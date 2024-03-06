@@ -1,4 +1,4 @@
-# Duke
+# FitNUS
 
 {Give product intro here}
 
