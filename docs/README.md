@@ -1,6 +1,6 @@
 # Duke
 
-{Give product intro here}
+{Recipe.io}
 
 Useful links:
 * [User Guide](UserGuide.md)
