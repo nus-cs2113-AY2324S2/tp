@@ -1,9 +1,6 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
+Display |    Name    | Github Profile | Portfolio 
+--------|:----------:|:--------------:|:---------:
 ![](https://avatars.githubusercontent.com/u/33289235) | Hoe Wen En | [Github](https://github.com/wenenhoe) | [Portfolio](team/wenenhoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://avatars.githubusercontent.com/u/48584322?v=4) | Nick Chua  | [Github](https://github.com/nickczh) | [Portfolio](team/nickchua.md)
