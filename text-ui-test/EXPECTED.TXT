@@ -10,6 +10,6 @@
 Welcome to MediTracker, your best companion to track your medicine intake.
 Let's begin tracking!
 
-test
 ____________________________________________________________
 test
+
