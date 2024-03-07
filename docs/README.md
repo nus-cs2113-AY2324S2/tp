@@ -1,4 +1,4 @@
-# Duke
+# BinBash
 
 {Give product intro here}
 
