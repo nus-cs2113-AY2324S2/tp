@@ -1,4 +1,4 @@
-# Duke
+# BudgetBuddy
 
 {Give product intro here}
 
