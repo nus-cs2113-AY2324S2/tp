@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+# Vim swap files
+*.swp
+
 # Gradle build files
 /.gradle/
 /build/
