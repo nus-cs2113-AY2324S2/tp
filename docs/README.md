@@ -1,6 +1,6 @@
-# Duke
+# Florizz
 
-{Give product intro here}
+An easy to use bouquet recomendation software using CLI 
 
 Useful links:
 * [User Guide](UserGuide.md)
