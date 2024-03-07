@@ -1,21 +1,35 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.ui.Ui;
 
-public class Duke {
+public class MediTracker {
+
+    private Ui ui;
+
+    public MediTracker() {
+        ui = new Ui();
+    }
+
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Runs the MediTracker.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        while (!isExit) {
+            String command = ui.readCommand();
+            if (command.equals("exit")) {
+                isExit = true;
+                continue;
+            }
+
+            ui.showLine(); // show the divider line ("_________")
+            System.out.println(command + "\n");
+        }
+    }
+
+    public static void main(String[] args) {
+        new MediTracker().run();
     }
 }
