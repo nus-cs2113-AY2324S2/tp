@@ -1,4 +1,4 @@
-# Duke
+# Omnitravel
 
 {Give product intro here}
 
