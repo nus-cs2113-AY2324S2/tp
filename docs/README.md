@@ -1,4 +1,4 @@
-# DINEEZ
+# DINEZ
 
 {Give product intro here}
 
