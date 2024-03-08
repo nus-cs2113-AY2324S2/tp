@@ -1,9 +1,5 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+Display |      Name      |               Github Profile               | Portfolio 
+--------|:--------------:|:------------------------------------------:|:---------:
+![](https://drive.google.com/file/d/1uMHCtP7f5p0-rQEjezbzxItLioc5VzM5/view?usp=drive_link) | Paturi Karthik | [Github](https://github.com/paturikarthik) | [Portfolio](docs/team/paturikarthik.md)
