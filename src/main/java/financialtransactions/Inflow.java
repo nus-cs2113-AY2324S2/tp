@@ -1,14 +1,13 @@
 package financialtransactions;
-import financialtransactions.Transaction;
 
 public class Inflow extends Transaction<Inflow.Category> {
-    protected enum Category {
+    public enum Category {
         INCOME, INVESTMENT, GIFT, LOAN, REFUND, OTHER
     }
-    public Inflow(String name, double amount) {
-        super(name, amount);
+    public Inflow(String name, double amount, String date) {
+        super(name, amount, date);
     }
-    protected void setCategory(Category category) {
+    public void setCategory(Category category) {
         super.category = category;
     }
 }
