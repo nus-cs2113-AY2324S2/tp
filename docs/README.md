@@ -1,4 +1,4 @@
-# Duke
+# NUSFC 24
 
 {Give product intro here}
 
