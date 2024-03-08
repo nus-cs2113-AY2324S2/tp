@@ -17,30 +17,28 @@ public class Main {
             System.out.println("Password is incorrect");
         }
 
-        TransactionList<Inflow> inflow = new TransactionList<>();
-        TransactionList<Outflow> outflow = new TransactionList<>();
+        TransactionManager manager = new TransactionManager();
         Inflow income = new Inflow("Salary payment", 400.00, null);
         income.setCategory(Inflow.Category.INCOME);
-        inflow.addTransaction(income);
+        manager.addTransaction(income);
 
         Inflow investment = new Inflow("Investment", 500.00, null);
         investment.setCategory(Inflow.Category.INVESTMENT);
-        inflow.addTransaction(investment);
+        manager.addTransaction(investment);
 
         Inflow loan = new Inflow("Loan payment", 400.00, "23/05/2022 1900");
         loan.setCategory(Inflow.Category.LOAN);
-        inflow.addTransaction(loan);
+        manager.addTransaction(loan);
 
         Outflow rent = new Outflow("Rent", 50000, null);
         rent.setCategory(Outflow.Category.RENT);
-        outflow.addTransaction(rent);
+        manager.addTransaction(rent);
 
         Outflow shopping = new Outflow("Shopping", 200, "23/05/2022 2000");
         shopping.setCategory(Outflow.Category.SHOPPING);
-        outflow.addTransaction(shopping);
+        manager.addTransaction(shopping);
 
-        System.out.println(inflow.toString());
-        System.out.println(outflow.toString());
+        System.out.println(manager.toString());
         sc.close();
     }
 }
