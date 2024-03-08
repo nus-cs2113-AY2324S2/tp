@@ -1,9 +1,5 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+Display |        Name        | Github Profile | Portfolio 
+--------|:------------------:|:--------------:|:---------:
+![](https://drive.google.com/file/d/1BM0lQP13brp_vlVJsgHYzQHSWaREHrnP/view?usp=drive_link) | Rex Yong Jin Xiang | [Github](https://github.com/rexyyong) | [Portfolio](docs/team/johndoe.md)
