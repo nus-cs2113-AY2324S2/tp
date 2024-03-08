@@ -1,5 +1,10 @@
 package classify.student;
 
+/**
+ * Meant to represent a particular student of the tuition centre.
+ * The student can first be declared with a only a name, and the subsequent details 
+ * added later.
+ */
 public class Student {
 
     //@@author Cryolian
@@ -8,6 +13,11 @@ public class Student {
 
     public Student(String name) {
         this.name = name;
+    }
+
+    public Student(String name, Details details) {
+        this.name = name;
+        this.details = details;
     }
     
     public String getName() {

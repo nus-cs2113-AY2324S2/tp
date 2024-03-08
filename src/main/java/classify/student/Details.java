@@ -3,15 +3,19 @@ package classify.student;
 import classify.classgroup.Class;
 import java.util.ArrayList;
 
+/**
+ * Important details of a student the tuition centre
+ * has to keep track of.
+ */
 public class Details {
 
     //@@author Cryolian
-    public String gender;
-    public int phoneNumber;
-    public Class currentClass;
-    public ArrayList<String> subjects;
-    public String lastPaymentDate;
-    public String remarks;
+    public String gender = "unknown";
+    public int phoneNumber = 0;
+    public Class currentClass = new Class(0, "Unknown");
+    public ArrayList<String> subjects = new ArrayList<>();
+    public String lastPaymentDate = "unknown";
+    public String remarks = "NA";
     
     public String getGender() {
         return gender;
@@ -23,10 +27,6 @@ public class Details {
 
     public Class getCurrentClass() {
         return currentClass;
-    }
-
-    public ArrayList<String> getSubjects() {
-        return subjects;
     }
 
     public String getLastPaymentDate() {
