@@ -1,4 +1,4 @@
-# Duke
+# DINEEZ
 
 {Give product intro here}
 
