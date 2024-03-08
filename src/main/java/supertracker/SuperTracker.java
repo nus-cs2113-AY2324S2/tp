@@ -1,8 +1,6 @@
 package supertracker;
 
-import supertracker.command.ExitCommand;
 import supertracker.command.Command;
-import supertracker.command.InvalidCommand;
 import supertracker.parser.Parser;
 
 import java.util.Scanner;
@@ -23,7 +21,7 @@ public class SuperTracker {
         do {
             String input = in.nextLine();
             command = Parser.parseCommand(input.trim());
-            System.out.println("\t" + input.trim());
+            command.execute();
         } while (!command.isExit());
 
         in.close();
