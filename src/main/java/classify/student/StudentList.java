@@ -33,8 +33,7 @@ public class StudentList {
     /**
      * Removes the first student in the list with a name matching
      * the given string.
-     * @param name The string to search among the names of the student
-     * to remove.
+     * @param name The string to search among the names of the student to remove.
      */
     public void removeStudent(String name) {
         for (Student s: studentList) {
