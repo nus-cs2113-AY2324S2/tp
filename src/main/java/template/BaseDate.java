@@ -24,14 +24,14 @@ public class BaseDate {
             "hh:mma");
 
     private static final ArrayList<String> dateTimeFormats = dateTimeVary();
-    public static DateTimeFormatter formatter = null;
+    private static DateTimeFormatter formatter = null;
     LocalDateTime dateTime = null;
-    private final String DEAULT_TIME = " 0000";
+    private final String defaultTime = " 0000";
 
     public BaseDate(String args){
         args = args.strip();
         if (!args.contains(" ")) {
-            args = args + DEAULT_TIME;
+            args = args + defaultTime;
         }
         for (String format : dateTimeFormats) {
             try {
@@ -43,9 +43,10 @@ public class BaseDate {
 
         }
         if (dateTime == null) {
-           System.out.println(String.format(
-            "Please input date in one of the correct formats: %s\n\n(Optional) Please input time in one of the correct formats: %s\n",
-            dateFormats, timeFormats));
+            System.out.println(String.format(
+                "Please input date in one of the correct formats: " +
+                        "%s\n\n(Optional) Please input time in one of the correct formats: %s\n",
+                    dateFormats, timeFormats));
         }
     }
 

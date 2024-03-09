@@ -2,7 +2,7 @@ package user;
 
 public class Authentication {
     private String password;
-    String username;
+    private String username;
 
     public Authentication(String password, String username) {
         this.password = password;
