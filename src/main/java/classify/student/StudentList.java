@@ -10,6 +10,11 @@ public class StudentList {
     //@@author Cryolian
     public ArrayList<Student> studentList;
 
+    //@@author ParthGandhiNUS
+    public static ArrayList<Student> masterStudentList = new ArrayList<>();
+    public static final String DOT = ".";
+
+    //@@author Cryolian
     public StudentList() {
         this.studentList = new ArrayList<>();
     } 
@@ -30,6 +35,17 @@ public class StudentList {
         this.studentList.remove(id);
     }
 
+    //@@author ParthGandhiNUS
+    /**
+     * Used in the "list" command to print all the Current Tasks in the proper format
+     */
+    public static void printCurrentArrayList(ArrayList<Student>currentList){
+        for (int i = 1; i <= currentList.size(); i++){
+            System.out.println(i + DOT + currentList.get(i-1));
+        }
+    }
+
+    //@@author Cryolian
     /**
      * Removes the first student in the list with a name matching
      * the given string.
