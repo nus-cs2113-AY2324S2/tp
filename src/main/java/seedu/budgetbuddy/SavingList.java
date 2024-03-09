@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavingList {
+
     protected List<Saving> savings;
-    private int initialAmount;
     protected List<String> categories;
+    private int initialAmount;
 
     public SavingList() {
         this.savings = new ArrayList<>();
