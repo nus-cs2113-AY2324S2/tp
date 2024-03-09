@@ -1,23 +1,30 @@
 package classify;
 
+import classify.student.StudentList;
+
 import java.util.Scanner;
 
 public class Classify {
+    public static Scanner in = new Scanner(System.in);
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        // @@author ParthGandhiNUS
+        // CAA: 9 March 2024 1pm
+        Ui.printWelcomeMessage();
+        // Takes in only the first word input by the user
+        String userCommand = UserInput.processInput(in.next());
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
-        in.close();
+        //Set up polling for the first word input by the user.
+        // If user's first word is "bye", will exit the while loop.
+        while (!(userCommand.equals("bye"))){
+            InputParsing.parseUserCommand(UserInput.processInput(userCommand), StudentList.masterStudentList, in);
+            userCommand = in.next();
+        }
+
+        Ui.printEndConversation();
     }
 }
 
