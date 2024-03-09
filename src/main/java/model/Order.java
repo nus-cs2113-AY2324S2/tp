@@ -10,13 +10,11 @@ import java.time.format.DateTimeFormatter;
 public class Order implements ItemManager {
     private final String orderID;
     private final ArrayList<MenuItem> orderItemList = new ArrayList<>();
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     private static final double SERVICE_CHARGE = 0.1;
     private static final double GST = 0.09;
 
-    public Order() {
-        this.orderID = "ORDER" + LocalDateTime.now().format(formatter);
+    public Order() {;
+        this.orderID = "ORDER" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
     @Override
