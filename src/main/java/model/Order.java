@@ -10,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class Order implements ItemManager {
     private final String orderID;
     private final ArrayList<MenuItem> orderItemList = new ArrayList<>();
-    private static final double SERVICE_CHARGE = 0.1;
-    private static final double GST = 0.09;
-
+    private final static double SERVICE_CHARGE = 0.1;
+    private final static double GST = 0.09;
     public Order() {;
         this.orderID = "ORDER" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
