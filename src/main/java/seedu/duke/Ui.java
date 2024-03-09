@@ -17,6 +17,7 @@ public class Ui {
     }
 
     public void showGoodbye() {
+        System.out.println(DIVIDER);
         System.out.println("Goodbye! Thank you for using BudgetBuddy.");
     }
 
