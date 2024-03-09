@@ -1,7 +1,7 @@
 public enum CommandType {
     EXIT("(?i)bye"),
     HELP("(?i)help"),
-    CREATE_ORDER("(?i)create\\s*order\\s*-menu\\s*(\\d+)"), // case insensitive space safe
+    CREATE_ORDER("(?i)create\\s*order\\s*-menu\\s*(\\d+)"), // case-insensitive
     VIEW_ORDER("(?i)view\\s*-order\\s*(\\d+)"),
     EDIT_ORDER("(?i)edit\\s*-order\\s*(\\d+)");
 
