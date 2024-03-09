@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.budgetbuddy;
 
 import java.util.Scanner;
 
@@ -6,6 +6,11 @@ public class BudgetBuddy {
 
     private Ui ui;
     private Parser parser;
+
+    public BudgetBuddy() {
+        ui = new Ui();
+        parser = new Parser();
+    }
 
     public void handleCommands(String input) {
         Command command = parser.parseCommand(input);
@@ -15,10 +20,6 @@ public class BudgetBuddy {
         } else {
             System.out.println("Invalid Command");
         }
-    }
-    public BudgetBuddy() {
-        ui = new Ui();
-        parser = new Parser();
     }
 
     public void run() {

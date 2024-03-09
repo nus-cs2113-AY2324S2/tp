@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.budgetbuddy;
 public class MenuCommand extends Command {
     private int index;
     private Ui ui;
