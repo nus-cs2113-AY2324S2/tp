@@ -1,6 +1,6 @@
-package classify;
+package classify.commands;
 
-import classify.commands.Ui;
+import classify.Ui;
 import classify.student.Student;
 import classify.student.StudentList;
 
