@@ -2,7 +2,7 @@ package classify.student;
 
 /**
  * Meant to represent a particular student of the tuition centre.
- * The student can first be declared with a only a name, and the subsequent details 
+ * The student can first be declared with only a name, and the subsequent details
  * added later.
  */
 public class Student {
