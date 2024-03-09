@@ -14,10 +14,9 @@ public abstract class Transaction<T> {
     public Transaction(String name, double amount, String date) {
         this.name = name;
         this.amount = amount;
-        if(date == null){
+        if (date == null){
             this.date = new BaseDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        }
-        else{
+        } else{
             this.date = new BaseDate(date);
         }
     }
@@ -40,5 +39,9 @@ public abstract class Transaction<T> {
     public String toString() {
         String baseString = String.format("Name: %s, Amount: %.2f, Date: %s", name, amount, date.toString());
         return baseString;
+    }
+
+    public String toSave() {
+        return String.format("%s|%s|%s|%s\n", name, amount, date.toString(), getCategory());
     }
 }

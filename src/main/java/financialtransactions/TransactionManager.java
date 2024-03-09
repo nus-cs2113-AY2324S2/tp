@@ -39,4 +39,8 @@ public class TransactionManager {
     public String toString() {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
     }
+
+    public String toSave() {
+        return inflows.toSave() + outflows.toSave();
+    }
 }
