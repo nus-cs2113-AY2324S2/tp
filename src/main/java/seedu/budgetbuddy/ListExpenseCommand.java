@@ -1,7 +1,5 @@
 package seedu.budgetbuddy;
 
-import java.util.ArrayList;
-
 public class ListExpenseCommand extends Command {
     private ExpenseList expenses;
     private String filterCategory;
