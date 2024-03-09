@@ -8,6 +8,10 @@ public class MenuCommand extends Command {
         ui = new Ui();
     }
 
+    public int getIndex() {
+        return this.index;
+    }
+
     @Override
     public void execute() {
         if (index == 0) {
