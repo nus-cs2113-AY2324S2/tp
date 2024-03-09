@@ -35,47 +35,4 @@ public class Parser {
                 .filter(s -> !s.isEmpty())
                 .toArray(String[]::new);
     }
-
-    // unit test for the parser
-    public static void main(String[] args) {
-        String[] inputs = {
-            "TEST CASES FOR NORMAL OPERATION",
-            "create order -menu 1",
-            "view -order 2",
-            "edit -order 3",
-            "bye",
-            "help",
-            "asfdhih 123",
-            "create order -menu 1 2 3",
-            "view -order 1 2 3",
-            "edit -order 1 2 3",
-            "create order -menu",
-            "view -order",
-            "edit -order",
-
-            "TEST CASES FOR CASE INSENSITIVITY",
-            "CrEaTe OrDeR -mEnU 99",
-            "ViEw -OrDeR 2",
-            "EdIt -OrDeR 1",
-            "ByE",
-            "HeLp",
-            "AsFdHiH 123",
-            "CrEaTe OrDeR -mEnU 1 2 3"
-        };
-
-        for (String input : inputs) {
-            try {
-                CommandType token = analyzeInput(input);
-                String[] arguments = splitInput(token, input);
-                System.out.println("Input: " + input);
-                System.out.println("Token: " + token);
-                System.out.println("Arguments: " + Arrays.toString(arguments));
-                System.out.println();
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid input: " + input);
-                System.out.println();
-            }
-        }
-
-    }
 }
