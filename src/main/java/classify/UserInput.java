@@ -1,4 +1,4 @@
-package classify.commands;
+package classify;
 
 public class UserInput {
     /**

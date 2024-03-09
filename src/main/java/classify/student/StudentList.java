@@ -6,19 +6,29 @@ import java.util.ArrayList;
  * Class to represent a list of Students.
  */
 public class StudentList {
+    //@@ParthGandhiNUS
+    public static final String DOT = ".";
+    public static ArrayList<Student> masterStudentList = new ArrayList<>();
 
     //@@author Cryolian
     public ArrayList<Student> studentList;
 
-    //@@author ParthGandhiNUS
-    public static ArrayList<Student> masterStudentList = new ArrayList<>();
-    public static final String DOT = ".";
-
     //@@author Cryolian
     public StudentList() {
         this.studentList = new ArrayList<>();
-    } 
+    }
 
+    //@@author ParthGandhiNUS
+    /**
+     * Used in the "list" command to print all the Current Tasks in the proper format
+     */
+    public static void printCurrentArrayList(ArrayList<Student>currentList){
+        for (int i = 1; i <= currentList.size(); i++){
+            System.out.println(i + DOT + currentList.get(i-1));
+        }
+    }
+
+    //@@author Cryolian
     /**
      * Adds in an instance of a student to the student list.
      * @param s The student to add to the list.
@@ -35,15 +45,6 @@ public class StudentList {
         this.studentList.remove(id);
     }
 
-    //@@author ParthGandhiNUS
-    /**
-     * Used in the "list" command to print all the Current Tasks in the proper format
-     */
-    public static void printCurrentArrayList(ArrayList<Student>currentList){
-        for (int i = 1; i <= currentList.size(); i++){
-            System.out.println(i + DOT + currentList.get(i-1));
-        }
-    }
 
     //@@author Cryolian
     /**

@@ -1,7 +1,5 @@
 package classify;
 
-import classify.commands.InputParsing;
-import classify.commands.UserInput;
 import classify.student.StudentList;
 
 import java.util.Scanner;
