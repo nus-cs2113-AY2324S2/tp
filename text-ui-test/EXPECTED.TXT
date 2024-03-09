@@ -1,12 +1,7 @@
 Enter your command: 
-Savings:
-1 | Category: Salary | Amount: $2000 | Description: Monthly Salary | 
-2 | Category: Investments | Amount: $200 | Description: Stocks | 
-------------------------------------------------------------------------
-Initial Savings Amount: $2200
-Expenses Deducted: 
-$50 spent on Bus Fare on 2024-03-09
-$30 spent on Lunch on 2024-03-09
-------------------------------------------------------------------------
-Remaining Amount: $2120
-Enter your command:
+Expenses:
+1 | Date: 2024-03-09 | Category: Transport | Amount: $50 | Description: Bus Fare | 
+2 | Date: 2024-03-09 | Category: Food | Amount: $30 | Description: Lunch | 
+-----------------------------------------------------------------------------
+Total Expenses: $80
+Enter your command: 

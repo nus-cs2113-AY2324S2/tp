@@ -1,1 +1,2 @@
-list savings
+list expense
+exit
