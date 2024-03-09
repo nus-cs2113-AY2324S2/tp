@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-public class Duke {
+public class BudgetBuddy {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
