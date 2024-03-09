@@ -1,7 +1,13 @@
-package longah.exceptions;
+package longah.exception;
 
 public enum ExceptionMessage {
-    UNABLE_TO_FIND_PERSON ("That person cannot be found.");
+    // [Cause of Exception]([Message to be printed])
+    // Data Storage Exceptions
+    STORAGE_FILE_NOT_FOUND("File not found."),
+    STORAGE_FILE_NOT_CREATED("File not created."),
+    STORAGE_FILE_NOT_READ("File not read."),
+    STORAGE_FILE_NOT_WRITTEN("File not written."),
+    INVALID_STORAGE_CONTENT("Invalid content in storage file, line ignored.");
 
     private final String message;
 

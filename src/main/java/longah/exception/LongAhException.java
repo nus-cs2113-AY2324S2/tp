@@ -1,6 +1,4 @@
-package longah.exceptions;
-
-import longah.LongAh;
+package longah.exception;
 
 public class LongAhException extends Exception {
     /**
