@@ -1,20 +1,22 @@
-import java.util.Scanner;
+import financialtransactions.TransactionManager;
+import financialtransactions.Inflow;
+import financialtransactions.Outflow;
 
-import financialtransactions.*;
 import user.Authentication;
 import user.BaseUser;
+import userinteractions.UI;
 
 public class Main {
     public static void main(String[] args) {
+        UI ui = new UI();
         BaseUser user = new BaseUser("Bob");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
+        ui.printMessage("Enter password");
+        String password = ui.readInput();
         Authentication auth = user.getAuthentication();
         if (auth.checkPassword("Bob", password)) {
-            System.out.println("Password is correct");
+            ui.printMessage("Password is correct");
         } else {
-            System.out.println("Password is incorrect");
+            ui.printMessage("Password is incorrect");
         }
 
         TransactionManager manager = new TransactionManager();
@@ -39,6 +41,5 @@ public class Main {
         manager.addTransaction(shopping);
 
         System.out.println(manager.toString());
-        sc.close();
     }
 }
