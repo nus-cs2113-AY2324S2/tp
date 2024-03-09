@@ -29,7 +29,7 @@ public class Storage {
                     inflow.setCategory(Inflow.Category.valueOf(transactionInfo[3]));
                     manager.addTransaction(inflow);
                 } else {
-                    Outflow outflow = new Outflow(transactionInfo[0], amount, transactionInfo[2]);
+                    Outflow outflow = new Outflow(transactionInfo[0], -amount, transactionInfo[2]);
                     outflow.setCategory(Outflow.Category.valueOf(transactionInfo[3]));
                     manager.addTransaction(outflow);
                 }
