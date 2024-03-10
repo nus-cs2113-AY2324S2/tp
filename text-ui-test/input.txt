@@ -1,1 +1,1 @@
-James Gosling
+add saving /c Salary /a 1200      
