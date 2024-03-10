@@ -1,1 +1,1 @@
-add saving /c Salary /a 1200      
+bye 

@@ -3,18 +3,18 @@ package seedu.budgetBuddy;
 public class BudgetBuddy {
 
     private static final Ui ui = new Ui();
-    public static void main(String[] args){
+    private static final Parser parser = new Parser(); 
+
+    public static void main(String[] args) {
         ui.greet();
-        String input = ui.readCommand();
+        String input;
         while (true) {
+            input = ui.readCommand(); 
             if (input.equals("bye")) {
-                break;
-            } else{ 
-                Parser parser = new Parser();
-                input = ui.readCommand();
-                parser.parseInput(input);
-                ui.showAdd(input);
+                break; 
             }
+            parser.parseInput(input); 
+            ui.showAdd(input); 
         }
         ui.showGoodBye();
         ui.closeScanner();

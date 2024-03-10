@@ -7,8 +7,3 @@ Welcome to BudgetBuddy!
 
 What can I do for you?
 ____________________________________________________________
-
-Got it. I've added this transaction:
-add saving /c asd /a 12
-____________________________________________________________
-
