@@ -35,7 +35,7 @@ Example of usage:
 
 **A**: {your answer here}
 
-## Command Summary
+## ActiveEdge.Command Summary
 
 {Give a 'cheat sheet' of commands here}
 
