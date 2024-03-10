@@ -30,6 +30,10 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Displays the menu item based on the given index.
+     * @param index The index of the menu item to display.
+     */
     public void showMenuItem(int index) {
         System.out.println(DIVIDER);
         switch (index) {

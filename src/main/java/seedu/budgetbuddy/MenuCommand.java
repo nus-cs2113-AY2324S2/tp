@@ -12,6 +12,10 @@ public class MenuCommand extends Command {
         return this.index;
     }
 
+    /**
+     * Executes the menu command by showing the menu titles or a specific menu item.
+     *
+     */
     @Override
     public void execute() {
         if (index == 0) {
