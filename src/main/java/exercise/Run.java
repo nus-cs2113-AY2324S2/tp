@@ -4,16 +4,17 @@ import java.time.LocalDateTime;
 public class Run extends Workout{
     protected static final Integer MAX_TIME_ARRAY_LENGTH = 3;
     protected static final Integer MIN_TIME_ARRAY_LENGTH = 2;
-    protected static Integer[] times;
-    protected static double distance;
+    protected Integer[] times;
+    protected double distance;
     protected static LocalDateTime date = null;
-    protected static String pace;
+    protected String pace;
 
     // overloaded constructor for optional date parameter
     public Run(String stringTime, String stringDistance) {
         times = parseTime(stringTime);
         distance = Double.parseDouble(stringDistance);
         pace = calculatePace();
+        WorkoutList.addRun(this);
     }
 
     public Run(String stringTime, String stringDistance, String stringDate) {
@@ -21,6 +22,9 @@ public class Run extends Workout{
         distance = Double.parseDouble(stringDistance);
         date = parseDate(stringDate);
         pace = calculatePace();
+
+        WorkoutList.addRun(this);
+
     }
 
     public String getTimes() {
@@ -92,4 +96,18 @@ public class Run extends Workout{
         int seconds = (int) Math.round(remainingSeconds * 60);
         return String.format("%d:%02d/km", minutes, seconds);
     }
+
+    /**
+     * Method overrides the Workout toString() for specific run formatting
+     * run  mm:ss  distance  pace
+     * e.g. run  30:10   60:3   30:01/km
+     */
+    @Override
+    public String toString() {
+
+        String runString = "run \t";
+        runString += getTimes() + "\t\t" + getDistance() + "\t\t" + getPace();
+        return  runString;
+    }
+
 }

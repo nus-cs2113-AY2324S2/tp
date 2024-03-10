@@ -2,8 +2,13 @@ package exercise;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
-public class Workout {
+import java.util.ArrayList;
+
+
+public abstract class Workout {
     protected LocalDateTime date = null;
+    String header = "Type\tTime\t\tDistance\tPace\n";
+
 
     public Workout(String stringDate) {
         this.date = parseDate(stringDate);
@@ -18,7 +23,7 @@ public class Workout {
     }
 
     public static LocalDateTime parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDateTime formattedDateTime = null;
         try {
             formattedDateTime = LocalDateTime.parse(dateTime, formatter);
@@ -29,5 +34,15 @@ public class Workout {
         }
         return formattedDateTime;
     }
+
+
+    @Override
+    public String toString(){
+        return getDate().toString();
+    }
+
+
+
+
 
 }
