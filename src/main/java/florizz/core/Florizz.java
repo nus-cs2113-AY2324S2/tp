@@ -1,21 +1,29 @@
 package florizz.core;
 
-import java.util.Scanner;
+import florizz.command.Command;
+import florizz.objects.Bouquet;
+
+import java.util.ArrayList;
 
 public class Florizz {
     /**
      * Main entry-point for the java.florizz.core.Florizz application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + "florizz");
-        System.out.println("What is your name?");
+        ArrayList<Bouquet>  tempBouquetList = new ArrayList<>();
+        boolean isRunning = true;
+        Ui ui = new Ui();
+        ui.printIntroMessage();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        while (isRunning){
+            try {
+                String input = ui.getInput();
+                Command command = Parser.parse(input);
+                isRunning = command.execute(tempBouquetList, ui);
+            }
+            catch(FlorizzException error){
+                ui.printError(error);
+            }
+        }
     }
 }
