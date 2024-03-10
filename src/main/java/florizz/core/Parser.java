@@ -1,19 +1,22 @@
 package florizz.core;
 
-import florizz.command.*;
+import florizz.command.AddBouquetCommand;
+import florizz.command.Command;
+import florizz.command.DeleteBouquetCommand;
+import florizz.command.ListBouquetCommand;
 import florizz.objects.Bouquet;
 
 public class Parser {
     public static Command parse (String input) throws FlorizzException{
         switch (input.split(" ")[0]){
-            case ("mybouquets"):
-                return new ListBouquetCommand();
-            case ("new"):
-                return handleAddBouquet(input);
-            case ("delete"):
-                return handleDeleteBouquet(input);
-            default:
-                throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
+        case ("mybouquets"):
+            return new ListBouquetCommand();
+        case ("new"):
+            return handleAddBouquet(input);
+        case ("delete"):
+            return handleDeleteBouquet(input);
+        default:
+            throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
     }
 
