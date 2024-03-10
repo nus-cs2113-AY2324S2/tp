@@ -1,10 +1,10 @@
-package seedu.duke;
+package florizz.core;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Florizz {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.florizz.core.Florizz application.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -12,7 +12,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + "florizz");
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
