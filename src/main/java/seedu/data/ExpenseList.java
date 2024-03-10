@@ -1,6 +1,7 @@
 package seedu.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import seedu.task.Expense;
 
@@ -10,7 +11,7 @@ public class ExpenseList {
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>();
+        this.categories = new ArrayList<>(Arrays.asList("Housing", "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
     public void addExpense(Expense expense) {
