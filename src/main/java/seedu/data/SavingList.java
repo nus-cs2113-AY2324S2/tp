@@ -11,7 +11,8 @@ public class SavingList {
 
     public SavingList() {
         this.savings = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Salary", "Investments", "Gifts", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Salary", 
+        "Investments", "Gifts", "Others"));
     }
 
     public void addSaving(String category, String amount) {

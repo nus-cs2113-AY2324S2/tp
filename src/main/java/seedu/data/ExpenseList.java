@@ -11,7 +11,8 @@ public class ExpenseList {
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Housing", "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Housing", 
+        "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
     public void addExpense(Expense expense) {
