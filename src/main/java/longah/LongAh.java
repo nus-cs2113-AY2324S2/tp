@@ -119,49 +119,50 @@ public class LongAh {
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
-        System.out.println("Welcome to LongAh! You won't have to worry about splitting bills during the Year of the Dragon!");
+        System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
         while (true) {
             System.out.println("Enter command:");
             String command = app.scanner.nextLine();
             String[] parts = command.split(" ");
             switch (parts[0]) {
-                case "add":
-                    if (parts.length == 4 && parts[1].startsWith("p/") && parts[2].startsWith("a/") && parts[3].startsWith("p/")) {
-                        String person1 = parts[1].substring(2);
-                        double amount = Double.parseDouble(parts[2].substring(2));
-                        String person2 = parts[3].substring(2);
-                        app.addDebt(person1, amount, person2);
-                    } else {
-                        System.out.println("Invalid command format. Use 'add p/PERSON1 a/AMOUNT p/PERSON2'");
-                    }
-                    break;
-                case "list":
-                    app.listAllDebts();
-                    break;
-                case "delete":
-                    if (parts.length == 2) {
-                        int index = Integer.parseInt(parts[1]);
-                        app.deleteDebt(index);
-                    } else {
-                        System.out.println("Invalid command format. Use 'delete INDEX'");
-                    }
-                    break;
-                case "find":
-                    if (parts.length == 2) {
-                        String person = parts[1];
-                        app.findDebts(person);
-                    } else {
-                        System.out.println("Invalid command format. Use 'find PERSON'");
-                    }
-                    break;
-                case "clear":
-                    app.clearAllDebts();
-                    break;
-                case "exit":
-                    return;
-                default:
-                    System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
+            case "add":
+                if (parts.length == 4 && parts[1].startsWith("p/")
+                    && parts[2].startsWith("a/") && parts[3].startsWith("p/")) {
+                    String person1 = parts[1].substring(2);
+                    double amount = Double.parseDouble(parts[2].substring(2));
+                    String person2 = parts[3].substring(2);
+                    app.addDebt(person1, amount, person2);
+                } else {
+                    System.out.println("Invalid command format. Use 'add p/PERSON1 a/AMOUNT p/PERSON2'");
+                }
+                break;
+            case "list":
+                app.listAllDebts();
+                break;
+            case "delete":
+                if (parts.length == 2) {
+                    int index = Integer.parseInt(parts[1]);
+                    app.deleteDebt(index);
+                } else {
+                    System.out.println("Invalid command format. Use 'delete INDEX'");
+                }
+                break;
+            case "find":
+                if (parts.length == 2) {
+                    String person = parts[1];
+                    app.findDebts(person);
+                } else {
+                    System.out.println("Invalid command format. Use 'find PERSON'");
+                }
+                break;
+            case "clear":
+                app.clearAllDebts();
+                break;
+            case "exit":
+                return;
+            default:
+                System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
             }
         }
     }
