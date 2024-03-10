@@ -123,6 +123,9 @@ public class LongAh {
         LongAh app = new LongAh();
         while (true) {
             System.out.println("Enter command:");
+            if (!app.scanner.hasNextLine()) {
+                return;
+            }
             String command = app.scanner.nextLine();
             String[] parts = command.split(" ");
             switch (parts[0]) {
