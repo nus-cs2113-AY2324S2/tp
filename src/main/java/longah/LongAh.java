@@ -163,6 +163,7 @@ public class LongAh {
                 app.clearAllDebts();
                 break;
             case "exit":
+                System.exit(0);
                 return;
             default:
                 System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
