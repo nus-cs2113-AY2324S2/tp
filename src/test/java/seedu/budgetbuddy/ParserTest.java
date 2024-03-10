@@ -25,10 +25,18 @@ public class ParserTest {
     }
 
     @Test
+    public void testInvalidMenuCommand() {
+        Parser parser = new Parser();
+        Command invalidMenuCommand = parser.parseCommand("menu invalidNumber");
+
+        assertNull(invalidMenuCommand);
+    }
+
+    @Test
     public void testInvalidCommand() {
         Parser parser = new Parser();
-        Command command = parser.parseCommand("notACommand");
+        Command invalidCommand = parser.parseCommand("notACommand");
 
-        assertNull(command);
+        assertNull(invalidCommand);
     }
 }
