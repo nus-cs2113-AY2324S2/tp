@@ -20,8 +20,7 @@ public class Florizz {
                 String input = ui.getInput();
                 Command command = Parser.parse(input);
                 isRunning = command.execute(tempBouquetList, ui);
-            }
-            catch(FlorizzException error){
+            } catch(FlorizzException error){
                 ui.printError(error);
             }
         }

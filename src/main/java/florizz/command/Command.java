@@ -9,9 +9,11 @@ import java.util.ArrayList;
  */
 public abstract class Command {
     /**
-     *
+     * Executes the command
+     * @param bouquetList list of bouquets to be manipulated by the command
      * @param ui ui class for printing
-
+     * @return isRunning, if false program will terminate
+     * @throws FlorizzException catch all exception class
      */
     public abstract boolean execute(ArrayList<Bouquet> bouquetList, Ui ui) throws FlorizzException;
 }
