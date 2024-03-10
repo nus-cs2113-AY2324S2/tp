@@ -1,8 +1,8 @@
-package seedu.duke;
+package longah;
 
 import java.util.Scanner;
 
-public class Duke {
+public class LongAh {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
