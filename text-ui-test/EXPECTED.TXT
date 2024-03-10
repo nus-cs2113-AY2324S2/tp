@@ -1,9 +1,5 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
+ACTIVE EDGE AI assistant!
+How can I help you today?
 Hello James Gosling
+
