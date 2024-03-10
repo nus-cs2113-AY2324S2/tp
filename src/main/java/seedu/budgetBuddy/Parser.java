@@ -5,40 +5,46 @@ public class Parser {
     public void parseInput(String input) {
         if (input.startsWith("add expense")) {
             String[] parts = input.split(" ", 2);
-            parseExpense(parts);
+            parseExpense(parts[1]);
         } else if (input.startsWith("add saving")) {
             String[] parts = input.split(" ", 2);
-            parseSaving(parts);
+            parseSaving(parts[1]);
         } else {
             System.out.println("Invalid input");
         }
     }
 
-    private void parseExpense(String[] parts) {
+    private void parseExpense(String details) {
         try {
-            String[] categoryParts = parts[1].split(" /c ");
-            String[] amountParts = categoryParts[1].split(" /a ");
-            String[] descriptionParts = amountParts[1].split(" /d ");
-
-            String category = categoryParts[1].trim();
-            String amount = amountParts[1].trim();
-            String description = descriptionParts[1].trim();
+            String category = extractDetail(details, "/c");
+            String amount = extractDetail(details, "/a");
+            String description = extractDetail(details, "/d");
             TaskManager.addExpense(category, amount, description);
         } catch (Exception e) {
             System.out.println("Error parsing expense. Ensure the format is correct.");
         }
     }
 
-    private void parseSaving(String[] parts) {
+    private void parseSaving(String details) {
         try {
-            String[] categoryParts = parts[1].split(" /c ");
-            String[] amountParts = categoryParts[1].split(" /a ");
-
-            String category = categoryParts[1].trim();
-            String amount = amountParts[1].trim();
+            String category = extractDetail(details, "/c");
+            String amount = extractDetail(details, "/a");
             TaskManager.addSaving(category, amount);
         } catch (Exception e) {
             System.out.println("Error parsing saving. Ensure the format is correct.");
         }
+    }
+
+    private String extractDetail(String details, String prefix) {
+        int startIndex = details.indexOf(prefix) + prefix.length();
+        int endIndex = details.length();
+
+        String[] nextPrefixes = { "/c", "/a", "/d" };
+        for (String nextPrefix : nextPrefixes) {
+            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
+                endIndex = details.indexOf(nextPrefix, startIndex);
+            }
+        }
+        return details.substring(startIndex, endIndex).trim();
     }
 }
