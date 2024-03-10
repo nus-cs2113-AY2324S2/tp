@@ -5,7 +5,7 @@ import supertracker.command.ExitCommand;
 import supertracker.command.InvalidCommand;
 
 public class Parser {
-    protected static final String EXIT_COMMAND = "bye";
+    protected static final String EXIT_COMMAND = "quit";
 
     /**
      * Returns the command word specified in the user input string
