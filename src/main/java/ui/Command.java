@@ -1,4 +1,4 @@
-package seedu.duke;
+package ui;
 
 public enum Command {
     LOAD,

@@ -1,6 +1,6 @@
-package seedu.duke;
-import java.io.IOException;
-import java.util.ArrayList;
+package ui;
+import ui.Command;
+
 import java.util.Scanner;
 
 /**
