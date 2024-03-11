@@ -1,10 +1,14 @@
 package ActiveEdge.Parser;
 
+
 import ActiveEdge.Command.DailyCaloriesCommand;
+import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
+import ActiveEdge.Command.LogWaterCommand;
+import ActiveEdge.Command.ViewWaterIntakeCommand;
 
 public class Parser {
-    public void handleInput(String input) {
+    public void handleInput(String input) throws ActiveEdgeException {
         if(input.contains("help")){
             new HelpCommand();
         } else if (input.startsWith("log")) {
@@ -23,8 +27,6 @@ public class Parser {
             } else if (inputTrimmed.startsWith("w")) { //shows water
 
             } else if (inputTrimmed.startsWith("g")) { //shows goals
-
-            }
         } else {
             System.out.println("Hello!\n");
         }

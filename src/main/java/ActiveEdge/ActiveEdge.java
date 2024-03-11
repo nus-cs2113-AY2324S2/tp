@@ -1,5 +1,6 @@
 package ActiveEdge;
 
+import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Parser.Parser;
 import ActiveEdge.Ui.ByeUi;
 
@@ -9,7 +10,7 @@ public class ActiveEdge {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void run() {
+    public static void run() throws ActiveEdgeException {
         Scanner in = new Scanner(System.in);
         String logo = "ACTIVE EDGE";
         System.out.println("Hello from\n" + logo + " AI assistant!");
@@ -26,7 +27,7 @@ public class ActiveEdge {
         ByeUi.printByeMessage();
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws ActiveEdgeException {
         new ActiveEdge().run();
     }
 }
