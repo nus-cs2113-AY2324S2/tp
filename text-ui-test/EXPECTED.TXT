@@ -1,0 +1,29 @@
+Hello from
+ACTIVE EDGE AI assistant!
+How can I help you today?
+ Welcome to the Health Tracker Bot! Here are the available commands:
+
+1. Calorie Intake Tracker:
+   - log m/MEAL_NAME s/number of servings: log meals
+     Example: log m/chicken rice s/1
+   - list meals: view meals
+   - show c: view daily calories:
+   - set goal c/NUMBER: set daily calorie goal:
+     Example: set goal c/2000
+
+2. Water Intake Tracker:
+   - add w/QUANTITY: log water
+     Example: add w/500 (logs 500ml of water)
+   - show water intake: view water intake
+   - set goal w/NUMBER: set daily water goal
+     Example: set goal w/2000
+
+3. Goal Setting:
+   - show goals: view goals
+
+Additional Commands:
+   - help: Shows this user guide.
+   - list: Lists all logged data for the day (meals and water).
+   - clear: Clears all data for the current day.
+
+Start tracking your health goals now! If you have any questions, feel free to ask.
