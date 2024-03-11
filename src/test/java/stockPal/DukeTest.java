@@ -1,4 +1,4 @@
-package seedu.duke;
+package stockPal;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
