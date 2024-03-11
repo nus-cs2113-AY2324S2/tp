@@ -1,9 +1,7 @@
 package exercise;
 import java.time.LocalDate;
-
+import utility.Constant;
 public class Run extends Workout{
-    protected static final Integer MAX_TIME_ARRAY_LENGTH = 3;
-    protected static final Integer MIN_TIME_ARRAY_LENGTH = 2;
     protected Integer[] times;
     protected double distance;
     protected static LocalDate date = null;
@@ -22,17 +20,15 @@ public class Run extends Workout{
         distance = Double.parseDouble(stringDistance);
         date = parseDate(stringDate);
         pace = calculatePace();
-
         WorkoutList.addRun(this);
-
     }
 
     public String getTimes() {
-        if (times.length == MIN_TIME_ARRAY_LENGTH) {
+        if (times.length == Constant.MIN_TIME_ARRAY_LENGTH) {
             // hh:mm:ss
             return times[0] + ":" + times[1] + ":" + times[2];
         }
-        else if (times.length == MAX_TIME_ARRAY_LENGTH) {
+        else if (times.length == Constant.MAX_TIME_ARRAY_LENGTH) {
             // mm:ss
             return times[0] + ":" + times[1];
         }
@@ -51,14 +47,14 @@ public class Run extends Workout{
     public static Integer[] parseTime(String inputTime) {
         String[] stringTimeParts = inputTime.split(":");
         int inputLength = stringTimeParts.length;
-        Integer[] integerTimes = new Integer[MAX_TIME_ARRAY_LENGTH];
+        Integer[] integerTimes = new Integer[Constant.MAX_TIME_ARRAY_LENGTH];
 
-        if (inputLength == MAX_TIME_ARRAY_LENGTH) {
+        if (inputLength == Constant.MAX_TIME_ARRAY_LENGTH) {
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
             integerTimes[2] = Integer.parseInt(stringTimeParts[2]);
         }
-        else if (inputLength == MIN_TIME_ARRAY_LENGTH) {
+        else if (inputLength == Constant.MIN_TIME_ARRAY_LENGTH) {
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
         }
@@ -73,11 +69,11 @@ public class Run extends Workout{
         int timeLength = times.length;
         int totalSeconds;
 
-        if (timeLength == MAX_TIME_ARRAY_LENGTH) {
+        if (timeLength == Constant.MAX_TIME_ARRAY_LENGTH) {
             totalSeconds = times[0] * 3600 + times[1] * 60  + times[2];
         }
 
-        else if (timeLength == MIN_TIME_ARRAY_LENGTH) {
+        else if (timeLength == Constant.MIN_TIME_ARRAY_LENGTH) {
             totalSeconds = times[0] * 60 + times[1];
         }
         else {
