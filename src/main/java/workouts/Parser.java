@@ -1,8 +1,4 @@
-package exercise;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+package workouts;
 
 public class Parser {
 
