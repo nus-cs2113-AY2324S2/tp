@@ -1,5 +1,5 @@
 package ui;
-import ui.Command;
+import utility.Command;
 
 import java.util.Scanner;
 
@@ -103,7 +103,7 @@ public class Handler {
 
                 case HELP:
 
-                    // Yet to implement : Reply.printHelp();
+                    Output.printHelp();
 
                     break;
 
