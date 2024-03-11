@@ -1,6 +1,5 @@
 package ui;
 import utility.Command;
-
 import java.util.Scanner;
 
 /**
@@ -8,6 +7,8 @@ import java.util.Scanner;
  * before providing feedback to the user.
  */
 public class Handler {
+
+
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -17,9 +18,10 @@ public class Handler {
      */
     public static void processInput() {
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
 
-        while (true) {
+        while (in.hasNextLine()) {
+            String userInput = in.nextLine();
+
             // Convert command to uppercase before processing
             String instruction = userInput.toUpperCase().split(" ")[0];
 
@@ -116,7 +118,7 @@ public class Handler {
                 // Yet to implement : Reply.printException(e);
             }
 
-            userInput = in.nextLine();
+
         }
     }
 
@@ -159,6 +161,7 @@ public class Handler {
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
+        System.exit(0);
     }
 }
 
