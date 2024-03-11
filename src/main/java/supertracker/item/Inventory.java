@@ -10,6 +10,10 @@ public class Inventory {
         return itemMap.containsKey(name.toLowerCase());
     }
 
+    public static Item get(String name) {
+        return itemMap.get(name.toLowerCase());
+    }
+
     public static void put(String name, Item item) {
         itemMap.put(name.toLowerCase(), item);
     }
