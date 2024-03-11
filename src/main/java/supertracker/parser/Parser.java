@@ -45,7 +45,7 @@ public class Parser {
             command = parseNewCommand(input);
             break;
         case LIST_COMMAND:
-            command = new ListCommand();
+            command = parseListCommand(input);
             break;
         default:
             command = new InvalidCommand();
@@ -64,11 +64,11 @@ public class Parser {
 
         for (String param : params) {
             param = param.trim();
-            if (param.startsWith("n/")) {
+            if (param.startsWith("n/") && name.isEmpty()) {
                 name = param.substring(PARAM_BEGIN_INDEX);
-            } else if (param.startsWith("q/")) {
+            } else if (param.startsWith("q/") && quantityString.isEmpty()) {
                 quantityString = param.substring(PARAM_BEGIN_INDEX);
-            } else if (param.startsWith("p/")) {
+            } else if (param.startsWith("p/") && priceString.isEmpty()) {
                 priceString = param.substring(PARAM_BEGIN_INDEX);
             }
         }
@@ -98,6 +98,33 @@ public class Parser {
         }
 
         return new NewCommand(name, quantity, price);
+    }
+
+    private static Command parseListCommand(String input) {
+        // split input string into params if they start with "q/" or "p/"
+        String[] params = input.split("(?=[qp]/)");
+
+        boolean qExists = false;
+        boolean pExists = false;
+
+        // to check if q comes before p or vice versa
+        String firstParam = "";
+
+        for (String param : params) {
+            if (param.startsWith("q/")) {
+                qExists = true;
+                if (firstParam.isEmpty()) {
+                    firstParam = "q";
+                }
+            } else if (param.startsWith("p/")) {
+                pExists = true;
+                if (firstParam.isEmpty()) {
+                    firstParam = "p";
+                }
+            }
+        }
+
+        return new ListCommand(qExists, pExists, firstParam);
     }
 
     private static double roundTo2Dp(double unroundedValue) {

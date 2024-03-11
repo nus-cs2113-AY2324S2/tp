@@ -29,6 +29,38 @@ public class Ui {
     public static void newCommandSuccess(Item item) {
         printIndent(item.getName() + " has been added to the inventory!");
         printIndent("Quantity: " + item.getQuantity());
-        printIndent("Price: $" + String.format("%.2f", item.getPrice()));
+        printIndent("Price: " + item.getPriceString());
+    }
+
+    public static void listIntro(int size) {
+        if (size == 0) {
+            printIndent("Nothing to list! No items in inventory!");
+            return;
+        }
+        if (size == 1) {
+            printIndent("There is 1 unique item in your inventory:");
+            return;
+        }
+        printIndent("There are " + size + " unique items in your inventory:");
+    }
+
+    public static void listItem(Item item, int index, boolean qExists, boolean pExists, String firstParam) {
+        String stringToPrint = index + ". Name: " + item.getName();
+        String quantityString = "    Quantity: " + item.getQuantity();
+        String priceString = "    Price: " + item.getPriceString();
+
+        if (qExists && pExists) {
+            if (firstParam.equals("q")) {
+                stringToPrint += (quantityString + priceString);
+            } else if (firstParam.equals("p")) {
+                stringToPrint += (priceString + quantityString);
+            }
+        } else if (qExists) {
+            stringToPrint += quantityString;
+        } else if (pExists) {
+            stringToPrint += priceString;
+        }
+
+        printIndent(stringToPrint);
     }
 }

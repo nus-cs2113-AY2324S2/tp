@@ -1,5 +1,6 @@
 package supertracker.item;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Inventory {
@@ -11,5 +12,9 @@ public class Inventory {
 
     public static void put(String name, Item item) {
         itemMap.put(name.toLowerCase(), item);
+    }
+
+    public static Collection<Item> items() {
+        return itemMap.values();
     }
 }
