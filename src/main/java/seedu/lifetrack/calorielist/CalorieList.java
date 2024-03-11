@@ -29,8 +29,6 @@ public class CalorieList {
         {
             System.out.println("Sorry, this index is invalid. Please enter a positive integer.");
         }
-
-
-
     }
+
 }
