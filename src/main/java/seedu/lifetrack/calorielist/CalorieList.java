@@ -24,10 +24,12 @@ public class CalorieList {
                 return;
             }
             this.calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
+            System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e)
         {
             System.out.println("Sorry, this index is invalid. Please enter a positive integer.");
         }
+
 
 
     }
