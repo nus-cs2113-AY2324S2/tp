@@ -21,6 +21,15 @@ public class ItemList {
         itemList.add(item);
     }
 
+    public String deleteItem(int index) {
+        Item tempItem = itemList.get(index - 1);
+        itemList.remove(index - 1);
+
+        String output = "Got it! I've removed the following item:"
+                + String.format("\t%s", tempItem);
+        return output;
+    }
+
     @Override
     public String toString() {
         return itemList.toString();
