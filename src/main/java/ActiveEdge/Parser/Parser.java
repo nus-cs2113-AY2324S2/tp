@@ -6,6 +6,8 @@ public class Parser {
     public void handleInput(String input) {
         if(input.contains("help")){
             new HelpCommand();
+        } else {
+            System.out.println("Hello!\n");
         }
     }
 }
