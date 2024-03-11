@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import exercise.Run;
+import exercise.WorkoutList;
+import exercise.Parser;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,5 +21,6 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
     }
 }
