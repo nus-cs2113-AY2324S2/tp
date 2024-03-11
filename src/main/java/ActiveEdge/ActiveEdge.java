@@ -9,7 +9,7 @@ public class ActiveEdge {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void run() {
         Scanner in = new Scanner(System.in);
         String logo = "ACTIVE EDGE";
         System.out.println("Hello from\n" + logo + " AI assistant!");
@@ -24,5 +24,9 @@ public class ActiveEdge {
             input = in.nextLine();
         }
         ByeUi.printByeMessage();
+    }
+
+    public static void main(String[] args)  {
+        new ActiveEdge().run();
     }
 }
