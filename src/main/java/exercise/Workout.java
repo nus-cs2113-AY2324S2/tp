@@ -1,14 +1,11 @@
 package exercise;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 
 public abstract class Workout {
-    protected LocalDateTime date = null;
+    protected LocalDate date = null;
     String header = "Type\tTime\t\tDistance\tPace\n";
-
 
     public Workout(String stringDate) {
         this.date = parseDate(stringDate);
@@ -18,21 +15,21 @@ public abstract class Workout {
     public Workout() {
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public static LocalDateTime parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDateTime formattedDateTime = null;
+    public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate formattedDate = null;
         try {
-            formattedDateTime = LocalDateTime.parse(dateTime, formatter);
+            formattedDate = LocalDate.parse(dateTime, formatter);
         }
         catch (Exception e) {
             System.err.println("Error parsing date: " + e.getMessage());
             System.exit(1);
         }
-        return formattedDateTime;
+        return formattedDate;
     }
 
 

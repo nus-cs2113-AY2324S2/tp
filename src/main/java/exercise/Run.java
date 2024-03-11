@@ -1,12 +1,12 @@
 package exercise;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Run extends Workout{
     protected static final Integer MAX_TIME_ARRAY_LENGTH = 3;
     protected static final Integer MIN_TIME_ARRAY_LENGTH = 2;
     protected Integer[] times;
     protected double distance;
-    protected static LocalDateTime date = null;
+    protected static LocalDate date = null;
     protected String pace;
 
     // overloaded constructor for optional date parameter
