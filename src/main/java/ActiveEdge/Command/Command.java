@@ -1,13 +1,5 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.TaskList;
-import ActiveEdge.Ui.CommandUi;
-
 public abstract class Command {
-    public abstract void execute(TaskList tasks, CommandUi ui, Storage storage) throws ActiveEdgeException;
-    public boolean isExit() {
-        return false;
-    }
-
-
+    public abstract void execute();
 }
