@@ -13,7 +13,7 @@ public class Handler {
      * Processes user input and filters for valid command words from enum {@code Command},
      * then creates the relevant {@code Task} object based on details entered.
      *
-     * @throws CustomException If an error occurs during command processing.
+     * @throws IllegalArgumentException If an error occurs during command processing.
      */
     public static void processInput() {
         Scanner in = new Scanner(System.in);
@@ -103,17 +103,17 @@ public class Handler {
 
                 case HELP:
 
-                    Reply.printHelp();
+                    // Yet to implement : Reply.printHelp();
 
                     break;
 
                 default:
-                    throw new CustomException();
+                    // Yet to implement : throw new CustomException();
                 }
             } catch (IllegalArgumentException e) {
-                Reply.printException(e, Constant.INVALID_COMMAND);
-            } catch (CustomException e) {
-                Reply.printException(e);
+                // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
+                // Yet to implement : } catch (CustomException e) {
+                // Yet to implement : Reply.printException(e);
             }
 
             userInput = in.nextLine();
@@ -124,9 +124,7 @@ public class Handler {
     /**
      * Constructs a new {@code }  object based on the user input.
      *
-     * @param tasks The tasks list to be managed, adding the relevant {@code Event} object into the list.
      * @param userInput The user input string.
-     * @throws CustomException If the {@code Event} details are unspecified or invalid.
      */
     public static void handleExercise(String userInput){};
     public static void handleLoad(String userInput){};
@@ -149,8 +147,8 @@ public class Handler {
      * and returning the tasks list.
      */
     public static void initialiseBot() {
-        Reply.printWelcomeMessage();
-        Storage.loadProfile();
+        // Yet to implement : Reply.printWelcomeMessage();
+        // Yet to implement : Storage.loadProfile();
     }
 
     /**
@@ -158,9 +156,9 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        Storage.saveTasks(tasks);
-        Reply.printGoodbyeMessage();
-        Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
+        // Yet to implement : Storage.saveTasks(tasks);
+        // Yet to implement : Reply.printGoodbyeMessage();
+        // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
     }
 }
 
