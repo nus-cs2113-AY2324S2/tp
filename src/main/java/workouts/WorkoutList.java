@@ -3,8 +3,8 @@ package workouts;
 import java.util.ArrayList;
 
 public class WorkoutList extends ArrayList<Workout> {
-    private static final ArrayList<Workout> workouts = new ArrayList<Workout>();
-    private static final ArrayList<Workout> runs = new ArrayList<Workout>();
+    private static final ArrayList<Workout> workouts = new ArrayList<>();
+    private static final ArrayList<Workout> runs = new ArrayList<>();
 
     /**
      * Adds a workout to the list of workouts whenever addRun is called
@@ -65,7 +65,7 @@ public class WorkoutList extends ArrayList<Workout> {
     }
 
     public static Workout getLatestRun(){
-        return runs.get(runs.size()-1);
+        return runs.get(runs.size() -1 );
     }
 
 

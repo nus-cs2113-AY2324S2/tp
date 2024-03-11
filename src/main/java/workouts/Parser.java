@@ -11,7 +11,7 @@ public class Parser {
     }
 
     private static void printNewLine() {
-        System.out.print("\n");
+        System.out.println();
     }
 
     public static void printExerciseHeaderWithDate(){
@@ -58,6 +58,5 @@ public class Parser {
         Parser.printExerciseHeader();
         System.out.println(WorkoutList.getLatestRun());
         Parser.printNewLine();
-
     }
 }
