@@ -1,18 +1,18 @@
 package supertracker.item;
 
 public class Item {
-    protected String itemName;
-    protected int quantity;
-    protected double price;
+    private String name;
+    private int quantity;
+    private double price;
 
-    public Item(String itemName, int quantity, double price) {
-        this.itemName = itemName;
+    public Item(String name, int quantity, double price) {
+        this.name = name;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
 
     public int getQuantity() {

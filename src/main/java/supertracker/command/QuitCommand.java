@@ -2,14 +2,14 @@ package supertracker.command;
 
 import supertracker.Ui;
 
-public class InvalidCommand implements Command {
+public class QuitCommand implements Command {
     @Override
     public void execute() {
-        Ui.printInvalidCommand();
+        Ui.sayGoodbye();
     }
 
     @Override
     public boolean isQuit() {
-        return false;
+        return true;
     }
 }

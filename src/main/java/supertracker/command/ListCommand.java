@@ -1,11 +1,9 @@
 package supertracker.command;
 
-import supertracker.Ui;
-
-public class InvalidCommand implements Command {
+public class ListCommand implements Command {
     @Override
     public void execute() {
-        Ui.printInvalidCommand();
+        System.out.println("\tSorry! Invalid command");
     }
 
     @Override
