@@ -1,14 +1,13 @@
 package seedu.duke;
-
-import exercise.Run;
-import exercise.WorkoutList;
-import exercise.Parser;
-
 import java.util.Scanner;
+
+import static ui.Handler.initialiseBot;
+import static ui.Handler.processInput;
+import static ui.Handler.terminateBot;
 
 public class Duke {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for PulsePilor.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,9 +17,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-
+        initialiseBot();
+        processInput();
+        terminateBot();
     }
 }
