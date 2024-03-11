@@ -29,4 +29,5 @@ public class HelpUi {
                 "\n" +
                 "Start tracking your health goals now! If you have any questions, feel free to ask." );
     }
+
 }
