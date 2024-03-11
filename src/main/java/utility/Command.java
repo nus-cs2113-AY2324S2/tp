@@ -1,4 +1,4 @@
-package ui;
+package utility;
 
 public enum Command {
     LOAD,
