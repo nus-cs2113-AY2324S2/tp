@@ -21,12 +21,17 @@ public class Parser {
             if (inputTrimmed.startsWith("w")) {
             }
 
-        } else if (input.startsWith("list")) { //list meals, and list both
+        } else if (input.startsWith("list")) {
+            if (input.trim().length() > 4) { //list meals
 
+            } else { //list both
+
+            }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.substring(5).split(" ");
             inputTrimmed = parts[1].trim();
             if (inputTrimmed.startsWith("c")) { //shows calorie
+            } else if (inputTrimmed.startsWith("w")) { //shows water
 
             } else if (inputTrimmed.startsWith("w")) { //shows water
             } else if (inputTrimmed.startsWith("g")) { //shows goals
