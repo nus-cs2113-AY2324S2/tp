@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Processes all menu commands and returns the corresponding Command object
+     * Processes all menu commands and returns the corresponding Command object.
      * This method interprets the user's input and displays either the entire menu or the associated menu item
      *
      * @param input The full user input string
@@ -36,7 +36,7 @@ public class Parser {
     }
 
     /**
-     * Parses a string input into a Command object and returns the associated command to handle the associated user input
+     * Parses a string input into a Command object and returns the associated command to handle the user input
      * @param input The user input string.
      * @return A Command object corresponding to the user input, or null if the input is invalid.
      */
