@@ -8,7 +8,7 @@ public class CommandUi {
     public static void printLog() {
 
     }
-    public static void printDailyCalories(int totalCal, int calGoal) {
+    public static void printDailyCalories(int totalCal) {
 
     }
 }
