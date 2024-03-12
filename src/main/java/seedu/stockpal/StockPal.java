@@ -1,7 +1,11 @@
 package seedu.stockpal;
 
-import seedu.stockpal.commands.Command;
+import seedu.stockpal.exceptions.InvalidCommandException;
+import seedu.stockpal.exceptions.InvalidFormatException;
+import seedu.stockpal.parser.Parser;
 import seedu.stockpal.ui.Ui;
+
+import java.util.ArrayList;
 
 public class StockPal {
     /**
@@ -25,11 +29,16 @@ public class StockPal {
     }
 
     private static void runCommandUntilExit() {
-        Command command;
         do {
             String userInput = Ui.getUserInput();
-            // command = new Parser.parseCommand(userInput);
-            // execute command and print results
-        } while (false); // check if command is exit
+            try {
+                ArrayList<String> parsed = Parser.parseCommand(userInput);
+                System.out.println(parsed.toString());
+                // execute command and print results
+            } catch (InvalidCommandException | InvalidFormatException e) {
+                System.out.println("throw");
+            }
+
+        } while (true); // check if command is exit
     }
 }
