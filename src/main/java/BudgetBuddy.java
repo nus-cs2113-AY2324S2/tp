@@ -22,7 +22,7 @@ public class BudgetBuddy {
         while (isRunning) {
             String input = in.nextLine();
 
-            switch (input) {
+            switch (input.split(" ")[0]) {
             case "bye":
                 System.out.println("Goodbye!");
                 isRunning = false;
