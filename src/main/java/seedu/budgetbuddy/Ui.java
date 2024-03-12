@@ -1,10 +1,8 @@
 package seedu.budgetbuddy;
 
-import java.util.Scanner;
-
 public class Ui {
     private static final String DIVIDER = "__________________________________________________";
-    
+
     public void showWelcome() {
         System.out.println(DIVIDER);
         System.out.println("                     BudgetBuddy");

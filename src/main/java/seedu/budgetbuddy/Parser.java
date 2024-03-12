@@ -1,7 +1,12 @@
 package seedu.budgetbuddy;
 
-
-import seedu.budgetbuddy.command.*;
+import seedu.budgetbuddy.command.AddExpenseCommand;
+import seedu.budgetbuddy.command.AddSavingCommand;
+import seedu.budgetbuddy.command.EditExpenseCommand;
+import seedu.budgetbuddy.command.EditSavingCommand;
+import seedu.budgetbuddy.command.ReduceSavingCommand;
+import seedu.budgetbuddy.command.DeleteExpenseCommand;
+import seedu.budgetbuddy.command.Command;
 
 public class Parser {
 

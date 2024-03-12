@@ -1,7 +1,6 @@
 package seedu.budgetbuddy.command;
 
 import seedu.budgetbuddy.ExpenseList;
-import seedu.budgetbuddy.SavingList;
 
 public class EditExpenseCommand extends Command{
     private ExpenseList expenses;
