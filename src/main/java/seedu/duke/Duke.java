@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,6 +17,15 @@ public class Duke {
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
+
+        String command = in.nextLine();
+
+        
+            //ProblemGenerator ;
+            ProblemGenerator pb = new ProblemGenerator();
+            pb.TypeChoose();
+
+
         System.out.println("Hello " + in.nextLine());
     }
 }
