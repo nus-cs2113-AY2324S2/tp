@@ -4,6 +4,8 @@ public enum ExceptionMessage {
     // [Cause of Exception]([Message to be printed])
     // General Exceptions
     INVALID_INDEX ("Invalid index."),
+    // Member Exceptions
+    DUPLICATE_MEMBER ("Duplicate member."),
     // Transaction Exceptions
     INVALID_TRANSACTION_FORMAT ("Invalid transaction format."),
     INVALID_MEMBER_NAME ("Invalid member name."),

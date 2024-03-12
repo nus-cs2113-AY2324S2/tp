@@ -23,6 +23,18 @@ public class TransactionList {
     }
 
     /**
+     * Adds a transaction to the list with the specified expression and member list.
+     *
+     * @param expression The expression of the transaction to add.
+     * @param memberList The member list of the transaction to add.
+     * @throws LongAhException If the expression is invalid.
+     */
+    public void add(String expression, MemberList memberList)
+             throws LongAhException {
+        transactions.add(new Transaction(expression, memberList));
+    }
+
+    /**
      * Removes a transaction from the list by index.
      *
      * @param index The index of the transaction to remove.

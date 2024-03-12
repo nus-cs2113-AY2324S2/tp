@@ -51,7 +51,10 @@ public class Member {
      */
     @Override
     public String toString() {
-        return this.name + ": $" + this.balance;
+        if (this.balance >= 0) {
+            return this.name + ": $" + this.balance;
+        }
+        return this.name + ": -$" + Math.abs(this.balance);
     }
 
     /**

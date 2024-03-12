@@ -22,19 +22,19 @@ public class Transaction {
      */
     public Transaction(String userInput, MemberList memberList) throws LongAhException {
         // User input format: p/[person owed] p/[person1 owing] a/[amount1] p/[person2 owing] a/[amount2] ...
-        String[] splitInput = userInput.split(" p/");
+        String[] splitInput = userInput.split("p/");
 
-        if (splitInput.length < 2) {
+        if (splitInput.length < 3) {
             // Minimum of 2 people as part of a transaction
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
         }
 
-        String personOwedName = splitInput[0].trim();
+        String personOwedName = splitInput[1].trim();
         // Exception is thrown if the person owed does not exist in the group
         this.personOwed = memberList.getMember(personOwedName);
         double totalSumOwed = 0.0;
 
-        for (int i = 1; i < splitInput.length; i++) {
+        for (int i = 2; i < splitInput.length; i++) {
             String nameValue = splitInput[i].trim();
             totalSumOwed += addPayee(nameValue, memberList);
         }
@@ -52,7 +52,7 @@ public class Transaction {
      * @throws LongAhException If the expression is in an invalid format or value.
      */
     public Double addPayee(String expression, MemberList memberList) throws LongAhException {
-        String[] splitPersonOwing = expression.split(" a/");
+        String[] splitPersonOwing = expression.split("a/");
         if (splitPersonOwing.length != 2) {
             // Each person owing should have an amount specified
             // Feature may be changed in the future
