@@ -7,3 +7,6 @@ Hello from
 
 What is your name?
 Hello James Gosling!
+Enter command:
+bye bye!
+- - - - -
