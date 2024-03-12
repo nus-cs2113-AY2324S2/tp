@@ -22,4 +22,34 @@ public class SavingList {
             categories.add(category);
         }
     }
+
+    public void editSaving(String category, int index, double amount) {
+        int categoryIndex = categories.indexOf(category);
+        if (categoryIndex != -1 && index > 0 && index <= savings.size()) {
+            Saving savingToEdit = savings.get(index - 1);
+            savingToEdit.setCategory(category);
+            savingToEdit.setAmount(amount);
+            System.out.println("Saving edited successfully.");
+        } else {
+            System.out.println("Invalid category or index.");
+        }
+    }
+
+    public void reduceSavings(int index, double amount){
+        if (index >= 0 && index < savings.size()){
+            Saving saving = savings.get(index);
+            if(saving.getAmount() >= amount){
+                saving.setAmount(saving.getAmount() - amount);
+            } else {
+                System.out.println("Insufficient savings amount.");
+            }
+        } else {
+            System.out.println("Invalid saving index.");
+        }
+    }
+
+    public void printsaving() {
+        System.out.println(savings.toString());
+    }
+
 }

@@ -6,9 +6,10 @@ public class Saving extends Transaction{
         super(category, amount);
     }
 
-
     @Override
     public String toString() {
         return "Category: " + category + " Amount: " + amount;
     }
+
+
 }

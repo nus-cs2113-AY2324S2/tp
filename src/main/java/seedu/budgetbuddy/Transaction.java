@@ -2,8 +2,7 @@ package seedu.budgetbuddy;
 
 public abstract class Transaction {
     String category;
-    int amount;
-    String description;
+    double amount;
 
     public Transaction(String category, int amount) {
         this.category = category;
@@ -17,4 +16,13 @@ public abstract class Transaction {
     public double getAmount() {
         return amount;
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setAmount(double amount){
+        this.amount = amount;
+    }
+
 }

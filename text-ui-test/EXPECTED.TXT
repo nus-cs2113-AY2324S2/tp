@@ -1,10 +1,10 @@
-Welcome to BudgetBuddy!
-    ____  ____  
-   | __ )| __ ) 
-   |  _ \|  _ \ 
-   | |_) | |_) |
-   |____/|____/ 
-
-What can I do for you?
-____________________________________________________________
-Bye. Hope to see you again soon!
+__________________________________________________
+                     BudgetBuddy
+__________________________________________________
+Welcome to BudgetBuddy, to start, please type "menu INDEX" to view commands for the respective functions
+To view all menu items again, type "menu".
+__________________________________________________
+1. Manage Expenses     3. View Expenses
+2. Manage Savings      4. View Savings
+__________________________________________________
+Goodbye! Thank you for using BudgetBuddy.
