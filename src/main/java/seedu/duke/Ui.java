@@ -24,7 +24,8 @@ public class Ui {
 
         Transaction editedExpense = Parser.parseEditExpenseCommand(editExpenseCommand);
         if (editedExpense != null) {
-            expenseList.editExpense(editedExpense.getCategory(), 1, editedExpense.getAmount(), editedExpense.getDescription());
+            expenseList.editExpense(editedExpense.getCategory(), 1, editedExpense.getAmount(),
+                    editedExpense.getDescription());
             System.out.println("Expense edited successfully.");
         } else {
             System.out.println("Invalid edit expense command.");
@@ -37,7 +38,8 @@ public class Ui {
 
         Transaction editedSaving = Parser.parseEditSavingCommand(editSavingCommand);
         if (editedSaving != null) {
-            savingList.editSaving(editedSaving.getCategory(), 1, editedSaving.getAmount(), editedSaving.getDescription());
+            savingList.editSaving(editedSaving.getCategory(), 1, editedSaving.getAmount(),
+                    editedSaving.getDescription());
             System.out.println("Saving edited successfully.");
         } else {
             System.out.println("Invalid edit saving command.");
