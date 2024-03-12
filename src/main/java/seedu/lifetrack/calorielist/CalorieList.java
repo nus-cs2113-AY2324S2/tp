@@ -33,6 +33,17 @@ public class CalorieList {
         }
     }
 
+    /**
+     * Parses a string input representing calorie intake and adds it to the calorie list.
+     *
+     * This method takes a string input representing calorie intake information and
+     * attempts to parse it using the parseCaloriesIn method from the Parser class.
+     * If the input format is incorrect or contains missing components, it catches
+     * the InvalidInputException and prints an error message. Otherwise, it adds
+     * the parsed Entry object to the calorieArrayList.
+     *
+     * @param input the input string containing date, time, activity, and calorie count
+     */
     public static void calorieIn(String input) {
         try {
             Entry newEntry = Parser.parseCaloriesIn(input);
