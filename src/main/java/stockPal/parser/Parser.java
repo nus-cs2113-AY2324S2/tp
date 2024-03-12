@@ -1,6 +1,13 @@
 package stockPal.parser;
 
-import stockPal.commands.*;
+import stockPal.commands.NewCommand;
+import stockPal.commands.EditCommand;
+import stockPal.commands.DeleteCommand;
+import stockPal.commands.InflowCommand;
+import stockPal.commands.OutflowCommand;
+import stockPal.commands.ListCommand;
+import stockPal.commands.ExitCommand;
+import stockPal.commands.HelpCommand;
 
 import stockPal.exceptions.InvalidCommandException;
 import stockPal.exceptions.InvalidFormatException;
@@ -18,12 +25,12 @@ public final class Parser {
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("(delete) (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("(inflow) (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("(outflow) (\\d+) a/(\\d+)");
-    private static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 5;
-    private static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 6;
-    private static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 2;
-    private static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 3;
-    private static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 3;
-    private static final int START_INDEX = 0;
+    public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 5;
+    public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 6;
+    public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 2;
+    public static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 3;
+    public static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 3;
+    public static final int START_INDEX = 0;
 
     private Parser() {
     }

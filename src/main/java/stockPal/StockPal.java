@@ -1,6 +1,5 @@
 package stockPal;
 
-import stockPal.commands.Command;
 import stockPal.exceptions.InvalidCommandException;
 import stockPal.exceptions.InvalidFormatException;
 import stockPal.parser.Parser;
@@ -30,7 +29,6 @@ public class StockPal {
     }
     
     private static void runCommandUntilExit() {
-        Command command;
         do {
             String userInput = Ui.getUserInput();
             try {
@@ -40,6 +38,6 @@ public class StockPal {
                 System.out.println("thrown");
             }
 
-        } while (false); // check if command is exit
+        } while (true); // check if command is exit
     }
 }
