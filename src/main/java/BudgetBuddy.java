@@ -7,11 +7,7 @@ public class BudgetBuddy {
      */
 
     public static void main(String[] args){
-        String logo = "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n" +
-                      "██ ▄▄▀█ ██ █ ▄▀█ ▄▄▄█ ▄▄█▄ ▄████ ▄▄▀█ ██ █ ▄▀█ ▄▀█ ██ █\n" +
-                      "██ ▄▄▀█ ██ █ █ █ █▄▀█ ▄▄██ █████ ▄▄▀█ ██ █ █ █ █ █ ▀▀ █\n" +
-                      "██ ▀▀ ██▄▄▄█▄▄██▄▄▄▄█▄▄▄██▄█████ ▀▀ ██▄▄▄█▄▄██▄▄██▀▀▀▄█\n" +
-                      "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n";
+        String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
