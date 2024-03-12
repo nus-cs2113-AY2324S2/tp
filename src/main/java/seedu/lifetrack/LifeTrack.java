@@ -1,7 +1,6 @@
 package seedu.lifetrack;
 
 import seedu.lifetrack.calorielist.CalorieList;
-import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.ui.Ui;
 
 import java.util.Scanner;
@@ -11,11 +10,6 @@ public class LifeTrack {
      * Main entry-point for the java.lifetrack.LifeTrack application.
      */
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
         String logo = "LLLLL  IIIII FFFFF EEEEE  TTTTT RRRR   AAA  CCC  K  K\n" +
                 "L       I    F     E        T   R   R A   A C  C K K \n" +
                 "LLL     I    FFFF  EEEE     T   RRRR  AAAAA C    KK  \n" +

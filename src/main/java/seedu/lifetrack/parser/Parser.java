@@ -1,4 +1,5 @@
 package seedu.lifetrack.parser;
+
 import seedu.lifetrack.activity.Activity;
 import seedu.lifetrack.calorielist.Entry;
 import seedu.lifetrack.calories.Calorie;
