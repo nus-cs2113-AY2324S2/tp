@@ -23,8 +23,6 @@ public class BudgetBuddy {
 
         if (command != null) {
             command.execute();
-            expenses.printexpense();
-            savings.printsaving();
         } else {
             System.out.println("Invalid Command");
         }
