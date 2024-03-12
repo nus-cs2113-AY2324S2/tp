@@ -53,7 +53,7 @@ public class Git {
             break;
 
         case "list":
-            // groceryList.listGroceries();
+            groceryList.listGroceries();
             break;
 
         case "help":

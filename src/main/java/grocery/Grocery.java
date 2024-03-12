@@ -45,5 +45,9 @@ public class Grocery {
     public void setExpiration(String expiration) {
         this.expiration = expiration;
     }
+
+    public String printGrocery() {
+        return this.name + ", amount: " + this.amount + ", expiration: " + this.expiration;
+    }
 }
 

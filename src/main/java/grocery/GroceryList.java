@@ -77,5 +77,14 @@ public class GroceryList {
         }
     }
 
+    /**
+     * Lists all the user's groceries.
+     */
+    public void listGroceries() {
+        System.out.println("Here are your groceries!");
+        for (Grocery grocery: groceries) {
+            System.out.println(" - " + grocery.printGrocery());
+        }
+    }
 
 }
