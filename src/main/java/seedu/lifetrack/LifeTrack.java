@@ -2,6 +2,7 @@ package seedu.lifetrack;
 
 import seedu.lifetrack.calorielist.CalorieList;
 import seedu.lifetrack.calories.Calorie;
+import seedu.lifetrack.ui.Ui;
 
 import java.util.Scanner;
 
@@ -27,5 +28,10 @@ public class LifeTrack {
         System.out.println("Hello " + in.nextLine());
         CalorieList calorieList = new CalorieList();
         Ui.readUserInput();
+        byeMessage();
+    }
+
+    public static void byeMessage() {
+        System.out.println("Bye! See you again soon ^^");
     }
 }
