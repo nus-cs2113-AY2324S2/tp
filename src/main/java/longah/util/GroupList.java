@@ -1,7 +1,9 @@
-package longah;
+package longah.util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import longah.node.Member;
 
 /**
  * Represents a list of group members.

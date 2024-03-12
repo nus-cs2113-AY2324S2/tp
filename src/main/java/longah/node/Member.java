@@ -1,4 +1,4 @@
-package longah;
+package longah.node;
 
 /**
  * Represents a member in the LongAh application.

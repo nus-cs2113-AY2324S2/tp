@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import longah.node.Member;
+import longah.node.Transaction;
+import longah.util.TransactionList;
+
 /**
  * LongAh class manages debts between members.
  */
