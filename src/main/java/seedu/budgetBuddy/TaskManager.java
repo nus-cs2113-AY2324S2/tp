@@ -1,9 +1,5 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.data.ExpenseList;
-import seedu.budgetbuddy.data.SavingList;
-
-
 public class TaskManager {
     private static ExpenseList expenses = new ExpenseList();
     private static SavingList savings = new SavingList();

@@ -1,4 +1,4 @@
-package seedu.budgetbuddy.task;
+package seedu.budgetbuddy;
 
 public class Saving extends Transaction{
 

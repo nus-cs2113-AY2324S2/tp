@@ -1,9 +1,7 @@
-package seedu.budgetbuddy.data;
+package seedu.budgetbuddy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import seedu.budgetbuddy.task.Expense;
 
 public class ExpenseList {
     protected ArrayList <Expense> expenses;
