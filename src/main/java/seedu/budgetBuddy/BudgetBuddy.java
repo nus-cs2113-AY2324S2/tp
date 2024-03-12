@@ -1,4 +1,4 @@
-package seedu.budgetBuddy;
+package seedu.budgetbuddy;
 
 public class BudgetBuddy {
 

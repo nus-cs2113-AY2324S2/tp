@@ -1,4 +1,4 @@
-package seedu.task;
+package seedu.budgetbuddy.task;
 
 public abstract class Transaction {
     String category;

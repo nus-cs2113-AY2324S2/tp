@@ -1,7 +1,7 @@
-package seedu.budgetBuddy;
+package seedu.budgetbuddy;
 
-import seedu.data.ExpenseList;
-import seedu.data.SavingList;
+import seedu.budgetbuddy.data.ExpenseList;
+import seedu.budgetbuddy.data.SavingList;
 
 
 public class TaskManager {

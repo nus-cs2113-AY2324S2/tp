@@ -1,4 +1,4 @@
-package seedu.task;
+package seedu.budgetbuddy.task;
 
 public class Expense extends Transaction{
     protected String description;
