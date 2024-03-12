@@ -1,5 +1,4 @@
 package ActiveEdge.Task;
-import ActiveEdge.Task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
