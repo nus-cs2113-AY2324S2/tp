@@ -1,6 +1,6 @@
 package health;
 
-/**
+/*
  * The BMI class extends the Health class and provides functionality
  * to calculate and categorise the Body Mass Index based on user's
  * height and weight.
@@ -10,7 +10,7 @@ public class BMI extends Health {
         super();
     }
 
-    /**
+    /*
      * Calculates BMI based on height and weight, prints calculated BMI value,
      * and calls the printBMICategory method.
      */
@@ -21,7 +21,7 @@ public class BMI extends Health {
         printBMICategory(BMI);
     }
 
-    /**
+    /*
      * Prints the BMI category based on the calculated BMI value.
      *
      * @param BMI The BMI value to categorize.
