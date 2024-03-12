@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-Enter your command: 
-Expenses:
-1 | Date: 2024-03-09 | Category: Transport | Amount: $50 | Description: Bus Fare | 
-2 | Date: 2024-03-09 | Category: Food | Amount: $30 | Description: Lunch | 
------------------------------------------------------------------------------
-Total Expenses: $80
-Enter your command: 
-=======
 __________________________________________________
                      BudgetBuddy
 __________________________________________________
@@ -17,4 +8,3 @@ __________________________________________________
 2. Manage Savings      4. View Savings
 __________________________________________________
 Goodbye! Thank you for using BudgetBuddy.
->>>>>>> master

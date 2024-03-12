@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-list expense
-exit
-=======
 bye
->>>>>>> master
