@@ -1,4 +1,4 @@
-package seedu.budgetBuddy;
+package seedu.budgetbuddy;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
