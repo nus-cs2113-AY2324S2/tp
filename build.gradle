@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClass.set("seedu.git.GiT")
+    mainClass.set("git.Git")
 }
 
 shadowJar {
-    archiveBaseName.set("GiT")
+    archiveBaseName.set("Git")
     archiveClassifier.set("")
 }
 
