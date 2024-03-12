@@ -22,7 +22,7 @@ public class CalorieList {
                 System.out.println("Sorry, this index is out of out of range. Please enter a valid index.");
                 return;
             }
-            this.calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
+//            this.calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
