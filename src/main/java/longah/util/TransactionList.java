@@ -1,7 +1,6 @@
 package longah.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import longah.node.Transaction;
 import longah.exception.LongAhException;
