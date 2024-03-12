@@ -6,25 +6,31 @@ import supertracker.parser.Parser;
 import java.util.Scanner;
 
 public class SuperTracker {
-    protected static final String LINE = "--------------------------------------------------------------------------\n";
-    protected static final String GREET_MESSAGE = LINE + "Hello, welcome to SuperTracker, how may I help you?\n" + LINE;
-    protected static final String EXIT_MESSAGE = LINE + "Goodbye!\n" + LINE;
-
     /**
      * Main entry-point for the java.supertracker.SuperTracker application.
      */
     public static void main(String[] args) {
-        System.out.println(GREET_MESSAGE);
+        run();
+    }
 
+    /**
+     * Runs the java.supertracker.SuperTracker application.
+     */
+    private static void run() {
+        Ui.greetUser();
+        handleCommands();
+    }
+
+    private static void handleCommands() {
         Scanner in = new Scanner(System.in);
         Command command;
         do {
             String input = in.nextLine();
+            Ui.printLine();
             command = Parser.parseCommand(input.trim());
             command.execute();
-        } while (!command.isExit());
-
+            Ui.printLine();
+        } while (!command.isQuit());
         in.close();
-        System.out.println(EXIT_MESSAGE);
     }
 }
