@@ -1,27 +1,29 @@
 package seedu.budgetbuddy;
 
-public class Transaction {
-    protected String category;
-    protected int amount;
-    protected String description;
+public abstract class Transaction {
+    String category;
+    double amount;
 
-    public Transaction(String category, int amount, String description) {
+    public Transaction(String category, double amount) {
         this.category = category;
         this.amount = amount;
-        this.description = description;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public int getAmount() {
+    // Getters and setters
+    public double getAmount() {
         return amount;
     }
 
-    public String getDescription() {
-        return description;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    // Getters and setters
+    public void setAmount(double amount){
+        this.amount = amount;
+    }
+
 }

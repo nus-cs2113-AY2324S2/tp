@@ -2,25 +2,21 @@ package seedu.budgetbuddy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class ExpenseList {
-    protected List<Expense> expenses;
-    protected List<String> categories;
+    protected ArrayList <Expense> expenses;
+    protected ArrayList<String> categories;
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>();
-
-        // Initialize categories
-        categories.add("Housing");
-        categories.add("Groceries");
-        categories.add("Utility");
-        categories.add("Transport");
-        categories.add("Entertainment");
-        categories.add("Others");
+        this.categories = new ArrayList<>(Arrays.asList("Housing", 
+        "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
-    // Methods to add, edit, delete expenses
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
 
     public void listExpenses(String filterCategory) {
         System.out.println("Expenses:");
@@ -39,8 +35,8 @@ public class ExpenseList {
 
     }
 
-    public int calculateTotalExpenses() {
-        int totalExpenses = 0;
+    public double calculateTotalExpenses() {
+        double totalExpenses = 0;
         for (Expense expense: expenses) {
             if (expense.getAmount() < 0) {
                 try {
@@ -54,11 +50,33 @@ public class ExpenseList {
         }
         return totalExpenses;
     }
-
-    public void addExpense(Expense expense) {
+    public void addExpense(String category, String amount, String description) {
+        int amountInt = Integer.parseInt(amount); 
+        Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
+
+        if (!categories.contains(category)) {
+            categories.add(category);
+        }
     }
-    public List<Expense> getExpenses() {
-        return expenses;
+
+    public void editExpense(String category, int index, double amount, String description) {
+        int categoryIndex = categories.indexOf(category);
+        if (categoryIndex != -1 && index > 0 && index <= expenses.size()) {
+            Expense expenseToEdit = expenses.get(index - 1);
+            expenseToEdit.setCategory(category);
+            expenseToEdit.setAmount(amount);
+            expenseToEdit.setDescription(description);
+            System.out.println("Expense edited successfully.");
+        } else {
+            System.out.println("Invalid category or index.");
+        }
+    }
+    public void deleteExpense(int index){
+        if (index >= 0 && index < expenses.size()){
+            expenses.remove(index);
+        } else {
+            System.out.println("Invalid expense index.");
+        }
     }
 }

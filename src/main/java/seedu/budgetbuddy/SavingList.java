@@ -1,44 +1,47 @@
 package seedu.budgetbuddy;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class SavingList {
-
-    protected List<Saving> savings;
-    protected List<String> categories;
-    private int initialAmount;
+    protected ArrayList <Saving> savings;
+    protected ArrayList<String> categories;
+    private double initialAmount;
 
     public SavingList() {
         this.savings = new ArrayList<>();
-        this.categories = new ArrayList<>();
+        this.categories = new ArrayList<>(Arrays.asList("Salary", 
+        "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
-
-        // Initialize categories
-        categories.add("Salary");
-        categories.add("Investments");
-        categories.add("Gifts");
-        categories.add("Others");
     }
 
-    // Methods to add, edit, delete savings
+    public void findTotalSavings() {
+        double totalSavings = 0;
+        for (int i = 0; i < savings.size(); i++) {
+            Saving saving = savings.get(i);
+            totalSavings = totalSavings + saving.getAmount();
+        }
+
+        this.initialAmount = totalSavings;
+    }
+
 
     public void listSavings(String filterCategory, ExpenseList expenseList) {
+        findTotalSavings();
         System.out.println("Savings:");
         for (int i = 0; i < savings.size(); i++) {
             Saving saving = savings.get(i);
             if (filterCategory == null || saving.getCategory().equalsIgnoreCase(filterCategory)) {
-                System.out.print(i+1 + " | ");
+                System.out.print(i + 1 + " | ");
                 System.out.print("Category: " + saving.getCategory() + " | ");
                 System.out.print("Amount: $" + saving.getAmount() + " | ");
-                System.out.println("Description: " + saving.getDescription() + " | ");
             }
         }
         System.out.println("------------------------------------------------------------------------");
         System.out.println("Initial Savings Amount: $" + initialAmount);
         System.out.println("Expenses Deducted: ");
 
-        int totalExpenses = 0;
+        double totalExpenses = 0;
         for (Expense expense : expenseList.getExpenses()) {
             totalExpenses += expense.getAmount();
             System.out.println("$" + expense.getAmount() + " spent on " + expense.getDescription() +
@@ -46,13 +49,13 @@ public class SavingList {
         }
         System.out.println("------------------------------------------------------------------------");
 
-        int remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
+        double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
         System.out.println("Remaining Amount: $" + remainingAmount);
 
     }
 
-    public int calculateRemainingSavings(int initialAmount, int totalExpenses) {
-        int remainingAmount = initialAmount - totalExpenses;
+    public double calculateRemainingSavings(double initialAmount, double totalExpenses) {
+        double remainingAmount = initialAmount - totalExpenses;
         if (remainingAmount < 0) {
             try {
                 throw new Exception("Insufficient Funds");
@@ -64,9 +67,38 @@ public class SavingList {
         }
     }
 
-    public void addSaving(Saving saving) {
+    public void addSaving(String category, String amount) {
+        int amountInt = Integer.parseInt(amount);
+        Saving saving = new Saving(category, amountInt);
         savings.add(saving);
-        initialAmount += saving.getAmount();
+
+        if (!categories.contains(category)) {
+            categories.add(category);
+        }
     }
 
+    public void editSaving(String category, int index, double amount) {
+        int categoryIndex = categories.indexOf(category);
+        if (categoryIndex != -1 && index > 0 && index <= savings.size()) {
+            Saving savingToEdit = savings.get(index - 1);
+            savingToEdit.setCategory(category);
+            savingToEdit.setAmount(amount);
+            System.out.println("Saving edited successfully.");
+        } else {
+            System.out.println("Invalid category or index.");
+        }
+    }
+
+    public void reduceSavings(int index, double amount){
+        if (index >= 0 && index < savings.size()){
+            Saving saving = savings.get(index);
+            if(saving.getAmount() >= amount){
+                saving.setAmount(saving.getAmount() - amount);
+            } else {
+                System.out.println("Insufficient savings amount.");
+            }
+        } else {
+            System.out.println("Invalid saving index.");
+        }
+    }
 }

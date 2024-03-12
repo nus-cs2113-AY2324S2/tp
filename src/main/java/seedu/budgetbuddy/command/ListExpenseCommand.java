@@ -1,4 +1,6 @@
-package seedu.budgetbuddy;
+package seedu.budgetbuddy.command;
+
+import seedu.budgetbuddy.ExpenseList;
 
 public class ListExpenseCommand extends Command {
     private ExpenseList expenses;
