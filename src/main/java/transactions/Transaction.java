@@ -1,4 +1,13 @@
 package transactions;
 
 public class Transaction {
+    private String description;
+    private float amount;
+    private String category;
+
+    public Transaction(String description, float amount, String category) {
+        this.description = description;
+        this.amount = amount;
+        this.category = category;
+    }
 }
