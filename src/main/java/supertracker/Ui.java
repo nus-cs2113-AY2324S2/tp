@@ -3,14 +3,12 @@ package supertracker;
 import supertracker.item.Item;
 
 public class Ui {
-    private static final int ZERO_ITEMS = 0;
-    private static final int ONE_ITEM = 1;
     private static final String LINE = "    --------------------------------------------------------------------------";
     private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
-    public static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
-    public static final String FAREWELL_MESSAGE = "Goodbye! Hope to see you again!";
+    private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
+    private static final String FAREWELL_MESSAGE = "Goodbye! Hope to see you again!";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -55,11 +53,11 @@ public class Ui {
     }
 
     public static void listIntro(int size) {
-        if (size == ZERO_ITEMS) {
+        if (size == 0) {
             printIndent(EMPTY_LIST_MESSAGE);
             return;
         }
-        if (size == ONE_ITEM) {
+        if (size == 1) {
             printIndent(SINGLE_ITEM_LIST_MESSAGE);
             return;
         }
