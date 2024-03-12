@@ -2,11 +2,11 @@ package seedu.lifetrack.calorielist;
 
 import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.parser.Parser;
+import seedu.lifetrack.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
 
 public class CalorieList {
-    public ArrayList<Entry> calorieArrayList;
     public static ArrayList<Entry> calorieArrayList;
 
     public CalorieList(){
@@ -33,6 +33,15 @@ public class CalorieList {
         }
     }
 
+    public static void calorieIn(String input) {
+        try {
             Entry newEntry = Parser.parseCaloriesIn(input);
             calorieArrayList.add(newEntry);
+        } catch (InvalidInputException e) {
+            System.out.println("Ensure you follow format with no missing inputs!:" +
+                    " calories in d/DATE t/TIME a/ACTIVITY c/CALORIES_IN");
+        }
+
+    }
+
 }
