@@ -31,4 +31,5 @@ public class CalorieList {
         }
     }
 
+            Entry newEntry = Parser.parseCaloriesIn(input);
 }
