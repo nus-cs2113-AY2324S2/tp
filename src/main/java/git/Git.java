@@ -26,24 +26,23 @@ public class Git {
     /**
      * Handles commands.
      *
-     * @param command Command.
-     * @param details Command details.
+     * @param commandParts Command and its details.
      * @throws GitException Exception thrown depending on specific error.
      */
-    private void executeCommand(String command, String details) throws GitException {
-        switch (command) {
+    private void executeCommand(String[] commandParts) throws GitException {
+        switch (commandParts[0]) {
         case "add":
             // Assuming the format is "add GROCERY"
-            Grocery grocery = new Grocery(details, "", "");
+            Grocery grocery = new Grocery(commandParts[1], "", "");
             groceryList.addGrocery(grocery);
             break;
 
         case "exp":
-            groceryList.setExpiration(details);
+            groceryList.setExpiration(commandParts[1]);
             break;
 
         case "amt":
-            groceryList.setAmount(details);
+            groceryList.setAmount(commandParts[1]);
             break;
 
         case "del":
@@ -76,7 +75,7 @@ public class Git {
         while (isRunning) {
             try {
                 String[] commandParts = ui.processInput();
-                executeCommand(commandParts[0], commandParts[1]);
+                executeCommand(commandParts);
             } catch (GitException e) {
                 System.out.println(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) {

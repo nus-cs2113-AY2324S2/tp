@@ -43,10 +43,8 @@ public class Ui {
      * Processes user input into commands and their details.
      */
     public String[] processInput() throws GitException {
-        String command = in.next().toLowerCase();
-        String input = in.nextLine().strip();
-
-        return new String[]{command, input};
+        String commandLine = in.nextLine();
+        return commandLine.strip().split(" ", 2);
     }
 
     /**
