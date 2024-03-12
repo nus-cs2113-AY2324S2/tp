@@ -33,7 +33,7 @@ public class Output {
     }
 
     private static void printExerciseHeader(){
-        System.out.println("Type\tTime\t\tDistance\tPace");
+        System.out.println("Type\tTime\t\tDistance\tPace\t\tDate");
     }
 
     public static void printAddRun(Workout newRun){

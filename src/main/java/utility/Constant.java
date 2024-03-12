@@ -11,4 +11,5 @@ public class Constant {
     public static final String NO_RUNS_FOUND = "No runs found!";
     public static final String EMPTY_HISTORY = "No history found!";
 
+    public static final String NO_DATE_SPECIFIED = "NA";
 }
