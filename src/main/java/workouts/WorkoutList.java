@@ -78,6 +78,10 @@ public class WorkoutList extends ArrayList<Workout> {
         return runs.get(runs.size() -1 );
     }
 
+    public static int getSize(){
+        return runs.size();
+    }
+
 
     /**
      * Used for ParserTest

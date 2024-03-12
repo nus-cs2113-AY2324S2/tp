@@ -133,13 +133,14 @@ public class Handler {
      * @param userInput The user input string.
      */
     public static void handleExercise(String userInput){
+        // to be implemented
         // If it is a run (help me to abstract it out)
-        Run r1 = new Run("00:10:10", "10.3" );
-        Output.printAddRun(r1);
-        Run r2 = new Run("00:20:10", "20.3", "10/11/2024");
-        Output.printAddRun(r2);
-        Run r3 = new Run("00:30:10", "30.3");
-        Output.printAddRun(r3);
+        //Run r1 = new Run("00:10:10", "10.3" );
+        //Output.printAddRun(r1);
+        //Run r2 = new Run("00:20:10", "20.3", "10/11/2024");
+        //Output.printAddRun(r2);
+        //Run r3 = new Run("00:30:10", "30.3");
+        //Output.printAddRun(r3);
     };
     public static void handleLoad(String userInput){};
     public static void handleNew(String userInput){};
@@ -148,7 +149,7 @@ public class Handler {
     };
     public static void handleLatest(String userInput){
         // if asked to show latest run
-        Output.printLatestRun();;
+        Output.printLatestRun();
     };
     public static void handleHealth(String userInput){};
     public static void handleHeight(String userInput){};

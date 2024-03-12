@@ -33,7 +33,7 @@ public class Output {
     }
 
     private static void printExerciseHeader(){
-        System.out.println("Type\tTime\t\tDistance\tPace\t\tDate");
+        System.out.println("Index\t\tType\tTime\t\tDistance\tPace\t\tDate");
     }
 
     public static void printAddRun(Workout newRun){
@@ -48,7 +48,7 @@ public class Output {
         try{
             Workout latestRun = WorkoutList.getLatestRun();
             printExerciseHeader();
-            System.out.println(latestRun);
+            System.out.println(WorkoutList.getSize() + ".\t\t\t" + latestRun);
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println(Constant.NO_RUNS_FOUND);
         }
@@ -72,7 +72,7 @@ public class Output {
             ArrayList<Workout> workoutList = WorkoutList.getWorkouts(filter);
             printExerciseHeader();
             for (int i = 0; i < workoutList.size(); i++){
-                System.out.println(i + "\t\t\t" + WorkoutList.getWorkouts(filter).get(i));
+                System.out.println((i + 1) + ".\t\t\t" + WorkoutList.getWorkouts(filter).get(i));
             }
 
         } catch (ArrayIndexOutOfBoundsException e){
