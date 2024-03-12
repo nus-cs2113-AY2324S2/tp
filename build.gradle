@@ -29,11 +29,13 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+//    mainClass.set("seedu.duke.Duke")
+    mainClass.set("seedu.stockpal.StockPal")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+//    archiveBaseName.set("duke")
+    archiveBaseName.set("stockpal")
     archiveClassifier.set("")
 }
 
