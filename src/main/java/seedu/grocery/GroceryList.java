@@ -10,5 +10,12 @@ public class GroceryList {
         groceries.add(grocery);
     }
 
+    public void listGroceries() {
+        System.out.println("Here are your groceries!");
+        for (Grocery grocery: groceries) {
+            System.out.println(" - " + grocery.printGrocery());
+        }
+    }
+
     // Additional methods for updating grocery items
 }

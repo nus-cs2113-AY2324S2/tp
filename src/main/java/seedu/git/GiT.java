@@ -42,15 +42,15 @@ public class GiT {
                 case "exp":
                     // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
                     String[] expParts = commandParts[1].split(" d/", 2);
-                    groceryList.setExpiration(expParts[0], expParts[1]);
+                    //groceryList.setExpiration(expParts[0], expParts[1]);
                     break;
                 case "amt":
                     // Assuming the format is "amt GROCERY a/AMOUNT"
                     String[] amtParts = commandParts[1].split(" a/", 2);
-                    groceryList.setAmount(amtParts[0], amtParts[1]);
+                    //groceryList.setAmount(amtParts[0], amtParts[1]);
                     break;
                 case "del":
-                    groceryList.removeGrocery(commandParts[1]);
+                    //groceryList.removeGrocery(commandParts[1]);
                     break;
                 case "list":
                     groceryList.listGroceries();
