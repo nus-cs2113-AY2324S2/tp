@@ -1,5 +1,4 @@
 package seedu.duke;
-
 public abstract class Transaction {
 
     protected String category;
@@ -14,6 +13,10 @@ public abstract class Transaction {
 
     public String getCategory(){
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setCategory(){
