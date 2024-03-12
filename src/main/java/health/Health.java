@@ -21,4 +21,11 @@ public class Health {
         this.height = height;
         this.weight = weight;
     }
+
+    /**
+     * Prints a new line.
+     */
+    public static void printNewLine() {
+        System.out.println();
+    }
 }
