@@ -1,9 +1,5 @@
     WELCOME TO BYTECEPS
    -------------------------------------------------
-workout /create WORKOUT_PLAN_NAME
-week /assign WORKOUT_PLAN_NAME /to DAY
-week /today
-bye
 COMMAND: 
 workout 
 ARGUMENTS: 
