@@ -8,7 +8,7 @@ public class Ui {
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
-    private static final String FAREWELL_MESSAGE = "Goodbye! Hope to see you again!";
+    private static final String FAREWELL_MESSAGE = "Goodbye!";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
