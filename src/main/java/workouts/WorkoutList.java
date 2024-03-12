@@ -18,7 +18,7 @@ public class WorkoutList extends ArrayList<Workout> {
      * Adds a run to the list of runs and to the main workout list too
      * @param run Run object
      */
-    public static void addRun(Run run){
+    protected static void addRun(Run run){
         runs.add(run);
         addWorkout(run);
     }
@@ -33,8 +33,14 @@ public class WorkoutList extends ArrayList<Workout> {
      */
     public static ArrayList<Workout> getWorkouts(String filter) {
         if (filter.equals("run")) {
+            if (runs.isEmpty()){
+                throw new ArrayIndexOutOfBoundsException();
+            }
             return runs;
         } else {
+            if (workouts.isEmpty()){
+                throw new ArrayIndexOutOfBoundsException();
+            }
             return workouts;
         }
     }
@@ -65,6 +71,10 @@ public class WorkoutList extends ArrayList<Workout> {
     }
 
     public static Workout getLatestRun(){
+        if (runs.isEmpty()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
         return runs.get(runs.size() -1 );
     }
 
