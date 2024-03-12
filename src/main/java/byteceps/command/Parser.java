@@ -6,6 +6,11 @@ public class Parser {
     private String command;
     private HashMap<String, String> arguments;
 
+    public Parser() {
+        command = "";
+        arguments = new HashMap<>();
+    }
+
     public String getCommandString() {
         return command;
     }
@@ -39,10 +44,5 @@ public class Parser {
     public String toString() {
         return "COMMAND: " + System.lineSeparator() + command + System.lineSeparator() +
                 "ARGUMENTS: " + System.lineSeparator() + arguments.toString();
-    }
-
-    public Parser() {
-        command = "";
-        arguments = new HashMap<>();
     }
 }
