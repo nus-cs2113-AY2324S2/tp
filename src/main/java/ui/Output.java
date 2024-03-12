@@ -55,17 +55,6 @@ public class Output {
         printLine();
     }
 
-    /**
-    * * Prints all workouts in the workout list
-    * @param filter can be "all", "run" or "gym"
-    * "all" prints all workouts
-    * "run" prints only runs (yet to be implemented)
-    * "gym" prints only gym workouts (yet to be implemented)
-    * Output is printed to the console in the format:
-    * Type Time Distance Pace
-    * Run 00:10:10 10.3 0:58/km
-    * Run 30:10:10 60.3 0:30/km
-    */
     public static void printHistory(String filter){
         printLine();
         try{
@@ -79,10 +68,5 @@ public class Output {
             System.out.println(Constant.EMPTY_HISTORY);
         }
         printLine();
-
-
-
-
     }
-
 }
