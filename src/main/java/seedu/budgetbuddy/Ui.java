@@ -40,14 +40,14 @@ public class Ui {
         case 1:
             System.out.println("Manage Expenses");
             System.out.println("add expense c/CATEGORY a/AMOUNT d/DESCRIPTION");
-            System.out.println("edit expense c/CATEGORY i/INDEX a/AMOUNT");
-            System.out.println("delete expense c/CATEGORY i/INDEX");
+            System.out.println("edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION");
+            System.out.println("delete expense i/INDEX");
             break;
         case 2:
             System.out.println("Manage Savings");
             System.out.println("add savings c/CATEGORY a/AMOUNT");
             System.out.println("edit savings c/CATEGORY i/INDEX a/AMOUNT");
-            System.out.println("reduce savings c/CATEGORY i/INDEX a/AMOUNT");
+            System.out.println("reduce savings i/INDEX a/AMOUNT");
             break;
         case 3:
             System.out.println("View Expenses");
@@ -63,4 +63,5 @@ public class Ui {
         }
         System.out.println(DIVIDER);
     }
+
 }

@@ -1,7 +1,6 @@
-package seedu.budgetbuddy;
+package seedu.budgetbuddy.command;
 
 public class Command {
     public void execute() {
     }
-
 }

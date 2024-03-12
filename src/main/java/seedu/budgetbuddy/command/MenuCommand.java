@@ -1,4 +1,7 @@
-package seedu.budgetbuddy;
+package seedu.budgetbuddy.command;
+
+import seedu.budgetbuddy.Ui;
+
 public class MenuCommand extends Command {
     private int index;
     private Ui ui;
