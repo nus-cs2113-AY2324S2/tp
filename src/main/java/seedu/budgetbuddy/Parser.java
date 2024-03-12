@@ -7,6 +7,8 @@ import seedu.budgetbuddy.command.EditSavingCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.DeleteExpenseCommand;
 import seedu.budgetbuddy.command.Command;
+import seedu.budgetbuddy.command.MenuCommand;
+
 
 public class Parser {
 
@@ -21,6 +23,16 @@ public class Parser {
             }
         }
         return details.substring(startIndex, endIndex).trim();
+    }
+
+    /**
+     * Checks if the provided input starts with the word "menu" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "menu", else returns false
+     */
+    public Boolean isMenuCommand(String input) {
+        return input.startsWith("menu");
     }
 
     public Boolean isExitCommand(String input) {
@@ -51,6 +63,26 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+
+    /**
+     * Processes all menu commands and returns the corresponding Command object.
+     * This method interprets the user's input and displays either the entire menu or the associated menu item
+     *
+     * @param input The full user input string
+     * @return A new MenuCommand object with the specified index, returns null if index is not an integer
+     */
+    public Command handleMenuCommand(String input) {
+        if (input.trim().equals("menu")) {
+            return new MenuCommand(0);
+        }
+        try {
+            String indexAsString = input.substring(5);
+            int index = Integer.parseInt(indexAsString);
+            return new MenuCommand(index);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 
     public Command handleAddExpenseCommand(ExpenseList expenses, String input) {
         String[] parts = input.split(" ", 2);
@@ -185,7 +217,17 @@ public class Parser {
         return null;
 
     }
+
+    /**
+     * Parses a string input into a Command object and returns the associated command to handle the user input
+     * @param input The user input string.
+     * @return A Command object corresponding to the user input, or null if the input is invalid.
+     */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
+
+        if(isMenuCommand(input)) {
+            return handleMenuCommand(input);
+        }
 
         if (isAddExpenseCommand(input)) {
             return handleAddExpenseCommand(expenses, input);
@@ -203,7 +245,6 @@ public class Parser {
             return handleEditSavingCommand(savings, input);
         }
 
-
         if (isDeleteExpenseCommand(input)) {
             return handleDeleteExpenseCommand(expenses, input);
         }
@@ -214,4 +255,5 @@ public class Parser {
 
         return null;
     }
+
 }

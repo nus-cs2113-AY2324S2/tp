@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class BudgetBuddy {
 
-    private final Ui ui;
-    private final Parser parser;
-
+    private Ui ui;
+    private Parser parser;
     private ExpenseList expenses;
     private SavingList savings;
+
     public BudgetBuddy() {
         ui = new Ui();
         parser = new Parser();
