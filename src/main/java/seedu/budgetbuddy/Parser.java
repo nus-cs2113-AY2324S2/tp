@@ -8,7 +8,8 @@ import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.DeleteExpenseCommand;
 import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.MenuCommand;
-
+import seedu.budgetbuddy.command.ListExpenseCommand;
+import seedu.budgetbuddy.command.ListSavingsCommand;
 
 public class Parser {
 
@@ -23,6 +24,10 @@ public class Parser {
             }
         }
         return details.substring(startIndex, endIndex).trim();
+    }
+
+    public Boolean isListCommand(String input) {
+        return input.startsWith("list");
     }
 
     /**
@@ -63,6 +68,37 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+
+    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
+        String[] parts = input.split(" ");
+        String action = parts[0];
+
+        switch (action) {
+        case "list":
+            if (parts.length == 2) {
+                // List expenses or savings
+                String listType = parts[1];
+                if (listType.equalsIgnoreCase("expense")) {
+                    return new ListExpenseCommand(expenseList);
+                } else if (listType.equalsIgnoreCase("savings")) {
+                    return new ListSavingsCommand(savingList, expenseList);
+                }
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expense")) {
+                String filterCategory = parts[2];
+                return new ListExpenseCommand(expenseList, filterCategory);
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
+                String filterCategory = parts[2];
+                return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
+            } else {
+                return null;
+            }
+            break;
+        // Add, edit, delete, and other commands...
+        default:
+            return null;
+        }
+        return null;
+    }
 
     /**
      * Processes all menu commands and returns the corresponding Command object.
@@ -251,6 +287,10 @@ public class Parser {
 
         if (isReduceSavingCommand(input)) {
             return handleReduceSavingCommand(savings, input);
+        }
+
+        if (isListCommand(input)) {
+            return handleListCommand(input, expenses, savings);
         }
 
         return null;

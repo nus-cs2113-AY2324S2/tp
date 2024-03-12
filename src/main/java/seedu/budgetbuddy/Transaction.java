@@ -4,7 +4,7 @@ public abstract class Transaction {
     String category;
     double amount;
 
-    public Transaction(String category, int amount) {
+    public Transaction(String category, double amount) {
         this.category = category;
         this.amount = amount;
     }
@@ -13,6 +13,7 @@ public abstract class Transaction {
         return category;
     }
 
+    // Getters and setters
     public double getAmount() {
         return amount;
     }

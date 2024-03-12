@@ -30,6 +30,7 @@ public class BudgetBuddy {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
+
         ui.showWelcome();
 
         boolean isExit = false;

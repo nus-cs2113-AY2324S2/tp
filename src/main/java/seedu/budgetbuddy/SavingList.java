@@ -6,11 +6,65 @@ import java.util.Arrays;
 public class SavingList {
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
+    private double initialAmount;
 
     public SavingList() {
         this.savings = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Salary", 
         "Investments", "Gifts", "Others"));
+        this.initialAmount = 0;
+    }
+
+    public void findTotalSavings() {
+        double totalSavings = 0;
+        for (int i = 0; i < savings.size(); i++) {
+            Saving saving = savings.get(i);
+            totalSavings = totalSavings + saving.getAmount();
+        }
+
+        this.initialAmount = totalSavings;
+    }
+
+
+    public void listSavings(String filterCategory, ExpenseList expenseList) {
+        findTotalSavings();
+        System.out.println("Savings:");
+        for (int i = 0; i < savings.size(); i++) {
+            Saving saving = savings.get(i);
+            if (filterCategory == null || saving.getCategory().equalsIgnoreCase(filterCategory)) {
+                System.out.print(i + 1 + " | ");
+                System.out.print("Category: " + saving.getCategory() + " | ");
+                System.out.print("Amount: $" + saving.getAmount() + " | ");
+            }
+        }
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Initial Savings Amount: $" + initialAmount);
+        System.out.println("Expenses Deducted: ");
+
+        double totalExpenses = 0;
+        for (Expense expense : expenseList.getExpenses()) {
+            totalExpenses += expense.getAmount();
+            System.out.println("$" + expense.getAmount() + " spent on " + expense.getDescription() +
+                    " on " + expense.getDateAdded());
+        }
+        System.out.println("------------------------------------------------------------------------");
+
+        double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
+        System.out.println("Remaining Amount: $" + remainingAmount);
+
+    }
+
+    public double calculateRemainingSavings(double initialAmount, double totalExpenses) {
+        double remainingAmount = initialAmount - totalExpenses;
+        if (remainingAmount < 0) {
+            try {
+                throw new Exception("Insufficient Funds");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return remainingAmount;
+        }
     }
 
     public void addSaving(String category, String amount) {
@@ -47,5 +101,4 @@ public class SavingList {
             System.out.println("Invalid saving index.");
         }
     }
-
 }

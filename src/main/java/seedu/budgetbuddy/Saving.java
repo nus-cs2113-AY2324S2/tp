@@ -1,8 +1,7 @@
 package seedu.budgetbuddy;
-
 public class Saving extends Transaction{
 
-    public Saving(String category, int amount) {
+    public Saving(String category, double amount) {
         super(category, amount);
     }
 
