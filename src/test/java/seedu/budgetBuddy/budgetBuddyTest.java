@@ -1,12 +1,17 @@
-package seedu.duke;
+package seedu.budgetBuddy;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+class budgetBuddyTest {
     @Test
     public void sampleTest() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void sampleFailingTest() {
         assertTrue(true);
     }
 }
