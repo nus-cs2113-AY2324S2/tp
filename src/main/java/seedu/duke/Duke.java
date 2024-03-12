@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import CantVasUI.*;
 
 public class Duke {
     /**
