@@ -1,13 +1,9 @@
 package longah;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import longah.node.Member;
 import longah.util.MemberList;
-import longah.node.Transaction;
 import longah.util.TransactionList;
 import longah.util.Subtransaction;
 import longah.exception.LongAhException;
@@ -57,49 +53,49 @@ public class LongAh {
                 String command = app.scanner.nextLine();
                 String[] parts = command.split(" ", 2);
                 switch (parts[0]) {
-                    case "add":
-                        transactions.add(parts[1], members);
-                        break;
-                    case "list":
-                        app.listAllDebts();
-                        break;
-                    // case "delete":
-                    // if (parts.length == 2) {
-                    // int index = Integer.parseInt(parts[1]);
-                    // app.deleteDebt(index);
-                    // } else {
-                    // System.out.println("Invalid command format. Use 'delete
-                    // INDEX'");
-                    // }
-                    // break;
-                    // case "find":
-                    // if (parts.length == 2) {
-                    // String person = parts[1];
-                    // app.findDebts(person);
-                    // } else {
-                    // System.out.println("Invalid command format. Use 'find
-                    // PERSON'");
-                    // }
-                    // break;
-                    // case "clear":
-                    // app.clearAllDebts();
-                    // break;
-                    case "addmember":
-                        if (parts.length == 2) {
-                            String name = parts[1];
-                            members.addMember(name);
-                        } else {
-                            System.out.println("Invalid command format. Use 'addmember NAME'");
-                        }
-                        break;
-                    case "listmembers":
-                        members.listMembers();
-                        break;
-                    case "exit":
-                        System.exit(0);
-                        return;
-                    default:
-                        System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
+                case "add":
+                    transactions.add(parts[1], members);
+                    break;
+                case "list":
+                    app.listAllDebts();
+                    break;
+                // case "delete":
+                // if (parts.length == 2) {
+                // int index = Integer.parseInt(parts[1]);
+                // app.deleteDebt(index);
+                // } else {
+                // System.out.println("Invalid command format. Use 'delete
+                // INDEX'");
+                // }
+                // break;
+                // case "find":
+                // if (parts.length == 2) {
+                // String person = parts[1];
+                // app.findDebts(person);
+                // } else {
+                // System.out.println("Invalid command format. Use 'find
+                // PERSON'");
+                // }
+                // break;
+                // case "clear":
+                // app.clearAllDebts();
+                // break;
+                case "addmember":
+                    if (parts.length == 2) {
+                        String name = parts[1];
+                        members.addMember(name);
+                    } else {
+                        System.out.println("Invalid command format. Use 'addmember NAME'");
+                    }
+                    break;
+                case "listmembers":
+                    members.listMembers();
+                    break;
+                case "exit":
+                    System.exit(0);
+                    return;
+                default:
+                    System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);
