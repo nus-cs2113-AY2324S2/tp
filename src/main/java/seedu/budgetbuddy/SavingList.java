@@ -48,8 +48,4 @@ public class SavingList {
         }
     }
 
-    public void printsaving() {
-        System.out.println(savings.toString());
-    }
-
 }

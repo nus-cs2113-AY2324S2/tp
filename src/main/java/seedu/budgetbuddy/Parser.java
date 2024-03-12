@@ -57,11 +57,8 @@ public class Parser {
         String details = parts[1];
         try {
             String category = extractDetailsForAdd(details, "/c");
-            System.out.println(category);
             String amount = extractDetailsForAdd(details, "/a");
-            System.out.println(amount);
             String description = extractDetailsForAdd(details, "/d");
-            System.out.println(description);
             return new AddExpenseCommand(expenses,category, amount, description);
         } catch (Exception e) {
             System.out.println("Error parsing expense. Ensure the format is correct.");
@@ -117,10 +114,6 @@ public class Parser {
 
         // Validate required fields
         if (category != null && index != -1 && amount != -1 && description != null) {
-            System.out.println(category);
-            System.out.println(index);
-            System.out.println(amount);
-            System.out.println(description);
             return new EditExpenseCommand(expenses, category, index, amount, description);
         } else {
             // Handle incomplete command
@@ -167,7 +160,6 @@ public class Parser {
         String[] parts = input.split("i/", 2);
         try {
             String indexAsString = parts[1].trim();
-            System.out.println(indexAsString);
             int index = Integer.parseInt(indexAsString) - 1;
             return new DeleteExpenseCommand(expenses, index);
         } catch (NumberFormatException e) {
@@ -184,10 +176,7 @@ public class Parser {
 
             String indexToReduceAsString = parts[1].trim();
             String amountToReduceAsString = parts[2].trim();
-            System.out.println(indexToReduceAsString);
-            System.out.println(amountToReduceAsString);
             int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
-
             double amountToReduce = Double.parseDouble(amountToReduceAsString);
 
             return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);

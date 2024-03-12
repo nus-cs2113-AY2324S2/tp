@@ -43,7 +43,4 @@ public class ExpenseList {
         }
     }
 
-    public void printexpense() {
-        System.out.println(expenses.toString());
-    }
 }
