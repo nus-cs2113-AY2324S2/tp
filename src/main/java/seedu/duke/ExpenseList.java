@@ -29,4 +29,11 @@ class ExpenseList {
             System.out.println("Invalid category or index.");
         }
     }
+    public void deleteExpense(int index){
+        if (index >= 0 && index < expenses.size()){
+            expenses.remove(index);
+        } else {
+            System.out.println("Invalid expense index.");
+        }
+    }
 }

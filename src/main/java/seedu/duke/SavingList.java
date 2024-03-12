@@ -28,4 +28,17 @@ class SavingList {
             System.out.println("Invalid category or index.");
         }
     }
+
+    public void reduceSavings(int index, double amount){
+        if (index >= 0 && index < savings.size()){
+            Saving saving = savings.get(index);
+            if(saving.getAmount() >= amount){
+                saving.setAmount(saving.getAmount() - amount);
+            } else {
+                System.out.println("Insufficient savings amount.");
+            }
+        } else {
+            System.out.println("Invalid saving index.");
+        }
+    }
 }

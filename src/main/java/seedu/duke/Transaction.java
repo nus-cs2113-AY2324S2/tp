@@ -15,8 +15,12 @@ public abstract class Transaction {
         return category;
     }
 
-    public void setCategory(String category){
-        this.category = this.category;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setCategory(){
+        this.category = category;
     }
 
     public double getAmount(){
