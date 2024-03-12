@@ -1,7 +1,5 @@
 package git;
 
-import java.util.Scanner;
-
 import exceptions.GitException;
 import grocery.Grocery;
 import grocery.GroceryList;
@@ -75,8 +73,6 @@ public class Git {
      * Runs Git.
      */
     private void run() {
-        Scanner scanner = new Scanner(System.in);
-
         while (isRunning) {
             try {
                 String[] commandParts = ui.processInput();
@@ -89,8 +85,6 @@ public class Git {
                 ui.printLine();
             }
         }
-
-        scanner.close();
     }
 
     /**
