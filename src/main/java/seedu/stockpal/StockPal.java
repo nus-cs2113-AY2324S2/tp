@@ -37,6 +37,7 @@ public class StockPal {
                 // execute command and print results
             } catch (InvalidCommandException | InvalidFormatException e) {
                 System.out.println("throw");
+                break;
             }
 
         } while (true); // check if command is exit

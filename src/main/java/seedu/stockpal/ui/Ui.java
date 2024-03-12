@@ -6,17 +6,17 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class Ui {
+    private static final Scanner scanner = new Scanner(System.in);
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static String getUserInput() throws NoSuchElementException {
         String input = "";
         try {
-            Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
         } catch (NoSuchElementException exception) {
+            System.out.println("error");
             System.exit(0);
         }
-
         return input;
     }
 

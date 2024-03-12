@@ -1,1 +1,4 @@
-James Gosling
+new n/name q/123 p/123.20 d/something
+new n/name q/123 p/123.20 d/some
+exit
+bye
