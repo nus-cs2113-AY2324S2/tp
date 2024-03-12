@@ -24,6 +24,11 @@ public class Ui {
     private static String addItemOpening(Item item) {
         return item.getName() + " has been added to the inventory!";
     }
+
+    private static void updateItemOpening(Item item) {
+        System.out.println(item.getName() + " has been successfully updated!");
+    }
+
     public static void printIndent(String string) {
         System.out.println("     " + string);
     }
@@ -48,6 +53,12 @@ public class Ui {
 
     public static void newCommandSuccess(Item item) {
         printIndent(addItemOpening(item));
+        printIndent(quantityMessage(item));
+        printIndent(priceMessage(item));
+    }
+
+    public static void updateCommandSuccess(Item item) {
+        updateItemOpening(item);
         printIndent(quantityMessage(item));
         printIndent(priceMessage(item));
     }

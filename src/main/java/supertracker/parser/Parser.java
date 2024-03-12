@@ -1,16 +1,18 @@
 package supertracker.parser;
 
-import supertracker.command.Command;
-import supertracker.command.NewCommand;
-import supertracker.command.QuitCommand;
 import supertracker.command.InvalidCommand;
 import supertracker.command.ListCommand;
+import supertracker.command.NewCommand;
+import supertracker.command.QuitCommand;
+import supertracker.command.UpdateCommand;
+import supertracker.command.Command;
 import supertracker.item.Inventory;
 
 public class Parser {
     private static final String QUIT_COMMAND = "quit";
     private static final String NEW_COMMAND = "new";
     private static final String LIST_COMMAND = "list";
+    private static final String UPDATE_COMMAND = "update";
     private static final int PARAM_BEGIN_INDEX = 2;
     private static final double ROUNDING_FACTOR = 100.0;
 
@@ -47,6 +49,9 @@ public class Parser {
         case LIST_COMMAND:
             command = parseListCommand(input);
             break;
+        case UPDATE_COMMAND:
+            command = parseUpdateCommand(input);
+            break;
         default:
             command = new InvalidCommand();
             break;
@@ -54,7 +59,47 @@ public class Parser {
         return command;
     }
 
-    private static Command parseNewCommand(String input) {
+
+    private static Command parseUpdateCommand(String input) {
+        ExtractDataForNewOrUpdateCommand result = getExtractDataForNewOrUpdateCommand(input);
+
+        if (result.name.isEmpty()) {
+            // throw error
+            System.out.println("empty param");
+        }
+        if (!Inventory.contains(result.name)) {
+            // throw error
+            System.out.println(result.name + " does not exist in inventory. Unable to update its values. =(");
+        }
+
+        int quantity = 0;
+        double price = 0;
+
+        if (result.quantityString.isEmpty()) {
+            quantity = 0;
+        } else {
+            quantity = Integer.parseInt(result.quantityString);
+        }
+        if (result.priceString.isEmpty()) {
+            price = 0;
+        } else {
+            price = roundTo2Dp(Double.parseDouble(result.priceString));
+        }
+
+        if (quantity < 0) {
+            // throw error
+            System.out.println("quantity less than 0");
+        }
+        if (price < 0) {
+            // throw error
+            System.out.println("price less than 0");
+        }
+
+        return new UpdateCommand(result.name, quantity, price);
+    }
+
+    // extracted for new or update command to use
+    private static ExtractDataForNewOrUpdateCommand getExtractDataForNewOrUpdateCommand(String input) {
         // split input string into params if they start with "n/", "q/" or "p/"
         String[] params = input.split("(?=[nqp]/)");
 
@@ -72,20 +117,36 @@ public class Parser {
                 priceString = param.substring(PARAM_BEGIN_INDEX);
             }
         }
+        return new ExtractDataForNewOrUpdateCommand(name, quantityString, priceString);
+    }
 
-        if (name.isEmpty() || quantityString.isEmpty() || priceString.isEmpty()) {
+    private static class ExtractDataForNewOrUpdateCommand {
+        public final String name;
+        public final String quantityString;
+        public final String priceString;
+
+        public ExtractDataForNewOrUpdateCommand(String name, String quantityString, String priceString) {
+            this.name = name;
+            this.quantityString = quantityString;
+            this.priceString = priceString;
+        }
+    }
+
+    private static Command parseNewCommand(String input) {
+        ExtractDataForNewOrUpdateCommand result = getExtractDataForNewOrUpdateCommand(input);
+
+        if (result.name.isEmpty() || result.quantityString.isEmpty() || result.priceString.isEmpty()) {
             // throw error (possible to split for unique error messages)
             System.out.println("empty param");
         }
-
-        if (Inventory.contains(name)) {
+        if (Inventory.contains(result.name)) {
             // throw error
             System.out.println("Inventory already contains item");
         }
 
         // throws NumberFormatException if strings cannot be parsed
-        int quantity = Integer.parseInt(quantityString);
-        double price = roundTo2Dp(Double.parseDouble(priceString));
+        int quantity = Integer.parseInt(result.quantityString);
+        double price = roundTo2Dp(Double.parseDouble(result.priceString));
 
 
         if (quantity < 0) {
@@ -97,7 +158,7 @@ public class Parser {
             System.out.println("price less than 0");
         }
 
-        return new NewCommand(name, quantity, price);
+        return new NewCommand(result.name, quantity, price);
     }
 
     private static Command parseListCommand(String input) {
