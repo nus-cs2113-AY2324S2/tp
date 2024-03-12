@@ -1,8 +1,6 @@
 package ui;
 
 import utility.Command;
-import workouts.Run;
-
 import java.util.Scanner;
 
 

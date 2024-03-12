@@ -31,8 +31,7 @@ public class Run extends Workout{
     public String getTimes() {
         if (isHourPresent) {
             return times[0] + ":" + times[1] + ":" + times[2];
-        }
-        else {
+        } else {
             return times[0] + ":" + times[1];
         }
     }
@@ -62,13 +61,11 @@ public class Run extends Workout{
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
             integerTimes[2] = Integer.parseInt(stringTimeParts[2]);
-        }
-        else if (inputLength == Constant.MIN_RUNTIME_ARRAY_LENGTH) {
+        } else if (inputLength == Constant.MIN_RUNTIME_ARRAY_LENGTH) {
             this.isHourPresent = false;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
-        }
-        else {
+        } else {
             System.err.println("Incorrect time format!");
             return null;
         }
@@ -84,9 +81,7 @@ public class Run extends Workout{
 
         if (isHourPresent) {
             totalSeconds = times[0] * 3600 + times[1] * 60  + times[2];
-        }
-
-        else {
+        } else {
             totalSeconds = times[0] * 60 + times[1];
         }
         return totalSeconds;
@@ -119,8 +114,7 @@ public class Run extends Workout{
 
         if (date != null){
             runString += "\t\t" + date;
-        }
-        else {
+        } else {
             runString += "\t\t" + Constant.NO_DATE_SPECIFIED;
         }
 

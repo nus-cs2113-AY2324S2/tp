@@ -24,8 +24,7 @@ public abstract class Workout {
         LocalDate formattedDate = null;
         try {
             formattedDate = LocalDate.parse(dateTime, formatter);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error parsing date: " + e.getMessage());
             System.exit(1);
         }

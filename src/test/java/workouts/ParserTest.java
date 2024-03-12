@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import ui.Output;
 import utility.Constant;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 
@@ -35,7 +35,7 @@ class ParserTest {
         System.setErr(originalErr);
     }
     @Test
-    void printHistory_Runsonly_expectAllRunsPrinted() {
+    void printHistory_runsOnly_expectAllRunsPrinted() {
         Run r1 = new Run("40:10", "10.3", "15/03/2024");
         Run r2 = new Run("01:59:10", "15.3");
         String expected = Constant.PARTITION_LINE + "\n" +
@@ -51,12 +51,12 @@ class ParserTest {
     }
 
     @Test
-    void printLatestRun_oneRun_expectAllRunsPrinted() {
+    void printLatestRun_oneRun_expectOneRunPrinted() {
         new Run("40:10", "10.3");
         String expected = Constant.PARTITION_LINE + "\n" +
                 "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
                 "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\tNA\n" +
-                Constant.PARTITION_LINE + "\n";;
+                Constant.PARTITION_LINE + "\n";
         expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
