@@ -1,11 +1,13 @@
 package seedu.lifetrack.calorielist;
 
 import seedu.lifetrack.calories.Calorie;
+import seedu.lifetrack.parser.Parser;
 
 import java.util.ArrayList;
 
 public class CalorieList {
     public ArrayList<Entry> calorieArrayList;
+    public static ArrayList<Entry> calorieArrayList;
 
     public CalorieList(){
         calorieArrayList= new ArrayList<>();
@@ -32,4 +34,5 @@ public class CalorieList {
     }
 
             Entry newEntry = Parser.parseCaloriesIn(input);
+            calorieArrayList.add(newEntry);
 }
