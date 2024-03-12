@@ -14,7 +14,7 @@ public class Parser {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
 
-        String[] nextPrefixes = { "/c", "/a", "/d" };
+        String[] nextPrefixes = { "c/", "a/", "d/" };
         for (String nextPrefix : nextPrefixes) {
             if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
                 endIndex = details.indexOf(nextPrefix, startIndex);
@@ -56,9 +56,9 @@ public class Parser {
         String[] parts = input.split(" ", 2);
         String details = parts[1];
         try {
-            String category = extractDetailsForAdd(details, "/c");
-            String amount = extractDetailsForAdd(details, "/a");
-            String description = extractDetailsForAdd(details, "/d");
+            String category = extractDetailsForAdd(details, "c/");
+            String amount = extractDetailsForAdd(details, "a/");
+            String description = extractDetailsForAdd(details, "d/");
             return new AddExpenseCommand(expenses,category, amount, description);
         } catch (Exception e) {
             System.out.println("Error parsing expense. Ensure the format is correct.");
@@ -73,8 +73,8 @@ public class Parser {
         String details = parts[1];
 
         try {
-            String category = extractDetailsForAdd(details, "/c");
-            String amount = extractDetailsForAdd(details, "/a");
+            String category = extractDetailsForAdd(details, "c/");
+            String amount = extractDetailsForAdd(details, "a/");
             return new AddSavingCommand(savings, category, amount);
         } catch (Exception e) {
             System.out.println("Error parsing saving. Ensure the format is correct.");
