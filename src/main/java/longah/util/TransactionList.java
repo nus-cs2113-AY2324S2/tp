@@ -2,23 +2,16 @@ package longah.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import longah.node.Transaction;
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 /**
  * Represents a list of transactions.
  */
 public class TransactionList {
-    private List<Transaction> transactions;
-
-    /**
-     * Constructs a new TransactionList instance.
-     */
-    public TransactionList() {
-        this.transactions = new ArrayList<>();
-    }
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     /**
      * Adds a transaction to the list.
@@ -33,50 +26,14 @@ public class TransactionList {
      * Removes a transaction from the list by index.
      *
      * @param index The index of the transaction to remove.
+     * @throws LongAhException If the index is invalid.
      */
-    public void remove(int index) {
-        if (index >= 0 && index < transactions.size()) {
+    public void remove(int index) throws LongAhException {
+        try {
             transactions.remove(index);
-        } else {
-            System.out.println("Invalid index.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-    }
-
-    /**
-     * Calculates the balances between members.
-     *
-     * @return A map containing the balances between members.
-     */
-    public Map<String, Double> calculateBalances() {
-        Map<String, Double> balances = new HashMap<>();
-
-        for (Transaction transaction : transactions) {
-            String fromName = transaction.getFrom().getName();
-            String toName = transaction.getTo().getName();
-            double amount = transaction.getAmount();
-
-            balances.put(fromName, balances.getOrDefault(fromName, 0.0) - amount);
-            balances.put(toName, balances.getOrDefault(toName, 0.0) + amount);
-        }
-
-        return balances;
-    }
-
-    /**
-     * Gets the name of the other person involved in a transaction with the given name.
-     *
-     * @param name The name of the person.
-     * @return The name of the other person in the transaction.
-     */
-    public String getOtherPerson(String name) {
-        for (Transaction transaction : transactions) {
-            if (transaction.getFrom().getName().equals(name)) {
-                return transaction.getTo().getName();
-            } else if (transaction.getTo().getName().equals(name)) {
-                return transaction.getFrom().getName();
-            }
-        }
-        return "";
     }
 
     /**
@@ -91,7 +48,7 @@ public class TransactionList {
      *
      * @return The list of transactions.
      */
-    public List<Transaction> getTransactions() {
+    public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 }

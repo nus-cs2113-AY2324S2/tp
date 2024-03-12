@@ -23,7 +23,7 @@ public class Member {
      * @param amount The amount to add to the balance.
      */
     public void addToBalance(double amount) {
-        balance += amount;
+        this.balance += amount;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Member {
      * @param amount The amount to subtract from the balance.
      */
     public void subtractFromBalance(double amount) {
-        balance -= amount;
+        this.balance -= amount;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Member {
      * @return The balance of the member.
      */
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Member {
      */
     @Override
     public String toString() {
-        return name + ": $" + balance;
+        return this.name + ": $" + this.balance;
     }
 
     /**
@@ -60,6 +60,6 @@ public class Member {
      * @return The name of the member.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 }

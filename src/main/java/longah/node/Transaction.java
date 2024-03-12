@@ -1,72 +1,90 @@
 package longah.node;
 
+import java.util.HashMap;
+
+import longah.util.MemberList;
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
+
 /**
  * Represents a transaction between two members.
  */
 public class Transaction {
-    private Member from;
-    private Member to;
-    private double amount;
+    private Member personOwed;
+    private HashMap<Member, Double> subtransactions = new HashMap<>();
 
     /**
-     * Constructs a new Transaction instance.
-     *
-     * @param from   The member who owes the amount.
-     * @param to     The member who is owed the amount.
-     * @param amount The amount of the transaction.
+     * Constructs a new Transaction instance with the given user input and member list.
+     * 
+     * @param userInput The user input for the transaction.
+     * @param memberList The list of members in the group.
+     * @throws LongAhException If the user input is in an invalid format or value.
      */
-    public Transaction(Member from, Member to, double amount) {
-        this.from = from;
-        this.to = to;
-        this.amount = amount;
-        from.subtractFromBalance(amount);
-        to.addToBalance(amount);
+    public Transaction(String userInput, MemberList memberList) throws LongAhException {
+        // User input format: p/[person owed] p/[person1 owing] a/[amount1] p/[person2 owing] a/[amount2] ...
+        String[] splitInput = userInput.split(" p/");
+
+        if (splitInput.length < 2) {
+            // Minimum of 2 people as part of a transaction
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
+        }
+
+        String personOwedName = splitInput[0].trim();
+        // Exception is thrown if the person owed does not exist in the group
+        this.personOwed = memberList.getMember(personOwedName);
+        double totalSumOwed = 0.0;
+
+        for (int i = 1; i < splitInput.length; i++) {
+            String nameValue = splitInput[i].trim();
+            totalSumOwed += addPayee(nameValue, memberList);
+        }
+
+        this.personOwed.addToBalance(totalSumOwed);
+        updateBalances();
     }
 
     /**
-     * Checks if the transaction involves a specific person.
-     *
-     * @param person The name of the person to check.
-     * @return True if the person is involved in the transaction, false otherwise.
+     * Adds a payee to the transaction.
+     * 
+     * @param expression The expression containing the payee and amount owed.
+     * @param memberList The list of members in the group.
+     * @return The amount owed by the payee.
+     * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public boolean getInvolves(String person) {
-        return from.toString().equals(person) || to.toString().equals(person);
+    public Double addPayee(String expression, MemberList memberList) throws LongAhException {
+        String[] splitPersonOwing = expression.split(" a/");
+        if (splitPersonOwing.length != 2) {
+            // Each person owing should have an amount specified
+            // Feature may be changed in the future
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
+        }
+
+        String personOwingName = splitPersonOwing[0].trim();
+        // Exception is thrown if the person owing does not exist in the group
+        Member personOwing = memberList.getMember(personOwingName);
+        Double amountOwed;
+        try {
+            amountOwed = Double.parseDouble(splitPersonOwing[1].trim());
+        } catch (NumberFormatException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_VALUE_FORMAT);
+        }
+
+        if (amountOwed <= 0) {
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_VALUE);
+        }
+
+        this.subtransactions.put(personOwing, amountOwed);
+        return amountOwed;
     }
 
     /**
-     * Returns a string representation of the transaction.
-     *
-     * @return A string describing the transaction.
+     * Updates the balances of the members involved in the transaction.
      */
-    @Override
-    public String toString() {
-        return from + " owes " + to + " $" + amount;
-    }
-
-    /**
-     * Gets the member who owes the amount.
-     *
-     * @return The member who owes the amount.
-     */
-    public Member getFrom() {
-        return from;
-    }
-
-    /**
-     * Gets the member who is owed the amount.
-     *
-     * @return The member who is owed the amount.
-     */
-    public Member getTo() {
-        return to;
-    }
-
-    /**
-     * Gets the amount of the transaction.
-     *
-     * @return The amount of the transaction.
-     */
-    public double getAmount() {
-        return amount;
+    public void updateBalances() {
+        for (HashMap.Entry<Member, Double> entry : this.subtransactions.entrySet()) {
+            Member member = entry.getKey();
+            double amount = entry.getValue();
+            member.subtractFromBalance(amount);
+        }
     }
 }
