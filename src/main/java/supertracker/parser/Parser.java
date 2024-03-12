@@ -1,6 +1,11 @@
 package supertracker.parser;
 
-import supertracker.command.*;
+import supertracker.command.InvalidCommand;
+import supertracker.command.ListCommand;
+import supertracker.command.NewCommand;
+import supertracker.command.QuitCommand;
+import supertracker.command.UpdateCommand;
+import supertracker.command.Command;
 import supertracker.item.Inventory;
 
 public class Parser {
@@ -72,14 +77,12 @@ public class Parser {
 
         if (result.quantityString.isEmpty()) {
             quantity = 0;
-        }
-        else {
+        } else {
             quantity = Integer.parseInt(result.quantityString);
         }
         if (result.priceString.isEmpty()) {
             price = 0;
-        }
-        else {
+        } else {
             price = roundTo2Dp(Double.parseDouble(result.priceString));
         }
 
