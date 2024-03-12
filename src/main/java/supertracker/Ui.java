@@ -3,7 +3,29 @@ package supertracker;
 import supertracker.item.Item;
 
 public class Ui {
+    private static final int ZERO_ITEMS = 0;
+    private static final int ONE_ITEM = 1;
     private static final String LINE = "    --------------------------------------------------------------------------";
+    private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
+    private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
+    private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
+    public static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
+    public static final String FAREWELL_MESSAGE = "Goodbye! Hope to see you again!";
+
+    private static String listSize(int size){
+        return ("There are " + size + " unique items in your inventory:");
+    }
+    private static String priceMessage(Item item) {
+        return "Price: " + item.getPriceString();
+    }
+
+    private static String quantityMessage(Item item) {
+        return "Quantity: " + item.getQuantity();
+    }
+
+    private static String addItemOpening(Item item) {
+        return item.getName() + " has been added to the inventory!";
+    }
     public static void printIndent(String string) {
         System.out.println("     " + string);
     }
@@ -14,34 +36,34 @@ public class Ui {
 
     public static void greetUser() {
         printLine();
-        printIndent("Hello, welcome to SuperTracker, how may I help you?");
+        printIndent(WELCOME_MESSAGE);
         printLine();
     }
 
     public static void sayGoodbye() {
-        printIndent("Goodbye!");
+        printIndent(FAREWELL_MESSAGE);
     }
 
     public static void printInvalidCommand() {
-        printIndent("Sorry! Invalid command!");
+        printIndent(INVALID_COMMAND_MESSAGE);
     }
 
     public static void newCommandSuccess(Item item) {
-        printIndent(item.getName() + " has been added to the inventory!");
-        printIndent("Quantity: " + item.getQuantity());
-        printIndent("Price: " + item.getPriceString());
+        printIndent(addItemOpening(item));
+        printIndent(quantityMessage(item));
+        printIndent(priceMessage(item));
     }
 
     public static void listIntro(int size) {
-        if (size == 0) {
-            printIndent("Nothing to list! No items in inventory!");
+        if (size == ZERO_ITEMS) {
+            printIndent(EMPTY_LIST_MESSAGE);
             return;
         }
-        if (size == 1) {
-            printIndent("There is 1 unique item in your inventory:");
+        if (size == ONE_ITEM) {
+            printIndent(SINGLE_ITEM_LIST_MESSAGE);
             return;
         }
-        printIndent("There are " + size + " unique items in your inventory:");
+        printIndent(listSize(size));
     }
 
     public static void listItem(Item item, int index, boolean qExists, boolean pExists, String firstParam) {
