@@ -26,5 +26,6 @@ public class LifeTrack {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         CalorieList calorieList = new CalorieList();
+        Ui.readUserInput();
     }
 }
