@@ -1,11 +1,15 @@
 package stockPal;
 
-import stockPal.commands.Command;
+import stockPal.exceptions.InvalidCommandException;
+import stockPal.exceptions.InvalidFormatException;
+import stockPal.parser.Parser;
 import stockPal.ui.Ui;
+
+import java.util.ArrayList;
 
 public class StockPal {
     /**
-     * Main entry-point for the java.stockpal.StockPal application.
+     * Main entry-point for the java.stockPal.StockPal application.
      */
     
     public static void main(String[] args) {
@@ -25,11 +29,15 @@ public class StockPal {
     }
     
     private static void runCommandUntilExit() {
-        Command command;
         do {
             String userInput = Ui.getUserInput();
-            // command = new Parser.parseCommand(userInput);
-            // execute command and print results
-        } while (false); // check if command is exit
+            try {
+                ArrayList<String> parsedInput = Parser.parseCommand(userInput);
+                // execute command and print results
+            } catch (InvalidCommandException | InvalidFormatException e) {
+                System.out.println("thrown");
+            }
+
+        } while (true); // check if command is exit
     }
 }
