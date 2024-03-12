@@ -10,4 +10,16 @@ public class Transaction {
         this.amount = amount;
         this.category = category;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
 }
