@@ -26,6 +26,7 @@ public class Ui {
      * Prints welcome message.
      */
     private void printWelcome() {
+        // LOGO causes runtest.bat to fail, failing our CI
         final String GITLOGO =
                 "   _______ ______\n"
                 + "  / ____(_)_  __/\n"
@@ -33,7 +34,7 @@ public class Ui {
                 + "/ /_/ / / / /    \n"
                 + "\\____/_/ /_/     \n";
 
-        System.out.println("Hello from\n" + GITLOGO);
+        System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         System.out.println("Hello " + in.nextLine() + "!");
         System.out.println("Enter command:");

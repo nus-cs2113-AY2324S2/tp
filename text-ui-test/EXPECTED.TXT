@@ -1,10 +1,4 @@
-Hello from
-   _______ ______
-  / ____(_)_  __/
- / / __/ / / /
-/ /_/ / / / /
-\____/_/ /_/
-
+Hello from GiT
 What is your name?
 Hello James Gosling!
 Enter command:
