@@ -1,22 +1,54 @@
 package seedu.budgetbuddy;
 
+import seedu.budgetbuddy.command.Command;
+
+import java.util.Scanner;
+
 public class BudgetBuddy {
 
-    private static final Ui ui = new Ui();
-    private static final Parser parser = new Parser(); 
+    private final Ui ui;
+    private final Parser parser;
+
+    private ExpenseList expenses;
+    private SavingList savings;
+    public BudgetBuddy() {
+        ui = new Ui();
+        parser = new Parser();
+        expenses = new ExpenseList();
+        savings = new SavingList();
+    }
+
+    public void handleCommands(String input) {
+        Command command = parser.parseCommand(expenses, savings, input);
+
+        if (command != null) {
+            command.execute();
+        } else {
+            System.out.println("Invalid Command");
+        }
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        ui.showWelcome();
+
+        boolean isExit = false;
+        while (!isExit) {
+            String input = scanner.nextLine();
+
+            if (parser.isExitCommand(input)) {
+                isExit = true;
+            } else {
+                handleCommands(input);
+            }
+
+        }
+
+        ui.showGoodbye();
+        scanner.close();
+    }
 
     public static void main(String[] args) {
-        ui.greet();
-        String input;
-        while (true) {
-            input = ui.readCommand(); 
-            if (input.equals("bye")) {
-                break; 
-            }
-            parser.parseInput(input); 
-            ui.showAdd(input); 
-        }
-        ui.showGoodBye();
-        ui.closeScanner();
+        new BudgetBuddy().run();
     }
 }
