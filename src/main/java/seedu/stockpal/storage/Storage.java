@@ -14,27 +14,26 @@ import seedu.stockpal.storage.exception.StorageIOException;
 public class Storage {
 
     public static final String DEFAULT_STORAGE_FILEPATH = "data/inventory.csv";
+    private static final Double EMPTY_PRICE = -0.1;
+    private static final String EMPTY_STRING = "";
 
-    public final String PATH;
-
-    private final Double EMPTYPRICE = -0.1;
-    private final String EMPTYSTRING = "";
+    public final String path;
 
     public Storage() {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
     public Storage(String filePath) {
-        this.PATH = filePath;
+        this.path = filePath;
     }
 
     public ProductList load() throws StockPalException, StorageIOException {
-        Path path = Path.of(PATH);
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+        Path filepath = Path.of(this.path);
+        if (!Files.exists(filepath) || !Files.isRegularFile(filepath)) {
             createSaveFile();
             return new ProductList();
         }
-        CsvReader invReader = new CsvReader(PATH);
+        CsvReader invReader = new CsvReader(this.path);
         return parseInventory(invReader.readAllData());
     }
 
@@ -54,15 +53,15 @@ public class Storage {
         Integer productId = Integer.parseInt(productRow[0]);
         String productName = productRow[1];
         Integer productQty = Integer.parseInt(productRow[2]);
-        Double productPrice = (productRow[3].equalsIgnoreCase(EMPTYSTRING))
-                ? EMPTYPRICE
+        Double productPrice = (productRow[3].equalsIgnoreCase(EMPTY_STRING))
+                ? EMPTY_PRICE
                 : Double.parseDouble(productRow[3]);
         String productDesc = productRow[4];
         return new Product(productName, productQty, productPrice, productDesc, productId);
     }
 
     private void createSaveFile() throws StockPalException {
-        File f = new File(PATH);
+        File f = new File(path);
         f.getParentFile().mkdirs();
         try {
             f.createNewFile();
