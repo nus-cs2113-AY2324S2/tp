@@ -17,4 +17,7 @@ public class TransactionList {
         return transactions;
     }
 
+    private void addTransaction(Transaction t) {
+        transactions.add(t);
+    }
 }
