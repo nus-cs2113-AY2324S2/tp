@@ -1,9 +1,24 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    WELCOME TO BYTECEPS
+   -------------------------------------------------
+COMMAND: 
+workout 
+ARGUMENTS: 
+{create=WORKOUT_PLAN_NAME}
 
-What is your name?
-Hello James Gosling
+COMMAND: 
+week 
+ARGUMENTS: 
+{to=DAY, assign=WORKOUT_PLAN_NAME}
+
+COMMAND: 
+week 
+ARGUMENTS: 
+{today=}
+
+COMMAND: 
+bye
+ARGUMENTS: 
+{}
+
+    GOODBYE FOR NOW. STAY HARD!
+   -------------------------------------------------
