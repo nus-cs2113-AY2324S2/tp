@@ -6,9 +6,10 @@ public enum ExceptionMessage {
     INVALID_INDEX ("Invalid index."),
     // Member Exceptions
     DUPLICATE_MEMBER ("Duplicate member."),
+    INVALID_MEMBER_NAME ("Invalid member name."),
+    MEMBER_NOT_FOUND ("Member not found."),
     // Transaction Exceptions
     INVALID_TRANSACTION_FORMAT ("Invalid transaction format."),
-    INVALID_MEMBER_NAME ("Invalid member name."),
     INVALID_TRANSACTION_VALUE ("Invalid transaction value."),
     INVALID_VALUE_FORMAT ("Invalid value format."),
     // Data Storage Exceptions

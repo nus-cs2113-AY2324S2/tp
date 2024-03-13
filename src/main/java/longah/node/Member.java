@@ -1,5 +1,10 @@
 package longah.node;
 
+import java.util.regex.Pattern;
+
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
+
 /**
  * Represents a member in the LongAh application.
  */
@@ -11,8 +16,14 @@ public class Member {
      * Constructs a new Member instance with the given name and zero balance.
      *
      * @param name The name of the member.
+     * @throws LongAhException If the name is invalid.
      */
-    public Member(String name) {
+    public Member(String name) throws LongAhException {
+        // Check if name is fully alphanumeric
+        if (!Pattern.matches("[A-Za-z0-9]+", name)) {
+            throw new LongAhException(ExceptionMessage.INVALID_MEMBER_NAME);
+        }
+
         this.name = name;
         this.balance = 0.0;
     }
@@ -22,7 +33,10 @@ public class Member {
      *
      * @param amount The amount to add to the balance.
      */
-    public void addToBalance(double amount) {
+    public void addToBalance(double amount) throws LongAhException {
+        if (amount <= 0) {
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_VALUE);
+        }
         this.balance += amount;
     }
 
@@ -31,7 +45,10 @@ public class Member {
      *
      * @param amount The amount to subtract from the balance.
      */
-    public void subtractFromBalance(double amount) {
+    public void subtractFromBalance(double amount) throws LongAhException {
+        if (amount <= 0) {
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_VALUE);
+        }
         this.balance -= amount;
     }
 
