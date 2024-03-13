@@ -140,23 +140,65 @@ public class Handler {
         //Run r3 = new Run("00:30:10", "30.3");
         //Output.printAddRun(r3);
     };
-    public static void handleLoad(String userInput){};
-    public static void handleNew(String userInput){};
+    public static void handleLoad(String userInput){}
+    public static void handleNew(String userInput){
+        getRun(userInput);
+    }
     public static void handleHistory(String userInput){
         Output.printHistory("all");
-    };
+    }
     public static void handleLatest(String userInput){
         // if asked to show latest run
         Output.printLatestRun();
-    };
-    public static void handleHealth(String userInput){};
-    public static void handleHeight(String userInput){};
-    public static void handleWeight(String userInput){};
-    public static void handleBmi(String userInput){};
-    public static void handleStart(String userInput){};
-    public static void handleEnd(String userInput){};
-    public static void handleToday(String userInput){};
-    public static void handleLength(String userInput){};
+    }
+    public static void handleHealth(String userInput){}
+    public static void handleHeight(String userInput){}
+    public static void handleWeight(String userInput){}
+    public static void handleBmi(String userInput){}
+    public static void handleStart(String userInput){}
+    public static void handleEnd(String userInput){}
+    public static void handleToday(String userInput){}
+    public static void handleLength(String userInput){}
+
+    /**
+     * Parses a string containing run information, extracts the command, distance and end time before returning
+     * an array of strings containing the information.
+     *
+     * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
+     * @return An array of strings containing the extracted command, distance, time taken and date(if given).
+     * // @throws CustomException If the Event time range is invalid or unspecified.
+     */
+    public static String[] getRun(String input) {
+
+        String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
+
+
+        if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
+            // throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
+        }
+
+        int indexE = input.indexOf("/e");
+        int indexD = input.indexOf("/d");
+        int indexT = input.indexOf("/t");
+        int indexDate = input.indexOf("/date");
+
+        String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
+        String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
+        String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
+        String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
+
+
+        if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
+            //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
+        }
+
+        results[0] = command;
+        results[1] = dSubstring;
+        results[2] = tSubstring;
+        results[3] = dateSubstring;
+
+        return results;
+    }
 
 
 
