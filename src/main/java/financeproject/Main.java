@@ -1,3 +1,4 @@
+package financeproject;
 import java.util.Scanner;
 
 import financialtransactions.Inflow;

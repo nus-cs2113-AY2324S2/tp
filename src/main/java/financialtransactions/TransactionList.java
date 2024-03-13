@@ -41,7 +41,7 @@ public class TransactionList<T extends Transaction<?>> {
         String baseString = "Transactions: \n";
         Integer index = 1;
         for(T transaction : transactionList){
-            baseString += String.format("%d)\t%s\n", index, transaction.toString());
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
             index += 1;
         }
         return baseString;
@@ -53,7 +53,7 @@ public class TransactionList<T extends Transaction<?>> {
         int index = 1;
         for (int i = listSize - 1; i >= listSize - n - 1; i--) {
             T transaction = transactionList.get(i);
-            baseString += String.format("%d)\t%s\n", index, transaction.toString());
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
             index++;
         }
         return baseString;
