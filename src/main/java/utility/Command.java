@@ -16,7 +16,5 @@ public enum Command {
     LENGTH,
     HELP,
     EXIT,
-    ALL,
-    RUN,
-    GYM
+
 }

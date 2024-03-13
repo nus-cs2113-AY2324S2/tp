@@ -1,6 +1,5 @@
 package ui;
 
-import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Workout;
@@ -36,9 +35,6 @@ public class Output {
     private static void printExerciseHeader(){
         System.out.println("Index\t\tType\tTime\t\tDistance\tPace\t\tDate");
     }
-    private static boolean isValidFilter(String filter){
-        return filter.equals("all") || filter.equals("run") || filter.equals("gym");
-    }
     public static void printAddRun(Workout newRun){
         printLine();
         System.out.println("Successfully added the following run");
@@ -51,7 +47,7 @@ public class Output {
         try{
             Workout latestRun = WorkoutList.getLatestRun();
             printExerciseHeader();
-            System.out.println(WorkoutList.getSize() + ".\t\t\t" + latestRun);
+            System.out.println(WorkoutList.getRunSize() + ".\t\t\t" + latestRun);
         } catch (CustomExceptions.OutOfBounds e){
             System.out.println(e.getMessage());
         }
@@ -62,9 +58,7 @@ public class Output {
 
         printLine();
         try{
-            if(!isValidFilter(filter)){
-                throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
-            }
+
             ArrayList<Workout> workoutList = WorkoutList.getWorkouts(filter);
             printExerciseHeader();
             for (int i = 0; i < workoutList.size(); i++){
