@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import longah.exception.ExceptionMessage;
 
 public class MemberTest {
+    /** 
+     * Tests the successful creation of a member with a valid name.
+     */
     @Test
     public void memberConstructor_validName_success() {
         try {
@@ -19,6 +22,9 @@ public class MemberTest {
         }
     }
 
+    /**
+     * Tests the unsuccessful creation of a member with an invalid name.
+     */
     @Test
     public void memberConstructor_invalidName_exceptionThrown() {
         try {
