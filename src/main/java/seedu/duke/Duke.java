@@ -16,7 +16,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
+
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        String name = in.nextLine();
+        System.out.println("Hello " + name);
+
+        // Call the Echo functionality
+        Echo echo = new Echo();
+        echo.startEcho();
     }
 }
