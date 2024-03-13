@@ -48,21 +48,21 @@ public class Parser {
         }
 
         int markBox = 0;
-            try {
-                markBox = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                if (input.equals("quit")) {
-                    // tell some other class they wanna quit
-                    return;
-                }
-                // call function to Ui to say "not a number, invalid move"
+        try {
+            markBox = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            if (input.equals("quit")) {
+                // tell some other class they wanna quit
+                return;
             }
+            // call function to Ui to say "not a number, invalid move"
+        }
 
-            if (markBox < 0 || markBox > 9) {
-                // call function to Ui to say "invalid move"
-            } else {
-                // call function to TT game to mark that box as user's
-            }
+        if (markBox < 1 || markBox > 9) {
+            // call function to Ui to say "invalid move"
+        } else {
+            // call function to TT game to mark that box as user's
+        }
     }
 
     /**
