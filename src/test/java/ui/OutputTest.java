@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import ui.Output;
 import utility.Constant;
 import workouts.Run;
 import workouts.WorkoutList;
