@@ -1,8 +1,13 @@
 package seedu.stockpal;
 
+import seedu.stockpal.data.ProductList;
+import seedu.stockpal.data.product.Product;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
+import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.parser.Parser;
+import seedu.stockpal.storage.Storage;
+import seedu.stockpal.storage.exception.StorageIOException;
 import seedu.stockpal.ui.Ui;
 
 import java.util.ArrayList;
@@ -12,6 +17,9 @@ public class StockPal {
      * Main entry-point for the java.stockpal.StockPal application.
      */
 
+    private static final Storage STORAGE = new Storage();
+    private static ProductList productList;
+
     public static void main(String[] args) {
         start();
         runCommandUntilExit();
@@ -19,8 +27,12 @@ public class StockPal {
     }
 
     private static void start() {
-        // load storage file
         Ui.printWelcomeMessage();
+        try {
+            productList = STORAGE.load();
+        } catch (StockPalException | StorageIOException e) {
+            throw new RuntimeException(e); //replace this with Ui.printError(error message);
+        }
     }
 
     private static void exit() {
