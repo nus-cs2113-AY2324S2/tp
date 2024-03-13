@@ -15,9 +15,16 @@ public class EchoTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void startEchoPunctuation(){
         assertEquals("!!??::,,//", Echo.echoInput("!!??::,,//"));
     }
 
 
+=======
+    public void startEchoSymbols() {
+        assertEquals("#$%^&", Echo.echoInput("#$%^&"));
+
+    }
+>>>>>>> a3aa00a922b6614164e1b8d74da2c241be7e5503
 }
