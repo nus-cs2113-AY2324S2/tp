@@ -19,12 +19,12 @@ public class Parser {
         String arguments = tokens.length > 1 ? tokens[1] : "";
 
         switch (commandString) {
-            case "delete":
-                return parseDeleteCommand(arguments);
-            case "list":
-                return parseListCommand(arguments);
-            default:
-                return null;
+        case "delete":
+            return parseDeleteCommand(arguments);
+        case "list":
+            return parseListCommand(arguments);
+        default:
+            return null;
         }
     }
 
@@ -42,3 +42,4 @@ public class Parser {
         return new ListCommand(itemList);
     }
 }
+
