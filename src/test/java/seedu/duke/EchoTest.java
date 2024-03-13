@@ -7,4 +7,10 @@ public class EchoTest {
         assertEquals("test", Echo.echoInput("test"));
 
     }
+
+    @Test
+    public void startEchoNumbers() {
+        assertEquals("123456", Echo.echoInput("123456"));
+
+    }
 }
