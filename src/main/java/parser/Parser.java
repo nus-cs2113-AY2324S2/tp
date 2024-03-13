@@ -27,6 +27,8 @@ public class Parser {
             case "c":
                 category = parseData[i + 1];
                 break;
+            default:
+                break;
             }
         }
         assert amount != null;
