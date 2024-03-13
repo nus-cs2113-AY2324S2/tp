@@ -19,4 +19,10 @@ public class EchoTest {
         assertEquals("#$%^&", Echo.echoInput("#$%^&"));
 
     }
+
+    @Test
+    public void startEchoName() {
+        assertEquals("maxbranch", Echo.echoInput("maxbranch"));
+
+    }
 }
