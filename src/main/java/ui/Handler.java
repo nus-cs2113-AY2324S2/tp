@@ -166,7 +166,6 @@ public class Handler {
      *
      * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
      * @return An array of strings containing the extracted command, distance, time taken and date(if given).
-     * // @throws CustomException If the Event time range is invalid or unspecified.
      */
     public static String[] getRun(String input) {
 
