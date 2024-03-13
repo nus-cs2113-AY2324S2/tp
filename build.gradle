@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.LifeTrack")
+    mainClass.set("seedu.lifetrack.LifeTrack")
 }
 
 shadowJar {
