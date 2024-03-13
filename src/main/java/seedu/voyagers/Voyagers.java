@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.voyagers;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Voyagers {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
