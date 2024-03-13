@@ -6,7 +6,5 @@ import org.junit.jupiter.api.Test;
 
 class FAPTest {
     @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
+    public void mainTest() { assertTrue(true);}
 }
