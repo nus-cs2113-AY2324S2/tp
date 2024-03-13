@@ -58,7 +58,7 @@ public class Parser {
                 // call function to Ui to say "not a number, invalid move"
             }
 
-            if (markBox < 1 || markBox > 9) {
+            if (markBox < 0 || markBox > 9) {
                 // call function to Ui to say "invalid move"
             } else {
                 // call function to TT game to mark that box as user's
