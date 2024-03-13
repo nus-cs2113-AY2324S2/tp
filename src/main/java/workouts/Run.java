@@ -109,16 +109,13 @@ public class Run extends Workout{
     @Override
     public String toString() {
 
-        String runString = "run \t";
-        runString += getTimes() + "\t\t" + getDistance() + "\t\t" + getPace();
-
+        String printedDate;
         if (date != null){
-            runString += "\t\t" + date;
-        } else {
-            runString += "\t\t" + Constant.NO_DATE_SPECIFIED;
+            printedDate = date.toString();
+        } else{
+            printedDate = Constant.NO_DATE_SPECIFIED;
         }
-
-        return  runString;
+        return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
     }
 
 
