@@ -80,7 +80,7 @@ public class Transaction {
     /**
      * Updates the balances of the members involved in the transaction.
      */
-    public void updateBalances() {
+    public void updateBalances() throws LongAhException {
         for (HashMap.Entry<Member, Double> entry : this.subtransactions.entrySet()) {
             Member member = entry.getKey();
             double amount = entry.getValue();

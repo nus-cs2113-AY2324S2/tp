@@ -68,7 +68,7 @@ public class MemberList {
                 return member;
             }
         }
-        throw new LongAhException(ExceptionMessage.INVALID_MEMBER_NAME);
+        throw new LongAhException(ExceptionMessage.MEMBER_NOT_FOUND);
     }
 
     /**
