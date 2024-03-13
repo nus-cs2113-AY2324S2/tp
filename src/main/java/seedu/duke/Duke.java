@@ -1,5 +1,4 @@
 package seedu.duke;
-import java.util.Scanner;
 
 import static ui.Handler.initialiseBot;
 import static ui.Handler.processInput;
