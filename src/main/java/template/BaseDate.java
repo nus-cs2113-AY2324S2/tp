@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Locale;
 import java.util.ArrayList;
 
 public class BaseDate {
@@ -61,7 +62,7 @@ public class BaseDate {
 
     @Override
     public String toString() {
-        formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+        formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma", Locale.US);
         return String.format("%s", dateTime.format(formatter));
     }
 
