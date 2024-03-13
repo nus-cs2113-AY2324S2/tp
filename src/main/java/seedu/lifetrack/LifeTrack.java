@@ -11,9 +11,9 @@ public class LifeTrack {
      */
     public static void main(String[] args) {
         String logo = "LLLLL  IIIII FFFFF EEEEE  TTTTT RRRR   AAA  CCC  K  K\n" +
-                "L       I    F     E        T   R   R A   A C  C K K \n" +
-                "LLL     I    FFFF  EEEE     T   RRRR  AAAAA C    KK  \n" +
-                "L       I    F     E        T   R  R A   A C  C K K \n" +
+                "L       I    F     E        T   R   R A   A C  C K K\n" +
+                "LLL     I    FFFF  EEEE     T   RRRR  AAAAA C    KK\n" +
+                "L       I    F     E        T   R  R A   A C  C K K\n" +
                 "LLLLL IIIII F     EEEEE    TTTT R   R A   A  CCC K  K\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
