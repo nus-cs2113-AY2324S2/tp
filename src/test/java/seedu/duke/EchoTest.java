@@ -13,4 +13,10 @@ public class EchoTest {
         assertEquals("123456", Echo.echoInput("123456"));
 
     }
+
+    @Test
+    public void startEchoSymbols() {
+        assertEquals("#$%^&", Echo.echoInput("#$%^&"));
+
+    }
 }
