@@ -14,7 +14,6 @@ public class UserInterface {
             "_____________________________________________________________________";
 
     private static final String TAB_SPACE = "    ";
-    public static final int INDEX_OFFSET = 1;
     public static final int START_INDEX = 0;
 
     public static void printDeleteMessage(String transaction){
