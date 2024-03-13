@@ -9,16 +9,24 @@ public class Parser {
     public Transaction parseTransaction(String input) {
         String data = input.substring(ADD_COMMAND_INDEX + 1);
         String[] parseData = data.split("/");
-        String description = null, date = null, amount = null, category = null;
+        String description = null;
+        String date = null;
+        String amount = null;
+        String category = null;
         for(int i = 0; i < parseData.length; i++) {
-            if (parseData[i].trim().equals("n")){
+            switch (parseData[i].trim()) {
+            case "n":
                 description = parseData[i + 1];
-            } else if (parseData[i].trim().equals("$")) {
+                break;
+            case "$":
                 amount = parseData[i + 1];
-            } else if (parseData[i].trim().equals("d")) {
+                break;
+            case "d":
                 date = parseData[i + 1];
-            } else if (parseData[i].trim().equals("c")) {
+                break;
+            case "c":
                 category = parseData[i + 1];
+                break;
             }
         }
         assert amount != null;
