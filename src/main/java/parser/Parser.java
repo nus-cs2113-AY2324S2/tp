@@ -27,6 +27,8 @@ public class Parser {
             // Implement delete transaction functionality
             break;
         case "view-history":
+            int numTransactions = Integer.parseInt(command.split(" ")[1].trim());
+            manager.displayTransactionHistory(numTransactions);
             break;
         case "export-csv":
             // Implement export to CSV functionality

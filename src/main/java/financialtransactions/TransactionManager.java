@@ -1,5 +1,6 @@
 package financialtransactions;
 
+
 public class TransactionManager {
     private TransactionList<Inflow> inflows;
     private TransactionList<Outflow> outflows;
@@ -38,5 +39,9 @@ public class TransactionManager {
     @Override
     public String toString() {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
+    }
+
+    public void displayTransactionHistory(int n) {
+        System.out.println("Inflows:\n" + inflows.lastNTransactions(n) + "\nOutflows:\n" + outflows.lastNTransactions(n));
     }
 }
