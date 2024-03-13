@@ -22,4 +22,11 @@ public class Transaction {
     public String getCategory() {
         return category;
     }
+
+    @Override
+    public String toString() {
+        return  (" Description: " + getDescription() + " | " +
+                " Amount: " + getAmount() + " | " +
+                " Category: " + getCategory()) ;
+    }
 }
