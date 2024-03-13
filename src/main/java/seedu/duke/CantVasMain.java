@@ -23,6 +23,6 @@ public class CantVasMain {
 
         // Call the Echo functionality
         Echo echo = new Echo();
-        echo.startEcho();
+        Echo.startEcho();
     }
 }

@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Echo {
 
-private ArrayList<String> inputs;
+    private static ArrayList<String> inputs;
 
-public Echo() {
-    inputs = new ArrayList<>();
-}
+    public static void initializeInputs() {
+        inputs = new ArrayList<>();
+    }
 
-    public void startEcho() {
+    public static String echoInput(String input) {
+        return input;
+    }
+
+    public static void startEcho() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter text to echo back, or type 'exit' to quit:");
 
@@ -21,17 +25,18 @@ public Echo() {
             }
             inputs.add(input);
             echoBack();
+            inputs.remove(input);
         }
     }
 
-    private void echoBack() {
-        for (String input : inputs) {
+    private static void echoBack() {
+        for (String input : inputs ) {
             System.out.println(input);
         }
     }
 
     public static void main(String[] args) {
-        Echo echo = new Echo();
-        echo.startEcho();
+        Echo.initializeInputs();
+        startEcho();
     }
 }
