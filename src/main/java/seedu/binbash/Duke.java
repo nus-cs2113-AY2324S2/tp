@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.binbash;
 
 import java.util.Scanner;
 
