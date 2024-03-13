@@ -1,6 +1,7 @@
 package financemanager;
 
 import transactions.Transaction;
+import ui.UserInterface;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ public class TransactionList {
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void printTransactions(){
+        UserInterface.printAllTransactions(transactions);
     }
 
 }
