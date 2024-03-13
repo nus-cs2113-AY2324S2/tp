@@ -31,6 +31,9 @@ public class BudgetBuddy {
                 System.out.println("Displaying transactions:");
                 System.out.println(transactions.getTransactions());
                 break;
+            case "add":
+                transactions.processTransaction(input);
+                break;
             default:
                 System.out.println("Invalid command.");
             }
