@@ -11,13 +11,13 @@ public class Parser {
         String[] parseData = data.split("/");
         String description = null, date = null, amount = null, category = null;
         for(int i = 0; i < parseData.length; i++) {
-            if (parseData[i].trim() == "n"){
+            if (parseData[i].trim().equals("n")){
                 description = parseData[i + 1];
-            } else if (parseData[i].trim() == "$") {
+            } else if (parseData[i].trim().equals("$")) {
                 amount = parseData[i + 1];
-            } else if (parseData[i].trim() == "d") {
+            } else if (parseData[i].trim().equals("d")) {
                 date = parseData[i + 1];
-            } else if (parseData[i].trim() == "c") {
+            } else if (parseData[i].trim().equals("c")) {
                 category = parseData[i + 1];
             }
         }
