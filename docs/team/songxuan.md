@@ -4,3 +4,4 @@
 
 
 ### Summary of Contributions
+- Added PR Template.
