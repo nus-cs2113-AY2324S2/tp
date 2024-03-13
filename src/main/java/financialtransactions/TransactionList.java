@@ -9,6 +9,10 @@ public class TransactionList<T extends Transaction<?>> {
         this.transactionList = new ArrayList<>();
     }
 
+    public ArrayList<T> getTransactionList() {
+        return this.transactionList;
+    }
+
     public Boolean addTransaction(T newTransaction){
         if(newTransaction != null){
             transactionList.add(newTransaction);
@@ -37,9 +41,22 @@ public class TransactionList<T extends Transaction<?>> {
         String baseString = "Transactions: \n";
         Integer index = 1;
         for(T transaction : transactionList){
-            baseString += String.format("%d)\t%s\n", index, transaction.toString());
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
             index += 1;
         }
         return baseString;
     }
+
+    public String lastNTransactions(int n) {
+        String baseString = "Transactions: \n";
+        int listSize = transactionList.size();
+        int index = 1;
+        for (int i = listSize - 1; i >= listSize - n - 1; i--) {
+            T transaction = transactionList.get(i);
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
+            index++;
+        }
+        return baseString;
+    }
+
 }

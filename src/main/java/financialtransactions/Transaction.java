@@ -16,8 +16,7 @@ public abstract class Transaction<T> {
         this.amount = amount;
         if(date == null){
             this.date = new BaseDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        }
-        else{
+        } else{
             this.date = new BaseDate(date);
         }
     }

@@ -1,6 +1,9 @@
+package financeproject;
 import java.util.Scanner;
 
-import financialtransactions.*;
+import financialtransactions.Inflow;
+import financialtransactions.Outflow;
+import financialtransactions.TransactionManager;
 import user.Authentication;
 import user.BaseUser;
 
@@ -18,11 +21,11 @@ public class Main {
         }
 
         TransactionManager manager = new TransactionManager();
-        Inflow income = new Inflow("Salary payment", 400.00, null);
+        Inflow income = new Inflow("Salary payment", 400.00, "23/05/2022 1900");
         income.setCategory(Inflow.Category.INCOME);
         manager.addTransaction(income);
 
-        Inflow investment = new Inflow("Investment", 500.00, null);
+        Inflow investment = new Inflow("Investment", 500.00, "23/05/2022 1900");
         investment.setCategory(Inflow.Category.INVESTMENT);
         manager.addTransaction(investment);
 
@@ -30,7 +33,7 @@ public class Main {
         loan.setCategory(Inflow.Category.LOAN);
         manager.addTransaction(loan);
 
-        Outflow rent = new Outflow("Rent", 50000, null);
+        Outflow rent = new Outflow("Rent", 50000, "23/05/2022 1900");
         rent.setCategory(Outflow.Category.RENT);
         manager.addTransaction(rent);
 
