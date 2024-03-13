@@ -1,8 +1,15 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import ai.Ai;
 
 public class Duke {
+    private final Ai ai;
+
+    public Duke() {
+        this.ai = new Ai();
+    }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
