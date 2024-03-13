@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class UserInterface {
 
+    public static final int START_INDEX = 0;
     private static final String LINE = "-------------------------------------------" +
             "----------------------------------------------------------------------" +
             "-----------------------";
@@ -14,7 +15,7 @@ public class UserInterface {
             "_____________________________________________________________________";
 
     private static final String TAB_SPACE = "    ";
-    public static final int START_INDEX = 0;
+
 
     public static void printDeleteMessage(String transaction){
         System.out.println(LINE);
