@@ -47,10 +47,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with valid added balance.
+     * Tests the addToBalance method of the Member class with valid added balance.
      */
     @Test
-    public void memberConstructor_validAddSuccess() {
+    public void addToBalance_validAdd_success() {
         try {
             Member member = new Member("Bob");
             member.addToBalance(10.0);
@@ -62,10 +62,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with invalid added balance.
+     * Tests the addToBalance method of the Member class with invalid added balance.
      */
     @Test
-    public void memberConstructor_invalidAdd_exceptionThrown() {
+    public void addToBalance_invalidAdd_exceptionThrown() {
         try {
             Member member = new Member("Bob");
             member.addToBalance(-20.0);
@@ -77,10 +77,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with valid subtracted balance.
+     * Tests the subtractFromBalance method of the Member class with valid subtracted balance.
      */
     @Test
-    public void memberConstructor_validSubtractSuccess() {
+    public void subtractFromBalance_validSubtract_success() {
         try {
             Member member = new Member("Alice");
             member.addToBalance(10.0);
@@ -92,10 +92,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with invalid subtracted balance.
+     * Tests the subtractFromBalance method of the Member class with invalid subtracted balance.
      */
     @Test
-    public void memberConstructor_invalidSubtract_exceptionThrown() {
+    public void subtractFromBalance_invalidSubtract_exceptionThrown() {
         try {
             Member member = new Member("Alice");
             member.subtractFromBalance(-20.0);
@@ -107,10 +107,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with boundary balance.
+     * Tests the subtractFromBalance method of the Member class with boundary values.
      */
     @Test
-    public void memberConstructor_boundaryBalance_success() {
+    public void subtractFromBalance_boundaryValues_success() {
         try {
             Member member = new Member("Bob");
             member.addToBalance(Double.MAX_VALUE);
@@ -122,10 +122,10 @@ public class MemberTest {
     }
 
     /**
-     * Tests the constructor of the Member class with concurrent transactions.
+     * Tests the subtractFromBalance method of the Member class with concurrent transactions.
      */
     @Test
-    public void memberConstructor_concurrentTransactions_success() {
+    public void subtractFromBalance_concurrentTransactions_success() {
         try {
             Member member = new Member("Alice");
             Thread t1 = new Thread(() -> {
