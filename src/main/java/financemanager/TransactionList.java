@@ -1,6 +1,5 @@
 package financemanager;
 
-import parser.Parser;
 import transactions.Transaction;
 
 import java.util.ArrayList;
@@ -8,11 +7,11 @@ import ui.UserInterface;
 
 public class TransactionList {
 
-    private ArrayList<Transaction> transactions;
     public static final int DELETE_BEGIN_INDEX = 7;
     public static final int INDEX_OFFSET = 1;
     public static final int LOWER_BOUND = 0;
 
+    private ArrayList<Transaction> transactions;
 
     public TransactionList() {
         // Initialise ArrayList in the constructor
