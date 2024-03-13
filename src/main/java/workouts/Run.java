@@ -47,7 +47,7 @@ public class Run extends Workout{
     /**
      * Method parses the time format in either hh:mm:ss or mm:ss.
      * Sets {@code isHourPresent} variable to true if hours have been specified.
-     * therwise, set to false.
+     * Otherwise, set to false.
      * @param inputTime String variable representing time taken in either hh:mm:ss or mm:ss format
      * @return A list of integers representing the hours (if present), minutes and seconds.
      */

@@ -1,5 +1,8 @@
 package workouts;
 
+import utility.Constant;
+import utility.CustomExceptions;
+
 import java.util.ArrayList;
 
 public class WorkoutList extends ArrayList<Workout> {
@@ -31,50 +34,38 @@ public class WorkoutList extends ArrayList<Workout> {
      *               "gym" returns only gym workouts
      * @return ArrayList of workouts
      */
-    public static ArrayList<Workout> getWorkouts(String filter) {
+    public static ArrayList<Workout> getWorkouts(String filter) throws CustomExceptions.OutOfBounds {
         if (filter.equals("run")) {
             if (runs.isEmpty()){
-                throw new ArrayIndexOutOfBoundsException();
+                throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
             }
             return runs;
         } else {
             if (workouts.isEmpty()){
-                throw new ArrayIndexOutOfBoundsException();
+                throw new CustomExceptions.OutOfBounds(Constant.EMPTY_HISTORY);
             }
             return workouts;
         }
     }
 
-    /**
-     * Returns a specific run based on the index
-     * @param index index of the run
-     * @return Run object
-     */
+
     public static Workout getSpecificRun(int index){
         return runs.get(index);
     }
-    /**
-     * Returns a specific workout based on the index
-     * @param index index of the workout
-     * @return Workout object
-     */
+
     public static Workout getSpecificWorkout(int index){
         return workouts.get(index);
     }
 
-    /**
-     * Returns the latest workout
-     * @return Workout object
-     */
+
     public static Workout getLatestWorkout(){
         return workouts.get(workouts.size()-1);
     }
 
-    public static Workout getLatestRun(){
+    public static Workout getLatestRun() throws CustomExceptions.OutOfBounds {
         if (runs.isEmpty()) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
         }
-
         return runs.get(runs.size() -1 );
     }
 
