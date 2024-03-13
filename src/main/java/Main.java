@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
-import financialtransactions.*;
+import financialtransactions.Inflow;
+import financialtransactions.Outflow;
+import financialtransactions.TransactionManager;
 import user.Authentication;
 import user.BaseUser;
 

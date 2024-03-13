@@ -1,7 +1,6 @@
 package parser;
 
-import financialtransactions.*;
-import java.util.ArrayList;
+import financialtransactions.TransactionManager;
 
 public class Parser {
     protected static boolean isContinue = true;

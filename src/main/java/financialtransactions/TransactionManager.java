@@ -42,6 +42,9 @@ public class TransactionManager {
     }
 
     public void displayTransactionHistory(int n) {
-        System.out.println("Inflows:\n" + inflows.lastNTransactions(n) + "\nOutflows:\n" + outflows.lastNTransactions(n));
+        String inflowTransactions = inflows.lastNTransactions(n);
+        String outflowTransactions = outflows.lastNTransactions(n);
+        System.out.println("Inflows:\n" + inflowTransactions + "\nOutflows:\n" + outflowTransactions);
     }
+    
 }
