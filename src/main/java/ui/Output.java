@@ -1,18 +1,22 @@
 package ui;
 
 import utility.Constant;
+import utility.CustomExceptions;
+import workouts.Workout;
+import workouts.WorkoutList;
+import java.util.ArrayList;
 
 public class Output {
     /**
-     * Prints a horizontal line.
-     */
-    public static void printLine() {
+    * Prints a horizontal line.
+    */
+    private static void printLine() {
         System.out.println(Constant.PARTITION_LINE);
     }
 
     /**
-     * Prints the help message.
-     */
+    * Prints the help message.
+    */
     public static void printHelp() {
         printLine();
         System.out.println("Commands List:");
@@ -27,5 +31,52 @@ public class Output {
         printLine();
         System.out.println("bmi format: bmi *parameter*");
         printLine();
+    }
+
+
+    private static String getFormattedRunWithIndex(int index, Workout currentWorkout){
+        return String.format(Constant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
+    }
+    public static void printAddRun(Workout newRun){
+        printLine();
+        System.out.println(Constant.ADD_RUN);
+        System.out.println(Constant.EXERCISE_HEADER);
+        System.out.println(newRun);
+        printLine();
+    }
+    public static void printLatestRun(){
+        try{
+            printLine();
+            Workout latestRun = WorkoutList.getLatestRun();
+            String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
+            System.out.println(Constant.EXERCISE_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(latestRunString);
+
+        } catch (CustomExceptions.OutOfBounds e){
+            System.out.println(e.getMessage());
+        } finally {
+            printLine();
+        }
+    }
+
+    public static void printHistory(String filter) {
+
+        try{
+            printLine();
+            ArrayList<Workout> workoutList = WorkoutList.getWorkouts(filter);
+            System.out.println(Constant.EXERCISE_HEADER_WITH_INDEX_FORMAT);
+
+            for (int i = 0; i < workoutList.size(); i++){
+                int index = i+1;
+                Workout currentWorkout = workoutList.get(i);
+                String output = getFormattedRunWithIndex(index, currentWorkout);
+                System.out.println(output);
+            }
+
+        } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput  e ){
+            System.out.println(e.getMessage());
+        } finally {
+            printLine();
+        }
     }
 }
