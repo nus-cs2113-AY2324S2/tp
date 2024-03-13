@@ -1,5 +1,8 @@
 package utility;
 
+/**
+ * Represents a custom exception class designed for PulsePilot to handle errors during command processing.
+ */
 public class CustomExceptions extends Exception {
 
     public static class OutOfBounds extends Exception {

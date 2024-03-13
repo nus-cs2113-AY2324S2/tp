@@ -165,6 +165,11 @@ public class Handler {
      * and returning the tasks list.
      */
     public static void initialiseBot() {
+        Output.printArt();
+        System.out.println("Hello from PulsePilot\n");
+        System.out.println("What is your name?");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Hello " + in.nextLine());
         // Yet to implement : Reply.printWelcomeMessage();
         // Yet to implement : Storage.loadProfile();
     }
