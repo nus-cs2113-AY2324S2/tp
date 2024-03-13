@@ -1,6 +1,7 @@
 package seedu.binbash.parser;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.binbash.ItemList;
 import seedu.binbash.command.Command;
@@ -25,7 +26,7 @@ public class Parser {
             case "list":
                 return parseListCommand(arguments);
             default:
-                return null; // Unknown command
+                return null;
         }
     }
 
