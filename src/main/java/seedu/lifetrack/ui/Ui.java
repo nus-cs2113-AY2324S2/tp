@@ -14,16 +14,22 @@ import java.util.Scanner;
  */
 public class Ui {
     public static void readUserInput() {
+
         String line;
         Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        while (!line.equalsIgnoreCase("bye")) {
-            if (line.trim().isEmpty()) {
-                System.out.println("Please enter a non empty Input!");
-            } else if (line.startsWith("calories in")) {
-                CalorieList.calorieIn(line);
-            }
+        if(in.hasNextLine()) {
             line = in.nextLine();
+            while (!line.equalsIgnoreCase("bye")) {
+                if (line.trim().isEmpty()) {
+                    System.out.println("Please enter a non empty Input!");
+                } else if (line.startsWith("calories in")) {
+                    CalorieList.calorieIn(line);
+                }
+
+                if(in.hasNextLine()) {
+                    line = in.nextLine();
+                }
+            }
         }
     }
 }
