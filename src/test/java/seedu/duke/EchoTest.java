@@ -27,4 +27,11 @@ public class EchoTest {
 
     }
 
+
+    @Test
+    public void startEchoName() {
+        assertEquals("maxbranch", Echo.echoInput("maxbranch"));
+
+    }
+
 }
