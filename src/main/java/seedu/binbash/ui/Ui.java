@@ -3,12 +3,12 @@ package seedu.binbash.ui;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LOGO = "  ____  _       ____            _\n" +
-            " | __ )(_)_ __ | __ )  __ _ ___| |__\n" +
-            " |  _ \\| | '_ \\|  _ \\ / _` / __| '_ \\\n" +
-            " | |_) | | | | | |_) | (_| \\__ \\ | | |\n" +
-            " |____/|_|_| |_|____/ \\__,_|___/_| |_|\n" +
-            "\n";
+    private static final String LOGO = String.format("  ____  _       ____            _%n" +
+            " | __ )(_)_ __ | __ )  __ _ ___| |__%n" +
+            " |  _ \\| | '_ \\|  _ \\ / _` / __| '_ \\%n" +
+            " | |_) | | | | | |_) | (_| \\__ \\ | | |%n" +
+            " |____/|_|_| |_|____/ \\__,_|___/_| |_|%n" +
+            "%n");
     private static final String WELCOME_MESSAGE = "Welcome to BinBash!";
     private static final String GOODBYE_MESSAGE = "Bye!";
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
@@ -42,6 +42,6 @@ public class Ui {
     }
 
     public void talk(String line) {
-        System.out.println(LINE_DIVIDER + "\n" + line + "\n" + LINE_DIVIDER);
+        System.out.printf(LINE_DIVIDER + "%n" + line + "%n" + LINE_DIVIDER + "%n");
     }
 }
