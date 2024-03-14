@@ -69,5 +69,8 @@ public class TransactionManager {
         }
 
     }
-    
+
+    public String toSave() {
+        return inflows.toSave() + outflows.toSave();
+    }
 }

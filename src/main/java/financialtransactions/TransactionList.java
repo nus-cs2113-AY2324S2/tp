@@ -9,10 +9,6 @@ public class TransactionList<T extends Transaction<?>> {
         this.transactionList = new ArrayList<>();
     }
 
-    public ArrayList<T> getTransactionList() {
-        return this.transactionList;
-    }
-
     public int getTransactionListSize() {
         return this.transactionList.size();
     }
@@ -54,4 +50,14 @@ public class TransactionList<T extends Transaction<?>> {
         }
         return baseString;
     }
+
+    public String toSave() {
+        String baseString = "";
+        for (T transaction : transactionList) {
+            baseString += transaction.toSave();
+        }
+        return baseString;
+    }
+    
+
 }

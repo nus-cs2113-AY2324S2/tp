@@ -2,12 +2,7 @@ Enter password:
 Password is correct
 Inflows:
 Transactions: 
-1)  Name: Salary payment, Amount: 400.00, Date: May 23 2022 07:00PM
-2)  Name: Investment, Amount: 500.00, Date: May 23 2022 07:00PM
-3)  Name: Loan payment, Amount: 400.00, Date: May 23 2022 07:00PM
 
 Outflows:
 Transactions: 
-1)  Name: Rent, Amount: -50000.00, Date: May 23 2022 07:00PM
-2)  Name: Shopping, Amount: -200.00, Date: May 23 2022 08:00PM
 
