@@ -16,24 +16,24 @@ import static seedu.lifetrack.calorielist.CalorieList.calorieIn;
  * information using the calorieIn method from the CalorieList class.
  */
 public class Ui {
-    static CalorieList calorieList;
 
-    public Ui(CalorieList calorieList) {
-        Ui.calorieList = calorieList;
-    }
+    public static void readUserInput(CalorieList calorieList) {
+        String line;
+        Scanner in = new Scanner(System.in);
+        if(in.hasNextLine()) {
+            line = in.nextLine();
+            while (!line.equalsIgnoreCase("bye")) {
+                if (line.trim().isEmpty()) {
+                    System.out.println("Please enter a non empty Input!");
+                } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
+                    calorieList.addEntry(line);
+                } else if (line.startsWith("list")) {
+                    calorieList.printCalorieList();
+                }
 
-    public static void readUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        do {
-            input = scanner.nextLine();
-            printLine();
-            if (input.trim().isEmpty()) {
-                printEmptyInputMessage();
-            } else if (input.startsWith("calories in")) {
-                calorieIn(input);
-            } else if (input.startsWith("bye")) {
-                byeMessage();
+                if(in.hasNextLine()) {
+                    line = in.nextLine();
+                }
             }
             printLine();
         } while (!input.equalsIgnoreCase("bye"));
