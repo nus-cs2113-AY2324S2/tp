@@ -1,4 +1,4 @@
-workout /create WORKOUT_PLAN_NAME
-week /assign WORKOUT_PLAN_NAME /to DAY
-week /today
-bye
+exercise /add bicep curls
+exercise /delete bicep curls
+workout /create arm day
+exit
