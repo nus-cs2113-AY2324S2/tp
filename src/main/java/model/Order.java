@@ -13,7 +13,7 @@ public class Order implements ItemManager {
     private final String orderID;
     private final ArrayList<MenuItem> orderItemList = new ArrayList<>();
 
-    public Order() {;
+    public Order() {
         this.orderID = "ORDER" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
@@ -22,6 +22,10 @@ public class Order implements ItemManager {
         this.orderItemList.add(item);
     }
 
+    /**
+     * Removes an item from the order list by its index
+     * @param index the index of the item to be removed
+     */
     @Override
     public void remove(int index) {
         try {
@@ -32,7 +36,7 @@ public class Order implements ItemManager {
     }
 
     /**
-     * Remove all items from the order list by its ID
+     * Removes all items from the order list by its ID
      * @param ID the ID of the item to be removed
      */
     @Override
