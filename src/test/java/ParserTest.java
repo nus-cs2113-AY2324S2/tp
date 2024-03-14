@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import ui.CommandType;
+import ui.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
