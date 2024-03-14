@@ -1,7 +1,9 @@
 package seedu.stockpal.ui;
 
 import seedu.stockpal.common.Messages;
+import seedu.stockpal.data.product.Product;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -38,5 +40,11 @@ public final class Ui {
 
     public static void printGoodbyeMessage() {
         printToScreen(Messages.MESSAGE_GOODBYE);
+    }
+
+    public static void printListTasks(ArrayList<Product> products) {
+        for (Product product : products) {
+            System.out.println(product);
+        }
     }
 }
