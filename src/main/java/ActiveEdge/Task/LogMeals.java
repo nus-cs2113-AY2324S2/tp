@@ -1,5 +1,7 @@
 package ActiveEdge.Task;
-import java.util.ArrayList;
+
+import static ActiveEdge.Task.TaskList.tasksList;
+import ActiveEdge.Task.Task;
 
 public class LogMeals extends Task {
 
@@ -16,22 +18,22 @@ public class LogMeals extends Task {
     int servingsNum = Integer.parseInt(servings);
     int caloriesNum = Integer.parseInt(calories);
     int mealCalories = servingsNum * caloriesNum;
-    static ArrayList<Integer> calorieTracker = new ArrayList<>();
 
-    public static int addCalories(int mealCalories) {
-        int totalCalories = 0;
-        calorieTracker.add(mealCalories);
-        for (int i = 0; i < calorieTracker.size(); i++) {
-            totalCalories = totalCalories + calorieTracker.get(i);
+    int totalCalories;
+
+    public int addCalories() {
+        if(tasksList.size()==0) {
+            totalCalories = 0;
+        } else {
+            totalCalories += mealCalories;
         }
         return totalCalories;
     }
 
-
     public String toString() {
         return "You've logged " + servings + " serving of " + super.getDescription() + ".\n" +
                 "Estimated calories: " + mealCalories +"\n" +
-                "Total calories today: " + addCalories(mealCalories);
+                "Total calories: " + totalCalories;
     }
 
 }

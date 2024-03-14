@@ -1,15 +1,9 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.TaskList;
+import ActiveEdge.Ui.CommandUi;
 
-public class ListMealsCommand extends Command {
-    @Override
-    public void execute() {
-
-    }
-
-    @Override
-    public void execute(TaskList meal) {
-
+public class ListMealsCommand {
+    public ListMealsCommand() {
+        CommandUi.printMealList();
     }
 }
