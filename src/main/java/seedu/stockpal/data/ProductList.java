@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 public class ProductList extends ArrayList<Product> {
     public ArrayList<Product> products = new ArrayList<Product>();
+  
+    public void addProduct(Product toAdd) {
+
+        products.add(toAdd);
+    }
 
     /**
      * Finds product with a specific Pid and
