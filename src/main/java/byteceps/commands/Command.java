@@ -7,7 +7,6 @@ public abstract class Command {
     private String actionParameters;
     private ArrayList<InputArguments> additionalArguments;
 
-
     public Command(InputArguments commandAction, ArrayList<InputArguments> additionalArguments) {
         this.action = commandAction.getFlag();
         this.actionParameters = commandAction.getParameter();
@@ -25,19 +24,12 @@ public abstract class Command {
         return action;
     }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
-
     public String getActionParameters() {
         return actionParameters;
-    }
-
-    public void setActionParameters(String actionParameters) {
-        this.actionParameters = actionParameters;
     }
 
     public ArrayList<InputArguments> getAdditionalArguments() {
         return additionalArguments;
     }
+
 }
