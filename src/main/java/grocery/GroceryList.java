@@ -81,10 +81,21 @@ public class GroceryList {
      * Lists all the user's groceries.
      */
     public void listGroceries() {
+        int size = groceries. size();
+        if (size == 0) {
+            System.out.println("There's no groceries!");
+            return;
+        }
         System.out.println("Here are your groceries!");
         for (Grocery grocery: groceries) {
             System.out.println(" - " + grocery.printGrocery());
         }
     }
 
+    public void removeGrocery(String details) throws NoSuchGroceryException {
+        // Assuming the format is "del GROCERY"
+        Grocery grocery = getGrocery(details);
+        groceries.remove(grocery);
+        System.out.println("You now have " + groceries.size() + " groceries left");
+    }
 }
