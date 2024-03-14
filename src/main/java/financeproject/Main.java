@@ -1,5 +1,4 @@
 package financeproject;
-import java.util.Scanner;
 
 //import financialtransactions.Inflow;
 //import financialtransactions.Outflow;
@@ -7,19 +6,20 @@ import financialtransactions.TransactionManager;
 import storage.Storage;
 import user.Authentication;
 import user.BaseUser;
+import userinteraction.UI;
 
 public class Main {
     public static void main(String[] args) {
         Storage storage = new Storage("./data");
         BaseUser user = new BaseUser("Bob");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
+        UI ui = new UI();
+        ui.printMessage("Enter password: ");
+        String password = ui.readInput();
         Authentication auth = user.getAuthentication();
         if (auth.checkPassword("Bob", password)) {
-            System.out.println("Password is correct");
+            ui.printMessage("Password is correct");
         } else {
-            System.out.println("Password is incorrect");
+            ui.printMessage("Password is incorrect");
         }
 
         TransactionManager manager = storage.loadFile();
@@ -44,8 +44,7 @@ public class Main {
         shopping.setCategory(Outflow.Category.SHOPPING);
         manager.addTransaction(shopping);
          */
-        System.out.println(manager.toString());
+        ui.printMessage(manager.toString());
         storage.saveFile(manager);
-        sc.close();
     }
 }
