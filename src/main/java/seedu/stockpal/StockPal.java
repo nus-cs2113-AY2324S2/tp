@@ -1,6 +1,7 @@
 package seedu.stockpal;
 
 import seedu.stockpal.commands.Command;
+import seedu.stockpal.commands.ExitCommand;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -45,12 +46,18 @@ public class StockPal {
             String userInput = Ui.getUserInput();
             try {
                 Command command = parser.parseCommand(userInput);
+                if (isExitCommand(command)) {
+                    break;
+                }
                 command.execute();
             } catch (InvalidCommandException | InvalidFormatException e) {
                 System.out.println("throw");
-                break;
             }
 
         } while (true); // check if command is exit
+    }
+
+    private static boolean isExitCommand(Command command) {
+        return command instanceof ExitCommand;
     }
 }
