@@ -19,9 +19,9 @@ public class RecipeIO {
         Recipe testRecipe = new Recipe("Spaghetti Carbonara", 60, 1000,
                 testAllergies, MealCategory.LUNCH, testURL);
         System.out.println("Hello");
-        System.out.println("What is your name?");
         System.out.println(testRecipe);
 
+        System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
     }
