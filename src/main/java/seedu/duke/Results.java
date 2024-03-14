@@ -1,12 +1,12 @@
 package seedu.duke;
 
 public class Results {
+    private static final int HUNDRED_PERCENT = 100;
+    private static final int ZERO_QUESTIONS = 0;
+
     protected int numberOfCorrectAnswers;
     protected int totalNumberOfQuestions;
     protected String score;
-
-    private static final int HUNDRED_PERCENT = 100;
-    private static final int ZERO_QUESTIONS = 0;
 
     public Results() {
         numberOfCorrectAnswers = ZERO_QUESTIONS;
@@ -15,7 +15,8 @@ public class Results {
     }
 
     public void calculateScore() {
-        int scorePercentage = (int) ((double) numberOfCorrectAnswers / (double) totalNumberOfQuestions * HUNDRED_PERCENT);
+        int scorePercentage = (int) ((double) numberOfCorrectAnswers / (double) totalNumberOfQuestions *
+                HUNDRED_PERCENT);
         score = numberOfCorrectAnswers + "/" + totalNumberOfQuestions + " (" + scorePercentage + "%)";
     }
 
