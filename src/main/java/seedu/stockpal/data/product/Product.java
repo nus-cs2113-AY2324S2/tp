@@ -15,7 +15,7 @@ public class Product {
         this.quantity = new Quantity(quantity);
         this.price = new Price(price);
         this.description = new Description(description);
-        this.pid = new Pid();
+        this.pid = new Pid(pid);
     }
 
     public void setName(Name name) {

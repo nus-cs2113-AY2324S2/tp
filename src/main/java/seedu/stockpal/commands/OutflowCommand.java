@@ -11,9 +11,9 @@ public class OutflowCommand extends Command {
     Pid pid;
     Integer amountToDecrease;
 
-    public OutflowCommand(ProductList productList, Pid pid, Integer amountToDecrease) {
+    public OutflowCommand(ProductList productList, Integer pidValue, Integer amountToDecrease) {
         this.productList = productList;
-        this.pid = pid;
+        this.pid = new Pid(pidValue);
         this.amountToDecrease = amountToDecrease;
     }
 

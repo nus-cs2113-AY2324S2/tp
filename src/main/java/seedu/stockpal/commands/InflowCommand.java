@@ -5,18 +5,20 @@ import seedu.stockpal.data.product.Pid;
 
 public class InflowCommand extends Command {
     public static final String COMMAND_KEYWORD = "inflow";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    public static final String COMMAND_USAGE = COMMAND_KEYWORD
+            + ": Edits an existing product in the inventory at the specific PID\n"
+            + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]";
+
 
     ProductList productList;
     Pid pid;
     Integer amountToIncrease;
 
-    public InflowCommand(ProductList productList, Pid pid, Integer amountToIncrease) {
+    public InflowCommand(ProductList productList, Integer pidValue, Integer amountToIncrease) {
         this.productList = productList;
-        this.pid = pid;
+        this.pid = new Pid(pidValue);
         this.amountToIncrease = amountToIncrease;
     }
-
 
     @Override
     public void execute() {
