@@ -25,7 +25,6 @@ public class Parser {
     public static Entry parseCaloriesIn(String input) throws InvalidInputException {
         //splits string according to d/ , t/ , a/ , c/ keyword
         String[] parts = input.split("d/|t/|a/|c/");
-
         //parts length less than 5 means that not all split keywords were keyed in
         if (parts.length < 5) {
             throw new InvalidInputException();
@@ -48,7 +47,7 @@ public class Parser {
         Calorie caloriesConsumed = new Calorie(calories, command == "calories in" ? true : false);
 
         //create Object Entry to be returned
-        Entry newCalorieInEntry = new Entry(activityToAdd, caloriesConsumed);
-        return newCalorieInEntry;
+        Entry newEntry = new Entry(activityToAdd, caloriesConsumed);
+        return newEntry;
     }
 }

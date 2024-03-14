@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class CalorieList {
     
-    public static ArrayList<Entry> calorieArrayList;
+    public ArrayList<Entry> calorieArrayList;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -16,7 +16,7 @@ public class CalorieList {
      * Index should be in an integer from 1 to size of the list.
      * @param index the index of calorie record user want to delete
      */
-    public void deleteCalorie(int index) {
+    public void deleteEntry(int index) {
         try {
             if(index > calorieArrayList.size()) {
                 System.out.println("Sorry, this index is out of out of range. Please enter a valid index.");
@@ -40,7 +40,7 @@ public class CalorieList {
      *
      * @param input the input string containing date, time, activity, and calorie count
      */
-    public static void addEntry(String input) {
+    public void addEntry(String input) {
         try {
             Entry newEntry = Parser.parseCaloriesIn(input);
             calorieArrayList.add(newEntry);

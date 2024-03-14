@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static void readUserInput() {
+    public static void readUserInput(CalorieList calorieList) {
         String line;
         Scanner in = new Scanner(System.in);
         if(in.hasNextLine()) {
@@ -23,7 +23,7 @@ public class Ui {
                 if (line.trim().isEmpty()) {
                     System.out.println("Please enter a non empty Input!");
                 } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
-                    CalorieList.addEntry(line);
+                    calorieList.addEntry(line);
                 }
 
                 if(in.hasNextLine()) {
