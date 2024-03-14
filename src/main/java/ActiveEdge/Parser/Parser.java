@@ -6,10 +6,11 @@ import ActiveEdge.Task.LogMeals;
 import ActiveEdge.FoodData;
 
 
+
 public class Parser {
 
     public void handleInput(String input) throws ActiveEdgeException {
-        if(input.contains("help")){
+        if (input.contains("help")) {
             new HelpCommand();
         } else if (input.startsWith("log")) {
             //input parsing logic here to get description, servings, calories from the database
@@ -18,7 +19,6 @@ public class Parser {
             String servings = parts[1].trim();
             String calories = findCalories(description);
             new LogMeals(description, servings, calories);
-
         } else if (input.startsWith("list")) {
             if (input.trim().length() > 4) { //list meals
 
@@ -33,6 +33,8 @@ public class Parser {
             } else if (inputTrimmed.startsWith("w")) { //shows water
 
             } else if (inputTrimmed.startsWith("g")) {  //shows goals
+
+            } else if (inputTrimmed.startsWith("g")) { //shows goals
 
             } else {
                 System.out.println("Hello!\n");
