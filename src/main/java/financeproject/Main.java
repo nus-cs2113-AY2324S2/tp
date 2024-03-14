@@ -14,16 +14,6 @@ public class Main {
         Storage storage = new Storage("./data");
         UI ui = new UI();
         ui.printMessage("Welcome. Inorder to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
-        /*BaseUser user = new BaseUser("Bob");
-        ui.printMessage("Enter password: ");
-        String password = ui.readInput();
-        Authentication auth = user.getAuthentication();
-        if (auth.checkPassword("Bob", password)) {
-            ui.printMessage("Password is correct");
-        } else {
-            ui.printMessage("Password is incorrect");
-        }
-*/
 
         //TransactionManager manager = storage.loadFile();
         TransactionManager manager = new TransactionManager();
