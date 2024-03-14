@@ -5,4 +5,9 @@ public class Description {
     public Description(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Description: " + (description.isEmpty() ? "[X]" : description);
+    }
 }

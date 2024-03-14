@@ -1,11 +1,12 @@
 package seedu.stockpal.ui;
 
 import seedu.stockpal.common.Messages;
-import seedu.stockpal.data.product.Product;
+import seedu.stockpal.data.ProductList;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
 public final class Ui {
     private static final Scanner scanner = new Scanner(System.in);
@@ -28,7 +29,7 @@ public final class Ui {
      *
      * @param messages List of messages to output.
      */
-    private static void printToScreen(String ... messages) {
+    public static void printToScreen(String... messages) {
         for (String message : messages) {
             System.out.println(message.replace("\n", LINE_SEPARATOR));
         }
@@ -42,9 +43,14 @@ public final class Ui {
         printToScreen(Messages.MESSAGE_GOODBYE);
     }
 
-    public static void printListTasks(ArrayList<Product> products) {
-        for (Product product : products) {
-            System.out.println(product);
+    public static void printListTasks(ProductList products) {
+        for (int i = 0; i < products.getSize(); i ++) {
+            System.out.println((i + 1) + ". " + products.get(i).getName());
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(products.get(i).getQuantity());
+            System.out.println(products.get(i).getPrice());
+            System.out.println(products.get(i).getDescription());
+            System.out.println(HORIZONTAL_LINE);
         }
     }
 }

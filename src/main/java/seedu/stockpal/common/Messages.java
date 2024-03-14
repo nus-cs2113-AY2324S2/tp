@@ -1,6 +1,7 @@
 package seedu.stockpal.common;
 
 public class Messages {
+    public static final String HORIZONTAL_LINE = "==================================================";
     public static final String MESSAGE_WELCOME = "Welcome to StockPal!";
     public static final String MESSAGE_GOODBYE = "Exiting program, goodbye!";
 

@@ -13,7 +13,6 @@ public class ProductList {
     public ArrayList<Product> products = new ArrayList<Product>();
   
     public void addProduct(Product toAdd) {
-
         products.add(toAdd);
     }
 
@@ -34,6 +33,11 @@ public class ProductList {
         return -1;
     }
 
+    public void deleteProduct(Pid productPid) {
+        int productIndex = findProductIndex(productPid);
+        products.remove(productIndex);
+    }
+
     public void updateProduct(int productIndex, Name newName, Quantity newQuantity
             , Description newDescription, Price newPrice) {
         Product updatedProduct = products.get(productIndex);
@@ -50,5 +54,27 @@ public class ProductList {
             updatedProduct.setPrice(newPrice);
         }
         products.set(productIndex, updatedProduct);
+    }
+
+    public void increaseAmount(int productIndex, Integer amountToIncrease) {
+        Product updatedProduct = products.get(productIndex);
+        updatedProduct.increaseQuantity(amountToIncrease);
+    }
+
+    public void decreaseAmount(int productIndex, Integer amountToDecrease) {
+        Product updatedProduct = products.get(productIndex);
+        updatedProduct.decreaseQuantity(amountToDecrease);
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
+    }
+
+    public int getSize() {
+        return products.size();
+    }
+
+    public Product get(int i) {
+        return products.get(i);
     }
 }

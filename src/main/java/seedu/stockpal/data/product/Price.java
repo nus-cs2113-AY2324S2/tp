@@ -6,4 +6,9 @@ public class Price {
     public Price(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Price: " + (price == null ? "[X]" : String.valueOf(price));
+    }
 }
