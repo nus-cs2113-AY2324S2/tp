@@ -25,4 +25,16 @@ class RecipeIOTest {
         recipes.addRecipe(newRecipe);
         assertTrue(recipes.getSize() == 1);
     }
+
+    @Test
+    public void testDeleteRecipe() {
+        RecipeList recipes = new RecipeList();
+        ArrayList allergies = new ArrayList<String>();
+        allergies.add("eggs");
+        Recipe newRecipe = new Recipe("cookies", 40, 350, allergies,
+                MealCategory.DESSERT, "THIS IS MY URL");
+        recipes.addRecipe(newRecipe);
+        recipes.deleteRecipe(1);
+        assertTrue(recipes.getSize() == 0);
+    }
 }

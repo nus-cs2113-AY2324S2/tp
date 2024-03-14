@@ -19,10 +19,10 @@ public class RecipeList {
     /**
      * Deletes the Recipe from the recipe list.
      *
-     * @param input The input from the user.
+     * @param recipeNumber The recipe number from the user.
      */
-    public void deleteRecipe(String input) {
-        int recipeNumber = Integer.parseInt(input.split(" ")[1]) - 1;
+    public void deleteRecipe(int recipeNumber) {
+        recipeNumber = recipeNumber - 1;
         if (recipeNumber >= recipes.size() || recipeNumber < 0) {
             System.out.println("Sorry, there were no recipes with that number.");
         } else {
