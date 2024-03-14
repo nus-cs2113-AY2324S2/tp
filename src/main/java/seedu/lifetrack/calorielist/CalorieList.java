@@ -1,5 +1,7 @@
 package seedu.lifetrack.calorielist;
 
+import seedu.lifetrack.activity.Activity;
+import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.parser.Parser;
 import seedu.lifetrack.exceptions.InvalidInputException;
 import java.util.ArrayList;
@@ -46,6 +48,25 @@ public class CalorieList {
         } catch (InvalidInputException e) {
             System.out.println("Ensure you follow format with no missing inputs!:" +
                     " calories in d/DATE t/TIME a/ACTIVITY c/CALORIES_IN");
+        }
+    }
+
+    /**
+     * Prints the list of calorie entries along with its activity description.
+     * If the list is empty, it prints a message indicating that the list is empty.
+     * Otherwise, it prints each entry's activity description and calorie count.
+     */
+    public static void printCalorieList() {
+        if (calorieArrayList.isEmpty()) {
+            System.out.println("Your caloric list is empty.");
+        } else {
+            System.out.println("Caloric List: ");
+            for (int i = 0; i < calorieArrayList.size(); i++) {
+                Entry entry = calorieArrayList.get(i);
+                Activity activity = entry.getActivity();
+                Calorie calorie = entry.getCalorie();
+                System.out.println((i + 1) + ". Activity: " + activity.getDescription() + ", Calories: " + calorie.getCalories());
+            }
         }
     }
 }
