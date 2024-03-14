@@ -5,13 +5,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ResultsTest {
+    Results roundResults;
+
+    void createResult() {
+        roundResults = new Results();
+        roundResults.increaseNumberOfQuestions();
+        roundResults.increaseNumberOfQuestions();
+        roundResults.increaseCorrectAnswers();
+        roundResults.calculateScore();
+    }
+
     @Test
     void testScoreCalculation() {
-        Results sessionResults = new Results();
-        sessionResults.increaseNumberOfQuestions();
-        sessionResults.increaseNumberOfQuestions();
-        sessionResults.increaseCorrectAnswers();
-        sessionResults.calculateScore();
-        assertEquals("1/2 (50%)", sessionResults.getScore());
+        createResult();
+        assertEquals("1/2 (50%)", roundResults.getScore());
     }
 }
