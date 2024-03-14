@@ -53,6 +53,15 @@ public class Ui {
         printBreakLine();
     }
 
+    public void printHelpMessage() {
+        System.out.println("Here are the list of commands you can use:");
+        System.out.println("1. new <bouquet_name> - Add a bouquet");
+        System.out.println("2. delete <bouquet_name> - Delete a bouquets");
+        System.out.println("3. mybouquets - List current saved bouquets");
+        System.out.println("4. bye - Exits the programme");
+        printBreakLine();
+    }
+
     public void printError(FlorizzException error){
         System.out.println(error.errorMessage);
         printBreakLine();
