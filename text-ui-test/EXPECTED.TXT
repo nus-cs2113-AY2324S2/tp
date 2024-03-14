@@ -8,7 +8,7 @@ parsing command... exercise
 Deleting exercise bicep curls
 parsed input: workout, create, arm day
 parsing command... workout
-java.lang.UnsupportedOperationException: This method is to be implemented by child classes
+java.lang.NullPointerException
 parsing command... exit
     GOODBYE FOR NOW. STAY HARD!
    -------------------------------------------------
