@@ -6,7 +6,7 @@ import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class storageTest {
+public class StorageTest {
     public static final String FILE_PATH = "recipe.txt";
     @Test
     public void testExist(){
