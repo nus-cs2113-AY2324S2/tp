@@ -40,7 +40,6 @@ class OutputTest {
         // Test Setup
         Run r1 = new Run("40:10", "10.3", "15/03/2024");
         Run r2 = new Run("01:59:10", "15.3");
-
         String expected = Constant.PARTITION_LINE + "\n" +
                 "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
                 "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\t2024-03-15\n" +
@@ -96,6 +95,4 @@ class OutputTest {
         assertEquals(expected, outContent.toString());
         cleanup();
     }
-
-
 }

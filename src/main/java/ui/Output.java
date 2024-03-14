@@ -77,7 +77,7 @@ public class Output {
             System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
 
             for (int i = 0; i < workoutList.size(); i++){
-                int index = i+1;
+                int index = i + 1;
                 Workout currentWorkout = workoutList.get(i);
                 String output = getFormattedRunWithIndex(index, currentWorkout);
                 System.out.println(output);

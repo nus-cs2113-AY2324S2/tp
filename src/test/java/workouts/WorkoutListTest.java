@@ -32,6 +32,7 @@ class WorkoutListTest {
     void addRun_normalInput_expectAppend()  {
         try {
             Run inputRun = new Run("40:10", "10.3", "15/03/2024");
+            WorkoutList.addRun(inputRun);
             ArrayList<Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
             ArrayList<Workout> workoutList = WorkoutList.getWorkouts(Constant.ALL);
 

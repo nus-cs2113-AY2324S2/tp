@@ -15,8 +15,8 @@ public class GymStation {
 
     public void processSets(Integer[] weightAndReps){
         int weight = weightAndReps[0];
-        int repitition = weightAndReps[1];
-        GymSet newSet = new GymSet(weight, repitition);
+        int repetition = weightAndReps[1];
+        GymSet newSet = new GymSet(weight, repetition);
         sets.add(newSet);
     }
 

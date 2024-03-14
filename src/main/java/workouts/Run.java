@@ -3,11 +3,11 @@ import java.time.LocalDate;
 import utility.Constant;
 import utility.CustomExceptions;
 public class Run extends Workout{
-    protected static Integer[] times;
-    protected static double distance;
+    protected Integer[] times;
+    protected double distance;
     protected LocalDate date = null;
-    protected static String pace;
-    protected static boolean isHourPresent;
+    protected String pace;
+    protected boolean isHourPresent;
 
     // overloaded constructor for optional date parameter
     public Run(String stringTime, String stringDistance) {
@@ -36,8 +36,6 @@ public class Run extends Workout{
         } else {
             return times[0] + ":" + times[1];
         }
-
-
     }
 
     public double getDistance() {
@@ -55,18 +53,18 @@ public class Run extends Workout{
      * @param inputTime String variable representing time taken in either hh:mm:ss or mm:ss format
      * @return A list of integers representing the hours (if present), minutes and seconds.
      */
-    public static Integer[] parseTime(String inputTime)  {
+    public Integer[] parseTime(String inputTime)  {
         String[] stringTimeParts = inputTime.split(":");
         int inputLength = stringTimeParts.length;
         Integer[] integerTimes = new Integer[inputLength];
 
         if (inputLength == Constant.MAX_RUNTIME_ARRAY_LENGTH) {
-            isHourPresent = true;
+            this.isHourPresent = true;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
             integerTimes[2] = Integer.parseInt(stringTimeParts[2]);
         } else if (inputLength == Constant.MIN_RUNTIME_ARRAY_LENGTH) {
-            isHourPresent = false;
+            this.isHourPresent = false;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
         } else {
@@ -80,13 +78,13 @@ public class Run extends Workout{
      * Method checks if hour has been specified, then returns total seconds.
      * @return The total number of seconds in the run.
      */
-    public static int calculateTotalSeconds(){
+    public int calculateTotalSeconds(){
         int totalSeconds;
 
-        if (isHourPresent) {
-            totalSeconds = times[0] * 3600 + times[1] * 60  + times[2];
+        if (this.isHourPresent) {
+            totalSeconds = this.times[0] * 3600 + this.times[1] * 60  + this.times[2];
         } else {
-            totalSeconds = times[0] * 60 + times[1];
+            totalSeconds = this.times[0] * 60 + this.times[1];
         }
         return totalSeconds;
     }
@@ -95,9 +93,9 @@ public class Run extends Workout{
      * Method calculates the pace of the run.
      * @return
      */
-    public static String calculatePace() {
+    public String calculatePace() {
         int totalSeconds = calculateTotalSeconds();
-        double paceInDecimal = ((double) totalSeconds / distance) / 60;
+        double paceInDecimal = ((double) totalSeconds / this.distance) / 60;
 
         int minutes = (int) paceInDecimal;
         double remainingSeconds = paceInDecimal - minutes;
