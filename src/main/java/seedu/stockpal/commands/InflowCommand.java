@@ -3,12 +3,11 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 
-public class InflowCommand extends Command {
+public class InflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
             + ": Edits an existing product in the inventory at the specific PID\n"
             + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]";
-
 
     ProductList productList;
     Pid pid;
