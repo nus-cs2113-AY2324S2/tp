@@ -36,6 +36,13 @@ public class ExerciseCommand extends Command{
     }
 
     public void deleteExercise() {
-        System.out.printf("Deleting exercise %s\n", getActionParameters());
+        String exerciseName = getActionParameters();
+        if (!exerciseName.isEmpty()) {
+            exerciseManager.deleteExercise(exerciseName);
+            System.out.printf("Exercise '%s' deleted successfully.\n", exerciseName);
+        } else {
+            System.out.println("Exercise name cannot be empty.");
+        }
+    }
     }
 }
