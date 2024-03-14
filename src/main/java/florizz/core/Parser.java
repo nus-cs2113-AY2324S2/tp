@@ -14,6 +14,8 @@ public class Parser {
             return handleDeleteBouquet(input);
         case ("bye"):
             return new ExitCommand();
+        case ("help"):
+            return new HelpCommand();
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
