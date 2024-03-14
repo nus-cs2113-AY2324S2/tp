@@ -1,8 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.ui.ResponseManager;
-import seedu.duke.userprofile.Asset;
-import seedu.duke.userprofile.Health;
 import seedu.duke.userprofile.Profile;
 
 import java.util.Scanner;
