@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Parser {
     private String command;
-//    private final HashMap<String, String> arguments;
     private InputArguments commandAction;
     private ArrayList<InputArguments> additionalArguments;
 

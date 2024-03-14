@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class ExerciseCommand extends Command{
     public static final String COMMAND_WORD = "exercise";
-//    public final String[] AVAILABLE_ACTIONS = {"add", "delete", "edit", "list"};
-
     public ExerciseCommand(InputArguments commandAction, ArrayList<InputArguments> additionalArguments) {
         super(commandAction, additionalArguments);
     }
@@ -20,6 +18,8 @@ public class ExerciseCommand extends Command{
         case "delete":
             deleteExercise();
             break;
+        default:
+            throw new UnsupportedOperationException();
         }
 
         return new CommandResult("TO IMPLEMENT");
