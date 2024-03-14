@@ -5,6 +5,7 @@ import seedu.lifetrack.ui.Ui;
 
 import java.util.Scanner;
 
+
 public class LifeTrack {
 
     /**
@@ -23,7 +24,7 @@ public class LifeTrack {
         Ui.readUserInput(calorieList);
         byeMessage();
     }
-
+  
     public static void byeMessage() {
         System.out.println("Bye! See you again soon ^^");
     }
