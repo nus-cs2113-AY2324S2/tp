@@ -48,7 +48,7 @@ public class DailyMedicationManager {
     /**
      * Fetches the corresponding DailyMedication and set the medication to taken
      *
-     * @param listIndex Index of the dailyMedications list to update
+     * @param listIndex Index of the dailyMedications list to update (1-based indexing)
      * @see DailyMedication#take()
      */
     public void takeDailyMedication(int listIndex) {
@@ -59,7 +59,7 @@ public class DailyMedicationManager {
     /**
      * Fetches the corresponding DailyMedication and set the medication to not taken
      *
-     * @param listIndex Index of the dailyMedications list to update
+     * @param listIndex Index of the dailyMedications list to update (1-based indexing)
      * @see DailyMedication#untake()
      */
     public void untakeDailyMedication(int listIndex) {
