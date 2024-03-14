@@ -46,4 +46,14 @@ public class ProductList extends ArrayList<Product> {
         }
         products.set(productIndex, updatedProduct);
     }
+
+    public void increaseAmount(int productIndex, Integer amountToIncrease) {
+        Product updatedProduct = products.get(productIndex);
+        updatedProduct.increaseQuantity(amountToIncrease);
+    }
+
+    public void decreaseAmount(int productIndex, Integer amountToDecrease) {
+        Product updatedProduct = products.get(productIndex);
+        updatedProduct.decreaseQuantity(amountToDecrease);
+    }
 }
