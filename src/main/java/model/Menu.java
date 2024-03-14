@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import static model.SetMenu.*;
+import static model.SetMenu.Breakfast;
+import static model.SetMenu.Lunch;
+import static model.SetMenu.Dinner;
 
 public class Menu implements ItemManager {
     private static int numOfItems = 0;
