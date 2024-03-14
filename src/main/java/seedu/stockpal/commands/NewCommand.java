@@ -1,5 +1,6 @@
 package seedu.stockpal.commands;
 
+import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 
 
@@ -9,22 +10,26 @@ public class NewCommand extends Command {
 
     private static Integer pid = 1;
     private final Product toAdd;
+    protected ProductList productList;
 
 
-    public NewCommand(String name,
+    public NewCommand(ProductList productList,
+                      String name,
                       Integer quantity,
                       Double price,
                       String description
                       ) {
+        setProductList(productList);
         this.toAdd = new Product(name, quantity, price, description, pid++);
     }
 
+    public void setProductList(ProductList productList) {
+        this.productList = productList;
+    }
 
     @Override
     public void execute() {
-        //super.execute();
         productList.addProduct(toAdd);
-        //return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         System.out.println("Added product!");
     }
 }
