@@ -10,19 +10,20 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 class BinBashTest {
+    private static final String NEWLINE = System.lineSeparator();
     private static final String TEST_INPUT = "bye";
-    private static final String EXPECTED_OUTPUT = "-------------------------------------------------------------\n" +
-            "  ____  _       ____            _\n" +
-            " | __ )(_)_ __ | __ )  __ _ ___| |__\n" +
-            " |  _ \\| | '_ \\|  _ \\ / _` / __| '_ \\\n" +
-            " | |_) | | | | | |_) | (_| \\__ \\ | | |\n" +
-            " |____/|_|_| |_|____/ \\__,_|___/_| |_|\n" +
-            "\n" +
-            "Welcome to BinBash!\n" +
-            "-------------------------------------------------------------\n" +
-            "-------------------------------------------------------------\n" +
-            "Bye!\n" +
-            "-------------------------------------------------------------\n";
+    private static final String EXPECTED_OUTPUT = "-------------------------------------------------------------" +
+            NEWLINE +
+            "  ____  _       ____            _" + NEWLINE +
+            " | __ )(_)_ __ | __ )  __ _ ___| |__" + NEWLINE +
+            " |  _ \\| | '_ \\|  _ \\ / _` / __| '_ \\" + NEWLINE +
+            " | |_) | | | | | |_) | (_| \\__ \\ | | |" + NEWLINE +
+            " |____/|_|_| |_|____/ \\__,_|___/_| |_|" + NEWLINE + NEWLINE +
+            "Welcome to BinBash!" + NEWLINE +
+            "-------------------------------------------------------------" + NEWLINE +
+            "-------------------------------------------------------------" + NEWLINE +
+            "Bye!" + NEWLINE +
+            "-------------------------------------------------------------" + NEWLINE;
     private static final InputStream systemIn = System.in;
     private static final PrintStream systemOut = System.out;
     private ByteArrayInputStream testIn;
