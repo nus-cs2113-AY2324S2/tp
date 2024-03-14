@@ -16,18 +16,27 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void calculateTotalExpenses_addingNegativeIntegers_exceptionThrown() {
+    public void addExpense_addingExpense_success() {
         ExpenseList expenseList = new ExpenseList();
-        expenseList.addExpense("Transport", "-50", "Bus Fare");
-        expenseList.addExpense("Food", "-30", "Lunch");
+        expenseList.addExpense("Transport", "50", "Bus Fare");
 
+        assertEquals(1, expenseList.getExpenses().size());
+        assertEquals("Transport", expenseList.getExpenses().get(0).getCategory());
+        assertEquals(50.0, expenseList.getExpenses().get(0).getAmount(), 0.01); 
+        assertEquals("Bus Fare", expenseList.getExpenses().get(0).getDescription());
+    }
+
+    @Test
+    public void addExpense_addingNegativeExpense_exceptionThrown() {
+        ExpenseList expenseList = new ExpenseList();
         try {
-            assertEquals(0, expenseList.calculateTotalExpenses());
+            expenseList.addExpense("Transport", "-50", "Bus Fare");
             fail();
         } catch (Exception e) {
             assertEquals("java.lang.Exception: Expenses should not be negative", e.getMessage());
         }
     }
+
     @Test
     public void editExpense_validInput_success() {
         //Create an ExpenseList and add two expenses

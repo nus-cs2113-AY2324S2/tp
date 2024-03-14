@@ -52,6 +52,13 @@ public class ExpenseList {
     }
     public void addExpense(String category, String amount, String description) {
         int amountInt = Integer.parseInt(amount); 
+        if (amountInt < 0) {
+            try {
+                throw new Exception("Expenses should not be negative");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
 

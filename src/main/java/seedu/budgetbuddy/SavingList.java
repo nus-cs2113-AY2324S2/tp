@@ -73,6 +73,13 @@ public class SavingList {
 
     public void addSaving(String category, String amount) {
         int amountInt = Integer.parseInt(amount);
+        if (amountInt < 0) {
+            try {
+                throw new Exception("Savings should not be negative");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         Saving saving = new Saving(category, amountInt);
         savings.add(saving);
 
