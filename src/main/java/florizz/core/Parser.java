@@ -1,9 +1,6 @@
 package florizz.core;
 
-import florizz.command.AddBouquetCommand;
-import florizz.command.Command;
-import florizz.command.DeleteBouquetCommand;
-import florizz.command.ListBouquetCommand;
+import florizz.command.*;
 import florizz.objects.Bouquet;
 
 public class Parser {
@@ -15,6 +12,8 @@ public class Parser {
             return handleAddBouquet(input);
         case ("delete"):
             return handleDeleteBouquet(input);
+        case ("bye"):
+            return new ExitCommand();
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
@@ -29,4 +28,5 @@ public class Parser {
         String bouquetToDelete = input.substring(input.indexOf(" ") + 1);
         return new DeleteBouquetCommand(new Bouquet(bouquetToDelete));
     }
+
 }
