@@ -1,4 +1,4 @@
-package seedu.duke.userProfile;
+package seedu.duke.userprofile;
 
 public class Health {
     private static int healthBar = 100;

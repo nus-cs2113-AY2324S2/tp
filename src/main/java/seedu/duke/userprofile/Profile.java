@@ -1,4 +1,4 @@
-package seedu.duke.userProfile;
+package seedu.duke.userprofile;
 
 public class Profile {
     private final String name;

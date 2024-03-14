@@ -13,6 +13,7 @@ public class ResponseManager {
     }
 
     public static void printJobSelectionErrorMessage() {
-        System.out.println("Invalid job type. Please choose from Robotics, Semiconductor industry, Artificial intelligence.");
+        System.out.println(
+            "Invalid job type. Please choose from Robotics, Semiconductor industry, Artificial intelligence.");
     }
 }
