@@ -1,2 +1,2 @@
-test
+add -n Medication_A -q 60_TAB -d 500mg -e 01/07/25 -f morning -r cause_dizziness
 exit

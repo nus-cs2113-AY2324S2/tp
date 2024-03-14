@@ -42,7 +42,6 @@ public class MediTracker {
             command.execute(medicationList, ui);
             isExit = command.isExit();
         }
-        ui.showExitMessage();
     }
 
     /**
