@@ -15,7 +15,7 @@ import recipeio.recipe.RecipeList;
 public class Storage {
     public static final String FILE_PATH = "recipe.txt";
 
-    public static final String delimiter = " | ";
+    public static final String DELIMITER = " | ";
     /**
      * Save the list of items to a txt file
      *
@@ -30,15 +30,15 @@ public class Storage {
         for (int i = 0; i < RecipeSize; i++) {
             Recipe recipe = recipeList.get(i);
             bw.write(recipe.name);
-            bw.write(delimiter);
+            bw.write(DELIMITER);
             bw.write(String.valueOf(recipe.cookTime));
-            bw.write(delimiter);
+            bw.write(DELIMITER);
             bw.write(String.valueOf(recipe.calories));
-            bw.write(delimiter);
+            bw.write(DELIMITER);
             bw.write(String.join(",",recipe.allergies));
-            bw.write(delimiter);
+            bw.write(DELIMITER);
             bw.write(recipe.category.toString());
-            bw.write(delimiter);
+            bw.write(DELIMITER);
             bw.write(recipe.url);
         }
         bw.newLine();
