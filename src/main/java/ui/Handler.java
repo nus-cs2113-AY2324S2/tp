@@ -1,5 +1,7 @@
 package ui;
 
+import health.BMI;
+import health.Health;;
 import utility.Command;
 import java.util.Scanner;
 
@@ -152,9 +154,15 @@ public class Handler {
         Output.printLatestRun();
     }
     public static void handleHealth(String userInput){}
-    public static void handleHeight(String userInput){}
-    public static void handleWeight(String userInput){}
-    public static void handleBmi(String userInput){}
+    public static void handleHeight(String userInput){
+        Health.setHeightAndWeight(userInput);
+    }
+    public static void handleWeight(String userInput){
+        Health.setHeightAndWeight(userInput);
+    }
+    public static void handleBmi(String userInput){
+        BMI.calculateBMI();
+    }
     public static void handleStart(String userInput){}
     public static void handleEnd(String userInput){}
     public static void handleToday(String userInput){}
