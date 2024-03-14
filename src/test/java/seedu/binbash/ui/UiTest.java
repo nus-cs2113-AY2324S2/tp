@@ -31,6 +31,6 @@ class UiTest {
     public void testTalk() {
         String test_line = "this is a test line of text.";
         ui.talk(test_line);
-        assertEquals(LINE_DIVIDER + "\n" + test_line + "\n" + LINE_DIVIDER + "\n", outContent.toString());
+        assertEquals(LINE_DIVIDER + System.lineSeparator() + test_line + System.lineSeparator() + LINE_DIVIDER + System.lineSeparator(), outContent.toString());
     }
 }

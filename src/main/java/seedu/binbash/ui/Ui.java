@@ -28,6 +28,6 @@ public class Ui {
     }
 
     public void talk(String line) {
-        System.out.println(LINE_DIVIDER + "\n" + line + "\n" + LINE_DIVIDER);
+        System.out.println(LINE_DIVIDER + System.lineSeparator() + line + System.lineSeparator() + LINE_DIVIDER);
     }
 }
