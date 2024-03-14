@@ -29,7 +29,7 @@ public class Parser {
         }
     }
 
-    private Command parseDeleteCommand(String arguments) {
+    public Command parseDeleteCommand(String arguments) {
         Matcher matcher = DeleteCommand.COMMAND_FORMAT.matcher(arguments);
         if (matcher.matches()) {
             int index = Integer.parseInt(matcher.group("index"));
@@ -39,7 +39,7 @@ public class Parser {
         }
     }
 
-    private Command parseListCommand(String arguments) {
+    public Command parseListCommand(String arguments) {
         return new ListCommand(itemList);
     }
 }
