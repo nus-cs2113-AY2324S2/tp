@@ -7,6 +7,7 @@ parsed input: exercise, list, null
 parsing command... exercise
 List of exercises:
 bicep curls
+
 parsed input: exercise, delete, bicep curls
 parsing command... exercise
 Exercise 'bicep curls' deleted successfully.
@@ -14,5 +15,6 @@ parsed input: workout, create, arm day
 parsing command... workout
 java.lang.NullPointerException
 parsing command... exit
+exit
     GOODBYE FOR NOW. STAY HARD!
    -------------------------------------------------
