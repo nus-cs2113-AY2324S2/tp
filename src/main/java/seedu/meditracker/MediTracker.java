@@ -19,7 +19,8 @@ public class MediTracker {
 
     /**
      * Runs the MediTracker application.
-     * This method displays a welcome message, reads user commands, and processes them until the user exits the application.
+     * This method displays a welcome message, reads user commands, and processes them until the user exits the
+     * application.
      */
     public void run() {
 
