@@ -31,4 +31,5 @@ public class TransactionListTest {
         assertEquals(testTransaction.getCategory(), transactionList.getTransactions().get(0).getCategory());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
     }
+
 }
