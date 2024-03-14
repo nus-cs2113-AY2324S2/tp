@@ -15,5 +15,6 @@ public enum Command {
     TODAY,
     LENGTH,
     HELP,
-    EXIT
+    EXIT,
+
 }
