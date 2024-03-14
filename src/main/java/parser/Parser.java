@@ -16,22 +16,22 @@ public class Parser {
         for(int i = 0; i < parseData.length; i++) {
             switch (parseData[i].trim()) {
             case "n":
-                description = parseData[i + 1];
+                description = parseData[i + 1].trim();
                 break;
             case "$":
-                amount = parseData[i + 1];
+                amount = parseData[i + 1].trim();
                 break;
             case "d":
-                date = parseData[i + 1];
+                date = parseData[i + 1].trim();
                 break;
             case "c":
-                category = parseData[i + 1];
+                category = parseData[i + 1].trim();
                 break;
             default:
                 break;
             }
         }
         assert amount != null;
-        return new Transaction(description, Float.parseFloat(amount), date, category);
+        return new Transaction(description, Float.parseFloat(amount), category, date);
     }
 }
