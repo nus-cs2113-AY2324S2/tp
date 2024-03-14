@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class RecipeIO {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the Recipe.IO application.
      */
     public static void main(String[] args) {
         ArrayList<String> testAllergies = new ArrayList<>();
