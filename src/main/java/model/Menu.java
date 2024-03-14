@@ -1,8 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static model.SetMenu.*;
+import static model.SetMenu.Breakfast;
+import static model.SetMenu.Lunch;
+import static model.SetMenu.Dinner;
 
 public class Menu implements ItemManager {
     private static int numOfItems = 0;
@@ -61,4 +65,11 @@ public class Menu implements ItemManager {
         numOfItems--;
     }
 
+    @Override
+    public String toString() {
+        return this.menuItemID + "\n" +
+                IntStream.range(0,this.menuItemList.size())
+                        .mapToObj(x -> (x + 1) + ". " + this.menuItemList.get(x))
+                        .collect(Collectors.joining("\n"));
+    }
 }
