@@ -22,20 +22,20 @@ public class RecipeIO {
                 testAllergies, MealCategory.LUNCH, testURL);
         System.out.println("Hello");
 
-        RecipeList testRecipeList = new RecipeList();
 
-        try {
-            Storage.loadFile(testRecipeList);
-        } catch (Exception e) {
-            testRecipeList.addRecipe(testRecipe);
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            Storage.saveFile(testRecipeList);
-        } catch (Exception e) {
-            System.out.println("Error saving list!");
-        }
+//        RecipeList testRecipeList = new RecipeList();
+//        try {
+//            Storage.loadFile(testRecipeList);
+//        } catch (Exception e) {
+//            testRecipeList.addRecipe(testRecipe);
+//            System.out.println(e.getMessage());
+//        }
+//
+//        try {
+//            Storage.saveFile(testRecipeList);
+//        } catch (Exception e) {
+//            System.out.println("Error saving list!");
+//        }
 
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);

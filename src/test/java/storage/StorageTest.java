@@ -4,7 +4,9 @@ import recipeio.recipe.RecipeList;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class StorageTest {
     public static final String FILE_PATH = "recipe.txt";
