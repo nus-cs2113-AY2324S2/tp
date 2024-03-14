@@ -5,7 +5,7 @@ import seedu.duke.ui.UI;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Main {
+public class Duke {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
