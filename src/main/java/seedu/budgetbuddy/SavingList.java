@@ -2,7 +2,6 @@ package seedu.budgetbuddy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class SavingList {
     protected ArrayList <Saving> savings;
