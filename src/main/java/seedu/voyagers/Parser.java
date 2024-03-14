@@ -205,7 +205,7 @@ public class Parser {
                 location = addWordAfterSeparator(tokens, location, i);
                 break;
             default:
-                System.out.println("Bug in add main trip, reached default");
+                //No more flags found
                 break;
             }
         }
