@@ -36,12 +36,12 @@ public class Order implements ItemManager {
     }
 
     /**
-     * Removes all items from the order list by its ID
-     * @param ID the ID of the item to be removed
+     * Removes all items from the order list by its id
+     * @param id the id of the item to be removed
      */
     @Override
-    public void remove(String ID) {
-        this.orderItemList.removeIf(x -> x.getID().equals(ID));
+    public void remove(String id) {
+        this.orderItemList.removeIf(x -> x.getID().equals(id));
     }
 
     public String getID() {

@@ -1,18 +1,18 @@
 package model;
 
 public abstract class Item {
-    private final String ID;
+    private final String id;
     private final String name;
     private final double unitPrice;
 
-    public Item(String ID, String name, double unitPrice) {
-        this.ID = ID;
+    public Item(String id, String name, double unitPrice) {
+        this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
     }
 
     public String getID() {
-        return this.ID;
+        return this.id;
     }
 
     public String getName() {
