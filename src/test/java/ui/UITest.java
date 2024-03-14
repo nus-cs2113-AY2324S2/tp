@@ -2,7 +2,10 @@ package ui;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
