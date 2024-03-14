@@ -15,8 +15,8 @@ public class InitializeCommand {
         String jobType = scanner.nextLine();
 
         // verify user input
-        while (!jobType.equals("robotics") && !jobType.equals("semiconductor industry") && !jobType.equals("artificial intelligence")) {
-            System.out.println("Invalid job type. Please choose from robotics, semiconductor industry, artificial intelligence.");
+        while (!jobType.equals("Robotics") && !jobType.equals("Semiconductor industry") && !jobType.equals("Artificial intelligence")) {
+            System.out.println("Invalid job type. Please choose from Robotics, Semiconductor industry, Artificial intelligence.");
             jobType = scanner.nextLine();
         }
 
