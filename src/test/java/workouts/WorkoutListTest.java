@@ -87,7 +87,6 @@ class WorkoutListTest {
         inputList.add(new Run("30:10", "20.3", "30/03/2023"));
 
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            // Call the method or code that should throw the exception
             ArrayList<Workout> runList = WorkoutList.getWorkouts("invalidFilter");
         });
     }
@@ -99,7 +98,6 @@ class WorkoutListTest {
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForRun() {
         assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            // Call the method or code that should throw the exception
             WorkoutList.getWorkouts(Constant.RUN);
         });
     }
@@ -111,7 +109,6 @@ class WorkoutListTest {
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForAll() {
         assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            // Call the method or code that should throw the exception
             WorkoutList.getWorkouts(Constant.ALL);
         });
     }

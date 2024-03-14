@@ -19,6 +19,7 @@ class RunTest {
         for (int i = 0; i < Constant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
+        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -33,6 +34,7 @@ class RunTest {
         for (int i = 0; i < Constant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
+        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -44,6 +46,7 @@ class RunTest {
         int result = testRun.calculateTotalSeconds();
         int expected = 3942;
         assertEquals(result, expected);
+        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -55,6 +58,6 @@ class RunTest {
         String result = testRun.calculatePace();
         String expected ="7:47/km";
         assertEquals(result, expected);
-
+        WorkoutList.clearWorkoutsAndRun();
     }
 }
