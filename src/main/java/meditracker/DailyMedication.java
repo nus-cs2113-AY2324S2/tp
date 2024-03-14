@@ -1,4 +1,4 @@
-package seedu.meditracker;
+package meditracker;
 
 /**
  * Stores name and the status of daily medication (taken or not)

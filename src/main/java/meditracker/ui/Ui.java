@@ -1,4 +1,4 @@
-package seedu.meditracker.ui;
+package meditracker.ui;
 
 import java.util.Scanner;
 

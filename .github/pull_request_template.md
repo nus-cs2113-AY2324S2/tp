@@ -1,5 +1,6 @@
 # Checklist for feature implementation and modification
-- [ ] Issue addressed: Issue #x
+Closes #<Issue_Number>
+- [ ] Added relevant milestone (under milestone tab on the right)
 - Implementation
   - [ ] Sources (if any) credited under both relevant section(s) and Developer Guide (Acknowledgement)
   - [ ] JUnit Test(s)
@@ -22,7 +23,8 @@
 
 
 # Checklist for non-implementation related PR
-- [ ] Issue addressed: Issue #x
+Closes #<Issue_Number>
+- [ ] Added relevant milestone (under milestone tab on the right)
 - Documentation (Contributions)
   - [ ] Developer Guide contributions (if any)
   - [ ] User Guide contributions (if any)
