@@ -5,7 +5,6 @@ import transactions.Transaction;
 import ui.UserInterface;
 
 import java.util.ArrayList;
-import ui.UserInterface;
 
 public class TransactionList {
 
