@@ -6,6 +6,7 @@ import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.ByeCommand;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.DeleteCommand;
+import seedu.binbash.command.ListCommand;
 
 public class Parser {
     private final ItemList itemList;
