@@ -57,9 +57,9 @@ public class Parser {
             return new WorkoutCommand(commandAction, additionalArguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+        default:
+            throw new UnsupportedOperationException();
         }
-
-        return null;
     }
 
     public String getCommandString() {
