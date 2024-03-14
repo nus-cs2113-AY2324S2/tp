@@ -1,5 +1,5 @@
 # Checklist for feature implementation and modification
-- [ ] Issue addressed: Closes #<Issue_Number>
+Closes #<Issue_Number>
 - [ ] Added relevant milestone (under milestone tab on the right)
 - Implementation
   - [ ] Sources (if any) credited under both relevant section(s) and Developer Guide (Acknowledgement)
@@ -23,7 +23,7 @@
 
 
 # Checklist for non-implementation related PR
-- [ ] Issue addressed: Closes #<Issue_Number>
+Closes #<Issue_Number>
 - [ ] Added relevant milestone (under milestone tab on the right)
 - Documentation (Contributions)
   - [ ] Developer Guide contributions (if any)
