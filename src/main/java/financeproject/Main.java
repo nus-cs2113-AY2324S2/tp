@@ -1,26 +1,29 @@
 package financeproject;
-import java.util.Scanner;
 
-import financialtransactions.Inflow;
-import financialtransactions.Outflow;
+//import financialtransactions.Inflow;
+//import financialtransactions.Outflow;
 import financialtransactions.TransactionManager;
+import storage.Storage;
 import user.Authentication;
 import user.BaseUser;
+import userinteraction.UI;
 
 public class Main {
     public static void main(String[] args) {
+        Storage storage = new Storage("./data");
         BaseUser user = new BaseUser("Bob");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
+        UI ui = new UI();
+        ui.printMessage("Enter password: ");
+        String password = ui.readInput();
         Authentication auth = user.getAuthentication();
         if (auth.checkPassword("Bob", password)) {
-            System.out.println("Password is correct");
+            ui.printMessage("Password is correct");
         } else {
-            System.out.println("Password is incorrect");
+            ui.printMessage("Password is incorrect");
         }
 
-        TransactionManager manager = new TransactionManager();
+        TransactionManager manager = storage.loadFile();
+        /*
         Inflow income = new Inflow("Salary payment", 400.00, "23/05/2022 1900");
         income.setCategory(Inflow.Category.INCOME);
         manager.addTransaction(income);
@@ -40,8 +43,8 @@ public class Main {
         Outflow shopping = new Outflow("Shopping", 200, "23/05/2022 2000");
         shopping.setCategory(Outflow.Category.SHOPPING);
         manager.addTransaction(shopping);
-
-        System.out.println(manager.toString());
-        sc.close();
+         */
+        ui.printMessage(manager.toString());
+        storage.saveFile(manager);
     }
 }

@@ -58,5 +58,13 @@ public class TransactionList<T extends Transaction<?>> {
         }
         return baseString;
     }
-
+    
+    public String toSave() {
+        String baseString = "";
+        for (T transaction : transactionList) {
+            baseString += transaction.toSave();
+        }
+        return baseString;
+    }
+    
 }
