@@ -1,6 +1,6 @@
-package seedu.meditracker;
+package meditracker;
 
-import seedu.meditracker.ui.Ui;
+import meditracker.ui.Ui;
 
 /**
  * The main class for the MediTracker application.
