@@ -71,4 +71,13 @@ public class ExpenseListTest {
         assertEquals(50.0, expenseList.getExpenses().get(0).getAmount(), 0.01);
         assertEquals("Bus Fare", expenseList.getExpenses().get(0).getDescription());
     }
+
+    @Test
+    public void testDeleteExpense_indexOutOfBounds() {
+        ExpenseList expenseList = new ExpenseList();
+
+        int initialSize = expenseList.getExpenses().size();
+        expenseList.deleteExpense(initialSize + 1); // Trying to delete with index out of bounds
+        assertEquals(initialSize, expenseList.getExpenses().size()); // Size should remain the same
+    }
 }
