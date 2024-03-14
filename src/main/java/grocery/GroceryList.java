@@ -6,6 +6,7 @@ import exceptions.WrongFormatException;
 
 import java.util.ArrayList;
 import java.util.List;
+import git.Ui;
 
 /**
  * Stores all the user's groceries.
@@ -29,7 +30,7 @@ public class GroceryList {
         }
         try {
             groceries.add(grocery);
-            System.out.println(grocery.getName() + " added!");
+            Ui.printGroceryAdded(grocery);
         } catch (NullPointerException e) {
             System.out.println("Failed to add grocery: the groceries collection is null.");
         } catch (Exception e) {
@@ -66,7 +67,7 @@ public class GroceryList {
             String[] expParts = details.split("d/", 2);
             Grocery grocery = getGrocery(expParts[0].strip());
             grocery.setExpiration(expParts[1].strip());
-            System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
+            Ui.printExpSet(grocery);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new WrongFormatException("date");
         }
@@ -81,7 +82,7 @@ public class GroceryList {
             String[] expParts = details.split("a/", 2);
             Grocery grocery = getGrocery(expParts[0].strip());
             grocery.setAmount(expParts[1].strip());
-            System.out.println(grocery.getName() + ": " + grocery.getAmount());
+            Ui.printAmtSet(grocery);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new WrongFormatException("amt");
         }
@@ -93,19 +94,16 @@ public class GroceryList {
     public void listGroceries() {
         int size = groceries. size();
         if (size == 0) {
-            System.out.println("There's no groceries!");
+            Ui.printNoGrocery();
             return;
         }
-        System.out.println("Here are your groceries!");
-        for (Grocery grocery: groceries) {
-            System.out.println(" - " + grocery.printGrocery());
-        }
+        Ui.printGroceryList(groceries);
     }
 
     public void removeGrocery(String details) throws NoSuchGroceryException {
         // Assuming the format is "del GROCERY"
         Grocery grocery = getGrocery(details);
         groceries.remove(grocery);
-        System.out.println("You now have " + groceries.size() + " groceries left");
+        Ui.printGroceryRemoved(grocery, groceries);
     }
 }

@@ -2,7 +2,9 @@ package grocery;
 
 import exceptions.GitException;
 
+import exceptions.NoSuchGroceryException;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -42,5 +44,17 @@ public class GroceryListTest {
         } catch (IllegalArgumentException e) {
             assertEquals("The grocery name is invalid.", e.getMessage());
         }
-    }    
+    }
+
+    @Test
+    public void removeGrocery_groceryDelete_exceptionThrown() {
+        try {
+            GroceryList gl = new GroceryList();
+            gl.addGrocery(new Grocery("fooood", null, null));
+            gl.removeGrocery("food");
+            fail("Expected NoSuchGroceryException not thrown");
+        } catch (NoSuchGroceryException e) {
+            assertEquals("The grocery does not exist!", e.getMessage());
+        }
+    }
 }
