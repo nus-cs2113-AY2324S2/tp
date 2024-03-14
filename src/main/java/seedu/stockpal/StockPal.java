@@ -45,7 +45,7 @@ public class StockPal {
             try {
                 ArrayList<String> parsed = Parser.parseCommand(userInput);
                 System.out.println(parsed.toString());
-                // execute command and print results
+                //execute command and print results
             } catch (InvalidCommandException | InvalidFormatException e) {
                 System.out.println("throw");
                 break;
