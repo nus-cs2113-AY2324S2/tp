@@ -32,6 +32,7 @@ class WorkoutListTest {
     void addRun_normalInput_expectAppend()  {
         try {
             Run inputRun = new Run("40:10", "10.3", "15/03/2024");
+            WorkoutList.addRun(inputRun);
             ArrayList<Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
             ArrayList<Workout> workoutList = WorkoutList.getWorkouts(Constant.ALL);
 
@@ -86,7 +87,6 @@ class WorkoutListTest {
         inputList.add(new Run("30:10", "20.3", "30/03/2023"));
 
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            // Call the method or code that should throw the exception
             ArrayList<Workout> runList = WorkoutList.getWorkouts("invalidFilter");
         });
     }
@@ -98,7 +98,6 @@ class WorkoutListTest {
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForRun() {
         assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            // Call the method or code that should throw the exception
             WorkoutList.getWorkouts(Constant.RUN);
         });
     }
@@ -110,7 +109,6 @@ class WorkoutListTest {
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForAll() {
         assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            // Call the method or code that should throw the exception
             WorkoutList.getWorkouts(Constant.ALL);
         });
     }
@@ -142,5 +140,4 @@ class WorkoutListTest {
         // Call the method or code that should throw the exception
         assertThrows(CustomExceptions.OutOfBounds.class, WorkoutList::getLatestRun);
     }
-
 }
