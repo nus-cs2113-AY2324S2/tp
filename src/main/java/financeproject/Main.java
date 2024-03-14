@@ -3,6 +3,7 @@ package financeproject;
 import financialtransactions.Inflow;
 import financialtransactions.Outflow;
 import financialtransactions.TransactionManager;
+import parser.Parser;
 import storage.Storage;
 import user.Authentication;
 import user.BaseUser;
@@ -11,8 +12,9 @@ import userinteraction.UI;
 public class Main {
     public static void main(String[] args) {
         Storage storage = new Storage("./data");
-        BaseUser user = new BaseUser("Bob");
         UI ui = new UI();
+        ui.printMessage("Welcome. Inorder to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
+        /*BaseUser user = new BaseUser("Bob");
         ui.printMessage("Enter password: ");
         String password = ui.readInput();
         Authentication auth = user.getAuthentication();
@@ -21,9 +23,18 @@ public class Main {
         } else {
             ui.printMessage("Password is incorrect");
         }
+*/
 
-        TransactionManager manager = storage.loadFile();
+        //TransactionManager manager = storage.loadFile();
+        TransactionManager manager = new TransactionManager();
 
+        while (Parser.isContinue) {
+            String command = ui.readInput();
+            Parser.parseCommand(command, manager);
+            storage.saveFile(manager);
+        }
+        ui.closeScanner();
+        /*
         Inflow income = new Inflow("Salary payment", 400.00, "23/05/2022 1900");
         income.setCategory(Inflow.Category.INCOME);
         manager.addTransaction(income);
@@ -45,9 +56,6 @@ public class Main {
         manager.addTransaction(shopping);
 
 
-        ui.printMessage(manager.toString());
-        manager.showLastNTransactions(3);
-        storage.saveFile(manager);
-        ui.closeScanner();
+        ui.printMessage(manager.toString()); */
     }
 }

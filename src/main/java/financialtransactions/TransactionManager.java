@@ -67,7 +67,6 @@ public class TransactionManager {
                 index++;
             }
         }
-
     }
 
     public String toSave() {
