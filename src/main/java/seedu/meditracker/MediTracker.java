@@ -44,7 +44,7 @@ public class MediTracker {
     }
 
     /**
-     * The main method that starts the MediTracker application.
+     * Starts the MediTracker application.
      * It creates a new MediTracker object and calls its run() method.
      * @param args Command-line arguments.
      */
