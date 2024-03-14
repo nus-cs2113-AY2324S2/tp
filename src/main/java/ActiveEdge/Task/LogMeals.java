@@ -19,7 +19,7 @@ public class LogMeals extends Task {
     int caloriesNum = Integer.parseInt(calories);
     int mealCalories = servingsNum * caloriesNum;
 
-    int totalCalories;
+    public static int totalCalories;
 
     public int addCalories() {
         if(tasksList.size()==0) {

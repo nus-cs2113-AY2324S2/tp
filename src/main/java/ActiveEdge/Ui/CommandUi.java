@@ -2,6 +2,7 @@ package ActiveEdge.Ui;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 import ActiveEdge.Task.Task;
+import ActiveEdge.Task.LogMeals;
 
 public class CommandUi {
 
@@ -19,6 +20,10 @@ public class CommandUi {
 
     public static void printLogMessage(Task newMeal, int size) {
         System.out.println(newMeal);
+    }
+
+    public static void printShowCalMessage() {
+        System.out.println("Today calories consumed today: " + LogMeals.totalCalories);
     }
 
 }
