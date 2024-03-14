@@ -35,6 +35,9 @@ public class BudgetBuddy {
                 case "delete":
                     transactions.removeTransaction(input);
                     break;
+                case "add":
+                    transactions.processTransaction(input);
+                    break;                    
                 default:
                     System.out.println("Invalid command.");
                 }

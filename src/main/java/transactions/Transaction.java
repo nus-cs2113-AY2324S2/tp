@@ -5,10 +5,13 @@ public class Transaction {
     private float amount;
     private String category;
 
-    public Transaction(String description, float amount, String category) {
+    private String date;
+
+    public Transaction(String description, float amount, String category, String date) {
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.date = date;
     }
 
     public String getDescription() {
@@ -22,6 +25,9 @@ public class Transaction {
     public String getCategory() {
         return category;
     }
+  
+    public String getDate() {
+        return date;
 
     @Override
     public String toString() {
