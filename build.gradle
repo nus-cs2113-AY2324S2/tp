@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("recipeio.RecipeIO")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("recipeio")
     archiveClassifier.set("")
 }
 
