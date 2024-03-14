@@ -65,4 +65,27 @@ public class TravelActivityList {
         }
         return "cant be found";
     }
+
+    public void searchTask (String taskName) {
+        ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
+        int temporaryArrayCounter = 0;
+        boolean isFound = false;
+        for(int iterator = 0; iterator < travelActivities.size(); iterator += 1){
+            if(travelActivities.get(iterator).getPlan().contains(taskName)){
+                temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
+                temporaryArrayCounter += 1;
+            }
+        }
+        if (temporaryArrayCounter == 0) {
+            System.out.println("Sorry I could not find what you are looking for.");
+        }
+        else {
+            System.out.println("Here are what you are looking for:");
+            for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
+                System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
+            }
+        }
+    }
+
+
 }

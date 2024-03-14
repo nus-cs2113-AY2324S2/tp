@@ -33,7 +33,11 @@ public class Duke {
 
                 int taskNumber = Integer.parseInt(sentence[1]);
                 travelActivityList.removeTask(taskNumber);
-            } else if(line.startsWith("bye")){
+            } else if(line.startsWith("find")) {
+                String[] taskName = line.split(" ");
+                travelActivityList.searchTask(taskName[1]);
+            }
+            else if(line.startsWith("bye")){
                 userSaysBye = true;
             }
 
