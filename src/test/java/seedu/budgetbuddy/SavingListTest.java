@@ -40,6 +40,6 @@ public class SavingListTest {
         savingList.editSaving("Salary", 1, 150);
 
         // Verify that the saving was edited successfully
-        assertEquals(150, savingList.getSavings().get(0).getAmount(), 0.001); // Assuming appropriate getters are available
+        assertEquals(150, savingList.getSavings().get(0).getAmount(), 0.001);
     }
 }
