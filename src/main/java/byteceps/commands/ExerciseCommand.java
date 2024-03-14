@@ -1,22 +1,30 @@
 package byteceps.commands;
 
 import java.util.ArrayList;
+import byteceps.exercises.Exercise;
+import byteceps.exercises.ExerciseManager;
 
-public class ExerciseCommand extends Command{
+public class ExerciseCommand extends Command {
     public static final String COMMAND_WORD = "exercise";
+    private final ExerciseManager exerciseManager;
+
     public ExerciseCommand(InputArguments commandAction, ArrayList<InputArguments> additionalArguments) {
         super(commandAction, additionalArguments);
+        this.exerciseManager = ExerciseManager.getInstance();
     }
 
 
     @Override
     public CommandResult execute() {
-        switch(getAction()) {
+        switch (getAction()) {
         case "add":
             addExercise();
             break;
         case "delete":
             deleteExercise();
+            break;
+        case "list":
+            listExercises();
             break;
         default:
             throw new UnsupportedOperationException();
