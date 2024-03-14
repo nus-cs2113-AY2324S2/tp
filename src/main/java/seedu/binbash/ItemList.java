@@ -17,8 +17,14 @@ public class ItemList {
     /**
      * Test method
      */
+
+    public int getItemCount() {
+        return itemList.size();
+    }
+
     public String addItem(String itemName, String itemDescription) {
         Item item = new Item(itemName, itemDescription);
+
         itemList.add(item);
 
         String output = "Noted! I have added the following item into your inventory:"
