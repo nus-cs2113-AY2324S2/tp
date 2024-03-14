@@ -1,12 +1,12 @@
 package financeproject;
 
-import financialtransactions.Inflow;
-import financialtransactions.Outflow;
+//import financialtransactions.Inflow;
+//import financialtransactions.Outflow;
 import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
-import user.Authentication;
-import user.BaseUser;
+//import user.Authentication;
+//import user.BaseUser;
 import userinteraction.UI;
 
 public class Main {
