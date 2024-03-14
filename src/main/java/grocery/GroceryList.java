@@ -24,9 +24,19 @@ public class GroceryList {
      * Adds a grocery.
      */
     public void addGrocery(Grocery grocery) {
-        groceries.add(grocery);
-        System.out.println(grocery.getName() + " added!");
+        if (grocery.getName() == null || grocery.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("The grocery name is invalid.");
+        }
+        try {
+            groceries.add(grocery);
+            System.out.println(grocery.getName() + " added!");
+        } catch (NullPointerException e) {
+            System.out.println("Failed to add grocery: the groceries collection is null.");
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred while adding the grocery: " + e.getMessage());
+        }
     }
+    
 
     /**
      * Returns the desired grocery.
