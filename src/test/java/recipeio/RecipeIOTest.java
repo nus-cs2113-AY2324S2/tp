@@ -37,6 +37,7 @@ class RecipeIOTest {
         recipes.addRecipe(newRecipe);
         recipes.deleteRecipe(1);
         assertTrue(recipes.getSize() == 0);
+    }
     
     @Test
     public void testStringConversion() {
