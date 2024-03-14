@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import transactions.Transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionListTest {
 
