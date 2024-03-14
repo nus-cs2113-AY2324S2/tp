@@ -26,6 +26,7 @@ public class ByteCeps {
 
                 Command command = parser.parseCommand();
                 CommandResult commandOutput = command.execute();
+                System.out.println(commandOutput.feedbackToUser);
 
                 if (commandOutput.feedbackToUser.equals("exit")) {
                     break;

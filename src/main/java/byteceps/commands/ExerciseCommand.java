@@ -1,6 +1,7 @@
 package byteceps.commands;
 
 import java.util.ArrayList;
+
 import byteceps.exercises.Exercise;
 import byteceps.exercises.ExerciseManager;
 
@@ -18,50 +19,50 @@ public class ExerciseCommand extends Command {
     public CommandResult execute() {
         switch (getAction()) {
         case "add":
-            addExercise();
-            break;
+            return addExercise();
         case "delete":
-            deleteExercise();
-            break;
+            return deleteExercise();
         case "list":
-            listExercises();
-            break;
+            return listExercises();
         default:
             throw new UnsupportedOperationException();
         }
-
-        return new CommandResult("TO IMPLEMENT");
     }
 
-    public void addExercise() {
+    public CommandResult addExercise() {
         String exerciseName = getActionParameters();
-        if (!exerciseName.isEmpty()) {
+        if (exerciseName != null && !exerciseName.isEmpty()) {
             exerciseManager.addExercise(exerciseName);
-            System.out.printf("Exercise '%s' added successfully.\n", exerciseName);
+            return new CommandResult(String.format("Exercise '%s' added successfully.", exerciseName));
         } else {
-            System.out.println("Exercise name cannot be empty.");
+            return new CommandResult("Exercise name cannot be empty.");
         }
     }
 
-    public void deleteExercise() {
+    public CommandResult deleteExercise() {
         String exerciseName = getActionParameters();
-        if (!exerciseName.isEmpty()) {
+        if (exerciseName == null || exerciseName.isEmpty()) {
+            return new CommandResult("Exercise name cannot be empty.");
+        }
+
+        if (exerciseManager.hasExercise(exerciseName)) {
             exerciseManager.deleteExercise(exerciseName);
-            System.out.printf("Exercise '%s' deleted successfully.\n", exerciseName);
+            return new CommandResult(String.format("Exercise '%s' deleted successfully.", exerciseName));
         } else {
-            System.out.println("Exercise name cannot be empty.");
+            return new CommandResult(String.format("Exercise '%s' does not exist.", exerciseName));
         }
     }
 
-    public void listExercises() {
+    public CommandResult listExercises() {
         ArrayList<Exercise> exercises = exerciseManager.getAllExercises();
         if (exercises.isEmpty()) {
-            System.out.println("No exercises found.");
+            return new CommandResult("No exercises found.");
         } else {
-            System.out.println("List of exercises:");
+            StringBuilder exerciseList = new StringBuilder("List of exercises:\n");
             for (Exercise exercise : exercises) {
-                System.out.println(exercise.getExerciseName());
+                exerciseList.append(exercise.getExerciseName()).append("\n");
             }
+            return new CommandResult(exerciseList.toString());
         }
     }
 }
