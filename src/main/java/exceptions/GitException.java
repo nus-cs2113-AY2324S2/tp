@@ -7,7 +7,7 @@ public abstract class GitException extends Exception {
     protected String message;
 
     /**
-     * Constructs WallybotException.
+     * Constructs GiTException.
      */
     public GitException() {}
 
