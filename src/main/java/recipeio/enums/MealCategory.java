@@ -1,5 +1,5 @@
 package recipeio.enums;
 
 public enum MealCategory {
-    BREAKFAST, LUNCH, DINNER
+    BREAKFAST, LUNCH, DINNER, APPETIZER, DESSERT
 }
