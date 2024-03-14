@@ -24,6 +24,8 @@ public class Ui {
                     System.out.println("Please enter a non empty Input!");
                 } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
                     calorieList.addEntry(line);
+                } else if (line.startsWith("list")) {
+                    CalorieList.printCalorieList();
                 }
 
                 if(in.hasNextLine()) {
