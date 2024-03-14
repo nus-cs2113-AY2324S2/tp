@@ -8,7 +8,6 @@ import seedu.lifetrack.calorielist.CalorieList;
 import seedu.lifetrack.calorielist.Entry;
 import seedu.lifetrack.calories.Calorie;
 
-import java.util.ArrayList;
 
 class DukeTest {
     @Test
