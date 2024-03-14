@@ -10,5 +10,8 @@ public class Saving extends Transaction{
         return "Category: " + category + " Amount: " + amount;
     }
 
+    public double getAmount() {
+        return amount;
+    }
 
 }

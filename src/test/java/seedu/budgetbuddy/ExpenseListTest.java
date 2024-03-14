@@ -33,7 +33,11 @@ public class ExpenseListTest {
     public void addExpense_addingExpense_success() {
         ExpenseList expenseList = new ExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
-        assertEquals(1, expenseList.getExpenses().size());
+
+        assertEquals(2, expenseList.getExpenses().size());
+        assertEquals("Transport", expenseList.getExpenses().get(0).getCategory());
+        assertEquals(50.0, expenseList.getExpenses().get(0).getAmount(), 0.01); 
+        assertEquals("Bus Fare", expenseList.getExpenses().get(0).getDescription());
     }
 
     @Test
