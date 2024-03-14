@@ -3,8 +3,8 @@ package ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+//import utility.Constant;
 import utility.CustomExceptions;
-//import workouts.Run;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -68,7 +68,7 @@ class HandlerTest {
     @Test
     void getRun_missingParameter_expectException() {
         // Test Setup
-        String input = "new /e:run /d:10.3 /t:00:40:10"; // Missing /date parameter
+        String input = "new /e:run /d:10.3"; // Missing /t parameter
 
         // Exercise and Verify
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
