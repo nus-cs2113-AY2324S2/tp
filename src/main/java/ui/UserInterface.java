@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class UserInterface {
-
+  
     public static final int START_INDEX = 0;
     private static final String LINE = "-------------------------------------------" +
             "----------------------------------------------------------------------" +
@@ -78,5 +78,4 @@ public class UserInterface {
         System.out.println( TAB_SPACE + "No such command exists." );
         System.out.println(LINE);
     }
-
 }

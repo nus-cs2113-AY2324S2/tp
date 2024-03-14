@@ -31,10 +31,11 @@ public class Transaction {
     private LocalDate parseDate(String by) {
         return LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
+  
     public String getCategory() {
         return category;
     }
-
+  
     @Override
     public String toString() {
         return  (" Description: " + getDescription() + " | " +

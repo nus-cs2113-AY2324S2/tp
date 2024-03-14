@@ -31,6 +31,12 @@ public class BudgetBuddy {
                 case "list":
                     transactions.printTransactions();
                     break;
+                case "delete":
+                    transactions.removeTransaction(input);
+                    break;
+                case "add":
+                    transactions.processTransaction(input);
+                    break;
                 default:
                     UserInterface.printNoCommandExists();
                 }
@@ -41,9 +47,5 @@ public class BudgetBuddy {
         } catch(Exception e){
             UserInterface.printUnknownError(e.getMessage());
         }
-
-
-
-
     }
 }
