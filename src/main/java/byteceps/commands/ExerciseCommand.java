@@ -26,7 +26,13 @@ public class ExerciseCommand extends Command{
     }
 
     public void addExercise() {
-        System.out.printf("Adding exercise: %s\n", getActionParameters());
+        String exerciseName = getActionParameters();
+        if (!exerciseName.isEmpty()) {
+            exerciseManager.addExercise(exerciseName);
+            System.out.printf("Exercise '%s' added successfully.\n", exerciseName);
+        } else {
+            System.out.println("Exercise name cannot be empty.");
+        }
     }
 
     public void deleteExercise() {
