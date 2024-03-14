@@ -9,4 +9,8 @@ public class Calorie {
         this.calories = calories;
         this.isIntake = isIntake;
     }
+
+    public int getCalories() {
+        return calories;
+    }
 }

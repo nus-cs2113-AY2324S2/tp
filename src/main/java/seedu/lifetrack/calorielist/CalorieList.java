@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CalorieList {
     
-    public ArrayList<Entry> calorieArrayList;
+    private ArrayList<Entry> calorieArrayList;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -56,7 +56,7 @@ public class CalorieList {
      * If the list is empty, it prints a message indicating that the list is empty.
      * Otherwise, it prints each entry's activity description and calorie count.
      */
-    public static void printCalorieList() {
+    public void printCalorieList() {
         if (calorieArrayList.isEmpty()) {
             System.out.println("Your caloric list is empty.");
         } else {
@@ -69,5 +69,9 @@ public class CalorieList {
                         + ", Calories: " + calorie.getCalories());
             }
         }
+    }
+
+    public int getSize() {
+        return calorieArrayList.size();
     }
 }
