@@ -32,4 +32,10 @@ public class DailyMedication {
     public void untake() {
         isTaken = false;
     }
+
+    @Override
+    public String toString() {
+        String takenIcon = isTaken ? "[X]" : "[ ]";
+        return String.format("%s %s", takenIcon, name);
+    }
 }

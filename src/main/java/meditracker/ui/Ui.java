@@ -1,5 +1,8 @@
 package meditracker.ui;
 
+import meditracker.DailyMedication;
+
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -67,5 +70,13 @@ public class Ui {
      */
     public String readCommand() {
         return input.nextLine();
+    }
+
+    public void printTodayMedsList(List<DailyMedication> dailyMedications) {
+        System.out.println("Here are the medications you have to take today: ");
+        for(DailyMedication dailyMedication : dailyMedications) {
+            int numbering = dailyMedications.indexOf(dailyMedication) + 1;
+            System.out.println("\t" + numbering + ". " + dailyMedication);
+        }
     }
 }

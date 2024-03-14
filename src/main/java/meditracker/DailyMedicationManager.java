@@ -1,5 +1,7 @@
 package meditracker;
 
+import meditracker.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  */
 public class DailyMedicationManager {
     private final List<DailyMedication> dailyMedications;
+    private Ui ui;
 
     /**
      * Constructs DailyMedicationManager with a list of DailyMedication
@@ -16,6 +19,7 @@ public class DailyMedicationManager {
      */
     public DailyMedicationManager() {
         dailyMedications = new ArrayList<>();
+        ui = new Ui();
 
         // TODO: Fetch today list from storage.
         //       If does not exist or old list,
@@ -65,5 +69,9 @@ public class DailyMedicationManager {
     public void untakeDailyMedication(int listIndex) {
         DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.untake();
+    }
+
+    public void printDailyMedications() {
+        ui.printTodayMedsList(dailyMedications);
     }
 }
