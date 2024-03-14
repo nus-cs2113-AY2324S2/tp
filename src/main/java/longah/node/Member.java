@@ -33,7 +33,7 @@ public class Member {
      *
      * @param amount The amount to add to the balance.
      */
-    public void addToBalance(double amount) throws LongAhException {
+    public synchronized void addToBalance(double amount) throws LongAhException {
         if (amount <= 0) {
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_VALUE);
         }
@@ -45,7 +45,7 @@ public class Member {
      *
      * @param amount The amount to subtract from the balance.
      */
-    public void subtractFromBalance(double amount) throws LongAhException {
+    public synchronized void subtractFromBalance(double amount) throws LongAhException {
         if (amount <= 0) {
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_VALUE);
         }
