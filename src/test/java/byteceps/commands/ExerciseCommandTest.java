@@ -15,6 +15,7 @@ class ExerciseCommandTest {
     @BeforeEach
     public void setUp() {
         exerciseManager = ExerciseManager.getInstance();
+        exerciseManager.deleteAllExercises();
         exerciseManager.addExercise("Push-ups");
         exerciseManager.addExercise("Sit-ups");
     }
@@ -54,31 +55,28 @@ class ExerciseCommandTest {
         assertEquals("Exercise 'Running' does not exist.", result.feedbackToUser);
     }
 
-
     @Test
-    public void listExercises_noExercisesInList_shouldReturnNoExercisesFoundMessage() {
+    public void listExercises_noExercises_success() {
         exerciseManager.deleteExercise("Push-ups");
         exerciseManager.deleteExercise("Sit-ups");
+
         ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("list", ""), null);
         CommandResult result = exerciseCommand.execute();
         assertEquals("No exercises found.", result.feedbackToUser);
     }
 
-    @Test
-    public void listExercises_oneExerciseInList_shouldReturnListWithOneExercise() {
-        exerciseManager.deleteExercise("Sit-ups");
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("list", ""), null);
-        CommandResult result = exerciseCommand.execute();
-        assertEquals("List of exercises:\nPush-ups\n", result.feedbackToUser);
-    }
 
     @Test
-    public void listExercises_multipleExercisesInList_shouldReturnListWithMultipleExercises() {
-        exerciseManager.addExercise("Squats");
+    public void listExercises_exercisesExist_success() {
         ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("list", ""), null);
         CommandResult result = exerciseCommand.execute();
-        assertEquals("List of exercises:\nPush-ups\nSit-ups\nSquats\n", result.feedbackToUser);
+        assertEquals("List of exercises:\nPush-ups\nSit-ups\n", result.feedbackToUser);
     }
+
+
+
+
+
 
 
 }

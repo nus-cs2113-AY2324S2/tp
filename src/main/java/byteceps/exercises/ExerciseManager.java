@@ -31,6 +31,10 @@ public class ExerciseManager {
         }
     }
 
+    public void deleteAllExercises() {
+        exercises.clear();
+    }
+
     public ArrayList<Exercise> getAllExercises() {
         return new ArrayList<>(exercises);
     }
