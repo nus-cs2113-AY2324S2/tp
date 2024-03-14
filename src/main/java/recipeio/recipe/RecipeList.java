@@ -1,4 +1,4 @@
-package seedu.duke;
+package recipeio.recipe;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,6 @@ public class RecipeList {
     /**
      * Represents the user's list of recipes (ie their recipe book).
      */
-    public static final String SPACE = " ";
     private final ArrayList<Recipe> recipes;
 
     /**
@@ -23,22 +22,22 @@ public class RecipeList {
      * @param input The input from the user.
      */
     public void deleteRecipe(String input) {
-        int taskNumber = Integer.parseInt(input.split(SPACE)[1]) - 1;
-        if (taskNumber >= tasks.size() || taskNumber < 0) {
-            ui.noValidNumberPrinter(input);
+        int recipeNumber = Integer.parseInt(input.split(" ")[1]) - 1;
+        if (recipeNumber >= recipes.size() || recipeNumber < 0) {
+            System.out.println("Sorry, there were no recipes with that number.");
         } else {
-            Task selectedTask = tasks.get(taskNumber);
-            tasks.remove(taskNumber);
-            ui.deleteTaskPrinter(selectedTask, tasks);
+            Recipe selectedRecipe = recipes.get(recipeNumber);
+            recipes.remove(recipeNumber);
+            System.out.println("Deleted that recipe!");
         }
     }
 
     /**
      * Adds a recipe to the list.
      *
-     * @param newTask The new recipe to be added.
+     * @param recipe The new recipe to be added.
      */
-    public void addTask(Recipe recipe) {
+    public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
     }
 
@@ -54,7 +53,7 @@ public class RecipeList {
     /**
      * Returns the recipe at the specified index.
      *
-     * @param index The index of the task.
+     * @param index The index of the recipe.
      * @return The recipe at the specified index.
      */
     public Recipe get(int index) {
@@ -79,7 +78,7 @@ public class RecipeList {
                 }
                 counter += 1;
             }
-            System.out.println(output.toString());
+            System.out.println(output);
         }
     }
 
@@ -94,7 +93,7 @@ public class RecipeList {
             System.out.println("Sorry, you have no recipes to find matches with. Try adding some!");
         } else {
             for (int i = 0; i < recipes.size(); i += 1) {
-                if (recipes.get(i).getName().contains(keyword)) {
+                if (recipes.get(i).name.contains(keyword)) {
                     matches.addRecipe(recipes.get(i));
                 }
             }
@@ -114,7 +113,6 @@ public class RecipeList {
                 }
                 System.out.println("Here are your matches:\n" + output);
             }
-        }
         }
     }
 }
