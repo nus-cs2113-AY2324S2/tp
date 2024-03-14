@@ -58,6 +58,10 @@ public class Ui {
         printBreakLine();
     }
 
+    public void printExitMessage() {
+        System.out.println("Enjoy your bouquet! Thank you for using Florizz");
+        printBreakLine();
+    }
 
 
 }
