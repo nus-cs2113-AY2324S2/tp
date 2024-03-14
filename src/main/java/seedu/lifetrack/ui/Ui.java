@@ -13,8 +13,8 @@ import java.util.Scanner;
  * information using the calorieIn method from the CalorieList class.
  */
 public class Ui {
-    public static void readUserInput() {
 
+    public static void readUserInput(CalorieList calorieList) {
         String line;
         Scanner in = new Scanner(System.in);
         if(in.hasNextLine()) {
@@ -22,8 +22,8 @@ public class Ui {
             while (!line.equalsIgnoreCase("bye")) {
                 if (line.trim().isEmpty()) {
                     System.out.println("Please enter a non empty Input!");
-                } else if (line.startsWith("calories in")) {
-                    CalorieList.calorieIn(line);
+                } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
+                    calorieList.addEntry(line);
                 } else if (line.startsWith("list")) {
                     CalorieList.printCalorieList();
                 }
