@@ -1,9 +1,6 @@
 package ActiveEdge.Parser;
 
-import ActiveEdge.Command.ActiveEdgeException;
-import ActiveEdge.Command.HelpCommand;
-import ActiveEdge.Command.ListMealsCommand;
-import ActiveEdge.Command.LogMealCommand;
+import ActiveEdge.Command.*;
 import ActiveEdge.Task.LogMeals;
 import ActiveEdge.FoodData;
 
@@ -27,7 +24,7 @@ public class Parser {
             String[] parts = input.split(" ");
             String inputTrimmed = input.trim();
             if (inputTrimmed.startsWith("c")) { //shows calorie
-
+                new ShowCaloriesCommand();
             } else if (inputTrimmed.startsWith("w")) { //shows water
 
             } else if (inputTrimmed.startsWith("g")) {  //shows goals
