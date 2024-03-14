@@ -36,6 +36,10 @@ public class Parser {
         //extracts date, time, activity, calories_in portion from input
         String date = parts[1].trim();
         String time = parts[2].trim();
+        return getNewCalorieInEntry(parts, date, time);
+    }
+
+    private static Entry getNewCalorieInEntry(String[] parts, String date, String time) throws InvalidInputException {
         String description = parts[3].trim();
         String strCalories = parts[4].trim();
         //ensures that all inputs are not empty
@@ -49,8 +53,7 @@ public class Parser {
         Calorie caloriesConsumed = new Calorie(calories, true);
 
         //create Object Entry to be returned
-        Entry newCalorieInEntry = new Entry(activityToAdd, caloriesConsumed);
-        return newCalorieInEntry;
+        return new Entry(activityToAdd, caloriesConsumed);
     }
 
 }

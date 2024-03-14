@@ -5,6 +5,7 @@ import seedu.lifetrack.ui.Ui;
 
 import java.util.Scanner;
 
+
 public class LifeTrack {
     /**
      * Main entry-point for the java.lifetrack.LifeTrack application.
@@ -21,11 +22,7 @@ public class LifeTrack {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         CalorieList calorieList = new CalorieList();
+        Ui ui = new Ui(calorieList);
         Ui.readUserInput();
-        byeMessage();
-    }
-
-    public static void byeMessage() {
-        System.out.println("Bye! See you again soon ^^");
     }
 }
