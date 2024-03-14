@@ -22,4 +22,8 @@ public class TravelActivity {
         this.taskIsDone = taskIsDone;
     }
 
+    public String getPlan(){
+        return travelActivity;
+    }
+
 }
