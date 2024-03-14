@@ -142,5 +142,4 @@ class WorkoutListTest {
         // Call the method or code that should throw the exception
         assertThrows(CustomExceptions.OutOfBounds.class, WorkoutList::getLatestRun);
     }
-
 }

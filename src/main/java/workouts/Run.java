@@ -1,12 +1,13 @@
 package workouts;
 import java.time.LocalDate;
 import utility.Constant;
+import utility.CustomExceptions;
 public class Run extends Workout{
-    protected Integer[] times;
-    protected double distance;
+    protected static Integer[] times;
+    protected static double distance;
     protected LocalDate date = null;
-    protected String pace;
-    protected boolean isHourPresent;
+    protected static String pace;
+    protected static boolean isHourPresent;
 
     // overloaded constructor for optional date parameter
     public Run(String stringTime, String stringDistance) {
@@ -28,12 +29,15 @@ public class Run extends Workout{
      * Returns string format of time taken for run.
      * @return
      */
-    public String getTimes() {
+    public String getTimes() throws CustomExceptions {
+
         if (isHourPresent) {
             return times[0] + ":" + times[1] + ":" + times[2];
         } else {
             return times[0] + ":" + times[1];
         }
+
+
     }
 
     public double getDistance() {
@@ -51,22 +55,22 @@ public class Run extends Workout{
      * @param inputTime String variable representing time taken in either hh:mm:ss or mm:ss format
      * @return A list of integers representing the hours (if present), minutes and seconds.
      */
-    public Integer[] parseTime(String inputTime) {
+    public static Integer[] parseTime(String inputTime)  {
         String[] stringTimeParts = inputTime.split(":");
         int inputLength = stringTimeParts.length;
         Integer[] integerTimes = new Integer[inputLength];
 
         if (inputLength == Constant.MAX_RUNTIME_ARRAY_LENGTH) {
-            this.isHourPresent = true;
+            isHourPresent = true;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
             integerTimes[2] = Integer.parseInt(stringTimeParts[2]);
         } else if (inputLength == Constant.MIN_RUNTIME_ARRAY_LENGTH) {
-            this.isHourPresent = false;
+            isHourPresent = false;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
         } else {
-            System.err.println("Incorrect time format!");
+            System.out.println("Incorrect time format!");
             return null;
         }
         return integerTimes;
@@ -76,7 +80,7 @@ public class Run extends Workout{
      * Method checks if hour has been specified, then returns total seconds.
      * @return The total number of seconds in the run.
      */
-    public int calculateTotalSeconds(){
+    public static int calculateTotalSeconds(){
         int totalSeconds;
 
         if (isHourPresent) {
@@ -91,7 +95,7 @@ public class Run extends Workout{
      * Method calculates the pace of the run.
      * @return
      */
-    public String calculatePace() {
+    public static String calculatePace() {
         int totalSeconds = calculateTotalSeconds();
         double paceInDecimal = ((double) totalSeconds / distance) / 60;
 
@@ -115,7 +119,11 @@ public class Run extends Workout{
         } else{
             printedDate = Constant.NO_DATE_SPECIFIED;
         }
-        return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        try {
+            return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        } catch (CustomExceptions e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

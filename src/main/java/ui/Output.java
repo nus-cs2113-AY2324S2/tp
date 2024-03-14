@@ -50,7 +50,7 @@ public class Output {
     public static void printAddRun(Workout newRun){
         printLine();
         System.out.println(Constant.ADD_RUN);
-        System.out.println(Constant.EXERCISE_HEADER);
+        System.out.println(Constant.RUN_HEADER);
         System.out.println(newRun);
         printLine();
     }
@@ -59,7 +59,7 @@ public class Output {
             printLine();
             Workout latestRun = WorkoutList.getLatestRun();
             String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
-            System.out.println(Constant.EXERCISE_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
             System.out.println(latestRunString);
 
         } catch (CustomExceptions.OutOfBounds e){
@@ -74,7 +74,7 @@ public class Output {
         try{
             printLine();
             ArrayList<Workout> workoutList = WorkoutList.getWorkouts(filter);
-            System.out.println(Constant.EXERCISE_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
 
             for (int i = 0; i < workoutList.size(); i++){
                 int index = i+1;
