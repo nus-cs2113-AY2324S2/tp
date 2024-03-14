@@ -19,35 +19,33 @@ public class BudgetBuddy {
 
         TransactionList transactions = new TransactionList();
         boolean isRunning = true;
+        try{
+            while (isRunning) {
+                String input = in.nextLine();
 
-        while (isRunning) {
-            String input = in.nextLine();
-            try{
                 switch (input.split(" ")[0]) {
                 case "bye":
-                    System.out.println("Goodbye!");
+                    UserInterface.printGoodBye();
                     isRunning = false;
                     break;
                 case "list":
-                    System.out.println("Displaying transactions:");
-                    System.out.println(transactions.getTransactions());
+                    transactions.printTransactions();
                     break;
                 case "delete":
                     transactions.removeTransaction(input);
                     break;
                 case "add":
                     transactions.processTransaction(input);
-                    break;                    
+                    break;
                 default:
-                    System.out.println("Invalid command.");
+                    UserInterface.printNoCommandExists();
                 }
-            } catch(IndexOutOfBoundsException e){
-                UserInterface.printIndexOutOfBounds(e.getMessage());
             }
-
+        } catch(IndexOutOfBoundsException e){
+            UserInterface.printIndexOutOfBounds("Given index id is out of bound",
+                    Integer.parseInt(e.getMessage()));
+        } catch(Exception e){
+            UserInterface.printUnknownError(e.getMessage());
         }
-
-
-
     }
 }

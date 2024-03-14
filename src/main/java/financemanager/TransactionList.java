@@ -2,9 +2,9 @@ package financemanager;
 
 import parser.Parser;
 import transactions.Transaction;
+import ui.UserInterface;
 
 import java.util.ArrayList;
-import ui.UserInterface;
 
 public class TransactionList {
 
@@ -23,6 +23,10 @@ public class TransactionList {
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void printTransactions(){
+        UserInterface.printAllTransactions(transactions);
     }
 
     public void removeTransaction(String input){
