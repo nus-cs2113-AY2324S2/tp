@@ -17,6 +17,11 @@ public class ItemList {
     /**
      * Test method
      */
+
+    public int getItemCount() {
+        return itemList.size();
+    }
+
     public void addItem(Item item) {
         itemList.add(item);
     }
