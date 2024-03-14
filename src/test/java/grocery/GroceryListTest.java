@@ -4,6 +4,7 @@ import exceptions.GitException;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class GroceryListTest {
@@ -32,4 +33,14 @@ public class GroceryListTest {
         }
     }
 
+    @Test
+    public void addGrocery_throwIllegalArgument_exception(){
+        try{
+            GroceryList gl = new GroceryList();
+            gl.addGrocery(new Grocery("InvalidGroceryName", null, null));
+            fail("Expected IllegalArgumentException was not thrown.");
+        } catch (IllegalArgumentException e){
+            assertEquals("The grocery name is invalid.", e.getMessage());
+        }
+    }
 }
