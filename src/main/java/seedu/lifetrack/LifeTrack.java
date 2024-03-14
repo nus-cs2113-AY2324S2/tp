@@ -20,7 +20,7 @@ public class LifeTrack {
                 "L       I    F     E        T   R  R A   A C  C K K\n" +
                 "LLLLL IIIII F     EEEEE    TTTT R   R A   A  CCC K  K\n";
         System.out.println("Hello from\n" + logo);
-
+        System.out.println("What do you want to do today?\n");
         Ui.readUserInput(calorieList);
         byeMessage();
     }

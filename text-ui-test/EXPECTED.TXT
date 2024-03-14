@@ -5,4 +5,6 @@ LLL     I    FFFF  EEEE     T   RRRR  AAAAA C    KK
 L       I    F     E        T   R  R A   A C  C K K
 LLLLL IIIII F     EEEEE    TTTT R   R A   A  CCC K  K
 
+What do you want to do today?
+
 Bye! See you again soon ^^

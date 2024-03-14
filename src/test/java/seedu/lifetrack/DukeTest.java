@@ -2,8 +2,13 @@ package seedu.lifetrack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calorielist.CalorieList;
+import seedu.lifetrack.ui.Ui;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class DukeTest {
     @Test
@@ -34,4 +39,5 @@ class DukeTest {
         calorieList.deleteEntry(-1);
         assertEquals(initialSize, calorieList.getSize());
     }
+
 }

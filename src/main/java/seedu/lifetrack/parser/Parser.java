@@ -5,6 +5,8 @@ import seedu.lifetrack.calorielist.Entry;
 import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.exceptions.InvalidInputException;
 
+import java.util.Objects;
+
 public class Parser {
 
     /**
@@ -34,10 +36,11 @@ public class Parser {
         String command = parts[0].trim();
         String date = parts[1].trim();
         String time = parts[2].trim();
-        return getNewCalorieInEntry(parts, date, time);
+        return getNewCalorieInEntry(parts, date, time, command);
     }
 
-    private static Entry getNewCalorieInEntry(String[] parts, String date, String time) throws InvalidInputException {
+    private static Entry getNewCalorieInEntry(String[] parts, String date, String time, String command)
+            throws InvalidInputException {
         String description = parts[3].trim();
         String strCalories = parts[4].trim();
         //ensures that all inputs are not empty
@@ -48,7 +51,7 @@ public class Parser {
 
         //create objects for Activity, Calorie
         Activity activityToAdd = new Activity(date, time, description);
-        Calorie caloriesConsumed = new Calorie(calories, command == "calories in" ? true : false);
+        Calorie caloriesConsumed = new Calorie(calories, Objects.equals(command, "calories in"));
 
         //create Object Entry to be returned
         return new Entry(activityToAdd, caloriesConsumed);
