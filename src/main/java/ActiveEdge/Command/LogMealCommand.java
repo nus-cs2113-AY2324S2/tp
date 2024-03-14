@@ -32,9 +32,4 @@ public class LogMealCommand {
         return calorieOfFood;
     }
 
-    public int addCalories() {
-        int totalCalories = 0;
-
-        return totalCalories;
-    }
 }
