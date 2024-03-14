@@ -1,7 +1,5 @@
 package seedu.stockpal.commands;
 
-import seedu.stockpal.data.ProductList;
-
 public abstract class Command {
 
 

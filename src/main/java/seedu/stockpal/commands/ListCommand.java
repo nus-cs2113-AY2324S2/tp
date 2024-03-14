@@ -1,6 +1,6 @@
 package seedu.stockpal.commands;
 
-public class ListCommand extends Command {
+public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
 
