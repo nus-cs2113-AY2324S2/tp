@@ -15,7 +15,7 @@ public class InitializeCommand {
 
         String playerName = scanner.nextLine();
         while (playerName.isEmpty()) {
-            playerName = Parser.parseCareer(scanner.nextLine());
+            playerName = Parser.parseName(scanner.nextLine());
         }
 
         ResponseManager.printJobSelectionMessage();
