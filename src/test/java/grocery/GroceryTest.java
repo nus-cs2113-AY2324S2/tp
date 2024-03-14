@@ -1,8 +1,7 @@
 package grocery;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GroceryTest {
     @Test
@@ -11,5 +10,4 @@ class GroceryTest {
         String message = "apple" + ", amount: " + ", expiration: ";
         assertEquals(message, grocery.printGrocery());
     }
-
 }
