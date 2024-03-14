@@ -1,12 +1,12 @@
+package ui;
+
 import org.junit.jupiter.api.Test;
-import ui.CommandType;
-import ui.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ParserTest {
+class ParserUnitTest {
     @Test
     void testAnalyzeInput_validInput() {
         Parser parser = new Parser();
