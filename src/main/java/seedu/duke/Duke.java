@@ -1,8 +1,5 @@
 package seedu.duke;
 
-import model.MenuItem;
-import model.Order;
-
 import java.util.Scanner;
 
 public class Duke {
