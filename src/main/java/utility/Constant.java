@@ -26,4 +26,7 @@ public class Constant {
     public static final String INVALID_PRINT_HISTORY_FILTER = "Invalid filter! Filter is only 'all', 'run' or 'gym'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
     public static final String NO_HISTORY_FOUND = "No history found!";
+    public static final String INVALID_RUN_TIME = "Invalid run time!";
+    public static final String INVALID_GYM_INPUT = "Invalid gym parameters!";
+    public static final String INVALID_GYM_STATION_INDEX = "Invalid gym station index!";
 }
