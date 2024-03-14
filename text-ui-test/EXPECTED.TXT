@@ -1,24 +1,14 @@
     WELCOME TO BYTECEPS
    -------------------------------------------------
-COMMAND: 
-workout 
-ARGUMENTS: 
-{create=WORKOUT_PLAN_NAME}
-
-COMMAND: 
-week 
-ARGUMENTS: 
-{to=DAY, assign=WORKOUT_PLAN_NAME}
-
-COMMAND: 
-week 
-ARGUMENTS: 
-{today=}
-
-COMMAND: 
-bye
-ARGUMENTS: 
-{}
-
+parsed input: exercise, add, bicep curls
+parsing command... exercise
+Adding exercise: bicep curls
+parsed input: exercise, delete, bicep curls
+parsing command... exercise
+Deleting exercise bicep curls
+parsed input: workout, create, arm day
+parsing command... workout
+java.lang.UnsupportedOperationException: This method is to be implemented by child classes
+parsing command... exit
     GOODBYE FOR NOW. STAY HARD!
    -------------------------------------------------
