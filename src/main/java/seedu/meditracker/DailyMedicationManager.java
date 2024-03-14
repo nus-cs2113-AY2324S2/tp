@@ -33,13 +33,26 @@ public class DailyMedicationManager {
     }
 
     /**
+     * Gets the DailyMedication object from the dailyMedications list.
+     * Also converts the index to 0-based indexing before being used.
+     *
+     * @param listIndex Index of the dailyMedications list to update (1-based indexing)
+     * @return DailyMedication object at the corresponding index (0-based indexing)
+     * @throws IndexOutOfBoundsException Out of range index specified
+     */
+    public DailyMedication getDailyMedication(int listIndex) throws IndexOutOfBoundsException {
+        listIndex--; // Decremented to 0-base indexing
+        return dailyMedications.get(listIndex);
+    }
+
+    /**
      * Fetches the corresponding DailyMedication and set the medication to taken
      *
      * @param listIndex Index of the dailyMedications list to update
      * @see DailyMedication#take()
      */
     public void takeDailyMedication(int listIndex) {
-        DailyMedication dailyMedication = dailyMedications.get(listIndex);
+        DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.take();
     }
 
@@ -50,7 +63,7 @@ public class DailyMedicationManager {
      * @see DailyMedication#untake()
      */
     public void untakeDailyMedication(int listIndex) {
-        DailyMedication dailyMedication = dailyMedications.get(listIndex);
+        DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.untake();
     }
 }
