@@ -3,11 +3,7 @@ package seedu.lifetrack;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import seedu.lifetrack.activity.Activity;
 import seedu.lifetrack.calorielist.CalorieList;
-import seedu.lifetrack.calorielist.Entry;
-import seedu.lifetrack.calories.Calorie;
-
 
 class DukeTest {
     @Test
@@ -18,24 +14,24 @@ class DukeTest {
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
-        CalorieList.calorieArrayList.add(new Entry(new Activity("2024-03-14","12:00", "Run"),new Calorie(200,true)));
-        int initialSize = CalorieList.calorieArrayList.size();
-        calorieList.deleteCalorie(1);
-        assertEquals(initialSize - 1, CalorieList.calorieArrayList.size());
-        CalorieList.calorieArrayList.add(new Entry(new Activity("2024-03-14","12:00", "Run"),new Calorie(200,true)));
-        CalorieList.calorieArrayList.add(new Entry(new Activity("2024-03-14","13:00", "Eat"),new Calorie(200,false)));
-        initialSize = CalorieList.calorieArrayList.size();
-        calorieList.deleteCalorie(2);
-        assertEquals(initialSize - 1, CalorieList.calorieArrayList.size());
+        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        int initialSize = calorieList.getSize();
+        calorieList.deleteEntry(1);
+        assertEquals(initialSize - 1, calorieList.getSize());
+        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories in d/2024-03-14 t/13:00 a/Eat c/200");
+        initialSize = calorieList.getSize();
+        calorieList.deleteEntry(2);
+        assertEquals(initialSize - 1, calorieList.getSize());
     }
 
     @Test
     public void testDeleteCalorieInvalidIndex() {
         CalorieList calorieList = new CalorieList();
-        CalorieList.calorieArrayList.add(new Entry(new Activity("2024-03-14","12:00", "Run"),new Calorie(200,true)));
-        int initialSize = CalorieList.calorieArrayList.size();
-        calorieList.deleteCalorie(2); // Index out of bounds
-        calorieList.deleteCalorie(-1);
-        assertEquals(initialSize, CalorieList.calorieArrayList.size());
+        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        int initialSize = calorieList.getSize();
+        calorieList.deleteEntry(2); // Index out of bounds
+        calorieList.deleteEntry(-1);
+        assertEquals(initialSize, calorieList.getSize());
     }
 }

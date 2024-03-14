@@ -12,4 +12,12 @@ public class Entry {
         this.calorie = calorie;
         this.activity= activity;
     }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public Calorie getCalorie() {
+        return calorie;
+    }
 }

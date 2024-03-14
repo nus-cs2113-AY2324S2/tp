@@ -25,7 +25,7 @@ public class Ui {
                 } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
                     calorieList.addEntry(line);
                 } else if (line.startsWith("list")) {
-                    CalorieList.printCalorieList();
+                    calorieList.printCalorieList();
                 }
 
                 if(in.hasNextLine()) {
