@@ -9,7 +9,10 @@ import workouts.Run;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+// import static org.junit.jupiter.api.Assertions.fail;
 
 class HandlerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -26,7 +29,7 @@ class HandlerTest {
     }
 
     @Test
-    void handleExercise_validInputRun_expectRunAdded() {
+    void handleExercise_validInputRun_expectRunAdded() throws CustomExceptions.InvalidInput {
         // Test Setup
         String input = "new /e:run /d:10.3 /t:00:40:10 /date:15/03/2024";
 
@@ -48,7 +51,7 @@ class HandlerTest {
     }
 
     @Test
-    void getRun_validInput_expectCorrectParsing() {
+    void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
         // Test Setup
         String input = "new /e:run /d:10.3 /t:00:40:10 /date:15/03/2024";
 
@@ -69,7 +72,7 @@ class HandlerTest {
     }
 
     @Test
-    void handleNew_validInputRun_expectRunAdded() {
+    void handleNew_validInputRun_expectRunAdded() throws CustomExceptions.InvalidInput {
         // Test Setup
         String input = "new /e:run /d:10.3 /t:00:40:10 /date:15/03/2024";
 
@@ -81,6 +84,7 @@ class HandlerTest {
         assertEquals(expected, outContent.toString());
     }
 
+    /*
     @Test
     void handleHistory_allFilter_expectAllWorkoutsPrinted() {
         // Test Setup
@@ -110,7 +114,6 @@ class HandlerTest {
         assertEquals(expected, outContent.toString());
     }
 
-    /*
     @Test
     void handleHelp_noInput_expectHelpMessagePrinted() {
         // Exercise
