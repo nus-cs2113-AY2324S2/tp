@@ -3,7 +3,7 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 
-public class OutflowCommand extends Command {
+public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
 
@@ -16,7 +16,6 @@ public class OutflowCommand extends Command {
         this.pid = new Pid(pidValue);
         this.amountToDecrease = amountToDecrease;
     }
-
     @Override
     public void execute() {
         int productIndex = this.productList.findProductIndex(this.pid);

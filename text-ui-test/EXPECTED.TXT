@@ -1,6 +1,2 @@
 Welcome to StockPal!
-[new, name, 123, 123.20, something]
-[new, name, 123, 123.20, some]
-[exit]
-throw
 Exiting program, goodbye!

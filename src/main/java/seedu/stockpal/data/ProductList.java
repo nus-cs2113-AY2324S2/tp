@@ -34,6 +34,11 @@ public class ProductList extends ArrayList<Product> {
         return -1;
     }
 
+    public void deleteProduct(Pid productPid) {
+        int productIndex = findProductIndex(productPid);
+        products.remove(productIndex);
+    }
+
     public void updateProduct(int productIndex, Name newName, Quantity newQuantity
             , Description newDescription, Price newPrice) {
         Product updatedProduct = products.get(productIndex);

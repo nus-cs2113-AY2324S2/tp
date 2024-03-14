@@ -8,27 +8,26 @@ import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 
 //@@author Kobot7
-public class EditCommand extends Command {
+public class EditCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "edit";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
             + ": Edits an existing product in the inventory at the specific PID\n"
             + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]";
 
-    ProductList productList;
     Pid pid;
     Name name;
     Quantity quantity;
     Description description;
     Price price;
 
-    public EditCommand(ProductList productList, Pid pid, Name name
-            , Quantity quantity, Description description, Price price) {
+    public EditCommand(ProductList productList, Integer pid, String name,
+                       Integer quantity, Double price, String description) {
         this.productList = productList;
-        this.pid = pid;
-        this.name = name;
-        this.quantity = quantity;
-        this.description = description;
-        this.price = price;
+        this.pid = new Pid(pid);
+        this.name = new Name(name);
+        this.quantity = new Quantity(quantity);
+        this.price = new Price(price);
+        this.description = new Description(description);
     }
 
     @Override

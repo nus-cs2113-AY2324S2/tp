@@ -1,5 +1,7 @@
 package seedu.stockpal;
 
+import seedu.stockpal.commands.Command;
+import seedu.stockpal.commands.ExitCommand;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -9,8 +11,6 @@ import seedu.stockpal.storage.Storage;
 import seedu.stockpal.storage.exception.StorageIOException;
 import seedu.stockpal.ui.Ui;
 
-import java.util.ArrayList;
-
 public class StockPal {
     /**
      * Main entry-point for the java.stockpal.StockPal application.
@@ -18,6 +18,7 @@ public class StockPal {
 
     private static final Storage STORAGE = new Storage();
     private static ProductList productList;
+    private static Parser parser;
 
     public static void main(String[] args) {
         start();
@@ -29,6 +30,7 @@ public class StockPal {
         Ui.printWelcomeMessage();
         try {
             productList = STORAGE.load();
+            parser = new Parser(productList);
         } catch (StockPalException | StorageIOException e) {
             throw new RuntimeException(e); //replace this with Ui.printError(error message);
         }
@@ -43,14 +45,19 @@ public class StockPal {
         do {
             String userInput = Ui.getUserInput();
             try {
-                ArrayList<String> parsed = Parser.parseCommand(userInput);
-                System.out.println(parsed.toString());
-                //execute command and print results
+                Command command = parser.parseCommand(userInput);
+                if (isExitCommand(command)) {
+                    break;
+                }
+                command.execute();
             } catch (InvalidCommandException | InvalidFormatException e) {
                 System.out.println("throw");
-                break;
             }
 
         } while (true); // check if command is exit
+    }
+
+    private static boolean isExitCommand(Command command) {
+        return command instanceof ExitCommand;
     }
 }
