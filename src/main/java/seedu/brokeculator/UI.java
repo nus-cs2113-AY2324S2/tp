@@ -1,10 +1,16 @@
 package seedu.brokeculator;
 
+import java.util.Scanner;
+
 public class UI {
     private static final String STRING_DECORATION = "------------------------------------";
     public static String prettify(String message, String topLineDecoration, String bottomLineDecoration) {
         return topLineDecoration + System.lineSeparator()
                 + message + System.lineSeparator() + bottomLineDecoration;
+    }
+    public static String getUserInput() {
+        Scanner stdinScanner = new Scanner(System.in);
+        return stdinScanner.nextLine();
     }
 
     /**
