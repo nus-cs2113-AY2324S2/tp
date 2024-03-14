@@ -4,8 +4,6 @@ import seedu.lifetrack.calorielist.CalorieList;
 
 import java.util.Scanner;
 
-import static seedu.lifetrack.calorielist.CalorieList.calorieIn;
-
 /**
  * Reads user input from the console and processes it.
  * <p>
@@ -19,25 +17,20 @@ public class Ui {
 
     public static void readUserInput(CalorieList calorieList) {
         String line;
-        Scanner in = new Scanner(System.in);
-        if(in.hasNextLine()) {
-            line = in.nextLine();
-            while (!line.equalsIgnoreCase("bye")) {
-                if (line.trim().isEmpty()) {
-                    System.out.println("Please enter a non empty Input!");
-                } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
-                    calorieList.addEntry(line);
-                } else if (line.startsWith("list")) {
-                    calorieList.printCalorieList();
-                }
+        do {
+            line = new Scanner(System.in).nextLine();
+            handleUserInput(line, calorieList);
+        } while (!line.equalsIgnoreCase("bye"));
+    }
 
-                if(in.hasNextLine()) {
-                    line = in.nextLine();
-                }
-            }
-            printLine();
-        } while (!input.equalsIgnoreCase("bye"));
-        scanner.close();
+    public static void handleUserInput(String line, CalorieList calorieList) {
+        if (line.trim().isEmpty()) {
+            System.out.println("Please enter a non empty Input!");
+        } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
+            calorieList.addEntry(line);
+        } else if (line.startsWith("list")) {
+            calorieList.printCalorieList();
+        }
     }
 
     public static void byeMessage() {
