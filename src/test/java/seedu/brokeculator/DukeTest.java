@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.brokeculator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
