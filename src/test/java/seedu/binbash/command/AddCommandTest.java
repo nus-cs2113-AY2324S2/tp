@@ -10,8 +10,9 @@ public class AddCommandTest {
     @Test
     void execute_item_oneItemInItemList() {
         ItemList itemList = new ItemList();
+        AddCommand addCommand = new AddCommand(itemList, "testItem", "A test item");
 
-        itemList.addItem("testItem", "A test item");
+        addCommand.execute();
         assertEquals(1, itemList.getItemCount());
     }
 }
