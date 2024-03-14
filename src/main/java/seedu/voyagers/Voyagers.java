@@ -1,8 +1,6 @@
 package seedu.voyagers;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
-import seedu.voyagers.Parser;
 
 public class Voyagers {
 
