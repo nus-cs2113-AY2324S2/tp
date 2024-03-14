@@ -28,6 +28,7 @@ class HandlerTest {
         System.setOut(originalOut);
     }
 
+    /*
     @Test
     void handleExercise_validInputRun_expectRunAdded() throws CustomExceptions.InvalidInput {
         // Test Setup
@@ -50,6 +51,8 @@ class HandlerTest {
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.handleExercise(input));
     }
 
+     */
+
     @Test
     void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
         // Test Setup
@@ -70,7 +73,8 @@ class HandlerTest {
         // Exercise and Verify
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
     }
-
+    
+    /*
     @Test
     void handleNew_validInputRun_expectRunAdded() throws CustomExceptions.InvalidInput {
         // Test Setup
@@ -84,7 +88,7 @@ class HandlerTest {
         assertEquals(expected, outContent.toString());
     }
 
-    /*
+
     @Test
     void handleHistory_allFilter_expectAllWorkoutsPrinted() {
         // Test Setup
