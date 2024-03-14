@@ -42,6 +42,7 @@ public class Main {
         manager.addTransaction(shopping);
 
         System.out.println(manager.toString());
+        manager.showLastNTransactions(3);
         sc.close();
     }
 }

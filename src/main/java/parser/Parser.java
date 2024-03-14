@@ -27,7 +27,7 @@ public class Parser {
             break;
         case "view-history":
             int numTransactions = Integer.parseInt(command.split(" ")[1].trim());
-            manager.displayTransactionHistory(numTransactions);
+            manager.showLastNTransactions(numTransactions);
             break;
         case "export-csv":
             // Implement export to CSV functionality
