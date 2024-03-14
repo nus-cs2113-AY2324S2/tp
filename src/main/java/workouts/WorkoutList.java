@@ -23,7 +23,7 @@ public class WorkoutList extends ArrayList<Workout> {
      *
      * @param run Run object
      */
-    protected static void addRun(Run run) {
+    public static void addRun(Run run) {
         runs.add(run);
         addWorkout(run);
     }

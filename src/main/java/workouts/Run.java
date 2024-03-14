@@ -1,6 +1,7 @@
 package workouts;
 import java.time.LocalDate;
 import utility.Constant;
+import utility.CustomExceptions;
 public class Run extends Workout{
     protected Integer[] times;
     protected double distance;
@@ -28,7 +29,8 @@ public class Run extends Workout{
      * Returns string format of time taken for run.
      * @return
      */
-    public String getTimes() {
+    public String getTimes() throws CustomExceptions {
+
         if (isHourPresent) {
             return times[0] + ":" + times[1] + ":" + times[2];
         } else {
@@ -51,7 +53,7 @@ public class Run extends Workout{
      * @param inputTime String variable representing time taken in either hh:mm:ss or mm:ss format
      * @return A list of integers representing the hours (if present), minutes and seconds.
      */
-    public Integer[] parseTime(String inputTime) {
+    public Integer[] parseTime(String inputTime)  {
         String[] stringTimeParts = inputTime.split(":");
         int inputLength = stringTimeParts.length;
         Integer[] integerTimes = new Integer[inputLength];
@@ -66,7 +68,7 @@ public class Run extends Workout{
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
         } else {
-            System.err.println("Incorrect time format!");
+            System.out.println("Incorrect time format!");
             return null;
         }
         return integerTimes;
@@ -79,10 +81,10 @@ public class Run extends Workout{
     public int calculateTotalSeconds(){
         int totalSeconds;
 
-        if (isHourPresent) {
-            totalSeconds = times[0] * 3600 + times[1] * 60  + times[2];
+        if (this.isHourPresent) {
+            totalSeconds = this.times[0] * 3600 + this.times[1] * 60  + this.times[2];
         } else {
-            totalSeconds = times[0] * 60 + times[1];
+            totalSeconds = this.times[0] * 60 + this.times[1];
         }
         return totalSeconds;
     }
@@ -93,7 +95,7 @@ public class Run extends Workout{
      */
     public String calculatePace() {
         int totalSeconds = calculateTotalSeconds();
-        double paceInDecimal = ((double) totalSeconds / distance) / 60;
+        double paceInDecimal = ((double) totalSeconds / this.distance) / 60;
 
         int minutes = (int) paceInDecimal;
         double remainingSeconds = paceInDecimal - minutes;
@@ -115,7 +117,11 @@ public class Run extends Workout{
         } else{
             printedDate = Constant.NO_DATE_SPECIFIED;
         }
-        return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        try {
+            return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        } catch (CustomExceptions e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
