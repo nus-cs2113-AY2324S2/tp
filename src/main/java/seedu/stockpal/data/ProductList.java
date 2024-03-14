@@ -6,4 +6,12 @@ import java.util.ArrayList;
 
 public class ProductList {
     public ArrayList<Product> products = new ArrayList<Product>();
+
+
+    public void addProduct(Product toAdd) {
+
+        products.add(toAdd);
+    }
+
+
 }
