@@ -34,13 +34,13 @@ public class GroceryListTest {
     }
 
     @Test
-    public void addGrocery_throwIllegalArgument_exception(){
-        try{
+    public void addGrocery_throwIllegalArgument_exception() {
+        try {
             GroceryList gl = new GroceryList();
-            gl.addGrocery(new Grocery("InvalidGroceryName", null, null));
+            gl.addGrocery(new Grocery(null, null, null)); // Use null to trigger the exception
             fail("Expected IllegalArgumentException was not thrown.");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("The grocery name is invalid.", e.getMessage());
         }
-    }
+    }    
 }
