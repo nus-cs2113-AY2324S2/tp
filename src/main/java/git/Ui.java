@@ -1,8 +1,10 @@
 package git;
 
+import java.util.List;
 import java.util.Scanner;
 
 import exceptions.GitException;
+import grocery.Grocery;
 
 
 /**
@@ -62,6 +64,34 @@ public class Ui {
                         "exit: exits the program."
         );
     }
+
+    public static void printExpSet(Grocery grocery) {
+        System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
+    }
+
+    public static void printGroceryAdded(Grocery grocery) {
+        System.out.println(grocery.getName() + " added!");
+    }
+
+    public static void printAmtSet(Grocery grocery) {
+        System.out.println(grocery.getName() + ": " + grocery.getAmount());
+    }
+
+    public static void printNoGrocery() {
+        System.out.println("There's no groceries!");
+    }
+
+    public static void printGroceryList(List<Grocery> groceries) {
+        System.out.println("Here are your groceries!");
+        for (Grocery grocery: groceries) {
+            System.out.println(" - " + grocery.printGrocery());
+        }
+    }
+
+    public static void printGroceryRemoved(Grocery grocery, List<Grocery> groceries) {
+        System.out.println("You now have " + groceries.size() + " groceries left");
+    }
+
 
     /**
      * Prints divider for user readability.
