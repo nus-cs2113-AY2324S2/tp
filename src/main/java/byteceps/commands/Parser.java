@@ -34,7 +34,7 @@ public class Parser {
         for (String keyValuePair : argumentKeyValuePairs) {
             String[] currentKV = keyValuePair.split( " ", 2);
             String flag = currentKV[0];
-            String parameter = currentKV[1];
+            String parameter = currentKV.length > 1 ? currentKV[1] : null;
 
             InputArguments currentInputArgument = new InputArguments(flag, parameter);
 
