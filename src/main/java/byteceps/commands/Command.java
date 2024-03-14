@@ -16,9 +16,7 @@ public abstract class Command {
     public Command() {
     }
 
-    public CommandResult execute() {
-        throw new UnsupportedOperationException("This method is to be implemented by child classes");
-    }
+    public abstract CommandResult execute();
 
     public String getAction() {
         return action;
