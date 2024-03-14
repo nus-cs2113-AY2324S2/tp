@@ -1,5 +1,8 @@
 package seedu.stockpal.data.product;
 
+import seedu.stockpal.exceptions.InsufficientAmountException;
+import seedu.stockpal.ui.Ui;
+
 public class Product {
     protected Name name;
     protected Quantity quantity;
@@ -12,7 +15,7 @@ public class Product {
         this.quantity = new Quantity(quantity);
         this.price = new Price(price);
         this.description = new Description(description);
-        this.pid = new Pid();
+        this.pid = new Pid(pid);
     }
 
     public void setName(Name name) {
@@ -37,5 +40,17 @@ public class Product {
 
     public boolean isPidMatch(Pid pid) {
         return this.pid.equals(pid);
+    }
+
+    public void increaseQuantity(Integer amountToChange) {
+        quantity.updateIncreaseQuantity(amountToChange);
+    }
+
+    public void decreaseQuantity(Integer amountToChange) {
+        try {
+            quantity.updateDecreaseQuantity(amountToChange);
+        } catch (InsufficientAmountException e) {
+            Ui.printToScreen("Insufficient amount in inventory. Amount in inventory: " + quantity);
+        }
     }
 }

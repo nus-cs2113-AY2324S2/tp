@@ -26,7 +26,7 @@ public final class Ui {
      *
      * @param messages List of messages to output.
      */
-    private static void printToScreen(String ... messages) {
+    public static void printToScreen(String... messages) {
         for (String message : messages) {
             System.out.println(message.replace("\n", LINE_SEPARATOR));
         }
