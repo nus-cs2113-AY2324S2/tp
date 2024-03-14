@@ -35,5 +35,18 @@ class ItemListTest {
         assertEquals(item.getItemDescription(), "A test item");
     }
 
+    @Test
+    void printList_twoItemsInItemList_correctPrintFormatForBothItems() {
+        ItemList itemList = new ItemList();
 
+        itemList.addItem("testItem", "1");
+        itemList.addItem("testItem", "2");
+
+        String actualOutput = itemList.printList();
+
+        String expectedOutput = "testItem: 1" + System.lineSeparator() +
+                "testItem: 2" + System.lineSeparator();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
 }
