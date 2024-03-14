@@ -21,17 +21,4 @@ public class Balance {
 
         System.out.println("End of Balance List");
     }
-
-//    public static void main(String[] args) {
-//        Map<String, Float> userList = new HashMap<>(Map.of(
-//                "Shaoliang", 5.0f,
-//                "Avril", -5.0f,
-//                "Hafiz", 10.0f,
-//                "Mukund", -10.0f
-//        ));
-//
-//        Balance balance = new Balance("Junxiang", userList);
-//
-//        balance.printBalance();
-//    }
 }
