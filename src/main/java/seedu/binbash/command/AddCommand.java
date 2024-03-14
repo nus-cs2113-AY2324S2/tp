@@ -5,8 +5,12 @@ import seedu.binbash.ItemList;
 
 public class AddCommand extends Command {
     public static final String COMMAND_STRING = "add";
+
     public static final Pattern COMMAND_FORMAT =
-            Pattern.compile("add\\s/n(?<itemName>\\s+)\\s/d(?<itemDescription>\\s+)");
+            Pattern.compile("add\\s+n/(?<itemName>.+?)\\s+d/(?<itemDescription>.+)");
+
+
+
     private String itemName;
     private String itemDescription;
 
