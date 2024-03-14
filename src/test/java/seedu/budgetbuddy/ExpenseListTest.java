@@ -37,9 +37,13 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void addSaving_addingSaving_success() {
-        SavingList savingList = new SavingList();
-        savingList.addSaving("Salary", "1000");
-        assertEquals(1, savingList.getSaving().size());
+    public void addExpense_addingNegativeExpense_exceptionThrown() {
+        ExpenseList expenseList = new ExpenseList();
+        try {
+            expenseList.addExpense("Transport", "-50", "Bus Fare");
+            fail();
+        } catch (Exception e) {
+            assertEquals("java.lang.Exception: Expenses should not be negative", e.getMessage());
+        }
     }
 }
