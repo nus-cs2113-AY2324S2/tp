@@ -2,6 +2,7 @@ package seedu.binbash;
 
 import java.util.regex.Matcher;
 
+import seedu.binbash.command.ByeCommand;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.DeleteCommand;
 import seedu.binbash.command.ListCommand;
@@ -24,7 +25,7 @@ public class Parser {
         case "list":
             return parseListCommand(arguments);
         default:
-            return null;
+            return new ByeCommand(itemList);
         }
     }
 
