@@ -2,9 +2,12 @@ package ActiveEdge.Parser;
 
 import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
+import ActiveEdge.Command.ListMealsCommand;
+import ActiveEdge.Command.LogMealCommand;
 import ActiveEdge.Task.LogMeals;
 import ActiveEdge.FoodData;
 
+import java.util.List;
 
 
 public class Parser {
@@ -13,15 +16,10 @@ public class Parser {
         if (input.contains("help")) {
             new HelpCommand();
         } else if (input.startsWith("log")) {
-            //input parsing logic here to get description, servings, calories from the database
-            String[] parts = input.substring(4).split("m/ | s/");
-            String description = parts[0].trim();
-            String servings = parts[1].trim();
-            String calories = findCalories(description);
-            new LogMeals(description, servings, calories);
+            new LogMealCommand(input);
         } else if (input.startsWith("list")) {
             if (input.trim().length() > 4) { //list meals
-
+                new ListMealsCommand();
             } else { //list both
 
             }
@@ -40,17 +38,6 @@ public class Parser {
                 System.out.println("Hello!\n");
             }
         }
-    }
-
-    private String findCalories(String description) {
-        String calorieOfFood = null;
-        for (String[] food : FoodData.foodItems) {
-            if (food[1].equalsIgnoreCase(description)) { // Match description ignoring case
-                calorieOfFood = food[2];
-                break; // Stop searching once found
-            }
-        }
-        return calorieOfFood;
     }
 
 }
