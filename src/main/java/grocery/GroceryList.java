@@ -89,9 +89,7 @@ public class GroceryList {
     public void removeGrocery(String details) throws NoSuchGroceryException {
         // Assuming the format is "del GROCERY"
         Grocery grocery = getGrocery(details);
-            //System.out.println("I have deleted the task: ");
-            //System.out.println(grocery); //need to toString this to print correctly
-            groceries.remove(grocery);
-            System.out.println("You now have " + groceries.size() + " groceries left");
+        groceries.remove(grocery);
+        System.out.println("You now have " + groceries.size() + " groceries left");
     }
 }

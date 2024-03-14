@@ -46,7 +46,7 @@ public class Git {
             break;
 
         case "del":
-             groceryList.removeGrocery(commandParts[1]);
+            groceryList.removeGrocery(commandParts[1]);
             break;
 
         case "list":
