@@ -17,7 +17,7 @@ public class ProductList extends ArrayList<Product> {
         products.add(toAdd);
     }
 
-    /**
+    /**l
      * Finds product with a specific Pid and
      * returns its index in the product list.
      *
@@ -32,6 +32,11 @@ public class ProductList extends ArrayList<Product> {
             }
         }
         return -1;
+    }
+
+    public void deleteProduct(Pid productPid) {
+        int productIndex = findProductIndex(productPid);
+        products.remove(productIndex);
     }
 
     public void updateProduct(int productIndex, Name newName, Quantity newQuantity
