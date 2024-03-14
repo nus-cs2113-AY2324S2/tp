@@ -46,6 +46,9 @@ public class TransactionList {
     }
 
     public void processTransaction(String input) {
-        addTransaction(parser.parseTransaction(input));
+        Transaction t = parser.parseTransaction(input);
+        addTransaction(t);
+        String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
+        UserInterface.printAddMessage(fetchData);
     }
 }
