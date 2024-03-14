@@ -26,9 +26,14 @@ public class InitializeCommand {
         }
 
         Profile profile = new Profile(playerName, jobType);
+        System.out.println(getProfile(profile));
 
         ResponseManager.printWelcomeMessage(profile);
 
         scanner.close();
+    }
+
+    public static String getProfile(Profile profile) {
+        return profile.toString();
     }
 }
