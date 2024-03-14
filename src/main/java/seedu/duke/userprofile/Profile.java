@@ -14,6 +14,10 @@ public class Profile {
         this.occupation = occupation;
     }
 
+    public String outputName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "Your name is :" + name + '\n'
