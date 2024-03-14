@@ -46,5 +46,8 @@ public class TransactionManager {
         String outflowTransactions = outflows.lastNTransactions(n);
         System.out.println("Inflows:\n" + inflowTransactions + "\nOutflows:\n" + outflowTransactions);
     }
-    
+
+    public String toSave() {
+        return inflows.toSave() + outflows.toSave();
+    }
 }

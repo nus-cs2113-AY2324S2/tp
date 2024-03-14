@@ -40,4 +40,9 @@ public abstract class Transaction<T> {
         String baseString = String.format("Name: %s, Amount: %.2f, Date: %s", name, amount, date.toString());
         return baseString;
     }
+    
+    public String toSave() {
+        String baseString = String.format("%s|%.2f|%s|%s\n", name, amount, date.toString(), category);
+        return baseString;
+    }
 }

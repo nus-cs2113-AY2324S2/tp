@@ -1,14 +1,16 @@
 package financeproject;
 import java.util.Scanner;
 
-import financialtransactions.Inflow;
-import financialtransactions.Outflow;
+//import financialtransactions.Inflow;
+//import financialtransactions.Outflow;
 import financialtransactions.TransactionManager;
+import storage.Storage;
 import user.Authentication;
 import user.BaseUser;
 
 public class Main {
     public static void main(String[] args) {
+        Storage storage = new Storage("./data");
         BaseUser user = new BaseUser("Bob");
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter password: ");
@@ -20,7 +22,8 @@ public class Main {
             System.out.println("Password is incorrect");
         }
 
-        TransactionManager manager = new TransactionManager();
+        TransactionManager manager = storage.loadFile();
+        /*
         Inflow income = new Inflow("Salary payment", 400.00, "23/05/2022 1900");
         income.setCategory(Inflow.Category.INCOME);
         manager.addTransaction(income);
@@ -40,8 +43,9 @@ public class Main {
         Outflow shopping = new Outflow("Shopping", 200, "23/05/2022 2000");
         shopping.setCategory(Outflow.Category.SHOPPING);
         manager.addTransaction(shopping);
-
+         */
         System.out.println(manager.toString());
+        storage.saveFile(manager);
         sc.close();
     }
 }
