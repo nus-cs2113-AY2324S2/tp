@@ -65,7 +65,8 @@ public class CalorieList {
                 Entry entry = calorieArrayList.get(i);
                 Activity activity = entry.getActivity();
                 Calorie calorie = entry.getCalorie();
-                System.out.println((i + 1) + ". Activity: " + activity.getDescription() + ", Calories: " + calorie.getCalories());
+                System.out.println((i + 1) + ". Activity: " + activity.getDescription()
+                        + ", Calories: " + calorie.getCalories());
             }
         }
     }
