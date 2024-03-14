@@ -17,8 +17,13 @@ public class ItemList {
     /**
      * Test method
      */
-    public void addItem(Item item) {
+    public String addItem(String itemName, String itemDescription) {
+        Item item = new Item(itemName, itemDescription);
         itemList.add(item);
+
+        String output = "Noted! I have added the following item into your inventory:"
+                + String.format("\t%s", item);
+        return output;
     }
 
     public String deleteItem(int index) {
