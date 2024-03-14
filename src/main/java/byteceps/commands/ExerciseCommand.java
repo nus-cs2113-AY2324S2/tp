@@ -44,5 +44,16 @@ public class ExerciseCommand extends Command{
             System.out.println("Exercise name cannot be empty.");
         }
     }
+
+    public void listExercises() {
+        ArrayList<Exercise> exercises = exerciseManager.getAllExercises();
+        if (exercises.isEmpty()) {
+            System.out.println("No exercises found.");
+        } else {
+            System.out.println("List of exercises:");
+            for (Exercise exercise : exercises) {
+                System.out.println(exercise.getExerciseName());
+            }
+        }
     }
 }
