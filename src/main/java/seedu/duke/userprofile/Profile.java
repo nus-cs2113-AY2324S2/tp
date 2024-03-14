@@ -7,19 +7,18 @@ public class Profile {
     private final Asset asset;
 
 
-    public Profile(String name, String occupation, int goal) {
-
+    public Profile(String name, String occupation) {
         this.name = name;
         this.health = new Health();
-        this.asset = new Asset(goal);
+        this.asset = new Asset(100000);
         this.occupation = occupation;
     }
 
     @Override
     public String toString() {
-        return "this user's name is :" + this.name + '\n'
-                + "occupation :" + this.occupation + '\n'
-                + "current health :" + health.outputHealth()
+        return "Your name is :" + name + '\n'
+                + "occupation :" + occupation + '\n'
+                + "current health :" + health.outputHealth() + "\n"
                 + "current asset: " + asset.outputAsset();
     }
 }

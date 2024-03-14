@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.ui.ResponseManager;
+import seedu.duke.userprofile.Asset;
+import seedu.duke.userprofile.Health;
+import seedu.duke.userprofile.Profile;
 
 import java.util.Scanner;
 
@@ -8,25 +11,25 @@ import java.util.Scanner;
 public class InitializeCommand {
 
     public static void main (String[] args) {
-        ResponseManager responseManager = new ResponseManager();
 
         Scanner scanner = new Scanner(System.in);
-        responseManager.printInitializationMessage();
+        ResponseManager.printInitializationMessage();
 
         String playerName = scanner.nextLine();
-
-
-        responseManager.printJobSelectionMessage();
-        String jobType = scanner.nextLine();
-
-        // verify user input
-        while (!jobType.equals("Robotics") && !jobType.equals("Semiconductor industry")
-                && !jobType.equals("Artificial intelligence")) {
-            responseManager.printJobSelectionErrorMessage();
-            jobType = scanner.nextLine();
+        while (playerName.isEmpty()) {
+            playerName = Parser.parseCareer(scanner.nextLine());
         }
 
-        System.out.println("Welcome, " + playerName + "! You have chosen a career in " + jobType + ".");
+        ResponseManager.printJobSelectionMessage();
+        String jobType = Parser.parseCareer(scanner.nextLine());
+
+        while (jobType.isEmpty()) {
+            jobType = Parser.parseCareer(scanner.nextLine());
+        }
+
+        Profile profile = new Profile(playerName, jobType);
+
+        ResponseManager.printWelcomeMessage(profile);
 
         scanner.close();
     }
