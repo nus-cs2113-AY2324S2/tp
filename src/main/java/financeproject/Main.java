@@ -47,7 +47,7 @@ public class Main {
 
         ui.printMessage(manager.toString());
         manager.showLastNTransactions(3);
-        //sc.close();
         storage.saveFile(manager);
+        ui.closeScanner();
     }
 }
