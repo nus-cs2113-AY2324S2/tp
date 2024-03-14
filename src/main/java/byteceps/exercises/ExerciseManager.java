@@ -34,4 +34,13 @@ public class ExerciseManager {
     public ArrayList<Exercise> getAllExercises() {
         return new ArrayList<>(exercises);
     }
+
+    public boolean hasExercise(String exerciseName) {
+        for (Exercise exercise : exercises) {
+            if (exercise.getExerciseName().equalsIgnoreCase(exerciseName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
