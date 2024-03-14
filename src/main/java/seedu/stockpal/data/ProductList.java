@@ -17,7 +17,7 @@ public class ProductList extends ArrayList<Product> {
         products.add(toAdd);
     }
 
-    /**l
+    /**
      * Finds product with a specific Pid and
      * returns its index in the product list.
      *
