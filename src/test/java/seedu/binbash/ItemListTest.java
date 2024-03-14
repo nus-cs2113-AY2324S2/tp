@@ -15,4 +15,25 @@ class ItemListTest {
 
         assertEquals(0, itemList.getItemCount());
     }
+
+    @Test
+    void addItem_noItemInItemList_oneItemInItemList() {
+        ItemList itemList = new ItemList();
+
+        itemList.addItem("testItem", "A test item");
+        assertEquals(1, itemList.getItemCount());
+    }
+
+    @Test
+    void addItem_itemNameAndDescription_correctItemNameAndDescription() {
+        ItemList itemList = new ItemList();
+
+        itemList.addItem("testItem", "A test item");
+        Item item = itemList.getItemList().get(0);
+
+        assertEquals(item.getItemName(), "testItem");
+        assertEquals(item.getItemDescription(), "A test item");
+    }
+
+
 }
