@@ -28,4 +28,18 @@ public class SavingListTest {
             savingList.calculateRemainingSavings(initialAmount, totalExpenses);
         });
     }
+
+    @Test
+    public void editSaving_validInput_success() {
+        // Create a SavingList and add some savings
+        SavingList savingList = new SavingList();
+        savingList.addSaving("Salary", String.valueOf(100));
+        savingList.addSaving("Investments", String.valueOf(200));
+
+        // Edit one of the savings
+        savingList.editSaving("Salary", 1, 150);
+
+        // Verify that the saving was edited successfully
+        assertEquals(150, savingList.getSavings().get(0).getAmount(), 0.001);
+    }
 }

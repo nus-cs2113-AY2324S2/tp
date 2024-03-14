@@ -16,6 +16,10 @@ public class SavingList {
         this.initialAmount = 0;
     }
 
+    public ArrayList<Saving> getSavings() {
+        return savings;
+    }
+
     public void findTotalSavings() {
         double totalSavings = 0;
         for (int i = 0; i < savings.size(); i++) {
