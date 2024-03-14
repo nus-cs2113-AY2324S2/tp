@@ -4,6 +4,12 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+Ideas and structure for the Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
+
+Ideas and structure for the User Guide: https://se-education.org/addressbook-level3/UserGuide.html
+
+## Setting up and getting started
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}

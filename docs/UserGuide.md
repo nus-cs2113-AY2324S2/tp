@@ -1,3 +1,8 @@
+<!-- 
+CREDIT: We try to follow the ideas and structure of the following sample user guide:
+https://se-education.org/addressbook-level3/UserGuide.html
+-->
+
 # User Guide
 
 ## Introduction
