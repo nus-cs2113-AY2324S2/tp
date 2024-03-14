@@ -13,3 +13,4 @@ Let's begin tracking!
 ____________________________________________________________
 test
 
+Thank you for using MediTracker. Hope to see you again!
