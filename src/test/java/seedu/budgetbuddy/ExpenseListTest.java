@@ -28,4 +28,18 @@ public class ExpenseListTest {
             assertEquals("java.lang.Exception: Expenses should not be negative", e.getMessage());
         }
     }
+
+    @Test
+    public void addExpense_addingExpense_success() {
+        ExpenseList expenseList = new ExpenseList();
+        expenseList.addExpense("Transport", "50", "Bus Fare");
+        assertEquals(1, expenseList.getExpenses().size());
+    }
+
+    @Test
+    public void addSaving_addingSaving_success() {
+        SavingList savingList = new SavingList();
+        savingList.addSaving("Salary", "1000");
+        assertEquals(1, savingList.getSaving().size());
+    }
 }
