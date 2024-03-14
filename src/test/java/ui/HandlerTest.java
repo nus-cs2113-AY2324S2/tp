@@ -4,12 +4,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utility.CustomExceptions;
-import workouts.Run;
+//import workouts.Run;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 // import static org.junit.jupiter.api.Assertions.fail;
@@ -73,7 +73,7 @@ class HandlerTest {
         // Exercise and Verify
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
     }
-    
+
     /*
     @Test
     void handleNew_validInputRun_expectRunAdded() throws CustomExceptions.InvalidInput {
