@@ -1,4 +1,5 @@
 import financemanager.TransactionList;
+import ui.UserInterface;
 
 import java.util.Scanner;
 
@@ -21,22 +22,29 @@ public class BudgetBuddy {
 
         while (isRunning) {
             String input = in.nextLine();
-
-            switch (input.split(" ")[0]) {
-            case "bye":
-                System.out.println("Goodbye!");
-                isRunning = false;
-                break;
-            case "list":
-                System.out.println("Displaying transactions:");
-                System.out.println(transactions.getTransactions());
-                break;
-            case "add":
-                transactions.processTransaction(input);
-                break;
-            default:
-                System.out.println("Invalid command.");
+            try{
+                switch (input.split(" ")[0]) {
+                case "bye":
+                    System.out.println("Goodbye!");
+                    isRunning = false;
+                    break;
+                case "list":
+                    System.out.println("Displaying transactions:");
+                    System.out.println(transactions.getTransactions());
+                    break;
+                case "delete":
+                    transactions.removeTransaction(input);
+                    break;
+                case "add":
+                    transactions.processTransaction(input);
+                    break;                    
+                default:
+                    System.out.println("Invalid command.");
+                }
+            } catch(IndexOutOfBoundsException e){
+                UserInterface.printIndexOutOfBounds(e.getMessage());
             }
+
         }
 
 

@@ -25,8 +25,15 @@ public class Transaction {
     public String getCategory() {
         return category;
     }
-
+  
     public String getDate() {
         return date;
+    }
+    
+    @Override
+    public String toString() {
+        return  (" Description: " + getDescription() + " | " +
+                " Amount: " + getAmount() + " | " +
+                " Category: " + getCategory()) ;
     }
 }
