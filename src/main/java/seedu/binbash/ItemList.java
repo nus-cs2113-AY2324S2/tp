@@ -34,6 +34,26 @@ public class ItemList {
         return output;
     }
 
+    /**
+     * DO LET ME KNOW IF THE METHOD NAME IS WEIRD. IM RETURNING A STRING REPRESENTATION INSTEAD
+     * OF CALLING SOUT TO STAY CONSISTENT WITH THE OTHER COMMANDS BEHAVIOUR. SO IT DOESN'T ACTUALLY
+     * PRINT THE LIST. IF THERES A BETTER NAME LMK THANKS
+     *
+     * Returns a string representation of all the items in the list. Each item's string
+     * representation is obtained by calling its `toString` method.
+     *
+     * @return A concatenated string of all item representations in the list, each on a new line.
+     */
+    public String printList() {
+        String output = "";
+
+        for (Item item: itemList) {
+            output += item.toString() + System.lineSeparator();
+        }
+
+        return output;
+    }
+
     @Override
     public String toString() {
         return itemList.toString();
