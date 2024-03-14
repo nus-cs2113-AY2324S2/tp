@@ -5,6 +5,7 @@ import seedu.lifetrack.exceptions.InvalidInputException;
 import java.util.ArrayList;
 
 public class CalorieList {
+    
     public static ArrayList<Entry> calorieArrayList;
 
     public CalorieList() {
@@ -39,13 +40,12 @@ public class CalorieList {
      *
      * @param input the input string containing date, time, activity, and calorie count
      */
-    public static void calorieIn(String input) {
+    public static void addEntry(String input) {
         try {
             Entry newEntry = Parser.parseCaloriesIn(input);
             calorieArrayList.add(newEntry);
         } catch (InvalidInputException e) {
-            System.out.println("Ensure you follow format with no missing inputs!:" +
-                    " calories in d/DATE t/TIME a/ACTIVITY c/CALORIES_IN");
+            System.out.println(e.getMessage());
         }
     }
 }

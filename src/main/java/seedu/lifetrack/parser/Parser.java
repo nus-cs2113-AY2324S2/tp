@@ -7,8 +7,6 @@ import seedu.lifetrack.exceptions.InvalidInputException;
 
 public class Parser {
 
-
-
     /**
      * Parses a string input to create an Entry object representing calorie intake.
      *
@@ -33,7 +31,8 @@ public class Parser {
             throw new InvalidInputException();
         }
 
-        //extracts date, time, activity, calories_in portion from input
+        //extracts command, date, time, activity, calories_in portion from input
+        String command = parts[0].trim();
         String date = parts[1].trim();
         String time = parts[2].trim();
         String description = parts[3].trim();
@@ -46,11 +45,10 @@ public class Parser {
 
         //create objects for Activity, Calorie
         Activity activityToAdd = new Activity(date, time, description);
-        Calorie caloriesConsumed = new Calorie(calories, true);
+        Calorie caloriesConsumed = new Calorie(calories, command == "calories in" ? true : false);
 
         //create Object Entry to be returned
         Entry newCalorieInEntry = new Entry(activityToAdd, caloriesConsumed);
         return newCalorieInEntry;
     }
-
 }
