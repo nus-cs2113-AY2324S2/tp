@@ -53,6 +53,31 @@ public class Trip {
         return description;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDates(Date startDate, Date endDate) {
+
+        if (startDate.after(endDate)) {
+            throw new IllegalArgumentException("Start date cannot be after end date");
+        }
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+
+
+
     /**
      * Returns the sub-trips of the current trip.
      * @return the array with sub-trips of the current trip
@@ -67,5 +92,38 @@ public class Trip {
      */
     public void addSubTrip(Trip subTrip) {
         subTrips.add(subTrip);
+    }
+
+    /**
+     * Removes the specified sub-trip from the current trip.
+     * @param subTrip the sub-trip to be removed
+     */
+    public void removeSubTrip(Trip subTrip) {
+        subTrips.remove(subTrip);
+    }
+
+    /**
+     * Removes the sub-trip at the specified index.
+     * @param i the index of the sub-trip to be removed. Index starts from 0.
+     */
+    public void removeSubTrip(int i){
+        try{
+            subTrips.remove(i);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+    }
+
+    /**
+     * Returns the sub-trip at the specified index.
+     * @param i the index of the sub-trip to be returned. Index starts from 0.
+     * @return the sub-trip at the specified index
+     */
+    public Trip getSubTrip(int i){
+        try{
+            return subTrips.get(i);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
     }
 }
