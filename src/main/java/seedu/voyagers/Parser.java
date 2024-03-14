@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Parser {
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
-    private ArrayList<Trip> tripsList;
 
     private static final Calendar defaultStartCalendar = Calendar.getInstance();
     private static final Calendar defaultEndCalendar = Calendar.getInstance();
@@ -22,6 +19,10 @@ public class Parser {
 
     private static final Date DEFAULT_START = defaultStartCalendar.getTime();
     private static final Date DEFAULT_END = defaultEndCalendar.getTime();
+
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+    private ArrayList<Trip> tripsList;
 
     public Parser(ArrayList<Trip> tripsList) {
         this.tripsList = tripsList;
@@ -89,7 +90,8 @@ public class Parser {
             return;
         }
 
-        String start = "-", end = "-";
+        String start = "-";
+        String end = "-";
         for (int i = 2; i < tokens.length; i++) {
             if (tokens[i].toLowerCase().equals("/start") && i + 1 < tokens.length) {
                 start = tokens[i + 1];
@@ -175,7 +177,11 @@ public class Parser {
 
     private void addMainTrip(String[] tokens) {
         StringBuilder sentenceBuilder = new StringBuilder();
-        String name = "-", start = "-", end = "-", location = "-", description = "-";
+        String name = "-";
+        String start = "-";
+        String end = "-";
+        String location = "-";
+        String description = "-";
 
         for (int i = 1; i < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
