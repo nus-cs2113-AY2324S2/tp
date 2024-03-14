@@ -1,7 +1,6 @@
 package seedu.binbash.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.binbash.Item;
 import seedu.binbash.ItemList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
