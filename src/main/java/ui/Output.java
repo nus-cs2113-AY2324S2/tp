@@ -7,6 +7,7 @@ import workouts.WorkoutList;
 import java.util.ArrayList;
 
 public class Output {
+
     /**
     * Prints a horizontal line.
     */
@@ -19,7 +20,8 @@ public class Output {
     */
     public static void printHelp() {
         printLine();
-        System.out.println("Commands List:" + "\n");
+        System.out.println("Commands List:");
+        System.out.println();
         System.out.println("list - prints out the List");
         System.out.println("help - procures command list");
         System.out.println("exit - terminates the bot");
@@ -30,6 +32,15 @@ public class Output {
         printLine();
         System.out.println("bmi format: bmi *parameter*");
         printLine();
+    }
+
+    /**
+     * Prints an ASCII Art depicting the word 'PulsePilot'.
+     */
+    public static void printArt() {
+        System.out.println(" _              _");
+        System.out.println("|_)    |  _  _ |_) o  |  _ _|_");
+        System.out.println("|  |_| | _> (/_|   |  | (_) |_");
     }
 
 
