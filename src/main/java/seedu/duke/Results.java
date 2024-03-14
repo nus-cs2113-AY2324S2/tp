@@ -13,7 +13,7 @@ public class Results {
         totalNumberOfQuestions = ZERO_QUESTIONS;
     }
 
-    private static void calculateScore() {
+    public static void calculateScore() {
         int scorePercentage = numberOfCorrectAnswers / totalNumberOfQuestions * HUNDRED_PERCENT;
         score = numberOfCorrectAnswers + "/" + totalNumberOfQuestions + " (" + scorePercentage + "%)";
     }
