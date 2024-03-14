@@ -19,7 +19,7 @@ public class Duke {
                 travelActivityList.listTasks();
             } else if (line.startsWith("add")){
                 // Adds a travel activity into the list
-                String[] sentence = line.split("add");
+                String[] sentence = line.split(" ");
                 // Checks if the description of the task is empty
                 TravelActivity newTask = new TravelActivity(sentence[1]);
                 travelActivityList.addTask(newTask);

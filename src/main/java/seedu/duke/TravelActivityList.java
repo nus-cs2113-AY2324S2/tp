@@ -30,7 +30,6 @@ public class TravelActivityList {
             }
             taskCount++;
             System.out.println("     " + taskCount +"." + task);
-
         }
     }
 
@@ -56,4 +55,14 @@ public class TravelActivityList {
 
     }
 
+    public String getDescription(String plan){
+        for(TravelActivity travelActivity: travelActivities){
+            if(travelActivity.getPlan().equals(plan)){
+                return travelActivity.getPlan();
+            } else {
+                break;
+            }
+        }
+        return "cant be found";
+    }
 }
