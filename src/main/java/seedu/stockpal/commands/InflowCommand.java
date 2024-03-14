@@ -2,7 +2,6 @@ package seedu.stockpal.commands;
 
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
-import seedu.stockpal.data.product.Quantity;
 
 public class InflowCommand extends Command {
     public static final String COMMAND_KEYWORD = "inflow";

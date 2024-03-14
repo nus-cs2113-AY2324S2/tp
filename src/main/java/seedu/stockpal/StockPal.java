@@ -1,6 +1,5 @@
 package seedu.stockpal;
 
-import seedu.stockpal.commands.InflowCommand;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;

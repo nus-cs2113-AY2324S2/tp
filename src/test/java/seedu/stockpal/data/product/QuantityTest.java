@@ -3,7 +3,9 @@ package seedu.stockpal.data.product;
 import org.junit.jupiter.api.Test;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class QuantityTest {
     @Test
@@ -30,7 +32,7 @@ class QuantityTest {
     }
 
     @Test
-    public void updateDecreaseQuantity_anyInteger_InsufficientAmountExceptionThrown() {
+    public void updateDecreaseQuantity_anyInteger_insufficientAmountExceptionThrown() {
         Quantity quantityObject = new Quantity(10);
         try {
             quantityObject.updateDecreaseQuantity(15);
