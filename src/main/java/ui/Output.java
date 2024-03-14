@@ -38,7 +38,7 @@ public class Output {
      * Prints an ASCII Art depicting the word 'PulsePilot'.
      */
     public static void printArt() {
-        System.out.println(" _              _             ");
+        System.out.println(" _              _");
         System.out.println("|_)    |  _  _ |_) o  |  _ _|_");
         System.out.println("|  |_| | _> (/_|   |  | (_) |_");
     }
