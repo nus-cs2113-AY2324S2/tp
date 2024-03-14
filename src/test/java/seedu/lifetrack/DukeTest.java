@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calorielist.CalorieList;
-import seedu.lifetrack.ui.Ui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 class DukeTest {
     @Test
