@@ -1,8 +1,8 @@
 package model;
 
 public class MenuItem extends Item{
-    public MenuItem(String ID, String name, double unitPrice) {
-        super(ID, name, unitPrice);
+    public MenuItem(String id, String name, double unitPrice) {
+        super(id, name, unitPrice);
     }
 
     @Override
