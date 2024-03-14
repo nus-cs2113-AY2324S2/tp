@@ -1,6 +1,7 @@
 package recipeio;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import recipeio.enums.MealCategory;
@@ -36,5 +37,11 @@ class RecipeIOTest {
         recipes.addRecipe(newRecipe);
         recipes.deleteRecipe(1);
         assertTrue(recipes.getSize() == 0);
+    
+    @Test
+    public void testStringConversion() {
+        Recipe testRecipe = new Recipe("Spaghetti Carbonara", 0, 0, null,
+                MealCategory.LUNCH, null);
+        assertEquals("Spaghetti Carbonara / LUNCH", testRecipe.toString());
     }
 }
