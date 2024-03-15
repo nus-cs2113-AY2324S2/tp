@@ -23,7 +23,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_addExercise_ExerciseCommand() {
+    public void parseCommand_addExercise_exerciseCommand() {
         Parser testParser = new Parser();
         String validInput = "exercise /add deadlift";
         testParser.parseInput(validInput);
@@ -33,7 +33,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_listWorkout_WorkoutCommand() {
+    public void parseCommand_listWorkout_workoutCommand() {
         Parser testParser = new Parser();
         String validInput = "workout /list";
         testParser.parseInput(validInput);
