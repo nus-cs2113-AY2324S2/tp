@@ -5,4 +5,7 @@ public class Pid {
     public Pid(Integer pid) {
         this.pid = pid;
     }
+    public Integer getDescription() {
+        return pid;
+    }
 }

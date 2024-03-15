@@ -8,4 +8,8 @@ public class Price {
                 ? null
                 : price;
     }
+
+    public Double getPrice() {
+        return price;
+    }
 }

@@ -9,6 +9,10 @@ public class Quantity {
         this.quantity = quantity;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
     public void updateIncreaseQuantity(Integer increaseQuantity) {
         quantity += increaseQuantity;
     }

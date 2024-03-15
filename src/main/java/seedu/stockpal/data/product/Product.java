@@ -17,6 +17,24 @@ public class Product {
         this.description = new Description(description);
         this.pid = new Pid(pid);
     }
+    public Name getName() {
+        return name;
+    }
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+    public Pid getPid() {
+        return pid;
+    }
+
 
     public void setName(Name name) {
         this.name = name;
