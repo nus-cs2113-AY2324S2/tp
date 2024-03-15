@@ -8,7 +8,11 @@ import supertracker.command.UpdateCommand;
 import supertracker.command.Command;
 import supertracker.item.Inventory;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
+    private static final String BASE_FLAG = "/";
     private static final String QUIT_COMMAND = "quit";
     private static final String NEW_COMMAND = "new";
     private static final String LIST_COMMAND = "list";
@@ -37,6 +41,7 @@ public class Parser {
      */
     public static Command parseCommand(String input) {
         String commandWord = getCommandWord(input);
+        String params = input.replace(commandWord, "").trim();
 
         Command command;
         switch (commandWord) {
@@ -44,7 +49,7 @@ public class Parser {
             command = new QuitCommand();
             break;
         case NEW_COMMAND:
-            command = parseNewCommand(input);
+            command = parseNewCommand(params);
             break;
         case LIST_COMMAND:
             command = parseListCommand(input);
@@ -59,6 +64,27 @@ public class Parser {
         return command;
     }
 
+    private static String makeStringPattern(String inputParams, String[] paramFlags) {
+        StringBuilder flagBuilder = new StringBuilder();
+        for (String flag : paramFlags) {
+            flagBuilder.append(flag);
+        }
+        String flags = flagBuilder.toString();
+
+        String[] params = inputParams.split("(?=[" + flags + "]" + BASE_FLAG + ")");
+        StringBuilder stringPattern = new StringBuilder();
+
+        for (String paramFlag : paramFlags) {
+            for (String p : params) {
+                if (p.startsWith(paramFlag + BASE_FLAG)) {
+                    stringPattern.append(p);
+                    break;
+                }
+            }
+        }
+
+        return stringPattern.toString().trim();
+    }
 
     private static Command parseUpdateCommand(String input) {
         ExtractDataForNewOrUpdateCommand result = getExtractDataForNewOrUpdateCommand(input);
@@ -133,32 +159,37 @@ public class Parser {
     }
 
     private static Command parseNewCommand(String input) {
-        ExtractDataForNewOrUpdateCommand result = getExtractDataForNewOrUpdateCommand(input);
+        Pattern p = Pattern.compile("n/(?<name>.*) q/(?<quantity>[0-9]*) p/(?<price>[0-9]*(?:.[0-9]*)?)$");
+        String[] flags = {"n", "q", "p"};
+        String newCommandPattern = makeStringPattern(input, flags);
+        Matcher matcher = p.matcher(newCommandPattern);
 
-        if (result.name.isEmpty() || result.quantityString.isEmpty() || result.priceString.isEmpty()) {
-            // throw error (possible to split for unique error messages)
-            System.out.println("empty param");
+        if (!matcher.matches()) {
+            return new InvalidCommand();
         }
-        if (Inventory.contains(result.name)) {
-            // throw error
-            System.out.println("Inventory already contains item");
+
+        String itemName = matcher.group("name").trim();
+        String itemQuantityString = matcher.group("quantity");
+        String itemPriceString = matcher.group("price");
+
+        if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
+            return new InvalidCommand();
         }
 
         // throws NumberFormatException if strings cannot be parsed
-        int quantity = Integer.parseInt(result.quantityString);
-        double price = roundTo2Dp(Double.parseDouble(result.priceString));
+        int itemQuantity = Integer.parseInt(itemQuantityString);
+        double itemPrice = roundTo2Dp(Double.parseDouble(itemPriceString));
 
+//        if (quantity < 0) {
+//            // throw error
+//            System.out.println("quantity less than 0");
+//        }
+//        if (price < 0) {
+//            // throw error
+//            System.out.println("price less than 0");
+//        }
 
-        if (quantity < 0) {
-            // throw error
-            System.out.println("quantity less than 0");
-        }
-        if (price < 0) {
-            // throw error
-            System.out.println("price less than 0");
-        }
-
-        return new NewCommand(result.name, quantity, price);
+        return new NewCommand(itemName, itemQuantity, itemPrice);
     }
 
     private static Command parseListCommand(String input) {

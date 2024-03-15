@@ -1,6 +1,6 @@
 package supertracker.command;
 
-import supertracker.Ui;
+import supertracker.ui.Ui;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 

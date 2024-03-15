@@ -1,6 +1,6 @@
 package supertracker.command;
 
-import supertracker.Ui;
+import supertracker.ui.Ui;
 
 public class InvalidCommand implements Command {
     @Override

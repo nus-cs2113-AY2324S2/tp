@@ -2,6 +2,7 @@ package supertracker;
 
 import supertracker.command.Command;
 import supertracker.parser.Parser;
+import supertracker.ui.Ui;
 
 import java.util.Scanner;
 
