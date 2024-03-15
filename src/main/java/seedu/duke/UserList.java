@@ -31,4 +31,7 @@ public class UserList {
             System.out.println(user.getName());
         }
     }
+    public ArrayList<User> getUsers() {
+        return allUsers;
+    }
 }
