@@ -1,8 +1,9 @@
 package ActiveEdge.Command;
 
+import ActiveEdge.Storage;
+import ActiveEdge.Task.LogWaterTask;
 import ActiveEdge.Task.TaskList;
 import ActiveEdge.Ui.CommandUi;
-import ActiveEdge.Task.WaterTracker;
 
 public class LogWaterCommand extends Command {
     private int quantity;
@@ -13,8 +14,23 @@ public class LogWaterCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, CommandUi ui, Storage storage) throws ActiveEdgeException {
-        WaterTracker waterTracker = new WaterTracker("Water intake", quantity);
-        tasks.add(waterTracker);
-        System.out.println("Successfully logged " + quantity + " ml of water.");
+        if (quantity <= 0) {
+            throw new ActiveEdgeException("Invalid water quantity. Please enter a positive value.");
+        }
+
+        LogWaterTask logWaterTask = new LogWaterTask(quantity);
+        tasks.addTask(logWaterTask);
+        CommandUi.printWaterLogMessage(logWaterTask);
+
+    }
+
+    @Override
+    public void execute() {
+        // Empty implementation for the execute method inherited from Command
+    }
+
+    @Override
+    public void execute(TaskList meal) {
+        // Empty implementation for the execute method inherited from Command
     }
 }

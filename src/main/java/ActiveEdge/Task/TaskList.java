@@ -1,11 +1,13 @@
 package ActiveEdge.Task;
-import ActiveEdge.Task.Task;
 import java.util.ArrayList;
-
 
 public class TaskList {
     // Static constant ArrayList to store Task objects
-    public static final ArrayList<Task> tasksList = new ArrayList<>();
+    public static final ArrayList<Task> tasksList = new ArrayList<Task>();
+
+    public Task getTask(int index) { return tasksList.get(index); }
+
+    public void addTask(Task task) { tasksList.add(task); }
 
     public void add(Task task) {
         tasksList.add(task);
@@ -19,6 +21,7 @@ public class TaskList {
             throw new IndexOutOfBoundsException("Index is out of bounds.");
         }
     }
+
 
     public static int size() {
         return tasksList.size();

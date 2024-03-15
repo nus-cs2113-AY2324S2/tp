@@ -1,21 +1,24 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.Task;
+import ActiveEdge.Storage;
 import ActiveEdge.Task.TaskList;
-import ActiveEdge.Task.WaterTracker;
 import ActiveEdge.Ui.CommandUi;
+import ActiveEdge.Task.ViewWaterTask;
 
 public class ViewWaterIntakeCommand extends Command {
     @Override
     public void execute(TaskList tasks, CommandUi ui, Storage storage) throws ActiveEdgeException {
-        int totalWaterIntake = 0;
-        for (int i = 0; i < tasks.tasksList.size(); i++) {
-            Task task = tasks.tasksList.get(i);
-            if (task instanceof WaterTracker) {
-                totalWaterIntake += ((WaterTracker) task).getQuantity();
-            }
-        }
-
-        System.out.println("Total water intake: " + totalWaterIntake + " ml");
+        int totalWaterIntake = ViewWaterTask.getTotalWaterIntake(tasks.tasksList);
+        CommandUi.printWaterIntakeMessage(totalWaterIntake);
     }
+    @Override
+    public void execute() {
+        // Empty implementation for the execute method inherited from Command
+    }
+
+    @Override
+    public void execute(TaskList meal) {
+        // Empty implementation for the execute method inherited from Command
+    }
+
 }

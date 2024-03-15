@@ -1,7 +1,9 @@
 package ActiveEdge.Command;
-import ActiveEdge.Ui.CommandUi;
-public class ShowCaloriesCommand extends Command {
-    public void execute() {
 
+import ActiveEdge.Ui.CommandUi;
+
+public class ShowCaloriesCommand {
+    public ShowCaloriesCommand() {
+        CommandUi.printShowCalMessage();
     }
 }
