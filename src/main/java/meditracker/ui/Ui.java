@@ -72,11 +72,11 @@ public class Ui {
         return input.nextLine();
     }
 
-    public void printTodayMedsList(List<DailyMedication> dailyMedications) {
-        System.out.println("Here are the medications you have to take today: ");
-        for(DailyMedication dailyMedication : dailyMedications) {
-            int numbering = dailyMedications.indexOf(dailyMedication) + 1;
-            System.out.println("\t" + numbering + ". " + dailyMedication);
+    public <T> void printMedsList(List<T> medications, String listName) {
+        System.out.println("Here are the " + listName + " you have to take today: ");
+        for(T medication : medications) {
+            int numbering = medications.indexOf(medication) + 1;
+            System.out.println("\t" + numbering + ". " + medication);
         }
     }
 }

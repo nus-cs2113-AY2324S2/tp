@@ -71,7 +71,7 @@ public class DailyMedicationManager {
         dailyMedication.untake();
     }
 
-    public void printDailyMedications() {
-        ui.printTodayMedsList(dailyMedications);
+    public void printMedications() {
+        ui.printMedsList(dailyMedications, "Daily Medications");
     }
 }
