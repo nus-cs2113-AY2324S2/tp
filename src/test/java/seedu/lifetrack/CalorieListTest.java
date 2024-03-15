@@ -9,22 +9,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalorieListTest {
 
     @Test
-    public void calorieIn_validInput_entryAdded() {
-//    public void calorieInTest() {
+    public void addEntry_validInput_entryAdded() {
         // Test setup
         CalorieList calorieList = new CalorieList();
-        String validInput = "calories in d/2024-03-14 t/15:30 a/Eat burger c/369";
-        final int INDEX0 = 0;
+        String validInputCalorieIn = "calories in d/2024-03-14 t/15:30 a/Eat burger c/369";
+        String validInputCalorieOut = "calories out d/2024-03-15 t/14:00 a/run c/679";
 
         // Call method to test
-        CalorieList.calorieIn(validInput);
+        calorieList.addEntry(validInputCalorieIn);
+        calorieList.addEntry(validInputCalorieOut);
 
         // Verify that the entry has been added to the list
-        assertEquals(1, CalorieList.calorieArrayList.size());
-        Entry addedEntry = CalorieList.calorieArrayList.get(INDEX0);
-        assertEquals("2024-03-14", addedEntry.getActivity().getDate());
-        assertEquals("15:30", addedEntry.getActivity().getTime());
-        assertEquals("Eat burger", addedEntry.getActivity().getDescription());
-        assertEquals(369, addedEntry.getCalorie().getCalories());
+        assertEquals(2, calorieList.getSize());
+        Entry firstEntry = calorieList.getEntry(0);
+        Entry secondEntry = calorieList.getEntry(1);
+
+        // Check calories intake entry
+        assertEquals("2024-03-14", firstEntry.getActivity().getDate());
+        assertEquals("15:30", firstEntry.getActivity().getTime());
+        assertEquals("Eat burger", firstEntry.getActivity().getDescription());
+        assertEquals(369, firstEntry.getCalorie().getCalories());
+
+        // Check calories outflow entry
+        assertEquals("2024-03-15", secondEntry.getActivity().getDate());
+        assertEquals("14:00", secondEntry.getActivity().getTime());
+        assertEquals("run", secondEntry.getActivity().getDescription());
+        assertEquals(679, secondEntry.getCalorie().getCalories());
     }
 }
