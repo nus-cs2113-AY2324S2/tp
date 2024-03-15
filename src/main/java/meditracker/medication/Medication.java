@@ -14,7 +14,6 @@ public class Medication {
     private String expiryDate;
     private String intakeFreq;
     private String remarks;
-    private boolean isTaken = false;
 
     /**
      * Constructs a Medication object with the specified information.
@@ -35,11 +34,4 @@ public class Medication {
         this.remarks = remarks;
     }
 
-    /**
-     * Gets the status of whether the medication has been taken.
-     * @return true if the medication has been taken, false otherwise.
-     */
-    public boolean getIsTaken() {
-        return isTaken;
-    }
 }

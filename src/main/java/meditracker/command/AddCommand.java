@@ -30,15 +30,15 @@ public class AddCommand extends Command {
      * @param arguments The arguments containing medication information to be parsed.
      */
     public AddCommand(String arguments) throws MediTrackerException {
+        String[] medicineInformation = arguments.split(" ");
         try {
-            String[] medicineInformation = arguments.split(" ");
             medicationName = medicineInformation[MED_NAME];
             medicineQuantity = medicineInformation[MED_QTY];
             medicineDosage = medicineInformation[MED_DOSAGE];
             expiryDate = medicineInformation[MED_EXP];
             intakeFreq = medicineInformation[MED_FREQ];
             remarks = medicineInformation[MED_RMK];
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new MediTrackerException();
         }
     }
