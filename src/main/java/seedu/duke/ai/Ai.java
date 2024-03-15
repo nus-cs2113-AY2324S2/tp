@@ -1,4 +1,4 @@
-package ai;
+package seedu.duke.ai;
 
 import java.util.Random;
 
