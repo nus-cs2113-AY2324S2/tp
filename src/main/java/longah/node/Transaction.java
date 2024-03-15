@@ -24,7 +24,7 @@ public class Transaction {
         // User input format: p/[person owed] p/[person1 owing] a/[amount1] p/[person2 owing] a/[amount2] ...
         String[] splitInput = userInput.split("p/");
 
-        if (splitInput.length < 3) {
+        if (splitInput.length < 3 || !splitInput[0].isEmpty()) {
             // Minimum of 2 people as part of a transaction
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
         }
@@ -88,6 +88,9 @@ public class Transaction {
         }
     }
 
+    public Member getPersonOwed() {
+        return this.personOwed;
+    }
     /**
      * Checks whether the input member name is the owner of a transaction.
      *
@@ -128,5 +131,4 @@ public class Transaction {
         }
         return owner + payee;
     }
-
 }
