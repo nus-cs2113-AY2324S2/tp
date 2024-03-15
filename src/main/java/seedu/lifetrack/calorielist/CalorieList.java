@@ -4,6 +4,8 @@ import seedu.lifetrack.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.parser.Parser;
 import seedu.lifetrack.exceptions.InvalidInputException;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CalorieList {
@@ -12,6 +14,10 @@ public class CalorieList {
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
+    }
+
+    public Entry getEntry(int index) {
+        return calorieArrayList.get(index);
     }
 
     /**
