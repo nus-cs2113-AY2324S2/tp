@@ -1,7 +1,5 @@
 package meditracker.ui;
 
-import meditracker.DailyMedication;
-
 import java.util.List;
 import java.util.Scanner;
 
