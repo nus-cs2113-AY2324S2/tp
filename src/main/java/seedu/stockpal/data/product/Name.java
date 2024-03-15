@@ -7,6 +7,10 @@ public class Name {
         this.name = name;
     }
 
+    public boolean isNull() {
+        return this.name == null;
+    }
+
     @Override
     public String toString() {
         return ("Name: " + name);

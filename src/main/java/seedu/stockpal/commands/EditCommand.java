@@ -29,7 +29,7 @@ public class EditCommand extends ListActionCommand {
         this.price = new Price(price);
         this.description = new Description(description);
     }
-
+    
     @Override
     public void execute() {
         int productIndex = this.productList.findProductIndex(this.pid);
