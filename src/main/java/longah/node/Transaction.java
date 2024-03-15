@@ -91,4 +91,44 @@ public class Transaction {
     public Member getPersonOwed() {
         return this.personOwed;
     }
+    /**
+     * Checks whether the input member name is the owner of a transaction.
+     *
+     * @param memberName String representation of member name to check
+     * @return a boolean value determining whether the input name is the owner of the transaction
+     */
+    public boolean isOwned(String memberName) {
+        return personOwed.isName(memberName);
+    }
+
+    /**
+     * Checks whether the input member name is a payee within the transaction
+     *
+     * @param memberName String representation of member name to check
+     * @return a boolean value determining whether the input name is a payee in the transaction
+     */
+    public boolean isPayee(String memberName) {
+        for (Member member : subtransactions.keySet()) {
+            if (member.isName(memberName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return a string representation of the transaction for printouts
+     */
+    public String toString() {
+        String owner = "Owner: " + personOwed.getName() + "\n";
+        String payee = "";
+        int payeeNo = 1;
+        for (HashMap.Entry<Member, Double> entry : subtransactions.entrySet()) {
+            Member member = entry.getKey();
+            double amount = entry.getValue();
+            payee += String.format("Payee %d: %s Owed amount: %,.2f\n", payeeNo, member.getName(), amount);
+            payeeNo++;
+        }
+        return owner + payee;
+    }
 }

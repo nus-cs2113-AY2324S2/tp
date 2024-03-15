@@ -50,4 +50,159 @@ public class TransactionListTest {
             assertEquals(expectedString, e.getMessage());
         }
     }
+
+    /**
+     * Tests the listing of transactions when there are none stored in the system
+     */
+    @Test
+    public void list_noTransactions_success(){
+        TransactionList transactionList = new TransactionList();
+        String printedOutput = transactionList.listTransactions();
+        assertEquals("", printedOutput);
+    }
+    
+    /*
+    @Test
+    public void list_multiTransactions_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Jack");
+            memberList.addMember("Jane");
+            memberList.addMember("James");
+
+            transactionList.add("p/Jack p/Jane a/100 p/James a/200", memberList);
+            transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
+            String printedOutput = transactionList.listTransactions();
+            String expectedString = "1.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: James Owed amount: 200.00\n" +
+                    "Payee 2: Jane Owed amount: 100.00\n" +
+                    "\n" +
+                    "2.\n" +
+                    "Owner: Jane\n" +
+                    "Payee 1: Jack Owed amount: 150.00\n" +
+                    "Payee 2: James Owed amount: 200.00\n" +
+                    "\n";
+            assertEquals(expectedString, printedOutput);
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+     */
+
+    /**
+     * Tests the listing of payments when the input member does not own any
+     */
+    @Test
+    public void findPayment_noTransactions_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Jack");
+            memberList.addMember("Jane");
+            memberList.addMember("James");
+
+            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
+            String printedOutput = transactionList.findTransactions("James");
+            String expectedString = "James owns the following list of transactions." + "\n";
+            assertEquals(expectedString, printedOutput);
+
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+
+    /*
+    @Test
+    public void findPayment_multiTransactions_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Jack");
+            memberList.addMember("Jane");
+            memberList.addMember("James");
+
+            transactionList.add("p/Jack p/James a/100 p/Jane a/200 ", memberList);
+            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
+            String printedOutput = transactionList.findPayments("Jack");
+            String expectedString = "Jack owns the following list of transactions.\n" +
+                    "1.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: Jane Owed amount: 200.00\n" +
+                    "Payee 2: James Owed amount: 100.00\n" +
+                    "\n" +
+                    "2.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: Jane Owed amount: 150.00\n" +
+                    "Payee 2: James Owed amount: 200.00\n" +
+                    "\n";
+
+            assertEquals(expectedString, printedOutput);
+
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+     */
+
+    /**
+     * Tests the listing of debts when the input member does not have any
+     */
+    @Test
+    public void findDebt_noTransactions_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Jack");
+            memberList.addMember("Jane");
+            memberList.addMember("James");
+
+            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
+            String printedOutput = transactionList.findDebts("Jack");
+            String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
+            assertEquals(expectedString, printedOutput);
+
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+
+
+    /*
+    @Test
+    public void findDebt_multiTransactions_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Jack");
+            memberList.addMember("Jane");
+            memberList.addMember("James");
+
+            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
+            String printedOutput = transactionList.findDebts("James");
+            String expectedString = "James is involved as the payee in the following list of transactions.\n" +
+                    "1.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: Jane Owed amount: 200.00\n" +
+                    "Payee 2: James Owed amount: 100.00\n" +
+                    "\n" +
+                    "2.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: Jane Owed amount: 150.00\n" +
+                    "Payee 2: James Owed amount: 200.00\n"  +
+                    "\n";
+
+            assertEquals(expectedString, printedOutput);
+
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+
+     */
+
 }

@@ -71,4 +71,55 @@ public class TransactionList {
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
+
+    /**
+     * Returns a String printout the list of transactions stored in the system.
+     */
+    public String listTransactions() {
+        int index = 1;
+        String outString = "";
+        for (Transaction transaction : transactions) {
+            outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+            index ++;
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which the member name is involved as the transaction owner
+     *
+     * @param memberName String representation of the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findTransactions(String memberName) {
+        int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", memberName) + "\n";
+        for (Transaction transaction : transactions) {
+            if (transaction.isOwned(memberName)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index ++;
+            }
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which a person is involved as a payee
+     *
+     * @param memberName String representation of the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findDebts(String memberName) {
+        String outString = String.format("%s is involved as the payee in the following list of transactions."
+                , memberName) + "\n";
+        int index = 1;
+        for (Transaction transaction : transactions) {
+            if (transaction.isPayee(memberName)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index ++;
+            }
+        }
+        return outString;
+    }
+
 }
