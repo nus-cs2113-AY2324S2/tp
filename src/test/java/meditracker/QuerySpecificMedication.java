@@ -2,6 +2,7 @@ package meditracker;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class QuerySpecificMedication {
     public void queryMedication_ifContains_expect() {
         String inputString = "Omeprazole";
 
-        ArrayList<String> medications = new ArrayList<String>();
+        List<String> medications = new ArrayList<>();
         String medOne = "Panadol";
         String medTwo = "Omeprazole";
         medications.add(medOne);
