@@ -45,22 +45,25 @@ public class TransactionList<T extends Transaction<?>> {
 
     @Override
     public String toString(){
-        String baseString = "Transactions: \n";
-        Integer index = 1;
+        StringBuilder baseString = new StringBuilder("Transactions: \n");
+        int index = 1;
         for(T transaction : transactionList){
-            baseString += String.format("%d)  %s\n", index, transaction.toString());
+            baseString.append(String.format("%d)  %s\n", index, transaction.toString()));
             index += 1;
         }
-        return baseString;
+        return baseString.toString();
     }
 
     public String toSave() {
-        String baseString = "";
+        StringBuilder baseString = new StringBuilder();
         for (T transaction : transactionList) {
-            baseString += transaction.toSave();
+            baseString.append(transaction.toSave());
         }
-        return baseString;
+        return baseString.toString();
     }
-    
+
+    public void addInflow(Inflow inflow) {
+        transactionList.add((T) inflow);
+    }
 
 }
