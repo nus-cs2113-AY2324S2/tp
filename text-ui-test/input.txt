@@ -1,4 +1,5 @@
 exercise /add bicep curls
+exercise /list
 exercise /delete bicep curls
 workout /create arm day
 exit

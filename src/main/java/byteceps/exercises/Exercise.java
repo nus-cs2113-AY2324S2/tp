@@ -6,4 +6,8 @@ public class Exercise {
     public Exercise(String exerciseName) {
         this.exerciseName = exerciseName;
     }
+
+    public String getExerciseName() {
+        return exerciseName;
+    }
 }
