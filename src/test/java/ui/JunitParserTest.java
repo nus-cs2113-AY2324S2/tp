@@ -15,6 +15,7 @@ public class JunitParserTest {
     @Test
     public void analyzeInput_validInput_success() {
         assertEquals(CommandType.CREATE_ORDER, new Parser().analyzeInput("Create Order -menu 1"));
+        assertEquals(CommandType.VIEW_ORDER, new Parser().analyzeInput("View -order 2"));
     }
 
     @Test
