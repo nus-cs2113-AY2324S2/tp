@@ -1,7 +1,7 @@
 package classify.classgroup;
 
-import classify.student.StudentList;
-import classify.student.Student;
+// import classify.student.StudentList;
+// import classify.student.Student;
 
 /**
  * Class meant to represent a class for students. 
@@ -12,7 +12,7 @@ public class Class {
     public int ageOfStudents;
     public String className;
     public String subject;
-    public StudentList studentList = new StudentList();
+    // public StudentList studentList = new StudentList();
 
     /**
      * Constructor for a class of Students.
@@ -22,14 +22,6 @@ public class Class {
     public Class(int ageOfStudents, String className) {
         this.ageOfStudents = ageOfStudents;
         this.className = className;
-    }
-
-    /**
-     * Add a student as attending this class.
-     * @param s Student to add to the class.
-     */
-    public void addStudent(Student s) {
-        this.studentList.addStudent(s);
     }
 
     /**

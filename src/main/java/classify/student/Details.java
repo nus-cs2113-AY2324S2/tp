@@ -1,6 +1,6 @@
 package classify.student;
 
-import classify.classgroup.Class;
+// import classify.classgroup.Class;
 import java.util.ArrayList;
 
 /**
@@ -12,21 +12,21 @@ public class Details {
     //@@author Cryolian
     public String gender = "unknown";
     public int phoneNumber = 0;
-    public Class currentClass = new Class(0, "Unknown");
+    // public Class currentClass = new Class(0, "Unknown");
     public ArrayList<String> subjects = new ArrayList<>();
     public String lastPaymentDate = "unknown";
     public String remarks = "NA";
-    
+
+    public Details() {
+        
+    }
+     
     public String getGender() {
         return gender;
     }
 
     public int getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public Class getCurrentClass() {
-        return currentClass;
     }
 
     public String getLastPaymentDate() {
@@ -53,7 +53,4 @@ public class Details {
         this.remarks = remarks;
     }
 
-    public void setCurrentClass(Class currentClass) {
-        this.currentClass = currentClass;
-    }
 }
