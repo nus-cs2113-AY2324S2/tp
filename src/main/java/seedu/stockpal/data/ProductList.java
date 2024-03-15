@@ -6,7 +6,7 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
-import seedu.stockpal.parser.Parser;
+
 
 
 import java.util.ArrayList;
