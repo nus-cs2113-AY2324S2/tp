@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class MedicationList {
     /** The list of medications stored in an ArrayList. */
-    public ArrayList<Medication> medications = new ArrayList<Medication>();
+    public List<Medication> medications = new ArrayList<>();
 
     /**
      * Constructs an empty MedicationList.
