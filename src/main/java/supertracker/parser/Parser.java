@@ -77,7 +77,7 @@ public class Parser {
         for (String paramFlag : paramFlags) {
             for (String p : params) {
                 if (p.startsWith(paramFlag + BASE_FLAG)) {
-                    stringPattern.append(p);
+                    stringPattern.append(p.trim()).append(" ");
                     break;
                 }
             }
