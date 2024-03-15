@@ -12,11 +12,15 @@ public class Details {
     //@@author Cryolian
     public String gender = "unknown";
     public int phoneNumber = 0;
-    public Class currentClass = new Class(0, "Unknown");
+    // public Class currentClass = new Class(0, "Unknown");
     public ArrayList<String> subjects = new ArrayList<>();
     public String lastPaymentDate = "unknown";
     public String remarks = "NA";
-    
+
+    public Details() {
+        
+    }
+     
     public String getGender() {
         return gender;
     }
@@ -25,9 +29,9 @@ public class Details {
         return phoneNumber;
     }
 
-    public Class getCurrentClass() {
-        return currentClass;
-    }
+    // public Class getCurrentClass() {
+    //     return currentClass;
+    // }
 
     public String getLastPaymentDate() {
         return lastPaymentDate;
@@ -53,7 +57,7 @@ public class Details {
         this.remarks = remarks;
     }
 
-    public void setCurrentClass(Class currentClass) {
-        this.currentClass = currentClass;
-    }
+    // public void setCurrentClass(Class currentClass) {
+    //     this.currentClass = currentClass;
+    // }
 }

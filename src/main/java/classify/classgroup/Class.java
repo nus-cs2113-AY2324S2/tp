@@ -12,7 +12,7 @@ public class Class {
     public int ageOfStudents;
     public String className;
     public String subject;
-    public StudentList studentList = new StudentList();
+    // public StudentList studentList = new StudentList();
 
     /**
      * Constructor for a class of Students.
@@ -24,13 +24,13 @@ public class Class {
         this.className = className;
     }
 
-    /**
-     * Add a student as attending this class.
-     * @param s Student to add to the class.
-     */
-    public void addStudent(Student s) {
-        this.studentList.addStudent(s);
-    }
+    // /**
+    //  * Add a student as attending this class.
+    //  * @param s Student to add to the class.
+    //  */
+    // public void addStudent(Student s) {
+    //     this.studentList.addStudent(s);
+    // }
 
     /**
      * Get the age of the students attending the class. 
