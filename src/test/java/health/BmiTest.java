@@ -63,4 +63,40 @@ class BmiTest {
         // Assert
         assertEquals(expected, outContent.toString());
     }
+
+    @Test
+    void printBMICategory_overweight_printsCorrectCategory() {
+        // Arrange
+        String expected = "You're overweight." + System.lineSeparator();
+
+        // Act
+        Bmi.printBmiCategory(27.0);
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    void printBMICategory_obese_printsCorrectCategory() {
+        // Arrange
+        String expected = "You're obese." + System.lineSeparator();
+
+        // Act
+        Bmi.printBmiCategory(32.0);
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    void printBMICategory_severelyObese_printsCorrectCategory() {
+        // Arrange
+        String expected = "You're severely obese." + System.lineSeparator();
+
+        // Act
+        Bmi.printBmiCategory(40.0);
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
 }
