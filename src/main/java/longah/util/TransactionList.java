@@ -62,4 +62,46 @@ public class TransactionList {
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
+
+    /**
+     * Prints out the list of transactions stored in the system.
+     */
+    public void listTransactions() {
+        int index = 1;
+        for (Transaction transaction : transactions) {
+            System.out.println(String.format("%d.%s", index, transaction));
+            index ++;
+        }
+    }
+
+    /**
+     * List the list of transactions which a person is involved as the transaction owner
+     * @param memberName String representation of the name of person to search for
+     */
+    public void findPayments(String memberName) {
+        System.out.println(String.format("%s owns the following list of transactions.", memberName));
+        int index = 1;
+        for (Transaction transaction : transactions) {
+            if (transaction.isOwner(memberName)) {
+                System.out.println(String.format("%d.\n%s", index, transaction));
+                index ++;
+            }
+        }
+    }
+
+    /**
+     * List the list of transactions which a person is involved as a payee
+     * @param memberName String representation of the name of person to search for
+     */
+    public void findDebts(String memberName) {
+        System.out.println(String.format("%s is involved as the payee in the following list of transactions.", memberName));
+        int index = 1;
+        for (Transaction transaction : transactions) {
+            if (transaction.isPayee(memberName)) {
+                System.out.println(String.format("%d.\n%s", index, transaction));
+                index ++;
+            }
+        }
+    }
+
 }

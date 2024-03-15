@@ -82,4 +82,13 @@ public class Member {
     public String getName() {
         return this.name;
     }
+
+    /**
+     * Used to check whether the input String matches the name of a member.
+     * @param memberName String representation of a member name
+     * @return A boolean value checking whether the input matches with name.
+     */
+    public boolean isEqual(String memberName) {
+        return name.equals(memberName);
+    }
 }
