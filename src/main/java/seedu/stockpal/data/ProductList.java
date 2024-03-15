@@ -80,4 +80,9 @@ public class ProductList {
     public Product get(int i) {
         return products.get(i);
     }
+
+    public Quantity getProductQuantity (Integer productIndex) {
+        Product updatedProduct = products.get(productIndex);
+        return updatedProduct.getQuantity();
+    }
 }
