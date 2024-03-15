@@ -8,8 +8,9 @@ public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
     private static Integer pid = 1;
-    private final Product toAdd;
     protected ProductList productList;
+    private final Product toAdd;
+
 
 
 
