@@ -18,7 +18,9 @@ public class TextUi {
         this.out = out;
     }
 
-    public String getUserCommand() {return null;}
+    public String getUserCommand() {
+        return null;
+    }
 
     public void showWelcomeMessage() {}
 
