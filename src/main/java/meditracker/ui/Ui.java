@@ -72,7 +72,7 @@ public class Ui {
 
     public <T> void printMedsList(List<T> medications, String listName) {
         System.out.println("Here are the " + listName + " you have to take today: ");
-        for(T medication : medications) {
+        for (T medication : medications) {
             int numbering = medications.indexOf(medication) + 1;
             System.out.println("\t" + numbering + ". " + medication);
         }
