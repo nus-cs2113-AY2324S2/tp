@@ -1,4 +1,4 @@
-package seedu.meditracker.command;
+package meditracker;
 
 import meditracker.command.AddCommand;
 import org.junit.jupiter.api.Test;
