@@ -1,8 +1,7 @@
-package seedu;
+package seedu.bookbuddy;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import seedu.bookbuddy.BookBuddy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,9 +12,6 @@ class BookBuddyTest {
         assertTrue(true);
     }
 
-    @Test
-    void main() {
-    }
 
     @Test
     void addBook() {
@@ -24,7 +20,4 @@ class BookBuddyTest {
         assertEquals("Harry Potter", BookBuddy.bookDetailsList.get(0).getDescription());
     }
 
-    @Test
-    void printList() {
-    }
 }
