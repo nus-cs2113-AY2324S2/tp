@@ -24,6 +24,8 @@ public class ExerciseCommand extends Command {
             return deleteExercise();
         case "list":
             return listExercises();
+        case "edit":
+            return editExercise();
         default:
             throw new UnsupportedOperationException();
         }
@@ -64,5 +66,40 @@ public class ExerciseCommand extends Command {
             }
             return new CommandResult(exerciseList.toString());
         }
+    }
+
+    public CommandResult editExercise() {
+        String prevExerciseName = getActionParameters().trim();
+        ArrayList<InputArguments> newExercise = getAdditionalArguments();
+
+
+        if (prevExerciseName == null || prevExerciseName.isEmpty()) {
+            return new CommandResult("Previous exercise name cannot be empty.");
+        }
+
+        if (newExercise == null || newExercise.size()>1 ) {
+            return new CommandResult("There must be 1 new exercise.");
+        }
+
+        String editFlag=newExercise.get(0).getFlag().trim();
+        String newExerciseName=newExercise.get(0).getParameter().trim();
+
+        if (!editFlag.equalsIgnoreCase("to")) {
+            return new CommandResult("Enter the correct flag for editing exercise: 'to'.");
+        }
+
+        if (newExerciseName == null || newExerciseName.isEmpty()) {
+            return new CommandResult("New exercise name cannot be empty.");
+        }
+
+        if (exerciseManager.hasExercise(prevExerciseName)) {
+
+            exerciseManager.editExercise(prevExerciseName, newExerciseName);
+            return new CommandResult(String.format("Exercise '%s' edited successfully to '%s'.", prevExerciseName,
+                    newExerciseName));
+        } else {
+            return new CommandResult(String.format("Previous exercise '%s' does not exist.", prevExerciseName));
+        }
+
     }
 }
