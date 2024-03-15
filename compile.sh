@@ -5,11 +5,11 @@ SRC_DIR="src"
 BUILD_DIR="build"
 CLASSES_DIR="$BUILD_DIR/classes"
 LIBS_DIR="$BUILD_DIR/libs"
-JAR_NAME="project.jar"
+JAR_NAME="Financer.jar"
 
 
 # Compile the Java files
-find "$SRC_DIR" -name "*.java" > sources.txt
+find "$SRC_DIR" -name "*.java" ! -path "*/test/*" > sources.txt
 javac -d "$CLASSES_DIR" @sources.txt
 rm sources.txt
 
