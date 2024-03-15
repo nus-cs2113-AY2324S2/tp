@@ -1,2 +1,0 @@
-> Hello from Voyagers!
-> Please enter your command:
