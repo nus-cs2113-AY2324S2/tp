@@ -20,5 +20,10 @@ public class Quantity {
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
     }
+
+    @Override
+    public String toString() {
+        return ("Quantity: " + quantity);
+    }
 }
 

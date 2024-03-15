@@ -11,11 +11,10 @@ import seedu.stockpal.data.product.Price;
 
 import java.util.ArrayList;
 
-public class ProductList extends ArrayList<Product> {
+public class ProductList {
     public ArrayList<Product> products = new ArrayList<Product>();
   
     public void addProduct(Product toAdd) {
-
         products.add(toAdd);
     }
 
@@ -67,5 +66,17 @@ public class ProductList extends ArrayList<Product> {
     public void decreaseAmount(int productIndex, Integer amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.decreaseQuantity(amountToDecrease);
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
+    }
+
+    public int getSize() {
+        return products.size();
+    }
+
+    public Product get(int i) {
+        return products.get(i);
     }
 }

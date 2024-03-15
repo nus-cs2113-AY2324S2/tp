@@ -8,4 +8,11 @@ public class Price {
                 ? null
                 : price;
     }
+
+    @Override
+    public String toString() {
+        return "Price: " + ((price == null)
+                ? "[X]"
+                : String.valueOf(price));
+    }
 }

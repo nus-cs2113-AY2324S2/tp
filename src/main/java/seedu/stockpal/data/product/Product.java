@@ -18,6 +18,26 @@ public class Product {
         this.pid = new Pid(pid);
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public Pid getPid() {
+        return pid;
+    }
+
     public void setName(Name name) {
         this.name = name;
     }
@@ -34,10 +54,6 @@ public class Product {
         this.description = description;
     }
 
-    public void setPid(Pid pid) {
-        this.pid = pid;
-    }
-
     public boolean isPidMatch(Pid pid) {
         return this.pid.equals(pid);
     }
@@ -52,5 +68,10 @@ public class Product {
         } catch (InsufficientAmountException e) {
             Ui.printToScreen("Insufficient amount in inventory. Amount in inventory: " + quantity);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "" + this.name;
     }
 }

@@ -87,8 +87,7 @@ public class Parser {
     }
 
     private ListCommand createListCommand() {
-        //return new ListCommand(productList);
-        return new ListCommand();
+        return new ListCommand(productList);
     }
 
     private HelpCommand createHelpCommand() {

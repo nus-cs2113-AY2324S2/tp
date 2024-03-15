@@ -1,9 +1,13 @@
 package seedu.stockpal.ui;
 
 import seedu.stockpal.common.Messages;
+import seedu.stockpal.data.ProductList;
+import seedu.stockpal.data.product.Product;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
 public final class Ui {
     private static final Scanner scanner = new Scanner(System.in);
@@ -38,5 +42,18 @@ public final class Ui {
 
     public static void printGoodbyeMessage() {
         printToScreen(Messages.MESSAGE_GOODBYE);
+    }
+
+    public static void printListTasks(ProductList products) {
+        for (int i = 0; i < products.getSize(); i ++) {
+            Product product = products.get(i);
+            System.out.println((i + 1) + ". " + product);
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(product.getPid());
+            System.out.println(product.getQuantity());
+            System.out.println(product.getPrice());
+            System.out.println(product.getDescription());
+            System.out.println(HORIZONTAL_LINE);
+        }
     }
 }

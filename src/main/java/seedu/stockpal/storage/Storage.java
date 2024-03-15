@@ -41,7 +41,7 @@ public class Storage {
         ProductList productList = new ProductList();
         for (String[] productRow : csvData) {
             try {
-                productList.add(parseProductFromRow(productRow));
+                productList.addProduct(parseProductFromRow(productRow));
             } catch (NumberFormatException e) {
                 throw new StorageIOException("Data file contains erroneous input");
             }

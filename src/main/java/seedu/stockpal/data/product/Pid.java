@@ -5,4 +5,9 @@ public class Pid {
     public Pid(Integer pid) {
         this.pid = pid;
     }
+
+    @Override
+    public String toString() {
+        return ("PID: " + pid);
+    }
 }
