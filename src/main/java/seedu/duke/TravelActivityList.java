@@ -17,6 +17,7 @@ public class TravelActivityList {
      */
     public void addTask(TravelActivity travelActivity){
         travelActivities.add(travelActivity);
+        noOfTasks += 1;
     }
 
     /**
@@ -52,6 +53,7 @@ public class TravelActivityList {
         travelActivities.remove(indexOfTask);
         System.out.println("I have removed this task:");
         System.out.println(removedTask);
+        noOfTasks -=1;
 
     }
 
@@ -59,8 +61,6 @@ public class TravelActivityList {
         for(TravelActivity travelActivity: travelActivities){
             if(travelActivity.getPlan().equals(plan)){
                 return travelActivity.getPlan();
-            } else {
-                break;
             }
         }
         return "cant be found";
