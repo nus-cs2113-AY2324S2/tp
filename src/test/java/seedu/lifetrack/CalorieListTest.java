@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalorieListTest {
 
     @Test
-    public void calorieInTest() {
+    public void calorieIn_validInput_entryAdded() {
+//    public void calorieInTest() {
         // Test setup
         CalorieList calorieList = new CalorieList();
         String validInput = "calories in d/2024-03-14 t/15:30 a/Eat burger c/369";
