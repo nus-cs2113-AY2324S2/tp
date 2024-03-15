@@ -95,7 +95,8 @@ public class LongAh {
                     System.exit(0);
                     return;
                 default:
-                    System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
+                    System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear'," +
+                            " 'addmember', 'listmembers', or 'exit'.");
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);

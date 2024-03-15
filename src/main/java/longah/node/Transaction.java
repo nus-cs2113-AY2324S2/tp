@@ -87,4 +87,8 @@ public class Transaction {
             member.subtractFromBalance(amount);
         }
     }
+
+    public Member getPersonOwed() {
+        return this.personOwed;
+    }
 }
