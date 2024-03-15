@@ -24,9 +24,9 @@ public class TransactionManager {
 
     public boolean removeTransaction(int index, boolean isInflow) {
         if (isInflow) {
-            return inflows.removeTransacitonIndex(index);
+            return inflows.removeTransactionIndex(index);
         } else {
-            return outflows.removeTransacitonIndex(index);
+            return outflows.removeTransactionIndex(index);
         }
     }
 

@@ -1,8 +1,13 @@
 package parser;
 
+import userinteraction.UI;
 import financialtransactions.TransactionManager;
 
 public class Parser {
+    UI ui;
+    public Parser(UI ui) {
+        this.ui = ui;
+    }
     protected static boolean isContinue = true;
 
     public static void parseCommand(String command, TransactionManager manager) {
