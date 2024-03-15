@@ -9,4 +9,9 @@ class DukeTest {
     public void sampleTest() {
         assertTrue(true);
     }
+
+
+     public void sampleTest2() {
+        assertTrue(true);
+    }
 }
