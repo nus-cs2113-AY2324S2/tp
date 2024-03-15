@@ -1,5 +1,7 @@
 package seedu.expense;
 
+import storage.parsing.FileKeyword;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -65,7 +67,7 @@ public class Expense implements Saveable {
      */
     public String getStringRepresentation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
-        return String.format("%s: $%.2f (%s) [%s]",
+        return FileKeyword.EXPENSE + String.format("%s: $%.2f (%s) [%s]",
                 description, amount, date.format(formatter), category.toUpperCase());
     }
 
