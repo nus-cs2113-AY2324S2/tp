@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Solution below adapted by https://stackoverflow.com/questions/58665761
 class UiTest {
     private static final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private static final PrintStream originalOut = System.out;
