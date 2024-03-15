@@ -1,3 +1,5 @@
+package parser.pack;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,21 +18,25 @@ public class Parser {
      * rn it returns nothing but maybe it can return a string of the game name ?
      * whatever makes it flow easier
      */
-    public static void readGame() {
+    public static String readGame() {
         input = readLine();
         if (input == null) {
-            // call function to Ui to say something is wrong with reader
-            // maybe restart program ?
+            // call function to Ui to say something is wrong with reader // maybe restart program ?
+            return ("null input on readGame()");
         }
 
         if (input.equals("Tic Tac Toe")) {
             // call tic tac toe
+            return ("calling ttt");
         } else if (input.equals("Hangman")) {
             // call hangman
+            return ("calling hangman");
         } else if (input.equals("quit")) {
             // call function to tell someone else they want to quit
+            return ("tryna quit");
         } else {
             // call "unknown game entered for Ui to print something and reprompt user
+            return ("unknown game name ! choices: hangman, ttt, or quit");
         }
     }
 
@@ -40,11 +46,11 @@ public class Parser {
      * rn it returns nothing but maybe it can return the int repping the box num ?
      * whatever makes it flow easier
      */
-    public static void readTTMove() {
+    public static String readTTMove() {
         input = readLine();
         if (input == null) {
-            // call function to Ui to say something is wrong with reader
-            // maybe restart program ?
+            // call function to Ui to say something is wrong with reader // maybe restart program ?
+            return ("null input on readTTMove()");
         }
 
         int markBox = 0;
@@ -53,15 +59,19 @@ public class Parser {
         } catch (NumberFormatException e) {
             if (input.equals("quit")) {
                 // tell some other class they wanna quit
-                return;
+                return ("tryna quit ttt");
+                //return;
             }
             // call function to Ui to say "not a number, invalid move"
+            return ("invalid tt input = " + input);
         }
 
         if (markBox < 1 || markBox > 9) {
             // call function to Ui to say "invalid move"
+            return ("invalid tt move = " + markBox);
         } else {
             // call function to TT game to mark that box as user's
+            return ("doing tt move = " + markBox);
         }
     }
 
@@ -79,4 +89,24 @@ public class Parser {
         }
         return null;
     }
+
+    /* public static void main (String ars[]) {
+        System.out.println("\ntest ttt");
+        System.out.println(readGame());
+        System.out.println("\ntest h");
+        System.out.println(readGame());
+        System.out.println("\ntest quit");
+        System.out.println(readGame());
+        System.out.println("\ntest hub");
+        System.out.println(readGame());
+
+        System.out.println("\ntest 1-9");
+        System.out.println(readTTMove());
+        System.out.println("\ntest 13");
+        System.out.println(readTTMove());
+        System.out.println("\ntest quit");
+        System.out.println(readTTMove());
+        System.out.println("\ntest hub");
+        System.out.println(readTTMove());
+    } */
 }
