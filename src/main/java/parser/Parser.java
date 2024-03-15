@@ -2,10 +2,10 @@ package parser;
 
 import financialtransactions.Inflow;
 import financialtransactions.Outflow;
+import userinteraction.UI;
 import financialtransactions.TransactionManager;
 import user.Authentication;
 import user.BaseUser;
-import userinteraction.UI;
 
 public class Parser {
     public boolean isContinue;

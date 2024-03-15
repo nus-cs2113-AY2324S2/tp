@@ -17,22 +17,24 @@ public class TransactionList<T extends Transaction<?>> {
         return this.transactionList.get(n);
     }
 
-    public Boolean addTransaction(T newTransaction){
-        if(newTransaction != null){
+    public boolean addTransaction(T newTransaction){
+        if (newTransaction != null){
             transactionList.add(newTransaction);
             return true;
         }
         return false;
     }
 
+
     public Boolean removeTransactionIndex (int index){
-        if(index >= transactionList.size() || index < 0){
+        if (index >= transactionList.size() || index < 0){
             System.out.println("Invalid Index");
             return false;
         }
         transactionList.remove(index);
         return true;
     }
+
     public double getBalance(){
         double balance = 0.00;
         for(Transaction<?> transaction : transactionList){
@@ -40,6 +42,7 @@ public class TransactionList<T extends Transaction<?>> {
         }
         return balance;
     }
+
     @Override
     public String toString(){
         String baseString = "Transactions: \n";
