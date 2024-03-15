@@ -34,11 +34,4 @@ public class Medication {
         this.remarks = remarks;
     }
 
-    /**
-     * Gets the status of whether the medication has been taken.
-     * @return true if the medication has been taken, false otherwise.
-     */
-    public boolean getIsTaken() {
-        return isTaken;
-    }
 }
