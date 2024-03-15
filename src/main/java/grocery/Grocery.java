@@ -47,7 +47,9 @@ public class Grocery {
     }
 
     public String printGrocery() {
-        return this.name + ", amount: " + this.amount + ", expiration: " + this.expiration;
+        String amt = (this.amount.isEmpty() ) ? "" : ", amount: " + this.amount;
+        String exp = (this.expiration.isEmpty() ) ? "" : ", expiration: " + this.expiration;
+        return this.name + amt + exp;
     }
 }
 
