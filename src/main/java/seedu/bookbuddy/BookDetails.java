@@ -1,4 +1,4 @@
-package seedu.BookBuddy;
+package seedu.bookbuddy;
 
 public class BookDetails {
 

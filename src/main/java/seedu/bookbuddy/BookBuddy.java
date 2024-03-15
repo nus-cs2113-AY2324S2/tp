@@ -1,4 +1,4 @@
-package seedu.BookBuddy;
+package seedu.bookbuddy;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -8,7 +8,7 @@ public class BookBuddy {
     public static ArrayList<BookDetails> bookDetailsList = new ArrayList<>();
     public static void main(String[] args) {
 
-        System.out.println("Hello! We are BookBuddy!");
+        System.out.println("Hello! We are bookbuddy!");
         Scanner scanner = new Scanner(System.in);
         while(true) {
             String input = scanner.nextLine();

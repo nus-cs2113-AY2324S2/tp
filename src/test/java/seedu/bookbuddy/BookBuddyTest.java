@@ -1,11 +1,11 @@
-package seedu.BookBuddy;
+package seedu;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+import seedu.bookbuddy.BookBuddy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.Test;
+
 
 class BookBuddyTest {
     @Test
