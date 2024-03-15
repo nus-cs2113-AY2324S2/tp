@@ -230,9 +230,23 @@ public class Parser {
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
 
-            if (!confirmPartialInfo(name, startDate, endDate, location, description)) {
-                System.out.println("Partial trip information not confirmed. Aborting.");
-                return;
+            if (isPartialTripInfo(name, startDate, endDate, location, description)) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("You are about to add a trip with the following information:");
+                System.out.println("Name: " + name);
+                System.out.println("Start Date: " + (startDate == DEFAULT_START ? "-" : dateFormat.format(startDate)));
+                System.out.println("End Date: " + (endDate == DEFAULT_END ? "-" : dateFormat.format(endDate)));
+                System.out.println("Location: " + location);
+                System.out.println("Description: " + description);
+                System.out.println("Confirm? (Y/N)");
+                String confirmation = null;
+                while(confirmation == null){
+                    confirmation = scanner.nextLine().toLowerCase();
+                }
+                if(!confirmation.toLowerCase().equals("y")){
+                    System.out.println("Add main trip aborted");
+                    return;
+                }
             }
 
             Trip newTrip = new Trip(name, startDate, endDate, location, description);
@@ -266,22 +280,12 @@ public class Parser {
         return false;
     }
 
-    private boolean confirmPartialInfo(String name, Date startDate, Date endDate, String location, String description) {
-        if (!(name.isEmpty() || startDate == DEFAULT_START || endDate == DEFAULT_END
-                || location.isEmpty() || description.isEmpty())) {
+    private boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location, String description) {
+        if (startDate == DEFAULT_START || endDate == DEFAULT_END
+                || location.isEmpty() || description.isEmpty()) {
             return true;
         }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("You are about to add a trip with the following information:");
-        System.out.println("Name: " + name);
-        System.out.println("Start Date: " + (startDate == DEFAULT_START ? "-" : dateFormat.format(startDate)));
-        System.out.println("End Date: " + (endDate == DEFAULT_END ? "-" : dateFormat.format(endDate)));
-        System.out.println("Location: " + location);
-        System.out.println("Description: " + description);
-        System.out.println("Confirm? (Y/N)");
-
-        String confirmation = scanner.nextLine().toLowerCase();
-        return confirmation.equals("y");
+        return false;
     }
 
     private void deleteMainTrip(String[] tokens) {
