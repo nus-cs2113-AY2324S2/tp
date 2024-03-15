@@ -13,9 +13,9 @@ public class Ui {
     /**
      * Displays the welcome message and introduction name.
      */
-    public void showWelcome() {
+    public void showWelcomeMessage() {
         printIntroName();
-        showWelcomeMessage();
+        showWelcome();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Ui {
     /**
      * Displays the welcome message.
      */
-    public void showWelcomeMessage() {
+    public void showWelcome() {
         System.out.println("Welcome to MediTracker, your best companion to track your medicine intake.");
         System.out.println("Let's begin tracking!\n");
     }
@@ -60,6 +60,10 @@ public class Ui {
      */
     public void showExitMessage() {
         System.out.println("Thank you for using MediTracker. Hope to see you again!");
+    }
+
+    public void showAddCommandMessage() {
+        System.out.println("Medicine has been successfully added!");
     }
 
     /**
