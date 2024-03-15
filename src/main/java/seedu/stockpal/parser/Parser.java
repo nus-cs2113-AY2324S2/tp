@@ -21,7 +21,8 @@ import java.util.regex.Pattern;
 public class Parser {
     public static final String DIVIDER = " ";
     public static final Pattern NEW_COMMAND_PATTERN =
-            Pattern.compile("new n/(\\S+) q/(\\d+)(?: p/(\\d+\\.\\d{2}))?(?: d/(.{1,100}))?");
+            Pattern.compile("new n/((?:\\S+\\s*)+) q/(\\d+)(?: p/(\\d+\\.\\d{2}))?(?: d/(.{1,100}))?");
+
     public static final Pattern EDIT_COMMAND_PATTERN =
             Pattern.compile("edit (\\d+)(?: n/(\\S+))?(?: q/(\\d+))?(?: p/(\\d+\\.\\d{2}))?(?: d/(.{1,100}))?");
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
@@ -33,7 +34,10 @@ public class Parser {
     public static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 2;
     public static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 2;
     public static final int START_INDEX = 0;
-    private final ProductList productList;
+    private static final Double EMPTY_PRICE = -0.1;
+
+
+    public final ProductList productList;
     public Parser(ProductList productList) {
         this.productList = productList;
     }
@@ -83,6 +87,7 @@ public class Parser {
     }
 
     private ListCommand createListCommand() {
+        //return new ListCommand(productList);
         return new ListCommand();
     }
 
@@ -113,8 +118,13 @@ public class Parser {
     private EditCommand createEditCommand(ArrayList<String> parsed) {
         Integer pid = Integer.parseInt(parsed.get(0));
         String name = parsed.get(1);
-        Integer quantity = Integer.parseInt(parsed.get(2));
-        Double price = Double.parseDouble(parsed.get(3));
+        Integer quantity = (parsed.get(2) == null)
+                ? null
+                : Integer.parseInt(parsed.get(2));
+
+        Double price = (parsed.get(3) == null)
+                ? null
+                : Double.parseDouble(parsed.get(3));
         String description = parsed.get(4);
 
         return new EditCommand(productList, pid, name, quantity, price, description);
@@ -123,7 +133,9 @@ public class Parser {
     private NewCommand createNewCommand(ArrayList<String> parsed) {
         String name = parsed.get(0);
         Integer quantity = Integer.parseInt(parsed.get(1));
-        Double price = Double.parseDouble(parsed.get(2));
+        Double price = (parsed.get(2) == null)
+                ? EMPTY_PRICE
+                : Double.parseDouble(parsed.get(2));
         String description = parsed.get(3);
 
         return new NewCommand(productList, name, quantity, price, description);
