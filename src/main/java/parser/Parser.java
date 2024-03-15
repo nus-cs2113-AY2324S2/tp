@@ -68,5 +68,9 @@ public class Parser {
         }
         return null;
     }
+
+    public boolean getIsContinue(){
+        return this.isContinue;
+    }
 }
 
