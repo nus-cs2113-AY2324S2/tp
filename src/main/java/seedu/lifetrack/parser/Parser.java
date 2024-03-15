@@ -24,7 +24,8 @@ public class Parser {
      * @throws InvalidInputException if the input string is missing components or
      *                              contains empty fields
      */
-    public static Entry parseCaloriesIn(String input) throws InvalidInputException {
+    public static Entry parseCaloriesInput(String input) throws InvalidInputException {
+        
         //splits string according to d/ , t/ , a/ , c/ keyword
         String[] parts = input.split("d/|t/|a/|c/");
         //parts length less than 5 means that not all split keywords were keyed in
@@ -36,17 +37,19 @@ public class Parser {
         String command = parts[0].trim();
         String date = parts[1].trim();
         String time = parts[2].trim();
-        return getNewCalorieInEntry(parts, date, time, command);
-    }
-
-    private static Entry getNewCalorieInEntry(String[] parts, String date, String time, String command)
-            throws InvalidInputException {
         String description = parts[3].trim();
         String strCalories = parts[4].trim();
+
         //ensures that all inputs are not empty
         if (date.isEmpty() || time.isEmpty() || description.isEmpty() || strCalories.isEmpty()) {
             throw new InvalidInputException();
         }
+        return getNewCalorieEntry(command, date, time, description, strCalories);
+    }
+
+    private static Entry getNewCalorieEntry(String command, String date, String time,
+            String description, String strCalories) throws InvalidInputException {
+
         int calories = Integer.parseInt(strCalories);
 
         //create objects for Activity, Calorie

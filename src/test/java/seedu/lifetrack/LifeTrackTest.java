@@ -1,17 +1,13 @@
 package seedu.lifetrack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
 
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calorielist.CalorieList;
+import seedu.lifetrack.exceptions.InvalidInputException;
 
-
-class DukeTest {
-    @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
+class LifeTrackTest {
 
     @Test
     public void testDeleteCalorieValidIndex() {
@@ -37,4 +33,21 @@ class DukeTest {
         assertEquals(initialSize, calorieList.getSize());
     }
 
+    @Test
+    public void parseCaloriesInput_emptyFields_exceptionThrown() {
+        try {
+            parseCaloriesInput("calories in");
+        } catch (InvalidInputException e) {
+            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCaloriesInput_incompleteFields_exceptionThrown() {
+        try {
+            parseCaloriesInput("calories in d/220224 t/");
+        } catch (InvalidInputException e) {
+            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+        }
+    }
 }

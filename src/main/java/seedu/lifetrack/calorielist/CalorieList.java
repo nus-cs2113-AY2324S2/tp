@@ -1,8 +1,9 @@
 package seedu.lifetrack.calorielist;
 
+import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
+
 import seedu.lifetrack.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
-import seedu.lifetrack.parser.Parser;
 import seedu.lifetrack.exceptions.InvalidInputException;
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class CalorieList {
      */
     public void addEntry(String input) {
         try {
-            Entry newEntry = Parser.parseCaloriesIn(input);
+            Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());

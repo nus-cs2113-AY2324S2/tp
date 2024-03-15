@@ -5,7 +5,6 @@ import seedu.lifetrack.ui.Ui;
 
 import java.util.Scanner;
 
-
 public class LifeTrack {
 
     /**
