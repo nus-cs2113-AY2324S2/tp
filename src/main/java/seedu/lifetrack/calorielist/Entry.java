@@ -17,15 +17,7 @@ public class Entry {
         return activity;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
     public Calorie getCalorie() {
         return calorie;
-    }
-
-    public void setCalorie(Calorie calorie) {
-        this.calorie = calorie;
     }
 }
