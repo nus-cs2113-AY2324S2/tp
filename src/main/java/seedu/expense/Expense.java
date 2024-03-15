@@ -68,4 +68,9 @@ public class Expense implements Saveable {
         return String.format("%s: $%.2f (%s) [%s]",
                 description, amount, date.format(formatter), category.toUpperCase());
     }
+
+    public static Expense getExpenseFromFile(String fileString) throws Exception {
+        // TODO
+        return new Expense(null, 1, null, null);
+    }
 }
