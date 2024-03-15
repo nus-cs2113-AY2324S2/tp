@@ -27,7 +27,7 @@ public class InputTest {
 
     @Test
     // Expect Empty String as function is exited
-    public void handleInputBye_printByeMessage() {
+    public void handleUserInput_inputBye_printByeMessage() {
         CalorieList calorieList = new CalorieList();
         String input = "bye";
         Ui.handleUserInput(input, calorieList);
