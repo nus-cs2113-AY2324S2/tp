@@ -8,15 +8,20 @@ import user.BaseUser;
 import userinteraction.UI;
 
 public class Parser {
-    public static boolean isContinue = true;
-    static UI ui = new UI();
+    public boolean isContinue;
+    UI ui;
 
-    public static void parseCommand(String command, TransactionManager manager) {
+    public Parser() {
+        this.isContinue = true;
+        this.ui = new UI();
+    }
+
+    public String parseCommand(String command, TransactionManager manager) {
         String[] commandParts = command.split(" ");
         String action = commandParts[0];
 
         switch (action) {
-        case "login": ;
+        case "login":
             BaseUser user = new BaseUser(commandParts[1]);
             String password = commandParts[2];
             Authentication auth = user.getAuthentication();
@@ -34,7 +39,7 @@ public class Parser {
             Inflow inflow = new Inflow(inflowName, inflowAmount, inflowDate);
             manager.addTransaction(inflow);
             ui.printMessage("Ok. Added inflow");
-            break;
+            return "Ok. Added inflow";
         case "add-outflow":
             String outflowName = commandParts[1];
             double outflowAmount = Double.parseDouble(commandParts[2]);
@@ -43,7 +48,7 @@ public class Parser {
             Outflow outflow = new Outflow(outflowName, outflowAmount, outflowDate);
             manager.addTransaction(outflow);
             ui.printMessage("Ok. Added outflow");
-            break;
+            return "Ok. Added outflow";
         case "delete-inflow":
             //manager.removeTransaction(1, true);
             break;
@@ -61,6 +66,7 @@ public class Parser {
             System.out.println("Invalid command");
             break;
         }
+        return null;
     }
 }
 

@@ -14,13 +14,13 @@ public class Main {
         Storage storage = new Storage("./data");
         UI ui = new UI();
         ui.printMessage("Welcome. Inorder to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
-
         //TransactionManager manager = storage.loadFile();
         TransactionManager manager = new TransactionManager();
 
-        while (Parser.isContinue) {
+        Parser parser = new Parser();
+        while (parser.isContinue) {
             String command = ui.readInput();
-            Parser.parseCommand(command, manager);
+            parser.parseCommand(command, manager);
             storage.saveFile(manager);
         }
         ui.closeScanner();
