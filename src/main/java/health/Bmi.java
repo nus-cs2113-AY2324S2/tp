@@ -1,7 +1,7 @@
 package health;
 
 /*
- * The BMI class extends the Health class and provides functionality
+ * The Bmi class extends the Health class and provides functionality
  * to calculate and categorise the Body Mass Index based on user's
  * height and weight.
  */
@@ -14,19 +14,19 @@ public class Bmi extends Health {
      * Calculates BMI based on height and weight, prints calculated BMI value,
      * and calls the printBMICategory method.
      */
-    public static void calculateBMI() {
-        double bmi = Health.weight / (Math.pow(Health.height, 2.0));
-        System.out.printf("Your BMI is %.2f", bmi);
+    public static void calculateBmi() {
+        double Bmi = Health.weight / (Math.pow(Health.height, 2.0));
+        System.out.printf("Your BMI is %.2f", Bmi);
         Health.printNewLine();
-        printBMICategory(bmi);
+        printBmiCategory(Bmi);
     }
 
     /*
-     * Prints the BMI category based on the calculated BMI value.
+     * Prints the BMI category based on the calculated Bmi value.
      *
-     * @param BMI The BMI value to categorize.
+     * @param Bmi The BMI value to categorize.
      */
-    public static void printBMICategory(double bmi) {
+    public static void printBmiCategory(double bmi) {
         if (bmi < 18.5) {
             System.out.println("You're underweight.");
         } else if (bmi < 24.9) {
