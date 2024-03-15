@@ -31,7 +31,7 @@ public class ExpenseTest {
 
     @Test
     void testGetStringRepresentation() {
-        String expected = "Lunch: $12.50 (15 March 2023, 02:30 PM) [FOOD]";
+        String expected = "--expense--Lunch: $12.50 (15 March 2023, 02:30 PM) [FOOD]";
         assertEquals(expected, testExpense.getStringRepresentation());
     }
 }
