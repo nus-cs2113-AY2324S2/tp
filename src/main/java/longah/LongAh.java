@@ -56,8 +56,11 @@ public class LongAh {
                 case "add":
                     transactions.add(parts[1], members);
                     break;
-                case "list":
+                case "listdebts":
                     app.listAllDebts();
+                    break;
+                case "listtransactions":
+                    transactions.listTransactions();
                     break;
                 case "delete":
                     if (parts.length == 2) {
@@ -67,7 +70,7 @@ public class LongAh {
                     System.out.println("Invalid command format. Use 'delete INDEX'");
                     }
                     break;
-                case "findPayment":
+                case "findpayment":
                     if (parts.length == 2) {
                     String person = parts[1];
                     transactions.findPayments(person);
@@ -75,7 +78,7 @@ public class LongAh {
                     System.out.println("Invalid command format. Use 'findPayment PERSON'");
                     }
                     break;
-                case "findDebt":
+                case "finddebt":
                     if (parts.length == 2) {
                         String person = parts[1];
                         transactions.findDebts(person);

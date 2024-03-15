@@ -74,9 +74,12 @@ public class TransactionList {
         }
     }
 
-
+    /**
+     * List the list of transactions which a person is involved as the transaction owner
+     * @param memberName String representation of the name of person to search for
+     */
     public void findPayments(String memberName) {
-        System.out.println("%s owns the following list of transactions.");
+        System.out.println(String.format("%s owns the following list of transactions.", memberName));
         int index = 1;
         for (Transaction transaction : transactions) {
             if (transaction.isOwner(memberName)) {
@@ -86,8 +89,12 @@ public class TransactionList {
         }
     }
 
+    /**
+     * List the list of transactions which a person is involved as a payee
+     * @param memberName String representation of the name of person to search for
+     */
     public void findDebts(String memberName) {
-        System.out.println("%s is involved as the payee in the following list of transactions.");
+        System.out.println(String.format("%s is involved as the payee in the following list of transactions.", memberName));
         int index = 1;
         for (Transaction transaction : transactions) {
             if (transaction.isPayee(memberName)) {
