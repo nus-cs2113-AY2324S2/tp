@@ -74,4 +74,8 @@ public abstract class Map {
     public void nextMapBasedOnCommand(Command userCommand){
         userCommand.execute();
     }
+
+    public ArrayList<ArrayList<Character>> getMap(){
+        return storedMap;
+    }
 }
