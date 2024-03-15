@@ -26,14 +26,14 @@ public class Bmi extends Health {
      *
      * @param Bmi The BMI value to categorize.
      */
-    public static void printBmiCategory(double Bmi) {
-        if (Bmi < 18.5) {
+    public static void printBmiCategory(double bmi) {
+        if (bmi < 18.5) {
             System.out.println("You're underweight.");
-        } else if (Bmi < 24.9) {
+        } else if (bmi < 24.9) {
             System.out.println("Great! You're within normal range.");
-        } else if (Bmi < 29.9) {
+        } else if (bmi < 29.9) {
             System.out.println("You're overweight.");
-        } else if (Bmi < 39.9) {
+        } else if (bmi < 39.9) {
             System.out.println("You're obese.");
         } else {
             System.out.println("You're severely obese.");
