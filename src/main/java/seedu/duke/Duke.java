@@ -1,21 +1,23 @@
 package seedu.duke;
 
 import seedu.duke.Ui.Ui;
+import seedu.duke.ai.Ai;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
+    private final Ai ai;
     private final Ui u1;
 
     public Duke() {
+        this.ai = new Ai();
         this.u1 = new Ui();
     }
 
+    /**
+     * Main entry-point for the java.duke.Duke application.
+     */
     public static void main(String[] args) {
         Duke d1=new Duke();
         d1.runLogic();
-
     }
 
     private void runLogic(){
