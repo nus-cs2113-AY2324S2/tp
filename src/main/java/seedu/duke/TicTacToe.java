@@ -1,3 +1,4 @@
+package seedu.duke;
 public class TicTacToe {
     protected static String[] board = new String[9];
 
