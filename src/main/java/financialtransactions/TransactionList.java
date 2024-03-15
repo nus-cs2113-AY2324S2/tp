@@ -26,7 +26,8 @@ public class TransactionList<T extends Transaction<?>> {
     }
 
 
-    public Boolean removeTransactionIndex (int index){
+    public boolean removeTransactionIndex (int index){
+        printTransactionsSafeInfo();
         if (index >= transactionList.size() || index < 0){
             System.out.println("Invalid Index");
             return false;
@@ -62,8 +63,11 @@ public class TransactionList<T extends Transaction<?>> {
         return baseString.toString();
     }
 
-    public void addInflow(Inflow inflow) {
-        transactionList.add((T) inflow);
+    protected void printTransactionsSafeInfo() {
+        int index = 1;
+        for (T transaction : transactionList) {
+            System.out.print(index++);
+            System.out.println(" " + transaction.getName() + " " + transaction.getCategory());
+        }
     }
-
 }
