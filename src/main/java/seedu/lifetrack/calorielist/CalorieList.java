@@ -60,7 +60,7 @@ public class CalorieList {
         if (calorieArrayList.isEmpty()) {
             System.out.println("Your caloric list is empty.");
         } else {
-            System.out.println("Caloric List: ");
+            System.out.println("Caloric List:");
             for (int i = 0; i < calorieArrayList.size(); i++) {
                 Entry entry = calorieArrayList.get(i);
                 Activity activity = entry.getActivity();
