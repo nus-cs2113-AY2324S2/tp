@@ -23,7 +23,6 @@ public class Voyagers {
 
         //Start managing tripList
         System.out.println("Please enter your command:");
-        scanner.nextLine(); // Consume the newline character
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
             if (command.equalsIgnoreCase("exit")) {

@@ -1,0 +1,7 @@
+Welcome to Voyagers!
+What would you like to do today?
+File not found.
+Creating new file...
+File created.
+Index	Name	Start Date	End Date	Location	Description
+Please enter your command:
