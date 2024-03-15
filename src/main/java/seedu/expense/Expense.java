@@ -9,10 +9,10 @@ public class Expense implements Saveable {
     private final double amount;
     private final String category;
 
-    public Expense(String description, LocalDateTime date, double amount, String category) {
+    public Expense(String description, double amount, LocalDateTime date, String category) {
         this.description = description;
-        this.date = date;
         this.amount = amount;
+        this.date = date;
         this.category = category;
     }
 
@@ -33,7 +33,7 @@ public class Expense implements Saveable {
     }
 
     public String getStringRepresentation() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
         return String.format("%s: $%.2f (%s) [%s]",
                 description, amount, date.format(formatter), category.toUpperCase());
     }
