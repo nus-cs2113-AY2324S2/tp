@@ -73,45 +73,49 @@ public class TransactionList {
     }
 
     /**
-     * Prints out the list of transactions stored in the system.
+     * Returns a String printout the list of transactions stored in the system.
      */
-    public void listTransactions() {
+    public String listTransactions() {
         int index = 1;
+        String outString = "";
         for (Transaction transaction : transactions) {
-            System.out.println(String.format("%d.%s", index, transaction));
+            outString = outString + String.format("%d.%s", index, transaction) + "\n";
             index ++;
         }
+        return outString;
     }
 
     /**
-     * List the list of transactions which a person is involved as the transaction owner
+     * Returns a String printout of the list of transactions which the member name is involved as the transaction owner
      * @param memberName String representation of the name of person to search for
      */
-    public void findPayments(String memberName) {
-        System.out.println(String.format("%s owns the following list of transactions.", memberName));
+    public String findPayments(String memberName) {
         int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", memberName) + "\n";
         for (Transaction transaction : transactions) {
             if (transaction.isOwner(memberName)) {
-                System.out.println(String.format("%d.\n%s", index, transaction));
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index ++;
             }
         }
+        return outString;
     }
 
     /**
-     * List the list of transactions which a person is involved as a payee
+     * Return a String printout the list of transactions which a person is involved as a payee
      * @param memberName String representation of the name of person to search for
      */
-    public void findDebts(String memberName) {
-        System.out.println(String.format("%s is involved as the payee in the following list of transactions."
-                , memberName));
+    public String findDebts(String memberName) {
+        String outString = String.format("%s is involved as the payee in the following list of transactions."
+                , memberName);
         int index = 1;
         for (Transaction transaction : transactions) {
             if (transaction.isPayee(memberName)) {
-                System.out.println(String.format("%d.\n%s", index, transaction));
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index ++;
             }
         }
+        return outString;
     }
 
 }
