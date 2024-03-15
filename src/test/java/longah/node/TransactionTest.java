@@ -1,6 +1,5 @@
 package longah.node;
 
-import longah.node.Transaction;
 import longah.util.MemberList;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ public class TransactionTest {
      * Tests the successful creation of a transaction with balances correctly updated.
      */
     @Test
-    public void transactionConstructor_Transaction_success() {
+    public void transactionConstructor_transaction_success() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
