@@ -13,7 +13,8 @@ public class Logic {
         loadExpensesFromFile();
         while (true) {
             try {
-                Command command = mainParser.getCommandFromUserInput();
+                String userInput = UI.getUserInput();
+                Command command = mainParser.getCommandFromUserInput(userInput);
                 command.execute();
                 saveExpensesToFile();
             } catch (Exception e) {
