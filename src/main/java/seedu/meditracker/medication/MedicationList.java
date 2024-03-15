@@ -20,7 +20,7 @@ public class MedicationList {
      * Constructs a MedicationList with the specified list of medications.
      * @param medications The list of medications to be stored.
      */
-    public MedicationList(ArrayList<Medication> medications) {
+    public MedicationList(List<Medication> medications) {
         this.medications = medications;
     }
 }
