@@ -1,7 +1,7 @@
 package ui;
 
 import health.Bmi;
-import health.Health;;
+import health.Health;
 import utility.Command;
 import utility.CustomExceptions;
 import workouts.Run;
