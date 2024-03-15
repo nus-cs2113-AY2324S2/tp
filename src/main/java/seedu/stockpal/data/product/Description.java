@@ -6,6 +6,10 @@ public class Description {
         this.description = description;
     }
 
+    public boolean isNull() {
+        return this.description == null;
+    }
+
     @Override
     public String toString() {
         return "Description: " + ((description == null || description.isEmpty())

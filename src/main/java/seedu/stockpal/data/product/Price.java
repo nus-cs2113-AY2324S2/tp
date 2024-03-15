@@ -9,6 +9,9 @@ public class Price {
                 : price;
     }
 
+    public boolean isNull() {
+        return this.price == null;
+    }
     @Override
     public String toString() {
         return "Price: " + ((price == null)

@@ -21,6 +21,10 @@ public class Quantity {
         }
     }
 
+    public boolean isNull() {
+        return this.quantity == null;
+    }
+
     @Override
     public String toString() {
         return ("Quantity: " + quantity);

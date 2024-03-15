@@ -43,16 +43,17 @@ public class ProductList {
     public void updateProduct(int productIndex, Name newName, Quantity newQuantity
             , Description newDescription, Price newPrice) {
         Product updatedProduct = products.get(productIndex);
-        if (newName != null) {
+
+        if (!newName.isNull()) {
             updatedProduct.setName(newName);
         }
-        if (newQuantity != null) {
+        if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
         }
-        if (newDescription != null) {
+        if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
         }
-        if (newPrice != null) {
+        if (!newPrice.isNull()) {
             updatedProduct.setPrice(newPrice);
         }
         products.set(productIndex, updatedProduct);
