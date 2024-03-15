@@ -14,7 +14,6 @@ public class Medication {
     private String expiryDate;
     private String intakeFreq;
     private String remarks;
-    private boolean isTaken = false;
 
     /**
      * Constructs a Medication object with the specified information.
