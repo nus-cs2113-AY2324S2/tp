@@ -10,4 +10,11 @@ class GroceryTest {
         String message = "apple";
         assertEquals(message, grocery.printGrocery());
     }
+
+    @Test
+    public void printGrocery_correctAmtAndExp() {
+        Grocery grocery = new Grocery("chicken", "1 leg", "soon");
+        String message = "chicken" + ", amount: 1 leg" + ", expiration: soon";
+        assertEquals(message, grocery.printGrocery());
+    }
 }
