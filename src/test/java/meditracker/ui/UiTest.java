@@ -32,7 +32,8 @@ class UiTest {
         Ui ui = new Ui();
         List<DailyMedication> medications = new ArrayList<>(1);
         ui.printMedsList(medications, "Daily Medications");
-        StringBuilder expectedOutput = new StringBuilder("Here are the Daily Medications you have to take today: " + System.lineSeparator());
+        StringBuilder expectedOutput = new StringBuilder("Here are the Daily Medications you have to take today: "
+                + System.lineSeparator());
 
 
         for (DailyMedication dailyMedication : medications) {
