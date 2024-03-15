@@ -8,10 +8,9 @@ class DukeTest {
     @Test
     public void sampleTest() {
         assertTrue(true);
+        assertTrue(true); 
     }
 
 
-     public void sampleTest2() {
-        assertTrue(true);
-    }
+     
 }
