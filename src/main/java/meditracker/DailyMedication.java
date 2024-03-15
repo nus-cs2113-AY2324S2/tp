@@ -35,7 +35,7 @@ public class DailyMedication {
 
     @Override
     public String toString() {
-        String takenIcon = isTaken ? "[X]" : "[ ]";
+        String takenIcon = isTaken ? "[X]" : "[ ]"; // X identify medication as taken
         return String.format("%s %s", takenIcon, name);
     }
 }
