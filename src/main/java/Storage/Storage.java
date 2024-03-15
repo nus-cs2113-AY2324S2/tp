@@ -58,8 +58,8 @@ public class Storage {
                 String lineSkipped = scanner.nextLine();
             }
         } catch(FileNotFoundException e){
-                System.out.println("File does not exist.");
-            }
+            System.out.println("File does not exist.");
+        }
     }
 
     public static void main (String[]args){
