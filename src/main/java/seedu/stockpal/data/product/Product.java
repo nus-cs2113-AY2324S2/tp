@@ -72,6 +72,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "" + getPid() + getName() + getQuantity() + getPrice() + getDescription();
+        return "" + this.name;
     }
 }
