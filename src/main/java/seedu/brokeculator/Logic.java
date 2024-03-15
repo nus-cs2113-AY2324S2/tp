@@ -1,23 +1,27 @@
 package seedu.brokeculator;
 
 public class Logic {
-    public Logic() {
-        GeneralInputParser mainParser = new GeneralInputParser();
-        FileManager fileManager = new FileManager();
-        ExpenseManager expenseManager = new ExpenseManager();
+    private GeneralInputParser mainParser;
+    private FileManager fileManager;
+    private ExpenseManager expenseManager;
+    public Logic(GeneralInputParser mainParser, FileManager fileManager, ExpenseManager expenseManager) {
+        this.mainParser = mainParser;
+        this.fileManager = fileManager;
+        this.expenseManager = expenseManager;
     }
     public void run() {
+        loadExpensesFromFile();
         while (true) {
             try {
                 Command command = mainParser.getCommandFromUserInput();
                 command.execute();
-                fileManager.save();
+                saveExpensesToFile();
             } catch (Exception e) {
                 UI.print("error occured, sus. " + e.getMessage());
             }
         }
     }
-    private void loadTasksFromFile() {
+    private void loadExpensesFromFile() {
         boolean hasNoFileErrors = fileManager.openFile();
         if (!hasNoFileErrors) {
             UI.print("continuing without file");
@@ -28,8 +32,10 @@ public class Logic {
             Command loadCommand = mainParser.getCommandFromFileInput(line);
             loadCommand.execute();
         }
+        //after obtaining a clean expense list, we save it back to the file to remove any corrupted data
+        saveExpensesToFile();
     }
-    private void saveTasksToFile() {
+    private void saveExpensesToFile() {
         String expenseListToSave = expenseManager.getExpensesStringRepresentations();
         fileManager.save(expenseListToSave);
     }

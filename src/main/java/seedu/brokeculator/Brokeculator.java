@@ -5,7 +5,10 @@ public class Brokeculator {
             + System.lineSeparator()
             + "What can I do for you?";
     public static void main(String[] args){
-        Logic driverLogic = new Logic();
+        GeneralInputParser mainParser = new GeneralInputParser();
+        FileManager fileManager = new FileManager();
+        ExpenseManager expenseManager = new ExpenseManager();
+        Logic driverLogic = new Logic(mainParser, fileManager, expenseManager);
         UI.print(GREETING);
         driverLogic.run();
     }
