@@ -18,4 +18,36 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
     }
+
+    // Method to check if the shot resulted in a goal
+    public static boolean goalCheck(int userInput, int save) {
+        return !(userInput == save); // If shoot direction matches save direction, it's not a goal and the returned value is false
+    }
+
+    public static void viewGoalBeforeShot() {
+        System.out.println("_______________________________");
+        System.out.println("|         |         |         |");
+        System.out.println("|         |         |         |");
+        System.out.println("|         |         |         |");
+        System.out.println("|         |         |         |");
+    }
+    public static void viewGoalAfterShot(boolean goalScored) {
+        if(goalScored) {
+            System.out.println("GOAL!!!!");
+            System.out.println("_______________________________");
+            System.out.println("| *    *  |  *  *   | *      *|");
+            System.out.println("|    *    |       * |     *   |");
+            System.out.println("|*   *    | *   *   |  *   *  |");
+            System.out.println("|      *  |    *    |*      * |");
+        }
+        else {
+            System.out.println("no goal :((((");
+            System.out.println("_______________________________");
+            System.out.println("\\         \\         \\         \\");
+            System.out.println(" \\         \\         \\         \\");
+            System.out.println("  \\         \\         \\         \\");
+            System.out.println("   \\         \\         \\         \\");
+        }
+    }
 }
+
