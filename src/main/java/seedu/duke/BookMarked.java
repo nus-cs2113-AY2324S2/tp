@@ -16,7 +16,7 @@ public class BookMarked {
         Scanner in = new Scanner(System.in);
         String newItem = in.nextLine();
 
-        while (!newItem.contains("bye")) {
+        while (!newItem.equalsIgnoreCase("bye")) {
             String[] splitItem = newItem.split(" ");
             if (splitItem[0].matches("/help")) {
                 printHelpMessage();
@@ -80,9 +80,9 @@ public class BookMarked {
         System.out.println("2. To delete current existing book");
         System.out.println("   delete NUMBER_ACCORDING_TO_LIST");
         System.out.println("3. To mark book as borrowed");
-        System.out.println("   borrow NAME_OF_BOOK");
+        System.out.println("   borrow INDEX_OF_BOOK");
         System.out.println("4. To unmark book as returned");
-        System.out.println("   return NAME_OF_BOOK");
+        System.out.println("   return INDEX_OF_BOOK");
         System.out.println("5. To list all the books added");
         System.out.println("   list");
     }

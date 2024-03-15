@@ -11,7 +11,7 @@ public class BookTest {
     }
 
     @Test
-    public void getBorrowedStatus_Borrowed_returnFormattedString() {
+    public void getBorrowedStatus_borrowed_returnFormattedString() {
         Book testBook = new Book("Test Book");
         testBook.isBorrowed = true;
         assertEquals(", borrowed", testBook.getBorrowedStatus());
