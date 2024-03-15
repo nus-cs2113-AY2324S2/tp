@@ -6,8 +6,8 @@ public class Brokeculator {
             + "What can I do for you?";
     public static void main(String[] args){
         GeneralInputParser mainParser = new GeneralInputParser();
-        FileManager fileManager = new FileManager();
         ExpenseManager expenseManager = new ExpenseManager();
+        FileManager fileManager = new FileManager(expenseManager);
         Logic driverLogic = new Logic(mainParser, fileManager, expenseManager);
         UI.print(GREETING);
         driverLogic.run();
