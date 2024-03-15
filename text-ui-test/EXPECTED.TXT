@@ -4,3 +4,6 @@ Password is correct. You are now logged in
 Unable to save tasks!
 Ok. Added inflow
 Unable to save tasks!
+Ok. Added outflow
+Unable to save tasks!
+Unable to save tasks!

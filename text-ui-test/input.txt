@@ -1,2 +1,4 @@
 login Bob password
 add-inflow Salary 400.00 23/05/2022 1900
+add-outflow Salary 400.00 23/05/2022 1900
+quit
