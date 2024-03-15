@@ -81,7 +81,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("to", "Decline push-ups");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("Exercise 'Push-ups' edited successfully to 'Decline push-ups'.", result.feedbackToUser);
 
@@ -93,7 +94,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("to", "Decline push-ups");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", ""), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", ""),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("Previous exercise name cannot be empty.", result.feedbackToUser);
 
@@ -105,7 +107,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("to", "Decline push-ups");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Pull-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Pull-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("Previous exercise 'Pull-ups' does not exist.", result.feedbackToUser);
 
@@ -115,7 +118,8 @@ class ExerciseCommandTest {
     public void editExercise_emptyNewExercise_failure() {
         ArrayList<InputArguments> additionalArguments= new ArrayList<>();
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("There must be 1 new exercise.", result.feedbackToUser);
 
@@ -130,7 +134,8 @@ class ExerciseCommandTest {
         additionalArguments.add(newExerciseTwo);
 
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("There must be 1 new exercise.", result.feedbackToUser);
 
@@ -142,7 +147,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("", "Decline push-ups");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("Enter the correct flag for editing exercise: 'to'.", result.feedbackToUser);
 
@@ -154,7 +160,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("change", "Decline push-ups");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("Enter the correct flag for editing exercise: 'to'.", result.feedbackToUser);
 
@@ -166,7 +173,8 @@ class ExerciseCommandTest {
         InputArguments newExercise= new InputArguments("to", "");
         additionalArguments.add(newExercise);
 
-        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"), additionalArguments);
+        ExerciseCommand exerciseCommand = new ExerciseCommand(new InputArguments("edit", "Push-ups"),
+                additionalArguments);
         CommandResult result=exerciseCommand.execute();
         assertEquals("New exercise name cannot be empty.", result.feedbackToUser);
 
