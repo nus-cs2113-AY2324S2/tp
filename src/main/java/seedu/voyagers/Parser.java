@@ -66,21 +66,28 @@ public class Parser {
     }
 
     private void setName(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
+        String oldName = null;
+        String newName = null;
+        for (int i = 0; i + 1 < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/old":
+                oldName = addWordAfterSeparator(tokens, oldName, i);
+                break;
+            case "/new":
+                newName = addWordAfterSeparator(tokens, newName, i);
+                break;
+            default:
+                //No flags found
+                break;
+            }
+        }
+        Trip mainTrip = findTripByName(oldName);
         if (mainTrip == null) {
             System.out.println("Trip not found: " + tokens[1]);
             return;
         }
-
-        String name = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/n") && i + 1 < tokens.length) {
-                name = tokens[i + 1];
-                break;
-            }
-        }
-        mainTrip.setName(name);
-        System.out.println("Name set to: " + name);
+        mainTrip.setName(newName);
+        System.out.println("Name set to: " + newName);
     }
 
     private void setDates(String[] tokens) {
@@ -111,22 +118,25 @@ public class Parser {
     }
 
     private void setLocation(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
+        String tripName = null;
+        String location = "-";
+        for (int i = 0; i + 1 < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordAfterSeparator(tokens, tripName, i);
+                break;
+            case "/location":
+                location = addWordAfterSeparator(tokens, location, i);
+                break;
+            default:
+                //No flags found
+                break;
+            }
+        }
+        Trip mainTrip = findTripByName(tripName);
         if (mainTrip == null) {
             System.out.println("Trip not found: " + tokens[1]);
             return;
-        }
-
-        String location = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/location") && i + 1 < tokens.length) {
-                StringBuilder sentenceBuilder = new StringBuilder();
-                for (int j = i + 1; j < tokens.length && !tokens[j].startsWith("/"); j++) {
-                    sentenceBuilder.append(tokens[j]).append(" ");
-                }
-                location = sentenceBuilder.toString().trim();
-                break;
-            }
         }
         mainTrip.setLocation(location);
         System.out.println("Location set to: " + location);
@@ -142,11 +152,7 @@ public class Parser {
         String description = "-";
         for (int i = 2; i < tokens.length; i++) {
             if (tokens[i].toLowerCase().equals("/d") && i + 1 < tokens.length) {
-                StringBuilder sentenceBuilder = new StringBuilder();
-                for (int j = i + 1; j < tokens.length && !tokens[j].startsWith("/"); j++) {
-                    sentenceBuilder.append(tokens[j]).append(" ");
-                }
-                description = sentenceBuilder.toString().trim();
+                description = addWordAfterSeparator(tokens, description, i);
                 break;
             }
         }
@@ -154,7 +160,7 @@ public class Parser {
         System.out.println("Description set to: " + description);
     }
 
-    private Trip findTripByName(String tripName) {
+    protected Trip findTripByName(String tripName) {
         for (Trip trip : tripsList) {
             if (trip.getName().equals(tripName)) {
                 return trip;
@@ -205,7 +211,7 @@ public class Parser {
                 location = addWordAfterSeparator(tokens, location, i);
                 break;
             default:
-                //No more flags found
+                //No flags found
                 break;
             }
         }
@@ -224,9 +230,23 @@ public class Parser {
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
 
-            if (!confirmPartialInfo(name, startDate, endDate, location, description)) {
-                System.out.println("Partial trip information not confirmed. Aborting.");
-                return;
+            if (isPartialTripInfo(name, startDate, endDate, location, description)) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("You are about to add a trip with the following information:");
+                System.out.println("Name: " + name);
+                System.out.println("Start Date: " + (startDate == DEFAULT_START ? "-" : dateFormat.format(startDate)));
+                System.out.println("End Date: " + (endDate == DEFAULT_END ? "-" : dateFormat.format(endDate)));
+                System.out.println("Location: " + location);
+                System.out.println("Description: " + description);
+                System.out.println("Confirm? (Y/N)");
+                String confirmation = null;
+                while (confirmation == null) {
+                    confirmation = scanner.nextLine().toLowerCase();
+                }
+                if (!confirmation.toLowerCase().equals("y")) {
+                    System.out.println("Add main trip aborted");
+                    return;
+                }
             }
 
             Trip newTrip = new Trip(name, startDate, endDate, location, description);
@@ -242,7 +262,7 @@ public class Parser {
     private String addWordAfterSeparator(String[] tokens, String name, int i) {
         if (i + 1 < tokens.length) {
             StringBuilder nameBuilder = new StringBuilder();
-            for (int j = i + 1; j < tokens.length && !tokens[j].startsWith("/"); j++) {
+            for (int j = i + 1; j < tokens.length && !(tokens[j].startsWith("/")); j++) {
                 nameBuilder.append(tokens[j]).append(" ");
             }
             name = nameBuilder.toString().trim();
@@ -260,22 +280,12 @@ public class Parser {
         return false;
     }
 
-    private boolean confirmPartialInfo(String name, Date startDate, Date endDate, String location, String description) {
-        if (!(name.isEmpty() || startDate == DEFAULT_START || endDate == DEFAULT_END
-                || location.isEmpty() || description.isEmpty())) {
+    private boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location, String description) {
+        if (startDate == DEFAULT_START || endDate == DEFAULT_END
+                || location.isEmpty() || description.isEmpty()) {
             return true;
         }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("You are about to add a trip with the following information:");
-        System.out.println("Name: " + name);
-        System.out.println("Start Date: " + (startDate == DEFAULT_START ? "-" : dateFormat.format(startDate)));
-        System.out.println("End Date: " + (endDate == DEFAULT_END ? "-" : dateFormat.format(endDate)));
-        System.out.println("Location: " + location);
-        System.out.println("Description: " + description);
-        System.out.println("Confirm? (Y/N)");
-
-        String confirmation = scanner.nextLine().toLowerCase();
-        return confirmation.equals("y");
+        return false;
     }
 
     private void deleteMainTrip(String[] tokens) {
