@@ -29,7 +29,7 @@ public abstract class Transaction<T> {
         return amount;
     }
 
-    protected T getCategory() {
+    public T getCategory() {
         return category;
     }
 
