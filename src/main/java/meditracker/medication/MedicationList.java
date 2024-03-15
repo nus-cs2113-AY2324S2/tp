@@ -1,4 +1,4 @@
-package seedu.meditracker.medication;
+package meditracker.medication;
 
 import java.util.ArrayList;
 

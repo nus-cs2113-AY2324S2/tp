@@ -1,7 +1,7 @@
-package seedu.meditracker.command;
+package meditracker.command;
 
-import seedu.meditracker.medication.MedicationList;
-import seedu.meditracker.ui.Ui;
+import meditracker.medication.MedicationList;
+import meditracker.ui.Ui;
 
 /**
  * The ExitCommand class represents a command to exit the application.

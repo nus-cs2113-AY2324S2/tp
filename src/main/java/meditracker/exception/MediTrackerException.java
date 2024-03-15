@@ -1,4 +1,4 @@
-package seedu.meditracker.exception;
+package meditracker.exception;
 
 /**
  * The MediTrackerException class represents an exception specific to the MediTracker application.

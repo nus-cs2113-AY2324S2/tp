@@ -1,9 +1,9 @@
-package seedu.meditracker.parser;
+package meditracker.parser;
 
-import seedu.meditracker.command.Command;
-import seedu.meditracker.command.AddCommand;
-import seedu.meditracker.command.ExitCommand;
-import seedu.meditracker.exception.MediTrackerException;
+import meditracker.command.Command;
+import meditracker.exception.MediTrackerException;
+import meditracker.command.AddCommand;
+import meditracker.command.ExitCommand;
 
 /**
  * The Parser class parses user input commands into Command objects.

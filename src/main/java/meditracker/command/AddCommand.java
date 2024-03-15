@@ -1,9 +1,9 @@
-package seedu.meditracker.command;
+package meditracker.command;
 
-import seedu.meditracker.exception.MediTrackerException;
-import seedu.meditracker.medication.Medication;
-import seedu.meditracker.medication.MedicationList;
-import seedu.meditracker.ui.Ui;
+import meditracker.exception.MediTrackerException;
+import meditracker.medication.Medication;
+import meditracker.medication.MedicationList;
+import meditracker.ui.Ui;
 
 /**
  * The AddCommand class represents a command to add a new medication.

@@ -1,9 +1,10 @@
 package seedu.meditracker.command;
 
+import meditracker.command.AddCommand;
 import org.junit.jupiter.api.Test;
-import seedu.meditracker.exception.MediTrackerException;
-import seedu.meditracker.medication.MedicationList;
-import seedu.meditracker.ui.Ui;
+import meditracker.exception.MediTrackerException;
+import meditracker.medication.MedicationList;
+import meditracker.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

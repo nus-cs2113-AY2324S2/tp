@@ -1,10 +1,10 @@
-package seedu.meditracker;
+package meditracker;
 
-import seedu.meditracker.command.Command;
-import seedu.meditracker.exception.MediTrackerException;
-import seedu.meditracker.medication.MedicationList;
-import seedu.meditracker.parser.Parser;
-import seedu.meditracker.ui.Ui;
+import meditracker.command.Command;
+import meditracker.exception.MediTrackerException;
+import meditracker.medication.MedicationList;
+import meditracker.parser.Parser;
+import meditracker.ui.Ui;
 
 /**
  * The main class for the MediTracker application.

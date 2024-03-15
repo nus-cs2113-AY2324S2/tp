@@ -1,4 +1,4 @@
-package seedu.meditracker.medication;
+package meditracker.medication;
 
 /**
  * The Medication class represents a medication.
