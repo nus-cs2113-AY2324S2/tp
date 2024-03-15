@@ -7,9 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,7 +62,8 @@ public class ParserTest {
 
     @Test
     public void testSetName() {
-        String input = "addmaintrip /n Trip1 with long name /start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
+        String input = "addmaintrip /n Trip1 with long name " +
+                "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
         parser.parseInput(input);
 
         assertEquals(1, tripsList.size());
@@ -78,7 +76,8 @@ public class ParserTest {
 
     @Test
     public void testSetLocation() {
-        String input = "addmaintrip /n Trip1 with long name /start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
+        String input = "addmaintrip /n Trip1 with long name " +
+                "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
         parser.parseInput(input);
 
         assertEquals(1, tripsList.size());

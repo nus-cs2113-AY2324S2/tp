@@ -121,16 +121,16 @@ public class Parser {
         String tripName = null;
         String location = "-";
         for (int i = 0; i + 1 < tokens.length; i++) {
-            switch(tokens[i].toLowerCase()){
-                case "/n":
-                    tripName = addWordAfterSeparator(tokens, tripName, i);
-                    break;
-                case "/location":
-                    location = addWordAfterSeparator(tokens, location, i);
-                    break;
-                default:
-                    //No flags found
-                    break;
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordAfterSeparator(tokens, tripName, i);
+                break;
+            case "/location":
+                location = addWordAfterSeparator(tokens, location, i);
+                break;
+            default:
+                //No flags found
+                break;
             }
         }
         Trip mainTrip = findTripByName(tripName);
@@ -240,10 +240,10 @@ public class Parser {
                 System.out.println("Description: " + description);
                 System.out.println("Confirm? (Y/N)");
                 String confirmation = null;
-                while(confirmation == null){
+                while (confirmation == null) {
                     confirmation = scanner.nextLine().toLowerCase();
                 }
-                if(!confirmation.toLowerCase().equals("y")){
+                if (!confirmation.toLowerCase().equals("y")) {
                     System.out.println("Add main trip aborted");
                     return;
                 }
