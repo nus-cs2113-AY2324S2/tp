@@ -58,16 +58,16 @@ public class ParserTest {
     }
 
     /**
-    @Test
-    public void checkGameNull() {
+     @Test
+     public void checkGameNull() {
         String input = null;
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         String expected = "null input on readGame()";
         assertEquals(expected, seedu.duke.Duke.Parser.readGame());
-    }
-    **/
+     }
+     **/
 
     @Test
     public void checkTTMoveValidNum() {
@@ -110,16 +110,16 @@ public class ParserTest {
     }
 
     /**
-    @Test
-    public void checkTTMoveNull() {
-        String input = null;
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+     @Test
+     public void checkTTMoveNull() {
+         String input = null;
+         InputStream in = new ByteArrayInputStream(input.getBytes());
+         System.setIn(in);
 
-        String expected = "null input on readTTMove()";
-        assertEquals(expected, seedu.duke.Duke.Parser.readTTMove());
-    }
-    **/
+         String expected = "null input on readTTMove()";
+         assertEquals(expected, seedu.duke.Duke.Parser.readTTMove());
+     }
+     **/
 }
 
 
