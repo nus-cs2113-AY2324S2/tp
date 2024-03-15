@@ -8,6 +8,8 @@ public class Description {
 
     @Override
     public String toString() {
-        return "Description: " + (description.isEmpty() ? "[X]" : description);
+        return "Description: " + ((description == null || description.isEmpty())
+                ? "[X]"
+                : description);
     }
 }

@@ -47,6 +47,7 @@ public final class Ui {
         for (int i = 0; i < products.getSize(); i ++) {
             System.out.println((i + 1) + ". " + products.get(i).getName());
             System.out.println(HORIZONTAL_LINE);
+            System.out.println(products.get(i).getPid());
             System.out.println(products.get(i).getQuantity());
             System.out.println(products.get(i).getPrice());
             System.out.println(products.get(i).getDescription());

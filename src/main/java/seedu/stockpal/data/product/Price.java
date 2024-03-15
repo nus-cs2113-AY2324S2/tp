@@ -11,6 +11,8 @@ public class Price {
 
     @Override
     public String toString() {
-        return "Price: " + (price == null ? "[X]" : String.valueOf(price));
+        return "Price: " + ((price == null)
+                ? "[X]"
+                : String.valueOf(price));
     }
 }

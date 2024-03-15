@@ -23,7 +23,7 @@ public class Quantity {
 
     @Override
     public String toString() {
-        return ("Quantity: " + String.valueOf(quantity));
+        return ("Quantity: " + quantity);
     }
 }
 

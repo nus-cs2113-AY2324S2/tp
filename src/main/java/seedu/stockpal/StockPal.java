@@ -16,7 +16,6 @@ public class StockPal {
      * Main entry-point for the java.stockpal.StockPal application.
      */
 
-    public static ProductList productList;
     private static Parser parser;
     private static final Storage STORAGE = new Storage();
 
@@ -29,7 +28,7 @@ public class StockPal {
     private static void start() {
         Ui.printWelcomeMessage();
         try {
-            productList = STORAGE.load();
+            ProductList productList = STORAGE.load();
             parser = new Parser(productList);
         } catch (StockPalException | StorageIOException e) {
             throw new RuntimeException(e); //replace this with Ui.printError(error message);

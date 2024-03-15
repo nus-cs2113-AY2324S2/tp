@@ -8,6 +8,6 @@ public class Pid {
 
     @Override
     public String toString() {
-        return ("PID: " + String.valueOf(pid));
+        return ("PID: " + pid);
     }
 }
