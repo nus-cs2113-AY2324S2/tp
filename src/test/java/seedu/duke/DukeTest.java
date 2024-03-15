@@ -3,6 +3,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DukeTest {
 
@@ -24,6 +25,11 @@ class DukeTest {
         assertEquals("cant be found", travelActivityList.getDescription("visit museum"));
     }
 
+    @Test
+    public void trueTest(){
+        assertTrue(true);
+    }
+    @Test
     public void testStringCoversion(){
         assertEquals("visit museum", new TravelActivity("visit museum").toString());
     }
