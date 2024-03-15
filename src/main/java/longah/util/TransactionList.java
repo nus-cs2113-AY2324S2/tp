@@ -34,6 +34,15 @@ public class TransactionList {
     }
 
     /**
+     * Returns the size of the transaction list.
+     * 
+     * @return The size of the transaction list.
+     */
+    public int getTransactionListSize() {
+        return transactions.size();
+    }
+
+    /**
      * Removes a transaction from the list by index.
      *
      * @param index The index of the transaction to remove.
