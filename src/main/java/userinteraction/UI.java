@@ -14,4 +14,8 @@ public class UI {
     public String readInput() {
         return sc.nextLine();
     }
+
+    public void closeScanner() {
+        sc.close();
+    }
 }
