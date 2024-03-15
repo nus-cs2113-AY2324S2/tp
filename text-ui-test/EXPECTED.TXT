@@ -1,8 +1,3 @@
-Enter password: 
-Password is correct
-Inflows:
-Transactions: 
-
-Outflows:
-Transactions: 
-
+Welcome. Inorder to login, type your command in the format:
+login u/USERNAME p/PASSWORD
+Password is correct. You are now logged in
