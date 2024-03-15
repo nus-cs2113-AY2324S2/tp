@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import utility.Constant;
+import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
 
@@ -36,11 +37,9 @@ class OutputTest {
         System.setErr(originalErr);
     }
     @Test
-    void printHistory_runsOnly_expectAllRunsPrinted() {
-        // Test Setup
-        Run r1 = new Run("40:10", "10.3", "15/03/2024");
-        Run r2 = new Run("01:59:10", "15.3");
-
+    void printHistory_runsOnly_expectAllRunsPrinted() throws CustomExceptions.InvalidInput {
+        new Run("40:10", "10.3", "15/03/2024");
+        new Run("01:59:10", "15.3");
         String expected = Constant.PARTITION_LINE + "\n" +
                 "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
                 "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\t2024-03-15\n" +
@@ -55,8 +54,6 @@ class OutputTest {
 
     @Test
     void printHistory_invalidHistoryFilter_throwError() {
-        // Test Setup
-
         String expected = Constant.PARTITION_LINE + "\n" +
                 "\u001B[31mError: Invalid filter! Filter is only 'all', 'run' or 'gym'\u001B[0m" + "\n" +
                 Constant.PARTITION_LINE + "\n";
@@ -69,7 +66,7 @@ class OutputTest {
     }
 
     @Test
-    void printLatestRun_oneRun_expectOneRunPrinted() {
+    void printLatestRun_oneRun_expectOneRunPrinted() throws CustomExceptions.InvalidInput {
         // Test Setup
         new Run("40:10", "10.3");
 
@@ -96,6 +93,4 @@ class OutputTest {
         assertEquals(expected, outContent.toString());
         cleanup();
     }
-
-
 }

@@ -19,17 +19,14 @@ public class Constant {
 
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
-    public static final String EXERCISE_HEADER_WITH_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
-    public static final String EXERCISE_HEADER = "Type\\tTime\\t\\tDistance\\tPace\\t\\tDate\"";
-
-
+    public static final String RUN_HEADER_WITH_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
+    public static final String RUN_HEADER = "Type\\tTime\\t\\tDistance\\tPace\\t\\tDate\"";
 
     // Constant for Error
     public static final String INVALID_PRINT_HISTORY_FILTER = "Invalid filter! Filter is only 'all', 'run' or 'gym'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
     public static final String NO_HISTORY_FOUND = "No history found!";
-
-
-
-
+    public static final String INVALID_RUN_TIME = "Invalid run time!";
+    public static final String INVALID_GYM_INPUT = "Invalid gym parameters!";
+    public static final String INVALID_GYM_STATION_INDEX = "Invalid gym station index!";
 }

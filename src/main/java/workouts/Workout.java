@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Workout {
     protected LocalDate date = null;
-    String header = "Type\tTime\t\tDistance\tPace\n";
 
     public Workout(String stringDate) {
         this.date = parseDate(stringDate);
@@ -24,9 +23,8 @@ public abstract class Workout {
         LocalDate formattedDate = null;
         try {
             formattedDate = LocalDate.parse(dateTime, formatter);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             System.err.println("Error parsing date: " + e.getMessage());
-            System.exit(1);
         }
         return formattedDate;
     }
