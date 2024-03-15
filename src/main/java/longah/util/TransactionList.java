@@ -103,7 +103,8 @@ public class TransactionList {
      * @param memberName String representation of the name of person to search for
      */
     public void findDebts(String memberName) {
-        System.out.println(String.format("%s is involved as the payee in the following list of transactions.", memberName));
+        System.out.println(String.format("%s is involved as the payee in the following list of transactions."
+                , memberName));
         int index = 1;
         for (Transaction transaction : transactions) {
             if (transaction.isPayee(memberName)) {
