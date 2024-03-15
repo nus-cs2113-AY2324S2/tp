@@ -87,6 +87,7 @@ public class Parser {
     }
 
     private static Command parseUpdateCommand(String input) {
+        Pattern p = Pattern.compile("n/(.*)");
         ExtractDataForNewOrUpdateCommand result = getExtractDataForNewOrUpdateCommand(input);
 
         if (result.name.isEmpty()) {
@@ -169,8 +170,8 @@ public class Parser {
         }
 
         String itemName = matcher.group("name").trim();
-        String itemQuantityString = matcher.group("quantity");
-        String itemPriceString = matcher.group("price");
+        String itemQuantityString = matcher.group("quantity").trim();
+        String itemPriceString = matcher.group("price").trim();
 
         if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
             return new InvalidCommand();
@@ -179,15 +180,6 @@ public class Parser {
         // throws NumberFormatException if strings cannot be parsed
         int itemQuantity = Integer.parseInt(itemQuantityString);
         double itemPrice = roundTo2Dp(Double.parseDouble(itemPriceString));
-
-//        if (quantity < 0) {
-//            // throw error
-//            System.out.println("quantity less than 0");
-//        }
-//        if (price < 0) {
-//            // throw error
-//            System.out.println("price less than 0");
-//        }
 
         return new NewCommand(itemName, itemQuantity, itemPrice);
     }
