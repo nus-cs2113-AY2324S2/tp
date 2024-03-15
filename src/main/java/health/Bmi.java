@@ -18,7 +18,7 @@ public class Bmi extends Health {
         double Bmi = Health.weight / (Math.pow(Health.height, 2.0));
         System.out.printf("Your BMI is %.2f", Bmi);
         Health.printNewLine();
-        printBMICategory(Bmi);
+        printBmiCategory(Bmi);
     }
 
     /*
