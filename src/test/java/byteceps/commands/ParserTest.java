@@ -45,8 +45,8 @@ public class ParserTest {
     @Test
     public void parseCommand_invalidCommand_throwException() {
         Parser testParser = new Parser();
-        String validInput = "aaaaa /list";
-        testParser.parseInput(validInput);
+        String invalidInput = "aaaaa /list";
+        testParser.parseInput(invalidInput);
 
 
         Exception exception = assertThrows(UnsupportedOperationException.class, testParser::parseCommand);
