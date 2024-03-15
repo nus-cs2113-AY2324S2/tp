@@ -27,4 +27,20 @@ public class fallenCode {
 //            break;
 //        }
 //    }
+
+    //@@author Cryolian
+    // public Class getCurrentClass() {
+    //     return currentClass;
+    // }
+    // public void setCurrentClass(Class currentClass) {
+    //     this.currentClass = currentClass;
+    // }
+    
+    // /**
+    //  * Add a student as attending this class.
+    //  * @param s Student to add to the class.
+    //  */
+    // public void addStudent(Student s) {
+    //     this.studentList.addStudent(s);
+    // }
 }

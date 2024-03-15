@@ -1,6 +1,6 @@
 package classify.student;
 
-import classify.classgroup.Class;
+// import classify.classgroup.Class;
 import java.util.ArrayList;
 
 /**
@@ -29,10 +29,6 @@ public class Details {
         return phoneNumber;
     }
 
-    // public Class getCurrentClass() {
-    //     return currentClass;
-    // }
-
     public String getLastPaymentDate() {
         return lastPaymentDate;
     }
@@ -57,7 +53,4 @@ public class Details {
         this.remarks = remarks;
     }
 
-    // public void setCurrentClass(Class currentClass) {
-    //     this.currentClass = currentClass;
-    // }
 }
