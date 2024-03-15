@@ -3,7 +3,6 @@ package storage.parsing;
 import command.AddExpenseFromFileCommand;
 import command.Command;
 import command.InvalidCommand;
-import seedu.expense.Expense;
 import seedu.expense.ExpenseManager;
 
 public class GeneralFileParser {
