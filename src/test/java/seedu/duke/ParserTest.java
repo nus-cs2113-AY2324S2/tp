@@ -1,10 +1,11 @@
-package parser.pack;
+package seedu.duke;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     // for some reason, if you run these all one by one, it passes everything
@@ -13,7 +14,7 @@ public class ParserTest {
 
     @Test
     public void dummyTest(){
-        assertEquals(2, 2);
+        assertTrue(true);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class ParserTest {
         System.setIn(in);
 
         String expected = "null input on readGame()";
-        assertEquals(expected, Parser.readGame());
+        assertEquals(expected, seedu.duke.Duke.Parser.readGame());
     }
     **/
 
@@ -116,7 +117,9 @@ public class ParserTest {
         System.setIn(in);
 
         String expected = "null input on readTTMove()";
-        assertEquals(expected, Parser.readTTMove());
+        assertEquals(expected, seedu.duke.Duke.Parser.readTTMove());
     }
     **/
 }
+
+

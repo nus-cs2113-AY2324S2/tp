@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/seedu/duke/Parser.java
 package seedu.duke;
-========
-package parser.pack;
->>>>>>>> JUnit_Parser.java:src/main/java/parser/pack/Parser.java
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -103,7 +99,6 @@ public class Parser {
         System.out.println(readGame());
         System.out.println("\ntest hub");
         System.out.println(readGame());
-
         System.out.println("\ntest 1-9");
         System.out.println(readTTMove());
         System.out.println("\ntest 13");
