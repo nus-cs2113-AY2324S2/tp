@@ -27,7 +27,7 @@ public class ParserTest {
         assertEquals(expected, Parser.readGame());
     }
 
-    /**
+    /*
     @Test
     public void checkGameHangman() {
         String input = "Hangman";
@@ -119,7 +119,7 @@ public class ParserTest {
          String expected = "null input on readTTMove()";
          assertEquals(expected, seedu.duke.Duke.Parser.readTTMove());
      }
-     **/
+     */
 }
 
 
