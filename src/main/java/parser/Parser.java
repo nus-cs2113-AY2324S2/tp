@@ -8,6 +8,7 @@ import user.Authentication;
 import user.BaseUser;
 
 public class Parser {
+    protected static boolean isContinue = true;
     public boolean isContinue;
     UI ui;
 
