@@ -1,6 +1,6 @@
 package ui;
 
-import health.BMI;
+import health.Bmi;
 import health.Health;;
 import utility.Command;
 import utility.CustomExceptions;
@@ -174,7 +174,7 @@ public class Handler {
         Health.setHeightAndWeight(userInput);
     }
     public static void handleBmi(String userInput){
-        BMI.calculateBMI();
+        Bmi.calculateBmi();
     }
     public static void handleStart(String userInput){}
     public static void handleEnd(String userInput){}
