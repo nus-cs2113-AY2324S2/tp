@@ -1,4 +1,4 @@
-package command;
+package brokeculator.command;
 
 import seedu.expense.Expense;
 import seedu.expense.ExpenseManager;

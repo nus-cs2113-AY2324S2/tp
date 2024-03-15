@@ -1,8 +1,8 @@
-package storage.parsing;
+package brokeculator.storage.parsing;
 
-import command.AddExpenseFromFileCommand;
-import command.Command;
-import command.InvalidCommand;
+import brokeculator.command.AddExpenseFromFileCommand;
+import brokeculator.command.Command;
+import brokeculator.command.InvalidCommand;
 import seedu.expense.ExpenseManager;
 
 public class GeneralFileParser {
