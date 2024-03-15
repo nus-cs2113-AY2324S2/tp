@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Timetable {
     // Each inner ArrayList represents a term
-    private ArrayList<ArrayList<Course>> courses;
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
+    private ArrayList<ArrayList<Course>> courses;
 
     /**
      * Constructor to initialise the courses attribute with an empty 2D ArrayList
