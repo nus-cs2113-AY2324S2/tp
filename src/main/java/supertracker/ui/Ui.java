@@ -1,4 +1,4 @@
-package supertracker;
+package supertracker.ui;
 
 import supertracker.item.Item;
 
