@@ -105,7 +105,7 @@ public class TransactionListTest {
 
             transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
             transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
-            String printedOutput = transactionList.findPayments("James");
+            String printedOutput = transactionList.findTransactions("James");
             String expectedString = "James owns the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 

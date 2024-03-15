@@ -90,21 +90,23 @@ public class Transaction {
 
     /**
      * Checks whether the input member name is the owner of a transaction.
+     *
      * @param memberName String representation of member name to check
      * @return a boolean value determining whether the input name is the owner of the transaction
      */
-    public boolean isOwner(String memberName) {
-        return personOwed.isEqual(memberName);
+    public boolean isOwned(String memberName) {
+        return personOwed.isName(memberName);
     }
 
     /**
      * Checks whether the input member name is a payee within the transaction
+     *
      * @param memberName String representation of member name to check
      * @return a boolean value determining whether the input name is a payee in the transaction
      */
     public boolean isPayee(String memberName) {
         for (Member member : subtransactions.keySet()) {
-            if (member.isEqual(memberName)) {
+            if (member.isName(memberName)) {
                 return true;
             }
         }
@@ -112,7 +114,7 @@ public class Transaction {
     }
 
     /**
-     * Returns a string representation of the transaction for printouts
+     * @return a string representation of the transaction for printouts
      */
     public String toString() {
         String owner = "Owner: " + personOwed.getName() + "\n";

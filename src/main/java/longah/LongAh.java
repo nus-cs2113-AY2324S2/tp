@@ -73,7 +73,7 @@ public class LongAh {
                 case "findpayment":
                     if (parts.length == 2) {
                         String person = parts[1];
-                        System.out.println(transactions.findPayments(person));
+                        System.out.println(transactions.findTransactions(person));
                     } else {
                         System.out.println("Invalid command format. Use 'findPayment PERSON'");
                     }

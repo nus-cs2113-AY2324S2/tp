@@ -86,14 +86,16 @@ public class TransactionList {
     }
 
     /**
-     * Returns a String printout of the list of transactions which the member name is involved as the transaction owner
+     * Printout the list of transactions which the member name is involved as the transaction owner
+     *
      * @param memberName String representation of the name of person to search for
+     * @return Returns a String printout of the required list of transactions
      */
-    public String findPayments(String memberName) {
+    public String findTransactions(String memberName) {
         int index = 1;
         String outString = String.format("%s owns the following list of transactions.", memberName) + "\n";
         for (Transaction transaction : transactions) {
-            if (transaction.isOwner(memberName)) {
+            if (transaction.isOwned(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index ++;
             }
@@ -102,8 +104,10 @@ public class TransactionList {
     }
 
     /**
-     * Return a String printout the list of transactions which a person is involved as a payee
+     * Printout the list of transactions which a person is involved as a payee
+     *
      * @param memberName String representation of the name of person to search for
+     * @return Returns a String printout of the required list of transactions
      */
     public String findDebts(String memberName) {
         String outString = String.format("%s is involved as the payee in the following list of transactions."

@@ -88,7 +88,7 @@ public class Member {
      * @param memberName String representation of a member name
      * @return A boolean value checking whether the input matches with name.
      */
-    public boolean isEqual(String memberName) {
+    public boolean isName(String memberName) {
         return name.equals(memberName);
     }
 }
