@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
+    final int SIZE_OF_DELETE = 7;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -22,10 +23,11 @@ public class CalorieList {
 
     /**
      * Index should be in an integer from 1 to size of the list.
-     * @param index the index of calorie record user want to delete
+     * @param line the string containing the index of calorie record user want to delete
      */
-    public void deleteEntry(int index) {
+    public void deleteEntry(String line) {
         try {
+            int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             if(index > calorieArrayList.size()) {
                 System.out.println("Sorry, this index is out of out of range. Please enter a valid index.");
                 return;
