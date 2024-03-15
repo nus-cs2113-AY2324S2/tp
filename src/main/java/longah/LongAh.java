@@ -56,30 +56,39 @@ public class LongAh {
                 case "add":
                     transactions.add(parts[1], members);
                     break;
-                case "list":
+                case "listdebts":
                     app.listAllDebts();
                     break;
-                // case "delete":
-                // if (parts.length == 2) {
-                // int index = Integer.parseInt(parts[1]);
-                // app.deleteDebt(index);
-                // } else {
-                // System.out.println("Invalid command format. Use 'delete
-                // INDEX'");
-                // }
-                // break;
-                // case "find":
-                // if (parts.length == 2) {
-                // String person = parts[1];
-                // app.findDebts(person);
-                // } else {
-                // System.out.println("Invalid command format. Use 'find
-                // PERSON'");
-                // }
-                // break;
-                // case "clear":
-                // app.clearAllDebts();
-                // break;
+                case "listtransactions":
+                    System.out.println(transactions.listTransactions());
+                    break;
+                case "delete":
+                    if (parts.length == 2) {
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        transactions.remove(index);
+                    } else {
+                        System.out.println("Invalid command format. Use 'delete INDEX'");
+                    }
+                    break;
+                case "findpayment":
+                    if (parts.length == 2) {
+                        String person = parts[1];
+                        System.out.println(transactions.findTransactions(person));
+                    } else {
+                        System.out.println("Invalid command format. Use 'findPayment PERSON'");
+                    }
+                    break;
+                case "finddebt":
+                    if (parts.length == 2) {
+                        String person = parts[1];
+                        System.out.println(transactions.findDebts(person));
+                    } else {
+                        System.out.println("Invalid command format. Use 'findDebt PERSON'");
+                    }
+                    break;
+                case "clear":
+                    transactions.clear();
+                    break;
                 case "addmember":
                     if (parts.length == 2) {
                         String name = parts[1];
