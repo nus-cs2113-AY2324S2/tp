@@ -1,6 +1,6 @@
 package seedu.duke;
 import seedu.duke.UserList;
-import
+import seedu.duke.ui.UI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class DukeTest {
     @Test
@@ -20,12 +22,15 @@ class DukeTest {
         UserList userList = new UserList();
         ByteArrayInputStream in = new ByteArrayInputStream("invalid\nbye\n".getBytes());
         System.setIn(in);
-        String expectedOutput = "Welcome to Duke!\nInvalid command!\nGoodbye!\n";
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        String expectedOutput = "Timetable comparison app opened. \r\nInvalid command. \r\nBye. \r\n";
 
         // Act
         Duke.main(new String[0]);
 
         // Assert
-        assertEquals(expectedOutput, UI.printInvalidCommand());
+        assertEquals(expectedOutput, out.toString());
     }
 }
