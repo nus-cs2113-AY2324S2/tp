@@ -1,5 +1,6 @@
 package meditracker.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -71,5 +72,13 @@ public class Ui {
      */
     public String readCommand() {
         return input.nextLine();
+    }
+
+    public <T> void printMedsList(List<T> medications, String listName) {
+        System.out.println("Here are the " + listName + " you have to take today: ");
+        for (T medication : medications) {
+            int numbering = medications.indexOf(medication) + 1;
+            System.out.println("\t" + numbering + ". " + medication);
+        }
     }
 }
