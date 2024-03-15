@@ -4,11 +4,11 @@ import userinteraction.UI;
 import financialtransactions.TransactionManager;
 
 public class Parser {
+    protected static boolean isContinue = true;
     UI ui;
     public Parser(UI ui) {
         this.ui = ui;
     }
-    protected static boolean isContinue = true;
 
     public static void parseCommand(String command, TransactionManager manager) {
         String[] commandParts = command.split(" ");
