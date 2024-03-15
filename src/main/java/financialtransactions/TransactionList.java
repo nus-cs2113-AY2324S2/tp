@@ -67,5 +67,8 @@ public class TransactionList<T extends Transaction<?>> {
         }
         return baseString;
     }
-    
+
+    public void addInflow(Inflow inflow) {
+        transactionList.add((T) inflow);
+    }
 }
