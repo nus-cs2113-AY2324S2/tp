@@ -28,7 +28,10 @@ class BmiTest {
         // Arrange
         Health.height = 1.75; // 175 cm
         Health.weight = 70.0; // 70 kg
-        String expected = "Your BMI is 22.86" + System.lineSeparator() + "Great! You're within normal range." + System.lineSeparator();
+        String expected = "Your BMI is 22.86"
+                + System.lineSeparator()
+                + "Great! You're within normal range."
+                + System.lineSeparator();
 
         // Act
         Bmi.calculateBmi();
