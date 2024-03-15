@@ -73,16 +73,19 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("p/Jack p/Jane a/100 p/James a/200", memberList);
             transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
             String printedOutput = transactionList.listTransactions();
-            String expectedString = "1.Owner: Jack\n" +
-                    "Payee 1: Jane Owed amount: 200.00\n" +
-                    "Payee 2: James Owed amount: 100.00\n" +
+            String expectedString = "1.\n" +
+                    "Owner: Jack\n" +
+                    "Payee 1: James Owed amount: 200.00\n" +
+                    "Payee 2: Jane Owed amount: 100.00\n" +
                     "\n" +
-                    "2.Owner: Jane\n" +
+                    "2.\n" +
+                    "Owner: Jane\n" +
                     "Payee 1: Jack Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n";
+                    "Payee 2: James Owed amount: 200.00\n" +
+                    "\n";
             assertEquals(expectedString, printedOutput);
         } catch (LongAhException e) {
             fail();
@@ -104,7 +107,7 @@ public class TransactionListTest {
             transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
             transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
             String printedOutput = transactionList.findPayments("James");
-            String expectedString = "James owns the following list of transactions.";
+            String expectedString = "James owns the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 
         } catch (LongAhException e) {
@@ -136,7 +139,9 @@ public class TransactionListTest {
                     "2.\n" +
                     "Owner: Jack\n" +
                     "Payee 1: Jane Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n";
+                    "Payee 2: James Owed amount: 200.00\n" +
+                    "\n";
+
             assertEquals(expectedString, printedOutput);
 
         } catch (LongAhException e) {
@@ -159,7 +164,7 @@ public class TransactionListTest {
             transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
             transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
             String printedOutput = transactionList.findDebts("Jack");
-            String expectedString = "Jack is involved as the payee in the following list of transactions.";
+            String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 
         } catch (LongAhException e) {
@@ -191,7 +196,9 @@ public class TransactionListTest {
                     "2.\n" +
                     "Owner: Jack\n" +
                     "Payee 1: Jane Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n";
+                    "Payee 2: James Owed amount: 200.00\n"  +
+                    "\n";
+
             assertEquals(expectedString, printedOutput);
 
         } catch (LongAhException e) {

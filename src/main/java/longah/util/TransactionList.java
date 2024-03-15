@@ -79,7 +79,7 @@ public class TransactionList {
         int index = 1;
         String outString = "";
         for (Transaction transaction : transactions) {
-            outString = outString + String.format("%d.%s", index, transaction) + "\n";
+            outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
             index ++;
         }
         return outString;
@@ -107,7 +107,7 @@ public class TransactionList {
      */
     public String findDebts(String memberName) {
         String outString = String.format("%s is involved as the payee in the following list of transactions."
-                , memberName);
+                , memberName) + "\n";
         int index = 1;
         for (Transaction transaction : transactions) {
             if (transaction.isPayee(memberName)) {
