@@ -1,5 +1,6 @@
 package financialtransactions;
 
+
 public class TransactionManager {
     private TransactionList<Inflow> inflows;
     private TransactionList<Outflow> outflows;
@@ -23,9 +24,9 @@ public class TransactionManager {
 
     public boolean removeTransaction(int index, boolean isInflow) {
         if (isInflow) {
-            return inflows.removeTransacitonIndex(index);
+            return inflows.removeTransactionIndex(index);
         } else {
-            return outflows.removeTransacitonIndex(index);
+            return outflows.removeTransactionIndex(index);
         }
     }
 
@@ -38,5 +39,15 @@ public class TransactionManager {
     @Override
     public String toString() {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
+    }
+
+    public void displayTransactionHistory(int n) {
+        String inflowTransactions = inflows.lastNTransactions(n);
+        String outflowTransactions = outflows.lastNTransactions(n);
+        System.out.println("Inflows:\n" + inflowTransactions + "\nOutflows:\n" + outflowTransactions);
+    }
+
+    public String toSave() {
+        return inflows.toSave() + outflows.toSave();
     }
 }

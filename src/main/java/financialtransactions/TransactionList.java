@@ -9,15 +9,19 @@ public class TransactionList<T extends Transaction<?>> {
         this.transactionList = new ArrayList<>();
     }
 
-    public Boolean addTransaction(T newTransaction){
-        if(newTransaction != null){
+    public ArrayList<T> getTransactionList() {
+        return this.transactionList;
+    }
+
+    public boolean addTransaction(T newTransaction){
+        if (newTransaction != null){
             transactionList.add(newTransaction);
             return true;
         }
         return false;
     }
 
-    public Boolean removeTransacitonIndex(int index){
+    public Boolean removeTransactionIndex(int index){
         if(index >= transactionList.size() || index < 0){
             System.out.println("Invalid Index");
             return false;
@@ -25,6 +29,7 @@ public class TransactionList<T extends Transaction<?>> {
         transactionList.remove(index);
         return true;
     }
+
     public double getBalance(){
         double balance = 0.00;
         for(Transaction<?> transaction : transactionList){
@@ -37,9 +42,30 @@ public class TransactionList<T extends Transaction<?>> {
         String baseString = "Transactions: \n";
         Integer index = 1;
         for(T transaction : transactionList){
-            baseString += String.format("%d)\t%s\n", index, transaction.toString());
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
             index += 1;
         }
         return baseString;
     }
+
+    public String lastNTransactions(int n) {
+        String baseString = "Transactions: \n";
+        int listSize = transactionList.size();
+        int index = 1;
+        for (int i = listSize - 1; i >= listSize - n - 1; i--) {
+            T transaction = transactionList.get(i);
+            baseString += String.format("%d)  %s\n", index, transaction.toString());
+            index++;
+        }
+        return baseString;
+    }
+    
+    public String toSave() {
+        String baseString = "";
+        for (T transaction : transactionList) {
+            baseString += transaction.toSave();
+        }
+        return baseString;
+    }
+    
 }
