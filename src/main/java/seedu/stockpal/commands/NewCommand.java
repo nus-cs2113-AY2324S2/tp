@@ -8,7 +8,10 @@ public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
     private static Integer pid = 1;
+    protected ProductList productList;
     private final Product toAdd;
+
+
 
 
     public NewCommand(ProductList productList, String name, Integer quantity, Double price, String description) {
@@ -18,9 +21,7 @@ public class NewCommand extends ListActionCommand {
 
     @Override
     public void execute() {
-        //super.execute();
         productList.addProduct(toAdd);
-        //return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         System.out.println("Added product!");
     }
 }
