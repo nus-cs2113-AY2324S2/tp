@@ -1,9 +1,5 @@
 package seedu.lifetrack;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
-
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calorielist.CalorieList;
 import seedu.lifetrack.exceptions.InvalidInputException;
@@ -11,8 +7,12 @@ import seedu.lifetrack.exceptions.InvalidInputException;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
 
-class DukeTest {
+
+class LifeTrackTest {
     @Test
     public void sampleTest() {
         assertTrue(true);
@@ -59,6 +59,7 @@ class DukeTest {
             assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
         }
     }
+
     @Test
     public void testPrintCalorieListEmpty() {
         String lineSeparator = System.lineSeparator();
