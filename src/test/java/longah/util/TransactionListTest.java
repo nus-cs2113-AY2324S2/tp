@@ -8,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 public class TransactionListTest {
     /**
      * Tests the successful removal of a transaction from the list by index.
