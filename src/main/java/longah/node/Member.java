@@ -82,4 +82,8 @@ public class Member {
     public String getName() {
         return this.name;
     }
+
+    public boolean isEqual(String memberName) {
+        return name.equals(memberName);
+    }
 }

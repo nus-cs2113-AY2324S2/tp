@@ -87,4 +87,31 @@ public class Transaction {
             member.subtractFromBalance(amount);
         }
     }
+
+    public boolean isOwner(String memberName) {
+        return personOwed.isEqual(memberName);
+    }
+
+    public boolean isPayee(String memberName) {
+        for (Member member : subtransactions.keySet()) {
+            if (member.isEqual(memberName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String toString() {
+        String owner = "Owner: " + personOwed.getName() + "\n";
+        String payee = "";
+        int payeeNo = 1;
+        for (HashMap.Entry<Member, Double> entry : subtransactions.entrySet()) {
+            Member member = entry.getKey();
+            double amount = entry.getValue();
+            payee += String.format("Payee %d: %s Owed amount: %,.2f\n", payeeNo, member.getName(), amount);
+            payeeNo++;
+        }
+        return owner + payee;
+    }
+
 }
