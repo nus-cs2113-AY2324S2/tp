@@ -11,6 +11,6 @@ Welcome to MediTracker, your best companion to track your medicine intake.
 Let's begin tracking!
 
 ____________________________________________________________
-test
-
+Medicine has been successfully added!
+____________________________________________________________
 Thank you for using MediTracker. Hope to see you again!
