@@ -7,12 +7,14 @@ package classify.student;
  */
 public class Student {
 
+    //@@author Cryolian
+    public String name;
+    public Details details = new Details();
+
     //@@author tayponghee
     private StudentAttributes attributes;
 
     //@@author Cryolian
-    public String name;
-    public Details details = new Details();
 
     public Student(String name) {
         this.name = name;

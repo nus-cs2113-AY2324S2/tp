@@ -14,15 +14,14 @@ public class InputParsing {
     private static final String VIEW = "view";
     private static final String DELETE = "delete";
     private static final String WRONG_INPUT_MESSAGE = "Wrong Input! Please try again!";
-
     //@@author tayponghee
-    public static final String ENTER_STUDENT_NAME = "Enter student name: ";
-    public static final String STUDENT_DETAILS = "Student details:";
-    public static final String NAME = "Name: ";
-    public static final String GRADE = "Grade: ";
-    public static final String CLASSES_ATTENDED = "Classes Attended: ";
-    public static final String STUDENT_NOT_FOUND = "Student not found!";
-    public static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
+    private static final String ENTER_STUDENT_NAME = "Enter student name: ";
+    private static final String STUDENT_DETAILS = "Student details:";
+    private static final String NAME = "Name: ";
+    private static final String GRADE = "Grade: ";
+    private static final String CLASSES_ATTENDED = "Classes Attended: ";
+    private static final String STUDENT_NOT_FOUND = "Student not found!";
+    private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand) {
