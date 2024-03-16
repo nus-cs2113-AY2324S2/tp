@@ -1,4 +1,4 @@
-package seedu.duke;
+package Time;
 import java.time.LocalDate;
 
 public class DateUtils {
