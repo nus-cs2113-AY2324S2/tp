@@ -7,6 +7,12 @@ public class GymStation {
     protected ArrayList<GymSet> sets;
     protected int numberOfSets;
 
+    /**
+     * Gym Station contains an ArrayList of GymSets.
+     * @param name
+     * @param weightAndReps
+     * @param numberOfSets
+     */
     public GymStation(String name, Integer[] weightAndReps, int numberOfSets) {
         this.stationName = name;
         this.numberOfSets = numberOfSets;

@@ -25,8 +25,7 @@ class WorkoutListTest {
 
     /**
      * Tests the behavior of adding a new run to the run list.
-     * Verifies whether the newly added run is correctly reflected in the run and workoutlist.
-     *
+     * Verifies whether the newly added run is correctly reflected in the run and WorkoutList.
      */
     @Test
     void addRun_normalInput_expectAppend()  {
@@ -81,7 +80,7 @@ class WorkoutListTest {
      * Verifies whether the method is able to correct retrieve the list of workouts.
      */
     @Test
-    void getWorkouts_improperFilters_throwInvalidInput() {
+    void getWorkouts_improperFilters_throwInvalidInput() throws CustomExceptions.InvalidInput {
         ArrayList<Workout> inputList = new ArrayList<>();
         inputList.add(new Run("40:10", "10.3", "15/03/2024"));
         inputList.add(new Run("30:10", "20.3", "30/03/2023"));
@@ -125,7 +124,7 @@ class WorkoutListTest {
 
             Run actual = WorkoutList.getLatestRun();
             assertEquals(secondRun, actual);
-        } catch (CustomExceptions.OutOfBounds e) {
+        } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
             fail("Should not throw an exception");
         }
 

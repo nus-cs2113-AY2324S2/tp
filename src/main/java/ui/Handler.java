@@ -1,6 +1,12 @@
 package ui;
 
+import health.Bmi;
+import health.Health;
 import utility.Command;
+import utility.CustomExceptions;
+import workouts.Run;
+import workouts.WorkoutList;
+
 import java.util.Scanner;
 
 
@@ -118,6 +124,8 @@ public class Handler {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
+            } catch (CustomExceptions.InvalidInput e) {
+                throw new RuntimeException(e);
             }
 
 
@@ -130,7 +138,7 @@ public class Handler {
      *
      * @param userInput The user input string.
      */
-    public static void handleExercise(String userInput){
+    public static void handleExercise(String userInput) throws CustomExceptions.InvalidInput {
         // to be implemented
         // If it is a run (help me to abstract it out)
         //Run r1 = new Run("00:10:10", "10.3" );
@@ -139,9 +147,16 @@ public class Handler {
         //Output.printAddRun(r2);
         //Run r3 = new Run("00:30:10", "30.3");
         //Output.printAddRun(r3);
-    };
+        String[] runDetails = getRun(userInput);
+        if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty() || runDetails[3].isEmpty()) {
+            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+        }
+        Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+        WorkoutList.addRun(newRun);
+        System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+    }
     public static void handleLoad(String userInput){}
-    public static void handleNew(String userInput){
+    public static void handleNew(String userInput) throws CustomExceptions.InvalidInput {
         getRun(userInput);
     }
     public static void handleHistory(String userInput){
@@ -152,9 +167,15 @@ public class Handler {
         Output.printLatestRun();
     }
     public static void handleHealth(String userInput){}
-    public static void handleHeight(String userInput){}
-    public static void handleWeight(String userInput){}
-    public static void handleBmi(String userInput){}
+    public static void handleHeight(String userInput){
+        Health.setHeightAndWeight(userInput);
+    }
+    public static void handleWeight(String userInput){
+        Health.setHeightAndWeight(userInput);
+    }
+    public static void handleBmi(String userInput){
+        Bmi.calculateBmi();
+    }
     public static void handleStart(String userInput){}
     public static void handleEnd(String userInput){}
     public static void handleToday(String userInput){}
@@ -167,13 +188,13 @@ public class Handler {
      * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
      * @return An array of strings containing the extracted command, distance, time taken and date(if given).
      */
-    public static String[] getRun(String input) {
+    public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
 
         String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
 
 
         if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
-            // throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
+            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
         }
 
         int indexE = input.indexOf("/e");
