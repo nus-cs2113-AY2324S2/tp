@@ -1,17 +1,18 @@
 package commands.reflectcommands;
 
 import commands.Command;
-import reflection.Reflection;
+import exceptions.ReflectException;
+import reflection.ReflectionManager;
 
 public class GetReflectionQuestionsCommand implements Command {
 
-    private Reflection reflection;
-    public GetReflectionQuestionsCommand(Reflection reflection) {
+    private ReflectionManager reflection;
+    public GetReflectionQuestionsCommand(ReflectionManager reflection) {
         this.reflection = reflection;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws ReflectException {
         reflection.printFiveRandomQuestions();
     }
 

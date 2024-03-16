@@ -1,5 +1,7 @@
 package reflection;
 
+import exceptions.ReflectException;
+
 import java.util.Collections;
 import java.util.ArrayList;
 
@@ -75,22 +77,27 @@ public class ReflectionQuestionBank {
         }
     }
 
-    public ArrayList<ReflectionQuestion> getFiveRandomQuestions() {
-        ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
+    public ArrayList<ReflectionQuestion> getFiveRandomQuestions() throws ReflectException {
+        try {
+            ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
 
-        // Create a copy of the original list
-        ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionQuestionList);
+            // Create a copy of the original list
+            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionQuestionList);
 
-        // Shuffle the copy list
-        Collections.shuffle(copyList);
+            // Shuffle the copy list
+            Collections.shuffle(copyList);
 
-        // Select the first five questions from the shuffled copy list and
-        // add them to the result list
-        for (int i = 0; i < 5; i++) {
-            randomQuestions.add(copyList.get(i));
+            // Select the first five questions from the shuffled copy list and
+            // add them to the result list
+            for (int i = 0; i < 5; i++) {
+                randomQuestions.add(copyList.get(i));
+            }
+
+            return randomQuestions;
+        } catch (IndexOutOfBoundsException e) {
+            throw new ReflectException("Question bank is empty");
         }
 
-        return randomQuestions;
     }
 
     public int getTaskListSize() {

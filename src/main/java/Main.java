@@ -1,7 +1,7 @@
 import commands.Command;
 import exceptions.Wellness360Exception;
 import parser.Parser;
-import reflection.Reflection;
+import reflection.ReflectionManager;
 import ui.Ui;
 import java.util.Scanner;
 import sleep.SleepTracker;
@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
         SleepTracker sleepTracker = new SleepTracker();
-        Reflection reflection = new Reflection();
+        ReflectionManager reflection = new ReflectionManager();
 
         while (!isExit) {
 

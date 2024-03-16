@@ -1,18 +1,19 @@
 package reflection;
 
+import exceptions.ReflectException;
 import ui.Ui;
 
 import java.util.ArrayList;
 
-public class Reflection {
+public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
 
-    public Reflection() {
+    public ReflectionManager() {
         this.questionBank = new ReflectionQuestionBank();
     }
 
-    public void printFiveRandomQuestions() {
+    public void printFiveRandomQuestions() throws ReflectException {
         fiveRandomQuestions = questionBank.getFiveRandomQuestions();
         Ui.printList(fiveRandomQuestions);
     }

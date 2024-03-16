@@ -3,10 +3,10 @@ package parser;
 import commands.Command;
 import commands.reflectcommands.GetReflectionQuestionsCommand;
 import exceptions.ReflectException;
-import reflection.Reflection;
+import reflection.ReflectionManager;
 
 public class ReflectionCommandParser {
-    public static Command determineReflectionCommand(Reflection reflection, String commandArgs)
+    public static Command determineReflectionCommand(ReflectionManager reflection, String commandArgs)
             throws ReflectException {
 
         String[] userCommand = commandArgs.trim().split("\\s+", 2);

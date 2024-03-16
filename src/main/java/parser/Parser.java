@@ -2,7 +2,7 @@ package parser;
 
 import commands.Command;
 import commands.ExitCommand;
-import reflection.Reflection;
+import reflection.ReflectionManager;
 import sleep.SleepTracker;
 
 import static parser.ReflectionCommandParser.determineReflectionCommand;
@@ -12,7 +12,7 @@ import exceptions.Wellness360Exception;
 public class Parser {
 
     public static Command determineCommand(SleepTracker sleepTracker,
-                                           Reflection reflection,
+                                           ReflectionManager reflection,
                                            String userInput)
             throws Wellness360Exception {
 
