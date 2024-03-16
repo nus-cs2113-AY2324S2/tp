@@ -43,7 +43,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke FlirtFork = new Duke(FILE_PATH);
-        FlirtFork.run();
+        Duke flirtFork = new Duke(FILE_PATH);
+        flirtFork.run();
     }
 }
