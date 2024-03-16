@@ -10,7 +10,8 @@ public class SleepCycleListTest {
     private SleepCycleList sleepCycleList;
 
     @BeforeEach
-    public void setUp() { sleepCycleList = new SleepCycleList();
+    public void setUp() {
+        sleepCycleList = new SleepCycleList();
     }
 
     @Test
