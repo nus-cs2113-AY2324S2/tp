@@ -1,16 +1,12 @@
 package seedu.duke;
 
-public class Activity extends Favourites{
-    public Activity(String description) {
-        super(description);
-    }
+public class Activity extends Favourites {
+    protected String location;
+    protected String price;
 
-    @Override
-    public String toString() {
-        return "[A] " + super.toString();
-    }
-
-    public String toFileFormat() {
-        return "A | " + description;
+    public Activity(String name, String location, String price) {
+        super(name);
+        this.location = location;
+        this.price = price;
     }
 }
