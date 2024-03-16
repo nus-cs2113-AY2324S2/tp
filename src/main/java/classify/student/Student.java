@@ -7,6 +7,9 @@ package classify.student;
  */
 public class Student {
 
+    //@@author tayponghee
+    private StudentAttributes attributes;
+
     //@@author Cryolian
     public String name;
     public Details details = new Details();
@@ -19,7 +22,22 @@ public class Student {
         this.name = name;
         this.details = details;
     }
-    
+
+    //@@ tayponghee
+    public Student(String name, StudentAttributes attributes) {
+        this.name = name;
+        this.attributes = attributes;
+    }
+
+    public StudentAttributes getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(StudentAttributes attributes) {
+        this.attributes = attributes;
+    }
+
+    //@@ Cryolian
     public String getName() {
         return name;
     }
