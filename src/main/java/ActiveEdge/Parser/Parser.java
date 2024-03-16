@@ -21,26 +21,15 @@ public class Parser {
             String[] items = parts.split("/");
             if (items[0].equals("w")) {
                 String quantityString = items[1];
-                try {
-                    int quantity = Integer.parseInt(quantityString);
-                    if (quantity <= 0) {
-                        System.out.println("Water quantity must be a positive integer.");
-                        return;
-                    }
-                    LogWaterCommand logWaterCommand = new LogWaterCommand(quantity);
-                    logWaterCommand.execute();
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid water quantity. Please provide a valid integer.");
-                }
+                LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
+                logWaterCommand.execute();
 
-            }
-
-            new LogMealCommand(input);
-        }       else if (input.startsWith("list")) {
+            }else if(items[0].equals("m")) {
+                new LogMealCommand(input);
+            }else if (input.startsWith("list")) {
                 if (input.trim().length() > 4) { //list meals
                     new ListMealsCommand();
-            } else { //list both
-
+                }
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
