@@ -5,10 +5,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.*;
 
 
 public class Storage {
     public static void readTripFile(ArrayList<Trip> trips, String currentDir) {
+
+        Logger logger = Logger.getLogger("Storage");
         //local path of data file
         File f = new File(currentDir + "/local-voyagers.txt" );
 
@@ -27,11 +30,14 @@ public class Storage {
                 Trip trip = new Trip(inputs[0], startDate, endDate, inputs[3], inputs[4]);
             }
         } catch (FileNotFoundException e) {
+
             System.out.println("File not found. \nCreating new file... \nFile created.");
             try {
                 f.createNewFile();
+                logger.log(Level.INFO, "File created.");
             } catch (java.io.IOException ex) {
                 System.out.println("An error occurred.");
+                logger.log(Level.SEVERE, "An error occurred when creating the file.");
             }
         } catch (ParseException e) {
             System.out.println("An error occurred.");
