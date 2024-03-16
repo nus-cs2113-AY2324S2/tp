@@ -47,4 +47,15 @@ public class ExerciseManager {
         }
         return false;
     }
+
+    public void editExercise(String prevExerciseName, String newExerciseName) {
+        Exercise newExercise = new Exercise(newExerciseName);
+        for (Exercise exercise : exercises) {
+            if (exercise.exerciseName.equals(prevExerciseName)) {
+                int editIndex = exercises.indexOf(exercise);
+                exercises.set(editIndex, newExercise);
+                return;
+            }
+        }
+    }
 }
