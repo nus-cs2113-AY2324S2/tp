@@ -13,21 +13,44 @@
 
 ## Features 
 
-{Give detailed description of each feature}
+1. Menu
+2. Add
+3. List Expenses
+4. List Savings
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Listing Expenses: `list expense`
+    - When listing expenses, users have the option to filter expenses based on categories.
+    - Users can specify a category to view expenses related to that category only.
+    - If no category is specified, the system will list all expenses.
+    - The listed expenses include details such as the date of the expense, category, amount, and description.
+    - Total expenses are displayed at the end of the list.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `list expense CATEGORY`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `CATEGORY` is optional and can be left blank.
+* The `CATEGORY` must be a pre-existing category if inputted.
 
-Example of usage: 
+Example Usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`list expenses`
+`list expenses Transport`
+`list expenses Housing`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Listing Savings: `list savings`
+    - Similar to listing expenses, users can view their savings with optional category filtering.
+    - Savings are listed along with their respective categories and amounts.
+    - Total savings are displayed at the end of the list, after deducting relevant expenditures.
+
+Format: `list savings CATEGORY`
+
+* The `CATEGORY` is optional and can be left blank.
+* The `CATEGORY` must be a pre-existing category if inputted.
+
+Example Usage:
+
+`list savings`
+`list savings Salary`
+`list savings Investment`
 
 ## FAQ
 
@@ -40,3 +63,6 @@ Example of usage:
 {Give a 'cheat sheet' of commands here}
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
+* 
+* List Expenses: `list expenses CATEGORY`
+* List Savings: `list savings CATEGORY`
