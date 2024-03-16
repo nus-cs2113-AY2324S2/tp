@@ -1,5 +1,6 @@
 package ActiveEdge.Parser;
 
+import java.io.IOException;
 import java.util.Scanner;
 import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
@@ -9,6 +10,8 @@ import ActiveEdge.Task.LogMeals;
 import ActiveEdge.Task.Task;
 import ActiveEdge.Task.TaskList;
 import ActiveEdge.Command.*;
+
+import static ActiveEdge.Task.TaskList.tasksList;
 
 
 public class Parser {
@@ -34,10 +37,18 @@ public class Parser {
                 logMealCommand.execute();
             }
         } else if (input.startsWith("list")) {
+            if (tasksList.size() > 0) {
+                if (input.substring(4).trim().contains("meals")) { //list meals
+                    new ListMealsCommand();
+                } else { //list both
+
+                }
+            } else {
+                System.out.println("There are no items in your list!");
             if (input.trim().length() > 4) { //list meals
                 new ListMealsCommand();
             } else { //list both
-
+              
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");

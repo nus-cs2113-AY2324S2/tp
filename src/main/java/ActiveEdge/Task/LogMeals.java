@@ -40,6 +40,23 @@ public class LogMeals extends Task {
 //    public int getMealCalories () { return mealCalories; }
 //    public int getTotalCalories() { return totalCalories; }
 
+
+    protected Integer servings;
+    //protected int mealCalories;
+ 
+    public LogMeals (int servings, /*int mealCalories,*/ String description) {
+        super(description);
+        this.servings = servings;
+        //this.mealCalories = mealCalories;
+
+    }
+
+    public int getServings() { return servings; }
+
+    //public int getMealCalories() { return mealCalories; }
+
+    public String getFoodName() { return description; }
+  
     protected String description;
     protected Integer servings;
     //protected int mealCalories;
@@ -56,4 +73,5 @@ public class LogMeals extends Task {
     //public int getMealCalories() { return mealCalories; }
 
     public String getDescription() { return description; }
+
 }
