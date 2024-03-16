@@ -77,7 +77,7 @@ public class ExerciseCommand extends Command {
             return new CommandResult("Previous exercise name cannot be empty.");
         }
 
-        if (newExercise.size()!=1 ) {
+        if (newExercise.size() != 1 ) {
             return new CommandResult("There must be 1 new exercise.");
         }
 
