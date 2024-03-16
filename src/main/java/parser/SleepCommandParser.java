@@ -20,7 +20,7 @@ public class SleepCommandParser {
         case "list":
             return new ListSleepCommand(sleepTracker);
         default:
-            throw new SleepException("Unknown command");
+            throw new SleepException("Unknown sleep command");
         }
     }
 }

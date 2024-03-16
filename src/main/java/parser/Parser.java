@@ -2,13 +2,20 @@ package parser;
 
 import commands.Command;
 import commands.ExitCommand;
+import reflection.Reflection;
 import sleep.SleepTracker;
+
+import static parser.ReflectionCommandParser.determineReflectionCommand;
 import static parser.SleepCommandParser.determineSleepCommand;
 import exceptions.Wellness360Exception;
 
 public class Parser {
 
-    public static Command determineCommand(SleepTracker sleepTracker, String userInput) throws Wellness360Exception {
+    public static Command determineCommand(SleepTracker sleepTracker,
+                                           Reflection reflection,
+                                           String userInput)
+            throws Wellness360Exception {
+
         String[] userWords = userInput.trim().split("\\s+", 2);
         String userCommandSection = userWords[0];
 
@@ -16,6 +23,7 @@ public class Parser {
 
         switch (userCommandSection) {
         case "reflect":
+            return determineReflectionCommand(reflection, commandArgs);
         case "habit":
         case "sleep":
             return determineSleepCommand(sleepTracker, commandArgs);

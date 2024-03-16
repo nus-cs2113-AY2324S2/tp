@@ -1,6 +1,7 @@
 import commands.Command;
 import exceptions.Wellness360Exception;
 import parser.Parser;
+import reflection.Reflection;
 import ui.Ui;
 import java.util.Scanner;
 import sleep.SleepTracker;
@@ -13,6 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
         SleepTracker sleepTracker = new SleepTracker();
+        Reflection reflection = new Reflection();
 
         while (!isExit) {
 
@@ -23,7 +25,7 @@ public class Main {
             //execute user command if it is valid else throw exception
             //save tasks to file after each command
             try {
-                Command userCommand = Parser.determineCommand(sleepTracker, userInput);
+                Command userCommand = Parser.determineCommand(sleepTracker, reflection, userInput);
                 userCommand.execute();
                 isExit = userCommand.isExit();
             } catch (Wellness360Exception e) {
