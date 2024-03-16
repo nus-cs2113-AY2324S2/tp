@@ -45,6 +45,10 @@ public class Parser {
                 }
             } else {
                 System.out.println("There are no items in your list!");
+            if (input.trim().length() > 4) { //list meals
+                new ListMealsCommand();
+            } else { //list both
+              
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
