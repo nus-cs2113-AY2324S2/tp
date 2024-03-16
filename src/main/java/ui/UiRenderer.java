@@ -8,22 +8,24 @@ import data.TaskManager;
 
 public class UiRenderer {
     private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private static final String HORIZONTAL_DIVIDER = "+------------";
 
-    public static void printWeekHeader() {
+    private static void printHorizontalDivider() {
         for (String day : WEEK_DAYS) {
-            System.out.print("+------------");
+            System.out.print(HORIZONTAL_DIVIDER);
         }
         System.out.println("+");
+    }
+
+    public static void printWeekHeader() {
+        printHorizontalDivider();
 
         for (String day : WEEK_DAYS) {
             System.out.printf("| %-10s ", day);
         }
         System.out.println("|");
 
-        for (String day : WEEK_DAYS) {
-            System.out.print("+------------");
-        }
-        System.out.println("+");
+        printHorizontalDivider();
     }
 
     public static void printWeekDays(LocalDate startOfWeek, DateTimeFormatter dateFormatter, TaskManager taskManager) {
@@ -34,10 +36,7 @@ public class UiRenderer {
         }
         System.out.println("|");
 
-        for (String day : WEEK_DAYS) {
-            System.out.print("+------------");
-        }
-        System.out.println("+");
+        printHorizontalDivider();
 
         int maxTasks = 0;
         for (int i = 0; i < 7; i++) {
@@ -62,9 +61,6 @@ public class UiRenderer {
             System.out.println("|");
         }
 
-        for (String day : WEEK_DAYS) {
-            System.out.print("+------------");
-        }
-        System.out.println("+");
+        printHorizontalDivider();
     }
 }
