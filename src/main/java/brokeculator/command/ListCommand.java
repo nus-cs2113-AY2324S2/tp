@@ -1,6 +1,5 @@
 package brokeculator.command;
 
-import brokeculator.expense.Expense;
 import brokeculator.expense.ExpenseManager;
 import brokeculator.frontend.UI;
 
