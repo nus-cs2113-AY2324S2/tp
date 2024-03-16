@@ -7,26 +7,24 @@ import java.util.Scanner;
 
 public class ActiveEdge {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the ActiveEdge application.
      */
-    public static void run() {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         String logo = "ACTIVE EDGE";
         System.out.println("Hello from\n" + logo + " AI assistant!");
         System.out.println("How can I help you today?");
 
+        FoodStorage foodStorage = new FoodStorage();
         Parser parser = new Parser();
 
-        String input = in.nextLine();
+        String input = scanner.nextLine();
 
-        while(!input.equals("bye")) {
-            parser.handleInput(input);
-            input = in.nextLine();
+        while (!input.equalsIgnoreCase("bye")) {
+            parser.handleInput(input, foodStorage, scanner);
+            input = scanner.nextLine();
         }
-        ByeUi.printByeMessage();
-    }
 
-    public static void main(String[] args)  {
-        new ActiveEdge().run();
+        ByeUi.printByeMessage();
     }
 }
