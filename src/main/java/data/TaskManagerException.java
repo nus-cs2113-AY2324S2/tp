@@ -3,6 +3,8 @@ package data;
 // uncomment below line when WeekView is implemented
 // import main.WeekView;
 
+import Time.WeekView;
+
 import java.time.LocalDate;
 import java.util.List;
 
