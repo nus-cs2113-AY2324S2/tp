@@ -1,5 +1,6 @@
 package brokeculator.storage.parsing;
 import brokeculator.command.Command;
+import brokeculator.command.InvalidCommand;
 
 public class GeneralInputParser {
     public GeneralInputParser() {
@@ -7,10 +8,11 @@ public class GeneralInputParser {
     }
     public Command getCommandFromUserInput(String userInput) {
         //TODO
-        return null;
-    }
-    public Command getCommandFromFileInput(String lineInFile) {
-        // TODO
-        return null;
+        switch (userInput) {
+        case ("exit"):
+            return ExitParser.parseInput(userInput);
+        default:
+            return new InvalidCommand("invalid command");
+        }
     }
 }
