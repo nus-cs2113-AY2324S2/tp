@@ -55,8 +55,6 @@ public abstract class ActivityManager {
         }
     }
 
-    public abstract void edit();
-
     public void delete(Activity activity) throws Exceptions.ActivityDoesNotExists {
         String activityName = activity.getActivityName();
         Integer index = this.activityHashMap.get(activityName);

@@ -1,11 +1,11 @@
 package byteceps.commands;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Parser {
     private String command;
     private InputArguments commandAction;
-    private ArrayList<InputArguments> additionalArguments;
+    private HashMap<String, String> additionalArguments;
 
     public Parser() {
         flush();
@@ -14,7 +14,7 @@ public class Parser {
     private void flush() {
         command = "";
         commandAction = null;
-        additionalArguments = new ArrayList<>();
+        additionalArguments = new HashMap<>();
     }
 
     public void parseInput(String line) {
@@ -36,18 +36,16 @@ public class Parser {
             String flag = currentKV[0].trim();
 
             String parameter;
-
             if (currentKV.length > 1) {
                 parameter = currentKV[1].trim();
             } else {
                 parameter = "";
             }
-            InputArguments currentInputArgument = new InputArguments(flag, parameter);
 
             if (commandAction == null) {
-                commandAction = currentInputArgument;
+                commandAction = new InputArguments(flag, parameter);
             } else {
-                additionalArguments.add(currentInputArgument);
+                additionalArguments.put(flag, parameter);
             }
         }
     }
@@ -64,9 +62,9 @@ public class Parser {
         return commandAction.getParameter();
     }
 
-    //    public ArrayList<InputArguments> getAdditionalArguments() {
-    //        return additionalArguments;
-    //    }
+    public HashMap<String, String> getAdditionalArguments() {
+        return additionalArguments;
+    }
 
     @Override
     public String toString() {

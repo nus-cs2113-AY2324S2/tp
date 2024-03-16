@@ -8,6 +8,10 @@ public class Exercise extends Activity {
     }
 
     //    public String getExerciseName() {
-    //        return exerciseName;
+    //        return activityName;
     //    }
+
+    public void editExerciseName(String newExerciseName) {
+        activityName = newExerciseName;
+    }
 }

@@ -107,4 +107,42 @@ class ExerciseManagerTest {
 
         assertThrows(IllegalStateException.class, ()->exerciseManager.execute(parser));
     }
+
+    @Test
+    public void execute_validExerciseEdit_success() {
+        setUpStreams();
+
+        String validInput = "exercise /add Push-ups";
+        parser.parseInput(validInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+        exerciseManager.list();
+
+        String editedInput = "exercise /edit Push-ups /to Push Ups";
+        parser.parseInput(editedInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+        exerciseManager.list();
+
+        String expectedOutput = "Added exercise: Push-ups\n" +
+                "listing Exercise\n" +
+                "1. Push-ups\n" +
+                "Edited exercise from Push-ups to Push Ups\n" +
+                "listing Exercise\n" +
+                "1. Push Ups\n";
+
+        assertEquals(expectedOutput, outContent.toString());
+
+        restoreStreams();
+    }
+
+    @Test
+    public void execute_invalidExerciseEdit_throwsInvalidInput() {
+        String invalidInput = "exercise /edit";
+        parser.parseInput(invalidInput);
+        assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
+
+        String invalidInput2 = "exercise /edit non-existent";
+        parser.parseInput(invalidInput2);
+        assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
+
+    }
 }
