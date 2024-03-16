@@ -1,6 +1,5 @@
 package seedu.binbash;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -61,7 +60,6 @@ public class ItemList {
     }
 
     /**
-     *
      * Returns a string representation of all the items in the list. Each item's string
      * representation is obtained by calling its `toString` method.
      *

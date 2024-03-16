@@ -2,7 +2,12 @@ package seedu.binbash;
 
 import java.util.regex.Matcher;
 
-import seedu.binbash.command.*;
+import seedu.binbash.command.Command;
+import seedu.binbash.command.AddCommand;
+import seedu.binbash.command.DeleteCommand;
+import seedu.binbash.command.SearchCommand;
+import seedu.binbash.command.ListCommand;
+import seedu.binbash.command.ByeCommand;
 
 public class Parser {
     private final ItemList itemList;
