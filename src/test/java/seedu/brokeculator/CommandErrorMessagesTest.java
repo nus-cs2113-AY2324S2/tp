@@ -1,6 +1,6 @@
 package seedu.brokeculator;
 
-import brokeculator.CommandErrorMessages;
+import brokeculator.enumerators.CommandErrorMessages;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

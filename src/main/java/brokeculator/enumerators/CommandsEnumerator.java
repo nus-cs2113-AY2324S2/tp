@@ -1,4 +1,4 @@
-package brokeculator;
+package brokeculator.enumerators;
 
 public enum CommandsEnumerator {
     LIST_COMMAND("list"),

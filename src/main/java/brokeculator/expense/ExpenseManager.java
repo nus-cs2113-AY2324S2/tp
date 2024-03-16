@@ -8,4 +8,9 @@ public class ExpenseManager {
     public void add(Expense expense) {
         // TODO
     }
+
+    public String getExpensesStringRepresentations() {
+        // TODO
+        return null;
+    }
 }

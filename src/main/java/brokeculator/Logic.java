@@ -1,4 +1,7 @@
 package brokeculator;
+import brokeculator.expense.ExpenseManager;
+import brokeculator.storage.FileManager;
+import brokeculator.command.Command;
 
 public class Logic {
     private GeneralInputParser mainParser;

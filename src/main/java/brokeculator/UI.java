@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class UI {
     private static final String STRING_DECORATION = "------------------------------------";
+    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * appends topLineDecoration and bottomLineDecoration to the top and bottom of message respectively
@@ -22,11 +23,18 @@ public class UI {
      * @return String singleLineUserInput single line of user input
      */
     public static String getUserInput() {
-        Scanner stdinScanner = new Scanner(System.in);
-        String singleLineUserInput = stdinScanner.nextLine();
-        return singleLineUserInput;
+        try {
+            String singleLineUserInput = scanner.nextLine();
+            return singleLineUserInput;
+        } catch (Exception e) {
+            UI.print("Error in scanning input, recreating scanner");
+            recreateScanner();
+            return null;
+        }
     }
-
+    private static void recreateScanner() {
+        scanner = new Scanner(System.in);
+    }
     /**
      *  prints out message to stdout with the decorators ------ at the top and bottom of the file
      * @param message the message to print
