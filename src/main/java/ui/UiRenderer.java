@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-// uncomment below line when merging with Taskmanager
-// import main.TaskManager;
+
+import data.TaskManager;
 
 public class UiRenderer {
     private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};

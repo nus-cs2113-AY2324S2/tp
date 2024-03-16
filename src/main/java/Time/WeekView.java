@@ -1,4 +1,7 @@
-package seedu.duke;
+package Time;
+
+import data.TaskManager;
+import ui.UiRenderer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,8 +18,8 @@ public class WeekView {
     public void printWeekView(TaskManager taskManager) {
         LocalDate endOfWeek = startOfWeek.plusDays(6);
         System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) + " - " + dateFormatter.format(endOfWeek));
-        UIRenderer.printWeekHeader();
-        UIRenderer.printWeekDays(startOfWeek, dateFormatter, taskManager);
+        UiRenderer.printWeekHeader();
+        UiRenderer.printWeekDays(startOfWeek, dateFormatter, taskManager);
     }
 
     public void nextWeek() {
