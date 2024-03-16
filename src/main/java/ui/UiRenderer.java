@@ -14,6 +14,7 @@ public class UiRenderer {
     private static final String ENTRY_FORMAT = VERTICAL_DIVIDER + " %-10s ";
     private static final String TASK_DISPLAY_FORMAT = VERTICAL_DIVIDER + " %-10.10s ";
     private static final String EMPTY_TASK_DISPLAY_FORMAT = VERTICAL_DIVIDER + "            ";
+    private static final int numberOfDaysInWeek = 7;
 
     public static void printWeekHeader() {
         printHorizontalDivider();
@@ -46,7 +47,7 @@ public class UiRenderer {
     }
 
     private static void printDateRow(DateTimeFormatter dateFormatter, LocalDate date) {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numberOfDaysInWeek; i++) {
             System.out.printf(ENTRY_FORMAT, dateFormatter.format(date));
             date = date.plusDays(1);
         }
@@ -55,7 +56,7 @@ public class UiRenderer {
 
     public static void printWeeksTasks(LocalDate startOfWeek, int maxTasks, TaskManager taskManager) {
         for (int taskIndex = 0; taskIndex < maxTasks; taskIndex++) {
-            for (int dayIndex = 0; dayIndex < 7; dayIndex++) {
+            for (int dayIndex = 0; dayIndex < numberOfDaysInWeek; dayIndex++) {
                 LocalDate currentDate = startOfWeek.plusDays(dayIndex);
                 List<String> dayTasks = taskManager.getTasksForDate(currentDate);
                 printTaskForDay(dayTasks, taskIndex);
@@ -75,7 +76,7 @@ public class UiRenderer {
 
     private static int getMaxTasks(LocalDate startOfWeek, TaskManager taskManager) {
         int maxTasks = 0;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numberOfDaysInWeek; i++) {
             LocalDate currentDate = startOfWeek.plusDays(i);
             int tasksSize = taskManager.getTasksForDate(currentDate).size();
             if (tasksSize > maxTasks) {
