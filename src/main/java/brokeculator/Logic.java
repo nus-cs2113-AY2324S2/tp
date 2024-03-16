@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator;
 
 public class Logic {
     private GeneralInputParser mainParser;

@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator;
 
 public class ExitCommand extends Command {
     public static final String GOODBYE_STRING = "Goodbye!";

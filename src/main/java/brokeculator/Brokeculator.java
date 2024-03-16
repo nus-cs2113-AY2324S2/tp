@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator;
 
 public class Brokeculator {
     private static final String GREETING = "Hello! I'm Brokeculator!"

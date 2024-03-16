@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator;
 
 import java.util.Scanner;
 

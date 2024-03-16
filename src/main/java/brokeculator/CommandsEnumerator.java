@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator;
 
 public enum CommandsEnumerator {
     LIST_COMMAND("list"),
