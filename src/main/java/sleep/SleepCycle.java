@@ -1,24 +1,24 @@
 package sleep;
 
 public class SleepCycle {
-    double hours_slept;
-    String date_of_sleep;
+    private double hoursSlept;
+    private String dateOfSleep;
 
     public SleepCycle(double hours, String date) {
-        this.hours_slept = hours;
-        this.date_of_sleep = date;
+        this.hoursSlept = hours;
+        this.dateOfSleep = date;
     }
 
-    public double getHours_slept() {
-        return hours_slept;
+    public double getHoursSlept() {
+        return hoursSlept;
     }
 
-    public String getDate_of_sleep() {
-        return date_of_sleep;
+    public String getDateOfSleep() {
+        return dateOfSleep;
     }
 
     @Override
     public String toString() {
-        return this.date_of_sleep  + ": " + this.hours_slept;
+        return this.dateOfSleep  + ": " + this.hoursSlept;
     }
 }
