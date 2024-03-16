@@ -1,4 +1,4 @@
-package seedu.duke.userprofile;
+package player;
 
 public class Asset {
     private static int totalAsset = 5000;

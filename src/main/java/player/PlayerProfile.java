@@ -1,20 +1,20 @@
-package seedu.duke.userprofile;
+package player;
 
-public class Profile {
+public class PlayerProfile {
     private final String name;
     private final String occupation;
     private final Health health;
     private final Asset asset;
 
 
-    public Profile(String name, String occupation) {
+    public PlayerProfile(String name, String occupation) {
         this.name = name;
         this.health = new Health();
         this.asset = new Asset(100000);
         this.occupation = occupation;
     }
 
-    public String outputName() {
+    public String getName() {
         return this.name;
     }
 
