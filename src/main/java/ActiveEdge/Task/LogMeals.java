@@ -5,7 +5,7 @@ import ActiveEdge.Task.Task;
 
 public class LogMeals extends Task {
 
-    protected String servings;
+    /* protected String servings;
 
     protected String calories;
 
@@ -13,27 +13,47 @@ public class LogMeals extends Task {
         super(description);
         this.servings = servings;
         this.calories = calories;
+    } */
+
+//    int servingsNum = Integer.parseInt(servings);
+//    int caloriesNum = Integer.parseInt(calories);
+//    int mealCalories = servingsNum * caloriesNum;
+//
+//    public static int totalCalories;
+//
+//    public int addCalories() {
+//        if(tasksList.size()==0) {
+//            totalCalories = 0;
+//        } else {
+//            totalCalories += mealCalories;
+//        }
+//        return totalCalories;
+//    }
+//
+//    /* public String toString() {
+//        return "You've logged " + servings + " serving of " + super.getDescription() + ".\n" +
+//                "Estimated calories: " + mealCalories +"\n" +
+//                "Total calories: " + totalCalories;
+//    } */
+//
+//    public int getServings() { return servingsNum; }
+//    public int getMealCalories () { return mealCalories; }
+//    public int getTotalCalories() { return totalCalories; }
+
+    protected String description;
+    protected Integer servings;
+    //protected int mealCalories;
+
+    public LogMeals (int servings, /*int mealCalories,*/ String description) {
+        super("Log Meal");
+        this.servings = servings;
+        //this.mealCalories = mealCalories;
+        this.description = description;
     }
 
-    int servingsNum = Integer.parseInt(servings);
-    int caloriesNum = Integer.parseInt(calories);
-    int mealCalories = servingsNum * caloriesNum;
+    public int getServings() { return servings; }
 
-    public static int totalCalories;
+    //public int getMealCalories() { return mealCalories; }
 
-    public int addCalories() {
-        if(tasksList.size()==0) {
-            totalCalories = 0;
-        } else {
-            totalCalories += mealCalories;
-        }
-        return totalCalories;
-    }
-
-    public String toString() {
-        return "You've logged " + servings + " serving of " + super.getDescription() + ".\n" +
-                "Estimated calories: " + mealCalories +"\n" +
-                "Total calories: " + totalCalories;
-    }
-
+    public String getDescription() { return description; }
 }

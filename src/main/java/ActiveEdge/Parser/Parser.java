@@ -5,6 +5,7 @@ import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
 import ActiveEdge.Command.LogWaterCommand;
 import ActiveEdge.Command.ViewWaterIntakeCommand;
+import ActiveEdge.Task.LogMeals;
 import ActiveEdge.Task.Task;
 import ActiveEdge.Task.TaskList;
 import ActiveEdge.Command.*;
@@ -24,12 +25,19 @@ public class Parser {
                 LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
                 logWaterCommand.execute();
 
-            }else if(items[0].equals("m")) {
-                new LogMealCommand(input);
-            }else if (input.startsWith("list")) {
-                if (input.trim().length() > 4) { //list meals
-                    new ListMealsCommand();
-                }
+            } else if(items[0].equals("m")) {
+                String[] logParts = parts.split("m/|s/");
+                String description = logParts[0].trim();
+                String servings = logParts[1].trim();
+
+                LogMealCommand logMealCommand = new LogMealCommand(description, servings);
+                logMealCommand.execute();
+            }
+        } else if (input.startsWith("list")) {
+            if (input.trim().length() > 4) { //list meals
+                new ListMealsCommand();
+            } else { //list both
+
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
