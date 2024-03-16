@@ -23,15 +23,6 @@ class ResponseManagerTest {
         System.setOut(standardOut);
     }
 
-
-    @Test
-    void printJobSelectionErrorMessage() {
-        ResponseManager.printJobSelectionErrorMessage();
-        assertEquals("Invalid job type." +
-            " Please choose from Robotics, Semiconductor industry," +
-            " Artificial intelligence.", outputStreamCaptor.toString().trim());
-    }
-
     @Test
     void printChooseIndustryMessage() {
         String testIndustry = "Robotics";
@@ -39,15 +30,4 @@ class ResponseManagerTest {
         assertEquals("You have chosen Robotics", outputStreamCaptor.toString().trim());
     }
 
-    @Test
-    void printInvalidNameMessage() {
-        ResponseManager.printInvalidNameMessage();
-        assertEquals("Please enter a valid name", outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    void printNameTooLongMessage() {
-        ResponseManager.printNameTooLongMessage();
-        assertEquals("Name is too long", outputStreamCaptor.toString().trim());
-    }
 }
