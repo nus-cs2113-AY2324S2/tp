@@ -1,4 +1,4 @@
-package seedu.expense;
+package brokeculator.expense;
 
 public class ExpenseManager {
     public ExpenseManager() {
@@ -7,5 +7,10 @@ public class ExpenseManager {
 
     public void add(Expense expense) {
         // TODO
+    }
+
+    public String getExpensesStringRepresentations() {
+        // TODO
+        return null;
     }
 }

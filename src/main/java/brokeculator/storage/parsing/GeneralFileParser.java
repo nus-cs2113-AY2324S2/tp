@@ -3,7 +3,7 @@ package brokeculator.storage.parsing;
 import brokeculator.command.AddExpenseFromFileCommand;
 import brokeculator.command.Command;
 import brokeculator.command.InvalidCommand;
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.ExpenseManager;
 
 public class GeneralFileParser {
     private ExpenseManager expenseManager;
