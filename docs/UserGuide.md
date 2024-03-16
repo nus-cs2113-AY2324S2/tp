@@ -2,41 +2,120 @@
 
 ## Introduction
 
-{Give a product intro}
+PulsePilot is a **desktop app for tracking health-related information, optimised for users via a Command Line Interface (CLI)**. If one can type fast, you can key in and track health-related information faster than traditional GUI applications installed on your phone or computer.
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+    - [Notes About Command Format](#notes-about-command-format)
+    - [General](#general)
+      - [List](#list)
+      - [Help](#help)
+      - [Exit](#exit)
+      - [Saving Data](#saving-data)
+    - [Workouts](#workouts)
+      - [Run](#run)
+      - [Gym](#gym)
+    - [Health](#health)
+      - [BMI](#bmi)
+      - [Menstrual Cycle](#menstrual-cycle)
+* [Frequently Asked Questions (FAQ)](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have the latest Java 11.
+2. Download the latest `pulsepilot.jar`.
+3. Copy the file to the folder you want to use as the home folder for PulsePilot.
+4. Open a command terminal (either cmd.exe or bash), cd to the folder with `pulsepilot.jar` in it, and use `java -jar pulsepilot.jar` to run the application.
+5. The welcome message for PulsePilot should be printed to the screen.
+6. Type commands in the command line and press Enter to execute it. Using `help` and pressing Enter will print the help message.
 
-## Features 
+```
+Include banner from bot here.
+```
 
-{Give detailed description of each feature}
+## Features
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Notes About Command Format
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+* Words in UPPER_CASE are the parameters to be supplied by the user.
+    * TO ADD EXAMPLES FOR THE SPECIFIC COMMANDS.
+* Items in square brackets are optional.
+    * TO ADD EXAMPLES FOR THE SPECIFIC COMMANDS.
+* Extraneous parameters for commands that do not take in parameters (such as help) will be ignored.
+    * e.g. If the command entered is `help me`, it will be interpreted as `help`.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* Items with `...`  after them can be used multiple times, not including zero times.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### General
 
-Example of usage: 
+#### List
 
-`todo n/Write the rest of the User Guide d/next week`
+#### Help
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+#### Exit
+
+#### Saving Data
+
+
+### Workouts
+
+Tracks either a gym or exercise workout (to be changed).
+
+#### Gym
+
+Add New Gym: `gym`
+
+Adds a new gym exercise to the exercise tracker.
+
+Format: `gym /s:Bench Press...` (to be changed)
+* **At least one station** has to be provided. Can include as many as the user wants.
+* Parameters must be **in order**.
+* `STATION` refers to the station name (i.e. `Bench Press`, `Deadlift`)
+* `WEIGHT` is a **1 decimal point** number in kilograms (i.e. `85.5`) representing the amount of weight carried for the station.
+* `SETS` is a **positive integer more than 1** representing the number of sets done for the station.
+* `REPETITIONS` is a **positive integer more than 1** representing the number of repetitions done per set.
+* `DATE` is in `DD/MM/YYYY` format (i.e. `05/12/2023`).
+
+Example:
+
+Expected Output:
+
+```
+Include the expected output of the bot here. 
+```
+
+#### Run
+
+To be added. 
+
+### Health
+
+Tracks health of the user.
+
+#### BMI
+
+To be added.
+
+#### Menstrual Cycle
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**1.** How do I transfer my data to another computer?
 
-**A**: {your answer here}
+Ensure that you have the `data.txt` file in the same directory as `pulsepilot.jar`. 
+
+TO ADD MORE. 
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Action | Format, Examples |
+|--------|------------------|
+| help   |                  |
+| run    |                  |
+| gym    |                  |
+| bmi    |                  |
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+
