@@ -17,26 +17,14 @@ public class Parser {
         if (input.contains("help")) {
             new HelpCommand();
         } else if (input.startsWith("log")) {
-            String[] parts = input.substring(2).split(" ");
-            inputTrimmed = parts[1].trim();
-            if (inputTrimmed.startsWith("w")) {
-                if (parts.length < 3) {
-                    System.out.println("Invalid log water command format. Example: log w/500");
-                    return;
-                }
-                String quantityString = parts[2];
-                try {
-                    int quantity = Integer.parseInt(quantityString);
-                    if (quantity <= 0) {
-                        System.out.println("Water quantity must be a positive integer.");
-                        return;
-                    }
-                    LogWaterCommand logWaterCommand = new LogWaterCommand(quantity);
-                    logWaterCommand.execute(new TaskList(), null, null);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid water quantity. Please provide a valid integer.");
-                }
-            }else if(inputTrimmed.startsWith("m")) {
+            String parts = input.substring(4);
+            String[] items = parts.split("/");
+            if (items[0].equals("w")) {
+                String quantityString = items[1];
+                LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
+                logWaterCommand.execute();
+
+            }else if(items[0].equals("m")) {
                 new LogMealCommand(input);
             }else if (input.startsWith("list")) {
                 if (input.trim().length() > 4) { //list meals
@@ -45,15 +33,12 @@ public class Parser {
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
-            inputTrimmed = input.trim();
-            if (inputTrimmed.startsWith("c")) { //shows calorie
+            if (parts[1].startsWith("c")) { //shows calorie
                 new ShowCaloriesCommand();
-            } else if (inputTrimmed.startsWith("w")) { //shows water
+            } else if (parts[1].startsWith("w")) { //shows water
                 ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
-                viewWaterIntakeCommand.execute(new TaskList(), null, null);
-
-
-            } else if (inputTrimmed.startsWith("g")) {  //shows goals
+                viewWaterIntakeCommand.execute();
+            } else if (parts[1].startsWith("g")) {  //shows goals
 
             } else {
                 System.out.println("Hello!\n");
