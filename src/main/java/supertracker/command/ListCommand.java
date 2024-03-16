@@ -7,13 +7,13 @@ import supertracker.item.Item;
 import java.util.Collection;
 
 public class ListCommand implements Command {
-    private boolean qExists;
-    private boolean pExists;
+    private boolean hasQuantity;
+    private boolean hasPrice;
     private String firstParam;
 
-    public ListCommand(boolean qExists, boolean pExists, String firstParam) {
-        this.qExists = qExists;
-        this.pExists = pExists;
+    public ListCommand(boolean hasQuantity, boolean hasPrice, String firstParam) {
+        this.hasQuantity = hasQuantity;
+        this.hasPrice = hasPrice;
         this.firstParam = firstParam;
     }
 
@@ -23,7 +23,7 @@ public class ListCommand implements Command {
         Collection<Item> items = Inventory.items();
         Ui.listIntro(items.size());
         for (Item item : items) {
-            Ui.listItem(item, index, qExists, pExists, firstParam);
+            Ui.listItem(item, index, hasQuantity, hasPrice, firstParam);
             index++;
         }
     }

@@ -75,20 +75,20 @@ public class Ui {
         printIndent(listSize(size));
     }
 
-    public static void listItem(Item item, int index, boolean qExists, boolean pExists, String firstParam) {
+    public static void listItem(Item item, int index, boolean hasQuantity, boolean hasPrice, String firstParam) {
         String stringToPrint = index + ". Name: " + item.getName();
         String quantityString = "    Quantity: " + item.getQuantity();
         String priceString = "    Price: " + item.getPriceString();
 
-        if (qExists && pExists) {
+        if (hasQuantity && hasPrice) {
             if (firstParam.equals("q")) {
                 stringToPrint += (quantityString + priceString);
             } else if (firstParam.equals("p")) {
                 stringToPrint += (priceString + quantityString);
             }
-        } else if (qExists) {
+        } else if (hasQuantity) {
             stringToPrint += quantityString;
-        } else if (pExists) {
+        } else if (hasPrice) {
             stringToPrint += priceString;
         }
 
