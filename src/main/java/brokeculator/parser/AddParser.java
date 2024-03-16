@@ -1,8 +1,8 @@
 package brokeculator.parser;
 
 import brokeculator.command.AddCommand;
-import seedu.expense.Expense;
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.Expense;
+import brokeculator.expense.ExpenseManager;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
 package brokeculator.command;
 
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.ExpenseManager;
 
 public class SummariseCommand extends Command {
     private ExpenseManager expenseManager;

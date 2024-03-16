@@ -1,7 +1,7 @@
 package brokeculator.command;
 
-import seedu.expense.Expense;
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.Expense;
+import brokeculator.expense.ExpenseManager;
 
 public class AddCommand extends Command{
     private Expense expenseToAdd;

@@ -1,7 +1,7 @@
 package brokeculator.parser;
 
 import brokeculator.command.DeleteCommand;
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.ExpenseManager;
 
 public class DeleteParser {
     private ExpenseManager expenseManager;

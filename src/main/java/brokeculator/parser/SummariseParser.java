@@ -1,7 +1,7 @@
 package brokeculator.parser;
 
 import brokeculator.command.SummariseCommand;
-import seedu.expense.ExpenseManager;
+import brokeculator.expense.ExpenseManager;
 
 public class SummariseParser {
     private ExpenseManager expenseManager;

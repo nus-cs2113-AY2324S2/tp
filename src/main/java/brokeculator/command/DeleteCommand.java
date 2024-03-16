@@ -1,9 +1,6 @@
 package brokeculator.command;
 
-import seedu.expense.Expense;
-import seedu.expense.ExpenseManager;
-
-import java.util.ArrayList;
+import brokeculator.expense.ExpenseManager;
 
 public class DeleteCommand extends Command {
     private int indexToDelete;
