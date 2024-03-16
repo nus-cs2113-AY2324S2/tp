@@ -8,9 +8,9 @@ public class UI {
 
     /**
      * appends topLineDecoration and bottomLineDecoration to the top and bottom of message respectively
-     * @param String message message to encapsulate
-     * @param String topLineDecoration string to append to top of message
-     * @param String bottomLineDecoration string to append to bottom of message
+     * @param message message to encapsulate
+     * @param topLineDecoration string to append to top of message
+     * @param bottomLineDecoration string to append to bottom of message
      * @return message appended with topLineDecoration and bottomLineDecoration at top and bottom respectively
      */
     public static String prettify(String message, String topLineDecoration, String bottomLineDecoration) {
