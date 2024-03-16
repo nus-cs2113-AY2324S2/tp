@@ -15,6 +15,6 @@ public class ListCommand extends Command {
     }
 
     public String execute() {
-        return itemList.printList();
+        return itemList.printList(itemList.getItemList());
     }
 }
