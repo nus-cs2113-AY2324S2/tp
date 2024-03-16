@@ -22,6 +22,8 @@ public class InputParsing {
     private static final String CLASSES_ATTENDED = "Classes Attended: ";
     private static final String STUDENT_NOT_FOUND = "Student not found!";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
+    private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
+    private static final String HELP = "help";
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand) {
@@ -33,6 +35,17 @@ public class InputParsing {
         case VIEW:
             in.nextLine();
             viewStudent(masterStudentList, in);
+            Ui.printDivider();
+            break;
+
+        //@@author alalal47
+        case DELETE:
+            in.nextLine();
+            deleteStudent(masterStudentList, in);
+            break;
+
+        case HELP:
+            printHelpMessage();
             Ui.printDivider();
             break;
 
@@ -55,6 +68,31 @@ public class InputParsing {
             Ui.printDivider();
             break;
         }
+    }
+
+    //@@author alalal47
+    private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in) {
+        System.out.print(ENTER_STUDENT_NAME);
+        String studentName = in.nextLine().trim();
+        Student foundStudent = findStudentByName(masterStudentList, studentName);
+        if (foundStudent != null) {
+            System.out.println(NAME + foundStudent.getName());
+            System.out.println(STUDENT_DELETED_SUCCESSFULLY);
+        } else {
+            System.out.println(STUDENT_NOT_FOUND);
+        }
+        Ui.printDivider();
+        masterStudentList.remove(foundStudent);
+    }
+
+    private static void printHelpMessage() {
+        System.out.println("add                         Adds a student to the student list, " +
+                                                        "expects a name, grade and lessons attended");
+        System.out.println("view                        Views a students details, expects a name");
+        System.out.println("delete                      Deletes a student from the student list, expects a name");
+        System.out.println("list                        Displays the list of all students");
+        System.out.println("bye                         Exits Classify");
+        System.out.println("help                        Prints this help message");
     }
 
     //@@author tayponghee
