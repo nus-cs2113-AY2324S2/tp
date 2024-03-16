@@ -5,14 +5,14 @@ import seedu.duke.exceptions.FlirtForkException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class FlirtFork {
+public class Duke {
     private static final String FILE_PATH = "./data/FlirtFork.txt";
     private static final String HORIZONTAL = "____________________________________________________________";
     private FavouritesList favourites;
     private Ui ui;
     private Storage storage;
 
-    public FlirtFork(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -43,7 +43,7 @@ public class FlirtFork {
     }
 
     public static void main(String[] args) {
-        FlirtFork FlirtFork = new FlirtFork(FILE_PATH);
+        Duke FlirtFork = new Duke(FILE_PATH);
         FlirtFork.run();
     }
 }
