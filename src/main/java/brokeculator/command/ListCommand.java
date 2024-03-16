@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     @Override
     public void execute() {
         //TODO implement proper printing of expense list
-        ArrayList<Expense> listOfExpensesToPrint = expenseManager.listExpenses(amountToList);
-        UI.print(listOfExpensesToPrint);
+        //ArrayList<Expense> listOfExpensesToPrint = expenseManager.listExpenses(amountToList);
+        UI.print("placeholder for printing expense list");
     }
 }

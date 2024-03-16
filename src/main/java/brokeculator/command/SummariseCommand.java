@@ -12,6 +12,8 @@ public class SummariseCommand extends Command {
 
     @Override
     public void execute() {
-        expenseManager.summariseExpense();
+        //TODO implement proper expense summarising
+        //expenseManager.summariseExpense();
+        UI.print("placeholder for expense summarising");
     }
 }

@@ -14,6 +14,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute() {
-        expenseManager.delete(indexToDelete);
+        //TODO implement proper expense deleting
+        //expenseManager.delete(indexToDelete);
+        UI.print("placeholder for expense deleting");
     }
 }
