@@ -32,7 +32,7 @@ public class Parser {
         case "exit":
             return new ExitCommand(commandArgs);
         default:
-            throw new Wellness360Exception("Hello");
+            throw new Wellness360Exception("Unknown Wellness360 command");
         }
     }
 }
