@@ -3,8 +3,6 @@ package brokeculator.command;
 import brokeculator.expense.ExpenseManager;
 import brokeculator.frontend.UI;
 
-import java.util.ArrayList;
-
 public class ListCommand extends Command {
     private int amountToList;
     private ExpenseManager expenseManager;
