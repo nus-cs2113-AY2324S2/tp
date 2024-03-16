@@ -40,9 +40,9 @@ public class Ui {
      *
      * @param message the message to be printed
      */
-    public static void printMessageWithSepNewLine(String message) {System.out.println(SEP + "\n" +message + "\n" + SEP);
+    public static void printMessageWithSepNewLine(String message) {
+        System.out.println(SEP + "\n" +message + "\n" + SEP);
     }
-
 
     public static void printList(ArrayList list) {
         for (int i = 0; i < list.size(); i ++) {
