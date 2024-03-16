@@ -1,6 +1,9 @@
 package brokeculator.command;
 
+import seedu.expense.Expense;
 import seedu.expense.ExpenseManager;
+
+import java.util.ArrayList;
 
 public class ListCommand extends Command {
     private int amountToList;
@@ -13,6 +16,8 @@ public class ListCommand extends Command {
 
     @Override
     public void execute() {
-        expenseManager.list(amountToList);
+        //TODO implement proper printing of expense list
+        ArrayList<Expense> listOfExpensesToPrint = expenseManager.listExpenses(amountToList);
+        UI.print(listOfExpensesToPrint);
     }
 }
