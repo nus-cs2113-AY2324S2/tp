@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ class ResponseManagerTest {
     @Test
     void printChooseIndustryMessage() {
         String testIndustry = "Robotics";
-        ResponseManager.printChooseIndustryMessage(testIndustry);
+        ResponseManager.echoChosenIndustry(testIndustry);
         assertEquals("You have chosen Robotics", outputStreamCaptor.toString().trim());
     }
 
