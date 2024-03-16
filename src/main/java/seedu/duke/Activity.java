@@ -9,4 +9,9 @@ public class Activity extends Favourites {
         this.location = location;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }

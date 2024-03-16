@@ -2,14 +2,12 @@ package seedu.duke;
 
 import seedu.duke.exceptions.FlirtForkException;
 
-public class ListFavouritesCommand extends Command{
+public class GenerateItineraryCommand extends Command{
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage) throws FlirtForkException {
-        if (favourites.isEmpty()) {
-            ui.showFavourite("No treasures found this time. Let's fill it with some love!");
-        } else {
-            ui.listFavourites(favourites);
-        }
+        Food food = foods.getRandomFood();
+        Activity activity = activities.getRandomActivity();
+        System.out.println("You can do " + activity + " and have a nice meal at " + food);
     }
 }

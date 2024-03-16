@@ -44,6 +44,8 @@ public class Parser {
                 throw new FlirtForkException("OOPS! Please enter keyword(s) to find!");
             }
             return new FindFavouritesCommand(arguments);
+        case "itinerary":
+            return new GenerateItineraryCommand();
         case "exit":
             return new ExitCommand();
         default:
