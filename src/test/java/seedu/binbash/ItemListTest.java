@@ -42,7 +42,7 @@ class ItemListTest {
         itemList.addItem("testItem", "1");
         itemList.addItem("testItem", "2");
 
-        String actualOutput = itemList.printList();
+        String actualOutput = itemList.printList(itemList.getItemList());
 
         String expectedOutput = "testItem: 1" + System.lineSeparator() +
                 "testItem: 2" + System.lineSeparator();

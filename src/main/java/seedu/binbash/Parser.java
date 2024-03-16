@@ -2,11 +2,7 @@ package seedu.binbash;
 
 import java.util.regex.Matcher;
 
-import seedu.binbash.command.AddCommand;
-import seedu.binbash.command.ByeCommand;
-import seedu.binbash.command.Command;
-import seedu.binbash.command.DeleteCommand;
-import seedu.binbash.command.ListCommand;
+import seedu.binbash.command.*;
 
 public class Parser {
     private final ItemList itemList;
@@ -27,13 +23,15 @@ public class Parser {
             return parseDeleteCommand(userInput);
         case "list":
             return parseListCommand(userInput);
+        case "search":
+            return parseSearchCommand(userInput);
         default:
             return new ByeCommand(itemList);
         }
     }
 
-    private Command parseDeleteCommand(String arguments) {
-        Matcher matcher = DeleteCommand.COMMAND_FORMAT.matcher(arguments);
+    private Command parseDeleteCommand(String userInput) {
+        Matcher matcher = DeleteCommand.COMMAND_FORMAT.matcher(userInput);
         if (matcher.matches()) {
             int index = Integer.parseInt(matcher.group("index"));
             return new DeleteCommand(itemList, index);
@@ -42,12 +40,22 @@ public class Parser {
         }
     }
 
-    private Command parseAddCommand(String arguments) {
-        Matcher matcher = AddCommand.COMMAND_FORMAT.matcher(arguments);
+    private Command parseAddCommand(String userInput) {
+        Matcher matcher = AddCommand.COMMAND_FORMAT.matcher(userInput);
         if (matcher.matches()) {
             String itemName = matcher.group("itemName");
             String itemDescription = matcher.group("itemDescription");
             return new AddCommand(itemList, itemName, itemDescription);
+        } else {
+            return null;
+        }
+    }
+
+    private Command parseSearchCommand(String userInput) {
+        Matcher matcher = SearchCommand.COMMAND_FORMAT.matcher(userInput);
+        if (matcher.matches()) {
+            String keyword = matcher.group("keyword");
+            return new SearchCommand(itemList, keyword);
         } else {
             return null;
         }
