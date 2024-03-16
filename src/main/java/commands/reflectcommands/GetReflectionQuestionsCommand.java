@@ -1,7 +1,6 @@
 package commands.reflectcommands;
 
 import commands.Command;
-import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
 public class GetReflectionQuestionsCommand implements Command {
@@ -12,7 +11,7 @@ public class GetReflectionQuestionsCommand implements Command {
     }
 
     @Override
-    public void execute() throws ReflectException {
+    public void execute() {
         reflection.printFiveRandomQuestions();
     }
 

@@ -13,9 +13,14 @@ public class ReflectionManager {
         this.questionBank = new ReflectionQuestionBank();
     }
 
-    public void printFiveRandomQuestions() throws ReflectException {
-        fiveRandomQuestions = questionBank.getFiveRandomQuestions();
-        Ui.printList(fiveRandomQuestions);
+    public void printFiveRandomQuestions() {
+        try {
+            fiveRandomQuestions = questionBank.getFiveRandomQuestions();
+            Ui.printList(fiveRandomQuestions);
+        } catch (ReflectException e) {
+            Ui.printMessageWithSepNewLine(e.getMessage());
+        }
+
     }
 
 
