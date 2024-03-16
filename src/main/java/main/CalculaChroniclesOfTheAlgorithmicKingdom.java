@@ -27,10 +27,10 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
         while (true) {
             String userCommandText = ui.readInCommand();
             userCommand = parser.parserCommand(userCommandText);
+            userCommand.setCurrentMap(map);
             userCommand.execute();
-
-            map.nextMapBasedOnCommand(userCommand);
             ui.printPlayerStatus(playerStatus);
+            ui.printMap(map);
             textBox.nextTextBoxBasedOnMapAndCommand(userCommand, map);
         }
     }

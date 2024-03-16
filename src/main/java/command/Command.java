@@ -1,11 +1,11 @@
 package command;
 
-import java.util.ArrayList;
+import map.AMap;
 
 public abstract class Command {
 
     protected String commandDescription;
-    protected ArrayList<ArrayList<Character>> currentMap;
+    protected AMap currentMap;
     public abstract void execute();
     public Command(){
         commandDescription = "Impossible";
@@ -14,7 +14,11 @@ public abstract class Command {
     public String getCommandDescription(){
         return commandDescription;
     }
-    public ArrayList<ArrayList<Character>> getCurrentMap(){
+    public AMap getCurrentMap(){
         return currentMap;
+    }
+
+    public void setCurrentMap(AMap givenMap){
+        currentMap = givenMap;
     }
 }
