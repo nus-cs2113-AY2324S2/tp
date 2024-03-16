@@ -1,11 +1,18 @@
 package brokeculator.command;
 
-public class InvalidCommand extends Command{
+import brokeculator.frontend.UI;
+
+public class InvalidCommand extends Command {
+    private String errorMessage;
     public InvalidCommand() {
-        super();
+        //TODO
+    }
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
     @Override
     public void execute() {
-        System.out.println("Invalid command");
+        // TODO
+        UI.print(errorMessage);
     }
 }

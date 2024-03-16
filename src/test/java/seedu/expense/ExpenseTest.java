@@ -1,6 +1,8 @@
 package seedu.expense;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import brokeculator.expense.Expense;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

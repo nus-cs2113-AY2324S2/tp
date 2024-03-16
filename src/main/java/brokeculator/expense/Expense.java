@@ -1,4 +1,4 @@
-package seedu.expense;
+package brokeculator.expense;
 
 import brokeculator.storage.parsing.FileKeyword;
 
