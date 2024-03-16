@@ -14,7 +14,7 @@ public class AddParser {
         this.expenseManager = expenseManager;
     }
 
-    public  Command parseInput(String userInput) {
+    public Command parseInput(String userInput) {
         int expenseDescriptionEndIndex = userInput.indexOf(":");
         int expenseDateBeginIndex = userInput.indexOf("(");
         int expenseDateEndIndex = userInput.indexOf(")");
