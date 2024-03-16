@@ -1,14 +1,14 @@
 package reflection;
 
 public class ReflectionQuestion {
-    private final String QUESTION;
+    private String question;
 
     public ReflectionQuestion(String question) {
-        this.QUESTION = question;
+        this.question = question;
     }
 
     @Override
     public String toString() {
-        return QUESTION;
+        return question;
     }
 }
