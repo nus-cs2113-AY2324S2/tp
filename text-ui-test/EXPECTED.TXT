@@ -1,20 +1,12 @@
     WELCOME TO BYTECEPS
    -------------------------------------------------
-parsed input: exercise, add, bicep curls
-parsing command... exercise
-Exercise 'bicep curls' added successfully.
-parsed input: exercise, list, null
-parsing command... exercise
-List of exercises:
-bicep curls
-
-parsed input: exercise, delete, bicep curls
-parsing command... exercise
-Exercise 'bicep curls' deleted successfully.
-parsed input: workout, create, arm day
-parsing command... workout
-java.lang.NullPointerException
-parsing command... exit
-exit
+Added exercise: bench press
+Added exercise: push ups
+listing Exercise
+1. bench press
+2. push ups
+Error: byteceps.errors.Exceptions$ActivityDoesNotExists: The Exercise entry: bicep curls does not exist and cannot be deleted
+Deleted exercise: push ups
+Error: byteceps.errors.Exceptions$ActivityDoesNotExists: The Exercise entry: bicep curls does not exist and cannot be deleted
     GOODBYE FOR NOW. STAY HARD!
    -------------------------------------------------
