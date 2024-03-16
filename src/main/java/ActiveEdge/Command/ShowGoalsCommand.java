@@ -1,21 +1,27 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.Goal;
+import ActiveEdge.Task.GoalTask;
+import ActiveEdge.Task.Task;
+import ActiveEdge.Task.TaskList;
 import ActiveEdge.Ui.GoalsUi;
 
+public class ShowGoalsCommand  {
 
-public class ShowGoalsCommand extends Command {
-    private Goal goalSetting;
-
-    public ShowGoalsCommand(Goal goalSetting) {
-        this.goalSetting = goalSetting;
-    }
-
-    @Override
     public void execute() {
-        int calorieGoal = goalSetting.getDailyCalorieGoal();
-        int waterGoal = goalSetting.getDailyWaterGoal();
-        GoalsUi.printShowGoalsMessage();
+        int calorieGoal = 0;
+        int waterGoal = 0;
+        for (Task task : TaskList.tasksList) {
+            if (task instanceof GoalTask) {
+                GoalTask goalTask = (GoalTask) task;
+                if (goalTask.getDescription().startsWith("c")) {
+                    calorieGoal = goalTask.getGoalAmount();
+                } else if (goalTask.getDescription().startsWith("w")) {
+                    waterGoal = goalTask.getGoalAmount();
+                }
+            }
+        }
+        GoalsUi.printShowGoalsMessage(calorieGoal, waterGoal);
     }
 }
+
 

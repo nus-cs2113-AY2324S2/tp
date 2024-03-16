@@ -50,10 +50,38 @@ public class Parser {
                 ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
                 viewWaterIntakeCommand.execute();
             } else if (parts[1].startsWith("g")) {  //shows goals
-
+                ShowGoalsCommand showGoalsCommand = new ShowGoalsCommand();
+                showGoalsCommand.execute();
             } else {
                 System.out.println("Hello!\n");
             }
+        }
+        else if (input.startsWith("set goal")) {
+            // Handle setting goals
+            String[] parts = input.split("/");
+            if (parts.length != 2) {
+                System.out.println("Invalid command. Please use the format 'set goal c/NUMBER' or 'set goal w/NUMBER'.");
+                return;
+            }
+            String goalType = parts[0].substring(parts[0].length() - 1);
+            try {
+                int goalAmount = Integer.parseInt(parts[1]);
+                if (goalAmount <= 0) {
+                    System.out.println("Goal amount must be a positive integer.");
+                    return;
+                }
+                if (goalType.equals("c")) {
+                    new AddGoalsCommand(goalType, goalAmount).execute(); // Execute AddGoalCommand for setting calorie goal
+                } else if (goalType.equals("w")) {
+                    new AddGoalsCommand(goalType, goalAmount).execute(); // Execute AddGoalCommand for setting water goal
+                } else {
+                    System.out.println("Invalid goal type. Please use 'c' for calories or 'w' for water.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid goal amount. Please provide a valid integer.");
+            }
+        } else {
+            System.out.println("Unknown command.");
         }
     }
 

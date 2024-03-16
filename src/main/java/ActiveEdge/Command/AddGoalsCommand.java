@@ -1,27 +1,21 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.Goal;
+import ActiveEdge.Task.GoalTask;
+import static ActiveEdge.Task.TaskList.tasksList;
 import ActiveEdge.Ui.GoalsUi;
 
+public class AddGoalsCommand  {
+    private String description;
+    private int goalAmount;
 
-public class AddGoalsCommand extends Command {
-    private String input;
-    private Goal goalSetting;
-
-    public AddGoalsCommand(String input) {
-        this.input = input;
+    public AddGoalsCommand(String description, int goalAmount) {
+        this.description = description;
+        this.goalAmount = goalAmount;
     }
 
-    @Override
     public void execute() {
-        if (input.startsWith("set goal c/")) {
-            goalSetting.setDailyCalorieGoal(goalAmount);
-            GoalsUi.printAddGoalMessage(calorieGoalTask.getDescription(), calorieGoalTask.getGoalAmount());
-        } else if (input.startsWith("set goal w/")) {
-            goalSetting.setDailyWaterGoal(goalAmount);
-            GoalsUi.printAddGoalMessage(waterGoalTask.getDescription(), waterGoalTask.getGoalAmount());
-        } else {
-            System.out.println("Invalid command.");
-        }
+        GoalTask addGoalTask = new GoalTask(description, goalAmount);
+        tasksList.add(addGoalTask);
+        GoalsUi.printAddGoalMessage(description, goalAmount);
     }
 }
