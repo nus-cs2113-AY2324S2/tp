@@ -17,7 +17,7 @@ public class GeneralInputParser {
         this.summariseParser = summariseParser;
     }
 
-    public void parseInput(String userInput) {
+    public Command getCommandFromUserInput(String userInput) {
         Command commandToExecute;
         String commandKeyword = userInput.split(" ")[0];
         switch (commandKeyword) {
@@ -37,6 +37,6 @@ public class GeneralInputParser {
             // received invalid command
             commandToExecute = new InvalidCommand();
         }
-        commandToExecute.execute();
+        return commandToExecute;
     }
 }
