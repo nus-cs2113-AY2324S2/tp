@@ -2,19 +2,19 @@ package seedu.voyagers;
 
 
 import java.util.Scanner;
-import seedu.voyagers.Trip;
+
 
 /**
  * Represents the user interface of the application
  */
 public class Ui {
 
-    private String lastLine;
+
 
     private static final String LOGO = "Voyagers";
     private static final String NAME = "Voyagers";
     private static final String DIVIDER = "\t\t____________________________________________________________";
-
+    private String lastLine;
     public Ui() {
     }
 
@@ -85,7 +85,7 @@ public class Ui {
     }
 
     /**
-     *
+     * Prints the message after adding a task
      * @return the last line read
      */
     public String geLastLine() {
