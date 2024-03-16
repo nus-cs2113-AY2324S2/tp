@@ -1,23 +1,12 @@
 package seedu.voyagers;
 
 import org.junit.Test;
-
 import java.util.List;
 import java.util.Random;
-import org.junit.jupiter.api.Assertions.assertFalse;
-import org.junit.jupiter.api.Assertions.assertTrue;
-import seedu.voyagers.Currency;
-
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.voyagers.Currency;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class UtilsTests {
+public class CurrencyTest {
 
     @Test
     public void hasSymbol() {
