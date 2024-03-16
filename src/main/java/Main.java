@@ -1,6 +1,10 @@
+import commands.Command;
+import exceptions.Wellness360Exception;
+import parser.Parser;
 import ui.Ui;
-
 import java.util.Scanner;
+import sleep.SleepTracker;
+
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
@@ -8,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // TODO: instantiate objects of each different feature
+        SleepTracker sleepTracker = new SleepTracker();
 
         while (!isExit) {
 
@@ -19,11 +23,11 @@ public class Main {
             //execute user command if it is valid else throw exception
             //save tasks to file after each command
             try {
-                // TODO: to add individual objects for each feature in the determineCommand method
-                //  input parameters
-                // TODO: Execute user command
-            } catch (Error e) {
-                // TODO: Handle any input errors
+                Command userCommand = Parser.determineCommand(sleepTracker, userInput);
+                userCommand.execute();
+                isExit = userCommand.isExit();
+            } catch (Wellness360Exception e) {
+                Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
     }
