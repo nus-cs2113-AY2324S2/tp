@@ -11,7 +11,8 @@ public class FindFavouritesCommand extends Command{
     }
 
     @Override
-    public void execute(FavouritesList favourites, Ui ui, Storage storage) throws FlirtForkException {
+    public void execute(FavouritesList favourites, FoodList foods, ActivityList activities,Ui ui,
+                        Storage storage) throws FlirtForkException {
         ArrayList<Favourites> matchingFavourites = favourites.findFavourites(keyword);
         ui.showMatchingFavourites(matchingFavourites);
     }
