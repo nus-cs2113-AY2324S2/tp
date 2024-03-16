@@ -1,6 +1,8 @@
 package brokeculator;
+import brokeculator.frontend.UI;
 import brokeculator.storage.FileManager;
 import brokeculator.expense.ExpenseManager;
+import brokeculator.storage.parsing.GeneralInputParser;
 
 public class Brokeculator {
     private static final String GREETING = "Hello! I'm Brokeculator!"

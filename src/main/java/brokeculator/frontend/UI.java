@@ -1,4 +1,4 @@
-package brokeculator;
+package brokeculator.frontend;
 
 import java.util.Scanner;
 

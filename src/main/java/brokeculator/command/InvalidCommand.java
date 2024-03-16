@@ -1,7 +1,10 @@
 package brokeculator.command;
-import brokeculator.UI;
+import brokeculator.frontend.UI;
 public class InvalidCommand extends Command {
     private String errorMessage;
+    public InvalidCommand() {
+        //TODO
+    }
     public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }

@@ -1,5 +1,5 @@
 package brokeculator.command;
-import brokeculator.UI;
+import brokeculator.frontend.UI;
 
 public class ExitCommand extends Command {
     public static final String GOODBYE_STRING = "Goodbye!";
