@@ -52,13 +52,12 @@ public class Parser {
         }
     }
 
-
     public static Favourites parseFavourites(String line) {
         String[] parts = line.split(" \\| ");
         Favourites favourite = null;
 
         if ("F".equals(parts[0]) && parts.length >= 2) {
-            favourite = new Food(parts[1]);
+            favourite = new Food(parts[0], parts[1], parts[2]);
         } else if ("A".equals(parts[0]) && parts.length >= 2) {
             favourite = new Activity(parts[1]);
         }
@@ -66,5 +65,10 @@ public class Parser {
         return favourite;
     }
 
-
+    public static Food parseFood(String line) {
+        String[] parts = line.split(" \\| ");
+        Food food;
+        food = new Food(parts[0], parts[1], parts[2]);
+        return food;
+    }
 }
