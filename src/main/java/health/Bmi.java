@@ -15,10 +15,10 @@ public class Bmi extends Health {
      * and calls the printBMICategory method.
      */
     public static void calculateBmi() {
-        double Bmi = Health.weight / (Math.pow(Health.height, 2.0));
-        System.out.printf("Your BMI is %.2f", Bmi);
+        double bmi = Health.weight / (Math.pow(Health.height, 2.0));
+        System.out.printf("Your BMI is %.2f", bmi);
         Health.printNewLine();
-        printBmiCategory(Bmi);
+        printBmiCategory(bmi);
     }
 
     /*
