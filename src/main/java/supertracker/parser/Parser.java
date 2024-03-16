@@ -22,8 +22,8 @@ public class Parser {
     private static final String QUANTITY_FLAG = "q";
     private static final String PRICE_FLAG = "p";
     private static final String NAME_GROUP = "name";
-    public static final String QUANTITY_GROUP = "quantity";
-    public static final String PRICE_GROUP = "price";
+    private static final String QUANTITY_GROUP = "quantity";
+    private static final String PRICE_GROUP = "price";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">[0-9]*) "
             + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">[0-9]*(?:\\.[0-9]*)?) ";
