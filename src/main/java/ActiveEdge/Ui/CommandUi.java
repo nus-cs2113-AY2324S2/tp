@@ -33,7 +33,7 @@ public class CommandUi {
     }
 
     public static void printWaterIntakeMessage(int totalWaterIntake) {
-        System.out.println("Total water intake: " + totalWaterIntake + " ml");
+        System.out.println("Total water consumed today: " + totalWaterIntake + " ml");
     }
 
 

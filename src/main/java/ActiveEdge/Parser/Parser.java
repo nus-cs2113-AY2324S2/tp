@@ -17,7 +17,7 @@ public class Parser {
         if (input.contains("help")) {
             new HelpCommand();
         } else if (input.startsWith("log")) {
-            String[] parts = input.substring(4).split(" ");
+            String[] parts = input.substring(2).split(" ");
             inputTrimmed = parts[1].trim();
             if (inputTrimmed.startsWith("w")) {
                 if (parts.length < 3) {
@@ -36,15 +36,12 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid water quantity. Please provide a valid integer.");
                 }
-
-            }
-
-            new LogMealCommand(input);
-        }       else if (input.startsWith("list")) {
+            }else if(inputTrimmed.startsWith("m")) {
+                new LogMealCommand(input);
+            }else if (input.startsWith("list")) {
                 if (input.trim().length() > 4) { //list meals
                     new ListMealsCommand();
-            } else { //list both
-
+                }
             }
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
