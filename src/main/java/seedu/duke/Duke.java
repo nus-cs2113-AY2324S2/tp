@@ -10,6 +10,7 @@ public class Duke {
     private static final String FOOD_FILE_PATH = "./data/FoodList.txt";
     private static final String HORIZONTAL = "____________________________________________________________";
     private FavouritesList favourites;
+    private FoodList foods;
     private Ui ui;
     private Storage storage;
 
@@ -18,6 +19,7 @@ public class Duke {
         storage = new Storage(filePath, foodFilePath);
         try {
             favourites = new FavouritesList(storage.loadFavourites());
+            foods = new FoodList(storage.loadFood());
         } catch (FileNotFoundException e) {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
