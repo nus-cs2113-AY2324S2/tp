@@ -1,7 +1,5 @@
 package classify;
 
-
-
 import classify.student.Student;
 import classify.student.StudentList;
 
@@ -15,13 +13,20 @@ public class InputParsing {
     private static final String DELETE = "delete";
     private static final String WRONG_INPUT_MESSAGE = "Wrong Input! Please try again!";
 
-    public static void parseUserCommand(String userCommand, ArrayList<Student>masterStudentList, Scanner in){
+    //@@author tayponghee
+    public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand) {
         case BYE:
+            Ui.printEndConversation();
             break;
 
+        //@@author ParthGandhiNUS
         case LIST:
-            StudentList.printCurrentArrayList(masterStudentList);
+            if (masterStudentList != null) {
+                StudentList.printCurrentArrayList(masterStudentList);
+            } else {
+                System.out.println("Student list is null.");
+            }
             Ui.printDivider();
             break;
 
@@ -31,6 +36,4 @@ public class InputParsing {
             break;
         }
     }
-
-
 }
