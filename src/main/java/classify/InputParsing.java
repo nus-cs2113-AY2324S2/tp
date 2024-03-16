@@ -26,10 +26,6 @@ public class InputParsing {
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand) {
-        case BYE:
-            Ui.printEndConversation();
-            break;
-
         case ADD:
             in.nextLine();
             addStudent(masterStudentList, in);
@@ -42,6 +38,10 @@ public class InputParsing {
             break;
 
         //@@author ParthGandhiNUS
+        case BYE:
+            Ui.printEndConversation();
+            break;
+
         case LIST:
             if (masterStudentList != null) {
                 StudentList.printCurrentArrayList(masterStudentList);
