@@ -11,8 +11,26 @@ import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Parser {
 
+    private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
+    protected ArrayList<String> expenseCategories;
+    protected ArrayList<String> savingsCategories;
+
+    public Parser() {
+        this.expenseCategories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.savingsCategories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
+
+        // Configure logging
+        LoggingConfig.configure();
+    }
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -70,34 +88,94 @@ public class Parser {
 
 
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
+        assert input != null : "Input should not be null";
+        assert !input.isEmpty() : "Input should not be empty";
+
         String[] parts = input.split(" ");
+        assert parts.length >= 1 : "At least one part should be present in the input";
+
         String action = parts[0];
+        assert !action.isEmpty() : "Action should not be empty";
 
         switch (action) {
         case "list":
             if (parts.length == 2) {
                 // List expenses or savings
                 String listType = parts[1];
-                if (listType.equalsIgnoreCase("expense")) {
+                assert !listType.isEmpty() : "List type should not be empty";
+
+                if (listType.equalsIgnoreCase("expenses")) {
                     return new ListExpenseCommand(expenseList);
                 } else if (listType.equalsIgnoreCase("savings")) {
                     return new ListSavingsCommand(savingList, expenseList);
                 }
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expense")) {
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
                 String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
                 return new ListExpenseCommand(expenseList, filterCategory);
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
                 String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
                 return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
             } else {
                 return null;
             }
             break;
-        // Add, edit, delete, and other commands...
+
         default:
             return null;
         }
         return null;
+    }
+
+    private boolean isValidExpenseCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : expenseCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidSavingsCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : savingsCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
