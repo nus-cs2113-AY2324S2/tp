@@ -10,9 +10,11 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
     private String foodFilePath;
-    public Storage(String filePath, String foodFilePath) {
+    private String activityFilePath;
+    public Storage(String filePath, String foodFilePath, String activityFilePath) {
         this.filePath = filePath;
         this.foodFilePath = foodFilePath;
+        this.activityFilePath = activityFilePath;
     }
 
     public ArrayList<Favourites> loadFavourites() throws FileNotFoundException {
@@ -73,5 +75,23 @@ public class Storage {
             new File(file.getParent()).mkdirs();
         }
         return loadedFood;
+    }
+
+    public ArrayList<Activity> loadActivity() throws FileNotFoundException {
+        ArrayList<Activity> loadedActivity = new ArrayList<>();
+        File file = new File(activityFilePath);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Activity activity = Parser.parseActivity(line);
+                loadedActivity.add(activity);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("OOPS! No saved tasks found, starting with an empty list ~");
+            new File(file.getParent()).mkdirs();
+        }
+        return loadedActivity;
     }
 }
