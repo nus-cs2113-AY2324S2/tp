@@ -10,8 +10,23 @@ import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.FindExpensesCommand;
 
 public class Parser {
+
+    private String extractDetailsForFind(String input, String splitter) {
+        int startIndex = input.indexOf(splitter) + splitter.length();
+        int endIndex = input.length();
+
+        String[] nextPrefixes = { "d/", "morethan/", "lessthan/" };
+        for (String nextPrefix : nextPrefixes) {
+            if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
+                endIndex = input.indexOf(nextPrefix, startIndex);
+            }
+        }
+        return input.substring(startIndex, endIndex).trim();
+    }
+
 
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
@@ -26,6 +41,9 @@ public class Parser {
         return details.substring(startIndex, endIndex).trim();
     }
 
+    public Boolean isFindExpensesCommand(String input) {
+        return input.startsWith("find expenses");
+    }
     public Boolean isListCommand(String input) {
         return input.startsWith("list");
     }
@@ -68,6 +86,55 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+
+    /**
+     * Parses the "find expenses" command, allowing for optional and combinable parameters.
+     *
+     * @param input The full user input string.
+     * @param expenses The ExpenseList to search within.
+     * @return A Command for executing the search, or null if the input is invalid.
+     */
+    public Command handleFindExpensesCommand(String input, ExpenseList expenses) {
+        String description = null;
+        Double minAmount = null;
+        Double maxAmount = null;
+
+        if(!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
+            System.out.println("Please Ensure that you include d/, morethan/ or lessthan/");
+            return null;
+        }
+
+        if (input.contains("d/")) {
+            description = extractDetailsForFind(input, "d/");
+        }
+
+        if (input.contains("morethan/")) {
+            String minAmountAsString = extractDetailsForFind(input, "morethan/");
+            try {
+                minAmount = Double.parseDouble(minAmountAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format for amount.");
+                return null;
+            }
+        }
+
+        if (input.contains("lessthan/")) {
+            String maxAmountAsString = extractDetailsForFind(input, "lessthan/");
+            try {
+                maxAmount = Double.parseDouble(maxAmountAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format for amount.");
+                return null;
+            }
+        }
+
+        if (minAmount != null && maxAmount != null && minAmount > maxAmount) {
+            System.out.println("Maximum Amount cannot be Smaller than Minimum Amount");
+            return null;
+        }
+
+        return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
+    }
 
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         String[] parts = input.split(" ");
@@ -291,6 +358,10 @@ public class Parser {
 
         if (isListCommand(input)) {
             return handleListCommand(input, expenses, savings);
+        }
+
+        if (isFindExpensesCommand(input)) {
+            return handleFindExpensesCommand(input, expenses);
         }
 
         return null;

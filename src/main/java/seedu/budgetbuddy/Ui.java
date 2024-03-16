@@ -1,7 +1,6 @@
 package seedu.budgetbuddy;
 
 public class Ui {
-
     private static final String DIVIDER = "__________________________________________________";
 
     public void showWelcome() {
@@ -17,6 +16,9 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    public void printDivider() {
+        System.out.println(DIVIDER);
+    }
     public void showGoodbye() {
         System.out.println("Goodbye! Thank you for using BudgetBuddy.");
     }
