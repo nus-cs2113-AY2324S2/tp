@@ -2,6 +2,7 @@ package seedu.stockpal.commands;
 
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
+import seedu.stockpal.ui.Ui;
 
 public class InflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
@@ -23,6 +24,6 @@ public class InflowCommand extends ListActionCommand {
     public void execute() {
         int productIndex = this.productList.findProductIndex(this.pid);
         productList.increaseAmount(productIndex, amountToIncrease);
-
+        Ui.printToScreen("Quantity updated! New quantity is: " + productList.getProductQuantity(productIndex));
     }
 }
