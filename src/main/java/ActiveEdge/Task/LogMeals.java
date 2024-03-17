@@ -43,7 +43,7 @@ public class LogMeals extends Task {
 
     protected Integer servings;
     //protected int mealCalories;
- 
+
     public LogMeals (int servings, /*int mealCalories,*/ String description) {
         super(description);
         this.servings = servings;
