@@ -1,12 +1,5 @@
 -------------------------------------------------
 WELCOME TO BYTECEPS
 -------------------------------------------------
-[User]> [ByteCep]> Added Exercise: bench press
-[User]> [ByteCep]> Added Exercise: push ups
-[User]> [ByteCep]> Listing Exercises
-			1. bench press
-			2. push ups
-[User]> [ByteCep]> Error: The Exercise entry: bicep curls does not exist[User]> [ByteCep]> Deleted Exercise: push ups
-[User]> [ByteCep]> Error: The Exercise entry: bicep curls does not exist[User]> -------------------------------------------------
 GOODBYE FOR NOW. STAY HARD!
 -------------------------------------------------

@@ -1,7 +1,1 @@
-exercise /add bench press
-exercise /add push ups
-exercise /list
-exercise /delete bicep curls
-exercise /delete push ups
-exercise /edit bicep curls /to hammer curls
-exit
+bye
