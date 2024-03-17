@@ -1,6 +1,7 @@
 package parser;
 
 import commands.Command;
+import commands.habitcommands.AddHabitCommand;
 import exceptions.HabitException;
 import habit.HabitTracker;
 
@@ -13,6 +14,7 @@ public class HabitCommandParser {
 
         switch(userHabitCommand) {
         case "add":
+            return new AddHabitCommand(habitTracker, habitCommandArgs);
         case "list":
         case "update":
         default:

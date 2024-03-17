@@ -44,6 +44,10 @@ public class Ui {
         System.out.println(SEP + "\n" +message + "\n" + SEP);
     }
 
+    public static void printMessageWithoutSepNewLine(String message) {
+        System.out.println(SEP + "\n" + message + SEP);
+    }
+
     public static void printList(ArrayList list) {
         System.out.println(SEP);
         for (int i = 0; i < list.size(); i ++) {
