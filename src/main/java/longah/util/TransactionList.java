@@ -77,7 +77,7 @@ public class TransactionList {
      */
     public String listTransactions() {
         int transactionListSize = getTransactionListSize();
-        System.out.println(transactionListSize + " transactions found.");
+        //System.out.println(transactionListSize + " transactions found.");
         int index = 1;
         String outString = "";
         for (Transaction transaction : transactions) {
@@ -88,7 +88,8 @@ public class TransactionList {
     }
 
     /**
-     * Printout the list of transactions which the member name is involved as the transaction owner
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
      *
      * @param memberName String representation of the name of person to search for
      * @return Returns a String printout of the required list of transactions
@@ -97,7 +98,7 @@ public class TransactionList {
         int index = 1;
         String outString = String.format("%s owns the following list of transactions.", memberName) + "\n";
         for (Transaction transaction : transactions) {
-            if (transaction.isOwned(memberName)) {
+            if (transaction.isLender(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index ++;
             }

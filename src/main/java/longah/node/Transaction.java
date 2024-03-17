@@ -45,9 +45,9 @@ public class Transaction {
     /**
      * Adds a borrower to the transaction.
      * 
-     * @param expression The expression containing the payee and amount owed.
+     * @param expression The expression containing the borrower and amount borrowed.
      * @param memberList The list of members in the group.
-     * @return The amount owed by the payee.
+     * @return The amount owed by the borrower.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
     public Double addBorrower(String expression, MemberList memberList) throws LongAhException {
@@ -59,7 +59,7 @@ public class Transaction {
         }
 
         String borrowerName = splitBorrower[0].trim();
-        // Exception is thrown if the person owing does not exist in the group
+        // Exception is thrown if the borrower does not exist in the group
         Member borrower = memberList.getMember(borrowerName);
         Double amountBorrowed;
         try {
@@ -89,29 +89,29 @@ public class Transaction {
     }
 
     /**
-     * Gets the member who is owed in the transaction.
+     * Gets the member who is the lender in the transaction.
      *
-     * @return The member who is owed in the transaction
+     * @return The member who is the lender in the transaction
      */
     public Member getLender() {
         return this.lender;
     }
 
     /**
-     * Checks whether the input member name is the owner of a transaction.
+     * Checks whether the input member name is the lender of a transaction.
      *
      * @param memberName String representation of member name to check
      * @return a boolean value determining whether the input name is the owner of the transaction
      */
-    public boolean isOwned(String memberName) {
+    public boolean isLender(String memberName) {
         return lender.isName(memberName);
     }
 
     /**
-     * Checks whether the input member name is a payee within the transaction
+     * Checks whether the input member name is a borrower within the transaction
      *
      * @param memberName String representation of member name to check
-     * @return a boolean value determining whether the input name is a payee in the transaction
+     * @return a boolean value determining whether the input name is a borrower in the transaction
      */
     public boolean isBorrower(String memberName) {
         for (Subtransaction subtransaction : subtransactions) {
@@ -126,15 +126,16 @@ public class Transaction {
      * @return a string representation of the transaction for printouts
      */
     public String toString() {
-        String owner = "Lender: " + lender.getName() + "\n";
-        String payee = "";
-        int payeeNo = 1;
+        String lender = "Lender: " + this.lender.getName() + "\n";
+        String borrower = "";
+        int borrowerNo = 1;
         for (Subtransaction subtransaction : subtransactions) {
             Member member = subtransaction.getBorrower();
             double amount = subtransaction.getAmount();
-            payee += String.format("Borrower %d: %s Owed amount: %,.2f\n", payeeNo, member.getName(), amount);
-            payeeNo++;
+            borrower += String.format("Borrower %d: %s Owed amount: %,.2f\n",
+                    borrowerNo, member.getName(), amount);
+            borrowerNo++;
         }
-        return owner + payee;
+        return lender + borrower;
     }
 }
