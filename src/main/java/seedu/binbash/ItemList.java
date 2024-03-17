@@ -70,7 +70,7 @@ public class ItemList {
         String output = "";
 
         for (Item item: itemList) {
-            output += item.toString() + System.lineSeparator();
+            output += item.toString() + System.lineSeparator() + System.lineSeparator();
         }
 
         return output;
