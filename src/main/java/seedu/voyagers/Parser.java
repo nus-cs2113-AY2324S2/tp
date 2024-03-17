@@ -39,22 +39,22 @@ public class Parser {
 
         switch (command) {
         case "addmaintrip":
-            addMainTrip(tokens);
+            commandAddMainTrip(tokens);
             break;
         case "deletemaintrip":
             deleteMainTrip(tokens);
             break;
         case "setname":
-            setName(tokens);
+            commandSetName(tokens);
             break;
         case "setdates":
-            setDates(tokens);
+            commandSetDates(tokens);
             break;
         case "setlocation":
-            setLocation(tokens);
+            commandSetLocation(tokens);
             break;
         case "setdescription":
-            setDescription(tokens);
+            commandSetDescription(tokens);
             break;
         case "listall":
             listAll();
@@ -65,48 +65,102 @@ public class Parser {
         }
     }
 
-    private void setName(String[] tokens) {
+    /**
+     * Method to parse user input to change existing trip's name
+     *
+     * @param tokens String[] of user input split by " "
+     *               eg. user input `setname /old The old name /new Vacation to Hokkaido`
+     *               setname must be first word, flag-content pair can be input in any order
+     *               name can be made up of multiple words
+     *               do not input "/" unless as a flag.
+     */
+    private void commandSetName(String[] tokens) {
         String oldName = null;
         String newName = null;
+        boolean oldNameEntered = false;
+        boolean newNameEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/old":
-                oldName = addWordAfterSeparator(tokens, oldName, i);
+                oldName = addWordsAfterSeparator(tokens, i);
+                oldNameEntered = true;
                 break;
             case "/new":
-                newName = addWordAfterSeparator(tokens, newName, i);
+                newName = addWordsAfterSeparator(tokens, i);
+                newNameEntered = true;
                 break;
             default:
                 //No flags found
                 break;
             }
         }
+        if (!oldNameEntered) {
+            System.out.println("You are missing /old <name>");
+            return;
+        }
+        if (!newNameEntered) {
+            System.out.println("You are missing /new <name>");
+            return;
+        }
+        // Check if the trip exists (if not, print an error message and return)
         Trip mainTrip = findTripByName(oldName);
         if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
+            System.out.println("Trip not found: " + oldName);
             return;
         }
         mainTrip.setName(newName);
         System.out.println("Name set to: " + newName);
     }
 
-    private void setDates(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+    /**
+     * Method to parse user input to change existing trip's dates
+     *
+     * @param tokens String[] of user input split by " "
+     *               eg. user input `setdates /n Current Name /start 2024/01/01 /end 2024/03/31`
+     *               setdates must be first word, flag-content pair can be input in any order
+     *               dates must be in yyyy/MM/dd format
+     *               do not input "/" unless as a flag.
+     */
+    private void commandSetDates(String[] tokens) {
+        String tripName = null;
         String start = "-";
         String end = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/start") && i + 1 < tokens.length) {
+        boolean nameEntered = false;
+        boolean startEntered = false;
+        boolean endEntered = false;
+        for (int i = 0; i < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, i);
+                nameEntered = true;
+                break;
+            case "/start":
                 start = tokens[i + 1];
-            } else if (tokens[i].toLowerCase().equals("/end") && i + 1 < tokens.length) {
+                startEntered = true;
+                break;
+            case "/end":
                 end = tokens[i + 1];
+                endEntered = true;
+                break;
+            default:
+                break;
             }
         }
-
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        // Check if the trip exists (if not, print an error message and return)
+        Trip mainTrip = findTripByName(tripName);
+        if (mainTrip == null) {
+            System.out.println("Trip not found: " + tripName);
+            return;
+        }
+        if (!startEntered || !endEntered) {
+            System.out.println("You are missing /start <date> or /end <date");
+            return;
+        }
+        // Parse the dates (if valid)
         try {
             Date startDate = dateFormat.parse(start);
             Date endDate = dateFormat.parse(end);
@@ -117,49 +171,101 @@ public class Parser {
         }
     }
 
-    private void setLocation(String[] tokens) {
+    /**
+     * Method to parse user input to change existing trip's location
+     *
+     * @param tokens String[] of user input split by " "
+     *               eg. user input `setlocation /n The current name /location New Place`
+     *               setlocation must be first word, flag-content pair can be input in any order
+     *               location can be made up of multiple words
+     *               do not input "/" unless as a flag.
+     */
+    private void commandSetLocation(String[] tokens) {
         String tripName = null;
         String location = "-";
+        boolean nameEntered = false;
+        boolean locationEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                tripName = addWordAfterSeparator(tokens, tripName, i);
+                tripName = addWordsAfterSeparator(tokens, i);
+                nameEntered = true;
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, i);
+                locationEntered = true;
                 break;
             default:
-                //No flags found
                 break;
             }
         }
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        if (!locationEntered) {
+            System.out.println("You are missing /location <location");
+            return;
+        }
         Trip mainTrip = findTripByName(tripName);
         if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
+            System.out.println("Trip not found: " + tripName);
             return;
         }
         mainTrip.setLocation(location);
         System.out.println("Location set to: " + location);
     }
 
-    private void setDescription(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+    /**
+     * Method to parse user input to change existing trip's description
+     *
+     * @param tokens String[] of user input split by " "
+     *               eg. user input `setdescription /m The current name /description New description`
+     *               setdescription must be first word, flag-content pair can be input in any order
+     *               description can be made up of multiple words
+     *               do not input "/" unless as a flag.
+     */
+    private void commandSetDescription(String[] tokens) {
+        String tripName = null;
         String description = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/d") && i + 1 < tokens.length) {
-                description = addWordAfterSeparator(tokens, description, i);
+        boolean nameEntered = false;
+        boolean descriptionEntered = false;
+        for (int i = 0; i + 1 < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, i);
+                break;
+            case "/d":
+                description = addWordsAfterSeparator(tokens, i);
+                descriptionEntered = true;
+                break;
+            default:
                 break;
             }
+        }
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        Trip mainTrip = findTripByName(tripName);
+        if (mainTrip == null) {
+            System.out.println("Trip not found: " + tripName);
+            return;
+        }
+        if (!descriptionEntered) {
+            System.out.println("You are missing /n <name> or /d <description");
+            return;
         }
         mainTrip.setDescription(description);
         System.out.println("Description set to: " + description);
     }
 
+    /**
+     * Method to find a trip by name
+     *
+     * @param tripName name of the trip to find
+     * @return Trip object if found, null otherwise
+     */
     protected Trip findTripByName(String tripName) {
         for (Trip trip : tripsList) {
             if (trip.getName().equals(tripName)) {
@@ -169,6 +275,9 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Method to print a list of all trips
+     */
     public void listAll() {
         System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
         for (int i = 0; i < tripsList.size(); i++) {
@@ -181,18 +290,32 @@ public class Parser {
         }
     }
 
-    private void addMainTrip(String[] tokens) {
+    /**
+     * Method to parse user input to add a new main trip
+     *
+     * @param tokens String[] of user input split by " "
+     *               eg. user input `addmain /n The current name /start 2024/01/01
+     *               /end 2024/03/31 /d Description /location New Place`
+     *               addmain must be first word, flag-content pair can be input in any order
+     *               dates must be in yyyy/MM/dd format
+     *               name, location, descrption can be made up of multiple words
+     *               /n name is required to add trip
+     *               other flag-content pairs may be omitted to add trip with partial information
+     *               Name cannot match an existing trip's name
+     *               do not input "/" unless as a flag.
+     */
+    private void commandAddMainTrip(String[] tokens) {
         StringBuilder sentenceBuilder = new StringBuilder();
         String name = "-";
         String start = "-";
         String end = "-";
         String location = "-";
         String description = "-";
-
+        //Loop through user input words to find flag-content pairs
         for (int i = 1; i < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                name = addWordAfterSeparator(tokens, name, i);
+                name = addWordsAfterSeparator(tokens, i);
                 break;
             case "/start":
                 if (i + 1 < tokens.length) {
@@ -205,17 +328,17 @@ public class Parser {
                 }
                 break;
             case "/d":
-                description = addWordAfterSeparator(tokens, description, i);
+                description = addWordsAfterSeparator(tokens, i);
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, i);
                 break;
             default:
                 //No flags found
                 break;
             }
         }
-
+        //check if trip with same name exists
         if (tripNameExists(name)) {
             System.out.println("A trip with the name '" + name + "' already exists. Cannot create another main trip " +
                     "with the same name.");
@@ -223,13 +346,14 @@ public class Parser {
         }
 
         try {
+            //check if name has was inputted
             if (name == "-") {
                 System.out.println("You cannot leave name empty when creating a new main trip.");
                 return;
             }
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
-
+            //check if only partial info is provided (name must be entered)
             if (isPartialTripInfo(name, startDate, endDate, location, description)) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("You are about to add a trip with the following information:");
@@ -239,6 +363,7 @@ public class Parser {
                 System.out.println("Location: " + location);
                 System.out.println("Description: " + description);
                 System.out.println("Confirm? (Y/N)");
+                //print to user asking for confirmation of partial trip info
                 String confirmation = null;
                 while (confirmation == null) {
                     confirmation = scanner.nextLine().toLowerCase();
@@ -259,15 +384,25 @@ public class Parser {
         }
     }
 
-    private String addWordAfterSeparator(String[] tokens, String name, int i) {
+    /**
+     * Method to concatenate words until the end of the String[] tokens or until the next "/"
+     *
+     * @param tokens user input split  by " "
+     *               eg. String[] tokens = {"/n", "The", "current", "name", "/location", "New", "Place"};
+     * @param i index of the current word in the String[] tokens
+     * @return sentence String name with concatenated words
+     *               eg. sentence = "New Place"
+     */
+    private String addWordsAfterSeparator(String[] tokens, int i) {
+        String sentence = null;
         if (i + 1 < tokens.length) {
             StringBuilder nameBuilder = new StringBuilder();
             for (int j = i + 1; j < tokens.length && !(tokens[j].startsWith("/")); j++) {
                 nameBuilder.append(tokens[j]).append(" ");
             }
-            name = nameBuilder.toString().trim();
+            sentence = nameBuilder.toString().trim();
         }
-        return name;
+        return sentence;
     }
 
 
