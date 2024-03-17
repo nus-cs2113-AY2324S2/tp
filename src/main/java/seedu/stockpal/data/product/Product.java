@@ -65,8 +65,9 @@ public class Product {
     public void decreaseQuantity(Integer amountToChange) {
         try {
             quantity.updateDecreaseQuantity(amountToChange);
+            Ui.printToScreen("Quantity updated. " + quantity);
         } catch (InsufficientAmountException e) {
-            Ui.printToScreen("Insufficient amount in inventory. Amount in inventory: " + quantity);
+            Ui.printToScreen("Insufficient amount in inventory. No change to quantity." + quantity);
         }
     }
 
