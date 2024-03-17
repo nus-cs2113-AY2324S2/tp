@@ -8,4 +8,9 @@ public class Itinerary {
         this.food = food;
         this.activity = activity;
     }
+
+    @Override
+    public String toString() {
+        return "You can do " + activity + " and have a nice meal at " + food;
+    }
 }

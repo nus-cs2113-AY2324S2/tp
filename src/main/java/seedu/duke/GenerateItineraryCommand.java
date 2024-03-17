@@ -8,6 +8,7 @@ public class GenerateItineraryCommand extends Command{
                         Storage storage) throws FlirtForkException {
         Food food = foods.getRandomFood();
         Activity activity = activities.getRandomActivity();
-        System.out.println("You can do " + activity + " and have a nice meal at " + food);
+        Itinerary itinerary = new Itinerary(food, activity);
+        System.out.println(itinerary);
     }
 }
