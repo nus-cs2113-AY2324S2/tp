@@ -1,5 +1,6 @@
 package seedu.binbash;
 
+import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.ByeCommand;
@@ -8,10 +9,12 @@ public class BinBash {
     private Ui userInterface;
     private ItemList itemList;
     private Parser inputParser;
+    private Storage storage;
 
     public BinBash() {
         userInterface = new Ui();
-        itemList = new ItemList();
+        storage = new Storage();
+        itemList = new ItemList(storage.loadData());
         inputParser = new Parser(itemList);
     }
 
@@ -29,6 +32,7 @@ public class BinBash {
 
             String executionResult = userCommand.execute();
             userInterface.talk(executionResult);
+            storage.saveToStorage(itemList.getItemList());
         }
 
         userInterface.farewell();
