@@ -10,6 +10,8 @@ public class Florizz {
      * Main entry-point for the java.florizz.core.Florizz application.
      */
     public static void main(String[] args) {
+        // Adds flowers to the dict (temporary use)
+        FlowerDictionary.startup();
         ArrayList<Bouquet>  tempBouquetList = new ArrayList<>();
         boolean isRunning = true;
         Ui ui = new Ui();

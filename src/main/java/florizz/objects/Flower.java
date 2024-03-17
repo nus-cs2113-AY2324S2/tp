@@ -15,6 +15,10 @@ public class Flower {
         return name;
     }
 
+    public String getOccasion() {
+        return occasion;
+    }
+
     @Override
     public String toString() {
         return ("Name: " + name + "\n" + "Colour: " + colour + "\n" + "Occasion: " + occasion + "\n");

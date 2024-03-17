@@ -16,6 +16,8 @@ public class Parser {
             return new ExitCommand();
         case ("help"):
             return new HelpCommand();
+        case ("flower"):
+            return handleFlowerCommand(input);
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
@@ -29,6 +31,11 @@ public class Parser {
     private static DeleteBouquetCommand handleDeleteBouquet(String input){
         String bouquetToDelete = input.substring(input.indexOf(" ") + 1);
         return new DeleteBouquetCommand(new Bouquet(bouquetToDelete));
+    }
+
+    private static FlowerCommand handleFlowerCommand(String input) {
+        String occasion  = (input.length() == 6) ? " " : input.substring(input.indexOf(" ") + 1);
+        return new FlowerCommand(occasion);
     }
 
 }

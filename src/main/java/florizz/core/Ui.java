@@ -72,5 +72,21 @@ public class Ui {
         printBreakLine();
     }
 
+    public void printAllDictFlowerName() {
+        System.out.println("Here are all te flowers you can add: ");
+        for (int i = 0; i < FlowerDictionary.size(); i++) {
+            System.out.println(FlowerDictionary.get(i).getFlowerName());
+        }
+        printBreakLine();
+    }
 
+    public void printOccasionFlower(String targetOccasion) {
+        System.out.println("Here are all the flowers related to " + targetOccasion.toLowerCase() + ": ");
+        for (int i = 0; i < FlowerDictionary.size(); i++) {
+            if (FlowerDictionary.get(i).getOccasion().equalsIgnoreCase(targetOccasion)) {
+                System.out.println(FlowerDictionary.get(i).getFlowerName());
+            }
+        }
+        printBreakLine();
+    }
 }
