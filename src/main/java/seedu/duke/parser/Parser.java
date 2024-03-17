@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.InvalidCommand;
 // import seedu.duke.modules.ModuleList;
 // import seedu.duke.command.ListCommand;
 // import seedu.duke.command.RemoveCommand;
@@ -42,7 +43,7 @@ public class Parser {
     // Command constructor function
     private static final Function<Map<String, String>, Command> INIT_CONSTRUCTOR = Parser::initCommand;
     private static final Function<Map<String, String>, Command> GPA_CONSTRUCTOR = Parser::gpaCommand;
-    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::listCommand;
+    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::ViewCommand;
     private static final Function<Map<String, String>, Command> REMOVE_MODULE_CONSTRUCTOR = Parser::removeCommand;
     private static final Function<Map<String, String>, Command> ADD_MODULE_CONSTRUCTOR = Parser::addCommand;
     private static final Function<Map<String, String>, Command> GRADE_CONSTRUCTOR = Parser::gradeCommand;
@@ -63,7 +64,7 @@ public class Parser {
         return list;
     }
 
-    public static void getCommand(String userInput) {
+    public static Command getCommand(String userInput) {
         for (CommandMetadata commandMetadata : metadataList) {
             Pattern commandPattern = commandMetadata.getPattern();
             Matcher matcher = commandPattern.matcher(userInput);
@@ -71,26 +72,28 @@ public class Parser {
             if (matcher.matches()) {
                 Map<String, String> commandArguments = commandMetadata.getCommandArguments(matcher);
                 Function<Map<String, String>, Command> commandClassConstructor = commandMetadata.getConstructor();
-                return;
+
+                Command commandInstance = commandClassConstructor.apply(commandArguments);
+                return commandInstance;
             }
         }
-        return;
+        return new InvalidCommand();
     }
 
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
         // return new initCommand(args)
-        return new AddCommand();
+        return new InvalidCommand();
     }
 
     private static Command gpaCommand(Map<String, String> args) {
         // return new GPACommand();
-        return new AddCommand();
+        return new InvalidCommand();
     }
 
-    private static Command listCommand(Map<String, String> args) {
+    private static Command ViewCommand(Map<String, String> args) {
         // return new ListCommand();
-        return new AddCommand();
+        return new InvalidCommand();
     }
 
     private static Command removeCommand(Map<String, String> args) {
@@ -112,6 +115,6 @@ public class Parser {
 
     private static Command gradeCommand(Map<String, String> args) {
         // return new GradeCommand();
-        return new AddCommand();
+        return new InvalidCommand();
     }
 }
