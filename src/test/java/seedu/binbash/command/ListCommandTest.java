@@ -11,8 +11,10 @@ class ListCommandTest {
     void execute_listCommandWithTwoItemsInItemList_correctPrintFormatForBothItems() {
         ItemList itemList = new ItemList();
 
-        itemList.addItem("testItem", "1");
-        itemList.addItem("testItem", "2");
+        itemList.addItem("testItem1", "Test item 1", 2,
+                "3", 4.00, 5.00);
+        itemList.addItem("testItem2", "Test item 2", 6,
+                "7", 8.00, 9.00);
 
         ListCommand listCommand = new ListCommand(itemList);
 
