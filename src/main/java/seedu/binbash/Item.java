@@ -46,7 +46,8 @@ public class Item {
     @Override
     public String toString() {
         return String.format(
-                "%s\n \tdescription: %s\n \tquantity: %d\n \texpiry date: %s\n \tsale price: $%.2f\n \tcost price: $%.2f",
+                "%s\n \tdescription: %s\n \tquantity: %d\n \texpiry date: %s\n \tsale price: $%.2f\n " +
+                        "\tcost price: $%.2f",
                 itemName,
                 itemDescription,
                 itemQuantity,
