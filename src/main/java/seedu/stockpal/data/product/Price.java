@@ -1,6 +1,8 @@
 package seedu.stockpal.data.product;
 
-public class Price {
+import seedu.stockpal.common.CommandParameter;
+
+public class Price implements CommandParameter {
     protected Double price;
 
     public Price(Double price) {
@@ -16,6 +18,6 @@ public class Price {
     public String toString() {
         return "Price: " + ((price == null)
                 ? "[X]"
-                : String.valueOf(price));
+                : String.format("%.2f", price));
     }
 }
