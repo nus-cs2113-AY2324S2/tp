@@ -1,6 +1,8 @@
 package seedu.binbash.ui;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Ui {
     private static final String NEWLINE = System.lineSeparator();
@@ -12,6 +14,7 @@ public class Ui {
     private static final String WELCOME_MESSAGE = "Welcome to BinBash!";
     private static final String GOODBYE_MESSAGE = "Bye!";
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
+    private static final Logger UILOGGER = Logger.getLogger("BinBashUi");
 
     private final Scanner in;
     private boolean isUserActive;
@@ -30,7 +33,11 @@ public class Ui {
     }
 
     public String readUserCommand() {
-        return in.nextLine();
+        assert isUserActive();
+        String userInput = in.nextLine();
+        UILOGGER.setLevel(Level.WARNING);
+        UILOGGER.log(Level.INFO, "received raw user input: " + userInput);
+        return userInput;
     }
 
     public void greet() {
