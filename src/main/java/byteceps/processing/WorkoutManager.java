@@ -16,7 +16,10 @@ public class WorkoutManager extends ActivityManager {
     }
 
     @Override
-    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity, Exceptions.ActivityExistsException, Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity,
+            Exceptions.ActivityExistsException,
+            Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
         switch (parser.getAction()) {
         case "create":
             Workout newWorkout = processCreateWorkout(parser);
@@ -26,7 +29,7 @@ public class WorkoutManager extends ActivityManager {
             ));
             break;
         case "assign":
-            String workoutPlan= assignExerciseToWorkout(parser);
+            String workoutPlan = assignExerciseToWorkout(parser);
             UserInterface.printMessage(String.format(
                     "Assigned Exercise '%s' to Workout Plan '%s'\n", parser.getActionParameter(), workoutPlan
             ));
@@ -37,7 +40,7 @@ public class WorkoutManager extends ActivityManager {
             list();
             break;
         case "list":
-            if(parser.getActionParameter() == null) {
+            if (parser.getActionParameter() == null) {
                 list();
             } else {
                 list(parser.getActionParameter());
@@ -56,7 +59,8 @@ public class WorkoutManager extends ActivityManager {
         return new Workout(parser.getActionParameter());
     }
 
-    public String assignExerciseToWorkout(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+    public String assignExerciseToWorkout(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
         HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
         if (!additionalArguments.containsKey("to")) {
             throw new Exceptions.InvalidInput("assign command not complete");
@@ -76,6 +80,7 @@ public class WorkoutManager extends ActivityManager {
     public void list(String workoutName) {
         //add code here
     }
+
     @Override
     public String getActivityType(boolean plural) {
         return plural ? "Workouts" : "Workout";
