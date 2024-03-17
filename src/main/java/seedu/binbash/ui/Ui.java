@@ -38,6 +38,7 @@ public class Ui {
     }
 
     public void farewell() {
+        assert !isUserActive();
         talk(GOODBYE_MESSAGE);
     }
 
