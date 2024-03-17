@@ -2,6 +2,7 @@ package parser;
 
 import commands.Command;
 import commands.focuscommands.StartTimerCommand;
+import commands.focuscommands.StopTimerCommand;
 import exceptions.FocusException;
 
 public class FocusCommandParser {
@@ -14,7 +15,7 @@ public class FocusCommandParser {
         case "start":
             return new StartTimerCommand();
         case "stop":
-            // To be added
+            return new StopTimerCommand();
         default:
             throw new FocusException("Unknown Focus Timer command");
         }
