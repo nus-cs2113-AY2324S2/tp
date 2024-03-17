@@ -41,4 +41,17 @@ public class MedicationManager {
     public void addMedication(Medication medication) {
         medications.add(medication);
     }
+
+    /**
+     * Gets the Medication object from the medications list.
+     * Also converts the index to 0-based indexing before being used.
+     *
+     * @param listIndex Index of the medications list to update (1-based indexing)
+     * @return Medication object at the corresponding index (0-based indexing)
+     * @throws IndexOutOfBoundsException Out of range index specified
+     */
+    public Medication getMedication(int listIndex) throws IndexOutOfBoundsException {
+        listIndex--; // Decremented to 0-base indexing
+        return medications.get(listIndex);
+    }
 }
