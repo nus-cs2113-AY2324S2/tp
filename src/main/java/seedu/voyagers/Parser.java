@@ -39,22 +39,22 @@ public class Parser {
 
         switch (command) {
         case "addmaintrip":
-            addMainTrip(tokens);
+            commandAddMainTrip(tokens);
             break;
         case "deletemaintrip":
             deleteMainTrip(tokens);
             break;
         case "setname":
-            setName(tokens);
+            commandSetName(tokens);
             break;
         case "setdates":
-            setDates(tokens);
+            commandSetDates(tokens);
             break;
         case "setlocation":
-            setLocation(tokens);
+            commandSetLocation(tokens);
             break;
         case "setdescription":
-            setDescription(tokens);
+            commandSetDescription(tokens);
             break;
         case "listall":
             listAll();
@@ -65,7 +65,7 @@ public class Parser {
         }
     }
 
-    private void setName(String[] tokens) {
+    private void commandSetName(String[] tokens) {
         String oldName = null;
         String newName = null;
         boolean oldNameEntered = false;
@@ -103,7 +103,7 @@ public class Parser {
         System.out.println("Name set to: " + newName);
     }
 
-    private void setDates(String[] tokens) {
+    private void commandSetDates(String[] tokens) {
         String tripName = null;
         String start = "-";
         String end = "-";
@@ -153,7 +153,7 @@ public class Parser {
         }
     }
 
-    private void setLocation(String[] tokens) {
+    private void commandSetLocation(String[] tokens) {
         String tripName = null;
         String location = "-";
         boolean nameEntered = false;
@@ -189,7 +189,7 @@ public class Parser {
         System.out.println("Location set to: " + location);
     }
 
-    private void setDescription(String[] tokens) {
+    private void commandSetDescription(String[] tokens) {
         String tripName = null;
         String description = "-";
         boolean nameEntered = false;
@@ -245,7 +245,7 @@ public class Parser {
         }
     }
 
-    private void addMainTrip(String[] tokens) {
+    private void commandAddMainTrip(String[] tokens) {
         StringBuilder sentenceBuilder = new StringBuilder();
         String name = "-";
         String start = "-";
