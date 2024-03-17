@@ -9,6 +9,7 @@ import supertracker.command.UpdateCommand;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
@@ -47,7 +48,20 @@ public class ParserTest {
     }
 
     @Test
+    public void parseCommand_validDeleteCommandInput_newCommand() throws TrackerException {
+
+        Command newItem = Parser.parseCommand("new n/strawberry q/12 p/2.2");
+        newItem.execute();
+
+        Command deleteItem = Parser.parseCommand("delete n/strawberry");
+        deleteItem.execute();
+
+        assertFalse(Inventory.contains("strawberry"));
+    }
+
+    @Test
     public void parseCommand_invalidCommandInput_invalidCommand() throws TrackerException {
+
         String[] inputs = {"abcdefg", "1239", "newnew n/j q/2 p/123", "elephant"};
 
         for (String input : inputs) {
