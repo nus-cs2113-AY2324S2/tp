@@ -9,10 +9,6 @@ import java.util.regex.Pattern;
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.RemoveCommand;
-<<<<<<< HEAD
-=======
-// import seedu.duke.modules.ModuleList;
->>>>>>> f512f2eaccde6dc8bb3e4160b55daef95f79fd62
 // import seedu.duke.command.ListCommand;
 // import seedu.duke.command.RemoveCommand;
 
