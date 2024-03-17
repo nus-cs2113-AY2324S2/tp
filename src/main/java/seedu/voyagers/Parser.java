@@ -294,11 +294,13 @@ public class Parser {
      * Method to parse user input to add a new main trip
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `addmain /n The current name /start 2024/01/01 /end 2024/03/31 /d Description /location New Place`
+     *               eg. user input `addmain /n The current name /start 2024/01/01
+     *               /end 2024/03/31 /d Description /location New Place`
      *               addmain must be first word, flag-content pair can be input in any order
      *               dates must be in yyyy/MM/dd format
      *               name, location, descrption can be made up of multiple words
-     *               /n name is required to add trip, other flag-content pairs may be omitted to add trip with partial information
+     *               /n name is required to add trip
+     *               other flag-content pairs may be omitted to add trip with partial information
      *               Name cannot match an existing trip's name
      *               do not input "/" unless as a flag.
      */
@@ -387,9 +389,9 @@ public class Parser {
      *
      * @param tokens user input split  by " "
      *               eg. String[] tokens = {"/n", "The", "current", "name", "/location", "New", "Place"};
-     * @param i      index of the current word in the String[] tokens
+     * @param i index of the current word in the String[] tokens
      * @return sentence String name with concatenated words
-     * eg. sentence = "New Place"
+     *               eg. sentence = "New Place"
      */
     private String addWordsAfterSeparator(String[] tokens, int i) {
         String sentence = null;
