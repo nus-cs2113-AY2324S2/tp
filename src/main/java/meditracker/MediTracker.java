@@ -1,6 +1,7 @@
 package meditracker;
 
 import meditracker.command.Command;
+import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
 import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
@@ -28,8 +29,9 @@ public class MediTracker {
      * This method displays a welcome message, reads user commands, and processes them until the user exits the
      * application.
      * @throws MediTrackerException If an error occurs during the execution of the application.
+     * @throws ArgumentNotFoundException Argument required not found
      */
-    public void run() throws MediTrackerException {
+    public void run() throws MediTrackerException, ArgumentNotFoundException {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
@@ -49,8 +51,9 @@ public class MediTracker {
      * It creates a new MediTracker object and calls its run() method.
      * @param args Command-line arguments.
      * @throws MediTrackerException If an error occurs during the execution of the application.
+     * @throws ArgumentNotFoundException Argument required not found
      */
-    public static void main(String[] args) throws MediTrackerException {
+    public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
         new MediTracker().run();
     }
 }
