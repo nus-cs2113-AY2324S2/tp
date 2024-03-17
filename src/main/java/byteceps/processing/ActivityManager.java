@@ -3,6 +3,7 @@ package byteceps.processing;
 import byteceps.activities.Activity;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
+import byteceps.ui.UserInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public abstract class ActivityManager {
 
     public ActivityManager() {
         //        instance = this;
-        this.activityType = getActivityType();
+        this.activityType = getActivityType(false);
         this.activityList = new ArrayList<>();
         this.activityHashMap = new HashMap<>();
     }
@@ -83,14 +84,14 @@ public abstract class ActivityManager {
 
     public void list() {
         if (activityList.isEmpty()) {
-            System.out.println("Your list is empty");
+            System.out.println("[BYTECEPS]> Your list is empty");
             return;
         }
 
-        System.out.printf("listing %s\n", activityType);
+        UserInterface.printMessage(String.format("Listing %s\n", getActivityType(true)));
         for (ListIterator<Activity> it = activityList.listIterator(); it.hasNext(); ) {
             Activity currentActivity = it.next();
-            System.out.printf("%d. %s\n", it.nextIndex(), currentActivity.getActivityName());
+            System.out.printf("\t\t\t%d. %s\n", it.nextIndex(), currentActivity.getActivityName());
         }
     }
 
@@ -103,5 +104,5 @@ public abstract class ActivityManager {
     //        activityList.clear();
     //    }
 
-    public abstract String getActivityType();
+    public abstract String getActivityType(boolean plural);
 }

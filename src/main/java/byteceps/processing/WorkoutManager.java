@@ -36,7 +36,7 @@ public class WorkoutManager extends ActivityManager {
     }
 
     @Override
-    public String getActivityType() {
-        return "Workouts";
+    public String getActivityType(boolean plural) {
+        return plural ? "Workouts" : "Workout";
     }
 }

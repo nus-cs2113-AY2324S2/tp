@@ -4,6 +4,7 @@ package byteceps.processing;
 import byteceps.activities.Exercise;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
+import byteceps.ui.UserInterface;
 
 import java.util.HashMap;
 
@@ -22,16 +23,22 @@ public class ExerciseManager extends ActivityManager {
         case "add":
             newExercise = processAddExercise(parser);
             add(newExercise);
-            System.out.printf("Added exercise: %s\n", newExercise.getActivityName());
+            UserInterface.printMessage(String.format(
+                    "Added Exercise: %s\n", newExercise.getActivityName()
+            ));
             break;
         case "delete":
             retrievedExercise = retrieveExercise(parser);
             delete(retrievedExercise);
-            System.out.printf("Deleted exercise: %s\n", retrievedExercise.getActivityName());
+            UserInterface.printMessage(String.format(
+                    "Deleted Exercise: %s\n", retrievedExercise.getActivityName()
+            ));
             break;
         case "edit":
             String newExerciseName = processEditExercise(parser);
-            System.out.printf("Edited exercise from %s to %s\n", parser.getActionParameter(), newExerciseName);
+            UserInterface.printMessage(String.format(
+                    "Edited Exercise from %s to %s\n", parser.getActionParameter(), newExerciseName
+            ));
             break;
         case "list":
             list();
@@ -67,12 +74,8 @@ public class ExerciseManager extends ActivityManager {
     }
 
     @Override
-    public String getActivityType() {
-        return "Exercise";
+    public String getActivityType(boolean plural) {
+        return plural ? "Exercises" : "Exercise";
     }
 
-    @Override
-    public String toString() {
-        return "Exercises";
-    }
 }

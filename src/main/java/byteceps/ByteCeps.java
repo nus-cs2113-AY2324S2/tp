@@ -40,7 +40,7 @@ public class ByteCeps {
                 case "exit":
                     return;
                 default:
-                    System.out.println("Unknown command!");
+                    UserInterface.printMessage("Unknown Command!");
                 }
 
             } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
