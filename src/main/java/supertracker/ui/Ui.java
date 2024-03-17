@@ -10,6 +10,7 @@ public class Ui {
     private static final String MISSING_ITEM_MESSAGE = "Sorry! I could not delete that item!";
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
     private static final String FAREWELL_MESSAGE = "Goodbye!";
+    private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -27,7 +28,7 @@ public class Ui {
     }
 
     private static void updateItemOpening(Item item) {
-        System.out.println(item.getName() + " has been successfully updated!");
+        printIndent(item.getName() + " has been successfully updated!");
     }
 
     private static String deleteItemOpening(String itemName) {
@@ -106,5 +107,10 @@ public class Ui {
         }
 
         printIndent(stringToPrint);
+    }
+
+    public static void printError(String errorMessage) {
+        printIndent(BASIC_ERROR_MESSAGE);
+        printIndent(errorMessage);
     }
 }
