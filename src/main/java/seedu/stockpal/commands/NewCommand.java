@@ -21,7 +21,7 @@ public class NewCommand extends ListActionCommand {
         else {
             pid = productList.getSize() + 1;
         }
-        this.toAdd = new Product(name, quantity, price, description, pid++);
+        this.toAdd = new Product(name, quantity, price, description, pid);
         this.productList = productList;
     }
 
