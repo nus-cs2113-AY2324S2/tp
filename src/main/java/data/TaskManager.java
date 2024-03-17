@@ -29,6 +29,14 @@ public class TaskManager {
         }
     }
 
+    public static void updateTask(LocalDate date, int taskIndex, String updatedTask) {
+        List<String> dayTasks = tasks.get(date);
+        if (dayTasks != null && taskIndex >= 0 && taskIndex < dayTasks.size()) {
+            dayTasks.set(taskIndex, updatedTask);
+        }
+    }
+
+
     public List<String> getTasksForDate(LocalDate date) {
         return tasks.getOrDefault(date, new ArrayList<>());
     }
@@ -47,6 +55,41 @@ public class TaskManager {
         System.out.println("Task added.");
     }
 
+    public static void updateManager(Scanner scanner, WeekView weekView, TaskManager taskManager) throws TaskManagerException {
+        System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
+        LocalDate date = getStringFromUser(scanner);
+
+        checkIfDateInCurrentWeek(date, weekView);
+
+        listTasksAtDate(taskManager, date, "Enter the task number of the task you wish to update:");
+
+        int taskNumber;
+        String updatedDescription;
+
+        try {
+            taskNumber = Integer.parseInt(scanner.nextLine().trim());
+
+            System.out.println("Enter the updated task description:");
+            updatedDescription = scanner.nextLine().trim();
+
+            updateTask(date, taskNumber - 1, updatedDescription);
+            System.out.println("Task updated.");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid task number. Please try again.");
+        }
+
+    }
+
+    private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message) throws TaskManagerException {
+        List<String> dayTasks = taskManager.getTasksForDate(date);
+        checkIfDateHasTasks(dayTasks);
+
+        System.out.println(message);
+        for (int i = 0; i < dayTasks.size(); i++) {
+            System.out.println((i + 1) + ". " + dayTasks.get(i));
+        }
+    }
+
     public static void deleteManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
             throws DateTimeParseException, TaskManagerException {
 
@@ -55,13 +98,7 @@ public class TaskManager {
 
         checkIfDateInCurrentWeek(date, weekView);
 
-        List<String> dayTasks = taskManager.getTasksForDate(date);
-        checkIfDateHasTasks(dayTasks);
-
-        System.out.println("Enter the task number to delete:");
-        for (int i = 0; i < dayTasks.size(); i++) {
-            System.out.println((i + 1) + ". " + dayTasks.get(i));
-        }
+        listTasksAtDate(taskManager, date, "Enter the task number to delete:");
 
         int taskNumber;
 
@@ -75,7 +112,7 @@ public class TaskManager {
     }
 
     // to abstract as Parser/UI function
-    private static LocalDate getStringFromUser (Scanner scanner) throws DateTimeParseException {
+    private static LocalDate getStringFromUser(Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
         LocalDate date;
         date = LocalDate.parse(dateString, dateFormatter);

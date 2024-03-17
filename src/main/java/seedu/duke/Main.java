@@ -11,8 +11,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static data.TaskManager.addManager;
-import static data.TaskManager.deleteManager;
+import static data.TaskManager.*;
 
 public class Main {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -27,7 +26,7 @@ public class Main {
         while (true) {
             weekView.printWeekView(taskManager);
             System.out.println("Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, " +
-                    "'delete' to delete a task, or 'quit' to quit:");
+                    "'update' to edit a task, 'delete' to delete a task, or 'quit' to quit:");
             String input = scanner.nextLine().trim().toLowerCase();
 
             try {
@@ -40,6 +39,9 @@ public class Main {
                     break;
                 case "add":
                     addManager(scanner, weekView, taskManager);
+                    break;
+                case "update":
+                    updateManager(scanner, weekView, taskManager);
                     break;
                 case "delete":
                     deleteManager(scanner, weekView, taskManager);
