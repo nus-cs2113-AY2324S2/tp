@@ -66,7 +66,7 @@ public class TravelActivityList {
         return "cant be found";
     }
 
-    public void searchTask (String taskName) {
+    public void searchKeyword (String taskName) {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
         boolean isFound = false;
