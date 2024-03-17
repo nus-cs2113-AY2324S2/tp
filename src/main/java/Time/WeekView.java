@@ -19,7 +19,7 @@ public class WeekView {
         LocalDate endOfWeek = startOfWeek.plusDays(6);
         System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) + " - " + dateFormatter.format(endOfWeek));
         UiRenderer.printWeekHeader();
-        UiRenderer.printWeekDays(startOfWeek, dateFormatter, taskManager);
+        UiRenderer.printWeekBody(startOfWeek, dateFormatter, taskManager);
     }
 
     public void nextWeek() {
