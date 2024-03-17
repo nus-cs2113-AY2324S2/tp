@@ -10,9 +10,9 @@
 
 
 ## Product scope
-### Target user profile
+### Target user playerProfile
 
-{Describe the target user profile}
+{Describe the target user playerProfile}
 
 ### Value proposition
 
