@@ -1,7 +1,10 @@
 package seedu.duke;
 
-import command.*;
-import logic.OrderLogic;
+import command.CreateOrderCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.ViewOrderCommand;
+import command.ViewOrdersSummaryCommand;
 import model.Menu;
 import model.MenuItem;
 import model.Order;
@@ -22,6 +25,7 @@ public class Duke {
         ArrayList<Order> ordersList = new ArrayList<>();
         ArrayList<Menu> menusList = new ArrayList<>();
 
+        //for testing
         testOrderAddAndRemove(ordersList);
         testOrderAddAndRemove(ordersList);
 
@@ -32,7 +36,9 @@ public class Duke {
             try {
                 commandType = Parser.analyzeInput(inputText);
             } catch (IllegalArgumentException e) {
-                commandType = CommandType.INVALID;
+                System.out.println("Invalid command");
+                HelpCommand.execute();
+                continue;
             }
             switch (commandType) {
             case EXIT:
@@ -52,7 +58,7 @@ public class Duke {
             case VIEW_ALL_ORDERS:
                 ViewOrdersSummaryCommand.execute(ordersList);
                 break;
-            case INVALID:
+            default:
                 System.out.println("Invalid command");
                 HelpCommand.execute();
             }

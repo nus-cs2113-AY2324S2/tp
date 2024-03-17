@@ -1,9 +1,5 @@
 package command;
 
-import model.Order;
-
-import java.util.ArrayList;
-
 public class HelpCommand implements MainCommand{
 
     public static void execute() {
