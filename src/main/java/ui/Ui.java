@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Ui {
     private static final String BOT_NAME = "Wellness360";
-    private static final String SEP = "____________________________________________________________";
+    private static final String SEP = "________________________________________________________________________________________________________________";
 
     /**
      * Greets the user upon starting the application.
