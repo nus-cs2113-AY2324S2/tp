@@ -5,6 +5,7 @@ import seedu.binbash.command.Command;
 import seedu.binbash.command.ByeCommand;
 
 public class BinBash {
+    
     /**
      * Main entry-point for the BinBash application.
      */
@@ -28,6 +29,7 @@ public class BinBash {
             userInterface.talk(executionResult);
         }
 
+        assert !userInterface.isUserActive();
         userInterface.farewell();
     }
 }
