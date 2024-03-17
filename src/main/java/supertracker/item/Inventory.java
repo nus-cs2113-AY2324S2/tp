@@ -18,6 +18,10 @@ public class Inventory {
         itemMap.put(name.toLowerCase(), item);
     }
 
+    public static void delete(String name) {
+        itemMap.remove(name.toLowerCase());
+    }
+
     public static Collection<Item> items() {
         return itemMap.values();
     }
