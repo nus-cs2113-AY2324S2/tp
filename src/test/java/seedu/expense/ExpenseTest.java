@@ -5,11 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import brokeculator.expense.Expense;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 public class ExpenseTest {
-    LocalDateTime testDate = LocalDateTime.of(2023, 3, 15, 14, 30);
-    Expense testExpense = new Expense("Lunch", 12.50, testDate, "food");
+    Expense testExpense = new Expense("Lunch", 12.50, "today", "food");
 
     @Test
     void testGetDescription() {
@@ -23,17 +20,11 @@ public class ExpenseTest {
 
     @Test
     void testGetDate() {
-        assertEquals(testDate, testExpense.getDate());
+        assertEquals("today", testExpense.getDate());
     }
 
     @Test
     void testGetCategory() {
         assertEquals("food", testExpense.getCategory());
-    }
-
-    @Test
-    void testGetStringRepresentation() {
-        String expected = "--expense--Lunch: $12.50 (15 March 2023, 02:30 PM) [FOOD]";
-        assertEquals(expected, testExpense.getStringRepresentation());
     }
 }

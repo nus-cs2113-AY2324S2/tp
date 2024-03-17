@@ -5,15 +5,13 @@ import brokeculator.expense.ExpenseManager;
 
 public class AddCommand extends Command{
     private Expense expenseToAdd;
-    private ExpenseManager expenseManager;
 
-    public AddCommand(Expense expenseToAdd, ExpenseManager expenseManager) {
+    public AddCommand(Expense expenseToAdd) {
         this.expenseToAdd = expenseToAdd;
-        this.expenseManager = expenseManager;
     }
 
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         try {
             expenseManager.add(expenseToAdd);
         } catch (Exception e) {

@@ -1,21 +1,30 @@
 package brokeculator.command;
 
+import brokeculator.expense.Expense;
 import brokeculator.expense.ExpenseManager;
 import brokeculator.frontend.UI;
 
+import java.util.ArrayList;
+
 public class ListCommand extends Command {
     private int amountToList;
-    private ExpenseManager expenseManager;
 
-    public ListCommand(int amountToList, ExpenseManager expenseManager) {
+    public ListCommand(int amountToList) {
         this.amountToList = amountToList;
-        this.expenseManager = expenseManager;
     }
 
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         //TODO implement proper printing of expense list
-        //ArrayList<Expense> listOfExpensesToPrint = expenseManager.listExpenses(amountToList);
-        UI.print("placeholder for printing expense list");
+        ArrayList<Expense> listOfExpensesToPrint = expenseManager.listExpenses(amountToList);
+
+        if (listOfExpensesToPrint.isEmpty()) {
+            UI.print("No expenses to list");
+            return;
+        }
+
+        for (Expense expense : listOfExpensesToPrint) {
+            UI.print(expense.getStringRepresentation());
+        }
     }
 }

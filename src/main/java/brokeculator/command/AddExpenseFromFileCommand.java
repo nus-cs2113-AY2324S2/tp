@@ -5,18 +5,16 @@ import brokeculator.expense.ExpenseManager;
 
 public class AddExpenseFromFileCommand extends Command{
     private String fileString;
-    private ExpenseManager expenseManager;
 
-    public AddExpenseFromFileCommand(String fileString, ExpenseManager expenseManager) {
+    public AddExpenseFromFileCommand(String fileString) {
         this.fileString = fileString;
-        this.expenseManager = expenseManager;
     }
 
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         try {
             Expense expense = Expense.getExpenseFromFile(this.fileString);
-            this.expenseManager.add(expense);
+            expenseManager.add(expense);
         } catch (Exception e) {
             // TODO: fix feedback
             System.out.println("Expense cannot be added");
