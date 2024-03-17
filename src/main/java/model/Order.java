@@ -14,7 +14,7 @@ public class Order implements ItemManager {
     private final ArrayList<MenuItem> orderItemList = new ArrayList<>();
 
     public Order() {
-        this.orderID = "ORDER" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        this.orderID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
     @Override
@@ -28,6 +28,7 @@ public class Order implements ItemManager {
      */
     @Override
     public void remove(int index) {
+        assert index > 0 : "Index should be greater than 0";
         try {
             this.orderItemList.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -58,9 +59,19 @@ public class Order implements ItemManager {
         return null;
     }
 
+
+
     //TODO: Implement getReceipt method with discount
     public String getReceipt(double discount) {
         return null;
+    }
+
+    /**
+     * Returns a brief summary of the order
+     * @return the orderID and the total price of the order
+     */
+    public String getOrderSummary() {
+        return this.orderID + " {Total Price: " + this.getTotalPrice() + "}";
     }
 
     @Override

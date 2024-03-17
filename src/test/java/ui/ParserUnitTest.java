@@ -32,6 +32,7 @@ class ParserUnitTest {
     @Test
     void testAnalyzeInput_invalidInput() {
         Parser parser = new Parser();
+
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("asfdhih 123"));
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("create order -menu 1 2 3"));
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("view -order 1 2 3"));
@@ -39,6 +40,16 @@ class ParserUnitTest {
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("create order -menu"));
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("view -order"));
         assertThrows(IllegalArgumentException.class, () -> parser.analyzeInput("edit -order"));
+
+        /*
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("asfdhih 123"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("create order -menu 1 2 3"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("view -order 1 2 3"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("edit -order 1 2 3"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("create order -menu"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("view -order"));
+        assertEquals(CommandType.INVALID, Parser.analyzeInput("edit -order"));
+        */
     }
 
     @Test

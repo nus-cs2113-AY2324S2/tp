@@ -1,13 +1,8 @@
 package command;
 
-import model.Order;
-import model.OrdersList;
-
 public class HelpCommand implements MainCommand{
-    private boolean isExit;
-    @Override
-    public void execute(OrdersList ordersList, Order order) {
-        isExit = false;
+
+    public static void execute() {
         System.out.print("Here are the list of available commands:\n\t");
         System.out.println("help: Shows all the commands that can be used.");
         System.out.println("\tcreate order -menu <menu_id>: Creates a new order using the specified menu.");
@@ -16,10 +11,5 @@ public class HelpCommand implements MainCommand{
         System.out.println("\tedit -order <order_id>: Navigates to the order interface to perform sub-commands" +
                 "for editing an order.");
         System.out.println("\tbye: Quits the program");
-    }
-
-    @Override
-    public boolean isExit() {
-        return isExit;
     }
 }
