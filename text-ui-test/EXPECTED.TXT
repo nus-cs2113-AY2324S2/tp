@@ -6,5 +6,6 @@ To view all menu items again, type "menu".
 __________________________________________________
 1. Manage Expenses     3. View Expenses
 2. Manage Savings      4. View Savings
+5. Find Expenses
 __________________________________________________
 Goodbye! Thank you for using BudgetBuddy.
