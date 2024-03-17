@@ -1,5 +1,6 @@
 package supertracker.parser;
 
+import supertracker.TrackerException;
 import supertracker.command.InvalidCommand;
 import supertracker.command.ListCommand;
 import supertracker.command.NewCommand;
@@ -54,7 +55,7 @@ public class Parser {
      * @param input a String of the user's input
      * @return a Command to execute
      */
-    public static Command parseCommand(String input) {
+    public static Command parseCommand(String input) throws TrackerException {
         String commandWord = getCommandWord(input);
         String params = input.replace(commandWord, "").trim();
 
@@ -122,27 +123,22 @@ public class Parser {
         return Math.round(unroundedValue * ROUNDING_FACTOR) / ROUNDING_FACTOR;
     }
 
-    private static Command parseUpdateCommand(String input) {
+    private static Command parseUpdateCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(UPDATE_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            // throw error
-            return new InvalidCommand();
+            throw new TrackerException("Invalid update command format!");
         }
 
         String itemName = matcher.group(NAME_GROUP).trim().toLowerCase();
         String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
         String priceString = matcher.group(PRICE_GROUP).replace(PRICE_FLAG + BASE_FLAG, "").trim();
         if (itemName.isEmpty() || (quantityString.isEmpty() && priceString.isEmpty())) {
-            // throw error
-            System.out.println("empty param");
-            return new InvalidCommand();
+            throw new TrackerException("Parameters cannot be left empty!");
         }
         if (!Inventory.contains(itemName)) {
-            // throw error
-            System.out.println(itemName + " does not exist in inventory. Unable to update its values. =(");
-            return new InvalidCommand();
+            throw new TrackerException(itemName + " does not exist in inventory. Unable to update its values. =(");
         }
 
         int quantity = 0;
@@ -158,12 +154,12 @@ public class Parser {
         return new UpdateCommand(itemName, quantity, price);
     }
 
-    private static Command parseNewCommand(String input) {
+    private static Command parseNewCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(NEW_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            throw new TrackerException("Invalid new command format!");
         }
 
         String itemName = matcher.group(NAME_GROUP).trim();
@@ -171,7 +167,7 @@ public class Parser {
         String itemPriceString = matcher.group(PRICE_GROUP).trim();
 
         if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
-            return new InvalidCommand();
+            throw new TrackerException("Parameters cannot be empty!");
         }
 
         // throws NumberFormatException if strings cannot be parsed
@@ -181,12 +177,12 @@ public class Parser {
         return new NewCommand(itemName, itemQuantity, itemPrice);
     }
 
-    private static Command parseListCommand(String input) {
+    private static Command parseListCommand(String input) throws TrackerException {
         String[] flags = {QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(LIST_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            throw new TrackerException("Invalid list command format!");
         }
 
         boolean hasQuantity = !matcher.group(QUANTITY_GROUP).isEmpty();

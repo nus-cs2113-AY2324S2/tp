@@ -1,5 +1,6 @@
 package supertracker.ui;
 
+import supertracker.TrackerException;
 import supertracker.item.Item;
 
 public class Ui {
@@ -10,6 +11,7 @@ public class Ui {
     private static final String MISSING_ITEM_MESSAGE = "Sorry! I could not delete that item!";
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
     private static final String FAREWELL_MESSAGE = "Goodbye!";
+    private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -106,5 +108,10 @@ public class Ui {
         }
 
         printIndent(stringToPrint);
+    }
+
+    public static void printError(TrackerException e) {
+        printIndent(BASIC_ERROR_MESSAGE);
+        printIndent(e.getErrorMessage());
     }
 }

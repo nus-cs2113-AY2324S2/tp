@@ -1,6 +1,7 @@
 package supertracker.parser;
 
 import org.junit.jupiter.api.Test;
+import supertracker.TrackerException;
 import supertracker.command.Command;
 import supertracker.command.InvalidCommand;
 import supertracker.command.NewCommand;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class ParserTest {
     @Test
-    public void parseCommand_validNewCommandInput_newCommand() {
+    public void parseCommand_validNewCommandInput_newCommand() throws TrackerException {
         String[] inputs = {"new n/apple q/50 p/99.5", "new p/99.5 q/23 n/elephant", "new q/88 n/banana p/213"};
 
         for (String input : inputs) {
@@ -23,7 +24,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_validUpdateCommandInput_updateCommand() {
+    public void parseCommand_validUpdateCommandInput_updateCommand() throws TrackerException {
         Command newItem = Parser.parseCommand("new n/banana milkshake q/11 p/12.2");
         newItem.execute();
 
@@ -46,7 +47,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_invalidCommandInput_invalidCommand() {
+    public void parseCommand_invalidCommandInput_invalidCommand() throws TrackerException {
         String[] inputs = {"abcdefg", "1239", "newnew n/j q/2 p/123", "elephant"};
 
         for (String input : inputs) {

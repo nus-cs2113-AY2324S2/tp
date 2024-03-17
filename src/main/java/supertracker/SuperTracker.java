@@ -1,6 +1,7 @@
 package supertracker;
 
 import supertracker.command.Command;
+import supertracker.command.InvalidCommand;
 import supertracker.parser.Parser;
 import supertracker.ui.Ui;
 
@@ -28,8 +29,13 @@ public class SuperTracker {
         do {
             String input = in.nextLine();
             Ui.printLine();
-            command = Parser.parseCommand(input.trim());
-            command.execute();
+            try {
+                command = Parser.parseCommand(input.trim());
+                command.execute();
+            } catch (TrackerException e) {
+                Ui.printError(e);
+                command = new InvalidCommand();
+            }
             Ui.printLine();
         } while (!command.isQuit());
         in.close();
