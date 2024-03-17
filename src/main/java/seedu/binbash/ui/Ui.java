@@ -50,6 +50,6 @@ public class Ui {
     }
 
     public void talk(String line) {
-        System.out.println(LINE_DIVIDER + System.lineSeparator() + line + System.lineSeparator() + LINE_DIVIDER);
+        System.out.println(LINE_DIVIDER + NEWLINE + line + NEWLINE + LINE_DIVIDER);
     }
 }
