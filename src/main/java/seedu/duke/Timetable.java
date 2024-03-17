@@ -183,4 +183,17 @@ public class Timetable {
         plan.append("Term MCs: ").append(termCredit).append(System.lineSeparator());
         return plan.toString();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder plan = new StringBuilder();
+
+        for (ArrayList<Course> termCourses : courses) {
+            for (Course course : termCourses) {
+                plan.append(course.toString()).append(System.lineSeparator());
+            }
+        }
+
+        return plan.toString();
+    }
 }
