@@ -1,4 +1,4 @@
-package storage;
+package recipeio.storage;
 
 import java.io.IOException;
 import java.util.Scanner;

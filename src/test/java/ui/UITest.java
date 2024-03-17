@@ -1,6 +1,7 @@
 package ui;
 
 import org.junit.jupiter.api.Test;
+import recipeio.ui.UI;
 
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
