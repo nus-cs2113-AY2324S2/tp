@@ -11,9 +11,9 @@ import java.util.ListIterator;
 
 public abstract class ActivityManager {
     //    private static ActivityManager instance;
-    private final String activityType;
-    private final ArrayList<Activity> activityList;
-    private final HashMap<String, Integer> activityHashMap;
+    protected final String activityType;
+    protected final ArrayList<Activity> activityList;
+    protected final HashMap<String, Integer> activityHashMap;
 
     public ActivityManager() {
         //        instance = this;
@@ -84,15 +84,19 @@ public abstract class ActivityManager {
 
     public void list() {
         if (activityList.isEmpty()) {
-            UserInterface.printMessage("Your List is Empty");
+            UserInterface.printMessage(String.format("Your List of %s is Empty", getActivityType(true)));
             return;
         }
 
-        UserInterface.printMessage(String.format("Listing %s\n", getActivityType(true)));
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("Listing %s:" + System.lineSeparator(), getActivityType(true)));
+
         for (ListIterator<Activity> it = activityList.listIterator(); it.hasNext(); ) {
             Activity currentActivity = it.next();
-            System.out.printf("\t\t\t%d. %s\n", it.nextIndex(), currentActivity.getActivityName());
+            result.append(String.format("\t\t\t%d. %s\n", it.nextIndex(), currentActivity.getActivityName()));
         }
+
+        UserInterface.printMessage(result.toString());
     }
 
     //    public boolean hasActivity(String activityName) {

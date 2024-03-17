@@ -22,7 +22,8 @@ public class UserInterface {
     }
 
     public static void printMessage(String message) {
-        System.out.printf("[ByteCep]> %s", message);
+        System.out.printf("[ByteCeps]> %s" + System.lineSeparator(), message);
+        System.out.println(SEPARATOR);
     }
 
     public void printWelcomeMessage() {

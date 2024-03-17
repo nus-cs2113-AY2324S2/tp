@@ -24,20 +24,20 @@ public class ExerciseManager extends ActivityManager {
             newExercise = processAddExercise(parser);
             add(newExercise);
             UserInterface.printMessage(String.format(
-                    "Added Exercise: %s\n", newExercise.getActivityName()
+                    "Added Exercise: %s", newExercise.getActivityName()
             ));
             break;
         case "delete":
             retrievedExercise = retrieveExercise(parser);
             delete(retrievedExercise);
             UserInterface.printMessage(String.format(
-                    "Deleted Exercise: %s\n", retrievedExercise.getActivityName()
+                    "Deleted Exercise: %s", retrievedExercise.getActivityName()
             ));
             break;
         case "edit":
             String newExerciseName = processEditExercise(parser);
             UserInterface.printMessage(String.format(
-                    "Edited Exercise from %s to %s\n", parser.getActionParameter(), newExerciseName
+                    "Edited Exercise from %s to %s", parser.getActionParameter(), newExerciseName
             ));
             break;
         case "list":
@@ -72,7 +72,6 @@ public class ExerciseManager extends ActivityManager {
 
         return newExerciseName;
     }
-
     @Override
     public String getActivityType(boolean plural) {
         return plural ? "Exercises" : "Exercise";
