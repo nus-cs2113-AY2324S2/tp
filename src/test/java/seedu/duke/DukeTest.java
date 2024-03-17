@@ -43,9 +43,7 @@ class DukeTest {
         assertEquals("cant be found", travelActivityList.getDescription("visit museum"));
         //check number of tasks
         assertEquals(2, travelActivityList.getNoOfTravelActivities());
-
-
-
+        
     }
 
     @Test
