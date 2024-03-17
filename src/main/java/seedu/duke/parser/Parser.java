@@ -8,9 +8,8 @@ import java.util.regex.Pattern;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
-import seedu.duke.modules.ModuleList;
-// import seedu.duke.command.ListCommand;
-// import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.InvalidCommand;
 
 public class Parser {
 
@@ -28,7 +27,7 @@ public class Parser {
                     "\\s+w/(?<semester>[1-9]|10)\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
-                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|[1-5](?:\\.0|\\.5)?|0\\.0?)", Pattern.CASE_INSENSITIVE);
+                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|[1-4](?:\\.0|\\.5)?|[05]\\.0?)", Pattern.CASE_INSENSITIVE);
 
     // Argument Group captures
     private static final String[] INIT_ARGUMENTS = {"name"};
@@ -41,7 +40,7 @@ public class Parser {
     // Command constructor function
     private static final Function<Map<String, String>, Command> INIT_CONSTRUCTOR = Parser::initCommand;
     private static final Function<Map<String, String>, Command> GPA_CONSTRUCTOR = Parser::gpaCommand;
-    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::listCommand;
+    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::viewCommand;
     private static final Function<Map<String, String>, Command> REMOVE_MODULE_CONSTRUCTOR = Parser::removeCommand;
     private static final Function<Map<String, String>, Command> ADD_MODULE_CONSTRUCTOR = Parser::addCommand;
     private static final Function<Map<String, String>, Command> GRADE_CONSTRUCTOR = Parser::gradeCommand;
@@ -62,7 +61,7 @@ public class Parser {
         return list;
     }
 
-    public static void getCommand(String userInput) {
+    public static Command getCommand(String userInput) {
         for (CommandMetadata commandMetadata : metadataList) {
             Pattern commandPattern = commandMetadata.getPattern();
             Matcher matcher = commandPattern.matcher(userInput);
@@ -70,45 +69,49 @@ public class Parser {
             if (matcher.matches()) {
                 Map<String, String> commandArguments = commandMetadata.getCommandArguments(matcher);
                 Function<Map<String, String>, Command> commandClassConstructor = commandMetadata.getConstructor();
-                return;
+
+                Command commandInstance = commandClassConstructor.apply(commandArguments);
+                return commandInstance;
             }
         }
-        return;
+        return new InvalidCommand();
     }
 
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
-        // return new InitCommand(args);
-        //to be continued by Fong Shi Xiang
-        String moduleCode = "";
-        String moduleGrade = "";
-        String moduleMC = "";
-        ModuleList moduleList = new ModuleList(2);
-        return new AddCommand(moduleCode, moduleGrade, moduleMC, moduleList);
+        // return new initCommand(args)
+        return new InvalidCommand();
     }
 
     private static Command gpaCommand(Map<String, String> args) {
         // return new GPACommand();
-        return new AddCommand();
+        return new InvalidCommand();
     }
 
-    private static Command listCommand(Map<String, String> args) {
-        // return new ListCommand();
-        return new AddCommand();
+    private static Command viewCommand(Map<String, String> args) {
+        // return new ViewCommand();
+        return new InvalidCommand();
     }
 
     private static Command removeCommand(Map<String, String> args) {
-        // return new RemoveCommand(args);
-        return new AddCommand();
+        return new RemoveCommand(args);
     }
 
     private static Command addCommand(Map<String, String> args) {
-        // return new AddCommand(args);
-        return new AddCommand();
+        String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+        String status = args.getOrDefault("status", "STATUS_ERROR");
+        String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
+        String mc = args.getOrDefault("mc", "MC_ERROR");
+
+        int semesterInt = Integer.parseInt(semester);
+        int mcInt = Integer.parseInt(mc);
+        boolean statusBool = status.toLowerCase().equals("taken");
+
+        return new AddCommand(moduleCode, mcInt, statusBool, semesterInt);
     }
 
     private static Command gradeCommand(Map<String, String> args) {
         // return new GradeCommand();
-        return new AddCommand();
+        return new InvalidCommand();
     }
 }
