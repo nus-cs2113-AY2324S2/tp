@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
+import seedu.duke.command.RemoveCommand;
 import seedu.duke.modules.ModuleList;
 // import seedu.duke.command.ListCommand;
 // import seedu.duke.command.RemoveCommand;
@@ -98,8 +99,7 @@ public class Parser {
     }
 
     private static Command removeCommand(Map<String, String> args) {
-        // return new RemoveCommand(args);
-        return new AddCommand();
+        return new RemoveCommand(args);
     }
 
     private static Command addCommand(Map<String, String> args) {
