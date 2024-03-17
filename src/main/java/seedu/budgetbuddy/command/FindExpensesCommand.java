@@ -14,6 +14,10 @@ public class FindExpensesCommand extends Command {
     private Ui ui;
 
     public FindExpensesCommand(ExpenseList expenses, String description, Double minAmount, Double maxAmount) {
+        if (minAmount != null && maxAmount != null) {
+            assert minAmount <= maxAmount : "Minimum amount cannot be larger than Maximum Amount";
+        }
+
         ui = new Ui();
         this.expenses = expenses;
         this.description = description;
@@ -23,6 +27,9 @@ public class FindExpensesCommand extends Command {
 
     @Override
     public void execute() {
+        if (minAmount != null && maxAmount != null) {
+            assert minAmount <= maxAmount : "Minimum amount cannot be larger than Maximum Amount";
+        }
         ArrayList<Expense> filteredExpenses = expenses.filterExpenses(description, minAmount, maxAmount);
         ExpenseList filteredExpensesList = new ExpenseList(filteredExpenses);
 

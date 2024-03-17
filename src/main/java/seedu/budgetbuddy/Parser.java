@@ -86,6 +86,9 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+    public boolean isLarger(Double minAmount, Double maxAmount) {
+        return maxAmount >= minAmount;
+    }
 
     /**
      * Parses the "find expenses" command, allowing for optional and combinable parameters.
@@ -95,6 +98,10 @@ public class Parser {
      * @return A Command for executing the search, or null if the input is invalid.
      */
     public Command handleFindExpensesCommand(String input, ExpenseList expenses) {
+        assert input != null : "Input cannot be null";
+        assert !input.isEmpty() : "Input cannot be empty";
+        assert input.startsWith("find expenses") : "Input must be a find expenses command";
+
         String description = null;
         Double minAmount = null;
         Double maxAmount = null;
