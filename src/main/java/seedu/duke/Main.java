@@ -86,17 +86,19 @@ import Time.WeekView;
 import data.TaskManager;
 import data.TaskManagerException;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static Storage.Storage.createNewFile;
 import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
 
 public class Main {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = DateUtils.getStartOfWeek(today);
@@ -105,6 +107,8 @@ public class Main {
 
         boolean printWeek = true; // Flag to control printing of the week view
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
+
+        createNewFile(); //Creates directory and tasks.txt file if it does not exist
 
         while (true) {
             if (printWeek) {
