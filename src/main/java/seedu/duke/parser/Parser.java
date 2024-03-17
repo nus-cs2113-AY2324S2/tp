@@ -9,6 +9,10 @@ import java.util.regex.Pattern;
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.RemoveCommand;
+<<<<<<< HEAD
+=======
+// import seedu.duke.modules.ModuleList;
+>>>>>>> f512f2eaccde6dc8bb3e4160b55daef95f79fd62
 // import seedu.duke.command.ListCommand;
 // import seedu.duke.command.RemoveCommand;
 
@@ -78,7 +82,7 @@ public class Parser {
 
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
-        // return new InitCommand(args);
+        // return new initCommand(args)
         return new AddCommand();
     }
 
@@ -97,7 +101,15 @@ public class Parser {
     }
 
     private static Command addCommand(Map<String, String> args) {
-        // return new AddCommand(args);
+        String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+        String status = args.getOrDefault("status", "STATUS_ERROR");
+        String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
+        String mc = args.getOrDefault("mc", "MC_ERROR");
+
+        int semesterInt = Integer.parseInt(semester);
+        int mcInt = Integer.parseInt(mc);
+        boolean statusBool = status.toLowerCase().equals("taken");
+
         return new AddCommand();
     }
 
