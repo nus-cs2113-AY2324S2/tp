@@ -86,4 +86,7 @@ public class ProductList {
         Product updatedProduct = products.get(productIndex);
         return updatedProduct.getQuantity();
     }
+    public ArrayList<Product> getProducts () {
+        return products;
+    }
 }

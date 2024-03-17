@@ -3,6 +3,7 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 
+import static seedu.stockpal.common.Messages.MESSAGE_ADDED;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
 
@@ -14,8 +15,16 @@ public class NewCommand extends ListActionCommand {
 
 
     public NewCommand(ProductList productList, String name, Integer quantity, Double price, String description) {
-        int pid = productList.getSize() + 1;
+        int sizeOfArray = productList.getSize();
+        int pid;
 
+        if (sizeOfArray == 0) {
+            pid = 1;
+        } else if (sizeOfArray == productList.get(sizeOfArray - 1).getProductPid().getPid()) {
+            pid = sizeOfArray + 1;
+        } else {
+            pid = productList.get(sizeOfArray - 1).getProductPid().getPid() + 1;
+        }
         this.toAdd = new Product(name, quantity, price, description, pid);
         this.productList = productList;
     }
@@ -23,6 +32,6 @@ public class NewCommand extends ListActionCommand {
     @Override
     public void execute() {
         productList.addProduct(toAdd);
-        printToScreen("Added product!");
+        printToScreen(MESSAGE_ADDED);
     }
 }
