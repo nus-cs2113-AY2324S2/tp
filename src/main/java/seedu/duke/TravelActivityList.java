@@ -35,8 +35,8 @@ public class TravelActivityList {
             taskCount++;
             System.out.println("     " + taskCount +"." + task);
         }
-        int final_task_count = noOfTasks;
-        assert final_task_count == taskCount : "Index out of bounds while listing activities";
+        int finalTaskCount = noOfTasks;
+        assert finalTaskCount == taskCount : "Index out of bounds while listing activities";
     }
 
     /**
@@ -88,8 +88,7 @@ public class TravelActivityList {
         }
         if (temporaryArrayCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
-        }
-        else {
+        } else {
             System.out.println("Here are what you are looking for:");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
