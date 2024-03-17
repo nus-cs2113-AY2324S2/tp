@@ -9,6 +9,15 @@ public class ModuleList {
         this.moduleList = new ArrayList<Module>(size);
     }
 
+    public Module getModule(String courseCode) {
+        for(Module module : moduleList){
+            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+                return module;
+            }
+        }
+        return null;
+    }
+
     public void addModule(Module module) {
         moduleList.add(module);
     }
