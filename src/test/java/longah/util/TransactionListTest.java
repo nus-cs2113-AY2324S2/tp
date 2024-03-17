@@ -20,7 +20,7 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("p/Alice p/Bob a/5", memberList);
+            transactionList.addTransaction("p/Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             transactionList.remove(0);
             assertEquals(0, transactionList.getTransactionListSize());
@@ -41,7 +41,7 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("p/Alice p/Bob a/5", memberList);
+            transactionList.addTransaction("p/Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             transactionList.remove(-1);
             fail();
@@ -103,8 +103,8 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
+            transactionList.addTransaction("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.addTransaction("p/Jane p/Jack a/150 p/James a/200", memberList);
             String printedOutput = transactionList.findTransactions("James");
             String expectedString = "James owns the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
@@ -159,8 +159,8 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
+            transactionList.addTransaction("p/Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.addTransaction("p/Jack p/Jane a/150 p/James a/200", memberList);
             String printedOutput = transactionList.findDebts("Jack");
             String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);

@@ -25,7 +25,7 @@ public class MemberList {
      * @param member The member to add.
      */
     public void addMember(Member member) {
-        members.add(member);
+        this.members.add(member);
     }
 
     /**
@@ -37,7 +37,14 @@ public class MemberList {
         if (isMember(name)) {
             throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
         }
-        members.add(new Member(name));
+        this.members.add(new Member(name));
+    }
+
+    public void addMember(String name, double balance) throws LongAhException {
+        if (isMember(name)) {
+            throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
+        }
+        this.members.add(new Member(name, balance));
     }
 
     /**

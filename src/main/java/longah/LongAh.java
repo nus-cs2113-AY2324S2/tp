@@ -54,7 +54,7 @@ public class LongAh {
                 String[] parts = command.split(" ", 2);
                 switch (parts[0]) {
                 case "add":
-                    transactions.add(parts[1], members);
+                    transactions.addTransaction(parts[1], members);
                     break;
                 case "listdebts":
                     app.listAllDebts();

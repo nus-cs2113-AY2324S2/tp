@@ -17,7 +17,7 @@ public class TransactionList {
      *
      * @param transaction The transaction to add.
      */
-    public void add(Transaction transaction) {
+    public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
     }
 
@@ -28,7 +28,7 @@ public class TransactionList {
      * @param memberList The member list of the transaction to add.
      * @throws LongAhException If the expression is invalid.
      */
-    public void add(String expression, MemberList memberList)
+    public void addTransaction(String expression, MemberList memberList)
              throws LongAhException {
         transactions.add(new Transaction(expression, memberList));
     }
