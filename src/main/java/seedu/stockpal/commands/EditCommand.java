@@ -1,14 +1,12 @@
 package seedu.stockpal.commands;
 
 import seedu.stockpal.common.CommandParameter;
-import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
-import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.ui.Ui;
 
 import java.util.Arrays;
@@ -36,25 +34,34 @@ public class EditCommand extends ListActionCommand {
         this.description = new Description(description);
     }
 
-    private void checkAtLeastOneValidArgument() throws InvalidCommandException {
+    /**
+     * Checks if at least 1 parameter (name, quantity, price, description)
+     * is provided in the command.
+     *
+     * @return True if there is at least 1 parameter provided. False otherwise.
+     */
+    private boolean atLeastOneValidParameter() {
         for (CommandParameter parameter : Arrays.asList(name, quantity, price, description)) {
             if (!parameter.isNull()) {
-                return;
+                return true;
             }
         }
 
-        throw new InvalidCommandException(Messages.MESSAGE_ERROR_MISSING_PARAMETERS);
+        return false;
     }
+
     @Override
     public void execute() {
-        try {
-            checkAtLeastOneValidArgument();
-        } catch (InvalidCommandException exception) {
-            Ui.printExceptionMessage(exception);
+        if (!atLeastOneValidParameter()) {
+            Ui.printMissingParametersMessage();
             return;
         }
 
         int productIndex = this.productList.findProductIndex(this.pid);
+        if (productIndex == -1) {
+            Ui.printInvalidPidMessage();
+            return;
+        }
         productList.updateProduct(productIndex, name, quantity, description, price);
         Ui.printEditSuccessMessage();
     }

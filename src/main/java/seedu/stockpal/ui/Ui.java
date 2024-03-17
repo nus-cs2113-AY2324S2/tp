@@ -65,4 +65,12 @@ public final class Ui {
     public static void printEditSuccessMessage() {
         printToScreen(Messages.MESSAGE_EDIT_SUCCESS);
     }
+
+    public static void printMissingParametersMessage() {
+        Ui.printToScreen(Messages.MESSAGE_ERROR_MISSING_PARAMETERS);
+    }
+
+    public static void printInvalidPidMessage() {
+        Ui.printToScreen(Messages.MESSAGE_ERROR_INVALID_PID);
+    }
 }
