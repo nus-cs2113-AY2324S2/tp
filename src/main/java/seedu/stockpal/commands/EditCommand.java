@@ -6,6 +6,8 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
+import seedu.stockpal.exceptions.StockPalException;
+import seedu.stockpal.storage.Storage;
 
 //@@author Kobot7
 public class EditCommand extends ListActionCommand {
@@ -19,20 +21,24 @@ public class EditCommand extends ListActionCommand {
     Quantity quantity;
     Description description;
     Price price;
+    private final Storage storage;
 
     public EditCommand(ProductList productList, Integer pid, String name,
-                       Integer quantity, Double price, String description) {
+                       Integer quantity, Double price, String description,
+                       Storage storage) {
         this.productList = productList;
         this.pid = new Pid(pid);
         this.name = new Name(name);
         this.quantity = new Quantity(quantity);
         this.price = new Price(price);
         this.description = new Description(description);
+        this.storage = storage;
     }
     
     @Override
-    public void execute() {
+    public void execute() throws StockPalException {
         int productIndex = this.productList.findProductIndex(this.pid);
         productList.updateProduct(productIndex, name, quantity, description, price);
+        storage.save(productList);
     }
 }

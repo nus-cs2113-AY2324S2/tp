@@ -75,4 +75,18 @@ public class Product {
     public String toString() {
         return "" + this.name;
     }
+
+    /**
+     * Converts the Product to the specific format for saving to the data file.
+     *
+     * @return A formatted string containing the Product for saving.
+     */
+    public String toSave() {
+        String separator = ";";
+        return this.pid.toSave() + separator +
+                this.name.toSave() + separator +
+                this.quantity.toSave() + separator +
+                this.price.toSave() + separator +
+                this.description.toSave();
+    }
 }

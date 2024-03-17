@@ -1,5 +1,8 @@
 package seedu.stockpal.data;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -7,10 +10,8 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 
-import java.util.ArrayList;
-
 public class ProductList {
-    public ArrayList<Product> products = new ArrayList<Product>();
+    public List<Product> products = new ArrayList<>();
 
     /**
      * @param toAdd Add a product to our list.
@@ -82,11 +83,16 @@ public class ProductList {
         return products.get(i);
     }
 
-    public Quantity getProductQuantity (Integer productIndex) {
+    public Quantity getProductQuantity(Integer productIndex) {
         Product updatedProduct = products.get(productIndex);
         return updatedProduct.getQuantity();
     }
-    public ArrayList<Product> getProducts () {
+    public List<Product> getProducts() {
         return products;
+    }
+
+    public String toSave(Integer productIndex) {
+        Product currProd = products.get(productIndex);
+        return currProd.toSave();
     }
 }

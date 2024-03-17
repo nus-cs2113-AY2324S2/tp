@@ -13,21 +13,21 @@ public class ParserTest {
     @Test
     public void parseCommand_helpCommand_success() throws InvalidCommandException, InvalidFormatException {
         String testInput = "help";
-        Parser testParser = new Parser(null);
+        Parser testParser = new Parser(null, null);
 
         assertInstanceOf(HelpCommand.class, testParser.parseCommand(testInput));
     }
     @Test
     public void parseCommand_listCommand_success() throws InvalidCommandException, InvalidFormatException {
         String testInput = "list";
-        Parser testParser = new Parser(null);
+        Parser testParser = new Parser(null, null);
 
         assertInstanceOf(ListCommand.class, testParser.parseCommand(testInput));
     }
     @Test
     public void parseCommand_exitCommand_success() throws InvalidCommandException, InvalidFormatException {
         String testInput = "exit";
-        Parser testParser = new Parser(null);
+        Parser testParser = new Parser(null, null);
 
         assertInstanceOf(ExitCommand.class, testParser.parseCommand(testInput));
     }
