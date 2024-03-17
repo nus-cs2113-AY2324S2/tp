@@ -59,6 +59,7 @@ public class Ui {
         System.out.println("2. delete <bouquet_name> - Delete a bouquets");
         System.out.println("3. mybouquets - List current saved bouquets");
         System.out.println("4. bye - Exits the programme");
+        System.out.println("4. flower - List flowers that can be added into mybouquets");
         printBreakLine();
     }
 
@@ -73,7 +74,7 @@ public class Ui {
     }
 
     public void printAllDictFlowerName() {
-        System.out.println("Here are all te flowers you can add: ");
+        System.out.println("Here are all the flowers you can add: ");
         for (int i = 0; i < FlowerDictionary.size(); i++) {
             System.out.println(FlowerDictionary.get(i).getFlowerName());
         }
