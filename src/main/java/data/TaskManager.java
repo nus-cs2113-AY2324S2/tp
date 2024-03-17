@@ -7,8 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-import static data.TaskManagerException.checkIfDateHasTasks;
-import static data.TaskManagerException.checkIfDateInCurrentWeek;
+import static data.TaskManagerException.*;
 
 
 public class TaskManager {
@@ -33,12 +32,19 @@ public class TaskManager {
         return tasks.getOrDefault(date, new ArrayList<>());
     }
 
-    public static void addManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
+    public static void addManager(Scanner scanner, WeekView weekView, TaskManager taskManager, boolean inMonthView)
             throws TaskManagerException {
         System.out.println("Enter the date for the task (dd/MM/yyyy):");
         LocalDate date = getStringFromUser(scanner);
 
-        checkIfDateInCurrentWeek(date, weekView);
+        //checkIfDateInCurrentWeek(date, weekView);
+        if (inMonthView) {
+            // Check if the date is within the current month
+            checkIfDateInCurrentMonth(date);
+        } else {
+            // Check if the date is within the current week
+            checkIfDateInCurrentWeek(date, weekView);
+        }
 
         System.out.println("Enter the task description:");
         String task = scanner.nextLine().trim();
@@ -75,10 +81,24 @@ public class TaskManager {
     }
 
     // to abstract as Parser/UI function
+    /*
     private static LocalDate getStringFromUser (Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
         LocalDate date;
         date = LocalDate.parse(dateString, dateFormatter);
         return date;
     }
+    */
+    private static LocalDate getStringFromUser(Scanner scanner) throws DateTimeParseException {
+        String dateString = scanner.nextLine().trim();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateString, dateFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseException("Invalid date format. Please use the format dd/MM/yyyy.", dateString, 0);
+        }
+        return date;
+    }
+
 }

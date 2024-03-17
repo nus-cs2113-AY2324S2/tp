@@ -137,7 +137,7 @@ public class Main {
                 break;
             case "add":
                 try {
-                    addManager(scanner, weekView, taskManager);
+                    addManager(scanner, weekView, taskManager, inMonthView);
                 } catch (TaskManagerException e) {
                     System.out.println(e.getMessage());
                 }
