@@ -10,6 +10,10 @@ public class DeleteCommand extends Command {
     public DeleteCommand(ItemList itemList, int index) {
         super(itemList);
         this.index = index;
+        commandLogger.fine(String.format(
+                "Creating Delete Command... ItemIndex: %d",
+                index
+        ));
     }
 
     public String execute() {

@@ -6,6 +6,7 @@ public class ListCommand extends Command {
 
     public ListCommand(ItemList itemList) {
         super(itemList);
+        commandLogger.fine("Creating List Command...");
     }
 
     public String execute() {

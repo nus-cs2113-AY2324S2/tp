@@ -12,6 +12,10 @@ public class SearchCommand extends Command {
     public SearchCommand(ItemList itemList, String keyword) {
         super(itemList);
         this.keyword = keyword;
+        commandLogger.fine(String.format(
+                "Creating Search Command... Keyword: %s",
+                keyword
+        ));
     }
 
     public String execute() {

@@ -15,6 +15,11 @@ public class AddCommand extends Command {
         super(itemList);
         this.itemName = itemName;
         this.itemDescription = itemDescription;
+        commandLogger.fine(String.format(
+                "Creating Add Command... ItemName: %s , ItemDescription: %s",
+                itemName,
+                itemDescription
+        ));
     }
 
     @Override
