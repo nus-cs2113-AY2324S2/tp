@@ -8,27 +8,27 @@ package meditracker.medication;
 public class Medication {
 
     // Medication attributes are intentionally declared String. To be modified later.
-    private String medicationName;
-    private String medicineQuantity;
-    private String medicineDosage;
+    private String name;
+    private String quantity;
+    private String dosage;
     private String expiryDate;
     private String intakeFreq;
     private String remarks;
 
     /**
      * Constructs a Medication object with the specified information.
-     * @param medicationName The name of the medication.
-     * @param medicineQuantity The quantity of the medication.
-     * @param medicineDosage The dosage of the medication.
+     * @param name The name of the medication.
+     * @param quantity The quantity of the medication.
+     * @param dosage The dosage of the medication.
      * @param expiryDate The expiry date of the medication.
      * @param intakeFreq The intake frequency of the medication.
      * @param remarks Any remarks or notes about the medication.
      */
-    public Medication(String medicationName, String medicineQuantity, String medicineDosage, String expiryDate,
+    public Medication(String name, String quantity, String dosage, String expiryDate,
                       String intakeFreq, String remarks) {
-        this.medicationName = medicationName;
-        this.medicineQuantity = medicineQuantity;
-        this.medicineDosage = medicineDosage;
+        this.name = name;
+        this.quantity = quantity;
+        this.dosage = dosage;
         this.expiryDate = expiryDate;
         this.intakeFreq = intakeFreq;
         this.remarks = remarks;
