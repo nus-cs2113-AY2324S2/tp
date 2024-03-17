@@ -2,7 +2,7 @@ package meditracker;
 
 import meditracker.command.Command;
 import meditracker.exception.MediTrackerException;
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
 import meditracker.ui.Ui;
 
@@ -13,14 +13,14 @@ import meditracker.ui.Ui;
 public class MediTracker {
 
     private Ui ui;
-    private MedicationList medicationList;
+    private MedicationManager medicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes the user interface.
      */
     public MediTracker() {
         ui = new Ui();
-        medicationList = new MedicationList();
+        medicationManager = new MedicationManager();
     }
 
     /**
@@ -39,7 +39,7 @@ public class MediTracker {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationList, ui);
+            command.execute(medicationManager, ui);
             isExit = command.isExit();
         }
     }
