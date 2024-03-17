@@ -91,4 +91,10 @@ public class Ui {
         }
         printBreakLine();
     }
+
+    public void printAllOccasion() {
+        System.out.println("Here are all the occasions associated with the available flowers: ");
+        OccasionDictionary.print();
+        printBreakLine();
+    }
 }

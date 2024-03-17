@@ -18,6 +18,8 @@ public class Parser {
             return new HelpCommand();
         case ("flower"):
             return handleFlowerCommand(input);
+        case ("occasion"):
+            return new ListOccasionCommand();
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
