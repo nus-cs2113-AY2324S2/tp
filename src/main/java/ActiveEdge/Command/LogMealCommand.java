@@ -40,6 +40,41 @@ public class LogMealCommand {
         TaskList.tasksList.add(logMeals);
         CommandUi.printMealLogMessage(logMeals);
     }
+
+    protected String description;
+    protected String servings;
+
+    public LogMealCommand(String description, String servings) {
+        this.description = description;
+        this.servings = servings;
+    }
+
+//    private String findCalories(String description) {
+//        String calorieOfFood = null;
+//        for (String[] food : FoodData.foodItems) {
+//            if (food[1].equalsIgnoreCase(description)) { // Match description ignoring case
+//                calorieOfFood = food[2];
+//                break; // Stop searching once found
+//            }
+//        }
+//        return calorieOfFood;
+//    }
+
+    public void execute() throws ActiveEdgeException {
+        try {
+            int servingNum = Integer.parseInt(servings);
+            //        String calorieOfFood = findCalories(description);
+            //
+            //        int foodCalorie = Integer.parseInt(calorieOfFood);
+            //        int mealCalorie = foodCalorie * servingNum;
+
+            LogMeals logMeals = new LogMeals(servingNum, /*mealCalorie,*/ description);
+            TaskList.tasksList.add(logMeals);
+            CommandUi.printMealLogMessage(logMeals);
+        } catch (NumberFormatException e) {
+            throw new ActiveEdgeException("Invalid meal. Please provide a valid integer.");
+        }
+    }
 }
 
 

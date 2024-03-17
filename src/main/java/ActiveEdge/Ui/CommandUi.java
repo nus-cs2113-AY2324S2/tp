@@ -17,6 +17,7 @@ public class CommandUi {
     }
 
     public static void printMealLogMessage(LogMeals logMeals) {
+
         System.out.println("You've logged " + logMeals.getServings() + " of" + logMeals.getFoodName());
         //System.out.println("Estimated calories: " + logMeals.getMealCalories());
         System.out.println("Total calories: ");
