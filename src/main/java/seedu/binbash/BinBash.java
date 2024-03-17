@@ -5,14 +5,17 @@ import seedu.binbash.command.Command;
 import seedu.binbash.command.ByeCommand;
 
 public class BinBash {
-    /**
-     * Main entry-point for the BinBash application.
-     */
-    public static void main(String[] args) {
-        Ui userInterface = new Ui();
-        ItemList itemList = new ItemList();
-        Parser inputParser = new Parser(itemList);
+    private Ui userInterface;
+    private ItemList itemList;
+    private Parser inputParser;
 
+    public BinBash() {
+        userInterface = new Ui();
+        itemList = new ItemList();
+        inputParser = new Parser(itemList);
+    }
+
+    private void run() {
         userInterface.greet();
 
         while (userInterface.isUserActive()) {
@@ -29,5 +32,12 @@ public class BinBash {
         }
 
         userInterface.farewell();
+    }
+    
+    /**
+     * Main entry-point for the BinBash application.
+     */
+    public static void main(String[] args) {
+        new BinBash().run();
     }
 }
