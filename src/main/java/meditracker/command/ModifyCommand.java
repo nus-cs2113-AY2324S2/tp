@@ -64,6 +64,8 @@ public class ModifyCommand extends Command {
             case REMARKS:
                 medication.setRemarks(argumentValue);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + argumentName);
             }
         }
 
