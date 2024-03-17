@@ -3,12 +3,15 @@ package seedu.duke.modules;
 public class Module {
     private String moduleCode;
     private String moduleGrade;
-    private String moduleMC;
+    private int moduleMC;
+    private boolean moduleStatus;
+    private int moduleDate;
 
-    public Module(String moduleCode, String moduleGrade, String moduleMC) {
+    public Module(String moduleCode, int moduleMC, boolean moduleStatus, int moduleDate) {
         this.moduleCode = moduleCode;
-        this.moduleGrade = moduleGrade;
         this.moduleMC = moduleMC;
+        this.moduleStatus = moduleStatus;
+        this.moduleDate = moduleDate;
     }
 
     public String getModuleCode() {
@@ -27,12 +30,28 @@ public class Module {
         this.moduleGrade = moduleGrade;
     }
 
-    public String getModuleMC() {
+    public int getModuleMC() {
         return moduleMC;
     }
 
-    public void setModuleMC(String moduleMC) {
+    public void setModuleMC(int moduleMC) {
         this.moduleMC = moduleMC;
+    }
+
+    public boolean getModuleStatus() {
+        return moduleStatus;
+    }
+
+    public void setModuleStatus(boolean moduleStatus) {
+        this.moduleStatus = moduleStatus;
+    }
+
+    public int getModuleDate() {
+        return moduleDate;
+    }
+
+    public void setModuleDate(int moduleDate) {
+        this.moduleDate = moduleDate;
     }
 
     @Override

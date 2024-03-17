@@ -10,9 +10,6 @@ import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.InvalidCommand;
-// import seedu.duke.modules.ModuleList;
-// import seedu.duke.command.ListCommand;
-// import seedu.duke.command.RemoveCommand;
 
 public class Parser {
 
@@ -43,7 +40,7 @@ public class Parser {
     // Command constructor function
     private static final Function<Map<String, String>, Command> INIT_CONSTRUCTOR = Parser::initCommand;
     private static final Function<Map<String, String>, Command> GPA_CONSTRUCTOR = Parser::gpaCommand;
-    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::ViewCommand;
+    private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::viewCommand;
     private static final Function<Map<String, String>, Command> REMOVE_MODULE_CONSTRUCTOR = Parser::removeCommand;
     private static final Function<Map<String, String>, Command> ADD_MODULE_CONSTRUCTOR = Parser::addCommand;
     private static final Function<Map<String, String>, Command> GRADE_CONSTRUCTOR = Parser::gradeCommand;
@@ -91,8 +88,8 @@ public class Parser {
         return new InvalidCommand();
     }
 
-    private static Command ViewCommand(Map<String, String> args) {
-        // return new ListCommand();
+    private static Command viewCommand(Map<String, String> args) {
+        // return new ViewCommand();
         return new InvalidCommand();
     }
 
