@@ -19,6 +19,7 @@ public class UserList {
         if (listLength == 1) {
             this.activeUser = allUsers.get(0);
         }
+
     }
     public void setActiveUser(int index) {
         this.activeUser = allUsers.get(index);

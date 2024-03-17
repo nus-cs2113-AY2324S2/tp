@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
+    private static final int ADD_TASK_INDEX = 9;
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -39,7 +40,14 @@ public class Duke {
                 userList.addUser(newUser);
             } else if (Objects.equals(command, "current")) {
                 UI.printSetActiveUser(userList.getActiveUser().getName());
-            } else {
+            } else if (Objects.equals(command, "delete")) {
+                String[] words = input.split(" ");
+                int weekOfDay = Integer.parseInt(words[1]);
+                int index = Integer.parseInt(words[2]) - 1;
+
+                userList.getActiveUser().timetable.deleteUserTask(weekOfDay, index);
+            }
+            else {
                 UI.printInvalidCommand();
             }
         }

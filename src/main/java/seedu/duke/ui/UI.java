@@ -19,4 +19,9 @@ public class UI {
     public static void printInvalidCommand() {
         System.out.println("Invalid command. ");
     }
+
+    public static void printAddTask(String description) {
+        System.out.println("The following task is added: ");
+        System.out.println(description);
+    }
 }
