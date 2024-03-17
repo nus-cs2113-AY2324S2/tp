@@ -17,7 +17,7 @@ public class DeleteCommand implements Command {
     @Override
     public void execute() {
         if (!Inventory.contains(itemName)) {
-            deleteUnsuccessful(itemName);
+            deleteUnsuccessful();
             return;
         }
 
