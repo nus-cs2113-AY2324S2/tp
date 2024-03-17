@@ -6,7 +6,7 @@ WELCOME TO BYTECEPS
 [joshua]> [ByteCep]> Listing Exercises
 			1. bench press
 			2. push ups
-[joshua]> [ByteCep]> [BYTECEPS]> Error: The Exercise entry: bicep curls does not exist and cannot be deleted[joshua]> [ByteCep]> Deleted Exercise: push ups
-[joshua]> [ByteCep]> [BYTECEPS]> Error: The Exercise entry: bicep curls does not exist and cannot be deleted[joshua]> -------------------------------------------------
+[joshua]> [ByteCep]> [BYTECEPS]> Error: The Exercise entry: bicep curls does not exist[joshua]> [ByteCep]> Deleted Exercise: push ups
+[joshua]> [ByteCep]> [BYTECEPS]> Error: The Exercise entry: bicep curls does not exist[joshua]> -------------------------------------------------
 GOODBYE FOR NOW. STAY HARD!
 -------------------------------------------------
