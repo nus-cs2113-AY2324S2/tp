@@ -92,6 +92,13 @@ public class Storage {
         return dataItems;
     }
 
+    // TODO: Check if there's a better way to do this. It would be nice to use methods from the
+    //  Parser class and create AddCommand(s) so that I can call Command.execute(), but that requires
+    //  me to already have an ItemList object, which would be weird since loadData() returns an Item List.
+
+    // TODO: Perhaps I could refactor it to create an ItemList object first, then
+    //  call Storage.loadData() ?
+
     /**
      * Parses the list of strings and converts them into a list of Item objects.
      *
