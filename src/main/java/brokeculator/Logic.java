@@ -46,7 +46,7 @@ public class Logic {
     }
     private void saveExpensesToFile() {
         try {
-            String expenseListToSave = expenseManager.getExpensesStringRepresentations();
+            String expenseListToSave = expenseManager.getExpensesStringRepresentation();
             fileManager.save(expenseListToSave);
         } catch (Exception e) {
             UI.print("file save error occured" + e.getMessage());
