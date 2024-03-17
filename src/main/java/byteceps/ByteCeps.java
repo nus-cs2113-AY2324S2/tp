@@ -45,7 +45,7 @@ public class ByteCeps {
 
             } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
                      Exceptions.InvalidInput | Exceptions.ActivityDoesNotExists e) {
-                UserInterface.printMessage(String.format("[BYTECEPS]> Error: %s", e.getMessage()));
+                UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
             }
         }
     }
@@ -55,6 +55,5 @@ public class ByteCeps {
         commandLine();
         ui.printGoodbyeMessage();
     }
-
 
 }

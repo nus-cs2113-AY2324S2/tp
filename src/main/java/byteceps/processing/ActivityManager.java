@@ -84,7 +84,7 @@ public abstract class ActivityManager {
 
     public void list() {
         if (activityList.isEmpty()) {
-            System.out.println("[BYTECEPS]> Your list is empty");
+            UserInterface.printMessage("Your List is Empty");
             return;
         }
 

@@ -8,8 +8,10 @@ public class UserInterface {
     private static final String MESSAGE_WELCOME = "WELCOME TO BYTECEPS";
     private static final String MESSAGE_GOODBYE = "GOODBYE FOR NOW. STAY HARD!";
     private static final String SEPARATOR = "-------------------------------------------------";
+    private static final String username = "User";
     private final Scanner in;
     private final PrintStream out;
+    //    private final String username = System.getProperty("user.name");
 
     public UserInterface() {
         this(System.in, System.out);
@@ -38,7 +40,7 @@ public class UserInterface {
     public String getUserInput() {
         String userInput;
         do {
-            out.printf("[%s]> ", System.getProperty("user.name"));
+            out.printf("[%s]> ", username);
             userInput = in.nextLine().trim();
         } while (userInput.trim().isEmpty());
 
