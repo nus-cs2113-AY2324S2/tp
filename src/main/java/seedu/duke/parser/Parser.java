@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
-import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.GradeCommand;
 import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.ViewGpaCommand;
+
 
 public class Parser {
 
@@ -84,8 +87,7 @@ public class Parser {
     }
 
     private static Command gpaCommand(Map<String, String> args) {
-        // return new GPACommand();
-        return new InvalidCommand();
+        return new ViewGpaCommand();
     }
 
     private static Command viewCommand(Map<String, String> args) {
@@ -111,7 +113,8 @@ public class Parser {
     }
 
     private static Command gradeCommand(Map<String, String> args) {
-        // return new GradeCommand();
-        return new InvalidCommand();
+        String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+        String grade = args.getOrDefault("grade", "GRADE_ERROR");
+        return new GradeCommand(moduleCode, grade);
     }
 }
