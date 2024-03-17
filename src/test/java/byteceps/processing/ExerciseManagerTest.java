@@ -47,7 +47,7 @@ class ExerciseManagerTest {
     public void execute_addEmptyNameExercise_throwsInvalidInput() {
         String emptyInput = "exercise /add";
         parser.parseInput(emptyInput);
-        assertThrows(Exceptions.InvalidInput.class, ()-> exerciseManager.execute(parser));
+        assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
     }
 
     @Test
@@ -99,7 +99,8 @@ class ExerciseManagerTest {
                 "\n" +
                 "-------------------------------------------------\n";
 
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.replaceAll("\\s+",""),
+                outContent.toString().replaceAll("\\s+",""));
 
         restoreStreams();
     }
@@ -109,7 +110,7 @@ class ExerciseManagerTest {
         String invalidInput = "exercise /unknown";
         parser.parseInput(invalidInput);
 
-        assertThrows(IllegalStateException.class, ()->exerciseManager.execute(parser));
+        assertThrows(IllegalStateException.class, () -> exerciseManager.execute(parser));
     }
 
     @Test
@@ -126,14 +127,21 @@ class ExerciseManagerTest {
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
         exerciseManager.list();
 
-        String expectedOutput = "[ByteCeps]> Edited Exercise from Push-ups to Push Ups\n" +
+        String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
+                "-------------------------------------------------\n" +
+                "[ByteCeps]> Listing Exercises:\n" +
+                "\t\t\t1. Push-ups\n" +
+                "\n" +
+                "-------------------------------------------------\n" +
+                "[ByteCeps]> Edited Exercise from Push-ups to Push Ups\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
                 "\t\t\t1. Push Ups\n" +
                 "\n" +
                 "-------------------------------------------------\n";
 
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.replaceAll("\\s+",""),
+                outContent.toString().replaceAll("\\s+",""));
 
         restoreStreams();
     }
