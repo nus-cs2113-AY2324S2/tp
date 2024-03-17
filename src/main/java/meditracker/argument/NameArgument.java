@@ -3,7 +3,7 @@ package meditracker.argument;
 public class NameArgument extends Argument {
     public NameArgument(boolean isOptional) {
         super(
-                "name",
+                ArgumentName.NAME,
                 "-n",
                 "What is the name of the medication?",
                 "Name of medication",

@@ -1,13 +1,13 @@
 package meditracker.argument;
 
 public class Argument {
-    private final String name;
+    private final ArgumentName name;
     private final String flag;
     private final String prompt;
     private final String help;
     private final boolean isOptional;
 
-    public Argument(String name, String flag, String prompt, String help, boolean isOptional) {
+    public Argument(ArgumentName name, String flag, String prompt, String help, boolean isOptional) {
         this.name = name;
         this.flag = flag;
         this.prompt = prompt;
@@ -15,7 +15,7 @@ public class Argument {
         this.isOptional = isOptional;
     }
 
-    public String getName() {
+    public ArgumentName getName() {
         return name;
     }
 

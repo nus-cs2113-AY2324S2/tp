@@ -9,7 +9,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 class ArgumentParser {
-    protected final Map<String, String> PARSED_ARGUMENTS = new HashMap<>();
+    protected final Map<ArgumentName, String> PARSED_ARGUMENTS = new HashMap<>();
 
     /**
      * Constructs ArgumentParser that parses raw input into corresponding key value pairs
@@ -20,7 +20,7 @@ class ArgumentParser {
      */
     public ArgumentParser(ArgumentList argumentList, String rawInput) throws ArgumentNotFoundException {
         List<String> rawInputSplit = List.of(rawInput.split(" "));
-        SortedMap<Integer, String> indexes = getArgumentIndexes(argumentList, rawInputSplit);
+        SortedMap<Integer, ArgumentName> indexes = getArgumentIndexes(argumentList, rawInputSplit);
         getArgumentValues(indexes, rawInputSplit);
     }
 
@@ -33,18 +33,19 @@ class ArgumentParser {
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private SortedMap<Integer, String> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
+    private SortedMap<Integer, ArgumentName> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
             throws ArgumentNotFoundException {
-        SortedMap<Integer, String> indexes = new TreeMap<>();
+        SortedMap<Integer, ArgumentName> indexes = new TreeMap<>();
         for (Argument argument: argumentList.getArguments()) {
             String flag = argument.getFlag();
+            ArgumentName argumentName = argument.getName();
             boolean isRequired = !argument.isOptional();
 
             int flagIndex = rawInputSplit.indexOf(flag);
             boolean isNotFound = flagIndex == -1;
 
             if (!isNotFound) {
-                indexes.put(flagIndex, flag);
+                indexes.put(flagIndex, argumentName);
             } else if (isRequired) {
                 // arg keyword not found in additional input
                 String errorContext = String.format("Missing \"%s\" argument", flag);
@@ -62,13 +63,13 @@ class ArgumentParser {
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private void getArgumentValues(SortedMap<Integer, String> indexes, List<String> rawInputSplit) {
-        String argKey = indexes.get(indexes.firstKey());
+    private void getArgumentValues(SortedMap<Integer, ArgumentName> indexes, List<String> rawInputSplit) {
+        ArgumentName argKey = indexes.get(indexes.firstKey());
         int startIndex = indexes.firstKey() + 1; // position after keyword arg
         int endIndex;
 
         boolean isSkipFirst = false;
-        for (Map.Entry<Integer, String> index: indexes.entrySet()) {
+        for (Map.Entry<Integer, ArgumentName> index: indexes.entrySet()) {
             if (!isSkipFirst) {
                 isSkipFirst = true; // Skips first map entry
                 continue;

@@ -12,7 +12,7 @@ public class ArgumentList {
         ARGUMENTS = List.of(arguments);
     }
 
-    public Map<String, String> parse(String rawInput) throws ArgumentNotFoundException {
+    public Map<ArgumentName, String> parse(String rawInput) throws ArgumentNotFoundException {
         ArgumentParser argumentParser = new ArgumentParser(this, rawInput);
         return argumentParser.PARSED_ARGUMENTS;
     }
