@@ -4,5 +4,7 @@ e/ add/  d/ testing amt/ 3 date/ 11.11.2011
 e/ add/  d/ testing amt/ 900 date/ 11.11.2011
 list
 e/ del/ 1
+view -m 11.2011
+view -y 2011
 list
 exit

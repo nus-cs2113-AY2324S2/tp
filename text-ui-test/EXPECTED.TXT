@@ -7,19 +7,41 @@
 
 CantVas Help
 To input expenses, use format:
- << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
+<< e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
+To delete saved expenses, use format:
+<< e/ del/ <index> >>
 To List saved expenses, use format:
- << list >>
+<< list >>
+To view saved expenses by month, use format:
+<< view -m <mm.yyyy> >>
+To view saved expenses by year, use format:
+<< view -y <yyyy> >>
+CantVas Help
+To input expenses, use format:
+<< e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
+To delete saved expenses, use format:
+<< e/ del/ <index> >>
+To List saved expenses, use format:
+<< list >>
+To view saved expenses by month, use format:
+<< view -m <mm.yyyy> >>
+To view saved expenses by year, use format:
+<< view -y <yyyy> >>
 Expenditure added successfully.
 Expenditure added successfully.
 Expenditure added successfully.
 Current Expenses:
-1.  testing  | Cost: $500.0 | date: 11.11.2011
-2.  testing  | Cost: $3.0 | date: 11.11.2011
-3.  testing  | Cost: $900.0 | date: 11.11.2011
-deleted: testing  | Cost: $500.0 | date: 11.11.2011
+1. testing | Cost: $500.0 | date: 11.11.2011
+2. testing | Cost: $3.0 | date: 11.11.2011
+3. testing | Cost: $900.0 | date: 11.11.2011
+deleted:testing | Cost: $500.0 | date: 11.11.2011
+Expenses for the month & year 11.2011:
+1. testing | Cost: $3.0 | date: 11.11.2011
+1. testing | Cost: $900.0 | date: 11.11.2011
+Expenses for the year 2011:
+1. testing | Cost: $3.0 | date: 11.11.2011
+1. testing | Cost: $900.0 | date: 11.11.2011
 Current Expenses:
-1.  testing  | Cost: $3.0 | date: 11.11.2011
-2.  testing  | Cost: $900.0 | date: 11.11.2011
-Shutting down...
- Goodbye.
+1. testing | Cost: $3.0 | date: 11.11.2011
+2. testing | Cost: $900.0 | date: 11.11.2011
+Shutting down... Goodbye!!
