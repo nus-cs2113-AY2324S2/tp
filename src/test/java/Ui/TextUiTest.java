@@ -1,4 +1,4 @@
-package seedu.duke;
+package Ui;
 
 public class TextUiTest {
 }

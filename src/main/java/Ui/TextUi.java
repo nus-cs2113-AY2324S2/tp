@@ -1,4 +1,4 @@
-package seedu.duke;
+package Ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
