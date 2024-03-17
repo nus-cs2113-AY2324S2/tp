@@ -59,7 +59,8 @@ public class Ui {
         System.out.println("2. delete <bouquet_name> - Delete a bouquets");
         System.out.println("3. mybouquets - List current saved bouquets");
         System.out.println("4. bye - Exits the programme");
-        System.out.println("4. flower - List flowers that can be added into mybouquets");
+        System.out.println("5. flower - Shows a list of flowers that can be added into mybouquets");
+        System.out.println("6. flower <occasion> - Shows a list of flowers associated with said occasion");
         printBreakLine();
     }
 
