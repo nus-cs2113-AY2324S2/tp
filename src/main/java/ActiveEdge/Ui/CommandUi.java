@@ -17,10 +17,8 @@ public class CommandUi {
     }
 
     public static void printMealLogMessage(LogMeals logMeals) {
-
-        System.out.println("You've logged " + logMeals.getServings() + " of" + logMeals.getFoodName());
-        //System.out.println("Estimated calories: " + logMeals.getMealCalories());
-        System.out.println("Total calories: ");
+        System.out.println("You've logged " + Integer.toString(logMeals.getServings()) + " servings" + " of " + logMeals.getFoodName() + ".") ;
+        System.out.println("Total calories: " + Integer.toString(logMeals.getMealCalories()));
     }
 
     public static void printShowCalMessage() {
@@ -33,8 +31,4 @@ public class CommandUi {
     public static void printWaterIntakeMessage(int totalWaterIntake) {
         System.out.println("Total water consumed today: " + totalWaterIntake + " ml");
     }
-
-
-
-
 }

@@ -23,10 +23,7 @@ public class GoalsUi {
         }
     }
 
-
     public static void printShowGoalsMessage(int calorieGoal, int waterGoal) {
         System.out.println("Current goals: Daily calories: " + calorieGoal + "kcal" + ", Daily water: " + waterGoal + "ml.");
     }
 }
-
-
