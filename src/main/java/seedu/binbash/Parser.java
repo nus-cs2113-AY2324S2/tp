@@ -50,7 +50,13 @@ public class Parser {
         if (matcher.matches()) {
             String itemName = matcher.group("itemName");
             String itemDescription = matcher.group("itemDescription");
-            return new AddCommand(itemList, itemName, itemDescription);
+            int itemQuantity = Integer.parseInt(matcher.group("itemQuantity"));
+            String itemExpirationDate = matcher.group("itemExpirationDate");
+            double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
+            double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
+
+            return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
+                    itemCostPrice);
         } else {
             return null;
         }

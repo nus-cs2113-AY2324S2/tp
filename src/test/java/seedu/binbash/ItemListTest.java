@@ -9,7 +9,8 @@ class ItemListTest {
     @Test
     void deleteItem_oneItemInItemList_noItemInItemList() {
         ItemList itemList = new ItemList();
-        itemList.addItem("testItem", "A test item");
+        itemList.addItem("testItem", "A test item", 2,
+                "3", 4.00, 5.00);
 
         itemList.deleteItem(1);
 
@@ -20,32 +21,52 @@ class ItemListTest {
     void addItem_noItemInItemList_oneItemInItemList() {
         ItemList itemList = new ItemList();
 
-        itemList.addItem("testItem", "A test item");
+        itemList.addItem("testItem", "A test item", 2,
+                "3", 4.00, 5.00);
         assertEquals(1, itemList.getItemCount());
     }
 
     @Test
-    void addItem_itemNameAndDescription_correctItemNameAndDescription() {
+    void addItem_itemInputs_correctItemParameters() {
         ItemList itemList = new ItemList();
 
-        itemList.addItem("testItem", "A test item");
+        itemList.addItem("testItem", "A test item", 2,
+                "3", 4.00, 5.00);
         Item item = itemList.getItemList().get(0);
 
         assertEquals(item.getItemName(), "testItem");
         assertEquals(item.getItemDescription(), "A test item");
+        assertEquals(item.getItemQuantity(), 2);
+        assertEquals(item.getItemExpirationDate(), "3");
+        assertEquals(item.getItemSalePrice(), 4.00);
+        assertEquals(item.getItemCostPrice(), 5.00);
     }
 
     @Test
     void printList_twoItemsInItemList_correctPrintFormatForBothItems() {
         ItemList itemList = new ItemList();
 
-        itemList.addItem("testItem", "1");
-        itemList.addItem("testItem", "2");
+        itemList.addItem("testItem1", "Test item 1", 2,
+                "3", 4.00, 5.00);
+        itemList.addItem("testItem2", "Test item 2", 6,
+                "7", 8.00, 9.00);
 
         String actualOutput = itemList.printList(itemList.getItemList());
 
-        String expectedOutput = "testItem: 1" + System.lineSeparator() +
-                "testItem: 2" + System.lineSeparator();
+        String expectedOutput = "testItem1" + System.lineSeparator() +
+                "\tdescription: Test item 1" + System.lineSeparator() +
+                "\tquantity: 2" + System.lineSeparator() +
+                "\texpiry date: 3" + System.lineSeparator() +
+                "\tsale price: $4.00" + System.lineSeparator() +
+                "\tcost price: $5.00" + System.lineSeparator() +
+                System.lineSeparator() +
+                "testItem2" + System.lineSeparator() +
+                "\tdescription: Test item 2" + System.lineSeparator() +
+                "\tquantity: 6" + System.lineSeparator() +
+                "\texpiry date: 7" + System.lineSeparator() +
+                "\tsale price: $8.00" + System.lineSeparator() +
+                "\tcost price: $9.00" + System.lineSeparator() +
+                System.lineSeparator();
 
         assertEquals(expectedOutput, actualOutput);
     }

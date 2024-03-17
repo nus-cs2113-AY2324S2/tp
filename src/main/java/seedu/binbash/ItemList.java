@@ -23,13 +23,14 @@ public class ItemList {
         return itemList.size();
     }
 
-    public String addItem(String itemName, String itemDescription) {
-        Item item = new Item(itemName, itemDescription);
+    public String addItem(String itemName, String itemDescription, int itemQuantity, String itemExpirationDate,
+                          double itemSalePrice, double itemCostPrice) {
+        Item item = new Item(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
 
         itemList.add(item);
 
-        String output = "Noted! I have added the following item into your inventory:"
-                + String.format("\t%s", item);
+        String output = "Noted! I have added the following item into your inventory:\n"
+                + "\n" + item;
         return output;
     }
 
@@ -69,7 +70,7 @@ public class ItemList {
         String output = "";
 
         for (Item item: itemList) {
-            output += item.toString() + System.lineSeparator();
+            output += item.toString() + System.lineSeparator() + System.lineSeparator();
         }
 
         return output;
