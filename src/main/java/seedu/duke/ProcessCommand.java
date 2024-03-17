@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class ProcessCommand {
-    private  final ExpenditureList expenselist;
+    private final ExpenditureList expenselist;
 
     protected ProcessCommand(ExpenditureList expenselist) {
         this.expenselist = expenselist;
@@ -31,7 +31,7 @@ public class ProcessCommand {
      * if command is more complex or related to expenditure,
      * passes command to the method processUserCommand
      */
-    public void UserCommand() {
+    public void userCommand() {
         while(true) {
             String command;
             Scanner in = new Scanner(System.in);
@@ -44,7 +44,8 @@ public class ProcessCommand {
                 return;
             case "help":
                 System.out.println("CantVas Help \n"
-                        + "To input expenses, use format:\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
+                        + "To input expenses, use format:"
+                        + "\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
                         + "To List saved expenses, use format:\n << list >>  ");
                 break;
             default:

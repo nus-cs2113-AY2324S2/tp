@@ -1,5 +1,5 @@
 package seedu.duke;
-import CantVasUI.UI;
+import cantvasui.UI;
 
 public class CantVasMain {
     /**
@@ -10,6 +10,6 @@ public class CantVasMain {
         ui.printLogo();
         ExpenditureList expenseList = new ExpenditureList();
         ProcessCommand processCommand = new ProcessCommand(expenseList);
-        processCommand.UserCommand();
+        processCommand.userCommand();
     }
 }

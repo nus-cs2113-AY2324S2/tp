@@ -3,8 +3,8 @@ package seedu.duke;
 import java.util.ArrayList;
 
 class ExpenditureList {
+    public static int expenditureCount;
     private static ArrayList<Expenditure> expenditureList;
-    public static int expenditureCount ;
 
     public ExpenditureList() {
         expenditureList = new ArrayList<>();
