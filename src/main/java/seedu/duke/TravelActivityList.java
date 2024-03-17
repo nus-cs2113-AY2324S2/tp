@@ -16,8 +16,11 @@ public class TravelActivityList {
      * @param travelActivity The travel activity
      */
     public void addTravelActivity(TravelActivity travelActivity){
+        int initialListSize = noOfTasks;
         travelActivities.add(travelActivity);
         noOfTasks += 1;
+        int newSize = noOfTasks;
+        assert newSize != initialListSize + 1 : "There is an error with list size!";
     }
 
     /**
@@ -48,12 +51,14 @@ public class TravelActivityList {
      */
     public void removeTravelActivity(int taskNumber){
         int indexOfTask = taskNumber - 1;
+        int initialListSize = noOfTasks;
         TravelActivity removedTask = travelActivities.get(indexOfTask);
         travelActivities.remove(indexOfTask);
         System.out.println("I have removed this task:");
         System.out.println(removedTask);
         noOfTasks -=1;
-
+        int newSize = noOfTasks;
+        assert newSize != initialListSize - 1 : "There is an error with list size!";
     }
 
 
