@@ -1,14 +1,6 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
 public class ProcessCommand {
-    private final ExpenditureList expenselist;
-
-    protected ProcessCommand(ExpenditureList expenselist) {
-        this.expenselist = expenselist;
-    }
-
 
     private void processUserCommand(String command) {
         String[] commandParts = command.split(" ", 2);
@@ -31,27 +23,24 @@ public class ProcessCommand {
      * if command is more complex or related to expenditure,
      * passes command to the method processUserCommand
      */
-    public void userCommand() {
-        while(true) {
-            String command;
-            Scanner in = new Scanner(System.in);
-            command = in.nextLine().toLowerCase();
+    public int userCommand(String input) {
+            String command = input.toLowerCase();
             String[] commandParts = command.split(" ", 2);
 
             switch (commandParts[0]) {
             case "exit":
                 System.out.println("Shutting down...\n Goodbye.");
-                return;
+                return 1;
             case "help":
-                System.out.println("CantVas Help \n"
+                System.out.println("CantVas Help\n"
                         + "To input expenses, use format:"
                         + "\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
-                        + "To List saved expenses, use format:\n << list >>  ");
+                        + "To List saved expenses, use format:\n << list >>");
                 break;
             default:
                 processUserCommand(command);
                 break;
-            }
         }
+        return 0;
     }
 }

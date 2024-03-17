@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-class ExpenditureList {
+public class ExpenditureList {
     public static int expenditureCount;
     private static ArrayList<Expenditure> expenditureList;
 

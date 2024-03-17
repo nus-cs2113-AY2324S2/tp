@@ -3,16 +3,20 @@ import cantvasui.UI;
 
 public class CantVasMain {
     private static UI ui;
+    private static ProcessCommand processCommand;
 
     public CantVasMain() {
         ui = new UI();
+        processCommand = new ProcessCommand();
     }
 
     public void run() {
         UI.printLogo();
-        ExpenditureList expenseList = new ExpenditureList();
-        ProcessCommand processCommand = new ProcessCommand(expenseList);
-        processCommand.userCommand();
+        int exit;
+        do {
+            String command = ui.getUserCommand();
+            exit = processCommand.userCommand(command);
+        } while (exit != 1);
     }
 
     /**
