@@ -3,7 +3,6 @@ package byteceps.commands;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
 
@@ -13,7 +12,7 @@ public class ParserTest {
         String validInput = "exercise /add deadlift";
         testParser.parseInput(validInput);
 
-        String command = testParser.getCommandString();
+        String command = testParser.getCommand();
         String action = testParser.getAction();
         String parameter = testParser.getActionParameter();
 
@@ -28,27 +27,8 @@ public class ParserTest {
         String validInput = "exercise /add deadlift";
         testParser.parseInput(validInput);
 
-        Command outputCommand = testParser.parseCommand();
-        assertEquals(outputCommand.getClass(), ExerciseCommand.class);
+        String outputCommand = testParser.getCommand();
+        assertEquals(outputCommand, "exercise");
     }
 
-    @Test
-    public void parseCommand_listWorkout_workoutCommand() {
-        Parser testParser = new Parser();
-        String validInput = "workout /list";
-        testParser.parseInput(validInput);
-
-        Command outputCommand = testParser.parseCommand();
-        assertEquals(outputCommand.getClass(), WorkoutCommand.class);
-    }
-
-    @Test
-    public void parseCommand_invalidCommand_throwException() {
-        Parser testParser = new Parser();
-        String invalidInput = "aaaaa /list";
-        testParser.parseInput(invalidInput);
-
-
-        Exception exception = assertThrows(UnsupportedOperationException.class, testParser::parseCommand);
-    }
 }

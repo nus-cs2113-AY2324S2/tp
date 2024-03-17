@@ -1,11 +1,11 @@
 package byteceps.commands;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Parser {
     private String command;
     private InputArguments commandAction;
-    private ArrayList<InputArguments> additionalArguments;
+    private HashMap<String, String> additionalArguments;
 
     public Parser() {
         flush();
@@ -14,7 +14,7 @@ public class Parser {
     private void flush() {
         command = "";
         commandAction = null;
-        additionalArguments = new ArrayList<>();
+        additionalArguments = new HashMap<>();
     }
 
     public void parseInput(String line) {
@@ -33,36 +33,24 @@ public class Parser {
         String[] argumentKeyValuePairs = line.substring(indexOfFirstSlash + 1).split("/");
         for (String keyValuePair : argumentKeyValuePairs) {
             String[] currentKV = keyValuePair.split( " ", 2);
-            String flag = currentKV[0];
-            String parameter = currentKV.length > 1 ? currentKV[1] : null;
+            String flag = currentKV[0].trim();
 
-            InputArguments currentInputArgument = new InputArguments(flag, parameter);
+            String parameter;
+            if (currentKV.length > 1) {
+                parameter = currentKV[1].trim();
+            } else {
+                parameter = "";
+            }
 
             if (commandAction == null) {
-                commandAction = currentInputArgument;
+                commandAction = new InputArguments(flag, parameter);
             } else {
-                additionalArguments.add(currentInputArgument);
+                additionalArguments.put(flag, parameter);
             }
         }
-
-        System.out.printf("parsed input: %s, %s, %s\n", command, commandAction.getFlag(), commandAction.getParameter());
     }
 
-    public Command parseCommand() {
-        System.out.println("parsing command... " + command);
-        switch(command) {
-        case ExerciseCommand.COMMAND_WORD:
-            return new ExerciseCommand(commandAction, additionalArguments);
-        case WorkoutCommand.COMMAND_WORD:
-            return new WorkoutCommand(commandAction, additionalArguments);
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-        default:
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    public String getCommandString() {
+    public String getCommand() {
         return command;
     }
 
@@ -74,7 +62,7 @@ public class Parser {
         return commandAction.getParameter();
     }
 
-    public ArrayList<InputArguments> getAdditionalArguments() {
+    public HashMap<String, String> getAdditionalArguments() {
         return additionalArguments;
     }
 

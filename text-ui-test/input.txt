@@ -1,5 +1,7 @@
-exercise /add bicep curls
+exercise /add bench press
+exercise /add push ups
 exercise /list
 exercise /delete bicep curls
-workout /create arm day
+exercise /delete push ups
+exercise /edit bicep curls /to hammer curls
 exit

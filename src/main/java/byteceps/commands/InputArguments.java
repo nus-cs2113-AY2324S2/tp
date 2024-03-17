@@ -5,8 +5,8 @@ public class InputArguments {
     private final String parameter;
 
     public InputArguments(String flag, String parameter) {
-        this.flag = flag;
-        this.parameter = parameter;
+        this.flag = flag.trim();
+        this.parameter = parameter.trim();
     }
 
 
@@ -17,4 +17,5 @@ public class InputArguments {
     public String getParameter() {
         return parameter;
     }
+
 }
