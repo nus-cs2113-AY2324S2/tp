@@ -9,5 +9,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
     public static final String MESSAGE_ERROR_MISSING_PARAMETERS = "Please ensure that there is " +
             "at least 1 parameter provided.";
-    public static final String MESSAGE_EDIT_SUCCESS = "Product details have been updated. Updated product:";
+    public static final String MESSAGE_EDIT_SUCCESS = "Product details have been updated.";
 }
