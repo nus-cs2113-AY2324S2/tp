@@ -144,8 +144,10 @@ public class MemberList {
             // Check the current pair for which balance is greater or if equal
             if (positiveBalance > negativeBalance) {
                 Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        negativeBalance);
+//                        new Subtransaction(negativeMember, positiveMember,
+//                        negativeBalance);
+                        new Subtransaction(positiveMember, negativeMember,
+                                negativeBalance);
                 positiveBalance -= negativeBalance;
                 negativeBalance = 0;
                 subtransactions.add(subtransaction);
@@ -153,8 +155,10 @@ public class MemberList {
 
             } else if (positiveBalance < negativeBalance) {
                 Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        positiveBalance);
+//                        new Subtransaction(negativeMember, positiveMember,
+//                        positiveBalance);
+                        new Subtransaction(positiveMember, negativeMember,
+                                positiveBalance);
                 negativeBalance -= positiveBalance;
                 positiveBalance = 0;
                 subtransactions.add(subtransaction);
@@ -162,8 +166,10 @@ public class MemberList {
 
             } else {
                 Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        positiveBalance);
+//                        new Subtransaction(negativeMember, positiveMember,
+//                        positiveBalance);
+                        new Subtransaction(positiveMember, negativeMember,
+                                positiveBalance);
                 positiveBalance = 0;
                 negativeBalance = 0;
                 subtransactions.add(subtransaction);

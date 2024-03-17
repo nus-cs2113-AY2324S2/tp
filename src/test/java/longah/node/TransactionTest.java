@@ -20,12 +20,12 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
-            Transaction transaction = new Transaction("p/Alice p/Bob a/5", memberList);
-            Member personOwed = transaction.getPersonOwed();
-            assertEquals("Alice", personOwed.getName());
-            assertEquals(5.0, personOwed.getBalance());
-            Member personOwing = memberList.getMember("Bob");
-            assertEquals(-5.0, personOwing.getBalance());
+            Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
+            Member lender = transaction.getLender();
+            assertEquals("Alice", lender.getName());
+            assertEquals(5.0, lender.getBalance());
+            Member borrower = memberList.getMember("Bob");
+            assertEquals(-5.0, borrower.getBalance());
         } catch (LongAhException e) {
             fail();
         }
@@ -40,7 +40,7 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
-            new Transaction("p/Alice a/5", memberList);
+            new Transaction("Alice a/5", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_FORMAT.getMessage();
@@ -57,8 +57,8 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
-            Transaction transaction = new Transaction("p/Alice p/Bob a/5", memberList);
-            transaction.addPayee("Bob b/5", memberList);
+            Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
+            transaction.addBorrower("Bob b/5", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_FORMAT.getMessage();
@@ -76,8 +76,8 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
-            Transaction transaction = new Transaction("p/Alice p/Bob a/5", memberList);
-            transaction.addPayee("Bob a/five", memberList);
+            Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
+            transaction.addBorrower("Bob a/five", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_VALUE_FORMAT.getMessage();
@@ -95,8 +95,8 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
-            Transaction transaction = new Transaction("p/Alice p/Bob a/5", memberList);
-            transaction.addPayee("Bob a/-5", memberList);
+            Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
+            transaction.addBorrower("Bob a/-5", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_VALUE.getMessage();

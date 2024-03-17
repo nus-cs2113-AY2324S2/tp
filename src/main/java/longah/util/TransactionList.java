@@ -76,6 +76,8 @@ public class TransactionList {
      * Returns a String printout the list of transactions stored in the system.
      */
     public String listTransactions() {
+        int transactionListSize = getTransactionListSize();
+        System.out.println(transactionListSize + " transactions found.");
         int index = 1;
         String outString = "";
         for (Transaction transaction : transactions) {
@@ -104,7 +106,7 @@ public class TransactionList {
     }
 
     /**
-     * Printout the list of transactions which a person is involved as a payee
+     * Printout the list of transactions which a person is involved as a borrower
      *
      * @param memberName String representation of the name of person to search for
      * @return Returns a String printout of the required list of transactions
@@ -114,12 +116,11 @@ public class TransactionList {
                 , memberName) + "\n";
         int index = 1;
         for (Transaction transaction : transactions) {
-            if (transaction.isPayee(memberName)) {
+            if (transaction.isBorrower(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index ++;
             }
         }
         return outString;
     }
-
 }
