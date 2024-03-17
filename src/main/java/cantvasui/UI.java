@@ -38,5 +38,11 @@ public class UI {
         );
     }
 
+    public static void printHelpMessage() {
+        System.out.println("CantVas Help\n"
+                + "To input expenses, use format:"
+                + "\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
+                + "To List saved expenses, use format:\n << list >>");
+    }
 
 }

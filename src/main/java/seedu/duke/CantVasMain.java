@@ -13,11 +13,11 @@ public class CantVasMain {
 
     public void run() {
         UI.printLogo();
-        int exit;
+        boolean exit;
         do {
             String command = ui.getUserCommand();
             exit = processCommand.userCommand(command);
-        } while (exit != 1);
+        } while (!exit);
     }
 
     /**

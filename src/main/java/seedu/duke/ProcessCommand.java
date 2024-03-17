@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import cantvasui.UI;
+
 public class ProcessCommand {
     private final ExpenditureList expenselist;
 
@@ -29,24 +31,21 @@ public class ProcessCommand {
      * if command is more complex or related to expenditure,
      * passes command to the method processUserCommand
      */
-    public int userCommand(String input) {
+    public boolean userCommand(String input) {
             String command = input.toLowerCase();
             String[] commandParts = command.split(" ", 2);
 
             switch (commandParts[0]) {
             case "exit":
                 System.out.println("Shutting down...\n Goodbye.");
-                return 1;
+                return true;
             case "help":
-                System.out.println("CantVas Help\n"
-                        + "To input expenses, use format:"
-                        + "\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
-                        + "To List saved expenses, use format:\n << list >>");
+                UI.printHelpMessage();
                 break;
             default:
                 processUserCommand(command);
                 break;
         }
-        return 0;
+        return false;
     }
 }
