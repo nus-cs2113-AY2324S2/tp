@@ -9,6 +9,7 @@ import sleep.SleepTracker;
 import static parser.HabitCommandParser.determineHabitCommand;
 import static parser.ReflectionCommandParser.determineReflectionCommand;
 import static parser.SleepCommandParser.determineSleepCommand;
+import static parser.FocusCommandParser.determineFocusCommand;
 import exceptions.Wellness360Exception;
 
 public class Parser {
@@ -33,6 +34,7 @@ public class Parser {
             return determineSleepCommand(sleepTracker, commandArgs);
         case "fitness":
         case "focus":
+            return determineFocusCommand(commandArgs);
         case "exit":
             return new ExitCommand(commandArgs);
         default:
