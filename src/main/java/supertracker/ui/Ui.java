@@ -1,6 +1,5 @@
 package supertracker.ui;
 
-import supertracker.TrackerException;
 import supertracker.item.Item;
 
 public class Ui {
@@ -29,7 +28,7 @@ public class Ui {
     }
 
     private static void updateItemOpening(Item item) {
-        System.out.println(item.getName() + " has been successfully updated!");
+        printIndent(item.getName() + " has been successfully updated!");
     }
 
     private static String deleteItemOpening(String itemName) {
@@ -110,8 +109,8 @@ public class Ui {
         printIndent(stringToPrint);
     }
 
-    public static void printError(TrackerException e) {
+    public static void printError(String errorMessage) {
         printIndent(BASIC_ERROR_MESSAGE);
-        printIndent(e.getErrorMessage());
+        printIndent(errorMessage);
     }
 }

@@ -34,7 +34,7 @@ public class SuperTracker {
                 command = Parser.parseCommand(input.trim());
                 command.execute();
             } catch (TrackerException e) {
-                Ui.printError(e);
+                Ui.printError(e.getErrorMessage());
                 command = new InvalidCommand();
             }
             Ui.printLine();

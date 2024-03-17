@@ -9,6 +9,7 @@ import supertracker.command.UpdateCommand;
 import supertracker.command.DeleteCommand;
 import supertracker.command.Command;
 import supertracker.item.Inventory;
+import supertracker.ui.ErrorMessage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +36,8 @@ public class Parser {
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + "[0-9]*(?:\\.[0-9]*)?)?) ";
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
             + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
+    private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
+
 
     /**
      * Returns the command word specified in the user input string
@@ -129,17 +132,17 @@ public class Parser {
         Matcher matcher = getPatternMatcher(UPDATE_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            throw new TrackerException("Invalid update command format!");
+            throw new TrackerException(ErrorMessage.INVALID_UPDATE_FORMAT);
         }
 
         String itemName = matcher.group(NAME_GROUP).trim().toLowerCase();
         String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
         String priceString = matcher.group(PRICE_GROUP).replace(PRICE_FLAG + BASE_FLAG, "").trim();
         if (itemName.isEmpty() || (quantityString.isEmpty() && priceString.isEmpty())) {
-            throw new TrackerException("Parameters cannot be left empty!");
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
         if (!Inventory.contains(itemName)) {
-            throw new TrackerException(itemName + " does not exist in inventory. Unable to update its values. =(");
+            throw new TrackerException(itemName + ErrorMessage.ITEM_NOT_IN_LIST);
         }
 
         int quantity = 0;
@@ -160,7 +163,7 @@ public class Parser {
         Matcher matcher = getPatternMatcher(NEW_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            throw new TrackerException("Invalid new command format!");
+            throw new TrackerException(ErrorMessage.INVALID_NEW_ITEM_FORMAT);
         }
 
         String itemName = matcher.group(NAME_GROUP).trim();
@@ -168,7 +171,7 @@ public class Parser {
         String itemPriceString = matcher.group(PRICE_GROUP).trim();
 
         if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
-            throw new TrackerException("Parameters cannot be empty!");
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
         // throws NumberFormatException if strings cannot be parsed
@@ -183,7 +186,7 @@ public class Parser {
         Matcher matcher = getPatternMatcher(LIST_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            throw new TrackerException("Invalid list command format!");
+            throw new TrackerException(ErrorMessage.INVALID_LIST_FORMAT);
         }
 
         boolean hasQuantity = !matcher.group(QUANTITY_GROUP).isEmpty();
@@ -200,19 +203,19 @@ public class Parser {
         return new ListCommand(hasQuantity, hasPrice, firstParam);
     }
 
-    private static Command parseDeleteCommand(String input) {
-        if (!input.contains(NAME_FLAG + BASE_FLAG)) {
-            return new InvalidCommand();
-        }
-        String[] parseName = input.split(NAME_FLAG + BASE_FLAG, 2);
-        String itemName = parseName[1];
+    private static Command parseDeleteCommand(String input) throws TrackerException {
+        String[] flags = {NAME_FLAG};
+        Matcher matcher = getPatternMatcher(DELETE_COMMAND_REGEX, input, flags);
 
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_DELETE_FORMAT);
+        }
+
+        String itemName = matcher.group(NAME_GROUP);
         if (itemName.isEmpty()) {
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
-        //throws ArrayIndexOutOfBoundsException if string is have no n/
+
         return new DeleteCommand(itemName);
-
     }
-
 }
