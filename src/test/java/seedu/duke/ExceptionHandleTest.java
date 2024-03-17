@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class FAPTest {
+public class ExceptionHandleTest {
     @Test
-    public void mainTest() {
+    public void exceptionHandleTest() {
         assertTrue(true);
     }
 }
