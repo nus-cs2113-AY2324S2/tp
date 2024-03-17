@@ -22,6 +22,7 @@ public class WeekView {
     public void printWeekView(TaskManager taskManager) {
         LocalDate endOfWeek = startOfWeek.plusDays(6);
         System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) + " - " + dateFormatter.format(endOfWeek));
+
         printWeekHeader();
         printWeekDays(startOfWeek, dateFormatter, taskManager);
     }
