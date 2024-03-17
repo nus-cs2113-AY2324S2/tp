@@ -1,7 +1,8 @@
 package cantvasui;
 
-public class UI {
+import java.util.Scanner;
 
+public class UI {
 
     /*   static final String divider = "------------------------------------------------";
 
@@ -16,6 +17,16 @@ public class UI {
             System.out.println("Please check again on your input :D");
       }
     */
+
+    private final Scanner in;
+
+    public UI() {
+        this.in = new Scanner(System.in);
+    }
+
+    public String getUserCommand() {
+        return in.nextLine();
+    }
 
     public static void printLogo() {
         System.out.println("   _____            ___      __ \n"
