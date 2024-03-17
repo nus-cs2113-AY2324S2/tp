@@ -9,11 +9,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Deals with file access.
+ */
 public class Storage {
 
     private final static String FOLDER_PATH = "./data/";
     private final static String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
 
+    /**
+     * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.
+     *
+     * @param timetable A table containing all courses of the user.
+     */
     public static void writeToFile(Timetable timetable) {
         try {
             FileWriter fw = new FileWriter(USER_TIMETABLE_FILE_PATH);
@@ -24,6 +32,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Take in a file name, then load the file containing all courses of the major/user to a Timetable object.
+     *
+     * @param timetableName The name of the file containing all courses of the major/user.
+     *                      e.g. timetableName of "CEG" indicating the recommended timetable of Computer Engineering,
+     *                      while timetableName of "myTimetable" indicating the timetable of the user.
+     * @return A timetable object that is loaded from the given file.
+     */
     public static Timetable loadTimetable(String timetableName) {
         Timetable newTimetable = new Timetable();
         String filePathName = FOLDER_PATH + timetableName + ".csv";
