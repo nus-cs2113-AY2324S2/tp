@@ -190,7 +190,8 @@ public class Handler {
             if (typeOfExercise.equals(Constant.RUN)){
                 String[] runDetails = getRun(userInput);
 
-                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty() || runDetails[3].isEmpty()) {
+                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
+                        || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
                 }
                 Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
