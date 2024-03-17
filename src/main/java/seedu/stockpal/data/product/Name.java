@@ -8,6 +8,15 @@ public class Name {
     }
 
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public boolean isNull() {
+        return this.name == null;
+    }
+
+    @Override
+    public String toString() {
+        return ("Name: " + name);
     }
 }

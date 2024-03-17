@@ -8,6 +8,17 @@ public class Description {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
+    }
+
+    public boolean isNull() {
+        return this.description == null;
+    }
+
+    @Override
+    public String toString() {
+        return "Description: " + ((description == null || description.isEmpty())
+                ? "[X]"
+                : description);
     }
 }

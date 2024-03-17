@@ -44,16 +44,17 @@ public class ProductList {
     public void updateProduct(int productIndex, Name newName, Quantity newQuantity
             , Description newDescription, Price newPrice) {
         Product updatedProduct = products.get(productIndex);
-        if (newName != null) {
+
+        if (!newName.isNull()) {
             updatedProduct.setName(newName);
         }
-        if (newQuantity != null) {
+        if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
         }
-        if (newDescription != null) {
+        if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
         }
-        if (newPrice != null) {
+        if (!newPrice.isNull()) {
             updatedProduct.setPrice(newPrice);
         }
         products.set(productIndex, updatedProduct);
@@ -67,5 +68,17 @@ public class ProductList {
     public void decreaseAmount(int productIndex, Integer amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.decreaseQuantity(amountToDecrease);
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
+    }
+
+    public int getSize() {
+        return products.size();
+    }
+
+    public Product get(int i) {
+        return products.get(i);
     }
 }

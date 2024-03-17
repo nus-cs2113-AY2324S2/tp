@@ -10,7 +10,7 @@ public class Quantity {
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void updateIncreaseQuantity(Integer increaseQuantity) {
@@ -23,6 +23,15 @@ public class Quantity {
         } else {
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
+    }
+
+    public boolean isNull() {
+        return this.quantity == null;
+    }
+
+    @Override
+    public String toString() {
+        return ("Quantity: " + quantity);
     }
 }
 

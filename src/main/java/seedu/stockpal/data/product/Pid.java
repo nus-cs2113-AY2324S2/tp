@@ -5,7 +5,23 @@ public class Pid {
     public Pid(Integer pid) {
         this.pid = pid;
     }
+
     public Integer getPid() {
-        return pid;
+        return this.pid;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Pid)) {
+            return false;
+        }
+
+        Pid objToCompare = (Pid) obj;
+        return this.pid.equals(objToCompare.getPid());
+    }
+
+    @Override
+    public String toString() {
+        return ("PID: " + pid);
     }
 }

@@ -10,6 +10,15 @@ public class Price {
     }
 
     public Double getPrice() {
-        return price;
+        return this.price;
+    }
+    public boolean isNull() {
+        return this.price == null;
+    }
+    @Override
+    public String toString() {
+        return "Price: " + ((price == null)
+                ? "[X]"
+                : String.valueOf(price));
     }
 }
