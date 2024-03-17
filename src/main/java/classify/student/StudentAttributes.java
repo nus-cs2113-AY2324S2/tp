@@ -1,14 +1,23 @@
 package classify.student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentAttributes {
     private String name;
-    private double grade;
-    private int classesAttended;
+    private List<SubjectGrade> subjectGrades;
 
-    public StudentAttributes(String name, double grade, int classesAttended) {
+    public StudentAttributes(String name) {
         this.name = name;
-        this.grade = grade;
-        this.classesAttended = classesAttended;
+        this.subjectGrades = new ArrayList<>();
+    }
+
+    public void addSubjectGrade(SubjectGrade subjectGrade) {
+        subjectGrades.add(subjectGrade);
+    }
+
+    public List<SubjectGrade> getSubjectGrades() {
+        return subjectGrades;
     }
 
     public String getName() {
@@ -19,30 +28,16 @@ public class StudentAttributes {
         this.name = name;
     }
 
-    public double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(double grade) {
-        this.grade = grade;
-    }
-
-    public int getClassesAttended() {
-        return classesAttended;
-    }
-
-    public void setClassesAttended(int classesAttended) {
-        this.classesAttended = classesAttended;
-    }
-
-
     @Override
     public String toString() {
-        return "StudentAttributes{" +
+        StringBuilder sb = new StringBuilder();
+        sb.append("StudentAttributes{" +
                 "name='" + name + '\'' +
-                ", grade=" + grade +
-                ", classesAttended=" + classesAttended +
-                '}';
+                ", subjectGrades=[");
+        for (SubjectGrade subjectGrade : subjectGrades) {
+            sb.append(subjectGrade.toString()).append(", ");
+        }
+        sb.append("]}");
+        return sb.toString();
     }
 }
-
