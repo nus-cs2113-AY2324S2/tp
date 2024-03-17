@@ -1,7 +1,6 @@
 package brokeculator.command;
 
 import brokeculator.expense.ExpenseManager;
-import brokeculator.frontend.UI;
 
 public class DeleteCommand extends Command {
     private int indexToDelete;

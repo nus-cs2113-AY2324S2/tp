@@ -2,16 +2,15 @@
 Hello! I'm Brokeculator!
 What can I do for you?
 ------------------------------------
-Creating your data bank...
 Data file successfully created!
 ------------------------------------
-file save error occurednull
+Enter a command:
 ------------------------------------
 ------------------------------------
-invalid command
+null
 ------------------------------------
 ------------------------------------
-file save error occurednull
+Enter a command:
 ------------------------------------
 ------------------------------------
 Goodbye!
