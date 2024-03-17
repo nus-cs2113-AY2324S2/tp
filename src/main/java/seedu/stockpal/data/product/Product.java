@@ -17,24 +17,6 @@ public class Product {
         this.description = new Description(description);
         this.pid = new Pid(pid);
     }
-    public Name getProductName() {
-        return this.name;
-    }
-    public Quantity getProductQuantity() {
-        return this.quantity;
-    }
-
-    public Price getProductPrice() {
-        return this.price;
-    }
-
-    public Description getProductDescription() {
-        return this.description;
-    }
-    public Pid getProductPid() {
-        return this.pid;
-    }
-
 
     public Name getName() {
         return this.name;

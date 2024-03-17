@@ -19,11 +19,11 @@ public class NewCommandTest {
         NewCommand userInput = new NewCommand(productList, "chocolate", 100, 2.00, "ingredient");
         userInput.execute();
 
-        assertEquals("chocolate",productList.getProducts().get(0).getProductName().getName());
-        assertEquals(100,productList.getProducts().get(0).getProductQuantity().getQuantity());
-        assertEquals(2.00,productList.getProducts().get(0).getProductPrice().getPrice());
-        assertEquals("ingredient",productList.getProducts().get(0).getProductDescription().getDescription());
-        assertEquals(1, productList.getProducts().get(0).getProductPid().getPid());
+        assertEquals("chocolate",productList.getProducts().get(0).getName().getName());
+        assertEquals(100,productList.getProducts().get(0).getQuantity().getQuantity());
+        assertEquals(2.00,productList.getProducts().get(0).getPrice().getPrice());
+        assertEquals("ingredient",productList.getProducts().get(0).getDescription().getDescription());
+        assertEquals(1, productList.getProducts().get(0).getPid().getPid());
     }
 
     @Test
@@ -31,11 +31,11 @@ public class NewCommandTest {
         NewCommand userInput = new NewCommand(productList, "chocolate", 100, null, null);
         userInput.execute();
 
-        assertEquals("chocolate",productList.getProducts().get(0).getProductName().getName());
-        assertEquals(100,productList.getProducts().get(0).getProductQuantity().getQuantity());
-        assertNull(productList.getProducts().get(0).getProductPrice().getPrice());
-        assertNull(productList.getProducts().get(0).getProductDescription().getDescription());
-        assertEquals(1, productList.getProducts().get(0).getProductPid().getPid());
+        assertEquals("chocolate",productList.getProducts().get(0).getName().getName());
+        assertEquals(100,productList.getProducts().get(0).getQuantity().getQuantity());
+        assertNull(productList.getProducts().get(0).getPrice().getPrice());
+        assertNull(productList.getProducts().get(0).getDescription().getDescription());
+        assertEquals(1, productList.getProducts().get(0).getPid().getPid());
     }
 
     @Test
@@ -46,11 +46,11 @@ public class NewCommandTest {
         NewCommand userInput2 = new NewCommand(productList, "strawberry", 200, null, null);
         userInput2.execute();
 
-        assertEquals("chocolate",productList.products.get(0).getProductName().getName());
-        assertEquals(1, productList.products.get(0).getProductPid().getPid());
+        assertEquals("chocolate",productList.products.get(0).getName().getName());
+        assertEquals(1, productList.products.get(0).getPid().getPid());
 
-        assertEquals("strawberry",productList.products.get(1).getProductName().getName());
-        assertEquals(2, productList.products.get(1).getProductPid().getPid());
+        assertEquals("strawberry",productList.products.get(1).getName().getName());
+        assertEquals(2, productList.products.get(1).getPid().getPid());
     }
 
 }

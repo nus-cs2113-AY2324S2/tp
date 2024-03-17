@@ -20,10 +20,10 @@ public class NewCommand extends ListActionCommand {
 
         if (sizeOfArray == 0) {
             pid = 1;
-        } else if (sizeOfArray == productList.get(sizeOfArray - 1).getProductPid().getPid()) {
+        } else if (sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()) {
             pid = sizeOfArray + 1;
         } else {
-            pid = productList.get(sizeOfArray - 1).getProductPid().getPid() + 1;
+            pid = productList.get(sizeOfArray - 1).getPid().getPid() + 1;
         }
         this.toAdd = new Product(name, quantity, price, description, pid);
         this.productList = productList;
