@@ -23,8 +23,7 @@ public class AddParser {
         int expenseDescriptionEndIndex = expenseDateEndIndex - 2;
 
         String expenseDescription = userInput.substring(expenseDescriptionBeginIndex, expenseDescriptionEndIndex);
-        String expenseDateAsString = userInput.substring(expenseDateBeginIndex, expenseDateEndIndex);
-        LocalDateTime expenseDate = LocalDateTime.parse(expenseDateAsString);
+        String expenseDate = userInput.substring(expenseDateBeginIndex, expenseDateEndIndex);
         String expenseAmountAsString = userInput.substring(expenseAmountBeginIndex, expenseAmountEndIndex);
         double expenseAmount = Double.parseDouble(expenseAmountAsString);
         String expenseCategory = userInput.substring(expenseCategoryBeginIndex);
