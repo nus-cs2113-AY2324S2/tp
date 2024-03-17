@@ -9,9 +9,7 @@ import static model.SetMenu.Lunch;
 import static model.SetMenu.Dinner;
 
 public class Menu implements ItemManager {
-    private static int numOfItems = 0;
     private final ArrayList<MenuItem> menuItemList = new ArrayList<>();
-
     private final String menuItemID;
 
     public Menu(SetMenu menuType) {
@@ -28,7 +26,6 @@ public class Menu implements ItemManager {
         default:
             this.menuItemID = "No Menu type";
         }
-
     }
 
     @Override
@@ -38,7 +35,6 @@ public class Menu implements ItemManager {
     @Override
     public void add(MenuItem item) {
         this.menuItemList.add(item);
-        numOfItems++;
     }
 
     /**
@@ -49,7 +45,6 @@ public class Menu implements ItemManager {
     public void remove(int menuItemNum) {
         try {
             this.menuItemList.remove(menuItemNum - 1);
-            numOfItems--;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid menu item number");
         }
@@ -62,7 +57,6 @@ public class Menu implements ItemManager {
     @Override
     public void remove(String name) {
         this.menuItemList.removeIf(x -> x.getID().equals(name));
-        numOfItems--;
     }
 
     @Override

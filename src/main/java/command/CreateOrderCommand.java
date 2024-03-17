@@ -1,20 +1,12 @@
 package command;
 
+import logic.OrderLogic;
 import model.Order;
-import model.OrdersList;
+import java.util.ArrayList;
 
 public class CreateOrderCommand implements MainCommand{
-    private boolean isExit;
 
-    @Override
-    public void execute(OrdersList ordersList, Order order) {
-        isExit = false;
-        Order newOrder = new Order();
-        ordersList.add(newOrder);
-    }
-
-    @Override
-    public boolean isExit() {
-        return isExit;
+    public static Order execute() {
+        return OrderLogic.createNewOrder();
     }
 }

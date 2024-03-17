@@ -1,10 +1,9 @@
 package command;
 
 import model.Order;
-import model.OrdersList;
+
+import java.util.ArrayList;
 
 public interface MainCommand {
 
-    void execute(OrdersList ordersList, Order order);
-    boolean isExit();
 }
