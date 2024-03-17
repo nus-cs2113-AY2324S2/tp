@@ -22,16 +22,19 @@ public class TransactionManager {
             return outflows.addTransaction(outflow);
         }
         System.out.println("Invalid transaction type.");
-        return false;
     }
 
     public boolean removeTransaction(int index, boolean isInflow) {
         transactionList.removeTransactionIndex(index);
-        if (isInflow) {
+        Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
+        String transactionType = transactionRemoved.getTransactionType();
+        if (transactionType.equals("I")) {
             return inflows.removeTransactionIndex(index);
-        } else {
+        }
+        if (transactionType.equals("O")){
             return outflows.removeTransactionIndex(index);
         }
+        return false;
     }
 
     public double getTotalBalance() {

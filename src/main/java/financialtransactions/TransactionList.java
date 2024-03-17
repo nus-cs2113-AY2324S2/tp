@@ -25,7 +25,6 @@ public class TransactionList<T extends Transaction<?>> {
         return false;
     }
 
-
     public boolean removeTransactionIndex (int index){
         printTransactionsSafeInfo();
         if (index >= transactionList.size() || index < 0){

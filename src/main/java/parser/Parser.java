@@ -50,6 +50,7 @@ public class Parser {
             ui.printMessage("Ok. Added outflow");
             return "Ok. Added outflow";
         case "delete-inflow":
+            String index = commandParts[1];
             //manager.removeTransaction(1, true);
             break;
         case "delete-outflow":
