@@ -48,6 +48,8 @@ public class Parser {
             return new GenerateItineraryCommand();
         case "exit":
             return new ExitCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new FlirtForkException("Love is a language we all speak, but we didn't quite catch that. \n" +
                     "Try again? \n" + HORIZONTAL);
