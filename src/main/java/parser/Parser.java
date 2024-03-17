@@ -2,9 +2,11 @@ package parser;
 
 import commands.Command;
 import commands.ExitCommand;
+import habit.HabitTracker;
 import reflection.ReflectionManager;
 import sleep.SleepTracker;
 
+import static parser.HabitCommandParser.determineHabitCommand;
 import static parser.ReflectionCommandParser.determineReflectionCommand;
 import static parser.SleepCommandParser.determineSleepCommand;
 import exceptions.Wellness360Exception;
@@ -13,6 +15,7 @@ public class Parser {
 
     public static Command determineCommand(SleepTracker sleepTracker,
                                            ReflectionManager reflection,
+                                           HabitTracker habitTracker,
                                            String userInput)
             throws Wellness360Exception {
 
@@ -25,6 +28,7 @@ public class Parser {
         case "reflect":
             return determineReflectionCommand(reflection, commandArgs);
         case "habit":
+            return determineHabitCommand(habitTracker, commandArgs);
         case "sleep":
             return determineSleepCommand(sleepTracker, commandArgs);
         case "fitness":
