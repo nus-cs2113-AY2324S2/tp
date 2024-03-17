@@ -1,28 +1,55 @@
 package Ui;
 
+import Storage.Storage;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 public class TextUi {
 
+    public static final String DIVIDER = "----------------";
+
+    public static final String WELCOME_MESSAGE = "Welcome to StockMaster, where you can master the knowledge on your " +
+            "Stock!";
+
+    public static final String GOODBYE_MESSAGE = "Thank you for using StockMaster, hope we have helped your lazy ass!";
     private final Scanner in;
-    private final PrintStream out;
 
     public TextUi() {
-        this(System.in, System.out);
-    }
-
-    public TextUi(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
+        this.in = new Scanner(System.in);
     }
 
     public String getUserCommand() {
-        return null;
+        System.out.println("Enter Command: ");
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 
-    public void showWelcomeMessage() {}
+    public void showWelcomeMessage(String version, String StorageFilePath) {
+        replyToUser(
+                DIVIDER,
+                version,
+                DIVIDER,
+                "Data is being extracted from: " + StorageFilePath,
+                WELCOME_MESSAGE
+        );
+    }
 
-    public void showGoodByeMessage() {}
+    public void showGoodByeMessage(String StorageFilePath) {
+        replyToUser(
+                DIVIDER,
+                "Data is being saved to :" + StorageFilePath,
+                DIVIDER,
+                GOODBYE_MESSAGE
+        );
+    }
+
+    public void replyToUser(String...message) {
+        for (String m : message) {
+            System.out.println(m + "\n");
+        }
+    }
 }
+
+
