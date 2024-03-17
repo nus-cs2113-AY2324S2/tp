@@ -68,22 +68,35 @@ public class Parser {
     private void setName(String[] tokens) {
         String oldName = null;
         String newName = null;
+        boolean oldNameEntered = false;
+        boolean newNameEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/old":
-                oldName = addWordAfterSeparator(tokens, oldName, i);
+                oldName = addWordsAfterSeparator(tokens, oldName, i);
+                oldNameEntered = true;
                 break;
             case "/new":
-                newName = addWordAfterSeparator(tokens, newName, i);
+                newName = addWordsAfterSeparator(tokens, newName, i);
+                newNameEntered = true;
                 break;
             default:
                 //No flags found
                 break;
             }
         }
+        if(!oldNameEntered){
+            System.out.println("You are missing /old <name>");
+            return;
+        }
+        if(!newNameEntered){
+            System.out.println("You are missing /new <name>");
+            return;
+        }
+        // Check if the trip exists (if not, print an error message and return)
         Trip mainTrip = findTripByName(oldName);
         if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
+            System.out.println("Trip not found: " + oldName);
             return;
         }
         mainTrip.setName(newName);
@@ -91,22 +104,45 @@ public class Parser {
     }
 
     private void setDates(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+        String tripName = null;
         String start = "-";
         String end = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/start") && i + 1 < tokens.length) {
+        boolean nameEntered = false;
+        boolean startEntered = false;
+        boolean endEntered = false;
+        for (int i = 0; i < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, tripName, i);
+                nameEntered = true;
+                break;
+            case "/start":
                 start = tokens[i + 1];
-            } else if (tokens[i].toLowerCase().equals("/end") && i + 1 < tokens.length) {
+                startEntered = true;
+                break;
+            case "/end":
                 end = tokens[i + 1];
+                endEntered = true;
+                break;
+            default:
+                break;
             }
         }
-
+        if(!nameEntered){
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        // Check if the trip exists (if not, print an error message and return)
+        Trip mainTrip = findTripByName(tripName);
+        if (mainTrip == null) {
+            System.out.println("Trip not found: " + tripName);
+            return;
+        }
+        if(!startEntered || !endEntered){
+            System.out.println("You are missing /start <date> or /end <date");
+            return;
+        }
+        // Parse the dates (if valid)
         try {
             Date startDate = dateFormat.parse(start);
             Date endDate = dateFormat.parse(end);
@@ -120,22 +156,33 @@ public class Parser {
     private void setLocation(String[] tokens) {
         String tripName = null;
         String location = "-";
+        boolean nameEntered = false;
+        boolean locationEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                tripName = addWordAfterSeparator(tokens, tripName, i);
+                tripName = addWordsAfterSeparator(tokens, tripName, i);
+                nameEntered = true;
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, location, i);
+                locationEntered = true;
                 break;
             default:
-                //No flags found
                 break;
             }
         }
+        if(!nameEntered){
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        if(!locationEntered){
+            System.out.println("You are missing /location <location");
+            return;
+        }
         Trip mainTrip = findTripByName(tripName);
         if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
+            System.out.println("Trip not found: " + tripName);
             return;
         }
         mainTrip.setLocation(location);
@@ -143,18 +190,35 @@ public class Parser {
     }
 
     private void setDescription(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+        String tripName = null;
         String description = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/d") && i + 1 < tokens.length) {
-                description = addWordAfterSeparator(tokens, description, i);
+        boolean nameEntered = false;
+        boolean descriptionEntered = false;
+        for (int i = 0; i + 1 < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, tripName, i);
+                break;
+            case "/d":
+                description = addWordsAfterSeparator(tokens, description, i);
+                descriptionEntered = true;
+                break;
+            default:
                 break;
             }
+        }
+        if(!nameEntered){
+            System.out.println("You are missing /n <name>");
+            return;
+        }
+        Trip mainTrip = findTripByName(tripName);
+        if (mainTrip == null) {
+            System.out.println("Trip not found: " + tripName);
+            return;
+        }
+        if(!descriptionEntered){
+            System.out.println("You are missing /n <name> or /d <description");
+            return;
         }
         mainTrip.setDescription(description);
         System.out.println("Description set to: " + description);
@@ -192,7 +256,7 @@ public class Parser {
         for (int i = 1; i < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                name = addWordAfterSeparator(tokens, name, i);
+                name = addWordsAfterSeparator(tokens, name, i);
                 break;
             case "/start":
                 if (i + 1 < tokens.length) {
@@ -205,10 +269,10 @@ public class Parser {
                 }
                 break;
             case "/d":
-                description = addWordAfterSeparator(tokens, description, i);
+                description = addWordsAfterSeparator(tokens, description, i);
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, location, i);
                 break;
             default:
                 //No flags found
@@ -259,7 +323,7 @@ public class Parser {
         }
     }
 
-    private String addWordAfterSeparator(String[] tokens, String name, int i) {
+    private String addWordsAfterSeparator(String[] tokens, String name, int i) {
         if (i + 1 < tokens.length) {
             StringBuilder nameBuilder = new StringBuilder();
             for (int j = i + 1; j < tokens.length && !(tokens[j].startsWith("/")); j++) {
