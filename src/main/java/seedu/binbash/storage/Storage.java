@@ -80,7 +80,7 @@ public class Storage {
         if (!dataFile.exists()) {
             boolean wasFileCreated = dataFile.createNewFile();
             if (!wasFileCreated) {
-                    throw new BinBashException("Could not create items.txt file.");
+                throw new BinBashException("Could not create items.txt file.");
             }
         }
 
