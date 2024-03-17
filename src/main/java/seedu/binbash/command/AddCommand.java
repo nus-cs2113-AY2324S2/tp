@@ -4,20 +4,16 @@ import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
 
 public class AddCommand extends Command {
-    public static final String COMMAND_STRING = "add";
 
     public static final Pattern COMMAND_FORMAT =
             Pattern.compile("add\\s+n/(?<itemName>.+?)\\s+d/(?<itemDescription>.+)\\s+q/(?<itemQuantity>.+)\\s"
                     + "+e/(?<itemExpirationDate>.+)+s/(?<itemSalePrice>.+)+c/(?<itemCostPrice>.+)");
-
-
-
-    private String itemName;
-    private String itemDescription;
-    private int itemQuantity;
-    private String itemExpirationDate;
-    private  double itemSalePrice;
-    private double itemCostPrice;
+    private final String itemName;
+    private final String itemDescription;
+    private final int itemQuantity;
+    private final String itemExpirationDate;
+    private final double itemSalePrice;
+    private final double itemCostPrice;
 
     public AddCommand(ItemList itemList, String itemName, String itemDescription, int itemQuantity,
                       String itemExpirationDate, double itemSalePrice, double itemCostPrice) {
@@ -28,6 +24,17 @@ public class AddCommand extends Command {
         this.itemExpirationDate = itemExpirationDate;
         this.itemSalePrice = itemSalePrice;
         this.itemCostPrice = itemCostPrice;
+
+        commandLogger.fine(String.format(
+                "Creating Add Command... itemName: %s, itemDescription: %s, itemQuantity: %d, itemExpirationDate: %s"
+                        + "itemSalePrice: %f, itemCostPrice: %f",
+                itemName,
+                itemDescription,
+                itemQuantity,
+                itemExpirationDate,
+                itemSalePrice,
+                itemCostPrice
+        ));
     }
 
     @Override
