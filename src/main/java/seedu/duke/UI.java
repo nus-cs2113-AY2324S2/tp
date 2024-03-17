@@ -1,4 +1,4 @@
-package cantvasui;
+package seedu.duke;
 
 import java.util.Scanner;
 
@@ -40,9 +40,12 @@ public class UI {
 
     public static void printHelpMessage() {
         System.out.println("CantVas Help\n"
-                + "To input expenses, use format:"
-                + "\n << e/ add/  d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
-                + "To List saved expenses, use format:\n << list >>");
+                + "To input expenses, use format:\n"
+                + "<< e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>\n"
+                + "To delete saved expenses, use format:\n<< e/ del/ <index> >>\n"
+                + "To List saved expenses, use format:\n<< list >>\n"
+                + "To view saved expenses by month, use format:\n<< view -m <mm.yyyy> >>\n"
+                + "To view saved expenses by year, use format:\n<< view -y <yyyy> >>");
     }
 
 }

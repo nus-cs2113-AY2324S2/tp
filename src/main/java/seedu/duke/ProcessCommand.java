@@ -1,50 +1,82 @@
 package seedu.duke;
 
-import cantvasui.UI;
-
 public class ProcessCommand {
-    private final ExpenditureList expenselist;
 
-    protected ProcessCommand(ExpenditureList expenselist) {
-        this.expenselist = expenselist;
+    public ProcessCommand() {
     }
 
-    private void processUserCommand(String command) {
-        String[] commandParts = command.split(" ", 2);
-        String commandType = commandParts[0];
+    public void processUserCommand(String command) {
 
-        switch(commandType) {
-        case "list":
-            ExpenditureList.listExpenses();
+        if (!command.startsWith("e/")) {
+            System.out.println("Invalid command. Commands related to expenditures should start with 'e/'.");
+            return;
+        }
+
+        String[] commandParts = command.substring(2).trim().split("/", 2);
+        if (commandParts.length < 2) {
+            System.out.println("Incomplete command!");
+            return;
+        }
+
+        String action = commandParts[0].trim();
+        String actionDetails = commandParts[1].trim();
+
+        switch (action) {
+        case "add":
+            ExpenditureList.addExpenditure(actionDetails);
             break;
-        case "e/":
-            ExpenditureList.handleCommand(commandParts[1]);
+        case "del":
+            try {
+                int index = Integer.parseInt(actionDetails);
+                ExpenditureList.deleteExpenditure(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid index format for deletion.");
+            }
             break;
         default:
-            System.out.println("Invalid input...");
+            System.out.println("Unknown function: " + action);
+            break;
         }
     }
 
-    /**
-     * Handles basic commands inputted by user
-     * if command is more complex or related to expenditure,
-     * passes command to the method processUserCommand
-     */
     public boolean userCommand(String input) {
-        String command = input.toLowerCase();
-        String[] commandParts = command.split(" ", 2);
-
-        switch (commandParts[0]) {
+        input = input.trim().toLowerCase();
+        switch (input) {
         case "exit":
-            System.out.println("Shutting down...\n Goodbye.");
+            System.out.println("Shutting down... Goodbye!!");
             return true;
+        case "list":
+            ExpenditureList.listExpenses();
+            break;
         case "help":
             UI.printHelpMessage();
             break;
         default:
-            processUserCommand(command);
+            if (input.startsWith("e/")) {
+                processUserCommand(input);
+            } else if (input.startsWith("view -m ")) {
+                String monthYear = input.length() > "view -m ".length() ?
+                        input.substring("view -m ".length()).trim() : "";
+                if (!monthYear.isEmpty()) {
+                    ExpenditureList.listExpensesByMonth(monthYear);
+                } else {
+                    System.out.println("Please provide a month and year in MM.YYYY format after 'view -m'.");
+                }
+            } else if (input.startsWith("view -y ")) {
+                String year = input.length() > "view -y ".length() ?
+                        input.substring("view -y ".length()).trim() : "";
+                if (!year.isEmpty()) {
+                    ExpenditureList.listExpensesByYear(year);
+                } else {
+                    System.out.println("Please provide a year in YYYY format after 'view -y'.");
+                }
+            } else {
+                System.out.println("Unknown command. Please try again! Type 'help' for more information!");
+            }
             break;
         }
         return false;
     }
+
+
 }

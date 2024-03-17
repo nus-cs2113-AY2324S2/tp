@@ -1,5 +1,4 @@
 package seedu.duke;
-import cantvasui.UI;
 
 public class CantVasMain {
     private static UI ui;
@@ -8,11 +7,12 @@ public class CantVasMain {
     public CantVasMain() {
         ui = new UI();
         ExpenditureList expenseList = new ExpenditureList();
-        processCommand = new ProcessCommand(expenseList);
+        processCommand = new ProcessCommand();
     }
 
     public void run() {
         UI.printLogo();
+        UI.printHelpMessage();
         boolean exit;
         do {
             String command = ui.getUserCommand();

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExpenditureList {
     public static int expenditureCount;
@@ -11,36 +12,99 @@ public class ExpenditureList {
         expenditureCount = 0;
     }
 
-    public static void addExpenditure(String expenditure) { // n/3.22 d/31.01.2024
-        String description;
-        String amount;
-        String date;
-
-        String[] descriptionParts = expenditure.split("amt/", 2);
-        if (descriptionParts.length != 2) {
-            System.out.println("Invalid input format");
+    public static void listExpensesByMonth(String monthYear) {
+        if (!monthYear.matches("\\d{2}\\.\\d{4}")) {
+            System.out.println("Month and year format incorrect! Please use MM.yyyy format.");
             return;
         }
 
-        description = descriptionParts[0].substring(3); // Removing the "d/" prefix
-        String remainingPart = descriptionParts[1];
+        String[] monthYearParts = monthYear.split("\\.");
+        String targetMonth = monthYearParts[0];
+        String targetYear = monthYearParts[1];
+        List<Expenditure> filteredExpenses = new ArrayList<>();
 
-        String[] amountAndDateParts = remainingPart.split("date/", 2);
-        if (amountAndDateParts.length != 2) {
-            System.out.println("Invalid input format");
+        for (Expenditure exp : expenditureList) {
+            String[] dateParts = exp.getDate().split("\\.");
+            String expenseMonth = dateParts[1];
+            String expenseYear = dateParts[2];
+
+            if (expenseMonth.equals(targetMonth) && expenseYear.equals(targetYear)) {
+                filteredExpenses.add(exp);
+            }
+        }
+
+        if (filteredExpenses.isEmpty()) {
+            System.out.println("No expenses found for " + monthYear);
+        } else {
+            System.out.println("Expenses for the month & year " + monthYear + ":");
+            int count = 1;
+            for (Expenditure exp : filteredExpenses) {
+                System.out.println(count + ". " + exp);
+            }
+        }
+    }
+
+    public static void listExpensesByYear(String year) {
+        List<Expenditure> filteredExpenses = new ArrayList<>();
+
+        if (!year.matches("\\d{4}")) {
+            System.out.println("Year format incorrect. Please use yyyy format.");
             return;
         }
 
-        amount = amountAndDateParts[0].trim();
-        date = amountAndDateParts[1].trim();
+        for (Expenditure exp : expenditureList) {
+            String[] dateParts = exp.getDate().split("\\.");
+            String expenseYear = dateParts[2];
+
+            if (expenseYear.equals(year)) {
+                filteredExpenses.add(exp);
+            }
+        }
+
+        if (filteredExpenses.isEmpty()) {
+            System.out.println("No expenses found for year " + year);
+        } else {
+            System.out.println("Expenses for the year " + year + ":");
+            int count = 1;
+            for (Expenditure exp : filteredExpenses) {
+                System.out.println(count + ". " + exp);
+            }
+        }
+    }
+
+    public static void addExpenditure(String expenditure) {
+        String[] parts = expenditure.split("d/", 2);
+        if (parts.length < 2) {
+            System.out.println("Invalid input format for description.");
+            return;
+        }
+        // Description part directly after "d/"
+        String descriptionPart = parts[1].trim();
+
+        parts = descriptionPart.split(" amt/", 2);
+        if (parts.length < 2) {
+            System.out.println("Invalid input format for amount.");
+            return;
+        }
+        String description = parts[0].trim();
+        String amountAndDate = parts[1].trim();
+
+        parts = amountAndDate.split(" date/", 2);
+        if (parts.length < 2) {
+            System.out.println("Invalid input format for date.");
+            return;
+        }
+        String amount = parts[0].trim();
+        String date = parts[1].trim();
 
         try {
             float amountValue = Float.parseFloat(amount);
+            // Ensure that the expenditureList is initialized somewhere before this
             expenditureList.add(new Expenditure(description, amountValue, date));
             expenditureCount += 1;
             System.out.println("Expenditure added successfully.");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount format");
+            System.out.println("Invalid amount format!");
         }
     }
 
@@ -68,23 +132,5 @@ public class ExpenditureList {
         }
     }
 
-
-    public static void handleCommand(String command) {
-        String[] commandParts = command.split(" ", 2);
-        String actionType = commandParts[0];
-
-        switch (actionType) {
-        case "add/":
-            addExpenditure(commandParts[1]);
-            break;
-        case "del/":
-            int index = Integer.parseInt(commandParts[1]);
-            deleteExpenditure(index);
-            break;
-        default:
-            System.out.println("Error, invalid input");
-            break;
-        }
-    }
 }
 
