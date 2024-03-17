@@ -2,13 +2,15 @@ package seedu.binbash;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemListTest {
 
     @Test
     void deleteItem_oneItemInItemList_noItemInItemList() {
-        ItemList itemList = new ItemList();
+        ItemList itemList = new ItemList(new ArrayList<Item>());
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
 
@@ -19,7 +21,7 @@ class ItemListTest {
 
     @Test
     void addItem_noItemInItemList_oneItemInItemList() {
-        ItemList itemList = new ItemList();
+        ItemList itemList = new ItemList(new ArrayList<Item>());
 
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
@@ -28,7 +30,7 @@ class ItemListTest {
 
     @Test
     void addItem_itemInputs_correctItemParameters() {
-        ItemList itemList = new ItemList();
+        ItemList itemList = new ItemList(new ArrayList<Item>());
 
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
@@ -44,7 +46,7 @@ class ItemListTest {
 
     @Test
     void printList_twoItemsInItemList_correctPrintFormatForBothItems() {
-        ItemList itemList = new ItemList();
+        ItemList itemList = new ItemList(new ArrayList<Item>());
 
         itemList.addItem("testItem1", "Test item 1", 2,
                 "3", 4.00, 5.00);
