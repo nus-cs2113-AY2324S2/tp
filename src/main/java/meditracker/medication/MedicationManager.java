@@ -32,4 +32,13 @@ public class MedicationManager {
     public Integer getTotalMedications() {
         return medications.size();
     }
+
+    /**
+     * Adds a Medication to the list of Medication
+     *
+     * @param medication Medication to be added to the list
+     */
+    public void addMedication(Medication medication) {
+        medications.add(medication);
+    }
 }

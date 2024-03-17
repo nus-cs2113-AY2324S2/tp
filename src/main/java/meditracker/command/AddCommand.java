@@ -54,7 +54,7 @@ public class AddCommand extends Command {
     public void execute(MedicationManager medicationManager, Ui ui) {
         Medication medication = new Medication(medicationName, medicineQuantity, medicineDosage, expiryDate, intakeFreq,
                 remarks);
-        medicationManager.medications.add(medication);
+        medicationManager.addMedication(medication);
         ui.showAddCommandMessage();
     }
 }
