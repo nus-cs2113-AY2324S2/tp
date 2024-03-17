@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.AddCommand;
+import seedu.duke.modules.ModuleList;
 // import seedu.duke.command.ListCommand;
 // import seedu.duke.command.RemoveCommand;
 
@@ -78,7 +79,12 @@ public class Parser {
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
         // return new InitCommand(args);
-        return new AddCommand();
+        //to be continued by Fong Shi Xiang
+        String moduleCode = "";
+        String moduleGrade = "";
+        String moduleMC = "";
+        ModuleList moduleList = new ModuleList(2);
+        return new AddCommand(moduleCode, moduleGrade, moduleMC, moduleList);
     }
 
     private static Command gpaCommand(Map<String, String> args) {
