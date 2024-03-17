@@ -17,6 +17,8 @@ public class DeleteCommand extends Command {
     }
 
     public String execute() {
+        assert index > 0 && index <= itemList.getItemCount(); // Ensure index out of bounds error is caught by Parser.
+
         return itemList.deleteItem(index);
     }
 }
