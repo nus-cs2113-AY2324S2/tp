@@ -1,7 +1,6 @@
 package seedu.duke.modules;
 
 import java.util.ArrayList;
-import seedu.duke.FAP;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
