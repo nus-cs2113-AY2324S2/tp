@@ -1,5 +1,7 @@
 package brokeculator.command;
+
 import brokeculator.frontend.UI;
+
 public class InvalidCommand extends Command {
     private String errorMessage;
     public InvalidCommand() {
