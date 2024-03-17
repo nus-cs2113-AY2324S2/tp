@@ -31,6 +31,10 @@ public class Storage {
         this.storageLogger = Logger.getLogger("storageLogger");
     }
 
+    // TODO: Handle exceptions properly (when the exceptions for AddCommand are settled)
+    //  Lumping 3 exceptions together without a custom message for each
+    //  exception is bad exception handling!
+
     /**
      * Loads the data from the file and returns a list of items.
      * If the data file is corrupted or an error occurs during reading, the file is marked as corrupted.
@@ -46,11 +50,11 @@ public class Storage {
         try {
             ArrayList<String> stringRepresentationOfTxtFile = readTxtFile();
             itemList = parseAndAddToList(stringRepresentationOfTxtFile);
-        } catch (BinBashException | IOException e) {
+        } catch (BinBashException | IOException | NumberFormatException e) {
             isCorrupted = true;
         }
 
-        assert !isCorrupted : "data file should not be corrupted";
+        assert !isCorrupted : "data file is corrupted";
 
         storageLogger.log(Level.INFO, "Data loaded successfully.");
 
@@ -130,6 +134,8 @@ public class Storage {
                         itemExpirationDate,
                         itemSalePrice,
                         itemCostPrice));
+            } else {
+                isCorrupted = true;
             }
         }
         return itemList;
