@@ -3,19 +3,17 @@ package ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import utility.Constant;
 import utility.Constant;
 import utility.CustomExceptions;
-import workouts.Workout;
-import workouts.WorkoutList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-// import static org.junit.jupiter.api.Assertions.fail;
 
 class HandlerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -105,7 +103,7 @@ class HandlerTest {
      * Refer to {@code checkTypeOfExercise_insufficientUserInput_throwInsufficientInput()} for that.
      */
     @Test
-    void checkTypeOfExercise_invalidUserInput_throwInvalidInput(){
+    void checkTypeOfExercise_invalidUserInput_throwInvalidInput() {
 
         // with invalid exercise type
         String input1 = "new /e";
@@ -132,7 +130,7 @@ class HandlerTest {
         });
 
         // with wrong slash
-        String input5= "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
+        String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input5);
         });
@@ -148,26 +146,22 @@ class HandlerTest {
      */
     @Test
     void checkTypeOfExercise_insufficientUserInput_throwInsufficientInput() {
-            // new /e:run /d:DISTANCE /t:TIME [/date:DATE]
+        // without distance, time, and date
+        String input2 = "new /e:run";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
+            Handler.checkTypeOfExercise(input2);
+        });
 
+        // without time and date
+        String input3 = "new /e:run /d:10.3";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
+            Handler.checkTypeOfExercise(input3);
+        });
 
-            // without distance, time, and date
-            String input2 = "new /e:run";
-            assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-                Handler.checkTypeOfExercise(input2);
-            });
-
-            // without time and date
-            String input3 = "new /e:run /d:10.3";
-            assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-                Handler.checkTypeOfExercise(input3);
-            });
-
-
-            // without the date
-            String input4= "new /e:run /d:30:10 /t:00:20:10";
-            assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-                Handler.checkTypeOfExercise(input4);
-            });
+        // without the date
+        String input4 = "new /e:run /d:30:10 /t:00:20:10";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
+            Handler.checkTypeOfExercise(input4);
+        });
     }
 }
