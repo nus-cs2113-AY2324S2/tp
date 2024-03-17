@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.logging.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,7 +14,10 @@ public class Menu implements ItemManager {
 
     private final String menuID;
 
+    private final static Logger logr = Logger.getLogger("MenuLogger");
+
     public Menu(SetMenu menuType) {
+        Menu.setupLogger();
         switch (menuType) {
         case Breakfast:
             this.menuID = String.valueOf(Breakfast);
@@ -50,7 +54,7 @@ public class Menu implements ItemManager {
             this.menuItemList.remove(menuItemNum - 1);
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid menu item number");
+            logr.log(Level.SEVERE, "You tried removing an item belonging to an index outside the valid range of the ArrayList",e);
         }
     }
 
@@ -69,5 +73,27 @@ public class Menu implements ItemManager {
                 IntStream.range(0,this.menuItemList.size())
                         .mapToObj(x -> (x + 1) + ". " + this.menuItemList.get(x))
                         .collect(Collectors.joining("\n"));
+    }
+
+    /**
+     * Set up logger for this class. It has two handlers, one FileHandler and one ConsoleHandler
+     * FileHandler records log messages from FINE and above
+     * ConsoleHandler only records SEVERE messages
+     */
+    private static void setupLogger() {
+        LogManager.getLogManager().reset();
+        logr.setLevel(Level.ALL);
+
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.SEVERE);
+        logr.addHandler(ch);
+
+        try {
+            FileHandler fh = new FileHandler("MenuLogger.log");
+            fh.setLevel(Level.FINE);
+            logr.addHandler(fh);
+        } catch (java.io.IOException e) {
+            logr.log(Level.SEVERE, "File logger not working.",e);
+        }
     }
 }
