@@ -1,6 +1,8 @@
 package brokeculator.expense;
 
+import brokeculator.frontend.UI;
 import brokeculator.storage.parsing.FileKeyword;
+import brokeculator.storage.parsing.SaveableType;
 
 /**
  * Represents an expense in the expense tracker.
@@ -20,10 +22,10 @@ public class Expense implements Saveable {
      * @param category the category of the expense.
      */
     public Expense(String description, double amount, String date, String category) {
-        this.description = description;
+        this.description = description.trim();
         this.amount = amount;
-        this.date = date;
-        this.category = category;
+        this.date = date.trim();
+        this.category = category.trim();
     }
 
     /**
@@ -63,12 +65,27 @@ public class Expense implements Saveable {
      * @return a string representation of the expense.
      */
     public String getStringRepresentation() {
-        return FileKeyword.EXPENSE + String.format("%s: $%.2f (%s) [%s]",
-                description, amount, date, category.toUpperCase());
+        return FileKeyword.formatWithKeyword(SaveableType.EXPENSE,
+                String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase())
+        );
     }
 
-    public static Expense getExpenseFromFile(String fileString) throws Exception {
-        // TODO
-        return new Expense(null, 1, null, null);
+    public static Expense getExpenseFromFile(String stringRepresentation) throws Exception {
+        UI.print(stringRepresentation);
+        String[] split = stringRepresentation.split(" ");
+        if (split.length != 4) {
+            throw new Exception("Expense file is corrupted.");
+        }
+        
+        String description = split[0];
+
+        String amountString = split[1].substring(1);
+        double amount = Double.parseDouble(amountString);
+
+        String date = split[2].substring(1, split[2].length() - 1);
+
+        String category = split[3].substring(1, split[3].length() - 1);
+
+        return new Expense(description, amount, date, category);
     }
 }
