@@ -1,6 +1,10 @@
 package supertracker.command;
 
 import supertracker.item.Inventory;
+import supertracker.ui.Ui;
+
+import static supertracker.ui.Ui.deleteUnsuccessful;
+
 
 public class DeleteCommand implements Command {
 
@@ -12,7 +16,13 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute() {
+        if (!Inventory.contains(itemName)) {
+            deleteUnsuccessful(itemName);
+            return;
+        }
+
         Inventory.delete(itemName);
+        Ui.deleteSuccess(itemName);
     }
 
     @Override
