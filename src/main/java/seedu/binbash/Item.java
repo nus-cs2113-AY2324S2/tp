@@ -45,8 +45,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format(
-                "%s\n \tdescription: %s\n \tquantity: %d\n \texpiry date: %s\n \tsale price: $%.2f\n " +
+        return String.format("%s" + System.lineSeparator() +
+                        "\tdescription: %s" + System.lineSeparator() +
+                        "\tquantity: %d" + System.lineSeparator() +
+                        "\texpiry date: %s" + System.lineSeparator() +
+                        "\tsale price: $%.2f" + System.lineSeparator() +
                         "\tcost price: $%.2f",
                 itemName,
                 itemDescription,

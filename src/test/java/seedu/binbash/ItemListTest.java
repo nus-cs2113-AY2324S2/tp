@@ -66,6 +66,7 @@ class ItemListTest {
                 "\texpiry date: 7" + System.lineSeparator() +
                 "\tsale price: $8.00" + System.lineSeparator() +
                 "\tcost price: $9.00" + System.lineSeparator() +
+                System.lineSeparator() +
                 System.lineSeparator();
 
         assertEquals(expectedOutput, actualOutput);
