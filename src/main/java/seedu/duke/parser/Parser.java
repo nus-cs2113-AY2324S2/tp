@@ -27,7 +27,7 @@ public class Parser {
                     "\\s+w/(?<semester>[1-9]|10)\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
-                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|[1-5](?:\\.0|\\.5)?|0\\.0?)", Pattern.CASE_INSENSITIVE);
+                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|[1-4](?:\\.0|\\.5)?|[05]\\.0?)", Pattern.CASE_INSENSITIVE);
 
     // Argument Group captures
     private static final String[] INIT_ARGUMENTS = {"name"};
@@ -107,7 +107,7 @@ public class Parser {
         int mcInt = Integer.parseInt(mc);
         boolean statusBool = status.toLowerCase().equals("taken");
 
-        return new AddCommand();
+        return new AddCommand(moduleCode, mcInt, statusBool, semesterInt);
     }
 
     private static Command gradeCommand(Map<String, String> args) {
