@@ -10,7 +10,6 @@ public class NewCommandTest {
         assertTrue(true);
     }
 
-    // methodBeingTested_conditionToTest_expectedOutcome
     @Test
     void NewCommand_allFieldsFilled_expectCorrectAllocation() {
         final ProductList productList = new ProductList();
@@ -21,6 +20,7 @@ public class NewCommandTest {
         assertEquals(100,productList.products.get(0).getQuantity().getQuantity());
         assertEquals(2.00,productList.products.get(0).getPrice().getPrice());
         assertEquals("ingredient",productList.products.get(0).getDescription().getDescription());
+        assertEquals(1, productList.products.get(0).getPid().getPid());
     }
 
     @Test
@@ -33,6 +33,7 @@ public class NewCommandTest {
         assertEquals(100,productList.products.get(0).getQuantity().getQuantity());
         assertNull(productList.products.get(0).getPrice().getPrice());
         assertNull(productList.products.get(0).getDescription().getDescription());
+        assertEquals(1, productList.products.get(0).getPid().getPid());
     }
 
     @Test
@@ -45,7 +46,10 @@ public class NewCommandTest {
         userInput2.execute();
 
         assertEquals("chocolate",productList.products.get(0).getName().getName());
+        assertEquals(1, productList.products.get(0).getPid().getPid());
+
         assertEquals("strawberry",productList.products.get(1).getName().getName());
+        assertEquals(2, productList.products.get(1).getPid().getPid());
     }
 
 

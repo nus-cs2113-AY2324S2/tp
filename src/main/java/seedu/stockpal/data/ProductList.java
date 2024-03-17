@@ -7,15 +7,15 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 
-
-
 import java.util.ArrayList;
 
 public class ProductList {
     public ArrayList<Product> products = new ArrayList<Product>();
-  
-    public void addProduct(Product toAdd) {
 
+    /**
+     * @param toAdd Add a product to our list.
+     */
+    public void addProduct(Product toAdd) {
         products.add(toAdd);
     }
 

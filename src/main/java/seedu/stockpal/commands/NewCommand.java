@@ -3,6 +3,8 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 
+import static seedu.stockpal.ui.Ui.printToScreen;
+
 
 public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
@@ -10,8 +12,6 @@ public class NewCommand extends ListActionCommand {
     private static Integer pid = 1;
     protected ProductList productList;
     private final Product toAdd;
-
-
 
 
     public NewCommand(ProductList productList, String name, Integer quantity, Double price, String description) {
@@ -22,6 +22,6 @@ public class NewCommand extends ListActionCommand {
     @Override
     public void execute() {
         productList.addProduct(toAdd);
-        System.out.println("Added product!");
+        printToScreen("Added product!");
     }
 }
