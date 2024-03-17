@@ -1,13 +1,13 @@
-package seedu.duke.userprofile;
+package player;
 
 public class Health {
     private static int healthBar = 100;
 
-    public void addhealth(int amount) {
+    public void add(int amount) {
         healthBar += amount;
     }
 
-    public void deductAmount(int amount) {
+    public void deduct(int amount) {
         healthBar -= amount;
     }
 

@@ -1,4 +1,4 @@
-package seedu.duke.userprofile;
+package player;
 
 import org.junit.jupiter.api.Test;
 
