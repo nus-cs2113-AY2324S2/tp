@@ -1,10 +1,5 @@
-package Ui;
+package ui;
 
-import Storage.Storage;
-
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
@@ -35,20 +30,20 @@ public class TextUi {
         return userInput.trim().isEmpty();
     }
 
-    public void showWelcomeMessage(String version, String StorageFilePath) {
+    public void showWelcomeMessage(String version, String storageFilePath) {
         replyToUser(
                 DIVIDER,
                 version,
                 DIVIDER,
-                "Data is being extracted from: " + StorageFilePath,
+                "Data is being extracted from: " + storageFilePath,
                 WELCOME_MESSAGE
         );
     }
 
-    public void showGoodByeMessage(String StorageFilePath) {
+    public void showGoodByeMessage(String storageFilePath) {
         replyToUser(
                 DIVIDER,
-                "Data is being saved to :" + StorageFilePath,
+                "Data is being saved to :" + storageFilePath,
                 DIVIDER,
                 GOODBYE_MESSAGE
         );
