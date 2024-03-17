@@ -20,7 +20,7 @@ public class TravelActivityList {
         travelActivities.add(travelActivity);
         noOfTasks += 1;
         int newSize = noOfTasks;
-        assert newSize != initialListSize + 1 : "There is an error with list size!";
+        assert newSize == initialListSize + 1 : "There is an error with list size!";
     }
 
     /**
@@ -35,6 +35,8 @@ public class TravelActivityList {
             taskCount++;
             System.out.println("     " + taskCount +"." + task);
         }
+        int finalTaskCount = noOfTasks;
+        assert finalTaskCount == taskCount : "Index out of bounds while listing activities";
     }
 
     /**
@@ -49,7 +51,10 @@ public class TravelActivityList {
      * Removes travel activity from the travel activity list
      * @param taskNumber The travel activity number on the list
      */
-    public void removeTravelActivity(int taskNumber){
+    public void removeTravelActivity(int taskNumber) throws OmniException{
+        if(taskNumber > travelActivities.size()){
+            throw new OmniException("Travel activity cannot be found!");
+        }
         int indexOfTask = taskNumber - 1;
         int initialListSize = noOfTasks;
         TravelActivity removedTask = travelActivities.get(indexOfTask);
@@ -58,7 +63,7 @@ public class TravelActivityList {
         System.out.println(removedTask);
         noOfTasks -=1;
         int newSize = noOfTasks;
-        assert newSize != initialListSize - 1 : "There is an error with list size!";
+        assert newSize == initialListSize - 1 : "There is an error with list size!";
     }
 
 
@@ -83,8 +88,7 @@ public class TravelActivityList {
         }
         if (temporaryArrayCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
-        }
-        else {
+        } else {
             System.out.println("Here are what you are looking for:");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());

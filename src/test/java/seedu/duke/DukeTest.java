@@ -15,7 +15,7 @@ class DukeTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void deleteTest() throws OmniException {
         //add the plan
         TravelActivityList travelActivityList = new TravelActivityList();
         travelActivityList.addTravelActivity(new TravelActivity("visit museum"));
@@ -26,7 +26,7 @@ class DukeTest {
     }
 
     @Test
-    public void getNoTasksTest() {
+    public void getNoTasksTest() throws OmniException {
         //add the first plan
         TravelActivityList travelActivityList = new TravelActivityList();
         travelActivityList.addTravelActivity(new TravelActivity("visit museum"));
