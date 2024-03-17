@@ -19,23 +19,23 @@ public class Product {
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Quantity getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public Price getPrice() {
-        return price;
+        return this.price;
     }
 
     public Description getDescription() {
-        return description;
+        return this.description;
     }
 
     public Pid getPid() {
-        return pid;
+        return this.pid;
     }
 
     public void setName(Name name) {

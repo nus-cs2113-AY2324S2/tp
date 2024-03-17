@@ -7,6 +7,10 @@ public class Name {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public boolean isNull() {
         return this.name == null;
     }

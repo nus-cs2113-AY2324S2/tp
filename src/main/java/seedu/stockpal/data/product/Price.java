@@ -9,6 +9,9 @@ public class Price {
                 : price;
     }
 
+    public Double getPrice() {
+        return this.price;
+    }
     public boolean isNull() {
         return this.price == null;
     }
