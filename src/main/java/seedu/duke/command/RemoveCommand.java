@@ -1,13 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.modules.Module;
-import seedu.duke.modules.ModuleList;
 
 import java.util.Map;
 
 public class RemoveCommand extends Command{
     private final Map<String, String> args;
-    private ModuleList moduleList;
     public RemoveCommand(Map<String, String> args){
         this.args = args;
     }

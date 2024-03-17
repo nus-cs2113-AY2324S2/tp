@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.modules.Module;
-import seedu.duke.modules.ModuleList;
 
 public class AddCommand extends Command{
     private String moduleCode;
@@ -9,7 +8,6 @@ public class AddCommand extends Command{
     private int moduleMC;
     private boolean moduleStatus;
     private int moduleDate;
-    private ModuleList moduleList;
 
     public AddCommand(String moduleCode, int moduleMC, boolean moduleStatus, int moduleDate) {
         this.moduleCode = moduleCode;
