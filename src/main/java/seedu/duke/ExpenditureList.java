@@ -22,7 +22,7 @@ public class ExpenditureList {
             return;
         }
 
-        description = descriptionParts[0].substring(2); // Removing the "d/" prefix
+        description = descriptionParts[0].substring(3); // Removing the "d/" prefix
         String remainingPart = descriptionParts[1];
 
         String[] amountAndDateParts = remainingPart.split("date/", 2);
@@ -45,6 +45,10 @@ public class ExpenditureList {
     }
 
     public static void deleteExpenditure(int index) {
+        Expenditure expenditure = expenditureList.get(index - 1);
+        System.out.println("deleted:" + expenditure.getDescription() +
+                " | Cost: $" + expenditure.getAmount() +
+                " | date: " + expenditure.getDate());
         expenditureList.remove(index - 1);
         expenditureCount--;
     }
