@@ -12,8 +12,6 @@ import supertracker.item.Inventory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static supertracker.ui.Ui.deleteUnsuccessful;
-
 public class Parser {
     private static final String QUIT_COMMAND = "quit";
     private static final String NEW_COMMAND = "new";
