@@ -23,5 +23,3 @@ public class ShowGoalsCommand  {
         GoalsUi.printShowGoalsMessage(calorieGoal, waterGoal);
     }
 }
-
-
