@@ -7,10 +7,9 @@ public class Exercise extends Activity {
         super(exerciseName);
     }
 
-    //    public String getExerciseName() {
-    //        return activityName;
-    //    }
-
+    public String toString() {
+        return super.getActivityName();
+    }
     public void editExerciseName(String newExerciseName) {
         activityName = newExerciseName;
     }

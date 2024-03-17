@@ -44,7 +44,7 @@ public class ByteCeps {
                 }
 
             } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
-                     Exceptions.InvalidInput | Exceptions.ActivityDoesNotExists e) {
+                     Exceptions.InvalidInput | Exceptions.ActivityDoesNotExists  | IllegalStateException e) {
                 UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
             }
         }
