@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private Ui ui = new Ui();
     public static void main(String[] args) {
 
-        printGreeting();
+        new Duke().runBot();
         boolean userSaysBye = false;
         TravelActivityList travelActivityList = new TravelActivityList();
         String line;
@@ -16,13 +17,13 @@ public class Duke {
             if (line.equals("list")) {
                 // Prints the all the tasks in the list
                 System.out.println("Here are the travel activities in your list:");
-                travelActivityList.listTasks();
+                travelActivityList.listTravelActivities();
             } else if (line.startsWith("add")){
                 // Adds a travel activity into the list
                 String[] sentence = line.split(" ");
                 // Checks if the description of the task is empty
                 TravelActivity newTask = new TravelActivity(sentence[1]);
-                travelActivityList.addTask(newTask);
+                travelActivityList.addTravelActivity(newTask);
                 System.out.println("I added a new travel activity");
                 System.out.println(newTask);
 
@@ -32,7 +33,7 @@ public class Duke {
                 // Checks if the description of the task is empty or non-numerical
 
                 int taskNumber = Integer.parseInt(sentence[1]);
-                travelActivityList.removeTask(taskNumber);
+                travelActivityList.removeTravelActivity(taskNumber);
             } else if(line.startsWith("find")) {
                 String[] taskName = line.split(" ");
                 travelActivityList.searchTask(taskName[1]);
@@ -44,11 +45,11 @@ public class Duke {
         }
     }
 
-    public static void printGreeting() {
-        System.out.println("Hello");
-        System.out.println("How may I assist you?");
-
+    public void runBot(){
+        ui.printGreeting();
     }
+
+
 }
 
 

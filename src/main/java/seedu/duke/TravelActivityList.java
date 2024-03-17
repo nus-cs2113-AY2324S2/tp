@@ -5,7 +5,7 @@ public class TravelActivityList {
     /** Array of travel activity */
     private ArrayList<TravelActivity> travelActivities;
 
-    /** Number of TravelActivitys */
+    /** Number of TravelActivities */
     private int noOfTasks = 0;
     public TravelActivityList() {
         travelActivities = new ArrayList<>();
@@ -15,15 +15,15 @@ public class TravelActivityList {
      * Adds travel activity to the travel activity list
      * @param travelActivity The travel activity
      */
-    public void addTask(TravelActivity travelActivity){
+    public void addTravelActivity(TravelActivity travelActivity){
         travelActivities.add(travelActivity);
         noOfTasks += 1;
     }
 
     /**
-     * Prints out all the task
+     * Prints out all the travel activities
      */
-    public void listTasks(){
+    public void listTravelActivities(){
         int taskCount = 0;
         for (TravelActivity task: travelActivities) {
             if (task == null) {
@@ -35,19 +35,18 @@ public class TravelActivityList {
     }
 
     /**
-     * returns the number of tasks in the list
-     * @return the number of tasks
+     * returns the number of travel activities in the list
+     * @return the number of travel activities
      */
-    public int getNoOfTasks(){
+    public int getNoOfTravelActivities(){
         return noOfTasks;
     }
 
     /**
-     * Removes task from the task list
-     *
-     * @param taskNumber The task number
+     * Removes travel activity from the travel activity list
+     * @param taskNumber The travel activity number on the list
      */
-    public void removeTask(int taskNumber){
+    public void removeTravelActivity(int taskNumber){
         int indexOfTask = taskNumber - 1;
         TravelActivity removedTask = travelActivities.get(indexOfTask);
         travelActivities.remove(indexOfTask);
@@ -56,6 +55,7 @@ public class TravelActivityList {
         noOfTasks -=1;
 
     }
+
 
     public String getDescription(String plan){
         for(TravelActivity travelActivity: travelActivities){
