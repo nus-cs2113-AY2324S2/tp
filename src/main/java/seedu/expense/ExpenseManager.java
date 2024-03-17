@@ -1,4 +1,4 @@
-package brokeculator.expense;
+package seedu.expense;
 
 import java.util.ArrayList;
 
