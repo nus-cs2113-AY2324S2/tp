@@ -1,6 +1,8 @@
 package seedu.duke;
 
 
+import java.util.NoSuchElementException;
+
 /**
  * Represents the user interface of the Omnitravel bot
  * It contains all the responses of the Omnitravel bot to the user's commands
@@ -9,7 +11,7 @@ public class Ui {
     /**
      * Prints the greetings
      */
-    public void printGreeting() {
+    public static void printGreeting() {
         printLine();
         System.out.println(" ____  _      _      _  _____  ____  ____  _     _____ _    \n" +
                 "/  _ \\/ \\__/|/ \\  /|/ \\/__ __\\/  __\\/  _ \\/ \\ |\\/  __// \\   \n" +
@@ -24,7 +26,7 @@ public class Ui {
     /**
      * Prints the farewell greetings
      */
-    public void printBye(){
+    public static void printBye(){
         printLine();
         System.out.println("Thank you for using Omnitravel");
         System.out.println("We hope to see you again! Goodbye!");
@@ -33,6 +35,16 @@ public class Ui {
 
     public static void printLine(){
         System.out.println("____________________________________________________________");
+    }
+
+    public static void printException(OmniException exception){
+        printLine();
+        System.out.println("Warning! " + exception.getMessage());
+    }
+
+    public static void printNoSuchElementException(NoSuchElementException exception){
+        printLine();
+        System.out.println("Warning! " + exception.getMessage());
     }
 
 
