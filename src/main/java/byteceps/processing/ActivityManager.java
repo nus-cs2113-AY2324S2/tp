@@ -73,7 +73,7 @@ public abstract class ActivityManager {
         Integer index = this.activityHashMap.get(activityName);
         if (index == null) {
             throw new Exceptions.ActivityDoesNotExists(
-                    String.format("The %s entry: %s does not exist and cannot be deleted",
+                    String.format("The %s entry: %s does not exist",
                             this.activityType, activityName)
             );
         }
