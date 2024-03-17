@@ -1,5 +1,6 @@
 package supertracker.parser;
 
+import supertracker.TrackerException;
 import supertracker.command.InvalidCommand;
 import supertracker.command.ListCommand;
 import supertracker.command.NewCommand;
@@ -8,6 +9,7 @@ import supertracker.command.UpdateCommand;
 import supertracker.command.DeleteCommand;
 import supertracker.command.Command;
 import supertracker.item.Inventory;
+import supertracker.ui.ErrorMessage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,6 +36,8 @@ public class Parser {
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + "[0-9]*(?:\\.[0-9]*)?)?) ";
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
             + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
+    private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
+
 
     /**
      * Returns the command word specified in the user input string
@@ -54,7 +58,7 @@ public class Parser {
      * @param input a String of the user's input
      * @return a Command to execute
      */
-    public static Command parseCommand(String input) {
+    public static Command parseCommand(String input) throws TrackerException {
         String commandWord = getCommandWord(input);
         String params = input.replace(commandWord, "").trim();
 
@@ -115,6 +119,7 @@ public class Parser {
     private static Matcher getPatternMatcher(String regex, String input, String[] paramFlags) {
         Pattern p = Pattern.compile(regex);
         String commandPattern = makeStringPattern(input, paramFlags);
+        assert commandPattern.length() >= paramFlags.length;
         return p.matcher(commandPattern);
     }
 
@@ -122,27 +127,22 @@ public class Parser {
         return Math.round(unroundedValue * ROUNDING_FACTOR) / ROUNDING_FACTOR;
     }
 
-    private static Command parseUpdateCommand(String input) {
+    private static Command parseUpdateCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(UPDATE_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            // throw error
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.INVALID_UPDATE_FORMAT);
         }
 
         String itemName = matcher.group(NAME_GROUP).trim().toLowerCase();
         String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
         String priceString = matcher.group(PRICE_GROUP).replace(PRICE_FLAG + BASE_FLAG, "").trim();
         if (itemName.isEmpty() || (quantityString.isEmpty() && priceString.isEmpty())) {
-            // throw error
-            System.out.println("empty param");
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
         if (!Inventory.contains(itemName)) {
-            // throw error
-            System.out.println(itemName + " does not exist in inventory. Unable to update its values. =(");
-            return new InvalidCommand();
+            throw new TrackerException(itemName + ErrorMessage.ITEM_NOT_IN_LIST);
         }
 
         int quantity = 0;
@@ -158,12 +158,12 @@ public class Parser {
         return new UpdateCommand(itemName, quantity, price);
     }
 
-    private static Command parseNewCommand(String input) {
+    private static Command parseNewCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(NEW_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.INVALID_NEW_ITEM_FORMAT);
         }
 
         String itemName = matcher.group(NAME_GROUP).trim();
@@ -171,7 +171,7 @@ public class Parser {
         String itemPriceString = matcher.group(PRICE_GROUP).trim();
 
         if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
         // throws NumberFormatException if strings cannot be parsed
@@ -181,12 +181,12 @@ public class Parser {
         return new NewCommand(itemName, itemQuantity, itemPrice);
     }
 
-    private static Command parseListCommand(String input) {
+    private static Command parseListCommand(String input) throws TrackerException {
         String[] flags = {QUANTITY_FLAG, PRICE_FLAG};
         Matcher matcher = getPatternMatcher(LIST_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.INVALID_LIST_FORMAT);
         }
 
         boolean hasQuantity = !matcher.group(QUANTITY_GROUP).isEmpty();
@@ -203,19 +203,19 @@ public class Parser {
         return new ListCommand(hasQuantity, hasPrice, firstParam);
     }
 
-    private static Command parseDeleteCommand(String input) {
-        if (!input.contains(NAME_FLAG + BASE_FLAG)) {
-            return new InvalidCommand();
-        }
-        String[] parseName = input.split(NAME_FLAG + BASE_FLAG, 2);
-        String itemName = parseName[1];
+    private static Command parseDeleteCommand(String input) throws TrackerException {
+        String[] flags = {NAME_FLAG};
+        Matcher matcher = getPatternMatcher(DELETE_COMMAND_REGEX, input, flags);
 
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_DELETE_FORMAT);
+        }
+
+        String itemName = matcher.group(NAME_GROUP);
         if (itemName.isEmpty()) {
-            return new InvalidCommand();
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
-        //throws ArrayIndexOutOfBoundsException if string is have no n/
+
         return new DeleteCommand(itemName);
-
     }
-
 }
