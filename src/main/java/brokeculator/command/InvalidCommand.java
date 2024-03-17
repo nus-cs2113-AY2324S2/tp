@@ -1,5 +1,6 @@
 package brokeculator.command;
 
+import brokeculator.expense.ExpenseManager;
 import brokeculator.frontend.UI;
 
 public class InvalidCommand extends Command {
@@ -11,7 +12,7 @@ public class InvalidCommand extends Command {
         this.errorMessage = errorMessage;
     }
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         // TODO
         UI.print(errorMessage);
     }
