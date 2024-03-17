@@ -74,7 +74,7 @@ public class Parser {
             command = parseUpdateCommand(params);
             break;
         case DELETE_COMMAND:
-            command = new DeleteCommand(params);
+            command = parseDeleteCommand(params);
             break;
         default:
             command = new InvalidCommand();
@@ -199,4 +199,20 @@ public class Parser {
 
         return new ListCommand(hasQuantity, hasPrice, firstParam);
     }
+
+    private static Command parseDeleteCommand(String input) {
+        if (!input.contains(NAME_FLAG + BASE_FLAG)) {
+            return new InvalidCommand();
+        }
+        String[] parseName = input.split(NAME_FLAG + BASE_FLAG, 2);
+        String itemName = parseName[1];
+
+        if (itemName.isEmpty()) {
+            return new InvalidCommand();
+        }
+        //throws ArrayIndexOutOfBoundsException if string is have no n/
+        return new DeleteCommand(itemName);
+
+    }
+
 }

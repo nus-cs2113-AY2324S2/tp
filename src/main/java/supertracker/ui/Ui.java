@@ -74,7 +74,7 @@ public class Ui {
         printIndent(deleteItemOpening(itemName));
     }
 
-    public static void deleteUnsuccessful(String itemName) {
+    public static void deleteUnsuccessful() {
         printIndent(MISSING_ITEM_MESSAGE);
     }
 
