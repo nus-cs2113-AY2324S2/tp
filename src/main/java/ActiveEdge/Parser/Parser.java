@@ -1,18 +1,13 @@
 package ActiveEdge.Parser;
 
-import java.io.IOException;
-import java.util.Scanner;
 import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
 import ActiveEdge.Command.LogWaterCommand;
 import ActiveEdge.Command.ViewWaterIntakeCommand;
-import ActiveEdge.Task.LogMeals;
-import ActiveEdge.Task.Task;
-import ActiveEdge.Task.TaskList;
 import ActiveEdge.Command.*;
 
 import static ActiveEdge.Task.TaskList.tasksList;
-
+import static ActiveEdge.FoodData.foodItems;
 
 public class Parser {
 
@@ -29,11 +24,17 @@ public class Parser {
                 logWaterCommand.execute();
 
             } else if(items[0].equals("m")) {
-                String[] logParts = parts.split("m/|s/");
-                String description = logParts[0].trim();
-                String servings = logParts[1].trim();
+                String[] logParts = parts.trim().split(" ");
+                String description = logParts[0].substring(2);
+                int servings = Integer.parseInt(logParts[1].substring(2));
+                int calories = 0;
 
-                LogMealCommand logMealCommand = new LogMealCommand(description, servings);
+                for (int i = 0; i < foodItems.length; i++){
+                    if (foodItems[i][1].equals(description)){
+                        calories = Integer.parseInt(foodItems[i][2])*servings;
+                    }
+                }
+                LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories);
                 logMealCommand.execute();
             }
         } else if (input.startsWith("list")) {
@@ -49,7 +50,7 @@ public class Parser {
                 new ListMealsCommand();
             } else { //list both
               
-            }
+            }}
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
             if (parts[1].startsWith("c")) { //shows calorie
@@ -88,9 +89,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid goal amount. Please provide a valid integer.");
             }
-        } else {
+        }
+        else {
             System.out.println("Unknown command.");
         }
     }
-
 }
