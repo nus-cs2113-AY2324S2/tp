@@ -8,8 +8,7 @@ import supertracker.command.UpdateCommand;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
@@ -43,6 +42,18 @@ public class ParserTest {
         update.execute();
         bShake = Inventory.get("banana milkshake");
         assertEquals(96.96, bShake.getPrice());
+    }
+
+    @Test
+    public void parseCommand_validDeleteCommandInput_newCommand() {
+
+        Command newItem = Parser.parseCommand("new n/strawberry q/12 p/2.2");
+        newItem.execute();
+
+        Command deleteItem = Parser.parseCommand("delete n/strawberry");
+        deleteItem.execute();
+
+        assertFalse(Inventory.contains("strawberry"));
     }
 
     @Test
