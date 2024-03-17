@@ -24,6 +24,6 @@ public class CantVasMain {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-       new CantVasMain().run();
+        new CantVasMain().run();
     }
 }
