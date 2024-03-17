@@ -15,9 +15,12 @@ public class MenuCommand extends Command {
         assert index >= 0 : "Index should be a positive number";
         this.index = index;
         ui = new Ui();
+
     }
 
     public int getIndex() {
+        assert index >= 0 : "Index must be a positive number";
+
         return this.index;
     }
 
@@ -30,11 +33,14 @@ public class MenuCommand extends Command {
         assert index >= 0 : "Index must be a positive number";
 
         logger.log(Level.INFO, "Starting the processing of Menu Command with Index :" + index);
+
         if (index == 0) {
             logger.log(Level.INFO, "Displaying all Menu Items");
+
             ui.showMenuTitles();
         } else {
             logger.log(Level.INFO, "Displaying Menu Items at Index : " + index);
+
             ui.showMenuItem(index);
         }
 

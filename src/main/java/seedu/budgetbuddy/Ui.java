@@ -35,6 +35,8 @@ public class Ui {
      * @param index The index of the menu item to display.
      */
     public void showMenuItem(int index) {
+        assert index >= 0 : "Index must be a positive integer";
+
         System.out.println(DIVIDER);
         switch (index) {
         case 1:
