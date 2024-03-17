@@ -35,6 +35,8 @@ public class TravelActivityList {
             taskCount++;
             System.out.println("     " + taskCount +"." + task);
         }
+        int final_task_count = noOfTasks;
+        assert final_task_count == taskCount : "Index out of bounds while listing activities";
     }
 
     /**
@@ -49,7 +51,10 @@ public class TravelActivityList {
      * Removes travel activity from the travel activity list
      * @param taskNumber The travel activity number on the list
      */
-    public void removeTravelActivity(int taskNumber){
+    public void removeTravelActivity(int taskNumber) throws OmniException{
+        if(taskNumber > travelActivities.size()){
+            throw new OmniException("Travel activity cannot be found!");
+        }
         int indexOfTask = taskNumber - 1;
         int initialListSize = noOfTasks;
         TravelActivity removedTask = travelActivities.get(indexOfTask);
