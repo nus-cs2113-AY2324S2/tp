@@ -30,6 +30,8 @@ public class FlowerDictionary {
         add("Daisy", "White", "Valentines");
         add("Babys Breath", "White", "Wedding");
         add("Chrysanthemum", "White", "Funeral");
+        add("Hydrangea", "Blue", "Wedding");
+        add("Carnation", "Pink", "Mother's Day");
     }
 
     /**
