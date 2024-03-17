@@ -10,6 +10,7 @@ public class Ui {
      * Prints the greetings
      */
     public void printGreeting() {
+        printLine();
         System.out.println(" ____  _      _      _  _____  ____  ____  _     _____ _    \n" +
                 "/  _ \\/ \\__/|/ \\  /|/ \\/__ __\\/  __\\/  _ \\/ \\ |\\/  __// \\   \n" +
                 "| / \\|| |\\/||| |\\ ||| |  / \\  |  \\/|| / \\|| | //|  \\  | |   \n" +
@@ -17,17 +18,20 @@ public class Ui {
                 "\\____/\\_/  \\|\\_/  \\|\\_/  \\_/  \\_/\\_\\\\_/ \\|\\__/  \\____\\\\____/)");
         System.out.println("Hello");
         System.out.println("How may I assist you?");
+        printLine();
     }
 
     /**
      * Prints the farewell greetings
      */
     public void printBye(){
+        printLine();
         System.out.println("Thank you for using Omnitravel");
         System.out.println("We hope to see you again! Goodbye!");
+        printLine();
     }
 
-    public void printLine(){
+    public static void printLine(){
         System.out.println("____________________________________________________________");
     }
 
