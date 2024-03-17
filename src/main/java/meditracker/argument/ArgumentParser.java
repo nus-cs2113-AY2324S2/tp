@@ -9,7 +9,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 class ArgumentParser {
-    protected final Map<ArgumentName, String> PARSED_ARGUMENTS = new HashMap<>();
+    protected final Map<ArgumentName, String> parsedArguments = new HashMap<>();
 
     /**
      * Constructs ArgumentParser that parses raw input into corresponding key value pairs
@@ -77,7 +77,7 @@ class ArgumentParser {
 
             endIndex = index.getKey();
             String argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
-            PARSED_ARGUMENTS.put(argKey, argValue);
+            parsedArguments.put(argKey, argValue);
 
             argKey = index.getValue();
             startIndex = endIndex + 1;
@@ -85,7 +85,7 @@ class ArgumentParser {
 
         endIndex = rawInputSplit.size();
         String argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
-        PARSED_ARGUMENTS.put(argKey, argValue);
+        parsedArguments.put(argKey, argValue);
     }
 
     /**

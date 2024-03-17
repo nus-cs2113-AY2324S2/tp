@@ -18,7 +18,7 @@ import meditracker.ui.Ui;
 import java.util.Map;
 
 public class ModifyCommand extends Command {
-    public final ArgumentList ARGUMENT_LIST = new ArgumentList(
+    public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false),
             new NameArgument(true),
             new QuantityArgument(true),
@@ -27,21 +27,21 @@ public class ModifyCommand extends Command {
             new IntakeFrequencyArgument(true),
             new RemarksArgument(true)
     );
-    private final Map<ArgumentName, String> PARSED_ARGUMENTS;
+    private final Map<ArgumentName, String> parsedArguments;
 
     public ModifyCommand(String arguments) throws ArgumentNotFoundException {
-        PARSED_ARGUMENTS = ARGUMENT_LIST.parse(arguments);
+        parsedArguments = argumentList.parse(arguments);
     }
 
     @Override
     public void execute(MedicationManager medicationManager, Ui ui) {
-        String listIndexString = PARSED_ARGUMENTS.get(ArgumentName.LIST_INDEX);
+        String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
 
         Medication medication = medicationManager.getMedication(listIndex);
-        for (Argument argument: ARGUMENT_LIST.getArguments()) {
+        for (Argument argument: argumentList.getArguments()) {
             ArgumentName argumentName = argument.getName();
-            String argumentValue = PARSED_ARGUMENTS.get(argumentName);
+            String argumentValue = parsedArguments.get(argumentName);
 
             switch (argumentName) {
             case DOSAGE:
