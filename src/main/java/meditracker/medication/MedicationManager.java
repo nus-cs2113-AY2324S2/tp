@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MedicationManager {
     /** The list of medications stored in an ArrayList. */
-    public List<Medication> medications = new ArrayList<>();
+    private List<Medication> medications = new ArrayList<>();
 
     /**
      * Constructs an empty MedicationList.
@@ -23,5 +23,13 @@ public class MedicationManager {
      */
     public MedicationManager(List<Medication> medications) {
         this.medications = medications;
+    }
+
+    /**
+     * Gets the size of list of medications
+     * @return Total number of medications
+     */
+    public Integer getTotalMedications() {
+        return medications.size();
     }
 }

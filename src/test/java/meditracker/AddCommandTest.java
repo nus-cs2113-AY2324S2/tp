@@ -22,6 +22,6 @@ class AddCommandTest {
         command.execute(medicationManager, ui);
 
         // actual test
-        assertEquals(1, medicationManager.medications.size());
+        assertEquals(1, medicationManager.getTotalMedications());
     }
 }
