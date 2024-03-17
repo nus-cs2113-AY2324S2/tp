@@ -82,4 +82,9 @@ public class Course {
         }
         return s;
     }
+
+    @Override
+    public String toString() {
+        return courseCode + "," + courseName + "," + modularCredit + "," + year + "," + term;
+    }
 }
