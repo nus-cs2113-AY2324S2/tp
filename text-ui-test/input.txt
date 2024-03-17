@@ -1,2 +1,3 @@
 sleep add 1 /date 27/12/24
 sleep list
+exit
