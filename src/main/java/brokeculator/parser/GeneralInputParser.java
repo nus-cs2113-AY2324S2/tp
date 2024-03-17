@@ -20,12 +20,11 @@ public class GeneralInputParser {
         case "summarise":
             commandToExecute = SummariseParser.parseInput(userInput);
             break;
-        case ("exit"):
+        case "exit":
             commandToExecute = ExitParser.parseInput(userInput);
             break;
         default:
-            // received invalid command
-            commandToExecute = new InvalidCommand();
+            commandToExecute = new InvalidCommand("Invalid command. Please try again.");
         }
         return commandToExecute;
     }
