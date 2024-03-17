@@ -20,7 +20,7 @@ public class TravelActivityList {
         travelActivities.add(travelActivity);
         noOfTasks += 1;
         int newSize = noOfTasks;
-        assert newSize != initialListSize + 1 : "There is an error with list size!";
+        assert newSize == initialListSize + 1 : "There is an error with list size!";
     }
 
     /**
