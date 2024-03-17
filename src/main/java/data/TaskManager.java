@@ -29,10 +29,16 @@ public class TaskManager {
         }
     }
 
-    public static void updateTask(LocalDate date, int taskIndex, String updatedTask) {
-        List<String> dayTasks = tasks.get(date);
-        if (dayTasks != null && taskIndex >= 0 && taskIndex < dayTasks.size()) {
-            dayTasks.set(taskIndex, updatedTask);
+    public static void updateTask(LocalDate date, int taskIndex, String updatedTask) throws TaskManagerException {
+        try {
+            List<String> dayTasks = tasks.get(date);
+            boolean dayHasTasks = dayTasks != null;
+            boolean taskIndexExists = taskIndex >= 0 && taskIndex < Objects.requireNonNull(dayTasks).size();
+            if (dayHasTasks && taskIndexExists) {
+                dayTasks.set(taskIndex, updatedTask);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -44,7 +50,7 @@ public class TaskManager {
     public static void addManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
             throws TaskManagerException {
         System.out.println("Enter the date for the task (dd/MM/yyyy):");
-        LocalDate date = getStringFromUser(scanner);
+        LocalDate date = parseInputDate(scanner);
 
         checkIfDateInCurrentWeek(date, weekView);
 
@@ -57,7 +63,7 @@ public class TaskManager {
 
     public static void updateManager(Scanner scanner, WeekView weekView, TaskManager taskManager) throws TaskManagerException {
         System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
-        LocalDate date = getStringFromUser(scanner);
+        LocalDate date = parseInputDate(scanner);
 
         checkIfDateInCurrentWeek(date, weekView);
 
@@ -75,7 +81,9 @@ public class TaskManager {
             updateTask(date, taskNumber - 1, updatedDescription);
             System.out.println("Task updated.");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid task number. Please try again.");
+            System.out.println("Task number should be an integer value. Please try again.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The task number you have entered does not exist. Please try again.");
         }
 
     }
@@ -94,7 +102,7 @@ public class TaskManager {
             throws DateTimeParseException, TaskManagerException {
 
         System.out.println("Enter the date for the task to delete (dd/MM/yyyy):");
-        LocalDate date = getStringFromUser(scanner);
+        LocalDate date = parseInputDate(scanner);
 
         checkIfDateInCurrentWeek(date, weekView);
 
@@ -112,7 +120,7 @@ public class TaskManager {
     }
 
     // to abstract as Parser/UI function
-    private static LocalDate getStringFromUser(Scanner scanner) throws DateTimeParseException {
+    private static LocalDate parseInputDate(Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
         LocalDate date;
         date = LocalDate.parse(dateString, dateFormatter);
