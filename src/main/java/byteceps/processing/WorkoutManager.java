@@ -4,15 +4,18 @@ package byteceps.processing;
 import byteceps.activities.Workout;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
+import byteceps.ui.UserInterface;
 
 public class WorkoutManager extends ActivityManager {
     @Override
-    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity, Exceptions.ActivityExistsException {
+    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity, Exceptions.ActivityExistsException, Exceptions.InvalidInput {
         switch (parser.getAction()) {
         case "create":
             Workout newWorkout = processCreateWorkout(parser);
             add(newWorkout);
-            //   System.out.printf("Added exercise: %s\n", newExercise.getActivityName());
+            UserInterface.printMessage(String.format(
+                    "Added Workout Plan: %s\n", newWorkout.getActivityName()
+            ));
             break;
         case "assign":
             // similar to exercise's edit I think?
@@ -22,6 +25,7 @@ public class WorkoutManager extends ActivityManager {
         case "unassign":
             break;
         case "samples":
+            list();
             break;
         case "list":
             if(parser.getActionParameter() == null) {
@@ -35,8 +39,11 @@ public class WorkoutManager extends ActivityManager {
         }
     }
 
-    public Workout processCreateWorkout(Parser parser) {
-        // check if parser is valid if not throw errors
+    public Workout processCreateWorkout(Parser parser) throws Exceptions.InvalidInput {
+        String workoutName = parser.getActionParameter();
+        if (workoutName.isEmpty()) {
+            throw new Exceptions.InvalidInput("Workout name cannot be empty");
+        }
         return new Workout(parser.getActionParameter());
     }
 
