@@ -1,16 +1,9 @@
 package brokeculator.parser;
 
 import brokeculator.command.ListCommand;
-import brokeculator.expense.ExpenseManager;
 
 public class ListParser {
-    private ExpenseManager expenseManager;
-
-    public ListParser(ExpenseManager expenseManager) {
-        this.expenseManager = expenseManager;
-    }
-
-    public ListCommand parseInput(String userInput) {
+    public static ListCommand parseInput(String userInput) {
         String[] userInputAsArray = userInput.split(" ");
         int amountToList = 0;
         if (userInputAsArray.length == 1) {
@@ -20,6 +13,6 @@ public class ListParser {
             amountToList = Integer.parseInt(userInputAsArray[1]);
         }
 
-        return new ListCommand(amountToList, expenseManager);
+        return new ListCommand(amountToList);
     }
 }

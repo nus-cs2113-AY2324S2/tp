@@ -29,6 +29,14 @@ public class ExpenseManager {
         return total;
     }
 
+    public ArrayList<Expense> listExpenses(int amountToList) {
+        if (amountToList == -1) {
+            return expenses;
+        } else {
+            return new ArrayList<>(expenses.subList(0, Math.min(amountToList, expenses.size())));
+        }
+    }
+
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < expenses.size(); i++) {

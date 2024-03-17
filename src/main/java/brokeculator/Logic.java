@@ -4,29 +4,27 @@ import brokeculator.frontend.UI;
 import brokeculator.storage.FileManager;
 import brokeculator.command.Command;
 import brokeculator.storage.parsing.GeneralFileParser;
-import brokeculator.storage.parsing.GeneralInputParser;
+import brokeculator.parser.GeneralInputParser;
+
 public class Logic {
-    private GeneralInputParser mainParser;
     private FileManager fileManager;
     private ExpenseManager expenseManager;
-    private GeneralFileParser fileParser;
-    public Logic(GeneralInputParser mainParser, FileManager fileManager
-                 , ExpenseManager expenseManager, GeneralFileParser fileParser) {
-        this.mainParser = mainParser;
+    public Logic(FileManager fileManager, ExpenseManager expenseManager) {
         this.fileManager = fileManager;
         this.expenseManager = expenseManager;
-        this.fileParser = fileParser;
     }
     public void run() {
         loadExpensesFromFile();
         while (true) {
             try {
+                UI.print("Enter a command:");
                 String userInput = UI.getUserInput();
-                Command command = mainParser.getCommandFromUserInput(userInput);
-                command.execute();
+                assert userInput != null;
+                Command command = GeneralInputParser.getCommandFromUserInput(userInput);
+                command.execute(expenseManager);
                 saveExpensesToFile();
             } catch (Exception e) {
-                UI.print("error occured, sus. " + e.getMessage());
+                UI.print("error occurred, sus. " + e.getMessage());
             }
         }
     }
@@ -38,18 +36,18 @@ public class Logic {
         }
         while (fileManager.hasNextLine()) {
             String line = fileManager.readNextLine();
-            Command loadCommand = fileParser.getCommandFromFileInput(line);
-            loadCommand.execute();
+            Command loadCommand = GeneralFileParser.getCommandFromFileInput(line);
+            loadCommand.execute(expenseManager);
         }
         //after obtaining a clean expense list, we save it back to the file to remove any corrupted data
         saveExpensesToFile();
     }
     private void saveExpensesToFile() {
         try {
-            String expenseListToSave = expenseManager.getExpensesStringRepresentations();
+            String expenseListToSave = expenseManager.getExpensesStringRepresentation();
             fileManager.save(expenseListToSave);
         } catch (Exception e) {
-            UI.print("file save error occured" + e.getMessage());
+            UI.print("file save error occurred" + e.getMessage());
         }
     }
 }

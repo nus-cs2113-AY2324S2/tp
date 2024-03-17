@@ -1,4 +1,4 @@
-package brokeculator.storage.parsing;
+package brokeculator.parser;
 
 import brokeculator.command.Command;
 import brokeculator.command.ExitCommand;

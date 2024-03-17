@@ -4,16 +4,13 @@ import brokeculator.expense.ExpenseManager;
 import brokeculator.frontend.UI;
 
 public class SummariseCommand extends Command {
-    private ExpenseManager expenseManager;
 
-    public SummariseCommand(ExpenseManager expenseManager) {
-        this.expenseManager = expenseManager;
-    }
+    public SummariseCommand() {}
 
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         //TODO implement proper expense summarising
-        //expenseManager.summariseExpense();
-        UI.print("placeholder for expense summarising");
+        double summary = expenseManager.summariseExpenses();
+        UI.print("Total expenses: " + summary);
     }
 }

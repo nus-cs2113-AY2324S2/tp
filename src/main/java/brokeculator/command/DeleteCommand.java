@@ -1,21 +1,17 @@
 package brokeculator.command;
 
 import brokeculator.expense.ExpenseManager;
-import brokeculator.frontend.UI;
 
 public class DeleteCommand extends Command {
     private int indexToDelete;
-    private ExpenseManager expenseManager;
 
-    public DeleteCommand(int indexToDelete, ExpenseManager expenseManager) {
+    public DeleteCommand(int indexToDelete) {
         this.indexToDelete = indexToDelete;
-        this.expenseManager = expenseManager;
     }
 
     @Override
-    public void execute() {
+    public void execute(ExpenseManager expenseManager) {
         //TODO implement proper expense deleting
-        //expenseManager.delete(indexToDelete);
-        UI.print("placeholder for expense deleting");
+        expenseManager.delete(indexToDelete);
     }
 }
