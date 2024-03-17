@@ -1,5 +1,7 @@
 package ActiveEdge;
 
+import ActiveEdge.Task.GoalTask;
+import ActiveEdge.Task.LogMeals;
 import ActiveEdge.Task.Task;
 import ActiveEdge.Task.TaskList;
 
@@ -31,8 +33,9 @@ public class Storage {
 
     public static void saveLogsToFile(String filePath) {
         try (FileWriter fw = new FileWriter(filePath)) {
-            for (Task task : TaskList.tasksList) {
-                fw.write(task.getDescription() + "\n");
+            for (int i = 0; i < TaskList.tasksList.size(); i++) {
+                String out = TaskList.tasksList.get(i).toString();
+                fw.write(out + "\n");
             }
         } catch (IOException e) {
             System.out.println("An error occurred while saving tasks to file: " + e.getMessage());
@@ -47,9 +50,20 @@ public class Storage {
         }
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
-                String description = scanner.nextLine();
-                Task newTask = new Task(description);
-                TaskList.tasksList.add(newTask);
+                String task = scanner.nextLine();
+                if(task.startsWith("Meal")){
+                    String[] items = task.trim().split(" ");
+                    LogMeals newTask = new LogMeals(items[1], Integer.parseInt(items[2]),  Integer.parseInt(items[3]));
+                    TaskList.tasksList.add(newTask);
+                }else if (task.startsWith("Goal")){
+                    String[] items = task.trim().split(" ");
+                    GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
+                    TaskList.tasksList.add(newTask);
+                } else if (task.startsWith("Water")) {
+                    String[] items = task.trim().split(" ");
+                    GoalTask newTask = new GoalTask(items[0], Integer.parseInt(items[1]));
+                    TaskList.tasksList.add(newTask);
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error: " + e.getMessage());

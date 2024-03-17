@@ -5,6 +5,7 @@ import ActiveEdge.Command.HelpCommand;
 import ActiveEdge.Command.LogWaterCommand;
 import ActiveEdge.Command.ViewWaterIntakeCommand;
 import ActiveEdge.Command.*;
+import ActiveEdge.Storage;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 import static ActiveEdge.FoodData.foodItems;
@@ -93,5 +94,6 @@ public class Parser {
         else {
             System.out.println("Unknown command.");
         }
+        Storage.saveLogsToFile("data/data.txt");
     }
 }

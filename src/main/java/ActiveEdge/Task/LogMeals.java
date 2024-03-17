@@ -16,4 +16,9 @@ public class LogMeals extends Task {
     }
 
     public int getMealCalories() { return mealCalories; }
+
+    @Override
+    public String toString() {
+        return "Meal " + this.getDescription() + " " + this.getServings() + " " + this.getMealCalories();
+    }
 }
