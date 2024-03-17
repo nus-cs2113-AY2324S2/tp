@@ -1,6 +1,12 @@
 package seedu.duke;
 
 public class ProcessCommand {
+    private final ExpenditureList expenselist;
+
+    protected ProcessCommand(ExpenditureList expenselist) {
+        this.expenselist = expenselist;
+    }
+
 
     private void processUserCommand(String command) {
         String[] commandParts = command.split(" ", 2);

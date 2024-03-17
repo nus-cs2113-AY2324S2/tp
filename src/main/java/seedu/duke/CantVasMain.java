@@ -7,7 +7,8 @@ public class CantVasMain {
 
     public CantVasMain() {
         ui = new UI();
-        processCommand = new ProcessCommand();
+        ExpenditureList expenseList = new ExpenditureList();
+        processCommand = new ProcessCommand(expenseList);
     }
 
     public void run() {

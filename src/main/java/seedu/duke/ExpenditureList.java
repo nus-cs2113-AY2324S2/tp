@@ -44,6 +44,11 @@ public class ExpenditureList {
         }
     }
 
+    public static void deleteExpenditure(int index) {
+        expenditureList.remove(index - 1);
+        expenditureCount--;
+    }
+
     public static void listExpenses() {
         if (expenditureList.isEmpty()) {
             System.out.println("No expenses to display.");
@@ -67,6 +72,10 @@ public class ExpenditureList {
         switch (actionType) {
         case "add/":
             addExpenditure(commandParts[1]);
+            break;
+        case "del/":
+            int index = Integer.parseInt(commandParts[1]);
+            deleteExpenditure(index);
             break;
         default:
             System.out.println("Error, invalid input");
