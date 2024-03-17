@@ -13,6 +13,7 @@ public class Ui {
         System.out.println(DIVIDER);
         System.out.println("1. Manage Expenses     3. View Expenses");
         System.out.println("2. Manage Savings      4. View Savings");
+        System.out.println("5. Find Expenses");
         System.out.println(DIVIDER);
     }
 
@@ -28,6 +29,7 @@ public class Ui {
         System.out.println("Menu Options:");
         System.out.println("1. Manage Expenses     3. View Expenses");
         System.out.println("2. Manage Savings      4. View Savings");
+        System.out.println("5. Find Expenses");
         System.out.println("Use 'menu INDEX' to select an option");
         System.out.println(DIVIDER);
     }
@@ -58,6 +60,11 @@ public class Ui {
         case 4:
             System.out.println("View Savings");
             System.out.println("list savings [CATEGORY]");
+            break;
+        case 5:
+            System.out.println("Find Expenses");
+            System.out.println("find expenses d/DESCRIPTION morethan/MINAMOUNT lessthan/MAXAMOUNT " +
+                    "(Choose the parameters according to what you wish to search for)");
             break;
         default:
             System.out.println("Invalid menu index.");
