@@ -13,7 +13,14 @@ public class ModuleList {
     }
 
     public Module getModule(String courseCode) {
-        for(Module module : moduleList){
+        // check if the module is already taken
+        for(Module module : takenModuleList){
+            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+                return module;
+            }
+        }
+        // check if the module is planned to be taken
+        for(Module module : toBeTakenModuleList){
             if(module.getModuleCode().equals(courseCode.toUpperCase())){
                 return module;
             }
