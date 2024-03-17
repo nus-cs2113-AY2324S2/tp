@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+import static Storage.Storage.saveTasksToFile;
 import static data.TaskManagerException.*;
 
 
@@ -50,6 +51,7 @@ public class TaskManager {
         String task = scanner.nextLine().trim();
 
         addTask(date, task);
+        saveTasksToFile(tasks); //Updates tasks from hashmap into tasks.txt file
         System.out.println("Task added.");
     }
 
