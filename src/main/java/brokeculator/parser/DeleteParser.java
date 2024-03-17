@@ -11,7 +11,7 @@ public class DeleteParser {
     }
 
     public DeleteCommand parseInput(String userInput) {
-        String[] userInputAsArray = userInput.split(" ");
+        String[] userInputAsArray = userInput.trim().split("\\s+");
         int indexToDelete = 0;
         if (userInputAsArray.length == 1) {
             //TODO proper error handling when delete command has no index
