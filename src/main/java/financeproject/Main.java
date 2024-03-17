@@ -2,6 +2,7 @@ package financeproject;
 
 //import financialtransactions.Inflow;
 //import financialtransactions.Outflow;
+import customexceptions.IncompletePromptException;
 import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
@@ -10,7 +11,7 @@ import storage.Storage;
 import userinteraction.UI;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IncompletePromptException {
         Storage storage = new Storage("./data");
         UI ui = new UI();
         ui.printMessage("Welcome. Inorder to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");

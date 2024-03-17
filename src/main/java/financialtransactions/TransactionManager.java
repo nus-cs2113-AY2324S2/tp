@@ -1,7 +1,10 @@
 package financialtransactions;
 
+import java.util.ArrayList;
 
 public class TransactionManager {
+    private static final String[] INSTRUCTIONS = {"add-inflow", "add-outflow", "delete-inflow",
+            "delete-outflow", "export-csv", "login", "quit", "view-history"};
     private TransactionList<Transaction<?>> transactionList;
     private TransactionList<Inflow> inflows;
     private TransactionList<Outflow> outflows;
