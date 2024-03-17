@@ -19,4 +19,3 @@ text-ui-test/EXPECTED-UNIX.TXT
 /data/
 StorageLogger.log
 /src/test/data/StorageTest/NonExistentFile.csv
-/src/test/data/NewCommandTest/
