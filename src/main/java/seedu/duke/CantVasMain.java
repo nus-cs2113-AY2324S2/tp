@@ -1,15 +1,29 @@
 package seedu.duke;
-import CantVasUI.UI;
+import cantvasui.UI;
 
 public class CantVasMain {
+    private static UI ui;
+    private static ProcessCommand processCommand;
+
+    public CantVasMain() {
+        ui = new UI();
+        ExpenditureList expenseList = new ExpenditureList();
+        processCommand = new ProcessCommand(expenseList);
+    }
+
+    public void run() {
+        UI.printLogo();
+        boolean exit;
+        do {
+            String command = ui.getUserCommand();
+            exit = processCommand.userCommand(command);
+        } while (!exit);
+    }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        UI ui = new UI();
-        ui.printLogo();
-        ExpenditureList expenseList = new ExpenditureList();
-        ProcessCommand processCommand = new ProcessCommand(expenseList);
-        processCommand.UserCommand();
+        new CantVasMain().run();
     }
 }

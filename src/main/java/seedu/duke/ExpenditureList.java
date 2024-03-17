@@ -2,9 +2,9 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-class ExpenditureList {
+public class ExpenditureList {
+    public static int expenditureCount;
     private static ArrayList<Expenditure> expenditureList;
-    public static int expenditureCount ;
 
     public ExpenditureList() {
         expenditureList = new ArrayList<>();
@@ -22,7 +22,7 @@ class ExpenditureList {
             return;
         }
 
-        description = descriptionParts[0].substring(2); // Removing the "d/" prefix
+        description = descriptionParts[0].substring(3); // Removing the "d/" prefix
         String remainingPart = descriptionParts[1];
 
         String[] amountAndDateParts = remainingPart.split("date/", 2);
@@ -42,6 +42,15 @@ class ExpenditureList {
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount format");
         }
+    }
+
+    public static void deleteExpenditure(int index) {
+        Expenditure expenditure = expenditureList.get(index - 1);
+        System.out.println("deleted:" + expenditure.getDescription() +
+                " | Cost: $" + expenditure.getAmount() +
+                " | date: " + expenditure.getDate());
+        expenditureList.remove(index - 1);
+        expenditureCount--;
     }
 
     public static void listExpenses() {
@@ -67,6 +76,10 @@ class ExpenditureList {
         switch (actionType) {
         case "add/":
             addExpenditure(commandParts[1]);
+            break;
+        case "del/":
+            int index = Integer.parseInt(commandParts[1]);
+            deleteExpenditure(index);
             break;
         default:
             System.out.println("Error, invalid input");

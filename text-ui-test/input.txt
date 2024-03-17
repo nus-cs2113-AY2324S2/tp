@@ -1,3 +1,8 @@
-James Gosling
-hi
+help
+e/ add/  d/ testing amt/ 500 date/ 11.11.2011
+e/ add/  d/ testing amt/ 3 date/ 11.11.2011
+e/ add/  d/ testing amt/ 900 date/ 11.11.2011
+list
+e/ del/ 1
+list
 exit
