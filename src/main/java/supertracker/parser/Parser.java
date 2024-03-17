@@ -5,6 +5,7 @@ import supertracker.command.ListCommand;
 import supertracker.command.NewCommand;
 import supertracker.command.QuitCommand;
 import supertracker.command.UpdateCommand;
+import supertracker.command.DeleteCommand;
 import supertracker.command.Command;
 import supertracker.item.Inventory;
 
@@ -17,6 +18,7 @@ public class Parser {
     private static final String NEW_COMMAND = "new";
     private static final String LIST_COMMAND = "list";
     private static final String UPDATE_COMMAND = "update";
+    private static final String DELETE_COMMAND = "delete";
     private static final int PARAM_BEGIN_INDEX = 2;
     private static final double ROUNDING_FACTOR = 100.0;
 
@@ -56,6 +58,9 @@ public class Parser {
             break;
         case UPDATE_COMMAND:
             command = parseUpdateCommand(input);
+            break;
+        case DELETE_COMMAND:
+            command = new DeleteCommand(params);
             break;
         default:
             command = new InvalidCommand();

@@ -7,6 +7,7 @@ public class Ui {
     private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
+    private static final String MISSING_ITEM_MESSAGE = "Sorry! I could not delete that item!";
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
     private static final String FAREWELL_MESSAGE = "Goodbye!";
 
@@ -27,6 +28,10 @@ public class Ui {
 
     private static void updateItemOpening(Item item) {
         System.out.println(item.getName() + " has been successfully updated!");
+    }
+
+    private static String deleteItemOpening(String itemName) {
+        return itemName + " has been deleted!";
     }
 
     public static void printIndent(String string) {
@@ -61,6 +66,14 @@ public class Ui {
         updateItemOpening(item);
         printIndent(quantityMessage(item));
         printIndent(priceMessage(item));
+    }
+
+    public static void deleteSuccess(String itemName) {
+        printIndent(deleteItemOpening(itemName));
+    }
+
+    public static void deleteUnsuccessful(String itemName) {
+        printIndent(MISSING_ITEM_MESSAGE);
     }
 
     public static void listIntro(int size) {
