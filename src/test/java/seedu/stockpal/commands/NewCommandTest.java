@@ -2,12 +2,13 @@ package seedu.stockpal.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.stockpal.data.ProductList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class NewCommandTest {
 
     @Test
-    void NewCommand_allFieldsFilled_expectCorrectAllocation() {
+    void newCommand_allFieldsFilled_expectCorrectAllocation() {
         final ProductList productList = new ProductList();
         NewCommand userInput = new NewCommand(productList, "chocolate", 100, 2.00, "ingredient");
         userInput.execute();
@@ -20,7 +21,7 @@ public class NewCommandTest {
     }
 
     @Test
-    void NewCommand_compulsoryFieldsFilled_expectCorrectAllocation() {
+    void newCommand_compulsoryFieldsFilled_expectCorrectAllocation() {
         final ProductList productList = new ProductList();
         NewCommand userInput = new NewCommand(productList, "chocolate", 100, null, null);
         userInput.execute();
@@ -33,7 +34,7 @@ public class NewCommandTest {
     }
 
     @Test
-    void NewCommand_twoProductsWithCompulsoryFieldsFilled_expectCorrectAllocation() {
+    void newCommand_twoProductsWithCompulsoryFieldsFilled_expectCorrectAllocation() {
         final ProductList productList = new ProductList();
         NewCommand userInput1 = new NewCommand(productList, "chocolate", 100, 2.00, "ingredient");
         userInput1.execute();
