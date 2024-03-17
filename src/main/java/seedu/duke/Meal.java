@@ -13,6 +13,7 @@ public class Meal {
     // Constructor
     public Meal(String name, int servingSize, int caloriesPerServing, int carbs, int protein, int fat, int fiber, int sugar) {
         this.name = name;
+        this.servingSize = servingSize;
         this.caloriesPerServing = caloriesPerServing;
         this.carbsPerServing = carbs;
         this.proteinPerServing = protein;
@@ -22,6 +23,17 @@ public class Meal {
     }
 
     // Getter methods
+    public void infoMeal() {
+        System.out.println("Meal: " + name);
+        System.out.println("Serving Size: " + servingSize);
+        System.out.println("Calories: " + getCalories());
+        System.out.println("Carbs: " + getCarbs());
+        System.out.println("Protein: " + getProtein());
+        System.out.println("Fat: " + getFat());
+        System.out.println("Fiber: " + getFiber());
+        System.out.println("Sugar: " + getSugar());
+    }
+
     public String getName() {
         return name;
     }
