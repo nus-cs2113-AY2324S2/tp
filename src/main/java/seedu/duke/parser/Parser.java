@@ -79,12 +79,7 @@ public class Parser {
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
         // return new InitCommand(args);
-        //to be continued by Fong Shi Xiang
-        String moduleCode = "";
-        String moduleGrade = "";
-        String moduleMC = "";
-        ModuleList moduleList = new ModuleList(2);
-        return new AddCommand(moduleCode, moduleGrade, moduleMC, moduleList);
+        return new AddCommand();
     }
 
     private static Command gpaCommand(Map<String, String> args) {
