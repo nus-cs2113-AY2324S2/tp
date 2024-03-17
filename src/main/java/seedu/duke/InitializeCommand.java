@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.ui.ResponseManager;
 import seedu.duke.userprofile.Profile;
+import seedu.duke.tictactoe.TicTacToe;
 
 import java.util.Scanner;
 
@@ -29,6 +30,9 @@ public class InitializeCommand {
         System.out.println(getProfile(profile));
 
         ResponseManager.printWelcomeMessage(profile);
+
+        TicTacToe game = new TicTacToe('X');
+        game.gameStart();
 
         scanner.close();
     }
