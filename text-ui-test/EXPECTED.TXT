@@ -7,3 +7,5 @@ Hello from
 
 What is your name?
 Hello James Gosling
+Enter text to echo back, or type 'exit' to quit:
+Error caught:No line found

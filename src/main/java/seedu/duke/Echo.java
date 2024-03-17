@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Echo {
 
@@ -18,14 +19,18 @@ public class Echo {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter text to echo back, or type 'exit' to quit:");
 
-        while (true) {
-            String input = scanner.nextLine();
-            if ("exit".equalsIgnoreCase(input)) {
-                break;
+        try {
+            while (true) {
+                String input = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(input)) {
+                    break;
+                }
+                inputs.add(input);
+                echoBack();
+                inputs.remove(input);
             }
-            inputs.add(input);
-            echoBack();
-            inputs.remove(input);
+        } catch (NoSuchElementException e) {
+            System.out.println("Error caught:" + e.getMessage());
         }
     }
 
