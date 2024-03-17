@@ -14,8 +14,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final static String FOLDER_PATH = "./data/";
-    private final static String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
+    private static final String FOLDER_PATH = "./data/";
+    private static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
 
     /**
      * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.
@@ -102,8 +102,11 @@ public class Storage {
 
     public static Course parseCourse(String sentence) throws Exception {
         String[] words = sentence.split(",");
-        String courseCode, courseName;
-        int modularCredits, year, term;
+        String courseCode;
+        String courseName;
+        int modularCredits;
+        int year;
+        int term;
 
         try {
             courseCode = words[0];
