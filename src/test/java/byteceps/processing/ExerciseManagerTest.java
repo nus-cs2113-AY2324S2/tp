@@ -90,14 +90,14 @@ class ExerciseManagerTest {
 
         exerciseManager.list();
         String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
-                "-------------------------------------------------" +
+                "-------------------------------------------------\n" +
                 "[ByteCeps]> Added Exercise: Deadlifts\n" +
-                "-------------------------------------------------" +
+                "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
                 "\t\t\t1. Push-ups\n" +
                 "\t\t\t2. Deadlifts\n" +
                 "\n" +
-                "-------------------------------------------------";
+                "-------------------------------------------------\n";
 
         assertEquals(expectedOutput, outContent.toString());
 
@@ -127,12 +127,11 @@ class ExerciseManagerTest {
         exerciseManager.list();
 
         String expectedOutput = "[ByteCeps]> Edited Exercise from Push-ups to Push Ups\n" +
-                "-------------------------------------------------" +
+                "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
                 "\t\t\t1. Push Ups\n" +
-                "\t\t\t2. Deadlifts\n" +
                 "\n" +
-                "-------------------------------------------------";
+                "-------------------------------------------------\n";
 
         assertEquals(expectedOutput, outContent.toString());
 
