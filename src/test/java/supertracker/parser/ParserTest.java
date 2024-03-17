@@ -9,7 +9,9 @@ import supertracker.command.UpdateCommand;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class ParserTest {
     @Test
