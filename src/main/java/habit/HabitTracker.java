@@ -6,6 +6,8 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+import static ui.Ui.printMessageWithoutSepNewLine;
+
 
 public class HabitTracker {
     private static ArrayList<Habit> habitList = new ArrayList<>();
@@ -21,7 +23,15 @@ public class HabitTracker {
     }
 
     public void listHabits() {
-
+        String listHabitsMessage = "Here is the list of all your habits!\n";
+        if (habitList.isEmpty()) {
+            listHabitsMessage += "  <you currently have no habits, add one now!>\n";
+        }
+        for (int i = 0; i < habitList.size(); i++) {
+            Habit habit = habitList.get(i);
+            listHabitsMessage += "  " + (i + 1) + ". " + habit + "\n";
+        }
+        printMessageWithoutSepNewLine(listHabitsMessage);
     }
 
 
