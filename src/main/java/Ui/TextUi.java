@@ -4,6 +4,7 @@ import Storage.Storage;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
@@ -20,10 +21,18 @@ public class TextUi {
         this.in = new Scanner(System.in);
     }
 
-    public String getUserCommand() {
+    public String getUserInput() {
         System.out.println("Enter Command: ");
         Scanner in = new Scanner(System.in);
+        String userInput = in.nextLine();
+        if (shouldIgnore(userInput)) {
+            return "Invalid Command"; //Might want to change this with Exceptions
+        }
         return in.nextLine();
+    }
+
+    public boolean shouldIgnore(String userInput) {
+        return userInput.trim().isEmpty();
     }
 
     public void showWelcomeMessage(String version, String StorageFilePath) {
@@ -50,6 +59,16 @@ public class TextUi {
             System.out.println(m + "\n");
         }
     }
+
+    /*Waiting for ArrayList before implementing final code
+    private void showInventoryList(ArrayList<Items> arrayList) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i) == null) {
+                break;
+            }
+            replyToUser(arrayList.get(i));
+        }
+    }*/
 }
 
 
