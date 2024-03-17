@@ -1,4 +1,4 @@
-package seedu.expense;
+package brokeculator.expense;
 
 public interface Saveable {
     String getStringRepresentation();

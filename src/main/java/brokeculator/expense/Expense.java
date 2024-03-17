@@ -1,16 +1,13 @@
-package seedu.expense;
+package brokeculator.expense;
 
 import brokeculator.storage.parsing.FileKeyword;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an expense in the expense tracker.
  */
 public class Expense implements Saveable {
     private final String description;
-    private final LocalDateTime date;
+    private final String date;
     private final double amount;
     private final String category;
 
@@ -22,7 +19,7 @@ public class Expense implements Saveable {
      * @param date the date of the expense.
      * @param category the category of the expense.
      */
-    public Expense(String description, double amount, LocalDateTime date, String category) {
+    public Expense(String description, double amount, String date, String category) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -49,7 +46,7 @@ public class Expense implements Saveable {
      * Returns the date of the expense.
      * @return the date of the expense.
      */
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -66,9 +63,8 @@ public class Expense implements Saveable {
      * @return a string representation of the expense.
      */
     public String getStringRepresentation() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
         return FileKeyword.EXPENSE + String.format("%s: $%.2f (%s) [%s]",
-                description, amount, date.format(formatter), category.toUpperCase());
+                description, amount, date, category.toUpperCase());
     }
 
     public static Expense getExpenseFromFile(String fileString) throws Exception {
