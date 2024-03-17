@@ -2,6 +2,7 @@ package supertracker;
 
 import supertracker.command.Command;
 import supertracker.command.InvalidCommand;
+import supertracker.command.QuitCommand;
 import supertracker.parser.Parser;
 import supertracker.ui.Ui;
 
@@ -38,6 +39,8 @@ public class SuperTracker {
             }
             Ui.printLine();
         } while (!command.isQuit());
+        
+        assert command instanceof QuitCommand;
         in.close();
     }
 }

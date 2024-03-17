@@ -116,6 +116,7 @@ public class Parser {
     private static Matcher getPatternMatcher(String regex, String input, String[] paramFlags) {
         Pattern p = Pattern.compile(regex);
         String commandPattern = makeStringPattern(input, paramFlags);
+        assert commandPattern.length() >= paramFlags.length;
         return p.matcher(commandPattern);
     }
 
