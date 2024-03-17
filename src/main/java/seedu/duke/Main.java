@@ -81,17 +81,21 @@ public class Main {
 
 package seedu.duke;
 
+import Storage.Storage;
 import Time.DateUtils;
 import Time.WeekView;
 import data.TaskManager;
 import data.TaskManagerException;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static Storage.Storage.createNewFile;
+import static Storage.Storage.loadTasksFromFile;
 import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
 

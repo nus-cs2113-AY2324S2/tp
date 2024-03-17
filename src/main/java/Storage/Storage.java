@@ -1,16 +1,20 @@
 package Storage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Storage {
 
-    protected static final Path FILE_PATH = Path.of("./save/tasks.txt");
+    private static final Path FILE_PATH = Path.of("./save/tasks.txt");
 
     /**
      * Creates directory and tasks.txt if it does not exist
@@ -39,6 +43,22 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
         }
+    }
+
+    public static Map<LocalDate, List<String>> loadTasksFromFile() {
+        Map<LocalDate, List<String>> tasks = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH.toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                LocalDate date = LocalDate.parse(parts[0]);
+                String task = parts[1];
+                tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
+            }
+        } catch (IOException e) {
+            System.out.println("I/O exception occurred during file handling");
+        }
+        return tasks;
     }
 
 }
