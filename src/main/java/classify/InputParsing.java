@@ -3,8 +3,10 @@ package classify;
 import classify.student.Student;
 import classify.student.StudentAttributes;
 import classify.student.StudentList;
+import classify.student.SubjectGrade;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputParsing {
@@ -15,6 +17,7 @@ public class InputParsing {
     private static final String DELETE = "delete";
     private static final String WRONG_INPUT_MESSAGE = "Wrong Input! Please try again!";
     //@@author tayponghee
+    private static final String ENTER_STUDENT_DETAILS = "Enter student details: ";
     private static final String ENTER_STUDENT_NAME = "Enter student name: ";
     private static final String STUDENT_DETAILS = "Student details:";
     private static final String NAME = "Name: ";
@@ -26,7 +29,7 @@ public class InputParsing {
     private static final String HELP = "help";
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
-        switch (userCommand) {
+        switch (userCommand.toLowerCase()) {
         case ADD:
             in.nextLine();
             addStudent(masterStudentList, in);
@@ -96,6 +99,12 @@ public class InputParsing {
     }
 
     //@@author tayponghee
+    /**
+     * Displays the details of a specific student.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     */
     private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in) {
         System.out.print(ENTER_STUDENT_NAME);
         String studentName = in.nextLine();
@@ -103,26 +112,52 @@ public class InputParsing {
         if (foundStudent != null) {
             System.out.println(STUDENT_DETAILS);
             System.out.println(NAME + foundStudent.getName());
-            System.out.println(GRADE + foundStudent.getAttributes().getGrade());
-            System.out.println(CLASSES_ATTENDED + foundStudent.getAttributes().getClassesAttended());
+            StudentAttributes attributes = foundStudent.getAttributes();
+            if (attributes != null) {
+                List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
+                if (!subjectGrades.isEmpty()) {
+                    for (SubjectGrade subjectGrade : subjectGrades) {
+                        System.out.println("Subject: " + subjectGrade.getSubject());
+                        System.out.println("Grade: " + subjectGrade.getGrade());
+                        System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
+                        System.out.println();
+                    }
+                } else {
+                    System.out.println("No subjects and grades found for this student.");
+                }
+            } else {
+                System.out.println("No attributes found for this student.");
+            }
         } else {
             System.out.println(STUDENT_NOT_FOUND);
         }
     }
 
+    /**
+     * Adds a new student to the list of students.
+     * Does not allow for students of the same name to be added.
+     * Checks if attributes added are in the correct format.
+     * Allows for multiple subjects to be added, along with their grades and classes
+     * attended.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     */
     private static void addStudent(ArrayList<Student> masterStudentList, Scanner in) {
-        System.out.println(ENTER_STUDENT_NAME);
-
+        System.out.println(ENTER_STUDENT_DETAILS);
         System.out.print(NAME);
         String name = in.nextLine().trim();
 
-        System.out.print(GRADE);
-        double grade = parseDoubleInput(in.nextLine());
+        if (findStudentByName(masterStudentList, name) != null) {
+            System.out.println("Student with the same name already exists. Please enter a different name.");
+            Ui.printDivider();
+            return;
+        }
 
-        System.out.print(CLASSES_ATTENDED);
-        int classesAttended = parseIntegerInput(in.nextLine());
+        StudentAttributes attributes = new StudentAttributes(name);
 
-        StudentAttributes attributes = new StudentAttributes(name, grade, classesAttended);
+        attributeInput(in, attributes);
+
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
 
@@ -130,24 +165,88 @@ public class InputParsing {
         Ui.printDivider();
     }
 
-    private static double parseDoubleInput(String input) {
-        try {
-            return Double.parseDouble(input);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input for grade. Please enter a valid number.");
-            return 0;
+    private static void attributeInput(Scanner in, StudentAttributes attributes) {
+        while (true) {
+            System.out.print("Subject: ");
+            String subject = in.nextLine().trim();
+            double grade = checkForGradeFormat(in);
+            int classesAttended = checkForClassesAttendedFormat(in);
+
+            SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
+
+            attributes.addSubjectGrade(subjectGrade);
+
+            System.out.println("Do you want to add another subject and grade? (yes/no)");
+            String response = in.nextLine().trim().toLowerCase();
+            if (!response.equals("yes")) {
+                break;
+            }
         }
     }
 
-    private static int parseIntegerInput(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input for classes attended. Please enter a valid number.");
-            return 0;
+    /**
+     * Checks the format of the input for the number of classes attended.
+     * Prompts the user to enter a valid integer until one is provided.
+     *
+     * @param in The scanner object to read user input.
+     * @return The valid number of classes attended.
+     */
+    private static int checkForClassesAttendedFormat(Scanner in) {
+        int classesAttended;
+        while (true) {
+            System.out.print(CLASSES_ATTENDED);
+            String classesAttendedInput = in.nextLine();
+            try {
+                classesAttended = Integer.parseInt(classesAttendedInput);
+                if (classesAttended < 0) {
+                    System.out.println("Classes attended must be 0 or more.");
+                    Ui.printDivider();
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
+                Ui.printDivider();
+            }
         }
+        return classesAttended;
     }
 
+    /**
+     * Checks the format of the input for the grade.
+     * Prompts the user to enter a valid double within the range [0, 100] until one is provided.
+     *
+     * @param in The scanner object to read user input.
+     * @return The valid grade.
+     */
+    private static double checkForGradeFormat(Scanner in) {
+        double grade;
+        while (true) {
+            System.out.print(GRADE);
+            String gradeInput = in.nextLine();
+            try {
+                grade = Double.parseDouble(gradeInput);
+                if (grade < 0 || grade > 100) {
+                    System.out.println("Grade must be between 0 and 100. Please enter a valid number.");
+                    Ui.printDivider();
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input for grade. Please enter a valid number.");
+                Ui.printDivider();
+            }
+        }
+        return grade;
+    }
+
+    /**
+     * Finds a student in the list by their name.
+     *
+     * @param masterStudentList The list of all students.
+     * @param name              The name of the student to search for.
+     * @return The student object if found, null otherwise.
+     */
     private static Student findStudentByName(ArrayList<Student> masterStudentList, String name) {
         for (Student student : masterStudentList) {
             if (student.getName().equalsIgnoreCase(name)) {

@@ -25,7 +25,7 @@ public class Student {
         this.details = details;
     }
 
-    //@@ tayponghee
+    //@@author tayponghee
     public Student(String name, StudentAttributes attributes) {
         this.name = name;
         this.attributes = attributes;
@@ -37,6 +37,9 @@ public class Student {
 
     public void setAttributes(StudentAttributes attributes) {
         this.attributes = attributes;
+    }
+    public StudentAttributes getAttributesList() {
+        return attributes;
     }
 
     //@@ Cryolian
