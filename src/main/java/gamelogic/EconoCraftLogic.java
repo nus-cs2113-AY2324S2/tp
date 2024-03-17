@@ -42,8 +42,16 @@ public class EconoCraftLogic {
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
 
+<<<<<<< HEAD
         seedu.duke.tictactoe.TicTacToe game = new seedu.duke.tictactoe.TicTacToe('X');
         game.gameStart();
+=======
+
+        seedu.duke.tictactoe.TicTacToe game = new seedu.duke.tictactoe.TicTacToe('X');
+        game.gameStart();
+
+     
+>>>>>>> 9d19ac2734dcdf993a693e56d086a8ba88a054e4
         return new EconoCraftLogic(playerProfile);
     }
 
