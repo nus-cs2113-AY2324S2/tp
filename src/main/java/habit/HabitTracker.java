@@ -34,10 +34,29 @@ public class HabitTracker {
         printMessageWithoutSepNewLine(listHabitsMessage);
     }
 
-
-
+    public static boolean isValidHabitID(int taskNumber) {
+        return taskNumber > 0 && taskNumber <= habitList.size();
+    }
 
     public void updateHabitCount(String habitIDString, String updatedCount) throws HabitException {
+        int habitID;
+        try {
+            habitID = Integer.parseInt(habitIDString);
+            if (!isValidHabitID(habitID)) {
+                throw new HabitException("Please provide a valid habit ID.");
+            }
+        } catch (NumberFormatException e) {
+            throw new HabitException("Please provide a valid habit ID.");
+        }
 
+        Habit habit = habitList.get(habitID - 1);
+        int changeInCount = habit.updateCount(updatedCount);
+        String updateHabitCountMessage = "";
+        if (changeInCount > 0) {
+            updateHabitCountMessage += "Good Job! You have completed your habit!\n";
+        }
+        updateHabitCountMessage += "The count for your habit has been updated:\n";
+        updateHabitCountMessage += "  " + habitID + ". " + habit;
+        Ui.printMessageWithSepNewLine(updateHabitCountMessage);
     }
 }
