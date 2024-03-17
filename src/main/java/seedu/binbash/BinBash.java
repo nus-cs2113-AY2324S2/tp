@@ -29,7 +29,6 @@ public class BinBash {
             userInterface.talk(executionResult);
         }
 
-        assert !userInterface.isUserActive();
         userInterface.farewell();
     }
 }
