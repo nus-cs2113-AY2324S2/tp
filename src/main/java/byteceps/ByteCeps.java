@@ -14,7 +14,7 @@ public class ByteCeps {
 
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
-        workoutManager = new WorkoutManager();
+        workoutManager = new WorkoutManager(exerciseManager);
         ui = new UserInterface();
         parser = new Parser();
     }

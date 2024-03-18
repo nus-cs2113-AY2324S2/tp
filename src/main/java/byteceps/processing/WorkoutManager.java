@@ -1,49 +1,121 @@
 package byteceps.processing;
 
-
+import byteceps.activities.Exercise;
 import byteceps.activities.Workout;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
+import byteceps.ui.UserInterface;
+
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class WorkoutManager extends ActivityManager {
+    private final ExerciseManager exerciseManager;
+
+    public WorkoutManager(ExerciseManager exerciseManager) {
+        this.exerciseManager = exerciseManager;
+    }
+
+    //@@author V4vern
     @Override
-    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity, Exceptions.ActivityExistsException {
+    public void execute(Parser parser) throws Exceptions.ErrorAddingActivity,
+            Exceptions.ActivityExistsException,
+            Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
         switch (parser.getAction()) {
         case "create":
             Workout newWorkout = processCreateWorkout(parser);
             add(newWorkout);
-            //   System.out.printf("Added exercise: %s\n", newExercise.getActivityName());
+            UserInterface.printMessage(String.format(
+                    "Added Workout Plan: %s\n", newWorkout.getActivityName()
+            ));
             break;
         case "assign":
-            // similar to exercise's edit I think?
-            // find the exercises available in the exercise manager (might need to pass in)
-            // add to the workoutList in the workout class
+            String workoutPlan = assignExerciseToWorkout(parser);
+            UserInterface.printMessage(String.format(
+                    "Assigned Exercise '%s' to Workout Plan '%s'\n", parser.getActionParameter(), workoutPlan
+            ));
             break;
         case "unassign":
+            String workoutName = unassignedExerciseFromWorkout(parser);
+            UserInterface.printMessage(String.format(
+                    "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
+            ));
             break;
         case "samples":
+            //list();
+            break;
+        case "info":
+            list(parser.getActionParameter());
             break;
         case "list":
-            if(parser.getActionParameter() == null) {
-                list();
-            } else {
-                list(parser.getActionParameter());
-            }
+            list();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
     }
 
-    public Workout processCreateWorkout(Parser parser) {
-        // check if parser is valid if not throw errors
+    //@@author V4vern
+    public Workout processCreateWorkout(Parser parser) throws Exceptions.InvalidInput {
+        String workoutName = parser.getActionParameter();
+        if (workoutName.isEmpty()) {
+            throw new Exceptions.InvalidInput("Workout name cannot be empty");
+        }
         return new Workout(parser.getActionParameter());
     }
 
-    //todo: attempts to search for the workout name and lists that 1 workout
-    public void list(String workoutName) {
-        //add code here
+    //@@author V4vern
+    public String assignExerciseToWorkout(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
+        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
+        if (!additionalArguments.containsKey("to")) {
+            throw new Exceptions.InvalidInput("assign command not complete");
+        }
+        String exerciseName = parser.getActionParameter();
+        String workoutPlanName = additionalArguments.get("to");
+
+        Exercise exercise = (Exercise) exerciseManager.retrieve(exerciseName);
+        Workout workoutPlan = (Workout) retrieve(workoutPlanName);
+
+        workoutPlan.addExercise(exercise);
+
+        return workoutPlanName;
     }
+
+    //@@author V4vern
+    public void list(String workoutPlanName) throws Exceptions.ActivityDoesNotExists {
+        Workout workout = (Workout) retrieve(workoutPlanName);
+        StringBuilder message = new StringBuilder();
+        ArrayList<Exercise> workoutList = workout.getWorkoutList();
+
+        message.append(String.format("Listing exercises in workout plan '%s':%n", workoutPlanName));
+
+        int index = 1;
+        for (Exercise exercise : workoutList) {
+            message.append(String.format("\t\t\t%d. %s%n", index++, exercise.getActivityName()));
+        }
+        UserInterface.printMessage(message.toString());
+    }
+
+    //@@author V4vern
+    public String unassignedExerciseFromWorkout(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
+        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
+        if (!additionalArguments.containsKey("from")) {
+            throw new Exceptions.InvalidInput("unassign command not complete");
+        }
+        String exerciseName = parser.getActionParameter();
+        String workoutPlanName = additionalArguments.get("from");
+
+        Workout workoutPlan = (Workout) retrieve(workoutPlanName);
+        ArrayList<Exercise> workoutList = workoutPlan.getWorkoutList();
+
+        workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
+
+        return workoutPlanName;
+    }
+
     @Override
     public String getActivityType(boolean plural) {
         return plural ? "Workouts" : "Workout";

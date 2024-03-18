@@ -48,6 +48,7 @@ public class ExerciseManager extends ActivityManager {
         }
     }
 
+    //@@author V4vern
     public Exercise processAddExercise(Parser parser) throws Exceptions.InvalidInput {
         String exerciseName = parser.getActionParameter();
         if (exerciseName.isEmpty()) {
@@ -56,6 +57,7 @@ public class ExerciseManager extends ActivityManager {
         return new Exercise(exerciseName);
     }
 
+    //@@author V4vern
     public Exercise retrieveExercise(Parser parser) throws Exceptions.ActivityDoesNotExists {
         String exerciseName = parser.getActionParameter();
         return (Exercise) retrieve(exerciseName);
