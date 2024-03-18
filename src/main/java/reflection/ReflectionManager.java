@@ -25,7 +25,7 @@ public class ReflectionManager {
     public void printFiveRandomQuestions() {
         try {
             fiveRandomQuestions = questionBank.getFiveRandomQuestions();
-            Ui.printList(fiveRandomQuestions);
+            Ui.printList(fiveRandomQuestions, "Generated Questions:");
         } catch (ReflectException e) {
             Ui.printMessageWithSepNewLine(e.getMessage());
         }
@@ -46,6 +46,14 @@ public class ReflectionManager {
         } catch (NullPointerException e) {
             throw new ReflectException("No questions generated yet. Generate questions using 'reflect get' " +
                     "command first.");
+        }
+    }
+
+    public void printFavourites() {
+        if(favoriteReflectionsList.getFavouritesList().isEmpty()) {
+            Ui.printMessageWithSepNewLine("No reflection questions saved to favourites");
+        } else {
+            Ui.printList(favoriteReflectionsList.getFavouritesList(), "Favourites list:");
         }
     }
 

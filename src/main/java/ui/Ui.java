@@ -49,8 +49,10 @@ public class Ui {
         System.out.println(SEP + "\n" + message + SEP);
     }
 
-    public static void printList(ArrayList list) {
+
+    public static void printList(ArrayList list, String message) {
         System.out.println(SEP);
+        System.out.println(message);
         for (int i = 0; i < list.size(); i ++) {
             System.out.println((i + 1) + ". " + list.get(i).toString());
         }
