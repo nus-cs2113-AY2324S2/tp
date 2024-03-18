@@ -19,6 +19,7 @@ public class ActiveEdge {
 
         Parser parser = new Parser();
 
+        Storage.fetchData();
         String input = in.nextLine();
 
         while (!input.equalsIgnoreCase("bye")) {
