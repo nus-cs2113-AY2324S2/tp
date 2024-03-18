@@ -1,7 +1,8 @@
 package seedu.duke;
 public class User {
-    private final String name;
     public Timetable timetable = new Timetable();
+    private final String name;
+
     public User(String name) {
         this.name = name;
     }
