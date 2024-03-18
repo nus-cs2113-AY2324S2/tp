@@ -56,7 +56,7 @@ class RecipeIOTest {
         RecipeList testRecipeList = new RecipeList();
         testRecipeList.addRecipe(testRecipe);
         testRecipeList.findAllergy("eggs");
-        String expectedOutput = "List of recipes with eggs mentioned:\nUseSpaghetti Carbonara\n";
+        String expectedOutput = "List of recipes with eggs mentioned:\nSpaghetti Carbonara\n";
         assertEquals(testRecipeList.findAllergy("eggs"), expectedOutput);
     }
 }
