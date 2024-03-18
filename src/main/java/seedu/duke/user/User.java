@@ -124,6 +124,28 @@ public class User {
         }
     }
 
+    public static void handleEditMealServingSize(String command) {
+        int slashIndex = command.indexOf("/");
+        int mealIndex = Integer.parseInt(command.substring(20, slashIndex - 3));
+        String mealName = mealList.get(mealIndex).getName();
+        int servingSize = Integer.parseInt(command.substring(slashIndex));
+
+        Meal updatedMeal = new Meal(mealName, servingSize);
+        mealList.set(mealIndex, updatedMeal);
+        System.out.println(mealName + "has been edited to " + servingSize + " serving(s)");
+    }
+
+    public static void handleEditDrinkServingSize(String command) {
+        int slashIndex = command.indexOf("/");
+        int drinkIndex = Integer.parseInt(command.substring(21, slashIndex - 3));
+        String drinkName = mealList.get(drinkIndex).getName();
+        int servingSize = Integer.parseInt(command.substring(slashIndex));
+
+        Meal updatedDrink = new Drink(drinkName, servingSize);
+        mealList.set(drinkIndex, updatedDrink);
+        System.out.println(drinkName + "has been edited to " + servingSize " ml");
+    }
+
     public static void handleDeleteMeal(String command) {
         int mealIndex = Integer.parseInt(command.substring(11));
         String mealName = mealList.get(mealIndex).getName();
