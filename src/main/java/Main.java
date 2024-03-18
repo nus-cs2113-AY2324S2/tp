@@ -20,6 +20,8 @@ public class Main {
         HabitTracker habitTracker = new HabitTracker();
         FocusTimer focusTimer = new FocusTimer();
 
+        Ui.greetUser();
+
         while (!isExit) {
 
             Ui.promptUserInput();
@@ -37,5 +39,7 @@ public class Main {
                 Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
+
+        Ui.sayGoodbye();
     }
 }

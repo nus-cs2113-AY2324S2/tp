@@ -7,7 +7,19 @@ import commands.reflectcommands.SaveToFavouritesCommand;
 import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
+/**
+ * A parser for handling reflection-related commands.
+ */
 public class ReflectionCommandParser {
+
+    /**
+     * Determines the appropriate reflection command based on user input.
+     *
+     * @param reflectionManager The ReflectionManager instance to be used for executing commands.
+     * @param commandArgs       The string containing the user command and its arguments.
+     * @return The Command object corresponding to the user's reflection command.
+     * @throws ReflectException if an error occurs during command parsing or execution.
+     */
     public static Command determineReflectionCommand(ReflectionManager reflectionManager, String commandArgs)
             throws ReflectException {
 

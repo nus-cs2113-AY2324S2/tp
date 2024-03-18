@@ -5,6 +5,9 @@ import exceptions.ReflectException;
 import java.util.Collections;
 import java.util.ArrayList;
 
+/**
+ * Represents a bank of reflection questions.
+ */
 public class ReflectionQuestionBank {
     private ArrayList<ReflectionQuestion> reflectionQuestionList;
     private String[] questions = {
@@ -59,11 +62,17 @@ public class ReflectionQuestionBank {
         "How do you celebrate your unique talents and creative voice?"
     };
 
+    /**
+     * Constructs a ReflectionQuestionBank and initializes the list of reflection questions.
+     */
     public ReflectionQuestionBank() {
         this.reflectionQuestionList = new ArrayList<>();
         setUpReflectionBank();
     }
 
+    /**
+     * Initializes the reflection question bank with predefined questions.
+     */
     private void setUpReflectionBank() {
         for(String question : questions) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(question);
@@ -71,12 +80,23 @@ public class ReflectionQuestionBank {
         }
     }
 
+    /**
+     * Adds a reflection question to the bank.
+     *
+     * @param question The reflection question to add.
+     */
     public void addReflectionQuestion(ReflectionQuestion question) {
         if (!question.toString().isBlank()) {
             reflectionQuestionList.add(question);
         }
     }
 
+    /**
+     * Retrieves five random reflection questions from the bank.
+     *
+     * @return An ArrayList containing five random reflection questions.
+     * @throws ReflectException if the bank is empty.
+     */
     public ArrayList<ReflectionQuestion> getFiveRandomQuestions() throws ReflectException {
         try {
             ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
@@ -100,10 +120,20 @@ public class ReflectionQuestionBank {
 
     }
 
+    /**
+     * Retrieves the size of the reflection question bank.
+     *
+     * @return The size of the reflection question bank.
+     */
     public int getTaskListSize() {
         return reflectionQuestionList.size();
     }
 
+    /**
+     * Retrieves the list of reflection questions.
+     *
+     * @return The list of reflection questions.
+     */
     public ArrayList<ReflectionQuestion> getQuestionsList() {
         return reflectionQuestionList;
     }

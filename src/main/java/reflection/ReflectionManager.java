@@ -6,11 +6,19 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Manages reflection-related operations.
+ */
 public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
     private String favouriteQuestionsFilePath = "data/favourites.txt";
+    private static final String BOT_NAME = "Wellness360";
+
+    /**
+     * Constructs a ReflectionManager and initializes question bank and favorite reflections list.
+     */
     public ReflectionManager() {
         this.questionBank = new ReflectionQuestionBank();
 
@@ -22,6 +30,9 @@ public class ReflectionManager {
         }
     }
 
+    /**
+     * Prints five random reflection questions.
+     */
     public void printFiveRandomQuestions() {
         try {
             fiveRandomQuestions = questionBank.getFiveRandomQuestions();
@@ -31,6 +42,12 @@ public class ReflectionManager {
         }
     }
 
+    /**
+     * Saves a reflection question to favorites.
+     *
+     * @param reflectionId The ID of the reflection question to save.
+     * @throws ReflectException if an error occurs during saving.
+     */
     public void saveReflectionQuestion(int reflectionId) throws ReflectException {
         try {
             ReflectionQuestion questionToSave = fiveRandomQuestions.get(reflectionId - 1);
@@ -49,6 +66,9 @@ public class ReflectionManager {
         }
     }
 
+    /**
+     * Prints the list of favorite reflection questions.
+     */
     public void printFavourites() {
         if(favoriteReflectionsList.getFavouritesList().isEmpty()) {
             Ui.printMessageWithSepNewLine("No reflection questions saved to favourites");
@@ -57,6 +77,11 @@ public class ReflectionManager {
         }
     }
 
+    /**
+     * Retrieves the question bank.
+     *
+     * @return The ReflectionQuestionBank instance.
+     */
     public ReflectionQuestionBank getQuestionBank() {
         return questionBank;
     }

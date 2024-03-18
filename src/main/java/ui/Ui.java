@@ -11,14 +11,18 @@ public class Ui {
     private static final String BOT_NAME = "Wellness360";
     private static final String SEP = "_______________________________________________________" +
             "_________________________________________________________";
+    private static final String LOGO =
+            "__        __   _ _                     _____  __    ___  \n" +
+            "\\ \\      / /__| | |_ __   ___  ___ ___|___ / / /_  / _ \\ \n" +
+            " \\ \\ /\\ / / _ \\ | | '_ \\ / _ \\/ __/ __| |_ \\| '_ \\| | | |\n" +
+            "  \\ V  V /  __/ | | | | |  __/\\__ \\__ \\___) | (_) | |_| |\n" +
+            "   \\_/\\_/ \\___|_|_|_| |_|\\___||___/___/____/ \\___/ \\___/\n";
 
     /**
      * Greets the user upon starting the application.
-     * Displays a welcome message including the chatbot's name.
      */
     public static void greetUser() {
-        System.out.println(SEP + "\nHello! I'm " + BOT_NAME);
-        System.out.println("What can I do for you?\n" + SEP);
+        System.out.println("Welcome to Wellness360!\n" + SEP);
     }
 
     /**
@@ -33,7 +37,7 @@ public class Ui {
      * Displays a farewell message.
      */
     public static void sayGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!\n" + SEP);
+        Ui.printMessageWithSepNewLine("Goodbye! See you again!");
     }
 
     /**
