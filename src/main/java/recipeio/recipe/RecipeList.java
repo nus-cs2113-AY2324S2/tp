@@ -1,5 +1,7 @@
 package recipeio.recipe;
 
+import ui.UI;
+
 import java.util.ArrayList;
 
 
@@ -38,7 +40,13 @@ public class RecipeList {
      * @param recipe The new recipe to be added.
      */
     public void addRecipe(Recipe recipe) {
-        recipes.add(recipe);
+        //this try-catch block can be helpful when there's not enough memory for a new recipe in the list
+        try {
+            //TaskList<T> add method only throw IndexOutOfBound exception for the overload add(int, T).
+            recipes.add(recipe);
+        } catch (Exception e) {
+            UI.printMessage(e.toString());
+        }
     }
 
     /**
@@ -80,6 +88,29 @@ public class RecipeList {
             }
             System.out.println(output);
         }
+    }
+
+    /**
+     * Returns a list of recipes with the allergy included
+     *
+     * @param allergy The allergy that the user is trying to filter by
+     */
+    public String findAllergy(String allergy) {
+        int count = 0;
+        String output = "";
+        for (Recipe item: recipes) {
+            for (String value : item.allergies) {
+                if (value.contains(allergy)) {
+                    output = "List of recipes with " + allergy + " mentioned:\n" + item.name + "\n";
+                    count++;
+                }
+            }
+        }
+        //if no allergies are found
+        if (count == 0) {
+            output = "There are no recipes with " + allergy;
+        }
+        return output;
     }
 
     /**
