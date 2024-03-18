@@ -2,13 +2,14 @@ package seedu.budgetbuddy.command;
 
 import seedu.budgetbuddy.ExpenseList;
 
+
 public class AddExpenseCommand extends Command{
     private ExpenseList expenses;
     private final String category;
     private final String amount;
     private final String description;
 
-    public AddExpenseCommand(ExpenseList expenses,String category, String amount, String description) {
+    public AddExpenseCommand (ExpenseList expenses,String category, String amount, String description) {
         this.expenses = expenses;
         this.category = category;
         this.amount = amount;

@@ -40,6 +40,6 @@ public class ExpenseListTest {
     public void addSaving_addingSaving_success() {
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1000");
-        assertEquals(1, savingList.getSaving().size());
+        assertEquals(1, savingList.getSavings().size());
     }
 }

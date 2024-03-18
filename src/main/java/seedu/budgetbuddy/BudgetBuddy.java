@@ -4,6 +4,8 @@ import seedu.budgetbuddy.command.Command;
 
 import java.util.Scanner;
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 public class BudgetBuddy {
 
     private Ui ui;
@@ -18,17 +20,18 @@ public class BudgetBuddy {
         savings = new SavingList();
     }
 
-    public void handleCommands(String input) {
+    public void handleCommands(String input) throws BudgetBuddyException {
         Command command = parser.parseCommand(expenses, savings, input);
 
         if (command != null) {
             command.execute();
-        } else {
-            System.out.println("Invalid Command");
+        }
+        else {
+            throw new BudgetBuddyException("Invalid command");
         }
     }
 
-    public void run() {
+    public void run() throws BudgetBuddyException {
         Scanner scanner = new Scanner(System.in);
 
         ui.showWelcome();
@@ -37,9 +40,10 @@ public class BudgetBuddy {
         while (!isExit) {
             String input = scanner.nextLine();
 
-            if (parser.isExitCommand(input)) {
+            if (input.equals("bye")) {
                 isExit = true;
-            } else {
+            }
+            else {
                 handleCommands(input);
             }
 
@@ -49,7 +53,7 @@ public class BudgetBuddy {
         scanner.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BudgetBuddyException {
         new BudgetBuddy().run();
     }
 }
