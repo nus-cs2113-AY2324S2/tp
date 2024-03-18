@@ -33,5 +33,14 @@ public class Quantity {
     public String toString() {
         return ("Quantity: " + quantity);
     }
+
+    /**
+     * Converts the Quantity to the specific format for saving to the data file.
+     *
+     * @return A formatted string containing the Quantity for saving.
+     */
+    public String toSave() {
+        return this.quantity.toString();
+    }
 }
 
