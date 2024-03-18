@@ -1,6 +1,5 @@
 package longah.node;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import longah.util.MemberList;
