@@ -14,11 +14,12 @@ public class FAP {
      */
     public static ModuleList takenModuleList = new ModuleList(10);
     public static ModuleList toBeTakenModuleList = new ModuleList(10);
+
     public static void main(String[] args) {
         printGreeting();
-        while(true) {
+        Scanner in = new Scanner(System.in);
+        while (true) {
             try {
-                Scanner in = new Scanner(System.in);
                 String userInput = in.nextLine();
                 String cleanUserInput = userInput.trim();
                 Command command = Parser.getCommand(cleanUserInput);
