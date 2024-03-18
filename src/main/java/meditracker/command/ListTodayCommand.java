@@ -1,10 +1,10 @@
 package meditracker.command;
 
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
 public class ListTodayCommand extends Command {
     @Override
-    public void execute(MedicationList medicationList, Ui ui) {
+    public void execute(MedicationManager medicationManager, Ui ui) {
     }
 }

@@ -13,4 +13,6 @@ Let's begin tracking!
 ____________________________________________________________
 Medicine has been successfully added!
 ____________________________________________________________
+Medicine has been successfully modified!
+____________________________________________________________
 Thank you for using MediTracker. Hope to see you again!

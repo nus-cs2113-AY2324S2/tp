@@ -4,8 +4,15 @@
 
 
 ## Summary of Contributions
+### Code related Contributions
+- Issue #41: Create a common logging class for the whole program
+
+### Developer Guide Contributions
+
+### User Guide Contributions
+
 ### PR Reviews
-#2, #5
+#2, #5, #40
 
 ### Team-based tasks
 - Added PR Template.

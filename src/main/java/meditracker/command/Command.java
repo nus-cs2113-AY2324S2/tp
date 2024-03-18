@@ -1,18 +1,18 @@
 package meditracker.command;
 
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
 public abstract class Command {
-    private MedicationList medicationList;
+    private MedicationManager medicationManager;
 
     /**
      * Executes the command.
      *
-     * @param medicationList ArrayList of medicines.
+     * @param medicationManager ArrayList of medicines.
      * @param ui Ui object.
      */
-    public abstract void execute(MedicationList medicationList, Ui ui);
+    public abstract void execute(MedicationManager medicationManager, Ui ui);
 
     /**
      * Returns the boolean to exit the program.
