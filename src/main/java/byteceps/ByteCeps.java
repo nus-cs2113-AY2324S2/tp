@@ -3,18 +3,21 @@ package byteceps;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.processing.ExerciseManager;
+import byteceps.processing.WeeklyProgramManager;
 import byteceps.processing.WorkoutManager;
 import byteceps.ui.UserInterface;
 
 public class ByteCeps {
     private static ExerciseManager exerciseManager = null;
     private static WorkoutManager workoutManager = null;
+    private static WeeklyProgramManager weeklyProgramManager = null;
     private static Parser parser;
     private static UserInterface ui;
 
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
         workoutManager = new WorkoutManager(exerciseManager);
+        weeklyProgramManager = new WeeklyProgramManager(workoutManager);
         ui = new UserInterface();
         parser = new Parser();
     }
@@ -35,6 +38,9 @@ public class ByteCeps {
                     continue;
                 case "workout":
                     workoutManager.execute(parser);
+                    continue;
+                case "week":
+                    weeklyProgramManager.execute(parser);
                     continue;
                 case "bye":
                 case "exit":
