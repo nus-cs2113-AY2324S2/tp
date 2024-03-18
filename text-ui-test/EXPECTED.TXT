@@ -1,9 +1,38 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+______ _                       _____  __   __   _____
+| ___ \ |                     / __  \/  | /  | |____ |
+| |_/ / | __ _ _   _  ___ _ __`' / /'`| | `| |     / /
+|  __/| |/ _` | | | |/ _ \ '__| / /   | |  | |     \ \
+| |   | | (_| | |_| |  __/ |  ./ /____| |__| |_.___/ /
+\_|   |_|\__,_|\__, |\___|_|  \_____/\___/\___/\____/
+                __/ |
+               |___/
 What is your name?
-Hello James Gosling
+Hello CaiShenYe
+************************************************
+Input a command player! // TODO: show possible commands
+-1 HP coz invalid commandTODO: show possible commands
+Input a command player! // TODO: show possible commands
+The solution for question 1:
+solution1
+Input a command player! // TODO: show possible commands
+The solution for question 2:
+solution2
+Input a command player! // TODO: show possible commands
+The solutions are :
+Solution for question 1:
+solution1
+
+Solution for question 2:
+solution2
+
+
+Input a command player! // TODO: show possible commands
+The solution for question 1:
+explanation1
+Input a command player! // TODO: show possible commands
+The solution for question 2:
+explanation2
+Input a command player! // TODO: show possible commands
+bye bye, get more sleep zzz
+************************************************
