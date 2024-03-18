@@ -29,8 +29,8 @@ public class MediLogger {
      */
     public static void initialiseLogger() {
         if (mediLogger != null) {
-           mediLogger.warning("Logger " + MEDILOGGER_NAME + " has been initialised already");
-           return;
+            mediLogger.warning("Logger " + MEDILOGGER_NAME + " has been initialised already");
+            return;
         }
 
         mediLogger = Logger.getLogger(MEDILOGGER_NAME);
