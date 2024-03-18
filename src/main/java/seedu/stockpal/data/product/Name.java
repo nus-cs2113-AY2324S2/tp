@@ -9,6 +9,10 @@ public class Name implements CommandParameter {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public boolean isNull() {
         return this.name == null;
     }
@@ -16,5 +20,14 @@ public class Name implements CommandParameter {
     @Override
     public String toString() {
         return ("Name: " + name);
+    }
+
+    /**
+     * Converts the Name to the specific format for saving to the data file.
+     *
+     * @return A formatted string containing the Name for saving.
+     */
+    public String toSave() {
+        return this.name;
     }
 }

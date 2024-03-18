@@ -9,6 +9,8 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.ui.Ui;
+import seedu.stockpal.exceptions.StockPalException;
+import seedu.stockpal.storage.Storage;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -16,7 +18,7 @@ import java.util.logging.Logger;
 
 //@@author Kobot7
 public class EditCommand extends ListActionCommand {
-    private static Logger logger = Logger.getLogger("Foo");
+    private static Logger logger = Logger.getLogger(Storage.class.getName());
     public static final String COMMAND_KEYWORD = "edit";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
             + ": Edits an existing product in the inventory at the specific PID\n"
@@ -27,15 +29,18 @@ public class EditCommand extends ListActionCommand {
     Quantity quantity;
     Description description;
     Price price;
+    private final Storage storage;
 
     public EditCommand(ProductList productList, Integer pid, String name,
-                       Integer quantity, Double price, String description) {
+                       Integer quantity, Double price, String description,
+                       Storage storage) {
         this.productList = productList;
         this.pid = new Pid(pid);
         this.name = new Name(name);
         this.quantity = new Quantity(quantity);
         this.price = new Price(price);
         this.description = new Description(description);
+        this.storage = storage;
     }
 
     /**
@@ -55,12 +60,11 @@ public class EditCommand extends ListActionCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws StockPalException {
         if (!atLeastOneValidParameter()) {
             Ui.printMissingParametersMessage();
             return;
         }
-
         int productIndex = this.productList.findProductIndex(this.pid);
         if (productIndex == -1) {
             Ui.printInvalidPidMessage();
@@ -68,7 +72,9 @@ public class EditCommand extends ListActionCommand {
         }
         assert productList.getSize() > 0;
         productList.updateProduct(productIndex, name, quantity, description, price);
+
         logger.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
         Ui.printEditSuccessMessage();
+        storage.save(productList);
     }
 }
