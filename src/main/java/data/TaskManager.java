@@ -55,6 +55,16 @@ public class TaskManager {
         System.out.println("Task added.");
     }
 
+    public void addTasksFromFile(Map<LocalDate, List<String>> tasksFromFile) {
+        for (Map.Entry<LocalDate, List<String>> entry : tasksFromFile.entrySet()) {
+            LocalDate date = entry.getKey();
+            List<String> taskList = entry.getValue();
+            for (String task : taskList) {
+                addTask(date, task);
+            }
+        }
+    }
+
     public static void deleteManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
             throws DateTimeParseException, TaskManagerException {
 
