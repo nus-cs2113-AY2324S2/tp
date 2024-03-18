@@ -1,8 +1,9 @@
 package meditracker;
 
 import meditracker.command.Command;
+import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
 import meditracker.ui.Ui;
 
@@ -13,14 +14,14 @@ import meditracker.ui.Ui;
 public class MediTracker {
 
     private Ui ui;
-    private MedicationList medicationList;
+    private MedicationManager medicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes the user interface.
      */
     public MediTracker() {
         ui = new Ui();
-        medicationList = new MedicationList();
+        medicationManager = new MedicationManager();
     }
 
     /**
@@ -28,8 +29,9 @@ public class MediTracker {
      * This method displays a welcome message, reads user commands, and processes them until the user exits the
      * application.
      * @throws MediTrackerException If an error occurs during the execution of the application.
+     * @throws ArgumentNotFoundException Argument required not found
      */
-    public void run() throws MediTrackerException {
+    public void run() throws MediTrackerException, ArgumentNotFoundException {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
@@ -39,7 +41,7 @@ public class MediTracker {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationList, ui);
+            command.execute(medicationManager, ui);
             isExit = command.isExit();
         }
     }
@@ -49,8 +51,9 @@ public class MediTracker {
      * It creates a new MediTracker object and calls its run() method.
      * @param args Command-line arguments.
      * @throws MediTrackerException If an error occurs during the execution of the application.
+     * @throws ArgumentNotFoundException Argument required not found
      */
-    public static void main(String[] args) throws MediTrackerException {
+    public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
         new MediTracker().run();
     }
 }
