@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Timetable {
     //todo
-    private ArrayList<Task>[] daysOfWeek;
+    protected ArrayList<Task>[] daysOfWeek;
     public Timetable() {
         daysOfWeek = new ArrayList[7];
         initializeTimetable();
@@ -17,12 +17,15 @@ public class Timetable {
     }
     protected String name;
     public void addUserTask(int dayOfWeek, Task task){
+        assert dayOfWeek >= 0 && dayOfWeek <= 6 : "Invalid day of a week, please try again!";
         if(dayOfWeek >= 0 && dayOfWeek < 7){
             daysOfWeek[dayOfWeek - 1].add(task);
         }
     }
 
     public void deleteUserTask(int dayOfWeek, int index){
+        assert dayOfWeek >= 0 && dayOfWeek <= 6 : "Invalid day of a week, please try again!";
+        assert index >= 0 && index < daysOfWeek[dayOfWeek - 1].size() : "Invalid task index, please try again!";
         if (dayOfWeek >= 0 && dayOfWeek < 7) {
 
             ArrayList<Task> tasks = daysOfWeek[dayOfWeek - 1];
