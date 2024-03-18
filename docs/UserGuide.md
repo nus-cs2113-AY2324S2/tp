@@ -20,6 +20,9 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Sleep Tracker
           - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
           - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
+        - Focus Timer
+          - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
+          - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -243,6 +246,45 @@ Total hrs slept: 15.0
 2. 30/01/12: 8.0
 ________________________________________________________________________________________________________________
 ```
+### Start a new focus timer: `focus start`
+Allow the user to start a new focus timer session. The user will be able
+to start the timer whenever they want and the application will keep track of the time. 
+In addition, only 1 timer will run at a time, thus multiple uses of `focus start` is not allowed.
+
+Format:
+~~~
+focus start
+~~~
+* The `focus` and `start` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Your session has started. Time to grind!
+________________________________________________________________________________________________________________
+~~~
+
+### Stop the current focus timer: `focus stop`
+Allow users to stop a timer that is currently running. The users will be able to see the total
+time elapsed upon a successful stop.
+
+Format:
+~~~
+focus stop
+~~~
+* The `focus` and `stop` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Depending on the total time spent, the output may differ.
+~~~
+________________________________________________________________________________________________________________
+Your focus session has ended.
+ Time spent: X hours, X minutes, XX seconds
+To start a new session, use ‘focustimer start’ 
+________________________________________________________________________________________________________________
+~~~
 
 ## FAQ
 
