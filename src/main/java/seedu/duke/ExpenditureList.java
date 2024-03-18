@@ -132,5 +132,9 @@ public class ExpenditureList {
         }
     }
 
+    public Expenditure getExpenditure(int index) {
+        return expenditureList.get(index);
+    }
+
 }
 

@@ -27,4 +27,8 @@ public class Expenditure {
     public String toString() {
         return description + " | Cost: $" + amount + " | date: " + date;
     }
+
+    public String toStringStorage() {
+        return description + " | " + amount + " | " + date;
+    }
 }
