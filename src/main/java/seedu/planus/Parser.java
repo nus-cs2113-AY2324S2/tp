@@ -9,22 +9,6 @@ import java.util.Scanner;
  */
 public class Parser {
 
-
-    /**
-     * Initializes the timetable based on user input.
-     * @return The initialized timetable.
-     */
-    public static Timetable initialiseTimetable() {
-        String[] majors = new String[] {"BME","CEG","ChBE","CVE","EE","ESP","ISE","ME","MSE"};
-        List<String> majorsList = Arrays.asList(majors);
-        String major = "";
-        while (!majorsList.contains(major)) {
-            Scanner in = new Scanner(System.in);
-            major = in.nextLine();
-        }
-        return Storage.loadTimetable(major);
-    }
-
     /**
      * Parses the user command and performs the corresponding action on the timetable.
      * @param line The user command to be parsed.
@@ -60,7 +44,7 @@ public class Parser {
                 timetable.removeCourse(words[1]);
                 return false;
             case "view":
-                if (words[1].isEmpty()) {
+                if (words.length == 1) {
                     timetable.getPlan();
                     return false;
                 } else {
