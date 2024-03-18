@@ -12,10 +12,6 @@ public class Task {
         this.from = from;
         this.to = to;
     }
-
-    public String getDay() {
-        return day;
-    }
     @Override
     public String toString() {
         return description + " (" + day + " from " + from + " to " + to + ")";

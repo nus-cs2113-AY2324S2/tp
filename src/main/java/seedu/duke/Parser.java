@@ -1,9 +1,9 @@
 package seedu.duke;
-import java.util.Scanner;
-import java.util.ArrayList;
+
+import seedu.duke.ui.UI;
+
 public class Parser {
     private static User user;
-    private static final int NAME_INDEX = 1;
     private static final int DAY_INDEX = 2;
     private static final int DESCRIPTION_INDEX = 3;
     private static final int FROM_INDEX = 4;
@@ -32,7 +32,7 @@ public class Parser {
         int dayOfWeek = parseDayOfWeek(day);
         if (dayOfWeek != -1) {
             user.timetable.addUserTask(dayOfWeek, task);
-            System.out.println("Task added successfully.");
+            UI.printAddTask(description);
         } else {
             System.out.println("Invalid day of the week.");
         }
@@ -59,8 +59,6 @@ public class Parser {
             return -1; // Invalid day
         }
     }
-
-    private static final int NAME_PART = 1;
 
     public void deleteTask(String command) {
         String[] parts = command.split("/"); // Splitting command into parts using space

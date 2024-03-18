@@ -1,15 +1,7 @@
 package seedu.duke;
-import seedu.duke.UserList;
-import seedu.duke.ui.UI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 class TimetableTest {
     @Test
@@ -20,8 +12,8 @@ class TimetableTest {
 
         timetable.addUserTask(dayOfWeek, task);
 
-        assertEquals(1, timetable.daysOfWeek[dayOfWeek - 1].size());
-        assertEquals(task, timetable.daysOfWeek[dayOfWeek - 1].get(0));
+        assertEquals(1, timetable.daysOfWeek.get(0).size());
+        assertEquals(task, timetable.daysOfWeek.get(0).get(0));
     }
     @Test
     public void testDeleteUserTask() {
@@ -38,8 +30,8 @@ class TimetableTest {
         timetable.deleteUserTask(dayOfWeek, 0);
 
         // Check if the task is deleted
-        assertEquals(1, timetable.daysOfWeek[dayOfWeek - 1].size());
-        assertEquals(task2, timetable.daysOfWeek[dayOfWeek - 1].get(0));
+        assertEquals(1, timetable.daysOfWeek.get(0).size());
+        assertEquals(task2, timetable.daysOfWeek.get(0).get(0));
 
     }
 }
