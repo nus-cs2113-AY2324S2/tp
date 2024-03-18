@@ -32,7 +32,7 @@ public class Parser {
         } else if (command.equals("viewProteins")) {
             User.handleViewProteins();
         } else if (command.equals("viewWater")) {
-            User.handleViewWater();
+            User.handleViewWaterIntake();
         } else if (command.equals("viewFiber")) {
             User.handleViewFiber();
         } else if (command.equals("listMeals")) {

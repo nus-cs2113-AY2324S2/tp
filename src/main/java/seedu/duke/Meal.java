@@ -30,12 +30,12 @@ public class Meal {
     // Method to set nutrient values based on meal name
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
-        calories = nutrients[0];
-        carbs = nutrients[1];
-        protein = nutrients[2];
-        fat = nutrients[3];
-        fiber = nutrients[4];
-        sugar = nutrients[5];
+        calories = nutrients[0] * servingSize;
+        carbs = nutrients[1] * servingSize;
+        protein = nutrients[2] * servingSize;
+        fat = nutrients[3] * servingSize;
+        fiber = nutrients[4] * servingSize;
+        sugar = nutrients[5] * servingSize;
     }
 
     // Getter methods
@@ -44,27 +44,27 @@ public class Meal {
     }
 
     public int getCalories() {
-        return calories * servingSize;
+        return calories;
     }
 
     public int getCarbs() {
-        return carbs * servingSize;
+        return carbs;
     }
 
     public int getProtein() {
-        return protein * servingSize;
+        return protein;
     }
 
     public int getFat() {
-        return fat * servingSize;
+        return fat;
     }
 
     public int getFiber() {
-        return fiber * servingSize;
+        return fiber;
     }
 
     public int getSugar() {
-        return sugar * servingSize;
+        return sugar;
     }
 
     // Method to print all meal info

@@ -69,7 +69,7 @@ public class User {
         System.out.println("Total Proteins: " + proteinCount);
     }
 
-    public static void viewTotalWaterIntake() {
+    public static void handleViewWaterIntake() {
         int waterIntake = 0;
         for (Water water: totalWaterIntake) {
             waterIntake += water.getWater();
@@ -113,7 +113,7 @@ public class User {
             System.out.println("  >> nothing so far :o");
         } else {
             printDrinkList(1);
-            viewTotalWaterIntake();
+            handleViewWaterIntake();
         }
     }
 
@@ -124,7 +124,7 @@ public class User {
         } else {
             printMealList(1);
             printDrinkList(mealList.size() + 1);
-            viewTotalWaterIntake();
+            handleViewWaterIntake();
         }
     }
 
