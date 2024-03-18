@@ -22,9 +22,10 @@ public class TransactionManager {
             return outflows.addTransaction(outflow);
         }
         System.out.println("Invalid transaction type.");
+        return false;
     }
 
-    public boolean removeTransaction(int index, boolean isInflow) {
+    public boolean removeTransaction(int index) {
         transactionList.removeTransactionIndex(index);
         Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
         String transactionType = transactionRemoved.getTransactionType();
