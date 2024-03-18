@@ -1,5 +1,4 @@
 package ActiveEdge.Parser;
-
 import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
 import ActiveEdge.Command.LogWaterCommand;
@@ -9,6 +8,7 @@ import ActiveEdge.Storage;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 import static ActiveEdge.FoodData.foodItems;
+import ActiveEdge.FoodData;
 
 public class Parser {
 
@@ -16,7 +16,17 @@ public class Parser {
         String inputTrimmed;
         if (input.contains("help")) {
             new HelpCommand();
-        } else if (input.startsWith("log")) {
+        }
+        else if (input.equalsIgnoreCase("list foods")) {
+            FoodData.printFood();
+        }
+//        else if (foodStorage.containsFood(input)) {
+//            int calories = foodStorage.getCalories(input);
+//            System.out.println(input + " contains " + calories + " calories.");
+//        } else {
+//            System.out.println("Sorry, I don't have information about " + input);
+//        }
+        else if (input.startsWith("log")) {
             String parts = input.substring(4);
             String[] items = parts.split("/");
             if (items[0].equals("w")) {
@@ -42,15 +52,11 @@ public class Parser {
             if (tasksList.size() > 0) {
                 if (input.substring(4).trim().contains("meals")) { //list meals
                     new ListMealsCommand();
-                } else { //list both
-
-                }
+            }
             } else {
                 System.out.println("There are no items in your list!");
             if (input.trim().length() > 4) { //list meals
                 new ListMealsCommand();
-            } else { //list both
-              
             }}
         } else if (input.startsWith("show")) { //show calories, water, and goals
             String[] parts = input.split(" ");
@@ -97,3 +103,4 @@ public class Parser {
         Storage.saveLogsToFile("data/data.txt");
     }
 }
+
