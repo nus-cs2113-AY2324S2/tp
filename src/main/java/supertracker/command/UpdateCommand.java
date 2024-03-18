@@ -26,7 +26,7 @@ public class UpdateCommand implements Command {
         }
         assert newQuantity >= 0;
         assert newPrice >= 0;
-        Item newItem = new Item(oldItem.getName(), newQuantity, newPrice);
+        Item newItem = new Item(name, newQuantity, newPrice);
         Inventory.put(name, newItem);
         Ui.updateCommandSuccess(newItem);
     }

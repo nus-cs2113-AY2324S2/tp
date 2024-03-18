@@ -29,11 +29,11 @@ public class Parser {
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
-            + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">[0-9]*) "
-            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">[0-9]*(?:\\.[0-9]*)?) ";
+            + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
+            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) ";
     private static final String UPDATE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
-            + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + "[0-9]*)?) "
-            + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + "[0-9]*(?:\\.[0-9]*)?)?) ";
+            + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
             + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
@@ -135,27 +135,41 @@ public class Parser {
             throw new TrackerException(ErrorMessage.INVALID_UPDATE_FORMAT);
         }
 
-        String itemName = matcher.group(NAME_GROUP).trim().toLowerCase();
+        String name = matcher.group(NAME_GROUP).trim();
         String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
         String priceString = matcher.group(PRICE_GROUP).replace(PRICE_FLAG + BASE_FLAG, "").trim();
-        if (itemName.isEmpty() || (quantityString.isEmpty() && priceString.isEmpty())) {
+
+        if (name.isEmpty() || (quantityString.isEmpty() && priceString.isEmpty())) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
-        if (!Inventory.contains(itemName)) {
-            throw new TrackerException(itemName + ErrorMessage.ITEM_NOT_IN_LIST);
+
+        if (!Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_UPDATE);
         }
 
         int quantity = -1;
         double price = -1;
 
-        if (!quantityString.isEmpty()) {
-            quantity = Integer.parseInt(quantityString);
-        }
-        if (!priceString.isEmpty()) {
-            price = roundTo2Dp(Double.parseDouble(priceString));
+        try {
+            if (!quantityString.isEmpty()) {
+                quantity = Integer.parseInt(quantityString);
+            }
+            if (!priceString.isEmpty()) {
+                price = roundTo2Dp(Double.parseDouble(priceString));
+            }
+        } catch (NumberFormatException e) {
+            throw new TrackerException(ErrorMessage.INVALID_NUMBER_FORMAT);
         }
 
-        return new UpdateCommand(itemName, quantity, price);
+        if (!quantityString.isEmpty() && quantity < 0) {
+            throw new TrackerException(ErrorMessage.QUANTITY_TOO_SMALL);
+        }
+
+        if (!priceString.isEmpty() && price < 0) {
+            throw new TrackerException(ErrorMessage.PRICE_TOO_SMALL);
+        }
+
+        return new UpdateCommand(name, quantity, price);
     }
 
     private static Command parseNewCommand(String input) throws TrackerException {
@@ -166,19 +180,38 @@ public class Parser {
             throw new TrackerException(ErrorMessage.INVALID_NEW_ITEM_FORMAT);
         }
 
-        String itemName = matcher.group(NAME_GROUP).trim();
-        String itemQuantityString = matcher.group(QUANTITY_GROUP).trim();
-        String itemPriceString = matcher.group(PRICE_GROUP).trim();
+        String name = matcher.group(NAME_GROUP).trim();
+        String quantityString = matcher.group(QUANTITY_GROUP).trim();
+        String priceString = matcher.group(PRICE_GROUP).trim();
 
-        if (itemName.isEmpty() || itemQuantityString.isEmpty() || itemPriceString.isEmpty()) {
+        if (name.isEmpty() || quantityString.isEmpty() || priceString.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
-        // throws NumberFormatException if strings cannot be parsed
-        int itemQuantity = Integer.parseInt(itemQuantityString);
-        double itemPrice = roundTo2Dp(Double.parseDouble(itemPriceString));
+        if (Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_IN_LIST_NEW);
+        }
 
-        return new NewCommand(itemName, itemQuantity, itemPrice);
+        int quantity;
+        double price;
+
+        // throws NumberFormatException if strings cannot be parsed
+        try {
+            quantity = Integer.parseInt(quantityString);
+            price = roundTo2Dp(Double.parseDouble(priceString));
+        } catch (NumberFormatException e) {
+            throw new TrackerException(ErrorMessage.INVALID_NUMBER_FORMAT);
+        }
+
+        if (quantity < 0) {
+            throw new TrackerException(ErrorMessage.QUANTITY_TOO_SMALL);
+        }
+
+        if (price < 0) {
+            throw new TrackerException(ErrorMessage.PRICE_TOO_SMALL);
+        }
+
+        return new NewCommand(name, quantity, price);
     }
 
     private static Command parseListCommand(String input) throws TrackerException {
@@ -211,11 +244,16 @@ public class Parser {
             throw new TrackerException(ErrorMessage.INVALID_DELETE_FORMAT);
         }
 
-        String itemName = matcher.group(NAME_GROUP);
-        if (itemName.isEmpty()) {
+        String name = matcher.group(NAME_GROUP);
+
+        if (name.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
-        return new DeleteCommand(itemName);
+        if (!Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_DELETE);
+        }
+
+        return new DeleteCommand(name);
     }
 }

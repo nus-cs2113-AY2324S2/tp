@@ -73,10 +73,6 @@ public class Ui {
         printIndent(deleteItemOpening(itemName));
     }
 
-    public static void deleteUnsuccessful() {
-        printIndent(MISSING_ITEM_MESSAGE);
-    }
-
     public static void listIntro(int size) {
         if (size == 0) {
             printIndent(EMPTY_LIST_MESSAGE);
