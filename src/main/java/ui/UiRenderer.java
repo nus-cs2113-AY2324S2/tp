@@ -88,4 +88,12 @@ public class UiRenderer {
         }
         return maxTasks;
     }
+  
+    public static void printSeparator() {
+        for (int i = 0; i < 7; i++) {
+            System.out.print("+------------");
+        }
+        System.out.println("+");
+    }
 }
+
