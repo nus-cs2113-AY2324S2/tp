@@ -112,7 +112,7 @@ public class TransactionListTest {
 
             String command = "findpayment James";
             String[] parts = command.split(" ", 2);
-            String printedOutput = transactionList.findTransactions(parts);
+            String printedOutput = transactionList.findTransactions(parts[1]);
             String expectedString = "James owns the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 
@@ -169,7 +169,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Jack p/Jane a/200 p/James a/100", memberList);
             transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
             String[] parts = "finddebt Jack".split(" ", 2);
-            String printedOutput = transactionList.findDebts(parts);
+            String printedOutput = transactionList.findDebts(parts[1]);
             String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 

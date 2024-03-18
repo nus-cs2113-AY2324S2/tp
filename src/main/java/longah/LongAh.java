@@ -81,10 +81,10 @@ public class LongAh {
                     transactions.remove(parts);
                     break;
                 case "findpayment":
-                    System.out.println(transactions.findTransactions(parts));
+                    System.out.println(transactions.findTransactions(parts[1]));
                     break;
                 case "finddebt":
-                    System.out.println(transactions.findDebts(parts));
+                    System.out.println(transactions.findDebts(parts[1]));
                     break;
                 case "clear":
                     transactions.clear();
