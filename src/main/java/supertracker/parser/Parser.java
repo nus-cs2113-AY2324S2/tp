@@ -145,8 +145,8 @@ public class Parser {
             throw new TrackerException(itemName + ErrorMessage.ITEM_NOT_IN_LIST);
         }
 
-        int quantity = 0;
-        double price = 0;
+        int quantity = -1;
+        double price = -1;
 
         if (!quantityString.isEmpty()) {
             quantity = Integer.parseInt(quantityString);
