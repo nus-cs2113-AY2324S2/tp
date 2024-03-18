@@ -234,11 +234,11 @@ public class Handler {
 
         // Assert and validate the extracted values
 
-        assert !results[0].isEmpty() : "Command should not be empty";
-        assert !results[1].isEmpty() : "Distance should not be empty";
-        assert results[1].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
-        assert !results[2].isEmpty() : "Time should not be empty";
-        assert results[2].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
+        assert !results[Constant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
+        assert !results[Constant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
+        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+        assert !results[Constant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
+        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
 
         return results;
     }

@@ -74,6 +74,12 @@ public class Constant {
     public static final String INVALID_PARAMETER = "Parameter(s) invalid or out of bounds";
     public static final String NO_DATE_SPECIFIED = "NA";
 
+    // getRun Constants
+    public static final int SUBSTRING_COMMAND = 0;
+    public static final int SUBSTRING_DISTANCE = 1;
+    public static final int SUBSTRING_TIME = 2;
+    public static final int SUBSTRING_DATE = 3;
+
 
     // Storage Replies
     public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
