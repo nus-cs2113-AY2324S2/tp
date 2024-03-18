@@ -45,4 +45,28 @@ public class Constant {
 
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
+
+    public static final Integer HEALTH_TYPE_INDEX = 1;
+    public static final String BMI_INPUT = "h:bmi";
+    public static final String PERIOD_INPUT = "h:period";
+    public static final String BMI = "bmi";
+    public static final String PERIOD = "period";
+    public static final Integer BMI_PARAMETERS = 2;
+    public static final Integer BMI_H_OFFSET = 8;
+    public static final Integer BMI_HEIGHT_OFFSET = 8;
+    public static final Integer BMI_WEIGHT_OFFSET = 8;
+
+    public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
+    public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
+    public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
+    public static final String OBESE_MESSAGE = "You're obese.";
+    public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
+    public static final String BLANK_INPUT_FOR_HEALTH = "Type of health cannot be empty. " +
+            "Please input either /h:bmi or /h:period";
+    public static final String INSUFFICIENT_PARAMETERS_FOR_BMI = "Insufficient parameters for bmi! " +
+            "Example input: /h:bmi /height:height /weight:weight";
+    public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
+            "Example input: /h:period /start:startDate /end:endDate";
+    public static final String MISSING_PARAMETERS = "Missing parameter(s)";
+
 }
