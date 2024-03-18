@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CSVReader {
-    public static final String delimiter = ",";
+    public static final String DELIMITER = ",";
     public static void main(String[] args){
         String csvFile = "./db/Meal_db.csv";
         CSVReader.read(csvFile);
@@ -19,7 +19,7 @@ public class CSVReader {
             String line = "";
             String[] tempArr;
             while ((line = br.readLine()) != null) {
-                tempArr = line.split(delimiter);
+                tempArr = line.split(DELIMITER);
                 for (String tempStr : tempArr) {
                     System.out.print(tempStr + " ");
                 }
