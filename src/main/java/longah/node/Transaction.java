@@ -123,7 +123,9 @@ public class Transaction {
     }
 
     /**
-     * @return a string representation of the transaction for printouts
+     * Returns a string representation of the transaction for printouts.
+     * 
+     * @return a string representation of the transaction
      */
     public String toString() {
         String lender = "Lender: " + this.lender.getName() + "\n";
