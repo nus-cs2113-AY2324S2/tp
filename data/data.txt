@@ -1,7 +1,8 @@
-Meal fish and chips 2 1530
-Meal ham and cheese sandwich 1 352
-Meal roast beef sandwich 3 1053
-Water 200
-Water 600
+Meal fishandchips 2 1530
+Meal hamandcheesesandwich 1 352
+Meal roastbeefsandwich 3 1053
+Goal Water 200
+Goal Water 600
 Goal w 5000
 Goal c 40000
+Meal sotoayam 2 600
