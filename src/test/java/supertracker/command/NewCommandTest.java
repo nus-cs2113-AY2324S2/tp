@@ -7,8 +7,10 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NewCommandTest {
     @BeforeEach
