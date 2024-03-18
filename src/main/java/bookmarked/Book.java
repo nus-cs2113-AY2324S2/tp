@@ -13,6 +13,14 @@ public class Book {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
     }
 
+    public void setBorrowed() {
+        this.isBorrowed = true;
+    }
+
+    public void setReturned() {
+        this.isBorrowed = false;
+    }
+
     @Override
     public String toString() {
         return (this.description + getBorrowedStatus());
