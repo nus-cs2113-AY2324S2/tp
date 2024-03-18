@@ -22,7 +22,7 @@ class DukeTest {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        String expectedOutput = "Timetable comparison app opened. \r\nInvalid command. \r\nBye. \r\n";
+        String expectedOutput = "Timetable comparison app opened." + System.lineSeparator() + "Invalid command." + System.lineSeparator() + "Bye.";
 
         // Act
         Duke.main(new String[0]);
