@@ -1,5 +1,4 @@
 package ActiveEdge.Parser;
-
 import ActiveEdge.Command.ActiveEdgeException;
 import ActiveEdge.Command.HelpCommand;
 import ActiveEdge.Command.LogWaterCommand;
@@ -9,6 +8,7 @@ import ActiveEdge.Storage;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 import static ActiveEdge.FoodData.foodItems;
+import ActiveEdge.FoodData;
 
 public class Parser {
 
@@ -17,7 +17,16 @@ public class Parser {
             String inputTrimmed;
             if (input.contains("help")) {
                 new HelpCommand();
-            } else if (input.startsWith("log")) {
+            } else if (input.equalsIgnoreCase("list foods")) {
+                FoodData.printFood();
+            }
+//        else if (foodStorage.containsFood(input)) {
+//            int calories = foodStorage.getCalories(input);
+//            System.out.println(input + " contains " + calories + " calories.");
+//        } else {
+//            System.out.println("Sorry, I don't have information about " + input);
+//        }
+            else if (input.startsWith("log")) {
                 String parts = input.substring(4);
                 String[] items = parts.split("/");
                 if (items[0].equals("w")) {
@@ -65,7 +74,7 @@ public class Parser {
                     ShowGoalsCommand showGoalsCommand = new ShowGoalsCommand();
                     showGoalsCommand.execute();
                 } else {
-                    throw new ActiveEdgeException("Unknown command.");
+                    System.out.println("Hello!\n");
                 }
             } else if (input.startsWith("set goal")) {
                 // Handle setting goals
@@ -96,9 +105,8 @@ public class Parser {
             }
             Storage.saveLogsToFile("data/data.txt");
         } catch (ActiveEdgeException e) {
-            System.out.println("Error: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("An unexpected error occurred: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }
+
