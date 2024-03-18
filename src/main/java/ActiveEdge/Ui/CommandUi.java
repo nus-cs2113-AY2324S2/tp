@@ -27,7 +27,8 @@ public class CommandUi {
         System.out.println("Successfully logged " + newWaterTask.getQuantity() + " ml of water.");
     }
 
-    public static void printWaterIntakeMessage(int totalWaterIntake) {
-        System.out.println("Total water consumed today: " + totalWaterIntake + " ml");
+    public static void printWaterIntakeMessage(int totalWaterIntake, int waterGoal) {
+        double percentage = ((double) totalWaterIntake / waterGoal) * 100;
+        System.out.println("Total water consumed today: " + totalWaterIntake + " ml (" + String.format("%.0f%%", percentage) + " of " + waterGoal + "ml goal).");
     }
 }
