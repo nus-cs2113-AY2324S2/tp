@@ -107,36 +107,6 @@ public class TaskManager {
         }
     }
 
-    public static void deleteManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
-            throws DateTimeParseException, TaskManagerException {
-
-        System.out.println("Enter the date for the task to delete (dd/MM/yyyy):");
-        LocalDate date = getStringFromUser(scanner);
-
-        checkIfDateInCurrentWeek(date, weekView);
-
-        List<String> dayTasks = taskManager.getTasksForDate(date);
-        checkIfDateHasTasks(dayTasks);
-
-        System.out.println("Enter the task number to delete:");
-        for (int i = 0; i < dayTasks.size(); i++) {
-            System.out.println((i + 1) + ". " + dayTasks.get(i));
-        }
-
-        int taskNumber;
-
-        try {
-            taskNumber = Integer.parseInt(scanner.nextLine().trim());
-            taskManager.deleteTask(date, taskNumber - 1);
-            System.out.println("Task deleted.");
-        } catch (NumberFormatException e) {
-            System.out.println("Task number should be an integer value. Please try again.");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("The task number you have entered does not exist. Please try again.");
-        }
-
-    }
-
     private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message) throws TaskManagerException {
         List<String> dayTasks = taskManager.getTasksForDate(date);
         checkIfDateHasTasks(dayTasks);
@@ -165,6 +135,8 @@ public class TaskManager {
             System.out.println("Task deleted.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number. Please try again.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The task number you have entered does not exist. Please try again.");
         }
     }
 
