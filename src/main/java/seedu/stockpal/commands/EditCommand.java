@@ -73,7 +73,6 @@ public class EditCommand extends ListActionCommand {
         }
         assert productList.getSize() > 0;
         productList.updateProduct(productIndex, name, quantity, description, price);
-
         logger.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
         Ui.printEditSuccessMessage();
         storage.save(productList);
