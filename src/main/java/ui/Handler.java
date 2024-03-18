@@ -2,6 +2,7 @@ package ui;
 
 import health.Bmi;
 import health.Health;
+import health.HealthList;
 import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
@@ -69,22 +70,6 @@ public class Handler {
                 case HEALTH:
 
                     handleHealth(userInput);
-
-                    break;
-                case HEIGHT:
-
-                    handleHeight(userInput);
-
-                    break;
-                case WEIGHT:
-
-                    handleWeight(userInput);
-
-                    break;
-
-                case BMI:
-
-                    handleBmi(userInput);
 
                     break;
 
@@ -187,7 +172,7 @@ public class Handler {
     public static void handleExercise(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
-            if (typeOfExercise.equals(Constant.RUN)){
+            if (typeOfExercise.equals(Constant.RUN)) {
                 String[] runDetails = getRun(userInput);
 
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
@@ -197,12 +182,11 @@ public class Handler {
                 Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
                 WorkoutList.addRun(newRun);
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
-            } else if (typeOfExercise.equals(Constant.GYM)){
+            } else if (typeOfExercise.equals(Constant.GYM)) {
                 // Yet to implement : handleGym(userInput);
                 getGym(userInput);
             }
-        }
-        catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
         }
 
@@ -218,16 +202,28 @@ public class Handler {
         // if asked to show latest run
         Output.printLatestRun();
     }
-    public static void handleHealth(String userInput){}
-    public static void handleHeight(String userInput){
-        Health.setHeightAndWeight(userInput);
+
+    public static void handleHealth(String userInput){
+        try {
+            String typeOfHealth = Health.checkTypeOfHealth(userInput);
+            if (typeOfHealth.equals(Constant.BMI)){
+                String[] bmiDetails = Bmi.getBmi(userInput);
+
+                if (bmiDetails[0].isEmpty() || bmiDetails[1].isEmpty() || bmiDetails[2].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                }
+                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2]);
+                HealthList.addBmi(newBmi);
+                System.out.println("Added: bmi | " + bmiDetails[1] + " | " + bmiDetails[2]);
+                System.out.println(newBmi);
+            } else if (typeOfHealth.equals(Constant.PERIOD)){
+                // Yet to implement
+            }
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.out.println(e.getMessage());
+        }
     }
-    public static void handleWeight(String userInput){
-        Health.setHeightAndWeight(userInput);
-    }
-    public static void handleBmi(String userInput){
-        Bmi.calculateBmi();
-    }
+
     public static void handleStart(String userInput){}
     public static void handleEnd(String userInput){}
     public static void handleToday(String userInput){}
