@@ -1,5 +1,9 @@
 package sleep;
 
+/**
+ * Represents the interface for SleepTracker
+ * The sleepCycleList contains all the tasks managed by Wellness360.
+ */
 public class SleepTracker {
     SleepCycleList sleepCycleList;
 
@@ -14,5 +18,4 @@ public class SleepTracker {
     public void addSleepCycle(SleepCycle sleepCycleToAdd) {
         sleepCycleList.addSleepCycle(sleepCycleToAdd);
     }
-
 }
