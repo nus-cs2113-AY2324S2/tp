@@ -133,18 +133,18 @@ public class Handler {
         }
         
 
-        if(isRun && userInputs.length < 5){
+        if (isRun && userInputs.length < 5) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
         }
 
-        if(isGym && userInputs.length < 3){
+        if (isGym && userInputs.length < 3) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
         }
 
 
         if (isRun){
             return Constant.RUN;
-        }else {
+        } else {
             return Constant.GYM;
         }
     }
@@ -236,9 +236,11 @@ public class Handler {
 
         assert !results[Constant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
         assert !results[Constant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
-        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric " +
+                "value (assuming KM)";
         assert !results[Constant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
-        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
+        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format " +
+                "HH:MM:SS";
 
         return results;
     }
