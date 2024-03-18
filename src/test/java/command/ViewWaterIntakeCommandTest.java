@@ -23,21 +23,6 @@ public class ViewWaterIntakeCommandTest {
     }
 
     @Test
-    public void testExecute() {
-//        // Mock TaskList
-//        ArrayList<Task> tasksList = new ArrayList<>();
-//        tasksList.add(new WaterTask(200)); // Adding water intake
-//        tasksList.add(new GoalTask("w", 1500)); // Adding water goal
-//        ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
-//
-//        // Mock TaskList and execute command
-//        viewWaterIntakeCommand.execute();
-//
-//        // Verify output message
-//        assertEquals("Total water consumed today: 200 ml (13% of 1500ml goal).", outputStreamCaptor.toString().trim());
-    }
-
-    @Test
     public void testGetTotalWaterIntake() {
         // Create a mock task list
         ArrayList<Task> tasksList = new ArrayList<>();
@@ -46,7 +31,7 @@ public class ViewWaterIntakeCommandTest {
 
         ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
 
-        // Call the private method getTotalWaterIntake using reflection or make it package-private for testing
+        // Call method getTotalWaterIntake using reflection or make it package-private for testing
         int totalWaterIntake = viewWaterIntakeCommand.getTotalWaterIntake(tasksList);
 
         // Verify total water intake
