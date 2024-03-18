@@ -19,7 +19,7 @@ public class Quantity {
         if (tentativeQuantity >= Integer.MAX_VALUE) {
             throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
         }
-        quantity += increaseQuantity;
+        quantity = (int) tentativeQuantity;
     }
 
     public void updateDecreaseQuantity(Integer decreaseQuantity) throws InsufficientAmountException {
