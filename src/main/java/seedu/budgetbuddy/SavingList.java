@@ -68,7 +68,11 @@ public class SavingList {
             System.out.println("------------------------------------------------------------------------");
 
             double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
-            System.out.println("Remaining Amount: $" + remainingAmount);
+            if (remainingAmount < 0) {
+                System.out.println("You are currently short on savings by: $" + remainingAmount);
+            } else {
+                System.out.println("Remaining Amount: $" + remainingAmount);
+            }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An error occurred while listing savings", e);
         }
@@ -79,17 +83,9 @@ public class SavingList {
             assert initialAmount >= 0 : "Initial amount should not be negative";
             assert totalExpenses >= 0 : "Total expenses should not be negative";
 
-            double remainingAmount = initialAmount - totalExpenses;
-            if (remainingAmount < 0) {
-                throw new Exception("Insufficient Funds");
-            } else {
-                return remainingAmount;
-            }
+            return (initialAmount - totalExpenses);
         } catch (AssertionError e) {
             LOGGER.log(Level.SEVERE, "Assertion failed while calculating remaining savings", e);
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Insufficient funds", e);
-            throw new RuntimeException(e);
         }
         return -1;
     }
