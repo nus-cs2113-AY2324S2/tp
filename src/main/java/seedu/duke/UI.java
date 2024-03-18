@@ -45,7 +45,8 @@ public class UI {
                 + "To delete saved expenses, use format:\n<< e/ del/ <index> >>\n"
                 + "To List saved expenses, use format:\n<< list >>\n"
                 + "To view saved expenses by month, use format:\n<< view -m <mm.yyyy> >>\n"
-                + "To view saved expenses by year, use format:\n<< view -y <yyyy> >>");
+                + "To view saved expenses by year, use format:\n<< view -y <yyyy> >>"
+                + "To end the program, type 'exit' ");
     }
 
 }
