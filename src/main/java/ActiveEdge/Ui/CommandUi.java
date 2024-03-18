@@ -2,8 +2,7 @@ package ActiveEdge.Ui;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 
-import ActiveEdge.Task.LogWaterTask;
-import ActiveEdge.Task.Task;
+import ActiveEdge.Task.WaterTask;
 import ActiveEdge.Task.LogMeals;
 
 public class CommandUi {
@@ -24,7 +23,7 @@ public class CommandUi {
     public static void printShowCalMessage() {
     }
 
-    public static void printWaterLogMessage(LogWaterTask newWaterTask) {
+    public static void printWaterLogMessage(WaterTask newWaterTask) {
         System.out.println("Successfully logged " + newWaterTask.getQuantity() + " ml of water.");
     }
 

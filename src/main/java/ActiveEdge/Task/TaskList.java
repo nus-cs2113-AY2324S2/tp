@@ -9,7 +9,7 @@ public class TaskList {
         tasksList.add(task);
     }
 
-    public Task get(int index) {
+    public static long get() {
         if (index >= 0 && index < tasksList.size()) {
             return tasksList.get(index);
         } else {
@@ -18,11 +18,4 @@ public class TaskList {
         }
     }
 
-    public static int size() {
-        return tasksList.size();
-    }
-
-    public TaskList getTasks() {
-        return null;
-    }
 }
