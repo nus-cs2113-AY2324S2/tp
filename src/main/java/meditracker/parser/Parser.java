@@ -2,6 +2,8 @@ package meditracker.parser;
 
 import meditracker.command.Command;
 import meditracker.command.ModifyCommand;
+import meditracker.command.TakeCommand;
+import meditracker.command.UntakeCommand;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
 import meditracker.command.AddCommand;
@@ -30,6 +32,10 @@ public class Parser {
             return new AddCommand(arguments);
         case "modify":
             return new ModifyCommand(arguments);
+        case "take":
+            return new TakeCommand(arguments);
+        case "untake":
+            return new UntakeCommand(arguments);
         default:
             throw new MediTrackerException();
         }
