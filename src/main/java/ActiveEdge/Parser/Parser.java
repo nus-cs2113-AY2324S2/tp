@@ -41,7 +41,7 @@ public class Parser {
             } else if (parts[1].startsWith("g")) {  //shows goals
 
             } else {
-                System.out.println("Hello!\n");
+                throw new ActiveEdgeException("Unknown command.");
             }
         }
     }
