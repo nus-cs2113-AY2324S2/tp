@@ -89,7 +89,7 @@ public class Handler {
      */
     public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
         int index = input.indexOf(delimiter);
-        if (index == -1) {
+        if (index == -1 || index == input.length() - delimiter.length()) {
             return "";
         }
 
