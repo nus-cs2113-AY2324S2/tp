@@ -3,7 +3,6 @@ package seedu.duke;
 import Parser.Parser;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private final TextUi ui = new TextUi();
