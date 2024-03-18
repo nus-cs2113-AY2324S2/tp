@@ -1,4 +1,5 @@
 package seedu.voyagers;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -10,11 +11,11 @@ import java.util.logging.Logger;
 
 
 public class Storage {
-    public static void readTripFile(ArrayList<Trip> trips, String currentDir) {
+    public static void readTripFile(ArrayList<Trip> trips, String currentDir, String fileName) {
 
         Logger logger = Logger.getLogger("Storage");
         //local path of data file
-        File f = new File(currentDir + "/local-voyagers.txt" );
+        File f = new File(currentDir + "/" + fileName);
 
         try {
             Scanner s = new Scanner(f);
@@ -29,7 +30,9 @@ public class Storage {
                 Date startDate = format.parse(inputs[1]);
                 Date endDate = format.parse(inputs[2]);
                 Trip trip = new Trip(inputs[0], startDate, endDate, inputs[3], inputs[4]);
+                trips.add(trip);
             }
+            s.close();
         } catch (FileNotFoundException e) {
 
             System.out.println("File not found. \nCreating new file... \nFile created.");

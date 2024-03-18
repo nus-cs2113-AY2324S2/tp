@@ -5,7 +5,8 @@ import static seedu.voyagers.Storage.readTripFile;
 import static seedu.voyagers.Storage.writeTripFile;
 
 public class Voyagers {
-    
+    private static final String FILE_NAME = "local-voyagers.txt";
+
     public static void main(String[] args) {
         welcomeMessage();
         new Voyagers().runTrip();
@@ -18,7 +19,7 @@ public class Voyagers {
         Parser parser = new Parser(tripArrayList);
         Scanner scanner = new Scanner(System.in);
         String currentDir = System.getProperty("user.dir");
-        readTripFile(tripArrayList, currentDir);
+        readTripFile(tripArrayList, currentDir, FILE_NAME);
         parser.listAll();
 
         //Start managing tripList
