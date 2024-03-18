@@ -1,6 +1,10 @@
 package recipeio.parser;
 
-import recipeio.command.*;
+import recipeio.command.HelpCommand;
+import recipeio.command.ByeCommand;
+import recipeio.command.AddRecipeCommand;
+import recipeio.command.Command;
+import recipeio.command.DeleteRecipeCommand;
 import recipeio.enums.MealCategory;
 import recipeio.recipe.RecipeList;
 import recipeio.recipe.Recipe;
@@ -14,16 +18,16 @@ import java.util.Collections;
 public class InputParser {
     public static final int KEY = 0;
     public static final String SPACE = " ";
-    private final String line;
-    private final String[] processedInput;
-    private final String command;
-    private final RecipeList recipes;
     private static final String INVALID_TASK_FORMAT_ERROR_MESSAGE = "Sorry. I couldn't " +
             "understand. Please follow the correct format.";
     private static final String INTEGER_NEEDED_ERROR_MESSAGE = "Make sure you enter an integer for cook time and" +
             "calories!";
     private static final String MEAL_CATEGORY_ERROR_MESSAGE = "Please enter a valid meal category. Here are your" +
             "options:\n BREAKFAST, LUNCH, DINNER, APPETIZER, DESSERT";
+    private final String line;
+    private final String[] processedInput;
+    private final String command;
+    private final RecipeList recipes;
 
     public InputParser(String input, RecipeList recipes) {
         this.line = input;
@@ -34,16 +38,16 @@ public class InputParser {
     public static Command parseCommand(String command) throws Exception {
         String keyword = command.split(" ")[0];
         switch (keyword) {
-            case AddRecipeCommand.COMMAND_WORD:
-                Recipe recipe = parseAddCommand(command);
-                return new AddRecipeCommand(recipe);
-            case ByeCommand.COMMAND_WORD:
-                return new ByeCommand();
-            case DeleteRecipeCommand.COMMAND_WORD:
-                int recipeToDelete = parseDeleteCommand(command);
-                return new DeleteRecipeCommand(recipeToDelete);
-            default:
-                return new HelpCommand();
+        case AddRecipeCommand.COMMAND_WORD:
+            Recipe recipe = parseAddCommand(command);
+            return new AddRecipeCommand(recipe);
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
+        case DeleteRecipeCommand.COMMAND_WORD:
+            int recipeToDelete = parseDeleteCommand(command);
+            return new DeleteRecipeCommand(recipeToDelete);
+        default:
+            return new HelpCommand();
         }
     }
 

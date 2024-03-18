@@ -26,8 +26,8 @@ public class Storage {
         FileWriter fw = new FileWriter(myFile, false);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        int RecipeSize = recipeList.getSize();
-        for (int i = 0; i < RecipeSize; i++) {
+        int recipeSize = recipeList.getSize();
+        for (int i = 0; i < recipeSize; i++) {
             Recipe recipe = recipeList.get(i);
             bw.write(recipe.name);
             bw.write(DELIMITER);

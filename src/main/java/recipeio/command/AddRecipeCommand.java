@@ -5,11 +5,11 @@ import recipeio.storage.Storage;
 import recipeio.ui.UI;
 
 public class AddRecipeCommand extends Command{
-    private final Recipe toAdd;
     public static final String COMMAND_WORD = "add";
-    private final String ADDING_ERROR_MESSAGE = "Oops, for some reason this recipe could not be added to your recipe" +
-            "book";
-    private final String SAVING_ERROR_MESSAGE = "Sorry, there was an error trying to save your recipe book.";
+    private static final String ADDING_ERROR_MESSAGE = "Oops, for some reason this recipe could not be added to " +
+            "your recipe book";
+    private static final String SAVING_ERROR_MESSAGE = "Sorry, there was an error trying to save your recipe book.";
+    private final Recipe toAdd;
 
     /**
      * Constructs an add command with the recipe to add.

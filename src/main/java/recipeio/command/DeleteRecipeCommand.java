@@ -5,10 +5,10 @@ import recipeio.storage.Storage;
 import recipeio.ui.UI;
 
 public class DeleteRecipeCommand extends Command{
-    private final int toDelete;
     public static final String COMMAND_WORD = "delete";
-    private final String DELETE_ERROR_MESSAGE = "Oops, for some reason this recipe could not be deleted.";
-    private final String SAVING_ERROR_MESSAGE = "Sorry, there was an error trying to save your recipe book.";
+    private static final String DELETE_ERROR_MESSAGE = "Oops, for some reason this recipe could not be deleted.";
+    private static final String SAVING_ERROR_MESSAGE = "Sorry, there was an error trying to save your recipe book.";
+    private final int toDelete;
 
     public DeleteRecipeCommand(int toDelete) {
         this.toDelete = toDelete;
