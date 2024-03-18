@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static Storage.Storage.createNewFile;
-import static Storage.Storage.loadTasksFromFile;
 import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
 import static data.TaskManager.updateManager;
@@ -69,7 +68,11 @@ public class Main {
                 } 
                 break;
             case "update":
-                updateManager(scanner, weekView, taskManager);
+                    try {
+                        updateManager(scanner, weekView, taskManager);
+                    } catch (TaskManagerException e) {
+                        System.out.println(e.getMessage());
+                    }
                 break;
             case "add":
                 try {
