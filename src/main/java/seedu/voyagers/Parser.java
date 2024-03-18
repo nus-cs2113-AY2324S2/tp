@@ -102,12 +102,14 @@ public class Parser {
             System.out.println("You are missing /new <name>");
             return;
         }
+        assert (oldNameEntered && newNameEntered) : "oldName and newName must be entered";
         // Check if the trip exists (if not, print an error message and return)
         Trip mainTrip = findTripByName(oldName);
         if (mainTrip == null) {
             System.out.println("Trip not found: " + oldName);
             return;
         }
+        assert mainTrip != null : "mainTrip cannot be null";
         mainTrip.setName(newName);
         System.out.println("Name set to: " + newName);
     }
