@@ -1,8 +1,5 @@
 package recipeio;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 import recipeio.enums.MealCategory;
 import recipeio.recipe.Recipe;
@@ -11,6 +8,8 @@ import recipeio.recipe.RecipeList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class RecipeIOTest {
     @Test
@@ -21,7 +20,7 @@ class RecipeIOTest {
     @Test
     public void testAddRecipe() {
         RecipeList recipes = new RecipeList();
-        ArrayList allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<String>();
         allergies.add("eggs");
         Recipe newRecipe = new Recipe("cookies", 40, 350, allergies,
                 MealCategory.DESSERT, "THIS IS MY URL");
@@ -32,7 +31,7 @@ class RecipeIOTest {
     @Test
     public void testDeleteRecipe() {
         RecipeList recipes = new RecipeList();
-        ArrayList allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<String>();
         allergies.add("eggs");
         Recipe newRecipe = new Recipe("cookies", 40, 350, allergies,
                 MealCategory.DESSERT, "THIS IS MY URL");
@@ -60,6 +59,10 @@ class RecipeIOTest {
         testRecipeList.addRecipe(testRecipe);
         testRecipeList.findAllergy("eggs");
         String expectedOutput = "List of recipes with eggs mentioned:\n1. Spaghetti Carbonara\n";
-        assertEquals( expectedOutput, outContent.toString());
+        if (outContent.toString().equals(expectedOutput)) {
+            assertTrue(true);
+        } else {
+            fail();
+        }
     }
 }
