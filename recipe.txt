@@ -1,1 +1,1 @@
-Spaghetti Carbonara | 60 | 1000 | Dairy,Egg,Gluten | LUNCH | https://www.bbcgoodfood.com/recipes/ultimate-spaghetti-carbonara-recipe
+Spaghetti Carbonara | 60 | 1000 | Dairy,Egg,Gluten | LUNCH | https://www.bbcgoodfood.com/recipes/ultimate-spaghetti-carbonara-recipe pizza | 34 | 540 | eggs,dairy,gluten | LUNCH | www.pizza.com

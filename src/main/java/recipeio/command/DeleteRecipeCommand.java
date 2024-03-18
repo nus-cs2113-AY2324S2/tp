@@ -4,20 +4,14 @@ import recipeio.recipe.RecipeList;
 import recipeio.storage.Storage;
 import recipeio.ui.UI;
 
-public class AddRecipeCommand extends Command{
-    private final Recipe toAdd;
-    public static final String COMMAND_WORD = "add";
-    private final String ADDING_ERROR_MESSAGE = "Oops, for some reason this recipe could not be added to your recipe" +
-            "book";
+public class DeleteRecipeCommand extends Command{
+    private final int toDelete;
+    public static final String COMMAND_WORD = "delete";
+    private final String DELETE_ERROR_MESSAGE = "Oops, for some reason this recipe could not be deleted.";
     private final String SAVING_ERROR_MESSAGE = "Sorry, there was an error trying to save your recipe book.";
 
-    /**
-     * Constructs an add command with the recipe to add.
-     *
-     * @param toAdd the recipe to add.
-     */
-    public AddRecipeCommand(Recipe toAdd) {
-        this.toAdd = toAdd;
+    public DeleteRecipeCommand(int toDelete) {
+        this.toDelete = toDelete;
     }
 
     /**
@@ -30,11 +24,11 @@ public class AddRecipeCommand extends Command{
      */
     @Override
     public void execute(RecipeList recipes, UI ui, Storage storage) throws Exception {
-        System.out.println("entered add execute");
+        Recipe deleted = recipes.get(toDelete - 1);
         try {
-            recipes.addRecipe(toAdd);
+            recipes.deleteRecipe(toDelete);
         } catch (Exception e) {
-            throw new Exception(ADDING_ERROR_MESSAGE);
+            throw new Exception(DELETE_ERROR_MESSAGE);
         }
 
         try {
@@ -42,8 +36,7 @@ public class AddRecipeCommand extends Command{
         } catch (Exception e) {
             throw new Exception(SAVING_ERROR_MESSAGE);
         }
-
-        ui.addRecipePrinter(toAdd, recipes.getSize());
+        ui.deleteRecipePrinter(deleted, recipes.getSize());
     }
 }
 

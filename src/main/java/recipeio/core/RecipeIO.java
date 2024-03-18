@@ -2,6 +2,7 @@ package recipeio.core;
 
 import recipeio.command.Command;
 import recipeio.enums.MealCategory;
+import recipeio.parser.InputParser;
 import recipeio.recipe.Recipe;
 import recipeio.recipe.RecipeList;
 import recipeio.storage.Storage;
@@ -20,9 +21,11 @@ public class RecipeIO {
             "saved recipe book.";
     private static Storage storage;
     private static RecipeList recipes;
+    private static UI ui;
 
     public RecipeIO() throws FileNotFoundException {
         storage = new Storage();
+        recipes = new RecipeList();
         try {
             storage.loadFile(recipes);
         } catch (FileNotFoundException e) {
@@ -31,35 +34,23 @@ public class RecipeIO {
     }
 
     public void run() {
-        String input;
         Scanner inputGetter = new Scanner(System.in);
         UI.sayHi();
         boolean isExitCommand = false;
         while (!isExitCommand) {
             try {
                 String fullCommand = inputGetter.nextLine();
-                Command command = Parser.parseCommand(fullCommand);
-                command.execute(recipes, UI, storage);
-                isExitCommand = command.isExit();
+                System.out.println("this is the full command: " + fullCommand);
+                Command command = InputParser.parseCommand(fullCommand);
+                command.execute(recipes, ui, storage);
+                isExitCommand = command.isExitCommand();
             } catch (Exception e) {
                 UI.printMessage(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) {
-        ArrayList<String> testAllergies = new ArrayList<>();
-        testAllergies.add("Dairy");
-        testAllergies.add("Egg");
-        testAllergies.add("Gluten");
-        String testURL = "https://www.bbcgoodfood.com/recipes/ultimate-spaghetti-carbonara-recipe";
-        Recipe testRecipe = new Recipe("Spaghetti Carbonara", 60, 1000,
-                testAllergies, MealCategory.LUNCH, testURL);
-        System.out.println("Hello");
-        System.out.println(testRecipe);
-
-        System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public static void main(String[] args) throws FileNotFoundException {
+        new RecipeIO().run();
     }
 }
