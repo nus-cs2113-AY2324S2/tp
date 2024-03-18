@@ -9,9 +9,6 @@ public class Constant {
 
     public static final String ADD_RUN = "Successfully added a new run";
 
-
-    public static final String NO_DATE_SPECIFIED = "NA";
-
     // Constant for Workout
     public static final String RUN = "run";
     public static final String GYM = "gym";
@@ -29,4 +26,17 @@ public class Constant {
     public static final String INVALID_RUN_TIME = "Invalid run time!";
     public static final String INVALID_GYM_INPUT = "Invalid gym parameters!";
     public static final String INVALID_GYM_STATION_INDEX = "Invalid gym station index!";
+
+    // Input Errors
+    public static final String INVALID_COMMAND = "Invalid command. Enter 'help' to view available commands.";
+    public static final String UNSPECIFIED_PARAMETER = "Parameter(s) unspecified.";
+    public static final String INVALID_PARAMETER = "Parameter(s) invalid or out of bounds";
+    public static final String NO_DATE_SPECIFIED = "NA";
+
+    // Storage Replies
+    public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
+    public static final String MISSING_FILE = "What is your name, Captain?";
+    public static final String LOAD_ERROR = "File read error:\n" + "Error at ";
+    public static final String CORRUPT_ERROR = "\nFile is corrupted. Ceasing any further data imports.";
+    public static final String SUCCESSFUL_LOAD = "Welcome back, Captain\n" + "Previous data has been synchronised.";
 }
