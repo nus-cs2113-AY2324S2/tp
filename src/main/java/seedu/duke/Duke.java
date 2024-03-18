@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
-    private static final int ADD_TASK_INDEX = 9;
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
