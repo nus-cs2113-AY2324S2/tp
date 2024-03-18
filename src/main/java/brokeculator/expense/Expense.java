@@ -1,6 +1,5 @@
 package brokeculator.expense;
 
-import brokeculator.frontend.UI;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
@@ -71,7 +70,6 @@ public class Expense implements Saveable {
     }
 
     public static Expense getExpenseFromFile(String stringRepresentation) throws Exception {
-        UI.print(stringRepresentation);
         String[] split = stringRepresentation.split(" ");
         if (split.length != 4) {
             throw new Exception("Expense file is corrupted.");
