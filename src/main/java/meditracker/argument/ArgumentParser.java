@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+/**
+ * ArgumentParser class to handle parsing of user input
+ * All arguments have to be specified with a flag.
+ */
 class ArgumentParser {
     protected final Map<ArgumentName, String> parsedArguments = new HashMap<>();
 

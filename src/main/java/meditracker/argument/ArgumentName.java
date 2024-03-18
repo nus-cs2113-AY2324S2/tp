@@ -1,5 +1,9 @@
 package meditracker.argument;
 
+/**
+ * ArgumentName enum to standardise the enum values for use
+ * by Command classes and ArgumentParser
+ */
 public enum ArgumentName {
     DOSAGE("dosage"),
     EXPIRATION_DATE("expirationDate"),
