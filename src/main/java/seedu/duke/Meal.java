@@ -68,15 +68,16 @@ public class Meal {
     }
 
     // Method to print all meal info
-    public void infoMeal() {
+    public static void handleInfoMeal(String command) {
+        String name = Parser.parseInfoMeal(command);
+        int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name);
-        System.out.println("Serving Size: " + servingSize);
-        System.out.println("Calories: " + getCalories());
-        System.out.println("Carbs: " + getCarbs());
-        System.out.println("Protein: " + getProtein());
-        System.out.println("Fat: " + getFat());
-        System.out.println("Fiber: " + getFiber());
-        System.out.println("Sugar: " + getSugar());
+        System.out.println("Calories: " + nutrients[0]);
+        System.out.println("Carbs: " + nutrients[1]);
+        System.out.println("Protein: " + nutrients[2]);
+        System.out.println("Fat: " + nutrients[3]);
+        System.out.println("Fiber: " + nutrients[4]);
+        System.out.println("Sugar: " + nutrients[5]);
     }
 
 }

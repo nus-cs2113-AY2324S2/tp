@@ -11,7 +11,6 @@ public class Drink {
     private int sugar;
     private int protein;
     private int fat;
-    private int sodium;
 
     public Drink(String name, int volume) {
         this.name = name;
@@ -21,9 +20,9 @@ public class Drink {
 
     // Add nutrient details per 100 milliliter to the static HashMap
     static {
-        nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2, 5});
-        nutrientDetails.put("lemon tea", new int[]{150, 30, 25, 1, 20, 3});
-        nutrientDetails.put("milk coffee", new int[]{20, 27, 25, 4, 3, 2});
+        nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2});
+        nutrientDetails.put("lemon tea", new int[]{150, 30, 25, 1, 20});
+        nutrientDetails.put("milk coffee", new int[]{20, 27, 25, 4, 3});
     }
 
     private void setNutrientValues(String name) {
@@ -33,19 +32,18 @@ public class Drink {
         sugar = nutrients[2] * drinkVolume / 100;
         protein = nutrients[3] * drinkVolume / 100;
         fat = nutrients[4] * drinkVolume / 100;
-        sodium = nutrients[5]  * drinkVolume / 100;
     }
 
-    public void infoDrink() {
+    public static void handleInfoDrink(String command) {
+        String name = Parser.parseInfoDrink(command);
+        int[] nutrients = nutrientDetails.get(name);
         System.out.println("Drink: " + name);
-        System.out.println("Volume: " + drinkVolume);
-        System.out.println("Calories: " + getCalories());
-        System.out.println("Carbs: " + getCarbs());
+        System.out.println("Calories: " + nutrients[0]);
+        System.out.println("Carbs: " + nutrients[1]);
         // Sugar is part of Carbohydrates
-        System.out.println("    Sugar: " + getSugar());
-        System.out.println("Protein: " + getProtein());
-        System.out.println("Fat: " + getFat());
-        System.out.println("Sodium: " + getSodium());
+        System.out.println("Sugar: " + nutrients[2]);
+        System.out.println("Protein: " + nutrients[3]);
+        System.out.println("Fat: " + nutrients[4]);
     }
 
     public String getName() {
@@ -74,9 +72,5 @@ public class Drink {
 
     public int getFat() {
         return fat;
-    }
-
-    public int getSodium() {
-        return sodium;
     }
 }
