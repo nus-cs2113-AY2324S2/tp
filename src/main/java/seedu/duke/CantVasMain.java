@@ -1,12 +1,15 @@
 package seedu.duke;
 
+import static storage.Storage.readExpenditureFile;
+
 public class CantVasMain {
     private static UI ui;
+    private static ExpenditureList expenseList;
     private static ProcessCommand processCommand;
 
     public CantVasMain() {
         ui = new UI();
-        ExpenditureList expenseList = new ExpenditureList();
+        expenseList = readExpenditureFile();
         processCommand = new ProcessCommand();
     }
 
@@ -16,7 +19,7 @@ public class CantVasMain {
         boolean exit;
         do {
             String command = ui.getUserCommand();
-            exit = processCommand.userCommand(command);
+            exit = processCommand.userCommand(command, expenseList);
         } while (!exit);
     }
 

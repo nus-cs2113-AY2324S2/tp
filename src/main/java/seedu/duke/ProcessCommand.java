@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import storage.Storage;
+
 public class ProcessCommand {
 
     public ProcessCommand() {
@@ -39,11 +41,12 @@ public class ProcessCommand {
         }
     }
 
-    public boolean userCommand(String input) {
+    public boolean userCommand(String input, ExpenditureList expenses) {
         input = input.trim().toLowerCase();
         switch (input) {
         case "exit":
             System.out.println("Shutting down... Goodbye!!");
+            Storage.writeToFile(expenses);
             return true;
         case "list":
             ExpenditureList.listExpenses();
