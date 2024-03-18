@@ -41,6 +41,12 @@ public class Duke {
                     Ui.printLine();
                     break;
 
+                case "help":
+                    Ui.printLine();
+                    Ui.helpCommand();
+                    Ui.printLine();
+                    break;
+
                 case "bye":
                     Ui.printBye();
                     userSaysBye = true;
