@@ -113,6 +113,9 @@ public class InputParsing {
     private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in) {
         System.out.print(ENTER_STUDENT_NAME);
         String studentName = in.nextLine();
+
+        assert studentName != null : "Student name cannot be null";
+
         Student foundStudent = findStudentByName(masterStudentList, studentName);
         if (foundStudent != null) {
             logger.log(Level.INFO, "Viewing student details: " + studentName);
@@ -161,18 +164,20 @@ public class InputParsing {
      */
     private static void addStudent(ArrayList<Student> masterStudentList, Scanner in) {
         System.out.println(ENTER_STUDENT_DETAILS);
-        System.out.print(NAME);
-        String name = in.nextLine().trim();
-
-        if (findStudentByName(masterStudentList, name) != null) {
-            logger.log(Level.WARNING, "Student with the same name already exists.");
-            System.out.println("Student with the same name already exists. Please enter a different name.");
-            Ui.printDivider();
-            return;
-        }
-
+        String name;
+        name = checkForEmptyName(masterStudentList, in);
+        assert name != null : "Student name cannot be empty";
         StudentAttributes attributes = new StudentAttributes(name);
         attributeInput(in, attributes);
+
+        if (attributes.getSubjectGrades().isEmpty()) {
+            System.out.println("At least one subject must be provided. Please add subjects and grades.");
+            Ui.printDivider();
+            attributeInput(in, attributes);
+        }
+
+        assert attributes.getSubjectGrades() != null : "Subject cannot be empty";
+
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
 
@@ -181,15 +186,54 @@ public class InputParsing {
         Ui.printDivider();
     }
 
+    /**
+     * Prompts the user to enter a non-empty name for a student and checks if it already exists in the list.
+     * If the name is empty or already exists, prompts the user again until valid input is provided.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     * @return The valid non-empty name entered by the user.
+     */
+    private static String checkForEmptyName(ArrayList<Student> masterStudentList, Scanner in) {
+        String name;
+        while (true) {
+            System.out.print(NAME);
+            name = in.nextLine().trim();
+            if (name.isEmpty()) {
+                System.out.println("Student name cannot be empty. Please enter a valid name.");
+                Ui.printDivider();
+            } else if (findStudentByName(masterStudentList, name) != null) {
+                logger.log(Level.WARNING, "Student with the same name already exists.");
+                System.out.println("Student with the same name already exists. Please enter a different name.");
+                Ui.printDivider();
+            } else {
+                break;
+            }
+        }
+        return name;
+    }
+
+    /**
+     * Prompts the user to enter attributes for a student, including subject, grade, and classes attended.
+     * Continues to prompt the user until at least one subject and grade are provided.
+     *
+     * @param in         The scanner object to read user input.
+     * @param attributes The StudentAttributes object to store the attributes of the student.
+     */
     private static void attributeInput(Scanner in, StudentAttributes attributes) {
         while (true) {
             System.out.print("Subject: ");
             String subject = in.nextLine().trim();
+            if (subject.isEmpty()) {
+                logger.log(Level.WARNING, "Empty subject provided.");
+                System.out.println("Subject cannot be empty. Please enter a valid subject.");
+                Ui.printDivider();
+                continue;
+            }
             double grade = checkForGradeFormat(in);
             int classesAttended = checkForClassesAttendedFormat(in);
 
             SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
-
             attributes.addSubjectGrade(subjectGrade);
 
             System.out.println("Do you want to add another subject and grade? (yes/no)");
