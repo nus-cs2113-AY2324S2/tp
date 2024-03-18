@@ -13,6 +13,7 @@ public class StorageTest {
     @Test
     public void testExist(){
         File f = new File(FILE_PATH);
+        assert f.getPath().equals(FILE_PATH) : "File exists";
         if (f.exists()) {
             assertTrue(true);
         } else {
