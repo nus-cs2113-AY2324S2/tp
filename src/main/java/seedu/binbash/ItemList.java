@@ -45,7 +45,7 @@ public class ItemList {
     public String deleteItemName(String itemName) {
         int targetIndex = -1;
         for (Item item : itemList) {
-            if (item.getItemName() == itemName) {
+            if (item.getItemName().equals(itemName)) {
                 targetIndex = itemList.indexOf(item);
                 break;
             }
