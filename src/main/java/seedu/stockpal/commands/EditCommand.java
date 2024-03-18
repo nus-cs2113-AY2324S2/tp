@@ -1,6 +1,7 @@
 package seedu.stockpal.commands;
 
 import seedu.stockpal.common.CommandParameter;
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -10,9 +11,12 @@ import seedu.stockpal.data.product.Price;
 import seedu.stockpal.ui.Ui;
 
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author Kobot7
 public class EditCommand extends ListActionCommand {
+    private static Logger logger = Logger.getLogger("Foo");
     public static final String COMMAND_KEYWORD = "edit";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
             + ": Edits an existing product in the inventory at the specific PID\n"
@@ -64,6 +68,7 @@ public class EditCommand extends ListActionCommand {
         }
         assert productList.getSize() > 0;
         productList.updateProduct(productIndex, name, quantity, description, price);
+        logger.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
         Ui.printEditSuccessMessage();
     }
 }
