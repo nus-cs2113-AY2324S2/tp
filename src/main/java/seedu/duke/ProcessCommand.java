@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import storage.Storage;
+import gpa.gpaMain;
+import gpa.gpaCommand;
 
 public class ProcessCommand {
 
@@ -8,9 +10,13 @@ public class ProcessCommand {
     }
 
     public void processUserCommand(String command) {
+        if(command.startsWith("gpa")){
+            gpaCommand.ProcessGPACommand();
+        }
 
         if (!command.startsWith("e/")) {
             System.out.println("Invalid command. Commands related to expenditures should start with 'e/'.");
+            System.out.println("Commands related to gpa calculation should start with 'gpa'.");
             return;
         }
 
@@ -35,6 +41,7 @@ public class ProcessCommand {
                 System.out.println("Invalid index format for deletion.");
             }
             break;
+
         default:
             System.out.println("Unknown function: " + action);
             break;
@@ -44,6 +51,10 @@ public class ProcessCommand {
     public boolean userCommand(String input, ExpenditureList expenses) {
         input = input.trim().toLowerCase();
         switch (input) {
+        case "gpa":
+            gpaCommand.ProcessGPACommand();
+            UI.printHelpMessage();
+            break;
         case "exit":
             System.out.println("Shutting down... Goodbye!!");
             Storage.writeToFile(expenses);
