@@ -1,4 +1,6 @@
-package seedu.duke;
+package bookmarked;
+
+import bookmarked.Book;
 
 import java.util.Scanner;
 import java.util.ArrayList;

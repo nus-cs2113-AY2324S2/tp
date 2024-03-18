@@ -1,4 +1,4 @@
-package seedu.duke;
+package bookmarked;
 
 public class Book {
     protected String description;
