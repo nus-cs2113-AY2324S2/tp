@@ -17,16 +17,9 @@ public class UpdateCommand implements Command {
 
     @Override
     public void execute() {
-        Item oldItem = Inventory.get(name);
-        if (newQuantity == -1) {
-            newQuantity = oldItem.getQuantity();
-        }
-        if (newPrice == -1) {
-            newPrice = oldItem.getPrice();
-        }
         assert newQuantity >= 0;
         assert newPrice >= 0;
-        Item newItem = new Item(oldItem.getName(), newQuantity, newPrice);
+        Item newItem = new Item(name, newQuantity, newPrice);
         Inventory.put(name, newItem);
         Ui.updateCommandSuccess(newItem);
     }
