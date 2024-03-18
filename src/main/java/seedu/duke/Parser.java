@@ -2,7 +2,7 @@ package seedu.duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Parser {
-    private static final User user;
+    private static User user;
 
     public Parser(User user) {
         this.user = user;
