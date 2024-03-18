@@ -6,5 +6,5 @@ Goal Water 100
 Goal Water 100
 Goal Water 100
 Goal Water 250
-Water 100
-Water 500
+
+
