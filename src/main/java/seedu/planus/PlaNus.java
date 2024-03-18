@@ -24,23 +24,22 @@ public class PlaNus {
      * Runs the PlaNus application.
      */
     public void run() {
-        //ui start message
+        Ui.printLogo();
         Path filePath = Paths.get(Storage.USER_TIMETABLE_FILE_PATH);
 
         if (Files.exists(filePath)) {
             timetable = Storage.loadTimetable("myTimetable");
         }
         else {
-            timetable = Parser.initialiseTimetable();
-            Storage.writeToFile(timetable);
+            timetable = new Timetable();
         }
 
         while (!isExit) {
-            // ui get command String line = Ui.getUserCommand();
-            //isExit = Parser.parseCommand(line, timetable);
+            String line = Ui.getUserCommand();
+            isExit = Parser.parseCommand(line, timetable);
             Storage.writeToFile(timetable);
         }
-        //ui end message
+        Ui.printExit();
     }
     /**
      * Main entry-point for the java.planus.PlaNus application.

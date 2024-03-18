@@ -1,5 +1,7 @@
 package seedu.planus;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Ui {
     public static void printLogo() {
         System.out.println(" ________  ___       ________  ________   ___  ___  ________      \n" +
@@ -48,6 +50,12 @@ public class Ui {
 
     public static void printFailedToWrite() {
         System.out.println("Failed writing timetable to file");
+    }
+
+    public static String getUserCommand() {
+        System.out.print("Command: ");
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 }
 
