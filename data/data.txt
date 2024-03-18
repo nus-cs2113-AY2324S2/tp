@@ -1,0 +1,3 @@
+Goal c 20000
+Meal dumplings 1 300
+Meal dumplings 2 700
