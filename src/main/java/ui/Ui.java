@@ -25,7 +25,7 @@ public class Ui {
      * Prints the prompt for user input.
      */
     public static void promptUserInput() {
-        System.out.print("You: ");
+        System.out.print("You:");
     }
 
     /**
