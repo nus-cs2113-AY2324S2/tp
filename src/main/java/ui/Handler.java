@@ -48,7 +48,7 @@ public class Handler {
                     break;
                 case NEW:
 
-                    handleNew(userInput);
+                    handleExercise(userInput);
 
                     break;
                 case HISTORY:
@@ -59,11 +59,6 @@ public class Handler {
                 case LATEST:
 
                     handleLatest(userInput);
-
-                    break;
-                case EXERCISE:
-
-                    handleExercise(userInput);
 
                     break;
                 case HEALTH:
@@ -125,8 +120,6 @@ public class Handler {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
-            } catch (CustomExceptions.InvalidInput e) {
-                throw new RuntimeException(e);
             }
 
 
@@ -209,9 +202,6 @@ public class Handler {
 
     }
     public static void handleLoad(String userInput){}
-    public static void handleNew(String userInput) throws CustomExceptions.InvalidInput {
-        getRun(userInput);
-    }
     public static void handleHistory(String userInput){
         Output.printHistory("all");
     }
@@ -238,6 +228,7 @@ public class Handler {
     public static void getGym(String input){
         System.out.println("temp");
     }
+
     /**
      * Parses a string containing run information, extracts the command, distance and end time before returning
      * an array of strings containing the information.
@@ -251,7 +242,7 @@ public class Handler {
 
 
         if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
-            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
 
@@ -261,14 +252,23 @@ public class Handler {
         int indexDate = input.indexOf("/date");
 
         String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
+        assert !command.isEmpty() : "Command should not be empty";
+
         String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
+        assert !dSubstring.isEmpty() : "Distance should not be empty";
+        assert dSubstring.matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+
         String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
+        assert !tSubstring.isEmpty() : "Time should not be empty";
+        assert tSubstring.matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
+
         String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
 
 
         if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
             //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
         }
+
 
         results[0] = command;
         results[1] = dSubstring;

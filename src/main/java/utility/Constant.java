@@ -41,7 +41,7 @@ public class Constant {
 
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
-    
+
     // Input Errors
     public static final String INVALID_COMMAND = "Invalid command. Enter 'help' to view available commands.";
     public static final String UNSPECIFIED_PARAMETER = "Parameter(s) unspecified.";
