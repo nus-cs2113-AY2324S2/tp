@@ -1,6 +1,7 @@
 package seedu.stockpal.data.product;
 
 import seedu.stockpal.exceptions.InsufficientAmountException;
+import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 
 public class Quantity {
     protected Integer quantity;
@@ -13,7 +14,11 @@ public class Quantity {
         return this.quantity;
     }
 
-    public void updateIncreaseQuantity(Integer increaseQuantity) {
+    public void updateIncreaseQuantity(Integer increaseQuantity) throws InventoryQuantityOverflowException {
+        long tentativeQuantity = (long) quantity + (long) increaseQuantity;
+        if (tentativeQuantity >= Integer.MAX_VALUE) {
+            throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
+        }
         quantity += increaseQuantity;
     }
 
