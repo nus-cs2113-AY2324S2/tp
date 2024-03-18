@@ -9,6 +9,7 @@ public class Course {
     private int modularCredit;
     private int year;
     private int term;
+    private Grade grade;
 
     /**
      * Constructor to initialise all the attributes
@@ -25,6 +26,7 @@ public class Course {
         this.modularCredit = modularCredit;
         this.year = year;
         this.term = term;
+        this.grade = null;
     }
 
     /**
@@ -37,6 +39,10 @@ public class Course {
      */
     public Course(String courseCode, String courseName, int year, int term) {
         this(courseCode, courseName, 4, year, term);
+    }
+
+    public void setGrade(String letterGrade) {
+        grade = new Grade(letterGrade);
     }
 
     public String getCourseCode() {
@@ -55,6 +61,14 @@ public class Course {
         return term;
     }
 
+    public double getNumberGrade() {
+        return grade.getNumberGrade();
+    }
+
+    public String getLetterGrade() {
+        return grade.getLetterGrade();
+    }
+
     /**
      * Returns a string containing details of the course
      *
@@ -62,6 +76,15 @@ public class Course {
      */
     public String getDetails() {
         return courseCode + " " + courseName + " (MC: " + modularCredit + ")";
+    }
+
+    /**
+     * Returns a string containing the grade in letter form of the course
+     *
+     * @return A string that contains the course code and the grade
+     */
+    public String getGrade() {
+        return courseCode + ": " + getLetterGrade();
     }
 
     /**
@@ -85,6 +108,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return courseCode + "," + courseName + "," + modularCredit + "," + year + "," + term;
+        return courseCode + "," + courseName + "," + modularCredit + "," + year + "," + term + "," + getLetterGrade();
     }
 }
