@@ -21,6 +21,6 @@ public class Flower {
 
     @Override
     public String toString() {
-        return ("Name: " + name + "\n" + "Colour: " + colour + "\n" + "Occasion: " + occasion + "\n");
+        return ("Name: " + name + "\n" + "Colour: " + colour + "\n" + "Occasion: " + occasion);
     }
 }
