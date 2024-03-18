@@ -40,12 +40,6 @@ public class Handler {
                 switch (command) {
                 case EXIT:
                     return;
-
-                case LOAD:
-
-                    handleLoad(userInput);
-
-                    break;
                 case NEW:
 
                     handleExercise(userInput);
@@ -66,47 +60,6 @@ public class Handler {
                     handleHealth(userInput);
 
                     break;
-                case HEIGHT:
-
-                    handleHeight(userInput);
-
-                    break;
-                case WEIGHT:
-
-                    handleWeight(userInput);
-
-                    break;
-
-                case BMI:
-
-                    handleBmi(userInput);
-
-                    break;
-
-                case START:
-
-                    handleStart(userInput);
-
-                    break;
-
-                case END:
-
-                    handleEnd(userInput);
-
-                    break;
-
-                case TODAY:
-
-                    handleToday(userInput);
-
-                    break;
-
-                case LENGTH:
-
-                    handleLength(userInput);
-
-                    break;
-
                 case HELP:
 
                     Output.printHelp();
@@ -123,52 +76,6 @@ public class Handler {
             }
 
 
-        }
-    }
-
-    /**
-     * Checks the type of exercise based on the user input.
-     * Usage: to use this method whenever the user enters a new exercise.
-     * Handles all the checks for input validity and sufficiency.
-     * Can assume input is valid and sufficient if no exceptions are thrown.
-     * @param userInput The user input string.
-     * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
-     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
-     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
-     */
-    public static String checkTypeOfExercise(String userInput) throws
-            CustomExceptions.InvalidInput,
-            CustomExceptions.InsufficientInput {
-        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
-
-        String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
-
-        if (exerciseType.isBlank()){
-            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_EXERCISE);
-        }
-
-        exerciseType = exerciseType.toLowerCase();
-
-
-        boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
-        boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
-        if(!isRun && !isGym){
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
-        }
-
-        if(isRun && userInputs.length < 5){
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
-        }
-
-        if(isGym && userInputs.length < 3){
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
-        }
-
-
-        if (isRun){
-            return Constant.RUN;
-        }else {
-            return Constant.GYM;
         }
     }
 
@@ -201,7 +108,55 @@ public class Handler {
         }
 
     }
-    public static void handleLoad(String userInput){}
+
+    /**
+     * Checks the type of exercise based on the user input.
+     * Usage: to use this method whenever the user enters a new exercise.
+     * Handles all the checks for input validity and sufficiency.
+     * Can assume input is valid and sufficient if no exceptions are thrown.
+     * @param userInput The user input string.
+     * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     */
+    public static String checkTypeOfExercise(String userInput) throws
+            CustomExceptions.InvalidInput,
+            CustomExceptions.InsufficientInput {
+        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
+
+        String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
+
+        if (exerciseType.isBlank()){
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_EXERCISE);
+        }
+
+        exerciseType = exerciseType.toLowerCase();
+
+
+        boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
+        boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
+        if(!isRun && !isGym){
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
+        }
+        
+
+        if(isRun && userInputs.length < 5){
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
+        }
+
+        if(isGym && userInputs.length < 3){
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
+        }
+
+
+        if (isRun){
+            return Constant.RUN;
+        }else {
+            return Constant.GYM;
+        }
+    }
+
+
     public static void handleHistory(String userInput){
         Output.printHistory("all");
     }
@@ -209,20 +164,11 @@ public class Handler {
         // if asked to show latest run
         Output.printLatestRun();
     }
-    public static void handleHealth(String userInput){}
-    public static void handleHeight(String userInput){
-        Health.setHeightAndWeight(userInput);
+    public static void handleHealth(String userInput){
+
     }
-    public static void handleWeight(String userInput){
-        Health.setHeightAndWeight(userInput);
-    }
-    public static void handleBmi(String userInput){
-        Bmi.calculateBmi();
-    }
-    public static void handleStart(String userInput){}
-    public static void handleEnd(String userInput){}
-    public static void handleToday(String userInput){}
-    public static void handleLength(String userInput){}
+
+
 
 
     public static void getGym(String input){
@@ -277,8 +223,6 @@ public class Handler {
 
         return results;
     }
-
-
 
     /**
      * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
