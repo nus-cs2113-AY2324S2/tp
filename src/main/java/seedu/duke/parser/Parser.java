@@ -12,7 +12,7 @@ import seedu.duke.command.GradeCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.ViewGpaCommand;
-
+import seedu.duke.command.ViewCommand;
 
 public class Parser {
 
@@ -91,8 +91,8 @@ public class Parser {
     }
 
     private static Command viewCommand(Map<String, String> args) {
-        // return new ViewCommand();
-        return new InvalidCommand();
+        String moduleCode = args.getOrDefault("mode", "MODE_ERROR");
+        return new ViewCommand(moduleCode);
     }
 
     private static Command removeCommand(Map<String, String> args) {

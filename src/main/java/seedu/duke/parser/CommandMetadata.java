@@ -39,7 +39,7 @@ public class CommandMetadata {
         Map<String, String> arguments = new HashMap<>();
 
         for (int i = 0; i < groupArguments.length; i++) {
-            arguments.put(groupArguments[i], matcher.group(groupArguments[i]));
+            arguments.put(groupArguments[i], matcher.group(groupArguments[i]).toUpperCase());
         }
 
         return arguments;
