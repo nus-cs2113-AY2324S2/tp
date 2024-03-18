@@ -9,7 +9,8 @@ import java.util.ArrayList;
  */
 public class Ui {
     private static final String BOT_NAME = "Wellness360";
-    private static final String SEP = "____________________________________________________________";
+    private static final String SEP = "_______________________________________________________" +
+            "_________________________________________________________";
 
     /**
      * Greets the user upon starting the application.
@@ -44,10 +45,16 @@ public class Ui {
         System.out.println(SEP + "\n" +message + "\n" + SEP);
     }
 
+    public static void printMessageWithoutSepNewLine(String message) {
+        System.out.println(SEP + "\n" + message + SEP);
+    }
+
     public static void printList(ArrayList list) {
+        System.out.println(SEP);
         for (int i = 0; i < list.size(); i ++) {
             System.out.println((i + 1) + ". " + list.get(i).toString());
         }
+        System.out.println(SEP);
     }
 
 }
