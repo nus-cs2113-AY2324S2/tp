@@ -8,8 +8,8 @@ import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
-
 import java.util.Scanner;
+import storage.LogFile;
 
 
 /**
@@ -17,8 +17,7 @@ import java.util.Scanner;
  * before providing feedback to the user.
  */
 public class Handler {
-
-
+    static LogFile logging = new LogFile();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -29,16 +28,16 @@ public class Handler {
     public static void processInput() {
         Scanner in = new Scanner(System.in);
 
+
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
-
-            // Convert command to uppercase before processing
             String instruction = userInput.toUpperCase().split(" ")[0];
+            logging.writeLog("User Input: " + userInput, false);
 
             try {
                 Command command = Command.valueOf(instruction);
-
                 switch (command) {
+
                 case EXIT:
                     return;
                 case NEW:
@@ -139,7 +138,6 @@ public class Handler {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(Constant.RUN)) {
                 String[] runDetails = getRun(userInput);
-
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
@@ -247,13 +245,16 @@ public class Handler {
      */
     public static void initialiseBot() {
         Output.printWelcomeBanner();
+        logging.writeLog("Started bot", false);
         // Yet to implement : Check for existing save, if not, make a new one
         // Yet to implement : int status = Storage.load();
         int status = 1;
         if (status == 1) {
             Output.printGreeting(1);
             Scanner in = new Scanner(System.in);
-            System.out.println("Welcome aboard, " + in.nextLine());
+            String name = in.nextLine();
+            System.out.println("Welcome aboard, " + name);
+            logging.writeLog("Name entered: " + name, false);
         }
     }
 
@@ -262,6 +263,7 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
+        logging.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
