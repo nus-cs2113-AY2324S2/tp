@@ -391,9 +391,9 @@ public class Parser {
      *
      * @param tokens user input split  by " "
      *               eg. String[] tokens = {"/n", "The", "current", "name", "/location", "New", "Place"};
-     * @param i index of the current word in the String[] tokens
+     * @param i      index of the current word in the String[] tokens
      * @return sentence String name with concatenated words
-     *               eg. sentence = "New Place"
+     * eg. sentence = "New Place"
      */
     private String addWordsAfterSeparator(String[] tokens, int i) {
         String sentence = null;

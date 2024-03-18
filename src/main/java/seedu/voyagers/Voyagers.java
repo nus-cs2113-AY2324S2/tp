@@ -1,6 +1,8 @@
 package seedu.voyagers;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import static seedu.voyagers.Storage.readTripFile;
 import static seedu.voyagers.Storage.writeTripFile;
 
@@ -12,7 +14,7 @@ public class Voyagers {
         new Voyagers().runTrip();
     }
 
-    void runTrip () {
+    void runTrip() {
 
         //Initialise
         ArrayList<Trip> tripArrayList = new ArrayList<>();
