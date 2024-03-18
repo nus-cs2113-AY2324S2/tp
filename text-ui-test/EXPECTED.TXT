@@ -7,7 +7,7 @@ Data file successfully created!
 Enter a command:
 ------------------------------------
 ------------------------------------
-null
+Invalid command. Please try again.
 ------------------------------------
 ------------------------------------
 Enter a command:
