@@ -8,6 +8,8 @@ import classify.student.SubjectGrade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InputParsing {
     private static final String BYE = "bye";
@@ -21,12 +23,15 @@ public class InputParsing {
     private static final String ENTER_STUDENT_NAME = "Enter student name: ";
     private static final String STUDENT_DETAILS = "Student details:";
     private static final String NAME = "Name: ";
-    private static final String GRADE = "Grade: ";
     private static final String CLASSES_ATTENDED = "Classes Attended: ";
     private static final String STUDENT_NOT_FOUND = "Student not found!";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
     private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
     private static final String HELP = "help";
+    private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+    private static final String SUBJECT = "Subject: ";
+    private static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100: ";
+
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand.toLowerCase()) {
@@ -110,26 +115,37 @@ public class InputParsing {
         String studentName = in.nextLine();
         Student foundStudent = findStudentByName(masterStudentList, studentName);
         if (foundStudent != null) {
+            logger.log(Level.INFO, "Viewing student details: " + studentName);
             System.out.println(STUDENT_DETAILS);
             System.out.println(NAME + foundStudent.getName());
             StudentAttributes attributes = foundStudent.getAttributes();
-            if (attributes != null) {
-                List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
-                if (!subjectGrades.isEmpty()) {
-                    for (SubjectGrade subjectGrade : subjectGrades) {
-                        System.out.println("Subject: " + subjectGrade.getSubject());
-                        System.out.println("Grade: " + subjectGrade.getGrade());
-                        System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
-                        System.out.println();
-                    }
-                } else {
-                    System.out.println("No subjects and grades found for this student.");
+            showAttributes(attributes);
+        } else {
+            logger.log(Level.WARNING, "Student not found: " + studentName);
+            System.out.println(STUDENT_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Displays the attributes of a student.
+     *
+     * @param attributes The attributes of the student to display.
+     */
+    private static void showAttributes(StudentAttributes attributes) {
+        if (attributes != null) {
+            List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
+            if (!subjectGrades.isEmpty()) {
+                for (SubjectGrade subjectGrade : subjectGrades) {
+                    System.out.println(SUBJECT + subjectGrade.getSubject());
+                    System.out.println(CURRENT_MARKS_OUT_OF_100 + subjectGrade.getGrade());
+                    System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
+                    System.out.println();
                 }
             } else {
-                System.out.println("No attributes found for this student.");
+                System.out.println("No subjects and grades found for this student.");
             }
         } else {
-            System.out.println(STUDENT_NOT_FOUND);
+            System.out.println("No attributes found for this student.");
         }
     }
 
@@ -149,18 +165,18 @@ public class InputParsing {
         String name = in.nextLine().trim();
 
         if (findStudentByName(masterStudentList, name) != null) {
+            logger.log(Level.WARNING, "Student with the same name already exists.");
             System.out.println("Student with the same name already exists. Please enter a different name.");
             Ui.printDivider();
             return;
         }
 
         StudentAttributes attributes = new StudentAttributes(name);
-
         attributeInput(in, attributes);
-
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
 
+        logger.log(Level.INFO, "Student added successfully.");
         System.out.println(STUDENT_ADDED_SUCCESSFULLY);
         Ui.printDivider();
     }
@@ -205,6 +221,7 @@ public class InputParsing {
                 }
                 break;
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Invalid input for classes attended: " + classesAttendedInput, e);
                 System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
                 Ui.printDivider();
             }
@@ -222,7 +239,7 @@ public class InputParsing {
     private static double checkForGradeFormat(Scanner in) {
         double grade;
         while (true) {
-            System.out.print(GRADE);
+            System.out.print(CURRENT_MARKS_OUT_OF_100);
             String gradeInput = in.nextLine();
             try {
                 grade = Double.parseDouble(gradeInput);
@@ -233,6 +250,7 @@ public class InputParsing {
                 }
                 break;
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Invalid input for grade: " + gradeInput, e);
                 System.out.println("Invalid input for grade. Please enter a valid number.");
                 Ui.printDivider();
             }
