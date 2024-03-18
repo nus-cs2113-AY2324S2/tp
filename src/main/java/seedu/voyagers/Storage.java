@@ -35,7 +35,7 @@ public class Storage {
             s.close();
         } catch (FileNotFoundException e) {
 
-            System.out.println("File not found. \nCreating new file... \nFile created.");
+            System.out.println("File not found.\nCreating new file...\nFile created.");
             try {
                 f.createNewFile();
                 logger.log(Level.INFO, "File created.");
