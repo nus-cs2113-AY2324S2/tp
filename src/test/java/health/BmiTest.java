@@ -26,15 +26,14 @@ class BmiTest {
     @Test
     void calculateBMI_heightWeight_printsCorrectBMIAndCategory() {
         // Arrange
-        Health.height = 1.75; // 175 cm
-        Health.weight = 70.0; // 70 kg
+        Bmi bmi = new Bmi("1.75", "70.0");
         String expected = "Your BMI is 22.86"
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator();
 
         // Act
-        Bmi.calculateBmi();
+        System.out.println(bmi);
 
         // Assert
         assertEquals(expected, outContent.toString());
@@ -46,7 +45,7 @@ class BmiTest {
         String expected = "You're underweight." + System.lineSeparator();
 
         // Act
-        Bmi.printBmiCategory(17.5);
+        System.out.println(Bmi.getBmiCategory(17.5));
 
         // Assert
         assertEquals(expected, outContent.toString());
@@ -58,7 +57,7 @@ class BmiTest {
         String expected = "Great! You're within normal range." + System.lineSeparator();
 
         // Act
-        Bmi.printBmiCategory(22.0);
+        System.out.println(Bmi.getBmiCategory(22.0));
 
         // Assert
         assertEquals(expected, outContent.toString());
@@ -70,7 +69,7 @@ class BmiTest {
         String expected = "You're overweight." + System.lineSeparator();
 
         // Act
-        Bmi.printBmiCategory(27.0);
+        System.out.println(Bmi.getBmiCategory(27.0));
 
         // Assert
         assertEquals(expected, outContent.toString());
@@ -82,7 +81,7 @@ class BmiTest {
         String expected = "You're obese." + System.lineSeparator();
 
         // Act
-        Bmi.printBmiCategory(32.0);
+        System.out.println(Bmi.getBmiCategory(32.0));
 
         // Assert
         assertEquals(expected, outContent.toString());
@@ -94,7 +93,26 @@ class BmiTest {
         String expected = "You're severely obese." + System.lineSeparator();
 
         // Act
-        Bmi.printBmiCategory(40.0);
+        System.out.println(Bmi.getBmiCategory(40.0));
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    void showCurrentBmi_printsCorrectCurrentBmi() {
+        // Arrange
+        Bmi bmi = new Bmi("1.71", "60.5");
+
+        HealthList.addBmi(bmi);
+
+        String expected = "Your BMI is 20.69"
+                + System.lineSeparator()
+                + "Great! You're within normal range."
+                + System.lineSeparator();
+
+        // Act
+        HealthList.showCurrentBmi();
 
         // Assert
         assertEquals(expected, outContent.toString());
