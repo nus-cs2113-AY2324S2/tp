@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
 
 public class DeleteNameCommand extends Command {
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("deletename\\s(?<index>\\d+)");
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("deletename\\s(?<itemName>\\d+)");
     private final String itemName;
 
     public DeleteNameCommand(ItemList itemList, String itemName) {
