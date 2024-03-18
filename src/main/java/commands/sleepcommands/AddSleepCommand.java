@@ -21,7 +21,7 @@ public class AddSleepCommand implements Command {
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours slept");
         }
-        this.sleepCycleToAdd = new SleepCycle(hourSlept, userCommand[1]);
+        this.sleepCycleToAdd = new SleepCycle(hourSlept, userCommand[1].trim());
     }
     @Override
     public void execute() {
