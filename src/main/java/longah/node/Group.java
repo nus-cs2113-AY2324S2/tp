@@ -92,6 +92,7 @@ public class Group {
         }
 
         this.transactions.addTransaction(transactionExpression, this.members);
+        updateTransactionSolution();
         System.out.println(borrowerName + " has no more debts!");
     }
 }
