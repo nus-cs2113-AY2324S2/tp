@@ -18,10 +18,10 @@ public class UpdateCommand implements Command {
     @Override
     public void execute() {
         Item oldItem = Inventory.get(name);
-        if (newQuantity == 0) {
+        if (newQuantity == -1) {
             newQuantity = oldItem.getQuantity();
         }
-        if (newPrice == 0) {
+        if (newPrice == -1) {
             newPrice = oldItem.getPrice();
         }
         Item newItem = new Item(oldItem.getName(), newQuantity, newPrice);
