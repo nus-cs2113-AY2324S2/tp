@@ -20,7 +20,7 @@ public class SleepCycleList {
         sleepCycleList.add(sleepCycle);
         totalHrsSlept += sleepCycle.getHoursSlept();
         numberOfCycles += 1;
-        Ui.printMessageWithSepNewLine("---SleepCycle for " + sleepCycle.getDateOfSleep() + " has been added ---");
+        Ui.printMessageWithSepNewLine("--- SleepCycle for " + sleepCycle.getDateOfSleep() + " has been added ---");
     }
 
     public void listSleepCycles() {
