@@ -1,6 +1,9 @@
 package longah.node;
 
+import java.util.ArrayList;
+
 import longah.util.MemberList;
+import longah.util.Subtransaction;
 import longah.util.TransactionList;
 import longah.handler.StorageHandler;
 import longah.exception.LongAhException;
@@ -9,6 +12,7 @@ public class Group {
     private MemberList members;
     private TransactionList transactions;
     private StorageHandler storage;
+    private ArrayList<Subtransaction> transactionSolution;
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.
@@ -53,5 +57,12 @@ public class Group {
      */
     public TransactionList getTransactionList() {
         return this.transactions;
+    }
+
+    /**
+     * Update the transaction solution of the group based on the debts and credits of the members.
+     */
+    public void updateTransactionSolution() {
+        this.transactionSolution = this.members.solveTransactions();
     }
 }
