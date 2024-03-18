@@ -17,12 +17,12 @@ class DukeTest {
     @Test
     public void testInvalidCommand() {
         // Arrange
-        ByteArrayInputStream in = new ByteArrayInputStream("invalid\nbye\n".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("invalid\r\nbye\r\n".getBytes());
         System.setIn(in);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        String expectedOutput = "Timetable comparison app opened." + System.lineSeparator() + "Invalid command." + System.lineSeparator() + "Bye.";
+        String expectedOutput = "Timetable comparison app opened. \r\nInvalid command. \r\nBye. \r\n";
 
         // Act
         Duke.main(new String[0]);
