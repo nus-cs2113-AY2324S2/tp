@@ -50,8 +50,7 @@ public class Duke {
                 parser.parseCommand(input);
             } else if (Objects.equals(command, "view")) {
                 userList.getActiveUser().viewTimetable();
-            }
-            else {
+            } else {
                 UI.printInvalidCommand();
             }
         }
