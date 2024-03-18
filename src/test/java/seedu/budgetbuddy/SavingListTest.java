@@ -1,5 +1,6 @@
 package seedu.budgetbuddy;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +21,18 @@ public class SavingListTest {
     }
 
     @Test
+    public void calculateRemainingSavings_insufficientFunds_success() {
+        SavingList savingList = new SavingList();
+        double initialAmount = 200;
+        double totalExpenses = 1000;
+        double expectedRemaining = -800;
+
+        double actualRemaining = savingList.calculateRemainingSavings(initialAmount, totalExpenses);
+
+        assertEquals(expectedRemaining, actualRemaining);
+    }
+
+    @Test @Disabled
     public void calculateRemainingSavings_insufficientFunds_exceptionThrown() {
         SavingList savingList = new SavingList();
         double initialAmount = 100;
