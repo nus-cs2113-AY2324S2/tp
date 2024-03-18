@@ -1,7 +1,10 @@
 package seedu.binbash.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.binbash.Item;
 import seedu.binbash.ItemList;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +12,7 @@ class ListCommandTest {
 
     @Test
     void execute_listCommandWithTwoItemsInItemList_correctPrintFormatForBothItems() {
-        ItemList itemList = new ItemList();
+        ItemList itemList = new ItemList(new ArrayList<Item>());
 
         itemList.addItem("testItem1", "Test item 1", 2,
                 "3", 4.00, 5.00);

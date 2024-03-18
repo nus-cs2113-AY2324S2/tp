@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class ItemList {
     private final List<Item> itemList;
 
-    public ItemList() {
-        itemList = new ArrayList<>();
+    public ItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public List<Item> getItemList() {
