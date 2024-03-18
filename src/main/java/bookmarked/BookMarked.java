@@ -1,9 +1,12 @@
 package bookmarked;
 
 import bookmarked.Book;
+import bookmarked.ui.Ui;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import static bookmarked.ui.Ui.greetings;
 
 public class BookMarked {
 
@@ -12,8 +15,7 @@ public class BookMarked {
 
 
     public static void main(String[] args) {
-        System.out.println("Welcome to BookMarked, a one-stop app for all your librarian needs!");
-        System.out.println("Type /help to see a list of commands!");
+        Ui.greetings();
 
         Scanner in = new Scanner(System.in);
         String newItem = in.nextLine();
