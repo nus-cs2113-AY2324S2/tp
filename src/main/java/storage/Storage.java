@@ -48,6 +48,11 @@ public abstract class Storage {
         }
     }
 
+    public static boolean isFileCreated (String filePath) {
+        File f = new File(filePath);
+        return f.exists() && !f.isDirectory();
+    }
+
 }
 
 
