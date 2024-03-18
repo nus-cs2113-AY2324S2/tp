@@ -10,7 +10,12 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
     - [Features](#features)
     - [Command Format](#features)
     - [Usage](#usage)
-        - [`reflect get` - Get reflection questions](#getting-reflection-questions-reflect-get)
+        - Reflection Manager
+          - [`reflect get` - Get reflection questions](#getting-reflection-questions-reflect-get)
+        - Habit Tracker
+          - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
+          - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
+          - [`habit update` - Update habit count after completing a habit](#update-habit-count-after-completing-a-habit-habit-update)
 
 ## Quick Start
 
@@ -70,6 +75,95 @@ ________________________________________________________________________________
 3. What are your biggest strengths, and how can you leverage them more effectively in your daily life?
 4. How do you prioritize self-care and well-being in your daily life?
 5. Reflect on a time when you took a creative risk. What did you learn from the experience?
+________________________________________________________________________________________________________________
+```
+
+### Add a new habit: `habit add`
+Allow the user to add new habits into the habit tracker.
+
+Format:
+```
+habit add [HABIT_DESCRIPTION]
+```
+
+* The `habit` and `add` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit add vacuum and mop the floor
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Great! You have added a new habit:
+  'vacuum and mop the floor' was successfully added!
+________________________________________________________________________________________________________________
+```
+
+### List out all habits: `habit list`
+Prints a list of all the habits that the user has added into the habit tracker.
+
+Format:
+```
+habit list
+```
+
+* The `habit` and `list` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit list
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Here is the list of all your habits!
+  1. vacuum and mop the floor [count: 2]
+  2. complete leetcode daily question [count: 3]
+________________________________________________________________________________________________________________
+```
+
+### Update habit count after completing a habit: `habit update`
+Allow the user to update the number of times they have completed a habit. The user will be able to increase the 
+count after they have completed the habit during the day. If the user has accidentally increased the count, 
+they can decrease the count too.
+
+Format:
+```
+habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
+```
+
+* The `habit`, `list`, `id` and `by` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage (increasing count):
+```
+habit update /id 2 /by +1
+```
+* For increasing count, you can omit the positive sign `+` in front, and just type the command as `/by 1`
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Good Job! You have completed your habit!
+The count for your habit has been updated:
+  2. complete leetcode daily question [count: 4]
+________________________________________________________________________________________________________________
+```
+
+Example of usage (decreasing count):
+```
+habit update /id 2 /by -2
+```
+* For decreasing count, you must include a negative sign `-` in front of the count.
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+The count for your habit has been updated:
+  2. complete leetcode daily question [count: 2]
 ________________________________________________________________________________________________________________
 ```
 
