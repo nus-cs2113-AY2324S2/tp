@@ -87,22 +87,22 @@ public class RecipeList {
      *
      * @param allergy The allergy that the user is trying to filter by
      */
-    public void findAllergy(String allergy) {
+    public String findAllergy(String allergy) {
         int count = 0;
+        String output = "";
         for (Recipe item: recipes) {
             for (String value : item.allergies) {
                 if (value.contains(allergy)) {
-                    System.out.println("List of recipes with " + allergy + " mentioned:");
-                    System.out.print((count + 1) + ". ");
-                    System.out.println(item.name);
+                    output = "List of recipes with " + allergy + " mentioned:\n" + item.name + "\n";
                     count++;
                 }
             }
         }
         //if no allergies are found
         if (count == 0) {
-            System.out.println("There are no recipes with " + allergy);
+            output = "There are no recipes with " + allergy;
         }
+        return output;
     }
 
     /**

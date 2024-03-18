@@ -5,13 +5,10 @@ import recipeio.enums.MealCategory;
 import recipeio.recipe.Recipe;
 import recipeio.recipe.RecipeList;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 
 class RecipeIOTest {
@@ -52,8 +49,6 @@ class RecipeIOTest {
 
     @Test
     public void testFindAllergy() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("eggs");
         Recipe testRecipe = new Recipe("Spaghetti Carbonara", 0, 0, testAllergies,
@@ -61,11 +56,7 @@ class RecipeIOTest {
         RecipeList testRecipeList = new RecipeList();
         testRecipeList.addRecipe(testRecipe);
         testRecipeList.findAllergy("eggs");
-        String expectedOutput = "List of recipes with eggs mentioned:\n1. Spaghetti Carbonara\n";
-        if (outContent.toString().equals(expectedOutput)) {
-            assertTrue(true);
-        } else {
-            fail();
-        }
+        String expectedOutput = "List of recipes with eggs mentioned:\nUseSpaghetti Carbonara\n";
+        assertEquals(testRecipeList.findAllergy("eggs"), expectedOutput);
     }
 }
