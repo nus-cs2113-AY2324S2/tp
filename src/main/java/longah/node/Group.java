@@ -95,6 +95,7 @@ public class Group {
 
         this.transactions.addTransaction(transactionExpression, this.members);
         updateTransactionSolution();
+        assert this.members.getMember(borrowerName).getBalance() == 0 : "Borrower should have no more debts.";
         System.out.println(borrowerName + " has no more debts!");
     }
 

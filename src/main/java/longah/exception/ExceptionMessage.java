@@ -22,6 +22,7 @@ public enum ExceptionMessage {
     STORAGE_FILE_NOT_READ ("File not read."),
     STORAGE_FILE_NOT_WRITTEN ("File not written."),
     INVALID_STORAGE_CONTENT ("Invalid content in storage file, line ignored."),
+    STORAGE_FILE_CORRUPTED ("Storage file is corrupted."),
 
     // Ui exceptions
     INVALID_FINDPAYMENT_COMMAND("Invalid command format." +

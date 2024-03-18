@@ -146,6 +146,7 @@ public class MemberList {
         ArrayList<ArrayList<Member>> classifiedMembers = classifyMembers();
         ArrayList<Member> positiveMembers = classifiedMembers.get(0);
         ArrayList<Member> negativeMembers = classifiedMembers.get(1);
+        assert !positiveMembers.isEmpty() && !negativeMembers.isEmpty() : "Members should be classified.";
 
         ArrayList<Subtransaction> subtransactions = new ArrayList<>();
         int positiveIndex = 0;
