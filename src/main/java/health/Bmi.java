@@ -34,7 +34,7 @@ public class Bmi extends Health {
     public static String[] getBmi(String input) throws CustomExceptions.InvalidInput {
         String[] results = new String[Constant.BMI_PARAMETERS];
 
-        if(!input.contains("/h") || !input.contains("/height:") || !input.contains("/weight:")) {
+        if (!input.contains("/h") || !input.contains("/height:") || !input.contains("/weight:")) {
             throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
         }
 
@@ -55,7 +55,7 @@ public class Bmi extends Health {
         results[2] = weightSubstring;
 
         return results;
-     }
+    }
 
 
     /*
@@ -87,6 +87,6 @@ public class Bmi extends Health {
 
     @Override
     public String toString() {
-        return "Your BMI is " + calculateBmiValue() + System.lineSeparator() + getBmiCategory(bmiValue);
+        return "Your BMI is " + this.calculateBmiValue() + System.lineSeparator() + this.getBmiCategory(bmiValue);
     }
 }

@@ -98,4 +98,23 @@ class BmiTest {
         // Assert
         assertEquals(expected, outContent.toString());
     }
+
+    @Test
+    void showCurrentBmi_printsCorrectCurrentBmi() {
+        // Arrange
+        Bmi bmi = new Bmi("1.71", "60.5");
+
+        HealthList.addBmi(bmi);
+
+        String expected = "Your BMI is 20.69"
+                + System.lineSeparator()
+                + "Great! You're within normal range."
+                + System.lineSeparator();
+
+        // Act
+        HealthList.showCurrentBmi();
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
 }

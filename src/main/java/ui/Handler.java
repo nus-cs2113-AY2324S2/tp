@@ -172,7 +172,7 @@ public class Handler {
     public static void handleExercise(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
-            if (typeOfExercise.equals(Constant.RUN)){
+            if (typeOfExercise.equals(Constant.RUN)) {
                 String[] runDetails = getRun(userInput);
 
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
@@ -182,12 +182,11 @@ public class Handler {
                 Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
                 WorkoutList.addRun(newRun);
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
-            } else if (typeOfExercise.equals(Constant.GYM)){
+            } else if (typeOfExercise.equals(Constant.GYM)) {
                 // Yet to implement : handleGym(userInput);
                 getGym(userInput);
             }
-        }
-        catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
         }
 
@@ -220,8 +219,7 @@ public class Handler {
             } else if (typeOfHealth.equals(Constant.PERIOD)){
                 // Yet to implement
             }
-        }
-        catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
         }
     }
