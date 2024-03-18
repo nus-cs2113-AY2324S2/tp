@@ -3,7 +3,7 @@ package meditracker;
 import meditracker.command.AddCommand;
 import org.junit.jupiter.api.Test;
 import meditracker.exception.MediTrackerException;
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,11 +17,11 @@ class AddCommandTest {
         // setup lines
         String inputString = "add -n Medication_A -q 60_TAB -d 500mg -e 01/07/25 -f morning -r cause_dizziness";
         Ui ui = new Ui();
-        MedicationList medicationList = new MedicationList();
+        MedicationManager medicationManager = new MedicationManager();
         AddCommand command = new AddCommand(inputString);
-        command.execute(medicationList, ui);
+        command.execute(medicationManager, ui);
 
         // actual test
-        assertEquals(1, medicationList.medications.size());
+        assertEquals(1, medicationManager.getTotalMedications());
     }
 }

@@ -1,6 +1,6 @@
 package meditracker.command;
 
-import meditracker.medication.MedicationList;
+import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
 /**
@@ -12,11 +12,11 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command.
      * This method displays the exit message using the provided user interface.
-     * @param medicationList The MedicationList object (not used in this command).
+     * @param medicationManager The MedicationList object (not used in this command).
      * @param ui The Ui object used to interact with the user interface.
      */
     @Override
-    public void execute(MedicationList medicationList, Ui ui) {
+    public void execute(MedicationManager medicationManager, Ui ui) {
         ui.showExitMessage();
     }
 

@@ -66,6 +66,10 @@ public class Ui {
         System.out.println("Medicine has been successfully added!");
     }
 
+    public void showModifyCommandMessage() {
+        System.out.println("Medicine has been successfully modified!");
+    }
+
     /**
      * Reads user input command.
      * @return The user input command as a String.
