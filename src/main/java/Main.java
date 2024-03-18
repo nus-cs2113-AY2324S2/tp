@@ -1,5 +1,6 @@
 import commands.Command;
 import exceptions.Wellness360Exception;
+import fitness.FitnessMotivator;
 import focus.FocusTimer;
 import habit.HabitTracker;
 import parser.Parser;
@@ -16,9 +17,12 @@ public class Main {
     public static void main(String[] args) {
 
         SleepTracker sleepTracker = new SleepTracker();
-        ReflectionManager reflection = new ReflectionManager();
+        ReflectionManager reflectionManager = new ReflectionManager();
         HabitTracker habitTracker = new HabitTracker();
         FocusTimer focusTimer = new FocusTimer();
+        FitnessMotivator fitnessMotivator = new FitnessMotivator();
+
+        Ui.greetUser();
 
         while (!isExit) {
 
@@ -29,13 +33,15 @@ public class Main {
             //execute user command if it is valid else throw exception
             //save tasks to file after each command
             try {
-                Command userCommand = Parser.determineCommand(sleepTracker, reflection,
-                        habitTracker, focusTimer, userInput);
+                Command userCommand = Parser.determineCommand(sleepTracker, reflectionManager,
+                        habitTracker, focusTimer, fitnessMotivator, userInput);
                 userCommand.execute();
                 isExit = userCommand.isExit();
             } catch (Wellness360Exception e) {
                 Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
+
+        Ui.sayGoodbye();
     }
 }

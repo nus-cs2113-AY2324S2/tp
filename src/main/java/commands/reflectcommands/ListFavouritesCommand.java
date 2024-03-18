@@ -1,30 +1,30 @@
+
 package commands.reflectcommands;
 
 import commands.Command;
 import reflection.ReflectionManager;
 
 /**
- * A command implementation for retrieving reflection questions.
+ * A command implementation for listing favorite reflection items.
  */
-public class GetReflectionQuestionsCommand implements Command {
-
+public class ListFavouritesCommand implements Command {
     private ReflectionManager reflectionManager;
 
     /**
-     * Constructs a GetReflectionQuestionsCommand.
+     * Constructs a ListFavouritesCommand.
      *
-     * @param reflectionManager The ReflectionManager instance to be used for retrieving questions.
+     * @param reflectionManager The ReflectionManager instance to be used for listing favorite items.
      */
-    public GetReflectionQuestionsCommand(ReflectionManager reflectionManager) {
+    public ListFavouritesCommand(ReflectionManager reflectionManager) {
         this.reflectionManager = reflectionManager;
     }
 
     /**
-     * Executes the command to retrieve and print five random reflection questions.
+     * Executes the command to print the list of favorite reflection items.
      */
     @Override
     public void execute() {
-        reflectionManager.printFiveRandomQuestions();
+        reflectionManager.printFavourites();
     }
 
     /**
