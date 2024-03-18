@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.DeleteIndexCommand;
+import seedu.binbash.command.DeleteNameCommand;
 import seedu.binbash.command.SearchCommand;
 import seedu.binbash.command.ListCommand;
 import seedu.binbash.command.ByeCommand;
@@ -24,8 +25,10 @@ public class Parser {
         switch (commandString) {
         case "add":
             return parseAddCommand(userInput);
-        case "delete":
-            return parseDeleteCommand(userInput);
+        case "deleteindex":
+            return parseDeleteIndexCommand(userInput);
+        case "deletename":
+            return parseDeleteNameCommand(userInput);
         case "list":
             return parseListCommand(userInput);
         case "search":
@@ -35,11 +38,21 @@ public class Parser {
         }
     }
 
-    private Command parseDeleteCommand(String userInput) {
+    private Command parseDeleteIndexCommand(String userInput) {
         Matcher matcher = DeleteIndexCommand.COMMAND_FORMAT.matcher(userInput);
         if (matcher.matches()) {
             int index = Integer.parseInt(matcher.group("index"));
             return new DeleteIndexCommand(itemList, index);
+        } else {
+            return null;
+        }
+    }
+
+    private Command parseDeleteNameCommand(String userInput) {
+        Matcher matcher = DeleteNameCommand.COMMAND_FORMAT.matcher(userInput);
+        if (matcher.matches()) {
+            String itemName = matcher.group("itemName");
+            return new DeleteNameCommand(itemList, itemName);
         } else {
             return null;
         }
