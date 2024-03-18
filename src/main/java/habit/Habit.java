@@ -3,12 +3,20 @@ package habit;
 import exceptions.HabitException;
 
 public class Habit {
-    protected String description;
-    protected int habitCount;
+    private String description;
+    private int habitCount;
 
     public Habit(String description) {
         this.description = description;
         this.habitCount = 0;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getHabitCount() {
+        return habitCount;
     }
 
     public int updateCount(String updatedCount) throws HabitException {
