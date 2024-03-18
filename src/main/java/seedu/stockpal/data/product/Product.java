@@ -64,7 +64,7 @@ public class Product {
             quantity.updateIncreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
         } catch (InventoryQuantityOverflowException IQOE) {
-            Ui.printToScreen("Overflow detected. Not change to quantity. " + quantity.toString());
+            Ui.printToScreen("Overflow detected. No change to quantity. " + quantity.toString());
         }
 
     }
@@ -73,7 +73,7 @@ public class Product {
         try {
             quantity.updateDecreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
-        } catch (InsufficientAmountException e) {
+        } catch (InsufficientAmountException IAE) {
             Ui.printToScreen("Insufficient amount in inventory. No change to quantity. " + quantity.toString());
         }
     }
