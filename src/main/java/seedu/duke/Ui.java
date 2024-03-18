@@ -31,11 +31,11 @@ public class Ui {
     }
 
     public void printOneSolution(int questionNum, String solution) {
-        System.out.println("The solution for question " + questionNum + ": "
+        System.out.println("The solution for question " + questionNum + ":"
                 + System.lineSeparator() + solution);
     }
     public void printAllSolutions(String allSolutions) {
-        System.out.println("The solutions are : "
+        System.out.println("The solutions are :"
                 + System.lineSeparator() + allSolutions);
     }
     private void handleException(CustomException e) {
@@ -50,14 +50,14 @@ public class Ui {
 
     public void sayHi() {
         String logo =
-                "______ _                       _____  __   __   _____ \n" +
+                "______ _                       _____  __   __   _____\n" +
                 "| ___ \\ |                     / __  \\/  | /  | |____ |\n" +
                 "| |_/ / | __ _ _   _  ___ _ __`' / /'`| | `| |     / /\n" +
                 "|  __/| |/ _` | | | |/ _ \\ '__| / /   | |  | |     \\ \\\n" +
                 "| |   | | (_| | |_| |  __/ |  ./ /____| |__| |_.___/ /\n" +
-                "\\_|   |_|\\__,_|\\__, |\\___|_|  \\_____/\\___/\\___/\\____/ \n" +
-                "                __/ |                                 \n" +
-                "               |___/       ";
+                "\\_|   |_|\\__,_|\\__, |\\___|_|  \\_____/\\___/\\___/\\____/\n" +
+                "                __/ |\n" +
+                "               |___/";
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
