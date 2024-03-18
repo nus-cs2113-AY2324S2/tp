@@ -13,7 +13,7 @@ public class UI {
         System.out.println("What is your name?");
         Scanner input = new Scanner(System.in);
         name = input.nextLine();
-        System.out.println("Hello " + name + "! How can I help you today?");
+        System.out.println("Hello Chef " + name + "! How can I help you today?");
         System.out.println(SEPARATOR);
     }
 

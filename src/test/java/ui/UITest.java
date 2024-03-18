@@ -28,7 +28,7 @@ public class UITest {
         String expected = UI.SEPARATOR + System.lineSeparator() +
                 "Welcome to Recipe.io!" + System.lineSeparator() +
                 "What is your name?" + System.lineSeparator() +
-                "Hello Hung!" + System.lineSeparator() +
+                "Hello Chef Hung! How can I help you today?" + System.lineSeparator() +
                 UI.SEPARATOR + System.lineSeparator();
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(testOut);
