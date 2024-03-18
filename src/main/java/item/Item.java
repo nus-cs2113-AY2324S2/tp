@@ -1,11 +1,10 @@
 package item;
 
 public class Item {
+    public static int numberOfItems;
     private final String itemName;
     private int quantity;
     private String UOM;
-
-    public static int numberOfItems;
 
     public Item(String name, int quantity, String uom) {
         this.itemName = name;
