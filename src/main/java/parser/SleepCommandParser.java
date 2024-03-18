@@ -18,7 +18,7 @@ public class SleepCommandParser {
         case "add":
             return new AddSleepCommand(sleepTracker, sleepCommandArgs);
         case "list":
-            return new ListSleepCommand(sleepTracker);
+            return new ListSleepCommand(sleepTracker, sleepCommandArgs);
         default:
             throw new SleepException("Unknown sleep command");
         }
