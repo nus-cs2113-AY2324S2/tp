@@ -23,13 +23,14 @@ public class InputParsing {
     private static final String ENTER_STUDENT_NAME = "Enter student name: ";
     private static final String STUDENT_DETAILS = "Student details:";
     private static final String NAME = "Name: ";
-    private static final String GRADE = "Grade: ";
     private static final String CLASSES_ATTENDED = "Classes Attended: ";
     private static final String STUDENT_NOT_FOUND = "Student not found!";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
     private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
     private static final String HELP = "help";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+    public static final String SUBJECT = "Subject: ";
+    public static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100: ";
 
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
@@ -94,7 +95,7 @@ public class InputParsing {
 
     private static void printHelpMessage() {
         System.out.println("add                         Adds a student to the student list, " +
-                                                        "expects a name, grade and lessons attended");
+                                                        "expects a name, grades and lessons attended");
         System.out.println("view                        Views a students details, expects a name");
         System.out.println("delete                      Deletes a student from the student list, expects a name");
         System.out.println("list                        Displays the list of all students");
@@ -135,8 +136,8 @@ public class InputParsing {
             List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
             if (!subjectGrades.isEmpty()) {
                 for (SubjectGrade subjectGrade : subjectGrades) {
-                    System.out.println("Subject: " + subjectGrade.getSubject());
-                    System.out.println("Grade: " + subjectGrade.getGrade());
+                    System.out.println(SUBJECT + subjectGrade.getSubject());
+                    System.out.println(CURRENT_MARKS_OUT_OF_100 + subjectGrade.getGrade());
                     System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
                     System.out.println();
                 }
@@ -164,18 +165,18 @@ public class InputParsing {
         String name = in.nextLine().trim();
 
         if (findStudentByName(masterStudentList, name) != null) {
+            logger.log(Level.WARNING, "Student with the same name already exists.");
             System.out.println("Student with the same name already exists. Please enter a different name.");
             Ui.printDivider();
             return;
         }
 
         StudentAttributes attributes = new StudentAttributes(name);
-
         attributeInput(in, attributes);
-
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
 
+        logger.log(Level.INFO, "Student added successfully.");
         System.out.println(STUDENT_ADDED_SUCCESSFULLY);
         Ui.printDivider();
     }
@@ -220,6 +221,7 @@ public class InputParsing {
                 }
                 break;
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Invalid input for classes attended: " + classesAttendedInput, e);
                 System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
                 Ui.printDivider();
             }
@@ -237,7 +239,7 @@ public class InputParsing {
     private static double checkForGradeFormat(Scanner in) {
         double grade;
         while (true) {
-            System.out.print(GRADE);
+            System.out.print(CURRENT_MARKS_OUT_OF_100);
             String gradeInput = in.nextLine();
             try {
                 grade = Double.parseDouble(gradeInput);
@@ -248,6 +250,7 @@ public class InputParsing {
                 }
                 break;
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Invalid input for grade: " + gradeInput, e);
                 System.out.println("Invalid input for grade. Please enter a valid number.");
                 Ui.printDivider();
             }
