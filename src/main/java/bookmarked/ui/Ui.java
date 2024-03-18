@@ -21,4 +21,12 @@ public class Ui {
         System.out.println("5. To list all the books added");
         System.out.println("   list");
     }
+
+    public static void separateNextInput() {
+        System.out.println("__________");
+    }
+
+    public static void exitProgramme() {
+        System.out.println("Bye!");
+    }
 }

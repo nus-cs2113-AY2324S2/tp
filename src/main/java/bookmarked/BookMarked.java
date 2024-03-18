@@ -39,14 +39,14 @@ public class BookMarked {
                 returnBook(splitItem);
             }
 
-            System.out.println("__________");
+            Ui.separateNextInput();
             newItem = in.nextLine();
 
         }
-        System.out.println("Bye!");
+        Ui.exitProgramme();
 
     }
-
+    
     public static void printList(int numberOfBooks) {
         System.out.println("Here are your list items!");
         for (int i = 0; i < numberOfBooks; i++) {
