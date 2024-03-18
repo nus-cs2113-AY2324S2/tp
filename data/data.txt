@@ -1,18 +1,7 @@
-
-Goal c 20000
-Meal dumplings 1 300
-Meal dumplings 2 700
-Goal c 4000
-Goal w 3000
-Meal sushi 3 1050
-Goal Water 4000
-Goal Water 100
-Goal Water 100
-Goal Water 100
-Goal Water 250
-Goal Water 100
-Goal w 3000
-Goal Water 100
-Goal Water 430
-Goal w 2000
-Water 500
+Meal fish and chips 2 1530
+Meal ham and cheese sandwich 1 352
+Meal roast beef sandwich 3 1053
+Water 200
+Water 600
+Goal w 5000
+Goal c 40000

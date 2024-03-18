@@ -9,18 +9,42 @@ public class CommandUi {
 
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
+        int j = 1;
         for (int i = 0; i < tasksList.size(); i++) {
-            int j = 1;
             if (tasksList.get(i).toString().startsWith("Meal")) {
-                System.out.println(j + ". " + tasksList.get(i));
+                System.out.print(j + ". " + tasksList.get(i).toString().substring(5));
+                System.out.println(" kcal");
                 j++;
+            }
+        }
+    }
+
+    public static void printFullList() {
+        System.out.println("Logged data for today:");
+        System.out.print("Food ");
+        System.out.println("(food name, servings, calories):");
+        int j = 1;
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).toString().startsWith("Meal")) {
+                System.out.print(j + ". " + tasksList.get(i).toString().substring(5));
+                System.out.println(" kcal");
+                j++;
+            }
+        }
+        System.out.println("Water:");
+        int k = 1;
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).toString().startsWith("Water")) {
+                System.out.print(j + ". " + tasksList.get(i).toString().substring(6));
+                System.out.println(" ml");
+                k++;
             }
         }
     }
 
     public static void printMealLogMessage(LogMeals logMeals) {
         System.out.println("You've logged " + Integer.toString(logMeals.getServings()) + " servings" + " of " + logMeals.getFoodName() + ".") ;
-        System.out.println("Estimated calories: " + Integer.toString(logMeals.getMealCalories()));
+        System.out.println("Estimated calories: " + Integer.toString(logMeals.getMealCalories()) + " kcal");
     }
 
     public static void printShowCalMessage() {
@@ -39,9 +63,7 @@ public class CommandUi {
             }
         }
         System.out.print("Total calories today: ");
-        System.out.println(totalCalories + " out of " + goal);
-
-
+        System.out.println(totalCalories + " kcal out of " + goal + " kcal");
     }
 
     public static void printWaterLogMessage(WaterTask newWaterTask) {
