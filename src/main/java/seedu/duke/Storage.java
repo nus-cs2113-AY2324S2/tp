@@ -28,7 +28,7 @@ public class Storage {
             fw.write(timetable.toString());
             fw.close();
         } catch (IOException e) {
-            System.out.println("Failed writing timetable to file");
+            Ui.printFailedToWrite();
         }
     }
 
@@ -55,7 +55,7 @@ public class Storage {
         try {
             s = new Scanner(f);
         } catch (FileNotFoundException e) {
-            System.out.println("Loading file failed.");
+            Ui.printFailedLoadingFile();
             return newTimetable;
         }
         s.useDelimiter(System.lineSeparator());
@@ -84,7 +84,7 @@ public class Storage {
             try {
                 Files.createFile(filePath);
             } catch (IOException ex) {
-                System.out.println("File creation failed.");
+                Ui.printFileFailedToCreate();
                 return;
             }
         } else {
@@ -92,12 +92,11 @@ public class Storage {
                 Files.createDirectory(folderPath);
                 Files.createFile(filePath);
             } catch (IOException ex) {
-                System.out.println("File creation failed.");
+                Ui.printFileFailedToCreate();
                 return;
             }
         }
-
-        System.out.println("File creation successful.");
+        Ui.printFileCreated();
     }
 
     public static Course parseCourse(String sentence) throws Exception {
