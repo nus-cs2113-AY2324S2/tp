@@ -1,5 +1,7 @@
 package recipeio.recipe;
 
+import ui.UI;
+
 import java.util.ArrayList;
 
 
@@ -38,7 +40,12 @@ public class RecipeList {
      * @param recipe The new recipe to be added.
      */
     public void addRecipe(Recipe recipe) {
-        recipes.add(recipe);
+        //this try-catch block can be helpful when there's not enough memory for a new recipe in the list
+        try {
+            recipes.add(recipe); //TaskList<T> add method only throw IndexOutOfBound exception for the overload add(int, T).
+        } catch (Exception e) {
+            UI.printMessage(e.toString());
+        }
     }
 
     /**
