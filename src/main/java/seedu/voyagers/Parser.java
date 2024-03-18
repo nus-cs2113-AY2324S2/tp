@@ -69,10 +69,6 @@ public class Parser {
      * Method to parse user input to change existing trip's name
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `setname /old The old name /new Vacation to Hokkaido`
-     *               setname must be first word, flag-content pair can be input in any order
-     *               name can be made up of multiple words
-     *               do not input "/" unless as a flag.
      */
     private void commandSetName(String[] tokens) {
         String oldName = null;
@@ -118,10 +114,6 @@ public class Parser {
      * Method to parse user input to change existing trip's dates
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `setdates /n Current Name /start 2024/01/01 /end 2024/03/31`
-     *               setdates must be first word, flag-content pair can be input in any order
-     *               dates must be in yyyy/MM/dd format
-     *               do not input "/" unless as a flag.
      */
     private void commandSetDates(String[] tokens) {
         String tripName = null;
@@ -177,10 +169,6 @@ public class Parser {
      * Method to parse user input to change existing trip's location
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `setlocation /n The current name /location New Place`
-     *               setlocation must be first word, flag-content pair can be input in any order
-     *               location can be made up of multiple words
-     *               do not input "/" unless as a flag.
      */
     private void commandSetLocation(String[] tokens) {
         String tripName = null;
@@ -222,10 +210,6 @@ public class Parser {
      * Method to parse user input to change existing trip's description
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `setdescription /m The current name /description New description`
-     *               setdescription must be first word, flag-content pair can be input in any order
-     *               description can be made up of multiple words
-     *               do not input "/" unless as a flag.
      */
     private void commandSetDescription(String[] tokens) {
         String tripName = null;
@@ -284,11 +268,9 @@ public class Parser {
         System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
         for (int i = 0; i < tripsList.size(); i++) {
             Trip trip = tripsList.get(i);
-            String startDateStr = trip.getStartDate().equals(DEFAULT_START) ?
-                    "-" : printDateFormat.format(trip.getStartDate());
+            String startDateStr = trip.getStartDate().equals(DEFAULT_START) ? "-" : printDateFormat.format(trip.getStartDate());
             String endDateStr = trip.getEndDate().equals(DEFAULT_END) ? "-" : printDateFormat.format(trip.getEndDate());
-            System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\n", i, trip.getName(), startDateStr,
-                    endDateStr, trip.getLocation(), trip.getDescription());
+            System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\n", i, trip.getName(), startDateStr, endDateStr, trip.getLocation(), trip.getDescription());
         }
     }
 
@@ -296,15 +278,6 @@ public class Parser {
      * Method to parse user input to add a new main trip
      *
      * @param tokens String[] of user input split by " "
-     *               eg. user input `addmain /n The current name /start 2024/01/01
-     *               /end 2024/03/31 /d Description /location New Place`
-     *               addmain must be first word, flag-content pair can be input in any order
-     *               dates must be in yyyy/MM/dd format
-     *               name, location, descrption can be made up of multiple words
-     *               /n name is required to add trip
-     *               other flag-content pairs may be omitted to add trip with partial information
-     *               Name cannot match an existing trip's name
-     *               do not input "/" unless as a flag.
      */
     private void commandAddMainTrip(String[] tokens) {
         StringBuilder sentenceBuilder = new StringBuilder();
@@ -342,8 +315,7 @@ public class Parser {
         }
         //check if trip with same name exists
         if (tripNameExists(name)) {
-            System.out.println("A trip with the name '" + name + "' already exists. Cannot create another main trip " +
-                    "with the same name.");
+            System.out.println("A trip with the name '" + name + "' already exists. Cannot create another main trip " + "with the same name.");
             return;
         }
 
@@ -390,11 +362,10 @@ public class Parser {
      * Method to concatenate words until the end of the String[] tokens or until the next "/"
      *
      * @param tokens user input split by " "
-     * eg. String[] tokens = {"/n", "The", "current", "name", "/location", "New", "Place"};
-     * @param i index of the current word in the String[] tokens
+     * @param i      index of the current word in the String[] tokens
      * @return sentence String name with concatenated words
-     * eg. sentence = "New Place"
      */
+
     private String addWordsAfterSeparator(String[] tokens, int i) {
         String sentence = null;
         if (i + 1 < tokens.length) {
@@ -418,8 +389,7 @@ public class Parser {
     }
 
     private boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location, String description) {
-        if (startDate == DEFAULT_START || endDate == DEFAULT_END
-                || location.isEmpty() || description.isEmpty()) {
+        if (startDate == DEFAULT_START || endDate == DEFAULT_END || location.isEmpty() || description.isEmpty()) {
             return true;
         }
         return false;
