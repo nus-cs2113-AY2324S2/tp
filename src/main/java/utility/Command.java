@@ -5,7 +5,6 @@ public enum Command {
     NEW,
     HISTORY,
     LATEST,
-    EXERCISE,
     HEALTH,
     HEIGHT,
     WEIGHT,

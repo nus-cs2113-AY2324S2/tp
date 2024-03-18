@@ -8,8 +8,8 @@ import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
-
 import java.util.Scanner;
+import storage.LogFile;
 
 
 /**
@@ -17,8 +17,7 @@ import java.util.Scanner;
  * before providing feedback to the user.
  */
 public class Handler {
-
-
+    static LogFile logging = new LogFile();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -29,16 +28,16 @@ public class Handler {
     public static void processInput() {
         Scanner in = new Scanner(System.in);
 
+
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
-
-            // Convert command to uppercase before processing
             String instruction = userInput.toUpperCase().split(" ")[0];
+            logging.writeLog("User Input: " + userInput, false);
 
             try {
                 Command command = Command.valueOf(instruction);
-
                 switch (command) {
+
                 case EXIT:
                     return;
 
@@ -49,7 +48,7 @@ public class Handler {
                     break;
                 case NEW:
 
-                    handleNew(userInput);
+                    handleExercise(userInput);
 
                     break;
                 case HISTORY:
@@ -60,11 +59,6 @@ public class Handler {
                 case LATEST:
 
                     handleLatest(userInput);
-
-                    break;
-                case EXERCISE:
-
-                    handleExercise(userInput);
 
                     break;
                 case HEALTH:
@@ -110,8 +104,6 @@ public class Handler {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
-            } catch (CustomExceptions.InvalidInput e) {
-                throw new RuntimeException(e);
             }
 
 
@@ -174,7 +166,6 @@ public class Handler {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(Constant.RUN)) {
                 String[] runDetails = getRun(userInput);
-
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
@@ -188,13 +179,11 @@ public class Handler {
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
+            // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
     }
     public static void handleLoad(String userInput){}
-    public static void handleNew(String userInput) throws CustomExceptions.InvalidInput {
-        getRun(userInput);
-    }
     public static void handleHistory(String userInput){
         Output.printHistory("all");
     }
@@ -233,6 +222,7 @@ public class Handler {
     public static void getGym(String input){
         System.out.println("temp");
     }
+
     /**
      * Parses a string containing run information, extracts the command, distance and end time before returning
      * an array of strings containing the information.
@@ -246,7 +236,7 @@ public class Handler {
 
 
         if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
-            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
 
@@ -256,14 +246,23 @@ public class Handler {
         int indexDate = input.indexOf("/date");
 
         String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
+        assert !command.isEmpty() : "Command should not be empty";
+
         String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
+        assert !dSubstring.isEmpty() : "Distance should not be empty";
+        assert dSubstring.matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+
         String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
+        assert !tSubstring.isEmpty() : "Time should not be empty";
+        assert tSubstring.matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
+
         String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
 
 
         if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
             //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
         }
+
 
         results[0] = command;
         results[1] = dSubstring;
@@ -273,27 +272,31 @@ public class Handler {
         return results;
     }
 
-
-
     /**
-     * Initializes the Jarvas bot by printing a welcome message, loading tasks from storage,
+     * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
      * and returning the tasks list.
      */
     public static void initialiseBot() {
-        Output.printArt();
-        System.out.println("Hello from PulsePilot\n");
-        System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
-        // Yet to implement : Reply.printWelcomeMessage();
-        // Yet to implement : Storage.loadProfile();
+        Output.printWelcomeBanner();
+        logging.writeLog("Started bot", false);
+        // Yet to implement : Check for existing save, if not, make a new one
+        // Yet to implement : int status = Storage.load();
+        int status = 1;
+        if (status == 1) {
+            Output.printGreeting(1);
+            Scanner in = new Scanner(System.in);
+            String name = in.nextLine();
+            System.out.println("Welcome aboard, " + name);
+            logging.writeLog("Name entered: " + name, false);
+        }
     }
 
     /**
-     * Terminates the Jarvas bot by saving tasks to storage, printing a goodbye message,
+     * Terminates PulsePilot by saving tasks to storage, printing a goodbye message,
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
+        logging.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
