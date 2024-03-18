@@ -17,7 +17,7 @@ public class GoalsUi {
             } else {
                 throw new ActiveEdgeException("Invalid goal description. Must be 'c' for calories or 'w' for water.");
             }
-            System.out.println("Goal added: " + goalType + " with goal amount " + goalAmount + unit);
+            System.out.println("Goal added: " + goalType + " with goal amount " + goalAmount + " " + unit);
         } catch (ActiveEdgeException e) {
             System.out.println("Error: " + e.warning);
         }
