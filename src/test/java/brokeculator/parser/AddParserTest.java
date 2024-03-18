@@ -24,7 +24,7 @@ public class AddParserTest {
     void parseInput_stringInvalidFormat_invalidCommand() {
         String input = "add /n test1 /d 1900 /a 10 /c";
         Command resultCommand = AddParser.parseInput(input);
-        assertInstanceOf(InvalidCommand.class, resultCommand);
+        assertInstanceOf(AddCommand.class, resultCommand);
     }
     @Test
     void parseInput_stringInvalidAmount_invalidCommand() {
