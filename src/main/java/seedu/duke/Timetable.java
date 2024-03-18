@@ -1,15 +1,12 @@
 package seedu.duke;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Timetable {
     //todo
-    protected ArrayList<ArrayList<Task>> daysOfWeek = new ArrayList<>(7);;
+    protected ArrayList<ArrayList<Task>> daysOfWeek = new ArrayList<>(7);
     public Timetable() {
         initializeTimetable();
     }
-
     private void initializeTimetable() {
         for (int i = 0; i < 7; i++) {
             daysOfWeek.add(new ArrayList<>());
@@ -27,12 +24,11 @@ public class Timetable {
 
         ArrayList<Task> tasks = daysOfWeek.get(dayOfWeek - 1);
         if (index < tasks.size()){
-                Task taskDeleted = tasks.get(index);
-                tasks.remove(index);
-                System.out.println("Task " + taskDeleted.description + "is deleted from " + dayOfWeek);
-
+            Task taskDeleted = tasks.get(index);
+            tasks.remove(index);
+            System.out.println("Task " + taskDeleted.description + "is deleted from " + dayOfWeek);
         } else{
-                System.out.println("Invalid task index. Please try again");
+            System.out.println("Invalid task index. Please try again");
         }
     }
 
