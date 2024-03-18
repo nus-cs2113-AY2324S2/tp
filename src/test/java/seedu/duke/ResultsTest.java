@@ -10,9 +10,9 @@ class ResultsTest {
     void createResult() {
         roundResults = new Results();
         roundResults.increaseNumberOfQuestions();
-        roundResults.increaseNumberOfQuestions();
-        roundResults.increaseCorrectAnswers();
-        roundResults.calculateScore();
+        roundResults.increaseNumberOfQuestions(); // total 2 questions
+        roundResults.increaseCorrectAnswers(); // 1 correct answer
+        roundResults.calculateScore(); // returns 1/2 (50%)
     }
 
     @Test
