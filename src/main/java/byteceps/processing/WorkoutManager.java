@@ -79,6 +79,21 @@ public class WorkoutManager extends ActivityManager {
     //todo: attempts to search for the workout name and lists that 1 workout
     public void list(String workoutName) {
         //add code here
+    //@@author V4vern
+    public void list(String workoutPlanName) throws Exceptions.ActivityDoesNotExists {
+        Workout workout = (Workout) retrieve(workoutPlanName);
+        StringBuilder message = new StringBuilder();
+        ArrayList<Exercise> workoutList = workout.getWorkoutList();
+
+        message.append(String.format("Listing exercises in workout plan '%s':%n", workoutPlanName));
+
+        int index = 1;
+        for (Exercise exercise : workoutList) {
+            message.append(String.format("\t\t\t%d. %s%n", index++, exercise.getActivityName()));
+        }
+        UserInterface.printMessage(message.toString());
+    }
+
     }
 
     @Override
