@@ -7,12 +7,11 @@ import java.util.Scanner;
 public class UI {
     public static final String SEPARATOR = "-----------------------------";
     private static String name;
-    public static void sayHi() {
+    public static void sayHi(Scanner inputGetter) {
         System.out.println(SEPARATOR);
         System.out.println("Welcome to Recipe.io!");
         System.out.println("What is your name?");
-        Scanner input = new Scanner(System.in);
-        name = input.nextLine();
+        name = inputGetter.nextLine();
         System.out.println("Hello Chef " + name + "! How can I help you today?");
         System.out.println(SEPARATOR);
     }

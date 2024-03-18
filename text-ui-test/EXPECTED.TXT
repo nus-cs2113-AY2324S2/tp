@@ -1,10 +1,13 @@
 -----------------------------
 Welcome to Recipe.io!
 What is your name?
-Yuki
 Hello Chef Yuki! How can I help you today?
 -----------------------------
-bye
+-----------------------------
+Woo hoo chef! I have added this recipe to your recipe book:
+	 pizza / DINNER
+You now have 2 recipes in your recipe book. Keep adding some!
+-----------------------------
 -----------------------------
 See you again, Yuki!
 -----------------------------

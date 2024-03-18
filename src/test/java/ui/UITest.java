@@ -6,6 +6,7 @@ import recipeio.ui.UI;
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +35,8 @@ public class UITest {
         PrintStream printStream = new PrintStream(testOut);
         System.setOut(printStream);
 
-        UI.sayHi();
+        Scanner inputGetter = new Scanner(System.in);
+        UI.sayHi(inputGetter);
 
         String actual = testOut.toString();
 

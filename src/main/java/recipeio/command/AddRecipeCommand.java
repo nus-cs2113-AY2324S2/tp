@@ -29,7 +29,6 @@ public class AddRecipeCommand extends Command{
      */
     @Override
     public void execute(RecipeList recipes, Storage storage) throws Exception {
-        System.out.println("entered add execute");
         try {
             recipes.addRecipe(toAdd);
         } catch (Exception e) {

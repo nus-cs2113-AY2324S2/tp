@@ -38,7 +38,7 @@ public class RecipeIO {
 
     public void run() {
         Scanner inputGetter = new Scanner(System.in);
-        UI.sayHi();
+        UI.sayHi(inputGetter);
         boolean isExitCommand = false;
         while (!isExitCommand) {
             try {
