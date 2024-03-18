@@ -2,6 +2,7 @@ package workouts;
 
 import utility.CustomExceptions;
 import utility.Constant;
+import utility.Parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Gym extends Workout{
     }
     // overloaded constructor for optional date
     public Gym(String stringDate) {
-        this.date = parseDate(stringDate);
+        this.date = Parser.parseDate(stringDate);
     }
 
     /**

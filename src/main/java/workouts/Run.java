@@ -1,5 +1,6 @@
 package workouts;
 import java.time.LocalDate;
+import utility.Parser;
 import utility.Constant;
 import utility.CustomExceptions;
 public class Run extends Workout{
@@ -20,7 +21,7 @@ public class Run extends Workout{
     public Run(String stringTime, String stringDistance, String stringDate) throws CustomExceptions.InvalidInput {
         times = parseTime(stringTime);
         distance = Double.parseDouble(stringDistance);
-        date = parseDate(stringDate);
+        date = Parser.parseDate(stringDate);
         pace = calculatePace();
         WorkoutList.addRun(this);
     }
