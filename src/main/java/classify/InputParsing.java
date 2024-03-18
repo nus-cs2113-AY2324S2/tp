@@ -8,6 +8,8 @@ import classify.student.SubjectGrade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InputParsing {
     private static final String BYE = "bye";
@@ -27,6 +29,8 @@ public class InputParsing {
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
     private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
     private static final String HELP = "help";
+    private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+
 
     public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
         switch (userCommand.toLowerCase()) {
@@ -110,26 +114,37 @@ public class InputParsing {
         String studentName = in.nextLine();
         Student foundStudent = findStudentByName(masterStudentList, studentName);
         if (foundStudent != null) {
+            logger.log(Level.INFO, "Viewing student details: " + studentName);
             System.out.println(STUDENT_DETAILS);
             System.out.println(NAME + foundStudent.getName());
             StudentAttributes attributes = foundStudent.getAttributes();
-            if (attributes != null) {
-                List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
-                if (!subjectGrades.isEmpty()) {
-                    for (SubjectGrade subjectGrade : subjectGrades) {
-                        System.out.println("Subject: " + subjectGrade.getSubject());
-                        System.out.println("Grade: " + subjectGrade.getGrade());
-                        System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
-                        System.out.println();
-                    }
-                } else {
-                    System.out.println("No subjects and grades found for this student.");
+            showAttributes(attributes);
+        } else {
+            logger.log(Level.WARNING, "Student not found: " + studentName);
+            System.out.println(STUDENT_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Displays the attributes of a student.
+     *
+     * @param attributes The attributes of the student to display.
+     */
+    private static void showAttributes(StudentAttributes attributes) {
+        if (attributes != null) {
+            List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
+            if (!subjectGrades.isEmpty()) {
+                for (SubjectGrade subjectGrade : subjectGrades) {
+                    System.out.println("Subject: " + subjectGrade.getSubject());
+                    System.out.println("Grade: " + subjectGrade.getGrade());
+                    System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
+                    System.out.println();
                 }
             } else {
-                System.out.println("No attributes found for this student.");
+                System.out.println("No subjects and grades found for this student.");
             }
         } else {
-            System.out.println(STUDENT_NOT_FOUND);
+            System.out.println("No attributes found for this student.");
         }
     }
 
