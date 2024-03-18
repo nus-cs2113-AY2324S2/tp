@@ -28,6 +28,7 @@ public class Transaction {
             // Minimum of 2 people as part of a transaction
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
         }
+        assert splitInput.length >= 2 : "Invalid transaction.";
 
         String lenderName = splitInput[0].trim();
         // Exception is thrown if the person owed does not exist in the group

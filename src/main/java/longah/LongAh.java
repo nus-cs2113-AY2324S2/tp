@@ -105,6 +105,9 @@ public class LongAh {
                     group.settleUp(parts[1]);
                     group.saveAllData();
                     break;
+                case "solution":
+                    System.out.println(group.printSolution());
+                    break;
                 case "exit":
                     System.exit(0);
                     return;

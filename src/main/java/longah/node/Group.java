@@ -13,7 +13,7 @@ public class Group {
     private MemberList members;
     private TransactionList transactions;
     private StorageHandler storage;
-    private ArrayList<Subtransaction> transactionSolution;
+    private ArrayList<Subtransaction> transactionSolution = new ArrayList<>();
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.
@@ -62,8 +62,10 @@ public class Group {
 
     /**
      * Update the transaction solution of the group based on the debts and credits of the members.
+     * 
+     * @throws LongAhException If the transaction solution cannot be updated
      */
-    public void updateTransactionSolution() {
+    public void updateTransactionSolution() throws LongAhException {
         this.transactionSolution = this.members.solveTransactions();
     }
 
@@ -118,5 +120,18 @@ public class Group {
     public void saveAllData() throws LongAhException {
         saveMembersData();
         saveTransactionsData();
+    }
+
+    public String printSolution() throws LongAhException {
+        updateTransactionSolution();
+        if (this.transactionSolution.size() == 0) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+
+        String solution = "Best Way to Solve Debts:\n";
+        for (Subtransaction subtransaction : this.transactionSolution) {
+            solution += subtransaction.toString() + "\n";
+        }
+        return solution;
     }
 }

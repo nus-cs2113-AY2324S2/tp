@@ -105,8 +105,13 @@ public class MemberList {
      * Groups members into two lists: positive balances and negative balances.
      * 
      * @return An array of two lists: members with positive balances and members with negative balances.
+     * @throws LongAhException If there are no members in the group.
      */
-    public ArrayList<ArrayList<Member>> classifyMembers() {
+    public ArrayList<ArrayList<Member>> classifyMembers() throws LongAhException {
+        if (members.isEmpty()) {
+            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
+        }
+
         ArrayList<Member> positiveMembers = new ArrayList<>();
         ArrayList<Member> negativeMembers = new ArrayList<>();
 
@@ -122,6 +127,10 @@ public class MemberList {
         classifiedMembers.add(positiveMembers);
         classifiedMembers.add(negativeMembers);
 
+        if (positiveMembers.isEmpty() || negativeMembers.isEmpty()) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+
         return classifiedMembers;
     }
 
@@ -130,8 +139,10 @@ public class MemberList {
      * This is done by pairing up members with positive balances and negative balances.
      * The members are then iterated through and the balances are solved by subtracting the
      * negative balance from the positive balance until the transaction has been solved.
+     * 
+     * @return The list of subtransactions needed to solve the balances of the group members.
      */
-    public ArrayList<Subtransaction> solveTransactions() {
+    public ArrayList<Subtransaction> solveTransactions() throws LongAhException {
         ArrayList<ArrayList<Member>> classifiedMembers = classifyMembers();
         ArrayList<Member> positiveMembers = classifiedMembers.get(0);
         ArrayList<Member> negativeMembers = classifiedMembers.get(1);
