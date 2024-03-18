@@ -8,11 +8,11 @@ class QuestionTest {
 
     Question oneQuestion;
     final String question1 = "question1";
-    final String answer1 = "answer1";
+    final String solution1 = "solution1";
     final String explanation1 = "explanation1";
 
     void createQuestion() {
-        oneQuestion = new Question(question1, answer1, explanation1);
+        oneQuestion = new Question(question1, solution1, explanation1);
     }
 
     // 3 part format
@@ -33,9 +33,9 @@ class QuestionTest {
     }
 
     @Test
-    void getAnswer_oneQuestion_expectAnswer() {
+    void getSolution_oneQuestion_expectSolution() {
         createQuestion();
 
-        assertEquals(answer1, oneQuestion.getAnswer());
+        assertEquals(solution1, oneQuestion.getSolution());
     }
 }

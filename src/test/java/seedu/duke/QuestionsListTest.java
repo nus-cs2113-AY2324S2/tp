@@ -16,8 +16,8 @@ class QuestionsListTest {
     }
 
     void createTwoQuestions() {
-        question1 = new Question("question1", "answer1", "explanation1");
-        question2 = new Question("question2", "answer2", "explanation2");
+        question1 = new Question("question1", "solution1", "explanation1");
+        question2 = new Question("question2", "solution2", "explanation2");
     }
 
     // 3 part format
@@ -34,28 +34,28 @@ class QuestionsListTest {
     }
 
     @Test
-    void getAllExplanations_twoQuestions_twoExplanations() throws CustomException {
+    void getAllSolutions_twoQuestions_twoExplanations() throws CustomException {
         createQuestionList();
         createTwoQuestions();
         questionList.addQuestion(question1);
         questionList.addQuestion(question2);
 
         String expectedOutput =
-                "Explanation for question 1:" + System.lineSeparator()
-                        + "explanation1" + System.lineSeparator()
+                "Solution for question 1:" + System.lineSeparator()
+                        + "solution1" + System.lineSeparator()
                         + System.lineSeparator()
-                        + "Explanation for question 2:" + System.lineSeparator()
-                        + "explanation2" + System.lineSeparator()
+                        + "Solution for question 2:" + System.lineSeparator()
+                        + "solution2" + System.lineSeparator()
                         + System.lineSeparator();
 
-        assertEquals(expectedOutput, questionList.getAllExplanations());
+        assertEquals(expectedOutput, questionList.getAllSolutions());
     }
 
     @Test
-    void getAllExplanations_noQuestions_customException() {
+    void getAllSolutions_noQuestions_customException() {
         createQuestionList(); // empty question List
 
         assertThrows(CustomException.class, // expect Exception
-                () -> questionList.getAllExplanations());
+                () -> questionList.getAllSolutions());
     }
 }

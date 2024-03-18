@@ -2,12 +2,12 @@ package seedu.duke;
 
 public class Question {
     private String question;
-    private String answer;
+    private String solution;
     private String explanation;
 
-    public Question(String question, String answer, String explanation){
+    public Question(String question, String solution, String explanation){
         this.question = question;
-        this.answer = answer;
+        this.solution = solution;
         this.explanation = explanation;
     }
 
@@ -17,7 +17,7 @@ public class Question {
     public String getQuestion() {
         return question;
     }
-    public String getAnswer() {
-        return answer;
+    public String getSolution() {
+        return solution;
     }
 }
