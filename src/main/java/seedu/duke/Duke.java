@@ -12,8 +12,6 @@ public class Duke {
         UI.printGreeting();
         UserList userList = new UserList();
 
-
-
         //replace this with parser
         while (true) {
             String input = in.nextLine();
