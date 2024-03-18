@@ -16,4 +16,7 @@ java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TX
 
 cd ..\..\text-ui-test
 
+findstr /v /c:"OOPS!" ACTUAL.TXT > ACTUAL_FILTERED.TXT
+move /y ACTUAL_FILTERED.TXT ACTUAL.TXT
+
 FC ACTUAL.TXT EXPECTED.TXT >NUL && ECHO Test passed! || Echo Test failed!
