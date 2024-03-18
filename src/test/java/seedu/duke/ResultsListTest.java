@@ -16,12 +16,12 @@ class ResultsListTest {
         roundOneResults.increaseNumberOfQuestions();
         roundOneResults.increaseNumberOfQuestions();
         roundOneResults.increaseCorrectAnswers();
-        roundOneResults.calculateScore();
+        roundOneResults.calculateScore(); // 1 out of 2 correct
         roundTwoResults.increaseNumberOfQuestions();
         roundTwoResults.increaseCorrectAnswers();
-        roundTwoResults.calculateScore();
-        sessionsResults.addResult(roundOneResults);
-        sessionsResults.addResult(roundTwoResults);
+        roundTwoResults.calculateScore(); // 1 out of 1 correct
+        sessionsResults.addResult(roundOneResults); // returns 1/2 (50%)
+        sessionsResults.addResult(roundTwoResults); // returns 1/1 (100%)
     }
 
     @Test
