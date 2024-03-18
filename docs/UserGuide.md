@@ -24,6 +24,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Focus Timer
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
           - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -84,6 +85,7 @@ ________________________________________________________________________________
 5. Reflect on a time when you took a creative risk. What did you learn from the experience?
 ________________________________________________________________________________________________________________
 ```
+
 ### Save favourite reflection question: `reflect save`
 Allows user to save reflection question to favourites after viewing generated questions. This allows the user 
 to review the question another time. The favourites list is stored in memory as a text file. 
@@ -112,6 +114,7 @@ Got it. Added reflection question to favourites:
 How do you overcome creative blocks or periods of stagnation?
 ________________________________________________________________________________________________________________
 ```
+
 ### View favourite reflection questions: `reflect list`
 Allow the user to view favourite reflection questions that have been saved.
 
