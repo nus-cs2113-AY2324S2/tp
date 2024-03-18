@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
 public class TextUi {
@@ -16,17 +17,17 @@ public class TextUi {
         this.in = new Scanner(System.in);
     }
 
-    public String getUserInput() {
+    public static String getUserInput() {
         System.out.println("Enter Command: ");
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
         if (shouldIgnore(userInput)) {
             return "Invalid Command"; //Might want to change this with Exceptions
         }
-        return in.nextLine();
+        return userInput;
     }
 
-    public boolean shouldIgnore(String userInput) {
+    public static boolean shouldIgnore(String userInput) {
         return userInput.trim().isEmpty();
     }
 
