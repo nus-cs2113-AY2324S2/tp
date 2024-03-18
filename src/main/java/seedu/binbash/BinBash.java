@@ -4,6 +4,7 @@ import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.ByeCommand;
+import seedu.binbash.exceptions.BinBashException;
 
 public class BinBash {
     private Ui userInterface;
@@ -23,16 +24,21 @@ public class BinBash {
 
         while (userInterface.isUserActive()) {
             String userInput = userInterface.readUserCommand();
-            Command userCommand = inputParser.parseCommand(userInput);
+            try {
+                Command userCommand = inputParser.parseCommand(userInput);
 
-            if (userCommand instanceof ByeCommand) {
-                userInterface.setUserAsInactive();
-                continue;
+                if (userCommand instanceof ByeCommand) {
+                    userInterface.setUserAsInactive();
+                    continue;
+                }
+
+                String executionResult = userCommand.execute();
+                userInterface.talk(executionResult);
+                storage.saveToStorage(itemList.getItemList());
+
+            } catch (BinBashException e) {
+                userInterface.talk(e.getMessage());
             }
-
-            String executionResult = userCommand.execute();
-            userInterface.talk(executionResult);
-            storage.saveToStorage(itemList.getItemList());
         }
 
         userInterface.farewell();
