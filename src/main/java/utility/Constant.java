@@ -63,7 +63,7 @@ public class Constant {
     public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
             "Example input: /h:period /start:startDate /end:endDate";
     public static final String MISSING_PARAMETERS = "Missing parameter(s)";
-      // Input Errors
+    // Input Errors
     public static final String INVALID_COMMAND = "Invalid command. Enter 'help' to view available commands.";
     public static final String UNSPECIFIED_PARAMETER = "Parameter(s) unspecified.";
     public static final String INVALID_PARAMETER = "Parameter(s) invalid or out of bounds";
