@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
-    private static int waterIntake;
+    private static ArrayList<Water> totalWaterIntake;
 
     public User() {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
-        waterIntake = 0;
+        totalWaterIntake = new ArrayList<>();
     }
 
     public static void handleMeal(String command) {
@@ -69,8 +69,12 @@ public class User {
         System.out.println("Total Proteins: " + proteinCount);
     }
 
-    public static void handleViewWater() {
-        System.out.println("Total Water: " + waterIntake);
+    public static void viewTotalWaterIntake() {
+        int waterIntake = 0;
+        for (Water water: totalWaterIntake) {
+            waterIntake += water.getWater();
+        }
+        System.out.println("Total water intake: " + waterIntake);
     }
 
     public static void handleViewFiber() {
@@ -108,8 +112,8 @@ public class User {
         if (drinkList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
-            Water.viewWater();
             printDrinkList(1);
+            viewTotalWaterIntake();
         }
     }
 
@@ -120,7 +124,7 @@ public class User {
         } else {
             printMealList(1);
             printDrinkList(mealList.size() + 1);
-            Water.viewWater();
+            viewTotalWaterIntake();
         }
     }
 

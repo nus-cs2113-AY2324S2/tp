@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.HashMap;
 
 public class Meal {
-    private static String name;
+    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
+    private String name;
     private int servingSize;
     private int calories;
     private int carbs;
@@ -11,7 +12,6 @@ public class Meal {
     private int fat;
     private int fiber;
     private int sugar;
-    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
 
     // Constructor with only serving size and meal name
     public Meal(String name, int servingSize) {
@@ -39,7 +39,7 @@ public class Meal {
     }
 
     // Getter methods
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
