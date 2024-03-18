@@ -11,7 +11,8 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
     - [Command Format](#features)
     - [Usage](#usage)
         - Reflection Manager
-          - [`reflect get` - Get reflection questions](#getting-reflection-questions-reflect-get)
+          - [`reflect get` - Get reflection questions](#get-reflection-questions-reflect-get)
+          - [`reflect save` - Save favourite reflection question](#save-favourite-reflection-question-reflect-save)
         - Habit Tracker
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
@@ -45,8 +46,8 @@ A command has the general structure:
 
 ## Usage
 
-### Getting reflection questions: `reflect get`
-Generate a set of 5 random unique reflection questions from 
+### Get reflection questions: `reflect get`
+Allows user to generate a set of 5 random unique reflection questions from 
 a question bank for users to view and reflect on. The questions come 
 from 5 main categories: personal growth and development, relationships 
 and social connections, career and professional development, health 
@@ -77,6 +78,34 @@ ________________________________________________________________________________
 3. What are your biggest strengths, and how can you leverage them more effectively in your daily life?
 4. How do you prioritize self-care and well-being in your daily life?
 5. Reflect on a time when you took a creative risk. What did you learn from the experience?
+________________________________________________________________________________________________________________
+```
+### Save favourite reflection question: `reflect save`
+Allows user to save reflection question to favourites after viewing generated questions. This allows the user 
+to review the question another time. The favourites list is stored in memory as a text file. 
+New users will have an empty favourites list file on load, but existing users can load back favourite questions from
+past sessions.
+
+Format:
+```
+reflect save [QUESTION_ID]
+```
+
+* The `reflect` and `save` are case-sensitive. Use lower casing for these 2 keywords.
+* Questions that can be saved correspond to the most recent list of generated questions.
+* Users need to generate questions before attempting to save it to favourites.
+* `QUESTION_ID` only accepts integers between 1 and 5 inclusive.
+
+
+Example of usage:
+```
+reflect save 1
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Got it. Added reflection question to favourites:
+How do you overcome creative blocks or periods of stagnation?
 ________________________________________________________________________________________________________________
 ```
 
