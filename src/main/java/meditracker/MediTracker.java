@@ -3,6 +3,7 @@ package meditracker;
 import meditracker.command.Command;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
+import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
 import meditracker.ui.Ui;
@@ -54,6 +55,7 @@ public class MediTracker {
      * @throws ArgumentNotFoundException Argument required not found
      */
     public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
+        MediLogger.initialiseLogger();
         new MediTracker().run();
     }
 }
