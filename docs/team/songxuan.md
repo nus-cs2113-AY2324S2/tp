@@ -12,7 +12,7 @@
 ### User Guide Contributions
 
 ### PR Reviews
-#2, #5
+#2, #5, #40
 
 ### Team-based tasks
 - Added PR Template.

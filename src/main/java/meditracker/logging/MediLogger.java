@@ -2,6 +2,9 @@ package meditracker.logging;
 
 import java.util.logging.Logger;
 
+/**
+ * Main Logging class to get the logger for logging outputs to the console.
+ */
 public class MediLogger {
     private static final String MEDILOGGER_NAME = "MediLogger";
     private static Logger mediLogger  = null;
