@@ -1,10 +1,10 @@
 package brokeculator.command;
-import brokeculator.expense.ExpenseManager;
+import brokeculator.dashboard.Dashboard;
 import brokeculator.frontend.UI;
 
 public class ExitCommand extends Command {
     public static final String GOODBYE_STRING = "Goodbye!";
-    public void execute(ExpenseManager expenseManager) {
+    public void execute(Dashboard dashboard) {
         UI.print(GOODBYE_STRING);
         System.exit(0);
     }

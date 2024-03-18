@@ -1,6 +1,6 @@
 package brokeculator.command;
 
-import brokeculator.expense.ExpenseManager;
+import brokeculator.dashboard.Dashboard;
 import brokeculator.frontend.UI;
 
 public class InvalidCommand extends Command {
@@ -10,7 +10,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute(ExpenseManager expenseManager) {
+    public void execute(Dashboard dashboard) {
         UI.print(errorMessage);
     }
 }
