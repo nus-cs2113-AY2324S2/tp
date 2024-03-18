@@ -14,9 +14,6 @@ public class FavoriteReflectionsList {
             favouritesList.add(reflectionQuestion);
         }
     }
-    public void removeReflectionQuestion(ReflectionQuestion reflectionQuestion) {
-        favouritesList.remove(reflectionQuestion);
-    }
 
     public ArrayList<ReflectionQuestion> getFavouritesList() {
         return favouritesList;

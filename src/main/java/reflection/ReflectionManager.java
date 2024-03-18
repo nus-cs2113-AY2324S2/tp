@@ -10,12 +10,12 @@ public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
-    private final String FAVOURITE_QUESTIONS_FILE_PATH = "data/favourites.txt";
+    private String favouriteQuestionsFilePath = "data/favourites.txt";
     public ReflectionManager() {
         this.questionBank = new ReflectionQuestionBank();
 
         this.favoriteReflectionsList = new FavoriteReflectionsList();
-        ArrayList<String> favouritesList = Storage.loadDataFromFile(FAVOURITE_QUESTIONS_FILE_PATH);
+        ArrayList<String> favouritesList = Storage.loadDataFromFile(favouriteQuestionsFilePath);
         for (String fav : favouritesList) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(fav);
             this.favoriteReflectionsList.addReflectionQuestion(reflectionQuestion);
@@ -36,7 +36,7 @@ public class ReflectionManager {
             ReflectionQuestion questionToSave = fiveRandomQuestions.get(reflectionId - 1);
 
             favoriteReflectionsList.addReflectionQuestion(questionToSave);
-            Storage.saveTasksToFile(FAVOURITE_QUESTIONS_FILE_PATH, favoriteReflectionsList.getFavouritesList());
+            Storage.saveTasksToFile(favouriteQuestionsFilePath, favoriteReflectionsList.getFavouritesList());
 
             Ui.printMessageWithSepNewLine("Got it. Added reflection question to favourites:\n" + questionToSave);
 
