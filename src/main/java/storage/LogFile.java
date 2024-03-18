@@ -8,9 +8,10 @@ import java.util.logging.SimpleFormatter;
 import utility.Constant;
 
 public class LogFile {
-    private static LogFile instance = null;
-    protected static FileHandler logFileHandler = null;
     private static final Logger logger = Logger.getLogger(LogFile.class.getName());
+    protected static FileHandler logFileHandler = null;
+    private static LogFile instance = null;
+
 
     /**
      * Private constructor to prevent instantiation from outside the class.
