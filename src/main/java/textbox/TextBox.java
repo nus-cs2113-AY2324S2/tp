@@ -14,4 +14,5 @@ public class TextBox {
     public String getNextMessage(){
         return nextMessage;
     }
+
 }

@@ -37,32 +37,32 @@ class MapTest {
     @Test
     void playerShouldMoveUpCorrectly() {
         map.movePlayerUpOne();
-        assertEquals('P', map.getStoredMap().get(1).get(2), "Player should move up 1 place");
-        assertEquals('.', map.getStoredMap().get(2).get(2),
+        assertEquals('P', map.getCurrentMap().get(1).get(2), "Player should move up 1 place");
+        assertEquals('.', map.getCurrentMap().get(2).get(2),
                 "Original player position should be empty after moving up");
     }
 
     @Test
     void playerShouldMoveDownCorrectly() {
         map.movePlayerDownOne();
-        assertEquals('P', map.getStoredMap().get(3).get(2), "Player should move down 1 place");
-        assertEquals('.', map.getStoredMap().get(2).get(2),
+        assertEquals('P', map.getCurrentMap().get(3).get(2), "Player should move down 1 place");
+        assertEquals('.', map.getCurrentMap().get(2).get(2),
                 "Original player position should be empty after moving down");
     }
 
     @Test
     void playerShouldMoveLeftCorrectly() {
         map.movePlayerLeftOne();
-        assertEquals('P', map.getStoredMap().get(2).get(1), "Player should move left 1 place");
-        assertEquals('.', map.getStoredMap().get(2).get(2),
+        assertEquals('P', map.getCurrentMap().get(2).get(1), "Player should move left 1 place");
+        assertEquals('.', map.getCurrentMap().get(2).get(2),
                 "Original player position should be empty after moving left");
     }
 
     @Test
     void playerShouldMoveRightCorrectly() {
         map.movePlayerRightOne();
-        assertEquals('P', map.getStoredMap().get(2).get(3), "Player moves right 1 place");
-        assertEquals('.', map.getStoredMap().get(2).get(2),
+        assertEquals('P', map.getCurrentMap().get(2).get(3), "Player moves right 1 place");
+        assertEquals('.', map.getCurrentMap().get(2).get(2),
                 "Original player position should be empty after moving right");
     }
 }
