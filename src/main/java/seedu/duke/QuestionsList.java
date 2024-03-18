@@ -10,7 +10,6 @@ public class QuestionsList {
 
     public QuestionsList() {
         questionsList = new ArrayList<>();
-
     }
 
     public void addQuestion(Question question){

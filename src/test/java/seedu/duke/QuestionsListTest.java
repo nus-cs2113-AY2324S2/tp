@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class QuestionsListTest {
-    QuestionsList questionList;
+    QuestionsList questionsList;
     Question question1;
     Question question2;
 
     void createQuestionList() {
-        questionList = new QuestionsList();
+        questionsList = new QuestionsList();
     }
 
     void createTwoQuestions() {
@@ -27,18 +27,18 @@ class QuestionsListTest {
     void getSize_addTwoQuestions_twoQuestions() {
         createQuestionList();
         createTwoQuestions();
-        questionList.addQuestion(question1);
-        questionList.addQuestion(question2);
+        questionsList.addQuestion(question1);
+        questionsList.addQuestion(question2);
 
-        assertEquals(2, questionList.getSize());
+        assertEquals(2, questionsList.getSize());
     }
 
     @Test
     void getAllSolutions_twoQuestions_twoExplanations() throws CustomException {
         createQuestionList();
         createTwoQuestions();
-        questionList.addQuestion(question1);
-        questionList.addQuestion(question2);
+        questionsList.addQuestion(question1);
+        questionsList.addQuestion(question2);
 
         String expectedOutput =
                 "Solution for question 1:" + System.lineSeparator()
@@ -48,7 +48,7 @@ class QuestionsListTest {
                         + "solution2" + System.lineSeparator()
                         + System.lineSeparator();
 
-        assertEquals(expectedOutput, questionList.getAllSolutions());
+        assertEquals(expectedOutput, questionsList.getAllSolutions());
     }
 
     @Test
@@ -56,6 +56,6 @@ class QuestionsListTest {
         createQuestionList(); // empty question List
 
         assertThrows(CustomException.class, // expect Exception
-                () -> questionList.getAllSolutions());
+                () -> questionsList.getAllSolutions());
     }
 }
