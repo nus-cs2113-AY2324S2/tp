@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 
 import seedu.binbash.command.Command;
 import seedu.binbash.command.AddCommand;
-import seedu.binbash.command.DeleteCommand;
+import seedu.binbash.command.DeleteIndexCommand;
 import seedu.binbash.command.SearchCommand;
 import seedu.binbash.command.ListCommand;
 import seedu.binbash.command.ByeCommand;
@@ -36,10 +36,10 @@ public class Parser {
     }
 
     private Command parseDeleteCommand(String userInput) {
-        Matcher matcher = DeleteCommand.COMMAND_FORMAT.matcher(userInput);
+        Matcher matcher = DeleteIndexCommand.COMMAND_FORMAT.matcher(userInput);
         if (matcher.matches()) {
             int index = Integer.parseInt(matcher.group("index"));
-            return new DeleteCommand(itemList, index);
+            return new DeleteIndexCommand(itemList, index);
         } else {
             return null;
         }
