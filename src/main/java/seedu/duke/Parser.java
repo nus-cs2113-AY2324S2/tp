@@ -18,25 +18,29 @@ public class Parser {
      * rn it returns nothing but maybe it can return a string of the game name ?
      * whatever makes it flow easier
      */
-    public static String readGame() {
+    public static int readGame() {
         input = readLine();
         if (input == null) {
             // call function to Ui to say something is wrong with reader // maybe restart program ?
-            return ("null input on readGame()");
+            System.out.println ("null input on readGame()");
+            return -1;
         }
 
-        if (input.equals("Tic Tac Toe")) {
-            // call tic tac toe
-            return ("calling ttt");
-        } else if (input.equals("Hangman")) {
-            // call hangman
-            return ("calling hangman");
-        } else if (input.equals("quit")) {
+        if (input.equals("quit")) {
             // call function to tell someone else they want to quit
-            return ("tryna quit");
+            System.out.println ("tryna quit");
+            return 0;
+        } else if (input.equals("Tic Tac Toe")) {
+            // call tic tac toe
+            System.out.println("Loading Tic Tac Toe...");
+            return 1; // for TTT
+        } else if (input.equals("Hangman")) {
+            System.out.println("Loading Hangman...");
+            return 2; // for Hangman
         } else {
             // call "unknown game entered for Ui to print something and reprompt user
-            return ("unknown game name ! choices: hangman, ttt, or quit");
+            System.out.println ("unknown game name ! choices: hangman, ttt, or quit");
+            return 3;
         }
     }
 
@@ -89,24 +93,5 @@ public class Parser {
         }
         return null;
     }
-
-    /* public static void main (String ars[]) {
-        System.out.println("\ntest ttt");
-        System.out.println(readGame());
-        System.out.println("\ntest h");
-        System.out.println(readGame());
-        System.out.println("\ntest quit");
-        System.out.println(readGame());
-        System.out.println("\ntest hub");
-        System.out.println(readGame());
-        System.out.println("\ntest 1-9");
-        System.out.println(readTTMove());
-        System.out.println("\ntest 13");
-        System.out.println(readTTMove());
-        System.out.println("\ntest quit");
-        System.out.println(readTTMove());
-        System.out.println("\ntest hub");
-        System.out.println(readTTMove());
-    } */
 }
 
