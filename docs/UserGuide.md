@@ -21,6 +21,12 @@
 
 ## BinBash Overview
 
+Welcome to BinBash, an **Inventory Management System** designed to streamline your stock control processes. 
+BinBash offers a simple and lightweight solution that makes managing your items fast and efficient.
+It's built to handle the complexities of inventory tracking so that you don't have to. 
+This guide will walk you through each feature, providing clear instructions and examples to ensure that you 
+can make the most out of BinBash. Let's get your inventory organized efficiently and effectively!
+
 ## How to Use this Guide
 
 ## Getting Started
