@@ -12,7 +12,9 @@ public class User {
     public String getName() {
         return name;
     }
-
-
-
+    public void viewTimetable() {
+        for (int i = 0; i < 7; i++) {
+            timetable.printTasksOfTheDay(i);
+        }
+    }
 }
