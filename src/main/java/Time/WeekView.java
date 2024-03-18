@@ -1,14 +1,14 @@
 package Time;
 import data.TaskManager;
-import static ui.UiRenderer.printWeekHeader;
-import static ui.UiRenderer.printSeparator;
-import static ui.UiRenderer.printWeekDays;
+//import static ui.UiRenderer.printWeekDays;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+
+import static ui.UiRenderer.*;
 
 public class WeekView {
     private LocalDate startOfWeek;
@@ -24,7 +24,8 @@ public class WeekView {
         System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) + " - " + dateFormatter.format(endOfWeek));
 
         printWeekHeader();
-        printWeekDays(startOfWeek, dateFormatter, taskManager);
+        printWeekBody(startOfWeek, dateFormatter, taskManager);
+//        printWeekDays(startOfWeek, dateFormatter, taskManager);
     }
 
     public void nextWeek() {
