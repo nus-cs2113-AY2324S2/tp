@@ -7,6 +7,7 @@ import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
 import java.util.Scanner;
+import storage.LogFile;
 
 
 /**
@@ -14,8 +15,7 @@ import java.util.Scanner;
  * before providing feedback to the user.
  */
 public class Handler {
-
-
+    static LogFile logging = new LogFile();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -26,16 +26,16 @@ public class Handler {
     public static void processInput() {
         Scanner in = new Scanner(System.in);
 
+
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
-
-            // Convert command to uppercase before processing
             String instruction = userInput.toUpperCase().split(" ")[0];
+            logging.writeLog("User Input: " + userInput, false);
 
             try {
                 Command command = Command.valueOf(instruction);
-
                 switch (command) {
+
                 case EXIT:
                     return;
 
@@ -225,10 +225,13 @@ public class Handler {
      */
     public static void initialiseBot() {
         Output.printArt();
+        logging.writeLog("Started bot", false);
         System.out.println("Hello from PulsePilot\n");
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        String name = in.nextLine();
+        System.out.println("Hello " + name);
+        logging.writeLog("Name entered: " + name, false);
         // Yet to implement : Reply.printWelcomeMessage();
         // Yet to implement : Storage.loadProfile();
     }
@@ -238,6 +241,7 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
+        logging.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);

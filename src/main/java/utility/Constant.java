@@ -29,4 +29,6 @@ public class Constant {
     public static final String INVALID_RUN_TIME = "Invalid run time!";
     public static final String INVALID_GYM_INPUT = "Invalid gym parameters!";
     public static final String INVALID_GYM_STATION_INDEX = "Invalid gym station index!";
+
+    public static final String LOG_FILE_PATH ="./pulsepilot_log.txt";
 }
