@@ -68,6 +68,8 @@ public class LongAh {
                 switch (parts[0]) {
                 case "add":
                     transactions.addTransaction(parts[1], members);
+                    group.updateTransactionSolution();
+                    group.saveAllData();
                     break;
                 case "listdebts":
                     app.listAllDebts();
@@ -91,6 +93,7 @@ public class LongAh {
                     if (parts.length == 2) {
                         String name = parts[1];
                         members.addMember(name);
+                        group.saveMembersData();
                     } else {
                         System.out.println("Invalid command format. Use 'addmember NAME'");
                     }
@@ -100,6 +103,7 @@ public class LongAh {
                     break;
                 case "settleup":
                     group.settleUp(parts[1]);
+                    group.saveTransactionsData();
                     break;
                 case "exit":
                     System.exit(0);

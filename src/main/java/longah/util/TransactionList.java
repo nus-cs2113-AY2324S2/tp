@@ -18,7 +18,7 @@ public class TransactionList {
      * @param transaction The transaction to add.
      */
     public void addTransaction(Transaction transaction) {
-        transactions.add(transaction);
+        this.transactions.add(transaction);
     }
 
     /**
@@ -30,7 +30,7 @@ public class TransactionList {
      */
     public void addTransaction(String expression, MemberList memberList)
              throws LongAhException {
-        transactions.add(new Transaction(expression, memberList));
+        this.transactions.add(new Transaction(expression, memberList));
     }
 
     /**
@@ -39,7 +39,7 @@ public class TransactionList {
      * @return The size of the transaction list.
      */
     public int getTransactionListSize() {
-        return transactions.size();
+        return this.transactions.size();
     }
 
     /**
@@ -53,10 +53,10 @@ public class TransactionList {
             throw new LongAhException(ExceptionMessage.INVALID_DELETE_COMMAND);
         }
         int index = Integer.parseInt(input[1]) - 1;
-        if (index < 0 || index >= transactions.size()) {
+        if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        transactions.remove(index);
+        this.transactions.remove(index);
 
     }
 
@@ -64,7 +64,7 @@ public class TransactionList {
      * Clears all transactions from the list.
      */
     public void clear() {
-        transactions.clear();
+        this.transactions.clear();
     }
 
     /**
@@ -73,7 +73,7 @@ public class TransactionList {
      * @return The list of transactions.
      */
     public ArrayList<Transaction> getTransactions() {
-        return transactions;
+        return this.transactions;
     }
 
     /**
@@ -86,7 +86,7 @@ public class TransactionList {
         }
         int index = 1;
         String outString = "";
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : this.transactions) {
             outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
             index++;
         }
@@ -130,7 +130,7 @@ public class TransactionList {
         String outString = String.format("%s is involved as the payee in the following list of transactions."
                 , memberName) + "\n";
         int index = 1;
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : this.transactions) {
             if (transaction.isBorrower(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;

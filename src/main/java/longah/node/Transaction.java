@@ -1,5 +1,6 @@
 package longah.node;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import longah.util.MemberList;
@@ -40,6 +41,21 @@ public class Transaction {
         }
         this.lender.addToBalance(totalSumLent);
         updateBorrowerBalances();
+    }
+
+    /**
+     * Constructs a new Transaction instance with the given lender, subtransactions and member list.
+     * Used for storage methods only.
+     * 
+     * @param lender The member who lent the money in the transaction.
+     * @param subtransactions The list of subtransactions in the transaction.
+     * @param memberList The list of members in the group.
+     * @throws LongAhException If the lender does not exist in the group.
+     */
+    public Transaction(Member lender, ArrayList<Subtransaction> subtransactions,
+            MemberList memberList) throws LongAhException {
+        this.lender = lender;
+        this.subtransactions = subtransactions;
     }
 
     /**
@@ -127,6 +143,7 @@ public class Transaction {
      * 
      * @return a string representation of the transaction
      */
+    @Override
     public String toString() {
         String lender = "Lender: " + this.lender.getName() + "\n";
         String borrower = "";
@@ -137,6 +154,23 @@ public class Transaction {
             borrower += String.format("Borrower %d: %s Owed amount: %,.2f\n",
                     borrowerNo, member.getName(), amount);
             borrowerNo++;
+        }
+        return lender + borrower;
+    }
+
+    /**
+     * Returns a string representation of the transaction for storage.
+     * 
+     * @param delimiter The delimiter to separate the lender and borrowers.
+     * @return a string representation of the transaction for storage
+     */
+    public String toStorageString(String delimiter) {
+        String lender = this.lender.getName();
+        String borrower = "";
+        for (Subtransaction subtransaction : this.subtransactions) {
+            String borrowerName = subtransaction.getBorrower().getName();
+            double amount = subtransaction.getAmount();
+            borrower += delimiter + borrowerName + delimiter + amount;
         }
         return lender + borrower;
     }

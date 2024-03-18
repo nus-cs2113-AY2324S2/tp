@@ -93,6 +93,16 @@ public class Member {
     }
 
     /**
+     * Returns a string representation of the member for storage.
+     * 
+     * @param delimiter The delimiter to separate the name and balance.
+     * @return A string representation of the member for storage.
+     */
+    public String toStorageString(String delimiter) {
+        return this.name + delimiter + this.balance;
+    }
+
+    /**
      * Gets the name of the member.
      *
      * @return The name of the member.

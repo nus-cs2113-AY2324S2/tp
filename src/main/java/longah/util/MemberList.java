@@ -185,4 +185,14 @@ public class MemberList {
     public int getMemberListSize() {
         return members.size();
     }
+
+    /**
+     * Returns the list of members, of type in the group.
+     * For use in storage only.
+     * 
+     * @return The list of members in the group.
+     */
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
 }

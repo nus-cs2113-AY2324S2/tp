@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import longah.node.Member;
 import longah.util.MemberList;
 import longah.util.Subtransaction;
-// import longah.node.Transaction;
+import longah.node.Transaction;
 import longah.util.TransactionList;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
@@ -127,13 +128,13 @@ public class StorageHandler {
                 Member lender = members.getMember(lenderName);
                 ArrayList<Subtransaction> subtransactions = new ArrayList<>();
 
-                for (int i = 2; i < transactionData.length; i += 2) {
+                for (int i = 1; i < transactionData.length; i += 2) {
                     Subtransaction subtransaction = parseSubtransaction(transactionData[i],
                             transactionData[i + 1], lender, members);
                     subtransactions.add(subtransaction);
                 }
-                // Transaction transaction = new Transaction(description, lender, subtransactions);
-                // transactions.addTransaction(transaction);
+                Transaction transaction = new Transaction(lender, subtransactions, members);
+                transactions.addTransaction(transaction);
             } catch (LongAhException | NumberFormatException e) {
                 throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
             }
@@ -167,5 +168,43 @@ public class StorageHandler {
         loadTransactionsData(transactionsScanner, transactions, members);
         membersScanner.close();
         transactionsScanner.close();
+    }
+
+    /**
+     * Saves the members data from the MemberList object into the data file.
+     * 
+     * @param members The MemberList object to save the data from
+     * @throws LongAhException If the data file is not written
+     */
+    public void saveMembersData(MemberList members) throws LongAhException {
+        try {
+            FileWriter fw = new FileWriter(this.membersFile);
+            for (Member member : members.getMembers()) {
+                String data = member.toStorageString(SEPARATOR);
+                fw.write(data + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new LongAhException(ExceptionMessage.STORAGE_FILE_NOT_WRITTEN);
+        }
+    }
+
+    /**
+     * Saves the transactions data from the TransactionList object into the data file.
+     * 
+     * @param transactions The TransactionList object to save the data from
+     * @throws LongAhException If the data file is not written
+     */
+    public void saveTransactionsData(TransactionList transactions) throws LongAhException {
+        try {
+            FileWriter fw = new FileWriter(this.transactionsFile);
+            for (Transaction transaction : transactions.getTransactions()) {
+                String data = transaction.toStorageString(SEPARATOR);
+                fw.write(data + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new LongAhException(ExceptionMessage.STORAGE_FILE_NOT_WRITTEN);
+        }
     }
 }

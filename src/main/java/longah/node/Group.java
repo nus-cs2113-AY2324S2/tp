@@ -95,4 +95,28 @@ public class Group {
         updateTransactionSolution();
         System.out.println(borrowerName + " has no more debts!");
     }
+
+    /**
+     * Saves the member data into the storage file.
+     */
+    public void saveMembersData() throws LongAhException {
+        this.storage.saveMembersData(this.members);
+    }
+
+    /**
+     * Saves the transaction data into the storage file.
+     */
+    public void saveTransactionsData() throws LongAhException {
+        this.storage.saveTransactionsData(this.transactions);
+    }
+
+    /**
+     * Loads the data from the storage file into the member list and transaction list.
+     * 
+     * @throws LongAhException If the data file is not read or the content is invalid
+     */
+    public void saveAllData() throws LongAhException {
+        saveMembersData();
+        saveTransactionsData();
+    }
 }
