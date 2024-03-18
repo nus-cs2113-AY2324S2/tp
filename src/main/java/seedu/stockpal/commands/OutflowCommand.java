@@ -9,9 +9,9 @@ public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
 
-    ProductList productList;
-    Pid pid;
-    Integer amountToDecrease;
+    private ProductList productList;
+    private Pid pid;
+    private Integer amountToDecrease;
     private final Storage storage;
 
     public OutflowCommand(ProductList productList, Integer pidValue, Integer amountToDecrease, Storage storage) {
