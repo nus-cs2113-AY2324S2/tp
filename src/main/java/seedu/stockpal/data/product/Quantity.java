@@ -10,6 +10,10 @@ public class Quantity implements CommandParameter {
         this.quantity = quantity;
     }
 
+    public Integer getQuantity() {
+        return this.quantity;
+    }
+
     public void updateIncreaseQuantity(Integer increaseQuantity) {
         quantity += increaseQuantity;
     }
@@ -29,6 +33,15 @@ public class Quantity implements CommandParameter {
     @Override
     public String toString() {
         return ("Quantity: " + quantity);
+    }
+
+    /**
+     * Converts the Quantity to the specific format for saving to the data file.
+     *
+     * @return A formatted string containing the Quantity for saving.
+     */
+    public String toSave() {
+        return this.quantity.toString();
     }
 }
 

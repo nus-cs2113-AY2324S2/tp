@@ -19,23 +19,23 @@ public class Product {
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Quantity getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public Price getPrice() {
-        return price;
+        return this.price;
     }
 
     public Description getDescription() {
-        return description;
+        return this.description;
     }
 
     public Pid getPid() {
-        return pid;
+        return this.pid;
     }
 
     public void setName(Name name) {
@@ -65,13 +65,28 @@ public class Product {
     public void decreaseQuantity(Integer amountToChange) {
         try {
             quantity.updateDecreaseQuantity(amountToChange);
+            Ui.printToScreen("Quantity updated. " + quantity);
         } catch (InsufficientAmountException e) {
-            Ui.printToScreen("Insufficient amount in inventory. Amount in inventory: " + quantity);
+            Ui.printToScreen("Insufficient amount in inventory. No change to quantity." + quantity);
         }
     }
 
     @Override
     public String toString() {
         return "" + this.name;
+    }
+
+    /**
+     * Converts the Product to the specific format for saving to the data file.
+     *
+     * @return A formatted string containing the Product for saving.
+     */
+    public String toSave() {
+        String separator = ";";
+        return this.pid.toSave() + separator +
+                this.name.toSave() + separator +
+                this.quantity.toSave() + separator +
+                this.price.toSave() + separator +
+                this.description.toSave();
     }
 }
