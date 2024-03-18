@@ -2,41 +2,39 @@
 
 ## Introduction
 
-{Give a product intro}
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Table of Contents](#table-of-contents)
+3. [BinBash Overview](#binbash-overview)
+4. [How to Use this Guide](#how-to-use-this-guide)
+5. [Getting Started](#getting-started)
+6. [Features](#features)
+7. [Command Summary](#command-summary)
+8. [FAQ](#faq)
+9. [Glossary](#glossary)
 
-## Quick Start
+## BinBash Overview
 
-{Give steps to get started quickly}
+## How to Use this Guide
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+## Getting Started
+
+1. Ensure you have Java 11 or above installed.
 
 ## Features 
 
-{Give detailed description of each feature}
-
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
-
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
+### Adding an item: `add`
+### Searching for an item: `search`
+### Listing current inventory: `list`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
 * Add todo `todo n/TODO_NAME d/DEADLINE`
+
+## FAQ
+
+**Q**: How do I ...
+
+**A**: {your answer here}
+
+## Glossary
