@@ -53,7 +53,13 @@ public class Storage {
                 String task = scanner.nextLine();
                 if(task.startsWith("Meal")){
                     String[] items = task.trim().split(" ");
-                    LogMeals newTask = new LogMeals(items[1], Integer.parseInt(items[2]),  Integer.parseInt(items[3]));
+                    int len = items.length;
+                    assert len >= 4;
+                    String mealName = "";
+                    for (int i = 1; i <= len - 3; i++){
+                        mealName = mealName + items[i];
+                    }
+                    LogMeals newTask = new LogMeals(mealName, Integer.parseInt(items[len - 2]),  Integer.parseInt(items[len - 1]));
                     TaskList.tasksList.add(newTask);
                 }else if (task.startsWith("Goal")){
                     String[] items = task.trim().split(" ");

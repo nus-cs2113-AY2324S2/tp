@@ -6,4 +6,3 @@ public class ActiveEdgeException extends Exception{
         super(warning);
     }
 }
-
