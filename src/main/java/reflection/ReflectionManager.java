@@ -13,7 +13,8 @@ public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
-    private String favouriteQuestionsFilePath = "data/favourites.txt";
+
+    private final String favouriteQuestionsFilePath = "data/favourites.txt";
 
     /**
      * Constructs a ReflectionManager and initializes question bank and favorite reflections list.

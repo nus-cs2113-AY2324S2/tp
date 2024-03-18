@@ -2,11 +2,13 @@ package parser;
 
 import commands.Command;
 import commands.ExitCommand;
+import fitness.FitnessMotivator;
 import focus.FocusTimer;
 import habit.HabitTracker;
 import reflection.ReflectionManager;
 import sleep.SleepTracker;
 
+import static parser.FitnessCommandParser.determineFitnessCommand;
 import static parser.HabitCommandParser.determineHabitCommand;
 import static parser.ReflectionCommandParser.determineReflectionCommand;
 import static parser.SleepCommandParser.determineSleepCommand;
@@ -18,7 +20,9 @@ public class Parser {
     public static Command determineCommand(SleepTracker sleepTracker,
                                            ReflectionManager reflection,
                                            HabitTracker habitTracker,
-                                           FocusTimer focusTimer, String userInput)
+                                           FocusTimer focusTimer,
+                                           FitnessMotivator fitnessMotivator,
+                                           String userInput)
             throws Wellness360Exception {
 
         String[] userWords = userInput.trim().split("\\s+", 2);
@@ -34,6 +38,7 @@ public class Parser {
         case "sleep":
             return determineSleepCommand(sleepTracker, commandArgs);
         case "fitness":
+            return determineFitnessCommand(fitnessMotivator, commandArgs);
         case "focus":
             return determineFocusCommand(focusTimer, commandArgs);
         case "exit":
