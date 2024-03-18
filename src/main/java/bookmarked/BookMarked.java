@@ -12,7 +12,6 @@ public class BookMarked {
     public static ArrayList<Book> listOfBooks = new ArrayList<>();
     public static int numberOfBooks = 0;
 
-
     public static void main(String[] args) {
         Ui.greetings();
 
@@ -20,8 +19,5 @@ public class BookMarked {
         String newItem = in.nextLine();
 
         Parser.runCommand(newItem, in, listOfBooks);
-        Ui.exitProgramme();
-
     }
-
 }
