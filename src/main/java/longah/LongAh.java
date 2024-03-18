@@ -103,7 +103,7 @@ public class LongAh {
                     break;
                 case "settleup":
                     group.settleUp(parts[1]);
-                    group.saveTransactionsData();
+                    group.saveAllData();
                     break;
                 case "exit":
                     System.exit(0);
