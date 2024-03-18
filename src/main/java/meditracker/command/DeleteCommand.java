@@ -9,6 +9,10 @@ import meditracker.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * The DeleteCommand class represents a command to delete an existing medication.
+ * It extends the Command class.
+ */
 public class DeleteCommand extends Command {
     public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false)
