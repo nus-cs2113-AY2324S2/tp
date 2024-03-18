@@ -20,9 +20,10 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("p/Alice p/Bob a/5", memberList);
+            transactionList.add("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            transactionList.remove(0);
+            String[] parts = "remove 1".split(" ", 2);
+            transactionList.remove(parts);
             assertEquals(0, transactionList.getTransactionListSize());
 
         } catch (LongAhException e) {
@@ -41,9 +42,10 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("p/Alice p/Bob a/5", memberList);
+            transactionList.add("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            transactionList.remove(-1);
+            String[] parts = "remove -1".split(" ", 2);
+            transactionList.remove(parts);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
@@ -55,10 +57,15 @@ public class TransactionListTest {
      * Tests the listing of transactions when there are none stored in the system
      */
     @Test
-    public void list_noTransactions_success(){
-        TransactionList transactionList = new TransactionList();
-        String printedOutput = transactionList.listTransactions();
-        assertEquals("", printedOutput);
+    public void list_noTransactions_success() throws LongAhException {
+        try {
+            TransactionList transactionList = new TransactionList();
+            transactionList.listTransactions();
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
     }
     
     /*
@@ -103,9 +110,11 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
-            String printedOutput = transactionList.findTransactions("James");
+            transactionList.add("Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("Jane p/Jack a/150 p/James a/200", memberList);
+            String command = "findpayment James";
+            String[] parts = command.split(" ", 2);
+            String printedOutput = transactionList.findTransactions(parts);
             String expectedString = "James owns the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 
@@ -159,9 +168,10 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
-            String printedOutput = transactionList.findDebts("Jack");
+            transactionList.add("Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.add("Jack p/Jane a/150 p/James a/200", memberList);
+            String[] parts = "finddebt Jack".split(" ", 2);
+            String printedOutput = transactionList.findDebts(parts);
             String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
             assertEquals(expectedString, printedOutput);
 
