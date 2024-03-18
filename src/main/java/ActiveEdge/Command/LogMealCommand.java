@@ -2,34 +2,23 @@ package ActiveEdge.Command;
 
 import ActiveEdge.Ui.CommandUi;
 import ActiveEdge.Task.LogMeals;
-import ActiveEdge.FoodData;
 
 import static ActiveEdge.Task.TaskList.tasksList;
 
 public class LogMealCommand {
-    public LogMealCommand(String input) {
-        if(input.trim().length() > 4 && input.contains("m/") && input.contains("s/")) {
-            String[] parts = input.substring(4).split("m/ | s/");
-            String description = parts[0].trim();
-            String servings = parts[1].trim();
-            String calories = findCalories(description);
+    protected String description;
+    protected int servings;
+    protected int mealCalories;
 
-            LogMeals newMeal = new LogMeals(description, servings, calories);
-            tasksList.add(newMeal);
-
-            CommandUi.printLogMessage(newMeal, tasksList.size());
-        }
+    public LogMealCommand(String description, int servings, int mealCalories) {
+        this.description = description;
+        this.servings = servings;
+        this.mealCalories = mealCalories;
     }
 
-    private String findCalories(String description) {
-        String calorieOfFood = null;
-        for (String[] food : FoodData.foodItems) {
-            if (food[1].equalsIgnoreCase(description)) { // Match description ignoring case
-                calorieOfFood = food[2];
-                break; // Stop searching once found
-            }
-        }
-        return calorieOfFood;
+    public void execute() throws ActiveEdgeException {
+        LogMeals logMeal = new LogMeals(description, servings, mealCalories);
+        tasksList.add(logMeal);
+        CommandUi.printMealLogMessage(logMeal);
     }
-
 }

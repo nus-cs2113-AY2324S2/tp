@@ -1,39 +1,24 @@
 package ActiveEdge.Task;
 
-import static ActiveEdge.Task.TaskList.tasksList;
-import ActiveEdge.Task.Task;
-
 public class LogMeals extends Task {
+    protected Integer servings;
+    protected Integer mealCalories;
 
-    protected String servings;
-
-    protected String calories;
-
-    public LogMeals(String description, String servings, String calories) {
-        super(description);
+    public LogMeals (String meal, int servings, int mealCalories){
+        super(meal);
         this.servings = servings;
-        this.calories = calories;
+        this.mealCalories = mealCalories;
+    }
+    public String getFoodName() { return description; }
+
+    public int getServings(){
+        return servings;
     }
 
-    int servingsNum = Integer.parseInt(servings);
-    int caloriesNum = Integer.parseInt(calories);
-    int mealCalories = servingsNum * caloriesNum;
+    public int getMealCalories() { return mealCalories; }
 
-    public static int totalCalories;
-
-    public int addCalories() {
-        if(tasksList.size()==0) {
-            totalCalories = 0;
-        } else {
-            totalCalories += mealCalories;
-        }
-        return totalCalories;
-    }
-
+    @Override
     public String toString() {
-        return "You've logged " + servings + " serving of " + super.getDescription() + ".\n" +
-                "Estimated calories: " + mealCalories +"\n" +
-                "Total calories: " + totalCalories;
+        return "Meal " + this.getDescription() + " " + this.getServings() + " " + this.getMealCalories();
     }
-
 }

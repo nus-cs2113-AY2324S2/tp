@@ -1,0 +1,4 @@
+Goal c4000
+Goal w3000
+Meal sushi 3 1050
+Water 4000
