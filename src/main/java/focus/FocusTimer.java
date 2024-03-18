@@ -33,6 +33,6 @@ public class FocusTimer {
         long seconds = timeElapsed.toSeconds();
         Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + " Time spent: " +
                 hours + " hours, " + minutes + " minutes, " + seconds + " seconds" + "\n" +
-                "To start a new session, use ‘focustimer start’ ");
+                "To start a new session, use ‘focus start’ ");
     }
 }
