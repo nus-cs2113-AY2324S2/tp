@@ -77,7 +77,7 @@ public class WorkoutManager extends ActivityManager {
         Exercise exercise = (Exercise) exerciseManager.retrieve(exerciseName);
         Workout workoutPlan = (Workout) retrieve(workoutPlanName);
 
-        if (workoutPlan.getWorkoutList().contains(exercise)) {
+        if (workoutPlan.getExerciseList().contains(exercise)) {
             throw new Exceptions.InvalidInput("Exercise already assigned to workout plan");
         }
 

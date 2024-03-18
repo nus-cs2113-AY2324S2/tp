@@ -18,7 +18,7 @@ class WorkoutTest {
 
         ArrayList<Exercise> expectedList = new ArrayList<>();
         expectedList.add(exercise);
-        assertEquals(expectedList, workout.getWorkoutList());
+        assertEquals(expectedList, workout.getExerciseList());
     }
 
     @Test
@@ -39,13 +39,13 @@ class WorkoutTest {
         expectedList.add(exercise1);
         expectedList.add(exercise2);
         expectedList.add(exercise3);
-        assertEquals(expectedList, workout.getWorkoutList());
+        assertEquals(expectedList, workout.getExerciseList());
     }
 
     @Test
     public void getWorkoutList_workoutWithNoExercises_returnsEmptyList() {
         Workout workout = new Workout("Push Day");
-        assertTrue(workout.getWorkoutList().isEmpty());
+        assertTrue(workout.getExerciseList().isEmpty());
     }
 
     @Test
@@ -59,7 +59,7 @@ class WorkoutTest {
         ArrayList<Exercise> expectedList = new ArrayList<>();
         expectedList.add(exercise1);
         expectedList.add(exercise2);
-        assertEquals(expectedList, workout.getWorkoutList());
+        assertEquals(expectedList, workout.getExerciseList());
     }
 
 
