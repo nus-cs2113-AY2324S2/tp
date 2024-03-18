@@ -23,16 +23,24 @@ public class Ui {
         return "Quantity: " + item.getQuantity();
     }
 
-    private static String addItemOpening(Item item) {
+    private static String newItemOpening(Item item) {
         return item.getName() + " has been added to the inventory!";
     }
 
-    private static void updateItemOpening(Item item) {
-        printIndent(item.getName() + " has been successfully updated!");
+    private static String updateItemOpening(Item item) {
+        return item.getName() + " has been successfully updated!";
     }
 
-    private static String deleteItemOpening(String itemName) {
-        return itemName + " has been deleted!";
+    private static String deleteItemOpening(String name) {
+        return name + " has been deleted!";
+    }
+
+    private static String addItemOpening(Item item, int quantityAdded) {
+        return quantityAdded + " " + item.getName() + " added to inventory!";
+    }
+
+    private static String removeItemOpening(Item item, int quantityRemoved) {
+        return quantityRemoved + " " + item.getName() + " removed from inventory!";
     }
 
     public static void printIndent(String string) {
@@ -58,19 +66,29 @@ public class Ui {
     }
 
     public static void newCommandSuccess(Item item) {
-        printIndent(addItemOpening(item));
+        printIndent(newItemOpening(item));
         printIndent(quantityMessage(item));
         printIndent(priceMessage(item));
     }
 
     public static void updateCommandSuccess(Item item) {
-        updateItemOpening(item);
+        printIndent(updateItemOpening(item));
         printIndent(quantityMessage(item));
         printIndent(priceMessage(item));
     }
 
-    public static void deleteSuccess(String itemName) {
-        printIndent(deleteItemOpening(itemName));
+    public static void deleteCommandSuccess(String name) {
+        printIndent(deleteItemOpening(name));
+    }
+
+    public static void addCommandSuccess(Item item, int quantityAdded) {
+        printIndent(addItemOpening(item, quantityAdded));
+        printIndent(quantityMessage(item));
+    }
+
+    public static void removeCommandSuccess(Item item, int quantityRemoved) {
+        printIndent(removeItemOpening(item, quantityRemoved));
+        printIndent(quantityMessage(item));
     }
 
     public static void listIntro(int size) {

@@ -7,17 +7,18 @@ public class ErrorMessage {
     public static final String INVALID_DELETE_FORMAT = "Invalid delete command format!";
     public static final String INVALID_LIST_FORMAT = "Invalid list command format!";
     public static final String INVALID_NEW_ITEM_FORMAT = "Invalid new command format!";
+    public static final String INVALID_ADD_FORMAT = "Invalid add command format!";
+    public static final String INVALID_REMOVE_FORMAT = "Invalid remove command format!";
     public static final String ITEM_NOT_IN_LIST_UPDATE =
             " does not exist in inventory. Unable to update its values. =(";
-
     public static final String ITEM_NOT_IN_LIST_DELETE =
             " does not exist in inventory. Unable to delete something that does not exist. =(";
+    public static final String ITEM_NOT_IN_LIST_ADD=
+            " does not exist in inventory. Unable to increase its quantity. =(";
+    public static final String ITEM_NOT_IN_LIST_REMOVE=
+            " does not exist in inventory. Unable to decrease its quantity. =(";
     public static final String ITEM_IN_LIST_NEW = " already exists in inventory. Use the update command instead.";
-
-
     public static final String INVALID_NUMBER_FORMAT = "Invalid values for price/quantity";
-
     public static final String QUANTITY_TOO_SMALL = "Quantity should be more than 0";
-
     public static final String PRICE_TOO_SMALL = "Price should be more than 0";
 }

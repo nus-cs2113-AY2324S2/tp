@@ -5,16 +5,16 @@ import supertracker.ui.Ui;
 
 public class DeleteCommand implements Command {
 
-    String itemName;
+    private String name;
 
-    public DeleteCommand(String itemName) {
-        this.itemName = itemName;
+    public DeleteCommand(String name) {
+        this.name = name;
     }
 
     @Override
     public void execute() {
-        Inventory.delete(itemName);
-        Ui.deleteSuccess(itemName);
+        Inventory.delete(name);
+        Ui.deleteCommandSuccess(name);
     }
 
     @Override
