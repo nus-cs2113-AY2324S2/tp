@@ -21,7 +21,6 @@ public class FileManager {
     public boolean openFile() {
         try {
             if (!this.dataFile.exists()) {
-                printCreatingFileMessage();
                 createDataFile();
             }
             this.scanner = new Scanner(this.dataFile);
@@ -37,9 +36,6 @@ public class FileManager {
 
     private void printDataLossWarning() {
         System.out.println("Errors! Your data will not be saved");
-    }
-    private void printCreatingFileMessage() {
-        System.out.println("Creating your data bank...");
     }
     private void printDataSavedMessage() {
         System.out.println("Data file successfully created!");
