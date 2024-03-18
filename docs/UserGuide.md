@@ -13,6 +13,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Reflection Manager
           - [`reflect get` - Get reflection questions](#get-reflection-questions-reflect-get)
           - [`reflect save` - Save favourite reflection question](#save-favourite-reflection-question-reflect-save)
+          - [`reflect list` - View favourite reflection questions](#view-favourite-reflection-questions-reflect-list)
         - Habit Tracker
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
@@ -20,6 +21,10 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Sleep Tracker
           - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
           - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
+        - Focus Timer
+          - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
+          - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -80,6 +85,7 @@ ________________________________________________________________________________
 5. Reflect on a time when you took a creative risk. What did you learn from the experience?
 ________________________________________________________________________________________________________________
 ```
+
 ### Save favourite reflection question: `reflect save`
 Allows user to save reflection question to favourites after viewing generated questions. This allows the user 
 to review the question another time. The favourites list is stored in memory as a text file. 
@@ -91,7 +97,7 @@ Format:
 reflect save [QUESTION_ID]
 ```
 
-* The `reflect` and `save` are case-sensitive. Use lower casing for these 2 keywords.
+* The `reflect` and `save` keywords are case-sensitive. Use lower casing for these 2 keywords.
 * Questions that can be saved correspond to the most recent list of generated questions.
 * Users need to generate questions before attempting to save it to favourites.
 * `QUESTION_ID` only accepts integers between 1 and 5 inclusive.
@@ -106,6 +112,31 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 Got it. Added reflection question to favourites:
 How do you overcome creative blocks or periods of stagnation?
+________________________________________________________________________________________________________________
+```
+
+### View favourite reflection questions: `reflect list`
+Allow the user to view favourite reflection questions that have been saved.
+
+Format:
+
+```
+reflect list
+```
+* The `reflect` and `list` keywords are case-sensitive. Use lower casing for these 2 keywords.  
+
+Example of usage:
+```
+reflect list
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Favourites list:
+1. How do you overcome creative blocks or periods of stagnation?
+2. How do you prioritize self-care and well-being in your daily life?
+3. Reflect on a time when you took a creative risk. What did you learn from the experience?
 ________________________________________________________________________________________________________________
 ```
 
@@ -243,6 +274,45 @@ Total hrs slept: 15.0
 2. 30/01/12: 8.0
 ________________________________________________________________________________________________________________
 ```
+### Start a new focus timer: `focus start`
+Allow the user to start a new focus timer session. The user will be able
+to start the timer whenever they want and the application will keep track of the time. 
+In addition, only 1 timer will run at a time, thus multiple uses of `focus start` is not allowed.
+
+Format:
+~~~
+focus start
+~~~
+* The `focus` and `start` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Your session has started. Time to grind!
+________________________________________________________________________________________________________________
+~~~
+
+### Stop the current focus timer: `focus stop`
+Allow users to stop a timer that is currently running. The users will be able to see the total
+time elapsed upon a successful stop.
+
+Format:
+~~~
+focus stop
+~~~
+* The `focus` and `stop` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Depending on the total time spent, the output may differ.
+~~~
+________________________________________________________________________________________________________________
+Your focus session has ended.
+ Time spent: X hours, X minutes, XX seconds
+To start a new session, use ‘focustimer start’ 
+________________________________________________________________________________________________________________
+~~~
 
 ## FAQ
 

@@ -22,6 +22,8 @@ public class Main {
         FocusTimer focusTimer = new FocusTimer();
         FitnessMotivator fitnessMotivator = new FitnessMotivator();
 
+        Ui.greetUser();
+
         while (!isExit) {
 
             Ui.promptUserInput();
@@ -39,5 +41,7 @@ public class Main {
                 Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
+
+        Ui.sayGoodbye();
     }
 }
