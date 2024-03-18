@@ -8,14 +8,28 @@ import java.util.logging.SimpleFormatter;
 import utility.Constant;
 
 public class LogFile {
+    private static LogFile instance = null;
     protected static FileHandler logFileHandler = null;
     private static final Logger logger = Logger.getLogger(LogFile.class.getName());
 
     /**
-     * Initializes the log file handler.
+     * Private constructor to prevent instantiation from outside the class.
      */
-    public LogFile (){
+    private LogFile() {
         initializeLogFile();
+    }
+
+    /**
+     * Returns the singleton instance of the LogFile class.
+     * If the instance is null, it creates a new instance.
+     *
+     * @return The singleton instance of the LogFile class.
+     */
+    public static LogFile getInstance() {
+        if (instance == null) {
+            instance = new LogFile();
+        }
+        return instance;
     }
 
     /**

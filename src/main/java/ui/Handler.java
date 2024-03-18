@@ -17,7 +17,7 @@ import storage.LogFile;
  * before providing feedback to the user.
  */
 public class Handler {
-    static LogFile logging = new LogFile();
+    LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -32,7 +32,7 @@ public class Handler {
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(" ")[0];
-            logging.writeLog("User Input: " + userInput, false);
+            LogFile.writeLog("User Input: " + userInput, false);
 
             try {
                 Command command = Command.valueOf(instruction);
@@ -245,7 +245,7 @@ public class Handler {
      */
     public static void initialiseBot() {
         Output.printWelcomeBanner();
-        logging.writeLog("Started bot", false);
+        LogFile.writeLog("Started bot", false);
         // Yet to implement : Check for existing save, if not, make a new one
         // Yet to implement : int status = Storage.load();
         int status = 1;
@@ -254,7 +254,7 @@ public class Handler {
             Scanner in = new Scanner(System.in);
             String name = in.nextLine();
             System.out.println("Welcome aboard, " + name);
-            logging.writeLog("Name entered: " + name, false);
+            LogFile.writeLog("Name entered: " + name, false);
         }
     }
 
@@ -263,7 +263,7 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        logging.writeLog("Bot exited gracefully", false);
+        LogFile.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
