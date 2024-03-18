@@ -14,7 +14,7 @@ class ItemListTest {
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
 
-        itemList.deleteItem(1);
+        itemList.deleteItemIndex(1);
 
         assertEquals(0, itemList.getItemCount());
     }

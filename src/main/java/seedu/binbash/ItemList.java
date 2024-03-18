@@ -34,7 +34,7 @@ public class ItemList {
         return output;
     }
 
-    public String deleteItem(int index) {
+    public String deleteItemIndex(int index) {
         Item tempItem = itemList.remove(index - 1);
 
         String output = "Got it! I've removed the following item:"
