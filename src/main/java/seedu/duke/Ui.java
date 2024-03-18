@@ -49,6 +49,7 @@ public class Ui {
 
     public static void helpCommand(){
         System.out.println("These are the available commands!");
-        System.out.println("1. list\n2. add <insert travel activity>\n3. delete <insert activity number>\n4. find <insert keyword>\n5. help\n6. bye\n");
+        System.out.println("1. list\n2. add <insert travel activity>\n3. delete <insert activity number>\n" +
+                           "4. find <insert keyword>\n5. help\n6. bye\n");
     }
 }
