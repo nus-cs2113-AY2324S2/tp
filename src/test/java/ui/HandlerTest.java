@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utility.Constant;
+
 import utility.CustomExceptions;
 
 import java.io.ByteArrayOutputStream;
@@ -49,7 +50,6 @@ class HandlerTest {
         // Exercise and Verify
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
     }
-
     /**
      * Test the behavior of the checkTypeOfExercise method when the user input is valid.
      * Expected behavior is to return {@code Constant.RUN} or {@code Constant.GYM}
