@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class Storage {
     private static final String FILENAME = "./StockMasterData.txt";
-    private static File StockMaster;
+    private static File stockMaster;
 
     /**
      * Write contents to the file.
@@ -42,7 +42,7 @@ public class Storage {
      * Returns the private File dukeData.
      */
     public static File getFile() {
-        return StockMaster;
+        return stockMaster;
     }
 
     /**
@@ -63,9 +63,9 @@ public class Storage {
     }
 
     public static void main (String[]args){
-        StockMaster = new File(FILENAME);
+        stockMaster = new File(FILENAME);
         try {
-            writeToFile(StockMaster.getPath(), "", true);
+            writeToFile(stockMaster.getPath(), "", true);
         } catch (IOException e) {
             System.out.println("File does not exist.");
         }
