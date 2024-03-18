@@ -25,11 +25,11 @@ public class EditCommand extends ListActionCommand {
 
     private static Logger logger = Logger.getLogger(EditCommand.class.getName());
 
-    Pid pid;
-    Name name;
-    Quantity quantity;
-    Description description;
-    Price price;
+    private Pid pid;
+    private Name name;
+    private Quantity quantity;
+    private Description description;
+    private Price price;
     private final Storage storage;
 
     public EditCommand(ProductList productList, Integer pid, String name,
