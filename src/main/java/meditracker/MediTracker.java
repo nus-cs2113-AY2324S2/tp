@@ -2,6 +2,7 @@ package meditracker;
 
 import meditracker.command.Command;
 import meditracker.exception.MediTrackerException;
+import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationList;
 import meditracker.parser.Parser;
 import meditracker.ui.Ui;
@@ -51,6 +52,7 @@ public class MediTracker {
      * @throws MediTrackerException If an error occurs during the execution of the application.
      */
     public static void main(String[] args) throws MediTrackerException {
+        MediLogger.initialiseLogger();
         new MediTracker().run();
     }
 }
