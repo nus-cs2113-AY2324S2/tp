@@ -16,7 +16,7 @@ public class ViewWaterIntakeCommand {
 
     }
 
-    private int getTotalWaterIntake(ArrayList<Task> tasksList) {
+    int getTotalWaterIntake(ArrayList<Task> tasksList) {
         int totalWaterIntake = 0;
         for (Task task : tasksList) {
             if (task instanceof WaterTask) {
@@ -26,7 +26,7 @@ public class ViewWaterIntakeCommand {
         return totalWaterIntake;
     }
 
-    private int getWaterGoal(ArrayList<Task> tasksList) {
+    public int getWaterGoal(ArrayList<Task> tasksList) {
         for (Task task : tasksList) {
             if (task instanceof GoalTask && task.getDescription().startsWith("w")) {
                 return ((GoalTask) task).getGoalAmount();

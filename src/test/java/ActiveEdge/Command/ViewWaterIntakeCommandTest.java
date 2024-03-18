@@ -1,42 +1,72 @@
+package ActiveEdge.Command;
+
 import ActiveEdge.Command.ViewWaterIntakeCommand;
-import ActiveEdge.Task.TaskList;
+import ActiveEdge.Task.GoalTask;
+import ActiveEdge.Task.Task;
 import ActiveEdge.Task.WaterTask;
-import ActiveEdge.Ui.CommandUi;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewWaterIntakeCommandTest {
 
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
     @Test
-    public void testExecute() throws InterruptedException {
-        // Create a mock TaskList
-        TaskList taskListMock = mock(TaskList.class);
+    public void testExecute() {
+        // Mock TaskList
+        ArrayList<Task> tasksList = new ArrayList<>();
+        tasksList.add(new WaterTask(200)); // Adding water intake
+        tasksList.add(new GoalTask("w", 1500)); // Adding water goal
+        ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
 
-        // Create a mock CommandUi
-        CommandUi uiMock = mock(CommandUi.class);
-
-        // Create a ViewWaterIntakeCommand instance with mocked dependencies
-        ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand(taskListMock, uiMock);
-
-        // Define behavior for the mock TaskList
-        WaterTask waterTask1 = new WaterTask(200);
-        WaterTask waterTask2 = new WaterTask(300);
-        wait(taskListMock.get()).thenReturn(new ArrayList<>(Arrays.asList(waterTask1, waterTask2)));
-
-        // Call the execute method
+        // Mock TaskList and execute command
         viewWaterIntakeCommand.execute();
 
-        // Verify that the printWaterIntakeMessage method was called with the correct total water intake
-        verify(uiMock).printWaterIntakeMessage(500);
+        // Verify output message
+        assertEquals("Total water consumed today: 200 ml (13% of 1500ml goal).", outputStreamCaptor.toString().trim());
     }
 
-    private CommandUi verify(CommandUi uiMock) {
-        return null;
+    @Test
+    public void testGetTotalWaterIntake() {
+        // Create a mock task list
+        ArrayList<Task> tasksList = new ArrayList<>();
+        tasksList.add(new WaterTask(200)); // Adding water intake
+        tasksList.add(new WaterTask(300)); // Adding water intake
+
+        ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
+
+        // Call the private method getTotalWaterIntake using reflection or make it package-private for testing
+        int totalWaterIntake = viewWaterIntakeCommand.getTotalWaterIntake(tasksList);
+
+        // Verify total water intake
+        assertEquals(500, totalWaterIntake);
+    }
+
+    @Test
+    public void testGetWaterGoal() {
+        // Create a mock task list
+        ArrayList<Task> tasksList = new ArrayList<>();
+        tasksList.add(new GoalTask("c", 2000)); // Adding calorie goal
+        tasksList.add(new GoalTask("w", 1500)); // Adding water goal
+
+        ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
+
+        // Call the private method getWaterGoal using reflection or make it package-private for testing
+        int waterGoal = viewWaterIntakeCommand.getWaterGoal(tasksList);
+
+        // Verify water goal
+        assertEquals(1500, waterGoal);
     }
 }
-
