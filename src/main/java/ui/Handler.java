@@ -3,6 +3,7 @@ package ui;
 import health.Bmi;
 import health.Health;
 import utility.Command;
+import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
@@ -46,7 +47,7 @@ public class Handler {
                     break;
                 case NEW:
 
-                    handleNew(userInput);
+                    handleExercise(userInput);
 
                     break;
                 case HISTORY:
@@ -57,11 +58,6 @@ public class Handler {
                 case LATEST:
 
                     handleLatest(userInput);
-
-                    break;
-                case EXERCISE:
-
-                    handleExercise(userInput);
 
                     break;
                 case HEALTH:
@@ -123,41 +119,88 @@ public class Handler {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
-            } catch (CustomExceptions.InvalidInput e) {
-                throw new RuntimeException(e);
             }
 
 
         }
     }
 
+    /**
+     * Checks the type of exercise based on the user input.
+     * Usage: to use this method whenever the user enters a new exercise.
+     * Handles all the checks for input validity and sufficiency.
+     * Can assume input is valid and sufficient if no exceptions are thrown.
+     * @param userInput The user input string.
+     * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     */
+    public static String checkTypeOfExercise(String userInput) throws
+            CustomExceptions.InvalidInput,
+            CustomExceptions.InsufficientInput {
+        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
+
+        String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
+
+        if (exerciseType.isBlank()){
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_EXERCISE);
+        }
+
+        exerciseType = exerciseType.toLowerCase();
+
+
+        boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
+        boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
+        if(!isRun && !isGym){
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
+        }
+
+        if(isRun && userInputs.length < 5){
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
+        }
+
+        if(isGym && userInputs.length < 3){
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
+        }
+
+
+        if (isRun){
+            return Constant.RUN;
+        }else {
+            return Constant.GYM;
+        }
+    }
 
     /**
      * Constructs a new {@code }  object based on the user input.
      *
      * @param userInput The user input string.
      */
-    public static void handleExercise(String userInput) throws CustomExceptions.InvalidInput {
-        // to be implemented
-        // If it is a run (help me to abstract it out)
-        //Run r1 = new Run("00:10:10", "10.3" );
-        //Output.printAddRun(r1);
-        //Run r2 = new Run("00:20:10", "20.3", "10/11/2024");
-        //Output.printAddRun(r2);
-        //Run r3 = new Run("00:30:10", "30.3");
-        //Output.printAddRun(r3);
-        String[] runDetails = getRun(userInput);
-        if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty() || runDetails[3].isEmpty()) {
-            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+    public static void handleExercise(String userInput) {
+        try {
+            String typeOfExercise = checkTypeOfExercise(userInput);
+            if (typeOfExercise.equals(Constant.RUN)){
+                String[] runDetails = getRun(userInput);
+
+                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
+                        || runDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                }
+                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                WorkoutList.addRun(newRun);
+                System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+            } else if (typeOfExercise.equals(Constant.GYM)){
+                // Yet to implement : handleGym(userInput);
+                getGym(userInput);
+            }
         }
-        Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
-        WorkoutList.addRun(newRun);
-        System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+        catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.out.println(e.getMessage());
+            // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+        }
+
     }
     public static void handleLoad(String userInput){}
-    public static void handleNew(String userInput) throws CustomExceptions.InvalidInput {
-        getRun(userInput);
-    }
     public static void handleHistory(String userInput){
         Output.printHistory("all");
     }
@@ -180,6 +223,11 @@ public class Handler {
     public static void handleToday(String userInput){}
     public static void handleLength(String userInput){}
 
+
+    public static void getGym(String input){
+        System.out.println("temp");
+    }
+
     /**
      * Parses a string containing run information, extracts the command, distance and end time before returning
      * an array of strings containing the information.
@@ -193,8 +241,9 @@ public class Handler {
 
 
         if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
-            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
+
 
         int indexE = input.indexOf("/e");
         int indexD = input.indexOf("/d");
@@ -202,14 +251,23 @@ public class Handler {
         int indexDate = input.indexOf("/date");
 
         String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
+        assert !command.isEmpty() : "Command should not be empty";
+
         String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
+        assert !dSubstring.isEmpty() : "Distance should not be empty";
+        assert dSubstring.matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+
         String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
+        assert !tSubstring.isEmpty() : "Time should not be empty";
+        assert tSubstring.matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
+
         String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
 
 
         if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
             //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
         }
+
 
         results[0] = command;
         results[1] = dSubstring;
@@ -220,24 +278,26 @@ public class Handler {
     }
 
     /**
-     * Initializes the Jarvas bot by printing a welcome message, loading tasks from storage,
+     * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
      * and returning the tasks list.
      */
     public static void initialiseBot() {
-        Output.printArt();
+        Output.printWelcomeBanner();
         logging.writeLog("Started bot", false);
-        System.out.println("Hello from PulsePilot\n");
-        System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        String name = in.nextLine();
-        System.out.println("Hello " + name);
-        logging.writeLog("Name entered: " + name, false);
-        // Yet to implement : Reply.printWelcomeMessage();
-        // Yet to implement : Storage.loadProfile();
+        // Yet to implement : Check for existing save, if not, make a new one
+        // Yet to implement : int status = Storage.load();
+        int status = 1;
+        if (status == 1) {
+            Output.printGreeting(1);
+            Scanner in = new Scanner(System.in);
+            String name = in.nextLine();
+            System.out.println("Welcome aboard, " + name);
+            logging.writelog("Name entered: " + name, false);
+        }
     }
 
     /**
-     * Terminates the Jarvas bot by saving tasks to storage, printing a goodbye message,
+     * Terminates PulsePilot by saving tasks to storage, printing a goodbye message,
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
