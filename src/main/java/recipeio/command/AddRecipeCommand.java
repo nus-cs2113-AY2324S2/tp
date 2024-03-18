@@ -24,12 +24,11 @@ public class AddRecipeCommand extends Command{
      * Adds a recipe to the recipe book and saves it to storage.
      *
      * @param recipes the list of tasks.
-     * @param ui the user interface.
      * @param storage the storage.
      * @throws Exception if there was an error adding the task or saving it to storage.
      */
     @Override
-    public void execute(RecipeList recipes, UI ui, Storage storage) throws Exception {
+    public void execute(RecipeList recipes, Storage storage) throws Exception {
         System.out.println("entered add execute");
         try {
             recipes.addRecipe(toAdd);
@@ -43,7 +42,7 @@ public class AddRecipeCommand extends Command{
             throw new Exception(SAVING_ERROR_MESSAGE);
         }
 
-        ui.addRecipePrinter(toAdd, recipes.getSize());
+        UI.addRecipePrinter(toAdd, recipes.getSize());
     }
 }
 

@@ -18,12 +18,11 @@ public class DeleteRecipeCommand extends Command{
      * Adds a recipe to the recipe book and saves it to storage.
      *
      * @param recipes the list of tasks.
-     * @param ui the user interface.
      * @param storage the storage.
      * @throws Exception if there was an error adding the task or saving it to storage.
      */
     @Override
-    public void execute(RecipeList recipes, UI ui, Storage storage) throws Exception {
+    public void execute(RecipeList recipes, Storage storage) throws Exception {
         Recipe deleted = recipes.get(toDelete - 1);
         try {
             recipes.deleteRecipe(toDelete);
@@ -36,7 +35,7 @@ public class DeleteRecipeCommand extends Command{
         } catch (Exception e) {
             throw new Exception(SAVING_ERROR_MESSAGE);
         }
-        ui.deleteRecipePrinter(deleted, recipes.getSize());
+        UI.deleteRecipePrinter(deleted, recipes.getSize());
     }
 }
 

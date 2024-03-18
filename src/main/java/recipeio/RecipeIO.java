@@ -1,4 +1,4 @@
-package recipeio.core;
+package recipeio;
 
 import recipeio.command.Command;
 import recipeio.parser.InputParser;
@@ -7,6 +7,9 @@ import recipeio.storage.Storage;
 import recipeio.ui.UI;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class RecipeIO {
@@ -18,15 +21,18 @@ public class RecipeIO {
             + " saved recipe book.";
     private static Storage storage;
     private static RecipeList recipes;
-    private static UI ui;
 
-    public RecipeIO() throws FileNotFoundException {
+    public RecipeIO() {
         storage = new Storage();
         recipes = new RecipeList();
         try {
             storage.loadFile(recipes);
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException(FILE_NOT_FOUND_ERROR_MESSAGE);
+            try {
+                Files.createDirectories(Paths.get("data/recipe.txt").getParent());
+            } catch (IOException except) {
+                except.printStackTrace();
+            }
         }
     }
 
@@ -37,9 +43,8 @@ public class RecipeIO {
         while (!isExitCommand) {
             try {
                 String fullCommand = inputGetter.nextLine();
-                assert (fullCommand.isEmpty() == false);
                 Command command = InputParser.parseCommand(fullCommand);
-                command.execute(recipes, ui, storage);
+                command.execute(recipes, storage);
                 isExitCommand = command.isExitCommand();
             } catch (Exception e) {
                 UI.printMessage(e.getMessage());
@@ -47,7 +52,7 @@ public class RecipeIO {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         new RecipeIO().run();
     }
 }

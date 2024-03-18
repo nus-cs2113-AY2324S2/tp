@@ -37,7 +37,7 @@ public class UI {
         System.out.println(SEPARATOR);
     }
 
-    public void printHelpCommand(){
+    public static void printHelpCommand(){
         System.out.println(SEPARATOR);
         System.out.println("Sorry, I don't understand what you are saying. Here are your possible commands.\nPlease " +
                 "follow the format exactly as shown:\n" +

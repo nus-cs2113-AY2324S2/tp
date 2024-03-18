@@ -8,8 +8,8 @@ public class ByeCommand extends Command{
     public static final String COMMAND_WORD = "bye";
 
     @Override
-    public void execute(RecipeList tasks, UI ui, Storage storage) {
-        ui.bye();
+    public void execute(RecipeList tasks, Storage storage) {
+        UI.bye();
     }
     @Override
     public boolean isExitCommand() {

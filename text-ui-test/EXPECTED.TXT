@@ -1,4 +1,10 @@
-Hello
-Spaghetti Carbonara / LUNCH
+-----------------------------
+Welcome to Recipe.io!
 What is your name?
-Hello Yuki
+Yuki
+Hello Chef Yuki! How can I help you today?
+-----------------------------
+bye
+-----------------------------
+See you again, Yuki!
+-----------------------------
