@@ -80,6 +80,27 @@ public class Handler {
     }
 
 
+    /**
+     * Extracts a substring from the given input string based on the provided delimiter.
+     *
+     * @param input     The input string from which to extract the substring.
+     * @param delimiter The delimiter to search for in the input string.
+     * @return The extracted substring, or an empty string if the delimiter is not found.
+     */
+    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
+        int index = input.indexOf(delimiter);
+        if (index == -1) {
+            return "";
+        }
+
+        int startIndex = index + delimiter.length();
+        int endIndex = input.indexOf("/", startIndex);
+        if (endIndex == -1) {
+            endIndex = input.length();
+        }
+
+        return input.substring(startIndex, endIndex).trim();
+    }
 
     /**
      * Checks the type of exercise based on the user input.
@@ -202,39 +223,22 @@ public class Handler {
         String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
 
 
-        if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
+        if (!input.contains("/e:") || !input.contains("/d:") || !input.contains("/t:")) {
             throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
+        results[0] = extractSubstringFromSpecificIndex(input, "/e:"); // Command
+        results[1] = extractSubstringFromSpecificIndex(input, "/d:"); // Distance
+        results[2] = extractSubstringFromSpecificIndex(input, "/t:"); // Time
+        results[3] = extractSubstringFromSpecificIndex(input, "/date:"); // Date
 
-        int indexE = input.indexOf("/e");
-        int indexD = input.indexOf("/d");
-        int indexT = input.indexOf("/t");
-        int indexDate = input.indexOf("/date");
+        // Assert and validate the extracted values
 
-        String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
-        assert !command.isEmpty() : "Command should not be empty";
-
-        String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
-        assert !dSubstring.isEmpty() : "Distance should not be empty";
-        assert dSubstring.matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
-
-        String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
-        assert !tSubstring.isEmpty() : "Time should not be empty";
-        assert tSubstring.matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
-
-        String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
-
-
-        if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
-            //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
-        }
-
-
-        results[0] = command;
-        results[1] = dSubstring;
-        results[2] = tSubstring;
-        results[3] = dateSubstring;
+        assert !results[0].isEmpty() : "Command should not be empty";
+        assert !results[1].isEmpty() : "Distance should not be empty";
+        assert results[1].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
+        assert !results[2].isEmpty() : "Time should not be empty";
+        assert results[2].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
 
         return results;
     }
