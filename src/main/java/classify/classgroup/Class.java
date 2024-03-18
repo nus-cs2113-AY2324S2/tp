@@ -22,6 +22,8 @@ public class Class {
     public Class(int ageOfStudents, String className) {
         this.ageOfStudents = ageOfStudents;
         this.className = className;
+        assert this.ageOfStudents == ageOfStudents : "class attribute should be equal to constructor";
+        assert this.className == className : "class attribute should be equal to constructor"; 
     }
 
     /**
