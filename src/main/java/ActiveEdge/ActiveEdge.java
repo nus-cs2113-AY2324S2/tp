@@ -10,7 +10,7 @@ public class ActiveEdge {
     /**
      * Main entry-point for the ActiveEdge application.
      */
-    public static void run() throws ActiveEdgeException {
+    public static void run() {
         Scanner in = new Scanner(System.in);
 
         String logo = "ACTIVE EDGE";
