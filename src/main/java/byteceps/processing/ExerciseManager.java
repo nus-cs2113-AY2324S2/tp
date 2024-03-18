@@ -6,8 +6,6 @@ import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
 
-import java.util.HashMap;
-
 public class ExerciseManager extends ActivityManager {
     @Override
     public void execute(Parser parser) throws Exceptions.InvalidInput,
@@ -64,11 +62,13 @@ public class ExerciseManager extends ActivityManager {
     }
 
     public String processEditExercise(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
-        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
-        if (!additionalArguments.containsKey("to")) {
+
+        String newExerciseName = parser.getAdditionalArguments("to");
+
+        if (newExerciseName == null) {
             throw new Exceptions.InvalidInput("Edit command not complete");
         }
-        String newExerciseName = additionalArguments.get("to");
+
         Exercise retrievedExercise = retrieveExercise(parser);
         retrievedExercise.editExerciseName(newExerciseName);
 

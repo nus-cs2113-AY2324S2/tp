@@ -62,8 +62,8 @@ public class Parser {
         return commandAction.getParameter();
     }
 
-    public HashMap<String, String> getAdditionalArguments() {
-        return additionalArguments;
+    public String getAdditionalArguments(String key) {
+        return additionalArguments.get(key);
     }
 
     @Override

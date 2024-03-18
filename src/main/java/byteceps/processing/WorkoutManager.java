@@ -6,7 +6,6 @@ import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
 
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class WorkoutManager extends ActivityManager {
@@ -37,7 +36,7 @@ public class WorkoutManager extends ActivityManager {
             ));
             break;
         case "unassign":
-            String workoutName = unassignedExerciseFromWorkout(parser);
+            String workoutName = unassignExerciseFromWorkout(parser);
             UserInterface.printMessage(String.format(
                     "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
             ));
@@ -68,12 +67,12 @@ public class WorkoutManager extends ActivityManager {
     //@@author V4vern
     public String assignExerciseToWorkout(Parser parser) throws Exceptions.InvalidInput,
             Exceptions.ActivityDoesNotExists {
-        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
-        if (!additionalArguments.containsKey("to")) {
+
+        String exerciseName = parser.getActionParameter();
+        String workoutPlanName = parser.getAdditionalArguments("to");
+        if (workoutPlanName == null) {
             throw new Exceptions.InvalidInput("assign command not complete");
         }
-        String exerciseName = parser.getActionParameter();
-        String workoutPlanName = additionalArguments.get("to");
 
         Exercise exercise = (Exercise) exerciseManager.retrieve(exerciseName);
         Workout workoutPlan = (Workout) retrieve(workoutPlanName);
@@ -91,7 +90,7 @@ public class WorkoutManager extends ActivityManager {
     public void list(String workoutPlanName) throws Exceptions.ActivityDoesNotExists {
         Workout workout = (Workout) retrieve(workoutPlanName);
         StringBuilder message = new StringBuilder();
-        ArrayList<Exercise> workoutList = workout.getWorkoutList();
+        ArrayList<Exercise> workoutList = workout.getExerciseList();
 
         message.append(String.format("Listing exercises in workout plan '%s':%n", workoutPlanName));
 
@@ -103,17 +102,17 @@ public class WorkoutManager extends ActivityManager {
     }
 
     //@@author V4vern
-    public String unassignedExerciseFromWorkout(Parser parser) throws Exceptions.InvalidInput,
+    public String unassignExerciseFromWorkout(Parser parser) throws Exceptions.InvalidInput,
             Exceptions.ActivityDoesNotExists {
-        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
-        if (!additionalArguments.containsKey("from")) {
+
+        String workoutPlanName  = parser.getAdditionalArguments("from");
+        String exerciseName = parser.getActionParameter();
+        if (workoutPlanName == null) {
             throw new Exceptions.InvalidInput("unassign command not complete");
         }
-        String exerciseName = parser.getActionParameter();
-        String workoutPlanName = additionalArguments.get("from");
 
         Workout workoutPlan = (Workout) retrieve(workoutPlanName);
-        ArrayList<Exercise> workoutList = workoutPlan.getWorkoutList();
+        ArrayList<Exercise> workoutList = workoutPlan.getExerciseList();
 
         workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
 
