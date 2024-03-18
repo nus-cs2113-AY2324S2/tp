@@ -52,7 +52,17 @@ public class Transaction {
      * @throws LongAhException If the lender does not exist in the group.
      */
     public Transaction(Member lender, ArrayList<Subtransaction> subtransactions,
-            MemberList memberList) throws LongAhException {
+            MemberList members) throws LongAhException {
+        // Exception is thrown if any of the members do not exist in the group
+        if (!members.isMember(lender)) {
+            throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
+        }
+        for (Subtransaction subtransaction : subtransactions) {
+            if (!members.isMember(subtransaction.getBorrower())) {
+                throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
+            }
+        }
+
         this.lender = lender;
         this.subtransactions = subtransactions;
     }

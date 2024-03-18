@@ -63,6 +63,16 @@ public class MemberList {
     }
 
     /**
+     * Returns true if the member is in the group, false otherwise.
+     * 
+     * @param member The member to check for.
+     * @return True if the member is in the group, false otherwise.
+     */
+    public boolean isMember(Member member) {
+        return this.members.contains(member);
+    }
+
+    /**
      * Returns the member object with the specified name.
      * 
      * @param name The name of the member to get.

@@ -79,7 +79,7 @@ public class Group {
         }
 
         updateTransactionSolution();
-        String transactionExpression = "borrowerName";
+        String transactionExpression = borrowerName;
 
         for (Subtransaction subtransaction : this.transactionSolution) {
             Member subBorrower = subtransaction.getBorrower();
