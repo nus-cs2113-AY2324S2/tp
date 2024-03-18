@@ -21,4 +21,5 @@ public class ErrorMessage {
     public static final String INVALID_NUMBER_FORMAT = "Invalid values for price/quantity";
     public static final String QUANTITY_TOO_SMALL = "Quantity should be more than 0";
     public static final String PRICE_TOO_SMALL = "Price should be more than 0";
+    public static final String FILE_HANDLER_ERROR = "Error setting up file handler";
 }
