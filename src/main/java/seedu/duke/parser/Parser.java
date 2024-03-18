@@ -31,7 +31,7 @@ public class Parser {
                     "\\s+w/(?<semester>[1-9]|10)\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
-                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|[1-4](?:\\.0|\\.5)?|[05]\\.0?)", Pattern.CASE_INSENSITIVE);
+                    "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)", Pattern.CASE_INSENSITIVE);
     private static final Pattern BYE_PATTERN =
             Pattern.compile("bye", Pattern.CASE_INSENSITIVE);
 
@@ -42,6 +42,7 @@ public class Parser {
     private static final String[] REMOVE_MODULE_ARGUMENTS = {"courseCode"};
     private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "status", "semester", "mc"};
     private static final String[] GRADE_ARGUMENTS = {"courseCode", "grade"};
+    private static final String[] BYE_ARGUMENTS = {};
 
     // Command constructor function
     private static final Function<Map<String, String>, Command> INIT_CONSTRUCTOR = Parser::initCommand;
@@ -50,7 +51,6 @@ public class Parser {
     private static final Function<Map<String, String>, Command> REMOVE_MODULE_CONSTRUCTOR = Parser::removeCommand;
     private static final Function<Map<String, String>, Command> ADD_MODULE_CONSTRUCTOR = Parser::addCommand;
     private static final Function<Map<String, String>, Command> GRADE_CONSTRUCTOR = Parser::gradeCommand;
-
     private static final Function<Map<String, String>, Command> BYE_CONSTRUCTOR = Parser::byeCommand;
 
     // Initialise ArrayList that puts all the commandMetadata together
@@ -65,7 +65,7 @@ public class Parser {
         list.add(new CommandMetadata(REMOVE_MODULE_PATTERN, REMOVE_MODULE_ARGUMENTS, REMOVE_MODULE_CONSTRUCTOR));
         list.add(new CommandMetadata(ADD_MODULE_PATTERN, ADD_MODULE_ARGUMENTS, ADD_MODULE_CONSTRUCTOR));
         list.add(new CommandMetadata(GRADE_PATTERN, GRADE_ARGUMENTS, GRADE_CONSTRUCTOR));
-        list.add(new CommandMetadata(BYE_PATTERN, new String[]{}, BYE_CONSTRUCTOR));
+        list.add(new CommandMetadata(BYE_PATTERN, BYE_ARGUMENTS, BYE_CONSTRUCTOR));
 
         return list;
     }
