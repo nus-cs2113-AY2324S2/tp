@@ -62,6 +62,7 @@ public class EditCommand extends ListActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
+        assert productList.getSize() > 0;
         productList.updateProduct(productIndex, name, quantity, description, price);
         Ui.printEditSuccessMessage();
     }
