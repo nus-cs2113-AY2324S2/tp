@@ -12,6 +12,8 @@ public class Florizz {
     public static void main(String[] args) {
         // Adds flowers to the dict (temporary use)
         FlowerDictionary.startup();
+        // Adds occasions to the dict (temporary use)
+        OccasionDictionary.startup();
         ArrayList<Bouquet>  tempBouquetList = new ArrayList<>();
         boolean isRunning = true;
         Ui ui = new Ui();

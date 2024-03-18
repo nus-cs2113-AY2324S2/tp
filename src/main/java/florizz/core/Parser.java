@@ -19,7 +19,9 @@ public class Parser {
         case ("flower"):
             return handleFlowerCommand(input);
         case ("info"):
-              return handleInfoCommand(input);
+              return handleInfoCommand(input);      
+        case ("occasion"):
+            return new ListOccasionCommand();
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
