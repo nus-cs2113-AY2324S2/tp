@@ -89,4 +89,21 @@ public class Output {
             printLine();
         }
     }
+
+    public static void printWelcomeBanner() {
+        printLine();
+        printArt();
+        System.out.println("Engaging orbital thrusters...");
+        System.out.println("PulsePilot on standby");
+        printLine();
+    }
+
+    public static void printGreeting(int status) {
+        if (status == 0) {
+            System.out.println(Constant.SUCCESSFUL_LOAD);
+        } else {
+            System.out.println(Constant.MISSING_FILE);
+        }
+        printLine();
+    }
 }
