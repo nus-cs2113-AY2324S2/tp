@@ -5,14 +5,14 @@ import reflection.ReflectionManager;
 
 public class GetReflectionQuestionsCommand implements Command {
 
-    private ReflectionManager reflection;
-    public GetReflectionQuestionsCommand(ReflectionManager reflection) {
-        this.reflection = reflection;
+    private ReflectionManager reflectionManager;
+    public GetReflectionQuestionsCommand(ReflectionManager reflectionManager) {
+        this.reflectionManager = reflectionManager;
     }
 
     @Override
     public void execute() {
-        reflection.printFiveRandomQuestions();
+        reflectionManager.printFiveRandomQuestions();
     }
 
     @Override
