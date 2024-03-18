@@ -17,6 +17,10 @@ import meditracker.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * The ModifyCommand class represents a command to modify an existing medication.
+ * It extends the Command class.
+ */
 public class ModifyCommand extends Command {
     public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false),
@@ -29,10 +33,21 @@ public class ModifyCommand extends Command {
     );
     private final Map<ArgumentName, String> parsedArguments;
 
+    /**
+     * Constructs a ModifyCommand object with the specified arguments.
+     * @param arguments The arguments containing medication information to be parsed.
+     */
     public ModifyCommand(String arguments) throws ArgumentNotFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 
+    /**
+     * Executes the modify command.
+     * This method modifies an existing Medication object using the provided information in the medication list.
+     * It also displays a message confirming the modification of the medication.
+     * @param medicationManager The MedicationList object representing the list of medications.
+     * @param ui The Ui object used to interact with the user interface.
+     */
     @Override
     public void execute(MedicationManager medicationManager, Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
