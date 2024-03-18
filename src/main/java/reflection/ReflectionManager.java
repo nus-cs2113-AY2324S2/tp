@@ -10,7 +10,7 @@ public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
-    private String favouriteQuestionsFilePath = "data/favourites.txt";
+    private final String favouriteQuestionsFilePath = "data/favourites.txt";
     public ReflectionManager() {
         this.questionBank = new ReflectionQuestionBank();
 

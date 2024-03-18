@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ReflectionQuestionBank {
     private ArrayList<ReflectionQuestion> reflectionQuestionList;
-    private String[] questions = {
+    private final String[] questions = {
         "What have been the most significant lessons you've learned about yourself in the past year?",
         "How have your values evolved over time, and why?",
         "What habits or behaviors do you want to cultivate or change to become a better version of yourself?",
