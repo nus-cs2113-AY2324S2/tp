@@ -13,6 +13,8 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute() {
+        assert Inventory.contains(name);
+
         Inventory.delete(name);
         Ui.deleteCommandSuccess(name);
     }

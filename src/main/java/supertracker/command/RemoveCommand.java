@@ -15,6 +15,9 @@ public class RemoveCommand implements Command {
 
     @Override
     public void execute() {
+        assert Inventory.contains(name);
+        assert quantity >= 0;
+
         Item oldItem = Inventory.get(name);
         int newQuantity = oldItem.getQuantity() - quantity;
         newQuantity = Math.max(newQuantity, 0);
