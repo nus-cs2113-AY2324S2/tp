@@ -1,8 +1,9 @@
 package seedu.stockpal.data.product;
 
+import seedu.stockpal.common.CommandParameter;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 
-public class Quantity {
+public class Quantity implements CommandParameter {
     protected Integer quantity;
 
     public Quantity(Integer quantity) {
