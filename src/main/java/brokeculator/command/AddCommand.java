@@ -1,7 +1,7 @@
 package brokeculator.command;
 
+import brokeculator.dashboard.Dashboard;
 import brokeculator.expense.Expense;
-import brokeculator.expense.ExpenseManager;
 
 public class AddCommand extends Command{
     private Expense expenseToAdd;
@@ -11,9 +11,9 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(ExpenseManager expenseManager) {
+    public void execute(Dashboard dashboard) {
         try {
-            expenseManager.add(expenseToAdd);
+            dashboard.getExpenseManager().add(expenseToAdd);
         } catch (Exception e) {
             // TODO: fix feedback
             System.out.println("Expense cannot be added");
