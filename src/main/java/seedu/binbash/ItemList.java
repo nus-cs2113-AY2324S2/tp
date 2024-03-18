@@ -29,8 +29,8 @@ public class ItemList {
 
         itemList.add(item);
 
-        String output = "Noted! I have added the following item into your inventory:\n"
-                + "\n" + item;
+        String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
+                + System.lineSeparator() + item;
         return output;
     }
 
