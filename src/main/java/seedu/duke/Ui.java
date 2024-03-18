@@ -15,7 +15,7 @@ public class Ui {
     public void greetingMessage() {
         System.out.println(HORIZONTAL);
         System.out.println("Hungry for love? You've come to the right place.\n" +
-                "Welcome to " + BOT_NAME + " - where Cupid meets the chef! \n\n" +
+                "Welcome to " + BOT_NAME + " - where Cupid meets the chef!\n\n" +
                 "Send me 'help' if you're new!");
         System.out.println(HORIZONTAL);
     }
