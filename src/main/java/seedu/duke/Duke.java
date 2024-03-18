@@ -22,7 +22,8 @@ public class Duke {
 
     public void run() throws IOException {
         ui.showWelcomeMessage();
-        this
+        this.normalOperation();
+        ui.showGoodByeMessage();
     }
 
     private void normalOperation() throws IOException {
