@@ -40,7 +40,7 @@ public class RecipeIO {
         while (!isExitCommand) {
             try {
                 String fullCommand = inputGetter.nextLine();
-                System.out.println("this is the full command: " + fullCommand);
+                assert (fullCommand.isEmpty() == false);
                 Command command = InputParser.parseCommand(fullCommand);
                 command.execute(recipes, ui, storage);
                 isExitCommand = command.isExitCommand();
