@@ -7,6 +7,7 @@ import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class WorkoutManager extends ActivityManager {
     private final ExerciseManager exerciseManager;
@@ -15,6 +16,7 @@ public class WorkoutManager extends ActivityManager {
         this.exerciseManager = exerciseManager;
     }
 
+    //@@author V4vern
     @Override
     public void execute(Parser parser) throws Exceptions.ErrorAddingActivity,
             Exceptions.ActivityExistsException,
@@ -35,22 +37,26 @@ public class WorkoutManager extends ActivityManager {
             ));
             break;
         case "unassign":
+            String workoutName = unassignedExerciseFromWorkout(parser);
+            UserInterface.printMessage(String.format(
+                    "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
+            ));
             break;
         case "samples":
-            list();
+            //list();
+            break;
+        case "info":
+            list(parser.getActionParameter());
             break;
         case "list":
-            if (parser.getActionParameter() == null) {
-                list();
-            } else {
-                list(parser.getActionParameter());
-            }
+            list();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
     }
 
+    //@@author V4vern
     public Workout processCreateWorkout(Parser parser) throws Exceptions.InvalidInput {
         String workoutName = parser.getActionParameter();
         if (workoutName.isEmpty()) {
@@ -59,6 +65,7 @@ public class WorkoutManager extends ActivityManager {
         return new Workout(parser.getActionParameter());
     }
 
+    //@@author V4vern
     public String assignExerciseToWorkout(Parser parser) throws Exceptions.InvalidInput,
             Exceptions.ActivityDoesNotExists {
         HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
@@ -76,9 +83,6 @@ public class WorkoutManager extends ActivityManager {
         return workoutPlanName;
     }
 
-    //todo: attempts to search for the workout name and lists that 1 workout
-    public void list(String workoutName) {
-        //add code here
     //@@author V4vern
     public void list(String workoutPlanName) throws Exceptions.ActivityDoesNotExists {
         Workout workout = (Workout) retrieve(workoutPlanName);
@@ -94,6 +98,22 @@ public class WorkoutManager extends ActivityManager {
         UserInterface.printMessage(message.toString());
     }
 
+    //@@author V4vern
+    public String unassignedExerciseFromWorkout(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityDoesNotExists {
+        HashMap<String, String> additionalArguments = parser.getAdditionalArguments();
+        if (!additionalArguments.containsKey("from")) {
+            throw new Exceptions.InvalidInput("unassign command not complete");
+        }
+        String exerciseName = parser.getActionParameter();
+        String workoutPlanName = additionalArguments.get("from");
+
+        Workout workoutPlan = (Workout) retrieve(workoutPlanName);
+        ArrayList<Exercise> workoutList = workoutPlan.getWorkoutList();
+
+        workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
+
+        return workoutPlanName;
     }
 
     @Override
