@@ -35,16 +35,15 @@ public class Parser {
                     logWaterCommand.execute();
 
                 } else if (items[0].equals("m")) {
-                    String[] logParts = parts.trim().split(" ");
-                    String description = logParts[0].substring(2);
-                    int servings = Integer.parseInt(logParts[1].substring(2));
+                    String[] logParts = input.split("m/|s/");
+                    String description = logParts[1].trim();
+                    int servings = Integer.parseInt(logParts[2]);
                     int calories = 0;
 
                     for (int i = 0; i < foodItems.length; i++) {
                         if (foodItems[i][0].equals(description)) {
                             calories = Integer.parseInt(foodItems[i][1]) * servings;
                         }
-
                     }
 
                     LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories);
@@ -55,7 +54,7 @@ public class Parser {
                     if (input.substring(4).trim().contains("meals")) { //list meals
                         new ListMealsCommand();
                     } else { //list both
-
+                        new ListFullCommand();
                     }
                 } else {
                     System.out.println("There are no items in your list!");
