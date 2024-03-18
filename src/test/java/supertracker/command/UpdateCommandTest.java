@@ -1,5 +1,6 @@
 package supertracker.command;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import supertracker.parser.Parser;
 import supertracker.TrackerException;
@@ -11,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UpdateCommandTest {
+    @BeforeEach
+    public void setUp() {
+        Inventory.clear();
+    }
+
     @Test
     public void updateCommand_validData_correctlyConstructed(){
         String name = "Milk";
@@ -20,9 +26,9 @@ public class UpdateCommandTest {
         int newQuantity = 200;
         double newPrice = 3.00;
 
-        Command newCommand = new NewCommand("Milk", quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price);
         newCommand.execute();
-        Command updateCommand = new UpdateCommand("Milk", 200, 3.00);
+        Command updateCommand = new UpdateCommand(name, newQuantity, newPrice);
         updateCommand.execute();
 
         assertTrue(Inventory.contains(name));

@@ -22,6 +22,10 @@ public class Inventory {
         itemMap.remove(name.toLowerCase());
     }
 
+    public static void clear() {
+        itemMap.clear();
+    }
+
     public static Collection<Item> items() {
         return itemMap.values();
     }
