@@ -1,5 +1,6 @@
 import commands.Command;
 import exceptions.Wellness360Exception;
+import focus.FocusTimer;
 import habit.HabitTracker;
 import parser.Parser;
 import reflection.ReflectionManager;
@@ -17,6 +18,7 @@ public class Main {
         SleepTracker sleepTracker = new SleepTracker();
         ReflectionManager reflection = new ReflectionManager();
         HabitTracker habitTracker = new HabitTracker();
+        FocusTimer focusTimer = new FocusTimer();
 
         while (!isExit) {
 
@@ -27,7 +29,8 @@ public class Main {
             //execute user command if it is valid else throw exception
             //save tasks to file after each command
             try {
-                Command userCommand = Parser.determineCommand(sleepTracker, reflection, habitTracker, userInput);
+                Command userCommand = Parser.determineCommand(sleepTracker, reflection,
+                        habitTracker, focusTimer, userInput);
                 userCommand.execute();
                 isExit = userCommand.isExit();
             } catch (Wellness360Exception e) {

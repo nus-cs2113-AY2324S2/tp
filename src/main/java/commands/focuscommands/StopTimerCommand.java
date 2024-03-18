@@ -5,12 +5,16 @@ import exceptions.FocusException;
 import focus.FocusTimer;
 
 public class StopTimerCommand implements Command {
+    public FocusTimer focusTimer;
+    public StopTimerCommand(FocusTimer timer) {
+        this.focusTimer = timer;
+    }
     @Override
     public void execute() throws FocusException {
-        if (!FocusTimer.isStarted) {
+        if (!focusTimer.getStatus()) {
             throw new FocusException("Error! Clock is not running...");
         }
-        FocusTimer.setStopTiming();
+        focusTimer.setStopTiming();
     }
 
     @Override

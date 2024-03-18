@@ -6,23 +6,27 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class FocusTimer {
-    public static LocalDateTime startTiming;
-    public static LocalDateTime stopTiming;
-    public static boolean isStarted = false;
+    public LocalDateTime startTiming;
+    public LocalDateTime stopTiming;
+    public boolean isStarted = false;
 
-    public static void setStartTiming() {
-        startTiming = LocalDateTime.now();
+    public void setStartTiming() {
+        this.startTiming = LocalDateTime.now();
         isStarted = true;
         Ui.printMessageWithSepNewLine("Your session has started. Time to grind!");
     }
 
-    public static void setStopTiming() {
+    public void setStopTiming() {
         stopTiming = LocalDateTime.now();
         isStarted = false;
         totalTimeSpent();
     }
 
-    public static void totalTimeSpent() {
+    public boolean getStatus() {
+        return isStarted;
+    }
+
+    public void totalTimeSpent() {
         Duration timeElapsed = Duration.between(startTiming,stopTiming);
         long hours = timeElapsed.toHours();
         long minutes = timeElapsed.toMinutes();
