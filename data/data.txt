@@ -1,3 +1,7 @@
+
+Goal c 20000
+Meal dumplings 1 300
+Meal dumplings 2 700
 Goal c 4000
 Goal w 3000
 Meal sushi 3 1050
