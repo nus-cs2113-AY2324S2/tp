@@ -18,6 +18,8 @@ public class Parser {
             return new HelpCommand();
         case ("flower"):
             return handleFlowerCommand(input);
+        case ("info"):
+              return handleInfoCommand(input);      
         case ("occasion"):
             return new ListOccasionCommand();
         default:
@@ -38,6 +40,11 @@ public class Parser {
     private static FlowerCommand handleFlowerCommand(String input) {
         String occasion  = (input.length() == 6) ? " " : input.substring(input.indexOf(" ") + 1);
         return new FlowerCommand(occasion);
+    }
+
+    private static InfoCommand handleInfoCommand(String input) {
+        String flowerName = input.substring(input.indexOf(" ") + 1);
+        return new InfoCommand(flowerName);
     }
 
 }
