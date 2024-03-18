@@ -3,6 +3,7 @@ package longah;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import longah.node.Group;
 import longah.util.MemberList;
 import longah.util.TransactionList;
 import longah.util.Subtransaction;
@@ -12,8 +13,9 @@ import longah.exception.LongAhException;
  * LongAh class manages debts between members.
  */
 public class LongAh {
-    private static MemberList members = new MemberList();
-    private static TransactionList transactions = new TransactionList();
+    private static MemberList members;
+    private static TransactionList transactions;
+    private static Group group;
     private Scanner scanner;
 
     /**
@@ -44,6 +46,14 @@ public class LongAh {
     public static void main(String[] args) {
         System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
+        try {
+            group = new Group();
+            members = group.getMemberList();
+            transactions = group.getTransactionList();
+        } catch (LongAhException e) {
+            LongAhException.printException(e);
+        }
+
         while (true) {
             try {
                 System.out.print("Enter command: ");
