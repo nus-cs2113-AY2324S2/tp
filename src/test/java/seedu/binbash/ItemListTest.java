@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemListTest {
 
     @Test
-    void deleteItemIndex_oneItemInItemList_noItemInItemList() {
+    void deleteItem_oneItemInItemList_noItemInItemList() {
         ItemList itemList = new ItemList(new ArrayList<Item>());
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
 
-        itemList.deleteItemIndex(1);
+        itemList.deleteItem(1);
 
         assertEquals(0, itemList.getItemCount());
     }

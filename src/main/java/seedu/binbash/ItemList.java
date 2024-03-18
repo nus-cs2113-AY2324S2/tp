@@ -34,29 +34,8 @@ public class ItemList {
         return output;
     }
 
-    public String deleteItemIndex(int index) {
+    public String deleteItem(int index) {
         Item tempItem = itemList.remove(index - 1);
-
-        String output = "Got it! I've removed the following item:"
-                + String.format("\t%s", tempItem);
-        return output;
-    }
-
-    public String deleteItemName(String itemName) {
-        int targetIndex = -1;
-        for (Item item : itemList) {
-            if (item.getItemName().equals(itemName)) {
-                targetIndex = itemList.indexOf(item);
-                break;
-            }
-        }
-
-        if (targetIndex == -1) {
-            String output = "Item was not found! Nothing was deleted.";
-            return output;
-        }
-
-        Item tempItem = itemList.remove(targetIndex);
 
         String output = "Got it! I've removed the following item:"
                 + String.format("\t%s", tempItem);
