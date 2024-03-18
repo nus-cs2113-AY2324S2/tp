@@ -179,9 +179,8 @@ public class Handler {
     public static void handleExercise(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
-            if (typeOfExercise.equals(Constant.RUN)){
+            if (typeOfExercise.equals(Constant.RUN)) {
                 String[] runDetails = getRun(userInput);
-
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
@@ -189,12 +188,11 @@ public class Handler {
                 Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
                 WorkoutList.addRun(newRun);
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
-            } else if (typeOfExercise.equals(Constant.GYM)){
+            } else if (typeOfExercise.equals(Constant.GYM)) {
                 // Yet to implement : handleGym(userInput);
                 getGym(userInput);
             }
-        }
-        catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
             // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
@@ -292,7 +290,7 @@ public class Handler {
             Scanner in = new Scanner(System.in);
             String name = in.nextLine();
             System.out.println("Welcome aboard, " + name);
-            logging.writelog("Name entered: " + name, false);
+            logging.writeLog("Name entered: " + name, false);
         }
     }
 

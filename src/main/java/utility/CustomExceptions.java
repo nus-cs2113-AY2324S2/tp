@@ -37,6 +37,7 @@ public class CustomExceptions extends Exception {
     public static class InsufficientInput extends Exception {
         public InsufficientInput(String message) {
             super("\u001b[31mError: " + message + "\u001b[0m");
+            LogFile.writeLog(message, true);
         }
     }
 }
