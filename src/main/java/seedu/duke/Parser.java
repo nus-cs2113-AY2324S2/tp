@@ -26,7 +26,7 @@ public class Parser {
         // Adding task to the User's task list
         int dayOfWeek = parseDayOfWeek(day);
         if (dayOfWeek != -1) {
-            user.addTask(dayOfWeek, task);
+            user.addUserTask(dayOfWeek, task);
             System.out.println("Task added successfully.");
         } else {
             System.out.println("Invalid day of the week.");
@@ -66,7 +66,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(parts[1].trim());
             int dayOfWeek = 0; // Assume we are always deleting from Sunday for now
-            user.deleteTask(dayOfWeek, index - 1); // Adjust index by -1 to match array index
+            user.deleteUserTask(dayOfWeek, index - 1); // Adjust index by -1 to match array index
             System.out.println("Task deleted successfully.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid task index.");
