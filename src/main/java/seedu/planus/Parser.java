@@ -4,10 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Parser class handles the parsing of user commands in the PlaNus application.
+ */
 public class Parser {
 
 
-
+    /**
+     * Initializes the timetable based on user input.
+     * @return The initialized timetable.
+     */
     public static Timetable initialiseTimetable() {
         String[] majors = new String[] {"BME","CEG","ChBE","CVE","EE","ESP","ISE","ME","MSE"};
         List<String> majorsList = Arrays.asList(majors);
@@ -19,6 +25,12 @@ public class Parser {
         return Storage.loadTimetable(major);
     }
 
+    /**
+     * Parses the user command and performs the corresponding action on the timetable.
+     * @param line The user command to be parsed.
+     * @param timetable The timetable to be modified.
+     * @return A boolean indicating whether the application should exit.
+     */
     public static boolean parseCommand(String line, Timetable timetable) {
         String[] words = line.split(" ", 2);
         String[] yearAndTerm;
