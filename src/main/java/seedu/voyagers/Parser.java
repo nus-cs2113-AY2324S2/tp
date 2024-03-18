@@ -268,9 +268,12 @@ public class Parser {
         System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
         for (int i = 0; i < tripsList.size(); i++) {
             Trip trip = tripsList.get(i);
-            String startDateStr = trip.getStartDate().equals(DEFAULT_START) ? "-" : printDateFormat.format(trip.getStartDate());
-            String endDateStr = trip.getEndDate().equals(DEFAULT_END) ? "-" : printDateFormat.format(trip.getEndDate());
-            System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\n", i, trip.getName(), startDateStr, endDateStr, trip.getLocation(), trip.getDescription());
+            String startDateStr = trip.getStartDate().equals(DEFAULT_START) ? "-" :
+                    printDateFormat.format(trip.getStartDate());
+            String endDateStr = trip.getEndDate().equals(DEFAULT_END) ? "-" :
+                    printDateFormat.format(trip.getEndDate());
+            System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\n", i, trip.getName(),
+                    startDateStr, endDateStr, trip.getLocation(), trip.getDescription());
         }
     }
 
@@ -315,7 +318,8 @@ public class Parser {
         }
         //check if trip with same name exists
         if (tripNameExists(name)) {
-            System.out.println("A trip with the name '" + name + "' already exists. Cannot create another main trip " + "with the same name.");
+            System.out.println("A trip with the name '" + name + "' already exists. " +
+                    "Cannot create another main trip " + "with the same name.");
             return;
         }
 
