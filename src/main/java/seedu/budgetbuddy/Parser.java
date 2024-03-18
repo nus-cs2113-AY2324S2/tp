@@ -27,9 +27,6 @@ public class Parser {
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
         this.savingsCategories = new ArrayList<>(Arrays.asList("Salary",
                 "Investments", "Gifts", "Others"));
-
-        // Configure logging
-        LoggingConfig.configure();
     }
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();

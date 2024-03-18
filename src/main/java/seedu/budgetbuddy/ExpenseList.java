@@ -15,9 +15,6 @@ public class ExpenseList {
         this.expenses = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Housing", 
         "Groceries", "Utility", "Transport", "Entertainment", "Others"));
-
-        // Configure logging
-        LoggingConfig.configure();
     }
 
     public List<Expense> getExpenses() {

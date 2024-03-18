@@ -17,8 +17,6 @@ public class SavingList {
         this.categories = new ArrayList<>(Arrays.asList("Salary", 
         "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
-
-        LoggingConfig.configure();
     }
 
     public ArrayList<Saving> getSavings() {
