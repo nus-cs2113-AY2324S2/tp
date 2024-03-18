@@ -23,7 +23,7 @@ public class EditCommand extends ListActionCommand {
             + ": Edits an existing product in the inventory at the specific PID\n"
             + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]";
 
-    private static Logger logger = Logger.getLogger(Storage.class.getName());
+    private static Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     Pid pid;
     Name name;

@@ -16,13 +16,15 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EditCommandTest {
+    private static final String TEST_FILE_PATH = "src/test/data/EditCommandTest/Test.csv";
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     private ProductList productList = new ProductList();
     private Storage storage;
+
     @BeforeEach
     public void setUp() throws InvalidStorageFilePathException {
-        storage = new Storage();
+        storage = new Storage(TEST_FILE_PATH);
 
         System.setOut(new PrintStream(outContent));
 
