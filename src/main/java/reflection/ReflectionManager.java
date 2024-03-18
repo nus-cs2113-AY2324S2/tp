@@ -14,7 +14,6 @@ public class ReflectionManager {
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
     private String favouriteQuestionsFilePath = "data/favourites.txt";
-    private static final String BOT_NAME = "Wellness360";
 
     /**
      * Constructs a ReflectionManager and initializes question bank and favorite reflections list.
