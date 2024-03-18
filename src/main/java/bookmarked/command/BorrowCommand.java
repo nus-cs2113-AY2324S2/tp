@@ -2,7 +2,6 @@ package bookmarked.command;
 
 import bookmarked.Book;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BorrowCommand extends Command {

@@ -1,6 +1,5 @@
 package bookmarked;
 
-import bookmarked.Book;
 import bookmarked.parser.Parser;
 import bookmarked.ui.Ui;
 

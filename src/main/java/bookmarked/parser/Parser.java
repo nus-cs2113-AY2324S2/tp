@@ -12,7 +12,6 @@ import bookmarked.command.HelpCommand;
 import bookmarked.command.ListCommand;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Parser {
