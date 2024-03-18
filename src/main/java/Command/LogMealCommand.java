@@ -1,4 +1,4 @@
-package ActiveEdge.Command;
+package Command;
 
 import ActiveEdge.Ui.CommandUi;
 import ActiveEdge.Task.LogMeals;
@@ -20,5 +20,17 @@ public class LogMealCommand {
         LogMeals logMeal = new LogMeals(description, servings, mealCalories);
         tasksList.add(logMeal);
         CommandUi.printMealLogMessage(logMeal);
+    }
+
+    public int getMealCalories() {
+        return mealCalories;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getServings() {
+        return servings;
     }
 }

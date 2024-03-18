@@ -1,27 +1,29 @@
-package ActiveEdge.Command;
+package Command;
 
-import ActiveEdge.Command.ActiveEdgeException;
-import ActiveEdge.Command.LogWaterCommand;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class LogWaterCommandTest {
 
     @Test
-    void testExecute_ValidQuantity() {
+    void testValidQuantity() {
         LogWaterCommand logWaterCommand = new LogWaterCommand("500");
         assertDoesNotThrow(logWaterCommand::execute);
     }
 
     @Test
-    void testExecute_InvalidQuantity() {
+    void testInvalidQuantity() {
         LogWaterCommand logWaterCommand = new LogWaterCommand("abc");
         ActiveEdgeException exception = assertThrows(ActiveEdgeException.class, logWaterCommand::execute);
-        assertEquals("Invalid water quantity. Please provide a valid integer.", exception.getMessage());
+        assertEquals("Invalid water quantity. " +
+                "Please provide a valid integer.", exception.getMessage());
     }
 
     @Test
-    void testExecute_NonPositiveQuantity() throws ActiveEdgeException {
+    void testNonPositiveQuantity() throws ActiveEdgeException {
         LogWaterCommand logWaterCommand = new LogWaterCommand("-100");
         logWaterCommand.execute();
     }

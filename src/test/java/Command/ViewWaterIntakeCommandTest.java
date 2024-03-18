@@ -1,6 +1,5 @@
-package ActiveEdge.Command;
+package Command;
 
-import ActiveEdge.Command.ViewWaterIntakeCommand;
 import ActiveEdge.Task.GoalTask;
 import ActiveEdge.Task.Task;
 import ActiveEdge.Task.WaterTask;

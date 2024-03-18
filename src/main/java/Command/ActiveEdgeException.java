@@ -1,4 +1,4 @@
-package ActiveEdge.Command;
+package Command;
 public class ActiveEdgeException extends Exception{
     public String warning;
 

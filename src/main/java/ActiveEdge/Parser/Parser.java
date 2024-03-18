@@ -1,9 +1,5 @@
 package ActiveEdge.Parser;
-import ActiveEdge.Command.ActiveEdgeException;
-import ActiveEdge.Command.HelpCommand;
-import ActiveEdge.Command.LogWaterCommand;
-import ActiveEdge.Command.ViewWaterIntakeCommand;
-import ActiveEdge.Command.*;
+import Command.*;
 import ActiveEdge.Storage;
 
 import static ActiveEdge.Task.TaskList.tasksList;
@@ -75,7 +71,8 @@ public class Parser {
                 // Handle setting goals
                 String[] parts = input.split("/");
                 if (parts.length != 2) {
-                    System.out.println("Invalid command. Please use the format 'set goal c/NUMBER' or 'set goal w/NUMBER'.");
+                    System.out.println("Invalid command. " +
+                            "Please use the format 'set goal c/NUMBER' or 'set goal w/NUMBER'.");
                     return;
                 }
                 String goalType = parts[0].substring(parts[0].length() - 1);
@@ -86,14 +83,16 @@ public class Parser {
                         return;
                     }
                     if (goalType.equals("c")) {
-                        new AddGoalsCommand(goalType, goalAmount).execute(); // Execute AddGoalCommand for setting calorie goal
+                        new AddGoalsCommand(goalType, goalAmount).execute();
                     } else if (goalType.equals("w")) {
-                        new AddGoalsCommand(goalType, goalAmount).execute(); // Execute AddGoalCommand for setting water goal
+                        new AddGoalsCommand(goalType, goalAmount).execute();
                     } else {
-                        System.out.println("Invalid goal type. Please use 'c' for calories or 'w' for water.");
+                        System.out.println("Invalid goal type. " +
+                                "Please use 'c' for calories or 'w' for water.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid goal amount. Please provide a valid integer.");
+                    System.out.println("Invalid goal amount. " +
+                            "Please provide a valid integer.");
                 }
             } else {
                 System.out.println("Unknown command.");

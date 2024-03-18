@@ -1,4 +1,4 @@
-package ActiveEdge.Command;
+package Command;
 
 import ActiveEdge.Storage;
 import ActiveEdge.Task.TaskList;

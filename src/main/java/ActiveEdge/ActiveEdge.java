@@ -1,6 +1,6 @@
 package ActiveEdge;
 
-import ActiveEdge.Command.ActiveEdgeException;
+import Command.ActiveEdgeException;
 import ActiveEdge.Parser.Parser;
 import ActiveEdge.Ui.ByeUi;
 

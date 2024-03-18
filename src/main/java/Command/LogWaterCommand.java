@@ -1,4 +1,4 @@
-package ActiveEdge.Command;
+package Command;
 
 import ActiveEdge.Task.WaterTask;
 import ActiveEdge.Ui.CommandUi;

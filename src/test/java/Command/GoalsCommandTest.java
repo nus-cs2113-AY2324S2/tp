@@ -1,11 +1,6 @@
-package ActiveEdge.Command;
+package Command;
 
-import ActiveEdge.Command.ActiveEdgeException;
-import ActiveEdge.Command.AddGoalsCommand;
-import ActiveEdge.Command.ShowGoalsCommand;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GoalsCommandTest {
@@ -46,7 +41,7 @@ public class GoalsCommandTest {
 //    }
     
     @Test
-    void testExecute_AddCalorieGoal() {
+    void testAddCalorieGoal() {
         AddGoalsCommand addGoalsCommand = new AddGoalsCommand("c", 2000);
         addGoalsCommand.execute();
         // Assuming you have a method to check if the calorie goal was set correctly
@@ -54,7 +49,7 @@ public class GoalsCommandTest {
     }
 
     @Test
-    void testExecute_AddWaterGoal() {
+    void testAddWaterGoal() {
         AddGoalsCommand addGoalsCommand = new AddGoalsCommand("w", 2500);
         addGoalsCommand.execute();
         // Assuming you have a method to check if the water goal was set correctly
@@ -63,16 +58,16 @@ public class GoalsCommandTest {
 
     boolean checkCalorieGoal(int expectedCalorieGoal) {
         // Assuming there's a class or storage mechanism responsible for managing goals
-//        int storedCalorieGoal = GoalManager.getCalorieGoal(); // Retrieve the stored calorie goal
-//        return storedCalorieGoal == expectedCalorieGoal;
+        // int storedCalorieGoal = GoalManager.getCalorieGoal();
+        // return storedCalorieGoal == expectedCalorieGoal;
         return true;
     }
 
 
     boolean checkWaterGoal(int expectedWaterGoal) {
         // Assuming there's a class or storage mechanism responsible for managing goals
-//        int storedWaterGoal = GoalManager.getWaterGoal(); // Retrieve the stored water goal
-//        return storedWaterGoal == expectedWaterGoal;
+        // int storedWaterGoal = GoalManager.getWaterGoal();
+        // return storedWaterGoal == expectedWaterGoal;
         return true;
     }
 }
