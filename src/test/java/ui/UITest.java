@@ -6,6 +6,7 @@ import recipeio.ui.UI;
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,13 +29,14 @@ public class UITest {
         String expected = UI.SEPARATOR + System.lineSeparator() +
                 "Welcome to Recipe.io!" + System.lineSeparator() +
                 "What is your name?" + System.lineSeparator() +
-                "Hello Hung!" + System.lineSeparator() +
+                "Hello Chef Hung! How can I help you today?" + System.lineSeparator() +
                 UI.SEPARATOR + System.lineSeparator();
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(testOut);
         System.setOut(printStream);
 
-        UI.sayHi();
+        Scanner inputGetter = new Scanner(System.in);
+        UI.sayHi(inputGetter);
 
         String actual = testOut.toString();
 

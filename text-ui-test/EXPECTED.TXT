@@ -1,4 +1,13 @@
-Hello
-Spaghetti Carbonara / LUNCH
+-----------------------------
+Welcome to Recipe.io!
 What is your name?
-Hello Yuki
+Hello Chef Yuki! How can I help you today?
+-----------------------------
+-----------------------------
+Woo hoo chef! I have added this recipe to your recipe book:
+	 pizza / DINNER
+You now have 2 recipes in your recipe book. Keep adding some!
+-----------------------------
+-----------------------------
+See you again, Yuki!
+-----------------------------
