@@ -28,30 +28,30 @@ public class Ui {
 
     public void helpMessage() {
         System.out.println("To generate a randomised date itinerary, simply send me the following: \n" +
-        "'itinerary'\n\n" +
-        "To add food to your favourites, simply send me the following: \n" +
-        "'food' [space] '(name of eatery)' [space] '(location)' [space] '(price)'\n\n" +
-        "To add an activity to your favourites, simply send me the following: \n" +
-        "'activity' [space] '(name of activity)'[space] '(location)' [space] '(price)'\n\n" +
-        "To find an entry from your favourites, simply send me the following: \n" +
-        "'find' [space] '(keyword)'\n\n" +
-        "To list out all your favourites, simply send me the following: \n" +
-        "'favourites'\n\n" +
-        "To exit the program, simply send me the following: \n" +
-        "'exit'\n\n" +
-        "LEGEND (prices):\n" +
-        "C: Cheap\n" +
-        "B: Budget\n" +
-        "A: Affordable\n" +
-        "P: Pricey\n" +
-        "S: Special Ocassions Only\n\n" +
-        "LEGEND (areas):\n" +
-        "E: East\n" +
-        "W: West\n" +
-        "C: Central\n" +
-        "S: South\n" +
-        "NE: NorthEast\n" +
-        "ACC: Accessible (found in multiple places around SG)"
+            "'itinerary'\n\n" +
+            "To add food to your favourites, simply send me the following: \n" +
+            "'food' [space] '(name of eatery)' [space] '(location)' [space] '(price)'\n\n" +
+            "To add an activity to your favourites, simply send me the following: \n" +
+            "'activity' [space] '(name of activity)'[space] '(location)' [space] '(price)'\n\n" +
+            "To find an entry from your favourites, simply send me the following: \n" +
+            "'find' [space] '(keyword)'\n\n" +
+            "To list out all your favourites, simply send me the following: \n" +
+            "'favourites'\n\n" +
+            "To exit the program, simply send me the following: \n" +
+            "'exit'\n\n" +
+            "LEGEND (prices):\n" +
+            "C: Cheap\n" +
+            "B: Budget\n" +
+            "A: Affordable\n" +
+            "P: Pricey\n" +
+            "S: Special Ocassions Only\n\n" +
+            "LEGEND (areas):\n" +
+            "E: East\n" +
+            "W: West\n" +
+            "C: Central\n" +
+            "S: South\n" +
+            "NE: NorthEast\n" +
+            "ACC: Accessible (found in multiple places around SG)"
         );
     }
 
