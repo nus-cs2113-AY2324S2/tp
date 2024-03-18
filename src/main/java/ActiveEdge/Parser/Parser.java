@@ -20,12 +20,6 @@ public class Parser {
             } else if (input.equalsIgnoreCase("list foods")) {
                 FoodData.printFood();
             }
-//        else if (foodStorage.containsFood(input)) {
-//            int calories = foodStorage.getCalories(input);
-//            System.out.println(input + " contains " + calories + " calories.");
-//        } else {
-//            System.out.println("Sorry, I don't have information about " + input);
-//        }
             else if (input.startsWith("log")) {
                 String parts = input.substring(4);
                 String[] items = parts.split("/");

@@ -2,7 +2,6 @@ package ActiveEdge;
 
 import ActiveEdge.Task.GoalTask;
 import ActiveEdge.Task.LogMeals;
-import ActiveEdge.Task.Task;
 import ActiveEdge.Task.TaskList;
 
 import java.io.File;
@@ -59,7 +58,9 @@ public class Storage {
                     for (int i = 1; i <= len - 3; i++){
                         mealName = mealName + items[i];
                     }
-                    LogMeals newTask = new LogMeals(mealName, Integer.parseInt(items[len - 2]),  Integer.parseInt(items[len - 1]));
+                    LogMeals newTask = new LogMeals(mealName,
+                            Integer.parseInt(items[len - 2]),
+                            Integer.parseInt(items[len - 1]));
                     TaskList.tasksList.add(newTask);
                 }else if (task.startsWith("Goal")){
                     String[] items = task.trim().split(" ");
