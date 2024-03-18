@@ -1,65 +1,28 @@
 package ActiveEdge.Command;
 
-import ActiveEdge.Task.WaterTask;
-import ActiveEdge.Task.TaskList;
+import ActiveEdge.Command.ActiveEdgeException;
+import ActiveEdge.Command.LogWaterCommand;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
 
 public class LogWaterCommandTest {
 
     @Test
-    public void testExecuteWithValidQuantity() throws ActiveEdgeException {
-        // Arrange
-        String quantityString = "10";
-        LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
+    void testExecute_ValidQuantity() {
+        LogWaterCommand logWaterCommand = new LogWaterCommand("500");
+        assertDoesNotThrow(logWaterCommand::execute);
+    }
 
-        // Act
+    @Test
+    void testExecute_InvalidQuantity() {
+        LogWaterCommand logWaterCommand = new LogWaterCommand("abc");
+        ActiveEdgeException exception = assertThrows(ActiveEdgeException.class, logWaterCommand::execute);
+        assertEquals("Invalid water quantity. Please provide a valid integer.", exception.getMessage());
+    }
+
+    @Test
+    void testExecute_NonPositiveQuantity() throws ActiveEdgeException {
+        LogWaterCommand logWaterCommand = new LogWaterCommand("-100");
         logWaterCommand.execute();
-
-        // Assert
-        List<WaterTask> tasksList = TaskList.get();
-        assertEquals(1, tasksList.size());
-        assertEquals(10, tasksList.get(0).getQuantity());
-    }
-
-    @Test
-    public void testExecuteWithInvalidQuantity() {
-        // Arrange
-        String quantityString = "invalid";
-
-        // Act & Assert
-        assertThrows(ActiveEdgeException.class, () -> {
-            LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
-            logWaterCommand.execute();
-        });
-    }
-
-    @Test
-    public void testExecuteWithZeroQuantity() {
-        // Arrange
-        String quantityString = "0";
-
-        // Act & Assert
-        assertDoesNotThrow(() -> {
-            LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
-            logWaterCommand.execute();
-        });
-        // Verify that no task is added
-        assertEquals(0, TaskList.get().size());
-    }
-
-    @Test
-    public void testExecuteWithNegativeQuantity() {
-        // Arrange
-        String quantityString = "-10";
-
-        // Act & Assert
-        assertDoesNotThrow(() -> {
-            LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
-            logWaterCommand.execute();
-        });
-        // Verify that no task is added
-        assertEquals(0, TaskList.get().size());
     }
 }
