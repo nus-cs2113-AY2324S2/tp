@@ -389,11 +389,11 @@ public class Parser {
     /**
      * Method to concatenate words until the end of the String[] tokens or until the next "/"
      *
-     * @param tokens user input split  by " "
+     * @param tokens user input split by " "
      *               eg. String[] tokens = {"/n", "The", "current", "name", "/location", "New", "Place"};
-     * @param i      index of the current word in the String[] tokens
-     * @return sentence String name with concatenated words
-     * eg. sentence = "New Place"
+     * @param i index of the current word in the String[] tokens
+     * @return       sentence String name with concatenated words
+     *               eg. sentence = "New Place"
      */
     private String addWordsAfterSeparator(String[] tokens, int i) {
         String sentence = null;
