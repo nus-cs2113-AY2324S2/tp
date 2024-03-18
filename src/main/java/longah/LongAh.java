@@ -8,6 +8,7 @@ import longah.util.MemberList;
 import longah.util.TransactionList;
 import longah.util.Subtransaction;
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 /**
  * LongAh class manages debts between members.
@@ -28,7 +29,10 @@ public class LongAh {
     /**
      * Lists all debts between members.
      */
-    public void listAllDebts() {
+    public void listAllDebts() throws LongAhException {
+        if (members.getMemberListSize() == 0) {
+            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
+        }
         ArrayList<Subtransaction> subtransactions = members.solveTransactions();
 
         System.out.println("Best Way to Solve Debts:");
@@ -40,8 +44,7 @@ public class LongAh {
     /**
      * The main method to run the LongAh application.
      *
-     * @param args
-     *            The command-line arguments.
+     * @param args The command-line arguments.
      */
     public static void main(String[] args) {
         System.out.println("Welcome to LongAh!");
@@ -73,28 +76,13 @@ public class LongAh {
                     System.out.println(transactions.listTransactions());
                     break;
                 case "delete":
-                    if (parts.length == 2) {
-                        int index = Integer.parseInt(parts[1]) - 1;
-                        transactions.remove(index);
-                    } else {
-                        System.out.println("Invalid command format. Use 'delete INDEX'");
-                    }
+                    transactions.remove(parts);
                     break;
                 case "findpayment":
-                    if (parts.length == 2) {
-                        String person = parts[1];
-                        System.out.println(transactions.findTransactions(person));
-                    } else {
-                        System.out.println("Invalid command format. Use 'findPayment PERSON'");
-                    }
+                    System.out.println(transactions.findTransactions(parts));
                     break;
                 case "finddebt":
-                    if (parts.length == 2) {
-                        String person = parts[1];
-                        System.out.println(transactions.findDebts(person));
-                    } else {
-                        System.out.println("Invalid command format. Use 'findDebt PERSON'");
-                    }
+                    System.out.println(transactions.findDebts(parts));
                     break;
                 case "clear":
                     transactions.clear();
@@ -110,11 +98,16 @@ public class LongAh {
                 case "listmembers":
                     members.listMembers();
                     break;
+                case "settleup":
+                    transactions.settleUp(parts, members);
+                    break;
                 case "exit":
                     System.exit(0);
                     return;
                 default:
-                    System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
+                    System.out.println("Invalid command. Use 'add', 'listdebts', 'listtransactions'," +
+                            " 'delete', 'findpayment', 'finddebt', 'clear', or 'addmember'" +
+                            ", 'exit'.");
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);

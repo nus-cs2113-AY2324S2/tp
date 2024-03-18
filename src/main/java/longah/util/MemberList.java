@@ -80,13 +80,12 @@ public class MemberList {
 
     /**
      * Prints the list of members in the group.
+     * throws LongAhException If there are no members in the group.
      */
-    public void listMembers() {
+    public void listMembers() throws LongAhException {
         if (members.isEmpty()) {
-            System.out.println("No members in the group.");
-            return;
+            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
         }
-
         for (Member member : members) {
             System.out.println(member);
         }
@@ -150,27 +149,24 @@ public class MemberList {
 
             // Check the current pair for which balance is greater or if equal
             if (positiveBalance > negativeBalance) {
-                Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        negativeBalance);
+                Subtransaction subtransaction =
+                        new Subtransaction(positiveMember, negativeMember, negativeBalance);
                 positiveBalance -= negativeBalance;
                 negativeBalance = 0;
                 subtransactions.add(subtransaction);
                 negativeIndex++;
 
             } else if (positiveBalance < negativeBalance) {
-                Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        positiveBalance);
+                Subtransaction subtransaction =
+                        new Subtransaction(positiveMember, negativeMember, positiveBalance);
                 negativeBalance -= positiveBalance;
                 positiveBalance = 0;
                 subtransactions.add(subtransaction);
                 positiveIndex++;
 
             } else {
-                Subtransaction subtransaction = 
-                        new Subtransaction(negativeMember, positiveMember,
-                        positiveBalance);
+                Subtransaction subtransaction =
+                        new Subtransaction(positiveMember, negativeMember, positiveBalance);
                 positiveBalance = 0;
                 negativeBalance = 0;
                 subtransactions.add(subtransaction);
@@ -180,5 +176,13 @@ public class MemberList {
         }
 
         return subtransactions;
+    }
+
+    /**
+     * Get the number of members in the group.
+     * @return The number of members in the group.
+     */
+    public int getMemberListSize() {
+        return members.size();
     }
 }

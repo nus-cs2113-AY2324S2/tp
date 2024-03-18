@@ -6,39 +6,39 @@ import longah.node.Member;
  * Represents a subtransaction within a transaction.
  */
 public class Subtransaction {
-    private Member personOwed;
-    private Member personOwing;
+    private Member lender;
+    private Member borrower;
     private double amount;
 
     /**
-     * Constructs a new Subtransaction instance with the given person owed, person owing, and amount.
+     * Constructs a new Subtransaction instance with the given lender, person borrower, and amount.
      * 
-     * @param personOwed The person owed in the subtransaction.
-     * @param personOwing The person owing in the subtransaction.
-     * @param amount The amount owed in the subtransaction.
+     * @param lender The lender who lends out money in the subtransaction.
+     * @param borrower The borrower who borrows money in the subtransaction.
+     * @param amount The amount borrowed in the subtransaction.
      */
-    public Subtransaction(Member personOwed, Member personOwing, double amount) {
-        this.personOwed = personOwed;
-        this.personOwing = personOwing;
+    public Subtransaction(Member lender, Member borrower, double amount) {
+        this.lender = lender;
+        this.borrower = borrower;
         this.amount = amount;
     }
 
     /**
-     * Returns the person owed in the subtransaction.
+     * Returns the lender in the subtransaction.
      * 
-     * @return The person owed in the subtransaction.
+     * @return The lender in the subtransaction.
      */
-    public Member getPersonOwed() {
-        return personOwed;
+    public Member getLender() {
+        return lender;
     }
 
     /**
-     * Returns the person owing in the subtransaction.
+     * Returns the borrower in the subtransaction.
      * 
-     * @return The person owing in the subtransaction.
+     * @return The borrower in the subtransaction.
      */
-    public Member getPersonOwing() {
-        return personOwing;
+    public Member getBorrower() {
+        return borrower;
     }
 
     /**
@@ -57,6 +57,6 @@ public class Subtransaction {
      */
     @Override
     public String toString() {
-        return personOwed.getName() + " owes " + personOwing.getName() + " $" + amount;
+        return borrower.getName() + " owes " + lender.getName() + " $" + amount;
     }
 }

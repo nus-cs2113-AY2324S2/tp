@@ -35,7 +35,7 @@ public class TransactionList {
 
     /**
      * Returns the size of the transaction list.
-     * 
+     *
      * @return The size of the transaction list.
      */
     public int getTransactionListSize() {
@@ -45,15 +45,19 @@ public class TransactionList {
     /**
      * Removes a transaction from the list by index.
      *
-     * @param index The index of the transaction to remove.
+     * @param input The index of the transaction to remove.
      * @throws LongAhException If the index is invalid.
      */
-    public void remove(int index) throws LongAhException {
-        try {
-            transactions.remove(index);
-        } catch (IndexOutOfBoundsException e) {
+    public void remove(String[] input) throws LongAhException {
+        if (input.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_DELETE_COMMAND);
+        }
+        int index = Integer.parseInt(input[1]) - 1;
+        if (index < 0 || index >= transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
+        transactions.remove(index);
+
     }
 
     /**
@@ -75,51 +79,94 @@ public class TransactionList {
     /**
      * Returns a String printout the list of transactions stored in the system.
      */
-    public String listTransactions() {
+    public String listTransactions() throws LongAhException {
+        int transactionListSize = getTransactionListSize();
+        if (transactionListSize == 0) {
+            throw new LongAhException(ExceptionMessage.NO_TRANSACTION_FOUND);
+        }
         int index = 1;
         String outString = "";
         for (Transaction transaction : transactions) {
             outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
-            index ++;
+            index++;
         }
         return outString;
     }
 
     /**
-     * Printout the list of transactions which the member name is involved as the transaction owner
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
      *
-     * @param memberName String representation of the name of person to search for
+     * @param input User input containing the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
-    public String findTransactions(String memberName) {
+    public String findTransactions(String[] input) throws LongAhException {
+        if (input.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_FINDPAYMENT_COMMAND);
+        }
+        String person = input[1];
         int index = 1;
-        String outString = String.format("%s owns the following list of transactions.", memberName) + "\n";
+        String outString = String.format("%s owns the following list of transactions.", person) + "\n";
         for (Transaction transaction : transactions) {
-            if (transaction.isOwned(memberName)) {
+            if (transaction.isLender(person)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
-                index ++;
+                index++;
             }
         }
         return outString;
     }
 
     /**
-     * Printout the list of transactions which a person is involved as a payee
+     * Printout the list of transactions which a person is involved as a borrower
      *
-     * @param memberName String representation of the name of person to search for
+     * @param input containing the String representation of the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
-    public String findDebts(String memberName) {
+    public String findDebts(String[] input) throws LongAhException {
+        if (input.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_FINDDEBT_COMMAND);
+        }
+        String memberName = input[1];
         String outString = String.format("%s is involved as the payee in the following list of transactions."
                 , memberName) + "\n";
         int index = 1;
         for (Transaction transaction : transactions) {
-            if (transaction.isPayee(memberName)) {
+            if (transaction.isBorrower(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
-                index ++;
+                index++;
             }
         }
         return outString;
     }
 
+    /**
+     * Settles up the debts of the specified borrower by creating a transaction
+     * to pay a single person in the group.
+     *
+     * @param input Input string containing the name of
+     *              the borrower to settle up.
+     */
+    public void settleUp(String[] input, MemberList members) throws LongAhException {
+        if (input.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_SETTLEUP_COMMAND);
+        }
+        String borrowerName = input[1];
+        ArrayList<Subtransaction> subtransactions = members.solveTransactions();
+        String lenderName = "";
+        double amountRepaid = 0.0;
+        for (Subtransaction subtransaction : subtransactions) {
+            if (subtransaction.getBorrower().isName(borrowerName)) {
+                lenderName = subtransaction.getLender().getName();
+                amountRepaid = subtransaction.getAmount();
+                String transactionExpression = borrowerName + " p/" + lenderName + " a/" + amountRepaid;
+                try {
+                    addTransaction(transactionExpression, members);
+                    System.out.println(borrowerName + " has repaid " + lenderName + " $" + amountRepaid);
+                } catch (LongAhException e) {
+                    LongAhException.printException(e);
+                }
+            }
+        }
+        System.out.println(borrowerName + " has no more debts!");
+    }
 }

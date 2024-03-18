@@ -22,7 +22,8 @@ public class TransactionListTest {
 
             transactionList.addTransaction("p/Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            transactionList.remove(0);
+            String[] parts = "remove 1".split(" ", 2);
+            transactionList.remove(parts);
             assertEquals(0, transactionList.getTransactionListSize());
 
         } catch (LongAhException e) {
@@ -43,7 +44,8 @@ public class TransactionListTest {
 
             transactionList.addTransaction("p/Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            transactionList.remove(-1);
+            String[] parts = "remove -1".split(" ", 2);
+            transactionList.remove(parts);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
@@ -55,10 +57,15 @@ public class TransactionListTest {
      * Tests the listing of transactions when there are none stored in the system
      */
     @Test
-    public void list_noTransactions_success(){
-        TransactionList transactionList = new TransactionList();
-        String printedOutput = transactionList.listTransactions();
-        assertEquals("", printedOutput);
+    public void list_noTransactions_success() throws LongAhException {
+        try {
+            TransactionList transactionList = new TransactionList();
+            transactionList.listTransactions();
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
     }
     
     /*
