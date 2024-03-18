@@ -42,7 +42,8 @@ public class RecipeList {
     public void addRecipe(Recipe recipe) {
         //this try-catch block can be helpful when there's not enough memory for a new recipe in the list
         try {
-            recipes.add(recipe); //TaskList<T> add method only throw IndexOutOfBound exception for the overload add(int, T).
+            //TaskList<T> add method only throw IndexOutOfBound exception for the overload add(int, T).
+            recipes.add(recipe);
         } catch (Exception e) {
             UI.printMessage(e.toString());
         }
