@@ -15,6 +15,22 @@
 
 {Give detailed description of each feature}
 
+### Finding expenses : `find expenses`
+Finds expenses based on their description or amount
+
+Format : `find expenses [d/DESCRIPTION] [morethan/MINAMOUNT] [lessthan/MAXAMOUNT]`
+
+* `DESCRIPTION`, `MINAMOUNT`, `MAXAMOUNT` can be used in any order and combination
+* `DESCRIPTION` is the description associated with the expenses the user wishes to find
+* `MINAMOUNT` is the filter for expenses with amounts higher than specified value
+* `MAXAMOUNT` is the filter for expenses with amounts lower than specified value
+* At least one filter must be provided
+
+Examples of usage :
+
+* `find expenses d/coffee` : Finds all expenses with the word "coffee" in the description
+* `find expenses d/coffee morethan/200` : Finds all expenses with the word "coffee" and amount higher than $200
+
 ### Adding a todo: `todo`
 Adds a new item to the list of todo items.
 
