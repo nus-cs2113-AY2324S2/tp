@@ -7,7 +7,8 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteCommandTest {

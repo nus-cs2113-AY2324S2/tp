@@ -8,7 +8,10 @@ import supertracker.ui.ErrorMessage;
 import supertracker.ui.Ui;
 
 import java.util.Scanner;
-import java.util.logging.*;
+
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SuperTracker {
     private static final Logger logger = Logger.getLogger(SuperTracker.class.getName());
