@@ -12,7 +12,7 @@ public class FitnessMotivator {
 
     public FitnessMotivator() {}
 
-    public void getExercises() {
+    public String getExercises() {
         Random random = new Random();
         int randomInt1 = random.nextInt(allExercises.size("Arms"));
         int randomInt2 = random.nextInt(allExercises.size("Chest"));
@@ -30,6 +30,7 @@ public class FitnessMotivator {
                 "4. " + exercise4 + "\n" + "5. " + exercise5 + "\n";
 
         Ui.printMessageWithSepNewLine(message);
+        return message;
     }
 
 }
