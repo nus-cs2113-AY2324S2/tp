@@ -73,6 +73,11 @@ public class Ui {
     public void showTakeCommandMessage() {
         System.out.println("Medicine has been successfully taken");
     }
+
+    public void showUntakeCommandMessage() {
+        System.out.println("Medicine has been successfully untaken");
+    }
+
     /**
      * Reads user input command.
      * @return The user input command as a String.
