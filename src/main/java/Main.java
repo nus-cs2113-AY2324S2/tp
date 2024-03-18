@@ -16,9 +16,11 @@ public class Main {
     public static void main(String[] args) {
 
         SleepTracker sleepTracker = new SleepTracker();
-        ReflectionManager reflection = new ReflectionManager();
+        ReflectionManager reflectionManager = new ReflectionManager();
         HabitTracker habitTracker = new HabitTracker();
         FocusTimer focusTimer = new FocusTimer();
+
+        Ui.greetUser();
 
         while (!isExit) {
 
@@ -29,7 +31,7 @@ public class Main {
             //execute user command if it is valid else throw exception
             //save tasks to file after each command
             try {
-                Command userCommand = Parser.determineCommand(sleepTracker, reflection,
+                Command userCommand = Parser.determineCommand(sleepTracker, reflectionManager,
                         habitTracker, focusTimer, userInput);
                 userCommand.execute();
                 isExit = userCommand.isExit();
@@ -37,5 +39,7 @@ public class Main {
                 Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
+
+        Ui.sayGoodbye();
     }
 }
