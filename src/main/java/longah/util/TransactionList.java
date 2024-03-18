@@ -138,35 +138,4 @@ public class TransactionList {
         }
         return outString;
     }
-
-    /**
-     * Settles up the debts of the specified borrower by creating a transaction
-     * to pay a single person in the group.
-     *
-     * @param input Input string containing the name of
-     *              the borrower to settle up.
-     */
-    public void settleUp(String[] input, MemberList members) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_SETTLEUP_COMMAND);
-        }
-        String borrowerName = input[1];
-        ArrayList<Subtransaction> subtransactions = members.solveTransactions();
-        String lenderName = "";
-        double amountRepaid = 0.0;
-        for (Subtransaction subtransaction : subtransactions) {
-            if (subtransaction.getBorrower().isName(borrowerName)) {
-                lenderName = subtransaction.getLender().getName();
-                amountRepaid = subtransaction.getAmount();
-                String transactionExpression = borrowerName + " p/" + lenderName + " a/" + amountRepaid;
-                try {
-                    addTransaction(transactionExpression, members);
-                    System.out.println(borrowerName + " has repaid " + lenderName + " $" + amountRepaid);
-                } catch (LongAhException e) {
-                    LongAhException.printException(e);
-                }
-            }
-        }
-        System.out.println(borrowerName + " has no more debts!");
-    }
 }

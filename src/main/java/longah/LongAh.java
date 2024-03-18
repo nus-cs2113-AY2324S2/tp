@@ -99,7 +99,7 @@ public class LongAh {
                     members.listMembers();
                     break;
                 case "settleup":
-                    transactions.settleUp(parts, members);
+                    group.settleUp(parts[1]);
                     break;
                 case "exit":
                     System.exit(0);

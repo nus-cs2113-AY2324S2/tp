@@ -35,8 +35,8 @@ public class Transaction {
         double totalSumLent = 0.0;
 
         for (int i = 1; i < splitInput.length; i++) {
-            String nameValue = splitInput[i].trim();
-            totalSumLent += borrowNameAmount(nameValue, memberList);
+            String borrowNameAmount = splitInput[i].trim();
+            totalSumLent += addBorrower(borrowNameAmount, memberList);
         }
         this.lender.addToBalance(totalSumLent);
         updateBorrowerBalances();
@@ -50,7 +50,7 @@ public class Transaction {
      * @return The amount owed by the borrower.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public Double borrowNameAmount(String expression, MemberList memberList) throws LongAhException {
+    public Double addBorrower(String expression, MemberList memberList) throws LongAhException {
         String[] splitBorrower = expression.split("a/");
         if (splitBorrower.length != 2) {
             // Each person owing should have an amount specified

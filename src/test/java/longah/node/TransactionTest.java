@@ -52,13 +52,13 @@ public class TransactionTest {
      * Tests the unsuccessful creation of a transaction with an invalid command to denote amount.
      */
     @Test
-    public void addPayee_invalidAmountCommand_exceptionThrown() {
+    public void addBorrower_invalidAmountCommand_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.borrowNameAmount("Bob b/5", memberList);
+            transaction.addBorrower("Bob b/5", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_FORMAT.getMessage();
@@ -71,13 +71,13 @@ public class TransactionTest {
      * rather than a double value.
      */
     @Test
-    public void addPayee_invalidAmountValue_exceptionThrown() {
+    public void addBorrower_invalidAmountValue_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.borrowNameAmount("Bob a/five", memberList);
+            transaction.addBorrower("Bob a/five", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_VALUE_FORMAT.getMessage();
@@ -90,13 +90,13 @@ public class TransactionTest {
      * value for person that owes.
      */
     @Test
-    public void addPayee_negativeAmountValue_exceptionThrown() {
+    public void addBorrower_negativeAmountValue_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.borrowNameAmount("Bob a/-5", memberList);
+            transaction.addBorrower("Bob a/-5", memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_VALUE.getMessage();

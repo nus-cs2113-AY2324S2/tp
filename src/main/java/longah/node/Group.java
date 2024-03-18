@@ -7,6 +7,7 @@ import longah.util.Subtransaction;
 import longah.util.TransactionList;
 import longah.handler.StorageHandler;
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 public class Group {
     private MemberList members;
@@ -64,5 +65,33 @@ public class Group {
      */
     public void updateTransactionSolution() {
         this.transactionSolution = this.members.solveTransactions();
+    }
+
+    /**
+     * Settles up the debts of the specified borrower by creating a transaction to repay all debts owed.
+     *
+     * @param borrowerName The name of the borrower to settle up.
+     */
+    public void settleUp(String borrowerName) throws LongAhException {
+        Member borrower = this.members.getMember(borrowerName);
+        if (borrower.getBalance() == 0) {
+            throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND);
+        }
+
+        updateTransactionSolution();
+        String transactionExpression = "borrowerName";
+
+        for (Subtransaction subtransaction : this.transactionSolution) {
+            Member subBorrower = subtransaction.getBorrower();
+            if (borrower == subBorrower) {
+                Member lender = subtransaction.getLender();
+                double amountRepaid = subtransaction.getAmount();
+                transactionExpression += " p/" + lender.getName() + " a/" + amountRepaid;
+                System.out.println(borrowerName + " has repaid " + lender.getName() + " $" + amountRepaid);
+            }
+        }
+
+        this.transactions.addTransaction(transactionExpression, this.members);
+        System.out.println(borrowerName + " has no more debts!");
     }
 }

@@ -14,6 +14,7 @@ public enum ExceptionMessage {
     INVALID_TRANSACTION_VALUE ("Invalid transaction value."),
     INVALID_VALUE_FORMAT ("Invalid value format."),
     NO_TRANSACTION_FOUND ("Transaction list is empty."),
+    NO_DEBTS_FOUND ("No debts found."),
     // Data Storage Exceptions
     STORAGE_FILE_NOT_FOUND ("File not found."),
     STORAGE_FILE_NOT_CREATED ("File not created."),
