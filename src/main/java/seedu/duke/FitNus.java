@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.user.User;
-
 public class FitNus {
 
     private static Ui ui;
