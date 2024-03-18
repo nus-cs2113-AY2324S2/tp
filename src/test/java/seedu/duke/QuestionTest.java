@@ -11,29 +11,30 @@ class QuestionTest {
     final String answer1 = "answer1";
     final String explanation1 = "explanation1";
 
-    private void setUpOneQuestion() {
+    void createQuestion() {
         oneQuestion = new Question(question1, answer1, explanation1);
     }
 
     // 3 part format
     // methodBeingTested_conditionToTest_expectedOutcome
+
     @Test
     void getExplanation_oneQuestion_expectExplanation() {
-        setUpOneQuestion();
+        createQuestion();
 
         assertEquals(explanation1, oneQuestion.getExplanation());
     }
 
     @Test
     void getQuestion_oneQuestion_expectQuestion() {
-        setUpOneQuestion();
+        createQuestion();
 
         assertEquals(question1, oneQuestion.getQuestion());
     }
 
     @Test
     void getAnswer_oneQuestion_expectAnswer() {
-        setUpOneQuestion();
+        createQuestion();
 
         assertEquals(answer1, oneQuestion.getAnswer());
     }
