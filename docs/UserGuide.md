@@ -16,12 +16,14 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
           - [`habit update` - Update habit count after completing a habit](#update-habit-count-after-completing-a-habit-habit-update)
-
+        - Sleep Tracker
+          - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
+          - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Wellness360` from [here](http://link.to/duke).
-3. To start `Wellness360` Using the `jar` file, go to the containing folder for BossMan. 
+3. To start `Wellness360` Using the `jar` file, go to the containing folder for Wellness360. 
 Then, on your terminal of choice, run:
 ```
 -$ java -jar ip.jar
@@ -167,6 +169,51 @@ The count for your habit has been updated:
 ________________________________________________________________________________________________________________
 ```
 
+### Add a new sleep cycle: `sleep add`
+Allow the user to add new sleep Cycles into the sleep tracker.
+
+Format:
+```
+sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
+```
+
+* The `sleep`, `/date` and `add` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+sleep add 7 /date 18/03/24
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+--- SleepCycle for 18/03/24 has been added ---
+________________________________________________________________________________________________________________
+```
+
+### List out all sleep cycles: `sleep list`
+Prints a list of all the sleep cycles that the user has added into the sleep tracker.
+
+Format:
+```
+sleep list
+```
+
+* The `sleep` and `list` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+sleep list
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Total hrs slept: 15.0
+1. 27/01/12: 7.0
+2. 30/01/12: 8.0
+________________________________________________________________________________________________________________
+```
 
 ## FAQ
 
