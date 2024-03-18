@@ -26,7 +26,7 @@ public class UiRenderer {
     }
 
     private static void printHorizontalDivider() {
-        for (String day : WEEK_DAYS) {
+        for (int i = 0; i < 7; i++) {
             System.out.print(SINGLE_HORIZONTAL_DIVIDER);
         }
         System.out.println(END_HORIZONTAL_DIVIDER);
@@ -40,8 +40,7 @@ public class UiRenderer {
     }
 
     public static void printWeekBody(LocalDate startOfWeek, DateTimeFormatter dateFormatter, TaskManager taskManager) {
-        LocalDate date = startOfWeek;
-        printDateRow(dateFormatter, date);
+        printDateRow(dateFormatter, startOfWeek);
 
         printHorizontalDivider();
         int maxTasks = getMaxTasks(startOfWeek, taskManager);
