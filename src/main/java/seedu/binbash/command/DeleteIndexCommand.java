@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
 
 public class DeleteIndexCommand extends Command {
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("delete\\s(?<index>\\d+)");
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("deleteindex\\s(?<index>\\d+)");
     private final int index;
 
     public DeleteIndexCommand(ItemList itemList, int index) {
