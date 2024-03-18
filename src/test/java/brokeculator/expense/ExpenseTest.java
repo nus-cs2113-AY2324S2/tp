@@ -1,4 +1,4 @@
-package seedu.expense;
+package brokeculator.expense;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

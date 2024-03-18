@@ -1,4 +1,4 @@
-package seedu.brokeculator;
+package brokeculator.enumerators;
 
 import brokeculator.enumerators.CommandErrorMessages;
 import org.junit.jupiter.api.Test;
