@@ -85,6 +85,178 @@ public class Timetable {
         return isRemoved;
     }
 
+    public void addGrade(String courseCode, String grade) {
+        for (int i = 0; i < courses.size(); i++) {
+            for (int j = 0; j < courses.get(i).size(); j++) {
+                String currCourseCode = courses.get(i).get(j).getCourseCode();
+                if (currCourseCode.equalsIgnoreCase(courseCode)) {
+                    courses.get(i).get(j).setGrade(grade);
+                    Ui.printSuccessToAddGrade(currCourseCode);
+                    return;
+                }
+            }
+        }
+        Ui.printFailedToAddGrade();
+    }
+
+    public void removeGrade(String courseCode) {
+        for (int i = 0; i < courses.size(); i++) {
+            for (int j = 0; j < courses.get(i).size(); j++) {
+                String currCourseCode = courses.get(i).get(j).getCourseCode();
+                if (currCourseCode.equalsIgnoreCase(courseCode)) {
+                    courses.get(i).get(j).setGrade(null);
+                    Ui.printSuccessToRemoveGrade(currCourseCode);
+                    return;
+                }
+            }
+        }
+        Ui.printFailedToRemoveGrade();
+    }
+
+    private int searchTimetableIndex(int year, int term) {
+        int index = -1;
+        for (int i = 0; i < courses.size(); i ++) {
+            if (courses.get(i).get(0).getYear() == year && courses.get(i).get(0).getTerm() == term) {
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+
+    public String checkGrade() {
+        int totalMCs = 0;
+        int yearMCs = 0;
+        int termMCs = 0;
+        double totalGrade = 0.00;
+        double yearGrade = 0.00;
+        double termGrade = 0.00;
+
+        StringBuilder plan = new StringBuilder();
+
+        for (int y = 1; y <= MAX_CANDIDATURE_YEAR; y ++) {
+            plan.append("Year ").append(y).append(":").append(System.lineSeparator());
+
+            for (int t = 1; t <= TERM_PER_YEAR; t ++) {
+                int index = searchTimetableIndex(y, t);
+                if (index == -1) {
+                    continue;
+                }
+
+                plan.append(courses.get(index).get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
+
+                for (Course course : courses.get(index)) {
+                    plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
+                    termMCs += course.getModularCredit();
+                    termGrade += course.getNumberGrade();
+                }
+
+                double termGPA = 0.00;
+                if (termMCs != 0) {
+                    termGPA = termGrade / termMCs;
+                }
+
+                plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
+                        .append("-----------------------------").append(System.lineSeparator());
+
+                yearMCs += termMCs;
+                yearGrade += termGrade;
+            }
+
+            double yearGPA = 0.00;
+            if (yearMCs != 0) {
+                yearGPA = yearGrade / yearMCs;
+            }
+
+            plan.append("Year ").append(y).append(" GPA: ").append(yearGPA).append(System.lineSeparator()).append(System.lineSeparator());
+
+            totalMCs += yearMCs;
+            totalGrade += yearGrade;
+        }
+
+        double GPA = 0.00;
+        if (totalMCs != 0) {
+            GPA = totalGrade / totalMCs;
+        }
+        plan.append("Total GPA: ").append(GPA).append(System.lineSeparator()).append(System.lineSeparator());
+
+        return plan.toString();
+    }
+
+    public String checkGrade(int year) {
+        int yearMCs = 0;
+        int termMCs = 0;
+        double yearGrade = 0.00;
+        double termGrade = 0.00;
+
+        StringBuilder plan = new StringBuilder();
+
+        plan.append("Year ").append(year).append(":").append(System.lineSeparator());
+
+        for (int t = 1; t <= TERM_PER_YEAR; t ++) {
+            int index = searchTimetableIndex(year, t);
+            if (index == -1) {
+                continue;
+            }
+
+            plan.append(courses.get(index).get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
+
+            for (Course course : courses.get(index)) {
+                plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
+                termMCs += course.getModularCredit();
+                termGrade += course.getNumberGrade();
+            }
+
+            double termGPA = 0.00;
+            if (termMCs != 0) {
+                termGPA = termGrade / termMCs;
+            }
+
+            plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
+                    .append("-----------------------------").append(System.lineSeparator());
+
+            yearMCs += termMCs;
+            yearGrade += termGrade;
+        }
+
+        double yearGPA = 0.00;
+        if (yearMCs != 0) {
+            yearGPA = yearGrade / yearMCs;
+        }
+
+        plan.append("Year ").append(year).append(" GPA: ").append(yearGPA).append(System.lineSeparator()).append(System.lineSeparator());
+
+        return plan.toString();
+    }
+
+    public String checkGrade(int year, int term) {
+        int termMCs = 0;
+        double termGrade = 0.00;
+        int index = searchTimetableIndex(year, term);
+
+        StringBuilder plan = new StringBuilder();
+
+        plan.append(courses.get(index).get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
+
+        for (Course course : courses.get(index)) {
+            plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
+            if (course.getGrade() == null) {
+                continue;
+            }
+            termMCs += course.getModularCredit();
+            termGrade += course.getNumberGrade();
+        }
+
+        double termGPA = 0.00;
+        if (termMCs != 0) {
+            termGPA = termGrade / termMCs;
+        }
+        plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
+                .append("-----------------------------").append(System.lineSeparator());
+
+        return plan.toString();
+    }
+
     /**
      * Returns a formatted string containing the entire timetable plan of the user
      *

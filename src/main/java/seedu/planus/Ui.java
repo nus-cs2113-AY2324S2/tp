@@ -48,6 +48,22 @@ public class Ui {
         System.out.println("Year is not from 1 to 6");
     }
 
+    public static void printFailedToAddGrade() {
+        System.out.println("The course does not exist in the current timetable! You may want to add the course first.");
+    }
+
+    public static void printSuccessToAddGrade(String courseCode) {
+        System.out.println("The grade has been added to " + courseCode);
+    }
+
+    public static void printFailedToRemoveGrade() {
+        System.out.println("The course does not exist in the current timetable!");
+    }
+
+    public static void printSuccessToRemoveGrade(String courseCode) {
+        System.out.println("The grade has been removed for " + courseCode);
+    }
+
     public static void printFailedToWrite() {
         System.out.println("Failed writing timetable to file");
     }
