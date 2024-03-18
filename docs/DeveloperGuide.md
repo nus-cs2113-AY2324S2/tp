@@ -11,8 +11,8 @@ Ideas and structure for the User Guide: https://se-education.org/addressbook-lev
 ## Setting up and getting started
 
 ## Design & implementation
-
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+- TODO: Design and Implementation of the Logging Functionaity (SX)
 
 
 ## Product scope
@@ -32,7 +32,6 @@ Ideas and structure for the User Guide: https://se-education.org/addressbook-lev
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
-
 {Give non-functional requirements}
 
 ## Glossary
