@@ -10,8 +10,11 @@ public class CommandUi {
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
         for (int i = 0; i < tasksList.size(); i++) {
-            int index = 1 + i;
-            System.out.println(index + ". " + tasksList.get(i));
+            int j = 1;
+            if (tasksList.get(i).toString().startsWith("Meal")) {
+                System.out.println(j + ". " + tasksList.get(i));
+                j++;
+            }
         }
     }
 

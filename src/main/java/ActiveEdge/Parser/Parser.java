@@ -44,7 +44,7 @@ public class Parser {
                         if (foodItems[i][0].equals(description)) {
                             calories = Integer.parseInt(foodItems[i][1]) * servings;
                         }
-                        
+
                     }
 
                     LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories);
