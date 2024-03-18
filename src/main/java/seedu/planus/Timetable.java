@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.planus;
 
 import java.util.ArrayList;
 

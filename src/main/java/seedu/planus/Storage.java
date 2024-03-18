@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.planus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,8 +14,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private static final String FOLDER_PATH = "./data/";
-    private static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
+    public static final String FOLDER_PATH = "./data/";
+    public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
 
     /**
      * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.

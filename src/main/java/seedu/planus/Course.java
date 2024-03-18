@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.planus;
 
 /**
  * Represents a course taken or planned by the user
