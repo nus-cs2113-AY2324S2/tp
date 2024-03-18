@@ -1,9 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
 import seedu.duke.modules.ModuleList;
+import seedu.duke.parser.Parser;
 
-import java.util.Objects;
 import java.util.Scanner;
+
+import static seedu.duke.ui.Ui.printGreeting;
 
 public class FAP {
     /**
@@ -11,14 +14,20 @@ public class FAP {
      */
     public static ModuleList takenModuleList = new ModuleList(10);
     public static ModuleList toBeTakenModuleList = new ModuleList(10);
+
     public static void main(String[] args) {
-        System.out.println("Hello from FAP");
-        System.out.println("What is your name?");
-        String command = "";
-        do {
-            Scanner in = new Scanner(System.in);
-            command = in.nextLine();
-            System.out.println("Hello " + command);
-        } while (!Objects.equals(command, "bye"));
+        printGreeting();
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            try {
+                String userInput = in.nextLine();
+                String cleanUserInput = userInput.trim();
+                Command command = Parser.getCommand(cleanUserInput);
+                command.execute(cleanUserInput);
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+                break;
+            }
+        }
     }
 }

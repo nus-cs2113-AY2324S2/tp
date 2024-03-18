@@ -12,6 +12,7 @@ public class Module {
         this.moduleMC = moduleMC;
         this.moduleStatus = moduleStatus;
         this.moduleDate = moduleDate;
+        this.moduleGrade = null;
     }
 
     public String getModuleCode() {
@@ -52,6 +53,35 @@ public class Module {
 
     public void setModuleDate(int moduleDate) {
         this.moduleDate = moduleDate;
+    }
+
+    public double getGradeNumber () {
+        switch (moduleGrade) {
+        case "A+":
+            //fall through
+        case "A":
+            return 5.0;
+        case "A-":
+            return 4.5;
+        case "B+":
+            return 4.0;
+        case "B":
+            return 3.5;
+        case "B-":
+            return 3.0;
+        case "C+":
+            return 2.5;
+        case "C":
+            return 2.0;
+        case "D+":
+            return 1.5;
+        case "D":
+            return 1.0;
+        case "F":
+            return 0;
+        default:
+            return 0;
+        }
     }
 
     @Override
