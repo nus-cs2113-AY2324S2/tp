@@ -1,5 +1,8 @@
 package meditracker.argument;
 
+/**
+ * Name of medication
+ */
 public class NameArgument extends Argument {
     public NameArgument(boolean isOptional) {
         super(

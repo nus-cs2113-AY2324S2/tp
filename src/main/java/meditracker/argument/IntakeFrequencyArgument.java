@@ -1,5 +1,8 @@
 package meditracker.argument;
 
+/**
+ * Intake frequency of medication
+ */
 public class IntakeFrequencyArgument extends Argument {
     public IntakeFrequencyArgument(boolean isOptional) {
         super(
