@@ -1,5 +1,6 @@
 package ActiveEdge.Command;
-import ActiveEdge.Task.LogWaterTask;
+
+import ActiveEdge.Task.WaterTask;
 import ActiveEdge.Ui.CommandUi;
 import ActiveEdge.Task.TaskList;
 
@@ -11,20 +12,19 @@ public class LogWaterCommand {
     }
 
     public void execute() throws ActiveEdgeException {
+        int quantity = 0;
         try {
-            int quantity = Integer.parseInt(quantityString);
-            if (quantity <= 0) {
-                System.out.println("Water quantity must be above 0. Please try again.");
-            }
-            else {
-                LogWaterTask logWaterTask = new LogWaterTask(quantity);
-                TaskList.tasksList.add(logWaterTask);
-                CommandUi.printWaterLogMessage(logWaterTask);
-            }
+            quantity = Integer.parseInt(quantityString);
         } catch (NumberFormatException e) {
-            throw new ActiveEdgeException ("Invalid water quantity. Please provide a valid integer.");
+            throw new ActiveEdgeException("Invalid water quantity. Please provide a valid integer.");
+        }
+
+        if (quantity <= 0) {
+            System.out.println("Water quantity must be above 0. Please try again.");
+        } else {
+            WaterTask waterTask = new WaterTask(quantity); // Changed to WaterTask
+            TaskList.tasksList.add(waterTask); // Changed to WaterTask
+            CommandUi.printWaterLogMessage(waterTask); // Changed to WaterTask
         }
     }
 }
-
-
