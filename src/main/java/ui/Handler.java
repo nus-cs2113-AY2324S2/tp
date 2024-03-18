@@ -6,7 +6,6 @@ import utility.Command;
 import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
-
 import java.util.Scanner;
 
 
@@ -219,8 +218,6 @@ public class Handler {
 
         return results;
     }
-
-
 
     /**
      * Initializes the Jarvas bot by printing a welcome message, loading tasks from storage,

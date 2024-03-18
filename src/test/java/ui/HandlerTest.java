@@ -3,16 +3,16 @@ package ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import utility.Constant;
+
 import utility.CustomExceptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-// import static org.junit.jupiter.api.Assertions.fail;
+
+
 
 class HandlerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -48,4 +48,6 @@ class HandlerTest {
         // Exercise and Verify
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
     }
+
+
 }
