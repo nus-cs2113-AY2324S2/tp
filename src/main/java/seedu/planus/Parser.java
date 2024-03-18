@@ -45,7 +45,7 @@ public class Parser {
                 return false;
             case "view":
                 if (words.length == 1) {
-                    timetable.getPlan();
+                    System.out.println(timetable.getPlan());
                     return false;
                 } else {
                     yearAndTerm = words[1].split("/y",2);
