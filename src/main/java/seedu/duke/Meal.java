@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.HashMap;
 
 public class Meal {
-    private String name;
+    private static String name;
     private int servingSize;
     private int calories;
     private int carbs;
@@ -39,7 +39,7 @@ public class Meal {
     }
 
     // Getter methods
-    public String getName() {
+    public static String getName() {
         return name;
     }
 

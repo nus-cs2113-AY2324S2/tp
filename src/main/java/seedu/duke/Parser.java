@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.user.User;
+
 public class Parser {
     public static String mealDescription;
     public static int mealSize;
@@ -16,29 +18,29 @@ public class Parser {
         if (command.equals("help")) {
             handleHelp();
         } else if (command.startsWith("ate")) {
-            //handleMeal(command);
+            User.handleMeal(command);
         } else if (command.startsWith("drink")) {
-            //handleDrink(command);
+            User.handleDrink(command);
         } else if (command.startsWith("infoMeal")) {
             //handleInfoMeal(command);
         } else if (command.startsWith("infoDrink")) {
             //handleInfoDrink(command);
         } else if (command.equals("viewCalories")) {
-            //handleViewCalories();
+            User.handleViewCalories();
         } else if (command.equals("viewCarbohydrates")) {
-            //handleViewCarbohydrates();
+            User.handleViewCarbohydrates();
         } else if (command.equals("viewProteins")) {
-            //handleViewProteins();
+            User.handleViewProteins();
         } else if (command.equals("viewWater")) {
-            //handleViewWater();
+            User.handleViewWater();
         } else if (command.equals("viewFiber")) {
-            //handleViewFiber();
+            User.handleViewFiber();
         } else if (command.equals("listMeals")) {
-            //handleListMeals();
+            User.handleListMeals();
         } else if (command.equals("listDrinks")) {
-            //handleListDrinks();
+            User.handleListDrinks();
         } else if (command.equals("listEverything")) {
-            //handleListEverything();
+            User.handleListEverything();
         } else if (command.startsWith("editMealServingSize")) {
             //handleEditMealServingSize(command);
         } else if (command.startsWith("editDrinkServingSize")) {
@@ -46,13 +48,13 @@ public class Parser {
         } else if (command.startsWith("editWaterIntake")) {
             //handleEditWaterIntake(command);
         } else if (command.startsWith("deleteMeal")) {
-            //handleDeleteMeal(command);
+            User.handleDeleteMeal(command);
         } else if (command.startsWith("deleteDrink")) {
-            //handleDeleteDrink(command);
+            User.handleDeleteDrink(command);
         } else if (command.equals("clear")) {
-            //handleClear();
+            User.handleClear();
         } else if (command.equals("exit")) {
-            //handleExit();
+            //User.handleExit();
         } else {
             System.out.println("Invalid command");
         }

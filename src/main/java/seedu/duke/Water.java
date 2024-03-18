@@ -7,7 +7,7 @@ public class Water {
         this.waterIntake += waterIntake;
     }
 
-    public void viewWater() {
+    public static void viewWater() {
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
