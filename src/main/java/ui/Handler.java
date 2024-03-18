@@ -3,6 +3,7 @@ package ui;
 import health.Bmi;
 import health.Health;
 import utility.Command;
+import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Run;
 import workouts.WorkoutList;
@@ -149,7 +150,7 @@ public class Handler {
         //Output.printAddRun(r3);
         String[] runDetails = getRun(userInput);
         if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty() || runDetails[3].isEmpty()) {
-            throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
         Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
         WorkoutList.addRun(newRun);
@@ -223,21 +224,23 @@ public class Handler {
 
 
     /**
-     * Initializes the Jarvas bot by printing a welcome message, loading tasks from storage,
+     * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
      * and returning the tasks list.
      */
     public static void initialiseBot() {
-        Output.printArt();
-        System.out.println("Hello from PulsePilot\n");
-        System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
-        // Yet to implement : Reply.printWelcomeMessage();
-        // Yet to implement : Storage.loadProfile();
+        Output.printWelcomeBanner();
+        // Yet to implement : Check for existing save, if not, make a new one
+        // Yet to implement : int status = Storage.load();
+        int status = 1;
+        if (status == 1) {
+            Output.printGreeting(1);
+            Scanner in = new Scanner(System.in);
+            System.out.println("Welcome aboard, " + in.nextLine());
+        }
     }
 
     /**
-     * Terminates the Jarvas bot by saving tasks to storage, printing a goodbye message,
+     * Terminates PulsePilot by saving tasks to storage, printing a goodbye message,
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
