@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemListTest {
 
     @Test
-    void deleteItem_oneItemInItemList_noItemInItemList() {
+    void deleteItem_indexOfItemInItemList_itemRemovedFromItemList() {
         ItemList itemList = new ItemList(new ArrayList<Item>());
         itemList.addItem("testItem", "A test item", 2,
                 "3", 4.00, 5.00);
@@ -17,6 +17,28 @@ class ItemListTest {
         itemList.deleteItem(1);
 
         assertEquals(0, itemList.getItemCount());
+    }
+
+    @Test
+    void deleteItem_nameOfItemInItemList_itemRemovedFromItemList() {
+        ItemList itemList = new ItemList(new ArrayList<Item>());
+        itemList.addItem("testItem", "A test item", 2,
+                "3", 4.00, 5.00);
+
+        itemList.deleteItem("testItem");
+
+        assertEquals(0, itemList.getItemCount());
+    }
+
+    @Test
+    void deleteItem_nameOfItemNotInItemList_itemNotRemovedFromItemList() {
+        ItemList itemList = new ItemList(new ArrayList<Item>());
+        itemList.addItem("testItem", "A test item", 2,
+                "3", 4.00, 5.00);
+
+        itemList.deleteItem("notTestItem");
+
+        assertEquals(1, itemList.getItemCount());
     }
 
     @Test

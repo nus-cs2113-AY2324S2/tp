@@ -44,6 +44,12 @@ public class ParserTest {
     }
 
     @Test
+    public void testParseCommand_validCommandDelete_returnsDeleteCommand() throws InvalidCommandException {
+        itemList.addItem("Test Item", "Test Description", 5, "2024-12-31", 10.5, 7.5);
+        Command command = parser.parseCommand("delete Test Item");
+        assertTrue(command instanceof DeleteCommand);
+    }
+
     public void parseAddCommand_createItemWithNoQuantityAndExpirationDate_returnsAddCommand() {
         try {
             itemList.addItem("Test Item", "Test Description", 0, "N.A.", 0.00, 0.00);
@@ -88,17 +94,6 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseCommand_validCommandDelete_returnsDeleteCommand() {
-        try {
-            itemList.addItem("Test Item", "Test Description", 5, "2024-12-31", 10.5, 7.5);
-            Command command = parser.parseCommand("delete 1");
-            assertTrue(command instanceof DeleteCommand);
-        } catch (InvalidCommandException e) {
-            fail("Unexpected exception: " + e.getMessage());
-        }
-    }
-
-    @Test
     public void testParseCommand_validCommandList_returnsListCommand() throws InvalidCommandException {
         Command command = parser.parseCommand("list");
         assertTrue(command instanceof ListCommand);
@@ -117,7 +112,7 @@ public class ParserTest {
 
     @Test
     public void testParseCommand_invalidDeleteCommand_throwsInvalidArgumentException() {
-        assertThrows(InvalidArgumentException.class, () -> parser.parseCommand("delete invalid"));
+        assertThrows(InvalidArgumentException.class, () -> parser.parseCommand("delete -1"));
     }
 
     @Test
