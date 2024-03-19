@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.FlirtForkException;
-import java.lang.IllegalArgumentException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 

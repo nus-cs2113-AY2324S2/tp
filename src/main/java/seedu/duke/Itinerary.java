@@ -11,12 +11,12 @@ public class Itinerary {
         this.food2 = food2;
         this.activity1 = activity1;
         this.activity2 = activity2;
-}
+    }
 
     @Override
     public String toString() {
         return "Here is a rough itinerary for your date: \n" + 
                 "We begin with lunch at " + food1 + ", followed by some fun at " + activity1 + ".\n" +
-                "We proceed to have dinner at " + food2 + ", and wrap it up with our last activity at " + activity2 + ".\n";
+                "We proceed to have dinner at " + food2 + ", and finish the night at " + activity2 + ".\n";
     }
 }
