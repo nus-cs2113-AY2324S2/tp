@@ -1,5 +1,6 @@
 package data;
 
+import storage.Storage;
 import time.WeekView;
 
 import java.time.LocalDate;
@@ -68,7 +69,7 @@ public class TaskManager {
         String task = scanner.nextLine().trim();
 
         addTask(date, task);
-        saveTasksToFile(tasks); // Updates tasks from hashmap into tasks.txt file
+        saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
         System.out.println("Task added.");
     }
 
@@ -92,7 +93,7 @@ public class TaskManager {
             updatedDescription = scanner.nextLine().trim();
 
             updateTask(date, taskNumber - 1, updatedDescription);
-            saveTasksToFile(tasks); //Update tasks.txt file
+            saveTasksToFile(tasks,Storage.FILE_PATH); //Update tasks.txt file
             System.out.println("Task updated.");
         } catch (NumberFormatException e) {
             System.out.println("Task number should be an integer value. Please try again.");
@@ -139,7 +140,7 @@ public class TaskManager {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
             taskManager.deleteTask(date, taskNumber - 1);
             System.out.println("Task deleted.");
-            saveTasksToFile(tasks); //Update tasks.txt file
+            saveTasksToFile(tasks, Storage.FILE_PATH); //Update tasks.txt file
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number. Please try again.");
         } catch (IndexOutOfBoundsException e) {
