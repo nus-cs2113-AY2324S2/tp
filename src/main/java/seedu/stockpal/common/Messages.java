@@ -7,8 +7,8 @@ public class Messages {
 
     public static final String MESSAGE_ADDED = "Product added!";
     public static final String MESSAGE_REFER_TO_HELP = "For more information on the commands, use `help`.";
-    public static final String MESSAGE_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
-
+    public static final String MESSAGE_ERROR_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
+    public static final String MESSAGE_ERROR_INVALID_FORMAT = "Invalid format. " + MESSAGE_REFER_TO_HELP;
     public static final String MESSAGE_ERROR_MISSING_PARAMETERS = "Please ensure that there is " +
             "at least 1 parameter provided.";
 
@@ -23,4 +23,6 @@ public class Messages {
     public static final String WARNING_CLOSE_WRITER_ERROR = "OOPS!! Error in closing save file writer!";
     public static final String MESSAGE_FILE_ALR_CREATED = "A non-existent file scenario is already handled earlier.";
     public static final String MESSAGE_DELETE_SUCCESS = "Product has been deleted.";
+    public static final String MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED = "Integer input exceeds largest integer " +
+            "allowed. Max integer is " + Integer.MAX_VALUE;
 }
