@@ -1,10 +1,11 @@
 package seedu.voyagers;
 
+import seedu.voyagers.classes.*;
+import seedu.voyagers.utils.*;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static seedu.voyagers.utils.Storage.readTripFile;
 import static seedu.voyagers.utils.Storage.writeTripFile;

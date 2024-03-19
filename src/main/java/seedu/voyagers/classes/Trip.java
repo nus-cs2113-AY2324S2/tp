@@ -2,6 +2,7 @@ package seedu.voyagers.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
+import seedu.voyagers.utils.*;
 
 public class Trip {
     private String name;
@@ -30,8 +31,8 @@ public class Trip {
     public Trip(String[] args) throws Exception{
         this.name = args[0];
 
-        this.startDate =  Util.dateFormat.parse(args[1]);
-        this.endDate =   Util.dateFormat.parse(args[2]);
+        this.startDate =  FormatDate.dateFormat.parse(args[1]);
+        this.endDate =   FormatDate.dateFormat.parse(args[2]);
         this.location = args[3];
         this.description = args[4];
 
@@ -149,8 +150,8 @@ public class Trip {
     @Override
     public String toString() {
         String s = "Name: " + name + "\t\tStart Date: " +
-                Util.dateFormat.format(startDate) + "\t\tEnd Date: " +
-                Util.dateFormat.format(endDate) + "\t\tLocation: " +
+                FormatDate.dateFormat.format(startDate) + "\t\tEnd Date: " +
+                FormatDate.dateFormat.format(endDate) + "\t\tLocation: " +
                 location + "\t\tDescription: " + description;
         s += "\n\tSub-trips:";
         for (Trip t : subTrips) {
