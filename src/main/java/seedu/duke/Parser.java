@@ -77,4 +77,36 @@ public class Parser {
             throw new OmniException("Please specify which keyword you want to find!");
         }
     }
+
+    /**
+     * Handles the case where the check command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length != 2 && command[1] is not numeric
+     */
+    public static void checkCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 2 && isNumeric(command[1])){
+            int listNumber = Integer.parseInt(command[1]);
+            list.checkTravelActivity(listNumber);
+        } else {
+            throw new OmniException("Please specify which task to check");
+        }
+    }
+
+    /**
+     * Handles the case where the uncheck command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length != 2 && command[1] is not numeric
+     */
+    public static void uncheckCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 2 && isNumeric(command[1])){
+            int listNumber = Integer.parseInt(command[1]);
+            list.uncheckTravelActivity(listNumber);
+        } else {
+            throw new OmniException("Please specify which task to uncheck");
+        }
+    }
 }
