@@ -5,15 +5,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.*;
 import java.util.Scanner;
 
 public class NewsOnTheGo {
 
     public static final String FILENAME = "data/sampleNews.txt";
+    private static Logger logger = Logger.getLogger("NewsOnTheGo");
+
     /**
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
      */
     public static void main(String[] args) {
+        logger.log(Level.INFO, "Starting NewsOnTheGo");
         String logo = "\n" +
                 ",-,-.                 ,---.     ,--,--'.       ,---.      \n" +
                 "` | |   ,-. . , , ,-. |   | ,-. `- |   |-. ,-. |  -'  ,-. \n" +
@@ -42,6 +46,8 @@ public class NewsOnTheGo {
                 System.out.println(e.getMessage());
             }
         }
+
+        logger.log(Level.INFO, "Ending NewsOnTheGo");
     }
 
     static List<NewsArticle> importNewsFromText(String filename) {
@@ -77,6 +83,7 @@ public class NewsOnTheGo {
         DAILY, GET, FILTER, SAVE, SOURCE, BYE
     }
     private static boolean processCommand(String command, String line, List<NewsArticle> list) {
+        assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
         case DAILY:
             dailyNews(line, list);
