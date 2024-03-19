@@ -22,6 +22,10 @@ public class TravelActivity {
         this.taskIsDone = taskIsDone;
     }
 
+    /**
+     * Gets the description of the travel activity
+     * @return The description of the travel activity
+     */
     public String getPlan(){
         return travelActivity;
     }

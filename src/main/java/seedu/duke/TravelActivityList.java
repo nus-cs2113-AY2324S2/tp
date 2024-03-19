@@ -5,7 +5,7 @@ public class TravelActivityList {
     /** Array of travel activity */
     private ArrayList<TravelActivity> travelActivities;
 
-    /** Number of TravelActivitys */
+    /** Number of TravelActivities */
     private int noOfTasks = 0;
     public TravelActivityList() {
         travelActivities = new ArrayList<>();
@@ -15,14 +15,18 @@ public class TravelActivityList {
      * Adds travel activity to the travel activity list
      * @param travelActivity The travel activity
      */
-    public void addTask(TravelActivity travelActivity){
+    public void addTravelActivity(TravelActivity travelActivity){
+        int initialListSize = noOfTasks;
         travelActivities.add(travelActivity);
+        noOfTasks += 1;
+        int newSize = noOfTasks;
+        assert newSize == initialListSize + 1 : "There is an error with list size!";
     }
 
     /**
-     * Prints out all the task
+     * Prints out all the travel activities
      */
-    public void listTasks(){
+    public void listTravelActivities(){
         int taskCount = 0;
         for (TravelActivity task: travelActivities) {
             if (task == null) {
@@ -31,42 +35,48 @@ public class TravelActivityList {
             taskCount++;
             System.out.println("     " + taskCount +"." + task);
         }
+        int finalTaskCount = noOfTasks;
+        assert finalTaskCount == taskCount : "Index out of bounds while listing activities";
     }
 
     /**
-     * returns the number of tasks in the list
-     * @return the number of tasks
+     * returns the number of travel activities in the list
+     * @return the number of travel activities
      */
-    public int getNoOfTasks(){
+    public int getNoOfTravelActivities(){
         return noOfTasks;
     }
 
     /**
-     * Removes task from the task list
-     *
-     * @param taskNumber The task number
+     * Removes travel activity from the travel activity list
+     * @param taskNumber The travel activity number on the list
      */
-    public void removeTask(int taskNumber){
+    public void removeTravelActivity(int taskNumber) throws OmniException{
+        if(taskNumber > travelActivities.size()){
+            throw new OmniException("Travel activity cannot be found!");
+        }
         int indexOfTask = taskNumber - 1;
+        int initialListSize = noOfTasks;
         TravelActivity removedTask = travelActivities.get(indexOfTask);
         travelActivities.remove(indexOfTask);
         System.out.println("I have removed this task:");
         System.out.println(removedTask);
-
+        noOfTasks -=1;
+        int newSize = noOfTasks;
+        assert newSize == initialListSize - 1 : "There is an error with list size!";
     }
+
 
     public String getDescription(String plan){
         for(TravelActivity travelActivity: travelActivities){
             if(travelActivity.getPlan().equals(plan)){
                 return travelActivity.getPlan();
-            } else {
-                break;
             }
         }
         return "cant be found";
     }
 
-    public void searchTask (String taskName) {
+    public void searchKeyword (String taskName) {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
         boolean isFound = false;
@@ -78,8 +88,7 @@ public class TravelActivityList {
         }
         if (temporaryArrayCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
-        }
-        else {
+        } else {
             System.out.println("Here are what you are looking for:");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());

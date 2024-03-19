@@ -1,54 +1,66 @@
 package seedu.duke;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
-
-        printGreeting();
+        Ui.printGreeting();
         boolean userSaysBye = false;
-        TravelActivityList travelActivityList = new TravelActivityList();
+        TravelActivityList list = new TravelActivityList();
         String line;
         Scanner in = new Scanner(System.in);
         while (!userSaysBye) {
-            line = in.nextLine();
-            if (line.equals("list")) {
-                // Prints the all the tasks in the list
-                System.out.println("Here are the travel activities in your list:");
-                travelActivityList.listTasks();
-            } else if (line.startsWith("add")){
-                // Adds a travel activity into the list
-                String[] sentence = line.split(" ");
-                // Checks if the description of the task is empty
-                TravelActivity newTask = new TravelActivity(sentence[1]);
-                travelActivityList.addTask(newTask);
-                System.out.println("I added a new travel activity");
-                System.out.println(newTask);
+            try {
+                line = in.nextLine();
+                String[] command = line.split(" ");
 
-            } else if(line.startsWith("delete")){
-                // Deletes the task in the list
-                String[] sentence = line.split(" ");
-                // Checks if the description of the task is empty or non-numerical
+                switch (command[0].toLowerCase()) {
+                case "list":
+                    Ui.printLine();
+                    Parser.getList(list);
+                    Ui.printLine();
+                    break;
 
-                int taskNumber = Integer.parseInt(sentence[1]);
-                travelActivityList.removeTask(taskNumber);
-            } else if(line.startsWith("find")) {
-                String[] taskName = line.split(" ");
-                travelActivityList.searchTask(taskName[1]);
+                case "add":
+                    Ui.printLine();
+                    Parser.addCommand(line, command, list);
+                    Ui.printLine();
+                    break;
+
+                case "delete":
+                    Ui.printLine();
+                    Parser.deleteCommand(command, list);
+                    Ui.printLine();
+                    break;
+
+                case "find":
+                    Ui.printLine();
+                    Parser.findCommand(command, list);
+                    Ui.printLine();
+                    break;
+
+                case "bye":
+                    Ui.printBye();
+                    userSaysBye = true;
+                    break;
+
+                default:
+                    Ui.printLine();
+                    System.out.println("This is not a valid command");
+                    Ui.printLine();
+                }
+            } catch (OmniException exception){
+                Ui.printException(exception);
+            } catch (NoSuchElementException exception){
+                Ui.printNoSuchElementException(exception);
             }
-            else if(line.startsWith("bye")){
-                userSaysBye = true;
-            }
-
         }
     }
 
-    public static void printGreeting() {
-        System.out.println("Hello");
-        System.out.println("How may I assist you?");
 
-    }
+
 }
 
 
