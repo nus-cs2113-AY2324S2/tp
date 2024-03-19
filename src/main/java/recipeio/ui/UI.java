@@ -1,5 +1,7 @@
 package recipeio.ui;
 
+import recipeio.recipe.Recipe;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -32,6 +34,20 @@ public class UI {
         printLine();
     }
 
+    public static void printAddMessage(Recipe recipe, int recipeListSize) {
+        System.out.println(SEPARATOR);
+        System.out.println("Woo hoo chef! I have added this recipe to your recipe book:\n\t" + recipe.toString() +
+                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
+        System.out.println(SEPARATOR);
+    }
+
+    public static void printDeleteMessage(Recipe recipe, int recipeListSize) {
+        System.out.println(SEPARATOR);
+        System.out.println("Okay chef! I have deleted this recipe from your recipe book:\n\t" +  recipe.toString() +
+                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
+        System.out.println(SEPARATOR);
+    }
+
     public void helpCommand(){
         //will add content once we finished discussing the commands
     }
@@ -42,7 +58,7 @@ public class UI {
 
     public static void bye() {
         printLine();
-        System.out.println("See you again!");
+        System.out.println("See you again chef! (｡˃ ᵕ ˂ ) ♨");
         printLine();
     }
 

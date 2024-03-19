@@ -1,6 +1,8 @@
 package recipeio.commands;
 
 import recipeio.recipe.Recipe;
+import recipeio.ui.UI;
+
 import java.util.ArrayList;
 
 public class DeleteRecipeCommand {
@@ -17,7 +19,7 @@ public class DeleteRecipeCommand {
         } else {
             Recipe selectedRecipe = recipes.get(recipeNumber);
             recipes.remove(recipeNumber);
-            System.out.println("Deleted that recipe!");
+            UI.printDeleteMessage(selectedRecipe, recipes.size());
         }
     }
 }
