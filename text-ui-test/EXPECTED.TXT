@@ -50,6 +50,10 @@ Expenses for the year 2011:
 Current Expenses:
 1. testing | Cost: $3.0 | date: 11.11.2011
 2. testing | Cost: $900.0 | date: 11.11.2011
+Unknown command. Please try again! Type 'help' for more information!
+Current Expenses:
+1. testing | Cost: $3.0 | date: 11.11.2011
+2. testing | Cost: $900.0 | date: 11.11.2011
 CantVas Help
 To input expenses, use format:
 << e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
@@ -65,25 +69,3 @@ To view saved expenses by year, use format:
 To Use gpa calculator, type 'gpa' to continue
 To end the program, type 'exit'
 Enter 'GPA' to start or 'exit' to exit to main menu:
-Enter your current GPA and the number of MCs taken (format: GPA_SCORE /NUMBER_OF_MCS):
-Enter the number of mods you want to add (format: NUMBER_OF_MODS):
-Enter modular credit and expected grade for module 1 (format: MODULAR_CREDIT /EXPECTED_GRADE):
-Enter modular credit and expected grade for module 2 (format: MODULAR_CREDIT /EXPECTED_GRADE):
-Your updated GPA is: 4.12
-Enter 'GPA' to start or 'exit' to exit to main menu:
-Exiting the GPA calculator. Thank you for using it!
-CantVas Help
-To input expenses, use format:
-<< e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
-To delete saved expenses, use format:
-<< e/ del/ <index> >>
-To List saved expenses, use format:
-<< list >>
-To view saved expenses by month, use format:
-<< view -m <mm.yyyy> >>
-To view saved expenses by year, use format:
-<< view -y <yyyy> >>
- -------------------------------------------------------------
-To Use gpa calculator, type 'gpa' to continue
-To end the program, type 'exit'
-Shutting down... Goodbye!!

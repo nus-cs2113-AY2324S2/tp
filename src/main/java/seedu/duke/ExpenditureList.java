@@ -117,6 +117,14 @@ public class ExpenditureList {
         expenditureCount--;
     }
 
+    public static void clearlist(){
+        for (int num = 0 ;num<expenditureList.size();num++) {
+            System.out.println("I have removed everything in the list");
+            expenditureList.remove(num);
+            expenditureCount --;
+        }
+    }
+
     public static void listExpenses() {
         if (expenditureList.isEmpty()) {
             System.out.println("No expenses to display.");
