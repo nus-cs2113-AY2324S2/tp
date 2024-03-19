@@ -1,10 +1,10 @@
-package seedu.duke;
+package newsonthego;
 
 import java.util.Scanner;
 
-public class Duke {
+public class NewsOnTheGo {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.newsonthego.NewsOnTheGo application.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
