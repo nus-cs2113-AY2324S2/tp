@@ -25,21 +25,28 @@ public class Parser {
             throw new EndProgramException();
         case "help":
             // Help code here
+            break;
         case "group":
             // Group code here
+            break;
         case "member":
             // Member code here
+            break;
         case "expense":
             String[] extractExpense = argument.split(" ", 2);
             String expense = extractExpense[0];
             int amount = Integer.parseInt(extractExpense[1]);
             ExpenseAdder newExpense = new ExpenseAdder(expense,amount);
+            break;
         case "list":
             // List code here
+            break;
         case "balance":
             // Balance code here
+            break;
         default:
             // Default clause
+            break;
         }
     }
 }
