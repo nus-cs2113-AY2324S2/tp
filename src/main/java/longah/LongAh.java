@@ -59,7 +59,7 @@ public class LongAh {
             LongAhLogger.addHandler(handler);
             LongAhLogger.setUseParentHandlers(false);
         } catch (IOException e) {
-            System.out.println("Log file initiation failed.");
+            LongAhLogger.log(Level.WARNING, "Log data may not be saved due to permission.");
         }
 
         LongAhLogger.log(Level.INFO, "Starting Pre-program preparations.");
