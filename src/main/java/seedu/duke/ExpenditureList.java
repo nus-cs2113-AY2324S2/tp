@@ -121,7 +121,7 @@ public class ExpenditureList {
         if (expenditureList.isEmpty()) {
             System.out.println("The list is already empty!");
         } else {
-            // No need to use a separate counter since expenditureList.size() will dynamically change as items are removed
+
             while (!expenditureList.isEmpty()) {
                 expenditureList.remove(expenditureList.size() - 1); // Remove the last element
                 expenditureCount--; // Decrement the count of expenditures
