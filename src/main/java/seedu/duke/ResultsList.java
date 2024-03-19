@@ -18,7 +18,7 @@ public class ResultsList {
         count++;
     }
 
-    public Results getSpecifiedResult(int index) {
+    public Results getSpecifiedResult(int index) throws IndexOutOfBoundsException {
         return sessionResults.get(index);
     }
 
@@ -26,7 +26,7 @@ public class ResultsList {
         return sessionResults;
     }
 
-    public String toString() {
+    public String toString(boolean includesQuestion) {
         StringBuilder listOfResults = new StringBuilder();
         for (int i = 0; i < count; i++) {
             listOfResults.append((i + 1)).append(". ").append(sessionResults.get(i).getScore()).append("\n");
