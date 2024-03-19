@@ -67,10 +67,12 @@ public class ItemList {
      * @return A concatenated string of all item representations in the list, each on a new line.
      */
     public String printList(List<Item> itemList) {
+        int index = 1;
         String output = "";
 
         for (Item item: itemList) {
-            output += item.toString() + System.lineSeparator() + System.lineSeparator();
+            output += index + ". " + item.toString() + System.lineSeparator() + System.lineSeparator();
+            index++;
         }
 
         return output;
