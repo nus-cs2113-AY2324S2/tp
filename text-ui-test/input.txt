@@ -1,3 +1,5 @@
-Yuki
-add pizza / 10 / 10 / dinner / dinner / dinner
-bye
+add /name meatballs /time 12
+list
+delete 1
+list
+exit

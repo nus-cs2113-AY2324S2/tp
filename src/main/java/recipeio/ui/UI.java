@@ -1,58 +1,58 @@
 package recipeio.ui;
 
-import recipeio.recipe.Recipe;
-
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class UI {
     public static final String SEPARATOR = "-----------------------------";
     private static String name;
-    public static void sayHi(Scanner inputGetter) {
+
+    private final Scanner in;
+
+    public UI() {
+        this(System.in);
+    }
+
+    public UI (InputStream in) {
+        this.in = new Scanner(in);
+    }
+
+    public static void printLine() {
         System.out.println(SEPARATOR);
+    }
+
+    public static void sayHi() {
+        printLine();
         System.out.println("Welcome to Recipe.io!");
-        System.out.println("What is your name?");
-        name = inputGetter.nextLine();
-        System.out.println("Hello Chef " + name + "! How can I help you today?");
-        System.out.println(SEPARATOR);
     }
 
     public static void printMessage(String message) {
-        System.out.println(SEPARATOR);
+        printLine();
         System.out.println(message);
-        System.out.println(SEPARATOR);
+        printLine();
     }
 
-    public static void addRecipePrinter(Recipe recipe, int recipeListSize) {
-        System.out.println(SEPARATOR);
-        System.out.println("Woo hoo chef! I have added this recipe to your recipe book:\n\t" + recipe.toString() +
-                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
-        System.out.println(SEPARATOR);
+    public void helpCommand(){
+        //will add content once we finished discussing the commands
     }
 
-    public static void deleteRecipePrinter(Recipe recipe, int recipeListSize) {
-        System.out.println(SEPARATOR);
-        System.out.println("Okay chef! I have deleted this recipe from your recipe book:\n\t" +  recipe.toString() +
-                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
-        System.out.println(SEPARATOR);
-    }
-
-    public static void printHelpCommand(){
-        System.out.println(SEPARATOR);
-        System.out.println("Sorry, I don't understand what you are saying. Here are your possible commands.\nPlease " +
-                "follow the format exactly as shown:\n" +
-                "To add a recipe: add [RECIPE NAME] / [COOK TIME IN MINS] / [CALORIES] / " +
-                "[ALLERGIES SEPARATED BY COMMAS] / " +
-                "[BREAKFAST, LUNCH, DINNER, APPETIZER, OR DESSERT] / [A URL TO THE RECIPE]\nFor example:\n" +
-                "add Pizza Bagels / 40 / 540 / eggs, gluten, dairy / lunch / www.thisispizzabagels.com");
-        System.out.println(SEPARATOR);
-    }
     public static String getName(){
         return name;
     }
 
     public static void bye() {
-        System.out.println(SEPARATOR);
-        System.out.println("See you again, " + name + "!");
-        System.out.println(SEPARATOR);
+        printLine();
+        System.out.println("See you again!");
+        printLine();
     }
+
+    public String getUserInput() {
+        printLine();
+        System.out.println("Enter command:");
+        String fullInputLine = in.nextLine();
+
+        System.out.println("[Command entered: " + fullInputLine + "]");
+        return fullInputLine;
+    }
+
 }

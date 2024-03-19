@@ -1,12 +1,12 @@
 package ui;
 
 import org.junit.jupiter.api.Test;
+import recipeio.InputParser;
 import recipeio.ui.UI;
 
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.Scanner;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,19 +24,14 @@ public class UITest {
 
     @Test
     public void testUISayHi(){
-        getInput("Hung");
 
         String expected = UI.SEPARATOR + System.lineSeparator() +
-                "Welcome to Recipe.io!" + System.lineSeparator() +
-                "What is your name?" + System.lineSeparator() +
-                "Hello Chef Hung! How can I help you today?" + System.lineSeparator() +
-                UI.SEPARATOR + System.lineSeparator();
+                "Welcome to Recipe.io!" + System.lineSeparator();
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(testOut);
         System.setOut(printStream);
 
-        Scanner inputGetter = new Scanner(System.in);
-        UI.sayHi(inputGetter);
+        UI.sayHi();
 
         String actual = testOut.toString();
 
@@ -68,7 +63,7 @@ public class UITest {
         System.setOut(printStream);
 
         String expected = UI.SEPARATOR + System.lineSeparator() +
-                "See you again, " + UI.getName() + "!" + System.lineSeparator() +
+                "See you again!" + System.lineSeparator() +
                 UI.SEPARATOR + System.lineSeparator();
 
         UI.bye();
@@ -76,5 +71,12 @@ public class UITest {
         String actual = testOut.toString();
 
         assertEquals(expected, actual);
+    }
+
+    @Test void testParseCommand() {
+        String userInput = "delete 1";
+        String command = InputParser.parseCommand(userInput);
+
+        assertEquals("delete", command);
     }
 }
