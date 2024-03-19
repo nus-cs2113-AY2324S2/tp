@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.time.LocalDateTime;
+
 public class Parser {
 
     public static void parse(String command, Ui ui) {
@@ -32,8 +34,14 @@ public class Parser {
                 Test test = pb.typeChoose();
                 Checker checker = new Checker(test);
                 checker.getUserAnswer();
+
                 System.out.println("Acc: "+checker.getAccuracy());
                 System.out.println("Spend Time: "+checker.getTime()+"s");
+
+                // Storage write to file
+                Storage.addRecord(new Record(LocalDateTime.now(), (double) test.getNumber() / checker.getTime(), checker.getAccuracy()));
+                Storage.writeFile();
+
                 break;
             case "help": 
                 ui.help(command);
