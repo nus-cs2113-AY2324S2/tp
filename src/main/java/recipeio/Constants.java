@@ -14,6 +14,7 @@ public class Constants {
     public static final String DELETE_COMMAND = "delete";
     public static final String LIST_COMMAND = "list";
     public static final String HELP_COMMAND = "help";
+    public static final String FIND_BY_NAME = "name";
     public static final String INVALID_TASK_FORMAT_ERROR_MESSAGE = "Sorry. I couldn't understand. Please follow the " +
             "correct format.";
     public static final String INTEGER_NEEDED_ERROR_MESSAGE = "Make sure you enter an integer for cook time and" +

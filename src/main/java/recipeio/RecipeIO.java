@@ -30,6 +30,7 @@ public class RecipeIO {
         String parsedCommand = InputParser.parseCommand(userInput);
 
         while (!parsedCommand.equals(Constants.EXIT_COMMAND)) {
+            logger.log(Level.INFO, "not an exit command.");
             recipeList.executeCommand(parsedCommand, userInput);
             userInput = ui.getUserInput();
             parsedCommand = InputParser.parseCommand(userInput);

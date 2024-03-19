@@ -9,9 +9,10 @@ public class FindByNameCommand {
     /**
      * Finds the recipes with key name in recipe book.
      *
-     * @param keyword The keyword that the user passes in.
+     * @param userInput The input that the user passes in.
      */
-    public void execute(String keyword, ArrayList<Recipe> recipes) {
+    public static void execute(String userInput, ArrayList<Recipe> recipes) {
+        String keyword = userInput.split(" ")[1];
         ArrayList<Recipe> matches = new ArrayList<>();
         if (recipes.isEmpty()) {
             System.out.println("Sorry, you have no recipes to find matches with. Try adding some!");

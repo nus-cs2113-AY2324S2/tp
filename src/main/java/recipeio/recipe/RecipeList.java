@@ -5,6 +5,7 @@ import recipeio.InputParser;
 import recipeio.commands.AddRecipeCommand;
 import recipeio.commands.DeleteRecipeCommand;
 import recipeio.commands.FindByAllergyCommand;
+import recipeio.commands.FindByNameCommand;
 import recipeio.commands.ListRecipeCommand;
 import recipeio.ui.UI;
 
@@ -67,6 +68,10 @@ public class RecipeList {
         ListRecipeCommand.execute(recipes);
     }
 
+    public void findName(String name) {
+        FindByNameCommand.execute(name, recipes);
+    }
+
     public String findAllergy(String allergy) {
         return FindByAllergyCommand.execute(allergy, recipes);
     }
@@ -82,6 +87,8 @@ public class RecipeList {
         case Constants.DELETE_COMMAND:
             delete(userInput);
             break;
+        case Constants.FIND_BY_NAME:
+            findName(userInput);
         default:
             System.out.println("try another command");
         }
