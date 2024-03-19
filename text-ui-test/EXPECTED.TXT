@@ -1,7 +1,14 @@
-Welcome to Voyagers!
-What would you like to do today?
+Voyagers
+		____________________________________________________________
+		Hello! I'm Voyagers
+		What can I do for you?
+		Here are the trips in your list from the previous time:
 File not found.
 Creating new file...
 File created.
-No trips found.
-Please enter your command:
+		____________________________________________________________
+		You have no trips in your list.
+		____________________________________________________________
+		____________________________________________________________
+		Bye. Hope to see you again soon!
+		____________________________________________________________
