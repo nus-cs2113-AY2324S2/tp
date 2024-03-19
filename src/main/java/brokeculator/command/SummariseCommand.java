@@ -14,7 +14,6 @@ public class SummariseCommand extends Command {
 
     @Override
     public void execute(Dashboard dashboard) {
-        //TODO implement proper expense summarising
         double summary = dashboard.getExpenseManager().summariseExpenses(beginIndex, endIndex);
         UI.print("Total expenses: " + summary);
     }
