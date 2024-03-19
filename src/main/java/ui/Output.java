@@ -71,9 +71,10 @@ public class Output {
 
     public static void printHistory(String filter) {
 
+
         try{
             printLine();
-            ArrayList<Workout> workoutList = WorkoutList.getWorkouts(filter);
+            ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(filter);
             System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
 
             for (int i = 0; i < workoutList.size(); i++){
