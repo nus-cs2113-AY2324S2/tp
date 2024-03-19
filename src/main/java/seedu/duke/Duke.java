@@ -37,11 +37,15 @@ public class Duke {
                     if (input.equals("TTT")) {
                         try {
                             runTicTacToe();
+                            System.out.println("now what would you like to do");
+                            inGame = false;
                         } catch (InvalidTTMoveException e) {
                             throw new RuntimeException(e);
                         }
                     } else if (input.equals("hangman")) {
                         hangman.runHangMan();
+                        System.out.println("now what would you like to do");
+                        inGame = false;
                     }
                 } catch (InvalidGameException | NullPointerException e) {
                     ui.println("invalid game");
