@@ -20,8 +20,8 @@ import storage.LogFile;
  * before providing feedback to the user.
  */
 public class Handler {
-    LogFile logFile = LogFile.getInstance();
     public static Scanner in;
+    LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -274,7 +274,7 @@ public class Handler {
                 String userInput = in.nextLine();
                 String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
                 String[] validatedInputs = checkGymStationInput(inputs);
-                AddGymStationInput(validatedInputs, gym);
+                addGymStationInput(validatedInputs, gym);
             }
             Output.printAddGym(gym);
         } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
@@ -310,7 +310,9 @@ public class Handler {
         return new String[]{exerciseName, sets, reps, weights};
     }
 
-    private static void AddGymStationInput(String [] validatedInputs, Gym gym) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+    private static void addGymStationInput(String [] validatedInputs, Gym gym) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
 
         String exerciseName = validatedInputs[Constant.INDEX_OF_STATION_NAME];
         int weights = Integer.parseInt(validatedInputs[Constant.INDEX_OF_STATION_WEIGHTS]);

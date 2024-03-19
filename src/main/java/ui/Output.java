@@ -1,11 +1,13 @@
 package ui;
 
-import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
 import utility.Filters;
-import workouts.*;
-
+import workouts.Gym;
+import workouts.GymStation;
+import workouts.Run;
+import workouts.Workout;
+import workouts.WorkoutList;
 import java.util.ArrayList;
 
 public class Output {
@@ -133,17 +135,17 @@ public class Output {
             printLine();
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
-                case ALL:
-                    printExerciseHistory();
-                    break;
-                case RUN:
-                    printRunHistory();
-                    break;
-                case GYM:
-                    printGymHistory();
-                    break;
-                default:
-                    throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
+            case ALL:
+                printExerciseHistory();
+                break;
+            case RUN:
+                printRunHistory();
+                break;
+            case GYM:
+                printGymHistory();
+                break;
+            default:
+                throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
             }
         } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());

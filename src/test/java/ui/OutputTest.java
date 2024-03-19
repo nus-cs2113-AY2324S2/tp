@@ -5,13 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Gym;
 import workouts.Run;
-import workouts.Workout;
 import workouts.WorkoutList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

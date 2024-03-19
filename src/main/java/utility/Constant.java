@@ -32,7 +32,8 @@ public class Constant {
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
     public static final String RUN_HEADER_WITH_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
-    public static final String GYM_STATION_HEADER_WITH_INDEX_FORMAT = "Index\t\t\tExercise Name\t\tSets\tRepetition\t\tWeights";
+    public static final String GYM_STATION_HEADER_WITH_INDEX_FORMAT = "Index\t\t\tExercise Name\t\tSets\tRepetition" +
+            "\t\tWeights";
 
     public static final String GYM_STATION_FORMAT = "%s: ";
 
@@ -52,7 +53,8 @@ public class Constant {
             "Please input either /e:run or /e:gym";
 
 
-    public static final String STATION_GYM_FORMAT = "[name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number]";
+    public static final String STATION_GYM_FORMAT = "[name of exercise:string] /s:[sets:number] /r:[reps:number] " +
+            "/w:[weights:number]";
 
     public static final String BLANK_INPUT_FOR_GYM_STATION = "Fields cannot be empty" +
             "Please input " + STATION_GYM_FORMAT;
