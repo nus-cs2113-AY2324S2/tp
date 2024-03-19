@@ -7,7 +7,9 @@ import seedu.stockpal.storage.Storage;
 
 public class DeleteCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "delete";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    public static final String COMMAND_USAGE = COMMAND_KEYWORD +
+            ": Deletes a product from the inventory with using its PID.\n" +
+            "Format: delete PID";
     protected Pid pid;
     private final Storage storage;
 
