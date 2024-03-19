@@ -90,7 +90,7 @@ public class NewsOnTheGo {
                 }
             }
             if(!topicFound) {
-                NewsTopic newsTopic = new NewsTopic(topic);
+                NewsTopic newsTopic = new NewsTopic(topic, newsArticle);
                 newsTopics.add(newsTopic);
             }
         }
@@ -114,7 +114,7 @@ public class NewsOnTheGo {
             showTopics();
             break;
         case FILTER:
-            filterNews(line, list);
+            filterNews(line);
             break;
         case SAVE:
             saveNews(line, list);
@@ -133,7 +133,7 @@ public class NewsOnTheGo {
     }
 
     private static void showTopics() {
-        System.out.println("Here are the list of topics for your viewing:")
+        System.out.println("Here are the list of topics for your viewing:");
         for(NewsTopic topic: newsTopics) {
             System.out.println(" - " +topic.getTopicName());
         }
@@ -145,8 +145,31 @@ public class NewsOnTheGo {
     private static void getNews(String line, List<NewsArticle> list) {
     }
 
-    private static void filterNews(String line, List<NewsArticle> list) {
+    private static int findTopicIndex(String topic) {
+        int left = 0;
+        int right = newsTopics.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int comparisonResult = topic.trim().compareToIgnoreCase(newsTopics.get(mid).getTopicName().trim());
+            if (comparisonResult == 0) {
+                return mid;
+            } else if (comparisonResult < 0) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
 
+    private static void filterNews(String line) {
+        int topicIndex = findTopicIndex(line.substring(6).trim());
+        if (topicIndex < 0) {
+            System.out.println("Sorry, this topic is not available right now :(");
+        } else {
+            System.out.println("Here are the news articles related to the topic of your interest:");
+            newsTopics.get(topicIndex).printNewsArticles();
+        }
     }
 
     private static void saveNews(String line, List<NewsArticle> list) {
