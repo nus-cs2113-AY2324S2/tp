@@ -14,8 +14,8 @@ public class Duke {
         while (!userSaysBye) {
             try {
                 line = in.nextLine();
+                assert line != null :"Input does not exist!";
                 String[] command = line.split(" ");
-
                 switch (command[0].toLowerCase()) {
                 case "list":
                     Ui.printLine();
@@ -35,9 +35,27 @@ public class Duke {
                     Ui.printLine();
                     break;
 
+                case "check":
+                    Ui.printLine();
+                    Parser.checkCommand(command, list);
+                    Ui.printLine();
+                    break;
+
+                case "uncheck":
+                    Ui.printLine();
+                    Parser.uncheckCommand(command, list);
+                    Ui.printLine();
+                    break;
+
                 case "find":
                     Ui.printLine();
                     Parser.findCommand(command, list);
+                    Ui.printLine();
+                    break;
+
+                case "help":
+                    Ui.printLine();
+                    Ui.helpCommand();
                     Ui.printLine();
                     break;
 

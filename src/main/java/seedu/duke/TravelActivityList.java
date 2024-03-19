@@ -20,7 +20,7 @@ public class TravelActivityList {
         travelActivities.add(travelActivity);
         noOfTasks += 1;
         int newSize = noOfTasks;
-        assert newSize == initialListSize + 1 : "There is an error with list size!";
+        assert newSize == initialListSize + 1 :"There is an error with list size!";
     }
 
     /**
@@ -32,8 +32,9 @@ public class TravelActivityList {
             if (task == null) {
                 break;
             }
+            String checked = task.getTaskStatus()? "[X]" : "[ ]";
             taskCount++;
-            System.out.println("     " + taskCount +"." + task);
+            System.out.println("     " + checked + " " + taskCount +". " + task);
         }
         int finalTaskCount = noOfTasks;
         assert finalTaskCount == taskCount : "Index out of bounds while listing activities";
@@ -52,6 +53,7 @@ public class TravelActivityList {
      * @param taskNumber The travel activity number on the list
      */
     public void removeTravelActivity(int taskNumber) throws OmniException{
+        assert taskNumber != 0  :"There is not tasks in the list";
         if(taskNumber > travelActivities.size()){
             throw new OmniException("Travel activity cannot be found!");
         }
@@ -63,7 +65,7 @@ public class TravelActivityList {
         System.out.println(removedTask);
         noOfTasks -=1;
         int newSize = noOfTasks;
-        assert newSize == initialListSize - 1 : "There is an error with list size!";
+        assert newSize == initialListSize - 1 :"There is an error with list size!";
     }
 
 
@@ -80,7 +82,7 @@ public class TravelActivityList {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
         boolean isFound = false;
-        for(int iterator = 0; iterator < travelActivities.size(); iterator += 1){
+        for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
             if(travelActivities.get(iterator).getPlan().contains(taskName)){
                 temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
                 temporaryArrayCounter += 1;
@@ -94,6 +96,38 @@ public class TravelActivityList {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
             }
         }
+    }
+
+    /**
+     * Checks travel activity as completed
+     * @param taskNumber The travel activity number on the list
+     */
+    public void checkTravelActivity(int taskNumber) throws OmniException{
+        assert taskNumber != 0 : "There is not tasks in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity markedTask  = travelActivities.get(indexOfTask);
+        markedTask.setTaskStatus(true);
+        System.out.println("I have checked this task:");
+        System.out.println(markedTask);
+    }
+
+    /**
+     * Unchecks travel activity and sets it to uncompleted
+     * @param taskNumber The travel activity number on the list
+     */
+    public void uncheckTravelActivity(int taskNumber) throws OmniException{
+        assert taskNumber != 0 : "There is not tasks in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity markedTask  = travelActivities.get(indexOfTask);
+        markedTask.setTaskStatus(false);
+        System.out.println("I have unchecked this task:");
+        System.out.println(markedTask);
     }
 
 
