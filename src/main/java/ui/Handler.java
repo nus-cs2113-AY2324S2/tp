@@ -21,7 +21,7 @@ import storage.LogFile;
  */
 public class Handler {
     public static Scanner in;
-    LogFile logFile = LogFile.getInstance();
+    static LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
