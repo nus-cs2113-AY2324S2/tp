@@ -57,7 +57,6 @@ public class Bmi extends Health {
         return results;
     }
 
-
     /*
      * Calculates BMI based on height and weight, prints calculated BMI value,
      * and calls the printBMICategory method.
