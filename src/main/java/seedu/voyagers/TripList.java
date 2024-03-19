@@ -112,10 +112,10 @@ public class TripList {
         return -1;
     }
 
-    public Trip getTrip(String name){
+    public Trip getTrip(String name) throws IllegalArgumentException{
         int index = findTrip(name);
         if (index == -1){
-            return null;
+            throw new IllegalArgumentException("No such trip found");
         }
         return trips.get(index);
     }

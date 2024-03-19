@@ -6,6 +6,7 @@ import seedu.voyagers.commands.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -42,6 +43,8 @@ public class Parser {
         switch (command) {
         case "addmaintrip":
             return commandAddMainTrip(tokens);
+        case "addsubtrip":
+            return commandAddSubTrip(tokens);
         case "deletemaintrip":
             return deleteMainTrip(tokens);
         case "setname":
@@ -64,6 +67,26 @@ public class Parser {
         }
 
         return new EmptyCommand();
+    }
+
+    private static Command commandAddSubTrip(String[] tokens) {
+        String[] newTokens = new String[tokens.length - 1];
+
+        System.arraycopy(tokens, 2, newTokens, 1, tokens.length - 2);
+
+        System.out.println(Arrays.toString(newTokens));
+
+        Command c = commandAddMainTrip(newTokens);
+
+
+        String SubTripArgs[] = c.getArgs();
+        String args[] = new String[6];
+        System.arraycopy(SubTripArgs, 0, args, 1, 5);
+        args[0] = tokens[1];
+
+
+        return new AddSubTripCommand(args);
+
     }
 
     /**
@@ -274,14 +297,12 @@ public class Parser {
             }
         }
 
-        System.out.println("Check 1");
         try {
             //check if name has was inputted
             if (name == "-") {
                 System.out.println("You cannot leave name empty when creating a new main trip.");
                 throw new IllegalArgumentException("Name cannot be empty.");
             }
-            System.out.println("Check 2");
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
             //check if only partial info is provided (name must be entered)
@@ -304,7 +325,7 @@ public class Parser {
                     return new EmptyCommand();
                 }
             }
-            System.out.println("Check 3");
+
             // print start date in the format yyyy-MM-dd
             String startDateString = dateFormat.format(startDate);
             String endDateString = dateFormat.format(endDate);
@@ -317,7 +338,6 @@ public class Parser {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("Check 4");
         return new EmptyCommand();
     }
 

@@ -18,31 +18,8 @@ public class AddTripCommand extends Command{
 
     public void execute(TripList trips, Ui ui, Storage storage){
 
-
-        int l = args.length;
-        System.out.println(args.length);
-        for (int i = 0; i < l; i++){
-            System.out.println(args[i]);
-        }
-
-        String name = args[0];
-        Date startDate = null;
-        Date endDate = null;
         try{
-            startDate =  Util.dateFormat.parse(args[1]);
-            endDate =   Util.dateFormat.parse(args[2]);
-        } catch (Exception e){
-            ui.echo("Invalid date format");
-            return;
-        }
-
-
-        String location = args[3];
-        String description = args[4];
-        Trip trip = new Trip(name, startDate, endDate, location, description);
-
-
-        try{
+            Trip trip = new Trip(args);
             trips.add(trip);
             ui.echo("Got it. I've added this trip:\n" + trip
                     + "\nNow you have " + trips.size() +
