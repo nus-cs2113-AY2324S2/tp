@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class WorkoutList extends ArrayList<Workout> {
     private static final ArrayList<Workout> workouts = new ArrayList<>();
-    private static final ArrayList<Workout> runs = new ArrayList<>();
+    private static final ArrayList<Run> runs = new ArrayList<>();
+    private static final ArrayList<Gym> gyms = new ArrayList<>();
+
 
     /**
      * Adds a workout to the list of workouts whenever addRun is called
@@ -37,7 +39,7 @@ public class WorkoutList extends ArrayList<Workout> {
      *               "gym" returns only gym workouts
      * @return ArrayList of workouts
      */
-    public static ArrayList<Workout> getWorkouts(String filter)
+    public static ArrayList<? extends Workout> getWorkouts(String filter)
             throws CustomExceptions.OutOfBounds,
             CustomExceptions.InvalidInput {
 
@@ -54,6 +56,8 @@ public class WorkoutList extends ArrayList<Workout> {
 
         if(filter.equals(Constant.RUN)){
             return runs;
+        } else if (filter.equals(Constant.GYM)) {
+            return gyms;
         } else {
             return workouts;
         }
