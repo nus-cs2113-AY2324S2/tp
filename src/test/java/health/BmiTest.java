@@ -102,11 +102,11 @@ class BmiTest {
     @Test
     void showCurrentBmi_printsCorrectCurrentBmi() {
         // Arrange
-        Bmi bmi = new Bmi("1.71", "60.5");
+        Bmi bmi = new Bmi("1.75", "70.0");
 
         HealthList.addBmi(bmi);
 
-        String expected = "Your BMI is 20.69"
+        String expected = "Your BMI is 22.86"
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator();
