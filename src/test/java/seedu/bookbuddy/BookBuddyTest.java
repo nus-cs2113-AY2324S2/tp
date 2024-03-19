@@ -31,15 +31,23 @@ class BookBuddyTest {
     @Test
     public void testPrintWelcomeMessage() {
         BookBuddy.printWelcomeMessage();
-        String expectedOutput = "Hello! We are BookBuddy!\nHow can I help you today?\n";
+        String expectedOutput = "Hello! We are BookBuddy!" + System.lineSeparator() +
+                "How can I help you today?" + System.lineSeparator();
         String actualOutput = outContent.toString();
 
+        // Normalize the line endings in the actual output to match the system's line separator
+        String normalizedActualOutput = actualOutput.replace(System.lineSeparator(), "\n");
+
+        // Normalize the expected output line endings to \n for comparison
+        String normalizedExpectedOutput = expectedOutput.replace("\n", System.lineSeparator());
+
         // Convert to byte arrays to compare
-        byte[] expectedBytes = expectedOutput.getBytes();
-        byte[] actualBytes = actualOutput.getBytes();
+        byte[] expectedBytes = normalizedExpectedOutput.getBytes();
+        byte[] actualBytes = normalizedActualOutput.getBytes();
 
         assertArrayEquals(expectedBytes, actualBytes);
     }
+
 
 
     @Test
