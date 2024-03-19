@@ -2,7 +2,8 @@ package seedu.voyagers.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
-import seedu.voyagers.utils.*;
+import seedu.voyagers.utils.FormatDate;
+
 
 public class Trip {
     private String name;

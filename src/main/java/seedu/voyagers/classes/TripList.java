@@ -1,6 +1,5 @@
 package seedu.voyagers.classes;
 import seedu.voyagers.VoyagerException;
-import seedu.voyagers.classes.Trip;
 
 import java.util.ArrayList;
 

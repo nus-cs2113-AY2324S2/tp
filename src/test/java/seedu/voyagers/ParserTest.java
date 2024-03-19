@@ -3,6 +3,8 @@ package seedu.voyagers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.voyagers.classes.Trip;
+import seedu.voyagers.classes.TripList;
+import seedu.voyagers.utils.Ui;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
