@@ -29,8 +29,9 @@ public class Handler {
      *
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
-    public static void processInput() {
-        in = new Scanner(System.in);
+
+    public static void processInput() throws CustomExceptions.InvalidInput {
+        Scanner in = new Scanner(System.in);
 
 
         while (in.hasNextLine()) {
@@ -71,10 +72,11 @@ public class Handler {
                     break;
 
                 default:
-                    // Yet to implement : throw new CustomException();
+
+                    break; // valueOf results in immediate exception for non-match with enum Command
                 }
             } catch (IllegalArgumentException e) {
-                // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
+                Output.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
 
