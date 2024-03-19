@@ -43,7 +43,7 @@ public class Duke {
                 int weekOfDay = Integer.parseInt(words[1]);
                 int index = Integer.parseInt(words[2]) - 1;
 
-                userList.getActiveUser().timetable.deleteUserTask(weekOfDay, index);
+                //userList.getActiveUser().timetable.deleteUserTask(weekOfDay, index);
             } else if (Objects.equals(command, "addtask")) {
                 User currentUser = userList.getActiveUser();
                 Parser parser = new Parser(currentUser);

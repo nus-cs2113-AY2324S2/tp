@@ -12,6 +12,7 @@ public class Parser {
     public Parser(User user) {
         Parser.user = user;
     }
+
     public void parseCommand(String command) {
         String[] parts = command.split("/"); // Splitting command into parts using slash
 
@@ -29,34 +30,12 @@ public class Parser {
         Task task = new Task(description, day, from, to);
 
         // Adding task to the User's task list
-        int dayOfWeek = parseDayOfWeek(day);
-        if (dayOfWeek != -1) {
-            user.timetable.addUserTask(dayOfWeek, task);
+        try {
+            Timetable.checkDay(day);
+            user.timetable.addUserTask(day, task);
             UI.printAddTask(description);
-        } else {
-            System.out.println("Invalid day of the week.");
-        }
-    }
-
-    private int parseDayOfWeek(String day) {
-        // Mapping day of the week to index (0-6)
-        switch (day.toLowerCase()) {
-        case "sunday":
-            return 7;
-        case "monday":
-            return 1;
-        case "tuesday":
-            return 2;
-        case "wednesday":
-            return 3;
-        case "thursday":
-            return 4;
-        case "friday":
-            return 5;
-        case "saturday":
-            return 6;
-        default:
-            return -1; // Invalid day
+        } catch (InvalidDayException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -71,7 +50,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(parts[1].trim());
             int dayOfWeek = 0; // Assume we are always deleting from Sunday for now
-            user.timetable.deleteUserTask(dayOfWeek, index - 1); // Adjust index by -1 to match array index
+            user.timetable.deleteUserTask("sunday", index - 1); // Adjust index by -1 to match array index
             System.out.println("Task deleted successfully.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid task index.");

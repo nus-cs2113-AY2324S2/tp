@@ -8,30 +8,29 @@ class TimetableTest {
     public void testAddUserTask() {
         Timetable timetable = new Timetable();
         Task task = new Task("Study","2024-03-18", "09:00", "11:00");
-        int dayOfWeek = 1; // assume Tuesday
 
-        timetable.addUserTask(dayOfWeek, task);
+        timetable.addUserTask("Tuesday", task);
 
-        assertEquals(1, timetable.daysOfWeek.get(0).size());
-        assertEquals(task, timetable.daysOfWeek.get(0).get(0));
+        timetable.printTasksOfTheDay("Tuesday");
+        assertEquals(1, timetable.getWeeklyTasks().get("Tuesday").size());
+        assertEquals(task, timetable.getWeeklyTasks().get("Tuesday").get(0));
     }
     @Test
     public void testDeleteUserTask() {
         Timetable timetable = new Timetable();
         Task task1 = new Task("Study", "2024-03-18", "09:00", "11:00");
         Task task2 = new Task("Exercise", "2024-03-18", "15:00", "16:30");
-        int dayOfWeek = 1; // assume Tuesday
 
         // Add tasks to the timetable
-        timetable.addUserTask(dayOfWeek, task1);
-        timetable.addUserTask(dayOfWeek, task2);
+        timetable.addUserTask("tuesday", task1);
+        timetable.addUserTask("tuesday", task2);
 
         // Delete the first task
-        timetable.deleteUserTask(dayOfWeek, 0);
+        timetable.deleteUserTask("tuesday", 0);
 
         // Check if the task is deleted
-        assertEquals(1, timetable.daysOfWeek.get(0).size());
-        assertEquals(task2, timetable.daysOfWeek.get(0).get(0));
+        assertEquals(1, timetable.getWeeklyTasks().get("tuesday").size());
+        assertEquals(task2, timetable.getWeeklyTasks().get("tuesday").get(0));
 
     }
 }

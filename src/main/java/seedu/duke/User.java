@@ -10,8 +10,8 @@ public class User {
         return name;
     }
     public void viewTimetable() {
-        for (int i = 0; i < 7; i++) {
-            timetable.printTasksOfTheDay(i);
+        for (String day : Timetable.days) {
+            timetable.printTasksOfTheDay(day);
         }
     }
 }
