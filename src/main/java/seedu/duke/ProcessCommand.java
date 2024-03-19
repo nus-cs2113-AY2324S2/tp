@@ -30,7 +30,7 @@ public class ProcessCommand {
 
         switch (action) {
         case "add":
-            ExpenditureList.addExpenditure(actionDetails);
+            ExpenditureList.addExpenditure(actionDetails,true);
             break;
         case "del":
             try {

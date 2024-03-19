@@ -1,6 +1,7 @@
 package storage;
 
 import seedu.duke.ExpenditureList;
+import seedu.duke.InvalidInputFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,7 +42,7 @@ public class Storage {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 String expenditure = processLine(line);
-                ExpenditureList.addExpenditure(expenditure);
+                ExpenditureList.addExpenditure(expenditure,false);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error" + e.getMessage());
