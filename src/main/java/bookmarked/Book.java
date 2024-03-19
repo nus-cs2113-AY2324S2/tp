@@ -21,10 +21,6 @@ public class Book {
         this.isBorrowed = false;
     }
 
-    public String getBookDescription() {
-        return this.description;
-    }
-
     @Override
     public String toString() {
         return (this.description + getBorrowedStatus());
