@@ -1,7 +1,8 @@
-package seedu.duke.Ui;
+package seedu.duke.ui;
 import java.util.Scanner;
 
 public class Ui {
+
     private static final Scanner IN = new Scanner(System.in);
 
     public String readUserInput(){
