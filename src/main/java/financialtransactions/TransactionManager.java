@@ -25,13 +25,17 @@ public class TransactionManager {
         return false;
     }
 
-    public boolean removeTransaction(int index, boolean isInflow) {
+    public boolean removeTransaction(int index) {
         transactionList.removeTransactionIndex(index);
-        if (isInflow) {
+        Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
+        String transactionType = transactionRemoved.getTransactionType();
+        if (transactionType.equals("I")) {
             return inflows.removeTransactionIndex(index);
-        } else {
+        }
+        if (transactionType.equals("O")){
             return outflows.removeTransactionIndex(index);
         }
+        return false;
     }
 
     public double getTotalBalance() {
