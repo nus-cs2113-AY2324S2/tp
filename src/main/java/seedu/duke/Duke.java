@@ -6,7 +6,7 @@ import seedu.duke.exceptions.InvalidTTMoveException;
 import static seedu.duke.TicTacToe.runTicTacToe;
 
 public class Duke {
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -41,7 +41,7 @@ public class Duke {
                         }
                     }
                 } catch (InvalidGameException e) {
-                    System.out.println("invalid game");
+                    System.out.print("invalid game");
                 }
             }
         }
