@@ -34,6 +34,11 @@ public class Ui {
         this.name = name;
     }
 
+    static void missingMessage(String parameters){
+        String message = "parameter missing! using default" ;
+        System.out.print("parameter missing! using default"+parameters);
+    }
+
     /**
      * Displays a greeting message.
      */
