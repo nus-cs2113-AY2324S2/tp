@@ -1,11 +1,14 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
+    private static final HashMap<String, Group> groups = new HashMap<>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,6 +32,19 @@ public class Duke {
                 String expense = extractExpense[0];
                 int amount = Integer.parseInt(extractExpense[1]);
                 ExpenseAdder newExpense = new ExpenseAdder(expense,amount);
+            }
+
+            if (userInput.startsWith("group")) {
+                String groupName = userInput.substring(6).trim();
+                Group group = groups.get(groupName);
+
+                if (group == null) {
+                    group = new Group(groupName);
+                    groups.put(groupName, group);
+                    System.out.println("Created New Group: " + groupName);
+                } else {
+                    System.out.println("Entering group: " + groupName);
+                }
             }
             System.out.println();
         }
