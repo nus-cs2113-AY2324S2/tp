@@ -1,6 +1,6 @@
 package ui;
 
-import transaction.Transaction;
+import transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package transaction;
+package transaction.type;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

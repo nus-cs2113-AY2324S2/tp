@@ -1,7 +1,7 @@
 package transaction;
 
 import parser.Parser;
-import transaction.Transaction;
+import transaction.type.Transaction;
 import ui.UserInterface;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package parser;
 import org.junit.jupiter.api.Test;
-import transaction.Transaction;
+import transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
