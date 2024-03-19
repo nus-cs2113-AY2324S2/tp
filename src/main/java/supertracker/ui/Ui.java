@@ -83,11 +83,13 @@ public class Ui {
     }
 
     public static void addCommandSuccess(Item item, int quantityAdded) {
+        assert quantityAdded >= 0;
         printIndent(addItemOpening(item, quantityAdded));
         printIndent(quantityMessage(item));
     }
 
     public static void removeCommandSuccess(Item item, int quantityRemoved) {
+        assert quantityRemoved >= 0;
         printIndent(removeItemOpening(item, quantityRemoved));
         printIndent(quantityMessage(item));
     }
