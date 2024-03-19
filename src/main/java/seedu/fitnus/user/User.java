@@ -161,7 +161,7 @@ public class User {
     }
 
     public void handleListEverything() {
-        System.out.println("here's what you have drank today");
+        System.out.println("here's what you have consumed today");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
