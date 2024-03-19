@@ -182,7 +182,7 @@ public class Parser {
         if (!Meal.getNutrientDetails().containsKey(infoDrinkDescription)) {
             throw new UnregisteredDrinkException();
         }
-        return command.substring(drinkIndex).trim();
+        return infoDrinkDescription;
     }
 
     public static void parseEditMeal(String command) {
