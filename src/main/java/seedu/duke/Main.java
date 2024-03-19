@@ -33,7 +33,8 @@ public class Main {
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
         createNewFile(); //Creates directory and tasks.txt file if it does not exist
-        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(); //Reads tasks from txt file
+        Map<LocalDate, List<String>> tasksFromFile = 
+                Storage.loadTasksFromFile(); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
         while (true) {
@@ -45,7 +46,8 @@ public class Main {
                 }
             }
             printWeek = true; // Reset flag for the next iteration
-            System.out.println("Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, " +
+            System.out.println("Enter 'next' for next week, 'prev' for previous week, " +
+                    "'add' to add a task, " +
                     "'update' to edit a task, " +
                     "'delete' to delete a task, " + 
                     "'month' to display the month view, " +
