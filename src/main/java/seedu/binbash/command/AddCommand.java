@@ -42,8 +42,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        return itemList.addItem(itemName, itemDescription, itemQuantity, itemExpirationDate,
+    public boolean execute() {
+        executionUiOutput = itemList.addItem(itemName, itemDescription, itemQuantity, itemExpirationDate,
                 itemSalePrice, itemCostPrice);
+        return true;
     }
 }

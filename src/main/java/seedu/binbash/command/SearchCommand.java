@@ -18,7 +18,8 @@ public class SearchCommand extends Command {
         ));
     }
 
-    public String execute() {
-        return itemList.searchItem(keyword);
+    public boolean execute() {
+        executionUiOutput = itemList.searchItem(keyword);
+        return true;
     }
 }

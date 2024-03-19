@@ -9,7 +9,8 @@ public class ListCommand extends Command {
         commandLogger.fine("Creating List Command...");
     }
 
-    public String execute() {
-        return itemList.printList(itemList.getItemList());
+    public boolean execute() {
+        executionUiOutput = itemList.printList(itemList.getItemList());
+        return true;
     }
 }
