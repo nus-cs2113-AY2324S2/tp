@@ -1,19 +1,11 @@
 package gpa;
 
 
-import seedu.duke.CantVasMain;
-import seedu.duke.Expenditure;
-import seedu.duke.ExpenditureList;
-import seedu.duke.Echo;
-import seedu.duke.ProcessCommand;
-import seedu.duke.UI;
-import storage.Storage;
-
-
-public class gpaMain {
+public class GPAMain {
 
     // Method to calculate new GPA with inputs provided as parameters
-    public static double calculateNewGPA(double currentGPA, int totalAccumulatedCredits, int numOfModules, int[] moduleCredits, String[] moduleGrades) {
+    public static double calculateNewGPA(double currentGPA, int totalAccumulatedCredits,
+                                         int numOfModules, int[] moduleCredits, String[] moduleGrades) {
         double totalPoints = currentGPA * totalAccumulatedCredits;
         int newCredits = 0;
 
