@@ -36,6 +36,18 @@ public class Duke {
                     Ui.printLine();
                     break;
 
+                case "check":
+                    Ui.printLine();
+                    Parser.checkCommand(command, list);
+                    Ui.printLine();
+                    break;
+
+                case "uncheck":
+                    Ui.printLine();
+                    Parser.uncheckCommand(command, list);
+                    Ui.printLine();
+                    break;
+
                 case "find":
                     Ui.printLine();
                     Parser.findCommand(command, list);
