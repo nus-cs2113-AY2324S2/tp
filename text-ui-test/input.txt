@@ -1,1 +1,4 @@
+add m/chicken rice s/2
+ate m/chicken rice s/2
+listMeals
 exit
