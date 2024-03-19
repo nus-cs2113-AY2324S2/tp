@@ -71,7 +71,7 @@ public class ParserTest {
 
     @Test
     public void testParseCommand_invalidDeleteCommand_throwsInvalidArgumentException() {
-        assertThrows(InvalidArgumentException.class, () -> parser.parseCommand("delete invalid"));
+        assertThrows(InvalidArgumentException.class, () -> parser.parseCommand("delete -1"));
     }
 
     @Test
