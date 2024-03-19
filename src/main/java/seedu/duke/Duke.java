@@ -17,6 +17,7 @@ public class Duke {
                 assert line != null :"Input does not exist!";
                 String[] command = line.split(" ");
                 switch (command[0].toLowerCase()) {
+                    
                 case "list":
                     Ui.printLine();
                     Parser.getList(list);
