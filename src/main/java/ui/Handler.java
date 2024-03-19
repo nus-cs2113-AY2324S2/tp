@@ -219,7 +219,8 @@ public class Handler {
         }
     }
 
-    private static void checkAndAddGymStationInput(String userInput, Gym gym) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+    private static void checkAndAddGymStationInput(String userInput, Gym gym) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
         // probably change to alfa method
         String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"
 
@@ -255,7 +256,8 @@ public class Handler {
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      */
-    public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+    public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
         // input that I will get is something like new /e:gym /n: 2
         // use get index method that alfattih will push later
 
