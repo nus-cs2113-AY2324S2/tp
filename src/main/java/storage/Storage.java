@@ -26,6 +26,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error creating new file: " + e.getMessage());
         }
+        assert directory.exists();
     }
 
     public static ExpenditureList readExpenditureFile() {

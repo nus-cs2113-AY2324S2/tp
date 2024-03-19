@@ -13,6 +13,7 @@ public class ExpenditureList {
     }
 
     public static void listExpensesByMonth(String monthYear) {
+        assert monthYear.length() == 7;
         if (!monthYear.matches("\\d{2}\\.\\d{4}")) {
             System.out.println("Month and year format incorrect! Please use MM.yyyy format.");
             return;
@@ -126,6 +127,7 @@ public class ExpenditureList {
                 expenditureList.remove(expenditureList.size() - 1); // Remove the last element
                 expenditureCount--; // Decrement the count of expenditures
             }
+            assert expenditureList.isEmpty();
             System.out.println("I have cleared the whole list!");
         }
     }
@@ -137,6 +139,7 @@ public class ExpenditureList {
         }
 
         System.out.println("Current Expenses:");
+        assert !expenditureList.isEmpty();
         for (int i = 0; i < expenditureList.size(); i++) {
             Expenditure expenditure = expenditureList.get(i);
             System.out.println((i + 1) + ". " + expenditure.getDescription() +
