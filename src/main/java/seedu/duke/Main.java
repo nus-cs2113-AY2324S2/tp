@@ -32,8 +32,8 @@ public class Main {
         boolean printWeek = true; // Flag to control printing of the week view
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
-        createNewFile(); //Creates directory and tasks.txt file if it does not exist
-        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(); //Reads tasks from txt file
+        createNewFile(Storage.FILE_PATH); //Creates directory and tasks.txt file if it does not exist
+        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
         while (true) {
