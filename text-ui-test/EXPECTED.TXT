@@ -1,5 +1,6 @@
 __________________________________________________
 Hello! This is your CEG Future Academic Planner!
 What can I do for you?
-INVALID COMMAND
+Hello JAMES GOSLING!
+What would you like to do today?
 Bye. Enjoy your studies!
