@@ -1,1 +1,11 @@
+new n/cake q/50 p/15.60
+new n/blueberry p/10 q/200
+new n/hello
+list p/ q/
+update n/cake q/99
+update n/blueberry p/18.82 q/54
+list q/
+list p/
+delete n/cake
+list
 quit
