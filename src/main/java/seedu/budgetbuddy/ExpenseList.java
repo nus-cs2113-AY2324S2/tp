@@ -6,13 +6,20 @@ import java.util.List;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories;
+    public ExpenseList(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
+        this.categories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+    }
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
@@ -26,6 +33,18 @@ public class ExpenseList {
 
     public List<Expense> getExpenses() {
         return expenses;
+    }
+
+    public ArrayList<Expense> filterExpenses(String description, Double minAmount, Double maxAmount) {
+        String descriptionInLowerCase = description.toLowerCase();
+        ArrayList<Expense> filteredExpenses = new ArrayList<>(this.expenses.stream()
+                .filter(expense -> (expense.getDescription().toLowerCase().contains(descriptionInLowerCase)))
+                .filter(expense -> (minAmount == null || expense.getAmount() > minAmount))
+                .filter(expense -> (maxAmount == null || expense.getAmount() < maxAmount))
+                .collect(Collectors.toList()));
+
+        return filteredExpenses;
+
     }
 
     public void listExpenses(String filterCategory) {

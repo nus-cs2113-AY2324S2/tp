@@ -5,7 +5,6 @@ import seedu.budgetbuddy.command.Command;
 import java.util.Scanner;
 
 public class BudgetBuddy {
-
     private Ui ui;
     private Parser parser;
     private ExpenseList expenses;

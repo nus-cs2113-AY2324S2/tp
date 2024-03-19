@@ -25,7 +25,6 @@ Example of usage:
 
 `edit savings c/Entertainment i/3 a/300`
 
-
 ### Edit Expenses: `edit expense`
 Edit expenses that have been added previously.
 
@@ -108,10 +107,26 @@ Example Usage:
 `list expenses Transport`
 `list expenses Housing`
 
+### Finding expenses : `find expenses`
+Finds expenses based on their description or amount
+
+Format : `find expenses [d/DESCRIPTION] [morethan/MINAMOUNT] [lessthan/MAXAMOUNT]`
+
+* `DESCRIPTION`, `MINAMOUNT`, `MAXAMOUNT` can be used in any order and combination
+* `DESCRIPTION` is the description associated with the expenses the user wishes to find
+* `MINAMOUNT` is the filter for expenses with amounts higher than specified value
+* `MAXAMOUNT` is the filter for expenses with amounts lower than specified value
+* At least one filter must be provided
+
+Examples of usage :
+
+`find expenses d/coffee` : Finds all expenses with the word "coffee" in the description
+`find expenses d/coffee morethan/200` : Finds all expenses with the word "coffee" and amount higher than $200
 
 ## Command Summary
 * Edit Expenses `edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION`
 * Edit Savings `edit savings c/CATEGORY i/INDEX a/AMOUNT`
 * List Expenses: `list expenses CATEGORY`
 * List Savings: `list savings CATEGORY`
+*  Find Expenses `find expenses `
 
