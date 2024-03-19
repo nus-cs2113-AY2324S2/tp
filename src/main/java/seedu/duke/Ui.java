@@ -28,6 +28,8 @@ public class Ui {
 
     public void helpMessage() {
         System.out.println(
+            "To take a look at potential restaurants or activities, simply send me the following: \n" +
+            "'list'\n\n" +
             "To generate a randomised date idea, simply send me the following: \n" +
             "'idea'\n\n" +
             "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
