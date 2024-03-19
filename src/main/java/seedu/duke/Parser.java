@@ -45,7 +45,12 @@ public class Parser {
             }
             return new FindFavouritesCommand(arguments);
         case "itinerary":
-            return new GenerateItineraryCommand();
+            if (arguments.trim().isEmpty()) {
+                throw new FlirtForkEmptyException();
+            }
+            return new GenerateItineraryCommand(arguments);
+        case "idea":
+            return new GenerateIdeaCommand();
         case "exit":
             return new ExitCommand();
         case "help":

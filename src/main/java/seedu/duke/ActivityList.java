@@ -19,4 +19,16 @@ public class ActivityList {
         int activityIndex = random.nextInt(9);
         return activities.get(activityIndex);
     }
+
+    public Activity getFilteredActivity(String preferredLocation, String preferredPrice) {
+        ArrayList<Activity> filteredActivities = new ArrayList<>();
+        for (Activity eachActivity : activities) {
+            if (eachActivity.location.equals(preferredLocation) && eachActivity.price.equals(preferredPrice)) {
+                filteredActivities.add(eachActivity);
+            }
+        }
+        Random random = new Random();
+        int filteredActivityIndex = random.nextInt(filteredActivities.size());
+        return filteredActivities.get(filteredActivityIndex);
+    }
 }
