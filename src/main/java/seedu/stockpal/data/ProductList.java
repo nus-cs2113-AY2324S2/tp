@@ -83,10 +83,6 @@ public class ProductList {
         return products.get(i);
     }
 
-    public Quantity getProductQuantity(Integer productIndex) {
-        Product updatedProduct = products.get(productIndex);
-        return updatedProduct.getQuantity();
-    }
     public List<Product> getProducts() {
         return products;
     }
