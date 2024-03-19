@@ -45,6 +45,7 @@ public class Parser {
             double inflowAmount = 0;
             String inflowDate = null;
             String inflowTime = null;
+            String inflowCategory = null;
 
             for (String part : commandParts) {
                 if (part.startsWith("n/")) {
@@ -55,11 +56,13 @@ public class Parser {
                     inflowDate = part.substring(2);
                 } else if (part.startsWith("t/")) {
                     inflowTime = part.substring(2);
+                } else if (part.startsWith("c/")) {
+                    inflowCategory = part.substring(2);
                 }
             }
             String inflowDateTime = inflowDate + " " + inflowTime;
-
             Inflow inflow = new Inflow(inflowName, inflowAmount, inflowDateTime);
+            inflow.setCategory(Inflow.Category.valueOf(inflowCategory.toUpperCase()));
             manager.addTransaction(inflow);
             ui.printMessage("Ok. Added inflow");
             return "Ok. Added inflow";
@@ -68,6 +71,7 @@ public class Parser {
             double outflowAmount = 0;
             String outflowDate = null;
             String outflowTime = null;
+            String outflowCategory = null;
 
             for (String part : commandParts) {
                 if (part.startsWith("n/")) {
@@ -78,11 +82,14 @@ public class Parser {
                     outflowDate = part.substring(2);
                 } else if (part.startsWith("t/")) {
                     outflowTime = part.substring(2);
+                } else if (part.startsWith("c/")) {
+                    outflowCategory = part.substring(2);
                 }
             }
             String outflowDateTime = outflowDate + " " + outflowTime;
 
             Outflow outflow = new Outflow(outflowName, outflowAmount, outflowDateTime);
+            outflow.setCategory(Outflow.Category.valueOf(outflowCategory.toUpperCase()));
             manager.addTransaction(outflow);
             ui.printMessage("Ok. Added outflow");
             return "Ok. Added outflow";
@@ -90,9 +97,6 @@ public class Parser {
         case "delete-outflow":
             String index = commandParts[1];
             manager.removeTransaction(Integer.parseInt(index));
-            //manager.removeTransaction(1, true);
-            //break;
-            //manager.removeTransaction(1, false);
             break;
         case "view-history":
             String numTransactionsString = null;
