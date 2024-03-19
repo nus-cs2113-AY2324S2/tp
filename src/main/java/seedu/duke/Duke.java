@@ -41,8 +41,8 @@ public class Duke {
                             throw new RuntimeException(e);
                         }
                     }
-                } catch (InvalidGameException e) {
-                    System.out.print("invalid game");
+                } catch (InvalidGameException | NullPointerException e) {
+                    ui.println("invalid game");
                 }
             }
         }
