@@ -14,6 +14,7 @@ import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.ViewGpaCommand;
+import seedu.duke.command.InitCommand;
 
 public class Parser {
 
@@ -88,8 +89,8 @@ public class Parser {
 
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
-        // return new initCommand(args)
-        return new InvalidCommand();
+        String name = args.getOrDefault("name", "NAME_ERROR");
+        return new InitCommand(name);
     }
 
     private static Command gpaCommand(Map<String, String> args) {
