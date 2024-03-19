@@ -25,19 +25,16 @@ public class PlaNus {
      */
     public void run() {
         Ui.printLogo();
-        Path filePath = Paths.get(Storage.USER_TIMETABLE_FILE_PATH);
 
-        if (Files.exists(filePath)) {
-            timetable = Storage.loadTimetable("myTimetable");
-        }
-        else {
-            timetable = new Timetable();
-        }
+        timetable = Storage.loadTimetable(Storage.USER_TIMETABLE_FILE_NAME);
 
         while (!isExit) {
             String line = Ui.getUserCommand();
-            isExit = Parser.parseCommand(line, timetable);
-            Storage.writeToFile(timetable);
+            try {
+                isExit = Parser.parseCommand(line, timetable);
+            } catch (Exception e) {
+                Ui.printErrorMessage(e.getMessage());
+            }
         }
         Ui.printExit();
     }

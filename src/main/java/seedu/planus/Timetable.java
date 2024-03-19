@@ -12,7 +12,7 @@ public class Timetable {
      * Constructor to initialise the courses attribute with an empty 2D ArrayList
      */
     public Timetable() {
-        courses = new ArrayList<ArrayList<Course>>();
+        courses = new ArrayList<>();
     }
 
     /**
@@ -86,25 +86,30 @@ public class Timetable {
     }
 
     public void addGrade(String courseCode, String grade) {
-        for (int i = 0; i < courses.size(); i++) {
-            for (int j = 0; j < courses.get(i).size(); j++) {
-                String currCourseCode = courses.get(i).get(j).getCourseCode();
+        for (ArrayList<Course> courseList : courses) {
+            for (Course course : courseList) {
+                String currCourseCode = course.getCourseCode();
                 if (currCourseCode.equalsIgnoreCase(courseCode)) {
-                    courses.get(i).get(j).setGrade(grade);
+                    course.setGrade(grade);
+                    if (course.getLetterGrade() == null) {
+                        Ui.printInvalidInputGrade();
+                        return;
+                    }
                     Ui.printSuccessToAddGrade(currCourseCode);
                     return;
                 }
             }
         }
+
         Ui.printFailedToAddGrade();
     }
 
     public void removeGrade(String courseCode) {
-        for (int i = 0; i < courses.size(); i++) {
-            for (int j = 0; j < courses.get(i).size(); j++) {
-                String currCourseCode = courses.get(i).get(j).getCourseCode();
+        for (ArrayList<Course> courseList : courses) {
+            for (Course course : courseList) {
+                String currCourseCode = course.getCourseCode();
                 if (currCourseCode.equalsIgnoreCase(courseCode)) {
-                    courses.get(i).get(j).setGrade(null);
+                    course.setGrade(null);
                     Ui.printSuccessToRemoveGrade(currCourseCode);
                     return;
                 }
@@ -118,7 +123,7 @@ public class Timetable {
         for (int i = 0; i < courses.size(); i ++) {
             if (courses.get(i).get(0).getYear() == year && courses.get(i).get(0).getTerm() == term) {
                 index = i;
-                return index;
+                break;
             }
         }
         return index;
@@ -147,8 +152,11 @@ public class Timetable {
 
                 for (Course course : courses.get(index)) {
                     plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
+                    if (course.getLetterGrade() == null) {
+                        continue;
+                    }
                     termMCs += course.getModularCredit();
-                    termGrade += course.getNumberGrade();
+                    termGrade += course.getNumberGrade() * course.getModularCredit();
                 }
 
                 double termGPA = 0.00;
@@ -203,8 +211,12 @@ public class Timetable {
 
             for (Course course : courses.get(index)) {
                 plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
+                if (course.getLetterGrade() == null) {
+                    continue;
+                }
+
                 termMCs += course.getModularCredit();
-                termGrade += course.getNumberGrade();
+                termGrade += course.getNumberGrade() * course.getModularCredit();
             }
 
             double termGPA = 0.00;
@@ -240,11 +252,11 @@ public class Timetable {
 
         for (Course course : courses.get(index)) {
             plan.append("  ").append(course.getGrade()).append(System.lineSeparator());
-            if (course.getGrade() == null) {
+            if (course.getLetterGrade() == null) {
                 continue;
             }
             termMCs += course.getModularCredit();
-            termGrade += course.getNumberGrade();
+            termGrade += course.getNumberGrade() * course.getModularCredit();
         }
 
         double termGPA = 0.00;

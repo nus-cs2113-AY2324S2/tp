@@ -26,7 +26,7 @@ public class Course {
         this.modularCredit = modularCredit;
         this.year = year;
         this.term = term;
-        this.grade = null;
+        this.grade = new Grade();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Course {
     }
 
     public void setGrade(String letterGrade) {
-        grade = new Grade(letterGrade);
+        grade.setLetterGrade(letterGrade);
     }
 
     public String getCourseCode() {
