@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -27,10 +26,6 @@ public class Storage {
         records.add(record);
     }
 
-    public static void removeRecord(Record record) {
-        records.remove(record);
-    }
-
     public static void clearRecords() {
         records.clear();
     }
@@ -43,7 +38,6 @@ public class Storage {
      */
     public static void processLine(String line) throws Exception{
         String[] words = line.split(" ");
-        String suffixWord = line.substring(words[0].length() + 1);
 
         if (words.length != 3 ) {
             throw new Exception();
@@ -54,7 +48,7 @@ public class Storage {
         double accuracy = Double.parseDouble(words[2]);
 
         Record record = new Record(dateTime, speed, accuracy);
-        records.add(record);
+        addRecord(record);
     }
 
     /**
@@ -68,10 +62,10 @@ public class Storage {
                     processLine(line);
                 }
             } catch (Exception e) {
-                records.clear();
+                clearRecords();
             }
         } catch (IOException e) {
-            records.clear();
+            clearRecords();
         }
     }
 

@@ -4,12 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Record {
-    private LocalDateTime dateTime;
-
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private double speed;
+    private LocalDateTime dateTime;
 
+    private double speed;
     private double accuracy;
 
     public Record(LocalDateTime dateTime, double speed, double accuracy) {
@@ -19,7 +18,7 @@ public class Record {
     }
 
     String writeLine() {
-        return dateTime.format(formatter) + " " + speed + " " + accuracy;
+        return getDateTime().format(formatter) + " " + getSpeed() + " " + getAccuracy();
     }
 
     public double getSpeed() {
