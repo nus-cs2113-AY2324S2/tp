@@ -9,7 +9,7 @@ import data.TaskManager;
 public class UiRenderer {
     private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-    private static final int SPACE_COUNT = 15;
+    private static final int SPACE_COUNT = 10;
     private static final String SINGLE_HORIZONTAL_DIVIDER = "+" + "-".repeat(SPACE_COUNT + 2);
     private static final String END_HORIZONTAL_DIVIDER = "+";
     private static final String VERTICAL_DIVIDER = "|";
@@ -44,6 +44,7 @@ public class UiRenderer {
 
         printHorizontalDivider();
         int maxTasks = getMaxTasks(startOfWeek, taskManager);
+        assert maxTasks >= 0 : "maxTasks should be non-negative";
         printWeeksTasks(startOfWeek, maxTasks, taskManager);
         printHorizontalDivider();
     }
