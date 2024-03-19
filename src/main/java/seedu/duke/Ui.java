@@ -13,9 +13,9 @@ public class Ui {
      */
     public static void printGreeting() {
         printLine();
-        System.out.println(" ____  _      _      _  _____  ____  ____  _     _____ _    \n" +
-                "/  _ \\/ \\__/|/ \\  /|/ \\/__ __\\/  __\\/  _ \\/ \\ |\\/  __// \\   \n" +
-                "| / \\|| |\\/||| |\\ ||| |  / \\  |  \\/|| / \\|| | //|  \\  | |   \n" +
+        System.out.println(" ____  _      _      _  _____  ____  ____  _     _____ _\n" +
+                "/  _ \\/ \\__/|/ \\  /|/ \\/__ __\\/  __\\/  _ \\/ \\ |\\/  __// \\\n" +
+                "| / \\|| |\\/||| |\\ ||| |  / \\  |  \\/|| / \\|| | //|  \\  | |\n" +
                 "| \\_/|| |  ||| | \\||| |  | |  |    /| |-||| \\// |  /_ | |_/\\\n" +
                 "\\____/\\_/  \\|\\_/  \\|\\_/  \\_/  \\_/\\_\\\\_/ \\|\\__/  \\____\\\\____/)");
         System.out.println("Hello");
@@ -47,8 +47,9 @@ public class Ui {
         System.out.println("Warning! " + exception.getMessage());
     }
 
-
-
-
-
+    public static void helpCommand(){
+        System.out.println("These are the available commands!");
+        System.out.println("1. list\n2. add <insert travel activity>\n3. delete <insert activity number>\n" +
+                           "4. find <insert keyword>\n5. help\n6. bye\n");
+    }
 }
