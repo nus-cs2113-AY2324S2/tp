@@ -1,8 +1,8 @@
-package transaction;
+package budgetbuddy.transaction;
 
-import parser.Parser;
-import transaction.type.Transaction;
-import ui.UserInterface;
+import budgetbuddy.parser.Parser;
+import budgetbuddy.transaction.type.Transaction;
+import budgetbuddy.ui.UserInterface;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
-package transaction.type;
+package budgetbuddy.transaction.type;
 
 import org.junit.jupiter.api.Test;
-import transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package transaction.type;
+package budgetbuddy.transaction.type;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

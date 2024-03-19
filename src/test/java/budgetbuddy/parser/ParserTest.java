@@ -1,6 +1,6 @@
-package parser;
+package budgetbuddy.parser;
 import org.junit.jupiter.api.Test;
-import transaction.type.Transaction;
+import budgetbuddy.transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

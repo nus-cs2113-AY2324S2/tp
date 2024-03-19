@@ -1,4 +1,4 @@
-package transaction.type;
+package budgetbuddy.transaction.type;
 
 public class Expense extends Transaction {
 

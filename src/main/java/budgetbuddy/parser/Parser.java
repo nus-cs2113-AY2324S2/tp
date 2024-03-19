@@ -1,6 +1,6 @@
-package parser;
+package budgetbuddy.parser;
 
-import transaction.type.Transaction;
+import budgetbuddy.transaction.type.Transaction;
 
 public class Parser {
 

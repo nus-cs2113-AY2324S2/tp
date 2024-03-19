@@ -1,6 +1,6 @@
-package ui;
+package budgetbuddy.ui;
 
-import transaction.type.Transaction;
+import budgetbuddy.transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

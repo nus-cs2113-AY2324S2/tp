@@ -1,5 +1,7 @@
-import transaction.TransactionList;
-import ui.UserInterface;
+package budgetbuddy;
+
+import budgetbuddy.transaction.TransactionList;
+import budgetbuddy.ui.UserInterface;
 
 import java.util.Scanner;
 
