@@ -5,13 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class NewsOnTheGo {
 
     public static final String FILENAME = "data/sampleNews.txt";
-    private static Logger logger = Logger.getLogger("NewsOnTheGo");
+    private static final Logger logger = Logger.getLogger("NewsOnTheGo");
 
     /**
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
