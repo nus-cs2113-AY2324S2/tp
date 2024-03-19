@@ -6,21 +6,19 @@ public class GPACommand {
 
     public static void processGPACommand() {
 
-        while (true) { // Changed to an infinite loop to handle input until "exit" is encountered
+        while (true) {
             System.out.println("Enter 'GPA' to start or 'exit' to exit to main menu:");
             String command = ui.getUserCommand();
 
-            // Check for exit command immediately
             if ("exit".equalsIgnoreCase(command)) {
                 System.out.println("Exiting the GPA calculator. Thank you for using it!");
-                break; // Exit the loop and method, ending the program or going back to the main menu
+                break;
             } else if (!"GPA".equalsIgnoreCase(command)) {
-                // Handle invalid input without changing the loop control variable
-                System.out.println("Invalid input. Please input 'GPA' to start or 'exit' to exit.");
-                continue; // Skip the rest of the loop iteration and prompt again
+                System.out.println("Invalid input. " +
+                        "Please input 'GPA' to start or 'exit' to exit.");
+                continue;
             }
 
-            // If we reach this point, "GPA" was entered
             System.out.println("Enter your current GPA and the number of MCs taken" +
                     " (format: GPA_SCORE /NUMBER_OF_MCS):");
             String gpaInput = ui.getUserCommand();
@@ -32,6 +30,17 @@ public class GPACommand {
             double currentGPA = Double.parseDouble(gpaInput.split("/")[0].trim());
             int totalAccumulatedCredits = Integer.parseInt(gpaInput.split("/")[1].trim());
 
+            // Input validation for negative numbers
+            if (currentGPA < 0 || currentGPA > 5 || totalAccumulatedCredits < 0) {
+                System.out.println("Invalid input: GPA score should be between 0 and 5," +
+                        " and MCs should not be negative.");
+                continue; // Skip the rest of the loop iteration and prompt again
+            }
+
+            // Assertions for additional validation
+            assert currentGPA >= 0 && currentGPA <= 5 : "GPA should be between 0 and 5.";
+            assert totalAccumulatedCredits >= 0 : "MCs should not be negative.";
+
             System.out.println("Enter the number of mods you want to add (format: NUMBER_OF_MODS):");
             String modsInput = ui.getUserCommand();
             if ("exit".equalsIgnoreCase(modsInput.trim())) {
@@ -40,6 +49,14 @@ public class GPACommand {
             }
 
             int numOfModules = Integer.parseInt(modsInput.trim());
+            if (numOfModules < 0) {
+                System.out.println("Invalid input: Number of modules cannot be negative.");
+                continue;
+            }
+
+            // Assertion for the number of modules
+            assert numOfModules >= 0 : "Number of modules should not be negative.";
+
             int[] moduleCredits = new int[numOfModules];
             String[] moduleGrades = new String[numOfModules];
 
@@ -49,7 +66,7 @@ public class GPACommand {
                 String modInput = ui.getUserCommand();
                 if ("exit".equalsIgnoreCase(modInput.trim())) {
                     System.out.println("Exiting the GPA calculator. Thank you for using it!");
-                    return; // Exit the method entirely, ending the program or going back to the main menu
+                    return;
                 }
 
                 moduleCredits[i] = Integer.parseInt(modInput.split("/")[0].trim());
@@ -59,7 +76,6 @@ public class GPACommand {
             double updatedGPA = GPAMain.calculateNewGPA(currentGPA,
                     totalAccumulatedCredits, numOfModules, moduleCredits, moduleGrades);
             System.out.printf("Your updated GPA is: %.2f\n", updatedGPA);
-            // Loop will continue after calculation, allowing for new inputs or exit
         }
     }
 }
