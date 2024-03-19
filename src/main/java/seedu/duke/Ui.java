@@ -1,6 +1,7 @@
 package seedu.duke;
 
-import com.jakewharton.fliptables.FlipTableConverters;
+
+import com.bethecoder.ascii_table.ASCIITable;
 import seedu.duke.exceptions.CustomException;
 
 import java.util.Scanner;
@@ -69,8 +70,8 @@ public class Ui {
         printLine();
     }
 
-    public void printTable(String[] headers, Object[][] data) {
-        System.out.println(FlipTableConverters.fromObjects(headers, data));
+    public void printTable(String[] headers, String[][] data) {
+        System.out.println(ASCIITable.getInstance().getTable(headers, data));
     }
 
 }

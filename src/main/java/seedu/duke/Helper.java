@@ -12,11 +12,11 @@ public class Helper {
         commandList.add(new Command("explain", "View explaination for the solution", "explain [QUESTION_INDEX]"));
     }
 
-    public static Object[][] listAllCommands() {
+    public static String[][] listAllCommands() {
         int commandNum = commandList.size();
-        Object[][] tableData = new Object[commandNum][];
+        String[][] tableData = new String[commandNum][];
         for (int i = 0; i < commandNum; i++) {
-            tableData[i] = new Object[]{
+            tableData[i] = new String[]{
                 commandList.get(i).getCommandName(),
                 commandList.get(i).getCommandFunction(),
                 commandList.get(i).getCommandUsage()
