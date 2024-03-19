@@ -30,4 +30,6 @@ public class TravelActivity {
         return travelActivity;
     }
 
+    public boolean getTaskStatus() {return taskIsDone;}
+
 }
