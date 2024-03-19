@@ -11,10 +11,25 @@ import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
 
+    private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
+    protected ArrayList<String> expenseCategories;
+    protected ArrayList<String> savingsCategories;
+
+    public Parser() {
+        this.expenseCategories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.savingsCategories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
+    }
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -71,34 +86,94 @@ public class Parser {
     }
 
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
+        assert input != null : "Input should not be null";
+        assert !input.isEmpty() : "Input should not be empty";
+
         String[] parts = input.split(" ");
+        assert parts.length >= 1 : "At least one part should be present in the input";
+
         String action = parts[0];
+        assert !action.isEmpty() : "Action should not be empty";
 
         switch (action) {
-            case "list":
-                if (parts.length == 2) {
-                    // List expenses or savings
-                    String listType = parts[1];
-                    if (listType.equalsIgnoreCase("expense")) {
-                        return new ListExpenseCommand(expenseList);
-                    } else if (listType.equalsIgnoreCase("savings")) {
-                        return new ListSavingsCommand(savingList, expenseList);
-                    }
-                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expense")) {
-                    String filterCategory = parts[2];
-                    return new ListExpenseCommand(expenseList, filterCategory);
-                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
-                    String filterCategory = parts[2];
-                    return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
-                } else {
-                    return null;
+        case "list":
+            if (parts.length == 2) {
+                // List expenses or savings
+                String listType = parts[1];
+                assert !listType.isEmpty() : "List type should not be empty";
+
+                if (listType.equalsIgnoreCase("expenses")) {
+                    return new ListExpenseCommand(expenseList);
+                } else if (listType.equalsIgnoreCase("savings")) {
+                    return new ListSavingsCommand(savingList, expenseList);
                 }
-                break;
-            // Add, edit, delete, and other commands...
-            default:
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
+                String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
+                return new ListExpenseCommand(expenseList, filterCategory);
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
+                String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
+                return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
+            } else {
                 return null;
+            }
+            break;
+
+        default:
+            return null;
         }
         return null;
+    }
+
+    private boolean isValidExpenseCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : expenseCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidSavingsCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : savingsCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -231,6 +306,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid Amount. Amount should be a numerical value.");
                     return null;
                 }
             } else if (part.startsWith("d/")) {
@@ -261,6 +337,7 @@ public class Parser {
                     index = Integer.parseInt(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid index format
+                    System.out.println("Invalid index");
                     return null;
                 }
             } else if (part.startsWith("a/")) {
@@ -268,6 +345,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid amount. Amount should be a numerical value");
                     return null;
                 }
             }
@@ -284,32 +362,57 @@ public class Parser {
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
         String[] parts = input.split("i/", 2);
-        try {
-            String indexAsString = parts[1].trim();
-            int index = Integer.parseInt(indexAsString) - 1;
-            return new DeleteExpenseCommand(expenses, index);
-        } catch (NumberFormatException e) {
+        // Check if the input format is correct (i.e., contains "i/")
+        if (parts.length < 2) {
+            System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
             return null;
         }
 
+        try {
+            int index = Integer.parseInt(parts[1].trim()) - 1;
+            // Check if the index is within the bounds of the expense list.
+            if (index < 0 || index >= expenses.size()) {
+                System.out.println("Error: Index is out of bounds.");
+                return null;
+            }
+            // If the index is valid, return a new DeleteExpenseCommand.
+            return new DeleteExpenseCommand(expenses, index);
+        } catch (NumberFormatException e) {
+            // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
+            System.out.println("Error: Index is not a valid number.");
+            return null;
+        }
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
         String description = input.replace("reduce", "").trim();
 
-        if (description.contains("i/") && description.contains("a/")) {
-            String[] parts = description.split("i/|a/", 3);
+        if(description.contains("i/") && description.contains("a/")) {
+            try {
+                String[] parts = description.split("i/|a/", 3);
 
-            String indexToReduceAsString = parts[1].trim();
-            String amountToReduceAsString = parts[2].trim();
-            int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
-            double amountToReduce = Double.parseDouble(amountToReduceAsString);
+                String indexToReduceAsString = parts[1].trim();
+                String amountToReduceAsString = parts[2].trim();
+                int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
+                double amountToReduce = Double.parseDouble(amountToReduceAsString);
 
-            return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+                // Validate the index range.
+                if (indexToReduce < 0 || indexToReduce >= savings.size()) {
+                    System.out.println("Error: Index is out of bounds.");
+                    return null;
+                }
+
+                return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+            } catch (NumberFormatException e){
+                // Catch and handle incorrect number formats for index or amount.
+                System.out.println("Error: Index and amount must be valid numbers.");
+                return null;
+            }
+        } else {
+            // Handle the case where the input does not contain the required markers.
+            System.out.println("Error: Invalid command format. Expected format: reduce i/<index> a/<amount>");
+            return null;
         }
-
-        return null;
-
     }
 
     /**
