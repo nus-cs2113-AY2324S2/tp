@@ -1,116 +1,44 @@
 package longah;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+import longah.node.Group;
+import longah.util.MemberList;
+import longah.util.TransactionList;
+import longah.util.Subtransaction;
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 /**
  * LongAh class manages debts between members.
  */
 public class LongAh {
-    private Map<String, Member> members;
-    private TransactionList transactions;
+    private static MemberList members;
+    private static TransactionList transactions;
+    private static Group group;
     private Scanner scanner;
 
     /**
      * Constructs a new LongAh instance.
      */
     public LongAh() {
-        this.members = new HashMap<>();
-        this.transactions = new TransactionList();
         this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Adds a debt between two members.
-     *
-     * @param person1 The name of the first person.
-     * @param amount  The amount of the debt.
-     * @param person2 The name of the second person.
-     */
-    public void addDebt(String person1, double amount, String person2) {
-        Member from = getOrCreateMember(person1);
-        Member to = getOrCreateMember(person2);
-        transactions.add(new Transaction(from, to, amount));
     }
 
     /**
      * Lists all debts between members.
      */
-    public void listAllDebts() {
-        Map<String, Double> balances = transactions.calculateBalances();
-
-        // Display simplified debts
-        boolean hasDebts = false;
-        for (String name : balances.keySet()) {
-            double amount = balances.get(name);
-            if (amount != 0) {
-                String formattedAmount = String.format("%.2f", Math.abs(amount));
-                String otherPerson = getOtherPerson(name);
-                if (amount > 0 && balances.containsKey(otherPerson) && balances.get(otherPerson) == -amount) {
-                    System.out.println(otherPerson + " owes " + name + " $" + formattedAmount);
-                    hasDebts = true;
-                } else if (amount < 0 && balances.containsKey(otherPerson) && balances.get(otherPerson) == -amount) {
-                    // Skip, as the other person already owes this person
-                } else {
-                    System.out.println(name + " owes " + otherPerson + " $" + formattedAmount);
-                    hasDebts = true;
-                }
-            }
+    public void listAllDebts() throws LongAhException {
+        if (members.getMemberListSize() == 0) {
+            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
         }
+        ArrayList<Subtransaction> subtransactions = members.solveTransactions();
 
-        if (!hasDebts) {
-            System.out.println("No debts, Huat Ah!");
+        System.out.println("Best Way to Solve Debts:");
+        for (Subtransaction subtransaction : subtransactions) {
+            System.out.println(subtransaction);
         }
-    }
-
-    /**
-     * Gets the other person involved in a transaction.
-     *
-     * @param name The name of the person.
-     * @return The name of the other person.
-     */
-    private String getOtherPerson(String name) {
-        return transactions.getOtherPerson(name);
-    }
-
-    /**
-     * Deletes a debt transaction by index.
-     *
-     * @param index The index of the transaction to delete.
-     */
-    public void deleteDebt(int index) {
-        transactions.remove(index);
-    }
-
-    /**
-     * Finds debts involving a specific person.
-     *
-     * @param person The name of the person to find debts for.
-     */
-    public void findDebts(String person) {
-        for (Transaction transaction : transactions.getTransactions()) {
-            if (transaction.getInvolves(person)) {
-                System.out.println(transaction);
-            }
-        }
-    }
-
-    /**
-     * Clears all debts.
-     */
-    public void clearAllDebts() {
-        transactions.clear();
-    }
-
-    /**
-     * Gets or creates a member with the given name.
-     *
-     * @param name The name of the member.
-     * @return The Member object.
-     */
-    private Member getOrCreateMember(String name) {
-        return members.computeIfAbsent(name, Member::new);
     }
 
     /**
@@ -121,52 +49,72 @@ public class LongAh {
     public static void main(String[] args) {
         System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
+        try {
+            group = new Group();
+            members = group.getMemberList();
+            transactions = group.getTransactionList();
+        } catch (LongAhException e) {
+            LongAhException.printException(e);
+        }
+
         while (true) {
-            System.out.println("Enter command:");
-            if (!app.scanner.hasNextLine()) {
-                return;
-            }
-            String command = app.scanner.nextLine();
-            String[] parts = command.split(" ");
-            switch (parts[0]) {
-            case "add":
-                if (parts.length == 4 && parts[1].startsWith("p/")
-                    && parts[2].startsWith("a/") && parts[3].startsWith("p/")) {
-                    String person1 = parts[1].substring(2);
-                    double amount = Double.parseDouble(parts[2].substring(2));
-                    String person2 = parts[3].substring(2);
-                    app.addDebt(person1, amount, person2);
-                } else {
-                    System.out.println("Invalid command format. Use 'add p/PERSON1 a/AMOUNT p/PERSON2'");
+            try {
+                System.out.print("Enter command: ");
+                if (!app.scanner.hasNextLine()) {
+                    return;
                 }
-                break;
-            case "list":
-                app.listAllDebts();
-                break;
-            case "delete":
-                if (parts.length == 2) {
-                    int index = Integer.parseInt(parts[1]);
-                    app.deleteDebt(index);
-                } else {
-                    System.out.println("Invalid command format. Use 'delete INDEX'");
+                String command = app.scanner.nextLine();
+                String[] parts = command.split(" ", 2);
+                switch (parts[0]) {
+                case "add":
+                    transactions.addTransaction(parts[1], members);
+                    group.updateTransactionSolution();
+                    group.saveAllData();
+                    break;
+                case "listdebts":
+                    app.listAllDebts();
+                    break;
+                case "listtransactions":
+                    System.out.println(transactions.listTransactions());
+                    break;
+                case "delete":
+                    transactions.remove(parts);
+                    break;
+                case "findpayment":
+                    System.out.println(transactions.findTransactions(parts));
+                    break;
+                case "finddebt":
+                    System.out.println(transactions.findDebts(parts));
+                    break;
+                case "clear":
+                    transactions.clear();
+                    break;
+                case "addmember":
+                    if (parts.length == 2) {
+                        String name = parts[1];
+                        members.addMember(name);
+                        group.saveMembersData();
+                    } else {
+                        System.out.println("Invalid command format. Use 'addmember NAME'");
+                    }
+                    break;
+                case "listmembers":
+                    members.listMembers();
+                    break;
+                case "settleup":
+                    group.settleUp(parts[1]);
+                    group.saveAllData();
+                    break;
+                case "exit":
+                    System.exit(0);
+                    return;
+                default:
+                    System.out.println("Invalid command. Use 'add', 'listdebts', 'listtransactions'," +
+                            " 'delete', 'findpayment', 'finddebt', 'clear', or 'addmember'" +
+                            ", 'exit'.");
                 }
-                break;
-            case "find":
-                if (parts.length == 2) {
-                    String person = parts[1];
-                    app.findDebts(person);
-                } else {
-                    System.out.println("Invalid command format. Use 'find PERSON'");
-                }
-                break;
-            case "clear":
-                app.clearAllDebts();
-                break;
-            case "exit":
-                System.exit(0);
-                return;
-            default:
-                System.out.println("Invalid command. Use 'add', 'list', 'delete', 'find', 'clear', or 'exit'.");
+            } catch (LongAhException e) {
+                LongAhException.printException(e);
             }
         }
     }

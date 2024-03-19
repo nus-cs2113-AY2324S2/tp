@@ -1,2 +1,5 @@
-add p/alice a/5 p/bob
-list
+addmember Amy
+addmember Brandon
+listmembers
+add Amy p/Brandon a/5
+listdebts
