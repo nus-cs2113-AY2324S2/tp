@@ -154,11 +154,6 @@ public class Handler {
 
     }
 
-    public static void handleLatest(String userInput) {
-        // if asked to show latest run
-        Output.printLatestRun();
-    }
-
     /**
      * Handles user input related to health data. Parses the user input to determine
      * the type of health data and processes it accordingly.
