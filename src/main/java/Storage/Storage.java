@@ -31,6 +31,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks in hashmap and writes it in formatted form to tests.txt
+     *
+     * @param tasks
+     */
     public static void saveTasksToFile(Map<LocalDate, List<String>> tasks) {
         try (FileWriter writer = new FileWriter(FILE_PATH.toFile())) {
             for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
@@ -45,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from test.txt to hashmap
+     *
+     * @return tasks hashmap of tasks read from test.txt
+     */
     public static Map<LocalDate, List<String>> loadTasksFromFile() {
         Map<LocalDate, List<String>> tasks = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH.toFile()))) {
