@@ -30,7 +30,7 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
 
-    public static void processInput() throws CustomExceptions.InvalidInput {
+    public static void processInput() {
         Scanner in = new Scanner(System.in);
 
 
