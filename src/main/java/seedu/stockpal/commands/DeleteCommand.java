@@ -30,7 +30,7 @@ public class DeleteCommand extends ListActionCommand {
     public void execute() throws StockPalException {
         productList.deleteProduct(pid);
         Ui.printDeleteSuccessMessage();
-        LOGGER.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
+        LOGGER.log(Level.INFO, Messages.MESSAGE_DELETE_SUCCESS);
         storage.save(productList);
     }
 }
