@@ -207,6 +207,55 @@ public class Handler {
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      */
+    public static void getGym(String input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+        // input that I will get is something like new /e: gym /n: 2
+        // use get index method that alfattih will push later
+        int numberOfStations = 2; // assuming i parsed the user initial input
+        Gym gym = new Gym();
+        for (int i = 0; i < numberOfStations; i++) {
+            Output.printGymStationPrompt(i + 1);
+            Scanner in = new Scanner(System.in);
+            String userInput = in.nextLine();
+            checkAndAddGymStationInput(userInput, gym);
+        }
+    }
+
+    private static void checkAndAddGymStationInput(String userInput, Gym gym) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+        // probably change to alfa method
+        String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"
+
+        if (inputs.length != Constant.LENGTH_OF_GYM_STATION_INPUTS) {
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM_STATION);
+        }
+
+        if (inputs[Constant.INDEX_OF_STATION_NAME].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_SETS].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_REPS].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_WEIGHTS].isBlank()) {
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_GYM_STATION);
+        }
+
+        String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
+
+        try {
+
+            int numberOfSets = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_SETS]);
+            int repetition = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_REPS]);
+            int weights = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_WEIGHTS]);
+            gym.addStation(exerciseName, weights, numberOfSets, repetition);
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+        }
+    }
+
+    /**
+     * Called when a user inputs a new gym
+     * Creates a gym object and prompts the user to enter details of the gym workouts and adds that to the gym object .
+     *
+     * @param input The user input string.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
+     */
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
         // input that I will get is something like new /e:gym /n: 2
         // use get index method that alfattih will push later
