@@ -18,7 +18,7 @@ public class Main {
         TransactionManager manager = new TransactionManager();
 
         Parser parser = new Parser();
-        while (parser.getIsContinue()) {
+        while (parser.isContinue) {
             String command = ui.readInput();
             parser.parseCommand(command, manager);
             storage.saveFile(manager);

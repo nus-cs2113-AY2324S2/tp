@@ -95,21 +95,26 @@ public class Parser {
             //manager.removeTransaction(1, false);
             break;
         case "view-history":
-            int numTransactions = Integer.parseInt(commandParts[1].substring(2));
+            String numTransactionsString = null;
+            for (String part : commandParts) {
+                if (part.startsWith("n/")) {
+                    numTransactionsString = part.substring(2);
+                }
+            }
+            int numTransactions = 0;
+            if (numTransactionsString != null) {
+                numTransactions = Integer.parseInt(numTransactionsString);
+            }
             manager.showLastNTransactions(numTransactions);
             break;
         case "quit":
-            isContinue = false;
+            this.isContinue = false;
             break;
         default:
             System.out.println("Invalid command");
             break;
         }
         return null;
-    }
-
-    public boolean getIsContinue(){
-        return this.isContinue;
     }
 }
 
