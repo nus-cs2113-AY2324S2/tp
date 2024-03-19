@@ -6,7 +6,7 @@ import seedu.binbash.ItemList;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeleteCommandTest {
 
