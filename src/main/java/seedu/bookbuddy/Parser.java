@@ -30,8 +30,9 @@ public class Parser {
         try {
             switch (command) {
                 case ADD_COMMAND:
-                    if (inputArray.length < 2)
+                    if (inputArray.length < 2) {
                         throw new InvalidCommandArgumentException("The add command requires a book title.");
+                    }
                     books.addBook(inputArray[1]);
                     break;
                 case REMOVE_COMMAND:
