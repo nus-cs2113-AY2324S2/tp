@@ -7,4 +7,12 @@ e/ del/ 1
 view -m 11.2011
 view -y 2011
 list
+help
+gpa
+gpa
+4.00/20
+2
+4/A+
+2/B
+exit
 exit
