@@ -1,1 +1,3 @@
-Hello! We are bookbuddy!
+Hello! We are Book Buddy!
+How can I help you today?
+Sorry but that is not a valid command. Please try again
