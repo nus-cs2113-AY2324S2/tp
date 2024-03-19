@@ -15,7 +15,7 @@ public class Constant {
 
 
     public static final String PARTITION_LINE = "____________________________________________________________";
-    public static final String SPLIT_BY_SLASH = "/";
+
     public static final String ADD_RUN = "Successfully added a new run session";
     public static final String ADD_GYM = "Successfully added a new gym session";
 
