@@ -1,8 +1,7 @@
 package seedu.duke;
 
 import storage.Storage;
-import gpa.gpaMain;
-import gpa.gpaCommand;
+import gpa.GPACommand;
 
 public class ProcessCommand {
 
@@ -11,7 +10,7 @@ public class ProcessCommand {
 
     public void processUserCommand(String command) {
         if(command.startsWith("gpa")){
-            gpaCommand.ProcessGPACommand();
+            GPACommand.processGPACommand();
         }
 
         if (!command.startsWith("e/")) {
@@ -52,7 +51,7 @@ public class ProcessCommand {
         input = input.trim().toLowerCase();
         switch (input) {
         case "gpa":
-            gpaCommand.ProcessGPACommand();
+            GPACommand.processGPACommand();
             UI.printHelpMessage();
             break;
         case "exit":
