@@ -2,11 +2,15 @@ package recipeio;
 
 import recipeio.recipe.RecipeList;
 import recipeio.ui.UI;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * Main entry-point for the Recipe.IO application.
  */
 public class RecipeIO {
     private static UI ui;
+    private static final Logger logger = Logger.getLogger("RecipeIO Logger");
     private final RecipeList recipeList;
 
     public RecipeIO() {
@@ -21,6 +25,7 @@ public class RecipeIO {
     }
 
     public void runCommandLoopUntilExitCommand() {
+        logger.log(Level.INFO, "asking for first input from user.");
         String userInput = ui.getUserInput();
         String parsedCommand = InputParser.parseCommand(userInput);
 
