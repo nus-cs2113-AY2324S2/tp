@@ -14,6 +14,7 @@ import java.util.List;
  * Class for reading & writing input/output to file
  */
 public class Storage {
+
     private static String filePath = "recordList.txt";
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
