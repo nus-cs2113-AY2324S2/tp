@@ -50,6 +50,6 @@ public class Book {
 
     public String toString() {
         String statusMark = this.isRead() ? "X" : " "; // Mark with 'x' if completed
-        return  this.description + "[" + statusMark + "] " ;
+        return  this.description + " [" + statusMark + "]" ;
     }
 }

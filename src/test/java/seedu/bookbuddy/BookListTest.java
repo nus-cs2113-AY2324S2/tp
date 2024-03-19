@@ -15,9 +15,10 @@ class BookListTest {
 
     @Test
     void addBook() {
-        BookBuddy.addBook("addBook Harry Potter");
-        assertEquals(1, BookBuddy.bookDetailsList.size());
-        assertEquals("Harry Potter", BookBuddy.bookDetailsList.get(0).getDescription());
+        BookList bookList = new BookList();
+        bookList.addBook("Harry Potter");
+        assertEquals(1, bookList.getSize());
+        assertEquals("Harry Potter [ ]", bookList.getBook(0).toString());
     }
 
 }

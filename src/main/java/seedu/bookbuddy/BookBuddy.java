@@ -1,6 +1,5 @@
 package seedu.bookbuddy;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -14,21 +13,12 @@ public class BookBuddy {
             String input = scanner.nextLine();
             String command = input.split(" ", 2)[0];
             if (Objects.equals(command, "addBook")) {
-                addBook(input);
+                String actualDescription = input.split(" ", 2)[1];
+                bookList.addBook(actualDescription);
             } else if (Objects.equals(command, "list")) {
-                printList();
+                bookList.printAllBooks();
             }
         }
     }
-
-    public static void addBook(String input) {
-        String actualDescription = input.split(" ", 2)[1];
-        bookList.addBook(actualDescription);
-    }
-
-    public static void printList() {
-        bookList.printAllBooks();
-    }
-
 
 }

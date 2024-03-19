@@ -76,8 +76,7 @@ public class BookList {
                 System.out.print((i + 1) + ".");
                 System.out.println(currentBook);
             }
-        }
-        else {
+        } else {
             System.out.println("The list is empty.");
         }
     }
