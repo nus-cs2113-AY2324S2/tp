@@ -1,5 +1,8 @@
 package seedu.voyagers;
 
+import seedu.voyagers.commands.Command;
+import seedu.voyagers.commands.ListCommand;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,36 +12,46 @@ import static seedu.voyagers.Storage.writeTripFile;
 public class Voyagers {
     private static final String FILE_NAME = "local-voyagers.txt";
 
+    //TODO: change to private and add to the command.execute(Ui, tripList, storae)
+    public TripList tripList;
+    public Ui ui;
+
+    public Voyagers() {
+        this.tripList = new TripList(new ArrayList<>());
+        this.ui = new Ui();
+    }
     public static void main(String[] args) {
-        welcomeMessage();
-        new Voyagers().runTrip();
+        new Voyagers().run();
     }
 
-    void runTrip() {
+    void run() {
 
-        //Initialise
-        ArrayList<Trip> tripArrayList = new ArrayList<>();
-        Parser parser = new Parser(tripArrayList);
-        Scanner scanner = new Scanner(System.in);
+
+        ui.showWelcome();
+        ui.echo("Here are the trips in your list from the previous time:", false, false);
+
+        //TODO: make Storage a singleton
         String currentDir = System.getProperty("user.dir");
-        readTripFile(tripArrayList, currentDir, FILE_NAME);
-        parser.listAll();
+        //TODO: check
+        readTripFile(tripList.getTrips(), currentDir, FILE_NAME);
 
-        //Start managing tripList
-        System.out.println("Please enter your command:");
-        while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            if (command.equalsIgnoreCase("exit")) {
-                break;
+
+        new ListCommand().execute(tripList, ui, null);
+        boolean isExit = false;
+
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parseInput(fullCommand);
+                c.execute(tripList, ui, null);
+                isExit = c.isExit();
+
+            } catch (Exception e) { //TODO: change to specific exceptions
+                ui.echo(e.getMessage());
             }
-            parser.parseInput(command);
         }
-        scanner.close();
-        writeTripFile(tripArrayList, tripArrayList.size(), currentDir);
+
+        writeTripFile(tripList.getTrips(), tripList.size(), currentDir);
     }
 
-    static void welcomeMessage() {
-        System.out.println("Welcome to Voyagers!");
-        System.out.println("What would you like to do today?");
-    }
 }

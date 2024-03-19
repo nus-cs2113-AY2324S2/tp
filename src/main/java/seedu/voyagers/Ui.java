@@ -79,8 +79,8 @@ public class Ui {
      * @param size size of the list after deletion
      */
     public void showDelete(Trip task, int size) {
-        echo("Noted. I've removed this task:\n\t\t" + task, true, false);
-        echo("Now you have " + size + " tasks in the list.", false, true);
+        echo("Noted. I've removed this trip:\n\t\t" + task, true, false);
+        echo("Now you have " + size + " trips in the list.", false, true);
 
     }
 
