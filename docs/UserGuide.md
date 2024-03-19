@@ -29,6 +29,37 @@ Example of usage:
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
+### Delete Expense: `delete expense`
+
+Deletes expenses that have been added wrongly or are no longer relevant.
+
+Format: `delete expense i/INDEX`
+
+* The `INDEX` must be a positive integer and a valid index in the menu list.
+
+Example of usage:
+
+`delete expense i/4` 
+Deletes the expense of at index 4 listed in the expenditure tracker.
+
+**Note:**
+- Once an expense is deleted, it cannot be recovered.
+
+### Reduce Savings: `reduce savings`
+
+Reduces the amount saved in a particular category
+
+Format: `reduce savings i/INDEX a/AMOUNT`
+
+* The `INDEX` must be a positive integer and a valid index in the menu list.
+* The `AMOUNT` to be reduced must be a positive integer
+
+Example of usage:
+
+`reduce savings i/4 a/10`
+Reduces the savings of category of index 4 listed in the savings tracker by $10
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

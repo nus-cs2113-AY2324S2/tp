@@ -8,6 +8,10 @@ public class SavingList {
     protected ArrayList<String> categories;
     private double initialAmount;
 
+    public int size() {
+        return savings.size();
+    }
+
     public SavingList() {
         this.savings = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Salary", 

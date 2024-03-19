@@ -8,6 +8,10 @@ public class ExpenseList {
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories;
 
+    public int size() {
+        return expenses.size();
+    }
+
     public ExpenseList() {
         this.expenses = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Housing", 
