@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import java.util.ArrayList;
 import seedu.duke.modules.Module;
-import seedu.duke.modules.ModuleList;
 
 public class ViewCommand extends Command{
 
