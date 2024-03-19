@@ -3,5 +3,5 @@ What would you like to do today?
 File not found.
 Creating new file...
 File created.
-Index	Name	Start Date	End Date	Location	Description
+No trips found.
 Please enter your command:

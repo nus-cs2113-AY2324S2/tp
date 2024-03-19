@@ -1,10 +1,12 @@
 package seedu.voyagers;
 
+import seedu.voyagers.classes.Trip;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.voyagers.Storage.readTripFile;
-import static seedu.voyagers.Storage.writeTripFile;
+import static seedu.voyagers.utils.Storage.readTripFile;
+import static seedu.voyagers.utils.Storage.writeTripFile;
 
 public class Voyagers {
     private static final String FILE_NAME = "local-voyagers.txt";

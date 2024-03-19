@@ -1,5 +1,7 @@
 package seedu.voyagers;
 
+import seedu.voyagers.classes.Trip;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

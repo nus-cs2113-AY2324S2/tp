@@ -1,5 +1,7 @@
-package seedu.voyagers;
+package seedu.voyagers.utils;
 
+
+import seedu.voyagers.classes.Trip;
 
 import java.util.Scanner;
 
