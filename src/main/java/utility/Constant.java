@@ -61,9 +61,6 @@ public class Constant {
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
 
-<<<<<<< HEAD
-    public static final String SPLIT_BY_SLASH = "/";
-=======
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Invalid input for Gym Stations! " +
             "Please input /n:[name of exercise] /s:[sets] /r:[reps] /w:[weights]";
 
