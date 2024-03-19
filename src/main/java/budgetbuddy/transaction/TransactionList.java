@@ -1,8 +1,9 @@
-package financemanager;
+package budgetbuddy.transaction;
 
-import parser.Parser;
-import transactions.Transaction;
-import ui.UserInterface;
+import budgetbuddy.account.Account;
+import budgetbuddy.parser.Parser;
+import budgetbuddy.transaction.type.Transaction;
+import budgetbuddy.ui.UserInterface;
 
 import java.util.ArrayList;
 
@@ -25,17 +26,18 @@ public class TransactionList {
         return transactions;
     }
 
-    public void printTransactions(){
-        UserInterface.printAllTransactions(transactions);
+    public void printTransactions(Account account){
+        UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
-    public void removeTransaction(String input){
+    public void removeTransaction(String input, Account account){
         int id = Integer.parseInt(input.substring(DELETE_BEGIN_INDEX).trim()) - INDEX_OFFSET;
         int size = transactions.size();
         if (id >= LOWER_BOUND && id < size) {
             String itemRemoved = transactions.get(id).toString();
+            account.setBalance(account.getBalance() - transactions.get(id).getAmount() );
             transactions.remove(id);
-            UserInterface.printDeleteMessage(itemRemoved);
+            UserInterface.printDeleteMessage(itemRemoved, account.getBalance());
         } else {
             throw new IndexOutOfBoundsException(size);
         }
@@ -45,10 +47,10 @@ public class TransactionList {
         transactions.add(t);
     }
 
-    public void processTransaction(String input) {
-        Transaction t = parser.parseTransaction(input);
+    public void processTransaction(String input, Account account) {
+        Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
-        UserInterface.printAddMessage(fetchData);
+        UserInterface.printAddMessage(fetchData, account.getBalance());
     }
 }

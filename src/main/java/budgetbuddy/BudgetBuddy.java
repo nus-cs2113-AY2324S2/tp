@@ -1,5 +1,8 @@
-import financemanager.TransactionList;
-import ui.UserInterface;
+package budgetbuddy;
+
+import budgetbuddy.account.Account;
+import budgetbuddy.transaction.TransactionList;
+import budgetbuddy.ui.UserInterface;
 
 import java.util.Scanner;
 
@@ -8,7 +11,6 @@ public class BudgetBuddy {
     /**
      * Main entry-point for the java.BudgetBuddy application.
      */
-
     public static void main(String[] args){
         String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
@@ -17,7 +19,9 @@ public class BudgetBuddy {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
 
+
         TransactionList transactions = new TransactionList();
+        Account account = new Account();
         boolean isRunning = true;
         try{
             while (isRunning) {
@@ -29,13 +33,13 @@ public class BudgetBuddy {
                     isRunning = false;
                     break;
                 case "list":
-                    transactions.printTransactions();
+                    transactions.printTransactions(account);
                     break;
                 case "delete":
-                    transactions.removeTransaction(input);
+                    transactions.removeTransaction(input, account);
                     break;
                 case "add":
-                    transactions.processTransaction(input);
+                    transactions.processTransaction(input, account);
                     break;
                 default:
                     UserInterface.printNoCommandExists();

@@ -1,6 +1,6 @@
-package ui;
+package budgetbuddy.ui;
 
-import transactions.Transaction;
+import budgetbuddy.transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,25 +12,30 @@ public class UserInterface {
             "----------------------------------------------------------------------" +
             "-----------------------";
     private static final String TABLE_BORDER = "________________________________________" +
-            "_____________________________________________________________________";
+            "_________________________________________________________________________________";
 
     private static final String TAB_SPACE = "    ";
 
 
-    public static void printDeleteMessage(String transaction){
+    public static void printDeleteMessage(String transaction, double balance){
+        String[] parts = transaction.split("\\|");
         System.out.println(LINE);
-        System.out.println(TAB_SPACE + "Got it. I have removed the following transaction from the history");
-        System.out.println( TAB_SPACE + transaction);
+        System.out.println(TAB_SPACE + "Got it. I have removed the following transaction from the history \n");
+        for (String part : parts) {
+            System.out.println(TAB_SPACE + part.trim());
+        }
+        System.out.println("\n" + TAB_SPACE + "Your updated account balance is $" + balance);
         System.out.println(LINE);
     }
 
-    public static void printAddMessage(String transaction){
+    public static void printAddMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Got it. I have added the following transaction \n");
         for (String part : parts) {
             System.out.println(TAB_SPACE + part.trim());
         }
+        System.out.println("\n" + TAB_SPACE + "Your updated account balance is $" + balance);
         System.out.println(LINE);
     }
 
@@ -47,21 +52,26 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
-    public static void printAllTransactions(ArrayList<Transaction> transactions) {
+    public static void printAllTransactions(ArrayList<Transaction> transactions, double balance) {
         int index = transactions.size();
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Your Transaction history:");
-        System.out.println(TABLE_BORDER);
-        System.out.printf(TAB_SPACE + "%-5s %-50s %-20s %-15s %-15s%n", "ID", "Transaction", "Date",
-                "Amount", "Category");
+        System.out.println(TAB_SPACE+TABLE_BORDER);
+        System.out.printf(TAB_SPACE+TAB_SPACE + "%-5s %-10s %-50s %-20s %-15s %-15s%n", "ID", "Type", "Transaction",
+                "Date", "Amount", "Category");
         for (int i = START_INDEX; i < index; i++) {
             Transaction transaction = transactions.get(i);
+            String type = transaction.getTransactionType();
+            String description = transaction.getDescription();
             LocalDate date = transaction.getDate();
-            System.out.printf(TAB_SPACE + "%-5d %-50.45s %-20s %-15f  %-15s%n", i + 1,
-                    transaction.getDescription(), date,
-                    transaction.getAmount(), transaction.getCategory());
+            double amount = transaction.getAmount();
+            String category = transaction.getCategory();
+
+            System.out.printf(TAB_SPACE+TAB_SPACE + "%-5d %-10s %-50.45s %-20s %-15.2f  %-15s%n", i + 1, type,
+                    description, date, amount, category);
         }
-        System.out.println(TABLE_BORDER);
+        System.out.println(TAB_SPACE+TABLE_BORDER);
+        System.out.println("\n" + TAB_SPACE + "Your currents account balance is $" + balance);
         System.out.println(LINE);
     }
 

@@ -1,8 +1,10 @@
-package financemanager;
+package budgetbuddy.transaction;
 
+import budgetbuddy.account.Account;
+import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import transactions.Transaction;
+import budgetbuddy.transaction.type.Transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,10 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TransactionListTest {
 
     private TransactionList transactionList;
+    private Account account;
 
     @BeforeEach
     public void setUp() {
         transactionList = new TransactionList();
+        account = new Account();
     }
 
     @Test
@@ -23,8 +27,9 @@ public class TransactionListTest {
 
     @Test
     public void processTransaction_addsTransaction() {
-        Transaction testTransaction = new Transaction("Test", 200,"Personal", "14-03-2024");
-        transactionList.processTransaction("add /n/Test /$/200 /d/14-03-2024 /c/Personal");
+        Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
+                account);
+        transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
 
         assertEquals(1, transactionList.getTransactions().size());
         assertEquals(testTransaction.getDescription(), transactionList.getTransactions().get(0).getDescription());
@@ -33,13 +38,16 @@ public class TransactionListTest {
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
     }
 
+    @Test
     public void removeTransaction_removesCorrectTransaction() {
-        Transaction testTransaction1 = new Transaction("Test1", 100, "Category1", "14-03-2024");
-        Transaction testTransaction2 = new Transaction("Test2", 200, "Category2", "16-03-2024");
+        Transaction testTransaction1 = new Income("Test1", 100, "Category1",
+                "14-03-2024", account);
+        Transaction testTransaction2 = new Income("Test2", 200, "Category2",
+                "16-03-2024", account);
         transactionList.addTransaction(testTransaction1);
         transactionList.addTransaction(testTransaction2);
 
-        transactionList.removeTransaction("delete 1");
+        transactionList.removeTransaction("delete 1", account);
 
         assertEquals(1, transactionList.getTransactions().size());
         assertEquals(testTransaction2, transactionList.getTransactions().get(0));
@@ -47,9 +55,11 @@ public class TransactionListTest {
 
     @Test
     public void removeTransaction_withInvalidIndex_throwsIndexOutOfBoundsException() {
-        Transaction testTransaction = new Transaction("Test", 200, "Personal", "14-03-2024");
+        Transaction testTransaction = new Income("Test", 200, "Personal",
+                "14-03-2024", account);
         transactionList.addTransaction(testTransaction);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> transactionList.removeTransaction("delete 2"));
+        assertThrows(IndexOutOfBoundsException.class, () -> transactionList.removeTransaction(
+                "delete 2", account));
     }
 }
