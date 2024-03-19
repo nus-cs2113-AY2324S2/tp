@@ -1,7 +1,8 @@
 package seedu.duke.command;
 
-public class ListCommand extends Command{
+public class InvalidCommand extends Command {
     @Override
     public void execute(String userInput) {
+        System.out.println("INVALID COMMAND");
     }
 }

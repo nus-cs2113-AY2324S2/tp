@@ -39,6 +39,28 @@ public class ModuleList {
         //moduleList.remove(module);
     }
 
-    public void changeModuleGrade(int index) {
+    public void changeModuleGrade(String moduleCode, String grade) {
+        Module toChange = getModule(moduleCode);
+        if (toChange == null) {
+            System.out.println("This module does not exist in the list");
+            return;
+        }
+        toChange.setModuleGrade(grade);
     }
+
+    public double tallyGPA() {
+        int totalMC = 0;
+        double sumOfGPA = 0;
+        for (Module module : takenModuleList) {
+            if(module.getModuleGrade() == null || module.getModuleGrade().equals("CS") ||
+                    module.getModuleGrade().equals("CU") ) {
+                continue;
+            }
+            totalMC += module.getModuleMC();
+            sumOfGPA += module.getGradeNumber();
+        }
+        return sumOfGPA/(double)totalMC;
+    }
+
+
 }

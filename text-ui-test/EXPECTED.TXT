@@ -1,3 +1,5 @@
-Hello from FAP
-What is your name?
-Hello James Gosling
+__________________________________________________
+Hello! This is your CEG Future Academic Planner!
+What can I do for you?
+INVALID COMMAND
+Bye. Enjoy your studies!
