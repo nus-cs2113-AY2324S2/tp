@@ -48,6 +48,8 @@ public class TicTacToe extends Game{
                 case 7:
                     line = board[2] + board[4] + board[6];
                     break;
+                default:
+                    //this never happens
             }
             if (line.equals("XXX")) {
                 return "X";
