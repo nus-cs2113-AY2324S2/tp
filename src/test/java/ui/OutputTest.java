@@ -127,6 +127,7 @@ class OutputTest {
                     "\n" + Constant.PARTITION_LINE + "\n";
 
             Output.printHistory(Constant.GYM);
+            expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
             assertEquals(expected, outContent.toString());
             cleanup();
 
