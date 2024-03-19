@@ -35,10 +35,11 @@ public class BookList {
 
     /**
      * Adds a new Book to the list.
-     * @param taskDescription The description of the book.
+     * @param title The title of the book.
      */
-    public void addBook(String taskDescription) {
-        books.add(new Book(taskDescription));
+    public void addBook(String title) {
+        books.add(new Book(title));
+        System.out.println("Successfully added " + title + " to the list.");
     }
 
     /**
@@ -46,7 +47,9 @@ public class BookList {
      * @param index The index of the book to delete.
      */
     public void deleteBook(int index) {
-        books.remove(index-1);
+        Book book = books.get(index - 1);
+        books.remove(index - 1);
+        System.out.println("Successfully removed " + book.getTitle() + " from the list.");
     }
 
     /**
@@ -54,7 +57,7 @@ public class BookList {
      * @param index The index of the book to mark as read.
      */
     public void markDoneByIndex(int index) {
-        books.get(index-1).markBookAsRead();
+        books.get(index - 1).markBookAsRead();
     }
 
     /**
@@ -62,7 +65,7 @@ public class BookList {
      * @param index The index of the book to mark as unread.
      */
     public void markUndoneByIndex(int index) {
-        books.get(index-1).markBookAsUnread();
+        books.get(index - 1).markBookAsUnread();
     }
 
     /**
@@ -73,8 +76,8 @@ public class BookList {
             System.out.println("All books:");
             for (int i = 0; i < books.size(); i++) {
                 Book currentBook = books.get(i);
-                System.out.print((i + 1) + ".");
-                System.out.println(currentBook);
+                System.out.print((i + 1) + ". ");
+                System.out.println(currentBook.toString());
             }
         } else {
             System.out.println("The list is empty.");

@@ -18,7 +18,7 @@ class BookListTest {
         BookList bookList = new BookList();
         bookList.addBook("Harry Potter");
         assertEquals(1, bookList.getSize());
-        assertEquals("Harry Potter [ ]", bookList.getBook(0).toString());
+        assertEquals("[U] Harry Potter", bookList.getBook(0).toString());
     }
 
 }
