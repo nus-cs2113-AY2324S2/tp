@@ -88,7 +88,7 @@ public class Parser {
         }
 
         if (commandParts.length == 1) {
-            Object[][] printData = helper.listAllCommands();
+            String[][] printData = helper.listAllCommands();
             String[] tableHeader = {"command", "function", "usage"};
             ui.printTable(tableHeader, printData);
         } else {
