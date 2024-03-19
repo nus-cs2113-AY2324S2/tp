@@ -5,7 +5,7 @@ import java.util.Random;
  * The Ui class handles user interface interactions.
  */
 public class Ui {
-    private static final String LINE = "________________________________________________________________________________";
+    private static final String LINE = "_____________________________________________________________________________";
     private String[] byeSentences = {
         "AeroCade dismissed. Fly with honor and return victorious.",
         "Departure clearance granted. Execute your aero-maneuvers with expertise.",

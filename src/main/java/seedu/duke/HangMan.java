@@ -63,7 +63,4 @@ public class HangMan {
         guessedLetters.add(userInput);
         numberOfLettersGuessed += 1;
     }
-
-
-
 }
