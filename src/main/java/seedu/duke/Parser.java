@@ -5,18 +5,37 @@ import seedu.duke.exceptions.CustomException;
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
 
-    public void parseCommand(String command, Ui ui, QuestionsList questionsList, Helper helper) throws CustomException {
-        String lowerCaseCommand = command.toLowerCase();
+    public void parseCommand(String command, Ui ui, QuestionsList questionsList, Helper helper, TopicList topicList) throws CustomException {
 
-        if (lowerCaseCommand.startsWith("bye")) {
-            ui.isPlaying = false;
-        } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
-            processSolutionCommand(lowerCaseCommand, ui, questionsList);
-        } else if (lowerCaseCommand.startsWith("help")) {
-            processHelpCommand(lowerCaseCommand, ui, helper);
-        } else {
-            throw new CustomException("-1 HP coz invalid command");
+        String lowerCaseCommand = command.toLowerCase();
+        if (ui.isPlaying) {
+            if (lowerCaseCommand.startsWith("bye")) {
+                ui.isPlaying = false;
+            } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
+                processSolutionCommand(lowerCaseCommand, ui, questionsList);
+            } else if (lowerCaseCommand.startsWith("topic")){
+                processStartCommand(lowerCaseCommand, ui, topicList);
+            } else if (lowerCaseCommand.startsWith("help")) {
+                processHelpCommand(lowerCaseCommand, ui, helper);
+            } else {
+                throw new CustomException("-1 HP coz invalid command");
+            }
         }
+
+        String commandParameter = commandParts[PARAMETER_INDEX];
+        try {
+            // if parameter is an Integer
+            int topicNum = Integer.parseInt(commandParameter);
+            // checks validity of parameter
+            if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
+                throw new CustomException("booo no such topic");
+            }
+            ui.printChosenTopic(topicNum, topicList);
+
+        } catch (NumberFormatException e) {
+                throw new CustomException("invalid " + lowerCaseCommand + " parameter");
+        }
+
     }
 
     // user enters "solution 1" to get solution for question1 OR
