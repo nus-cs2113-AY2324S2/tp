@@ -121,7 +121,7 @@ public class TripList {
     }
 
     public boolean isTripNameRepeated(String name){
-       return findTrip(name) != -1;
+        return findTrip(name) != -1;
     }
 
 

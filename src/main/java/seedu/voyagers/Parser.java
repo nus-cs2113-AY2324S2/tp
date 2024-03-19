@@ -1,6 +1,15 @@
 package seedu.voyagers;
 
-import seedu.voyagers.commands.*;
+import seedu.voyagers.commands.AddSubTripCommand;
+import seedu.voyagers.commands.AddTripCommand;
+import seedu.voyagers.commands.Command;
+import seedu.voyagers.commands.DeleteCommand;
+import seedu.voyagers.commands.EmptyCommand;
+import seedu.voyagers.commands.ExitCommand;
+import seedu.voyagers.commands.HelpCommand;
+import seedu.voyagers.commands.ListCommand;
+import seedu.voyagers.commands.ModifyTripCommand;
+
 
 
 import java.text.ParseException;
@@ -79,9 +88,9 @@ public class Parser {
         Command c = commandAddMainTrip(newTokens);
 
 
-        String SubTripArgs[] = c.getArgs();
+        String subTripArgs[] = c.getArgs();
         String args[] = new String[6];
-        System.arraycopy(SubTripArgs, 0, args, 1, 5);
+        System.arraycopy(subTripArgs, 0, args, 1, 5);
         args[0] = tokens[1];
 
 

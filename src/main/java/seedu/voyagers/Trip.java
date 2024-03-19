@@ -148,7 +148,10 @@ public class Trip {
 
     @Override
     public String toString() {
-        String s = "Name: " + name + "\t\tStart Date: " + Util.dateFormat.format(startDate) + "\t\tEnd Date: " + Util.dateFormat.format(endDate) + "\t\tLocation: " + location + "\t\tDescription: " + description;
+        String s = "Name: " + name + "\t\tStart Date: " +
+                Util.dateFormat.format(startDate) + "\t\tEnd Date: " +
+                Util.dateFormat.format(endDate) + "\t\tLocation: " +
+                location + "\t\tDescription: " + description;
         s += "\n\tSub-trips:";
         for (Trip t : subTrips) {
             s += "\n\t\t" + t.toString();

@@ -5,11 +5,6 @@ import seedu.voyagers.Trip;
 import seedu.voyagers.TripList;
 import seedu.voyagers.Ui;
 
-import seedu.voyagers.Util;
-
-import java.util.Date;
-
-
 public class AddTripCommand extends Command{
 
     public AddTripCommand(String[] args){
