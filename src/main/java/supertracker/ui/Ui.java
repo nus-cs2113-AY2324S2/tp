@@ -1,5 +1,6 @@
 package supertracker.ui;
 
+import supertracker.item.Inventory;
 import supertracker.item.Item;
 
 public class Ui {
@@ -92,6 +93,7 @@ public class Ui {
     }
 
     public static void listIntro(int size) {
+        assert size >= 0;
         if (size == 0) {
             printIndent(EMPTY_LIST_MESSAGE);
             return;
