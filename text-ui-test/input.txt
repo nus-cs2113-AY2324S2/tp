@@ -1,1 +1,8 @@
-James Gosling
+CaiShenYe
+invalidCommand
+solution 1
+solution 2
+solution -all
+explain 1
+explain 2
+bye
