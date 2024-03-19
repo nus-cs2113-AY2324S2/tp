@@ -19,7 +19,7 @@ class QuantityTest {
         Quantity quantityObject = new Quantity(0);
         try {
             quantityObject.updateIncreaseQuantity(10);
-        } catch (InventoryQuantityOverflowException IQOE) {
+        } catch (InventoryQuantityOverflowException iqoe) {
             fail();
         }
         assertEquals(10, quantityObject.quantity);
@@ -31,8 +31,8 @@ class QuantityTest {
         try {
             quantityObject.updateIncreaseQuantity(Integer.MAX_VALUE);
             fail("Expected InventoryQuantityOverflowException was not thrown");
-        } catch (InventoryQuantityOverflowException IQOE) {
-            assertEquals("Overflow detected. No Change to quantity.", IQOE.getMessage());
+        } catch (InventoryQuantityOverflowException iqoe) {
+            assertEquals("Overflow detected. No Change to quantity.", iqoe.getMessage());
         }
         assertEquals(10, quantityObject.quantity);
     }
@@ -42,7 +42,7 @@ class QuantityTest {
         Quantity quantityObject = new Quantity(10);
         try {
             quantityObject.updateDecreaseQuantity(5);
-        } catch (InsufficientAmountException IAE) {
+        } catch (InsufficientAmountException iae) {
             fail();
         }
         assertEquals(5, quantityObject.quantity);
@@ -54,8 +54,8 @@ class QuantityTest {
         try {
             quantityObject.updateDecreaseQuantity(15);
             fail("Expected InsufficientAmountException was not thrown");
-        } catch (InsufficientAmountException IAE) {
-            assertEquals("Insufficient amount in inventory", IAE.getMessage());
+        } catch (InsufficientAmountException iae) {
+            assertEquals("Insufficient amount in inventory", iae.getMessage());
         }
         assertEquals(10, quantityObject.quantity);
     }
