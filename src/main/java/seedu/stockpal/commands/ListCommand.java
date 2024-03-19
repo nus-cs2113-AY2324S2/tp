@@ -3,12 +3,17 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.ui.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.stockpal.common.Messages.MESSAGE_EMPTY_LIST;
+import static seedu.stockpal.common.Messages.MESSAGE_LIST_SUCCESS;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
 public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
     protected ProductList productList;
 
     public ListCommand(ProductList productList) {
@@ -27,6 +32,7 @@ public class ListCommand extends ListActionCommand {
         }
 
         Ui.printListTasks(productList);
+        LOGGER.log(Level.INFO, MESSAGE_LIST_SUCCESS);
     }
 
 }
