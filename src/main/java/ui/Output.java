@@ -43,6 +43,14 @@ public class Output {
         System.out.println("|  |_| | _> (/_|   |  | (_) |_");
     }
 
+    public static void printGymStationPrompt(int stationNumber){
+        printLine();
+        System.out.println("Please enter the details of station " + stationNumber);
+        printLine();
+    }
+
+
+
 
     private static String getFormattedRunWithIndex(int index, Workout currentWorkout){
         return String.format(Constant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);

@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import utility.Parser;
 import utility.Constant;
 import utility.CustomExceptions;
+
+
 public class Run extends Workout{
     protected Integer[] times;
     protected double distance;
@@ -117,6 +119,8 @@ public class Run extends Workout{
         }
         return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
     }
+
+
 
 
 
