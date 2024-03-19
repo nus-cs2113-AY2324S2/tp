@@ -3,8 +3,6 @@ package seedu.stockpal;
 import seedu.stockpal.commands.Command;
 import seedu.stockpal.commands.ExitCommand;
 import seedu.stockpal.data.ProductList;
-import seedu.stockpal.exceptions.InvalidCommandException;
-import seedu.stockpal.exceptions.InvalidFormatException;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.parser.Parser;
 import seedu.stockpal.storage.Storage;
