@@ -24,6 +24,9 @@ public class AddCommand extends Command {
         this.itemExpirationDate = itemExpirationDate;
         this.itemSalePrice = itemSalePrice;
         this.itemCostPrice = itemCostPrice;
+        
+        assert itemName != null && !itemName.trim().isEmpty();
+        assert itemQuantity >= 0;
 
         commandLogger.fine(String.format(
                 "Creating Add Command... itemName: %s, itemDescription: %s, itemQuantity: %d, itemExpirationDate: %s"
