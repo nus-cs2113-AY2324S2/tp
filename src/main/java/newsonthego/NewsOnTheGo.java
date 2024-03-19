@@ -132,6 +132,10 @@ public class NewsOnTheGo {
         return false;
     }
 
+    /**
+     * Displays the list of available news topics.
+     * This method prints the list of topics along with their names.
+     */
     private static void showTopics() {
         System.out.println("Here are the list of topics for your viewing:");
         for(NewsTopic topic: newsTopics) {
@@ -145,6 +149,13 @@ public class NewsOnTheGo {
     private static void getNews(String line, List<NewsArticle> list) {
     }
 
+    /**
+     * Finds the index of a news topic in the list of topics.
+     * This method performs a binary search to find the index of the specified topic.
+     *
+     * @param topic the name of the topic to search for
+     * @return the index of the topic if found, or -1 if the topic is not found
+     */
     private static int findTopicIndex(String topic) {
         int left = 0;
         int right = newsTopics.size() - 1;
@@ -162,6 +173,12 @@ public class NewsOnTheGo {
         return -1;
     }
 
+    /**
+     * Filters news articles based on a specified topic.
+     * This method finds the index of the specified topic and prints news articles related to that topic.
+     *
+     * @param line the input string containing the topic to filter
+     */
     private static void filterNews(String line) {
         int topicIndex = findTopicIndex(line.substring(6).trim());
         if (topicIndex < 0) {
