@@ -29,6 +29,24 @@ public class Member {
     }
 
     /**
+     * Constructs a new Member instance with the given name and balance.
+     * Used for storage methods.
+     *
+     * @param name The name of the member.
+     * @param balance The balance of the member.
+     * @throws LongAhException If the name is invalid.
+     */
+    public Member(String name, double balance) throws LongAhException {
+        // Check if name is fully alphanumeric
+        if (!Pattern.matches("[A-Za-z0-9]+", name)) {
+            throw new LongAhException(ExceptionMessage.INVALID_MEMBER_NAME);
+        }
+
+        this.name = name;
+        this.balance = balance;
+    }
+
+    /**
      * Adds the specified amount to the member's balance.
      *
      * @param amount The amount to add to the balance.
@@ -72,6 +90,16 @@ public class Member {
             return this.name + ": $" + this.balance;
         }
         return this.name + ": -$" + Math.abs(this.balance);
+    }
+
+    /**
+     * Returns a string representation of the member for storage.
+     * 
+     * @param delimiter The delimiter to separate the name and balance.
+     * @return A string representation of the member for storage.
+     */
+    public String toStorageString(String delimiter) {
+        return this.name + delimiter + this.balance;
     }
 
     /**

@@ -1,5 +1,5 @@
 addmember Amy
 addmember Brandon
 listmembers
-add p/Amy p/Brandon a/5
+add Amy p/Brandon a/5
 listdebts
