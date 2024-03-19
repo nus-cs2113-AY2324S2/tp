@@ -45,7 +45,7 @@ public class fallenCode {
     // }
 
     /*
-    //@author tayponghee
+    //@@author tayponghee
     if (attributes.getSubjectGrades().isEmpty()) {
         System.out.println("At least one subject must be provided. Please add subjects and grades.");
         Ui.printDivider();

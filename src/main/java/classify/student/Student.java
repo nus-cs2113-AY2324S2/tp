@@ -38,9 +38,6 @@ public class Student {
     public void setAttributes(StudentAttributes attributes) {
         this.attributes = attributes;
     }
-    public StudentAttributes getAttributesList() {
-        return attributes;
-    }
 
     //@@ Cryolian
     public String getName() {

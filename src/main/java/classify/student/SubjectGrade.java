@@ -28,4 +28,16 @@ public class SubjectGrade {
     public int getClassesAttended() {
         return classesAttended;
     }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    public void setClassesAttended(int classesAttended) {
+        this.classesAttended = classesAttended;
+    }
 }

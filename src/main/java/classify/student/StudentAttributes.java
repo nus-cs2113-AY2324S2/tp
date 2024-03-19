@@ -40,4 +40,25 @@ public class StudentAttributes {
         sb.append("]}");
         return sb.toString();
     }
+
+    //@@author blackmirag3
+    public SubjectGrade findSubject(String subjectName) {
+        for (SubjectGrade subjectGrade : subjectGrades) {
+            String currentSubjectName = subjectGrade.getSubject();
+            if (currentSubjectName.equals(subjectName)) {
+                return subjectGrade;
+            }
+        }
+        return null;
+    }
+
+    public void deleteSubject(String subjectName) {
+        for (SubjectGrade subjectGrade : subjectGrades) {
+            String currentSubjectName = subjectGrade.getSubject();
+            if (currentSubjectName.equals(subjectName)) {
+                subjectGrades.remove(subjectGrade);
+                return;
+            }
+        }
+    }
 }
