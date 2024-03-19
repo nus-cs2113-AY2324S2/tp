@@ -3,12 +3,14 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class ResultsList {
+    private static final int ZERO_RESULTS = 0;
+
     protected ArrayList<Results> sessionResults;
     protected int count;
 
     public ResultsList() {
         sessionResults = new ArrayList<>();
-        count = 0;
+        count = ZERO_RESULTS;
     }
 
     public void addResult(Results roundResults) {
