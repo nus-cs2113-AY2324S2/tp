@@ -1,6 +1,6 @@
-package seedu.duke;
+package seedu.fitnus;
 
-import seedu.duke.exception.UnregisteredMealException;
+import seedu.fitnus.exception.UnregisteredMealException;
 
 import java.util.HashMap;
 
@@ -67,6 +67,10 @@ public class Meal {
 
     public int getSugar() {
         return sugar;
+    }
+
+    public int getServingSize() {
+        return servingSize;
     }
 
     // Method to print all meal info

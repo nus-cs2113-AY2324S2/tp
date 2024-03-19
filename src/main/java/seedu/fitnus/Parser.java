@@ -1,12 +1,13 @@
-package seedu.duke;
+package seedu.fitnus;
 
-import seedu.duke.exception.IncompleteDrinkException;
-import seedu.duke.exception.IncompleteMealException;
-import seedu.duke.exception.IncompleteWaterException;
-import seedu.duke.exception.InvalidCommandException;
-import seedu.duke.exception.UnregisteredDrinkException;
-import seedu.duke.exception.UnregisteredMealException;
-import seedu.duke.user.User;
+import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.IncompleteWaterException;
+import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.invalidIndexException;
+import seedu.fitnus.user.User;
 
 public class Parser {
     public static String mealDescription;
@@ -85,6 +86,9 @@ public class Parser {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
+        } catch (invalidIndexException e) {
+            System.out.println("Sorry the index you provided is invalid, check listMeals/listDrinks to view valid " +
+                    "indexes.");
         }
     }
 

@@ -1,15 +1,16 @@
-package seedu.duke.user;
+package seedu.fitnus.user;
 
-import seedu.duke.Drink;
-import seedu.duke.Meal;
-import seedu.duke.Parser;
-import seedu.duke.Water;
+import seedu.fitnus.Drink;
+import seedu.fitnus.Meal;
+import seedu.fitnus.Parser;
+import seedu.fitnus.Water;
 
-import seedu.duke.exception.IncompleteDrinkException;
-import seedu.duke.exception.IncompleteMealException;
-import seedu.duke.exception.IncompleteWaterException;
-import seedu.duke.exception.UnregisteredDrinkException;
-import seedu.duke.exception.UnregisteredMealException;
+import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.IncompleteWaterException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.invalidIndexException;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ public class User {
         int servingSize = Parser.mealSize;
 
         mealList.add(new Meal(mealName, servingSize));
+        assert !mealList.isEmpty(): "failed to add meal";
+
         System.out.println("Added " + servingSize + " serving of " + mealName);
     }
 
@@ -45,6 +48,7 @@ public class User {
     public void handleWater(String command) throws IncompleteWaterException {
         Parser.parseWater(command);
         int volume = Parser.waterSize;
+        assert volume > 0: "invalid volume";
 
         totalWaterIntake.add(new Water(volume));
         System.out.println("Added " + volume + " ml of water");
@@ -91,7 +95,7 @@ public class User {
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
-    public void handleViewFiber() {
+    public static void handleViewFiber() {
         int fibreCount = 0;
         for (Meal meal: mealList) {
             fibreCount += meal.getFiber();
@@ -166,16 +170,26 @@ public class User {
         }
     }
 
-    public static void handleEditMealServingSize(String command) {
+    public static void handleEditMealServingSize(String command) throws invalidIndexException {
         Parser.parseEditMeal(command);
+        assert Parser.editMealIndex != 0: "meal index out of bounds";
+        if (Parser.editMealIndex >= mealList.size()) {
+            throw new invalidIndexException();
+        }
+
         String mealName = mealList.get(Parser.editMealIndex).getName();
         Meal updatedMeal = new Meal(mealName, Parser.editMealSize);
         mealList.set(Parser.editMealIndex, updatedMeal);
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
 
-    public static void handleEditDrinkServingSize(String command) {
+    public static void handleEditDrinkServingSize(String command) throws invalidIndexException {
         Parser.parseEditDrink(command);
+        assert Parser.editDrinkIndex != 0: "drink index out of bounds";
+
+        if (Parser.editDrinkIndex >= drinkList.size()) {
+            throw new invalidIndexException();
+        }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
         Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
@@ -184,14 +198,15 @@ public class User {
 
     public void handleDeleteMeal(String command) {
         int mealIndex = Integer.parseInt(command.substring(11)) - 1;
+        assert mealIndex >= 0: "meal index out of bounds";
         String mealName = mealList.get(mealIndex).getName();
         mealList.remove(mealIndex);
-
         System.out.println("Removed " + mealName + " from meals");
     }
 
     public void handleDeleteDrink(String command) {
         int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
+        assert drinkIndex >= 0: "drink index out of bounds";
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
         System.out.println("Removed " + drinkName + " from drinks");
@@ -200,6 +215,9 @@ public class User {
     public void handleClear() {
         mealList.clear();
         drinkList.clear();
+        assert mealList.isEmpty(): "clearing of meal list failed";
+        assert drinkList.isEmpty(): "clearing of drink list failed";
+
         System.out.println("All entries have been deleted");
     }
 

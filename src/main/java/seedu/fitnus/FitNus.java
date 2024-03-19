@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.fitnus;
 
 public class FitNus {
 
@@ -19,6 +19,4 @@ public class FitNus {
     public static void main(String[] args) {
         new FitNus().run();
     }
-
-
 }

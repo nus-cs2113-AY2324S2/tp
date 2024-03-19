@@ -1,6 +1,6 @@
-package seedu.duke;
+package seedu.fitnus;
 
-import seedu.duke.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
 import java.util.HashMap;
 
 public class Drink {
