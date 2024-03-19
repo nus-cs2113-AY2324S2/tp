@@ -44,7 +44,7 @@ public class NewsOnTheGo {
         }
     }
 
-    private static List<NewsArticle> importNewsFromText(String filename) {
+    static List<NewsArticle> importNewsFromText(String filename) {
         List<String> stringList;
         try {
             stringList = Files.readAllLines(Paths.get(filename));
@@ -118,9 +118,9 @@ public class NewsOnTheGo {
     /**
      * Enter the news article number as stored in the array, and it will return the source of the news article.
      */
-    private static void sourceNews(String line, List<NewsArticle> list) {
+    static void sourceNews(String line, List<NewsArticle> list) {
         String[] split = line.split(" ");
-        int index = Integer.parseInt(split[1]);
+        int index = Integer.parseInt(split[1]) + 1;
         System.out.println(list.get(index).getSource());
     }
 }
