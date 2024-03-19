@@ -26,10 +26,11 @@ public class Parser {
             // notice: write your parser function by your own
             case "": // by default, it will be "gen"
             case "gen":
-            case "generate": //@晨珖 姚 <1014717807@QQ.com>
+            case "generate":
                 //ProblemGenerator ;
                 ProblemGenerator pb = new ProblemGenerator();
-                pb.TypeChoose(action);
+                //pb.TypeChoose(action);
+                pb.TypeChoose();
                 break;
             case "help": 
                 ui.help(command);
