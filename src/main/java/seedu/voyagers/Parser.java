@@ -9,7 +9,7 @@ import seedu.voyagers.commands.ExitCommand;
 import seedu.voyagers.commands.HelpCommand;
 import seedu.voyagers.commands.ListCommand;
 import seedu.voyagers.commands.ModifyTripCommand;
-
+import seedu.voyagers.utils.FormatDate;
 
 
 import java.text.ParseException;
@@ -34,7 +34,7 @@ public class Parser {
     private static final Date DEFAULT_START = defaultStartCalendar.getTime();
     private static final Date DEFAULT_END = defaultEndCalendar.getTime();
 
-    private static final SimpleDateFormat dateFormat = Util.dateFormat;
+    private static final SimpleDateFormat dateFormat = FormatDate.dateFormat;
 
 
 

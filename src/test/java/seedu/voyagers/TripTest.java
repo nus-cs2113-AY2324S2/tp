@@ -1,6 +1,7 @@
 package seedu.voyagers;
 
 import org.junit.jupiter.api.Test;
+import seedu.voyagers.classes.Trip;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

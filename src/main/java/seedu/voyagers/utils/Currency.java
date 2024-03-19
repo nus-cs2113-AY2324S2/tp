@@ -1,4 +1,4 @@
-package seedu.voyagers;
+package seedu.voyagers.utils;
 
 public enum Currency {
     USD("US Dollar", "$"),

@@ -1,4 +1,6 @@
-package seedu.voyagers;
+package seedu.voyagers.classes;
+import seedu.voyagers.VoyagerException;
+
 import java.util.ArrayList;
 
 
