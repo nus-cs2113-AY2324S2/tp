@@ -1,4 +1,23 @@
-Hello
-Spaghetti Carbonara / LUNCH
-What is your name?
-Hello Yuki
+-----------------------------
+Welcome to Recipe.io!
+-----------------------------
+Enter command:
+[Command entered: add /name meatballs /time 12]
+-----------------------------
+Enter command:
+[Command entered: list]
+meatballs  / GENERAL
+-----------------------------
+Enter command:
+[Command entered: delete 1]
+Deleted that recipe!
+-----------------------------
+Enter command:
+[Command entered: list]
+Sorry, there are no recipes in your recipe book to print.
+-----------------------------
+Enter command:
+[Command entered: exit]
+-----------------------------
+See you again!
+-----------------------------

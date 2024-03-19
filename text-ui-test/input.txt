@@ -1,1 +1,5 @@
-Yuki
+add /name meatballs /time 12
+list
+delete 1
+list
+exit
