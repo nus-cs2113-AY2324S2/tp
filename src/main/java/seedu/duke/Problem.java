@@ -2,8 +2,8 @@ package seedu.duke;
 
 public class Problem {
 
-    private String description;
-    private double answer;
+    private final String description;
+    private final double answer;
 
     public Problem(String description, double answer) {
         this.description = description;

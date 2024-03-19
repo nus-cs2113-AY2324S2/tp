@@ -1,26 +1,21 @@
 package seedu.duke;
 
 
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class for reading & writing input/output to file
  */
 public class Storage {
-    private static String filePath = "../../../../../tasklist.txt";
+    private static final String filePath = "../../../../../tasklist.txt";
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private static List<Record> records = new ArrayList<>();
+    private static final List<Record> records = new ArrayList<>();
 
     public static void addRecord(Record record) {
         records.add(record);
@@ -33,13 +28,14 @@ public class Storage {
 
     /**
      * Method for processing a line of input
+     *
      * @param line the line to be processed
      * @throws Exception exception is thrown whenever the input format is corrupt.
      */
-    public static void processLine(String line) throws Exception{
+    public static void processLine(String line) throws Exception {
         String[] words = line.split(" ");
 
-        if (words.length != 3 ) {
+        if (words.length != 3) {
             throw new Exception();
         }
 
@@ -55,7 +51,7 @@ public class Storage {
      * Method for reading the input file
      */
     public static void readFile() {
-        try (BufferedReader reader= new BufferedReader(new FileReader(filePath))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             try {
                 while ((line = reader.readLine()) != null) {
@@ -80,7 +76,7 @@ public class Storage {
                 writer.newLine();
             }
             writer.flush();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

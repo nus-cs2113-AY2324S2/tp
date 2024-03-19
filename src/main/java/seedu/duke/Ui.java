@@ -21,7 +21,7 @@ public class Ui {
     private static final String GEN_COMMAND =
             "Generate problem sets: \t" + "gen -t [type] -n [number] -d [maximum digits]";
     private static final String HELP_COMMAND =
-            "Help function: \t" + "help [type], type can be 'gen'/'command'/...";
+            "Help function: \t" + "help [type], type can be 'gen/'command'/...";
     private final String name;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -47,11 +47,15 @@ public class Ui {
         System.out.println(logo);
         System.out.println("Hello! I'm " + name);
         System.out.println("Type 'help' to see the instructions. \n");
+        this.showLine();
         System.out.println(PROBLEM_FORM);
     }
 
     public String readCommand() {
-        return scanner.nextLine().trim();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine().trim();
+        }
+        return "";
     }
 
     public void showLine() {
@@ -60,18 +64,17 @@ public class Ui {
 
     public void help(String helpType) {
         switch (helpType) {
-        case "": // by default, user asks Input Instruction
+        case "": // by default, user asks Help Instruction
+        case "command":
+            System.out.println(HELP_COMMAND);
+            break;
         case "gen":
         case "generate":
             System.out.println(GEN_COMMAND);
             System.out.println(INPUT_INSTRUCTION);
             break;
-        case "command":
-            System.out.println(HELP_COMMAND);
-            break;
-        default:
-            break;
         }
+        this.showLine();
     }
 
     // invalid input
@@ -82,10 +85,6 @@ public class Ui {
     public void invalidCommand() {
         System.out.println("Invalid command! Please try again.");
     }
-
-    /**
-     * Displays an error message for an invalid index.
-     */
 
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
