@@ -24,7 +24,7 @@ public class MediTracker {
     public MediTracker() {
         ui = new Ui();
         medicationManager = new MedicationManager();
-        dailyMedicationManager = new DailyMedicationManager();
+        dailyMedicationManager = new DailyMedicationManager(medicationManager);
     }
 
     /**
