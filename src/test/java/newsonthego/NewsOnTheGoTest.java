@@ -1,8 +1,12 @@
 package newsonthego;
 
+import static newsonthego.NewsOnTheGo.importNewsFromText;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 class NewsOnTheGoTest {
     @Test
@@ -11,6 +15,11 @@ class NewsOnTheGoTest {
         assertTrue(true); 
     }
 
+    @Test
+    public void sampleTestSource() {
+        List<NewsArticle> newsArticles = importNewsFromText("data/sampleNews.txt");
+        assertEquals("Financial Times", newsArticles.get(1).getSource());
+    }
 
      
 }
