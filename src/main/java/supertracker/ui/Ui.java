@@ -94,6 +94,7 @@ public class Ui {
     }
 
     public static void listIntro(int size) {
+        assert size >= 0;
         if (size == 0) {
             printIndent(EMPTY_LIST_MESSAGE);
             return;
