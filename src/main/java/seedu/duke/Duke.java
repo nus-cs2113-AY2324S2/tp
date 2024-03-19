@@ -10,7 +10,7 @@ public class Duke {
     /**
      * Main entry-point for PulsePilot.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomExceptions.InvalidInput {
         initialiseBot();
         processInput();
         terminateBot();
