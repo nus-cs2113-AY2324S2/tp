@@ -4,8 +4,8 @@ import utility.Constant;
 import utility.CustomExceptions;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import static workouts.Workout.parseDate;
 
 /**
  * The Bmi class extends the Health class and provides functionality to calculate
@@ -48,7 +48,7 @@ public class Bmi extends Health {
 
         assert this.height > 0 && this.weight > 0 : "Height and weight must be positive";
 
-        this.date = Parser.parseDate(date);
+        this.date = parseDate(date);
 
         this.bmiValue = calculateBmiValue();
         this.bmiCategory = getBmiCategory(bmiValue);
