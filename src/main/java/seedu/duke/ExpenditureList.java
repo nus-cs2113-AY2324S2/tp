@@ -72,39 +72,40 @@ public class ExpenditureList {
         }
     }
 
-    public static void addExpenditure(String expenditure, boolean userAdded) {
-        String[] parts = expenditure.split("d/", 2);
-        if (parts.length < 2) {
-            System.out.println("Invalid input format for description.");
-            return;
-        }
-        // Description part directly after "d/"
-        String descriptionPart = parts[1].trim();
 
-        parts = descriptionPart.split(" amt/", 2);
-        if (parts.length < 2) {
-            System.out.println("Invalid input format for amount.");
-            return;
-        }
-        String description = parts[0].trim();
-        String amountAndDate = parts[1].trim();
-
-        parts = amountAndDate.split(" date/", 2);
-        if (parts.length < 2) {
-            System.out.println("Invalid input format for date.");
-            return;
-        }
-        String amount = parts[0].trim();
-        String date = parts[1].trim();
-
+    public static void addExpenditure(String expenditure, Boolean userAdded) {
         try {
+            String[] parts = expenditure.split("d/", 2);
+            if (parts.length < 2) {
+                throw new InvalidInputFormatException("Invalid input format for description.");
+            }
+            // Description part directly after "d/"
+            String descriptionPart = parts[1].trim();
+
+            parts = descriptionPart.split(" amt/", 2);
+            if (parts.length < 2) {
+                throw new InvalidInputFormatException("Invalid input format for amount.");
+            }
+            String description = parts[0].trim();
+            String amountAndDate = parts[1].trim();
+
+            parts = amountAndDate.split(" date/", 2);
+            if (parts.length < 2) {
+                throw new InvalidInputFormatException("Invalid input format for date.");
+            }
+            String amount = parts[0].trim();
+            String date = parts[1].trim();
+
             float amountValue = Float.parseFloat(amount);
             // Ensure that the expenditureList is initialized somewhere before this
             expenditureList.add(new Expenditure(description, amountValue, date));
             expenditureCount += 1;
+
             if (userAdded){
                 System.out.println("Expenditure added successfully.");
             }
+        } catch (InvalidInputFormatException e) {
+            System.out.println(e.getMessage());
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount format!");
@@ -120,11 +121,16 @@ public class ExpenditureList {
         expenditureCount--;
     }
 
-    public static void clearlist(){
-        for (int num = 0 ;num<expenditureList.size();num++) {
-            System.out.println("I have removed everything in the list");
-            expenditureList.remove(num);
-            expenditureCount --;
+    public static void clearlist() {
+        if (expenditureList.isEmpty()) {
+            System.out.println("The list is already empty!");
+        } else {
+
+            while (!expenditureList.isEmpty()) {
+                expenditureList.remove(expenditureList.size() - 1); // Remove the last element
+                expenditureCount--; // Decrement the count of expenditures
+            }
+            System.out.println("I have cleared the whole list!");
         }
     }
 

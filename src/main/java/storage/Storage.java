@@ -1,6 +1,7 @@
 package storage;
 
 import seedu.duke.ExpenditureList;
+import seedu.duke.InvalidInputFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
