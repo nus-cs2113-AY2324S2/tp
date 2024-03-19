@@ -14,6 +14,14 @@ public class ActivityList {
         this.activities = activities;
     }
 
+    public Activity get(int i) {
+        return activities.get(i);
+    }
+
+    public int size() {
+        return activities.size();
+    }
+
     public Activity getRandomActivity() {
         Random random = new Random();
         int activityIndex = random.nextInt(9);
