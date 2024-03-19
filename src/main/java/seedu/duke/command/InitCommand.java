@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import java.util.Map;
-
 public class InitCommand extends Command{
     private final String name;
     public InitCommand(String name) {
