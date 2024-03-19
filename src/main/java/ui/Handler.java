@@ -7,6 +7,7 @@ import health.Period;
 import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
+import workouts.Gym;
 import workouts.Run;
 import workouts.WorkoutList;
 import java.util.Scanner;
@@ -46,6 +47,11 @@ public class Handler {
                     handleExercise(userInput);
 
                     break;
+                case HEALTH:
+
+                    handleHealth(userInput);
+
+                    break;
                 case HISTORY:
 
                     handleHistory(userInput);
@@ -54,11 +60,6 @@ public class Handler {
                 case LATEST:
 
                     handleLatest(userInput);
-
-                    break;
-                case HEALTH:
-
-                    handleHealth(userInput);
 
                     break;
                 case HELP:
@@ -103,52 +104,6 @@ public class Handler {
         return input.substring(startIndex, endIndex).trim();
     }
 
-    /**
-     * Checks the type of exercise based on the user input.
-     * Usage: to use this method whenever the user enters a new exercise.
-     * Handles all the checks for input validity and sufficiency.
-     * Can assume input is valid and sufficient if no exceptions are thrown.
-     * @param userInput The user input string.
-     * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
-     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
-     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
-     */
-    public static String checkTypeOfExercise(String userInput) throws
-            CustomExceptions.InvalidInput,
-            CustomExceptions.InsufficientInput {
-        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
-
-        String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
-
-        if (exerciseType.isBlank()){
-            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_EXERCISE);
-        }
-
-        exerciseType = exerciseType.toLowerCase();
-
-
-        boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
-        boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
-        if(!isRun && !isGym){
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
-        }
-        
-
-        if (isRun && userInputs.length < 5) {
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
-        }
-
-        if (isGym && userInputs.length < 3) {
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
-        }
-
-
-        if (isRun){
-            return Constant.RUN;
-        } else {
-            return Constant.GYM;
-        }
-    }
 
     /**
      * Constructs a new {@code }  object based on the user input.
@@ -159,7 +114,7 @@ public class Handler {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(Constant.RUN)) {
-                String[] runDetails = getRun(userInput);
+                String[] runDetails = Run.getRun(userInput);
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
@@ -169,21 +124,13 @@ public class Handler {
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
             } else if (typeOfExercise.equals(Constant.GYM)) {
                 // Yet to implement : handleGym(userInput);
-                getGym(userInput);
+                Gym.getGym(userInput);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
             // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
-    }
-
-    public static void handleHistory(String userInput){
-        Output.printHistory("all");
-    }
-    public static void handleLatest(String userInput){
-        // if asked to show latest run
-        Output.printLatestRun();
     }
 
     /**
@@ -197,7 +144,7 @@ public class Handler {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(Constant.BMI)){
                 String[] bmiDetails = Bmi.getBmi(userInput);
-                
+
                 if (bmiDetails[0].isEmpty()
                         || bmiDetails[1].isEmpty()
                         || bmiDetails[2].isEmpty()
@@ -229,44 +176,64 @@ public class Handler {
         }
     }
 
-
-    public static void getGym(String input){
-        System.out.println("temp");
+    public static void handleHistory(String userInput){
+        Output.printHistory("all");
     }
+    public static void handleLatest(String userInput){
+        // if asked to show latest run
+        Output.printLatestRun();
+    }
+
+
+
 
     /**
-     * Parses a string containing run information, extracts the command, distance and end time before returning
-     * an array of strings containing the information.
-     *
-     * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
-     * @return An array of strings containing the extracted command, distance, time taken and date(if given).
+     * Checks the type of exercise based on the user input.
+     * Usage: to use this method whenever the user enters a new exercise.
+     * Handles all the checks for input validity and sufficiency.
+     * Can assume input is valid and sufficient if no exceptions are thrown.
+     * @param userInput The user input string.
+     * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      */
-    public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
+    public static String checkTypeOfExercise(String userInput) throws
+            CustomExceptions.InvalidInput,
+            CustomExceptions.InsufficientInput {
+        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
 
-        String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
+        String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
-
-        if (!input.contains("/e:") || !input.contains("/d:") || !input.contains("/t:")) {
-            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+        if (exerciseType.isBlank()){
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_EXERCISE);
         }
 
-        results[Constant.SUBSTRING_COMMAND] = extractSubstringFromSpecificIndex(input, "/e:"); // Command
-        results[Constant.SUBSTRING_DISTANCE] = extractSubstringFromSpecificIndex(input, "/d:"); // Distance
-        results[Constant.SUBSTRING_TIME] = extractSubstringFromSpecificIndex(input, "/t:"); // Time
-        results[Constant.SUBSTRING_DATE] = extractSubstringFromSpecificIndex(input, "/date:"); // Date
+        exerciseType = exerciseType.toLowerCase();
 
-        // Assert and validate the extracted values
 
-        assert !results[Constant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
-        assert !results[Constant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
-        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric " +
-                "value (assuming KM)";
-        assert !results[Constant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
-        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format " +
-                "HH:MM:SS";
+        boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
+        boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
+        if(!isRun && !isGym){
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
+        }
 
-        return results;
+
+        if (isRun && userInputs.length < 5) {
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
+        }
+
+        if (isGym && userInputs.length < 3) {
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
+        }
+
+
+        if (isRun){
+            return Constant.RUN;
+        } else {
+            return Constant.GYM;
+        }
     }
+
 
     /**
      * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
