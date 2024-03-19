@@ -20,7 +20,13 @@ public class Test {
     public  void addToTest(Problem p){
         problemList.add(p);
     }
-    public int getNumber(){return number;}
-    public  ArrayList<Problem> getProblem(){return problemList;}
+
+    public int getNumber(){
+        return number;
+    }
+
+    public  ArrayList<Problem> getProblem() {
+        return problemList;
+    }
 
 }

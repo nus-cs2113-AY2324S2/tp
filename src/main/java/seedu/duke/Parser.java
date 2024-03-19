@@ -25,33 +25,34 @@ public class Parser {
         }
 
         switch (action) {
-            // notice: write your parser function by your own
-            case "": // by default, it will be "gen"
-            case "gen":
-            case "generate":
-                //ProblemGenerator ;
-                ProblemGenerator pb = new ProblemGenerator();
-                Test test = pb.typeChoose();
-                Checker checker = new Checker(test);
-                checker.getUserAnswer();
+        // notice: write your parser function by your own
+        case "": // by default, it will be "gen"
+        case "gen":
+        case "generate":
+            //ProblemGenerator ;
+            ProblemGenerator pb = new ProblemGenerator();
+            Test test = pb.typeChoose();
+            Checker checker = new Checker(test);
+            checker.getUserAnswer();
 
-                System.out.println("Acc: "+checker.getAccuracy());
-                System.out.println("Spend Time: "+checker.getTime()+"s");
+            System.out.println("Acc: "+checker.getAccuracy());
+            System.out.println("Spend Time: "+checker.getTime()+"s");
 
-                // Storage write to file
-                Storage.addRecord(new Record(LocalDateTime.now(), (double) test.getNumber() / checker.getTime(), checker.getAccuracy()));
-                Storage.writeFile();
+            // Storage write to file
+            double speed = (double) test.getNumber() / checker.getTime();
+            Storage.addRecord(new Record(LocalDateTime.now(), speed, checker.getAccuracy()));
+            Storage.writeFile();
 
-                break;
-            case "help": 
-                ui.help(command);
-                break;
-            case "exit":
-                ui.exit();
-                break;
-            default:
-                ui.invalidCommand();
-                break;
+            break;
+        case "help":
+            ui.help(command);
+            break;
+        case "exit":
+            ui.exit();
+            break;
+        default:
+            ui.invalidCommand();
+            break;
         }
     }
 }
