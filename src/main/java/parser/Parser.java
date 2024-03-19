@@ -1,6 +1,6 @@
 package parser;
 
-import transactions.Transaction;
+import transaction.Transaction;
 
 public class Parser {
 

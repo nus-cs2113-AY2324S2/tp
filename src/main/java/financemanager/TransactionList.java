@@ -1,7 +1,7 @@
 package financemanager;
 
 import parser.Parser;
-import transactions.Transaction;
+import transaction.Transaction;
 import ui.UserInterface;
 
 import java.util.ArrayList;

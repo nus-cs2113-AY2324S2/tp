@@ -1,4 +1,4 @@
-package transactions;
+package transaction;
 
 import org.junit.jupiter.api.Test;
 
