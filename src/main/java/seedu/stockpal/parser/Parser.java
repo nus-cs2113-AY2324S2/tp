@@ -17,7 +17,9 @@ import seedu.stockpal.exceptions.InvalidFormatException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.stockpal.storage.Storage;
+
 
 public class Parser {
     public static final String DIVIDER = " ";

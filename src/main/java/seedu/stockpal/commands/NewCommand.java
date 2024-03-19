@@ -1,17 +1,24 @@
 package seedu.stockpal.commands;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.storage.Storage;
 
+import java.util.logging.Level;
+
+import static seedu.stockpal.commands.EditCommand.logger;
 import static seedu.stockpal.common.Messages.MESSAGE_ADDED;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
 
 public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    public static final String COMMAND_USAGE = COMMAND_KEYWORD
+            + ": Creates a new product to the inventory and assigns a unique Product ID (PID) to it.\n"
+            + "Format: new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]";
+
     protected ProductList productList;
     private final Product toAdd;
     private final Storage storage;
@@ -39,5 +46,10 @@ public class NewCommand extends ListActionCommand {
         productList.addProduct(toAdd);
         printToScreen(MESSAGE_ADDED);
         storage.append(toAdd);
+
+        if (productList.getSize() <= 0) {
+            throw new AssertionError();
+        }
+        logger.log(Level.INFO, Messages.MESSAGE_ADDED);
     }
 }

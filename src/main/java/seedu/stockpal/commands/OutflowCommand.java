@@ -8,8 +8,8 @@ import seedu.stockpal.storage.Storage;
 public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
-            + ": Reduce quantity of an existing product in the inventory at the specific PID\n"
-            + "Format: outflow PID [a/QUANTITY] ";
+            + ": Decreases the quantity by the specified amount from the existing amount according to the PID.\n"
+            + "Format: outflow PID a/DECREMENT_AMOUNT";
 
     private ProductList productList;
     private Pid pid;
