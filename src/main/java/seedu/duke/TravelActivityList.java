@@ -52,7 +52,7 @@ public class TravelActivityList {
      * @param taskNumber The travel activity number on the list
      */
     public void removeTravelActivity(int taskNumber) throws OmniException{
-        assert taskNumber != 0  : "There is not tasks in the list";
+        assert taskNumber != 0  :"There is not tasks in the list";
         if(taskNumber > travelActivities.size()){
             throw new OmniException("Travel activity cannot be found!");
         }
