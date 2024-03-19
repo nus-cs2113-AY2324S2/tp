@@ -5,13 +5,12 @@ import seedu.voyagers.Trip;
 import seedu.voyagers.TripList;
 import seedu.voyagers.Ui;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 
-public class AddTrip extends Command{
+public class AddTripCommand extends Command{
 
-    public AddTrip(String[] args){
+    public AddTripCommand(String[] args){
         super(args);
     }
 
@@ -22,10 +21,18 @@ public class AddTrip extends Command{
         String location = args[3];
         String description = args[4];
         Trip trip = new Trip(name, startDate, endDate, location, description);
-        trips.add(trip);
-        ui.echo("Got it. I've added this trip:\n" + trip
-                + "\nNow you have " + trips.size() +
-                " trips in the list.");
+
+        try{
+            trips.add(trip);
+            ui.echo("Got it. I've added this trip:\n" + trip
+                    + "\nNow you have " + trips.size() +
+                    " trips in the list.");
+        } catch (Exception e){
+            ui.echo(e.getMessage());
+            return;
+        }
+
+
 
         //storage.writeTripFile(trips, trips.size());
     }

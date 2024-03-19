@@ -22,6 +22,9 @@ public class TripList {
      * @param trip the trip to add
      */
     public void add(Trip trip){
+        if (isTripNameRepeated(trip.getName())){
+            throw new IllegalArgumentException("Trip name already exists");
+        }
         this.trips.add(trip);
     }
 
@@ -88,6 +91,29 @@ public class TripList {
         }
 
         return i;
+    }
+
+    public void setTrip(int index, Trip trip){
+        this.trips.set(index, trip);
+    }
+
+    /**
+     * Finds the index of the trip with the specified name
+     * @param name
+     * @return the index of the trip with the specified name (starting from 0).
+     * Returns -1 if no such trip is found.
+     */
+    public int findTrip(String name){
+        for (int i = 0; i < trips.size(); i++){
+            if (trips.get(i).getName().equals(name)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean isTripNameRepeated(String name){
+       return findTrip(name) != -1;
     }
 
 
