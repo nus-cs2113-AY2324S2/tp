@@ -1,6 +1,5 @@
 package supertracker.ui;
 
-import supertracker.item.Inventory;
 import supertracker.item.Item;
 
 public class Ui {
