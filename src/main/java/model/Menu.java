@@ -21,7 +21,7 @@ public class Menu implements ItemManager {
 
     private final String menuID;
 
-    private final static Logger logr = Logger.getLogger("MenuLogger");
+    private static final Logger logr = Logger.getLogger("MenuLogger");
 
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
