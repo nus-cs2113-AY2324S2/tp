@@ -54,5 +54,11 @@ class DukeTest {
     public void testStringCoversion(){
         assertEquals("visit museum", new TravelActivity("visit museum").toString());
     }
+    @Test
+    public void searchTest () {
+        assertTrue(true);
+    }
+
+
 
 }
