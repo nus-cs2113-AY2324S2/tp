@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
+
+import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.DeleteCommand;
 import seedu.binbash.command.SearchCommand;
@@ -46,6 +48,49 @@ public class ParserTest {
         itemList.addItem("Test Item", "Test Description", 5, "2024-12-31", 10.5, 7.5);
         Command command = parser.parseCommand("delete Test Item");
         assertTrue(command instanceof DeleteCommand);
+    }
+
+    public void parseAddCommand_createItemWithNoQuantityAndExpirationDate_returnsAddCommand() {
+        try {
+            itemList.addItem("Test Item", "Test Description", 0, "N.A.", 0.00, 0.00);
+            Command command = parser.parseCommand("add n/Test Item d/Test Description s/0.00 c/0.00");
+            assertTrue(command instanceof AddCommand);
+        } catch (InvalidCommandException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseAddCommand_createItemWithNoQuantity_returnsAddCommand() {
+        try {
+            itemList.addItem("Test Item", "Test Description", 0, "01-01-1999", 0.00, 0.00);
+            Command command = parser.parseCommand("add n/Test Item d/Test Description e/01-01-1999 s/0.00 c/0.00");
+            assertTrue(command instanceof AddCommand);
+        } catch (InvalidCommandException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseAddCommand_createItemWithNoExpiration_returnsAddCommand() {
+        try {
+            itemList.addItem("Test Item", "Test Description", 10, "N.A.", 0.00, 0.00);
+            Command command = parser.parseCommand("add n/Test Item d/Test Description q/10 s/0.00 c/0.00");
+            assertTrue(command instanceof AddCommand);
+        } catch (InvalidCommandException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseAddCommand_createItemWithAllArguments_returnsAddCommand() {
+        try {
+            itemList.addItem("Test Item", "Test Description", 10, "01-01-1999", 0.00, 0.00);
+            Command command = parser.parseCommand("add n/Test Item d/Test Description q/10 e/01-01-1999 s/0.00 c/0.00");
+            assertTrue(command instanceof AddCommand);
+        } catch (InvalidCommandException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
     }
 
     @Test

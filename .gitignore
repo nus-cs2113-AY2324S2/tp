@@ -18,6 +18,8 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data
+text-ui-test/data/*
 
 # Data files
 /data/

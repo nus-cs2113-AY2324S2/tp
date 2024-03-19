@@ -11,5 +11,76 @@ Welcome to BinBash!
 
 -------------------------------------------------------------
 -------------------------------------------------------------
+Noted! I have added the following item into your inventory:
+
+item with
+	description: no exp or quantity
+	quantity: 0
+	expiry date: N.A.
+	sale price: $0.00
+	cost price: $100.00
+-------------------------------------------------------------
+-------------------------------------------------------------
+Noted! I have added the following item into your inventory:
+
+item with
+	description: no exp
+	quantity: 10
+	expiry date: N.A.
+	sale price: $0.00
+	cost price: $100.00
+-------------------------------------------------------------
+-------------------------------------------------------------
+Noted! I have added the following item into your inventory:
+
+item with
+	description: no quantity
+	quantity: 0
+	expiry date: 01-01-1999
+	sale price: $0.00
+	cost price: $100.00
+-------------------------------------------------------------
+-------------------------------------------------------------
+Noted! I have added the following item into your inventory:
+
+item with
+	description: everything
+	quantity: 100
+	expiry date: 01-01-1999
+	sale price: $0.00
+	cost price: $100.00
+-------------------------------------------------------------
+-------------------------------------------------------------
+1. item with
+	description: no exp or quantity
+	quantity: 0
+	expiry date: N.A.
+	sale price: $0.00
+	cost price: $100.00
+
+2. item with
+	description: no exp
+	quantity: 10
+	expiry date: N.A.
+	sale price: $0.00
+	cost price: $100.00
+
+3. item with
+	description: no quantity
+	quantity: 0
+	expiry date: 01-01-1999
+	sale price: $0.00
+	cost price: $100.00
+
+4. item with
+	description: everything
+	quantity: 100
+	expiry date: 01-01-1999
+	sale price: $0.00
+	cost price: $100.00
+
+
+-------------------------------------------------------------
+-------------------------------------------------------------
 Bye!
 -------------------------------------------------------------
