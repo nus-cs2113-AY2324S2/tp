@@ -13,6 +13,7 @@ public class NewsOnTheGo {
 
     public static final String FILENAME = "data/sampleNews.txt";
     private static final Logger logger = Logger.getLogger("NewsOnTheGo");
+    private static ArrayList<NewsTopic> newsTopics = new ArrayList<>();
 
     /**
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
@@ -75,6 +76,22 @@ public class NewsOnTheGo {
             int bias = Integer.parseInt(split[7].split(" ")[1]);
             NewsArticle newsArticle = new NewsArticle(headline, author, date, source, importance, reliability, bias);
             list.add(newsArticle);
+            //identify related topic to the article
+            String topic = split[8];
+            boolean topicFound = false;
+            //checks against current list of topics
+            //if topic is recurring, adds article to the current topic list
+            //else, a new topic will be added to the list of topics
+            for(NewsTopic t: newsTopics) {
+                if(topic.equalsIgnoreCase(t.getTopicName())){
+                    t.addNewsArticle(newsArticle);
+                    topicFound = true;
+                }
+            }
+            if(!topicFound) {
+                NewsTopic newsTopic = new NewsTopic(topic);
+                newsTopics.add(newsTopic);
+            }
         }
 
         return list;
