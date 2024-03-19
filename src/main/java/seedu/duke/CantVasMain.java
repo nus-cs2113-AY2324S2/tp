@@ -3,7 +3,7 @@ package seedu.duke;
 import static storage.Storage.readExpenditureFile;
 
 public class CantVasMain {
-    private static UI ui;
+    public static UI ui;
     private static ExpenditureList expenseList;
     private static ProcessCommand processCommand;
 
