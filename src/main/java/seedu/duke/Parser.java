@@ -85,6 +85,9 @@ public class Parser {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
+        } catch (invalidIndexException e) {
+            System.out.println("Sorry the index you provided is invalid, check listMeals/listDrinks to view valid " +
+                    "indexes.");
         }
     }
 
