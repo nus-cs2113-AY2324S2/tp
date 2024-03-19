@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class ItemList {
     private final List<Item> itemList;
 
-    public ItemList() {
-        itemList = new ArrayList<>();
+    public ItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public List<Item> getItemList() {
@@ -29,8 +29,8 @@ public class ItemList {
 
         itemList.add(item);
 
-        String output = "Noted! I have added the following item into your inventory:\n"
-                + "\n" + item;
+        String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
+                + System.lineSeparator() + item;
         return output;
     }
 
