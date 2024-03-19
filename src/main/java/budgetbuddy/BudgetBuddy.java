@@ -1,5 +1,6 @@
 package budgetbuddy;
 
+import budgetbuddy.account.Account;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.ui.UserInterface;
 
@@ -19,7 +20,9 @@ public class BudgetBuddy {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
 
+
         TransactionList transactions = new TransactionList();
+        Account account = new Account();
         boolean isRunning = true;
         try{
             while (isRunning) {
@@ -37,7 +40,7 @@ public class BudgetBuddy {
                     transactions.removeTransaction(input);
                     break;
                 case "add":
-                    transactions.processTransaction(input);
+                    transactions.processTransaction(input, account);
                     break;
                 default:
                     UserInterface.printNoCommandExists();

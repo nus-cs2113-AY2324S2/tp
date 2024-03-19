@@ -1,5 +1,6 @@
 package budgetbuddy.transaction;
 
+import budgetbuddy.account.Account;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
@@ -45,8 +46,8 @@ public class TransactionList {
         transactions.add(t);
     }
 
-    public void processTransaction(String input) {
-        Transaction t = parser.parseTransaction(input);
+    public void processTransaction(String input, Account account) {
+        Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
         UserInterface.printAddMessage(fetchData);
