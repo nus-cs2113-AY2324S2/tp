@@ -1,15 +1,15 @@
 package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
-import seedu.lifetrack.calorielist.CalorieList;
-import seedu.lifetrack.exceptions.InvalidInputException;
+import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
 
 
 class LifeTrackTest {

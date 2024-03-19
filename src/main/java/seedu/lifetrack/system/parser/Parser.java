@@ -1,9 +1,9 @@
-package seedu.lifetrack.parser;
+package seedu.lifetrack.system.parser;
 
-import seedu.lifetrack.activity.Activity;
-import seedu.lifetrack.calorielist.Entry;
+import seedu.lifetrack.calories.activity.Activity;
+import seedu.lifetrack.calories.calorielist.Entry;
 import seedu.lifetrack.calories.Calorie;
-import seedu.lifetrack.exceptions.InvalidInputException;
+import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.Objects;
 

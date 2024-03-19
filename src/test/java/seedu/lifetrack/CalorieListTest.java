@@ -1,8 +1,8 @@
 package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
-import seedu.lifetrack.calorielist.CalorieList;
-import seedu.lifetrack.calorielist.Entry;
+import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.calories.calorielist.Entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

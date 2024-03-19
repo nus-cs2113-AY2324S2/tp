@@ -1,4 +1,4 @@
-package seedu.lifetrack.activity;
+package seedu.lifetrack.calories.activity;
 
 public class Activity {
 
