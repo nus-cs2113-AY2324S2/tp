@@ -47,7 +47,7 @@ public class NewCommand extends ListActionCommand {
         printToScreen(MESSAGE_ADDED);
         storage.append(toAdd);
 
-        if (productList.getSize() <= 0) {
+        if (productList.getSize() < 0) {
             throw new AssertionError();
         }
         logger.log(Level.INFO, Messages.MESSAGE_ADDED);
