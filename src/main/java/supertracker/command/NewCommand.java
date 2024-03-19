@@ -17,6 +17,10 @@ public class NewCommand implements Command {
 
     @Override
     public void execute() {
+        assert !Inventory.contains(name);
+        assert quantity >= 0;
+        assert price >= 0;
+
         Item item = new Item(name, quantity, price);
         Inventory.put(name, item);
         Ui.newCommandSuccess(item);

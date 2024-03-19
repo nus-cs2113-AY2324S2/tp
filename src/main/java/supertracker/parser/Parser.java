@@ -1,10 +1,12 @@
 package supertracker.parser;
 
 import supertracker.TrackerException;
+import supertracker.command.AddCommand;
 import supertracker.command.InvalidCommand;
 import supertracker.command.ListCommand;
 import supertracker.command.NewCommand;
 import supertracker.command.QuitCommand;
+import supertracker.command.RemoveCommand;
 import supertracker.command.UpdateCommand;
 import supertracker.command.DeleteCommand;
 import supertracker.command.Command;
@@ -20,6 +22,8 @@ public class Parser {
     private static final String LIST_COMMAND = "list";
     private static final String UPDATE_COMMAND = "update";
     private static final String DELETE_COMMAND = "delete";
+    private static final String ADD_COMMAND = "add";
+    private static final String REMOVE_COMMAND = "remove";
     private static final double ROUNDING_FACTOR = 100.0;
     private static final String BASE_FLAG = "/";
     private static final String NAME_FLAG = "n";
@@ -37,6 +41,10 @@ public class Parser {
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
             + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
+    private static final String ADD_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
+            + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
+    private static final String REMOVE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
+            + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
 
 
     /**
@@ -78,6 +86,12 @@ public class Parser {
             break;
         case DELETE_COMMAND:
             command = parseDeleteCommand(params);
+            break;
+        case ADD_COMMAND:
+            command = parseAddCommand(params);
+            break;
+        case REMOVE_COMMAND:
+            command = parseRemoveCommand(params);
             break;
         default:
             command = new InvalidCommand();
@@ -244,7 +258,7 @@ public class Parser {
             throw new TrackerException(ErrorMessage.INVALID_DELETE_FORMAT);
         }
 
-        String name = matcher.group(NAME_GROUP);
+        String name = matcher.group(NAME_GROUP).trim();
 
         if (name.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
@@ -255,5 +269,75 @@ public class Parser {
         }
 
         return new DeleteCommand(name);
+    }
+
+    private static Command parseAddCommand(String input) throws TrackerException {
+        String[] flags = {NAME_FLAG, QUANTITY_FLAG};
+        Matcher matcher = getPatternMatcher(ADD_COMMAND_REGEX, input, flags);
+
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_ADD_FORMAT);
+        }
+
+        String name = matcher.group(NAME_GROUP).trim();
+        String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
+
+        if (name.isEmpty() || quantityString.isEmpty()) {
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        if (!Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_ADD);
+        }
+
+        int quantity;
+
+        // throws NumberFormatException if strings cannot be parsed
+        try {
+            quantity = Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            throw new TrackerException(ErrorMessage.INVALID_NUMBER_FORMAT);
+        }
+
+        if (quantity < 0) {
+            throw new TrackerException(ErrorMessage.QUANTITY_TOO_SMALL);
+        }
+
+        return new AddCommand(name,quantity);
+    }
+
+    private static Command parseRemoveCommand(String input) throws TrackerException {
+        String[] flags = {NAME_FLAG, QUANTITY_FLAG};
+        Matcher matcher = getPatternMatcher(REMOVE_COMMAND_REGEX, input, flags);
+
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_REMOVE_FORMAT);
+        }
+
+        String name = matcher.group(NAME_GROUP).trim();
+        String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
+
+        if (name.isEmpty() || quantityString.isEmpty()) {
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        if (!Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_REMOVE);
+        }
+
+        int quantity;
+
+        // throws NumberFormatException if strings cannot be parsed
+        try {
+            quantity = Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            throw new TrackerException(ErrorMessage.INVALID_NUMBER_FORMAT);
+        }
+
+        if (quantity < 0) {
+            throw new TrackerException(ErrorMessage.QUANTITY_TOO_SMALL);
+        }
+
+        return new RemoveCommand(name, quantity);
     }
 }
