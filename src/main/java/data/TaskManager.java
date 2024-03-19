@@ -80,6 +80,11 @@ public class TaskManager {
         LocalDate date = parseInputDate(scanner);
 
         checkIfDateInCurrentWeek(date, weekView);
+        if (inMonthView) {
+            checkIfDateInCurrentMonth(date);
+        } else {
+            checkIfDateInCurrentWeek(date, weekView);
+        }
 
         listTasksAtDate(taskManager, date, "Enter the task number of the task you wish to update:");
 
