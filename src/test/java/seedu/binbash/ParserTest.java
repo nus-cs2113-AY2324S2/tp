@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import seedu.binbash.command.Command;
-import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.DeleteCommand;
 import seedu.binbash.command.SearchCommand;
 import seedu.binbash.command.ListCommand;
