@@ -60,9 +60,11 @@ public class Parser {
             if (index <= 0 || index > itemList.getItemCount()) {
                 throw new InvalidArgumentException("Index is out of bounds!");
             }
+            assert index <= 0 || index > itemList.getItemCount();
             return new DeleteCommand(itemList, index);
         } else {
             String keyword = argumentMatcher.group("identifier");
+            assert !keyword.isEmpty();
             return new DeleteCommand(itemList, keyword);
         }
     }
