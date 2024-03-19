@@ -51,6 +51,17 @@ public class OrderTest {
                 "1. D01 Chicken Rice $3.50", order.toString());
     }
 
-
-
+    @Test
+    public void testOrderSummary() {
+        MenuItem dish01 = new MenuItem("D01", "Chicken Rice", 3.50);
+        MenuItem dish02 = new MenuItem("D02", "Nasi Lemak", 3.00);
+        MenuItem dish04 = new MenuItem("D04", "Mee Siam", 3.50);
+        MenuItem dish05 = new MenuItem("D04", "Mee Siam", 3.50);
+        Order order = new Order();
+        order.add(dish01);
+        order.add(dish02);
+        order.add(dish04);
+        order.add(dish05);
+        assertEquals(order.getID() + " {Total Price: " + order.getTotalPrice() + "}", order.getOrderSummary());
+    }
 }
