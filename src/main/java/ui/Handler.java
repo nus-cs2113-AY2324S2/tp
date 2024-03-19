@@ -30,7 +30,7 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
 
-    public static void processInput() throws CustomExceptions.InvalidInput {
+    public static void processInput() {
         Scanner in = new Scanner(System.in);
 
 
@@ -77,9 +77,6 @@ public class Handler {
                 }
             } catch (IllegalArgumentException e) {
                 Output.printException(e, Constant.INVALID_COMMAND);
-                // Yet to implement : } catch (CustomException e) {
-                // Yet to implement : Reply.printException(e);
-
             }
 
 
