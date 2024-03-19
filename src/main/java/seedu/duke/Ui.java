@@ -15,6 +15,8 @@ public class Ui {
         System.out.println(LINE);
         System.out.println("Hello! Welcome to FitNUS");
         System.out.println("What would you like to track today?");
+        Meal.printAvailableMeals();
+        Drink.printAvailableDrinks();
         System.out.println(LINE);
     }
 
