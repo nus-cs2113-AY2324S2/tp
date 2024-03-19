@@ -1,19 +1,20 @@
 package seedu.duke;
 public class Game {
-    protected int gameType; // 0 to exit, 1 for tictactoe, 2 for hangman
-    protected TicTacToe game;
+    protected boolean isExit; // true to exit
+    protected String gameName;
 
     public Game(String line) {
-        gameType = Integer.parseInt(line);
-        switch (gameType) {
-        case 0:
-            //exit game
+        gameName = line;
+        isExit = false;
+    }
+
+    public void startGame() {
+        switch (gameName) { //to parse string
+        case ("tic tac toe"):
+            //start tic-tac-toe
             break;
-        case 1:
-            game = new TicTacToe();
-            break;
-        case 2:
-            //enters hangman game
+        case ("hangman"):
+            //starts hangman
             break;
         default:
             //throw exception
