@@ -1,7 +1,10 @@
+____________________________________________________________
  _              _
 |_)    |  _  _ |_) o  |  _ _|_
 |  |_| | _> (/_|   |  | (_) |_
-Hello from PulsePilot
-
-What is your name?
-Hello James Gosling
+Engaging orbital thrusters...
+PulsePilot on standby
+____________________________________________________________
+What is your name, Captain?
+____________________________________________________________
+Welcome aboard, James Gosling
