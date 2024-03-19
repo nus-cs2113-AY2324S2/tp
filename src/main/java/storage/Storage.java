@@ -19,6 +19,7 @@ public class Storage {
     /**
      * Creates directory and tasks.txt if it does not exist
      *
+     * @param path File Path of tests.txt file
      * @throws IOException If an I/O exception occurs during file handling
      */
     public static void createNewFile(Path path) throws IOException {
@@ -34,7 +35,8 @@ public class Storage {
     /**
      * Reads tasks in hashmap and writes it in formatted form to tests.txt
      *
-     * @param tasks
+     * @param tasks Hashmap of tasks
+     * @param path File Path of tests.txt file
      */
     public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
@@ -53,6 +55,7 @@ public class Storage {
     /**
      * Loads tasks from test.txt to hashmap
      *
+     * @param path File Path of tests.txt file
      * @return tasks hashmap of tasks read from test.txt
      */
     public static Map<LocalDate, List<String>> loadTasksFromFile(Path path) {
