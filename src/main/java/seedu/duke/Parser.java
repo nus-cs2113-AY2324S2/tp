@@ -84,7 +84,7 @@ public class Parser {
         } catch (UnregisteredDrinkException e) {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
-            throw new RuntimeException("Sorry that meal is not registered in the database.");
+            System.out.println("Sorry that meal is not registered in the database.");
         }
     }
 
