@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.parserExceptions.InvalidGameException;
+import seedu.duke.exceptions.parserExceptions.InvalidTTMoveException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,8 +12,20 @@ import java.io.InputStreamReader;
  */
 public class Parser {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static String input = "";
 
+    public static boolean ifQuit(String input) {
+        if (input.equals("quit")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean ifHelp(String input) {
+        if (input.equals("help")) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Reads input from user specifiying what game they wish to play.
@@ -18,29 +33,9 @@ public class Parser {
      * rn it returns nothing but maybe it can return a string of the game name ?
      * whatever makes it flow easier
      */
-    public static int readGame() {
-        input = readLine();
-        if (input == null) {
-            // call function to Ui to say something is wrong with reader // maybe restart program ?
-            System.out.println ("null input on readGame()");
-            return -1;
-        }
-
-        if (input.equals("quit")) {
-            // call function to tell someone else they want to quit
-            System.out.println ("tryna quit");
-            return 0;
-        } else if (input.equals("Tic Tac Toe")) {
-            // call tic tac toe
-            System.out.println("Loading Tic Tac Toe...");
-            return 1; // for TTT
-        } else if (input.equals("Hangman")) {
-            System.out.println("Loading Hangman...");
-            return 2; // for Hangman
-        } else {
-            // call "unknown game entered for Ui to print something and reprompt user
-            System.out.println ("unknown game name ! choices: hangman, ttt, or quit");
-            return 3;
+    public static void readGame(String input) throws InvalidGameException {
+        if (!input.equals("Tic Tac Toe") || !input.equals("Hangman")) {
+            throw new InvalidGameException();
         }
     }
 
@@ -50,32 +45,17 @@ public class Parser {
      * rn it returns nothing but maybe it can return the int repping the box num ?
      * whatever makes it flow easier
      */
-    public static String readTTMove() {
-        input = readLine();
-        if (input == null) {
-            // call function to Ui to say something is wrong with reader // maybe restart program ?
-            return ("null input on readTTMove()");
-        }
-
-        int markBox = 0;
+    public static void readTTMove(String input) throws InvalidTTMoveException {
+       int markBox;
         try {
             markBox = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            if (input.equals("quit")) {
-                // tell some other class they wanna quit
-                return ("tryna quit ttt");
-                //return;
-            }
-            // call function to Ui to say "not a number, invalid move"
-            return ("invalid tt input = " + input);
+            throw new InvalidTTMoveException();
         }
 
         if (markBox < 1 || markBox > 9) {
             // call function to Ui to say "invalid move"
-            return ("invalid tt move = " + markBox);
-        } else {
-            // call function to TT game to mark that box as user's
-            return ("doing tt move = " + markBox);
+            throw new InvalidTTMoveException();
         }
     }
 
@@ -85,7 +65,7 @@ public class Parser {
      *
      * @returns String representation of user input
      */
-    private static String readLine() {
+    public static String readLine() {
         try {
             return br.readLine();
         } catch (IOException e) {
