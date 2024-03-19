@@ -16,12 +16,11 @@ import longah.exception.ExceptionMessage;
  * LongAh class manages debts between members.
  */
 public class LongAh {
+    private static final Logger LongAhLogger = Logger.getLogger("LongAh");
     private static MemberList members;
     private static TransactionList transactions;
     private static Group group;
     private Scanner scanner;
-
-    private static final Logger LongAhLogger = Logger.getLogger("LongAh");
 
     /**
      * Constructs a new LongAh instance.

@@ -2,7 +2,6 @@ package longah.util;
 
 import java.util.ArrayList;
 
-import longah.LongAh;
 import longah.node.Transaction;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
