@@ -117,11 +117,16 @@ public class ExpenditureList {
         expenditureCount--;
     }
 
-    public static void clearlist(){
-        for (int num = 0 ;num<expenditureList.size();num++) {
-            System.out.println("I have removed everything in the list");
-            expenditureList.remove(num);
-            expenditureCount --;
+    public static void clearlist() {
+        if (expenditureList.isEmpty()) {
+            System.out.println("The list is already empty!");
+        } else {
+            // No need to use a separate counter since expenditureList.size() will dynamically change as items are removed
+            while (!expenditureList.isEmpty()) {
+                expenditureList.remove(expenditureList.size() - 1); // Remove the last element
+                expenditureCount--; // Decrement the count of expenditures
+            }
+            System.out.println("I have cleared the whole list!");
         }
     }
 
