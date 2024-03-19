@@ -1,9 +1,9 @@
 package seedu.duke;
 
 // import java.util.Random;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class ProblemGenerator {
 
@@ -12,27 +12,52 @@ public class ProblemGenerator {
 
     static final String DEFAULT_OPERATORS = "+-*/";
 
+    public static HashMap<String, String> parseCommand(String command) {
+        HashMap<String, String> options = new HashMap<>();
+        String[] tokens = command.split("\\s+");
 
-    static final String PROBLEM_FORM = "pleas operators the number and difficulty you like in following form\n"+
-            "generate -t [operators] -n [number] -d [maximum digit] \n";
-    Scanner in = new Scanner(System.in);
+        for (int i = 0; i < tokens.length; i++) {
 
-    public void typeChoose() {
+            switch (tokens[i]) {
+            case "-t":
+                options.put("operators", tokens[i + 1]);
+                break;
+            case "-n":
+                options.put("number", tokens[i + 1]);
+                break;
+            case "-d":
+                options.put("maximumDigits", tokens[i + 1]);
+                break;
+            default:
+                break;
+            }
+        }
+        defaultOptions(command, options);
+        return options;
+    }
 
-        System.out.println(PROBLEM_FORM);
-        String command = in.nextLine();
+    private static void defaultOptions(String command, HashMap<String, String> options) {
+        if (!command.contains("-t")) {
+            options.put("operators", DEFAULT_OPERATORS);
+        }
+        if (!command.contains("-n")) {
+            options.put("number", DEFAULT_NUMBER);
+        }
+        if (!command.contains("-d")) {
+            options.put("maximumDigits", DEFAULT_MAX_DIGITS);
+        }
+    }
+
+    public void typeChoose(String command) {
         HashMap<String, String> parameter = parseCommand(command);
-
         generate(parameter);
-
-
     }
 
     private void generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
-        int maxDigit =  Integer.parseInt(parameter.get("maximumDigits"));
+        int maxDigit = Integer.parseInt(parameter.get("maximumDigits"));
         String op = parameter.get("operators");
 
         ArrayList<String> operations = new ArrayList<>();
@@ -52,87 +77,46 @@ public class ProblemGenerator {
 
 
         //ArrayList<Problem> test = new ArrayList<>();
-        Test test = new Test(op,maxDigit,number) ;
+        Test test = new Test(op, maxDigit, number);
 
-        for( int i=0; i<number;i++){
+        for (int i = 0; i < number; i++) {
 
-            String description = "";
+            String description;
             double answer;
-            int max = (int) Math.pow(10,maxDigit);
-            int op1 = (int) (Math.random()*max);
-            int op2 = (int) (Math.random()*max);
-            String tempOperator = operations.get((int) (Math.random()*operations.size()));
+            int max = (int) Math.pow(10, maxDigit);
+            int op1 = (int) (Math.random() * max);
+            int op2 = (int) (Math.random() * max);
+            String tempOperator = operations.get((int) (Math.random() * operations.size()));
 
 
-            switch (tempOperator){
-            case("+"):
+            switch (tempOperator) {
+            case ("+"):
                 answer = op1 + op2;
                 break;
-            case("-"):
+            case ("-"):
                 answer = op1 - op2;
                 break;
-            case("*"):
+            case ("*"):
                 answer = op1 * op2;
                 break;
-            case("/"):
-                if(op2==0) {
+            case ("/"):
+                if (op2 == 0) {
                     continue;
                 }
                 answer = (double) op1 / op2;
                 break;
             default:
                 continue;
-
             }
+
             description = op1 + tempOperator + op2 + "=";
 
-
-
             Problem p = new Problem(description, answer);
-            System.out.println((i+1) +". "+ p.unsolved());
+            System.out.println((i + 1) + ". " + p.unsolved());
             test.addToTest(p);
 
-
-
         }
 
     }
-
-
-    public static HashMap<String, String> parseCommand(String command) {
-        HashMap<String, String> options = new HashMap<>();
-        String[] tokens = command.split("\\s+");
-
-        for (int i = 0; i < tokens.length; i++) {
-
-            if (tokens[i].equals("-t")) {
-                options.put("operators", tokens[i + 1]);
-            } else if (tokens[i].equals("-n")) {
-                options.put("number", tokens[i + 1]);
-            } else if (tokens[i].equals("-d")) {
-                options.put("maximumDigits", tokens[i + 1]);
-
-            }
-        }
-
-        defaultOptions(command, options);
-
-        return options;
-    }
-
-
-    private static void defaultOptions(String command, HashMap<String, String> options) {
-        if(!command.contains("-t")){
-            options.put("operators", DEFAULT_OPERATORS);
-
-        }
-        if (!command.contains("-n")) {
-            options.put("number", DEFAULT_NUMBER);
-        }
-        if (!command.contains("-d")) {
-            options.put("maximumDigits", DEFAULT_MAX_DIGITS);
-        }
-    }
-
 
 }

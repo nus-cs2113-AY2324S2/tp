@@ -9,7 +9,7 @@ public class Parser {
          *
          * Generate problem sets:
          * gen -t 1 -n 2 -d 3
-         * 
+         *
          * Help function:
          * help
          */
@@ -29,11 +29,10 @@ public class Parser {
         case "generate":
             //ProblemGenerator ;
             ProblemGenerator pb = new ProblemGenerator();
-            //pb.TypeChoose(action);
-            pb.typeChoose();
+            pb.typeChoose(action);
             break;
         case "help":
-            ui.help(command);
+            ui.help(description);
             break;
         case "exit":
             ui.exit();
