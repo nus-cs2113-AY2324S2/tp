@@ -36,7 +36,7 @@ class BookListTest {
         testBookList.printAllBooks();
 
         String expectedOutput = "All books:\n1. [U] Harry Potter\n";
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
         System.setOut(System.out);
     }

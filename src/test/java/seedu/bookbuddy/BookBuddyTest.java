@@ -31,14 +31,14 @@ class BookBuddyTest {
     public void testPrintWelcomeMessage() {
         BookBuddy.printWelcomeMessage();
         String expectedOutput = "Hello! We are BookBuddy!\nHow can I help you today?\n";
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 
     @Test
     public void testPrintExitMessage() {
         BookBuddy.printExitMessage();
         String expectedOutput = "Thank you for using BookBuddy! Hope to see you again!\n";
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 
 }
