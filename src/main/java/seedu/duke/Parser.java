@@ -5,17 +5,48 @@ import seedu.duke.exceptions.CustomException;
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
 
+
+
+
     public void parseCommand(String command, Ui ui, QuestionsList questionsList) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
-
-        if (lowerCaseCommand.startsWith("bye")) {
-            ui.isPlaying = false;
-        } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
-            processSolutionCommand(lowerCaseCommand, ui, questionsList);
-        } else {
-            throw new CustomException("-1 HP coz invalid command");
+        if (ui.isPlaying) {
+            if (lowerCaseCommand.startsWith("bye")) {
+                ui.isPlaying = false;
+            } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
+                processSolutionCommand(lowerCaseCommand, ui, questionsList);
+            } /*else if (lowerCaseCommand.startsWith("start")){
+                processStartCommand(lowerCaseCommand, ui, topicList);
+            }*/ else {
+                throw new CustomException("-1 HP coz invalid command");
+            }
         }
+
     }
+
+    /*private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList) throws CustomException {
+
+        String[] commandParts = lowerCaseCommand.split(" ");
+        if (commandParts.length != 2) {
+            throw new CustomException("invalid " + lowerCaseCommand + " command");
+        }
+        String commandParameter = commandParts[PARAMETER_INDEX];
+        /*try {
+            // if parameter is an Integer
+            int topicNum = Integer.parseInt(commandParameter);
+            // checks validity of parameter
+            if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
+                throw new CustomException("booo no such topic");
+            }
+
+        } catch (NumberFormatException e) {
+            // if parameter is a String
+            if (!commandParameter.contentEquals("-all")) {
+                throw new CustomException("invalid " + typeOfCommand + " parameter");
+            }
+        }
+
+    }*/
 
     // user enters "solution 1" to get solution for question1 OR
     // user enters "solution -all" to get ALL solutions
