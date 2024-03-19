@@ -19,6 +19,7 @@ public class Duke {
         String input = "";
         boolean inGame = false;
         input = Parser.readLine();
+
         while (input != null) {
 
 
