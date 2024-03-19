@@ -17,7 +17,7 @@ import storage.LogFile;
  * before providing feedback to the user.
  */
 public class Handler {
-    static LogFile logging = new LogFile();
+    LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -32,7 +32,7 @@ public class Handler {
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(" ")[0];
-            logging.writeLog("User Input: " + userInput, false);
+            LogFile.writeLog("User Input: " + userInput, false);
 
             try {
                 Command command = Command.valueOf(instruction);
@@ -40,12 +40,6 @@ public class Handler {
 
                 case EXIT:
                     return;
-
-                case LOAD:
-
-                    handleLoad(userInput);
-
-                    break;
                 case NEW:
 
                     handleExercise(userInput);
@@ -66,31 +60,6 @@ public class Handler {
                     handleHealth(userInput);
 
                     break;
-
-                case START:
-
-                    handleStart(userInput);
-
-                    break;
-
-                case END:
-
-                    handleEnd(userInput);
-
-                    break;
-
-                case TODAY:
-
-                    handleToday(userInput);
-
-                    break;
-
-                case LENGTH:
-
-                    handleLength(userInput);
-
-                    break;
-
                 case HELP:
 
                     Output.printHelp();
@@ -109,6 +78,8 @@ public class Handler {
 
         }
     }
+
+
 
     /**
      * Checks the type of exercise based on the user input.
@@ -139,6 +110,7 @@ public class Handler {
         if(!isRun && !isGym){
             throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
         }
+        
 
         if(isRun && userInputs.length < 5){
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
@@ -183,7 +155,7 @@ public class Handler {
         }
 
     }
-    public static void handleLoad(String userInput){}
+
     public static void handleHistory(String userInput){
         Output.printHistory("all");
     }
@@ -192,18 +164,32 @@ public class Handler {
         Output.printLatestRun();
     }
 
+    /**
+     * Handles user input related to health data. Parses the user input to determine
+     * the type of health data and processes it accordingly.
+     *
+     * @param userInput A string containing health data information of user.
+     */
     public static void handleHealth(String userInput){
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(Constant.BMI)){
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
-                if (bmiDetails[0].isEmpty() || bmiDetails[1].isEmpty() || bmiDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                if (bmiDetails[0].isEmpty()
+                        || bmiDetails[1].isEmpty()
+                        || bmiDetails[2].isEmpty()
+                        || bmiDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
                 }
-                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2]);
+                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
                 HealthList.addBmi(newBmi);
-                System.out.println("Added: bmi | " + bmiDetails[1] + " | " + bmiDetails[2]);
+                System.out.println(Constant.BMI_ADDED_MESSAGE_PREFIX
+                        + bmiDetails[1]
+                        + Constant.LINE
+                        + bmiDetails[2]
+                        + Constant.LINE
+                        + bmiDetails[3]);
                 System.out.println(newBmi);
             } else if (typeOfHealth.equals(Constant.PERIOD)){
                 // Yet to implement
@@ -212,11 +198,6 @@ public class Handler {
             System.out.println(e.getMessage());
         }
     }
-
-    public static void handleStart(String userInput){}
-    public static void handleEnd(String userInput){}
-    public static void handleToday(String userInput){}
-    public static void handleLength(String userInput){}
 
 
     public static void getGym(String input){
@@ -278,7 +259,7 @@ public class Handler {
      */
     public static void initialiseBot() {
         Output.printWelcomeBanner();
-        logging.writeLog("Started bot", false);
+        LogFile.writeLog("Started bot", false);
         // Yet to implement : Check for existing save, if not, make a new one
         // Yet to implement : int status = Storage.load();
         int status = 1;
@@ -287,7 +268,7 @@ public class Handler {
             Scanner in = new Scanner(System.in);
             String name = in.nextLine();
             System.out.println("Welcome aboard, " + name);
-            logging.writeLog("Name entered: " + name, false);
+            LogFile.writeLog("Name entered: " + name, false);
         }
     }
 
@@ -296,7 +277,7 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        logging.writeLog("Bot exited gracefully", false);
+        LogFile.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
         // Yet to implement : Reply.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);

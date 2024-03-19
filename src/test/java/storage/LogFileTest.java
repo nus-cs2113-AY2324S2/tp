@@ -8,7 +8,7 @@ class LogFileTest {
 
     @Test
     void initializeLogFile_noInput_logFileHandlerNotNull() {
-        LogFile logTest = new LogFile();
+        LogFile logTest = LogFile.getInstance();
         assertNotNull(logTest.logFileHandler);
     }
 }
