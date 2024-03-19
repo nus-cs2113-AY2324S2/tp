@@ -5,7 +5,6 @@ import seedu.budgetbuddy.command.Command;
 import java.util.Scanner;
 
 public class BudgetBuddy {
-
     private Ui ui;
     private Parser parser;
     private ExpenseList expenses;
@@ -23,8 +22,9 @@ public class BudgetBuddy {
 
         if (command != null) {
             command.execute();
-        } else {
-            System.out.println("Invalid Command");
+        }
+        else {
+            System.out.println("Invalid command");
         }
     }
 
@@ -37,9 +37,10 @@ public class BudgetBuddy {
         while (!isExit) {
             String input = scanner.nextLine();
 
-            if (parser.isExitCommand(input)) {
+            if (input.equals("bye")) {
                 isExit = true;
-            } else {
+            }
+            else {
                 handleCommands(input);
             }
 

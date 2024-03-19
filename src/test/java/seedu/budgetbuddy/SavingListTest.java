@@ -1,6 +1,9 @@
 package seedu.budgetbuddy;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,18 +23,43 @@ public class SavingListTest {
     }
 
     @Test
-    public void testCalculateRemainingSavings_insufficientFunds_exceptionThrown() {
+    public void calculateRemainingSavings_insufficientFunds_success() {
+        SavingList savingList = new SavingList();
+        double initialAmount = 200;
+        double totalExpenses = 1000;
+        double expectedRemaining = -800;
+
+        double actualRemaining = savingList.calculateRemainingSavings(initialAmount, totalExpenses);
+
+        assertEquals(expectedRemaining, actualRemaining);
+    }
+
+    @Test @Disabled
+    public void calculateRemainingSavings_insufficientFunds_exceptionThrown() {
         SavingList savingList = new SavingList();
         double initialAmount = 100;
         double totalExpenses = 200;
 
-        assertThrows(RuntimeException.class, () -> {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             savingList.calculateRemainingSavings(initialAmount, totalExpenses);
         });
+        assertEquals("java.lang.Exception: Insufficient Funds", exception.getMessage());
     }
 
     @Test
-    public void editSaving_validInput_success() {
+    public void findTotalSavings_calculateSavingsList_success() throws BudgetBuddyException {
+        SavingList savingList = new SavingList();
+        savingList.addSaving("Salary", "500"); // Adding initial savings to work with
+        savingList.addSaving("Investments", "300");
+
+        savingList.findTotalSavings();
+
+        assertEquals(800, savingList.initialAmount);
+
+    }
+
+    @Test
+    public void editSaving_validInput_success() throws BudgetBuddyException {
         // Create a SavingList and add some savings
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", String.valueOf(100));
@@ -45,7 +73,7 @@ public class SavingListTest {
     }
 
     @Test
-    public void reduceSavings_validIndexAndAmount_success() {
+    public void reduceSavings_validIndexAndAmount_success() throws BudgetBuddyException {
 
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "500"); // Adding initial savings to work with

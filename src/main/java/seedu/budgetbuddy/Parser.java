@@ -10,13 +10,44 @@ import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.FindExpensesCommand;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Parser {
+    
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+    protected ArrayList<String> expenseCategories;
+    protected ArrayList<String> savingsCategories;
 
-    private static Logger logger = Logger.getLogger("ParserLogger");
+    public Parser() {
+        this.expenseCategories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.savingsCategories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
+    }
+
+    private String extractDetailsForFind(String input, String splitter) {
+        int startIndex = input.indexOf(splitter) + splitter.length();
+        int endIndex = input.length();
+
+        String[] nextPrefixes = { "d/", "morethan/", "lessthan/" };
+        for (String nextPrefix : nextPrefixes) {
+            if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
+                endIndex = input.indexOf(nextPrefix, startIndex);
+            }
+        }
+        return input.substring(startIndex, endIndex).trim();
+    }
+    
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -30,6 +61,9 @@ public class Parser {
         return details.substring(startIndex, endIndex).trim();
     }
 
+    public Boolean isFindExpensesCommand(String input) {
+        return input.startsWith("find expenses");
+    }
     public Boolean isListCommand(String input) {
         return input.startsWith("list");
     }
@@ -41,7 +75,7 @@ public class Parser {
      * @return true if user input starts with "menu", else returns false
      */
     public Boolean isMenuCommand(String input) {
-        logger.log(Level.INFO, "Checking if Input is a Menu Command");
+        LOGGER.log(Level.INFO, "Checking if Input is a Menu Command");
         return input.startsWith("menu");
     }
 
@@ -65,7 +99,7 @@ public class Parser {
         return input.startsWith("edit savings");
     }
 
-    public Boolean isDeleteExpenseCommand(String input){
+    public Boolean isDeleteExpenseCommand(String input) {
         return input.startsWith("delete");
     }
 
@@ -73,97 +107,271 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+    public boolean isLarger(Double minAmount, Double maxAmount) {
+        return maxAmount >= minAmount;
+    }
+
+    /**
+     * Parses the "find expenses" command, allowing for optional and combinable parameters.
+     *
+     * @param input The full user input string.
+     * @param expenses The ExpenseList to search within.
+     * @return A Command for executing the search, or null if the input is invalid.
+     */
+    public Command handleFindExpensesCommand(String input, ExpenseList expenses) {
+        assert input != null : "Input cannot be null";
+        assert !input.isEmpty() : "Input cannot be empty";
+        assert input.startsWith("find expenses") : "Input must be a find expenses command";
+
+        String description = null;
+        Double minAmount = null;
+        Double maxAmount = null;
+
+        if(!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
+            System.out.println("Please Ensure that you include d/, morethan/ or lessthan/");
+            return null;
+        }
+
+        if (input.contains("d/")) {
+            description = extractDetailsForFind(input, "d/");
+        }
+
+        if (input.contains("morethan/")) {
+            String minAmountAsString = extractDetailsForFind(input, "morethan/");
+            try {
+                minAmount = Double.parseDouble(minAmountAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format for amount.");
+                return null;
+            }
+        }
+
+        if (input.contains("lessthan/")) {
+            String maxAmountAsString = extractDetailsForFind(input, "lessthan/");
+            try {
+                maxAmount = Double.parseDouble(maxAmountAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format for amount.");
+                return null;
+            }
+        }
+
+        if (minAmount != null && maxAmount != null && minAmount > maxAmount) {
+            System.out.println("Maximum Amount cannot be Smaller than Minimum Amount");
+            return null;
+        }
+
+        return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
+    }
+
 
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
+        assert input != null : "Input should not be null";
+        assert !input.isEmpty() : "Input should not be empty";
+
         String[] parts = input.split(" ");
+        assert parts.length >= 1 : "At least one part should be present in the input";
+
         String action = parts[0];
+        assert !action.isEmpty() : "Action should not be empty";
 
         switch (action) {
         case "list":
             if (parts.length == 2) {
                 // List expenses or savings
                 String listType = parts[1];
-                if (listType.equalsIgnoreCase("expense")) {
+                assert !listType.isEmpty() : "List type should not be empty";
+
+                if (listType.equalsIgnoreCase("expenses")) {
                     return new ListExpenseCommand(expenseList);
                 } else if (listType.equalsIgnoreCase("savings")) {
                     return new ListSavingsCommand(savingList, expenseList);
                 }
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expense")) {
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
                 String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
                 return new ListExpenseCommand(expenseList, filterCategory);
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
                 String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
                 return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
             } else {
                 return null;
             }
             break;
-        // Add, edit, delete, and other commands...
+
         default:
             return null;
         }
         return null;
     }
 
+    private boolean isValidExpenseCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : expenseCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidSavingsCategory(String category) {
+
+        assert category != null : "Category should not be null";
+        assert !category.isEmpty() : "Category should not be empty";
+
+        for (String validCategory : savingsCategories) {
+            if (validCategory.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Processes all menu commands and returns the corresponding Command object.
-     * This method interprets the user's input and displays either the entire menu or the associated menu item
+     * This method interprets the user's input and displays either the entire menu
+     * or the associated menu item
      *
      * @param input The full user input string
-     * @return A new MenuCommand object with the specified index, returns null if index is not an integer
+     * @return A new MenuCommand object with the specified index, returns null if
+     *         index is not an integer
      */
     public Command handleMenuCommand(String input) {
         assert input != null : "Input should not be empty";
         assert input.startsWith("menu") : "Input should be a menu command";
 
-        logger.log(Level.INFO, "Start processing for Menu Command");
+        LOGGER.log(Level.INFO, "Start processing for Menu Command");
 
         if (input.trim().equals("menu")) {
-            logger.log(Level.INFO, "Menu Command has no parameters");
+            LOGGER.log(Level.INFO, "Menu Command has no parameters");
             return new MenuCommand(0);
         }
         try {
             String indexAsString = input.substring(5);
             int index = Integer.parseInt(indexAsString);
 
-            logger.log(Level.INFO, "Menu Command has found parameter" + index);
+            LOGGER.log(Level.INFO, "Menu Command has found parameter" + index);
 
             return new MenuCommand(index);
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "Index found to not be an Integer");
+            LOGGER.log(Level.WARNING, "Index found to not be an Integer");
             return null;
         }
     }
 
     public Command handleAddExpenseCommand(ExpenseList expenses, String input) {
+        if (input == null || !input.contains("c/") || !input.contains("a/") || !input.contains("d/")) {
+            System.out.println("Invalid command format.");
+            return null;
+        }
         String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println("Expense details are missing.");
+            return null;
+        }
         String details = parts[1];
-        try {
-            String category = extractDetailsForAdd(details, "c/");
-            String amount = extractDetailsForAdd(details, "a/");
-            String description = extractDetailsForAdd(details, "d/");
-            return new AddExpenseCommand(expenses,category, amount, description);
-        } catch (Exception e) {
-            System.out.println("Error parsing expense. Ensure the format is correct.");
+
+        String category = extractDetailsForAdd(details, "c/");
+        if (category.isEmpty()) {
+            System.out.println("category is missing.");
+            return null;
+        }
+        String amount = extractDetailsForAdd(details, "a/");
+        if (amount.isEmpty()) {
+            System.out.println("amount is missing.");
+            return null;
         }
 
-        return null;
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                throw new BudgetBuddyException(amount + " is not a valid amount.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount. Please enter a valid number.");
+            return null;
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
 
+        String description = extractDetailsForAdd(details, "d/");
+        if (description.isEmpty()) {
+            System.out.println("description is missing.");
+            return null;
+        }
+        return new AddExpenseCommand(expenses, category, amount, description);
     }
 
     public Command handleAddSavingCommand(SavingList savings, String input) {
-        String[] parts = input.split(" ", 2);
-        String details = parts[1];
-
-        try {
-            String category = extractDetailsForAdd(details, "c/");
-            String amount = extractDetailsForAdd(details, "a/");
-            return new AddSavingCommand(savings, category, amount);
-        } catch (Exception e) {
-            System.out.println("Error parsing saving. Ensure the format is correct.");
+        if (input == null || !input.contains(" ") || !input.contains("c/") || !input.contains("a/")){
+            System.out.println("Invalid command format.");
+            return null;
         }
 
-        return null;
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println("Saving details are missing.");
+            return null;
+        }
+
+        String details = parts[1];
+        String category = extractDetailsForAdd(details, "c/");
+        if (category.isEmpty()){
+            System.out.println("Category is missing.");
+            return null;
+        }
+        
+        String amount = extractDetailsForAdd(details, "a/");
+        if (amount.isEmpty()) {
+            System.out.println("amount is missing.");
+            return null;
+        }
+
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                throw new BudgetBuddyException(amount + " is not a valid amount.");
+            }
+           
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount. Please enter a valid number.");
+            return null;
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        return new AddSavingCommand(savings, category, amount);
     }
 
     public Command handleEditExpenseCommand(ExpenseList expenses, String input) {
@@ -188,6 +396,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid Amount. Amount should be a numerical value.");
                     return null;
                 }
             } else if (part.startsWith("d/")) {
@@ -218,6 +427,7 @@ public class Parser {
                     index = Integer.parseInt(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid index format
+                    System.out.println("Invalid index");
                     return null;
                 }
             } else if (part.startsWith("a/")) {
@@ -225,6 +435,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid amount. Amount should be a numerical value");
                     return null;
                 }
             }
@@ -241,43 +452,71 @@ public class Parser {
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
         String[] parts = input.split("i/", 2);
-        try {
-            String indexAsString = parts[1].trim();
-            int index = Integer.parseInt(indexAsString) - 1;
-            return new DeleteExpenseCommand(expenses, index);
-        } catch (NumberFormatException e) {
+        // Check if the input format is correct (i.e., contains "i/")
+        if (parts.length < 2) {
+            System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
             return null;
         }
 
+        try {
+            int index = Integer.parseInt(parts[1].trim()) - 1;
+            // Check if the index is within the bounds of the expense list.
+            if (index < 0 || index >= expenses.size()) {
+                System.out.println("Error: Index is out of bounds.");
+                return null;
+            }
+            // If the index is valid, return a new DeleteExpenseCommand.
+            return new DeleteExpenseCommand(expenses, index);
+        } catch (NumberFormatException e) {
+            // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
+            System.out.println("Error: Index is not a valid number.");
+            return null;
+        }
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
-            String[] parts  = description.split("i/|a/", 3);
+            try {
+                String[] parts = description.split("i/|a/", 3);
 
-            String indexToReduceAsString = parts[1].trim();
-            String amountToReduceAsString = parts[2].trim();
-            int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
-            double amountToReduce = Double.parseDouble(amountToReduceAsString);
+                String indexToReduceAsString = parts[1].trim();
+                String amountToReduceAsString = parts[2].trim();
+                int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
+                double amountToReduce = Double.parseDouble(amountToReduceAsString);
 
-            return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+                // Validate the index range.
+                if (indexToReduce < 0 || indexToReduce >= savings.size()) {
+                    System.out.println("Error: Index is out of bounds.");
+                    return null;
+                }
+
+                return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+            } catch (NumberFormatException e){
+                // Catch and handle incorrect number formats for index or amount.
+                System.out.println("Error: Index and amount must be valid numbers.");
+                return null;
+            }
+        } else {
+            // Handle the case where the input does not contain the required markers.
+            System.out.println("Error: Invalid command format. Expected format: reduce i/<index> a/<amount>");
+            return null;
         }
-
-        return null;
-
     }
 
     /**
-     * Parses a string input into a Command object and returns the associated command to handle the user input
+     * Parses a string input into a Command object and returns the associated
+     * command to handle the user input
+     * 
      * @param input The user input string.
-     * @return A Command object corresponding to the user input, or null if the input is invalid.
+     * @return A Command object corresponding to the user input, or null if the
+     *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
-
+        
         if(isMenuCommand(input)) {
-            logger.log(Level.INFO, "Confirmed that input is a menu command");
+            LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
             return handleMenuCommand(input);
         }
 
@@ -307,6 +546,10 @@ public class Parser {
 
         if (isListCommand(input)) {
             return handleListCommand(input, expenses, savings);
+        }
+
+        if (isFindExpensesCommand(input)) {
+            return handleFindExpensesCommand(input, expenses);
         }
 
         return null;
