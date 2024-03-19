@@ -1,6 +1,7 @@
 package seedu.budgetbuddy.command;
 
 import seedu.budgetbuddy.ExpenseList;
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 
 public class AddExpenseCommand extends Command{
@@ -18,7 +19,11 @@ public class AddExpenseCommand extends Command{
 
     @Override
     public void execute() {
-        expenses.addExpense(this.category,this.amount,this.description);
-        System.out.println("Expense Added :" + category + " of $" + amount + " description : " + description);
+        try {
+            expenses.addExpense(this.category,this.amount,this.description);
+            System.out.println("Expense Added :" + category + " of $" + amount + " description : " + description);
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

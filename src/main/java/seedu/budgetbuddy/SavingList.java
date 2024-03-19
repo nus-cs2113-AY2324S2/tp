@@ -3,6 +3,8 @@ package seedu.budgetbuddy;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 public class SavingList {
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
@@ -71,7 +73,10 @@ public class SavingList {
         }
     }
 
-    public void addSaving(String category, String amount) {
+    public void addSaving(String category, String amount) throws BudgetBuddyException{
+        if (!categories.contains(category)) {
+            throw new BudgetBuddyException("The category '" + category + "' is not listed.");
+        }
         int amountInt = Integer.parseInt(amount);
         if (amountInt < 0) {
             try {

@@ -2,16 +2,19 @@ package seedu.budgetbuddy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 import java.util.Arrays;
 
 public class ExpenseList {
-    protected ArrayList <Expense> expenses;
+    protected ArrayList<Expense> expenses;
     protected ArrayList<String> categories;
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Housing", 
-        "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
     public List<Expense> getExpenses() {
@@ -23,7 +26,7 @@ public class ExpenseList {
         for (int i = 0; i < expenses.size(); i++) {
             Expense expense = expenses.get(i);
             if (filterCategory == null || expense.getCategory().equalsIgnoreCase(filterCategory)) {
-                System.out.print(i+1 + " | ");
+                System.out.print(i + 1 + " | ");
                 System.out.print("Date: " + expense.getDateAdded() + " | ");
                 System.out.print("Category: " + expense.getCategory() + " | ");
                 System.out.print("Amount: $" + expense.getAmount() + " | ");
@@ -37,7 +40,7 @@ public class ExpenseList {
 
     public double calculateTotalExpenses() {
         double totalExpenses = 0;
-        for (Expense expense: expenses) {
+        for (Expense expense : expenses) {
             if (expense.getAmount() < 0) {
                 try {
                     throw new Exception("Expenses should not be negative");
@@ -50,21 +53,24 @@ public class ExpenseList {
         }
         return totalExpenses;
     }
-    public void addExpense(String category, String amount, String description) {
-        int amountInt = Integer.parseInt(amount); 
-        if (amountInt < 0) {
-            try {
-                throw new Exception("Expenses should not be negative");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+
+    public void addExpense(String category, String amount, String description) throws BudgetBuddyException {
+        if (!categories.contains(category)) {
+            throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
+        int amountInt;
+        try {
+            amountInt = Integer.parseInt(amount);
+        } catch (NumberFormatException e) {
+            throw new BudgetBuddyException("Invalid amount format. Amount should be a number.");
+        }
+
+        if (amountInt < 0) {
+            throw new BudgetBuddyException("Expenses should not be negative.");
+        }
+
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
-
-        if (!categories.contains(category)) {
-            categories.add(category);
-        }
     }
 
     public void editExpense(String category, int index, double amount, String description) {
@@ -79,8 +85,9 @@ public class ExpenseList {
             System.out.println("Invalid category or index.");
         }
     }
-    public void deleteExpense(int index){
-        if (index >= 0 && index < expenses.size()){
+
+    public void deleteExpense(int index) {
+        if (index >= 0 && index < expenses.size()) {
             expenses.remove(index);
         } else {
             System.out.println("Invalid expense index.");

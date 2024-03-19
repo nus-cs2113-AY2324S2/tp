@@ -1,13 +1,16 @@
 package seedu.budgetbuddy;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ExpenseListTest {
 
     @Test
-    public void calculateTotalExpenses_addingIntegers_success() {
+    public void calculateTotalExpenses_addingIntegers_success() throws BudgetBuddyException {
         ExpenseList expenseList = new ExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
         expenseList.addExpense("Food", "30", "Lunch");
@@ -27,7 +30,7 @@ public class ExpenseListTest {
         }
     }
 
-    public void addExpense_addingExpense_success() {
+    public void addExpense_addingExpense_success() throws BudgetBuddyException {
         ExpenseList expenseList = new ExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
 
@@ -49,7 +52,7 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void editExpense_validInput_success() {
+    public void editExpense_validInput_success() throws BudgetBuddyException {
         //Create an ExpenseList and add two expenses
         ExpenseList expenseList = new ExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
@@ -66,14 +69,14 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void addSaving_addingSaving_success() {
+    public void addSaving_addingSaving_success() throws BudgetBuddyException {
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1000");
         assertEquals(1, savingList.getSavings().size());
     }
 
     @Test
-    public void editExpense_invalidCategoryOrIndex_failure() {
+    public void editExpense_invalidCategoryOrIndex_failure() throws BudgetBuddyException {
         // Create an ExpenseList and add two expenses
         ExpenseList expenseList = new ExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
