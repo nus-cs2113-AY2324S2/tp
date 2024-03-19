@@ -3,7 +3,7 @@ package seedu.duke;
 // import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
-// import java.util.Scanner;
+ import java.util.Scanner;
 
 public class ProblemGenerator {
 
@@ -31,7 +31,7 @@ public class ProblemGenerator {
     private void Generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
-    generate_problems
+
         int maxDigit =  Integer.parseInt(parameter.get("maximumDigits"));
         String op = parameter.get("operators");
 
@@ -50,7 +50,7 @@ public class ProblemGenerator {
             operations.add("/");
         }
 
- generate_problems
+
         //ArrayList<Problem> test = new ArrayList<>();
         Test test = new Test(op,maxDigit,number) ;
 
@@ -84,7 +84,7 @@ public class ProblemGenerator {
             }
             desctiption = op1 + tempOperator + op2 + "=";
 
- generate_problems
+
 
             Problem p = new Problem(desctiption,answer);
             System.out.println((i+1) +". "+ p.unsolved());
@@ -102,7 +102,7 @@ public class ProblemGenerator {
         String[] tokens = command.split("\\s+");
 
         for (int i = 0; i < tokens.length; i++) {
- generate_problems
+
             if (tokens[i].equals("-t")) {
                 options.put("operators", tokens[i + 1]);
             } else if (tokens[i].equals("-n")) {
@@ -118,8 +118,8 @@ public class ProblemGenerator {
         return options;
     }
 
- generate_problems
-    private static void DeafaultOptions(String command, HashMap<String, String> options) {
+
+    private static void DefaultOptions(String command, HashMap<String, String> options) {
         if(!command.contains("-t")){
             options.put("operators", DEFAULT_OPERATORS);
 
