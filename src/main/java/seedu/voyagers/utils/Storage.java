@@ -33,6 +33,7 @@ public class Storage {
             }
             while (s.hasNext()) {
                 String[] inputs = s.nextLine().split("\\|", 5);
+                assert inputs.length == 5 : "Invalid input format";
                 java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
                 Date startDate = format.parse(inputs[1]);
                 Date endDate = format.parse(inputs[2]);
@@ -44,6 +45,7 @@ public class Storage {
 
             System.out.println("File not found.\nCreating new file...\nFile created.");
             try {
+                assert f.createNewFile() : "File creation failed";
                 f.createNewFile();
                 logger.log(Level.INFO, "File created.");
             } catch (java.io.IOException ex) {

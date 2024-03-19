@@ -23,8 +23,6 @@ public class AddTripCommand extends Command{
             ui.echo(e.getMessage());
         }
 
-
-
         //storage.writeTripFile(trips, trips.size());
     }
 
