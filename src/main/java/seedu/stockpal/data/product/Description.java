@@ -1,6 +1,8 @@
 package seedu.stockpal.data.product;
 
-public class Description {
+import seedu.stockpal.common.CommandParameter;
+
+public class Description implements CommandParameter {
     private static final String EMPTY_STRING = "";
     protected String description;
 
