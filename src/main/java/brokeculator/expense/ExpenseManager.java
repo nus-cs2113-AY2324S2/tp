@@ -21,9 +21,10 @@ public class ExpenseManager {
         expenses.remove(index);
     }
 
-    public double summariseExpenses() {
+    public double summariseExpenses(int beginIndex, int endIndex) {
         double total = 0;
-        for (Expense expense : expenses) {
+        ArrayList<Expense> expensesToList = new ArrayList<>(expenses.subList(beginIndex, endIndex));
+        for (Expense expense : expensesToList) {
             total += expense.getAmount();
         }
         return total;
