@@ -2,7 +2,11 @@ package supertracker.parser;
 
 import org.junit.jupiter.api.Test;
 import supertracker.TrackerException;
-import supertracker.command.*;
+import supertracker.command.Command;
+import supertracker.command.InvalidCommand;
+import supertracker.command.NewCommand;
+import supertracker.command.UpdateCommand;
+import supertracker.command.QuitCommand;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
