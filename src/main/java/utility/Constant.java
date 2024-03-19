@@ -7,8 +7,16 @@ public class Constant {
     public static final Integer MIN_RUNTIME_ARRAY_LENGTH = 2;
 
     public static final Integer EXERCISE_TYPE_INDEX = 1;
+    public static final Integer LENGTH_OF_GYM_STATION_INPUTS = 4;
+    public static final Integer INDEX_OF_STATION_NAME = 0;
+    public static final Integer INDEX_OF_STATION_SETS = 1;
+    public static final Integer INDEX_OF_STATION_REPS = 2;
+    public static final Integer INDEX_OF_STATION_WEIGHTS = 3;
+
+
     public static final String PARTITION_LINE = "____________________________________________________________";
 
+    public static final String SPLIT_BY_SLASH = "/";
     public static final String ADD_RUN = "Successfully added a new run";
 
     // Constant for Workout
@@ -31,11 +39,22 @@ public class Constant {
     public static final String NO_HISTORY_FOUND = "No history found!";
     public static final String BLANK_INPUT_FOR_EXERCISE = "Type of exercise cannot be empty. " +
             "Please input either /e:run or /e:gym";
+
+
+    private static final String STATION_GYM_FORMAT = "/n:[name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number]";
+
+    public static final String BLANK_INPUT_FOR_GYM_STATION = "Fields cannot be empty" +
+            "Please input " + STATION_GYM_FORMAT;
+
     public static final String INVALID_INPUT_FOR_EXERCISE = "Invalid input for exercise type! " +
             "Please input either /e:run or /e:gym";
+
     public static final String INVALID_RUN_TIME = "Invalid run time!";
     public static final String INVALID_GYM_INPUT = "Invalid gym parameters!";
     public static final String INVALID_GYM_STATION_INDEX = "Invalid gym station index!";
+
+    public static final String NUMERIC_INPUT_REQUIRED_GYM_STATION = "Numeric input required for sets, reps and weights!"
+            + "Please input " + STATION_GYM_FORMAT;
     public static final String INSUFFICIENT_PARAMETERS_FOR_RUN = "Insufficient parameters for run! " +
             "Example input: new /e:run /d:DISTANCE /t:TIME [/date:DATE]";
 
@@ -44,6 +63,13 @@ public class Constant {
 
     // Health Constants
     public static final String SPLIT_BY_SLASH = "/";
+=======
+    public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Invalid input for Gym Stations! " +
+            "Please input /n:[name of exercise] /s:[sets] /r:[reps] /w:[weights]";
+
+
+    // Health Constants
+>>>>>>> d72f38d (Add getGym and AddGymStationInput)
     public static final Integer HEALTH_TYPE_INDEX = 1;
     public static final String BMI_INPUT = "h:bmi";
     public static final String PERIOD_INPUT = "h:period";

@@ -1,5 +1,7 @@
 package workouts;
 
+import utility.Constant;
+
 import java.util.ArrayList;
 
 public class GymStation {
@@ -10,18 +12,17 @@ public class GymStation {
     /**
      * Gym Station contains an ArrayList of GymSets.
      * @param name
-     * @param weightAndReps
+     * @param weight
+     * @param repetition
      * @param numberOfSets
      */
-    public GymStation(String name, Integer[] weightAndReps, int numberOfSets) {
+    public GymStation(String name, int weight, int repetition , int numberOfSets) {
         this.stationName = name;
         this.numberOfSets = numberOfSets;
-        processSets(weightAndReps);
+        processSets(weight, repetition);
     }
 
-    public void processSets(Integer[] weightAndReps){
-        int weight = weightAndReps[0];
-        int repetition = weightAndReps[1];
+    public void processSets(int weight, int repetition){
         GymSet newSet = new GymSet(weight, repetition);
         sets.add(newSet);
     }
@@ -40,5 +41,12 @@ public class GymStation {
 
     public int getNumberOfSets() {
         return numberOfSets;
+    }
+
+    @Override
+    public String toString() {
+        return "Test";// implement later
+//        return String.format("%s \t\t%s",
+//                this.getStationName(), this.getNumberOfSets(), this.get
     }
 }

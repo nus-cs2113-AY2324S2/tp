@@ -29,19 +29,15 @@ public class Gym extends Workout{
      * Adds station to an ArrayList of GymStation object
      * Takes string name, weight done, number of sets, number of reps
      * @param name
-     * @param stringWeight
-     * @param stringNumberOfSet
-     * @param stringReps
+     * @param weight
+     * @param numberOfSet
+     * @param repetitions
      * @throws CustomExceptions.InvalidInput
      */
-    public void addStation(String name, String stringWeight, String stringNumberOfSet,
-                           String stringReps) throws CustomExceptions.InvalidInput{
+    public void addStation(String name, int weight, int numberOfSet,
+                           int repetitions) throws CustomExceptions.InvalidInput{
         try {
-            int reps = Integer.parseInt(stringReps);
-            int weight = Integer.parseInt(stringWeight);
-            int numberOfSets = Integer.parseInt(stringNumberOfSet);
-            Integer[] weightAndReps = {weight, reps};
-            GymStation newStation = new GymStation(name, weightAndReps, numberOfSets);
+            GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
             throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
@@ -64,7 +60,13 @@ public class Gym extends Workout{
 
     @Override
     public String toString() {
-        // to be implemented
-        return null;
+        String printedDate;
+        if (date != null){
+            printedDate = date.toString();
+        } else{
+            printedDate = Constant.NO_DATE_SPECIFIED;
+        }
+        return String.format("%s \t\t%s",
+                Constant.GYM, printedDate);
     }
 }

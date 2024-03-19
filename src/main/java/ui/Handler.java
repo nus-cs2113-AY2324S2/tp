@@ -9,8 +9,9 @@ import utility.Constant;
 import utility.CustomExceptions;
 import workouts.Gym;
 import workouts.Run;
-import workouts.WorkoutList;
+
 import java.util.Scanner;
+
 import storage.LogFile;
 
 
@@ -75,6 +76,7 @@ public class Handler {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
+
             }
 
 
@@ -119,9 +121,10 @@ public class Handler {
                         || runDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput("Missing parameter(s)");
                 }
-                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
-                WorkoutList.addRun(newRun);
+
+                new Run(runDetails[2], runDetails[1], runDetails[3]);
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+
             } else if (typeOfExercise.equals(Constant.GYM)) {
                 // Yet to implement : handleGym(userInput);
                 Gym.getGym(userInput);
@@ -142,7 +145,7 @@ public class Handler {
     public static void handleHealth(String userInput){
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(Constant.BMI)){
+            if (typeOfHealth.equals(Constant.BMI)) {
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
                 if (bmiDetails[0].isEmpty()
