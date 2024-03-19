@@ -24,22 +24,23 @@ public class Checker {
         return Math.abs(problem.getAnswer() - answer) < 0.01;
     }
 
-    void getUserAnswer(){
+
+    void getUserAnswer() {
         long startTime = System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
-        for(int i=0;i<test.getNumber();i++){
+        for (int i = 0; i < test.getNumber(); i++) {
             Problem problem = test.getProblem().get(i);
             System.out.println(problem.unsolved());
             String userInput = scanner.nextLine();
             double answer = Double.NEGATIVE_INFINITY;
             try {
                 answer = Double.parseDouble(userInput);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid Input, please enter a number");
                 continue;
             }
             userAnswer[i] = answer;
-            if(checkCorrectness(problem, answer)){
+            if (checkCorrectness(problem, answer)) {
                 correctNumber++;
                 isCorrect[i] = true;
             }
@@ -47,11 +48,11 @@ public class Checker {
         }
 
         long endTime = System.currentTimeMillis();
-        accuracy = (double) correctNumber /test.getNumber();
-        this.time = (endTime - startTime)/1000;
+        accuracy = (double) correctNumber / test.getNumber();
+        this.time = (endTime - startTime) / 1000;
     }
 
-    public Boolean[] checkAnswer(){
+    public Boolean[] checkAnswer() {
         return isCorrect;
     }
 

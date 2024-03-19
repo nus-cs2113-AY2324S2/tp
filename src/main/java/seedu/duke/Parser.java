@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.time.LocalDateTime;
-
 public class Parser {
 
     public static void parse(String command, Ui ui) {
@@ -11,7 +9,7 @@ public class Parser {
          *
          * Generate problem sets:
          * gen -t 1 -n 2 -d 3
-         * 
+         *
          * Help function:
          * help
          */
@@ -31,18 +29,11 @@ public class Parser {
         case "generate":
             //ProblemGenerator ;
             ProblemGenerator pb = new ProblemGenerator();
-            Test test = pb.typeChoose();
+            Test test = pb.typeChoose(action);
             Checker checker = new Checker(test);
             checker.getUserAnswer();
-
-            System.out.println("Acc: "+checker.getAccuracy());
-            System.out.println("Spend Time: "+checker.getTime()+"s");
-
-            // Storage write to file
-            double speed = (double) test.getNumber() / checker.getTime();
-            Storage.addRecord(new Record(LocalDateTime.now(), speed, checker.getAccuracy()));
-            Storage.writeFile();
-
+            System.out.println("Acc: " + checker.getAccuracy());
+            System.out.println("Spend Time: " + checker.getTime() + "s");
             break;
         case "help":
             ui.help(command);
