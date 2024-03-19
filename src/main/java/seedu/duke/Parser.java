@@ -36,13 +36,13 @@ public class Parser {
             String[] extractExpense = argument.split(" ", 2);
             String expense = extractExpense[0];
             int amount = Integer.parseInt(extractExpense[1]);
-            ExpenseAdder newExpense = new ExpenseAdder(expense,amount);
+            Expense newExpense = new Expense(expense,amount);
             break;
         case "list":
             // List code here
             break;
         case "balance":
-            // Balance code here
+            // seedu.duke.Balance code here
             break;
         default:
             // Default clause

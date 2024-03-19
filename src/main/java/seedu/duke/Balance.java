@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,7 @@ public class Balance {
     }
 
     public void printBalance() {
-        String firstLine = String.format("User %s's Balance List:", userName);
+        String firstLine = String.format("User %s's seedu.duke.Balance List:", userName);
         System.out.println(firstLine);
 
         for (Map.Entry<String, Float> entry : userList.entrySet()) {
@@ -19,6 +21,6 @@ public class Balance {
             System.out.println(balanceLine);
         }
 
-        System.out.println("End of Balance List");
+        System.out.println("End of seedu.duke.Balance List");
     }
 }
