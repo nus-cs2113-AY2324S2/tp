@@ -1,8 +1,8 @@
 package seedu.duke;
 
-import Storage.Storage;
-import Time.DateUtils;
-import Time.WeekView;
+import storage.Storage;
+import time.DateUtils;
+import time.WeekView;
 import data.TaskManager;
 import data.TaskManagerException;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static Storage.Storage.createNewFile;
+import static storage.Storage.createNewFile;
 import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
 import static data.TaskManager.updateManager;
@@ -68,15 +68,15 @@ public class Main {
                 } 
                 break;
             case "update":
-                    try {
-                        updateManager(scanner, weekView, taskManager);
-                    } catch (TaskManagerException e) {
-                        System.out.println(e.getMessage());
-                    }
+                try {
+                    updateManager(scanner, weekView, taskManager);
+                } catch (TaskManagerException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "add":
                 try {
-                    addManager(scanner, weekView, taskManager, inMonthView);
+                    addManager(scanner, weekView, inMonthView);
                 } catch (TaskManagerException e) {
                     System.out.println(e.getMessage());
                 }
