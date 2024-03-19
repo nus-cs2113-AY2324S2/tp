@@ -1,28 +1,37 @@
 package recipeio;
 
-import recipeio.enums.MealCategory;
-import recipeio.recipe.Recipe;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import recipeio.recipe.RecipeList;
+import recipeio.ui.UI;
+/**
+ * Main entry-point for the Recipe.IO application.
+ */
 public class RecipeIO {
-    /**
-     * Main entry-point for the Recipe.IO application.
-     */
-    public static void main(String[] args) {
-        ArrayList<String> testAllergies = new ArrayList<>();
-        testAllergies.add("Dairy");
-        testAllergies.add("Egg");
-        testAllergies.add("Gluten");
-        String testURL = "https://www.bbcgoodfood.com/recipes/ultimate-spaghetti-carbonara-recipe";
-        Recipe testRecipe = new Recipe("Spaghetti Carbonara", 60, 1000,
-                testAllergies, MealCategory.LUNCH, testURL);
-        System.out.println("Hello");
-        System.out.println(testRecipe);
+    private static UI ui;
+    private final RecipeList recipeList;
 
-        System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public RecipeIO() {
+        ui = new UI();
+        recipeList = new RecipeList();
+    }
+
+    public void run() {
+        UI.sayHi();
+        runCommandLoopUntilExitCommand();
+        UI.bye();
+    }
+
+    public void runCommandLoopUntilExitCommand() {
+        String userInput = ui.getUserInput();
+        String parsedCommand = InputParser.parseCommand(userInput);
+
+        while (!parsedCommand.equals(Constants.EXIT_COMMAND)) {
+            recipeList.executeCommand(parsedCommand, userInput);
+            userInput = ui.getUserInput();
+            parsedCommand = InputParser.parseCommand(userInput);
+        }
+    }
+
+    public static void main(String[] args) {
+        new RecipeIO().run();
     }
 }
