@@ -1,5 +1,7 @@
 package meditracker.medication;
 
+import meditracker.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,4 +56,11 @@ public class MedicationManager {
         listIndex--; // Decremented to 0-base indexing
         return medications.get(listIndex);
     }
+
+    public void printAllMedications() {
+        System.out.println("You have " + getTotalMedications() + " medications listed below.");
+        Ui ui = new Ui();
+        ui.printMedsList(medications);
+    }
+
 }
