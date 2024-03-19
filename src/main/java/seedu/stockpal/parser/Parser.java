@@ -81,7 +81,8 @@ public class Parser {
             return createOutflowCommand(parsed);
 
         default:
-            throw new InvalidCommandException();
+            //print help
+            throw new InvalidCommandException("Invalid command: " + command);
         }
     }
 
@@ -154,7 +155,7 @@ public class Parser {
             throws InvalidFormatException {
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new InvalidFormatException();
+            throw new InvalidFormatException("Invalid input format");
         }
 
         ArrayList<String> parsed = new ArrayList<>();

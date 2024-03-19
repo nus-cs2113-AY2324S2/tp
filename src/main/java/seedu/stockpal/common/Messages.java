@@ -22,4 +22,5 @@ public class Messages {
     public static final String WARNING_DATA_FILE_FORMAT_ERROR = "OOPS!! Error in data file format!";
     public static final String WARNING_CLOSE_WRITER_ERROR = "OOPS!! Error in closing save file writer!";
     public static final String MESSAGE_FILE_ALR_CREATED = "A non-existent file scenario is already handled earlier.";
+    public static final String MESSAGE_DELETE_SUCCESS = "Product has been deleted.";
 }

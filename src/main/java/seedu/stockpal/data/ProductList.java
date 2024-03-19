@@ -9,6 +9,7 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
+import seedu.stockpal.exceptions.PidNotFoundException;
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -38,8 +39,11 @@ public class ProductList {
         return -1;
     }
 
-    public void deleteProduct(Pid productPid) {
+    public void deleteProduct(Pid productPid) throws PidNotFoundException {
         int productIndex = findProductIndex(productPid);
+        if (productIndex == -1) {
+            throw new PidNotFoundException("Product with PID: " + productPid.toString() + " not found");
+        }
         products.remove(productIndex);
     }
 

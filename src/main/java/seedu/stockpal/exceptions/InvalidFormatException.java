@@ -1,9 +1,6 @@
 package seedu.stockpal.exceptions;
 
-public class InvalidFormatException extends Exception {
-    public InvalidFormatException() {
-        super();
-    }
+public class InvalidFormatException extends StockPalException {
     public InvalidFormatException(String message) {
         super(message);
     }
