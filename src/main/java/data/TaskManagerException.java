@@ -62,7 +62,7 @@ public class TaskManagerException extends Exception {
     /**
      * Method that checks if a specified date has existing tasks.
      *
-     * @param dayTasks The List<String> containing the list of tasks for the specified date.
+     * @param dayTasks The List containing the list of tasks for the specified date.
      * @throws TaskManagerException if the specified date has no tasks.
      */
 
