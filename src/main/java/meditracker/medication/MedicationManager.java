@@ -48,7 +48,7 @@ public class MedicationManager {
      * Gets the Medication object from the medications list.
      * Also converts the index to 0-based indexing before being used.
      *
-     * @param listIndex Index of the medications list to update (1-based indexing)
+     * @param listIndex Index of the medications list to get (1-based indexing)
      * @return Medication object at the corresponding index (0-based indexing)
      * @throws IndexOutOfBoundsException Out of range index specified
      */
@@ -57,10 +57,21 @@ public class MedicationManager {
         return medications.get(listIndex);
     }
 
+    /**
+     * Deletes the Medication object from the medications list.
+     * Also converts the index to 0-based indexing before being used.
+     *
+     * @param listIndex Index of the medications list to delete (1-based indexing)
+     * @throws IndexOutOfBoundsException Out of range index specified
+     */
+    public void removeMedication(int listIndex) throws IndexOutOfBoundsException {
+        listIndex--; // Decremented to 0-base indexing
+        medications.remove(listIndex);
+    }
+
     public void printAllMedications() {
         System.out.println("You have " + getTotalMedications() + " medications listed below.");
         Ui ui = new Ui();
         ui.printMedsList(medications);
     }
-
 }

@@ -1,6 +1,7 @@
 package meditracker.parser;
 
 import meditracker.command.Command;
+import meditracker.command.DeleteCommand;
 import meditracker.command.ListCommand;
 import meditracker.command.ModifyCommand;
 import meditracker.exception.ArgumentNotFoundException;
@@ -33,6 +34,8 @@ public class Parser {
             return new ModifyCommand(arguments);
         case "list":
             return new ListCommand(arguments);
+        case "delete":
+            return new DeleteCommand(arguments);
         default:
             throw new MediTrackerException();
         }

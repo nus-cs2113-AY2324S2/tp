@@ -74,6 +74,10 @@ public class Ui {
         System.out.println("Your list of medications has been successfully shown!");
     }
 
+    public void showDeleteCommandMessage() {
+        System.out.println("Medicine has been successfully deleted");
+    }
+
     /**
      * Reads user input command.
      * @return The user input command as a String.
