@@ -12,14 +12,14 @@ public class Bmi extends Health {
     /*
      * The height of the user in meters.
      */
-    protected static double height;
+    protected double height;
 
     /*
      * The weight of the user in kilograms.
      */
-    protected static double weight;
-    protected static double bmiValue;
-    protected static String bmiCategory;
+    protected double weight;
+    protected double bmiValue;
+    protected String bmiCategory;
 
     /*
      * Constructor for Health object.
