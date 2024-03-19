@@ -6,7 +6,6 @@ public class Inflow extends Transaction<Inflow.Category> {
     }
     public Inflow(String name, double amount, String date) {
         super(name, amount, date);
-        super.transactionType = "I";
     }
     public void setCategory(Category category) {
         super.category = category;
