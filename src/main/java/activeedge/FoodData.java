@@ -1,8 +1,13 @@
 package activeedge;
 
+/**
+ * The FoodData class stores information about various food items.
+ */
 public class FoodData {
-    // Define the data for each food item
-    //category, food name, calories
+    /**
+     * An array containing data for each food item.
+     * Each element is an array with two elements: food name and calories.
+     */
     public static String[][] foodItems = {
             {"fried chicken", "543"},
             {"chicken burger", "357"},
@@ -224,6 +229,9 @@ public class FoodData {
             {"kuih keria", "250"}
     };
 
+    /**
+     * Prints the calories of each food item in the foodItems array.
+     */
     public static void printFood(){
         for (int i = 0; i < foodItems.length; i++){
             System.out.println(foodItems[i][1]);
