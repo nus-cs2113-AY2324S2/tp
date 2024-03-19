@@ -20,6 +20,4 @@ class NewsOnTheGoTest {
         List<NewsArticle> newsArticles = importNewsFromText("data/sampleNews.txt");
         assertEquals("Financial Times", newsArticles.get(1).getSource());
     }
-
-     
 }
