@@ -1,6 +1,8 @@
 package ui;
 
 import org.junit.jupiter.api.Test;
+import recipeio.InputParser;
+import recipeio.ui.UI;
 
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
@@ -22,13 +24,9 @@ public class UITest {
 
     @Test
     public void testUISayHi(){
-        getInput("Hung");
 
         String expected = UI.SEPARATOR + System.lineSeparator() +
-                "Welcome to Recipe.io!" + System.lineSeparator() +
-                "What is your name?" + System.lineSeparator() +
-                "Hello Hung!" + System.lineSeparator() +
-                UI.SEPARATOR + System.lineSeparator();
+                "Welcome to Recipe.io!" + System.lineSeparator();
         ByteArrayOutputStream testOut = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(testOut);
         System.setOut(printStream);
@@ -65,7 +63,7 @@ public class UITest {
         System.setOut(printStream);
 
         String expected = UI.SEPARATOR + System.lineSeparator() +
-                "See you again, " + UI.getName() + "!" + System.lineSeparator() +
+                "See you again!" + System.lineSeparator() +
                 UI.SEPARATOR + System.lineSeparator();
 
         UI.bye();
