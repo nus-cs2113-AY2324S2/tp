@@ -211,23 +211,29 @@ class BmiTest {
      * Test the behaviour of printing Bmi history.
      */
     @Test
-    void showBmiHistory_twoInputs_printsCorrectBmiHistory() {
+    void showBmiHistory_bmiObject_printsCorrectBmiHistory() {
         // Arrange
-        Bmi firstBmi = new Bmi("1.71", "60.5", "19-03-2024");
-        Bmi secondBmi = new Bmi("1.80", "74.5", "19-03-2024");
+        Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
+        Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
 
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
 
         String expected = "2024-03-19"
                 + System.lineSeparator()
-                + "Your BMI is 20.69"
+                + "Your BMI is 22.86"
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator()
-                + "2024-03-19"
+                + "2024-03-20"
                 + System.lineSeparator()
-                + "Your BMI is 22.99"
+                + "Your BMI is 26.12"
+                + System.lineSeparator()
+                + "You're overweight."
+                + System.lineSeparator()
+                + "2024-03-21"
+                + System.lineSeparator()
+                + "Your BMI is 22.84"
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator();

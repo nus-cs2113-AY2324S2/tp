@@ -72,13 +72,21 @@ class PeriodTest {
     @Test
     void showPeriodHistory_printCorrectPeriodHistory() {
         // Arrange
-        Period firstPeriod = new Period("09/02/2024", "16/02/2024");
-        Period secondPeriod = new Period("09/03/2024", "16/03/2024");
+        Period firstPeriod = new Period("10/04/2024", "16/04/2024");
+        Period secondPeriod = new Period("09/05/2024", "16/05/2024");
 
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
 
-        String expected = "Period Start: "
+        String expected = "Period Start: 2023-02-09 Period End: 2023-02-16"
+                + System.lineSeparator()
+                + "Period Length: 8 days"
+                + System.lineSeparator()
+                + "Period Start: 2023-03-09 Period End: 2023-03-16"
+                + System.lineSeparator()
+                + "Period Length: 8 days"
+                + System.lineSeparator()
+                + "Period Start: "
                 + firstPeriod.getStartDate()
                 + " Period End: "
                 + firstPeriod.endDate
