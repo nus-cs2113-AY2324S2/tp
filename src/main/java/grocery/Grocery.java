@@ -47,6 +47,7 @@ public class Grocery {
     }
 
     public String printGrocery() {
+        assert !(this.name.isEmpty());
         String amt = (this.amount.isEmpty() ) ? "" : ", amount: " + this.amount;
         String exp = (this.expiration.isEmpty() ) ? "" : ", expiration: " + this.expiration;
         return this.name + amt + exp;
