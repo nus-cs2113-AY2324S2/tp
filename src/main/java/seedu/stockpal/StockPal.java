@@ -3,22 +3,20 @@ package seedu.stockpal;
 import seedu.stockpal.commands.Command;
 import seedu.stockpal.commands.ExitCommand;
 import seedu.stockpal.data.ProductList;
-import seedu.stockpal.exceptions.InvalidCommandException;
-import seedu.stockpal.exceptions.InvalidFormatException;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.parser.Parser;
 import seedu.stockpal.storage.Storage;
+import seedu.stockpal.storage.exception.InvalidStorageFilePathException;
 import seedu.stockpal.storage.exception.StorageIOException;
 import seedu.stockpal.ui.Ui;
 
 public class StockPal {
+
+    private static Parser parser;
+
     /**
      * Main entry-point for the java.stockpal.StockPal application.
      */
-
-    private static Parser parser;
-    private static final Storage STORAGE = new Storage();
-
     public static void main(String[] args) {
         start();
         runCommandUntilExit();
@@ -28,10 +26,12 @@ public class StockPal {
     private static void start() {
         Ui.printWelcomeMessage();
         try {
-            ProductList productList = STORAGE.load();
-            parser = new Parser(productList);
-        } catch (StockPalException | StorageIOException e) {
-            throw new RuntimeException(e); //replace this with Ui.printError(error message);
+            Storage storage = new Storage();
+            ProductList productList = storage.load();
+            parser = new Parser(productList, storage);
+        } catch (InvalidStorageFilePathException | StockPalException | StorageIOException e) {
+            Ui.printToScreen(e.getMessage());
+            exit();
         }
     }
 
@@ -49,8 +49,8 @@ public class StockPal {
                     break;
                 }
                 command.execute();
-            } catch (InvalidCommandException | InvalidFormatException e) {
-                System.out.println("throw");
+            } catch (StockPalException spe) {
+                Ui.printToScreen(spe.getMessage());
             }
 
         } while (true); // check if command is exit

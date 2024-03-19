@@ -1,19 +1,22 @@
 package seedu.stockpal.data;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
-
-
-
-import java.util.ArrayList;
+import seedu.stockpal.exceptions.PidNotFoundException;
 
 public class ProductList {
-    public ArrayList<Product> products = new ArrayList<Product>();
-  
+    public List<Product> products = new ArrayList<>();
+
+    /**
+     * @param toAdd Add a product to our list.
+     */
     public void addProduct(Product toAdd) {
         products.add(toAdd);
     }
@@ -24,6 +27,7 @@ public class ProductList {
      *
      * @param pid Product ID to search for.
      * @return Index of the product in the product list.
+     *     If product is not in the product list, return -1.
      */
     public int findProductIndex(Pid pid) {
         for (int i = 0; i < products.size(); i++) {
@@ -35,8 +39,11 @@ public class ProductList {
         return -1;
     }
 
-    public void deleteProduct(Pid productPid) {
+    public void deleteProduct(Pid productPid) throws PidNotFoundException {
         int productIndex = findProductIndex(productPid);
+        if (productIndex == -1) {
+            throw new PidNotFoundException("Product with PID: " + productPid.toString() + " not found");
+        }
         products.remove(productIndex);
     }
 
@@ -81,8 +88,12 @@ public class ProductList {
         return products.get(i);
     }
 
-    public Quantity getProductQuantity (Integer productIndex) {
-        Product updatedProduct = products.get(productIndex);
-        return updatedProduct.getQuantity();
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public String toSave(Integer productIndex) {
+        Product currProd = products.get(productIndex);
+        return currProd.toSave();
     }
 }

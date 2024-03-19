@@ -32,8 +32,13 @@ public final class Ui {
      */
     public static void printToScreen(String... messages) {
         for (String message : messages) {
-            System.out.println(message.replace("\n", LINE_SEPARATOR));
+            String platformIndependentMessage = message.replace("\n", LINE_SEPARATOR);
+            System.out.println(platformIndependentMessage);
         }
+    }
+
+    public static void printExceptionMessage(Exception exception) {
+        printToScreen(exception.getMessage());
     }
 
     public static void printWelcomeMessage() {
@@ -55,5 +60,21 @@ public final class Ui {
             System.out.println(product.getDescription());
             System.out.println(HORIZONTAL_LINE);
         }
+    }
+
+    public static void printEditSuccessMessage() {
+        printToScreen(Messages.MESSAGE_EDIT_SUCCESS);
+    }
+
+    public static void printMissingParametersMessage() {
+        Ui.printToScreen(Messages.MESSAGE_ERROR_MISSING_PARAMETERS);
+    }
+
+    public static void printInvalidPidMessage() {
+        Ui.printToScreen(Messages.MESSAGE_ERROR_INVALID_PID);
+    }
+
+    public static void printDeleteSuccessMessage() {
+        printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
     }
 }

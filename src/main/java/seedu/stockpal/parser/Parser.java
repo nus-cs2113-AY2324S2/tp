@@ -17,14 +17,15 @@ import seedu.stockpal.exceptions.InvalidFormatException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import seedu.stockpal.storage.Storage;
 
 public class Parser {
     public static final String DIVIDER = " ";
     public static final Pattern NEW_COMMAND_PATTERN =
-            Pattern.compile("new n/((?:\\S+\\s*)+) q/(\\d+)(?: p/(\\d+\\.\\d{2}))?(?: d/(.{1,100}))?");
-
+            Pattern.compile("new n/([a-zA-Z0-9 ]+) q/(\\d+)(?: p/(\\d+\\.\\d{2}))?(?: d/([a-zA-Z0-9 ]{1,100}))?");
     public static final Pattern EDIT_COMMAND_PATTERN =
-            Pattern.compile("edit (\\d+)(?: n/(\\S+))?(?: q/(\\d+))?(?: p/(\\d+\\.\\d{2}))?(?: d/(.{1,100}))?");
+            Pattern.compile("edit (\\d+)(?: n/([a-zA-Z0-9 ]+))?(?: q/(\\d+))?" +
+                    "(?: p/(\\d+\\.\\d{2}))?(?: d/([a-zA-Z0-9 ]{1,100}))?");
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
@@ -36,10 +37,12 @@ public class Parser {
     public static final int START_INDEX = 0;
     private static final Double EMPTY_PRICE = -0.1;
 
-
     public final ProductList productList;
-    public Parser(ProductList productList) {
+    private final Storage storage;
+
+    public Parser(ProductList productList, Storage storage) {
         this.productList = productList;
+        this.storage = storage;
     }
 
     public Command parseCommand(String input) throws InvalidFormatException, InvalidCommandException {
@@ -78,7 +81,8 @@ public class Parser {
             return createOutflowCommand(parsed);
 
         default:
-            throw new InvalidCommandException();
+            //print help
+            throw new InvalidCommandException("Invalid command: " + command);
         }
     }
 
@@ -98,20 +102,20 @@ public class Parser {
         Integer pid = Integer.parseInt(parsed.get(0));
         Integer decreaseBy = Integer.parseInt(parsed.get(1));
 
-        return new OutflowCommand(productList, pid, decreaseBy);
+        return new OutflowCommand(productList, pid, decreaseBy, storage);
     }
 
     private InflowCommand createInflowCommand(ArrayList<String> parsed) {
         Integer pid = Integer.parseInt(parsed.get(0));
         Integer increaseBy = Integer.parseInt(parsed.get(1));
 
-        return new InflowCommand(productList, pid, increaseBy);
+        return new InflowCommand(productList, pid, increaseBy, storage);
     }
 
     private DeleteCommand createDeleteCommand(ArrayList<String> parsed) {
         Integer pid = Integer.parseInt(parsed.get(0));
 
-        return new DeleteCommand(productList, pid);
+        return new DeleteCommand(productList, pid, storage);
     }
 
     private EditCommand createEditCommand(ArrayList<String> parsed) {
@@ -126,7 +130,7 @@ public class Parser {
                 : Double.parseDouble(parsed.get(3));
         String description = parsed.get(4);
 
-        return new EditCommand(productList, pid, name, quantity, price, description);
+        return new EditCommand(productList, pid, name, quantity, price, description, storage);
     }
 
     private NewCommand createNewCommand(ArrayList<String> parsed) {
@@ -137,7 +141,7 @@ public class Parser {
                 : Double.parseDouble(parsed.get(2));
         String description = parsed.get(3);
 
-        return new NewCommand(productList, name, quantity, price, description);
+        return new NewCommand(productList, name, quantity, price, description, storage);
     }
 
     private static String getCommandFromInput(String input) {
@@ -151,7 +155,7 @@ public class Parser {
             throws InvalidFormatException {
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new InvalidFormatException();
+            throw new InvalidFormatException("Invalid input format");
         }
 
         ArrayList<String> parsed = new ArrayList<>();
