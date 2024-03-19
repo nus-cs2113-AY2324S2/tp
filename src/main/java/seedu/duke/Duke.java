@@ -10,6 +10,9 @@ public class Duke {
      */
 
     public static void run() {
+  
+        Storage.readFile();
+  
         ui.greet();
         String command = ui.readCommand();
         while (!command.equals("exit")) {
