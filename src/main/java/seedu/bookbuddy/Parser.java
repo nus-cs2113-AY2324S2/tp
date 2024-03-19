@@ -29,33 +29,33 @@ public class Parser {
         int index;
         try {
             switch (command) {
-                case ADD_COMMAND:
-                    if (inputArray.length < 2) {
-                        throw new InvalidCommandArgumentException("The add command requires a book title.");
-                    }
-                    books.addBook(inputArray[1]);
-                    break;
-                case REMOVE_COMMAND:
-                    index = Integer.parseInt(inputArray[1]);
-                    books.deleteBook(index);
-                    break;
-                case LIST_COMMAND:
-                    books.printAllBooks();
-                    break;
-                case MARK_COMMAND:
-                    index = Integer.parseInt(inputArray[1]);
-                    books.markDoneByIndex(index);
-                    break;
-                case UNMARK_COMMAND:
-                    index = Integer.parseInt(inputArray[1]);
-                    books.markUndoneByIndex(index);
-                    break;
-                case EXIT_COMMAND:
-                    BookBuddy.printExitMessage();
-                    System.exit(0);
-                    break;
-                default:
-                    throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
+            case ADD_COMMAND:
+                if (inputArray.length < 2) {
+                    throw new InvalidCommandArgumentException("The add command requires a book title.");
+                }
+                books.addBook(inputArray[1]);
+                break;
+            case REMOVE_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.deleteBook(index);
+                break;
+            case LIST_COMMAND:
+                books.printAllBooks();
+                break;
+            case MARK_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.markDoneByIndex(index);
+                break;
+            case UNMARK_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.markUndoneByIndex(index);
+                break;
+            case EXIT_COMMAND:
+                BookBuddy.printExitMessage();
+                System.exit(0);
+                break;
+            default:
+                throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
             }
         } catch (NumberFormatException e) {
             throw new InvalidBookIndexException("Book index must be an integer.");
