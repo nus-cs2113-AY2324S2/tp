@@ -124,14 +124,17 @@ public class ProblemGenerator {
     private static void defaultOptions(String command, HashMap<String, String> options) {
         if(!command.contains("-t")){
             options.put("operators", DEFAULT_OPERATORS);
-
+            Ui.missingMessage("operators");
         }
         if (!command.contains("-n")) {
             options.put("number", DEFAULT_NUMBER);
+            Ui.missingMessage("number");
         }
         if (!command.contains("-d")) {
             options.put("maximumDigits", DEFAULT_MAX_DIGITS);
+            Ui.missingMessage("maximumDigits");
         }
+
     }
 
 
