@@ -4,21 +4,29 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class BookBuddy {
-    private static BookList bookList = new BookList();
+    private static BookList books = new BookList();
     public static void main(String[] args) {
+        printWelcomeMessage();
+        getUserInput(books);
+    }
 
-        System.out.println("Hello! We are bookbuddy!");
-        Scanner scanner = new Scanner(System.in);
-        while(true) {
-            String input = scanner.nextLine();
-            String command = input.split(" ", 2)[0];
-            if (Objects.equals(command, "addBook")) {
-                String actualDescription = input.split(" ", 2)[1];
-                bookList.addBook(actualDescription);
-            } else if (Objects.equals(command, "list")) {
-                bookList.printAllBooks();
-            }
+    public static void printWelcomeMessage() {
+        System.out.println("Hello! We are BookBuddy!");
+        System.out.println("How can I help you today?");
+    }
+
+    public static void getUserInput(BookList books) {
+        Scanner input = new Scanner(System.in);
+
+        //noinspection InfiniteLoopStatement
+        while (true) {
+            String userInput = input.nextLine();
+            Parser.parseCommand(userInput, books);
         }
+    }
+
+    public static void printExitMessage() {
+        System.out.println("Thank you for using bookbuddy! Hope to see you again!");
     }
 
 }

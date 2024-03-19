@@ -2,27 +2,27 @@ package seedu.bookbuddy;
 
 public class Book {
 
-    public String description;
+    public String title;
     protected boolean isRead;
 
 
     /**
-     * Creates a new Task with the specified description.
+     * Creates a new Book with the specified title.
      *
-     * @param description The description of the task.
+     * @param title The description of the book.
      */
-    public Book(String description) {
-        this.description = description; // Description of the task
-        this.isRead = false; //Completion status of the task(True: Read, False: Unread)
+    public Book(String title) {
+        this.title = title; // Description of the book
+        this.isRead = false; //Completion status of the book (True: Read, False: Unread)
     }
 
     /**
-     * Returns the description of the book.
+     * Returns the title of the book.
      *
-     * @return The description of the book.
+     * @return The title of the book.
      */
-    public String getDescription() {
-        return this.description;
+    public String getTitle() {
+        return this.title;
     }
 
     /**
@@ -39,6 +39,7 @@ public class Book {
      */
     public void markBookAsRead() {
         this.isRead = true;
+        System.out.println("Successfully marked " + this.getTitle() + " as read.");
     }
 
     /**
@@ -46,10 +47,11 @@ public class Book {
      */
     public void markBookAsUnread() {
         this.isRead = false;
+        System.out.println("Successfully marked " + this.getTitle() + " as unread.");
     }
 
     public String toString() {
-        String statusMark = this.isRead() ? "X" : " "; // Mark with 'x' if completed
-        return  this.description + " [" + statusMark + "]" ;
+        String statusMark = this.isRead() ? "R" : "U"; // Mark with 'R' if read and 'U' if unread
+        return "[" + statusMark + "] " + this.title;
     }
 }
