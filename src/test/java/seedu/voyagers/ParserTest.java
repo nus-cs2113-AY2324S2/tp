@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +15,7 @@ public class ParserTest {
 
     private static final String DEFAULT_START = "01 January 1900";
     private static final String DEFAULT_END = "01 January 2500";
-    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("en"));
     private TripList tripsList;
     private Ui ui;
     private Parser parser;
