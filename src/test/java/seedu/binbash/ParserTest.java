@@ -47,8 +47,10 @@ public class ParserTest {
         try {
             Command command = parser.parseCommand("add item description 5 2024-12-31 10.5 7.5");
             assertTrue(command instanceof AddCommand);
+        } catch (InvalidFormatException e) {
+            fail("Unexpected InvalidFormatException: " + e.getMessage());
         } catch (InvalidCommandException e) {
-            fail("Unexpected exception: " + e.getMessage());
+            fail("Unexpected InvalidCommandException: " + e.getMessage());
         }
     }
 
