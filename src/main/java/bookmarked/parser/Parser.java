@@ -11,6 +11,8 @@ import bookmarked.command.DeleteCommand;
 import bookmarked.command.BorrowCommand;
 import bookmarked.command.HelpCommand;
 import bookmarked.command.ListCommand;
+import bookmarked.exceptions.bookMarkedException;
+import bookmarked.exceptions.emptyListException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,6 +38,9 @@ public class Parser {
                 userCommand = new FindCommand(newItem, listOfBooks);
             } else {
                 Ui.printUnknownCommand();
+                Ui.separateNextInput();
+                newItem = in.nextLine();
+                continue;
             }
             userCommand.handleCommand();
             Ui.separateNextInput();
