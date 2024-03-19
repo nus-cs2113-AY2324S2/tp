@@ -11,7 +11,6 @@ public class BudgetBuddy {
     /**
      * Main entry-point for the java.BudgetBuddy application.
      */
-
     public static void main(String[] args){
         String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
@@ -37,7 +36,7 @@ public class BudgetBuddy {
                     transactions.printTransactions();
                     break;
                 case "delete":
-                    transactions.removeTransaction(input);
+                    transactions.removeTransaction(input, account);
                     break;
                 case "add":
                     transactions.processTransaction(input, account);

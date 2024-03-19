@@ -30,13 +30,14 @@ public class TransactionList {
         UserInterface.printAllTransactions(transactions);
     }
 
-    public void removeTransaction(String input){
+    public void removeTransaction(String input, Account account){
         int id = Integer.parseInt(input.substring(DELETE_BEGIN_INDEX).trim()) - INDEX_OFFSET;
         int size = transactions.size();
         if (id >= LOWER_BOUND && id < size) {
             String itemRemoved = transactions.get(id).toString();
+            account.setBalance(account.getBalance() - transactions.get(id).getAmount() );
             transactions.remove(id);
-            UserInterface.printDeleteMessage(itemRemoved);
+            UserInterface.printDeleteMessage(itemRemoved, account.getBalance());
         } else {
             throw new IndexOutOfBoundsException(size);
         }
