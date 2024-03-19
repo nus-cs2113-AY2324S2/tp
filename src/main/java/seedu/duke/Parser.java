@@ -29,7 +29,11 @@ public class Parser {
             case "generate":
                 //ProblemGenerator ;
                 ProblemGenerator pb = new ProblemGenerator();
-                pb.TypeChoose();
+                Test test = pb.TypeChoose();
+                Checker checker = new Checker(test);
+                checker.getUserAnswer();
+                System.out.println(checker.getAccuracy());
+                System.out.println(checker.getCorrectNumber());
                 break;
             case "help": 
                 ui.help(command);

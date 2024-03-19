@@ -17,18 +17,18 @@ public class ProblemGenerator {
             "generate -t [operators] -n [number] -d [maximum digit] \n";
     Scanner in = new Scanner(System.in);
 
-    public void TypeChoose() {
+    public Test TypeChoose() {
 
         System.out.println(PROBLEM_FORM);
         String command = in.nextLine();
         HashMap<String, String> parameter = parseCommand(command);
 
-        Generate(parameter);
+        return Generate(parameter);
 
 
     }
 
-    private void Generate(HashMap<String, String> parameter) {
+    private Test Generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
@@ -93,7 +93,7 @@ public class ProblemGenerator {
 
 
         }
-
+    return test;
     }
 
 

@@ -1,35 +1,56 @@
 package seedu.duke;
+import java.util.Scanner;
 import seedu.duke.Problem;
 
 import java.util.ArrayList;
 
 public class Checker {
     private Double[] userAnswer;
-    private ArrayList<Problem> test;
+    private final Test test;
     private Boolean[] isCorrect;
     private int correctNumber;
     double accuracy;
+    long time;
 
     Boolean checkCorrectness(Problem problem, double answer){
-        if(Math.abs(problem.getAnser()-answer)<0.01){
-            return ture;
-        }
-        return false;
+        return Math.abs(problem.getAnswer() - answer) < 0.01;
     }
 
-    public Checker(Double[] userAnswer, ArrayList<Problem> test){
-        assert userAnswer != null: "Input null userAnswer!";
+    public Checker(Test test){
         assert test != null: "Input null test!";
-        this.userAnswer = userAnswer;
+        this.userAnswer = new Double[test.getNumber()];
         this.test = test;
-        this.isCorrect = new Boolean[test.size()];
+        this.isCorrect = new Boolean[test.getNumber()];
         this.correctNumber = 0;
-        for(int i=0;i<test.size();i++){
-            isCorrect[i] = checkCorrectness(test.get(i), userAnswer[i]);
-            correctNumber++;
-        }
-        accuracy = (double) correctNumber /test.size();
+        accuracy = 0.0;
+        this.time = 0;
 
+    }
+    void getUserAnswer(){
+        long startTime = System.currentTimeMillis();
+        Scanner scanner = new Scanner(System.in);
+        for(int i=0;i<test.getNumber();i++){
+            Problem problem = test.getProblem().get(i);
+            System.out.println(problem.unsolved());
+            String userInput = scanner.nextLine();
+            double answer = Double.NEGATIVE_INFINITY;
+            try {
+                answer = Double.parseDouble(userInput);
+            }catch (NumberFormatException e){
+                System.out.println("Invalid Input, please enter a number");
+                continue;
+            }
+            userAnswer[i] = answer;
+            if(checkCorrectness(problem, answer)){
+                correctNumber++;
+                isCorrect[i] = true;
+            }
+
+        }
+
+        long endTime = System.currentTimeMillis();
+        accuracy = (double) correctNumber /test.getNumber();
+        this.time = endTime - startTime;
     }
 
     public Boolean[] checkAnswer(){

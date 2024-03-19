@@ -18,5 +18,7 @@ public class Problem {
         return desctiption + "__";
     }
 
-
+    public double getAnswer() {
+        return answer;
+    }
 }
