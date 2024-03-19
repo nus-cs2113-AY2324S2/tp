@@ -99,7 +99,6 @@ public class TaskManager {
     }
 
     /**
-<<<<<<< HEAD
      * Prompts user for updated task description
      *
      * @param scanner User input
@@ -143,14 +142,8 @@ public class TaskManager {
     }
 
     /**
-<<<<<<< HEAD
-     * Scans through hashmap and adds tasks to formatted tasks.txt
-     *
-     * @param tasksFromFile Hashmap of tasks
-=======
      * Adds tasks from a file to the TaskManager.
      * @param tasksFromFile A map containing tasks read from a file.
->>>>>>> 281fb15b8d95f728f8bac1aa8b9bc884b857b7c4
      */
     public void addTasksFromFile(Map<LocalDate, List<String>> tasksFromFile) {
         for (Map.Entry<LocalDate, List<String>> entry : tasksFromFile.entrySet()) {
@@ -163,10 +156,10 @@ public class TaskManager {
     }
 
     /**
-     *
+     * Lists task of the input date
      *
      * @param taskManager Hashmap of tasks
-     * @param date Date thats prompted by user
+     * @param date Date that's prompted by user
      * @param message Message to be prompted to the user
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
@@ -182,7 +175,6 @@ public class TaskManager {
     }
 
     /**
-<<<<<<< HEAD
      * Prompts user for task description and deletes task from hashmap and tasks.txt file
      *
      * @param scanner User input
