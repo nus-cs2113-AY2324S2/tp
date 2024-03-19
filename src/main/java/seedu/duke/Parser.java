@@ -59,9 +59,9 @@ public class Parser {
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
             } else if (command.startsWith("editMealServingSize")) {
-                //handleEditMealServingSize(command);
+                User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrinkServingSize")) {
-                //handleEditDrinkServingSize(command);
+                User.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWaterIntake")) {
                 //handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {

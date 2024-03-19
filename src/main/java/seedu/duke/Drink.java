@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exception.UnregisteredDrinkException;
-
 import java.util.HashMap;
 
 public class Drink {
@@ -35,7 +34,6 @@ public class Drink {
         protein = nutrients[3] * drinkVolume / 100;
         fat = nutrients[4] * drinkVolume / 100;
     }
-
     public static void handleInfoDrink(String command) throws UnregisteredDrinkException {
         String name = Parser.parseInfoDrink(command);
         int[] nutrients = nutrientDetails.get(name);

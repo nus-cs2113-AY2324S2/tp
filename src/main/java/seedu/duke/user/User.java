@@ -23,7 +23,6 @@ public class User {
         drinkList = new ArrayList<>();
         totalWaterIntake = new ArrayList<>();
     }
-
     public void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
@@ -123,7 +122,7 @@ public class User {
     public void printMealList(int startIndex) {
         for (int i = 0; i < mealList.size(); i++) {
             Meal currentMeal = mealList.get(i);
-            System.out.print((startIndex+i) + ". " + currentMeal.getName());
+            System.out.println((startIndex+i) + ". " + currentMeal.getName());
         }
         System.out.println();
     }
@@ -168,39 +167,39 @@ public class User {
 
     public static void handleEditMealServingSize(String command) {
         int slashIndex = command.indexOf("/");
-        int mealIndex = Integer.parseInt(command.substring(20, slashIndex - 3));
+        int mealIndex = Integer.parseInt(command.substring(20, slashIndex - 2)) - 1;
         String mealName = mealList.get(mealIndex).getName();
-        int servingSize = Integer.parseInt(command.substring(slashIndex));
+        int servingSize = Integer.parseInt(command.substring(slashIndex + 1));
 
         Meal updatedMeal = new Meal(mealName, servingSize);
         mealList.set(mealIndex, updatedMeal);
-        System.out.println(mealName + "has been edited to " + servingSize + " serving(s)");
+        System.out.println(mealName + " has been edited to " + servingSize + " serving(s)");
     }
 
     public static void handleEditDrinkServingSize(String command) {
         int slashIndex = command.indexOf("/");
-        int drinkIndex = Integer.parseInt(command.substring(21, slashIndex - 3));
+        int drinkIndex = Integer.parseInt(command.substring(21, slashIndex - 2)) - 1;
         String drinkName = mealList.get(drinkIndex).getName();
-        int servingSize = Integer.parseInt(command.substring(slashIndex));
+        int servingSize = Integer.parseInt(command.substring(slashIndex + 1));
 
-        Meal updatedDrink = new Drink(drinkName, servingSize);
-        mealList.set(drinkIndex, updatedDrink);
-        System.out.println(drinkName + "has been edited to " + servingSize " ml");
+        Drink updatedDrink = new Drink(drinkName, servingSize);
+        drinkList.set(drinkIndex, updatedDrink);
+        System.out.println(drinkName + "has been edited to " + servingSize + " ml");
     }
 
     public void handleDeleteMeal(String command) {
-        int mealIndex = Integer.parseInt(command.substring(11));
+        int mealIndex = Integer.parseInt(command.substring(11)) - 1;
         String mealName = mealList.get(mealIndex).getName();
         mealList.remove(mealIndex);
 
-        System.out.println("Removed " + mealName + " from Meals");
+        System.out.println("Removed " + mealName + " from meals");
     }
 
     public void handleDeleteDrink(String command) {
-        int drinkIndex = Integer.parseInt(command.substring(12));
+        int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
-        System.out.println("Removed " + drinkName + " from Meals");
+        System.out.println("Removed " + drinkName + " from drinks");
     }
 
     public void handleClear() {
