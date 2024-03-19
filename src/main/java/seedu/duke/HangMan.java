@@ -147,6 +147,9 @@ public class HangMan {
             System.out.println("  |    / \\");
             System.out.println("==============");
             break;
+        default:
+            System.out.println("default");
+            break;
         }
 
     }
@@ -194,5 +197,4 @@ public class HangMan {
             return;
         }
     }
-
 }

@@ -5,6 +5,7 @@ import java.util.Random;
  * The Ui class handles user interface interactions.
  */
 public class Ui {
+    private static final String LINE = "_____________________________________________________________________________";
     private String[] byeSentences = {
         "AeroCade dismissed. Fly with honor and return victorious.",
         "Departure clearance granted. Execute your aero-maneuvers with expertise.",
@@ -12,30 +13,52 @@ public class Ui {
         "Permission to depart granted. Execute your flight plan with discipline."
     };
 
-    private String logo = "\n\n\n" +
-            " _______  _______  ______    _______    \n" +
-            "|   _   ||       ||    _ |  |       |   \n" +
-            "|  |_|  ||    ___||   | ||  |   _   |   \n" +
-            "|       ||   |___ |   |_||_ |  | |  |   \n" +
-            "|       ||    ___||    __  ||  |_|  |   \n" +
-            "|   _   ||   |___ |   |  | ||       |   \n" +
-            "|__| |__||_______||___|  |_||_______|   \n" +
-            " _______  _______  ______   _______     \n" +
-            "|       ||   _   ||      | |       |    \n" +
-            "|       ||  |_|  ||  _    ||    ___|    \n" +
-            "|       ||       || | |   ||   |___     \n" +
-            "|      _||       || |_|   ||    ___|    \n" +
-            "|     |_ |   _   ||       ||   |___     \n" +
-            "|_______||__| |__||______| |_______|    \n" ;
+    private String logo = "\n\n\n" + LINE + "\n" +
+            "               _______  _______  ______    _______    \n" +
+            "              |   _   ||       ||    _ |  |       |   \n" +
+            "  __|____|__  |  |_|  ||    ___||   | ||  |   _   |   \n" +
+            "    |  X |    |       ||   |___ |   |_||_ |  | |  |   \n" +
+            "  __|____|__  |       ||    ___||    __  ||  |_|  |   \n" +
+            "   O|  X |O   |   _   ||   |___ |   |  | ||       |   \n" +
+            "              |__| |__||_______||___|  |_||_______|   \n" +
+            "               _______  _______  ______   _______     \n" +
+            "              |       ||   _   ||      | |       |    \n" +
+            "              |       ||  |_|  ||  _    ||    ___|    \n" +
+            "              |       ||       || | |   ||   |___     |  @      \n" +
+            "              |      _||       || |_|   ||    ___|    | /|\\    \n" +
+            "              |     |_ |   _   ||       ||   |___     |  |      \n" +
+            "              |_______||__| |__||______| |_______|    | / \\  \n\n" ;
 
+    private String boeing =
+            "                                |\n" +
+            "                              .-'-.\n" +
+            "                             ' ___ '\n" +
+            "                   ---------'  .-.  '---------\n" +
+            "   _________________________'  '-'  '_________________________\n" +
+            "    ''''''-|---|--/    \\==][^',_m_,'^][==/    \\--|---|-''''''\n" +
+            "                  \\    /  ||/   H   \\||  \\    /\n" +
+            "                   '--'   OO   O|O   OO   '--' \n\n";
     public void println(String s) {
         System.out.println(s);
     }
 
     
     public void greetUser() {
-        println(logo + "\n[Welcome to the AeroCade]");
-        println("What can I do for you?\nType 'help' for a list of available commands!\n");
+        println(logo + boeing + LINE +
+            "\n              [      Welcome to the AeroCade      ]\n" + LINE);
+        println(
+            "                          Choose your game:\n" +
+            "                                   ||                        \n" +
+            "           X  |  -  |  -           ||          _______       \n" +
+            "          ____|_____|____          ||          |     |       \n" +
+            "              |     |              ||          |     @       \n" +
+            "           -  |  O  |  X           ||          |    /|\\     \n" +
+            "          ____|_____|____          ||          |     |       \n" +
+            "              |     |              ||          |    /|\\     \n" +
+            "           -  |  O  |  -           ||        ==============  \n" +
+            "                                   ||                        \n" +
+            "            TIC-TAC-TOE            ||           HANGMAN        " +
+                    "\n\n\nType 'help' for a list of available commands!\n");
     }
 
     public void byeUser() {
