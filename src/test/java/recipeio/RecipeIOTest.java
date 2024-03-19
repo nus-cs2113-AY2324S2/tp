@@ -24,7 +24,7 @@ class RecipeIOTest {
         allergies.add("eggs");
         Recipe newRecipe = new Recipe("cookies", 40, 350, allergies,
                 MealCategory.DESSERT, "THIS IS MY URL");
-        recipes.addRecipe(newRecipe);
+        recipes.add(newRecipe);
         assertTrue(recipes.getSize() == 1);
     }
 
@@ -35,8 +35,8 @@ class RecipeIOTest {
         allergies.add("eggs");
         Recipe newRecipe = new Recipe("cookies", 40, 350, allergies,
                 MealCategory.DESSERT, "THIS IS MY URL");
-        recipes.addRecipe(newRecipe);
-        recipes.deleteRecipe(1);
+        recipes.add(newRecipe);
+        recipes.delete(1);
         assertTrue(recipes.getSize() == 0);
     }
     
@@ -54,7 +54,7 @@ class RecipeIOTest {
         Recipe testRecipe = new Recipe("Spaghetti Carbonara", 0, 0, testAllergies,
                 MealCategory.LUNCH, null);
         RecipeList testRecipeList = new RecipeList();
-        testRecipeList.addRecipe(testRecipe);
+        testRecipeList.add(testRecipe);
         testRecipeList.findAllergy("eggs");
         String expectedOutput = "List of recipes with eggs mentioned:\nSpaghetti Carbonara\n";
         assertEquals(testRecipeList.findAllergy("eggs"), expectedOutput);

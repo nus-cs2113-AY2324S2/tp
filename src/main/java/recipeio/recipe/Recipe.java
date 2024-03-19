@@ -3,6 +3,7 @@ package recipeio.recipe;
 import recipeio.enums.MealCategory;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * The Recipe class represents a recipe containing various attributes such as name, cook time,
@@ -22,8 +23,8 @@ public class Recipe {
         this.cookTime = cookTime;
         this.calories = calories;
         this.allergies = allergies;
-        this.category = category;
         this.url = url;
+        this.category = Objects.requireNonNullElse(category, MealCategory.GENERAL);
     }
 
     @Override

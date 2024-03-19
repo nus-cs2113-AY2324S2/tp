@@ -1,4 +1,4 @@
-package storage;
+package recipeio.storage;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -64,7 +64,7 @@ public class Storage {
             MealCategory category = MealCategory.valueOf(line.split(" \\| ")[4]);
             String url = line.split(" \\| ")[5];
             Recipe testRecipe = new Recipe(name, cookTime, calories, allergies, category, url);
-            recipeList.addRecipe(testRecipe);
+            recipeList.add(testRecipe);
         }
     }
 }
