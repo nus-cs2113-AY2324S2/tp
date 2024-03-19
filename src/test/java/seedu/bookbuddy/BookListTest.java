@@ -1,9 +1,13 @@
 package seedu.bookbuddy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 
 class BookListTest {
@@ -15,10 +19,27 @@ class BookListTest {
 
     @Test
     void addBook() {
-        BookList bookList = new BookList();
-        bookList.addBook("Harry Potter");
-        assertEquals(1, bookList.getSize());
-        assertEquals("[U] Harry Potter", bookList.getBook(0).toString());
+        BookList testBookList = new BookList();
+        testBookList.addBook("Harry Potter");
+        assertEquals(1, testBookList.getSize());
+        assertEquals("[U] Harry Potter", testBookList.getBook(0).toString());
+    }
+
+    @Test
+    void printAllBooks() {
+        BookList testBookList = new BookList();
+        testBookList.addBook("Harry Potter");
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        testBookList.printAllBooks();
+
+        String expectedOutput = "All books:\n1. [U] Harry Potter\n";
+        String normalizedActualOutput = outContent.toString().replace("\r\n", "\n");
+        assertEquals(expectedOutput.trim(), normalizedActualOutput.trim());
+
+        System.setOut(System.out);
     }
 
     @Test
