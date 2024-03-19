@@ -2,7 +2,6 @@ package seedu.duke.ai;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import seedu.duke.ai.Ai;
 
 public class AiTest {
     @Test

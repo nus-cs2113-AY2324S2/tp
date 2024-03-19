@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Ui.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public class Duke {
@@ -43,9 +43,12 @@ public class Duke {
         return !userInput.equalsIgnoreCase("bye");
     }
 
-    // Method to check if the shot resulted in a goal
+    /**
+     * Method to check if the shot resulted in a goal
+     * If shoot direction matches save direction, it's not a goal and the returned value is false.
+     */
     public static boolean goalCheck(int userInput, int save) {
-        return !(userInput == save); // If shoot direction matches save direction, it's not a goal and the returned value is false
+        return !(userInput == save);
     }
 
     public static void viewGoalBeforeShot() {
