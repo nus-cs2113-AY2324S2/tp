@@ -54,8 +54,16 @@ public class TaskManager {
         return tasks.getOrDefault(date, new ArrayList<>());
     }
 
+    /**
+     * Prompts user for task description and adds task to hashmap and tasks.txt file
+     *
+     * @param scanner User input
+     * @param weekView Current week being viewed
+     * @param inMonthView Whether month is being viewed
+     * @throws TaskManagerException Throws exception when not in correct week/month view
+     */
     public static void addManager(Scanner scanner, WeekView weekView, boolean inMonthView)
-            throws TaskManagerException {
+            throws TaskManagerException, DateTimeParseException {
         System.out.println("Enter the date for the task (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
@@ -73,13 +81,21 @@ public class TaskManager {
         System.out.println("Task added.");
     }
 
-
-    public static void updateManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
+    /**
+     * Prompts user for updated task description
+     *
+     * @param scanner User input
+     * @param weekView Current week being viewed
+     * @param inMonthView Whether month is being viewed
+     * @throws TaskManagerException Throws exception when not in correct week/month view
+     */
+    public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
             throws TaskManagerException {
         System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
-        checkIfDateInCurrentWeek(date, weekView);
+//        checkIfDateInCurrentWeek(date, weekView);
+
         if (inMonthView) {
             checkIfDateInCurrentMonth(date);
         } else {

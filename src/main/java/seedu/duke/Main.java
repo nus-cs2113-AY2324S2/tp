@@ -7,6 +7,7 @@ import data.TaskManager;
 import data.TaskManagerException;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -69,7 +70,7 @@ public class Main {
                 break;
             case "update":
                 try {
-                    updateManager(scanner, weekView, taskManager);
+                    updateManager(scanner, weekView, inMonthView, taskManager);
                 } catch (TaskManagerException e) {
                     System.out.println(e.getMessage());
                 }
@@ -77,7 +78,7 @@ public class Main {
             case "add":
                 try {
                     addManager(scanner, weekView, inMonthView);
-                } catch (TaskManagerException e) {
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
