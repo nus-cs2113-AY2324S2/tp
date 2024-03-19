@@ -6,12 +6,7 @@ import time.WeekView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 import static data.TaskManagerException.checkIfDateHasTasks;
 import static data.TaskManagerException.checkIfDateInCurrentWeek;
@@ -90,7 +85,7 @@ public class TaskManager {
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
     public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
-            throws TaskManagerException {
+            throws TaskManagerException, DateTimeParseException {
         System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 

@@ -71,7 +71,7 @@ public class Main {
             case "update":
                 try {
                     updateManager(scanner, weekView, inMonthView, taskManager);
-                } catch (TaskManagerException e) {
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
@@ -85,7 +85,7 @@ public class Main {
             case "delete":
                 try {
                     deleteManager(scanner, weekView, taskManager);
-                } catch (TaskManagerException e) {
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
