@@ -10,8 +10,12 @@ public class ExpenseList {
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Housing", 
-        "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Housing",
+                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+    }
+
+    public int size() {
+        return expenses.size();
     }
 
     public List<Expense> getExpenses() {
@@ -96,6 +100,7 @@ public class ExpenseList {
     public void deleteExpense(int index){
         if (index >= 0 && index < expenses.size()){
             expenses.remove(index);
+            System.out.println("Expense deleted successfully!");
         } else {
             System.out.println("Invalid expense index.");
         }

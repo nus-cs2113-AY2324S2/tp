@@ -8,11 +8,16 @@ public class SavingList {
     protected ArrayList<String> categories;
     private double initialAmount;
 
+
     public SavingList() {
         this.savings = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Salary", 
         "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
+    }
+
+    public int size() {
+        return savings.size();
     }
 
     public ArrayList<Saving> getSavings() {
@@ -117,6 +122,7 @@ public class SavingList {
             Saving saving = savings.get(index);
             if(saving.getAmount() >= amount){
                 saving.setAmount(saving.getAmount() - amount);
+                System.out.println("Savings reduced successfully!");
             } else {
                 System.out.println("Insufficient savings amount.");
             }
