@@ -21,6 +21,10 @@ public class Parser {
     }
 
     public static boolean ifHelp(String input) {
+        // Check if the input is null
+        if (input == null) {
+            return false; // or throw an exception, depending on your requirements
+        }
         if (input.equals("help")) {
             return true;
         }
