@@ -173,6 +173,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid Amount. Amount should be a numerical value.");
                     return null;
                 }
             } else if (part.startsWith("d/")) {
@@ -203,6 +204,7 @@ public class Parser {
                     index = Integer.parseInt(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid index format
+                    System.out.println("Invalid index");
                     return null;
                 }
             } else if (part.startsWith("a/")) {
@@ -210,6 +212,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid amount. Amount should be a numerical value");
                     return null;
                 }
             }
@@ -226,32 +229,57 @@ public class Parser {
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
         String[] parts = input.split("i/", 2);
-        try {
-            String indexAsString = parts[1].trim();
-            int index = Integer.parseInt(indexAsString) - 1;
-            return new DeleteExpenseCommand(expenses, index);
-        } catch (NumberFormatException e) {
+        // Check if the input format is correct (i.e., contains "i/")
+        if (parts.length < 2) {
+            System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
             return null;
         }
 
+        try {
+            int index = Integer.parseInt(parts[1].trim()) - 1;
+            // Check if the index is within the bounds of the expense list.
+            if (index < 0 || index >= expenses.size()) {
+                System.out.println("Error: Index is out of bounds.");
+                return null;
+            }
+            // If the index is valid, return a new DeleteExpenseCommand.
+            return new DeleteExpenseCommand(expenses, index);
+        } catch (NumberFormatException e) {
+            // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
+            System.out.println("Error: Index is not a valid number.");
+            return null;
+        }
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
-            String[] parts  = description.split("i/|a/", 3);
+            try {
+                String[] parts = description.split("i/|a/", 3);
 
-            String indexToReduceAsString = parts[1].trim();
-            String amountToReduceAsString = parts[2].trim();
-            int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
-            double amountToReduce = Double.parseDouble(amountToReduceAsString);
+                String indexToReduceAsString = parts[1].trim();
+                String amountToReduceAsString = parts[2].trim();
+                int indexToReduce = Integer.parseInt(indexToReduceAsString) - 1;
+                double amountToReduce = Double.parseDouble(amountToReduceAsString);
 
-            return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+                // Validate the index range.
+                if (indexToReduce < 0 || indexToReduce >= savings.size()) {
+                    System.out.println("Error: Index is out of bounds.");
+                    return null;
+                }
+
+                return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
+            } catch (NumberFormatException e){
+                // Catch and handle incorrect number formats for index or amount.
+                System.out.println("Error: Index and amount must be valid numbers.");
+                return null;
+            }
+        } else {
+            // Handle the case where the input does not contain the required markers.
+            System.out.println("Error: Invalid command format. Expected format: reduce i/<index> a/<amount>");
+            return null;
         }
-
-        return null;
-
     }
 
     /**
