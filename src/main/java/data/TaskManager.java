@@ -132,6 +132,7 @@ public class TaskManager {
 
         try {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
+            assert taskNumber != 0 : "Task Number is invalid!";
 
             System.out.println("Enter the updated task description:");
             updatedDescription = scanner.nextLine().trim();
