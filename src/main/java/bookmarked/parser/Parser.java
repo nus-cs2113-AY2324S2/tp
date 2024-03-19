@@ -10,6 +10,7 @@ import bookmarked.command.DeleteCommand;
 import bookmarked.command.BorrowCommand;
 import bookmarked.command.HelpCommand;
 import bookmarked.command.ListCommand;
+import bookmarked.command.FindCommand;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +32,8 @@ public class Parser {
                 userCommand = new BorrowCommand(splitItem, listOfBooks);
             } else if (splitItem[0].matches("return")) {
                 userCommand = new ReturnCommand(splitItem, listOfBooks);
+            } else if (splitItem[0].matches("find")) {
+                userCommand = new FindCommand(newItem, listOfBooks);
             }
             userCommand.handleCommand();
             Ui.separateNextInput();
