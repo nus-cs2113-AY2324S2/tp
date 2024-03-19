@@ -120,29 +120,29 @@ public class InputParsing {
         showAttributes(attributes);
         //edits only StudentAttribute. (Not Name or Details)
         while (true) {
-        System.out.println("How would you like to update student's subject? (enter blank to exit)");
-        String command = in.nextLine().trim();
-        if (command.isBlank()) {
-            return;
-        }
-        switch (command) {
-        case ADD:
-            addAttribute(in, attributes);
-            student.setAttributes(attributes);
-            break;
+            System.out.println("How would you like to update student's subject? (enter blank to exit)");
+            String command = in.nextLine().trim();
+            if (command.isBlank()) {
+                return;
+            }
+            switch (command) {
+            case ADD:
+                addAttribute(in, attributes);
+                student.setAttributes(attributes);
+                break;
 
-        case EDIT:
-            editAttribute(in, attributes);
-            break;
+            case EDIT:
+                editAttribute(in, attributes);
+                break;
 
-        case DELETE:
-            deleteAttribute(in, attributes);
-            break;
+            case DELETE:
+                deleteAttribute(in, attributes);
+                break;
 
-        default:
-            System.out.println("invalid input");
-            break;
-        }
+            default:
+                System.out.println("invalid input");
+                break;
+            }
         }
         //if done overwrite student
     }
