@@ -41,6 +41,7 @@ public class Trip {
 
     /**
      * Returns the duration of the trip in days.
+     *
      * @return duration of the trip in days
      */
     public int getDuration() {
@@ -77,11 +78,9 @@ public class Trip {
     }
 
 
-
-
-
     /**
      * Returns the sub-trips of the current trip.
+     *
      * @return the array with sub-trips of the current trip
      */
     public ArrayList<Trip> getSubTrips() {
@@ -90,6 +89,7 @@ public class Trip {
 
     /**
      * Adds a sub-trip to the current trip.
+     *
      * @param subTrip the sub-trip to be added
      */
     public void addSubTrip(Trip subTrip) {
@@ -98,6 +98,7 @@ public class Trip {
 
     /**
      * Removes the specified sub-trip from the current trip.
+     *
      * @param subTrip the sub-trip to be removed
      */
     public void removeSubTrip(Trip subTrip) {
@@ -106,10 +107,11 @@ public class Trip {
 
     /**
      * Removes the sub-trip at the specified index.
+     *
      * @param i the index of the sub-trip to be removed. Index starts from 0.
      */
-    public void removeSubTrip(int i){
-        try{
+    public void removeSubTrip(int i) {
+        try {
             subTrips.remove(i);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -118,11 +120,12 @@ public class Trip {
 
     /**
      * Returns the sub-trip at the specified index.
+     *
      * @param i the index of the sub-trip to be returned. Index starts from 0.
      * @return the sub-trip at the specified index
      */
-    public Trip getSubTrip(int i){
-        try{
+    public Trip getSubTrip(int i) {
+        try {
             return subTrips.get(i);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
