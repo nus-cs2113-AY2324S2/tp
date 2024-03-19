@@ -222,7 +222,8 @@ public class Handler {
     }
 
     /**
-     * For justin to do.
+     * Prints the latest run.
+     *
      * @param userInput String representing user input.
      */
     public static void handleLatestRun(String userInput){
@@ -230,11 +231,12 @@ public class Handler {
     }
 
     /**
-     * For justin to do.
-     * @param inputs
-     * @return
-     * @throws CustomExceptions.InsufficientInput
-     * @throws CustomExceptions.InvalidInput
+     * Checks parameters from user input for adding a new GymStation.
+     *
+     * @param inputs List of strings representing user input.
+     * @return Array of strings representing the parameters required for a new GymStation.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     private static String[] checkGymStationInput(String[] inputs) throws
             CustomExceptions.InsufficientInput,
@@ -255,16 +257,16 @@ public class Handler {
         } catch (NumberFormatException e) {
             throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
         }
-
         return new String[]{exerciseName, sets, reps, weights};
     }
 
     /**
-     * For justin to do.
-     * @param validatedInputs
-     * @param gym
-     * @throws CustomExceptions.InsufficientInput
-     * @throws CustomExceptions.InvalidInput
+     * Adds new gym station using validated parameters.
+     *
+     * @param validatedInputs Array representing validated GymStation parameters.
+     * @param gym Gym object to add the GymStation to.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     private static void addGymStationInput(String []validatedInputs, Gym gym) throws
             CustomExceptions.InsufficientInput,

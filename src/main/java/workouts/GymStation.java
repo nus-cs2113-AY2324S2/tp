@@ -86,7 +86,9 @@ public class GymStation {
         StringBuilder format = new StringBuilder(String.format(Constant.GYM_STATION_FORMAT,
                 this.getStationName()));
 
-        format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, this.getNumberOfSets(), this.getSpecificSet(0)));
+        format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT,
+                this.getNumberOfSets(),
+                this.getSpecificSet(0)));
         return format.toString();
     }
 
