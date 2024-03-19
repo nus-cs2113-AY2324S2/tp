@@ -1,5 +1,7 @@
 package recipeio.ui;
 
+import recipeio.recipe.Recipe;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -30,6 +32,13 @@ public class UI {
         printLine();
         System.out.println(message);
         printLine();
+    }
+
+    public static void printAddMessage(Recipe recipe, int recipeListSize) {
+        System.out.println(SEPARATOR);
+        System.out.println("Woo hoo chef! I have added this recipe to your recipe book:\n\t" + recipe.toString() +
+                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
+        System.out.println(SEPARATOR);
     }
 
     public void helpCommand(){

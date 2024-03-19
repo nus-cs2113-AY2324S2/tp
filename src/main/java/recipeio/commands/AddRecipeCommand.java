@@ -17,6 +17,7 @@ public class AddRecipeCommand {
         try {
             //TaskList<T> add method only throw IndexOutOfBound exception for the overload add(int, T).
             recipes.add(recipe);
+            UI.printAddMessage(recipe, recipes.size());
         } catch (Exception e) {
             UI.printMessage(e.toString());
         }
