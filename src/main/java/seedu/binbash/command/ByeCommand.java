@@ -9,7 +9,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        return "";
+    public boolean execute() {
+        executionUiOutput = "";
+        return true;
     }
 }
