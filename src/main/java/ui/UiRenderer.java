@@ -44,6 +44,7 @@ public class UiRenderer {
 
         printHorizontalDivider();
         int maxTasks = getMaxTasks(startOfWeek, taskManager);
+        assert maxTasks >= 0 : "maxTasks should be non-negative";
         printWeeksTasks(startOfWeek, maxTasks, taskManager);
         printHorizontalDivider();
     }
