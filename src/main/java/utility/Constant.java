@@ -51,6 +51,8 @@ public class Constant {
     public static final String PERIOD = "period";
     public static final Integer BMI_PARAMETERS = 2;
     public static final Integer BMI_H_OFFSET = 8;
+    public static final Integer BMI_PARAMETERS = 3;
+    public static final Integer BMI_H_OFFSET = 3;
     public static final Integer BMI_HEIGHT_OFFSET = 8;
     public static final Integer BMI_WEIGHT_OFFSET = 8;
 
