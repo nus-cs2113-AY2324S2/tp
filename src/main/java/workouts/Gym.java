@@ -21,6 +21,10 @@ public class Gym extends Workout{
         this.date = Parser.parseDate(stringDate);
     }
 
+    public static void getGym(String input){
+        System.out.println("temp");
+    }
+
     /**
      * Adds station to an ArrayList of GymStation object
      * Takes string name, weight done, number of sets, number of reps

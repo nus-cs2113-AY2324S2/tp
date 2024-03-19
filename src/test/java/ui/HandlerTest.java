@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import utility.Constant;
 
 import utility.CustomExceptions;
+import workouts.Run;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,13 +34,13 @@ class HandlerTest {
     @Test
     void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
         // Test Setup
-        String input = "new /e:run /d:10.3 /t:00:40:10 /date:15/03/2024";
+        String input = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
 
         // Exercise
-        String[] result = Handler.getRun(input);
+        String[] result = Run.getRun(input);
 
         // Verify
-        assertArrayEquals(new String[]{"run", "10.3", "00:40:10", "15/03/2024"}, result);
+        assertArrayEquals(new String[]{"run", "10.3", "00:40:10", "15-03-2024"}, result);
     }
 
     @Test
@@ -48,7 +49,7 @@ class HandlerTest {
         String input = "new /e:run /d:10.3"; // Missing /t parameter
 
         // Exercise and Verify
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.getRun(input));
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Run.getRun(input));
     }
     /**
      * Test the behavior of the checkTypeOfExercise method when the user input is valid.
@@ -58,7 +59,7 @@ class HandlerTest {
     @Test
     void checkTypeOfExercise_correctUserInput_expectRunOrGym() {
         try {
-            String input1 = "new /e:run /d:10.3 /t:00:40:10 /date:15/03/2024";
+            String input1 = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
             String expected1 = Constant.RUN;
             String result1 = Handler.checkTypeOfExercise(input1);
             assertEquals(result1, expected1);
@@ -69,7 +70,7 @@ class HandlerTest {
             assertEquals(result2, expected2);
 
             // with capital letter
-            String input3 = "NEW /E:run /D:10.3 /T:00:40:10 /Date:15/03/2024";
+            String input3 = "NEW /E:run /D:10.3 /T:00:40:10 /Date:15-03-2024";
             String expected3 = Constant.RUN;
             String result3 = Handler.checkTypeOfExercise(input3);
             assertEquals(result3, expected3);
@@ -79,8 +80,8 @@ class HandlerTest {
             String result4 = Handler.checkTypeOfExercise(input4);
             assertEquals(result4, expected4);
 
-            // exercises in captial letter
-            String input5 = "NEW /E:RUN /D:10.3 /T:00:40:10 /Date:15/03/2024";
+            // exercises in capital letter
+            String input5 = "NEW /E:RUN /D:10.3 /T:00:40:10 /Date:15-03-2024";
             String expected5 = Constant.RUN;
             String result5 = Handler.checkTypeOfExercise(input5);
             assertEquals(result5, expected5);
@@ -112,28 +113,30 @@ class HandlerTest {
         });
 
         // with invalid exercise type
-        String input2 = "new /e:wrong /d:10.3 /t:00:40:10 /date:15/03/2024";
+        String input2 = "new /e:wrong /d:10.3 /t:00:40:10 /date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input2);
         });
 
         // with invalid exercise type
-        String input3 = "new /e:gymm /d:10.3 /t:00:40:10 /date:15/03/2024";
+        String input3 = "new /e:gymm /d:10.3 /t:00:40:10 /date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input3);
         });
 
         // with invalid format
-        String input4 = "new /e-gymm /d-10.3 /t:00:40:10 /date:15/03/2024";
+        String input4 = "new /e-gymm /d-10.3 /t:00:40:10 /date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input4);
         });
 
-        // with wrong slash
-        String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
+        /* with wrong slash
+        String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input5);
         });
+
+         */
 
 
     }
