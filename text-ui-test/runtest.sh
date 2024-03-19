@@ -8,6 +8,10 @@ cd ..
 
 cd text-ui-test
 
+# cleanup old data files
+rm data/items.txt
+rmdir data
+
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
