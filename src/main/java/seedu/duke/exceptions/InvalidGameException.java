@@ -1,4 +1,4 @@
-package seedu.duke.exceptions.parserExceptions;
+package seedu.duke.exceptions;
 
 public class InvalidGameException extends Exception {
 }

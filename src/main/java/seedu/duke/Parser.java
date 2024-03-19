@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.parserExceptions.InvalidGameException;
-import seedu.duke.exceptions.parserExceptions.InvalidTTMoveException;
+import seedu.duke.exceptions.InvalidGameException;
+import seedu.duke.exceptions.InvalidTTMoveException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class Parser {
      * whatever makes it flow easier
      */
     public static void readTTMove(String input) throws InvalidTTMoveException {
-       int markBox;
+        int markBox;
         try {
             markBox = Integer.parseInt(input);
         } catch (NumberFormatException e) {

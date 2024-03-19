@@ -1,10 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.parserExceptions.InvalidGameException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import seedu.duke.exceptions.InvalidGameException;
 
 public class Duke {
     private static Ui ui = new Ui();
