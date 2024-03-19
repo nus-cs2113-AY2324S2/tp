@@ -12,7 +12,7 @@ public class UserInterface {
             "----------------------------------------------------------------------" +
             "-----------------------";
     private static final String TABLE_BORDER = "________________________________________" +
-            "_____________________________________________________________________";
+            "_________________________________________________________________________________";
 
     private static final String TAB_SPACE = "    ";
 
@@ -52,21 +52,26 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
-    public static void printAllTransactions(ArrayList<Transaction> transactions) {
+    public static void printAllTransactions(ArrayList<Transaction> transactions, double balance) {
         int index = transactions.size();
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Your Transaction history:");
-        System.out.println(TABLE_BORDER);
-        System.out.printf(TAB_SPACE + "%-5s %-50s %-20s %-15s %-15s%n", "ID", "Transaction", "Date",
-                "Amount", "Category");
+        System.out.println(TAB_SPACE+TABLE_BORDER);
+        System.out.printf(TAB_SPACE+TAB_SPACE + "%-5s %-10s %-50s %-20s %-15s %-15s%n", "ID", "Type", "Transaction",
+                "Date", "Amount", "Category");
         for (int i = START_INDEX; i < index; i++) {
             Transaction transaction = transactions.get(i);
+            String type = transaction.getTransactionType();
+            String description = transaction.getDescription();
             LocalDate date = transaction.getDate();
-            System.out.printf(TAB_SPACE + "%-5d %-50.45s %-20s %-15f  %-15s%n", i + 1,
-                    transaction.getDescription(), date,
-                    transaction.getAmount(), transaction.getCategory());
+            double amount = transaction.getAmount();
+            String category = transaction.getCategory();
+
+            System.out.printf(TAB_SPACE+TAB_SPACE + "%-5d %-10s %-50.45s %-20s %-15.2f  %-15s%n", i + 1, type,
+                    description, date, amount, category);
         }
-        System.out.println(TABLE_BORDER);
+        System.out.println(TAB_SPACE+TABLE_BORDER);
+        System.out.println("\n" + TAB_SPACE + "Your currents account balance is $" + balance);
         System.out.println(LINE);
     }
 

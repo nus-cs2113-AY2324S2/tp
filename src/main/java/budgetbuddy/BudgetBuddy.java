@@ -33,7 +33,7 @@ public class BudgetBuddy {
                     isRunning = false;
                     break;
                 case "list":
-                    transactions.printTransactions();
+                    transactions.printTransactions(account);
                     break;
                 case "delete":
                     transactions.removeTransaction(input, account);

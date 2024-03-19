@@ -26,8 +26,8 @@ public class TransactionList {
         return transactions;
     }
 
-    public void printTransactions(){
-        UserInterface.printAllTransactions(transactions);
+    public void printTransactions(Account account){
+        UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
     public void removeTransaction(String input, Account account){
