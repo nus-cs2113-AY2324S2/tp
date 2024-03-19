@@ -1,2 +1,7 @@
 list
+add n/item with d/no exp or quantity s/0.00 c/100.00
+add n/item with d/no exp q/10 s/0.00 c/100.00
+add n/item with d/no quantity e/01-01-1999 s/0.00 c/100.00
+add n/item with d/everything q/100 e/01-01-1999 s/0.00 c/100.00
+list
 bye
