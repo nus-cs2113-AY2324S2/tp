@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exception.UnregisteredMealException;
+
 import java.util.HashMap;
 
 public class Meal {
@@ -68,10 +70,10 @@ public class Meal {
     }
 
     // Method to print all meal info
-    public static void handleInfoMeal(String command) {
+    public static void handleInfoMeal(String command) throws UnregisteredMealException {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
-        System.out.println("Meal: " + name);
+        System.out.println("Meal: " + name + " (per serving)");
         System.out.println("Calories: " + nutrients[0]);
         System.out.println("Carbs: " + nutrients[1]);
         System.out.println("Protein: " + nutrients[2]);

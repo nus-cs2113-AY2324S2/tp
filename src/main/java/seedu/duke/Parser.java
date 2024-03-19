@@ -162,13 +162,21 @@ public class Parser {
         waterSize = Integer.parseInt(command.substring(sizeIndex).trim());
     }
 
-    public static String parseInfoMeal(String command) {
+    public static String parseInfoMeal(String command) throws UnregisteredMealException {
         int mealIndex = 9;
-        return command.substring(mealIndex).trim();
+        String infoMealDescription = command.substring(mealIndex).trim();
+        if (!Meal.getNutrientDetails().containsKey(infoMealDescription)) {
+            throw new UnregisteredMealException();
+        }
+        return infoMealDescription;
     }
 
-    public static String parseInfoDrink(String command) {
+    public static String parseInfoDrink(String command) throws UnregisteredDrinkException {
         int drinkIndex = 10;
+        String infoDrinkDescription = command.substring(drinkIndex).trim();
+        if (!Meal.getNutrientDetails().containsKey(infoDrinkDescription)) {
+            throw new UnregisteredDrinkException();
+        }
         return command.substring(drinkIndex).trim();
     }
 
