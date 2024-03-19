@@ -1,5 +1,7 @@
 package meditracker;
 
+import meditracker.medication.Medication;
+import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
 import java.util.ArrayList;
@@ -18,9 +20,15 @@ public class DailyMedicationManager {
      *
      * @see DailyMedication
      */
-    public DailyMedicationManager() {
+    public DailyMedicationManager(MedicationManager medicationManager) {
+        assert medicationManager != null;
         dailyMedications = new ArrayList<>();
         ui = new Ui();
+        for (Medication medication : medicationManager.getMedications()) {
+            String medicationName = medication.getName();
+            DailyMedication dailyMedication = new DailyMedication(medicationName);
+            addDailyMedication(dailyMedication);
+        }
 
         // TODO: Fetch today list from storage.
         //       If does not exist or old list,
