@@ -23,6 +23,7 @@ public class Menu implements ItemManager {
 
     private final static Logger logr = Logger.getLogger("MenuLogger");
 
+
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
         switch (menuType) {
@@ -38,7 +39,6 @@ public class Menu implements ItemManager {
         default:
             this.menuID = "No Menu type";
         }
-
     }
 
     @Override
