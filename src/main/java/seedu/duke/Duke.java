@@ -24,7 +24,6 @@ public class Duke {
                 break;
             } else if (Parser.ifHelp(input)) {
                 ui.printHelp();
-                continue;
             }
 
             if (!inGame) {
@@ -45,7 +44,9 @@ public class Duke {
                         inGame = false;
                     }
                 } catch (InvalidGameException | NullPointerException e) {
-                    ui.println("Invalid Game.");
+                    if (!input.equals("help")) {
+                        ui.println("Invalid Game.");
+                    }
                 }
             }
             input = Parser.readLine();
