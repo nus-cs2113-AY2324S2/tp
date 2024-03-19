@@ -173,6 +173,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid Amount. Amount should be a numerical value.");
                     return null;
                 }
             } else if (part.startsWith("d/")) {
@@ -203,6 +204,7 @@ public class Parser {
                     index = Integer.parseInt(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid index format
+                    System.out.println("Invalid index");
                     return null;
                 }
             } else if (part.startsWith("a/")) {
@@ -210,6 +212,7 @@ public class Parser {
                     amount = Double.parseDouble(part.substring(2));
                 } catch (NumberFormatException e) {
                     // Handle invalid amount format
+                    System.out.println("Invalid amount. Amount should be a numerical value");
                     return null;
                 }
             }
