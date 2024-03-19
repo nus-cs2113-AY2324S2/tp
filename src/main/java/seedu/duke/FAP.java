@@ -15,7 +15,6 @@ public class FAP {
     public static ModuleList takenModuleList = new ModuleList(10);
     public static ModuleList toBeTakenModuleList = new ModuleList(10);
 
-
     public static void main(String[] args) {
         printGreeting();
         Scanner in = new Scanner(System.in);

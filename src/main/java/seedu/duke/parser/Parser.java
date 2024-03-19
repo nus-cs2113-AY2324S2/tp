@@ -14,6 +14,7 @@ import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.ViewGpaCommand;
+import seedu.duke.command.InitCommand;
 
 public class Parser {
 
