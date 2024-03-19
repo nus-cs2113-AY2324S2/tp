@@ -5,44 +5,48 @@ import seedu.duke.exceptions.CustomException;
 import java.util.ArrayList;
 
 public class QuestionsList {
-    private ArrayList<Question> questionsList;
-
+    private ArrayList<Question> chosenQuestionsList;
 
     public QuestionsList() {
-        questionsList = new ArrayList<>();
+        chosenQuestionsList = new ArrayList<>();
+
     }
 
     public void addQuestion(Question question){
-        questionsList.add(question);
+        chosenQuestionsList.add(question);
+    }
+
+    public Question getQuestionUnit(int index){
+        return chosenQuestionsList.get(index);
     }
 
     public int getSize() {
-        return questionsList.size();
+        return chosenQuestionsList.size();
     }
 
     // user enters "explain 1" to get explanation for question1
     public String getOneExplanation(int questionNum) {
         int questionIndex = questionNum - 1; // -1 coz zero index
-        Question question = questionsList.get(questionIndex);
+        Question question = chosenQuestionsList.get(questionIndex);
         return question.getExplanation();
     }
 
     // user enters "solution 1" to get solution for question1
     public String getOneSolution(int questionNum) {
         int questionIndex = questionNum - 1; // -1 coz zero index
-        Question question = questionsList.get(questionIndex);
+        Question question = chosenQuestionsList.get(questionIndex);
         return question.getSolution();
     }
 
     // user enters "solution -all" to get ALL solutions
     public String getAllSolutions() throws CustomException {
-        if (questionsList.isEmpty()) {
+        if (chosenQuestionsList.isEmpty()) {
             throw new CustomException("No questions yet");
         }
         StringBuilder allQuestions = new StringBuilder();
 
-        for (Question question: questionsList) {
-            int questionNum = questionsList.indexOf(question) + 1; // +1 coz zero index
+        for (Question question: chosenQuestionsList) {
+            int questionNum = chosenQuestionsList.indexOf(question) + 1; // +1 coz zero index
             String header = "Solution for question " + questionNum + ":" + System.lineSeparator();
             String solutionForOneQuestion = header + question.getSolution() + System.lineSeparator();
 

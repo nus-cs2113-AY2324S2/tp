@@ -13,8 +13,9 @@ public class Ui {
 
     public boolean hasStartedGame = false;
     public TopicList topicList;
+    public QuestionListByTopic questionListByTopic;
 
-    public void readCommands(Ui ui, QuestionsList questionsList, TopicList topicList) {
+    public void readCommands(Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
         printLine();
@@ -23,7 +24,7 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, topicList);
+                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
@@ -45,9 +46,19 @@ public class Ui {
         System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
     }
 
-    public void printChosenTopic(int topicNum, TopicList topicList){
+    public void printChosenTopic(int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic){
+        QuestionsList qnList = new QuestionsList();
         System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
+        System.out.println("Here are the questions: ");
+        qnList = questionListByTopic.getQuestionSet(topicNum - 1);
+        int numOfQns = qnList.getSize();
+        Question questionUnit;
+        for (int index = 0; index < numOfQns; index ++){
+            questionUnit = qnList.getQuestionUnit(index);
+            System.out.println(questionUnit.getQuestion());
+        }
     }
+
 
     public void printOneSolution(int questionNum, String solution) {
         System.out.println("The solution for question " + questionNum + ":"

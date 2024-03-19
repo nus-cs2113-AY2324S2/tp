@@ -4,27 +4,34 @@ import seedu.duke.exceptions.CustomException;
 
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
+    boolean hasChosenTopic = false;
 
 
 
 
-    public void parseCommand(String command, Ui ui, QuestionsList questionsList, TopicList topicList) throws CustomException {
+    public void parseCommand(String command, Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
+
+            if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
+                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic);
+                hasChosenTopic = true;
+            } else if (!hasChosenTopic) {
+                throw new CustomException("Please choose a topic in the format: topic [INDEX]");
+            }
+
             if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
                 processSolutionCommand(lowerCaseCommand, ui, questionsList);
-            } else if (lowerCaseCommand.startsWith("topic")){
-                processStartCommand(lowerCaseCommand, ui, topicList);
-            } else {
+            }  else if (!lowerCaseCommand.startsWith("topic")) {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
 
     }
 
-    private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList) throws CustomException {
+    private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
@@ -38,7 +45,7 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("booo no such topic");
             }
-            ui.printChosenTopic(topicNum, topicList);
+            ui.printChosenTopic(topicNum, topicList, questionListByTopic);
 
         } catch (NumberFormatException e) {
                 throw new CustomException("invalid " + lowerCaseCommand + " parameter");
