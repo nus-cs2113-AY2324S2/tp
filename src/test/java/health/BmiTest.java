@@ -205,6 +205,7 @@ class BmiTest {
 
         // Act & Assert
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
+
     }
 
     /**

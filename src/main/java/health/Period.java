@@ -7,7 +7,6 @@ import utility.Parser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-
 public class Period extends Health {
     protected LocalDate startDate;
     protected LocalDate endDate;
@@ -32,6 +31,12 @@ public class Period extends Health {
      *
      * @return The start date of the period
      */
+    public Period(String stringStartDate, String stringEndDate) {
+        this.startDate = Parser.parseDate(stringStartDate);
+        this.endDate = Parser.parseDate(stringEndDate);
+        this.length = calculatePeriodLength();
+    }
+
     public LocalDate getStartDate() {
         return startDate;
     }
