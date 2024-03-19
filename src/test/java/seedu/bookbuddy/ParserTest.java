@@ -1,9 +1,11 @@
 package seedu.bookbuddy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
@@ -20,4 +22,50 @@ public class ParserTest {
         assertTrue(books.getBook(0).isRead);
         assertEquals("[R] Gulliver's Travels", books.getBook(0).toString());
     }
+
+    @Test
+    void parseAddCommand() {
+        BookList testBookList = new BookList();
+        Parser.parseCommand("add The Great Gatsby", testBookList);
+        assertEquals(1, testBookList.getSize());
+        assertEquals("The Great Gatsby", testBookList.getBook(0).getTitle());
+    }
+
+    @Test
+    void parseRemoveCommand() {
+        BookList books = new BookList();
+        books.addBook("The Great Gatsby");
+        Parser.parseCommand("remove 1", books);
+        assertEquals(0, books.getSize());
+    }
+
+    @Test
+    void parseMarkCommand() {
+        BookList books = new BookList();
+        books.addBook("The Great Gatsby");
+        Parser.parseCommand("mark 1", books);
+        assertTrue(books.getBook(0).isRead());
+    }
+
+    @Test
+    void parseUnmarkCommand() {
+        BookList books = new BookList();
+        books.addBook("The Great Gatsby");
+        Parser.parseCommand("mark 1", books);
+        Parser.parseCommand("unmark 1", books);
+        assertFalse(books.getBook(0).isRead());
+    }
+
+    @Test
+    void parseInvalidCommand() {
+        BookList books = new BookList();
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Parser.parseCommand("invalid", books);
+        assertEquals("Sorry but that is not a valid command. Please try again\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+
+
 }
