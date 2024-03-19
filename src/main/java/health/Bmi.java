@@ -146,7 +146,7 @@ public class Bmi extends Health {
     }
 
     public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate formattedDate = null;
         try {
             formattedDate = LocalDate.parse(dateTime, formatter);
