@@ -1,5 +1,7 @@
 package workouts;
 
+import utility.Constant;
+
 public class GymSet {
     int weight;
     int repititions;
@@ -12,6 +14,11 @@ public class GymSet {
     public GymSet(int weight, int repititions){
         this.weight = weight;
         this.repititions = repititions;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Constant.GYM_SET_FORMAT, this.repititions, this.weight);
     }
 }
 

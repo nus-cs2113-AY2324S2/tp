@@ -45,4 +45,10 @@ public class HealthList extends ArrayList<Health> {
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
     }
+
+    public static void showPeriodHistory() {
+        for (Period period : periods) {
+            System.out.println(period);
+        }
+    }
 }

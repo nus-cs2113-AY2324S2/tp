@@ -12,6 +12,12 @@ public class Period extends Health {
     protected LocalDate endDate;
     protected long length;
 
+    /**
+     * Constructs a Period object with the given start and end dates in string format.
+     *
+     * @param stringStartDate A string representing the start date of the period
+     * @param stringEndDate   A string representing the end date of the period
+     */
     public Period(String stringStartDate, String stringEndDate) {
         this.startDate = Parser.parseDate(stringStartDate);
         this.endDate = Parser.parseDate(stringEndDate);
@@ -22,16 +28,25 @@ public class Period extends Health {
         return startDate;
     }
 
+    /**
+     * Extracts the period information from the user input string.
+     *
+     * @param input A string consisting of period information
+     * @return An array of strings containing the appropriate health command, start date, and end date
+     * @throws CustomExceptions.InvalidInput if the input string does not contain the required parameters
+     */
     public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
         String[] results = new String[Constant.PERIOD_CYCLE_PARAMETERS];
 
-        if (!input.contains("/h") || !input.contains("/start:") || !input.contains("/end:")) {
+        if (!input.contains(Constant.HEALTH_FLAG)
+                | !input.contains(Constant.START_FLAG)
+                || !input.contains(Constant.END_FLAG)) {
             throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
         }
 
-        int indexH = input.indexOf("/h");
-        int indexStart = input.indexOf("/start");
-        int indexEnd = input.indexOf("/end");
+        int indexH = input.indexOf(Constant.HEALTH_FLAG);
+        int indexStart = input.indexOf(Constant.START_FLAG);
+        int indexEnd = input.indexOf(Constant.END_FLAG);
 
         String command = input.substring(indexH + Constant.PERIOD_CYCLE_H_OFFSET, indexStart).trim();
         String startSubstring = input.substring(indexStart + Constant.PERIOD_CYCLE_START_OFFSET, indexEnd).trim();
@@ -48,6 +63,11 @@ public class Period extends Health {
         return results;
     }
 
+    /**
+     * Calculates the length of the period in days.
+     *
+     * @return The length of the period.
+     */
     public long calculatePeriodLength() {
         // Add 1 to include both start and end dates
         long length = ChronoUnit.DAYS.between(startDate,endDate) + 1;
