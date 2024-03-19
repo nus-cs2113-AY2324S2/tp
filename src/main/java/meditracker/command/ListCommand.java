@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedicationManager;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
 import meditracker.argument.ListTypeArgument;
@@ -26,7 +27,9 @@ public class ListCommand extends Command {
      * @param ui                Ui object.
      */
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        DailyMedicationManager dailyMedicationManager,
+                        Ui ui) {
         String listTypeString = parsedArguments.get(ArgumentName.LIST_TYPE);
         
         switch (listTypeString) {

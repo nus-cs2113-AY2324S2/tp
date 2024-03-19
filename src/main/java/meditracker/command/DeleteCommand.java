@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedicationManager;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
 import meditracker.argument.ListIndexArgument;
@@ -28,7 +29,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        DailyMedicationManager dailyMedicationManager,
+                        Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
         medicationManager.removeMedication(listIndex);
