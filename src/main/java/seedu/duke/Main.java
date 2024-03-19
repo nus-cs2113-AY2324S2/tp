@@ -84,7 +84,7 @@ public class Main {
                 break;
             case "delete":
                 try {
-                    deleteManager(scanner, weekView, taskManager);
+                    deleteManager(scanner, weekView, inMonthView, taskManager);
                 } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }

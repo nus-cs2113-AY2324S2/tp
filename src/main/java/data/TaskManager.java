@@ -118,7 +118,12 @@ public class TaskManager {
         }
 
     }
-  
+
+    /**
+     * Scans through hashmap and adds tasks to formatted tasks.txt
+     *
+     * @param tasksFromFile Hashmap of tasks
+     */
     public void addTasksFromFile(Map<LocalDate, List<String>> tasksFromFile) {
         for (Map.Entry<LocalDate, List<String>> entry : tasksFromFile.entrySet()) {
             LocalDate date = entry.getKey();
@@ -129,6 +134,14 @@ public class TaskManager {
         }
     }
 
+    /**
+     *
+     *
+     * @param taskManager Hashmap of tasks
+     * @param date Date thats prompted by user
+     * @param message Message to be prompted to the user
+     * @throws TaskManagerException Throws exception when not in correct week/month view
+     */
     private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message)
             throws TaskManagerException {
         List<String> dayTasks = taskManager.getTasksForDate(date);
@@ -140,13 +153,27 @@ public class TaskManager {
         }
     }
 
-    public static void deleteManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
+    /**
+     * Prompts user for task description and deletes task from hashmap and tasks.txt file
+     *
+     * @param scanner User input
+     * @param weekView Current week being viewed
+     * @param inMonthView Whether month is being viewed
+     * @throws TaskManagerException Throws exception when not in correct week/month view
+     */
+    public static void deleteManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager)
             throws DateTimeParseException, TaskManagerException {
 
         System.out.println("Enter the date for the task to delete (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
-        checkIfDateInCurrentWeek(date, weekView);
+//        checkIfDateInCurrentWeek(date, weekView);
+
+        if (inMonthView) {
+            checkIfDateInCurrentMonth(date);
+        } else {
+            checkIfDateInCurrentWeek(date, weekView);
+        }
 
         listTasksAtDate(taskManager, date, "Enter the task number to delete:");
 
@@ -165,6 +192,14 @@ public class TaskManager {
     }
 
     // to abstract as Parser/UI function
+
+    /**
+     * Parses user input into date time format
+     *
+     * @param scanner User Input
+     * @return Formatted date time from user input
+     * @throws DateTimeParseException Throws exception is user input is not in correct format
+     */
     private static LocalDate parseInputDate(Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
