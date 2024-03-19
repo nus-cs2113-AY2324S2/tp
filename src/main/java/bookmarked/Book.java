@@ -9,11 +9,14 @@ public class Book {
         this.isBorrowed = false;
     }
 
+    public String getName() {
+        return this.description;
+    }
     public String getBorrowedStatus() {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
     }
 
-    public void setBorrowed() {
+    public void setBorrowed(boolean status) {
         this.isBorrowed = true;
     }
 
@@ -27,4 +30,7 @@ public class Book {
     }
 
 }
+
+
+
 
