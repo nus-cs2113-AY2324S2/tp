@@ -6,14 +6,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.ByeCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.GradeCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.RemoveCommand;
-import seedu.duke.command.ViewCommand;
-import seedu.duke.command.ViewGpaCommand;
+import seedu.duke.command.*;
 
 public class Parser {
 
@@ -88,8 +81,8 @@ public class Parser {
 
     // Class Constructor functions
     private static Command initCommand(Map<String, String> args) {
-        // return new initCommand(args)
-        return new InvalidCommand();
+        String name = args.getOrDefault("name", "NAME_ERROR");
+        return new InitCommand(name);
     }
 
     private static Command gpaCommand(Map<String, String> args) {
