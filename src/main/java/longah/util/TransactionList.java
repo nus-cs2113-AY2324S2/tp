@@ -17,8 +17,8 @@ public class TransactionList {
      *
      * @param transaction The transaction to add.
      */
-    public void add(Transaction transaction) {
-        transactions.add(transaction);
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
     }
 
     /**
@@ -28,9 +28,9 @@ public class TransactionList {
      * @param memberList The member list of the transaction to add.
      * @throws LongAhException If the expression is invalid.
      */
-    public void add(String expression, MemberList memberList)
-            throws LongAhException {
-        transactions.add(new Transaction(expression, memberList));
+    public void addTransaction(String expression, MemberList memberList)
+             throws LongAhException {
+        this.transactions.add(new Transaction(expression, memberList));
     }
 
     /**
@@ -39,7 +39,7 @@ public class TransactionList {
      * @return The size of the transaction list.
      */
     public int getTransactionListSize() {
-        return transactions.size();
+        return this.transactions.size();
     }
 
     /**
@@ -53,10 +53,10 @@ public class TransactionList {
             throw new LongAhException(ExceptionMessage.INVALID_DELETE_COMMAND);
         }
         int index = Integer.parseInt(input[1]) - 1;
-        if (index < 0 || index >= transactions.size()) {
+        if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        transactions.remove(index);
+        this.transactions.remove(index);
 
     }
 
@@ -64,7 +64,7 @@ public class TransactionList {
      * Clears all transactions from the list.
      */
     public void clear() {
-        transactions.clear();
+        this.transactions.clear();
     }
 
     /**
@@ -73,7 +73,7 @@ public class TransactionList {
      * @return The list of transactions.
      */
     public ArrayList<Transaction> getTransactions() {
-        return transactions;
+        return this.transactions;
     }
 
     /**
@@ -86,7 +86,7 @@ public class TransactionList {
         }
         int index = 1;
         String outString = "";
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : this.transactions) {
             outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
             index++;
         }
@@ -130,43 +130,12 @@ public class TransactionList {
         String outString = String.format("%s is involved as the payee in the following list of transactions."
                 , memberName) + "\n";
         int index = 1;
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : this.transactions) {
             if (transaction.isBorrower(memberName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
         }
         return outString;
-    }
-
-    /**
-     * Settles up the debts of the specified borrower by creating a transaction
-     * to pay a single person in the group.
-     *
-     * @param input Input string containing the name of
-     *              the borrower to settle up.
-     */
-    public void settleUp(String[] input, MemberList members) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_SETTLEUP_COMMAND);
-        }
-        String borrowerName = input[1];
-        ArrayList<Subtransaction> subtransactions = members.solveTransactions();
-        String lenderName = "";
-        double amountRepaid = 0.0;
-        for (Subtransaction subtransaction : subtransactions) {
-            if (subtransaction.getBorrower().isName(borrowerName)) {
-                lenderName = subtransaction.getLender().getName();
-                amountRepaid = subtransaction.getAmount();
-                String transactionExpression = borrowerName + " p/" + lenderName + " a/" + amountRepaid;
-                try {
-                    add(transactionExpression, members);
-                    System.out.println(borrowerName + " has repaid " + lenderName + " $" + amountRepaid);
-                } catch (LongAhException e) {
-                    LongAhException.printException(e);
-                }
-            }
-        }
-        System.out.println(borrowerName + " has no more debts!");
     }
 }

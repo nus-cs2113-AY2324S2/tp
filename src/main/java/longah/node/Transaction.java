@@ -35,11 +35,36 @@ public class Transaction {
         double totalSumLent = 0.0;
 
         for (int i = 1; i < splitInput.length; i++) {
-            String nameValue = splitInput[i].trim();
-            totalSumLent += borrowNameAmount(nameValue, memberList);
+            String borrowNameAmount = splitInput[i].trim();
+            totalSumLent += addBorrower(borrowNameAmount, memberList);
         }
         this.lender.addToBalance(totalSumLent);
         updateBorrowerBalances();
+    }
+
+    /**
+     * Constructs a new Transaction instance with the given lender, subtransactions and member list.
+     * Used for storage methods only.
+     * 
+     * @param lender The member who lent the money in the transaction.
+     * @param subtransactions The list of subtransactions in the transaction.
+     * @param memberList The list of members in the group.
+     * @throws LongAhException If the lender does not exist in the group.
+     */
+    public Transaction(Member lender, ArrayList<Subtransaction> subtransactions,
+            MemberList members) throws LongAhException {
+        // Exception is thrown if any of the members do not exist in the group
+        if (!members.isMember(lender)) {
+            throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
+        }
+        for (Subtransaction subtransaction : subtransactions) {
+            if (!members.isMember(subtransaction.getBorrower())) {
+                throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
+            }
+        }
+
+        this.lender = lender;
+        this.subtransactions = subtransactions;
     }
 
     /**
@@ -50,7 +75,7 @@ public class Transaction {
      * @return The amount owed by the borrower.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public Double borrowNameAmount(String expression, MemberList memberList) throws LongAhException {
+    public Double addBorrower(String expression, MemberList memberList) throws LongAhException {
         String[] splitBorrower = expression.split("a/");
         if (splitBorrower.length != 2) {
             // Each person owing should have an amount specified
@@ -123,8 +148,11 @@ public class Transaction {
     }
 
     /**
-     * @return a string representation of the transaction for printouts
+     * Returns a string representation of the transaction for printouts.
+     * 
+     * @return a string representation of the transaction
      */
+    @Override
     public String toString() {
         String lender = "Lender: " + this.lender.getName() + "\n";
         String borrower = "";
@@ -135,6 +163,23 @@ public class Transaction {
             borrower += String.format("Borrower %d: %s Owed amount: %,.2f\n",
                     borrowerNo, member.getName(), amount);
             borrowerNo++;
+        }
+        return lender + borrower;
+    }
+
+    /**
+     * Returns a string representation of the transaction for storage.
+     * 
+     * @param delimiter The delimiter to separate the lender and borrowers.
+     * @return a string representation of the transaction for storage
+     */
+    public String toStorageString(String delimiter) {
+        String lender = this.lender.getName();
+        String borrower = "";
+        for (Subtransaction subtransaction : this.subtransactions) {
+            String borrowerName = subtransaction.getBorrower().getName();
+            double amount = subtransaction.getAmount();
+            borrower += delimiter + borrowerName + delimiter + amount;
         }
         return lender + borrower;
     }

@@ -20,7 +20,7 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("Alice p/Bob a/5", memberList);
+            transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove 1".split(" ", 2);
             transactionList.remove(parts);
@@ -42,7 +42,7 @@ public class TransactionListTest {
             memberList.addMember("Alice");
             memberList.addMember("Bob");
 
-            transactionList.add("Alice p/Bob a/5", memberList);
+            transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove -1".split(" ", 2);
             transactionList.remove(parts);
@@ -110,8 +110,6 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("Jane p/Jack a/150 p/James a/200", memberList);
             String command = "findpayment James";
             String[] parts = command.split(" ", 2);
             String printedOutput = transactionList.findTransactions(parts);
@@ -168,8 +166,8 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("Jack p/Jane a/150 p/James a/200", memberList);
+            transactionList.addTransaction("Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
             String[] parts = "finddebt Jack".split(" ", 2);
             String printedOutput = transactionList.findDebts(parts);
             String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";

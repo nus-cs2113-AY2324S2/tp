@@ -25,7 +25,7 @@ public class MemberList {
      * @param member The member to add.
      */
     public void addMember(Member member) {
-        members.add(member);
+        this.members.add(member);
     }
 
     /**
@@ -37,7 +37,14 @@ public class MemberList {
         if (isMember(name)) {
             throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
         }
-        members.add(new Member(name));
+        this.members.add(new Member(name));
+    }
+
+    public void addMember(String name, double balance) throws LongAhException {
+        if (isMember(name)) {
+            throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
+        }
+        this.members.add(new Member(name, balance));
     }
 
     /**
@@ -53,6 +60,16 @@ public class MemberList {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the member is in the group, false otherwise.
+     * 
+     * @param member The member to check for.
+     * @return True if the member is in the group, false otherwise.
+     */
+    public boolean isMember(Member member) {
+        return this.members.contains(member);
     }
 
     /**
@@ -177,5 +194,15 @@ public class MemberList {
      */
     public int getMemberListSize() {
         return members.size();
+    }
+
+    /**
+     * Returns the list of members, of type in the group.
+     * For use in storage only.
+     * 
+     * @return The list of members in the group.
+     */
+    public ArrayList<Member> getMembers() {
+        return members;
     }
 }
