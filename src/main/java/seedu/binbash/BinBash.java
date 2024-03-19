@@ -32,8 +32,8 @@ public class BinBash {
                     continue;
                 }
 
-                String executionResult = userCommand.execute();
-                userInterface.talk(executionResult);
+                userCommand.execute();
+                userInterface.talk(userCommand.getExecutionUiOutput());
                 storage.saveToStorage(itemList.getItemList());
 
             } catch (BinBashException e) {
