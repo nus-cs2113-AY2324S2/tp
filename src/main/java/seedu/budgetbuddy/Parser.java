@@ -20,8 +20,8 @@ import java.util.logging.Logger;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
-
-    private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
+    
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     protected ArrayList<String> expenseCategories;
     protected ArrayList<String> savingsCategories;
 
@@ -44,7 +44,7 @@ public class Parser {
         }
         return input.substring(startIndex, endIndex).trim();
     }
-
+    
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -72,6 +72,7 @@ public class Parser {
      * @return true if user input starts with "menu", else returns false
      */
     public Boolean isMenuCommand(String input) {
+        LOGGER.log(Level.INFO, "Checking if Input is a Menu Command");
         return input.startsWith("menu");
     }
 
@@ -262,14 +263,24 @@ public class Parser {
      *         index is not an integer
      */
     public Command handleMenuCommand(String input) {
+        assert input != null : "Input should not be empty";
+        assert input.startsWith("menu") : "Input should be a menu command";
+
+        LOGGER.log(Level.INFO, "Start processing for Menu Command");
+
         if (input.trim().equals("menu")) {
+            LOGGER.log(Level.INFO, "Menu Command has no parameters");
             return new MenuCommand(0);
         }
         try {
             String indexAsString = input.substring(5);
             int index = Integer.parseInt(indexAsString);
+
+            LOGGER.log(Level.INFO, "Menu Command has found parameter" + index);
+
             return new MenuCommand(index);
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Index found to not be an Integer");
             return null;
         }
     }
@@ -500,8 +511,9 @@ public class Parser {
      *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
-
-        if (isMenuCommand(input)) {
+        
+        if(isMenuCommand(input)) {
+            LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
             return handleMenuCommand(input);
         }
 
