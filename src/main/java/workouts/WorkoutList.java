@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class WorkoutList extends ArrayList<Workout> {
     private static final ArrayList<Workout> workouts = new ArrayList<>();
-    private static final ArrayList<Workout> runs = new ArrayList<>();
+    private static final ArrayList<Run> runs = new ArrayList<>();
+    private static final ArrayList<Gym> gyms = new ArrayList<>();
+
 
     /**
      * Adds a workout to the list of workouts whenever addRun is called
@@ -28,6 +30,11 @@ public class WorkoutList extends ArrayList<Workout> {
         addWorkout(run);
     }
 
+    public static void addGym(Gym gym) {
+        gyms.add(gym);
+        addWorkout(gym);
+    }
+
     /**
      * Returns a list of workouts based on the filter
      *
@@ -37,23 +44,28 @@ public class WorkoutList extends ArrayList<Workout> {
      *               "gym" returns only gym workouts
      * @return ArrayList of workouts
      */
-    public static ArrayList<Workout> getWorkouts(String filter)
+    public static ArrayList<? extends Workout> getWorkouts(String filter)
             throws CustomExceptions.OutOfBounds,
             CustomExceptions.InvalidInput {
 
+        filter = filter.toLowerCase();
         if(!filter.equals(Constant.ALL) && !filter.equals(Constant.RUN) && !filter.equals(Constant.GYM)) {
             throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
         }
-
         if(filter.equals(Constant.RUN) && runs.isEmpty()){
             throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
         }
         if(filter.equals(Constant.ALL) && workouts.isEmpty()){
             throw new CustomExceptions.OutOfBounds(Constant.NO_HISTORY_FOUND);
         }
+        if(filter.equals(Constant.GYM) && gyms.isEmpty()){
+            throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
+        }
 
         if(filter.equals(Constant.RUN)){
             return runs;
+        } else if (filter.equals(Constant.GYM)) {
+            return gyms;
         } else {
             return workouts;
         }
