@@ -80,7 +80,7 @@ public class LongAh {
                 case "delete":
                     transactions.remove(parts);
                     break;
-                case "findpayment":
+                case "findtransaction":
                     System.out.println(transactions.findTransactions(parts));
                     break;
                 case "finddebt":

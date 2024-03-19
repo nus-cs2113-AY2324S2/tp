@@ -2,6 +2,7 @@ package longah.util;
 
 import java.util.ArrayList;
 
+import longah.LongAh;
 import longah.node.Transaction;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
@@ -113,6 +114,9 @@ public class TransactionList {
                 index++;
             }
         }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER);
+        }
         return outString;
     }
 
@@ -135,6 +139,9 @@ public class TransactionList {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER);
         }
         return outString;
     }

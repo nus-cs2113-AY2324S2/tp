@@ -15,6 +15,9 @@ public enum ExceptionMessage {
     INVALID_VALUE_FORMAT ("Invalid value format."),
     NO_TRANSACTION_FOUND ("Transaction list is empty."),
     NO_DEBTS_FOUND ("No debts found."),
+    // Search Command Exceptions
+    NO_TRANSACTION_FOUND_FOR_MEMBER ("The queried member does not own any transactions"),
+    NO_DEBTS_FOUND_FOR_MEMBER("The queried member does not owe any debts"),
     // Data Storage Exceptions
     STORAGE_FILE_NOT_FOUND ("File not found."),
     STORAGE_FILE_NOT_CREATED ("File not created."),
