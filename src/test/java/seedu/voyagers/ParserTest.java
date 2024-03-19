@@ -16,18 +16,20 @@ public class ParserTest {
     private static final String DEFAULT_END = "01 January 2500";
     private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
     private TripList tripsList;
+    private Ui ui;
     private Parser parser;
 
     @BeforeEach
     public void setUp() {
         tripsList = new TripList(new ArrayList<>());
+        ui = new Ui();
     }
 
     @Test
     public void testAddMainTrip() {
         String input = "addmaintrip /n Trip1 with long name /start 2024-03-15 /end 2024-03-20 " +
                 "/location Location1 /d This is the description";
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
         Trip addedTrip = tripsList.getTrip("Trip1 with long name");
@@ -47,7 +49,7 @@ public class ParserTest {
         System.setIn(in);
 
         // Execute the parser with the prepared input
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
         Trip addedTrip = tripsList.getTrip("Trip1");
@@ -63,13 +65,13 @@ public class ParserTest {
     public void testSetName() {
         String input = "addmaintrip /n Trip1 with long name " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
         Trip addedTrip = tripsList.getTrip("Trip1 with long name");
         assertEquals("Trip1 with long name", addedTrip.getName());
         input = "setname /old Trip1 with long name /new This is the new name";
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
         assertEquals("This is the new name", addedTrip.getName());
     }
 
@@ -77,13 +79,13 @@ public class ParserTest {
     public void testSetLocation() {
         String input = "addmaintrip /n Trip1 with long name " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
         Trip addedTrip = tripsList.getTrip("Trip1 with long name");
         assertEquals("Location1", addedTrip.getLocation());
         input = "setlocation /n Trip1 with long name    /location the new hangout";
-        Parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
         assertEquals("the new hangout", addedTrip.getLocation());
     }
 }
