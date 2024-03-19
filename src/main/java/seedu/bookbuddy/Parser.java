@@ -1,5 +1,10 @@
 package seedu.bookbuddy;
 
+import exceptions.BookNotFoundException;
+import exceptions.InvalidBookIndexException;
+import exceptions.InvalidCommandArgumentException;
+import exceptions.UnsupportedCommandException;
+
 /**
  * Parses inputs from the user in order to execute the correct commands.
  */
@@ -22,32 +27,40 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
         int index;
-
-        switch (command) {
-        case ADD_COMMAND:
-            books.addBook(inputArray[1]);
-            break;
-        case REMOVE_COMMAND:
-            index = Integer.parseInt(inputArray[1]);
-            books.deleteBook(index);
-            break;
-        case LIST_COMMAND:
-            books.printAllBooks();
-            break;
-        case MARK_COMMAND:
-            index = Integer.parseInt(inputArray[1]);
-            books.markDoneByIndex(index);
-            break;
-        case UNMARK_COMMAND:
-            index = Integer.parseInt(inputArray[1]);
-            books.markUndoneByIndex(index);
-            break;
-        case EXIT_COMMAND:
-            BookBuddy.printExitMessage();
-            System.exit(0);
-            break;
-        default:
-            System.out.println("Sorry but that is not a valid command. Please try again");
+        try {
+            switch (command) {
+            case ADD_COMMAND:
+                if (inputArray.length < 2) {
+                    throw new InvalidCommandArgumentException("The add command requires a book title.");
+                }
+                books.addBook(inputArray[1]);
+                break;
+            case REMOVE_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.deleteBook(index);
+                break;
+            case LIST_COMMAND:
+                books.printAllBooks();
+                break;
+            case MARK_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.markDoneByIndex(index);
+                break;
+            case UNMARK_COMMAND:
+                index = Integer.parseInt(inputArray[1]);
+                books.markUndoneByIndex(index);
+                break;
+            case EXIT_COMMAND:
+                BookBuddy.printExitMessage();
+                System.exit(0);
+                break;
+            default:
+                throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidBookIndexException("Book index must be an integer.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new BookNotFoundException("Book not found at the provided index.");
         }
     }
 

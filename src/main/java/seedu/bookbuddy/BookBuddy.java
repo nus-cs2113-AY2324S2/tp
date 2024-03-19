@@ -1,5 +1,7 @@
 package seedu.bookbuddy;
 
+import exceptions.UnsupportedCommandException;
+
 import java.util.Scanner;
 
 public class BookBuddy {
@@ -19,8 +21,17 @@ public class BookBuddy {
 
         //noinspection InfiniteLoopStatement
         while (true) {
-            String userInput = input.nextLine();
-            Parser.parseCommand(userInput, books);
+            String userInput = input.nextLine().trim();
+            if (userInput.isEmpty()) {
+                // If the input is empty, do not call parseCommand and just prompt for input again.
+                continue;
+            }
+
+            try {
+                Parser.parseCommand(userInput, books);
+            } catch (UnsupportedCommandException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
