@@ -10,16 +10,13 @@ public class Problem {
         this.answer = answer;
     }
 
-    public String solved(){
-
+    public String solved() {
         return desctiption + answer;
     }
 
-    public String unsolved(){
-
+    public String unsolved() {
         return desctiption + "__";
     }
-
 
 
 }
