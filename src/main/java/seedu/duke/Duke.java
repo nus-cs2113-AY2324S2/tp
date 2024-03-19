@@ -4,6 +4,7 @@ import seedu.duke.exceptions.InvalidGameException;
 import seedu.duke.exceptions.InvalidTTMoveException;
 
 import static seedu.duke.TicTacToe.runTicTacToe;
+import static seedu.duke.HangMan.runHangMan;
 
 public class Duke {
     private static final Ui ui = new Ui();
@@ -40,6 +41,8 @@ public class Duke {
                         } catch (InvalidTTMoveException e) {
                             throw new RuntimeException(e);
                         }
+                    } else if (input.equals("hangman")) {
+                        runHangMan();
                     }
                 } catch (InvalidGameException | NullPointerException e) {
                     ui.println("invalid game");
