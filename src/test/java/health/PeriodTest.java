@@ -3,11 +3,10 @@ package health;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PeriodTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -65,6 +64,41 @@ class PeriodTest {
 
         // Act
         HealthList.showLatestPeriod();
+
+        // Assert
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    void showPeriodHistory_printCorrectPeriodHistory() {
+        // Arrange
+        Period firstPeriod = new Period("09/02/2024", "16/02/2024");
+        Period secondPeriod = new Period("09/03/2024", "16/03/2024");
+
+        HealthList.addPeriod(firstPeriod);
+        HealthList.addPeriod(secondPeriod);
+
+        String expected = "Period Start: "
+                + firstPeriod.getStartDate()
+                + " Period End: "
+                + firstPeriod.endDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + firstPeriod.length
+                + " days"
+                + System.lineSeparator()
+                + "Period Start: "
+                + secondPeriod.getStartDate()
+                + " Period End: "
+                + secondPeriod.endDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + secondPeriod.length
+                + " days"
+                + System.lineSeparator();
+
+        // Act
+        HealthList.showPeriodHistory();
 
         // Assert
         assertEquals(expected, outContent.toString());

@@ -14,7 +14,6 @@ import java.io.PrintStream;
 import utility.Constant;
 import utility.CustomExceptions;
 
-
 class BmiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -208,6 +207,9 @@ class BmiTest {
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
     }
 
+    /**
+     * Test the behaviour of printing Bmi history.
+     */
     @Test
     void showBmiHistory_twoInputs_printsCorrectBmiHistory() {
         // Arrange
