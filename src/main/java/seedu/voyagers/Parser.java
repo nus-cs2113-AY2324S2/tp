@@ -262,6 +262,7 @@ public class Parser {
     /**
      * Method to print a list of all trips
      */
+
     private static Command listAll() {
        return new ListCommand();
     }
