@@ -11,20 +11,17 @@ public class ProblemGenerator {
 
     static final String DEFAULT_OPERATORS = "+-*/";
 
-    static final String PROBLEM_FORM = "pleas type the number and difficulty you like in following form\n"+
-            "generate -t [type] -n [number] -d [maximum digit] \n";
+    static final String PROBLEM_FORM = "pleas operators the number and difficulty you like in following form\n"+
+            "generate -t [operators] -n [number] -d [maximum digit] \n";
     Scanner in = new Scanner(System.in);
 
     public void TypeChoose() {
-        while(true){
-            System.out.println(PROBLEM_FORM);
-            String command = in.nextLine();
-            HashMap<String, String> parameter = parseCommand(command);
 
-            Generate(parameter);
-        }
+        System.out.println(PROBLEM_FORM);
+        String command = in.nextLine();
+        HashMap<String, String> parameter = parseCommand(command);
 
-
+        Generate(parameter);
 
     }
 
@@ -32,7 +29,7 @@ public class ProblemGenerator {
 
         int number = Integer.parseInt(parameter.get("number"));
         int maxDigit =  Integer.parseInt(parameter.get("maximumDigits"));
-        String op = parameter.get("type");
+        String op = parameter.get("operators");
         ArrayList<String> operations = new ArrayList<>();
 
         if(op.contains("+")){
@@ -48,18 +45,20 @@ public class ProblemGenerator {
             operations.add("/");
         }
 
-        ArrayList<Problem> test = null;
+        //ArrayList<Problem> test = new ArrayList<>();
+        Test test = new Test(op,maxDigit,number) ;
+
         for( int i=0; i<number;i++){
 
-            String desctiption = new String();
+            String desctiption = "";
             double answer;
             int max = (int) Math.pow(10,maxDigit);
             int op1 = (int) (Math.random()*max);
             int op2 = (int) (Math.random()*max);
-            String tempOpeator = operations.get((int) (Math.random()*operations.size()));
+            String tempOperator = operations.get((int) (Math.random()*operations.size()));
 
-            desctiption = op1 + tempOpeator + op2 + "=";
-            switch (tempOpeator){
+
+            switch (tempOperator){
             case("+"):
                 answer = op1 + op2;
                 break;
@@ -76,12 +75,13 @@ public class ProblemGenerator {
             default:
                 continue;
             }
+            desctiption = op1 + tempOperator + op2 + "=";
 
 
             Problem p = new Problem(desctiption,answer);
-            System.out.println(p.unsolved());
+            System.out.println((i+1) +". "+ p.unsolved());
+            test.addToTest(p);
 
-            test.add(p);
 
         }
 
@@ -95,11 +95,11 @@ public class ProblemGenerator {
 
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].equals("-t")) {
-                options.put("type", tokens[i + 1]);
+                options.put("operators", tokens[i + 1]);
             } else if (tokens[i].equals("-n")) {
                 options.put("number", tokens[i + 1]);
             } else if (tokens[i].equals("-d")) {
-                options.put("maximumDigit", tokens[i + 1]);
+                options.put("maximumDigits", tokens[i + 1]);
             }
         }
 
@@ -110,7 +110,7 @@ public class ProblemGenerator {
 
     private static void DeafaultOptions(String command, HashMap<String, String> options) {
         if(!command.contains("-t")){
-            options.put("type", DEFAULT_OPERATORS);
+            options.put("operators", DEFAULT_OPERATORS);
         }
         if(!command.contains("-n")){
             options.put("number",DEFAULT_NUMBER);
