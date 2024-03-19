@@ -38,6 +38,8 @@ public class Parser {
             // List code here
         case "balance":
             // Balance code here
+        default:
+            // Default clause
         }
     }
 }
