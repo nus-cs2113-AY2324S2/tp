@@ -13,7 +13,8 @@ public class NewsArticle {
 
     protected String content;
 
-    public NewsArticle(String headline, String author, String date, String source, int importance, int reliability, int bias) {
+    public NewsArticle(String headline, String author, String date, String source, int importance, int reliability,
+                       int bias) {
         this.headline = headline;
         this.author = author;
         this.date = date;
