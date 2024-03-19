@@ -99,7 +99,7 @@ Tracks health of the user.
 
 Calculates user's Body Mass Index (BMI).
 
-Format: `/h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE'
+Format: `/h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE`
 * All parameters must be provided in correct order as shown above.
 * `HEIGHT` is a **2 decimal point number in metres** (i.e. 1.71) representing the user's height.
 * `WEIGHT` is a **2 decimal point number in kilograms** (i.e. 60.50) representing the user’s weight.
@@ -116,6 +116,23 @@ Great! You're within normal range.
 ```
 
 #### Menstrual Cycle
+
+Tracks the start and end of user's menstrual cycle. 
+
+Format: `/h:period /start:START_DATE /end:END_DATE`
+
+* All parameters must be provided in correct order as shown above.
+* `START_DATE` is `DD/MM/YYYY` format (i.e. `19/03/2024`) representing the start of a cycle.
+* `END_DATE` is a `DD/MM/YYYY` format (i.e. `19/03/2024`) representing the end of a cycle.
+
+Examples:
+* /h:period /start:09/03/2022 /end:16/03/2022
+
+Usage:
+```
+Period Start: 2022/03/09 Period End: 2022/03/16
+Period Length: 8 days
+```
 
 ## FAQ
 

@@ -15,22 +15,22 @@ public class Bmi extends Health {
     /**
      * The height of the user in meters.
      */
-    protected static double height;
+    protected double height;
 
     /**
      * The weight of the user in kilograms.
      */
-    protected static double weight;
+    protected double weight;
 
     /**
      * The Bmi of the user.
      */
-    protected static double bmiValue;
+    protected double bmiValue;
 
     /**
      * The Bmi's corresponding category.
      */
-    protected static String bmiCategory;
+    protected String bmiCategory;
 
     protected LocalDate date = null;
 
@@ -83,7 +83,6 @@ public class Bmi extends Health {
 
         if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(Constant.INSUFFICIENT_PARAMETERS_FOR_BMI);
-            // throw new CustomExceptions(Constant.UNSPECIFIED_PARAMETERS;
         }
 
         results[0] = command;
