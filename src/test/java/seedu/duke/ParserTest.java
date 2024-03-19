@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
@@ -17,13 +18,22 @@ public class ParserTest {
     }
 
     @Test
-    public void checkGameTTT() {
-        String input = "Tic Tac Toe";
+    public void checkQuit() {
+        String input = "quit";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        String expected = "calling ttt";
-        //assertEquals(expected, Parser.readGame());
+        boolean expected = true;
+        assertEquals(expected, Parser.ifQuit(input));
+    }
+
+    public void checkHelp() {
+        String input = "help";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        boolean expected = true;
+        assertEquals(expected, Parser.ifHelp(input));
     }
 
     /*
