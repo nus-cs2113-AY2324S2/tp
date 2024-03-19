@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,12 +94,12 @@ public class NewsOnTheGo {
                 newsTopics.add(newsTopic);
             }
         }
-
+        Collections.sort(newsTopics, new TopicComparator());
         return list;
     }
 
     public enum Command {
-        DAILY, GET, FILTER, SAVE, SOURCE, BYE
+        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, BYE
     }
     private static boolean processCommand(String command, String line, List<NewsArticle> list) {
         assert !command.isEmpty();
@@ -108,6 +109,9 @@ public class NewsOnTheGo {
             break;
         case GET:
             getNews(line, list);
+            break;
+        case TOPICS:
+            showTopics();
             break;
         case FILTER:
             filterNews(line, list);
@@ -128,6 +132,13 @@ public class NewsOnTheGo {
         return false;
     }
 
+    private static void showTopics() {
+        System.out.println("Here are the list of topics for your viewing:")
+        for(NewsTopic topic: newsTopics) {
+            System.out.println(" - " +topic.getTopicName());
+        }
+    }
+
     private static void dailyNews(String line, List<NewsArticle> list) {
     }
 
@@ -135,6 +146,7 @@ public class NewsOnTheGo {
     }
 
     private static void filterNews(String line, List<NewsArticle> list) {
+
     }
 
     private static void saveNews(String line, List<NewsArticle> list) {
