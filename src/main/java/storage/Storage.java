@@ -1,7 +1,7 @@
 package storage;
 
 import seedu.duke.ExpenditureList;
-import seedu.duke.InvalidInputFormatException;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +36,7 @@ public class Storage {
             createNewFile();
             return expenses;
         }
+        assert file.exists() : "file should exist" ;
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
