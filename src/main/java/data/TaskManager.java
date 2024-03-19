@@ -6,7 +6,13 @@ import time.WeekView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Scanner;
+
 
 import static data.TaskManagerException.checkIfDateHasTasks;
 import static data.TaskManagerException.checkIfDateInCurrentWeek;
@@ -112,7 +118,6 @@ public class TaskManager {
         System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
-//        checkIfDateInCurrentWeek(date, weekView);
 
         if (inMonthView) {
             checkIfDateInCurrentMonth(date);
@@ -188,8 +193,6 @@ public class TaskManager {
 
         System.out.println("Enter the date for the task to delete (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
-
-//        checkIfDateInCurrentWeek(date, weekView);
 
         if (inMonthView) {
             checkIfDateInCurrentMonth(date);

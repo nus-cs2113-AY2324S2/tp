@@ -34,7 +34,7 @@ public class Main {
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
         createNewFile(Storage.FILE_PATH); //Creates directory and tasks.txt file if it does not exist
-        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
+        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(Storage.FILE_PATH);
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
         while (true) {
