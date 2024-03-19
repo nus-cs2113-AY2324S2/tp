@@ -1,11 +1,16 @@
 package seedu.bookbuddy;
 
+import exceptions.BookNotFoundException;
+import exceptions.InvalidBookIndexException;
+import exceptions.InvalidCommandArgumentException;
+import exceptions.UnsupportedCommandException;
 import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
@@ -57,15 +62,33 @@ public class ParserTest {
     }
 
     @Test
-    void parseInvalidCommand() {
+    void parseInvalidAddCommandThrowsException() {
         BookList books = new BookList();
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
-        Parser.parseCommand("invalid", books);
-        assertEquals("Sorry but that is not a valid command. Please try again", outContent.toString());
-        System.setOut(originalOut);
+        String input = "add"; // No book title provided
+        assertThrows(InvalidCommandArgumentException.class, () -> Parser.parseCommand(input, books));
     }
 
+    @Test
+    void parseInvalidRemoveCommandThrowsException() {
+        BookList books = new BookList();
+        String input = "remove notAnIndex"; // Invalid index provided
+        assertThrows(InvalidBookIndexException.class, () -> Parser.parseCommand(input, books));
+    }
 
+    @Test
+    void parseRemoveCommandForNonExistentBookThrowsException() {
+        BookList books = new BookList();
+        String input = "remove 1"; // No books in the list, so index 1 is invalid
+        assertThrows(BookNotFoundException.class, () -> Parser.parseCommand(input, books));
+    }
+
+    @Test
+    void parseUnsupportedCommandThrowsException() {
+        BookList books = new BookList();
+        String input = "Geronimo Stilton"; // Completely unsupported command
+        assertThrows(UnsupportedCommandException.class, () -> Parser.parseCommand(input, books));
+    }
 }
+
+
+
