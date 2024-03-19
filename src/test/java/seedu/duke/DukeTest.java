@@ -35,7 +35,7 @@ class DukeTest {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
         }
-        GenerateItineraryCommand generateItineraryCommand = new GenerateItineraryCommand();
+        GenerateIdeaCommand generateItineraryCommand = new GenerateIdeaCommand();
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);

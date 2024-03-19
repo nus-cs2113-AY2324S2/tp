@@ -1,10 +1,90 @@
-25 Degrees | C | P
-Five Guys | NE, C | A
-Hantol | S | P
+25 Degrees | C | C
+49 Seats | C | C
+888 Mookata | C | C
+90 Minutes | C | B
+A9 Noodles and Dumplings | C | B
+Aburi Kaisen Don Keisuke | C | B
+Five Guys | C | A
+Hantol | C | A
 Swee Choon | C | A
-Wano Niku | S | B
-Super Thai Mookata | C | A
-Cicheti | C | S
-Ikura Japanese | C | A
-R.K Eating House | NE | B
-Tolido's Expresso Nook | E | P
+Wano Niku | C | P
+Super Thai Mookata | C | P
+Cicheti | C | P
+Ikura Japanese | C | S
+R.K Eating House | C | S
+Tolido's Expresso Nook | C | S
+886 Bistro | E | C
+Al Jasra | E | C
+Breakfast Grill | E | C
+Charlie's Corner | E | B
+E&D Co | E | B
+Ha-Jun | E | B
+Missus | E | A
+Mr Yakiniku | E | A
+Five Oars | E | A
+Knead To Eat | E | P
+Craze Kitchen | E | P
+Neptune | E | P
+Supernova | E | S
+The Sushi Bar | E | S
+The Basil Inn | E | S
+25 Degrees | W | C
+49 Seats | W | C
+888 Mookata | W | C
+90 Minutes | W | B
+A9 Noodles and Dumplings | W | B
+Aburi Kaisen Don Keisuke | W | B
+Five Guys | W | A
+Hantol | W | A
+Swee Choon | W | A
+Wano Niku | W | P
+Super Thai Mookata | W | P
+Cicheti | W | P
+Ikura Japanese | W | S
+R.K Eating House | W | S
+Tolido's Expresso Nook | W | S
+46 Mittsu | S | C
+Abundance | S | C
+Hwang Shi | S | C
+Gyunion | S | B
+Gyu San | S | B
+Hamburg Steak | S | B
+Hantoi | S | A
+Burger Labo | S | A
+Old Habits Cafe | S | A
+Publico | S | P
+Pura Barsa | S | P
+Marcy's | S | P
+Lau Pa Sat | S | S
+Potato Head | S | S
+Dankga | S | S
+Fuel X | NE | C
+Samwitch | NE | C
+Breakfast Club | NE | C
+Whisk and Paddle | NE | B
+Tend Bistro | NE | B
+Dai Lou | NE | B
+Riang | NE | A
+Ishiro | NE | A
+Folk Yard | NE | A
+Tie Fun Wan | NE | P
+Gusta Sourdough Pizza Co | NE | P
+Curry Otoko Donburi | NE | P
+Shabu-GO | NE | S
+idaten Udon | NE | S
+Moments | NE | S
+Aburi-En | ACC | C
+Genki Sushi | ACC | C
+Makisan | ACC | C
+Lenu | ACC | B
+A&W | ACC | B
+Monster Curry | ACC | B
+Pepperlunch | ACC | A
+Shi Li Fang | ACC | A
+Soup Spoon | ACC | A
+Green Dot | ACC | P
+Hai Di Lao | ACC | P
+Poulet | ACC | P
+Gochi-so Shokudo | ACC | S
+Ichiban Sushi | ACC | S
+Watami Japanese Dining | ACC | S
