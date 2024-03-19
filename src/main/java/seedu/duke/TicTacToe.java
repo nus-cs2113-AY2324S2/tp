@@ -6,13 +6,12 @@ import java.util.Scanner;
 
 import static seedu.duke.Parser.readTTMove;
 
-public class TicTacToe extends Game {
+public class TicTacToe extends Game{
     protected static String[] board = new String[9];
 
     public TicTacToe(String line) {
         super(line);
     }
-
     public static void printBoard() {
         System.out.println("  " + board[0] + " | " + board[1] + " | " + board[2] + "  ");
         System.out.println("-------------");
@@ -49,8 +48,6 @@ public class TicTacToe extends Game {
                 case 7:
                     line = board[2] + board[4] + board[6];
                     break;
-                default:
-                    // Will never execute
             }
             if (line.equals("XXX")) {
                 return "X";
