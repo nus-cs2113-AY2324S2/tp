@@ -7,7 +7,7 @@ import static seedu.duke.TicTacToe.runTicTacToe;
 import static seedu.duke.HangMan.runHangMan;
 
 public class Duke {
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -20,6 +20,7 @@ public class Duke {
         boolean inGame = false;
         input = Parser.readLine();
         while (input != null) {
+
 
             if (Parser.ifQuit(input)) {
                 break;
@@ -42,8 +43,8 @@ public class Duke {
                     } else if (input.equals("hangman")) {
                         runHangMan();
                     }
-                } catch (InvalidGameException e) {
-                    System.out.println("invalid game");
+                } catch (InvalidGameException | NullPointerException e) {
+                    ui.println("invalid game");
                 }
             }
             input = Parser.readLine();
