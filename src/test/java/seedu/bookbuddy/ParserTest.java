@@ -64,28 +64,32 @@ public class ParserTest {
     void parseInvalidAddCommandThrowsException() {
         BookList books = new BookList();
         String input = "add"; // No book title provided
-        assertThrows(InvalidCommandArgumentException.class, () -> Parser.parseCommand(input, books), "The add command requires a book title.");
+        assertThrows(InvalidCommandArgumentException.class,
+                () -> Parser.parseCommand(input, books), "The add command requires a book title.");
     }
 
     @Test
     void parseInvalidRemoveCommandThrowsException() {
         BookList books = new BookList();
         String input = "remove notAnIndex"; // Invalid index provided
-        assertThrows(InvalidBookIndexException.class, () -> Parser.parseCommand(input, books), "Book index must be an integer.");
+        assertThrows(InvalidBookIndexException.class,
+                () -> Parser.parseCommand(input, books), "Book index must be an integer.");
     }
 
     @Test
     void parseRemoveCommandForNonExistentBookThrowsException() {
         BookList books = new BookList();
         String input = "remove 1"; // No books in the list, so index 1 is invalid
-        assertThrows(BookNotFoundException.class, () -> Parser.parseCommand(input, books), "Book not found at the provided index.");
+        assertThrows(BookNotFoundException.class,
+                () -> Parser.parseCommand(input, books), "Book not found at the provided index.");
     }
 
     @Test
     void parseUnsupportedCommandThrowsException() {
         BookList books = new BookList();
         String input = "Geronimo Stilton"; // Completely unsupported command
-        assertThrows(UnsupportedCommandException.class, () -> Parser.parseCommand(input, books), "Sorry but that is not a valid command. Please try again");
+        assertThrows(UnsupportedCommandException.class,
+                () -> Parser.parseCommand(input, books), "Sorry but that is not a valid command. Please try again");
     }
 }
 
