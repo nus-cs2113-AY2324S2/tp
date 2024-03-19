@@ -83,4 +83,19 @@ public class Ui {
         }
     }
 
+    public static void listFood() {
+        System.out.println("HMMMM Let's see what food is theree: ");
+    }
+
+    public static void listActivities() {
+        System.out.println("What are some activities you can do as a couple? Let's see.." );
+    }
+
+    public static void listCommand() {
+        System.out.println("Looking for ideas to spice up your date night?");
+        System.out.println("Choose from the following options:");
+        System.out.println("1. List out delicious dining options (type 'food')");
+        System.out.println("2. Discover exciting activities to do together (type 'activities')");
+        System.out.println("What's your pleasure?");
+    }
 }
