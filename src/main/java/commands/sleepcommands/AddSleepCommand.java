@@ -16,7 +16,7 @@ public class AddSleepCommand implements Command {
      * Constructs a new AddSleepCommand object with user input.
      *
      * @param sleepTracker Class that contains information and functions to be executed required by Sleep Tracker
-     * @param sleepCommandArgs User input for the list sleep cycles command.
+     * @param sleepCommandArgs User input for the add sleep cycles command.
      * @throws SleepException if there is any formatting issues.
      */
     public AddSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
