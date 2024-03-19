@@ -14,6 +14,10 @@ public class Parser {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static boolean ifQuit(String input) {
+        // Check if the input is null
+        if (input == null) {
+            return false; // or throw an exception, depending on your requirements
+        }
         if (input.equals("quit")) {
             return true;
         }
