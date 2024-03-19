@@ -36,7 +36,8 @@ class BookListTest {
         testBookList.printAllBooks();
 
         String expectedOutput = "All books:\n1. [U] Harry Potter\n";
-        assertEquals(expectedOutput.trim(), outContent.toString().trim());
+        String normalizedActualOutput = outContent.toString().replace("\r\n", "\n");
+        assertEquals(expectedOutput.trim(), normalizedActualOutput.trim());
 
         System.setOut(System.out);
     }

@@ -65,7 +65,8 @@ public class ParserTest {
         final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
         Parser.parseCommand("invalid", books);
-        assertEquals("Sorry but that is not a valid command. Please try again\n", outContent.toString());
+        String normalizedActualOutput = outContent.toString().replace("\r\n", "\n");
+        assertEquals("Sorry but that is not a valid command. Please try again\n", normalizedActualOutput);
         System.setOut(originalOut);
     }
 
