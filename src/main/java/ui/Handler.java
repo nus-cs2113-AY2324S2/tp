@@ -7,9 +7,11 @@ import health.Period;
 import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
+import workouts.Gym;
 import workouts.Run;
-import workouts.WorkoutList;
+
 import java.util.Scanner;
+
 import storage.LogFile;
 
 
@@ -18,7 +20,8 @@ import storage.LogFile;
  * before providing feedback to the user.
  */
 public class Handler {
-    static LogFile logFile = LogFile.getInstance();
+    public static Scanner in;
+    LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -26,7 +29,8 @@ public class Handler {
      *
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
-    public static void processInput() {
+
+    public static void processInput() throws CustomExceptions.InvalidInput {
         Scanner in = new Scanner(System.in);
 
 
@@ -68,12 +72,14 @@ public class Handler {
                     break;
 
                 default:
-                    // Yet to implement : throw new CustomException();
+
+                    break; // valueOf results in immediate exception for non-match with enum Command
                 }
             } catch (IllegalArgumentException e) {
-                // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
+                Output.printException(e, Constant.INVALID_COMMAND);
                 // Yet to implement : } catch (CustomException e) {
                 // Yet to implement : Reply.printException(e);
+
             }
 
 
@@ -101,6 +107,177 @@ public class Handler {
         }
 
         return input.substring(startIndex, endIndex).trim();
+    }
+
+    /**
+     * Constructs a new {@code }  object based on the user input.
+     *
+     * @param userInput The user input string.
+     */
+    public static void handleExercise(String userInput) {
+        try {
+            String typeOfExercise = checkTypeOfExercise(userInput);
+            if (typeOfExercise.equals(Constant.RUN)) {
+                String[] runDetails = Run.getRun(userInput);
+                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
+                        || runDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                }
+
+                new Run(runDetails[2], runDetails[1], runDetails[3]);
+                System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+
+            } else if (typeOfExercise.equals(Constant.GYM)) {
+                // Yet to implement : handleGym(userInput);
+                int numberOfStations = getNumberOfGymStations(userInput);
+                Gym gym = new Gym();
+                getGymStation(numberOfStations, gym);
+            }
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.out.println(e.getMessage());
+            // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+        }
+
+    }
+
+
+    /**
+     * Handle history command.
+     * Expected command: `history /e:[all\run\gym]`
+     * Show history of all exercises, run or gym.
+     * @param userInput
+     */
+    public static void handleHistory(String userInput) {
+        // if asked to show history
+        String [] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
+        String filter = inputs[1].split(":")[1];
+        Output.printHistory(filter);
+
+    }
+
+    /**
+     * Called when a user inputs a new gym
+     * Creates a gym object and prompts the user to enter details of the gym workouts and adds that to the gym object .
+     *
+     * @param input The user input string.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
+     */
+    public static void getGym(String input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+        // input that I will get is something like new /e: gym /n: 2
+        // use get index method that alfattih will push later
+        int numberOfStations = 2; // assuming i parsed the user initial input
+        Gym gym = new Gym();
+        for (int i = 0; i < numberOfStations; i++) {
+            Output.printGymStationPrompt(i + 1);
+            Scanner in = new Scanner(System.in);
+            String userInput = in.nextLine();
+            checkAndAddGymStationInput(userInput, gym);
+        }
+    }
+
+    private static void checkAndAddGymStationInput(String userInput, Gym gym) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        // probably change to alfa method
+        String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"
+
+        if (inputs.length != Constant.LENGTH_OF_GYM_STATION_INPUTS) {
+            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM_STATION);
+        }
+
+        if (inputs[Constant.INDEX_OF_STATION_NAME].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_SETS].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_REPS].isBlank() ||
+                inputs[Constant.INDEX_OF_STATION_WEIGHTS].isBlank()) {
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_GYM_STATION);
+        }
+
+        String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
+
+        try {
+
+            int numberOfSets = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_SETS]);
+            int repetition = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_REPS]);
+            int weights = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_WEIGHTS]);
+            gym.addStation(exerciseName, weights, numberOfSets, repetition);
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+        }
+    }
+
+    /**
+     * Called when a user inputs a new gym
+     * Creates a gym object and prompts the user to enter details of the gym workouts and adds that to the gym object .
+     *
+     * @param input The user input string.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
+     */
+    public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        // input that I will get is something like new /e:gym /n: 2
+        // use get index method that alfattih will push later
+
+        String [] inputs = input.split(Constant.SPLIT_BY_SLASH);
+        String numberOfStationsString = inputs[2];
+        String numberOfStationStr =  numberOfStationsString.split(":")[1];
+        System.out.println(numberOfStationsString);
+        return Integer.parseInt(numberOfStationStr);
+
+    }
+
+    private static void getGymStation(int numberOfStations, Gym gym) {
+        try{
+            for (int i = 0; i < numberOfStations; i++) {
+                Output.printGymStationPrompt(i + 1);
+                String userInput = in.nextLine();
+                String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
+                String[] validatedInputs = checkGymStationInput(inputs);
+                addGymStationInput(validatedInputs, gym);
+            }
+            Output.printAddGym(gym);
+        } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void handleLatest(String userInput){
+        // if asked to show latest run
+        Output.printLatestRun();
+    }
+
+    private static String[] checkGymStationInput(String[] inputs) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+
+        String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
+        String sets = inputs[Constant.INDEX_OF_STATION_SETS].split(":")[1].trim();
+        String reps = inputs[Constant.INDEX_OF_STATION_REPS].split(":")[1].trim();
+        String weights = inputs[Constant.INDEX_OF_STATION_WEIGHTS].split(":")[1].trim();
+
+        if (exerciseName.isBlank() || sets.isBlank() || reps.isBlank() || weights.isBlank()) {
+            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_GYM_STATION);
+        }
+        try {
+            Integer.parseInt(sets);
+            Integer.parseInt(reps);
+            Integer.parseInt(weights);
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+        }
+
+        return new String[]{exerciseName, sets, reps, weights};
+    }
+
+    private static void addGymStationInput(String [] validatedInputs, Gym gym) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+        String exerciseName = validatedInputs[Constant.INDEX_OF_STATION_NAME];
+        int weights = Integer.parseInt(validatedInputs[Constant.INDEX_OF_STATION_WEIGHTS]);
+        int numberOfSets = Integer.parseInt(validatedInputs[Constant.INDEX_OF_STATION_SETS]);
+        int repetition = Integer.parseInt(validatedInputs[Constant.INDEX_OF_STATION_REPS]);
+        gym.addStation(exerciseName, weights, numberOfSets, repetition);
     }
 
     /**
@@ -151,42 +328,6 @@ public class Handler {
     }
 
     /**
-     * Constructs a new {@code }  object based on the user input.
-     *
-     * @param userInput The user input string.
-     */
-    public static void handleExercise(String userInput) {
-        try {
-            String typeOfExercise = checkTypeOfExercise(userInput);
-            if (typeOfExercise.equals(Constant.RUN)) {
-                String[] runDetails = getRun(userInput);
-                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
-                        || runDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
-                }
-                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
-                WorkoutList.addRun(newRun);
-                System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
-            } else if (typeOfExercise.equals(Constant.GYM)) {
-                // Yet to implement : handleGym(userInput);
-                getGym(userInput);
-            }
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            System.out.println(e.getMessage());
-            // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
-        }
-
-    }
-
-    public static void handleHistory(String userInput){
-        Output.printHistory("all");
-    }
-    public static void handleLatest(String userInput){
-        // if asked to show latest run
-        Output.printLatestRun();
-    }
-
-    /**
      * Handles user input related to health data. Parses the user input to determine
      * the type of health data and processes it accordingly.
      *
@@ -230,60 +371,6 @@ public class Handler {
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());
         }
-    }
-
-
-    public static void getGym(String input){
-        System.out.println("temp");
-    }
-
-    /**
-     * Parses a string containing run information, extracts the command, distance and end time before returning
-     * an array of strings containing the information.
-     *
-     * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
-     * @return An array of strings containing the extracted command, distance, time taken and date(if given).
-     */
-    public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
-
-        String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
-
-
-        if (!input.contains("/e") || !input.contains("/d") || !input.contains("/t")) {
-            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
-        }
-
-
-        int indexE = input.indexOf("/e");
-        int indexD = input.indexOf("/d");
-        int indexT = input.indexOf("/t");
-        int indexDate = input.indexOf("/date");
-
-        String command = input.substring(indexE + 3, indexD).trim(); // Constant.RUN_E_OFFSET , "/e:" = 3
-        assert !command.isEmpty() : "Command should not be empty";
-
-        String dSubstring = input.substring(indexD + 3, indexT).trim(); // Constant.RUN_D_OFFSET , "/d:" = 3
-        assert !dSubstring.isEmpty() : "Distance should not be empty";
-        assert dSubstring.matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric value (assuming KM)";
-
-        String tSubstring = input.substring(indexT + 3, indexDate).trim(); // Constant.RUN_T_OFFSET , "/t:" = 3
-        assert !tSubstring.isEmpty() : "Time should not be empty";
-        assert tSubstring.matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format HH:MM:SS";
-
-        String dateSubstring = input.substring(indexDate + 6).trim(); // Constant.RUN_DATE_OFFSET , "/date:" = 6
-
-
-        if (command.isEmpty() || dSubstring.isEmpty() || tSubstring.isEmpty()) {
-            //throw new CustomException(Constant.UNSPECIFIED_PARAMETER);
-        }
-
-
-        results[0] = command;
-        results[1] = dSubstring;
-        results[2] = tSubstring;
-        results[3] = dateSubstring;
-
-        return results;
     }
 
     /**
