@@ -16,8 +16,8 @@ public class Constant {
 
     public static final String PARTITION_LINE = "____________________________________________________________";
 
-    public static final String SPLIT_BY_SLASH = "/";
-    public static final String ADD_RUN = "Successfully added a new run";
+    public static final String ADD_RUN = "Successfully added a new run session";
+    public static final String ADD_GYM = "Successfully added a new gym session";
 
     // Constant for Workout
     public static final String RUN = "run";
@@ -31,17 +31,27 @@ public class Constant {
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
     public static final String RUN_HEADER_WITH_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
+    public static final String GYM_STATION_HEADER_WITH_INDEX_FORMAT = "Index\t\t\tExercise Name\t\tSets\tRepetition\t\tWeights";
+
+    public static final String GYM_STATION_FORMAT = "%s: ";
+
+    public static final String GYM_SET_FORMAT = "%d reps at %d KG";
+    public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets of %s";
+
     public static final String RUN_HEADER = "Type\\tTime\\t\\tDistance\\tPace\\t\\tDate\"";
 
     // Constant for Error
     public static final String INVALID_PRINT_HISTORY_FILTER = "Invalid filter! Filter is only 'all', 'run' or 'gym'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
+
+    public static final String NO_GYMS_FOUND = "No gyms found! You need to add a gym first!";
+
     public static final String NO_HISTORY_FOUND = "No history found!";
     public static final String BLANK_INPUT_FOR_EXERCISE = "Type of exercise cannot be empty. " +
             "Please input either /e:run or /e:gym";
 
 
-    private static final String STATION_GYM_FORMAT = "/n:[name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number]";
+    public static final String STATION_GYM_FORMAT = "[name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number]";
 
     public static final String BLANK_INPUT_FOR_GYM_STATION = "Fields cannot be empty" +
             "Please input " + STATION_GYM_FORMAT;
@@ -60,7 +70,8 @@ public class Constant {
 
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
-
+    public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Insufficient parameters for Gym Stations! " +
+            "Please input [name of exercise] /s:[sets] /r:[reps] /w:[weights]";
 
 
     // Health Constants

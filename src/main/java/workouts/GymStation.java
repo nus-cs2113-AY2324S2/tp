@@ -3,10 +3,11 @@ package workouts;
 import utility.Constant;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GymStation {
     protected String stationName;
-    protected ArrayList<GymSet> sets;
+    protected ArrayList<GymSet> sets = new ArrayList<GymSet>();
     protected int numberOfSets;
 
     /**
@@ -23,8 +24,13 @@ public class GymStation {
     }
 
     public void processSets(int weight, int repetition){
-        GymSet newSet = new GymSet(weight, repetition);
-        sets.add(newSet);
+
+        // to implement later different weights
+        for (int i = 0; i < repetition; i++) {
+            GymSet newSet = new GymSet(weight, repetition);
+            sets.add(newSet);
+        }
+
     }
 
     public String getStationName() {
@@ -45,8 +51,23 @@ public class GymStation {
 
     @Override
     public String toString() {
-        return "Test";// implement later
-//        return String.format("%s \t\t%s",
-//                this.getStationName(), this.getNumberOfSets(), this.get
+        ArrayList<GymSet> allSets = this.getSets();
+        HashMap<String, Integer> allVariations = new HashMap<>();
+
+        for (GymSet set : allSets) {
+            if (allVariations.containsKey(set.toString())) {
+                allVariations.put(set.toString(), allVariations.get(set.toString()) + 1);
+            } else {
+                allVariations.put(set.toString(), 1);
+            }
+        }
+        StringBuilder format = new StringBuilder(String.format(Constant.GYM_STATION_FORMAT,
+                this.getStationName()));
+
+        for (String key : allVariations.keySet()) {
+            format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, this.getNumberOfSets(), key));
+        }
+
+        return format.toString();
     }
 }

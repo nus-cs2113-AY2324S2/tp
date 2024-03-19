@@ -5,12 +5,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+
 import utility.Constant;
 import utility.CustomExceptions;
+import workouts.Gym;
 import workouts.Run;
+import workouts.Workout;
 import workouts.WorkoutList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OutputTest {
 
@@ -46,7 +51,7 @@ class OutputTest {
                 "2.\t\t\trun \t1:59:10\t\t15.3\t\t7:47/km\t\tNA\n" +
                 Constant.PARTITION_LINE + "\n";
         expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
-        Output.printHistory("run");
+        Output.printHistory(Constant.RUN);
         assertEquals(expected, outContent.toString());
         cleanup();
 
@@ -54,13 +59,15 @@ class OutputTest {
 
     @Test
     void printHistory_invalidHistoryFilter_throwError() {
+        String input = "invalidfilter";
         String expected = Constant.PARTITION_LINE + "\n" +
                 "\u001B[31mError: Invalid filter! Filter is only 'all', 'run' or 'gym'\u001B[0m" + "\n" +
                 Constant.PARTITION_LINE + "\n";
         expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
 
-        Output.printHistory("invalidFilter");
-        assertEquals(expected, outContent.toString());
+        assertThrows(IllegalArgumentException.class, () -> {
+            Output.printHistory(input);
+        });
         cleanup();
 
     }
@@ -92,5 +99,41 @@ class OutputTest {
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
         cleanup();
+    }
+
+    @Test
+    void printGymHistory_correctInput_expectPrintGymHistory(){
+        try{
+            Gym gym1 = new Gym();
+            gym1.addStation("Bench Press", 4, 10, 50);
+            gym1.addStation("Shoulder Press", 20, 4, 10);
+
+            Gym gym2 = new Gym();
+            gym2.addStation("Squat Press", 4, 10, 50);
+            gym2.addStation("Lat Press", 20, 4, 10);
+
+            String expected = Constant.PARTITION_LINE + "\n" +
+                    "Gym Session 1\n" +
+                    String.format(Constant.GYM_STATION_FORMAT, "Bench Press") +
+                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    "\n" +
+                    String.format(Constant.GYM_STATION_FORMAT, "Shoulder Press") +
+                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    "\n" + Constant.PARTITION_LINE + "\n" +
+                    "Gym Session 2\n" +
+                    String.format(Constant.GYM_STATION_FORMAT, "Squat Press") +
+                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    "\n" +
+                    String.format(Constant.GYM_STATION_FORMAT, "Lat Press") +
+                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    "\n" + Constant.PARTITION_LINE + "\n";
+
+            Output.printHistory(Constant.GYM);
+            assertEquals(expected, outContent.toString());
+            cleanup();
+
+        }  catch (CustomExceptions.InvalidInput e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

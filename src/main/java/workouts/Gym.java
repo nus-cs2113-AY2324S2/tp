@@ -14,11 +14,15 @@ public class Gym extends Workout{
     // takes (station name, weight, sets, reps)
 
     public Gym() {
+        WorkoutList.addGym(this);
 
     }
     // overloaded constructor for optional date
     public Gym(String stringDate) {
+
         this.date = Parser.parseDate(stringDate);
+        WorkoutList.addGym(this);
+
     }
 
     public static void getGym(String input){
@@ -40,6 +44,7 @@ public class Gym extends Workout{
             GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
         }
     }
@@ -63,10 +68,9 @@ public class Gym extends Workout{
         String printedDate;
         if (date != null){
             printedDate = date.toString();
+            return String.format("(%s)", printedDate);
         } else{
-            printedDate = Constant.NO_DATE_SPECIFIED;
+            return "";
         }
-        return String.format("%s \t\t%s",
-                Constant.GYM, printedDate);
     }
 }

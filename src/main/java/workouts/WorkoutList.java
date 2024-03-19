@@ -30,6 +30,11 @@ public class WorkoutList extends ArrayList<Workout> {
         addWorkout(run);
     }
 
+    public static void addGym(Gym gym) {
+        gyms.add(gym);
+        addWorkout(gym);
+    }
+
     /**
      * Returns a list of workouts based on the filter
      *
@@ -43,15 +48,18 @@ public class WorkoutList extends ArrayList<Workout> {
             throws CustomExceptions.OutOfBounds,
             CustomExceptions.InvalidInput {
 
+        filter = filter.toLowerCase();
         if(!filter.equals(Constant.ALL) && !filter.equals(Constant.RUN) && !filter.equals(Constant.GYM)) {
             throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
         }
-
         if(filter.equals(Constant.RUN) && runs.isEmpty()){
             throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
         }
         if(filter.equals(Constant.ALL) && workouts.isEmpty()){
             throw new CustomExceptions.OutOfBounds(Constant.NO_HISTORY_FOUND);
+        }
+        if(filter.equals(Constant.GYM) && gyms.isEmpty()){
+            throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
         }
 
         if(filter.equals(Constant.RUN)){
