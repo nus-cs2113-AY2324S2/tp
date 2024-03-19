@@ -2,8 +2,11 @@ package seedu.duke;
 
 import seedu.duke.exceptions.FlirtForkException;
 import java.lang.IllegalArgumentException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class GenerateItineraryCommand extends Command{
+    private static final Logger LOGGER = Logger.getLogger(GenerateItineraryCommand.class.getName());
     private String preferredLocation;
     private String preferredPrice;
 
@@ -36,6 +39,7 @@ public class GenerateItineraryCommand extends Command{
             System.out.println(itinerary);
         } catch (IllegalArgumentException e) {
             System.out.println("We could not generate a suitable itineray based on your inputs! Sorry!!");
+            LOGGER.log(Level.SEVERE, "Invalid arguments given");
         }
     }
 }

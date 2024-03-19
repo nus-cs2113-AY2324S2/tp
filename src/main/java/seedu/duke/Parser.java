@@ -76,6 +76,8 @@ public class Parser {
             favourite = new Food(parts[0], parts[1], parts[2]);
         } else if ("A".equals(parts[0]) && parts.length >= 2) {
             favourite = new Activity(parts[0], parts[1], parts[2]);
+        } else {
+            assert false; // Throws AssertionError if favourite not created yet
         }
 
         return favourite;

@@ -26,7 +26,7 @@ class DukeTest {
     }
 
     @Test
-    public void testGenerateItineraryCommand() {
+    public void testGenerateIdeaCommand() {
         try {
             favourites = new FavouritesList(storage.loadFavourites());
             foods = new FoodList(storage.loadFood());
@@ -35,16 +35,64 @@ class DukeTest {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
         }
-        GenerateIdeaCommand generateItineraryCommand = new GenerateIdeaCommand();
+        GenerateIdeaCommand generateIdeaCommand = new GenerateIdeaCommand();
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+            System.setOut(printStream);
+            generateIdeaCommand.execute(favourites, foods, activities, ui, storage);
+            String output = outputStream.toString();
+            assertTrue(output.contains("You can do"));
+            assertTrue(output.contains("and have a nice meal at"));
+            assertTrue(output.length() > 36);
+            System.setOut(System.out);
+        } catch (FlirtForkException e) {
+            ui.errorMessage(e.getMessage());
+        }
+    }
+
+    @Test
+    public void generateItineraryCommand_validInputs_success() {
+        try {
+            favourites = new FavouritesList(storage.loadFavourites());
+            foods = new FoodList(storage.loadFood());
+            activities = new ActivityList(storage.loadActivity());
+        } catch (FileNotFoundException e) {
+            ui.errorMessage("File not found. Starting with an empty task list :)");
+            favourites = new FavouritesList(new ArrayList<>());
+        }
+        GenerateItineraryCommand generateItineraryCommand = new GenerateItineraryCommand("C C");
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
             System.setOut(printStream);
             generateItineraryCommand.execute(favourites, foods, activities, ui, storage);
             String output = outputStream.toString();
-            assertTrue(output.contains("You can do"));
-            assertTrue(output.contains("and have a nice meal at"));
-            assertTrue(output.length() > 36);
+            assertTrue(output.contains("Here is a rough itinerary for your date:"));
+            System.setOut(System.out);
+        } catch (FlirtForkException e) {
+            ui.errorMessage(e.getMessage());
+        }
+    }
+
+    @Test
+    public void generateItineraryCommand_invalidInputs_errorMessagePrinted() {
+        try {
+            favourites = new FavouritesList(storage.loadFavourites());
+            foods = new FoodList(storage.loadFood());
+            activities = new ActivityList(storage.loadActivity());
+        } catch (FileNotFoundException e) {
+            ui.errorMessage("File not found. Starting with an empty task list :)");
+            favourites = new FavouritesList(new ArrayList<>());
+        }
+        GenerateItineraryCommand generateItineraryCommand = new GenerateItineraryCommand("THW GDBE");
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+            System.setOut(printStream);
+            generateItineraryCommand.execute(favourites, foods, activities, ui, storage);
+            String output = outputStream.toString();
+            assertTrue(output.contains("We could not generate a suitable itineray based on your inputs! Sorry!!"));
             System.setOut(System.out);
         } catch (FlirtForkException e) {
             ui.errorMessage(e.getMessage());
