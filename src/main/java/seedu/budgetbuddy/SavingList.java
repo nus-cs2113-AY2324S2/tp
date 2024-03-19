@@ -15,6 +15,10 @@ public class SavingList {
         this.initialAmount = 0;
     }
 
+    public ArrayList<Saving> getSavings() {
+        return savings;
+    }
+
     public void findTotalSavings() {
         double totalSavings = 0;
         for (int i = 0; i < savings.size(); i++) {
@@ -69,6 +73,13 @@ public class SavingList {
 
     public void addSaving(String category, String amount) {
         int amountInt = Integer.parseInt(amount);
+        if (amountInt < 0) {
+            try {
+                throw new Exception("Savings should not be negative");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         Saving saving = new Saving(category, amountInt);
         savings.add(saving);
 
