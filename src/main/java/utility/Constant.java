@@ -41,6 +41,9 @@ public class Constant {
 
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
+
+
+    // Health Constants
     public static final Integer HEALTH_TYPE_INDEX = 1;
     public static final String BMI_INPUT = "h:bmi";
     public static final String PERIOD_INPUT = "h:period";
@@ -63,11 +66,14 @@ public class Constant {
     public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
             "Example input: /h:period /start:startDate /end:endDate";
     public static final String MISSING_PARAMETERS = "Missing parameter(s)";
+
+
     // Input Errors
     public static final String INVALID_COMMAND = "Invalid command. Enter 'help' to view available commands.";
     public static final String UNSPECIFIED_PARAMETER = "Parameter(s) unspecified.";
     public static final String INVALID_PARAMETER = "Parameter(s) invalid or out of bounds";
     public static final String NO_DATE_SPECIFIED = "NA";
+
 
     // Storage Replies
     public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
