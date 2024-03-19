@@ -34,7 +34,7 @@ public class Parser {
      * whatever makes it flow easier
      */
     public static void readGame(String input) throws InvalidGameException {
-        if (!input.equals("Tic Tac Toe") && !input.equals("Hangman")) {
+        if (input != null && !input.equals("Tic Tac Toe") && !input.equals("Hangman")) {
             throw new InvalidGameException();
         }
     }
@@ -46,6 +46,10 @@ public class Parser {
      * whatever makes it flow easier
      */
     public static void readTTMove(String input) throws InvalidTTMoveException {
+        if (input == null) {
+            return;
+        }
+
         int markBox;
         try {
             markBox = Integer.parseInt(input);
