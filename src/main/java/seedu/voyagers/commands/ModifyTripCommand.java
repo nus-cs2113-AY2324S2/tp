@@ -43,6 +43,7 @@ public class ModifyTripCommand extends Command{
                 ui.echo("Invalid dates");
                 return;
             }
+            break;
         case "location":
             trip.setLocation(args[2]);
             break;

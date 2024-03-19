@@ -88,8 +88,8 @@ public class Parser {
         Command c = commandAddMainTrip(newTokens);
 
 
-        String subTripArgs[] = c.getArgs();
-        String args[] = new String[6];
+        String[] subTripArgs = c.getArgs();
+        String[] args = new String[6];
         System.arraycopy(subTripArgs, 0, args, 1, 5);
         args[0] = tokens[1];
 
@@ -134,9 +134,7 @@ public class Parser {
             throw new IllegalArgumentException("You are missing /new <name>");
         }
 
-        assert (oldNameEntered && newNameEntered) : "oldName and newName must be entered";
-
-        String args[] = {oldName, "name", newName};
+        String[] args = {oldName, "name", newName};
         return new ModifyTripCommand(args);
     }
 
@@ -180,7 +178,7 @@ public class Parser {
             throw new IllegalArgumentException("You are missing /start <date> or /end <date");
         }
 
-        String args[] = {tripName, "dates", start, end};
+        String[] args = {tripName, "dates", start, end};
         return new ModifyTripCommand(args);
 
     }
@@ -218,7 +216,7 @@ public class Parser {
             throw new IllegalArgumentException("You are missing /location <location");
         }
 
-        String args[] = {tripName, "location", location};
+        String[] args = {tripName, "location", location};
         return new ModifyTripCommand(args);
     }
 
@@ -255,7 +253,7 @@ public class Parser {
             throw new IllegalArgumentException("You are missing /n <name> or /d <description");
         }
 
-        String args[] = {tripName, "description", description};
+        String[] args = {tripName, "description", description};
         return new ModifyTripCommand(args);
     }
 
@@ -264,7 +262,7 @@ public class Parser {
      */
 
     private static Command listAll() {
-       return new ListCommand();
+        return new ListCommand();
     }
 
     /**
@@ -339,7 +337,7 @@ public class Parser {
             // print start date in the format yyyy-MM-dd
             String startDateString = dateFormat.format(startDate);
             String endDateString = dateFormat.format(endDate);
-            String args[] = {name, startDateString, endDateString, location, description};
+            String[] args = {name, startDateString, endDateString, location, description};
             return new AddTripCommand(args);
 
         } catch (ParseException e) {
@@ -373,16 +371,14 @@ public class Parser {
 
 
 
-    private static boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location, String description) {
-        if (startDate == DEFAULT_START || endDate == DEFAULT_END || location.isEmpty() || description.isEmpty()) {
-            return true;
-        }
-        return false;
+    private static boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location,
+                                             String description) {
+        return startDate == DEFAULT_START || endDate == DEFAULT_END || location.isEmpty() || description.isEmpty();
     }
 
     private static Command deleteMainTrip(String[] tokens) {
 
-        String args[] = {tokens[1]};
+        String[] args = {tokens[1]};
         return new DeleteCommand(args);
 
     }
