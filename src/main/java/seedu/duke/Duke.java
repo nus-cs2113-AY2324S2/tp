@@ -4,10 +4,10 @@ import seedu.duke.exceptions.InvalidGameException;
 import seedu.duke.exceptions.InvalidTTMoveException;
 
 import static seedu.duke.TicTacToe.runTicTacToe;
-import static seedu.duke.HangMan.runHangMan;
 
 public class Duke {
     private static final Ui ui = new Ui();
+    private static final HangMan hangman = new HangMan();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -19,8 +19,12 @@ public class Duke {
         String input = "";
         boolean inGame = false;
         input = Parser.readLine();
+<<<<<<< HEAD
 
         while (input != null) {
+=======
+        while (true) {
+>>>>>>> 28c711fe1f602b8f21ef549402e484091996a598
 
 
             if (Parser.ifQuit(input)) {
@@ -38,11 +42,15 @@ public class Duke {
                     if (input.equals("TTT")) {
                         try {
                             runTicTacToe();
+                            System.out.println("now what would you like to do");
+                            inGame = false;
                         } catch (InvalidTTMoveException e) {
                             throw new RuntimeException(e);
                         }
                     } else if (input.equals("hangman")) {
-                        runHangMan();
+                        hangman.runHangMan();
+                        System.out.println("now what would you like to do");
+                        inGame = false;
                     }
                 } catch (InvalidGameException | NullPointerException e) {
                     ui.println("invalid game");

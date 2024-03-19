@@ -5,7 +5,7 @@ import java.util.Random;
  * The Ui class handles user interface interactions.
  */
 public class Ui {
-    private static final String LINE = "_____________________________________________________________________________";
+    private static final String LINE = "_________________________________________________________________";
     private String[] byeSentences = {
         "AeroCade dismissed. Fly with honor and return victorious.",
         "Departure clearance granted. Execute your aero-maneuvers with expertise.",
@@ -47,17 +47,17 @@ public class Ui {
         println(logo + boeing + LINE +
             "\n              [      Welcome to the AeroCade      ]\n" + LINE);
         println(
-            "                          Choose your game:\n" +
-            "                                   ||                        \n" +
-            "           X  |  -  |  -           ||          _______       \n" +
-            "          ____|_____|____          ||          |     |       \n" +
-            "              |     |              ||          |     @       \n" +
-            "           -  |  O  |  X           ||          |    /|\\     \n" +
-            "          ____|_____|____          ||          |     |       \n" +
-            "              |     |              ||          |    /|\\     \n" +
-            "           -  |  O  |  -           ||        ==============  \n" +
-            "                                   ||                        \n" +
-            "            TIC-TAC-TOE            ||           HANGMAN        " +
+            "              [          Choose your game:        ]\n" +
+            "                                |                        \n" +
+            "        X  |  -  |  -           |          _______       \n" +
+            "       ____|_____|____          |          |     |       \n" +
+            "           |     |              |          |     @       \n" +
+            "        -  |  O  |  X           |          |    /|\\     \n" +
+            "       ____|_____|____          |          |     |       \n" +
+            "           |     |              |          |    /|\\     \n" +
+            "        -  |  O  |  -           |        ==============  \n" +
+            "                                |                        \n" +
+            "         TIC-TAC-TOE            |           HANGMAN        " +
                     "\n\n\nType 'help' for a list of available commands!\n");
     }
 
