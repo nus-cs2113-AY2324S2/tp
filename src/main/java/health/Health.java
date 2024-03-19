@@ -42,6 +42,4 @@ public class Health {
             return Constant.PERIOD;
         }
     }
-
-
 }
