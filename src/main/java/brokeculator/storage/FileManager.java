@@ -3,6 +3,9 @@ package brokeculator.storage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
+import brokeculator.frontend.UI;
+
 import java.io.FileWriter;
 
 public class FileManager {
@@ -21,9 +24,9 @@ public class FileManager {
     public boolean openFile() {
         try {
             if (!this.dataFile.exists()) {
-                printCreatingFileMessage();
                 createDataFile();
             }
+            assert this.dataFile.exists();
             this.scanner = new Scanner(this.dataFile);
             this.hasNoFileErrors = true;
             printDataSavedMessage();
@@ -36,13 +39,10 @@ public class FileManager {
     }
 
     private void printDataLossWarning() {
-        System.out.println("Errors! Your data will not be saved");
-    }
-    private void printCreatingFileMessage() {
-        System.out.println("Creating your data bank...");
+        UI.print("Errors! Your data will not be saved");
     }
     private void printDataSavedMessage() {
-        System.out.println("Data file successfully created!");
+        UI.print("Data file successfully created!");
     }
 
     private void createDataFile() throws Exception {
@@ -51,10 +51,12 @@ public class FileManager {
         if (!isDataDirectoryReady) {
             throw new Exception();
         }
+        assert this.dataFile.getParentFile().exists();
         boolean isDataFileCreated = this.dataFile.createNewFile();
         if (!isDataFileCreated) {
             throw new Exception();
         }
+        assert this.dataFile.exists();
     }
 
     public boolean hasNextLine() {

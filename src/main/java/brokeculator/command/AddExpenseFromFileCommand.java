@@ -1,23 +1,23 @@
 package brokeculator.command;
 
+import brokeculator.dashboard.Dashboard;
 import brokeculator.expense.Expense;
-import brokeculator.expense.ExpenseManager;
+import brokeculator.frontend.UI;
 
 public class AddExpenseFromFileCommand extends Command{
-    private String fileString;
+    private final String fileString;
 
     public AddExpenseFromFileCommand(String fileString) {
         this.fileString = fileString;
     }
 
     @Override
-    public void execute(ExpenseManager expenseManager) {
+    public void execute(Dashboard dashboard) {
         try {
             Expense expense = Expense.getExpenseFromFile(this.fileString);
-            expenseManager.add(expense);
+            dashboard.getExpenseManager().add(expense);
         } catch (Exception e) {
-            // TODO: fix feedback
-            System.out.println("Expense cannot be added");
+            UI.print("Expense cannot be added");
         }
     }
 }

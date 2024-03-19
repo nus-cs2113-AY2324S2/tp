@@ -40,7 +40,7 @@ public class ExpenseManager {
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < expenses.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, expenses.get(i).getStringRepresentation()));
+            sb.append(expenses.get(i).getStringRepresentation());
         }
         return sb.toString();
     }

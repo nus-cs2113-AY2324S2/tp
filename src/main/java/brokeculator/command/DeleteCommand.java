@@ -1,6 +1,6 @@
 package brokeculator.command;
 
-import brokeculator.expense.ExpenseManager;
+import brokeculator.dashboard.Dashboard;
 
 public class DeleteCommand extends Command {
     private int indexToDelete;
@@ -10,8 +10,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(ExpenseManager expenseManager) {
+    public void execute(Dashboard dashboard) {
         //TODO implement proper expense deleting
-        expenseManager.delete(indexToDelete);
+        dashboard.getExpenseManager().delete(indexToDelete);
     }
 }

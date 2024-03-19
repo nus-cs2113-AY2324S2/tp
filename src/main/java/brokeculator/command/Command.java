@@ -1,8 +1,8 @@
 package brokeculator.command;
 
-import brokeculator.expense.ExpenseManager;
+import brokeculator.dashboard.Dashboard;
 
 public abstract class Command {
     public Command() {};
-    public abstract void execute(ExpenseManager expenseManager);
+    public abstract void execute(Dashboard dashboard);
 }

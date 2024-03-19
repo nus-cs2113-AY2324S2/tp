@@ -1,7 +1,5 @@
-package seedu.brokeculator;
+package brokeculator.frontend;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import brokeculator.frontend.UI;
 import org.junit.jupiter.api.Test;
 public class UITest {
     @Test
