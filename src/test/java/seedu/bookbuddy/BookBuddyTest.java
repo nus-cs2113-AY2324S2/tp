@@ -1,12 +1,20 @@
-package seedu.duke;
+package seedu.bookbuddy;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+class BookBuddyTest {
     @Test
     public void sampleTest() {
         assertTrue(true);
     }
+
+
+    @Test
+    void addBook() {
+    }
+
 }
