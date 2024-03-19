@@ -41,6 +41,13 @@ public class UI {
         System.out.println(SEPARATOR);
     }
 
+    public static void printDeleteMessage(Recipe recipe, int recipeListSize) {
+        System.out.println(SEPARATOR);
+        System.out.println("Okay chef! I have deleted this recipe from your recipe book:\n\t" +  recipe.toString() +
+                "\nYou now have " + recipeListSize + " recipes in your recipe book. Keep adding some!");
+        System.out.println(SEPARATOR);
+    }
+
     public void helpCommand(){
         //will add content once we finished discussing the commands
     }
