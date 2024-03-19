@@ -6,11 +6,18 @@ public class Player2113 {
     public static final String SOME_FILE_PATH = "something";
     private Ui ui;
     private QuestionsList questionsList;
+
     private TopicList topicList;
 
     public Player2113(String someFilePath) {
         questionsList = new QuestionsList();
         topicList = new TopicList();
+
+    private Helper helper;
+    public Player2113(String someFilePath) {
+        questionsList = new QuestionsList();
+        helper = new Helper();
+
         if (someFilePath.contentEquals("something")) {
             // TODO: load data from file
             // Add dummy data (for now)
@@ -31,7 +38,8 @@ public class Player2113 {
         ui.sayHi();
         ui.printTopicList(topicList, ui);
         while (ui.isPlaying) {
-            ui.readCommands(ui, questionsList, topicList);
+
+            ui.readCommands(ui, questionsList, helper, topicList);
         }
 
     }
