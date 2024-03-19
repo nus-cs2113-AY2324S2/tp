@@ -14,6 +14,14 @@ public class FoodList {
         this.foods = foods;
     }
 
+    public int size() {
+        return foods.size();
+    }
+
+    public Food get(int i) {
+        return foods.get(i);
+    }
+
     public Food getRandomFood() {
         Random random = new Random();
         int foodIndex = random.nextInt(9);

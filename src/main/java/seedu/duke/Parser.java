@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.exceptions.FlirtForkEmptyException;
 import seedu.duke.exceptions.FlirtForkException;
 
+import java.util.Scanner;
+
 public class Parser {
     private static final String HORIZONTAL = "____________________________________________________________";
 
@@ -50,6 +52,11 @@ public class Parser {
             return new ExitCommand();
         case "help":
             return new HelpCommand();
+        case "list":
+            Ui.listCommand();
+            Scanner scanner = new Scanner(System.in);
+            String optionType = scanner.nextLine().toLowerCase();
+            return new ListOptionsCommand(optionType);
         default:
             throw new FlirtForkException("Love is a language we all speak, but we didn't quite catch that. \n" +
                     "Try again? \n" + HORIZONTAL);
