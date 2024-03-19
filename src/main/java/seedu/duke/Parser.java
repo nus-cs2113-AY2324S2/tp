@@ -11,7 +11,7 @@ public class Parser {
          *
          * Generate problem sets:
          * gen -t 1 -n 2 -d 3
-         * 
+         *
          * Help function:
          * help
          */

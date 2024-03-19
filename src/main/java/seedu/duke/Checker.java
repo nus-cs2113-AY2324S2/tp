@@ -1,23 +1,18 @@
 package seedu.duke;
-import java.util.Scanner;
-import seedu.duke.Problem;
 
-import java.util.ArrayList;
+import java.util.Scanner;
+//import seedu.duke.Problem;
 
 public class Checker {
-    private Double[] userAnswer;
-    private final Test test;
-    private Boolean[] isCorrect;
-    private int correctNumber;
     double accuracy;
     long time;
+    private final Test test;
+    private Boolean[] isCorrect;
+    private Double[] userAnswer;
+    private int correctNumber;
 
-    Boolean checkCorrectness(Problem problem, double answer){
-        return Math.abs(problem.getAnswer() - answer) < 0.01;
-    }
-
-    public Checker(Test test){
-        assert test != null: "Input null test!";
+    public Checker(Test test) {
+        assert test != null : "Input null test!";
         this.userAnswer = new Double[test.getNumber()];
         this.test = test;
         this.isCorrect = new Boolean[test.getNumber()];
@@ -26,22 +21,27 @@ public class Checker {
         this.time = 0;
 
     }
-    void getUserAnswer(){
+
+    Boolean checkCorrectness(Problem problem, double answer) {
+        return Math.abs(problem.getAnswer() - answer) < 0.01;
+    }
+
+    void getUserAnswer() {
         long startTime = System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
-        for(int i=0;i<test.getNumber();i++){
+        for (int i = 0; i < test.getNumber(); i++) {
             Problem problem = test.getProblem().get(i);
             System.out.println(problem.unsolved());
             String userInput = scanner.nextLine();
             double answer = Double.NEGATIVE_INFINITY;
             try {
                 answer = Double.parseDouble(userInput);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid Input, please enter a number");
                 continue;
             }
             userAnswer[i] = answer;
-            if(checkCorrectness(problem, answer)){
+            if (checkCorrectness(problem, answer)) {
                 correctNumber++;
                 isCorrect[i] = true;
             }
@@ -49,11 +49,11 @@ public class Checker {
         }
 
         long endTime = System.currentTimeMillis();
-        accuracy = (double) correctNumber /test.getNumber();
-        this.time = (endTime - startTime)/1000;
+        accuracy = (double) correctNumber / test.getNumber();
+        this.time = (endTime - startTime) / 1000;
     }
 
-    public Boolean[] checkAnswer(){
+    public Boolean[] checkAnswer() {
         return isCorrect;
     }
 
@@ -61,7 +61,11 @@ public class Checker {
         return correctNumber;
     }
 
-    public double getAccuracy(){return accuracy;}
+    public double getAccuracy() {
+        return accuracy;
+    }
 
-    public long getTime(){return time;}
+    public long getTime() {
+        return time;
+    }
 }
