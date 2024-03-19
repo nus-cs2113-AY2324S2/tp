@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Test {
 
     String operators;
-    int  maxDigits;
+    int maxDigits;
     int number;
     ArrayList<Problem> problemList = new ArrayList<>();
 
@@ -17,10 +17,16 @@ public class Test {
         this.number = number;
     }
 
-    public  void addToTest(Problem p){
+    public void addToTest(Problem p) {
         problemList.add(p);
     }
-    public int getNumber(){return number;}
-    public  ArrayList<Problem> getProblem(){return problemList;}
+
+    public int getNumber() {
+        return number;
+    }
+
+    public ArrayList<Problem> getProblem() {
+        return problemList;
+    }
 
 }

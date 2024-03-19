@@ -9,7 +9,7 @@ public class Parser {
          *
          * Generate problem sets:
          * gen -t 1 -n 2 -d 3
-         * 
+         *
          * Help function:
          * help
          */
@@ -23,27 +23,27 @@ public class Parser {
         }
 
         switch (action) {
-            // notice: write your parser function by your own
-            case "": // by default, it will be "gen"
-            case "gen":
-            case "generate":
-                //ProblemGenerator ;
-                ProblemGenerator pb = new ProblemGenerator();
-                Test test = pb.typeChoose();
-                Checker checker = new Checker(test);
-                checker.getUserAnswer();
-                System.out.println("Acc: "+checker.getAccuracy());
-                System.out.println("Spend Time: "+checker.getTime()+"s");
-                break;
-            case "help": 
-                ui.help(command);
-                break;
-            case "exit":
-                ui.exit();
-                break;
-            default:
-                ui.invalidCommand();
-                break;
+        // notice: write your parser function by your own
+        case "": // by default, it will be "gen"
+        case "gen":
+        case "generate":
+            //ProblemGenerator ;
+            ProblemGenerator pb = new ProblemGenerator();
+            Test test = pb.TypeChoose(action);
+            Checker checker = new Checker(test);
+            checker.getUserAnswer();
+            System.out.println("Acc: " + checker.getAccuracy());
+            System.out.println("Spend Time: " + checker.getTime() + "s");
+            break;
+        case "help":
+            ui.help(command);
+            break;
+        case "exit":
+            ui.exit();
+            break;
+        default:
+            ui.invalidCommand();
+            break;
         }
     }
 }
