@@ -8,13 +8,20 @@ import java.util.ArrayList;
 
 import static ui.Ui.printMessageWithoutSepNewLine;
 
-
+/**
+ * Represents the habit tracker which stores all habits.
+ */
 public class HabitTracker {
     private static ArrayList<Habit> habitList = new ArrayList<>();
 
     public HabitTracker() {
     }
 
+    /**
+     * Adds a new habit into habitList.
+     *
+     * @param newHabit The habit to be added.
+     */
     public void addHabit (Habit newHabit) {
         habitList.add(newHabit);
         String addHabitMessage = "Great! You have added a new habit:\n";
@@ -22,6 +29,9 @@ public class HabitTracker {
         Ui.printMessageWithSepNewLine(addHabitMessage);
     }
 
+    /**
+     * List out all habits in habitList.
+     */
     public void listHabits() {
         String listHabitsMessage = "Here is the list of all your habits!\n";
         if (habitList.isEmpty()) {
@@ -34,10 +44,17 @@ public class HabitTracker {
         printMessageWithoutSepNewLine(listHabitsMessage);
     }
 
-    public static boolean isValidHabitID(int taskNumber) {
-        return taskNumber > 0 && taskNumber <= habitList.size();
+    public static boolean isValidHabitID(int habitID) {
+        return habitID > 0 && habitID <= habitList.size();
     }
 
+    /**
+     * Update the habit count for a habit.
+     *
+     * @param habitIDString The string of a habitID to be updated.
+     * @param updatedCount The count to be added to the existing habit count.
+     * @throws HabitException If an invalid habit ID is provided.
+     */
     public void updateHabitCount(String habitIDString, String updatedCount) throws HabitException {
         int habitID;
         try {
