@@ -3,7 +3,7 @@ package seedu.duke;
 // import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
- import java.util.Scanner;
+import java.util.Scanner;
 
 public class ProblemGenerator {
 
@@ -17,18 +17,18 @@ public class ProblemGenerator {
             "generate -t [operators] -n [number] -d [maximum digit] \n";
     Scanner in = new Scanner(System.in);
 
-    public void TypeChoose() {
+    public void typeChoose() {
 
         System.out.println(PROBLEM_FORM);
         String command = in.nextLine();
         HashMap<String, String> parameter = parseCommand(command);
 
-        Generate(parameter);
+        generate(parameter);
 
 
     }
 
-    private void Generate(HashMap<String, String> parameter) {
+    private void generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
@@ -56,7 +56,7 @@ public class ProblemGenerator {
 
         for( int i=0; i<number;i++){
 
-            String desctiption = "";
+            String description = "";
             double answer;
             int max = (int) Math.pow(10,maxDigit);
             int op1 = (int) (Math.random()*max);
@@ -75,18 +75,20 @@ public class ProblemGenerator {
                 answer = op1 * op2;
                 break;
             case("/"):
-                if(op2==0) continue;
+                if(op2==0) {
+                    continue;
+                }
                 answer = (double) op1 / op2;
                 break;
             default:
                 continue;
 
             }
-            desctiption = op1 + tempOperator + op2 + "=";
+            description = op1 + tempOperator + op2 + "=";
 
 
 
-            Problem p = new Problem(desctiption,answer);
+            Problem p = new Problem(description, answer);
             System.out.println((i+1) +". "+ p.unsolved());
             test.addToTest(p);
 
@@ -113,13 +115,13 @@ public class ProblemGenerator {
             }
         }
 
-        DefaultOptions(command, options);
+        defaultOptions(command, options);
 
         return options;
     }
 
 
-    private static void DefaultOptions(String command, HashMap<String, String> options) {
+    private static void defaultOptions(String command, HashMap<String, String> options) {
         if(!command.contains("-t")){
             options.put("operators", DEFAULT_OPERATORS);
 

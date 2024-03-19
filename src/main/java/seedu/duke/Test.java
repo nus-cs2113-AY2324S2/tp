@@ -7,10 +7,10 @@ public class Test {
     String operators;
     int  maxDigits;
     int number;
-    ArrayList<Problem> ProblemList = new ArrayList<>();
+    ArrayList<Problem> problemList = new ArrayList<>();
 
     public Test(String operators, int maxDigits, int number) {
-        ArrayList<Problem> ProblemList = new ArrayList<>();
+        ArrayList<Problem> problemList = new ArrayList<>();
 
         this.operators = operators;
         this.maxDigits = maxDigits;
@@ -18,7 +18,7 @@ public class Test {
     }
 
     public  void addToTest(Problem p){
-        ProblemList.add(p);
+        problemList.add(p);
     }
 
 }

@@ -23,25 +23,24 @@ public class Parser {
         }
 
         switch (action) {
-            // notice: write your parser function by your own
-            case "": // by default, it will be "gen"
-            case "gen":
-            case "generate":
-                //ProblemGenerator ;
-                ProblemGenerator pb = new ProblemGenerator();
-                //pb.TypeChoose(action);
-                pb.TypeChoose();
-                break;
-            case "help": 
-                ui.help(command);
-                break;
-            case "exit":
-                ui.exit();
-                break;
-            default:
-                ui.invalidCommand();
-                break;
+        // notice: write your parser function by your own
+        case "": // by default, it will be "gen"
+        case "gen":
+        case "generate":
+            //ProblemGenerator ;
+            ProblemGenerator pb = new ProblemGenerator();
+            //pb.TypeChoose(action);
+            pb.typeChoose();
+            break;
+        case "help":
+            ui.help(command);
+            break;
+        case "exit":
+            ui.exit();
+            break;
+        default:
+            ui.invalidCommand();
+            break;
         }
     }
-
 }
