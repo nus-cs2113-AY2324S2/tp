@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.HashMap;
 
 public class Meal {
-    private static String name;
+    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
+    private String name;
     private int servingSize;
     private int calories;
     private int carbs;
@@ -11,7 +12,6 @@ public class Meal {
     private int fat;
     private int fiber;
     private int sugar;
-    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
 
     // Constructor with only serving size and meal name
     public Meal(String name, int servingSize) {
@@ -30,53 +30,54 @@ public class Meal {
     // Method to set nutrient values based on meal name
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
-        calories = nutrients[0];
-        carbs = nutrients[1];
-        protein = nutrients[2];
-        fat = nutrients[3];
-        fiber = nutrients[4];
-        sugar = nutrients[5];
+        calories = nutrients[0] * servingSize;
+        carbs = nutrients[1] * servingSize;
+        protein = nutrients[2] * servingSize;
+        fat = nutrients[3] * servingSize;
+        fiber = nutrients[4] * servingSize;
+        sugar = nutrients[5] * servingSize;
     }
 
     // Getter methods
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
     public int getCalories() {
-        return calories * servingSize;
+        return calories;
     }
 
     public int getCarbs() {
-        return carbs * servingSize;
+        return carbs;
     }
 
     public int getProtein() {
-        return protein * servingSize;
+        return protein;
     }
 
     public int getFat() {
-        return fat * servingSize;
+        return fat;
     }
 
     public int getFiber() {
-        return fiber * servingSize;
+        return fiber;
     }
 
     public int getSugar() {
-        return sugar * servingSize;
+        return sugar;
     }
 
     // Method to print all meal info
-    public void infoMeal() {
+    public static void handleInfoMeal(String command) {
+        String name = Parser.parseInfoMeal(command);
+        int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name);
-        System.out.println("Serving Size: " + servingSize);
-        System.out.println("Calories: " + getCalories());
-        System.out.println("Carbs: " + getCarbs());
-        System.out.println("Protein: " + getProtein());
-        System.out.println("Fat: " + getFat());
-        System.out.println("Fiber: " + getFiber());
-        System.out.println("Sugar: " + getSugar());
+        System.out.println("Calories: " + nutrients[0]);
+        System.out.println("Carbs: " + nutrients[1]);
+        System.out.println("Protein: " + nutrients[2]);
+        System.out.println("Fat: " + nutrients[3]);
+        System.out.println("Fiber: " + nutrients[4]);
+        System.out.println("Sugar: " + nutrients[5]);
     }
 
 }

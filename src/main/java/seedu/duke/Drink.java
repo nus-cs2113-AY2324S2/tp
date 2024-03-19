@@ -1,36 +1,49 @@
 package seedu.duke;
 
+import java.util.HashMap;
+
 public class Drink {
+    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int drinkVolume;
-    private int caloriesPerMilliliter;
-    private int carbsPerMilliliter;
-    private int sugarPerMilliliter;
-    private int proteinPerMilliliter;
-    private int fatPerMilliliter;
-    private int sodiumPerMilliliter;
+    private int calories;
+    private int carbs;
+    private int sugar;
+    private int protein;
+    private int fat;
 
-    public Drink(String name, int volume, int calories, int carbs, int protein, int fat, int sugar, int sodium) {
+    public Drink(String name, int volume) {
         this.name = name;
         this.drinkVolume = volume;
-        this.caloriesPerMilliliter = calories;
-        this.carbsPerMilliliter = carbs;
-        this.proteinPerMilliliter = protein;
-        this.fatPerMilliliter = fat;
-        this.sugarPerMilliliter = sugar;
-        this.sodiumPerMilliliter = sodium;
+        setNutrientValues(name);
     }
 
-    public void infoDrink() {
+    // Add nutrient details per 100 milliliter to the static HashMap
+    static {
+        nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2});
+        nutrientDetails.put("lemon tea", new int[]{150, 30, 25, 1, 20});
+        nutrientDetails.put("milk coffee", new int[]{20, 27, 25, 4, 3});
+    }
+
+    private void setNutrientValues(String name) {
+        int[] nutrients = nutrientDetails.get(name);
+        calories = nutrients[0] * drinkVolume / 100;
+        carbs = nutrients[1] * drinkVolume / 100;
+        sugar = nutrients[2] * drinkVolume / 100;
+        protein = nutrients[3] * drinkVolume / 100;
+        fat = nutrients[4] * drinkVolume / 100;
+    }
+
+    public static void handleInfoDrink(String command) {
+        String name = Parser.parseInfoDrink(command);
+        int[] nutrients = nutrientDetails.get(name);
         System.out.println("Drink: " + name);
-        System.out.println("Volume: " + drinkVolume);
-        System.out.println("Calories: " + getCalories());
-        System.out.println("Carbs: " + getCarbs());
+        System.out.println("Calories: " + nutrients[0]);
+        System.out.println("Carbs: " + nutrients[1]);
         // Sugar is part of Carbohydrates
-        System.out.println("    Sugar: " + getSugar());
-        System.out.println("Protein: " + getProtein());
-        System.out.println("Fat: " + getFat());
-        System.out.println("Sodium: " + getSodium());
+        System.out.println("Sugar: " + nutrients[2]);
+        System.out.println("Protein: " + nutrients[3]);
+        System.out.println("Fat: " + nutrients[4]);
     }
 
     public String getName() {
@@ -42,26 +55,22 @@ public class Drink {
     }
 
     public int getCalories() {
-        return caloriesPerMilliliter * drinkVolume;
+        return calories;
     }
 
     public int getCarbs() {
-        return carbsPerMilliliter * drinkVolume;
+        return carbs;
     }
 
     public int getSugar() {
-        return sugarPerMilliliter * drinkVolume;
+        return sugar;
     }
 
     public int getProtein() {
-        return proteinPerMilliliter * drinkVolume;
+        return protein;
     }
 
     public int getFat() {
-        return fatPerMilliliter* drinkVolume;
-    }
-
-    public int getSodium() {
-        return sodiumPerMilliliter * drinkVolume;
+        return fat;
     }
 }

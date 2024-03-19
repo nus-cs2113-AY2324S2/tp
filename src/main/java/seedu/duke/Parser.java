@@ -13,34 +13,44 @@ public class Parser {
     public static int editDrinkIndex;
     public static int editDrinkSize;
     public static int editWaterSize;
+    private User user;
 
-    public static void handleCommand(String command) {
+    public Parser() {
+        this.user = new User();
+    }
+    public void handleCommand(String command) {
         if (command.equals("help")) {
             handleHelp();
         } else if (command.startsWith("ate")) {
-            User.handleMeal(command);
+            user.handleMeal(command);
         } else if (command.startsWith("drink")) {
-            User.handleDrink(command);
-        } else if (command.startsWith("infoMeal")) {
-            //handleInfoMeal(command);
+            user.handleDrink(command);
+        } else if (command.startsWith("water")) {
+            user.handleWater(command);
+        }else if (command.startsWith("infoMeal")) {
+            Meal.handleInfoMeal(command);
         } else if (command.startsWith("infoDrink")) {
-            //handleInfoDrink(command);
+            Drink.handleInfoDrink(command);
         } else if (command.equals("viewCalories")) {
-            User.handleViewCalories();
+            user.handleViewCalories();
         } else if (command.equals("viewCarbohydrates")) {
-            User.handleViewCarbohydrates();
-        } else if (command.equals("viewProteins")) {
-            User.handleViewProteins();
+            user.handleViewCarbohydrates();
+        } else if (command.equals("viewProtein")) {
+            user.handleViewProteins();
+        } else if (command.equals("viewSugar")) {
+            user.handleViewSugar();
+        }else if (command.equals("viewFat")) {
+            user.handleViewFat();
         } else if (command.equals("viewWater")) {
-            User.handleViewWater();
+            user.handleViewWaterIntake();
         } else if (command.equals("viewFiber")) {
-            User.handleViewFiber();
+            user.handleViewFiber();
         } else if (command.equals("listMeals")) {
-            User.handleListMeals();
+            user.handleListMeals();
         } else if (command.equals("listDrinks")) {
-            User.handleListDrinks();
+            user.handleListDrinks();
         } else if (command.equals("listEverything")) {
-            User.handleListEverything();
+            user.handleListEverything();
         } else if (command.startsWith("editMealServingSize")) {
             User.handleEditMealServingSize(command);
         } else if (command.startsWith("editDrinkServingSize")) {
@@ -48,13 +58,11 @@ public class Parser {
         } else if (command.startsWith("editWaterIntake")) {
             //handleEditWaterIntake(command);
         } else if (command.startsWith("deleteMeal")) {
-            User.handleDeleteMeal(command);
+            user.handleDeleteMeal(command);
         } else if (command.startsWith("deleteDrink")) {
-            User.handleDeleteDrink(command);
+            user.handleDeleteDrink(command);
         } else if (command.equals("clear")) {
-            User.handleClear();
-        } else if (command.equals("exit")) {
-            //User.handleExit();
+            user.handleClear();
         } else {
             System.out.println("Invalid command");
         }
@@ -68,7 +76,7 @@ public class Parser {
         System.out.println("Find the information about a certain drink: infoDrink DRINK");
         System.out.println("View daily calories consumed: viewCalories");
         System.out.println("View daily carbohydrates consumed: viewCarbohydrates");
-        System.out.println("View daily proteins consumed: viewProteins");
+        System.out.println("View daily proteins consumed: viewProtein");
         System.out.println("View daily fat consumed: viewFat");
         System.out.println("View daily sugar consumed: viewSugar");
         System.out.println("View daily water consumption: viewWater");

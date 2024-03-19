@@ -1,18 +1,13 @@
 package seedu.duke;
 
 public class Water {
-    private int waterIntake = 0;
+    private int waterIntake;
 
     public Water(int waterIntake) {
-        this.waterIntake += waterIntake;
-    }
-
-    public static void viewWater() {
-        System.out.println("Total water intake: " + waterIntake + " ml");
+        this.waterIntake = waterIntake;
     }
 
     public int getWater() {
         return waterIntake;
     }
-
 }
