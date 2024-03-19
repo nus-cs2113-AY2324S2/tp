@@ -89,6 +89,10 @@ public class Output {
             printLine();
         }
     }
+    public static void printException(Exception e, String message){
+        System.err.println("Exception Caught!\n" + message + "\n\n" + e.getMessage());
+        printLine();
+    }
 
     public static void printWelcomeBanner() {
         printLine();
