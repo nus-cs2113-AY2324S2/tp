@@ -5,6 +5,8 @@ import seedu.voyagers.Trip;
 import seedu.voyagers.TripList;
 import seedu.voyagers.Ui;
 
+import seedu.voyagers.Util;
+
 import java.util.Date;
 
 
@@ -15,12 +17,30 @@ public class AddTripCommand extends Command{
     }
 
     public void execute(TripList trips, Ui ui, Storage storage){
+        System.out.println("Entro a addTripCommand");
+
+        int l = args.length;
+        System.out.println(args.length);
+        for (int i = 0; i < l; i++){
+            System.out.println(args[i]);
+        }
+
         String name = args[0];
-        Date startDate = new Date(args[1]);
-        Date endDate = new Date(args[2]);
+        Date startDate = null;
+        Date endDate = null;
+        try{
+            startDate =  Util.dateFormat.parse(args[1]);
+            endDate =   Util.dateFormat.parse(args[2]);
+        } catch (Exception e){
+            ui.echo("Invalid date format");
+            return;
+        }
+
+
         String location = args[3];
         String description = args[4];
         Trip trip = new Trip(name, startDate, endDate, location, description);
+
 
         try{
             trips.add(trip);
@@ -29,7 +49,6 @@ public class AddTripCommand extends Command{
                     " trips in the list.");
         } catch (Exception e){
             ui.echo(e.getMessage());
-            return;
         }
 
 

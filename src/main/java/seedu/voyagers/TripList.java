@@ -112,6 +112,14 @@ public class TripList {
         return -1;
     }
 
+    public Trip getTrip(String name){
+        int index = findTrip(name);
+        if (index == -1){
+            return null;
+        }
+        return trips.get(index);
+    }
+
     public boolean isTripNameRepeated(String name){
        return findTrip(name) != -1;
     }

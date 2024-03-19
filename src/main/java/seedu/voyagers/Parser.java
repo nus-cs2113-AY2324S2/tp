@@ -25,13 +25,14 @@ public class Parser {
     private static final Date DEFAULT_END = defaultEndCalendar.getTime();
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+
 
 
 
     public static Command parseInput(String input) throws IllegalArgumentException{
         String[] tokens = input.split(" ");
-        if (tokens.length < 2 && !tokens[0].equals("listall")) {
+        if (tokens.length < 2 && !tokens[0].equals("listall") && !tokens[0].equals("exit")
+                && !tokens[0].equals("help")) {
             System.out.println("Insufficient input.");
             throw new IllegalArgumentException("Insufficient input.");
         }
@@ -273,13 +274,14 @@ public class Parser {
             }
         }
 
-
+        System.out.println("Check 1");
         try {
             //check if name has was inputted
             if (name == "-") {
                 System.out.println("You cannot leave name empty when creating a new main trip.");
                 throw new IllegalArgumentException("Name cannot be empty.");
             }
+            System.out.println("Check 2");
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
             //check if only partial info is provided (name must be entered)
@@ -302,8 +304,11 @@ public class Parser {
                     return new EmptyCommand();
                 }
             }
-
-            String args[] = {name, startDate.toString(), endDate.toString(), location, description};
+            System.out.println("Check 3");
+            // print start date in the format yyyy-MM-dd
+            String startDateString = dateFormat.format(startDate);
+            String endDateString = dateFormat.format(endDate);
+            String args[] = {name, startDateString, endDateString, location, description};
             return new AddTripCommand(args);
 
         } catch (ParseException e) {
@@ -312,6 +317,7 @@ public class Parser {
             System.out.println(e.getMessage());
         }
 
+        System.out.println("Check 4");
         return new EmptyCommand();
     }
 
