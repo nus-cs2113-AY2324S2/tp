@@ -70,6 +70,10 @@ public class Ui {
         System.out.println("Medicine has been successfully modified!");
     }
 
+    public void showListCommandMessage() {
+        System.out.println("Your list of medications has been successfully shown!");
+    }
+
     /**
      * Reads user input command.
      * @return The user input command as a String.
@@ -78,8 +82,7 @@ public class Ui {
         return input.nextLine();
     }
 
-    public <T> void printMedsList(List<T> medications, String listName) {
-        System.out.println("Here are the " + listName + " you have to take today: ");
+    public <T> void printMedsList(List<T> medications) {
         for (T medication : medications) {
             int numbering = medications.indexOf(medication) + 1;
             System.out.println("\t" + numbering + ". " + medication);
