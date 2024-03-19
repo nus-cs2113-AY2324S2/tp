@@ -15,6 +15,7 @@ public class DailyMedicationManager {
 
     /**
      * Constructs DailyMedicationManager with a list of DailyMedication
+     *
      * @see DailyMedication
      */
     public DailyMedicationManager() {
@@ -25,6 +26,19 @@ public class DailyMedicationManager {
         //       If does not exist or old list,
         //       populate from MedicationManager
         // TODO: Add @see Storage when implemented
+    }
+
+    /**
+     * Constructs DailyMedicationManager with lines imported from the textfile
+     *
+     * @param lines lines of String read from each row in the textfile
+     */
+    public DailyMedicationManager(List<String> lines) {
+        dailyMedications = new ArrayList<>();
+        for(String line : lines) {
+            DailyMedication dailyMedication = parseImportedLine(line);
+            addDailyMedication(dailyMedication);
+        }
     }
 
     /**
@@ -74,5 +88,23 @@ public class DailyMedicationManager {
     public void printMedications() {
         System.out.println("Here are the Daily Medications you have to take today: ");
         ui.printMedsList(dailyMedications);
+    }
+
+    /**
+     * Separates each row by the separator and add into the DailyMedicationManager
+     * 
+     * @param line each line read from the textfile
+     * @return dailyMedication object to add into the DailyMedicationManager
+     */
+    private DailyMedication parseImportedLine(String line) {
+        String[] fields = line.split("\\|");
+        boolean isTaken = Boolean.parseBoolean(fields[0].trim());
+        DailyMedication dailyMedication = new DailyMedication(fields[1].trim());
+        if (isTaken) {
+            dailyMedication.take();
+        } else {
+            dailyMedication.untake();
+        }
+        return dailyMedication;
     }
 }
