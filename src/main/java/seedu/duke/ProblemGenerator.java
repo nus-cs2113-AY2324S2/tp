@@ -1,8 +1,5 @@
 package seedu.duke;
 
-// import java.util.Random;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,77 +16,43 @@ public class ProblemGenerator {
 
         for (int i = 0; i < tokens.length; i++) {
 
-            switch (tokens[i]) {
-            case "-t":
+            if (tokens[i].equals("-t")) {
                 options.put("operators", tokens[i + 1]);
-                break;
-            case "-n":
+            } else if (tokens[i].equals("-n")) {
                 options.put("number", tokens[i + 1]);
-                break;
-            case "-d":
+            } else if (tokens[i].equals("-d")) {
                 options.put("maximumDigits", tokens[i + 1]);
-                break;
-            default:
-                break;
+
             }
         }
+
         defaultOptions(command, options);
+
         return options;
     }
 
     private static void defaultOptions(String command, HashMap<String, String> options) {
         if (!command.contains("-t")) {
             options.put("operators", DEFAULT_OPERATORS);
+            Ui.missingMessage("operators");
         }
         if (!command.contains("-n")) {
             options.put("number", DEFAULT_NUMBER);
+            Ui.missingMessage("number");
         }
         if (!command.contains("-d")) {
             options.put("maximumDigits", DEFAULT_MAX_DIGITS);
+            Ui.missingMessage("maximumDigits");
         }
+
     }
 
-    public void typeChoose(String command) {
-    public static HashMap<String, String> parseCommand(String command) {
-        HashMap<String, String> options = new HashMap<>();
-        String[] tokens = command.split("\\s+");
-
-        for (int i = 0; i < tokens.length; i++) {
-
-            switch (tokens[i]) {
-            case "-t":
-                options.put("operators", tokens[i + 1]);
-                break;
-            case "-n":
-                options.put("number", tokens[i + 1]);
-                break;
-            case "-d":
-                options.put("maximumDigits", tokens[i + 1]);
-                break;
-            }
-        }
-        defaultOptions(command, options);
-        return options;
-    }
-
-    private static void defaultOptions(String command, HashMap<String, String> options) {
-        if (!command.contains("-t")) {
-            options.put("operators", DEFAULT_OPERATORS);
-        }
-        if (!command.contains("-n")) {
-            options.put("number", DEFAULT_NUMBER);
-        }
-        if (!command.contains("-d")) {
-            options.put("maximumDigits", DEFAULT_MAX_DIGITS);
-        }
-    }
-
-    public void typeChoose(String command) {
+    public Test TypeChoose(String command) {
         HashMap<String, String> parameter = parseCommand(command);
-        generate(parameter);
+        return Generate(parameter);
     }
 
-    private void generate(HashMap<String, String> parameter) {
+    private Test Generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
@@ -154,7 +117,7 @@ public class ProblemGenerator {
 
 
         }
-
+        return test;
     }
 
 

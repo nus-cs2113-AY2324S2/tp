@@ -29,10 +29,14 @@ public class Parser {
         case "generate":
             //ProblemGenerator ;
             ProblemGenerator pb = new ProblemGenerator();
-            pb.typeChoose(action);
+            Test test = pb.TypeChoose(action);
+            Checker checker = new Checker(test);
+            checker.getUserAnswer();
+            System.out.println("Acc: " + checker.getAccuracy());
+            System.out.println("Spend Time: " + checker.getTime() + "s");
             break;
         case "help":
-            ui.help(description);
+            ui.help(command);
             break;
         case "exit":
             ui.exit();
