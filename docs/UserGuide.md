@@ -2,6 +2,17 @@
 
 ## Introduction
 
+This document aims to provide a comprehensive and in-depth guide on how to install, configure and use BinBash. For those who just want to get started right away, head to [Getting Started](#getting-started).
+
+### What's New in BinBash 1.0
+
+Our long awaited first release adds everything you would expect of an inventory management system, including:
+* Adding of items
+* Removing of items
+* Searching for items
+* Listing your entire inventory
+* and more (head to [Features](#features) to find out!)
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Table of Contents](#table-of-contents)
