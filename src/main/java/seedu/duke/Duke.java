@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.InvalidGameException;
+import seedu.duke.exceptions.InvalidTTMoveException;
+
+import static seedu.duke.TicTacToe.runTicTacToe;
 
 public class Duke {
     private static Ui ui = new Ui();
@@ -30,7 +33,13 @@ public class Duke {
                 try {
                     Parser.readGame(input);
                     inGame = true;
-                    // call the game they want
+                    if (input.equals("TTT")) {
+                        try {
+                            runTicTacToe();
+                        } catch (InvalidTTMoveException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 } catch (InvalidGameException e) {
                     System.out.println("invalid game");
                 }
