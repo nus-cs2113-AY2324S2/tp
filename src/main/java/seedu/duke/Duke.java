@@ -20,7 +20,9 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         while(true){
-            Parser parser = new Parser(in.nextLine());
+            String userInput = in.nextLine();
+            Parser parser = new Parser(userInput);
+
             try {
                 parser.handleUserInput();
             } catch (Parser.EndProgramException e) {
