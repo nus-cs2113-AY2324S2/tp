@@ -26,7 +26,7 @@ public class BookBuddy {
     }
 
     public static void printExitMessage() {
-        System.out.println("Thank you for using bookbuddy! Hope to see you again!");
+        System.out.println("Thank you for using BookBuddy! Hope to see you again!");
     }
 
 }
