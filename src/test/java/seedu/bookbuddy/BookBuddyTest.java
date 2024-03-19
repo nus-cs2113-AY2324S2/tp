@@ -28,13 +28,6 @@ class BookBuddyTest {
         assertTrue(true);
     }
 
-//    @Test
-//    public void testPrintWelcomeMessage() {
-//        BookBuddy.printWelcomeMessage();
-//        String expectedOutput = "Hello! We are BookBuddy!\n" + "How can I help you today?\n";
-//        assertEquals(expectedOutput.trim(), outContent.toString().trim());
-//    }
-
     @Test
     public void testPrintWelcomeMessage() {
         BookBuddy.printWelcomeMessage();
