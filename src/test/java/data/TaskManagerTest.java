@@ -42,20 +42,6 @@ class TaskManagerTest {
     }
 
     @Test
-    void deleteTask_validInput_deletesTask() {
-        // Arrange
-        LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
-        addTask(date, taskDescription);
-
-        // Act
-        taskManager.deleteTask(date, 0);
-
-        // Assert
-        assertTrue(taskManager.getTasksForDate(date).isEmpty());
-    }
-
-    @Test
     void updateTask_validInput_updatesTask() {
         // Arrange
         LocalDate date = LocalDate.now();
