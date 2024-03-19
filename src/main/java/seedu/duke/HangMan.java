@@ -23,30 +23,46 @@ public class HangMan {
     }
 
     public void runHangMan() {
-        String userInput;
-        Scanner in = new Scanner(System.in);
-
-        userInput = in.nextLine();
 
         printHangMan();
         printLettersGuessed();
         printWordGuesser();
 
+        System.out.println("Now what is your first guess?");
 
         while (state < 6) {
-            addGuess(userInput);
-            printHangMan();
-            printLettersGuessed();
-            printWordGuesser();
+            String userInput;
+            Scanner in = new Scanner(System.in);
+            userInput = in.nextLine();
+
+            if (userInput.equalsIgnoreCase("quit")) {
+                System.out.println("Thank you!! Hope you had flying good time.");
+                break;
+            }
+            if (!allGuessedLetters.contains(userInput)) {
+                addGuess(userInput);
+                printHangMan();
+                printLettersGuessed();
+                printWordGuesser();
+            } else {
+                System.out.println("you've already guessed this before");
+                System.out.println("now try something else");
+                System.out.println("___________________________________");
+            }
+
             if (!correctGuesses.contains("_")) {
                 System.out.println("Woahhhh you got it!!");
                 break;
             }
-            userInput = in.nextLine();
+            System.out.println("give me your next guess");
         }
-        printHangMan();
-        System.out.println();
-        System.out.println("Oh noo!! It seems you have lost   :( ");
+
+        // once state = 6, game ends in failure.
+        if (state == 6) {
+            printHangMan();
+            System.out.println();
+            System.out.println("Oh noo!! It seems you have lost   :( ");
+        }
     }
     public static int getNumberOfLettersGuessed() {
         return numberOfLettersGuessed;
@@ -177,6 +193,7 @@ public class HangMan {
         return guessType;
     }
     public static void addGuess(String userInput) {
+        System.out.println("Checking to see if [" + userInput + "] is part of the word...");
         int guessType = parseGuess(userInput);
         if (guessType == 1) { // input is a single character
             allGuessedLetters.add(userInput);
@@ -188,13 +205,12 @@ public class HangMan {
                 while (tempWord.indexOf(userInput,lastSearchedIndex) != -1) {
                     lastSearchedIndex = tempWord.indexOf(userInput,lastSearchedIndex);
                     charCorrectGuesses[lastSearchedIndex] = userInput.charAt(0);
+                    lastSearchedIndex++;
                 }
                 correctGuesses = String.valueOf(charCorrectGuesses);
             } else {
                 state += 1;
             }
-        } else if (guessType == 2) {
-            return;
         }
     }
 }
