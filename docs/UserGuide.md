@@ -35,14 +35,18 @@ You can modify the details of an existing trip using the following commands:
 Example:
 
 ```bash
-setname Europe Trip /n European Adventure
+setname /old Europe Trip /new European Adventure
+```
+
+```bash
+setdates /n Europe Trip /start 2024/05/01 /end 2024/07/31
 ```
 
 ### Deleting a Main Trip
 To delete an existing main trip, use the `deletemaintrip` command followed by the trip name.
 
 ```bash
-deletemaintrip Europe Trip
+deletemaintrip /n Europe Trip
 ```
 ### Listing All Trips
 To view a list of all trips along with their details, use the listall command.
