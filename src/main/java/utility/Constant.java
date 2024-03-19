@@ -53,6 +53,8 @@ public class Constant {
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
     public static final String DATE_FLAG = "/date";
+    public static final String START_FLAG = "/start:";
+    public static final String END_FLAG = "/end:";
 
     public static final Integer BMI_PARAMETERS = 4;
     public static final Integer BMI_H_OFFSET = 3;
