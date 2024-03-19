@@ -12,8 +12,14 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Storage {
+
+    /**
+     * Reads the trip file and adds the trips to the list of trips.
+     * @param trips The list of trips to add the trips to.
+     * @param currentDir The current directory of the file.
+     * @param fileName The name of the file to read from.
+     */
     public static void readTripFile(ArrayList<Trip> trips, String currentDir, String fileName) {
 
         Logger logger = Logger.getLogger("Storage");
@@ -49,6 +55,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the trips to the trip file.
+     * @param trips The list of trips to write to the file.
+     * @param tripsCount The number of trips in the list.
+     * @param currentDir The current directory of the file.
+     */
     public static void writeTripFile(ArrayList<Trip> trips, int tripsCount, String currentDir) {
         //local path of data file
         File f = new File(currentDir + "/local-voyagers.txt");
