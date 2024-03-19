@@ -1,16 +1,14 @@
 package gpa;
 
-import java.util.Scanner;
-
+import static seedu.duke.CantVasMain.ui;
 
 public class GPACommand {
 
     public static void processGPACommand() {
-        Scanner scanner = new Scanner(System.in);
 
         while (true) { // Changed to an infinite loop to handle input until "exit" is encountered
             System.out.println("Enter 'GPA' to start or 'exit' to exit to main menu:");
-            String command = scanner.nextLine().trim();
+            String command = ui.getUserCommand();
 
             // Check for exit command immediately
             if ("exit".equalsIgnoreCase(command)) {
@@ -25,7 +23,7 @@ public class GPACommand {
             // If we reach this point, "GPA" was entered
             System.out.println("Enter your current GPA and the number of MCs taken" +
                     " (format: GPA_SCORE /NUMBER_OF_MCS):");
-            String gpaInput = scanner.nextLine();
+            String gpaInput = ui.getUserCommand();
             if ("exit".equalsIgnoreCase(gpaInput.trim())) {
                 System.out.println("Exiting the GPA calculator. Thank you for using it!");
                 break;
@@ -35,7 +33,7 @@ public class GPACommand {
             int totalAccumulatedCredits = Integer.parseInt(gpaInput.split("/")[1].trim());
 
             System.out.println("Enter the number of mods you want to add (format: NUMBER_OF_MODS):");
-            String modsInput = scanner.nextLine();
+            String modsInput = ui.getUserCommand();
             if ("exit".equalsIgnoreCase(modsInput.trim())) {
                 System.out.println("Exiting the GPA calculator. Thank you for using it!");
                 break;
@@ -48,7 +46,7 @@ public class GPACommand {
             for (int i = 0; i < numOfModules; i++) {
                 System.out.println("Enter modular credit and expected grade for module " + (i + 1)
                         + " (format: MODULAR_CREDIT /EXPECTED_GRADE):");
-                String modInput = scanner.nextLine();
+                String modInput = ui.getUserCommand();
                 if ("exit".equalsIgnoreCase(modInput.trim())) {
                     System.out.println("Exiting the GPA calculator. Thank you for using it!");
                     return; // Exit the method entirely, ending the program or going back to the main menu

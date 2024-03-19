@@ -45,10 +45,10 @@ public class UI {
                 + "To delete saved expenses, use format:\n<< e/ del/ <index> >>\n"
                 + "To List saved expenses, use format:\n<< list >>\n"
                 + "To view saved expenses by month, use format:\n<< view -m <mm.yyyy> >>\n"
-                + "To view saved expenses by year, use format:\n<< view -y <yyyy> >> \n"
+                + "To view saved expenses by year, use format:\n<< view -y <yyyy> >>\n"
                 + " -------------------------------------------------------------\n"
-                + "To Use gpa calculator, type 'gpa' to continue \n"
-                + "To end the program, type 'exit' ");
+                + "To Use gpa calculator, type 'gpa' to continue\n"
+                + "To end the program, type 'exit'");
     }
 
 
