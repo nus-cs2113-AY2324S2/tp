@@ -1,4 +1,4 @@
-add /name meatballs /time 12
+add pizza/34/340/eggs/dinner/www.food.com
 list
 delete 1
 list

@@ -2,11 +2,11 @@
 Welcome to Recipe.io!
 -----------------------------
 Enter command:
-[Command entered: add /name meatballs /time 12]
+[Command entered: add pizza/34/340/eggs/dinner/www.food.com]
 -----------------------------
 Enter command:
 [Command entered: list]
-meatballs  / GENERAL
+pizza / DINNER
 -----------------------------
 Enter command:
 [Command entered: delete 1]

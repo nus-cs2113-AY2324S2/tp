@@ -89,6 +89,7 @@ public class RecipeList {
             break;
         case Constants.FIND_BY_NAME:
             findName(userInput);
+            break;
         default:
             System.out.println("try another command");
         }
