@@ -80,4 +80,19 @@ public class Meal {
         System.out.println("Sugar: " + nutrients[5]);
     }
 
+    // Print all the available meals registered in the database
+    public static void printAvailableMeals() {
+        System.out.print("Available meals: ");
+        for (String meal : nutrientDetails.keySet()) {
+            System.out.print(meal);
+            System.out.print(", ");
+        }
+        System.out.print("etc.");
+        System.out.println();
+    }
+
+    public static HashMap<String, int[]> getNutrientDetails() {
+        return nutrientDetails;
+    }
+
 }
