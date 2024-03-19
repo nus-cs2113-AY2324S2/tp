@@ -1,8 +1,5 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Player2113 {
     public static final String SOME_FILE_PATH = "something";
     private Ui ui;

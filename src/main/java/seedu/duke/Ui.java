@@ -2,10 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.CustomException;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-
 
 public class Ui {
     private static final int NEW_LINE = 48;
@@ -15,7 +12,9 @@ public class Ui {
     public TopicList topicList;
     public QuestionListByTopic questionListByTopic;
 
-    public void readCommands(Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic) {
+    public void readCommands(
+            Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic
+    ) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
         printLine();

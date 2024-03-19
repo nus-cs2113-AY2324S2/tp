@@ -9,7 +9,10 @@ public class Parser {
 
 
 
-    public void parseCommand(String command, Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic) throws CustomException {
+    public void parseCommand(
+            String command, Ui ui, QuestionsList questionsList,
+            TopicList topicList, QuestionListByTopic questionListByTopic
+    ) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
@@ -31,7 +34,9 @@ public class Parser {
 
     }
 
-    private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic) throws CustomException {
+    private void processStartCommand (
+            String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic
+    ) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
@@ -48,7 +53,7 @@ public class Parser {
             ui.printChosenTopic(topicNum, topicList, questionListByTopic);
 
         } catch (NumberFormatException e) {
-                throw new CustomException("invalid " + lowerCaseCommand + " parameter");
+            throw new CustomException("invalid " + lowerCaseCommand + " parameter");
         }
 
     }
