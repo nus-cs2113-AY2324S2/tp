@@ -1,9 +1,6 @@
 package seedu.stockpal.exceptions;
 
-public class InvalidCommandException extends Exception {
-    public InvalidCommandException() {
-        super();
-    }
+public class InvalidCommandException extends StockPalException {
 
     public InvalidCommandException(String message) {
         super(message);

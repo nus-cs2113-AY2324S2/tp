@@ -51,8 +51,6 @@ public class StockPal {
                     break;
                 }
                 command.execute();
-            } catch (InvalidCommandException | InvalidFormatException e) {
-                Ui.printToScreen("throw");
             } catch (StockPalException spe) {
                 Ui.printToScreen(spe.getMessage());
             }
