@@ -23,15 +23,10 @@ public class ExpenseManager {
 
     public double summariseExpenses(int beginIndex, int endIndex) {
         double total = 0;
-        ArrayList<Expense> expensesToList;
-        if (endIndex >= expenses.size()) {
-            endIndex = expenses.size();
+        if (endIndex == -1 || endIndex >= expenses.size()) {
+            endIndex = expenses.size() - 1;
         }
-        if (endIndex == -1) {
-            expensesToList = new ArrayList<>(expenses.subList(beginIndex, expenses.size()));
-        } else {
-            expensesToList = new ArrayList<>(expenses.subList(beginIndex, endIndex + 1));
-        }
+        ArrayList<Expense> expensesToList  = new ArrayList<>(expenses.subList(beginIndex, endIndex + 1));
         for (Expense expense : expensesToList) {
             total += expense.getAmount();
         }
