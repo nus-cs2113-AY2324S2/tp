@@ -22,6 +22,11 @@ class TaskManagerTest {
         taskManager = new TaskManager();
     }
 
+    @AfterEach
+    void resetTaskManager() {
+        taskManager = null;
+    }
+
     @Test
     void addTask_validInput_addsTask() {
         // Arrange
