@@ -47,7 +47,12 @@ public class Parser {
             }
             return new FindFavouritesCommand(arguments);
         case "itinerary":
-            return new GenerateItineraryCommand();
+            if (arguments.trim().isEmpty()) {
+                throw new FlirtForkEmptyException();
+            }
+            return new GenerateItineraryCommand(arguments);
+        case "idea":
+            return new GenerateIdeaCommand();
         case "exit":
             return new ExitCommand();
         case "help":
@@ -71,6 +76,8 @@ public class Parser {
             favourite = new Food(parts[0], parts[1], parts[2]);
         } else if ("A".equals(parts[0]) && parts.length >= 2) {
             favourite = new Activity(parts[0], parts[1], parts[2]);
+        } else {
+            assert false; // Throws AssertionError if favourite not created yet
         }
 
         return favourite;

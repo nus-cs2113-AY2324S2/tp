@@ -27,8 +27,13 @@ public class Ui {
     }
 
     public void helpMessage() {
-        System.out.println("To generate a randomised date itinerary, simply send me the following: \n" +
-            "'itinerary'\n\n" +
+        System.out.println(
+            "To take a look at potential restaurants or activities, simply send me the following: \n" +
+            "'list'\n\n" +
+            "To generate a randomised date idea, simply send me the following: \n" +
+            "'idea'\n\n" +
+            "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
+            "'itinerary' [space] '(preferred location)' [space] '(preferred price)'\n\n" +
             "To add food to your favourites, simply send me the following: \n" +
             "'food' [space] '(name of eatery)' [space] '(location)' [space] '(price)'\n\n" +
             "To add an activity to your favourites, simply send me the following: \n" +
@@ -37,15 +42,19 @@ public class Ui {
             "'find' [space] '(keyword)'\n\n" +
             "To list out all your favourites, simply send me the following: \n" +
             "'favourites'\n\n" +
+            "To delete an activity from your favourites, simply send me the following: \n" +
+            "'delete' [space] '(index of entry)'\n\n" +            
             "To exit the program, simply send me the following: \n" +
             "'exit'\n\n" +
+
             "LEGEND (prices):\n" +
             "C: Cheap\n" +
             "B: Budget\n" +
             "A: Affordable\n" +
             "P: Pricey\n" +
             "S: Special Ocassions Only\n\n" +
-            "LEGEND (areas):\n" +
+
+            "LEGEND (locations):\n" +
             "E: East\n" +
             "W: West\n" +
             "C: Central\n" +
