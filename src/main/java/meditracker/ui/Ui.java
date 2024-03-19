@@ -70,6 +70,14 @@ public class Ui {
         System.out.println("Medicine has been successfully modified!");
     }
 
+    public void showListCommandMessage() {
+        System.out.println("Your list of medications has been successfully shown!");
+    }
+
+    public void showDeleteCommandMessage() {
+        System.out.println("Medicine has been successfully deleted");
+    }
+
     public void showTakeCommandMessage() {
         System.out.println("Medicine has been successfully taken");
     }
@@ -86,8 +94,7 @@ public class Ui {
         return input.nextLine();
     }
 
-    public <T> void printMedsList(List<T> medications, String listName) {
-        System.out.println("Here are the " + listName + " you have to take today: ");
+    public <T> void printMedsList(List<T> medications) {
         for (T medication : medications) {
             int numbering = medications.indexOf(medication) + 1;
             System.out.println("\t" + numbering + ". " + medication);

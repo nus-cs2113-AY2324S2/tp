@@ -13,6 +13,7 @@ Ideas and structure for the User Guide: https://se-education.org/addressbook-lev
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 - TODO: Design and Implementation of the Logging Functionaity (SX)
+- TODO: Design and Implementing of the Load and Save functionality (SX)
 
 
 ## Product scope
@@ -30,9 +31,11 @@ Ideas and structure for the User Guide: https://se-education.org/addressbook-lev
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|multipurpose user|Store data locally|Use the application and see the data even when offline between sessions|
 
 ## Non-Functional Requirements
 {Give non-functional requirements}
+- The user's program data should be persistent between program sessions.
 
 ## Glossary
 

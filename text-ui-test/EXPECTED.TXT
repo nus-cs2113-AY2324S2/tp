@@ -15,4 +15,6 @@ Medicine has been successfully added!
 ____________________________________________________________
 Medicine has been successfully modified!
 ____________________________________________________________
+Medicine has been successfully deleted
+____________________________________________________________
 Thank you for using MediTracker. Hope to see you again!
