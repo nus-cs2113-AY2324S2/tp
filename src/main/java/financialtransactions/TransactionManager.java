@@ -25,14 +25,13 @@ public class TransactionManager {
         return false;
     }
 
-    public boolean removeTransaction(int index) {
+    public boolean removeTransaction(int index) throws Exception{
         transactionList.removeTransactionIndex(index);
         Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
-        String transactionType = transactionRemoved.getTransactionType();
-        if (transactionType.equals("I")) {
+        if (transactionRemoved instanceof Inflow) {
             return inflows.removeTransactionIndex(index);
         }
-        if (transactionType.equals("O")){
+        if (transactionRemoved instanceof Outflow){
             return outflows.removeTransactionIndex(index);
         }
         return false;
@@ -49,31 +48,31 @@ public class TransactionManager {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
     }
 
-    public void showLastNTransactions(int n) {
+    public String showLastNTransactions(int n) throws Exception{
         int listSize = transactionList.getTransactionListSize();
         if (n > listSize) {
-            return;
+            throw new Exception("Invalid index");
         }
         int index = 1;
-
-        System.out.println("Inflows:\nTransactions:");
+        String returnedText = "Inflows:\nTransactions:";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Inflow) {
-                System.out.println(index + ") " + transactionList.getNthTransaction(i).toString());
+                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
                 index++;
             }
         }
 
         index = 1;
-        System.out.println("\nOutflows:\nTransactions:");
+        returnedText += "\nOutflows:\nTransactions:";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Outflow) {
-                System.out.println(index + ") " + transactionList.getNthTransaction(i).toString());
+                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
                 index++;
             }
         }
+        return returnedText;
     }
 
     public String toSave() {

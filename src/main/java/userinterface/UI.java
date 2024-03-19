@@ -1,4 +1,4 @@
-package userinteraction;
+package userinterface;
 
 import java.util.Scanner;
 

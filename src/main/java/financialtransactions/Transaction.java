@@ -11,7 +11,6 @@ public abstract class Transaction<T> {
     protected double amount;
     protected BaseDate date;
     protected T category;
-    protected String transactionType; // Indicates type of task, either "O" for outflow or "I" for inflow
 
     public Transaction(String name, double amount, String date) {
         this.name = name;
@@ -29,10 +28,6 @@ public abstract class Transaction<T> {
 
     public double getAmount() {
         return amount;
-    }
-
-    public String getTransactionType() {
-        return this.transactionType;
     }
 
     public T getCategory() {

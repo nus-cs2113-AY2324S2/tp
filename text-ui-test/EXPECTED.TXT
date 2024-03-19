@@ -1,13 +1,15 @@
 Welcome. In order to login, type your command in the format:
 login u/USERNAME p/PASSWORD
+username: 
+password: 
 Password is correct. You are now logged in
 Ok. Added inflow
 Ok. Added outflow
 Ok. Added inflow
 Inflows:
-Transactions:
-1) Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
+Transactions:1)  Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
 
 Outflows:
-Transactions:
-1) Name: Rent, Amount: -1500.00, Date: Jun 23 2023 06:00PM
+Transactions:1)  Name: Rent, Amount: -1500.00, Date: Jun 23 2023 06:00PM
+
+Exiting application

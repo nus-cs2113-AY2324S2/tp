@@ -13,7 +13,10 @@ public class TransactionList<T extends Transaction<?>> {
         return this.transactionList.size();
     }
 
-    public T getNthTransaction(int n) {
+    public T getNthTransaction(int n) throws Exception{
+        if(n >= this.transactionList.size()){
+            throw new Exception("Invalid index");
+        }
         return this.transactionList.get(n);
     }
 
