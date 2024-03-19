@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 
 class BookListTest {
@@ -34,7 +36,8 @@ class BookListTest {
         testBookList.printAllBooks();
 
         String expectedOutput = "All books:\n1. [U] Harry Potter\n";
-        assertEquals(expectedOutput, outContent.toString());
+        String normalizedActualOutput = outContent.toString().replace("\r\n", "\n");
+        assertEquals(expectedOutput.trim(), normalizedActualOutput.trim());
 
         System.setOut(System.out);
     }
