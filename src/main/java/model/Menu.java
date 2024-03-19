@@ -17,12 +17,10 @@ import static model.SetMenu.Lunch;
 import static model.SetMenu.Dinner;
 
 public class Menu implements ItemManager {
+    private static final Logger logr = Logger.getLogger("MenuLogger");
     private final ArrayList<MenuItem> menuItemList = new ArrayList<>();
 
     private final String menuID;
-
-    private static final Logger logr = Logger.getLogger("MenuLogger");
-
 
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
@@ -61,7 +59,8 @@ public class Menu implements ItemManager {
             this.menuItemList.remove(menuItemNum - 1);
 
         } catch (IndexOutOfBoundsException e) {
-            logr.log(Level.SEVERE, "You tried removing an item belonging to an index outside the valid range of the ArrayList",e);
+            logr.log(Level.SEVERE, "You tried removing an item belonging to an index " +
+                    "outside the valid range of the ArrayList",e);
         }
     }
 
