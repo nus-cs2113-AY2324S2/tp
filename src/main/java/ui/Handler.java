@@ -185,18 +185,32 @@ public class Handler {
         Output.printLatestRun();
     }
 
+    /**
+     * Handles user input related to health data. Parses the user input to determine
+     * the type of health data and processes it accordingly.
+     *
+     * @param userInput A string containing health data information of user.
+     */
     public static void handleHealth(String userInput){
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(Constant.BMI)){
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
-                if (bmiDetails[0].isEmpty() || bmiDetails[1].isEmpty() || bmiDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                if (bmiDetails[0].isEmpty()
+                        || bmiDetails[1].isEmpty()
+                        || bmiDetails[2].isEmpty()
+                        || bmiDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
                 }
-                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2]);
+                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
                 HealthList.addBmi(newBmi);
-                System.out.println("Added: bmi | " + bmiDetails[1] + " | " + bmiDetails[2]);
+                System.out.println(Constant.BMI_ADDED_MESSAGE_PREFIX
+                        + bmiDetails[1]
+                        + Constant.LINE
+                        + bmiDetails[2]
+                        + Constant.LINE
+                        + bmiDetails[3]);
                 System.out.println(newBmi);
             } else if (typeOfHealth.equals(Constant.PERIOD)){
                 // Yet to implement
