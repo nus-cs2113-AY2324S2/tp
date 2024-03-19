@@ -75,7 +75,7 @@ public class Parser {
                     ShowGoalsCommand showGoalsCommand = new ShowGoalsCommand();
                     showGoalsCommand.execute();
                 } else {
-                    System.out.println("Hello!\n");
+                    System.out.println("Invalid command!\n");
                 }
             } else if (input.startsWith("set goal")) {
                 // Handle setting goals
