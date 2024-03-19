@@ -4,32 +4,51 @@ package seedu.duke;
 import com.bethecoder.ascii_table.ASCIITable;
 import seedu.duke.exceptions.CustomException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 public class Ui {
     private static final int NEW_LINE = 48;
     public boolean isPlaying = true;
 
-    public void readCommands(Ui ui, QuestionsList questionsList, Helper helper) {
+    public boolean hasStartedGame = false;
+    public TopicList topicList;
+
+    public void readCommands(Ui ui, QuestionsList questionsList, Helper helper, TopicList topicList) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
         printLine();
 
         while(isPlaying) {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, helper);
+                parser.parseCommand(command, ui, questionsList, helper, topicList);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
         }
+
         sayBye();
     }
 
     private void askForInput() {
         System.out.println("Input a command player! // TODO: show possible commands"); // TODO
+    }
+
+    public void printTopicList(TopicList topicList, Ui ui){
+        int topicListSize = topicList.getSize();
+        System.out.println("Here are the topics in CS2113: ");
+        for (int index = 0; index < topicListSize; index++) {
+            System.out.println((index + 1) + ". " + topicList.getTopic(index));
+        }
+        System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
+    }
+
+    public void printChosenTopic(int topicNum, TopicList topicList){
+        System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
     }
 
     public void printOneSolution(int questionNum, String solution) {
@@ -63,6 +82,9 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Hello " + in.nextLine());
+        printLine();
     }
 
     public void sayBye() {
