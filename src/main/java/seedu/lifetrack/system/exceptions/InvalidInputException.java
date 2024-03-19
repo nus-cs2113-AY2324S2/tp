@@ -1,4 +1,4 @@
-package seedu.lifetrack.exceptions;
+package seedu.lifetrack.system.exceptions;
 
 public class InvalidInputException extends Exception {
 

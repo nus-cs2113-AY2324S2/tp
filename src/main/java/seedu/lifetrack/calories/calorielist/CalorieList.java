@@ -1,17 +1,17 @@
-package seedu.lifetrack.calorielist;
+package seedu.lifetrack.calories.calorielist;
 
-import static seedu.lifetrack.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
 
-import seedu.lifetrack.activity.Activity;
+import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
-import seedu.lifetrack.exceptions.InvalidInputException;
+import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
 
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    final int SIZE_OF_DELETE = 7;
+    private final int SIZE_OF_DELETE = 7;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -28,14 +28,13 @@ public class CalorieList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
-            if(index > calorieArrayList.size()) {
-                System.out.println("Sorry, this index is out of out of range. Please enter a valid index.");
-                return;
-            }
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer.");
+            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
+                    "within the size of the list.");
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid index!");
         }
     }
 

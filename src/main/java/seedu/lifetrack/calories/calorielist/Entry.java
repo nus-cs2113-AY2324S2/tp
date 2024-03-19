@@ -1,6 +1,6 @@
-package seedu.lifetrack.calorielist;
+package seedu.lifetrack.calories.calorielist;
 
-import seedu.lifetrack.activity.Activity;
+import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
 
 public class Entry {
