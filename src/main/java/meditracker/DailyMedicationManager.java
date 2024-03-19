@@ -28,6 +28,18 @@ public class DailyMedicationManager {
     }
 
     /**
+     * Constructs DailyMedicationManager with lines imported from the textfile
+     * @param lines lines of String read from each row in the textfile
+     */
+    public DailyMedicationManager(List<String> lines) {
+        dailyMedications = new ArrayList<>();
+        for(String line : lines) {
+            DailyMedication dailyMedication = parseImportedLine(line);
+            addDailyMedication(dailyMedication);
+        }
+    }
+
+    /**
      * Adds a DailyMedication to the list of DailyMedication
      *
      * @param dailyMedication DailyMedication to be added to the list
@@ -73,5 +85,22 @@ public class DailyMedicationManager {
 
     public void printMedications() {
         ui.printMedsList(dailyMedications, "Daily Medications");
+    }
+
+    /**
+     * Separates each row by the separator and add into the DailyMedicationManager
+     * @param line each line read from the textfile
+     * @return dailyMedication object to add into the DailyMedicationManager
+     */
+    private DailyMedication parseImportedLine(String line) {
+        String[] fields = line.split("\\|");
+        boolean isTaken = Boolean.parseBoolean(fields[0].trim());
+        DailyMedication dailyMedication = new DailyMedication(fields[1].trim());
+        if (isTaken) {
+            dailyMedication.take();
+        } else {
+            dailyMedication.untake();
+        }
+        return dailyMedication;
     }
 }
