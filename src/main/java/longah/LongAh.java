@@ -3,7 +3,10 @@ package longah;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Level;
 
 import longah.node.Group;
 import longah.util.MemberList;
