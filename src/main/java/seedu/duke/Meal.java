@@ -69,6 +69,10 @@ public class Meal {
         return sugar;
     }
 
+    public int getServingSize() {
+        return servingSize;
+    }
+
     // Method to print all meal info
     public static void handleInfoMeal(String command) throws UnregisteredMealException {
         String name = Parser.parseInfoMeal(command);

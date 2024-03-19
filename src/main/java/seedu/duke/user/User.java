@@ -10,6 +10,7 @@ import seedu.duke.exception.IncompleteMealException;
 import seedu.duke.exception.IncompleteWaterException;
 import seedu.duke.exception.UnregisteredDrinkException;
 import seedu.duke.exception.UnregisteredMealException;
+import seedu.duke.exception.invalidIndexException;
 
 import java.util.ArrayList;
 
@@ -91,7 +92,7 @@ public class User {
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
-    public void handleViewFiber() {
+    public static void handleViewFiber() {
         int fibreCount = 0;
         for (Meal meal: mealList) {
             fibreCount += meal.getFiber();
@@ -174,8 +175,11 @@ public class User {
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
 
-    public static void handleEditDrinkServingSize(String command) {
+    public static void handleEditDrinkServingSize(String command) throws invalidIndexException {
         Parser.parseEditDrink(command);
+        if (Parser.editDrinkIndex >= drinkList.size()) {
+            throw new invalidIndexException();
+        }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
         Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
