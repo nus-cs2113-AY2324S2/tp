@@ -3,6 +3,9 @@ package seedu.stockpal.commands;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.ui.Ui;
 
+import static seedu.stockpal.common.Messages.MESSAGE_EMPTY_LIST;
+import static seedu.stockpal.ui.Ui.printToScreen;
+
 public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
@@ -19,7 +22,7 @@ public class ListCommand extends ListActionCommand {
     @Override
     public void execute() {
         if (productList.isEmpty()) {
-            System.out.println("ProductList is empty");
+            printToScreen(MESSAGE_EMPTY_LIST);
             return;
         }
 

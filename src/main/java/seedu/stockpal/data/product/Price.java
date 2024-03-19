@@ -20,9 +20,9 @@ public class Price implements CommandParameter {
     }
     @Override
     public String toString() {
-        return "Price: " + ((price == null)
+        return "Price: " + (this.isNull()
                 ? "[X]"
-                : String.format("%.2f", price));
+                : String.format("$%.2f", price));
     }
 
     /**

@@ -31,7 +31,6 @@ public class ListCommandTest {
         ListCommand command = new ListCommand(emptyProductList);
         command.execute();
         String expected = "ProductList is empty\n".trim();
-        //System.out.println(output);
         assertEquals(expected, output.toString().trim());
     }
 }

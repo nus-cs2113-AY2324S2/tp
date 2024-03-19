@@ -50,15 +50,10 @@ public final class Ui {
     }
 
     public static void printListTasks(ProductList products) {
-        for (int i = 0; i < products.getSize(); i ++) {
+        for (int i = 0; i < products.getSize(); i++ ) {
             Product product = products.get(i);
             System.out.println((i + 1) + ". " + product);
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(product.getPid());
-            System.out.println(product.getQuantity());
-            System.out.println(product.getPrice());
-            System.out.println(product.getDescription());
-            System.out.println(HORIZONTAL_LINE);
+            printToScreen(HORIZONTAL_LINE);
         }
     }
 

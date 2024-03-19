@@ -80,7 +80,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "" + this.name;
+        String separator = "  |  ";
+        return (this.pid + separator + this.name + separator + this.quantity + separator + this.price
+                + System.lineSeparator() + this.description);
     }
 
     /**
