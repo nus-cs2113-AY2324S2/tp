@@ -6,6 +6,7 @@ import supertracker.command.Command;
 import supertracker.command.InvalidCommand;
 import supertracker.command.NewCommand;
 import supertracker.command.UpdateCommand;
+import supertracker.command.QuitCommand;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
@@ -48,7 +49,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_validDeleteCommandInput_newCommand() throws TrackerException {
+    public void parseCommand_validDeleteCommandInput_deleteCommand() throws TrackerException {
 
         Command newItem = Parser.parseCommand("new n/strawberry q/12 p/2.2");
         newItem.execute();
@@ -68,5 +69,13 @@ public class ParserTest {
             Command resultCommand = Parser.parseCommand(input);
             assertInstanceOf(InvalidCommand.class, resultCommand);
         }
+    }
+    @Test
+    public void parseCommand_validQuitCommandInput_quitCommand() throws TrackerException {
+
+        String input = "quit";
+        Command resultCommand = Parser.parseCommand(input);
+
+        assertInstanceOf(QuitCommand.class, resultCommand);
     }
 }
