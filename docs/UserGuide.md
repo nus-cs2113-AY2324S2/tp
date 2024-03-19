@@ -40,6 +40,13 @@ can make the most out of BinBash. Let's get your inventory organized efficiently
 
 ## How to Use this Guide
 
+Though we make no assumptions on your technical familiarity, it would help if this isn't your first time seeing a command prompt.
+
+Throughout the course of this guide we will describe the various inventory management capabilities BinBash is capable of, and how you might perform them using keyboard typed commands.
+The format and expected outputs of these commands will be enumerated in turn. Don't worry if you can't get the hang of them immediately! We'll provide some concrete examples to better illustrate their use cases.
+
+If you consider yourself a power user, we feel it is self-explanatory to jump to the [Command Summary](#command-summary).
+
 ## Getting Started
 
 To run BinBash, ensure that your Computer meets the following minimum system requirements:
