@@ -15,10 +15,10 @@ To List saved expenses, use format:
 To view saved expenses by month, use format:
 << view -m <mm.yyyy> >>
 To view saved expenses by year, use format:
-<< view -y <yyyy> >>
+<< view -y <yyyy> >> 
  -------------------------------------------------------------
-To Use gpa calculator, type 'gpa' to continue
-To end the program, type 'exit'
+To Use gpa calculator, type 'gpa' to continue 
+To end the program, type 'exit' 
 CantVas Help
 To input expenses, use format:
 << e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
@@ -29,10 +29,10 @@ To List saved expenses, use format:
 To view saved expenses by month, use format:
 << view -m <mm.yyyy> >>
 To view saved expenses by year, use format:
-<< view -y <yyyy> >>
+<< view -y <yyyy> >> 
  -------------------------------------------------------------
-To Use gpa calculator, type 'gpa' to continue
-To end the program, type 'exit'
+To Use gpa calculator, type 'gpa' to continue 
+To end the program, type 'exit' 
 Expenditure added successfully.
 Expenditure added successfully.
 Expenditure added successfully.
@@ -50,8 +50,14 @@ Expenses for the year 2011:
 Current Expenses:
 1. testing | Cost: $3.0 | date: 11.11.2011
 2. testing | Cost: $900.0 | date: 11.11.2011
+<<<<<<< HEAD
 I have cleared the whole list!
 No expenses to display.
+=======
+I have removed everything in the list
+Current Expenses:
+1. testing | Cost: $900.0 | date: 11.11.2011
+>>>>>>> 8d35c16 (bug fix)
 CantVas Help
 To input expenses, use format:
 << e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
@@ -62,10 +68,10 @@ To List saved expenses, use format:
 To view saved expenses by month, use format:
 << view -m <mm.yyyy> >>
 To view saved expenses by year, use format:
-<< view -y <yyyy> >>
+<< view -y <yyyy> >> 
  -------------------------------------------------------------
-To Use gpa calculator, type 'gpa' to continue
-To end the program, type 'exit'
+To Use gpa calculator, type 'gpa' to continue 
+To end the program, type 'exit' 
 Enter 'GPA' to start or 'exit' to exit to main menu:
 Enter your current GPA and the number of MCs taken (format: GPA_SCORE /NUMBER_OF_MCS):
 Enter the number of mods you want to add (format: NUMBER_OF_MODS):
