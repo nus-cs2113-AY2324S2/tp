@@ -60,14 +60,18 @@ public class TicTacToe extends Game {
     }
 
     public static void runTicTacToe() throws InvalidTTMoveException {
+        for (int i = 0; i < 9; i++) {
+            board[i] = " ";
+        }
         Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
+        String line = " ";
         while (checkWinner().equals("unending") || line.equals("exit")) {
-            readTTMove(line);
-            board[Integer.parseInt(line) + 1] = "X";
             printBoard();
             line = in.nextLine();
+            readTTMove(line);
+            board[Integer.parseInt(line) - 1] = "X";
         }
+        printBoard();
         System.out.println("Thank you for playing. See you next time!");
     }
 }
