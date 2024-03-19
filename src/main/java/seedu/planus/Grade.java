@@ -12,8 +12,7 @@ public class Grade {
     }
 
     public Grade(String letterGrade) {
-        this.letterGrade = letterGrade;
-        setNumberGrade(letterGrade);
+        setLetterGrade(letterGrade);
     }
 
     public String getLetterGrade() {
@@ -22,6 +21,11 @@ public class Grade {
 
     public void setLetterGrade(String letterGrade) {
         this.letterGrade = letterGrade;
+        setNumberGrade(letterGrade);
+
+        if (numberGrade == -1) {
+            this.letterGrade = null;
+        }
     }
 
     public double getNumberGrade() {
@@ -34,6 +38,11 @@ public class Grade {
      * @param letterGrade Grade entered in letter form
      */
     private void setNumberGrade(String letterGrade) {
+        if (letterGrade == null) {
+            this.numberGrade = -1;
+            return;
+        }
+
         switch(letterGrade) {
         case "A+":
         case "A":

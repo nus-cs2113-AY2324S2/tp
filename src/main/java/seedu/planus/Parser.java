@@ -17,73 +17,150 @@ public class Parser {
      * @param timetable The timetable to be modified.
      * @return A boolean indicating whether the application should exit.
      */
-    public static boolean parseCommand(String line, Timetable timetable) {
+    public static boolean parseCommand(String line, Timetable timetable) throws Exception {
         String[] words = line.split(" ");
         String[] yearAndTerm;
         int year;
         int term;
 
-        switch(words[0]) {
+        String commandWord;
+        try {
+            commandWord = words[0].toLowerCase();
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            throw new Exception(Ui.INVALID_COMMAND);
+        }
+        switch(commandWord) {
         case "init":
-            timetable = Storage.loadTimetable(words[1]);
+            try {
+                timetable = Storage.loadTimetable(words[1]);
+                Storage.writeToFile(timetable);
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new Exception(Ui.MISSING_MAJOR);
+            }
             return false;
         case "add":
-            if (Objects.equals(words[1], "course")) {
+            String targetAdded;
+            try {
+                targetAdded = words[1];
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new Exception(Ui.INVALID_COMMAND);
+            }
+            if (targetAdded.equalsIgnoreCase("course")) {
                 Course newCourse;
-                String[] courseCodeAndYearAndTerms = words[2].split("/y", 2);
-                String courseCode = courseCodeAndYearAndTerms[0].trim();
+                String[] courseCodeAndYearAndTerms;
+                try {
+                    courseCodeAndYearAndTerms = words[2].split("y/", 2);
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_ADD_COURSE);
+                }
+                String courseCode;
+                try {
+                    courseCode = courseCodeAndYearAndTerms[0].trim();
+                    yearAndTerm = courseCodeAndYearAndTerms[1].split("t/", 2);
+                    year = Integer.parseInt(yearAndTerm[0].trim());
+                    term = Integer.parseInt(yearAndTerm[1].trim());
+                } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_ADD_COURSE);
+                }
                 String courseName = "userAdded";
-                yearAndTerm = courseCodeAndYearAndTerms[1].split("/t", 2);
-                year = Integer.parseInt(yearAndTerm[0].trim());
-                term = Integer.parseInt(yearAndTerm[1].trim());
                 newCourse = new Course(courseCode, courseName, year, term);
                 try {
                     timetable.addCourse(newCourse);
+                    Storage.writeToFile(timetable);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    throw new Exception(e.getMessage());
                 }
-            } else if (Objects.equals(words[1], "grade")) {
-                timetable.addGrade(words[2], words[3]);
+            } else if (targetAdded.equalsIgnoreCase("grade")) {
+                try {
+                    timetable.addGrade(words[2], words[3]);
+                    Storage.writeToFile(timetable);
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_ADD_GRADE);
+                }
+            } else {
+                throw new Exception(Ui.INVALID_ADD);
             }
             return false;
         case "rm":
-            if (Objects.equals(words[1], "course")) {
-                timetable.removeCourse(words[2]);
-            } else if (Objects.equals(words[1], "grade")) {
-                timetable.removeGrade(words[2]);
+            String targetRemoved;
+            try {
+                targetRemoved = words[1];
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new Exception(Ui.INVALID_COMMAND);
+            }
+            if (targetRemoved.equalsIgnoreCase("course")) {
+                try {
+                    timetable.removeCourse(words[2]);
+                    Storage.writeToFile(timetable);
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_REMOVE_COURSE);
+                }
+            } else if (targetRemoved.equalsIgnoreCase("grade")) {
+                try {
+                    timetable.removeGrade(words[2]);
+                    Storage.writeToFile(timetable);
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_REMOVE_GRADE);
+                }
+            } else {
+                throw new Exception(Ui.INVALID_REMOVE);
             }
             return false;
         case "change":
-            timetable.addGrade(words[2], words[3]);
+            try {
+                timetable.addGrade(words[2], words[3]);
+                Storage.writeToFile(timetable);
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new Exception(Ui.INVALID_CHANGE_GRADE);
+            }
             return false;
         case "check":
-            if (words[1].equals("grade")) {
-                if ((words.length == 4) && words[3].contains("t/")) {
-                    year = Integer.parseInt(words[2]);
-                    term = Integer.parseInt(words[3].split("t/", 1)[0].trim());
-                    System.out.println(timetable.checkGrade(year, term));
-                } else if (words.length == 3) {
-                    year = Integer.parseInt(words[2]);
-                    System.out.println(timetable.checkGrade(year));
-                } else if (words.length == 2) {
-                    System.out.println(timetable.checkGrade());
+            if (words.length == 1) {
+                System.out.println(timetable.checkGrade());
+            } else if (words.length == 2) {
+                try {
+                    year = Integer.parseInt(words[1].substring("y/".length()));
+                } catch (NumberFormatException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_CHECK_YEAR_GRADE);
                 }
+                System.out.println(timetable.checkGrade(year));
+            } else {
+                try {
+                    year = Integer.parseInt(words[1].substring("y/".length()));
+                    term = Integer.parseInt(words[2].substring("t/".length()));
+                } catch (NumberFormatException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_CHECK_TERM_GRADE);
+                }
+                System.out.println(timetable.checkGrade(year, term));
             }
             return false;
         case "view":
             if (words.length == 1) {
                 System.out.println(timetable.getPlan());
-                return false;
+            } else if (words.length == 2) {
+                try {
+                    year = Integer.parseInt(words[1].substring("y/".length()));
+                } catch (NumberFormatException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_VIEW_YEAR_PLAN);
+                }
+                System.out.println(timetable.getPlan(year));
             } else {
-                yearAndTerm = words[1].split("/y",2);
-                year = Integer.parseInt(yearAndTerm[0].trim());
-                term = Integer.parseInt(yearAndTerm[1].trim());
-                timetable.getPlan(year,term);
-                return false;
+                try {
+                    year = Integer.parseInt(words[1].substring("y/".length()));
+                    term = Integer.parseInt(words[2].substring("t/".length()));
+                } catch (NumberFormatException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_VIEW_TERM_PLAN);
+                }
+                System.out.println(timetable.getPlan(year, term));
             }
+            return false;
+        case "help":
+            Ui.printHelp();
+            return false;
         case "bye":
             return true;
+        default:
+            throw new Exception(Ui.INVALID_COMMAND);
         }
-        return false;
     }
 }
