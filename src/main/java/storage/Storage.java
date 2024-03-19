@@ -36,6 +36,7 @@ public class Storage {
             createNewFile();
             return expenses;
         }
+        assert file.exists() : "file should exist" ;
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
