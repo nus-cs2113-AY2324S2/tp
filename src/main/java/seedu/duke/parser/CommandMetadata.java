@@ -38,8 +38,12 @@ public class CommandMetadata {
     Map<String, String> getCommandArguments(Matcher matcher) {
         Map<String, String> arguments = new HashMap<>();
 
-        for (int i = 0; i < groupArguments.length; i++) {
-            arguments.put(groupArguments[i], matcher.group(groupArguments[i]).toUpperCase());
+        for (String groupArgument : groupArguments) {
+            String argument = matcher.group(groupArgument);
+            if (groupArgument.equals("courseCode") || groupArgument.equals("grade")) {
+                argument = argument.toUpperCase();
+            }
+            arguments.put(groupArgument, argument);
         }
 
         return arguments;
