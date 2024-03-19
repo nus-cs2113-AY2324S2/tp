@@ -24,7 +24,7 @@ public class DeleteCommandTest {
         String inputString = "delete -l 1";
         DeleteCommand command = new DeleteCommand(inputString);
         Ui ui = new Ui();
-        command.execute(medicationManager, ui);
+        command.execute(medicationManager, null, ui);
 
         assertThrows(IndexOutOfBoundsException.class, () -> medicationManager.getMedication(1));
     }
