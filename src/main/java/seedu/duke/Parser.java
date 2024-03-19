@@ -31,7 +31,7 @@ public class Parser {
         case "generate":
             //ProblemGenerator ;
             ProblemGenerator pb = new ProblemGenerator();
-            Test test = pb.typeChoose(action);
+            Test test = pb.typeChoose(command);
             Checker checker = new Checker(test);
             checker.getUserAnswer();
             System.out.println("Acc: " + checker.getAccuracy());
