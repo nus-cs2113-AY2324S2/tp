@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import meditracker.exception.FileReadWriteException;
 import meditracker.logging.MediLogger;
+import meditracker.medication.MedicationManager;
 
 //@@author annoy-o-mus
 /**
@@ -36,7 +37,7 @@ public class FileReaderWriter {
      *
      * @throws FileReadWriteException When there is any issue creating the directories.
      */
-    public static void initialiseDirectory() throws FileReadWriteException {
+    private static void initialiseDirectory() throws FileReadWriteException {
         File directory = null;
 
         // Solution adapted from: https://stackoverflow.com/a/3634879
@@ -58,9 +59,10 @@ public class FileReaderWriter {
      * Creates a JSON save file and writes.
      * Also attempts to reinitialise the directory in case of a first-time save.
      *
+     * @return The File object that corresponds to the write file.
      * @throws FileReadWriteException If the file is unable to be created due to system issues.
      */
-    public static void createJsonSaveFile() throws FileReadWriteException {
+    public static File createJsonSaveFile() throws FileReadWriteException {
         String fullFilePath = getFullJsonDataFilePath();
         initialiseDirectory();
         File fileToWrite = new File(fullFilePath);
@@ -69,13 +71,13 @@ public class FileReaderWriter {
             // TODO: Also to take into account empty file for first run.
             fileToWrite.delete();
             fileToWrite.createNewFile();
+            return fileToWrite;
         } catch (IOException e) {
             throw new FileReadWriteException("IO Error: Unable to write to JSON File");
         } catch (SecurityException e) {
             throw new FileReadWriteException("Unable to create save JSON file. Please make sure that "
                     + "the file has the appropriate permissions for MediTracker to write to.");
         }
-        // To implement: Writing JSON data to the file.
     }
 
     /**
@@ -95,5 +97,20 @@ public class FileReaderWriter {
                     + "Program will run with no data loaded.");
         }
         // To be implemented: Actual reading and loading of the JSON data
+    }
+
+    /**
+     * Saves the medication information found in `MedicationManager`.
+     *
+     * @param medManager The instance of the MedicationManager that contains the Medication information.
+     */
+    public static void saveMediTrackerData(MedicationManager medManager) {
+        try {
+            File fileToWrite = createJsonSaveFile();
+            JsonExporter.saveMedicationDataToJson(medManager, fileToWrite);
+            //TODO: Delete the renamed save file by `createJsonSaveFile`
+        } catch (FileReadWriteException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
