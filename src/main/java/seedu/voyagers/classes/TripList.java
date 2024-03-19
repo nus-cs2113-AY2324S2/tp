@@ -101,9 +101,8 @@ public class TripList {
 
     /**
      * Finds the index of the trip with the specified name
-     * @param name
-     * @return the index of the trip with the specified name (starting from 0).
-     * Returns -1 if no such trip is found.
+     * @param name the name of the trip to find
+     * @return the index of the trip with the specified name. Returns -1 if no such trip is found
      */
     public int findTrip(String name){
         for (int i = 0; i < trips.size(); i++){

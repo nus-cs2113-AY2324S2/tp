@@ -1,7 +1,7 @@
 package seedu.voyagers;
 
-import seedu.voyagers.classes.*;
-import seedu.voyagers.utils.*;
+import seedu.voyagers.classes.TripList;
+import seedu.voyagers.utils.Ui;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
 
