@@ -197,18 +197,8 @@ public class InputParsing {
         assert name != null : "Student name cannot be empty";
         StudentAttributes attributes = new StudentAttributes(name);
         attributeInput(in, attributes);
-
-        if (attributes.getSubjectGrades().isEmpty()) {
-            System.out.println("At least one subject must be provided. Please add subjects and grades.");
-            Ui.printDivider();
-            attributeInput(in, attributes);
-        }
-
-        assert attributes.getSubjectGrades() != null : "Subject cannot be empty";
-
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
-
         logger.log(Level.INFO, "Student added successfully.");
         System.out.println(STUDENT_ADDED_SUCCESSFULLY);
         Ui.printDivider();
@@ -256,24 +246,25 @@ public class InputParsing {
      */
     private static void attributeInput(Scanner in, StudentAttributes attributes) {
         while (true) {
-            System.out.print("Subject: ");
+            System.out.print("Subject (enter nothing to skip): ");
             String subject = in.nextLine().trim();
-            if (subject.isEmpty()) {
-                logger.log(Level.WARNING, "Empty subject provided.");
-                System.out.println("Subject cannot be empty. Please enter a valid subject.");
-                Ui.printDivider();
-                continue;
-            }
-            double grade = checkForGradeFormat(in);
-            int classesAttended = checkForClassesAttendedFormat(in);
-
-            SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
-            attributes.addSubjectGrade(subjectGrade);
-
-            System.out.println("Do you want to add another subject and grade? (yes/no)");
-            String response = in.nextLine().trim().toLowerCase();
-            if (!response.equals("yes")) {
+            //@author blackmirag3
+            if (subject.isBlank()) {
+                SubjectGrade subjectGrade = new SubjectGrade();
+                attributes.addSubjectGrade(subjectGrade);
                 break;
+            }
+            //@author tayponghee
+            else {
+                double grade = checkForGradeFormat(in);
+                int classesAttended = checkForClassesAttendedFormat(in);
+                SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
+                attributes.addSubjectGrade(subjectGrade);
+                System.out.println("Do you want to add another subject and grade? (yes/no)");
+                String response = in.nextLine().trim().toLowerCase();
+                if (!response.equals("yes")) {
+                    break;
+                }
             }
         }
     }
