@@ -1,5 +1,8 @@
 package utility;
 
+/**
+ * Constants class representing all constants used for PulsePilot.
+ */
 public class Constant {
 
     // Formatted Replies

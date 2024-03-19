@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the parser used for PulsePilot
+ */
 public class Parser {
 
     /**
@@ -14,7 +17,7 @@ public class Parser {
      * @throws DateTimeParseException
      */
     public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate formattedDate = null;
         try {
             formattedDate = LocalDate.parse(dateTime, formatter);
