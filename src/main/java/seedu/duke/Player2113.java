@@ -3,8 +3,8 @@ package seedu.duke;
 public class Player2113 {
     public static final String SOME_FILE_PATH = "something";
     private Ui ui;
-    private QuestionsList questionsList;
-    private Helper helper;
+    private final QuestionsList questionsList;
+    private final Helper helper;
     public Player2113(String someFilePath) {
         questionsList = new QuestionsList();
         helper = new Helper();
