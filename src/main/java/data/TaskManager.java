@@ -74,6 +74,7 @@ public class TaskManager {
 
     /**
      * Adds a task from user input along with the date.
+     *
      * @param scanner Scanner object to get user input.
      * @param weekView WeekView object to validate the date.
      * @param inMonthView A boolean indicating whether the view is in month view or not.
