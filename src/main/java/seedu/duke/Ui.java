@@ -12,8 +12,11 @@ public class Ui {
     public TopicList topicList;
     public QuestionListByTopic questionListByTopic;
 
+    public String[] inputAnswers;
+
     public void readCommands(
-            Ui ui, QuestionsList questionsList, TopicList topicList, QuestionListByTopic questionListByTopic
+            Ui ui, QuestionsList questionsList, TopicList topicList,
+            QuestionListByTopic questionListByTopic
     ) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
@@ -36,6 +39,10 @@ public class Ui {
         System.out.println("Input a command player! // TODO: show possible commands"); // TODO
     }
 
+    private void askForAnswerInput(){
+        System.out.print("Enter your answer: ");
+    }
+
     public void printTopicList(TopicList topicList, Ui ui){
         int topicListSize = topicList.getSize();
         System.out.println("Here are the topics in CS2113: ");
@@ -45,16 +52,25 @@ public class Ui {
         System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
     }
 
-    public void printChosenTopic(int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic){
+    public void printChosenTopic(
+            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic
+    ){
         QuestionsList qnList = new QuestionsList();
         System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
         System.out.println("Here are the questions: ");
         qnList = questionListByTopic.getQuestionSet(topicNum - 1);
         int numOfQns = qnList.getSize();
         Question questionUnit;
+        String[] inputAnswers = new String[numOfQns];
+        String answer;
         for (int index = 0; index < numOfQns; index ++){
             questionUnit = qnList.getQuestionUnit(index);
             System.out.println(questionUnit.getQuestion());
+            askForAnswerInput();
+            Parser parser = new Parser();
+            Scanner in = new Scanner(System.in);
+            answer = in.nextLine();
+            inputAnswers[index] = answer;
         }
     }
 

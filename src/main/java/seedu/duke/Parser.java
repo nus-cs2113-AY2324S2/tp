@@ -6,9 +6,6 @@ public class Parser {
     private static final int PARAMETER_INDEX = 1;
     boolean hasChosenTopic = false;
 
-
-
-
     public void parseCommand(
             String command, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic
