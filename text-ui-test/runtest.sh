@@ -11,7 +11,7 @@ cd text-ui-test
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 # ACTUAL.TXT
-diff EXPECTED-UNIX.TXT DUMMYTEXT.TXT
+diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ] 
 then
     echo "Test passed!"
