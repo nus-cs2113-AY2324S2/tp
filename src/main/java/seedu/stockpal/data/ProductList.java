@@ -26,6 +26,7 @@ public class ProductList {
      *
      * @param pid Product ID to search for.
      * @return Index of the product in the product list.
+     *     If product is not in the product list, return -1.
      */
     public int findProductIndex(Pid pid) {
         for (int i = 0; i < products.size(); i++) {
