@@ -4,8 +4,8 @@ import utility.Constant;
 import utility.CustomExceptions;
 
 import java.time.LocalDate;
-
-import static workouts.Workout.parseDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The Bmi class extends the Health class and provides functionality to calculate
@@ -143,5 +143,16 @@ public class Bmi extends Health {
                 + this.calculateBmiValue()
                 + System.lineSeparator()
                 + this.getBmiCategory(bmiValue);
+    }
+
+    public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate formattedDate = null;
+        try {
+            formattedDate = LocalDate.parse(dateTime, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Error parsing date: " + e.getMessage());
+        }
+        return formattedDate;
     }
 }
