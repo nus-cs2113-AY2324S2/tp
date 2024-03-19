@@ -12,7 +12,7 @@ public enum ArgumentName {
     NAME("name"),
     QUANTITY("quantity"),
     REMARKS("remarks"),
-    LIST_TYPE("list");
+    LIST_TYPE("listType");
 
     public final String value;
 
