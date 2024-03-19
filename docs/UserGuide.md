@@ -103,10 +103,10 @@ Format: `/h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE'
 * All parameters must be provided in correct order as shown above.
 * `HEIGHT` is a **2 decimal point number in metres** (i.e. 1.71) representing the user's height.
 * `WEIGHT` is a **2 decimal point number in kilograms** (i.e. 60.50) representing the user’s weight.
-* `DATE` is in `DD/MM/YYYY` format (i.e. `19/03/2024`).
+* `DATE` is in `DD-MM-YYYY` format (i.e. `19-03-2024`).
 
 Examples: 
-* /h:bmi /height:1.71 /weight:60.50 /date:19/03/2024
+* /h:bmi /height:1.71 /weight:60.50 /date:19-03-2024
 
 Usage:
 ```
