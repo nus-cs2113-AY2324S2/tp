@@ -1,6 +1,15 @@
 package activeedge.ui;
 
+/**
+ * The HelpUi class provides a user interface for displaying help messages related to
+ * the Health Tracker Bot. It outlines how to use various commands within the bot for
+ * tracking calorie intake, water intake, and setting personal health goals.
+ */
 public class HelpUi {
+
+    /**
+     * Prints a detailed help message to the standard output.
+     */
     public static void printHelpMessage() {
         System.out.println(" Welcome to the Health Tracker Bot! Here are the available commands:\n" +
                 "\n" +
