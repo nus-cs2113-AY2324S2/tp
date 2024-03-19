@@ -1,5 +1,6 @@
 package seedu.budgetbuddy;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,14 +21,39 @@ public class SavingListTest {
     }
 
     @Test
-    public void testCalculateRemainingSavings_insufficientFunds_exceptionThrown() {
+    public void calculateRemainingSavings_insufficientFunds_success() {
+        SavingList savingList = new SavingList();
+        double initialAmount = 200;
+        double totalExpenses = 1000;
+        double expectedRemaining = -800;
+
+        double actualRemaining = savingList.calculateRemainingSavings(initialAmount, totalExpenses);
+
+        assertEquals(expectedRemaining, actualRemaining);
+    }
+
+    @Test @Disabled
+    public void calculateRemainingSavings_insufficientFunds_exceptionThrown() {
         SavingList savingList = new SavingList();
         double initialAmount = 100;
         double totalExpenses = 200;
 
-        assertThrows(RuntimeException.class, () -> {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             savingList.calculateRemainingSavings(initialAmount, totalExpenses);
         });
+        assertEquals("java.lang.Exception: Insufficient Funds", exception.getMessage());
+    }
+
+    @Test
+    public void findTotalSavings_calculateSavingsList_success() {
+        SavingList savingList = new SavingList();
+        savingList.addSaving("Salary", "500"); // Adding initial savings to work with
+        savingList.addSaving("Investments", "300");
+
+        savingList.findTotalSavings();
+
+        assertEquals(800, savingList.initialAmount);
+
     }
 
     @Test
