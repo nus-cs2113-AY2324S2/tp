@@ -1,42 +1,38 @@
 # User Guide
 
-## Introduction
+## Features
 
-{Give a product intro}
+### Edit Expenses: `edit expense`
+Edit expenses that have been added previously.
 
-## Quick Start
+Format: `edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION`
 
-{Give steps to get started quickly}
+* The `CATEGORY` must be one of the following pre-defined categories: "Housing",
+  "Groceries", "Utility", "Transport", "Entertainment" or "Others".
+* The `INDEX` must be a positive integer and a valid index in the menu list with respect to the category.
+* The `AMOUNT` must be a positive integer.
+* The `DESCRIPTION` can be any string.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+Example of usage:
 
-## Features 
+`edit expense c/Utility i/2 a/180 d/Household Electricity`
 
-{Give detailed description of each feature}
+### Edit Savings: `edit savings`
+Edit Savings that have been added previously.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `edit savings c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+* The `CATEGORY` must be one of the following pre-defined categories: "Housing",
+  "Groceries", "Utility", "Transport", "Entertainment" or "Others".
+* The `INDEX` must be a positive integer and a valid index in the menu list with respect to the category.
+* The `AMOUNT` must be a positive integer.
+* The `DESCRIPTION` can be any string.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Example of usage:
 
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
+`edit expense c/Entertainment i/3 a/300 d/Skydiving`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Edit Expenses `edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION`
+* Edit Savings `edit savings c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION`
