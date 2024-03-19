@@ -1,9 +1,10 @@
 package seedu.stockpal.data.product;
 
+import seedu.stockpal.common.CommandParameter;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 
-public class Quantity {
+public class Quantity implements CommandParameter {
     public static final Integer MAX_QUANTITY = Integer.MAX_VALUE;
     protected Integer quantity;
 
