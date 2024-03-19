@@ -171,7 +171,7 @@ public class Handler {
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
                 if (bmiDetails[0].isEmpty() || bmiDetails[1].isEmpty() || bmiDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
                 }
                 Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2]);
                 HealthList.addBmi(newBmi);
