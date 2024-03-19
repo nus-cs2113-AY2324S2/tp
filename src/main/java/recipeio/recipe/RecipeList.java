@@ -6,8 +6,12 @@ import recipeio.commands.AddRecipeCommand;
 import recipeio.commands.DeleteRecipeCommand;
 import recipeio.commands.FindByAllergyCommand;
 import recipeio.commands.ListRecipeCommand;
+import recipeio.ui.UI;
 
 import java.util.ArrayList;
+
+import static recipeio.Constants.MAX_RECIPES;
+import static recipeio.InputParser.parseAdd;
 
 public class RecipeList {
     /**
@@ -37,16 +41,13 @@ public class RecipeList {
     }
 
     public void add(String userInput) {
-        String[] details = InputParser.parseDetails(userInput);
-        Recipe recipe = new Recipe(
-                details[1],
-                Integer.parseInt(details[2]),
-                0,
-                null,
-                null,
-                null
-        );
-        AddRecipeCommand.execute(recipe, recipes);
+        assert(recipes.size() < MAX_RECIPES);
+        try {
+            Recipe newRecipe = parseAdd(userInput);
+            AddRecipeCommand.execute(newRecipe, recipes);
+        } catch (Exception e){
+            UI.printMessage(e.getMessage());
+        }
     }
 
     public void add(Recipe recipe) {
@@ -70,7 +71,7 @@ public class RecipeList {
         return FindByAllergyCommand.execute(allergy, recipes);
     }
 
-    public void executeCommand(String command, String userInput) {
+    public void executeCommand(String command, String userInput){
         switch (command) {
         case Constants.LIST_COMMAND:
             listRecipes();
