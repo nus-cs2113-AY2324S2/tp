@@ -1,14 +1,14 @@
 package seedu.duke.command;
 
 public class InitCommand extends Command{
-    private final String name;
+    private final String Name;
     public InitCommand(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     @Override
     public void execute(String userInput) {
-        System.out.println("Hello " + name + "!");
+        System.out.println("Hello " + Name + "!");
         System.out.println("What would you like to do today?");
     }
 }
