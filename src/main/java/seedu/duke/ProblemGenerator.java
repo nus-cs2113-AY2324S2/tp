@@ -52,7 +52,7 @@ public class ProblemGenerator {
         return Generate(parameter);
     }
 
-    private Test Generate(HashMap<String, String> parameter) {
+    private Test generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
