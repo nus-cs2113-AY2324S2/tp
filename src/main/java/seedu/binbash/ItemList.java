@@ -42,6 +42,25 @@ public class ItemList {
         return output;
     }
 
+    public String deleteItem(String keyword) {
+        int targetIndex = -1;
+        Item currentItem;
+        for (int i = 0 ; i < itemList.size(); i ++) {
+            currentItem = itemList.get(i);
+            if (currentItem.getItemName().equals(keyword)) {
+                targetIndex = i + 1;
+                break;
+            }
+        }
+
+        if (targetIndex == -1) {
+            String output = "Item not found! Nothing was deleted!";
+            return output;
+        }
+
+        return deleteItem(targetIndex);
+    }
+
     public String searchItem(String keyword) {
         ArrayList<Item> filteredList = (ArrayList<Item>) itemList.stream()
                 .filter(item -> item.getItemName().contains(keyword))
