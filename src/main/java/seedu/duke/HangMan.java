@@ -22,7 +22,7 @@ public class HangMan {
         correctGuesses = LINE.repeat(chosenWordLength);
     }
 
-    public static void runHangMan() {
+    public void runHangMan() {
         String userInput;
         Scanner in = new Scanner(System.in);
 
