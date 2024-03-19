@@ -1,21 +1,24 @@
 package workouts;
 
 import utility.Constant;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * Represents a GymStation object.
+ */
 public class GymStation {
     protected String stationName;
-    protected ArrayList<GymSet> sets = new ArrayList<GymSet>();
+    protected ArrayList<GymSet> sets = new ArrayList<>();
     protected int numberOfSets;
 
     /**
-     * Gym Station contains an ArrayList of GymSets.
-     * @param name
-     * @param weight
-     * @param repetition
-     * @param numberOfSets
+     * Constructs a new GymStation object that contains the name, weight, number of repetitions and number of sets done
+     * in one station.
+     *
+     * @param name String name of the station
+     * @param weight Weight used.
+     * @param repetition Number of reps done.
+     * @param numberOfSets Number of sets done.
      */
     public GymStation(String name, int weight, int repetition , int numberOfSets) {
         this.stationName = name;
@@ -23,51 +26,68 @@ public class GymStation {
         processSets(weight, repetition);
     }
 
+    /**
+     * Function which adds the gym sets to
+     * @param weight
+     * @param repetition
+     */
     public void processSets(int weight, int repetition){
-
-        // to implement later different weights
-        for (int i = 0; i < repetition; i++) {
+        for (int i = 0; i < numberOfSets; i++) {
             GymSet newSet = new GymSet(weight, repetition);
             sets.add(newSet);
         }
-
     }
 
+    /**
+     * Retrieves the station name for the GymStation object.
+     *
+     * @return String representing the name for the station.
+     */
     public String getStationName() {
         return stationName;
     }
 
+    /**
+     * Retrieves an ArrayList of gym sets for the GymStation object.
+     *
+     * @return The ArrayList of GymSet objects.
+     */
     public  ArrayList<GymSet> getSets() {
         return sets;
     }
 
+    /**
+     * Retrieves a specific GymSet using an index.
+     *
+     * @param index Index of the desired GymSet.
+     * @return Desired GymSet object.
+     */
     public GymSet getSpecificSet(int index) {
         return sets.get(index);
     }
 
+
+    /**
+     * Retrieves the number sets within the GymStation.
+     *
+     * @return The number of sets done.
+     */
     public int getNumberOfSets() {
         return numberOfSets;
     }
 
+    /**
+     * Retrieves the string representation of a GymStation object.
+     *
+     * @return A formatted string representing a GymStation object.
+     */
     @Override
     public String toString() {
-        ArrayList<GymSet> allSets = this.getSets();
-        HashMap<String, Integer> allVariations = new HashMap<>();
-
-        for (GymSet set : allSets) {
-            if (allVariations.containsKey(set.toString())) {
-                allVariations.put(set.toString(), allVariations.get(set.toString()) + 1);
-            } else {
-                allVariations.put(set.toString(), 1);
-            }
-        }
         StringBuilder format = new StringBuilder(String.format(Constant.GYM_STATION_FORMAT,
                 this.getStationName()));
 
-        for (String key : allVariations.keySet()) {
-            format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, this.getNumberOfSets(), key));
-        }
-
+        format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, this.getNumberOfSets(), this.getSpecificSet(0)));
         return format.toString();
     }
+
 }

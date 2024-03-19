@@ -14,7 +14,7 @@ public class Parser {
      * @param dateTime String representing the date.
      * @return LocalDate variable representing the date.
      *
-     * @throws DateTimeParseException If there is an error parsing the date. 
+     * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
