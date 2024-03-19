@@ -12,12 +12,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
+    private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
     private static final String LIST = "list";
     private static final String ADD = "add";
     private static final String VIEW = "view";
     private static final String DELETE = "delete";
-    private static final String WRONG_INPUT_MESSAGE = "Wrong Input! Please try again!";
+    private static final String WRONG_INPUT_MESSAGE = "No such command, type \"help\" to view all commands";
     //@@author tayponghee
     private static final String ENTER_STUDENT_DETAILS = "Enter student details: ";
     private static final String ENTER_STUDENT_NAME = "Enter student name: ";
@@ -33,23 +34,20 @@ public class InputParsing {
     private static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100: ";
 
 
-    public static void parseUserCommand(String userCommand, ArrayList<Student> masterStudentList, Scanner in){
-        switch (userCommand.toLowerCase()) {
+    public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in){
+        switch (userCommand[0]) {
         case ADD:
-            in.nextLine();
-            addStudent(masterStudentList, in);
+            addStudent(masterStudentList, in, userCommand[1]);
             break;
 
         case VIEW:
-            in.nextLine();
-            viewStudent(masterStudentList, in);
+            viewStudent(masterStudentList, in, userCommand[1]);
             Ui.printDivider();
             break;
 
         //@@author alalal47
         case DELETE:
-            in.nextLine();
-            deleteStudent(masterStudentList, in);
+            deleteStudent(masterStudentList, in, userCommand[1]);
             break;
 
         case HELP:
@@ -79,10 +77,23 @@ public class InputParsing {
     }
 
     //@@author alalal47
-    private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in) {
-        System.out.print(ENTER_STUDENT_NAME);
-        String studentName = in.nextLine().trim();
-        Student foundStudent = findStudentByName(masterStudentList, studentName);
+    /**
+     * Removes a student from the list.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     * @param studentName       The name of the student if the user had entered it before being prompted
+     */
+    private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
+        String name;
+        if (studentName == null) {
+            System.out.print(ENTER_STUDENT_NAME);
+            name = in.nextLine().trim();
+        } else {
+            name = studentName;
+        }
+
+        Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
             System.out.println(NAME + foundStudent.getName());
             System.out.println(STUDENT_DELETED_SUCCESSFULLY);
@@ -93,11 +104,17 @@ public class InputParsing {
         masterStudentList.remove(foundStudent);
     }
 
+    /**
+     * Displays the help message to teach users how to use Classify.
+     */
     private static void printHelpMessage() {
         System.out.println("add                         Adds a student to the student list, " +
-                                                        "expects a name, grade and lessons attended");
-        System.out.println("view                        Views a students details, expects a name");
-        System.out.println("delete                      Deletes a student from the student list, expects a name");
+                                                        "expects a name, grade and lessons attended" +
+                                                        ", can be used directly with a name e.g. add [name]");
+        System.out.println("view                        Views a students details, expects a name" +
+                                                        ", can be used directly with a name e.g. add [name]");
+        System.out.println("delete                      Deletes a student from the student list, expects a name" +
+                                                        ", can be used directly with a name e.g. add [name]");
         System.out.println("list                        Displays the list of all students");
         System.out.println("bye                         Exits Classify");
         System.out.println("help                        Prints this help message");
@@ -109,22 +126,28 @@ public class InputParsing {
      *
      * @param masterStudentList The list of all students.
      * @param in                The scanner object to read user input.
+     * @param studentName       The name of the student if the user had entered it before being prompted
      */
-    private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in) {
-        System.out.print(ENTER_STUDENT_NAME);
-        String studentName = in.nextLine();
+    private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
+        String name;
+        if (studentName == null) {
+            System.out.print(ENTER_STUDENT_NAME);
+            name = in.nextLine();
+        } else {
+            name = studentName;
+        }
 
-        assert studentName != null : "Student name cannot be null";
+        assert name != null : "Student name cannot be null";
 
-        Student foundStudent = findStudentByName(masterStudentList, studentName);
+        Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
-            logger.log(Level.INFO, "Viewing student details: " + studentName);
+            logger.log(Level.INFO, "Viewing student details: " + name);
             System.out.println(STUDENT_DETAILS);
             System.out.println(NAME + foundStudent.getName());
             StudentAttributes attributes = foundStudent.getAttributes();
             showAttributes(attributes);
         } else {
-            logger.log(Level.WARNING, "Student not found: " + studentName);
+            logger.log(Level.WARNING, "Student not found: " + name);
             System.out.println(STUDENT_NOT_FOUND);
         }
     }
@@ -161,11 +184,16 @@ public class InputParsing {
      *
      * @param masterStudentList The list of all students.
      * @param in                The scanner object to read user input.
+     * @param studentName       The name of the student if the user had entered it before being prompted
      */
-    private static void addStudent(ArrayList<Student> masterStudentList, Scanner in) {
-        System.out.println(ENTER_STUDENT_DETAILS);
+    private static void addStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
-        name = checkForEmptyName(masterStudentList, in);
+        if (studentName == null) {
+            System.out.println(ENTER_STUDENT_DETAILS);
+            name = checkForEmptyName(masterStudentList, in, studentName);
+        } else {
+            name = checkForEmptyName(masterStudentList,in, studentName);
+        }
         assert name != null : "Student name cannot be empty";
         StudentAttributes attributes = new StudentAttributes(name);
         attributeInput(in, attributes);
@@ -192,13 +220,19 @@ public class InputParsing {
      *
      * @param masterStudentList The list of all students.
      * @param in                The scanner object to read user input.
+     * @param studentName       The name of the student if the user had entered it before being prompted
      * @return The valid non-empty name entered by the user.
      */
-    private static String checkForEmptyName(ArrayList<Student> masterStudentList, Scanner in) {
+    private static String checkForEmptyName(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
         while (true) {
-            System.out.print(NAME);
-            name = in.nextLine().trim();
+            if (studentName == null) {
+                System.out.print(NAME);
+                name = in.nextLine().trim();
+            } else {
+                name = studentName.trim();
+                studentName = NOTEMPTY;
+            }
             if (name.isEmpty()) {
                 System.out.println("Student name cannot be empty. Please enter a valid name.");
                 Ui.printDivider();

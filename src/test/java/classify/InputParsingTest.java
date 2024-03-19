@@ -18,7 +18,9 @@ public class InputParsingTest {
         System.setOut(new PrintStream(outputStream));
 
         ArrayList<Student> masterStudentList = new ArrayList<>();
-        InputParsing.parseUserCommand("bye", masterStudentList, new Scanner(System.in));
+        String [] commands = new String[2];
+        commands[0] = "bye";
+        InputParsing.parseUserCommand(commands, masterStudentList, new Scanner(System.in));
 
         System.setOut(System.out);
 
@@ -35,10 +37,12 @@ public class InputParsingTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         ArrayList<Student> students = new ArrayList<>();
-        InputParsing.parseUserCommand("yeet", students, new Scanner(System.in));
+        String [] commands = new String[2];
+        commands[0] = "yeet";
+        InputParsing.parseUserCommand(commands, students, new Scanner(System.in));
         System.setOut(System.out);
         String printedOutput = outputStream.toString().trim();
-        String expectedOutput = "Wrong Input! Please try again!" +
+        String expectedOutput = "No such command, type \"help\" to view all commands" +
                 System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         assertEquals(expectedOutput.trim(), printedOutput);
     }
@@ -50,18 +54,23 @@ public class InputParsingTest {
         System.setOut(new PrintStream(outputStream));
 
         ArrayList<Student> masterStudentList = new ArrayList<>();
-        InputParsing.parseUserCommand("help", masterStudentList, new Scanner(System.in));
+        String [] commands = new String[2];
+        commands[0] = "help";
+        InputParsing.parseUserCommand(commands, masterStudentList, new Scanner(System.in));
 
         System.setOut(System.out);
 
         String printedOutput = outputStream.toString().trim();
         String expectedOutput =
-                "add                         Adds a student to the student list, expects a name," +
-                                             " grade and lessons attended"
+                "add                         Adds a student to the student list, expects a name" +
+                                             ", grade and lessons attended," +
+                                             " can be used directly with a name e.g. add [name]"
                                              + System.lineSeparator() +
-                "view                        Views a students details, expects a name"
+                "view                        Views a students details, expects a name" +
+                                             ", can be used directly with a name e.g. add [name]"
                                              + System.lineSeparator() +
-                "delete                      Deletes a student from the student list, expects a name"
+                "delete                      Deletes a student from the student list, expects a name" +
+                                             ", can be used directly with a name e.g. add [name]"
                                              + System.lineSeparator() +
                 "list                        Displays the list of all students"
                                              + System.lineSeparator() +
