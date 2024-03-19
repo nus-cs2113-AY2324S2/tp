@@ -21,7 +21,8 @@ class ListCommandTest {
 
         ListCommand listCommand = new ListCommand(itemList);
 
-        String actualOutput = listCommand.execute();
+        listCommand.execute();
+        String actualOutput = listCommand.getExecutionUiOutput();
 
         String expectedOutput = "1. testItem1" + System.lineSeparator() +
                 "\tdescription: Test item 1" + System.lineSeparator() +
