@@ -61,6 +61,9 @@ public class ProcessCommand {
         case "list":
             ExpenditureList.listExpenses();
             break;
+        case "clearlist":
+            ExpenditureList.clearlist();
+            break;
         case "help":
             UI.printHelpMessage();
             break;

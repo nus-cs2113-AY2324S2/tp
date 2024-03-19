@@ -7,6 +7,8 @@ e/ del/ 1
 view -m 11.2011
 view -y 2011
 list
+clearlist
+list
 help
 gpa
 gpa
