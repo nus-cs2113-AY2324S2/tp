@@ -31,7 +31,7 @@ public class Player2113 {
         ui.sayHi();
         ui.printTopicList(topicList, ui);
         while (ui.isPlaying) {
-            ui.readCommands(ui, questionsList);
+            ui.readCommands(ui, questionsList, topicList);
         }
 
     }

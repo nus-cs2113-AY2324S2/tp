@@ -21,7 +21,6 @@ public class Topic {
         this.hasAttempted = true;
     }
 
-
     public String toString(){
         return "[" + getStatus() + "]" + topicName;
     }

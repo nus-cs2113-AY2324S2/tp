@@ -14,18 +14,16 @@ public class Ui {
     public boolean hasStartedGame = false;
     public TopicList topicList;
 
-    public void readCommands(Ui ui, QuestionsList questionsList) {
+    public void readCommands(Ui ui, QuestionsList questionsList, TopicList topicList) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
-        //System.out.println("Hello " + in.nextLine());
         printLine();
-        //ui.printTopicList(topicList, ui);
 
         while(isPlaying) {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList);
+                parser.parseCommand(command, ui, questionsList, topicList);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
@@ -33,17 +31,7 @@ public class Ui {
 
         sayBye();
     }
-    /*public void startGame(int index) {
-        String chosenTopicName = topicList.getTopic(index - 1);
-        System.out.println(chosenTopicName);
-        System.out.println("There are 10 questions in this question set. Type in the correct answer and press enter to move on to the next question.");
-    }*/
 
-
-
-    public void printMessage(String message){
-        System.out.println(message);
-    }
     private void askForInput() {
         System.out.println("Input a command player! // TODO: show possible commands"); // TODO
     }
@@ -55,6 +43,10 @@ public class Ui {
             System.out.println((index + 1) + ". " + topicList.getTopic(index));
         }
         System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
+    }
+
+    public void printChosenTopic(int topicNum, TopicList topicList){
+        System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
     }
 
     public void printOneSolution(int questionNum, String solution) {
@@ -75,7 +67,7 @@ public class Ui {
         System.out.println();
     }
 
-    public String sayHi() {
+    public void sayHi() {
         String logo =
                 "______ _                       _____  __   __   _____\n" +
                 "| ___ \\ |                     / __  \\/  | /  | |____ |\n" +
@@ -91,8 +83,6 @@ public class Ui {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         printLine();
-        String name = in.nextLine();
-        return name;
     }
 
     public void sayBye() {

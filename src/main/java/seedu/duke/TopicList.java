@@ -23,4 +23,10 @@ public class TopicList {
         return topicList.size();
     }
 
+    public String getChosenTopic(int topicNum){
+        int topicIndex = topicNum - 1;
+        Topic topic = topicList.get(topicIndex);
+        return topic.topicName;
+    }
+
 }

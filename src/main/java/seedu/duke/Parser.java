@@ -8,45 +8,43 @@ public class Parser {
 
 
 
-    public void parseCommand(String command, Ui ui, QuestionsList questionsList) throws CustomException {
+    public void parseCommand(String command, Ui ui, QuestionsList questionsList, TopicList topicList) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
             if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
                 processSolutionCommand(lowerCaseCommand, ui, questionsList);
-            } /*else if (lowerCaseCommand.startsWith("start")){
+            } else if (lowerCaseCommand.startsWith("topic")){
                 processStartCommand(lowerCaseCommand, ui, topicList);
-            }*/ else {
+            } else {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
 
     }
 
-    /*private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList) throws CustomException {
+    private void processStartCommand(String lowerCaseCommand, Ui ui, TopicList topicList) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
             throw new CustomException("invalid " + lowerCaseCommand + " command");
         }
         String commandParameter = commandParts[PARAMETER_INDEX];
-        /*try {
+        try {
             // if parameter is an Integer
             int topicNum = Integer.parseInt(commandParameter);
             // checks validity of parameter
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("booo no such topic");
             }
+            ui.printChosenTopic(topicNum, topicList);
 
         } catch (NumberFormatException e) {
-            // if parameter is a String
-            if (!commandParameter.contentEquals("-all")) {
-                throw new CustomException("invalid " + typeOfCommand + " parameter");
-            }
+                throw new CustomException("invalid " + lowerCaseCommand + " parameter");
         }
 
-    }*/
+    }
 
     // user enters "solution 1" to get solution for question1 OR
     // user enters "solution -all" to get ALL solutions
