@@ -5,6 +5,12 @@ import seedu.duke.Meal;
 import seedu.duke.Parser;
 import seedu.duke.Water;
 
+import seedu.duke.exception.IncompleteDrinkException;
+import seedu.duke.exception.IncompleteMealException;
+import seedu.duke.exception.IncompleteWaterException;
+import seedu.duke.exception.UnregisteredDrinkException;
+import seedu.duke.exception.UnregisteredMealException;
+
 import java.util.ArrayList;
 
 public class User {
@@ -18,7 +24,7 @@ public class User {
         totalWaterIntake = new ArrayList<>();
     }
 
-    public void handleMeal(String command) {
+    public void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
@@ -27,7 +33,7 @@ public class User {
         System.out.println("Added " + servingSize + " serving of " + mealName);
     }
 
-    public void handleDrink(String command) {
+    public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
@@ -36,7 +42,7 @@ public class User {
         System.out.println("Added " + servingSize + " ml of " + drinkName);
     }
 
-    public void handleWater(String command) {
+    public void handleWater(String command) throws IncompleteWaterException {
         Parser.parseWater(command);
         int volume = Parser.waterSize;
 

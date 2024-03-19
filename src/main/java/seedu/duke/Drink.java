@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exception.UnregisteredDrinkException;
+
 import java.util.HashMap;
 
 public class Drink {
@@ -34,16 +36,26 @@ public class Drink {
         fat = nutrients[4] * drinkVolume / 100;
     }
 
-    public static void handleInfoDrink(String command) {
+    public static void handleInfoDrink(String command) throws UnregisteredDrinkException {
         String name = Parser.parseInfoDrink(command);
         int[] nutrients = nutrientDetails.get(name);
-        System.out.println("Drink: " + name);
+        System.out.println("Drink: " + name + " (100 ml)");
         System.out.println("Calories: " + nutrients[0]);
         System.out.println("Carbs: " + nutrients[1]);
         // Sugar is part of Carbohydrates
         System.out.println("Sugar: " + nutrients[2]);
         System.out.println("Protein: " + nutrients[3]);
         System.out.println("Fat: " + nutrients[4]);
+    }
+
+    public static void printAvailableDrinks() {
+        System.out.print("Available drinks: ");
+        for (String drink : nutrientDetails.keySet()) {
+            System.out.print(drink);
+            System.out.print(", ");
+        }
+        System.out.print("etc.");
+        System.out.println();
     }
 
     public String getName() {
@@ -73,4 +85,9 @@ public class Drink {
     public int getFat() {
         return fat;
     }
+
+    public static HashMap<String, int[]> getNutrientDetails() {
+        return nutrientDetails;
+    }
+
 }
