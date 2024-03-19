@@ -74,4 +74,11 @@ public class UITest {
 
         assertEquals(expected, actual);
     }
+
+    @Test void testParseCommand() {
+        String userInput = "delete 1";
+        String command = InputParser.parseCommand(userInput);
+
+        assertEquals("delete", command);
+    }
 }
