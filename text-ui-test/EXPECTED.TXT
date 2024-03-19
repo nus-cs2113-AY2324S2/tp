@@ -1,0 +1,3 @@
+Welcome to StockPal!
+Enter a command to begin.
+Exiting program, goodbye!
