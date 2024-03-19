@@ -14,7 +14,8 @@ import java.util.List;
  * Class for reading & writing input/output to file
  */
 public class Storage {
-    private static final String filePath = "../../../../../tasklist.txt";
+
+    private static String filePath = "recordList.txt";
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -37,13 +38,13 @@ public class Storage {
     public static void processLine(String line) throws Exception {
         String[] words = line.split(" ");
 
-        if (words.length != 3) {
+        if (words.length != 4 ) {
             throw new Exception();
         }
 
-        LocalDateTime dateTime = LocalDateTime.parse(words[0], formatter);
-        double speed = Double.parseDouble(words[1]);
-        double accuracy = Double.parseDouble(words[2]);
+        LocalDateTime dateTime = LocalDateTime.parse(words[0] + " " + words[1], formatter);
+        double speed = Double.parseDouble(words[2]);
+        double accuracy = Double.parseDouble(words[3]);
 
         Record record = new Record(dateTime, speed, accuracy);
         addRecord(record);
@@ -59,11 +60,14 @@ public class Storage {
                 while ((line = reader.readLine()) != null) {
                     processLine(line);
                 }
+                System.out.println("past records successfully loaded!");
             } catch (Exception e) {
                 clearRecords();
+                System.out.println("past record save file corrupt! Records cleared!");
             }
         } catch (IOException e) {
             clearRecords();
+            System.out.println("no past records found. Starting anew!");
         }
     }
 
@@ -78,7 +82,9 @@ public class Storage {
                 writer.newLine();
             }
             writer.flush();
-        } catch (IOException e) {
+            System.out.println("Record successfully saved!");
+        }catch (IOException e) {
+            System.out.println("Error when saving record!");
             e.printStackTrace();
         }
     }

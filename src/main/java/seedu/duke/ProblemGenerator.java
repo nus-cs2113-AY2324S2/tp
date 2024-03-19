@@ -47,9 +47,9 @@ public class ProblemGenerator {
 
     }
 
-    public Test TypeChoose(String command) {
+    public Test typeChoose(String command) {
         HashMap<String, String> parameter = parseCommand(command);
-        return Generate(parameter);
+        return generate(parameter);
     }
 
     private Test generate(HashMap<String, String> parameter) {

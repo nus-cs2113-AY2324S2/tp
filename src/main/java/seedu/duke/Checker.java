@@ -1,18 +1,16 @@
 package seedu.duke;
-
 import java.util.Scanner;
-//import seedu.duke.Problem;
 
 public class Checker {
-    double accuracy;
-    long time;
+    private Double[] userAnswer;
     private final Test test;
     private Boolean[] isCorrect;
-    private Double[] userAnswer;
     private int correctNumber;
+    private double accuracy;
+    private long time;
 
-    public Checker(Test test) {
-        assert test != null : "Input null test!";
+    public Checker(Test test){
+        assert test != null: "Input null test!";
         this.userAnswer = new Double[test.getNumber()];
         this.test = test;
         this.isCorrect = new Boolean[test.getNumber()];
@@ -22,9 +20,10 @@ public class Checker {
 
     }
 
-    Boolean checkCorrectness(Problem problem, double answer) {
+    Boolean checkCorrectness(Problem problem, double answer){
         return Math.abs(problem.getAnswer() - answer) < 0.01;
     }
+
 
     void getUserAnswer() {
         long startTime = System.currentTimeMillis();
