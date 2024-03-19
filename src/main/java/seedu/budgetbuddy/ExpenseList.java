@@ -2,6 +2,9 @@ package seedu.budgetbuddy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,21 +79,24 @@ public class ExpenseList {
 
         return totalExpenses;
     }
-    public void addExpense(String category, String amount, String description) {
-        int amountInt = Integer.parseInt(amount); 
-        if (amountInt < 0) {
-            try {
-                throw new Exception("Expenses should not be negative");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+
+    public void addExpense(String category, String amount, String description) throws BudgetBuddyException {
+        if (!categories.contains(category)) {
+            throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
+        int amountInt;
+        try {
+            amountInt = Integer.parseInt(amount);
+        } catch (NumberFormatException e) {
+            throw new BudgetBuddyException("Invalid amount format. Amount should be a number.");
+        }
+
+        if (amountInt < 0) {
+            throw new BudgetBuddyException("Expenses should not be negative.");
+        }
+
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
-
-        if (!categories.contains(category)) {
-            categories.add(category);
-        }
     }
 
     public void editExpense(String category, int index, double amount, String description) {

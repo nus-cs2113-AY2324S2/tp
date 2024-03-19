@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 public class Parser {
 
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
@@ -75,14 +77,13 @@ public class Parser {
         return input.startsWith("edit savings");
     }
 
-    public Boolean isDeleteExpenseCommand(String input){
+    public Boolean isDeleteExpenseCommand(String input) {
         return input.startsWith("delete");
     }
 
     public Boolean isReduceSavingCommand(String input) {
         return input.startsWith("reduce");
     }
-
 
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
@@ -177,10 +178,12 @@ public class Parser {
 
     /**
      * Processes all menu commands and returns the corresponding Command object.
-     * This method interprets the user's input and displays either the entire menu or the associated menu item
+     * This method interprets the user's input and displays either the entire menu
+     * or the associated menu item
      *
      * @param input The full user input string
-     * @return A new MenuCommand object with the specified index, returns null if index is not an integer
+     * @return A new MenuCommand object with the specified index, returns null if
+     *         index is not an integer
      */
     public Command handleMenuCommand(String input) {
         if (input.trim().equals("menu")) {
@@ -196,34 +199,89 @@ public class Parser {
     }
 
     public Command handleAddExpenseCommand(ExpenseList expenses, String input) {
+        if (input == null || !input.contains("c/") || !input.contains("a/") || !input.contains("d/")) {
+            System.out.println("Invalid command format.");
+            return null;
+        }
         String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println("Expense details are missing.");
+            return null;
+        }
         String details = parts[1];
-        try {
-            String category = extractDetailsForAdd(details, "c/");
-            String amount = extractDetailsForAdd(details, "a/");
-            String description = extractDetailsForAdd(details, "d/");
-            return new AddExpenseCommand(expenses,category, amount, description);
-        } catch (Exception e) {
-            System.out.println("Error parsing expense. Ensure the format is correct.");
+
+        String category = extractDetailsForAdd(details, "c/");
+        if (category.isEmpty()) {
+            System.out.println("category is missing.");
+            return null;
+        }
+        String amount = extractDetailsForAdd(details, "a/");
+        if (amount.isEmpty()) {
+            System.out.println("amount is missing.");
+            return null;
         }
 
-        return null;
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                throw new BudgetBuddyException(amount + " is not a valid amount.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount. Please enter a valid number.");
+            return null;
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
 
+        String description = extractDetailsForAdd(details, "d/");
+        if (description.isEmpty()) {
+            System.out.println("description is missing.");
+            return null;
+        }
+        return new AddExpenseCommand(expenses, category, amount, description);
     }
 
     public Command handleAddSavingCommand(SavingList savings, String input) {
-        String[] parts = input.split(" ", 2);
-        String details = parts[1];
-
-        try {
-            String category = extractDetailsForAdd(details, "c/");
-            String amount = extractDetailsForAdd(details, "a/");
-            return new AddSavingCommand(savings, category, amount);
-        } catch (Exception e) {
-            System.out.println("Error parsing saving. Ensure the format is correct.");
+        if (input == null || !input.contains(" ") || !input.contains("c/") || !input.contains("a/")){
+            System.out.println("Invalid command format.");
+            return null;
         }
 
-        return null;
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println("Saving details are missing.");
+            return null;
+        }
+
+        String details = parts[1];
+        String category = extractDetailsForAdd(details, "c/");
+        if (category.isEmpty()){
+            System.out.println("Category is missing.");
+            return null;
+        }
+        
+        String amount = extractDetailsForAdd(details, "a/");
+        if (amount.isEmpty()) {
+            System.out.println("amount is missing.");
+            return null;
+        }
+
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                throw new BudgetBuddyException(amount + " is not a valid amount.");
+            }
+           
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount. Please enter a valid number.");
+            return null;
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        return new AddSavingCommand(savings, category, amount);
     }
 
     public Command handleEditExpenseCommand(ExpenseList expenses, String input) {
@@ -358,13 +416,16 @@ public class Parser {
     }
 
     /**
-     * Parses a string input into a Command object and returns the associated command to handle the user input
+     * Parses a string input into a Command object and returns the associated
+     * command to handle the user input
+     * 
      * @param input The user input string.
-     * @return A Command object corresponding to the user input, or null if the input is invalid.
+     * @return A Command object corresponding to the user input, or null if the
+     *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
 
-        if(isMenuCommand(input)) {
+        if (isMenuCommand(input)) {
             return handleMenuCommand(input);
         }
 
