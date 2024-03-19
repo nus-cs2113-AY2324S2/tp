@@ -1,4 +1,4 @@
-# User Guide
+# BinBash User Guide
 
 ## Introduction
 
@@ -31,7 +31,23 @@ can make the most out of BinBash. Let's get your inventory organized efficiently
 
 ## Getting Started
 
-1. Ensure you have Java 11 or above installed.
+To run BinBash, ensure that your Computer meets the following minimum system requirements:
+* Operating System: Windows, macOS, or Linux
+* Java `11` is installed. Refer to our [FAQ](#faq) for more details.
+
+1. Ensure that you have Java `11` or above installed on your Computer.
+2. Head over to our [GitHub Page](https://github.com/AY2324S2-CS2113T-T09-2/tp/releases) and download the latest version of `BinBash.jar`.
+3. Move the downloaded `BinBash.jar` file to an empty folder of your choice. This folder will now serve as the home folder for BinBash.
+4. Open the terminal/command prompt for your system.
+   1. If you're on Windows, press `Windows Key + R` and type in `cmd`. Press enter to launch the command prompt.
+   2. If you're on Mac, click on `Launchpad` > `Other` > `Terminal`. Alternatively, click on the Spotlight icon in your menu bar, and type in `Terminal`.
+   3. If you're on Linux, open the terminal in your Linux distribution.
+5. Navigate to the folder containing `BinBash.jar` using the terminal/command prompt.
+6. Type `java -jar BinBash.jar` into the command prompt, and press enter.
+
+Awesome! You've now successfully started the BinBash application!
+
+Now, you can head over to the [Features](#features) section to learn how to use the application.
 
 ## Features
 
@@ -68,8 +84,15 @@ Examples:
 
 ## FAQ
 
-**Q**: How do I ...
+**Q**: How do I know if I have Java `11` installed on my computer?
 
-**A**: {your answer here}
+**A**: Using the terminal/command prompt, type in `java -version`. If Java `11` is installed, you should see a result that is similar to this:
+```bash
+$ java -version
+openjdk version "11.0.22" 2024-01-16
+OpenJDK Runtime Environment ... (build ...)
+OpenJDK 64-Bit Server VM ... (build ...)
+```
+If not, do refer to Oracle's [guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) on installing Java `11` for your operating system.
 
 ## Glossary
