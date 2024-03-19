@@ -48,10 +48,12 @@ public class Constant {
     public static final String PERIOD_INPUT = "h:period";
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
+
     public static final String HEALTH_FLAG = "/h";
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
     public static final String DATE_FLAG = "/date";
+
     public static final Integer BMI_PARAMETERS = 4;
     public static final Integer BMI_H_OFFSET = 3;
     public static final Integer BMI_HEIGHT_OFFSET = 8;
@@ -64,6 +66,11 @@ public class Constant {
     public static final double OBESE_BMI_THRESHOLD = 39.9;
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
+
+    public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
+    public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
+    public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
+    public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
 
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
@@ -83,6 +90,7 @@ public class Constant {
 
     public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
+    public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
     public static final String LINE = " | ";
   
     // Input Errors

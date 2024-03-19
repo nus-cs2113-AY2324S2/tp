@@ -3,6 +3,7 @@ package ui;
 import health.Bmi;
 import health.Health;
 import health.HealthList;
+import health.Period;
 import utility.Command;
 import utility.Constant;
 import utility.CustomExceptions;
@@ -192,7 +193,18 @@ public class Handler {
                         + bmiDetails[3]);
                 System.out.println(newBmi);
             } else if (typeOfHealth.equals(Constant.PERIOD)){
-                // Yet to implement
+                String[] periodDetails = Period.getPeriod(userInput);
+
+                if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+                }
+                Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
+                HealthList.addPeriod(newPeriod);
+                System.out.println(Constant.PERIOD_ADDED_MESSAGE_PREFIX
+                        + periodDetails[1]
+                        + Constant.LINE
+                        + periodDetails[2]);
+                System.out.println(newPeriod);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             System.out.println(e.getMessage());

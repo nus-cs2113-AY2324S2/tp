@@ -131,13 +131,13 @@ class BmiTest {
     @Test
     void showCurrentBmi_bmiObject_printsCorrectCurrentBmi() {
         // Arrange
-        Bmi bmi = new Bmi("1.71", "60.5", "19-03-2024");
+        Bmi bmi = new Bmi("1.75", "70.00", "19-03-2024");
 
         HealthList.addBmi(bmi);
 
         String expected = "2024-03-19"
                 + System.lineSeparator()
-                + "Your BMI is 20.69"
+                + "Your BMI is 22.86"
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator();
@@ -206,5 +206,34 @@ class BmiTest {
 
         // Act & Assert
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
+    }
+
+    @Test
+    void showBmiHistory_twoInputs_printsCorrectBmiHistory() {
+        // Arrange
+        Bmi firstBmi = new Bmi("1.71", "60.5", "19-03-2024");
+        Bmi secondBmi = new Bmi("1.80", "74.5", "19-03-2024");
+
+        HealthList.addBmi(firstBmi);
+        HealthList.addBmi(secondBmi);
+
+        String expected = "2024-03-19"
+                + System.lineSeparator()
+                + "Your BMI is 20.69"
+                + System.lineSeparator()
+                + "Great! You're within normal range."
+                + System.lineSeparator()
+                + "2024-03-19"
+                + System.lineSeparator()
+                + "Your BMI is 22.99"
+                + System.lineSeparator()
+                + "Great! You're within normal range."
+                + System.lineSeparator();
+
+        // Act
+        HealthList.showBmiHistory();
+
+        // Assert
+        assertEquals(expected, outContent.toString());
     }
 }
