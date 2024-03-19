@@ -42,14 +42,10 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseCommand_validCommandDelete_returnsDeleteCommand() {
-        try {
-            itemList.addItem("Test Item", "Test Description", 5, "2024-12-31", 10.5, 7.5);
-            Command command = parser.parseCommand("delete 1");
-            assertTrue(command instanceof DeleteCommand);
-        } catch (InvalidCommandException e) {
-            fail("Unexpected exception: " + e.getMessage());
-        }
+    public void testParseCommand_validCommandDelete_returnsDeleteCommand() throws InvalidCommandException {
+        itemList.addItem("Test Item", "Test Description", 5, "2024-12-31", 10.5, 7.5);
+        Command command = parser.parseCommand("delete Test Item");
+        assertTrue(command instanceof DeleteCommand);
     }
 
     @Test
