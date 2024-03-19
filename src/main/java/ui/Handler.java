@@ -166,7 +166,7 @@ public class Handler {
     public static void handleHealth(String userInput){
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(Constant.BMI)) {
+            if (typeOfHealth.equals(Constant.BMI)){
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
                 if (bmiDetails[0].isEmpty()
@@ -192,7 +192,10 @@ public class Handler {
                 }
                 Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
                 HealthList.addPeriod(newPeriod);
-                System.out.println("Added: period | " + periodDetails[1] + " | " + periodDetails[2]);
+                System.out.println(Constant.PERIOD_ADDED_MESSAGE_PREFIX
+                        + periodDetails[1]
+                        + Constant.LINE
+                        + periodDetails[2]);
                 System.out.println(newPeriod);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
