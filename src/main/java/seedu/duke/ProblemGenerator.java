@@ -2,6 +2,7 @@ package seedu.duke;
 
 // import java.util.Random;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,6 +30,41 @@ public class ProblemGenerator {
                 options.put("maximumDigits", tokens[i + 1]);
                 break;
             default:
+                break;
+            }
+        }
+        defaultOptions(command, options);
+        return options;
+    }
+
+    private static void defaultOptions(String command, HashMap<String, String> options) {
+        if (!command.contains("-t")) {
+            options.put("operators", DEFAULT_OPERATORS);
+        }
+        if (!command.contains("-n")) {
+            options.put("number", DEFAULT_NUMBER);
+        }
+        if (!command.contains("-d")) {
+            options.put("maximumDigits", DEFAULT_MAX_DIGITS);
+        }
+    }
+
+    public void typeChoose(String command) {
+    public static HashMap<String, String> parseCommand(String command) {
+        HashMap<String, String> options = new HashMap<>();
+        String[] tokens = command.split("\\s+");
+
+        for (int i = 0; i < tokens.length; i++) {
+
+            switch (tokens[i]) {
+            case "-t":
+                options.put("operators", tokens[i + 1]);
+                break;
+            case "-n":
+                options.put("number", tokens[i + 1]);
+                break;
+            case "-d":
+                options.put("maximumDigits", tokens[i + 1]);
                 break;
             }
         }
@@ -111,12 +147,15 @@ public class ProblemGenerator {
 
             description = op1 + tempOperator + op2 + "=";
 
+
             Problem p = new Problem(description, answer);
             System.out.println((i + 1) + ". " + p.unsolved());
             test.addToTest(p);
 
+
         }
 
     }
+
 
 }

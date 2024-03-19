@@ -21,7 +21,7 @@ public class Ui {
     private static final String GEN_COMMAND =
             "Generate problem sets: \t" + "gen -t [type] -n [number] -d [maximum digits]";
     private static final String HELP_COMMAND =
-            "Help function: \t" + "help [type], type can be 'gen/'command'/...";
+            "Help function: \t" + "help [type], type can be 'gen'/'command'/...";
     private final String name;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -72,9 +72,6 @@ public class Ui {
         case "generate":
             System.out.println(GEN_COMMAND);
             System.out.println(INPUT_INSTRUCTION);
-            break;
-        default:
-            System.out.println("Invalid help type! Please try again.");
             break;
         }
         this.showLine();

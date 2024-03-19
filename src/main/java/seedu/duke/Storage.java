@@ -31,7 +31,6 @@ public class Storage {
 
     /**
      * Method for processing a line of input
-     *
      * @param line the line to be processed
      * @throws Exception exception is thrown whenever the input format is corrupt.
      */
