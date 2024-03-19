@@ -6,7 +6,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.command.*;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.GradeCommand;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.ViewGpaCommand;
 
 public class Parser {
 
