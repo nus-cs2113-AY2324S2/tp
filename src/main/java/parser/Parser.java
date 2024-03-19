@@ -17,13 +17,22 @@ public class Parser {
     }
 
     public String parseCommand(String command, TransactionManager manager) {
-        String[] commandParts = command.split(" ");
+        String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
         
         switch (action) {
         case "login":
-            BaseUser user = new BaseUser(commandParts[1]);
-            String password = commandParts[2];
+            String username = "";
+            String password = null;
+            for (String part : commandParts) {
+                if (part.startsWith("u/")) {
+                    username = part.substring(2);
+                } else if (part.startsWith("p/")) {
+                    password = part.substring(2);
+                }
+            }
+
+            BaseUser user = new BaseUser(username);
             Authentication auth = user.getAuthentication();
             if (auth.checkPassword(user.getName(), password)) {
                 ui.printMessage("Password is correct. You are now logged in");
@@ -32,20 +41,48 @@ public class Parser {
             }
             break;
         case "add-inflow":
-            String inflowName = commandParts[1];
-            double inflowAmount = Double.parseDouble(commandParts[2]);
-            String inflowDate = commandParts[3] + " " + commandParts[4];
+            String inflowName = null;
+            double inflowAmount = 0;
+            String inflowDate = null;
+            String inflowTime = null;
 
-            Inflow inflow = new Inflow(inflowName, inflowAmount, inflowDate);
+            for (String part : commandParts) {
+                if (part.startsWith("n/")) {
+                    inflowName = part.substring(2);
+                } else if (part.startsWith("a/")) {
+                    inflowAmount = Double.parseDouble(part.substring(2));
+                } else if (part.startsWith("d/")) {
+                    inflowDate = part.substring(2);
+                } else if (part.startsWith("t/")) {
+                    inflowTime = part.substring(2);
+                }
+            }
+            String inflowDateTime = inflowDate + " " + inflowTime;
+
+            Inflow inflow = new Inflow(inflowName, inflowAmount, inflowDateTime);
             manager.addTransaction(inflow);
             ui.printMessage("Ok. Added inflow");
             return "Ok. Added inflow";
         case "add-outflow":
-            String outflowName = commandParts[1];
-            double outflowAmount = Double.parseDouble(commandParts[2]);
-            String outflowDate = commandParts[3] + " " + commandParts[4];
+            String outflowName = null;
+            double outflowAmount = 0;
+            String outflowDate = null;
+            String outflowTime = null;
 
-            Outflow outflow = new Outflow(outflowName, outflowAmount, outflowDate);
+            for (String part : commandParts) {
+                if (part.startsWith("n/")) {
+                    outflowName = part.substring(2);
+                } else if (part.startsWith("a/")) {
+                    outflowAmount = Double.parseDouble(part.substring(2));
+                } else if (part.startsWith("d/")) {
+                    outflowDate = part.substring(2);
+                } else if (part.startsWith("t/")) {
+                    outflowTime = part.substring(2);
+                }
+            }
+            String outflowDateTime = outflowDate + " " + outflowTime;
+
+            Outflow outflow = new Outflow(outflowName, outflowAmount, outflowDateTime);
             manager.addTransaction(outflow);
             ui.printMessage("Ok. Added outflow");
             return "Ok. Added outflow";
@@ -58,21 +95,26 @@ public class Parser {
             //manager.removeTransaction(1, false);
             break;
         case "view-history":
-            int numTransactions = Integer.parseInt(commandParts[1].trim());
+            String numTransactionsString = null;
+            for (String part : commandParts) {
+                if (part.startsWith("n/")) {
+                    numTransactionsString = part.substring(2);
+                }
+            }
+            int numTransactions = 0;
+            if (numTransactionsString != null) {
+                numTransactions = Integer.parseInt(numTransactionsString);
+            }
             manager.showLastNTransactions(numTransactions);
             break;
         case "quit":
-            isContinue = false;
+            this.isContinue = false;
             break;
         default:
             System.out.println("Invalid command");
             break;
         }
         return null;
-    }
-
-    public boolean getIsContinue(){
-        return this.isContinue;
     }
 }
 

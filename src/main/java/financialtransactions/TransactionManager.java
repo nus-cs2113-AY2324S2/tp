@@ -51,6 +51,9 @@ public class TransactionManager {
 
     public void showLastNTransactions(int n) {
         int listSize = transactionList.getTransactionListSize();
+        if (n > listSize) {
+            return;
+        }
         int index = 1;
 
         System.out.println("Inflows:\nTransactions:");

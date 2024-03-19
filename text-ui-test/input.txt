@@ -1,4 +1,4 @@
-login Bob password
-add-inflow Salary 400.00 23/05/2022 1900
-add-outflow Salary 400.00 23/05/2022 1900
+login u/Bob p/password
+add-inflow n/Salary a/400.00 d/23/05/2022 t/1900
+add-outflow n/Salary a/400.00 d/23/05/2022 t/1900
 quit
