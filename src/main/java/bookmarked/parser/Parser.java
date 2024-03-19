@@ -34,6 +34,8 @@ public class Parser {
                 userCommand = new ReturnCommand(splitItem, listOfBooks);
             } else if (splitItem[0].matches("find")) {
                 userCommand = new FindCommand(newItem, listOfBooks);
+            } else {
+                Ui.printUnknownCommand();
             }
             userCommand.handleCommand();
             Ui.separateNextInput();

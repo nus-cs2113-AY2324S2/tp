@@ -26,6 +26,10 @@ public class Ui {
         System.out.println("__________");
     }
 
+    public static void printUnknownCommand() {
+        System.out.println("Unknown command; please type /help to see what commands you can use.");
+    }
+
     public static void exitProgramme() {
         System.out.println("Bye!");
     }
