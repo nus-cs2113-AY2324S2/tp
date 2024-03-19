@@ -1,7 +1,9 @@
 package seedu.binbash;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 import seedu.binbash.command.Command;
 import seedu.binbash.command.AddCommand;
@@ -76,8 +78,13 @@ public class Parser {
         }
         String itemName = matcher.group("itemName");
         String itemDescription = matcher.group("itemDescription");
-        int itemQuantity = Integer.parseInt(matcher.group("itemQuantity"));
-        String itemExpirationDate = matcher.group("itemExpirationDate");
+        int itemQuantity = Integer.parseInt(
+                Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
+        );
+        String itemExpirationDate = Objects.requireNonNullElse( // If no expiration date provided, set as N.A.
+                matcher.group("itemExpirationDate"),
+                "N.A."
+        ).strip();
         double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
         double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 

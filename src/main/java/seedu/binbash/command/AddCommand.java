@@ -5,9 +5,10 @@ import seedu.binbash.ItemList;
 
 public class AddCommand extends Command {
 
-    public static final Pattern COMMAND_FORMAT =
-            Pattern.compile("add\\s+n/(?<itemName>.+?)\\s+d/(?<itemDescription>.+)\\s+q/(?<itemQuantity>.+)\\s"
-                    + "+e/(?<itemExpirationDate>.+)+s/(?<itemSalePrice>.+)+c/(?<itemCostPrice>.+)");
+    public static final Pattern COMMAND_FORMAT = Pattern.compile(
+            "add\\s" + "n/(?<itemName>.+?)\\s" + "d/(?<itemDescription>.+?)\\s" + "(q/(?<itemQuantity>.+?))?"
+                    + "(e/(?<itemExpirationDate>.+?))?" + "s/(?<itemSalePrice>.+?)\\s" + "c/(?<itemCostPrice>.+)"
+    );
     private final String itemName;
     private final String itemDescription;
     private final int itemQuantity;

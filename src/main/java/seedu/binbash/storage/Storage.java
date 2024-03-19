@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -122,8 +123,13 @@ public class Storage {
             if (matcher.matches()) {
                 String itemName = matcher.group("itemName");
                 String itemDescription = matcher.group("itemDescription");
-                int itemQuantity = Integer.parseInt(matcher.group("itemQuantity"));
-                String itemExpirationDate = matcher.group("itemExpirationDate");
+                int itemQuantity = Integer.parseInt(
+                        Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
+                );
+                String itemExpirationDate = Objects.requireNonNullElse(
+                        matcher.group("itemExpirationDate"),
+                        "N.A."
+                ).strip();
                 double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
                 double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 

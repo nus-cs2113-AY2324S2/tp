@@ -2,6 +2,17 @@
 
 ## Introduction
 
+This document aims to provide a comprehensive and in-depth guide on how to install, configure and use BinBash. For those who just want to get started right away, head to [Getting Started](#getting-started).
+
+### What's New in BinBash 1.0
+
+Our long awaited first release adds everything you would expect of an inventory management system, including:
+* Adding of items
+* Removing of items
+* Searching for items
+* Listing your entire inventory
+* and more (head to [Features](#features) to find out!)
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Table of Contents](#table-of-contents)
@@ -28,6 +39,13 @@ This guide will walk you through each feature, providing clear instructions and 
 can make the most out of BinBash. Let's get your inventory organized efficiently and effectively!
 
 ## How to Use this Guide
+
+Though we make no assumptions on your technical familiarity, it would help if this isn't your first time seeing a command prompt.
+
+Throughout the course of this guide we will describe the various inventory management capabilities BinBash is capable of, and how you might perform them using keyboard typed commands.
+The format and expected outputs of these commands will be enumerated in turn. Don't worry if you can't get the hang of them immediately! We'll provide some concrete examples to better illustrate their use cases.
+
+If you consider yourself a power user, we feel it is self-explanatory to jump to the [Command Summary](#command-summary).
 
 ## Getting Started
 
