@@ -70,6 +70,7 @@ public class ExpenseListTest {
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1000");
         assertEquals(1, savingList.getSavings().size());
+    }
 
     @Test
     public void editExpense_invalidCategoryOrIndex_failure() {
