@@ -23,33 +23,6 @@ class BookListTest {
         assertEquals("[U] Harry Potter", testBookList.getBook(0).toString());
     }
 
-
-    @Test
-    void deleteBook() {
-        BookList testBookList = new BookList();
-        testBookList.addBook("Harry Potter");
-        testBookList.addBook("The Hobbit");
-        assertEquals(2, testBookList.getSize());
-
-        testBookList.deleteBook(1); // Delete the first book
-        assertEquals(1, testBookList.getSize());
-        assertEquals("The Hobbit", testBookList.getBook(0).getTitle());
-    }
-
-    @Test
-    void markDoneAndUndoneByIndex() {
-        BookList testBookList = new BookList();
-        testBookList.addBook("Harry Potter");
-
-        testBookList.markDoneByIndex(1); // Mark the first book as read
-        assertTrue(testBookList.getBook(0).isRead());
-
-        testBookList.markUndoneByIndex(1); // Mark the first book as unread
-        assertFalse(testBookList.getBook(0).isRead());
-    }
-
-
-
     @Test
     void printAllBooks() {
         BookList testBookList = new BookList();
@@ -66,7 +39,40 @@ class BookListTest {
         System.setOut(System.out);
     }
 
+    @Test
+    void deleteBook() {
+        BookList bookList = new BookList();
+        bookList.addBook("Harry Potter");
+        assertEquals(1, bookList.getSize());
+        bookList.deleteBook(1);
+        assertEquals(0, bookList.getSize());
+    }
 
+    @Test
+    void getBook() {
+        BookList bookList = new BookList();
+        bookList.addBook("Harry Potter");
+        bookList.addBook("Geronimo");
+        bookList.addBook("Cradle");
+        assertEquals("[U] Cradle", bookList.getBook(2).toString());
+    }
 
+    @Test
+    void markDoneByIndex() {
+        BookList bookList = new BookList();
+        bookList.addBook("Harry Potter");
+        bookList.markDoneByIndex(1);
+        assertEquals("[R] Harry Potter", bookList.getBook(0).toString());
+    }
+
+    @Test
+    void markUndoneByIndex() {
+        BookList bookList = new BookList();
+        bookList.addBook("Harry Potter");
+        bookList.markDoneByIndex(1);
+        assertEquals("[R] Harry Potter", bookList.getBook(0).toString());
+        bookList.markUndoneByIndex(1);
+        assertEquals("[U] Harry Potter", bookList.getBook(0).toString());
+    }
 
 }

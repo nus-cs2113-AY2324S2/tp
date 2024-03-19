@@ -29,7 +29,10 @@ public class BookList {
      * @param index The index of the book to retrieve.
      * @return The Book at the specified index.
      */
-    public Book getBook(int index){
+    public Book getBook(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index > books.size()) {
+            throw new IndexOutOfBoundsException("Book index out of range.");
+        }
         return books.get(index);
     }
 
@@ -46,7 +49,10 @@ public class BookList {
      * Deletes a book from the list by its index.
      * @param index The index of the book to delete.
      */
-    public void deleteBook(int index) {
+    public void deleteBook(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index > books.size()) {
+            throw new IndexOutOfBoundsException("Book index out of range.");
+        }
         Book book = books.get(index - 1);
         books.remove(index - 1);
         System.out.println("Successfully removed " + book.getTitle() + " from the list.");
@@ -56,7 +62,10 @@ public class BookList {
      * Marks a book as read by its index.
      * @param index The index of the book to mark as read.
      */
-    public void markDoneByIndex(int index) {
+    public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index > books.size()) {
+            throw new IndexOutOfBoundsException("Book index out of range.");
+        }
         books.get(index - 1).markBookAsRead();
     }
 
@@ -64,7 +73,10 @@ public class BookList {
      * Marks a book as unread by its index.
      * @param index The index of the book to mark as unread.
      */
-    public void markUndoneByIndex(int index) {
+    public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index > books.size()) {
+            throw new IndexOutOfBoundsException("Book index out of range.");
+        }
         books.get(index - 1).markBookAsUnread();
     }
 
