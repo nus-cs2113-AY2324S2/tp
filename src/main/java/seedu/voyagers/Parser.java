@@ -5,7 +5,7 @@ import seedu.voyagers.commands.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class Parser {
     private static final Date DEFAULT_START = defaultStartCalendar.getTime();
     private static final Date DEFAULT_END = defaultEndCalendar.getTime();
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat dateFormat = Util.dateFormat;
 
 
 

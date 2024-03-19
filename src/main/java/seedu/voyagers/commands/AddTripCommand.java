@@ -17,7 +17,7 @@ public class AddTripCommand extends Command{
     }
 
     public void execute(TripList trips, Ui ui, Storage storage){
-        System.out.println("Entro a addTripCommand");
+
 
         int l = args.length;
         System.out.println(args.length);

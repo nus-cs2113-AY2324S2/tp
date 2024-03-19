@@ -131,4 +131,9 @@ public class Trip {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\t\tStart Date: " + Util.dateFormat.format(startDate) + "\t\tEnd Date: " + Util.dateFormat.format(endDate) + "\t\tLocation: " + location + "\t\tDescription: " + description;
+    }
 }

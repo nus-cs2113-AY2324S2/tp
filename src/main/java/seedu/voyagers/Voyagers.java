@@ -42,14 +42,10 @@ public class Voyagers {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-
                 Command c = Parser.parseInput(fullCommand);
-                System.out.println("Recibo comando" );
-                if (c == null) {
-                   System.out.println("Comando nulo");
-                }
                 c.execute(tripList, ui, null);
                 isExit = c.isExit();
+
             } catch (Exception e) { //TODO: change to specific exceptions
                 ui.echo(e.getMessage());
             }
