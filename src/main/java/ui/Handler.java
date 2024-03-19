@@ -69,7 +69,8 @@ public class Handler {
                     break;
 
                 default:
-                    // Yet to implement : throw new CustomException();
+
+                    break; // valueOf results in immediate exception for non-match with enum Command
                 }
             } catch (IllegalArgumentException e) {
                 // Yet to implement : Reply.printException(e, Constant.INVALID_COMMAND);
