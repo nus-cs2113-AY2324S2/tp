@@ -29,12 +29,13 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.BookMarked")
+    mainClass.set("bookmarked.BookMarked")
 }
 
 shadowJar {
     archiveBaseName.set("BookMarked")
     archiveClassifier.set("")
+    archiveFileName = 'bookmarked.jar'
 }
 
 checkstyle {
