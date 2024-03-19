@@ -279,7 +279,13 @@ public class Parser {
      * Method to print a list of all trips
      */
     public void listAll() {
-        System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
+        if (tripsList.isEmpty()) {
+            System.out.println("No trips found.");
+            return;
+        }
+        else {
+            System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
+        }
         for (int i = 0; i < tripsList.size(); i++) {
             Trip trip = tripsList.get(i);
             String startDateStr = trip.getStartDate().equals(DEFAULT_START) ?

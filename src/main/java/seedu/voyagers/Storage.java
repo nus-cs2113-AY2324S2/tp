@@ -20,8 +20,6 @@ public class Storage {
             Scanner s = new Scanner(f);
             if (s.hasNext()) {
                 System.out.println("Here are the trips in your list:");
-            } else {
-                System.out.println("No trip in your list.");
             }
             while (s.hasNext()) {
                 String[] inputs = s.nextLine().split("\\|", 5);
