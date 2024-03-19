@@ -15,15 +15,22 @@ public class Bmi extends Health {
     /**
      * The height of the user in meters.
      */
-    protected double height;
+    protected static double height;
 
     /**
      * The weight of the user in kilograms.
      */
-    protected double weight;
-    protected double bmiValue;
-    protected String bmiCategory;
+    protected static double weight;
 
+    /**
+     * The Bmi of the user.
+     */
+    protected static double bmiValue;
+
+    /**
+     * The Bmi's corresponding category.
+     */
+    protected static String bmiCategory;
 
     protected LocalDate date = null;
 
@@ -92,11 +99,6 @@ public class Bmi extends Health {
      *
      * @return The calculated Bmi value.
      * @throws AssertionError If calculated value is not positive.
-=======
-    /*
-     * Calculates BMI based on height and weight, prints calculated BMI value,
-     * and calls the printBMICategory method.
->>>>>>> 655e06da663c8923daec5ed590ec5f567f999ce6
      */
     public double calculateBmiValue() {
         double bmi = Math.round((weight / (Math.pow(height, Constant.POWER_OF_TWO))) * Constant.ROUNDING_FACTOR)

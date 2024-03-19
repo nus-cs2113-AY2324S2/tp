@@ -42,35 +42,37 @@ public class Constant {
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
 
+    // Health Constants
     public static final String SPLIT_BY_SLASH = "/";
     public static final Integer HEALTH_TYPE_INDEX = 1;
     public static final String BMI_INPUT = "h:bmi";
     public static final String PERIOD_INPUT = "h:period";
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
+    public static final Integer BMI_PARAMETERS = 4;
     public static final String HEALTH_FLAG = "/h";
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
     public static final String DATE_FLAG = "/date";
-    public static final Integer BMI_PARAMETERS = 4;
     public static final Integer BMI_H_OFFSET = 3;
     public static final Integer BMI_HEIGHT_OFFSET = 8;
     public static final Integer BMI_WEIGHT_OFFSET = 8;
+    public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
+    public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
+    public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
+    public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
     public static final Integer DATE_OFFSET = 6;
-
     public static final double UNDERWEIGHT_BMI_THRESHOLD = 18.5;
     public static final double NORMAL_BMI_THRESHOLD = 24.9;
     public static final double OVERWEIGHT_BMI_THRESHOLD = 29.9;
     public static final double OBESE_BMI_THRESHOLD = 39.9;
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
-
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
     public static final String OBESE_MESSAGE = "You're obese.";
     public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
-
     public static final String BLANK_INPUT_FOR_HEALTH = "Type of health cannot be empty. " +
             "Please input either /h:bmi or /h:period";
     public static final String INVALID_INPUT_FOR_HEALTH = "Invalid input for health type! " +
