@@ -7,11 +7,13 @@ import seedu.stockpal.storage.Storage;
 
 public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    public static final String COMMAND_USAGE = COMMAND_KEYWORD
+            + ": Reduce quantity of an existing product in the inventory at the specific PID\n"
+            + "Format: outflow PID [a/QUANTITY] ";
 
-    ProductList productList;
-    Pid pid;
-    Integer amountToDecrease;
+    private ProductList productList;
+    private Pid pid;
+    private Integer amountToDecrease;
     private final Storage storage;
 
     public OutflowCommand(ProductList productList, Integer pidValue, Integer amountToDecrease, Storage storage) {
