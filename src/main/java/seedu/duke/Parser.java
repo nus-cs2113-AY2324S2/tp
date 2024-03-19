@@ -56,6 +56,7 @@ public class Parser {
         if (command.length == 2 && isNumeric(command[1])){
             int listNumber = Integer.parseInt(command[1]);
             list.removeTravelActivity(listNumber);
+
         } else {
             throw new OmniException("Please specify which task to delete");
         }

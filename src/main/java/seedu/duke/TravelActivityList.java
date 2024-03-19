@@ -20,7 +20,7 @@ public class TravelActivityList {
         travelActivities.add(travelActivity);
         noOfTasks += 1;
         int newSize = noOfTasks;
-        assert newSize == initialListSize + 1 : "There is an error with list size!";
+        assert newSize == initialListSize + 1 :"There is an error with list size!";
     }
 
     /**
@@ -52,6 +52,7 @@ public class TravelActivityList {
      * @param taskNumber The travel activity number on the list
      */
     public void removeTravelActivity(int taskNumber) throws OmniException{
+        assert taskNumber != 0  : "There is not tasks in the list";
         if(taskNumber > travelActivities.size()){
             throw new OmniException("Travel activity cannot be found!");
         }
@@ -63,7 +64,7 @@ public class TravelActivityList {
         System.out.println(removedTask);
         noOfTasks -=1;
         int newSize = noOfTasks;
-        assert newSize == initialListSize - 1 : "There is an error with list size!";
+        assert newSize == initialListSize - 1 :"There is an error with list size!";
     }
 
 
@@ -80,7 +81,7 @@ public class TravelActivityList {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
         boolean isFound = false;
-        for(int iterator = 0; iterator < travelActivities.size(); iterator += 1){
+        for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
             if(travelActivities.get(iterator).getPlan().contains(taskName)){
                 temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
                 temporaryArrayCounter += 1;

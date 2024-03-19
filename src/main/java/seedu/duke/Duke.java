@@ -14,8 +14,8 @@ public class Duke {
         while (!userSaysBye) {
             try {
                 line = in.nextLine();
+                assert line != null : "Input does not exist!";
                 String[] command = line.split(" ");
-
                 switch (command[0].toLowerCase()) {
                 case "list":
                     Ui.printLine();
