@@ -1,7 +1,12 @@
 package workouts;
 import java.time.LocalDate;
+
+import ui.Handler;
+import utility.Parser;
 import utility.Constant;
 import utility.CustomExceptions;
+
+
 public class Run extends Workout{
     protected Integer[] times;
     protected double distance;
@@ -20,9 +25,43 @@ public class Run extends Workout{
     public Run(String stringTime, String stringDistance, String stringDate) throws CustomExceptions.InvalidInput {
         times = parseTime(stringTime);
         distance = Double.parseDouble(stringDistance);
-        date = parseDate(stringDate);
+        date = Parser.parseDate(stringDate);
         pace = calculatePace();
         WorkoutList.addRun(this);
+    }
+
+    /**
+     * Parses a string containing run information, extracts the command, distance and end time before returning
+     * an array of strings containing the information.
+     *
+     * @param input A string containing the Run information in the format "new /e:run /d:DISTANCE /t:TIME [/date:DATE]".
+     * @return An array of strings containing the extracted command, distance, time taken and date(if given).
+     */
+    public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
+
+        String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
+
+
+        if (!input.contains("/e:") || !input.contains("/d:") || !input.contains("/t:")) {
+            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+        }
+
+        results[Constant.SUBSTRING_COMMAND] = Handler.extractSubstringFromSpecificIndex(input, "/e:"); // Command
+        results[Constant.SUBSTRING_DISTANCE] = Handler.extractSubstringFromSpecificIndex(input, "/d:"); // Distance
+        results[Constant.SUBSTRING_TIME] = Handler.extractSubstringFromSpecificIndex(input, "/t:"); // Time
+        results[Constant.SUBSTRING_DATE] = Handler.extractSubstringFromSpecificIndex(input, "/date:"); // Date
+
+        // Assert and validate the extracted values
+
+        assert !results[Constant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
+        assert !results[Constant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
+        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric " +
+                "value (assuming KM)";
+        assert !results[Constant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
+        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format " +
+                "HH:MM:SS";
+
+        return results;
     }
 
     /**
@@ -116,6 +155,8 @@ public class Run extends Workout{
         }
         return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
     }
+
+
 
 
 

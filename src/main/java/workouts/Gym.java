@@ -2,6 +2,7 @@ package workouts;
 
 import utility.CustomExceptions;
 import utility.Constant;
+import utility.Parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,32 +14,37 @@ public class Gym extends Workout{
     // takes (station name, weight, sets, reps)
 
     public Gym() {
+        WorkoutList.addGym(this);
 
     }
     // overloaded constructor for optional date
     public Gym(String stringDate) {
-        this.date = parseDate(stringDate);
+
+        this.date = Parser.parseDate(stringDate);
+        WorkoutList.addGym(this);
+
+    }
+
+    public static void getGym(String input){
+        System.out.println("temp");
     }
 
     /**
      * Adds station to an ArrayList of GymStation object
      * Takes string name, weight done, number of sets, number of reps
      * @param name
-     * @param stringWeight
-     * @param stringNumberOfSet
-     * @param stringReps
+     * @param weight
+     * @param numberOfSet
+     * @param repetitions
      * @throws CustomExceptions.InvalidInput
      */
-    public void addStation(String name, String stringWeight, String stringNumberOfSet,
-                           String stringReps) throws CustomExceptions.InvalidInput{
+    public void addStation(String name, int weight, int numberOfSet,
+                           int repetitions) throws CustomExceptions.InvalidInput{
         try {
-            int reps = Integer.parseInt(stringReps);
-            int weight = Integer.parseInt(stringWeight);
-            int numberOfSets = Integer.parseInt(stringNumberOfSet);
-            Integer[] weightAndReps = {weight, reps};
-            GymStation newStation = new GymStation(name, weightAndReps, numberOfSets);
+            GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
         }
     }
@@ -59,7 +65,12 @@ public class Gym extends Workout{
 
     @Override
     public String toString() {
-        // to be implemented
-        return null;
+        String printedDate;
+        if (date != null){
+            printedDate = date.toString();
+            return String.format("(%s)", printedDate);
+        } else{
+            return "";
+        }
     }
 }
