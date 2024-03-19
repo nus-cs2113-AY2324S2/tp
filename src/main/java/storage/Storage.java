@@ -41,7 +41,7 @@ public class Storage {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 String expenditure = processLine(line);
-                ExpenditureList.addExpenditure(expenditure);
+                ExpenditureList.addExpenditure(expenditure,false);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error" + e.getMessage());
