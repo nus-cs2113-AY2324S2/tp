@@ -11,10 +11,10 @@ public class Parser {
 
     /**
      * Parses and converts String date to a LocalDate variable.
-     * @param dateTime
-     * @return
+     * @param dateTime String representing the date.
+     * @return LocalDate variable representing the date.
      *
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException If there is an error parsing the date. 
      */
     public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
