@@ -29,7 +29,7 @@ public class Parser {
             case "generate": //@晨珖 姚 <1014717807@QQ.com>
                 //ProblemGenerator ;
                 ProblemGenerator pb = new ProblemGenerator();
-                pb.TypeChoose(action);
+                pb.TypeChoose();
                 break;
             case "help": 
                 helpCommand(description, ui);
