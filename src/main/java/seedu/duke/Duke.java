@@ -18,9 +18,8 @@ public class Duke {
 
         String input = "";
         boolean inGame = false;
-
+        input = Parser.readLine();
         while (input != null) {
-            input = Parser.readLine();
 
 
             if (Parser.ifQuit(input)) {
@@ -48,6 +47,7 @@ public class Duke {
                     ui.println("invalid game");
                 }
             }
+            input = Parser.readLine();
         }
     }
 }
