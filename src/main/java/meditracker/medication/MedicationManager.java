@@ -57,6 +57,10 @@ public class MedicationManager {
         return medications.get(listIndex);
     }
 
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
     /**
      * Deletes the Medication object from the medications list.
      * Also converts the index to 0-based indexing before being used.
