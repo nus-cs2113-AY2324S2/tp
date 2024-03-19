@@ -73,4 +73,8 @@ public final class Ui {
     public static void printInvalidPidMessage() {
         Ui.printToScreen(Messages.MESSAGE_ERROR_INVALID_PID);
     }
+
+    public static void printDeleteSuccessMessage() {
+        printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
+    }
 }

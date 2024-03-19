@@ -1,9 +1,14 @@
 package seedu.stockpal.commands;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.storage.Storage;
+import seedu.stockpal.ui.Ui;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeleteCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "delete";
@@ -12,6 +17,7 @@ public class DeleteCommand extends ListActionCommand {
             "Format: delete PID";
     protected Pid pid;
     private final Storage storage;
+    private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
 
 
     public DeleteCommand(ProductList productList, Integer pid, Storage storage) {
@@ -23,6 +29,8 @@ public class DeleteCommand extends ListActionCommand {
     @Override
     public void execute() throws StockPalException {
         productList.deleteProduct(pid);
+        Ui.printDeleteSuccessMessage();
+        LOGGER.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
         storage.save(productList);
     }
 }
