@@ -6,6 +6,7 @@ import seedu.duke.exception.IncompleteWaterException;
 import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.exception.UnregisteredDrinkException;
 import seedu.duke.exception.UnregisteredMealException;
+import seedu.duke.exception.invalidIndexException;
 import seedu.duke.user.User;
 
 public class Parser {
