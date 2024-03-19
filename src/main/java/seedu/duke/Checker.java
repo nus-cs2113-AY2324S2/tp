@@ -50,7 +50,7 @@ public class Checker {
 
         long endTime = System.currentTimeMillis();
         accuracy = (double) correctNumber /test.getNumber();
-        this.time = endTime - startTime;
+        this.time = (endTime - startTime)/1000;
     }
 
     public Boolean[] checkAnswer(){
@@ -62,4 +62,6 @@ public class Checker {
     }
 
     public double getAccuracy(){return accuracy;}
+
+    public long getTime(){return time;}
 }

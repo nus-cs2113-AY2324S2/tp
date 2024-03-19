@@ -21,6 +21,6 @@ public class Test {
         problemList.add(p);
     }
     public int getNumber(){return number;}
-    public  ArrayList<Problem> getProblem(){return ProblemList;}
+    public  ArrayList<Problem> getProblem(){return problemList;}
 
 }

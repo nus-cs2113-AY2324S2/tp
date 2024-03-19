@@ -32,8 +32,8 @@ public class Parser {
                 Test test = pb.TypeChoose();
                 Checker checker = new Checker(test);
                 checker.getUserAnswer();
-                System.out.println(checker.getAccuracy());
-                System.out.println(checker.getCorrectNumber());
+                System.out.println("Acc: "+checker.getAccuracy());
+                System.out.println("Spend Time: "+checker.getTime()+"s");
                 break;
             case "help": 
                 ui.help(command);
