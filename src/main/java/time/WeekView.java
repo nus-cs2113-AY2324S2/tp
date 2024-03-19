@@ -1,6 +1,6 @@
-package Time;
+package time;
+
 import data.TaskManager;
-//import static ui.UiRenderer.printWeekDays;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
-import static ui.UiRenderer.*;
+import static ui.UiRenderer.printWeekHeader;
+import static ui.UiRenderer.printWeekBody;
+import static ui.UiRenderer.printSeparator;
 
 public class WeekView {
     private LocalDate startOfWeek;
@@ -21,11 +23,11 @@ public class WeekView {
 
     public void printWeekView(TaskManager taskManager) {
         LocalDate endOfWeek = startOfWeek.plusDays(6);
-        System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) + " - " + dateFormatter.format(endOfWeek));
+        System.out.println("\nWeek View: " + dateFormatter.format(startOfWeek) +
+                " - " + dateFormatter.format(endOfWeek));
 
         printWeekHeader();
         printWeekBody(startOfWeek, dateFormatter, taskManager);
-//        printWeekDays(startOfWeek, dateFormatter, taskManager);
     }
 
     public void nextWeek() {
@@ -43,7 +45,6 @@ public class WeekView {
     public void printMonthView(TaskManager taskManager) {
         YearMonth yearMonth = YearMonth.from(startOfWeek);
         LocalDate firstOfMonth = startOfWeek.withDayOfMonth(1);
-        LocalDate lastOfMonth = yearMonth.atEndOfMonth();
         LocalDate current = firstOfMonth.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
         // Create a formatter that only prints the day of the month

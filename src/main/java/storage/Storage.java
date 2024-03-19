@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +23,7 @@ public class Storage {
      */
     public static void createNewFile() throws IOException {
         if (!Files.isDirectory(FILE_PATH.getParent())) {
-            System.out.println("Directory not found, creating new one");
+            //  System.out.println("Directory not found, creating new one");
             Files.createDirectories(FILE_PATH.getParent());
         }
         if (!Files.exists(FILE_PATH)) {
@@ -31,6 +31,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks in hashmap and writes it in formatted form to tests.txt
+     *
+     * @param tasks
+     */
     public static void saveTasksToFile(Map<LocalDate, List<String>> tasks) {
         try (FileWriter writer = new FileWriter(FILE_PATH.toFile())) {
             for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
@@ -45,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from test.txt to hashmap
+     *
+     * @return tasks hashmap of tasks read from test.txt
+     */
     public static Map<LocalDate, List<String>> loadTasksFromFile() {
         Map<LocalDate, List<String>> tasks = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH.toFile()))) {
