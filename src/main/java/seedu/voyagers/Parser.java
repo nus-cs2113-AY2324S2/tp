@@ -55,6 +55,8 @@ public class Parser {
             return listAll();
         case "exit":
             return new ExitCommand();
+        case "help":
+            return new HelpCommand();
         // Other cases for commands like "addsubtrip", "removesubtrip" can be added similarly
         default:
             System.out.println("Unknown command.");

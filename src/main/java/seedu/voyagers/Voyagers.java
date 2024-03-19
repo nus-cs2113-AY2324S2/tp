@@ -28,7 +28,7 @@ public class Voyagers {
 
 
         ui.showWelcome();
-        ui.echo("Here are the tasks in your list from the previous time:", false, false);
+        ui.echo("Here are the trips in your list from the previous time:", false, false);
 
         //TODO: make Storage a singleton
         String currentDir = System.getProperty("user.dir");
