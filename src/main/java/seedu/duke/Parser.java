@@ -38,19 +38,19 @@ public class Parser {
                 Meal.handleInfoMeal(command);
             } else if (command.startsWith("infoDrink")) {
                 Drink.handleInfoDrink(command);
-            } else if (command.equals("viewCalories")) {
+            } else if (command.equals("calories")) {
                 user.handleViewCalories();
-            } else if (command.equals("viewCarbohydrates")) {
+            } else if (command.equals("carbs")) {
                 user.handleViewCarbohydrates();
-            } else if (command.equals("viewProtein")) {
+            } else if (command.equals("protein")) {
                 user.handleViewProteins();
-            } else if (command.equals("viewSugar")) {
+            } else if (command.equals("sugar")) {
                 user.handleViewSugar();
-            } else if (command.equals("viewFat")) {
+            } else if (command.equals("fat")) {
                 user.handleViewFat();
             } else if (command.equals("viewWater")) {
                 user.handleViewWaterIntake();
-            } else if (command.equals("viewFiber")) {
+            } else if (command.equals("fiber")) {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
                 user.handleListMeals();
@@ -58,12 +58,12 @@ public class Parser {
                 user.handleListDrinks();
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
-            } else if (command.startsWith("editMealServingSize")) {
-                //handleEditMealServingSize(command);
-            } else if (command.startsWith("editDrinkServingSize")) {
-                //handleEditDrinkServingSize(command);
-            } else if (command.startsWith("editWaterIntake")) {
-                //handleEditWaterIntake(command);
+            } else if (command.startsWith("editMeal")) {
+                User.handleEditMealServingSize(command);
+            } else if (command.startsWith("editDrink")) {
+                User.handleEditDrinkServingSize(command);
+            } else if (command.startsWith("editWater")) {
+                //User.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
@@ -89,28 +89,29 @@ public class Parser {
     }
 
     public static void handleHelp() {
-        System.out.println("Add a meal eaten: ate m/MEAL s/SERVING_SIZE");
-        System.out.println("Add a drink: drink d/DRINK s/SERVING_SIZE");
-        System.out.println("Add water: water s/SERVING_SIZE");
-        System.out.println("Find the information about a certain meal: infoMeal MEAL");
-        System.out.println("Find the information about a certain drink: infoDrink DRINK");
-        System.out.println("View daily calories consumed: viewCalories");
-        System.out.println("View daily carbohydrates consumed: viewCarbohydrates");
-        System.out.println("View daily proteins consumed: viewProtein");
-        System.out.println("View daily fat consumed: viewFat");
-        System.out.println("View daily sugar consumed: viewSugar");
-        System.out.println("View daily water consumption: viewWater");
-        System.out.println("View daily fiber consumed: viewFiber");
-        System.out.println("List meal intake: listMeals");
-        System.out.println("List drink intake: listDrinks");
-        System.out.println("List entire food intake for the day: listEverything");
-        System.out.println("Edit an existing meal after inserted: editMealServingSize INDEX s/NEW_SERVING_SIZE");
-        System.out.println("Edit an existing drink after inserted: editDrinkServingSize INDEX s/NEW_SERVING_SIZE");
-        System.out.println("Edit water intake after inserted: editWaterIntake s/TOTAL_WATER_INTAKE");
-        System.out.println("Delete certain meal entry: deleteMeal INDEX");
-        System.out.println("Delete certain drink entry: deleteDrink INDEX");
-        System.out.println("Clear all entries: clear");
-        System.out.println("Exit the app: exit ");
+        System.out.println("here's all the valid commands i recognise: ");
+        System.out.println("- Add a meal eaten: ate m/MEAL s/SERVING_SIZE");
+        System.out.println("- Add a drink: drink d/DRINK s/SERVING_SIZE");
+        System.out.println("- Add water: water s/SERVING_SIZE");
+        System.out.println("- Find the information about a certain meal: infoMeal MEAL");
+        System.out.println("- Find the information about a certain drink: infoDrink DRINK");
+        System.out.println("- View daily calories consumed: calories");
+        System.out.println("- View daily carbohydrates consumed: carbs");
+        System.out.println("- View daily proteins consumed: protein");
+        System.out.println("- View daily fat consumed: fat");
+        System.out.println("- View daily sugar consumed: sugar");
+        System.out.println("- View daily fiber consumed: fiber");
+        System.out.println("- View daily water consumption: viewWater");
+        System.out.println("- List meal intake: listMeals");
+        System.out.println("- List drink intake: listDrinks");
+        System.out.println("- List entire food intake for the day: listEverything");
+        System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
+        System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
+        //System.out.println("- Edit water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
+        System.out.println("- Delete certain meal entry: deleteMeal INDEX");
+        System.out.println("- Delete certain drink entry: deleteDrink INDEX");
+        System.out.println("- Clear all entries: clear");
+        System.out.println("- Exit the app: exit ");
     }
 
     public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException {
@@ -181,17 +182,15 @@ public class Parser {
     }
 
     public static void parseEditMeal(String command) {
-        int mealSizePosition = command.indexOf("s/");
-        int mealIndexPosition = 20;
-        editMealIndex = Integer.parseInt(command.substring(mealIndexPosition, mealSizePosition).trim());
-        editMealSize = Integer.parseInt(command.substring(mealSizePosition + 2).trim());
+        int mealSizePosition = command.indexOf("/");
+        editMealIndex = Integer.parseInt(command.substring(9, mealSizePosition - 2).trim()) - 1;
+        editMealSize = Integer.parseInt(command.substring(mealSizePosition + 1).trim());
     }
 
     public static void parseEditDrink(String command) {
-        int drinkSizePosition = command.indexOf("s/");
-        int drinkIndexPosition = 21;
-        editDrinkIndex = Integer.parseInt(command.substring(drinkIndexPosition, drinkSizePosition).trim());
-        editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 2).trim());
+        int drinkSizePosition = command.indexOf("/");
+        editDrinkIndex = Integer.parseInt(command.substring(10, drinkSizePosition - 2).trim()) - 1;
+        editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 1).trim());
     }
 
     public static void parseEditWater(String command) {

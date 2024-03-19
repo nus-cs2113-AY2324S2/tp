@@ -49,6 +49,7 @@ public class User {
         totalWaterIntake.add(new Water(volume));
         System.out.println("Added " + volume + " ml of water");
     }
+
     public void handleViewCalories() {
         int caloriesCount = 0;
         for (Meal meal: mealList) {
@@ -123,9 +124,8 @@ public class User {
     public void printMealList(int startIndex) {
         for (int i = 0; i < mealList.size(); i++) {
             Meal currentMeal = mealList.get(i);
-            System.out.print((startIndex+i) + ". " + currentMeal.getName());
+            System.out.println((startIndex+i) + ". " + currentMeal.getName());
         }
-        System.out.println();
     }
     public void handleListMeals() {
         System.out.println("here's what you have eaten today");
@@ -166,19 +166,35 @@ public class User {
         }
     }
 
+    public static void handleEditMealServingSize(String command) {
+        Parser.parseEditMeal(command);
+        String mealName = mealList.get(Parser.editMealIndex).getName();
+        Meal updatedMeal = new Meal(mealName, Parser.editMealSize);
+        mealList.set(Parser.editMealIndex, updatedMeal);
+        System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
+    }
+
+    public static void handleEditDrinkServingSize(String command) {
+        Parser.parseEditDrink(command);
+        String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
+        Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
+        drinkList.set(Parser.editDrinkIndex, updatedDrink);
+        System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
+    }
+
     public void handleDeleteMeal(String command) {
-        int mealIndex = Integer.parseInt(command.substring(11));
+        int mealIndex = Integer.parseInt(command.substring(11)) - 1;
         String mealName = mealList.get(mealIndex).getName();
         mealList.remove(mealIndex);
 
-        System.out.println("Removed " + mealName + " from Meals");
+        System.out.println("Removed " + mealName + " from meals");
     }
 
     public void handleDeleteDrink(String command) {
-        int drinkIndex = Integer.parseInt(command.substring(12));
+        int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
-        System.out.println("Removed " + drinkName + " from Meals");
+        System.out.println("Removed " + drinkName + " from drinks");
     }
 
     public void handleClear() {
