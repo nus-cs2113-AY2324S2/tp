@@ -11,7 +11,8 @@ public enum ArgumentName {
     LIST_INDEX("listIndex"),
     NAME("name"),
     QUANTITY("quantity"),
-    REMARKS("remarks");
+    REMARKS("remarks"),
+    LIST_TYPE("listType");
 
     public final String value;
 
