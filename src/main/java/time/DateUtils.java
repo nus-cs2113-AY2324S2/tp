@@ -1,4 +1,4 @@
-package Time;
+package time;
 import java.time.LocalDate;
 
 public class DateUtils {

@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +23,7 @@ public class Storage {
      */
     public static void createNewFile() throws IOException {
         if (!Files.isDirectory(FILE_PATH.getParent())) {
-            System.out.println("Directory not found, creating new one");
+            //  System.out.println("Directory not found, creating new one");
             Files.createDirectories(FILE_PATH.getParent());
         }
         if (!Files.exists(FILE_PATH)) {
