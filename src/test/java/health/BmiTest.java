@@ -130,6 +130,7 @@ class BmiTest {
     @Test
     void showCurrentBmi_bmiObject_printsCorrectCurrentBmi() {
         // Arrange
+
         Bmi bmi = new Bmi("1.75", "70.00", "19-03-2024");
 
         HealthList.addBmi(bmi);

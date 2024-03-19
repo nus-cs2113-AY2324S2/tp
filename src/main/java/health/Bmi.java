@@ -22,6 +22,7 @@ public class Bmi extends Health {
      */
     protected double weight;
 
+
     /**
      * The Bmi of the user.
      */

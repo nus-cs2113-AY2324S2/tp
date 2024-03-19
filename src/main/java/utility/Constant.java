@@ -42,6 +42,7 @@ public class Constant {
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM = "Insufficient parameters for gym! " +
             "Example input: new /e:gym /n:<number of exercise>";
 
+    // Health Constants
     public static final String SPLIT_BY_SLASH = "/";
     public static final Integer HEALTH_TYPE_INDEX = 1;
     public static final String BMI_INPUT = "h:bmi";
@@ -49,14 +50,14 @@ public class Constant {
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
 
+    public static final Integer BMI_PARAMETERS = 4;
     public static final String HEALTH_FLAG = "/h";
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
     public static final String DATE_FLAG = "/date";
-    public static final String START_FLAG = "/start:";
-    public static final String END_FLAG = "/end:";
+    public static final String START_FLAG = "/start";
+    public static final String END_FLAG = "/end";
 
-    public static final Integer BMI_PARAMETERS = 4;
     public static final Integer BMI_H_OFFSET = 3;
     public static final Integer BMI_HEIGHT_OFFSET = 8;
     public static final Integer BMI_WEIGHT_OFFSET = 8;
@@ -79,7 +80,6 @@ public class Constant {
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
     public static final String OBESE_MESSAGE = "You're obese.";
     public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
-
     public static final String BLANK_INPUT_FOR_HEALTH = "Type of health cannot be empty. " +
             "Please input either /h:bmi or /h:period";
     public static final String INVALID_INPUT_FOR_HEALTH = "Invalid input for health type! " +
@@ -108,4 +108,10 @@ public class Constant {
     public static final String CORRUPT_ERROR = "\nFile is corrupted. Ceasing any further data imports.";
     public static final String SUCCESSFUL_LOAD = "Welcome back, Captain\n" + "Previous data has been synchronised.";
     public static final String LOG_FILE_PATH ="./pulsepilot_log.txt";
+
+    // getRun Constants
+    public static final int SUBSTRING_COMMAND = 0;
+    public static final int SUBSTRING_DISTANCE = 1;
+    public static final int SUBSTRING_TIME = 2;
+    public static final int SUBSTRING_DATE = 3;
 }

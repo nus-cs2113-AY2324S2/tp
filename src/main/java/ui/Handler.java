@@ -18,7 +18,7 @@ import storage.LogFile;
  * before providing feedback to the user.
  */
 public class Handler {
-    LogFile logFile = LogFile.getInstance();
+    static LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -46,6 +46,11 @@ public class Handler {
                     handleExercise(userInput);
 
                     break;
+                case HEALTH:
+
+                    handleHealth(userInput);
+
+                    break;
                 case HISTORY:
 
                     handleHistory(userInput);
@@ -54,11 +59,6 @@ public class Handler {
                 case LATEST:
 
                     handleLatest(userInput);
-
-                    break;
-                case HEALTH:
-
-                    handleHealth(userInput);
 
                     break;
                 case HELP:
@@ -81,6 +81,27 @@ public class Handler {
     }
 
 
+    /**
+     * Extracts a substring from the given input string based on the provided delimiter.
+     *
+     * @param input     The input string from which to extract the substring.
+     * @param delimiter The delimiter to search for in the input string.
+     * @return The extracted substring, or an empty string if the delimiter is not found.
+     */
+    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
+        int index = input.indexOf(delimiter);
+        if (index == -1 || index == input.length() - delimiter.length()) {
+            return "";
+        }
+
+        int startIndex = index + delimiter.length();
+        int endIndex = input.indexOf("/", startIndex);
+        if (endIndex == -1) {
+            endIndex = input.length();
+        }
+
+        return input.substring(startIndex, endIndex).trim();
+    }
 
     /**
      * Checks the type of exercise based on the user input.
@@ -111,20 +132,20 @@ public class Handler {
         if(!isRun && !isGym){
             throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
         }
-        
 
-        if(isRun && userInputs.length < 5){
+
+        if (isRun && userInputs.length < 5) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
         }
 
-        if(isGym && userInputs.length < 3){
+        if (isGym && userInputs.length < 3) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
         }
 
 
         if (isRun){
             return Constant.RUN;
-        }else {
+        } else {
             return Constant.GYM;
         }
     }
