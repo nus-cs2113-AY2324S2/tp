@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import com.jakewharton.fliptables.FlipTableConverters;
 import seedu.duke.exceptions.CustomException;
 
 import java.util.Scanner;
@@ -8,7 +9,7 @@ public class Ui {
     private static final int NEW_LINE = 48;
     public boolean isPlaying = true;
 
-    public void readCommands(Ui ui, QuestionsList questionsList) {
+    public void readCommands(Ui ui, QuestionsList questionsList, Helper helper) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
@@ -18,7 +19,7 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList);
+                parser.parseCommand(command, ui, questionsList, helper);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
@@ -66,6 +67,10 @@ public class Ui {
     public void sayBye() {
         System.out.println("bye bye, get more sleep zzz");
         printLine();
+    }
+
+    public void printTable(String[] headers, Object[][] data) {
+        System.out.println(FlipTableConverters.fromObjects(headers, data));
     }
 
 }
