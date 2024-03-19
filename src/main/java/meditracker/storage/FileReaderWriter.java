@@ -39,10 +39,11 @@ public class FileReaderWriter {
     public static void initialiseDirectory() throws FileReadWriteException {
         File directory = null;
 
+        // Solution adapted from: https://stackoverflow.com/a/3634879
         try {
             directory = new File(getJsonDataFolderName());
         } catch (NullPointerException e) {
-            throw new FileReadWriteException("Folder name to store the JSON file is null");
+            throw new FileReadWriteException("Unable to create folder: Folder name to contain the JSON file is null");
         }
 
         try {
@@ -64,6 +65,8 @@ public class FileReaderWriter {
         initialiseDirectory();
         File fileToWrite = new File(fullFilePath);
         try {
+            // TODO: Introduce a more robust way (rename, create then delete - Done by another function)
+            // TODO: Also to take into account empty file for first run.
             fileToWrite.delete();
             fileToWrite.createNewFile();
         } catch (IOException e) {
