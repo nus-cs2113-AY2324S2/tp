@@ -7,9 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final String name;
-    private final Scanner scanner = new Scanner(System.in);
-
     // Pre-defined sentences
     private static final String PROBLEM_FORM =
             "Please type the number and difficulty you like in following form: \n" +
@@ -25,6 +22,9 @@ public class Ui {
             "Generate problem sets: \t" + "gen -t [type] -n [number] -d [maximum digits]";
     private static final String HELP_COMMAND =
             "Help function: \t" + "help [type], type can be 'gen'/'command'/...";
+    private final String name;
+    private final Scanner scanner = new Scanner(System.in);
+
     /**
      * Creates a new Ui with the given name.
      *
@@ -60,16 +60,17 @@ public class Ui {
 
     public void help(String helpType) {
         switch (helpType) {
-            case "": // by default, user asks Input Instruction
-            case "gen":
-            case "generate":
-                System.out.println(GEN_COMMAND);
-                System.out.println(INPUT_INSTRUCTION);
-                break;
-            case "command":
-                System.out.println(HELP_COMMAND);
-            default:
-                break;
+        case "": // by default, user asks Input Instruction
+        case "gen":
+        case "generate":
+            System.out.println(GEN_COMMAND);
+            System.out.println(INPUT_INSTRUCTION);
+            break;
+        case "command":
+            System.out.println(HELP_COMMAND);
+            break;
+        default:
+            break;
         }
     }
 
@@ -85,7 +86,7 @@ public class Ui {
     /**
      * Displays an error message for an invalid index.
      */
-    
+
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
         showLine();

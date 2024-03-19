@@ -2,20 +2,20 @@ package seedu.duke;
 
 public class Problem {
 
-    private String desctiption;
+    private String description;
     private double answer;
 
-    public Problem(String desctiption, double answer) {
-        this.desctiption = desctiption;
+    public Problem(String description, double answer) {
+        this.description = description;
         this.answer = answer;
     }
 
     public String solved() {
-        return desctiption + answer;
+        return description + answer;
     }
 
     public String unsolved() {
-        return desctiption + "__";
+        return description + "__";
     }
 
     public double getAnswer() {
