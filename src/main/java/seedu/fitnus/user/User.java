@@ -128,7 +128,8 @@ public class User {
     public void printMealList(int startIndex) {
         for (int i = 0; i < mealList.size(); i++) {
             Meal currentMeal = mealList.get(i);
-            System.out.println((startIndex+i) + ". " + currentMeal.getName());
+            System.out.println((startIndex+i) + ". " + currentMeal.getName() + " (serving size: "
+                    + currentMeal.getServingSize() + ")");
         }
     }
     public void handleListMeals() {
@@ -143,7 +144,8 @@ public class User {
     public void printDrinkList(int startIndex) {
         for (int i = 0; i < drinkList.size(); i++) {
             Drink currentDrink = drinkList.get(i);
-            System.out.print((startIndex+i) + ". " + currentDrink.getName());
+            System.out.print((startIndex+i) + ". " + currentDrink.getName() + " (serving size: "
+                    + currentDrink.getDrinkVolumeSize() + ")");
         }
     }
 
