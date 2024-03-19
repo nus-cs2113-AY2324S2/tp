@@ -1,8 +1,9 @@
-package financemanager;
+package transaction;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import transaction.Transaction;
+import transaction.TransactionList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

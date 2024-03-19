@@ -1,4 +1,4 @@
-package financemanager;
+package transaction;
 
 import parser.Parser;
 import transaction.Transaction;

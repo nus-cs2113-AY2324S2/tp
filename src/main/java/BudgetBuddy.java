@@ -1,4 +1,4 @@
-import financemanager.TransactionList;
+import transaction.TransactionList;
 import ui.UserInterface;
 
 import java.util.Scanner;
