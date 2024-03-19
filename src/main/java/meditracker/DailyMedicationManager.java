@@ -15,6 +15,7 @@ public class DailyMedicationManager {
 
     /**
      * Constructs DailyMedicationManager with a list of DailyMedication
+     *
      * @see DailyMedication
      */
     public DailyMedicationManager() {
@@ -29,6 +30,7 @@ public class DailyMedicationManager {
 
     /**
      * Constructs DailyMedicationManager with lines imported from the textfile
+     *
      * @param lines lines of String read from each row in the textfile
      */
     public DailyMedicationManager(List<String> lines) {
@@ -90,6 +92,7 @@ public class DailyMedicationManager {
 
     /**
      * Separates each row by the separator and add into the DailyMedicationManager
+     * 
      * @param line each line read from the textfile
      * @return dailyMedication object to add into the DailyMedicationManager
      */
