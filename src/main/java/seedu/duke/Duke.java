@@ -12,7 +12,6 @@ public class Duke {
         UI.printGreeting();
         UserList userList = new UserList();
 
-
         //replace this with parser
         while (true) {
             String input = in.nextLine();
@@ -39,6 +38,18 @@ public class Duke {
                 userList.addUser(newUser);
             } else if (Objects.equals(command, "current")) {
                 UI.printSetActiveUser(userList.getActiveUser().getName());
+            } else if (Objects.equals(command, "delete")) {
+                String[] words = input.split(" ");
+                int weekOfDay = Integer.parseInt(words[1]);
+                int index = Integer.parseInt(words[2]) - 1;
+
+                userList.getActiveUser().timetable.deleteUserTask(weekOfDay, index);
+            } else if (Objects.equals(command, "addtask")) {
+                User currentUser = userList.getActiveUser();
+                Parser parser = new Parser(currentUser);
+                parser.parseCommand(input);
+            } else if (Objects.equals(command, "view")) {
+                userList.getActiveUser().viewTimetable();
             } else {
                 UI.printInvalidCommand();
             }
