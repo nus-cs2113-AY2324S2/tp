@@ -32,6 +32,6 @@ public class Parser {
             }
         }
         assert amount != null;
-        return new Transaction(description, Float.parseFloat(amount), category, date);
+        return new Transaction(description, Double.parseDouble(amount), category, date);
     }
 }

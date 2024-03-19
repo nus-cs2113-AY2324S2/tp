@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private String description;
-    private float amount;
+    private double amount;
     private String category;
     private LocalDate date;
 
-    public Transaction(String description, float amount, String category,String date) {
+    public Transaction(String description, double amount, String category,String date) {
         this.description = description;
         this.amount = amount;
         this.category = category;
@@ -20,7 +20,7 @@ public class Transaction {
         return description;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
