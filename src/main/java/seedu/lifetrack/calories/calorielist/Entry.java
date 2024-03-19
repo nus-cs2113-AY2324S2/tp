@@ -1,6 +1,6 @@
-package seedu.lifetrack.calorielist;
+package seedu.lifetrack.calories.calorielist;
 
-import seedu.lifetrack.activity.Activity;
+import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
 
 public class Entry {
@@ -17,15 +17,7 @@ public class Entry {
         return activity;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
     public Calorie getCalorie() {
         return calorie;
-    }
-
-    public void setCalorie(Calorie calorie) {
-        this.calorie = calorie;
     }
 }
