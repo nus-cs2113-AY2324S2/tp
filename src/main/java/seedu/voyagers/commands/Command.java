@@ -40,4 +40,8 @@ public abstract class Command {
     public boolean isExit(){
         return false;
     }
+
+    public String[] getArgs() {
+        return args;
+    }
 }

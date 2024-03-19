@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,24 +16,25 @@ public class ParserTest {
 
     private static final String DEFAULT_START = "01 January 1900";
     private static final String DEFAULT_END = "01 January 2500";
-    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
-    private ArrayList<Trip> tripsList;
+    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("en"));
+    private TripList tripsList;
+    private Ui ui;
     private Parser parser;
 
     @BeforeEach
     public void setUp() {
-        tripsList = new ArrayList<>();
-        parser = new Parser(tripsList);
+        tripsList = new TripList(new ArrayList<>());
+        ui = new Ui();
     }
 
     @Test
     public void testAddMainTrip() {
         String input = "addmaintrip /n Trip1 with long name /start 2024-03-15 /end 2024-03-20 " +
                 "/location Location1 /d This is the description";
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = parser.findTripByName("Trip1 with long name");
+        Trip addedTrip = tripsList.getTrip("Trip1 with long name");
         assertEquals("Trip1 with long name", addedTrip.getName());
         assertEquals("15 March 2024", printDateFormat.format(addedTrip.getStartDate()));
         assertEquals("20 March 2024", printDateFormat.format(addedTrip.getEndDate()));
@@ -49,10 +51,10 @@ public class ParserTest {
         System.setIn(in);
 
         // Execute the parser with the prepared input
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = parser.findTripByName("Trip1");
+        Trip addedTrip = tripsList.getTrip("Trip1");
         assertEquals("Trip1", addedTrip.getName());
         assertEquals(DEFAULT_START, printDateFormat.format(addedTrip.getStartDate())); // Check start date
         assertEquals(DEFAULT_END, printDateFormat.format(addedTrip.getEndDate())); // Check end date
@@ -65,13 +67,13 @@ public class ParserTest {
     public void testSetName() {
         String input = "addmaintrip /n Trip1 with long name " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = parser.findTripByName("Trip1 with long name");
+        Trip addedTrip = tripsList.getTrip("Trip1 with long name");
         assertEquals("Trip1 with long name", addedTrip.getName());
         input = "setname /old Trip1 with long name /new This is the new name";
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
         assertEquals("This is the new name", addedTrip.getName());
     }
 
@@ -79,13 +81,13 @@ public class ParserTest {
     public void testSetLocation() {
         String input = "addmaintrip /n Trip1 with long name " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = parser.findTripByName("Trip1 with long name");
+        Trip addedTrip = tripsList.getTrip("Trip1 with long name");
         assertEquals("Location1", addedTrip.getLocation());
         input = "setlocation /n Trip1 with long name    /location the new hangout";
-        parser.parseInput(input);
+        Parser.parseInput(input).execute(tripsList, ui, null);
         assertEquals("the new hangout", addedTrip.getLocation());
     }
 }

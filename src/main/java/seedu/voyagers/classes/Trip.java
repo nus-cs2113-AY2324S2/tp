@@ -27,6 +27,16 @@ public class Trip {
         this.description = description;
     }
 
+    public Trip(String[] args) throws Exception{
+        this.name = args[0];
+
+        this.startDate =  Util.dateFormat.parse(args[1]);
+        this.endDate =   Util.dateFormat.parse(args[2]);
+        this.location = args[3];
+        this.description = args[4];
+
+    }
+
     public String getName() {
         return name;
     }
@@ -37,6 +47,10 @@ public class Trip {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public int getSubTripsSize(){
+        return subTrips.size();
     }
 
     /**
@@ -130,5 +144,20 @@ public class Trip {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = "Name: " + name + "\t\tStart Date: " +
+                Util.dateFormat.format(startDate) + "\t\tEnd Date: " +
+                Util.dateFormat.format(endDate) + "\t\tLocation: " +
+                location + "\t\tDescription: " + description;
+        s += "\n\tSub-trips:";
+        for (Trip t : subTrips) {
+            s += "\n\t\t" + t.toString();
+        }
+
+        return s;
+
     }
 }
