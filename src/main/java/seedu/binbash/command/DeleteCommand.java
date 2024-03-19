@@ -32,7 +32,8 @@ public class DeleteCommand extends Command {
 
     public String execute() {
         if (isIndex) {
-            assert index > 0 && index <= itemList.getItemCount(); // Ensure index out of bounds error is caught by Parser.
+            // Ensure index out of bounds error is caught by Parser.
+            assert index > 0 && index <= itemList.getItemCount();
             commandLogger.log(Level.INFO, "Delete identifier is detected as an index");
             return itemList.deleteItem(index);
         }
