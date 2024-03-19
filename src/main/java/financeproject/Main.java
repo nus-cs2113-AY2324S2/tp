@@ -14,8 +14,9 @@ public class Main {
         Storage storage = new Storage("./data");
         UI ui = new UI();
         ui.printMessage("Welcome. In order to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
-        //TransactionManager manager = storage.loadFile();
         TransactionManager manager = new TransactionManager();
+        manager = storage.loadFile();
+
 
         Parser parser = new Parser();
         while (parser.isContinue) {
