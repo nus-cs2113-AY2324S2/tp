@@ -1,7 +1,10 @@
-package seedu.voyagers;
+package seedu.voyagers.utils;
+
+import seedu.voyagers.classes.Trip;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,19 +51,18 @@ public class Storage {
 
     public static void writeTripFile(ArrayList<Trip> trips, int tripsCount, String currentDir) {
         //local path of data file
-
         File f = new File(currentDir + "/local-voyagers.txt");
 
-        try {
-            java.io.FileWriter writer = new java.io.FileWriter(f);
+        try (java.io.FileWriter writer = new java.io.FileWriter(f)) {
             for (int i = 0; i < tripsCount; i++) {
                 Trip trip = trips.get(i);
-                writer.write(trip.getName() + "|" + trip.getStartDate() + "|" + trip.getEndDate() + "|"
+                writer.write(trip.getName() + "|" + FormatDate.dateFormat.format(trip.getStartDate()) + "|" +
+                        FormatDate.dateFormat.format(trip.getEndDate()) + "|"
                         + trip.getLocation() + "|" + trip.getDescription() + "\n");
             }
-            writer.close();
-        } catch (java.io.IOException e) {
-            System.out.println("An error occurred.");
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
         }
     }
+
 }

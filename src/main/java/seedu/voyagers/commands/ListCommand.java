@@ -1,9 +1,8 @@
 package seedu.voyagers.commands;
 
-import seedu.voyagers.Storage;
-import seedu.voyagers.TripList;
-import seedu.voyagers.Ui;
-
+import seedu.voyagers.classes.TripList;
+import seedu.voyagers.utils.Ui;
+import seedu.voyagers.utils.Storage;
 
 public class ListCommand extends Command{
 

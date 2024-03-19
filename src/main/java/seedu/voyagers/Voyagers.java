@@ -1,18 +1,19 @@
 package seedu.voyagers;
 
+import seedu.voyagers.classes.*;
+import seedu.voyagers.utils.*;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import static seedu.voyagers.Storage.readTripFile;
-import static seedu.voyagers.Storage.writeTripFile;
+import static seedu.voyagers.utils.Storage.readTripFile;
+import static seedu.voyagers.utils.Storage.writeTripFile;
 
 public class Voyagers {
     private static final String FILE_NAME = "local-voyagers.txt";
 
-    //TODO: change to private and add to the command.execute(Ui, tripList, storae)
+    //TODO: change to private and add to the command.execute(Ui, tripList, storage)
     public TripList tripList;
     public Ui ui;
 

@@ -2,6 +2,8 @@ package seedu.voyagers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import seedu.voyagers.classes.Trip;
+import seedu.voyagers.utils.Storage;
 
 import java.io.File;
 import java.io.FileWriter;
