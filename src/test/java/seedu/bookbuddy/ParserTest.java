@@ -63,7 +63,7 @@ public class ParserTest {
         final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
         Parser.parseCommand("invalid", books);
-        assertEquals("Sorry but that is not a valid command. Please try again\n", outContent.toString());
+        assertEquals("Sorry but that is not a valid command. Please try again", outContent.toString());
         System.setOut(originalOut);
     }
 
