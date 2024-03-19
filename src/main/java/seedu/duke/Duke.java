@@ -18,6 +18,7 @@ public class Duke {
         while (input != null) {
             input = Parser.readLine();
 
+
             if (Parser.ifQuit(input)) {
                 break;
             } else if (Parser.ifHelp(input)) {

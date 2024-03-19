@@ -14,22 +14,14 @@ public class Parser {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static boolean ifQuit(String input) {
-        // Check if the input is null
-        if (input == null) {
-            return false; // or throw an exception, depending on your requirements
-        }
-        if (input.equals("quit")) {
+        if (input != null && input.equals("quit")) {
             return true;
         }
         return false;
     }
 
     public static boolean ifHelp(String input) {
-        // Check if the input is null
-        if (input == null) {
-            return false; // or throw an exception, depending on your requirements
-        }
-        if (input.equals("help")) {
+        if (input != null && input.equals("help")) {
             return true;
         }
         return false;
@@ -42,7 +34,7 @@ public class Parser {
      * whatever makes it flow easier
      */
     public static void readGame(String input) throws InvalidGameException {
-        if (!input.equals("Tic Tac Toe") || !input.equals("Hangman")) {
+        if (!input.equals("Tic Tac Toe") && !input.equals("Hangman")) {
             throw new InvalidGameException();
         }
     }
