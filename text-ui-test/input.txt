@@ -1,2 +1,2 @@
-James Gosling
+init n/James Gosling
 bye
