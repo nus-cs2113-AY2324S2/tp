@@ -13,4 +13,10 @@ public class HealthList extends ArrayList<Health> {
         int currentIndex = bmis.size();
         System.out.println(bmis.get(currentIndex - 1));
     }
+
+    public static void showBmiHistory() {
+        for (Bmi bmi : bmis) {
+            System.out.println(bmi);
+        }
+    }
 }
