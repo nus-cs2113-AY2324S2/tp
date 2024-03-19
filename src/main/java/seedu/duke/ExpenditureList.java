@@ -72,7 +72,7 @@ public class ExpenditureList {
         }
     }
 
-    public static void addExpenditure(String expenditure) {
+    public static void addExpenditure(String expenditure, boolean userAdded) {
         String[] parts = expenditure.split("d/", 2);
         if (parts.length < 2) {
             System.out.println("Invalid input format for description.");
@@ -102,7 +102,10 @@ public class ExpenditureList {
             // Ensure that the expenditureList is initialized somewhere before this
             expenditureList.add(new Expenditure(description, amountValue, date));
             expenditureCount += 1;
-            System.out.println("Expenditure added successfully.");
+            if (userAdded){
+                System.out.println("Expenditure added successfully.");
+            }
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount format!");
         }
