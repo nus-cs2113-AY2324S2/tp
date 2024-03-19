@@ -219,7 +219,7 @@ public class Handler {
                         || bmiDetails[1].isEmpty()
                         || bmiDetails[2].isEmpty()
                         || bmiDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
                 }
                 Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
                 HealthList.addBmi(newBmi);

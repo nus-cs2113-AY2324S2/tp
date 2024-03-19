@@ -48,7 +48,7 @@ public class Bmi extends Health {
 
         assert this.height > 0 && this.weight > 0 : "Height and weight must be positive";
 
-        this.date = parseDate(date);
+        this.date = Parser.parseDate(date);
 
         this.bmiValue = calculateBmiValue();
         this.bmiCategory = getBmiCategory(bmiValue);
