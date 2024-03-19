@@ -48,7 +48,7 @@ public class ItemList {
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
             if (currentItem.getItemName().equals(keyword)) {
-                targetIndex = i;
+                targetIndex = i + 1;
                 break;
             }
         }

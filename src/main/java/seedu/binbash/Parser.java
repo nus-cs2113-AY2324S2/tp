@@ -1,6 +1,7 @@
 package seedu.binbash;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.binbash.command.Command;
 import seedu.binbash.command.AddCommand;
@@ -44,13 +45,26 @@ public class Parser {
         }
     }
 
-    private Command parseDeleteCommand(String userInput) throws InvalidArgumentException {
-        Matcher matcher = DeleteCommand.COMMAND_FORMAT.matcher(userInput);
-        if (!matcher.matches()) {
-            throw new InvalidArgumentException("Delete command is not properly formatted!");
+    private Command parseDeleteCommand(String userInput) throws InvalidFormatException,
+            InvalidArgumentException {
+        Matcher argumentMatcher = DeleteCommand.COMMAND_FORMAT.matcher(userInput);
+        if (!argumentMatcher.matches()) {
+            throw new InvalidFormatException("Delete command is not properly formatted!");
         }
-        int index = Integer.parseInt(matcher.group("index"));
-        return new DeleteCommand(itemList, index);
+
+        Pattern indexIdentifier = Pattern.compile("^-?[0-9]+$");
+        Matcher indexMatcher = indexIdentifier.matcher(argumentMatcher.group("identifier"));
+
+        if (indexMatcher.matches()) {
+            int index = Integer.parseInt(argumentMatcher.group("identifier"));
+            if (index <= 0 || index > itemList.getItemCount()) {
+                throw new InvalidArgumentException("Index is out of bounds!");
+            }
+            return new DeleteCommand(itemList, index);
+        } else {
+            String keyword = argumentMatcher.group("identifier");
+            return new DeleteCommand(itemList, keyword);
+        }
     }
 
     private Command parseAddCommand(String userInput) throws InvalidFormatException {
