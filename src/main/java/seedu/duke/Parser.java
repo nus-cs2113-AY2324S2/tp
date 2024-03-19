@@ -24,7 +24,7 @@ public class Parser {
 
         switch (action) {
             // notice: write your parser function by your own
-            case "": // by deafult, it will be "gen"
+            case "": // by default, it will be "gen"
             case "gen":
             case "generate":
                 //ProblemGenerator ;
@@ -33,7 +33,7 @@ public class Parser {
                 pb.TypeChoose();
                 break;
             case "help": 
-                helpCommand(description, ui);
+                ui.help(command);
                 break;
             case "exit":
                 ui.exit();
@@ -42,18 +42,6 @@ public class Parser {
                 ui.invalidCommand();
                 break;
         }
-    }
-
-    public static void helpCommand(String command, Ui ui) {
-        // Help: Input instructions
-        // if null, print general help
-        // if (command == "") {
-        //     ui.help("");
-        //     return;
-        // }
-
-        ui.help(command);
-    
     }
 
 }
