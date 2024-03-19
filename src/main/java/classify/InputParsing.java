@@ -18,23 +18,30 @@ public class InputParsing {
     private static final String ADD = "add";
     private static final String VIEW = "view";
     private static final String DELETE = "delete";
+    //@@author blackmirag3
+    private static final String EDIT = "edit";
     private static final String WRONG_INPUT_MESSAGE = "No such command, type \"help\" to view all commands";
     //@@author tayponghee
     private static final String ENTER_STUDENT_DETAILS = "Enter student details: ";
     private static final String ENTER_STUDENT_NAME = "Enter student name: ";
-    private static final String STUDENT_DETAILS = "Student details:";
+    private static final String STUDENT_DETAILS = "Student details: ";
     private static final String NAME = "Name: ";
-    private static final String CLASSES_ATTENDED = "Classes Attended: ";
+    private static final String CLASSES_ATTENDED = "Classes Attended (blank to skip): ";
     private static final String STUDENT_NOT_FOUND = "Student not found!";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
     private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
     private static final String HELP = "help";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
     private static final String SUBJECT = "Subject: ";
-    private static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100: ";
+    private static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100 (blank to skip) : ";
 
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in){
+        //@@author blackmirag3
+        if (masterStudentList == null) {
+            System.out.println("Student list is null.");
+        }
+        //@@author tayponghee
         switch (userCommand[0]) {
         case ADD:
             addStudent(masterStudentList, in, userCommand[1]);
@@ -61,12 +68,11 @@ public class InputParsing {
             break;
 
         case LIST:
-            if (masterStudentList != null) {
-                StudentList.printCurrentArrayList(masterStudentList);
-            } else {
-                System.out.println("Student list is null.");
-            }
-            Ui.printDivider();
+            listStudents(masterStudentList);
+            break;
+
+        case EDIT:
+            editStudent(masterStudentList, in, userCommand[1]);
             break;
 
         default:
@@ -74,6 +80,71 @@ public class InputParsing {
             Ui.printDivider();
             break;
         }
+    }
+    //@@author blackmirag3
+    private static void listStudents(ArrayList<Student> list) {
+        if (list.isEmpty()) {
+            System.out.println("Currently no students in list.");
+        } else {
+            StudentList.printCurrentArrayList(list);
+        }
+        Ui.printDivider();
+    }
+
+    private static void editStudent(ArrayList<Student> list, Scanner in, String name) {
+        if (list.isEmpty()) {
+            System.out.println("Currently no students in list.");
+            return;
+        }
+        Student student = null;
+        if (name != null) {
+            student = findStudentByName(list, name);
+            if (student == null) {
+                System.out.println(STUDENT_NOT_FOUND);
+            }
+        }
+        while (student == null) {
+            System.out.println("Name of student to edit (enter blank to exit):");
+            name = in.nextLine().trim();
+            if (name.isBlank()) {
+                return;
+            }
+            student = findStudentByName(list, name);
+            if (student == null) {
+                System.out.println(STUDENT_NOT_FOUND);
+            } else {
+                break;
+            }
+        }
+        StudentAttributes attributes = student.getAttributes();
+        showAttributes(attributes);
+        //edits only StudentAttribute. (Not Name or Details)
+        while (true) {
+        System.out.println("How would you like to update student's subject? (enter blank to exit)");
+        String command = in.nextLine().trim();
+        if (command.isBlank()) {
+            return;
+        }
+        switch (command) {
+        case ADD:
+            addAttribute(in, attributes);
+            student.setAttributes(attributes);
+            break;
+
+        case EDIT:
+            editAttribute(in, attributes);
+            break;
+
+        case DELETE:
+            deleteAttribute(in, attributes);
+            break;
+
+        default:
+            System.out.println("invalid input");
+            break;
+        }
+        }
+        //if done overwrite student
     }
 
     //@@author alalal47
@@ -190,25 +261,13 @@ public class InputParsing {
         String name;
         if (studentName == null) {
             System.out.println(ENTER_STUDENT_DETAILS);
-            name = checkForEmptyName(masterStudentList, in, studentName);
-        } else {
-            name = checkForEmptyName(masterStudentList,in, studentName);
         }
+        name = checkForEmptyName(masterStudentList, in, studentName);
         assert name != null : "Student name cannot be empty";
         StudentAttributes attributes = new StudentAttributes(name);
-        attributeInput(in, attributes);
-
-        if (attributes.getSubjectGrades().isEmpty()) {
-            System.out.println("At least one subject must be provided. Please add subjects and grades.");
-            Ui.printDivider();
-            attributeInput(in, attributes);
-        }
-
-        assert attributes.getSubjectGrades() != null : "Subject cannot be empty";
-
+        addAttribute(in, attributes);
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
-
         logger.log(Level.INFO, "Student added successfully.");
         System.out.println(STUDENT_ADDED_SUCCESSFULLY);
         Ui.printDivider();
@@ -247,33 +306,88 @@ public class InputParsing {
         return name;
     }
 
+    //@@author blackmirag3
     /**
-     * Prompts the user to enter attributes for a student, including subject, grade, and classes attended.
-     * Continues to prompt the user until at least one subject and grade are provided.
+     * Prompts the user to edit subject, grade, and classes attended for student.
+     * Continues to prompt the user until user enters blank to exit.
      *
      * @param in         The scanner object to read user input.
      * @param attributes The StudentAttributes object to store the attributes of the student.
      */
-    private static void attributeInput(Scanner in, StudentAttributes attributes) {
+    private static void editAttribute(Scanner in, StudentAttributes attributes) {
         while (true) {
-            System.out.print("Subject: ");
-            String subject = in.nextLine().trim();
-            if (subject.isEmpty()) {
-                logger.log(Level.WARNING, "Empty subject provided.");
-                System.out.println("Subject cannot be empty. Please enter a valid subject.");
-                Ui.printDivider();
-                continue;
+            System.out.print("Subject to edit (enter nothing to exit): ");
+            String subjectToFind = in.nextLine().trim();
+            if (subjectToFind.isBlank()) {
+                System.out.println("no subject edited");
+                return;
             }
-            double grade = checkForGradeFormat(in);
-            int classesAttended = checkForClassesAttendedFormat(in);
+            SubjectGrade currentSubject = attributes.findSubject(subjectToFind);
+            if (currentSubject != null) {
+                System.out.print("New subject name (enter nothing to skip): ");
+                String newName = in.nextLine().trim();
+                if (!newName.isBlank()) {
+                    currentSubject.setSubject(newName);
+                }
+                double newGrade = promptForGrade(in);
+                currentSubject.setGrade(newGrade);
+                int newClassesAttended = promptForClassesAttended(in);
+                currentSubject.setClassesAttended(newClassesAttended);
+                System.out.println("Subject updated.");
+            } else {
+                System.out.println("Subject not found.");
+            }
+        }
+    }
 
-            SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
-            attributes.addSubjectGrade(subjectGrade);
+    private static void deleteAttribute(Scanner in, StudentAttributes attributes) {
+        while (true) {
+            System.out.println("Subject to delete (enter blank to exit)");
+            String subjectToDelete = in.nextLine().trim();
+            if (subjectToDelete.isBlank()) {
+                System.out.println("no subject deleted");
+                return;
+            }
+            if (attributes.findSubject(subjectToDelete) != null) {
+                attributes.deleteSubject(subjectToDelete);
+                System.out.println("Subject deleted");
+            } else {
+                System.out.println("subject not found");
+            }
+        }
+    }
 
-            System.out.println("Do you want to add another subject and grade? (yes/no)");
-            String response = in.nextLine().trim().toLowerCase();
-            if (!response.equals("yes")) {
+    //@@author tayponghee
+    /**
+     * Prompts the user to enter attributes for a student, including subject, grade, and classes attended.
+     * Continues to prompt the user until user enters blank to exit.
+     *
+     * @param in         The scanner object to read user input.
+     * @param attributes The StudentAttributes object to store the attributes of the student.
+     */
+    private static void addAttribute(Scanner in, StudentAttributes attributes) {
+        while (true) {
+            //@@author blackmirag3
+            System.out.print("Subject (enter nothing to skip): ");
+            String subject = in.nextLine().trim();
+            if (subject.isBlank()) {
+                System.out.println("No subjects added.");
                 break;
+            } else if (attributes.findSubject(subject) != null) {
+                //rejects subject if existing subject of same name exists in students' attributes
+                System.out.println("Subject already exists.");
+                break;
+            } else {
+                //@@author tayponghee
+                double grade = promptForGrade(in);
+                int classesAttended = promptForClassesAttended(in);
+                SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
+                attributes.addSubjectGrade(subjectGrade);
+                System.out.println("Do you want to add another subject and grade? (yes/no)");
+                String response = in.nextLine().trim().toLowerCase();
+                if (!response.equals("yes")) {
+                    break;
+                }
             }
         }
     }
@@ -285,55 +399,39 @@ public class InputParsing {
      * @param in The scanner object to read user input.
      * @return The valid number of classes attended.
      */
-    private static int checkForClassesAttendedFormat(Scanner in) {
-        int classesAttended;
+    private static int promptForClassesAttended(Scanner in) {
         while (true) {
             System.out.print(CLASSES_ATTENDED);
             String classesAttendedInput = in.nextLine();
-            try {
-                classesAttended = Integer.parseInt(classesAttendedInput);
-                if (classesAttended < 0) {
-                    System.out.println("Classes attended must be 0 or more.");
-                    Ui.printDivider();
-                    continue;
-                }
-                break;
-            } catch (NumberFormatException e) {
-                logger.log(Level.WARNING, "Invalid input for classes attended: " + classesAttendedInput, e);
-                System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
-                Ui.printDivider();
+            if (classesAttendedInput.isBlank()) {
+                return 0;
+            }
+            int classesAttended = Integer.parseInt(classesAttendedInput);
+            if (isValidClassesAttended(classesAttended)) {
+                return classesAttended;
             }
         }
-        return classesAttended;
     }
 
     /**
-     * Checks the format of the input for the grade.
+     * Prompts for grade from user input and checks format
      * Prompts the user to enter a valid double within the range [0, 100] until one is provided.
      *
      * @param in The scanner object to read user input.
      * @return The valid grade.
      */
-    private static double checkForGradeFormat(Scanner in) {
-        double grade;
+    private static double promptForGrade(Scanner in) {
         while (true) {
             System.out.print(CURRENT_MARKS_OUT_OF_100);
             String gradeInput = in.nextLine();
-            try {
-                grade = Double.parseDouble(gradeInput);
-                if (grade < 0 || grade > 100) {
-                    System.out.println("Grade must be between 0 and 100. Please enter a valid number.");
-                    Ui.printDivider();
-                    continue;
-                }
-                break;
-            } catch (NumberFormatException e) {
-                logger.log(Level.WARNING, "Invalid input for grade: " + gradeInput, e);
-                System.out.println("Invalid input for grade. Please enter a valid number.");
-                Ui.printDivider();
+            if (gradeInput.isBlank()) {
+                return 0;
+            }
+            double grade = Double.parseDouble(gradeInput);
+            if (isValidGrade(grade)) {
+                return grade;
             }
         }
-        return grade;
     }
 
     /**
@@ -350,5 +448,38 @@ public class InputParsing {
             }
         }
         return null;
+    }
+
+    //@@author blackmirag3
+    private static boolean isValidClassesAttended(int classesAttended) {
+        try {
+            if (classesAttended < 0) {
+                System.out.println("Classes attended must be 0 or more.");
+                Ui.printDivider();
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "Invalid input for classes attended: " + classesAttended, e);
+            System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
+            Ui.printDivider();
+            return false;
+        }
+    }
+
+    private static boolean isValidGrade(double grade) {
+        try {
+            if (grade < 0 || grade > 100) {
+                System.out.println("Grade must be between 0 and 100. Please enter a valid number.");
+                Ui.printDivider();
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "Invalid input for grade: " + grade, e);
+            System.out.println("Invalid input for grade. Please enter a valid number.");
+            Ui.printDivider();
+            return false;
+        }
     }
 }

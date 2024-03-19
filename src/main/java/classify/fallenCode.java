@@ -43,4 +43,12 @@ public class fallenCode {
     // public void addStudent(Student s) {
     //     this.studentList.addStudent(s);
     // }
+
+    /*
+    //@@author tayponghee
+    if (attributes.getSubjectGrades().isEmpty()) {
+        System.out.println("At least one subject must be provided. Please add subjects and grades.");
+        Ui.printDivider();
+        attributeInput(in, attributes);
+    }*/
 }
