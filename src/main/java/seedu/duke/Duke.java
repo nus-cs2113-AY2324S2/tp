@@ -14,20 +14,13 @@ public class Duke {
      */
     public static void main(String[] args) {
         ui.greetUser();
-        //ui.byeUser();
 
-        String input = "";
         boolean inGame = false;
-        input = Parser.readLine();
-<<<<<<< HEAD
+        String input = Parser.readLine();
 
-        while (input != null) {
-=======
         while (true) {
->>>>>>> 28c711fe1f602b8f21ef549402e484091996a598
-
-
             if (Parser.ifQuit(input)) {
+                ui.byeUser();
                 break;
             } else if (Parser.ifHelp(input)) {
                 ui.printHelp();
@@ -35,25 +28,24 @@ public class Duke {
             }
 
             if (!inGame) {
-                //ui.askGame();
                 try {
                     Parser.readGame(input);
                     inGame = true;
                     if (input.equals("TTT")) {
                         try {
                             runTicTacToe();
-                            System.out.println("now what would you like to do");
+                            System.out.println("Now what would you like to do?");
                             inGame = false;
                         } catch (InvalidTTMoveException e) {
                             throw new RuntimeException(e);
                         }
                     } else if (input.equals("hangman")) {
                         hangman.runHangMan();
-                        System.out.println("now what would you like to do");
+                        System.out.println("Now what would you like to do?");
                         inGame = false;
                     }
                 } catch (InvalidGameException | NullPointerException e) {
-                    ui.println("invalid game");
+                    ui.println("Invalid Game.");
                 }
             }
             input = Parser.readLine();

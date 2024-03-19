@@ -68,8 +68,13 @@ public class TicTacToe extends Game {
         while (checkWinner().equals("unending") || line.equals("exit")) {
             printBoard();
             line = in.nextLine();
-            readTTMove(line);
-            board[Integer.parseInt(line) - 1] = "X";
+
+            try {
+                readTTMove(line);
+                board[Integer.parseInt(line) - 1] = "X";
+            } catch (InvalidTTMoveException e){
+                System.out.println("Invalid move. There are only slots 1-9.");
+            }
         }
         printBoard();
         System.out.println("Thank you for playing. See you next time!");
