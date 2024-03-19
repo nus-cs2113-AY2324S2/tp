@@ -6,6 +6,9 @@ import java.util.Random;
  * Ai of the game.
  */
 public class Ai {
+    private static int minDirection = 0;
+    private static int maxDirection = 2;
+
     public Ai() {
     }
 
@@ -14,6 +17,17 @@ public class Ai {
      */
     public int getAiDirection() {
         Random rand = new Random();
-        return rand.nextInt(3);
+        int direction = rand.nextInt(3);
+        assert direction >= Ai.getMinDirection() && direction <= Ai.getMaxDirection() :
+                "Illegal AI direction generated!";
+        return direction;
+    }
+
+    public static int getMinDirection() {
+        return minDirection;
+    }
+
+    public static int getMaxDirection() {
+        return maxDirection;
     }
 }
