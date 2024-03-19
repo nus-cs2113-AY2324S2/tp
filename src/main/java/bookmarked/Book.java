@@ -1,4 +1,4 @@
-package seedu.duke;
+package bookmarked;
 
 public class Book {
     protected String description;
@@ -11,6 +11,14 @@ public class Book {
 
     public String getBorrowedStatus() {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
+    }
+
+    public void setBorrowed() {
+        this.isBorrowed = true;
+    }
+
+    public void setReturned() {
+        this.isBorrowed = false;
     }
 
     @Override
