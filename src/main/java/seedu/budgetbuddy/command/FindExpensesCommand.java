@@ -20,7 +20,13 @@ public class FindExpensesCommand extends Command {
 
         ui = new Ui();
         this.expenses = expenses;
-        this.description = description;
+
+        if(description == null) {
+            this.description = "";
+        }
+        else {
+            this.description = description;
+        }
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
     }

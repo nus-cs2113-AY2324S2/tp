@@ -3,6 +3,8 @@ package seedu.budgetbuddy;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -45,7 +47,7 @@ public class SavingListTest {
     }
 
     @Test
-    public void findTotalSavings_calculateSavingsList_success() {
+    public void findTotalSavings_calculateSavingsList_success() throws BudgetBuddyException {
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "500"); // Adding initial savings to work with
         savingList.addSaving("Investments", "300");
@@ -57,7 +59,7 @@ public class SavingListTest {
     }
 
     @Test
-    public void editSaving_validInput_success() {
+    public void editSaving_validInput_success() throws BudgetBuddyException {
         // Create a SavingList and add some savings
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", String.valueOf(100));
@@ -71,7 +73,7 @@ public class SavingListTest {
     }
 
     @Test
-    public void reduceSavings_validIndexAndAmount_success() {
+    public void reduceSavings_validIndexAndAmount_success() throws BudgetBuddyException {
 
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "500"); // Adding initial savings to work with

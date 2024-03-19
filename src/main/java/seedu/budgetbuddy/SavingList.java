@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 public class SavingList {
     private static final Logger LOGGER = Logger.getLogger(SavingList.class.getName());
     protected ArrayList <Saving> savings;
@@ -95,7 +97,10 @@ public class SavingList {
         return -1;
     }
 
-    public void addSaving(String category, String amount) {
+    public void addSaving(String category, String amount) throws BudgetBuddyException{
+        if (!categories.contains(category)) {
+            throw new BudgetBuddyException("The category '" + category + "' is not listed.");
+        }
         int amountInt = Integer.parseInt(amount);
         if (amountInt < 0) {
             try {

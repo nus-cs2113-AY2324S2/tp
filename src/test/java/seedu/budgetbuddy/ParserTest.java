@@ -5,12 +5,11 @@ import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.command.MenuCommand;
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
-
 
 public class ParserTest {
 
@@ -78,7 +77,7 @@ public class ParserTest {
     }
 
     @Test
-    public void handleListCommand_listExpenses_success() {
+    public void handleListCommand_listExpenses_success() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
@@ -93,7 +92,7 @@ public class ParserTest {
     }
 
     @Test
-    public void handleListCommand_listExpensesWithCategory_success() {
+    public void handleListCommand_listExpensesWithCategory_success() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
@@ -108,7 +107,7 @@ public class ParserTest {
     }
 
     @Test
-    public void handleListCommand_listExpensesWithCategory_invalidCategory() {
+    public void handleListCommand_listExpensesWithCategory_invalidCategory() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
@@ -122,12 +121,12 @@ public class ParserTest {
     }
 
     @Test
-    public void handleListCommand_listSavings_success() {
+    public void handleListCommand_listSavings_success() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1150");
-        savingList.addSaving("Investment", "300");
+        savingList.addSaving("Investments", "300");
 
         String input = "list savings";
 
@@ -136,13 +135,13 @@ public class ParserTest {
         assertEquals(ListSavingsCommand.class, command.getClass());
     }
 
-    @Test
-    public void handleListCommand_listSavingsWithCategory_success() {
+    @Test 
+    public void handleListCommand_listSavingsWithCategory_success() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1150");
-        savingList.addSaving("Investment", "300");
+        savingList.addSaving("Investments", "300");
 
         String input = "list savings salary";
 
@@ -151,13 +150,13 @@ public class ParserTest {
         assertEquals(ListSavingsCommand.class, command.getClass());
     }
 
-    @Test
-    public void handleListCommand_listSavingsWithCategory_invalidCategory() {
+    @Test 
+    public void handleListCommand_listSavingsWithCategory_invalidCategory() throws BudgetBuddyException {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
         savingList.addSaving("Salary", "1150");
-        savingList.addSaving("Investment", "300");
+        savingList.addSaving("Investments", "300");
 
         String input = "list savings qweqwe";
 
