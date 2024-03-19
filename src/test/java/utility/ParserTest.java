@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ParserTest {
     @Test
     void parseDate_correctDateInput_returnDate() {
-        LocalDate result = Parser.parseDate("08/03/2024");
+        LocalDate result = Parser.parseDate("08-03-2024");
         LocalDate expected = LocalDate.of(2024, 3, 8);
         assertEquals(expected, result);
     }

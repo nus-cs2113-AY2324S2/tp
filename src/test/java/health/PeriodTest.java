@@ -26,7 +26,7 @@ class PeriodTest {
     @Test
     void calculatePeriodLength_printsCorrectPeriod() {
         // Arrange
-        Period period = new Period("09/03/2022", "16/03/2022");
+        Period period = new Period("09-03-2022", "16-03-2022");
         String expected = "Period Start: "
                 + period.getStartDate()
                 + " Period End: "
@@ -47,8 +47,8 @@ class PeriodTest {
     @Test
     void showLatestPeriod_printCorrectPeriod() {
         // Arrange
-        Period firstPeriod = new Period("09/02/2023", "16/02/2023");
-        Period secondPeriod = new Period("09/03/2023", "16/03/2023");
+        Period firstPeriod = new Period("09-02-2023", "16-02-2023");
+        Period secondPeriod = new Period("09-03-2023", "16-03-2023");
 
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
@@ -72,8 +72,8 @@ class PeriodTest {
 
     void showPeriodHistory_printCorrectPeriodHistory() {
         // Arrange
-        Period firstPeriod = new Period("10/04/2024", "16/04/2024");
-        Period secondPeriod = new Period("09/05/2024", "16/05/2024");
+        Period firstPeriod = new Period("10-04-2024", "16-04-2024");
+        Period secondPeriod = new Period("09-05-2024", "16-05-2024");
 
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
