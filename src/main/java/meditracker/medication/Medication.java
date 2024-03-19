@@ -81,4 +81,9 @@ public class Medication {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+    @Override
+    public String toString() {
+        return getName() + " | " + getQuantity() + " | " + getDosage();
+    }
 }

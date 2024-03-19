@@ -84,7 +84,8 @@ public class DailyMedicationManager {
     }
 
     public void printMedications() {
-        ui.printMedsList(dailyMedications, "Daily Medications");
+        System.out.println("Here are the Daily Medications you have to take today: ");
+        ui.printMedsList(dailyMedications);
     }
 
     /**
