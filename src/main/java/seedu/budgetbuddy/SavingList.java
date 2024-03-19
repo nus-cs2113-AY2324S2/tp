@@ -89,15 +89,27 @@ public class SavingList {
     }
 
     public void editSaving(String category, int index, double amount) {
+        // Check if the category exists
         int categoryIndex = categories.indexOf(category);
-        if (categoryIndex != -1 && index > 0 && index <= savings.size()) {
-            Saving savingToEdit = savings.get(index - 1);
-            savingToEdit.setCategory(category);
-            savingToEdit.setAmount(amount);
-            System.out.println("Saving edited successfully.");
-        } else {
-            System.out.println("Invalid category or index.");
+        if (categoryIndex == -1) {
+            System.out.println("Invalid category.");
+            return;
         }
+
+        // Check if the index is within valid bounds
+        if (index <= 0 || index > savings.size()) {
+            System.out.println("Invalid index.");
+            return;
+        }
+
+        // Retrieve the saving to edit
+        Saving savingToEdit = savings.get(index - 1);
+
+        // Update the saving details
+        savingToEdit.setCategory(category);
+        savingToEdit.setAmount(amount);
+
+        System.out.println("Saving edited successfully.");
     }
 
     public void reduceSavings(int index, double amount){

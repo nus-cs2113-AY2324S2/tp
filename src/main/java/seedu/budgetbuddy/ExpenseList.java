@@ -68,17 +68,31 @@ public class ExpenseList {
     }
 
     public void editExpense(String category, int index, double amount, String description) {
+        // Check if the category exists in the list of categories
         int categoryIndex = categories.indexOf(category);
-        if (categoryIndex != -1 && index > 0 && index <= expenses.size()) {
-            Expense expenseToEdit = expenses.get(index - 1);
-            expenseToEdit.setCategory(category);
-            expenseToEdit.setAmount(amount);
-            expenseToEdit.setDescription(description);
-            System.out.println("Expense edited successfully.");
-        } else {
-            System.out.println("Invalid category or index.");
+        if (categoryIndex == -1) {
+            System.out.println("Invalid category.");
+            return;
         }
+
+        // Check if the index is within valid bounds
+        if (index <= 0 || index > expenses.size()) {
+            System.out.println("Invalid index.");
+            return;
+        }
+
+        // Retrieve the expense to edit
+        Expense expenseToEdit = expenses.get(index - 1);
+
+        // Update the expense details
+        expenseToEdit.setCategory(category);
+        expenseToEdit.setAmount(amount);
+        expenseToEdit.setDescription(description);
+
+        System.out.println("Expense edited successfully.");
     }
+
+
     public void deleteExpense(int index){
         if (index >= 0 && index < expenses.size()){
             expenses.remove(index);
