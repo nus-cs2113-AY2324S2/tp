@@ -12,24 +12,18 @@ public class ProblemGenerator {
 
     static final String DEFAULT_OPERATORS = "+-*/";
 
-
     static final String PROBLEM_FORM = "pleas operators the number and difficulty you like in following form\n"+
             "generate -t [operators] -n [number] -d [maximum digit] \n";
     Scanner in = new Scanner(System.in);
 
-    public Test TypeChoose() {
-
+    public Test typeChoose() {
         System.out.println(PROBLEM_FORM);
         String command = in.nextLine();
         HashMap<String, String> parameter = parseCommand(command);
-
-        return Generate(parameter);
-
-
-
+        return generate(parameter);
     }
 
-    private Test Generate(HashMap<String, String> parameter) {
+    private Test generate(HashMap<String, String> parameter) {
 
         int number = Integer.parseInt(parameter.get("number"));
 
@@ -90,13 +84,10 @@ public class ProblemGenerator {
 
 
             Problem p = new Problem(description, answer);
-            System.out.println((i+1) +". "+ p.unsolved());
+            //System.out.println((i+1) +". "+ p.unsolved());
             test.addToTest(p);
-
-
-
         }
-    return test;
+        return test;
     }
 
 
@@ -112,7 +103,6 @@ public class ProblemGenerator {
                 options.put("number", tokens[i + 1]);
             } else if (tokens[i].equals("-d")) {
                 options.put("maximumDigits", tokens[i + 1]);
-
             }
         }
 
