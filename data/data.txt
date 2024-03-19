@@ -1,2 +1,0 @@
-Salary|400.00|May 23 2022 07:00PM|null
-Bills|-300.00|May 23 2022 07:05PM|null

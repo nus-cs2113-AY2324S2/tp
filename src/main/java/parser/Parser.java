@@ -19,7 +19,7 @@ public class Parser {
     public String parseCommand(String command, TransactionManager manager) {
         String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
-
+        
         switch (action) {
         case "login":
             String username = "";
@@ -87,9 +87,11 @@ public class Parser {
             ui.printMessage("Ok. Added outflow");
             return "Ok. Added outflow";
         case "delete-inflow":
-            //manager.removeTransaction(1, true);
-            break;
         case "delete-outflow":
+            String index = commandParts[1];
+            manager.removeTransaction(Integer.parseInt(index));
+            //manager.removeTransaction(1, true);
+            //break;
             //manager.removeTransaction(1, false);
             break;
         case "view-history":
