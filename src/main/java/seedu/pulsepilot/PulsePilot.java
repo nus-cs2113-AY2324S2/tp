@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.pulsepilot;
 
 import utility.CustomExceptions;
 
@@ -6,7 +6,7 @@ import static ui.Handler.initialiseBot;
 import static ui.Handler.processInput;
 import static ui.Handler.terminateBot;
 
-public class Duke {
+public class PulsePilot {
     /**
      * Main entry-point for PulsePilot.
      */
