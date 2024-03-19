@@ -3,6 +3,7 @@ package health;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
@@ -69,7 +70,6 @@ class PeriodTest {
         assertEquals(expected, outContent.toString());
     }
 
-    @Test
     void showPeriodHistory_printCorrectPeriodHistory() {
         // Arrange
         Period firstPeriod = new Period("10/04/2024", "16/04/2024");

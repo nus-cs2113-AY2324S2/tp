@@ -83,16 +83,7 @@ public class Constant {
     public static final String PERIOD_INPUT = "h:period";
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
-
     public static final Integer BMI_PARAMETERS = 4;
-    public static final Integer BMI_H_OFFSET = 3;
-    public static final Integer BMI_HEIGHT_OFFSET = 8;
-    public static final Integer BMI_WEIGHT_OFFSET = 8;
-    public static final Integer DATE_OFFSET = 6;
-    public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
-    public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
-    public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
-    public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
     public static final String HEALTH_FLAG = "/h";
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
@@ -100,6 +91,15 @@ public class Constant {
     public static final String START_FLAG = "/start";
     public static final String END_FLAG = "/end";
 
+    public static final Integer BMI_H_OFFSET = 3;
+    public static final Integer BMI_HEIGHT_OFFSET = 8;
+    public static final Integer BMI_WEIGHT_OFFSET = 8;
+    public static final Integer DATE_OFFSET = 6;
+
+    public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
+    public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
+    public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
+    public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
     public static final double UNDERWEIGHT_BMI_THRESHOLD = 18.5;
     public static final double NORMAL_BMI_THRESHOLD = 24.9;
     public static final double OVERWEIGHT_BMI_THRESHOLD = 29.9;

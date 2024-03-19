@@ -109,6 +109,7 @@ public class Handler {
         return input.substring(startIndex, endIndex).trim();
     }
 
+
     /**
      * Constructs a new {@code }  object based on the user input.
      *
@@ -153,6 +154,53 @@ public class Handler {
         String filter = inputs[1].split(":")[1];
         Output.printHistory(filter);
 
+    }
+
+
+    /**
+     * Handles user input related to health data. Parses the user input to determine
+     * the type of health data and processes it accordingly.
+     *
+     * @param userInput A string containing health data information of user.
+     */
+    public static void handleHealth(String userInput){
+        try {
+            String typeOfHealth = Health.checkTypeOfHealth(userInput);
+            if (typeOfHealth.equals(Constant.BMI)){
+                String[] bmiDetails = Bmi.getBmi(userInput);
+
+                if (bmiDetails[0].isEmpty()
+                        || bmiDetails[1].isEmpty()
+                        || bmiDetails[2].isEmpty()
+                        || bmiDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+                }
+                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
+                HealthList.addBmi(newBmi);
+                System.out.println(Constant.BMI_ADDED_MESSAGE_PREFIX
+                        + bmiDetails[1]
+                        + Constant.LINE
+                        + bmiDetails[2]
+                        + Constant.LINE
+                        + bmiDetails[3]);
+                System.out.println(newBmi);
+            } else if (typeOfHealth.equals(Constant.PERIOD)){
+                String[] periodDetails = Period.getPeriod(userInput);
+
+                if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+                }
+                Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
+                HealthList.addPeriod(newPeriod);
+                System.out.println(Constant.PERIOD_ADDED_MESSAGE_PREFIX
+                        + periodDetails[1]
+                        + Constant.LINE
+                        + periodDetails[2]);
+                System.out.println(newPeriod);
+            }
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -327,51 +375,6 @@ public class Handler {
         }
     }
 
-    /**
-     * Handles user input related to health data. Parses the user input to determine
-     * the type of health data and processes it accordingly.
-     *
-     * @param userInput A string containing health data information of user.
-     */
-    public static void handleHealth(String userInput){
-        try {
-            String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(Constant.BMI)){
-                String[] bmiDetails = Bmi.getBmi(userInput);
-
-                if (bmiDetails[0].isEmpty()
-                        || bmiDetails[1].isEmpty()
-                        || bmiDetails[2].isEmpty()
-                        || bmiDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
-                }
-                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
-                HealthList.addBmi(newBmi);
-                System.out.println(Constant.BMI_ADDED_MESSAGE_PREFIX
-                        + bmiDetails[1]
-                        + Constant.LINE
-                        + bmiDetails[2]
-                        + Constant.LINE
-                        + bmiDetails[3]);
-                System.out.println(newBmi);
-            } else if (typeOfHealth.equals(Constant.PERIOD)){
-                String[] periodDetails = Period.getPeriod(userInput);
-
-                if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
-                }
-                Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
-                HealthList.addPeriod(newPeriod);
-                System.out.println(Constant.PERIOD_ADDED_MESSAGE_PREFIX
-                        + periodDetails[1]
-                        + Constant.LINE
-                        + periodDetails[2]);
-                System.out.println(newPeriod);
-            }
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     /**
      * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
