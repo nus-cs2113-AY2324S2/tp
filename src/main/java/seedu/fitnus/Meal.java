@@ -1,6 +1,6 @@
-package seedu.duke;
+package seedu.fitnus;
 
-import seedu.duke.exception.UnregisteredMealException;
+import seedu.fitnus.exception.UnregisteredMealException;
 
 import java.util.HashMap;
 

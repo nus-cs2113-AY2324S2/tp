@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.fitnus;
 
 import java.util.Scanner;
 

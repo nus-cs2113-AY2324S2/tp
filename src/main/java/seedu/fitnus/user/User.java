@@ -1,16 +1,16 @@
-package seedu.duke.user;
+package seedu.fitnus.user;
 
-import seedu.duke.Drink;
-import seedu.duke.Meal;
-import seedu.duke.Parser;
-import seedu.duke.Water;
+import seedu.fitnus.Drink;
+import seedu.fitnus.Meal;
+import seedu.fitnus.Parser;
+import seedu.fitnus.Water;
 
-import seedu.duke.exception.IncompleteDrinkException;
-import seedu.duke.exception.IncompleteMealException;
-import seedu.duke.exception.IncompleteWaterException;
-import seedu.duke.exception.UnregisteredDrinkException;
-import seedu.duke.exception.UnregisteredMealException;
-import seedu.duke.exception.invalidIndexException;
+import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.IncompleteWaterException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.invalidIndexException;
 
 import java.util.ArrayList;
 
@@ -170,7 +170,7 @@ public class User {
         }
     }
 
-    public static void handleEditMealServingSize(String command) throws invalidIndexException{
+    public static void handleEditMealServingSize(String command) throws invalidIndexException {
         Parser.parseEditMeal(command);
         assert Parser.editMealIndex != 0: "meal index out of bounds";
         if (Parser.editMealIndex >= mealList.size()) {
@@ -217,7 +217,7 @@ public class User {
         drinkList.clear();
         assert mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
-        
+
         System.out.println("All entries have been deleted");
     }
 

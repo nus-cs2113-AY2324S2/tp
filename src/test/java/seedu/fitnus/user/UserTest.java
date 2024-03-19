@@ -1,13 +1,13 @@
-package seedu.duke.user;
+package seedu.fitnus.user;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Drink;
-import seedu.duke.Meal;
-import seedu.duke.Parser;
-import seedu.duke.Water;
-import seedu.duke.exception.IncompleteMealException;
-import seedu.duke.exception.IncompleteWaterException;
-import seedu.duke.exception.UnregisteredMealException;
+import seedu.fitnus.Drink;
+import seedu.fitnus.Meal;
+import seedu.fitnus.Parser;
+import seedu.fitnus.Water;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.IncompleteWaterException;
+import seedu.fitnus.exception.UnregisteredMealException;
 
 import java.util.ArrayList;
 
