@@ -25,5 +25,6 @@ public class AddCommand extends Command{
     public void execute(String userInput) {
         Module newModule = new Module(moduleCode, moduleMC, moduleStatus, moduleDate);
         moduleList.addModule(newModule);
+        moduleList.printModules();
     }
 }

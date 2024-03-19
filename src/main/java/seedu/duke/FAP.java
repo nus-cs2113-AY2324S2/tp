@@ -12,8 +12,8 @@ public class FAP {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static ModuleList takenModuleList = new ModuleList(10);
-    public static ModuleList toBeTakenModuleList = new ModuleList(10);
+    public static ModuleList moduleList = new ModuleList(10);
+
 
     public static void main(String[] args) {
         printGreeting();

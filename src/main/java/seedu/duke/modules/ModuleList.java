@@ -27,6 +27,14 @@ public class ModuleList {
         return null;
     }
 
+    public ArrayList<Module> getTakenModuleList() {
+        return takenModuleList;
+    }
+
+    public ArrayList<Module> getToBeTakenModuleList() {
+        return toBeTakenModuleList;
+    }
+
     public void addModule(Module module) {
         if (module.getModuleStatus()) {
             takenModuleList.add(module);
@@ -35,8 +43,20 @@ public class ModuleList {
         }
     }
 
+    public void printModules() {
+        for (Module module:takenModuleList) {
+            System.out.println(module.getModuleCode());
+        }
+        for (Module module:toBeTakenModuleList) {
+            System.out.println(module.getModuleCode());
+        }
+    }
     public void removeModule(Module module) {
-        //moduleList.remove(module);
+        if (toBeTakenModuleList.contains(module)) {
+            toBeTakenModuleList.remove(module);
+        } else if (takenModuleList.contains(module)) {
+            takenModuleList.remove(module);
+        }
     }
 
     public void changeModuleGrade(String moduleCode, String grade) {
@@ -57,7 +77,7 @@ public class ModuleList {
                 continue;
             }
             totalMC += module.getModuleMC();
-            sumOfGPA += module.getGradeNumber();
+            sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
         return sumOfGPA/(double)totalMC;
     }
