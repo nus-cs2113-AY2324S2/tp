@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("BudgetBuddy")
+    mainClass.set("budgetbuddy.BudgetBuddy")
 }
 
 shadowJar {

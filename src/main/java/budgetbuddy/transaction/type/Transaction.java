@@ -40,7 +40,7 @@ public abstract class Transaction {
 
     @Override
     public String toString() {
-        return  ("Transaction Type: " + getTransactionType() + " | " +
+        return  (" Transaction Type: " + getTransactionType() + " | " +
                 " Description: " + getDescription() + " | " +
                 " Date: " + getDate() + " | " +
                 " Amount: " + getAmount() + " | " +
