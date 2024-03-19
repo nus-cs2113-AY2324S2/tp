@@ -26,6 +26,7 @@ public class Duke {
                 break;
             } else if (Parser.ifHelp(input)) {
                 ui.printHelp();
+                continue;
             }
 
             if (!inGame) {
