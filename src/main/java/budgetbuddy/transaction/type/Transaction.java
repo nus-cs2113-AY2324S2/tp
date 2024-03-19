@@ -3,7 +3,7 @@ package budgetbuddy.transaction.type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Transaction {
+public abstract class Transaction {
     private String description;
     private double amount;
     private String category;
@@ -35,10 +35,13 @@ public class Transaction {
     public String getCategory() {
         return category;
     }
-  
+
+    public abstract String getTransactionType();
+
     @Override
     public String toString() {
-        return  (" Description: " + getDescription() + " | " +
+        return  ("Transaction Type: " + getTransactionType() + " | " +
+                " Description: " + getDescription() + " | " +
                 " Date: " + getDate() + " | " +
                 " Amount: " + getAmount() + " | " +
                 " Category: " + getCategory()) ;

@@ -50,6 +50,6 @@ public class TransactionList {
         Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
-        UserInterface.printAddMessage(fetchData);
+        UserInterface.printAddMessage(fetchData, account.getBalance());
     }
 }

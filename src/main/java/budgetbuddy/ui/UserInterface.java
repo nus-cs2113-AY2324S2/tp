@@ -24,13 +24,14 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
-    public static void printAddMessage(String transaction){
+    public static void printAddMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Got it. I have added the following transaction \n");
         for (String part : parts) {
             System.out.println(TAB_SPACE + part.trim());
         }
+        System.out.println("\n" + TAB_SPACE + "Your updated account balance is $" + balance);
         System.out.println(LINE);
     }
 
