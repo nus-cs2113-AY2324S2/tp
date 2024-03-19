@@ -1,1 +1,14 @@
-James Gosling
+add
+18/03/2024
+new task 1
+add
+17/03/2024
+task2
+update
+17/03/2024
+1
+qioncioqnc uion uioqen qwpc
+delete
+18/03/2024
+1
+quit
