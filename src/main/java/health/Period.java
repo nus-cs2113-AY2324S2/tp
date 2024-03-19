@@ -5,33 +5,24 @@ import utility.CustomExceptions;
 import utility.Parser;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-import static health.HealthList.periods;
-
-public class PeriodCycle extends Health {
+public class Period extends Health {
     protected LocalDate startDate;
-    protected LocalDate endDate = null;
-    protected int length;
+    protected LocalDate endDate;
+    protected long length;
 
-    public PeriodCycle(LocalDate startDate, String stringEndDate) {
-        this.startDate = startDate;
-        this.endDate = Parser.parseDate(stringEndDate);
-        //this.length = getPeriodLength();
-    }
-    public PeriodCycle(String stringStartDate, String stringEndDate) {
+    public Period(String stringStartDate, String stringEndDate) {
         this.startDate = Parser.parseDate(stringStartDate);
         this.endDate = Parser.parseDate(stringEndDate);
-    }
-
-    public PeriodCycle(String stringStartDate) {
-        this.startDate = Parser.parseDate(stringStartDate);
+        this.length = calculatePeriodLength();
     }
 
     public LocalDate getStartDate() {
         return startDate;
     }
 
-    public static String[] getPeriodCycle(String input) throws CustomExceptions.InvalidInput {
+    public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
         String[] results = new String[Constant.PERIOD_CYCLE_PARAMETERS];
 
         if (!input.contains("/h") || !input.contains("/start:") || !input.contains("/end:")) {
@@ -57,19 +48,21 @@ public class PeriodCycle extends Health {
         return results;
     }
 
+    public long calculatePeriodLength() {
+        // Add 1 to include both start and end dates
+        long length = ChronoUnit.DAYS.between(startDate,endDate) + 1;
+        return length;
+    }
+
     @Override
     public String toString() {
-        return "Period Start: " + this.getStartDate() + " Period End: " + this.endDate;
+        return "Period Start: "
+                + this.getStartDate()
+                + " Period End: "
+                + this.endDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + this.length
+                + " days";
     }
-/*
-    public long getPeriodLength() {
-        return (startDate, endDate);
-    }
-
-    public int getCycleLength(String todayDate) {
-        int currentIndex = periods.size();
-
-    }
-*/
-
 }
