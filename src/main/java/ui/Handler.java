@@ -241,10 +241,10 @@ public class Handler {
             throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
         }
 
-        results[0] = extractSubstringFromSpecificIndex(input, "/e:"); // Command
-        results[1] = extractSubstringFromSpecificIndex(input, "/d:"); // Distance
-        results[2] = extractSubstringFromSpecificIndex(input, "/t:"); // Time
-        results[3] = extractSubstringFromSpecificIndex(input, "/date:"); // Date
+        results[Constant.SUBSTRING_COMMAND] = extractSubstringFromSpecificIndex(input, "/e:"); // Command
+        results[Constant.SUBSTRING_DISTANCE] = extractSubstringFromSpecificIndex(input, "/d:"); // Distance
+        results[Constant.SUBSTRING_TIME] = extractSubstringFromSpecificIndex(input, "/t:"); // Time
+        results[Constant.SUBSTRING_DATE] = extractSubstringFromSpecificIndex(input, "/date:"); // Date
 
         // Assert and validate the extracted values
 
