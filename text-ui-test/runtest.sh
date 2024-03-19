@@ -1,38 +1,27 @@
 #!/usr/bin/env bash
 
-# create bin directory if it doesn't exist
-if [ ! -d "../bin" ]
-then
-    mkdir ../bin
+# change to script directory
+cd "${0%/*}"
+
+# reset saved file from previous run
+if [ -e "save/tasks.txt" ]
+then 
+    rm save/tasks.txt
 fi
 
-# delete output from previous run
-if [ -e "./ACTUAL.TXT" ]
-then
-    rm ACTUAL.TXT
-fi
+cd ..
+./gradlew clean shadowJar
 
-# compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/BobBot/*.java
-then
-    echo "********** BUILD FAILURE **********"
-    exit 1
-fi
+cd text-ui-test
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin BobBot/BobBot < input.txt > ACTUAL.TXT
+java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL-UNIX.TXT
 
-# convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
-
-# compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
+diff EXPECTED-UNIX.TXT ACTUAL-UNIX.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test result: PASSED"
+    echo "Test passed!"
     exit 0
 else
-    echo "Test result: FAILED"
+    echo "Test failed!"
     exit 1
 fi
