@@ -184,6 +184,11 @@ public class Transaction {
         return lender + borrower;
     }
 
+    /**
+     * Recalculate the balances of the lender and borrowers involved in the transaction.
+     *
+     * @throws LongAhException
+     */
     public void recalculateBalances() throws LongAhException{
         for (Subtransaction subtransaction : subtransactions) {
             Member lender = this.lender;
@@ -191,6 +196,44 @@ public class Transaction {
             Member borrower = subtransaction.getBorrower();
             borrower.addToBalance(subtransaction.getAmount());
         }
+    }
+
+    /**
+     * Edits the specified transaction based on user input.
+     *
+     * @param expression   The user input for editing the transaction.
+     * @param memberList   The list of members in the group.
+     * @throws LongAhException If the transaction index is invalid or if the edit input is in an invalid format.
+     */
+    public void editTransaction(String expression, MemberList memberList) throws LongAhException {
+        // Reset the balances of all members involved in the transaction
+        this.lender.resetBalance();
+        for (Subtransaction subtransaction : this.subtransactions) {
+            subtransaction.getBorrower().resetBalance();
+        }
+        // Clear the existing subtransactions
+        subtransactions.clear();
+
+        // Parse the new transaction details
+        String[] splitInput = expression.split("p/");
+        if (splitInput.length < 2 || splitInput[0].isEmpty()) {
+            throw new LongAhException(ExceptionMessage.INVALID_EDIT_COMMAND);
+        }
+
+        String lenderName = splitInput[0].trim();
+        this.lender = memberList.getMember(lenderName);
+        double totalSumLent = 0.0;
+
+        for (int i = 1; i < splitInput.length; i++) {
+            String nameValue = splitInput[i].trim();
+            totalSumLent += addBorrower(nameValue, memberList);
+        }
+
+        // Replace the lender's balance with the new total sum lent
+        this.lender.addToBalance(totalSumLent);
+
+        // Update the borrowers' balances
+        updateBorrowerBalances();
     }
 
 }
