@@ -39,7 +39,7 @@ public class Parser {
                 }
                 String memberName = memberDetails[0].trim();
                 if (memberName.isEmpty()) {
-                    throw new ExpensesException("No name for user! Add a name for the user.");
+                    throw new ExpensesException("No name for user! Add a name for the user");
                 }
                 String groupNameForUser = memberDetails[1].trim();
                 User newUser = new User(memberName);

@@ -36,10 +36,11 @@ public class Group {
         try {
             for (User u : users) {
                 if (u.getName().equals(user.getName())) {
-                    throw new Exception("User already exists in group.");
+                    throw new Exception("User already exists in group");
                 }
             }
             users.add(user);
+            System.out.println("Added " + user.getName() + " to " + groupName);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
