@@ -1,6 +1,9 @@
 package budgetbuddy;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.ui.UserInterface;
 
@@ -54,7 +57,15 @@ public class BudgetBuddy {
                 }
                 transactions.saveTransactionList();
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (InvalidAddTransactionSyntax e) {
+            UserInterface.printInvalidAddSyntax(e.getMessage());
+        } catch (NumberFormatException e) {
+            UserInterface.printNumberFormatError(e.getMessage());
+        } catch (InvalidTransactionTypeException e) {
+            UserInterface.printTransactionTypeError(e.getMessage());
+        } catch(EmptyArgumentException e) {
+            UserInterface.printEmptyArgumentError(e.getMessage());
+        } catch(IndexOutOfBoundsException e){
             UserInterface.printIndexOutOfBounds("Given index id is out of bound",
                     Integer.parseInt(e.getMessage()));
         } catch (Exception e) {

@@ -1,6 +1,9 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +31,8 @@ public class TransactionListTest {
     }
 
     @Test
-    public void processTransaction_addsTransaction() {
+    public void processTransaction_addsTransaction()
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
         Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
@@ -41,7 +45,29 @@ public class TransactionListTest {
     }
 
     @Test
-    public void removeTransaction_removesCorrectTransaction() {
+    public void processTransaction_withInvalidAddSyntax_throwsInvalidAddTransactionSyntax() {
+
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add Expense /n/Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping 50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping /$/50 14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping /$/50 /d/14-03-2024 Personal", account));
+    }
+
+    @Test
+    public void processTransaction_withInvalidTransactionType_throwsTransactionTypeException() {
+
+        assertThrows(InvalidTransactionTypeException.class, () -> transactionList.processTransaction(
+                "add /t/Donation /n/Test /$/200 /d/14-03-2024 /c/Personal", account));
+    }
+
+    @Test
+    public void removeTransaction_removesCorrectTransaction() throws EmptyArgumentException {
         Transaction testTransaction1 = new Income("Test1", 100, "Category1",
                 "14-03-2024", account);
         Transaction testTransaction2 = new Income("Test2", 200, "Category2",
@@ -63,5 +89,25 @@ public class TransactionListTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> transactionList.removeTransaction(
                 "delete 2", account));
+    }
+
+    @Test
+    public void removeTransaction_withMissingIndex_throwsEmptyArgumentException() {
+        Transaction testTransaction = new Income("Test", 100, "Personal",
+                "14-03-2024", account);
+        transactionList.addTransaction(testTransaction);
+
+        assertThrows(EmptyArgumentException.class, () -> transactionList.removeTransaction(
+                "delete", account));
+    }
+
+    @Test
+    public void removeTransaction_withInvalidIndex_throwsNumberFormatException() {
+        Transaction testTransaction = new Income("Test", 100, "Personal",
+                "14-03-2024", account);
+        transactionList.addTransaction(testTransaction);
+
+        assertThrows(NumberFormatException.class, () -> transactionList.removeTransaction(
+                "delete one", account));
     }
 }
