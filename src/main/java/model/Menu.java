@@ -51,12 +51,12 @@ public class Menu implements ItemManager {
 
     /**
      * Removes an item from the menu by its corresponding number
-     * @param menuItemNum The number of the item in the menu
+     * @param menuNum The number of the item in the menu
      */
     @Override
-    public void remove(int menuItemNum) {
+    public void remove(int menuNum) {
         try {
-            this.menuItemList.remove(menuItemNum - 1);
+            this.menuItemList.remove(menuNum - 1);
 
         } catch (IndexOutOfBoundsException e) {
             logr.log(Level.SEVERE, "You tried removing an item belonging to an index " +
