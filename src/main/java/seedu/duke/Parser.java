@@ -25,6 +25,7 @@ public class Parser {
             throw new EndProgramException();
         case "help":
             // Help code here
+            Help.printHelp();
             break;
         case "group":
             // Group code here
