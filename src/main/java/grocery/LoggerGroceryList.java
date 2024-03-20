@@ -26,7 +26,7 @@ public class LoggerGroceryList {
         loggerGL.addHandler(ch);
 
         try {
-            FileHandler fh = new FileHandler("logs/./././GroceryList.log", true);
+            FileHandler fh = new FileHandler("logs/GroceryList.log", true);
             fh.setLevel(Level.INFO);
             loggerGL.addHandler(fh);
         } catch (IOException e) {

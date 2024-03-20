@@ -50,7 +50,6 @@ public class Grocery {
     /**
      * Returns a String representation of the Grocery.
      */
-    // TODO: cannot take in NULL values ?
     public String printGrocery() {
         assert !(this.name.isEmpty()) : "Grocery does not exist";
 

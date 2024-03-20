@@ -126,3 +126,19 @@
   <message>Added fooood</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T06:11:47.080729900Z</date>
+  <millis>1710915107080</millis>
+  <nanos>729900</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added good</message>
+</record>
+</log>
