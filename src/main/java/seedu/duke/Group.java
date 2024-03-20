@@ -3,13 +3,21 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Group {
-    protected String name;
+    protected String groupName;
     protected ArrayList<User> users;
     public static final HashMap<String, Group> groups = new HashMap<>();
 
-    public Group(String name) {
-        this.name = name;
+    public Group(String groupName) {
+        this.groupName = groupName;
         this.users = new ArrayList<>();
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public String getGroupName() {
+        return groupName;
     }
 
     public static Group getOrCreateGroup(String groupName) {
@@ -25,7 +33,15 @@ public class Group {
     }
 
     public void addUsers(User user) {
-        users.add(user);
-        System.out.println("User " + user.getName() + " added to group " + this.name);
+        try {
+            for (User u : users) {
+                if (u.getName().equals(user.getName())) {
+                    throw new Exception("User already exists in group.");
+                }
+            }
+            users.add(user);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
