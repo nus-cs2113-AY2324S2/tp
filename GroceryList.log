@@ -14,3 +14,171 @@
   <message>Added food</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T09:47:54.506992Z</date>
+  <millis>1710928074506</millis>
+  <nanos>992000</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T09:47:54.559200200Z</date>
+  <millis>1710928074559</millis>
+  <nanos>200200</nanos>
+  <sequence>1</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T09:47:54.581279500Z</date>
+  <millis>1710928074581</millis>
+  <nanos>279500</nanos>
+  <sequence>2</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T09:47:54.605366900Z</date>
+  <millis>1710928074605</millis>
+  <nanos>366900</nanos>
+  <sequence>3</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added fooood</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T09:48:21.534991500Z</date>
+  <millis>1710928101534</millis>
+  <nanos>991500</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added whe</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T13:01:21.310491Z</date>
+  <millis>1710939681310</millis>
+  <nanos>491000</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T13:01:21.331465Z</date>
+  <millis>1710939681331</millis>
+  <nanos>465000</nanos>
+  <sequence>1</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T13:01:21.345003200Z</date>
+  <millis>1710939681345</millis>
+  <nanos>3200</nanos>
+  <sequence>2</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added Meat</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T13:01:21.362571600Z</date>
+  <millis>1710939681362</millis>
+  <nanos>571600</nanos>
+  <sequence>3</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added fooood</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>

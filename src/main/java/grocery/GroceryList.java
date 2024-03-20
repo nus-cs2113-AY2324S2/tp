@@ -130,6 +130,7 @@ public class GroceryList {
      * Lists all the user's groceries.
      */
     public void listGroceries() {
+        assert (!groceries.isEmpty()) : "There is nothing to list.";
         int size = groceries.size();
         if (size == 0) {
             Ui.printNoGrocery();
@@ -144,6 +145,7 @@ public class GroceryList {
      * @throws GitException Exception thrown depending on error.
      */
     public void removeGrocery(String details) throws GitException {
+        assert (!groceries.isEmpty()) : "There is nothing to remove.";
         if (details.isEmpty()) {
             throw new EmptyGroceryException();
         }
