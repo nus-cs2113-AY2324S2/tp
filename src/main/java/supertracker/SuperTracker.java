@@ -18,6 +18,8 @@ public class SuperTracker {
     private static final String START_MESSAGE = "Starting SuperTracker application";
     private static final String EXIT_MESSAGE = "Exiting SuperTracker application";
     private static final String LOG_FILE_LOCATION = "supertracker.log";
+    private static final String COMMAND_LOG = "Command passed successfully:";
+    private static final String UNSUCCESSFUL_COMMAND_LOG = "Error while passing input: ";
 
     /**
      * Main entry-point for the java.supertracker.SuperTracker application.
@@ -48,8 +50,10 @@ public class SuperTracker {
             try {
                 command = Parser.parseCommand(input.trim());
                 command.execute();
+                logger.log(Level.INFO, COMMAND_LOG,command);
             } catch (TrackerException e) {
                 Ui.printError(e.getErrorMessage());
+                logger.log(Level.INFO, UNSUCCESSFUL_COMMAND_LOG + e.getErrorMessage(), e);
                 command = new InvalidCommand();
             }
             Ui.printLine();

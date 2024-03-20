@@ -7,7 +7,6 @@ public class Ui {
     private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
-    private static final String MISSING_ITEM_MESSAGE = "Sorry! I could not delete that item!";
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
     private static final String FAREWELL_MESSAGE = "Goodbye!";
     private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
