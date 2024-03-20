@@ -40,32 +40,37 @@ public class NewParser {
         }
 
         switch (command) {
-            case "exit":
-                return new ExitCommand();
-            case "listall":
-                return new ListCommand();
-            case "deletemaintrip":
-                return new DeleteCommand(parseArgs(line, ParserDefinitions.DELETE));
-            case "addmaintrip":
-                return new AddTripCommand(parseArgs(line, ParserDefinitions.ADDMAINTRIP));
-            case "addsubtrip":
-                return new AddSubTripCommand(parseArgs(line, ParserDefinitions.ADDSUBTRIP, true));
-            case "setname":
-                values = concatenate(new String[]{"name"},  parseArgs(line, ParserDefinitions.SETNAME, true));
-                return new ModifyTripCommand(values);
-            case "setdates":
-                values = concatenate(new String[]{"dates"},  parseArgs(line, ParserDefinitions.SETDATES, true));
-                return new ModifyTripCommand(values);
-            case "setlocation":
-                values = concatenate(new String[]{"location"},  parseArgs(line, ParserDefinitions.SETLOCATION, true));
-                return new ModifyTripCommand(values);
-            case "setdescription":
-                values = concatenate(new String[]{"description"},  parseArgs(line, ParserDefinitions.SETDESCRIPTION, true));
-                return new ModifyTripCommand(values);
-            case "help":
-                return new HelpCommand();
-            default:
-                throw new IllegalArgumentException("Invalid command");
+        case "exit":
+            return new ExitCommand();
+        case "listall":
+            return new ListCommand();
+        case "deletemaintrip":
+            return new DeleteCommand(parseArgs(line, ParserDefinitions.DELETE));
+        case "addmaintrip":
+            return new AddTripCommand(parseArgs(line, ParserDefinitions.ADDMAINTRIP));
+        case "addsubtrip":
+            return new AddSubTripCommand(parseArgs(line, ParserDefinitions.ADDSUBTRIP, true));
+        case "setname":
+            values = concatenate(new String[]{"name"},
+                    parseArgs(line, ParserDefinitions.SETNAME, true));
+            return new ModifyTripCommand(values);
+        case "setdates":
+            values = concatenate(new String[]{"dates"},
+                    parseArgs(line, ParserDefinitions.SETDATES, true));
+            return new ModifyTripCommand(values);
+        case "setlocation":
+            values = concatenate(new String[]{"location"},
+                    parseArgs(line, ParserDefinitions.SETLOCATION, true));
+            return new ModifyTripCommand(values);
+        case "setdescription":
+            values = concatenate(new String[]{"description"},
+                    parseArgs(line, ParserDefinitions.SETDESCRIPTION, true));
+            return new ModifyTripCommand(values);
+        case "help":
+            return new HelpCommand();
+        default:
+            throw new IllegalArgumentException("Invalid command");
+
         }
     }
 
