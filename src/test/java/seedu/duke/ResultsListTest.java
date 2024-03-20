@@ -38,13 +38,15 @@ class ResultsListTest {
         roundTwoResults.increaseCorrectAnswers();
         roundTwoResults.calculateScore(); // 1 out of 1 correct
 
-        sessionsResults.addResultAndQuestions(roundOneResults, roundOneQuestions); // returns 1/2 (50%)
-        sessionsResults.addResultAndQuestions(roundTwoResults, roundTwoQuestions); // returns 1/1 (100%)
+        sessionsResults.addResults(roundOneResults); // returns 1/2 (50%)
+        sessionsResults.addResults(roundTwoResults); // returns 1/1 (100%)
     }
 
     @Test
     void testStringConversion_twoRoundResults() throws CustomException {
         createResultList();
-        assertEquals("1. 1/2 (50%)\n2. 1/1 (100%)\n", sessionsResults.toString(false));
+        assertEquals("1/2 (50%)\n1/1 (100%)\n",
+                sessionsResults.getSpecifiedResult(0).getScore()
+                        +"\n"+ sessionsResults.getSpecifiedResult(1).getScore()+"\n");
     }
 }
