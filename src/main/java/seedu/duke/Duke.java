@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import parser.Parser;
+import ui.TextUi;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -25,15 +26,15 @@ public class Duke {
     }
 
     public void run() throws IOException {
-        ui.showWelcomeMessage();
+        ui.showWelcomeMessage("Version 1.0", "Storage File Path"); //Replace with variable
         this.normalOperation();
-        ui.showGoodByeMessage();
+        ui.showGoodByeMessage("Storage File Path"); //Replace with variable
     }
 
     private void normalOperation() throws IOException {
         String userInput;
         do {
-            userInput = ui.getUserCommand();
+            userInput = ui.getUserInput();
             parser.parseInput(userInput);
         } while (!userInput.equals("done"));
     }
