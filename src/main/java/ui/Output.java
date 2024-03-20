@@ -31,10 +31,8 @@ public class Output {
         System.out.println("new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
-        System.out.println("history /e:all - Show history of all exercises");
-        System.out.println("history /e:run - Show history of runs");
-        System.out.println("history /e:gym - Show history of gym workouts");
-        System.out.println("latest - Show the latest run");
+        System.out.println("history /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked");
+        System.out.println("latest /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked");
         System.out.println("help - Show this help message");
         System.out.println("exit - Exit the program");
         printLine();
@@ -55,10 +53,9 @@ public class Output {
      */
     public static void printGymStationPrompt(int stationNumber) {
         printLine();
-
         System.out.println("Please enter the details of station "
                 + stationNumber
-                + "( format: " + Constant.STATION_GYM_FORMAT + ")");
+                + ". (Format: " + Constant.STATION_GYM_FORMAT + ")");
         printLine();
     }
 
@@ -95,24 +92,6 @@ public class Output {
         System.out.println(Constant.ADD_GYM);
         printGymStats(gym);
         printLine();
-    }
-
-    /**
-     * Prints the latest Run object added.
-     */
-    public static void printLatestRun() {
-        try {
-            printLine();
-            Workout latestRun = WorkoutList.getLatestRun();
-            String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
-            System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
-            System.out.println(latestRunString);
-
-        } catch (CustomExceptions.OutOfBounds e) {
-            System.out.println(e.getMessage());
-        } finally {
-            printLine();
-        }
     }
 
     /**
@@ -173,6 +152,71 @@ public class Output {
     }
 
     /**
+     * Prints the latest Run object added.
+     */
+    public static void printLatestRun() {
+        try {
+            Workout latestRun = WorkoutList.getLatestRun();
+            String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
+            System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(latestRunString);
+
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void printLatestGym() {
+        try {
+            Workout latestGym = WorkoutList.getLatestGym();
+            String latestGymString = getFormattedRunWithIndex(WorkoutList.getGymSize(), latestGym);
+            System.out.println(Constant.GYM_STATION_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(latestGymString);
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void printLatestBmi() {
+        HealthList.showCurrentBmi();
+    }
+
+    public static void printLatestPeriod() {
+        HealthList.showLatestPeriod();
+    }
+
+    public static void printLatest(String filter) {
+        try {
+            printLine();
+            Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
+            switch (parsedFilter) {
+            case RUN:
+                printLatestRun();
+                break;
+
+            case GYM:
+                printLatestGym();
+                break;
+
+            case BMI:
+                printLatestBmi();
+                break;
+
+            case PERIOD:
+                printLatestPeriod();
+                break;
+
+            default:
+                throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
+            }
+        } catch (CustomExceptions.InvalidInput e) {
+            System.out.println(e.getMessage());
+        } finally {
+            printLine();
+        }
+    }
+
+    /**
      * Handler function to print all the Workout objects added to the list.
      *
      * @param filter String used to determine if all Run, Gym or Workout objects are printed.
@@ -199,7 +243,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
+                throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
             }
         } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
@@ -245,6 +289,7 @@ public class Output {
     }
 
     public static void printGoodbyeMessage() {
+        printLine();
         System.out.println("PulsePilot successful touchdown");
         System.out.println("See you soon, Captain!");
         printLine();
