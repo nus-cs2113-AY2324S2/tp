@@ -92,7 +92,7 @@ public class GroceryList {
      * Lists all the user's groceries.
      */
     public void listGroceries() {
-        int size = groceries. size();
+        int size = groceries.size();
         if (size == 0) {
             Ui.printNoGrocery();
             return;
