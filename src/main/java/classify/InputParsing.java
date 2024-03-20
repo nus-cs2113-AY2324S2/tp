@@ -425,7 +425,14 @@ public class InputParsing {
             if (gradeInput.isBlank()) {
                 return 0;
             }
-            double grade = Double.parseDouble(gradeInput);
+            //@@author ParthGandhiNUS
+            double grade = 0;
+            try {
+                grade = Double.parseDouble(gradeInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong number format! Please try again! ");
+                grade = promptForGrade(in);
+            }
             if (isValidGrade(grade)) {
                 return grade;
             }
