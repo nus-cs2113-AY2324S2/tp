@@ -7,6 +7,11 @@ import seedu.voyagers.classes.Trip;
 
 public class AddTripCommand extends Command{
 
+    /**
+     * Constructor for AddTripCommand
+     * @param args: args[0]= name, args[1]= location, args[2]= start date,
+     *            args[3]= end date, args[4]= description
+     */
     public AddTripCommand(String[] args){
         super(args);
     }
