@@ -44,10 +44,10 @@ public class Constant {
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
     public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets of %s";
 
-    public static final String RUN_HEADER = "Type\\tTime\\t\\tDistance\\tPace\\t\\tDate\"";
+    public static final String RUN_HEADER = "Type\tTime\t\tDistance\tPace\t\tDate";
 
     // Constant for Error
-    public static final String INVALID_PRINT_HISTORY_FILTER = "Invalid filter! Filter is only 'all', 'run' or 'gym'";
+    public static final String INVALID_FILTER = "Invalid filter! Filter is only 'run', 'gym', 'bmi' or 'period'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
 
     public static final String NO_GYMS_FOUND = "No gyms found! You need to add a gym first!";

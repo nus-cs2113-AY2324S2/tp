@@ -6,5 +6,7 @@ package utility;
 public enum Filters {
     ALL,
     RUN,
-    GYM
+    GYM,
+    PERIOD,
+    BMI
 }
