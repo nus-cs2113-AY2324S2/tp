@@ -1,5 +1,6 @@
 package brokeculator;
 import brokeculator.dashboard.Dashboard;
+import brokeculator.exceptions.BrokeculatorException;
 import brokeculator.frontend.UI;
 import brokeculator.command.Command;
 import brokeculator.storage.parsing.GeneralFileParser;
@@ -18,10 +19,13 @@ public class Logic {
                 String userInput = UI.getUserInput();
                 assert userInput != null;
                 Command command = GeneralInputParser.getCommandFromUserInput(userInput);
+                assert command != null : "command should not be null";
                 command.execute(dashboard);
                 saveExpensesToFile();
+            } catch (BrokeculatorException b) {
+                UI.print("Brokeculator error occurred. " + b.getMessage());
             } catch (Exception e) {
-                UI.print("error occurred, sus. " + e.getMessage());
+                UI.print("Exception caught in main loop. " + e.getMessage());
             }
         }
     }

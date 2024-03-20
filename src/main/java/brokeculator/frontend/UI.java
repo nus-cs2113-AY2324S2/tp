@@ -1,7 +1,7 @@
 package brokeculator.frontend;
 
 import java.util.Scanner;
-
+import brokeculator.exceptions.BrokeculatorException;
 public class UI {
     private static final String STRING_DECORATION = "------------------------------------";
     private static Scanner scanner = new Scanner(System.in);
@@ -22,14 +22,13 @@ public class UI {
      * function for retrieving user input line by line
      * @return String singleLineUserInput single line of user input
      */
-    public static String getUserInput() {
+    public static String getUserInput() throws BrokeculatorException {
         try {
             String singleLineUserInput = scanner.nextLine();
             return singleLineUserInput;
         } catch (Exception e) {
-            UI.print("Error in scanning input, recreating scanner");
             recreateScanner();
-            return null;
+            throw new BrokeculatorException("Error in scanning input detected. Please try again");
         }
     }
     private static void recreateScanner() {
