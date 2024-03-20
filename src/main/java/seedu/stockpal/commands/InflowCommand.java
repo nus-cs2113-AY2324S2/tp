@@ -8,8 +8,9 @@ import seedu.stockpal.storage.Storage;
 public class InflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
-            + ": Increase quantity of an existing product in the inventory at the specific PID\n"
-            + "Format: inflow PID [a/QUANTITY] ";
+            + ": Increases the quantity of product with PID "
+            + "by the specified INCREMENT_AMOUNT from the existing amount.\n"
+            + "Format: inflow PID a/INCREMENT_AMOUNT";
 
     private ProductList productList;
     private Pid pid;

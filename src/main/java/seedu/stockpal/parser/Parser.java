@@ -13,6 +13,7 @@ import seedu.stockpal.commands.Command;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
+import seedu.stockpal.exceptions.UnsignedIntegerExceededException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -20,7 +21,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.stockpal.exceptions.UnsignedIntegerExceededException;
 import seedu.stockpal.storage.Storage;
 
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_COMMAND;

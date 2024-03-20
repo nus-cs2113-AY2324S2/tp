@@ -14,7 +14,7 @@ public class DeleteCommand extends ListActionCommand {
 
     public static final String COMMAND_KEYWORD = "delete";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD +
-            ": Deletes a product from the inventory with using its PID.\n" +
+            ": Deletes the specified product from the inventory at the specified PID.\n" +
             "Format: delete PID";
     private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
     protected Pid pid;
