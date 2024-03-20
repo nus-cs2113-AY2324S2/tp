@@ -1,10 +1,7 @@
 package newsonthego;
 
-<<<<<<< HEAD
 import static newsonthego.NewsOnTheGo.findTopicIndex;
-=======
 import static newsonthego.NewsOnTheGo.FILENAME;
->>>>>>> ea039e5ace8637f1fdb062822bdd93e6ba29bcdb
 import static newsonthego.NewsOnTheGo.importNewsFromText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
