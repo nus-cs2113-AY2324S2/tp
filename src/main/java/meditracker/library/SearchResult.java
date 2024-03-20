@@ -26,7 +26,7 @@ public class SearchResult {
      *
      * @return The name of the medication.
      */
-    private String getName() {
+    public String getName() {
         return this.name;
     }
 
@@ -35,7 +35,7 @@ public class SearchResult {
      *
      * @return The illness(es) the medication is used to treat.
      */
-    private String getIllness() {
+    public String getIllness() {
         return this.illness;
     }
 
@@ -44,7 +44,7 @@ public class SearchResult {
      *
      * @return The possible side effects of the medication.
      */
-    private String getSideEffects() {
+    public String getSideEffects() {
         return this.sideEffects;
     }
 
