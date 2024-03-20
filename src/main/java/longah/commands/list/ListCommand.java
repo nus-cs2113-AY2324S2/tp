@@ -14,15 +14,11 @@ public class ListCommand extends Command {
      * @param commandString The command string.
      * @param taskExpression The task expression.
      */
-    public ListCommand(String commandString, String taskExpression) throws LongAhException {
+    public ListCommand(String commandString, String taskExpression) {
         super(commandString, taskExpression);
         String[] subCommandTaskExpSplit = this.taskExpression.split(" ", 2);
         this.subCommand = subCommandTaskExpSplit[0].toLowerCase();
-        if (subCommandTaskExpSplit.length > 1) {
-            this.taskExpression = subCommandTaskExpSplit[1];
-        } else {
-            throw new LongAhException(ExceptionMessage.INVALID_LIST_COMMAND);
-        }
+        this.taskExpression = subCommandTaskExpSplit.length > 1 ? subCommandTaskExpSplit[1] : "";
     }
 
     /**

@@ -13,6 +13,7 @@ public class AddCommand extends Command {
      * 
      * @param commandString The command string.
      * @param taskExpression The task expression.
+     * @throws LongAhException If the command is invalid.
      */
     public AddCommand(String commandString, String taskExpression) throws LongAhException {
         super(commandString, taskExpression);

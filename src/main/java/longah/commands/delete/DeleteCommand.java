@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
      * 
      * @param commandString The command string.
      * @param taskExpression The task expression.
+     * @throws LongAhException If the command string is invalid.
      */
     public DeleteCommand(String commandString, String taskExpression) throws LongAhException {
         super(commandString, taskExpression);

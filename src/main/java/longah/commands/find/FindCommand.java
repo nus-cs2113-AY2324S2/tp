@@ -13,6 +13,7 @@ public class FindCommand extends Command {
      * 
      * @param commandString The command string.
      * @param taskExpression The task expression.
+     * @throws LongAhException If the find command is invalid.
      */
     public FindCommand(String commandString, String taskExpression) throws LongAhException {
         super(commandString, taskExpression);
