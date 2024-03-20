@@ -173,7 +173,7 @@ public class TravelActivityList {
         TravelActivity taggedTask = travelActivities.get(indexOfTask);
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
-        System.out.println(taggedTask); 
+        System.out.println(taggedTask);
     }
 
 }
