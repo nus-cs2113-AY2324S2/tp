@@ -1,7 +1,6 @@
 package meditracker.command;
 
 import meditracker.DailyMedicationManager;
-import meditracker.argument.Argument;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
 import meditracker.argument.DosageArgument;
@@ -57,11 +56,11 @@ public class ModifyCommand extends Command {
                         Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
-
         Medication medication = medicationManager.getMedication(listIndex);
-        for (Argument argument: argumentList.getArguments()) {
-            ArgumentName argumentName = argument.getName();
-            String argumentValue = parsedArguments.get(argumentName);
+
+        for (Map.Entry<ArgumentName, String> argument: parsedArguments.entrySet()) {
+            ArgumentName argumentName = argument.getKey();
+            String argumentValue = argument.getValue();
 
             switch (argumentName) {
             case DOSAGE:
@@ -77,6 +76,9 @@ public class ModifyCommand extends Command {
                 continue;
             case NAME:
                 medication.setName(argumentValue);
+
+                // TODO: Update medication name in DailyMedication
+
                 break;
             case QUANTITY:
                 medication.setQuantity(argumentValue);
