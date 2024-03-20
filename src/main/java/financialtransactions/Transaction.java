@@ -14,7 +14,7 @@ public abstract class Transaction<T> {
     public Transaction(String name, double amount, String date) {
         this.name = name;
         this.amount = amount;
-        if(date == null){
+        if (date == null){
             this.date = new BaseDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         } else{
             this.date = new BaseDate(date);

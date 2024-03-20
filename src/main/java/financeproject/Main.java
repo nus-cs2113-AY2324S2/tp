@@ -5,7 +5,7 @@ import java.lang.reflect.InaccessibleObjectException;
 import customexceptions.InactivityTimeoutException;
 //import financialtransactions.Inflow;
 //import financialtransactions.Outflow;
-import customexceptions.UnknownPromptException;
+import customexceptions.IncompletePromptException;
 import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
@@ -45,8 +45,12 @@ public class Main {
             String command = ui.readInput();
             try {
                 parser.parseCommand(command, manager);
-            } catch (UnknownPromptException e) {
-                System.out.println("Invalid command");
+            } catch (IncompletePromptException e) {
+                if (e.getIsTypo()) {
+                    System.out.println("Sorry, your prompt appears incomplete. Could you finish your sentence?");
+                } else {
+                    System.out.println("Sorry, unknown prompt detected.");
+                }
             }
             storage.saveFile(manager);
         }

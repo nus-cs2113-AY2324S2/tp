@@ -1,6 +1,6 @@
 package parser;
 
-import customexceptions.UnknownPromptException;
+import customexceptions.IncompletePromptException;
 import financialtransactions.Inflow;
 import financialtransactions.Outflow;
 import userinteraction.UI;
@@ -17,7 +17,8 @@ public class Parser {
         this.ui = new UI();
     }
 
-    public String parseCommand(String command, TransactionManager manager) throws UnknownPromptException, UnknownPromptException {
+    public String parseCommand(String command, TransactionManager manager)
+            throws IncompletePromptException {
         String[] commandParts = command.split(" ");
         String action = commandParts[0];
 
@@ -33,6 +34,9 @@ public class Parser {
             }
             break;
         case "add-inflow":
+            if (commandParts.length < 3) {
+                throw new IncompletePromptException(command);
+            }
             String inflowName = commandParts[1];
             double inflowAmount = Double.parseDouble(commandParts[2]);
             String inflowDate = commandParts[3] + " " + commandParts[4];
@@ -42,6 +46,9 @@ public class Parser {
             ui.printMessage("Ok. Added inflow");
             return "Ok. Added inflow";
         case "add-outflow":
+            if (commandParts.length < 3) {
+                throw new IncompletePromptException(command);
+            }
             String outflowName = commandParts[1];
             double outflowAmount = Double.parseDouble(commandParts[2]);
             String outflowDate = commandParts[3] + " " + commandParts[4];
@@ -51,9 +58,15 @@ public class Parser {
             ui.printMessage("Ok. Added outflow");
             return "Ok. Added outflow";
         case "delete-inflow":
+            if (commandParts.length < 2) {
+                throw new IncompletePromptException(command);
+            }
             //manager.removeTransaction(1, true);
             break;
         case "delete-outflow":
+            if (commandParts.length < 2) {
+                throw new IncompletePromptException(command);
+            }
             //manager.removeTransaction(1, false);
             break;
         case "view-history":
@@ -64,7 +77,7 @@ public class Parser {
             isContinue = false;
             break;
         default:
-            throw new UnknownPromptException();
+            throw new IncompletePromptException(command);
         }
         return null;
     }
