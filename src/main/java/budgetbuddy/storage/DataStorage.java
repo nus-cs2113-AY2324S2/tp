@@ -24,6 +24,9 @@ public class DataStorage {
 
     public void saveTransactions(ArrayList<Transaction> transactionArrayList) throws IOException {
         File f = new File(STORAGE_FILE_PATH);
+
+        assert f.exists() : "File does not exist";
+
         FileWriter fw = new FileWriter(STORAGE_FILE_PATH);
         for (Transaction transaction : transactionArrayList) {
             if (transaction == null) {
@@ -50,6 +53,9 @@ public class DataStorage {
     private Transaction processData(String s, Account account) {
         String[] transactionInfo = s.split(" ,");
 
+        assert transactionInfo.length == 5 : "Invalid transaction information format";
+        assert transactionInfo[2].equals("Income") || transactionInfo[2].equals("Expense") : "Invalid transaction type";
+
         switch (transactionInfo[2]) {
         case "Income":
             return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
@@ -75,6 +81,9 @@ public class DataStorage {
         if (!f.exists()) {
             f.createNewFile();
         }
+
+        assert f.exists() : "File does not exist";
+
         Scanner s = new Scanner(f);
         ArrayList<Transaction> transactionList = new ArrayList<>();
         Account account = new Account();
