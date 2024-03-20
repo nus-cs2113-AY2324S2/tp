@@ -1,6 +1,5 @@
 package meditracker.command;
 
-import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
@@ -26,8 +25,7 @@ public class ModifyCommandTest {
         String inputString = "modify -l 1 -n " + newName;
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
-        command.execute(medicationManager, ui, dailyMedicationManager);
+        command.execute(medicationManager, null, ui);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));
@@ -49,8 +47,7 @@ public class ModifyCommandTest {
         String inputString = String.format("modify -n %s -l 1", newName);
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
-        command.execute(medicationManager, ui, dailyMedicationManager);
+        command.execute(medicationManager, null, ui);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));

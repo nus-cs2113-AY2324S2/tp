@@ -1,6 +1,5 @@
 package meditracker.command;
 
-import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
@@ -25,8 +24,7 @@ public class DeleteCommandTest {
         String inputString = "delete -l 1";
         DeleteCommand command = new DeleteCommand(inputString);
         Ui ui = new Ui();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
-        command.execute(medicationManager, ui, dailyMedicationManager);
+        command.execute(medicationManager, null, ui);
 
         assertThrows(IndexOutOfBoundsException.class, () -> medicationManager.getMedication(1));
     }
