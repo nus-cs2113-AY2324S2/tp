@@ -8,6 +8,7 @@
 - Issue #41: Create a common logging class for the whole program
 - Issue #25: Create and Open the JSON save file 
 - Issue #27: Read and Write medication-related data to JSON file
+- Issue #48: Read and wrote daily medication related data to txt file
 
 ### Developer Guide Contributions
 

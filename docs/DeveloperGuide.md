@@ -17,7 +17,7 @@ Additional Packages used: JSON
 - TODO: Design and Implementation of the Logging Functionaity (SX) (Issue #41)
 - TODO: Design and Implementing of the Load and Save functionality (SX) (Issue #25)
 - TODO: Design and Implementing of the Reading and Writing of JSON file (SX) (Issue #27)
-
+- TODO: Consider the design and impl. of #48
 
 ## Product scope
 ### Target user profile
