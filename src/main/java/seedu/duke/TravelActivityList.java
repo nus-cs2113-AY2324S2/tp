@@ -104,9 +104,10 @@ public class TravelActivityList {
                 temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
                 temporaryArrayCounter += 1;
                 logger.log(Level.INFO, "An activity is added to the temporaryArray");
+                isFound = true;
             }
         }
-        if (temporaryArrayCounter == 0) {
+        if (temporaryArrayCounter == 0 || isFound == false) {
             System.out.println("Sorry I could not find what you are looking for.");
             logger.log(Level.INFO, "No activity is stored in the temporaryArray");
         } else {
