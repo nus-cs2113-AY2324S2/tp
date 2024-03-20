@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedication;
 import meditracker.DailyMedicationManager;
 import meditracker.exception.MediTrackerException;
 import meditracker.medication.Medication;
@@ -57,6 +58,8 @@ public class AddCommand extends Command {
         Medication medication = new Medication(medicationName, medicineQuantity, medicineDosage, expiryDate, intakeFreq,
                 remarks);
         medicationManager.addMedication(medication);
+        DailyMedication dailyMedication = new DailyMedication(medicationName);
+        dailyMedicationManager.addDailyMedication(dailyMedication);
         ui.showAddCommandMessage();
     }
 }
