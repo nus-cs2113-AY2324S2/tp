@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 public class EditCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "edit";
     public static final String COMMAND_USAGE = COMMAND_KEYWORD
-            + ": Edits an existing product in the inventory at the specific PID\n"
+            + ": Edits an existing product in the inventory at the specific PID.\n"
             + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]";
 
-    private static Logger logger = Logger.getLogger(EditCommand.class.getName());
+    static Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     private Pid pid;
     private Name name;

@@ -5,7 +5,10 @@ import seedu.stockpal.ui.Ui;
 
 public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
+    public static final String COMMAND_USAGE = COMMAND_KEYWORD
+            + ": Lists each product in inventory.\n"
+            + "Format: list";
+
     protected ProductList productList;
 
     public ListCommand(ProductList productList) {

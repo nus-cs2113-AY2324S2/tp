@@ -2,7 +2,7 @@ package seedu.stockpal.common;
 
 public class Messages {
     public static final String HORIZONTAL_LINE = "==================================================";
-    public static final String MESSAGE_WELCOME = "Welcome to StockPal!";
+    public static final String MESSAGE_WELCOME = "Welcome to StockPal!" + "\n" + "Enter a command to begin.";
     public static final String MESSAGE_GOODBYE = "Exiting program, goodbye!";
 
     public static final String MESSAGE_ADDED = "Product added!";
