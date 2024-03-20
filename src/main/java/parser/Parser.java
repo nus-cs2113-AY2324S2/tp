@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class Parser {
     public boolean isExitCommandDetected = false;
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
@@ -86,10 +86,13 @@ public class Parser {
             return IncorrectCommand;
         }
         try {
+            String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+            int quantity = Integer.parseInt(matcher.group("quantity"));
             return new AddCommand(
                     matcher.group("itemName"),
-                    matcher.group("quantity"),
-                    matcher.group("uom")
+                    quantity,
+                    matcher.group("uom"),
+                    category
             );
 
         } catch (CommandFormatException e) {
