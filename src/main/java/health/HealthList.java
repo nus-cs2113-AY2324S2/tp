@@ -2,10 +2,11 @@ package health;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of BMI objects stored.
+ */
 public class HealthList extends ArrayList<Health> {
-    /**
-     * ArrayList to store Bmi objects.
-     */
+
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
@@ -31,18 +32,50 @@ public class HealthList extends ArrayList<Health> {
         System.out.println(bmis.get(currentIndex - 1));
     }
 
+    /**
+     * Prints all the BMI entries recorded.
+     */
     public static void showBmiHistory() {
+        assert !bmis.isEmpty() : "BMI List is empty";
         for (Bmi bmi : bmis) {
             System.out.println(bmi);
         }
     }
 
+    /**
+     * Adds a period to the ArrayList of periods.
+     *
+     * @param period Period object to be added
+     */
     public static void addPeriod(Period period) {
         periods.add(period);
     }
 
+    /**
+     * Prints the latest period object added.
+     */
     public static void showLatestPeriod() {
+        assert !periods.isEmpty() : "Period List is empty";
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
+    }
+
+
+    /**
+     * Prints all Period entries tracked.
+     */
+    public static void showPeriodHistory() {
+        assert !periods.isEmpty() : "Period List is empty";
+        for (Period period : periods) {
+            System.out.println(period);
+        }
+    }
+
+    /**
+     * Clears the Bmis and Periods array lists.
+     */
+    public static void clearBmisAndPeriods() {
+        periods.clear();
+        bmis.clear();
     }
 }

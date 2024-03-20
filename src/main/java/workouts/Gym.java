@@ -7,37 +7,42 @@ import utility.Parser;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a Gym object that contains an ArrayList of GymStation objects.
+ */
 public class Gym extends Workout{
     protected LocalDate date = null;
     protected ArrayList<GymStation> stations = new ArrayList<>();
 
-    // takes (station name, weight, sets, reps)
-
+    /**
+     * Constructor that adds a Gym object to WorkoutList.
+     */
     public Gym() {
-
-    }
-    // overloaded constructor for optional date
-    public Gym(String stringDate) {
-        this.date = Parser.parseDate(stringDate);
+        WorkoutList.addGym(this);
     }
 
     /**
-     * Adds station to an ArrayList of GymStation object
-     * Takes string name, weight done, number of sets, number of reps
-     * @param name
-     * @param stringWeight
-     * @param stringNumberOfSet
-     * @param stringReps
-     * @throws CustomExceptions.InvalidInput
+     * Overloaded constructor that adds a Gym object to WorkoutList, and also takes the optional date parameter.
+     * @param stringDate String representing the date parameter specified.
      */
-    public void addStation(String name, String stringWeight, String stringNumberOfSet,
-                           String stringReps) throws CustomExceptions.InvalidInput{
+    public Gym(String stringDate) {
+        this.date = Parser.parseDate(stringDate);
+        WorkoutList.addGym(this);
+    }
+
+    /**
+     * Adds station to an ArrayList of GymStation object.
+     *
+     * @param name Name of the gym station.
+     * @param weight Weight used for the station.
+     * @param numberOfSet Number of sets done.
+     * @param repetitions Number of repetitions done.
+     * @throws CustomExceptions.InvalidInput If there is invalid input in any parameter.
+     */
+    public void addStation(String name, int weight, int numberOfSet,
+                           int repetitions) throws CustomExceptions.InvalidInput{
         try {
-            int reps = Integer.parseInt(stringReps);
-            int weight = Integer.parseInt(stringWeight);
-            int numberOfSets = Integer.parseInt(stringNumberOfSet);
-            Integer[] weightAndReps = {weight, reps};
-            GymStation newStation = new GymStation(name, weightAndReps, numberOfSets);
+            GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
             throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
@@ -46,7 +51,8 @@ public class Gym extends Workout{
 
     /**
      * Get specific station as part of Gym object based on workout.
-     * @return
+     *
+     * @return The desired GymStation object.
      */
     public ArrayList<GymStation> getStations(){
         return stations;
@@ -58,9 +64,19 @@ public class Gym extends Workout{
         return stations.get(index);
     }
 
+    /**
+     * Retrieves the string representation of a Gym object.
+     *
+     * @return A formatted string representing the Gym object, inclusive of the date and gym stations done.
+     */
     @Override
     public String toString() {
-        // to be implemented
-        return null;
+        String printedDate;
+        if (date != null){
+            printedDate = date.toString();
+            return String.format("(%s)", printedDate);
+        } else{
+            return "";
+        }
     }
 }

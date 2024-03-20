@@ -18,7 +18,7 @@ class WorkoutListTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void cleanup() {
         WorkoutList.clearWorkoutsAndRun();
     }
 
@@ -32,8 +32,8 @@ class WorkoutListTest {
         try {
             Run inputRun = new Run("40:10", "10.3", "15/03/2024");
             WorkoutList.addRun(inputRun);
-            ArrayList<Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
-            ArrayList<Workout> workoutList = WorkoutList.getWorkouts(Constant.ALL);
+            ArrayList<? extends Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
+            ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.ALL);
 
             Workout expectedRun = runList.get(runList.size() - 1);
             Workout expectedWorkout = workoutList.get(runList.size() - 1);
@@ -63,7 +63,7 @@ class WorkoutListTest {
             inputList.add(new Run("30:10", "20.3", "30/03/2023"));
 
 
-            ArrayList<Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
+            ArrayList<? extends Workout> runList = WorkoutList.getWorkouts(Constant.RUN);
             for(int i = 0; i < inputList.size(); i++) {
                 Run expected = inputList.get(i);
                 Run actual = (Run) runList.get(i);
@@ -86,7 +86,7 @@ class WorkoutListTest {
         inputList.add(new Run("30:10", "20.3", "30/03/2023"));
 
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            ArrayList<Workout> runList = WorkoutList.getWorkouts("invalidFilter");
+            ArrayList<? extends Workout> runList = WorkoutList.getWorkouts("invalidFilter");
         });
     }
 
@@ -96,9 +96,7 @@ class WorkoutListTest {
      */
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForRun() {
-        assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            WorkoutList.getWorkouts(Constant.RUN);
-        });
+        assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(Constant.RUN));
     }
 
     /**
@@ -107,9 +105,7 @@ class WorkoutListTest {
      */
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForAll() {
-        assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            WorkoutList.getWorkouts(Constant.ALL);
-        });
+        assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(Constant.ALL));
     }
 
     /**
