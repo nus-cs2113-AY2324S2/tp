@@ -1,21 +1,16 @@
 package longah;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import longah.node.Group;
-import longah.util.MemberList;
-import longah.util.TransactionList;
-import longah.util.Subtransaction;
 import longah.exception.LongAhException;
-import longah.exception.ExceptionMessage;
+import longah.handler.InputHandler;
+import longah.commands.Command;
 
 /**
  * LongAh class manages debts between members.
  */
 public class LongAh {
-    private static MemberList members;
-    private static TransactionList transactions;
     private static Group group;
     private Scanner scanner;
 
@@ -24,21 +19,6 @@ public class LongAh {
      */
     public LongAh() {
         this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Lists all debts between members.
-     */
-    public void listAllDebts() throws LongAhException {
-        if (members.getMemberListSize() == 0) {
-            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
-        }
-        ArrayList<Subtransaction> subtransactions = members.solveTransactions();
-
-        System.out.println("Best Way to Solve Debts:");
-        for (Subtransaction subtransaction : subtransactions) {
-            System.out.println(subtransaction);
-        }
     }
 
     /**
@@ -51,8 +31,6 @@ public class LongAh {
         LongAh app = new LongAh();
         try {
             group = new Group();
-            members = group.getMemberList();
-            transactions = group.getTransactionList();
         } catch (LongAhException e) {
             LongAhException.printException(e);
         }
@@ -64,57 +42,12 @@ public class LongAh {
                     return;
                 }
                 String command = app.scanner.nextLine();
-                String[] parts = command.split(" ", 2);
-                switch (parts[0]) {
-                case "add":
-                    transactions.addTransaction(parts[1], members);
-                    group.updateTransactionSolution();
-                    group.saveAllData();
-                    break;
-                case "listdebts":
-                    app.listAllDebts();
-                    break;
-                case "listtransactions":
-                    System.out.println(transactions.listTransactions());
-                    break;
-                case "delete":
-                    transactions.remove(parts);
-                    break;
-                case "findpayment":
-                    System.out.println(transactions.findTransactions(parts[1]));
-                    break;
-                case "finddebt":
-                    System.out.println(transactions.findDebts(parts[1]));
-                    break;
-                case "clear":
-                    transactions.clear();
-                    break;
-                case "addmember":
-                    if (parts.length == 2) {
-                        String name = parts[1];
-                        members.addMember(name);
-                        group.saveMembersData();
-                    } else {
-                        System.out.println("Invalid command format. Use 'addmember NAME'");
-                    }
-                    break;
-                case "listmembers":
-                    members.listMembers();
-                    break;
-                case "settleup":
-                    group.settleUp(parts[1]);
-                    group.saveAllData();
-                    break;
-                case "solution":
-                    System.out.println(group.printSolution());
-                    break;
-                case "exit":
-                    System.exit(0);
+                Command c = InputHandler.parseInput(command);
+                c.execute(group);
+
+                // Check will not be reached if exception is thrown
+                if (c.isExit()) {
                     return;
-                default:
-                    System.out.println("Invalid command. Use 'add', 'listdebts', 'listtransactions'," +
-                            " 'delete', 'findpayment', 'finddebt', 'clear', or 'addmember'" +
-                            ", 'exit'.");
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);

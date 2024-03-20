@@ -92,13 +92,15 @@ public class MemberList {
      * Prints the list of members in the group.
      * throws LongAhException If there are no members in the group.
      */
-    public void listMembers() throws LongAhException {
+    public String listMembers() throws LongAhException {
         if (members.isEmpty()) {
             throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
         }
+        String output = "";
         for (Member member : members) {
-            System.out.println(member);
+            output += member + "\n";
         }
+        return output;
     }
 
     /**
@@ -216,5 +218,16 @@ public class MemberList {
      */
     public ArrayList<Member> getMembers() {
         return members;
+    }
+
+    /**
+     * Returns the balance of the member with the specified name.
+     * 
+     * @param name The name of the member to get the balance of.
+     * @return The balance of the member with the specified name.
+     * @throws LongAhException If the member does not exist in the group.
+     */
+    public double getMemberBalance(String name) throws LongAhException {
+        return getMember(name).getBalance();
     }
 }

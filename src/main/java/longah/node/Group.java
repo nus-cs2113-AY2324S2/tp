@@ -80,9 +80,7 @@ public class Group {
             throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND);
         }
 
-        updateTransactionSolution();
         String transactionExpression = borrowerName;
-
         for (Subtransaction subtransaction : this.transactionSolution) {
             Member subBorrower = subtransaction.getBorrower();
             if (borrower == subBorrower) {
@@ -123,8 +121,13 @@ public class Group {
         saveTransactionsData();
     }
 
-    public String printSolution() throws LongAhException {
-        updateTransactionSolution();
+    /**
+     * Returns the solution to the debts in the group.
+     * 
+     * @return The solution to the debts in the group
+     * @throws LongAhException If there are no debts to be solved
+     */
+    public String listDebts() throws LongAhException {
         if (this.transactionSolution.size() == 0) {
             throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
@@ -134,5 +137,20 @@ public class Group {
             solution += subtransaction.toString() + "\n";
         }
         return solution;
+    }
+
+    public String listIndivDebt(String name) throws LongAhException {
+        double balance = members.getMemberBalance(name);
+        if (balance == 0) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+
+        String output = "";
+        for (Subtransaction subtransaction : this.transactionSolution) {
+            if (subtransaction.isInvolved(name)) {
+                output += subtransaction.toString() + "\n";
+            }
+        }
+        return output;
     }
 }

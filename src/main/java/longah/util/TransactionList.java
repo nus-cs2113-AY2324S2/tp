@@ -45,19 +45,15 @@ public class TransactionList {
     /**
      * Removes a transaction from the list by index.
      *
-     * @param input The index of the transaction to remove.
+     * @param indexString The index of the transaction to remove.
      * @throws LongAhException If the index is invalid.
      */
-    public void remove(String[] input) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_DELETE_COMMAND);
-        }
-        int index = Integer.parseInt(input[1]) - 1;
+    public void remove(String indexString) throws LongAhException {
+        int index = Integer.parseInt(indexString) - 1;
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
         this.transactions.remove(index);
-
     }
 
     /**
@@ -104,7 +100,7 @@ public class TransactionList {
         int index = 1;
         String outString = String.format("%s owns the following list of transactions.", lenderName) + "\n";
         for (Transaction transaction : this.transactions) {
-            if (transaction.isLender(lenderName)) {
+            if (transaction.isInvolved(lenderName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }

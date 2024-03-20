@@ -51,6 +51,16 @@ public class Subtransaction {
     }
 
     /**
+     * Returns whether the input name is part of the subtransaction.
+     * 
+     * @param name The name to check.
+     * @return A boolean value determining whether the input name is the lender in the subtransaction.
+     */
+    public boolean isInvolved(String name) {
+        return lender.isName(name) || borrower.isName(name);
+    }
+
+    /**
      * Returns a string representation of the subtransaction.
      * 
      * @return A string representation of the subtransaction.

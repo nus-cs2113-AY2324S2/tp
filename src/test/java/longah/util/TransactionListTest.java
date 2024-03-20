@@ -23,7 +23,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove 1".split(" ", 2);
-            transactionList.remove(parts);
+            transactionList.remove(parts[1]);
             assertEquals(0, transactionList.getTransactionListSize());
 
         } catch (LongAhException e) {
@@ -45,7 +45,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove -1".split(" ", 2);
-            transactionList.remove(parts);
+            transactionList.remove(parts[1]);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
