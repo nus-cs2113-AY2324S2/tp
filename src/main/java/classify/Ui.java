@@ -29,6 +29,8 @@ public class Ui {
         System.out.println("add                         Adds a student to the student list, " +
                 "expects a name, grade and lessons attended" +
                 ", can be used directly with a name e.g. add [name]");
+        System.out.println("edit                        Edits a students details, expects a name" +
+                " , can be used directly with a name e.g. edit [name]");
         System.out.println("view                        Views a students details, expects a name" +
                 ", can be used directly with a name e.g. add [name]");
         System.out.println("delete                      Deletes a student from the student list, expects a name" +
