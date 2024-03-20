@@ -29,7 +29,6 @@ public class Handler {
      *
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
-
     public static void processInput() {
         in = new Scanner(System.in);
 
@@ -42,6 +41,7 @@ public class Handler {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
                 case EXIT:
+                    System.out.println(Constant.EXIT_MESSAGE);
                     return;
 
                 case NEW:
@@ -293,6 +293,10 @@ public class Handler {
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
         String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH);
+
+        if (userInputs.length < 2) {
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
+        }
 
         String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
