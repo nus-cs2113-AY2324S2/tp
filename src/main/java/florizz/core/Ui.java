@@ -68,13 +68,16 @@ public class Ui {
      */
     public void printHelpMessage() {
         System.out.println("Here are the list of commands you can use:");
-        System.out.println("1. new <bouquet_name> - Add a bouquet");
-        System.out.println("2. delete <bouquet_name> - Delete a bouquets");
+        System.out.println("1. new <bouquetName> - Add a bouquet");
+        System.out.println("2. delete <bouquetName> - Delete a bouquets");
         System.out.println("3. mybouquets - List current saved bouquets");
-        System.out.println("4. info <flower_name> - Provide information on chosen flower");
-        System.out.println("5. flower - Shows a list of flowers that can be added into mybouquets");
-        System.out.println("6. flower <occasion> - Shows a list of flowers associated with said occasion");
-        System.out.println("7. bye - Exits the programme");
+        System.out.println("4. info <flowerName> - Provide information on chosen flower");
+        System.out.println("5. add <flowerName> /q <quantity> /to <bouquetName> - add flower to a bouquet.");
+        System.out.println("6. remove <flowerName> /q <quantity> /from <bouquetName> - remove flower from a bouquet.");
+        System.out.println("7. flower - Shows a list of flowers that can be added into mybouquets");
+        System.out.println("8. flower <occasion> - Shows a list of flowers associated with said occasion");
+        System.out.println("9. occasion - Shows a list of occasions associated with available flowers.");
+        System.out.println("10. bye - Exits the programme");
         printBreakLine();
     }
 
