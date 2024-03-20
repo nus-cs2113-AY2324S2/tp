@@ -26,6 +26,7 @@ public class TransactionList {
     public TransactionList() throws IOException {
         // Initialise ArrayList in the constructor
         this.transactions = dataStorage.readFileContents();
+        assert transactions != null : "Transaction list is null after reading from file";
         this.parser = new Parser();
     }
 
@@ -49,8 +50,10 @@ public class TransactionList {
         int size = transactions.size();
         if (id >= LOWER_BOUND && id < size) {
             String itemRemoved = transactions.get(id).toString();
+            assert itemRemoved != null : "String representation of item to remove is null";
             account.setBalance(account.getBalance() - transactions.get(id).getAmount() );
             transactions.remove(id);
+            assert transactions.size() == size - 1 : "Transaction list size did not decrease after removal";
             UserInterface.printDeleteMessage(itemRemoved, account.getBalance());
         } else {
             throw new IndexOutOfBoundsException(size);
@@ -82,7 +85,9 @@ public class TransactionList {
         }
 
         Transaction t = parser.parseTransaction(input, account);
+        assert t != null : "Parsed transaction is null";
         addTransaction(t);
+        assert transactions.get(transactions.size() - 1) != null : "Added transaction is null after adding to the list";
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
         UserInterface.printAddMessage(fetchData, account.getBalance());
     }
