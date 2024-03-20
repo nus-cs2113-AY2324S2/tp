@@ -68,7 +68,7 @@ class NewsOnTheGoTest {
         String testTopic = "technology";
         userPreferences.addTopic(testTopic);
 
-        // Simulate reloading preferences
+        // Simulate reloading preferences by creating a new instance
         UserPreferences newUserPreferences = new UserPreferences();
         Set<String> loadedTopics = newUserPreferences.getInterestedTopics();
 

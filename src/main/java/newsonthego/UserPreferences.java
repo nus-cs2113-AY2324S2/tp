@@ -7,8 +7,10 @@ import java.util.Set;
 import java.io.IOException;
 
 public class UserPreferences {
-    private final Set<String> interestedTopics;
+
     private static final String PREFERENCES_FILE = "userPreferences.txt";
+    private final Set<String> interestedTopics;
+
 
     public UserPreferences() {
         this.interestedTopics = new HashSet<>();
