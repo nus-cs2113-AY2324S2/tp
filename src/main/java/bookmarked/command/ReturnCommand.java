@@ -1,6 +1,9 @@
 package bookmarked.command;
 
 import bookmarked.Book;
+import bookmarked.exceptions.emptyListException;
+import bookmarked.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +25,18 @@ public class ReturnCommand extends Command {
                 .filter(book -> book.getName().equalsIgnoreCase(bookName))
                 .collect(Collectors.toList());
         assert !foundBooks.isEmpty() : "Book should exist to return";
+
+        try {
+            runReturnCommand(foundBooks);
+        } catch (emptyListException e) {
+            Ui.printEmptyListMessage();
+        }
+    }
+
+    public void runReturnCommand(List<Book> foundBooks) throws emptyListException {
+        if (this.listOfBooks.isEmpty()) {
+            throw new emptyListException();
+        }
 
         if (!foundBooks.isEmpty()) {
             // It's possible there are multiple copies of the book, so mark all as returned
