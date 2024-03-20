@@ -25,7 +25,7 @@ public class Handler {
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
-     * then creates the relevant {@code Task} object based on details entered.
+     * then creates the relevant object based on details entered.
      *
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
@@ -130,11 +130,11 @@ public class Handler {
      * Handle history command.
      * Expected command: `history /e:[all\run\gym]`
      * Show history of all exercises, run or gym.
-     * @param userInput
+     * @param userInput The user input string.
      */
     public static void handleHistory(String userInput) {
         String [] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(":")[1]; // Constant.SPLIT_BY_COLON = ":" UNSTAGE
+        String filter = inputs[1].split(Constant.SPLIT_BY_COLON)[1];
         Output.printHistory(filter);
     }
 
@@ -181,7 +181,7 @@ public class Handler {
                 System.out.println(newPeriod);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage()); //unstage
+            Output.printException(e, e.getMessage());
         }
     }
 
@@ -194,10 +194,10 @@ public class Handler {
      */
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
-        // Update this method to use extractSubstringFromSpecificIndex() UNSTAGE
+        // Update this method to use extractSubstringFromSpecificIndex()
         String [] inputs = input.split(Constant.SPLIT_BY_SLASH);
         String numberOfStationsString = inputs[2];
-        String numberOfStationStr =  numberOfStationsString.split(":")[1]; // Constant.SPLIT_BY_COLON = ":" UNSTAGE
+        String numberOfStationStr =  numberOfStationsString.split(Constant.SPLIT_BY_COLON)[1];
         System.out.println(numberOfStationsString);
         return Integer.parseInt(numberOfStationStr);
     }
@@ -219,7 +219,7 @@ public class Handler {
             }
             Output.printAddGym(gym);
         } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
-            Output.printException(e, e.getMessage()); //unstage
+            Output.printException(e, e.getMessage());
         }
     }
     /**
@@ -244,9 +244,9 @@ public class Handler {
             CustomExceptions.InvalidInput {
 
         String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
-        String sets = inputs[Constant.INDEX_OF_STATION_SETS].split(":")[1].trim(); // Constant.SPLIT_BY_COLON = ":" UNSTAGE
-        String reps = inputs[Constant.INDEX_OF_STATION_REPS].split(":")[1].trim(); // Constant.SPLIT_BY_COLON = ":" UNSTAGE
-        String weights = inputs[Constant.INDEX_OF_STATION_WEIGHTS].split(":")[1].trim(); // Constant.SPLIT_BY_COLON = ":" UNSTAGE
+        String sets = inputs[Constant.INDEX_OF_STATION_SETS].split(Constant.SPLIT_BY_COLON)[1].trim();
+        String reps = inputs[Constant.INDEX_OF_STATION_REPS].split(Constant.SPLIT_BY_COLON)[1].trim();
+        String weights = inputs[Constant.INDEX_OF_STATION_WEIGHTS].split(Constant.SPLIT_BY_COLON)[1].trim();
 
         if (exerciseName.isBlank() || sets.isBlank() || reps.isBlank() || weights.isBlank()) {
             throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_GYM_STATION);
@@ -269,7 +269,7 @@ public class Handler {
      * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
-    private static void addGymStationInput(String[] validatedInputs, Gym gym) throws //UNSTAGE
+    private static void addGymStationInput(String[] validatedInputs, Gym gym) throws
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
@@ -293,7 +293,7 @@ public class Handler {
     public static String checkTypeOfExercise(String userInput) throws
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
-        String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"  UNSTAGE
+        String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH);
 
         String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
