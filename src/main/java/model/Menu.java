@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
 
-//import java.util.stream.Collectors;
-//import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static model.SetMenu.Breakfast;
 import static model.SetMenu.Lunch;
@@ -85,18 +85,19 @@ public class Menu implements ItemManager {
                         .collect(Collectors.joining("\n"));
     }*/
 
-
-    public void displayMenu() {
-        System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║              MENU                      ║");
-        System.out.println("╠══════════════════════════════════════╣");
-        System.out.println("║ ID   Name                   Price      ║");
-        System.out.println("╠══════════════════════════════════════╣");
+    @Override
+    public String toString() {
+        StringBuilder menuString = new StringBuilder();
+        menuString.append("+--------------------------------------+\n");
+        menuString.append("|              MENU                    |\n");
+        menuString.append("+------+-------------------------------+\n");
+        menuString.append("| ID   | Name                  | Price |\n");
+        menuString.append("+------+-------------------------------+\n");
         for (MenuItem item : menuItemList) {
-            System.out.printf("║ %-3s  %-20s $%-8.2f   ║\n", item.getID(), item.getName(), item.getPrice());
+            menuString.append(String.format("| %-5s| %-25s| $%-6.2f|\n", item.getID(), item.getName(), item.getPrice()));
         }
-
-        System.out.println("╚══════════════════════════════════════╝");
+        menuString.append("+------+-------------------------------+\n");
+        return menuString.toString();
 
     }
     /**
