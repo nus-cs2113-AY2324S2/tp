@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+//import java.util.stream.Collectors;
+//import java.util.stream.IntStream;
 
 import static model.SetMenu.Breakfast;
 import static model.SetMenu.Lunch;
@@ -22,6 +22,10 @@ public class Menu implements ItemManager {
 
     private final String menuID;
 
+    public Menu() {
+        Menu.setupLogger();
+        menuID = "v1 Menu";
+    }
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
         switch (menuType) {
