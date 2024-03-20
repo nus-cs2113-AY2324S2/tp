@@ -134,13 +134,14 @@ public class Parser {
         int prefixIndex = argument.indexOf(REMOVE_FLOWER_PREFIX);
         int quantityIndex = argument.indexOf(QUANTITY);
 
-        String flowerName = argument.substring(0,quantityIndex).trim();
+        String flowerName = argument.substring(0, quantityIndex).trim();
         String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
         // [WARNING] might need to check if it's a valid integer
         Integer quantity = Integer.parseInt(quantityString);
         String bouquetName = removePrefix(argument.substring(prefixIndex), REMOVE_FLOWER_PREFIX).trim();
 
         return new RemoveFlowerCommand(flowerName, quantity, bouquetName);
+    }
 
     private static InfoCommand handleInfoCommand(String input) {
         String flowerName = input.substring(input.indexOf(" ") + 1);
@@ -148,5 +149,4 @@ public class Parser {
         return new InfoCommand(flowerName);
 
     }
-
 }
