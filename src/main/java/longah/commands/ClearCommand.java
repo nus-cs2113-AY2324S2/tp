@@ -1,6 +1,7 @@
 package longah.commands;
 
 import longah.node.Group;
+import longah.util.MemberList;
 import longah.util.TransactionList;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
@@ -27,6 +28,7 @@ public class ClearCommand extends Command {
         }
 
         TransactionList transactions = group.getTransactionList();
-        transactions.clear();
+        MemberList members = group.getMemberList();
+        transactions.clear(members);
     }
 }

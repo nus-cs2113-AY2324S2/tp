@@ -115,7 +115,7 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER.getMessage();
+            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
             assertEquals(expectedString, e.getMessage());
         }
     }
@@ -170,7 +170,7 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER.getMessage();
+            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
             assertEquals(expectedString, e.getMessage());
         }
     }

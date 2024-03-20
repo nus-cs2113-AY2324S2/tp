@@ -110,7 +110,7 @@ public class TransactionList {
             }
         }
         if (index == 1) {
-            throw new LongAhException(ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER);
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
     }
@@ -132,7 +132,7 @@ public class TransactionList {
             }
         }
         if (index == 1) {
-            throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER);
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
     }
