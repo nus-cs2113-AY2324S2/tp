@@ -31,16 +31,8 @@ public class Parser {
             Help.printHelp();
             break;
         case "group":
-            String groupName = userInput.substring(6).trim();
-            Group group = groups.get(groupName);
-
-            if (group == null) {
-                group = new Group(groupName);
-                groups.put(groupName, group);
-                System.out.println("Created New Group: " + groupName);
-            } else {
-                System.out.println("Entering group: " + groupName);
-            }
+            String groupName = argument;
+            Group.getOrCreateGroup(groupName);
             break;
         case "member":
             // Member code here
