@@ -113,4 +113,40 @@ public class Parser {
             throw new OmniException("Please specify which activity to uncheck");
         }
     }
+
+    /**
+     * Handles the case where the tag command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length == 2
+     * @throws OmniException if command.length == 1
+     */
+    public static void tagCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 3 && isNumeric(command[1])){
+            int listNumber = Integer.parseInt(command[1]);
+            String tag = command[2];
+            list.tagActivity(listNumber, tag);
+        } else if (command.length == 2) {
+            throw new OmniException("Please specify a tag name");
+        } else {
+            throw new OmniException("Please specify which task to tag");
+        }
+    }
+
+    /**
+     * Handles the case where the untag command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length != 2 && command[1] is not numeric
+     */
+    public static void removeTagCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 2 && isNumeric(command[1])) {
+            int listNumber = Integer.parseInt(command[1]);
+            list.removeTag(listNumber);
+        } else {
+            throw new OmniException("Please specify which task to remove tag");
+        }
+    }
 }
