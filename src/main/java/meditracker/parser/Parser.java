@@ -7,6 +7,8 @@ import meditracker.command.ExitCommand;
 import meditracker.command.ListCommand;
 import meditracker.command.ModifyCommand;
 import meditracker.command.SearchCommand;
+import meditracker.command.TakeCommand;
+import meditracker.command.UntakeCommand;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
 
@@ -39,6 +41,10 @@ public class Parser {
             return new DeleteCommand(arguments);
         case "search":
             return new SearchCommand(arguments);
+        case "take":
+            return new TakeCommand(arguments);
+        case "untake":
+            return new UntakeCommand(arguments);
         default:
             throw new MediTrackerException();
         }

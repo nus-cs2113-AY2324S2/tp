@@ -20,7 +20,7 @@ class AddCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         AddCommand command = new AddCommand(inputString);
-        command.execute(medicationManager, ui, dailyMedicationManager);
+        command.execute(medicationManager, dailyMedicationManager, ui);
 
         // actual test
         assertEquals(1, medicationManager.getTotalMedications());
