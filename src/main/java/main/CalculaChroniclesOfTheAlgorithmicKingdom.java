@@ -43,7 +43,6 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
                 ui.printPlayerStatus(playerStatus);
                 ui.printMap(map);
             }
-            textBox.nextTextBoxBasedOnMapAndCommand(userCommand, map);
         }
     }
 

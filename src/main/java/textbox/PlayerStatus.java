@@ -35,4 +35,8 @@ public class PlayerStatus {
     public void setPlayerMoney(int playerMoney) {
         this.playerMoney = playerMoney;
     }
+
+    public void harmHealth(int dmg){
+        playerHealth -= dmg;
+    }
 }
