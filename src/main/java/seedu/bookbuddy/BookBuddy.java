@@ -2,15 +2,41 @@ package seedu.bookbuddy;
 
 import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
+
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Handler;
+
+
 import static java.util.logging.Logger.getLogger;
 
 
 
 public class BookBuddy {
     static final Logger LOGGER = getLogger(BookBuddy.class.getName());
+
+    static {
+        try {
+            LOGGER.setUseParentHandlers(false);
+            // Remove all the default handlers
+            Handler[] handlers = LOGGER.getHandlers();
+            for (Handler handler : handlers) {
+                LOGGER.removeHandler(handler);
+            }
+            // Add our file handler
+            FileHandler fileHandler = new FileHandler("BookBuddy.log", true); // Append to the existing file
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setLevel(Level.INFO);
+        } catch (SecurityException | IOException e) {
+            LOGGER.log(Level.SEVERE, "FileHandler can not be initialized", e);
+        }
+    }
+
     private static BookList books = new BookList();
     public static void main(String[] args) {
         LOGGER.log(Level.INFO, "BookBuddy application started.");
