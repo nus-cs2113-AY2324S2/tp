@@ -43,7 +43,6 @@ public class Expense {
     }
 
     /**
-     *
      * @return : float showing the total amount before division
      */
     public float getTotalAmount() {
