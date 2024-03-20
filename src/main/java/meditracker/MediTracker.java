@@ -29,6 +29,17 @@ public class MediTracker {
     }
 
     /**
+     * Constructs a new MediTracker object with data from save file for DailyMedicationManager
+     *
+     * @param dailyMedicationList Daily medication
+     */
+    public MediTracker(List<String> dailyMedicationList) {
+        ui = new Ui();
+        medicationManager = new MedicationManager();
+        dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
+    }
+
+    /**
      * Runs the MediTracker application.
      * This method displays a welcome message, reads user commands, and processes them until the user exits the
      * application.
@@ -60,6 +71,12 @@ public class MediTracker {
      */
     public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
         MediLogger.initialiseLogger();
-        new MediTracker().run();
+
+        List<String> dailyMedicationList = FileReaderWriter.loadDailyMedicationData();
+        if (dailyMedicationList == null) {
+            new MediTracker().run();
+        } else {
+            new MediTracker(dailyMedicationList).run();
+        }
     }
 }
