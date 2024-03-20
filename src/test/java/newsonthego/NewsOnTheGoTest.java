@@ -29,8 +29,10 @@ class NewsOnTheGoTest {
     @Test
     public void testFindTopicIndex() {
         int index = findTopicIndex("abcdefg");
-        assertEquals(-1,index);
+        assertEquals(-1, index);
+    }
 
+    @Test
     public void dailyFunctionTest() {
         String input = "daily March 10, 2024";
         String expected = "\"Scientists Discover New Species of Butterfly in the Amazon\"";
