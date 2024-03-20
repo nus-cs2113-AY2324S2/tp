@@ -8,6 +8,7 @@ public class Player2113 {
     private QuestionsList questionsList2;
     private TopicList topicList;
     private QuestionListByTopic questionListByTopic;
+    private ResultsList allResults;
 
     public Player2113(String someFilePath) {
         questionsList1 = new QuestionsList();
@@ -37,13 +38,14 @@ public class Player2113 {
 
     }
     public void run() {
+        allResults = new ResultsList();
         ui = new Ui();
         ui.sayHi();
         ui.printTopicList(topicList, ui);
 
         while (ui.isPlaying) {
 
-            ui.readCommands(ui, questionsList, topicList, questionListByTopic);
+            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults);
         }
 
     }
