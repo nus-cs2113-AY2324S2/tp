@@ -4,26 +4,26 @@ import java.util.Scanner;
  * The UI class handles user interaction by displaying messages and reading user input.
  */
 public class UI {
-    private Scanner scanner;
+    private static Scanner scanner;
 
     /**
      * Constructs a new UI instance.
      */
-    public UI() {
+    public static UI() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
      * Displays the welcome message.
      */
-    public void showWelcomeMessage() {
+    public static void showWelcomeMessage() {
         System.out.println("Welcome to LongAh!");
     }
 
     /**
      * Displays the command prompt.
      */
-    public void showCommandPrompt() {
+    public static void showCommandPrompt() {
         System.out.println("Enter command:");
     }
 
@@ -32,7 +32,7 @@ public class UI {
      *
      * @return The user input as a String.
      */
-    public String getUserInput() {
+    public static String getUserInput() {
         return scanner.nextLine().trim();
     }
 
@@ -41,7 +41,7 @@ public class UI {
      *
      * @param message The message to display.
      */
-    public void showMessage(String message) {
+    public static void showMessage(String message) {
         System.out.println(message);
     }
 }
