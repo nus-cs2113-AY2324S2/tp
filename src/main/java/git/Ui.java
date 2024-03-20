@@ -77,6 +77,8 @@ public class Ui {
      * Prints output after setting the selected grocery's expiration date.
      */
     public static void printExpSet(Grocery grocery) {
+        assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
+        assert !(grocery.getExpiration().isEmpty()): "expiration date should not be empty";
         System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
     }
 
@@ -84,6 +86,7 @@ public class Ui {
      * Prints output after adding a grocery.
      */
     public static void printGroceryAdded(Grocery grocery) {
+        assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
         System.out.println(grocery.getName() + " added!");
     }
 
@@ -91,6 +94,7 @@ public class Ui {
      * Prints output after setting the selected grocery's amount.
      */
     public static void printAmtSet(Grocery grocery) {
+        assert !(grocery.getAmount().isEmpty()): "grocery amount should not be empty";
         System.out.println(grocery.getName() + ": " + grocery.getAmount());
     }
 
