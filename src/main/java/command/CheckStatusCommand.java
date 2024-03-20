@@ -1,9 +1,10 @@
 package command;
 
+import player.PlayerProfile;
 import ui.ResponseManager;
 
 public class CheckStatusCommand implements Command {
-    public void execute() {
+    public void execute(PlayerProfile profile) {
         ResponseManager.indentPrint(
                 "Current Status:\n" + "Asset: " + profile.toString());
     }

@@ -19,7 +19,6 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
-        Scanner userInput = new Scanner(System.in);
         ResponseManager.printGameInit();
         String playerName = getName();
 
@@ -64,7 +63,7 @@ public class EconoCraftLogic {
         while (!exitFlag) {
             try {
                 Command command = CommandFactory.create(userInput.nextLine());
-                command.execute();
+                command.execute(playerProfile);
                 exitFlag = command.isExit();
             } catch (CommandInputException error) {
                 ResponseManager.indentPrint(error.getMessage());

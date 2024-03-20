@@ -1,6 +1,8 @@
 package command;
 
+import player.PlayerProfile;
+
 public interface Command {
-    public void execute();
-    public boolean isExit();
+    void execute(PlayerProfile playerProfile);
+    boolean isExit();
 }

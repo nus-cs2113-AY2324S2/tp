@@ -1,9 +1,10 @@
 package command;
 
+import player.PlayerProfile;
 import ui.ResponseManager;
 
 public class ExitCommand implements Command {
-    public void execute() {
+    public void execute(PlayerProfile playerProfile) {
         ResponseManager.printGoodbye();
     }
 
