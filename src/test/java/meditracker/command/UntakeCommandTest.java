@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class UntakeCommandTest {
     @Test
-    void execute_inOrderArgument_expectDailyMedicationTaken() throws ArgumentNotFoundException {
+    void execute_inOrderArgument_expectDailyMedicationUntaken() throws ArgumentNotFoundException {
         MedicationManager medicationManager = new MedicationManager();
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         DailyMedication dailyMedication = new DailyMedication("Medication_A");
