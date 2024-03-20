@@ -27,8 +27,10 @@ public class LoggerGroceryList {
         loggerGL.addHandler(ch);
 
         try {
-            String filepath = new File("tp/logs/GroceryList.log").getAbsolutePath();
-            FileHandler fh = new FileHandler(filepath, true);
+            // TODO: /home/runner/work/tp/tp/text-ui-test///////tp/logs/GroceryList.log.clk
+            // initialises it in text-ui-test ???
+            // do not put parent dir bruh
+            FileHandler fh = new FileHandler("GroceryList.log", true);
             fh.setLevel(Level.INFO);
             loggerGL.addHandler(fh);
         } catch (IOException e) {
