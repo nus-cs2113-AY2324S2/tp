@@ -15,7 +15,7 @@ public class CantVasMain {
 
     public void run() {
         UI.printLogo();
-        UI.printMotivationQuote();
+        //UI.printMotivationQuote(); //UNCOMMENT this when running, commented to pass runtest.sh**
         UI.printHelpMessage();
         boolean exit;
         do {

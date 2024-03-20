@@ -17,6 +17,7 @@ public class MotivationalQuotes {
         "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
         "After a while you learn to ignore the " +
             "names people call you and just trust who you are. - Shrek",
+        "Don't push buggy code. - nyh3",
         "Your limitation—it's only your imagination.",
         "Push yourself, because no one else is going to do it for you.",
         "Sometimes later becomes never. Do it now.",

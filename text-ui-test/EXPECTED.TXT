@@ -5,9 +5,6 @@
  | |___| (_| | | | | |_ \  / (_| \__ \
   \_____\__,_|_| |_|\__| \/ \__,_|___/
 
-Sometimes later becomes never. Do it now.
- -------------------------------------------------------------
-
 CantVas Help
 To input expenses, use format:
 << e/ add/ d/ <description> amt/ <cost> date/ <dd.mm.yyyy> >>
