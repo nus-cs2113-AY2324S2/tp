@@ -176,7 +176,8 @@ public class Timetable {
                 yearGPA = yearGrade / yearMCs;
             }
 
-            plan.append("Year ").append(y).append(" GPA: ").append(yearGPA).append(System.lineSeparator()).append(System.lineSeparator());
+            plan.append("Year ").append(y).append(" GPA: ").append(yearGPA).append(System.lineSeparator())
+                    .append(System.lineSeparator());
 
             totalMCs += yearMCs;
             totalGrade += yearGrade;
