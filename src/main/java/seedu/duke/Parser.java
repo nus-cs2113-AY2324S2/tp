@@ -1,10 +1,7 @@
 package seedu.duke;
-import java.util.HashMap;
 
 public class Parser {
     protected String userInput;
-    private static final HashMap<String, Group> groups = new HashMap<>();
-
 
     public static class EndProgramException extends Exception {
 

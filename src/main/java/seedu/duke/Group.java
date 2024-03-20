@@ -20,7 +20,7 @@ public class Group {
             groups.put(groupName, group);
             System.out.println("Created New Group: " + groupName);
         } else {
-            System.out.println("Entering Group: " + groupName);
+            System.out.println("Entering group: " + groupName);
         }
         return group;
     }
