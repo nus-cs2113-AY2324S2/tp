@@ -1,9 +1,7 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyArgumentsException;
 import bookmarked.exceptions.emptyListException;
-import bookmarked.exceptions.indexOutOfListBounds;
 import bookmarked.ui.Ui;
 
 import java.util.ArrayList;
