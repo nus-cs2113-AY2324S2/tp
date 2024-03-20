@@ -41,15 +41,18 @@ public class StudentList {
      */
     public static void printCurrentArrayMessage(ArrayList<Student>currentList){
         int numberOfStudents = currentList.size();
-        assert numberOfStudents >= 0;
+
         switch (numberOfStudents){
         case 0:
+            assert numberOfStudents == 0 : "Number of Students equal to zero!";
             System.out.println(ZERO_STUDENT_MESSAGE);
             break;
         case 1:
+            assert numberOfStudents == 1 : "Number of Students equal to one!";
             System.out.println(ONE_STUDENT_MESSAGE);
             break;
         default:
+            assert numberOfStudents > 1 : "Number of Students more than one!";
             System.out.println(CURRENTLY_THERE_ARE + numberOfStudents + STUDENTS_IN_THE_LIST);
             break;
         }
