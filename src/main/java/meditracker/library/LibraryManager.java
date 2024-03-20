@@ -28,7 +28,7 @@ public class LibraryManager {
         searchResults.clear();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (line.toLowerCase().contains(keyword)) {
+            if (line.toLowerCase().contains(keyword.trim().toLowerCase())) {
                 String[] medicationDetails = line.split("\\|");
                 searchResults.add(new SearchResult(medicationDetails[0], medicationDetails[1], medicationDetails[2]));
             }
