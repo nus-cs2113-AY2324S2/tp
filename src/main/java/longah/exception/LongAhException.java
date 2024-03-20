@@ -13,7 +13,7 @@ public class LongAhException extends Exception {
     /**
      * Constructor for LongAhExceptions.
      * 
-     * @param message The cause of the exception using enum {@link ExceptionMessages}.
+     * @param message The cause of the exception using enum {@link ExceptionMessage}.
      */
     public LongAhException(ExceptionMessage message) {
         super(message.getMessage());
