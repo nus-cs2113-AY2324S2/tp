@@ -1,5 +1,5 @@
 package seedu.duke;
-
+import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Group {
@@ -9,6 +9,20 @@ public class Group {
     public Group(String name) {
         this.name = name;
         this.users = new ArrayList<>();
+    }
+
+    private static HashMap<String, Group> groups = new HashMap<>();
+
+    public static Group getOrCreateGroup(String groupName) {
+        Group group = groups.get(groupName);
+        if (group == null) {
+            group = new Group(groupName);
+            groups.put(groupName, group);
+            System.out.println("Created New Group: " + groupName);
+        } else {
+            System.out.println("Entering group: " + groupName);
+        }
+        return group;
     }
 
     public void addUsers(User user) {

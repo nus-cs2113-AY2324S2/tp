@@ -28,7 +28,8 @@ public class Parser {
             Help.printHelp();
             break;
         case "group":
-            // Group code here
+            String groupName = argument;
+            Group.getOrCreateGroup(groupName);
             break;
         case "member":
             // Member code here
