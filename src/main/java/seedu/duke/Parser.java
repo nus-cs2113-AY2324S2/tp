@@ -25,6 +25,7 @@ public class Parser {
             throw new EndProgramException();
         case "help":
             // Help code here
+            Help.printHelp();
             break;
         case "group":
             // Group code here
@@ -36,7 +37,7 @@ public class Parser {
             String[] extractExpense = argument.split(" ", 2);
             String expense = extractExpense[0];
             int amount = Integer.parseInt(extractExpense[1]);
-            ExpenseAdder newExpense = new ExpenseAdder(expense,amount);
+            ExpenseAdder newExpense = new ExpenseAdder(expense, amount);
             break;
         case "list":
             // List code here
