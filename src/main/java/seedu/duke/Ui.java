@@ -18,12 +18,13 @@ public class Ui {
 
     public String[] inputAnswers;
 
+    private static final Scanner in = new Scanner(System.in);
+
     public void readCommands(
             Ui ui, QuestionsList questionsList, TopicList topicList,
             QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
     ) {
         Parser parser = new Parser();
-        Scanner in = new Scanner(System.in);
         printLine();
 
         while(isPlaying) {
@@ -49,11 +50,11 @@ public class Ui {
 
     public void printTopicList(TopicList topicList, Ui ui){
         int topicListSize = topicList.getSize();
-        System.out.println("Here are the topics in CS2113: ");
+        System.out.println("Here are the topics in CS2113:");
         for (int index = 0; index < topicListSize; index++) {
             System.out.println((index + 1) + ". " + topicList.getTopic(index));
         }
-        System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
+        System.out.println("Please choose a topic to play:");//input command in the form "start [INDEX]
     }
 
     public void printChosenTopic(
@@ -144,7 +145,6 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         printLine();
     }
