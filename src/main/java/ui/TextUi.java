@@ -1,5 +1,8 @@
 package ui;
 
+import item.Item;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
@@ -49,19 +52,20 @@ public class TextUi {
         );
     }
 
-    public void replyToUser(String...message) {
+    public static void replyToUser(String... message) {
         for (String m : message) {
             System.out.println(m + "\n");
         }
     }
 
-    /*Waiting for ArrayList before implementing final code
-    private void showInventoryList(ArrayList<Items> arrayList) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) == null) {
+    public static <T> void showInventoryList(ArrayList<T> arrayList) {
+        for (T item : arrayList) {
+            if (item == null) {
                 break;
             }
-            replyToUser(arrayList.get(i));
+            replyToUser(
+                    "List:",
+                    String.valueOf(item));
         }
-    }*/
+    }
 }
