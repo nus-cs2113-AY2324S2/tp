@@ -2,10 +2,11 @@ package meditracker.library;
 
 import meditracker.ui.Ui;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class LibraryManager {
 
-    private static final String FILE_PATH = "./data/medicationLibrary.txt";
+    private static final String FILE_PATH = "/medicationLibrary.txt";
     private final List<SearchResult> searchResults = new ArrayList<>();
 
     /**
@@ -23,8 +24,8 @@ public class LibraryManager {
      * @throws FileNotFoundException If the medication library file is not found.
      */
     public void searchMedication(String keyword) throws FileNotFoundException {
-        File file = new File(FILE_PATH);
-        Scanner scanner = new Scanner(file);
+        InputStream file = getClass().getResourceAsStream(FILE_PATH);
+        Scanner scanner = new Scanner(Objects.requireNonNull(file));
         searchResults.clear();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
