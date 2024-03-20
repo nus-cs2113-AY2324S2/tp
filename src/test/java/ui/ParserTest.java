@@ -26,7 +26,7 @@ class ParserTest {
 
     @Test
     void parseCareer_validInput_returnsCareer() throws JobSelectException {
-        assertEquals("Robotics", Parser.parseCareer("Robotics"));
+        assertEquals("Robotics", Parser.parseCareer("/r"));
     }
 
     @Test

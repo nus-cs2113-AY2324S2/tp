@@ -23,10 +23,21 @@ public class TicTacToe implements MiniGame {
     }
 
     private boolean checkCellForWin(char c1, char c2, char c3) {
-        if (c1 == playerMark && c2 == playerMark && c3 == playerMark) {
+        if (c1 == currentMark && c2 == currentMark && c3 == currentMark) {
             return true;
         }
         return false;
+    }
+
+    public int getStatus() {
+        if (checkForWin()) {
+            if (currentMark == playerMark) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+        return 0;
     }
 
     private boolean isBoardFull() {

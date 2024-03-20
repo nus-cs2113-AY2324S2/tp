@@ -16,6 +16,11 @@ public class ExerciseCommand implements Command {
         TicTacToe game = new TicTacToe(playerMark);
         game.startGame();
         game.outputResult();
+        if (game.getStatus() == 1) {
+            playerProfile.addHealth(1);
+        } else if (game.getStatus() == -1) {
+            playerProfile.loseHealth();
+        }
     }
 
     public boolean isExit() {
