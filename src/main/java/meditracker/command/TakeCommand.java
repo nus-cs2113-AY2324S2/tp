@@ -10,6 +10,10 @@ import meditracker.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * The TakeCommand class represents a command to take a daily medication.
+ * It extends the Command class.
+ */
 public class TakeCommand extends Command {
     public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false)

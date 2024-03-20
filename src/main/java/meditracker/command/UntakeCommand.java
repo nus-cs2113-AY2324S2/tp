@@ -10,6 +10,10 @@ import meditracker.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * The UntakeCommand class represents a command to untake a daily medication.
+ * It extends the Command class.
+ */
 public class UntakeCommand extends Command {
     public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false)
