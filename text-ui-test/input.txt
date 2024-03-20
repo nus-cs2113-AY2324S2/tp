@@ -1,1 +1,8 @@
 James Gosling
+group group1
+member mem1 /group group1
+member mem2 /group group1
+expense /amount 10 /paid mem1 /user mem2
+list
+balance mem1
+bye
