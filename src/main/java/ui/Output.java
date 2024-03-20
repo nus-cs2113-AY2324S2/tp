@@ -47,6 +47,10 @@ public class Output {
         System.out.println("|  |_| | _> (/_|   |  | (_) |_");
     }
 
+    /**
+     * Prints the gym station prompt.
+     * @param stationNumber Integer representing the current gym station index.
+     */
     public static void printGymStationPrompt(int stationNumber) {
         printLine();
 
@@ -57,10 +61,21 @@ public class Output {
     }
 
 
+    /**
+     * Returns the formatted string for printing runs.
+     *
+     * @param index The index of the run.
+     * @param currentWorkout The current Workout object within the list.
+     * @return A string
+     */
     private static String getFormattedRunWithIndex(int index, Workout currentWorkout) {
         return String.format(Constant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
     }
 
+    /**
+     * Prints the text header when adding a new Run.
+     * @param newRun The new Run object added.
+     */
     public static void printAddRun(Run newRun) {
         printLine();
         System.out.println(Constant.ADD_RUN);
@@ -69,6 +84,10 @@ public class Output {
         printLine();
     }
 
+    /**
+     * Prints the text header when adding a new Gym.
+     * @param gym The new Gym object added.
+     */
     public static void printAddGym(Gym gym){
         printLine();
         System.out.println(Constant.ADD_GYM);
@@ -76,6 +95,9 @@ public class Output {
         printLine();
     }
 
+    /**
+     * Prints the latest Run object added.
+     */
     public static void printLatestRun() {
         try {
             printLine();
@@ -91,6 +113,12 @@ public class Output {
         }
     }
 
+    /**
+     * Prints all the Run objects added to the list.
+     *
+     * @throws CustomExceptions.OutOfBounds If index is out of bounds.
+     * @throws CustomExceptions.InvalidInput If user input is invalid.
+     */
     private static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
 
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.RUN);
@@ -102,14 +130,19 @@ public class Output {
             String output = getFormattedRunWithIndex(index, currentWorkout);
             System.out.println(output);
         }
-
-
     }
 
+    /**
+     * For justin to do.
+     */
     private static void printExerciseHistory() {
 
     }
 
+    /**
+     * Prints all the stations within a specified Gym object.
+     * @param gym The Gym object containing the GymStation objects to be printed.
+     */
     private static void printGymStats(Gym gym){
         ArrayList<GymStation> allStations = gym.getStations();
         for (GymStation station: allStations){
@@ -117,6 +150,12 @@ public class Output {
         }
     }
 
+    /**
+     * Prints all the information for all Gym objects within the list.
+     *
+     * @throws CustomExceptions.OutOfBounds If index is out of bounds.
+     * @throws CustomExceptions.InvalidInput If user input is invalid.
+     */
     private static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.GYM);
         for (int i = 0; i < workoutList.size(); i++) {
@@ -130,6 +169,11 @@ public class Output {
         }
     }
 
+    /**
+     * Handler function to print all the Workout objects added to the list.
+     *
+     * @param filter String used to determine if all Run, Gym or Workout objects are printed.
+     */
     public static void printHistory(String filter) {
         try {
             printLine();
@@ -153,11 +197,20 @@ public class Output {
             printLine();
         }
     }
+
+    /**
+     * Prints a specified message and the exception error message.
+     * @param e Represents the Exception caught.
+     * @param message The custom message to be printed.
+     */
     public static void printException(Exception e, String message){
         System.err.println("Exception Caught!\n" + message + "\n\n" + e.getMessage());
         printLine();
     }
 
+    /**
+     * Prints the welcome banner for PulsePilot.
+     */
     public static void printWelcomeBanner() {
         printLine();
         printArt();
@@ -166,6 +219,11 @@ public class Output {
         printLine();
     }
 
+    /**
+     * Checks whether storage file is present, and prints corresponding message.
+     * @param status Integer representing whether the storage file has been loaded. If set to 0, file is present. Else,
+     *                file is not present.
+     */
     public static void printGreeting(int status) {
         if (status == 0) {
             System.out.println(Constant.SUCCESSFUL_LOAD);

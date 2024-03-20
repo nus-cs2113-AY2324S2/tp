@@ -7,6 +7,9 @@ import utility.Parser;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a Period object to track user's menstrual cycle.
+ */
 public class Period extends Health {
     protected LocalDate startDate;
     protected LocalDate endDate;

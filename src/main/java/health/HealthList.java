@@ -2,10 +2,11 @@ package health;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of BMI objects stored.
+ */
 public class HealthList extends ArrayList<Health> {
-    /**
-     * ArrayList to store Bmi objects.
-     */
+
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 

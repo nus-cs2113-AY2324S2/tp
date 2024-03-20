@@ -21,7 +21,7 @@ import storage.LogFile;
  */
 public class Handler {
     public static Scanner in;
-    LogFile logFile = LogFile.getInstance();
+    static LogFile logFile = LogFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
@@ -30,9 +30,8 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
 
-    public static void processInput() throws CustomExceptions.InvalidInput {
+    public static void processInput() {
         Scanner in = new Scanner(System.in);
-
 
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
@@ -42,47 +41,35 @@ public class Handler {
             try {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
-
                 case EXIT:
                     return;
+
                 case NEW:
-
                     handleExercise(userInput);
-
                     break;
+
                 case HEALTH:
-
                     handleHealth(userInput);
-
                     break;
+
                 case HISTORY:
-
                     handleHistory(userInput);
-
                     break;
+
                 case LATEST:
-
-                    handleLatest(userInput);
-
+                    handleLatestRun(userInput);
                     break;
+
                 case HELP:
-
                     Output.printHelp();
-
                     break;
 
                 default:
-
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
             } catch (IllegalArgumentException e) {
                 Output.printException(e, Constant.INVALID_COMMAND);
-                // Yet to implement : } catch (CustomException e) {
-                // Yet to implement : Reply.printException(e);
-
             }
-
-
         }
     }
 
@@ -111,7 +98,7 @@ public class Handler {
 
 
     /**
-     * Constructs a new {@code }  object based on the user input.
+     * Constructs either a new Run or Gym object based on the user input.
      *
      * @param userInput The user input string.
      */
@@ -129,16 +116,13 @@ public class Handler {
                 System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
 
             } else if (typeOfExercise.equals(Constant.GYM)) {
-                // Yet to implement : handleGym(userInput);
                 int numberOfStations = getNumberOfGymStations(userInput);
                 Gym gym = new Gym();
                 getGymStation(numberOfStations, gym);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            System.out.println(e.getMessage());
-            // throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+            Output.printException(e, e.getMessage());
         }
-
     }
 
 
@@ -149,13 +133,10 @@ public class Handler {
      * @param userInput
      */
     public static void handleHistory(String userInput) {
-        // if asked to show history
         String [] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
         String filter = inputs[1].split(":")[1];
         Output.printHistory(filter);
-
     }
-
 
     /**
      * Handles user input related to health data. Parses the user input to determine
@@ -204,58 +185,7 @@ public class Handler {
     }
 
     /**
-     * Called when a user inputs a new gym
-     * Creates a gym object and prompts the user to enter details of the gym workouts and adds that to the gym object .
-     *
-     * @param input The user input string.
-     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
-     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
-     */
-    public static void getGym(String input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
-        // input that I will get is something like new /e: gym /n: 2
-        // use get index method that alfattih will push later
-        int numberOfStations = 2; // assuming i parsed the user initial input
-        Gym gym = new Gym();
-        for (int i = 0; i < numberOfStations; i++) {
-            Output.printGymStationPrompt(i + 1);
-            Scanner in = new Scanner(System.in);
-            String userInput = in.nextLine();
-            checkAndAddGymStationInput(userInput, gym);
-        }
-    }
-
-    private static void checkAndAddGymStationInput(String userInput, Gym gym) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-        // probably change to alfa method
-        String[] inputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"
-
-        if (inputs.length != Constant.LENGTH_OF_GYM_STATION_INPUTS) {
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM_STATION);
-        }
-
-        if (inputs[Constant.INDEX_OF_STATION_NAME].isBlank() ||
-                inputs[Constant.INDEX_OF_STATION_SETS].isBlank() ||
-                inputs[Constant.INDEX_OF_STATION_REPS].isBlank() ||
-                inputs[Constant.INDEX_OF_STATION_WEIGHTS].isBlank()) {
-            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_GYM_STATION);
-        }
-
-        String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
-
-        try {
-
-            int numberOfSets = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_SETS]);
-            int repetition = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_REPS]);
-            int weights = Integer.parseInt(inputs[Constant.INDEX_OF_STATION_WEIGHTS]);
-            gym.addStation(exerciseName, weights, numberOfSets, repetition);
-        } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
-        }
-    }
-
-    /**
-     * Called when a user inputs a new gym
-     * Creates a gym object and prompts the user to enter details of the gym workouts and adds that to the gym object .
+     * Retrieves the number of gym stations in one Gym object from user input.
      *
      * @param input The user input string.
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
@@ -263,17 +193,19 @@ public class Handler {
      */
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
-        // input that I will get is something like new /e:gym /n: 2
-        // use get index method that alfattih will push later
-
         String [] inputs = input.split(Constant.SPLIT_BY_SLASH);
         String numberOfStationsString = inputs[2];
         String numberOfStationStr =  numberOfStationsString.split(":")[1];
         System.out.println(numberOfStationsString);
         return Integer.parseInt(numberOfStationStr);
-
     }
 
+    /**
+     * Retrieves the gym station details and adds a GymStation object to Gym.
+     *
+     * @param numberOfStations The number of stations in one gym session.
+     * @param gym The Gym object.
+     */
     private static void getGymStation(int numberOfStations, Gym gym) {
         try{
             for (int i = 0; i < numberOfStations; i++) {
@@ -288,15 +220,27 @@ public class Handler {
             System.out.println(e.getMessage());
         }
     }
-    public static void handleLatest(String userInput){
-        // if asked to show latest run
+
+    /**
+     * Prints the latest run.
+     *
+     * @param userInput String representing user input.
+     */
+    public static void handleLatestRun(String userInput){
         Output.printLatestRun();
     }
 
+    /**
+     * Checks parameters from user input for adding a new GymStation.
+     *
+     * @param inputs List of strings representing user input.
+     * @return Array of strings representing the parameters required for a new GymStation.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
     private static String[] checkGymStationInput(String[] inputs) throws
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
-
 
         String exerciseName = inputs[Constant.INDEX_OF_STATION_NAME].trim();
         String sets = inputs[Constant.INDEX_OF_STATION_SETS].split(":")[1].trim();
@@ -313,11 +257,18 @@ public class Handler {
         } catch (NumberFormatException e) {
             throw new CustomExceptions.InvalidInput(Constant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
         }
-
         return new String[]{exerciseName, sets, reps, weights};
     }
 
-    private static void addGymStationInput(String [] validatedInputs, Gym gym) throws
+    /**
+     * Adds new gym station using validated parameters.
+     *
+     * @param validatedInputs Array representing validated GymStation parameters.
+     * @param gym Gym object to add the GymStation to.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
+    private static void addGymStationInput(String []validatedInputs, Gym gym) throws
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
@@ -350,14 +301,11 @@ public class Handler {
         }
 
         exerciseType = exerciseType.toLowerCase();
-
-
         boolean isRun = exerciseType.equals(Constant.RUN_INPUT);
         boolean isGym = exerciseType.equals(Constant.GYM_INPUT);
         if(!isRun && !isGym){
             throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
         }
-
 
         if (isRun && userInputs.length < 5) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_RUN);
@@ -366,7 +314,6 @@ public class Handler {
         if (isGym && userInputs.length < 3) {
             throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_GYM);
         }
-
 
         if (isRun){
             return Constant.RUN;
