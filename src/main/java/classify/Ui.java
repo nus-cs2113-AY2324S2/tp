@@ -29,6 +29,8 @@ public class Ui {
         System.out.println("add                         Adds a student to the student list, " +
                 "expects a name, grade and lessons attended" +
                 ", can be used directly with a name e.g. add [name]");
+        System.out.println("edit                        Edits a students details, expects a name" +
+                " , can be used directly with a name e.g. edit [name]");
         System.out.println("view                        Views a students details, expects a name" +
                 ", can be used directly with a name e.g. add [name]");
         System.out.println("delete                      Deletes a student from the student list, expects a name" +
@@ -52,8 +54,6 @@ public class Ui {
     public static void printWelcomeMessage() {
         printDivider();
         System.out.println(WELCOME_TO_CLASSIFY);
-        System.out.println(WHAT_CAN_I_DO_FOR_YOU_TODAY);
-        printDivider();
     }
 
     /**
@@ -65,6 +65,10 @@ public class Ui {
     }
 
     //@@author blackmirag3
+    public static void printUserPrompt() {
+        System.out.println(WHAT_CAN_I_DO_FOR_YOU_TODAY);
+        printDivider();
+    }
     public static void printWrongInput() {
         System.out.println(WRONG_INPUT_MESSAGE);
         printDivider();

@@ -149,7 +149,6 @@ public class InputParsing {
         } else {
             name = studentName;
         }
-
         Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
             Ui.printStudentDeleted();
@@ -158,9 +157,8 @@ public class InputParsing {
         }
         Ui.printDivider();
         masterStudentList.remove(foundStudent);
+        assert foundStudent == null : "Student should be deleted";
     }
-
-
 
     //@@author tayponghee
     /**
