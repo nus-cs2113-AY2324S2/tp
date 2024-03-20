@@ -66,6 +66,9 @@ public class InputParsingTest {
                                              ", grade and lessons attended," +
                                              " can be used directly with a name e.g. add [name]"
                                              + System.lineSeparator() +
+                "edit                        Edits a students details, expects a name" +
+                                             " , can be used directly with a name e.g. edit [name]"
+                                             + System.lineSeparator() +
                 "view                        Views a students details, expects a name" +
                                              ", can be used directly with a name e.g. add [name]"
                                              + System.lineSeparator() +

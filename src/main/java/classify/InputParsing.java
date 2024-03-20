@@ -149,7 +149,7 @@ public class InputParsing {
         } else {
             name = studentName;
         }
-
+        assert name != null : "Student name cannot be null";
         Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
             Ui.printStudentDeleted();
