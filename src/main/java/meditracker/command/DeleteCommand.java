@@ -35,6 +35,8 @@ public class DeleteCommand extends Command {
         int listIndex = Integer.parseInt(listIndexString);
         medicationManager.removeMedication(listIndex);
 
+        // TODO: remove medication from DailyMedicationManager as well.
+
         ui.showDeleteCommandMessage();
     }
 }
