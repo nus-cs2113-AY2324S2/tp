@@ -18,7 +18,7 @@ class AddCommandTest {
         String inputString = "add -n Medication_A -q 60_TAB -d 500mg -e 01/07/25 -f morning -r cause_dizziness";
         Ui ui = new Ui();
         MedicationManager medicationManager = new MedicationManager();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         AddCommand command = new AddCommand(inputString);
         command.execute(medicationManager, ui, dailyMedicationManager);
 

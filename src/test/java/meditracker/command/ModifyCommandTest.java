@@ -26,7 +26,7 @@ public class ModifyCommandTest {
         String inputString = "modify -l 1 -n " + newName;
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         command.execute(medicationManager, ui, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
@@ -49,7 +49,7 @@ public class ModifyCommandTest {
         String inputString = String.format("modify -n %s -l 1", newName);
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         command.execute(medicationManager, ui, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
