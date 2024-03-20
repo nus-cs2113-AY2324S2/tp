@@ -1,5 +1,6 @@
 package newsonthego;
 
+import static newsonthego.NewsOnTheGo.findTopicIndex;
 import static newsonthego.NewsOnTheGo.importNewsFromText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,5 +20,11 @@ class NewsOnTheGoTest {
     public void sampleTestSource() {
         List<NewsArticle> newsArticles = importNewsFromText("data/sampleNews.txt");
         assertEquals("Financial Times", newsArticles.get(1).getSource());
+    }
+
+    @Test
+    public void testFindTopicIndex() {
+        int index = findTopicIndex("abcdefg");
+        assertEquals(-1,index);
     }
 }
