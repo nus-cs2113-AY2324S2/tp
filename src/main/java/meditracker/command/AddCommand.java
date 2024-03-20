@@ -1,5 +1,7 @@
 package meditracker.command;
 
+import meditracker.DailyMedication;
+import meditracker.DailyMedicationManager;
 import meditracker.exception.MediTrackerException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
@@ -49,12 +51,16 @@ public class AddCommand extends Command {
      * It also displays a message confirming the addition of the medication.
      * @param medicationManager The MedicationList object representing the list of medications.
      * @param ui The Ui object used to interact with the user interface.
+     * @param dailyMedicationManager  The DailMedicationManager object representing the list of DailyMedication.
      */
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        Ui ui, DailyMedicationManager dailyMedicationManager) {
         Medication medication = new Medication(medicationName, medicineQuantity, medicineDosage, expiryDate, intakeFreq,
                 remarks);
         medicationManager.addMedication(medication);
+        DailyMedication dailyMedication = new DailyMedication(medicationName);
+        dailyMedicationManager.addDailyMedication(dailyMedication);
         ui.showAddCommandMessage();
     }
 }

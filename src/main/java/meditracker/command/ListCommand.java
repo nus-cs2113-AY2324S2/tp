@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedicationManager;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
 import meditracker.argument.ListTypeArgument;
@@ -24,14 +25,19 @@ public class ListCommand extends Command {
      * Executes the list command
      * @param medicationManager List of medicines.
      * @param ui                Ui object.
+     * @param dailyMedicationManager  List of daily medicines.
      */
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        Ui ui, DailyMedicationManager dailyMedicationManager) {
         String listTypeString = parsedArguments.get(ArgumentName.LIST_TYPE);
         
         switch (listTypeString) {
         case "all":
             medicationManager.printAllMedications();
+            break;
+        case "today":
+            dailyMedicationManager.printMedications();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + listTypeString);
