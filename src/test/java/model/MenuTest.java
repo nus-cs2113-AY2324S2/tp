@@ -31,4 +31,5 @@ public class MenuTest {
         assertEquals(menu.getID() + "\n" +
                 "1. L01 Chicken Rice $3.50", menu.toString());
     }
+
 }
