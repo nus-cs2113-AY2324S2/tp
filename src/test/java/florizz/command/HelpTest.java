@@ -1,7 +1,8 @@
-package florizz.objects;
+package florizz.command;
 
 import florizz.command.HelpCommand;
 import florizz.core.Ui;
+import florizz.objects.Bouquet;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
