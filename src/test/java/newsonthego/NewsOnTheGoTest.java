@@ -37,6 +37,7 @@ class NewsOnTheGoTest {
         assertEquals(1, outputHeadlines.size());
         String output = outputHeadlines.get(0).getHeadline();
         assertEquals(expected, output);
+    }
       
     @Test
     public void testInfoNewsValidIndex() {
