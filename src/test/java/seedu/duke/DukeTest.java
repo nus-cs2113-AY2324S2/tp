@@ -17,12 +17,12 @@ class DukeTest {
     @Test
     public void testInvalidCommand() {
         // Arrange
-        ByteArrayInputStream in = new ByteArrayInputStream("invalid\n".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("invalid\r\nbye\r\n".getBytes());
         System.setIn(in);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        String expectedOutput = "Timetable comparison app opened. \r\nInvalid command. \r\n";
+        String expectedOutput = "Timetable comparison app opened. \r\nInvalid command. \r\nBye. \r\n";
 
         // Act
         Duke.main(new String[0]);
@@ -34,11 +34,11 @@ class DukeTest {
     public void testAddUser() {
         UserList userList = new UserList();
         User user = new User("Test User");
-        userList.addUser(user);
+        userList.AddUser(user);
 
         // Verify that the user is added to the list
         assertEquals(1, userList.getListLength());
-        assertEquals(user, userList.getActiveUser());
-        assertTrue(userList.getUsers().contains(user));
+        assertEquals(user, userList.GetActiveUser());
+        assertTrue(userList.GetUsers().contains(user));
     }
 }
