@@ -5,6 +5,7 @@ import command.ExitCommand;
 import command.HelpCommand;
 import command.ViewOrderCommand;
 import command.ViewOrdersSummaryCommand;
+import command.ViewMenuCommand;
 
 import model.Menu;
 import model.MenuItem;
