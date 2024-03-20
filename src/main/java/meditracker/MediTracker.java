@@ -6,7 +6,10 @@ import meditracker.exception.MediTrackerException;
 import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
+import meditracker.storage.FileReaderWriter;
 import meditracker.ui.Ui;
+
+import java.util.List;
 
 /**
  * The main class for the MediTracker application.
@@ -16,6 +19,7 @@ public class MediTracker {
 
     private Ui ui;
     private MedicationManager medicationManager;
+    private DailyMedicationManager dailyMedicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes the user interface.
@@ -23,6 +27,18 @@ public class MediTracker {
     public MediTracker() {
         ui = new Ui();
         medicationManager = new MedicationManager();
+        dailyMedicationManager = new DailyMedicationManager(medicationManager);
+    }
+
+    /**
+     * Constructs a new MediTracker object with data from save file for DailyMedicationManager
+     *
+     * @param dailyMedicationList Daily medication
+     */
+    public MediTracker(List<String> dailyMedicationList) {
+        ui = new Ui();
+        medicationManager = new MedicationManager();
+        dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
     }
 
     /**
@@ -36,13 +52,14 @@ public class MediTracker {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
+        FileReaderWriter.loadMediTrackerData(medicationManager);
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationManager, ui);
+            command.execute(medicationManager, dailyMedicationManager, ui);
             isExit = command.isExit();
         }
     }
@@ -56,6 +73,12 @@ public class MediTracker {
      */
     public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
         MediLogger.initialiseLogger();
-        new MediTracker().run();
+
+        List<String> dailyMedicationList = FileReaderWriter.loadDailyMedicationData();
+        if (dailyMedicationList == null) {
+            new MediTracker().run();
+        } else {
+            new MediTracker(dailyMedicationList).run();
+        }
     }
 }

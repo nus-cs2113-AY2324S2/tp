@@ -1,5 +1,6 @@
 package meditracker;
 
+import meditracker.medication.MedicationManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DailyMedicationManagerTest {
     @Test
     public void addDailyMedication_genericDailyMedication_dailyMedicationAdded() {
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(new MedicationManager());
         DailyMedication dailyMedication = new DailyMedication("TestMedication");
         dailyMedicationManager.addDailyMedication(dailyMedication);
 
@@ -21,7 +22,7 @@ public class DailyMedicationManagerTest {
 
     @Test
     public void takeDailyMedication_genericDailyMedication_dailyMedicationTaken() {
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(new MedicationManager());
         DailyMedication dailyMedication = new DailyMedication("TestMedication");
         assertFalse(dailyMedication.isTaken());
         dailyMedicationManager.addDailyMedication(dailyMedication);
@@ -34,7 +35,7 @@ public class DailyMedicationManagerTest {
 
     @Test
     public void untakeDailyMedication_genericDailyMedication_dailyMedicationNotTaken() {
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager();
+        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(new MedicationManager());
         DailyMedication dailyMedication = new DailyMedication("TestMedication");
         dailyMedication.take();
         assertTrue(dailyMedication.isTaken());

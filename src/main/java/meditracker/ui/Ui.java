@@ -1,5 +1,7 @@
 package meditracker.ui;
 
+import meditracker.library.SearchResult;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,6 +80,14 @@ public class Ui {
         System.out.println("Medicine has been successfully deleted");
     }
 
+    public void showTakeCommandMessage() {
+        System.out.println("Medicine has been successfully taken");
+    }
+
+    public void showUntakeCommandMessage() {
+        System.out.println("Medicine has been successfully untaken");
+    }
+
     /**
      * Reads user input command.
      * @return The user input command as a String.
@@ -90,6 +100,22 @@ public class Ui {
         for (T medication : medications) {
             int numbering = medications.indexOf(medication) + 1;
             System.out.println("\t" + numbering + ". " + medication);
+        }
+    }
+
+    public void showLibraryNotFoundMessage() {
+        System.out.println("Library not found! Please download the library from the website.");
+    }
+
+    public void showNoSearchResultsMessage() {
+        System.out.println("No search results found!");
+    }
+
+    public void showSearchResults(List<SearchResult> searchResults) {
+        System.out.println("Here are the search results:");
+
+        for (int i = 0; i < searchResults.size(); i++) {
+            System.out.println((i + 1) + ". " + searchResults.get(i));
         }
     }
 }

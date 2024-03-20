@@ -11,29 +11,29 @@ import meditracker.ui.Ui;
 import java.util.Map;
 
 /**
- * The DeleteCommand class represents a command to delete an existing medication.
+ * The UntakeCommand class represents a command to untake a daily medication.
  * It extends the Command class.
  */
-public class DeleteCommand extends Command {
+public class UntakeCommand extends Command {
     public final ArgumentList argumentList = new ArgumentList(
             new ListIndexArgument(false)
     );
     private final Map<ArgumentName, String> parsedArguments;
 
     /**
-     * Constructs a DeleteCommand object with the specified arguments.
-     * @param arguments The arguments containing medication information to be parsed.
+     * Constructs a UntakeCommand object with the specified arguments.
+     * @param arguments The arguments containing information to be parsed.
      */
-    public DeleteCommand(String arguments) throws ArgumentNotFoundException {
+    public UntakeCommand(String arguments) throws ArgumentNotFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 
     /**
-     * Executes the delete command.
-     * This method deletes an existing Medication object using the provided information in the medication list.
-     * It also displays a message confirming the deletion of the medication.
+     * Executes the untake command.
+     * This method unmarks an existing Medication object using the provided list index.
+     * It also displays a message confirming the modification of the daily medication status.
      *
-     * @param medicationManager      The MedicationList object representing the list of medications.
+     * @param medicationManager      The MedicationManager object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      * @param ui                     The Ui object used to interact with the user interface.
      */
@@ -43,10 +43,7 @@ public class DeleteCommand extends Command {
                         Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
-        medicationManager.removeMedication(listIndex);
-
-        // TODO: remove medication from DailyMedicationManager as well.
-
-        ui.showDeleteCommandMessage();
+        dailyMedicationManager.untakeDailyMedication(listIndex);
+        ui.showUntakeCommandMessage();
     }
 }

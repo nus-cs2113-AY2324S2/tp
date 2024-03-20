@@ -25,7 +25,7 @@ public class ModifyCommandTest {
         String inputString = "modify -l 1 -n " + newName;
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        command.execute(medicationManager, ui);
+        command.execute(medicationManager, null, ui);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));
@@ -47,7 +47,7 @@ public class ModifyCommandTest {
         String inputString = String.format("modify -n %s -l 1", newName);
         ModifyCommand command = new ModifyCommand(inputString);
         Ui ui = new Ui();
-        command.execute(medicationManager, ui);
+        command.execute(medicationManager, null, ui);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));
