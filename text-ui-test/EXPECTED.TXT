@@ -5,6 +5,15 @@ ____________________________________________________________
 Engaging orbital thrusters...
 PulsePilot on standby
 ____________________________________________________________
-What is your name, Captain?
+What is your name, voyager?
 ____________________________________________________________
-Welcome aboard, James Gosling
+Welcome aboard, Captain James Gosling
+____________________________________________________________
+Tips: Enter 'help' to view the pilot manual!
+Initiating FTL jump sequence...
+FTL jump completed.
+Terminal primed. Command inputs are now accepted...
+____________________________________________________________
+PulsePilot successful touchdown
+See you soon, Captain!
+____________________________________________________________
