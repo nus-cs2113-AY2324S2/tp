@@ -77,4 +77,8 @@ public class DataStorage {
         balance = account.getBalance();
         return transactionList;
     }
+
+    public double getBalance() {
+        return balance;
+    }
 }
