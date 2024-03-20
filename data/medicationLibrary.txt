@@ -1,0 +1,24 @@
+Medicine Name|Illness|Possible Side Effects
+Aspirin|Headache, Fever|Stomach irritation, Bleeding
+Paracetamol|Fever, Pain|Nausea, Liver damage (in high doses)
+Ibuprofen|Pain, Inflammation|Stomach pain, Heartburn
+Cetirizine|Allergy symptoms|Drowsiness, Dry mouth
+Loratadine|Allergy symptoms|Headache, Fatigue
+Diazepam|Anxiety, Muscle spasms|Drowsiness, Confusion
+Amoxicillin|Bacterial infections|Nausea, Diarrhea, Rash
+Ciprofloxacin|Bacterial infections|Nausea, Diarrhea, Tendon rupture (rare)
+Atorvastatin|High cholesterol|Muscle pain, Liver damage (rare)
+Metformin|Type 2 diabetes|Nausea, Diarrhea
+Insulin|Diabetes|Hypoglycemia, Injection site reactions
+Losartan|High blood pressure|Dizziness, Fatigue
+Levothyroxine|Hypothyroidism|Hair loss, Weight changes
+Alprazolam|Anxiety|Drowsiness, Memory problems
+Omeprazole|Acid reflux|Headache, Nausea
+Fexofenadine|Allergy symptoms|Headache, Dizziness
+Zyrtec|Allergy symptoms|Drowsiness, Dry mouth
+Lisinopril|High blood pressure|Dizziness, Cough
+Amlodipine|High blood pressure|Swelling, Dizziness
+Simvastatin|High cholesterol|Muscle pain, Liver damage (rare)
+Hydrochlorothiazide|High blood pressure|Dizziness, Low potassium
+Metoprolol|High blood pressure|Dizziness, Fatigue
+Morphine|Pain|Constipation, Drowsiness
