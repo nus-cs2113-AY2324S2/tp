@@ -1,5 +1,5 @@
-addmember Amy
-addmember Brandon
-listmembers
-add Amy p/Brandon a/5
-listdebts
+add member Amy
+add member Brandon
+list members
+add transaction Amy p/Brandon a/5
+list debts

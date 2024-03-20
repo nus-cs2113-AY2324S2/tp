@@ -24,7 +24,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove 1".split(" ", 2);
-            transactionList.remove(parts);
+            transactionList.remove(parts[1]);
             assertEquals(0, transactionList.getTransactionListSize());
 
         } catch (LongAhException e) {
@@ -46,7 +46,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String[] parts = "remove -1".split(" ", 2);
-            transactionList.remove(parts);
+            transactionList.remove(parts[1]);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
@@ -101,7 +101,7 @@ public class TransactionListTest {
      * Tests the listing of transactions when the input member does not own any
      */
     @Test
-    public void findTransaction_noTransactions_success() {
+    public void findTransaction_noTransactions_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             TransactionList transactionList = new TransactionList();
@@ -111,11 +111,11 @@ public class TransactionListTest {
 
             String command = "findtransaction James";
             String[] parts = command.split(" ", 2);
-            String printedOutput = transactionList.findTransactions(parts);
+            transactionList.findTransactions(parts[1]);
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER.getMessage();
+            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
             assertEquals(expectedString, e.getMessage());
         }
     }
@@ -136,7 +136,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Jack p/Jane a/150 p/James a/250", memberList);
             String command = "findtransaction Jack";
             String[] parts = command.split(" ", 2);
-            String printedOutput = transactionList.findTransactions(parts);
+            String printedOutput = transactionList.findTransactions(parts[1]);
 
             assertTrue(printedOutput.contains("Jack owns the following list of transactions."));
             assertTrue(printedOutput.contains("Lender: Jack"));
@@ -155,7 +155,7 @@ public class TransactionListTest {
      * Tests the listing of debts when the input member does not owe any
      */
     @Test
-    public void findDebt_noTransactions_success() {
+    public void findDebt_noTransactions_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             TransactionList transactionList = new TransactionList();
@@ -166,11 +166,11 @@ public class TransactionListTest {
             transactionList.addTransaction("Jack p/Jane a/200 p/James a/100", memberList);
             transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
             String[] parts = "finddebt Jack".split(" ", 2);
-            String printedOutput = transactionList.findDebts(parts);
+            transactionList.findDebts(parts[1]);
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER.getMessage();
+            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
             assertEquals(expectedString, e.getMessage());
         }
     }
@@ -192,7 +192,7 @@ public class TransactionListTest {
             transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
             String command = "finddebt James";
             String[] parts = command.split(" ", 2);
-            String printedOutput = transactionList.findDebts(parts);
+            String printedOutput = transactionList.findDebts(parts[1]);
 
             assertTrue(printedOutput.contains("Lender: Jack"));
             assertTrue(printedOutput.contains("Jane Owed amount: 200.00"));
