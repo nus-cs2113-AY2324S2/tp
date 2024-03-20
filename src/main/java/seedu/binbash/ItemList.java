@@ -15,10 +15,6 @@ public class ItemList {
         return itemList;
     }
 
-    /**
-     * Test method
-     */
-
     public int getItemCount() {
         return itemList.size();
     }
@@ -27,7 +23,9 @@ public class ItemList {
                           double itemSalePrice, double itemCostPrice) {
         Item item = new Item(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
 
+        int beforeSize = itemList.size();
         itemList.add(item);
+        assert itemList.size() == (beforeSize + 1);
 
         String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
                 + System.lineSeparator() + item;
@@ -35,7 +33,9 @@ public class ItemList {
     }
 
     public String deleteItem(int index) {
+        int beforeSize = itemList.size();
         Item tempItem = itemList.remove(index - 1);
+        assert itemList.size() == (beforeSize - 1);
 
         String output = "Got it! I've removed the following item:"
                 + String.format("\t%s", tempItem);
@@ -76,6 +76,7 @@ public class ItemList {
                     + printList(filteredList);
         }
 
+        assert filteredList.size() > 0 && filteredList.size() <= itemList.size();
         return output;
     }
 
