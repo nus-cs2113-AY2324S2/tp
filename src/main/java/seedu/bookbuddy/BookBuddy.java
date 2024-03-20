@@ -1,5 +1,6 @@
 package seedu.bookbuddy;
 
+import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
 
 import java.util.Scanner;
@@ -31,6 +32,8 @@ public class BookBuddy {
             try {
                 Parser.parseCommand(userInput, books);
             } catch (UnsupportedCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (InvalidCommandArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
