@@ -13,10 +13,10 @@ public class Expense {
     private ArrayList<String> payees = new ArrayList<>();
 
     /**
-     * Creates the Expense object corresponding to one expense.
-     * @param payer_name : The person who paid for the expense
-     * @param total_amount : The total amount before dividing between members of the group
-     * @param payee_list : The list of people who owe money for this expense (The payer is included as index 0 and will not be added as a payee)
+     * Constructor to create new Expense
+     * @param payer_name : The name of the user who paid for the Expense
+     * @param total_amount : The total amount before being divided
+     * @param payee_list : String array of people who owe the payer money (Index 0 is the payer and will not be added to the payee list)
      */
     Expense(String payer_name, String total_amount, String[] payee_list){
         total_amount = removeWhitespaces(total_amount);
@@ -27,12 +27,19 @@ public class Expense {
         this.payer_name = payer_name;
         this.total_amount = Float.parseFloat(total_amount);
         System.out.printf("Added new expense %.2f owed to %s by:",this.total_amount,this.payer_name);
-        for(String payee : payees){
+        for(String payee : this.payees){
             System.out.print(payee + ", ");
         }
         System.out.println();
     }
 
+    /**
+     *
+     * @return : float showing the total amount before division
+     */
+    public float getTotal_amount(){
+        return this.total_amount;
+    }
     private String removeWhitespaces(String item){
         String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
         return itemWithoutWhitespaces;
