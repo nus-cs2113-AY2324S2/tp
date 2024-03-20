@@ -41,14 +41,6 @@ public class OrderTest {
                 "2. D02 Nasi Lemak $3.00" + "\n" +
                 "3. D04 Mee Siam $3.50" + "\n" +
                 "4. D04 Mee Siam $3.50", order.toString());
-        order.remove(2);
-        assertEquals(order.getID() + "\n" +
-                "1. D01 Chicken Rice $3.50" + "\n" +
-                "2. D04 Mee Siam $3.50" + "\n" +
-                "3. D04 Mee Siam $3.50", order.toString());
-        order.remove("D04");
-        assertEquals(order.getID() + "\n" +
-                "1. D01 Chicken Rice $3.50", order.toString());
     }
 
     @Test

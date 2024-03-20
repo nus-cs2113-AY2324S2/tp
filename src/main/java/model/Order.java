@@ -12,42 +12,40 @@ public class Order implements ItemManager {
     private static final double GST = 0.09;
     private final String orderID;
     private final ArrayList<MenuItem> orderItemList = new ArrayList<>();
-    private boolean isComplete = false;
 
     public Order() {
         this.orderID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
     @Override
-    public void add(MenuItem item) {
+    public boolean add(MenuItem item) {
         this.orderItemList.add(item);
-    }
-
-    /**
-     * Removes an item from the order list by its index
-     * @param index the index of the item to be removed
-     */
-    @Override
-    public void remove(int index) {
-        assert index > 0 : "Index should be greater than 0";
-        try {
-            this.orderItemList.remove(index - 1);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid index");
-        }
+        return true;
     }
 
     /**
      * Removes all items from the order list by its id
-     * @param id the id of the item to be removed
+     * @param itemID the id of the item to be removed
      */
     @Override
-    public void remove(String id) {
-        this.orderItemList.removeIf(x -> x.getID().equals(id));
+    public boolean remove(String itemID) {
+        return this.orderItemList.removeIf(x -> x.getID().equals(itemID));
+    }
+
+    public boolean remove(MenuItem item) {
+        return this.orderItemList.remove(item);
+    }
+
+    public int getItemCount(String itemID) {
+        return (int) this.orderItemList.stream().filter(x -> x.getID().equals(itemID)).count();
     }
 
     public String getID() {
         return orderID;
+    }
+
+    public int getSize() {
+        return this.orderItemList.size();
     }
 
     public double getTotalPrice() {
@@ -55,26 +53,10 @@ public class Order implements ItemManager {
                 this.orderItemList.stream().mapToDouble(Item::getPrice).sum() * (1+SERVICE_CHARGE+GST)));
     }
 
-    /**
-     * Returns the completion status of the order
-     * @return true if order is completed, false otherwise
-     */
-    public boolean isComplete() {
-        return isComplete;
-    }
-    /**
-     * Sets an order as completed
-     */
-    public void setComplete() {
-        isComplete = true;
-    }
-
     //TODO: Implement getReceipt method
     public String getReceipt() {
         return null;
     }
-
-
 
     //TODO: Implement getReceipt method with discount
     public String getReceipt(double discount) {

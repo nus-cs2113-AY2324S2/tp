@@ -14,6 +14,7 @@ public enum CommandType {
     // edit order commands
     ADD_ITEM("(?i)add\\s*-item\\s*(\\d+)\\s*-quantity\\s*(\\d+)"),
     DELETE_ITEM("(?i)delete\\s*-item\\s*(\\d+)\\s*-quantity\\s*(\\d+)"),
+    VIEW_ITEM("view item"),
     COMPLETE_ORDER("(?i)complete\\s*"),
     //COMPLETE_ORDER("(?i)complete\\s*-order\\s*(\\d+)"),
 

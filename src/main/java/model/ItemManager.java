@@ -1,8 +1,7 @@
 package model;
 
 public interface ItemManager {
-    void add(MenuItem item);
-    void remove(String id);
-    void remove(int index);
+    boolean add(MenuItem item);
+    boolean remove(String itemID);
     String getID();
 }

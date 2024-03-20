@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MenuTest {
     @Test
     public void testEmptyMenu() {
-        Menu menu = new Menu();
+        Menu menu = new Menu("001");
         assertEquals(
                 "+--------------------------------------+\n" +
                         "|              MENU                    |\n" +

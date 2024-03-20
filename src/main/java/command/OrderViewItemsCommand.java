@@ -2,15 +2,16 @@ package command;
 
 import model.Order;
 
-public class ViewItemsCommand implements OrderCommand{
+public class OrderViewItemsCommand implements OrderCommand{
     /**
      * Executes the command to list all the items in an order.
      *
      * @param order     the order to be listed
-     * @return          always returns false, as order is not completed
      */
-    public static boolean execute(Order order) {
+    public static void execute(Order order) {
         System.out.println(order.toString());
-        return false;
+        if (order.getSize() == 0) {
+            System.out.println("Order is empty.");
+        }
     }
 }
