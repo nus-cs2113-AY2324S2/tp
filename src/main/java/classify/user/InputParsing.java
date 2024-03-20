@@ -426,20 +426,38 @@ public class InputParsing {
                 System.out.println("Subject already exists.");
                 break;
 
-            } else {
-            
-                // @@author tayponghee
-                double grade = Math.max(promptForGrade(in), 0);
-                int classesAttended = promptForClassesAttended(in);
-                SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
-                attributes.addSubjectGrade(subjectGrade);
-                System.out.println("Do you want to add another subject and grade? (yes/no)");
-                String response = in.nextLine().trim().toLowerCase();
-                if (!response.equals("yes")) {
-                    break;
-                }
+            } else if (checkForValidSubjectResponse(in, attributes, subject)) {
+                //@@author tayponghee
+                return;
             }
         }
+    }
+
+    /**
+     * Checks for a valid response from the user when prompted to add another subject and grade.
+     *
+     * @param in The scanner object to read user input.
+     * @param attributes The attributes of the student.
+     * @param subject The subject to be added.
+     * @return True if the user chooses not to add another subject and grade, false otherwise.
+     */
+    private static boolean checkForValidSubjectResponse(Scanner in, StudentAttributes attributes, String subject) {
+        double grade = Math.max(promptForGrade(in), 0);
+        int classesAttended = promptForClassesAttended(in);
+        SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
+        attributes.addSubjectGrade(subjectGrade);
+        while (true) {
+            System.out.println("Do you want to add another subject and grade? (yes/no)");
+            String response = in.nextLine().trim().toLowerCase();
+            if (response.equals("yes")) {
+                break;
+            } else if (response.equals("no")) {
+                return true;
+            } else {
+                System.out.println("Invalid response. Please type 'yes' or 'no'.");
+            }
+        }
+        return false;
     }
 
     /**
