@@ -8,21 +8,30 @@ public class Ui {
     private static final int NEW_LINE = 48;
     public boolean isPlaying = true;
 
-    public void readCommands(Ui ui, QuestionsList questionsList) {
+    public boolean hasStartedGame = false;
+    public TopicList topicList;
+    public QuestionListByTopic questionListByTopic;
+
+    public String[] inputAnswers;
+
+    public void readCommands(
+            Ui ui, QuestionsList questionsList, TopicList topicList,
+            QuestionListByTopic questionListByTopic
+    ) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
         printLine();
 
         while(isPlaying) {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList);
+                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
         }
+
         sayBye();
     }
 
@@ -30,10 +39,53 @@ public class Ui {
         System.out.println("Input a command player! // TODO: show possible commands"); // TODO
     }
 
+    private void askForAnswerInput(){
+        System.out.print("Enter your answer: ");
+    }
+
+    public void printTopicList(TopicList topicList, Ui ui){
+        int topicListSize = topicList.getSize();
+        System.out.println("Here are the topics in CS2113: ");
+        for (int index = 0; index < topicListSize; index++) {
+            System.out.println((index + 1) + ". " + topicList.getTopic(index));
+        }
+        System.out.println("Please choose a topic to play: ");//input command in the form "start [INDEX]
+    }
+
+    public void printChosenTopic(
+            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic
+    ){
+        QuestionsList qnList = new QuestionsList();
+        System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
+        System.out.println("Here are the questions: ");
+        qnList = questionListByTopic.getQuestionSet(topicNum - 1);
+        int numOfQns = qnList.getSize();
+        Question questionUnit;
+        String[] inputAnswers = new String[numOfQns];
+        String answer;
+        for (int index = 0; index < numOfQns; index ++){//go through 1 question set
+            questionUnit = qnList.getQuestionUnit(index);
+            System.out.println(questionUnit.getQuestion());
+            askForAnswerInput();
+            Parser parser = new Parser();
+            Scanner in = new Scanner(System.in);
+            answer = in.nextLine();
+            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit);
+        }
+        //add results to resultsList
+    }
+
+
     public void printOneSolution(int questionNum, String solution) {
         System.out.println("The solution for question " + questionNum + ":"
                 + System.lineSeparator() + solution);
     }
+
+    public void printOneExplanation (int questionNum, String explanation) {
+        System.out.println("The explanation for question " + questionNum + ":"
+                + System.lineSeparator() + explanation);
+    }
+
     public void printAllSolutions(String allSolutions) {
         System.out.println("The solutions are :"
                 + System.lineSeparator() + allSolutions);
@@ -61,6 +113,9 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Hello " + in.nextLine());
+        printLine();
     }
 
     public void sayBye() {
