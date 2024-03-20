@@ -3,7 +3,6 @@ package git;
 import java.util.List;
 import java.util.Scanner;
 
-import exceptions.GitException;
 import grocery.Grocery;
 
 
@@ -21,13 +20,12 @@ public class Ui {
      */
     public Ui() {
         in = new Scanner(System.in);
-        printWelcome();
     }
 
     /**
      * Prints welcome message.
      */
-    private void printWelcome() {
+    public void printWelcome() {
         // LOGO causes runtest.bat to fail, failing our CI
         final String GITLOGO =
                 "   _______ ______\n"
@@ -38,16 +36,26 @@ public class Ui {
 
         System.out.println("Hello from GiT");
         System.out.println("What is your name?");
+        printLine();
         System.out.println("Hello " + in.nextLine() + "!");
         System.out.println("Enter command:");
+        printLine();
     }
 
     /**
      * Processes user input into commands and their details.
      */
-    public String[] processInput() throws GitException {
+    public String[] processInput() {
         String commandLine = in.nextLine();
-        return commandLine.strip().split(" ", 2);
+        String[] commandParts = commandLine.strip().split(" ", 2);
+        assert commandParts.length > 0 : "Failed to read user input";
+
+        // Return an array of length 2 for executeCommand
+        if (commandParts.length == 1) {
+            return new String[]{commandParts[0], ""};
+        } else {
+            return commandParts;
+        }
     }
 
     /**
@@ -65,22 +73,37 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints output after setting the selected grocery's expiration date.
+     */
     public static void printExpSet(Grocery grocery) {
         System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
     }
 
+    /**
+     * Prints output after adding a grocery.
+     */
     public static void printGroceryAdded(Grocery grocery) {
         System.out.println(grocery.getName() + " added!");
     }
 
+    /**
+     * Prints output after setting the selected grocery's amount.
+     */
     public static void printAmtSet(Grocery grocery) {
         System.out.println(grocery.getName() + ": " + grocery.getAmount());
     }
 
+    /**
+     * Prints out when there are no groceries.
+     */
     public static void printNoGrocery() {
         System.out.println("There's no groceries!");
     }
 
+    /**
+     * Prints all groceries.
+     */
     public static void printGroceryList(List<Grocery> groceries) {
         System.out.println("Here are your groceries!");
         for (Grocery grocery: groceries) {
@@ -88,10 +111,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints output when the selected grocery is removed.
+     */
     public static void printGroceryRemoved(Grocery grocery, List<Grocery> groceries) {
         System.out.println("You now have " + groceries.size() + " groceries left");
     }
-
 
     /**
      * Prints divider for user readability.

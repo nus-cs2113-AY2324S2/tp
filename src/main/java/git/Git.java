@@ -1,6 +1,7 @@
 package git;
 
 import exceptions.GitException;
+import exceptions.InvalidCommandException;
 import grocery.Grocery;
 import grocery.GroceryList;
 
@@ -29,7 +30,9 @@ public class Git {
      * @param commandParts Command and its details.
      * @throws GitException Exception thrown depending on specific error.
      */
-    private void executeCommand(String[] commandParts) throws GitException {
+    public void executeCommand(String[] commandParts) throws GitException {
+        assert commandParts.length == 2 : "Command passed in wrong format";
+
         switch (commandParts[0]) {
         case "add":
             // Assuming the format is "add GROCERY"
@@ -38,6 +41,7 @@ public class Git {
             break;
 
         case "exp":
+            // if (commandParts.length < 2) throw new EmptyGroceryException();
             groceryList.setExpiration(commandParts[1]);
             break;
 
@@ -63,8 +67,7 @@ public class Git {
             break;
 
         default:
-            System.out.println("Unknown command. Type 'help' for a list of commands.");
-            break;
+            throw new InvalidCommandException();
         }
     }
 
@@ -72,14 +75,14 @@ public class Git {
      * Runs Git.
      */
     private void run() {
+        ui.printWelcome();
+
         while (isRunning) {
             try {
                 String[] commandParts = ui.processInput();
                 executeCommand(commandParts);
             } catch (GitException e) {
                 System.out.println(e.getMessage());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                // throw the other error
             } finally {
                 ui.printLine();
             }
