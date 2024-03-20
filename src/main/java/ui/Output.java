@@ -170,10 +170,10 @@ public class Output {
 
     public static void printLatestGym() {
         try {
-            Workout latestGym = WorkoutList.getLatestGym();
-            String latestGymString = getFormattedRunWithIndex(WorkoutList.getGymSize(), latestGym);
-            System.out.println(Constant.GYM_STATION_HEADER_WITH_INDEX_FORMAT);
-            System.out.println(latestGymString);
+            Gym latestGym = WorkoutList.getLatestGym();
+            int index = WorkoutList.getGymSize();
+            System.out.println("Gym Session " + index + latestGym);
+            printGymStats(latestGym);
         } catch (CustomExceptions.OutOfBounds e) {
             System.out.println(e.getMessage());
         }
