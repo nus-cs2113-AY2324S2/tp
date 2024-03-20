@@ -42,8 +42,18 @@ public class Task {
     public Task(String description, String day, String from, String to){
         this.description = description;
         this.day = day;
-        this.startTime = LocalTime.parse(from);
-        this.endTime = LocalTime.parse(to);
+        String fromHour = from.split(":")[0];
+        String fromMinute = from.split(":")[1];
+        String toHour = to.split(":")[0];
+        String toMinute = to.split(":")[1];
+        String formattedFrom = formatDates(fromHour) + ":" + formatDates(fromMinute);
+        String formattedTo = formatDates(toHour) + ":" + formatDates(toMinute);
+        this.startTime = LocalTime.parse(formattedFrom);
+        this.endTime = LocalTime.parse(formattedTo);
+    }
+
+    private String formatDates(String time) {
+        return time.length() == 1 ? "0" + time : time;
     }
     @Override
     public String toString() {
