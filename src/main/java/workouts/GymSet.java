@@ -23,7 +23,7 @@ public class GymSet {
     /**
      * Retrieves a string representation of a GymSet object.
      *
-     * @return A formatted string representing a GymSet, inclusive of the number of repititions and weight done.
+     * @return A formatted string representing a GymSet, inclusive of the number of repetitions and weight done.
      */
     @Override
     public String toString() {

@@ -27,7 +27,7 @@ public class Bmi extends Health {
     protected double bmiValue;
 
     /**
-     * The Bmi's corresponding category.
+     * The BMI category.
      */
     protected String bmiCategory;
 
@@ -42,8 +42,8 @@ public class Bmi extends Health {
      */
     public Bmi(String height, String weight, String date) {
 
-        this.height = Double.valueOf(height);
-        this.weight = Double.valueOf(weight);
+        this.height = Double.parseDouble(height);
+        this.weight = Double.parseDouble(weight);
 
         assert this.height > 0 && this.weight > 0 : "Height and weight must be positive";
 
@@ -140,6 +140,6 @@ public class Bmi extends Health {
                 + Constant.BMI_MESSAGE_PREFIX
                 + this.calculateBmiValue()
                 + System.lineSeparator()
-                + this.getBmiCategory(bmiValue);
+                + getBmiCategory(bmiValue);
     }
 }

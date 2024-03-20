@@ -72,7 +72,7 @@ public class HealthList extends ArrayList<Health> {
     }
 
     /**
-     * Clears the workouts, runs and gyms ArrayLists.
+     * Clears the Bmis and Periods array lists.
      */
     public static void clearBmisAndPeriods() {
         periods.clear();
