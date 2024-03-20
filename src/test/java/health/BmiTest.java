@@ -33,7 +33,6 @@ class BmiTest {
      */
     @Test
     void toString_heightWeight_printsCorrectBMIAndCategory() {
-        // Arrange
         Bmi bmi = new Bmi("1.75", "70.0", "19-03-2024");
         String expected = "2024-03-19"
                 + System.lineSeparator()
@@ -42,10 +41,7 @@ class BmiTest {
                 + "Great! You're within normal range."
                 + System.lineSeparator();
 
-        // Act
         System.out.println(bmi);
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -54,13 +50,8 @@ class BmiTest {
      */
     @Test
     void printBMICategory_underweight_printsCorrectCategory() {
-        // Arrange
         String expected = "You're underweight." + System.lineSeparator();
-
-        // Act
         System.out.println(Bmi.getBmiCategory(17.5));
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -69,13 +60,8 @@ class BmiTest {
      */
     @Test
     void printBMICategory_normal_printsCorrectCategory() {
-        // Arrange
         String expected = "Great! You're within normal range." + System.lineSeparator();
-
-        // Act
         System.out.println(Bmi.getBmiCategory(22.0));
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -84,13 +70,8 @@ class BmiTest {
      */
     @Test
     void printBMICategory_overweight_printsCorrectCategory() {
-        // Arrange
         String expected = "You're overweight." + System.lineSeparator();
-
-        // Act
         System.out.println(Bmi.getBmiCategory(27.0));
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -99,13 +80,8 @@ class BmiTest {
      */
     @Test
     void printBMICategory_obese_printsCorrectCategory() {
-        // Arrange
         String expected = "You're obese." + System.lineSeparator();
-
-        // Act
         System.out.println(Bmi.getBmiCategory(32.0));
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -114,13 +90,8 @@ class BmiTest {
      */
     @Test
     void printBMICategory_severelyObese_printsCorrectCategory() {
-        // Arrange
         String expected = "You're severely obese." + System.lineSeparator();
-
-        // Act
         System.out.println(Bmi.getBmiCategory(40.0));
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -129,7 +100,6 @@ class BmiTest {
      */
     @Test
     void showCurrentBmi_bmiObject_printsCorrectCurrentBmi() {
-        // Arrange
         Bmi bmi = new Bmi("1.75", "70.00", "19-03-2024");
         HealthList.addBmi(bmi);
 
@@ -139,11 +109,7 @@ class BmiTest {
                 + System.lineSeparator()
                 + "Great! You're within normal range."
                 + System.lineSeparator();
-
-        // Act
         HealthList.showCurrentBmi();
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
@@ -154,15 +120,9 @@ class BmiTest {
     void checkTypeOfHealth_returnCorrectHealthType() throws
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput{
-        // Arrange
         String userInput = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-
         String expected = Constant.BMI;
-
-        // Act
         String result = Health.checkTypeOfHealth(userInput);
-
-        // Assert
         assertEquals(expected, result);
     }
 
@@ -171,10 +131,7 @@ class BmiTest {
      */
     @Test
     void checkTypeOfHealth_throwsInvalidInputExceptions() {
-        // Arrange
         String userInput = "/h:run /height:1.71 /weight:60.50 /date:19-03-2024";
-
-        // Act & Assert
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.checkTypeOfHealth(userInput));
     }
 
@@ -183,14 +140,9 @@ class BmiTest {
      */
     @Test
     void getBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
-        // Arrange
         String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
         String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
-
-        // Act
         String[] result = Bmi.getBmi(input);
-
-        // Assert
         assertArrayEquals(expected, result);
     }
 
@@ -199,10 +151,7 @@ class BmiTest {
      */
     @Test
     void getBmi_wrongInput_throwsInvalidInputExceptions() {
-        // Arrange
         String input = "/h:bmi /height:1.71 /date:19-03-2024";
-
-        // Act & Assert
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
     }
 
@@ -211,7 +160,6 @@ class BmiTest {
      */
     @Test
     void showBmiHistory_bmiObject_printsCorrectBmiHistory() {
-        // Arrange
         Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
         Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
 
@@ -237,10 +185,7 @@ class BmiTest {
                 + "Great! You're within normal range."
                 + System.lineSeparator();
 
-        // Act
         HealthList.showBmiHistory();
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 }

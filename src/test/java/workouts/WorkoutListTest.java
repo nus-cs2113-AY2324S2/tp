@@ -18,7 +18,7 @@ class WorkoutListTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void cleanup() {
         WorkoutList.clearWorkoutsAndRun();
     }
 
@@ -96,9 +96,7 @@ class WorkoutListTest {
      */
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForRun() {
-        assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            WorkoutList.getWorkouts(Constant.RUN);
-        });
+        assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(Constant.RUN));
     }
 
     /**
@@ -107,9 +105,7 @@ class WorkoutListTest {
      */
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForAll() {
-        assertThrows(CustomExceptions.OutOfBounds.class, () -> {
-            WorkoutList.getWorkouts(Constant.ALL);
-        });
+        assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(Constant.ALL));
     }
 
     /**

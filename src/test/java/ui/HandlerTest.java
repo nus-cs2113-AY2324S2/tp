@@ -44,7 +44,9 @@ class HandlerTest {
         HealthList.clearBmisAndPeriods();
     }
 
-    // processInput Tests BEGIN here: ---------------------------------------------------------------------
+    /**
+     * Tests the processInput function's behaviour to the EXIT command.
+     */
     @Test
     void processInput_exitCommand_terminatesProgram() {
         String input = "EXIT";
@@ -56,6 +58,10 @@ class HandlerTest {
         assertTrue(output.contains("Initiating PulsePilot landing sequence..."));
     }
 
+    /**
+     * Tests the processInput function's behaviour to the NEW command to add a Run
+     * object.
+     */
     @Test
     void processInput_newCommand_addRunExercise() {
         String input = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
@@ -67,6 +73,10 @@ class HandlerTest {
         assertTrue(output.contains("Successfully added a new run session"));
     }
 
+    /**
+     * Tests the processInput function's behaviour to the HEALTH command to add
+     * a BMI object.
+     */
     @Test
     void processInput_healthCommand_addBMIHealthData() {
         String input = "HEALTH /h:bmi /height:1.70 /weight:65 /date:15-03-2024";
@@ -79,6 +89,10 @@ class HandlerTest {
     }
 
 
+    /**
+     * Tests the processInput function's behaviour to the HISTORY command to print
+     * all run objects.
+     */
     @Test
     void processInput_historyCommand_printsHistoryRun() {
         String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
@@ -92,6 +106,10 @@ class HandlerTest {
         assertTrue(output.contains("history:"));
     }
 
+    /**
+     * Tests the processInput function's behaviour to the LATEST command to print
+     * the latest run object.
+     */
     @Test
     void processInput_latestCommand_printsLatestRun() {
         String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
@@ -105,8 +123,10 @@ class HandlerTest {
         assertTrue(output.contains("Your latest run:"));
     }
 
-
-
+    /**
+     * Tests the processInput function's behaviour to the HELP command to print
+     * the help message.
+     */
     @Test
     void processInput_helpCommand_printsHelp() {
         String input = "HELP";
@@ -118,6 +138,10 @@ class HandlerTest {
         assertTrue(output.contains("Commands List"));
     }
 
+    /**
+     * Tests the processInput function's behaviour to an invalid command, which prints
+     * an error.
+     */
     @Test
     void processInput_invalidCommand_printsInvalidCommandException() {
         String input = "INVALID";
@@ -134,12 +158,7 @@ class HandlerTest {
                 System.lineSeparator();
 
         assertEquals(expected, errContent.toString());
-        ///String output = errContent.toString();
-        //assertTrue(output.contains("Invalid command."));
     }
-
-
-    // processInput Tests END here: ---------------------------------------------------------------------
 
     /**
      * Test the behavior of the checkTypeOfExercise method when the user input is valid.
@@ -203,29 +222,28 @@ class HandlerTest {
         });
 
         // with invalid exercise type
-        String input2 = "new /e:wrong /d:10.3 /t:00:40:10 /date:15-03-2024";
+        String input2 = "new /e:wrong /d:10.3 /t:00:40:10 /date:15/03/2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input2);
         });
 
         // with invalid exercise type
-        String input3 = "new /e:gymm /d:10.3 /t:00:40:10 /date:15-03-2024";
+        String input3 = "new /e:gymm /d:10.3 /t:00:40:10 /date:15/03/2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input3);
         });
 
         // with invalid format
-        String input4 = "new /e-gymm /d-10.3 /t:00:40:10 /date:15-03-2024";
+        String input4 = "new /e-gymm /d-10.3 /t:00:40:10 /date:15/03/2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input4);
         });
 
         // with wrong slash
-        String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15-03-2024";
+        String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input5);
         });
-
     }
 
     /**
@@ -238,20 +256,14 @@ class HandlerTest {
     void checkTypeOfExercise_insufficientUserInput_throwInsufficientInput() {
         // without distance, time, and date
         String input2 = "new /e:run";
-        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-            Handler.checkTypeOfExercise(input2);
-        });
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input2));
 
         // without time and date
         String input3 = "new /e:run /d:10.3";
-        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-            Handler.checkTypeOfExercise(input3);
-        });
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input3));
 
         // without the date
         String input4 = "new /e:run /d:30:10 /t:00:20:10";
-        assertThrows(CustomExceptions.InsufficientInput.class, () -> {
-            Handler.checkTypeOfExercise(input4);
-        });
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input4));
     }
 }

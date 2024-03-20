@@ -23,9 +23,11 @@ class PeriodTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests the behaviour of toString in Period class.
+     */
     @Test
     void calculatePeriodLength_printsCorrectPeriod() {
-        // Arrange
         Period period = new Period("09-03-2022", "16-03-2022");
         String expected = "Period Start: "
                 + period.getStartDate()
@@ -37,13 +39,14 @@ class PeriodTest {
                 + " days"
                 + System.lineSeparator();
 
-        // Act
         System.out.println(period);
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
+    /**
+     * Tests the behaviour of the showLatestPeriod function and whether it prints
+     * the last Period object added.
+     */
     @Test
     void showLatestPeriod_printCorrectPeriod() {
         // Arrange
@@ -63,13 +66,15 @@ class PeriodTest {
                 + " days"
                 + System.lineSeparator();
 
-        // Act
         HealthList.showLatestPeriod();
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 
+    /**
+     * Tests the behaviour of the showPeriodHistory function and whether it prints
+     * all Period objects added.
+     */
+    @Test
     void showPeriodHistory_printCorrectPeriodHistory() {
         // Arrange
         Period firstPeriod = new Period("10-04-2024", "16-04-2024");
@@ -105,10 +110,7 @@ class PeriodTest {
                 + " days"
                 + System.lineSeparator();
 
-        // Act
         HealthList.showPeriodHistory();
-
-        // Assert
         assertEquals(expected, outContent.toString());
     }
 }
