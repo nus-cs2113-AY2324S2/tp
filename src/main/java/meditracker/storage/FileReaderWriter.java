@@ -132,8 +132,9 @@ public class FileReaderWriter {
     }
 
     /**
-     * Loads the daily medication information from a fixed file data/dailymed/today.txt.
-     * The loading functionality will be improved in v2.0.
+     * Saves the daily medication information to a fixed file data/dailymed/today.txt.
+     * The file creation is the same as `createJsonSaveFile` (to be abstracted).
+     * The saving functionality will be improved in v2.0.
      *
      * @param dailyMedData A list of type String for the daily medication data.
      * @throws FileReadWriteException if there is an issue creating the file.
@@ -169,9 +170,8 @@ public class FileReaderWriter {
     }
 
     /**
-     * Saves the daily medication information to a fixed file data/dailymed/today.txt.
-     * The file creation is the same as `createJsonSaveFile` (to be abstracted).
-     * The saving functionality will be improved in v2.0.
+     * Loads the daily medication information from a fixed file data/dailymed/today.txt.
+     * The loading functionality will be improved in v2.0.
      *
      * @return A list of string with the daily medication data. null if the file could not be loaded.
      */
