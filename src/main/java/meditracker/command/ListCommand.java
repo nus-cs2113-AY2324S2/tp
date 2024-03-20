@@ -25,6 +25,7 @@ public class ListCommand extends Command {
      * Executes the list command
      * @param medicationManager List of medicines.
      * @param ui                Ui object.
+     * @param dailyMedicationManager  List of daily medicines.
      */
     @Override
     public void execute(MedicationManager medicationManager,

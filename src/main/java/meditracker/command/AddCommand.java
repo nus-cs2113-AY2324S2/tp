@@ -51,6 +51,7 @@ public class AddCommand extends Command {
      * It also displays a message confirming the addition of the medication.
      * @param medicationManager The MedicationList object representing the list of medications.
      * @param ui The Ui object used to interact with the user interface.
+     * @param dailyMedicationManager  The DailMedicationManager object representing the list of DailyMedication.
      */
     @Override
     public void execute(MedicationManager medicationManager,

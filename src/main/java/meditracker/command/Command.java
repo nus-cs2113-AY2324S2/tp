@@ -12,6 +12,7 @@ public abstract class Command {
      *
      * @param medicationManager ArrayList of medicines.
      * @param ui Ui object.
+     * @param dailyMedicationManager  ArrayList of daily Medication
      */
     public abstract void execute(MedicationManager medicationManager,
                                  Ui ui, DailyMedicationManager dailyMedicationManager);
