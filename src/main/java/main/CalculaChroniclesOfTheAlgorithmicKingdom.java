@@ -14,6 +14,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
     }
 
     public void startGame() {
+        assert false : "dummy assertion set to fail";
         PlayerStatus playerStatus = new PlayerStatus(100, 0, 0);
         TextBox textBox = new TextBox();
         Parser parser = new Parser();
