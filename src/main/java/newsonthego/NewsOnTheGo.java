@@ -1,14 +1,16 @@
 package newsonthego;
 
+import newsonthego.commands.DailyNewsCommand;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Scanner;
 
 public class NewsOnTheGo {
 
@@ -99,13 +101,13 @@ public class NewsOnTheGo {
     }
 
     public enum Command {
-        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, BYE
+        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
     }
     private static boolean processCommand(String command, String line, List<NewsArticle> list) {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
         case DAILY:
-            dailyNews(line, list);
+            new DailyNewsCommand(line, list);
             break;
         case GET:
             getNews(line, list);
@@ -121,6 +123,9 @@ public class NewsOnTheGo {
             break;
         case SOURCE:
             sourceNews(line, list);
+            break;
+        case INFO:
+            infoNews(line,list);
             break;
         case BYE:
             System.out.println("Bye. Hope to see you again soon!");
@@ -141,9 +146,6 @@ public class NewsOnTheGo {
         for(NewsTopic topic: newsTopics) {
             System.out.println(" - " +topic.getTopicName());
         }
-    }
-
-    private static void dailyNews(String line, List<NewsArticle> list) {
     }
 
     private static void getNews(String line, List<NewsArticle> list) {
@@ -200,5 +202,23 @@ public class NewsOnTheGo {
         String[] split = line.split(" ");
         int index = Integer.parseInt(split[1]) + 1;
         System.out.println(list.get(index).getSource());
+    }
+
+    /**
+     * Prints the importance, reliability, and bias of a news article based on its index in the list.
+     * @param line The command line containing the index of the news article.
+     * @param list The list of NewsArticle objects containing news articles.
+     */
+    public static void infoNews(String line, List<NewsArticle> list) {
+        String[] split = line.split(" ");
+        int index = Integer.parseInt(split[1]) - 1;
+        if (index >= 0 && index < list.size()) {
+            NewsArticle article = list.get(index);
+            System.out.println("Importance: " + article.getImportance());
+            System.out.println("Reliability: " + article.getReliability());
+            System.out.println("Bias: " + article.getBias());
+        } else {
+            System.out.println("Invalid article index.");
+        }
     }
 }
