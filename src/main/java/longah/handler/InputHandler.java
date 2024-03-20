@@ -13,7 +13,7 @@ public class InputHandler {
     public static Command parseInput(String userInput) throws LongAhException {
         String[] commandExpressionSplit = userInput.split(" ", 2);
         String commandString = commandExpressionSplit[0].toLowerCase();
-        String taskExpression = commandExpressionSplit[1];
+        String taskExpression = commandExpressionSplit.length > 1 ? commandExpressionSplit[1] : "";
         return CommandParser.parseCommand(commandString, taskExpression);
     }
 }
