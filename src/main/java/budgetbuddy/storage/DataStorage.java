@@ -38,7 +38,7 @@ public class DataStorage {
 
     private static String getStringToWrite(Transaction t) {
         return t.getDescription() + " ," + t.getCategory() + " ," + t.getTransactionType() + " ," + t.getDate()
-                + " ." + t.getAmount() + "\n";
+                + " ," + t.getAmount() + "\n";
     }
 
     private Transaction processData(String s, Account account) {
