@@ -409,7 +409,8 @@ public class InputParsing {
             try {
                 classesAttended = Integer.parseInt(classesAttendedInput);
             } catch (NumberFormatException e){
-                System.out.println("Wrong number format! Please try again! ");
+                System.out.println("Wrong number format! Please try again! e.g. 12 ");
+                Ui.printDivider();
                 classesAttended = promptForClassesAttended(in);
             }
             if (isValidClassesAttended(classesAttended)) {
@@ -437,7 +438,8 @@ public class InputParsing {
             try {
                 grade = Double.parseDouble(gradeInput);
             } catch (NumberFormatException e) {
-                System.out.println("Wrong number format! Please try again! ");
+                System.out.println("Wrong number format! Please try again! e.g. 75 ");
+                Ui.printDivider();
                 grade = promptForGrade(in);
             }
             if (isValidGrade(grade)) {
