@@ -1,5 +1,6 @@
 package seedu.duke;
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class TravelActivityList {
     /** Array of travel activity */
@@ -10,6 +11,8 @@ public class TravelActivityList {
     public TravelActivityList() {
         travelActivities = new ArrayList<>();
     }
+
+    private static Logger logger = Logger.getLogger("TravelActivityListLogger");
 
     /**
      * Adds travel activity to the travel activity list
@@ -87,22 +90,30 @@ public class TravelActivityList {
      */
 
     public void searchKeyword (String taskName) {
+        logger.log(Level.INFO, "searchKeyword function started");
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
+        logger.log(Level.INFO, "temporaryArray is initialised");
         boolean isFound = false;
+        logger.log(Level.INFO, "isFound is initialised to false");
+        logger.log(Level.INFO, "Search for activities related to taskName given by user started");
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
             if(travelActivities.get(iterator).getPlan().contains(taskName)){
                 temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
                 temporaryArrayCounter += 1;
+                logger.log(Level.INFO, "An activity is added to the temporaryArray");
             }
         }
         if (temporaryArrayCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
+            logger.log(Level.INFO, "No activity is stored in the temporaryArray");
         } else {
             assert !temporaryArray.isEmpty();
             System.out.println("Here are what you are looking for:");
+            logger.log(Level.INFO, "Starting the printing of activities in temporaryArray");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
+                logger.log(Level.INFO, "An activity in temporaryArray is printed");
             }
         }
     }
@@ -112,6 +123,7 @@ public class TravelActivityList {
      * @param taskNumber The travel activity number on the list
      */
     public void checkTravelActivity(int taskNumber) throws OmniException{
+
         assert taskNumber != 0 : "There is not tasks in the list";
         if (taskNumber > travelActivities.size()) {
             throw new OmniException("Travel activity cannot be found");
