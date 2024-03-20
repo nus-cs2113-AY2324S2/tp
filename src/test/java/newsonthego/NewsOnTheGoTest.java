@@ -38,5 +38,4 @@ class NewsOnTheGoTest {
         String output = outputHeadlines.get(0).getHeadline();
         assertEquals(expected, output);
     }
-     
 }
