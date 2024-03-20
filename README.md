@@ -35,11 +35,11 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ### I/O redirection tests
 
-* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
+* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-itemlist` and run the `runtest(.bat/.sh)` script.
 
 ### JUnit tests
 
-* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
+* A skeleton JUnit itemlist (`src/itemlist/java/seedu/duke/DukeTest.java`) is provided with this project template. 
 * If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
 ## Checkstyle
