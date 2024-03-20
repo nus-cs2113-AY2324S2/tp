@@ -257,6 +257,7 @@ public class InputParsing {
     private static String checkForEmptyName(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
         while (true) {
+
             if (studentName == null) {
                 Ui.printStudentNamePrompt();
                 name = in.nextLine().trim();
@@ -264,10 +265,14 @@ public class InputParsing {
                 name = studentName.trim();
                 studentName = NOTEMPTY;
             }
+
+            assert studentName != null :
+
             if (name.isEmpty()) {
                 System.out.println("Student name cannot be empty. Please enter a valid name.");
                 Ui.printDivider();
             } else if (findStudentByName(masterStudentList, name) != null) {
+                assert findStudentByName(masterStudentList, name) != null;
                 logger.log(Level.WARNING, "Student with the same name already exists.");
                 System.out.println("Student with the same name already exists. Please enter a different name.");
                 Ui.printDivider();
