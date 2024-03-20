@@ -64,6 +64,27 @@ class WorkoutManagerTest {
     }
 
     @Test
+    public void execute_deleteExistingWorkoutPlan_success() {
+        String workoutInput = "workout /create chest day";
+        parser.parseInput(workoutInput);
+        assertDoesNotThrow(() -> workoutManager.execute(parser));
+
+        String deleteInput = "workout /delete chest day";
+        parser.parseInput(deleteInput);
+        assertDoesNotThrow(() -> workoutManager.execute(parser));
+
+        // Ensure the workout plan is deleted
+        assertThrows(Exceptions.ActivityDoesNotExists.class, () -> workoutManager.retrieve("LegDay"));
+    }
+
+    @Test
+    public void execute_deleteNonExistingWorkoutPlan_throwsActivityDoesNotExists() {
+        String deleteInput = "workout /delete NonExistingWorkout";
+        parser.parseInput(deleteInput);
+        assertThrows(Exceptions.ActivityDoesNotExists.class, () -> workoutManager.execute(parser));
+    }
+
+    @Test
     public void execute_assignExerciseToWorkout_success() {
         String exerciseInput = "exercise /add Squat";
         parser.parseInput(exerciseInput);
