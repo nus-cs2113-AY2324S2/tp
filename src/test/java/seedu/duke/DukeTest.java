@@ -83,7 +83,7 @@ class DukeTest {
     }
     @Test
 
-    //basic test for search function
+    //basic test for searchKeyword function
     public void searchTest () {
         assertTrue(true);
     }
