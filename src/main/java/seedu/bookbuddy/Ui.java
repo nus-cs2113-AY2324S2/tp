@@ -2,22 +2,21 @@ package seedu.bookbuddy;
 
 public class Ui {
     public static void printWelcome() {
-        /*String logo =
+        String logo =
                 " ____    ____  \n"
                         + "|    \\  |    \\ \n"
                         + "| |_) / | |_) / \n"
                         + "| |_) \\ | |_) \\ \n"
                         + "|____/  |____/ \n";
         printLine();
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! We are BookBuddy!");
+        System.out.println("Hello from");
+        System.out.println("BookBuddy!");
+        //System.out.println("Hello! We are BookBuddy!");
         System.out.println("How can I help you today?");
-        printShortLine(); */
-        System.out.println("Hello! We are BookBuddy!");
-        System.out.println("How can I help you today?");
+        printShortLine();
     }
     public static void printLine() {
-        System.out.println("________________________________________");
+        System.out.println("___________________________________");
     }
     public static void printShortLine() {
         System.out.println("_____________");
