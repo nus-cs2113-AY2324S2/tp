@@ -1,14 +1,16 @@
 package newsonthego;
 
+import newsonthego.commands.DailyNewsCommand;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Scanner;
 
 public class NewsOnTheGo {
 
@@ -105,7 +107,7 @@ public class NewsOnTheGo {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
         case DAILY:
-            dailyNews(line, list);
+            new DailyNewsCommand(line, list);
             break;
         case GET:
             getNews(line, list);
@@ -144,9 +146,6 @@ public class NewsOnTheGo {
         for(NewsTopic topic: newsTopics) {
             System.out.println(" - " +topic.getTopicName());
         }
-    }
-
-    private static void dailyNews(String line, List<NewsArticle> list) {
     }
 
     private static void getNews(String line, List<NewsArticle> list) {
