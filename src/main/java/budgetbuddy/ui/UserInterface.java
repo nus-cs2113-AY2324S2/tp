@@ -52,6 +52,33 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
+    public static void printInvalidAddSyntax(String message) {
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + message);
+        System.out.println(TAB_SPACE + "Please ensure that you have entered all the arguments correctly.");
+        System.out.println(LINE);
+    }
+
+    public static void printTransactionTypeError(String message) {
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Invalid transaction type: " + message);
+        System.out.println(TAB_SPACE + "Please enter Expense or Income only.");
+        System.out.println(LINE);
+    }
+
+    public static void printNumberFormatError(String message) {
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Error occurred with the input: " + message);
+        System.out.println(TAB_SPACE + "Please enter an integer.");
+        System.out.println(LINE);
+    }
+
+    public static void printEmptyArgumentError(String message){
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Please include the " + message + "in the command.");
+        System.out.println(LINE);
+    }
+
     public static void printAllTransactions(ArrayList<Transaction> transactions, double balance) {
         int index = transactions.size();
         System.out.println(LINE);

@@ -1,6 +1,9 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
@@ -30,8 +33,15 @@ public class TransactionList {
         UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
-    public void removeTransaction(String input, Account account){
-        int id = Integer.parseInt(input.substring(DELETE_BEGIN_INDEX).trim()) - INDEX_OFFSET;
+    public void removeTransaction(String input, Account account) throws EmptyArgumentException, NumberFormatException {
+        if (input.trim().length() < DELETE_BEGIN_INDEX) {
+            throw new EmptyArgumentException("delete index");
+        }
+        String data = input.substring(DELETE_BEGIN_INDEX).trim();
+        if (!isInteger(data)) {
+            throw new NumberFormatException(data);
+        }
+        int id = Integer.parseInt(data) - INDEX_OFFSET;
         int size = transactions.size();
         if (id >= LOWER_BOUND && id < size) {
             String itemRemoved = transactions.get(id).toString();
@@ -42,12 +52,31 @@ public class TransactionList {
             throw new IndexOutOfBoundsException(size);
         }
     }
+
+    // Checks whether the input index is an Integer
+    public static boolean isInteger(String data) {
+        try {
+            Integer.parseInt(data);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
   
     void addTransaction(Transaction t) {
         transactions.add(t);
     }
 
-    public void processTransaction(String input, Account account) {
+    public void processTransaction(String input, Account account)
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+        // Check for syntax for add transaction
+        String[] arguments = {"/t/", "/n/", "/$/", "/d/", "/c/"};
+        for (String argument : arguments) {
+            if (!input.contains(argument)) {
+                throw new InvalidAddTransactionSyntax("Invalid add syntax.");
+            }
+        }
+
         Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
