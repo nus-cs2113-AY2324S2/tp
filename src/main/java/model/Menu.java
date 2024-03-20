@@ -10,27 +10,27 @@ import static model.SetMenu.Dinner;
 
 public class Menu implements ItemManager {
     private final ArrayList<MenuItem> menuItemList = new ArrayList<>();
-    private final String menuItemID;
+    private final String menuID;
 
     public Menu(SetMenu menuType) {
         switch (menuType) {
         case Breakfast:
-            this.menuItemID = String.valueOf(Breakfast);
+            this.menuID = String.valueOf(Breakfast);
             break;
         case Lunch:
-            this.menuItemID = String.valueOf(Lunch);
+            this.menuID = String.valueOf(Lunch);
             break;
         case Dinner:
-            this.menuItemID = String.valueOf(Dinner);
+            this.menuID = String.valueOf(Dinner);
             break;
         default:
-            this.menuItemID = "No Menu type";
+            this.menuID = "No Menu type";
         }
     }
 
     @Override
     public String getID() {
-        return menuItemID;
+        return menuID;
     }
     @Override
     public void add(MenuItem item) {
@@ -61,9 +61,19 @@ public class Menu implements ItemManager {
 
     @Override
     public String toString() {
-        return this.menuItemID + "\n" +
+        return this.menuID + "\n" +
                 IntStream.range(0,this.menuItemList.size())
                         .mapToObj(x -> (x + 1) + ". " + this.menuItemList.get(x))
                         .collect(Collectors.joining("\n"));
+    }
+
+    public void displayMenu() {
+        System.out.println("╔═════════════════════╗");
+        System.out.println("║      MENU           ║");
+        System.out.println("╠═════════════════════╣");
+        for (MenuItem item : menuItemList) {
+            System.out.printf("║ %-20s $%-8.2f ║\n", item.getName(), item.getPrice());
+        }
+        System.out.println("╚═════════════════════╝");
     }
 }
