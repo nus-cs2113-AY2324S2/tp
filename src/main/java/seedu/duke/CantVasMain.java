@@ -15,6 +15,7 @@ public class CantVasMain {
 
     public void run() {
         UI.printLogo();
+        UI.printMotivationQuote();
         UI.printHelpMessage();
         boolean exit;
         do {

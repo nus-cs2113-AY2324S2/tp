@@ -1,6 +1,8 @@
 package seedu.duke;
-
+import MotivationalQuotes.MotivationalQuotes;
 import java.util.Scanner;
+
+
 
 public class UI {
 
@@ -51,5 +53,14 @@ public class UI {
                 + "To end the program, type 'exit'");
     }
 
+    public static void printMotivationQuote() {
+        String quote = MotivationalQuotes.getQoute();
+        System.out.println(quote);
+        printLineBreak();
+    }
+
+    public static void printLineBreak() {
+        System.out.println(" -------------------------------------------------------------\n");
+    }
 
 }
