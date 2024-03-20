@@ -39,7 +39,7 @@ public class UntakeCommand extends Command {
                         Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
-        dailyMedicationManager.takeDailyMedication(listIndex);
+        dailyMedicationManager.untakeDailyMedication(listIndex);
         ui.showUntakeCommandMessage();
     }
 }

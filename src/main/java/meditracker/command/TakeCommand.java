@@ -39,7 +39,7 @@ public class TakeCommand extends Command {
                         Ui ui) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
-        dailyMedicationManager.untakeDailyMedication(listIndex);
+        dailyMedicationManager.takeDailyMedication(listIndex);
         ui.showTakeCommandMessage();
     }
 }
