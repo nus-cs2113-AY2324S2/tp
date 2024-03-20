@@ -25,9 +25,9 @@ public class Parser {
         if (ui.isPlaying) {
 
             if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
-                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic);
-                hasChosenTopic = true;
-            } else if (!hasChosenTopic) {
+                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults);
+                //hasChosenTopic = true;
+            } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
                 throw new CustomException("Please choose a topic in the format: topic [INDEX]");
             }
 
