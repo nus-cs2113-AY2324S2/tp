@@ -5,7 +5,7 @@ import java.lang.reflect.InaccessibleObjectException;
 import customexceptions.InactivityTimeoutException;
 //import financialtransactions.Inflow;
 //import financialtransactions.Outflow;
-import customexceptions.IncompletePromptException;
+import customexceptions.UnknownPromptException;
 import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
@@ -15,7 +15,7 @@ import user.InactivityTimer;
 import userinteraction.UI;
 
 public class Main {
-    public static void main(String[] args) throws IncompletePromptException {
+    public static void main(String[] args) {
         Storage storage = new Storage("./data");
         UI ui = new UI();
         ui.printMessage("Welcome. Inorder to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
@@ -28,23 +28,26 @@ public class Main {
             try {
                 inactivityTimer.checkTimeElapsed();
             } catch (InactivityTimeoutException e) {
-            if (e.isTimeOut()) {
-                parser.setIsContinue(false);
-            }
-            else if (e.isGracePeriod()) {
-                ui.printMessage("Some time has passed. Would you still like to continue: ");
-                String wantToContinue = ui.readInput();
-                if (wantToContinue.equalsIgnoreCase("y") ||
-                    wantToContinue.equalsIgnoreCase("yes")) {
+                if (e.isTimeOut()) {
+                    parser.setIsContinue(false);
+                } else if (e.isGracePeriod()) {
+                    ui.printMessage("Some time has passed. Would you still like to continue: ");
+                    String wantToContinue = ui.readInput();
+                    if (wantToContinue.equalsIgnoreCase("y") ||
+                            wantToContinue.equalsIgnoreCase("yes")) {
                         inactivityTimer.resetTimer();
-                } 
-                else if (wantToContinue.equalsIgnoreCase("n") || 
-                    wantToContinue.equalsIgnoreCase("no")) {
+                    } else if (wantToContinue.equalsIgnoreCase("n") ||
+                            wantToContinue.equalsIgnoreCase("no")) {
                         parser.setIsContinue(false);
+                    }
                 }
-            } 
+            }
             String command = ui.readInput();
-            parser.parseCommand(command, manager);
+            try {
+                parser.parseCommand(command, manager);
+            } catch (UnknownPromptException e) {
+                System.out.println("Invalid command");
+            }
             storage.saveFile(manager);
         }
         ui.closeScanner();

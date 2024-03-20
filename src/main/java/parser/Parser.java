@@ -1,5 +1,6 @@
 package parser;
 
+import customexceptions.UnknownPromptException;
 import financialtransactions.Inflow;
 import financialtransactions.Outflow;
 import userinteraction.UI;
@@ -16,7 +17,7 @@ public class Parser {
         this.ui = new UI();
     }
 
-    public String parseCommand(String command, TransactionManager manager) {
+    public String parseCommand(String command, TransactionManager manager) throws UnknownPromptException, UnknownPromptException {
         String[] commandParts = command.split(" ");
         String action = commandParts[0];
 
@@ -63,8 +64,7 @@ public class Parser {
             isContinue = false;
             break;
         default:
-            System.out.println("Invalid command");
-            break;
+            throw new UnknownPromptException();
         }
         return null;
     }
