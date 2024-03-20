@@ -40,7 +40,7 @@ public abstract class AMap {
 
 
     public void movePlayerUpOne() {
-        if (this.playerY - 1 >= 0) {
+        if (this.playerY - 1 >= 0 && currentMap.get(playerY - 1).get(playerX) == '.') {
             currentMap.get(playerY).set(playerX, '.');
             currentMap.get(playerY - 1).set(playerX, 'P');
             this.playerY -= 1;
@@ -49,7 +49,7 @@ public abstract class AMap {
 
 
     public void movePlayerDownOne() {
-        if (this.playerY + 1 < height) {
+        if (this.playerY + 1 < height && currentMap.get(playerY + 1).get(playerX) == '.') {
             currentMap.get(playerY).set(playerX, '.');
             currentMap.get(playerY + 1).set(playerX, 'P');
             this.playerY += 1;
@@ -58,7 +58,7 @@ public abstract class AMap {
 
 
     public void movePlayerLeftOne() {
-        if (this.playerX - 1 >= 0) {
+        if (this.playerX - 1 >= 0 && currentMap.get(playerY).get(playerX - 1) == '.') {
             currentMap.get(playerY).set(playerX, '.');
             currentMap.get(playerY).set(playerX - 1, 'P');
             this.playerX -= 1;
@@ -67,7 +67,7 @@ public abstract class AMap {
 
 
     public void movePlayerRightOne() {
-        if (this.playerY + 1 < width) {
+        if (this.playerY + 1 < width && currentMap.get(playerY).get(playerX + 1) == '.') {
             currentMap.get(playerY).set(playerX, '.');
             currentMap.get(playerY).set(playerX + 1, 'P');
             this.playerX += 1;

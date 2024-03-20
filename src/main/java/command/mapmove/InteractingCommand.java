@@ -5,6 +5,10 @@ import map.*;
 import map.BattleInterface.BattleInterface;
 
 public class InteractingCommand extends MapMoveCommand {
+
+    public InteractingCommand(){
+        commandDescription = "interact";
+    }
     @Override
     public void execute() {
         String entityInteractedWith = currentMap.handleInteract();
@@ -12,7 +16,7 @@ public class InteractingCommand extends MapMoveCommand {
         AMap battleMap;
         switch (entityInteractedWith) {
         case "@":
-            InteractableEntity monster = new Enemy(10, 10);
+            InteractableEntity monster = new Enemy(10, 10, 10);
             battleMap = new BattleInterface(playerStatus, textBox, monster);
             battleMap.initMap(30, 10);
             currentMap = battleMap;
