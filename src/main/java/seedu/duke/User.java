@@ -1,13 +1,13 @@
 package seedu.duke;
 
 public class User {
-    private String name;
+    private String userName;
 
-    public User(String name) {
-        this.name = name;
+    public User(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 }
