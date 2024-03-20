@@ -56,6 +56,7 @@ public final class Ui {
     }
 
     public static void printListTasks(ProductList products) {
+        printToScreen(HORIZONTAL_LINE);
         for (int i = 0; i < products.getSize(); i++ ) {
             assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);

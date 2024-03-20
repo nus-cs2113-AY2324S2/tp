@@ -29,6 +29,10 @@ public class OutflowCommand extends ListActionCommand {
     @Override
     public void execute(ProductList productList) throws StockPalException {
         int productIndex = productList.findProductIndex(this.pid);
+        if (productIndex == -1) {
+            Ui.printInvalidPidMessage();
+            return;
+        }
         productList.decreaseAmount(productIndex, amountToDecrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
     }
