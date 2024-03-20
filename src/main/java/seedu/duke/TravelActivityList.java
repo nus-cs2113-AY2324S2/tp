@@ -174,6 +174,7 @@ public class TravelActivityList {
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
         System.out.println(taggedTask);
+
     }
 
 }
