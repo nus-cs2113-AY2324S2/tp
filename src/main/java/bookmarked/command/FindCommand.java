@@ -1,6 +1,8 @@
 package bookmarked.command;
 
 import bookmarked.Book;
+import bookmarked.exceptions.emptyListException;
+import bookmarked.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -30,10 +32,19 @@ public class FindCommand extends Command {
             System.out.println("Find keyword cannot be empty!");
             return;
         }
-        processFind(keyword);
+
+        try {
+            processFind(keyword);
+        } catch (emptyListException e) {
+            Ui.printEmptyListMessage();
+        }
     }
 
-    private void processFind(String keyword) {
+    private void processFind(String keyword) throws emptyListException {
+        if (this.listOfBooks.isEmpty()) {
+            throw new emptyListException();
+        }
+
         logger.log(Level.INFO, "processing find books based on keyword");
         assert keyword != null : "keyword should not be empty";
         int numberOfBookFound = 0;

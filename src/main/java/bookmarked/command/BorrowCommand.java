@@ -1,6 +1,9 @@
 package bookmarked.command;
 
 import bookmarked.Book;
+import bookmarked.exceptions.emptyListException;
+import bookmarked.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +25,17 @@ public class BorrowCommand extends Command {
         List<Book> foundBooks = listOfBooks.stream()
                 .filter(book -> book.getName().equalsIgnoreCase(bookName))
                 .collect(Collectors.toList());
+        try {
+            runBorrowCommand(foundBooks);
+        } catch (emptyListException e) {
+            Ui.printEmptyListMessage();
+        }
+    }
+
+    public void runBorrowCommand(List<Book> foundBooks) throws emptyListException {
+        if (this.listOfBooks.isEmpty()) {
+            throw new emptyListException();
+        }
 
         if (!foundBooks.isEmpty()) {
             // Assuming that there can be multiple books with the same name,
