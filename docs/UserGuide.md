@@ -201,4 +201,13 @@ If not, refer to Oracle's [guide](https://docs.oracle.com/en/java/javase/11/inst
 **A**: You do not need an Internet connection. BinBash can be used offline.
 
 ## Glossary
-<!-- I think we can probably move the command summary down here instead. Seems like that's what most people do lol -->
+
+### Bash
+A computer program that provides a text-based interface and environment for user input. Also, the name of a programming language commonly used for scripting and operating system job control.
+
+### Command Prompt / Command Line / Terminal
+A means of interacting with a computer through keyboard typed lines of text, also known as commands. This is in contrast to the currently more popular graphical user interface (GUI), which uses visual elements that users can directly manipulate to perform their desired actions.
+
+### Java
+From Wikipedia:
+> Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.
