@@ -206,4 +206,71 @@ public class TransactionListTest {
         }
     }
 
+    /**
+     * Tests the editing of a transaction in the list with a valid index and expression.
+     */
+    @Test
+    public void editTransactionList_validIndexAndExpression_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Alice");
+            memberList.addMember("Bob");
+
+            transactionList.addTransaction("Alice p/Bob a/5", memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            String[] parts = "edit 1 Alice p/Bob a/10".split(" ", 2);
+            transactionList.editTransactionList(parts, memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            String expectedString = "1.\nLender: Alice\nBorrower 1: Bob Owed amount: 10.00\n";
+            assertEquals(expectedString.trim(), transactionList.listTransactions().trim());
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the editing of a transaction in the list with an invalid index.
+     */
+    @Test
+    public void editTransactionList_invalidIndex_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Alice");
+            memberList.addMember("Bob");
+
+            transactionList.addTransaction("Alice p/Bob a/5", memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            String[] parts = "edit -1 Alice p/Bob a/10".split(" ", 2);
+            transactionList.editTransactionList(parts, memberList);
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the editing of a transaction in the list with an invalid member.
+     */
+    @Test
+    public void editTransactionList_invalidPerson_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Alice");
+            memberList.addMember("Bob");
+
+            transactionList.addTransaction("Alice p/Bob a/5", memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            String[] parts = "edit 1 Alice p/Charlie a/10".split(" ", 2);
+            transactionList.editTransactionList(parts, memberList);
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.MEMBER_NOT_FOUND.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
+    }
+
 }
