@@ -30,7 +30,7 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
     public static void processInput() {
-        Scanner in = new Scanner(System.in);
+        in = new Scanner(System.in);
 
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
@@ -57,7 +57,7 @@ public class Handler {
                     break;
 
                 case LATEST:
-                    handleLatestRun(userInput);
+                    handleLatest(userInput);
                     break;
 
                 case HELP:
@@ -72,7 +72,6 @@ public class Handler {
             }
         }
     }
-
 
     /**
      * Extracts a substring from the given input string based on the provided delimiter.
@@ -96,7 +95,6 @@ public class Handler {
         return input.substring(startIndex, endIndex).trim();
     }
 
-
     /**
      * Constructs either a new Run or Gym object based on the user input.
      *
@@ -109,11 +107,11 @@ public class Handler {
                 String[] runDetails = Run.getRun(userInput);
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput("Missing parameter(s)");
+                    throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
                 }
 
-                new Run(runDetails[2], runDetails[1], runDetails[3]);
-                System.out.println("Added: run | " + runDetails[1] + " | " + runDetails[2] + " | " + runDetails[3]);
+                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                Output.printAddRun(newRun);
 
             } else if (typeOfExercise.equals(Constant.GYM)) {
                 int numberOfStations = getNumberOfGymStations(userInput);
@@ -124,7 +122,6 @@ public class Handler {
             Output.printException(e, e.getMessage());
         }
     }
-
 
     /**
      * Handle history command.
@@ -138,7 +135,6 @@ public class Handler {
         Output.printHistory(filter);
     }
 
-
     /**
      * Handles user input related to health data. Parses the user input to determine
      * the type of health data and processes it accordingly.
@@ -146,6 +142,7 @@ public class Handler {
      * @param userInput A string containing health data information of user.
      */
     public static void handleHealth(String userInput) {
+        Output.printLine();
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(Constant.BMI)){
@@ -183,6 +180,7 @@ public class Handler {
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e, e.getMessage());
         }
+        Output.printLine();
     }
 
     /**
@@ -198,7 +196,6 @@ public class Handler {
         String [] inputs = input.split(Constant.SPLIT_BY_SLASH);
         String numberOfStationsString = inputs[2];
         String numberOfStationStr =  numberOfStationsString.split(Constant.SPLIT_BY_COLON)[1];
-        System.out.println(numberOfStationsString);
         return Integer.parseInt(numberOfStationStr);
     }
 
@@ -223,12 +220,14 @@ public class Handler {
         }
     }
     /**
-     * Prints the latest run.
+     * Prints the latest run, gym, BMI entry or Period tracked.
      *
      * @param userInput String representing user input.
      */
-    public static void handleLatestRun(String userInput){
-        Output.printLatestRun();
+    public static void handleLatest(String userInput){
+        String [] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
+        String filter = inputs[1].split(Constant.SPLIT_BY_COLON)[1];
+        Output.printLatest(filter);
     }
 
     /**

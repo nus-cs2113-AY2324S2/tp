@@ -14,14 +14,11 @@ public class Gym extends Workout{
     protected LocalDate date = null;
     protected ArrayList<GymStation> stations = new ArrayList<>();
 
-    // takes (station name, weight, sets, reps)
-
     /**
      * Constructor that adds a Gym object to WorkoutList.
      */
     public Gym() {
         WorkoutList.addGym(this);
-
     }
 
     /**
@@ -29,10 +26,8 @@ public class Gym extends Workout{
      * @param stringDate String representing the date parameter specified.
      */
     public Gym(String stringDate) {
-
         this.date = Parser.parseDate(stringDate);
         WorkoutList.addGym(this);
-
     }
 
     /**
@@ -41,7 +36,7 @@ public class Gym extends Workout{
      * @param name Name of the gym station.
      * @param weight Weight used for the station.
      * @param numberOfSet Number of sets done.
-     * @param repetitions Number of repititions done.
+     * @param repetitions Number of repetitions done.
      * @throws CustomExceptions.InvalidInput If there is invalid input in any parameter.
      */
     public void addStation(String name, int weight, int numberOfSet,
