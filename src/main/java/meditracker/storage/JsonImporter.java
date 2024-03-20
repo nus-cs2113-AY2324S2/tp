@@ -68,7 +68,7 @@ public class JsonImporter {
         try {
             jsonFileData = Files.readAllLines(mediTrackerJsonPath);
         } catch (IOException e) {
-            logger.warning("Unable to the JSON save file. Defaults to empty state.");
+            logger.warning("Unable to read from the JSON save file. Defaulting to empty state.");
             return;
         }
 
@@ -79,7 +79,6 @@ public class JsonImporter {
         if (jsonFileData.size() >1) {
             logger.warning("JSON file should only contain one line. Multiple lines detected "
                     + "in JSON file. Will only take the first line.");
-
         }
         String jsonStringData = jsonFileData.get(0);
 
