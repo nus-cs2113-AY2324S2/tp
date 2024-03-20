@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedicationManager;
 import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 import meditracker.library.LibraryManager;
@@ -30,7 +31,9 @@ public class SearchCommand extends Command{
      * @param ui The Ui object to handle user interface interactions.
      */
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        DailyMedicationManager dailyMedicationManager,
+                        Ui ui) {
         try {
             LibraryManager libraryManager = new LibraryManager();
             libraryManager.searchMedication(keyword);
