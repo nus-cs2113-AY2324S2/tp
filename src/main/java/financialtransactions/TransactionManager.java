@@ -17,7 +17,8 @@ public class TransactionManager {
         if (transaction instanceof Inflow) {
             Inflow inflow = (Inflow) transaction;
             return inflows.addTransaction(inflow);
-        } else if (transaction instanceof Outflow) {
+        } 
+        if (transaction instanceof Outflow) {
             Outflow outflow = (Outflow) transaction;
             return outflows.addTransaction(outflow);
         }
@@ -28,11 +29,13 @@ public class TransactionManager {
     public boolean removeTransaction(int index) {
         transactionList.removeTransactionIndex(index);
         Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
-        String transactionType = transactionRemoved.getTransactionType();
-        if (transactionType.equals("I")) {
+        //String transactionType = transactionRemoved.getTransactionType();
+        //if (transactionType.equals("I")) {
+        if (transactionRemoved instanceof Inflow) {
             return inflows.removeTransactionIndex(index);
         }
-        if (transactionType.equals("O")){
+        //if (transactionType.equals("O")){
+        if (transactionRemoved instanceof Outflow) {
             return outflows.removeTransactionIndex(index);
         }
         return false;

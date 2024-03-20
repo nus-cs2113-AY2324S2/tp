@@ -1,0 +1,27 @@
+package user;
+
+import customexceptions.InactivityTimeoutException;
+
+public class InactivityTimer {
+    public static final int INACTIVITY_TIME = 180_000;
+    public static final int GRACE_TIME = 30_000;
+    private long startTime;
+
+    public InactivityTimer() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public void resetTimer() {
+        startTime = System.currentTimeMillis();
+    }
+    
+    public void checkTimeElapsed() throws InactivityTimeoutException {
+        long timeDifference = System.currentTimeMillis() - startTime;
+        if (timeDifference >= INACTIVITY_TIME) {
+            throw new InactivityTimeoutException(true, false);
+        }
+        else if (timeDifference >= GRACE_TIME) {
+            throw new InactivityTimeoutException(false, true);
+        }
+    }    
+}
