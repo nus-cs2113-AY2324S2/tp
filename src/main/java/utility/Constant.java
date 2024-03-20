@@ -129,10 +129,10 @@ public class Constant {
 
     // Storage Replies
     public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
-    public static final String MISSING_FILE = "What is your name, Captain?";
+    public static final String MISSING_FILE = "What is your name, voyager?";
     public static final String LOAD_ERROR = "File read error:\n" + "Error at ";
     public static final String CORRUPT_ERROR = "\nFile is corrupted. Ceasing any further data imports.";
-    public static final String SUCCESSFUL_LOAD = "Welcome back, Captain\n" + "Previous data has been synchronised.";
+    public static final String SUCCESSFUL_LOAD = "Captain's data found. Orbit has been synchronised.";
     public static final String LOG_FILE_PATH ="./pulsepilot_log.txt";
 
     // getRun Constants

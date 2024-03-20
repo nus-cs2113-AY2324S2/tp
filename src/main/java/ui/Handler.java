@@ -151,7 +151,7 @@ public class Handler {
     public static void handleHistory(String userInput) {
         // if asked to show history
         String [] inputs = userInput.split(Constant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(":")[1];
+        String filter = inputs[1].split(":")[1]; // Constant.SPLIT_BY_COLON = ":"
         Output.printHistory(filter);
 
     }
@@ -338,7 +338,7 @@ public class Handler {
     public static String checkTypeOfExercise(String userInput) throws
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
-        String[] userInputs = userInput.split("/"); // Constant.SPLIT_BY_SLASH = "/"
+        String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH); // Constant.SPLIT_BY_SLASH = "/"
 
         String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
@@ -372,6 +372,19 @@ public class Handler {
         }
     }
 
+    public static void userInduction() {
+        Scanner in = new Scanner(System.in);
+        String name = in.nextLine();
+        System.out.println("Welcome aboard, Captain " + name);
+        LogFile.writeLog("Name entered: " + name, false);
+        Output.printLine();
+
+        System.out.println("Tips: Enter 'help' to view the pilot manual!");
+        System.out.println("Initiating FTL jump sequence...");
+
+        // save name to DataFile
+        System.out.println("FTL jump completed.");
+    }
 
     /**
      * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
@@ -383,13 +396,13 @@ public class Handler {
         // Yet to implement : Check for existing save, if not, make a new one
         // Yet to implement : int status = Storage.load();
         int status = 1;
+        Output.printGreeting(1);
+
         if (status == 1) {
-            Output.printGreeting(1);
-            Scanner in = new Scanner(System.in);
-            String name = in.nextLine();
-            System.out.println("Welcome aboard, " + name);
-            LogFile.writeLog("Name entered: " + name, false);
+            userInduction();
         }
+        System.out.println("Terminal primed. Command inputs are now accepted...");
+        Output.printLine();
     }
 
     /**
@@ -397,10 +410,10 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        LogFile.writeLog("Bot exited gracefully", false);
         // Yet to implement : Storage.saveTasks(tasks);
-        // Yet to implement : Reply.printGoodbyeMessage();
+        Output.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
+        LogFile.writeLog("Bot exited gracefully", false);
         System.exit(0);
     }
 }

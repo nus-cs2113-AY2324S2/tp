@@ -15,7 +15,7 @@ public class Output {
     /**
      * Prints a horizontal line.
      */
-    private static void printLine() {
+    public static void printLine() {
         System.out.println(Constant.PARTITION_LINE);
     }
 
@@ -26,15 +26,16 @@ public class Output {
         printLine();
         System.out.println("Commands List:");
         System.out.println();
-        System.out.println("list - prints out the List");
-        System.out.println("help - procures command list");
-        System.out.println("exit - terminates the bot");
-        printLine();
-        System.out.println("bmi - calculates BMI");
-        System.out.println("weight - save current weight");
-        System.out.println("height - save current height");
-        printLine();
-        System.out.println("bmi format: bmi *parameter*");
+        System.out.println("new /e:run /d:DATE /t:TIME /l:DURATION - Add a new run");
+        System.out.println("new /e:gym /n:NUMBER_OF_STATIONS - Add a new gym workout");
+        System.out.println("health /t:bmi /w:WEIGHT /h:HEIGHT /d:DATE - Add new BMI data");
+        System.out.println("health /t:period /s:START_DATE /e:END_DATE - Add new period data");
+        System.out.println("history /e:all - Show history of all exercises");
+        System.out.println("history /e:run - Show history of runs");
+        System.out.println("history /e:gym - Show history of gym workouts");
+        System.out.println("latest - Show the latest run");
+        System.out.println("help - Show this help message");
+        System.out.println("exit - Exit the program");
         printLine();
     }
 
@@ -69,7 +70,7 @@ public class Output {
         printLine();
     }
 
-    public static void printAddGym(Gym gym){
+    public static void printAddGym(Gym gym) {
         printLine();
         System.out.println(Constant.ADD_GYM);
         printGymStats(gym);
@@ -110,7 +111,7 @@ public class Output {
 
     }
 
-    private static void printGymStats(Gym gym){
+    private static void printGymStats(Gym gym) {
         ArrayList<GymStation> allStations = gym.getStations();
         for (GymStation station: allStations){
             System.out.println(station);
@@ -153,7 +154,7 @@ public class Output {
             printLine();
         }
     }
-    public static void printException(Exception e, String message){
+    public static void printException(Exception e, String message) {
         System.err.println("Exception Caught!\n" + message + "\n\n" + e.getMessage());
         printLine();
     }
@@ -168,10 +169,17 @@ public class Output {
 
     public static void printGreeting(int status) {
         if (status == 0) {
+            System.out.println("Welcome back, Captain");
             System.out.println(Constant.SUCCESSFUL_LOAD);
         } else {
             System.out.println(Constant.MISSING_FILE);
         }
+        printLine();
+    }
+
+    public static void printGoodbyeMessage() {
+        System.out.println("PulsePilot successful touchdown");
+        System.out.println("See you soon, Captain!");
         printLine();
     }
 }
