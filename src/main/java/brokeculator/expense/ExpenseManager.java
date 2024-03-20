@@ -18,6 +18,9 @@ public class ExpenseManager {
     }
 
     public void delete(int index) {
+        if (index >= expenses.size()) {
+            index = expenses.size() - 1;
+        }
         expenses.remove(index);
     }
 
