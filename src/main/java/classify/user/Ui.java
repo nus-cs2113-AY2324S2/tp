@@ -32,18 +32,42 @@ public class Ui {
      * Displays the help message to teach users how to use Classify.
      */
     public static void printHelp() {
+        printAddHelpMessage();
+        printEditHelpMessage();
+        printViewHelpMessage();
+        printDeleteHelpMessage();
+        printListHelpMessage();
+        printByeHelpMessage();
+        System.out.println("help                        Prints this help message");
+    }
+
+    private static void printByeHelpMessage() {
+        System.out.println("bye                         Exits Classify");
+    }
+
+    private static void printListHelpMessage() {
+        System.out.println("list                        Displays the list of all students");
+    }
+
+    private static void printDeleteHelpMessage() {
+        System.out.println("delete                      Deletes a student from the student list, expects a name" +
+                ", can be used directly with a name e.g. add [name]");
+    }
+
+    private static void printViewHelpMessage() {
+        System.out.println("view                        Views a students details, expects a name" +
+                ", can be used directly with a name e.g. add [name]");
+    }
+
+    private static void printEditHelpMessage() {
+        System.out.println("edit                        Edits a students details, expects a name" +
+                ", can be used directly with a name e.g. edit [name]");
+    }
+
+    private static void printAddHelpMessage() {
         System.out.println("add                         Adds a student to the student list, " +
                 "expects a name, grade and lessons attended" +
                 ", can be used directly with a name e.g. add [name]");
-        System.out.println("edit                        Edits a students details, expects a name" +
-                " , can be used directly with a name e.g. edit [name]");
-        System.out.println("view                        Views a students details, expects a name" +
-                ", can be used directly with a name e.g. add [name]");
-        System.out.println("delete                      Deletes a student from the student list, expects a name" +
-                ", can be used directly with a name e.g. add [name]");
-        System.out.println("list                        Displays the list of all students");
-        System.out.println("bye                         Exits Classify");
-        System.out.println("help                        Prints this help message");
     }
 
     //@@author ParthGandhiNUS
