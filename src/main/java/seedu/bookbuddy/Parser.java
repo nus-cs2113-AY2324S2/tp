@@ -16,6 +16,7 @@ public class Parser {
     public static final String MARK_COMMAND = "mark";
     public static final String UNMARK_COMMAND = "unmark";
     public static final String EXIT_COMMAND = "bye";
+    public static final String HELP_COMMAND = "help";
 
     /**
      * Scans the user input for valid commands and handles them accordingly.
@@ -49,6 +50,9 @@ public class Parser {
             case UNMARK_COMMAND:
                 index = Integer.parseInt(inputArray[1]);
                 books.markUndoneByIndex(index);
+                break;
+            case HELP_COMMAND:
+                Ui.helpMessage();
                 break;
             case EXIT_COMMAND:
                 Ui.printExitMessage();

@@ -36,6 +36,9 @@ public class Ui {
     public static void removeBookMessage(int index) {
         System.out.println("alright.. i've removed " + BookList.books.get(index).getTitle() + " from the list.");
     }
-
-
+    public static void helpMessage() {
+        System.out.println("add (Bookname) -> to add new books to the list");
+        System.out.println("list -> to show whole list of added books");
+        System.out.println("remove (index) -> to remove the book from the corresponding index");
+    }
 }
