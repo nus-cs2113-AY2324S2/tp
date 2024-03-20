@@ -28,6 +28,8 @@ public class BudgetBuddy {
             throw new RuntimeException(e);
         }
         Account account = new Account();
+        transactions.updateBalance(account);
+
         boolean isRunning = true;
         try {
             while (isRunning) {

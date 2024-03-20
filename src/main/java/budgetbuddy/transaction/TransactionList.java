@@ -61,4 +61,8 @@ public class TransactionList {
     public void saveTransactionList() throws IOException {
         dataStorage.saveTransactions(transactions);
     }
+
+    public void updateBalance(Account account) {
+        account.setBalance(dataStorage.getBalance());
+    }
 }
