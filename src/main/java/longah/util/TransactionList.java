@@ -56,15 +56,18 @@ public class TransactionList {
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        this.transactions.remove(index);
-
+        Transaction removedTransaction = this.transactions.remove(index);
+        // recalculate the balances of the members
+        removedTransaction.recalculateBalances();
     }
 
     /**
      * Clears all transactions from the list.
+     * @param memberList The member list to clear balances from.
      */
-    public void clear() {
+    public void clear(MemberList memberList) {
         this.transactions.clear();
+        memberList.clearBalances();
     }
 
     /**

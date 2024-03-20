@@ -205,4 +205,13 @@ public class MemberList {
     public ArrayList<Member> getMembers() {
         return members;
     }
+
+    /**
+     * Iterates through the members list and clears their balances..
+     */
+    public void clearBalances() {
+        for (Member member : members) {
+            member.clearBalance();
+        }
+    }
 }

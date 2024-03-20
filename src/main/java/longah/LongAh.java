@@ -114,7 +114,7 @@ public class LongAh {
                     break;
                 case "clear":
                     LongAhLogger.log(Level.INFO, "User requests to clear all existing transactions.");
-                    transactions.clear();
+                    transactions.clear(members);
                     break;
                 case "addmember":
                     LongAhLogger.log(Level.INFO, "User requests to add a member.");
