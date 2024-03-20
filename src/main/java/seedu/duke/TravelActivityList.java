@@ -99,6 +99,7 @@ public class TravelActivityList {
         if (temporaryArrayCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
         } else {
+            assert !temporaryArray.isEmpty();
             System.out.println("Here are what you are looking for:");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
                 System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
