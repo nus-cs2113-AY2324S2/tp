@@ -1,5 +1,8 @@
 package parser;
 
+import command.AddCommand;
+import command.Command;
+import command.IncorrectCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
 import item.Item;
@@ -51,11 +54,11 @@ public class Parser {
             break;
 
         case ADD:
-//            try {
-//                prepareAdd(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
+            try {
+                prepareAdd(arguments);
+            } catch (CommandFormatException e) {
+                break;
+            }
             break;
         case DELETE:
 //            try {
@@ -78,29 +81,23 @@ public class Parser {
     }
 
 
-/*    private Command prepareAdd(String args) throws CommandFormatException{
+    private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
         }
-        try {
-            String category = matcher.group("category") != null ? matcher.group("category") : "NA";
-            int quantity = Integer.parseInt(matcher.group("quantity"));
-            return new AddCommand(
-                    matcher.group("itemName"),
-                    quantity,
-                    matcher.group("uom"),
-                    category
-            );
+        String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+        int quantity = Integer.parseInt(matcher.group("quantity"));
+        return new AddCommand(
+                matcher.group("itemName"),
+                quantity,
+                matcher.group("uom"),
+                category
+        );
 
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
-        }
     }
-
+/*
     private Command prepareDelete(String args) throws CommandFormatException{
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
