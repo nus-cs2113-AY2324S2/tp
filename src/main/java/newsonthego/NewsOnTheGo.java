@@ -1,14 +1,15 @@
 package newsonthego;
 
+import newsonthego.commands.DailyNewsCommand;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class NewsOnTheGo {
 
@@ -88,7 +89,7 @@ public class NewsOnTheGo {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
         case DAILY:
-            dailyNews(line, list);
+            new DailyNewsCommand(line, list);
             break;
         case GET:
             getNews(line, list);
@@ -110,25 +111,6 @@ public class NewsOnTheGo {
             break;
         }
         return false;
-    }
-
-    private static void dailyNews(String line, List<NewsArticle> list) {
-        String[] split = line.split(" ", 2);
-        String date = split[1];
-         List<NewsArticle> articles = list.stream()
-                .filter(a->a.getDate().equals(date))
-                .collect(Collectors.toList());
-
-        if (articles.isEmpty()) {
-            System.out.println("Nothing is found on this day: " + date);
-        } else {
-            System.out.println("Sure! Here are the headlines for today:");
-            System.out.println();
-            for (NewsArticle a : articles) {
-                System.out.println(a.getHeadline());
-            }
-            System.out.println();
-        }
     }
 
     private static void getNews(String line, List<NewsArticle> list) {
