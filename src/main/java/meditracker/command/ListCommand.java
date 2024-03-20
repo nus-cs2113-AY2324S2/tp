@@ -38,6 +38,9 @@ public class ListCommand extends Command {
         case "all":
             medicationManager.printAllMedications();
             break;
+        case "today":
+            dailyMedicationManager.printMedications();
+            break;
         default:
             throw new IllegalStateException("Unexpected value: " + listTypeString);
         }
