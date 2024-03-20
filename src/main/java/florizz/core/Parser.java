@@ -141,7 +141,8 @@ public class Parser {
         String bouquetName = removePrefix(argument.substring(prefixIndex), REMOVE_FLOWER_PREFIX).trim();
 
         return new RemoveFlowerCommand(flowerName, quantity, bouquetName);
-
+    }
+    
     private static InfoCommand handleInfoCommand(String input) {
         String flowerName = input.substring(input.indexOf(" ") + 1);
         assert !flowerName.isEmpty() : "This string is empty";
