@@ -9,6 +9,8 @@ import meditracker.parser.Parser;
 import meditracker.storage.FileReaderWriter;
 import meditracker.ui.Ui;
 
+import java.util.List;
+
 /**
  * The main class for the MediTracker application.
  * It initializes the user interface and runs the application loop.
