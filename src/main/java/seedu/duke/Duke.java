@@ -56,7 +56,7 @@ public class Duke {
 
                 case "tag":
                     Ui.printLine();
-                    Parser.tagCommand(command, list);
+                    Parser.tagCommand(line, list);
                     Ui.printLine();
                     break;
 
