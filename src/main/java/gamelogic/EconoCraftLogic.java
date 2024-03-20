@@ -16,20 +16,21 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
-        String playerName = "";
-        String jobType = "";
-
-        Scanner input = new Scanner(System.in);
         ResponseManager.printGameInit();
-        while (playerName.isEmpty()) {
-            try {
-                playerName = Parser.parseName(input.nextLine());
-            } catch (NameInputException e) {
-                ResponseManager.indentPrint(e.getMessage());
-            }
-        }
+        String playerName = getName();
 
         ResponseManager.printJobSelect();
+        String jobType = getJob();
+
+        PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
+        ResponseManager.printWelcome(playerProfile);
+     
+        return new EconoCraftLogic(playerProfile);
+    }
+
+    private static String getJob() {
+        Scanner input = new Scanner(System.in);
+        String jobType = "";
         while (jobType.isEmpty()) {
             try {
                 jobType = Parser.parseCareer(input.nextLine());
@@ -38,19 +39,24 @@ public class EconoCraftLogic {
             }
         }
         input.close();
-
-        PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
-        ResponseManager.printWelcome(playerProfile);
-
-
-        seedu.duke.tictactoe.TicTacToe game = new seedu.duke.tictactoe.TicTacToe('X');
-        game.gameStart();
-
-     
-        return new EconoCraftLogic(playerProfile);
+        return jobType;
     }
 
-    public void startGame() {
+    private static String getName() {
+        Scanner input = new Scanner(System.in);
+        String playerName = "";
+        while (playerName.isEmpty()) {
+            try {
+                playerName = Parser.parseName(input.nextLine());
+            } catch (NameInputException e) {
+                ResponseManager.indentPrint(e.getMessage());
+            }
+        }
+        input.close();
+        return playerName;
+    }
+
+    public void startEcono() {
         System.out.println("Game started");
     }
 }
