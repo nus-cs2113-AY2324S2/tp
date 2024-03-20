@@ -2,9 +2,11 @@ package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.parser.Parser;
+import budgetbuddy.storage.DataStorage;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TransactionList {
@@ -16,9 +18,11 @@ public class TransactionList {
     private ArrayList<Transaction> transactions;
     private Parser parser;
 
-    public TransactionList() {
+    private final DataStorage dataStorage = new DataStorage();
+
+    public TransactionList() throws IOException {
         // Initialise ArrayList in the constructor
-        this.transactions = new ArrayList<>();
+        this.transactions = dataStorage.readFileContents();
         this.parser = new Parser();
     }
 
