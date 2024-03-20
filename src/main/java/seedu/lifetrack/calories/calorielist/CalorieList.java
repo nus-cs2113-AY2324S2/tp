@@ -1,6 +1,5 @@
 package seedu.lifetrack.calories.calorielist;
 
-import seedu.lifetrack.calories.Activity;
 import seedu.lifetrack.system.Parser;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int SIZE_OF_DELETE = 7;
+    private final int DELETE_PADDING = 7;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -26,7 +25,7 @@ public class CalorieList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
+            int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {

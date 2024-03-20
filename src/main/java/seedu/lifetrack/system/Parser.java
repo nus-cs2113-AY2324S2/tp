@@ -17,10 +17,10 @@ public class Parser {
      * Parses a string input to create an Entry object representing calorie intake.
      *
      * This method expects the input string to follow a specific format, where the
-     * date, time, activity description, and calorie count are separated by the
-     * delimiters 'd/', 't/', 'a/', and 'c/'. The method extracts these components
-     * and creates an Entry object containing an Activity and a Calorie object.
-     * If any part of the input is missing or empty, an InvalidInputException is thrown.
+     * description, calorie count, date and macronutrients are separated by the
+     * delimiters 'desc/', 'c/', 'date/', and 'm/'. The method extracts these components
+     * and creates either an InputEntry or OutputEntry object depending on the user command.
+     * If required inputs are missing or empty, an InvalidInputException is thrown.
      *
      * @param input the input string to be parsed, containing date, time, activity,
      *              and calorie count information
