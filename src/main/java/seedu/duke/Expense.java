@@ -52,15 +52,4 @@ public class Expense {
     public ArrayList<String> getPayees() {
         return payees;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder expenseString = new StringBuilder();
-        expenseString.append(
-                String.format("Payer: %s|Amount: %.2f|Payees: ", payerName, totalAmount));
-        for(String payee : payees){
-            expenseString.append(payee).append(" ");
-        }
-        return expenseString.toString().trim();
-    }
 }

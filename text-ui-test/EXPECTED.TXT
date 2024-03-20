@@ -8,14 +8,4 @@ Hello from
 
 What is your name?
 Hello James Gosling
-Created New Group: group1
-Entering group: group1
-Added mem1 to group1
-Entering group: group1
-Added mem2 to group1
-Added new expense 10.00 owed to mem1 by:mem2, 
-Payer: mem1|Amount: 10.00|Payees: mem2
-User mem1's Balance List:
-  mem2 : 5.00
-End of Balance List
 Goodbye!

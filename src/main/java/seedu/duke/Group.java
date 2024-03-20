@@ -6,12 +6,10 @@ public class Group {
     public static final HashMap<String, Group> groups = new HashMap<>();
     protected String groupName;
     protected ArrayList<User> users;
-    protected ArrayList<Expense> expenses;
 
     public Group(String groupName) {
         this.groupName = groupName;
         this.users = new ArrayList<>();
-        this.expenses = new ArrayList<>();
     }
 
     public ArrayList<User> getUsers() {
@@ -21,8 +19,6 @@ public class Group {
     public String getGroupName() {
         return groupName;
     }
-
-    public ArrayList<Expense> getExpenses() { return expenses; }
 
     public static Group getOrCreateGroup(String groupName) {
         Group group = groups.get(groupName);
@@ -47,16 +43,6 @@ public class Group {
             System.out.println("Added " + user.getName() + " to " + groupName);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    public void addExpense(Expense expense){
-        expenses.add(expense);
-    }
-
-    public void printExpenses() {
-        for(Expense expense : expenses){
-            System.out.println(expense);
         }
     }
 }
