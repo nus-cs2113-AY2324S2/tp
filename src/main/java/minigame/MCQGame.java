@@ -27,9 +27,10 @@ public class MCQGame implements MiniGame {
             + "Answer the following questions:\n";
     private static final List<String> questionList = new ArrayList<>();
     private static final List<String> answerList = new ArrayList<>();
-    private int correctCount;
     private static final String CORRECT_MESSAGE = "Correct!\n";
     private static final String WRONG_MESSAGE = "Incorrect!\n";
+
+    private int correctCount;
 
     private void gameSetUp() {
         questionList.add(QUESTION_1);
