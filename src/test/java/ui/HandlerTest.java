@@ -60,7 +60,7 @@ class HandlerTest {
         Handler.processInput();
 
         String output = outContent.toString();
-        assertTrue(output.contains("Added: run | 10.3 | 00:40:10 | 15-03-2024"));
+        assertTrue(output.contains("Successfully added a new run session"));
     }
 
     @Test
