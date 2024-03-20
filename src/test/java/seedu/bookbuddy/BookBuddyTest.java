@@ -38,7 +38,9 @@ class BookBuddyTest {
                 + "|    \\  |    \\ \n"
                 + "| |_) / | |_) / \n"
                 + "| |_) \\ | |_) \\ \n"
-                + "|____/  |____/ \n" + "BookBuddy!\n" + "How can I help you today?\n"
+                + "|____/  |____/ \n"
+                + "BookBuddy!\n"
+                + "How can I help you today?\n"
                 + "_____________\n";
 
         String normalizedActualOutput = actualOutput.replace("\r\n", "\n");
