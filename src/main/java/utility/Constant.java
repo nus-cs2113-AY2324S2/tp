@@ -30,8 +30,10 @@ public class Constant {
     public static final String RUN_INPUT = "e:run";
     public static final String GYM_INPUT = "e:gym";
 
+    // Special Characters
     public static final String SPLIT_BY_SLASH = "/";
     public static final String SPLIT_BY_COLON = ":";
+    public static final String SPLIT_BY_WHITESPACE = "";
 
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
