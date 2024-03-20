@@ -1,5 +1,7 @@
 package ui;
 
+import command.CommandType;
+import exception.CommandInputException;
 import exception.JobSelectException;
 import exception.NameInputException;
 
@@ -26,5 +28,9 @@ public class Parser {
             return input;
         }
         throw new JobSelectException("Please enter a valid job type, try again!");
+    }
+
+    public static CommandType parseCommand(String input) throws CommandInputException {
+        return CommandType.analyseInput(input.trim().toLowerCase());
     }
 }
