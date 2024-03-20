@@ -1,5 +1,6 @@
 package grocery;
 
+
 /**
  * Represents a grocery.
  */
@@ -46,8 +47,12 @@ public class Grocery {
         this.expiration = expiration;
     }
 
+    /**
+     * Returns a String representation of the Grocery.
+     */
     public String printGrocery() {
         assert !(this.name.isEmpty());
+
         String amt = (this.amount.isEmpty() ) ? "" : ", amount: " + this.amount;
         String exp = (this.expiration.isEmpty() ) ? "" : ", expiration: " + this.expiration;
         return this.name + amt + exp;

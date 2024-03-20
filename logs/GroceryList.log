@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T04:59:24.082952300Z</date>
+  <millis>1710910764082</millis>
+  <nanos>952300</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added a</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-20T05:03:55.680808700Z</date>
+  <millis>1710911035680</millis>
+  <nanos>808700</nanos>
+  <sequence>0</sequence>
+  <logger>grocery.GroceryList</logger>
+  <level>INFO</level>
+  <class>grocery.GroceryList</class>
+  <method>addGrocery</method>
+  <thread>1</thread>
+  <message>Added noddles</message>
+</record>
+</log>
