@@ -117,12 +117,13 @@ public class Parser {
     /**
      * Handles the case where the tag command is given as input
      *
-     * @param command Command array of input string without spaces
+     * @param line array of input string
      * @param list List of travel activities
      * @throws OmniException if command.length == 2
      * @throws OmniException if command.length == 1
      */
-    public static void tagCommand(String[] command, TravelActivityList list) throws OmniException {
+    public static void tagCommand(String line, TravelActivityList list) throws OmniException {
+        String[] command = line.split("tag |-");
         if (command.length == 3 && isNumeric(command[1])){
             int listNumber = Integer.parseInt(command[1]);
             String tag = command[2];
