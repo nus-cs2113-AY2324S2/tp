@@ -31,6 +31,5 @@ public class HelpTest {
 
     static void printHelp() {
         System.out.print(prompt);
-
     }
 }
