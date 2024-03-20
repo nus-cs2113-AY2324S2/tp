@@ -12,7 +12,7 @@ public class OccasionDictionary {
 
     public static void startup() {
         for (int i = 0; i < FlowerDictionary.size(); i++) {
-            add(FlowerDictionary.get(i).getOccasion());
+            add(FlowerDictionary.get(i).getOccasion().toLowerCase());
         }
     }
 
@@ -24,5 +24,9 @@ public class OccasionDictionary {
         for (String occasion : uniqueOccasions) {
             System.out.println(occasion);
         }
+    }
+
+    public static boolean contains(String occasion) {
+        return uniqueOccasions.contains(occasion.toLowerCase());
     }
 }
