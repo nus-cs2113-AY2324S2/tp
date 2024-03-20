@@ -9,7 +9,6 @@ public class Student {
 
     //@@author Cryolian
     public String name;
-    public Details details = new Details();
 
     //@@author tayponghee
     private StudentAttributes attributes;
@@ -18,17 +17,7 @@ public class Student {
 
     public Student(String name) {
         this.name = name;
-    }
-
-    public Student(String name, Details details) {
-        this.name = name;
-        this.details = details;
-    }
-
-    //@@author tayponghee
-    public Student(String name, StudentAttributes attributes) {
-        this.name = name;
-        this.attributes = attributes;
+        this.attributes = new StudentAttributes(this);
     }
 
     public StudentAttributes getAttributes() {
