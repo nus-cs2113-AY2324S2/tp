@@ -31,7 +31,7 @@ public class Handler {
      */
 
     public static void processInput() {
-        Scanner in = new Scanner(System.in);
+        in = new Scanner(System.in);
 
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
@@ -198,7 +198,6 @@ public class Handler {
         String [] inputs = input.split(Constant.SPLIT_BY_SLASH);
         String numberOfStationsString = inputs[2];
         String numberOfStationStr =  numberOfStationsString.split(Constant.SPLIT_BY_COLON)[1];
-        System.out.println(numberOfStationsString);
         return Integer.parseInt(numberOfStationStr);
     }
 
