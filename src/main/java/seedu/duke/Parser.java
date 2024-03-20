@@ -21,9 +21,13 @@ public class Parser {
      *
      * @param list List of travel activities.
      */
-    public static void getList(TravelActivityList list){
-        System.out.println("Here are the travel activities in your list:");
-        list.listTravelActivities();
+    public static void getList(String[] command, TravelActivityList list) throws OmniException{
+        if (command.length == 1) {
+            System.out.println("Here are the travel activities in your list:");
+            list.listTravelActivities();
+        } else {
+            throw new OmniException("Do you mean the command list?");
+        }
     }
 
     /**
@@ -58,7 +62,7 @@ public class Parser {
             list.removeTravelActivity(listNumber);
 
         } else {
-            throw new OmniException("Please specify which task to delete");
+            throw new OmniException("Please specify which activity to delete");
         }
     }
 
@@ -74,7 +78,7 @@ public class Parser {
             String keyword = command[1];
             list.searchKeyword(keyword);
         } else {
-            throw new OmniException("Please specify which keyword you want to find!");
+            throw new OmniException("Please specify an appropriate keyword you want to find!");
         }
     }
 
@@ -90,7 +94,7 @@ public class Parser {
             int listNumber = Integer.parseInt(command[1]);
             list.checkTravelActivity(listNumber);
         } else {
-            throw new OmniException("Please specify which task to check");
+            throw new OmniException("Please specify which activity to check");
         }
     }
 
@@ -106,7 +110,7 @@ public class Parser {
             int listNumber = Integer.parseInt(command[1]);
             list.uncheckTravelActivity(listNumber);
         } else {
-            throw new OmniException("Please specify which task to uncheck");
+            throw new OmniException("Please specify which activity to uncheck");
         }
     }
 }
