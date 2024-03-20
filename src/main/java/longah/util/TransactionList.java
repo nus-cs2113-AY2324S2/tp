@@ -56,15 +56,18 @@ public class TransactionList {
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        this.transactions.remove(index);
-
+        Transaction removedTransaction = this.transactions.remove(index);
+        // recalculate the balances of the members
+        removedTransaction.recalculateBalances();
     }
 
     /**
      * Clears all transactions from the list.
+     * @param memberList The member list to clear balances from.
      */
-    public void clear() {
+    public void clear(MemberList memberList) {
         this.transactions.clear();
+        memberList.clearBalances();
     }
 
     /**
@@ -113,6 +116,9 @@ public class TransactionList {
                 index++;
             }
         }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER);
+        }
         return outString;
     }
 
@@ -135,6 +141,9 @@ public class TransactionList {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER);
         }
         return outString;
     }

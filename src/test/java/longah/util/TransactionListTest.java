@@ -2,11 +2,12 @@ package longah.util;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TransactionListTest {
     /**
@@ -68,7 +69,9 @@ public class TransactionListTest {
         }
     }
     
-    /*
+    /**
+     * Tests the listing of transactions when multiple entries are stored in the system
+     */
     @Test
     public void list_multiTransactions_success() {
         try {
@@ -78,31 +81,27 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/100 p/James a/200", memberList);
-            transactionList.add("p/Jane p/Jack a/150 p/James a/200", memberList);
+            transactionList.addTransaction("Jack p/Jane a/100 p/James a/200", memberList);
+            transactionList.addTransaction("Jane p/Jack a/150 p/James a/250", memberList);
             String printedOutput = transactionList.listTransactions();
-            String expectedString = "1.\n" +
-                    "Owner: Jack\n" +
-                    "Payee 1: James Owed amount: 200.00\n" +
-                    "Payee 2: Jane Owed amount: 100.00\n" +
-                    "\n" +
-                    "2.\n" +
-                    "Owner: Jane\n" +
-                    "Payee 1: Jack Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n" +
-                    "\n";
-            assertEquals(expectedString, printedOutput);
+
+            assertTrue(printedOutput.contains("Lender: Jack"));
+            assertTrue(printedOutput.contains("Jane Owed amount: 100.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 200.00"));
+            assertTrue(printedOutput.contains("Lender: Jane"));
+            assertTrue(printedOutput.contains("Jack Owed amount: 150.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 250.00"));
+
         } catch (LongAhException e) {
             fail();
         }
     }
-     */
 
     /**
-     * Tests the listing of payments when the input member does not own any
+     * Tests the listing of transactions when the input member does not own any
      */
     @Test
-    public void findPayment_noTransactions_success() {
+    public void findTransaction_noTransactions_success() {
         try {
             MemberList memberList = new MemberList();
             TransactionList transactionList = new TransactionList();
@@ -110,20 +109,22 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            String command = "findpayment James";
+            String command = "findtransaction James";
             String[] parts = command.split(" ", 2);
             String printedOutput = transactionList.findTransactions(parts);
-            String expectedString = "James owns the following list of transactions." + "\n";
-            assertEquals(expectedString, printedOutput);
+            fail();
 
         } catch (LongAhException e) {
-            fail();
+            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER.getMessage();
+            assertEquals(expectedString, e.getMessage());
         }
     }
 
-    /*
+    /**
+     * Tests the listing of payments when the input member owns multiple entries
+     */
     @Test
-    public void findPayment_multiTransactions_success() {
+    public void findTransaction_multiTransactions_success() {
         try {
             MemberList memberList = new MemberList();
             TransactionList transactionList = new TransactionList();
@@ -131,31 +132,27 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/James a/100 p/Jane a/200 ", memberList);
-            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
-            String printedOutput = transactionList.findPayments("Jack");
-            String expectedString = "Jack owns the following list of transactions.\n" +
-                    "1.\n" +
-                    "Owner: Jack\n" +
-                    "Payee 1: Jane Owed amount: 200.00\n" +
-                    "Payee 2: James Owed amount: 100.00\n" +
-                    "\n" +
-                    "2.\n" +
-                    "Owner: Jack\n" +
-                    "Payee 1: Jane Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n" +
-                    "\n";
+            transactionList.addTransaction("Jack p/James a/100 p/Jane a/200", memberList);
+            transactionList.addTransaction("Jack p/Jane a/150 p/James a/250", memberList);
+            String command = "findtransaction Jack";
+            String[] parts = command.split(" ", 2);
+            String printedOutput = transactionList.findTransactions(parts);
 
-            assertEquals(expectedString, printedOutput);
+            assertTrue(printedOutput.contains("Jack owns the following list of transactions."));
+            assertTrue(printedOutput.contains("Lender: Jack"));
+            assertTrue(printedOutput.contains("Jane Owed amount: 200.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 100.00"));
+            assertTrue(printedOutput.contains("Lender: Jack"));
+            assertTrue(printedOutput.contains("Jane Owed amount: 150.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 250.00"));
 
         } catch (LongAhException e) {
             fail();
         }
     }
-     */
 
     /**
-     * Tests the listing of debts when the input member does not have any
+     * Tests the listing of debts when the input member does not owe any
      */
     @Test
     public void findDebt_noTransactions_success() {
@@ -170,16 +167,18 @@ public class TransactionListTest {
             transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
             String[] parts = "finddebt Jack".split(" ", 2);
             String printedOutput = transactionList.findDebts(parts);
-            String expectedString = "Jack is involved as the payee in the following list of transactions." + "\n";
-            assertEquals(expectedString, printedOutput);
+            fail();
 
         } catch (LongAhException e) {
-            fail();
+            String expectedString = ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER.getMessage();
+            assertEquals(expectedString, e.getMessage());
         }
     }
 
 
-    /*
+    /**
+     * Tests the listing of debts when the input member owes multiple entries
+     */
     @Test
     public void findDebt_multiTransactions_success() {
         try {
@@ -189,28 +188,22 @@ public class TransactionListTest {
             memberList.addMember("Jane");
             memberList.addMember("James");
 
-            transactionList.add("p/Jack p/Jane a/200 p/James a/100", memberList);
-            transactionList.add("p/Jack p/Jane a/150 p/James a/200", memberList);
-            String printedOutput = transactionList.findDebts("James");
-            String expectedString = "James is involved as the payee in the following list of transactions.\n" +
-                    "1.\n" +
-                    "Owner: Jack\n" +
-                    "Payee 1: Jane Owed amount: 200.00\n" +
-                    "Payee 2: James Owed amount: 100.00\n" +
-                    "\n" +
-                    "2.\n" +
-                    "Owner: Jack\n" +
-                    "Payee 1: Jane Owed amount: 150.00\n" +
-                    "Payee 2: James Owed amount: 200.00\n"  +
-                    "\n";
+            transactionList.addTransaction("Jack p/Jane a/200 p/James a/100", memberList);
+            transactionList.addTransaction("Jack p/Jane a/150 p/James a/200", memberList);
+            String command = "finddebt James";
+            String[] parts = command.split(" ", 2);
+            String printedOutput = transactionList.findDebts(parts);
 
-            assertEquals(expectedString, printedOutput);
+            assertTrue(printedOutput.contains("Lender: Jack"));
+            assertTrue(printedOutput.contains("Jane Owed amount: 200.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 100.00"));
+            assertTrue(printedOutput.contains("Lender: Jack"));
+            assertTrue(printedOutput.contains("Jane Owed amount: 150.00"));
+            assertTrue(printedOutput.contains("James Owed amount: 200.00"));
 
         } catch (LongAhException e) {
             fail();
         }
     }
-
-     */
 
 }
