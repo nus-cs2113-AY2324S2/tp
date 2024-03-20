@@ -33,7 +33,9 @@ public class TravelActivity {
         return travelActivity;
     }
 
-    public boolean getTaskStatus() {return taskIsDone;}
+    public boolean getTaskStatus() {
+        return taskIsDone;
+    }
 
     /**
      * Gets the tag of the travel activity
