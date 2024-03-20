@@ -1,9 +1,9 @@
 package florizz.objects;
 
-import florizz.core.FlorizzException;
+
 
 import java.util.HashMap;
-import java.util.Locale;
+
 import java.util.Objects;
 
 public class Bouquet {

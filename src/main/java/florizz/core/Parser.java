@@ -1,6 +1,16 @@
 package florizz.core;
 
-import florizz.command.*;
+import florizz.command.Command;
+import florizz.command.AddBouquetCommand;
+import florizz.command.AddFlowerCommand;
+import florizz.command.DeleteBouquetCommand;
+import florizz.command.ExitCommand;
+import florizz.command.FlowerCommand;
+import florizz.command.InfoCommand;
+import florizz.command.ListBouquetCommand;
+import florizz.command.ListOccasionCommand;
+import florizz.command.RemoveFlowerCommand;
+import florizz.command.HelpCommand;
 import florizz.objects.Bouquet;
 
 public class Parser {
@@ -30,7 +40,7 @@ public class Parser {
         case ("flower"):
             return handleFlowerCommand(input);
         case ("info"):
-              return handleInfoCommand(input);      
+            return handleInfoCommand(input);
         case ("occasion"):
             return new ListOccasionCommand();
         case ("add"):
@@ -99,11 +109,13 @@ public class Parser {
 
     private static AddFlowerCommand handleAddFlower(String argument) throws FlorizzException {
         if (argument == null) {
-            throw new FlorizzException("No argument detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+            throw new FlorizzException("No argument detected! " +
+                    "Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
         }
 
         if (!argument.matches(ADD_FLOWER_REGEX)) {
-            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+            throw new FlorizzException("Incorrect format detected! " +
+                    "Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
         }
 
         // [WARNING] might need to check for extra slash k
@@ -122,11 +134,13 @@ public class Parser {
 
     private static RemoveFlowerCommand handleRemoveFlower(String argument) throws FlorizzException {
         if (argument == null) {
-            throw new FlorizzException("No argument detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+            throw new FlorizzException("No argument detected! " +
+                    "Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
         }
 
         if (!argument.matches(REMOVE_FLOWER_REGEX)) {
-            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+            throw new FlorizzException("Incorrect format detected! " +
+                    "Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
         }
 
         // [WARNING] might need to check for extra slash k
