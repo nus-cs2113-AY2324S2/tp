@@ -51,6 +51,8 @@ class OutputTest {
         new Run("01:59:10", "15.3");
         String expected = Constant.PARTITION_LINE +
                 System.lineSeparator() +
+                "Your run history:" +
+                System.lineSeparator() +
                 "Index\t\tType\tTime\t\tDistance\tPace\t\tDate" +
                 System.lineSeparator() +
                 "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\t2024-03-15" +
@@ -191,6 +193,8 @@ class OutputTest {
             gym2.addStation("Lat Press", 20, 4, 10);
 
             String expected = Constant.PARTITION_LINE +
+                    System.lineSeparator() +
+                    "Your gym history:" +
                     System.lineSeparator() +
                     "Gym Session 1"+
                     System.lineSeparator() +

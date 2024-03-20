@@ -216,6 +216,7 @@ public class Output {
     public static void printLatest(String filter) {
         try {
             printLine();
+            System.out.println("Your latest " + filter + Constant.SPLIT_BY_COLON);
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
             case RUN:
@@ -252,6 +253,7 @@ public class Output {
     public static void printHistory(String filter) {
         try {
             printLine();
+            System.out.println("Your " + filter + " history" + Constant.SPLIT_BY_COLON);
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
             case RUN:
@@ -286,9 +288,15 @@ public class Output {
      * @param message The custom message to be printed.
      */
     public static void printException(Exception e, String message) {
-        System.err.println("Exception Caught!\n" + message + "\n\n" + e.getMessage());
+        System.err.println("Exception Caught!" +
+                System.lineSeparator() +
+                message +
+                System.lineSeparator() +
+                System.lineSeparator() +
+                e.getMessage());
         printLine();
     }
+
 
     /**
      * Prints the welcome banner for PulsePilot.

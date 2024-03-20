@@ -23,19 +23,23 @@ import static org.junit.jupiter.api.Assertions.fail;
 class HandlerTest {
     private final ByteArrayInputStream inContent = new ByteArrayInputStream("".getBytes());
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final InputStream originalIn = System.in;
     private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
 
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setIn(inContent);
+        System.setErr(new PrintStream(errContent));
     }
 
     @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setIn(originalIn);
+        System.setErr(originalErr);
         WorkoutList.clearWorkoutsAndRun();
         HealthList.clearBmisAndPeriods();
     }
@@ -74,28 +78,34 @@ class HandlerTest {
         assertTrue(output.contains("Added: bmi | 1.70 | 65 | 15-03-2024"));
     }
 
-    /*
+
     @Test
-    void processInput_historyCommand_printsHistory() {
-        String input = "HISTORY /e:all";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
+    void processInput_historyCommand_printsHistoryRun() {
+        String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+        System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        String inputHistory = "HISTORY /view:run";
+        System.setIn(new ByteArrayInputStream(inputHistory.getBytes()));
 
         Handler.processInput();
 
         String output = outContent.toString();
-        assertTrue(output.contains("History of all exercises:"));
+        assertTrue(output.contains("history:"));
     }
 
     @Test
     void processInput_latestCommand_printsLatestRun() {
-        String input = "LATEST";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+        System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        String inputLatest = "LATEST /view:run";
+        System.setIn(new ByteArrayInputStream(inputLatest.getBytes()));
 
         Handler.processInput();
 
         String output = outContent.toString();
-        assertTrue(output.contains("Latest run:"));
+        assertTrue(output.contains("Your latest run:"));
     }
+
+
 
     @Test
     void processInput_helpCommand_printsHelp() {
@@ -115,18 +125,18 @@ class HandlerTest {
 
         Handler.processInput();
 
-        String expected = "Exception Caught!\n" +
-                "Invalid command. Enter 'help' to view available commands.\n" +
-                "\n" +
-                "No enum constant utility.Command.INVALID\n" +
-                Constant.PARTITION_LINE + "\n";
-        expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
+        String expected = "Exception Caught!" +
+                System.lineSeparator() +
+                "Invalid command. Enter 'help' to view available commands." +
+                System.lineSeparator() +
+                System.lineSeparator() +
+                "No enum constant utility.Command.INVALID" +
+                System.lineSeparator();
 
-        assertEquals(expected, outContent.toString());
-        ///String output = outContent.toString();
+        assertEquals(expected, errContent.toString());
+        ///String output = errContent.toString();
         //assertTrue(output.contains("Invalid command."));
     }
-     */
 
 
     // processInput Tests END here: ---------------------------------------------------------------------
