@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import parser.Parser;
+import ui.TextUi;
 
 import java.io.IOException;
 import java.util.Scanner;
