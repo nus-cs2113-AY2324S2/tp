@@ -76,6 +76,11 @@ public class Period extends Health {
         return ChronoUnit.DAYS.between(startDate,endDate) + 1;
     }
 
+    /**
+     * Retrieves the string representation of a Period object.
+     *
+     * @return A formatted string representing a Period object.
+     */
     @Override
     public String toString() {
         return "Period Start: "
