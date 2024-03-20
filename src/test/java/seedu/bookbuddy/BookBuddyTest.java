@@ -29,10 +29,11 @@ class BookBuddyTest {
 
     @Test
     public void testPrintWelcomeMessage() {
-        BookBuddy.printWelcomeMessage();
+        Ui.printWelcome();
         String actualOutput = outContent.toString();
 
         // Normalize line endings to \n in both expected and actual output
+
         String normalizedExpectedOutput = "Hello! We are BookBuddy!\nHow can I help you today?\n".replace("\r\n", "\n");
         String normalizedActualOutput = actualOutput.replace("\r\n", "\n");
 
@@ -45,8 +46,8 @@ class BookBuddyTest {
 
     @Test
     public void testPrintExitMessage() {
-        BookBuddy.printExitMessage();
-        String expectedOutput = "Thank you for using BookBuddy! Hope to see you again!\n";
+        Ui.printExitMessage();
+        String expectedOutput = "Thank you for using BookBuddy! Hope to see you again keke :)\n";
         assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 

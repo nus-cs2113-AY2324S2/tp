@@ -7,20 +7,17 @@ import java.util.logging.Level;
 import static java.util.logging.Logger.getLogger;
 
 
+
 public class BookBuddy {
-    private static BookList books = new BookList();
     static final Logger LOGGER = getLogger(BookBuddy.class.getName());
+    private static BookList books = new BookList();
     public static void main(String[] args) {
         LOGGER.log(Level.INFO, "BookBuddy application started.");
-        printWelcomeMessage();
+        Ui.printWelcome();
         getUserInput(books);
         LOGGER.log(Level.INFO, "BookBuddy application is shutting down.");
     }
 
-    public static void printWelcomeMessage() {
-        System.out.println("Hello! We are BookBuddy!");
-        System.out.println("How can I help you today?");
-    }
 
     public static void getUserInput(BookList books) {
         Scanner input = new Scanner(System.in);
@@ -44,8 +41,5 @@ public class BookBuddy {
         }
     }
 
-    public static void printExitMessage() {
-        System.out.println("Thank you for using BookBuddy! Hope to see you again!");
-    }
 
 }
