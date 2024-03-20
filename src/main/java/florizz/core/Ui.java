@@ -1,8 +1,10 @@
 package florizz.core;
 
 import florizz.objects.Bouquet;
+import florizz.objects.Flower;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Ui {
@@ -48,11 +50,22 @@ public class Ui {
         System.out.println("Here are the list of your saved bouquets:");
         int i = 1;
         for (Bouquet bouquet : bouquetList){
-            System.out.println(i++ + ". " + bouquet);
+            System.out.println(i++ + ". " + bouquet + " :");
+            HashMap<Flower, Integer> flowerHashMap = bouquet.getFlowerHashMap();
+            if (!flowerHashMap.isEmpty()) {
+                for (Flower j : flowerHashMap.keySet()) {
+                    System.out.println("    - " + flowerHashMap.get(j) + " x " + j.getFlowerName());
+                }
+            } else {
+                System.out.println("      No flowers added so far");
+            }
         }
         printBreakLine();
     }
 
+    /**
+     * print all available command
+     */
     public void printHelpMessage() {
         System.out.println("Here are the list of commands you can use:");
         System.out.println("1. new <bouquet_name> - Add a bouquet");
@@ -64,16 +77,27 @@ public class Ui {
         printBreakLine();
     }
 
+    /**
+     * print error message thrown by Florizz Exception
+     *
+     * @param error
+     */
     public void printError(FlorizzException error){
         System.out.println(error.errorMessage);
         printBreakLine();
     }
 
+    /**
+     * print exit message
+     */
     public void printExitMessage() {
         System.out.println("Enjoy your bouquet! Thank you for using Florizz");
         printBreakLine();
     }
 
+    /**
+     * print flowers in the dictionary
+     */
     public void printAllDictFlowerName() {
         System.out.println("Here are all the flowers you can add: ");
         for (int i = 0; i < FlowerDictionary.size(); i++) {
@@ -82,6 +106,11 @@ public class Ui {
         printBreakLine();
     }
 
+    /**
+     * print specific flowers for specific occasion inputted
+     *
+     * @param targetOccasion
+     */
     public void printOccasionFlower(String targetOccasion) {
         System.out.println("Here are all the flowers related to " + targetOccasion.toLowerCase() + ": ");
         for (int i = 0; i < FlowerDictionary.size(); i++) {
@@ -92,9 +121,55 @@ public class Ui {
         printBreakLine();
     }
 
+    /**
+     * print all occasions available
+     */
     public void printAllOccasion() {
         System.out.println("Here are all the occasions associated with the available flowers: ");
         OccasionDictionary.print();
+        printBreakLine();
+    }
+
+    /**
+     * print ui if flower added successfully
+     *
+     * @param bouquetList
+     * @param flowerName
+     * @param quantity
+     * @param bouquetName
+     */
+    public void printAddFlowerSuccess(ArrayList<Bouquet> bouquetList, String flowerName, Integer quantity, String bouquetName) {
+        System.out.println("You have successfully added the following: " + System.lineSeparator() +
+                           "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
+        printAllBouquets(bouquetList);
+        printBreakLine();
+    }
+
+    /**
+     * print ui if flower removed successfully
+     *
+     * @param bouquetList
+     * @param flowerName
+     * @param quantity
+     * @param bouquetName
+     */
+    public void printRemoveFlowerSuccess(ArrayList<Bouquet> bouquetList, String flowerName, Integer quantity, String bouquetName) {
+        System.out.println("You have successfully added the following: " + System.lineSeparator() +
+                           "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
+        printAllBouquets(bouquetList);
+        printBreakLine();
+    }
+
+    /**
+     * print ui if flower removed can't be found
+     *
+     * @param bouquetList
+     * @param flowerName
+     * @param bouquetName
+     */
+    public void printRemoveFlowerUnsuccessful(ArrayList<Bouquet> bouquetList, String flowerName, String bouquetName) {
+        System.out.println(flowerName + " cannot be found in bouquet: " + bouquetName);
+        printAllBouquets(bouquetList);
         printBreakLine();
     }
 }

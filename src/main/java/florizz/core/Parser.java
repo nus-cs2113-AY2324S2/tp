@@ -5,14 +5,14 @@ import florizz.objects.Bouquet;
 
 public class Parser {
     // prefixes to parse input
+
+    private static final String QUANTITY = "/q";
     private static final String ADD_FLOWER_PREFIX = "/to";
     private static final String REMOVE_FLOWER_PREFIX = "/from";
 
     // regex
-    private static final String ADD_FLOWER_REGEX = ".+/from\\s*.+";
-
-    // count of argument
-    //private static final int ADD_FLOWER_
+    private static final String ADD_FLOWER_REGEX = "(.+)/q(\\s*)(\\d+)(\\s*)/to(.+)";
+    private static final String REMOVE_FLOWER_REGEX = "(.+)/q(\\s*)(\\d+)(\\s*)/from(.+)";
 
     public static Command parse (String input) throws FlorizzException{
         String[] decodedInput = commandHandler(input);
@@ -31,8 +31,10 @@ public class Parser {
             return handleFlowerCommand(input);
         case ("occasion"):
             return new ListOccasionCommand();
-        //case ("add"):
-        //    return handleAddFlower(decodedInput[1]);
+        case ("add"):
+            return handleAddFlower(decodedInput[1]);
+        case ("remove"):
+            return handleRemoveFlower(decodedInput[1]);
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
@@ -58,6 +60,18 @@ public class Parser {
         return output;
     }
 
+    /**
+     * remove prefix from an input string
+     * e.g. "/to For Mom" -> " For Mom"
+     *
+     * @param input
+     * @param prefix
+     * @return input with prefix removed
+     */
+    private static String removePrefix(String input, String prefix) {
+        return input.replace(prefix, "");
+    }
+
     private static AddBouquetCommand handleAddBouquet(String input) {
         String newBouquetName = input.substring(input.indexOf(" ") + 1);
         return new AddBouquetCommand(new Bouquet(newBouquetName));
@@ -73,13 +87,50 @@ public class Parser {
         return new FlowerCommand(occasion);
     }
 
+    private static AddFlowerCommand handleAddFlower(String argument) throws FlorizzException {
+        if (argument == null) {
+            throw new FlorizzException("No argument detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+        }
 
-    /*
-    private static AddFlowerCommand handleAddFlower(String input) {
-        String arguments =
-        int indexOfAddFlowerPrefix = input.indexOf(ADD_FLOWER_PREFIX);
-        String flowerName= input.substring(input.indexOf(" ") + 1)
-        String bouquetName =
-    }*/
+        if (!argument.matches(ADD_FLOWER_REGEX)) {
+            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+        }
+
+        // [WARNING] might need to check for extra slash k
+
+        int prefixIndex = argument.indexOf(ADD_FLOWER_PREFIX);
+        int quantityIndex = argument.indexOf(QUANTITY);
+
+        String flowerName = argument.substring(0,quantityIndex).trim();
+        String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
+        // [WARNING] might need to check if it's a valid integer
+        Integer quantity = Integer.parseInt(quantityString);
+        String bouquetName = removePrefix(argument.substring(prefixIndex), ADD_FLOWER_PREFIX).trim();
+
+        return new AddFlowerCommand(flowerName, quantity, bouquetName);
+    }
+
+    private static RemoveFlowerCommand handleRemoveFlower(String argument) throws FlorizzException {
+        if (argument == null) {
+            throw new FlorizzException("No argument detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+        }
+
+        if (!argument.matches(REMOVE_FLOWER_REGEX)) {
+            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+        }
+
+        // [WARNING] might need to check for extra slash k
+
+        int prefixIndex = argument.indexOf(REMOVE_FLOWER_PREFIX);
+        int quantityIndex = argument.indexOf(QUANTITY);
+
+        String flowerName = argument.substring(0,quantityIndex).trim();
+        String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
+        // [WARNING] might need to check if it's a valid integer
+        Integer quantity = Integer.parseInt(quantityString);
+        String bouquetName = removePrefix(argument.substring(prefixIndex), REMOVE_FLOWER_PREFIX).trim();
+
+        return new RemoveFlowerCommand(flowerName, quantity, bouquetName);
+    }
 
 }

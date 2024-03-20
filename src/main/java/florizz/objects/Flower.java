@@ -5,6 +5,10 @@ public class Flower {
     private String occasion;
     private String colour;
 
+    public Flower() {
+        this("","","");
+    }
+
     public Flower(String name, String colour, String occasion) {
         this.name = name;
         this.occasion = occasion;
