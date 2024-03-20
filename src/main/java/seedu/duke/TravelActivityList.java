@@ -78,6 +78,14 @@ public class TravelActivityList {
         return "cant be found";
     }
 
+    /**
+     * Finds all activities in the TravelActivity list that contains a keyword specified
+     * by the user.
+     *
+     * @param taskName keyword specified by the user to find activities in the TravelActivity list
+     *                 related to the keyword.
+     */
+
     public void searchKeyword (String taskName) {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
