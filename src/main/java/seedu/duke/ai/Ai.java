@@ -15,7 +15,7 @@ public class Ai {
     /**
      * Returns a random number representing the direction chosen by the AI.
      */
-    public int getAiDirection() {
+    public static int getAiDirection() {
         Random rand = new Random();
         int direction = rand.nextInt(3);
         assert direction >= Ai.getMinDirection() && direction <= Ai.getMaxDirection() :
