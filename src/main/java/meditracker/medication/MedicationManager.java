@@ -69,6 +69,10 @@ public class MedicationManager {
         medications.remove(listIndex);
     }
 
+    /**
+     * Shows the number of medications in the medication list.
+     * Also lists all the medications in the medication list.
+     */
     public void printAllMedications() {
         System.out.println("You have " + getTotalMedications() + " medications listed below.");
         Ui ui = new Ui();
