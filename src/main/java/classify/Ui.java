@@ -54,8 +54,6 @@ public class Ui {
     public static void printWelcomeMessage() {
         printDivider();
         System.out.println(WELCOME_TO_CLASSIFY);
-        System.out.println(WHAT_CAN_I_DO_FOR_YOU_TODAY);
-        printDivider();
     }
 
     /**
@@ -67,6 +65,10 @@ public class Ui {
     }
 
     //@@author blackmirag3
+    public static void printUserPrompt() {
+        System.out.println(WHAT_CAN_I_DO_FOR_YOU_TODAY);
+        printDivider();
+    }
     public static void printWrongInput() {
         System.out.println(WRONG_INPUT_MESSAGE);
         printDivider();
