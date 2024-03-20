@@ -5,45 +5,50 @@ import seedu.duke.ui.UI;
 import java.util.ArrayList;
 
 public class UserList {
-    private static ArrayList<User> allUsers;
-    private static User activeUser;
+    private ArrayList<User> allUsers;
+    private User activeUser;
 
     public UserList() {
         allUsers = new ArrayList<>();
     }
 
-    public static User GetActiveUser() {
+    public User getActiveUser() {
         return activeUser;
     }
 
-    public static void SetActiveUser(User user) {
+    public void setActiveUser(User user) {
         if (user != null) {
-            UserList.activeUser = user;
+            activeUser = user;
         } else {
             System.out.println("User does not exist!");
         }
     }
 
-    public static void AddUser(User user) {
+    public void addUser(User user) {
         allUsers.add(user);
         if (allUsers.size() == 1) {
-            UserList.activeUser = allUsers.get(0); //If this was the first user added, set them as the current user
+            activeUser = allUsers.get(0); //If this was the first user added, set them as the current user
             UI.printActiveUser(user.getName());
         }
     }
 
-    public static void ListAll() {
+    public void listAll() {
         for (User user : allUsers) {
             System.out.println(user.getName());
         }
     }
-    public static ArrayList<User> GetUsers() {
+
+    public ArrayList<User> getUsers() {
         return allUsers;
     }
 
-    public static User FindUser(String name) {
+    public int getListLength() {
+        return allUsers.size();
+    }
+
+    public User findUser(String name) {
         for (User u : allUsers) {
-            if (name.toLowerCase().equals(u.getName().toLowerCase())) {
+            if (name.equalsIgnoreCase(u.getName())) {
                 return u;
             }
         }
