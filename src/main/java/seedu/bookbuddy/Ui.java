@@ -38,8 +38,12 @@ public class Ui {
         System.out.println("alright.. i've removed " + BookList.books.get(index).getTitle() + " from the list.");
     }
     public static void helpMessage() {
+        System.out.println("Here's a list of commands to get you started!!");
         System.out.println("add (Bookname) -> to add new books to the list");
         System.out.println("list -> to show whole list of added books");
         System.out.println("remove (index) -> to remove the book from the corresponding index");
+        System.out.println("mark (index) -> to mark book as read [R]");
+        System.out.println("unmark (index) -> to unmark book as unread [U]");
+        System.out.println("bye -> to exit BookBuddy software");
     }
 }
