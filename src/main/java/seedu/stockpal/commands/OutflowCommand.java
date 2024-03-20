@@ -5,15 +5,17 @@ import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.storage.Storage;
+import seedu.stockpal.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD
-            + ": Reduce quantity of an existing product in the inventory at the specific PID\n"
-            + "Format: outflow PID [a/QUANTITY] ";
+    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
+            + ": Decreases the quantity by the specified amount from the existing amount according to the PID."
+            + Messages.LINE_SEPARATOR
+            + "Format: outflow PID a/DECREMENT_AMOUNT");
 
     private static Logger logger = Logger.getLogger(OutflowCommand.class.getName());
 

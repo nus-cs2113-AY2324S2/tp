@@ -48,7 +48,7 @@ public class EditCommandTest {
         Product product = productList.get(index);
         assertEquals("Name: Cheese", product.getName().toString());
         assertEquals("Quantity: 10", product.getQuantity().toString());
-        assertEquals("Price: 1.50", product.getPrice().toString());
+        assertEquals("Price: $1.50", product.getPrice().toString());
         assertEquals("Description: Contains lactose.", product.getDescription().toString());
     }
 
@@ -62,7 +62,7 @@ public class EditCommandTest {
         Product product = productList.get(index);
         assertEquals("Name: Milk", product.getName().toString());
         assertEquals("Quantity: 20", product.getQuantity().toString());
-        assertEquals("Price: 1.50", product.getPrice().toString());
+        assertEquals("Price: $1.50", product.getPrice().toString());
         assertEquals("Description: Contains lactose.", product.getDescription().toString());
     }
 
@@ -76,7 +76,7 @@ public class EditCommandTest {
         Product product = productList.get(index);
         assertEquals("Name: Milk", product.getName().toString());
         assertEquals("Quantity: 10", product.getQuantity().toString());
-        assertEquals("Price: 3.10", product.getPrice().toString());
+        assertEquals("Price: $3.10", product.getPrice().toString());
         assertEquals("Description: Contains lactose.", product.getDescription().toString());
     }
 
@@ -90,7 +90,7 @@ public class EditCommandTest {
         Product product = productList.get(index);
         assertEquals("Name: Milk", product.getName().toString());
         assertEquals("Quantity: 10", product.getQuantity().toString());
-        assertEquals("Price: 1.50", product.getPrice().toString());
+        assertEquals("Price: $1.50", product.getPrice().toString());
         assertEquals("Description: Made by happy cows!", product.getDescription().toString());
     }
 
@@ -104,7 +104,7 @@ public class EditCommandTest {
         Product product = productList.get(index);
         assertEquals("Name: Parmesan", product.getName().toString());
         assertEquals("Quantity: 15", product.getQuantity().toString());
-        assertEquals("Price: 3.00", product.getPrice().toString());
+        assertEquals("Price: $3.00", product.getPrice().toString());
         assertEquals("Description: Made by happy cows!", product.getDescription().toString());
     }
 

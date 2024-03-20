@@ -45,6 +45,7 @@ public class StockPal {
             String userInput = Ui.getUserInput();
             try {
                 Command command = parser.parseCommand(userInput);
+
                 if (isExitCommand(command)) {
                     break;
                 }
