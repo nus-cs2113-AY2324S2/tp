@@ -3,12 +3,17 @@ package seedu.binbash;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class ItemList {
+    private static final Logger ITEMLIST_LOGGER = Logger.getLogger("ItemList");
+
     private final List<Item> itemList;
 
     public ItemList(ArrayList<Item> itemList) {
         this.itemList = itemList;
+        ITEMLIST_LOGGER.setLevel(Level.WARNING);
     }
 
     public List<Item> getItemList() {
@@ -48,6 +53,7 @@ public class ItemList {
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
             if (currentItem.getItemName().equals(keyword)) {
+                ITEMLIST_LOGGER.log(Level.INFO, "first matching item at index " + i + " found.");
                 targetIndex = i + 1;
                 break;
             }
