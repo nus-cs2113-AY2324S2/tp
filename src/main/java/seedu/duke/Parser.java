@@ -1,6 +1,7 @@
 package seedu.duke;
 
 public class Parser {
+    protected static Group currentGroup = new Group("");
     protected String userInput;
 
     public static class EndProgramException extends Exception {
