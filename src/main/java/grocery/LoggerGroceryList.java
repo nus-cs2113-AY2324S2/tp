@@ -1,5 +1,6 @@
 package grocery;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.logging.Logger;
@@ -26,7 +27,8 @@ public class LoggerGroceryList {
         loggerGL.addHandler(ch);
 
         try {
-            FileHandler fh = new FileHandler("logs/GroceryList.log", true);
+            String filepath = new File("logs/GroceryList.log").getAbsolutePath();
+            FileHandler fh = new FileHandler(filepath, true);
             fh.setLevel(Level.INFO);
             loggerGL.addHandler(fh);
         } catch (IOException e) {
