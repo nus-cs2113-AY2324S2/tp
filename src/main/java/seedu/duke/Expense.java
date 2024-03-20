@@ -11,6 +11,13 @@ public class Expense {
     private float total_amount;
 
     private ArrayList<String> payees = new ArrayList<>();
+
+    /**
+     * Creates the Expense object corresponding to one expense.
+     * @param payer_name : The person who paid for the expense
+     * @param total_amount : The total amount before dividing between members of the group
+     * @param payee_list : The list of people who owe money for this expense (The payer is included as index 0 and will not be added as a payee)
+     */
     Expense(String payer_name, String total_amount, String[] payee_list){
         total_amount = removeWhitespaces(total_amount);
         payer_name = removeWhitespaces(payer_name);
