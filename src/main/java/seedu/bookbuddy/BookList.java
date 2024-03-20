@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * and marking book as read or unread.
  */
 public class BookList {
-    private ArrayList<Book> books;
+    protected static ArrayList<Book> books;
 
     /**
      * Constructs a new BookList instance with an empty list.
@@ -42,7 +42,7 @@ public class BookList {
      */
     public void addBook(String title) {
         books.add(new Book(title));
-        System.out.println("Successfully added " + title + " to the list.");
+        Ui.addBookMessage(title);
     }
 
     /**
@@ -53,9 +53,10 @@ public class BookList {
         if (index < 0 || index > books.size()) {
             throw new IndexOutOfBoundsException("Book index out of range.");
         }
-        Book book = books.get(index - 1);
+        //Book book = books.get(index - 1);
+        //books.remove(index - 1);
+        Ui.removeBookMessage(index - 1);
         books.remove(index - 1);
-        System.out.println("Successfully removed " + book.getTitle() + " from the list.");
     }
 
     /**
@@ -83,11 +84,11 @@ public class BookList {
     /**
      * Prints all books currently in the list.
      */
-    public void printAllBooks() {
-        if (!books.isEmpty()) {
+    public static void printAllBooks() {
+        if (!BookList.books.isEmpty()) {
             System.out.println("All books:");
-            for (int i = 0; i < books.size(); i++) {
-                Book currentBook = books.get(i);
+            for (int i = 0; i < BookList.books.size(); i++) {
+                Book currentBook = BookList.books.get(i);
                 System.out.print((i + 1) + ". ");
                 System.out.println(currentBook.toString());
             }
