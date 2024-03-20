@@ -12,10 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DataStorage {
     public static final String STORAGE_FILE_PATH = "./data/data.txt";
     public static final String FOLDER_PATH = "./data";
+
+    private double balance;
 
     public void saveTransactions(ArrayList<Transaction> transactionArrayList) throws IOException {
         File f = new File(STORAGE_FILE_PATH);
@@ -27,7 +30,7 @@ public class DataStorage {
         }
     }
 
-    private void writeToFile(String stringToWrite) throws IOException {
+    private static void writeToFile(String stringToWrite) throws IOException {
         FileWriter fw = new FileWriter(STORAGE_FILE_PATH, true);
         fw.write(stringToWrite);
         fw.close();
@@ -43,9 +46,11 @@ public class DataStorage {
 
         switch (transactionInfo[2]) {
         case "Income":
-            return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]), transactionInfo[1], transactionInfo[3], account);
+            return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
+                    transactionInfo[1], transactionInfo[3], account);
         case "Expense":
-            return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]), transactionInfo[1], transactionInfo[3], account);
+            return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
+                    transactionInfo[1], transactionInfo[3], account);
         }
         return null;
     }
@@ -55,5 +60,21 @@ public class DataStorage {
         if (!Files.exists(dataFolderPath)) {
             Files.createDirectories(dataFolderPath);
         }
+    }
+
+    public ArrayList<Transaction> readFileContents() throws IOException {
+        createDataFolderIfNotExists();
+        File f = new File(STORAGE_FILE_PATH);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        Scanner s = new Scanner(f);
+        ArrayList<Transaction> transactionList = new ArrayList<>();
+        Account account = new Account();
+        for (int i = 0; s.hasNext(); i++) {
+            transactionList.add(processData(s.nextLine(), account));
+        }
+        balance = account.getBalance();
+        return transactionList;
     }
 }
