@@ -26,19 +26,24 @@ public class TravelActivityList {
     /**
      * Prints out all the travel activities
      */
-    public void listTravelActivities(){
+    public void listTravelActivities() {
         int taskCount = 0;
-        for (TravelActivity task: travelActivities) {
+        for (TravelActivity task : travelActivities) {
             if (task == null) {
                 break;
             }
-            String checked = task.getTaskStatus()? "[X]" : "[ ]";
+            String checked = task.getTaskStatus() ? "[X]" : "[ ]";
             taskCount++;
-            System.out.println("     " + checked + " " + taskCount +". " + task);
+            String tagInfo = "";
+            if (task.getTag() != null && !task.getTag().isEmpty()) {
+                tagInfo = " (" + task.getTag() + ")";
+            }
+            System.out.println("     " + checked + " " + taskCount + ". " + task + tagInfo);
         }
         int finalTaskCount = noOfTasks;
         assert finalTaskCount == taskCount : "Index out of bounds while listing activities";
     }
+
 
     /**
      * returns the number of travel activities in the list
