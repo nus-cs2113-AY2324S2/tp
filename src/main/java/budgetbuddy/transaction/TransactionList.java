@@ -67,7 +67,8 @@ public class TransactionList {
         transactions.add(t);
     }
 
-    public void processTransaction(String input, Account account) throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+    public void processTransaction(String input, Account account)
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
         // Check for syntax for add transaction
         String[] arguments = {"/t/", "/n/", "/$/", "/d/", "/c/"};
         for (String argument : arguments) {

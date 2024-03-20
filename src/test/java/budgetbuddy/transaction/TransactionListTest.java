@@ -29,7 +29,8 @@ public class TransactionListTest {
     }
 
     @Test
-    public void processTransaction_addsTransaction() throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+    public void processTransaction_addsTransaction()
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
         Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);

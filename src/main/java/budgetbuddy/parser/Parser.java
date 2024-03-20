@@ -6,13 +6,13 @@ import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
-import com.sun.jdi.InvalidTypeException;
 
 public class Parser {
 
     public static final int ADD_COMMAND_INDEX = 3;
 
-    public Transaction parseTransaction(String input, Account account) throws InvalidTransactionTypeException, NumberFormatException {
+    public Transaction parseTransaction(String input, Account account)
+            throws InvalidTransactionTypeException, NumberFormatException {
         String data = input.substring(ADD_COMMAND_INDEX + 1);
         String[] parseData = data.split("/");
         String type = null;
@@ -30,7 +30,7 @@ public class Parser {
                 break;
             case "$":
                 // Checks that input is an Integer
-                if (!TransactionList.isInteger(amount)) {
+                if (!TransactionList.isInteger(parseData[i+1].trim())) {
                     throw new NumberFormatException(parseData[i+1].trim());
                 } else {
                     amount = parseData[i + 1].trim();
