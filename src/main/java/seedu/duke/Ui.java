@@ -63,15 +63,16 @@ public class Ui {
         Question questionUnit;
         String[] inputAnswers = new String[numOfQns];
         String answer;
-        for (int index = 0; index < numOfQns; index ++){
+        for (int index = 0; index < numOfQns; index ++){//go through 1 question set
             questionUnit = qnList.getQuestionUnit(index);
             System.out.println(questionUnit.getQuestion());
             askForAnswerInput();
             Parser parser = new Parser();
             Scanner in = new Scanner(System.in);
             answer = in.nextLine();
-            inputAnswers[index] = answer;
+            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit);
         }
+        //add results to resultsList
     }
 
 

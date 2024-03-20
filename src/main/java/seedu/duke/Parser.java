@@ -114,5 +114,13 @@ public class Parser {
         }
 
     }
+
+    public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit){
+        inputAnswers[index] = answer;
+        String correctAnswer = questionUnit.getSolution();
+        if (answer.equals(correctAnswer)){
+            //increase score
+        }
+    }
 }
 
