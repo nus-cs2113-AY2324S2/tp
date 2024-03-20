@@ -93,6 +93,13 @@ public class WorkoutList extends ArrayList<Workout> {
         return (Run) runs.get(runs.size() - 1);
     }
 
+    public static Gym getLatestGym() throws CustomExceptions.OutOfBounds {
+        if (gyms.isEmpty()) {
+            throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
+        }
+        return (Gym) gyms.get(gyms.size() - 1);
+    }
+
     /**
      * Returns the number of runs in the list.
      *
