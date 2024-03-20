@@ -1,5 +1,8 @@
 package gamelogic;
 
+import command.Command;
+import command.CommandFactory;
+import exception.CommandInputException;
 import exception.JobSelectException;
 import exception.NameInputException;
 import player.PlayerProfile;
@@ -16,20 +19,21 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
-        String playerName = "";
-        String jobType = "";
-
-        Scanner input = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
         ResponseManager.printGameInit();
-        while (playerName.isEmpty()) {
-            try {
-                playerName = Parser.parseName(input.nextLine());
-            } catch (NameInputException e) {
-                ResponseManager.indentPrint(e.getMessage());
-            }
-        }
+        String playerName = getName();
 
         ResponseManager.printJobSelect();
+        String jobType = getJob();
+
+        PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
+        ResponseManager.printWelcome(playerProfile);
+        return new EconoCraftLogic(playerProfile);
+    }
+
+    private static String getJob() {
+        Scanner input = new Scanner(System.in);
+        String jobType = "";
         while (jobType.isEmpty()) {
             try {
                 jobType = Parser.parseCareer(input.nextLine());
@@ -37,25 +41,35 @@ public class EconoCraftLogic {
                 ResponseManager.indentPrint(e.getMessage());
             }
         }
-        input.close();
-
-        PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
-        ResponseManager.printWelcome(playerProfile);
-
-<<<<<<< HEAD
-        seedu.duke.tictactoe.TicTacToe game = new seedu.duke.tictactoe.TicTacToe('X');
-        game.gameStart();
-=======
-
-        seedu.duke.tictactoe.TicTacToe game = new seedu.duke.tictactoe.TicTacToe('X');
-        game.gameStart();
-
-     
->>>>>>> 9d19ac2734dcdf993a693e56d086a8ba88a054e4
-        return new EconoCraftLogic(playerProfile);
+        return jobType;
     }
 
-    public void startGame() {
-        System.out.println("Game started");
+    private static String getName() {
+        Scanner input = new Scanner(System.in);
+        String playerName = "";
+        while (playerName.isEmpty()) {
+            try {
+                playerName = Parser.parseName(input.nextLine());
+            } catch (NameInputException e) {
+                ResponseManager.indentPrint(e.getMessage());
+            }
+        }
+        return playerName;
+    }
+
+    public void startEcono() {
+        Scanner userInput = new Scanner(System.in);
+        boolean exitFlag = false;
+
+        while (!exitFlag) {
+            try {
+                Command command = CommandFactory.create(userInput.nextLine());
+                command.execute();
+                exitFlag = command.isExit();
+            } catch (CommandInputException error) {
+                ResponseManager.indentPrint(error.getMessage());
+            }
+        }
+        userInput.close();
     }
 }
