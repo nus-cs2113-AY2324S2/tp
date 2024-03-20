@@ -28,6 +28,5 @@ class NewsOnTheGoTest {
                 "\nReliability: " + newsArticles.get(1).getReliability() +
                 "\nBias: " + newsArticles.get(1).getBias());
     }
-
 }
 
