@@ -295,6 +295,10 @@ public class Handler {
             CustomExceptions.InsufficientInput {
         String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH);
 
+        if (userInputs.length < 2) {
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_EXERCISE);
+        }
+
         String exerciseType = userInputs[Constant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
         if (exerciseType.isBlank()){

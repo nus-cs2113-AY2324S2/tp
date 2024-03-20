@@ -130,7 +130,7 @@ class HandlerTest {
             Handler.checkTypeOfExercise(input4);
         });
 
-        /* with wrong slash
+        // with wrong slash
         String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input5);
