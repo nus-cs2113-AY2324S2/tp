@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class Group {
-    String name;
+    protected String name;
     protected ArrayList<User> users;
 
     public Group(String name) {
