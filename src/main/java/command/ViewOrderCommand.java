@@ -11,7 +11,7 @@ public class ViewOrderCommand implements MainCommand{
         try {
             String[] indexString = Parser.splitInput(Parser.analyzeInput(inputText), inputText);
             String orderID = indexString[0];
-            ordersList.stream().filter(x -> x.getID().equals(orderID)).forEach(x -> System.out.println(x.toString()));
+            ordersList.stream().filter(x -> x.getID().equals(orderID)).forEach(System.out::println);
         } catch (IndexOutOfBoundsException e) {
             //TODO: add exception class
             System.out.println("Order does not exist");

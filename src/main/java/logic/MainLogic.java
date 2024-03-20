@@ -1,8 +1,8 @@
 package logic;
 
-import command.CreateOrderCommand;
-import command.ExitCommand;
-import command.HelpCommand;
+import command.MainCreateOrderCommand;
+import command.MainExitCommand;
+import command.MainHelpCommand;
 import command.ViewOrderCommand;
 import command.ViewOrdersSummaryCommand;
 import model.Menu;
@@ -22,7 +22,7 @@ public class MainLogic {
         ArrayList<Order> ordersList = new ArrayList<>();
         ArrayList<Menu> menusList = new ArrayList<>();
 
-        //for testing
+        //for testin
         testOrderAddAndRemove(ordersList);
         testOrderAddAndRemove(ordersList);
 
@@ -34,19 +34,19 @@ public class MainLogic {
                 commandType = Parser.analyzeInput(inputText);
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid command");
-                HelpCommand.execute();
+                MainHelpCommand.execute();
                 continue;
             }
             switch (commandType) {
             case EXIT:
-                isExit = ExitCommand.execute(isExit);
+                isExit = MainExitCommand.execute(isExit);
                 break;
             case HELP:
-                HelpCommand.execute();
+                MainHelpCommand.execute();
                 break;
             case CREATE_ORDER:
                 //GOTO sub-menu to add/remove menuItems
-                Order newOrder = CreateOrderCommand.execute();
+                Order newOrder = MainCreateOrderCommand.execute(inputText, menusList); //inputText is passed to detect menu selected
                 ordersList.add(newOrder);
                 break;
             case VIEW_ORDER:
@@ -57,7 +57,7 @@ public class MainLogic {
                 break;
             default:
                 System.out.println("Invalid command");
-                HelpCommand.execute();
+                MainHelpCommand.execute();
             }
         }
     }
