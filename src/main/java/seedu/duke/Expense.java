@@ -10,17 +10,6 @@ public class Expense {
     private String payerName;
     private float totalAmount;
     private ArrayList<String> payees = new ArrayList<>();
-    public String getPayerName() {
-        return payerName;
-    }
-
-    public float getTotalAmount() {
-        return totalAmount;
-    }
-
-    public ArrayList<String> getPayees() {
-        return payees;
-    }
 
     Expense(String payer_name, String total_amount, String[] payee_list){
         total_amount = removeWhitespaces(total_amount);
@@ -41,5 +30,15 @@ public class Expense {
         String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
         return itemWithoutWhitespaces;
     }
+    public String getPayerName() {
+        return payerName;
+    }
 
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+
+    public ArrayList<String> getPayees() {
+        return payees;
+    }
 }
