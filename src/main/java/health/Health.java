@@ -3,6 +3,9 @@ package health;
 import utility.Constant;
 import utility.CustomExceptions;
 
+/**
+ * Represents a Health object to track user's health information.
+ */
 public class Health {
 
     /**

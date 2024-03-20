@@ -1,5 +1,8 @@
 package utility;
 
+/**
+ * Constants class representing all constants used for PulsePilot.
+ */
 public class Constant {
 
     // Formatted Replies
@@ -27,7 +30,10 @@ public class Constant {
     public static final String RUN_INPUT = "e:run";
     public static final String GYM_INPUT = "e:gym";
 
+    // Special Characters
     public static final String SPLIT_BY_SLASH = "/";
+    public static final String SPLIT_BY_COLON = ":";
+    public static final String SPLIT_BY_WHITESPACE = "";
 
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
@@ -40,10 +46,11 @@ public class Constant {
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
     public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets of %s";
 
-    public static final String RUN_HEADER = "Type\\tTime\\t\\tDistance\\tPace\\t\\tDate\"";
+    public static final int NUMBER_OF_RUN_PARAMETERS = 4;
+    public static final String RUN_HEADER = "Type\tTime\t\tDistance\tPace\t\tDate";
 
     // Constant for Error
-    public static final String INVALID_PRINT_HISTORY_FILTER = "Invalid filter! Filter is only 'all', 'run' or 'gym'";
+    public static final String INVALID_FILTER = "Invalid filter! Filter is only 'run', 'gym', 'bmi' or 'period'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
 
     public static final String NO_GYMS_FOUND = "No gyms found! You need to add a gym first!";
@@ -75,6 +82,8 @@ public class Constant {
             "Example input: new /e:gym /n:<number of exercise>";
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Insufficient parameters for Gym Stations! " +
             "Please input [name of exercise] /s:[sets] /r:[reps] /w:[weights]";
+    public static final int NUM_SECONDS_IN_MINUTE = 60;
+    public static final int NUM_SECONDS_IN_HOUR = 3600;
 
 
     // Health Constants
@@ -88,20 +97,25 @@ public class Constant {
     public static final String HEIGHT_FLAG = "/height";
     public static final String WEIGHT_FLAG = "/weight";
     public static final String DATE_FLAG = "/date";
+    public static final String START_FLAG = "/start";
+    public static final String END_FLAG = "/end";
+
     public static final Integer BMI_H_OFFSET = 3;
     public static final Integer BMI_HEIGHT_OFFSET = 8;
     public static final Integer BMI_WEIGHT_OFFSET = 8;
+    public static final Integer DATE_OFFSET = 6;
+
     public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
     public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
     public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
     public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
-    public static final Integer DATE_OFFSET = 6;
     public static final double UNDERWEIGHT_BMI_THRESHOLD = 18.5;
     public static final double NORMAL_BMI_THRESHOLD = 24.9;
     public static final double OVERWEIGHT_BMI_THRESHOLD = 29.9;
     public static final double OBESE_BMI_THRESHOLD = 39.9;
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
+
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
@@ -119,6 +133,7 @@ public class Constant {
 
     public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
+    public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
     public static final String LINE = " | ";
   
     // Input Errors
@@ -129,10 +144,10 @@ public class Constant {
 
     // Storage Replies
     public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
-    public static final String MISSING_FILE = "What is your name, Captain?";
+    public static final String MISSING_FILE = "What is your name, voyager?";
     public static final String LOAD_ERROR = "File read error:\n" + "Error at ";
     public static final String CORRUPT_ERROR = "\nFile is corrupted. Ceasing any further data imports.";
-    public static final String SUCCESSFUL_LOAD = "Welcome back, Captain\n" + "Previous data has been synchronised.";
+    public static final String SUCCESSFUL_LOAD = "Captain's data found. Orbit has been synchronised.";
     public static final String LOG_FILE_PATH ="./pulsepilot_log.txt";
 
     // getRun Constants
@@ -140,4 +155,7 @@ public class Constant {
     public static final int SUBSTRING_DISTANCE = 1;
     public static final int SUBSTRING_TIME = 2;
     public static final int SUBSTRING_DATE = 3;
+
+    // PulsePilot UI replies
+    public static final String EXIT_MESSAGE = "Initiating PulsePilot landing sequence...";
 }

@@ -1,2 +1,27 @@
 James Gosling
+help
+new /e:run /d:5.24 /t:25:23 /date:19-03-2024
+new /e:run /d:10.24 /t:33:33 /date:20-04-2024
+history /view:run
+latest /view:run
+new /e:gym /n:2
+benchpress /s:4 /r:5 /w:100
+squats /s:4 /r:5 /w:100
+history /view:gym
+new /e:gym /n:2
+shoulder press /s:4 /r:5 /w:50
+deadlift /s:4 /r:5 /w:120
+history /view:gym
+latest /view:gym
+health /h:bmi /height:1.80 /weight:85 /date:19-03-2024
+history /view:bmi
+health /h:bmi /height:2.0 /weight:45.42 /date:20-03-2024
+health /h:bmi /height:1.95 /weight:85.0 /date:21-03-2024
+history /view:bmi
+latest /view:bmi
+health /h:period /start:09-03-2022 /end:16-03-2022
+history /view:period
+health /h:period /start:20-11-2022 /end:22-12-2022
+history /view:period
+latest /view:period
 exit
