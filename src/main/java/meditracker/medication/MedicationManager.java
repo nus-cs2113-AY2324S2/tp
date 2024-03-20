@@ -74,6 +74,7 @@ public class MedicationManager {
      * Also lists all the medications in the medication list.
      */
     public void printAllMedications() {
+        assert medications != null;
         System.out.println("You have " + getTotalMedications() + " medications listed below.");
         Ui ui = new Ui();
         ui.printMedsList(medications);
