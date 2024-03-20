@@ -3,6 +3,7 @@ package florizz.objects;
 import florizz.core.FlorizzException;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Bouquet {
@@ -41,7 +42,7 @@ public class Bouquet {
         Bouquet c = (Bouquet) obj;
 
         // Compare the data members and return accordingly
-        return Objects.equals(c.bouquetName, this.bouquetName);
+        return Objects.equals(c.bouquetName.toUpperCase(), this.bouquetName.toUpperCase());
     }
 
     /**

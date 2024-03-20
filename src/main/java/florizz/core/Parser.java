@@ -29,6 +29,8 @@ public class Parser {
             return new HelpCommand();
         case ("flower"):
             return handleFlowerCommand(input);
+        case ("info"):
+              return handleInfoCommand(input);      
         case ("occasion"):
             return new ListOccasionCommand();
         case ("add"):
@@ -39,6 +41,7 @@ public class Parser {
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
     }
+
 
     /**
      * Splits input into command and arguments. Also handles capitalisation and space exceptions
@@ -71,14 +74,21 @@ public class Parser {
     private static String removePrefix(String input, String prefix) {
         return input.replace(prefix, "");
     }
-
-    private static AddBouquetCommand handleAddBouquet(String input) {
-        String newBouquetName = input.substring(input.indexOf(" ") + 1);
+  
+    private static AddBouquetCommand handleAddBouquet(String input) throws FlorizzException{
+        if (!input.contains(" ")){
+            throw new FlorizzException("Did not include bouquet to add");
+        }
+        String newBouquetName = input.substring(input.indexOf(" ") + 1).trim();
         return new AddBouquetCommand(new Bouquet(newBouquetName));
     }
 
-    private static DeleteBouquetCommand handleDeleteBouquet(String input) {
-        String bouquetToDelete = input.substring(input.indexOf(" ") + 1);
+    private static DeleteBouquetCommand handleDeleteBouquet(String input) throws FlorizzException{
+        if (!input.contains(" ")){
+            throw new FlorizzException("Did not include bouquet to delete");
+        }
+        String bouquetToDelete = input.substring(input.indexOf(" ") + 1).trim();
+
         return new DeleteBouquetCommand(new Bouquet(bouquetToDelete));
     }
 
@@ -131,6 +141,12 @@ public class Parser {
         String bouquetName = removePrefix(argument.substring(prefixIndex), REMOVE_FLOWER_PREFIX).trim();
 
         return new RemoveFlowerCommand(flowerName, quantity, bouquetName);
+
+    private static InfoCommand handleInfoCommand(String input) {
+        String flowerName = input.substring(input.indexOf(" ") + 1);
+        assert !flowerName.isEmpty() : "This string is empty";
+        return new InfoCommand(flowerName);
+
     }
 
 }
