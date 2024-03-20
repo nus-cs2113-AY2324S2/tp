@@ -1,6 +1,7 @@
 package seedu.lifetrack.system;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.liquids.liquidlist.LiquidList;
 
 import java.util.Scanner;
 
@@ -15,23 +16,28 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static void readUserInput(CalorieList calorieList) {
+    public static void readUserInput(CalorieList calorieList, LiquidList liquidList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList);
+            handleUserInput(line, calorieList, liquidList);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
-    public static void handleUserInput(String line, CalorieList calorieList) {
+    public static void handleUserInput(String line, CalorieList calorieList, LiquidList liquidList) {
         if (line.trim().isEmpty()) {
             System.out.println("Please enter a non empty Input!");
         } else if (line.startsWith("calories in") || line.startsWith("calories out")) {
             calorieList.addEntry(line);
+        } else if (line.startsWith("liquids in")) {
+            liquidList.addEntry(line);
         } else if (line.startsWith("list")) {
             calorieList.printCalorieList();
-        } else if (line.startsWith("delete")) {
+            liquidList.printLiquidList();
+        } else if (line.startsWith("delete calories")) {
             calorieList.deleteEntry(line);
+        }else if (line.startsWith("delete liquids")) {
+            liquidList.deleteEntry(line);
         }
     }
 

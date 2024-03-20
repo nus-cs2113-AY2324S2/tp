@@ -5,11 +5,10 @@ import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
 
-
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int DELETE_PADDING = 7;
+    private final int DELETE_PADDING = 16;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();

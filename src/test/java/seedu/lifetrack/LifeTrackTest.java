@@ -2,6 +2,7 @@ package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.liquids.liquidlist.LiquidList;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.io.ByteArrayOutputStream;
@@ -10,6 +11,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lifetrack.system.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.ParserLiquid.parseLiquidInput;
 
 
 class LifeTrackTest {
@@ -23,12 +25,12 @@ class LifeTrackTest {
         CalorieList calorieList = new CalorieList();
         calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete 1");
+        calorieList.deleteEntry("delete calories 1");
         assertEquals(initialSize - 1, calorieList.getSize());
         calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
         calorieList.addEntry("calories in desc/Eat c/200 date/2024-03-14");
         initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete 2");
+        calorieList.deleteEntry("delete calories 2");
         assertEquals(initialSize - 1, calorieList.getSize());
     }
 
@@ -37,8 +39,8 @@ class LifeTrackTest {
         CalorieList calorieList = new CalorieList();
         calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete 2"); // Index out of bounds
-        calorieList.deleteEntry("delete -1");
+        calorieList.deleteEntry("delete calories 2"); // Index out of bounds
+        calorieList.deleteEntry("delete calories -1");
         assertEquals(initialSize, calorieList.getSize());
     }
 
@@ -108,5 +110,85 @@ class LifeTrackTest {
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(5, calorieList.getSize());
     }
+    @Test
+    public void testDeleteLiquidValidIndex() {
+        LiquidList liquidList = new LiquidList();
+        liquidList.addEntry("liquids in b/Milo v/200");
+        int initialSize = liquidList.getSize();
+        liquidList.deleteEntry("delete liquids 1");
+        assertEquals(initialSize - 1, liquidList.getSize());
+    }
 
+    @Test
+    public void testDeleteLiquidInvalidIndex() {
+        LiquidList liquidList = new LiquidList();
+        liquidList.addEntry("liquids in b/Milo v/200");
+        int initialSize = liquidList.getSize();
+        liquidList.deleteEntry("delete liquids 2"); // Index out of bounds
+        liquidList.deleteEntry("delete liquids -1");
+        assertEquals(initialSize, liquidList.getSize());
+    }
+
+    @Test
+    public void parseLiquidInput_emptyFields_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in");
+        } catch (InvalidInputException e) {
+            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_incompleteFields_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/Milo");
+        } catch (InvalidInputException e) {
+            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testPrintLiquidListEmpty() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        LiquidList liquidList = new LiquidList();
+        liquidList.printLiquidList();
+        System.setOut(System.out);
+        String expectedOutput = "Your liquid list is empty." + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    public void testPrintLiquidListNonEmpty() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        LiquidList liquidList = new LiquidList();
+        liquidList.addEntry("liquids in b/Milo v/200");
+        liquidList.printLiquidList();
+        System.setOut(System.out);
+        String expectedOutput = "Liquid List:" + lineSeparator +
+                "1. Beverage: Milo, Volume: 200" + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    public void testPrintLiquidListMultipleEntries() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        LiquidList liquidList = new LiquidList();
+        liquidList.addEntry("liquids in b/Milo v/200");
+        liquidList.addEntry("liquids in b/Water v/300");
+        liquidList.addEntry("liquids in b/Juice v/150");
+        liquidList.printLiquidList();
+        System.setOut(System.out);
+        String expectedOutput = "Liquid List:" + lineSeparator +
+                "1. Beverage: Milo, Volume: 200" + lineSeparator +
+                "2. Beverage: Water, Volume: 300" + lineSeparator +
+                "3. Beverage: Juice, Volume: 150" + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+        assertEquals(3, liquidList.getSize());
+    }
 }
