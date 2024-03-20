@@ -7,6 +7,8 @@ import seedu.duke.exceptions.CustomException;
 import java.util.Scanner;
 
 public class Ui {
+    private static final Scanner in = new Scanner(System.in);
+
     private static final String HEADER_ALL_RESULTS = "These are all your results so far:\n";
 
     private static final int NEW_LINE = 48;
@@ -17,8 +19,6 @@ public class Ui {
     public QuestionListByTopic questionListByTopic;
 
     public String[] inputAnswers;
-
-    private static final Scanner in = new Scanner(System.in);
 
     public void readCommands(
             Ui ui, QuestionsList questionsList, TopicList topicList,
