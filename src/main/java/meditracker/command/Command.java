@@ -8,11 +8,11 @@ public abstract class Command {
     private MedicationManager medicationManager;
 
     /**
-     * Executes the command.
+     * Executes the command
      *
-     * @param medicationManager      ArrayList of medicines.
-     * @param dailyMedicationManager List of dailyMedication
-     * @param ui                     Ui object.
+     * @param medicationManager      The MedicationList object representing the list of medications.
+     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
+     * @param ui                     The Ui object used to interact with the user interface.
      */
     public abstract void execute(MedicationManager medicationManager,
                                  DailyMedicationManager dailyMedicationManager,

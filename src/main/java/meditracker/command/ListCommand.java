@@ -22,9 +22,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the list command
-     * @param medicationManager List of medicines.
-     * @param ui                Ui object.
+     * Executes the list command.
+     *
+     * @param medicationManager      The MedicationManager object representing the list of medications.
+     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
+     * @param ui                     The Ui object used to interact with the user interface.
      */
     @Override
     public void execute(MedicationManager medicationManager,
