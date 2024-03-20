@@ -26,30 +26,30 @@ public class Ui {
     /**
      * Prints the farewell greetings
      */
-    public static void printBye() {
+    public static void printBye(){
         printLine();
         System.out.println("Thank you for using Omnitravel");
         System.out.println("We hope to see you again! Goodbye!");
         printLine();
     }
 
-    public static void printLine() {
+    public static void printLine(){
         System.out.println("____________________________________________________________");
     }
 
-    public static void printException(OmniException exception) {
+    public static void printException(OmniException exception){
         printLine();
         System.out.println("Warning! " + exception.getMessage());
     }
 
-    public static void printNoSuchElementException(NoSuchElementException exception) {
+    public static void printNoSuchElementException(NoSuchElementException exception){
         printLine();
         System.out.println("Warning! " + exception.getMessage());
     }
 
-    public static void helpCommand() {
+    public static void helpCommand(){
         System.out.println("These are the available commands!");
         System.out.println("1. list\n2. add <insert travel activity>\n3. delete <insert activity number>\n" +
-                "4. find <insert keyword>\n5. help\n6. bye\n");
+                           "4. find <insert keyword>\n5. help\n6. bye\n");
     }
 }

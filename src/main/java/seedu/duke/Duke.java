@@ -53,18 +53,6 @@ public class Duke {
                     Ui.printLine();
                     break;
 
-                case "tag":
-                    Ui.printLine();
-                    Parser.tagCommand(command, list);
-                    Ui.printLine();
-                    break;
-
-                case "untag":
-                    Ui.printLine();
-                    Parser.removeTagCommand(command, list);
-                    Ui.printLine();
-                    break;
-
                 case "help":
                     Ui.printLine();
                     Ui.helpCommand();
@@ -88,4 +76,10 @@ public class Duke {
             }
         }
     }
+
+
+
 }
+
+
+

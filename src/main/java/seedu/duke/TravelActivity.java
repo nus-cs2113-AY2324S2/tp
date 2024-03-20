@@ -5,9 +5,6 @@ public class TravelActivity {
     private String travelActivity;
     /** Travel activity status */
     private boolean taskIsDone = false;
-    /** Travel activity tag */
-    private String tag;
-
     public TravelActivity(String line){
         travelActivity = line;
     }
@@ -35,19 +32,4 @@ public class TravelActivity {
 
     public boolean getTaskStatus() {return taskIsDone;}
 
-    /**
-     * Gets the tag of the travel activity
-     * @return The tag of the travel activity
-     */
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public void removeTag() {
-        this.tag = "";
-    }
 }
