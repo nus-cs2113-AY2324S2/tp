@@ -14,11 +14,15 @@ public class FindCommand extends Command {
      * @param commandString The command string.
      * @param taskExpression The task expression.
      */
-    public FindCommand(String commandString, String taskExpression) {
+    public FindCommand(String commandString, String taskExpression) throws LongAhException {
         super(commandString, taskExpression);
         String[] subCommandTaskExpSplit = this.taskExpression.split(" ", 2);
         this.subCommand = subCommandTaskExpSplit[0].toLowerCase();
-        this.taskExpression = subCommandTaskExpSplit[1];
+        if (subCommandTaskExpSplit.length > 1) {
+            this.taskExpression = subCommandTaskExpSplit[1];
+        } else {
+            throw new LongAhException(ExceptionMessage.INVALID_FIND_COMMAND);
+        }
     }
 
     public void execute(Group group) throws LongAhException {

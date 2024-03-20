@@ -30,15 +30,15 @@ public enum ExceptionMessage {
     ", 'exit'."),
     COMMAND_NOT_IMPLEMENTED ("This feature has yet to be implemented."),
     INVALID_ADD_COMMAND ("Invalid command format." +
-            " Use 'add member NAME' or 'add transaction LENDER p/BORRWER1 a/AMOUNT1 ...."),
+            " Use 'add member NAME' or 'add transaction LENDER p/BORRWER1 a/AMOUNT1 ..."),
     INVALID_LIST_COMMAND ("Invalid command format." +
-        " Use 'list members', 'list transactions', or 'list debts'"),
+            " Use 'list members', 'list transactions', or 'list debts'"),
     INVALID_FIND_COMMAND ("Invalid command format." +
             " Use 'find transactions NAME' or 'find debts NAME'"),
     INVALID_SETTLEUP_COMMAND ("Invalid command format." +
             " Use 'settleUp PERSON'"),
     INVALID_DELETE_COMMAND ("Invalid command format." +
-            " Use 'delete INDEX'"),
+            " Use 'delete transaction INDEX'"),
     INVALID_CLEAR_COMMAND ("Invalid command format." +
             " Use 'clear'"),
     INVALID_EXIT_COMMAND ("Invalid command format." +
