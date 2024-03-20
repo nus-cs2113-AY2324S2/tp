@@ -76,10 +76,8 @@ class OutputTest {
         new Run("40:10", "10.3");
 
 
-        String expected = Constant.PARTITION_LINE + "\n" +
-                "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
-                "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\tNA\n" +
-                Constant.PARTITION_LINE + "\n";
+        String expected = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
+                "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\tNA\n";
         expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
@@ -90,9 +88,8 @@ class OutputTest {
     void printLatestRun_noRun_expectNoRunMessage() {
         // Test Setup
 
-        String expected = Constant.PARTITION_LINE + "\n" +
-                "\u001B[31mError: No runs found! You need to add a run first!\u001B[0m\n" +
-                Constant.PARTITION_LINE + "\n";
+        String expected = "\u001B[31mError: No runs found! You need to add a run first!\u001B[0m\n";
+
         expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());

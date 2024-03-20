@@ -31,8 +31,10 @@ public class Output {
         System.out.println("new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
-        System.out.println("history /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked");
-        System.out.println("latest /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked");
+        System.out.println("history /view:[run/gym/bmi/period] - " +
+                "Show history of runs/gyms/bmi records/periods tracked");
+        System.out.println("latest /view:[run/gym/bmi/period] - " +
+                "Show history of runs/gyms/bmi records/periods tracked");
         System.out.println("help - Show this help message");
         System.out.println("exit - Exit the program");
         printLine();
