@@ -33,6 +33,7 @@ public class BookList {
         if (index < 0 || index > books.size()) {
             throw new IndexOutOfBoundsException("Book index out of range.");
         }
+        assert books.get(index) != null : "Retrieved book should not be null";
         return books.get(index);
     }
 
@@ -43,6 +44,7 @@ public class BookList {
     public void addBook(String title) {
         books.add(new Book(title));
         Ui.addBookMessage(title);
+        assert !books.isEmpty() : "Book list should not be empty after adding a book";
     }
 
     /**
@@ -67,6 +69,7 @@ public class BookList {
             throw new IndexOutOfBoundsException("Book index out of range.");
         }
         books.get(index - 1).markBookAsRead();
+        assert books.get(index - 1).isRead() : "Book should be marked as read";
     }
 
     /**
@@ -78,6 +81,7 @@ public class BookList {
             throw new IndexOutOfBoundsException("Book index out of range.");
         }
         books.get(index - 1).markBookAsUnread();
+        assert !books.get(index - 1).isRead() : "Book should not be marked as read";
     }
 
     /**
