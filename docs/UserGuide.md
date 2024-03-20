@@ -80,7 +80,11 @@ Expected Output:
 
 ```
 new /e:run /d:5.24 /t:25:23 /date:19-03-2024
-Added: run | 5.24 | 25:23 | 19-03-2024
+____________________________________________________________
+Successfully added a new run session
+Type	Time		Distance	Pace		Date
+run 	25:23		5.24		4:51/km		2024-03-19
+____________________________________________________________
 ```
 
 ### Workout: Gym
@@ -92,11 +96,11 @@ Format: `new /e:gym /n:NUMBER_OF_STATIONS`
 * All parameters must be provided in correct order as shown above.
 * `NUMBER_OF_STATIONS` is a **positive integer**  representing the number of stations for one Gym session.
 
-Examples: `new /e:gym /n:4`
+Examples: `new /e:gym /n:2`
 
 #### Adding Gym Stations
 
-Upon entry of the `new /e:gym` command, the bot will prompt for further details:
+Upon entry of the `new /e:gym` command, the bot will prompt for further details for each station done:
 
 Format: `STATION_NAME /s:SET /r:REPS /w:WEIGHT`
 
@@ -114,14 +118,14 @@ new /e:gym /n:2
 ____________________________________________________________
 Please enter the details of station 1. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
 ____________________________________________________________
-Bench Press /s:4 /r:10 /w:75
+Bench Press /s:4 /r:10 /w:5
 ____________________________________________________________
 Please enter the details of station 2. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
 ____________________________________________________________
 Squat /s:4 /r:5 /w:100
 ____________________________________________________________
 Successfully added a new gym session
-Bench Press: 4 sets of 10 reps at 75 KG
+Bench Press: 4 sets of 10 reps at 5 KG
 Squat: 4 sets of 5 reps at 100 KG
 ____________________________________________________________
 ```
@@ -142,10 +146,12 @@ Examples:
 Expected Output:
 ```
 health /h:bmi /height:1.70 /weight:75.42 /date:19-03-2024
+____________________________________________________________
 Added: bmi | 1.70 | 75.42 | 19-03-2024
 2024-03-19
 Your BMI is 26.1
 You're overweight.
+____________________________________________________________
 ```
 
 ### Health: Period
@@ -164,9 +170,11 @@ Examples:
 Expected Output:
 ```
 health /h:period /start:09-03-2022 /end:16-03-2022
+____________________________________________________________
 Added: period | 09-03-2022 | 16-03-2022
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
+____________________________________________________________
 ```
 
 ### History
@@ -186,28 +194,10 @@ Expected Output:
 history /view:run
 ____________________________________________________________
 Index		Type	Time		Distance	Pace		Date
-1.			run 	25:23		5.24		4:51/km		2024-03-19
+1.		run 	25:00		5.00		5:00/km		2024-03-17
+2.		run 	25:23		5.24		4:51/km		2024-03-18
+3.		run 	25:23		5.24		4:51/km		2024-03-19
 ____________________________________________________________
-
-history /view:gym
-____________________________________________________________
-Gym Session 1
-Bench Press: 4 sets of 10 reps at 75 KG
-Squat: 4 sets of 5 reps at 100 KG
-____________________________________________________________
-
-history /view:bmi
-____________________________________________________________
-2024-03-19
-Your BMI is 26.1
-You're overweight.
-____________________________________________________________
-
-history /view:period
-____________________________________________________________
-Period Start: 2022-03-09 Period End: 2022-03-16
-Period Length: 8 days
-___________________________________________________________
 ```
 
 ### Latest
@@ -240,6 +230,7 @@ Format: `help`
 Expected output:
 
 ```
+help
 ____________________________________________________________
 Commands List:
 
@@ -264,6 +255,7 @@ Expected Output:
 
 ```
 exit
+Initiating PulsePilot landing sequence...
 ____________________________________________________________
 PulsePilot successful touchdown
 See you soon, Captain!
