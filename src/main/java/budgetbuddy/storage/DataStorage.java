@@ -1,5 +1,8 @@
 package budgetbuddy.storage;
 
+import budgetbuddy.account.Account;
+import budgetbuddy.transaction.type.Expense;
+import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
 
 import java.io.File;
@@ -29,5 +32,17 @@ public class DataStorage {
     private static String getStringToWrite(Transaction t) {
         return t.getDescription() + " ," + t.getCategory() + " ," + t.getTransactionType() + " ," + t.getDate()
                 + " ." + t.getAmount() + "\n";
+    }
+
+    private Transaction processData(String s, Account account) {
+        String[] transactionInfo = s.split(" ,");
+
+        switch (transactionInfo[2]) {
+        case "Income":
+            return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]), transactionInfo[1], transactionInfo[3], account);
+        case "Expense":
+            return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]), transactionInfo[1], transactionInfo[3], account);
+        }
+        return null;
     }
 }
