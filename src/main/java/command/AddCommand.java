@@ -13,6 +13,14 @@ public class AddCommand extends Command {
     private final Item toAdd;
 
     public AddCommand(String itemName, int quantity, String uom, String category) {
+        System.out.println(itemName);
+        System.out.println(quantity);
+        System.out.println(uom);
+        System.out.println(category);
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.uom = uom;
+        this.category = category;
         this.toAdd = new Item(itemName, quantity, uom, category);
     }
 
