@@ -3,21 +3,22 @@ package seedu.binbash;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class ItemList {
+    private static final Logger ITEMLIST_LOGGER = Logger.getLogger("ItemList");
+
     private final List<Item> itemList;
 
     public ItemList(ArrayList<Item> itemList) {
         this.itemList = itemList;
+        ITEMLIST_LOGGER.setLevel(Level.WARNING);
     }
 
     public List<Item> getItemList() {
         return itemList;
     }
-
-    /**
-     * Test method
-     */
 
     public int getItemCount() {
         return itemList.size();
@@ -27,7 +28,9 @@ public class ItemList {
                           double itemSalePrice, double itemCostPrice) {
         Item item = new Item(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
 
+        int beforeSize = itemList.size();
         itemList.add(item);
+        assert itemList.size() == (beforeSize + 1);
 
         String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
                 + System.lineSeparator() + item;
@@ -35,7 +38,9 @@ public class ItemList {
     }
 
     public String deleteItem(int index) {
+        int beforeSize = itemList.size();
         Item tempItem = itemList.remove(index - 1);
+        assert itemList.size() == (beforeSize - 1);
 
         String output = "Got it! I've removed the following item:"
                 + String.format("\t%s", tempItem);
@@ -48,6 +53,7 @@ public class ItemList {
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
             if (currentItem.getItemName().equals(keyword)) {
+                ITEMLIST_LOGGER.log(Level.INFO, "first matching item at index " + i + " found.");
                 targetIndex = i + 1;
                 break;
             }
@@ -76,6 +82,7 @@ public class ItemList {
                     + printList(filteredList);
         }
 
+        assert filteredList.size() > 0 && filteredList.size() <= itemList.size();
         return output;
     }
 
