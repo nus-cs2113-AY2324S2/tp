@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class MotivationalQuotes {
 
-    public final static String[] MOTIVATIONALQUOTELIST = {
+    public static final String[] MOTIVATIONALQUOTELIST = {
         "The only way to do great work is to love what you do. - Steve Jobs",
         "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
         "Believe you can and you're halfway there. - Theodore Roosevelt",
@@ -12,11 +12,11 @@ public class MotivationalQuotes {
         "You are never too old to set another goal or to dream a new dream. - C.S. Lewis",
         "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
         "Success is not the key to happiness. Happiness is the key to success. " +
-        "If you love what you are doing, you will be successful. - Albert Schweitzer",
+            "If you love what you are doing, you will be successful. - Albert Schweitzer",
         "The way to get started is to quit talking and begin doing. - Walt Disney",
         "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
         "After a while you learn to ignore the " +
-        "names people call you and just trust who you are. - Shrek",
+            "names people call you and just trust who you are. - Shrek",
         "Your limitation—it's only your imagination.",
         "Push yourself, because no one else is going to do it for you.",
         "Sometimes later becomes never. Do it now.",
@@ -38,7 +38,7 @@ public class MotivationalQuotes {
         "In the middle of difficulty lies opportunity.",
         "You are capable of more than you know.",
         "Believe in yourself and all that you are. " +
-        "Know that there is something inside you that is greater than any obstacle.",
+            "Know that there is something inside you that is greater than any obstacle.",
         "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart."};
 
     public static String getQoute() {
