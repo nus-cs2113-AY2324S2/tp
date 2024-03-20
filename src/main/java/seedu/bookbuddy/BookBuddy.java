@@ -26,9 +26,6 @@ public class BookBuddy {
 
         //noinspection InfiniteLoopStatement
         while (true) {
-            /*if (!input.hasNextLine()) { // Check if there is another line of input
-                break; // Exit the loop if there is no input
-            }*/
             String userInput = input.nextLine().trim();
             if (userInput.isEmpty()) {
                 // If the input is empty, do not call parseCommand and just prompt for input again.
