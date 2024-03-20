@@ -1,6 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
@@ -30,8 +31,15 @@ public class TransactionList {
         UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
-    public void removeTransaction(String input, Account account){
-        int id = Integer.parseInt(input.substring(DELETE_BEGIN_INDEX).trim()) - INDEX_OFFSET;
+    public void removeTransaction(String input, Account account) throws EmptyArgumentException {
+        if (input.trim().length() < DELETE_BEGIN_INDEX) {
+            throw new EmptyArgumentException("Index is not specified.");
+        }
+        String data = input.substring(DELETE_BEGIN_INDEX).trim();
+        if (!isInteger(data)) {
+            throw new NumberFormatException(data);
+        }
+        int id = Integer.parseInt(data) - INDEX_OFFSET;
         int size = transactions.size();
         if (id >= LOWER_BOUND && id < size) {
             String itemRemoved = transactions.get(id).toString();
@@ -40,6 +48,16 @@ public class TransactionList {
             UserInterface.printDeleteMessage(itemRemoved, account.getBalance());
         } else {
             throw new IndexOutOfBoundsException(size);
+        }
+    }
+
+    // Checks whether the input index is an Integer
+    public static boolean isInteger(String data) {
+        try {
+            Integer.parseInt(data);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
   

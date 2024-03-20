@@ -42,7 +42,7 @@ public class Parser {
         if (type.equalsIgnoreCase("income")) {
             return new Income(description, Double.parseDouble(amount), category, date, account);
         } else if (type.equalsIgnoreCase("expense")) {
-            return  new Expense(description, Double.parseDouble(amount), category, date, account);
+            return new Expense(description, Double.parseDouble(amount), category, date, account);
         }
         return null;
     }

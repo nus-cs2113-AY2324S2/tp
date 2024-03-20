@@ -1,6 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +40,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void removeTransaction_removesCorrectTransaction() {
+    public void removeTransaction_removesCorrectTransaction() throws EmptyArgumentException {
         Transaction testTransaction1 = new Income("Test1", 100, "Category1",
                 "14-03-2024", account);
         Transaction testTransaction2 = new Income("Test2", 200, "Category2",
@@ -61,5 +62,25 @@ public class TransactionListTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> transactionList.removeTransaction(
                 "delete 2", account));
+    }
+
+    @Test
+    public void removeTransaction_withMissingIndex_throwsEmptyArgumentException() {
+        Transaction testTransaction = new Income("Test", 100, "Personal",
+                "14-03-2024", account);
+        transactionList.addTransaction(testTransaction);
+
+        assertThrows(EmptyArgumentException.class, () -> transactionList.removeTransaction(
+                "delete", account));
+    }
+
+    @Test
+    public void removeTransaction_withInvalidIndex_throwsNumberFormatException() {
+        Transaction testTransaction = new Income("Test", 100, "Personal",
+                "14-03-2024", account);
+        transactionList.addTransaction(testTransaction);
+
+        assertThrows(NumberFormatException.class, () -> transactionList.removeTransaction(
+                "delete one", account));
     }
 }
