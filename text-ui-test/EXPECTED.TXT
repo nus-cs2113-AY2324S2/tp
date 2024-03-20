@@ -10,29 +10,13 @@ ______ _                       _____  __   __   _____
 What is your name?
 Hello CaiShenYe
 ************************************************
+Here are the topics in CS2113:
+1. topic1
+2. topic2
+Please choose a topic to play:
+************************************************
 Input a command player! // TODO: show possible commands
 -1 HP coz invalid commandTODO: show possible commands
-Input a command player! // TODO: show possible commands
-The solution for question 1:
-solution1
-Input a command player! // TODO: show possible commands
-The solution for question 2:
-solution2
-Input a command player! // TODO: show possible commands
-The solutions are :
-Solution for question 1:
-solution1
-
-Solution for question 2:
-solution2
-
-
-Input a command player! // TODO: show possible commands
-The solution for question 1:
-explanation1
-Input a command player! // TODO: show possible commands
-The solution for question 2:
-explanation2
 Input a command player! // TODO: show possible commands
 bye bye, get more sleep zzz
 ************************************************
