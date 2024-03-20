@@ -150,4 +150,7 @@ public class Constant {
     public static final int SUBSTRING_DISTANCE = 1;
     public static final int SUBSTRING_TIME = 2;
     public static final int SUBSTRING_DATE = 3;
+
+    // PulsePilot UI replies
+    public static final String EXIT_MESSAGE = "Initiating PulsePilot landing sequence...";
 }

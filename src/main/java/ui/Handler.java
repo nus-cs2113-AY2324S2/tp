@@ -29,7 +29,6 @@ public class Handler {
      *
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
-
     public static void processInput() {
         Scanner in = new Scanner(System.in);
 
@@ -42,6 +41,7 @@ public class Handler {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
                 case EXIT:
+                    System.out.println(Constant.EXIT_MESSAGE);
                     return;
 
                 case NEW:
