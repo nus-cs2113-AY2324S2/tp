@@ -1,6 +1,9 @@
 package classify;
 
 import classify.student.StudentList;
+import classify.user.InputParsing;
+import classify.user.Ui;
+import classify.user.UserInput;
 
 import java.util.Scanner;
 
@@ -11,9 +14,11 @@ public class Classify {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+
         // @@author ParthGandhiNUS
         // CAA: 9 March 2024 1pm
         Ui.printWelcomeMessage();
+        
         // Takes in only the first word input by the user
         String[] userCommand = UserInput.processInput(in.nextLine());
 

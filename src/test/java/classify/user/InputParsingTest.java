@@ -1,6 +1,7 @@
-package classify;
+package classify.user;
 
 import classify.student.Student;
+
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

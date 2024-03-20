@@ -45,9 +45,11 @@ public class StudentList {
         case 0:
             System.out.println(ZERO_STUDENT_MESSAGE);
             break;
+
         case 1:
             System.out.println(ONE_STUDENT_MESSAGE);
             break;
+
         default:
             System.out.println(CURRENTLY_THERE_ARE + numberOfStudents + STUDENTS_IN_THE_LIST);
             break;
@@ -80,7 +82,9 @@ public class StudentList {
      * @param name The string to search among the names of the student to remove.
      */
     public void removeStudent(String name) {
+
         for (Student s: studentList) {
+            
             if (s.getName().equals(name)) {
                 studentList.remove(s);
                 return;

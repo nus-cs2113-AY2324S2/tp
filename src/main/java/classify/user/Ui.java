@@ -1,4 +1,6 @@
-package classify;
+package classify.user;
+
+import classify.student.Student;
 
 public class Ui {
     //@@author ParthGandhiNUS
@@ -20,6 +22,10 @@ public class Ui {
     private static final String SUBJECT_MESSAGE = "Subject: ";
     private static final String STUDENT_GRADES_PROMPT = "Current marks out of 100 (blank to skip) : ";
     private static final String STUDENT_GRADES_MESSAGE = "Current marks out of 100: ";
+    private static final String STUDENT_PHONE_MESSAGE = "Phone Number: ";
+    private static final String STUDENT_GENDER_MESSAGE = "Gender: ";
+    private static final String STUDENT_PAYMENT_MESSAGE = "Last Payment Date: ";
+    private static final String STUDENT_REMARKS_MESSAGE = "Remarks: ";
 
     //@author alalal47
     /**
@@ -86,6 +92,13 @@ public class Ui {
         System.out.println(STUDENT_DETAILS_MESSAGE);
     }
 
+    public static void printStudentDetails(Student student) {
+        System.out.println(STUDENT_PHONE_MESSAGE + student.getAttributes().getPhoneNumber());
+        System.out.println(STUDENT_GENDER_MESSAGE + student.getAttributes().getGender());
+        System.out.println(STUDENT_PAYMENT_MESSAGE + student.getAttributes().getLastPaymentDate());
+        System.out.println(STUDENT_REMARKS_MESSAGE + student.getAttributes().getRemarks());
+    }
+
     public static void printStudentName(String name) {
         System.out.println(STUDENT_NAME_MESSAGE + name);
     }
@@ -121,4 +134,5 @@ public class Ui {
     public static void printStudentGradesPrompt() {
         System.out.println(STUDENT_GRADES_PROMPT);
     }
+
 }

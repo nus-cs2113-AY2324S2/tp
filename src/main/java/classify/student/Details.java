@@ -1,21 +1,16 @@
 package classify.student;
 
-// import classify.classgroup.Class;
-import java.util.ArrayList;
-
 /**
  * Important details of a student the tuition centre
  * has to keep track of.
  */
-public class Details {
+public abstract class Details {
 
     //@@author Cryolian
-    public String gender = "unknown";
-    public int phoneNumber = 0;
-    // public Class currentClass = new Class(0, "Unknown");
-    public ArrayList<String> subjects = new ArrayList<>();
-    public String lastPaymentDate = "unknown";
-    public String remarks = "NA";
+    protected String gender;
+    protected int phoneNumber = 0;
+    protected String lastPaymentDate = "unknown";
+    protected String remarks = "NA";
 
     public Details() {
         
