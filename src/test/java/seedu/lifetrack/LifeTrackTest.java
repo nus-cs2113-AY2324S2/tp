@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.Parser.parseCaloriesInput;
 
 
 class LifeTrackTest {
@@ -21,12 +21,12 @@ class LifeTrackTest {
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories out a/Run c/200 d/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 1");
         assertEquals(initialSize - 1, calorieList.getSize());
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
-        calorieList.addEntry("calories in d/2024-03-14 t/13:00 a/Eat c/200");
+        calorieList.addEntry("calories out a/Run c/200 d/2024-03-14");
+        calorieList.addEntry("calories in a/Eat c/200 d/2024-03-14");
         initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 2");
         assertEquals(initialSize - 1, calorieList.getSize());
@@ -35,7 +35,7 @@ class LifeTrackTest {
     @Test
     public void testDeleteCalorieInvalidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories out a/Run c/200 d/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 2"); // Index out of bounds
         calorieList.deleteEntry("delete -1");
@@ -54,7 +54,7 @@ class LifeTrackTest {
     @Test
     public void parseCaloriesInput_incompleteFields_exceptionThrown() {
         try {
-            parseCaloriesInput("calories in d/220224 t/");
+            parseCaloriesInput("calories in d/220224");
         } catch (InvalidInputException e) {
             assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
         }
@@ -78,7 +78,7 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories in a/Run c/200 d/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         String expectedOutput = "Caloric List:" + lineSeparator + "1. Activity: Run, Calories: 200" + lineSeparator;
@@ -91,11 +91,11 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in d/2024-03-14 t/12:00 a/Run c/200");
-        calorieList.addEntry("calories out d/2024-03-14 t/13:00 a/Walk c/150");
-        calorieList.addEntry("calories in d/2024-03-14 t/14:00 a/Eat c/500");
-        calorieList.addEntry("calories out d/2024-03-14 t/15:00 a/Run c/250");
-        calorieList.addEntry("calories in d/2024-03-14 t/16:00 a/Eat c/300");
+        calorieList.addEntry("calories in a/Run c/200 d/2024-03-14");
+        calorieList.addEntry("calories out a/Walk c/150 d/2024-03-14");
+        calorieList.addEntry("calories in a/Eat c/500 d/2024-03-14");
+        calorieList.addEntry("calories out a/Run c/250 d/2024-03-14");
+        calorieList.addEntry("calories in a/Eat c/300 d/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         String expectedOutput = "Caloric List:" + lineSeparator +

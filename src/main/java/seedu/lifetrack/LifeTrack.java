@@ -1,7 +1,7 @@
 package seedu.lifetrack;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.ui.Ui;
+import seedu.lifetrack.system.Ui;
 
 import java.util.Scanner;
 
