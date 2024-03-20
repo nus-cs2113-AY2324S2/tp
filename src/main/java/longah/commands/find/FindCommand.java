@@ -34,6 +34,16 @@ public class FindCommand extends Command {
                     new FindTransactionCommand(fullCommandString, this.taskExpression);
             findTransactionCommand.execute(group);
             break;
+        case "lender":
+            FindLenderCommand findLenderCommand =
+                    new FindLenderCommand(fullCommandString, this.taskExpression);
+            findLenderCommand.execute(group);
+            break;
+        case "borrower":
+            FindBorrowerCommand findBorrowerCommand =
+                    new FindBorrowerCommand(fullCommandString, this.taskExpression);
+            findBorrowerCommand.execute(group);
+            break;
         case "debts":
             FindDebtCommand findDebtCommand =
                     new FindDebtCommand(fullCommandString, this.taskExpression);

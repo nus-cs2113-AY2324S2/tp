@@ -100,11 +100,55 @@ public class TransactionList {
      * @param lenderName User input containing the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
-    public String findTransactions(String lenderName) throws LongAhException {
+    public String findLender(String lenderName) throws LongAhException {
         int index = 1;
         String outString = String.format("%s owns the following list of transactions.", lenderName) + "\n";
         for (Transaction transaction : this.transactions) {
-            if (transaction.isInvolved(lenderName)) {
+            if (transaction.isLender(lenderName)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index++;
+            }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
+     *
+     * @param lenderName User input containing the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findBorrower(String borrowerName) throws LongAhException {
+        int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", borrowerName) + "\n";
+        for (Transaction transaction : this.transactions) {
+            if (transaction.isBorrower(borrowerName)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index++;
+            }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
+     *
+     * @param lenderName User input containing the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findTransactions(String name) throws LongAhException {
+        int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", name) + "\n";
+        for (Transaction transaction : this.transactions) {
+            if (transaction.isInvolved(name)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
