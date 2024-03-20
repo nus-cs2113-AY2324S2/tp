@@ -11,7 +11,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(Dashboard dashboard) {
-        //TODO implement proper expense deleting
         dashboard.getExpenseManager().delete(indexToDelete);
     }
 }
