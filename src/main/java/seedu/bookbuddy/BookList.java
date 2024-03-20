@@ -53,10 +53,9 @@ public class BookList {
         if (index < 0 || index > books.size()) {
             throw new IndexOutOfBoundsException("Book index out of range.");
         }
-        //Book book = books.get(index - 1);
-        //books.remove(index - 1);
         Ui.removeBookMessage(index - 1);
         books.remove(index - 1);
+        assert books.size() >= 0 : "Book list size should not be negative after deletion";
     }
 
     /**
