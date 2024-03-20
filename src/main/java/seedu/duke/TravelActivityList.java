@@ -39,7 +39,11 @@ public class TravelActivityList {
             }
             String checked = activity.getActivityStatus()? "[X]" : "[ ]";
             activityCount++;
-            System.out.println(checked + " " + activityCount +". " + activity);
+            if(activity.getTag()==null || activity.getTag().isEmpty()){
+                System.out.println(checked + " " + activityCount +". " + activity);
+            } else {
+                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getTag() + ")" );
+            }
         }
         int finalactivityCount = noOfActivities;
         assert finalactivityCount == activityCount : "Index out of bounds while listing activities";
@@ -168,7 +172,7 @@ public class TravelActivityList {
         TravelActivity taggedTask = travelActivities.get(indexOfTask);
         taggedTask.setTag(tag);
         System.out.println("I have tagged this task:");
-        System.out.println(taggedTask + "(" + tag + ")");
+        System.out.println(taggedTask + " (" + tag + ")");
     }
 
     /**

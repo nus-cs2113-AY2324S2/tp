@@ -8,6 +8,12 @@ delete 2
 add Go Malaysia
 add Go Australia
 find Australia
+tag 1 Asia
+list
+untag 1
+tag 78
+tag 79 hello
+untag 78
 check
 uncheck 5
 delete 5

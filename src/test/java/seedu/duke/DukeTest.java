@@ -13,6 +13,8 @@ class DukeTest {
         TravelActivityList travelActivityList = new TravelActivityList();
         travelActivityList.addTravelActivity(new TravelActivity("visit museum"));
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
+        travelActivityList.addTravelActivity(new TravelActivity("visit home"));
+        assertEquals("visit home", travelActivityList.getDescription("visit home"));
     }
 
     @Test
