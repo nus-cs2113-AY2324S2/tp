@@ -78,60 +78,60 @@ public class Parser {
     }
 
 
-//    private Command prepareAdd(String args) throws CommandFormatException{
-//        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-//        // Validate arg string format
-//        if (!matcher.matches()) {
-//            throw new CommandFormatException(CommandType.ADD);
-//            return IncorrectCommand;
-//        }
-//        try {
-//            return new AddCommand(
-//                    matcher.group("itemName"),
-//                    matcher.group("quantity"),
-//                    matcher.group("uom")
-//            );
-//
-//        } catch (CommandFormatException e) {
-//            throw new CommandFormatException(CommandType.ADD);
-//            return IncorrectCommand;
-//        }
-//    }
-//
-//    private Command prepareDelete(String args) throws CommandFormatException{
-//        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
-//        // Validate arg string format
-//        if (!matcher.matches()) {
-//            throw new CommandFormatException(CommandType.DELETE);
-//            return IncorrectCommand;
-//        }
-//        try {
-//            return new DeleteCommand(matcher.group("itemName");
-//
-//        } catch (CommandFormatException e) {
-//            throw new CommandFormatException(CommandType.DELETE);
-//            return IncorrectCommand;
-//        }
-//    }
-//
-//    private Command prepareEdit(String args) throws CommandFormatException{
-//        final Matcher matcher = EDIT_COMMAND_FORMAT.matcher(args.trim());
-//        // Validate arg string format
-//        if (!matcher.matches()) {
-//            throw new CommandFormatException(CommandType.EDIT);
-//            return IncorrectCommand;
-//        }
-//        try {
-//            return new EditCommand(
-//                    matcher.group("itemName"),
-//                    matcher.group("newQuantity")
-//            );
-//
-//        } catch (CommandFormatException e) {
-//            throw new CommandFormatException(CommandType.EDIT);
-//            return IncorrectCommand;
-//        }
-//    }
+/*    private Command prepareAdd(String args) throws CommandFormatException{
+        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.ADD);
+            return IncorrectCommand;
+        }
+        try {
+            return new AddCommand(
+                    matcher.group("itemName"),
+                    matcher.group("quantity"),
+                    matcher.group("uom")
+            );
+
+        } catch (CommandFormatException e) {
+            throw new CommandFormatException(CommandType.ADD);
+            return IncorrectCommand;
+        }
+    }
+
+    private Command prepareDelete(String args) throws CommandFormatException{
+        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.DELETE);
+            return IncorrectCommand;
+        }
+        try {
+            return new DeleteCommand(matcher.group("itemName");
+
+        } catch (CommandFormatException e) {
+            throw new CommandFormatException(CommandType.DELETE);
+            return IncorrectCommand;
+        }
+    }
+
+    private Command prepareEdit(String args) throws CommandFormatException{
+        final Matcher matcher = EDIT_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.EDIT);
+            return IncorrectCommand;
+        }
+        try {
+            return new EditCommand(
+                    matcher.group("itemName"),
+                    matcher.group("newQuantity")
+            );
+
+        } catch (CommandFormatException e) {
+            throw new CommandFormatException(CommandType.EDIT);
+            return IncorrectCommand;
+        }
+    }*/
 }
 
 

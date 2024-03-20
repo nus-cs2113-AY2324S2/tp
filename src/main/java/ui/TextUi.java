@@ -16,7 +16,7 @@ public class TextUi {
         this.in = new Scanner(System.in);
     }
 
-    public static String getUserInput() {
+    public String getUserInput() {
         System.out.println("Enter Command: ");
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
@@ -65,5 +65,3 @@ public class TextUi {
         }
     }*/
 }
-
-
