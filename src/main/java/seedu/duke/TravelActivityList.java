@@ -164,7 +164,7 @@ public class TravelActivityList {
      * Removes the tag on a travel activity
      * @param taskNumber The travel activity number on the list
      */
-    public void removeTag ( int taskNumber) throws OmniException {
+    public void removeTag(int taskNumber) throws OmniException {
         assert taskNumber != 0 : "There is no task in the list";
         if (taskNumber > travelActivities.size()) {
             throw new OmniException("Travel activity cannot be found");
@@ -173,7 +173,7 @@ public class TravelActivityList {
         TravelActivity taggedTask = travelActivities.get(indexOfTask);
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
-        System.out.println(taggedTask);
+        System.out.println(taggedTask); 
     }
 
 }
