@@ -55,8 +55,10 @@ class NewsOnTheGoTest {
     }
 
     // UserPreferences Tests
-    private UserPreferences userPreferences;
     private static final String PREFERENCES_FILE = "userPreferences.txt";
+
+    private UserPreferences userPreferences;
+
 
     @BeforeEach
     void setUpUserPreferences() {
