@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import parser.Parser;
+import ui.TextUi;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -35,6 +36,6 @@ public class Duke {
         do {
             userInput = ui.getUserCommand();
             parser.parseInput(userInput);
-        } while (!userInput.equals("done"));
+        } while (!parser.isExitCommandDetected);
     }
 }
