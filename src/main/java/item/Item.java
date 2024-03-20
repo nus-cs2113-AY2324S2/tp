@@ -4,12 +4,12 @@ public class Item {
     public static int numberOfItems;
     private final String itemName;
     private int quantity;
-    private String UOM;
+    private String uOM;
 
     public Item(String name, int quantity, String uom) {
         this.itemName = name;
         this.quantity = quantity;
-        this.UOM = uom;
+        this.uOM = uom;
         numberOfItems++;
     }
 
