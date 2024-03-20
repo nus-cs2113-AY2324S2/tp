@@ -230,4 +230,13 @@ public class MemberList {
     public double getMemberBalance(String name) throws LongAhException {
         return getMember(name).getBalance();
     }
+
+    /**
+     * Iterates through the members list and clears their balances..
+     */
+    public void clearBalances() {
+        for (Member member : members) {
+            member.clearBalance();
+        }
+    }
 }

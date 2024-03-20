@@ -49,7 +49,7 @@ public class Transaction {
      * 
      * @param lender The member who lent the money in the transaction.
      * @param subtransactions The list of subtransactions in the transaction.
-     * @param memberList The list of members in the group.
+     * @param members The list of members in the group.
      * @throws LongAhException If the lender does not exist in the group.
      */
     public Transaction(Member lender, ArrayList<Subtransaction> subtransactions,
@@ -194,4 +194,14 @@ public class Transaction {
         }
         return lender + borrower;
     }
+
+    public void recalculateBalances() throws LongAhException{
+        for (Subtransaction subtransaction : subtransactions) {
+            Member lender = this.lender;
+            lender.subtractFromBalance(subtransaction.getAmount());
+            Member borrower = subtransaction.getBorrower();
+            borrower.addToBalance(subtransaction.getAmount());
+        }
+    }
+
 }

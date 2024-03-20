@@ -112,7 +112,7 @@ public class Group {
     }
 
     /**
-     * Loads the data from the storage file into the member list and transaction list.
+     * Loads the data from the member list and transaction list into storage file.
      * 
      * @throws LongAhException If the data file is not read or the content is invalid
      */
