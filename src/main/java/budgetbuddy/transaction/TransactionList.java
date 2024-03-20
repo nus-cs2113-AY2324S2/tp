@@ -57,4 +57,8 @@ public class TransactionList {
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
         UserInterface.printAddMessage(fetchData, account.getBalance());
     }
+
+    public void saveTransactionList() throws IOException {
+        dataStorage.saveTransactions(transactions);
+    }
 }
