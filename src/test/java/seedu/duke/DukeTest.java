@@ -13,10 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DukeTest {
     private static final String FILE_PATH = "./data/FlirtFork.txt";
-    private static final String FOOD_FILE_PATH = "./data/FoodList.txt";
-    private static final String ACTIVITY_FILE_PATH = "./data/ActivityList.txt";
     private Ui ui = new Ui();
-    private Storage storage = new Storage(FILE_PATH, FOOD_FILE_PATH, ACTIVITY_FILE_PATH);
+    private Storage storage = new Storage(FILE_PATH);
     private FavouritesList favourites;
     private FoodList foods;
     private ActivityList activities;

@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String FILE_PATH = "./data/FlirtFork.txt";
-    private static final String FOOD_FILE_PATH = "./data/FoodList.txt";
-    private static final String ACTIVITY_FILE_PATH = "./data/ActivityList.txt";
+
     private static final String HORIZONTAL = "____________________________________________________________";
     private FavouritesList favourites;
     private FoodList foods;
@@ -16,9 +15,9 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
-    public Duke(String filePath, String foodFilePath, String activityFilePath) {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath, foodFilePath, activityFilePath);
+        storage = new Storage(filePath);
         try {
             favourites = new FavouritesList(storage.loadFavourites());
             foods = new FoodList(storage.loadFood());
@@ -49,7 +48,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke flirtFork = new Duke(FILE_PATH, FOOD_FILE_PATH, ACTIVITY_FILE_PATH);
+        Duke flirtFork = new Duke(FILE_PATH);
         flirtFork.run();
     }
 }

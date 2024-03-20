@@ -6,15 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.InputStream;
 
 public class Storage {
     private String filePath;
-    private String foodFilePath;
-    private String activityFilePath;
-    public Storage(String filePath, String foodFilePath, String activityFilePath) {
+
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.foodFilePath = foodFilePath;
-        this.activityFilePath = activityFilePath;
     }
 
     public ArrayList<Favourites> loadFavourites() throws FileNotFoundException {
@@ -61,36 +59,32 @@ public class Storage {
 
     public ArrayList<Food> loadFood() throws FileNotFoundException {
         ArrayList<Food> loadedFood = new ArrayList<>();
-        File file = new File(foodFilePath);
-        try {
-            Scanner scanner = new Scanner(file);
+        InputStream is = getClass().getClassLoader().getResourceAsStream("FoodList.txt");
+        if (is == null) {
+            throw new FileNotFoundException("Food list file not found");
+        }
+        try (Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                Food food = Parser.parseFood(line);
-                loadedFood.add(food);
+                // Parse the line into a Food object and add it to the list
+                loadedFood.add(Parser.parseFood(line));
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("OOPS! No saved tasks found, starting with an empty list ~");
-            new File(file.getParent()).mkdirs();
         }
         return loadedFood;
     }
 
     public ArrayList<Activity> loadActivity() throws FileNotFoundException {
         ArrayList<Activity> loadedActivity = new ArrayList<>();
-        File file = new File(activityFilePath);
-        try {
-            Scanner scanner = new Scanner(file);
+        InputStream is = getClass().getClassLoader().getResourceAsStream("ActivityList.txt");
+        if (is == null) {
+            throw new FileNotFoundException("Activity list file not found");
+        }
+        try (Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                Activity activity = Parser.parseActivity(line);
-                loadedActivity.add(activity);
+                // Parse the line into an Activity object and add it to the list
+                loadedActivity.add(Parser.parseActivity(line));
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("OOPS! No saved tasks found, starting with an empty list ~");
-            new File(file.getParent()).mkdirs();
         }
         return loadedActivity;
     }
