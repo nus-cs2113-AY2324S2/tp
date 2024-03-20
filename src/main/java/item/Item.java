@@ -5,11 +5,23 @@ public class Item {
     private final String itemName;
     private int quantity;
     private String UOM;
+    private String category;
+    private boolean isOOS;
 
-    public Item(String name, int quantity, String uom) {
+    public Item(String name, int quantity, String uom, String category) {
         this.itemName = name;
         this.quantity = quantity;
         this.UOM = uom;
+        if (category.isEmpty()) {
+            this.category = "NA";
+        } else {
+            this.category = category;
+        }
+        if (quantity == 0) {
+            this.isOOS = true;
+        } else {
+            this.isOOS = false;
+        }
         numberOfItems++;
     }
 
@@ -23,5 +35,13 @@ public class Item {
 
     public void setQuantity(int newQuantity) {
         this.quantity = newQuantity;
+    }
+
+    public void markOOS() {
+        this.isOOS = true;
+    }
+
+    public void unmarkOOS() {
+        this.isOOS = false;
     }
 }
