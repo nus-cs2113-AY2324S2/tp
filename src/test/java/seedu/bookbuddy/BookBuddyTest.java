@@ -34,11 +34,7 @@ class BookBuddyTest {
 
         // Normalize line endings to \n in both expected and actual output
         String normalizedExpectedOutput = "___________________________________\n"
-                + "Hello from\n" + " ____    ____  \n"
-                + "|    \\  |    \\ \n"
-                + "| |_) / | |_) / \n"
-                + "| |_) \\ | |_) \\ \n"
-                + "|____/  |____/ \n"
+                + "Hello from\n"
                 + "BookBuddy!\n"
                 + "How can I help you today?\n"
                 + "_____________\n";
