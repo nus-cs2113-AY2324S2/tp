@@ -36,6 +36,6 @@ public class Duke {
         do {
             userInput = ui.getUserCommand();
             parser.parseInput(userInput);
-        } while (!userInput.equals("done"));
+        } while (!parser.isExitCommandDetected);
     }
 }
