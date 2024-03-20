@@ -1,14 +1,13 @@
 package seedu.duke;
 
-import seedu.duke.command.Command;
-import seedu.duke.modules.ModuleList;
-import seedu.duke.parser.Parser;
-
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.ui.Ui.printGreeting;
+import seedu.duke.command.Command;
+import seedu.duke.modules.ModuleList;
+import seedu.duke.parser.Parser;
 
 public class FAP {
     private static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
