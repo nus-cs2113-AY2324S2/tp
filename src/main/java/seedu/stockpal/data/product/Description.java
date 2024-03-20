@@ -1,10 +1,7 @@
 package seedu.stockpal.data.product;
 
-import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.CommandParameter;
 import seedu.stockpal.ui.Ui;
-
-import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 
 public class Description implements CommandParameter {
     private static final String EMPTY_STRING = "";
