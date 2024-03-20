@@ -2,7 +2,8 @@ package longah.node;
 
 import java.util.ArrayList;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import longah.util.MemberList;
 import longah.util.Subtransaction;
@@ -12,12 +13,12 @@ import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
 
 public class Group {
+    private static Logger logger = Logger.getLogger("Group Logger");
+
     private MemberList members;
     private TransactionList transactions;
     private StorageHandler storage;
     private ArrayList<Subtransaction> transactionSolution = new ArrayList<>();
-
-    private static Logger logger = Logger.getLogger("Group Logger");
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.

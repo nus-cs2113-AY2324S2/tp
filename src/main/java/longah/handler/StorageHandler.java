@@ -7,7 +7,8 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import longah.node.Member;
 import longah.util.MemberList;
