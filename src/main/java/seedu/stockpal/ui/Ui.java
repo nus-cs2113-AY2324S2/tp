@@ -13,7 +13,7 @@ import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 
 public final class Ui {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int WRAP_LENGTH = 70;
+    private static final int WRAP_LENGTH = 81;
 
     public static String getUserInput() throws NoSuchElementException {
         String input = "";
@@ -56,6 +56,7 @@ public final class Ui {
     }
 
     public static void printListTasks(ProductList products) {
+        printToScreen(HORIZONTAL_LINE);
         for (int i = 0; i < products.getSize(); i++ ) {
             assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);

@@ -3,7 +3,7 @@ package seedu.stockpal.data.product;
 import seedu.stockpal.common.CommandParameter;
 
 public class Name implements CommandParameter {
-    protected String name;
+    private final String name;
 
     public Name(String name) {
         this.name = name;

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
-import seedu.stockpal.storage.exception.InvalidStorageFilePathException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class ListCommandTest {
     private final ProductList emptyProductList = new ProductList();
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private ProductList productList = new ProductList();
+    private final ProductList productList = new ProductList();
 
     //Standard output stream will be redirected to variable output, temporarily
     @BeforeEach
@@ -34,15 +33,16 @@ public class ListCommandTest {
     public void restoreStreamForEmptyList() {
         System.setOut(originalOut);
     }
+
     @Test
     public void emptyListTest() {
-        ListCommand command = new ListCommand(emptyProductList);
-        command.execute();
+        ListCommand command = new ListCommand();
+        command.execute(emptyProductList);
         assertEquals(MESSAGE_EMPTY_LIST, output.toString().trim());
     }
 
     @BeforeEach
-    public void setUpStreamForList() throws InvalidStorageFilePathException {
+    public void setUpStreamForList() {
         Product corn = new Product("Corn", 50, 1.00, "It's corn!", 1);
         productList.addProduct(corn);
 
@@ -64,8 +64,8 @@ public class ListCommandTest {
 
     @Test
     public void listTest() throws IOException {
-        ListCommand command = new ListCommand(productList);
-        command.execute();
+        ListCommand command = new ListCommand();
+        command.execute(productList);
         String expected = new String(Files.readAllBytes(Paths.get(LIST_TEST_FILE_TO_COMPARE)));
         assertEquals(expected, output.toString());
     }

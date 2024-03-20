@@ -3,6 +3,7 @@ package seedu.stockpal.commands;
 import seedu.stockpal.exceptions.StockPalException;
 
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
+import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
 public class HelpCommand extends Command {
@@ -12,14 +13,14 @@ public class HelpCommand extends Command {
     @Override
     public void execute() throws StockPalException {
         String formattedText = HORIZONTAL_LINE
-                + "\n" + NewCommand.COMMAND_USAGE
-                + "\n\n" + EditCommand.COMMAND_USAGE
-                + "\n\n" + DeleteCommand.COMMAND_USAGE
-                + "\n\n" + InflowCommand.COMMAND_USAGE
-                + "\n\n" + OutflowCommand.COMMAND_USAGE
-                + "\n\n" + ListCommand.COMMAND_USAGE
-                + "\n\n" + ExitCommand.COMMAND_USAGE
-                + "\n" + HORIZONTAL_LINE;
+                + LINE_SEPARATOR + NewCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + EditCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + DeleteCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + InflowCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + OutflowCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + ListCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + LINE_SEPARATOR + ExitCommand.COMMAND_USAGE
+                + LINE_SEPARATOR + HORIZONTAL_LINE;
 
         printToScreen(formattedText);
     }

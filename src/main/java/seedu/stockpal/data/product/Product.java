@@ -6,11 +6,11 @@ import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 import seedu.stockpal.ui.Ui;
 
 public class Product {
-    protected Name name;
-    protected Quantity quantity;
-    protected Price price;
-    protected Description description;
-    protected Pid pid;
+    private Name name;
+    private Quantity quantity;
+    private Price price;
+    private Description description;
+    private final Pid pid;
 
     public Product(String name, Integer quantity, Double price, String description, Integer pid) {
         this.name = new Name(name);

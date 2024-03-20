@@ -3,7 +3,7 @@ package seedu.stockpal.common;
 public class Messages {
     public static final String LINE_SEPARATOR = System.lineSeparator();
     public static final String HORIZONTAL_LINE =
-            "==========================================================================";
+            "====================================================================================";
     public static final String MESSAGE_WELCOME = "Welcome to StockPal!"
             + "\n"
             + "Enter a command to begin.";

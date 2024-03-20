@@ -16,6 +16,6 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 
-/data/
 StorageLogger.log
 /src/test/data/StorageTest/NonExistentFile.csv
+/data/
