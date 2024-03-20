@@ -16,7 +16,7 @@ public class FlowerDictionary {
      * @param colour Colour of flower to be added
      * @param occasion Occasion that the flower is bought for
      */
-    public static void add(String name, String colour, String occasion) {
+    private static void add(String name, String colour, String occasion) {
         flowerDict.add(new Flower(name, colour, occasion));
     }
 
@@ -31,7 +31,7 @@ public class FlowerDictionary {
         add("Babys Breath", "White", "Wedding");
         add("Chrysanthemum", "White", "Funeral");
         add("Hydrangea", "Blue", "Wedding");
-        add("Carnation", "Pink", "Mother's Day");
+        add("Carnation", "Pink", "Mothers Day");
     }
 
     /**
