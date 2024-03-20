@@ -29,6 +29,7 @@ public class Parser {
                 description = parseData[i + 1].trim();
                 break;
             case "$":
+                // Checks that input is an Integer
                 if (!TransactionList.isInteger(amount)) {
                     throw new NumberFormatException(parseData[i+1].trim());
                 } else {

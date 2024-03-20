@@ -2,6 +2,7 @@ package budgetbuddy;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.ui.UserInterface;
@@ -47,6 +48,8 @@ public class BudgetBuddy {
                     UserInterface.printNoCommandExists();
                 }
             }
+        } catch (InvalidAddTransactionSyntax e) {
+            UserInterface.printInvalidAddSyntax(e.getMessage());
         } catch (NumberFormatException e) {
             UserInterface.printNumberFormatError(e.getMessage());
         } catch (InvalidTransactionTypeException e) {

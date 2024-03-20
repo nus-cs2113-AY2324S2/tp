@@ -2,6 +2,7 @@ package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.transaction.type.Transaction;
@@ -66,7 +67,15 @@ public class TransactionList {
         transactions.add(t);
     }
 
-    public void processTransaction(String input, Account account) throws InvalidTransactionTypeException {
+    public void processTransaction(String input, Account account) throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+        // Check for syntax for add transaction
+        String[] arguments = {"/t/", "/n/", "/$/", "/d/", "/c/"};
+        for (String argument : arguments) {
+            if (!input.contains(argument)) {
+                throw new InvalidAddTransactionSyntax("Invalid add syntax.");
+            }
+        }
+
         Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));

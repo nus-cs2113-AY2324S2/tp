@@ -2,6 +2,7 @@ package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidAddTransactionSyntax;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void processTransaction_addsTransaction() throws InvalidTransactionTypeException {
+    public void processTransaction_addsTransaction() throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
         Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
@@ -38,6 +39,21 @@ public class TransactionListTest {
         assertEquals(testTransaction.getAmount(), transactionList.getTransactions().get(0).getAmount());
         assertEquals(testTransaction.getCategory(), transactionList.getTransactions().get(0).getCategory());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
+    }
+
+    @Test
+    public void processTransaction_withInvalidAddSyntax_throwsInvalidAddTransactionSyntax() {
+
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add Expense /n/Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping 50 /d/14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping /$/50 14-03-2024 /c/Personal", account));
+        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
+                "add /t/Expense /n/Shopping /$/50 /d/14-03-2024 Personal", account));
     }
 
     @Test
