@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 
 
 class LifeTrackTest {

@@ -7,7 +7,7 @@ import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.Objects;
 
-public class Parser {
+public class ParserCalories {
 
     /**
      * Parses a string input to create an Entry object representing calorie intake.
