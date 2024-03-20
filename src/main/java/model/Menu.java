@@ -59,21 +59,23 @@ public class Menu implements ItemManager {
         this.menuItemList.removeIf(x -> x.getID().equals(name));
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return this.menuID + "\n" +
                 IntStream.range(0,this.menuItemList.size())
                         .mapToObj(x -> (x + 1) + ". " + this.menuItemList.get(x))
                         .collect(Collectors.joining("\n"));
-    }
+    }*/
 
     public void displayMenu() {
-        System.out.println("╔═════════════════════╗");
-        System.out.println("║      MENU           ║");
-        System.out.println("╠═════════════════════╣");
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║              MENU                      ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.println("║ ID   Name                   Price      ║");
+        System.out.println("╠══════════════════════════════════════╣");
         for (MenuItem item : menuItemList) {
-            System.out.printf("║ %-20s $%-8.2f ║\n", item.getName(), item.getPrice());
+            System.out.printf("║ %-3s  %-20s $%-8.2f   ║\n", item.getID(), item.getName(), item.getPrice());
         }
-        System.out.println("╚═════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
     }
 }
