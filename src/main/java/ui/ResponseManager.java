@@ -13,6 +13,9 @@ public class ResponseManager {
             "for Artificial intelligence, enter '/a'\n";
     private static final String BYE_MSG = "Bye bye adventurer!";
 
+    public static void printBoard(String boardInfor) {
+        System.out.println(INDENTATION + boardInfor + INDENTATION);
+    }
 
     public static void indentPrint(String message) {
         System.out.println(INDENTATION + message + INDENTATION);
