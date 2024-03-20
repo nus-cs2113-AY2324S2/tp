@@ -27,9 +27,9 @@ public class GymStation {
     }
 
     /**
-     * Function which adds the gym sets to
-     * @param weight
-     * @param repetition
+     * Function which adds a GymSet object to GymStation.
+     * @param weight The weight done for the set.
+     * @param repetition The number of repetitions done for the set.
      */
     public void processSets(int weight, int repetition){
         for (int i = 0; i < numberOfSets; i++) {
@@ -83,13 +83,10 @@ public class GymStation {
      */
     @Override
     public String toString() {
-        StringBuilder format = new StringBuilder(String.format(Constant.GYM_STATION_FORMAT,
-                this.getStationName()));
-
-        format.append(String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT,
+        return String.format(Constant.GYM_STATION_FORMAT,
+                this.getStationName()) + String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT,
                 this.getNumberOfSets(),
-                this.getSpecificSet(0)));
-        return format.toString();
+                this.getSpecificSet(0));
     }
 
 }

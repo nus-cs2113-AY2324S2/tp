@@ -1,5 +1,6 @@
 package workouts;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import utility.Constant;
 import utility.CustomExceptions;
@@ -10,6 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class RunTest {
 
+    @AfterEach
+    void cleanup() {
+        WorkoutList.clearWorkoutsAndRun();
+    }
     /**
      * Tests the behaviour of parsing a time string with hours into an integer array.
      */
@@ -22,7 +27,6 @@ class RunTest {
         for (int i = 0; i < Constant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -37,7 +41,6 @@ class RunTest {
         for (int i = 0; i < Constant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -58,7 +61,6 @@ class RunTest {
         int result = testRun.calculateTotalSeconds();
         int expected = 3942;
         assertEquals(result, expected);
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -70,27 +72,27 @@ class RunTest {
         String result = testRun.calculatePace();
         String expected ="7:47/km";
         assertEquals(result, expected);
-        WorkoutList.clearWorkoutsAndRun();
     }
 
+    /**
+     * Tests the behaviour of the getRun function when a valid Run object has been added.
+     *
+     * @throws CustomExceptions.InvalidInput If there are invalid parameters.
+     */
     @Test
     void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
-        // Test Setup
         String input = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
-
-        // Exercise
         String[] result = Run.getRun(input);
-
-        // Verify
         assertArrayEquals(new String[]{"run", "10.3", "00:40:10", "15-03-2024"}, result);
     }
 
+    /**
+     * Tests the behaviour of the getRun function when a Run object is added with missing
+     * parameters.
+     */
     @Test
     void getRun_missingParameter_expectException() {
-        // Test Setup
-        String input = "new /e:run /d:10.3"; // Missing /t parameter
-
-        // Exercise and Verify
+        String input = "new /e:run /d:10.3";
         assertThrows(CustomExceptions.InvalidInput.class, () -> Run.getRun(input));
     }
 }

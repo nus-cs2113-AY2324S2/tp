@@ -15,6 +15,153 @@ FTL jump completed.
 Terminal primed. Command inputs are now accepted...
 ____________________________________________________________
 ____________________________________________________________
+Commands List:
+
+new /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run
+new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout
+health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data
+health /h:period /start:START_DATE /end:END_DATE - Add new period data
+history /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked
+latest /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked
+help - Show this help message
+exit - Exit the program
+____________________________________________________________
+____________________________________________________________
+Successfully added a new run session
+Type	Time		Distance	Pace		Date
+run 	25:23		5.24		4:51/km		2024-03-19
+____________________________________________________________
+____________________________________________________________
+Successfully added a new run session
+Type	Time		Distance	Pace		Date
+run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Your run history:
+Index		Type	Time		Distance	Pace		Date
+1.			run 	25:23		5.24		4:51/km		2024-03-19
+2.			run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Your latest run:
+Index		Type	Time		Distance	Pace		Date
+2.			run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 1. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 2. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+____________________________________________________________
+____________________________________________________________
+Successfully added a new gym session
+benchpress: 4 sets of 5 reps at 100 KG
+squats: 4 sets of 5 reps at 100 KG
+____________________________________________________________
+____________________________________________________________
+Your gym history:
+Gym Session 1
+benchpress: 4 sets of 5 reps at 100 KG
+squats: 4 sets of 5 reps at 100 KG
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 1. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 2. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+____________________________________________________________
+____________________________________________________________
+Successfully added a new gym session
+shoulder press: 4 sets of 5 reps at 50 KG
+deadlift: 4 sets of 5 reps at 120 KG
+____________________________________________________________
+____________________________________________________________
+Your gym history:
+Gym Session 1
+benchpress: 4 sets of 5 reps at 100 KG
+squats: 4 sets of 5 reps at 100 KG
+____________________________________________________________
+Gym Session 2
+shoulder press: 4 sets of 5 reps at 50 KG
+deadlift: 4 sets of 5 reps at 120 KG
+____________________________________________________________
+____________________________________________________________
+Your latest gym:
+Gym Session 2
+shoulder press: 4 sets of 5 reps at 50 KG
+deadlift: 4 sets of 5 reps at 120 KG
+____________________________________________________________
+____________________________________________________________
+Added: bmi | 1.80 | 85 | 19-03-2024
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+____________________________________________________________
+____________________________________________________________
+Your bmi history:
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+____________________________________________________________
+____________________________________________________________
+Added: bmi | 2.0 | 45.42 | 20-03-2024
+2024-03-20
+Your BMI is 11.36
+You're underweight.
+____________________________________________________________
+____________________________________________________________
+Added: bmi | 1.95 | 85.0 | 21-03-2024
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+____________________________________________________________
+Your bmi history:
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+2024-03-20
+Your BMI is 11.36
+You're underweight.
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+____________________________________________________________
+Your latest bmi:
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+____________________________________________________________
+Added: period | 09-03-2022 | 16-03-2022
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+____________________________________________________________
+____________________________________________________________
+Your period history:
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+____________________________________________________________
+____________________________________________________________
+Added: period | 20-11-2022 | 22-12-2022
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+____________________________________________________________
+Your period history:
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+____________________________________________________________
+Your latest period:
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+Initiating PulsePilot landing sequence...
+____________________________________________________________
 PulsePilot successful touchdown
 See you soon, Captain!
 ____________________________________________________________

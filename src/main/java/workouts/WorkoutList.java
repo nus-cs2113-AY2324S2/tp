@@ -90,14 +90,14 @@ public class WorkoutList extends ArrayList<Workout> {
         if (runs.isEmpty()) {
             throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
         }
-        return (Run) runs.get(runs.size() - 1);
+        return runs.get(runs.size() - 1);
     }
 
     public static Gym getLatestGym() throws CustomExceptions.OutOfBounds {
         if (gyms.isEmpty()) {
             throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
         }
-        return (Gym) gyms.get(gyms.size() - 1);
+        return gyms.get(gyms.size() - 1);
     }
 
     /**

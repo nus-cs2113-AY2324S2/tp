@@ -56,7 +56,7 @@ public class Period extends Health {
         String endSubstring = input.substring(indexEnd + Constant.PERIOD_CYCLE_END_OFFSET).trim();
 
         if (command.isEmpty() || startSubstring.isEmpty() || endSubstring.isEmpty()) {
-            // throw new CustomExceptions(Constant.UNSPECIFIED_PARAMETERS;
+            throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
         }
 
         results[0] = command;
@@ -73,10 +73,14 @@ public class Period extends Health {
      */
     public long calculatePeriodLength() {
         // Add 1 to include both start and end dates
-        long length = ChronoUnit.DAYS.between(startDate,endDate) + 1;
-        return length;
+        return ChronoUnit.DAYS.between(startDate,endDate) + 1;
     }
 
+    /**
+     * Retrieves the string representation of a Period object.
+     *
+     * @return A formatted string representing a Period object.
+     */
     @Override
     public String toString() {
         return "Period Start: "

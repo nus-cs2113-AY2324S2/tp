@@ -30,13 +30,10 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
     public static void processInput() {
-        in = new Scanner(System.in);
-
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(" ")[0];
             LogFile.writeLog("User Input: " + userInput, false);
-
             try {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
@@ -327,7 +324,6 @@ public class Handler {
     }
 
     public static void userInduction() {
-        Scanner in = new Scanner(System.in);
         String name = in.nextLine();
         System.out.println("Welcome aboard, Captain " + name);
         LogFile.writeLog("Name entered: " + name, false);
@@ -340,12 +336,20 @@ public class Handler {
         System.out.println("FTL jump completed.");
     }
 
+    public static void initialiseScanner(){
+        in = new Scanner(System.in);
+    }
+    public static void destroyScanner(){
+        in.close();
+    }
+
     /**
      * Initializes PulsePilot by printing a welcome message, loading tasks from storage,
      * and returning the tasks list.
      */
     public static void initialiseBot() {
         Output.printWelcomeBanner();
+        initialiseScanner();
         LogFile.writeLog("Started bot", false);
         // Yet to implement : Check for existing save, if not, make a new one
         // Yet to implement : int status = Storage.load();
@@ -368,6 +372,7 @@ public class Handler {
         Output.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
         LogFile.writeLog("Bot exited gracefully", false);
+        destroyScanner();
         System.exit(0);
     }
 }

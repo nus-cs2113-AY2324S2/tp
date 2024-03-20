@@ -45,7 +45,6 @@ public class Gym extends Workout{
             GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
         }
     }

@@ -45,6 +45,12 @@ class OutputTest {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
+
+    /**
+     * Tests the behaviour of the printHistory function for Run objects.
+     *
+     * @throws CustomExceptions.InvalidInput If there are invalid parameters specified.
+     */
     @Test
     void printHistory_runsOnly_expectAllRunsPrinted() throws CustomExceptions.InvalidInput {
         new Run("40:10", "10.3", "15-03-2024");
@@ -63,18 +69,22 @@ class OutputTest {
                 System.lineSeparator();
         Output.printHistory(Constant.RUN);
         assertEquals(expected, outContent.toString());
-        cleanup();
-
     }
 
+    /**
+     * Tests the behaviour of the printHistory function when an invalid filter is used.
+     */
     @Test
     void printHistory_invalidHistoryFilter_throwError() {
-        String input = "invalidfilter";
+        String input = "invalidFilter";
         assertThrows(IllegalArgumentException.class, () -> Output.printHistory(input));
-        cleanup();
-
     }
 
+    /**
+     * Tests the behaviour of the printLatestRun function after a Run object is added.
+     *
+     * @throws CustomExceptions.InvalidInput If there are invalid parameters specified.
+     */
     @Test
     void printLatestRun_oneRun_expectOneRunPrinted() throws CustomExceptions.InvalidInput {
         new Run("40:10", "10.3");
@@ -84,18 +94,22 @@ class OutputTest {
                 System.lineSeparator();
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestRun function when no Runs are added.
+     */
     @Test
     void printLatestRun_noRun_expectNoRunMessage() {
-        String expected = "\u001B[31mError: No runs found! You need to add a run first!\u001B[0m" +
+        String expected = "\u001B[31mError: " + Constant.NO_RUNS_FOUND + "\u001B[0m" +
                 System.lineSeparator();
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestGym function when two Gyms are added.
+     */
     @Test
     void printLatestGym_twoGyms_expectOneGymPrinted() {
         try{
@@ -124,18 +138,23 @@ class OutputTest {
         }  catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
         }
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestGym function when no Gyms are added.
+     */
     @Test
     void printLatestGym_noGym_expectNoGymMessage() {
-        String expected = "\u001B[31mError: No gyms found! You need to add a gym first!\u001B[0m" +
+        String expected = "\u001B[31mError: " + Constant.NO_GYMS_FOUND + "\u001B[0m" +
                 System.lineSeparator();
         Output.printLatestGym();
         assertEquals(expected, outContent.toString());
         cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestBmi function when two Bmi objects are added.
+     */
     @Test void printLatestBmi_twoBmis_expectOneBmiPrinted() {
         Bmi firstBmi = new Bmi("1.75", "70.0", "18-03-2024");
         Bmi secondBmi = new Bmi("1.55", "55.0", "20-03-2024");
@@ -149,15 +168,19 @@ class OutputTest {
                 "Great! You're within normal range." +
                 System.lineSeparator();
         assertEquals(expected, outContent.toString());
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestBmi function when no Bmi objects are added.
+     */
     @Test
     void printLatestBmi_noBmi_expectAssertionError() {
         assertThrows(AssertionError.class, Output::printLatestBmi);
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printLatestBmi function when two Period objects are added.
+     */
     @Test
     void printLatestPeriod_twoPeriods_expectOneBmiPrinted() {
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
@@ -171,16 +194,20 @@ class OutputTest {
                 System.lineSeparator();
 
         assertEquals(expected, outContent.toString());
-        cleanup();
     }
 
-
+    /**
+     * Tests the behaviour of the printLatestBmi function when no Period objects are added.
+     */
     @Test
     void printLatestPeriod_noPeriod_expectAssertionError() {
         assertThrows(AssertionError.class, Output::printLatestPeriod);
-        cleanup();
     }
 
+    /**
+     * Tests the behaviour of the printGymHistory function, which should print both Gyms
+     * added.
+     */
     @Test
     void printGymHistory_correctInput_expectPrintGymHistory(){
         try{
@@ -218,8 +245,6 @@ class OutputTest {
                     System.lineSeparator();
             Output.printHistory(Constant.GYM);
             assertEquals(expected, outContent.toString());
-            cleanup();
-
         }  catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
         }
