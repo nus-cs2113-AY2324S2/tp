@@ -41,11 +41,10 @@ public class Storage {
     }
 
     /**
-     * Returns the private File dukeData.
+     * Returns the private file directory of storage.
      */
-    public static File getFile() {
-        return stockMaster;
-
+    public static String getFileDirectory() {
+        return FILENAME;
     }
 
     /**
