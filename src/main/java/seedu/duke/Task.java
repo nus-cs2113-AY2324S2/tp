@@ -1,4 +1,5 @@
 package seedu.duke;
+
 import java.time.LocalTime;
 
 public class Task {
@@ -7,39 +8,7 @@ public class Task {
     protected LocalTime startTime;
     protected LocalTime endTime;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public Task(String description, String day, String from, String to){
+    public Task(String description, String day, String from, String to) {
         this.description = description;
         this.day = day;
         String fromHour = from.split(":")[0];
@@ -52,9 +21,20 @@ public class Task {
         this.endTime = LocalTime.parse(formattedTo);
     }
 
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+
     private String formatDates(String time) {
         return time.length() == 1 ? "0" + time : time;
     }
+
     @Override
     public String toString() {
         return description + " (" + day + " from " + startTime + " to " + endTime + ")";
