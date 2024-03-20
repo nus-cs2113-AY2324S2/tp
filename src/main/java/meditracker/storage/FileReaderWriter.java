@@ -134,7 +134,7 @@ public class FileReaderWriter {
     /**
      * Loads the daily medication information from a fixed file data/dailymed/today.txt.
      * The loading functionality will be improved in v2.0.
-
+     *
      * @param dailyMedData A list of type String for the daily medication data.
      * @throws FileReadWriteException if there is an issue creating the file.
      */
