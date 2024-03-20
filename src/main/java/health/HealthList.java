@@ -52,4 +52,12 @@ public class HealthList extends ArrayList<Health> {
             System.out.println(period);
         }
     }
+
+    /**
+     * Clears the workouts, runs and gyms ArrayLists.
+     */
+    public static void clearBmisAndPeriods() {
+        periods.clear();
+        bmis.clear();
+    }
 }
