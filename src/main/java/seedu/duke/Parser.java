@@ -32,12 +32,22 @@ public class Parser {
             Group.getOrCreateGroup(groupName);
             break;
         case "member":
-            String[] memberDetails = argument.split("/group");
-            String memberName = memberDetails[0].trim();
-            String groupNameForUser = memberDetails[1].trim();
-            User newUser = new User(memberName);
-            Group group = Group.getOrCreateGroup(groupNameForUser);
-            group.addUsers(newUser);
+            try {
+                String[] memberDetails = argument.split("/group");
+                if(memberDetails.length == 1){
+                    throw new ExpensesException("No group name for user! Add /group <group name>");
+                }
+                String memberName = memberDetails[0].trim();
+                if (memberName.isEmpty()) {
+                    throw new ExpensesException("No name for user! Add a name for the user.");
+                }
+                String groupNameForUser = memberDetails[1].trim();
+                User newUser = new User(memberName);
+                Group group = Group.getOrCreateGroup(groupNameForUser);
+                group.addUsers(newUser);
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
             break;
         case "expense":
             try{
