@@ -7,17 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JunitParserTest {
+    //@@author adamzzq
     @Test
     public void analyzeInput_invalidInput_exceptionThrown() {
         assertThrows(IllegalArgumentException.class, () -> Parser.analyzeInput("invalid input"));
     }
 
+    //@@author adamzzq
     @Test
     public void analyzeInput_validInput_success() {
         assertEquals(CommandType.CREATE_ORDER, new Parser().analyzeInput("Create Order -menu 1"));
         assertEquals(CommandType.VIEW_ORDER, new Parser().analyzeInput("View -order 2"));
     }
 
+    //@@author adamzzq
     @Test
     void splitInputTest() {
         Parser parser = new Parser();
@@ -26,6 +29,7 @@ public class JunitParserTest {
         assertArrayEquals(new String[]{"5"}, parser.splitInput(CommandType.EDIT_ORDER, "edit -order 5"));
     }
 
+    //@@author adamzzq
     @Test
     void testSplitInput_invalidInput() {
         Parser parser = new Parser();

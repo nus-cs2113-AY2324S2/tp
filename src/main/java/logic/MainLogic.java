@@ -5,9 +5,12 @@ import command.MainExitCommand;
 import command.MainHelpCommand;
 import command.ViewOrderCommand;
 import command.ViewOrdersSummaryCommand;
+import command.ViewMenuCommand;
+
 import model.Menu;
 import model.MenuItem;
 import model.Order;
+import model.SetMenu;
 import ui.CommandType;
 import ui.Parser;
 
@@ -22,7 +25,8 @@ public class MainLogic {
         ArrayList<Order> ordersList = new ArrayList<>();
         ArrayList<Menu> menusList = new ArrayList<>();
 
-        //for testin
+        //testing
+        initMenu(menusList);
         testOrderAddAndRemove(ordersList);
         testOrderAddAndRemove(ordersList);
 
@@ -49,6 +53,9 @@ public class MainLogic {
                 Order newOrder = MainCreateOrderCommand.execute(inputText, menusList); //inputText is passed to detect menu selected
                 ordersList.add(newOrder);
                 break;
+            case VIEW_MENU:
+                ViewMenuCommand.execute(menusList);
+                // fallthrough
             case VIEW_ORDER:
                 ViewOrderCommand.execute(ordersList, inputText);
                 break;
@@ -60,6 +67,33 @@ public class MainLogic {
                 MainHelpCommand.execute();
             }
         }
+    }
+
+    private static void initMenu(ArrayList<Menu> menusList) {
+        MenuItem dish01 = new MenuItem("001", "Chicken Rice", 3.50);
+        MenuItem dish02 = new MenuItem("002", "Nasi Lemak", 3.00);
+        MenuItem dish03 = new MenuItem("0O3", "Hokkien Mee", 4.00);
+        MenuItem dish04 = new MenuItem("004", "Mee Siam", 3.50);
+        MenuItem dish05 = new MenuItem("005", "Fishball Noodles", 3.00);
+        MenuItem dish06 = new MenuItem("0O6", "Chicken Curry Rice", 5.00);
+        MenuItem dish07 = new MenuItem("007", "Seafood Fried Rice", 5.50);
+        MenuItem dish08 = new MenuItem("008", "Roasted delight set", 6.50);
+        MenuItem dish09 = new MenuItem("009", "Hotplate beef set", 7.00);
+        MenuItem dish10 = new MenuItem("010", "Kimchi noodles", 4.00);
+
+        Menu menuV1 = new Menu(SetMenu.Dinner);
+        menuV1.add(dish01);
+        menuV1.add(dish02);
+        menuV1.add(dish03);
+        menuV1.add(dish04);
+        menuV1.add(dish05);
+        menuV1.add(dish06);
+        menuV1.add(dish07);
+        menuV1.add(dish08);
+        menuV1.add(dish09);
+        menuV1.add(dish10);
+        menusList.add(menuV1);
+
     }
 
     public static void testOrderAddAndRemove(ArrayList<Order> ordersList) {
