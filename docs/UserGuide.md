@@ -71,7 +71,7 @@ Now, you can head over to the [Features](#features) section to learn how to use 
 
 ### Adding an item: `add`
 
-Adds an item to the inventory.
+> Adds an item to the inventory.
 
 Format: `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/SALE_PRICE c/COST_PRICE`
 
@@ -81,12 +81,40 @@ Format: `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/
 * There is no need to include the currency. A "$" sign will be appended to the prices.
 
 Examples: 
-* add `n/apple d/a type of fruit q/10 e/12-10-2024 s/1.20 c/0.45`
-* add `n/lego d/toys q/7 s/102.00  c/34.32`
+* `add n/apple d/a type of fruit q/10 e/12-10-2024 s/1.20 c/0.45`
+* `add n/lego d/toys q/7 s/102.00  c/34.32`
 
 ### Searching for an item: `search`
 ### Listing current inventory: `list`
 ### Deleting an item: `delete`
+
+> Deletes an item from the inventory. Item Identifier can be either item index or item name.
+
+#### Deleting an item using item index
+
+Format: `delete ITEM_INDEX`
+
+* `ITEM_INDEX` must be specified.
+* `ITEM_INDEX` specified must exist in the inventory, otherwise no item will be deleted
+* Index of items can be viewed using the `list` command.
+
+Examples:
+* `delete 1` 
+* `delete 4`
+
+#### Deleting an item using item name
+
+Format: `delete ITEM_NAME`
+
+* `ITEM_NAME` must be specified.
+* `ITEM_NAME` specified must be the exact name of the item.
+* If there are no items with item names matching `ITEM_NAME`, no items will be deleted.
+* Item names of items in the inventory can be viewed using the `list` command.
+
+Examples:
+* `delete cookie`
+* `delete tissue paper`
+
 ### Exiting the application: `bye`
 
 > Exits the application.
