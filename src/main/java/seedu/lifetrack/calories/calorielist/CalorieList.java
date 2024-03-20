@@ -1,6 +1,6 @@
 package seedu.lifetrack.calories.calorielist;
 
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 
 import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int SIZE_OF_DELETE = 7;
+    private final int SIZE_OF_DELETE = 16;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
