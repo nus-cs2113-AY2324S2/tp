@@ -77,6 +77,9 @@ public class ModifyCommand extends Command {
                 continue;
             case NAME:
                 medication.setName(argumentValue);
+
+                // TODO: Update medication name in DailyMedication
+
                 break;
             case QUANTITY:
                 medication.setQuantity(argumentValue);
