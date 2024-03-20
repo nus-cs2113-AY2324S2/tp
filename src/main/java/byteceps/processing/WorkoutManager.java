@@ -29,6 +29,13 @@ public class WorkoutManager extends ActivityManager {
                     "Added Workout Plan: %s\n", newWorkout.getActivityName()
             ));
             break;
+        case "delete":
+            Workout existingWorkout = processCreateWorkout(parser);
+            delete(existingWorkout);
+            UserInterface.printMessage(String.format(
+                    "Deleted Exercise: %s", existingWorkout.getActivityName()
+            ));
+            break;
         case "assign":
             String workoutPlan = assignExerciseToWorkout(parser);
             UserInterface.printMessage(String.format(
@@ -105,7 +112,7 @@ public class WorkoutManager extends ActivityManager {
     public String unassignExerciseFromWorkout(Parser parser) throws Exceptions.InvalidInput,
             Exceptions.ActivityDoesNotExists {
 
-        String workoutPlanName  = parser.getAdditionalArguments("from");
+        String workoutPlanName = parser.getAdditionalArguments("from");
         String exerciseName = parser.getActionParameter();
         if (workoutPlanName == null) {
             throw new Exceptions.InvalidInput("unassign command not complete");
