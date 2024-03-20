@@ -1,4 +1,4 @@
-package seedu.duke.tictactoe;
+package tictactoe;
 
 import java.util.Scanner;
 import java.util.Random;

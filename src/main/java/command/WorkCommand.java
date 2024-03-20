@@ -7,6 +7,7 @@ public class WorkCommand implements Command {
         TypingGame game = new TypingGame();
         game.startGame();
         game.outputResult();
+
     }
 
     public boolean isExit() {

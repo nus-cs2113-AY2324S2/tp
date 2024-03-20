@@ -14,6 +14,13 @@ public class PlayerProfile {
         this.occupation = occupation;
     }
 
+    public Asset getAsset() {
+        return this.asset;
+    }
+
+    public Health getHealth() {
+        return this.health;
+    }
     public String getName() {
         return this.name;
     }

@@ -5,7 +5,10 @@ import exception.CommandInputException;
 public enum CommandType {
     WORK("work"),
     REST("rest"),
-    EXIT("bye");
+    EXIT("bye"),
+
+    STATUS("status");
+
 
     private final String command;
 
