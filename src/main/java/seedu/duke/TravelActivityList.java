@@ -130,5 +130,36 @@ public class TravelActivityList {
         System.out.println(markedTask);
     }
 
+    /**
+     * Adds a tag to travel activity
+     * @param taskNumber The travel activity number on the list
+     * @param tag The tag of travel activity
+     */
+    public void tagActivity(int taskNumber, String tag) throws OmniException{
+        assert taskNumber != 0 : "There is no tasks in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity taggedTask  = travelActivities.get(indexOfTask);
+        taggedTask.setTag(tag);
+        System.out.println("I have tagged this task:");
+        System.out.println(taggedTask + "(" + tag + ")");
+    }
 
+    /**
+     * Removes the tag on a travel activity
+     * @param taskNumber The travel activity number on the list
+     */
+    public void removeTag(int taskNumber) throws OmniException {
+        assert taskNumber != 0 : "There is no task in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity taggedTask = travelActivities.get(indexOfTask);
+        taggedTask.removeTag();
+        System.out.println("Tag removed from the task:");
+        System.out.println(taggedTask);
+    }
 }
