@@ -111,7 +111,7 @@ public class Parser {
         int prefixIndex = argument.indexOf(ADD_FLOWER_PREFIX);
         int quantityIndex = argument.indexOf(QUANTITY);
 
-        String flowerName = argument.substring(0,quantityIndex).trim();
+        String flowerName = argument.substring(0,quantityIndex).trim().toLowerCase();
         String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
         // [WARNING] might need to check if it's a valid integer
         Integer quantity = Integer.parseInt(quantityString);
@@ -134,7 +134,8 @@ public class Parser {
         int prefixIndex = argument.indexOf(REMOVE_FLOWER_PREFIX);
         int quantityIndex = argument.indexOf(QUANTITY);
 
-        String flowerName = argument.substring(0, quantityIndex).trim();
+
+        String flowerName = argument.substring(0, quantityIndex).trim().toLowerCase();
         String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
         // [WARNING] might need to check if it's a valid integer
         Integer quantity = Integer.parseInt(quantityString);

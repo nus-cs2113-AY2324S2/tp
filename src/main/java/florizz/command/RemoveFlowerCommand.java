@@ -36,11 +36,10 @@ public class RemoveFlowerCommand extends Command {
         }
 
         boolean doesFlowerExist = false;
-        FlowerDictionary flowerDictionary = new FlowerDictionary();
         Flower flowerToBeAdded = new Flower();
-        for (int i = 0; !doesFlowerExist && i < flowerDictionary.size(); i++) {
-            if (flowerDictionary.get(i).getFlowerName().equals(flowerName)) {
-                flowerToBeAdded = flowerDictionary.get(i);
+        for (int i = 0; !doesFlowerExist && i < FlowerDictionary.size(); i++) {
+            if (FlowerDictionary.get(i).getFlowerName().toLowerCase().equals(flowerName)) {
+                flowerToBeAdded = FlowerDictionary.get(i);
                 doesFlowerExist = true;
             }
         }
