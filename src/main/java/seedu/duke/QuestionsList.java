@@ -56,5 +56,22 @@ public class QuestionsList {
 
         return allQuestions.toString();
     }
-}
 
+    public String getAllQuestions() throws CustomException {
+        if (questionsList.isEmpty()) {
+            throw new CustomException("No questions yet");
+        }
+        StringBuilder allQuestions = new StringBuilder();
+
+        for (Question question : questionsList) {
+            int questionNum = questionsList.indexOf(question) + 1; // +1 coz zero index
+            String header = "Question " + questionNum + ":" + System.lineSeparator();
+            String displayQuestion = header + question.getQuestion() + System.lineSeparator();
+
+            allQuestions.append(displayQuestion);
+            allQuestions.append(System.lineSeparator());
+        }
+
+        return allQuestions.toString();
+    }
+}
