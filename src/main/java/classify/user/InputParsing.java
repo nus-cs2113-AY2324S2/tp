@@ -168,7 +168,7 @@ public class InputParsing {
             Ui.printStudentNotFound();
         }
         
-        Ui.printDivider();
+ffffffffffffffffffffffff        Ui.printDivider();
         masterStudentList.remove(foundStudent);
         assert foundStudent == null : "Student should be deleted";
     }
