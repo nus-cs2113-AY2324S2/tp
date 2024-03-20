@@ -61,7 +61,7 @@ public class DataStorage {
             return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
                     transactionInfo[1], transactionInfo[3], account);
         case "Expense":
-            return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
+            return new Expense(transactionInfo[0], -Double.parseDouble(transactionInfo[4]),
                     transactionInfo[1], transactionInfo[3], account);
         default:
             return null;
