@@ -1,20 +1,22 @@
 package parser;
 
-import command.AddCommand;
 import command.Command;
+import command.DeleteCommand;
+import command.AddCommand;
+import command.ListCommand;
 import command.IncorrectCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.EditCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
-import item.Item;
-import storage.Storage;
-import ui.TextUi;
+import itemlist.Itemlist;
 
-import java.util.ArrayList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public boolean isExitCommandDetected = false;
     public static final Pattern ADD_COMMAND_FORMAT =
             Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
 
@@ -28,7 +30,7 @@ public class Parser {
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
 
-    public void parseInput(String userInput) {
+    public Command parseInput(String userInput) {
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -42,42 +44,35 @@ public class Parser {
 
         switch (userCommand) {
         case EXIT:
-//          storage.saveItems(items);  //(COMMAND FROM STORAGE TO SAVE ITEMLIST)
-//          ui.closeScanner();  //(COMMAND FROM TEXTUI TO CLOSE SCANNER)
-            isExitCommandDetected = true;
-            return;
+            return new ExitCommand(true);
         case HELP:
-            System.out.println(Messages.HELP);
-            break;
+            return new HelpCommand();
         case LIST:
-//                ui.listItems(items);  //(COMMAND FROM TEXTUI TO PRINT ITEMS)
-            break;
-
+            return new ListCommand<>(Itemlist.getItems());
         case ADD:
             try {
-                prepareAdd(arguments);
+                return prepareAdd(arguments);
+
             } catch (CommandFormatException e) {
                 break;
             }
-            break;
         case DELETE:
-//            try {
-//                prepareDelete(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
-            break;
+            try {
+                return prepareDelete(arguments);
+            } catch (CommandFormatException e) {
+                break;
+            }
         case EDIT:
-//            try {
-//                prepareEdit(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
-            break;
+            try {
+                return prepareEdit(arguments);
+            } catch (CommandFormatException e) {
+                break;
+            }
         default:
             System.out.println(Messages.INVALID_COMMAND);
             break;
         }
+        return new IncorrectCommand();
     }
 
 
@@ -95,9 +90,8 @@ public class Parser {
                 matcher.group("uom"),
                 category
         );
-
     }
-    /*
+
     private Command prepareDelete(String args) throws CommandFormatException{
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
@@ -118,7 +112,7 @@ public class Parser {
             matcher.group("itemName"),
             newQuantity
         );
-    }*/
+    }
 }
 
 

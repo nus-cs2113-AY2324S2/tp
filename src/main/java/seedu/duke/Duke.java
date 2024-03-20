@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import command.Command;
+import command.ExitCommand;
 import parser.Parser;
 import ui.TextUi;
 
@@ -15,7 +17,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,6 +28,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+        new Duke().run();
     }
 
     public void run() throws IOException {
@@ -38,7 +41,8 @@ public class Duke {
         String userInput;
         do {
             userInput = ui.getUserInput();
-            parser.parseInput(userInput);
-        } while (!parser.isExitCommandDetected);
+            Command command = parser.parseInput(userInput);
+            command.execute();
+        } while (!ExitCommand.getIsExit());
     }
 }
