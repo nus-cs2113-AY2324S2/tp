@@ -20,7 +20,7 @@ public class SearchCommand extends Command{
      * @param arguments The keyword to search for.
      */
     public SearchCommand(String arguments) {
-        this.keyword = arguments.trim().toLowerCase();
+        this.keyword = arguments;
     }
 
     /**
@@ -38,7 +38,6 @@ public class SearchCommand extends Command{
             LibraryManager libraryManager = new LibraryManager();
             libraryManager.searchMedication(keyword);
             libraryManager.printSearchResults(ui);
-
         } catch (IOException e) {
             ui.showLibraryNotFoundMessage();
         }
