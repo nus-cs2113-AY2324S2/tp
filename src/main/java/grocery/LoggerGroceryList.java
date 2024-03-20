@@ -27,7 +27,7 @@ public class LoggerGroceryList {
         loggerGL.addHandler(ch);
 
         try {
-            String filepath = new File("logs/GroceryList.log").getAbsolutePath();
+            String filepath = new File("tp/logs/GroceryList.log").getAbsolutePath();
             FileHandler fh = new FileHandler(filepath, true);
             fh.setLevel(Level.INFO);
             loggerGL.addHandler(fh);
