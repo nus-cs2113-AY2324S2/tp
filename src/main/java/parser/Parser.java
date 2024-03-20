@@ -103,15 +103,8 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
         }
-        try {
-            return new DeleteCommand(matcher.group("itemName");
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
-        }
+        return new DeleteCommand(matcher.group("itemName"));
     }
 
     private Command prepareEdit(String args) throws CommandFormatException{
@@ -119,18 +112,12 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
         }
-        try {
-            return new EditCommand(
-                    matcher.group("itemName"),
-                    matcher.group("newQuantity")
-            );
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
-        }
+        int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
+        return new EditCommand(
+            matcher.group("itemName"),
+            newQuantity
+        );
     }*/
 }
 
