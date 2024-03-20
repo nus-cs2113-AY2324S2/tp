@@ -1,10 +1,11 @@
 package seedu.duke;
 public class User {
-    public Timetable timetable = new Timetable();
+    private Timetable timetable;
     private final String name;
 
     public User(String name) {
         this.name = name;
+        this.timetable = new Timetable();
     }
     public String getName() {
         return name;
@@ -13,5 +14,8 @@ public class User {
         for (String day : Timetable.days) {
             timetable.printTasksOfTheDay(day);
         }
+    }
+    public Timetable getTimetable() {
+        return timetable;
     }
 }
