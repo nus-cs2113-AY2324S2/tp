@@ -1,10 +1,14 @@
 package seedu.duke;
 
+
+import com.bethecoder.ascii_table.ASCIITable;
 import seedu.duke.exceptions.CustomException;
 
 import java.util.Scanner;
 
 public class Ui {
+    private static final String HEADER_ALL_RESULTS = "These are all your results so far:\n";
+
     private static final int NEW_LINE = 48;
     public boolean isPlaying = true;
 
@@ -16,7 +20,7 @@ public class Ui {
 
     public void readCommands(
             Ui ui, QuestionsList questionsList, TopicList topicList,
-            QuestionListByTopic questionListByTopic
+            QuestionListByTopic questionListByTopic, ResultsList allResults
     ) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
@@ -26,7 +30,7 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic);
+                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
@@ -53,26 +57,30 @@ public class Ui {
     }
 
     public void printChosenTopic(
-            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic
+            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList alLResults
     ){
-        QuestionsList qnList = new QuestionsList();
+        Results topicResults = new Results();
+        QuestionsList qnList;
         System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
         System.out.println("Here are the questions: ");
         qnList = questionListByTopic.getQuestionSet(topicNum - 1);
+        alLResults.addQuestions(topicNum - 1);
         int numOfQns = qnList.getSize();
         Question questionUnit;
         String[] inputAnswers = new String[numOfQns];
         String answer;
         for (int index = 0; index < numOfQns; index ++){//go through 1 question set
             questionUnit = qnList.getQuestionUnit(index);
+            topicResults.increaseNumberOfQuestions();
             System.out.println(questionUnit.getQuestion());
             askForAnswerInput();
             Parser parser = new Parser();
             Scanner in = new Scanner(System.in);
             answer = in.nextLine();
-            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit);
+            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit, topicResults);
         }
-        //add results to resultsList
+        topicResults.calculateScore();
+        alLResults.addResults(topicResults);
     }
 
 
@@ -91,12 +99,26 @@ public class Ui {
                 + System.lineSeparator() + allSolutions);
     }
 
-    public void printOneResult(int roundNum, String score) {
-        System.out.println("Your results for Round " + roundNum + ":\n" + score);
+    public void printOneResult(boolean includesQuestions, int topicNum, String score,
+                               QuestionListByTopic questionListByTopic) {
+        System.out.println("Your results for Topic " + (topicNum + 1) + ":\n" + score + "\n");
+        if (includesQuestions) {
+            System.out.println(questionListByTopic.getQuestionSet(topicNum).getAllQuestions());
+        }
     }
 
-    public void printAllResults(String allResults) {
-        System.out.println("These are all your results so far:\n" + allResults);
+    public void printAllResults(boolean includesQuestions, ResultsList allResults,
+                                QuestionListByTopic questionListByTopic) {
+        int numberOfResults = allResults.getSizeOfAllResults();
+        System.out.println(HEADER_ALL_RESULTS);
+        for (int i = 0; i < numberOfResults; i++) {
+            int topicNum = allResults.getTopicNum(i);
+            System.out.println("Your results for Topic " + (topicNum + 1) + ":\n"
+                    + allResults.getSpecifiedResult(i).getScore() + "\n");
+            if (includesQuestions) {
+                System.out.println(questionListByTopic.getQuestionSet(topicNum).getAllQuestions());
+            }
+        }
     }
 
     private void handleException(CustomException e) {
@@ -130,6 +152,10 @@ public class Ui {
     public void sayBye() {
         System.out.println("bye bye, get more sleep zzz");
         printLine();
+    }
+
+    public void printTable(String[] headers, String[][] data) {
+        System.out.println(ASCIITable.getInstance().getTable(headers, data));
     }
 
 }

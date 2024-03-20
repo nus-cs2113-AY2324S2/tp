@@ -4,19 +4,30 @@ import seedu.duke.exceptions.CustomException;
 
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
+  
+    private static final int NO_PARAMETERS = 1;
+    private static final int ONE_PARAMETER = 2;
+    private static final int TWO_PARAMETERS = 3;
+    private static final int FIRST_PARAMETER = 1;
+    private static final int SECOND_PARAMETER = 2;
+
+    private static final String QUESTION_PARAMETER = "questions";
+    private static final String COMMAND_SPLITTER = " ";
+
+    private static final boolean INCLUDES_QUESTION = true;
     boolean hasChosenTopic = false;
 
     public void parseCommand(
             String command, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic
+            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults
     ) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
             if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
-                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic);
-                hasChosenTopic = true;
-            } else if (!hasChosenTopic) {
+                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults);
+                //hasChosenTopic = true;
+            } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
                 throw new CustomException("Please choose a topic in the format: topic [INDEX]");
             }
 
@@ -25,15 +36,52 @@ public class Parser {
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
                 //System.out.println("ERROR");
                 processSolutionCommand(lowerCaseCommand, ui, questionsList, topicList, questionListByTopic);
-            }  else if (!lowerCaseCommand.startsWith("topic")) {
+            } else if (lowerCaseCommand.startsWith("results")) {
+                processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic);
+            } else if (lowerCaseCommand.startsWith("help")) {
+                processHelpCommand(lowerCaseCommand, ui, helper);
+            } else {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
 
     }
 
+    private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
+                                       QuestionListByTopic questionListByTopic) {
+        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER, TWO_PARAMETERS);
+        switch (commandParts.length) {
+        case (NO_PARAMETERS): {
+            ui.printAllResults(!INCLUDES_QUESTION, allResults, questionListByTopic);
+            break;
+        }
+        case (ONE_PARAMETER): {
+            if (commandParts[PARAMETER_INDEX].equals(QUESTION_PARAMETER)) {
+                ui.printAllResults(INCLUDES_QUESTION, allResults, questionListByTopic);
+            } else {
+                int index = Integer.parseInt(commandParts[FIRST_PARAMETER]);
+                String score = allResults.getSpecifiedResult(index - 1).getScore();
+                int topicNum = allResults.getTopicNum(index - 1);
+                ui.printOneResult(!INCLUDES_QUESTION, topicNum, score, questionListByTopic);
+            }
+            break;
+        }
+        case (TWO_PARAMETERS): {
+            int index = Integer.parseInt(commandParts[SECOND_PARAMETER]);
+            String score = allResults.getSpecifiedResult(index - 1).getScore();
+            int topicNum = allResults.getTopicNum(index - 1);
+            ui.printOneResult(INCLUDES_QUESTION, topicNum, score, questionListByTopic);
+            break;
+        }
+        default: {
+            break;
+        }
+        }
+    }
+
     private void processStartCommand (
-            String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic
+            String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
+            ResultsList allResults
     ) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
@@ -48,7 +96,7 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("booo no such topic");
             }
-            ui.printChosenTopic(topicNum, topicList, questionListByTopic);
+            ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults);
 
         } catch (NumberFormatException e) {
             throw new CustomException("invalid " + lowerCaseCommand + " parameter");
@@ -115,11 +163,27 @@ public class Parser {
 
     }
 
-    public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit){
+    public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,
+                                   Results topicResults){
         inputAnswers[index] = answer;
         String correctAnswer = questionUnit.getSolution();
         if (answer.equals(correctAnswer)){
-            //increase score
+            topicResults.increaseCorrectAnswers();
+        }
+    }
+
+    private void processHelpCommand(String lowerCaseCommand, Ui ui, Helper helper) throws CustomException {
+        String[] commandParts = lowerCaseCommand.split(" ");
+        if (commandParts.length != 1 && commandParts.length != 2) {
+            throw new CustomException("invalid help command parameter");
+        }
+
+        if (commandParts.length == 1) {
+            String[][] printData = helper.listAllCommands();
+            String[] tableHeader = {"command", "function", "usage"};
+            ui.printTable(tableHeader, printData);
+        } else {
+            // TODO: given a command, find and print the detailed usage for that command
         }
     }
 }
