@@ -19,7 +19,7 @@ public class Parser {
 
     public void parseCommand(
             String command, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults
+            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
     ) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {

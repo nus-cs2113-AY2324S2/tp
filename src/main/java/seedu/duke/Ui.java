@@ -20,7 +20,7 @@ public class Ui {
 
     public void readCommands(
             Ui ui, QuestionsList questionsList, TopicList topicList,
-            QuestionListByTopic questionListByTopic, ResultsList allResults
+            QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
     ) {
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults);
+                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults, helper);
             } catch (CustomException e) {
                 ui.handleException(e);
             }

@@ -16,6 +16,7 @@ public class Player2113 {
         questionsList2 = new QuestionsList();
         questionListByTopic = new QuestionListByTopic();
         topicList = new TopicList();
+        allResults = new ResultsList();
         helper = new Helper();
 
         if (someFilePath.contentEquals("something")) {
@@ -42,13 +43,12 @@ public class Player2113 {
     }
   
     public void run() {
-        allResults = new ResultsList();
         ui = new Ui();
         ui.sayHi();
         ui.printTopicList(topicList, ui);
 
         while (ui.isPlaying) {
-            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults);
+            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults, helper);
         }
 
     }
