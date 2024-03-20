@@ -43,7 +43,7 @@ public class TransactionList {
             throw new EmptyArgumentException("delete index");
         }
         String data = input.substring(DELETE_BEGIN_INDEX).trim();
-        if (!isInteger(data)) {
+        if (isNotInteger(data)) {
             throw new NumberFormatException(data);
         }
         int id = Integer.parseInt(data) - INDEX_OFFSET;
@@ -60,13 +60,21 @@ public class TransactionList {
         }
     }
 
-    // Checks whether the input index is an Integer
-    public static boolean isInteger(String data) {
+    public static boolean isNotInteger(String data) {
         try {
             Integer.parseInt(data);
-            return true;
-        } catch (NumberFormatException e) {
             return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
+    public static boolean isNotDouble(String data) {
+        try {
+            Double.parseDouble(data);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
         }
     }
   
