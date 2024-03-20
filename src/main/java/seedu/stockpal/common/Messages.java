@@ -29,6 +29,8 @@ public class Messages {
     public static final String MESSAGE_FILE_ALR_CREATED = "A non-existent file scenario is already handled earlier.";
   
     public static final String MESSAGE_DELETE_SUCCESS = "Product has been deleted.";
+    public static final String MESSAGE_INFLOW_SUCCESS = "Product quantity has been increased successfully.";
+    public static final String MESSAGE_OUTFLOW_SUCCESS = "Product quantity has been decreased successfully.";
     public static final String MESSAGE_LIST_SUCCESS = "Products in the product list have been printed.";
     public static final String MESSAGE_EMPTY_LIST = "ProductList is empty";
 }
