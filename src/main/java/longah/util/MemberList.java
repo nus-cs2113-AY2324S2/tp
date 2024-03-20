@@ -157,12 +157,7 @@ public class MemberList {
         try {
             classifiedMembers = classifyMembers();
         } catch (LongAhException e) {
-            // Return empty ArrayList if no transactions are needed
-            if (e.getMessage().equals(ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage())) {
-                return new ArrayList<>();
-            } else {
-                throw e;
-            }
+            return new ArrayList<>();
         }
         
         ArrayList<Member> positiveMembers = classifiedMembers.get(0);
