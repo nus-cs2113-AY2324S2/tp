@@ -6,8 +6,8 @@ import java.util.HashSet;
 public class OccasionDictionary {
     private static HashSet<String> uniqueOccasions = new HashSet<>();
 
-    public static void add(String Occasion) {
-        uniqueOccasions.add(Occasion);
+    public static void add(String occasion) {
+        uniqueOccasions.add(occasion);
     }
 
     public static void startup() {

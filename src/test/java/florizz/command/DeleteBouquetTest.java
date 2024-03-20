@@ -22,8 +22,7 @@ public class DeleteBouquetTest {
         controlList.remove(testBouquet);
         try {
             testDeleteBouquetCommand.execute(testList, ui);
-        }
-        catch(FlorizzException error){
+        } catch(FlorizzException error){
             ui.printError(error);
         }
         assertEquals(controlList, testList);

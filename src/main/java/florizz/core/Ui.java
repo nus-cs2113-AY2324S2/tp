@@ -153,7 +153,8 @@ public class Ui {
      * @param quantity
      * @param bouquetName
      */
-    public void printAddFlowerSuccess(ArrayList<Bouquet> bouquetList, String flowerName, Integer quantity, String bouquetName) {
+    public void printAddFlowerSuccess(ArrayList<Bouquet> bouquetList,
+                                      String flowerName, Integer quantity, String bouquetName) {
         System.out.println("You have successfully added the following: " + System.lineSeparator() +
                            "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
@@ -168,7 +169,8 @@ public class Ui {
      * @param quantity
      * @param bouquetName
      */
-    public void printRemoveFlowerSuccess(ArrayList<Bouquet> bouquetList, String flowerName, Integer quantity, String bouquetName) {
+    public void printRemoveFlowerSuccess(ArrayList<Bouquet> bouquetList,
+                                         String flowerName, Integer quantity, String bouquetName) {
         System.out.println("You have successfully removed the following: " + System.lineSeparator() +
                            "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
