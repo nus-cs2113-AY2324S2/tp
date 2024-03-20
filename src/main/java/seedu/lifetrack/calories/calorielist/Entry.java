@@ -1,23 +1,31 @@
 package seedu.lifetrack.calories.calorielist;
 
-import seedu.lifetrack.calories.activity.Activity;
-import seedu.lifetrack.calories.Calorie;
+public abstract class Entry {
 
-public class Entry {
+    private String description;
+    private int calories;
+    private String date;
 
-    private Activity activity;
-    private Calorie calorie;
-
-    public Entry(Activity activity, Calorie calorie){
-        this.calorie = calorie;
-        this.activity= activity;
+    public Entry(String description, int calories, String date){
+        this.description = description;
+        this.calories = calories;
+        this.date = date;
     }
 
-    public Activity getActivity() {
-        return activity;
+    public String getDescription() {
+        return description;
     }
 
-    public Calorie getCalorie() {
-        return calorie;
+    public int getCalories() {
+        return calories;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String toString() {
+        return String.format("Date: " + date + ", Description: " + description + ", Calories: " + calories);
+        
     }
 }

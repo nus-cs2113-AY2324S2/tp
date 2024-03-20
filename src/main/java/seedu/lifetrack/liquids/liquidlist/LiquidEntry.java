@@ -1,12 +1,12 @@
 package seedu.lifetrack.liquids.liquidlist;
 
-import seedu.lifetrack.liquids.beverage.Beverage;
+import seedu.lifetrack.liquids.Beverage;
 
-public class Entry {
+public class LiquidEntry {
 
     private Beverage beverage;
 
-    public Entry(Beverage beverage){
+    public LiquidEntry(Beverage beverage){
         this.beverage= beverage;
     }
 

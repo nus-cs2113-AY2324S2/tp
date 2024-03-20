@@ -12,8 +12,8 @@ public class CalorieListTest {
     public void addEntry_validInput_entryAdded() {
         // Test setup
         CalorieList calorieList = new CalorieList();
-        String validInputCalorieIn = "calories in d/2024-03-14 t/15:30 a/Eat burger c/369";
-        String validInputCalorieOut = "calories out d/2024-03-15 t/14:00 a/run c/679";
+        String validInputCalorieIn = "calories in desc/Eat burger c/369 date/2024-03-14";
+        String validInputCalorieOut = "calories out desc/run c/679 date/2024-03-15";
 
         // Call method to test
         calorieList.addEntry(validInputCalorieIn);
@@ -25,15 +25,13 @@ public class CalorieListTest {
         Entry secondEntry = calorieList.getEntry(1);
 
         // Check calories intake entry
-        assertEquals("2024-03-14", firstEntry.getActivity().getDate());
-        assertEquals("15:30", firstEntry.getActivity().getTime());
-        assertEquals("Eat burger", firstEntry.getActivity().getDescription());
-        assertEquals(369, firstEntry.getCalorie().getCalories());
+        assertEquals("2024-03-14", firstEntry.getDate());
+        assertEquals("Eat burger", firstEntry.getDescription());
+        assertEquals(369, firstEntry.getCalories());
 
         // Check calories outflow entry
-        assertEquals("2024-03-15", secondEntry.getActivity().getDate());
-        assertEquals("14:00", secondEntry.getActivity().getTime());
-        assertEquals("run", secondEntry.getActivity().getDescription());
-        assertEquals(679, secondEntry.getCalorie().getCalories());
+        assertEquals("2024-03-15", secondEntry.getDate());
+        assertEquals("run", secondEntry.getDescription());
+        assertEquals(679, secondEntry.getCalories());
     }
 }

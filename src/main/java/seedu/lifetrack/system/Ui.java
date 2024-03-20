@@ -1,4 +1,4 @@
-package seedu.lifetrack.ui;
+package seedu.lifetrack.system;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;

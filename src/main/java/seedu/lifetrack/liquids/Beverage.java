@@ -1,4 +1,4 @@
-package seedu.lifetrack.liquids.beverage;
+package seedu.lifetrack.liquids;
 
 public class Beverage {
     private String beverage;

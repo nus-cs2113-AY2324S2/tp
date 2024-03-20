@@ -1,17 +1,14 @@
 package seedu.lifetrack.calories.calorielist;
 
-import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
-
-import seedu.lifetrack.calories.activity.Activity;
-import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import seedu.lifetrack.system.parser.ParserCalories;
 
 import java.util.ArrayList;
 
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int SIZE_OF_DELETE = 16;
+    private final int DELETE_PADDING = 16;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -27,7 +24,7 @@ public class CalorieList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
+            int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
@@ -51,7 +48,7 @@ public class CalorieList {
      */
     public void addEntry(String input) {
         try {
-            Entry newEntry = parseCaloriesInput(input);
+            Entry newEntry = ParserCalories.parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
@@ -70,10 +67,7 @@ public class CalorieList {
             System.out.println("Caloric List:");
             for (int i = 0; i < calorieArrayList.size(); i++) {
                 Entry entry = calorieArrayList.get(i);
-                Activity activity = entry.getActivity();
-                Calorie calorie = entry.getCalorie();
-                System.out.println((i + 1) + ". Activity: " + activity.getDescription()
-                        + ", Calories: " + calorie.getCalories());
+                System.out.println((i + 1) + ". " + entry);
             }
         }
     }
