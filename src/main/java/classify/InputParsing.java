@@ -18,23 +18,9 @@ public class InputParsing {
     private static final String ADD = "add";
     private static final String VIEW = "view";
     private static final String DELETE = "delete";
-    //@@author blackmirag3
     private static final String EDIT = "edit";
-    private static final String WRONG_INPUT_MESSAGE = "No such command, type \"help\" to view all commands";
-    //@@author tayponghee
-    private static final String ENTER_STUDENT_DETAILS = "Enter student details: ";
-    private static final String ENTER_STUDENT_NAME = "Enter student name: ";
-    private static final String STUDENT_DETAILS = "Student details: ";
-    private static final String NAME = "Name: ";
-    private static final String CLASSES_ATTENDED = "Classes Attended (blank to skip): ";
-    private static final String STUDENT_NOT_FOUND = "Student not found!";
-    private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully!";
-    private static final String STUDENT_DELETED_SUCCESSFULLY = "Student removed successfully!";
     private static final String HELP = "help";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
-    private static final String SUBJECT = "Subject: ";
-    private static final String CURRENT_MARKS_OUT_OF_100 = "Current marks out of 100 (blank to skip) : ";
-
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in){
         //@@author blackmirag3
@@ -58,7 +44,7 @@ public class InputParsing {
             break;
 
         case HELP:
-            printHelpMessage();
+            Ui.printHelp();
             Ui.printDivider();
             break;
 
@@ -76,8 +62,7 @@ public class InputParsing {
             break;
 
         default:
-            System.out.println(WRONG_INPUT_MESSAGE);
-            Ui.printDivider();
+            Ui.printWrongInput();
             break;
         }
     }
@@ -98,7 +83,7 @@ public class InputParsing {
         if (name != null) {
             student = findStudentByName(list, name);
             if (student == null) {
-                System.out.println(STUDENT_NOT_FOUND);
+                Ui.printStudentNotFound();
             }
         }
         while (student == null) {
@@ -108,12 +93,16 @@ public class InputParsing {
                 return;
             }
             student = findStudentByName(list, name);
-            if (student == null) {
-                System.out.println(STUDENT_NOT_FOUND);
-            } else {
+            if (student != null) {
                 break;
+            } else {
+                Ui.printStudentNotFound();
             }
         }
+        editStudentAttributes(in, student);
+    }
+
+    private static void editStudentAttributes(Scanner in, Student student) {
         StudentAttributes attributes = student.getAttributes();
         showAttributes(attributes);
         //edits only StudentAttribute. (Not Name or Details)
@@ -138,11 +127,10 @@ public class InputParsing {
                 break;
 
             default:
-                System.out.println("invalid input");
+                Ui.printWrongInput();
                 break;
             }
         }
-        //if done overwrite student
     }
 
     //@@author alalal47
@@ -156,7 +144,7 @@ public class InputParsing {
     private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
         if (studentName == null) {
-            System.out.print(ENTER_STUDENT_NAME);
+            Ui.printStudentNamePrompt();
             name = in.nextLine().trim();
         } else {
             name = studentName;
@@ -164,30 +152,15 @@ public class InputParsing {
 
         Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
-            System.out.println(NAME + foundStudent.getName());
-            System.out.println(STUDENT_DELETED_SUCCESSFULLY);
+            Ui.printStudentDeleted();
         } else {
-            System.out.println(STUDENT_NOT_FOUND);
+            Ui.printStudentNotFound();
         }
         Ui.printDivider();
         masterStudentList.remove(foundStudent);
     }
 
-    /**
-     * Displays the help message to teach users how to use Classify.
-     */
-    private static void printHelpMessage() {
-        System.out.println("add                         Adds a student to the student list, " +
-                                                        "expects a name, grade and lessons attended" +
-                                                        ", can be used directly with a name e.g. add [name]");
-        System.out.println("view                        Views a students details, expects a name" +
-                                                        ", can be used directly with a name e.g. add [name]");
-        System.out.println("delete                      Deletes a student from the student list, expects a name" +
-                                                        ", can be used directly with a name e.g. add [name]");
-        System.out.println("list                        Displays the list of all students");
-        System.out.println("bye                         Exits Classify");
-        System.out.println("help                        Prints this help message");
-    }
+
 
     //@@author tayponghee
     /**
@@ -200,24 +173,24 @@ public class InputParsing {
     private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
         if (studentName == null) {
-            System.out.print(ENTER_STUDENT_NAME);
+            Ui.printStudentNamePrompt();
             name = in.nextLine();
         } else {
             name = studentName;
         }
-
+        //@author blackmirag3
         assert name != null : "Student name cannot be null";
-
+        //@author tayponghee
         Student foundStudent = findStudentByName(masterStudentList, name);
         if (foundStudent != null) {
             logger.log(Level.INFO, "Viewing student details: " + name);
-            System.out.println(STUDENT_DETAILS);
-            System.out.println(NAME + foundStudent.getName());
+            Ui.printStudentDetails();
+            Ui.printStudentName(name);
             StudentAttributes attributes = foundStudent.getAttributes();
             showAttributes(attributes);
         } else {
             logger.log(Level.WARNING, "Student not found: " + name);
-            System.out.println(STUDENT_NOT_FOUND);
+            Ui.printStudentNotFound();
         }
     }
 
@@ -231,10 +204,11 @@ public class InputParsing {
             List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
             if (!subjectGrades.isEmpty()) {
                 for (SubjectGrade subjectGrade : subjectGrades) {
-                    System.out.println(SUBJECT + subjectGrade.getSubject());
-                    System.out.println(CURRENT_MARKS_OUT_OF_100 + subjectGrade.getGrade());
-                    System.out.println("Classes Attended: " + subjectGrade.getClassesAttended());
-                    System.out.println();
+                    assert subjectGrade != null : "subjectGrade cannot be null";
+                    Ui.printSubjectName(subjectGrade.getSubject());
+                    Ui.printStudentGrades(subjectGrade.getGrade());
+                    Ui.printClassesAttended(subjectGrade.getClassesAttended());
+                    Ui.printDivider();
                 }
             } else {
                 System.out.println("No subjects and grades found for this student.");
@@ -258,7 +232,7 @@ public class InputParsing {
     private static void addStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         String name;
         if (studentName == null) {
-            System.out.println(ENTER_STUDENT_DETAILS);
+            Ui.printStudentNamePrompt();
         }
         name = checkForEmptyName(masterStudentList, in, studentName);
         assert name != null : "Student name cannot be empty";
@@ -267,7 +241,7 @@ public class InputParsing {
         Student student = new Student(name, attributes);
         masterStudentList.add(student);
         logger.log(Level.INFO, "Student added successfully.");
-        System.out.println(STUDENT_ADDED_SUCCESSFULLY);
+        Ui.printStudentAdded();
         Ui.printDivider();
     }
 
@@ -284,7 +258,7 @@ public class InputParsing {
         String name;
         while (true) {
             if (studentName == null) {
-                System.out.print(NAME);
+                Ui.printStudentNamePrompt();
                 name = in.nextLine().trim();
             } else {
                 name = studentName.trim();
@@ -399,7 +373,7 @@ public class InputParsing {
      */
     private static int promptForClassesAttended(Scanner in) {
         while (true) {
-            System.out.print(CLASSES_ATTENDED);
+            Ui.printClassesAttendedPrompt();
             String classesAttendedInput = in.nextLine();
             if (classesAttendedInput.isBlank()) {
                 return 0;
@@ -428,7 +402,7 @@ public class InputParsing {
      */
     private static double promptForGrade(Scanner in) {
         while (true) {
-            System.out.print(CURRENT_MARKS_OUT_OF_100);
+            Ui.printStudentGradesPrompt();
             String gradeInput = in.nextLine();
             if (gradeInput.isBlank()) {
                 return 0;
