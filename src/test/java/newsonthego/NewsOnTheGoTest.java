@@ -19,6 +19,11 @@ import java.util.Set;
 
 
 class NewsOnTheGoTest {
+
+    private static final String PREFERENCES_FILE = "userPreferences.txt";
+
+    private UserPreferences userPreferences;
+    
     @Test
     public void sampleTest() {
         assertTrue(true);
@@ -55,11 +60,6 @@ class NewsOnTheGoTest {
     }
 
     // UserPreferences Tests
-    private static final String PREFERENCES_FILE = "userPreferences.txt";
-
-    private UserPreferences userPreferences;
-
-
     @BeforeEach
     void setUpUserPreferences() {
         // Initialize UserPreferences before each test
@@ -80,7 +80,7 @@ class NewsOnTheGoTest {
         assertTrue(userPreferences.getInterestedTopics().contains(testTopic), "Topic should be added to preferences");
 
         userPreferences.removeTopic(testTopic);
-        assertFalse(userPreferences.getInterestedTopics().contains(testTopic), "Topic should be removed from preferences");
+        assertFalse(userPreferences.getInterestedTopics().contains(testTopic), "Topic should be removed");
     }
 
     @Test
@@ -98,7 +98,7 @@ class NewsOnTheGoTest {
     @Test
     void testToString() {
         String expectedInitialMessage = "You are not currently interested in any topics.";
-        assertEquals(expectedInitialMessage, userPreferences.toString(), "Initial message should indicate no interests");
+        assertEquals(expectedInitialMessage, userPreferences.toString(), "Message should indicate no interests");
 
         String testTopic = "health";
         userPreferences.addTopic(testTopic);
