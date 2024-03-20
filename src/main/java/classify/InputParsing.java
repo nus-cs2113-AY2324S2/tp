@@ -266,7 +266,7 @@ public class InputParsing {
                 studentName = NOTEMPTY;
             }
 
-            assert studentName != null :
+            assert studentName != null;
 
             if (name.isEmpty()) {
                 System.out.println("Student name cannot be empty. Please enter a valid name.");
