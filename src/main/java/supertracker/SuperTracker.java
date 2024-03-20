@@ -14,11 +14,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SuperTracker {
-    public static final Logger logger = Logger.getLogger(SuperTracker.class.getName());
+    private static final Logger logger = Logger.getLogger(SuperTracker.class.getName());
     private static final String START_MESSAGE = "Starting SuperTracker application";
     private static final String EXIT_MESSAGE = "Exiting SuperTracker application";
     private static final String LOG_FILE_LOCATION = "supertracker.log";
-    public static final String COMMAND_LOG = "Command passed successfully:";
+    private static final String COMMAND_LOG = "Command passed successfully:";
+    private static final String UNSUCCESSFUL_COMMAND_LOG = "Error while passing input: ";
 
     /**
      * Main entry-point for the java.supertracker.SuperTracker application.
@@ -52,6 +53,7 @@ public class SuperTracker {
                 logger.log(Level.INFO, COMMAND_LOG,command);
             } catch (TrackerException e) {
                 Ui.printError(e.getErrorMessage());
+                logger.log(Level.INFO, UNSUCCESSFUL_COMMAND_LOG + e.getErrorMessage(), e);
                 command = new InvalidCommand();
             }
             Ui.printLine();
