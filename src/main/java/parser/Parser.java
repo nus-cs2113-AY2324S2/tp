@@ -97,7 +97,7 @@ public class Parser {
         );
 
     }
-/*
+    /*
     private Command prepareDelete(String args) throws CommandFormatException{
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
