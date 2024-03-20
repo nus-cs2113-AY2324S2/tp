@@ -1,10 +1,7 @@
 package financialtransactions;
 
-import java.util.ArrayList;
 
 public class TransactionManager {
-    private static final String[] INSTRUCTIONS = {"add-inflow", "add-outflow", "delete-inflow",
-            "delete-outflow", "export-csv", "login", "quit", "view-history"};
     private TransactionList<Transaction<?>> transactionList;
     private TransactionList<Inflow> inflows;
     private TransactionList<Outflow> outflows;
@@ -20,7 +17,8 @@ public class TransactionManager {
         if (transaction instanceof Inflow) {
             Inflow inflow = (Inflow) transaction;
             return inflows.addTransaction(inflow);
-        } else if (transaction instanceof Outflow) {
+        } 
+        if (transaction instanceof Outflow) {
             Outflow outflow = (Outflow) transaction;
             return outflows.addTransaction(outflow);
         }
@@ -28,13 +26,19 @@ public class TransactionManager {
         return false;
     }
 
-    public boolean removeTransaction(int index, boolean isInflow) {
+    public boolean removeTransaction(int index) {
         transactionList.removeTransactionIndex(index);
-        if (isInflow) {
+        Transaction<?> transactionRemoved = transactionList.getNthTransaction(index);
+        //String transactionType = transactionRemoved.getTransactionType();
+        //if (transactionType.equals("I")) {
+        if (transactionRemoved instanceof Inflow) {
             return inflows.removeTransactionIndex(index);
-        } else {
+        }
+        //if (transactionType.equals("O")){
+        if (transactionRemoved instanceof Outflow) {
             return outflows.removeTransactionIndex(index);
         }
+        return false;
     }
 
     public double getTotalBalance() {
