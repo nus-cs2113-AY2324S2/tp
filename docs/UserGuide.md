@@ -26,7 +26,8 @@ Our long awaited first release adds everything you would expect of an inventory 
     - [Deleting an item: `delete`](#deleting-an-item-delete)
     - [Exiting the application: `bye`](#exiting-the-application-bye)
     - [Saving and Loading data](#saving-and-loading-data)
-7. [Command Summary](#command-summary)
+7. [Possible issues during startup](#possible-issues-during-startup)
+8. [Command Summary](#command-summary)
 8. [FAQ](#faq)
 9. [Glossary](#glossary)
 
@@ -85,7 +86,27 @@ Examples:
 * `add n/lego d/toys q/7 s/102.00  c/34.32`
 
 ### Searching for an item: `search`
+
+> Searches for items whose names contain the given keyword as a substring.
+
+Format: `search KEYWORD`
+
+- `KEYWORD`: The keyword to search for within the task descriptions.
+- The search is case-sensitive and uses substring matching. This means it will find items whose names contain the exact 
+keyword. For example, searching for "Car" will return items with the name "Toy Car" and "Carrot", but not items with 
+the name "Scarlet Witch".
+
+**Examples:**
+
+- `search Milo`  
+  This will return items with names such as "Milo Powder" and "Milo Packet".
+
 ### Listing current inventory: `list`
+
+>Shows a list of all tasks in your task list.
+
+**Format:** `list`
+
 ### Deleting an item: `delete`
 
 > Deletes an item from the inventory. Item Identifier can be either item index or item name.
@@ -126,20 +147,34 @@ Format: `bye`
 
 ### Saving and Loading data
 
-Unsure as to how you can save your BinBash data? Don't worry! Your data is automatically saved to your local storage upon execution of the [`bye` command](#exiting-the-application-bye). No manual saving of data is required.
+Unsure as to how you can save your BinBash data? Don't worry! Your data is automatically saved to your local storage after any command that modifies your inventory. No manual saving of data is required.
 
 Similarly, your saved data will be automatically loaded into BinBash when you start the application. If no previous save data was found, the application starts on a clean state.
 
-> For advanced users, BinBash data is stored locally as a `.txt` file in your BinBash install location (`<Location of BinBash.jar>/data/items.txt`). Do exercise caution when directly editing this file; BinBash **will not load** your save file if it is corrupted.
+> **Caution**: For advanced users, BinBash data is stored locally as a `.txt` file in your BinBash install location (`<Location of BinBash.jar>/data/items.txt`). Do exercise caution when directly editing this file; BinBash **will not load** your save file if it is corrupted. 
+> It is highly recommended to take a backup of the file before editing it.
+
+## Possible Issues During Startup
+
+Have problems loading up BinBash? Fret not, here's how to troubleshoot some of them:
+
+1. **File is Corrupted Error**
+   If you encounter an error that says the file is corrupted, you should first take a look at your `data.txt` file. It's possible that the content of the file has become invalid. Here's what you can do:
+   - **Delete and Recreate**: If you're unsure about the formatting, simply delete the `data.txt` file. BinBash will create a new one when you restart the application.
+   - **Rectify the Content**: If you have important data you can't lose, open the `data.txt` file and fix any formatting issues. Make sure each task follows the correct structure BinBash expects.
+
+2. **Issues with Data Directory or File**
+   If you encounter an error about not being able to create or read/write from the data directory or file, this usually means there's a permissions issue on your system. Here's how to handle it:
+   - **Check Permissions**: Ensure that BinBash has the right permissions to access the folders it needs. Right-click on the directory and check its properties to make sure reading and writing are allowed.
 
 ## Command Summary
 
 | **Commands** | **Usage**                                                                                        |
 |--------------|--------------------------------------------------------------------------------------------------|
 | **add**      | `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/SALE_PRICE c/COST_PRICE` |
-| **search**   |                                                                                                  |
+| **search**   | `search KEYWORD`                                                                                 |
 | **list**     | `list`                                                                                           |
-| **delete**   |                                                                                                  |
+| **delete**   | `delete ITEM_INDEX`                                                                              |
 | **bye**      | `bye`                                                                                            |
 
 ## FAQ
