@@ -1,10 +1,13 @@
 package seedu.stockpal.common;
 
 public class Messages {
-    public static final String HORIZONTAL_LINE = "==================================================";
-    public static final String MESSAGE_WELCOME = "Welcome to StockPal!" + "\n" + "Enter a command to begin.";
+    public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String HORIZONTAL_LINE =
+            "==========================================================================";
+    public static final String MESSAGE_WELCOME = "Welcome to StockPal!"
+            + "\n"
+            + "Enter a command to begin.";
     public static final String MESSAGE_GOODBYE = "Exiting program, goodbye!";
-
     public static final String MESSAGE_ADDED = "Product added!";
     public static final String MESSAGE_REFER_TO_HELP = "For more information on the commands, use `help`.";
     public static final String MESSAGE_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
@@ -23,4 +26,6 @@ public class Messages {
     public static final String WARNING_CLOSE_WRITER_ERROR = "OOPS!! Error in closing save file writer!";
     public static final String MESSAGE_FILE_ALR_CREATED = "A non-existent file scenario is already handled earlier.";
     public static final String MESSAGE_DELETE_SUCCESS = "Product has been deleted.";
+    public static final String MESSAGE_LIST_SUCCESS = "Products in the product list have been printed.";
+    public static final String MESSAGE_EMPTY_LIST = "ProductList is empty";
 }

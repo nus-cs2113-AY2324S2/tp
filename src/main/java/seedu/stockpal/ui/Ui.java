@@ -1,5 +1,6 @@
 package seedu.stockpal.ui;
 
+import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
@@ -8,10 +9,11 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
+import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 
 public final class Ui {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final int WRAP_LENGTH = 70;
 
     public static String getUserInput() throws NoSuchElementException {
         String input = "";
@@ -37,6 +39,10 @@ public final class Ui {
         }
     }
 
+    public static String indentTextIfRequired (String textToFormat) {
+        return WordUtils.wrap(textToFormat, WRAP_LENGTH, LINE_SEPARATOR, true);
+    }
+
     public static void printExceptionMessage(Exception exception) {
         printToScreen(exception.getMessage());
     }
@@ -50,15 +56,11 @@ public final class Ui {
     }
 
     public static void printListTasks(ProductList products) {
-        for (int i = 0; i < products.getSize(); i ++) {
+        for (int i = 0; i < products.getSize(); i++ ) {
+            assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);
             System.out.println((i + 1) + ". " + product);
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(product.getPid());
-            System.out.println(product.getQuantity());
-            System.out.println(product.getPrice());
-            System.out.println(product.getDescription());
-            System.out.println(HORIZONTAL_LINE);
+            printToScreen(HORIZONTAL_LINE);
         }
     }
 
