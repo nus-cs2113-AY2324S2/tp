@@ -146,7 +146,9 @@ public class Run extends Workout{
         int totalSeconds;
 
         if (this.isHourPresent) {
-            totalSeconds = this.times[0] * Constant.NUM_SECONDS_IN_HOUR + this.times[1] * Constant.NUM_SECONDS_IN_MINUTE  + this.times[2];
+            totalSeconds = this.times[0] * Constant.NUM_SECONDS_IN_HOUR
+                    + this.times[1] * Constant.NUM_SECONDS_IN_MINUTE
+                    + this.times[2];
         } else {
             totalSeconds = this.times[0] * 60 + this.times[1];
         }
