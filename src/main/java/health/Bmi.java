@@ -2,10 +2,9 @@ package health;
 
 import utility.Constant;
 import utility.CustomExceptions;
+import utility.Parser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * The Bmi class extends the Health class and provides functionality to calculate
@@ -15,22 +14,22 @@ public class Bmi extends Health {
     /**
      * The height of the user in meters.
      */
-    protected static double height;
+    protected double height;
 
     /**
      * The weight of the user in kilograms.
      */
-    protected static double weight;
+    protected double weight;
 
     /**
      * The Bmi of the user.
      */
-    protected static double bmiValue;
+    protected double bmiValue;
 
     /**
      * The Bmi's corresponding category.
      */
-    protected static String bmiCategory;
+    protected String bmiCategory;
 
     protected LocalDate date = null;
 
@@ -48,7 +47,7 @@ public class Bmi extends Health {
 
         assert this.height > 0 && this.weight > 0 : "Height and weight must be positive";
 
-        this.date = parseDate(date);
+        this.date = Parser.parseDate(date);
 
         this.bmiValue = calculateBmiValue();
         this.bmiCategory = getBmiCategory(bmiValue);
@@ -83,7 +82,6 @@ public class Bmi extends Health {
 
         if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(Constant.INSUFFICIENT_PARAMETERS_FOR_BMI);
-            // throw new CustomExceptions(Constant.UNSPECIFIED_PARAMETERS;
         }
 
         results[0] = command;
@@ -143,16 +141,5 @@ public class Bmi extends Health {
                 + this.calculateBmiValue()
                 + System.lineSeparator()
                 + this.getBmiCategory(bmiValue);
-    }
-
-    public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate formattedDate = null;
-        try {
-            formattedDate = LocalDate.parse(dateTime, formatter);
-        } catch (DateTimeParseException e) {
-            System.err.println("Error parsing date: " + e.getMessage());
-        }
-        return formattedDate;
     }
 }

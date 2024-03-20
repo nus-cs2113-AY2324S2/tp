@@ -5,19 +5,17 @@
 PulsePilot is a **desktop app for tracking health-related information, optimised for users via a Command Line Interface (CLI)**. If one can type fast, you can key in and track health-related information faster than traditional GUI applications installed on your phone or computer.
 
 * [Quick Start](#quick-start)
-* [Features](#features)
-    - [Notes About Command Format](#notes-about-command-format)
-    - [General](#general)
-      - [List](#list)
-      - [Help](#help)
-      - [Exit](#exit)
-      - [Saving Data](#saving-data)
-    - [Workouts](#workouts)
-      - [Run](#run)
-      - [Gym](#gym)
-    - [Health](#health)
-      - [BMI](#bmi)
-      - [Menstrual Cycle](#menstrual-cycle)
+* [Notes About Command Format](#notes-about-command-format)
+* [Adding Data](#adding-workouts-new)
+  * [Workout: Run](#workout-run)
+  * [Workout: Gym](#workout-gym)
+  * [Health: BMI](#health-bmi)
+  * [Health: Period](#health-period)
+* [List](#list)
+* [Help](#help)
+* [Exit](#exit)
+* [Logging](#logging)
+* [Saving Data](#saving-data)
 * [Frequently Asked Questions (FAQ)](#faq)
 * [Command Summary](#command-summary)
 
@@ -33,80 +31,95 @@ PulsePilot is a **desktop app for tracking health-related information, optimised
 6. Type commands in the command line and press Enter to execute it. Using `help` and pressing Enter will print the help message.
 
 ```
-Include banner from bot here.
+____________________________________________________________
+ _              _
+|_)    |  _  _ |_) o  |  _ _|_
+|  |_| | _> (/_|   |  | (_) |_
+Engaging orbital thrusters...
+PulsePilot on standby
+____________________________________________________________
 ```
 
-## Features
+## Notes About Command Format
 
-### Notes About Command Format
-
-* Words in UPPER_CASE are the parameters to be supplied by the user.
-    * TO ADD EXAMPLES FOR THE SPECIFIC COMMANDS.
-* Items in square brackets are optional.
-    * TO ADD EXAMPLES FOR THE SPECIFIC COMMANDS.
-* Extraneous parameters for commands that do not take in parameters (such as help) will be ignored.
-    * e.g. If the command entered is `help me`, it will be interpreted as `help`.
+* Parameters in `UPPER_CASE` are the parameters to be **supplied by the user**.
+* Parameters in square brackets are optional.
+  * `[/d:DATE]` means that the `DATE` parameter is **optional**.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-* Items with `...`  after them can be used multiple times, not including zero times.
 
-### General
+## Adding Workouts: `new`
 
-#### List
+Adds new data to track to PulsePilot.
 
-#### Help
+### Workout: Run
 
-#### Exit
+Adds a new Run workout to track. 
 
-#### Saving Data
+Format: `new /e:run /d:DISTANCE /t:TIME [/date:DATE]`
 
+* All parameters must be provided in correct order as shown above.
+* `DISTANCE` is a **2 decimal point positive number** (i.e. `15.24`) representing the distance ran.
+* `TIME` is in `[HH]:MM:SS` format (i.e. `25:30`). The `HH` representing hours is **optional**.
+* `DATE` is in `DD-MM-YYYY` format (i.e. `19-03-2024`).
 
-### Workouts
-
-Tracks either a gym or exercise workout (to be changed).
-
-#### Gym
-
-Add New Gym: `gym`
-
-Adds a new gym exercise to the exercise tracker.
-
-Format: `gym /s:Bench Press...` (to be changed)
-* **At least one station** has to be provided. Can include as many as the user wants.
-* Parameters must be **in order**.
-* `STATION` refers to the station name (i.e. `Bench Press`, `Deadlift`)
-* `WEIGHT` is a **1 decimal point** number in kilograms (i.e. `85.5`) representing the amount of weight carried for the station.
-* `SETS` is a **positive integer more than 1** representing the number of sets done for the station.
-* `REPETITIONS` is a **positive integer more than 1** representing the number of repetitions done per set.
-* `DATE` is in `DD/MM/YYYY` format (i.e. `05/12/2023`).
-
-Example:
+Examples: `new /e:run /d:5.24 /t:25:23 /date:19-03-2024`
 
 Expected Output:
 
 ```
-Include the expected output of the bot here. 
+TO BE ADDED.
 ```
 
-#### Run
+### Workout: Gym
 
-To be added. 
+Adds a new gym session to track. 
 
-### Health
+Format: `new /e:gym /n:NUMBER_OF_STATIONS [/d:DATE]`
 
-Tracks health of the user.
+* All parameters must be provided in correct order as shown above.
+* `NUMBER_OF_STATIONS` is a **positive integer**  representing the number of stations for one Gym session.
+* `DATE` is in `DD-MM-YYYY` format (i.e. `19-03-2024`).
 
-#### BMI
+Examples: `new /e:gym /n:4 /d:19-03-2024`
+
+Expected output:
+
+```
+TO BE ADDED.
+```
+
+#### Adding Gym Stations
+
+Upon entry of the `new /e:gym` command, the bot will prompt for further details:
+
+Format: `STATION_NAME /s:SET /r:REPS /w:WEIGHT`
+
+* All parameters must be provided in correct order as shown above.
+* `STATION_NAME` is a **string**  representing the name of the gym station.
+* `SET` is a **positive integer**  representing the number of sets done for one station.
+* `REPS` is a **positive integer**  representing the number of repetitions done for one station.
+* `WEIGHT` is a **positive integer**  representing the weight used for one station.
+
+Examples: `Bench Press /s:4 /r:10 /w:75`
+
+Expected Output:
+
+```
+TO BE ADDED.
+```
+
+### Health: BMI
 
 Calculates user's Body Mass Index (BMI).
 
-Format: `/h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE'
+Format: `/h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE`
 * All parameters must be provided in correct order as shown above.
-* `HEIGHT` is a **2 decimal point number in metres** (i.e. 1.71) representing the user's height.
-* `WEIGHT` is a **2 decimal point number in kilograms** (i.e. 60.50) representing the user’s weight.
+* `HEIGHT` is a **2 decimal point number in metres** (i.e. `1.71`) representing the user's height.
+* `WEIGHT` is a **2 decimal point number in kilograms** (i.e. `60.50`) representing the user’s weight.
 * `DATE` is in `DD-MM-YYYY` format (i.e. `19-03-2024`).
 
-Examples: 
-* /h:bmi /height:1.71 /weight:60.50 /date:19-03-2024
+Examples:
+* `/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024`
 
 Usage:
 ```
@@ -115,15 +128,69 @@ Your BMI is 20.69
 Great! You're within normal range.
 ```
 
-#### Menstrual Cycle
+### Health: Period
+
+Tracks the start and end of user's menstrual cycle.
+
+Format: `/h:period /start:START_DATE /end:END_DATE`
+
+* All parameters must be provided in correct order as shown above.
+* `START_DATE` is `DD-MM-YYYY` format (i.e. `19-03-2024`) representing the start of a cycle.
+* `END_DATE` is a `DD-MM-YYYY` format (i.e. `19-03-2024`) representing the end of a cycle.
+
+Examples:
+* `/h:period /start:09/03/2022 /end:16/03/2022`
+
+Usage:
+```
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+```
+
+### List
+
+To be added.
+
+### Help
+
+Prints the `help` message. 
+
+Format: `help`
+
+Expected output:
+
+```
+____________________________________________________________
+Commands List:
+
+list - prints out the List
+help - procures command list
+exit - terminates the bot
+____________________________________________________________
+bmi - calculates BMI
+weight - save current weight
+height - save current height
+____________________________________________________________
+bmi format: bmi *parameter*
+____________________________________________________________
+```
+
+### Exit
+
+### Logging
+
+The latest logs are written to `pulsepilot_log.txt` once the bot exits. Each time the bot is run, the current `pulsepilot_log.txt` file is overwritten with the most recent logs. The logs record both info messages and any error messages.
+
+### Saving Data
+
+As of now, the bot does not write or read from any file. This feature will be implemented in v2.0. 
 
 ## FAQ
 
 **1.** How do I transfer my data to another computer?
 
-Ensure that you have the `data.txt` file in the same directory as `pulsepilot.jar`. 
+As of now, it is not possible to do so. This feature will be implemented in `v2.0`. 
 
-TO ADD MORE. 
 
 ## Command Summary
 

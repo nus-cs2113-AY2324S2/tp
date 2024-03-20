@@ -2,10 +2,11 @@ package health;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of BMI objects stored.
+ */
 public class HealthList extends ArrayList<Health> {
-    /**
-     * ArrayList to store Bmi objects.
-     */
+
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
@@ -44,5 +45,11 @@ public class HealthList extends ArrayList<Health> {
     public static void showLatestPeriod() {
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
+    }
+
+    public static void showPeriodHistory() {
+        for (Period period : periods) {
+            System.out.println(period);
+        }
     }
 }

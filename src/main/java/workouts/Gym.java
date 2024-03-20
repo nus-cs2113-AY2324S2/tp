@@ -7,17 +7,27 @@ import utility.Parser;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a Gym object that contains an ArrayList of GymStation objects.
+ */
 public class Gym extends Workout{
     protected LocalDate date = null;
     protected ArrayList<GymStation> stations = new ArrayList<>();
 
     // takes (station name, weight, sets, reps)
 
+    /**
+     * Constructor that adds a Gym object to WorkoutList.
+     */
     public Gym() {
         WorkoutList.addGym(this);
 
     }
-    // overloaded constructor for optional date
+
+    /**
+     * Overloaded constructor that adds a Gym object to WorkoutList, and also takes the optional date parameter.
+     * @param stringDate String representing the date parameter specified.
+     */
     public Gym(String stringDate) {
 
         this.date = Parser.parseDate(stringDate);
@@ -25,18 +35,14 @@ public class Gym extends Workout{
 
     }
 
-    public static void getGym(String input){
-        System.out.println("temp");
-    }
-
     /**
-     * Adds station to an ArrayList of GymStation object
-     * Takes string name, weight done, number of sets, number of reps
-     * @param name
-     * @param weight
-     * @param numberOfSet
-     * @param repetitions
-     * @throws CustomExceptions.InvalidInput
+     * Adds station to an ArrayList of GymStation object.
+     *
+     * @param name Name of the gym station.
+     * @param weight Weight used for the station.
+     * @param numberOfSet Number of sets done.
+     * @param repetitions Number of repititions done.
+     * @throws CustomExceptions.InvalidInput If there is invalid input in any parameter.
      */
     public void addStation(String name, int weight, int numberOfSet,
                            int repetitions) throws CustomExceptions.InvalidInput{
@@ -51,7 +57,8 @@ public class Gym extends Workout{
 
     /**
      * Get specific station as part of Gym object based on workout.
-     * @return
+     *
+     * @return The desired GymStation object.
      */
     public ArrayList<GymStation> getStations(){
         return stations;
@@ -63,6 +70,11 @@ public class Gym extends Workout{
         return stations.get(index);
     }
 
+    /**
+     * Retrieves the string representation of a Gym object.
+     *
+     * @return A formatted string representing the Gym object, inclusive of the date and gym stations done.
+     */
     @Override
     public String toString() {
         String printedDate;

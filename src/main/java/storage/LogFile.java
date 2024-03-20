@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import utility.Constant;
 
+/**
+ * Represents a Logfile object used to write information and error logs for PulsePilot.
+ */
 public class LogFile {
     protected static FileHandler logFileHandler = null;
     private static LogFile instance = null;
@@ -20,10 +23,10 @@ public class LogFile {
     }
 
     /**
-     * Returns the singleton instance of the LogFile class.
+     * Returns a singular instance of the LogFile class.
      * If the instance is null, it creates a new instance.
      *
-     * @return The singleton instance of the LogFile class.
+     * @return An instance of the LogFile class.
      */
     public static LogFile getInstance() {
         if (instance == null) {
@@ -51,7 +54,7 @@ public class LogFile {
     }
 
     /**
-     * Writes commands used and any errors to log file.
+     * Writes information or warning logs to the log file.
      *
      * @param input   String representing the user's input.
      * @param isError Boolean variable to determine if log is an error.

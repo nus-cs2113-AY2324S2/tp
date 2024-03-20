@@ -41,7 +41,7 @@ class OutputTest {
     }
     @Test
     void printHistory_runsOnly_expectAllRunsPrinted() throws CustomExceptions.InvalidInput {
-        new Run("40:10", "10.3", "15/03/2024");
+        new Run("40:10", "10.3", "15-03-2024");
         new Run("01:59:10", "15.3");
         String expected = Constant.PARTITION_LINE + "\n" +
                 "Index\t\tType\tTime\t\tDistance\tPace\t\tDate\n" +
