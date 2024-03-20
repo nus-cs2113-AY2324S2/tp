@@ -115,6 +115,8 @@ public class InputParsing {
             System.out.println("How would you like to update student's subject? (enter blank to exit)");
             String command = in.nextLine().trim();
             if (command.isBlank()) {
+                System.out.println("Exiting edit");
+                Ui.printDivider();
                 return;
             }
 
@@ -339,13 +341,14 @@ public class InputParsing {
      *                   student.
      */
     private static void editAttribute(Scanner in, StudentAttributes attributes) {
+
         while (true) {
 
             System.out.print("Subject to edit (enter nothing to exit): ");
             String subjectToFind = in.nextLine().trim();
 
             if (subjectToFind.isBlank()) {
-                System.out.println("no subject edited");
+                System.out.println("No subject edited.");
                 return;
             }
 
