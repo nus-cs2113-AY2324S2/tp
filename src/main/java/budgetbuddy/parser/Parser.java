@@ -1,15 +1,17 @@
 package budgetbuddy.parser;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
+import com.sun.jdi.InvalidTypeException;
 
 public class Parser {
 
     public static final int ADD_COMMAND_INDEX = 3;
 
-    public Transaction parseTransaction(String input, Account account) {
+    public Transaction parseTransaction(String input, Account account) throws InvalidTransactionTypeException {
         String data = input.substring(ADD_COMMAND_INDEX + 1);
         String[] parseData = data.split("/");
         String type = null;
@@ -43,7 +45,8 @@ public class Parser {
             return new Income(description, Double.parseDouble(amount), category, date, account);
         } else if (type.equalsIgnoreCase("expense")) {
             return new Expense(description, Double.parseDouble(amount), category, date, account);
+        } else {
+            throw new InvalidTransactionTypeException(type);
         }
-        return null;
     }
 }

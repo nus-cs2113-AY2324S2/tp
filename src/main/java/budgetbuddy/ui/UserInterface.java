@@ -52,6 +52,13 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
+    public static void printTransactionTypeError(String message) {
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Invalid transaction type: " + message);
+        System.out.println(TAB_SPACE + "Please enter Expense or Income only.");
+        System.out.println(LINE);
+    }
+
     public static void printNumberFormatError(String message) {
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Error occurred with the input: " + message);

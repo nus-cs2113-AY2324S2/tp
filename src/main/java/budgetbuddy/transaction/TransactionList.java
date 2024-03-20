@@ -2,6 +2,7 @@ package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
@@ -65,7 +66,7 @@ public class TransactionList {
         transactions.add(t);
     }
 
-    public void processTransaction(String input, Account account) {
+    public void processTransaction(String input, Account account) throws InvalidTransactionTypeException {
         Transaction t = parser.parseTransaction(input, account);
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));

@@ -2,6 +2,7 @@ package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
+import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void processTransaction_addsTransaction() {
+    public void processTransaction_addsTransaction() throws InvalidTransactionTypeException {
         Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
@@ -37,6 +38,13 @@ public class TransactionListTest {
         assertEquals(testTransaction.getAmount(), transactionList.getTransactions().get(0).getAmount());
         assertEquals(testTransaction.getCategory(), transactionList.getTransactions().get(0).getCategory());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
+    }
+
+    @Test
+    public void processTransaction_withInvalidTransactionType_throwsTransactionTypeException() {
+
+        assertThrows(InvalidTransactionTypeException.class, () -> transactionList.processTransaction(
+                "add /t/Donation /n/Test /$/200 /d/14-03-2024 /c/Personal", account));
     }
 
     @Test
