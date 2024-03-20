@@ -50,11 +50,12 @@ public class Grocery {
     /**
      * Returns a String representation of the Grocery.
      */
+    // TODO: cannot take in NULL values ?
     public String printGrocery() {
-        assert !(this.name.isEmpty());
+        assert !(this.name.isEmpty()) : "Grocery does not exist";
 
-        String amt = (this.amount.isEmpty() ) ? "" : ", amount: " + this.amount;
-        String exp = (this.expiration.isEmpty() ) ? "" : ", expiration: " + this.expiration;
+        String amt = (this.amount == null || this.amount.isEmpty()) ? "" : ", amount: " + this.amount;
+        String exp = (this.amount == null || this.expiration.isEmpty()) ? "" : ", expiration: " + this.expiration;
         return this.name + amt + exp;
     }
 }
