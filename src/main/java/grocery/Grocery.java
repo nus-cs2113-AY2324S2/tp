@@ -1,5 +1,6 @@
 package grocery;
 
+
 /**
  * Represents a grocery.
  */
@@ -46,10 +47,14 @@ public class Grocery {
         this.expiration = expiration;
     }
 
+    /**
+     * Returns a String representation of the Grocery.
+     */
     public String printGrocery() {
-        assert !(this.name.isEmpty());
-        String amt = (this.amount.isEmpty() ) ? "" : ", amount: " + this.amount;
-        String exp = (this.expiration.isEmpty() ) ? "" : ", expiration: " + this.expiration;
+        assert !(this.name.isEmpty()) : "Grocery does not exist";
+
+        String amt = (this.amount == null || this.amount.isEmpty()) ? "" : ", amount: " + this.amount;
+        String exp = (this.amount == null || this.expiration.isEmpty()) ? "" : ", expiration: " + this.expiration;
         return this.name + amt + exp;
     }
 }
