@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
 
-//import java.util.stream.Collectors;
-//import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static model.SetMenu.Breakfast;
 import static model.SetMenu.Lunch;
@@ -22,10 +22,6 @@ public class Menu implements ItemManager {
 
     private final String menuID;
 
-    public Menu() {
-        Menu.setupLogger();
-        menuID = "v1 Menu";
-    }
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
         switch (menuType) {
@@ -55,12 +51,12 @@ public class Menu implements ItemManager {
 
     /**
      * Removes an item from the menu by its corresponding number
-     * @param menuNum The number of the item in the menu
+     * @param menuItemNum The number of the item in the menu
      */
     @Override
-    public void remove(int menuNum) {
+    public void remove(int menuItemNum) {
         try {
-            this.menuItemList.remove(menuNum - 1);
+            this.menuItemList.remove(menuItemNum - 1);
 
         } catch (IndexOutOfBoundsException e) {
             logr.log(Level.SEVERE, "You tried removing an item belonging to an index " +
@@ -77,28 +73,14 @@ public class Menu implements ItemManager {
         this.menuItemList.removeIf(x -> x.getID().equals(name));
     }
 
-    /*@Override
+    @Override
     public String toString() {
         return this.menuID + "\n" +
                 IntStream.range(0,this.menuItemList.size())
                         .mapToObj(x -> (x + 1) + ". " + this.menuItemList.get(x))
                         .collect(Collectors.joining("\n"));
-    }*/
-
-
-    public void displayMenu() {
-        System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║              MENU                      ║");
-        System.out.println("╠══════════════════════════════════════╣");
-        System.out.println("║ ID   Name                   Price      ║");
-        System.out.println("╠══════════════════════════════════════╣");
-        for (MenuItem item : menuItemList) {
-            System.out.printf("║ %-3s  %-20s $%-8.2f   ║\n", item.getID(), item.getName(), item.getPrice());
-        }
-
-        System.out.println("╚══════════════════════════════════════╝");
-
     }
+
     /**
      * Set up logger for this class. It has two handlers, one FileHandler and one ConsoleHandler
      * FileHandler records log messages from FINE and above
@@ -119,7 +101,5 @@ public class Menu implements ItemManager {
         } catch (java.io.IOException e) {
             logr.log(Level.SEVERE, "File logger not working.",e);
         }
-
-
     }
 }
