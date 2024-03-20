@@ -4,7 +4,7 @@ import seedu.duke.exceptions.CustomException;
 
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
-
+  
     private static final int NO_PARAMETERS = 1;
     private static final int ONE_PARAMETER = 2;
     private static final int TWO_PARAMETERS = 3;
@@ -38,7 +38,9 @@ public class Parser {
                 processSolutionCommand(lowerCaseCommand, ui, questionsList, topicList, questionListByTopic);
             } else if (lowerCaseCommand.startsWith("results")) {
                 processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic);
-            } else if (!lowerCaseCommand.startsWith("topic")) {
+            } else if (lowerCaseCommand.startsWith("help")) {
+                processHelpCommand(lowerCaseCommand, ui, helper);
+            } else {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
@@ -167,6 +169,21 @@ public class Parser {
         String correctAnswer = questionUnit.getSolution();
         if (answer.equals(correctAnswer)){
             topicResults.increaseCorrectAnswers();
+        }
+    }
+
+    private void processHelpCommand(String lowerCaseCommand, Ui ui, Helper helper) throws CustomException {
+        String[] commandParts = lowerCaseCommand.split(" ");
+        if (commandParts.length != 1 && commandParts.length != 2) {
+            throw new CustomException("invalid help command parameter");
+        }
+
+        if (commandParts.length == 1) {
+            String[][] printData = helper.listAllCommands();
+            String[] tableHeader = {"command", "function", "usage"};
+            ui.printTable(tableHeader, printData);
+        } else {
+            // TODO: given a command, find and print the detailed usage for that command
         }
     }
 }

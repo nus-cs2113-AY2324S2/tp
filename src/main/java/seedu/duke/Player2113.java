@@ -9,12 +9,15 @@ public class Player2113 {
     private TopicList topicList;
     private QuestionListByTopic questionListByTopic;
     private ResultsList allResults;
+    private final Helper helper;
 
     public Player2113(String someFilePath) {
         questionsList1 = new QuestionsList();
         questionsList2 = new QuestionsList();
         questionListByTopic = new QuestionListByTopic();
         topicList = new TopicList();
+        helper = new Helper();
+
         if (someFilePath.contentEquals("something")) {
             // TODO: load data from file
             // Add dummy data (for now)
@@ -37,6 +40,7 @@ public class Player2113 {
         }
 
     }
+  
     public void run() {
         allResults = new ResultsList();
         ui = new Ui();
@@ -44,11 +48,11 @@ public class Player2113 {
         ui.printTopicList(topicList, ui);
 
         while (ui.isPlaying) {
-
             ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults);
         }
 
     }
+  
     public static void main(String[] args) {
         new Player2113(SOME_FILE_PATH).run();
     }

@@ -1,5 +1,7 @@
 package seedu.duke;
 
+
+import com.bethecoder.ascii_table.ASCIITable;
 import seedu.duke.exceptions.CustomException;
 
 import java.util.Scanner;
@@ -150,6 +152,10 @@ public class Ui {
     public void sayBye() {
         System.out.println("bye bye, get more sleep zzz");
         printLine();
+    }
+
+    public void printTable(String[] headers, String[][] data) {
+        System.out.println(ASCIITable.getInstance().getTable(headers, data));
     }
 
 }
