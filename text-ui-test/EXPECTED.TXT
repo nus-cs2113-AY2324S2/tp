@@ -7,9 +7,9 @@ to follow to use it in using this software:
 2. To delete current existing book
    delete NUMBER_ACCORDING_TO_LIST
 3. To mark book as borrowed
-   borrow INDEX_OF_BOOK
+   borrow NAME_OF_BOOK
 4. To unmark book as returned
-   return INDEX_OF_BOOK
+   return NAME_OF_BOOK
 5. To list all the books added
    list
 __________
