@@ -30,5 +30,7 @@ public class ClearCommand extends Command {
         TransactionList transactions = group.getTransactionList();
         MemberList members = group.getMemberList();
         transactions.clear(members);
+        group.updateTransactionSolution();
+        group.saveAllData();
     }
 }

@@ -153,7 +153,18 @@ public class MemberList {
      * @return The list of subtransactions needed to solve the balances of the group members.
      */
     public ArrayList<Subtransaction> solveTransactions() throws LongAhException {
-        ArrayList<ArrayList<Member>> classifiedMembers = classifyMembers();
+        ArrayList<ArrayList<Member>> classifiedMembers;
+        try {
+            classifiedMembers = classifyMembers();
+        } catch (LongAhException e) {
+            // Return empty ArrayList if no transactions are needed
+            if (e.getMessage().equals(ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage())) {
+                return new ArrayList<>();
+            } else {
+                throw e;
+            }
+        }
+        
         ArrayList<Member> positiveMembers = classifiedMembers.get(0);
         ArrayList<Member> negativeMembers = classifiedMembers.get(1);
         assert !positiveMembers.isEmpty() && !negativeMembers.isEmpty() : "Members should be classified.";

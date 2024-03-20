@@ -24,5 +24,7 @@ public class DeleteTransactionCommand extends Command {
     public void execute(Group group) throws LongAhException {
         TransactionList transactions = group.getTransactionList();
         transactions.remove(taskExpression);
+        group.updateTransactionSolution();
+        group.saveAllData();
     }
 }

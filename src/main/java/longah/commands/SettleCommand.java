@@ -21,5 +21,7 @@ public class SettleCommand extends Command {
      */
     public void execute(Group group) throws LongAhException {
         group.settleUp(this.taskExpression);
+        group.updateTransactionSolution();
+        group.saveAllData();
     }
 }

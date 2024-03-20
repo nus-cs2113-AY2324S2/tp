@@ -27,6 +27,7 @@ public class Group {
         this.members = new MemberList();
         this.transactions = new TransactionList();
         this.storage = new StorageHandler(this.members, this.transactions);
+        updateTransactionSolution();
     }
 
     /**
@@ -71,8 +72,8 @@ public class Group {
      * @throws LongAhException If the transaction solution cannot be updated
      */
     public void updateTransactionSolution() throws LongAhException {
-        logger.log(Level.INFO, "Updating transaction solution");
         this.transactionSolution = this.members.solveTransactions();
+        logger.log(Level.INFO, "Transaction solution updated");
     }
 
     /**
@@ -118,7 +119,7 @@ public class Group {
     }
 
     /**
-     * Loads the data from the member list and transaction list into storage file.
+     * Saves the data from the member list and transaction list into storage file.
      * 
      * @throws LongAhException If the data file is not read or the content is invalid
      */
