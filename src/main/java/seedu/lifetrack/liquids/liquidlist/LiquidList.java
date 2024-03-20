@@ -41,7 +41,6 @@ public class LiquidList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
-            assert index > 0 && index <= liquidArrayList.size() : "Invalid index";
             liquidArrayList.remove(index - 1);
             System.out.println("Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
