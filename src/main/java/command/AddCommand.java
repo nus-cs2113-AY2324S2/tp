@@ -16,7 +16,7 @@ public class AddCommand extends Command {
         this.toAdd = new Item(itemName, quantity, uom, category);
     }
 
-    public String getItemNam() {
+    public String getItemName() {
         return itemName;
     }
 
@@ -35,7 +35,7 @@ public class AddCommand extends Command {
     @Override
     public void execute() {
         Itemlist.addItem(toAdd);
-        System.out.println(MESSAGE_SUCCESS + getItemNam() + "(Qty: " + getQuantity() + ")");
+        System.out.println(MESSAGE_SUCCESS + getItemName() + "(Qty: " + getQuantity() + ")");
         if (!category.equals("NA")) {
             System.out.println("to " + getCategory());
         }
