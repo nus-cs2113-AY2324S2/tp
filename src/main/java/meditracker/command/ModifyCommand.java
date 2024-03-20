@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedication;
 import meditracker.DailyMedicationManager;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
@@ -77,8 +78,9 @@ public class ModifyCommand extends Command {
             case NAME:
                 medication.setName(argumentValue);
 
-                // TODO: Update medication name in DailyMedication
-
+                // Update medication name in DailyMedication
+                DailyMedication dailyMedication = dailyMedicationManager.getDailyMedication(listIndex);
+                dailyMedication.setName(argumentValue);
                 break;
             case QUANTITY:
                 medication.setQuantity(argumentValue);

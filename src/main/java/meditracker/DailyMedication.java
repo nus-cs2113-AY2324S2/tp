@@ -4,7 +4,7 @@ package meditracker;
  * Stores name and the status of daily medication (taken or not)
  */
 public class DailyMedication {
-    private final String name;
+    private String name;
     private boolean isTaken;
 
     /**
@@ -19,6 +19,10 @@ public class DailyMedication {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isTaken() {
