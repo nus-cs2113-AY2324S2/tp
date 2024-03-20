@@ -4,6 +4,7 @@ import parser.Parser;
 import ui.TextUi;
 import itemlist.Itemlist;
 
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -38,6 +39,6 @@ public class Duke {
         do {
             userInput = ui.getUserInput();
             parser.parseInput(userInput);
-        } while (!userInput.equals("done"));
+        } while (!parser.isExitCommandDetected);
     }
 }
