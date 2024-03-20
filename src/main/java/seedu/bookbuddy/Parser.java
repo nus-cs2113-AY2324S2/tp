@@ -59,7 +59,8 @@ public class Parser {
                 System.exit(0);
                 break;
             default:
-                throw new UnsupportedCommandException("Sorry but that is not a valid command use (help) to find out valid commands!");
+                throw new UnsupportedCommandException("Sorry but that is not a valid command " +
+                        "use (help) to find out valid commands!");
             }
         } catch (NumberFormatException e) {
             throw new InvalidBookIndexException("Book index must be an integer.");
