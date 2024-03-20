@@ -21,6 +21,18 @@ public class Parser {
             return;
         }
 
+        //Parse the compare command and split them into parts "compare user1 user2"
+        if (command.toLowerCase().startsWith("compare")) {
+            String[] parts = command.split("\\s+");
+            try {
+                InputValidator.validateCompareInput(command);
+                User user1 = parts[1];
+                User user2 = parts[2];
+            } catch (InvalidFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
         // Extracting description, day, start time, and end time from the parts
         String description = parts[DESCRIPTION_INDEX].trim().substring(5).trim();
         String day = parts[DAY_INDEX].trim().substring(3).trim(); // Removing "on" from day

@@ -1,8 +1,14 @@
 package seedu.duke;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the Timetable object consisting of Arraylist of Tasks for each day of the week.
+ */
 public class Timetable {
     private Map<String, ArrayList<Task>> weeklyTasks; // Map to store tasks for each day
     protected static final String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -45,6 +51,54 @@ public class Timetable {
         } catch (InvalidDayException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Compares and prints overlapping free time between two Timetables.
+     *
+     * @param table1 first Timetable.
+     * @param table2 second Timetable
+     *
+     * Prints the overlapping free time for each day in the format:
+     *      ----------------------
+     *      Shared Free Time on [day]
+     *      HH:mm - HH:mm: Overlapping Free Time
+     */
+    public static void compareTimetable(Timetable table1, Timetable table2){
+        for (String day : Timetable.days) {
+            System.out.println("----------------------\n" +
+                    "Shared Free Time on " + day + ":");
+            // Merge tasks from both timetables and sort them by start time
+            ArrayList<Task> mergedTasks = mergeAndSortTasks(table1.getWeeklyTasks().get(day), table2.getWeeklyTasks().get(day));
+            // Calculate overlapping free time intervals then print them
+            calculateAndPrintOverlappingFreeTime(mergedTasks, day);
+        }
+    }
+
+    private static ArrayList<Task> mergeAndSortTasks(ArrayList<Task> taskList1, ArrayList<Task> taskList2) {
+        ArrayList<Task> mergedTasks = new ArrayList<>(taskList1);
+        mergedTasks.addAll(taskList2);
+        mergedTasks.sort(Comparator.comparing(Task::getStartTime));
+        return mergedTasks;
+    }
+
+    private static void calculateAndPrintOverlappingFreeTime(ArrayList<Task> tasks, String day) {
+        if (!tasks.isEmpty()) {
+            LocalTime previousEndTime = LocalTime.MIN;
+            for (Task task : tasks) {
+                if (task.getStartTime().isAfter(previousEndTime)) {
+                    System.out.println(previousEndTime + " - " + task.getStartTime() + ": Overlapping Free Time");
+                }
+                previousEndTime = task.getEndTime();
+            }
+            if (previousEndTime.isBefore(LocalTime.MAX)) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                System.out.println(previousEndTime + " - " + LocalTime.MAX.format(formatter) + ": Overlapping Free Time");
+            }
+        } else {
+            System.out.println("** Whole day is free on " + day);
+        }
+
     }
 
     public void printTasksOfTheDay(String day) {
