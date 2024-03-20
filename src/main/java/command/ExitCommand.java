@@ -2,13 +2,13 @@ package command;
 
 public class ExitCommand extends Command{
 
-    protected boolean isExit = false;
+    protected static boolean isExit = false;
 
     public ExitCommand(boolean isExit) {
-        this.isExit = isExit;
+        ExitCommand.isExit = isExit;
     }
 
-    public boolean getIsExit() {
+    public static boolean getIsExit() {
         return isExit;
     }
 

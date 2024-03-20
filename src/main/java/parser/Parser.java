@@ -1,6 +1,13 @@
 package parser;
 
-import command.*;
+import command.Command;
+import command.DeleteCommand;
+import command.AddCommand;
+import command.ListCommand;
+import command.IncorrectCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.EditCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
 import itemlist.Itemlist;
@@ -40,11 +47,8 @@ public class Parser {
             return new ExitCommand(true);
         case HELP:
             return new HelpCommand();
-            break;
         case LIST:
             return new ListCommand<>(Itemlist.getItems());
-            break;
-
         case ADD:
             try {
                 return prepareAdd(arguments);
@@ -52,25 +56,23 @@ public class Parser {
             } catch (CommandFormatException e) {
                 break;
             }
-            break;
         case DELETE:
             try {
                 return prepareDelete(arguments);
             } catch (CommandFormatException e) {
                 break;
             }
-            break;
         case EDIT:
-           try {
-               return prepareEdit(arguments);
+            try {
+                return prepareEdit(arguments);
             } catch (CommandFormatException e) {
                 break;
             }
-            break;
         default:
             System.out.println(Messages.INVALID_COMMAND);
             break;
         }
+        return new IncorrectCommand();
     }
 
 
@@ -88,7 +90,6 @@ public class Parser {
                 matcher.group("uom"),
                 category
         );
-
     }
 
     private Command prepareDelete(String args) throws CommandFormatException{
@@ -106,7 +107,6 @@ public class Parser {
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.EDIT);
         }
-
         int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
         return new EditCommand(
             matcher.group("itemName"),

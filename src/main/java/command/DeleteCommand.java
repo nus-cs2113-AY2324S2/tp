@@ -21,8 +21,7 @@ public class DeleteCommand extends Command {
         }
         if (index == -1) {
             //throw exception;
-        }
-        else {
+        } else {
             Itemlist.deleteItem(index);
         }
     }

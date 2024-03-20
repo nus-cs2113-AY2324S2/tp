@@ -25,8 +25,7 @@ public class EditCommand extends Command {
         }
         if (index == -1) {
             //throw exception;
-        }
-        else {
+        } else {
             Itemlist.editQuantity(index, newQuantity);
         }
     }
