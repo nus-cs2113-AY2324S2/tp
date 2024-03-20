@@ -1,17 +1,11 @@
+package longah;
 import java.util.Scanner;
 
 /**
  * The UI class handles user interaction by displaying messages and reading user input.
  */
 public class UI {
-    private static Scanner scanner;
-
-    /**
-     * Constructs a new UI instance.
-     */
-    public static UI() {
-        this.scanner = new Scanner(System.in);
-    }
+    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * Displays the welcome message.
