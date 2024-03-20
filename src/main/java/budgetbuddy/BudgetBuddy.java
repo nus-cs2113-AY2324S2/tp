@@ -18,11 +18,8 @@ public class BudgetBuddy {
     public static void main(String[] args) {
         String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
+        System.out.println("What can I do for you?");
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
-
 
         TransactionList transactions = null;
         try {
