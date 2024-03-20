@@ -7,7 +7,7 @@ package classify;
 //import java.util.Scanner;
 
 //@@author ParthGandhiNUS
-public class fallenCode {
+public class FallenCode {
 //    while (!(userCommand.equals("bye"))){
 //        InputParsing.parseUserCommand(UserInput.processInput(userCommand), StudentList.masterStudentList, in);
 //    }
