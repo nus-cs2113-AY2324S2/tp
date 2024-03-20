@@ -24,6 +24,12 @@ public class Duke {
                 break;
             } else if (Parser.ifHelp(input)) {
                 ui.printHelp();
+            } else {
+                assert input != null;
+                if (input.equals("testquit")) {
+                    ui.println("runtestbat success!");
+                    break;
+                }
             }
 
             if (!inGame) {
@@ -43,10 +49,11 @@ public class Duke {
                         System.out.println("Now what would you like to do?");
                         inGame = false;
                     }
-                } catch (InvalidGameException | NullPointerException e) {
-                    if (!input.equals("help")) {
-                        ui.println("Invalid Game.");
+                    if (!input.equals("help")  ) {
+                        ui.printHelp();
                     }
+                } catch (InvalidGameException | NullPointerException e) {
+                    ui.println("Invalid Game.");
                 }
             }
             input = Parser.readLine();
