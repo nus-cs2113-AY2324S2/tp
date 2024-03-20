@@ -24,11 +24,14 @@ public class AddCommand extends Command {
         return quantity;
     }
 
-    public String getCategory() { return category; }
+    public String getCategory() {
+        return category;
+    }
 
     public String getUom() {
         return uom;
     }
+
     @Override
     public void execute() {
         Itemlist.addItem(toAdd);
