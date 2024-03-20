@@ -32,6 +32,8 @@ public class Duke {
                 parser.handleUserInput();
             } catch (Parser.EndProgramException e) {
                 break;
+            } catch (ExpensesException e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("Goodbye!");

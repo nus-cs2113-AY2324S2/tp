@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExpenseTest{
     @Test
     public void NewExpenseTest(){
-        Expense testExpense = new Expense("Mukund"," 10 ", new String[]{"Mukund", " JX", "hehe"});
-        assertEquals((float) 10, testExpense.getTotal_amount());
+        Expense testExpense = new Expense("Mukund",10, new String[]{"Mukund", " JX", "hehe"});
+        assertEquals((float) 10, testExpense.getTotalAmount());
     }
 }

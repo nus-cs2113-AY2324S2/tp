@@ -14,9 +14,9 @@ public class BalanceTest {
         users.add(new User("member3"));
 
         ArrayList<Expense> expenses = new ArrayList<>();
-        expenses.add(new Expense("member1", "15", new String[]{"", "member2", "member3"}));
-        expenses.add(new Expense("member2", "30", new String[]{"", "member1", "member3"}));
-        expenses.add(new Expense("member3", "100", new String[]{"", "member1"}));
+        expenses.add(new Expense("member1", 15, new String[]{"", "member2", "member3"}));
+        expenses.add(new Expense("member2", 30, new String[]{"", "member1", "member3"}));
+        expenses.add(new Expense("member3", 100, new String[]{"", "member1"}));
 
         Balance member1Balance = new Balance("member1", expenses, users);
         member1Balance.printBalance();

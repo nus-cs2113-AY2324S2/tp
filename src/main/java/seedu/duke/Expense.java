@@ -13,18 +13,19 @@ public class Expense {
 
     /**
      * Constructor to create new Expense
-     * @param payer_name : The name of the user who paid for the Expense
-     * @param total_amount : The total amount before being divided
-     * @param payee_list : String array of people who owe the payer money (Index 0 is the payer and will not be added to the payee list)
+     * @param payerName : The name of the user who paid for the Expense
+     * @param totalAmount : The total amount before being divided
+     * @param payeeList : String array of people who owe the payer money
+     *                  (Index 0 is the payer and will not be added to the payee list)
      */
-    Expense(String payer_name, String total_amount, String[] payee_list){
-        total_amount = removeWhitespaces(total_amount);
-        payer_name = removeWhitespaces(payer_name);
-        for(int i = 1; i < payee_list.length; i++){
-            payees.add(removeWhitespaces(payee_list[i]));
+    Expense(String payerName, float totalAmount, String[] payeeList){
+        payerName = removeWhitespaces(payerName);
+        for(int i = 1; i < payeeList.length; i++){
+            payees.add(removeWhitespaces(payeeList[i]));
         }
-        this.payerName = payer_name;
-        this.totalAmount = Float.parseFloat(total_amount);
+        this.payerName = payerName;
+        this.totalAmount = totalAmount;
+
         System.out.printf("Added new expense %.2f owed to %s by:",this.totalAmount,this.payerName);
         for(String payee : payees){
             System.out.print(payee + ", ");
