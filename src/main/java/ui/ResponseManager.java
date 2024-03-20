@@ -11,6 +11,7 @@ public class ResponseManager {
             "for Robotics, enter '/r'\n" +
             "for Semiconductor industry, enter '/s'\n" +
             "for Artificial intelligence, enter '/a'\n";
+    private static final String BYE_MSG = "Bye bye adventurer!";
 
 
     public static void indentPrint(String message) {
@@ -31,5 +32,9 @@ public class ResponseManager {
 
     public static void echoChosenIndustry(String input) {
         System.out.println("You have chosen " + input);
+    }
+
+    public static void printGoodbye() {
+        System.out.println(BYE_MSG);
     }
 }

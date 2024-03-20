@@ -1,5 +1,8 @@
 package gamelogic;
 
+import command.Command;
+import command.CommandFactory;
+import exception.CommandInputException;
 import exception.JobSelectException;
 import exception.NameInputException;
 import player.PlayerProfile;
@@ -16,6 +19,7 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
+        Scanner userInput = new Scanner(System.in);
         ResponseManager.printGameInit();
         String playerName = getName();
 
@@ -24,7 +28,6 @@ public class EconoCraftLogic {
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
-     
         return new EconoCraftLogic(playerProfile);
     }
 
@@ -38,7 +41,6 @@ public class EconoCraftLogic {
                 ResponseManager.indentPrint(e.getMessage());
             }
         }
-        input.close();
         return jobType;
     }
 
@@ -52,11 +54,22 @@ public class EconoCraftLogic {
                 ResponseManager.indentPrint(e.getMessage());
             }
         }
-        input.close();
         return playerName;
     }
 
     public void startEcono() {
-        System.out.println("Game started");
+        Scanner userInput = new Scanner(System.in);
+        boolean exitFlag = false;
+
+        while (!exitFlag) {
+            try {
+                Command command = CommandFactory.create(userInput.nextLine());
+                command.execute();
+                exitFlag = command.isExit();
+            } catch (CommandInputException error) {
+                ResponseManager.indentPrint(error.getMessage());
+            }
+        }
+        userInput.close();
     }
 }

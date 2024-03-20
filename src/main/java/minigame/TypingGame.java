@@ -18,43 +18,45 @@ public class TypingGame implements MiniGame {
     private static final String OUTPUT_COLOR = "\033[0;32m";
     private static final String RESET = "\033[0m";
     private int accuracy;
-    private double time;
+    private double timeSpent;
     private final String[] userInput;
 
     public TypingGame() {
         this.accuracy = 0;
-        this.time = 0;
+        this.timeSpent = 0;
         this.userInput = new String[] {""};
     }
 
     public void startGame() {
-        CompletableFuture<Integer> finalScore = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<String> finalScore = CompletableFuture.supplyAsync(() -> {
             Scanner scanner = new Scanner(System.in);
             ResponseManager.indentPrint(START_MSG);
-
             ResponseManager.indentPrint(OUTPUT_COLOR + TEXT_TO_TYPE + RESET + "\n");
-
             ResponseManager.indentPrint("Press ENTER to start typing..." + "\n");
-            scanner.nextLine(); // Wait for user to press Enter
-            long startTime = System.currentTimeMillis(); // Record start time
-            System.out.print("Type here: \n");
-            userInput[0] = scanner.nextLine();
-            long endTime = System.currentTimeMillis();
+            // Wait for user to press enter
+            scanner.nextLine();
 
-            this.time = (endTime - startTime) / TIME_RATIO;
+            typingGameLogic(scanner);
 
-            return calculateAccuracy();
+            return "Good job! You finished within the time limit!\n";
         });
 
         try {
-            finalScore.get(TIME_LIMIT, TimeUnit.SECONDS);
+            ResponseManager.indentPrint(finalScore.get(TIME_LIMIT, TimeUnit.SECONDS));
         } catch (TimeoutException e) {
-            this.time = TIME_LIMIT;
+            this.timeSpent = TIME_LIMIT;
             finalScore.cancel(true);
-            ResponseManager.indentPrint("\nTime's up!!!!" + "\n");
+            ResponseManager.indentPrint("\nTime's up!!!! Your input is not captured TAT\n");
         } catch (InterruptedException | ExecutionException e) {
-            ResponseManager.indentPrint("An error occurred while calculating your score." + "\n");
+            ResponseManager.indentPrint("An error occurred while calculating your score.\n");
         }
+    }
+
+    private void typingGameLogic(Scanner scanner) {
+        long startTime = System.currentTimeMillis();
+        System.out.print("Type here: \n");
+        userInput[0] = scanner.nextLine();
+        this.timeSpent = (System.currentTimeMillis() - startTime) / TIME_RATIO;
         this.accuracy = calculateAccuracy();
     }
 
@@ -70,6 +72,6 @@ public class TypingGame implements MiniGame {
 
     public void outputResult() {
         ResponseManager.indentPrint(
-                String.format("You typed at %d%% accuracy in %.2f seconds!\n", this.accuracy, this.time));
+                String.format("You typed at %d%% accuracy in %.2f seconds!\n", this.accuracy, this.timeSpent));
     }
 }
