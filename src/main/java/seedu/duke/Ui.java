@@ -79,6 +79,12 @@ public class Ui {
         System.out.println("The solution for question " + questionNum + ":"
                 + System.lineSeparator() + solution);
     }
+
+    public void printOneExplanation (int questionNum, String explanation) {
+        System.out.println("The explanation for question " + questionNum + ":"
+                + System.lineSeparator() + explanation);
+    }
+
     public void printAllSolutions(String allSolutions) {
         System.out.println("The solutions are :"
                 + System.lineSeparator() + allSolutions);
