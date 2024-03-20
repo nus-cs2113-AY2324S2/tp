@@ -1,20 +1,19 @@
 package logic;
 
-import command.CreateOrderCommand;
-import command.ExitCommand;
-import command.HelpCommand;
-import command.ViewOrderCommand;
-import command.ViewOrdersSummaryCommand;
-import command.ViewMenuCommand;
+import command.MainCreateOrderCommand;
+import command.MainExitCommand;
+import command.MainHelpCommand;
+import command.MainViewOrderCommand;
+import command.MainViewOrdersSummaryCommand;
 
 import model.Menu;
 import model.MenuItem;
 import model.Order;
-import model.SetMenu;
 import ui.CommandType;
 import ui.Parser;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class MainLogic {
@@ -25,9 +24,9 @@ public class MainLogic {
         ArrayList<Order> ordersList = new ArrayList<>();
         ArrayList<Menu> menusList = new ArrayList<>();
 
+        //testing
         initMenu(menusList);
-
-        //for testing
+        System.out.println("current menu ID: " + menusList.get(0).getID());
         testOrderAddAndRemove(ordersList);
         testOrderAddAndRemove(ordersList);
 
@@ -39,33 +38,35 @@ public class MainLogic {
                 commandType = Parser.analyzeInput(inputText);
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid command");
-                HelpCommand.execute();
+                MainHelpCommand.execute();
                 continue;
             }
             switch (commandType) {
             case EXIT:
-                isExit = ExitCommand.execute(isExit);
+                isExit = MainExitCommand.execute(isExit);
                 break;
             case HELP:
-                HelpCommand.execute();
+                MainHelpCommand.execute();
                 break;
             case CREATE_ORDER:
-                //GOTO sub-menu to add/remove menuItems
-                Order newOrder = CreateOrderCommand.execute();
-                ordersList.add(newOrder);
+                //GOTO sub-menu to add/remove menuItems, inputText is passed to detect menu selected
+                Optional<Order> newOrder = MainCreateOrderCommand.execute(input, inputText, menusList);
+                newOrder.ifPresentOrElse(x -> {
+                    ordersList.add(x);
+                    System.out.println("Order " + x.getID() + " created"); },
+                                        () -> System.out.println("Order not created"));
                 break;
-            case VIEW_MENU:
-                ViewMenuCommand.execute(menusList);
-                // fallthrough
             case VIEW_ORDER:
-                ViewOrderCommand.execute(ordersList, inputText);
+                Optional<Order> checkedOrder = MainViewOrderCommand.execute(ordersList, inputText);
+                checkedOrder.ifPresentOrElse(x -> System.out.println(x.toString()),
+                                            () -> System.out.println("Order not found"));
                 break;
             case VIEW_ALL_ORDERS:
-                ViewOrdersSummaryCommand.execute(ordersList);
+                MainViewOrdersSummaryCommand.execute(ordersList);
                 break;
             default:
                 System.out.println("Invalid command");
-                HelpCommand.execute();
+                MainHelpCommand.execute();
             }
         }
     }
@@ -82,7 +83,7 @@ public class MainLogic {
         MenuItem dish09 = new MenuItem("009", "Hotplate beef set", 7.00);
         MenuItem dish10 = new MenuItem("010", "Kimchi noodles", 4.00);
 
-        Menu menuV1 = new Menu(SetMenu.Dinner);
+        Menu menuV1 = new Menu("01");
         menuV1.add(dish01);
         menuV1.add(dish02);
         menuV1.add(dish03);

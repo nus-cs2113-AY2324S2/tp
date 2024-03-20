@@ -7,10 +7,13 @@ public class OrderCompleteCommand implements OrderCommand{
      * Executes the command to complete an order.
      *
      * @param order     the order to be completed
-     * @return          always returns true, as order is completed
+     * @return true if the order is completed, false otherwise
      */
-    public boolean execute(Order order) {
-        order.setComplete();
+    public static boolean execute(Order order) {
+        if (order.getSize() == 0) {
+            System.out.println("Order " + order.getID() + " is empty. Please add items to the order.");
+            return false;
+        }
         return true;
     }
 }

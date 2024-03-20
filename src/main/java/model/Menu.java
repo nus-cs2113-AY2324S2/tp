@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import java.util.Optional;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -15,13 +16,13 @@ import static model.SetMenu.Dinner;
 public class Menu implements ItemManager {
     private static final Logger logr = Logger.getLogger("MenuLogger");
     private final ArrayList<MenuItem> menuItemList = new ArrayList<>();
-
     private final String menuID;
 
-    public Menu() {
+    public Menu(String menuID) {
         Menu.setupLogger();
-        menuID = "v1 Menu";
+        this.menuID = menuID;
     }
+
     public Menu(SetMenu menuType) {
         Menu.setupLogger();
         switch (menuType) {
@@ -39,38 +40,28 @@ public class Menu implements ItemManager {
         }
     }
 
+    public Optional<MenuItem> getItem(String itemID) {
+        return menuItemList.stream().filter(x -> x.getID().equals(itemID)).findAny();
+    }
+
     @Override
     public String getID() {
         return menuID;
     }
     @Override
-    public void add(MenuItem item) {
+    public boolean add(MenuItem item) {
         this.menuItemList.add(item);
-
+        return true;
     }
 
     /**
-     * Removes an item from the menu by its corresponding number
-     * @param menuNum The number of the item in the menu
+     * Removes item from the menu by its name
+     * @param itemID The name of the item
      */
     @Override
-    public void remove(int menuNum) {
-        try {
-            this.menuItemList.remove(menuNum - 1);
-
-        } catch (IndexOutOfBoundsException e) {
-            logr.log(Level.SEVERE, "You tried removing an item belonging to an index " +
-                    "outside the valid range of the ArrayList",e);
-        }
-    }
-
-    /**
-     * Removes an item from the menu by its name
-     * @param name The name of the item
-     */
-    @Override
-    public void remove(String name) {
-        this.menuItemList.removeIf(x -> x.getID().equals(name));
+    public boolean remove(String itemID) {
+        this.menuItemList.removeIf(x -> x.getID().equals(itemID));
+        return true;
     }
 
     /*@Override
