@@ -49,6 +49,13 @@ public class Storage {
     }
 
     /**
+     * Set the private File dukeData.
+     */
+    public static File setFile() {
+        return new File(FILENAME);
+    }
+
+    /**
      * Read lines from the file and identify tasks written inside.
      * Add the identified tasks into a list of existing tasks.
      *
@@ -65,7 +72,7 @@ public class Storage {
     }
 
     public static void main (String[]args){
-        stockMaster = new File(FILENAME);
+        stockMaster = setFile();
         try {
             writeToFile(stockMaster.getPath(), "", true);
         } catch (IOException e) {
