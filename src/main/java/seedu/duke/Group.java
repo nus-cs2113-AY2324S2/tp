@@ -3,9 +3,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Group {
+    public static final HashMap<String, Group> groups = new HashMap<>();
     protected String groupName;
     protected ArrayList<User> users;
-    public static final HashMap<String, Group> groups = new HashMap<>();
 
     public Group(String groupName) {
         this.groupName = groupName;

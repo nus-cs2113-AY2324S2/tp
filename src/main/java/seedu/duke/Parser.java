@@ -32,7 +32,12 @@ public class Parser {
             Group.getOrCreateGroup(groupName);
             break;
         case "member":
-            // Member code here
+            String[] memberDetails = argument.split("/group");
+            String memberName = memberDetails[0].trim();
+            String groupNameForUser = memberDetails[1].trim();
+            User newUser = new User(memberName);
+            Group group = Group.getOrCreateGroup(groupNameForUser);
+            group.addUsers(newUser);
             break;
         case "expense":
             try{
