@@ -34,11 +34,11 @@ class DukeTest {
     public void testAddUser() {
         UserList userList = new UserList();
         User user = new User("Test User");
-        userList.addUser(user);
+        userList.AddUser(user);
 
         // Verify that the user is added to the list
         assertEquals(1, userList.getListLength());
-        assertEquals(user, userList.getActiveUser());
-        assertTrue(userList.getUsers().contains(user));
+        assertEquals(user, userList.GetActiveUser());
+        assertTrue(userList.GetUsers().contains(user));
     }
 }

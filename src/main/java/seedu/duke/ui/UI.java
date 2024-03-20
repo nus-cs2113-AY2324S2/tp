@@ -10,10 +10,10 @@ public class UI {
     public static void printListingUsers() {
         System.out.println("The current users are: ");
     }
-    public static void printAddUser(String description) {
-        System.out.println("New user added: " + description);
+    public static void printNewUser(String name) {
+        System.out.println("New user added: " + name);
     }
-    public static void printSetActiveUser(String description) {
+    public static void printActiveUser(String description) {
         System.out.println("The active user is: " + description);
     }
     public static void printInvalidCommand() {
