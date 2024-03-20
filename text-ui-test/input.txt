@@ -2,4 +2,4 @@ add member Amy
 add member Brandon
 list members
 add transaction Amy p/Brandon a/5
-list debt
+list debts
