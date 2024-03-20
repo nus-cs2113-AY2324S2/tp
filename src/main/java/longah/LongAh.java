@@ -87,7 +87,7 @@ public class LongAh {
                     System.out.println(transactions.findDebts(parts));
                     break;
                 case "clear":
-                    transactions.clear();
+                    transactions.clear(members);
                     break;
                 case "addmember":
                     if (parts.length == 2) {

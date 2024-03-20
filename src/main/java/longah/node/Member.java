@@ -119,4 +119,11 @@ public class Member {
     public boolean isName(String memberName) {
         return name.equals(memberName);
     }
+
+    /**
+     * Clears the balance of the member.
+     */
+    public void clearBalance() {
+        this.balance = 0;
+    }
 }
