@@ -1,56 +1,136 @@
 package ui;
 
+import health.HealthList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utility.Constant;
 
 import utility.CustomExceptions;
-import workouts.Run;
+import workouts.WorkoutList;
 
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
 class HandlerTest {
+    private final ByteArrayInputStream inContent = new ByteArrayInputStream("".getBytes());
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final InputStream originalIn = System.in;
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
+        System.setIn(inContent);
     }
 
     @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
+        System.setIn(originalIn);
+        WorkoutList.clearWorkoutsAndRun();
+        HealthList.clearBmisAndPeriods();
+    }
+
+    // processInput Tests BEGIN here: ---------------------------------------------------------------------
+    @Test
+    void processInput_exitCommand_terminatesProgram() {
+        String input = "EXIT";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Handler.processInput();
+
+        String output = outContent.toString();
+        assertTrue(output.contains("Initiating PulsePilot landing sequence..."));
     }
 
     @Test
-    void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
-        // Test Setup
-        String input = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+    void processInput_newCommand_addRunExercise() {
+        String input = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Exercise
-        String[] result = Run.getRun(input);
+        Handler.processInput();
 
-        // Verify
-        assertArrayEquals(new String[]{"run", "10.3", "00:40:10", "15-03-2024"}, result);
+        String output = outContent.toString();
+        assertTrue(output.contains("Added: run | 10.3 | 00:40:10 | 15-03-2024"));
     }
 
     @Test
-    void getRun_missingParameter_expectException() {
-        // Test Setup
-        String input = "new /e:run /d:10.3"; // Missing /t parameter
+    void processInput_healthCommand_addBMIHealthData() {
+        String input = "HEALTH /h:bmi /height:1.70 /weight:65 /date:15-03-2024";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Exercise and Verify
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Run.getRun(input));
+        Handler.processInput();
+
+        String output = outContent.toString();
+        assertTrue(output.contains("Added: bmi | 1.70 | 65 | 15-03-2024"));
     }
+
+    /*
+    @Test
+    void processInput_historyCommand_printsHistory() {
+        String input = "HISTORY /e:all";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Handler.processInput();
+
+        String output = outContent.toString();
+        assertTrue(output.contains("History of all exercises:"));
+    }
+
+    @Test
+    void processInput_latestCommand_printsLatestRun() {
+        String input = "LATEST";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Handler.processInput();
+
+        String output = outContent.toString();
+        assertTrue(output.contains("Latest run:"));
+    }
+
+    @Test
+    void processInput_helpCommand_printsHelp() {
+        String input = "HELP";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Handler.processInput();
+
+        String output = outContent.toString();
+        assertTrue(output.contains("Commands List"));
+    }
+
+    @Test
+    void processInput_invalidCommand_printsInvalidCommandException() {
+        String input = "INVALID";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Handler.processInput();
+
+        String expected = "Exception Caught!\n" +
+                "Invalid command. Enter 'help' to view available commands.\n" +
+                "\n" +
+                "No enum constant utility.Command.INVALID\n" +
+                Constant.PARTITION_LINE + "\n";
+        expected = expected.replaceAll("\\n|\\r\\n", System.lineSeparator());
+
+        assertEquals(expected, outContent.toString());
+        ///String output = outContent.toString();
+        //assertTrue(output.contains("Invalid command."));
+    }
+     */
+
+
+    // processInput Tests END here: ---------------------------------------------------------------------
+
     /**
      * Test the behavior of the checkTypeOfExercise method when the user input is valid.
      * Expected behavior is to return {@code Constant.RUN} or {@code Constant.GYM}
@@ -135,9 +215,6 @@ class HandlerTest {
         assertThrows(CustomExceptions.InvalidInput.class, () -> {
             Handler.checkTypeOfExercise(input5);
         });
-
-         */
-
 
     }
 

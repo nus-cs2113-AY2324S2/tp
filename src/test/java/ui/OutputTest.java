@@ -1,5 +1,6 @@
 package ui;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
@@ -29,7 +30,8 @@ class OutputTest {
         System.setErr(new PrintStream(errContent));
     }
 
-    private static void cleanup() {
+    @AfterEach
+    public void cleanup() {
         WorkoutList.clearWorkoutsAndRun();
         outContent.reset();
     }
