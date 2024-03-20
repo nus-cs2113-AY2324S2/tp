@@ -30,7 +30,9 @@ test {
 
 application {
     mainClass.set("seedu.duke.Duke")
+    applicationDefaultJvmArgs = ["-ea"] // Enable assertions
 }
+
 
 shadowJar {
     archiveBaseName.set("duke")
