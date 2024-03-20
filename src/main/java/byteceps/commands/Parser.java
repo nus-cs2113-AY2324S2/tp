@@ -21,6 +21,10 @@ public class Parser {
         // flush the old input
         flush();
 
+        assert command.isEmpty() : "Command should be empty after flush";
+        assert commandAction == null : "CommandAction should be null after flush";
+        assert additionalArguments.isEmpty() : "AdditionalArguments should be empty after flush";
+
         int indexOfFirstSlash = line.indexOf('/');
 
         // input does not have parameters
