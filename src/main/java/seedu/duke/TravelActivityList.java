@@ -78,6 +78,14 @@ public class TravelActivityList {
         return "cant be found";
     }
 
+    /**
+     * Finds all activities in the TravelActivity list that contains a keyword specified
+     * by the user.
+     *
+     * @param taskName keyword specified by the user to find activities in the TravelActivity list
+     *                 related to the keyword.
+     */
+
     public void searchKeyword (String taskName) {
         ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
         int temporaryArrayCounter = 0;
@@ -130,6 +138,7 @@ public class TravelActivityList {
         System.out.println(markedTask);
     }
 
+
     /**
      * Adds a tag to travel activity
      * @param taskNumber The travel activity number on the list
@@ -145,6 +154,10 @@ public class TravelActivityList {
         taggedTask.setTag(tag);
         System.out.println("I have tagged this task:");
         System.out.println(taggedTask + "(" + tag + ")");
+
+    public ArrayList<TravelActivity> getTravelActivities() {
+        return travelActivities;
+
     }
 
     /**
