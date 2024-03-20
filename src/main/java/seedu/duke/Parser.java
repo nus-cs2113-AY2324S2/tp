@@ -33,10 +33,12 @@ public class Parser {
             // Member code here
             break;
         case "expense":
-            String[] extractExpense = argument.split(" ", 2);
-            String expense = extractExpense[0];
-            int amount = Integer.parseInt(extractExpense[1]);
-            ExpenseAdder newExpense = new ExpenseAdder(expense,amount);
+            String[] removeExpenseTag = argument.split("/amount");
+            String[] extractAmount = removeExpenseTag[1].split("/paid");
+            String amount = extractAmount[0];
+            String[] extractPayer = extractAmount[1].split("/user");
+            String payer_name = extractPayer[0];
+            Expense newTransaction = new Expense(payer_name,amount,extractPayer);
             break;
         case "list":
             // List code here
