@@ -59,7 +59,7 @@ public class MediTracker {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationManager, ui, dailyMedicationManager);
+            command.execute(medicationManager, dailyMedicationManager, ui);
             isExit = command.isExit();
         }
     }
