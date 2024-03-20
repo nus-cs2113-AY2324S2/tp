@@ -45,7 +45,7 @@ class BookBuddyTest {
 
     @Test
     public void testPrintExitMessage() {
-        BookBuddy.printExitMessage();
+        Ui.printExitMessage();
         String expectedOutput = "Thank you for using BookBuddy! Hope to see you again!\n";
         assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }

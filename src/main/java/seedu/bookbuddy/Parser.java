@@ -51,7 +51,7 @@ public class Parser {
                 books.markUndoneByIndex(index);
                 break;
             case EXIT_COMMAND:
-                BookBuddy.printExitMessage();
+                Ui.printExitMessage();
                 System.exit(0);
                 break;
             default:
