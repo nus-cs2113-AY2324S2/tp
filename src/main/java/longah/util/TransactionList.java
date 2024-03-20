@@ -135,11 +135,7 @@ public class TransactionList {
             if (index < 0 || index >= transactions.size()) {
                 throw new LongAhException(ExceptionMessage.INVALID_INDEX);
             }
-            Transaction transactionBeforeEdit = transactions.get(index);
             transactions.get(index).editTransaction(editParts[1], memberList);
-
-            // Postcondition: The transaction at the specified index should not be the same as before the edit
-            assert !transactionBeforeEdit.equals(transactions.get(index)) : "Transaction was not edited";
         } catch (NumberFormatException e) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }

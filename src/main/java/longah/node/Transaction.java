@@ -234,6 +234,7 @@ public class Transaction {
 
         // Update the borrowers' balances
         updateBorrowerBalances();
+        assert this.lender.getBalance() == totalSumLent : "Lender's balance not updated correctly";
     }
 
 }
