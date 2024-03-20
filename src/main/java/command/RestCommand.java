@@ -1,8 +1,12 @@
 package command;
 
+import minigame.MCQGame;
+
 public class RestCommand implements Command {
     public void execute() {
-        System.out.println("RestCommand executed");
+        MCQGame game = new MCQGame();
+        game.startGame();
+        game.outputResult();
     }
 
     public boolean isExit() {

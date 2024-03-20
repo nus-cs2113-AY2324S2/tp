@@ -1,15 +1,20 @@
-package tictactoe;
+package minigame;
 
 import java.util.Scanner;
 import java.util.Random;
+import ui.ResponseManager;
 
-public class TicTacToe {
+public class TicTacToe implements MiniGame {
     private char[][] board = new char[3][3];
     private char playerMark;
+    private  char aiMark;
+    private  char currentMark;
     private boolean isGameOver = false;
 
     public TicTacToe(char playerMark) {
         this.playerMark = playerMark;
+        this.aiMark = (playerMark == 'X') ? 'O' : 'X';
+        this.currentMark = playerMark;
         initializeBoard();
     }
 
@@ -62,15 +67,8 @@ public class TicTacToe {
     }
 
     private void checkGameOver() {
-        if (checkForWin()) {
-            System.out.println();
-            printBoard();
-            System.out.println();
-            System.out.println("Siuuuuu, player " + playerMark + " wins!");
-            isGameOver = true;
-        } else if (isBoardFull()) {
-            printBoard();
-            System.out.println("Wow, it's a draw!");
+        if (checkForWin() || isBoardFull()) {
+            outputResult();
             isGameOver = true;
         }
     }
@@ -84,14 +82,14 @@ public class TicTacToe {
     }
 
     private void printBoard() {
-        System.out.println();
+        String boardInfor = "";
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                System.out.print(board[i][j] + " ");
+                boardInfor += board[i][j] + " ";
             }
-            System.out.println();
+            boardInfor += "\n";
         }
-        System.out.println();
+        ResponseManager.printBoard(boardInfor);
     }
 
     private boolean placeMark(int row, int column) {
@@ -105,7 +103,7 @@ public class TicTacToe {
     }
 
     private void placeAIMark() {
-        playerMark = (playerMark == 'X') ? 'O' : 'X';
+        currentMark = aiMark;
         Random rand = new Random();
         int row;
         int column;
@@ -115,29 +113,44 @@ public class TicTacToe {
             column = rand.nextInt(3);
         } while (board[row][column] != '-');
 
-        board[row][column] = playerMark;
+        board[row][column] = aiMark;
         printBoard();
         checkGameOver();
     }
 
-    public void gameStart() {
+    public void outputResult() {
+        if (checkForWin()) {
+            if (currentMark == playerMark) {
+                printBoard();
+                ResponseManager.indentPrint("Siuuuuu, player " + playerMark + " wins!");
+            } else {
+                ResponseManager.indentPrint("Noooooo, player " + playerMark + " lose the game");
+            }
+        } else {
+            printBoard();
+            ResponseManager.indentPrint("Wow, it's a draw!");
+        }
+    }
+
+    public void startGame() {
         Scanner scanner = new Scanner(System.in);
         printBoard();
         while (!isGameOver) {
-            System.out.println("Player " + playerMark + ", " +
+            ResponseManager.indentPrint("Player " + playerMark + ", " +
                 "enter your move (row [1-3] column [1-3]):");
+
             int row = scanner.nextInt() - 1;
             int column = scanner.nextInt() - 1;
 
             if (placeMark(row, column)) {
                 checkGameOver();
                 if (!isGameOver) {
-                    System.out.println("AI's turn!");
+                    ResponseManager.indentPrint("AI's turn!");
                     placeAIMark();
-                    playerMark = (playerMark == 'X') ? 'O' : 'X';
+                    currentMark = playerMark;
                 }
             } else {
-                System.out.println("Invalid move, please try again!");
+                ResponseManager.indentPrint("Invalid move, please try again!");
             }
         }
     }
