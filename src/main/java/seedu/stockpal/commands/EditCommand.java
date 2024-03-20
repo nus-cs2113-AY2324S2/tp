@@ -10,7 +10,6 @@ import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.ui.Ui;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.storage.Storage;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -22,27 +21,24 @@ public class EditCommand extends ListActionCommand {
     public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
             + ": Edits an existing product in the inventory at the specific PID."
             + Messages.LINE_SEPARATOR
-            + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [d/DESCRIPTION] [p/PRICE]");
+            + "Format: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [p/PRICE] [d/DESCRIPTION]")
+            + Messages.LINE_SEPARATOR
+            + "PRICE must be in 2 decimal places.";
 
-    static Logger logger = Logger.getLogger(EditCommand.class.getName());
+    protected static Logger logger = Logger.getLogger(EditCommand.class.getName());
 
-    private Pid pid;
-    private Name name;
-    private Quantity quantity;
-    private Description description;
-    private Price price;
-    private final Storage storage;
+    private final Pid pid;
+    private final Name name;
+    private final Quantity quantity;
+    private final Description description;
+    private final Price price;
 
-    public EditCommand(ProductList productList, Integer pid, String name,
-                       Integer quantity, Double price, String description,
-                       Storage storage) {
-        this.productList = productList;
+    public EditCommand(Integer pid, String name, Integer quantity, Double price, String description) {
         this.pid = new Pid(pid);
         this.name = new Name(name);
         this.quantity = new Quantity(quantity);
         this.price = new Price(price);
         this.description = new Description(description);
-        this.storage = storage;
     }
 
     /**
@@ -62,12 +58,12 @@ public class EditCommand extends ListActionCommand {
     }
 
     @Override
-    public void execute() throws StockPalException {
+    public void execute(ProductList productList) throws StockPalException {
         if (!atLeastOneValidParameter()) {
             Ui.printMissingParametersMessage();
             return;
         }
-        int productIndex = this.productList.findProductIndex(this.pid);
+        int productIndex = productList.findProductIndex(this.pid);
         if (productIndex == -1) {
             Ui.printInvalidPidMessage();
             return;
@@ -76,6 +72,5 @@ public class EditCommand extends ListActionCommand {
         productList.updateProduct(productIndex, name, quantity, description, price);
         logger.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);
         Ui.printEditSuccessMessage();
-        storage.save(productList);
     }
 }

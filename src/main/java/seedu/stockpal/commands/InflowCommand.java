@@ -4,7 +4,6 @@ import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.storage.Storage;
 import seedu.stockpal.ui.Ui;
 
 import java.util.logging.Level;
@@ -18,25 +17,20 @@ public class InflowCommand extends ListActionCommand {
             + Messages.LINE_SEPARATOR
             + "Format: inflow PID a/INCREMENT_AMOUNT");
 
-    private static Logger logger = Logger.getLogger(InflowCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InflowCommand.class.getName());
 
-    private ProductList productList;
-    private Pid pid;
-    private Integer amountToIncrease;
-    private final Storage storage;
+    private final Pid pid;
+    private final Integer amountToIncrease;
 
-    public InflowCommand(ProductList productList, Integer pidValue, Integer amountToIncrease, Storage storage) {
-        this.productList = productList;
+    public InflowCommand(Integer pidValue, Integer amountToIncrease) {
         this.pid = new Pid(pidValue);
         this.amountToIncrease = amountToIncrease;
-        this.storage = storage;
     }
 
     @Override
-    public void execute() throws StockPalException {
-        int productIndex = this.productList.findProductIndex(this.pid);
+    public void execute(ProductList productList) throws StockPalException {
+        int productIndex = productList.findProductIndex(this.pid);
         productList.increaseAmount(productIndex, amountToIncrease);
-        logger.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
-        storage.save(productList);
+        LOGGER.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
     }
 }

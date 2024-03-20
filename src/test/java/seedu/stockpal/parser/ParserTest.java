@@ -11,7 +11,7 @@ import seedu.stockpal.exceptions.UnsignedIntegerExceededException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
-    private final Parser testParser = new Parser(null, null);
+    private final Parser testParser = new Parser();
     private String testInput;
     @Test
     public void parseCommand_helpCommand_success()

@@ -5,7 +5,7 @@ import seedu.stockpal.ui.Ui;
 
 public class Description implements CommandParameter {
     private static final String EMPTY_STRING = "";
-    protected String description;
+    private final String description;
 
     public Description(String description) {
         this.description = description;

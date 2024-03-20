@@ -1,18 +1,17 @@
 package seedu.stockpal;
 
 import seedu.stockpal.commands.Command;
-import seedu.stockpal.commands.ExitCommand;
+import seedu.stockpal.commands.ListActionCommand;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.parser.Parser;
 import seedu.stockpal.storage.Storage;
-import seedu.stockpal.storage.exception.InvalidStorageFilePathException;
-import seedu.stockpal.storage.exception.StorageIOException;
 import seedu.stockpal.ui.Ui;
 
 public class StockPal {
-
+    private static Storage storage;
     private static Parser parser;
+    private static ProductList productList;
 
     /**
      * Main entry-point for the java.stockpal.StockPal application.
@@ -20,22 +19,21 @@ public class StockPal {
     public static void main(String[] args) {
         start();
         runCommandUntilExit();
-        exit();
     }
 
     private static void start() {
         Ui.printWelcomeMessage();
         try {
-            Storage storage = new Storage();
-            ProductList productList = storage.load();
-            parser = new Parser(productList, storage);
-        } catch (InvalidStorageFilePathException | StockPalException | StorageIOException e) {
-            Ui.printToScreen(e.getMessage());
+            storage = new Storage();
+            productList = storage.load();
+            parser = new Parser();
+        } catch (StockPalException spe) {
+            Ui.printExceptionMessage(spe);
             exit();
         }
     }
 
-    private static void exit() {
+    public static void exit() {
         Ui.printGoodbyeMessage();
         System.exit(0);
     }
@@ -46,18 +44,21 @@ public class StockPal {
             try {
                 Command command = parser.parseCommand(userInput);
 
-                if (isExitCommand(command)) {
-                    break;
+                if (!isListActionCommand(command)) {
+                    command.execute();
+                } else {
+                    ListActionCommand actionCommand = (ListActionCommand) command;
+                    actionCommand.execute(productList);
+                    storage.saveData(command, productList);
                 }
-                command.execute();
             } catch (StockPalException spe) {
-                Ui.printToScreen(spe.getMessage());
+                Ui.printExceptionMessage(spe);
             }
 
         } while (true); // check if command is exit
     }
 
-    private static boolean isExitCommand(Command command) {
-        return command instanceof ExitCommand;
+    private static boolean isListActionCommand(Command command) {
+        return command instanceof ListActionCommand;
     }
 }

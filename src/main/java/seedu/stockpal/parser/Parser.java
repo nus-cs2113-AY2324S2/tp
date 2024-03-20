@@ -10,7 +10,6 @@ import seedu.stockpal.commands.InflowCommand;
 import seedu.stockpal.commands.OutflowCommand;
 import seedu.stockpal.commands.Command;
 
-import seedu.stockpal.data.ProductList;
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
 import seedu.stockpal.exceptions.UnsignedIntegerExceededException;
@@ -20,8 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import seedu.stockpal.storage.Storage;
 
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_COMMAND;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED;
@@ -51,14 +48,6 @@ public class Parser {
     public static final int START_INDEX = 0;
     private static final Double EMPTY_PRICE = -0.1;
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
-
-    public final ProductList productList;
-    private final Storage storage;
-
-    public Parser(ProductList productList, Storage storage) {
-        this.productList = productList;
-        this.storage = storage;
-    }
 
     public Command parseCommand(String input)
             throws InvalidFormatException, InvalidCommandException, UnsignedIntegerExceededException {
@@ -116,7 +105,7 @@ public class Parser {
     }
 
     private ListCommand createListCommand() {
-        return new ListCommand(productList);
+        return new ListCommand();
     }
 
     private HelpCommand createHelpCommand() {
@@ -128,7 +117,7 @@ public class Parser {
         try {
             Integer pid = Integer.parseInt(parsed.get(0));
             Integer decreaseBy = Integer.parseInt(parsed.get(1));
-            return new OutflowCommand(productList, pid, decreaseBy, storage);
+            return new OutflowCommand(pid, decreaseBy);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
@@ -140,7 +129,7 @@ public class Parser {
         try {
             Integer pid = Integer.parseInt(parsed.get(0));
             Integer increaseBy = Integer.parseInt(parsed.get(1));
-            return new InflowCommand(productList, pid, increaseBy, storage);
+            return new InflowCommand(pid, increaseBy);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
@@ -150,7 +139,7 @@ public class Parser {
     private DeleteCommand createDeleteCommand(ArrayList<String> parsed) throws UnsignedIntegerExceededException {
         try {
             Integer pid = Integer.parseInt(parsed.get(0));
-            return new DeleteCommand(productList, pid, storage);
+            return new DeleteCommand(pid);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
@@ -169,7 +158,7 @@ public class Parser {
                     ? null
                     : Integer.parseInt(parsed.get(2));
 
-            return new EditCommand(productList, pid, name, quantity, price, description, storage);
+            return new EditCommand(pid, name, quantity, price, description);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
@@ -184,7 +173,7 @@ public class Parser {
         String description = parsed.get(3);
         try {
             Integer quantity = Integer.parseUnsignedInt(parsed.get(1));
-            return new NewCommand(productList, name, quantity, price, description, storage);
+            return new NewCommand(name, quantity, price, description);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);

@@ -93,7 +93,7 @@ public class ProductList {
     }
 
     public String toSave(Integer productIndex) {
-        Product currProd = products.get(productIndex);
-        return currProd.toSave();
+        Product currProduct = products.get(productIndex);
+        return currProduct.toSave();
     }
 }

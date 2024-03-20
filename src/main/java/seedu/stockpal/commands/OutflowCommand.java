@@ -4,7 +4,6 @@ import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.storage.Storage;
 import seedu.stockpal.ui.Ui;
 
 import java.util.logging.Level;
@@ -17,25 +16,20 @@ public class OutflowCommand extends ListActionCommand {
             + Messages.LINE_SEPARATOR
             + "Format: outflow PID a/DECREMENT_AMOUNT");
 
-    private static Logger logger = Logger.getLogger(OutflowCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(OutflowCommand.class.getName());
 
-    private ProductList productList;
-    private Pid pid;
-    private Integer amountToDecrease;
-    private final Storage storage;
+    private final Pid pid;
+    private final Integer amountToDecrease;
 
-    public OutflowCommand(ProductList productList, Integer pidValue, Integer amountToDecrease, Storage storage) {
-        this.productList = productList;
+    public OutflowCommand(Integer pidValue, Integer amountToDecrease) {
         this.pid = new Pid(pidValue);
         this.amountToDecrease = amountToDecrease;
-        this.storage = storage;
     }
 
     @Override
-    public void execute() throws StockPalException {
-        int productIndex = this.productList.findProductIndex(this.pid);
+    public void execute(ProductList productList) throws StockPalException {
+        int productIndex = productList.findProductIndex(this.pid);
         productList.decreaseAmount(productIndex, amountToDecrease);
-        logger.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
-        storage.save(productList);
+        LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
     }
 }
