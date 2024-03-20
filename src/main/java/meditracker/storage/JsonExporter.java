@@ -58,10 +58,10 @@ class JsonExporter {
         root.put("medicationList", medicationList);
 
         try {
-            FileWriter f = new FileWriter(fileToWrite);
-            f.write(root.toString());
-            f.flush();
-            f.close();
+            FileWriter fileWriter = new FileWriter(fileToWrite);
+            fileWriter.write(root.toString());
+            fileWriter.flush();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
