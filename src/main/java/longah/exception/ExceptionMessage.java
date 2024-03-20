@@ -18,7 +18,7 @@ public enum ExceptionMessage {
     NO_TRANSACTION_FOUND ("Transaction list is empty."),
     NO_DEBTS_FOUND ("No debts found."),
     TRANSACTIONS_SUMMED_UP ("No pending payments."),
-    
+
     // Data Storage Exceptions
     STORAGE_FILE_NOT_FOUND ("File not found."),
     STORAGE_FILE_NOT_CREATED ("File not created."),
@@ -28,9 +28,7 @@ public enum ExceptionMessage {
     STORAGE_FILE_CORRUPTED ("Storage file is corrupted."),
 
     // Ui exceptions
-    INVALID_COMMAND ("Invalid command. Use 'add', 'listdebts', 'listtransactions'," +
-    " 'delete', 'findpayment', 'finddebt', 'clear', or 'addmember'" +
-    ", 'exit'."),
+    INVALID_COMMAND ("Invalid command. Use 'help' to see the list of commands."),
     COMMAND_NOT_IMPLEMENTED ("This feature has yet to be implemented."),
     INVALID_ADD_COMMAND ("Invalid command format." +
             " Use 'add member NAME' or 'add transaction LENDER p/BORRWER1 a/AMOUNT1 ..."),

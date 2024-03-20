@@ -39,6 +39,7 @@ public class CommandParser {
 
         case "edit":
             // Fallthrough
+        case "help":
             throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
         default:
             throw new LongAhException(ExceptionMessage.INVALID_COMMAND);
