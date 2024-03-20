@@ -5,6 +5,9 @@ import exceptions.InvalidBookIndexException;
 import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
 
+import java.util.logging.Level;
+import static seedu.bookbuddy.BookBuddy.LOGGER;
+
 /**
  * Parses inputs from the user in order to execute the correct commands.
  */
@@ -27,11 +30,13 @@ public class Parser {
     public static void parseCommand( String input, BookList books) {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
+        LOGGER.log(Level.FINE, "Parsing command: {0}", command);
         int index;
         try {
             switch (command) {
             case ADD_COMMAND:
                 if (inputArray.length < 2) {
+                    LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
                     throw new InvalidCommandArgumentException("The add command requires a book title.");
                 }
                 books.addBook(inputArray[1]);
@@ -59,6 +64,7 @@ public class Parser {
                 System.exit(0);
                 break;
             default:
+                LOGGER.log(Level.WARNING, "Sorry but that is not a valid command. Please try again", command);
                 throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
             }
         } catch (NumberFormatException e) {
