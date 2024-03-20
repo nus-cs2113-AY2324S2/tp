@@ -7,6 +7,7 @@ public class Item {
     private String uom;
     private String category;
     private boolean isOOS;
+    
 
     public Item(String name, int quantity, String uom, String category) {
         this.itemName = name;
