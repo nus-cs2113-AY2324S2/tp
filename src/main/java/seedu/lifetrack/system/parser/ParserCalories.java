@@ -1,4 +1,4 @@
-package seedu.lifetrack.system;
+package seedu.lifetrack.system.parser;
 
 import seedu.lifetrack.calories.calorielist.Entry;
 import seedu.lifetrack.calories.calorielist.InputEntry;
@@ -7,7 +7,7 @@ import seedu.lifetrack.calories.Activity;
 import seedu.lifetrack.calories.Food;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
-public class Parser {
+public class ParserCalories {
 
     private static final int CARBS_IDX = 0;
     private static final int PROTEINS_IDX = 1;

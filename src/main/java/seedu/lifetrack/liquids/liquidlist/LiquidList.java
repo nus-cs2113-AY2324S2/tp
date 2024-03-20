@@ -1,6 +1,6 @@
 package seedu.lifetrack.liquids.liquidlist;
 
-import seedu.lifetrack.liquids.beverage.Beverage;
+import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class LiquidList {
 
-    private ArrayList<Entry> liquidArrayList;
+    private ArrayList<LiquidEntry> liquidArrayList;
     private final int SIZE_OF_DELETE = 15;
 
     /**
@@ -28,7 +28,7 @@ public class LiquidList {
      * @param index the index of the liquid entry to retrieve
      * @return the liquid entry at the specified index
      */
-    public Entry getEntry(int index) {
+    public LiquidEntry getEntry(int index) {
         assert index >= 0 && index < liquidArrayList.size() : "Index out of bounds";
         return liquidArrayList.get(index);
     }
@@ -58,7 +58,7 @@ public class LiquidList {
      */
     public void addEntry(String input) {
         try {
-            Entry newEntry = ParserLiquid.parseLiquidInput(input);
+            LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
@@ -75,7 +75,7 @@ public class LiquidList {
         } else {
             System.out.println("Liquid List:");
             for (int i = 0; i < liquidArrayList.size(); i++) {
-                Entry entry = liquidArrayList.get(i);
+                LiquidEntry entry = liquidArrayList.get(i);
                 Beverage beverage = entry.getBeverage();
                 System.out.println((i + 1) + ". Beverage: " + beverage.getBeverage()
                         + ", Volume: " + beverage.getVolume());
