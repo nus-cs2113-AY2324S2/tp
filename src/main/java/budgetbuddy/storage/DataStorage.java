@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,7 +26,9 @@ public class DataStorage {
         File f = new File(STORAGE_FILE_PATH);
         FileWriter fw = new FileWriter(STORAGE_FILE_PATH);
         for (Transaction transaction : transactionArrayList) {
-            if (transaction == null) break;
+            if (transaction == null) {
+                break;
+            }
             String stringToWrite = getStringToWrite(transaction);
             writeToFile(stringToWrite);
         }
@@ -56,8 +57,9 @@ public class DataStorage {
         case "Expense":
             return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
                     transactionInfo[1], transactionInfo[3], account);
+        default:
+            return null;
         }
-        return null;
     }
 
     private static void createDataFolderIfNotExists() throws IOException {
