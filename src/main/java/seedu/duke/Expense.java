@@ -7,19 +7,30 @@ import java.util.ArrayList;
  * A class to add a new expense
  */
 public class Expense {
-    private String payer_name;
-    private float total_amount;
-
+    private String payerName;
+    private float totalAmount;
     private ArrayList<String> payees = new ArrayList<>();
+    public String getPayerName() {
+        return payerName;
+    }
+
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+
+    public ArrayList<String> getPayees() {
+        return payees;
+    }
+
     Expense(String payer_name, String total_amount, String[] payee_list){
         total_amount = removeWhitespaces(total_amount);
         payer_name = removeWhitespaces(payer_name);
         for(int i = 1; i < payee_list.length; i++){
             payees.add(removeWhitespaces(payee_list[i]));
         }
-        this.payer_name = payer_name;
-        this.total_amount = Float.parseFloat(total_amount);
-        System.out.printf("Added new expense %.2f owed to %s by:",this.total_amount,this.payer_name);
+        this.payerName = payer_name;
+        this.totalAmount = Float.parseFloat(total_amount);
+        System.out.printf("Added new expense %.2f owed to %s by:",this.totalAmount,this.payerName);
         for(String payee : payees){
             System.out.print(payee + ", ");
         }
