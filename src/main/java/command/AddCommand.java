@@ -1,6 +1,7 @@
 package command;
 
 import item.Item;
+import itemlist.Itemlist;
 
 public class AddCommand extends Command {
 
@@ -8,10 +9,11 @@ public class AddCommand extends Command {
     protected String itemName;
     protected int quantity;
     protected String uom;
+    protected String category = "NA";
     private final Item toAdd;
 
-    public AddCommand(String itemName, int quantity, String uom) {
-        this.toAdd = new Item(itemName, quantity, uom);
+    public AddCommand(String itemName, int quantity, String uom, String category) {
+        this.toAdd = new Item(itemName, quantity, uom, category);
     }
 
     public String getItemNam() {
@@ -22,12 +24,17 @@ public class AddCommand extends Command {
         return quantity;
     }
 
+    public String getCategory() { return category; }
+
     public String getUom() {
         return uom;
     }
     @Override
     public void execute() {
-        //itemList.add(toAdd);
+        Itemlist.addItem(toAdd);
         System.out.println(MESSAGE_SUCCESS + getItemNam() + "(Qty: " + getQuantity() + ")");
+        if (!category.equals("NA")) {
+            System.out.println("to " + getCategory());
+        }
     }
 }

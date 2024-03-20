@@ -4,12 +4,12 @@ import item.Item;
 import java.util.ArrayList;
 
 public class Itemlist {
-    private final ArrayList<Item> items = new ArrayList<>();
+    private static final ArrayList<Item> items = new ArrayList<>();
 
     public Itemlist() {
     }
 
-    public void addItem(Item item) {
+    public static void addItem(Item item) {
         items.add(item);
     }
 
