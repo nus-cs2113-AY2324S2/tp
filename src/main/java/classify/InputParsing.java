@@ -404,7 +404,14 @@ public class InputParsing {
             if (classesAttendedInput.isBlank()) {
                 return 0;
             }
-            int classesAttended = Integer.parseInt(classesAttendedInput);
+            //@@author ParthGandhiNUS
+            int classesAttended;
+            try {
+                classesAttended = Integer.parseInt(classesAttendedInput);
+            } catch (NumberFormatException e){
+                System.out.println("Wrong number format! Please try again! ");
+                classesAttended = promptForClassesAttended(in);
+            }
             if (isValidClassesAttended(classesAttended)) {
                 return classesAttended;
             }
@@ -426,7 +433,7 @@ public class InputParsing {
                 return 0;
             }
             //@@author ParthGandhiNUS
-            double grade = 0;
+            double grade;
             try {
                 grade = Double.parseDouble(gradeInput);
             } catch (NumberFormatException e) {
