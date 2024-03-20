@@ -280,7 +280,7 @@ public class Parser {
         }
 
         String name = matcher.group(NAME_GROUP).trim();
-        String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
+        String quantityString = matcher.group(QUANTITY_GROUP).trim();
 
         if (name.isEmpty() || quantityString.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
@@ -315,7 +315,7 @@ public class Parser {
         }
 
         String name = matcher.group(NAME_GROUP).trim();
-        String quantityString = matcher.group(QUANTITY_GROUP).replace(QUANTITY_FLAG + BASE_FLAG, "").trim();
+        String quantityString = matcher.group(QUANTITY_GROUP).trim();
 
         if (name.isEmpty() || quantityString.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);

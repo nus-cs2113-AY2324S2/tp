@@ -70,6 +70,7 @@ public class ParserTest {
             assertInstanceOf(InvalidCommand.class, resultCommand);
         }
     }
+
     @Test
     public void parseCommand_validQuitCommandInput_quitCommand() throws TrackerException {
 
