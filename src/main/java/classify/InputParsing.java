@@ -83,11 +83,9 @@ public class InputParsing {
     }
     //@@author blackmirag3
     private static void listStudents(ArrayList<Student> list) {
-        if (list.isEmpty()) {
-            System.out.println("Currently no students in list.");
-        } else {
-            StudentList.printCurrentArrayList(list);
-        }
+        StudentList.printCurrentArrayList(list);
+        //@@author ParthGandhiNUS
+        StudentList.printCurrentArrayMessage(list);
         Ui.printDivider();
     }
 
