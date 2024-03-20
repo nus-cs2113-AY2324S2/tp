@@ -2,8 +2,7 @@ package byteceps.processing;
 
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
-import byteceps.activities.Exercise;
-import byteceps.activities.Workout;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
