@@ -8,6 +8,14 @@ public class Balance {
     protected String userName;
     protected Map<String, Float> balanceList;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public Map<String, Float> getBalanceList() {
+        return balanceList;
+    }
+
     public Balance(String userName, Map<String, Float> userList) {
         this.userName = userName;
         this.balanceList = userList;
