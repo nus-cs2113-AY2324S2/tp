@@ -24,7 +24,7 @@ public class Storage {
      *                  or overwrite the file (false).
      * @throws IOException If file is not found at the indicated file path.
      */
-    private static void writeToFile(String filePath, String textToAdd, boolean ifAppend) throws IOException {
+    public static void writeToFile(String filePath, String textToAdd, boolean ifAppend) throws IOException {
         FileWriter writer = new FileWriter(filePath, ifAppend);
         writer.write(textToAdd);
         writer.close();
@@ -49,11 +49,10 @@ public class Storage {
      * Read lines from the file and identify tasks written inside.
      * Add the identified tasks into a list of existing tasks.
      *
-     * @param fileToRead The file to read from.
      */
-    public static void readFromFile(File fileToRead) {
+    public static void readFromFile(File fileName) {
         try {
-            Scanner scanner = new Scanner(fileToRead);
+            Scanner scanner = new Scanner(fileName);
             while (scanner.hasNext()) {
                 String lineSkipped = scanner.nextLine();
             }
