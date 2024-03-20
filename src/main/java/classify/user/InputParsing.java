@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
+    private static final int UPPER_LIMIT_PHONE_NUMBER = 10;
+    private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
     private static final String LIST = "list";
@@ -574,6 +576,18 @@ public class InputParsing {
         }
     }
 
+    //@@author Cryolian
+    /**
+     * Creates a looping prompt asking for a phone number.
+     * Only exits the loop when either an exception is thrown,
+     * or when the number is either 8 or 10 digits to account for
+     * the length of a Singaporean number, with or without
+     * the country code.
+     * 
+     * @param in    The scanner class to read inputs from.
+     * @return      -1 if an exception was thrown. An 8
+     *              or 10 digit number if not.
+     */
     private static int promptForPhoneNumber(Scanner in) {
 
         System.out.println("Please input a valid Phone number: ");
@@ -589,23 +603,30 @@ public class InputParsing {
             return number;
 
         } catch (NumberFormatException e) {
-            System.out.println("A number was not inputted. ");
+            System.out.println("A valid number was not inputted. ");
         }
 
         return -1;
     }
 
     private static boolean checkNumberValidity(int number) {
-        return String.valueOf(number).length() == 8 || String.valueOf(number).length() == 10;
+        return String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER || String.valueOf(number).length() == UPPER_LIMIT_PHONE_NUMBER;
     }
 
+    /**
+     * A prompting input to scan in a string from the user input.
+     * 
+     * @param in    The scanner class to scan inputs from.
+     * @return      "Unknown" if blank was inputted, or the
+     *              trimmed string inputted by the user.
+     */
     private static String promptString(Scanner in) {
         
         String string = in.nextLine();
         if (string.isBlank()) {
             return "Unknown";
         } 
-        return string;
+        return string.trim();
         
     }
 
