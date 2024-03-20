@@ -57,14 +57,11 @@ public class QuestionsList {
         return allQuestions.toString();
     }
 
-    public String getAllQuestions() throws CustomException {
-        if (questionsList.isEmpty()) {
-            throw new CustomException("No questions yet");
-        }
+    public String getAllQuestions() {
         StringBuilder allQuestions = new StringBuilder();
 
-        for (Question question : questionsList) {
-            int questionNum = questionsList.indexOf(question) + 1; // +1 coz zero index
+        for (Question question : chosenQuestionsList) {
+            int questionNum = chosenQuestionsList.indexOf(question) + 1; // +1 coz zero index
             String header = "Question " + questionNum + ":" + System.lineSeparator();
             String displayQuestion = header + question.getQuestion() + System.lineSeparator();
 
