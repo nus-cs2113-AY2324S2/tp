@@ -129,6 +129,8 @@ public class TravelActivityList {
         System.out.println("I have unchecked this task:");
         System.out.println(markedTask);
     }
-
+    public ArrayList<TravelActivity> getTravelActivities() {
+        return travelActivities;
+    }
 
 }
