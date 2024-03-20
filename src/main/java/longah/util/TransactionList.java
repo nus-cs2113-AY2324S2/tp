@@ -119,7 +119,7 @@ public class TransactionList {
      * Printout the list of transactions which the member name is involved as the
      * transaction lender
      *
-     * @param lenderName User input containing the name of person to search for
+     * @param borrowerName User input containing the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
     public String findBorrower(String borrowerName) throws LongAhException {
@@ -141,7 +141,7 @@ public class TransactionList {
      * Printout the list of transactions which the member name is involved as the
      * transaction lender
      *
-     * @param lenderName User input containing the name of person to search for
+     * @param name User input containing the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
     public String findTransactions(String name) throws LongAhException {
