@@ -27,13 +27,19 @@ public class Parser {
         }
     }
 
-    private static AddBouquetCommand handleAddBouquet(String input){
-        String newBouquetName = input.substring(input.indexOf(" ") + 1);
+    private static AddBouquetCommand handleAddBouquet(String input) throws FlorizzException{
+        if (!input.contains(" ")){
+            throw new FlorizzException("Did not include bouquet to add");
+        }
+        String newBouquetName = input.substring(input.indexOf(" ") + 1).trim();
         return new AddBouquetCommand(new Bouquet(newBouquetName));
     }
 
-    private static DeleteBouquetCommand handleDeleteBouquet(String input){
-        String bouquetToDelete = input.substring(input.indexOf(" ") + 1);
+    private static DeleteBouquetCommand handleDeleteBouquet(String input) throws FlorizzException{
+        if (!input.contains(" ")){
+            throw new FlorizzException("Did not include bouquet to delete");
+        }
+        String bouquetToDelete = input.substring(input.indexOf(" ") + 1).trim();
         return new DeleteBouquetCommand(new Bouquet(bouquetToDelete));
     }
 
