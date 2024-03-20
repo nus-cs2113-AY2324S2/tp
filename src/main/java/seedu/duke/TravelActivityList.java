@@ -156,10 +156,6 @@ public class TravelActivityList {
         System.out.println(taggedTask + "(" + tag + ")");
     }
 
-    public ArrayList<TravelActivity> getTravelActivities () {
-            return travelActivities;
-    }
-
     /**
      * Removes the tag on a travel activity
      * @param taskNumber The travel activity number on the list
@@ -174,7 +170,10 @@ public class TravelActivityList {
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
         System.out.println(taggedTask);
+    }
 
+    public ArrayList<TravelActivity> getTravelActivities () {
+        return travelActivities;
     }
 
 }
