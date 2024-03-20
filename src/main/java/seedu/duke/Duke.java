@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import parser.Parser;
+import Itemlist.Itemlist;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class Duke {
     private final TextUi ui = new TextUi();
     private final Parser parser = new Parser();
+    private Itemlist itemlist = new Itemlist();
     /**
      * Main entry-point for the java.duke.Duke application.
      */
