@@ -14,3 +14,6 @@ Initiating FTL jump sequence...
 FTL jump completed.
 Terminal primed. Command inputs are now accepted...
 ____________________________________________________________
+PulsePilot successful touchdown
+See you soon, Captain!
+____________________________________________________________
