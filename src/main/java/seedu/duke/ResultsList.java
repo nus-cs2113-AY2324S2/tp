@@ -33,5 +33,10 @@ public class ResultsList {
         }
         return listOfResults.toString();
     }
+
+    public void clearResults() {
+        sessionResults.clear();
+        count = ZERO_RESULTS;
+    }
 }
 
