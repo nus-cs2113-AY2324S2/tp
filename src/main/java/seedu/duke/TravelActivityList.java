@@ -155,25 +155,25 @@ public class TravelActivityList {
         System.out.println("I have tagged this task:");
         System.out.println(taggedTask + "(" + tag + ")");
     }
-        public ArrayList<TravelActivity> getTravelActivities () {
+
+    public ArrayList<TravelActivity> getTravelActivities () {
             return travelActivities;
+    }
 
+    /**
+     * Removes the tag on a travel activity
+     * @param taskNumber The travel activity number on the list
+     */
+    public void removeTag ( int taskNumber) throws OmniException {
+        assert taskNumber != 0 : "There is no task in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
         }
-
-        /**
-         * Removes the tag on a travel activity
-         * @param taskNumber The travel activity number on the list
-         */
-        public void removeTag ( int taskNumber) throws OmniException {
-            assert taskNumber != 0 : "There is no task in the list";
-            if (taskNumber > travelActivities.size()) {
-                throw new OmniException("Travel activity cannot be found");
-            }
-            int indexOfTask = taskNumber - 1;
-            TravelActivity taggedTask = travelActivities.get(indexOfTask);
-            taggedTask.removeTag();
-            System.out.println("Tag removed from the task:");
-            System.out.println(taggedTask);
-        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity taggedTask = travelActivities.get(indexOfTask);
+        taggedTask.removeTag();
+        System.out.println("Tag removed from the task:");
+        System.out.println(taggedTask);
+    }
 
 }
