@@ -8,7 +8,7 @@ delete 2
 add Go Malaysia
 add Go Australia
 find Australia
-tag 1 Asia
+tag 1-Asia
 list
 untag 1
 tag 78
