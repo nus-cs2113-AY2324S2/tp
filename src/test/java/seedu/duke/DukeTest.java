@@ -89,7 +89,7 @@ class DukeTest {
     }
 
     @Test
-    public void testTagActivity() throws OmniException {
+    public void tagTest() throws OmniException {
         TravelActivityList list = new TravelActivityList();
         list.addTravelActivity(new TravelActivity("visit museum"));
         assertEquals("visit museum", list.getDescription("visit museum"));
@@ -100,7 +100,7 @@ class DukeTest {
     }
 
     @Test
-    public void testRemoveTagFromActivity() throws OmniException {
+    public void untagTest() throws OmniException {
         TravelActivityList list = new TravelActivityList();
         list.addTravelActivity(new TravelActivity("visit museum"));
         assertEquals("visit museum", list.getDescription("visit museum"));
