@@ -2,7 +2,6 @@ package seedu.duke;
 
 public class Parser {
     protected String userInput;
-    public static Group currentGroup = new Group("");
 
     public static class EndProgramException extends Exception {
 
@@ -30,7 +29,7 @@ public class Parser {
             break;
         case "group":
             String groupName = argument;
-            currentGroup = Group.getOrCreateGroup(groupName);
+            Group.getOrCreateGroup(groupName);
             break;
         case "member":
             try {
@@ -65,7 +64,6 @@ public class Parser {
                     String[] extractPayer = extractAmount[1].split("/user");
                     String payerName = extractPayer[0];
                     Expense newTransaction = new Expense(payerName,totalAmount,extractPayer);
-                    currentGroup.addExpense(newTransaction);
                 } catch (NumberFormatException e){
                     System.out.println("Re-enter expense with amount as a proper number.");
                 }
@@ -74,10 +72,10 @@ public class Parser {
             }
             break;
         case "list":
-            currentGroup.printExpenses();
+            // List code here
             break;
         case "balance":
-            new Balance(argument, currentGroup.expenses, currentGroup.users).printBalance();
+            // Balance code here
             break;
         default:
             // Default clause
