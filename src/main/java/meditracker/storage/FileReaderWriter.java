@@ -1,9 +1,10 @@
 package meditracker.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.file.FileSystems;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import meditracker.exception.FileReadWriteException;
@@ -84,19 +85,24 @@ public class FileReaderWriter {
      * Reads the JSON file to load and populate the MediTracker.
      * If the file is not found, a warning will be thrown to alert the user, and the program
      * will execute without the saved data (fresh state).
+     *
+     * @param medicationManager The instance of MedicationManager.
      */
-    public static void loadMediTrackerData() {
-        String fullFilePath = getFullJsonDataFilePath();
-        File fileToRead = new File(fullFilePath);
+    public static void loadMediTrackerData(MedicationManager medicationManager) {
+        Path mediTrackerJsonPath = null;
 
         try {
-            Scanner fileReaderScanner = new Scanner(fileToRead);
-        } catch (FileNotFoundException e) {
+            // https://stackoverflow.com/a/20838298
+            mediTrackerJsonPath = FileSystems.getDefault().getPath(getFullJsonDataFilePath());
+        } catch (InvalidPathException e) {
             Logger logger = MediLogger.getMediLogger();
-            logger.warning("Unable to find the file " + fullFilePath + " to read from. "
+            logger.warning("Unable to find the file " + jsonDataFileName + " to read from. "
                     + "Program will run with no data loaded.");
         }
-        // To be implemented: Actual reading and loading of the JSON data
+
+        if (mediTrackerJsonPath != null) {
+            JsonImporter.processMediTrackerJsonFile(mediTrackerJsonPath, medicationManager);
+        }
     }
 
     /**

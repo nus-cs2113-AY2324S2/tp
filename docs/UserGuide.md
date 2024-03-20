@@ -40,6 +40,8 @@ Example of usage:
 
 **A**: {your answer here}
 
+- TODO: Add warning about modifying the text files
+
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}

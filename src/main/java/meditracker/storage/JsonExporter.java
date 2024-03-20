@@ -54,6 +54,7 @@ class JsonExporter {
             Medication medicationInfo = medManager.getMedication(i);
             medicationList.put(convertMedicationInfoToJson(medicationInfo));
         }
+        root.put("version", 1.0);
         root.put("medicationList", medicationList);
 
         try {
