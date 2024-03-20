@@ -1,4 +1,3 @@
-Medicine Name|Illness|Possible Side Effects
 Aspirin|Headache, Fever|Stomach irritation, Bleeding
 Paracetamol|Fever, Pain|Nausea, Liver damage (in high doses)
 Ibuprofen|Pain, Inflammation|Stomach pain, Heartburn
