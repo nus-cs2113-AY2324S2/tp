@@ -11,6 +11,10 @@ public class CommandFactory {
             return new WorkCommand();
         case REST:
             return new RestCommand();
+
+        case STATUS:
+            return new CheckStatusCommand();
+
         default:
             return new ExitCommand();
         }

@@ -67,8 +67,11 @@ public class MCQGame implements MiniGame {
         }
     }
 
-    public void outputResult() {
+    public int getCorrectCount() {
+        return correctCount;
+    }
 
+    public void outputResult() {
         System.out.println("You answered " + correctCount
                 + " questions correctly.\n");
     }

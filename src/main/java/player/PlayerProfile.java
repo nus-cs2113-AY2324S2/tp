@@ -14,6 +14,22 @@ public class PlayerProfile {
         this.occupation = occupation;
     }
 
+    public void addAsset(int amount) {
+        this.asset.addAsset(amount);
+    }
+
+    public void addHealth(int amount) {
+        this.health.add(amount);
+    }
+
+    public void loseHealth() {
+        this.health.deduct(1);
+    }
+
+    public void loseAsset() {
+        this.asset.deductAsset(1);
+    }
+
     public String getName() {
         return this.name;
     }

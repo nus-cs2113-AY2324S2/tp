@@ -18,4 +18,6 @@ public class Health {
     public String outputHealth() {
         return "" + healthBar;
     }
+
+
 }
