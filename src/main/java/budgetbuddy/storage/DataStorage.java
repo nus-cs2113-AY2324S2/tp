@@ -8,10 +8,14 @@ import budgetbuddy.transaction.type.Transaction;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DataStorage {
     public static final String STORAGE_FILE_PATH = "./data/data.txt";
+    public static final String FOLDER_PATH = "./data";
 
     public void saveTransactions(ArrayList<Transaction> transactionArrayList) throws IOException {
         File f = new File(STORAGE_FILE_PATH);
@@ -44,5 +48,12 @@ public class DataStorage {
             return new Expense(transactionInfo[0], Double.parseDouble(transactionInfo[4]), transactionInfo[1], transactionInfo[3], account);
         }
         return null;
+    }
+
+    private static void createDataFolderIfNotExists() throws IOException {
+        Path dataFolderPath = Paths.get(FOLDER_PATH);
+        if (!Files.exists(dataFolderPath)) {
+            Files.createDirectories(dataFolderPath);
+        }
     }
 }
