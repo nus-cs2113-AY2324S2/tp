@@ -1,5 +1,6 @@
 package seedu.stockpal.data.product;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 import seedu.stockpal.ui.Ui;
@@ -82,7 +83,7 @@ public class Product {
     public String toString() {
         String separator = "  |  ";
         return (this.pid + separator + this.name + separator + this.quantity + separator + this.price
-                + System.lineSeparator() + this.description);
+                + Messages.LINE_SEPARATOR + this.description);
     }
 
     /**

@@ -2,10 +2,12 @@ package seedu.stockpal.data.product;
 
 import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.CommandParameter;
+import seedu.stockpal.ui.Ui;
+
+import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 
 public class Description implements CommandParameter {
     private static final String EMPTY_STRING = "";
-    private static final int WRAP_LENGTH = 70;
     protected String description;
 
     public Description(String description) {
@@ -33,7 +35,7 @@ public class Description implements CommandParameter {
         }
 
         String textToFormat = "Description: " + description;
-        return WordUtils.wrap(textToFormat, WRAP_LENGTH, System.lineSeparator(), true);
+        return Ui.indentTextIfRequired(textToFormat);
     }
 
     /**

@@ -13,9 +13,10 @@ import java.util.logging.Logger;
 public class DeleteCommand extends ListActionCommand {
 
     public static final String COMMAND_KEYWORD = "delete";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD +
-            ": Deletes a product from the inventory with using its PID.\n" +
-            "Format: delete PID";
+    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
+            + ": Deletes the specified product from the inventory at the specified PID."
+            + Messages.LINE_SEPARATOR
+            + "Format: delete PID");
     private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
     protected Pid pid;
     private final Storage storage;

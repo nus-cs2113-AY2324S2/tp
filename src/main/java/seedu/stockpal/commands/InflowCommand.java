@@ -1,15 +1,19 @@
 package seedu.stockpal.commands;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.storage.Storage;
+import seedu.stockpal.ui.Ui;
 
 public class InflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD
-            + ": Increase quantity of an existing product in the inventory at the specific PID\n"
-            + "Format: inflow PID [a/QUANTITY] ";
+    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
+            + ": Increases the quantity of product with PID "
+            + "by the specified INCREMENT_AMOUNT from the existing amount."
+            + Messages.LINE_SEPARATOR
+            + "Format: inflow PID a/INCREMENT_AMOUNT");
 
     private ProductList productList;
     private Pid pid;

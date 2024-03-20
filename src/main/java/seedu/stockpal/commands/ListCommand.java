@@ -1,19 +1,22 @@
 package seedu.stockpal.commands;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.stockpal.common.Messages.MESSAGE_EMPTY_LIST;
-import static seedu.stockpal.common.Messages.MESSAGE_LIST_SUCCESS;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
 public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
-    public static final String COMMAND_USAGE = COMMAND_KEYWORD + ": ";
     private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
+    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
+            + ": Lists each product in inventory."
+            + Messages.LINE_SEPARATOR
+            + "Format: list");
+
     protected ProductList productList;
 
     public ListCommand(ProductList productList) {
@@ -27,12 +30,12 @@ public class ListCommand extends ListActionCommand {
     @Override
     public void execute() {
         if (productList.isEmpty()) {
-            printToScreen(MESSAGE_EMPTY_LIST);
+            printToScreen(Messages.MESSAGE_EMPTY_LIST);
             return;
         }
 
         Ui.printListTasks(productList);
-        LOGGER.log(Level.INFO, MESSAGE_LIST_SUCCESS);
+        LOGGER.log(Level.INFO, Messages.MESSAGE_LIST_SUCCESS);
     }
 
 }

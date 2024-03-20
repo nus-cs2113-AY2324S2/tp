@@ -1,11 +1,12 @@
 package seedu.stockpal.common;
 
 public class Messages {
+    public static final String LINE_SEPARATOR = System.lineSeparator();
     public static final String HORIZONTAL_LINE =
             "==========================================================================";
-    public static final String MESSAGE_WELCOME = "Welcome to StockPal!";
+    public static final String MESSAGE_WELCOME = "Welcome to StockPal!" + LINE_SEPARATOR
+            + "Enter a command to begin.";
     public static final String MESSAGE_GOODBYE = "Exiting program, goodbye!";
-
     public static final String MESSAGE_ADDED = "Product added!";
     public static final String MESSAGE_REFER_TO_HELP = "For more information on the commands, use `help`.";
     public static final String MESSAGE_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
