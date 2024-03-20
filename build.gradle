@@ -29,13 +29,12 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
-    applicationDefaultJvmArgs = ["-ea"] // Enable assertions
+    mainClass.set("newsonthego.NewsOnTheGo")
 }
 
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("newsonthego")
     archiveClassifier.set("")
 }
 
