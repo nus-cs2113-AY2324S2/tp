@@ -58,11 +58,10 @@ public class Ui {
         System.out.println("1. new <bouquet_name> - Add a bouquet");
         System.out.println("2. delete <bouquet_name> - Delete a bouquets");
         System.out.println("3. mybouquets - List current saved bouquets");
-        System.out.println("4. flower <occasion_name> - List all flowers in Florizz or all flowers for an occasion");
-        System.out.println("5. info <flower_name> - Provide information on chosen flower");
-        System.out.println("6. flower - Shows a list of flowers that can be added into mybouquets");
-        System.out.println("7. flower <occasion> - Shows a list of flowers associated with said occasion");
-        System.out.println("8. bye - Exits the programme");
+        System.out.println("4. info <flower_name> - Provide information on chosen flower");
+        System.out.println("5. flower - Shows a list of flowers that can be added into mybouquets");
+        System.out.println("6. flower <occasion> - Shows a list of flowers associated with said occasion");
+        System.out.println("7. bye - Exits the programme");
         printBreakLine();
     }
 

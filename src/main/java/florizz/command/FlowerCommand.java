@@ -1,6 +1,7 @@
 package florizz.command;
 
 import florizz.core.FlorizzException;
+import florizz.core.OccasionDictionary;
 import florizz.core.Ui;
 import florizz.objects.Bouquet;
 
@@ -17,6 +18,8 @@ public class FlowerCommand extends Command{
     public boolean execute(ArrayList<Bouquet> bouquetList, Ui ui) throws FlorizzException {
         if (occasion.isBlank()) {
             ui.printAllDictFlowerName();
+        } else if (!OccasionDictionary.contains(occasion)){
+            throw new FlorizzException("This occasion does not exist type 'occasion' to get a list of occasions");
         } else {
             ui.printOccasionFlower(occasion);
         }
