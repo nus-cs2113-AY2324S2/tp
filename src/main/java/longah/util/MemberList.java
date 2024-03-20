@@ -40,6 +40,14 @@ public class MemberList {
         this.members.add(new Member(name));
     }
 
+    /**
+     * Adds a member to the group with the specified name and balance.
+     * For use in storage only.
+     * 
+     * @param name The name of the member to add.
+     * @param balance The balance of the member to add.
+     * @throws LongAhException If the member already exists in the group.
+     */
     public void addMember(String name, double balance) throws LongAhException {
         if (isMember(name)) {
             throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
@@ -232,7 +240,7 @@ public class MemberList {
     }
 
     /**
-     * Iterates through the members list and clears their balances..
+     * Iterates through the members list and clears their balances.
      */
     public void clearBalances() {
         for (Member member : members) {

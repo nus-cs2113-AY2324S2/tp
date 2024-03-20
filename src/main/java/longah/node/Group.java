@@ -2,6 +2,8 @@ package longah.node;
 
 import java.util.ArrayList;
 
+import java.util.logging.*;
+
 import longah.util.MemberList;
 import longah.util.Subtransaction;
 import longah.util.TransactionList;
@@ -14,6 +16,8 @@ public class Group {
     private TransactionList transactions;
     private StorageHandler storage;
     private ArrayList<Subtransaction> transactionSolution = new ArrayList<>();
+
+    private static Logger logger = Logger.getLogger("Group Logger");
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.
@@ -66,6 +70,7 @@ public class Group {
      * @throws LongAhException If the transaction solution cannot be updated
      */
     public void updateTransactionSolution() throws LongAhException {
+        logger.log(Level.INFO, "Updating transaction solution");
         this.transactionSolution = this.members.solveTransactions();
     }
 

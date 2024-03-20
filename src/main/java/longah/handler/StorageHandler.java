@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.logging.*;
+
 import longah.node.Member;
 import longah.util.MemberList;
 import longah.util.Subtransaction;
@@ -27,6 +29,8 @@ import longah.exception.ExceptionMessage;
 public class StorageHandler {
     // ASCII Defined Separator
     private static final String SEPARATOR = String.valueOf(Character.toChars(31));
+
+    private static Logger logger = Logger.getLogger("Storage Logger");
 
     // Storage Directory Constants
     private File membersFile;
@@ -62,6 +66,7 @@ public class StorageHandler {
 
         // Load data from data files into MemberList and TransactionList objects
         loadAllData(members, transactions);
+        logger.log(Level.INFO, "Data loaded from storage.");
     }
 
     /**
