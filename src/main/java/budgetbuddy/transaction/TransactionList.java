@@ -5,9 +5,11 @@ import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.exception.InvalidAddTransactionSyntax;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
+import budgetbuddy.storage.DataStorage;
 import budgetbuddy.transaction.type.Transaction;
 import budgetbuddy.ui.UserInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TransactionList {
@@ -19,9 +21,11 @@ public class TransactionList {
     private ArrayList<Transaction> transactions;
     private Parser parser;
 
-    public TransactionList() {
+    private final DataStorage dataStorage = new DataStorage();
+
+    public TransactionList() throws IOException {
         // Initialise ArrayList in the constructor
-        this.transactions = new ArrayList<>();
+        this.transactions = dataStorage.readFileContents();
         this.parser = new Parser();
     }
 
@@ -81,5 +85,13 @@ public class TransactionList {
         addTransaction(t);
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
         UserInterface.printAddMessage(fetchData, account.getBalance());
+    }
+
+    public void saveTransactionList() throws IOException {
+        dataStorage.saveTransactions(transactions);
+    }
+
+    public void updateBalance(Account account) {
+        account.setBalance(dataStorage.getBalance());
     }
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import budgetbuddy.transaction.type.Transaction;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,7 +20,7 @@ public class TransactionListTest {
     private Account account;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         transactionList = new TransactionList();
         account = new Account();
     }

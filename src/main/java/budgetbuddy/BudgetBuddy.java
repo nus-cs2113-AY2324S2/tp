@@ -7,6 +7,7 @@ import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.ui.UserInterface;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class BudgetBuddy {
@@ -14,7 +15,7 @@ public class BudgetBuddy {
     /**
      * Main entry-point for the java.BudgetBuddy application.
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
@@ -23,10 +24,17 @@ public class BudgetBuddy {
         System.out.println("Hello " + in.nextLine());
 
 
-        TransactionList transactions = new TransactionList();
+        TransactionList transactions = null;
+        try {
+            transactions = new TransactionList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Account account = new Account();
+        transactions.updateBalance(account);
+
         boolean isRunning = true;
-        try{
+        try {
             while (isRunning) {
                 String input = in.nextLine();
 
@@ -47,6 +55,7 @@ public class BudgetBuddy {
                 default:
                     UserInterface.printNoCommandExists();
                 }
+                transactions.saveTransactionList();
             }
         } catch (InvalidAddTransactionSyntax e) {
             UserInterface.printInvalidAddSyntax(e.getMessage());
@@ -59,7 +68,7 @@ public class BudgetBuddy {
         } catch(IndexOutOfBoundsException e){
             UserInterface.printIndexOutOfBounds("Given index id is out of bound",
                     Integer.parseInt(e.getMessage()));
-        } catch(Exception e){
+        } catch (Exception e) {
             UserInterface.printUnknownError(e.getMessage());
         }
     }
