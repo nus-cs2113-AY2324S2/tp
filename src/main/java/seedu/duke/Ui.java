@@ -38,6 +38,15 @@ public class Ui {
         System.out.println("The solutions are :"
                 + System.lineSeparator() + allSolutions);
     }
+
+    public void printOneResult(int roundNum, String score) {
+        System.out.println("Your results for Round " + roundNum + ":\n" + score);
+    }
+
+    public void printAllResults(String allResults) {
+        System.out.println("These are all your results so far:\n" + allResults);
+    }
+
     private void handleException(CustomException e) {
         System.out.println(e.getMessage() + "TODO: show possible commands"); //TODO
     }
