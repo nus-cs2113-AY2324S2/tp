@@ -7,17 +7,17 @@ import utility.Constant;
  */
 public class GymSet {
     int weight;
-    int repititions;
+    int repetitions;
 
     /**
      * Constructs a new GymSet object using the weight and reps for 1 set of a gym station.
      *
      * @param weight The weight done for the set.
-     * @param repititions The number of reps done for the set.
+     * @param repetitions The number of reps done for the set.
      */
-    public GymSet(int weight, int repititions){
+    public GymSet(int weight, int repetitions){
         this.weight = weight;
-        this.repititions = repititions;
+        this.repetitions = repetitions;
     }
 
     /**
@@ -27,7 +27,7 @@ public class GymSet {
      */
     @Override
     public String toString() {
-        return String.format(Constant.GYM_SET_FORMAT, this.repititions, this.weight);
+        return String.format(Constant.GYM_SET_FORMAT, this.repetitions, this.weight);
     }
 }
 

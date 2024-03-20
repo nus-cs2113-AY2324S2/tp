@@ -55,7 +55,7 @@ public class Run extends Workout{
      */
     public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
 
-        String[] results = new String[4]; // Constant.RUN_PARAMETERS = 4
+        String[] results = new String[Constant.NUMBER_OF_RUN_PARAMETERS];
 
 
         if (!input.contains("/e:") || !input.contains("/d:") || !input.contains("/t:")) {
@@ -146,7 +146,7 @@ public class Run extends Workout{
         int totalSeconds;
 
         if (this.isHourPresent) {
-            totalSeconds = this.times[0] * 3600 + this.times[1] * 60  + this.times[2];
+            totalSeconds = this.times[0] * Constant.NUM_SECONDS_IN_HOUR + this.times[1] * Constant.NUM_SECONDS_IN_MINUTE  + this.times[2];
         } else {
             totalSeconds = this.times[0] * 60 + this.times[1];
         }
@@ -160,11 +160,11 @@ public class Run extends Workout{
      */
     public String calculatePace() {
         int totalSeconds = calculateTotalSeconds();
-        double paceInDecimal = ((double) totalSeconds / this.distance) / 60;
+        double paceInDecimal = ((double) totalSeconds / this.distance) / Constant.NUM_SECONDS_IN_MINUTE;
 
         int minutes = (int) paceInDecimal;
         double remainingSeconds = paceInDecimal - minutes;
-        int seconds = (int) Math.round(remainingSeconds * 60);
+        int seconds = (int) Math.round(remainingSeconds * Constant.NUM_SECONDS_IN_MINUTE);
         return String.format("%d:%02d/km", minutes, seconds);
     }
 
@@ -183,9 +183,4 @@ public class Run extends Workout{
         }
         return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
     }
-
-
-
-
-
 }

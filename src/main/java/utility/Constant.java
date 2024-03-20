@@ -44,6 +44,7 @@ public class Constant {
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
     public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets of %s";
 
+    public static final int NUMBER_OF_RUN_PARAMETERS = 4;
     public static final String RUN_HEADER = "Type\tTime\t\tDistance\tPace\t\tDate";
 
     // Constant for Error
@@ -79,6 +80,8 @@ public class Constant {
             "Example input: new /e:gym /n:<number of exercise>";
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Insufficient parameters for Gym Stations! " +
             "Please input [name of exercise] /s:[sets] /r:[reps] /w:[weights]";
+    public static final int NUM_SECONDS_IN_MINUTE = 60;
+    public static final int NUM_SECONDS_IN_HOUR = 3600;
 
 
     // Health Constants
