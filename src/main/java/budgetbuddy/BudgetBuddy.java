@@ -50,6 +50,7 @@ public class BudgetBuddy {
                 default:
                     UserInterface.printNoCommandExists();
                 }
+                transactions.saveTransactionList();
             }
         } catch (IndexOutOfBoundsException e) {
             UserInterface.printIndexOutOfBounds("Given index id is out of bound",
