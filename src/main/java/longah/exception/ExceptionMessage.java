@@ -4,11 +4,13 @@ public enum ExceptionMessage {
     // [Cause of Exception]([Message to be printed])
     // General Exceptions
     INVALID_INDEX ("Invalid index."),
+
     // Member Exceptions
     DUPLICATE_MEMBER ("Duplicate member."),
     INVALID_MEMBER_NAME ("Invalid member name."),
     MEMBER_NOT_FOUND ("Member not found."),
     NO_MEMBERS_FOUND ("Member list is empty."),
+
     // Transaction Exceptions
     INVALID_TRANSACTION_FORMAT ("Invalid transaction format."),
     INVALID_TRANSACTION_VALUE ("Invalid transaction value."),
@@ -16,6 +18,7 @@ public enum ExceptionMessage {
     NO_TRANSACTION_FOUND ("Transaction list is empty."),
     NO_DEBTS_FOUND ("No debts found."),
     TRANSACTIONS_SUMMED_UP ("No pending payments."),
+    
     // Data Storage Exceptions
     STORAGE_FILE_NOT_FOUND ("File not found."),
     STORAGE_FILE_NOT_CREATED ("File not created."),

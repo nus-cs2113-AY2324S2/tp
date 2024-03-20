@@ -8,6 +8,7 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 
 import longah.node.Group;
+import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
 import longah.handler.InputHandler;
 import longah.commands.Command;
@@ -70,9 +71,14 @@ public class LongAh {
                     return;
                 }
             } catch (LongAhException e) {
-                LongAhLogger.log(Level.WARNING, "The previous user command caused an error. Check the returned " +
-                        "error message for details");
                 LongAhException.printException(e);
+                // Log critical errors
+                if (e.getMessage().equals(ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage()) ||
+                        e.getMessage().equals(ExceptionMessage.NO_DEBTS_FOUND.getMessage()) || 
+                        e.getMessage().equals(ExceptionMessage.NO_TRANSACTION_FOUND.getMessage())) {
+                    LongAhLogger.log(Level.WARNING, "The previous user command caused an error. " +
+                            "Check the returned error message for details");
+                }
             }
         }
     }
