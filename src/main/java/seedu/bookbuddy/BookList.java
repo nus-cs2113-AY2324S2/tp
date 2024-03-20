@@ -56,6 +56,7 @@ public class BookList {
         Book book = books.get(index - 1);
         books.remove(index - 1);
         System.out.println("Successfully removed " + book.getTitle() + " from the list.");
+        assert books.size() >= 0 : "Book list size should not be negative after deletion";
     }
 
     /**
