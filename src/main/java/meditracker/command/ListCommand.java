@@ -9,6 +9,10 @@ import meditracker.ui.Ui;
 
 import java.util.Map;
 
+/**
+ * The ListCommand class represents a command to list the medications.
+ * It extends the Command class.
+ */
 public class ListCommand extends Command {
 
     public ArgumentList argumentList = new ArgumentList(
