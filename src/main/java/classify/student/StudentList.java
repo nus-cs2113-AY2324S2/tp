@@ -28,7 +28,6 @@ public class StudentList {
      * @param currentList takes in an array to print out the name and other attributes of the Student
      */
     public static void printCurrentArrayList(ArrayList<Student>currentList){
-        assert currentList.size() >= 0;
         for (int i = 1; i <= currentList.size(); i++){
             System.out.println(i + DOT + currentList.get(i-1));
         }
@@ -44,15 +43,12 @@ public class StudentList {
 
         switch (numberOfStudents){
         case 0:
-            assert numberOfStudents == 0 : "Number of Students equal to zero!";
             System.out.println(ZERO_STUDENT_MESSAGE);
             break;
         case 1:
-            assert numberOfStudents == 1 : "Number of Students equal to one!";
             System.out.println(ONE_STUDENT_MESSAGE);
             break;
         default:
-            assert numberOfStudents > 1 : "Number of Students more than one!";
             System.out.println(CURRENTLY_THERE_ARE + numberOfStudents + STUDENTS_IN_THE_LIST);
             break;
         }
