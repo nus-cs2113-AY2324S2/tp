@@ -94,6 +94,7 @@ public class InputParsing {
             System.out.println("Name of student to edit (enter blank to exit):");
             name = in.nextLine().trim();
             if (name.isBlank()) {
+                System.out.println("Exiting edit.");
                 return;
             }
             student = findStudentByName(list, name);

@@ -14,7 +14,7 @@ public class UserInput {
         if  (userInput.trim().contains(" ")) {
             commandWithName = userInput.split(" ", 2);
         } else {
-            commandWithName[0] = userInput;
+            commandWithName[0] = userInput.trim();
         }
 
         commandWithName[0] = commandWithName[0].toLowerCase();
