@@ -37,13 +37,12 @@ public class BudgetBuddy {
         while (!isExit) {
             String input = scanner.nextLine();
 
-            if (input.equals("bye")) {
+            if (parser.isExitCommand(input)) {
                 isExit = true;
             }
             else {
                 handleCommands(input);
             }
-
         }
 
         ui.showGoodbye();

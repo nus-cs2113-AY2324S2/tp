@@ -36,6 +36,11 @@ public class ExpenseList {
     }
 
     public ArrayList<Expense> filterExpenses(String description, Double minAmount, Double maxAmount) {
+        assert minAmount <= maxAmount : "Minimum Amount must be smaller than or equals to Max Amount";
+
+        LOGGER.log(Level.INFO, "Start Filtering expenses based on description : " + " minAmount : "
+                + minAmount + "maxAmount : " + maxAmount);
+
         String descriptionInLowerCase = description.toLowerCase();
         ArrayList<Expense> filteredExpenses = new ArrayList<>(this.expenses.stream()
                 .filter(expense -> (expense.getDescription().toLowerCase().contains(descriptionInLowerCase)))
@@ -43,6 +48,7 @@ public class ExpenseList {
                 .filter(expense -> (maxAmount == null || expense.getAmount() < maxAmount))
                 .collect(Collectors.toList()));
 
+        LOGGER.log(Level.INFO, "Ending filtering and returning filtered expenses");
         return filteredExpenses;
 
     }

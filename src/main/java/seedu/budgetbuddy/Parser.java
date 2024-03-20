@@ -104,9 +104,6 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
-    public boolean isLarger(Double minAmount, Double maxAmount) {
-        return maxAmount >= minAmount;
-    }
 
     /**
      * Parses the "find expenses" command, allowing for optional and combinable parameters.
@@ -124,7 +121,11 @@ public class Parser {
         Double minAmount = null;
         Double maxAmount = null;
 
+        LOGGER.log(Level.INFO, "Begin parsing parameters in find expenses command");
+
         if(!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
+            LOGGER.log(Level.WARNING, "Input does not contain any parameters");
+
             System.out.println("Please Ensure that you include d/, morethan/ or lessthan/");
             return null;
         }
@@ -138,6 +139,8 @@ public class Parser {
             try {
                 minAmount = Double.parseDouble(minAmountAsString);
             } catch (NumberFormatException e) {
+                LOGGER.log(Level.WARNING, "Detected a String when expecting a Number in minAmount");
+
                 System.out.println("Invalid format for amount.");
                 return null;
             }
@@ -148,12 +151,16 @@ public class Parser {
             try {
                 maxAmount = Double.parseDouble(maxAmountAsString);
             } catch (NumberFormatException e) {
+                LOGGER.log(Level.WARNING, "Detected a String when expecting a Number in maxAmount");
+
                 System.out.println("Invalid format for amount.");
                 return null;
             }
         }
 
         if (minAmount != null && maxAmount != null && minAmount > maxAmount) {
+            LOGGER.log(Level.WARNING, "Detected Minimum Amount Larger than Maximum Amount");
+
             System.out.println("Maximum Amount cannot be Smaller than Minimum Amount");
             return null;
         }
