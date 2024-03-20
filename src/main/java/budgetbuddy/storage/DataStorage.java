@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +40,9 @@ public class DataStorage {
     }
 
     private static String getStringToWrite(Transaction t) {
-        return t.getDescription() + " ," + t.getCategory() + " ," + t.getTransactionType() + " ," + t.getDate()
+        LocalDate date = t.getDate();
+        String stringDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return t.getDescription() + " ," + t.getCategory() + " ," + t.getTransactionType() + " ," + stringDate
                 + " ," + t.getAmount() + "\n";
     }
 
