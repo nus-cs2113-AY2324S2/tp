@@ -6,7 +6,7 @@ public enum CommandType {
     WORK("work"),
     REST("rest"),
     EXIT("bye"),
-
+    EXERCISE("exercise"),
     STATUS("status");
 
 

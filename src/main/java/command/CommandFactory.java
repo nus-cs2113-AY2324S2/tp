@@ -9,8 +9,12 @@ public class CommandFactory {
         switch (commandType) {
         case WORK:
             return new WorkCommand();
+
         case REST:
             return new RestCommand();
+
+        case EXERCISE:
+            return new ExerciseCommand();
 
         case STATUS:
             return new CheckStatusCommand();

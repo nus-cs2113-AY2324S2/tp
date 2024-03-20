@@ -70,6 +70,10 @@ public class TypingGame implements MiniGame {
         return (correctCharacters * PERCENTAGE / TEXT_TO_TYPE.length());
     }
 
+    public int getAccuracy() {
+        return this.accuracy;
+    }
+
     public void outputResult() {
         ResponseManager.indentPrint(
                 String.format("You typed at %d%% accuracy in %.2f seconds!\n", this.accuracy, this.timeSpent));

@@ -21,11 +21,18 @@ public class Parser {
     }
 
     public static String parseCareer(String input) throws JobSelectException {
-        if (input.equals("Robotics") ||
-                input.equals("Semiconductor industry") ||
-                input.equals("Artificial intelligence")) {
-            ResponseManager.echoChosenIndustry(input);
-            return input;
+        switch (input.toLowerCase().trim()) {
+        case "/r":
+            ResponseManager.echoChosenIndustry("Robotics");
+            return "Robotics";
+
+        case "/s":
+            ResponseManager.echoChosenIndustry("Semi-conductor");
+            return "semi-conductor";
+
+        case "/a":
+            ResponseManager.echoChosenIndustry("Artificial Intelligence");
+            return "artificial intelligence";
         }
         throw new JobSelectException("Please enter a valid job type, try again!");
     }
