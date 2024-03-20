@@ -72,9 +72,12 @@ public class Ui {
         System.out.println("2. delete <bouquet_name> - Delete a bouquets");
         System.out.println("3. mybouquets - List current saved bouquets");
         System.out.println("4. info <flower_name> - Provide information on chosen flower");
-        System.out.println("5. flower - Shows a list of flowers that can be added into mybouquets");
-        System.out.println("6. flower <occasion> - Shows a list of flowers associated with said occasion");
-        System.out.println("7. bye - Exits the programme");
+        System.out.println("5. add <flower_name> /q <quantity> /to <bouquet_name> - add flower to a bouquet.");
+        System.out.println("6. remove <flower_name> /q <quantity> /from <bouquet_name> - remove flower from a bouquet.");
+        System.out.println("7. flower - Shows a list of flowers that can be added into mybouquets");
+        System.out.println("8. flower <occasion> - Shows a list of flowers associated with said occasion");
+        System.out.println("9. occasion - Shows a list of occasions associated with available flowers.");
+        System.out.println("10. bye - Exits the programme");
         printBreakLine();
     }
 
