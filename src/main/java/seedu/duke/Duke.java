@@ -20,7 +20,7 @@ public class Duke {
 
                 case "list":
                     Ui.printLine();
-                    Parser.getList(list);
+                    Parser.getList(command, list);
                     Ui.printLine();
                     break;
 
@@ -86,6 +86,8 @@ public class Duke {
                 Ui.printException(exception);
             } catch (NoSuchElementException exception){
                 Ui.printNoSuchElementException(exception);
+            } catch (NumberFormatException exception) {
+                Ui.printNumberTooLargeException(exception);
             }
         }
     }

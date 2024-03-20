@@ -4,10 +4,9 @@ public class TravelActivity {
     /** Travel activity description */
     private String travelActivity;
     /** Travel activity status */
-    private boolean taskIsDone = false;
+    private boolean activityIsDone = false;
     /** Travel activity tag */
     private String tag;
-
     public TravelActivity(String line){
         travelActivity = line;
     }
@@ -18,11 +17,11 @@ public class TravelActivity {
     }
 
     /**
-     * Sets the task status of the task to complete or incomplete
-     * @param taskIsDone Task status
+     * Sets the status of the activity to complete or incomplete
+     * @param activityIsDone activity status
      */
-    public void setTaskStatus(boolean taskIsDone){
-        this.taskIsDone = taskIsDone;
+    public void setActivityStatus(boolean activityIsDone){
+        this.activityIsDone = activityIsDone;
     }
 
     /**
@@ -33,8 +32,8 @@ public class TravelActivity {
         return travelActivity;
     }
 
-    public boolean getTaskStatus() {
-        return taskIsDone;
+    public boolean getActivityStatus() {
+        return activityIsDone;
     }
 
     /**

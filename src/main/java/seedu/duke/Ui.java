@@ -40,11 +40,19 @@ public class Ui {
     public static void printException(OmniException exception){
         printLine();
         System.out.println("Warning! " + exception.getMessage());
+        printLine();
     }
 
     public static void printNoSuchElementException(NoSuchElementException exception){
         printLine();
         System.out.println("Warning! " + exception.getMessage());
+        printLine();
+    }
+
+    public static void printNumberTooLargeException(NumberFormatException exception) {
+        printLine();
+        System.out.println("Warning! " + exception.getMessage() + " number too large!");
+        printLine();
     }
 
     public static void helpCommand(){
