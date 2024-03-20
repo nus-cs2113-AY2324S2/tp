@@ -11,13 +11,17 @@ Expected output:
 
 ```
 Here are the list of commands you can use:
-1. new <bouquet_name> - Add a bouquet
-2. delete <bouquet_name> - Delete a bouquets
+Here are the list of commands you can use:
+1. new <bouquetName> - Add a bouquet
+2. delete <bouquetName> - Delete a bouquets
 3. mybouquets - List current saved bouquets
-4. info <flower_name> - Provide information on chosen flower
-5. flower - Shows a list of flowers that can be added into mybouquets
-6. flower <occasion> - Shows a list of flowers associated with said occasion
-7. bye - Exits the programme
+4. info <flowerName> - Provide information on chosen flower
+5. add <flowerName> /q <quantity> /to <bouquetName> - add flower to a bouquet.
+6. remove <flowerName> /q <quantity> /from <bouquetName> - remove flower from a bouquet.
+7. flower - Shows a list of flowers that can be added into mybouquets
+8. flower <occasion> - Shows a list of flowers associated with said occasion
+9. occasion - Shows a list of occasions associated with available flowers.
+10. bye - Exits the programme
 ```
 
 ### Create a new bouquet: `new`
