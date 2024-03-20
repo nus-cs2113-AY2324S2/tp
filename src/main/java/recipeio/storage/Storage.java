@@ -1,4 +1,4 @@
-package storage;
+package recipeio.storage;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ import recipeio.recipe.Recipe;
 import recipeio.recipe.RecipeList;
 
 public class Storage {
-    public static final String FILE_PATH = "recipe.txt";
+    public static final String FILE_PATH = "data/recipe.txt";
 
     public static final String DELIMITER = " | ";
     /**
@@ -64,7 +64,7 @@ public class Storage {
             MealCategory category = MealCategory.valueOf(line.split(" \\| ")[4]);
             String url = line.split(" \\| ")[5];
             Recipe testRecipe = new Recipe(name, cookTime, calories, allergies, category, url);
-            recipeList.addRecipe(testRecipe);
+            recipeList.add(testRecipe);
         }
     }
 }
