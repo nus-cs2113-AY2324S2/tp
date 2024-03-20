@@ -4,16 +4,17 @@ import exceptions.UnsupportedCommandException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import static java.util.logging.Logger.getLogger;
 
 
 public class BookBuddy {
     private static BookList books = new BookList();
-    static final Logger logger = Logger.getLogger(BookBuddy.class.getName());
+    static final Logger LOGGER = getLogger(BookBuddy.class.getName());
     public static void main(String[] args) {
-        logger.log(Level.INFO, "BookBuddy application started.");
+        LOGGER.log(Level.INFO, "BookBuddy application started.");
         printWelcomeMessage();
         getUserInput(books);
-        logger.log(Level.INFO, "BookBuddy application is shutting down.");
+        LOGGER.log(Level.INFO, "BookBuddy application is shutting down.");
     }
 
     public static void printWelcomeMessage() {
@@ -23,7 +24,7 @@ public class BookBuddy {
 
     public static void getUserInput(BookList books) {
         Scanner input = new Scanner(System.in);
-        logger.log(Level.INFO, "Starting to get user input.");
+        LOGGER.log(Level.INFO, "Starting to get user input.");
 
         //noinspection InfiniteLoopStatement
         while (true) {
@@ -33,11 +34,11 @@ public class BookBuddy {
                 continue;
             }
             assert !userInput.isEmpty() : "User input should not be empty at this point";
-            logger.log(Level.FINE, "Processing user input: {0}", userInput);
+            LOGGER.log(Level.FINE, "Processing user input: {0}", userInput);
             try {
                 Parser.parseCommand(userInput, books);
             } catch (UnsupportedCommandException e) {
-                logger.log(Level.WARNING, "Unsupported command: {0}", userInput);
+                LOGGER.log(Level.WARNING, "Unsupported command: {0}", userInput);
                 System.out.println(e.getMessage());
             }
         }
