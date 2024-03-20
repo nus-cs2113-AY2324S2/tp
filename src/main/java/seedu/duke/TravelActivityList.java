@@ -1,8 +1,11 @@
 package seedu.duke;
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 
 public class TravelActivityList {
+    private static Logger logger = Logger.getLogger("TravelActivityListLogger");
     /** Array of travel activity */
     private ArrayList<TravelActivity> travelActivities;
 
@@ -12,7 +15,6 @@ public class TravelActivityList {
         travelActivities = new ArrayList<>();
     }
 
-    private static Logger logger = Logger.getLogger("TravelActivityListLogger");
 
     /**
      * Adds travel activity to the travel activity list
