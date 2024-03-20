@@ -40,7 +40,7 @@ class BookBuddyTest {
                 + "| |_) \\ | |_) \\ \n"
                 + "|____/  |____/ \n" + "BookBuddy!\n" + "How can I help you today?\n"
                 + "_____________\n";
-        
+
         String normalizedActualOutput = actualOutput.replace("\r\n", "\n");
 
         // Assert that the normalized outputs are equal
