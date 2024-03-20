@@ -8,5 +8,4 @@ Hello from
 BookBuddy!
 How can I help you today?
 _____________
-How can I help you today?
 Sorry but that is not a valid command. Please try again
