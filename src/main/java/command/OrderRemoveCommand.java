@@ -1,6 +1,5 @@
 package command;
 
-import model.MenuItem;
 import model.Order;
 
 public class OrderRemoveCommand implements OrderCommand {

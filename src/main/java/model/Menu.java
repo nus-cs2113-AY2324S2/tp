@@ -8,10 +8,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
-
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import static model.SetMenu.Breakfast;
 import static model.SetMenu.Lunch;
 import static model.SetMenu.Dinner;
@@ -94,12 +90,13 @@ public class Menu implements ItemManager {
         menuString.append("| ID   | Name                  | Price |\n");
         menuString.append("+------+-------------------------------+\n");
         for (MenuItem item : menuItemList) {
-            menuString.append(String.format("| %-5s| %-25s| $%-6.2f|\n", item.getID(), item.getName(), item.getPrice()));
+            menuString.append(String.format("| %-5s| %-25s| $%-6.2f|\n",
+                    item.getID(), item.getName(), item.getPrice()));
         }
         menuString.append("+------+-------------------------------+\n");
         return menuString.toString();
-
     }
+
     /**
      * Set up logger for this class. It has two handlers, one FileHandler and one ConsoleHandler
      * FileHandler records log messages from FINE and above
@@ -120,7 +117,5 @@ public class Menu implements ItemManager {
         } catch (java.io.IOException e) {
             logr.log(Level.SEVERE, "File logger not working.",e);
         }
-
-
     }
 }

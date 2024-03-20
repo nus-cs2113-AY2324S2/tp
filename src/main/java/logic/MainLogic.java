@@ -56,6 +56,7 @@ public class MainLogic {
                 break;
             case VIEW_MENU:
                 ViewMenuCommand.execute(menusList);
+                // fallthrough
             case VIEW_ORDER:
                 ViewOrderCommand.execute(ordersList, inputText);
                 break;
