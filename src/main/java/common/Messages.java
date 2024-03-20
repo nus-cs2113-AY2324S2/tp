@@ -11,7 +11,6 @@ public class Messages {
             "'edit [ITEM_NAME] qty/[NEW_QUANTITY]'";
     public static final String WELCOME = "Welcome to StockMaster, where you can master the knowledge on your " +
             "Stock!";
-    public static final String GOODBYE_MESSAGE = "Thank you for using StockMaster, hope we have helped your lazy ass!";
-/*//    public static final String MESSAGE_ ="";*/
+    public static final String GOODBYE = "Thank you for using StockMaster, hope we have helped your lazy ass!";
 
 }

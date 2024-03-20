@@ -1,5 +1,8 @@
 package parser;
 
+import command.AddCommand;
+import command.Command;
+import command.IncorrectCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
 import item.Item;
@@ -13,7 +16,7 @@ import java.util.regex.Pattern;
 public class Parser {
     public boolean isExitCommandDetected = false;
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
@@ -51,11 +54,11 @@ public class Parser {
             break;
 
         case ADD:
-//            try {
-//                prepareAdd(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
+            try {
+                prepareAdd(arguments);
+            } catch (CommandFormatException e) {
+                break;
+            }
             break;
         case DELETE:
 //            try {
@@ -78,40 +81,30 @@ public class Parser {
     }
 
 
-/*    private Command prepareAdd(String args) throws CommandFormatException{
+    private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
         }
-        try {
-            return new AddCommand(
-                    matcher.group("itemName"),
-                    matcher.group("quantity"),
-                    matcher.group("uom")
-            );
+        String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+        int quantity = Integer.parseInt(matcher.group("quantity"));
+        return new AddCommand(
+                matcher.group("itemName"),
+                quantity,
+                matcher.group("uom"),
+                category
+        );
 
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
-        }
     }
-
+    /*
     private Command prepareDelete(String args) throws CommandFormatException{
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
         }
-        try {
-            return new DeleteCommand(matcher.group("itemName");
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
-        }
+        return new DeleteCommand(matcher.group("itemName"));
     }
 
     private Command prepareEdit(String args) throws CommandFormatException{
@@ -119,18 +112,12 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
         }
-        try {
-            return new EditCommand(
-                    matcher.group("itemName"),
-                    matcher.group("newQuantity")
-            );
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
-        }
+        int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
+        return new EditCommand(
+            matcher.group("itemName"),
+            newQuantity
+        );
     }*/
 }
 
