@@ -78,7 +78,7 @@ class DukeTest {
         assertTrue(true);
     }
     @Test
-    public void testStringCoversion(){
+    public void testStringConversion(){
         assertEquals("visit museum", new TravelActivity("visit museum").toString());
     }
     @Test
@@ -88,8 +88,29 @@ class DukeTest {
         assertTrue(true);
     }
 
-    
+    @Test
+    public void testTagActivity() throws OmniException {
+        TravelActivityList list = new TravelActivityList();
+        list.addTravelActivity(new TravelActivity("visit museum"));
+        assertEquals("visit museum", list.getDescription("visit museum"));
+        // Tagging an existing task
+        list.tagActivity(1, "activity 1");
+        TravelActivity travelActivity = list.getTravelActivities().get(0);
+        assertEquals("activity 1", travelActivity.getTag());
+    }
 
-
+    @Test
+    public void testRemoveTagFromActivity() throws OmniException {
+        TravelActivityList list = new TravelActivityList();
+        list.addTravelActivity(new TravelActivity("visit museum"));
+        assertEquals("visit museum", list.getDescription("visit museum"));
+        // Tagging an existing task
+        list.tagActivity(1, "activity 1");
+        TravelActivity travelActivity = list.getTravelActivities().get(0);
+        assertEquals("activity 1", travelActivity.getTag());
+        // Remove an existing tag
+        list.removeTag(1);
+        assertEquals("visit museum", list.getDescription("visit museum"));
+    }
 
 }
