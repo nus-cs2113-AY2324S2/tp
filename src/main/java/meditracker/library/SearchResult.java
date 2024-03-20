@@ -55,6 +55,6 @@ public class SearchResult {
      */
     @Override
     public String toString() {
-        return getName() + " Treats: " + getIllness() + " May cause: " + getSideEffects();
+        return getName() + "; Treats: " + getIllness() + "; May cause: " + getSideEffects();
     }
 }
