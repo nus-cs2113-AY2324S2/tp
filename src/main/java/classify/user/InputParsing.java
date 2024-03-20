@@ -586,8 +586,7 @@ public class InputParsing {
         String string = in.nextLine();
         if (string.isBlank()) {
             return "Unknown";
-        }
-
+        } 
         return string;
         
     }

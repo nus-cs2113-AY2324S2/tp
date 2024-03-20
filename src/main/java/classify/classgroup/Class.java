@@ -16,8 +16,8 @@ public class Class {
 
     /**
      * Constructor for a class of Students.
-     * @param ageOfStudents Age of the students in the class.
-     * @param className Name of the class.
+     * @param ageOfStudents     Age of the students in the class.
+     * @param className         Name of the class.
      */
     public Class(int ageOfStudents, String className) {
         this.ageOfStudents = ageOfStudents;
@@ -28,7 +28,7 @@ public class Class {
 
     /**
      * Get the age of the students attending the class. 
-     * @return the age of the students as an integer.
+     * @return      The age of the students as an integer.
      */
     public int getAgeOfStudents() {
         return ageOfStudents;
