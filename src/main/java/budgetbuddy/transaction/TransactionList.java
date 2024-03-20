@@ -32,9 +32,9 @@ public class TransactionList {
         UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
-    public void removeTransaction(String input, Account account) throws EmptyArgumentException {
+    public void removeTransaction(String input, Account account) throws EmptyArgumentException, NumberFormatException {
         if (input.trim().length() < DELETE_BEGIN_INDEX) {
-            throw new EmptyArgumentException("Index is not specified.");
+            throw new EmptyArgumentException("delete index");
         }
         String data = input.substring(DELETE_BEGIN_INDEX).trim();
         if (!isInteger(data)) {

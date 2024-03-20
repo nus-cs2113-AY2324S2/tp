@@ -2,6 +2,7 @@ package budgetbuddy.parser;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.InvalidTransactionTypeException;
+import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
@@ -11,7 +12,7 @@ public class Parser {
 
     public static final int ADD_COMMAND_INDEX = 3;
 
-    public Transaction parseTransaction(String input, Account account) throws InvalidTransactionTypeException {
+    public Transaction parseTransaction(String input, Account account) throws InvalidTransactionTypeException, NumberFormatException {
         String data = input.substring(ADD_COMMAND_INDEX + 1);
         String[] parseData = data.split("/");
         String type = null;
@@ -28,8 +29,12 @@ public class Parser {
                 description = parseData[i + 1].trim();
                 break;
             case "$":
-                amount = parseData[i + 1].trim();
-                break;
+                if (!TransactionList.isInteger(amount)) {
+                    throw new NumberFormatException(parseData[i+1].trim());
+                } else {
+                    amount = parseData[i + 1].trim();
+                    break;
+                }
             case "d":
                 date = parseData[i + 1].trim();
                 break;
@@ -41,6 +46,7 @@ public class Parser {
             }
         }
         assert amount != null;
+        assert type != null;
         if (type.equalsIgnoreCase("income")) {
             return new Income(description, Double.parseDouble(amount), category, date, account);
         } else if (type.equalsIgnoreCase("expense")) {

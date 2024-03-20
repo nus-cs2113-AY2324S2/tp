@@ -68,8 +68,7 @@ public class UserInterface {
 
     public static void printEmptyArgumentError(String message){
         System.out.println(LINE);
-        System.out.println(TAB_SPACE + message);
-        System.out.println(TAB_SPACE + "Please include an index after the keyword.");
+        System.out.println(TAB_SPACE + "Please include the " + message + "in the command.");
         System.out.println(LINE);
     }
 
