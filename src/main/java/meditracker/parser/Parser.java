@@ -1,13 +1,8 @@
 package meditracker.parser;
 
-import meditracker.command.Command;
-import meditracker.command.DeleteCommand;
-import meditracker.command.ListCommand;
-import meditracker.command.ModifyCommand;
+import meditracker.command.*;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
-import meditracker.command.AddCommand;
-import meditracker.command.ExitCommand;
 
 /**
  * The Parser class parses user input commands into Command objects.
@@ -36,6 +31,8 @@ public class Parser {
             return new ListCommand(arguments);
         case "delete":
             return new DeleteCommand(arguments);
+        case "search":
+            return new SearchCommand(arguments);
         default:
             throw new MediTrackerException();
         }
