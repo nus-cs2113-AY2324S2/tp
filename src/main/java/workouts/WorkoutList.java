@@ -58,7 +58,7 @@ public class WorkoutList extends ArrayList<Workout> {
 
         filter = filter.toLowerCase();
         if(!filter.equals(Constant.ALL) && !filter.equals(Constant.RUN) && !filter.equals(Constant.GYM)) {
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
+            throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
         }
         if(filter.equals(Constant.RUN) && runs.isEmpty()){
             throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
