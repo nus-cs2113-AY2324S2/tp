@@ -145,16 +145,28 @@ public class Output {
         }
     }
 
+    /**
+     * Prints all Bmi objects recorded.
+     *
+     * @throws CustomExceptions.OutOfBounds If there is access to a Bmi object that does not exist.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
     private static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         HealthList.showBmiHistory();
     }
 
+    /**
+     * Prints all Period objects recorded.
+     *
+     * @throws CustomExceptions.OutOfBounds If there is access to a Period object that does not exist.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
     private static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         HealthList.showPeriodHistory();
     }
 
     /**
-     * Prints the latest Run object added.
+     * Prints the latest Run recorded.
      */
     public static void printLatestRun() {
         try {
@@ -168,25 +180,39 @@ public class Output {
         }
     }
 
+    /**
+     * Prints the latest Gym recorded.
+     */
     public static void printLatestGym() {
         try {
-            Workout latestGym = WorkoutList.getLatestGym();
-            String latestGymString = getFormattedRunWithIndex(WorkoutList.getGymSize(), latestGym);
-            System.out.println(Constant.GYM_STATION_HEADER_WITH_INDEX_FORMAT);
-            System.out.println(latestGymString);
+            Gym latestGym = WorkoutList.getLatestGym();
+            int index = WorkoutList.getGymSize();
+            System.out.println("Gym Session " + index + latestGym);
+            printGymStats(latestGym);
         } catch (CustomExceptions.OutOfBounds e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Prints the latest BMI entry recorded.
+     */
     public static void printLatestBmi() {
         HealthList.showCurrentBmi();
     }
 
+    /**
+     * Prints the latest Period entry recorded.
+     */
     public static void printLatestPeriod() {
         HealthList.showLatestPeriod();
     }
 
+    /**
+     * Handler function to print the latest entry of Run, Gym, Period, or BMI objects recorded.
+     *
+     * @param filter String used to determine the latest Run, Gym, Period, or BMI objects is to be printed.
+     */
     public static void printLatest(String filter) {
         try {
             printLine();
@@ -219,9 +245,9 @@ public class Output {
     }
 
     /**
-     * Handler function to print all the Workout objects added to the list.
+     * Handler function to print all entries of Run, Gym, Period, or BMI objects recorded.
      *
-     * @param filter String used to determine if all Run, Gym or Workout objects are printed.
+     * @param filter String used to determine if all Run, Gym, Period, or BMI objects are to be printed.
      */
     public static void printHistory(String filter) {
         try {
@@ -290,6 +316,9 @@ public class Output {
         printLine();
     }
 
+    /**
+     * Prints the goodbye message for PulsePilot.
+     */
     public static void printGoodbyeMessage() {
         printLine();
         System.out.println("PulsePilot successful touchdown");
