@@ -6,6 +6,7 @@ import meditracker.exception.MediTrackerException;
 import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
 import meditracker.parser.Parser;
+import meditracker.storage.FileReaderWriter;
 import meditracker.ui.Ui;
 
 /**
@@ -38,6 +39,7 @@ public class MediTracker {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
+        FileReaderWriter.loadMediTrackerData(medicationManager);
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {

@@ -8,12 +8,15 @@ Ideas and structure for the Developer Guide: https://se-education.org/addressboo
 
 Ideas and structure for the User Guide: https://se-education.org/addressbook-level3/UserGuide.html
 
+Additional Packages used: JSON
+
 ## Setting up and getting started
 
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-- TODO: Design and Implementation of the Logging Functionaity (SX)
-- TODO: Design and Implementing of the Load and Save functionality (SX)
+- TODO: Design and Implementation of the Logging Functionaity (SX) (Issue #41)
+- TODO: Design and Implementing of the Load and Save functionality (SX) (Issue #25)
+- TODO: Design and Implementing of the Reading and Writing of JSON file (SX) (Issue #27)
 
 
 ## Product scope
@@ -44,3 +47,4 @@ Ideas and structure for the User Guide: https://se-education.org/addressbook-lev
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+- TODO: Talk about how to test with different kinds of JSON file, and provide a sample JSON file with instructions on how to use it. (SX)
