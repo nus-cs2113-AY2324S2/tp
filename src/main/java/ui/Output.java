@@ -8,6 +8,7 @@ import workouts.GymStation;
 import workouts.Run;
 import workouts.Workout;
 import workouts.WorkoutList;
+import health.HealthList;
 import java.util.ArrayList;
 
 public class Output {
@@ -26,10 +27,10 @@ public class Output {
         printLine();
         System.out.println("Commands List:");
         System.out.println();
-        System.out.println("new /e:run /d:DATE /t:TIME /l:DURATION - Add a new run");
-        System.out.println("new /e:gym /n:NUMBER_OF_STATIONS - Add a new gym workout");
-        System.out.println("health /t:bmi /w:WEIGHT /h:HEIGHT /d:DATE - Add new BMI data");
-        System.out.println("health /t:period /s:START_DATE /e:END_DATE - Add new period data");
+        System.out.println("new /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run");
+        System.out.println("new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
+        System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
+        System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
         System.out.println("history /e:all - Show history of all exercises");
         System.out.println("history /e:run - Show history of runs");
         System.out.println("history /e:gym - Show history of gym workouts");
@@ -134,14 +135,6 @@ public class Output {
     }
 
     /**
-     * For justin to do.
-     */
-    private static void printExerciseHistory() {
-
-    }
-
-
-    /**
      * Prints all the stations within a specified Gym object.
      * @param gym The Gym object containing the GymStation objects to be printed.
      */
@@ -161,14 +154,22 @@ public class Output {
     private static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.GYM);
         for (int i = 0; i < workoutList.size(); i++) {
-            int index = i+1;
+            int index = i + 1;
             Gym currentWorkout = (Gym) workoutList.get(i);
             System.out.println("Gym Session " + index + currentWorkout);
             printGymStats(currentWorkout);
-            if(i != workoutList.size()-1){
+            if(i != workoutList.size() - 1){
                 printLine();
             }
         }
+    }
+
+    private static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+        HealthList.showBmiHistory();
+    }
+
+    private static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+        HealthList.showPeriodHistory();
     }
 
     /**
@@ -181,15 +182,22 @@ public class Output {
             printLine();
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
-            case ALL:
-                printExerciseHistory();
-                break;
             case RUN:
                 printRunHistory();
                 break;
+
             case GYM:
                 printGymHistory();
                 break;
+
+            case BMI:
+                printBmiHistory();
+                break;
+
+            case PERIOD:
+                printPeriodHistory();
+                break;
+
             default:
                 throw new CustomExceptions.InvalidInput(Constant.INVALID_PRINT_HISTORY_FILTER);
             }

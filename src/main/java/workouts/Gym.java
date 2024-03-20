@@ -14,8 +14,6 @@ public class Gym extends Workout{
     protected LocalDate date = null;
     protected ArrayList<GymStation> stations = new ArrayList<>();
 
-    // takes (station name, weight, sets, reps)
-
     /**
      * Constructor that adds a Gym object to WorkoutList.
      */

@@ -31,7 +31,7 @@ public class Bmi extends Health {
      */
     protected String bmiCategory;
 
-    protected LocalDate date = null;
+    protected LocalDate date;
 
     /**
      * Constructor for Bmi object.

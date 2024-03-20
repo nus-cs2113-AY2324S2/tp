@@ -33,6 +33,7 @@ public class HealthList extends ArrayList<Health> {
     }
 
     public static void showBmiHistory() {
+        assert !bmis.isEmpty() : "BMI List is empty";
         for (Bmi bmi : bmis) {
             System.out.println(bmi);
         }
@@ -43,11 +44,13 @@ public class HealthList extends ArrayList<Health> {
     }
 
     public static void showLatestPeriod() {
+        assert !periods.isEmpty() : "Period List is empty";
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
     }
 
     public static void showPeriodHistory() {
+        assert !periods.isEmpty() : "Period List is empty";
         for (Period period : periods) {
             System.out.println(period);
         }
