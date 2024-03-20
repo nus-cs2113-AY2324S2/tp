@@ -66,8 +66,7 @@ public class Parser {
             default:
 
                 LOGGER.log(Level.WARNING, "Sorry but that is not a valid command. Please try again", command);
-                throw new UnsupportedCommandException("Sorry but this is not valid command," +
-                                                      "use (help) to find out valid commands");
+                throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
 
             }
         } catch (NumberFormatException e) {
