@@ -34,6 +34,8 @@ public enum ExceptionMessage {
             " Use 'delete INDEX'"),
     INVALID_FINDDEBT_COMMAND("Invalid command format." +
             " Use 'findDebt PERSON'"),
+    INVALID_EDIT_COMMAND("Invalid command format." +
+            " Use 'edit INDEX NEW_TRANSACTION'"),
     INVALID_ADDMEMBER_COMMAND("Invalid command format." +
             " Use 'addMember NAME'");
     private final String message;
