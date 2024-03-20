@@ -68,11 +68,9 @@ public class InputParsing {
     }
     //@@author blackmirag3
     private static void listStudents(ArrayList<Student> list) {
-        if (list.isEmpty()) {
-            System.out.println("Currently no students in list.");
-        } else {
-            StudentList.printCurrentArrayList(list);
-        }
+        StudentList.printCurrentArrayList(list);
+        //@@author ParthGandhiNUS
+        StudentList.printCurrentArrayMessage(list);
         Ui.printDivider();
     }
 
@@ -380,7 +378,15 @@ public class InputParsing {
             if (classesAttendedInput.isBlank()) {
                 return 0;
             }
-            int classesAttended = Integer.parseInt(classesAttendedInput);
+            //@@author ParthGandhiNUS
+            int classesAttended;
+            try {
+                classesAttended = Integer.parseInt(classesAttendedInput);
+            } catch (NumberFormatException e){
+                System.out.println("Wrong number format! Please try again! e.g. 12 ");
+                Ui.printDivider();
+                classesAttended = promptForClassesAttended(in);
+            }
             if (isValidClassesAttended(classesAttended)) {
                 return classesAttended;
             }
@@ -401,7 +407,15 @@ public class InputParsing {
             if (gradeInput.isBlank()) {
                 return 0;
             }
-            double grade = Double.parseDouble(gradeInput);
+            //@@author ParthGandhiNUS
+            double grade;
+            try {
+                grade = Double.parseDouble(gradeInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong number format! Please try again! e.g. 75 ");
+                Ui.printDivider();
+                grade = promptForGrade(in);
+            }
             if (isValidGrade(grade)) {
                 return grade;
             }
