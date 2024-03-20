@@ -1,5 +1,7 @@
 package meditracker.medication;
 
+import meditracker.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,10 @@ public class MedicationManager {
         return medications.get(listIndex);
     }
 
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
     /**
      * Deletes the Medication object from the medications list.
      * Also converts the index to 0-based indexing before being used.
@@ -65,5 +71,11 @@ public class MedicationManager {
     public void removeMedication(int listIndex) throws IndexOutOfBoundsException {
         listIndex--; // Decremented to 0-base indexing
         medications.remove(listIndex);
+    }
+
+    public void printAllMedications() {
+        System.out.println("You have " + getTotalMedications() + " medications listed below.");
+        Ui ui = new Ui();
+        ui.printMedsList(medications);
     }
 }

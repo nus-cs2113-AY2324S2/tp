@@ -31,10 +31,9 @@ class UiTest {
     void printMedsList_sizeOfMedicationList_expectPrintedList() {
         Ui ui = new Ui();
         List<DailyMedication> medications = new ArrayList<>(1);
-        ui.printMedsList(medications, "Daily Medications");
-        StringBuilder expectedOutput = new StringBuilder("Here are the Daily Medications you have to take today: "
-                + System.lineSeparator());
 
+        ui.printMedsList(medications);
+        StringBuilder expectedOutput = new StringBuilder();
 
         for (DailyMedication dailyMedication : medications) {
             int numbering = medications.indexOf(dailyMedication) + 1;
