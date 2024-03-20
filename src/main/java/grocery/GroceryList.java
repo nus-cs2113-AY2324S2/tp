@@ -39,6 +39,7 @@ public class GroceryList {
         try {
             groceries.add(grocery);
             Ui.printGroceryAdded(grocery);
+            assert groceries.contains(grocery) : "Grocery should be added to the list";
         } catch (NullPointerException e) {
             System.out.println("Failed to add grocery: he groceries collection is null.");
         } catch (Exception e) {
@@ -64,6 +65,7 @@ public class GroceryList {
         }
 
         if (index != -1) {
+            assert groceries != null : "Found grocery should not be null";
             return groceries.get(index);
         } else {
             throw new NoSuchGroceryException();
@@ -94,6 +96,7 @@ public class GroceryList {
             throw new IncompleteCommandException(parameter);
         } else {
             grocery.setExpiration(date);
+            assert grocery.getExpiration().equals(date) : "Expiration date should be set correctly";
             Ui.printExpSet(grocery);
         }
     }
