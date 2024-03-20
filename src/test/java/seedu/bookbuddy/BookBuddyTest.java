@@ -33,8 +33,14 @@ class BookBuddyTest {
         String actualOutput = outContent.toString();
 
         // Normalize line endings to \n in both expected and actual output
-
-        String normalizedExpectedOutput = "Hello! We are BookBuddy!\nHow can I help you today?\n".replace("\r\n", "\n");
+        String normalizedExpectedOutput = "________________________________________\n"
+                + "Hello from\n" + " ____    ____  \n"
+                + "|    \\  |    \\ \n"
+                + "| |_) / | |_) / \n"
+                + "| |_) \\ | |_) \\ \n"
+                + "|____/  |____/ \n\n" + "Hello! We are BookBuddy!\n" + "How can I help you today?\n"
+                + "_____________\n";
+        //String normalizedExpectedOutput = "Hello! We are BookBuddy!\nHow can I help you today?\n".replace("\r\n", "\n");
         String normalizedActualOutput = actualOutput.replace("\r\n", "\n");
 
         // Assert that the normalized outputs are equal
