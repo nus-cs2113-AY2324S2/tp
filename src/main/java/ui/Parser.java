@@ -33,8 +33,10 @@ public class Parser {
         case "/a":
             ResponseManager.echoChosenIndustry("Artificial Intelligence");
             return "artificial intelligence";
+
+        default:
+            throw new JobSelectException("Please enter a valid job type, try again!");
         }
-        throw new JobSelectException("Please enter a valid job type, try again!");
     }
 
     public static CommandType parseCommand(String input) throws CommandInputException {
