@@ -21,8 +21,10 @@ public class TravelActivityList {
      * @param travelActivity The travel activity
      */
     public void addTravelActivity(TravelActivity travelActivity){
+        logger.log(Level.INFO, "addKeyword function started");
         int initialListSize = noOfActivities;
         travelActivities.add(travelActivity);
+        logger.log(Level.INFO, "travelActivity is added");
         noOfActivities += 1;
         int newSize = noOfActivities;
         assert newSize == initialListSize + 1 :"There is an error with list size!";
