@@ -5,13 +5,12 @@ import java.util.ArrayList;
 public class Group {
     protected String name;
     protected ArrayList<User> users;
+    public static final HashMap<String, Group> groups = new HashMap<>();
 
     public Group(String name) {
         this.name = name;
         this.users = new ArrayList<>();
     }
-
-    private static HashMap<String, Group> groups = new HashMap<>();
 
     public static Group getOrCreateGroup(String groupName) {
         Group group = groups.get(groupName);
