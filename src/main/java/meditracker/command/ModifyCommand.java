@@ -1,5 +1,6 @@
 package meditracker.command;
 
+import meditracker.DailyMedicationManager;
 import meditracker.argument.Argument;
 import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
@@ -49,7 +50,8 @@ public class ModifyCommand extends Command {
      * @param ui The Ui object used to interact with the user interface.
      */
     @Override
-    public void execute(MedicationManager medicationManager, Ui ui) {
+    public void execute(MedicationManager medicationManager,
+                        Ui ui, DailyMedicationManager dailyMedicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
 

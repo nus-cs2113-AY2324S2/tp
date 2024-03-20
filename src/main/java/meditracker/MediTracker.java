@@ -16,6 +16,7 @@ public class MediTracker {
 
     private Ui ui;
     private MedicationManager medicationManager;
+    private DailyMedicationManager dailyMedicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes the user interface.
@@ -42,7 +43,7 @@ public class MediTracker {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationManager, ui);
+            command.execute(medicationManager, ui, dailyMedicationManager);
             isExit = command.isExit();
         }
     }
