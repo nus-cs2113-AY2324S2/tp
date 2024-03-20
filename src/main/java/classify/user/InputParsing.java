@@ -610,7 +610,8 @@ public class InputParsing {
     }
 
     private static boolean checkNumberValidity(int number) {
-        return String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER || String.valueOf(number).length() == UPPER_LIMIT_PHONE_NUMBER;
+        return String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER 
+                || String.valueOf(number).length() == UPPER_LIMIT_PHONE_NUMBER;
     }
 
     /**
