@@ -158,7 +158,6 @@ public class Ui {
         System.out.println("You have successfully added the following: " + System.lineSeparator() +
                            "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
-        printBreakLine();
     }
 
     /**
@@ -174,7 +173,6 @@ public class Ui {
         System.out.println("You have successfully removed the following: " + System.lineSeparator() +
                            "    - " + quantity + " x " + flowerName + " -> Bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
-        printBreakLine();
     }
 
     /**
@@ -187,6 +185,5 @@ public class Ui {
     public void printRemoveFlowerUnsuccessful(ArrayList<Bouquet> bouquetList, String flowerName, String bouquetName) {
         System.out.println(flowerName + " cannot be found in bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
-        printBreakLine();
     }
 }

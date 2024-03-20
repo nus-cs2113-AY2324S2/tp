@@ -11,7 +11,6 @@ Expected output:
 
 ```
 Here are the list of commands you can use:
-Here are the list of commands you can use:
 1. new <bouquetName> - Add a bouquet
 2. delete <bouquetName> - Delete a bouquets
 3. mybouquets - List current saved bouquets
