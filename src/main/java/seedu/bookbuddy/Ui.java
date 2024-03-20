@@ -9,15 +9,15 @@ public class Ui {
                         + "| |_) \\ | |_) \\ \n"
                         + "|____/  |____/ \n";
         printLine();
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! We are BookBuddy!");
+        System.out.println("Hello from\n" + logo +"BookBuddy!");
+        //System.out.println("Hello! We are BookBuddy!");
         System.out.println("How can I help you today?");
         printShortLine();
         //System.out.println("Hello! We are BookBuddy!");
         //System.out.println("How can I help you today?");
     }
     public static void printLine() {
-        System.out.println("________________________________________");
+        System.out.println("___________________________________");
     }
     public static void printShortLine() {
         System.out.println("_____________");
