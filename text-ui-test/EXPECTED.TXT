@@ -17,4 +17,8 @@ Medicine has been successfully modified!
 ____________________________________________________________
 Medicine has been successfully deleted
 ____________________________________________________________
+Medicine has been successfully taken
+____________________________________________________________
+Medicine has been successfully untaken
+____________________________________________________________
 Thank you for using MediTracker. Hope to see you again!
