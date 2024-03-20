@@ -5,6 +5,7 @@ import command.ExitCommand;
 import command.HelpCommand;
 import command.ViewOrderCommand;
 import command.ViewOrdersSummaryCommand;
+
 import model.Menu;
 import model.MenuItem;
 import model.Order;
@@ -52,6 +53,8 @@ public class MainLogic {
                 Order newOrder = CreateOrderCommand.execute();
                 ordersList.add(newOrder);
                 break;
+            case VIEW_MENU:
+                ViewMenuCommand.execute(menusList);
             case VIEW_ORDER:
                 ViewOrderCommand.execute(ordersList, inputText);
                 break;
