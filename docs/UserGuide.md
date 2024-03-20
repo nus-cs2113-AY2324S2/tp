@@ -24,9 +24,10 @@ Our long awaited first release adds everything you would expect of an inventory 
     - [Searching for an item: `search`](#searching-for-an-item-search)
     - [Listing current inventory: `list`](#listing-current-inventory-list)
     - [Deleting an item: `delete`](#deleting-an-item-delete)
-    - [Exiting the program: `bye`](#exiting-the-program-bye)
-    - [Saving the data](#saving-the-data)
-7. [Command Summary](#command-summary)
+    - [Exiting the application: `bye`](#exiting-the-application-bye)
+    - [Saving and Loading data](#saving-and-loading-data)
+7. [Possible issues during startup](#possible-issues-during-startup)
+8. [Command Summary](#command-summary)
 8. [FAQ](#faq)
 9. [Glossary](#glossary)
 
@@ -49,11 +50,11 @@ If you consider yourself a power user, we feel it is self-explanatory to jump to
 
 ## Getting Started
 
-To run BinBash, ensure that your Computer meets the following minimum system requirements:
+To run BinBash, ensure that your computer meets the following minimum system requirements:
 * Operating System: Windows, macOS, or Linux
 * Java `11` is installed. Refer to our [FAQ](#faq) for more details.
 
-1. Ensure that you have Java `11` or above installed on your Computer.
+1. Ensure that you have Java `11` or above installed on your computer.
 2. Head over to our [GitHub Page](https://github.com/AY2324S2-CS2113T-T09-2/tp/releases) and download the latest version of `BinBash.jar`.
 3. Move the downloaded `BinBash.jar` file to an empty folder of your choice. This folder will now serve as the home folder for BinBash.
 4. Open the terminal/command prompt for your system.
@@ -71,7 +72,7 @@ Now, you can head over to the [Features](#features) section to learn how to use 
 
 ### Adding an item: `add`
 
-Adds an item to the inventory.
+> Adds an item to the inventory.
 
 Format: `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/SALE_PRICE c/COST_PRICE`
 
@@ -81,29 +82,104 @@ Format: `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/
 * There is no need to include the currency. A "$" sign will be appended to the prices.
 
 Examples: 
-* add `n/apple d/a type of fruit q/10 e/12-10-2024 s/1.20 c/0.45`
-* add `n/lego d/toys q/7 s/102.00  c/34.32`
+* `add n/apple d/a type of fruit q/10 e/12-10-2024 s/1.20 c/0.45`
+* `add n/lego d/toys q/7 s/102.00  c/34.32`
 
 ### Searching for an item: `search`
+
+> Searches for items whose names contain the given keyword as a substring.
+
+Format: `search KEYWORD`
+
+- `KEYWORD`: The keyword to search for within the task descriptions.
+- The search is case-sensitive and uses substring matching. This means it will find items whose names contain the exact 
+keyword. For example, searching for "Car" will return items with the name "Toy Car" and "Carrot", but not items with 
+the name "Scarlet Witch".
+
+**Examples:**
+
+- `search Milo`  
+  This will return items with names such as "Milo Powder" and "Milo Packet".
+
 ### Listing current inventory: `list`
+
+>Shows a list of all tasks in your task list.
+
+**Format:** `list`
+
 ### Deleting an item: `delete`
-### Exiting the program: `bye`
-### Saving the data
+
+> Deletes an item from the inventory. Item Identifier can be either item index or item name.
+
+#### Deleting an item using item index
+
+Format: `delete ITEM_INDEX`
+
+* `ITEM_INDEX` must be specified.
+* `ITEM_INDEX` specified must exist in the inventory, otherwise no item will be deleted
+* Index of items can be viewed using the `list` command.
+
+Examples:
+* `delete 1` 
+* `delete 4`
+
+#### Deleting an item using item name
+
+Format: `delete ITEM_NAME`
+
+* `ITEM_NAME` must be specified.
+* `ITEM_NAME` specified must be the exact name of the item.
+* If there are no items with item names matching `ITEM_NAME`, no items will be deleted.
+* Item names of items in the inventory can be viewed using the `list` command.
+
+Examples:
+* `delete cookie`
+* `delete tissue paper`
+
+### Exiting the application: `bye`
+
+> Exits the application.
+
+After a long day at work, it's time to take a rest!
+Fret not, BinBash will save the state of your current inventory, and you can always come back to it later.
+
+Format: `bye`
+
+### Saving and Loading data
+
+Unsure as to how you can save your BinBash data? Don't worry! Your data is automatically saved to your local storage after any command that modifies your inventory. No manual saving of data is required.
+
+Similarly, your saved data will be automatically loaded into BinBash when you start the application. If no previous save data was found, the application starts on a clean state.
+
+> **Caution**: For advanced users, BinBash data is stored locally as a `.txt` file in your BinBash install location (`<Location of BinBash.jar>/data/items.txt`). Do exercise caution when directly editing this file; BinBash **will not load** your save file if it is corrupted. 
+> It is highly recommended to take a backup of the file before editing it.
+
+## Possible Issues During Startup
+
+Have problems loading up BinBash? Fret not, here's how to troubleshoot some of them:
+
+1. **File is Corrupted Error**
+   If you encounter an error that says the file is corrupted, you should first take a look at your `data.txt` file. It's possible that the content of the file has become invalid. Here's what you can do:
+   - **Delete and Recreate**: If you're unsure about the formatting, simply delete the `data.txt` file. BinBash will create a new one when you restart the application.
+   - **Rectify the Content**: If you have important data you can't lose, open the `data.txt` file and fix any formatting issues. Make sure each task follows the correct structure BinBash expects.
+
+2. **Issues with Data Directory or File**
+   If you encounter an error about not being able to create or read/write from the data directory or file, this usually means there's a permissions issue on your system. Here's how to handle it:
+   - **Check Permissions**: Ensure that BinBash has the right permissions to access the folders it needs. Right-click on the directory and check its properties to make sure reading and writing are allowed.
 
 ## Command Summary
 
 | **Commands** | **Usage**                                                                                        |
 |--------------|--------------------------------------------------------------------------------------------------|
 | **add**      | `add n/ITEM_NAME d/ITEM_DESCRIPTION q/ITEM_QUANTITY e/EXPIRATION_DATE s/SALE_PRICE c/COST_PRICE` |
-| **search**   |                                                                                                  |
+| **search**   | `search KEYWORD`                                                                                 |
 | **list**     | `list`                                                                                           |
-| **delete**   |                                                                                                  |
+| **delete**   | `delete ITEM_INDEX`                                                                              |
 | **bye**      | `bye`                                                                                            |
 
 ## FAQ
 
-**Q**: How do I know if I have Java `11` installed on my computer?
-
+**Q**: How do I know if I have Java `11` installed on my computer? <br>
 **A**: Using the terminal/command prompt, type in `java -version`. If Java `11` is installed, you should see a result that is similar to this:
 ```bash
 $ java -version
@@ -111,6 +187,18 @@ openjdk version "11.0.22" 2024-01-16
 OpenJDK Runtime Environment ... (build ...)
 OpenJDK 64-Bit Server VM ... (build ...)
 ```
-If not, do refer to Oracle's [guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) on installing Java `11` for your operating system.
+If not, refer to Oracle's [guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) on installing Java `11` for your operating system.
+
+**Q**: Can I move my BinBash data to another computer? <br>
+**A**: Absolutely! Here's a step-by-step guide on how you can do this:
+1. On your current computer, locate the BinBash save file. The save file can be found at `<Location of BinBash.jar>/data/items.txt`. Make a copy of this file.
+2. Ensure that BinBash has been installed on the other computer. Refer to [this section](#getting-started) for more details.
+3. On the other computer, create the `/data` folder in the BinBash install location if it does not exist.
+4. Then, paste the copied save file in this folder. If an existing save file already exists, choose to overwrite it.
+5. Start up BinBash, and execute the [`list` command](#listing-current-inventory-list) to check that your data has been loaded successfully.
+
+**Q**: Do I need an Internet connection to use BinBash? <br>
+**A**: You do not need an Internet connection. BinBash can be used offline.
 
 ## Glossary
+<!-- I think we can probably move the command summary down here instead. Seems like that's what most people do lol -->
