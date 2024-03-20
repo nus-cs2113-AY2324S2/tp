@@ -45,6 +45,7 @@ public class ExpenseManager {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < expenses.size(); i++) {
             sb.append(expenses.get(i).getStringRepresentation());
+            sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
