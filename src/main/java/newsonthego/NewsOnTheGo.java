@@ -19,13 +19,14 @@ public class NewsOnTheGo {
     private static final ArrayList<NewsTopic> newsTopics = new ArrayList<>();
 
     /**
-     * Main entry-point for the java.newsworthiest.NewsOnTheGo application.
+     * Main entry-point for the java.newsonthego.NewsOnTheGo application.
      */
     public static void main(String[] args) {
 
-        UI.initializeUI();
-        List<NewsArticle> newsArticles = importNewsFromText(FILENAME);
         Scanner in = new Scanner(System.in);
+        UI.initializeUI(in);
+
+        List<NewsArticle> newsArticles = importNewsFromText(FILENAME);
 
         while (true) {
             System.out.println("What do you want from me?");
