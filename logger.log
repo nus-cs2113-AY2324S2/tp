@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-03-21T06:11:42.780683Z</date>
-  <millis>1711001502780</millis>
-  <nanos>683000</nanos>
+  <date>2024-03-21T06:31:05.003442Z</date>
+  <millis>1711002665003</millis>
+  <nanos>442000</nanos>
   <sequence>0</sequence>
   <logger>RecipeIO Logger</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>asking for first input from user.</message>
 </record>
 <record>
-  <date>2024-03-21T06:11:57.446360Z</date>
-  <millis>1711001517446</millis>
-  <nanos>360000</nanos>
+  <date>2024-03-21T06:31:10.623212Z</date>
+  <millis>1711002670623</millis>
+  <nanos>212000</nanos>
   <sequence>1</sequence>
   <logger>RecipeIO Logger</logger>
   <level>INFO</level>
@@ -25,76 +25,3 @@
   <thread>1</thread>
   <message>not an exit command.</message>
 </record>
-<record>
-  <date>2024-03-21T06:12:10.455802Z</date>
-  <millis>1711001530455</millis>
-  <nanos>802000</nanos>
-  <sequence>2</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-<record>
-  <date>2024-03-21T06:12:25.492329Z</date>
-  <millis>1711001545492</millis>
-  <nanos>329000</nanos>
-  <sequence>3</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-<record>
-  <date>2024-03-21T06:12:39.532557Z</date>
-  <millis>1711001559532</millis>
-  <nanos>557000</nanos>
-  <sequence>4</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-<record>
-  <date>2024-03-21T06:12:43.535616Z</date>
-  <millis>1711001563535</millis>
-  <nanos>616000</nanos>
-  <sequence>5</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-<record>
-  <date>2024-03-21T06:12:49.549384Z</date>
-  <millis>1711001569549</millis>
-  <nanos>384000</nanos>
-  <sequence>6</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-<record>
-  <date>2024-03-21T06:12:52.556887Z</date>
-  <millis>1711001572556</millis>
-  <nanos>887000</nanos>
-  <sequence>7</sequence>
-  <logger>RecipeIO Logger</logger>
-  <level>INFO</level>
-  <class>recipeio.RecipeIO</class>
-  <method>runCommandLoopUntilExitCommand</method>
-  <thread>1</thread>
-  <message>not an exit command.</message>
-</record>
-</log>
