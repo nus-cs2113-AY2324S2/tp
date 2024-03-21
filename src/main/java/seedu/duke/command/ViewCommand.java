@@ -23,17 +23,17 @@ public class ViewCommand extends Command{
         switch (mode) {
         case "all":
             System.out.println("Taken modules: ");
-            //printModuleList(takenModuleList);
+            printModuleList(moduleList.getTakenModuleList());
             System.out.println("Planned modules: ");
-            //printModuleList(planModuleList);
+            printModuleList(moduleList.getToBeTakenModuleList());
             break;
         case "taken":
             System.out.println("Taken modules: ");
-            //printModuleList(takenModuleList);
+            printModuleList(moduleList.getTakenModuleList());
             break;
         case "plan":
             System.out.println("Planned modules: ");
-            //printModuleList(planModuleList);
+            printModuleList(moduleList.getToBeTakenModuleList());
             break;
         default:
             System.out.println("Invalid mode.");
