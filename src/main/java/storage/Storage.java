@@ -72,6 +72,9 @@ public class Storage {
         try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (!checkFileFormat(line)) {
+                    throw new StorageFileException();
+                }
                 String[] parts = line.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0]);
                 String task = parts[1];
@@ -80,9 +83,17 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
             logger.log(Level.WARNING, "I/O exception occurred");
+        } catch (StorageFileException e) {
+            System.out.println("tasks.txt is in wrong format.");
+            logger.log(Level.WARNING, "Wrong tasks.txt format");
         }
         logger.log(Level.INFO, "tasks returned");
         return tasks;
+    }
+
+    public static boolean checkFileFormat(String line) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}\\|.+";
+        return line.matches(regex);
     }
 
 }
