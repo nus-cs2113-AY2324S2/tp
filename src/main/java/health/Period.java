@@ -83,13 +83,8 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        return "Period Start: "
-                + this.getStartDate()
-                + " Period End: "
-                + this.endDate
-                + System.lineSeparator()
-                + "Period Length: "
-                + this.length
-                + " days";
+        String startDateString = startDate.toString();
+        String endDateString = endDate.toString();
+        return String.format(UiConstant.PRINT_PERIOD_FORMAT, startDateString, endDateString, length);
     }
 }

@@ -45,7 +45,7 @@ public class Bmi extends Health {
         this.height = Double.parseDouble(height);
         this.weight = Double.parseDouble(weight);
 
-        assert this.height > 0 && this.weight > 0 : "Height and weight must be positive";
+        assert this.height > 0 && this.weight > 0 : UiConstant.HEIGHT_WEIGHT_REQUIRE_POSITIVE;
 
         this.date = Parser.parseDate(date);
 
@@ -101,7 +101,7 @@ public class Bmi extends Health {
     public double calculateBmiValue() {
         double bmi = Math.round((weight / (Math.pow(height, UiConstant.POWER_OF_TWO))) * UiConstant.ROUNDING_FACTOR)
                 / UiConstant.ROUNDING_FACTOR;
-        assert bmi > 0: "BMI value must be positive";
+        assert bmi > 0: UiConstant.BMI_MUST_BE_POSITIVE;
         return bmi;
     }
 
@@ -113,7 +113,7 @@ public class Bmi extends Health {
      * @throws AssertionError If calculated value is not positive.
      */
     public static String getBmiCategory(double bmiValue) {
-        assert bmiValue > 0: "BMI value must be positive";
+        assert bmiValue > 0: UiConstant.BMI_MUST_BE_POSITIVE;
 
         if (bmiValue < UiConstant.UNDERWEIGHT_BMI_THRESHOLD) {
             return UiConstant.UNDERWEIGHT_MESSAGE;
