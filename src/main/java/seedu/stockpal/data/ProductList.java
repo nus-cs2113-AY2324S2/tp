@@ -98,12 +98,12 @@ public class ProductList {
         return currProduct.toSave();
     }
 
-    public void checkThresholdQuantity () {
+    public void printLowQuantityProducts () {
         Ui.printLowQuantityAlert();
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
-            if (productQuantity.getQuantity() < 20) {
-                Ui.printLowQuantityProducts(product);
+            if (productQuantity.isLowQuantity(product)) {
+                Ui.printProductsBelowThreshold(product);
             }
         }
     }

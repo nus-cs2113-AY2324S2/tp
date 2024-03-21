@@ -4,6 +4,7 @@ import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
+import seedu.stockpal.data.product.Quantity;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -60,7 +61,7 @@ public final class Ui {
         for (int i = 0; i < products.getSize(); i++ ) {
             assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);
-            System.out.println((i + 1) + ". " + product);
+            printToScreen((i + 1) + ". " + product);
             printToScreen(HORIZONTAL_LINE);
         }
     }
@@ -83,11 +84,9 @@ public final class Ui {
 
     public static void printLowQuantityAlert() {
         printToScreen(Messages.ALERT_LOW_QUANTITY);
-        printToScreen(HORIZONTAL_LINE);
     }
 
-    public static void printLowQuantityProducts(Product product) {
+    public static void printProductsBelowThreshold(ProductList products) {
         printToScreen(HORIZONTAL_LINE);
-        printToScreen(product.getPid() + " | " + product.getName() + " | " + product.getQuantity().toString());
     }
 }

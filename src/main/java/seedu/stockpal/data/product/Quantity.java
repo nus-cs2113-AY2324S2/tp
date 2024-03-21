@@ -69,5 +69,10 @@ public class Quantity implements CommandParameter {
     public String toSave() {
         return this.quantity.toString();
     }
+
+    public boolean isLowQuantity (Product product) {
+        Quantity productQuantity = product.getQuantity();
+        return productQuantity.getQuantity() < 20;
+    }
 }
 
