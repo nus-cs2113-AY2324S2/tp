@@ -1,32 +1,48 @@
 package seedu.duke;
 
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.duke.ui.Ui.printGreeting;
+
 import seedu.duke.command.Command;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 
-import java.util.Scanner;
-
-import static seedu.duke.ui.Ui.printGreeting;
-
 public class FAP {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static ModuleList takenModuleList = new ModuleList(10);
-    public static ModuleList toBeTakenModuleList = new ModuleList(10);
+
+    public static ModuleList moduleList = new ModuleList(10);
+    private static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
 
     public static void main(String[] args) {
-        printGreeting();
+        try {
+            printGreeting();
+            assert moduleList != null : "moduleList should not be null";
+            runApplication();
+        } catch (AssertionError e) {
+            LOGGER.log(Level.SEVERE, "Assertion failed: " + e.getMessage(), e);
+            System.err.println("Critical assertion failure: " + e.getMessage());
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: " + e.getMessage(), e);
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    private static void runApplication() {
         Scanner in = new Scanner(System.in);
-        while (true) {
+        boolean continueRunning = true;
+
+        while (continueRunning) {
             try {
-                String userInput = in.nextLine();
-                String cleanUserInput = userInput.trim();
-                Command command = Parser.getCommand(cleanUserInput);
-                command.execute(cleanUserInput);
+                String userInput = in.nextLine().trim();
+                LOGGER.log(Level.INFO, "User input: " + userInput);
+                Command command = Parser.getCommand(userInput);
+                command.execute(userInput);
             } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage(), e);
                 System.out.println("An error occurred: " + e.getMessage());
-                break;
+                continueRunning = false; // Exit loop on error
             }
         }
     }

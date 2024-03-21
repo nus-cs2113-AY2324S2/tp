@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+
 import seedu.duke.modules.Module;
 
 public class ViewCommand extends Command{
@@ -20,23 +22,30 @@ public class ViewCommand extends Command{
 
     @Override
     public void execute(String userInput) {
-        switch (mode) {
-        case "all":
-            System.out.println("Taken modules: ");
-            //printModuleList(takenModuleList);
-            System.out.println("Planned modules: ");
-            //printModuleList(planModuleList);
-            break;
-        case "taken":
-            System.out.println("Taken modules: ");
-            //printModuleList(takenModuleList);
-            break;
-        case "plan":
-            System.out.println("Planned modules: ");
-            //printModuleList(planModuleList);
-            break;
-        default:
-            System.out.println("Invalid mode.");
+        try {
+            assert mode != null : "mode should be present";
+            logger.log(Level.INFO, "mode: " + mode);
+
+            switch (mode) {
+            case "all":
+                System.out.println("Taken modules: ");
+                printModuleList(moduleList.getTakenModuleList());
+                System.out.println("Planned modules: ");
+                printModuleList(moduleList.getToBeTakenModuleList());
+                break;
+            case "taken":
+                System.out.println("Taken modules: ");
+                printModuleList(moduleList.getTakenModuleList());
+                break;
+            case "plan":
+                System.out.println("Planned modules: ");
+                printModuleList(moduleList.getToBeTakenModuleList());
+                break;
+            default:
+                System.out.println("Invalid mode.");
+            }
+        } catch (AssertionError e) {
+            System.out.println("ViewCommand instance has invalid mode");
         }
     }
 }
