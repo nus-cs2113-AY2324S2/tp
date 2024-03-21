@@ -118,7 +118,9 @@ public class UiConstant {
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
 
-    public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s\nPeriod Length: %d days";
+    public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
+            + System.lineSeparator()
+            + "Period Length: %d days";
 
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
