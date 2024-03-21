@@ -37,4 +37,6 @@ public class Messages {
     public static final String ALERT_LOW_QUANTITY = "These products have low quantity! Please top up!";
     public static final String ALERT_FIRST_LOW_QUANTITY_OCCURRENCE = "Warning! This product is low in quantity.";
     public static final String MESSAGE_NO_LOW_QUANTITY_PRODUCTS = "No products with low quantity";
+
+    public static final String MESSAGE_EMPTY_FIND_LIST = "No matches found.";
 }
