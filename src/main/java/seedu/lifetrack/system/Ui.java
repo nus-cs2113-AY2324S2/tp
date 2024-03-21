@@ -36,8 +36,11 @@ public class Ui {
             liquidList.printLiquidList();
         } else if (line.startsWith("delete calories")) {
             calorieList.deleteEntry(line);
-        }else if (line.startsWith("delete liquids")) {
+        } else if (line.startsWith("delete liquids")) {
             liquidList.deleteEntry(line);
+        } else {
+            System.out.println("Please enter a valid command.\n" +
+                    "Refer to the user guide for more details");
         }
     }
 
