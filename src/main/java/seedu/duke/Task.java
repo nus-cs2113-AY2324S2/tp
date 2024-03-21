@@ -39,6 +39,15 @@ public class Task {
         this.endTime = endTime;
     }
 
+    /**
+     * Represents the constructor for Task class that takes in parameters inluding the description of the task,
+     * the day of the task, the starting time and the ending time of the task.
+     *
+     * @param description description of the task.
+     * @param day day of the task.
+     * @param from starting time of the task.
+     * @param to ending time of the task.
+     */
     public Task(String description, String day, String from, String to){
         this.description = description;
         this.day = day;
