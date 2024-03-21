@@ -33,7 +33,6 @@ public class TransactionList<T extends Transaction<?>> {
     }
 
     public boolean removeTransactionIndex (int index) throws Exception{
-        //printTransactionsSafeInfo();
         transactionList.remove(index);
         return true;
     }
