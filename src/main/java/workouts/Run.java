@@ -2,7 +2,12 @@ package workouts;
 import java.time.LocalDate;
 
 import ui.Handler;
-import utility.*;
+import utility.CustomExceptions;
+import utility.Parser;
+import utility.ErrorConstant;
+import utility.UiConstant;
+import utility.WorkoutConstant;
+
 
 /**
  * Represents a Run object.
@@ -184,6 +189,7 @@ public class Run extends Workout{
         } else{
             printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
         }
-        return String.format(WorkoutConstant.RUN_FORMAT, WorkoutConstant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        return String.format(WorkoutConstant.RUN_FORMAT, WorkoutConstant.RUN,
+                getTimes(), getDistance(), getPace(), printedDate);
     }
 }

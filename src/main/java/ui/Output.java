@@ -1,6 +1,9 @@
 package ui;
 
-import utility.*;
+import utility.CustomExceptions;
+import utility.Filters;
+import utility.UiConstant;
+import utility.WorkoutConstant;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;

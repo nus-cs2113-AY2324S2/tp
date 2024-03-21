@@ -4,7 +4,14 @@ import health.Bmi;
 import health.Health;
 import health.HealthList;
 import health.Period;
-import utility.*;
+
+import utility.CustomExceptions;
+import utility.ErrorConstant;
+import utility.UiConstant;
+import utility.HealthConstant;
+import utility.WorkoutConstant;
+import utility.Command;
+
 import workouts.Gym;
 import workouts.Run;
 
@@ -250,7 +257,7 @@ public class Handler {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_INPUT_FOR_EXERCISE);
         }
 
-        String exerciseType = userInputs[WorkoutConstant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
+        String exerciseType = userInputs[WorkoutConstant.EXERCISE_TYPE_INDEX].trim();
 
         if (exerciseType.isBlank()){
             throw new CustomExceptions.InvalidInput(WorkoutConstant.BLANK_INPUT_FOR_EXERCISE);

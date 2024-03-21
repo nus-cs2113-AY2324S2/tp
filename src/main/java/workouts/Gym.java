@@ -1,6 +1,10 @@
 package workouts;
 
-import utility.*;
+import utility.CustomExceptions;
+import utility.Parser;
+import utility.ErrorConstant;
+import utility.UiConstant;
+import utility.WorkoutConstant;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
