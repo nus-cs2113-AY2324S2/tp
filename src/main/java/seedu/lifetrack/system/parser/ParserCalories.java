@@ -89,6 +89,13 @@ public class ParserCalories {
             String[] macroParts = macroString.split(",");
             int idx = 0;
             for (String macro: macroParts) {
+                //Exception handling when user puts spaces in m/
+                //EG m/123,    , 123
+                if (macro.trim().isEmpty()) {
+                    throw new InvalidInputException("Invalid input exception: " +
+                            "Please ensure that all macronutrients fields are filled up. " +
+                            "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
+                }
                 macros[idx] = Integer.parseInt(macro.trim());
                 idx++;
             }
