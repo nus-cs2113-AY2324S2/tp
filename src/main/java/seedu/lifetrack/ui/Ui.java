@@ -18,11 +18,14 @@ public class Ui {
 
     private static final String WHITESPACE = "         ";
 
-    private static final String logo = "|     IIIII  FFFFF EEEEE  TTTTT RRRR    AAA   CCC  K  K\n" +
-            "|       I    F     E        T   R   R  A   A C     K K\n" +
-            "|       I    FFFF  EEEE     T   RRRR   AAAAA C     KK\n" +
-            "|       I    F     E        T   R  R   A   A C     K K\n" +
-            "|______  IIIII F     EEEEE    T   R   R  A   A  CCC  K  K\n";
+    private static final String logo =
+            "\n" +
+                    ".____    .__  _____        ___________                     __    \n" +
+                    "|    |   |__|/ ____\\____   \\__    ___/___________    ____ |  | __\n" +
+                    "|    |   |  \\   __\\/ __ \\    |    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n" +
+                    "|    |___|  ||  | \\  ___/    |    |   |  | \\// __ \\\\  \\___|    < \n" +
+                    "|_______ \\__||__|  \\___  >   |____|   |__|  (____  /\\___  >__|_ \\\n" +
+                    "        \\/             \\/                        \\/     \\/     \\/\n";
 
     public static void readUserInput(CalorieList calorieList, LiquidList liquidList) {
         String line;
@@ -111,8 +114,8 @@ public class Ui {
         System.out.println("\t - calories list: Displays all entries currently stored in the calorie list.");
         System.out.println("\t - calories delete <index>: Deletes the entry at the specified index" +
                 " from the calorie list.");
-        System.out.println("\t - hydration add b/<type of beverage> v/<volume> : " +
+        System.out.println("\t - liquids in b/<type of beverage> v/<volume> : " +
                 "Marks the task at the specified index as done.");
-        System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.\"");
+        System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
     }
 }
