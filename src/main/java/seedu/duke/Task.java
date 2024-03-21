@@ -41,6 +41,9 @@ public class Task {
         this.startTime = startTime;
     }
 
+    public void setType(String type){
+        this.type = type;
+    }
     /**
      * Represents the constructor for Task class that takes in parameters inluding the description of the task,
      * the day of the task, the starting time and the ending time of the task.
@@ -69,6 +72,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return description + " (" + day + " from " + startTime + " to " + endTime + ")" + "flexibility: " + type;
+        return description + " (" + day + " from " + startTime + " to " + endTime + ")" + "type: " + type;
     }
 }
