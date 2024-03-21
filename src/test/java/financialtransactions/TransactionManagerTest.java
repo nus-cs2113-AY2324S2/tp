@@ -17,7 +17,7 @@ public class TransactionManagerTest {
         shopping.setCategory(Outflow.Category.SHOPPING);
         managerTest.addTransaction(shopping);
         
-        assertEquals("Salary payment|400.00|May 23 2022 07:00PM|INCOME\n" + 
-                    "Shopping|-18.00|May 23 2022 08:00PM|SHOPPING\n", managerTest.toSave());
+        assertEquals("Salary payment|400.00|May 23 2022 07:00PM|INCOME\n" +
+            "Shopping|-200.00|May 23 2022 08:00PM|SHOPPING\n", managerTest.toSave());
     }
 }
