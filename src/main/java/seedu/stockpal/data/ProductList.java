@@ -99,11 +99,11 @@ public class ProductList {
     }
 
     public void checkThresholdQuantity () {
+        Ui.printLowQuantityProducts();
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
             if (productQuantity.getQuantity() < 20) {
-                Ui.printLowQuantityProducts();
-                Ui.printToScreen(product.getName() + " " + product.getQuantity().toString());
+                Ui.printToScreen(product.getPid() + " | " + product.getName() + " | " + product.getQuantity().toString());
             }
         }
     }
