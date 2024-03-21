@@ -1,7 +1,9 @@
 package meditracker;
 
+import meditracker.exception.FileReadWriteException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
+import meditracker.storage.FileReaderWriter;
 import meditracker.ui.Ui;
 
 import java.util.ArrayList;
@@ -29,11 +31,6 @@ public class DailyMedicationManager {
             DailyMedication dailyMedication = new DailyMedication(medicationName);
             addDailyMedication(dailyMedication);
         }
-
-        // TODO: Fetch today list from storage.
-        //       If does not exist or old list,
-        //       populate from MedicationManager
-        // TODO: Add @see Storage when implemented
     }
 
     /**
@@ -43,9 +40,14 @@ public class DailyMedicationManager {
      */
     public DailyMedicationManager(List<String> lines) {
         dailyMedications = new ArrayList<>();
-        for(String line : lines) {
-            DailyMedication dailyMedication = parseImportedLine(line);
-            addDailyMedication(dailyMedication);
+        ui = new Ui();
+        try {
+            for(String line : lines) {
+                DailyMedication dailyMedication = parseImportedLine(line);
+                addDailyMedication(dailyMedication);
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
         }
     }
 
@@ -56,6 +58,11 @@ public class DailyMedicationManager {
      */
     public void addDailyMedication(DailyMedication dailyMedication) {
         dailyMedications.add(dailyMedication);
+        try {
+            FileReaderWriter.saveDailyMedicationData(getDailyMedicationStringData());
+        } catch (FileReadWriteException e) {
+            System.out.println("Cannot write into today.txt");
+        }
     }
 
     /**
@@ -80,6 +87,11 @@ public class DailyMedicationManager {
     public void takeDailyMedication(int listIndex) {
         DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.take();
+        try {
+            FileReaderWriter.saveDailyMedicationData(getDailyMedicationStringData());
+        } catch (FileReadWriteException e) {
+            // TODO: Handle exception
+        }
     }
 
     /**
@@ -91,6 +103,11 @@ public class DailyMedicationManager {
     public void untakeDailyMedication(int listIndex) {
         DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.untake();
+        try {
+            FileReaderWriter.saveDailyMedicationData(getDailyMedicationStringData());
+        } catch (FileReadWriteException e) {
+            // TODO: Handle exception
+        }
     }
 
     public void printMedications() {
@@ -114,5 +131,19 @@ public class DailyMedicationManager {
             dailyMedication.untake();
         }
         return dailyMedication;
+    }
+
+    /**
+     * Takes each DailyMedication object and adds to string of each object
+     * to a list of String and return
+     *
+     * @return A list of DailyMedication object to string
+     */
+    private List<String> getDailyMedicationStringData() {
+        List<String> dailyMedicationStrings = new ArrayList<>();
+        for (DailyMedication dailyMedication : dailyMedications) {
+            dailyMedicationStrings.add(dailyMedication.isTaken() + "|" + dailyMedication.getName());
+        }
+        return dailyMedicationStrings;
     }
 }
