@@ -48,11 +48,19 @@ public class Parser {
                 processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic, userAnswers);
             } else if (lowerCaseCommand.startsWith("help")) {
                 processHelpCommand(lowerCaseCommand, ui, helper);
+            } else if (lowerCaseCommand.startsWith("list")){
+                processListCommand(topicList, ui);
             } else {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
 
+    }
+
+    private void processListCommand(TopicList topicList, Ui ui) {
+        String[][] printData = topicList.listAllTopics();
+        String[] tableHeader = {"index", "topic", "summary", "attempted"};
+        ui.printTable(tableHeader, printData);
     }
 
     private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
