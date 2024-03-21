@@ -1,5 +1,6 @@
 package newsonthego;
 
+import static newsonthego.NewsOnTheGo.findTopicIndex;
 import static newsonthego.NewsOnTheGo.FILENAME;
 import static newsonthego.NewsOnTheGo.importNewsFromText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import newsonthego.commands.DailyNewsCommand;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -36,6 +36,12 @@ class NewsOnTheGoTest {
         assertEquals("Financial Times", newsArticles.get(1).getSource());
     }
 
+    @Test
+    public void testFindTopicIndex() {
+        int index = findTopicIndex("abcdefg");
+        assertEquals(-1,index);
+    }
+    
     @Test
     public void dailyFunctionTest() {
         String input = "daily March 10, 2024";

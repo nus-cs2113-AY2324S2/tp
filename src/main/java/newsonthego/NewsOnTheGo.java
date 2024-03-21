@@ -158,7 +158,7 @@ public class NewsOnTheGo {
      * @param topic the name of the topic to search for
      * @return the index of the topic if found, or -1 if the topic is not found
      */
-    private static int findTopicIndex(String topic) {
+    static int findTopicIndex(String topic) {
         int left = 0;
         int right = newsTopics.size() - 1;
         while (left <= right) {
@@ -183,6 +183,7 @@ public class NewsOnTheGo {
      */
     private static void filterNews(String line) {
         int topicIndex = findTopicIndex(line.substring(6).trim());
+        System.out.println(topicIndex);
         if (topicIndex < 0) {
             System.out.println("Sorry, this topic is not available right now :(");
         } else {

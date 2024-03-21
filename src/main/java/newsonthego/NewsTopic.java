@@ -20,7 +20,7 @@ public class NewsTopic {
     }
 
     public void printNewsArticles() {
-        for(NewsArticle newsArticle : this.relatedNewsArticles) {
+        for (NewsArticle newsArticle : this.relatedNewsArticles) {
             System.out.println(newsArticle.getHeadline());
         }
     }
