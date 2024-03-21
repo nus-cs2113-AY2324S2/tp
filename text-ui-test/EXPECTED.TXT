@@ -1,10 +1,12 @@
-Hello from
-LLLLL  IIIII FFFFF EEEEE  TTTTT RRRR   AAA  CCC  K  K
-L       I    F     E        T   R   R A   A C  C K K
-LLL     I    FFFF  EEEE     T   RRRR  AAAAA C    KK
-L       I    F     E        T   R  R A   A C  C K K
-LLLLL IIIII F     EEEEE    TTTT R   R A   A  CCC K  K
+         Hello from
 
-What do you want to do today?
+|     IIIII  FFFFF EEEEE  TTTTT RRRR    AAA   CCC  K  K
+|       I    F     E        T   R   R  A   A C     K K
+|       I    FFFF  EEEE     T   RRRR   AAAAA C     KK
+|       I    F     E        T   R  R   A   A C     K K
+|______  IIIII F     EEEEE    T   R   R  A   A  CCC  K  K
 
-Bye! See you again soon ^^
+         How can I help you today?
+         -----------------------------------------------------------------------------
+         -----------------------------------------------------------------------------
+         Bye! See you again soon ^^

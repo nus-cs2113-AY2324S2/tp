@@ -4,6 +4,7 @@ import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,8 +16,7 @@ import java.util.logging.Logger;
 public class LiquidList {
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
     private ArrayList<LiquidEntry> liquidArrayList;
-    private final int sizeOfDelete = 15;
-
+    private final int SIZE_OF_DELETE = 15;
 
     /**
      * Constructs an empty LiquidList.
@@ -43,9 +43,9 @@ public class LiquidList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(sizeOfDelete).trim());
+            int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             liquidArrayList.remove(index - 1);
-            System.out.println("Successfully delete the liquid record.");
+            System.out.println("\t Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
             logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
                     "within the size of the list.", e);
@@ -63,6 +63,7 @@ public class LiquidList {
         try {
             LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
+            System.out.println("Beverage has been successfully added");
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
         }
@@ -74,13 +75,13 @@ public class LiquidList {
      */
     public void printLiquidList() {
         if (liquidArrayList.isEmpty()) {
-            System.out.println("Your liquid list is empty.");
+            System.out.println("\t Your liquid list is empty.");
         } else {
-            System.out.println("Liquid List:");
+            System.out.println("\t Liquid List:");
             for (int i = 0; i < liquidArrayList.size(); i++) {
                 LiquidEntry entry = liquidArrayList.get(i);
                 Beverage beverage = entry.getBeverage();
-                System.out.println((i + 1) + ". Beverage: " + beverage.getBeverage()
+                System.out.println("\t " + (i + 1) + ". Beverage: " + beverage.getBeverage()
                         + ", Volume: " + beverage.getVolume());
             }
         }
