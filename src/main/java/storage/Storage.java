@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 
 public class Storage {
 
-    private static Logger logger = Logger.getLogger("Storage");
     public static final Path FILE_PATH = Path.of("./save/tasks.txt");
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Creates directory and tasks.txt if it does not exist
