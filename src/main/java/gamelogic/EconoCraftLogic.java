@@ -28,6 +28,7 @@ public class EconoCraftLogic {
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
         return new EconoCraftLogic(playerProfile);
+
     }
 
     private static String getJob() {
