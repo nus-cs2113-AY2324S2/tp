@@ -81,6 +81,10 @@ public class ExpenseList {
     }
 
     public void addExpense(String category, String amount, String description) throws BudgetBuddyException {
+        assert category != null : "Category should not be null";
+        assert amount != null : "Amount should not be null";
+        assert description != null : "Description should not be null";
+        
         if (!categories.contains(category)) {
             throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
