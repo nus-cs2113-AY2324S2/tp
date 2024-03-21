@@ -5,6 +5,7 @@ import time.DateUtils;
 import time.WeekView;
 import data.TaskManager;
 import data.TaskManagerException;
+import log.FileLogger;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -24,6 +25,7 @@ public class Main {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void main(String[] args) throws IOException {
+        FileLogger.setupLogger();
         Scanner scanner = new Scanner(System.in);
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = DateUtils.getStartOfWeek(today);

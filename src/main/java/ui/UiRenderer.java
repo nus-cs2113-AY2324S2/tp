@@ -3,10 +3,14 @@ package ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import data.TaskManager;
 
 public class UiRenderer {
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     private static final int SPACE_COUNT = 10;
@@ -50,6 +54,7 @@ public class UiRenderer {
     }
 
     private static void printDateRow(DateTimeFormatter dateFormatter, LocalDate date) {
+        logger.log(Level.INFO, "Printing dates for week starting from " + date);
         for (int i = 0; i < numberOfDaysInWeek; i++) {
             System.out.printf(ENTRY_FORMAT, dateFormatter.format(date));
             date = date.plusDays(1);
