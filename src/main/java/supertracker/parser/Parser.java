@@ -1,7 +1,16 @@
 package supertracker.parser;
 
 import supertracker.TrackerException;
-import supertracker.command.*;
+import supertracker.command.AddCommand;
+import supertracker.command.InvalidCommand;
+import supertracker.command.ListCommand;
+import supertracker.command.NewCommand;
+import supertracker.command.QuitCommand;
+import supertracker.command.RemoveCommand;
+import supertracker.command.UpdateCommand;
+import supertracker.command.DeleteCommand;
+import supertracker.command.Command;
+import supertracker.command.FindCommand;
 import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
