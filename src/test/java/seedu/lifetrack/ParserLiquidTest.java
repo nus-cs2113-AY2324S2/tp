@@ -1,3 +1,4 @@
+//@@author rexyyong
 package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
@@ -19,17 +20,6 @@ public class ParserLiquidTest {
         // Call methods to test
         try {
             LiquidEntry entry = parseLiquidInput(invalidInput);
-        } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parseLiquidInput_missingKeywords_exceptionThrown() {
-        try {
-            parseLiquidInput("liquids in");
         } catch (InvalidInputException e) {
             assertEquals("Invalid input exception: " +
                     "Please ensure that you have entered b/ and v/\n" +
@@ -130,4 +120,27 @@ public class ParserLiquidTest {
                     "Please enter a positive integer value for volume", e.getMessage());
         }
     }
+
+    //@@author shawnpong
+    @Test
+    public void parseLiquidInput_missingKeywords_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in");
+        } catch (InvalidInputException e) {
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_incompleteInput_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/Milo");
+        } catch (InvalidInputException e) {
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());        }
+    }
+    //@@author
 }
