@@ -13,10 +13,17 @@ public class Parser {
     private static final int FIRST_PARAMETER = 1;
     private static final int SECOND_PARAMETER = 2;
 
-    private static final String QUESTION_PARAMETER = "questions";
+    private static final String DETAILS_PARAMETER = "details";
     private static final String COMMAND_SPLITTER = " ";
 
-    private static final boolean INCLUDES_QUESTION = true;
+    private static final boolean INCLUDES_DETAILS = true;
+    private static final boolean IS_CORRECT_ANSWER = true;
+    private static final String MESSAGE_NO_RESULTS = "There are no results.";
+    private static final String MESSAGE_ERROR = "An error has occurred.";
+    private static final String MESSAGE_INVALID_PARAMETERS = "Invalid parameters.";
+    private static final int NO_RESULTS = 0;
+    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
+    private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
     boolean hasChosenTopic = false;
 
     public void parseCommand(
@@ -49,33 +56,53 @@ public class Parser {
     }
 
     private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
-                                       QuestionListByTopic questionListByTopic) {
+                                       QuestionListByTopic questionListByTopic, AnswerTracker userAnswers)
+            throws CustomException {
+        if (allResults.getSizeOfAllResults() == NO_RESULTS) {
+            throw new CustomException(MESSAGE_NO_RESULTS);
+        }
         String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER, TWO_PARAMETERS);
+        assert commandParts.length <= TWO_PARAMETERS;
         switch (commandParts.length) {
         case (NO_PARAMETERS): {
-            ui.printAllResults(!INCLUDES_QUESTION, allResults, questionListByTopic);
+            ui.printAllResults(!INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             break;
         }
         case (ONE_PARAMETER): {
-            if (commandParts[PARAMETER_INDEX].equals(QUESTION_PARAMETER)) {
-                ui.printAllResults(INCLUDES_QUESTION, allResults, questionListByTopic);
+            if (commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+                ui.printAllResults(INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             } else {
-                int index = Integer.parseInt(commandParts[FIRST_PARAMETER]);
-                String score = allResults.getSpecifiedResult(index - 1).getScore();
-                int topicNum = allResults.getTopicNum(index - 1);
-                ui.printOneResult(!INCLUDES_QUESTION, topicNum, score, questionListByTopic);
+                try {
+                    int index = Integer.parseInt(commandParts[FIRST_PARAMETER]);
+                    String score = allResults.getSpecifiedResult(index - 1).getScore();
+                    int topicNum = allResults.getTopicNum(index - 1);
+                    ui.printOneResult(!INCLUDES_DETAILS, topicNum, score, questionListByTopic, userAnswers, index);
+                } catch (NumberFormatException e) {
+                    throw new CustomException(MESSAGE_INVALID_PARAMETERS);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CustomException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+                }
             }
             break;
         }
         case (TWO_PARAMETERS): {
-            int index = Integer.parseInt(commandParts[SECOND_PARAMETER]);
-            String score = allResults.getSpecifiedResult(index - 1).getScore();
-            int topicNum = allResults.getTopicNum(index - 1);
-            ui.printOneResult(INCLUDES_QUESTION, topicNum, score, questionListByTopic);
-            break;
+            if (!commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+                throw new CustomException(MESSAGE_INVALID_PARAMETERS);
+            }
+            try {
+                int index = Integer.parseInt(commandParts[SECOND_PARAMETER]);
+                String score = allResults.getSpecifiedResult(index - 1).getScore();
+                int topicNum = allResults.getTopicNum(index - 1);
+                ui.printOneResult(INCLUDES_DETAILS, topicNum, score, questionListByTopic, userAnswers, index);
+                break;
+            } catch (NumberFormatException e) {
+                throw new CustomException(MESSAGE_INVALID_INDEX);
+            } catch (IndexOutOfBoundsException e) {
+                throw new CustomException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+            }
         }
         default: {
-            break;
+            throw new CustomException(MESSAGE_ERROR);
         }
         }
     }
