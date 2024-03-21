@@ -51,10 +51,13 @@ public class ParserCalories {
         String date = parts[3].trim();
         int[] macros;
 
-        //check if optional macronutrients field was provided
         if (parts.length == 5) {
             String macroString = parts[4].trim();
-            macros = getMacrosFromString(macroString);
+            try {
+                macros = getMacrosFromString(macroString);
+            } catch (InvalidInputException e) {
+                throw new InvalidInputException(e.getMessage());
+            }
         } else {
             macros = null;
         }
@@ -80,14 +83,20 @@ public class ParserCalories {
         }
     }
 
-    private static int[] getMacrosFromString(String macroString) {
+    private static int[] getMacrosFromString(String macroString) throws InvalidInputException {
         int[] macros = new int[3];
         try {
             String[] macroParts = macroString.split(",");
             int idx = 0;
             for (String macro: macroParts) {
-                macros[idx] = Integer.parseInt(macro);
+                macros[idx] = Integer.parseInt(macro.trim());
                 idx++;
+            }
+//            Exception handling when user does not fill up values for macros
+            if (idx != 3) {
+                throw new InvalidInputException("Invalid input exception: " +
+                        "Please ensure that all macronutrients fields are filled up. " +
+                        "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
             }
         } catch (NumberFormatException e) {
             System.out.println("Please input only numbers into the macronutrients field!");
