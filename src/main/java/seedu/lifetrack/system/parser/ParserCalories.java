@@ -37,8 +37,10 @@ public class ParserCalories {
         int macrosIndex = input.indexOf("m/");
         if (descriptionIndex == -1 || caloriesIndex == -1 || dateIndex == -1 ||
                 (!(descriptionIndex < caloriesIndex && caloriesIndex < dateIndex) &&
-                macrosIndex != -1 && dateIndex < macrosIndex)) {
-            throw new InvalidInputException();
+                        macrosIndex != -1 && dateIndex < macrosIndex)) {
+            throw new InvalidInputException("Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "Example input: " +
+                    "calories in desc/DESCRIPTION c/INTEGER_CALORIES date/DATE");
         }
 
         //extract command, description, calories, date and macronutrients from input
@@ -59,7 +61,8 @@ public class ParserCalories {
 
         //check if the description, calories or date fields are empty
         if (description.isEmpty() || strCalories.isEmpty() || date.isEmpty()) {
-            throw new InvalidInputException();
+            throw new InvalidInputException("Please ensure that input parameters are not empty!\n" +
+                    "Example input: " + "calories in desc/DESCRIPTION c/INTEGER_CALORIES date/DATE");
         }
 
         try {
