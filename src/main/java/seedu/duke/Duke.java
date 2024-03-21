@@ -1,13 +1,15 @@
 package seedu.duke;
 
 import seedu.duke.exception.ProcessInputException;
-import seedu.duke.ui.Ui;
 
 public class Duke {
-    private static Ui u1 = new Ui();
+    private final Ui u1;
     private static Parser userCommandReader;
     private static boolean isTerminate = true;
 
+    public Duke() {
+        this.u1 = new Ui();
+    }
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -22,12 +24,11 @@ public class Duke {
         while (isTerminate) {
             Formatter.printGoalBeforeShot(1);
             processUserInput();
-            executeCommand();
         }
         u1.printBye();
     }
 
-    private static void executeCommand() {
+    private void executeCommand() {
         CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
 
         switch (selectedCommand) {

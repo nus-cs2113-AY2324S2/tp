@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package seedu.duke;
 
 import seedu.duke.CommandList;
 import seedu.duke.Formatter;

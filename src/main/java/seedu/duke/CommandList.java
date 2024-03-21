@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public enum CommandList {
