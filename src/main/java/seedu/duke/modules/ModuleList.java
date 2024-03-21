@@ -5,6 +5,9 @@ import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+
+import static seedu.duke.FAP.LOGGER;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
@@ -81,7 +84,7 @@ public class ModuleList {
             assert toChange.getModuleGrade().equals(grade) : "Grade is not updated successfully";
 
         } catch (ModuleNotFoundException e){
-            System.out.println("Module not found in either list");
+            System.out.println("Module not found in list");
         } catch (ModuleException e){
             System.out.println(e.getMessage());
         }
@@ -99,6 +102,7 @@ public class ModuleList {
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
         if(sumOfGPA == 0) {
+            LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
             throw new GpaException("No countable grades present to tally.");
         }
         return sumOfGPA/(double)totalMC;

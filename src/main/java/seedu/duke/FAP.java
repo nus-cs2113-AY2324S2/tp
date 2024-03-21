@@ -14,7 +14,7 @@ import seedu.duke.ui.Ui;
 public class FAP {
 
     public static ModuleList moduleList = new ModuleList(10);
-    private static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
 
     public static void main(String[] args) {
         try {
