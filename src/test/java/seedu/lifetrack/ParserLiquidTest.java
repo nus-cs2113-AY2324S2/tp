@@ -89,4 +89,35 @@ public class ParserLiquidTest {
                     "For example: liquids in b/Milo v/1000", e.getMessage());
         }
     }
+
+    @Test
+    public void parseLiquidInput_inputNonIntegerValueForVolume_invalidInputExceptionThrown() {
+        // setup test
+        LiquidList liquidList = new LiquidList();
+        String invalidInput = "liquids in b/Milo v/##s100";
+
+        // Call methods to test
+        try {
+            LiquidEntry entry = parseLiquidInput(invalidInput);
+        } catch (InvalidInputException e) {
+            assertEquals("Invalid input Exception: " +
+                    "Please enter a positive integer value for volume", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_inputNegativeValueForVolume_invalidInputExceptionThrown() {
+        // setup test
+        LiquidList liquidList = new LiquidList();
+        String invalidInput = "liquids in b/Milo v/-1000";
+
+        // Call methods to test
+        try {
+            LiquidEntry entry = parseLiquidInput(invalidInput);
+        } catch (InvalidInputException e) {
+            assertEquals("Invalid input Exception: " +
+                    "Please enter a positive integer value for volume", e.getMessage());
+        }
+    }
+
 }
