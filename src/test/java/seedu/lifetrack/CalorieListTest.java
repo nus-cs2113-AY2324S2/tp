@@ -39,7 +39,8 @@ public class CalorieListTest {
         assertEquals("run", secondEntry.getDescription());
         assertEquals(679, secondEntry.getCalories());
     }
-
+    
+    //@@author a-wild-chocolate
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
@@ -64,6 +65,7 @@ public class CalorieListTest {
         assertEquals(initialSize, calorieList.getSize());
     }
 
+    //@@author shawnpong
     @Test
     public void testPrintCalorieListEmpty() {
         String lineSeparator = System.lineSeparator();

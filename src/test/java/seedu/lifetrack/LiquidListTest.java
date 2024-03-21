@@ -1,3 +1,4 @@
+//@@author shawnpong
 package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
@@ -77,4 +78,5 @@ public class LiquidListTest {
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, liquidList.getSize());
     }
+    //@@author
 }
