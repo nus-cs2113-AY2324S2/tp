@@ -25,7 +25,7 @@ public class ParserTest {
 
     public void parseAndAssertEmpty(String[] inputs) {
         for (String input : inputs) {
-            final Command result = parser.parserCommand(input);
+            final Command result = parser.parseCommand(input);
             assertNull(result);
         }
     }

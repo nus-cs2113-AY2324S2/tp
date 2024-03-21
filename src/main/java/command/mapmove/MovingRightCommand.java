@@ -2,8 +2,18 @@ package command.mapmove;
 
 
 public class MovingRightCommand extends MapMoveCommand {
+    public MovingRightCommand() {
+        super();
+    }
+
+    public MovingRightCommand(String userInput) {
+        super(userInput);
+    }
+
     @Override
     public void execute() {
-        currentMap.movePlayerRightOne();
+        for (int i = 0; i < commandModifier; i++) {
+            currentMap.movePlayerRightOne();
+        }
     }
 }

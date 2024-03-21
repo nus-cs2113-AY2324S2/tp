@@ -1,9 +1,15 @@
 package command.mapmove;
 
 public class MovingLeftCommand extends MapMoveCommand {
+
+    public MovingLeftCommand(String userInput) {
+        super(userInput);
+    }
+
     @Override
     public void execute() {
-        currentMap.movePlayerLeftOne();
-
+        for (int i = 0; i < commandModifier; i++) {
+            currentMap.movePlayerLeftOne();
+        }
     }
 }
