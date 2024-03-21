@@ -17,7 +17,8 @@ public class TransactionManager {
         if (transaction instanceof Inflow) {
             Inflow inflow = (Inflow) transaction;
             return inflows.addTransaction(inflow);
-        } else if (transaction instanceof Outflow) {
+        } 
+        if (transaction instanceof Outflow) {
             Outflow outflow = (Outflow) transaction;
             return outflows.addTransaction(outflow);
         }
