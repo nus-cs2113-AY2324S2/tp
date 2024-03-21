@@ -1,42 +1,44 @@
 package workouts;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeFormatter;
+import utility.Parser;
 
+/**
+ * Represents a Workout object for PulsePilot.
+ */
 public abstract class Workout {
     protected LocalDate date = null;
 
+    /**
+     * Overloaded constructor that uses the optional date parameter from user input.
+     *
+     * @param stringDate String representing the date of the workout.
+     */
     public Workout(String stringDate) {
-        this.date = parseDate(stringDate);
+        this.date = Parser.parseDate(stringDate);
     }
 
-    // overloaded constructor for optional date parameter
+    /**
+     * Constructor that builds a new Workout object.
+     */
     public Workout() {
     }
 
+    /**
+     * Returns the date of the workout.
+     *
+     * @return LocalDate variable representing the date of the workout.
+     */
     public LocalDate getDate() {
         return date;
     }
 
-    public static LocalDate parseDate(String dateTime) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate formattedDate = null;
-        try {
-            formattedDate = LocalDate.parse(dateTime, formatter);
-        } catch (DateTimeParseException e) {
-            System.err.println("Error parsing date: " + e.getMessage());
-        }
-        return formattedDate;
-    }
-
-
+    /**
+     * Retrieves the string representation of a Workout object.
+     *
+     * @return A formatted string representing a Workout object.
+     */
     @Override
     public String toString(){
         return getDate().toString();
     }
-
-
-
-
-
 }

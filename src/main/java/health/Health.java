@@ -1,59 +1,60 @@
 package health;
 
-/*
- * The Health class represents health information of the user.
+import utility.UiConstant;
+import utility.CustomExceptions;
+
+/**
+ * Represents a Health object to track user's health information.
  */
 public class Health {
-    /*
-     * The height of the user in meters.
-     */
-    protected static double height;
 
-    /*
-     * The weight of the user in kilograms.
-     */
-    protected static double weight;
-
-    /*
-     * Constructor for Health object.
-     */
-    public Health() {
-        this.height = height;
-        this.weight = weight;
-    }
-
-    /*
-     * Sets the height and weight property of the Health class according to
-     * user input.
+    /**
+     * Check the type of health operation requested based on user input.
      *
-     * @param userInput The user input string in the format "height x.yz" or "weight x.yz".
+     * @param userInput A user-provided string, containing health type and its parameters.
+     * @return A health type constant.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
+     * @throws AssertionError If user input or health type is null or
+     *                        if the number of parameters is not equivalent to 4.
      */
-    public static void setHeightAndWeight(String userInput) {
-        String[] parts = userInput.split(" ");
+    public static String checkTypeOfHealth(String userInput) throws
+            CustomExceptions.InvalidInput,
+            CustomExceptions.InsufficientInput {
 
-        if (parts.length != 2) {
-            System.out.println("Invalid input format. Please enter in the correct format.");
-            return;
+        String[] userInputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+
+        assert userInputs.length > 0 : "Number of userInputs parts should be greater than 0";
+
+        String healthType = userInputs[UiConstant.HEALTH_TYPE_INDEX].trim();
+
+        if (healthType.isBlank()){
+            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_HEALTH);
         }
 
-        try {
-            if (parts[0].equals("height")) {
-                Health.height = Double.parseDouble(parts[1]);
-                System.out.printf("Your height is %.2fm.", Health.height);
-            } else {
-                Health.weight = Double.parseDouble(parts[1]);
-                System.out.printf("Your weight is %.2fkg.", Health.weight);
-            }
-            Health.printNewLine();
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid value entered. Please try again.");
-        }
-    }
+        healthType = healthType.toLowerCase();
 
-    /*
-     * Prints a new line.
-     */
-    public static void printNewLine() {
-        System.out.println();
+        boolean isBmi = healthType.equals(UiConstant.BMI_INPUT);
+        boolean isPeriod = healthType.equals(UiConstant.PERIOD_INPUT);
+
+        if(!isBmi && !isPeriod){
+            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_INPUT_FOR_HEALTH);
+        }
+
+        if(isBmi && userInputs.length < UiConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+        }
+
+        if(isPeriod && userInputs.length < UiConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
+        }
+
+        assert userInputs.length == 5 : "Array of userInputs should have 5 elements";
+
+        if (isBmi){
+            return UiConstant.BMI;
+        } else {
+            return UiConstant.PERIOD;
+        }
     }
 }
