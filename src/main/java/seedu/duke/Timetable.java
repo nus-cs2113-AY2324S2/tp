@@ -101,10 +101,19 @@ public class Timetable {
         if (!tasks.isEmpty()) {
             LocalTime previousEndTime = LocalTime.MIN;
             for (Task task : tasks) {
-                if (task.getStartTime().isAfter(previousEndTime)) {
-                    System.out.println(previousEndTime + " - " + task.getStartTime() + ": Overlapping Free Time");
+                if (task.getType().equalsIgnoreCase("C")) {
+                    if (task.getStartTime().isAfter(previousEndTime)) {
+                        System.out.println(previousEndTime + " - " + task.getStartTime() + ": Compulsory Task");
+                    }
+                    System.out.println(task.getStartTime() + " - " + task.getEndTime() + ": Compulsory Task");
+                    previousEndTime = task.getEndTime();
+                } else { // Flexible Task
+                    if (task.getStartTime().isAfter(previousEndTime)) {
+                        System.out.println(previousEndTime + " - " + task.getStartTime() + ": Flexible Task");
+                    }
+                    System.out.println(task.getStartTime() + " - " + task.getEndTime() + ": Flexible Task");
+                    previousEndTime = task.getEndTime();
                 }
-                previousEndTime = task.getEndTime();
             }
             if (previousEndTime.isBefore(LocalTime.MAX)) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
