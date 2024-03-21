@@ -67,6 +67,7 @@ public class BookList {
      */
     public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
         try {
+            assert index > 0 && index <= books.size() : "Index out of valid range";
             books.get(index - 1).markBookAsRead();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
@@ -79,6 +80,7 @@ public class BookList {
      */
     public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
         try {
+            assert index > 0 && index <= books.size() : "Index out of valid range";
             books.get(index - 1).markBookAsUnread();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
