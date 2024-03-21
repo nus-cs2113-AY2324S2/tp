@@ -42,12 +42,12 @@ public class LiquidList {
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             liquidArrayList.remove(index - 1);
-            System.out.println("Successfully delete the liquid record.");
+            System.out.println("\t Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
+            System.out.println("\t Sorry, this index is invalid. Please enter a positive integer " +
                     "within the size of the list.");
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index!");
+            System.out.println("\t Please enter a valid index!");
         }
     }
 
@@ -71,13 +71,13 @@ public class LiquidList {
      */
     public void printLiquidList() {
         if (liquidArrayList.isEmpty()) {
-            System.out.println("Your liquid list is empty.");
+            System.out.println("\t Your liquid list is empty.");
         } else {
-            System.out.println("Liquid List:");
+            System.out.println("\t Liquid List:");
             for (int i = 0; i < liquidArrayList.size(); i++) {
                 LiquidEntry entry = liquidArrayList.get(i);
                 Beverage beverage = entry.getBeverage();
-                System.out.println((i + 1) + ". Beverage: " + beverage.getBeverage()
+                System.out.println("\t " + (i + 1) + ". Beverage: " + beverage.getBeverage()
                         + ", Volume: " + beverage.getVolume());
             }
         }

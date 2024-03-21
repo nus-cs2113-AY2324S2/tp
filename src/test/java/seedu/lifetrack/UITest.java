@@ -5,12 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.ui.Ui;
+import seedu.lifetrack.liquids.liquidlist.LiquidList;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import seedu.lifetrack.system.Ui;
-import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
 
 public class UITest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
