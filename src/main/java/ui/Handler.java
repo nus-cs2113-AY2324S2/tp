@@ -4,10 +4,7 @@ import health.Bmi;
 import health.Health;
 import health.HealthList;
 import health.Period;
-import utility.Command;
-import utility.UiConstant;
-import utility.CustomExceptions;
-import utility.WorkoutConstant;
+import utility.*;
 import workouts.Gym;
 import workouts.Run;
 
@@ -33,7 +30,7 @@ public class Handler {
     public static void processInput() {
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
-            String instruction = userInput.toUpperCase().split(" ")[0];
+            String instruction = userInput.toUpperCase().split(UiConstant.SPLIT_BY_WHITESPACE)[0];
             LogFile.writeLog("User Input: " + userInput, false);
             try {
                 Command command = Command.valueOf(instruction);
@@ -66,7 +63,7 @@ public class Handler {
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
             } catch (IllegalArgumentException e) {
-                Output.printException(e, UiConstant.INVALID_COMMAND);
+                Output.printException(e, ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
     }
@@ -101,17 +98,17 @@ public class Handler {
     public static void handleExercise(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
-            if (typeOfExercise.equals(UiConstant.RUN)) {
+            if (typeOfExercise.equals(WorkoutConstant.RUN)) {
                 String[] runDetails = Run.getRun(userInput);
                 if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
                         || runDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(UiConstant.UNSPECIFIED_PARAMETER);
+                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
                 }
 
                 Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
                 Output.printAddRun(newRun);
 
-            } else if (typeOfExercise.equals(UiConstant.GYM)) {
+            } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
                 int numberOfStations = getNumberOfGymStations(userInput);
                 Gym gym = new Gym();
                 getGymStation(numberOfStations, gym);
@@ -143,39 +140,39 @@ public class Handler {
         Output.printLine();
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(UiConstant.BMI)){
+            if (typeOfHealth.equals(HealthConstant.BMI)){
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
                 if (bmiDetails[0].isEmpty()
                         || bmiDetails[1].isEmpty()
                         || bmiDetails[2].isEmpty()
                         || bmiDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
+                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
                 }
 
                 Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
                 HealthList.addBmi(newBmi);
-                System.out.println(UiConstant.BMI_ADDED_MESSAGE_PREFIX
+                System.out.println(HealthConstant.BMI_ADDED_MESSAGE_PREFIX
                         + bmiDetails[1]
                         + UiConstant.LINE
                         + bmiDetails[2]
                         + UiConstant.LINE
                         + bmiDetails[3]);
                 System.out.println(newBmi);
-            } else if (typeOfHealth.equals(UiConstant.PERIOD)){
+            } else if (typeOfHealth.equals(HealthConstant.PERIOD)){
                 String[] periodDetails = Period.getPeriod(userInput);
 
                 if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
+                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
                 }
 
                 Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
                 if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
-                    throw new CustomExceptions.InvalidInput(UiConstant.PERIOD_START_MUST_BE_BEFORE_END);
+                    throw new CustomExceptions.InvalidInput(HealthConstant.PERIOD_START_MUST_BE_BEFORE_END);
                 }
 
                 HealthList.addPeriod(newPeriod);
-                System.out.println(UiConstant.PERIOD_ADDED_MESSAGE_PREFIX
+                System.out.println(HealthConstant.PERIOD_ADDED_MESSAGE_PREFIX
                         + periodDetails[1]
                         + UiConstant.LINE
                         + periodDetails[2]);
@@ -197,7 +194,7 @@ public class Handler {
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
         String numberOfStationString = extractSubstringFromSpecificIndex(input, WorkoutConstant.STATION_DELIMITER);
-        assert Integer.parseInt(numberOfStationString) > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+        assert Integer.parseInt(numberOfStationString) > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
         return Integer.parseInt(numberOfStationString);
     }
 
@@ -250,35 +247,35 @@ public class Handler {
         String[] userInputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
 
         if (userInputs.length < 2) {
-            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_INPUT_FOR_EXERCISE);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_INPUT_FOR_EXERCISE);
         }
 
-        String exerciseType = userInputs[UiConstant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
+        String exerciseType = userInputs[WorkoutConstant.EXERCISE_TYPE_INDEX].trim(); // Constant.EXERCISE_TYPE_INDEX = 1
 
         if (exerciseType.isBlank()){
-            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_EXERCISE);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.BLANK_INPUT_FOR_EXERCISE);
         }
 
         exerciseType = exerciseType.toLowerCase();
-        boolean isRun = exerciseType.equals(UiConstant.RUN_INPUT);
-        boolean isGym = exerciseType.equals(UiConstant.GYM_INPUT);
+        boolean isRun = exerciseType.equals(WorkoutConstant.RUN_INPUT);
+        boolean isGym = exerciseType.equals(WorkoutConstant.GYM_INPUT);
         if(!isRun && !isGym){
-            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_INPUT_FOR_EXERCISE);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_INPUT_FOR_EXERCISE);
         }
 
         if (isRun && userInputs.length < 5) {
-            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_RUN);
+            throw new CustomExceptions.InsufficientInput(WorkoutConstant.INSUFFICIENT_PARAMETERS_FOR_RUN);
         }
 
         if (isGym && userInputs.length < 3) {
-            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_GYM);
+            throw new CustomExceptions.InsufficientInput(WorkoutConstant.INSUFFICIENT_PARAMETERS_FOR_GYM);
         }
 
 
         if (isRun){
-            return UiConstant.RUN;
+            return WorkoutConstant.RUN;
         } else {
-            return UiConstant.GYM;
+            return WorkoutConstant.GYM;
         }
     }
 

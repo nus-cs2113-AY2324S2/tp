@@ -1,5 +1,7 @@
 package health;
 
+import utility.ErrorConstant;
+import utility.HealthConstant;
 import utility.UiConstant;
 import utility.CustomExceptions;
 
@@ -24,37 +26,37 @@ public class Health {
 
         String[] userInputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
 
-        assert userInputs.length > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+        assert userInputs.length > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
 
-        String healthType = userInputs[UiConstant.HEALTH_TYPE_INDEX].trim();
+        String healthType = userInputs[HealthConstant.HEALTH_TYPE_INDEX].trim();
 
         if (healthType.isBlank()){
-            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(HealthConstant.BLANK_INPUT_FOR_HEALTH);
         }
 
         healthType = healthType.toLowerCase();
 
-        boolean isBmi = healthType.equals(UiConstant.BMI_INPUT);
-        boolean isPeriod = healthType.equals(UiConstant.PERIOD_INPUT);
+        boolean isBmi = healthType.equals(HealthConstant.BMI_INPUT);
+        boolean isPeriod = healthType.equals(HealthConstant.PERIOD_INPUT);
 
         if(!isBmi && !isPeriod){
-            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(HealthConstant.INVALID_INPUT_FOR_HEALTH);
         }
 
-        if(isBmi && userInputs.length < UiConstant.BMI_PARAMETERS){
-            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+        if(isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 
-        if(isPeriod && userInputs.length < UiConstant.BMI_PARAMETERS){
-            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
+        if(isPeriod && userInputs.length < HealthConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
         }
 
-        assert userInputs.length == 5 : UiConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
+        assert userInputs.length == 5 : HealthConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
 
         if (isBmi){
-            return UiConstant.BMI;
+            return HealthConstant.BMI;
         } else {
-            return UiConstant.PERIOD;
+            return HealthConstant.PERIOD;
         }
     }
 }

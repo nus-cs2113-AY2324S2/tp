@@ -1,8 +1,6 @@
 package workouts;
 
-import utility.CustomExceptions;
-import utility.UiConstant;
-import utility.Parser;
+import utility.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class Gym extends Workout{
             GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
-            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_GYM_INPUT);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_GYM_INPUT);
         }
     }
 
@@ -59,7 +57,7 @@ public class Gym extends Workout{
     }
     public GymStation getStationByIndex(int index) throws CustomExceptions.OutOfBounds{
         if (index >= stations.size() || index < 0) {
-            throw new CustomExceptions.OutOfBounds(UiConstant.INVALID_GYM_STATION_INDEX);
+            throw new CustomExceptions.OutOfBounds(WorkoutConstant.INVALID_GYM_STATION_INDEX);
         }
         return stations.get(index);
     }
@@ -76,10 +74,10 @@ public class Gym extends Workout{
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
-        String exerciseName = validatedInputs[UiConstant.INDEX_OF_STATION_NAME];
-        int weights = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_WEIGHTS]);
-        int numberOfSets = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_SETS]);
-        int repetition = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_REPS]);
+        String exerciseName = validatedInputs[WorkoutConstant.INDEX_OF_STATION_NAME];
+        int weights = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_WEIGHTS]);
+        int numberOfSets = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_SETS]);
+        int repetition = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_REPS]);
         gym.addStation(exerciseName, weights, numberOfSets, repetition);
     }
 
@@ -95,26 +93,26 @@ public class Gym extends Workout{
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
-        String exerciseName = inputs[UiConstant.INDEX_OF_STATION_NAME].trim();
-        String sets = inputs[UiConstant.INDEX_OF_STATION_SETS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
-        String reps = inputs[UiConstant.INDEX_OF_STATION_REPS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
-        String weights = inputs[UiConstant.INDEX_OF_STATION_WEIGHTS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String exerciseName = inputs[WorkoutConstant.INDEX_OF_STATION_NAME].trim();
+        String sets = inputs[WorkoutConstant.INDEX_OF_STATION_SETS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String reps = inputs[WorkoutConstant.INDEX_OF_STATION_REPS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String weights = inputs[WorkoutConstant.INDEX_OF_STATION_WEIGHTS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
 
 
 
         if (exerciseName.isBlank() || sets.isBlank() || reps.isBlank() || weights.isBlank()) {
-            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_GYM_STATION);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.BLANK_INPUT_FOR_GYM_STATION);
         }
         try {
             int setInt = Integer.parseInt(sets);
             int repInt = Integer.parseInt(reps);
             int weightInt = Integer.parseInt(weights);
-            assert setInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
-            assert repInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
-            assert weightInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+            assert setInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert repInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert weightInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
 
         } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput(UiConstant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
         }
 
 
