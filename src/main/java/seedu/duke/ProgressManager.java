@@ -14,8 +14,9 @@ public class ProgressManager {
         this.sessionResults = sessionResults;
     }
 
-    public void clearProgress() {
+    public ResultsList clearProgress() {
         logger.log(Level.INFO, "Clearing session progress.");
         sessionResults.clearResults();
+        return sessionResults;
     }
 }
