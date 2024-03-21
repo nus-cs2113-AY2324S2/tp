@@ -45,12 +45,12 @@ public class CalorieListTest {
         CalorieList calorieList = new CalorieList();
         calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 1");
+        calorieList.deleteEntry("calories delete 1");
         assertEquals(initialSize - 1, calorieList.getSize());
         calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         calorieList.addEntry("calories in Eat c/200 date/2024-03-14");
         initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 2");
+        calorieList.deleteEntry("calories delete 2");
         assertEquals(initialSize - 1, calorieList.getSize());
     }
 
@@ -59,8 +59,8 @@ public class CalorieListTest {
         CalorieList calorieList = new CalorieList();
         calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 2"); // Index out of bounds
-        calorieList.deleteEntry("delete calories -1");
+        calorieList.deleteEntry("calories delete 2"); // Index out of bounds
+        calorieList.deleteEntry("calories delete -1");
         assertEquals(initialSize, calorieList.getSize());
     }
 
