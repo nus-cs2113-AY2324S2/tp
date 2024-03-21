@@ -9,6 +9,7 @@ import static seedu.duke.ui.Ui.printGreeting;
 import seedu.duke.command.Command;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
+import seedu.duke.ui.Ui;
 
 public class FAP {
 
@@ -30,12 +31,12 @@ public class FAP {
     }
 
     private static void runApplication() {
-        Scanner in = new Scanner(System.in);
+        Ui ui = new Ui();
         boolean continueRunning = true;
 
         while (continueRunning) {
             try {
-                String userInput = in.nextLine().trim();
+                String userInput = ui.getUserCommand();
                 LOGGER.log(Level.INFO, "User input: " + userInput);
                 Command command = Parser.getCommand(userInput);
                 command.execute(userInput);
