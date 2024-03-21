@@ -1,5 +1,7 @@
 package seedu.duke.modules;
 
+import seedu.duke.exceptions.GpaException;
+import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
@@ -75,12 +77,17 @@ public class ModuleList {
         try{
             Module toChange = getModule(moduleCode);
             toChange.setModuleGrade(grade);
+            System.out.println("Grade for " + moduleCode + " updated to " + grade);
+            assert toChange.getModuleGrade().equals(grade) : "Grade is not updated successfully";
+
         } catch (ModuleNotFoundException e){
             System.out.println("Module not found in either list");
+        } catch (ModuleException e){
+            System.out.println(e.getMessage());
         }
     }
 
-    public double tallyGPA() {
+    public double tallyGPA() throws GpaException {
         int totalMC = 0;
         double sumOfGPA = 0;
         for (Module module : takenModuleList) {
@@ -90,6 +97,9 @@ public class ModuleList {
             }
             totalMC += module.getModuleMC();
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
+        }
+        if(sumOfGPA == 0) {
+            throw new GpaException("No countable grades present to tally.");
         }
         return sumOfGPA/(double)totalMC;
     }

@@ -1,16 +1,18 @@
 package seedu.duke.modules;
 
+import seedu.duke.exceptions.ModuleException;
+
 public class Module {
     private String moduleCode;
     private String moduleGrade;
     private int moduleMC;
-    private boolean moduleStatus;
+    private boolean moduleTaken;
     private int moduleDate;
 
-    public Module(String moduleCode, int moduleMC, boolean moduleStatus, int moduleDate) {
+    public Module(String moduleCode, int moduleMC, boolean moduleTaken, int moduleDate) {
         this.moduleCode = moduleCode;
         this.moduleMC = moduleMC;
-        this.moduleStatus = moduleStatus;
+        this.moduleTaken = moduleTaken;
         this.moduleDate = moduleDate;
         this.moduleGrade = null;
     }
@@ -30,10 +32,13 @@ public class Module {
         return moduleGrade;
     }
 
-    public void setModuleGrade(String moduleGrade) {
+    public void setModuleGrade(String moduleGrade) throws ModuleException {
 
-        if (moduleGrade != null && !moduleGrade.matches("A\\+|A|A-|B\\+|B|B-|C\\+|C|D\\+|D|F")) {
+        if (moduleGrade != null && !moduleGrade.matches("A\\+|A|A-|B\\+|B|B-|C\\+|C|D\\+|D|F|CS|CU")) {
             throw new IllegalArgumentException("Invalid module grade.");
+        }
+        if (!moduleTaken) {
+            throw new ModuleException("Module needs to be taken before its grade can be updated.");
         }
         this.moduleGrade = moduleGrade;
     }
@@ -50,11 +55,11 @@ public class Module {
     }
 
     public boolean getModuleStatus() {
-        return moduleStatus;
+        return moduleTaken;
     }
 
-    public void setModuleStatus(boolean moduleStatus) {
-        this.moduleStatus = moduleStatus;
+    public void setModuleStatus(boolean moduleTaken) {
+        this.moduleTaken = moduleTaken;
     }
 
     public int getModuleDate() {
