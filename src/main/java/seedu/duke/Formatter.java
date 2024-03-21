@@ -76,7 +76,6 @@ public class Formatter {
             System.out.println("  \\         \\         \\         \\");
             System.out.println("   \\         \\         \\         \\");
             System.out.println("no goal :((((");
-
         }
     }
     /**
