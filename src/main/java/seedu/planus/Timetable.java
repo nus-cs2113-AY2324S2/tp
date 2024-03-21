@@ -1,8 +1,10 @@
 package seedu.planus;
 
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class Timetable {
+    private static Logger logger = Logger.getLogger("myLogger");
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
 
@@ -24,10 +26,12 @@ public class Timetable {
      */
     public void addCourse(Course course) throws Exception {
         if (course.getTerm() < 1 || course.getTerm() > TERM_PER_YEAR) {
-            throw new Exception("Term is not from 1 to 4");
+            logger.log(Level.WARNING, course.toString() + ": Term provided is not from 1 to 4");
+            throw new Exception("Term provided is not from 1 to 4");
         }
         if (course.getYear() < 1 || course.getYear() > MAX_CANDIDATURE_YEAR) {
-            throw new Exception("Year is not from 1 to 6");
+            logger.log(Level.WARNING, course.toString() + ": Year provided is not from 1 to 6");
+            throw new Exception("Year provided is not from 1 to 6");
         }
 
         boolean hasYearAndTerm = false;
