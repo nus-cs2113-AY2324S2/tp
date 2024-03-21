@@ -17,6 +17,7 @@ public class Results {
     public void calculateScore() {
         int scorePercentage = (int) ((double) numberOfCorrectAnswers / (double) totalNumberOfQuestions *
                 HUNDRED_PERCENT);
+        assert scorePercentage >= 0;
         score = numberOfCorrectAnswers + "/" + totalNumberOfQuestions + " (" + scorePercentage + "%)";
     }
 

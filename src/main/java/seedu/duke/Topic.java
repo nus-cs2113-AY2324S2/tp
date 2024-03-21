@@ -1,10 +1,12 @@
 package seedu.duke;
 
 public class Topic {
+    protected QuestionsList chosenQuestionsList;
     protected String topicName;
     protected boolean hasAttempted;
 
-    public Topic(String topicName, boolean hasAttempted){
+    public Topic(QuestionsList chosenQuestionsList, String topicName, boolean hasAttempted){
+        this.chosenQuestionsList = chosenQuestionsList;
         this.topicName = topicName;
         this.hasAttempted = hasAttempted;
     }

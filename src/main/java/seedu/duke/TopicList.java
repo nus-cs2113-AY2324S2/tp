@@ -2,7 +2,6 @@ package seedu.duke;
 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TopicList {
     private ArrayList<Topic> topicList;
