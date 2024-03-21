@@ -28,8 +28,8 @@ public class Workout extends Activity {
         for (ListIterator<Exercise> it = exerciseList.listIterator(); it.hasNext(); ) {
             Activity currentExercise = it.next();
             result.append("\t".repeat(numTabs + 1));
-            result.append(String.format("%d. %s" + System.lineSeparator(),
-                        it.nextIndex(), currentExercise.toString()));
+            result.append(String.format("%d. %s%s",
+                        it.nextIndex(), currentExercise.toString(), System.lineSeparator()));
         }
         return result.toString();
     }

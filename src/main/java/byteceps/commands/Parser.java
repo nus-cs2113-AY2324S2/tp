@@ -17,14 +17,17 @@ public class Parser {
         additionalArguments = new HashMap<>();
     }
 
+    //@@author pqienso
     public void parseInput(String line) {
         // flush the old input
         flush();
 
+        //@@author joshualeejunyi
         assert command.isEmpty() : "Command should be empty after flush";
         assert commandAction == null : "CommandAction should be null after flush";
         assert additionalArguments.isEmpty() : "AdditionalArguments should be empty after flush";
 
+        //@@author pqienso
         int indexOfFirstSlash = line.indexOf('/');
 
         // input does not have parameters
@@ -70,6 +73,7 @@ public class Parser {
         return additionalArguments.get(key);
     }
 
+    //@@author pqienso
     @Override
     public String toString() {
         return "COMMAND: " + System.lineSeparator() + command + System.lineSeparator() +
