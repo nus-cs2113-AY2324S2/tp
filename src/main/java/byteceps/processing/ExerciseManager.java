@@ -48,7 +48,7 @@ public class ExerciseManager extends ActivityManager {
         ));
     }
 
-    private void executeDeleteAction(Parser parser) throws Exceptions.ActivityDoesNotExists {
+    private void executeDeleteAction(Parser parser) throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
         assert parser.getAction().equals("delete") : "Action must be delete";
         Exercise retrievedExercise;
         retrievedExercise = retrieveExercise(parser);
