@@ -2,17 +2,24 @@ package seedu.lifetrack.calories.calorielist;
 
 import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
 
-import seedu.lifetrack.calories.activity.Activity;
-import seedu.lifetrack.calories.Calorie;
+import static seedu.lifetrack.system.exceptions.ErrorMessages.printIndexOutOfBoundsError;
+import static seedu.lifetrack.system.exceptions.ErrorMessages.printNumberFormatError;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
+import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
+import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
+import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
+import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
+
 import seedu.lifetrack.system.exceptions.InvalidInputException;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.ArrayList;
 
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int SIZE_OF_DELETE = 7;
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+    private final int SIZE_OF_DELETE = 16;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -29,8 +36,9 @@ public class CalorieList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
+            Entry toDelete = calorieArrayList.get(index-1);
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
-            System.out.println("Successfully delete the calorie record.");
+            successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
             logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
                     "within the size of the list.", e);
@@ -51,10 +59,12 @@ public class CalorieList {
      * @param input the input string containing date, time, activity, and calorie count
      */
     public void addEntry(String input) {
+        assert (input.startsWith("calories in") || input.startsWith("calories out")) : "ensures that input is correct";
         logr.setLevel(Level.WARNING);
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
+            printNewCalorieEntry(newEntry);
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
         }
@@ -66,19 +76,12 @@ public class CalorieList {
      * Otherwise, it prints each entry's activity description and calorie count.
      */
     public void printCalorieList() {
-        logr.setLevel(Level.WARNING);
         if (calorieArrayList.isEmpty()) {
-            logr.log(Level.INFO,"Your caloric list is empty.");
+            emptyListMessage();
         } else {
-            System.out.println("Caloric List:");
+            calorieListHeader();
             for (int i = 0; i < calorieArrayList.size(); i++) {
-                Entry entry = calorieArrayList.get(i);
-                Activity activity = entry.getActivity();
-                Calorie calorie = entry.getCalorie();
-                logr.log(Level.INFO,(i + 1) + ". Activity: " + activity.getDescription()
-                        + ", Calories: " + calorie.getCalories());
-                System.out.println((i + 1) + ". Activity: " + activity.getDescription()
-                        + ", Calories: " + calorie.getCalories());
+                System.out.println("\t " + (i + 1) + ". " + calorieArrayList.get(i).toString());
             }
         }
     }
