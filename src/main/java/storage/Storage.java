@@ -14,30 +14,32 @@ import java.util.Map;
 
 public class Storage {
 
-    private static final Path FILE_PATH = Path.of("./save/tasks.txt");
+    public static final Path FILE_PATH = Path.of("./save/tasks.txt");
 
     /**
      * Creates directory and tasks.txt if it does not exist
      *
+     * @param path File Path of tests.txt file
      * @throws IOException If an I/O exception occurs during file handling
      */
-    public static void createNewFile() throws IOException {
-        if (!Files.isDirectory(FILE_PATH.getParent())) {
+    public static void createNewFile(Path path) throws IOException {
+        if (!Files.isDirectory(path.getParent())) {
             //  System.out.println("Directory not found, creating new one");
-            Files.createDirectories(FILE_PATH.getParent());
+            Files.createDirectories(path.getParent());
         }
-        if (!Files.exists(FILE_PATH)) {
-            Files.createFile(FILE_PATH);
+        if (!Files.exists(path)) {
+            Files.createFile(path);
         }
     }
 
     /**
      * Reads tasks in hashmap and writes it in formatted form to tests.txt
      *
-     * @param tasks
+     * @param tasks Hashmap of tasks
+     * @param path File Path of tests.txt file
      */
-    public static void saveTasksToFile(Map<LocalDate, List<String>> tasks) {
-        try (FileWriter writer = new FileWriter(FILE_PATH.toFile())) {
+    public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
+        try (FileWriter writer = new FileWriter(path.toFile())) {
             for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
                 LocalDate date = entry.getKey();
                 List<String> taskList = entry.getValue();
@@ -53,11 +55,12 @@ public class Storage {
     /**
      * Loads tasks from test.txt to hashmap
      *
+     * @param path File Path of tests.txt file
      * @return tasks hashmap of tasks read from test.txt
      */
-    public static Map<LocalDate, List<String>> loadTasksFromFile() {
+    public static Map<LocalDate, List<String>> loadTasksFromFile(Path path) {
         Map<LocalDate, List<String>> tasks = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH.toFile()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");

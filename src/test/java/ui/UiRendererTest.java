@@ -15,7 +15,7 @@ public class UiRendererTest {
     
     public static List<String> tasks = List.of("task1", "task2", "task3", "task4");
     public static List<String> emptyTaskList = List.of();    
-    private static final int SPACE_COUNT = 15;
+    private static final int SPACE_COUNT = 10;
     private static final String VERTICAL_DIVIDER = "|";
     private static final String TASK_DISPLAY_FORMAT = VERTICAL_DIVIDER + " %-" + SPACE_COUNT + "." + SPACE_COUNT + "s ";
     private static final String EMPTY_TASK_DISPLAY_FORMAT = VERTICAL_DIVIDER + " ".repeat(SPACE_COUNT+1) + " ";

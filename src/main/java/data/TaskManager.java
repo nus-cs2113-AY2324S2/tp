@@ -1,5 +1,6 @@
 package data;
 
+import storage.Storage;
 import time.WeekView;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+
 
 import static data.TaskManagerException.checkIfDateHasTasks;
 import static data.TaskManagerException.checkIfDateInCurrentWeek;
@@ -78,13 +80,14 @@ public class TaskManager {
 
     /**
      * Adds a task from user input along with the date.
+     *
      * @param scanner Scanner object to get user input.
      * @param weekView WeekView object to validate the date.
      * @param inMonthView A boolean indicating whether the view is in month view or not.
      * @throws TaskManagerException If there is an error in managing tasks.
      */
     public static void addManager(Scanner scanner, WeekView weekView, boolean inMonthView)
-            throws TaskManagerException {
+            throws TaskManagerException, DateTimeParseException {
         System.out.println("Enter the date for the task (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
@@ -98,23 +101,29 @@ public class TaskManager {
         String task = scanner.nextLine().trim();
 
         addTask(date, task);
-        saveTasksToFile(tasks); // Updates tasks from hashmap into tasks.txt file
+        saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
         System.out.println("Task added.");
     }
 
     /**
-     * Updates a task from user input along with the date.
-     * @param scanner Scanner object to get user input.
-     * @param weekView WeekView object to validate the date.
-     * @param taskManager TaskManager object to manage tasks.
-     * @throws TaskManagerException If there is an error in managing tasks.
+     * Prompts user for updated task description
+     *
+     * @param scanner User input
+     * @param weekView Current week being viewed
+     * @param inMonthView Whether month is being viewed
+     * @throws TaskManagerException Throws exception when not in correct week/month view
      */
-    public static void updateManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
-            throws TaskManagerException {
+    public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
+            throws TaskManagerException, DateTimeParseException {
         System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
-        checkIfDateInCurrentWeek(date, weekView);
+
+        if (inMonthView) {
+            checkIfDateInCurrentMonth(date);
+        } else {
+            checkIfDateInCurrentWeek(date, weekView);
+        }
 
         listTasksAtDate(taskManager, date, "Enter the task number of the task you wish to update:");
 
@@ -123,12 +132,13 @@ public class TaskManager {
 
         try {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
+            assert taskNumber != 0 : "Task Number is invalid!";
 
             System.out.println("Enter the updated task description:");
             updatedDescription = scanner.nextLine().trim();
 
             updateTask(date, taskNumber - 1, updatedDescription);
-            saveTasksToFile(tasks); // Update tasks.txt file
+            saveTasksToFile(tasks,Storage.FILE_PATH); //Update tasks.txt file
             System.out.println("Task updated.");
         } catch (NumberFormatException e) {
             System.out.println("Task number should be an integer value. Please try again.");
@@ -152,6 +162,14 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Lists task of the input date
+     *
+     * @param taskManager Hashmap of tasks
+     * @param date Date that's prompted by user
+     * @param message Message to be prompted to the user
+     * @throws TaskManagerException Throws exception when not in correct week/month view
+     */
     private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message)
             throws TaskManagerException {
         List<String> dayTasks = taskManager.getTasksForDate(date);
@@ -164,20 +182,24 @@ public class TaskManager {
     }
 
     /**
-     * Deletes a task based on user input.
-     * @param scanner Scanner object to get user input.
-     * @param weekView WeekView object to validate the date.
-     * @param taskManager TaskManager object to manage tasks.
-     * @throws DateTimeParseException If there is an error parsing the date.
-     * @throws TaskManagerException If there is an error in managing tasks.
+     * Prompts user for task description and deletes task from hashmap and tasks.txt file
+     *
+     * @param scanner User input
+     * @param weekView Current week being viewed
+     * @param inMonthView Whether month is being viewed
+     * @throws TaskManagerException Throws exception when not in correct week/month view
      */
-    public static void deleteManager(Scanner scanner, WeekView weekView, TaskManager taskManager)
+    public static void deleteManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager)
             throws DateTimeParseException, TaskManagerException {
 
         System.out.println("Enter the date for the task to delete (dd/MM/yyyy):");
         LocalDate date = parseInputDate(scanner);
 
-        checkIfDateInCurrentWeek(date, weekView);
+        if (inMonthView) {
+            checkIfDateInCurrentMonth(date);
+        } else {
+            checkIfDateInCurrentWeek(date, weekView);
+        }
 
         listTasksAtDate(taskManager, date, "Enter the task number to delete:");
 
@@ -187,7 +209,7 @@ public class TaskManager {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
             taskManager.deleteTask(date, taskNumber - 1);
             System.out.println("Task deleted.");
-            saveTasksToFile(tasks); // Update tasks.txt file
+            saveTasksToFile(tasks, Storage.FILE_PATH); //Update tasks.txt file
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number. Please try again.");
         } catch (IndexOutOfBoundsException e) {
@@ -196,6 +218,14 @@ public class TaskManager {
     }
 
     // to abstract as Parser/UI function
+
+    /**
+     * Parses user input into date time format
+     *
+     * @param scanner User Input
+     * @return Formatted date time from user input
+     * @throws DateTimeParseException Throws exception is user input is not in correct format
+     */
     private static LocalDate parseInputDate(Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

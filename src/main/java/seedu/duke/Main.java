@@ -7,6 +7,7 @@ import data.TaskManager;
 import data.TaskManagerException;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,8 +33,9 @@ public class Main {
         boolean printWeek = true; // Flag to control printing of the week view
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
-        createNewFile(); //Creates directory and tasks.txt file if it does not exist
-        Map<LocalDate, List<String>> tasksFromFile = Storage.loadTasksFromFile(); //Reads tasks from txt file
+        createNewFile(Storage.FILE_PATH); //Creates directory and tasks.txt file if it does not exist
+        Map<LocalDate, List<String>> tasksFromFile = 
+                Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
         while (true) {
@@ -45,7 +47,8 @@ public class Main {
                 }
             }
             printWeek = true; // Reset flag for the next iteration
-            System.out.println("Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, " +
+            System.out.println("Enter 'next' for next week, 'prev' for previous week, " +
+                    "'add' to add a task, " +
                     "'update' to edit a task, " +
                     "'delete' to delete a task, " + 
                     "'month' to display the month view, " +
@@ -69,22 +72,22 @@ public class Main {
                 break;
             case "update":
                 try {
-                    updateManager(scanner, weekView, taskManager);
-                } catch (TaskManagerException e) {
+                    updateManager(scanner, weekView, inMonthView, taskManager);
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "add":
                 try {
                     addManager(scanner, weekView, inMonthView);
-                } catch (TaskManagerException e) {
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "delete":
                 try {
-                    deleteManager(scanner, weekView, taskManager);
-                } catch (TaskManagerException e) {
+                    deleteManager(scanner, weekView, inMonthView, taskManager);
+                } catch (TaskManagerException | DateTimeParseException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
