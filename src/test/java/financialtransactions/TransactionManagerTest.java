@@ -18,6 +18,6 @@ public class TransactionManagerTest {
         managerTest.addTransaction(shopping);
         
         assertEquals("Salary payment|400.00|May 23 2022 07:00PM|INCOME\n" +
-                "Shopping|-200.00|May 23 2022 08:00PM|SHOPPING\n", managerTest.toSave());
+                "Shopping|-218.00|May 23 2022 08:00PM|SHOPPING\n", managerTest.toSave());
     }
 }

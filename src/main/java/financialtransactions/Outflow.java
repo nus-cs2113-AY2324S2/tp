@@ -1,7 +1,7 @@
 package financialtransactions;
 
 public class Outflow extends Transaction<Outflow.Category> {
-    private static final double TAX_AMOUNT = 0.09;
+    private static final double TAX_AMOUNT = 1.09;
     public enum Category {
         RENT, DEBT, SHOPPING, TREAT, EDUCATION, OTHER
     }
