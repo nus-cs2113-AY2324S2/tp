@@ -18,10 +18,10 @@ public enum CommandType {
 
     public static CommandType analyseInput(String userInput) throws CommandInputException {
         for (CommandType commandType : CommandType.values()) {
-            if (commandType.command.equals(userInput)) {
+            if (commandType.command.equals(userInput.toLowerCase().trim())) {
                 return commandType;
             }
         }
-        throw new CommandInputException("Invalid command, please try again!");
+        throw new CommandInputException("Invalid command, please try again!\n");
     }
 }

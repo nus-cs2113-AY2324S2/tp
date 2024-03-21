@@ -9,9 +9,11 @@ import player.PlayerProfile;
 import ui.Parser;
 import ui.ResponseManager;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EconoCraftLogic {
+    private static final Scanner userInput = new Scanner(System.in);
     private final PlayerProfile playerProfile;
 
     private EconoCraftLogic(PlayerProfile playerProfile) {
@@ -20,10 +22,22 @@ public class EconoCraftLogic {
 
     public static EconoCraftLogic initializeGame() {
         ResponseManager.printGameInit();
-        String playerName = getName();
+        String playerName = "";
+        String jobType = "";
+        try {
+            playerName = getName();
+        } catch (NoSuchElementException e) {
+            ResponseManager.printGoodbye();
+            System.exit(0);
+        }
 
         ResponseManager.printJobSelect();
-        String jobType = getJob();
+        try {
+            jobType = getJob();
+        } catch (NoSuchElementException e) {
+            ResponseManager.printGoodbye();
+            System.exit(0);
+        }
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
@@ -32,11 +46,10 @@ public class EconoCraftLogic {
     }
 
     private static String getJob() {
-        Scanner input = new Scanner(System.in);
         String jobType = "";
         while (jobType.isEmpty()) {
             try {
-                jobType = Parser.parseCareer(input.nextLine());
+                jobType = Parser.parseCareer(userInput.nextLine());
             } catch (JobSelectException e) {
                 ResponseManager.indentPrint(e.getMessage());
             }
@@ -45,11 +58,10 @@ public class EconoCraftLogic {
     }
 
     private static String getName() {
-        Scanner input = new Scanner(System.in);
         String playerName = "";
         while (playerName.isEmpty()) {
             try {
-                playerName = Parser.parseName(input.nextLine());
+                playerName = Parser.parseName(userInput.nextLine());
             } catch (NameInputException e) {
                 ResponseManager.indentPrint(e.getMessage());
             }
@@ -58,13 +70,7 @@ public class EconoCraftLogic {
     }
 
     public void startEcono() {
-        ResponseManager.indentPrint("Enter ur action!" +
-                "work - to work\n" +
-                "rest - to rest\n" +
-                "exercise - to exercise\n" +
-                "status - to check status\n" +
-                "bye - to exit\n");
-        Scanner userInput = new Scanner(System.in);
+        ResponseManager.printHelp();
         boolean exitFlag = false;
 
         while (!exitFlag) {
