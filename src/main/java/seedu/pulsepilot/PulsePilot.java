@@ -1,10 +1,10 @@
-package seedu.duke;
+package seedu.pulsepilot;
 
 import static ui.Handler.initialiseBot;
 import static ui.Handler.processInput;
 import static ui.Handler.terminateBot;
 
-public class Duke {
+public class PulsePilot {
     /**
      * Main entry-point for PulsePilot.
      */

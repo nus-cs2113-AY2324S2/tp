@@ -1,14 +1,20 @@
 package workouts;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class RunTest {
 
+    @AfterEach
+    void cleanup() {
+        WorkoutList.clearWorkoutsAndRun();
+    }
     /**
      * Tests the behaviour of parsing a time string with hours into an integer array.
      */
@@ -18,10 +24,9 @@ class RunTest {
         Run runTest = new Run(testTime, "15.3");
         Integer[] result = runTest.parseTime(testTime);
         Integer[] expected = {1, 59, 10};
-        for (int i = 0; i < Constant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
+        for (int i = 0; i < UiConstant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -33,10 +38,9 @@ class RunTest {
         Run runTest = new Run(testTime, "15.3");
         Integer[] result = runTest.parseTime("50:52");
         Integer[] expected = {50, 52};
-        for (int i = 0; i < Constant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
+        for (int i = 0; i < UiConstant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -57,7 +61,6 @@ class RunTest {
         int result = testRun.calculateTotalSeconds();
         int expected = 3942;
         assertEquals(result, expected);
-        WorkoutList.clearWorkoutsAndRun();
     }
 
     /**
@@ -69,6 +72,27 @@ class RunTest {
         String result = testRun.calculatePace();
         String expected ="7:47/km";
         assertEquals(result, expected);
-        WorkoutList.clearWorkoutsAndRun();
+    }
+
+    /**
+     * Tests the behaviour of the getRun function when a valid Run object has been added.
+     *
+     * @throws CustomExceptions.InvalidInput If there are invalid parameters.
+     */
+    @Test
+    void getRun_validInput_expectCorrectParsing() throws CustomExceptions.InvalidInput {
+        String input = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+        String[] result = Run.getRun(input);
+        assertArrayEquals(new String[]{"run", "10.3", "00:40:10", "15-03-2024"}, result);
+    }
+
+    /**
+     * Tests the behaviour of the getRun function when a Run object is added with missing
+     * parameters.
+     */
+    @Test
+    void getRun_missingParameter_expectException() {
+        String input = "new /e:run /d:10.3";
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Run.getRun(input));
     }
 }
