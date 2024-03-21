@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class ProgressManagerTest {
     ResultsList sessionResults = new ResultsList();
 
-    private static Logger logger = Logger.getLogger("ProgressManagerTestLogger");
+    static private Logger logger = Logger.getLogger("ProgressManagerTestLogger");
 
     void createResultList() {
 

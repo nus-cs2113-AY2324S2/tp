@@ -1,6 +1,7 @@
 package seedu.duke;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 
 public class ProgressManager {
