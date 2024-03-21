@@ -1,6 +1,7 @@
 package newsonthego;
 
 import newsonthego.commands.DailyNewsCommand;
+import newsonthego.commands.infoNewsCommand;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,25 +22,13 @@ public class NewsOnTheGo {
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
      */
     public static void main(String[] args) {
-        logger.log(Level.INFO, "Starting NewsOnTheGo");
-        String logo = "\n" +
-                ",-,-.                 ,---.     ,--,--'.       ,---.      \n" +
-                "` | |   ,-. . , , ,-. |   | ,-. `- |   |-. ,-. |  -'  ,-. \n" +
-                "  | |-. |-' |/|/  `-. |   | | |  , |   | | |-' |  ,-' | | \n" +
-                " ,' `-' `-' ' '   `-' `---' ' '  `-'   ' ' `-' `---|  `-' \n" +
-                "                                                ,-.|      \n" +
-                "                                                `-+'      \n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        UI.initializeUI();
 
         List<NewsArticle> newsArticles = importNewsFromText(FILENAME);
 
         while (true) {
             System.out.println("What do you want from me?");
-            String line = in.nextLine();
+            String line = UI.getInput();
             String command = line.split(" ")[0];
             try {
                 boolean endLoop = processCommand(command, line, newsArticles);
@@ -48,7 +36,7 @@ public class NewsOnTheGo {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                UI.printError(e.getMessage());
             }
         }
 
@@ -85,13 +73,13 @@ public class NewsOnTheGo {
             //checks against current list of topics
             //if topic is recurring, adds article to the current topic list
             //else, a new topic will be added to the list of topics
-            for(NewsTopic t: newsTopics) {
-                if(topic.equalsIgnoreCase(t.getTopicName())){
+            for (NewsTopic t : newsTopics) {
+                if (topic.equalsIgnoreCase(t.getTopicName())) {
                     t.addNewsArticle(newsArticle);
                     topicFound = true;
                 }
             }
-            if(!topicFound) {
+            if (!topicFound) {
                 NewsTopic newsTopic = new NewsTopic(topic, newsArticle);
                 newsTopics.add(newsTopic);
             }
@@ -103,6 +91,9 @@ public class NewsOnTheGo {
     public enum Command {
         DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
     }
+
+    infoNewsCommand infoPrinter = new infoNewsCommand();
+
     private static boolean processCommand(String command, String line, List<NewsArticle> list) {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
@@ -125,7 +116,7 @@ public class NewsOnTheGo {
             sourceNews(line, list);
             break;
         case INFO:
-            infoNews(line,list);
+            infoNewsCommand.printNewsInfo(line, list);
             break;
         case BYE:
             System.out.println("Bye. Hope to see you again soon!");
@@ -143,8 +134,8 @@ public class NewsOnTheGo {
      */
     private static void showTopics() {
         System.out.println("Here are the list of topics for your viewing:");
-        for(NewsTopic topic: newsTopics) {
-            System.out.println(" - " +topic.getTopicName());
+        for (NewsTopic topic : newsTopics) {
+            System.out.println(" - " + topic.getTopicName());
         }
     }
 
@@ -204,21 +195,5 @@ public class NewsOnTheGo {
         System.out.println(list.get(index).getSource());
     }
 
-    /**
-     * Prints the importance, reliability, and bias of a news article based on its index in the list.
-     * @param line The command line containing the index of the news article.
-     * @param list The list of NewsArticle objects containing news articles.
-     */
-    public static void infoNews(String line, List<NewsArticle> list) {
-        String[] split = line.split(" ");
-        int index = Integer.parseInt(split[1]) - 1;
-        if (index >= 0 && index < list.size()) {
-            NewsArticle article = list.get(index);
-            System.out.println("Importance: " + article.getImportance());
-            System.out.println("Reliability: " + article.getReliability());
-            System.out.println("Bias: " + article.getBias());
-        } else {
-            System.out.println("Invalid article index.");
-        }
-    }
+
 }
