@@ -1,5 +1,6 @@
 package byteceps.commands;
 
+import byteceps.errors.Exceptions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void parseInput_validCommand_success() {
+    public void parseInput_validCommand_success() throws Exceptions.InvalidInput {
         Parser testParser = new Parser();
         String validInput = "exercise /add deadlift";
         testParser.parseInput(validInput);

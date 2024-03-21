@@ -47,7 +47,7 @@ public class WorkoutManager extends ActivityManager {
         }
     }
 
-    private void executeInfoAction(Parser parser) throws Exceptions.ActivityDoesNotExists {
+    private void executeInfoAction(Parser parser) throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
         assert parser.getAction().equals("info") : "Action must be info";
         list(parser.getActionParameter());
     }
