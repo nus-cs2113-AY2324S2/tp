@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
 
+    private static Logger logger = Logger.getLogger("Storage");
     public static final Path FILE_PATH = Path.of("./save/tasks.txt");
 
     /**
@@ -48,6 +51,7 @@ public class Storage {
                 assert taskList != null;
                 for (String task : taskList) {
                     writer.write(date + "|" + task + System.lineSeparator());
+                    logger.log(Level.INFO, "task added: " + task);
                 }
             }
         } catch (IOException e) {
@@ -73,7 +77,9 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
+            logger.log(Level.WARNING, "I/O exception occurred");
         }
+        logger.log(Level.INFO, "tasks returned");
         return tasks;
     }
 
