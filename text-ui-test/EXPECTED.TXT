@@ -28,5 +28,5 @@ Sorry, there are no recipes in your recipe book to print.
 Enter command:
 [Command entered: exit]
 -----------------------------
-See you again chef! (｡˃ ᵕ ˂ ) ♨
+See you again chef!
 -----------------------------
