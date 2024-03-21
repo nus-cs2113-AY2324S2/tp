@@ -9,11 +9,11 @@ public class Helper {
         commandList.add(new Command("topic", "Start the round of questions for the chosen " +
                 "topic","topic [TOPIC_INDEX]"));
         commandList.add(new Command("help", "View available commands or check one", "help, help [COMMAND]"));
-        commandList.add(new Command("solution", "View solution to the question", "solution [QUESTION_INDEX]"));
+        commandList.add(new Command("solution", "View solution to the question", "solution [TOPIC_INDEX] [QUESTION_INDEX]"));
         commandList.add(new Command("explain", "View explanation for the solution",
-                "explain [QUESTION_INDEX]"));
+                "explain [TOPIC_INDEX] [QUESTION_INDEX]"));
         commandList.add(new Command("results", "View results for each topic played",
-                "results [details] [RESULTS_INDEX]"));
+                "results [RESULTS_INDEX]"));
         commandList.add(new Command("bye", "Terminate the program", "bye"));
     }
 
