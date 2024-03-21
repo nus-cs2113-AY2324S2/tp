@@ -22,8 +22,7 @@ public class BudgetBuddy {
 
         if (command != null) {
             command.execute();
-        }
-        else {
+        } else {
             System.out.println("Invalid command");
         }
     }
@@ -39,8 +38,7 @@ public class BudgetBuddy {
 
             if (parser.isExitCommand(input)) {
                 isExit = true;
-            }
-            else {
+            } else {
                 handleCommands(input);
             }
         }

@@ -118,27 +118,49 @@ public class SavingList {
     }
 
     public void editSaving(String category, int index, double amount) {
-        // Check if the category exists
+        LOGGER.info(String.format("Attempting to edit saving at index %d with category '%s' " +
+                "and amount %.2f", index, category, amount));
+
+        // Assert that the provided category is not null or empty
+        assert category != null && !category.isEmpty() : "Category cannot be null or empty";
+
+        // Assert that the index is within the valid bounds of the savings list
+        assert index > 0 && index <= savings.size() : "Index is out of bounds";
+
+        // Assert that the amount is non-negative
+        assert amount >= 0 : "Amount cannot be negative";
+
+        // Check if the category exists in the list of categories
         int categoryIndex = categories.indexOf(category);
         if (categoryIndex == -1) {
+            LOGGER.warning("Invalid category: " + category);
             System.out.println("Invalid category.");
             return;
         }
 
         // Check if the index is within valid bounds
         if (index <= 0 || index > savings.size()) {
+            LOGGER.warning(String.format("Invalid index: %d. Valid index range " +
+                    "is 1 to %d.", index, savings.size()));
             System.out.println("Invalid index.");
             return;
         }
 
-        // Retrieve the saving to edit
-        Saving savingToEdit = savings.get(index - 1);
+        try {
+            // Retrieve the saving to edit
+            Saving savingToEdit = savings.get(index - 1);
 
-        // Update the saving details
-        savingToEdit.setCategory(category);
-        savingToEdit.setAmount(amount);
+            // Update the saving details
+            savingToEdit.setCategory(category);
+            savingToEdit.setAmount(amount);
 
-        System.out.println("Saving edited successfully.");
+            LOGGER.info(String.format("Saving at index %d edited successfully. " +
+                    "New details: %s", index, savingToEdit.toString()));
+            System.out.println("Saving edited successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error occurred while editing saving at index " + index, e);
+            System.out.println("An error occurred during saving edition. Please try again.");
+        }
     }
 
     public void reduceSavings(int index, double amount){

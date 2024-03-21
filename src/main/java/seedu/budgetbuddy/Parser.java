@@ -492,7 +492,7 @@ public class Parser {
 
         assert savings != null : "Savings list cannot be null";
         assert input != null : "Input string cannot be null";
-
+        
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
