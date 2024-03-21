@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -20,6 +21,8 @@ public class Results {
     }
 
     public void calculateScore() {
+        LogManager.getLogManager().reset();
+        logger.setLevel(Level.ALL);
         logger.log(Level.INFO, "going to start calculating score");
         int scorePercentage = (int) ((double) numberOfCorrectAnswers / (double) totalNumberOfQuestions *
                 HUNDRED_PERCENT);
