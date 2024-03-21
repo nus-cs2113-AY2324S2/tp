@@ -377,10 +377,7 @@ public class Parser {
     }
 
     private static Command deleteMainTrip(String[] tokens) {
-
         String[] args = {tokens[1]};
         return new DeleteCommand(args);
-
     }
-
 }

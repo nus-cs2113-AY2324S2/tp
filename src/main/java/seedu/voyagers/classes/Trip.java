@@ -57,7 +57,6 @@ public class Trip {
 
     /**
      * Returns the duration of the trip in days.
-     *
      * @return duration of the trip in days
      */
     public int getDuration() {
@@ -97,7 +96,7 @@ public class Trip {
     /**
      * Returns the sub-trips of the current trip.
      *
-     * @return the array with sub-trips of the current trip
+     * @return the list with sub-trips of the current trip
      */
     public ArrayList<Trip> getSubTrips() {
         return subTrips;

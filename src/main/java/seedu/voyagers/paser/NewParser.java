@@ -150,8 +150,8 @@ public class NewParser {
         String line2 = "setname trip1 /n trip2";
         String[] values = null;
         try{
-            values = parseArgs(line2, ParserDefinitions.SETNAME, true);}
-        catch (IllegalArgumentException e){
+            values = parseArgs(line2, ParserDefinitions.SETNAME, true);
+        } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
         for (String value : values) {
