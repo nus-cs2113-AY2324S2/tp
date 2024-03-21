@@ -12,12 +12,12 @@ public class DeleteParser {
             return new InvalidCommand("Delete index not specified");
         }
         try {
-            indexToDelete = Integer.parseInt(userInputAsArray[1]);
+            indexToDelete = Integer.parseInt(userInputAsArray[1]) - 1;
         } catch (NumberFormatException e) {
             return new InvalidCommand("Delete index cannot be non-integer");
         }
         if (indexToDelete < 0) {
-            return new InvalidCommand("Delete index cannot be negative integer");
+            return new InvalidCommand("Delete index must be one or greater");
         }
         return new DeleteCommand(indexToDelete);
     }
