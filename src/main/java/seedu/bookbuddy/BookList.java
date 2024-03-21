@@ -42,7 +42,7 @@ public class BookList {
         }
         assert books.get(index - 1) != null : "Retrieved book should not be null";
         assert books.get(index - 1) instanceof Book : "Object at index should be an instance of Book";
-        return books.get(index);
+        return books.get(index - 1);
     }
 
     /**

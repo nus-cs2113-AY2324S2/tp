@@ -57,7 +57,7 @@ class BookListTest {
         bookList.addBook("Harry Potter");
         bookList.addBook("Geronimo");
         bookList.addBook("Cradle");
-        assertEquals("[U] Cradle", bookList.getBook(2).toString());
+        assertEquals("[U] Cradle", bookList.getBook(3).toString());
     }
 
     @Test
