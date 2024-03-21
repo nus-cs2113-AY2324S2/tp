@@ -5,33 +5,40 @@ import seedu.duke.Formatter;
 import seedu.duke.Parser;
 import seedu.duke.SyntaxAnalyser;
 
-import seedu.duke.exception.ProcessInputException;
-import seedu.duke.exception.ArgumentMismatchException;
-import seedu.duke.exception.BadTokenException;
-import seedu.duke.exception.IllegalCommandException;
-
+import seedu.duke.ProcessInputException;
+import seedu.duke.ArgumentMismatchException;
+import seedu.duke.BadTokenException;
+import seedu.duke.IllegalCommandException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+
+    private static final Scanner IN = new Scanner(System.in);
+    private static boolean isRunning = true;
+//    static ArrayList<Task> tasks = new ArrayList<Task>();
     private static String userInput;
     private static Parser userCommandReader;
-    private static final Scanner IN = new Scanner(System.in);
+    public static int roundCount = 0;
 
-    public void printGreet(){
-        print("WELCOME BACK");
+//    public String readUserInput(){
+//        return IN.nextLine();
+//    }
 
+
+    /**
+     * Reads user input and stores it
+     */
+    public static void beginListening() {
+        userInput = IN.nextLine();
     }
 
-    public void printBye(){
-        print("See you next time on court.");
-    }
-    private static void print(String thingToPrint){
-        System.out.println("    " + "-----NUSFC24-----");
-        System.out.println("    " + thingToPrint);
-        System.out.println("    " + "-----------------");
-    }
-
-    public void processInput() throws ProcessInputException {
+    /**
+     * Parses read input into its parameters
+     *
+     * @throws ProcessInputException If command read from input is invalid
+     */
+    public static void processInput() throws ProcessInputException {
         try {
             userCommandReader = new Parser(userInput);
         } catch (IllegalCommandException e) {
@@ -47,7 +54,36 @@ public class Ui {
             throw new ProcessInputException();
         }
     }
-    public void userInputCatcher() {
-        userInput = IN.nextLine();
+
+    /**
+     * Runs command based on parsed input
+     */
+    public static void executeCommand() {
+        CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
+        int userSelectedIndex;
+
+        switch (selectedCommand) {
+        case BYE:
+            CommandList.executeBye();
+            break;
+        case SHOOT:
+            CommandList.executeShoot(userCommandReader);
+            roundCount++;
+            break;
+        default:
+            Formatter.printErrorUnknown();
+        }
+    }
+
+    private static void print(String thingToPrint){
+        System.out.println("    " + "-----NUSFC24-----");
+        System.out.println("    " + thingToPrint);
+        System.out.println("    " + "-----------------");
+    }
+    public static void setIsRunning(boolean runState) {
+        isRunning = runState;
+    }
+    public static boolean getIsRunning() {
+        return isRunning;
     }
 }

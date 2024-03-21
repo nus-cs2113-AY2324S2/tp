@@ -1,9 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exception.ArgumentMismatchException;
-import seedu.duke.exception.BadTokenException;
-import seedu.duke.exception.IllegalCommandException;
-
 public class Parser {
     private String COMMAND_NAME;
     private String[] argumentTokens = {};

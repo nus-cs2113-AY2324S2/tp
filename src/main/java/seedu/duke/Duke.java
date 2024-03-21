@@ -1,13 +1,17 @@
 package seedu.duke;
 
-import seedu.duke.exception.ProcessInputException;
 import seedu.duke.ui.Ui;
+import seedu.duke.ai.Ai;
 
 public class Duke {
-    private static Ui u1 = new Ui();
-    private static Parser userCommandReader;
-    private static boolean isTerminate = true;
+    private final Ai ai;
+    private final Ui u1;
 
+
+    public Duke() {
+        this.ai = new Ai();
+        this.u1 = new Ui();
+    }
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -18,38 +22,27 @@ public class Duke {
     }
 
     private void runLogic() {
-        u1.printGreet();
-        while (isTerminate) {
-            Formatter.printGoalBeforeShot(1);
-            processUserInput();
-            executeCommand();
+//        u1.printGreet();
+        Formatter.printWelcomeMsg();
+
+        while (Ui.getIsRunning()) {
+            Formatter.printGoalBeforeShot(Ui.roundCount);
+            try {
+                Ui.beginListening();
+                Ui.processInput();
+                Ui.executeCommand();
+            } catch (ProcessInputException e) {
+                Formatter.printErrorExecutionFail();
+            }
+
         }
-        u1.printBye();
+//        u1.printBye();
     }
 
-    private static void executeCommand() {
-        CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
 
-        switch (selectedCommand) {
-        case BYE:
-            u1.printBye();
-            isTerminate = false;
-            break;
-        case SHOOT:
-            CommandList.executeShoot(userCommandReader);
-            break;
-        default:
-            Formatter.printErrorUnknown();
-        }
-    }
+//    private boolean isTerminate(String userInput){
+//        return !userInput.equalsIgnoreCase("bye");
+//    }
 
-    private void processUserInput(){
-        try {
-            u1.userInputCatcher();
-            u1.processInput();
-            executeCommand();
-        } catch (ProcessInputException e) {
-            Formatter.printErrorExecutionFail();
-        }
-    }
 }
+

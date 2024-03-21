@@ -25,10 +25,10 @@ class UiTest {
         System.setIn(systemIn);
     }
 
-//    @Test
-//    public void readUserInput_returnsCorrectly() {
-//        Ui ui = new Ui();
-//        String userInput = ui.readUserInput();
-//        assertEquals("test input", userInput, "The method should return the input provided by the user.");
-//    }
+    @Test
+    public void readUserInput_returnsCorrectly() {
+        Ui ui = new Ui();
+        String userInput = ui.readUserInput();
+        assertEquals("test input", userInput, "The method should return the input provided by the user.");
+    }
 }

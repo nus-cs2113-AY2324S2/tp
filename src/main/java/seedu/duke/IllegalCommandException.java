@@ -1,4 +1,4 @@
-package seedu.duke.exception;
+package seedu.duke;
 
 public class IllegalCommandException extends Exception {
 }
