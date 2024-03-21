@@ -60,7 +60,7 @@ public final class Ui {
         for (int i = 0; i < products.getSize(); i++ ) {
             assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);
-            printToScreen((i + 1) + ". " + product);
+            System.out.println((i + 1) + ". " + product);
             printToScreen(HORIZONTAL_LINE);
         }
     }
