@@ -65,7 +65,8 @@ public class Parser {
                 break;
             default:
                 LOGGER.log(Level.WARNING, "Sorry but that is not a valid command. Please try again", command);
-                throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again or type: help");
+                throw new UnsupportedCommandException("Sorry but that is not a valid command. " +
+                        "Please try again or type: help");
             }
         } catch (NumberFormatException e) {
             throw new InvalidBookIndexException("Book index must be an integer.");
