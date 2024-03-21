@@ -29,12 +29,12 @@ public class InputValidator {
     public static void validateAddTaskInput(String input) throws InvalidFormatException {
         // Define the regex pattern for the expected format with case-insensitive flag
         String regex = "(?i)^addtask\\s+/on\\s+(\\w+)\\s+/task\\s+(.+?)\\s" +
-                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})(\\s+/flexibility\\s+[fc])$";
+                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})(\\s+/type\\s+[fc])$";
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addTask format. " +
                     "Expected format: addTask /on [day] /task [description] /from [start time] /to [end time] " +
-                    "/flexibility [f/c]");
+                    "/type [f/c]");
         }
     }
 
