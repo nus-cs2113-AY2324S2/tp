@@ -34,6 +34,7 @@ public class Storage {
                     manager.addTransaction(outflow);
                 }
             }
+            sc.close();
         } catch (FileNotFoundException e) {
             createFileDir();
         }
