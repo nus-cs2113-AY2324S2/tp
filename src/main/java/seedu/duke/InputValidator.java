@@ -134,4 +134,18 @@ public class InputValidator {
             throw new NullPointerException("Timetable object is null.");
         }
     }
+
+    public static void validateChangeTaskTiming(String input) throws InvalidFormatException{
+        String prefix = "(?i)^changeTaskTiming\\s+/on\\s+";
+        String dayPattern = "(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
+        String indexPattern = "\\d+";
+        String startPattern = "\\d{1,2}:\\d{2}";
+        String endPattern = "\\d{1,2}:\\d{2}";
+        String suffix = "$";
+        String regex = prefix + dayPattern + "\\s+/index\\s+" + indexPattern + "\\s+/start\\s+" + startPattern + "\\s+/end\\s+" + endPattern + suffix;
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid changeTaskTiming format. " +
+                    "Expected format: changeTaskTiming /on [day] /index [index] /start [new start time] /end [new end time]");
+        }
+    }
 }
