@@ -20,33 +20,50 @@ public class ExerciseManager extends ActivityManager {
 
         switch (parser.getAction()) {
         case "add":
-            newExercise = processAddExercise(parser);
-            add(newExercise);
-            UserInterface.printMessage(String.format(
-                    "Added Exercise: %s", newExercise.getActivityName()
-            ));
+            executeAddAction(parser);
             break;
         case "delete":
-            retrievedExercise = retrieveExercise(parser);
-            delete(retrievedExercise);
-            UserInterface.printMessage(String.format(
-                    "Deleted Exercise: %s", retrievedExercise.getActivityName()
-            ));
+            executeDeleteAction(parser);
             break;
         //@@author LWachtel1
         case "edit":
-            String newExerciseName = processEditExercise(parser);
-            UserInterface.printMessage(String.format(
-                    "Edited Exercise from %s to %s", parser.getActionParameter(), newExerciseName
-            ));
+            executeEditAction(parser);
             break;
         //@@author V4vern
         case "list":
-            list();
+            executeListAction();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
+    }
+
+    private void executeEditAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+        String newExerciseName = processEditExercise(parser);
+        UserInterface.printMessage(String.format(
+                "Edited Exercise from %s to %s", parser.getActionParameter(), newExerciseName
+        ));
+    }
+
+    private void executeDeleteAction(Parser parser) throws Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("delete") : "Action must be delete";
+        Exercise retrievedExercise;
+        retrievedExercise = retrieveExercise(parser);
+        delete(retrievedExercise);
+        UserInterface.printMessage(String.format(
+                "Deleted Exercise: %s", retrievedExercise.getActivityName()
+        ));
+    }
+
+    private void executeAddAction(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
+        assert parser.getAction().equals("add") : "Action must be add";
+        Exercise newExercise;
+        newExercise = processAddExercise(parser);
+        add(newExercise);
+        UserInterface.printMessage(String.format(
+                "Added Exercise: %s", newExercise.getActivityName()
+        ));
     }
 
     //@@author V4vern
