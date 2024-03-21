@@ -1,6 +1,5 @@
 package seedu.bookbuddy;
 
-import exceptions.InvalidBookIndexException;
 import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
 import org.junit.jupiter.api.Test;
