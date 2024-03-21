@@ -49,6 +49,7 @@ public class MainLogic {
                 MainHelpCommand.execute();
                 break;
             case CREATE_ORDER:
+                //TODO: put all this into the method to maintain same level of abstraction
                 //GOTO sub-menu to add/remove menuItems, inputText is passed to detect menu selected
                 Optional<Order> newOrder = MainCreateOrderCommand.execute(input, inputText, menusList);
                 newOrder.ifPresentOrElse(x -> {
@@ -57,6 +58,7 @@ public class MainLogic {
                                         () -> System.out.println("Order not created"));
                 break;
             case VIEW_ORDER:
+                //TODO: put all this into the method to maintain same level of abstraction
                 Optional<Order> checkedOrder = MainViewOrderCommand.execute(ordersList, inputText);
                 checkedOrder.ifPresentOrElse(x -> System.out.println(x.toString()),
                                             () -> System.out.println("Order not found"));
