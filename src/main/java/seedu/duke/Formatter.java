@@ -1,9 +1,15 @@
 package seedu.duke;
 import java.util.logging.Logger;
 public class Formatter {
-    private static final Logger logger = Logger.getLogger(Formatter.class.getName());
     public static final String footballIcon = "⚽";
     public static final String emojiSad = "☹";
+    private static final Logger logger = Logger.getLogger(Formatter.class.getName());
+
+
+    /**
+     * Method to check if the shot resulted in a goal
+     * If shoot direction matches save direction, it's not a goal and the returned value is false.
+     */
 
     /**
      * Appends a newline to a given string and returns the resulting string
@@ -29,6 +35,7 @@ public class Formatter {
     public static void printWelcomeMsg() {
         printWrapper("〰");
         System.out.println("\t Welcome to NUSFC 24 " + footballIcon);
+//        System.out.println("\t What can I do for you?");
         printWrapper("〰");
     }
 
@@ -45,6 +52,7 @@ public class Formatter {
      * Method to check if the shot resulted in a goal
      * If shoot direction matches save direction, it's not a goal and the returned value is false.
      */
+
 
     public static void printGoalBeforeShot(int roundCount) {
         assert roundCount > 0 : "Round count should be greater than zero.";

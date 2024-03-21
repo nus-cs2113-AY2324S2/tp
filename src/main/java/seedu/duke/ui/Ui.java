@@ -5,11 +5,11 @@ import seedu.duke.Formatter;
 import seedu.duke.Parser;
 import seedu.duke.SyntaxAnalyser;
 
-import seedu.duke.exception.ProcessInputException;
-import seedu.duke.exception.ArgumentMismatchException;
-import seedu.duke.exception.BadTokenException;
-import seedu.duke.exception.IllegalCommandException;
-
+import seedu.duke.ProcessInputException;
+import seedu.duke.ArgumentMismatchException;
+import seedu.duke.BadTokenException;
+import seedu.duke.IllegalCommandException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -20,13 +20,18 @@ public class Ui {
     private static Parser userCommandReader;
     public static int roundCount = 0;
 
-
     /**
      * Reads user input and stores it
      */
     public static void beginListening() {
         userInput = IN.nextLine();
     }
+
+    /**
+     * Parses read input into its parameters
+     *
+     * @throws ProcessInputException If command read from input is invalid
+     */
 
     public static void processInput() throws ProcessInputException {
         try {

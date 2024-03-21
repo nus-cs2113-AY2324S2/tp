@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.exception.ProcessInputException;
 import seedu.duke.ui.Ui;
+import seedu.duke.ai.Ai;
 
 public class Duke {
 
@@ -26,3 +26,4 @@ public class Duke {
         }
     }
 }
+

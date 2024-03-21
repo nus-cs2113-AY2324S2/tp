@@ -5,6 +5,8 @@ import seedu.duke.ai.Ai;
 
 public enum CommandList {
     BYE, SHOOT
+//    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+    //insert new user command name here
     ;
 
     /**
@@ -20,6 +22,7 @@ public enum CommandList {
     }
 
     public static void executeShoot(Parser userCommandReader) {
+
         String selectedDirection = userCommandReader.getArgumentTokens()[0];
         int selectedDirectionIndex = Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);

@@ -1,4 +1,4 @@
-package seedu.duke.exception;
+package seedu.duke;
 
 public class ProcessInputException extends Exception {
 }
