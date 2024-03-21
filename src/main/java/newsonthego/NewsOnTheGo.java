@@ -22,13 +22,13 @@ public class NewsOnTheGo {
      * Main entry-point for the java.newsworthiest.NewsOnTheGo application.
      */
     public static void main(String[] args) {
-        UI.initializeUI();
 
+        UI.initializeUI();
         List<NewsArticle> newsArticles = importNewsFromText(FILENAME);
+        Scanner in = new Scanner(System.in);
 
         while (true) {
             System.out.println("What do you want from me?");
-            Scanner in = new Scanner(System.in);
             String line = in.nextLine();
             String command = line.split(" ")[0];
             try {
