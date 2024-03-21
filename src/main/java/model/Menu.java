@@ -60,6 +60,7 @@ public class Menu implements ItemManager {
      */
     @Override
     public boolean remove(String itemID) {
+        assert itemID != null: "itemID of item to be removed should not be null";
         this.menuItemList.removeIf(x -> x.getID().equals(itemID));
         return true;
     }
