@@ -16,13 +16,18 @@ public class ProgressManagerTest {
 
         logger.log(Level.INFO, "Creating dummy session results.");
 
-        final int NUM_OF_RESULTS = 3;
-        Results[] results = new Results[NUM_OF_RESULTS];
+        ResultsList sessionResults = new ResultsList();
+        Results results = new Results();
+        Question questionOne = new Question("Question 1", "Solution 1", "Explanation 1");
+        Question questionTwo = new Question("Question 2", "Solution 2", "Explanation 2");
+        QuestionsList questions = new QuestionsList();
 
-        for(int i = 0; i < NUM_OF_RESULTS; i++) {
-            results[i].increaseNumberOfQuestions();
-            sessionResults.addResults(results[i]);
-        }
+        questions.addQuestion(questionOne);
+        results.increaseNumberOfQuestions();
+        questions.addQuestion(questionTwo);
+        results.increaseNumberOfQuestions();
+
+        sessionResults.addResults(results);
     }
 
 
@@ -34,8 +39,8 @@ public class ProgressManagerTest {
         logger.log(Level.INFO, "Testing progress manager.");
         ProgressManager pm = new ProgressManager(sessionResults);
         sessionResults = pm.clearProgress();
-        assertEquals(0, sessionResults.getNumOfResults());
         int numOfResults = sessionResults.getNumOfResults();
+        assertEquals(0, sessionResults.getNumOfResults());
         assert numOfResults == 0 : "Number of results should be 0.";
     }
 }
