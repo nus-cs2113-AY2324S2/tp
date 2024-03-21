@@ -1,3 +1,8 @@
 Welcome to StockPal!
 Enter a command to begin.
+These products have low quantity! Please top up!
+====================================================================================
+No products with low quantity
+
+
 Exiting program, goodbye!
