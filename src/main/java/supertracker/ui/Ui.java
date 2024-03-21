@@ -10,6 +10,7 @@ public class Ui {
     private static final String WELCOME_MESSAGE = "Hello, welcome to SuperTracker, how may I help you?";
     private static final String FAREWELL_MESSAGE = "Goodbye!";
     private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
+    private static final String FIND_OPENING_MESSAGE = "Here are your found items:";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -105,6 +106,10 @@ public class Ui {
         printIndent(listSize(size));
     }
 
+    public static void findIntro() {
+        printIndent(FIND_OPENING_MESSAGE);
+    }
+
     public static void listItem(Item item, int index, boolean hasQuantity, boolean hasPrice, String firstParam) {
         String stringToPrint = index + ". Name: " + item.getName();
         String quantityString = "    Quantity: " + item.getQuantity();
@@ -128,5 +133,14 @@ public class Ui {
     public static void printError(String errorMessage) {
         printIndent(BASIC_ERROR_MESSAGE);
         printIndent(errorMessage);
+    }
+
+    public static void findItem(Item item, int index) {
+        String stringToPrint = index + ". Name: " + item.getName();
+        String quantityString = "    Quantity: " + item.getQuantity();
+        String priceString = "    Price: " + item.getPriceString();
+
+        stringToPrint += (priceString + quantityString);
+        printIndent(stringToPrint);
     }
 }
