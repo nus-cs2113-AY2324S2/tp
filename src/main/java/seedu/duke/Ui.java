@@ -4,6 +4,7 @@ package seedu.duke;
 import com.bethecoder.ascii_table.ASCIITable;
 import seedu.duke.exceptions.CustomException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -22,7 +23,7 @@ public class Ui {
 
     public void readCommands(
             Ui ui, QuestionsList questionsList, TopicList topicList,
-            QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
+            QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper, AnswerTracker userAnswers
     ) {
         Parser parser = new Parser();
         printLine();
@@ -31,7 +32,8 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults, helper);
+                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults, helper,
+                        userAnswers);
             } catch (CustomException e) {
                 ui.handleException(e);
             }
@@ -58,7 +60,8 @@ public class Ui {
     }
 
     public void printChosenTopic(
-            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList alLResults
+            int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList alLResults,
+            AnswerTracker userAnswers
     ){
         Results topicResults = new Results();
         QuestionsList qnList;
@@ -70,18 +73,22 @@ public class Ui {
         Question questionUnit;
         String[] inputAnswers = new String[numOfQns];
         String answer;
+        ArrayList<String> allAnswers = new ArrayList<>();
+        ArrayList<Boolean> answersCorrectness = new ArrayList<>();
         for (int index = 0; index < numOfQns; index ++){//go through 1 question set
             questionUnit = qnList.getQuestionUnit(index);
             topicResults.increaseNumberOfQuestions();
             System.out.println(questionUnit.getQuestion());
             askForAnswerInput();
             Parser parser = new Parser();
-            Scanner in = new Scanner(System.in);
             answer = in.nextLine();
-            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit, topicResults);
+            parser.handleAnswerInputs(inputAnswers, index, answer, questionUnit, topicResults, answersCorrectness);
+            allAnswers.add(answer);
         }
         topicResults.calculateScore();
         alLResults.addResults(topicResults);
+        userAnswers.addUserAnswers(allAnswers);
+        userAnswers.addUserCorrectness(answersCorrectness);
     }
 
 
@@ -100,25 +107,36 @@ public class Ui {
                 + System.lineSeparator() + allSolutions);
     }
 
-    public void printOneResult(boolean includesQuestions, int topicNum, String score,
-                               QuestionListByTopic questionListByTopic) {
+    public void printOneResult(boolean includesDetails, int topicNum, String score,
+                               QuestionListByTopic questionListByTopic, AnswerTracker userAnswers, int index) {
         System.out.println("Your results for Topic " + (topicNum + 1) + ":\n" + score + "\n");
-        if (includesQuestions) {
-            System.out.println(questionListByTopic.getQuestionSet(topicNum).getAllQuestions());
+        if (includesDetails) {
+            printResultDetails(questionListByTopic, topicNum, index-1, userAnswers);
         }
     }
 
-    public void printAllResults(boolean includesQuestions, ResultsList allResults,
-                                QuestionListByTopic questionListByTopic) {
+    public void printAllResults(boolean includesDetails, ResultsList allResults,
+                                QuestionListByTopic questionListByTopic, AnswerTracker userAnswers) {
         int numberOfResults = allResults.getSizeOfAllResults();
         System.out.println(HEADER_ALL_RESULTS);
         for (int i = 0; i < numberOfResults; i++) {
             int topicNum = allResults.getTopicNum(i);
             System.out.println("Your results for Topic " + (topicNum + 1) + ":\n"
                     + allResults.getSpecifiedResult(i).getScore() + "\n");
-            if (includesQuestions) {
-                System.out.println(questionListByTopic.getQuestionSet(topicNum).getAllQuestions());
+            if (includesDetails) {
+                printResultDetails(questionListByTopic, topicNum, i, userAnswers);
             }
+        }
+    }
+
+    private void printResultDetails(QuestionListByTopic questionListByTopic, int topicNum, int index,
+                                    AnswerTracker userAnswers) {
+        QuestionsList listOfQuestions = questionListByTopic.getQuestionSet(topicNum);
+        for (int i = 0; i < listOfQuestions.getSize(); i++) {
+            Question questionUnit = listOfQuestions.getQuestionUnit(i);
+            boolean isCorrectAnswer = userAnswers.getIsCorrect (i,index);
+            System.out.println(questionUnit.getQuestion() + "\nYou answered:\n" + userAnswers.getUserAnswers(i, index)
+                + "\nYou got it " + ((isCorrectAnswer) ? "right!\n" : "wrong!\n"));
         }
     }
 
