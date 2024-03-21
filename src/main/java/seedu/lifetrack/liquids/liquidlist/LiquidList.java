@@ -1,17 +1,20 @@
 package seedu.lifetrack.liquids.liquidlist;
 
+import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a list of liquid entries.
  * Provides methods to add, delete, and print liquid entries.
  */
 public class LiquidList {
-
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
     private ArrayList<LiquidEntry> liquidArrayList;
     private final int SIZE_OF_DELETE = 15;
 
@@ -44,10 +47,10 @@ public class LiquidList {
             liquidArrayList.remove(index - 1);
             System.out.println("\t Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\t Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.");
+            logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
+                    "within the size of the list.", e);
         } catch (NumberFormatException e) {
-            System.out.println("\t Please enter a valid index!");
+            logr.log(Level.WARNING, "Please enter a valid index!", e);
         }
     }
 
@@ -62,7 +65,7 @@ public class LiquidList {
             liquidArrayList.add(newEntry);
             System.out.println("Beverage has been successfully added");
         } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
