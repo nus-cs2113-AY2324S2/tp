@@ -134,8 +134,8 @@ public class ExpenseList {
         // Assert that the amount is non-negative
         assert amount >= 0 : "Amount cannot be negative";
         
-         // Assert that the description is not null.
-         //(An empty description might be valid in some cases)
+        // Assert that the description is not null.
+        //(An empty description might be valid in some cases)
         assert description != null : "Description cannot be null";
 
         // Check if the category exists in the list of categories
