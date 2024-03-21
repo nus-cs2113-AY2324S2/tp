@@ -46,7 +46,8 @@ public class Parser {
                     index = Integer.parseInt(inputArray[1]);
                     books.deleteBook(index);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 }
@@ -59,7 +60,8 @@ public class Parser {
                     index = Integer.parseInt(inputArray[1]);
                     books.markDoneByIndex(index);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 }
@@ -69,7 +71,8 @@ public class Parser {
                     index = Integer.parseInt(inputArray[1]);
                     books.markUndoneByIndex(index);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 }

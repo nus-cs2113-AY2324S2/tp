@@ -71,7 +71,7 @@ public class ParserTest {
     void parseInvalidRemoveCommandThrowsException() {
         BookList books = new BookList();
         String input = "remove notAnIndex"; // Invalid index provided
-        assertThrows(InvalidBookIndexException.class,
+        assertThrows(NumberFormatException.class,
                 () -> Parser.parseCommand(input, books), "Book index must be an integer.");
     }
 
