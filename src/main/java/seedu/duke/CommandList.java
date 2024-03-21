@@ -17,6 +17,10 @@ public enum CommandList {
         Ui.setIsRunning(false);
     }
     public static boolean goalCheck(int userInput, int AiInput) {
+        assert userInput >= 0 && userInput <= 2 :
+                "Illegal userInput generated!";
+        assert AiInput >= 0 && AiInput <= 2 :
+                "Illegal AiInput generated!";
         return userInput != AiInput;
     }
     public static void executeShoot(Parser userCommandReader){
@@ -26,7 +30,7 @@ public enum CommandList {
         //        void viewgoal (int shoot, boolean goalCheck)
 //        System.out.println("Function");
 
-        String selectedDirection = userCommandReader.getArgumentTokens()[0];
+        String selectedDirection = userCommandReader.getArgumentTokens()[1];
         int selectedDirectionIndex =  Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);
 

@@ -1,8 +1,6 @@
 package seedu.duke;
 import java.util.logging.Logger;
 public class Formatter {
-    public static final String footballIcon = "⚽";
-    public static final String emojiSad = "☹";
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
 
     /**
@@ -27,19 +25,19 @@ public class Formatter {
      * Prints welcome message at start of program
      */
     public static void printWelcomeMsg() {
-        printWrapper("〰");
-        System.out.println("\t Welcome to NUSFC 24 " + footballIcon);
+        printWrapper("-");
+        System.out.println("\t Welcome to NUSFC 24 ");
 //        System.out.println("\t What can I do for you?");
-        printWrapper("〰");
+        printWrapper("-");
     }
 
     /**
      * Prints goodbye message when program terminates
      */
     public static void printGoodbyeMsg() {
-        printWrapper("〰");
-        System.out.println("\t See you next time on court!" + " ツ");
-        printWrapper("〰");
+        printWrapper("-");
+        System.out.println("\t See you next time on court!");
+        printWrapper("-");
     }
 
     /**
@@ -85,18 +83,6 @@ public class Formatter {
     public static void printListEmpty() {
         System.out.println("\t List is empty. Add tasks using commands \"todo\", \"deadline\", \"event\".");
     }
-
-//    /**
-//     * Prints all tasks in list
-//     */
-//    public static void printListAll() {
-//        printWrapper("〓");
-//        System.out.println("\t Here are the tasks in your list:");
-//        for (int i = 0; i < Ui.tasks.size(); i++) {
-//            System.out.printf(" \t%d. %s\n", (i + 1), Ui.tasks.get(i));
-//        }
-//        printWrapper("〓");
-//    }
 
 //    /**
 //     * Prints a notification indicating task is marked given the index of a task
@@ -155,7 +141,7 @@ public class Formatter {
      * Prints a error message indicating command failed to execute
      */
     public static void printErrorExecutionFail() {
-        System.out.println("\t Ui: Command could not be executed " + emojiSad);
+        System.out.println("\t Ui: Command could not be executed ");
         System.out.println("\t Try again");
     }
 
@@ -163,7 +149,7 @@ public class Formatter {
      * Prints an error message indicating an unknown error has occured
      */
     public static void printErrorUnknown() {
-        System.out.println("\t Ui: Unexpected error " + emojiSad);
+        System.out.println("\t Ui: Unexpected error ");
     }
 
     /**
@@ -232,16 +218,5 @@ public class Formatter {
         System.out.println("Failed to load cache");
         System.out.println("Program will start with empty list");
     }
-
-//    public static void printMatches(String userQuery) {
-//        printWrapper("〓");
-//        System.out.println("\t Here are the matching tasks in your list:");
-//        for (int i = 0; i < Ui.tasks.size(); i++) {
-//            if (Ui.tasks.get(i).getDescription().contains(userQuery)) {
-//                System.out.printf(" \t%d. %s\n", (i + 1), Ui.tasks.get(i));
-//            }
-//        }
-//        printWrapper("〓");
-//    }
 }
 
