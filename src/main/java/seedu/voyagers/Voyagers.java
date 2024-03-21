@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 import static seedu.voyagers.utils.Storage.readTripFile;
 import static seedu.voyagers.utils.Storage.writeTripFile;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Voyagers {
 

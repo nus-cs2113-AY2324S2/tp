@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class Storage {
 
-    private static Logger LOGGER = Logger.getLogger("Storage");
+    private static final Logger LOGGER = Logger.getLogger("Storage");
 
 
     /**
