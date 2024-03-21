@@ -41,6 +41,7 @@ public class BookBuddy {
     public static void main(String[] args) {
         LOGGER.log(Level.INFO, "BookBuddy application started.");
         Ui.printWelcome();
+        assert books != null : "BookList not created";
         getUserInput(books);
         LOGGER.log(Level.INFO, "BookBuddy application is shutting down.");
     }
@@ -69,6 +70,4 @@ public class BookBuddy {
             }
         }
     }
-
-
 }

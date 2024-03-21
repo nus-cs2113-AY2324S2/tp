@@ -27,7 +27,7 @@ public class Parser {
      * @param books ArrayList of books
      */
 
-    public static void parseCommand( String input, BookList books) {
+    public static void parseCommand(String input, BookList books) {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
         LOGGER.log(Level.FINE, "Parsing command: {0}", command);
@@ -74,5 +74,4 @@ public class Parser {
             throw new BookNotFoundException("Book not found at the provided index.");
         }
     }
-
 }
