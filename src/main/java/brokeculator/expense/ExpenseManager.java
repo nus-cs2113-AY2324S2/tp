@@ -49,4 +49,8 @@ public class ExpenseManager {
         }
         return sb.toString();
     }
+
+    public int getNumberOfExpensesTracked() {
+        return expenses.size();
+    }
 }
