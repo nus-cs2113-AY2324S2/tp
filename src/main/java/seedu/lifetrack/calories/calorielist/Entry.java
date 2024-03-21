@@ -25,7 +25,6 @@ public abstract class Entry {
     }
 
     public String toString() {
-        return String.format("Date: " + date + ", Description: " + description + ", Calories: " + calories);
-        
+        return String.format("\t Date: " + date + ", Description: " + description + ", Calories: " + calories);
     }
 }

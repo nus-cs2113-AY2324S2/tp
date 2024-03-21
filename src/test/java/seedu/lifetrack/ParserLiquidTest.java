@@ -21,7 +21,18 @@ public class ParserLiquidTest {
             LiquidEntry entry = parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
             assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n"  +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_missingKeywords_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in");
+        } catch (InvalidInputException e) {
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
                     "For example: liquids in b/Milo v/1000", e.getMessage());
         }
     }
@@ -119,5 +130,4 @@ public class ParserLiquidTest {
                     "Please enter a positive integer value for volume", e.getMessage());
         }
     }
-
 }
