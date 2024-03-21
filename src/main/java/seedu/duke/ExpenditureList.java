@@ -167,7 +167,8 @@ public class ExpenditureList {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         dateFormat.setLenient(false);
         try {
-
+            //if user inputs a valid date but YEARS ahead, it will still be valid, ie 12.12.20202020
+            // only checks if date and month and whether month has those dates
             dateFormat.parse(date);
             return true;
         } catch (ParseException e) {
@@ -178,10 +179,13 @@ public class ExpenditureList {
 
     protected static boolean isValidAmount(float amt) {
         if (amt >= 0) {
-            float fractionalPart = amt - (int) amt;
+            String amtStr = String.valueOf(amt);
 
-            // Check if the fractional part has more than two decimal places
-            if (Math.round(fractionalPart * 100) / 100f != fractionalPart) {
+            // Split the string at the decimal point
+            String[] parts = amtStr.split("\\.");
+
+            // Check if there are more than two characters after the decimal point
+            if (parts[1].length() > 2) {
                 System.out.println("Invalid amount format! Please ensure the amount has at most two decimal places.");
                 return false;
             }
