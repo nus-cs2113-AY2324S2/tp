@@ -5,13 +5,14 @@ import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
 import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
-
+import java.util.logging.*;
 import java.util.ArrayList;
 
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
     private final int SIZE_OF_DELETE = 7;
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -31,10 +32,10 @@ public class CalorieList {
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.");
+            logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
+                    "within the size of the list.", e);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index!");
+            logr.log(Level.WARNING, "Please enter a valid index!", e);
         }
     }
 
@@ -50,11 +51,12 @@ public class CalorieList {
      * @param input the input string containing date, time, activity, and calorie count
      */
     public void addEntry(String input) {
+        logr.setLevel(Level.WARNING);
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
         } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
@@ -64,14 +66,17 @@ public class CalorieList {
      * Otherwise, it prints each entry's activity description and calorie count.
      */
     public void printCalorieList() {
+        logr.setLevel(Level.WARNING);
         if (calorieArrayList.isEmpty()) {
-            System.out.println("Your caloric list is empty.");
+            logr.log(Level.INFO,"Your caloric list is empty.");
         } else {
             System.out.println("Caloric List:");
             for (int i = 0; i < calorieArrayList.size(); i++) {
                 Entry entry = calorieArrayList.get(i);
                 Activity activity = entry.getActivity();
                 Calorie calorie = entry.getCalorie();
+                logr.log(Level.INFO,(i + 1) + ". Activity: " + activity.getDescription()
+                        + ", Calories: " + calorie.getCalories());
                 System.out.println((i + 1) + ". Activity: " + activity.getDescription()
                         + ", Calories: " + calorie.getCalories());
             }
