@@ -19,29 +19,28 @@ public class AddCommand extends Command {
      */
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
 
-            "add\\s+" +                                             // Match the 'add' command followed by one or more
-                                                                    // whitespace characters.
+            // Match the 'add' command followed by one or more whitespace characters.
+            "add\\s+" +
 
-                    "n/(?<itemName>.+?)(?=d/)" +                    // Match 'n/' followed by any characters for
-                                                                    // `itemName`, lazy match, until seeing 'd/'.
+                    // Match 'n/' followed by any characters for `itemName`, lazy match, until seeing 'd/'.
+                    "n/(?<itemName>.+?)(?=d/)" +
 
-                    "d/(?<itemDescription>.+?)(?=(q/|e/|s/))" +     // Match 'd/' followed by any characters for
-                                                                    // `itemDescription`, lazy match, until seeing
-                                                                    // 'q/', 'e/', or 's/'.
+                    // Match 'd/' followed by any characters for `itemDescription`, lazy match, until seeing
+                    // 'q/', 'e/', or 's/'.
+                    "d/(?<itemDescription>.+?)(?=(q/|e/|s/))" +
+                    
+                    // Optionally match 'q/' followed by the item quantity.
+                    "(q/(?<itemQuantity>.+?)(?=(e/|s/)))?\\s*" +
 
-                    "(q/(?<itemQuantity>.+?)(?=(e/|s/)))?\\s*" +    // Optionally match 'q/' followed by the
-                                                                    // item quantity.
+                    // Optionally match 'e/' followed by the expiration date.
+                    "(e/(?<itemExpirationDate>.+?)(?=s/))?\\s*" +
 
-                    "(e/(?<itemExpirationDate>.+?)(?=s/))?\\s*" +   // Optionally match 'e/' followed by the
-                                                                    // expiration date.
+                    // Match 's/' followed by the sale price, until seeing 'c/'.
+                    "(s/(?<itemSalePrice>.+?))(?=c/)" +
 
-                    "(s/(?<itemSalePrice>.+?))(?=c/)" +             // Match 's/' followed by the sale price, until
-                                                                    // seeing 'c/'.
-
-                    "c/(?<itemCostPrice>.+)"                        // Finally, match 'c/' followed by the cost price.
+                    // Finally, match 'c/' followed by the cost price.
+                    "c/(?<itemCostPrice>.+)"
     );
-
-
     private final String itemName;
     private final String itemDescription;
     private final int itemQuantity;
