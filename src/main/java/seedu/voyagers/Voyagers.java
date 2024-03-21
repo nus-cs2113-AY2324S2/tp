@@ -1,6 +1,7 @@
 package seedu.voyagers;
 
 import seedu.voyagers.classes.TripList;
+import seedu.voyagers.paser.NewParser;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
@@ -43,7 +44,7 @@ public class Voyagers {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parseInput(fullCommand);
+                Command c = NewParser.parse(fullCommand);
                 c.execute(tripList, ui, null);
                 isExit = c.isExit();
 
