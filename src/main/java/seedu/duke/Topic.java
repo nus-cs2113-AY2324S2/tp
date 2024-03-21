@@ -5,10 +5,13 @@ public class Topic {
     protected String topicName;
     protected boolean hasAttempted;
 
-    public Topic(QuestionsList chosenQuestionsList, String topicName, boolean hasAttempted){
+    protected String summary;
+
+    public Topic(QuestionsList chosenQuestionsList, String topicName, boolean hasAttempted, String summary){
         this.chosenQuestionsList = chosenQuestionsList;
         this.topicName = topicName;
         this.hasAttempted = hasAttempted;
+        this.summary = summary;
     }
 
     public String getStatus() {

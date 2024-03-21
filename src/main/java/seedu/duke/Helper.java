@@ -37,6 +37,11 @@ public class Helper {
                 "bye", "Terminate the program", "bye"
             )
         );
+        commandList.add(
+            new Command(
+                "list", "list available topics and their summaries", "list"
+            )
+        );
     }
 
     public String[][] listAllCommands() {

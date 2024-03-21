@@ -87,56 +87,19 @@ Your results for Topic 1:
 0/2 (0%)
 ```
 
-### `re` - Add a deadline
-
-Example of usage: `event [DEADLINE_NAME] /by [DUE_TIME]`.
-
-```
-deadline submit CS2113 iP /by 2024-03-08 23:59
-```
-
-An acknowledgement message will be displayed after successful execution:
-
-```
-____________________________________________________________
- Got it. I've added this task:
- [D][ ] submit CS2113 iP (by: Mar 8 2024 23:59)
- Now you have 5 tasks in the list.
-____________________________________________________________
-```
-
-### `list` - List all tasks
+### `list` - List all available topics and their summaries
 
 Example of usage: `list`.
 
 Sample output:
 
 ```
-____________________________________________________________
- Here are all the entries in your task list:
- 1. [D][ ] assignment 1 (by: Apr 23 2024)
- 2. [D][ ] assignment 2 (by: May 21 2024 18:00)
- 3. [T][ ] return book
- 4. [D][ ] finish book reading report (by: Mar 9 2024)
-____________________________________________________________
-```
-
-### `find` - Search with keyword
-
-Example of usage: `find [KEYWORD]`.
-
-```
-find assignment
-```
-
-A list of matching entries will be displayed:
-
-```
-____________________________________________________________
- Here are the matching tasks in your list:
- 1. [D][ ] assignment 1 (by: Apr 23 2024)
- 2. [D][ ] assignment 2 (by: May 21 2024 18:00)
-____________________________________________________________
++-------+--------+-------------------------------------------------+-----------+
+| index |  topic |                     summary                     | attempted |
++-------+--------+-------------------------------------------------+-----------+
+|     1 | topic1 | Covers topic 1 notions mentioned in lecture 1-2 |     false |
+|     2 | topic2 | Covers topic 2 notions mentioned in lecture 3-4 |     false |
++-------+--------+-------------------------------------------------+-----------+
 ```
 
 ### `solutions` - View solution to a question
