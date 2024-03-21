@@ -90,6 +90,7 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
+        assert startDate.isBefore(endDate) : UiConstant.PERIOD_START_MUST_BE_BEFORE_END;
         // Add 1 to include both start and end dates
         return ChronoUnit.DAYS.between(startDate,endDate) + 1;
     }
