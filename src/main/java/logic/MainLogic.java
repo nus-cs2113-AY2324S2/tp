@@ -44,6 +44,7 @@ public class MainLogic {
             switch (commandType) {
             case EXIT:
                 isExit = MainExitCommand.execute(isExit);
+                assert isExit : "isExit should be true";
                 break;
             case HELP:
                 MainHelpCommand.execute();
