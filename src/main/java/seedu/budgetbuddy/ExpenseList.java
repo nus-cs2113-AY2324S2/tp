@@ -125,6 +125,21 @@ public class ExpenseList {
     }
 
     public void editExpense(String category, int index, double amount, String description) {
+        // Assert that the provided category is not null or empty
+        assert category != null && !category.isEmpty() : "Category cannot be null or empty";
+
+        // Assert that the index is within the valid bounds of the expenses list
+        assert index > 0 && index <= expenses.size() : "Index is out of bounds";
+
+        // Assert that the amount is non-negative
+        assert amount >= 0 : "Amount cannot be negative";
+
+        /**
+         * Assert that the description is not null. 
+         * (An empty description might be valid in some cases)
+         */
+        assert description != null : "Description cannot be null";
+
         // Check if the category exists in the list of categories
         int categoryIndex = categories.indexOf(category);
         if (categoryIndex == -1) {

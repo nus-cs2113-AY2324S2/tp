@@ -118,6 +118,14 @@ public class SavingList {
     }
 
     public void editSaving(String category, int index, double amount) {
+        // Assert that the provided category is not null or empty
+        assert category != null && !category.isEmpty() : "Category cannot be null or empty";
+
+        // Assert that the index is within the valid bounds of the savings list
+        assert index > 0 && index <= savings.size() : "Index is out of bounds";
+
+        // Assert that the amount is non-negative
+        assert amount >= 0 : "Amount cannot be negative";
         // Check if the category exists
         int categoryIndex = categories.indexOf(category);
         if (categoryIndex == -1) {
