@@ -23,6 +23,7 @@ public class Storage {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String[] transactionInfo = sc.nextLine().split("\\|");
+                assert transactionInfo.length == 4 : "Transaction info should have 4 arguments";
                 double amount = Double.parseDouble(transactionInfo[1]);
                 if (!transactionInfo[1].startsWith("-")) {
                     Inflow inflow = new Inflow(transactionInfo[0], amount, transactionInfo[2]);
