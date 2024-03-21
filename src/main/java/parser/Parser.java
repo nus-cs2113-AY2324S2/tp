@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
+            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
@@ -39,7 +40,6 @@ public class Parser {
         }
 
         final CommandType userCommand = CommandType.valueOf(matcher.group("commandWord").toUpperCase());
-        final String arguments = matcher.group("arguments");
 
 
         switch (userCommand) {
@@ -51,20 +51,20 @@ public class Parser {
             return new ListCommand<>(Itemlist.getItems());
         case ADD:
             try {
-                return prepareAdd(arguments);
+                return prepareAdd(userInput);
 
             } catch (CommandFormatException e) {
                 break;
             }
         case DELETE:
             try {
-                return prepareDelete(arguments);
+                return prepareDelete(userInput);
             } catch (CommandFormatException e) {
                 break;
             }
         case EDIT:
             try {
-                return prepareEdit(arguments);
+                return prepareEdit(userInput);
             } catch (CommandFormatException e) {
                 break;
             }
@@ -78,17 +78,18 @@ public class Parser {
 
     private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
+
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
         }
-        String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+        //String category = matcher.group("category") != null ? matcher.group("category") : "NA";
         int quantity = Integer.parseInt(matcher.group("quantity"));
         return new AddCommand(
                 matcher.group("itemName"),
                 quantity,
-                matcher.group("uom"),
-                category
+                matcher.group("uom"), "test cat"
+                //category
         );
     }
 
