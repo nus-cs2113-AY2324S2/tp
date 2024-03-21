@@ -1,7 +1,15 @@
 Bob
 password
 add-inflow n/Salary a/400.00 d/23/05/2022 t/1900 c/income
-add-outflow n/Rent a/1500.00 d/23/06/2023 t/1800 c/rent
+add-outflow r/Rent a/1500.00 d/23/06/2023 t/1800 c/rent
 add-inflow n/Stocks a/400.00 d/24/10/2024 t/1200 c/investment
 view-history n/2
+add-outflow r/Groceries a/100.00 d/23/06/2023 t/1800 c/shopping
+add-inflow n/Refund a/50.00 d/23/06/2023 t/1800 c/refund
+view-history n/5
+delete-inflow i/3
+delete-outflow i/2
+edit-inflow i/1 n/Refund a/100.00 d/23/06/2023 t/1700 c/refund
+edit-outflow i/1 r/Groceries a/150.00 d/23/06/2023 t/1830 c/shopping
+view-history n/3
 quit

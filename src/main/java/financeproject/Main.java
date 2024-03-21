@@ -18,7 +18,7 @@ public class Main {
         manager = storage.loadFile();
 
         UI ui = new UI();
-        ui.printMessage("Welcome. In order to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
+        ui.printMessage("Welcome. Enter your username and password to login.");
 
         Parser parser = new Parser();
         BaseCommand baseCommand = null;
@@ -85,4 +85,3 @@ public class Main {
         ui.closeScanner();
     }
 }
-
