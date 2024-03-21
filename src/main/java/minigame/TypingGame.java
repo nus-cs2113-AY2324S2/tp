@@ -5,6 +5,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import ui.ResponseManager;
 
@@ -17,6 +21,7 @@ public class TypingGame implements MiniGame {
             + "Type the following text as fast as you can:\n";
     private static final String OUTPUT_COLOR = "\033[0;32m";
     private static final String RESET = "\033[0m";
+    private static final Logger TG_LOGGER = Logger.getLogger(TypingGame.class.getName());
     private int accuracy;
     private double timeSpent;
     private final String[] userInput;
@@ -27,7 +32,16 @@ public class TypingGame implements MiniGame {
         this.userInput = new String[] {""};
     }
 
+    private static void setupLogger() {
+        LogManager.getLogManager().reset();
+        TG_LOGGER.setLevel(Level.ALL);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.SEVERE);
+        TG_LOGGER.addHandler(consoleHandler);
+    }
+
     public void startGame() {
+        setupLogger();
         CompletableFuture<String> finalScore = CompletableFuture.supplyAsync(() -> {
             Scanner scanner = new Scanner(System.in);
             ResponseManager.indentPrint(START_MSG);
@@ -37,7 +51,7 @@ public class TypingGame implements MiniGame {
             scanner.nextLine();
 
             typingGameLogic(scanner);
-
+            TG_LOGGER.info("User has completed the game");
             return "Good job! You finished within the time limit!\n";
         });
 
@@ -47,8 +61,10 @@ public class TypingGame implements MiniGame {
             this.timeSpent = TIME_LIMIT;
             finalScore.cancel(true);
             ResponseManager.indentPrint("\nTime's up!!!! Your input is not captured TAT\n");
+            TG_LOGGER.info("User did not complete the game in time");
         } catch (InterruptedException | ExecutionException e) {
             ResponseManager.indentPrint("An error occurred while calculating your score.\n");
+            TG_LOGGER.log(Level.SEVERE, "An error occurred while calculating the score", e);
         }
     }
 
@@ -67,6 +83,8 @@ public class TypingGame implements MiniGame {
                 correctCharacters++;
             }
         }
+        assert correctCharacters <= TEXT_TO_TYPE.length() :
+                "Correct characters should not exceed the length of the text";
         return (correctCharacters * PERCENTAGE / TEXT_TO_TYPE.length());
     }
 

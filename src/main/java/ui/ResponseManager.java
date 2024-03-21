@@ -12,9 +12,16 @@ public class ResponseManager {
             "for Semiconductor industry, enter '/s'\n" +
             "for Artificial intelligence, enter '/a'\n";
     private static final String BYE_MSG = "Bye bye adventurer!";
+    private static final String HELP_MSG =
+            "Enter ur action!\n" +
+            "work - to work\n" +
+            "rest - to rest\n" +
+            "exercise - to exercise\n" +
+            "status - to check status\n" +
+            "bye - to exit\n";
 
-    public static void printBoard(String boardInfor) {
-        System.out.println(INDENTATION + boardInfor + INDENTATION);
+    public static void printBoard(String boardInfo) {
+        indentPrint(boardInfo + "\n");
     }
 
     public static void indentPrint(String message) {
@@ -39,5 +46,9 @@ public class ResponseManager {
 
     public static void printGoodbye() {
         System.out.println(BYE_MSG);
+    }
+
+    public static void printHelp() {
+        indentPrint(HELP_MSG);
     }
 }

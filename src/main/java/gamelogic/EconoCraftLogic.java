@@ -57,12 +57,7 @@ public class EconoCraftLogic {
     }
 
     public void startEcono() {
-        ResponseManager.indentPrint("Enter ur action!" +
-                "work - to work\n" +
-                "rest - to rest\n" +
-                "exercise - to exercise\n" +
-                "status - to check status\n" +
-                "bye - to exit\n");
+        ResponseManager.printHelp();
         Scanner userInput = new Scanner(System.in);
         boolean exitFlag = false;
 
