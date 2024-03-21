@@ -18,11 +18,14 @@ public enum CommandList {
     }
 
     public static boolean goalCheck(int userInput, int AiInput) {
+        assert userInput >= 0 && userInput <= 2 :
+                "Illegal userInput generated!";
+        assert AiInput >= 0 && AiInput <= 2 :
+                "Illegal AiInput generated!";
         return userInput != AiInput;
     }
 
     public static void executeShoot(Parser userCommandReader) {
-
         String selectedDirection = userCommandReader.getArgumentTokens()[0];
         int selectedDirectionIndex = Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);

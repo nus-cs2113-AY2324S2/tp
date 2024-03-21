@@ -1,10 +1,8 @@
 package seedu.duke;
 import java.util.logging.Logger;
 public class Formatter {
-    public static final String footballIcon = "⚽";
-    public static final String emojiSad = "☹";
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
-
+    public static final String emojiSad = "☹";
 
     /**
      * Method to check if the shot resulted in a goal
@@ -33,19 +31,19 @@ public class Formatter {
      * Prints welcome message at start of program
      */
     public static void printWelcomeMsg() {
-        printWrapper("〰");
-        System.out.println("\t Welcome to NUSFC 24 " + footballIcon);
+        printWrapper("-");
+        System.out.println("\t Welcome to NUSFC 24 ");
 //        System.out.println("\t What can I do for you?");
-        printWrapper("〰");
+        printWrapper("-");
     }
 
     /**
      * Prints goodbye message when program terminates
      */
     public static void printGoodbyeMsg() {
-        printWrapper("〰");
-        System.out.println("\t See you next time on court!" + " ツ");
-        printWrapper("〰");
+        printWrapper("-");
+        System.out.println("\t See you next time on court!");
+        printWrapper("-");
     }
 
     /**
@@ -88,6 +86,59 @@ public class Formatter {
     }
 
     /**
+     * Prints "list is empty" if tasks list is empty
+     */
+    public static void printListEmpty() {
+        System.out.println("\t List is empty. Add tasks using commands \"todo\", \"deadline\", \"event\".");
+    }
+
+//    /**
+//     * Prints a notification indicating task is marked given the index of a task
+//     *
+//     * @param index the index of a given task
+//     */
+//    public static void printMarkDoneNotif(int index) {
+//        System.out.println("\t Nice! I've marked this task as done:");
+//        System.out.printf("\t %s.\n", Ui.tasks.get(index));
+//    }
+
+//    /**
+//     * Prints a notification indicating task is unmarked given the index of a task
+//     *
+//     * @param index the index of a given task
+//     */
+//    public static void printMarkUndoneNotif(int index) {
+//        System.out.println("\t OK, I've marked this task as not done yet:");
+//        System.out.printf("\t %s.\n", Ui.tasks.get(index));
+//    }
+
+//    /**
+//     * Prints a notification indicating task is added given a task
+//     *
+//     * @param newTask the task being added
+//     */
+//    public static void printTaskNotif(Task newTask) {
+//        printWrapper("_");
+//        System.out.println("\t Got it. I've added this task:");
+//        System.out.printf("\t\t%s\n", newTask);
+//        System.out.printf("\t Now you have %d tasks in the list.\n", Ui.tasks.size());
+//        printWrapper("_");
+//    }
+//
+//    /**
+//     * Prints a notification indicating task is removed given the index of a task
+//     *
+//     * @param removedTask the task being removed
+//     */
+//    public static void printDeleteNotif(Task removedTask) {
+//        printWrapper("_");
+//        System.out.println("\t Noted. I've removed this task:");
+//        System.out.printf("\t\t%s\n", removedTask);
+//        System.out.printf("\t Now you have %d tasks in the list.\n", Ui.tasks.size());
+//        printWrapper("_");
+//    }
+
+    /**
      * Prints an error message indicating wrong command is entered
      */
     public static void printErrorWrongCommand() {
@@ -98,7 +149,7 @@ public class Formatter {
      * Prints a error message indicating command failed to execute
      */
     public static void printErrorExecutionFail() {
-        System.out.println("\t Ui: Command could not be executed " + emojiSad);
+        System.out.println("\t Ui: Command could not be executed ");
         System.out.println("\t Try again");
     }
 
@@ -106,7 +157,7 @@ public class Formatter {
      * Prints an error message indicating an unknown error has occured
      */
     public static void printErrorUnknown() {
-        System.out.println("\t Ui: Unexpected error " + emojiSad);
+        System.out.println("\t Ui: Unexpected error ");
     }
 
     /**
@@ -175,6 +226,5 @@ public class Formatter {
         System.out.println("Failed to load cache");
         System.out.println("Program will start with empty list");
     }
-
 }
 
