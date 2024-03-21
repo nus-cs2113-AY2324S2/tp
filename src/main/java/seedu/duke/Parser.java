@@ -57,7 +57,7 @@ public class Parser {
         return NAME_ARGSTR_PAIR.length == 2;
     }
 
-    private static String[] parseIntoNameAndArgumentString(String userInput) {
+    public static String[] parseIntoNameAndArgumentString(String userInput) {
         final String NAME_ARGSTR_SEPARATOR = " ";
         return userInput.split(NAME_ARGSTR_SEPARATOR, 2);
     }
