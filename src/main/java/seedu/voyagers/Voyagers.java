@@ -9,8 +9,10 @@ import java.util.ArrayList;
 
 import static seedu.voyagers.utils.Storage.readTripFile;
 import static seedu.voyagers.utils.Storage.writeTripFile;
+import java.util.logging.*;
 
 public class Voyagers {
+
     private static final String FILE_NAME = "local-voyagers.txt";
 
     //TODO: change to private and add to the command.execute(Ui, tripList, storage)
@@ -27,8 +29,11 @@ public class Voyagers {
 
     void run() {
 
+        Logger logger = Logger.getLogger("Voyagers");
+        logger.setLevel(Level.INFO);
 
         ui.showWelcome();
+        assert false : "This is a debug assertion set to fail.";
         ui.echo("Here are the trips in your list from the previous time:", false, false);
 
         //TODO: make Storage a singleton

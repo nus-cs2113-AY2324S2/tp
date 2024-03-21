@@ -12,7 +12,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Storage {
+
+    private static Logger LOGGER = Logger.getLogger("Storage");
+
 
     /**
      * Reads the trip file and adds the trips to the list of trips.
