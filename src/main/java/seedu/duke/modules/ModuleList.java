@@ -3,7 +3,6 @@ package seedu.duke.modules;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
@@ -94,6 +93,4 @@ public class ModuleList {
         }
         return sumOfGPA/(double)totalMC;
     }
-
-
 }
