@@ -11,6 +11,8 @@ import seedu.duke.BadTokenException;
 import seedu.duke.IllegalCommandException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Ui {
 
@@ -20,6 +22,7 @@ public class Ui {
     private static String userInput;
     private static Parser userCommandReader;
     public static int roundCount = 0;
+    private static final Logger logger = Logger.getLogger("Foo");
 
 //    public String readUserInput(){
 //        return IN.nextLine();
@@ -30,6 +33,7 @@ public class Ui {
      * Reads user input and stores it
      */
     public static void beginListening() {
+        logger.log(Level.INFO, "going to start processing user input");
         userInput = IN.nextLine();
     }
 
@@ -43,11 +47,13 @@ public class Ui {
             userCommandReader = new Parser(userInput);
         } catch (IllegalCommandException e) {
             Formatter.printErrorWrongCommand();
+            logger.log(Level.WARNING, "wrong command error");
             throw new ProcessInputException();
         } catch (ArgumentMismatchException e1) {
             int userArgumentCount = e1.userArgumentCount;
             int correctArgumentCount = SyntaxAnalyser.getArgumentCount(e1.userCommandName);
             Formatter.printErrorArgumentsMismatch(e1.userCommandName, userArgumentCount, correctArgumentCount);
+            logger.log(Level.WARNING, "wrong user input format error");
             throw new ProcessInputException();
         } catch (BadTokenException e2) {
             Formatter.printErrorBadTokens();
