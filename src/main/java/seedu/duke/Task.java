@@ -9,6 +9,20 @@ public class Task {
     protected LocalTime endTime;
     protected String type;
 
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Represents the constructor for Task class that takes in parameters inluding the description of the task,
+     * the day of the task, the starting time and the ending time of the task.
+     *
+     * @param description description of the task.
+     * @param day day of the task.
+     * @param from starting time of the task.
+     * @param to ending time of the task.
+     */
     public Task(String description, String day, String from, String to, String type) {
         this.description = description;
         this.day = day;
@@ -22,10 +36,6 @@ public class Task {
         this.endTime = LocalTime.parse(formattedTo);
         this.type = type;
     }
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
 
     public LocalTime getEndTime() {
         return endTime;
@@ -44,6 +54,7 @@ public class Task {
     public void setType(String type){
         this.type = type;
     }
+  
     /**
      * Represents the constructor for Task class that takes in parameters inluding the description of the task,
      * the day of the task, the starting time and the ending time of the task.
