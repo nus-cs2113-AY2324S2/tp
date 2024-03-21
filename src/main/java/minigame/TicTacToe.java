@@ -2,6 +2,8 @@ package minigame;
 
 import java.util.Scanner;
 import java.util.Random;
+
+import exception.InvalidMoveException;
 import ui.ResponseManager;
 
 public class TicTacToe implements MiniGame {
@@ -10,6 +12,7 @@ public class TicTacToe implements MiniGame {
     private  char aiMark;
     private  char currentMark;
     private boolean isGameOver = false;
+    private boolean isDraw = false;
 
     public TicTacToe(char playerMark) {
         this.playerMark = playerMark;
@@ -71,16 +74,21 @@ public class TicTacToe implements MiniGame {
 
     private boolean checkDiagonalForWin() {
         if (checkCellForWin(board[0][0], board[1][1], board[2][2]) ||
-            checkCellForWin(board[1][2], board[1][1], board[2][0])) {
+            checkCellForWin(board[0][2], board[1][1], board[2][0])) {
             return true;
         }
         return false;
     }
 
     private void checkGameOver() {
-        if (checkForWin() || isBoardFull()) {
-            outputResult();
+        if (checkForWin()) {
             isGameOver = true;
+            outputResult();
+        }
+        if (isBoardFull()) {
+            isDraw = true;
+            isGameOver = true;
+            outputResult();
         }
     }
 
@@ -98,19 +106,22 @@ public class TicTacToe implements MiniGame {
             for (int j = 0; j < 3; j++) {
                 boardInfor += board[i][j] + " ";
             }
-            boardInfor += "\n";
+            if (i <= 1) {
+                boardInfor += "\n";
+            }
         }
         ResponseManager.printBoard(boardInfor);
     }
 
-    private boolean placeMark(int row, int column) {
+    private void placeMark(int row, int column)  throws InvalidMoveException {
         if (row >= 0 && row < 3 && column >= 0 && column < 3 &&
             board[row][column] == '-') {
             board[row][column] = playerMark;
             printBoard();
-            return true;
+            checkGameOver();
+        } else {
+            throw new InvalidMoveException("Move at (" + (row + 1) + ", " + (column + 1) + ") is invalid.\n");
         }
-        return false;
     }
 
     private void placeAIMark() {
@@ -130,16 +141,14 @@ public class TicTacToe implements MiniGame {
     }
 
     public void outputResult() {
-        if (checkForWin()) {
-            if (currentMark == playerMark) {
-                printBoard();
-                ResponseManager.indentPrint("Siuuuuu, player " + playerMark + " wins!");
-            } else {
-                ResponseManager.indentPrint("Noooooo, player " + playerMark + " lose the game");
-            }
+        if (isDraw) {
+            ResponseManager.indentPrint("Wow, it's a draw!\n");
         } else {
-            printBoard();
-            ResponseManager.indentPrint("Wow, it's a draw!");
+            if (currentMark == playerMark) {
+                ResponseManager.indentPrint("Siuuuuu, player " + playerMark + " wins!\n");
+            } else {
+                ResponseManager.indentPrint("Noooooo, player " + playerMark + " lose the game\n");
+            }
         }
     }
 
@@ -148,20 +157,20 @@ public class TicTacToe implements MiniGame {
         printBoard();
         while (!isGameOver) {
             ResponseManager.indentPrint("Player " + playerMark + ", " +
-                "enter your move (row [1-3] column [1-3]):");
+                "enter your move (row [1-3] column [1-3]):\n");
 
             int row = scanner.nextInt() - 1;
             int column = scanner.nextInt() - 1;
 
-            if (placeMark(row, column)) {
-                checkGameOver();
+            try {
+                placeMark(row, column);
                 if (!isGameOver) {
-                    ResponseManager.indentPrint("AI's turn!");
+                    ResponseManager.indentPrint("AI's turn!\n");
                     placeAIMark();
                     currentMark = playerMark;
                 }
-            } else {
-                ResponseManager.indentPrint("Invalid move, please try again!");
+            } catch (InvalidMoveException e) {
+                ResponseManager.indentPrint(e.getMessage());
             }
         }
     }
