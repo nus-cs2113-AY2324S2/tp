@@ -122,7 +122,7 @@ public class Parser {
             int topicNum = Integer.parseInt(commandParameter);
             // checks validity of parameter
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
-                throw new CustomException("booo no such topic");
+                throw new CustomException("No such topic");
             }
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
 
@@ -157,13 +157,13 @@ public class Parser {
             int questionNum = Integer.parseInt(commandParameterQn);
 
             // checks validity of parameter
-            if ((topicNum < 1 || topicNum > topicList.getSize())) {
-                throw new CustomException("booo no such topic");
+            if (topicNum < 1 || topicNum > topicList.getSize()) {
+                throw new CustomException("No such topic");
             }
 
             QuestionsList qnList = questionListByTopic.getQuestionSet(topicNum - 1);
             if (questionNum < 1 || questionNum > qnList.getSize()) {
-                throw new CustomException(("booo no such question"));
+                throw new CustomException(("No such question"));
             }
 
             if (isSolutionCommand) {
@@ -171,7 +171,7 @@ public class Parser {
                 ui.printOneSolution(questionNum, solution);
                 return;
             } // only runs if explanation
-
+            assert typeOfCommand.contentEquals("explain") : "typeOfCommand should be explain";
             String explanation = qnList.getOneExplanation(questionNum);
             ui.printOneSolution(questionNum, explanation);
 
