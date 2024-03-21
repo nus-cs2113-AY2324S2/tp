@@ -40,7 +40,7 @@ public class InputParsing {
             Ui.printDivider();
             break;
 
-        // @@author alalal47
+        //@@author alalal47
         case DELETE:
             deleteStudent(masterStudentList, in, userCommand[1]);
             break;
@@ -145,7 +145,7 @@ public class InputParsing {
         }
     }
 
-    // @@author alalal47
+    //@@author alalal47
     /**
      * Removes a student from the list.
      *
@@ -155,9 +155,7 @@ public class InputParsing {
      *                          before being prompted
      */
     private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
-        
         String name;
-        
         if (studentName == null) {
             Ui.printStudentNamePrompt();
             name = in.nextLine().trim();
@@ -190,7 +188,8 @@ public class InputParsing {
     private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
         
         String name;
-        
+
+        //@@author alalal47
         if (studentName == null) {
             Ui.printStudentNamePrompt();
             name = in.nextLine();
@@ -198,9 +197,9 @@ public class InputParsing {
             name = studentName;
         }
 
-        // @author blackmirag3
+        //@@author blackmirag3
         assert name != null : "Student name cannot be null";
-        // @author tayponghee
+        //@@author tayponghee
         Student foundStudent = findStudentByName(masterStudentList, name);
 
         if (foundStudent != null) {
@@ -314,6 +313,7 @@ public class InputParsing {
         String name;
         while (true) {
 
+            //@@author alalal47
             if (studentName == null) {
                 Ui.printStudentNamePrompt();
                 name = in.nextLine().trim();
@@ -322,6 +322,7 @@ public class InputParsing {
                 studentName = NOTEMPTY;
             }
 
+            //@@author tayponghee
             assert studentName != null;
 
             if (name.isEmpty()) {

@@ -27,7 +27,7 @@ public class Ui {
     private static final String STUDENT_PAYMENT_MESSAGE = "Last Payment Date: ";
     private static final String STUDENT_REMARKS_MESSAGE = "Remarks: ";
 
-    //@author alalal47
+    //@@author alalal47
     /**
      * Displays the help message to teach users how to use Classify.
      */
