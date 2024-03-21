@@ -3,6 +3,7 @@ package seedu.stockpal.data;
 import java.util.List;
 import java.util.ArrayList;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -10,6 +11,9 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
+import seedu.stockpal.ui.Ui;
+
+import static seedu.stockpal.ui.Ui.printToScreen;
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -74,6 +78,30 @@ public class ProductList {
     public void decreaseAmount(int productIndex, Integer amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.decreaseQuantity(amountToDecrease);
+    }
+
+    /**
+     * @param productList ProductList object.
+     * @param keyword Keyword to search for.
+     */
+    public static void findKeyword(ProductList productList, String keyword) {
+        ProductList findList = new ProductList();
+        for (int i = 0; i < productList.getSize(); i ++) {
+            List<Product> products = productList.getProducts();
+            Product product = products.get(i);
+            String productName = product.getName().getName().toLowerCase();
+
+            if (productName.equals(keyword)) {
+                findList.addProduct(product);
+            }
+        }
+
+        if (findList.isEmpty()) {
+            printToScreen(Messages.MESSAGE_EMPTY_FIND_LIST);
+            return;
+        }
+
+        Ui.printListTasks(findList);
     }
 
     public boolean isEmpty() {

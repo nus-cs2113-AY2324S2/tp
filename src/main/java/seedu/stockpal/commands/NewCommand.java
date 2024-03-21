@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import static seedu.stockpal.commands.EditCommand.logger;
 import static seedu.stockpal.ui.Ui.printToScreen;
 
+//@@author EdmundTangg
 public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
     public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
@@ -25,7 +26,10 @@ public class NewCommand extends ListActionCommand {
     private final Double price;
     private final String description;
 
-    public NewCommand(String name, Integer quantity, Double price, String description) {
+    public NewCommand(String name,
+                      Integer quantity,
+                      Double price,
+                      String description) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -44,16 +48,31 @@ public class NewCommand extends ListActionCommand {
         logger.log(Level.INFO, Messages.MESSAGE_ADDED);
     }
 
-    private Product createProduct(ProductList productList, String name, Integer quantity,
-                                  Double price, String description) {
+    /**
+     * Creates a product.
+     * @param productList List of products object.
+     * @param name Name of object.
+     * @param quantity Quantity of object.
+     * @param price Price of object.
+     * @param description Description of object.
+     * @return object created.
+     */
+    private Product createProduct(ProductList productList,
+                                  String name,
+                                  Integer quantity,
+                                  Double price,
+                                  String description) {
+
         int sizeOfArray = productList.getSize();
         int pid;
 
         if (sizeOfArray == 0) {
             pid = 1;
-        } else if (sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()) {
+        }
+        else if (sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()) {
             pid = sizeOfArray + 1;
-        } else {
+        }
+        else {
             pid = productList.get(sizeOfArray - 1).getPid().getPid() + 1;
         }
         return new Product(name, quantity, price, description, pid);

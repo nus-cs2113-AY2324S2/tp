@@ -1,14 +1,6 @@
 package seedu.stockpal.parser;
 
-import seedu.stockpal.commands.HelpCommand;
-import seedu.stockpal.commands.ListCommand;
-import seedu.stockpal.commands.ExitCommand;
-import seedu.stockpal.commands.NewCommand;
-import seedu.stockpal.commands.EditCommand;
-import seedu.stockpal.commands.DeleteCommand;
-import seedu.stockpal.commands.InflowCommand;
-import seedu.stockpal.commands.OutflowCommand;
-import seedu.stockpal.commands.Command;
+import seedu.stockpal.commands.*;
 
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -40,11 +32,15 @@ public class Parser {
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
+
+    public static final Pattern  FIND_COMMAND_PATTERN = Pattern.compile("find ([^\\t\\n\\r\\f]{1,50})");
+
     public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 4;
     public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 5;
     public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 1;
     public static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 2;
     public static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 2;
+    public static final int NUM_OF_FIND_COMMAND_ARGUMENTS = 1;
     public static final int START_INDEX = 0;
     private static final Double EMPTY_PRICE = -0.1;
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -93,6 +89,11 @@ public class Parser {
             assert(parsed.get(0) != null);
             assert(parsed.get(1) != null);
             return validateAndCreateOutflowCommand(parsed);
+
+        case FindCommand.COMMAND_KEYWORD:
+            parsed = matchAndParseCommand(input, FIND_COMMAND_PATTERN, NUM_OF_FIND_COMMAND_ARGUMENTS);
+            assert(parsed.get(0) != null);
+            return validateAndCreateFindCommand(parsed);
 
         default:
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INVALID_COMMAND);
@@ -178,6 +179,11 @@ public class Parser {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
         }
+    }
+
+    private FindCommand validateAndCreateFindCommand(ArrayList<String> parsed) {
+        String name = parsed.get(0);
+            return new FindCommand(name);
     }
 
     private static String getCommandFromInput(String input) {
