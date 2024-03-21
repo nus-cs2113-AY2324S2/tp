@@ -8,7 +8,7 @@ public class ProgressManager {
 
     private ResultsList sessionResults;
 
-    private static Logger logger = Logger.getLogger("ProgressManagerLogger");
+    private Logger logger = Logger.getLogger("ProgressManagerLogger");
 
     public ProgressManager(ResultsList sessionResults) {
         this.sessionResults = sessionResults;
