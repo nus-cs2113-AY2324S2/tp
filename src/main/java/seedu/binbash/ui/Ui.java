@@ -2,11 +2,11 @@ package seedu.binbash.ui;
 
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.EndOfFileException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -22,22 +22,20 @@ public class Ui {
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
     private static final Logger UILOGGER = Logger.getLogger("BinBashUi");
 
-    private final Scanner in;
-    private Terminal userTerminal;
-    private LineReader input;
+    private static LineReader input;
     private boolean isUserActive;
 
     public Ui() {
-        in = new Scanner(System.in);
+        System.setProperty("org.jline.terminal.exec.redirectPipeCreationMode", "native");
         try {
-            userTerminal = TerminalBuilder.terminal();
+            Terminal userTerminal = TerminalBuilder.terminal();
+            input = LineReaderBuilder.builder()
+                .terminal(userTerminal)
+                .build();
         } catch (IOException e) {
-            // don't handle for now
+            UILOGGER.log(Level.WARNING, "failed to get system terminal!");
         }
         isUserActive = true;
-        input = LineReaderBuilder.builder()
-            .terminal(userTerminal)
-            .build();
     }
 
     public boolean isUserActive() {
@@ -50,7 +48,12 @@ public class Ui {
 
     public String readUserCommand() {
         assert isUserActive();
-        String userInput = input.readLine("binbash> ");
+        String userInput;
+        try {
+            userInput = input.readLine("");
+        } catch (EndOfFileException e) {
+            userInput = "bye";
+        }
         UILOGGER.setLevel(Level.WARNING);
         UILOGGER.log(Level.INFO, "received raw user input: " + userInput);
         return userInput;
