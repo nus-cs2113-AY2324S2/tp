@@ -113,6 +113,7 @@ class ExerciseManagerTest {
         assertThrows(IllegalStateException.class, () -> exerciseManager.execute(parser));
     }
 
+    //@@author LWachtel1
     @Test
     public void execute_validExerciseEdit_success() {
         setUpStreams();
@@ -146,6 +147,7 @@ class ExerciseManagerTest {
         restoreStreams();
     }
 
+    //@@author LWachtel1
     @Test
     public void execute_invalidExerciseEdit_throwsInvalidInput() {
         String invalidInput = "exercise /edit";
@@ -156,5 +158,49 @@ class ExerciseManagerTest {
         parser.parseInput(invalidInput2);
         assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
 
+    }
+
+    //@@author LWachtel1
+    @Test
+    public void execute_invalidExerciseEdit_emptyNewExercise_throwsInvalidInput() {
+        String validInput = "exercise /add Push-ups";
+        parser.parseInput(validInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String editedInput = "exercise /edit Push-ups /to";
+        parser.parseInput(editedInput);
+        assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
+    }
+
+    //@@author LWachtel1
+    @Test
+    public void execute_invalidExerciseEdit_invalidPreviousName_throwsActivityDoesNotExists() {
+        String validInput = "exercise /add Push-ups";
+        parser.parseInput(validInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String editedInput = "exercise /edit Pull-ups /to Decline Push-ups";
+        parser.parseInput(editedInput);
+        assertThrows(Exceptions.ActivityDoesNotExists.class, () -> exerciseManager.execute(parser));
+    }
+
+    //@@author LWachtel1
+    @Test
+    public void execute_invalidExerciseEdit_emptyPreviousName_throwsActivityDoesNotExists() {
+        String validInput = "exercise /add Push-ups";
+        parser.parseInput(validInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String editedInput = "exercise /edit /to Decline Push-ups";
+        parser.parseInput(editedInput);
+        assertThrows(Exceptions.ActivityDoesNotExists.class, () -> exerciseManager.execute(parser));
+    }
+
+    //@@author LWachtel1
+    @Test
+    public void execute_invalidFlag_throwsIllegalStateException() {
+        String invalidInput = "exercise /change Push-ups";
+        parser.parseInput(invalidInput);
+        assertThrows(IllegalStateException.class, () -> exerciseManager.execute(parser));
     }
 }
