@@ -13,6 +13,8 @@ public class ParserCalories {
     private static final int PROTEINS_IDX = 1;
     private static final int FATS_IDX = 2;
 
+    private static final int CALORIES_OUT_PADDING = 12;
+
     /**
      * Parses a string input to create an Entry object representing calorie intake.
      *
@@ -49,10 +51,21 @@ public class ParserCalories {
         String description = parts[1].trim();
         String strCalories = parts[2].trim();
         String date = parts[3].trim();
+        String[] parts = input.split("c/|date/|m/");
+        String command = parts[0].substring(0, CALORIES_OUT_PADDING).trim();
+        String description;
+        if (command.equals("calories out")) {
+            description = parts[0].substring(CALORIES_OUT_PADDING, caloriesIndex).trim();
+        } else {
+            command = parts[0].substring(0, CALORIES_OUT_PADDING - 1).trim();
+            description = parts[0].substring(CALORIES_OUT_PADDING - 1, caloriesIndex).trim();
+        }
+        String strCalories = parts[1].trim();
+        String date = parts[2].trim();
         int[] macros;
 
-        if (parts.length == 5) {
-            String macroString = parts[4].trim();
+        if (parts.length == 4) {
+            String macroString = parts[3].trim();
             try {
                 macros = getMacrosFromString(macroString);
             } catch (InvalidInputException e) {
