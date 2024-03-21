@@ -3,6 +3,8 @@ package command;
 import textbox.*;
 import map.AMap;
 
+import java.util.Scanner;
+
 
 public abstract class Command {
     protected TextBox textBox;
@@ -11,6 +13,9 @@ public abstract class Command {
     protected AMap currentMap;
 
     public abstract void execute();
+    public void execute(Scanner in){
+
+    }
 
     public Command() {
         commandDescription = "Impossible";

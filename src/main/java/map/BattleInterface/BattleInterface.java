@@ -8,9 +8,11 @@ import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
+import Math.*;
 
 import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BattleInterface extends AMap {
     protected PlayerStatus currentPlayer;
@@ -23,6 +25,31 @@ public class BattleInterface extends AMap {
         this.currentTextBox = text;
         this.currentEntity = entity;
 
+    }
+
+    @Override
+    public void fightLoop() {
+
+    }
+
+    @Override
+    public void fightLoop(Scanner in) {
+        MathPool mathPool = new MathPool();
+        mathPool.init();
+        Ui ui = new Ui();
+
+        while (currentPlayer.getPlayerHealth() > 0 && currentEntity.getHealth() > 0) {
+            ui.printPlayerStatus(currentPlayer);
+            ui.printMap(currentMap);
+            MathQuestion mathQuestion = mathPool.getQuestionByDifficulty(0);
+            ui.printQuestion(mathQuestion);
+            int answer = Integer.parseInt(in.nextLine().trim());
+            if (mathQuestion.checkAns(answer)) {
+                playerHitEnemy();
+            } else {
+                enemyHitPlayer();
+            }
+        }
     }
 
     public void initMap(int givenWidth, int givenHeight) {
@@ -51,26 +78,26 @@ public class BattleInterface extends AMap {
     }
 
 
-    public void playerHitEnemy(){
-        if (currentEntity instanceof Enemy){
-            int dmgDone = 10 - (10 * ((Enemy) currentEntity).getDefence());
+    public void playerHitEnemy() {
+        if (currentEntity instanceof Enemy) {
+            int dmgDone = 10;
             ((Enemy) currentEntity).harmHealth(dmgDone);
         }
     }
 
-    public void enemyHitPlayer(){
-        if (currentEntity instanceof Enemy){
+    public void enemyHitPlayer() {
+        if (currentEntity instanceof Enemy) {
             int dmgDone = ((Enemy) currentEntity).getDamage();
             currentPlayer.harmHealth(dmgDone);
         }
     }
 
 
-    public InteractableEntity getCurrentEntity(){
+    public InteractableEntity getCurrentEntity() {
         return currentEntity;
     }
 
-    public PlayerStatus getCurrentPlayer(){
+    public PlayerStatus getCurrentPlayer() {
         return currentPlayer;
     }
 

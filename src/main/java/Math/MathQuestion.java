@@ -1,9 +1,9 @@
 package Math;
 
 public class MathQuestion {
-    private String question;
-    private int answer;
-    private int difficulty;
+    private final String question;
+    private final int answer;
+    private final int difficulty;
 
     public MathQuestion(String qn, int ans, int diff){
         this.question = qn;
