@@ -28,7 +28,6 @@ public class Formatter {
     public static void printWelcomeMsg() {
         printWrapper("〰");
         System.out.println("\t Welcome to NUSFC 24 " + footballIcon);
-//        System.out.println("\t What can I do for you?");
         printWrapper("〰");
     }
 
@@ -58,6 +57,7 @@ public class Formatter {
 
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
+
     public static void printGoalAfterShot(boolean goalScored) {
         if (goalScored) {
 
@@ -67,8 +67,7 @@ public class Formatter {
             System.out.println("|*   *    | *   *   |  *   *  |");
             System.out.println("|      *  |    *    |*      * |");
             System.out.println("GOAL!!!!");
-        }
-        else {
+        } else {
 
             System.out.println("_______________________________");
             System.out.println("\\         \\         \\         \\");
@@ -79,6 +78,7 @@ public class Formatter {
 
         }
     }
+
     /**
      * Prints "list is empty" if tasks list is empty
      */

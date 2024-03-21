@@ -5,26 +5,19 @@ import seedu.duke.Formatter;
 import seedu.duke.Parser;
 import seedu.duke.SyntaxAnalyser;
 
-import seedu.duke.ProcessInputException;
-import seedu.duke.ArgumentMismatchException;
-import seedu.duke.BadTokenException;
-import seedu.duke.IllegalCommandException;
-import java.util.ArrayList;
+import seedu.duke.exception.ProcessInputException;
+import seedu.duke.exception.ArgumentMismatchException;
+import seedu.duke.exception.BadTokenException;
+import seedu.duke.exception.IllegalCommandException;
+
 import java.util.Scanner;
 
 public class Ui {
-
     private static final Scanner IN = new Scanner(System.in);
     private static boolean isRunning = true;
-//    static ArrayList<Task> tasks = new ArrayList<Task>();
     private static String userInput;
     private static Parser userCommandReader;
     public static int roundCount = 0;
-
-//    public String readUserInput(){
-//        return IN.nextLine();
-//    }
-
 
     /**
      * Reads user input and stores it
@@ -60,7 +53,6 @@ public class Ui {
      */
     public static void executeCommand() {
         CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
-        int userSelectedIndex;
 
         switch (selectedCommand) {
         case BYE:
@@ -75,14 +67,10 @@ public class Ui {
         }
     }
 
-    private static void print(String thingToPrint){
-        System.out.println("    " + "-----NUSFC24-----");
-        System.out.println("    " + thingToPrint);
-        System.out.println("    " + "-----------------");
-    }
     public static void setIsRunning(boolean runState) {
         isRunning = runState;
     }
+
     public static boolean getIsRunning() {
         return isRunning;
     }
