@@ -3,8 +3,11 @@ package seedu.duke;
 import seedu.duke.exception.ArgumentMismatchException;
 import seedu.duke.exception.BadTokenException;
 import seedu.duke.exception.IllegalCommandException;
+import java.util.logging.Logger;
+
 
 public class Parser {
+    private static final Logger logger = Logger.getLogger(Parser.class.getName());
     private String COMMAND_NAME;
     private String[] argumentTokens = {};
 
@@ -12,6 +15,9 @@ public class Parser {
         //default case: User enters a valid command, the command expects no arguments
         //NAME_ARGSTR_PAIR is either size 1 or 2
         final String[] NAME_ARGSTR_PAIR = parseIntoNameAndArgumentString(userInput);
+        assert NAME_ARGSTR_PAIR.length == 1 || NAME_ARGSTR_PAIR.length == 2;
+        logger.info("Parsed command " + NAME_ARGSTR_PAIR[0] +
+                (NAME_ARGSTR_PAIR.length == 1 ? " with no arguments": " with at least one argument"));
         final String USER_COMMAND_NAME = getUserCommandName(NAME_ARGSTR_PAIR);
         COMMAND_NAME = USER_COMMAND_NAME.toUpperCase();
         final String USER_ARGUMENT_STRING;
