@@ -10,7 +10,7 @@ public class DeleteInflowCommand extends BaseCommand {
     public String execute(TransactionManager manager) throws Exception {
         String inflowIndex = null;
         for (String part : commandParts) {
-            if (part.startsWith("n/")) {
+            if (part.startsWith("i/")) {
                 inflowIndex = part.substring(2);
             }
         }

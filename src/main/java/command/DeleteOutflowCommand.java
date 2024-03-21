@@ -10,7 +10,7 @@ public class DeleteOutflowCommand extends BaseCommand {
     public String execute(TransactionManager manager) throws Exception {
         String outflowIndex = null;
         for (String part : commandParts) {
-            if (part.startsWith("n/")) {
+            if (part.startsWith("i/")) {
                 outflowIndex = part.substring(2);
             }
         }
