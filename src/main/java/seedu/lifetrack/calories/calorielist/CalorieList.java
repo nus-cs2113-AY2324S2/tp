@@ -1,6 +1,10 @@
 package seedu.lifetrack.calories.calorielist;
 
+
+import static seedu.lifetrack.system.exceptions.ErrorMessages.printIndexOutOfBoundsError;
+import static seedu.lifetrack.system.exceptions.ErrorMessages.printNumberFormatError;
 import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.ui.CalorieListUi.*;
 
 import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
@@ -28,13 +32,13 @@ public class CalorieList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
+            Entry toDelete = calorieArrayList.get(index-1);
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
-            System.out.println("Successfully delete the calorie record.");
+            successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.");
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index!");
+            printIndexOutOfBoundsError();
+        } catch ( NumberFormatException e) {
+            printNumberFormatError();
         }
     }
 
@@ -53,6 +57,7 @@ public class CalorieList {
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
+            printNewCalorieEntry(newEntry);
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }
@@ -65,15 +70,14 @@ public class CalorieList {
      */
     public void printCalorieList() {
         if (calorieArrayList.isEmpty()) {
-            System.out.println("Your caloric list is empty.");
+            emptyListMessage();
         } else {
-            System.out.println("Caloric List:");
+            calorieListHeader();
             for (int i = 0; i < calorieArrayList.size(); i++) {
                 Entry entry = calorieArrayList.get(i);
                 Activity activity = entry.getActivity();
                 Calorie calorie = entry.getCalorie();
-                System.out.println((i + 1) + ". Activity: " + activity.getDescription()
-                        + ", Calories: " + calorie.getCalories());
+                System.out.println("\t " + (i + 1) + calorieArrayList.get(i).toString());
             }
         }
     }

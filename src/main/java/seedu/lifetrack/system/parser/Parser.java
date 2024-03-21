@@ -48,7 +48,7 @@ public class Parser {
     }
 
     private static Entry getNewCalorieEntry(String command, String date, String time,
-            String description, String strCalories) throws InvalidInputException {
+            String description, String strCalories) {
 
         int calories = Integer.parseInt(strCalories);
 

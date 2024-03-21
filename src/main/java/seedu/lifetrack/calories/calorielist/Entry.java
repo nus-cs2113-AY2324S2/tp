@@ -20,4 +20,9 @@ public class Entry {
     public Calorie getCalorie() {
         return calorie;
     }
+
+    public static String toString(Entry toDelete){
+        return "Activity: " + toDelete.getActivity().getDescription()
+                + ", Calories: " + toDelete.getCalorie().getCalories();
+    }
 }
