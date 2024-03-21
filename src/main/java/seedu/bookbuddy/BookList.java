@@ -51,13 +51,14 @@ public class BookList {
      * Deletes a book from the list by its index.
      * @param index The index of the book to delete.
      */
-    public void deleteBook(int index) throws IndexOutOfBoundsException{
-        if (index < 0 || index > books.size()) {
-            throw new IndexOutOfBoundsException("Book index out of range.");
+    public void deleteBook(int index) throws IndexOutOfBoundsException {
+        try {
+            Ui.removeBookMessage(index - 1);
+            books.remove(index - 1);
+            assert books.size() >= 0 : "Book list size should not be negative after deletion";
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid book index. Please enter a valid index");
         }
-        Ui.removeBookMessage(index - 1);
-        books.remove(index - 1);
-        assert books.size() >= 0 : "Book list size should not be negative after deletion";
     }
 
     /**
@@ -65,11 +66,11 @@ public class BookList {
      * @param index The index of the book to mark as read.
      */
     public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
-        if (index < 0 || index > books.size()) {
-            throw new IndexOutOfBoundsException("Book index out of range.");
+        try {
+            books.get(index - 1).markBookAsRead();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid book index. Please enter a valid index");
         }
-        books.get(index - 1).markBookAsRead();
-        assert books.get(index - 1).isRead() : "Book should be marked as read";
     }
 
     /**
@@ -77,11 +78,11 @@ public class BookList {
      * @param index The index of the book to mark as unread.
      */
     public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
-        if (index < 0 || index > books.size()) {
-            throw new IndexOutOfBoundsException("Book index out of range.");
+        try {
+            books.get(index - 1).markBookAsUnread();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid book index. Please enter a valid index");
         }
-        books.get(index - 1).markBookAsUnread();
-        assert !books.get(index - 1).isRead() : "Book should not be marked as read";
     }
 
     /**

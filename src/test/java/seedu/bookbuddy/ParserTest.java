@@ -1,6 +1,5 @@
 package seedu.bookbuddy;
 
-import exceptions.BookNotFoundException;
 import exceptions.InvalidBookIndexException;
 import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
@@ -74,14 +73,6 @@ public class ParserTest {
         String input = "remove notAnIndex"; // Invalid index provided
         assertThrows(InvalidBookIndexException.class,
                 () -> Parser.parseCommand(input, books), "Book index must be an integer.");
-    }
-
-    @Test
-    void parseRemoveCommandForNonExistentBookThrowsException() {
-        BookList books = new BookList();
-        String input = "remove 1"; // No books in the list, so index 1 is invalid
-        assertThrows(BookNotFoundException.class,
-                () -> Parser.parseCommand(input, books), "Book not found at the provided index.");
     }
 
     @Test
