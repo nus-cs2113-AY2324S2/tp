@@ -38,5 +38,9 @@ public class ResultsList {
         sessionResults.clear();
         count = ZERO_RESULTS;
     }
+
+    public int getNumOfResults() {
+        return count;
+    }
 }
 
