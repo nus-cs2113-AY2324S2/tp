@@ -83,6 +83,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return description + " (" + day + " from " + startTime + " to " + endTime + ")" + "type: " + type;
+        return description + " (" + day + " from " + startTime + " to " + endTime + ")" + " type: " + type;
     }
 }
