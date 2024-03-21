@@ -24,14 +24,14 @@ public class TimetableTest {
             timetable.addCourse(new Course("CS1010", "", 1, 5));
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals("Term is not from 1 to 4", e.getMessage());
+            assertEquals("Term provided is not from 1 to 4", e.getMessage());
         }
 
         try {
             timetable.addCourse(new Course("CS1010", "", 0, 1));
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals("Year is not from 1 to 6", e.getMessage());
+            assertEquals("Year provided is not from 1 to 6", e.getMessage());
         }
     }
 
