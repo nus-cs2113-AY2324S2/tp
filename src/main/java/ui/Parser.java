@@ -14,10 +14,10 @@ public class Parser {
             return input;
         }
         if (input.length() <= NAME_LENGTH_LIMIT) {
-            throw new NameInputException("please enter a valid name, try again!");
+            throw new NameInputException("please enter a valid name, try again!\n");
         }
         throw new NameInputException(
-                "Oops! Your name is too long! Please enter a name with less than 15 characters.");
+                "Oops! Your name is too long! Please enter a name with less than 15 characters.\n");
     }
 
     public static String parseCareer(String input) throws JobSelectException {
@@ -35,7 +35,7 @@ public class Parser {
             return "artificial intelligence";
 
         default:
-            throw new JobSelectException("Please enter a valid job type, try again!");
+            throw new JobSelectException("Please enter a valid job type, try again!\n");
         }
     }
 

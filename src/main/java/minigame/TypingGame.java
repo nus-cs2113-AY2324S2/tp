@@ -16,10 +16,11 @@ public class TypingGame implements MiniGame {
     private static final double TIME_RATIO = 1000.0;
     private static final int PERCENTAGE = 100;
     private static final int TIME_LIMIT = 20;
-    private static final String TEXT_TO_TYPE = "The quick brown fox jumps over the lazy dog.\n";
+    private static final String TEXT_TO_TYPE = "The quick brown fox jumps over the lazy dog.";
     private static final String START_MSG = "Welcome to the Typing Game!\n"
             + "Type the following text as fast as you can:\n";
-    private static final String OUTPUT_COLOR = "\033[0;32m";
+    private static final String GREEN_COLOR = "\033[0;32m";
+    private static final String RED_COLOR = "\033[0;31m";
     private static final String RESET = "\033[0m";
     private static final Logger TG_LOGGER = Logger.getLogger(TypingGame.class.getName());
     private int accuracy;
@@ -45,8 +46,8 @@ public class TypingGame implements MiniGame {
         CompletableFuture<String> finalScore = CompletableFuture.supplyAsync(() -> {
             Scanner scanner = new Scanner(System.in);
             ResponseManager.indentPrint(START_MSG);
-            ResponseManager.indentPrint(OUTPUT_COLOR + TEXT_TO_TYPE + RESET + "\n");
-            ResponseManager.indentPrint("Press ENTER to start typing..." + "\n");
+            ResponseManager.indentPrint(GREEN_COLOR + TEXT_TO_TYPE + RESET + "\n");
+            ResponseManager.indentPrint("Press" + RED_COLOR + "ENTER" + RESET + "to start typing..." + "\n");
             // Wait for user to press enter
             scanner.nextLine();
 
@@ -70,7 +71,7 @@ public class TypingGame implements MiniGame {
 
     private void typingGameLogic(Scanner scanner) {
         long startTime = System.currentTimeMillis();
-        System.out.print("Type here: \n");
+        System.out.print("Type here: ");
         userInput[0] = scanner.nextLine();
         this.timeSpent = (System.currentTimeMillis() - startTime) / TIME_RATIO;
         this.accuracy = calculateAccuracy();
