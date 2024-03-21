@@ -1,18 +1,24 @@
 package parser;
 
+import command.Command;
+import command.DeleteCommand;
+import command.AddCommand;
+import command.ListCommand;
+import command.IncorrectCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.EditCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
-import item.Item;
-import storage.Storage;
-import ui.TextUi;
+import itemlist.Itemlist;
 
-import java.util.ArrayList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public boolean isExitCommandDetected = false;
     public static final Pattern ADD_COMMAND_FORMAT =
+            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
             Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
@@ -25,7 +31,7 @@ public class Parser {
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
 
-    public void parseInput(String userInput) {
+    public Command parseInput(String userInput) {
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -34,68 +40,57 @@ public class Parser {
         }
 
         final CommandType userCommand = CommandType.valueOf(matcher.group("commandWord").toUpperCase());
-        final String arguments = matcher.group("arguments");
 
 
         switch (userCommand) {
         case EXIT:
-//          storage.saveItems(items);  //(COMMAND FROM STORAGE TO SAVE ITEMLIST)
-//          ui.closeScanner();  //(COMMAND FROM TEXTUI TO CLOSE SCANNER)
-            isExitCommandDetected = true;
-            return;
+            return new ExitCommand(true);
         case HELP:
-            System.out.println(Messages.HELP);
-            break;
+            return new HelpCommand();
         case LIST:
-//                ui.listItems(items);  //(COMMAND FROM TEXTUI TO PRINT ITEMS)
-            break;
-
+            return new ListCommand<>(Itemlist.getItems());
         case ADD:
-//            try {
-//                prepareAdd(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
-            break;
+            try {
+                return prepareAdd(userInput);
+
+            } catch (CommandFormatException e) {
+                break;
+            }
         case DELETE:
-//            try {
-//                prepareDelete(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
-            break;
+            try {
+                return prepareDelete(userInput);
+            } catch (CommandFormatException e) {
+                break;
+            }
         case EDIT:
-//            try {
-//                prepareEdit(arguments);
-//            } catch (CommandFormatException e) {
-//                break;
-//            }
-            break;
+            try {
+                return prepareEdit(userInput);
+            } catch (CommandFormatException e) {
+                break;
+            }
         default:
             System.out.println(Messages.INVALID_COMMAND);
             break;
         }
+        return new IncorrectCommand();
     }
 
 
-/*    private Command prepareAdd(String args) throws CommandFormatException{
+    private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
+
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
         }
-        try {
-            return new AddCommand(
-                    matcher.group("itemName"),
-                    matcher.group("quantity"),
-                    matcher.group("uom")
-            );
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.ADD);
-            return IncorrectCommand;
-        }
+        //String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+        int quantity = Integer.parseInt(matcher.group("quantity"));
+        return new AddCommand(
+                matcher.group("itemName"),
+                quantity,
+                matcher.group("uom"), "test cat"
+                //category
+        );
     }
 
     private Command prepareDelete(String args) throws CommandFormatException{
@@ -103,15 +98,8 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
         }
-        try {
-            return new DeleteCommand(matcher.group("itemName");
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.DELETE);
-            return IncorrectCommand;
-        }
+        return new DeleteCommand(matcher.group("itemName"));
     }
 
     private Command prepareEdit(String args) throws CommandFormatException{
@@ -119,19 +107,13 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
         }
-        try {
-            return new EditCommand(
-                    matcher.group("itemName"),
-                    matcher.group("newQuantity")
-            );
-
-        } catch (CommandFormatException e) {
-            throw new CommandFormatException(CommandType.EDIT);
-            return IncorrectCommand;
-        }
-    }*/
+        int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
+        return new EditCommand(
+            matcher.group("itemName"),
+            newQuantity
+        );
+    }
 }
 
 
