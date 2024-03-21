@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 class BmiTest {
@@ -121,7 +121,7 @@ class BmiTest {
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput{
         String userInput = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-        String expected = Constant.BMI;
+        String expected = UiConstant.BMI;
         String result = Health.checkTypeOfHealth(userInput);
         assertEquals(expected, result);
     }

@@ -1,6 +1,6 @@
 package health;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.Parser;
 
@@ -27,8 +27,26 @@ public class Period extends Health {
         this.length = calculatePeriodLength();
     }
 
+    /**
+     * Retrieves the start date of the period.
+     *
+     * @return The start date.
+     * @throws AssertionError if the start date is null
+     */
     public LocalDate getStartDate() {
+        assert startDate != null : UiConstant.START_DATE_CANNOT_BE_NULL;
         return startDate;
+    }
+
+    /**
+     * Retrieves the end date of the period.
+     *
+     * @return The end date.
+     * @throws AssertionError if the end date is null
+     */
+    public LocalDate getEndDate() {
+        assert endDate != null : UiConstant.END_DATE_CANNOT_BE_NULL;
+        return endDate;
     }
 
     /**
@@ -39,24 +57,24 @@ public class Period extends Health {
      * @throws CustomExceptions.InvalidInput if the input string does not contain the required parameters
      */
     public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[Constant.PERIOD_CYCLE_PARAMETERS];
+        String[] results = new String[UiConstant.PERIOD_CYCLE_PARAMETERS];
 
-        if (!input.contains(Constant.HEALTH_FLAG)
-                | !input.contains(Constant.START_FLAG)
-                || !input.contains(Constant.END_FLAG)) {
-            throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+        if (!input.contains(UiConstant.HEALTH_FLAG)
+                | !input.contains(UiConstant.START_FLAG)
+                || !input.contains(UiConstant.END_FLAG)) {
+            throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
         }
 
-        int indexH = input.indexOf(Constant.HEALTH_FLAG);
-        int indexStart = input.indexOf(Constant.START_FLAG);
-        int indexEnd = input.indexOf(Constant.END_FLAG);
+        int indexH = input.indexOf(UiConstant.HEALTH_FLAG);
+        int indexStart = input.indexOf(UiConstant.START_FLAG);
+        int indexEnd = input.indexOf(UiConstant.END_FLAG);
 
-        String command = input.substring(indexH + Constant.PERIOD_CYCLE_H_OFFSET, indexStart).trim();
-        String startSubstring = input.substring(indexStart + Constant.PERIOD_CYCLE_START_OFFSET, indexEnd).trim();
-        String endSubstring = input.substring(indexEnd + Constant.PERIOD_CYCLE_END_OFFSET).trim();
+        String command = input.substring(indexH + UiConstant.PERIOD_CYCLE_H_OFFSET, indexStart).trim();
+        String startSubstring = input.substring(indexStart + UiConstant.PERIOD_CYCLE_START_OFFSET, indexEnd).trim();
+        String endSubstring = input.substring(indexEnd + UiConstant.PERIOD_CYCLE_END_OFFSET).trim();
 
         if (command.isEmpty() || startSubstring.isEmpty() || endSubstring.isEmpty()) {
-            throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+            throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
         }
 
         results[0] = command;
@@ -72,6 +90,7 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
+        assert startDate.isBefore(endDate) : UiConstant.PERIOD_START_MUST_BE_BEFORE_END;
         // Add 1 to include both start and end dates
         return ChronoUnit.DAYS.between(startDate,endDate) + 1;
     }
@@ -83,13 +102,8 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        return "Period Start: "
-                + this.getStartDate()
-                + " Period End: "
-                + this.endDate
-                + System.lineSeparator()
-                + "Period Length: "
-                + this.length
-                + " days";
+        String startDateString = startDate.toString();
+        String endDateString = endDate.toString();
+        return String.format(UiConstant.PRINT_PERIOD_FORMAT, startDateString, endDateString, length);
     }
 }

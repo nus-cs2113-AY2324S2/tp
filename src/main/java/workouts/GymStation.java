@@ -1,6 +1,6 @@
 package workouts;
 
-import utility.Constant;
+import utility.UiConstant;
 import java.util.ArrayList;
 
 /**
@@ -83,8 +83,8 @@ public class GymStation {
      */
     @Override
     public String toString() {
-        return String.format(Constant.GYM_STATION_FORMAT,
-                this.getStationName()) + String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT,
+        return String.format(UiConstant.GYM_STATION_FORMAT,
+                this.getStationName()) + String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT,
                 this.getNumberOfSets(),
                 this.getSpecificSet(0));
     }
