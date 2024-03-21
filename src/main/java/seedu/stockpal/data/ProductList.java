@@ -3,7 +3,6 @@ package seedu.stockpal.data;
 import java.util.List;
 import java.util.ArrayList;
 
-import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
