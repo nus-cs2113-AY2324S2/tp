@@ -38,6 +38,7 @@ public class Ui {
         System.out.println("What is your name?");
         printLine();
         System.out.println("Hello " + in.nextLine() + "!");
+        displayHelp();
         System.out.println("Enter command:");
         printLine();
     }
@@ -64,12 +65,13 @@ public class Ui {
     public void displayHelp() {
         System.out.println(
                 "Here are some ways you can use this app!\n" +
-                        "add GROCERY: adds the item GROCERY\n" +
-                        "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY\n" +
-                        "amt GROCERY a/AMOUNT: sets the amount of GROCERY\n" +
-                        "del GROCERY: deletes GROCERY\n" +
-                        "list: shows list of all groceries you have\n" +
-                        "exit: exits the program."
+                        "add GROCERY: adds the item GROCERY.\n" +
+                        "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY.\n" +
+                        "amt GROCERY a/AMOUNT: sets the amount of GROCERY.\n" +
+                        "del GROCERY: deletes GROCERY.\n" +
+                        "list: shows list of all groceries you have.\n" +
+                        "exit: exits the program.\n" +
+                        "help: view all the possible commands."
         );
     }
 

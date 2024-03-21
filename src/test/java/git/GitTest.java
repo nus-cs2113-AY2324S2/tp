@@ -10,9 +10,9 @@ public class GitTest {
     @Test
     public void executeCommand_invalidCommand_success() {
         try {
-            Git git = new Git();
+            Parser parser = new Parser();
             String[] commandParts = {"nonsense", ""};
-            git.executeCommand(commandParts);
+            parser.executeCommand(commandParts);
         } catch (GitException e) {
             assertEquals("Unknown command. Type 'help' for a list of commands.", e.getMessage());;
         }
