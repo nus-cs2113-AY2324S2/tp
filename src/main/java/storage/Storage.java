@@ -53,5 +53,8 @@ public class Storage {
     public void setHealth(Health health) {
         assert health != null : "Cannot set a null Health object";
         this.health = health;
+
     }
+
 }
+
