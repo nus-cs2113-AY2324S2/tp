@@ -3,16 +3,16 @@ package seedu.lifetrack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.system.Ui;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import seedu.lifetrack.system.Ui;
+import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.liquids.liquidlist.LiquidList;
 
-public class InputTest {
+public class UITest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 

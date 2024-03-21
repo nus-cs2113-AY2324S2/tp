@@ -1,10 +1,13 @@
 package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.calories.calorielist.Entry;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalorieListTest {
 
@@ -33,5 +36,84 @@ public class CalorieListTest {
         assertEquals("2024-03-15", secondEntry.getDate());
         assertEquals("run", secondEntry.getDescription());
         assertEquals(679, secondEntry.getCalories());
+    }
+
+    @Test
+    public void testDeleteCalorieValidIndex() {
+        CalorieList calorieList = new CalorieList();
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        int initialSize = calorieList.getSize();
+        calorieList.deleteEntry("delete calories 1");
+        assertEquals(initialSize - 1, calorieList.getSize());
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/200 date/2024-03-14");
+        initialSize = calorieList.getSize();
+        calorieList.deleteEntry("delete calories 2");
+        assertEquals(initialSize - 1, calorieList.getSize());
+    }
+
+    @Test
+    public void testDeleteCalorieInvalidIndex() {
+        CalorieList calorieList = new CalorieList();
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        int initialSize = calorieList.getSize();
+        calorieList.deleteEntry("delete calories 2"); // Index out of bounds
+        calorieList.deleteEntry("delete calories -1");
+        assertEquals(initialSize, calorieList.getSize());
+    }
+
+    @Test
+    public void testPrintCalorieListEmpty() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        CalorieList calorieList = new CalorieList();
+        calorieList.printCalorieList();
+        System.setOut(System.out);
+        String expectedOutput = "Your caloric list is empty." + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    public void testPrintCalorieListNonEmpty() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        CalorieList calorieList = new CalorieList();
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
+        calorieList.printCalorieList();
+        System.setOut(System.out);
+        String expectedOutput = "New entry successfully added!" + lineSeparator +
+                "Caloric List:" + lineSeparator +
+                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    public void testPrintCalorieListMultipleEntries() {
+        String lineSeparator = System.lineSeparator();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        CalorieList calorieList = new CalorieList();
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Walk c/150 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/500 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/250 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
+        calorieList.printCalorieList();
+        System.setOut(System.out);
+        String expectedOutput = "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "Caloric List:" + lineSeparator +
+                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator +
+                "2. Date: 2024-03-14, Description: Walk, Calories: 150" + lineSeparator +
+                "3. Date: 2024-03-14, Description: Eat, Calories: 500" + lineSeparator +
+                "4. Date: 2024-03-14, Description: Run, Calories: 250" + lineSeparator +
+                "5. Date: 2024-03-14, Description: Eat, Calories: 300" + lineSeparator;
+        assertEquals(expectedOutput, outputStream.toString());
+        assertEquals(5, calorieList.getSize());
     }
 }
