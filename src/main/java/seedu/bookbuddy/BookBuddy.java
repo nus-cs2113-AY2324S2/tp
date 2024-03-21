@@ -67,6 +67,9 @@ public class BookBuddy {
                 System.out.println(e.getMessage());
             } catch (InvalidCommandArgumentException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) { // Generic catch block for any other exceptions
+                LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+                System.out.println("An unexpected error occurred. Please contact support.");
             }
         }
     }

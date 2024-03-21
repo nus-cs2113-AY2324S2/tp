@@ -4,6 +4,10 @@ package seedu.bookbuddy;
 import exceptions.BookNotFoundException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.bookbuddy.BookBuddy.LOGGER;
 
 /**
  * Manages a list of books, allowing for operations such as adding, deleting,
@@ -45,9 +49,14 @@ public class BookList {
      * @param title The title of the book.
      */
     public void addBook(String title) {
-        books.add(new Book(title));
-        Ui.addBookMessage(title);
-        assert !books.isEmpty() : "Book list should not be empty after adding a book";
+        try {
+            books.add(new Book(title));
+            Ui.addBookMessage(title);
+            assert !books.isEmpty() : "Book list should not be empty after adding a book";
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+            throw e; // Rethrow or handle as needed
+        }
     }
 
     /**
@@ -61,6 +70,9 @@ public class BookList {
             assert books.size() >= 0 : "Book list size should not be negative after deletion";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+            throw e; // Rethrow or handle as needed
         }
     }
 
@@ -73,6 +85,9 @@ public class BookList {
             books.get(index - 1).markBookAsRead();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+            throw e; // Rethrow or handle as needed
         }
     }
 
@@ -85,6 +100,8 @@ public class BookList {
             books.get(index - 1).markBookAsUnread();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (Exception e) { // Generic catch block for any other exceptions
+            System.out.println("An unexpected error occurred. Please contact support.");
         }
     }
 

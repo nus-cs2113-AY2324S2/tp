@@ -93,6 +93,9 @@ public class Parser {
             throw new InvalidBookIndexException("Book index must be an integer.");
         } catch (IndexOutOfBoundsException e) {
             throw new BookNotFoundException("Book not found at the provided index.");
+        } catch (Exception e) { // Generic catch block for any other exceptions
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+            System.out.println("An unexpected error occurred. Please contact support.");
         }
     }
 }
