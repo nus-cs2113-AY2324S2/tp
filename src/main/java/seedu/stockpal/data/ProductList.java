@@ -10,6 +10,7 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
+import seedu.stockpal.ui.Ui;
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -101,7 +102,8 @@ public class ProductList {
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
             if (productQuantity.getQuantity() < 20) {
-                System.out.println(product.getName() + " " + product.getQuantity().toString());
+                Ui.printLowQuantityProducts();
+                Ui.printToScreen(product.getName() + " " + product.getQuantity().toString());
             }
         }
     }
