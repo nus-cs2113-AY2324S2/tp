@@ -26,5 +26,7 @@ public class ProgressManagerTest {
         ProgressManager pm = new ProgressManager(sessionResults);
         pm.clearProgress();
         assertEquals(0, sessionResults.getNumOfResults());
+        int numOfResults = sessionResults.getNumOfResults();
+        assert numOfResults == 0 : "Number of results should be 0.";
     }
 }
