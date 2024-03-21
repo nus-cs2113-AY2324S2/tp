@@ -19,7 +19,7 @@ public class EditOutflowCommand extends BaseCommand {
         for (String part : commandParts) {
             if (part.startsWith("i/")) {
                 outflowIndex = Integer.parseInt(part.substring(2));
-            } else if (part.startsWith("n/")) {
+            } else if (part.startsWith("r/")) {
                 outflowName = part.substring(2);
             } else if (part.startsWith("a/")) {
                 outflowAmount = Double.parseDouble(part.substring(2));

@@ -17,7 +17,7 @@ public class AddOutflowCommand extends BaseCommand {
         String outflowCategory = null;
 
         for (String part : commandParts) {
-            if (part.startsWith("n/")) {
+            if (part.startsWith("r/")) {
                 outflowName = part.substring(2);
             } else if (part.startsWith("a/")) {
                 outflowAmount = Double.parseDouble(part.substring(2));
