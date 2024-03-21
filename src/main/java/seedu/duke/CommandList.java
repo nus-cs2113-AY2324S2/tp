@@ -4,7 +4,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public enum CommandList {
-    BYE, SHOOT
+    BYE, SHOOT, PENALTY
 //    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     //insert new user command name here
     ;
@@ -33,6 +33,10 @@ public enum CommandList {
         Formatter.printGoalAfterShot(isScoreGoal);
     }
 
+    public static void executePenalty() {
+        Penalty.executePenalty();
+    }
+    
     //insert new command here
 }
 

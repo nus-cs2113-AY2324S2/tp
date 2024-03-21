@@ -61,7 +61,7 @@ public class Ui {
      */
     public static void executeCommand() {
         CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
-
+    
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
@@ -69,6 +69,9 @@ public class Ui {
         case SHOOT:
             CommandList.executeShoot(userCommandReader);
             roundCount++;
+            break;
+        case PENALTY:
+            CommandList.executePenalty();
             break;
         default:
             Formatter.printErrorUnknown();
