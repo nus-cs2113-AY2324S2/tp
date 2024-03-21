@@ -56,19 +56,4 @@ public class QuestionsList {
 
         return allQuestions.toString();
     }
-
-    public String getAllQuestions() {
-        StringBuilder allQuestions = new StringBuilder();
-
-        for (Question question : chosenQuestionsList) {
-            int questionNum = chosenQuestionsList.indexOf(question) + 1; // +1 coz zero index
-            String header = "Question " + questionNum + ":" + System.lineSeparator();
-            String displayQuestion = header + question.getQuestion() + System.lineSeparator();
-
-            allQuestions.append(displayQuestion);
-            allQuestions.append(System.lineSeparator());
-        }
-
-        return allQuestions.toString();
-    }
 }

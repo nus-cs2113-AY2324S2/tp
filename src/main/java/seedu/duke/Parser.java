@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.exceptions.CustomException;
 
+import java.util.ArrayList;
+
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
   
@@ -11,33 +13,39 @@ public class Parser {
     private static final int FIRST_PARAMETER = 1;
     private static final int SECOND_PARAMETER = 2;
 
-    private static final String QUESTION_PARAMETER = "questions";
+    private static final String DETAILS_PARAMETER = "details";
     private static final String COMMAND_SPLITTER = " ";
 
-    private static final boolean INCLUDES_QUESTION = true;
+    private static final boolean INCLUDES_DETAILS = true;
+    private static final boolean IS_CORRECT_ANSWER = true;
+    private static final String MESSAGE_NO_RESULTS = "There are no results.";
+    private static final String MESSAGE_ERROR = "An error has occurred.";
+    private static final String MESSAGE_INVALID_PARAMETERS = "Invalid parameters.";
+    private static final int NO_RESULTS = 0;
+    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
+    private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
     boolean hasChosenTopic = false;
 
     public void parseCommand(
             String command, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
+            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper,
+            AnswerTracker userAnswers
     ) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
             if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
-                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults);
+                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults, userAnswers);
                 //hasChosenTopic = true;
             } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
                 throw new CustomException("Please choose a topic in the format: topic [INDEX]");
-            }
-
-            if (lowerCaseCommand.startsWith("bye")) {
+            } else if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
                 //System.out.println("ERROR");
                 processSolutionCommand(lowerCaseCommand, ui, questionsList, topicList, questionListByTopic);
             } else if (lowerCaseCommand.startsWith("results")) {
-                processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic);
+                processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic, userAnswers);
             } else if (lowerCaseCommand.startsWith("help")) {
                 processHelpCommand(lowerCaseCommand, ui, helper);
             } else {
@@ -48,40 +56,60 @@ public class Parser {
     }
 
     private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
-                                       QuestionListByTopic questionListByTopic) {
+                                       QuestionListByTopic questionListByTopic, AnswerTracker userAnswers)
+            throws CustomException {
+        if (allResults.getSizeOfAllResults() == NO_RESULTS) {
+            throw new CustomException(MESSAGE_NO_RESULTS);
+        }
         String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER, TWO_PARAMETERS);
+        assert commandParts.length <= TWO_PARAMETERS;
         switch (commandParts.length) {
         case (NO_PARAMETERS): {
-            ui.printAllResults(!INCLUDES_QUESTION, allResults, questionListByTopic);
+            ui.printAllResults(!INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             break;
         }
         case (ONE_PARAMETER): {
-            if (commandParts[PARAMETER_INDEX].equals(QUESTION_PARAMETER)) {
-                ui.printAllResults(INCLUDES_QUESTION, allResults, questionListByTopic);
+            if (commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+                ui.printAllResults(INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             } else {
-                int index = Integer.parseInt(commandParts[FIRST_PARAMETER]);
-                String score = allResults.getSpecifiedResult(index - 1).getScore();
-                int topicNum = allResults.getTopicNum(index - 1);
-                ui.printOneResult(!INCLUDES_QUESTION, topicNum, score, questionListByTopic);
+                try {
+                    int index = Integer.parseInt(commandParts[FIRST_PARAMETER]);
+                    String score = allResults.getSpecifiedResult(index - 1).getScore();
+                    int topicNum = allResults.getTopicNum(index - 1);
+                    ui.printOneResult(!INCLUDES_DETAILS, topicNum, score, questionListByTopic, userAnswers, index);
+                } catch (NumberFormatException e) {
+                    throw new CustomException(MESSAGE_INVALID_PARAMETERS);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CustomException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+                }
             }
             break;
         }
         case (TWO_PARAMETERS): {
-            int index = Integer.parseInt(commandParts[SECOND_PARAMETER]);
-            String score = allResults.getSpecifiedResult(index - 1).getScore();
-            int topicNum = allResults.getTopicNum(index - 1);
-            ui.printOneResult(INCLUDES_QUESTION, topicNum, score, questionListByTopic);
-            break;
+            if (!commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+                throw new CustomException(MESSAGE_INVALID_PARAMETERS);
+            }
+            try {
+                int index = Integer.parseInt(commandParts[SECOND_PARAMETER]);
+                String score = allResults.getSpecifiedResult(index - 1).getScore();
+                int topicNum = allResults.getTopicNum(index - 1);
+                ui.printOneResult(INCLUDES_DETAILS, topicNum, score, questionListByTopic, userAnswers, index);
+                break;
+            } catch (NumberFormatException e) {
+                throw new CustomException(MESSAGE_INVALID_INDEX);
+            } catch (IndexOutOfBoundsException e) {
+                throw new CustomException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+            }
         }
         default: {
-            break;
+            throw new CustomException(MESSAGE_ERROR);
         }
         }
     }
 
     private void processStartCommand (
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
-            ResultsList allResults
+            ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
@@ -96,7 +124,7 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("booo no such topic");
             }
-            ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults);
+            ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
 
         } catch (NumberFormatException e) {
             throw new CustomException("invalid " + lowerCaseCommand + " parameter");
@@ -164,11 +192,14 @@ public class Parser {
     }
 
     public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,
-                                   Results topicResults){
+                                   Results topicResults, ArrayList<Boolean> correctness){
         inputAnswers[index] = answer;
         String correctAnswer = questionUnit.getSolution();
         if (answer.equals(correctAnswer)){
             topicResults.increaseCorrectAnswers();
+            correctness.add(IS_CORRECT_ANSWER);
+        } else {
+            correctness.add(!IS_CORRECT_ANSWER);
         }
     }
 
