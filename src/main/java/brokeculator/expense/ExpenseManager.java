@@ -21,9 +21,13 @@ public class ExpenseManager {
         expenses.remove(index);
     }
 
-    public double summariseExpenses() {
+    public double summariseExpenses(int beginIndex, int endIndex) {
         double total = 0;
-        for (Expense expense : expenses) {
+        if (endIndex == -1 || endIndex >= expenses.size()) {
+            endIndex = expenses.size() - 1;
+        }
+        ArrayList<Expense> expensesToList  = new ArrayList<>(expenses.subList(beginIndex, endIndex + 1));
+        for (Expense expense : expensesToList) {
             total += expense.getAmount();
         }
         return total;
@@ -41,6 +45,7 @@ public class ExpenseManager {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < expenses.size(); i++) {
             sb.append(expenses.get(i).getStringRepresentation());
+            sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
