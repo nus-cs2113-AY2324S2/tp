@@ -44,9 +44,6 @@ public class BaseDate {
             }
 
         }
-        if (dateTime == null) {
-            System.out.println("Incorrect Format");
-        }
     }
 
     private static ArrayList<String> dateTimeVary() {
