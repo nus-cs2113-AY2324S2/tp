@@ -2,6 +2,8 @@ package seedu.bookbuddy;
 
 
 import exceptions.BookNotFoundException;
+import exceptions.BookReadAlreadyException;
+import exceptions.BookUnreadAlreadyException;
 
 import java.util.ArrayList;
 
@@ -68,12 +70,18 @@ public class BookList {
      * Marks a book as read by its index.
      * @param index The index of the book to mark as read.
      */
-    public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
+    public void markDoneByIndex(int index) throws IndexOutOfBoundsException, BookReadAlreadyException{
         try {
             assert index > 0 && index <= books.size() : "Index out of valid range";
+            if (books.get(index - 1).isRead()) {
+                throw new BookReadAlreadyException("That book is already marked as read!");
+            }
+            assert !books.get(index - 1).isRead() : "Book is already marked as read";
             books.get(index - 1).markBookAsRead();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (BookReadAlreadyException e) {
+            System.out.println("That book is already marked as read!");
         }
     }
 
@@ -81,12 +89,18 @@ public class BookList {
      * Marks a book as unread by its index.
      * @param index The index of the book to mark as unread.
      */
-    public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
+    public void markUndoneByIndex(int index) throws IndexOutOfBoundsException, BookReadAlreadyException{
         try {
             assert index > 0 && index <= books.size() : "Index out of valid range";
+            if (!books.get(index - 1).isRead()) {
+                throw new BookUnreadAlreadyException("That book is already marked as unread!");
+            }
+            assert books.get(index - 1).isRead() : "Book is already marked as unread";
             books.get(index - 1).markBookAsUnread();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (BookUnreadAlreadyException e) {
+            System.out.println("That book is already marked as unread!");
         }
     }
 
