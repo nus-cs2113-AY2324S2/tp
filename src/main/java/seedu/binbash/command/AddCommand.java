@@ -28,7 +28,7 @@ public class AddCommand extends Command {
                     // Match 'd/' followed by any characters for `itemDescription`, lazy match, until seeing
                     // 'q/', 'e/', or 's/'.
                     "d/(?<itemDescription>.+?)(?=(q/|e/|s/))" +
-                    
+
                     // Optionally match 'q/' followed by the item quantity.
                     "(q/(?<itemQuantity>.+?)(?=(e/|s/)))?\\s*" +
 
