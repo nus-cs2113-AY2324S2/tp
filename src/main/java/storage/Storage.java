@@ -41,8 +41,11 @@ public class Storage {
     public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
             for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
+                assert entry != null;
                 LocalDate date = entry.getKey();
+                assert date != null;
                 List<String> taskList = entry.getValue();
+                assert taskList != null;
                 for (String task : taskList) {
                     writer.write(date + "|" + task + System.lineSeparator());
                 }
