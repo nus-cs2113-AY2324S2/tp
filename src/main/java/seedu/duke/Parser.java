@@ -53,6 +53,20 @@ public class Parser {
             deleteTask(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktiming")){
             changeTaskTiming(command, userList);
+        } else if(command.toLowerCase().startsWith("changetasktype")){
+            try {
+                InputValidator.validateChangeTaskType(command);
+                String[] parts = command.split("\\s+");
+                List<String> wordList = Arrays.asList(parts);
+                String day = wordList.get(2);
+                int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
+                String newType = wordList.get(wordList.indexOf("/type") + 1);
+                InputValidator.validateDay(day);
+                userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
+                System.out.println("Task type changed successfully.");
+            } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
+                throw new RuntimeException(e);
+            }
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
                 InputValidator.validateCompareInput(command);
@@ -111,8 +125,8 @@ public class Parser {
             List<String> wordList = Arrays.asList(parts);
             String day = parts[2];
             int index = Integer.parseInt(parts[wordList.indexOf("/index") + 1]);
-            LocalTime newStartTime = LocalTime.parse(parts[wordList.indexOf("/start") + 1]);
-            LocalTime newEndTime = LocalTime.parse(parts[wordList.indexOf("/end") + 1]);
+            LocalTime newStartTime = LocalTime.parse(parts[wordList.indexOf("/from") + 1]);
+            LocalTime newEndTime = LocalTime.parse(parts[wordList.indexOf("/to") + 1]);
             InputValidator.validateDay(day);
             userList.getActiveUser().getTimetable().changeFlexibleTaskTiming(day, index - 1, newStartTime, newEndTime);
             System.out.println("Flexible task timing changed successfully.");

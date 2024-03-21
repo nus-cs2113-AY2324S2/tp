@@ -83,12 +83,20 @@ public class Timetable {
         }
         Task task = tasks.get(index);
         if(!task.getType().equals("f")){
-            throw new IllegalArgumentException("Task on " +dayOfWeek +"at index " + index +" is not flexible.");
+            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + index +" is not flexible.");
         }
         task.setStartTime(newStartTime);
         task.setEndTime(newEndTime);
     }
-
+    public void changeTaskType(String dayOfWeek, int index, String newType){
+        String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
+        ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
+        if(index < 0 || index >= tasks.size()){
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        Task task = tasks.get(index);
+        task.setType(newType);
+    }
     /**
      * Compares and prints overlapping free time between two Timetables.
      *
@@ -143,6 +151,7 @@ public class Timetable {
             System.out.println("** Whole day is free on " + day);
         }
     }
+
 
 
 }
