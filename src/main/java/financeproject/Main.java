@@ -20,7 +20,7 @@ public class Main {
         UI ui = new UI();
         ui.printMessage("Welcome. In order to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
 
-        Parser parser = new Parser();
+        Parser parser = new Parser(ui);
         BaseCommand baseCommand = null;
         String response = "";
 
@@ -62,7 +62,7 @@ public class Main {
 
             String command = ui.readInput();
             try {
-                baseCommand = parser.parseCommand(command, manager);
+                baseCommand = parser.parseCommand(command);
                 response = baseCommand.execute(manager);
                 ui.printMessage(response);
             } catch (IncompletePromptException e) {
