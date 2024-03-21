@@ -88,7 +88,7 @@ class ExerciseManagerTest {
         parser.parseInput(validInput2);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        exerciseManager.list();
+        exerciseManager.executeListAction();
         String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Added Exercise: Deadlifts\n" +
@@ -121,12 +121,12 @@ class ExerciseManagerTest {
         String validInput = "exercise /add Push-ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
-        exerciseManager.list();
+        exerciseManager.executeListAction();
 
         String editedInput = "exercise /edit Push-ups /to Push Ups";
         parser.parseInput(editedInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
-        exerciseManager.list();
+        exerciseManager.executeListAction();
 
         String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
                 "-------------------------------------------------\n" +

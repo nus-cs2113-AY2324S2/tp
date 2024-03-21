@@ -25,40 +25,66 @@ public class WorkoutManager extends ActivityManager {
         assert parser != null : "Parser must not be null";
         switch (parser.getAction()) {
         case "create":
-            Workout newWorkout = processWorkout(parser);
-            add(newWorkout);
-            UserInterface.printMessage(String.format(
-                    "Added Workout Plan: %s\n", newWorkout.getActivityName()
-            ));
+            executeCreateAction(parser);
             break;
         case "delete":
-            Workout existingWorkout = processWorkout(parser);
-            delete(existingWorkout);
-            UserInterface.printMessage(String.format(
-                    "Deleted Exercise: %s", existingWorkout.getActivityName()
-            ));
+            executeDeleteAction(parser);
             break;
         case "assign":
-            String workoutPlan = assignExerciseToWorkout(parser);
-            UserInterface.printMessage(String.format(
-                    "Assigned Exercise '%s' to Workout Plan '%s'\n", parser.getActionParameter(), workoutPlan
-            ));
+            executeAssignAction(parser);
             break;
         case "unassign":
-            String workoutName = unassignExerciseFromWorkout(parser);
-            UserInterface.printMessage(String.format(
-                    "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
-            ));
+            executeUnassignAction(parser);
             break;
         case "info":
-            list(parser.getActionParameter());
+            executeInfoAction(parser);
             break;
         case "list":
-            list();
+            executeListAction();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
+    }
+
+    private void executeInfoAction(Parser parser) throws Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("info") : "Action must be info";
+        list(parser.getActionParameter());
+    }
+
+    private void executeUnassignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("unassign") : "Action must be unassign";
+        String workoutName = unassignExerciseFromWorkout(parser);
+        UserInterface.printMessage(String.format(
+                "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
+        ));
+    }
+
+    private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("assign") : "Action must be assign";
+        String workoutPlan = assignExerciseToWorkout(parser);
+        UserInterface.printMessage(String.format(
+                "Assigned Exercise '%s' to Workout Plan '%s'\n", parser.getActionParameter(), workoutPlan
+        ));
+    }
+
+    private void executeDeleteAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("delete") : "Action must be delete";
+        Workout existingWorkout = processWorkout(parser);
+        delete(existingWorkout);
+        UserInterface.printMessage(String.format(
+                "Deleted Exercise: %s", existingWorkout.getActivityName()
+        ));
+    }
+
+    private void executeCreateAction(Parser parser) throws Exceptions.InvalidInput,
+            Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
+        assert parser.getAction().equals("create") : "Action must be create";
+        Workout newWorkout = processWorkout(parser);
+        add(newWorkout);
+        UserInterface.printMessage(String.format(
+                "Added Workout Plan: %s\n", newWorkout.getActivityName()
+        ));
     }
 
     //@@author V4vern

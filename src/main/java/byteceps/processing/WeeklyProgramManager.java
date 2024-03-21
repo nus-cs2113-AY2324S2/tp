@@ -6,6 +6,9 @@ import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 public class WeeklyProgramManager extends ActivityManager {
     private final WorkoutManager workoutManager;
     private final String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
@@ -25,28 +28,45 @@ public class WeeklyProgramManager extends ActivityManager {
 
         switch (parser.getAction()) {
         case "assign":
-            String day = parser.getAdditionalArguments("to");
-            if (day == null) {
-                throw new Exceptions.InvalidInput("Week command not complete");
-            }
-            String workoutName = parser.getActionParameter();
-            Activity workout = workoutManager.retrieve(workoutName);
-            assignWorkoutToDay(workout, day.toLowerCase());
-            UserInterface.printMessage(String.format("Workout %s assigned to %s", workoutName, day));
+            executeAssignAction(parser);
             break;
         case "clear":
-            activityList.replaceAll(null);
-            UserInterface.printMessage("Your weekly program has been cleared");
+            executeClearAction();
             break;
         case "today":
-            //todo: retrieve the day of the week and print the appropriate workout
+            executeTodayAction();
             break;
         case "list":
-            list();
+            executeListAction();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
+    }
+
+    private void executeTodayAction() {
+        DayOfWeek today = LocalDate.now().getDayOfWeek();
+        String workoutString = ((Workout) activityList.get(today.ordinal())).toString(1);
+        String message = "Here's today's workout: " + System.lineSeparator() + today.toString()
+                + System.lineSeparator() + workoutString;
+        UserInterface.printMessage(message);
+    }
+
+    private void executeClearAction() {
+        activityList.replaceAll(null);
+        UserInterface.printMessage("Your weekly program has been cleared");
+    }
+
+    private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+        assert parser.getAction().equals("assign") : "Action must be assign";
+        String day = parser.getAdditionalArguments("to");
+        if (day == null) {
+            throw new Exceptions.InvalidInput("Week command not complete");
+        }
+        String workoutName = parser.getActionParameter();
+        Activity workout = workoutManager.retrieve(workoutName);
+        assignWorkoutToDay(workout, day.toLowerCase());
+        UserInterface.printMessage(String.format("Workout %s assigned to %s", workoutName, day));
     }
 
     public void assignWorkoutToDay(Activity workout, String day) throws Exceptions.InvalidInput {
@@ -89,7 +109,7 @@ public class WeeklyProgramManager extends ActivityManager {
     }
 
     @Override
-    public void list() {
+    public void executeListAction() {
         StringBuilder message = new StringBuilder();
         message.append("Your workouts for the week:").append(System.lineSeparator());
         int index = 0;
