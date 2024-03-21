@@ -3,6 +3,7 @@ package budgetbuddy.transaction;
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidIndexException;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.type.Income;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class TransactionListTest {
 
     @Test
     public void processTransaction_addsTransaction()
-            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax, EmptyArgumentException {
         Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
@@ -67,7 +68,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void removeTransaction_removesCorrectTransaction() throws EmptyArgumentException {
+    public void removeTransaction_removesCorrectTransaction() throws EmptyArgumentException, InvalidIndexException {
         Transaction testTransaction1 = new Income("Test1", 100, "Category1",
                 "14-03-2024", account);
         Transaction testTransaction2 = new Income("Test2", 200, "Category2",
@@ -87,7 +88,7 @@ public class TransactionListTest {
                 "14-03-2024", account);
         transactionList.addTransaction(testTransaction);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> transactionList.removeTransaction(
+        assertThrows(InvalidIndexException.class, () -> transactionList.removeTransaction(
                 "delete 2", account));
     }
 

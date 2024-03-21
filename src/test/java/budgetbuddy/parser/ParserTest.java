@@ -1,5 +1,6 @@
 package budgetbuddy.parser;
 import budgetbuddy.account.Account;
+import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import org.junit.jupiter.api.Test;
 import budgetbuddy.transaction.type.Transaction;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void testParseTransaction() throws InvalidTransactionTypeException {
+    public void testParseTransaction() throws InvalidTransactionTypeException, EmptyArgumentException {
         Parser parser = new Parser();
         Account account = new Account();
         Transaction transaction = parser.parseTransaction("add /t/Income /n/Shopping /$/50 /d/14-03-2024 " +
