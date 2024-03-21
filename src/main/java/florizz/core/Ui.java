@@ -8,16 +8,16 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Ui {
+    Scanner inputScanner = new Scanner (System.in);
     public void printIntroMessage(){
         String logo = "\n" +
-                "   __ _            _         \n" +
-                "  / _| |          (_)        \n" +
+                "   __ _            _\n" +
+                "  / _| |          (_)\n" +
                 " | |_| | ___  _ __ _ ________\n" +
                 " |  _| |/ _ \\| '__| |_  /_  /\n" +
-                " | | | | (_) | |  | |/ / / / \n" +
+                " | | | | (_) | |  | |/ / / /\n" +
                 " |_| |_|\\___/|_|  |_/___/___|\n" +
-                "                             \n" +
-                "                             \n";
+                "\n";
         System.out.println("Hello from\n" + logo);
     }
 
@@ -31,7 +31,6 @@ public class Ui {
      */
     public String getInput(){
         System.out.println("What can I do for you?");
-        Scanner inputScanner = new Scanner(System.in);
         return inputScanner.nextLine();
     }
 
