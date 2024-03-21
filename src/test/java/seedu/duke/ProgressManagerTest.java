@@ -20,7 +20,7 @@ public class ProgressManagerTest {
 
 
     @Test
-    public void testClearProgress() {
+    public void clearProgress_threeResults_emptyResultsList() {
 
         createResultList();
         ProgressManager pm = new ProgressManager(sessionResults);
