@@ -55,14 +55,16 @@ public class TransactionManager {
     public boolean editInflow(int index, Transaction<?> updatedTransaction) throws Exception {
         int numOfInflows = inflows.getTransactionListSize();
         Transaction<?> transactionEdited = inflows.getNthTransaction(numOfInflows - index);
-        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited), updatedTransaction);
+        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited),
+                                             updatedTransaction);
         return inflows.editTransactionIndex(numOfInflows - index, (Inflow) updatedTransaction);
     }
 
     public boolean editOutflow(int index, Transaction<?> updatedTransaction) throws Exception {
         int numOfOutflows = outflows.getTransactionListSize();
         Transaction<?> transactionEdited = outflows.getNthTransaction(numOfOutflows - index);
-        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited), updatedTransaction);
+        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited),
+                                             updatedTransaction);
         return outflows.editTransactionIndex(numOfOutflows - index, (Outflow) updatedTransaction);
     }
 

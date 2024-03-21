@@ -1,7 +1,7 @@
 package financeproject;
 
-import command.BaseCommand;
 import customexceptions.InactivityTimeoutException;
+import command.BaseCommand;
 import customexceptions.IncompletePromptException;
 import financialtransactions.TransactionManager;
 import parser.Parser;
@@ -85,8 +85,3 @@ public class Main {
         ui.closeScanner();
     }
 }
-
-
-
-
-
