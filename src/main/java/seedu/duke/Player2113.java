@@ -9,6 +9,7 @@ public class Player2113 {
     private TopicList topicList;
     private QuestionListByTopic questionListByTopic;
     private ResultsList allResults;
+    private AnswerTracker userAnswers;
     private final Helper helper;
 
     public Player2113(String someFilePath) {
@@ -17,6 +18,7 @@ public class Player2113 {
         questionListByTopic = new QuestionListByTopic();
         topicList = new TopicList();
         allResults = new ResultsList();
+        userAnswers = new AnswerTracker();
         helper = new Helper();
 
         if (someFilePath.contentEquals("something")) {
@@ -48,7 +50,7 @@ public class Player2113 {
         ui.printTopicList(topicList, ui);
 
         while (ui.isPlaying) {
-            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults, helper);
+            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults, helper, userAnswers);
         }
 
     }

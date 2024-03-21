@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.exceptions.CustomException;
 
+import java.util.ArrayList;
+
 public class Parser {
     private static final int PARAMETER_INDEX = 1;
   
@@ -19,25 +21,24 @@ public class Parser {
 
     public void parseCommand(
             String command, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper
+            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper,
+            AnswerTracker userAnswers
     ) throws CustomException {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
             if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
-                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults);
+                processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults, userAnswers);
                 //hasChosenTopic = true;
             } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
                 throw new CustomException("Please choose a topic in the format: topic [INDEX]");
-            }
-
-            if (lowerCaseCommand.startsWith("bye")) {
+            } else if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
                 //System.out.println("ERROR");
                 processSolutionCommand(lowerCaseCommand, ui, questionsList, topicList, questionListByTopic);
             } else if (lowerCaseCommand.startsWith("results")) {
-                processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic);
+                processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic, userAnswers);
             } else if (lowerCaseCommand.startsWith("help")) {
                 processHelpCommand(lowerCaseCommand, ui, helper);
             } else {
