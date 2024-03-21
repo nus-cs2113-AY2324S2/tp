@@ -455,9 +455,15 @@ public class Parser {
     }
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
+        LOGGER.log(Level.INFO, "Processing handleDeleteExpenseCommand");
+
+        assert expenses != null : "Expense list cannot be null";
+        assert input != null : "Input string cannot be null";
+
         String[] parts = input.split("i/", 2);
         // Check if the input format is correct (i.e., contains "i/")
         if (parts.length < 2) {
+            LOGGER.log(Level.WARNING, "Invalid command format. Expected format: <command> i/<index>");
             System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
             return null;
         }
@@ -466,12 +472,15 @@ public class Parser {
             int index = Integer.parseInt(parts[1].trim()) - 1;
             // Check if the index is within the bounds of the expense list.
             if (index < 0 || index >= expenses.size()) {
+                LOGGER.log(Level.WARNING, "Index is out of bounds.");
                 System.out.println("Error: Index is out of bounds.");
                 return null;
             }
+            LOGGER.log(Level.INFO, "Successfully processed DeleteExpenseCommand");
             // If the index is valid, return a new DeleteExpenseCommand.
             return new DeleteExpenseCommand(expenses, index);
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.SEVERE, "Index is not a valid number.");
             // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
             System.out.println("Error: Index is not a valid number.");
             return null;
@@ -479,6 +488,11 @@ public class Parser {
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
+        LOGGER.log(Level.INFO, "Processing handleReduceSavingCommand");
+
+        assert savings != null : "Savings list cannot be null";
+        assert input != null : "Input string cannot be null";
+
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
@@ -492,17 +506,20 @@ public class Parser {
 
                 // Validate the index range.
                 if (indexToReduce < 0 || indexToReduce >= savings.size()) {
+                    LOGGER.log(Level.WARNING, "Index is out of bounds.");
                     System.out.println("Error: Index is out of bounds.");
                     return null;
                 }
-
+                LOGGER.log(Level.INFO, "Successfully processed ReduceSavingCommand!");
                 return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
             } catch (NumberFormatException e){
+                LOGGER.log(Level.SEVERE, "Index and amount must be valid numbers.");
                 // Catch and handle incorrect number formats for index or amount.
                 System.out.println("Error: Index and amount must be valid numbers.");
                 return null;
             }
         } else {
+            LOGGER.log(Level.WARNING, "Invalid command format. Expected format: reduce i/<index> a/<amount>");
             // Handle the case where the input does not contain the required markers.
             System.out.println("Error: Invalid command format. Expected format: reduce i/<index> a/<amount>");
             return null;
