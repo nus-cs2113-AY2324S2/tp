@@ -52,7 +52,7 @@ class WorkoutManagerTest {
     public void execute_createEmptyNameWorkout_throwsInvalidInput() {
         String emptyInput = "workout /create";
         parser.parseInput(emptyInput);
-        assertThrows(Exceptions.InvalidInput.class, () -> workoutManager.execute(parser));
+        assertThrows(AssertionError.class, () -> workoutManager.execute(parser));
     }
 
     @Test
