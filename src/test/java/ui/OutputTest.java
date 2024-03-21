@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 import workouts.Gym;
 import workouts.Run;
@@ -55,7 +55,7 @@ class OutputTest {
     void printHistory_runsOnly_expectAllRunsPrinted() throws CustomExceptions.InvalidInput {
         new Run("40:10", "10.3", "15-03-2024");
         new Run("01:59:10", "15.3");
-        String expected = Constant.PARTITION_LINE +
+        String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "Your run history:" +
                 System.lineSeparator() +
@@ -65,9 +65,9 @@ class OutputTest {
                 System.lineSeparator() +
                 "2.\t\t\trun \t1:59:10\t\t15.3\t\t7:47/km\t\tNA" +
                 System.lineSeparator() +
-                Constant.PARTITION_LINE +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
-        Output.printHistory(Constant.RUN);
+        Output.printHistory(UiConstant.RUN);
         assertEquals(expected, outContent.toString());
     }
 
@@ -101,7 +101,7 @@ class OutputTest {
      */
     @Test
     void printLatestRun_noRun_expectNoRunMessage() {
-        String expected = "\u001B[31mError: " + Constant.NO_RUNS_FOUND + "\u001B[0m" +
+        String expected = "\u001B[31mError: " + UiConstant.NO_RUNS_FOUND + "\u001B[0m" +
                 System.lineSeparator();
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
@@ -123,11 +123,11 @@ class OutputTest {
 
             String expected = "Gym Session 2" +
                     System.lineSeparator() +
-                    String.format(Constant.GYM_STATION_FORMAT, "Squat Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Squat Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
                     System.lineSeparator() +
-                    String.format(Constant.GYM_STATION_FORMAT, "Lat Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Lat Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
                     System.lineSeparator();
 
             Output.printLatestGym();
@@ -145,7 +145,7 @@ class OutputTest {
      */
     @Test
     void printLatestGym_noGym_expectNoGymMessage() {
-        String expected = "\u001B[31mError: " + Constant.NO_GYMS_FOUND + "\u001B[0m" +
+        String expected = "\u001B[31mError: " + UiConstant.NO_GYMS_FOUND + "\u001B[0m" +
                 System.lineSeparator();
         Output.printLatestGym();
         assertEquals(expected, outContent.toString());
@@ -219,31 +219,31 @@ class OutputTest {
             gym2.addStation("Squat Press", 4, 10, 50);
             gym2.addStation("Lat Press", 20, 4, 10);
 
-            String expected = Constant.PARTITION_LINE +
+            String expected = UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
                     "Your gym history:" +
                     System.lineSeparator() +
                     "Gym Session 1"+
                     System.lineSeparator() +
-                    String.format(Constant.GYM_STATION_FORMAT, "Bench Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Bench Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
                     System.lineSeparator() +
-                    String.format(Constant.GYM_STATION_FORMAT, "Shoulder Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Shoulder Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
                     System.lineSeparator() +
-                    Constant.PARTITION_LINE +
+                    UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
                     "Gym Session 2" +
                     System.lineSeparator() +
-                    String.format(Constant.GYM_STATION_FORMAT, "Squat Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Squat Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
                     System.lineSeparator()+
-                    String.format(Constant.GYM_STATION_FORMAT, "Lat Press") +
-                    String.format(Constant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(UiConstant.GYM_STATION_FORMAT, "Lat Press") +
+                    String.format(UiConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
                     System.lineSeparator() +
-                    Constant.PARTITION_LINE +
+                    UiConstant.PARTITION_LINE +
                     System.lineSeparator();
-            Output.printHistory(Constant.GYM);
+            Output.printHistory(UiConstant.GYM);
             assertEquals(expected, outContent.toString());
         }  catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());

@@ -1,6 +1,6 @@
 package ui;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.Filters;
 import workouts.Gym;
@@ -17,7 +17,7 @@ public class Output {
      * Prints a horizontal line.
      */
     public static void printLine() {
-        System.out.println(Constant.PARTITION_LINE);
+        System.out.println(UiConstant.PARTITION_LINE);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Output {
         printLine();
         System.out.println("Please enter the details of station "
                 + stationNumber
-                + ". (Format: " + Constant.STATION_GYM_FORMAT + ")");
+                + ". (Format: " + UiConstant.STATION_GYM_FORMAT + ")");
         printLine();
     }
 
@@ -70,7 +70,7 @@ public class Output {
      * @return A string
      */
     private static String getFormattedRunWithIndex(int index, Workout currentWorkout) {
-        return String.format(Constant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
+        return String.format(UiConstant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
     }
 
     /**
@@ -79,8 +79,8 @@ public class Output {
      */
     public static void printAddRun(Run newRun) {
         printLine();
-        System.out.println(Constant.ADD_RUN);
-        System.out.println(Constant.RUN_HEADER);
+        System.out.println(UiConstant.ADD_RUN);
+        System.out.println(UiConstant.RUN_HEADER);
         System.out.println(newRun);
         printLine();
     }
@@ -91,7 +91,7 @@ public class Output {
      */
     public static void printAddGym(Gym gym) {
         printLine();
-        System.out.println(Constant.ADD_GYM);
+        System.out.println(UiConstant.ADD_GYM);
         printGymStats(gym);
         printLine();
     }
@@ -104,8 +104,8 @@ public class Output {
      */
     private static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
 
-        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.RUN);
-        System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
+        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(UiConstant.RUN);
+        System.out.println(UiConstant.RUN_HEADER_WITH_INDEX_FORMAT);
 
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
@@ -133,7 +133,7 @@ public class Output {
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
     private static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
-        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(Constant.GYM);
+        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(UiConstant.GYM);
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
             Gym currentWorkout = (Gym) workoutList.get(i);
@@ -172,7 +172,7 @@ public class Output {
         try {
             Workout latestRun = WorkoutList.getLatestRun();
             String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
-            System.out.println(Constant.RUN_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(UiConstant.RUN_HEADER_WITH_INDEX_FORMAT);
             System.out.println(latestRunString);
 
         } catch (CustomExceptions.OutOfBounds e) {
@@ -216,7 +216,7 @@ public class Output {
     public static void printLatest(String filter) {
         try {
             printLine();
-            System.out.println("Your latest " + filter + Constant.SPLIT_BY_COLON);
+            System.out.println("Your latest " + filter + UiConstant.SPLIT_BY_COLON);
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
             case RUN:
@@ -236,7 +236,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
+                throw new CustomExceptions.InvalidInput(UiConstant.INVALID_FILTER);
             }
         } catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
@@ -253,7 +253,7 @@ public class Output {
     public static void printHistory(String filter) {
         try {
             printLine();
-            System.out.println("Your " + filter + " history" + Constant.SPLIT_BY_COLON);
+            System.out.println("Your " + filter + " history" + UiConstant.SPLIT_BY_COLON);
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
             case RUN:
@@ -273,7 +273,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
+                throw new CustomExceptions.InvalidInput(UiConstant.INVALID_FILTER);
             }
         } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
@@ -317,9 +317,9 @@ public class Output {
     public static void printGreeting(int status) {
         if (status == 0) {
             System.out.println("Welcome back, Captain");
-            System.out.println(Constant.SUCCESSFUL_LOAD);
+            System.out.println(UiConstant.SUCCESSFUL_LOAD);
         } else {
-            System.out.println(Constant.MISSING_FILE);
+            System.out.println(UiConstant.MISSING_FILE);
         }
         printLine();
     }

@@ -1,6 +1,6 @@
 package health;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.Parser;
 
@@ -61,27 +61,27 @@ public class Bmi extends Health {
      * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
      */
     public static String[] getBmi(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[Constant.BMI_PARAMETERS];
+        String[] results = new String[UiConstant.BMI_PARAMETERS];
 
-        if (!input.contains(Constant.HEALTH_FLAG)
-                || !input.contains(Constant.HEIGHT_FLAG)
-                || !input.contains(Constant.WEIGHT_FLAG)
-                || !input.contains(Constant.DATE_FLAG)) {
-            throw new CustomExceptions.InvalidInput(Constant.MISSING_PARAMETERS);
+        if (!input.contains(UiConstant.HEALTH_FLAG)
+                || !input.contains(UiConstant.HEIGHT_FLAG)
+                || !input.contains(UiConstant.WEIGHT_FLAG)
+                || !input.contains(UiConstant.DATE_FLAG)) {
+            throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
         }
 
-        int indexH = input.indexOf(Constant.HEALTH_FLAG);
-        int indexHeight = input.indexOf(Constant.HEIGHT_FLAG);
-        int indexWeight = input.indexOf(Constant.WEIGHT_FLAG);
-        int indexDate = input.indexOf(Constant.DATE_FLAG);
+        int indexH = input.indexOf(UiConstant.HEALTH_FLAG);
+        int indexHeight = input.indexOf(UiConstant.HEIGHT_FLAG);
+        int indexWeight = input.indexOf(UiConstant.WEIGHT_FLAG);
+        int indexDate = input.indexOf(UiConstant.DATE_FLAG);
 
-        String command = input.substring(indexH + Constant.BMI_H_OFFSET, indexHeight).trim();
-        String heightSubstring = input.substring(indexHeight + Constant.BMI_HEIGHT_OFFSET, indexWeight).trim();
-        String weightSubstring = input.substring(indexWeight + Constant.BMI_WEIGHT_OFFSET, indexDate).trim();
-        String dateSubstring = input.substring(indexDate + Constant.DATE_OFFSET).trim();
+        String command = input.substring(indexH + UiConstant.BMI_H_OFFSET, indexHeight).trim();
+        String heightSubstring = input.substring(indexHeight + UiConstant.BMI_HEIGHT_OFFSET, indexWeight).trim();
+        String weightSubstring = input.substring(indexWeight + UiConstant.BMI_WEIGHT_OFFSET, indexDate).trim();
+        String dateSubstring = input.substring(indexDate + UiConstant.DATE_OFFSET).trim();
 
         if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty()) {
-            throw new CustomExceptions.InvalidInput(Constant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+            throw new CustomExceptions.InvalidInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 
         results[0] = command;
@@ -99,8 +99,8 @@ public class Bmi extends Health {
      * @throws AssertionError If calculated value is not positive.
      */
     public double calculateBmiValue() {
-        double bmi = Math.round((weight / (Math.pow(height, Constant.POWER_OF_TWO))) * Constant.ROUNDING_FACTOR)
-                / Constant.ROUNDING_FACTOR;
+        double bmi = Math.round((weight / (Math.pow(height, UiConstant.POWER_OF_TWO))) * UiConstant.ROUNDING_FACTOR)
+                / UiConstant.ROUNDING_FACTOR;
         assert bmi > 0: "BMI value must be positive";
         return bmi;
     }
@@ -115,16 +115,16 @@ public class Bmi extends Health {
     public static String getBmiCategory(double bmiValue) {
         assert bmiValue > 0: "BMI value must be positive";
 
-        if (bmiValue < Constant.UNDERWEIGHT_BMI_THRESHOLD) {
-            return Constant.UNDERWEIGHT_MESSAGE;
-        } else if (bmiValue < Constant.NORMAL_BMI_THRESHOLD) {
-            return Constant.NORMAL_WEIGHT_MESSAGE;
-        } else if (bmiValue < Constant.OVERWEIGHT_BMI_THRESHOLD) {
-            return Constant.OVERWEIGHT_MESSAGE;
-        } else if (bmiValue < Constant.OBESE_BMI_THRESHOLD) {
-            return Constant.OBESE_MESSAGE;
+        if (bmiValue < UiConstant.UNDERWEIGHT_BMI_THRESHOLD) {
+            return UiConstant.UNDERWEIGHT_MESSAGE;
+        } else if (bmiValue < UiConstant.NORMAL_BMI_THRESHOLD) {
+            return UiConstant.NORMAL_WEIGHT_MESSAGE;
+        } else if (bmiValue < UiConstant.OVERWEIGHT_BMI_THRESHOLD) {
+            return UiConstant.OVERWEIGHT_MESSAGE;
+        } else if (bmiValue < UiConstant.OBESE_BMI_THRESHOLD) {
+            return UiConstant.OBESE_MESSAGE;
         } else {
-            return Constant.SEVERELY_OBESE_MESSAGE;
+            return UiConstant.SEVERELY_OBESE_MESSAGE;
         }
     }
 
@@ -137,7 +137,7 @@ public class Bmi extends Health {
     public String toString() {
         return this.date
                 + System.lineSeparator()
-                + Constant.BMI_MESSAGE_PREFIX
+                + UiConstant.BMI_MESSAGE_PREFIX
                 + this.calculateBmiValue()
                 + System.lineSeparator()
                 + getBmiCategory(bmiValue);

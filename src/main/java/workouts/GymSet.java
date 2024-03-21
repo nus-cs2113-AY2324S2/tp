@@ -1,6 +1,6 @@
 package workouts;
 
-import utility.Constant;
+import utility.UiConstant;
 
 /**
  * Represents a GymSet object.
@@ -27,7 +27,7 @@ public class GymSet {
      */
     @Override
     public String toString() {
-        return String.format(Constant.GYM_SET_FORMAT, this.repetitions, this.weight);
+        return String.format(UiConstant.GYM_SET_FORMAT, this.repetitions, this.weight);
     }
 }
 
