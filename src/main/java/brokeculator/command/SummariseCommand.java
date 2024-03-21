@@ -19,6 +19,6 @@ public class SummariseCommand extends Command {
             return;
         }
         double summary = dashboard.getExpenseManager().summariseExpenses(beginIndex, endIndex);
-        UI.print("Total expenses: " + summary);
+        UI.prettyPrint("The total is $" + summary);
     }
 }

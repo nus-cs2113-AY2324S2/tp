@@ -9,12 +9,13 @@ public class DeleteParser {
         String[] userInputAsArray = userInput.trim().split("\\s+");
         int indexToDelete = 0;
         if (userInputAsArray.length == 1) {
-            return new InvalidCommand("Delete index not specified");
+            return new InvalidCommand("Please specify an index to delete." + System.lineSeparator()
+                    + "Format: delete <index>");
         }
         try {
             indexToDelete = Integer.parseInt(userInputAsArray[1]) - 1;
         } catch (NumberFormatException e) {
-            return new InvalidCommand("Delete index cannot be non-integer");
+            return new InvalidCommand("The delete index must be an integer.");
         }
         if (indexToDelete < 0) {
             return new InvalidCommand("Delete index must be one or greater");

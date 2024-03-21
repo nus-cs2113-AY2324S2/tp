@@ -17,5 +17,6 @@ public class DeleteCommand extends Command {
             return;
         }
         dashboard.getExpenseManager().delete(indexToDelete);
+        UI.prettyPrint("Deleted expense at index " + indexToDelete);
     }
 }

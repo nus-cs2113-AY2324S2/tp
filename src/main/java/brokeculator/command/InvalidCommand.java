@@ -11,6 +11,6 @@ public class InvalidCommand extends Command {
 
     @Override
     public void execute(Dashboard dashboard) {
-        UI.print(errorMessage);
+        UI.prettyPrint(errorMessage);
     }
 }

@@ -43,13 +43,22 @@ public class ExpenseManager {
 
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < expenses.size(); i++) {
-            sb.append(expenses.get(i).getStringRepresentation());
+        for (Expense expense : expenses) {
+            sb.append(expense.getStringRepresentation());
             sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Expense expense : expenses) {
+            sb.append(expense.getStringRepresentation());
+        }
+        return sb.toString();
+    }
+    
     public int getNumberOfExpensesTracked() {
         return expenses.size();
     }
