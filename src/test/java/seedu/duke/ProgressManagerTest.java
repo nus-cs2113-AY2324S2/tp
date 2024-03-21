@@ -4,10 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.logging.*;
+
 public class ProgressManagerTest {
     ResultsList sessionResults = new ResultsList();
 
+    private static Logger logger = Logger.getLogger("ProgressManagerTestLogger");
+
     void createResultList() {
+
+        logger.log(Level.INFO, "Creating dummy session results.");
 
         final int NUM_OF_RESULTS = 3;
         Results[] results = new Results[NUM_OF_RESULTS];
@@ -23,6 +29,8 @@ public class ProgressManagerTest {
     public void clearProgress_threeResults_emptyResultsList() {
 
         createResultList();
+
+        logger.log(Level.INFO, "Testing progress manager.");
         ProgressManager pm = new ProgressManager(sessionResults);
         pm.clearProgress();
         assertEquals(0, sessionResults.getNumOfResults());
