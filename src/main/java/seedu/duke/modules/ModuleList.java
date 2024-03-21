@@ -61,9 +61,7 @@ public class ModuleList {
         }
     }
     public void removeModule(Module module) {
-        if (module == null) {
-            throw new IllegalArgumentException("Module cannot be null.");
-        }
+        assert module != null : "Module cannot be null";
         // The remove operation returns false if the item was not found
         boolean removed = toBeTakenModuleList.remove(module) || takenModuleList.remove(module);
         if (!removed) {
