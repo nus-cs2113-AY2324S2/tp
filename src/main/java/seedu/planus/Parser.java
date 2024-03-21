@@ -1,11 +1,5 @@
 package seedu.planus;
 
-import java.awt.desktop.SystemEventListener;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-
 /**
  * The Parser class handles the parsing of user commands in the PlaNus application.
  */

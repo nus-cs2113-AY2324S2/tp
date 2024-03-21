@@ -1,22 +1,35 @@
 package seedu.planus;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
 
-    public static String MISSING_MAJOR = "Please retry with a major code.\ne.g. init CEG";
-    public static String INVALID_COMMAND = "Command entered is invalid.\nPlease enter: \"help\" for available commands.";
-    public static String INVALID_ADD_COURSE = "To add course, please enter: add course [course code]y/[year]t/[term]\n    e.g. add course CS1010y/1t/1";
-    public static String INVALID_ADD_GRADE = "To add grade, please enter: add grade [course code] [letter grade]\n    e.g. add grade CS1010 A";
-    public static String INVALID_ADD = "To add course, please enter: add course [course code]y/[year]t/[term]\n    e.g. add course CS1010y/1t/1\nTo add grade, please enter: add grade [course code] [letter grade]\n    e.g. add grade CS1010 A";
-    public static String INVALID_REMOVE_COURSE = "To remove course, please enter: rm course [course code]\n    e.g. rm course CS1010";
-    public static String INVALID_REMOVE_GRADE = "To remove grade, please enter: rm grade [course code]\n    e.g. rm grade CS1010";
-    public static String INVALID_REMOVE = "To remove course, please enter: rm course [course code]\n    e.g. rm course CS1010\nTo remove grade, please enter: rm grade [course code]\n    e.g. rm grade CS1010";
-    public static String INVALID_CHANGE_GRADE = "To change grade, please enter: change grade [course code] [letter grade]\n    e.g. change grade CS1010 A";
-    public static String INVALID_CHECK_YEAR_GRADE = "To check grade of a year, please enter: check y/[year]\n    e.g. check y/1";
-    public static String INVALID_CHECK_TERM_GRADE = "To check grade of a term, please enter: check y/[year] t/[term]\n    e.g. check y/1 t/1";
-    public static String INVALID_VIEW_YEAR_PLAN = "To view course plan of a year, please enter: view y/[year]\n    e.g. view y/1";
-    public static String INVALID_VIEW_TERM_PLAN = "To view course plan of a term, please enter: view y/[year] t/[term]\n    e.g. view y/1 t/1";
+    public static final String MISSING_MAJOR = "Please retry with a major code.\ne.g. init CEG";
+    public static final String INVALID_COMMAND = "Command entered is invalid.\nPlease enter: \"help\" " +
+            "for available commands.";
+    public static final String INVALID_ADD_COURSE = "To add course, please enter: add course " +
+            "[course code]y/[year]t/[term]\n    e.g. add course CS1010y/1t/1";
+    public static final String INVALID_ADD_GRADE = "To add grade, please enter: add grade [course code] " +
+            "[letter grade]\n    e.g. add grade CS1010 A";
+    public static final String INVALID_ADD = "To add course, please enter: add course [course code]y/[year]t/[term]\n"
+            + "    e.g. add course CS1010y/1t/1\nTo add grade, please enter: add grade [course code] [letter grade]\n"
+            + "    e.g. add grade CS1010 A";
+    public static final String INVALID_REMOVE_COURSE = "To remove course, please enter: rm course [course code]\n" +
+            "    e.g. rm course CS1010";
+    public static final String INVALID_REMOVE_GRADE = "To remove grade, please enter: rm grade [course code]\n" +
+            "    e.g. rm grade CS1010";
+    public static final String INVALID_REMOVE = "To remove course, please enter: rm course [course code]\n" +
+            "    e.g. rm course CS1010\nTo remove grade, please enter: rm grade [course code]\n" +
+            "    e.g. rm grade CS1010";
+    public static final String INVALID_CHANGE_GRADE = "To change grade, please enter: change grade " +
+            "[course code] [letter grade]\n    e.g. change grade CS1010 A";
+    public static final String INVALID_CHECK_YEAR_GRADE = "To check grade of a year, please enter: check y/[year]\n" +
+            "    e.g. check y/1";
+    public static final String INVALID_CHECK_TERM_GRADE = "To check grade of a term, please enter: " +
+            "check y/[year] t/[term]\n    e.g. check y/1 t/1";
+    public static final String INVALID_VIEW_YEAR_PLAN = "To view course plan of a year, please enter: " +
+            "view y/[year]\n    e.g. view y/1";
+    public static final String INVALID_VIEW_TERM_PLAN = "To view course plan of a term, please enter: " +
+            "view y/[year] t/[term]\n    e.g. view y/1 t/1";
 
     public static void printLogo() {
         System.out.println(" ________  ___       ________  ________   ___  ___  ________      \n" +

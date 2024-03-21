@@ -237,7 +237,8 @@ public class Timetable {
             yearGPA = yearGrade / yearMCs;
         }
 
-        plan.append("Year ").append(year).append(" GPA: ").append(yearGPA).append(System.lineSeparator()).append(System.lineSeparator());
+        plan.append("Year ").append(year).append(" GPA: ").append(yearGPA).append(System.lineSeparator())
+                .append(System.lineSeparator());
 
         return plan.toString();
     }
