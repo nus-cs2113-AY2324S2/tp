@@ -2,6 +2,7 @@ package recipeio.commands;
 
 import recipeio.recipe.Recipe;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FindCommand {
@@ -32,6 +33,10 @@ public class FindCommand {
                 System.out.println("Here are your matches:\n" + output);
             }
         }
+    }
+
+    public static void findDate(LocalDate date, ArrayList<Recipe> recipes) {
+
     }
     public static void execute(String userInput, ArrayList<Recipe> recipes) {
         String[] inputSplitUp = userInput.split(" ", 3);
