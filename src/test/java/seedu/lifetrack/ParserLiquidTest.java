@@ -138,8 +138,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput("liquids in b/Milo");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
-        }
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());        }
     }
     //@@author
 }
