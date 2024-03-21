@@ -2,7 +2,6 @@ package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.calories.calorielist.Entry;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.io.ByteArrayOutputStream;
@@ -10,7 +9,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 
 
 class LifeTrackTest {
@@ -23,12 +22,12 @@ class LifeTrackTest {
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 1");
         assertEquals(initialSize - 1, calorieList.getSize());
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
-        calorieList.addEntry("calories in d/2024-03-14 t/13:00 a/Eat c/200");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories in eat c/200 date/2024-03-14");
         initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 2");
         assertEquals(initialSize - 1, calorieList.getSize());
@@ -37,7 +36,7 @@ class LifeTrackTest {
     @Test
     public void testDeleteCalorieInvalidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete 2"); // Index out of bounds
         calorieList.deleteEntry("delete -1");
@@ -49,7 +48,9 @@ class LifeTrackTest {
         try {
             parseCaloriesInput("calories in");
         } catch (InvalidInputException e) {
-            assertEquals("\t Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("\t Invalid input! \n"  + "\t Please ensure that you have" +
+                            " keyed in the correct format in the correct order!\n" +
+                    "\t Example input: calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
 
@@ -58,7 +59,10 @@ class LifeTrackTest {
         try {
             parseCaloriesInput("calories in d/220224 t/");
         } catch (InvalidInputException e) {
-            assertEquals("\t Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
+                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
 
@@ -81,13 +85,13 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in d/2024-03-14 t/12:00 a/Run c/200");
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         String expectedOutput = addedEntryHeader + lineSeparator +
-                "\t " + Entry.toString(calorieList.getEntry(0)) + lineSeparator +
+                "\t " + calorieList.getEntry(0).toString() + lineSeparator +
                 "\t Your Caloric List:" + lineSeparator +
-                "\t 1. Activity: Run, Calories: 200" + lineSeparator;
+                "\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -97,30 +101,30 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in d/2024-03-14 t/12:00 a/Run c/200");
-        calorieList.addEntry("calories out d/2024-03-14 t/13:00 a/Walk c/150");
-        calorieList.addEntry("calories in d/2024-03-14 t/14:00 a/Eat c/500");
-        calorieList.addEntry("calories out d/2024-03-14 t/15:00 a/Run c/250");
-        calorieList.addEntry("calories in d/2024-03-14 t/16:00 a/Eat c/300");
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Walk c/150 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/500 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/250 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         StringBuilder expectedOutput = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             expectedOutput.append(addedEntryHeader)
-                    .append(lineSeparator).append("\t ").append(Entry.toString(calorieList.getEntry(i)))
+                    .append(lineSeparator).append("\t ").append(calorieList.getEntry(i).toString())
                     .append(lineSeparator);
         }
         expectedOutput.append("\t Your Caloric List:")
                 .append(lineSeparator)
-                .append("\t 1. Activity: Run, Calories: 200")
+                .append("\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200")
                 .append(lineSeparator)
-                .append("\t 2. Activity: Walk, Calories: 150")
+                .append("\t 2. \t Date: 2024-03-14, Description: Walk, Calories: 150")
                 .append(lineSeparator)
-                .append("\t 3. Activity: Eat, Calories: 500")
+                .append("\t 3. \t Date: 2024-03-14, Description: Eat, Calories: 500")
                 .append(lineSeparator)
-                .append("\t 4. Activity: Run, Calories: 250")
+                .append("\t 4. \t Date: 2024-03-14, Description: Run, Calories: 250")
                 .append(lineSeparator)
-                .append("\t 5. Activity: Eat, Calories: 300")
+                .append("\t 5. \t Date: 2024-03-14, Description: Eat, Calories: 300")
                 .append(lineSeparator);
         assertEquals(expectedOutput.toString(), outputStream.toString());
         assertEquals(5, calorieList.getSize());

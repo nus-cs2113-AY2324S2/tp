@@ -6,7 +6,7 @@ public class CalorieListUi {
 
     public static void successfulDeletedMessage(Entry toDelete) {
         System.out.println("\t The following calorie record has been successfully deleted!");
-        System.out.println("\t " + Entry.toString(toDelete));
+        System.out.println("\t " + toDelete.toString());
     }
 
     public static void emptyListMessage() {
@@ -19,7 +19,7 @@ public class CalorieListUi {
 
     public static void printNewCalorieEntry(Entry newEntry) {
         System.out.println("\t The following entry has been added to your caloric list!");
-        System.out.println("\t " + Entry.toString(newEntry));
+        System.out.println("\t " + newEntry.toString());
 
     }
 }

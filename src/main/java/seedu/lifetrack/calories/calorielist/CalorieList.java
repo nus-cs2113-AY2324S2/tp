@@ -3,14 +3,12 @@ package seedu.lifetrack.calories.calorielist;
 
 import static seedu.lifetrack.system.exceptions.ErrorMessages.printIndexOutOfBoundsError;
 import static seedu.lifetrack.system.exceptions.ErrorMessages.printNumberFormatError;
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
 import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
 import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
 import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
 
-import seedu.lifetrack.calories.activity.Activity;
-import seedu.lifetrack.calories.Calorie;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
@@ -77,10 +75,7 @@ public class CalorieList {
         } else {
             calorieListHeader();
             for (int i = 0; i < calorieArrayList.size(); i++) {
-                Entry entry = calorieArrayList.get(i);
-                Activity activity = entry.getActivity();
-                Calorie calorie = entry.getCalorie();
-                System.out.println("\t " + (i + 1) + ". " + Entry.toString(calorieArrayList.get(i)));
+                System.out.println("\t " + (i + 1) + ". " + calorieArrayList.get(i).toString());
             }
         }
     }
