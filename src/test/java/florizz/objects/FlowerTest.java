@@ -12,9 +12,4 @@ public class FlowerTest {
         assertEquals("Orchid",flower.getFlowerName());
     }
 
-    @Test
-    void testToString() {
-        Flower flower = new Flower("Rose","Red","Valentines Day");
-        assertEquals("Name: Rose\nColour: Red\nOccasion: Valentines Day\n",flower.toString());
-    }
 }

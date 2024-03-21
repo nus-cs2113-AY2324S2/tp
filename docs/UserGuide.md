@@ -1,42 +1,168 @@
 # User Guide
+_Florizz is your personal digital florist which helps people in Singapore to curate flowers to create bouquets for all occasions._
 
-## Introduction
+## Features
+### Viewing help: `help`
+Shows a list of commands and its corresponding function
 
-{Give a product intro}
+Format: `help`
 
-## Quick Start
+Expected output:
 
-{Give steps to get started quickly}
+```
+Here are the list of commands you can use:
+1. new <bouquetName> - Add a bouquet
+2. delete <bouquetName> - Delete a bouquets
+3. mybouquets - List current saved bouquets
+4. info <flowerName> - Provide information on chosen flower
+5. add <flowerName> /q <quantity> /to <bouquetName> - add flower to a bouquet.
+6. remove <flowerName> /q <quantity> /from <bouquetName> - remove flower from a bouquet.
+7. flower - Shows a list of flowers that can be added into mybouquets
+8. flower <occasion> - Shows a list of flowers associated with said occasion
+9. occasion - Shows a list of occasions associated with available flowers.
+10. bye - Exits the programme
+```
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+### Create a new bouquet: `new`
+Creates an empty bouquet to add flowers to later
 
-## Features 
+Format: `new NAME`
 
-{Give detailed description of each feature}
+Bouquet name must not already exist
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Examples:
+`new For Girlfriend`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Expected output:
+```
+Added new bouquet to list: 
+For Girlfriend
+```
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### Delete existing bouquet: `delete`
+Deletes a bouquet from the bouquet list
 
-Example of usage: 
+Format:  `delete <bouquetName>`
 
-`todo n/Write the rest of the User Guide d/next week`
+Bouquet of that name must exist in the list
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Example:
+`delete For Mother`
 
-## FAQ
+Expected output:
+```
+Deleted bouquet: 
+For Mother
+```
 
-**Q**: How do I transfer my data to another computer? 
+### View existing bouquets: mybouquets
+Views all the bouquets in the list
 
-**A**: {your answer here}
+Format: `mybouquets`
 
-## Command Summary
+Expected output:
+```
+Here are the list of your saved bouquets:
+1. For Girlfriend :
+      No flowers added so far
+```
 
-{Give a 'cheat sheet' of commands here}
+### List all available flowers: flowers
+List all available flowers in the database currently, also able to filter presented flowers according to occasion, colour and meaning
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Format: `flower <occassion>`
+
+Example: `flower funeral`
+
+Expected output:
+```
+Here are all the flowers related to funeral: 
+Lily
+Chrysanthemum
+```
+### View detailed info of a flower: info
+
+Get detailed info (colour, meaning etc) about a specific flower in the database
+
+Format: `info <flowerName>`
+
+Example: `info Orchid`
+
+Expected Output:
+```
+Name: Orchid
+Colour: White
+Occasion: Wedding
+```
+
+### Add flower: add
+
+Adds a flower into a bouquet
+
+Format: `add <flowerName> /q <quantity> /to <bouquetName>`
+
+- Flower must exist in the database
+- Quantity must be a positive integer
+- Bouquet must exist in the database
+
+Examples:
+- `add Rose /q 3 /to Bouquet for mom`
+- `add Babys breath /q 2 /to Sister’s graduation`
+
+Expected Output:
+```
+You have successfully added the following: 
+    - 3 x Rose -> Bouquet: For Girlfriend
+Here are the list of your saved bouquets:
+1. For Girlfriend :
+    - 3 x Rose
+```
+
+### Remove flower: remove
+
+Removes a flower from a bouquet
+
+Format: `remove <flowerName> /q <quantity> /from <bouquetName>`
+
+- Flower must exist in the database and the bouquet specified
+- Quantity must be more than 0 and a valid number
+- Bouquet must exist in the database
+
+Examples:
+- `remove Rose /q 1 /from For Girfriend`
+- `remove Gerbera /q 3 /from Valentine’s Day`
+
+Expected output:
+```
+You have successfully added the following: 
+    - 1 x Rose -> Bouquet: For Girlfriend
+Here are the list of your saved bouquets:
+1. For Girlfriend :
+    - 2 x Rose
+```
+
+### List occasions: occasion
+Shows a list of occasions for buying flowers that users can choose. Upon choosing an occasion, a list of flowers that is associated with the chosen occasion will be shown.
+
+Format: `occasion`
+
+Expected output:
+```
+Here are all the occasions associated with the available flowers: 
+mother's day
+funeral
+valentines
+wedding
+```
+
+### Exit programme: exit
+
+Exits the program.
+
+Format: `bye`
+
+Expected output:
+```
+Enjoy your bouquet! Thank you for using Florizz
+```
+

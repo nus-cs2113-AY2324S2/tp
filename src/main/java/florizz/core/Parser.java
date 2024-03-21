@@ -1,6 +1,16 @@
 package florizz.core;
 
-import florizz.command.*;
+import florizz.command.Command;
+import florizz.command.AddBouquetCommand;
+import florizz.command.AddFlowerCommand;
+import florizz.command.DeleteBouquetCommand;
+import florizz.command.ExitCommand;
+import florizz.command.FlowerCommand;
+import florizz.command.InfoCommand;
+import florizz.command.ListBouquetCommand;
+import florizz.command.ListOccasionCommand;
+import florizz.command.RemoveFlowerCommand;
+import florizz.command.HelpCommand;
 import florizz.objects.Bouquet;
 
 public class Parser {
@@ -30,7 +40,7 @@ public class Parser {
         case ("flower"):
             return handleFlowerCommand(input);
         case ("info"):
-              return handleInfoCommand(input);      
+            return handleInfoCommand(input);
         case ("occasion"):
             return new ListOccasionCommand();
         case ("add"):
@@ -99,11 +109,13 @@ public class Parser {
 
     private static AddFlowerCommand handleAddFlower(String argument) throws FlorizzException {
         if (argument == null) {
-            throw new FlorizzException("No argument detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+            throw new FlorizzException("No argument detected! " +
+                    "Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
         }
 
         if (!argument.matches(ADD_FLOWER_REGEX)) {
-            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
+            throw new FlorizzException("Incorrect format detected! " +
+                    "Please use the correct format of 'add <flowerName> /q <quantity> /to <bouquetName>");
         }
 
         // [WARNING] might need to check for extra slash k
@@ -111,7 +123,7 @@ public class Parser {
         int prefixIndex = argument.indexOf(ADD_FLOWER_PREFIX);
         int quantityIndex = argument.indexOf(QUANTITY);
 
-        String flowerName = argument.substring(0,quantityIndex).trim();
+        String flowerName = argument.substring(0,quantityIndex).trim().toLowerCase();
         String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
         // [WARNING] might need to check if it's a valid integer
         Integer quantity = Integer.parseInt(quantityString);
@@ -122,11 +134,13 @@ public class Parser {
 
     private static RemoveFlowerCommand handleRemoveFlower(String argument) throws FlorizzException {
         if (argument == null) {
-            throw new FlorizzException("No argument detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+            throw new FlorizzException("No argument detected! " +
+                    "Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
         }
 
         if (!argument.matches(REMOVE_FLOWER_REGEX)) {
-            throw new FlorizzException("Incorrect format detected! Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
+            throw new FlorizzException("Incorrect format detected! " +
+                    "Please use the correct format of 'remove <flowerName> /q <quantity> /from <bouquetName>");
         }
 
         // [WARNING] might need to check for extra slash k
@@ -134,7 +148,8 @@ public class Parser {
         int prefixIndex = argument.indexOf(REMOVE_FLOWER_PREFIX);
         int quantityIndex = argument.indexOf(QUANTITY);
 
-        String flowerName = argument.substring(0, quantityIndex).trim();
+
+        String flowerName = argument.substring(0, quantityIndex).trim().toLowerCase();
         String quantityString = removePrefix(argument.substring(quantityIndex, prefixIndex), QUANTITY).trim();
         // [WARNING] might need to check if it's a valid integer
         Integer quantity = Integer.parseInt(quantityString);
@@ -142,11 +157,11 @@ public class Parser {
 
         return new RemoveFlowerCommand(flowerName, quantity, bouquetName);
     }
+
     private static InfoCommand handleInfoCommand(String input) {
         String flowerName = input.substring(input.indexOf(" ") + 1);
         assert !flowerName.isEmpty() : "This string is empty";
         return new InfoCommand(flowerName);
 
     }
-
 }

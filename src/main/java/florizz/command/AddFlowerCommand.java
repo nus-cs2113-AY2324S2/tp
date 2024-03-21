@@ -7,7 +7,7 @@ import florizz.objects.Bouquet;
 import florizz.objects.Flower;
 
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
+
 
 public class AddFlowerCommand extends Command{
     private String flowerName;
@@ -37,11 +37,10 @@ public class AddFlowerCommand extends Command{
         }
 
         boolean doesFlowerExist = false;
-        FlowerDictionary flowerDictionary = new FlowerDictionary();
         Flower flowerToBeAdded = new Flower();
-        for (int i = 0; !doesFlowerExist && i < flowerDictionary.size(); i++) {
-            if (flowerDictionary.get(i).getFlowerName().equals(flowerName)) {
-                flowerToBeAdded = flowerDictionary.get(i);
+        for (int i = 0; !doesFlowerExist && i < FlowerDictionary.size(); i++) {
+            if (FlowerDictionary.get(i).getFlowerName().toLowerCase().equals(flowerName)) {
+                flowerToBeAdded = FlowerDictionary.get(i);
                 doesFlowerExist = true;
             }
         }

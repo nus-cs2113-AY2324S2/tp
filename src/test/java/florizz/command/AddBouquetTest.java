@@ -20,8 +20,7 @@ public class AddBouquetTest {
         Command testAddBouquetCommand = new AddBouquetCommand(testBouquet);
         try {
             testAddBouquetCommand.execute(testList, ui);
-        }
-        catch(FlorizzException error){
+        } catch(FlorizzException error){
             ui.printError(error);
         }
         assertEquals(controlList, testList);

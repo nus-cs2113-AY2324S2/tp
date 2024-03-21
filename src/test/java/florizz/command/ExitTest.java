@@ -1,6 +1,5 @@
 package florizz.command;
 
-import florizz.command.ExitCommand;
 import florizz.core.Ui;
 import florizz.objects.Bouquet;
 import org.junit.jupiter.api.Test;
