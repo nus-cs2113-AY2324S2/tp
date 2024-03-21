@@ -12,6 +12,7 @@ import ui.ResponseManager;
 import java.util.Scanner;
 
 public class EconoCraftLogic {
+    private static final Scanner userInput = new Scanner(System.in);
     private final PlayerProfile playerProfile;
 
     private EconoCraftLogic(PlayerProfile playerProfile) {
@@ -19,23 +20,22 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
-        Scanner input = new Scanner(System.in);
         ResponseManager.printGameInit();
-        String playerName = getName(input);
+        String playerName = getName();
 
         ResponseManager.printJobSelect();
-        String jobType = getJob(input);
+        String jobType = getJob();
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
         return new EconoCraftLogic(playerProfile);
     }
 
-    private static String getJob(Scanner input) {
+    private static String getJob() {
         String jobType = "";
         while (jobType.isEmpty()) {
             try {
-                jobType = Parser.parseCareer(input.nextLine());
+                jobType = Parser.parseCareer(userInput.nextLine());
             } catch (JobSelectException e) {
                 ResponseManager.indentPrint(e.getMessage());
             }
@@ -43,11 +43,11 @@ public class EconoCraftLogic {
         return jobType;
     }
 
-    private static String getName(Scanner input) {
+    private static String getName() {
         String playerName = "";
         while (playerName.isEmpty()) {
             try {
-                playerName = Parser.parseName(input.nextLine());
+                playerName = Parser.parseName(userInput.nextLine());
             } catch (NameInputException e) {
                 ResponseManager.indentPrint(e.getMessage());
             }
@@ -57,7 +57,6 @@ public class EconoCraftLogic {
 
     public void startEcono() {
         ResponseManager.printHelp();
-        Scanner userInput = new Scanner(System.in);
         boolean exitFlag = false;
 
         while (!exitFlag) {
