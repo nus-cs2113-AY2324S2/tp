@@ -2,6 +2,7 @@ package command;
 
 import item.Item;
 import itemlist.Itemlist;
+import storage.Storage;
 
 public class EditCommand extends Command {
 
@@ -18,15 +19,17 @@ public class EditCommand extends Command {
     public void execute() {
         int index = -1;
         for (Item item : Itemlist.getItems()) {
-            if (item.getItemName().toLowerCase().equals(itemName)) {
+            if (item.getItemName().equals(itemName) || item.getItemName().toLowerCase().equals(itemName)) {
                 index = Itemlist.getItems().indexOf(item);
                 break;
             }
         }
         if (index == -1) {
             //throw exception;
+            System.out.println("item not found!");
         } else {
             Itemlist.editQuantity(index, newQuantity);
         }
+        Storage.overwriteFile(Itemlist.getItems(), false);
     }
 }

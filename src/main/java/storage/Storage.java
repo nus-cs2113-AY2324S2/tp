@@ -75,9 +75,22 @@ public class Storage {
 
     public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
         Item lastItem = items.get(items.size() - 1);
-        String descriptionAdded = items.size() + " | " + lastItem.getItemName() +
+        String descriptionAdded = (items.size() - 1) + " | " + lastItem.getItemName() +
                 " | " + lastItem.getQuantity() + "\n";
         updateFile(descriptionAdded, ifAppend);
+    }
+
+    public static void overwriteFile(ArrayList<Item> items, boolean ifAppend) {
+        int length = items.size();
+        for (int index = 0; index < length; index++) {
+            String descriptionAdded = index + " | " + items.get(index).getItemName() +
+                    " | " + items.get(index).getQuantity() + "\n";
+            if (index == 0) {
+                updateFile(descriptionAdded, ifAppend);
+            } else {
+                updateFile(descriptionAdded, !ifAppend);
+            }
+        }
     }
 
     public static void main (String[]args){
