@@ -5,8 +5,10 @@ import ui.ResponseManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class MCQGame implements MiniGame {
+    private static final Logger logger = Logger.getLogger("MCQLog");
     private static final String INSTRUCTION_MESSAGE = "Type T for true and F for false\n";
     private static final String QUESTION_1 =
             "As per the textbook, brown-field projects are usually \n" +
@@ -50,6 +52,7 @@ public class MCQGame implements MiniGame {
         ResponseManager.indentPrint(START_MSG);
         for (int i = 0; i < 2; i++) {
             int index = getRandomNumber(0, questionList.size() - 1);
+            assert index <= 3 : "Should not have index larger three!!!";
             ResponseManager.indentPrint(questionList.get(index));
             ResponseManager.indentPrint(INSTRUCTION_MESSAGE);
             String response = scanner.nextLine();
@@ -74,6 +77,8 @@ public class MCQGame implements MiniGame {
     public void outputResult() {
         System.out.println("You answered " + correctCount
                 + " questions correctly.\n");
+
+        logger.info("reached the end of rest action");
     }
 
     public int getRandomNumber(int min, int max) {
