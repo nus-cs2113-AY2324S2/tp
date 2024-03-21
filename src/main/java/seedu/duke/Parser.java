@@ -157,7 +157,7 @@ public class Parser {
             int questionNum = Integer.parseInt(commandParameterQn);
 
             // checks validity of parameter
-            if ((topicNum < 1 || topicNum > topicList.getSize())) {
+            if (topicNum < 1 || topicNum > topicList.getSize()) {
                 throw new CustomException("booo no such topic");
             }
 
