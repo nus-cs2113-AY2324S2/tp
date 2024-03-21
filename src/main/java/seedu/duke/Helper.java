@@ -17,7 +17,7 @@ public class Helper {
         commandList.add(new Command("bye", "Terminate the program", "bye"));
     }
 
-    public static String[][] listAllCommands() {
+    public String[][] listAllCommands() {
         int commandNum = commandList.size();
         String[][] tableData = new String[commandNum][];
         for (int i = 0; i < commandNum; i++) {

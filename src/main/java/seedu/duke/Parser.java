@@ -125,6 +125,8 @@ public class Parser {
                 throw new CustomException("No such topic");
             }
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
+            System.out.println("You have finished the topic! What will be your next topic?");
+            ui.printTopicList(topicList, ui);
 
         } catch (NumberFormatException e) {
             throw new CustomException("invalid " + lowerCaseCommand + " parameter");

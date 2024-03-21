@@ -43,7 +43,7 @@ public class Ui {
     }
 
     private void askForInput() {
-        System.out.println("Input a command player! // TODO: show possible commands"); // TODO
+        System.out.println("Input a command player! "); // TODO: show possible commands
     }
 
     private void askForAnswerInput(){
