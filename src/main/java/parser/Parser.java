@@ -9,6 +9,7 @@ import command.EditInflowCommand;
 import command.EditOutflowCommand;
 import command.ExitCommand;
 import command.ViewHistoryCommand;
+import command.HelpCommand;
 import customexceptions.IncompletePromptException;
 import financialtransactions.TransactionManager;
 import userinterface.UI;
@@ -27,8 +28,7 @@ public class Parser {
         String action = commandParts[0];
         switch (action) {
         case "help":
-            //implement help command
-            break;
+            return new HelpCommand(commandParts);
         case "add-inflow":
             if (commandParts.length < 6) {
                 throw new IncompletePromptException(command);
@@ -70,7 +70,6 @@ public class Parser {
         default:
             throw new Exception("Invalid command");
         }
-        return null;
     }
 
 }
