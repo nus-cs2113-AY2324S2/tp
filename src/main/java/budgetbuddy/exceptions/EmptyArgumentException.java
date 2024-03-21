@@ -1,4 +1,4 @@
-package budgetbuddy.exception;
+package budgetbuddy.exceptions;
 
 public class EmptyArgumentException extends Exception {
     public EmptyArgumentException(String message) {

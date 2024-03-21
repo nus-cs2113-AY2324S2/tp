@@ -1,10 +1,10 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
-import budgetbuddy.exception.EmptyArgumentException;
-import budgetbuddy.exception.InvalidAddTransactionSyntax;
-import budgetbuddy.exception.InvalidIndexException;
-import budgetbuddy.exception.InvalidTransactionTypeException;
+import budgetbuddy.exceptions.EmptyArgumentException;
+import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
+import budgetbuddy.exceptions.InvalidIndexException;
+import budgetbuddy.exceptions.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.storage.DataStorage;
 import budgetbuddy.transaction.type.Transaction;

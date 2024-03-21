@@ -1,8 +1,8 @@
 package budgetbuddy.parser;
 
 import budgetbuddy.account.Account;
-import budgetbuddy.exception.EmptyArgumentException;
-import budgetbuddy.exception.InvalidTransactionTypeException;
+import budgetbuddy.exceptions.EmptyArgumentException;
+import budgetbuddy.exceptions.InvalidTransactionTypeException;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;

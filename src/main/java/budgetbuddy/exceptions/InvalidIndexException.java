@@ -1,4 +1,4 @@
-package budgetbuddy.exception;
+package budgetbuddy.exceptions;
 
 public class InvalidIndexException extends Exception {
     public InvalidIndexException (String message) {

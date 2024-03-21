@@ -1,7 +1,7 @@
 package budgetbuddy.parser;
 import budgetbuddy.account.Account;
-import budgetbuddy.exception.EmptyArgumentException;
-import budgetbuddy.exception.InvalidTransactionTypeException;
+import budgetbuddy.exceptions.EmptyArgumentException;
+import budgetbuddy.exceptions.InvalidTransactionTypeException;
 import org.junit.jupiter.api.Test;
 import budgetbuddy.transaction.type.Transaction;
 
