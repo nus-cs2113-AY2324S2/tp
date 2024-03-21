@@ -89,4 +89,8 @@ public final class Ui {
     public static void printThresholdWarningAlert() {
         printToScreen(Messages.ALERT_FIRST_LOW_QUANTITY_OCCURRENCE);
     }
+
+    public static void printNoLowQuantity() {
+        printToScreen(Messages.MESSAGE_NO_LOW_QUANTITY_PRODUCTS);
+    }
 }

@@ -3,6 +3,7 @@ package seedu.stockpal.data;
 import java.util.List;
 import java.util.ArrayList;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -102,6 +103,8 @@ public class ProductList {
     }
 
     public void printLowQuantityProducts () {
+        boolean hasLowQuantity = false;
+
         Ui.printLowQuantityAlert();
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
@@ -110,6 +113,11 @@ public class ProductList {
                         productQuantity);
                 Ui.printToScreen(HORIZONTAL_LINE);
             }
+        }
+
+        if (!hasLowQuantity) {
+            Ui.printNoLowQuantity();
+            Ui.printToScreen(Messages.LINE_SEPARATOR);
         }
     }
 }
