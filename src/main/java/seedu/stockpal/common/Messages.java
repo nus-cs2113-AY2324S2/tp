@@ -33,4 +33,8 @@ public class Messages {
     public static final String MESSAGE_OUTFLOW_SUCCESS = "Product quantity has been decreased successfully.";
     public static final String MESSAGE_LIST_SUCCESS = "Products in the product list have been printed.";
     public static final String MESSAGE_EMPTY_LIST = "ProductList is empty";
+
+    public static final String ALERT_LOW_QUANTITY = "These products have low quantity! Please top up!";
+    public static final String ALERT_FIRST_LOW_QUANTITY_OCCURRENCE = "Warning! This product is low in quantity.";
+    public static final String MESSAGE_NO_LOW_QUANTITY_PRODUCTS = "No products with low quantity";
 }
