@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
 
+    private static Logger logger = Logger.getLogger("Storage");
     public static final Path FILE_PATH = Path.of("./save/tasks.txt");
 
     /**
@@ -26,9 +29,11 @@ public class Storage {
         if (!Files.isDirectory(path.getParent())) {
             //  System.out.println("Directory not found, creating new one");
             Files.createDirectories(path.getParent());
+            logger.log(Level.INFO, "new directory created");
         }
         if (!Files.exists(path)) {
             Files.createFile(path);
+            logger.log(Level.INFO, "new tests.txt file created");
         }
     }
 
@@ -41,10 +46,14 @@ public class Storage {
     public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
             for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
+                assert entry != null;
                 LocalDate date = entry.getKey();
+                assert date != null;
                 List<String> taskList = entry.getValue();
+                assert taskList != null;
                 for (String task : taskList) {
                     writer.write(date + "|" + task + System.lineSeparator());
+                    logger.log(Level.INFO, "task added: " + task);
                 }
             }
         } catch (IOException e) {
@@ -63,6 +72,9 @@ public class Storage {
         try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (!checkFileFormat(line)) {
+                    throw new StorageFileException();
+                }
                 String[] parts = line.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0]);
                 String task = parts[1];
@@ -70,8 +82,18 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
+            logger.log(Level.WARNING, "I/O exception occurred");
+        } catch (StorageFileException e) {
+            System.out.println("tasks.txt is in wrong format.");
+            logger.log(Level.WARNING, "Wrong tasks.txt format");
         }
+        logger.log(Level.INFO, "tasks returned");
         return tasks;
+    }
+
+    public static boolean checkFileFormat(String line) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}\\|.+";
+        return line.matches(regex);
     }
 
 }
