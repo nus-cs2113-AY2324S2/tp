@@ -1,9 +1,12 @@
 package seedu.bookbuddy;
 
-import exceptions.InvalidBookIndexException;
 import exceptions.InvalidCommandArgumentException;
 import exceptions.UnsupportedCommandException;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -68,11 +71,21 @@ public class ParserTest {
     }
 
     @Test
-    void parseInvalidRemoveCommandThrowsException() {
+    void parseInvalidRemoveCommandPrintsError() {
+        // Set up
         BookList books = new BookList();
-        String input = "remove notAnIndex"; // Invalid index provided
-        assertThrows(InvalidBookIndexException.class,
-                () -> Parser.parseCommand(input, books), "Book index must be an integer.");
+        String input = "remove notAnIndex";
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent)); // Redirect standard out to capture console output
+        // Act
+        Parser.parseCommand(input, books);
+
+        // Assert
+        String output = outContent.toString();
+        assertTrue(output.contains("not a valid number"), "Error message should contain 'not a valid number'");
+
+        // Cleanup
+        System.setOut(System.out); // Reset standard out
     }
 
     @Test
