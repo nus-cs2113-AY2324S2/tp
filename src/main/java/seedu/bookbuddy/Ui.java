@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("okii added [" + title + "] to the list.");
         System.out.println("remember to read it soon....");
     }
-    public static void removeBookMessage(int index) throws IndexOutOfBoundsException {
+    public static void removeBookMessage(int index) {
         System.out.println("alright.. i've removed " + BookList.books.get(index).getTitle() + " from the list.");
     }
     public static void helpMessage() {
