@@ -26,7 +26,7 @@ public class Storage {
      *                  or overwrite the file (false).
      * @throws IOException If file is not found at the indicated file path.
      */
-    private static void writeToFile(String filePath, String textToAdd, boolean ifAppend) throws IOException {
+    public static void writeToFile(String filePath, String textToAdd, boolean ifAppend) throws IOException {
         FileWriter writer = new FileWriter(filePath, ifAppend);
         writer.write(textToAdd);
         writer.close();
@@ -41,22 +41,27 @@ public class Storage {
     }
 
     /**
-     * Returns the private File dukeData.
+     * Returns the private file directory of storage.
      */
-    public static File getFile() {
-        return stockMaster;
+    public static String getFileDirectory() {
+        return FILENAME;
+    }
 
+    /**
+     * Set the private File dukeData.
+     */
+    public static File setFile() {
+        return new File(FILENAME);
     }
 
     /**
      * Read lines from the file and identify tasks written inside.
      * Add the identified tasks into a list of existing tasks.
      *
-     * @param fileToRead The file to read from.
      */
-    public static void readFromFile(File fileToRead) {
+    public static void readFromFile(File fileName) {
         try {
-            Scanner scanner = new Scanner(fileToRead);
+            Scanner scanner = new Scanner(fileName);
             while (scanner.hasNext()) {
                 String lineSkipped = scanner.nextLine();
             }
@@ -66,7 +71,7 @@ public class Storage {
     }
 
     public static void main (String[]args){
-        stockMaster = new File(FILENAME);
+        stockMaster = setFile();
         try {
             writeToFile(stockMaster.getPath(), "", true);
         } catch (IOException e) {
