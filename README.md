@@ -1,64 +1,191 @@
 # Player2113
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+A CLI tool to help COMP2113 student revise conceptual questions in a gamification environment.
 
-## Setting up in Intellij
+## Getting Started
 
-Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
+Prerequisites: JDK 11, Player2113 release `JDK` file
 
-1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
-1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   > Task :compileJava
-   > Task :processResources NO-SOURCE
-   > Task :classes
-   
-   > Task :Duke.main()
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   
-   What is your name?
-   ```
-   Type some word and press enter to let the execution proceed to the end.
+Start the programme with the following command:
 
-## Build automation using Gradle
+```
+java --jar Player2113.jar
+```
 
-* This project uses Gradle for build automation and dependency management. It includes a basic build script as well (i.e. the `build.gradle` file).
-* If you are new to Gradle, refer to the [Gradle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/gradle.html).
+You will see the welcome screen upon successful start-up:
 
-## Testing
+```
+Hello from
+______ _                       _____  __   __   _____
+| ___ \ |                     / __  \/  | /  | |____ |
+| |_/ / | __ _ _   _  ___ _ __`' / /'`| | `| |     / /
+|  __/| |/ _` | | | |/ _ \ '__| / /   | |  | |     \ \
+| |   | | (_| | |_| |  __/ |  ./ /____| |__| |_.___/ /
+\_|   |_|\__,_|\__, |\___|_|  \_____/\___/\___/\____/
+                __/ |
+               |___/
+What is your name?
+```
 
-### I/O redirection tests
+## Features
 
-* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
+### Attempt Question Sets
 
-### JUnit tests
+You can select a topic from the menu and attempt the questions related to the topic you wish to revise. There are multiple question banks pre-configured in Player2113.
 
-* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
-* If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
+### Result Statistics
 
-## Checkstyle
+You may check your answer accuracy after attempting a question set. The result is separated from practicing session for concentration consideration.
 
-* A sample CheckStyle rule configuration is provided in this project.
-* If you are new to Checkstyle, refer to the [Checkstyle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/checkstyle.html).
+### Solution
 
-## CI using GitHub Actions
+You may check the correct solution to a specific question in a certain question set.
 
-The project uses [GitHub actions](https://github.com/features/actions) for CI. When you push a commit to this repo or PR against it, GitHub actions will run automatically to build and verify the code as updated by the commit/PR.
+### Explaination
 
-## Documentation
+Detailed explaination is hidden unless invoked by the user for progressive learning and maximizing self-relection.
 
-`/docs` folder contains a skeleton version of the project documentation.
+### Help
 
-Steps for publishing documentation to the public: 
-1. If you are using this project template for an individual project, go your fork on GitHub.<br>
-   If you are using this project template for a team project, go to the team fork on GitHub.
-1. Click on the `settings` tab.
-1. Scroll down to the `GitHub Pages` section.
-1. Set the `source` as `master branch /docs folder`.
-1. Optionally, use the `choose a theme` button to choose a theme for your documentation.
+A in-app user guide is available for your reference in usage.
+
+## Usage
+
+> [!IMPORTANT]
+> The current release of Player2113 is a MVP preview version with various proposed functions unimplemented. Please strictly follow this user's guide.
+
+### `topic` - Choose a topic to revise
+
+Example of usage: `topic [TOPIC_INDEX]`
+
+```
+topic 1
+```
+
+The practice session for `topic 1` will be started:
+
+```
+topic 1
+Selected topic: topic1
+Here are the questions:
+question1
+Enter your answer:
+```
+
+### `results` - View the accuracy for an attempt
+
+Example of usage: `results [TOPIC_INDEX]`.
+
+```
+results 1
+```
+
+Sample output:
+
+```
+Your results for Topic 1:
+0/2 (0%)
+```
+
+### `re` - Add a deadline
+
+Example of usage: `event [DEADLINE_NAME] /by [DUE_TIME]`.
+
+```
+deadline submit CS2113 iP /by 2024-03-08 23:59
+```
+
+An acknowledgement message will be displayed after successful execution:
+
+```
+____________________________________________________________
+ Got it. I've added this task:
+ [D][ ] submit CS2113 iP (by: Mar 8 2024 23:59)
+ Now you have 5 tasks in the list.
+____________________________________________________________
+```
+
+### `list` - List all tasks
+
+Example of usage: `list`.
+
+Sample output:
+
+```
+____________________________________________________________
+ Here are all the entries in your task list:
+ 1. [D][ ] assignment 1 (by: Apr 23 2024)
+ 2. [D][ ] assignment 2 (by: May 21 2024 18:00)
+ 3. [T][ ] return book
+ 4. [D][ ] finish book reading report (by: Mar 9 2024)
+____________________________________________________________
+```
+
+### `find` - Search with keyword
+
+Example of usage: `find [KEYWORD]`.
+
+```
+find assignment
+```
+
+A list of matching entries will be displayed:
+
+```
+____________________________________________________________
+ Here are the matching tasks in your list:
+ 1. [D][ ] assignment 1 (by: Apr 23 2024)
+ 2. [D][ ] assignment 2 (by: May 21 2024 18:00)
+____________________________________________________________
+```
+
+### `solutions` - View solution to a question
+
+Example of usage: `solutions [TOPIC_INDEX] [QUESTION_INDEX]`.
+
+```
+solutions 1 1
+```
+
+Sample output:
+
+```
+The solution for question 1:
+solution1
+```
+
+### `explain` - View reasonings for a solution to a question
+
+Example of usage: `explain [TOPIC_INDEX] [QUESTION_INDEX]`.
+
+```
+explain 1 1
+```
+
+Sample output:
+
+```
+The solution for question 1:
+explanation1
+```
+
+### `help` - View built-in user's guide
+
+Example of usage: `help`
+
+Sample output:
+
+![Help Sample Output](./img/ug_usage_help.png)
+
+### `bye` - Exit programme
+
+Example of usage: `bye`.
+
+A goodbye message will be displayed:
+
+```
+bye bye, get more sleep zzz
+************************************************
+```
+
+## Troubleshooting
