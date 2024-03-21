@@ -6,7 +6,7 @@ public class ResponseManager {
     private static final String INITIALIZATION_MESSAGE = "Initializing...\n"
         + "Enter your name: \n";
     private static final String INDENTATION =
-            "===".repeat(10) + "\n";
+            "===".repeat(10);
     private static final String JOB_SELECT_MSG = "Choose your job type: \n" +
             "for Robotics, enter '/r'\n" +
             "for Semiconductor industry, enter '/s'\n" +
@@ -25,7 +25,7 @@ public class ResponseManager {
     }
 
     public static void indentPrint(String message) {
-        System.out.println(INDENTATION + message + INDENTATION);
+        System.out.println(INDENTATION + "\n" + message + INDENTATION);
     }
 
     public static void printGameInit() {

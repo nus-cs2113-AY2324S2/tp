@@ -19,19 +19,19 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
+        Scanner input = new Scanner(System.in);
         ResponseManager.printGameInit();
-        String playerName = getName();
+        String playerName = getName(input);
 
         ResponseManager.printJobSelect();
-        String jobType = getJob();
+        String jobType = getJob(input);
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);
         return new EconoCraftLogic(playerProfile);
     }
 
-    private static String getJob() {
-        Scanner input = new Scanner(System.in);
+    private static String getJob(Scanner input) {
         String jobType = "";
         while (jobType.isEmpty()) {
             try {
@@ -43,8 +43,7 @@ public class EconoCraftLogic {
         return jobType;
     }
 
-    private static String getName() {
-        Scanner input = new Scanner(System.in);
+    private static String getName(Scanner input) {
         String playerName = "";
         while (playerName.isEmpty()) {
             try {
