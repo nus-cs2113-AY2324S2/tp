@@ -59,6 +59,7 @@ public class ProductList {
         }
         if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
+            updatedProduct.getQuantity().notifyLowQuantity(newQuantity);
         }
         if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
