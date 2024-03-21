@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 public class ArgumentMismatchException extends Exception {
     public String userCommandName;

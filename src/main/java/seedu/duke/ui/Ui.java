@@ -5,11 +5,11 @@ import seedu.duke.Formatter;
 import seedu.duke.Parser;
 import seedu.duke.SyntaxAnalyser;
 
-import seedu.duke.ProcessInputException;
-import seedu.duke.ArgumentMismatchException;
-import seedu.duke.BadTokenException;
-import seedu.duke.IllegalCommandException;
-import java.util.ArrayList;
+import seedu.duke.exception.ProcessInputException;
+import seedu.duke.exception.ArgumentMismatchException;
+import seedu.duke.exception.BadTokenException;
+import seedu.duke.exception.IllegalCommandException;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
