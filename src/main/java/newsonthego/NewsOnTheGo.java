@@ -92,8 +92,6 @@ public class NewsOnTheGo {
         DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
     }
 
-    infoNewsCommand infoPrinter = new infoNewsCommand();
-
     private static boolean processCommand(String command, String line, List<NewsArticle> list) {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
