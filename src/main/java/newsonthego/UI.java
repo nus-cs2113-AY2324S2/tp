@@ -23,13 +23,7 @@ public class UI {
         System.out.println("Hello " + in.nextLine());
     }
 
-    public static String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
     public static void printError(String message) {
-
         System.err.println(message);
     }
 }

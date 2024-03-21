@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,10 +17,10 @@ public class NewsOnTheGo {
 
     public static final String FILENAME = "data/sampleNews.txt";
     private static final Logger logger = Logger.getLogger("NewsOnTheGo");
-    private static ArrayList<NewsTopic> newsTopics = new ArrayList<>();
+    private static final ArrayList<NewsTopic> newsTopics = new ArrayList<>();
 
     /**
-     * Main entry-point for the java.newsonthego.NewsOnTheGo application.
+     * Main entry-point for the java.newsworthiest.NewsOnTheGo application.
      */
     public static void main(String[] args) {
         UI.initializeUI();
@@ -28,7 +29,7 @@ public class NewsOnTheGo {
 
         while (true) {
             System.out.println("What do you want from me?");
-            String line = UI.getInput();
+            String line = getInput();
             String command = line.split(" ")[0];
             try {
                 boolean endLoop = processCommand(command, line, newsArticles);
@@ -41,6 +42,11 @@ public class NewsOnTheGo {
         }
 
         logger.log(Level.INFO, "Ending NewsOnTheGo");
+    }
+
+    public static String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     static List<NewsArticle> importNewsFromText(String filename) {
@@ -84,7 +90,7 @@ public class NewsOnTheGo {
                 newsTopics.add(newsTopic);
             }
         }
-        Collections.sort(newsTopics, new TopicComparator());
+        newsTopics.sort(new TopicComparator());
         return list;
     }
 
