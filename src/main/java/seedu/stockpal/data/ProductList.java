@@ -96,4 +96,14 @@ public class ProductList {
         Product currProduct = products.get(productIndex);
         return currProduct.toSave();
     }
+
+    public void checkThresholdQuantity () {
+        for (Product product : products) {
+            Quantity productQuantity = product.getQuantity();
+            if (productQuantity.getQuantity() < 20) {
+                System.out.println(product.getName() + " " + product.getQuantity().toString());
+            }
+        }
+    }
+
 }
