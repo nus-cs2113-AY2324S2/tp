@@ -1,7 +1,7 @@
 package workouts;
 
 import utility.CustomExceptions;
-import utility.Constant;
+import utility.UiConstant;
 import utility.Parser;
 
 import java.time.LocalDate;
@@ -45,7 +45,7 @@ public class Gym extends Workout{
             GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_GYM_INPUT);
+            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_GYM_INPUT);
         }
     }
 
@@ -59,9 +59,66 @@ public class Gym extends Workout{
     }
     public GymStation getStationByIndex(int index) throws CustomExceptions.OutOfBounds{
         if (index >= stations.size() || index < 0) {
-            throw new CustomExceptions.OutOfBounds(Constant.INVALID_GYM_STATION_INDEX);
+            throw new CustomExceptions.OutOfBounds(UiConstant.INVALID_GYM_STATION_INDEX);
         }
         return stations.get(index);
+    }
+
+    /**
+     * Adds new gym station using validated parameters.
+     *
+     * @param validatedInputs Array representing validated GymStation parameters.
+     * @param gym Gym object to add the GymStation to.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
+    public static void addGymStationInput(String[] validatedInputs, Gym gym) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+        String exerciseName = validatedInputs[UiConstant.INDEX_OF_STATION_NAME];
+        int weights = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_WEIGHTS]);
+        int numberOfSets = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_SETS]);
+        int repetition = Integer.parseInt(validatedInputs[UiConstant.INDEX_OF_STATION_REPS]);
+        gym.addStation(exerciseName, weights, numberOfSets, repetition);
+    }
+
+    /**
+     * Checks parameters from user input for adding a new GymStation.
+     *
+     * @param inputs List of strings representing user input.
+     * @return Array of strings representing the parameters required for a new GymStation.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
+    public static String[] checkGymStationInput(String[] inputs) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+        String exerciseName = inputs[UiConstant.INDEX_OF_STATION_NAME].trim();
+        String sets = inputs[UiConstant.INDEX_OF_STATION_SETS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String reps = inputs[UiConstant.INDEX_OF_STATION_REPS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String weights = inputs[UiConstant.INDEX_OF_STATION_WEIGHTS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+
+
+
+        if (exerciseName.isBlank() || sets.isBlank() || reps.isBlank() || weights.isBlank()) {
+            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_GYM_STATION);
+        }
+        try {
+            int setInt = Integer.parseInt(sets);
+            int repInt = Integer.parseInt(reps);
+            int weightInt = Integer.parseInt(weights);
+            assert setInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+            assert repInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+            assert weightInt > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
+
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(UiConstant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+        }
+
+
+        return new String[]{exerciseName, sets, reps, weights};
     }
 
     /**

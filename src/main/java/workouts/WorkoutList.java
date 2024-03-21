@@ -1,6 +1,6 @@
 package workouts;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 import java.util.ArrayList;
@@ -57,22 +57,22 @@ public class WorkoutList extends ArrayList<Workout> {
             CustomExceptions.InvalidInput {
 
         filter = filter.toLowerCase();
-        if(!filter.equals(Constant.ALL) && !filter.equals(Constant.RUN) && !filter.equals(Constant.GYM)) {
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_FILTER);
+        if(!filter.equals(UiConstant.ALL) && !filter.equals(UiConstant.RUN) && !filter.equals(UiConstant.GYM)) {
+            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_FILTER);
         }
-        if(filter.equals(Constant.RUN) && runs.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
+        if(filter.equals(UiConstant.RUN) && runs.isEmpty()){
+            throw new CustomExceptions.OutOfBounds(UiConstant.NO_RUNS_FOUND);
         }
-        if(filter.equals(Constant.ALL) && workouts.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(Constant.NO_HISTORY_FOUND);
+        if(filter.equals(UiConstant.ALL) && workouts.isEmpty()){
+            throw new CustomExceptions.OutOfBounds(UiConstant.NO_HISTORY_FOUND);
         }
-        if(filter.equals(Constant.GYM) && gyms.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
+        if(filter.equals(UiConstant.GYM) && gyms.isEmpty()){
+            throw new CustomExceptions.OutOfBounds(UiConstant.NO_GYMS_FOUND);
         }
 
-        if(filter.equals(Constant.RUN)){
+        if(filter.equals(UiConstant.RUN)){
             return runs;
-        } else if (filter.equals(Constant.GYM)) {
+        } else if (filter.equals(UiConstant.GYM)) {
             return gyms;
         } else {
             return workouts;
@@ -88,14 +88,14 @@ public class WorkoutList extends ArrayList<Workout> {
      */
     public static Run getLatestRun() throws CustomExceptions.OutOfBounds {
         if (runs.isEmpty()) {
-            throw new CustomExceptions.OutOfBounds(Constant.NO_RUNS_FOUND);
+            throw new CustomExceptions.OutOfBounds(UiConstant.NO_RUNS_FOUND);
         }
         return runs.get(runs.size() - 1);
     }
 
     public static Gym getLatestGym() throws CustomExceptions.OutOfBounds {
         if (gyms.isEmpty()) {
-            throw new CustomExceptions.OutOfBounds(Constant.NO_GYMS_FOUND);
+            throw new CustomExceptions.OutOfBounds(UiConstant.NO_GYMS_FOUND);
         }
         return gyms.get(gyms.size() - 1);
     }

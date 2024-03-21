@@ -1,6 +1,6 @@
 package health;
 
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 /**
@@ -22,39 +22,39 @@ public class Health {
             CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
 
-        String[] userInputs = userInput.split(Constant.SPLIT_BY_SLASH);
+        String[] userInputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
 
         assert userInputs.length > 0 : "Number of userInputs parts should be greater than 0";
 
-        String healthType = userInputs[Constant.HEALTH_TYPE_INDEX].trim();
+        String healthType = userInputs[UiConstant.HEALTH_TYPE_INDEX].trim();
 
         if (healthType.isBlank()){
-            throw new CustomExceptions.InvalidInput(Constant.BLANK_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(UiConstant.BLANK_INPUT_FOR_HEALTH);
         }
 
         healthType = healthType.toLowerCase();
 
-        boolean isBmi = healthType.equals(Constant.BMI_INPUT);
-        boolean isPeriod = healthType.equals(Constant.PERIOD_INPUT);
+        boolean isBmi = healthType.equals(UiConstant.BMI_INPUT);
+        boolean isPeriod = healthType.equals(UiConstant.PERIOD_INPUT);
 
         if(!isBmi && !isPeriod){
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_INPUT_FOR_HEALTH);
         }
 
-        if(isBmi && userInputs.length < Constant.BMI_PARAMETERS){
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+        if(isBmi && userInputs.length < UiConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 
-        if(isPeriod && userInputs.length < Constant.BMI_PARAMETERS){
-            throw new CustomExceptions.InsufficientInput(Constant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
+        if(isPeriod && userInputs.length < UiConstant.BMI_PARAMETERS){
+            throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
         }
 
         assert userInputs.length == 5 : "Array of userInputs should have 5 elements";
 
         if (isBmi){
-            return Constant.BMI;
+            return UiConstant.BMI;
         } else {
-            return Constant.PERIOD;
+            return UiConstant.PERIOD;
         }
     }
 }

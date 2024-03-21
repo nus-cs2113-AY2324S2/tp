@@ -2,7 +2,7 @@ package workouts;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +24,7 @@ class RunTest {
         Run runTest = new Run(testTime, "15.3");
         Integer[] result = runTest.parseTime(testTime);
         Integer[] expected = {1, 59, 10};
-        for (int i = 0; i < Constant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
+        for (int i = 0; i < UiConstant.MAX_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
     }
@@ -38,7 +38,7 @@ class RunTest {
         Run runTest = new Run(testTime, "15.3");
         Integer[] result = runTest.parseTime("50:52");
         Integer[] expected = {50, 52};
-        for (int i = 0; i < Constant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
+        for (int i = 0; i < UiConstant.MIN_RUNTIME_ARRAY_LENGTH; i++) {
             assertEquals(result[i], expected[i]);
         }
     }

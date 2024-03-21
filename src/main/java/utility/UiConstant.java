@@ -3,7 +3,7 @@ package utility;
 /**
  * Constants class representing all constants used for PulsePilot.
  */
-public class Constant {
+public class UiConstant {
 
     // Formatted Replies
     public static final Integer MAX_RUNTIME_ARRAY_LENGTH = 3;
@@ -82,6 +82,8 @@ public class Constant {
             "Example input: new /e:gym /n:<number of exercise>";
     public static final String INSUFFICIENT_PARAMETERS_FOR_GYM_STATION = "Insufficient parameters for Gym Stations! " +
             "Please input [name of exercise] /s:[sets] /r:[reps] /w:[weights]";
+
+    public static final String REQUIRES_POSITIVE_MESSAGE = "Requires a positive integer!";
     public static final int NUM_SECONDS_IN_MINUTE = 60;
     public static final int NUM_SECONDS_IN_HOUR = 3600;
 

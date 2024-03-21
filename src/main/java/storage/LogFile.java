@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import utility.Constant;
+import utility.UiConstant;
 
 /**
  * Represents a Logfile object used to write information and error logs for PulsePilot.
@@ -42,7 +42,7 @@ public class LogFile {
     public static void initializeLogFile() {
         try {
             if (logFileHandler == null) {
-                logFileHandler = new FileHandler(Constant.LOG_FILE_PATH);
+                logFileHandler = new FileHandler(UiConstant.LOG_FILE_PATH);
                 logFileHandler.setFormatter(new SimpleFormatter());
                 logger.addHandler(logFileHandler);
                 logger.setUseParentHandlers(false);

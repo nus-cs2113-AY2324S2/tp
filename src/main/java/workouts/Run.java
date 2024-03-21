@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 import ui.Handler;
 import utility.Parser;
-import utility.Constant;
+import utility.UiConstant;
 import utility.CustomExceptions;
 
 /**
@@ -55,25 +55,28 @@ public class Run extends Workout{
      */
     public static String[] getRun(String input) throws CustomExceptions.InvalidInput {
 
-        String[] results = new String[Constant.NUMBER_OF_RUN_PARAMETERS];
+        String[] results = new String[UiConstant.NUMBER_OF_RUN_PARAMETERS];
 
 
         if (!input.contains("/e:") || !input.contains("/d:") || !input.contains("/t:")) {
-            throw new CustomExceptions.InvalidInput(Constant.UNSPECIFIED_PARAMETER);
+            throw new CustomExceptions.InvalidInput(UiConstant.UNSPECIFIED_PARAMETER);
         }
+        // Command
+        results[UiConstant.SUBSTRING_COMMAND] = Handler.extractSubstringFromSpecificIndex(input, "/e:");
+        // Distance
+        results[UiConstant.SUBSTRING_DISTANCE] = Handler.extractSubstringFromSpecificIndex(input, "/d:");
+        // Time
+        results[UiConstant.SUBSTRING_TIME] = Handler.extractSubstringFromSpecificIndex(input, "/t:");
+        // Date
+        results[UiConstant.SUBSTRING_DATE] = Handler.extractSubstringFromSpecificIndex(input, "/date:");
 
-        results[Constant.SUBSTRING_COMMAND] = Handler.extractSubstringFromSpecificIndex(input, "/e:"); // Command
-        results[Constant.SUBSTRING_DISTANCE] = Handler.extractSubstringFromSpecificIndex(input, "/d:"); // Distance
-        results[Constant.SUBSTRING_TIME] = Handler.extractSubstringFromSpecificIndex(input, "/t:"); // Time
-        results[Constant.SUBSTRING_DATE] = Handler.extractSubstringFromSpecificIndex(input, "/date:"); // Date
-
-        assert !results[Constant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
-        assert !results[Constant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
-        assert results[Constant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") : "Distance should be a valid numeric " +
-                "value (assuming KM)";
-        assert !results[Constant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
-        assert results[Constant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be in the format " +
-                "HH:MM:SS";
+        assert !results[UiConstant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
+        assert !results[UiConstant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
+        assert results[UiConstant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") :
+                "Distance should be a valid numeric " + "value (assuming KM)";
+        assert !results[UiConstant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
+        assert results[UiConstant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be " +
+                "in the format " + "HH:MM:SS";
 
         return results;
     }
@@ -122,17 +125,17 @@ public class Run extends Workout{
         int inputLength = stringTimeParts.length;
         Integer[] integerTimes = new Integer[inputLength];
 
-        if (inputLength == Constant.MAX_RUNTIME_ARRAY_LENGTH) {
+        if (inputLength == UiConstant.MAX_RUNTIME_ARRAY_LENGTH) {
             this.isHourPresent = true;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
             integerTimes[2] = Integer.parseInt(stringTimeParts[2]);
-        } else if (inputLength == Constant.MIN_RUNTIME_ARRAY_LENGTH) {
+        } else if (inputLength == UiConstant.MIN_RUNTIME_ARRAY_LENGTH) {
             this.isHourPresent = false;
             integerTimes[0] = Integer.parseInt(stringTimeParts[0]);
             integerTimes[1] = Integer.parseInt(stringTimeParts[1]);
         } else {
-            throw new CustomExceptions.InvalidInput(Constant.INVALID_RUN_TIME);
+            throw new CustomExceptions.InvalidInput(UiConstant.INVALID_RUN_TIME);
         }
         return integerTimes;
     }
@@ -146,8 +149,8 @@ public class Run extends Workout{
         int totalSeconds;
 
         if (this.isHourPresent) {
-            totalSeconds = this.times[0] * Constant.NUM_SECONDS_IN_HOUR
-                    + this.times[1] * Constant.NUM_SECONDS_IN_MINUTE
+            totalSeconds = this.times[0] * UiConstant.NUM_SECONDS_IN_HOUR
+                    + this.times[1] * UiConstant.NUM_SECONDS_IN_MINUTE
                     + this.times[2];
         } else {
             totalSeconds = this.times[0] * 60 + this.times[1];
@@ -162,11 +165,11 @@ public class Run extends Workout{
      */
     public String calculatePace() {
         int totalSeconds = calculateTotalSeconds();
-        double paceInDecimal = ((double) totalSeconds / this.distance) / Constant.NUM_SECONDS_IN_MINUTE;
+        double paceInDecimal = ((double) totalSeconds / this.distance) / UiConstant.NUM_SECONDS_IN_MINUTE;
 
         int minutes = (int) paceInDecimal;
         double remainingSeconds = paceInDecimal - minutes;
-        int seconds = (int) Math.round(remainingSeconds * Constant.NUM_SECONDS_IN_MINUTE);
+        int seconds = (int) Math.round(remainingSeconds * UiConstant.NUM_SECONDS_IN_MINUTE);
         return String.format("%d:%02d/km", minutes, seconds);
     }
 
@@ -181,8 +184,8 @@ public class Run extends Workout{
         if (date != null){
             printedDate = date.toString();
         } else{
-            printedDate = Constant.NO_DATE_SPECIFIED;
+            printedDate = UiConstant.NO_DATE_SPECIFIED;
         }
-        return String.format(Constant.RUN_FORMAT, Constant.RUN, getTimes(), getDistance(), getPace(), printedDate);
+        return String.format(UiConstant.RUN_FORMAT, UiConstant.RUN, getTimes(), getDistance(), getPace(), printedDate);
     }
 }
