@@ -20,6 +20,24 @@ public class ParserLiquid {
      *                              contains empty fields
      */
     public static LiquidEntry parseLiquidInput(String input) throws InvalidInputException {
+        //get index for b/ and  v/ inputs
+        int beverageIndex = input.indexOf("b/");
+        int volumeIndex = input.indexOf("v/");
+
+        // Handle exception when b/ or v/ not entered
+        if (beverageIndex == -1 || volumeIndex == -1) {
+            throw new InvalidInputException("Invalid input exception: " +
+                "Please ensure that you have entered b/ and v/\n" +
+                "For example: liquids in b/Milo v/1000");
+        }
+
+        //Handle exception when order of b/ and v/ is incorrect
+        if (volumeIndex < beverageIndex) {
+            throw new InvalidInputException("Invalid input exception: " +
+                    "Please ensure that you have entered b/ before v/\n" +
+                    "For example: liquids in b/Milo v/1000");
+        }
+
 
         // splits string according to b/ and v/ keywords
         String[] parts = input.split("b/|v/");
@@ -38,6 +56,7 @@ public class ParserLiquid {
         }
         return getNewLiquidEntry(volume, beverageName);
     }
+
     private static LiquidEntry getNewLiquidEntry(String strVolume, String name) throws InvalidInputException {
         int volume = Integer.parseInt(strVolume);
 
