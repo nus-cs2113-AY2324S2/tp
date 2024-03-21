@@ -1,7 +1,7 @@
 package recipeio.recipe;
 
 import recipeio.enums.MealCategory;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,6 +16,7 @@ public class Recipe {
     public ArrayList<String> allergies;
     public MealCategory category;
     public String url;
+    public LocalDateTime dateTimeAdded;
 
     public Recipe(String name, int cookTime, int calories, ArrayList<String> allergies,
                   MealCategory category, String url) {
@@ -25,6 +26,7 @@ public class Recipe {
         this.allergies = allergies;
         this.url = url;
         this.category = Objects.requireNonNullElse(category, MealCategory.GENERAL);
+        this.dateTimeAdded = LocalDateTime.now();
     }
 
     @Override
