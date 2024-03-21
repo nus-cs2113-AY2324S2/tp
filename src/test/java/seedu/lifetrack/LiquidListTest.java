@@ -50,7 +50,8 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Milo v/200");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "\t Liquid List:" + lineSeparator +
+        String expectedOutput = "Beverage has been successfully added" + lineSeparator +
+                "\t Liquid List:" + lineSeparator +
                 "\t 1. Beverage: Milo, Volume: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
@@ -66,7 +67,10 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Juice v/150");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "\t Liquid List:" + lineSeparator +
+        String expectedOutput = "Beverage has been successfully added" + lineSeparator +
+                "Beverage has been successfully added" + lineSeparator +
+                "Beverage has been successfully added" + lineSeparator +
+                "\t Liquid List:" + lineSeparator +
                 "\t 1. Beverage: Milo, Volume: 200" + lineSeparator +
                 "\t 2. Beverage: Water, Volume: 300" + lineSeparator +
                 "\t 3. Beverage: Juice, Volume: 150" + lineSeparator;

@@ -55,6 +55,7 @@ public class CalorieList {
      * @param input the input string containing date, time, activity, and calorie count
      */
     public void addEntry(String input) {
+        assert (input.startsWith("calories in") || input.startsWith("calories out")) : "ensures that input is correct";
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
