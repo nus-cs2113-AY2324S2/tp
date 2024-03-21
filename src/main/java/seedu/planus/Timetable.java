@@ -1,7 +1,8 @@
 package seedu.planus;
 
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Timetable {
     private static Logger logger = Logger.getLogger("myLogger");
