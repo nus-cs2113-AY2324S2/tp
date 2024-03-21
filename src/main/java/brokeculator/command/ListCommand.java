@@ -19,12 +19,14 @@ public class ListCommand extends Command {
         ArrayList<Expense> listOfExpensesToPrint = dashboard.getExpenseManager().listExpenses(amountToList);
 
         if (listOfExpensesToPrint.isEmpty()) {
-            UI.print("No expenses to list");
+            UI.prettyPrint("You have no added expenses!");
             return;
         }
 
-        for (Expense expense : listOfExpensesToPrint) {
-            UI.print(expense.getStringRepresentation());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < listOfExpensesToPrint.size(); i++) {
+            sb.append(i + 1).append(". ").append(listOfExpensesToPrint.get(i)).append(System.lineSeparator());
         }
+        UI.prettyPrint(sb.toString());
     }
 }

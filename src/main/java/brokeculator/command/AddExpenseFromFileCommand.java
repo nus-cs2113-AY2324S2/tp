@@ -17,7 +17,7 @@ public class AddExpenseFromFileCommand extends Command{
             Expense expense = Expense.getExpenseFromFile(this.fileString);
             dashboard.getExpenseManager().add(expense);
         } catch (Exception e) {
-            UI.print("Expense cannot be added");
+            UI.println("Expense cannot be added");
         }
     }
 }

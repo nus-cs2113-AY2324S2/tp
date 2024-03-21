@@ -24,8 +24,8 @@ public class UI {
      */
     public static String getUserInput() throws BrokeculatorException {
         try {
-            String singleLineUserInput = scanner.nextLine();
-            return singleLineUserInput;
+            UI.print("\t-> ");
+            return scanner.nextLine();
         } catch (Exception e) {
             recreateScanner();
             throw new BrokeculatorException("Error in scanning input detected. Please try again");
@@ -38,7 +38,21 @@ public class UI {
      *  prints out message to stdout with the decorators ------ at the top and bottom of the file
      * @param message the message to print
      */
-    public static void print(String message){
-        System.out.println(prettify(message, STRING_DECORATION, STRING_DECORATION));
+    public static void prettyPrint(String message){
+        UI.println(prettify(message.trim(), STRING_DECORATION, STRING_DECORATION));
+    }
+
+    public static void greetUser() {
+        prettyPrint("Hello! I'm Brokeculator!"
+                + System.lineSeparator()
+                + "If this is your first time using me, type 'help' to see what I can do for you.");
+    }
+
+    public static void println(String s) {
+        System.out.println(s);
+    }
+
+    public static void print(String s) {
+        System.out.print(s);
     }
 }
