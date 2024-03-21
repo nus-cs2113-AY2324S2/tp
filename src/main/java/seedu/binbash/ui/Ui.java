@@ -28,7 +28,10 @@ public class Ui {
     public Ui() {
         System.setProperty("org.jline.terminal.exec.redirectPipeCreationMode", "native");
         try {
-            Terminal userTerminal = TerminalBuilder.terminal();
+            Terminal userTerminal = TerminalBuilder.builder()
+                .system(true)
+                .dumb(true)
+                .build();
             input = LineReaderBuilder.builder()
                 .terminal(userTerminal)
                 .build();
