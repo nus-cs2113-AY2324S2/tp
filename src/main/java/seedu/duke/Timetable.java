@@ -11,7 +11,6 @@ import java.util.Map;
  * This class represents the Timetable object consisting of Arraylist of Tasks for each day of the week.
  */
 public class Timetable {
-
     protected static final String[] DAYS = new String[]
         {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private Map<String, ArrayList<Task>> weeklyTasks; // Map to store tasks for each day
@@ -28,6 +27,23 @@ public class Timetable {
         return weeklyTasks;
     }
 
+    /**
+     * Prints tasks of the day specified.
+     * @param day day of the week the task is on.
+     */
+    public void printTasksOfTheDay(String day) {
+        String capitalizedDay = day.substring(0, 1).toUpperCase() + day.substring(1);
+        if (weeklyTasks.get(capitalizedDay).isEmpty()) {
+            System.out.println("NO TASK FOR " + day);
+            return;
+        }
+        System.out.println(capitalizedDay + ":");
+        int count = 1;
+        for (Task task : weeklyTasks.get(capitalizedDay)) {
+            System.out.println(count + ". " + task.toString());
+            count++;
+        }
+    }
     /**
      * Adds task on dayOfWeek at an index
      *
@@ -114,15 +130,5 @@ public class Timetable {
         }
     }
 
-    public void printTasksOfTheDay(String day) {
-        String capitalizedDay = day.substring(0, 1).toUpperCase() + day.substring(1);
-        if (weeklyTasks.get(capitalizedDay).isEmpty()) {
-            System.out.println("NO TASK FOR " + day);
-            return;
-        }
-        System.out.println(capitalizedDay + ":");
-        for (Task task : weeklyTasks.get(capitalizedDay)) {
-            System.out.println(task.toString());
-        }
-    }
+
 }
