@@ -88,7 +88,8 @@ public class NewParser {
      * @return the values for the arguments as an array. [Initial, /arg1, /arg2, ...]
      * @throws IllegalArgumentException if the arguments in the input are invalid
      */
-    private static String[] parseArgs(String line, String[] validArgs, boolean initial) throws IllegalArgumentException {
+    private static String[] parseArgs(String line, String[] validArgs, boolean initial)
+            throws IllegalArgumentException {
 
         String[] args = line.split(" ");
         String[] values = new String[validArgs.length + 1];
