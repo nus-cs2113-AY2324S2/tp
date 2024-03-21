@@ -33,7 +33,8 @@ public class InputValidator {
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addTask format. " +
-                    "Expected format: addTask /on [day] /task [description] /from [start time] /to [end time] /flexibility [f/c]");
+                    "Expected format: addTask /on [day] /task [description] /from [start time] /to [end time] " +
+                    "/flexibility [f/c]");
         }
     }
 
