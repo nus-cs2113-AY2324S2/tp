@@ -40,7 +40,7 @@ Current Expenses:
 1. testing | Cost: $500.0 | date: 11.11.2011
 2. testing | Cost: $3.0 | date: 11.11.2011
 3. testing | Cost: $900.0 | date: 11.11.2011
-deleted:testing | Cost: $500.0 | date: 11.11.2011
+deleted: testing | Cost: $500.0 | date: 11.11.2011
 Expenses for the month & year 11.2011:
 1. testing | Cost: $3.0 | date: 11.11.2011
 1. testing | Cost: $900.0 | date: 11.11.2011

@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class ExpenditureList {
         expenditureCount = 0;
     }
 
-    public static void listExpensesByMonth(String monthYear) {
+    protected static void listExpensesByMonth(String monthYear) {
         assert monthYear.length() == 7;
         if (!monthYear.matches("\\d{2}\\.\\d{4}")) {
             System.out.println("Month and year format incorrect! Please use MM.yyyy format.");
@@ -45,7 +47,7 @@ public class ExpenditureList {
         }
     }
 
-    public static void listExpensesByYear(String year) {
+    protected static void listExpensesByYear(String year) {
         List<Expenditure> filteredExpenses = new ArrayList<>();
 
         if (!year.matches("\\d{4}")) {
@@ -98,12 +100,11 @@ public class ExpenditureList {
             String date = parts[1].trim();
 
             float amountValue = Float.parseFloat(amount);
-            // Ensure that the expenditureList is initialized somewhere before this
-            expenditureList.add(new Expenditure(description, amountValue, date));
-            expenditureCount += 1;
-
-            if (userAdded){
-                System.out.println("Expenditure added successfully.");
+            // Ensure that the expenditureList is initialized somewhere before thi
+            if ( isValidDate(date) && isValidAmount(amountValue) ) {
+                expenditureList.add(new Expenditure(description, amountValue, date));
+                expenditureCount += 1;
+                userAddedMessage(userAdded);
             }
         } catch (InvalidInputFormatException e) {
             System.out.println(e.getMessage());
@@ -113,9 +114,15 @@ public class ExpenditureList {
         }
     }
 
+    private static void userAddedMessage(Boolean userAdded) {
+        if (userAdded){
+            System.out.println("Expenditure added successfully.");
+        }
+    }
+
     public static void deleteExpenditure(int index) {
         Expenditure expenditure = expenditureList.get(index - 1);
-        System.out.println("deleted:" + expenditure.getDescription() +
+        System.out.println("deleted: " + expenditure.getDescription() +
                 " | Cost: $" + expenditure.getAmount() +
                 " | date: " + expenditure.getDate());
         expenditureList.remove(index - 1);
@@ -155,6 +162,39 @@ public class ExpenditureList {
     public Expenditure getExpenditure(int index) {
         return expenditureList.get(index);
     }
+
+    protected static boolean isValidDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormat.setLenient(false);
+        try {
+            //if user inputs a valid date but YEARS ahead, it will still be valid, ie 12.12.20202020
+            // only checks if date and month and whether month has those dates
+            dateFormat.parse(date);
+            return true;
+        } catch (ParseException e) {
+            System.out.println("Invalid date.");
+            return false;
+        }
+    }
+
+    protected static boolean isValidAmount(float amt) {
+        if (amt >= 0) {
+            String amtStr = String.valueOf(amt);
+
+            // Split the string at the decimal point
+            String[] parts = amtStr.split("\\.");
+
+            // Check if there are more than two characters after the decimal point
+            if (parts[1].length() > 2) {
+                System.out.println("Invalid amount format! Please ensure the amount has at most two decimal places.");
+                return false;
+            }
+            return true;
+        }
+        System.out.println("Please enter a positive amount");
+        return false;
+    }
+
 
 }
 
