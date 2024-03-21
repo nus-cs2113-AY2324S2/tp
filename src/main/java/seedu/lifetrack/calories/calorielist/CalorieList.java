@@ -50,6 +50,7 @@ public class CalorieList {
         try {
             Entry newEntry = ParserCalories.parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
+            System.out.println("New entry successfully added!");
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }

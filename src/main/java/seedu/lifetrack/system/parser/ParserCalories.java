@@ -13,6 +13,8 @@ public class ParserCalories {
     private static final int PROTEINS_IDX = 1;
     private static final int FATS_IDX = 2;
 
+    private static final int CALORIES_OUT_PADDING = 12;
+
     /**
      * Parses a string input to create an Entry object representing calorie intake.
      *
@@ -30,45 +32,63 @@ public class ParserCalories {
      */
     public static Entry parseCaloriesInput(String input) throws InvalidInputException {
 
-        //check that desc/, c/ and date/ keywords exist in the correct order, else throw exception
-        int descriptionIndex = input.indexOf("desc/");
+        //check that c/ and date/ keywords exist in the correct order, else throw exception
         int caloriesIndex = input.indexOf("c/");
         int dateIndex = input.indexOf("date/");
         int macrosIndex = input.indexOf("m/");
-        if (descriptionIndex == -1 || caloriesIndex == -1 || dateIndex == -1 ||
-                (!(descriptionIndex < caloriesIndex && caloriesIndex < dateIndex) &&
-                macrosIndex != -1 && dateIndex < macrosIndex)) {
-            throw new InvalidInputException();
+        if (caloriesIndex == -1 || dateIndex == -1 ||
+                (!(caloriesIndex < dateIndex) && macrosIndex != -1 && dateIndex < macrosIndex) ||
+                (macrosIndex != -1 && (macrosIndex < dateIndex || macrosIndex < caloriesIndex)) ||
+                (macrosIndex == -1 && (dateIndex < caloriesIndex))) {
+            throw new InvalidInputException("Invalid input exception:" +
+                    "Please ensure that you have keyed in the correct format" +
+                    " in the correct order!" + "Example input: " +
+                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
-        assert descriptionIndex != -1 : "The desc/ keyword should exist!";
         assert caloriesIndex != -1 : "The c/ keyword should exist!";
         assert dateIndex != -1 : "The date/ keyword should exist!";
 
         //extract command, description, calories, date and macronutrients from input
-        String[] parts = input.split("desc/|c/|date/|m/");
-        assert parts.length >= 4 : "The desc/, c/, date/ fields must have been provided!";
-        String command = parts[0].trim();
-        String description = parts[1].trim();
-        String strCalories = parts[2].trim();
-        String date = parts[3].trim();
+        String[] parts = input.split("c/|date/|m/");
+        assert parts.length >= 3 : "The c/, date/ fields must have been provided!";
+        String command = parts[0].substring(0, CALORIES_OUT_PADDING).trim();
+        String description;
+        if (command.equals("calories out")) {
+            description = parts[0].substring(CALORIES_OUT_PADDING, caloriesIndex).trim();
+        } else {
+            command = parts[0].substring(0, CALORIES_OUT_PADDING - 1).trim();
+            description = parts[0].substring(CALORIES_OUT_PADDING - 1, caloriesIndex).trim();
+        }
+        String strCalories = parts[1].trim();
+        String date = parts[2].trim();
         int[] macros;
 
-        //check if optional macronutrients field was provided
-        if (parts.length == 5) {
-            String macroString = parts[4].trim();
-            macros = getMacrosFromString(macroString);
+        if (parts.length == 4) {
+            String macroString = parts[3].trim();
+            try {
+                macros = getMacrosFromString(macroString);
+            } catch (InvalidInputException e) {
+                throw new InvalidInputException(e.getMessage());
+            }
         } else {
             macros = null;
         }
 
+        //throw exception if command is calories out, but macros is keyed in
+        if (command.equals("calories out") && macros != null) {
+            throw new InvalidInputException("Invalid input exception: " +
+                    "Calorie output entry cannot have macros");
+        }
+
         //check if the description, calories or date fields are empty
         if (description.isEmpty() || strCalories.isEmpty() || date.isEmpty()) {
-            throw new InvalidInputException();
+            throw new InvalidInputException("Please ensure that input parameters are not empty!\n" +
+                    "Example input: " + "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE");
         }
 
         try {
             int calories = Integer.parseInt(strCalories);
-            if (command == "calories out") {
+            if (command.equals("calories out")) {
                 return makeNewOutputEntry(description, calories, date);
             } else if (macros == null) {
                 return makeNewInputEntry(description, calories, date);
@@ -81,14 +101,27 @@ public class ParserCalories {
         }
     }
 
-    private static int[] getMacrosFromString(String macroString) {
+    private static int[] getMacrosFromString(String macroString) throws InvalidInputException {
         int[] macros = new int[3];
         try {
             String[] macroParts = macroString.split(",");
             int idx = 0;
             for (String macro: macroParts) {
-                macros[idx] = Integer.parseInt(macro);
+                //Exception handling when user puts spaces in m/
+                //EG m/123,    , 123
+                if (macro.trim().isEmpty()) {
+                    throw new InvalidInputException("Invalid input exception: " +
+                            "Please ensure that all macronutrients fields are filled up. " +
+                            "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
+                }
+                macros[idx] = Integer.parseInt(macro.trim());
                 idx++;
+            }
+            //Exception handling when user does not fill up values for macros
+            if (idx != 3) {
+                throw new InvalidInputException("Invalid input exception: " +
+                        "Please ensure that all macronutrients fields are filled up. " +
+                        "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
             }
         } catch (NumberFormatException e) {
             System.out.println("Please input only numbers into the macronutrients field!");

@@ -12,8 +12,8 @@ public class CalorieListTest {
     public void addEntry_validInput_entryAdded() {
         // Test setup
         CalorieList calorieList = new CalorieList();
-        String validInputCalorieIn = "calories in desc/Eat burger c/369 date/2024-03-14";
-        String validInputCalorieOut = "calories out desc/run c/679 date/2024-03-15";
+        String validInputCalorieIn = "calories in Eat burger c/369 date/2024-03-14";
+        String validInputCalorieOut = "calories out run c/679 date/2024-03-15";
 
         // Call method to test
         calorieList.addEntry(validInputCalorieIn);
