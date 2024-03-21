@@ -2,10 +2,6 @@ package command.mapmove;
 
 
 public class MovingRightCommand extends MapMoveCommand {
-    public MovingRightCommand() {
-        super();
-    }
-
     public MovingRightCommand(String userInput) {
         super(userInput);
     }

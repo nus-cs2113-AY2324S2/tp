@@ -4,7 +4,7 @@ import map.BattleInterface.BattleInterface;
 import map.AMap;
 import textbox.PlayerStatus;
 import textbox.TextBox;
-
+import Math.*;
 import java.util.ArrayList;
 
 public class Ui {
@@ -33,7 +33,16 @@ public class Ui {
         }
         printDividingLine();
     }
-
+    public void printMap(ArrayList<ArrayList<Character>> map) {
+        printDividingLine();
+        for (ArrayList<Character> row : map) {
+            for (char cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+        printDividingLine();
+    }
     public void printMap(AMap map) {
         printDividingLine();
         for (ArrayList<Character> row : map.getCurrentMap()) {
@@ -52,5 +61,8 @@ public class Ui {
         System.out.println("'h' to print help menu");
         System.out.println("'run' to escape the battle interface");
         printDividingLine();
+    }
+    public void printQuestion(MathQuestion mathQuestion){
+        System.out.println(mathQuestion.getQuestion());
     }
 }

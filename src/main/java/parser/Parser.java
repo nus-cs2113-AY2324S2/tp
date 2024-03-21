@@ -12,11 +12,6 @@ import java.util.regex.Pattern;
 public class Parser {
 
 
-    public String readInCommand() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
     public CommandType analyseCommand(String userCommand) {
         Pattern pattern;
         Matcher matcher;

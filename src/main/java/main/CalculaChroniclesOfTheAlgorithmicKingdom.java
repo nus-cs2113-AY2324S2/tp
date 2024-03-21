@@ -1,14 +1,17 @@
 package main;
 
 import command.Command;
+import command.fight.FightingCommand;
 import command.mapmove.MapMoveCommand;
 import map.*;
 import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
+import Math.*;
 
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class CalculaChroniclesOfTheAlgorithmicKingdom {
@@ -17,6 +20,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
     }
 
     public void startGame() {
+        Scanner in  = new Scanner(System.in);
         PlayerStatus playerStatus = new PlayerStatus(100, 0, 0);
         TextBox textBox = new TextBox();
         Parser parser = new Parser();
@@ -27,6 +31,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
         map.initPlayerLocation(0, 0);
         map.placeMonsterInTheMap(2, 3);
         textBox.initTextBox();
+        map.addMaps(map);
 
         ui.printPlayerStatus(playerStatus);
         ui.printMap(map);
@@ -34,21 +39,26 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
         Command userCommand;
         while (true) {
-            String userCommandText = parser.readInCommand();
+            String userCommandText = in.nextLine();
+
             userCommand = parser.parseCommand(userCommandText);
             setUserCommand(userCommand, map, playerStatus, textBox);
 
             if (!(map instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
                 System.out.println("Invalid Command");
+            } else if (userCommand.getCommandDescription().equals("FIGHT!")){
+                userCommand.execute(in);
             } else {
                 userCommand.execute();
             }
-
+            map.storeMaps(0, map);
             map = userCommand.getCurrentMap();
+
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
                 ui.printMap(map);
             }
+
         }
     }
 
