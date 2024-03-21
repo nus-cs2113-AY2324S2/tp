@@ -44,9 +44,20 @@ public class WeeklyProgramManager extends ActivityManager {
         }
     }
 
-    private void executeTodayAction() {
+    private void executeTodayAction() throws Exceptions.ActivityDoesNotExists {
         DayOfWeek today = LocalDate.now().getDayOfWeek();
-        String workoutString = ((Workout) activityList.get(today.ordinal())).toString(1);
+        String currentDay=days[today.ordinal()];
+        Workout todayWorkout= ((Workout) activityList.get(today.ordinal()));
+
+        if (todayWorkout == null) {
+            throw new Exceptions.ActivityDoesNotExists(
+                    String.format("The %s entry for %s does not exist",
+                            this.activityType, currentDay)
+            );
+        }
+
+        String workoutString = todayWorkout.toString();
+
         String message = "Here's today's workout: " + System.lineSeparator() + today.toString()
                 + System.lineSeparator() + workoutString;
         UserInterface.printMessage(message);
