@@ -18,8 +18,9 @@ public class Florizz {
         boolean isRunning = true;
         Ui ui = new Ui();
         ui.printIntroMessage();
+        assert !isRunning : "Programme is running";
 
-        while (isRunning){
+        while (isRunning) {
             try {
                 String input = ui.getInput();
                 Command command = Parser.parse(input);
