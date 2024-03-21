@@ -2,27 +2,25 @@ package seedu.duke;
 
 import seedu.duke.ui.UI;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
-    static Scanner in = new Scanner(System.in);
-    static boolean finished = false;
+    static final Scanner IN = new Scanner(System.in);
+    static boolean isFinished = false;
 
-    public static void setFinished(boolean b) {
-        finished = b;
+    public static void setIsFinished(boolean b) {
+        isFinished = b;
     }
 
     public static void main(String[] args) {
         UI.printGreeting();
         UserList userList = new UserList();
 
-        //Replaced with Parser Logic
-        while (!finished) {
+        while (!isFinished) {
             try {
-                String input = in.nextLine();
+                String input = IN.nextLine();
                 Parser parser = new Parser();
-                parser.parseCommand(input);
+                parser.parseCommand(input, userList);
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());

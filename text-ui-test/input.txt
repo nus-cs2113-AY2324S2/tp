@@ -1,1 +1,11 @@
+adduser simon
+list
+addtask /on Monday /task lecture /from 9:00 /to 11:00
+view
+adduser tim
+switch tim
+addtask /on Eightday /task lecture /from 9:00 /to 11:00
+addtask /on Monday /task lecture /from 9:00 /to 11:00
+view
+compare simon tim
 bye

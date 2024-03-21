@@ -6,24 +6,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    public Parser() {}
 
     /**
      * Parses User Input and Identifies the command used.
      *
      * @param command The users text input.
      */
-    public void parseCommand(String command) {
-        if (command.toLowerCase().equals("list")) {
+    public void parseCommand(String command, UserList userList) {
+        if (command.equalsIgnoreCase("list")) {
             UI.printListingUsers();
-            UserList.ListAll();
-        } else if (command.toLowerCase().equals("bye")) {
+            userList.listAll();
+        } else if (command.equalsIgnoreCase("help")) {
+            UI.printHelp();
+        } else if (command.equalsIgnoreCase("bye")) {
             UI.printBye();
-            Duke.setFinished(true);
-        } else if (command.toLowerCase().equals("current")) {
-            UI.printActiveUser(UserList.GetActiveUser().getName());
-        } else if (command.toLowerCase().equals("view")) {
-            UserList.GetActiveUser().viewTimetable();
+            Duke.setIsFinished(true);
+        } else if (command.equalsIgnoreCase("current")) {
+            UI.printActiveUser(userList.getActiveUser().getName());
+        } else if (command.equalsIgnoreCase("view")) {
+            userList.getActiveUser().viewTimetable();
         } else if (command.toLowerCase().startsWith("adduser")) {
             try {
                 InputValidator.validateAddUserInput(command);
@@ -31,7 +32,7 @@ public class Parser {
                 String userName = parts[1];
                 User newUser = new User(userName);
                 UI.printNewUser(newUser.getName());
-                UserList.AddUser(newUser);
+                userList.addUser(newUser);
             } catch (InvalidFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -40,8 +41,8 @@ public class Parser {
                 InputValidator.validateSwitchInput(command);
                 String[] parts = command.split("\\s+");
                 String userName = parts[1];
-                UserList.SetActiveUser(UserList.FindUser(userName));
-                UI.printActiveUser(UserList.GetActiveUser().getName());
+                userList.setActiveUser(userList.findUser(userName));
+                UI.printActiveUser(userList.getActiveUser().getName());
             } catch (InvalidFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -56,7 +57,8 @@ public class Parser {
                 String endTime = parts[wordList.indexOf("/to") + 1];
                 InputValidator.validateDay(day);
                 Task task = new Task(description, day, startTime, endTime);
-                UserList.GetActiveUser().getTimetable().addUserTask(day, task);
+                userList.getActiveUser().getTimetable().addUserTask(day, task);
+                UI.printAddTask(task);
             } catch (InvalidFormatException | InvalidDayException e) {
                 System.out.println(e.getMessage());
             }
@@ -67,7 +69,7 @@ public class Parser {
                 String day = parts[2];
                 int index = Integer.parseInt(parts[4]);
                 InputValidator.validateDay(day);
-                UserList.GetActiveUser().getTimetable().deleteUserTask(day, index);
+                userList.getActiveUser().getTimetable().deleteUserTask(day, index);
             } catch (InvalidFormatException | InvalidDayException e) {
                 System.out.println(e.getMessage());
             }
@@ -77,9 +79,10 @@ public class Parser {
                 String[] parts = command.split("\\s+");
                 String user1 = parts[1];
                 String user2 = parts[2];
-                InputValidator.validateUserInput(user1);
-                InputValidator.validateUserInput(user2);
-                Timetable.compareTimetable(UserList.FindUser(user1).getTimetable(), UserList.FindUser(user2).getTimetable());
+                InputValidator.validateUserInput(user1, userList);
+                InputValidator.validateUserInput(user2, userList);
+                Timetable.compareTimetable(userList.findUser(user1).getTimetable(),
+                        userList.findUser(user2).getTimetable());
 
             } catch (InvalidFormatException | InvalidUserException | NullPointerException e) {
                 System.out.println(e.getMessage());

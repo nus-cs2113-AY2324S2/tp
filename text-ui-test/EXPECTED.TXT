@@ -1,2 +1,49 @@
 Timetable comparison app opened.
+New user added: simon
+The active user is: simon
+The current users are:
+simon
+The following task is added: lecture (Monday from 09:00 to 11:00)
+Monday:
+lecture (Monday from 09:00 to 11:00)
+NO TASK FOR Tuesday
+NO TASK FOR Wednesday
+NO TASK FOR Thursday
+NO TASK FOR Friday
+NO TASK FOR Saturday
+NO TASK FOR Sunday
+New user added: tim
+The active user is: tim
+[ERROR] Invalid day. Please enter a day from Monday - Sunday.
+The following task is added: lecture (Monday from 09:00 to 11:00)
+Monday:
+lecture (Monday from 09:00 to 11:00)
+NO TASK FOR Tuesday
+NO TASK FOR Wednesday
+NO TASK FOR Thursday
+NO TASK FOR Friday
+NO TASK FOR Saturday
+NO TASK FOR Sunday
+----------------------
+Shared Free Time on Monday:
+00:00 - 09:00: Overlapping Free Time
+11:00 - 23:59: Overlapping Free Time
+----------------------
+Shared Free Time on Tuesday:
+** Whole day is free on Tuesday
+----------------------
+Shared Free Time on Wednesday:
+** Whole day is free on Wednesday
+----------------------
+Shared Free Time on Thursday:
+** Whole day is free on Thursday
+----------------------
+Shared Free Time on Friday:
+** Whole day is free on Friday
+----------------------
+Shared Free Time on Saturday:
+** Whole day is free on Saturday
+----------------------
+Shared Free Time on Sunday:
+** Whole day is free on Sunday
 Bye.
