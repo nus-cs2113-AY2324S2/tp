@@ -40,9 +40,13 @@ public class ParserCalories {
                 macrosIndex != -1 && dateIndex < macrosIndex)) {
             throw new InvalidInputException();
         }
+        assert descriptionIndex != -1 : "The desc/ keyword should exist!";
+        assert caloriesIndex != -1 : "The c/ keyword should exist!";
+        assert dateIndex != -1 : "The date/ keyword should exist!";
 
         //extract command, description, calories, date and macronutrients from input
         String[] parts = input.split("desc/|c/|date/|m/");
+        assert parts.length >= 4 : "The desc/, c/, date/ fields must have been provided!";
         String command = parts[0].trim();
         String description = parts[1].trim();
         String strCalories = parts[2].trim();
