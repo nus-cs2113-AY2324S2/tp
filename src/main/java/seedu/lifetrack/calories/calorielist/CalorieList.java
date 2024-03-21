@@ -2,13 +2,15 @@ package seedu.lifetrack.calories.calorielist;
 
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserCalories;
-
+import java.util.logging.*;
 import java.util.ArrayList;
 
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
     private final int DELETE_PADDING = 16;
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();
@@ -28,10 +30,10 @@ public class CalorieList {
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.");
+            logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
+                    "within the size of the list.", e);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index!");
+            logr.log(Level.WARNING, "Please enter a valid index!", e);
         }
     }
 
@@ -51,7 +53,7 @@ public class CalorieList {
             Entry newEntry = ParserCalories.parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
         } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
