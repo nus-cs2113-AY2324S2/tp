@@ -1,6 +1,5 @@
 package newsonthego;
 
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,10 +16,13 @@ public class UI {
                 "                                                ,-.|      \n" +
                 "                                                `-+'      \n";
         System.out.println("Hello from\n" + logo);
+
+        /*
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+         */
     }
 
     public static void printError(String message) {
