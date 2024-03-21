@@ -10,6 +10,8 @@ public class OrderDeleteCommand implements OrderCommand {
      * Executes the command to remove an item from an order.
      *
      * @param order     the order containing the item to be removed
+     * @param inputText the input containing the details of the item to be removed
+     * @param menu      the menu that the item to be removed is from
      * @return          always returns false, as order is not completed
      */
     public static Order execute(Order order, String inputText, Menu menu) {
@@ -22,6 +24,7 @@ public class OrderDeleteCommand implements OrderCommand {
             return newOrder;
         } else if (newOrder.getItemCount(itemID) - Integer.parseInt(itemQuantity) <= 0) {
             newOrder.remove(itemID);
+            assert newOrder.getItemCount(itemID) == 0 : "all items of itemID should be removed from the order";
             System.out.println("All " + " " + menu.getItem(itemID).get().getName() + " is removed from order");
             return newOrder;
         } else {
