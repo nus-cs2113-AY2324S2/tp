@@ -93,7 +93,8 @@ public class Ui {
     }
 
     public static void printLine() {
-        System.out.println(WHITESPACE + "-----------------------------------------------------------------------------");
+        System.out.println(WHITESPACE + "-------------------------------------" +
+                "----------------------------------------");
     }
 
     public static void handleUnknownInput() {
