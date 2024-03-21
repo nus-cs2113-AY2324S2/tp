@@ -21,7 +21,10 @@ public class WeeklyProgramManager extends ActivityManager {
         }
     }
 
-    public void execute(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+
+    public void execute(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists,
+            Exceptions.ActivityExistsException {
+        
         assert parser != null : "Parser must not be null";
         assert parser.getAction() != null : "Command action must not be null";
 
@@ -47,9 +50,20 @@ public class WeeklyProgramManager extends ActivityManager {
         }
     }
 
-    private void executeTodayAction() {
+    private void executeTodayAction() throws Exceptions.ActivityDoesNotExists {
         DayOfWeek today = LocalDate.now().getDayOfWeek();
-        String workoutString = ((Workout) activityList.get(today.ordinal())).toString(1);
+        String currentDay=days[today.ordinal()];
+        Workout todayWorkout= ((Workout) activityList.get(today.ordinal()));
+
+        if (todayWorkout == null) {
+            throw new Exceptions.ActivityDoesNotExists(
+                    String.format("The %s entry for %s does not exist",
+                            this.activityType, currentDay)
+            );
+        }
+
+        String workoutString = todayWorkout.toString();
+
         String message = "Here's today's workout: " + System.lineSeparator() + today.toString()
                 + System.lineSeparator() + workoutString;
         UserInterface.printMessage(message);
@@ -99,47 +113,109 @@ public class WeeklyProgramManager extends ActivityManager {
         UserInterface.printMessage(String.format("Your workout on %s has been cleared", day));
     }
 
-    private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
+    private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists,
+            Exceptions.ActivityExistsException{
         assert parser.getAction().equals("assign") : "Action must be assign";
         String day = parser.getAdditionalArguments("to");
-        if (day == null) {
+        if (day == null || day.isEmpty()) {
             throw new Exceptions.InvalidInput("Week command not complete");
         }
         String workoutName = parser.getActionParameter();
         Activity workout = workoutManager.retrieve(workoutName);
         assignWorkoutToDay(workout, day.toLowerCase());
-        UserInterface.printMessage(String.format("Workout %s assigned to %s", workoutName, day));
     }
 
-    public void assignWorkoutToDay(Activity workout, String day) throws Exceptions.InvalidInput {
+    public void assignWorkoutToDay(Activity workout, String day) throws Exceptions.InvalidInput,
+            Exceptions.ActivityExistsException{
+
+        Workout chosenDay;
         switch (day) {
         case "mon":
         case "monday":
-            activityList.set(0, workout);
+            chosenDay = (Workout) activityList.get(0);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(0, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+
+            }
             break;
         case "tue":
         case "tuesday":
-            activityList.set(1, workout);
+            chosenDay = (Workout) activityList.get(1);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(1, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
             break;
         case "wed":
         case "wednesday":
-            activityList.set(2, workout);
+            chosenDay = (Workout) activityList.get(2);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(2, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
             break;
         case "thu":
         case "thursday":
-            activityList.set(3, workout);
+            chosenDay = (Workout) activityList.get(3);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+
+            } else {
+                activityList.set(3, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
             break;
         case "fri":
         case "friday":
-            activityList.set(4, workout);
+            chosenDay = (Workout) activityList.get(4);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(4, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
             break;
         case "sat":
         case "saturday":
-            activityList.set(5, workout);
+            chosenDay = (Workout) activityList.get(5);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(5, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
+
             break;
         case "sun":
         case "sunday":
-            activityList.set(6, workout);
+            chosenDay = (Workout) activityList.get(6);
+            if (chosenDay != null) {
+                throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to %s",
+                        chosenDay.getActivityName(), day));
+            } else {
+                activityList.set(6, workout);
+                UserInterface.printMessage(String.format("Workout %s assigned to %s",
+                        workout.getActivityName(), day));
+            }
             break;
         default:
             throw new Exceptions.InvalidInput("Not a valid day");
