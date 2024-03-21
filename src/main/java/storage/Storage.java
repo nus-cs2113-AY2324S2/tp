@@ -1,7 +1,10 @@
 package storage;
 
+import item.Item;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +37,7 @@ public class Storage {
 
     public static void updateFile(String inputText, boolean ifAppend) {
         try {
-            writeToFile(FILENAME, inputText, ifAppend);
+            writeToFile(getFileDirectory(), inputText, ifAppend);
         } catch (IOException e) {
             System.out.println("IOExceptions occurred");
         }
@@ -68,6 +71,13 @@ public class Storage {
         } catch(FileNotFoundException e){
             System.out.println("File does not exist.");
         }
+    }
+
+    public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
+        Item lastItem = items.get(items.size() - 1);
+        String descriptionAdded = items.size() + " | " + lastItem.getItemName() +
+                " | " + lastItem.getQuantity() + "\n";
+        updateFile(descriptionAdded, ifAppend);
     }
 
     public static void main (String[]args){

@@ -2,6 +2,7 @@ package command;
 
 import item.Item;
 import itemlist.Itemlist;
+import storage.Storage;
 
 public class AddCommand extends Command {
 
@@ -44,6 +45,7 @@ public class AddCommand extends Command {
     public void execute() {
         Itemlist.addItem(toAdd);
         System.out.println(MESSAGE_SUCCESS + getItemName() + "(Qty: " + getQuantity() + ")");
+        Storage.addToFile(Itemlist.getItems(), true);
         if (!category.equals("NA")) {
             System.out.println("to " + getCategory());
         }
