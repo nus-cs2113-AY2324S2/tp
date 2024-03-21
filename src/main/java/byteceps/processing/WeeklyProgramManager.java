@@ -21,9 +21,10 @@ public class WeeklyProgramManager extends ActivityManager {
         }
     }
 
+
     public void execute(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists,
             Exceptions.ActivityExistsException {
-
+        
         assert parser != null : "Parser must not be null";
         assert parser.getAction() != null : "Command action must not be null";
 

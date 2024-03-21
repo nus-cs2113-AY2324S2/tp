@@ -21,8 +21,13 @@ public class WorkoutManager extends ActivityManager {
             Exceptions.ActivityExistsException,
             Exceptions.InvalidInput,
             Exceptions.ActivityDoesNotExists {
-
         assert parser != null : "Parser must not be null";
+        assert parser.getAction() != null : "Command action must not be null";
+
+        if (parser.getAction().isEmpty()) {
+            throw new Exceptions.InvalidInput("No action specified");
+        }
+
         switch (parser.getAction()) {
         case "create":
             executeCreateAction(parser);
@@ -49,14 +54,20 @@ public class WorkoutManager extends ActivityManager {
 
     private void executeInfoAction(Parser parser) throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
         assert parser.getAction().equals("info") : "Action must be info";
-        list(parser.getActionParameter());
+        String workoutName = parser.getActionParameter();
+        if(workoutName == null || workoutName.isEmpty()) {
+            throw new Exceptions.InvalidInput("info command not complete");
+        }
+
+        list(workoutName);
+
     }
 
     private void executeUnassignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
         assert parser.getAction().equals("unassign") : "Action must be unassign";
         String workoutName = unassignExerciseFromWorkout(parser);
         UserInterface.printMessage(String.format(
-                "Unassigned Exercise '%s' from Workout Plan '%s'\n", parser.getActionParameter(), workoutName
+                "Unassigned Exercise '%s' from Workout Plan '%s'", parser.getActionParameter(), workoutName
         ));
     }
 
@@ -64,7 +75,7 @@ public class WorkoutManager extends ActivityManager {
         assert parser.getAction().equals("assign") : "Action must be assign";
         String workoutPlan = assignExerciseToWorkout(parser);
         UserInterface.printMessage(String.format(
-                "Assigned Exercise '%s' to Workout Plan '%s'\n", parser.getActionParameter(), workoutPlan
+                "Assigned Exercise '%s' to Workout Plan '%s'", parser.getActionParameter(), workoutPlan
         ));
     }
 
@@ -83,7 +94,7 @@ public class WorkoutManager extends ActivityManager {
         Workout newWorkout = processWorkout(parser);
         add(newWorkout);
         UserInterface.printMessage(String.format(
-                "Added Workout Plan: %s\n", newWorkout.getActivityName()
+                "Added Workout Plan: %s", newWorkout.getActivityName()
         ));
     }
 
@@ -131,6 +142,11 @@ public class WorkoutManager extends ActivityManager {
         StringBuilder message = new StringBuilder();
         ArrayList<Exercise> workoutList = workout.getExerciseList();
 
+        if (workoutList.isEmpty()) {
+            UserInterface.printMessage(String.format("Your workout plan %s is empty", workoutPlanName));
+            return;
+        }
+
         message.append(String.format("Listing exercises in workout plan '%s':%n", workoutPlanName));
 
         int index = 1;
@@ -156,7 +172,11 @@ public class WorkoutManager extends ActivityManager {
         assert workoutPlan != null : "Workout plan does not exist";
         ArrayList<Exercise> workoutList = workoutPlan.getExerciseList();
 
-        workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
+        boolean exerciseIsInWorkout =
+                workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
+        if (!exerciseIsInWorkout) {
+            throw new Exceptions.ActivityDoesNotExists("The exercise is not in the workout");
+        };
 
         return workoutPlanName;
     }
