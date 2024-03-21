@@ -15,8 +15,8 @@ Here are the topics in CS2113:
 2. topic2
 Please choose a topic to play:
 ************************************************
-Input a command player! // TODO: show possible commands
+Input a command player!
 -1 HP coz invalid commandTODO: show possible commands
-Input a command player! // TODO: show possible commands
+Input a command player!
 bye bye, get more sleep zzz
 ************************************************
