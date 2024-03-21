@@ -96,7 +96,8 @@ public class Ui {
     }
 
     public static void printInvalidAddGrade() {
-        System.out.println("To add grade, please enter: add grade [course code] [letter grade]\n    e.g. add grade CS1010 A");
+        System.out.println("To add grade, please enter: add grade [course code] [letter grade]\n    " +
+                "e.g. add grade CS1010 A");
     }
 
     public static void printWrongTerm() {

@@ -183,11 +183,11 @@ public class Timetable {
             totalGrade += yearGrade;
         }
 
-        double GPA = 0.00;
+        double cumulativeGPA = 0.00;
         if (totalMCs != 0) {
-            GPA = totalGrade / totalMCs;
+            cumulativeGPA = totalGrade / totalMCs;
         }
-        plan.append("Total GPA: ").append(GPA).append(System.lineSeparator()).append(System.lineSeparator());
+        plan.append("Total GPA: ").append(cumulativeGPA).append(System.lineSeparator()).append(System.lineSeparator());
 
         return plan.toString();
     }
