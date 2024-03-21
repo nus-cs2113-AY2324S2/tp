@@ -4,7 +4,7 @@ import newsonthego.NewsArticle;
 
 import java.util.List;
 
-public class infoNewsCommand {
+public class InfoNewsCommand {
 
     /**
      * Prints the importance, reliability, and bias of a news article based on its index in the list.

@@ -1,13 +1,12 @@
 package newsonthego;
 
 import newsonthego.commands.DailyNewsCommand;
-import newsonthego.commands.infoNewsCommand;
+import newsonthego.commands.InfoNewsCommand;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -120,7 +119,7 @@ public class NewsOnTheGo {
             sourceNews(line, list);
             break;
         case INFO:
-            infoNewsCommand.printNewsInfo(line, list);
+            InfoNewsCommand.printNewsInfo(line, list);
             break;
         case BYE:
             System.out.println("Bye. Hope to see you again soon!");
