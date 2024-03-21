@@ -20,7 +20,7 @@ public class TextUi {
     public String getUserInput() {
         System.out.println("Enter Command: ");
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
+        String userInput = in.hasNextLine() ? in.nextLine() : "";
         if (shouldIgnore(userInput)) {
             return "Invalid Command"; //Might want to change this with Exceptions
         }
