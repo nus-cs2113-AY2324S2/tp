@@ -1,8 +1,9 @@
 package seedu.duke;
-
+import java.util.logging.Logger;
 public class Formatter {
     public static final String footballIcon = "⚽";
     public static final String emojiSad = "☹";
+    private static final Logger logger = Logger.getLogger(Formatter.class.getName());
 
     /**
      * Appends a newline to a given string and returns the resulting string
@@ -48,19 +49,19 @@ public class Formatter {
 
 
     public static void printGoalBeforeShot(int roundCount) {
+        assert roundCount > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + roundCount);
         System.out.println("Round " + roundCount);
-
         System.out.println("_______________________________");
         System.out.println("|         |         |         |");
         System.out.println("|    0    |    1    |    2    |");
         System.out.println("|         |         |         |");
         System.out.println("|         |         |         |");
-
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
     public static void printGoalAfterShot(boolean goalScored) {
         if (goalScored) {
-
+            logger.info("GOAL!!!!");
             System.out.println("_______________________________");
             System.out.println("| *    *  |  *  *   | *      *|");
             System.out.println("|    *    |       * |     *   |");
@@ -69,7 +70,7 @@ public class Formatter {
             System.out.println("GOAL!!!!");
         }
         else {
-
+            logger.info("No goal :((((");
             System.out.println("_______________________________");
             System.out.println("\\         \\         \\         \\");
             System.out.println(" \\         \\         \\         \\");
