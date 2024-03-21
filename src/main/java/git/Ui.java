@@ -48,6 +48,7 @@ public class Ui {
      */
     public String[] processInput() {
         String commandLine = in.nextLine();
+        assert !(commandLine.isEmpty()): "User input should be read";
         String[] commandParts = commandLine.strip().split(" ", 2);
         assert commandParts.length > 0 : "Failed to read user input";
 
@@ -111,6 +112,7 @@ public class Ui {
      * Prints all groceries.
      */
     public static void printGroceryList(List<Grocery> groceries) {
+        assert !groceries.isEmpty() : "grocery list should not be empty";
         System.out.println("Here are your groceries!");
         for (Grocery grocery: groceries) {
             System.out.println(" - " + grocery.printGrocery());
@@ -121,6 +123,9 @@ public class Ui {
      * Prints output when the selected grocery is removed.
      */
     public static void printGroceryRemoved(Grocery grocery, List<Grocery> groceries) {
+        assert grocery!=null : "Grocery does not exist";
+        System.out.println("This grocery is removed:");
+        System.out.println(grocery.printGrocery());
         System.out.println("You now have " + groceries.size() + " groceries left");
     }
 
