@@ -9,6 +9,7 @@ import player.PlayerProfile;
 import ui.Parser;
 import ui.ResponseManager;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EconoCraftLogic {
@@ -21,10 +22,22 @@ public class EconoCraftLogic {
 
     public static EconoCraftLogic initializeGame() {
         ResponseManager.printGameInit();
-        String playerName = getName();
+        String playerName = "";
+        String jobType = "";
+        try {
+            playerName = getName();
+        } catch (NoSuchElementException e) {
+            ResponseManager.printGoodbye();
+            System.exit(0);
+        }
 
         ResponseManager.printJobSelect();
-        String jobType = getJob();
+        try {
+            jobType = getJob();
+        } catch (NoSuchElementException e) {
+            ResponseManager.printGoodbye();
+            System.exit(0);
+        }
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
         ResponseManager.printWelcome(playerProfile);

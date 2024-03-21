@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("gamelogic.EconoCraft")
+    mainClass.set("seedu.duke.Duke")
 }
 
 shadowJar {
