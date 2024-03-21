@@ -85,7 +85,10 @@ public class Parser {
             }
         } else if (command.toLowerCase().startsWith("addforall")) {
             addTaskForAll(command, userList);
-        } else {
+        } else if (command.toLowerCase().startsWith("viewcommonevents")) {
+            printConfirmedEvent(userList);
+        }
+        else {
             UI.printInvalidCommand();
         }
     }
@@ -122,7 +125,13 @@ public class Parser {
         String startTime = parts[wordList.indexOf("/from") + 1];
         String endTime = parts[wordList.indexOf("/to") + 1];
 
-        String type = parts[wordList.indexOf("/type") + 1];
+        String type;
+        if (wordList.contains("/type")) {
+            type = parts[wordList.indexOf("/type") + 1];
+        } else {
+            type = "common";
+        }
+
         InputValidator.validateDay(day);
         return new Task(description, day, startTime, endTime, type);
     }
@@ -163,5 +172,16 @@ public class Parser {
             user.getTimetable().addUserTask(task.day, task);
         }
         UI.printAddForAll(task);
+    }
+
+    private static void printConfirmedEvent(UserList userList) {
+        int taskCount = 1;
+        for (String day : DAYS) {
+            for (Task task : userList.getActiveUser().getTimetable().getWeeklyTasks().get(day)) {
+                if (task.type.equals("common")) {
+                    System.out.println(taskCount + ". " + task);
+                }
+            }
+        }
     }
 }
