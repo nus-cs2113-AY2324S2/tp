@@ -75,6 +75,8 @@ public class Timetable {
         }
     }
 
+
+
     /**
      * Compares and prints overlapping free time between two Timetables.
      *
