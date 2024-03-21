@@ -28,7 +28,8 @@ public class NewsOnTheGo {
 
         while (true) {
             System.out.println("What do you want from me?");
-            String line = getInput();
+            Scanner in = new Scanner(System.in);
+            String line = in.nextLine();
             String command = line.split(" ")[0];
             try {
                 boolean endLoop = processCommand(command, line, newsArticles);
@@ -43,10 +44,6 @@ public class NewsOnTheGo {
         logger.log(Level.INFO, "Ending NewsOnTheGo");
     }
 
-    public static String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 
     static List<NewsArticle> importNewsFromText(String filename) {
         List<String> stringList;
