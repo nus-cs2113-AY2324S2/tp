@@ -42,19 +42,37 @@ public class Parser {
                 books.addBook(inputArray[1]);
                 break;
             case REMOVE_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.deleteBook(index);
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    books.deleteBook(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case LIST_COMMAND:
                 books.printAllBooks();
                 break;
             case MARK_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.markDoneByIndex(index);
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    books.markDoneByIndex(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case UNMARK_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.markUndoneByIndex(index);
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    books.markUndoneByIndex(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case HELP_COMMAND:
                 Ui.helpMessage();

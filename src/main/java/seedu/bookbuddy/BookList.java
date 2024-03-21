@@ -1,5 +1,7 @@
 package seedu.bookbuddy;
 
+import exceptions.InvalidBookIndexException;
+
 import java.util.ArrayList;
 
 /**
