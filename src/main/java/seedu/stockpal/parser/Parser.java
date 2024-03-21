@@ -1,6 +1,17 @@
 package seedu.stockpal.parser;
 
-import seedu.stockpal.commands.*;
+import seedu.stockpal.commands.HelpCommand;
+import seedu.stockpal.commands.ListCommand;
+import seedu.stockpal.commands.ExitCommand;
+import seedu.stockpal.commands.NewCommand;
+import seedu.stockpal.commands.EditCommand;
+import seedu.stockpal.commands.DeleteCommand;
+import seedu.stockpal.commands.InflowCommand;
+import seedu.stockpal.commands.OutflowCommand;
+import seedu.stockpal.commands.FindCommand;
+import seedu.stockpal.commands.Command;
+
+
 
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -183,7 +194,7 @@ public class Parser {
 
     private FindCommand validateAndCreateFindCommand(ArrayList<String> parsed) {
         String name = parsed.get(0);
-            return new FindCommand(name);
+        return new FindCommand(name);
     }
 
     private static String getCommandFromInput(String input) {

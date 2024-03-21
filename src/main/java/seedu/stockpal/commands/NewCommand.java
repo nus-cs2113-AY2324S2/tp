@@ -68,11 +68,9 @@ public class NewCommand extends ListActionCommand {
 
         if (sizeOfArray == 0) {
             pid = 1;
-        }
-        else if (sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()) {
+        } else if (sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()) {
             pid = sizeOfArray + 1;
-        }
-        else {
+        } else {
             pid = productList.get(sizeOfArray - 1).getPid().getPid() + 1;
         }
         return new Product(name, quantity, price, description, pid);
