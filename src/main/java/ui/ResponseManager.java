@@ -6,19 +6,26 @@ public class ResponseManager {
     private static final String INITIALIZATION_MESSAGE = "Initializing...\n"
         + "Enter your name: \n";
     private static final String INDENTATION =
-            "===".repeat(10) + "\n";
+            "===".repeat(10);
     private static final String JOB_SELECT_MSG = "Choose your job type: \n" +
             "for Robotics, enter '/r'\n" +
             "for Semiconductor industry, enter '/s'\n" +
             "for Artificial intelligence, enter '/a'\n";
     private static final String BYE_MSG = "Bye bye adventurer!";
+    private static final String HELP_MSG =
+            "Enter ur action!\n" +
+            "work - to work\n" +
+            "rest - to rest\n" +
+            "exercise - to exercise\n" +
+            "status - to check status\n" +
+            "bye - to exit\n";
 
-    public static void printBoard(String boardInfor) {
-        System.out.println(INDENTATION + boardInfor + INDENTATION);
+    public static void printBoard(String boardInfo) {
+        indentPrint(boardInfo + "\n");
     }
 
     public static void indentPrint(String message) {
-        System.out.println(INDENTATION + message + INDENTATION);
+        System.out.println(INDENTATION + "\n" + message + INDENTATION);
     }
 
     public static void printGameInit() {
@@ -39,5 +46,9 @@ public class ResponseManager {
 
     public static void printGoodbye() {
         System.out.println(BYE_MSG);
+    }
+
+    public static void printHelp() {
+        indentPrint(HELP_MSG);
     }
 }
