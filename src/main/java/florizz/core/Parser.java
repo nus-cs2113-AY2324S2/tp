@@ -15,7 +15,6 @@ import florizz.objects.Bouquet;
 
 public class Parser {
     // prefixes to parse input
-
     private static final String QUANTITY = "/q";
     private static final String ADD_FLOWER_PREFIX = "/to";
     private static final String REMOVE_FLOWER_PREFIX = "/from";
@@ -25,7 +24,10 @@ public class Parser {
     private static final String REMOVE_FLOWER_REGEX = "(.+)/q(\\s*)(\\d+)(\\s*)/from(.+)";
 
     public static Command parse (String input) throws FlorizzException{
+        //logger.log(Level.INFO, "entered parse");
+
         String[] decodedInput = commandHandler(input);
+        //logger.log(Level.INFO, "commandHandler handled command successfully");
         switch (decodedInput[0]){
         case ("mybouquets"):
             return new ListBouquetCommand();

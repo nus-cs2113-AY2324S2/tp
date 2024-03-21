@@ -185,4 +185,11 @@ public class Ui {
         System.out.println(flowerName + " cannot be found in bouquet: " + bouquetName);
         printAllBouquets(bouquetList);
     }
+
+    /**
+     * print if IOException is caught in a try catch block
+     */
+    public void printIOError() {
+        System.out.println("ERROR: IO Error Encountered Xd");
+    }
 }

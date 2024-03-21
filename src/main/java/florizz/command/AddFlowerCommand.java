@@ -7,12 +7,9 @@ import florizz.objects.Bouquet;
 import florizz.objects.Flower;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class AddFlowerCommand extends Command{
-    private static Logger logger = Logger.getLogger("addFlowerLogger");
     private String flowerName;
     private Integer quantity;
     private String bouquetName;
@@ -25,7 +22,6 @@ public class AddFlowerCommand extends Command{
 
     @Override
     public boolean execute(ArrayList<Bouquet> bouquetList, Ui ui) throws FlorizzException {
-        logger.log(Level.INFO, "executed AddFlowerCommand");
         boolean doesBouquetExist = false;
         Bouquet bouquetToAddFlower = new Bouquet();
         for (int i = 0; !doesBouquetExist && i < bouquetList.size(); i++) {
