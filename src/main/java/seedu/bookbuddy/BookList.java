@@ -1,6 +1,8 @@
 package seedu.bookbuddy;
 
 
+import exceptions.BookNotFoundException;
+
 import java.util.ArrayList;
 
 /**
@@ -30,9 +32,9 @@ public class BookList {
      * @param index The index of the book to retrieve.
      * @return The Book at the specified index.
      */
-    public Book getBook(int index) throws IndexOutOfBoundsException{
+    public Book getBook(int index) throws BookNotFoundException{
         if (index < 0 || index > books.size()) {
-            throw new IndexOutOfBoundsException("Book index out of range.");
+            throw new BookNotFoundException("Book index out of range.");
         }
         assert books.get(index) != null : "Retrieved book should not be null";
         return books.get(index);
