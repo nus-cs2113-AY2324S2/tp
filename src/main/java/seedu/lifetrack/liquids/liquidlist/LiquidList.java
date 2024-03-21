@@ -60,6 +60,7 @@ public class LiquidList {
         try {
             LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
+            System.out.println("Beverage has been successfully added");
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }

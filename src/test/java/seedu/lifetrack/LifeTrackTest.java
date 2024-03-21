@@ -144,7 +144,9 @@ class LifeTrackTest {
         try {
             parseLiquidInput("liquids in");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -153,7 +155,9 @@ class LifeTrackTest {
         try {
             parseLiquidInput("liquids in b/Milo");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("Invalid input exception: " +
+                    "Please ensure that you have entered b/ and v/\n" +
+                    "For example: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -178,7 +182,8 @@ class LifeTrackTest {
         liquidList.addEntry("liquids in b/Milo v/200");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
+        String expectedOutput = "Beverage has been successfully added" +  lineSeparator +
+                "Liquid List:" + lineSeparator +
                 "1. Beverage: Milo, Volume: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
@@ -194,7 +199,10 @@ class LifeTrackTest {
         liquidList.addEntry("liquids in b/Juice v/150");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
+        String expectedOutput = "Beverage has been successfully added" +  lineSeparator +
+                "Beverage has been successfully added" +  lineSeparator +
+                "Beverage has been successfully added" +  lineSeparator +
+                "Liquid List:" + lineSeparator +
                 "1. Beverage: Milo, Volume: 200" + lineSeparator +
                 "2. Beverage: Water, Volume: 300" + lineSeparator +
                 "3. Beverage: Juice, Volume: 150" + lineSeparator;
