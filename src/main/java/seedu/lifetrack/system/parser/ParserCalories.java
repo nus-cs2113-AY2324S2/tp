@@ -32,25 +32,20 @@ public class ParserCalories {
      */
     public static Entry parseCaloriesInput(String input) throws InvalidInputException {
 
-        //check that desc/, c/ and date/ keywords exist in the correct order, else throw exception
-        int descriptionIndex = input.indexOf("desc/");
+        //check that c/ and date/ keywords exist in the correct order, else throw exception
         int caloriesIndex = input.indexOf("c/");
         int dateIndex = input.indexOf("date/");
         int macrosIndex = input.indexOf("m/");
-        if (descriptionIndex == -1 || caloriesIndex == -1 || dateIndex == -1 ||
-                (!(descriptionIndex < caloriesIndex && caloriesIndex < dateIndex) &&
-                        macrosIndex != -1 && dateIndex < macrosIndex)) {
+        if (caloriesIndex == -1 || dateIndex == -1 ||
+                (!(caloriesIndex < dateIndex) &&
+                        macrosIndex != -1 && dateIndex < macrosIndex) ||
+                        dateIndex < caloriesIndex) {
             throw new InvalidInputException("Please ensure that you have keyed in the correct format" +
                     " in the correct order!\n" + "Example input: " +
-                    "calories in desc/DESCRIPTION c/INTEGER_CALORIES date/DATE");
+                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE");
         }
 
         //extract command, description, calories, date and macronutrients from input
-        String[] parts = input.split("desc/|c/|date/|m/");
-        String command = parts[0].trim();
-        String description = parts[1].trim();
-        String strCalories = parts[2].trim();
-        String date = parts[3].trim();
         String[] parts = input.split("c/|date/|m/");
         String command = parts[0].substring(0, CALORIES_OUT_PADDING).trim();
         String description;
@@ -78,12 +73,12 @@ public class ParserCalories {
         //check if the description, calories or date fields are empty
         if (description.isEmpty() || strCalories.isEmpty() || date.isEmpty()) {
             throw new InvalidInputException("Please ensure that input parameters are not empty!\n" +
-                    "Example input: " + "calories in desc/DESCRIPTION c/INTEGER_CALORIES date/DATE");
+                    "Example input: " + "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE");
         }
 
         try {
             int calories = Integer.parseInt(strCalories);
-            if (command == "calories out") {
+            if (command.equals("calories out")) {
                 return makeNewOutputEntry(description, calories, date);
             } else if (macros == null) {
                 return makeNewInputEntry(description, calories, date);
