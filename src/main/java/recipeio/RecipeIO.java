@@ -31,6 +31,7 @@ public class RecipeIO {
         logger.log(Level.INFO, "asking for first input from user.");
         String userInput = ui.getUserInput();
         String parsedCommand = InputParser.parseCommand(userInput);
+        assert !userInput.isEmpty() : "user input empty";
 
         while (!parsedCommand.equals(Constants.EXIT_COMMAND)) {
             logger.log(Level.INFO, "not an exit command.");
