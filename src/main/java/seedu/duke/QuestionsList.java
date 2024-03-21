@@ -26,6 +26,7 @@ public class QuestionsList {
 
     // user enters "explain 1" to get explanation for question1
     public String getOneExplanation(int questionNum) {
+        assert questionNum > 0 : "questionNum should be more than 0";
         int questionIndex = questionNum - 1; // -1 coz zero index
         Question question = chosenQuestionsList.get(questionIndex);
         return question.getExplanation();
@@ -33,6 +34,7 @@ public class QuestionsList {
 
     // user enters "solution 1" to get solution for question1
     public String getOneSolution(int questionNum) {
+        assert questionNum > 0 : "questionNum should be more than 0";
         int questionIndex = questionNum - 1; // -1 coz zero index
         Question question = chosenQuestionsList.get(questionIndex);
         return question.getSolution();
