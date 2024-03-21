@@ -1,6 +1,9 @@
 package seedu.duke.modules;
 
+import seedu.duke.exceptions.ModuleNotFoundException;
+
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
@@ -11,7 +14,7 @@ public class ModuleList {
         this.toBeTakenModuleList = new ArrayList<Module>(size);
     }
 
-    public Module getModule(String courseCode) {
+    public Module getModule(String courseCode) throws ModuleNotFoundException {
         if (courseCode == null || courseCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Course code cannot be null or empty.");
         }
@@ -27,7 +30,7 @@ public class ModuleList {
                 return module;
             }
         }
-        return null;
+        throw new ModuleNotFoundException("Module " + courseCode + " not found!");
     }
 
     public ArrayList<Module> getTakenModuleList() {
@@ -72,11 +75,12 @@ public class ModuleList {
         if (moduleCode == null || moduleCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Module code cannot be null or empty.");
         }
-        Module toChange = getModule(moduleCode);
-        if (toChange == null) {
-            throw new IllegalStateException("This module does not exist in the list.");
+        try{
+            Module toChange = getModule(moduleCode);
+            toChange.setModuleGrade(grade);
+        } catch (ModuleNotFoundException e){
+            System.out.println("Module not found in either list");
         }
-        toChange.setModuleGrade(grade);
     }
 
     public double tallyGPA() {
