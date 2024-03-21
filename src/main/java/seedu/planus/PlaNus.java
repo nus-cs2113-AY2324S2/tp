@@ -1,10 +1,5 @@
 package seedu.planus;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
-
 /**
  * The main class that represents the PlaNus application.
  */
@@ -42,7 +37,7 @@ public class PlaNus {
      * Main entry-point for the java.planus.PlaNus application.
      */
     public static void main(String[] args) {
-//        assert false : "dummy assertion set to fail";
+        // assert false : "dummy assertion set to fail";
         new PlaNus().run();
     }
 }
