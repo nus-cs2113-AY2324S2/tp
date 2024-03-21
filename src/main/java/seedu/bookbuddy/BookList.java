@@ -2,6 +2,8 @@ package seedu.bookbuddy;
 
 
 import exceptions.BookNotFoundException;
+import exceptions.BookReadAlreadyException;
+import exceptions.BookUnreadAlreadyException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -80,13 +82,19 @@ public class BookList {
      * Marks a book as read by its index.
      * @param index The index of the book to mark as read.
      */
-    public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
+    public void markDoneByIndex(int index) throws IndexOutOfBoundsException, BookReadAlreadyException{
         try {
             assert index > 0 && index <= books.size() : "Index out of valid range";
+            if (books.get(index - 1).isRead()) {
+                throw new BookReadAlreadyException("That book is already marked as read!");
+            }
+            assert !books.get(index - 1).isRead() : "Book is already marked as read";
             books.get(index - 1).markBookAsRead();
             assert books.get(index - 1).isRead() : "Book should be marked as read";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (BookReadAlreadyException e) {
+            System.out.println("That book is already marked as read!");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
             throw e; // Rethrow or handle as needed
@@ -97,13 +105,19 @@ public class BookList {
      * Marks a book as unread by its index.
      * @param index The index of the book to mark as unread.
      */
-    public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
+    public void markUndoneByIndex(int index) throws IndexOutOfBoundsException, BookReadAlreadyException{
         try {
             assert index > 0 && index <= books.size() : "Index out of valid range";
+            if (!books.get(index - 1).isRead()) {
+                throw new BookUnreadAlreadyException("That book is already marked as unread!");
+            }
+            assert books.get(index - 1).isRead() : "Book is already marked as unread";
             books.get(index - 1).markBookAsUnread();
             assert !books.get(index - 1).isRead() : "Book should be marked as unread";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
+        } catch (BookUnreadAlreadyException e) {
+            System.out.println("That book is already marked as unread!");
         } catch (Exception e) { // Generic catch block for any other exceptions
             System.out.println("An unexpected error occurred. Please contact support.");
         }
