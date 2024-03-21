@@ -10,6 +10,7 @@ import supertracker.command.RemoveCommand;
 import supertracker.command.UpdateCommand;
 import supertracker.command.DeleteCommand;
 import supertracker.command.Command;
+import supertracker.command.FindCommand;
 import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
@@ -24,6 +25,7 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
     private static final String ADD_COMMAND = "add";
     private static final String REMOVE_COMMAND = "remove";
+    private static final String FIND_COMMAND = "find";
     private static final double ROUNDING_FACTOR = 100.0;
     private static final String BASE_FLAG = "/";
     private static final String NAME_FLAG = "n";
@@ -45,6 +47,7 @@ public class Parser {
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
     private static final String REMOVE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
+    private static final String FIND_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
 
 
     /**
@@ -92,6 +95,9 @@ public class Parser {
             break;
         case REMOVE_COMMAND:
             command = parseRemoveCommand(params);
+            break;
+        case FIND_COMMAND:
+            command = parseFindCommand(params);
             break;
         default:
             command = new InvalidCommand();
@@ -339,5 +345,26 @@ public class Parser {
         }
 
         return new RemoveCommand(name, quantity);
+    }
+
+    private static Command parseFindCommand(String input) throws TrackerException {
+        String[] flags = {NAME_FLAG};
+        Matcher matcher = getPatternMatcher(FIND_COMMAND_REGEX, input, flags);
+
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_FIND_FORMAT);
+        }
+
+        String name = matcher.group(NAME_GROUP).trim();
+
+        if (name.isEmpty()) {
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        if (!Inventory.contains(name)) {
+            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_FIND);
+        }
+
+        return new FindCommand(name);
     }
 }
