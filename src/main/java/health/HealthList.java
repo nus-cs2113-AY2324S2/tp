@@ -65,7 +65,7 @@ public class HealthList extends ArrayList<Health> {
      * Prints all Period entries tracked.
      */
     public static void showPeriodHistory() {
-        assert !periods.isEmpty() : "Period List is empty";
+        assert !periods.isEmpty() : UiConstant.PERIOD_LIST_EMPTY;
         for (Period period : periods) {
             System.out.println(period);
         }
