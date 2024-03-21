@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class LiquidList {
 
     private ArrayList<LiquidEntry> liquidArrayList;
-    private final int SIZE_OF_DELETE = 15;
+    private final int SIZEOFDELETE = 15;
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
     /**
@@ -43,7 +43,7 @@ public class LiquidList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
+            int index = Integer.parseInt(line.substring(SIZEOFDELETE).trim());
             liquidArrayList.remove(index - 1);
             System.out.println("Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {

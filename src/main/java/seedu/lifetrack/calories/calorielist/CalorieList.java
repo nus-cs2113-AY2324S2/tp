@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int DELETE_PADDING = 16;
+    private final int DELETEPADDING = 16;
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
 
@@ -27,7 +27,7 @@ public class CalorieList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
+            int index = Integer.parseInt(line.substring(DELETEPADDING).trim());
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             System.out.println("Successfully delete the calorie record.");
         } catch (IndexOutOfBoundsException e) {
