@@ -1,6 +1,5 @@
 package command;
 
-import financialtransactions.Outflow;
 import financialtransactions.TransactionManager;
 
 public class DeleteOutflowCommand extends BaseCommand {

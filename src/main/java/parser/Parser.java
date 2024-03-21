@@ -20,8 +20,7 @@ public class Parser {
         this.isContinue = true;
     }
 
-    public BaseCommand parseCommand(String command, TransactionManager manager) throws
-            IncompletePromptException, Exception {
+    public BaseCommand parseCommand(String command, TransactionManager manager) throws IncompletePromptException, Exception {
         String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
         switch (action) {
@@ -33,27 +32,11 @@ public class Parser {
                 throw new IncompletePromptException(command);
             }
             return new AddInflowCommand(commandParts);
-            /*String inflowName = commandParts[1];
-            double inflowAmount = Double.parseDouble(commandParts[2]);
-            String inflowDate = commandParts[3] + " " + commandParts[4];
-
-            Inflow inflow = new Inflow(inflowName, inflowAmount, inflowDate);
-            manager.addTransaction(inflow);
-            ui.printMessage("Ok. Added inflow");*/
-            //return "Ok. Added inflow";*/
         case "add-outflow":
             if (commandParts.length < 3) {
                 throw new IncompletePromptException(command);
             }
             return new AddOutflowCommand(commandParts);
-            /*String outflowName = commandParts[1];
-            double outflowAmount = Double.parseDouble(commandParts[2]);
-            String outflowDate = commandParts[3] + " " + commandParts[4];
-
-            Outflow outflow = new Outflow(outflowName, outflowAmount, outflowDate);
-            manager.addTransaction(outflow);
-            ui.printMessage("Ok. Added outflow");*/
-            //return "Ok. Added outflow";
         case "delete-inflow":
             if (commandParts.length < 2) {
                 throw new IncompletePromptException(command);
@@ -66,7 +49,7 @@ public class Parser {
             return new DeleteOutflowCommand(commandParts);
         case "edit-inflow":
         case "edit-outflow":
-            String index = commandParts[1];
+            // implement edit function
             break;
         case "view-history":
             return new ViewHistoryCommand(commandParts);
