@@ -165,7 +165,7 @@ public class WorkoutManager extends ActivityManager {
         String exerciseName = parser.getActionParameter();
         assert exerciseName != null : "Exercise name cannot be null";
         if (workoutPlanName == null) {
-            throw new Exceptions.InvalidInput("unassign command not complete");
+            throw new Exceptions.InvalidInput("Unassign command not complete");
         }
 
         Workout workoutPlan = (Workout) retrieve(workoutPlanName);
@@ -176,7 +176,7 @@ public class WorkoutManager extends ActivityManager {
                 workoutList.removeIf(exercise -> exercise.getActivityName().equalsIgnoreCase(exerciseName));
         if (!exerciseIsInWorkout) {
             throw new Exceptions.ActivityDoesNotExists("The exercise is not in the workout");
-        };
+        }
 
         return workoutPlanName;
     }
