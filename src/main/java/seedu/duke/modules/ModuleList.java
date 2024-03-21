@@ -12,15 +12,18 @@ public class ModuleList {
     }
 
     public Module getModule(String courseCode) {
-        // check if the module is already taken
-        for(Module module : takenModuleList){
-            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+        if (courseCode == null || courseCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Course code cannot be null or empty.");
+        }
+        courseCode = courseCode.toUpperCase(); // Convert once and reuse, improving efficiency
+
+        for (Module module : takenModuleList) {
+            if (module.getModuleCode().equals(courseCode)) {
                 return module;
             }
         }
-        // check if the module is planned to be taken
-        for(Module module : toBeTakenModuleList){
-            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+        for (Module module : toBeTakenModuleList) {
+            if (module.getModuleCode().equals(courseCode)) {
                 return module;
             }
         }
@@ -36,6 +39,9 @@ public class ModuleList {
     }
 
     public void addModule(Module module) {
+        if (module == null) {
+            throw new IllegalArgumentException("Module cannot be null.");
+        }
         if (module.getModuleStatus()) {
             takenModuleList.add(module);
         } else {
@@ -52,18 +58,23 @@ public class ModuleList {
         }
     }
     public void removeModule(Module module) {
-        if (toBeTakenModuleList.contains(module)) {
-            toBeTakenModuleList.remove(module);
-        } else if (takenModuleList.contains(module)) {
-            takenModuleList.remove(module);
+        if (module == null) {
+            throw new IllegalArgumentException("Module cannot be null.");
+        }
+        // The remove operation returns false if the item was not found
+        boolean removed = toBeTakenModuleList.remove(module) || takenModuleList.remove(module);
+        if (!removed) {
+            System.out.println("Module not found in either list.");
         }
     }
 
     public void changeModuleGrade(String moduleCode, String grade) {
+        if (moduleCode == null || moduleCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Module code cannot be null or empty.");
+        }
         Module toChange = getModule(moduleCode);
         if (toChange == null) {
-            System.out.println("This module does not exist in the list");
-            return;
+            throw new IllegalStateException("This module does not exist in the list.");
         }
         toChange.setModuleGrade(grade);
     }

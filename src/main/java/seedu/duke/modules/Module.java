@@ -20,6 +20,9 @@ public class Module {
     }
 
     public void setModuleCode(String moduleCode) {
+        if (moduleCode == null || moduleCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Module code cannot be null or empty.");
+        }
         this.moduleCode = moduleCode;
     }
 
@@ -28,6 +31,10 @@ public class Module {
     }
 
     public void setModuleGrade(String moduleGrade) {
+
+        if (moduleGrade != null && !moduleGrade.matches("A\\+|A|A-|B\\+|B|B-|C\\+|C|D\\+|D|F")) {
+            throw new IllegalArgumentException("Invalid module grade.");
+        }
         this.moduleGrade = moduleGrade;
     }
 
@@ -36,6 +43,9 @@ public class Module {
     }
 
     public void setModuleMC(int moduleMC) {
+        if (moduleMC <= 0) {
+            throw new IllegalArgumentException("Module MC (Modular Credits) must be positive.");
+        }
         this.moduleMC = moduleMC;
     }
 
@@ -52,6 +62,9 @@ public class Module {
     }
 
     public void setModuleDate(int moduleDate) {
+        if (moduleDate <= 0) {
+            throw new IllegalArgumentException("Module date must be a positive number.");
+        }
         this.moduleDate = moduleDate;
     }
 
@@ -80,7 +93,7 @@ public class Module {
         case "F":
             return 0;
         default:
-            return 0;
+            throw new IllegalStateException("Invalid or unassigned module grade.");
         }
     }
 
