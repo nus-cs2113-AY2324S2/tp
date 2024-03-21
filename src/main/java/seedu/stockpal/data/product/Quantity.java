@@ -3,17 +3,30 @@ package seedu.stockpal.data.product;
 import seedu.stockpal.common.CommandParameter;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
+import seedu.stockpal.ui.Ui;
 
 public class Quantity implements CommandParameter {
     public static final Integer MAX_QUANTITY = Integer.MAX_VALUE;
-    protected Integer quantity;
+    public static final Integer WARNING_QUANTITY = 20;
 
-    public Quantity(Integer quantity) {
+    protected Integer quantity;
+    private boolean isLowQuantityWarningPrinted;
+
+    public Quantity(Integer quantity, boolean isLowQuantityWarningPrinted) {
         this.quantity = quantity;
+        this.isLowQuantityWarningPrinted = isLowQuantityWarningPrinted;
     }
 
     public Integer getQuantity() {
         return this.quantity;
+    }
+
+    public boolean isLowQuantityWarningPrinted() {
+        return isLowQuantityWarningPrinted;
+    }
+
+    public void setWarningPrinted(boolean isPrinted) {
+        isLowQuantityWarningPrinted = isPrinted;
     }
 
     /**
@@ -47,6 +60,7 @@ public class Quantity implements CommandParameter {
         if (quantity >= decreaseQuantity) {
             quantity -= decreaseQuantity;
             assert quantity >= 0 : "Quantity cannot be smaller than 0.";
+            notifyLowQuantity(this);
         } else {
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
@@ -68,6 +82,18 @@ public class Quantity implements CommandParameter {
      */
     public String toSave() {
         return this.quantity.toString();
+    }
+
+    public boolean isLowQuantity (Product product) {
+        Quantity productQuantity = product.getQuantity();
+        return productQuantity.getQuantity() <= WARNING_QUANTITY;
+    }
+
+    public void notifyLowQuantity(Quantity quantity) {
+        if (quantity.getQuantity() <= WARNING_QUANTITY && !quantity.isLowQuantityWarningPrinted()) {
+            Ui.printThresholdWarningAlert();
+            quantity.setWarningPrinted(true);
+        }
     }
 }
 

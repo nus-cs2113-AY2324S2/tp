@@ -80,4 +80,17 @@ public final class Ui {
     public static void printDeleteSuccessMessage() {
         printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
     }
+
+    public static void printLowQuantityAlert() {
+        printToScreen(Messages.ALERT_LOW_QUANTITY);
+        printToScreen(HORIZONTAL_LINE);
+    }
+
+    public static void printThresholdWarningAlert() {
+        printToScreen(Messages.ALERT_FIRST_LOW_QUANTITY_OCCURRENCE);
+    }
+
+    public static void printNoLowQuantity() {
+        printToScreen(Messages.MESSAGE_NO_LOW_QUANTITY_PRODUCTS);
+    }
 }

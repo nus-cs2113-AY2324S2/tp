@@ -12,8 +12,9 @@ import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
-
 import static seedu.stockpal.ui.Ui.printToScreen;
+import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
+
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -60,6 +61,7 @@ public class ProductList {
         }
         if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
+            updatedProduct.getQuantity().notifyLowQuantity(newQuantity);
         }
         if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
@@ -123,5 +125,24 @@ public class ProductList {
     public String toSave(Integer productIndex) {
         Product currProduct = products.get(productIndex);
         return currProduct.toSave();
+    }
+
+    public void printLowQuantityProducts () {
+        boolean hasLowQuantity = false;
+
+        Ui.printLowQuantityAlert();
+        for (Product product : products) {
+            Quantity productQuantity = product.getQuantity();
+            if (productQuantity.isLowQuantity(product)) {
+                Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
+                        productQuantity);
+                Ui.printToScreen(HORIZONTAL_LINE);
+            }
+        }
+
+        if (!hasLowQuantity) {
+            Ui.printNoLowQuantity();
+            Ui.printToScreen(HORIZONTAL_LINE);
+        }
     }
 }

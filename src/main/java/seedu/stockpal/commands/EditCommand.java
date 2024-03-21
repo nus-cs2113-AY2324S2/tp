@@ -36,7 +36,7 @@ public class EditCommand extends ListActionCommand {
     public EditCommand(Integer pid, String name, Integer quantity, Double price, String description) {
         this.pid = new Pid(pid);
         this.name = new Name(name);
-        this.quantity = new Quantity(quantity);
+        this.quantity = new Quantity(quantity, false);
         this.price = new Price(price);
         this.description = new Description(description);
     }
