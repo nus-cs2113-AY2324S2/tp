@@ -12,7 +12,6 @@ import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
-
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
 public class ProductList {
@@ -117,7 +116,7 @@ public class ProductList {
 
         if (!hasLowQuantity) {
             Ui.printNoLowQuantity();
-            Ui.printToScreen(Messages.LINE_SEPARATOR);
+            Ui.printToScreen(HORIZONTAL_LINE);
         }
     }
 }
