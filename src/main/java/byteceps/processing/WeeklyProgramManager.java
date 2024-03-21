@@ -96,7 +96,7 @@ public class WeeklyProgramManager extends ActivityManager {
             throw new Exceptions.InvalidInput("Not a valid day");
         }
 
-        UserInterface.printMessage("Your workout on " + day + " has been cleared");
+        UserInterface.printMessage(String.format("Your workout on %s has been cleared", day));
     }
 
     private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
