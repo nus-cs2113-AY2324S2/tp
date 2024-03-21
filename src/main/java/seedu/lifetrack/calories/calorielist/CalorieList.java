@@ -2,7 +2,8 @@ package seedu.lifetrack.calories.calorielist;
 
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserCalories;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 
 public class CalorieList {

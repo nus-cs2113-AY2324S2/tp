@@ -4,8 +4,9 @@ import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
-import java.util.logging.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a list of liquid entries.
