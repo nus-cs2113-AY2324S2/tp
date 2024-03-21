@@ -31,6 +31,8 @@ public class ParserLiquid {
                 "For example: liquids in b/Milo v/1000");
         }
 
+        assert (beverageIndex != -1 || volumeIndex != -1) : "ensures that beverage and volume has been keyed in";
+
         //Handle exception when order of b/ and v/ is incorrect
         if (volumeIndex < beverageIndex) {
             throw new InvalidInputException("Invalid input exception: " +
