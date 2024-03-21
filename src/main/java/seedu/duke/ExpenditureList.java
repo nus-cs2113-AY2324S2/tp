@@ -101,7 +101,7 @@ public class ExpenditureList {
 
             float amountValue = Float.parseFloat(amount);
             // Ensure that the expenditureList is initialized somewhere before thi
-            if (isValidDate(date)) {
+            if ( isValidDate(date) && isValidAmount(amountValue) ) {
                 expenditureList.add(new Expenditure(description, amountValue, date));
                 expenditureCount += 1;
                 userAddedMessage(userAdded);
@@ -165,17 +165,32 @@ public class ExpenditureList {
 
     protected static boolean isValidDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        dateFormat.setLenient(false); // Disable lenient mode to ensure strict date parsing
-
+        dateFormat.setLenient(false);
         try {
-            // Attempt to parse the date
+
             dateFormat.parse(date);
-            return true; // If parsing succeeds, the date is valid
+            return true;
         } catch (ParseException e) {
             System.out.println("Invalid date.");
-            return false; // If parsing fails, the date is invalid
+            return false;
         }
     }
+
+    protected static boolean isValidAmount(float amt) {
+        if (amt >= 0) {
+            float fractionalPart = amt - (int) amt;
+
+            // Check if the fractional part has more than two decimal places
+            if (Math.round(fractionalPart * 100) / 100f != fractionalPart) {
+                System.out.println("Invalid amount format! Please ensure the amount has at most two decimal places.");
+                return false;
+            }
+            return true;
+        }
+        System.out.println("Please enter a positive amount");
+        return false;
+    }
+
 
 }
 
