@@ -7,6 +7,9 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 import longah.node.Member;
 import longah.util.MemberList;
 import longah.util.Subtransaction;
@@ -27,6 +30,8 @@ import longah.exception.ExceptionMessage;
 public class StorageHandler {
     // ASCII Defined Separator
     private static final String SEPARATOR = String.valueOf(Character.toChars(31));
+
+    private static Logger logger = Logger.getLogger("Storage Logger");
 
     // Storage Directory Constants
     private File membersFile;
@@ -62,6 +67,7 @@ public class StorageHandler {
 
         // Load data from data files into MemberList and TransactionList objects
         loadAllData(members, transactions);
+        logger.log(Level.INFO, "Data loaded from storage.");
     }
 
     /**
@@ -97,6 +103,8 @@ public class StorageHandler {
                 }
 
                 String[] memberData = data.split(SEPARATOR);
+                assert memberData.length == 2 : "Member data should have 2 parts.";
+
                 String name = memberData[0];
                 double balance = Double.parseDouble(memberData[1]);
                 members.addMember(name, balance);
@@ -133,14 +141,30 @@ public class StorageHandler {
                             transactionData[i + 1], lender, members);
                     subtransactions.add(subtransaction);
                 }
+
                 Transaction transaction = new Transaction(lender, subtransactions, members);
                 transactions.addTransaction(transaction);
+
             } catch (LongAhException | NumberFormatException e) {
                 throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
             }
         }
+        double total = checkTransactions(members);
+        if (total != 0) {
+            throw new LongAhException(ExceptionMessage.STORAGE_FILE_CORRUPTED);
+        }
     }
 
+    /**
+     * Parses the subtransaction data from the data file into a Subtransaction object.
+     * 
+     * @param borrowerName The name of the borrower in the subtransaction
+     * @param value The amount borrowed in the subtransaction
+     * @param lender The lender in the subtransaction
+     * @param members The MemberList object to reference the members in the subtransaction
+     * @return The Subtransaction object parsed from the data file
+     * @throws LongAhException If the data file is not read or the content is invalid
+     */
     public Subtransaction parseSubtransaction(String borrowerName, String value,
             Member lender, MemberList members) throws LongAhException{
         try {
@@ -150,6 +174,23 @@ public class StorageHandler {
         } catch (NumberFormatException e) {
             throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
         }
+    }
+
+    /**
+     * Checks the total balance of all members in the MemberList object.
+     * 
+     * @param members The MemberList object to check the total balance from
+     * @return The total balance of all members
+     */
+    public double checkTransactions(MemberList members) {
+        if (members.getMemberListSize() == 0) {
+            return 0;
+        }
+        double total = 0;
+        for (Member member : members.getMembers()) {
+            total += member.getBalance();
+        }
+        return total;
     }
 
     /**

@@ -45,14 +45,11 @@ public class TransactionList {
     /**
      * Removes a transaction from the list by index.
      *
-     * @param input The index of the transaction to remove.
+     * @param indexString The index of the transaction to remove.
      * @throws LongAhException If the index is invalid.
      */
-    public void remove(String[] input) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_DELETE_COMMAND);
-        }
-        int index = Integer.parseInt(input[1]) - 1;
+    public void remove(String indexString) throws LongAhException {
+        int index = Integer.parseInt(indexString) - 1;
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
@@ -100,24 +97,64 @@ public class TransactionList {
      * Printout the list of transactions which the member name is involved as the
      * transaction lender
      *
-     * @param input User input containing the name of person to search for
+     * @param lenderName User input containing the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
-    public String findTransactions(String[] input) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_FINDPAYMENT_COMMAND);
-        }
-        String person = input[1];
+    public String findLender(String lenderName) throws LongAhException {
         int index = 1;
-        String outString = String.format("%s owns the following list of transactions.", person) + "\n";
-        for (Transaction transaction : transactions) {
-            if (transaction.isLender(person)) {
+        String outString = String.format("%s owns the following list of transactions.", lenderName) + "\n";
+        for (Transaction transaction : this.transactions) {
+            if (transaction.isLender(lenderName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
         }
         if (index == 1) {
-            throw new LongAhException(ExceptionMessage.NO_TRANSACTION_FOUND_FOR_MEMBER);
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
+     *
+     * @param borrowerName User input containing the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findBorrower(String borrowerName) throws LongAhException {
+        int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", borrowerName) + "\n";
+        for (Transaction transaction : this.transactions) {
+            if (transaction.isBorrower(borrowerName)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index++;
+            }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+        return outString;
+    }
+
+    /**
+     * Printout the list of transactions which the member name is involved as the
+     * transaction lender
+     *
+     * @param name User input containing the name of person to search for
+     * @return Returns a String printout of the required list of transactions
+     */
+    public String findTransactions(String name) throws LongAhException {
+        int index = 1;
+        String outString = String.format("%s owns the following list of transactions.", name) + "\n";
+        for (Transaction transaction : this.transactions) {
+            if (transaction.isInvolved(name)) {
+                outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
+                index++;
+            }
+        }
+        if (index == 1) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
     }
@@ -144,25 +181,21 @@ public class TransactionList {
     /**
      * Printout the list of transactions which a person is involved as a borrower
      *
-     * @param input containing the String representation of the name of person to search for
+     * @param borrowerName containing the String representation of the name of person to search for
      * @return Returns a String printout of the required list of transactions
      */
-    public String findDebts(String[] input) throws LongAhException {
-        if (input.length != 2) {
-            throw new LongAhException(ExceptionMessage.INVALID_FINDDEBT_COMMAND);
-        }
-        String memberName = input[1];
+    public String findDebts(String borrowerName) throws LongAhException {
         String outString = String.format("%s is involved as the payee in the following list of transactions."
-                , memberName) + "\n";
+                , borrowerName) + "\n";
         int index = 1;
         for (Transaction transaction : this.transactions) {
-            if (transaction.isBorrower(memberName)) {
+            if (transaction.isBorrower(borrowerName)) {
                 outString = outString + String.format("%d.\n%s", index, transaction) + "\n";
                 index++;
             }
         }
         if (index == 1) {
-            throw new LongAhException(ExceptionMessage.NO_DEBTS_FOUND_FOR_MEMBER);
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
     }

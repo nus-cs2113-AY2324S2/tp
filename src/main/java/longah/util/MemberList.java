@@ -40,6 +40,14 @@ public class MemberList {
         this.members.add(new Member(name));
     }
 
+    /**
+     * Adds a member to the group with the specified name and balance.
+     * For use in storage only.
+     * 
+     * @param name The name of the member to add.
+     * @param balance The balance of the member to add.
+     * @throws LongAhException If the member already exists in the group.
+     */
     public void addMember(String name, double balance) throws LongAhException {
         if (isMember(name)) {
             throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
@@ -92,21 +100,28 @@ public class MemberList {
      * Prints the list of members in the group.
      * throws LongAhException If there are no members in the group.
      */
-    public void listMembers() throws LongAhException {
+    public String listMembers() throws LongAhException {
         if (members.isEmpty()) {
             throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
         }
+        String output = "";
         for (Member member : members) {
-            System.out.println(member);
+            output += member + "\n";
         }
+        return output;
     }
 
     /**
      * Groups members into two lists: positive balances and negative balances.
      * 
      * @return An array of two lists: members with positive balances and members with negative balances.
+     * @throws LongAhException If there are no members in the group.
      */
-    public ArrayList<ArrayList<Member>> classifyMembers() {
+    public ArrayList<ArrayList<Member>> classifyMembers() throws LongAhException {
+        if (members.isEmpty()) {
+            throw new LongAhException(ExceptionMessage.NO_MEMBERS_FOUND);
+        }
+
         ArrayList<Member> positiveMembers = new ArrayList<>();
         ArrayList<Member> negativeMembers = new ArrayList<>();
 
@@ -122,6 +137,10 @@ public class MemberList {
         classifiedMembers.add(positiveMembers);
         classifiedMembers.add(negativeMembers);
 
+        if (positiveMembers.isEmpty() || negativeMembers.isEmpty()) {
+            throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+        }
+
         return classifiedMembers;
     }
 
@@ -130,11 +149,20 @@ public class MemberList {
      * This is done by pairing up members with positive balances and negative balances.
      * The members are then iterated through and the balances are solved by subtracting the
      * negative balance from the positive balance until the transaction has been solved.
+     * 
+     * @return The list of subtransactions needed to solve the balances of the group members.
      */
-    public ArrayList<Subtransaction> solveTransactions() {
-        ArrayList<ArrayList<Member>> classifiedMembers = classifyMembers();
+    public ArrayList<Subtransaction> solveTransactions() throws LongAhException {
+        ArrayList<ArrayList<Member>> classifiedMembers;
+        try {
+            classifiedMembers = classifyMembers();
+        } catch (LongAhException e) {
+            return new ArrayList<>();
+        }
+        
         ArrayList<Member> positiveMembers = classifiedMembers.get(0);
         ArrayList<Member> negativeMembers = classifiedMembers.get(1);
+        assert !positiveMembers.isEmpty() && !negativeMembers.isEmpty() : "Members should be classified.";
 
         ArrayList<Subtransaction> subtransactions = new ArrayList<>();
         int positiveIndex = 0;
@@ -207,7 +235,18 @@ public class MemberList {
     }
 
     /**
-     * Iterates through the members list and clears their balances..
+     * Returns the balance of the member with the specified name.
+     * 
+     * @param name The name of the member to get the balance of.
+     * @return The balance of the member with the specified name.
+     * @throws LongAhException If the member does not exist in the group.
+     */
+    public double getMemberBalance(String name) throws LongAhException {
+        return getMember(name).getBalance();
+    }
+
+    /**
+     * Iterates through the members list and clears their balances.
      */
     public void clearBalances() {
         for (Member member : members) {

@@ -28,6 +28,7 @@ public class Transaction {
             // Minimum of 2 people as part of a transaction
             throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
         }
+        assert splitInput.length >= 2 : "Invalid transaction.";
 
         String lenderName = splitInput[0].trim();
         // Exception is thrown if the person owed does not exist in the group
@@ -139,12 +140,22 @@ public class Transaction {
      * @return a boolean value determining whether the input name is a borrower in the transaction
      */
     public boolean isBorrower(String memberName) {
-        for (Subtransaction subtransaction : subtransactions) {
+        for (Subtransaction subtransaction : this.subtransactions) {
             if (subtransaction.getBorrower().isName(memberName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Checks whether the input member name is involved in the transaction.
+     *
+     * @param memberName String representation of member name to check
+     * @return a boolean value determining whether the input name is involved in the transaction
+     */
+    public boolean isInvolved(String memberName) {
+        return isLender(memberName) || isBorrower(memberName);
     }
 
     /**
