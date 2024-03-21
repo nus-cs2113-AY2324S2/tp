@@ -38,12 +38,7 @@ public class TransactionList<T extends Transaction<?>> {
         return true;
     }
 
-    public boolean editTransactionIndex (int index, T transaction) {
-        //printTransactionsSafeInfo();
-        if (index >= transactionList.size() || index < 0){
-            System.out.println("Invalid Index");
-            return false;
-        }
+    public boolean editTransactionIndex (int index, T transaction) throws Exception {
         transactionList.set(index, transaction);
         return true;
     }

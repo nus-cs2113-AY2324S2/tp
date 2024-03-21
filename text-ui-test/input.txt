@@ -9,5 +9,7 @@ add-inflow n/Refund a/50.00 d/23/06/2023 t/1800 c/refund
 view-history n/5
 delete-inflow n/3
 delete-outflow n/2
+edit-inflow i/1 n/Refund a/100.00 d/23/06/2023 t/1700 c/refund
+edit-outflow i/1 n/Groceries a/150.00 d/23/06/2023 t/1830 c/shopping
 view-history n/3
 quit

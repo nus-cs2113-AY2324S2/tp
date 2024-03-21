@@ -1,13 +1,7 @@
 package parser;
 
+import command.*;
 import customexceptions.IncompletePromptException;
-import command.AddInflowCommand;
-import command.AddOutflowCommand;
-import command.BaseCommand;
-import command.DeleteInflowCommand;
-import command.DeleteOutflowCommand;
-import command.ExitCommand;
-import command.ViewHistoryCommand;
 import financialtransactions.TransactionManager;
 import userinterface.UI;
 
@@ -28,12 +22,12 @@ public class Parser {
             //implement help command
             break;
         case "add-inflow":
-            if (commandParts.length < 3) {
+            if (commandParts.length < 6) {
                 throw new IncompletePromptException(command);
             }
             return new AddInflowCommand(commandParts);
         case "add-outflow":
-            if (commandParts.length < 3) {
+            if (commandParts.length < 6) {
                 throw new IncompletePromptException(command);
             }
             return new AddOutflowCommand(commandParts);
@@ -48,10 +42,19 @@ public class Parser {
             }
             return new DeleteOutflowCommand(commandParts);
         case "edit-inflow":
+            if (commandParts.length < 7) {
+                throw new IncompletePromptException(command);
+            }
+            return new EditInflowCommand(commandParts);
         case "edit-outflow":
-            // implement edit function
-            break;
+            if (commandParts.length < 7) {
+                throw new IncompletePromptException(command);
+            }
+            return new EditOutflowCommand(commandParts);
         case "view-history":
+            if (commandParts.length < 2) {
+                throw new IncompletePromptException(command);
+            }
             return new ViewHistoryCommand(commandParts);
         case "quit":
             this.isContinue = false;

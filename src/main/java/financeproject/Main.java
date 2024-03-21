@@ -11,8 +11,6 @@ import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
 import user.InactivityTimer;
-//import user.Authentication;
-//import user.BaseUser;
 import user.Authentication;
 import user.BaseUser;
 import userinterface.UI;

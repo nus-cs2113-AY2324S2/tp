@@ -52,6 +52,20 @@ public class TransactionManager {
         return outflows.removeTransactionIndex(numOfOutflows - index);
     }
 
+    public boolean editInflow(int index, Transaction<?> updatedTransaction) throws Exception {
+        int numOfInflows = inflows.getTransactionListSize();
+        Transaction<?> transactionEdited = inflows.getNthTransaction(numOfInflows - index);
+        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited), updatedTransaction);
+        return inflows.editTransactionIndex(numOfInflows - index, (Inflow) updatedTransaction);
+    }
+
+    public boolean editOutflow(int index, Transaction<?> updatedTransaction) throws Exception {
+        int numOfOutflows = outflows.getTransactionListSize();
+        Transaction<?> transactionEdited = outflows.getNthTransaction(numOfOutflows - index);
+        transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited), updatedTransaction);
+        return outflows.editTransactionIndex(numOfOutflows - index, (Outflow) updatedTransaction);
+    }
+
     public double getTotalBalance() {
         double inflowBalance = inflows.getBalance();
         double outflowBalance = outflows.getBalance();
