@@ -3,6 +3,7 @@ package budgetbuddy;
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidIndexException;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.ui.UserInterface;
@@ -31,10 +32,10 @@ public class BudgetBuddy {
         transactions.updateBalance(account);
 
         boolean isRunning = true;
-        try {
-            while (isRunning) {
-                String input = in.nextLine();
 
+        while (isRunning) {
+            String input = in.nextLine();
+            try {
                 switch (input.split(" ")[0]) {
                 case "bye":
                     UserInterface.printGoodBye();
@@ -53,20 +54,23 @@ public class BudgetBuddy {
                     UserInterface.printNoCommandExists();
                 }
                 transactions.saveTransactionList();
+            } catch (InvalidAddTransactionSyntax e) {
+                UserInterface.printInvalidAddSyntax(e.getMessage());
+            } catch (NumberFormatException e) {
+                UserInterface.printNumberFormatError(e.getMessage());
+            } catch (InvalidTransactionTypeException e) {
+                UserInterface.printTransactionTypeError(e.getMessage());
+            } catch (EmptyArgumentException e) {
+                UserInterface.printEmptyArgumentError(e.getMessage());
+            } catch (InvalidIndexException e) {
+                UserInterface.printInvalidIndex("Given index id is out of bound",
+                        Integer.parseInt(e.getMessage()));
+            } catch (IndexOutOfBoundsException ignored){
+                UserInterface.printInvalidInput("Please check your command syntax");
+            } catch (Exception e) {
+                UserInterface.printUnknownError(e.getMessage());
             }
-        } catch (InvalidAddTransactionSyntax e) {
-            UserInterface.printInvalidAddSyntax(e.getMessage());
-        } catch (NumberFormatException e) {
-            UserInterface.printNumberFormatError(e.getMessage());
-        } catch (InvalidTransactionTypeException e) {
-            UserInterface.printTransactionTypeError(e.getMessage());
-        } catch(EmptyArgumentException e) {
-            UserInterface.printEmptyArgumentError(e.getMessage());
-        } catch(IndexOutOfBoundsException e){
-            UserInterface.printIndexOutOfBounds("Given index id is out of bound",
-                    Integer.parseInt(e.getMessage()));
-        } catch (Exception e) {
-            UserInterface.printUnknownError(e.getMessage());
         }
+
     }
 }

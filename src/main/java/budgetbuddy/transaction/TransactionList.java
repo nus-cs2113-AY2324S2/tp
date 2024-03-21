@@ -3,6 +3,7 @@ package budgetbuddy.transaction;
 import budgetbuddy.account.Account;
 import budgetbuddy.exception.EmptyArgumentException;
 import budgetbuddy.exception.InvalidAddTransactionSyntax;
+import budgetbuddy.exception.InvalidIndexException;
 import budgetbuddy.exception.InvalidTransactionTypeException;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.storage.DataStorage;
@@ -38,7 +39,8 @@ public class TransactionList {
         UserInterface.printAllTransactions(transactions, account.getBalance());
     }
 
-    public void removeTransaction(String input, Account account) throws EmptyArgumentException, NumberFormatException {
+    public void removeTransaction(String input, Account account) throws EmptyArgumentException,
+            NumberFormatException, InvalidIndexException {
         if (input.trim().length() < DELETE_BEGIN_INDEX) {
             throw new EmptyArgumentException("delete index");
         }
@@ -56,7 +58,7 @@ public class TransactionList {
             assert transactions.size() == size - 1 : "Transaction list size did not decrease after removal";
             UserInterface.printDeleteMessage(itemRemoved, account.getBalance());
         } else {
-            throw new IndexOutOfBoundsException(size);
+            throw new InvalidIndexException(String.valueOf(size));
         }
     }
 
@@ -83,7 +85,7 @@ public class TransactionList {
     }
 
     public void processTransaction(String input, Account account)
-            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax {
+            throws InvalidTransactionTypeException, InvalidAddTransactionSyntax, EmptyArgumentException {
         // Check for syntax for add transaction
         String[] arguments = {"/t/", "/n/", "/$/", "/d/", "/c/"};
         for (String argument : arguments) {

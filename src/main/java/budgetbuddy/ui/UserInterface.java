@@ -39,16 +39,22 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
-    public static void printIndexOutOfBounds(String message,int id){
+    public static void printInvalidIndex(String message, int id){
         System.out.println(LINE);
         System.out.println(TAB_SPACE + message);
-        System.out.println( TAB_SPACE + "Please use index within the range of: 0  to " + id);
+        System.out.println( TAB_SPACE + "Please use index within the range of: 1  to " + id);
         System.out.println(LINE);
     }
 
     public static void printUnknownError(String message){
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Unknown error occurred with message: " + message);
+        System.out.println(LINE);
+    }
+
+    public static void printInvalidInput(String message){
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Error occurred with message: " + message);
         System.out.println(LINE);
     }
 
