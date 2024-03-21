@@ -32,6 +32,11 @@ public class Period extends Health {
         return startDate;
     }
 
+    public LocalDate getEndDate() {
+        assert endDate != null : UiConstant.END_DATE_CANNOT_BE_NULL;
+        return endDate;
+    }
+
     /**
      * Extracts the period information from the user input string.
      *
