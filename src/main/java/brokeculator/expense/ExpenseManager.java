@@ -57,5 +57,8 @@ public class ExpenseManager {
             sb.append(expense.getStringRepresentation());
         }
         return sb.toString();
+
+    public int getNumberOfExpensesTracked() {
+        return expenses.size();
     }
 }

@@ -12,6 +12,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(Dashboard dashboard) {
+        if (indexToDelete >= dashboard.getExpenseManager().getNumberOfExpensesTracked()) {
+            UI.print("Delete index exceeds number of expenses currently tracked");
+            return;
+        }
         dashboard.getExpenseManager().delete(indexToDelete);
         UI.prettyPrint("Deleted expense at index " + indexToDelete);
     }
