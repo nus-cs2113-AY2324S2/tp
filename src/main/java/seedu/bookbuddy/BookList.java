@@ -40,7 +40,8 @@ public class BookList {
         if (index < 0 || index > books.size()) {
             throw new BookNotFoundException("Book index out of range.");
         }
-        assert books.get(index) != null : "Retrieved book should not be null";
+        assert books.get(index - 1) != null : "Retrieved book should not be null";
+        assert books.get(index - 1) instanceof Book : "Object at index should be an instance of Book";
         return books.get(index);
     }
 
@@ -83,6 +84,7 @@ public class BookList {
     public void markDoneByIndex(int index) throws IndexOutOfBoundsException{
         try {
             books.get(index - 1).markBookAsRead();
+            assert books.get(index - 1).isRead() : "Book should be marked as read";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
         } catch (Exception e) {
@@ -98,6 +100,7 @@ public class BookList {
     public void markUndoneByIndex(int index) throws IndexOutOfBoundsException{
         try {
             books.get(index - 1).markBookAsUnread();
+            assert !books.get(index - 1).isRead() : "Book should be marked as unread";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid book index. Please enter a valid index");
         } catch (Exception e) { // Generic catch block for any other exceptions
@@ -109,10 +112,12 @@ public class BookList {
      * Prints all books currently in the list.
      */
     public static void printAllBooks() {
+        assert BookList.books != null : "Books list should not be null since it has been initialised.";
         if (!BookList.books.isEmpty()) {
             System.out.println("All books:");
             for (int i = 0; i < BookList.books.size(); i++) {
                 Book currentBook = BookList.books.get(i);
+                assert currentBook != null : "Book in list should not be null";
                 System.out.print((i + 1) + ". ");
                 System.out.println(currentBook.toString());
             }

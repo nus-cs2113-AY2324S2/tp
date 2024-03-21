@@ -35,6 +35,7 @@ public class Parser {
         try {
             switch (command) {
             case ADD_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
                 if (inputArray.length < 2) {
                     LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
                     throw new InvalidCommandArgumentException("The add command requires a book title.");
@@ -42,6 +43,7 @@ public class Parser {
                 books.addBook(inputArray[1]);
                 break;
             case REMOVE_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     books.deleteBook(index);
@@ -56,8 +58,10 @@ public class Parser {
                 books.printAllBooks();
                 break;
             case MARK_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
                 try {
                     index = Integer.parseInt(inputArray[1]);
+                    assert index >= 0 : "Index should be non-negative";
                     books.markDoneByIndex(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
@@ -67,8 +71,10 @@ public class Parser {
                 }
                 break;
             case UNMARK_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
                 try {
                     index = Integer.parseInt(inputArray[1]);
+                    assert index >= 0 : "Index should be non-negative";
                     books.markUndoneByIndex(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
