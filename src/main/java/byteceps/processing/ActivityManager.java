@@ -67,6 +67,7 @@ public abstract class ActivityManager {
         }
 
         activityList.remove(index.intValue());
+        activityHashMap.remove(activityName);
 
     }
 
