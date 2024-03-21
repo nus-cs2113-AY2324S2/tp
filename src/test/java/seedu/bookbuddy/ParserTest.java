@@ -50,7 +50,7 @@ public class ParserTest {
         BookList books = new BookList();
         books.addBook("The Great Gatsby");
         Parser.parseCommand("mark 1", books);
-        assertTrue(books.getBook(0).isRead());
+        assertTrue(books.getBook(1).isRead());
     }
 
     @Test
