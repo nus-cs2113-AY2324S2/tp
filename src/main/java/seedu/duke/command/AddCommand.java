@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.Exceptions.ModuleException;
+import seedu.duke.exceptions.ModuleException;
 import seedu.duke.modules.Module;
 
 public class AddCommand extends Command{
