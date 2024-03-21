@@ -39,8 +39,8 @@ public class ProgressManagerTest {
         logger.log(Level.INFO, "Testing progress manager.");
         ProgressManager pm = new ProgressManager(sessionResults);
         sessionResults = pm.clearProgress();
-        int numOfResults = sessionResults.getNumOfResults();
-        assertEquals(0, sessionResults.getNumOfResults());
+        int numOfResults = sessionResults.getSizeOfAllResults();
+        assertEquals(0, sessionResults.getSizeOfAllResults());
         assert numOfResults == 0 : "Number of results should be 0.";
     }
 }
