@@ -34,6 +34,7 @@ public class EditInflowCommand extends BaseCommand {
 
         String inflowDateTime = inflowDate + " " + inflowTime;
         Inflow updatedInflow = new Inflow(inflowName, inflowAmount, inflowDateTime);
+        assert inflowCategory != null : "inflowCategory should not be null";
         updatedInflow.setCategory(Inflow.Category.valueOf(inflowCategory.toUpperCase()));
         manager.editInflow(inflowIndex, updatedInflow);
         return "Ok. Edited inflow";

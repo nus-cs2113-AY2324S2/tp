@@ -34,6 +34,7 @@ public class EditOutflowCommand extends BaseCommand {
 
         String outflowDateTime = outflowDate + " " + outflowTime;
         Outflow updatedOutflow = new Outflow(outflowName, outflowAmount, outflowDateTime);
+        assert outflowCategory != null : "outflowCategory should not be null";
         updatedOutflow.setCategory(Outflow.Category.valueOf(outflowCategory.toUpperCase()));
         manager.editOutflow(outflowIndex, updatedOutflow);
         return "Ok. Edited outflow";
