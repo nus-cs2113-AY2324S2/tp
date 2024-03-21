@@ -1,8 +1,9 @@
 package ui;
 
-import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.Filters;
+import utility.UiConstant;
+import utility.WorkoutConstant;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
@@ -57,7 +58,7 @@ public class Output {
         printLine();
         System.out.println("Please enter the details of station "
                 + stationNumber
-                + ". (Format: " + UiConstant.STATION_GYM_FORMAT + ")");
+                + ". (Format: " + WorkoutConstant.STATION_GYM_FORMAT + ")");
         printLine();
     }
 
@@ -70,7 +71,7 @@ public class Output {
      * @return A string
      */
     private static String getFormattedRunWithIndex(int index, Workout currentWorkout) {
-        return String.format(UiConstant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
+        return String.format(WorkoutConstant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
     }
 
     /**
@@ -79,8 +80,8 @@ public class Output {
      */
     public static void printAddRun(Run newRun) {
         printLine();
-        System.out.println(UiConstant.ADD_RUN);
-        System.out.println(UiConstant.RUN_HEADER);
+        System.out.println(WorkoutConstant.ADD_RUN);
+        System.out.println(WorkoutConstant.RUN_HEADER);
         System.out.println(newRun);
         printLine();
     }
@@ -91,7 +92,7 @@ public class Output {
      */
     public static void printAddGym(Gym gym) {
         printLine();
-        System.out.println(UiConstant.ADD_GYM);
+        System.out.println(WorkoutConstant.ADD_GYM);
         printGymStats(gym);
         printLine();
     }
@@ -104,8 +105,8 @@ public class Output {
      */
     private static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
 
-        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(UiConstant.RUN);
-        System.out.println(UiConstant.RUN_HEADER_WITH_INDEX_FORMAT);
+        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.RUN);
+        System.out.println(WorkoutConstant.RUN_HEADER_WITH_INDEX_FORMAT);
 
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
@@ -133,7 +134,7 @@ public class Output {
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
     private static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
-        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(UiConstant.GYM);
+        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.GYM);
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
             Gym currentWorkout = (Gym) workoutList.get(i);
@@ -172,7 +173,7 @@ public class Output {
         try {
             Workout latestRun = WorkoutList.getLatestRun();
             String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
-            System.out.println(UiConstant.RUN_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(WorkoutConstant.RUN_HEADER_WITH_INDEX_FORMAT);
             System.out.println(latestRunString);
 
         } catch (CustomExceptions.OutOfBounds e) {
@@ -236,7 +237,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(UiConstant.INVALID_FILTER);
+                throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);
             }
         } catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
@@ -273,7 +274,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(UiConstant.INVALID_FILTER);
+                throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);
             }
         } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
