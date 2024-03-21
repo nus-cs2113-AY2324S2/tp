@@ -29,9 +29,11 @@ public class Storage {
         if (!Files.isDirectory(path.getParent())) {
             //  System.out.println("Directory not found, creating new one");
             Files.createDirectories(path.getParent());
+            logger.log(Level.INFO, "new directory created");
         }
         if (!Files.exists(path)) {
             Files.createFile(path);
+            logger.log(Level.INFO, "new tests.txt file created");
         }
     }
 
