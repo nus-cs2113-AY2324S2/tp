@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.system.Ui;
+import seedu.lifetrack.ui.Ui;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
 
 import java.io.ByteArrayOutputStream;

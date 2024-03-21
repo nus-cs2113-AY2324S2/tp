@@ -40,9 +40,9 @@ public class ParserCalories {
                 (!(caloriesIndex < dateIndex) && macrosIndex != -1 && dateIndex < macrosIndex) ||
                 (macrosIndex != -1 && (macrosIndex < dateIndex || macrosIndex < caloriesIndex)) ||
                 (macrosIndex == -1 && (dateIndex < caloriesIndex))) {
-            throw new InvalidInputException("Invalid input exception:" +
-                    "Please ensure that you have keyed in the correct format" +
-                    " in the correct order!" + "Example input: " +
+            throw new InvalidInputException("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
         assert caloriesIndex != -1 : "The c/ keyword should exist!";

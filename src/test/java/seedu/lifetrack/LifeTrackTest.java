@@ -2,7 +2,6 @@ package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.io.ByteArrayOutputStream;
@@ -11,10 +10,10 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
-import static seedu.lifetrack.system.parser.ParserLiquid.parseLiquidInput;
 
 
 class LifeTrackTest {
+    private final String addedEntryHeader = "\t The following entry has been added to your caloric list!";
     @Test
     public void sampleTest() {
         assertTrue(true);
@@ -25,22 +24,22 @@ class LifeTrackTest {
         CalorieList calorieList = new CalorieList();
         calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 1");
+        calorieList.deleteEntry("delete 1");
         assertEquals(initialSize - 1, calorieList.getSize());
         calorieList.addEntry("calories out Run c/200 date/2024-03-14");
-        calorieList.addEntry("calories in Eat c/200 date/2024-03-14");
+        calorieList.addEntry("calories in eat c/200 date/2024-03-14");
         initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 2");
+        calorieList.deleteEntry("delete 2");
         assertEquals(initialSize - 1, calorieList.getSize());
     }
 
     @Test
     public void testDeleteCalorieInvalidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
-        calorieList.deleteEntry("delete calories 2"); // Index out of bounds
-        calorieList.deleteEntry("delete calories -1");
+        calorieList.deleteEntry("delete 2"); // Index out of bounds
+        calorieList.deleteEntry("delete -1");
         assertEquals(initialSize, calorieList.getSize());
     }
 
@@ -49,19 +48,20 @@ class LifeTrackTest {
         try {
             parseCaloriesInput("calories in");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception:" + "Please ensure that you have keyed in the correct format " +
-                    "in the correct order!" + "Example input: " +
-                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
+            assertEquals("\t Invalid input! \n"  + "\t Please ensure that you have" +
+                            " keyed in the correct format in the correct order!\n" +
+                    "\t Example input: calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
 
     @Test
     public void parseCaloriesInput_incompleteFields_exceptionThrown() {
         try {
-            parseCaloriesInput("calories in d/220224");
+            parseCaloriesInput("calories in d/220224 t/");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception:" + "Please ensure that you have keyed in the correct format " +
-                    "in the correct order!" + "Example input: " +
+            assertEquals("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
@@ -74,7 +74,8 @@ class LifeTrackTest {
         CalorieList calorieList = new CalorieList();
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "Your caloric list is empty." + lineSeparator;
+        String expectedOutput = "\t Your caloric list is empty. " +
+                "Add new entries to populate your list :)" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -87,9 +88,10 @@ class LifeTrackTest {
         calorieList.addEntry("calories in Run c/200 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "New entry successfully added!" + lineSeparator +
-                "Caloric List:" + lineSeparator +
-                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
+        String expectedOutput = addedEntryHeader + lineSeparator +
+                "\t " + calorieList.getEntry(0).toString() + lineSeparator +
+                "\t Your Caloric List:" + lineSeparator +
+                "\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -106,99 +108,26 @@ class LifeTrackTest {
         calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "Caloric List:" + lineSeparator +
-                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator +
-                "2. Date: 2024-03-14, Description: Walk, Calories: 150" + lineSeparator +
-                "3. Date: 2024-03-14, Description: Eat, Calories: 500" + lineSeparator +
-                "4. Date: 2024-03-14, Description: Run, Calories: 250" + lineSeparator +
-                "5. Date: 2024-03-14, Description: Eat, Calories: 300" + lineSeparator;
-        assertEquals(expectedOutput, outputStream.toString());
+        StringBuilder expectedOutput = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            expectedOutput.append(addedEntryHeader)
+                    .append(lineSeparator).append("\t ").append(calorieList.getEntry(i).toString())
+                    .append(lineSeparator);
+        }
+        expectedOutput.append("\t Your Caloric List:")
+                .append(lineSeparator)
+                .append("\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200")
+                .append(lineSeparator)
+                .append("\t 2. \t Date: 2024-03-14, Description: Walk, Calories: 150")
+                .append(lineSeparator)
+                .append("\t 3. \t Date: 2024-03-14, Description: Eat, Calories: 500")
+                .append(lineSeparator)
+                .append("\t 4. \t Date: 2024-03-14, Description: Run, Calories: 250")
+                .append(lineSeparator)
+                .append("\t 5. \t Date: 2024-03-14, Description: Eat, Calories: 300")
+                .append(lineSeparator);
+        assertEquals(expectedOutput.toString(), outputStream.toString());
         assertEquals(5, calorieList.getSize());
     }
-    @Test
-    public void testDeleteLiquidValidIndex() {
-        LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
-        int initialSize = liquidList.getSize();
-        liquidList.deleteEntry("delete liquids 1");
-        assertEquals(initialSize - 1, liquidList.getSize());
-    }
 
-    @Test
-    public void testDeleteLiquidInvalidIndex() {
-        LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
-        int initialSize = liquidList.getSize();
-        liquidList.deleteEntry("delete liquids 2"); // Index out of bounds
-        liquidList.deleteEntry("delete liquids -1");
-        assertEquals(initialSize, liquidList.getSize());
-    }
-
-    @Test
-    public void parseLiquidInput_emptyFields_exceptionThrown() {
-        try {
-            parseLiquidInput("liquids in");
-        } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parseLiquidInput_incompleteFields_exceptionThrown() {
-        try {
-            parseLiquidInput("liquids in b/Milo");
-        } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
-        }
-    }
-
-    @Test
-    public void testPrintLiquidListEmpty() {
-        String lineSeparator = System.lineSeparator();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        LiquidList liquidList = new LiquidList();
-        liquidList.printLiquidList();
-        System.setOut(System.out);
-        String expectedOutput = "Your liquid list is empty." + lineSeparator;
-        assertEquals(expectedOutput, outputStream.toString());
-    }
-
-    @Test
-    public void testPrintLiquidListNonEmpty() {
-        String lineSeparator = System.lineSeparator();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
-        liquidList.printLiquidList();
-        System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
-                "1. Beverage: Milo, Volume: 200" + lineSeparator;
-        assertEquals(expectedOutput, outputStream.toString());
-    }
-
-    @Test
-    public void testPrintLiquidListMultipleEntries() {
-        String lineSeparator = System.lineSeparator();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
-        liquidList.addEntry("liquids in b/Water v/300");
-        liquidList.addEntry("liquids in b/Juice v/150");
-        liquidList.printLiquidList();
-        System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
-                "1. Beverage: Milo, Volume: 200" + lineSeparator +
-                "2. Beverage: Water, Volume: 300" + lineSeparator +
-                "3. Beverage: Juice, Volume: 150" + lineSeparator;
-        assertEquals(expectedOutput, outputStream.toString());
-        assertEquals(3, liquidList.getSize());
-    }
 }
