@@ -146,9 +146,10 @@ public class ParserCalories {
     private static void checkKeywordsExist(int caloriesIndex, int dateIndex) throws InvalidInputException {
         //check that c/ and date/ keywords exist in the input, else throw exception
         if (caloriesIndex == -1 || dateIndex == -1) {
-            throw new InvalidInputException("Invalid input exception: Please ensure that you have keyed in " +
-                    "the correct format in the correct order! Example input: " +
-                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
+            throw new InvalidInputException("\t Invalid input! \n" +
+            "\t Please ensure that you have keyed in the correct format" +
+            " in the correct order!\n" + "\t Example input: " +
+            "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
     }
 
@@ -156,9 +157,10 @@ public class ParserCalories {
             throws InvalidInputException {        
         if ((macrosIndex != -1 && !(caloriesIndex < dateIndex && dateIndex < macrosIndex)) ||
                 (macrosIndex == -1 && !(caloriesIndex < dateIndex))) {
-            throw new InvalidInputException("Invalid input exception: Please ensure that you have keyed in " +
-                    "the correct format in the correct order! Example input: " +
-                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
+            throw new InvalidInputException("\t Invalid input! \n" +
+            "\t Please ensure that you have keyed in the correct format" +
+            " in the correct order!\n" + "\t Example input: " +
+            "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
     }
 

@@ -37,7 +37,7 @@ public class LiquidListTest {
         LiquidList liquidList = new LiquidList();
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Your liquid list is empty." + lineSeparator;
+        String expectedOutput = "\t Your liquid list is empty." + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -50,8 +50,8 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Milo v/200");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
-                "1. Beverage: Milo, Volume: 200" + lineSeparator;
+        String expectedOutput = "\t Liquid List:" + lineSeparator +
+                "\t 1. Beverage: Milo, Volume: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -66,10 +66,10 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Juice v/150");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Liquid List:" + lineSeparator +
-                "1. Beverage: Milo, Volume: 200" + lineSeparator +
-                "2. Beverage: Water, Volume: 300" + lineSeparator +
-                "3. Beverage: Juice, Volume: 150" + lineSeparator;
+        String expectedOutput = "\t Liquid List:" + lineSeparator +
+                "\t 1. Beverage: Milo, Volume: 200" + lineSeparator +
+                "\t 2. Beverage: Water, Volume: 300" + lineSeparator +
+                "\t 3. Beverage: Juice, Volume: 150" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, liquidList.getSize());
     }

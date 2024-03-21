@@ -11,6 +11,8 @@ import seedu.lifetrack.calories.calorielist.Entry;
 
 public class CalorieListTest {
 
+    private final String addedEntryHeader = "\t The following entry has been added to your caloric list!";
+
     @Test
     public void addEntry_validInput_entryAdded() {
         // Test setup
@@ -70,7 +72,8 @@ public class CalorieListTest {
         CalorieList calorieList = new CalorieList();
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "Your caloric list is empty." + lineSeparator;
+        String expectedOutput = "\t Your caloric list is empty. " +
+                "Add new entries to populate your list :)" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -83,9 +86,10 @@ public class CalorieListTest {
         calorieList.addEntry("calories in Run c/200 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "New entry successfully added!" + lineSeparator +
-                "Caloric List:" + lineSeparator +
-                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
+        String expectedOutput = addedEntryHeader + lineSeparator +
+                "\t " + calorieList.getEntry(0).toString() + lineSeparator +
+                "\t Your Caloric List:" + lineSeparator +
+                "\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -102,18 +106,25 @@ public class CalorieListTest {
         calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "New entry successfully added!" + lineSeparator +
-                "Caloric List:" + lineSeparator +
-                "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator +
-                "2. Date: 2024-03-14, Description: Walk, Calories: 150" + lineSeparator +
-                "3. Date: 2024-03-14, Description: Eat, Calories: 500" + lineSeparator +
-                "4. Date: 2024-03-14, Description: Run, Calories: 250" + lineSeparator +
-                "5. Date: 2024-03-14, Description: Eat, Calories: 300" + lineSeparator;
-        assertEquals(expectedOutput, outputStream.toString());
+        StringBuilder expectedOutput = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            expectedOutput.append(addedEntryHeader)
+                    .append(lineSeparator).append("\t ").append(calorieList.getEntry(i).toString())
+                    .append(lineSeparator);
+        }
+        expectedOutput.append("\t Your Caloric List:")
+                .append(lineSeparator)
+                .append("\t 1. \t Date: 2024-03-14, Description: Run, Calories: 200")
+                .append(lineSeparator)
+                .append("\t 2. \t Date: 2024-03-14, Description: Walk, Calories: 150")
+                .append(lineSeparator)
+                .append("\t 3. \t Date: 2024-03-14, Description: Eat, Calories: 500")
+                .append(lineSeparator)
+                .append("\t 4. \t Date: 2024-03-14, Description: Run, Calories: 250")
+                .append(lineSeparator)
+                .append("\t 5. \t Date: 2024-03-14, Description: Eat, Calories: 300")
+                .append(lineSeparator);
+        assertEquals(expectedOutput.toString(), outputStream.toString());
         assertEquals(5, calorieList.getSize());
     }
 }

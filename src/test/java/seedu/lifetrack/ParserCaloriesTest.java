@@ -13,8 +13,9 @@ class ParserCaloriesTest {
         try {
             parseCaloriesInput("calories in Running");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception:" + " Please ensure that you have keyed in the correct format " +
-                    "in the correct order!" + " Example input: " +
+            assertEquals("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
@@ -24,8 +25,9 @@ class ParserCaloriesTest {
         try {
             parseCaloriesInput("calories in Running date/220224");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception:" + " Please ensure that you have keyed in the correct format " +
-                    "in the correct order!" + " Example input: " +
+            assertEquals("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
@@ -35,8 +37,9 @@ class ParserCaloriesTest {
         try {
             parseCaloriesInput("calories in Running date/220224 c/123");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception:" + " Please ensure that you have keyed in the correct format " +
-                    "in the correct order!" + " Example input: " +
+            assertEquals("\t Invalid input! \n" +
+                    "\t Please ensure that you have keyed in the correct format" +
+                    " in the correct order!\n" + "\t Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }

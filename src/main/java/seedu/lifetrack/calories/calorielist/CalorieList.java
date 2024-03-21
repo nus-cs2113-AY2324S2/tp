@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CalorieList {
     
     private ArrayList<Entry> calorieArrayList;
-    private final int SIZE_OF_DELETE = 7;
+    private final int SIZE_OF_DELETE = 16;
 
     public CalorieList() {
         calorieArrayList= new ArrayList<>();

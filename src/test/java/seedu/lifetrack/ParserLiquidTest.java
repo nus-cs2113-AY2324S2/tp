@@ -9,20 +9,20 @@ import static seedu.lifetrack.system.parser.ParserLiquid.parseLiquidInput;
 public class ParserLiquidTest {
 
     @Test
-    public void parseLiquidInput_emptyFields_exceptionThrown() {
+    public void parseLiquidInput_missingKeywords_exceptionThrown() {
         try {
             parseLiquidInput("liquids in");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("\t Please ensure that you have keyed in the correct format!", e.getMessage());
         }
     }
 
     @Test
-    public void parseLiquidInput_incompleteFields_exceptionThrown() {
+    public void parseLiquidInput_incompleteInput_exceptionThrown() {
         try {
             parseLiquidInput("liquids in b/Milo");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("\t Please ensure that you have keyed in the correct format!", e.getMessage());
         }
     }
 }
