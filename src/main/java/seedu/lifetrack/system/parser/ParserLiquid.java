@@ -48,18 +48,31 @@ public class ParserLiquid {
 
         // extracts beverage name and quantity portion from input
         String beverageName = parts[1].trim();
-        String volume = parts[2].trim();
+        String strVolume = parts[2].trim();
 
         // ensures that both inputs are not empty
-        if (beverageName.isEmpty() || volume.isEmpty()) {
+        if (beverageName.isEmpty() || strVolume.isEmpty()) {
             throw new InvalidInputException("Please ensure that you have keyed in the correct format!");
+        }
+
+        int volume;
+        // Handle exception when non integer values are keyed in for volume
+        try {
+            volume = Integer.parseInt(strVolume);
+        } catch(NumberFormatException e) {
+            throw new InvalidInputException("Invalid input Exception: " +
+                    "Please enter a positive integer value for volume");
+        }
+
+        // Handle exception when negative values are keyed in for volume
+        if (volume <= 0) {
+            throw new InvalidInputException("Invalid input Exception: " +
+                    "Please enter a positive integer value for volume");
         }
         return getNewLiquidEntry(volume, beverageName);
     }
 
-    private static LiquidEntry getNewLiquidEntry(String strVolume, String name) throws InvalidInputException {
-        int volume = Integer.parseInt(strVolume);
-
+    private static LiquidEntry getNewLiquidEntry(int volume, String name) throws InvalidInputException {
         //create objects for Beverage
         Beverage liquidToAdd = new Beverage(name, volume);
 
