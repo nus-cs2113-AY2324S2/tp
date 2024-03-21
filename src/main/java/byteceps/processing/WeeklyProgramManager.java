@@ -34,7 +34,7 @@ public class WeeklyProgramManager extends ActivityManager {
             executeAssignAction(parser);
             break;
         case "clear":
-            executeClearAction();
+            executeClearAction(parser);
             break;
         case "today":
             executeTodayAction();
@@ -55,9 +55,48 @@ public class WeeklyProgramManager extends ActivityManager {
         UserInterface.printMessage(message);
     }
 
-    private void executeClearAction() {
-        activityList.replaceAll(null);
-        UserInterface.printMessage("Your weekly program has been cleared");
+    private void executeClearAction(Parser parser) throws Exceptions.InvalidInput {
+        String day = parser.getActionParameter();
+        if (day == null || day.isEmpty()) {
+            activityList.replaceAll((workout) -> null);
+            UserInterface.printMessage("All your workouts have been cleared from the week");
+            return;
+        }
+
+        switch (day) {
+        case "mon":
+        case "monday":
+            activityList.set(0, null);
+            break;
+        case "tue":
+        case "tuesday":
+            activityList.set(1, null);
+            break;
+        case "wed":
+        case "wednesday":
+            activityList.set(2, null);
+            break;
+        case "thu":
+        case "thursday":
+            activityList.set(3, null);
+            break;
+        case "fri":
+        case "friday":
+            activityList.set(4, null);
+            break;
+        case "sat":
+        case "saturday":
+            activityList.set(5, null);
+            break;
+        case "sun":
+        case "sunday":
+            activityList.set(6, null);
+            break;
+        default:
+            throw new Exceptions.InvalidInput("Not a valid day");
+        }
+
+        UserInterface.printMessage("Your workout on " + day + " has been cleared");
     }
 
     private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
