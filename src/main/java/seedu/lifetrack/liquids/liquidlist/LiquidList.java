@@ -1,9 +1,10 @@
 package seedu.lifetrack.liquids.liquidlist;
 
+import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
-
+import java.util.logging.*;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +15,7 @@ public class LiquidList {
 
     private ArrayList<LiquidEntry> liquidArrayList;
     private final int SIZE_OF_DELETE = 15;
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
     /**
      * Constructs an empty LiquidList.
@@ -44,10 +46,10 @@ public class LiquidList {
             liquidArrayList.remove(index - 1);
             System.out.println("Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.");
+            logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
+                    "within the size of the list.", e);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid index!");
+            logr.log(Level.WARNING, "Please enter a valid index!", e);
         }
     }
 
@@ -61,7 +63,7 @@ public class LiquidList {
             LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
         } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
