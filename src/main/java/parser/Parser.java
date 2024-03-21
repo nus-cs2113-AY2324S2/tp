@@ -1,44 +1,74 @@
 package parser;
 
-import command.Command;
-import command.HelpCommand;
-import command.QuitCommand;
+import command.*;
 import command.fight.FightingCommand;
 import command.fight.RunningCommand;
 import command.mapmove.*;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
+
+
     public String readInCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
 
-    public Command parserCommand(String userCommand) {
+    public CommandType analyseCommand(String userCommand) {
+        Pattern pattern;
+        Matcher matcher;
+        for (CommandType commandType : CommandType.values()) {
+            pattern = Pattern.compile(commandType.getRegExpression());
+            matcher = pattern.matcher(userCommand);
+            if(matcher.matches()){
+                return commandType;
+            }
+        }
+        return CommandType.ERROR;
+    }
+
+    public Command parseCommand(String userCommand) {
         Command command;
-        userCommand = userCommand.trim();
-        if (userCommand.equalsIgnoreCase("fight")) {
+
+        CommandType commandType = analyseCommand(userCommand);
+        switch (commandType){
+        case FIGHT:
             command = new FightingCommand();
-        } else if (userCommand.toLowerCase().startsWith("w")) {
-            command = new MovingForwardCommand();
-        } else if (userCommand.toLowerCase().startsWith("a")) {
-            command = new MovingLeftCommand();
-        } else if (userCommand.toLowerCase().startsWith("s")) {
-            command = new MovingDownwardCommand();
-        } else if (userCommand.toLowerCase().startsWith("d")) {
-            command = new MovingRightCommand();
-        } else if (userCommand.toLowerCase().startsWith("e")) {
-            command = new InteractingCommand();
-        } else if (userCommand.equalsIgnoreCase("q")) {
+            break;
+        case MOVE_FORWARD:
+            command = new MovingForwardCommand(userCommand);
+            break;
+        case MOVE_DOWNWARD:
+            command = new MovingDownwardCommand(userCommand);
+            break;
+        case MOVE_LEFT:
+            command = new MovingLeftCommand(userCommand);
+            break;
+        case MOVE_RIGHT:
+            command = new MovingRightCommand(userCommand);
+            break;
+        case QUIT:
             command = new QuitCommand();
-        } else if (userCommand.equalsIgnoreCase("h")) {
+            break;
+        case INTERACT:
+            command = new InteractingCommand();
+            break;
+        case HELP:
             command = new HelpCommand();
-        } else if (userCommand.equalsIgnoreCase("run")) {
+            break;
+        case RUN:
             command = new RunningCommand();
-        } else {
+            break;
+        case ERROR:
+            command = new ErrorCommand();
+            break;
+        default:
             command = null;
         }
         return command;
     }
+
 }

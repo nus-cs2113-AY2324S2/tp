@@ -1,11 +1,14 @@
 package main;
 
 import command.Command;
+import command.mapmove.MapMoveCommand;
 import map.*;
 import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
+
+import java.util.Map;
 
 
 public class CalculaChroniclesOfTheAlgorithmicKingdom {
@@ -14,7 +17,6 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
     }
 
     public void startGame() {
-        assert false : "dummy assertion set to fail";
         PlayerStatus playerStatus = new PlayerStatus(100, 0, 0);
         TextBox textBox = new TextBox();
         Parser parser = new Parser();
@@ -33,10 +35,14 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
         Command userCommand;
         while (true) {
             String userCommandText = parser.readInCommand();
-            userCommand = parser.parserCommand(userCommandText);
+            userCommand = parser.parseCommand(userCommandText);
             setUserCommand(userCommand, map, playerStatus, textBox);
 
-            userCommand.execute();
+            if (!(map instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
+                System.out.println("Invalid Command");
+            } else {
+                userCommand.execute();
+            }
 
             map = userCommand.getCurrentMap();
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
