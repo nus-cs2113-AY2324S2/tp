@@ -84,9 +84,6 @@ public final class Ui {
 
     public static void printLowQuantityAlert() {
         printToScreen(Messages.ALERT_LOW_QUANTITY);
-    }
-
-    public static void printProductsBelowThreshold(ProductList products) {
         printToScreen(HORIZONTAL_LINE);
     }
 }
