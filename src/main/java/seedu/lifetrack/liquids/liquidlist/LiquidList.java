@@ -13,10 +13,10 @@ import java.util.logging.Logger;
  * Provides methods to add, delete, and print liquid entries.
  */
 public class LiquidList {
-
-    private ArrayList<LiquidEntry> liquidArrayList;
-    private final int SIZEOFDELETE = 15;
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+    private ArrayList<LiquidEntry> liquidArrayList;
+    private final int sizeOfDelete = 15;
+
 
     /**
      * Constructs an empty LiquidList.
@@ -43,7 +43,7 @@ public class LiquidList {
      */
     public void deleteEntry(String line) {
         try {
-            int index = Integer.parseInt(line.substring(SIZEOFDELETE).trim());
+            int index = Integer.parseInt(line.substring(sizeOfDelete).trim());
             liquidArrayList.remove(index - 1);
             System.out.println("Successfully delete the liquid record.");
         } catch (IndexOutOfBoundsException e) {
