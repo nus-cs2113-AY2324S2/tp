@@ -455,6 +455,9 @@ public class Parser {
     }
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
+        assert expenses != null : "Expense list cannot be null";
+        assert input != null : "Input string cannot be null";
+
         String[] parts = input.split("i/", 2);
         // Check if the input format is correct (i.e., contains "i/")
         if (parts.length < 2) {
@@ -479,6 +482,9 @@ public class Parser {
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
+        assert savings != null : "Savings list cannot be null";
+        assert input != null : "Input string cannot be null";
+        
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
