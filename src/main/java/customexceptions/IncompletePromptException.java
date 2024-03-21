@@ -13,10 +13,12 @@ public class IncompletePromptException extends Exception {
     public IncompletePromptException(String line) {
         int spaceIndex = line.indexOf(" ");
         String firstWord = (spaceIndex == -1) ? line : line.substring(0, spaceIndex);
-        if (!Arrays.asList(INSTRUCTIONS).contains(firstWord)) {
-            checkTypo(firstWord);
-        } else {
+        if (Arrays.asList(INSTRUCTIONS).contains(firstWord)) {
+            isTypo = false;
             isIncomplete = true;
+            isUnknown = false;
+        } else {
+            checkTypo(firstWord);
         }
     }
 
