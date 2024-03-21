@@ -20,28 +20,28 @@ public class Parser {
         String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
         switch (action) {
-            case "add-inflow":
-                if (commandParts.length < 3) {
-                    throw new IncompletePromptException(command);
-                }
-                return new AddInflowCommand(commandParts);
-            case "add-outflow":
-                if (commandParts.length < 3) {
-                    throw new IncompletePromptException(command);
-                }
-                return new AddOutflowCommand(commandParts);
-            case "delete-inflow":
-            case "delete-outflow":
-                if (commandParts.length < 2) {
-                    throw new IncompletePromptException(command);
-                }
-                return new DeleteOutflowCommand(commandParts);
-            case "view-history":
-                return new ViewHistoryCommand(commandParts);
-            case "quit":
-                return new ExitCommand(commandParts);
-            default:
+        case "add-inflow":
+            if (commandParts.length < 3) {
                 throw new IncompletePromptException(command);
+            }
+            return new AddInflowCommand(commandParts);
+        case "add-outflow":
+            if (commandParts.length < 3) {
+                throw new IncompletePromptException(command);
+            }
+            return new AddOutflowCommand(commandParts);
+        case "delete-inflow":
+        case "delete-outflow":
+            if (commandParts.length < 2) {
+                throw new IncompletePromptException(command);
+            }
+            return new DeleteOutflowCommand(commandParts);
+        case "view-history":
+            return new ViewHistoryCommand(commandParts);
+        case "quit":
+            return new ExitCommand(commandParts);
+        default:
+            throw new IncompletePromptException(command);
         }
     }
 }

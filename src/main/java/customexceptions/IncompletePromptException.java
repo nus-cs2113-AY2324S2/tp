@@ -2,7 +2,7 @@ package customexceptions;
 
 public class IncompletePromptException extends Exception {
     public static final String[] INSTRUCTIONS = {"add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
-            "login", "quit", "view-history"};
+                                                    "login", "quit", "view-history"};
     private boolean isTypo = false;
     public IncompletePromptException(String line) {
         int spaceIndex = line.indexOf(" ");

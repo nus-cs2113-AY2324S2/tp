@@ -19,8 +19,7 @@ public class InactivityTimer {
         long timeDifference = System.currentTimeMillis() - startTime;
         if (timeDifference >= INACTIVITY_TIME) {
             throw new InactivityTimeoutException(true, false);
-        }
-        else if (timeDifference >= GRACE_TIME) {
+        } else if (timeDifference >= GRACE_TIME) {
             throw new InactivityTimeoutException(false, true);
         }
     }    
