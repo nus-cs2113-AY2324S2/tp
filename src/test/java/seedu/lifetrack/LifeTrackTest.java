@@ -23,12 +23,12 @@ class LifeTrackTest {
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete calories 1");
         assertEquals(initialSize - 1, calorieList.getSize());
-        calorieList.addEntry("calories out desc/Run c/200 date/2024-03-14");
-        calorieList.addEntry("calories in desc/Eat c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/200 date/2024-03-14");
         initialSize = calorieList.getSize();
         calorieList.deleteEntry("delete calories 2");
         assertEquals(initialSize - 1, calorieList.getSize());
@@ -49,7 +49,9 @@ class LifeTrackTest {
         try {
             parseCaloriesInput("calories in");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("Invalid input exception:" + "Please ensure that you have keyed in the correct format " +
+                    "in the correct order!" + "Example input: " +
+                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
 
@@ -58,7 +60,9 @@ class LifeTrackTest {
         try {
             parseCaloriesInput("calories in d/220224");
         } catch (InvalidInputException e) {
-            assertEquals("Please ensure that you have keyed in the correct format!", e.getMessage());
+            assertEquals("Invalid input exception:" + "Please ensure that you have keyed in the correct format " +
+                    "in the correct order!" + "Example input: " +
+                    "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS", e.getMessage());
         }
     }
 
@@ -80,10 +84,11 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in desc/Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "Caloric List:" + lineSeparator +
+        String expectedOutput = "New entry successfully added!" + lineSeparator +
+                "Caloric List:" + lineSeparator +
                 "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
@@ -94,14 +99,19 @@ class LifeTrackTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in desc/Run c/200 date/2024-03-14");
-        calorieList.addEntry("calories out desc/Walk c/150 date/2024-03-14");
-        calorieList.addEntry("calories in desc/Eat c/500 date/2024-03-14");
-        calorieList.addEntry("calories out desc/Run c/250 date/2024-03-14");
-        calorieList.addEntry("calories in desc/Eat c/300 date/2024-03-14");
+        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Walk c/150 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/500 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/250 date/2024-03-14");
+        calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
-        String expectedOutput = "Caloric List:" + lineSeparator +
+        String expectedOutput = "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "New entry successfully added!" + lineSeparator +
+                "Caloric List:" + lineSeparator +
                 "1. Date: 2024-03-14, Description: Run, Calories: 200" + lineSeparator +
                 "2. Date: 2024-03-14, Description: Walk, Calories: 150" + lineSeparator +
                 "3. Date: 2024-03-14, Description: Eat, Calories: 500" + lineSeparator +

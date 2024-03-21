@@ -2,7 +2,6 @@ package seedu.lifetrack.system;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
-import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import java.util.Scanner;
 
@@ -39,10 +38,6 @@ public class Ui {
             calorieList.deleteEntry(line);
         }else if (line.startsWith("delete liquids")) {
             liquidList.deleteEntry(line);
-        } else {
-            System.out.println("Invalid Input: " +
-                    "Please ensure that input starts with proper command\n" +
-                    "Refer to user guide for more information");
         }
     }
 

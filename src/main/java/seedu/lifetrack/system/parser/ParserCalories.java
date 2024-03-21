@@ -42,7 +42,7 @@ public class ParserCalories {
                 (macrosIndex == -1 && (dateIndex < caloriesIndex))) {
             throw new InvalidInputException("Invalid input exception:" +
                     "Please ensure that you have keyed in the correct format" +
-                    " in the correct order!\n" + "Example input: " +
+                    " in the correct order!" + "Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
 
@@ -114,7 +114,7 @@ public class ParserCalories {
                 macros[idx] = Integer.parseInt(macro.trim());
                 idx++;
             }
-//            Exception handling when user does not fill up values for macros
+            //Exception handling when user does not fill up values for macros
             if (idx != 3) {
                 throw new InvalidInputException("Invalid input exception: " +
                         "Please ensure that all macronutrients fields are filled up. " +
