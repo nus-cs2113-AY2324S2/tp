@@ -27,6 +27,8 @@ public class CalorieList {
      * @param line the string containing the index of calorie record user want to delete
      */
     public void deleteEntry(String line) {
+        assert (line.startsWith("calories delete") ) : "ensures that input is correct";
+
         try {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             Entry toDelete = calorieArrayList.get(index-1);
