@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-21T14:21:50.343340700Z</date>
+  <millis>1711030910343</millis>
+  <nanos>340700</nanos>
+  <sequence>0</sequence>
+  <logger>OrderAddCommandLogger</logger>
+  <level>INFO</level>
+  <class>command.OrderAddCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Adding new item to order</message>
+</record>
+<record>
+  <date>2024-03-21T14:21:50.378078200Z</date>
+  <millis>1711030910378</millis>
+  <nanos>78200</nanos>
+  <sequence>1</sequence>
+  <logger>OrderAddCommandLogger</logger>
+  <level>INFO</level>
+  <class>command.OrderAddCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Item successfully added to order</message>
+</record>
+</log>
