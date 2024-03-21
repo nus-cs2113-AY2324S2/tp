@@ -71,7 +71,7 @@ public class WeeklyProgramManager extends ActivityManager {
     private void executeAssignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
         assert parser.getAction().equals("assign") : "Action must be assign";
         String day = parser.getAdditionalArguments("to");
-        if (day == null) {
+        if (day == null || day.isEmpty()) {
             throw new Exceptions.InvalidInput("Week command not complete");
         }
         String workoutName = parser.getActionParameter();
@@ -111,9 +111,6 @@ public class WeeklyProgramManager extends ActivityManager {
             activityList.set(6, workout);
             break;
         default:
-            if (day.isEmpty()) {
-                throw new Exceptions.InvalidInput("Incomplete command");
-            }
             throw new Exceptions.InvalidInput("Not a valid day");
         }
     }
