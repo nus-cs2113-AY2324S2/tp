@@ -81,8 +81,13 @@ public final class Ui {
         printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
     }
 
-    public static void printLowQuantityProducts() {
+    public static void printLowQuantityAlert() {
         printToScreen(Messages.ALERT_LOW_QUANTITY);
         printToScreen(HORIZONTAL_LINE);
+    }
+
+    public static void printLowQuantityProducts(Product product) {
+        printToScreen(HORIZONTAL_LINE);
+        printToScreen(product.getPid() + " | " + product.getName() + " | " + product.getQuantity().toString());
     }
 }
