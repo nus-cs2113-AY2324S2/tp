@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.ui.UI;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Parser {
      *
      * @param command The users text input.
      */
-    public void parseCommand(String command, UserList userList) {
+    public void parseCommand(String command, UserList userList) throws InvalidFormatException {
         if (command.equalsIgnoreCase("list")) {
             UI.printListingUsers();
             userList.listAll();
@@ -47,33 +48,11 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else if (command.toLowerCase().startsWith("addtask")) {
-            try {
-                InputValidator.validateAddTaskInput(command);
-                String[] parts = command.split("\\s+");
-                List<String> wordList = Arrays.asList(parts);
-                String day = parts[2];
-                String description = parseDescription(wordList);
-                String startTime = parts[wordList.indexOf("/from") + 1];
-                String endTime = parts[wordList.indexOf("/to") + 1];
-                String type = parts[wordList.indexOf("/type") + 1];
-                InputValidator.validateDay(day);
-                Task task = new Task(description, day, startTime, endTime, type);
-                userList.getActiveUser().getTimetable().addUserTask(day, task);
-                UI.printAddTask(task);
-            } catch (InvalidFormatException | InvalidDayException e) {
-                System.out.println(e.getMessage());
-            }
+            addTask(command, userList);
         } else if (command.toLowerCase().startsWith("deletetask")) {
-            try {
-                InputValidator.validateDeleteTaskInput(command);
-                String[] parts = command.split("\\s+");
-                String day = parts[2];
-                int index = Integer.parseInt(parts[4]);
-                InputValidator.validateDay(day);
-                userList.getActiveUser().getTimetable().deleteUserTask(day, index);
-            } catch (InvalidFormatException | InvalidDayException e) {
-                System.out.println(e.getMessage());
-            }
+            deleteTask(command, userList);
+        } else if(command.toLowerCase().startsWith("changetasktiming")){
+            changeTaskTiming(command, userList);
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
                 InputValidator.validateCompareInput(command);
@@ -90,6 +69,55 @@ public class Parser {
             }
         } else {
             UI.printInvalidCommand();
+        }
+    }
+
+    private static void deleteTask(String command, UserList userList) {
+        try {
+            InputValidator.validateDeleteTaskInput(command);
+            String[] parts = command.split("\\s+");
+            String day = parts[2];
+            int index = Integer.parseInt(parts[4]);
+            InputValidator.validateDay(day);
+            userList.getActiveUser().getTimetable().deleteUserTask(day, index);
+        } catch (InvalidFormatException | InvalidDayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void addTask(String command, UserList userList) {
+        try {
+            InputValidator.validateAddTaskInput(command);
+            String[] parts = command.split("\\s+");
+            List<String> wordList = Arrays.asList(parts);
+            String day = parts[2];
+            String description = parseDescription(wordList);
+            String startTime = parts[wordList.indexOf("/from") + 1];
+            String endTime = parts[wordList.indexOf("/to") + 1];
+            String type = parts[wordList.indexOf("/type") + 1];
+            InputValidator.validateDay(day);
+            Task task = new Task(description, day, startTime, endTime, type);
+            userList.getActiveUser().getTimetable().addUserTask(day, task);
+            UI.printAddTask(task);
+        } catch (InvalidFormatException | InvalidDayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void changeTaskTiming(String command, UserList userList) throws InvalidFormatException {
+        try {
+            InputValidator.validateChangeTaskTiming(command);
+            String[] parts = command.split("\\s+");
+            List<String> wordList = Arrays.asList(parts);
+            String day = parts[2];
+            int index = Integer.parseInt(parts[wordList.indexOf("/index") + 1]);
+            LocalTime newStartTime = LocalTime.parse(parts[wordList.indexOf("/start") + 1]);
+            LocalTime newEndTime = LocalTime.parse(parts[wordList.indexOf("/end") + 1]);
+            InputValidator.validateDay(day);
+            userList.getActiveUser().getTimetable().changeFlexibleTaskTiming(day, index - 1, newStartTime, newEndTime);
+            System.out.println("Flexible task timing changed successfully.");
+        } catch (InvalidDayException e) {
+            throw new RuntimeException(e);
         }
     }
 

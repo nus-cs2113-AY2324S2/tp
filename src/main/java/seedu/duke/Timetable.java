@@ -75,7 +75,19 @@ public class Timetable {
         }
     }
 
-
+    public void changeFlexibleTaskTiming(String dayOfWeek, int index, LocalTime newStartTime, LocalTime newEndTime){
+        String capitalizedDay = dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1);
+        ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
+        if(index < 0 || index >= tasks.size()){
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        Task task = tasks.get(index);
+        if(!task.getType().equals("f")){
+            throw new IllegalArgumentException("Task on " +dayOfWeek +"at index " + index +" is not flexible.");
+        }
+        task.setStartTime(newStartTime);
+        task.setEndTime(newEndTime);
+    }
 
     /**
      * Compares and prints overlapping free time between two Timetables.
@@ -117,19 +129,10 @@ public class Timetable {
         if (!tasks.isEmpty()) {
             LocalTime previousEndTime = LocalTime.MIN;
             for (Task task : tasks) {
-                if (task.getType().equalsIgnoreCase("C")) {
-                    if (task.getStartTime().isAfter(previousEndTime)) {
-                        System.out.println(previousEndTime + " - " + task.getStartTime() + ": Compulsory Task");
-                    }
-                    System.out.println(task.getStartTime() + " - " + task.getEndTime() + ": Compulsory Task");
-                    previousEndTime = task.getEndTime();
-                } else { // Flexible Task
-                    if (task.getStartTime().isAfter(previousEndTime)) {
-                        System.out.println(previousEndTime + " - " + task.getStartTime() + ": Flexible Task");
-                    }
-                    System.out.println(task.getStartTime() + " - " + task.getEndTime() + ": Flexible Task");
-                    previousEndTime = task.getEndTime();
+                if (task.getStartTime().isAfter(previousEndTime)) {
+                    System.out.println(previousEndTime + " - " + task.getStartTime() + ": Overlapping Free Time");
                 }
+                previousEndTime = task.getEndTime();
             }
             if (previousEndTime.isBefore(LocalTime.MAX)) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");

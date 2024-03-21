@@ -37,6 +37,9 @@ public class Task {
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
+    public void setStartTime(LocalTime startTime){
+        this.startTime = startTime;
+    }
 
     /**
      * Represents the constructor for Task class that takes in parameters inluding the description of the task,
