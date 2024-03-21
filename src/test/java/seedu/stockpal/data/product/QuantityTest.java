@@ -16,7 +16,7 @@ class QuantityTest {
 
     @Test
     public void updateIncreaseQuantity_anyInteger_success() {
-        Quantity quantityObject = new Quantity(0);
+        Quantity quantityObject = new Quantity(0, false);
         try {
             quantityObject.updateIncreaseQuantity(10);
         } catch (InventoryQuantityOverflowException iqoe) {
@@ -27,7 +27,7 @@ class QuantityTest {
 
     @Test
     public void updateIncreaseQuantity_anyInteger_inventoryQuantityOverflowExceptionThrown() {
-        Quantity quantityObject = new Quantity(10);
+        Quantity quantityObject = new Quantity(10, false);
         try {
             quantityObject.updateIncreaseQuantity(Integer.MAX_VALUE);
             fail("Expected InventoryQuantityOverflowException was not thrown");
@@ -39,7 +39,7 @@ class QuantityTest {
 
     @Test
     public void updateDecreaseQuantity_anyInteger_success() {
-        Quantity quantityObject = new Quantity(10);
+        Quantity quantityObject = new Quantity(10, false);
         try {
             quantityObject.updateDecreaseQuantity(5);
         } catch (InsufficientAmountException iae) {
@@ -50,7 +50,7 @@ class QuantityTest {
 
     @Test
     public void updateDecreaseQuantity_anyInteger_insufficientAmountExceptionThrown() {
-        Quantity quantityObject = new Quantity(10);
+        Quantity quantityObject = new Quantity(10, false);
         try {
             quantityObject.updateDecreaseQuantity(15);
             fail("Expected InsufficientAmountException was not thrown");

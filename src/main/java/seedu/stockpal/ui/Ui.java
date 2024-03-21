@@ -4,7 +4,6 @@ import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
-import seedu.stockpal.data.product.Quantity;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -85,5 +84,9 @@ public final class Ui {
     public static void printLowQuantityAlert() {
         printToScreen(Messages.ALERT_LOW_QUANTITY);
         printToScreen(HORIZONTAL_LINE);
+    }
+
+    public static void printThresholdWarningAlert() {
+        printToScreen(Messages.ALERT_FIRST_LOW_QUANTITY_OCCURRENCE);
     }
 }
