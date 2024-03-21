@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ResultsList {
     protected ArrayList<Results> sessionResults;
     protected ArrayList<Integer> topicsChosen;
-    final static int ZERO_RESULTS = 0;
+    final int ZERO_RESULTS = 0;
     protected int count = ZERO_RESULTS;
 
     public ResultsList() {

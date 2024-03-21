@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class ProgressManagerTest {
     ResultsList sessionResults = new ResultsList();
 
-    static private Logger logger = Logger.getLogger("ProgressManagerTestLogger");
+    private Logger logger = Logger.getLogger("ProgressManagerTestLogger");
 
     void createResultList() {
 
