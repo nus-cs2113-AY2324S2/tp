@@ -55,8 +55,12 @@ public class Parser {
                 String description = parseDescription(wordList);
                 String startTime = parts[wordList.indexOf("/from") + 1];
                 String endTime = parts[wordList.indexOf("/to") + 1];
+                String flexibility = "";
+                if(wordList.contains("/flexibility")){
+                    flexibility = parts[wordList.indexOf("flexibility") + 1];
+                }
                 InputValidator.validateDay(day);
-                Task task = new Task(description, day, startTime, endTime);
+                Task task = new Task(description, day, startTime, endTime, flexibility);
                 userList.getActiveUser().getTimetable().addUserTask(day, task);
                 UI.printAddTask(task);
             } catch (InvalidFormatException | InvalidDayException e) {

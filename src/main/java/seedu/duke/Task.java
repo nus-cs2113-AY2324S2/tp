@@ -7,8 +7,9 @@ public class Task {
     protected String day;
     protected LocalTime startTime;
     protected LocalTime endTime;
+    protected String flexibility;
 
-    public Task(String description, String day, String from, String to) {
+    public Task(String description, String day, String from, String to, String flexibility) {
         this.description = description;
         this.day = day;
         String fromHour = from.split(":")[0];
@@ -19,8 +20,8 @@ public class Task {
         String formattedTo = formatDates(toHour) + ":" + formatDates(toMinute);
         this.startTime = LocalTime.parse(formattedFrom);
         this.endTime = LocalTime.parse(formattedTo);
+        this.flexibility = flexibility;
     }
-
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -37,6 +38,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return description + " (" + day + " from " + startTime + " to " + endTime + ")";
+        return description + " (" + day + " from " + startTime + " to " + endTime + ")" + "flexibility: " + flexibility;
     }
 }

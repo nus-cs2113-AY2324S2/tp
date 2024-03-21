@@ -17,7 +17,7 @@ class DukeTest {
         UserList userlist = new UserList();
         User user = new User("Test User");
         userlist.addUser(user);
-        Task task = new Task("Lecture", "Monday", "1:00", "2:00");
+        Task task = new Task("Lecture", "Monday", "1:00", "2:00", "f");
         user.getTimetable().addUserTask("Monday", task);
         assertEquals("Lecture", task.description);
         assertEquals(LocalTime.parse("01:00"), task.startTime);
