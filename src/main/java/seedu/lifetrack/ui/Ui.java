@@ -83,7 +83,8 @@ public class Ui {
         System.out.println("\t - calories list: Displays all entries currently stored in the calorie list.");
         System.out.println("\t - calories delete <index>: Deletes the entry at the specified index" +
                 " from the calorie list.");
-        System.out.println("\t - hydration add b/<type of beverage> v/<volume> : Marks the task at the specified index as done.");
+        System.out.println("\t - hydration add b/<type of beverage> v/<volume> : " +
+                "Marks the task at the specified index as done.");
         System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.\"");
     }
 }

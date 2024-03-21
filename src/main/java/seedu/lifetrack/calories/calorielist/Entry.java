@@ -21,8 +21,8 @@ public class Entry {
         return calorie;
     }
 
-    public static String toString(Entry toDelete){
-        return "Activity: " + toDelete.getActivity().getDescription()
-                + ", Calories: " + toDelete.getCalorie().getCalories();
+    public static String toString(Entry toPrint){
+        return "Activity: " + toPrint.getActivity().getDescription()
+                + ", Calories: " + toPrint.getCalorie().getCalories();
     }
 }

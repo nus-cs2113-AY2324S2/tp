@@ -4,7 +4,10 @@ package seedu.lifetrack.calories.calorielist;
 import static seedu.lifetrack.system.exceptions.ErrorMessages.printIndexOutOfBoundsError;
 import static seedu.lifetrack.system.exceptions.ErrorMessages.printNumberFormatError;
 import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
-import static seedu.lifetrack.ui.CalorieListUi.*;
+import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
+import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
+import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
+import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
 
 import seedu.lifetrack.calories.activity.Activity;
 import seedu.lifetrack.calories.Calorie;
@@ -77,7 +80,7 @@ public class CalorieList {
                 Entry entry = calorieArrayList.get(i);
                 Activity activity = entry.getActivity();
                 Calorie calorie = entry.getCalorie();
-                System.out.println("\t " + (i + 1) + calorieArrayList.get(i).toString());
+                System.out.println("\t " + (i + 1) + ". " + Entry.toString(calorieArrayList.get(i)));
             }
         }
     }
