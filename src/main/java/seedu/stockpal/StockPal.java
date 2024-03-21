@@ -17,6 +17,7 @@ public class StockPal {
      * Main entry-point for the java.stockpal.StockPal application.
      */
     public static void main(String[] args) {
+        assert false : "dummy assertion set to fail";
         start();
         runCommandUntilExit();
     }
