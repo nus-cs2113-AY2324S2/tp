@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
+            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)
+            // (?: cat/(?<category>[^/]+))?");
             Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
@@ -89,7 +90,7 @@ public class Parser {
                 matcher.group("itemName"),
                 quantity,
                 matcher.group("uom"), "test cat"
-                //category
+        //category
         );
     }
 
