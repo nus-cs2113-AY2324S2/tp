@@ -2,6 +2,7 @@ package seedu.duke;
 
 import command.Command;
 import command.ExitCommand;
+import exceptions.CommandFormatException;
 import parser.Parser;
 import ui.TextUi;
 
