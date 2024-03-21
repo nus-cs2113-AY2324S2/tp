@@ -1,19 +1,20 @@
-------------------------------------
-Hello! I'm Brokeculator!
-What can I do for you?
-------------------------------------
-------------------------------------
 Data file successfully created!
 ------------------------------------
+Hello! I'm Brokeculator!
+If this is your first time using me, type 'help' to see what I can do for you.
 ------------------------------------
-Enter a command:
+	-> ------------------------------------
+Here are the commands you can use:
+	1. add /n <description> /d <date> /a <amount> [/c <category>] - adds an expense to the dashboard
+	2. delete <index> - deletes an expense from the dashboard
+	3. list - lists all expenses in the dashboard
+	4. summarise [/from <start>] [/to <end>] - summarises the expenses in the dashboard
+	5. exit - exits the application
+
+Notes about the command format:
+	1. <word> are to be provided by the user without the <>
+	2. [/w word] are optional arguments
 ------------------------------------
-------------------------------------
-Invalid command. Please try again.
-------------------------------------
-------------------------------------
-Enter a command:
-------------------------------------
-------------------------------------
+	-> ------------------------------------
 Goodbye!
 ------------------------------------
