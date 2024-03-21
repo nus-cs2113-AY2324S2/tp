@@ -17,7 +17,7 @@ public class Main {
         manager = storage.loadFile();
 
         UI ui = new UI();
-        ui.printMessage("Welcome. In order to login, type your command in the format:\nlogin u/USERNAME p/PASSWORD");
+        ui.printMessage("Welcome. Enter your username and password to login.");
         
         Parser parser = new Parser();
         BaseCommand baseCommand = null;
@@ -44,7 +44,7 @@ public class Main {
             storage.saveFile(manager);
         } while (!baseCommand.isExit());
         ui.closeScanner();
-        /*
+        /*B
          * Inflow income = new Inflow("Salary payment", 400.00, "23/05/2022 1900");
          * income.setCategory(Inflow.Category.INCOME);
          * manager.addTransaction(income);

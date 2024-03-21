@@ -31,10 +31,24 @@ public class TransactionManager {
         if (transactionRemoved instanceof Inflow) {
             return inflows.removeTransactionIndex(index);
         }
-        if (transactionRemoved instanceof Outflow){
+        if (transactionRemoved instanceof Outflow) {
             return outflows.removeTransactionIndex(index);
         }
         return false;
+    }
+
+    public boolean removeInflow(int index) throws Exception {
+        int numOfInflows = inflows.getTransactionListSize();
+        Transaction<?> transactionRemoved = inflows.getNthTransaction(numOfInflows - index);
+        transactionList.removeTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionRemoved));
+        return inflows.removeTransactionIndex(numOfInflows - index);
+    }
+
+    public boolean removeOutflow(int index) throws Exception {
+        int numOfOutflows = outflows.getTransactionListSize();
+        Transaction<?> transactionRemoved = outflows.getNthTransaction(numOfOutflows - index);
+        transactionList.removeTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionRemoved));
+        return outflows.removeTransactionIndex(numOfOutflows - index);
     }
 
     public double getTotalBalance() {
@@ -54,7 +68,7 @@ public class TransactionManager {
             throw new Exception("Invalid index");
         }
         int index = 1;
-        String returnedText = "Inflows:\nTransactions:";
+        String returnedText = "Inflows:\nTransactions:\n";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Inflow) {
@@ -64,7 +78,7 @@ public class TransactionManager {
         }
 
         index = 1;
-        returnedText += "\nOutflows:\nTransactions:";
+        returnedText += "\nOutflows:\nTransactions:\n";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Outflow) {

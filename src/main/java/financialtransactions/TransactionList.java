@@ -20,6 +20,10 @@ public class TransactionList<T extends Transaction<?>> {
         return this.transactionList.get(n);
     }
 
+    public int getIndexOfParticularTransaction(T particularTransaction) {
+        return this.transactionList.indexOf(particularTransaction);
+    }
+
     public boolean addTransaction(T newTransaction){
         if (newTransaction != null){
             transactionList.add(newTransaction);
@@ -28,13 +32,19 @@ public class TransactionList<T extends Transaction<?>> {
         return false;
     }
 
-    public boolean removeTransactionIndex (int index){
-        printTransactionsSafeInfo();
+    public boolean removeTransactionIndex (int index) throws Exception{
+        //printTransactionsSafeInfo();
+        transactionList.remove(index);
+        return true;
+    }
+
+    public boolean editTransactionIndex (int index, T transaction) {
+        //printTransactionsSafeInfo();
         if (index >= transactionList.size() || index < 0){
             System.out.println("Invalid Index");
             return false;
         }
-        transactionList.remove(index);
+        transactionList.set(index, transaction);
         return true;
     }
 

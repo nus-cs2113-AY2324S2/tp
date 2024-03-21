@@ -3,6 +3,8 @@ package parser;
 import command.AddInflowCommand;
 import command.AddOutflowCommand;
 import command.BaseCommand;
+import command.DeleteInflowCommand;
+import command.DeleteOutflowCommand;
 import command.ExitCommand;
 import command.ViewHistoryCommand;
 import financialtransactions.TransactionManager;
@@ -19,23 +21,28 @@ public class Parser {
         String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
         switch (action) {
+        case "help":
+            //implement help command
+            break;
         case "add-inflow":
             return new AddInflowCommand(commandParts);
         case "add-outflow":
             return new AddOutflowCommand(commandParts);
         case "delete-inflow":
+            return new DeleteInflowCommand(commandParts);
         case "delete-outflow":
-            String index = commandParts[1];
-            manager.removeTransaction(Integer.parseInt(index));
+            return new DeleteOutflowCommand(commandParts);
+        case "edit-inflow":
+        case "edit-outflow":
+            // implement edit transaction command
             break;
         case "view-history":
             return new ViewHistoryCommand(commandParts);
         case "quit":
             return new ExitCommand(commandParts);
         default:
-            System.out.println("Invalid command");
-            break;
+            throw new Exception("Invalid command");
         }
-        throw new Exception("Error parsing");
+        return null;
     }
 }
