@@ -1,20 +1,38 @@
 package customexceptions;
 
+import java.util.Arrays;
+
 public class IncompletePromptException extends Exception {
-    public static final String[] INSTRUCTIONS = {"add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
-            "login", "quit", "view-history"};
+    public static final String[] INSTRUCTIONS = {
+        "add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
+        "login", "quit", "view-history"};
     private boolean isTypo = false;
+    private boolean isIncomplete = false;
+    private boolean isUnknown = false;
+
     public IncompletePromptException(String line) {
         int spaceIndex = line.indexOf(" ");
         String firstWord = (spaceIndex == -1) ? line : line.substring(0, spaceIndex);
-        checkTypo(firstWord);
+        if (!Arrays.asList(INSTRUCTIONS).contains(firstWord)) {
+            checkTypo(firstWord);
+        } else {
+            isIncomplete = true;
+        }
     }
+
     public boolean getIsTypo() {
         return this.isTypo;
     }
+    public boolean getIsIncomplete() {
+        return this.isIncomplete;
+    }
+    public boolean getIsUnknown() {
+        return this.isUnknown;
+    }
+
     public void checkTypo(String word) {
         for (String instruction : INSTRUCTIONS) {
-            if (!instruction.equals(word) && instruction.contains(word)) {
+            if (instruction.contains(word)) {
                 if (!isTypo) {
                     isTypo = true;
                     System.out.println("Did you mean: ");
@@ -23,7 +41,10 @@ public class IncompletePromptException extends Exception {
             }
         }
         if (isTypo) {
+            this.isIncomplete = true;
             System.out.println("?");
+        } else {
+            this.isUnknown = true;
         }
     }
 }

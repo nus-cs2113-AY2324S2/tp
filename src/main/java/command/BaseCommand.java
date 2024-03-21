@@ -15,4 +15,7 @@ public abstract class BaseCommand {
     public boolean isExit() {
         return this.isExit;
     }
+    public void setIsExit(boolean isExit) {
+        this.isExit = isExit;
+    }
 }

@@ -1,6 +1,14 @@
 package parser;
 
-import command.*;
+import command.AddInflowCommand;
+import command.AddOutflowCommand;
+import command.BaseCommand;
+import command.DeleteInflowCommand;
+import command.DeleteOutflowCommand;
+import command.EditInflowCommand;
+import command.EditOutflowCommand;
+import command.ExitCommand;
+import command.ViewHistoryCommand;
 import customexceptions.IncompletePromptException;
 import financialtransactions.TransactionManager;
 import userinterface.UI;
@@ -14,7 +22,7 @@ public class Parser {
         this.isContinue = true;
     }
 
-    public BaseCommand parseCommand(String command, TransactionManager manager) throws IncompletePromptException, Exception {
+    public BaseCommand parseCommand(String command, TransactionManager manager) throws Exception {
         String[] commandParts = command.split("\\s+");
         String action = commandParts[0];
         switch (action) {
@@ -61,12 +69,8 @@ public class Parser {
             return new ExitCommand(commandParts);
         default:
             throw new Exception("Invalid command");
-            //throw new IncompletePromptException(command);
         }
         return null;
     }
 
-    public void setIsContinue(boolean isContinue) {
-        this.isContinue = isContinue;
-    }
 }
