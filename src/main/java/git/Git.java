@@ -1,9 +1,6 @@
 package git;
 
 import exceptions.GitException;
-import exceptions.InvalidCommandException;
-import grocery.Grocery;
-import grocery.GroceryList;
 
 /**
  * Represents the Grocery in Time (GiT) program, allowing users to store and track their groceries!
