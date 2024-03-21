@@ -10,6 +10,6 @@ Inflows:
 Transactions:1)  Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
 
 Outflows:
-Transactions:1)  Name: Rent, Amount: -1500.00, Date: Jun 23 2023 06:00PM
+Transactions:1)  Name: Rent, Amount: -1635.00, Date: Jun 23 2023 06:00PM
 
 Exiting application

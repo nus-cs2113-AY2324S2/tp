@@ -1,10 +1,10 @@
 package customexceptions;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class IncompletePromptException extends Exception {
-    public static final String[] INSTRUCTIONS = {"add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
+    public static final String[] INSTRUCTIONS = {
+            "add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
             "login", "quit", "view-history"};
     private boolean isTypo = false;
     private boolean isIncomplete = false;

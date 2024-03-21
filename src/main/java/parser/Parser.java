@@ -1,9 +1,6 @@
 package parser;
 
 import customexceptions.IncompletePromptException;
-import financialtransactions.Inflow;
-import financialtransactions.Outflow;
-//import userinteraction.UI;
 import command.AddInflowCommand;
 import command.AddOutflowCommand;
 import command.BaseCommand;
