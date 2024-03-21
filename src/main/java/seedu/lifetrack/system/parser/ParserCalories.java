@@ -38,7 +38,8 @@ public class ParserCalories {
         int macrosIndex = input.indexOf("m/");
         if (caloriesIndex == -1 || dateIndex == -1 ||
                 (!(caloriesIndex < dateIndex) && macrosIndex != -1 && dateIndex < macrosIndex) ||
-                (macrosIndex != -1 && (macrosIndex < dateIndex || macrosIndex < caloriesIndex))) {
+                (macrosIndex != -1 && (macrosIndex < dateIndex || macrosIndex < caloriesIndex)) ||
+                (macrosIndex == -1 && (dateIndex < caloriesIndex))) {
             throw new InvalidInputException("Please ensure that you have keyed in the correct format" +
                     " in the correct order!\n" + "Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
