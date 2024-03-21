@@ -27,8 +27,26 @@ public class Period extends Health {
         this.length = calculatePeriodLength();
     }
 
+    /**
+     * Retrieves the start date of the period.
+     *
+     * @return The start date.
+     * @throws AssertionError if the start date is null
+     */
     public LocalDate getStartDate() {
+        assert startDate != null : UiConstant.START_DATE_CANNOT_BE_NULL;
         return startDate;
+    }
+
+    /**
+     * Retrieves the end date of the period.
+     *
+     * @return The end date.
+     * @throws AssertionError if the end date is null
+     */
+    public LocalDate getEndDate() {
+        assert endDate != null : UiConstant.END_DATE_CANNOT_BE_NULL;
+        return endDate;
     }
 
     /**
@@ -72,6 +90,7 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
+        assert startDate.isBefore(endDate) : UiConstant.PERIOD_START_MUST_BE_BEFORE_END;
         // Add 1 to include both start and end dates
         return ChronoUnit.DAYS.between(startDate,endDate) + 1;
     }
@@ -83,13 +102,8 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        return "Period Start: "
-                + this.getStartDate()
-                + " Period End: "
-                + this.endDate
-                + System.lineSeparator()
-                + "Period Length: "
-                + this.length
-                + " days";
+        String startDateString = startDate.toString();
+        String endDateString = endDate.toString();
+        return String.format(UiConstant.PRINT_PERIOD_FORMAT, startDateString, endDateString, length);
     }
 }

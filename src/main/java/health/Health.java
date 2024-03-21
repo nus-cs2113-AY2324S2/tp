@@ -24,7 +24,7 @@ public class Health {
 
         String[] userInputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
 
-        assert userInputs.length > 0 : "Number of userInputs parts should be greater than 0";
+        assert userInputs.length > 0 : UiConstant.REQUIRES_POSITIVE_MESSAGE;
 
         String healthType = userInputs[UiConstant.HEALTH_TYPE_INDEX].trim();
 
@@ -49,7 +49,7 @@ public class Health {
             throw new CustomExceptions.InsufficientInput(UiConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
         }
 
-        assert userInputs.length == 5 : "Array of userInputs should have 5 elements";
+        assert userInputs.length == 5 : UiConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
 
         if (isBmi){
             return UiConstant.BMI;

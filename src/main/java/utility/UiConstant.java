@@ -118,6 +118,10 @@ public class UiConstant {
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
 
+    public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
+            + System.lineSeparator()
+            + "Period Length: %d days";
+
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
@@ -137,7 +141,17 @@ public class UiConstant {
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
     public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
     public static final String LINE = " | ";
-  
+    public static final String NUMBER_OF_INPUTS_REQUIRED_PERIOD =  "Array of userInputs should have 5 elements.";
+    public static final String HEIGHT_WEIGHT_REQUIRE_POSITIVE = "Both Height and weight must be positive.";
+    public static final String BMI_MUST_BE_POSITIVE = "Bmi must be a positive value";
+    public static final String BMI_CANNOT_BE_NULL = "Bmi object cannot be null.";
+    public static final String BMI_LIST_EMPTY = "BMI List is empty.";
+    public static final String PERIOD_LIST_EMPTY = "Period List is empty.";
+    public static final String PERIOD_CANNOT_BE_NULL = "Period object cannot be null.";
+    public static final String PERIOD_START_MUST_BE_BEFORE_END = "Start date of period must be before end date.";
+    public static final String START_DATE_CANNOT_BE_NULL = "Start date of period cannot be empty.";
+    public static final String END_DATE_CANNOT_BE_NULL = "End date of period cannot be empty.";
+
     // Input Errors
     public static final String INVALID_COMMAND = "Invalid command. Enter 'help' to view available commands.";
     public static final String UNSPECIFIED_PARAMETER = "Parameter(s) unspecified.";

@@ -1,5 +1,7 @@
 package health;
 
+import utility.UiConstant;
+
 import java.util.ArrayList;
 
 /**
@@ -17,7 +19,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If Bmi object is null.
      */
     public static void addBmi(Bmi bmi) {
-        assert bmi != null : "Bmi object cannot be null";
+        assert bmi != null : UiConstant.BMI_CANNOT_BE_NULL;
         bmis.add(bmi);
     }
 
@@ -27,7 +29,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If bmis list is empty.
      */
     public static void showCurrentBmi() {
-        assert !bmis.isEmpty() : "BMI List is empty";
+        assert !bmis.isEmpty() : UiConstant.BMI_LIST_EMPTY;
         int currentIndex = bmis.size();
         System.out.println(bmis.get(currentIndex - 1));
     }
@@ -36,7 +38,7 @@ public class HealthList extends ArrayList<Health> {
      * Prints all the BMI entries recorded.
      */
     public static void showBmiHistory() {
-        assert !bmis.isEmpty() : "BMI List is empty";
+        assert !bmis.isEmpty() : UiConstant.BMI_LIST_EMPTY;
         for (Bmi bmi : bmis) {
             System.out.println(bmi);
         }
@@ -48,6 +50,7 @@ public class HealthList extends ArrayList<Health> {
      * @param period Period object to be added
      */
     public static void addPeriod(Period period) {
+        assert period != null : UiConstant.PERIOD_CANNOT_BE_NULL;
         periods.add(period);
     }
 
@@ -55,7 +58,7 @@ public class HealthList extends ArrayList<Health> {
      * Prints the latest period object added.
      */
     public static void showLatestPeriod() {
-        assert !periods.isEmpty() : "Period List is empty";
+        assert !periods.isEmpty() : UiConstant.PERIOD_LIST_EMPTY;
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
     }
@@ -65,7 +68,7 @@ public class HealthList extends ArrayList<Health> {
      * Prints all Period entries tracked.
      */
     public static void showPeriodHistory() {
-        assert !periods.isEmpty() : "Period List is empty";
+        assert !periods.isEmpty() : UiConstant.PERIOD_LIST_EMPTY;
         for (Period period : periods) {
             System.out.println(period);
         }
