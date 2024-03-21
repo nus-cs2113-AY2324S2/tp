@@ -111,6 +111,9 @@ public class WeeklyProgramManager extends ActivityManager {
             activityList.set(6, workout);
             break;
         default:
+            if (day.isEmpty()) {
+                throw new Exceptions.InvalidInput("Incomplete command");
+            }
             throw new Exceptions.InvalidInput("Not a valid day");
         }
     }
