@@ -11,6 +11,6 @@ public class MainViewOrderCommand implements MainCommand{
     public static Optional<Order> execute(ArrayList<Order> ordersList, String inputText) {
         String[] indexString = Parser.splitInput(Parser.analyzeInput(inputText), inputText);
         String orderID = indexString[0];
-        return ordersList.stream().findAny().filter(x -> x.getID().equals(orderID));
+        return ordersList.stream().filter(x -> x.getID().equals(orderID)).findAny();
     }
 }
