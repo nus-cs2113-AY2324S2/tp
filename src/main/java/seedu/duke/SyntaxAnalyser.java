@@ -1,15 +1,11 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SyntaxAnalyser {
     //check if argument token is an integer ranging from 0 to 2
-    private static String VALID_INDEX_REGEX = "^[0-2]$";
-    //    private static String getValidIndexRegex(int size) {
-//    }
+    private static final String VALID_INDEX_REGEX = "^[0-2]$";
     //check if argument token is any keyboard character
     private static final String UNRESTRICTED_CHAR_LENGTH_REGEX = ".+";
     private static final String[][] lutRegexSeq = {

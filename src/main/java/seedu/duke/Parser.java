@@ -6,7 +6,8 @@ public class Parser {
 
     public Parser(String userInput) throws IllegalCommandException, ArgumentMismatchException, BadTokenException {
         //default case: User enters a valid command, the command expects no arguments
-        final String[] NAME_ARGSTR_PAIR = parseIntoNameAndArgumentString(userInput); //NAME_ARGSTR_PAIR is either size 1 or 2
+        //NAME_ARGSTR_PAIR is either size 1 or 2
+        final String[] NAME_ARGSTR_PAIR = parseIntoNameAndArgumentString(userInput);
         final String USER_COMMAND_NAME = getUserCommandName(NAME_ARGSTR_PAIR);
         COMMAND_NAME = USER_COMMAND_NAME.toUpperCase();
         final String USER_ARGUMENT_STRING;

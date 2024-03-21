@@ -18,16 +18,10 @@ public class Ui {
 
     private static final Scanner IN = new Scanner(System.in);
     private static boolean isRunning = true;
-//    static ArrayList<Task> tasks = new ArrayList<Task>();
     private static String userInput;
     private static Parser userCommandReader;
     public static int roundCount = 0;
     private static final Logger logger = Logger.getLogger("Foo");
-
-//    public String readUserInput(){
-//        return IN.nextLine();
-//    }
-
 
     /**
      * Reads user input and stores it
@@ -42,6 +36,7 @@ public class Ui {
      *
      * @throws ProcessInputException If command read from input is invalid
      */
+
     public static void processInput() throws ProcessInputException {
         try {
             userCommandReader = new Parser(userInput);
@@ -66,7 +61,6 @@ public class Ui {
      */
     public static void executeCommand() {
         CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
-        int userSelectedIndex;
 
         switch (selectedCommand) {
         case BYE:
@@ -81,14 +75,10 @@ public class Ui {
         }
     }
 
-    private static void print(String thingToPrint){
-        System.out.println("    " + "-----NUSFC24-----");
-        System.out.println("    " + thingToPrint);
-        System.out.println("    " + "-----------------");
-    }
     public static void setIsRunning(boolean runState) {
         isRunning = runState;
     }
+
     public static boolean getIsRunning() {
         return isRunning;
     }

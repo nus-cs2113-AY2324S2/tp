@@ -2,6 +2,12 @@ package seedu.duke;
 import java.util.logging.Logger;
 public class Formatter {
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
+    public static final String emojiSad = "☹";
+
+    /**
+     * Method to check if the shot resulted in a goal
+     * If shoot direction matches save direction, it's not a goal and the returned value is false.
+     */
 
     /**
      * Appends a newline to a given string and returns the resulting string
@@ -57,6 +63,7 @@ public class Formatter {
         System.out.println("|         |         |         |");
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
+
     public static void printGoalAfterShot(boolean goalScored) {
         if (goalScored) {
             logger.info("GOAL!!!!");
@@ -77,6 +84,7 @@ public class Formatter {
             System.out.println("no goal :((((");
         }
     }
+
     /**
      * Prints "list is empty" if tasks list is empty
      */
@@ -134,7 +142,7 @@ public class Formatter {
      * Prints an error message indicating wrong command is entered
      */
     public static void printErrorWrongCommand() {
-        System.out.println("\t CommandParser: Command not found ");
+        System.out.println("\t CommandParser: Command not found " + emojiSad);
     }
 
     /**
@@ -156,7 +164,7 @@ public class Formatter {
      * Prints an error message indicating there is at least one bad argument provided
      */
     public static void printErrorBadTokens() {
-        System.out.println("\t Ui: Bad Token Error, please check your arguments");
+        System.out.println("\t Ui: Bad Token Error, please check your arguments" + emojiSad);
     }
 
     /**

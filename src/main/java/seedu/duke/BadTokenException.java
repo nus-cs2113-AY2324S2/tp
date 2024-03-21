@@ -1,4 +1,5 @@
 package seedu.duke;
 
-public class BadTokenException extends Exception{
+public class BadTokenException extends Exception {
+
 }
