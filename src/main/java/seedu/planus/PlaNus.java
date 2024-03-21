@@ -37,7 +37,6 @@ public class PlaNus {
      * Main entry-point for the java.planus.PlaNus application.
      */
     public static void main(String[] args) {
-        // assert false : "dummy assertion set to fail";
         new PlaNus().run();
     }
 }

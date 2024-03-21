@@ -4,6 +4,9 @@ package seedu.planus;
  * Represents a course taken or planned by the user
  */
 public class Course {
+    private static final int TERM_PER_YEAR = 4;
+    private static final int MAX_CANDIDATURE_YEAR = 6;
+
     private String courseCode;
     private String courseName;
     private int modularCredit;
@@ -94,6 +97,9 @@ public class Course {
      * @return A formatted string that contains the year and term that the user taken or plans to take the course
      */
     public String getYearAndTerm() {
+        assert (term >= 1 || term <= TERM_PER_YEAR): "Term is not from 1 to 4";
+        assert (year >= 1 || year <= MAX_CANDIDATURE_YEAR): "Year is not from 1 to 6";
+
         String s = "";
         s += "Year " + year;
         if (term >= 3) {

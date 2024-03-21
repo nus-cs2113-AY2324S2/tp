@@ -3,9 +3,10 @@ package seedu.planus;
 import java.util.ArrayList;
 
 public class Timetable {
-    // Each inner ArrayList represents a term
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
+
+    // Each inner ArrayList represents a term
     private ArrayList<ArrayList<Course>> courses;
 
     /**
@@ -281,6 +282,7 @@ public class Timetable {
         int totalCredit = 0;
 
         for (ArrayList<Course> termCourses : courses) {
+            assert !termCourses.isEmpty(): "Accessing empty term";
             plan.append(termCourses.get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
 
             int termCredit = 0;
@@ -316,6 +318,8 @@ public class Timetable {
                 break;
             }
 
+            assert termCourses.get(0).getYear() == year: "Accessing wrong year";
+            assert !termCourses.isEmpty(): "Accessing empty term";
             plan.append(termCourses.get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
 
             int termCredit = 0;
@@ -359,7 +363,11 @@ public class Timetable {
                 break;
             }
 
+            assert termCourses.get(0).getYear() == year: "Accessing wrong year";
+            assert termCourses.get(0).getTerm() == term: "Accessing wrong term";
+            assert !termCourses.isEmpty(): "Accessing empty term";
             plan.append(termCourses.get(0).getYearAndTerm()).append(":").append(System.lineSeparator());
+
             for (Course course : termCourses) {
                 plan.append("  ").append(course.getDetails()).append(System.lineSeparator());
                 termCredit += course.getModularCredit();
