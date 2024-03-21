@@ -1,7 +1,4 @@
 package seedu.lifetrack.calories.calorielist;
-import static seedu.lifetrack.system.parser.Parser.parseCaloriesInput;
-import static seedu.lifetrack.system.exceptions.ErrorMessages.printIndexOutOfBoundsError;
-import static seedu.lifetrack.system.exceptions.ErrorMessages.printNumberFormatError;
 import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
 import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
