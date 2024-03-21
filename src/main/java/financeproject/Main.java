@@ -20,7 +20,7 @@ public class Main {
         UI ui = new UI();
         ui.printMessage("Welcome. Enter your username and password to login.");
 
-        Parser parser = new Parser();
+        Parser parser = new Parser(ui);
         BaseCommand baseCommand = null;
         String response = "";
 
@@ -40,7 +40,7 @@ public class Main {
         do {
             String command = ui.readInput();
             try {
-                baseCommand = parser.parseCommand(command, manager);
+                baseCommand = parser.parseCommand(command);
                 response = baseCommand.execute(manager);
                 ui.printMessage(response);
                 inactivityTimer.resetTimer();
