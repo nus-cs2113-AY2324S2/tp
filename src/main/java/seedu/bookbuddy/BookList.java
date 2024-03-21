@@ -5,7 +5,6 @@ import exceptions.BookNotFoundException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static seedu.bookbuddy.BookBuddy.LOGGER;
 
