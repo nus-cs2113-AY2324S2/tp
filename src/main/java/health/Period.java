@@ -28,6 +28,7 @@ public class Period extends Health {
     }
 
     public LocalDate getStartDate() {
+        assert startDate != null : UiConstant.START_DATE_CANNOT_BE_NULL;
         return startDate;
     }
 

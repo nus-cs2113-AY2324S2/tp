@@ -152,6 +152,7 @@ public class Handler {
                         || bmiDetails[3].isEmpty()) {
                     throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
                 }
+
                 Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
                 HealthList.addBmi(newBmi);
                 System.out.println(UiConstant.BMI_ADDED_MESSAGE_PREFIX
@@ -167,7 +168,12 @@ public class Handler {
                 if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
                     throw new CustomExceptions.InvalidInput(UiConstant.MISSING_PARAMETERS);
                 }
+
                 Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
+                if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
+                    throw new CustomExceptions.InvalidInput(UiConstant.PERIOD_START_MUST_BE_BEFORE_END);
+                }
+
                 HealthList.addPeriod(newPeriod);
                 System.out.println(UiConstant.PERIOD_ADDED_MESSAGE_PREFIX
                         + periodDetails[1]

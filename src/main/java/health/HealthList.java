@@ -1,5 +1,7 @@
 package health;
 
+import utility.UiConstant;
+
 import java.util.ArrayList;
 
 /**
@@ -48,6 +50,7 @@ public class HealthList extends ArrayList<Health> {
      * @param period Period object to be added
      */
     public static void addPeriod(Period period) {
+        assert period != null : UiConstant.PERIOD_CANNOT_BE_NULL;
         periods.add(period);
     }
 
