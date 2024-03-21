@@ -162,7 +162,7 @@ class ExerciseManagerTest {
 
     //@@author LWachtel1
     @Test
-    public void execute_invalidExerciseEdit_emptyNewExercise_throwsInvalidInput() {
+    public void invalidExerciseEdit_emptyNewExercise_throwsInvalidInput() {
         String validInput = "exercise /add Push-ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
@@ -174,7 +174,7 @@ class ExerciseManagerTest {
 
     //@@author LWachtel1
     @Test
-    public void execute_invalidExerciseEdit_invalidPreviousName_throwsActivityDoesNotExists() {
+    public void invalidExerciseEdit_invalidPreviousName_throwsActivityDoesNotExists() {
         String validInput = "exercise /add Push-ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
@@ -186,7 +186,7 @@ class ExerciseManagerTest {
 
     //@@author LWachtel1
     @Test
-    public void execute_invalidExerciseEdit_emptyPreviousName_throwsActivityDoesNotExists() {
+    public void invalidExerciseEdit_emptyPreviousName_throwsActivityDoesNotExists() {
         String validInput = "exercise /add Push-ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
