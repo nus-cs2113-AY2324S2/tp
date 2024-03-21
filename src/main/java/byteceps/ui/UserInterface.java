@@ -22,22 +22,25 @@ public class UserInterface {
     }
 
     public static void printMessage(String message) {
-        System.out.printf("[ByteCeps]> %s" + System.lineSeparator(), message);
+        System.out.printf("[ByteCeps]> %s%s", message, System.lineSeparator());
         System.out.println(SEPARATOR);
     }
 
+    //@@author pqienso
     public void printWelcomeMessage() {
         out.println(SEPARATOR);
         out.println(MESSAGE_WELCOME);
         out.println(SEPARATOR);
     }
 
+    //@@author pqienso
     public void printGoodbyeMessage() {
         out.println(SEPARATOR);
         out.println(MESSAGE_GOODBYE);
         out.println(SEPARATOR);
     }
 
+    //@@author joshualeejunyi
     public String getUserInput() {
         String userInput;
         do {

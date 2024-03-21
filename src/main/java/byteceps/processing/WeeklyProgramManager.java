@@ -91,7 +91,7 @@ public class WeeklyProgramManager extends ActivityManager {
     @Override
     public void list() {
         StringBuilder message = new StringBuilder();
-        message.append("Your workouts for the week:" + System.lineSeparator());
+        message.append("Your workouts for the week:").append(System.lineSeparator());
         int index = 0;
         for (Activity workout : activityList) {
             message.append(String.format("\t%s: ", days[index++]));
