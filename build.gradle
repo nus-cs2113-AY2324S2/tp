@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("gamelogic.EconoCraft")
 }
 
 shadowJar {
@@ -43,4 +43,8 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions(true)
 }
+
+
+
