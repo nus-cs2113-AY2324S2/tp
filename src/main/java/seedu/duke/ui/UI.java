@@ -42,4 +42,8 @@ public class UI {
                 "delete: delete task \n" +
                 "compare <user1> <user2>: compare timetables ");
     }
+
+    public static void printAddForAll(Task task) {
+        System.out.println("The following task is added for all users: " + task.toString());
+    }
 }

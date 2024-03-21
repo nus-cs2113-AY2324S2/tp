@@ -148,4 +148,15 @@ public class InputValidator {
                     "Expected format: changeTaskTiming /on [day] /index [index] /start [new start time] /end [new end time]");
         }
     }
+
+    public static void validateAddTaskForAll(String input) throws InvalidFormatException {
+        String regex = "(?i)^addforall\\s+/on\\s+(\\w+)\\s+/task\\s+(.+?)\\s" +
+                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})$";
+
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid addTask format. " +
+                    "Expected format: addforall /on [day] /task [description] /from [start time] /to [end time] " +
+                    "/type [f/c]");
+        }
+    }
 }
