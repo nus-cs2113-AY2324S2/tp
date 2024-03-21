@@ -1,4 +1,4 @@
-   Hello from
+         Hello from
 
 |     IIIII  FFFFF EEEEE  TTTTT RRRR    AAA   CCC  K  K
 |       I    F     E        T   R   R  A   A C     K K
@@ -6,7 +6,7 @@
 |       I    F     E        T   R  R   A   A C     K K
 |______  IIIII F     EEEEE    T   R   R  A   A  CCC  K  K
 
-   How can I help you today?
-   -----------------------------------------------------------------------------
-   -----------------------------------------------------------------------------
-   Bye! See you again soon ^^
+         How can I help you today?
+         -----------------------------------------------------------------------------
+         -----------------------------------------------------------------------------
+         Bye! See you again soon ^^

@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private static final String WHITESPACE = "         ";
+
     private static final String logo = "|     IIIII  FFFFF EEEEE  TTTTT RRRR    AAA   CCC  K  K\n" +
             "|       I    F     E        T   R   R  A   A C     K K\n" +
             "|       I    FFFF  EEEE     T   RRRR   AAAAA C     KK\n" +
@@ -76,14 +78,14 @@ public class Ui {
     }
 
     public static void sayHello() {
-        System.out.println("\t Hello from\n\n" + logo);
-        System.out.println("\t How can I help you today?");
+        System.out.println(WHITESPACE + "Hello from\n\n" + logo);
+        System.out.println(WHITESPACE + "How can I help you today?");
         printLine();
     }
 
     public static void byeMessage() {
         printLine();
-        System.out.println("\t Bye! See you again soon ^^");
+        System.out.println(WHITESPACE + "Bye! See you again soon ^^");
     }
 
     public static void printEmptyInputMessage() {
@@ -91,7 +93,7 @@ public class Ui {
     }
 
     public static void printLine() {
-        System.out.println("\t -----------------------------------------------------------------------------");
+        System.out.println(WHITESPACE + "-----------------------------------------------------------------------------");
     }
 
     public static void handleUnknownInput() {
