@@ -25,7 +25,7 @@ public class ParserTest {
         assertEquals("[U] Gulliver's Travels", books.getBook(2).toString());
         books.deleteBook(1);
         books.markDoneByIndex(1);
-        assertTrue(books.getBook(0).isRead);
+        assertTrue(books.getBook(1).isRead);
         assertEquals("[R] Gulliver's Travels", books.getBook(1).toString());
     }
 
