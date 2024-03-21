@@ -35,6 +35,7 @@ application {
 shadowJar {
     archiveBaseName.set("bookbuddy")
     archiveClassifier.set("")
+    archiveFileName = 'BookBuddy.jar'
 }
 
 checkstyle {
