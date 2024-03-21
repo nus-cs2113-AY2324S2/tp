@@ -22,27 +22,31 @@ public class NewsOnTheGo {
      * Main entry-point for the java.newsworthiest.NewsOnTheGo application.
      */
     public static void main(String[] args) {
-
         UI.initializeUI();
         List<NewsArticle> newsArticles = importNewsFromText(FILENAME);
         Scanner in = new Scanner(System.in);
 
         while (true) {
             System.out.println("What do you want from me?");
-            String line = in.nextLine();
-            String command = line.split(" ")[0];
-            try {
-                boolean endLoop = processCommand(command, line, newsArticles);
-                if (endLoop) {
-                    break;
+            if (in.hasNextLine()) {
+                String line = in.nextLine();
+                String command = line.split(" ")[0];
+                try {
+                    boolean endLoop = processCommand(command, line, newsArticles);
+                    if (endLoop) {
+                        break;
+                    }
+                } catch (Exception e) {
+                    UI.printError(e.getMessage());
                 }
-            } catch (Exception e) {
-                UI.printError(e.getMessage());
+            } else {
+                break;
             }
         }
 
         logger.log(Level.INFO, "Ending NewsOnTheGo");
     }
+
 
 
     static List<NewsArticle> importNewsFromText(String filename) {
