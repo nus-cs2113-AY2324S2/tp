@@ -82,7 +82,7 @@ public class Parser {
 
     private void processStartCommand (
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
-            ResultsList allResults
+            ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
 
         String[] commandParts = lowerCaseCommand.split(" ");
@@ -97,7 +97,7 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("booo no such topic");
             }
-            ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults);
+            ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
 
         } catch (NumberFormatException e) {
             throw new CustomException("invalid " + lowerCaseCommand + " parameter");
@@ -165,11 +165,14 @@ public class Parser {
     }
 
     public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,
-                                   Results topicResults){
+                                   Results topicResults, ArrayList<Boolean> correctness){
         inputAnswers[index] = answer;
         String correctAnswer = questionUnit.getSolution();
         if (answer.equals(correctAnswer)){
             topicResults.increaseCorrectAnswers();
+            correctness.add(IS_CORRECT_ANSWER);
+        } else {
+            correctness.add(!IS_CORRECT_ANSWER);
         }
     }
 
