@@ -40,7 +40,8 @@ public class ParserCalories {
                 (!(caloriesIndex < dateIndex) && macrosIndex != -1 && dateIndex < macrosIndex) ||
                 (macrosIndex != -1 && (macrosIndex < dateIndex || macrosIndex < caloriesIndex)) ||
                 (macrosIndex == -1 && (dateIndex < caloriesIndex))) {
-            throw new InvalidInputException("Please ensure that you have keyed in the correct format" +
+            throw new InvalidInputException("Invalid input exception:" +
+                    "Please ensure that you have keyed in the correct format" +
                     " in the correct order!\n" + "Example input: " +
                     "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
         }
@@ -68,6 +69,12 @@ public class ParserCalories {
             }
         } else {
             macros = null;
+        }
+
+        //throw exception if command is calories out, but macros is keyed in
+        if (command.equals("calories out") && macros != null) {
+            throw new InvalidInputException("Invalid input exception: " +
+                    "Calorie output entry cannot have macros");
         }
 
         //check if the description, calories or date fields are empty
