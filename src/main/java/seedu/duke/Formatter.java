@@ -2,6 +2,49 @@ package seedu.duke;
 import java.util.logging.Logger;
 public class Formatter {
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
+    public static final String footballIcon = "⚽";
+    public static final String emojiSad = "☹";
+
+    /**
+     * Appends a newline to a given string and returns the resulting string
+     *
+     * @param str the given string
+     * @return A new string with a newline character appended to it
+     */
+    public static String appendNewLine(String str) {
+        return String.format("%s\n", str);
+    }
+
+    public static void printWrapper(String wrapWith) {
+        System.out.print("\t");
+        for (int i = 0; i < 60; i++) {
+            System.out.print(wrapWith);
+        }
+        System.out.print("\n");
+    }
+
+    /**
+     * Prints welcome message at start of program
+     */
+    public static void printWelcomeMsg() {
+        printWrapper("〰");
+        System.out.println("\t Welcome to NUSFC 24 " + footballIcon);
+        printWrapper("〰");
+    }
+
+    /**
+     * Prints goodbye message when program terminates
+     */
+    public static void printGoodbyeMsg() {
+        printWrapper("〰");
+        System.out.println("\t See you next time on court!" + " ツ");
+        printWrapper("〰");
+    }
+
+    /**
+     * Method to check if the shot resulted in a goal
+     * If shoot direction matches save direction, it's not a goal and the returned value is false.
+     */
 
     public static void printGoalBeforeShot(int roundCount) {
         assert roundCount > 0 : "Round count should be greater than zero.";
@@ -14,6 +57,7 @@ public class Formatter {
         System.out.println("|         |         |         |");
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
+
     public static void printGoalAfterShot(boolean goalScored) {
         if (goalScored) {
             logger.info("GOAL!!!!");
@@ -39,14 +83,14 @@ public class Formatter {
      * Prints an error message indicating wrong command is entered
      */
     public static void printErrorWrongCommand() {
-        System.out.println("\t CommandParser: Command not found ");
+        System.out.println("\t CommandParser: Command not found " + emojiSad);
     }
 
     /**
      * Prints a error message indicating command failed to execute
      */
     public static void printErrorExecutionFail() {
-        System.out.println("\t Ui: Command could not be executed ");
+        System.out.println("\t Ui: Command could not be executed " + emojiSad);
         System.out.println("\t Try again");
     }
 
@@ -54,14 +98,14 @@ public class Formatter {
      * Prints an error message indicating an unknown error has occured
      */
     public static void printErrorUnknown() {
-        System.out.println("\t Ui: Unexpected error ");
+        System.out.println("\t Ui: Unexpected error " + emojiSad);
     }
 
     /**
      * Prints an error message indicating there is at least one bad argument provided
      */
     public static void printErrorBadTokens() {
-        System.out.println("\t Ui: Bad Token Error, please check your arguments");
+        System.out.println("\t Ui: Bad Token Error, please check your arguments" + emojiSad);
     }
 
     /**

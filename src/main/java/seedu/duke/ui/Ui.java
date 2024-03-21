@@ -13,25 +13,22 @@ import seedu.duke.exception.IllegalCommandException;
 import java.util.Scanner;
 
 public class Ui {
+
+    private static final Scanner IN = new Scanner(System.in);
+    private static boolean isRunning = true;
     private static String userInput;
     private static Parser userCommandReader;
-    private static final Scanner IN = new Scanner(System.in);
+    public static int roundCount = 0;
 
-    public void printGreet(){
-        print("WELCOME BACK");
 
+    /**
+     * Reads user input and stores it
+     */
+    public static void beginListening() {
+        userInput = IN.nextLine();
     }
 
-    public void printBye(){
-        print("See you next time on court.");
-    }
-    private static void print(String thingToPrint){
-        System.out.println("    " + "-----NUSFC24-----");
-        System.out.println("    " + thingToPrint);
-        System.out.println("    " + "-----------------");
-    }
-
-    public void processInput() throws ProcessInputException {
+    public static void processInput() throws ProcessInputException {
         try {
             userCommandReader = new Parser(userInput);
         } catch (IllegalCommandException e) {
@@ -47,7 +44,31 @@ public class Ui {
             throw new ProcessInputException();
         }
     }
-    public void userInputCatcher() {
-        userInput = IN.nextLine();
+
+    /**
+     * Runs command based on parsed input
+     */
+    public static void executeCommand() {
+        CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
+
+        switch (selectedCommand) {
+        case BYE:
+            CommandList.executeBye();
+            break;
+        case SHOOT:
+            CommandList.executeShoot(userCommandReader);
+            roundCount++;
+            break;
+        default:
+            Formatter.printErrorUnknown();
+        }
+    }
+
+    public static void setIsRunning(boolean runState) {
+        isRunning = runState;
+    }
+
+    public static boolean getIsRunning() {
+        return isRunning;
     }
 }
