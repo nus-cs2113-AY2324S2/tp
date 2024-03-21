@@ -14,7 +14,7 @@ public class ProgressManagerTest {
 
         for(int i = 0; i < NUM_OF_RESULTS; i++) {
             results[i].increaseNumberOfQuestions();
-            sessionResults.addResult(results[i]);
+            sessionResults.addResults(results[i]);
         }
     }
 
