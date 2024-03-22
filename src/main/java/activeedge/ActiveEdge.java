@@ -33,4 +33,5 @@ public class ActiveEdge {
     public static void main(String[] args) throws ActiveEdgeException {
         new ActiveEdge().run();
     }
+
 }
