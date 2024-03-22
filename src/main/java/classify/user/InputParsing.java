@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 public class InputParsing {
     private static final String DEFAULT_STRING_VALUE = "Unknown";
-    private static final int UPPER_LIMIT_PHONE_NUMBER = 99999999;
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
