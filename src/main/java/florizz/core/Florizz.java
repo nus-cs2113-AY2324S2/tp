@@ -28,7 +28,7 @@ public class Florizz {
         Ui ui = new Ui();
         ui.printIntroMessage();
         assert !isRunning : "Programme is running";
-        assert tempBouquetList !=null : "tempBouquetList doesn't exist"
+        assert tempBouquetList !=null : "tempBouquetList doesn't exist";
 
         // Set up logger
         LogManager.getLogManager().reset();
