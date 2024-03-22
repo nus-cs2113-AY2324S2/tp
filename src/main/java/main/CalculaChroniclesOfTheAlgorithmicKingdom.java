@@ -35,7 +35,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
         ui.printPlayerStatus(playerStatus);
         ui.printMap(map);
-        System.out.println("Type 'h' to get the help menu.");
+        ui.printTextBox(textBox);
 
         Command userCommand;
         while (true) {
@@ -45,7 +45,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             setUserCommand(userCommand, map, playerStatus, textBox);
 
             if (!(map instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
-                System.out.println("Invalid Command");
+                textBox.setNextError("Invalid Command");
             } else if (userCommand.getCommandDescription().equals("FIGHT!")){
                 userCommand.execute(in);
             } else {
@@ -57,6 +57,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
                 ui.printMap(map);
+                ui.printTextBox(textBox);
             }
 
         }
