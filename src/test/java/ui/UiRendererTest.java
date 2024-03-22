@@ -10,7 +10,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ui.UiRenderer.printTaskForDay;
 
 public class UiRendererTest {

@@ -39,15 +39,4 @@ public class Deadline extends Task {
         return name + " (by: " + byDate + ")";
     }
 
-    /**
-     * Returns the String save format used to save Hachi task data.
-     * Override function of superclass Task.
-     *
-     * @return The required save format including the task type, status icon, name and by date.
-     */
-
-    @Override
-    public String getSaveFormat () {
-        return getTaskType() + " | " + getStatusIcon() + " | " + this.name + " | " + byDate;
-    }
 }

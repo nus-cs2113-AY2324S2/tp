@@ -25,16 +25,4 @@ public class Todo extends Task {
     public String getTaskType () {
         return "T";
     }
-
-    /**
-     * Returns the String save format used to save Hachi task data.
-     * Override function of superclass Task.
-     *
-     * @return The required save format including the task type, status icon and name.
-     */
-
-    @Override
-    public String getSaveFormat () {
-        return getTaskType() + " | " + getStatusIcon() + " | " + getName();
-    }
 }
