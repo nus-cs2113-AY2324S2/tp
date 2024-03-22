@@ -43,13 +43,13 @@ public class WaterTask extends Task {
      * @param tasksList The list of tasks to calculate total water intake from.
      * @return The total water intake from the specified list of tasks.
      */
-    public static int getTotalWaterIntake(ArrayList<Task> tasksList) {
-        int totalWaterIntake = 0;
-        for (Task task : tasksList) {
-            if (task instanceof WaterTask) {
-                totalWaterIntake += ((WaterTask) task).getQuantity();
-            }
-        }
-        return totalWaterIntake;
-    }
+//    public static int getTotalWaterIntake(ArrayList<Task> tasksList) {
+//        int totalWaterIntake = 0;
+//        for (Task task : tasksList) {
+//            if (task instanceof WaterTask) {
+//                totalWaterIntake += ((WaterTask) task).getQuantity();
+//            }
+//        }
+//        return totalWaterIntake;
+//    }
 }

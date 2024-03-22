@@ -97,8 +97,14 @@ public class Parser {
                     System.out.println("Invalid goal amount. " +
                             "Please provide a valid integer.");
                 }
+
             } else if(input.startsWith("find")) {
                 new FindCommand(input);
+
+            } else if(input.startsWith("delete")){
+                DeleteTaskCommand deleteCommand = new DeleteTaskCommand(input);
+                deleteCommand.execute();
+
             }else {
                 System.out.println("Unknown command.");
             }
