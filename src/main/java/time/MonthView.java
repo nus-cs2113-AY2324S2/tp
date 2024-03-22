@@ -89,6 +89,6 @@ public class MonthView extends View {
     }
 
     public LocalDate getStartOfMonth() {
-        return startOfView;
+        return startOfView.withDayOfMonth(1);
     }
 }
