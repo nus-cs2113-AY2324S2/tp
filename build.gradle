@@ -33,7 +33,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("PlaNUS")
     archiveClassifier.set("")
 }
 
@@ -44,4 +44,12 @@ checkstyle {
 run {
     enableAssertions = true
     standardInput = System.in
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "data"
+        }
+    }
 }
