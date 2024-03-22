@@ -1,5 +1,6 @@
 package classify.user;
 
+import classify.datacommands.DataHandler;
 import classify.student.Student;
 import classify.student.StudentAttributes;
 
@@ -33,8 +34,8 @@ public class InputParsing {
     private static final String VIEW_SUBJECT = "view_subject";
     private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
             "No students in the list, can't sort by name!";
-    private static final String STUDENTS_WITH_THE_SUBJECT = "Students with the subject \"";
-    private static final String NO_STUDENTS_FOUND_WITH_THE_SUBJECT = "No students found with the subject: ";
+    //private static final String STUDENTS_WITH_THE_SUBJECT = "Students with the subject \"";
+    //private static final String NO_STUDENTS_FOUND_WITH_THE_SUBJECT = "No students found with the subject: ";
     private static final String ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK =
             "Enter the subject name (type 'exit' to go back):";
     private static final String EXIT = "exit";
@@ -51,6 +52,9 @@ public class InputParsing {
         switch (userCommand[0]) {
         case ADD:
             addStudent(masterStudentList, in, userCommand[1]);
+            // @@author ParthGandhiNUS
+            DataHandler.writeStudentInfo(masterStudentList);
+            // @@author tayponghee
             break;
 
         case VIEW:
@@ -61,6 +65,9 @@ public class InputParsing {
         //@@author alalal47
         case DELETE:
             deleteStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
+            // @@author ParthGandhiNUS
+            DataHandler.writeStudentInfo(masterStudentList);
+            //@@author alalal47
             break;
 
         case RESTORE:
@@ -79,6 +86,7 @@ public class InputParsing {
         // @@author ParthGandhiNUS
         case BYE:
             Ui.printEndConversation();
+            DataHandler.writeStudentInfo(masterStudentList);
             break;
 
         case EDIT:
@@ -718,7 +726,7 @@ public class InputParsing {
      * @param name              The name of the student to search for.
      * @return The student object if found, null otherwise.
      */
-    private static Student findStudentByName(ArrayList<Student> masterStudentList, String name) {
+    public static Student findStudentByName(ArrayList<Student> masterStudentList, String name) {
         for (Student student : masterStudentList) {
             if (student.getName().equalsIgnoreCase(name)) {
                 return student;
