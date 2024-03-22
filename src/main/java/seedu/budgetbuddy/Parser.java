@@ -553,7 +553,10 @@ public class Parser {
                 System.out.println("Command Format : rec newlist [listName]");
                 return null;
             }
+        }
 
+        if(commandType.equals("viewlists")) {
+            return new RecurringExpenseCommand("viewlists", expensesList);
         }
 
         return null;

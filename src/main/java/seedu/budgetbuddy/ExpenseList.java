@@ -14,15 +14,9 @@ import java.util.logging.Logger;
 public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
 
-    protected String name;
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories = new ArrayList<>(Arrays.asList("Housing",
             "Groceries", "Utility", "Transport", "Entertainment", "Others"));;
-
-    public ExpenseList(String name, ArrayList<Expense> expenses) {
-        this.name = name;
-        this.expenses = expenses;
-    }
 
     public ExpenseList(ArrayList<Expense> expenses) {
         this.expenses = expenses;
@@ -187,5 +181,9 @@ public class ExpenseList {
         } else {
             System.out.println("Invalid expense index.");
         }
+    }
+
+    public String getName() {
+        return "placeholder";
     }
 }

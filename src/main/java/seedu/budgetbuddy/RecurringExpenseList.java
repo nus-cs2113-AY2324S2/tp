@@ -9,4 +9,9 @@ public class RecurringExpenseList extends ExpenseList{
         this.name = name;
         super.expenses = expenses;
     }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
 }
