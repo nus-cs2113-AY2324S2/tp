@@ -1,5 +1,18 @@
 # User Guide
 
+## Introduction
+BudgetBuddy is a product for users who wish to handle and track any current/future expenses on a singular platform. 
+BudgetBuddy provides a faster and more efficient way to track and calculate expenses and provides the ability 
+to deal with finances on a singular platform with ease as long as you can type fast.
+
+
+## Quick Start
+
+
+1. Ensure that you have Java 11 installed.
+2. Down the latest version of `BudgetBuddy` from [here](https://github.com/AY2324S2-CS2113-T12-3/tp/releases/tag/BudgetBuddy-MVP).
+
+
 ## Features
 1. Menu
 2. Add
