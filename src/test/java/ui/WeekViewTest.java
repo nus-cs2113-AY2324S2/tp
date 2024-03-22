@@ -22,7 +22,7 @@ public class WeekViewTest {
     @BeforeEach
     public void setUp() {
         LocalDate startOfWeek = LocalDate.of(2024, 3, 10); // March 10, 2024
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         weekView = new WeekView(startOfWeek, dateFormatter);
         LocalDate startOfMonth = LocalDate.of(2024, 3, 10); // March 10, 2024
         monthView = new MonthView(startOfWeek, dateFormatter);
