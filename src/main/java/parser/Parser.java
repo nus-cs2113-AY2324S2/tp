@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
-            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
+
 
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
@@ -31,16 +31,21 @@ public class Parser {
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
 
-    public Command parseInput(String userInput) {
-
+    public Command parseInput(String userInput){
+        final CommandType userCommand;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             System.out.println(Messages.INVALID_COMMAND);
             System.out.println(Messages.HELP);
+            return new IncorrectCommand();
         }
-
-        final CommandType userCommand = CommandType.valueOf(matcher.group("commandWord").toUpperCase());
-
+        String commandWord = matcher.group("commandWord").toUpperCase();
+        try {
+            userCommand = CommandType.valueOf(commandWord);
+        } catch (IllegalArgumentException e){
+            System.out.println(Messages.INVALID_COMMAND);
+            return new IncorrectCommand();
+        }
 
         switch (userCommand) {
         case EXIT:
@@ -70,7 +75,7 @@ public class Parser {
             }
         default:
             System.out.println(Messages.INVALID_COMMAND);
-            break;
+            return new IncorrectCommand();
         }
         return new IncorrectCommand();
     }
