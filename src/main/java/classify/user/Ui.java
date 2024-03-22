@@ -42,6 +42,10 @@ public class Ui {
     private static final String SUBJECT_MESSAGE = "Subject: ";
     private static final String STUDENT_GRADES_PROMPT = "Current marks out of 100 (blank to skip) : ";
     private static final String STUDENT_GRADES_MESSAGE = "Current marks out of 100: ";
+    //@@author alalal47
+    private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
+    private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
+    private static final String NO_RECENT_DELETES = "No recent deletes found!";
 
 
     //@@author alalal47
@@ -81,7 +85,6 @@ public class Ui {
     private static void printViewHelpMessage() {
         System.out.println("view                        Views a students details, expects a name" +
                 ", can be used directly with a name e.g. add [name]");
-
     }
 
     private static void printEditHelpMessage() {
@@ -239,4 +242,16 @@ public class Ui {
         System.out.println(NULL_ATTRIBUTE_ERROR);
     }
 
+    //@@author alalal47
+    public static void printDeleteUndone() {
+        System.out.println(DELETE_UNDONE_MESSAGE);
+    }
+
+    public static void printRestoreMessage() {
+        System.out.println(STUDENT_RESTORED_MESSAGE);
+    }
+
+    public static void printNoDeleteFound() {
+        System.out.println(NO_RECENT_DELETES);
+    }
 }
