@@ -5,65 +5,65 @@ import seedu.duke.exception.BadTokenException;
 import seedu.duke.exception.IllegalCommandException;
 
 public class Parser {
-    private String COMMAND_NAME;
+    private String commandName;
     private String[] argumentTokens = {};
 
     public Parser(String userInput) throws IllegalCommandException, ArgumentMismatchException, BadTokenException {
         //default case: User enters a valid command, the command expects no arguments
-        //NAME_ARGSTR_PAIR is either size 1 or 2
-        final String[] NAME_ARGSTR_PAIR = parseIntoNameAndArgumentString(userInput);
-        final String USER_COMMAND_NAME = getUserCommandName(NAME_ARGSTR_PAIR);
-        COMMAND_NAME = USER_COMMAND_NAME.toUpperCase();
-        final String USER_ARGUMENT_STRING;
+        //nameArgstrPair is either size 1 or 2
+        final String[] nameArgstrPair = parseIntoNameAndArgumentString(userInput);
+        final String userCommandName = getUserCommandName(nameArgstrPair);
+        commandName = userCommandName.toUpperCase();
+        final String userArgumentString;
 
-        if (!SyntaxAnalyser.validateUserCommandName(USER_COMMAND_NAME)) {
-            COMMAND_NAME = "NOT_A_COMMAND";
+        if (!SyntaxAnalyser.validateUserCommandName(userCommandName)) {
+            commandName = "NOT_A_COMMAND";
             throw new IllegalCommandException();
-        } else if (hasArgumentString(NAME_ARGSTR_PAIR)) {
-            USER_ARGUMENT_STRING = getUserArgumentString(NAME_ARGSTR_PAIR);
-            final String ARG_SEPARATOR = " /";
-            argumentTokens = parseIntoTokens(USER_ARGUMENT_STRING, ARG_SEPARATOR);
+        } else if (hasArgumentString(nameArgstrPair)) {
+            userArgumentString = getUserArgumentString(nameArgstrPair);
+            final String argSeparator = " /";
+            argumentTokens = parseIntoTokens(userArgumentString, argSeparator);
 
             if (!isCorrectUserArgumentCount()) {
-                throw new ArgumentMismatchException(COMMAND_NAME, argumentTokens.length);
-            } else if (!SyntaxAnalyser.validateTokens(COMMAND_NAME, argumentTokens)) {
+                throw new ArgumentMismatchException(commandName, argumentTokens.length);
+            } else if (!SyntaxAnalyser.validateTokens(commandName, argumentTokens)) {
                 throw new BadTokenException();
             }
         } else if (!isCorrectUserArgumentCount()) {
-            throw new ArgumentMismatchException(COMMAND_NAME, argumentTokens.length);
+            throw new ArgumentMismatchException(commandName, argumentTokens.length);
         }
     }
 
-    private static String getUserArgumentString(String[] NAME_ARGSTR_PAIR) {
-        return NAME_ARGSTR_PAIR[1];
+    private static String getUserArgumentString(String[] nameArgstrPair) {
+        return nameArgstrPair[1];
     }
 
-    private static String getUserCommandName(String[] NAME_ARGSTR_PAIR) {
-        return NAME_ARGSTR_PAIR[0];
+    private static String getUserCommandName(String[] nameArgstrPair) {
+        return nameArgstrPair[0];
     }
 
-    private String[] parseIntoTokens(final String USER_ARGUMENT_STRING, final String separator) {
-        final int EXPECTED_ARGUMENT_COUNT = SyntaxAnalyser.getArgumentCount(COMMAND_NAME);
-        return USER_ARGUMENT_STRING.split(separator, EXPECTED_ARGUMENT_COUNT);
+    private String[] parseIntoTokens(final String userArgumentString, final String separator) {
+        final int expectedArgumentCount = SyntaxAnalyser.getArgumentCount(commandName);
+        return userArgumentString.split(separator, expectedArgumentCount);
     }
 
     private boolean isCorrectUserArgumentCount() {
         int userArgumentCount = argumentTokens.length;
-        int correctArgumentCount = SyntaxAnalyser.getArgumentCount(COMMAND_NAME);
+        int correctArgumentCount = SyntaxAnalyser.getArgumentCount(commandName);
         return correctArgumentCount == userArgumentCount;
     }
 
-    private static boolean hasArgumentString(String[] NAME_ARGSTR_PAIR) {
-        return NAME_ARGSTR_PAIR.length == 2;
+    private boolean hasArgumentString(String[] nameArgstrPair) {
+        return nameArgstrPair.length == 2;
     }
 
     private static String[] parseIntoNameAndArgumentString(String userInput) {
-        final String NAME_ARGSTR_SEPARATOR = " ";
-        return userInput.split(NAME_ARGSTR_SEPARATOR, 2);
+        final String nameArgStrSeparator = " ";
+        return userInput.split(nameArgStrSeparator, 2);
     }
 
     public String getCommandName() {
-        return COMMAND_NAME;
+        return commandName;
     }
 
     public String[] getArgumentTokens() {
