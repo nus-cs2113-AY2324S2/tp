@@ -11,6 +11,7 @@ public class LogWaterCommandTest {
     @Test
     void testValidQuantity() {
         LogWaterCommand logWaterCommand = new LogWaterCommand("500");
+        assertDoesNotThrow(logWaterCommand::execute);
     }
 
     @Test
