@@ -11,46 +11,39 @@ public class SyntaxAnalyser {
     private static final String[][] lutRegexSeq = {
             {},
             {VALID_INDEX_REGEX},
-//            {},
-//            {VALID_INDEX_REGEX},
-//            {VALID_INDEX_REGEX},
-//            {UNRESTRICTED_CHAR_LENGTH_REGEX},
-//            {UNRESTRICTED_CHAR_LENGTH_REGEX, UNRESTRICTED_CHAR_LENGTH_REGEX},
-//            {UNRESTRICTED_CHAR_LENGTH_REGEX, UNRESTRICTED_CHAR_LENGTH_REGEX, UNRESTRICTED_CHAR_LENGTH_REGEX},
-//            {VALID_INDEX_REGEX},
-//            {UNRESTRICTED_CHAR_LENGTH_REGEX},
+            {}
             //insert new command syntax here
     };
 
     /**
      * Returns the argument count for a given command
      *
-     * @param COMMAND_NAME the command name of given command
+     * @param commandName the command name of given command
      * @return The number of arguments for the command
      */
-    public static int getArgumentCount(String COMMAND_NAME) {
-        return getRegexSeq(COMMAND_NAME).length;
+    public static int getArgumentCount(String commandName) {
+        return getRegexSeq(commandName).length;
     }
 
     /**
      * Returns the list of regex expressions for a given command
      *
-     * @param COMMAND_NAME the command name of given command
+     * @param commandName the command name of given command
      * @return An array of regex strings used to match each parameter of a given input
      */
-    public static String[] getRegexSeq(String COMMAND_NAME) {
-        return lutRegexSeq[CommandList.valueOf(COMMAND_NAME).ordinal()];
+    public static String[] getRegexSeq(String commandName) {
+        return lutRegexSeq[CommandList.valueOf(commandName).ordinal()];
     }
 
     /**
      * Returns true if the user entered command is valid, false otherwise
      *
-     * @param USER_COMMAND_NAME the command name of user entered command
+     * @param userCommandName the command name of user entered command
      * @return True if user enters valid command
      */
-    public static boolean validateUserCommandName(String USER_COMMAND_NAME) {
+    public static boolean validateUserCommandName(String userCommandName) {
         for (CommandList c : CommandList.values()) {
-            if (c.name().toLowerCase().equals(USER_COMMAND_NAME)) {
+            if (c.name().toLowerCase().equals(userCommandName)) {
                 return true;
             }
         }
@@ -60,17 +53,17 @@ public class SyntaxAnalyser {
     /**
      * Returns true if argument type of all arguments are correct, false otherwise
      *
-     * @param COMMAND_NAME   the command name of given command
+     * @param commandName   the command name of given command
      * @param argumentTokens the list of arguments parsed from user input
      * @return True if all argument types are correct
      */
-    public static boolean validateTokens(String COMMAND_NAME, String[] argumentTokens) {
-        String[] cmdNameRegexSeq = getRegexSeq(COMMAND_NAME);
-        for (int i = 0; i < getArgumentCount(COMMAND_NAME); i++) {
+    public static boolean validateTokens(String commandName, String[] argumentTokens) {
+        String[] cmdNameRegexSeq = getRegexSeq(commandName);
+        for (int i = 0; i < getArgumentCount(commandName); i++) {
             Pattern pattern = Pattern.compile(cmdNameRegexSeq[i]);
             Matcher matcher = pattern.matcher(argumentTokens[i]);
             if (!matcher.find()) {
-                Formatter.printErrorWrongArgumentType(COMMAND_NAME, cmdNameRegexSeq[i], i);
+                Formatter.printErrorWrongArgumentType(commandName, cmdNameRegexSeq[i], i);
                 return false;
             }
         }
