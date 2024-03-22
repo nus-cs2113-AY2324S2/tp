@@ -16,7 +16,11 @@ import java.util.Scanner;
 import static data.TaskManagerException.checkIfDateHasTasks;
 import static data.TaskManagerException.checkIfDateInCurrentWeek;
 import static data.TaskManagerException.checkIfDateInCurrentMonth;
+import static data.TaskType.DEADLINE;
+import static data.TaskType.TODO;
+import static data.TaskType.EVENT;
 import static storage.Storage.saveTasksToFile;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,22 +29,48 @@ import java.util.logging.Logger;
  * Manages tasks by providing functionalities to add, delete, and update tasks.
  */
 public class TaskManager {
-    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private static final Map<LocalDate, List<Task>> tasks = new HashMap<>();
 
     /**
      * Adds a task for a specific date.
+     *
      * @param date The date for the task.
      * @param taskDescription The description of the task.
+     * @param taskType The TaskType of the task to be added.
+     * @param dates A String array that contains the relevant dates for the task to be added.
      */
-    public static void addTask(LocalDate date, String taskDescription) {
-        Task task = new Task(taskDescription);
-        tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
+    public static void addTask(LocalDate date, String taskDescription, TaskType taskType, String[] dates)
+            throws TaskManagerException {
+        Task taskToAdd;
+
+        switch (taskType) {
+        case TODO:
+            taskToAdd = new Todo(taskDescription);
+            break;
+
+        case EVENT:
+            String startDate = dates[0];
+            String endDate = dates[1];
+            taskToAdd = new Event(taskDescription, startDate, endDate);
+            break;
+
+        case DEADLINE:
+            String deadline = dates[0];
+            taskToAdd = new Deadline(taskDescription, deadline);
+            break;
+
+        default:
+            throw new TaskManagerException("Invalid task type given. T for Todo, E for event, D for deadline.");
+        }
+
+        tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(taskToAdd);
     }
 
     /**
      * Deletes a task for a specific date and task index.
+     *
      * @param date The date of the task.
      * @param taskIndex The index of the task to delete.
      */
@@ -56,6 +86,7 @@ public class TaskManager {
 
     /**
      * Updates a task for a specific date and task index.
+     *
      * @param date The date of the task.
      * @param taskIndex The index of the task to update.
      * @param newTaskDescription The updated description of the task.
@@ -75,7 +106,8 @@ public class TaskManager {
             Task task = new Task(newTaskDescription);
             dayTasks.set(taskIndex, task);
 
-            logger.log(Level.INFO, "Updating task description from " + oldDescription + " to: " + newTaskDescription);
+            logger.log(Level.INFO, "Updating task description from " +
+                    oldDescription + " to: " + newTaskDescription);
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException(e);
         }
@@ -83,6 +115,7 @@ public class TaskManager {
 
     /**
      * Retrieves tasks for a specific date.
+     *
      * @param date The date to retrieve tasks for.
      * @return A list of tasks for the given date.
      */
@@ -97,6 +130,7 @@ public class TaskManager {
      * @param weekView WeekView object to validate the date.
      * @param inMonthView A boolean indicating whether the view is in month view or not.
      * @throws TaskManagerException If there is an error in managing tasks.
+     * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static void addManager(Scanner scanner, WeekView weekView, boolean inMonthView)
             throws TaskManagerException, DateTimeParseException {
@@ -109,22 +143,76 @@ public class TaskManager {
             checkIfDateInCurrentWeek(date, weekView);
         }
 
+        // vvv Below methods should be recreated when console inputs are streamlined
+        System.out.println("Enter the type of task (T for Todo, E for event, D for deadline):");
+        TaskType taskType = parseTaskType(scanner.nextLine().trim().toUpperCase());
+        // ^^^ Above methods should be recreated  when console inputs are streamlined
+
         System.out.println("Enter the task description:");
         String taskDescription = scanner.nextLine().trim();
 
-        addTask(date, taskDescription);
+        // vvv Below methods should be recreated when console inputs are streamlined
+        if (taskType == DEADLINE) {
+            System.out.println("Enter the deadline of this task:");
+            String[] deadline = new String[]{scanner.nextLine().trim()};
+
+            addTask(date, taskDescription, taskType, deadline);
+        } else if (taskType == EVENT) {
+            System.out.println("Enter the start date of this task:");
+            String startDate = scanner.nextLine().trim();
+            System.out.println("Enter the end date of this task:");
+            String endDate = scanner.nextLine().trim();
+            String [] startAndEndDates = new String[]{startDate, endDate};
+
+            addTask(date, taskDescription, taskType, startAndEndDates);
+        } else {
+            String[] dummyDates = {null}; // dummy String array to pass into function call
+            addTask(date, taskDescription, taskType, dummyDates);
+        }
+        // ^^^ Above methods should be recreated  when console inputs are streamlined
+
         saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
         System.out.println("Task added.");
     }
 
     /**
-     * Prompts user for updated task description
+     * Method that parses the TaskType to be specified based on the user's input.
      *
-     * @param scanner User input
-     * @param weekView Current week being viewed
-     * @param inMonthView Whether month is being viewed
-     * @param taskManager The taskManager class being used
-     * @throws TaskManagerException Throws exception when not in correct week/month view
+     * @param userInput The String containing the user's cleaned input.
+     * @return TaskType of the user's choosing.
+     */
+    public static TaskType parseTaskType(String userInput) {
+        TaskType currentTaskType;
+        switch (userInput) {
+        case "T":
+            currentTaskType = TODO;
+            break;
+
+        case "D":
+            currentTaskType = DEADLINE;
+            break;
+
+        case "E":
+            currentTaskType = EVENT;
+            break;
+
+        default:
+            currentTaskType = null;
+            // intentional fallthrough since addTask method checks for invalid taskType already
+        }
+
+        return currentTaskType;
+    }
+
+    /**
+     * Prompts user for updated task description.
+     *
+     * @param scanner User input.
+     * @param weekView Current week being viewed.
+     * @param inMonthView Whether month is being viewed.
+     * @param taskManager The taskManager class being used.
+     * @throws TaskManagerException If not in correct week/month view.
+     * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
             throws TaskManagerException, DateTimeParseException {
@@ -163,26 +251,53 @@ public class TaskManager {
 
     /**
      * Adds tasks from a file to the TaskManager.
+     *
      * @param tasksFromFile A map containing tasks read from a file.
+     * @throws TaskManagerException If there is an error adding tasks.
      */
-    public void addTasksFromFile(Map<LocalDate, List<Task>> tasksFromFile) {
+    public void addTasksFromFile(Map<LocalDate, List<Task>> tasksFromFile) throws TaskManagerException {
         for (Map.Entry<LocalDate, List<Task>> entry : tasksFromFile.entrySet()) {
             LocalDate date = entry.getKey();
             List<Task> taskList = entry.getValue();
+
             for (Task task : taskList) {
                 String taskDescription = task.getName();
-                addTask(date, taskDescription);
+                TaskType taskType = parseTaskType(task.getTaskType());
+                String[] dates = new String[]{null, null};
+
+                switch (taskType) {
+                case TODO:
+                    dates[0] = taskDescription;
+                    break;
+
+                case EVENT:
+                    String startDate = task.getStartDate();
+                    String endDate = task.getEndDate();
+                    dates[0] = startDate;
+                    dates[1] = endDate;
+                    break;
+
+                case DEADLINE:
+                    String deadline = task.getByDate();
+                    dates[0] = deadline;
+                    break;
+
+                default:
+                    logger.log(Level.INFO, "Task to add was invalid. Task in question: " + taskDescription);
+                }
+
+                addTask(date, taskDescription, taskType, dates);
             }
         }
     }
 
     /**
-     * Lists task of the input date
+     * Lists task of the input date.
      *
-     * @param taskManager Hashmap of tasks
-     * @param date Date that's prompted by user
-     * @param message Message to be prompted to the user
-     * @throws TaskManagerException Throws exception when not in correct week/month view
+     * @param taskManager Hashmap of tasks.
+     * @param date Date that's prompted by user.
+     * @param message Message to be prompted to the user.
+     * @throws TaskManagerException If not in correct week/month view.
      */
     private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message)
             throws TaskManagerException {
@@ -196,13 +311,14 @@ public class TaskManager {
     }
 
     /**
-     * Prompts user for task description and deletes task from hashmap and tasks.txt file
+     * Prompts user for task description and deletes task from hashmap and tasks.txt file.
      *
-     * @param scanner User input
-     * @param weekView Current week being viewed
-     * @param inMonthView Whether month is being viewed
-     * @param taskManager The taskManager class being used
-     * @throws TaskManagerException Throws exception when not in correct week/month view
+     * @param scanner User input.
+     * @param weekView Current week being viewed.
+     * @param inMonthView Whether month is being viewed.
+     * @param taskManager The taskManager class being used.
+     * @throws TaskManagerException If not in correct week/month view
+     * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static void deleteManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager)
             throws DateTimeParseException, TaskManagerException {
@@ -251,11 +367,11 @@ public class TaskManager {
     // to abstract as Parser/UI function
 
     /**
-     * Parses user input into date time format
+     * Parses user input into date time format.
      *
-     * @param scanner User Input
-     * @return Formatted date time from user input
-     * @throws DateTimeParseException Throws exception is user input is not in correct format
+     * @param scanner User Input.
+     * @return Formatted date time from user input.
+     * @throws DateTimeParseException If user input is not in correct format.
      */
     private static LocalDate parseInputDate(Scanner scanner) throws DateTimeParseException {
         String dateString = scanner.nextLine().trim();
