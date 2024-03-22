@@ -2,6 +2,8 @@ package Math;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class MathPool {
     private ArrayList<MathQuestion> poolOfQuestions;
@@ -18,7 +20,7 @@ public class MathPool {
         poolOfQuestions.add(problem);
     }
 
-    public MathQuestion getQuestionByDifficulty(int targetDifficulty) {
+    /*public MathQuestion getQuestionByDifficulty(int targetDifficulty) {
         ArrayList<MathQuestion> filteredQuestions = new ArrayList<>();
         for (MathQuestion question : poolOfQuestions) {
             if (question.getDifficulty() == targetDifficulty) {
@@ -31,7 +33,27 @@ public class MathPool {
         } else {
             return null;
         }
+    }*/
+
+    public MathQuestion getQuestionByDifficulty(int targetDifficulty) {
+        ArrayList<MathQuestion> filteredQuestions = new ArrayList<>();
+        for (MathQuestion question : poolOfQuestions) {
+            if (question.getDifficulty() == targetDifficulty) {
+                filteredQuestions.add(question);
+            }
+        }
+        if (!filteredQuestions.isEmpty()) {
+            // Shuffle the list of questions
+            Collections.shuffle(filteredQuestions);
+            // Iterate through shuffled questions
+            for (MathQuestion question : filteredQuestions) {
+                // Return the first question found (after shuffling)
+                return question;
+            }
+        }
+        return null; // Return null if no questions of the specified difficulty are found
     }
+
 
     public void init() {
         // Difficulty 0

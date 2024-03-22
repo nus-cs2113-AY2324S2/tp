@@ -42,8 +42,11 @@ public class BattleInterface extends AMap {
             ui.printQuestion(mathQuestion);
             int answer = Integer.parseInt(in.nextLine().trim());
             if (mathQuestion.checkAns(answer)) {
+                System.out.println("CORRECT!!!");
+
                 playerHitEnemy();
             } else {
+                System.out.println("WRONG ANSWER!!!");
                 enemyHitPlayer();
             }
         }
