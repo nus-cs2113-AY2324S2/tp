@@ -42,7 +42,7 @@ public class DailyMedicationManager {
         dailyMedications = new ArrayList<>();
         ui = new Ui();
         try {
-            for(String line : lines) {
+            for (String line : lines) {
                 DailyMedication dailyMedication = parseImportedLine(line);
                 addDailyMedication(dailyMedication);
             }
