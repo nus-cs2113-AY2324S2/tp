@@ -46,10 +46,12 @@ public class BattleInterface extends AMap {
             ui.printMap(currentMap);
             MathQuestion mathQuestion = mathPool.getQuestionByDifficulty(0);
             ui.printQuestion(mathQuestion);
-            String answerCommand = "";
+            String answerCommand = in.nextLine().trim();
             while (!pattern.matcher(answerCommand).matches()) {
-            answerCommand = in.nextLine().trim();
-            new ErrorCommand(new NumberFormatException("Answer must be an integer.")).execute();
+                currentTextBox.setNextError("Answer must be an integer.");
+                currentTextBox.setNextInstruction(mathQuestion.getQuestion());
+                ui.printTextBox(currentTextBox);
+                answerCommand = in.nextLine().trim();
             }
             answer = Integer.parseInt(answerCommand);
             if (mathQuestion.checkAns(answer)) {
