@@ -18,6 +18,7 @@ public class MonthView extends View {
 
     @Override
     public void printView(TaskManager taskManager) {
+        assert startOfView != null : "Start of Month missing!";
         YearMonth yearMonth = YearMonth.from(startOfView);
         LocalDate firstOfMonth = startOfView.withDayOfMonth(1);
         LocalDate current = firstOfMonth.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.SUNDAY));
@@ -80,4 +81,6 @@ public class MonthView extends View {
     public void previous() {
         startOfView = startOfView.minusMonths(1);
     }
+
+
 }

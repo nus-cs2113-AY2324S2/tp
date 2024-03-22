@@ -16,6 +16,7 @@ public class WeekView extends View {
 
     @Override
     public void printView(TaskManager taskManager) {
+        assert startOfView != null : "Start of Weekday missing!";
         LocalDate endOfWeek = startOfView.plusDays(6);
         System.out.println("\nWeek View: " + dateFormatter.format(startOfView) +
                 " - " + dateFormatter.format(endOfWeek));
@@ -34,7 +35,7 @@ public class WeekView extends View {
     public void previous() {
         startOfView = startOfView.minusWeeks(1);
     }
-    
+
     public LocalDate getStartOfWeek() {
         return startOfView;
     }
