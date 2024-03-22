@@ -11,12 +11,14 @@ public abstract class AMap {
     protected int playerX;
     protected int playerY;
     protected String mapName;
-    public AMap(){
+
+    public AMap() {
 
     }
 
     public abstract void fightLoop();
-    public void fightLoop(Scanner in){
+
+    public void fightLoop(Scanner in) {
 
     }
 
@@ -118,6 +120,46 @@ public abstract class AMap {
         return "no interaction";
     }
 
+    public int getInteractX() {
+        if (playerY > 0 && currentMap.get(playerY - 1).get(playerX) != '.') {
+            return playerX;
+        }
+        if (playerX < currentMap.get(0).size() - 1 && currentMap.get(playerY).get(playerX + 1) != '.') {
+            return playerX + 1;
+        }
+        if (playerY < currentMap.size() - 1 && currentMap.get(playerY + 1).get(playerX) != '.') {
+            return playerX;
+        }
+        if (playerX > 0 && currentMap.get(playerY).get(playerX - 1) != '.') {
+            return playerX - 1;
+        }
+        return -1;
+    }
+
+    public int getInteractY() {
+        if (playerY > 0 && currentMap.get(playerY - 1).get(playerX) != '.') {
+            return playerY - 1;
+        }
+        if (playerX < currentMap.get(0).size() - 1 && currentMap.get(playerY).get(playerX + 1) != '.') {
+            return playerY;
+        }
+        if (playerY < currentMap.size() - 1 && currentMap.get(playerY + 1).get(playerX) != '.') {
+            return playerY + 1;
+        }
+        if (playerX > 0 && currentMap.get(playerY).get(playerX - 1) != '.') {
+            return playerY;
+        }
+        return -1;
+    }
+
+    public void clearSpot(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            currentMap.get(y).set(x, '.');
+        }
+    }
+
+    public abstract boolean getEntityDeath();
+
     public void placeMonsterInTheMap(int x, int y) {
         currentMap.get(y).set(x, '@');
     }
@@ -129,6 +171,4 @@ public abstract class AMap {
     public int getPlayerY() {
         return playerY;
     }
-
-
 }

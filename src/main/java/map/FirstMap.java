@@ -7,4 +7,7 @@ public class FirstMap extends AMap{
     public void fightLoop() {
         System.out.println("lol");
     }
+    public boolean getEntityDeath(){
+        return false;
+    }
 }
