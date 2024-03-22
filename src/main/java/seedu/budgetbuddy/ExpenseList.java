@@ -13,18 +13,23 @@ import java.util.logging.Logger;
 
 public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
+
+    protected String name;
     protected ArrayList <Expense> expenses;
-    protected ArrayList<String> categories;
+    protected ArrayList<String> categories = new ArrayList<>(Arrays.asList("Housing",
+            "Groceries", "Utility", "Transport", "Entertainment", "Others"));;
+
+    public ExpenseList(String name, ArrayList<Expense> expenses) {
+        this.name = name;
+        this.expenses = expenses;
+    }
+
     public ExpenseList(ArrayList<Expense> expenses) {
         this.expenses = expenses;
-        this.categories = new ArrayList<>(Arrays.asList("Housing",
-                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Housing",
-                "Groceries", "Utility", "Transport", "Entertainment", "Others"));
     }
 
     public int size() {
@@ -105,6 +110,7 @@ public class ExpenseList {
         return totalExpenses;
     }
 
+    //@@author Zhang Yangda
     public void addExpense(String category, String amount, String description) throws BudgetBuddyException {
         assert category != null : "Category should not be null";
         assert amount != null : "Amount should not be null";
