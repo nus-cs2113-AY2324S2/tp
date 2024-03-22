@@ -30,6 +30,8 @@ public class Ui {
         System.out.println(
             "To take a look at potential restaurants or activities, simply send me the following: \n" +
             "'list'\n\n" +
+            "To let me know more about yourself, simply send me the following: \n" +
+            "'me'\n\n" +
             "To generate a randomised date idea, simply send me the following: \n" +
             "'idea'\n\n" +
             "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
@@ -106,5 +108,9 @@ public class Ui {
         System.out.println("1. List out delicious dining options (type 'food')");
         System.out.println("2. Discover exciting activities to do together (type 'activities')");
         System.out.println("What's your pleasure?");
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 }

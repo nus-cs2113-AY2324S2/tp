@@ -11,6 +11,8 @@ import java.io.InputStream;
 public class Storage {
     private String filePath;
 
+    private static final String USER_DETAILS_FILE = "./data/UserDetails.txt";
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -55,6 +57,41 @@ public class Storage {
             System.out.println("OOPS! An error occurred while saving tasks.");
             e.printStackTrace();
         }
+    }
+
+    public void saveUserDetails(UserDetails userDetails) {
+        try {
+            File file = new File(USER_DETAILS_FILE);
+            File parentDir = file.getParentFile();
+            if (!parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+            FileWriter writer = new FileWriter(file);
+            writer.write(userDetails.toFileFormat());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("OOPS! An error occurred while saving user details.");
+            e.printStackTrace();
+        }
+    }
+
+    public UserDetails loadUserDetails() {
+        try {
+            File file = new File(USER_DETAILS_FILE);
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                if (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] details = line.split("|");
+                    scanner.close();
+                    return new UserDetails(details[0], details[1], details[2],details[3]);
+                }
+                scanner.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("OOPS! No saved user details found.");
+        }
+        return null;
     }
 
     public ArrayList<Food> loadFood() throws FileNotFoundException {

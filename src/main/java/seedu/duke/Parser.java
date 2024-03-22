@@ -57,6 +57,8 @@ public class Parser {
             return new ExitCommand();
         case "help":
             return new HelpCommand();
+        case "me":
+            return new UserDetailsCommand(); 
         case "list":
             Ui.listCommand();
             Scanner scanner = new Scanner(System.in);
