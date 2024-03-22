@@ -47,7 +47,7 @@ public class WeekViewTest {
 
     @Test
     public void testNextMonth() {
-        LocalDate initialStartOfWeek = weekView.getStartOfWeek();
+        LocalDate initialStartOfWeek = monthView.getStartOfMonth();
         monthView.next();
         LocalDate newStartOfWeek = initialStartOfWeek.plusMonths(1).withDayOfMonth(1);
         assertEquals(newStartOfWeek, monthView.getStartOfMonth());
@@ -55,7 +55,7 @@ public class WeekViewTest {
 
     @Test
     public void testPreviousMonth() {
-        LocalDate initialStartOfWeek = weekView.getStartOfWeek();
+        LocalDate initialStartOfWeek = monthView.getStartOfMonth();
         monthView.previous();
         LocalDate newStartOfWeek = initialStartOfWeek.minusMonths(1).withDayOfMonth(1);
         assertEquals(newStartOfWeek, monthView.getStartOfMonth());
