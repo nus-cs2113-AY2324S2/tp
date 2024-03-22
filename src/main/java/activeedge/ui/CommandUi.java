@@ -2,10 +2,14 @@ package activeedge.ui;
 
 import static activeedge.task.TaskList.tasksList;
 
+import activeedge.task.Task;
 import activeedge.task.WaterTask;
 import activeedge.task.LogMeals;
 
 public class CommandUi {
+
+    final static String LINE = "____________________________________________________________\n";
+
 
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
@@ -36,11 +40,12 @@ public class CommandUi {
         int k = 1;
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).toString().startsWith("Water")) {
-                System.out.print(j + ". " + tasksList.get(i).toString().substring(6));
+                System.out.print(k + ". " + tasksList.get(i).toString().substring(6));
                 System.out.println(" ml");
                 k++;
             }
         }
+
     }
 
     public static void printMealLogMessage(LogMeals logMeals) {
@@ -77,5 +82,53 @@ public class CommandUi {
         System.out.println("Total water consumed today: " + totalWaterIntake +
                 " ml (" + String.format("%.0f%%", percentage) + " of " + waterGoal + "ml goal).");
     }
+
+
+    public static void printMatchingTasks(String word) {
+        System.out.println(LINE + " Here are the matching tasks in your list:");
+        int matchingTasksIndex = 1;
+        boolean found = false;
+
+        // Search in the food section
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).toString().startsWith("Meal") && tasksList.get(i).toString().contains(word)) {
+                System.out.print(matchingTasksIndex + ". ");
+                System.out.println(tasksList.get(i).toString().substring(5) + " kcal");
+                matchingTasksIndex++;
+                found = true; // Indicate that a match was found
+            }
+        }
+
+        // Search in the water section
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).toString().startsWith("Water") && tasksList.get(i).toString().contains(word)) {
+                System.out.print(matchingTasksIndex + ". ");
+                System.out.println(tasksList.get(i).toString().substring(6) + " ml");
+                matchingTasksIndex++;
+                found = true; // Indicate that a match was found
+            }
+        }
+
+        // If no matching tasks were found, print a message
+        if (!found) {
+            System.out.println("No matching tasks found.");
+        }
+
+        System.out.println(LINE);
+    }
+
+    public static void printInvalidDeleteFormatMessage() {
+        System.out.println("This is an invalid request. Please try again!");
+    }
+
+    public static void printTaskDeletedMessage(Task deletedTask) {
+        System.out.println("Task deleted: " + deletedTask.getDescription());
+    }
+
+    public static void printTaskNotFoundMessage() {
+        System.out.println("Task not found.");
+    }
+
+
 }
 
