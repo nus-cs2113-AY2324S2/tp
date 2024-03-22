@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 /**
@@ -47,8 +49,18 @@ public class Storage {
         Path filePath = Paths.get(filePathName);
 
         if (!Files.exists(filePath)) {
-            System.out.println("File at " + filePathName + " is not found. Trying to create one.");
-            createFile(filePathName);
+            if (timetableName == "myTimetable") {
+                System.out.println("File at " + filePathName + " is not found. Trying to create one.");
+                createFile(filePathName);
+            } else {
+                InputStream in = Thread.currentThread().getContextClassLoader()
+                        .getResourceAsStream(timetableName + ".csv");
+                try {
+                    Files.copy(in, filePath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
 
         File f = new File(filePathName);
