@@ -2,6 +2,7 @@ package command;
 
 import item.Item;
 import itemlist.Itemlist;
+import storage.Storage;
 
 public class DeleteCommand extends Command {
 
@@ -24,5 +25,6 @@ public class DeleteCommand extends Command {
         } else {
             Itemlist.deleteItem(index);
         }
+        Storage.overwriteFile(Itemlist.getItems(), false);
     }
 }

@@ -1,7 +1,10 @@
 package storage;
 
+import item.Item;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +16,7 @@ import java.io.IOException;
  */
 public class Storage {
     private static final String FILENAME = "./StockMasterData.txt";
-  
+
     private static File stockMaster;
 
 
@@ -34,7 +37,7 @@ public class Storage {
 
     public static void updateFile(String inputText, boolean ifAppend) {
         try {
-            writeToFile(FILENAME, inputText, ifAppend);
+            writeToFile(getFileDirectory(), inputText, ifAppend);
         } catch (IOException e) {
             System.out.println("IOExceptions occurred");
         }
@@ -70,6 +73,28 @@ public class Storage {
         }
     }
 
+    public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
+        assert items != null : "Items cannot be null.";
+        Item lastItem = items.get(items.size() - 1);
+        String descriptionAdded = (items.size() - 1) + " | " + lastItem.getItemName() +
+                " | " + lastItem.getQuantity() + "\n";
+        updateFile(descriptionAdded, ifAppend);
+    }
+
+    public static void overwriteFile(ArrayList<Item> items, boolean ifAppend) {
+        assert items != null : "Items cannot be null.";
+        int length = items.size();
+        for (int index = 0; index < length; index++) {
+            String descriptionAdded = index + " | " + items.get(index).getItemName() +
+                    " | " + items.get(index).getQuantity() + "\n";
+            if (index == 0) {
+                updateFile(descriptionAdded, ifAppend);
+            } else {
+                updateFile(descriptionAdded, !ifAppend);
+            }
+        }
+    }
+
     public static void main (String[]args){
         stockMaster = setFile();
         try {
@@ -79,4 +104,3 @@ public class Storage {
         }
     }
 }
-
