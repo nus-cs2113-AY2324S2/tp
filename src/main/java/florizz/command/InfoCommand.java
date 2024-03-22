@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InfoCommand extends Command{
-    private static final Logger logger = Logger.getLogger("InfoLog");
+    private static final Logger logger = Logger.getLogger(InfoCommand.class.getName());
     private ConsoleHandler ch = new ConsoleHandler();
     private String flowerName;
 
