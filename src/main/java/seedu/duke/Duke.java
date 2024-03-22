@@ -7,8 +7,6 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    private static final HashMap<String, Group> groups = new HashMap<>();
-
     public static void main(String[] args) {
         String logo =
                 ".------..------..------..------..------..------..------..------..------..------.\n" +
