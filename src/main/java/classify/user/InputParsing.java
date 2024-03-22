@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
-    private static final int UPPER_LIMIT_PHONE_NUMBER = 10;
+    private static final int UPPER_LIMIT_PHONE_NUMBER = 99999999;
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
@@ -156,7 +156,7 @@ public class InputParsing {
             switch (command) {
 
             case ADD:
-                addAttribute(in, attributes);
+                addSubject(in, attributes);
                 student.setAttributes(attributes);
                 break;
 
@@ -300,7 +300,7 @@ public class InputParsing {
         }
 
         Student student = new Student(name);
-        addAttribute(in, student.getAttributes());
+        addSubject(in, student.getAttributes());
 
         // @@author Cryolian
         int number = promptForPhoneNumber(in);
@@ -308,7 +308,11 @@ public class InputParsing {
         while (number < 0) {
             number = promptForPhoneNumber(in);
         }
+        
+        //@@author ParthGandhiNUS
+        assert number > 0 && number <= UPPER_LIMIT_PHONE_NUMBER: "Number is outside the acceptable range.";
 
+        //@@author Cryolian
         student.getAttributes().setPhoneNumber(number);
 
         System.out.println("Please input the student's gender: ");
@@ -443,7 +447,7 @@ public class InputParsing {
      * @param attributes The StudentAttributes object to store the attributes of the
      *                   student.
      */
-    private static void addAttribute(Scanner in, StudentAttributes attributes) {
+    private static void addSubject(Scanner in, StudentAttributes attributes) {
         while (true) {
             // @@author blackmirag3
             System.out.print("Subject (enter nothing to skip): ");
@@ -625,24 +629,32 @@ public class InputParsing {
         
         try {
             
-            int number = Integer.parseInt(in.nextLine());
+            int number = readInPhoneNumber(in);
+
             while (!checkNumberValidity(number)) {
                 System.out.println("Please input a valid number");
-                number = Integer.parseInt(in.nextLine());
+                number = readInPhoneNumber(in);
             } 
-
+            logger.log(Level.INFO, "Storing number: " + number);
             return number;
 
         } catch (NumberFormatException e) {
-            System.out.println("A valid number was not inputted. ");
+            System.out.println("A valid phone number was not inputted.");
         }
 
         return -1;
     }
 
+    private static int readInPhoneNumber(Scanner in) throws NumberFormatException{
+
+        String input = in.nextLine().trim();
+        
+        return Integer.parseInt(input);
+    }
+
     private static boolean checkNumberValidity(int number) {
-        return String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER 
-                || String.valueOf(number).length() == UPPER_LIMIT_PHONE_NUMBER;
+        return number > 0 &&
+                String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER;
     }
 
     /**
