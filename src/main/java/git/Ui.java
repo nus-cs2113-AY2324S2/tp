@@ -13,7 +13,7 @@ public class Ui {
     // ATTRIBUTES
     public static final String DIVIDER = "- - - - -";
     private Scanner in;
-    private Parser parser;
+
     // METHODS
 
     /**
