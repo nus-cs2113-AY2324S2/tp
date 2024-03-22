@@ -13,7 +13,10 @@ import florizz.command.RemoveFlowerCommand;
 import florizz.command.HelpCommand;
 import florizz.objects.Bouquet;
 
+import java.util.logging.Logger;
+
 public class Parser {
+    private static Logger logger = Logger.getLogger(Parser.class.getName());
     // prefixes to parse input
     private static final String QUANTITY = "/q";
     private static final String ADD_FLOWER_PREFIX = "/to";
@@ -24,34 +27,48 @@ public class Parser {
     private static final String REMOVE_FLOWER_REGEX = "(.+)/q(\\s*)(\\d+)(\\s*)/from(.+)";
 
     public static Command parse (String input) throws FlorizzException{
-        //logger.log(Level.INFO, "entered parse");
+        logger.entering("Parser", "parse");
 
         String[] decodedInput = commandHandler(input);
         //logger.log(Level.INFO, "commandHandler handled command successfully");
+        Command command;
         switch (decodedInput[0]){
         case ("mybouquets"):
-            return new ListBouquetCommand();
+            command = new ListBouquetCommand();
+            break;
         case ("new"):
-            return handleAddBouquet(input);
+            command = handleAddBouquet(input);
+            break;
         case ("delete"):
-            return handleDeleteBouquet(input);
+            command = handleDeleteBouquet(input);
+            break;
         case ("bye"):
-            return new ExitCommand();
+            command = new ExitCommand();
+            break;
         case ("help"):
-            return new HelpCommand();
+            command = new HelpCommand();
+            break;
         case ("flower"):
-            return handleFlowerCommand(input);
+            command =  handleFlowerCommand(input);
+            break;
         case ("info"):
-            return handleInfoCommand(input);
+            command =  handleInfoCommand(input);
+            break;
         case ("occasion"):
-            return new ListOccasionCommand();
+            command =  new ListOccasionCommand();
+            break;
         case ("add"):
-            return handleAddFlower(decodedInput[1]);
+            command =  handleAddFlower(decodedInput[1]);
+            break;
         case ("remove"):
-            return handleRemoveFlower(decodedInput[1]);
+            command =  handleRemoveFlower(decodedInput[1]);
+            break;
         default:
             throw new FlorizzException("Unidentified input, type help to get a list of all commands!");
         }
+
+        logger.exiting("Parser", "parse");
+        return command;
     }
 
 
