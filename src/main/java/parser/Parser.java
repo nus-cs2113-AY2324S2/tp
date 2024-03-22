@@ -1,6 +1,7 @@
 package parser;
 
 import command.*;
+import command.exception.IllegalCommandException;
 import command.fight.FightingCommand;
 import command.fight.RunningCommand;
 import command.mapmove.*;
@@ -11,6 +12,11 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    boolean isInInteractionScreen;
+
+    public Parser() {
+        this.isInInteractionScreen = false;
+    }
 
     public CommandType analyseCommand(String userCommand) {
         Pattern pattern;
@@ -25,13 +31,42 @@ public class Parser {
         return CommandType.ERROR;
     }
 
-    public Command parseCommand(String userCommand) {
+    public Command fightCommandParser(CommandType commandType, String userCommand) {
         Command command;
 
+        switch (commandType) {
+        case FIGHT:
+            isInInteractionScreen = false;
+            command = new FightingCommand();
+            break;
+        case RUN:
+            isInInteractionScreen = false;
+            command = new RunningCommand();
+            break;
+        case QUIT:
+            command = new QuitCommand();
+            break;
+        case ERROR:
+            command = new ErrorCommand(new IllegalCommandException("That's not a valid command."));
+            break;
+        default:
+            command = null;
+        }
+        return command;
+    }
+
+    public Command parseCommand(String userCommand) {
+        Command command;
         CommandType commandType = analyseCommand(userCommand);
+
+        if (isInInteractionScreen) {
+            return fightCommandParser(commandType, userCommand);
+        }
+
         switch (commandType){
         case FIGHT:
-            command = new FightingCommand();
+        case RUN:
+            command = new ErrorCommand(new IllegalCommandException("You can't do this here"));
             break;
         case MOVE_FORWARD:
             command = new MovingForwardCommand(userCommand);
@@ -49,21 +84,24 @@ public class Parser {
             command = new QuitCommand();
             break;
         case INTERACT:
+            isInInteractionScreen = true;
             command = new InteractingCommand();
             break;
         case HELP:
             command = new HelpCommand();
             break;
-        case RUN:
-            command = new RunningCommand();
-            break;
-        case ERROR:
-            command = new ErrorCommand();
-            break;
         default:
-            command = null;
+            command = new ErrorCommand(new IllegalCommandException("That's not a valid command. Enter h or help to find the list of commands."));
         }
         return command;
+    }
+
+    public boolean isInInteractionScreen() {
+        return isInInteractionScreen;
+    }
+
+    public void setInInteractionScreen(boolean inInteractionScreen) {
+        this.isInInteractionScreen = inInteractionScreen;
     }
 
 }

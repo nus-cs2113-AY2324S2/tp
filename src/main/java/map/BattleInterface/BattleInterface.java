@@ -2,6 +2,7 @@ package map.BattleInterface;
 
 import InteractableEntity.Enemy;
 import InteractableEntity.InteractableEntity;
+import command.ErrorCommand;
 import map.AMap;
 import textbox.PlayerStatus;
 import textbox.TextBox;
@@ -10,6 +11,8 @@ import Math.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BattleInterface extends AMap {
     protected PlayerStatus currentPlayer;
@@ -36,11 +39,19 @@ public class BattleInterface extends AMap {
         Ui ui = new Ui();
 
         while (currentPlayer.getPlayerHealth() > 0 && currentEntity.getHealth() > 0) {
+            int answer;
+            Pattern pattern = Pattern.compile("^[--]?[0-9]+$");
+            Matcher matcher;
             ui.printPlayerStatus(currentPlayer);
             ui.printMap(currentMap);
             MathQuestion mathQuestion = mathPool.getQuestionByDifficulty(0);
             ui.printQuestion(mathQuestion);
-            int answer = Integer.parseInt(in.nextLine().trim());
+            String answerCommand = "";
+            while (!pattern.matcher(answerCommand).matches()) {
+            answerCommand = in.nextLine().trim();
+            new ErrorCommand(new NumberFormatException("Answer must be an integer.")).execute();
+            }
+            answer = Integer.parseInt(answerCommand);
             if (mathQuestion.checkAns(answer)) {
                 System.out.println("CORRECT!!!");
 
