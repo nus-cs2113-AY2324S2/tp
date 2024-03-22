@@ -74,7 +74,10 @@ Subject (enter nothing to skip):
 SUBJECT
 
 Current marks out of 100 (blank to skip) : 
-GRADE
+100
+
+Enter Classes Attended (blank to skip):
+1
 
 Do you want to add another subject and grade? (yes/no) 
 no
@@ -86,12 +89,33 @@ NUMBER
 ```
 
 ### - View details of a student `view`
+Views a student details. Allows the user to do view <student> or just view.
 
+Example:
+view wario
+
+Student details: 
+Name: wario
+Phone Number: 12345678
+Gender: male
+Last Payment Date: 12/12/2023
+Remarks: Unknown
+Subject: subject
+Current marks out of 100: 100.0
+Classes Attended: 1
 
 ### - Edit details of a student `edit`
 
 
 ### - Delete a student from the working list `delete`
+Deletes the student from the list. Allows the user to do delete <student> or just delete.
+
+Example:
+delete
+
+Enter student name: 
+wario
+Student removed successfully!
 
 ## FAQ
 
@@ -105,5 +129,26 @@ NUMBER
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+### `add <student>` 
+Adds a student into the list. If the name of the student is not specified in the initial command, the program will prompt the user for the name.
 
+### `list` 
+Displays the list of students.
+
+### `view <student>` 
+Views a students details. If the name of the student is not specified in the initial command, the program will prompt the user for the name.
+
+### `delete <student>`
+Deletes the student from the list. If the name of the student is not specified in the initial command, the program will prompt the user for the name.
+
+### `edit <student>` 
+Allows the user to edit the details of the student. If the name of the student is not specified in the initial command, the program will prompt the user for the name.
+
+### `sort_name` 
+Sorts the list lexicographically.
+
+### `view_subject <subject>` 
+Lists all the students associated with that subject. If the user specifies the subject in the initial command, the list will be generated and the command will be terminated. If the user does not specify the subject, the programme will continuously prompt the user for a subject, until they choose to terminate the command.
+
+### `help` 
+Generates the list of commands.
