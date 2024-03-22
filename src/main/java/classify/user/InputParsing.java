@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
-    private static final int UPPER_LIMIT_PHONE_NUMBER = 10;
+    private static final String DEFAULT_STRING_VALUE = "Unknown";
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
@@ -109,7 +109,7 @@ public class InputParsing {
 
     private static void editStudent(ArrayList<Student> list, Scanner in, String name) {
         if (list.isEmpty()) {
-            System.out.println("Currently no students in list.");
+            Ui.printEmptyListError();
             return;
         }
         
@@ -123,13 +123,17 @@ public class InputParsing {
         }
         
         while (student == null) {
+
             System.out.println("Name of student to edit (enter blank to exit):");
             name = in.nextLine().trim();
+
             if (name.isBlank()) {
                 System.out.println("Exiting edit.");
                 return;
             }
+
             student = findStudentByName(list, name);
+
             if (student != null) {
                 break;
             } else {
@@ -145,7 +149,7 @@ public class InputParsing {
         showAttributes(attributes);
 
         while (true) {
-            System.out.println("How would you like to update student's subject? (enter blank to exit)");
+            Ui.printEditPrompt();
             String command = in.nextLine().trim();
             if (command.isBlank()) {
                 System.out.println("Exiting edit");
@@ -156,7 +160,7 @@ public class InputParsing {
             switch (command) {
 
             case ADD:
-                addAttribute(in, attributes);
+                addSubject(in, attributes);
                 student.setAttributes(attributes);
                 break;
 
@@ -266,11 +270,11 @@ public class InputParsing {
                 }
 
             } else {
-                System.out.println("No subjects and grades found for this student.");
+                Ui.printEmptySubjectError();
             }
 
         } else {
-            System.out.println("No attributes found for this student.");
+            Ui.printNullAttributeError();;
         }
     }
 
@@ -294,13 +298,14 @@ public class InputParsing {
         if (findStudentByName(masterStudentList, name) != null) {
             assert findStudentByName(masterStudentList, name) != null;
             logger.log(Level.WARNING, "Student with the same name already exists.");
-            System.out.println("Student with the same name already exists. Please enter a different name.");
+            
+            Ui.printSameNameError();
             Ui.printDivider();
             return;
         }
 
         Student student = new Student(name);
-        addAttribute(in, student.getAttributes());
+        addSubject(in, student.getAttributes());
 
         // @@author Cryolian
         int number = promptForPhoneNumber(in);
@@ -310,17 +315,18 @@ public class InputParsing {
         }
         //@@ author ParthGandhiNUS
         assert number > 0 && number < 100000000: "Number is outside the acceptable range.";
+
         //@@author Cryolian
         student.getAttributes().setPhoneNumber(number);
 
-        System.out.println("Please input the student's gender: ");
-        student.getAttributes().setGender(promptString(in));
+        Ui.promptForGender();
+        student.getAttributes().setGender(readInString(in));
 
-        System.out.println("Please input their last payment date: ");
-        student.getAttributes().setLastPaymentDate(promptString(in));
+        Ui.promptForLastPaymentDate();
+        student.getAttributes().setLastPaymentDate(readInString(in));
 
-        System.out.println("Please input any remarks: ");
-        student.getAttributes().setRemarks(promptString(in));
+        Ui.promptForRemarks();
+        student.getAttributes().setRemarks(readInString(in));
 
         //@@author tayponghee
         masterStudentList.add(student);
@@ -358,7 +364,7 @@ public class InputParsing {
             assert studentName != null;
 
             if (name.isEmpty()) {
-                System.out.println("Student name cannot be empty. Please enter a valid name.");
+                Ui.printEmptyNameMessage();
                 Ui.printDivider();
             } else {
                 break;
@@ -445,7 +451,7 @@ public class InputParsing {
      * @param attributes The StudentAttributes object to store the attributes of the
      *                   student.
      */
-    private static void addAttribute(Scanner in, StudentAttributes attributes) {
+    private static void addSubject(Scanner in, StudentAttributes attributes) {
         while (true) {
             // @@author blackmirag3
             System.out.print("Subject (enter nothing to skip): ");
@@ -603,7 +609,7 @@ public class InputParsing {
             return true;
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, "Invalid input for grade: " + grade, e);
-            System.out.println("Invalid input for grade. Please enter a valid number.");
+            Ui.printValidNumberError();
             Ui.printDivider();
             return false;
         }
@@ -623,28 +629,35 @@ public class InputParsing {
      */
     private static int promptForPhoneNumber(Scanner in) {
 
-        System.out.println("Please input a valid Phone number: ");
+        int number = 0;
         
         try {
             
-            int number = Integer.parseInt(in.nextLine());
-            while (!checkNumberValidity(number)) {
-                System.out.println("Please input a valid number");
-                number = Integer.parseInt(in.nextLine());
-            } 
-
+            do  {
+                Ui.printPhoneNumberPrompt();
+                number = readInPhoneNumber(in);
+            } while (!checkNumberValidity(number));
+            
+            logger.log(Level.INFO, "Storing number: " + number);
             return number;
 
         } catch (NumberFormatException e) {
-            System.out.println("A valid number was not inputted. ");
+            Ui.printValidNumberError();
         }
 
         return -1;
     }
 
+    private static int readInPhoneNumber(Scanner in) throws NumberFormatException{
+
+        String input = in.nextLine().trim();
+        
+        return Integer.parseInt(input);
+    }
+
     private static boolean checkNumberValidity(int number) {
-        return String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER 
-                || String.valueOf(number).length() == UPPER_LIMIT_PHONE_NUMBER;
+        return number > 0 &&
+                String.valueOf(number).length() == LOWER_LIMIT_PHONE_NUMBER;
     }
 
     /**
@@ -654,11 +667,11 @@ public class InputParsing {
      * @return      "Unknown" if blank was inputted, or the
      *              trimmed string inputted by the user.
      */
-    private static String promptString(Scanner in) {
+    private static String readInString(Scanner in) {
         
         String string = in.nextLine();
         if (string.isBlank()) {
-            return "Unknown";
+            return DEFAULT_STRING_VALUE;
         } 
         return string.trim();
         
