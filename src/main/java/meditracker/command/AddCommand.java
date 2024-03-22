@@ -63,7 +63,8 @@ public class AddCommand extends Command {
         DailyMedication dailyMedication = new DailyMedication(medicationName);
         medicationManager.addMedication(medication);
         dailyMedicationManager.addDailyMedication(dailyMedication);
-        assert medicationManager.getTotalMedications() != 0 : "Total medications in medication manager should not be 0!";
+        assert medicationManager.getTotalMedications() != 0 : "Total medications in medication " +
+                "manager should not be 0!";
         ui.showAddCommandMessage();
     }
 }
