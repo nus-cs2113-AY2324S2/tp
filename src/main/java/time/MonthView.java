@@ -11,7 +11,11 @@ import java.util.List;
 import static ui.UiRenderer.printSeparator;
 import static ui.UiRenderer.printWeekHeader;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MonthView extends View {
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public MonthView(LocalDate startOfMonth, DateTimeFormatter dateFormatter) {
         super(startOfMonth, dateFormatter);
@@ -19,6 +23,7 @@ public class MonthView extends View {
 
     @Override
     public void printView(TaskManager taskManager) {
+        logger.log(Level.INFO, "Printing calendar in month view");
         assert startOfView != null : "Start of Month missing!";
         YearMonth yearMonth = YearMonth.from(startOfView);
         LocalDate firstOfMonth = startOfView.withDayOfMonth(1);

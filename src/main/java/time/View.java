@@ -15,13 +15,9 @@ public abstract class View {
 
     public abstract void printView(TaskManager taskManager);
 
-    public void next() {
-        // To be implemented by child classes
-    }
+    public abstract void next();
 
-    public void previous() {
-        // To be implemented by child classes
-    }
+    public abstract void previous();
 
     public LocalDate getStartOfView() {
         return startOfView;
