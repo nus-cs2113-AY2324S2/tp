@@ -83,7 +83,7 @@ public class Timetable {
         }
         Task task = tasks.get(index);
         if(!task.getType().equals("f")){
-            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + index +" is not flexible.");
+            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + (index + 1) +" is not flexible, timings cannot be changed.");
         }
         task.setStartTime(newStartTime);
         task.setEndTime(newEndTime);

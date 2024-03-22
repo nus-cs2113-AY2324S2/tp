@@ -56,19 +56,9 @@ public class Parser {
         } else if(command.toLowerCase().startsWith("changetasktiming")){
             changeTaskTiming(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktype")){
-            try {
-                InputValidator.validateChangeTaskType(command);
-                String[] parts = command.split("\\s+");
-                List<String> wordList = Arrays.asList(parts);
-                String day = wordList.get(2);
-                int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
-                String newType = wordList.get(wordList.indexOf("/type") + 1);
-                InputValidator.validateDay(day);
-                userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
-                System.out.println("Task type changed successfully.");
-            } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
-                throw new RuntimeException(e);
-            }
+            changeTaskType(command, userList);
+        }  else if(command.toLowerCase().startsWith("addrepeattask")){
+            addRepeatTask(command, userList);
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
                 InputValidator.validateCompareInput(command);
@@ -90,6 +80,22 @@ public class Parser {
         }
         else {
             UI.printInvalidCommand();
+        }
+    }
+
+    private static void changeTaskType(String command, UserList userList) throws InvalidFormatException {
+        try {
+            InputValidator.validateChangeTaskType(command);
+            String[] parts = command.split("\\s+");
+            List<String> wordList = Arrays.asList(parts);
+            String day = wordList.get(2);
+            int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
+            String newType = wordList.get(wordList.indexOf("/type") + 1);
+            InputValidator.validateDay(day);
+            userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
+            System.out.println("Task type changed successfully.");
+        } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -149,6 +155,35 @@ public class Parser {
             System.out.println("Flexible task timing changed successfully.");
         } catch (InvalidDayException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void addRepeatTask(String command, UserList userList){
+        try {
+            InputValidator.validateAddRepeatTask(command);
+            String[] parts = command.split("\\s+");
+            List<String> wordlist = Arrays.asList(parts);
+            int taskIndex = wordlist.indexOf("/task");
+            if (taskIndex == -1 || taskIndex + 1 >= wordlist.size()) {
+                throw new InvalidFormatException(("Please enter a task name!"));
+            }
+            String description = wordlist.get(taskIndex + 1);
+            int daysIndex = wordlist.indexOf("/on") + 1;
+            int endDaysIndex = wordlist.indexOf("/from") ;
+            String[] days = Arrays.copyOfRange(parts, daysIndex, endDaysIndex );
+            if (days.length < 2){
+                throw new InvalidFormatException("Please enter at least 2 days, or you want to use addtask command!");
+            }
+            String startTime = parts[wordlist.indexOf("/from") + 1];
+            String endTime = parts[wordlist.indexOf("/to") + 1];
+            String type = parts[wordlist.indexOf("/type") + 1];
+            for (String day : days) {
+                Task task = new Task(description, day, startTime, endTime, type);
+                userList.getActiveUser().getTimetable().addUserTask(day, task);
+            }
+            System.out.println("Repeated task added successfully!");
+        } catch (InvalidFormatException e) {
+            System.out.println("Please enter at least 2 days, or you want to use addtask command!");
         }
     }
 
