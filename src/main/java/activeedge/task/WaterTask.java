@@ -1,10 +1,9 @@
 package activeedge.task;
 
-import java.util.ArrayList;
 
-/**
- * Represents a task related to water intake.
- */
+    /**
+    * Represents a task related to water intake.
+    */
 public class WaterTask extends Task {
     private int quantity;
 
@@ -37,12 +36,12 @@ public class WaterTask extends Task {
         return "Water " + this.getQuantity();
     }
 
-    /**
-     * Calculates the total water intake from a list of tasks.
-     *
-     * @param tasksList The list of tasks to calculate total water intake from.
-     * @return The total water intake from the specified list of tasks.
-     */
+//    /**
+//     * Calculates the total water intake from a list of tasks.
+//     *
+//     * @param tasksList The list of tasks to calculate total water intake from.
+//     * @return The total water intake from the specified list of tasks.
+//     */
 //    public static int getTotalWaterIntake(ArrayList<Task> tasksList) {
 //        int totalWaterIntake = 0;
 //        for (Task task : tasksList) {
