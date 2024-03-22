@@ -25,12 +25,33 @@ public class Ui {
 
 
     public void printTextBox(TextBox box) {
+        assert box.getNextDialogue() != null : "next dialogue is null";
+        assert box.getNextError() != null : "next error is null";
+        assert box.getNextInstruction() != null : "next instruction is null";
+        assert box.getNextNarration() != null : "next narration is null";
+
+
         printDividingLine();
-        if (box.getNextMessage() != null) {
-            System.out.println(box.getNextMessage());
-        } else {
-            System.out.println(" ");
+        if (!box.getNextNarration().isEmpty()) {
+            System.out.println(box.getNextNarration());
+            System.out.println("\n");
         }
+        if (!box.getNextDialogue().isEmpty()) {
+            System.out.println(box.getNextDialogue());
+        }
+        if (!box.getNextInstruction().isEmpty()) {
+            System.out.println(box.getNextInstruction());
+        }
+        if (!box.getNextError().isEmpty()) {
+            System.out.println(box.getNextError());
+        }
+        printDividingLine();
+        box.clearAll();
+    }
+
+    public void printTextbox(String message){ //for custom messages
+        printDividingLine();
+        System.out.println(message);
         printDividingLine();
     }
 

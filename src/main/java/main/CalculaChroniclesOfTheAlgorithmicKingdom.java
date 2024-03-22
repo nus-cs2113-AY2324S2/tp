@@ -8,8 +8,6 @@ import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
 
-import java.util.Map;
-
 
 public class CalculaChroniclesOfTheAlgorithmicKingdom {
     public static void main(String[] args) {
@@ -30,7 +28,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
         ui.printPlayerStatus(playerStatus);
         ui.printMap(map);
-        System.out.println("Type 'h' to get the help menu.");
+        ui.printTextBox(textBox);
 
         Command userCommand;
         while (true) {
@@ -39,7 +37,8 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             setUserCommand(userCommand, map, playerStatus, textBox);
 
             if (!(map instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
-                System.out.println("Invalid Command");
+                textBox.setNextError("Invalid Command");
+
             } else {
                 userCommand.execute();
             }
@@ -48,6 +47,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
                 ui.printMap(map);
+                ui.printTextBox(textBox);
             }
         }
     }
