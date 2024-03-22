@@ -18,3 +18,7 @@ Goal Water 0
 Goal Water 0
 Goal Water 0
 Goal Water 0
+Goal w 1000
+Goal w 0
+Goal w -9
+Goal w 0

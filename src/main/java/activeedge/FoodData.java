@@ -232,9 +232,19 @@ public class FoodData {
     /**
      * Prints the calories of each food item in the foodItems array.
      */
+
     public static void printFood(){
         for (int i = 0; i < foodItems.length; i++){
+            // Print the calorie value
             System.out.println(foodItems[i][1]);
+
+            // Assert that the calorie value is a valid integer
+            try {
+                int calorieValue = Integer.parseInt(foodItems[i][1]);
+                assert calorieValue >= 0 : "Calorie value must be non-negative";
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid calorie value for food item: " + foodItems[i][0]);
+            }
         }
     }
 }

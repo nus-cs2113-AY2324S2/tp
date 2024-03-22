@@ -24,6 +24,7 @@ public class CommandUi {
         System.out.print("Food ");
         System.out.println("(food name, servings, calories):");
         int j = 1;
+
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).toString().startsWith("Meal")) {
                 System.out.print(j + ". " + tasksList.get(i).toString().substring(5));

@@ -20,6 +20,9 @@ public class AddGoalsCommand {
      * @param goalAmount the amount associated with the goal task
      */
     public AddGoalsCommand(String description, int goalAmount) {
+        assert description != null : "Description cannot be null";
+        assert goalAmount > 0 : "Goal amount cannot be negative";
+
         this.description = description;
         this.goalAmount = goalAmount;
     }

@@ -33,9 +33,10 @@ public class Parser {
                     String quantityString = items[1];
                     LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
                     logWaterCommand.execute();
-
                 } else if (items[0].equals("m")) {
                     String[] logParts = input.split("m/|s/");
+                    int length = logParts.length;
+                    assert length >= 3;
                     String description = logParts[1].trim();
                     int servings = Integer.parseInt(logParts[2]);
                     int calories = 0;
@@ -92,6 +93,7 @@ public class Parser {
                         System.out.println("Goal amount must be a positive integer.");
                         return;
                     }
+                    assert goalAmount > 0 : "Goal amount must be positive integer";
                     if (goalType.equals("c")) {
                         new AddGoalsCommand(goalType, goalAmount).execute();
                     } else if (goalType.equals("w")) {
