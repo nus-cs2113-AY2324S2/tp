@@ -13,11 +13,12 @@ import florizz.command.RemoveFlowerCommand;
 import florizz.command.HelpCommand;
 import florizz.objects.Bouquet;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Parser {
-    private static Logger logger = Logger.getLogger(Parser.class.getName());
+    private static Logger logger = Logger.getLogger(Florizz.class.getName());
     // prefixes to parse input
     private static final String QUANTITY = "/q";
     private static final String ADD_FLOWER_PREFIX = "/to";

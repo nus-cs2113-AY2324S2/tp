@@ -1,6 +1,7 @@
 package florizz.core;
 
 import florizz.command.Command;
+import florizz.logging.MyFormatter;
 import florizz.objects.Bouquet;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class Florizz {
         assert tempBouquetList !=null : "tempBouquetList doesn't exist";
 
         // Set up logger
+
         LogManager.getLogManager().reset();
         logger.setLevel(Level.ALL);
 
@@ -42,11 +44,10 @@ public class Florizz {
 
         // Set up file handler
         try {
-            FileHandler fh = new FileHandler();
+            FileHandler fh = new FileHandler("./FlorizzLogger.xml", 2000, 1);
+            fh.setFormatter(new MyFormatter());
             fh.setLevel(Level.ALL);
             logger.addHandler(fh);
-            //System.out.println("FileHandler opened");
-            //System.out.println(Florizz.class.getClassLoader().getResource("logging.properties"));
         } catch (IOException e) {
             ui.printIOError();
         }
