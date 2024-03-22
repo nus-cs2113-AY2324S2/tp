@@ -45,7 +45,19 @@ public class Parser {
         }
         return input.substring(startIndex, endIndex).trim();
     }
-    
+
+    private String extractDetailsForRec(String details, String prefix) {
+        int startIndex = details.indexOf(prefix) + prefix.length();
+        int endIndex = details.length();
+
+        String[] nextPrefixes = { "to/", "c/", "a/", "d/" };
+        for (String nextPrefix : nextPrefixes) {
+            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
+                endIndex = details.indexOf(nextPrefix, startIndex);
+            }
+        }
+        return details.substring(startIndex, endIndex).trim();
+    }
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -569,6 +581,38 @@ public class Parser {
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid Integer");
                 System.out.println("Command Format : rec removelist [List Number]");
+                return null;
+            }
+        }
+
+        if(commandType.equals("newexpense")) {
+            try {
+                String listNumberAsString = extractDetailsForRec(input, "to/");
+                int listNumber = Integer.parseInt(listNumberAsString);
+
+                String category = extractDetailsForRec(input, "c/");
+
+                String amountAsString = extractDetailsForRec(input, "a/");
+                double amount = Double.parseDouble(amountAsString);
+
+                String description = extractDetailsForRec(input, "d/");
+
+                if (listNumberAsString.isEmpty() || category.isEmpty() || amountAsString.isEmpty()
+                        || description.isEmpty()) {
+                    throw new BudgetBuddyException("Please Ensure all parameters are filled");
+                }
+
+                return new RecurringExpenseCommand(expensesList, listNumber, category,
+                        amount, description, "newexpense");
+
+
+            } catch (BudgetBuddyException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Command Format : rec newexpense to/ LISTNUMBER c/ CATEGORY" +
+                            " a/ AMOUNT d/ DESCRIPTION");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ensure that listNumber and Amount are valid Numbers");
                 return null;
             }
         }

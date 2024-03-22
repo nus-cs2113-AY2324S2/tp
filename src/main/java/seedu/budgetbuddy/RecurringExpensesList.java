@@ -55,4 +55,10 @@ public class RecurringExpensesList {
         return recurringExpenses.size();
     }
 
+    public ExpenseList getExpenseListAtListNumber(int listNumber) {
+
+        int listNumberAsArrayPosition = listNumber - 1;
+        return recurringExpenses.get(listNumberAsArrayPosition);
+    }
+
 }

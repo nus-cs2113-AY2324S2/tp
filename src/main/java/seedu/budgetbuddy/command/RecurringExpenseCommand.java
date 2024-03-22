@@ -1,6 +1,8 @@
 package seedu.budgetbuddy.command;
 
+import seedu.budgetbuddy.ExpenseList;
 import seedu.budgetbuddy.RecurringExpensesList;
+import seedu.budgetbuddy.Ui;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.ArrayList;
@@ -8,16 +10,26 @@ import java.util.Arrays;
 
 public class RecurringExpenseCommand extends Command{
     public static ArrayList<String> commandTypes = new ArrayList<>(Arrays.asList("newlist",
-            "removelist", "rename", "viewlists", "removelist"));
+            "removelist", "rename", "viewlists", "removelist", "newexpense"));
+
     private RecurringExpensesList expensesList;
     private String initialListName;
-    private String newListName;
     private String commandType;
     private int listNumber;
 
-    public RecurringExpenseCommand(String initialListName, String newListName, String commandType) {
-        this.initialListName = initialListName;
-        this.newListName = newListName;
+    String category;
+    Double amount;
+    String description;
+
+    Ui ui = new Ui();
+
+    public RecurringExpenseCommand(RecurringExpensesList expensesList, int listNumber, String category,
+                                   Double amount, String description, String commandType) {
+        this.expensesList = expensesList;
+        this.listNumber = listNumber;
+        this.category = category;
+        this.amount = amount;
+        this.description = description;
         this.commandType = commandType;
     }
 
@@ -55,6 +67,29 @@ public class RecurringExpenseCommand extends Command{
         expensesList.removeList(listNumber);
     }
 
+    public void addExpenseToList() {
+
+        if (listNumber <= 0 || listNumber > expensesList.getSize()) {
+            System.out.println("Invalid List Number. Choose a List Number from 1 onwards");
+            System.out.println("Number of Lists you have currently : " + expensesList.getSize());
+            return;
+        }
+
+        ExpenseList expenses = expensesList.getExpenseListAtListNumber(listNumber);
+
+        try {
+            expenses.addExpense(category, amount.toString(), description);
+
+            ui.printDivider();
+            System.out.println("Successfully Added Expense to " + expenses.getName());
+            ui.printDivider();
+
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public void printList() {
         expensesList.printAllRecurringLists();
     }
@@ -71,6 +106,9 @@ public class RecurringExpenseCommand extends Command{
 
         case "removelist":
             removeList();
+
+        case "newexpense":
+            addExpenseToList();
         default:
             break;
         }
