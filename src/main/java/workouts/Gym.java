@@ -1,6 +1,5 @@
 package workouts;
 
-import ui.Handler;
 import utility.CustomExceptions;
 import utility.Parser;
 import utility.ErrorConstant;
