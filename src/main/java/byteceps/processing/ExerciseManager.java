@@ -93,8 +93,13 @@ public class ExerciseManager extends ActivityManager {
         }
 
         Exercise retrievedExercise = retrieveExercise(parser);
-        retrievedExercise.editExerciseName(newExerciseName);
+        String oldExerciseName = retrievedExercise.getActivityName();
+        int exerciseIndex = activityHashMap.get(oldExerciseName);
 
+        activityHashMap.remove(oldExerciseName);
+        activityHashMap.put(newExerciseName, exerciseIndex);
+
+        retrievedExercise.editExerciseName(newExerciseName);
         return newExerciseName;
     }
 
