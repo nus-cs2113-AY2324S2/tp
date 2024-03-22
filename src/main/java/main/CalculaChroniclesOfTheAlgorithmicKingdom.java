@@ -10,17 +10,21 @@ import textbox.TextBox;
 import ui.Ui;
 import Math.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 
 public class CalculaChroniclesOfTheAlgorithmicKingdom {
+    public static int currentOn;
+    public static ArrayList<AMap> storedMaps = new ArrayList<>();
     public static void main(String[] args) {
         new CalculaChroniclesOfTheAlgorithmicKingdom().startGame();
     }
 
     public void startGame() {
         Scanner in  = new Scanner(System.in);
+
         PlayerStatus playerStatus = new PlayerStatus(100, 0, 0);
         TextBox textBox = new TextBox();
         Parser parser = new Parser();
@@ -31,32 +35,33 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
         map.initPlayerLocation(0, 0);
         map.placeMonsterInTheMap(2, 3);
         textBox.initTextBox();
-        map.addMaps(map);
+        currentOn = 0;
+        storedMaps.add(map);
+        assert storedMaps.size() == 1;
 
         ui.printPlayerStatus(playerStatus);
-        ui.printMap(map);
-        ui.printTextBox(textBox);
+        ui.printMap(storedMaps.get(currentOn));
+        System.out.println("Type 'h' to get the help menu.");
 
         Command userCommand;
         while (true) {
             String userCommandText = in.nextLine();
 
             userCommand = parser.parseCommand(userCommandText);
-            setUserCommand(userCommand, map, playerStatus, textBox);
+            setUserCommand(userCommand, storedMaps.get(currentOn), playerStatus, textBox);
 
-            if (!(map instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
-                textBox.setNextError("Invalid Command");
+            if (!(storedMaps.get(currentOn) instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
+                System.out.println("Invalid Command");
+
             } else if (userCommand.getCommandDescription().equals("FIGHT!")){
                 userCommand.execute(in);
             } else {
                 userCommand.execute();
             }
-            map.storeMaps(0, map);
-            map = userCommand.getCurrentMap();
 
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
-                ui.printMap(map);
+                ui.printMap(storedMaps.get(currentOn));
                 ui.printTextBox(textBox);
             }
 

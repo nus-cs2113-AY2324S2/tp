@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class AMap {
-    protected static ArrayList<AMap> storedMaps = new ArrayList<>();
+
     protected int width;
     protected int height;
     protected ArrayList<ArrayList<Character>> currentMap;
@@ -129,11 +129,6 @@ public abstract class AMap {
     public int getPlayerY() {
         return playerY;
     }
-    public void storeMaps(int index, AMap map){
-        storedMaps.set(index, map);
-    }
-    public void addMaps(AMap map){
-        storedMaps.add(map);
-    }
+
 
 }

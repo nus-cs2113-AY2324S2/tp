@@ -3,6 +3,7 @@ package command.mapmove;
 import InteractableEntity.*;
 import map.*;
 import map.BattleInterface.BattleInterface;
+import static main.CalculaChroniclesOfTheAlgorithmicKingdom.*;
 
 public class InteractingCommand extends MapMoveCommand {
 
@@ -21,7 +22,8 @@ public class InteractingCommand extends MapMoveCommand {
             InteractableEntity monster = new Enemy(10, 10, 10);
             battleMap = new BattleInterface(playerStatus, textBox, monster);
             battleMap.initMap(30, 10);
-            currentMap = battleMap;
+            storedMaps.add(battleMap);
+            currentOn = 1;
             break;
         default:
             battleMap = new BattleInterface(null, null, null);
