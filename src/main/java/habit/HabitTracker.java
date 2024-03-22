@@ -23,6 +23,7 @@ public class HabitTracker {
      * @param newHabit The habit to be added.
      */
     public void addHabit (Habit newHabit) {
+        assert habitList != null : "habitList should not be null";
         habitList.add(newHabit);
         String addHabitMessage = "Great! You have added a new habit:\n";
         addHabitMessage += "  '" + newHabit.getDescription() + "' was successfully added!";
