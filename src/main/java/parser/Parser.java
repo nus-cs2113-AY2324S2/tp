@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+) (?: cat/(?<category>[^/]+))?");
+            //Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)");
 
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
@@ -78,18 +78,18 @@ public class Parser {
 
     private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-
+        System.out.println(matcher);
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
         }
-        //String category = matcher.group("category") != null ? matcher.group("category") : "NA";
+        String category = matcher.group("category") != null ? matcher.group("category") : "NA";
         int quantity = Integer.parseInt(matcher.group("quantity"));
         return new AddCommand(
                 matcher.group("itemName"),
                 quantity,
-                matcher.group("uom"), "test cat"
-                //category
+                matcher.group("uom"),
+                category
         );
     }
 

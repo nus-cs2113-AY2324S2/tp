@@ -45,4 +45,8 @@ public class Item {
     public void unmarkOOS() {
         this.isOOS = false;
     }
+
+    public String toString() {
+        return "Item: " + getItemName() + " (Qty " + getQuantity() + ")";
+    }
 }
