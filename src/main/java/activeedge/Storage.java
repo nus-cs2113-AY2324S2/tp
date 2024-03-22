@@ -3,6 +3,11 @@ package activeedge;
 import activeedge.task.GoalTask;
 import activeedge.task.LogMeals;
 import activeedge.task.TaskList;
+import activeedge.userdetails.LogHeight;
+import activeedge.userdetails.LogWeight;
+import activeedge.userdetails.UserDetailsList;
+import command.AddHeightCommand;
+import command.AddWeightCommand;
 import activeedge.task.WaterTask;
 
 import java.io.File;
@@ -57,6 +62,10 @@ public class Storage {
      */
     public static void saveLogsToFile(String filePath) {
         try (FileWriter fw = new FileWriter(filePath)) {
+            for (int i = 0; i < UserDetailsList.detailsList.size(); i++) {
+                String out = UserDetailsList.detailsList.get(i).toString();
+                fw.write(out + "\n");
+            }
             for (int i = 0; i < TaskList.tasksList.size(); i++) {
                 String out = TaskList.tasksList.get(i).toString();
                 fw.write(out + "\n");
@@ -77,33 +86,82 @@ public class Storage {
         if (!file.exists()) {
             createFile(filePath);
         }
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNext()) {
-                String task = scanner.nextLine();
-                if(task.startsWith("Meal")){
-                    String[] items = task.trim().split(" ");
-                    int len = items.length;
-                    assert len >= 4;
-                    String mealName = "";
-                    for (int i = 1; i <= len - 3; i++){
-                        mealName = mealName + items[i];
+        if (file.length() == 0) {
+            System.out.print("\n");
+            int i = 0;
+            int j = 0;
+            System.out.println("Welcome new user! PLease input your height and weight in whole numbers!");
+            try {
+                while(j<1) {
+                    System.out.println("Please input your height (in cm): ");
+                    Scanner scanner = new Scanner(System.in);
+                    try {
+                        Integer input = Integer.valueOf(scanner.nextLine());
+                        AddHeightCommand addHeightCommand = new AddHeightCommand(input);
+                        addHeightCommand.execute();
+                        saveLogsToFile("data/data.txt");
+                        j++;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input a whole number only");
                     }
-                    LogMeals newTask = new LogMeals(mealName,
-                            Integer.parseInt(items[len - 2]),
-                            Integer.parseInt(items[len - 1]));
-                    TaskList.tasksList.add(newTask);
-                }else if (task.startsWith("Goal")){
-                    String[] items = task.trim().split(" ");
-                    GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
-                    TaskList.tasksList.add(newTask);
-                } else if (task.startsWith("Water")) {
-                    String[] items = task.trim().split(" ");
-                    WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
-                    TaskList.tasksList.add(newTask);
                 }
+                while(i<1) {
+                    System.out.println("Please input your weight (in kg): ");
+                    Scanner scanner = new Scanner(System.in);
+                    try {
+                        Integer input = Integer.valueOf(scanner.nextLine());
+                        AddWeightCommand addWeightCommand = new AddWeightCommand(input);
+                        addWeightCommand.execute();
+                        saveLogsToFile("data/data.txt");
+                        i++;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input a whole number only");
+                    }
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("You can now start logging data!");
+        } else {
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNext()) {
+                    String task = scanner.nextLine();
+                    if (task.startsWith("Meal")) {
+                        String[] items = task.trim().split(" ");
+                        int len = items.length;
+                        assert len >= 4;
+                        String mealName = "";
+                        for (int i = 1; i <= len - 3; i++) {
+                            mealName = mealName + items[i];
+                        }
+                        LogMeals newTask = new LogMeals(mealName,
+                                Integer.parseInt(items[len - 2]),
+                                Integer.parseInt(items[len - 1]));
+                        TaskList.tasksList.add(newTask);
+                    } else if (task.startsWith("Goal")) {
+                        String[] items = task.trim().split(" ");
+                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
+                        TaskList.tasksList.add(newTask);
+                    } else if (task.startsWith("Water")) {
+                        String[] items = task.trim().split(" ");
+                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
+                        TaskList.tasksList.add(newTask);
+                    } else if (task.startsWith("Height")) {
+                        String[] items = task.trim().split(" ");
+                        LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]));
+                        UserDetailsList.detailsList.add(newHeight);
+                    } else if (task.startsWith("Weight")) {
+                        String[] items = task.trim().split(" ");
+                        LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
+                        UserDetailsList.detailsList.add(newWeight);
+                    } 
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+
         }
+
     }
+
 }
