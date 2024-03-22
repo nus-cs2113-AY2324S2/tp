@@ -2,11 +2,13 @@ package minigame;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import exception.InvalidMoveException;
 import ui.ResponseManager;
 
 public class TicTacToe implements MiniGame {
+    private static final Logger logger = Logger.getLogger("TacLog");
     private char[][] board = new char[3][3];
     private char playerMark;
     private  char aiMark;
@@ -19,6 +21,7 @@ public class TicTacToe implements MiniGame {
         this.aiMark = (playerMark == 'X') ? 'O' : 'X';
         this.currentMark = playerMark;
         initializeBoard();
+        logger.info("Game initialized with player mark: " + playerMark);
     }
 
     private boolean checkForWin() {
@@ -96,8 +99,10 @@ public class TicTacToe implements MiniGame {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = '-';
+                assert board[i][j] == '-': "Board should be initialized with '-'";
             }
         }
+        logger.info("Board initialized");
     }
 
     private void printBoard() {
@@ -110,6 +115,7 @@ public class TicTacToe implements MiniGame {
                 boardInfor += "\n";
             }
         }
+        logger.info("Board state:\n" + boardInfor);
         ResponseManager.printBoard(boardInfor);
     }
 
@@ -117,9 +123,11 @@ public class TicTacToe implements MiniGame {
         if (row >= 0 && row < 3 && column >= 0 && column < 3 &&
             board[row][column] == '-') {
             board[row][column] = playerMark;
+            logger.info("Mark placed by player at [" + row + "," + column + "]");
             printBoard();
             checkGameOver();
         } else {
+            logger.warning("Invalid move attempted at [" + row + "," + column + "]");
             throw new InvalidMoveException("Move at (" + (row + 1) + ", " + (column + 1) + ") is invalid.\n");
         }
     }
