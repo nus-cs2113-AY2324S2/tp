@@ -29,6 +29,7 @@ public class FocusTimer {
      *  Store the current time when the user calls the function as the stop timing for the timer.
      */
     public void setStopTiming() {
+        assert isStarted: "Timer should have started";
         stopTiming = LocalDateTime.now();
         isStarted = false;
         totalTimeSpent();
