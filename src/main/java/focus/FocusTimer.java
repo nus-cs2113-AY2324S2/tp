@@ -19,6 +19,7 @@ public class FocusTimer {
      * Store the current time when the user calls the function as the start timing for the timer.
      */
     public void setStartTiming() {
+        assert !isStarted: "Timer should not have started";
         this.startTiming = LocalDateTime.now();
         isStarted = true;
         Ui.printMessageWithSepNewLine("Your session has started. Time to grind!");
@@ -28,6 +29,7 @@ public class FocusTimer {
      *  Store the current time when the user calls the function as the stop timing for the timer.
      */
     public void setStopTiming() {
+        assert isStarted: "Timer should have started";
         stopTiming = LocalDateTime.now();
         isStarted = false;
         totalTimeSpent();
