@@ -74,6 +74,7 @@ public class Storage {
     }
 
     public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
+        assert items != null : "Items cannot be null.";
         Item lastItem = items.get(items.size() - 1);
         String descriptionAdded = (items.size() - 1) + " | " + lastItem.getItemName() +
                 " | " + lastItem.getQuantity() + "\n";
@@ -81,6 +82,7 @@ public class Storage {
     }
 
     public static void overwriteFile(ArrayList<Item> items, boolean ifAppend) {
+        assert items != null : "Items cannot be null.";
         int length = items.size();
         for (int index = 0; index < length; index++) {
             String descriptionAdded = index + " | " + items.get(index).getItemName() +
