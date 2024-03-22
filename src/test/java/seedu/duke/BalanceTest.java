@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class BalanceTest {
     @Test
-    public void testConstructor(){
+    public void testConstructor() {
         ArrayList<User> users = new ArrayList<>();
         users.add(new User("member1"));
         users.add(new User("member2"));

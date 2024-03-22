@@ -18,14 +18,14 @@ public class Balance {
         this.balanceList = new HashMap<>();
 
         // Populate balanceList with other Users from Group
-        for (User user : users){
-            if(!user.getName().equals(userName)){
+        for (User user : users) {
+            if(!user.getName().equals(userName)) {
                 balanceList.put(user.getName(), 0f);
             }
         }
 
         // Add Expenses to balanceList
-        for (Expense expense : expenses){
+        for (Expense expense : expenses) {
             addExpense(expense);
         }
     }
@@ -43,8 +43,8 @@ public class Balance {
         int numberOfUsers = payees.size() + 1;
         Float amountPerUser = expense.getTotalAmount() / numberOfUsers;
 
-        if(expense.getPayerName().equals(userName)){
-            for(String payee : payees){
+        if(expense.getPayerName().equals(userName)) {
+            for(String payee : payees) {
                 Float currentOwed = balanceList.get(payee);
                 Float newOwed = currentOwed + amountPerUser;
 

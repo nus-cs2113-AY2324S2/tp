@@ -1,7 +1,6 @@
 package seedu.duke;
 
 public class Parser {
-    protected static Group currentGroup = new Group("");
     protected String userInput;
 
     public static class EndProgramException extends Exception {
@@ -42,7 +41,7 @@ public class Parser {
             case "member":
                 try {
                     String[] memberDetails = argument.split("/group");
-                    if(memberDetails.length == 1){
+                    if(memberDetails.length == 1) {
                         throw new ExpensesException("No group name for user! Add /group <group name>");
                     }
                     String memberName = memberDetails[0].trim();
@@ -53,29 +52,29 @@ public class Parser {
                     User newUser = new User(memberName);
                     Group group = Group.getOrCreateGroup(groupNameForUser);
                     group.addUsers(newUser);
-                } catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "expense":
-                try{
+                try {
                     String[] removeExpenseTag = argument.split("/amount");
-                    if(removeExpenseTag.length == 1){
+                    if(removeExpenseTag.length == 1) {
                         throw new ExpensesException("No description for expenses! Add /amount /paid /user");
                     }
                     String[] extractAmount = removeExpenseTag[1].split("/paid");
                     String amount = extractAmount[0];
                     amount = removeWhitespaces(amount);
 
-                    try{
+                    try {
                         float totalAmount = Float.parseFloat(amount);
                         String[] extractPayer = extractAmount[1].split("/user");
                         String payerName = extractPayer[0];
                         Expense newTransaction = new Expense(payerName,totalAmount,extractPayer);
-                    } catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.out.println("Re-enter expense with amount as a proper number.");
                     }
-                } catch(ArrayIndexOutOfBoundsException e){
+                } catch(ArrayIndexOutOfBoundsException e) {
                     System.out.println("Empty /amount, /paid or /user. Add expenses using the correct format.");
                 }
                 break;
@@ -90,7 +89,7 @@ public class Parser {
                 break;
         }
     }
-    private String removeWhitespaces(String item){
+    private String removeWhitespaces(String item) {
         String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
         return itemWithoutWhitespaces;
     }
