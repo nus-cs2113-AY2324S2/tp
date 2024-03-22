@@ -27,6 +27,12 @@ public class AddParserTest {
         assertInstanceOf(AddCommand.class, resultCommand);
     }
     @Test
+    void parseInput_stringEmptyCategoryWithSpace_addCommand() {
+        String input = "add /n test1 /d 1900 /a 10 /c ";
+        Command resultCommand = AddParser.parseInput(input);
+        assertInstanceOf(AddCommand.class, resultCommand);
+    }
+    @Test
     void parseInput_stringInvalidAmount_invalidCommand() {
         String input = "add /n test1 /d 1900 /a a /c category1";
         Command resultCommand = AddParser.parseInput(input);
@@ -99,8 +105,26 @@ public class AddParserTest {
         assertInstanceOf(InvalidCommand.class, resultCommand);
     }
     @Test
-    void parseInput_stringWrongOptionsOrder_invalidCommand() {
+    void parseInput_stringWrongAmountOptionOrder_addCommand() {
         String input = "add /n test1 /a 10 /d 1900 /c category1";
+        Command resultCommand = AddParser.parseInput(input);
+        assertInstanceOf(AddCommand.class, resultCommand);
+    }
+    @Test
+    void parseInput_stringWrongCategoryOptionOrder_addCommand() {
+        String input = "add /c category1 /n test1 /a 10 /d 1900 ";
+        Command resultCommand = AddParser.parseInput(input);
+        assertInstanceOf(AddCommand.class, resultCommand);
+    }
+    @Test
+    void parseInput_emptyOptionFields_invalidCommand() {
+        String input = "add /n /d /a /c";
+        Command resultCommand = AddParser.parseInput(input);
+        assertInstanceOf(InvalidCommand.class, resultCommand);
+    }
+    @Test
+    void parseInput_emptyOptionFieldsNoSpaces_invalidCommand() {
+        String input = "add /n/d/a/c";
         Command resultCommand = AddParser.parseInput(input);
         assertInstanceOf(InvalidCommand.class, resultCommand);
     }
