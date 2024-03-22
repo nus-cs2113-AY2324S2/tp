@@ -20,7 +20,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
+/*        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
@@ -30,7 +30,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-        Storage.main(args);
+        Storage.main(args);*/
         new Duke().run();
     }
 
@@ -47,13 +47,6 @@ public class Duke {
             Command command = parser.parseInput(userInput);
             command.execute();
         } while (!ExitCommand.getIsExit());
-    }
-
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
     }
 
 }
