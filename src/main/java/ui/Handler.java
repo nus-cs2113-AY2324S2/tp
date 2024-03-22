@@ -198,6 +198,7 @@ public class Handler {
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      */
+    //@@author JustinSoh
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
         String numberOfStationString = extractSubstringFromSpecificIndex(input, WorkoutConstant.STATION_DELIMITER);
@@ -205,6 +206,8 @@ public class Handler {
         return Integer.parseInt(numberOfStationString);
     }
 
+
+    //@@author JustinSoh
     /**
      * Retrieves the gym station details and adds a GymStation object to Gym.
      *
@@ -225,6 +228,8 @@ public class Handler {
             Output.printException(e, e.getMessage());
         }
     }
+
+    //@@author JustinSoh
     /**
      * Prints the latest run, gym, BMI entry or Period tracked.
      *
@@ -237,7 +242,7 @@ public class Handler {
     }
 
 
-
+    //@@author
     /**
      * Checks the type of exercise based on the user input.
      * Usage: to use this method whenever the user enters a new exercise.
