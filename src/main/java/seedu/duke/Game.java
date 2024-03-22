@@ -6,6 +6,7 @@ public class Game {
     public Game(String line) {
         gameName = line;
         isExit = false;
+        assert !isExit;
     }
 
     public void startGame() {
