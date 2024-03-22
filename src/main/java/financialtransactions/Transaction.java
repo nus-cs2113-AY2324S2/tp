@@ -42,9 +42,6 @@ public abstract class Transaction<T> {
     }
 
     public String toSave() {
-        if (this instanceof Outflow) {
-            amount *= -1;
-        }
         return String.format("%s|%.2f|%s|%s\n", name, amount, date.toString(), category);
     }
 }
