@@ -308,7 +308,9 @@ public class InputParsing {
         while (number < 0) {
             number = promptForPhoneNumber(in);
         }
-
+        //@@ author ParthGandhiNUS
+        assert number > 0 && number < 100000000: "Number is outside the acceptable range.";
+        //@@author Cryolian
         student.getAttributes().setPhoneNumber(number);
 
         System.out.println("Please input the student's gender: ");
