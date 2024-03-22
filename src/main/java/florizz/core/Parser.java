@@ -13,10 +13,11 @@ import florizz.command.RemoveFlowerCommand;
 import florizz.command.HelpCommand;
 import florizz.objects.Bouquet;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
-    private static Logger logger = Logger.getLogger(Parser.class.getName());
+    private static Logger logger = Logger.getLogger(Florizz.class.getName());
     // prefixes to parse input
     private static final String QUANTITY = "/q";
     private static final String ADD_FLOWER_PREFIX = "/to";
@@ -30,7 +31,7 @@ public class Parser {
         logger.entering("Parser", "parse");
 
         String[] decodedInput = commandHandler(input);
-        //logger.log(Level.INFO, "commandHandler handled command successfully");
+        logger.log(Level.INFO, "commandHandler handled command successfully");
         Command command;
         switch (decodedInput[0]){
         case ("mybouquets"):
