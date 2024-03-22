@@ -1,22 +1,28 @@
 package seedu.binbash.storage;
 
-import seedu.binbash.Item;
+import seedu.binbash.item.Item;
 import seedu.binbash.command.AddCommand;
 import seedu.binbash.exceptions.BinBashException;
+import seedu.binbash.item.PerishableRetailItem;
+import seedu.binbash.item.RetailItem;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 
 public class Storage {
+    private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     protected String filePath;
     protected String dataDirectoryPath;
@@ -133,13 +139,23 @@ public class Storage {
                 double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
                 double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
-                itemList.add(new Item(
-                        itemName,
-                        itemDescription,
-                        itemQuantity,
-                        itemExpirationDate,
-                        itemSalePrice,
-                        itemCostPrice));
+                if (itemExpirationDate.equals("N.A.")) {
+                    itemList.add(new RetailItem(
+                            itemName,
+                            itemDescription,
+                            itemQuantity,
+                            Optional.empty(),
+                            itemSalePrice,
+                            itemCostPrice));
+                } else {
+                    itemList.add(new PerishableRetailItem(
+                            itemName,
+                            itemDescription,
+                            itemQuantity,
+                            Optional.of(LocalDate.parse(itemExpirationDate, EXPECTED_INPUT_DATE_FORMAT)),
+                            itemSalePrice,
+                            itemCostPrice));
+                }
             } else {
                 isCorrupted = true;
             }

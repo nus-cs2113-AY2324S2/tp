@@ -1,6 +1,9 @@
 package seedu.binbash;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +19,7 @@ import seedu.binbash.exceptions.InvalidArgumentException;
 import seedu.binbash.exceptions.InvalidFormatException;
 
 public class Parser {
+    private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private final ItemList itemList;
 
     public Parser(ItemList itemList) {
@@ -81,10 +85,9 @@ public class Parser {
         int itemQuantity = Integer.parseInt(
                 Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
         );
-        String itemExpirationDate = Objects.requireNonNullElse( // If no expiration date provided, set as N.A.
-                matcher.group("itemExpirationDate"),
-                "N.A."
-        ).strip();
+        Optional<LocalDate> itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
+                .map(x -> x.strip())
+                .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT));
         double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
         double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
