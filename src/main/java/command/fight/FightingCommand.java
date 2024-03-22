@@ -1,6 +1,6 @@
 package command.fight;
 import command.Command;
-
+import static main.CalculaChroniclesOfTheAlgorithmicKingdom.*;
 import java.util.Scanner;
 
 
@@ -17,5 +17,6 @@ public class FightingCommand extends Command {
     @Override
     public void execute(Scanner in) {
         currentMap.fightLoop(in);
+        currentOn = 0;
     }
 }
