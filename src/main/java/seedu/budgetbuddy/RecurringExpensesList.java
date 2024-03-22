@@ -1,5 +1,7 @@
 package seedu.budgetbuddy;
 
+import seedu.budgetbuddy.exception.BudgetBuddyException;
+
 import java.util.ArrayList;
 
 public class RecurringExpensesList {
@@ -16,9 +18,26 @@ public class RecurringExpensesList {
 
     }
 
+    public void removeList(int listNumber) {
+        int listNumberAsArrayPosition = listNumber - 1;
+        recurringExpenses.remove(listNumberAsArrayPosition);
+
+        ui.printDivider();
+        System.out.println("List Successfully Removed");
+        ui.printDivider();
+
+    }
+
     public void printAllRecurringLists() {
 
         int counter = 1;
+
+        if (recurringExpenses.isEmpty()) {
+            ui.printDivider();
+            System.out.println("You currently have no Recurring Expenses");
+            ui.printDivider();
+            return;
+        }
 
         ui.printDivider();
         System.out.println("These are your lists of Recurring Expenses");
@@ -30,6 +49,10 @@ public class RecurringExpensesList {
         }
 
         ui.printDivider();
+    }
+
+    public int getSize() {
+        return recurringExpenses.size();
     }
 
 }
