@@ -30,6 +30,8 @@ test {
 
 application {
     mainClass.set("ActiveEdge.ActiveEdge")
+    applicationDefaultJvmArgs = ["-ea"] // Enable assertions for running the application
+
 }
 
 shadowJar {
@@ -44,3 +46,10 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+run {
+    enableAssertions = true
+
+}
+
+

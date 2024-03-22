@@ -1,16 +1,7 @@
 package activeedge.parser;
-import command.LogMealCommand;
-import command.HelpCommand;
-import command.LogWaterCommand;
-import command.ListMealsCommand;
-import command.ListFullCommand;
-import command.ShowCaloriesCommand;
-import command.ViewWaterIntakeCommand;
-import command.ShowGoalsCommand;
-import command.AddGoalsCommand;
+import command.*;
 
 import activeedge.Storage;
-import command.ActiveEdgeException;
 
 import static activeedge.task.TaskList.tasksList;
 import static activeedge.FoodData.foodItems;
@@ -92,6 +83,7 @@ public class Parser {
                         System.out.println("Goal amount must be a positive integer.");
                         return;
                     }
+                    assert goalAmount > 0 : "Goal amount must be positive integer";
                     if (goalType.equals("c")) {
                         new AddGoalsCommand(goalType, goalAmount).execute();
                     } else if (goalType.equals("w")) {
@@ -104,7 +96,15 @@ public class Parser {
                     System.out.println("Invalid goal amount. " +
                             "Please provide a valid integer.");
                 }
-            } else {
+
+            } else if(input.startsWith("find")) {
+                new FindCommand(input);
+
+            } else if(input.startsWith("delete")){
+                DeleteTaskCommand deleteCommand = new DeleteTaskCommand(input);
+                deleteCommand.execute();
+
+            }else {
                 System.out.println("Unknown command.");
             }
             Storage.saveLogsToFile("data/data.txt");

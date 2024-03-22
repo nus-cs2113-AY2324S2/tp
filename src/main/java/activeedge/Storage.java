@@ -8,6 +8,7 @@ import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
+import activeedge.task.WaterTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -154,6 +155,18 @@ public class Storage {
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
                         UserDetailsList.detailsList.add(newWeight);
                     }
+                    LogMeals newTask = new LogMeals(mealName,
+                            Integer.parseInt(items[len - 2]),
+                            Integer.parseInt(items[len - 1]));
+                    TaskList.tasksList.add(newTask);
+                }else if (task.startsWith("Goal")){
+                    String[] items = task.trim().split(" ");
+                    GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
+                    TaskList.tasksList.add(newTask);
+                } else if (task.startsWith("Water")) {
+                    String[] items = task.trim().split(" ");
+                    WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
+                    TaskList.tasksList.add(newTask);
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Error: " + e.getMessage());

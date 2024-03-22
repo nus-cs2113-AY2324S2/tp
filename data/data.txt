@@ -1,0 +1,26 @@
+
+Meal fishandchips 2 1530
+Meal hamandcheesesandwich 1 352
+Meal roastbeefsandwich 3 1053
+Goal Water 200
+Goal Water 600
+Goal w 5000
+Goal c 40000
+Meal sotoayam 2 600
+Goal Water 100
+Goal Water 0
+Goal Water 0
+Goal Water 0
+Goal Water 0
+Goal Water 10
+Goal Water 10
+Goal Water 0
+Goal Water 0
+Goal Water 0
+Goal Water 0
+Goal Water 0
+Goal w 1000
+Goal w 0
+Goal w -9
+Goal w 0
+

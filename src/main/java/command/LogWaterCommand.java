@@ -32,6 +32,8 @@ public class LogWaterCommand {
             throw new ActiveEdgeException("Invalid water quantity. Please provide a valid integer.");
         }
 
+        assert quantity > 0 : "Water quantity must be above 0";
+
         if (quantity <= 0) {
             System.out.println("Water quantity must be above 0. Please try again.");
         } else {
