@@ -535,12 +535,8 @@ public class Parser {
         String commandType = commandParts[1];
         commandType = commandType.trim();
 
-        try {
-            if( !RecurringExpenseCommand.commandTypes.contains(commandType) ) {
-                throw new BudgetBuddyException("This Command Type does not exist for \"rec\"");
-            }
-        } catch (BudgetBuddyException e) {
-            System.out.println(e.getMessage());
+        if(!RecurringExpenseCommand.commandTypes.contains(commandType)) {
+            System.out.println("This Command Type does not exist for \"rec\"");
             return null;
         }
 
@@ -557,6 +553,24 @@ public class Parser {
 
         if(commandType.equals("viewlists")) {
             return new RecurringExpenseCommand("viewlists", expensesList);
+        }
+
+        if(commandType.equals("removelist")) {
+            try {
+
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(listNumber, "removelist", expensesList);
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec removelist [List Number]");
+                return null;
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec removelist [List Number]");
+                return null;
+            }
         }
 
         return null;
