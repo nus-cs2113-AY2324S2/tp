@@ -131,6 +131,7 @@ public class ParserLiquidTest {
         } catch (InvalidInputException e) {
             assertEquals("Invalid input exception: " +
                     "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());        }
+                    "For example: liquids in b/Milo v/1000", e.getMessage());
+        }
     }
 }
