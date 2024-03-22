@@ -55,6 +55,7 @@ public class PlaNus {
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
             }
+            timetable = Storage.loadTimetable(Storage.USER_TIMETABLE_FILE_NAME);
         }
         Ui.printExit();
     }

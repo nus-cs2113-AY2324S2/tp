@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class Storage {
 
     public static final String FOLDER_PATH = "./data/";
-    public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
     public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
+    public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
 
     /**
      * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.
@@ -47,7 +47,7 @@ public class Storage {
         Path filePath = Paths.get(filePathName);
 
         if (!Files.exists(filePath)) {
-            Ui.printFileNotFound(filePathName);
+            System.out.println("File at " + filePathName + " is not found. Trying to create one.");
             createFile(filePathName);
         }
 
@@ -68,7 +68,7 @@ public class Storage {
                 Course course = parseCourse(line);
                 newTimetable.addCourse(course);
             } catch (Exception e) {
-                Ui.printCorruptedData(lineNumber, filePathName);
+                System.out.println("Data corrupted at line " + lineNumber + "of file at " + filePathName);
             }
             lineNumber ++;
         }
@@ -114,18 +114,11 @@ public class Storage {
             modularCredits = Integer.parseInt(words[2]);
             year = Integer.parseInt(words[3]);
             term = Integer.parseInt(words[4]);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
             throw new Exception();
         }
 
-        Course course = new Course(courseCode, courseName, modularCredits, year, term);
-        try {
-            course.setGrade(words[5]);
-        } catch (IndexOutOfBoundsException e) {
-            return course;
-        }
-
-        return course;
+        return new Course(courseCode, courseName, modularCredits, year, term);
     }
 
 }

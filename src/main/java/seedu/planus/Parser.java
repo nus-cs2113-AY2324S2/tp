@@ -26,8 +26,8 @@ public class Parser {
         switch(commandWord) {
         case "init":
             try {
-                timetable = Storage.loadTimetable(words[1]);
-                Storage.writeToFile(timetable);
+                Timetable newTimetable = Storage.loadTimetable(words[1]);
+                Storage.writeToFile(newTimetable);
             } catch (IndexOutOfBoundsException | NullPointerException e) {
                 throw new Exception(Ui.MISSING_MAJOR);
             }
