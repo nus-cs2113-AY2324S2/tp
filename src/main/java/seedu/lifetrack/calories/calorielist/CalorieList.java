@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 public class CalorieList {
+
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
     private ArrayList<Entry> calorieArrayList;
     private final int SIZE_OF_DELETE = 16;
@@ -76,7 +77,8 @@ public class CalorieList {
         } else {
             calorieListHeader();
             for (int i = 0; i < calorieArrayList.size(); i++) {
-                System.out.println("\t " + (i + 1) + ". " + calorieArrayList.get(i).toString());
+                Entry entry = calorieArrayList.get(i);
+                System.out.println("\t " + (i + 1) + ". " + entry);
             }
         }
     }

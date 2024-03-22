@@ -14,4 +14,8 @@ public class InputEntry extends Entry {
         super(description, calories, date);
         this.food = food;
     }
+
+    public Food getFood() {
+        return food;
+    }
 }

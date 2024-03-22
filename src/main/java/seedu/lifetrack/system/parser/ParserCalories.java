@@ -6,6 +6,15 @@ import seedu.lifetrack.calories.calorielist.OutputEntry;
 import seedu.lifetrack.calories.Activity;
 import seedu.lifetrack.calories.Food;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectCaloriesInputMessage;
+import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectMacrosInputMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInInputMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncompleteMacrosMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMacrosInCaloriesOutMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncorrectOrderMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMissingKeywordsMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInMacrosInputMessage;
+
 
 public class ParserCalories {
 
@@ -32,7 +41,7 @@ public class ParserCalories {
         int caloriesIndex = input.indexOf("c/");
         int dateIndex = input.indexOf("date/");
         int macrosIndex = input.indexOf("m/");
-
+        
         checkKeywordsExist(caloriesIndex, dateIndex);
         assert caloriesIndex != -1 : "The c/ keyword should exist!";
         assert dateIndex != -1 : "The date/ keyword should exist!";
@@ -56,7 +65,7 @@ public class ParserCalories {
         int[] macros = null;
         if (macrosIndex != -1) {
             if (command.equals("calories out")) {
-                throw new InvalidInputException("Invalid input exception: Calorie output entry cannot have macros");
+                throw new InvalidInputException(getMacrosInCaloriesOutMessage());
             }
             String macroString = parts[3].trim();
             try {
@@ -85,7 +94,7 @@ public class ParserCalories {
         try {
             calories = Integer.parseInt(strCalories);
         } catch (NumberFormatException e) {
-            System.out.println("Please input only positive integers into the calories field!");
+            System.out.println(getIncorrectCaloriesInputMessage());
         }
         return calories;
     }
@@ -109,28 +118,24 @@ public class ParserCalories {
             for (String macro: macroParts) {
                 //throw exception if user inputs whitespace in the macros field i.e. m/123, ,123
                 if (macro.trim().isEmpty()) {
-                    throw new InvalidInputException("Invalid input exception: " +
-                            "Please ensure that all macronutrients fields are filled up. " +
-                            "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
+                    throw new InvalidInputException(getWhitespaceInMacrosInputMessage());
                 }
                 macros[idx] = Integer.parseInt(macro.trim());
                 idx++;
             }
             //throw exception if there are missing values in the macros field
             if (idx != 3) {
-                throw new InvalidInputException("Invalid input exception: " +
-                        "Please ensure that all macronutrients fields are filled up. " +
-                        "For example: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT");
+                throw new InvalidInputException(getIncompleteMacrosMessage());
             }
         } catch (NumberFormatException e) {
-            System.out.println("Please input only numbers into the macronutrients field!");
+            System.out.println(getIncorrectMacrosInputMessage());
         }
         return macros;
     }
 
     private static void checkCaloriesIsPositiveInteger(int calories) throws InvalidInputException {
         if (calories <= 0) {
-            throw new InvalidInputException("Please input only positive integers into the calories field!");
+            throw new InvalidInputException(getIncorrectCaloriesInputMessage());
         }
     }
 
@@ -138,18 +143,14 @@ public class ParserCalories {
             throws InvalidInputException {
         //check if the description, calories or date fields are empty
         if (description.isEmpty() || strCalories.isEmpty() || date.isEmpty()) {
-            throw new InvalidInputException("Please ensure that input parameters are not empty!\n" +
-                    "Example input: " + "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE");
+            throw new InvalidInputException(getWhitespaceInInputMessage());
         }
     }
 
     private static void checkKeywordsExist(int caloriesIndex, int dateIndex) throws InvalidInputException {
         //check that c/ and date/ keywords exist in the input, else throw exception
         if (caloriesIndex == -1 || dateIndex == -1) {
-            throw new InvalidInputException("\t Invalid input! \n" +
-            "\t Please ensure that you have keyed in the correct format" +
-            " in the correct order!\n" + "\t Example input: " +
-            "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
+            throw new InvalidInputException(getMissingKeywordsMessage());
         }
     }
 
@@ -157,10 +158,7 @@ public class ParserCalories {
             throws InvalidInputException {        
         if ((macrosIndex != -1 && !(caloriesIndex < dateIndex && dateIndex < macrosIndex)) ||
                 (macrosIndex == -1 && !(caloriesIndex < dateIndex))) {
-            throw new InvalidInputException("\t Invalid input! \n" +
-            "\t Please ensure that you have keyed in the correct format" +
-            " in the correct order!\n" + "\t Example input: " +
-            "calories in DESCRIPTION c/INTEGER_CALORIES date/DATE m/MACROS");
+            throw new InvalidInputException(getIncorrectOrderMessage());
         }
     }
 

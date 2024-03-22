@@ -18,6 +18,7 @@ public class LifeTrack {
         Ui.sayHello();
         Ui.readUserInput(calorieList,liquidList);
         Ui.byeMessage();
+        in.close();
     }
 
 }
