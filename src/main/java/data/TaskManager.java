@@ -111,6 +111,7 @@ public class TaskManager {
      * @param scanner User input
      * @param weekView Current week being viewed
      * @param inMonthView Whether month is being viewed
+     * @param taskManager The taskManager class being used
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
     public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
@@ -187,6 +188,7 @@ public class TaskManager {
      * @param scanner User input
      * @param weekView Current week being viewed
      * @param inMonthView Whether month is being viewed
+     * @param taskManager The taskManager class being used
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
     public static void deleteManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager)
