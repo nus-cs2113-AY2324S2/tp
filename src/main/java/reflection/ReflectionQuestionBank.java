@@ -113,6 +113,8 @@ public class ReflectionQuestionBank {
                 randomQuestions.add(copyList.get(i));
             }
 
+            assert randomQuestions.size() == 5 : "random questions list size should be 5";
+
             return randomQuestions;
         } catch (IndexOutOfBoundsException e) {
             throw new ReflectException("Question bank is empty");
