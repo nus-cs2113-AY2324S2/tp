@@ -210,7 +210,6 @@ public class Handler {
         return Integer.parseInt(numberOfStationString);
     }
 
-
     //@@author JustinSoh
     /**
      * Retrieves the gym station details and adds a GymStation object to Gym.
@@ -252,6 +251,7 @@ public class Handler {
      * Usage: to use this method whenever the user enters a new exercise.
      * Handles all the checks for input validity and sufficiency.
      * Can assume input is valid and sufficient if no exceptions are thrown.
+     *
      * @param userInput The user input string.
      * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
      * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
@@ -295,6 +295,9 @@ public class Handler {
         }
     }
 
+    /**
+     * Get user's name, and print profile induction messages.
+     */
     public static void userInduction() {
         String name = in.nextLine();
         System.out.println("Welcome aboard, Captain " + name);
@@ -304,14 +307,21 @@ public class Handler {
         System.out.println("Tips: Enter 'help' to view the pilot manual!");
         System.out.println("Initiating FTL jump sequence...");
 
-        // save name to DataFile
+        LogFile.writeLog("Name Entered: " + name, false);
         System.out.println("FTL jump completed.");
     }
 
+    /**
+     * Initialise scanner to read user input.
+     */
     public static void initialiseScanner(){
         in = new Scanner(System.in);
         assert in != null : "Object cannot be null";
     }
+
+    /**
+     * Close scanner to stop reading user input.
+     */
     public static void destroyScanner(){
         in.close();
     }

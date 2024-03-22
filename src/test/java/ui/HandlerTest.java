@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,6 +43,24 @@ class HandlerTest {
         System.setErr(originalErr);
         WorkoutList.clearWorkoutsAndRun();
         HealthList.clearBmisAndPeriods();
+        Handler.destroyScanner();
+        assert isScannerClosed(Handler.in) : "Scanner is not closed";
+    }
+
+    /**
+     * Checks whether the Scanner has been closed after each JUnit test to prevent overwriting of test input for each
+     * test.
+     *
+     * @param in Scanner object from Handler.
+     * @return True if the scanner is closed. Otherwise, return false.
+     */
+    public static boolean isScannerClosed(Scanner in) {
+        try {
+            in.hasNext();
+            return false;
+        } catch (IllegalStateException e) {
+            return true;
+        }
     }
 
     /**
@@ -53,10 +72,8 @@ class HandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
         assertTrue(output.contains("Initiating PulsePilot landing sequence..."));
-        Handler.destroyScanner();
     }
 
     /**
@@ -69,10 +86,8 @@ class HandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
         assertTrue(output.contains("Successfully added a new run session"));
-        Handler.destroyScanner();
     }
 
     /**
@@ -88,7 +103,6 @@ class HandlerTest {
 
         String output = outContent.toString();
         assertTrue(output.contains("Added: bmi | 1.70 | 65 | 15-03-2024"));
-        Handler.destroyScanner();
     }
 
 
@@ -107,7 +121,6 @@ class HandlerTest {
 
         String output = outContent.toString();
         assertTrue(output.contains("history:"));
-        Handler.destroyScanner();
     }
 
     /**
@@ -125,7 +138,6 @@ class HandlerTest {
 
         String output = outContent.toString();
         assertTrue(output.contains("Your latest run:"));
-        Handler.destroyScanner();
     }
 
     /**
@@ -141,7 +153,6 @@ class HandlerTest {
 
         String output = outContent.toString();
         assertTrue(output.contains("Commands List"));
-        Handler.destroyScanner();
     }
 
     /**
@@ -164,7 +175,6 @@ class HandlerTest {
                 System.lineSeparator();
 
         assertEquals(expected, errContent.toString());
-        Handler.destroyScanner();
     }
 
     /**
@@ -210,7 +220,6 @@ class HandlerTest {
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             fail(e.getMessage());
         }
-
     }
 
     /**
