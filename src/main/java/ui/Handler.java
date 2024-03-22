@@ -39,6 +39,9 @@ public class Handler {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(UiConstant.SPLIT_BY_WHITESPACE)[0];
             LogFile.writeLog("User Input: " + userInput, false);
+
+            assert userInput != null : "Object cannot be null";
+
             try {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
@@ -301,6 +304,7 @@ public class Handler {
 
     public static void initialiseScanner(){
         in = new Scanner(System.in);
+        assert in != null : "Object cannot be null";
     }
     public static void destroyScanner(){
         in.close();
