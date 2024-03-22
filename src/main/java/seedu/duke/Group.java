@@ -1,11 +1,13 @@
 package seedu.duke;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Group {
     public static final HashMap<String, Group> groups = new HashMap<>();
     protected String groupName;
     protected ArrayList<User> users;
+    static String currentGroupName = null;
 
     public Group(String groupName) {
         this.groupName = groupName;
@@ -20,15 +22,46 @@ public class Group {
         return groupName;
     }
 
+    /**
+     * Retrieves an existing group by its name or creates a new one if it does not exist.
+     * It ensures that a user cannot create or join a new group without exiting their current group.
+     *
+     * @param groupName The name of the group to get or create.
+     * @return The existing or newly created group.
+     * @throws IllegalStateException If trying to create or join a new group while already in another group.
+     */
     public static Group getOrCreateGroup(String groupName) {
-        Group group = groups.get(groupName);
-        if (group == null) {
-            group = new Group(groupName);
-            groups.put(groupName, group);
-            System.out.println("Created New Group: " + groupName);
-        } else {
-            System.out.println("Entering group: " + groupName);
+
+        // Check if user is accessing a group they are already in
+        if (currentGroupName != null && currentGroupName.equals(groupName)) {
+            System.out.println("You are in " + groupName);
+            return groups.get(groupName);
         }
+
+        // Use of Optional to handle non-existing groups in hashmap
+        Optional<Group> optionalGroup = Optional.ofNullable(groups.get(groupName));
+
+        // Tracker for existing group
+        final boolean[] isNewGroupCreated = {false};
+
+        // If the user is in a different group, prevent them from creating or joining a new group.
+        Group group = optionalGroup.orElseGet(() -> {
+            if (currentGroupName != null && !currentGroupName.equals(groupName)) {
+                throw new IllegalStateException("Please exit the current group '" + currentGroupName + "' to create or join another group.");
+            }
+            Group newGroup = new Group(groupName);
+            groups.put(groupName, newGroup);
+            System.out.println(groupName + " created.");
+            isNewGroupCreated[0] = true;
+            return newGroup;
+        });
+
+        // If a new group was created, update currentGroupName to reflect this.
+        if (isNewGroupCreated[0]) {
+            currentGroupName = groupName;
+        }
+
+        System.out.println("You are now in " + groupName);
         return group;
     }
 
@@ -43,6 +76,15 @@ public class Group {
             System.out.println("Added " + user.getName() + " to " + groupName);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void exitGroup() {
+        if (currentGroupName != null) {
+            System.out.println("You have exited " + currentGroupName + ".");
+            currentGroupName = null;
+        } else {
+            System.out.println("Please try again.");
         }
     }
 }
