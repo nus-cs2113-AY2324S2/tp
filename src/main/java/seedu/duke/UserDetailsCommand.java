@@ -1,13 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.FlirtForkException;
-
 public class UserDetailsCommand extends Command {
 
-    private static String HORIZONTAL = "____________________________________________________________";
+    private static final String HORIZONTAL = "____________________________________________________________";
 
     @Override
-    public void execute(FavouritesList favouritesList, FoodList foodList, ActivityList activityList, Ui ui, Storage storage) {
+    public void execute(FavouritesList favouritesList, FoodList foodList, 
+        ActivityList activityList, Ui ui, Storage storage) {
         ui.showMessage("Please enter your name:");
         String name = ui.readCommand();
         ui.showMessage("Great! Hello there " + name + ", it's my pleasure to know you!"); 

@@ -9,9 +9,8 @@ import java.util.Scanner;
 import java.io.InputStream;
 
 public class Storage {
-    private String filePath;
-
     private static final String USER_DETAILS_FILE = "./data/UserDetails.txt";
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
