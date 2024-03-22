@@ -49,7 +49,12 @@ public class Student {
         return false;
     }
 
-    //@@ Cryolian
+    //@@author ParthGandhiNUS
+    public String textFileInputString() {
+        return String.format("%s",getName().trim());
+    }
+
+    //@@author Cryolian
     public String getName() {
         return name;
     }

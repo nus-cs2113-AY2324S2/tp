@@ -28,7 +28,10 @@ public class InputParsingTest {
 
         String printedOutput = outputStream.toString().trim();
         String expectedOutput = "Hope you've had a productive day. See you again! Goodbye!" +
-                System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+                System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                + System.lineSeparator() + "Analysing Inputs..." + System.lineSeparator()
+                + "Updated Student Records successfully!"+System.lineSeparator()
+                + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
         assertEquals(expectedOutput.trim(), printedOutput);
     }
