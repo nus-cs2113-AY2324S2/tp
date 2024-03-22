@@ -14,6 +14,7 @@ public class Duke {
     private ActivityList activities;
     private Ui ui;
     private Storage storage;
+    private UserDetails userDetails;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,6 +23,7 @@ public class Duke {
             favourites = new FavouritesList(storage.loadFavourites());
             foods = new FoodList(storage.loadFood());
             activities = new ActivityList(storage.loadActivity());
+            userDetails = storage.loadUserDetails();
         } catch (FileNotFoundException e) {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
