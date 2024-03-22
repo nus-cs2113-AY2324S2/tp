@@ -13,5 +13,4 @@ public class Messages {
             "Stock!";
 
     public static final String GOODBYE = "Thank you for using StockMaster, hope we have helped your lazy ass!";
-
 }

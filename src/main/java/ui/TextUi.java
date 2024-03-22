@@ -2,6 +2,7 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import item.Item;
 
 public class TextUi {
 
@@ -64,5 +65,11 @@ public class TextUi {
             }
             replyToUser(arrayList.indexOf(item) + 1 +". " + item);
         }
+    }
+
+    public static void showEditMessage(String item, int oldQuantity, int newQuantity) {
+        replyToUser("\n" +
+                "Changed quantity of " + item + " from " + oldQuantity + " to " + newQuantity
+        );
     }
 }
