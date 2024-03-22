@@ -13,7 +13,7 @@ Welcome to BinBash!
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
 
-item with
+[R] item with
 	description: no exp or quantity
 	quantity: 0
 	expiry date: N.A.
@@ -23,7 +23,7 @@ item with
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
 
-item with
+[R] item with
 	description: no exp
 	quantity: 10
 	expiry date: N.A.
@@ -33,7 +33,7 @@ item with
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
 
-item with
+[P][R] item with
 	description: no quantity
 	quantity: 0
 	expiry date: 01-01-1999
@@ -43,7 +43,7 @@ item with
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
 
-item with
+[P][R] item with
 	description: everything
 	quantity: 100
 	expiry date: 01-01-1999
@@ -51,28 +51,28 @@ item with
 	cost price: $100.00
 -------------------------------------------------------------
 -------------------------------------------------------------
-1. item with
+1. [R] item with
 	description: no exp or quantity
 	quantity: 0
 	expiry date: N.A.
 	sale price: $0.00
 	cost price: $100.00
 
-2. item with
+2. [R] item with
 	description: no exp
 	quantity: 10
 	expiry date: N.A.
 	sale price: $0.00
 	cost price: $100.00
 
-3. item with
+3. [P][R] item with
 	description: no quantity
 	quantity: 0
 	expiry date: 01-01-1999
 	sale price: $0.00
 	cost price: $100.00
 
-4. item with
+4. [P][R] item with
 	description: everything
 	quantity: 100
 	expiry date: 01-01-1999
