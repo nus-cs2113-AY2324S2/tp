@@ -1,7 +1,7 @@
 package brokeculator.parser;
 
 import brokeculator.command.Command;
-import brokeculator.command.InvalidCommand;
+import brokeculator.command.HelpCommand;
 
 public class GeneralInputParser {
     public static Command getCommandFromUserInput(String userInput) {
@@ -24,7 +24,7 @@ public class GeneralInputParser {
             commandToExecute = ExitParser.parseInput(userInput);
             break;
         default:
-            commandToExecute = new InvalidCommand("Invalid command. Please try again.");
+            commandToExecute = new HelpCommand();
         }
         return commandToExecute;
     }

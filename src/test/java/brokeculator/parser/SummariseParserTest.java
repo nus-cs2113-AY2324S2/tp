@@ -15,15 +15,15 @@ public class SummariseParserTest {
     }
 
     @Test
-    public void parseInput_inputFromZero_summariseCommand() {
+    public void parseInput_inputFromZero_invalidCommand() {
         String input = "summarise /from 0";
         Command resultCommand = SummariseParser.parseInput(input);
-        assertInstanceOf(SummariseCommand.class, resultCommand);
+        assertInstanceOf(InvalidCommand.class, resultCommand);
     }
 
     @Test
     public void parseInput_inputFromPosInt_summariseCommand() {
-        String input = "summarise /from 2";
+        String input = "summarise /from 1";
         Command resultCommand = SummariseParser.parseInput(input);
         assertInstanceOf(SummariseCommand.class, resultCommand);
     }
@@ -57,10 +57,10 @@ public class SummariseParserTest {
     }
 
     @Test
-    public void parseInput_inputToZero_summariseCommand() {
+    public void parseInput_inputToZero_invalidCommand() {
         String input = "summarise /to 0";
         Command resultCommand = SummariseParser.parseInput(input);
-        assertInstanceOf(SummariseCommand.class, resultCommand);
+        assertInstanceOf(InvalidCommand.class, resultCommand);
     }
 
     @Test

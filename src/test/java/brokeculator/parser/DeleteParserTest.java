@@ -7,15 +7,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 public class DeleteParserTest {
     @Test
-    public void parseInput_inputZeroIndex_deleteCommand() {
+    public void parseInput_inputZeroIndex_invalidCommand() {
         String input = "delete 0";
         Command resultCommand = DeleteParser.parseInput(input);
-        assertInstanceOf(DeleteCommand.class, resultCommand);
+        assertInstanceOf(InvalidCommand.class, resultCommand);
     }
 
     @Test
     public void parseInput_inputPosIntIndex_deleteCommand() {
-        String input = "delete 5";
+        String input = "delete 1";
         Command resultCommand = DeleteParser.parseInput(input);
         assertInstanceOf(DeleteCommand.class, resultCommand);
     }

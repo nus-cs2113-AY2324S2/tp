@@ -39,10 +39,10 @@ public class FileManager {
     }
 
     private void printDataLossWarning() {
-        UI.print("Errors! Your data will not be saved");
+        UI.println("Errors! Your data will not be saved");
     }
     private void printDataSavedMessage() {
-        UI.print("Data file successfully created!");
+        UI.println("Data file successfully created!");
     }
 
     private void createDataFile() throws Exception {

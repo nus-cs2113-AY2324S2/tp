@@ -1,6 +1,8 @@
 package brokeculator.expense;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 public class ExpenseTest {
@@ -41,7 +43,7 @@ public class ExpenseTest {
             assertEquals("today", expenseFromFile.getDate());
             assertEquals("FOOD", expenseFromFile.getCategory());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            fail();
         }
     }
 }

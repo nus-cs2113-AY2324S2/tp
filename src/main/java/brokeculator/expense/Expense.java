@@ -3,10 +3,13 @@ package brokeculator.expense;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
+import java.util.logging.Logger;
+
 /**
  * Represents an expense in the expense tracker.
  */
 public class Expense implements Saveable {
+    private static final Logger logger = Logger.getLogger(Expense.class.getName());
     private final String description;
     private final String date;
     private final double amount;
@@ -72,6 +75,7 @@ public class Expense implements Saveable {
     public static Expense getExpenseFromFile(String stringRepresentation) throws Exception {
         String[] split = stringRepresentation.split(" ");
         if (split.length != 4) {
+            logger.warning("Expense file is corrupted.");
             throw new Exception("Expense file is corrupted.");
         }
         
@@ -85,5 +89,13 @@ public class Expense implements Saveable {
         String category = split[3].substring(1, split[3].length() - 1);
 
         return new Expense(description, amount, date, category);
+    }
+
+    @Override
+    public String toString() {
+        if (category.equalsIgnoreCase("null")) {
+            return String.format("%s $%.2f (%s)", description, amount, date);
+        }
+        return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
     }
 }
