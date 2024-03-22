@@ -2,6 +2,8 @@ package classify.user;
 
 import classify.student.Student;
 
+import java.util.ArrayList;
+
 public class Ui {
     //@@author ParthGandhiNUS
     private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -38,9 +40,16 @@ public class Ui {
         printDeleteHelpMessage();
         printListHelpMessage();
         printByeHelpMessage();
+        printSortNameMessage();
         System.out.println("help                        Prints this help message");
     }
 
+    //@@ author tayponghee
+    private static void printSortNameMessage() {
+        System.out.println("sort_name                        sorts the students by name lexicographically");
+    }
+
+    //@@ author Cryolian
     private static void printByeHelpMessage() {
         System.out.println("bye                         Exits Classify");
     }
@@ -160,4 +169,13 @@ public class Ui {
         System.out.println(STUDENT_GRADES_PROMPT);
     }
 
+    //@@ author tayponghee
+    public static void printStudentList(ArrayList<Student> students) {
+        System.out.println("List of Students:");
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println((i + 1) + ". " + students.get(i).getName());
+        }
+        System.out.println("Currently, there are " + students.size() + " students in the list.");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 }
