@@ -48,7 +48,9 @@ public class BattleInterface extends AMap {
             ui.printQuestion(mathQuestion);
             String answerCommand = in.nextLine().trim();
             while (!pattern.matcher(answerCommand).matches()) {
-                System.out.println("Answer must be an integer.");
+                currentTextBox.setNextError("Answer must be an integer.");
+                currentTextBox.setNextInstruction(mathQuestion.getQuestion());
+                ui.printTextBox(currentTextBox);
                 answerCommand = in.nextLine().trim();
             }
             answer = Integer.parseInt(answerCommand);
