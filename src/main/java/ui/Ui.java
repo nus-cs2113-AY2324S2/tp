@@ -32,6 +32,9 @@ public class Ui {
 
 
         printDividingLine();
+        if (!box.getNextError().isEmpty()) {
+            System.out.println(box.getNextError());
+        }
         if (!box.getNextNarration().isEmpty()) {
             System.out.println(box.getNextNarration());
             System.out.println("\n");
@@ -41,9 +44,6 @@ public class Ui {
         }
         if (!box.getNextInstruction().isEmpty()) {
             System.out.println(box.getNextInstruction());
-        }
-        if (!box.getNextError().isEmpty()) {
-            System.out.println(box.getNextError());
         }
         printDividingLine();
         box.clearAll();

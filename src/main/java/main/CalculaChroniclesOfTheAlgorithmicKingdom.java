@@ -42,17 +42,13 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
         ui.printPlayerStatus(playerStatus);
         ui.printMap(storedMaps.get(currentOn));
-        System.out.println("Type 'h' to get the help menu.");
+        ui.printTextBox(textBox);
 
         Command userCommand;
         while (true) {
             String userCommandText = in.nextLine();
 
             userCommand = parser.parseCommand(userCommandText);
-            if (userCommand instanceof ErrorCommand) {
-                userCommand.execute(); // To put in textbox when implemented
-                continue;
-            }
             setUserCommand(userCommand, storedMaps.get(currentOn), playerStatus, textBox);
 
             if (!(storedMaps.get(currentOn) instanceof FirstMap) && userCommand instanceof MapMoveCommand) {

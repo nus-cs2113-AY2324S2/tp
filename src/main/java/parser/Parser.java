@@ -47,7 +47,7 @@ public class Parser {
             command = new QuitCommand();
             break;
         case ERROR:
-            command = new ErrorCommand(new IllegalCommandException("That's not a valid command."));
+            command = new ErrorCommand(new IllegalCommandException("That's not a valid command.\n\n\nWill you [fight] or will you [run]?"));
             break;
         default:
             command = null;
@@ -66,7 +66,7 @@ public class Parser {
         switch (commandType){
         case FIGHT:
         case RUN:
-            command = new ErrorCommand(new IllegalCommandException("You can't do this here"));
+            command = new ErrorCommand(new IllegalCommandException("You can't do this here\n\n\n"));
             break;
         case MOVE_FORWARD:
             command = new MovingForwardCommand(userCommand);
@@ -91,7 +91,7 @@ public class Parser {
             command = new HelpCommand();
             break;
         default:
-            command = new ErrorCommand(new IllegalCommandException("That's not a valid command. Enter h or help to find the list of commands."));
+            command = new ErrorCommand(new IllegalCommandException("That's not a valid command.\n\n\nEnter 'h' or 'help' to find the list of commands."));
         }
         return command;
     }
