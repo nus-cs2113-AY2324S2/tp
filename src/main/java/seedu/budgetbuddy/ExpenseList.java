@@ -30,7 +30,7 @@ public class ExpenseList {
         return expenses.size();
     }
 
-    public List<Expense> getExpenses() {
+    public ArrayList<Expense> getExpenses() {
         return expenses;
     }
 
