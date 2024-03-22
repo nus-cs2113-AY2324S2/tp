@@ -78,5 +78,4 @@ public class LiquidListTest {
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, liquidList.getSize());
     }
-    //@@author
 }

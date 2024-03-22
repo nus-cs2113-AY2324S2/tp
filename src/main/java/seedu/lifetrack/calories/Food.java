@@ -11,4 +11,16 @@ public class Food {
         this.proteins = proteins;
         this.fats = fats;
     }
+
+    public int getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public int getProteins() {
+        return proteins;
+    }
+
+    public int getFats() {
+        return fats;
+    }
 }
