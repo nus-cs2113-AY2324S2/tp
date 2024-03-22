@@ -1,10 +1,12 @@
 package classify;
 
+import classify.datacommands.DataHandler;
 import classify.student.StudentList;
 import classify.user.InputParsing;
 import classify.user.Ui;
 import classify.user.UserInput;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Classify {
@@ -13,12 +15,12 @@ public class Classify {
     /**
      * Main entry-point for the Classify application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        // @@author ParthGandhiNUS
-        // CAA: 9 March 2024 1pm
+        // @@author ParthGandhiNUS  
         Ui.printWelcomeMessage();
         Ui.printUserPrompt();
+        DataHandler.readStudentInfo(StudentList.masterStudentList);
         
         // Takes in input from the user, and processes input to determine if it contains a command and a name   
         String[] userCommand = UserInput.processInput(in.nextLine());
