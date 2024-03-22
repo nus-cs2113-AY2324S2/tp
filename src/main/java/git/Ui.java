@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import exceptions.GitException;
 import grocery.Grocery;
 
 
@@ -46,7 +45,7 @@ public class Ui {
             System.out.println("Exiting...");
             System.exit(0);
         }
-}
+    }
 
     public void printHello(String userName) {
         System.out.println("Hello " + userName + "!");
