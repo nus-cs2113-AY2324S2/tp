@@ -2,6 +2,7 @@ package activeedge.ui;
 
 import static activeedge.task.TaskList.tasksList;
 
+import activeedge.task.Task;
 import activeedge.task.WaterTask;
 import activeedge.task.LogMeals;
 
@@ -36,11 +37,12 @@ public class CommandUi {
         int k = 1;
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).toString().startsWith("Water")) {
-                System.out.print(j + ". " + tasksList.get(i).toString().substring(6));
+                System.out.print(k + ". " + tasksList.get(i).toString().substring(6));
                 System.out.println(" ml");
                 k++;
             }
         }
+
     }
 
     public static void printMealLogMessage(LogMeals logMeals) {
@@ -77,4 +79,17 @@ public class CommandUi {
         System.out.println("Total water consumed today: " + totalWaterIntake +
                 " ml (" + String.format("%.0f%%", percentage) + " of " + waterGoal + "ml goal).");
     }
+
+    public static void printInvalidDeleteFormatMessage() {
+        System.out.println("This is an invalid request. Please try again!");
+    }
+
+    public static void printTaskDeletedMessage(Task deletedTask) {
+        System.out.println("Task deleted: " + deletedTask.getDescription());
+    }
+
+    public static void printTaskNotFoundMessage() {
+        System.out.println("Task not found.");
+    }
+
 }

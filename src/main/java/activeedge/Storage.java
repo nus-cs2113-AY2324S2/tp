@@ -3,6 +3,7 @@ package activeedge;
 import activeedge.task.GoalTask;
 import activeedge.task.LogMeals;
 import activeedge.task.TaskList;
+import activeedge.task.WaterTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -97,7 +98,7 @@ public class Storage {
                     TaskList.tasksList.add(newTask);
                 } else if (task.startsWith("Water")) {
                     String[] items = task.trim().split(" ");
-                    GoalTask newTask = new GoalTask(items[0], Integer.parseInt(items[1]));
+                    WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
                     TaskList.tasksList.add(newTask);
                 }
             }
