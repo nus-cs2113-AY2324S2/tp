@@ -63,7 +63,6 @@ public class MathPool {
         addMathQuestion("7^2 = ", 49, 3);
 
         // Difficulty 4
-        addMathQuestion("What is the value of π (pi) to two decimal places?", 3, 4);
         addMathQuestion("What is the sum of all angles in a triangle?", 180, 4);
         addMathQuestion("How many sides does a hexagon have?", 6, 4);
         addMathQuestion("What is the area of a square with side length 5?", 25, 4);
