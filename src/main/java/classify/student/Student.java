@@ -28,6 +28,7 @@ public class Student {
     public void setAttributes(StudentAttributes attributes) {
         this.attributes = attributes;
     }
+
     public String getGender() {
         return attributes.getGender();
     }
@@ -38,6 +39,14 @@ public class Student {
 
     public String getLastPaymentDate() {
         return attributes.getLastPaymentDate();
+    }
+    public boolean hasSubject(String subject) {
+        for (SubjectGrade subjectGrade : attributes.getSubjectGrades()) {
+            if (subjectGrade.getSubject().equalsIgnoreCase(subject)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //@@ Cryolian

@@ -28,10 +28,16 @@ public class InputParsing {
     private static final String EDIT = "edit";
     private static final String HELP = "help";
     private static final String SORT_NAME = "sort_name";
+    private static final String VIEW_SUBJECT = "view_subject";
     private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
             "No students in the list, can't sort by name!";
+    private static final String STUDENTS_WITH_THE_SUBJECT = "Students with the subject \"";
+    private static final String NO_STUDENTS_FOUND_WITH_THE_SUBJECT = "No students found with the subject: ";
+    private static final String ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK =
+            "Enter the subject name (type 'exit' to go back):";
+    private static final String EXIT = "exit";
+    private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
-
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in) {
         // @@author blackmirag3
@@ -77,10 +83,83 @@ public class InputParsing {
             listStudentsByName(masterStudentList);
             break;
 
+        case VIEW_SUBJECT:
+            handleViewSubjectCommand(masterStudentList, in, userCommand[1]);
+            break;
+
         default:
             Ui.printWrongInput();
             break;
         }
+    }
+
+    /**
+     * Lets the user check view a list of students with that corresponding subject.
+     * If the user types view_subject [subject], it will only generate the list of students with that subject,
+     * then exit.
+     * If the user types view_subject, the user can continuously view all students that
+     * have that subject, until they exit the command.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The user's input.
+     */
+    private static void handleViewSubjectCommand(ArrayList<Student> masterStudentList, Scanner in, String subject) {
+        if (subject != null && !subject.isEmpty()) {
+            viewStudentsBySubject(masterStudentList, subject);
+        } else {
+            findStudentsWithSubject(masterStudentList, in);
+        }
+    }
+
+    /**
+     * Finds students with the specified subject and displays them to the user.
+     * Continuously prompts the user to enter a subject name until they choose to exit.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     */
+    private static void findStudentsWithSubject(ArrayList<Student> masterStudentList, Scanner in) {
+        while (true) {
+            System.out.println(ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK);
+            String input = in.nextLine().trim();
+
+            if (input.equalsIgnoreCase(EXIT)) {
+                System.out.println(EXITED_THE_COMMAND);
+                Ui.printDivider();
+                return;
+            }
+
+            if (!input.isEmpty()) {
+                viewStudentsBySubject(masterStudentList, input);
+                return;
+            } else {
+                System.out.println("Please enter a valid subject name.");
+            }
+        }
+    }
+
+    /**
+     * Views all students who have the specified subject.
+     *
+     * @param masterStudentList The list of all students.
+     * @param subject           The subject to search for among students.
+     */
+    private static void viewStudentsBySubject(ArrayList<Student> masterStudentList, String subject) {
+        boolean found = false;
+        System.out.println("Students with the subject \"" + subject + "\":");
+
+        for (Student student : masterStudentList) {
+            if (student.hasSubject(subject)) {
+                System.out.println("- " + student.getName());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No students found with the subject: " + subject);
+        }
+
+        Ui.printDivider();
     }
 
     /**
@@ -97,7 +176,6 @@ public class InputParsing {
         Collections.sort(students, StudentComparators.nameComparator);
         listStudents(students);
     }
-
 
     // @@author blackmirag3
     private static void listStudents(ArrayList<Student> list) {
