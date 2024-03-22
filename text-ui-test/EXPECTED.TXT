@@ -2,5 +2,9 @@
 Welcome to Classify!
 What can I do for you today?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creating a new Student Info File...
+Now getting previous Student Info Records...
+Created a new student info file successfully!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Hope you've had a productive day. See you again! Goodbye!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
