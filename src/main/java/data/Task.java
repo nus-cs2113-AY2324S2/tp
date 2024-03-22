@@ -76,4 +76,44 @@ public class Task {
     public String getTaskType() {
         return "?";
     }
+
+    /**
+     * Getter for start date for an Event task.
+     * It is a dummy function meant for the Event subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getStartDate() {
+        return "";
+    }
+
+    /**
+     * Getter for end date for an Event task.
+     * It is a dummy function meant for the Event subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getEndDate() {
+        return "";
+    }
+
+    /**
+     * Getter for by date for a Deadline task.
+     * It is a dummy function meant for the Deadline subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getByDate() {
+        return "";
+    }
+
+    /**
+     * Method that creates the save format for a task.
+     * It is a dummy function meant for the subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getSaveFormat () {
+        return "";
+    }
 }
