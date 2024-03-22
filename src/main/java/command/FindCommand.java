@@ -12,6 +12,5 @@ public class FindCommand {
         } else {
             System.out.println(LINE +"Oh no! You are missing the keyword you want to search for!\n" + LINE);
         }
-
     }
 }
