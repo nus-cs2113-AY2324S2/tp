@@ -14,7 +14,7 @@ public class DeleteInflowCommand extends BaseCommand {
                 inflowIndex = part.substring(2);
             }
         }
-        assert inflowIndex != null;
+        assert inflowIndex != null : "inflowIndex should not be null";
         manager.removeInflow(Integer.parseInt(inflowIndex));
         return "Ok. Inflow deleted";
     }

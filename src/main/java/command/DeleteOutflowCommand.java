@@ -14,7 +14,7 @@ public class DeleteOutflowCommand extends BaseCommand {
                 outflowIndex = part.substring(2);
             }
         }
-        assert outflowIndex != null;
+        assert outflowIndex != null : "outflowIndex should not be null";
         manager.removeOutflow(Integer.parseInt(outflowIndex));
         return "Ok. Outflow deleted";
     }

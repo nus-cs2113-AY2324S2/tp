@@ -15,13 +15,12 @@ import userinterface.UI;
 public class Main {
     public static void main(String[] args) throws SecurityException {
         Storage storage = new Storage("./data");
-        TransactionManager manager;
-        manager = storage.loadFile();
+        TransactionManager manager = new TransactionManager();
 
         UI ui = new UI();
         ui.printMessage("Welcome. Enter your username and password to login.");
 
-        Parser parser = new Parser();
+        Parser parser = new Parser(ui);
         BaseCommand baseCommand = null;
         String response = "";
 
@@ -35,13 +34,13 @@ public class Main {
             return;
         } else {
             ui.printMessage("Password is correct. You are now logged in");
-            manager = new TransactionManager();
+            manager = storage.loadFile();
         }
 
         do {
             String command = ui.readInput();
             try {
-                baseCommand = parser.parseCommand(command, manager);
+                baseCommand = parser.parseCommand(command);
                 response = baseCommand.execute(manager);
                 ui.printMessage(response);
                 inactivityTimer.resetTimer();
@@ -63,7 +62,6 @@ public class Main {
                 inactivityTimer.checkTimeElapsed();
             } catch (InactivityTimeoutException e) {
                 if (e.isTimeOut()) {
-                    //parser.setIsContinue(false);
                     assert baseCommand != null;
                     baseCommand.setIsExit(true);
                 } else if (e.isGracePeriod()) {
@@ -75,7 +73,6 @@ public class Main {
                         inactivityTimer.resetTimer();
                     } else if (wantToContinue.equalsIgnoreCase("n") ||
                             wantToContinue.equalsIgnoreCase("no")) {
-                        //parser.setIsContinue(false);
                         System.out.println("Session ended. ");
                         assert baseCommand != null;
                         baseCommand.setIsExit(true);

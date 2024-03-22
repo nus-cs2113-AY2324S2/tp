@@ -19,7 +19,7 @@ public class EditOutflowCommand extends BaseCommand {
         for (String part : commandParts) {
             if (part.startsWith("i/")) {
                 outflowIndex = Integer.parseInt(part.substring(2));
-            } else if (part.startsWith("r/")) {
+            } else if (part.startsWith("n/")) {
                 outflowName = part.substring(2);
             } else if (part.startsWith("a/")) {
                 outflowAmount = Double.parseDouble(part.substring(2));
@@ -34,6 +34,7 @@ public class EditOutflowCommand extends BaseCommand {
 
         String outflowDateTime = outflowDate + " " + outflowTime;
         Outflow updatedOutflow = new Outflow(outflowName, outflowAmount, outflowDateTime);
+        assert outflowCategory != null : "outflowCategory should not be null";
         updatedOutflow.setCategory(Outflow.Category.valueOf(outflowCategory.toUpperCase()));
         manager.editOutflow(outflowIndex, updatedOutflow);
         return "Ok. Edited outflow";
