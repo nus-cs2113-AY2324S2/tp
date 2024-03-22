@@ -44,8 +44,8 @@ public class Florizz {
             FileHandler fh = new FileHandler();
             fh.setLevel(Level.ALL);
             logger.addHandler(fh);
-            System.out.println("FileHandler opened");
-            System.out.println(Florizz.class.getClassLoader().getResource("logging.properties"));
+            //System.out.println("FileHandler opened");
+            //System.out.println(Florizz.class.getClassLoader().getResource("logging.properties"));
         } catch (IOException e) {
             ui.printIOError();
         }
