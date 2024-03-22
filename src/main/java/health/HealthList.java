@@ -12,6 +12,7 @@ public class HealthList extends ArrayList<Health> {
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
+    //@@author j013n3
     /**
      * Adds a Bmi to the list of Bmis whenever addBmi is called.
      *
@@ -23,6 +24,7 @@ public class HealthList extends ArrayList<Health> {
         bmis.add(bmi);
     }
 
+    //@@author syj02
     /**
      * Prints the most recently added Bmi object from bmis list.
      *
@@ -36,6 +38,8 @@ public class HealthList extends ArrayList<Health> {
 
     /**
      * Prints all the BMI entries recorded.
+     *
+     * @throws AssertionError If bmis list is empty
      */
     public static void showBmiHistory() {
         assert !bmis.isEmpty() : HealthConstant.BMI_LIST_EMPTY;
@@ -48,6 +52,7 @@ public class HealthList extends ArrayList<Health> {
      * Adds a period to the ArrayList of periods.
      *
      * @param period Period object to be added
+     * @throws AssertionError If period object is null
      */
     public static void addPeriod(Period period) {
         assert period != null : HealthConstant.PERIOD_CANNOT_BE_NULL;
@@ -56,6 +61,7 @@ public class HealthList extends ArrayList<Health> {
 
     /**
      * Prints the latest period object added.
+     * @throws AssertionError If periods list is empty
      */
     public static void showLatestPeriod() {
         assert !periods.isEmpty() : HealthConstant.PERIOD_LIST_EMPTY;
@@ -63,9 +69,10 @@ public class HealthList extends ArrayList<Health> {
         System.out.println(periods.get(currentIndex - 1));
     }
 
-
+    //@@author j013n3
     /**
      * Prints all Period entries tracked.
+     * @throws AssertionError If periods list is empty
      */
     public static void showPeriodHistory() {
         assert !periods.isEmpty() : HealthConstant.PERIOD_LIST_EMPTY;
@@ -74,11 +81,15 @@ public class HealthList extends ArrayList<Health> {
         }
     }
 
+    //@@l5_z
     /**
      * Clears the Bmis and Periods array lists.
+     * @throws AssertionError If periods and bmis lists are not empty
      */
     public static void clearBmisAndPeriods() {
         periods.clear();
         bmis.clear();
+        assert bmis.isEmpty() : "Bmi list is not cleared.";
+        assert periods.isEmpty() : "Period list is not cleared.";
     }
 }

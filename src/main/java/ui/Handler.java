@@ -140,6 +140,7 @@ public class Handler {
         Output.printHistory(filter);
     }
 
+
     /**
      * Handles user input related to health data. Parses the user input to determine
      * the type of health data and processes it accordingly.
