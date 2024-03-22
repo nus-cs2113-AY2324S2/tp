@@ -79,31 +79,31 @@ public class TransactionManager {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
     }
 
-    public String showLastNTransactions(int n) throws Exception{
+    public String showLastNTransactions(int n) throws Exception {
         int listSize = transactionList.getTransactionListSize();
         if (n > listSize) {
             throw new Exception("Invalid index");
         }
         int index = 1;
-        String returnedText = "Inflows:\nTransactions:\n";
+        StringBuilder returnedText = new StringBuilder("Inflows:\nTransactions:\n");
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Inflow) {
-                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
+                returnedText.append(String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString()));
                 index++;
             }
         }
 
         index = 1;
-        returnedText += "\nOutflows:\nTransactions:\n";
+        returnedText.append("\nOutflows:\nTransactions:\n");
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Outflow) {
-                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
+                returnedText.append(String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString()));
                 index++;
             }
         }
-        return returnedText;
+        return returnedText.toString();
     }
 
     public String toSave() {

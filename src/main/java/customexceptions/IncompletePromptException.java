@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 public class IncompletePromptException extends Exception {
     public static final String[] INSTRUCTIONS = {
-        "add-inflow", "add-outflow", "delete-inflow", "delete-outflow",
-        "login", "quit", "view-history"};
+        "add-inflow", "add-outflow", "delete-inflow", "delete-outflow", "quit"};
     private boolean isTypo = false;
     private boolean isIncomplete = false;
     private boolean isUnknown = false;
