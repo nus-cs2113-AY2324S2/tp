@@ -84,7 +84,7 @@ public class InputParsing {
             break;
 
         case VIEW_SUBJECT:
-            handleViewSubjectCommand(masterStudentList, in);
+            handleViewSubjectCommand(masterStudentList, in, userCommand[1]);
             break;
 
         default:
@@ -95,23 +95,46 @@ public class InputParsing {
 
     /**
      * Lets the user check view a list of students with that corresponding subject.
-     * Will only exit from the command if the user types the command exit.
+     * If the user types view_subject [subject], it will only generate the list of students with that subject,
+     * then exit.
+     * If the user types view_subject, the user can continuously view all students that
+     * have that subject, until they exit the command.
      *
      * @param masterStudentList The list of all students.
      * @param in                The user's input.
      */
-    private static void handleViewSubjectCommand(ArrayList<Student> masterStudentList, Scanner in) {
+    private static void handleViewSubjectCommand(ArrayList<Student> masterStudentList, Scanner in, String subject) {
+        if (subject != null && !subject.isEmpty()) {
+            viewStudentsBySubject(masterStudentList, subject);
+        } else {
+            findStudentsWithSubject(masterStudentList, in);
+        }
+    }
+
+    /**
+     * Finds students with the specified subject and displays them to the user.
+     * Continuously prompts the user to enter a subject name until they choose to exit.
+     *
+     * @param masterStudentList The list of all students.
+     * @param in                The scanner object to read user input.
+     */
+    private static void findStudentsWithSubject(ArrayList<Student> masterStudentList, Scanner in) {
         while (true) {
             System.out.println(ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK);
-            String subject = in.nextLine().trim();
+            String input = in.nextLine().trim();
 
-            if (subject.equalsIgnoreCase(EXIT)) {
+            if (input.equalsIgnoreCase(EXIT)) {
                 System.out.println(EXITED_THE_COMMAND);
                 Ui.printDivider();
-                break;
+                return;
             }
 
-            viewStudentsBySubject(masterStudentList, subject);
+            if (!input.isEmpty()) {
+                viewStudentsBySubject(masterStudentList, input);
+                return;
+            } else {
+                System.out.println("Please enter a valid subject name.");
+            }
         }
     }
 
@@ -123,7 +146,7 @@ public class InputParsing {
      */
     private static void viewStudentsBySubject(ArrayList<Student> masterStudentList, String subject) {
         boolean found = false;
-        System.out.println(STUDENTS_WITH_THE_SUBJECT + subject + "\":");
+        System.out.println("Students with the subject \"" + subject + "\":");
 
         for (Student student : masterStudentList) {
             if (student.hasSubject(subject)) {
@@ -133,7 +156,7 @@ public class InputParsing {
         }
 
         if (!found) {
-            System.out.println(NO_STUDENTS_FOUND_WITH_THE_SUBJECT + subject);
+            System.out.println("No students found with the subject: " + subject);
         }
 
         Ui.printDivider();
