@@ -37,16 +37,12 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
         printLine();
-
         String userName = in.nextLine();
-        if (!Objects.equals(userName, "exit")) {
-            printHello(userName);
-        } else {
-            System.out.println("Exiting...");
-            System.exit(0);
-        }
+        printHello(userName);
     }
-
+    /**
+     * Prints Hello with user's name
+     */
     public void printHello(String userName) {
         System.out.println("Hello " + userName + "!");
 
