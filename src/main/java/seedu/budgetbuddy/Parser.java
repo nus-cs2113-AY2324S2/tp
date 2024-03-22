@@ -11,6 +11,7 @@ import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.command.FindExpensesCommand;
+import seedu.budgetbuddy.command.RecurringExpenseCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,9 @@ public class Parser {
         return details.substring(startIndex, endIndex).trim();
     }
 
+    public Boolean isRecCommand(String input) {
+        return input.startsWith("rec ");
+    }
     public Boolean isFindExpensesCommand(String input) {
         return input.startsWith("find expenses");
     }
@@ -526,6 +530,35 @@ public class Parser {
         }
     }
 
+    public Command handleRecCommand(String input, RecurringExpensesList expensesList) {
+        String[] commandParts = input.split(" ");
+        String commandType = commandParts[1];
+        commandType = commandType.trim();
+
+        try {
+            if( !RecurringExpenseCommand.commandTypes.contains(commandType) ) {
+                throw new BudgetBuddyException("This Command Type does not exist for \"rec\"");
+            }
+        } catch (BudgetBuddyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        if (commandType.equals("newlist")) {
+            try {
+                String listName = commandParts[2];
+                return new RecurringExpenseCommand(listName, "newlist", expensesList);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please Input a Valid listName");
+                System.out.println("Command Format : rec newlist [listName]");
+                return null;
+            }
+
+        }
+
+        return null;
+    }
+
     /**
      * Parses a string input into a Command object and returns the associated
      * command to handle the user input
@@ -534,7 +567,8 @@ public class Parser {
      * @return A Command object corresponding to the user input, or null if the
      *         input is invalid.
      */
-    public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
+    public Command parseCommand(RecurringExpensesList expensesList, ExpenseList expenses,
+                                SavingList savings, String input) {
         
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
@@ -571,6 +605,10 @@ public class Parser {
 
         if (isFindExpensesCommand(input)) {
             return handleFindExpensesCommand(input, expenses);
+        }
+
+        if (isRecCommand(input)) {
+            return handleRecCommand(input, expensesList);
         }
 
         return null;
