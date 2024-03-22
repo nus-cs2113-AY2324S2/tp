@@ -8,9 +8,20 @@ public class UI {
     private static Scanner scanner = new Scanner(System.in);
 
     /**
-     * Displays the welcome message.
+     * Displays the welcome message along with ASCII art.
      */
     public static void showWelcomeMessage() {
+        System.out.println(" /$$                                      /$$$$$$  /$$       /$$    ");
+        System.out.println("| $$                                     /$$__  $$| $$      | $$    ");
+        System.out.println("| $$        /$$$$$$  /$$$$$$$   /$$$$$$ | $$  \\ $$| $$$$$$$ | $$    ");
+        System.out.println("| $$       /$$__  $$| $$__  $$ /$$__  $$| $$$$$$$$| $$__  $$| $$    ");
+        System.out.println("| $$      | $$  \\ $$| $$  \\ $$| $$  \\ $$| $$__  $$| $$  \\ $$|__/    ");
+        System.out.println("| $$      | $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$        ");
+        System.out.println("| $$$$$$$$|  $$$$$$/| $$  | $$|  $$$$$$$| $$  | $$| $$  | $$ /$$    ");
+        System.out.println("|________/ \\______/ |__/  |__/ \\____  $$|__/  |__/|__/  |__/|__/    ");
+        System.out.println("                               /$$  \\ $$                            ");
+        System.out.println("                              |  $$$$$$/                            ");
+        System.out.println("                               \\______/                             ");
         System.out.println("Welcome to LongAh!");
     }
 
