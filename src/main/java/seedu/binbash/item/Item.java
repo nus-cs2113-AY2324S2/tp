@@ -1,16 +1,21 @@
-package seedu.binbash;
+package seedu.binbash.item;
 
-public class Item {
-    private final String itemName;
-    private final String itemDescription;
-    private final int itemQuantity;
-    private final String itemExpirationDate;
-    private final double itemSalePrice;
-    private final double itemCostPrice;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+public abstract class Item {
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    protected final String itemName;
+    protected final String itemDescription;
+    protected int itemQuantity;
+    protected final Optional<LocalDate> itemExpirationDate;
+    protected final double itemSalePrice;
+    protected final double itemCostPrice;
 
 
 
-    public Item(String itemName, String itemDescription, int itemQuantity, String itemExpirationDate,
+    public Item(String itemName, String itemDescription, int itemQuantity, Optional<LocalDate> itemExpirationDate,
                 double itemSalePrice, double itemCostPrice) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -31,8 +36,9 @@ public class Item {
     public int getItemQuantity() {
         return itemQuantity;
     }
+
     public String getItemExpirationDate() {
-        return itemExpirationDate;
+        return itemExpirationDate.map(x -> x.format(DATE_TIME_FORMATTER)).orElse("N.A.");
     }
 
     public double getItemSalePrice() {
@@ -54,7 +60,7 @@ public class Item {
                 itemName,
                 itemDescription,
                 itemQuantity,
-                itemExpirationDate,
+                getItemExpirationDate(),
                 itemSalePrice,
                 itemCostPrice
         );
