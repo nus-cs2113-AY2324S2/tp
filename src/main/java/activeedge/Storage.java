@@ -1,6 +1,5 @@
 package activeedge;
 
-import activeedge.parser.Parser;
 import activeedge.task.GoalTask;
 import activeedge.task.LogMeals;
 import activeedge.task.TaskList;
@@ -9,7 +8,6 @@ import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
-import command.LogMealCommand;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,7 +87,8 @@ public class Storage {
         }
         if (file.length() == 0) {
             System.out.print("\n");
-            int i = 0,j = 0;
+            int i = 0;
+            int j = 0;
             System.out.println("Welcome new user! PLease input your height and weight in whole numbers!");
             try {
                 while(j<1) {
