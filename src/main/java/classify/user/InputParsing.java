@@ -2,6 +2,8 @@ package classify.user;
 
 import classify.student.Student;
 import classify.student.StudentAttributes;
+
+import classify.student.StudentComparators;
 import classify.student.StudentList;
 import classify.student.SubjectGrade;
 
@@ -26,7 +28,7 @@ public class InputParsing {
     private static final String EDIT = "edit";
     private static final String HELP = "help";
     private static final String SORT_NAME = "sort_name";
-    public static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
+    private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
             "No students in the list, can't sort by name!";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
 
@@ -92,7 +94,7 @@ public class InputParsing {
             System.out.println(NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME);
             return;
         }
-        Collections.sort(students, Student.nameComparator);
+        Collections.sort(students, StudentComparators.nameComparator);
         listStudents(students);
     }
 
@@ -165,7 +167,11 @@ public class InputParsing {
             case DELETE:
                 deleteAttribute(in, attributes);
                 break;
+
+            default:
+                break;
             }
+
         }
     }
 

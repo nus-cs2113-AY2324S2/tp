@@ -46,7 +46,7 @@ public class Ui {
 
     //@@ author tayponghee
     private static void printSortNameMessage() {
-        System.out.println("sort_name                        sorts the students by name lexicographically");
+        System.out.println("sort_name                   sorts the students by name lexicographically");
     }
 
     //@@ author Cryolian

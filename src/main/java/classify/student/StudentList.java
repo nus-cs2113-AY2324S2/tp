@@ -1,8 +1,6 @@
 package classify.student;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-
 
 /**
  * Class to represent a list of Students.

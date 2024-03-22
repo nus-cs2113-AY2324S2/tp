@@ -1,7 +1,5 @@
 package classify.student;
 
-import java.util.Comparator;
-
 /**
  * Meant to represent a particular student of the tuition centre.
  * The student can first be declared with only a name, and the subsequent details
@@ -41,8 +39,6 @@ public class Student {
     public String getLastPaymentDate() {
         return attributes.getLastPaymentDate();
     }
-    public static Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
-
 
     //@@ Cryolian
     public String getName() {

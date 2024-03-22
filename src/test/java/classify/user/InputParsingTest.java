@@ -80,8 +80,10 @@ public class InputParsingTest {
                                              + System.lineSeparator() +
                 "bye                         Exits Classify"
                                              + System.lineSeparator() +
+               "sort_name                   sorts the students by name lexicographically"
+                                             + System.lineSeparator() +
                 "help                        Prints this help message" +
-                System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+            System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
         assertEquals(expectedOutput.trim(), printedOutput);
     }
