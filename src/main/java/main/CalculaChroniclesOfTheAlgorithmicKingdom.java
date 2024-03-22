@@ -52,6 +52,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
             if (!(storedMaps.get(currentOn) instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
                 System.out.println("Invalid Command");
+
             } else if (userCommand.getCommandDescription().equals("FIGHT!")){
                 userCommand.execute(in);
             } else {
@@ -61,6 +62,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
                 ui.printMap(storedMaps.get(currentOn));
+                ui.printTextBox(textBox);
             }
 
         }

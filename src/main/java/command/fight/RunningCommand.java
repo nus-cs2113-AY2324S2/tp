@@ -11,7 +11,7 @@ public class RunningCommand extends Command {
     @Override
     public void execute(){
         if(currentMap instanceof BattleInterface) {
-
+            textBox.setNextNarration("You decide to run and successfully got away");
         }
     }
 }
