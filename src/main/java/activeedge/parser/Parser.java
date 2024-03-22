@@ -92,6 +92,7 @@ public class Parser {
                         System.out.println("Goal amount must be a positive integer.");
                         return;
                     }
+                    assert goalAmount > 0 : "Goal amount must be positive integer";
                     if (goalType.equals("c")) {
                         new AddGoalsCommand(goalType, goalAmount).execute();
                     } else if (goalType.equals("w")) {
