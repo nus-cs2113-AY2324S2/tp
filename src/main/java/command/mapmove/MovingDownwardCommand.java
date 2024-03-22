@@ -1,6 +1,5 @@
 package command.mapmove;
 
-
 public class MovingDownwardCommand extends MapMoveCommand {
     public MovingDownwardCommand(String userInput) {
         super(userInput);
