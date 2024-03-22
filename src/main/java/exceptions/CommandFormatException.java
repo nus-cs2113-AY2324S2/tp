@@ -11,7 +11,7 @@ public class CommandFormatException extends Exception{
         case ADD:
             System.out.println(Messages.INVALID_ADD_FORMAT);
             break;
-        case DELETE:
+        case DEL:
             System.out.println(Messages.INVALID_DELETE_FORMAT);
             break;
         case EDIT:
