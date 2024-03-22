@@ -5,9 +5,9 @@ import java.util.Optional;
 
 public class Group {
     public static final HashMap<String, Group> groups = new HashMap<>();
+    public static String currentGroupName = null;
     protected String groupName;
     protected ArrayList<User> users;
-    static String currentGroupName = null;
 
     public Group(String groupName) {
         this.groupName = groupName;
@@ -47,7 +47,8 @@ public class Group {
         // If the user is in a different group, prevent them from creating or joining a new group.
         Group group = optionalGroup.orElseGet(() -> {
             if (currentGroupName != null && !currentGroupName.equals(groupName)) {
-                throw new IllegalStateException("Please exit the current group '" + currentGroupName + "' to create or join another group.");
+                throw new IllegalStateException("Please exit the current group '" + currentGroupName
+                            + "' to create or join another group.");
             }
             Group newGroup = new Group(groupName);
             groups.put(groupName, newGroup);
