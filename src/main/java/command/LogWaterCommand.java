@@ -28,15 +28,14 @@ public class LogWaterCommand {
         int quantity = 0;
         try {
             quantity = Integer.parseInt(quantityString);
-        } catch (NumberFormatException e) {
-            throw new ActiveEdgeException("Invalid water quantity. Please provide a valid integer.");
-        }
-        if (quantity <= 0) {
-            System.out.println("Water quantity must be above 0. Please try again.");
-        } else {
+            if (quantity <= 0) {
+                throw new ActiveEdgeException("Water quantity must be above 0. Please try again.");
+            }
             WaterTask waterTask = new WaterTask(quantity);
             TaskList.tasksList.add(waterTask);
             CommandUi.printWaterLogMessage(waterTask);
+        } catch (NumberFormatException e) {
+            throw new ActiveEdgeException("Invalid water quantity. Please provide a valid integer.");
         }
     }
 }

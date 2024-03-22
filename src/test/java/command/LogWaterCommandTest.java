@@ -21,7 +21,7 @@ public class LogWaterCommandTest {
         assertEquals("Invalid water quantity. " +
                 "Please provide a valid integer.", exception.getMessage());
     }
-
+    
     @Test
     void testNonPositiveQuantity() {
         LogWaterCommand logWaterCommand = new LogWaterCommand("-100");
