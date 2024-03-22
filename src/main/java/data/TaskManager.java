@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 import static data.TaskManagerException.checkIfDateHasTasks;
 import static data.TaskManagerException.checkIfDateInCurrentWeek;
 import static data.TaskManagerException.checkIfDateInCurrentMonth;
@@ -23,14 +22,15 @@ import static storage.Storage.saveTasksToFile;
  * Manages tasks by providing functionalities to add, delete, and update tasks.
  */
 public class TaskManager {
-    private static final Map<LocalDate, List<String>> tasks = new HashMap<>();
+    private static final Map<LocalDate, List<Task>> tasks = new HashMap<>();
 
     /**
      * Adds a task for a specific date.
      * @param date The date for the task.
-     * @param task The description of the task.
+     * @param taskDescription The description of the task.
      */
-    public static void addTask(LocalDate date, String task) {
+    public static void addTask(LocalDate date, String taskDescription) {
+        Task task = new Task(taskDescription);
         tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
     }
 
@@ -40,7 +40,7 @@ public class TaskManager {
      * @param taskIndex The index of the task to delete.
      */
     public void deleteTask(LocalDate date, int taskIndex) {
-        List<String> dayTasks = tasks.get(date);
+        List<Task> dayTasks = tasks.get(date);
         if (dayTasks != null && taskIndex >= 0 && taskIndex < dayTasks.size()) {
             dayTasks.remove(taskIndex);
             if (dayTasks.isEmpty()) {
@@ -53,16 +53,18 @@ public class TaskManager {
      * Updates a task for a specific date and task index.
      * @param date The date of the task.
      * @param taskIndex The index of the task to update.
-     * @param updatedTask The updated description of the task.
+     * @param newTaskDescription The updated description of the task.
      * @throws IndexOutOfBoundsException If the task index is out of bounds.
      */
-    public static void updateTask(LocalDate date, int taskIndex, String updatedTask) throws IndexOutOfBoundsException {
+    public static void updateTask(LocalDate date, int taskIndex, String newTaskDescription)
+            throws IndexOutOfBoundsException {
         try {
-            List<String> dayTasks = tasks.get(date);
+            List<Task> dayTasks = tasks.get(date);
             boolean dayHasTasks = dayTasks != null;
             boolean taskIndexExists = taskIndex >= 0 && taskIndex < Objects.requireNonNull(dayTasks).size();
             if (dayHasTasks && taskIndexExists) {
-                dayTasks.set(taskIndex, updatedTask);
+                Task task = new Task(newTaskDescription);
+                dayTasks.set(taskIndex, task);
             }
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException(e);
@@ -74,7 +76,7 @@ public class TaskManager {
      * @param date The date to retrieve tasks for.
      * @return A list of tasks for the given date.
      */
-    public List<String> getTasksForDate(LocalDate date) {
+    public List<Task> getTasksForDate(LocalDate date) {
         return tasks.getOrDefault(date, new ArrayList<>());
     }
 
@@ -98,9 +100,9 @@ public class TaskManager {
         }
 
         System.out.println("Enter the task description:");
-        String task = scanner.nextLine().trim();
+        String taskDescription = scanner.nextLine().trim();
 
-        addTask(date, task);
+        addTask(date, taskDescription);
         saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
         System.out.println("Task added.");
     }
@@ -111,6 +113,7 @@ public class TaskManager {
      * @param scanner User input
      * @param weekView Current week being viewed
      * @param inMonthView Whether month is being viewed
+     * @param taskManager The taskManager class being used
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
     public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
@@ -152,12 +155,13 @@ public class TaskManager {
      * Adds tasks from a file to the TaskManager.
      * @param tasksFromFile A map containing tasks read from a file.
      */
-    public void addTasksFromFile(Map<LocalDate, List<String>> tasksFromFile) {
-        for (Map.Entry<LocalDate, List<String>> entry : tasksFromFile.entrySet()) {
+    public void addTasksFromFile(Map<LocalDate, List<Task>> tasksFromFile) {
+        for (Map.Entry<LocalDate, List<Task>> entry : tasksFromFile.entrySet()) {
             LocalDate date = entry.getKey();
-            List<String> taskList = entry.getValue();
-            for (String task : taskList) {
-                addTask(date, task);
+            List<Task> taskList = entry.getValue();
+            for (Task task : taskList) {
+                String taskDescription = task.getName();
+                addTask(date, taskDescription);
             }
         }
     }
@@ -172,12 +176,12 @@ public class TaskManager {
      */
     private static void listTasksAtDate(TaskManager taskManager, LocalDate date, String message)
             throws TaskManagerException {
-        List<String> dayTasks = taskManager.getTasksForDate(date);
+        List<Task> dayTasks = taskManager.getTasksForDate(date);
         checkIfDateHasTasks(dayTasks);
 
         System.out.println(message);
         for (int i = 0; i < dayTasks.size(); i++) {
-            System.out.println((i + 1) + ". " + dayTasks.get(i));
+            System.out.println((i + 1) + ". " + dayTasks.get(i).getName());
         }
     }
 
@@ -187,6 +191,7 @@ public class TaskManager {
      * @param scanner User input
      * @param weekView Current week being viewed
      * @param inMonthView Whether month is being viewed
+     * @param taskManager The taskManager class being used
      * @throws TaskManagerException Throws exception when not in correct week/month view
      */
     public static void deleteManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager)
@@ -209,11 +214,27 @@ public class TaskManager {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
             taskManager.deleteTask(date, taskNumber - 1);
             System.out.println("Task deleted.");
-            saveTasksToFile(tasks, Storage.FILE_PATH); //Update tasks.txt file
+            saveTasksToFile(tasks, Storage.FILE_PATH); // Update tasks.txt file
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number. Please try again.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("The task number you have entered does not exist. Please try again.");
+        }
+    }
+
+    /**
+     * Function to delete all tasks on a specified date.
+     * Currently only used to complement JUnit testing.
+     *
+     * @param taskManager The taskManager class in use.
+     * @param specifiedDate The date on which all tasks are to be deleted.
+     */
+
+    public static void deleteAllTasksOnDate (TaskManager taskManager, LocalDate specifiedDate) {
+        List<Task> dayTasks = tasks.get(specifiedDate);
+        int numOfTasks = dayTasks.size();
+        for (int i = numOfTasks; i >= 0; i--) {
+            taskManager.deleteTask(specifiedDate, i - 1);
         }
     }
 
@@ -237,5 +258,4 @@ public class TaskManager {
         }
         return date;
     }
-
 }

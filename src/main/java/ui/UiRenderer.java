@@ -3,10 +3,15 @@ package ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import data.Task;
 import data.TaskManager;
 
 public class UiRenderer {
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     private static final int SPACE_COUNT = 10;
@@ -50,6 +55,7 @@ public class UiRenderer {
     }
 
     private static void printDateRow(DateTimeFormatter dateFormatter, LocalDate date) {
+        logger.log(Level.INFO, "Printing dates for week starting from " + date);
         for (int i = 0; i < numberOfDaysInWeek; i++) {
             System.out.printf(ENTRY_FORMAT, dateFormatter.format(date));
             date = date.plusDays(1);
@@ -61,17 +67,17 @@ public class UiRenderer {
         for (int taskIndex = 0; taskIndex < maxTasks; taskIndex++) {
             for (int dayIndex = 0; dayIndex < numberOfDaysInWeek; dayIndex++) {
                 LocalDate currentDate = startOfWeek.plusDays(dayIndex);
-                List<String> dayTasks = taskManager.getTasksForDate(currentDate);
+                List<Task> dayTasks = taskManager.getTasksForDate(currentDate);
                 printTaskForDay(dayTasks, taskIndex);
             }
             System.out.println(VERTICAL_DIVIDER);
         }
     }
 
-    public static void printTaskForDay(List<String> dayTasks, int taskIndex) {
+    public static void printTaskForDay(List<Task> dayTasks, int taskIndex) {
         if (taskIndex < dayTasks.size()) {
-            String task = dayTasks.get(taskIndex);
-            System.out.printf(TASK_DISPLAY_FORMAT, task);
+            Task task = dayTasks.get(taskIndex);
+            System.out.printf(TASK_DISPLAY_FORMAT, task.getName());
         } else {
             System.out.print(EMPTY_TASK_DISPLAY_FORMAT);
         }

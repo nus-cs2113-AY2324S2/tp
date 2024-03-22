@@ -1,5 +1,7 @@
 package storage;
 
+import data.Task;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,10 +13,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
 
     public static final Path FILE_PATH = Path.of("./save/tasks.txt");
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Creates directory and tasks.txt if it does not exist
@@ -26,9 +31,11 @@ public class Storage {
         if (!Files.isDirectory(path.getParent())) {
             //  System.out.println("Directory not found, creating new one");
             Files.createDirectories(path.getParent());
+            logger.log(Level.INFO, "new directory created");
         }
         if (!Files.exists(path)) {
             Files.createFile(path);
+            logger.log(Level.INFO, "new tests.txt file created");
         }
     }
 
@@ -38,13 +45,18 @@ public class Storage {
      * @param tasks Hashmap of tasks
      * @param path File Path of tests.txt file
      */
-    public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
+    public static void saveTasksToFile(Map<LocalDate, List<Task>> tasks, Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
-            for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
+            for (Map.Entry<LocalDate, List<Task>> entry : tasks.entrySet()) {
+                assert entry != null;
                 LocalDate date = entry.getKey();
-                List<String> taskList = entry.getValue();
-                for (String task : taskList) {
-                    writer.write(date + "|" + task + System.lineSeparator());
+                assert date != null;
+                List<Task> taskList = entry.getValue();
+                assert taskList != null;
+                for (Task task : taskList) {
+                    String taskDescription = task.getName();
+                    writer.write(date + "|" + taskDescription + System.lineSeparator());
+                    logger.log(Level.INFO, "task added: " + taskDescription);
                 }
             }
         } catch (IOException e) {
@@ -58,20 +70,34 @@ public class Storage {
      * @param path File Path of tests.txt file
      * @return tasks hashmap of tasks read from test.txt
      */
-    public static Map<LocalDate, List<String>> loadTasksFromFile(Path path) {
-        Map<LocalDate, List<String>> tasks = new HashMap<>();
+    public static Map<LocalDate, List<Task>> loadTasksFromFile(Path path) {
+        Map<LocalDate, List<Task>> tasks = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (!checkFileFormat(line)) {
+                    throw new StorageFileException();
+                }
                 String[] parts = line.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0]);
-                String task = parts[1];
-                tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
+                String taskDescription = parts[1];
+                Task taskToAdd = new Task(taskDescription);
+                tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(taskToAdd);
             }
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
+            logger.log(Level.WARNING, "I/O exception occurred");
+        } catch (StorageFileException e) {
+            System.out.println("tasks.txt is in wrong format.");
+            logger.log(Level.WARNING, "Wrong tasks.txt format");
         }
+        logger.log(Level.INFO, "tasks returned");
         return tasks;
+    }
+
+    public static boolean checkFileFormat(String line) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}\\|.+";
+        return line.matches(regex);
     }
 
 }

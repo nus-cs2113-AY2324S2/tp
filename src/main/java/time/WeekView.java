@@ -1,5 +1,6 @@
 package time;
 
+import data.Task;
 import data.TaskManager;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -108,9 +109,9 @@ public class WeekView {
             for (int taskIndex = 0; taskIndex < maxTasks; taskIndex++) {
                 for (int dayIndex = 0; dayIndex < 7; dayIndex++) {
                     LocalDate date = weekStart.plusDays(dayIndex);
-                    List<String> dayTasks = taskManager.getTasksForDate(date);
+                    List<Task> dayTasks = taskManager.getTasksForDate(date);
                     if (taskIndex < dayTasks.size()) {
-                        String task = dayTasks.get(taskIndex);
+                        Task task = dayTasks.get(taskIndex);
                         System.out.printf("| %-10.10s ", task);
                     } else {
                         System.out.print("|            ");
