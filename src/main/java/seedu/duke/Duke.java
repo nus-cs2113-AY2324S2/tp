@@ -3,6 +3,7 @@ package seedu.duke;
 import command.Command;
 import command.ExitCommand;
 import parser.Parser;
+import storage.Storage;
 import ui.TextUi;
 
 import itemlist.Itemlist;
@@ -28,6 +29,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+        Storage.main(args);
         new Duke().run();
     }
 
