@@ -34,10 +34,40 @@ public class MathPool {
     }
 
     public void init() {
+        // Difficulty 0
         addMathQuestion("1 + 1 = ", 2, 0);
         addMathQuestion("1 + 2 = ", 3, 0);
         addMathQuestion("3 + 1 = ", 4, 0);
         addMathQuestion("2 + 5 = ", 7, 0);
         addMathQuestion("10 + 23 = ", 33, 0);
+
+        // Difficulty 1
+        addMathQuestion("5 - 3 = ", 2, 1);
+        addMathQuestion("8 + 4 = ", 12, 1);
+        addMathQuestion("10 - 6 = ", 4, 1);
+        addMathQuestion("7 + 6 = ", 13, 1);
+        addMathQuestion("9 - 2 = ", 7, 1);
+
+        // Difficulty 2
+        addMathQuestion("6 * 4 = ", 24, 2);
+        addMathQuestion("12 / 3 = ", 4, 2);
+        addMathQuestion("9 * 5 = ", 45, 2);
+        addMathQuestion("20 / 4 = ", 5, 2);
+        addMathQuestion("8 * 7 = ", 56, 2);
+
+        // Difficulty 3
+        addMathQuestion("5^2 = ", 25, 3);
+        addMathQuestion("√144 = ", 12, 3);
+        addMathQuestion("3^3 = ", 27, 3);
+        addMathQuestion("√81 = ", 9, 3);
+        addMathQuestion("7^2 = ", 49, 3);
+
+        // Difficulty 4
+        addMathQuestion("What is the value of π (pi) to two decimal places?", 3, 4);
+        addMathQuestion("What is the sum of all angles in a triangle?", 180, 4);
+        addMathQuestion("How many sides does a hexagon have?", 6, 4);
+        addMathQuestion("What is the area of a square with side length 5?", 25, 4);
+        addMathQuestion("What is the perimeter of a rectangle with sides 4 and 6?", 20, 4);
     }
+
 }
