@@ -1,5 +1,8 @@
 package ui;
 
+import item.Item;
+import itemlist.Itemlist;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,7 +65,7 @@ public class TextUi {
             if (item == null) {
                 break;
             }
-            replyToUser(String.valueOf(item));
+            replyToUser(arrayList.indexOf(item) + 1 +". " + item);
         }
     }
 }

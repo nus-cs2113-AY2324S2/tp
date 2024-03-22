@@ -1,5 +1,7 @@
 package item;
 
+import itemlist.Itemlist;
+
 public class Item {
     public static int numberOfItems;
     private final String itemName;
@@ -7,7 +9,7 @@ public class Item {
     private String uom;
     private String category;
     private boolean isOOS;
-    
+
 
     public Item(String name, int quantity, String uom, String category) {
         this.itemName = name;
@@ -26,10 +28,20 @@ public class Item {
         numberOfItems++;
     }
 
+    public String getCategory() {
+        if (this.category.equals("NA")) {
+            return null;
+        } else {
+            return this.category;
+        }
+    }
     public String getItemName() {
         return this.itemName;
     }
 
+    public String getUom() {
+        return uom;
+    }
     public int getQuantity() {
         return this.quantity;
     }
@@ -47,6 +59,7 @@ public class Item {
     }
 
     public String toString() {
-        return "Item: " + getItemName() + " (Qty " + getQuantity() + ")";
+        String categoryString = (getCategory() != null) ? " to " + getCategory() : ""; // Check if category is null
+        return (getItemName() + " (Qty " + getQuantity() + " " + getUom() + ")" + categoryString);
     }
 }

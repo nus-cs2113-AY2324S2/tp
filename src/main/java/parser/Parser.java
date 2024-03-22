@@ -83,7 +83,6 @@ public class Parser {
 
     private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-        System.out.println(matcher);
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
