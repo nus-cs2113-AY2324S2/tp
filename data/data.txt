@@ -6,3 +6,7 @@ Goal Water 600
 Goal w 5000
 Goal c 40000
 Meal sotoayam 2 600
+Goal w 1000
+Goal w 0
+Goal w -9
+Goal w 0
