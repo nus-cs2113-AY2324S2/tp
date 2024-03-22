@@ -34,12 +34,12 @@ public class LogWaterCommand {
 
         assert quantity > 0 : "Water quantity must be above 0";
 
-        if (quantity <= 0) {
-            System.out.println("Water quantity must be above 0. Please try again.");
-        } else {
+//        if (quantity <= 0) {
+//            System.out.println("Water quantity must be above 0. Please try again.");
+//        } else {
             WaterTask waterTask = new WaterTask(quantity);
             TaskList.tasksList.add(waterTask);
             CommandUi.printWaterLogMessage(waterTask);
-        }
+        //}
     }
-}
+}   
