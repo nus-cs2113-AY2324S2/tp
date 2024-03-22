@@ -66,7 +66,7 @@ public class TaskManagerException extends Exception {
      * @throws TaskManagerException if the specified date has no tasks.
      */
 
-    public static void checkIfDateHasTasks(List<String> dayTasks) throws TaskManagerException {
+    public static void checkIfDateHasTasks(List<Task> dayTasks) throws TaskManagerException {
         if (dayTasks.isEmpty()) {
             throw new TaskManagerException("No tasks to delete on this date.");
         }
