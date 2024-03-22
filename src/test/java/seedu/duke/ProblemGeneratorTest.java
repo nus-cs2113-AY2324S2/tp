@@ -3,11 +3,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProblemGeneratorTest {
     public static String[] commands = {"generate -t + -n 1 -d 1", "generate -t - -n 2 -d 2",
-                            "generate -t * -n 3 -d 3", "generate -t / -n 4 -d 4"};
+            "generate -t * -n 3 -d 3", "generate -t / -n 4 -d 4"};
     public static void operatorTest() {
         for (String command: commands) {
             ProblemGenerator pb = new ProblemGenerator();
@@ -15,13 +17,17 @@ public class ProblemGeneratorTest {
             ArrayList<Problem> problems = test.getProblem();
             for (Problem problem: problems) {
                 if (command.equals(commands[0])) {
-                    assertTrue(problem.unsolved().contains("+"), "+: Problem format is incorrect: " + problem.unsolved());
+                    assertTrue(problem.unsolved().contains("+"),
+                            "+: Problem format is incorrect: " + problem.unsolved());
                 } else if (command.equals(commands[1])) {
-                    assertTrue(problem.unsolved().contains("-"),"-: Problem format is incorrect: " + problem.unsolved());
+                    assertTrue(problem.unsolved().contains("-"),
+                            "-: Problem format is incorrect: " + problem.unsolved());
                 } else if (command.equals(commands[2])) {
-                    assertTrue(problem.unsolved().contains("*"), "*: Problem format is incorrect: " + problem.unsolved());
+                    assertTrue(problem.unsolved().contains("*"),
+                            "*: Problem format is incorrect: " + problem.unsolved());
                 } else if (command.equals(commands[3])) {
-                    assertTrue(problem.unsolved().contains("/"), "/: Problem format is incorrect: " + problem.unsolved());
+                    assertTrue(problem.unsolved().contains("/"),
+                            "/: Problem format is incorrect: " + problem.unsolved());
                 } else {
                     fail("fail: Problem format is incorrect: " + problem.unsolved());
                 }
@@ -71,7 +77,7 @@ public class ProblemGeneratorTest {
             }
         }
     }
-    
+
 
     public static void main(String[] args) {
         operatorTest();
