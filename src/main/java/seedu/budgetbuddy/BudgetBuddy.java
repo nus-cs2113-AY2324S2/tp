@@ -10,20 +10,24 @@ public class BudgetBuddy {
     private ExpenseList expenses;
     private SavingList savings;
 
+    private RecurringExpensesList expensesList;
+
     public BudgetBuddy() {
         ui = new Ui();
         parser = new Parser();
         expenses = new ExpenseList();
         savings = new SavingList();
+        expensesList = new RecurringExpensesList();
+
     }
 
     public void handleCommands(String input) {
-        Command command = parser.parseCommand(expenses, savings, input);
+        Command command = parser.parseCommand(expensesList, expenses, savings, input);
 
         if (command != null) {
             command.execute();
         } else {
-            System.out.println("Invalid command");
+            System.out.println("(Invalid command)");
         }
     }
 
