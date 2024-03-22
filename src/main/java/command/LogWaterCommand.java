@@ -28,12 +28,10 @@ public class LogWaterCommand {
         int quantity = 0;
         try {
             quantity = Integer.parseInt(quantityString);
+            assert quantity > 0 : "Water quantity must be above 0";
         } catch (NumberFormatException e) {
             throw new ActiveEdgeException("Invalid water quantity. Please provide a valid integer.");
         }
-
-        assert quantity > 0 : "Water quantity must be above 0";
-
         if (quantity <= 0) {
             System.out.println("Water quantity must be above 0. Please try again.");
         } else {
