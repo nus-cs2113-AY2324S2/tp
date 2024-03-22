@@ -78,3 +78,4 @@ public class CommandUi {
                 " ml (" + String.format("%.0f%%", percentage) + " of " + waterGoal + "ml goal).");
     }
 }
+
