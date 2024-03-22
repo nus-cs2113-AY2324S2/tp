@@ -13,10 +13,6 @@ public class AddCommand extends Command {
     private final Item toAdd;
 
     public AddCommand(String itemName, int quantity, String uom, String category) {
-        System.out.println(itemName);
-        System.out.println(quantity);
-        System.out.println(uom);
-        System.out.println(category);
         this.itemName = itemName;
         this.quantity = quantity;
         this.uom = uom;
@@ -43,9 +39,12 @@ public class AddCommand extends Command {
     @Override
     public void execute() {
         Itemlist.addItem(toAdd);
-        System.out.println(MESSAGE_SUCCESS + getItemName() + "(Qty: " + getQuantity() + ")");
+        System.out.print(MESSAGE_SUCCESS + getItemName() + " (Qty: " + getQuantity() + " " + getUom() + ")");
         if (!category.equals("NA")) {
-            System.out.println("to " + getCategory());
+            System.out.println(" to " + getCategory());
+        } else {
+            System.out.println();
+            assert category.equals("NA");
         }
     }
 }
