@@ -1,5 +1,4 @@
 package florizz.command;
-
 import florizz.core.Ui;
 import florizz.objects.Bouquet;
 
