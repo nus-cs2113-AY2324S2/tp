@@ -1,11 +1,9 @@
 package florizz.core;
 
 import florizz.command.Command;
-import florizz.logging.MyFilter;
 import florizz.logging.MyFormatter;
 import florizz.objects.Bouquet;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.ConsoleHandler;
