@@ -18,7 +18,7 @@ public class TextUi {
     }
 
     public String getUserInput() {
-        System.out.println("Enter Command: ");
+        System.out.println("Enter Command:");
         Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
         if (shouldIgnore(userInput)) {
