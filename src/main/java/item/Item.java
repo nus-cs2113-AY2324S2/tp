@@ -1,7 +1,5 @@
 package item;
 
-import itemlist.Itemlist;
-
 public class Item {
     public static int numberOfItems;
     private final String itemName;

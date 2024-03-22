@@ -1,8 +1,5 @@
 package ui;
 
-import item.Item;
-import itemlist.Itemlist;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
