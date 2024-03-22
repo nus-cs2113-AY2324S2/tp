@@ -45,6 +45,14 @@ Initialises the process of editing both academic and non-academic details of a s
 
 Removes a student from the master list of students. 
 
+### - Produce a list of all the students who takes a subject `view_subject`
+
+Displays a list of all the students with that associated subject taken in the tuition centre.
+
+### - Sort the list lexicograpically, from A to Z `sort_name`
+
+Sorts the masterlist of students from A to Z. When the user types list, it will generate the updated sorted list.
+
 # Usage
 //todo add usage guide for our different commands
 
@@ -80,7 +88,6 @@ NUMBER
 ### - View details of a student `view`
 
 
-
 ### - Edit details of a student `edit`
 
 
@@ -100,4 +107,3 @@ NUMBER
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
