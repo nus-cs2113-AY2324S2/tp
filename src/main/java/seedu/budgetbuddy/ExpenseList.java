@@ -1,7 +1,6 @@
 package seedu.budgetbuddy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 

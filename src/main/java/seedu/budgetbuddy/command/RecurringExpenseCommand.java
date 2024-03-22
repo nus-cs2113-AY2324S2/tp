@@ -11,31 +11,53 @@ import java.util.Arrays;
 
 public class RecurringExpenseCommand extends Command{
     public static ArrayList<String> commandTypes = new ArrayList<>(Arrays.asList("newlist",
-            "removelist", "rename", "viewlists", "removelist", "newexpense", "addrec", "viewexpenses"));
+            "removelist", "rename", "viewlists", "newexpense", "addrec", "viewexpenses"));
 
     private RecurringExpensesList expensesList;
 
-    private ExpenseList overallexpenses;
+    private ExpenseList overallExpenses;
     private String initialListName;
     private String commandType;
     private int listNumber;
 
-    String category;
-    Double amount;
-    String description;
+    private String category;
+    private Double amount;
+    private String description;
 
-    Ui ui = new Ui();
+    private Ui ui = new Ui();
 
-    public RecurringExpenseCommand(RecurringExpensesList expensesList, ExpenseList overallexpenses,
-                                   int listNumber, String commandType) {
+
+    public RecurringExpenseCommand(RecurringExpensesList expensesList, String commandType) {
+        this.commandType = commandType;
         this.expensesList = expensesList;
-        this.overallexpenses = overallexpenses;
+    }
+
+    public RecurringExpenseCommand(String initialListName,
+                                   RecurringExpensesList expensesList, String commandType) {
+        this.initialListName = initialListName;
+        this.commandType = commandType;
+        this.expensesList = expensesList;
+    }
+
+    public RecurringExpenseCommand(int listNumber,
+                                   RecurringExpensesList expensesList, String commandType) {
+        this.listNumber = listNumber;
+        this.commandType = commandType;
+        this.expensesList = expensesList;
+    }
+
+    public RecurringExpenseCommand(int listNumber, RecurringExpensesList expensesList,
+                                   ExpenseList overallExpenses, String commandType) {
+
+        this.expensesList = expensesList;
+        this.overallExpenses = overallExpenses;
         this.listNumber = listNumber;
         this.commandType = commandType;
     }
 
-    public RecurringExpenseCommand(RecurringExpensesList expensesList, int listNumber, String category,
+    public RecurringExpenseCommand( int listNumber, RecurringExpensesList expensesList, String category,
                                    Double amount, String description, String commandType) {
+
         this.expensesList = expensesList;
         this.listNumber = listNumber;
         this.category = category;
@@ -44,24 +66,6 @@ public class RecurringExpenseCommand extends Command{
         this.commandType = commandType;
     }
 
-    public RecurringExpenseCommand(String commandType, RecurringExpensesList expensesList) {
-        this.commandType = commandType;
-        this.expensesList = expensesList;
-    }
-
-    public RecurringExpenseCommand(String initialListName, String commandType,
-                                   RecurringExpensesList expensesList) {
-        this.initialListName = initialListName;
-        this.commandType = commandType;
-        this.expensesList = expensesList;
-    }
-
-    public RecurringExpenseCommand(int listNumber, String commandType,
-                                   RecurringExpensesList expensesList) {
-        this.listNumber = listNumber;
-        this.commandType = commandType;
-        this.expensesList = expensesList;
-    }
 
     public void addNewList(String listName) {
         expensesList.addNewRecurringList(listName);
@@ -117,7 +121,7 @@ public class RecurringExpenseCommand extends Command{
             Double amount = expense.getAmount();
             String description = expense.getDescription();
 
-            Command addExpenseCommand = new AddExpenseCommand(overallexpenses, category,
+            Command addExpenseCommand = new AddExpenseCommand(overallExpenses, category,
                     amount.toString(), description);
 
             addExpenseCommand.execute();
@@ -171,6 +175,8 @@ public class RecurringExpenseCommand extends Command{
 
         case "viewexpenses":
             printExpensesAtIndex();
+            break;
+
         default:
             break;
         }

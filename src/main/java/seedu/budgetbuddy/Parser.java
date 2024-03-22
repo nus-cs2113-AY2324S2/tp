@@ -555,7 +555,7 @@ public class Parser {
         if (commandType.equals("newlist")) {
             try {
                 String listName = commandParts[2];
-                return new RecurringExpenseCommand(listName, "newlist", expensesList);
+                return new RecurringExpenseCommand(listName, expensesList,"newlist");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please Input a Valid listName");
                 System.out.println("Command Format : rec newlist [listName]");
@@ -564,7 +564,7 @@ public class Parser {
         }
 
         if(commandType.equals("viewlists")) {
-            return new RecurringExpenseCommand("viewlists", expensesList);
+            return new RecurringExpenseCommand(expensesList, "viewlists");
         }
 
         if(commandType.equals("removelist")) {
@@ -572,7 +572,7 @@ public class Parser {
 
                 String listNumberAsString = commandParts[2];
                 int listNumber = Integer.parseInt(listNumberAsString);
-                return new RecurringExpenseCommand(listNumber, "removelist", expensesList);
+                return new RecurringExpenseCommand(listNumber, expensesList,"removelist");
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("List Number Cannot be Empty");
@@ -602,7 +602,7 @@ public class Parser {
                     throw new BudgetBuddyException("Please Ensure all parameters are filled");
                 }
 
-                return new RecurringExpenseCommand(expensesList, listNumber, category,
+                return new RecurringExpenseCommand(listNumber, expensesList, category,
                         amount, description, "newexpense");
 
 
@@ -621,33 +621,32 @@ public class Parser {
             try {
                 String listNumberAsString = commandParts[2];
                 int listNumber = Integer.parseInt(listNumberAsString);
-                return new RecurringExpenseCommand(expensesList, overallExpenses, listNumber, "addrec");
+                return new RecurringExpenseCommand(listNumber, expensesList, overallExpenses, "addrec");
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid Integer");
                 System.out.println("Command Format : rec addrec [List Number]");
                 return null;
-            }  catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("List Number Cannot be Empty");
-            System.out.println("Command Format : rec addrec [List Number]");
-            return null;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec addrec [List Number]");
+                return null;
+            }
         }
-    }
 
         if(commandType.equals("viewexpenses")) {
             try {
                 String listNumberAsString = commandParts[2];
                 int listNumber = Integer.parseInt(listNumberAsString);
-                return new RecurringExpenseCommand(listNumber, "viewexpenses", expensesList);
+                return new RecurringExpenseCommand(listNumber, expensesList, "viewexpenses");
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid Integer");
                 System.out.println("Command Format : rec viewexpenses [List Number]");
             } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("List Number Cannot be Empty");
-            System.out.println("Command Format : rec viewexpenses [List Number]");
-            return null;
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec viewexpenses [List Number]");
+                return null;
+            }
         }
-    }
-
         return null;
     }
 

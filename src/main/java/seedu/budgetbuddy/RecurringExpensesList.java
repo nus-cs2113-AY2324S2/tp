@@ -1,7 +1,5 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.exception.BudgetBuddyException;
-
 import java.util.ArrayList;
 
 public class RecurringExpensesList {
