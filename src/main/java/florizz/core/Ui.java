@@ -104,7 +104,7 @@ public class Ui {
     public void printAllDictFlowerName() {
         System.out.println("Here are all the flowers you can add: ");
         for (int i = 0; i < FlowerDictionary.size(); i++) {
-            System.out.println(FlowerDictionary.get(i).getFlowerName());
+            System.out.println(" - " + FlowerDictionary.get(i).getFlowerName());
         }
         printBreakLine();
     }
