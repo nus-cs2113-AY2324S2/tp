@@ -18,10 +18,15 @@ import static data.TaskManagerException.checkIfDateInCurrentWeek;
 import static data.TaskManagerException.checkIfDateInCurrentMonth;
 import static storage.Storage.saveTasksToFile;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Manages tasks by providing functionalities to add, delete, and update tasks.
  */
 public class TaskManager {
+    private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private static final Map<LocalDate, List<Task>> tasks = new HashMap<>();
 
     /**
@@ -62,10 +67,15 @@ public class TaskManager {
             List<Task> dayTasks = tasks.get(date);
             boolean dayHasTasks = dayTasks != null;
             boolean taskIndexExists = taskIndex >= 0 && taskIndex < Objects.requireNonNull(dayTasks).size();
-            if (dayHasTasks && taskIndexExists) {
-                Task task = new Task(newTaskDescription);
-                dayTasks.set(taskIndex, task);
-            }
+            assert dayTasks != null;
+            assert taskIndexExists;
+
+            String oldDescription = dayTasks.get(taskIndex).getName();
+
+            Task task = new Task(newTaskDescription);
+            dayTasks.set(taskIndex, task);
+
+            logger.log(Level.INFO, "Updating task description from " + oldDescription + " to: " + newTaskDescription);
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException(e);
         }
