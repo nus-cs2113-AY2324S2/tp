@@ -32,6 +32,7 @@ public class AddSleepCommand implements Command {
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours slept");
         }
+        assert !sleepCommandArgs.isEmpty() : "Sleep cycle should not be added";
         this.sleepCycleToAdd = new SleepCycle(hourSlept, userCommand[1].trim());
     }
 
