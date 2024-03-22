@@ -4,7 +4,24 @@ import classify.student.Student;
 
 import java.util.ArrayList;
 
+//@@author Cryolian
 public class Ui {
+    private static final String EMPTY_SUBJECT_ERROR = "No subjects and grades found for this student.";
+    private static final String NULL_ATTRIBUTE_ERROR = "No attributes found for this student.";
+    private static final String EDIT_PROMPT = "How would you like to update a student's subject? (enter blank to exit)";
+    private static final String EDIT_TYPES_PROMPT = "Add, Edit or Delete: ";
+    private static final String EMPTY_LIST_ERROR = "Currently no students in list.";
+    private static final String VALID_NUMBER_ERROR = "A valid number was not entered. Please input a valid number. ";
+    private static final String PHONE_NUMBER_PROMPT = "Please input a valid phone number: ";
+    private static final String STUDENT_PHONE_MESSAGE = "Phone Number: ";
+    private static final String STUDENT_GENDER_MESSAGE = "Gender: ";
+    private static final String STUDENT_PAYMENT_MESSAGE = "Last Payment Date: ";
+    private static final String STUDENT_REMARKS_MESSAGE = "Remarks: ";
+    private static final String SAME_NAME_ERROR = "Student with the same name already exists. Please enter a different name.";
+    private static final String EMPTY_NAME_ERROR = "Student name cannot be empty. Please enter a valid name.";
+    private static final String GENDER_PROMPT = "Please input the student's gender: ";
+    private static final String PAYMENT_PROMPT = "Please input their last payment date: ";
+    private static final String REMARKS_PROMPT = "Please input any remarks: ";
     //@@author ParthGandhiNUS
     private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String WELCOME_TO_CLASSIFY = "Welcome to Classify!";
@@ -24,10 +41,7 @@ public class Ui {
     private static final String SUBJECT_MESSAGE = "Subject: ";
     private static final String STUDENT_GRADES_PROMPT = "Current marks out of 100 (blank to skip) : ";
     private static final String STUDENT_GRADES_MESSAGE = "Current marks out of 100: ";
-    private static final String STUDENT_PHONE_MESSAGE = "Phone Number: ";
-    private static final String STUDENT_GENDER_MESSAGE = "Gender: ";
-    private static final String STUDENT_PAYMENT_MESSAGE = "Last Payment Date: ";
-    private static final String STUDENT_REMARKS_MESSAGE = "Remarks: ";
+
 
     //@@author alalal47
     /**
@@ -178,4 +192,50 @@ public class Ui {
         System.out.println("Currently, there are " + students.size() + " students in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
+
+    public static void printSameNameError() {
+        System.out.println(SAME_NAME_ERROR);
+    }
+
+    public static void promptForRemarks() {
+        System.out.println(REMARKS_PROMPT);
+    }
+
+    public static void promptForLastPaymentDate() {
+        System.out.println(PAYMENT_PROMPT);
+    }
+
+    public static void promptForGender() {
+        System.out.println(GENDER_PROMPT);
+    }
+
+    public static void printEmptyNameMessage() {
+        System.out.println(EMPTY_NAME_ERROR);
+    }
+
+    public static void printPhoneNumberPrompt() {
+        System.out.println(PHONE_NUMBER_PROMPT);
+    }
+    
+    public static void printValidNumberError() {
+        System.out.println(VALID_NUMBER_ERROR);
+    }
+
+    public static void printEmptyListError() {
+        System.out.println(EMPTY_LIST_ERROR);
+    }
+
+    public static void printEditPrompt() {
+        System.out.println(EDIT_PROMPT);
+        System.out.println(EDIT_TYPES_PROMPT);
+    }
+
+    public static void printEmptySubjectError() {
+        System.out.println(EMPTY_SUBJECT_ERROR);
+    }
+
+    public static void printNullAttributeError() {
+        System.out.println(NULL_ATTRIBUTE_ERROR);
+    }
+
 }

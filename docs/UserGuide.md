@@ -45,8 +45,6 @@ Initialises the process of editing both academic and non-academic details of a s
 
 Removes a student from the master list of students. 
 
-
-
 # Usage
 //todo add usage guide for our different commands
 
@@ -78,6 +76,15 @@ NUMBER
 .
 .
 ```
+
+### - View details of a student `view`
+
+
+
+### - Edit details of a student `edit`
+
+
+### - Delete a student from the working list `delete`
 
 ## FAQ
 
