@@ -16,6 +16,7 @@ public class WeekViewTest {
     private WeekView weekView;
 
     private MonthView monthView;
+
     private TaskManager taskManagerMock;
 
     @BeforeEach
@@ -24,7 +25,7 @@ public class WeekViewTest {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         weekView = new WeekView(startOfWeek, dateFormatter);
         LocalDate startOfMonth = LocalDate.of(2024, 3, 10); // March 10, 2024
-        MonthView monthView = new MonthView(startOfMonth, dateFormatter);
+        monthView = new MonthView(startOfWeek, dateFormatter);
         taskManagerMock = new TaskManager(); // You can create a mock TaskManager as needed
     }
 
