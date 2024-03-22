@@ -214,11 +214,27 @@ public class TaskManager {
             taskNumber = Integer.parseInt(scanner.nextLine().trim());
             taskManager.deleteTask(date, taskNumber - 1);
             System.out.println("Task deleted.");
-            saveTasksToFile(tasks, Storage.FILE_PATH); //Update tasks.txt file
+            saveTasksToFile(tasks, Storage.FILE_PATH); // Update tasks.txt file
         } catch (NumberFormatException e) {
             System.out.println("Invalid task number. Please try again.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("The task number you have entered does not exist. Please try again.");
+        }
+    }
+
+    /**
+     * Function to delete all tasks on a specified date.
+     * Currently only used to complement JUnit testing.
+     *
+     * @param taskManager The taskManager class in use.
+     * @param specifiedDate The date on which all tasks are to be deleted.
+     */
+
+    public static void deleteAllTasksOnDate (TaskManager taskManager, LocalDate specifiedDate) {
+        List<Task> dayTasks = tasks.get(specifiedDate);
+        int numOfTasks = dayTasks.size();
+        for (int i = numOfTasks; i >= 0; i--) {
+            taskManager.deleteTask(specifiedDate, i - 1);
         }
     }
 
@@ -242,5 +258,4 @@ public class TaskManager {
         }
         return date;
     }
-
 }

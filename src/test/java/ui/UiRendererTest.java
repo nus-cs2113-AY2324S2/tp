@@ -44,7 +44,7 @@ public class UiRendererTest {
     @Test
     void printTaskForDay_hasTask_printsTaskWithFormat() {
         printTaskForDay(tasks, 0);
-        assertEquals(outContent.toString(), String.format(TASK_DISPLAY_FORMAT, tasks.get(0)));
+        assertEquals(outContent.toString(), String.format(TASK_DISPLAY_FORMAT, tasks.get(0).getName()));
     }
     
 }
