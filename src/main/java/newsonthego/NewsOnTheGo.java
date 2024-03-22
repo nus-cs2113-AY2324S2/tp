@@ -98,6 +98,7 @@ public class NewsOnTheGo {
         assert !command.isEmpty();
         switch (Command.valueOf(command.toUpperCase())) {
         case DAILY:
+            assert !list.isEmpty() : "newsArticles list must not be empty";
             new DailyNewsCommand(line, list);
             break;
         case GET:
@@ -174,6 +175,7 @@ public class NewsOnTheGo {
      */
     private static void filterNews(String line) {
         int topicIndex = findTopicIndex(line.substring(6).trim());
+        assert topicIndex >= 0 : "Topic index should be valid";
         System.out.println(topicIndex);
         if (topicIndex < 0) {
             System.out.println("Sorry, this topic is not available right now :(");
