@@ -70,12 +70,12 @@ public class TaskManager {
             assert dayTasks != null;
             assert taskIndexExists;
 
-            String originalTaskDescription = dayTasks.get(taskIndex).getName();
+            String oldDescription = dayTasks.get(taskIndex).getName();
 
             Task task = new Task(newTaskDescription);
             dayTasks.set(taskIndex, task);
 
-            logger.log(Level.INFO, "Updating task description from " + originalTaskDescription + " to: " + newTaskDescription);
+            logger.log(Level.INFO, "Updating task description from " + oldDescription + " to: " + newTaskDescription);
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException(e);
         }
