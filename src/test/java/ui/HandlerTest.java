@@ -4,9 +4,9 @@ import health.HealthList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utility.UiConstant;
 
 import utility.CustomExceptions;
+import utility.WorkoutConstant;
 import workouts.WorkoutList;
 
 import java.io.ByteArrayOutputStream;
@@ -176,34 +176,34 @@ class HandlerTest {
     void checkTypeOfExercise_correctUserInput_expectRunOrGym() {
         try {
             String input1 = "new /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
-            String expected1 = UiConstant.RUN;
+            String expected1 = WorkoutConstant.RUN;
             String result1 = Handler.checkTypeOfExercise(input1);
             assertEquals(result1, expected1);
 
             String input2 = "new /e:gym /n:4";
-            String expected2 = UiConstant.GYM;
+            String expected2 = WorkoutConstant.GYM;
             String result2 = Handler.checkTypeOfExercise(input2);
             assertEquals(result2, expected2);
 
             // with capital letter
             String input3 = "NEW /E:run /D:10.3 /T:00:40:10 /Date:15-03-2024";
-            String expected3 = UiConstant.RUN;
+            String expected3 = WorkoutConstant.RUN;
             String result3 = Handler.checkTypeOfExercise(input3);
             assertEquals(result3, expected3);
 
             String input4 = "NEW /E:gym /N:4";
-            String expected4 = UiConstant.GYM;
+            String expected4 = WorkoutConstant.GYM;
             String result4 = Handler.checkTypeOfExercise(input4);
             assertEquals(result4, expected4);
 
             // exercises in capital letter
             String input5 = "NEW /E:RUN /D:10.3 /T:00:40:10 /Date:15-03-2024";
-            String expected5 = UiConstant.RUN;
+            String expected5 = WorkoutConstant.RUN;
             String result5 = Handler.checkTypeOfExercise(input5);
             assertEquals(result5, expected5);
 
             String input6 = "NEW /E:GYM /N:4";
-            String expected6 = UiConstant.GYM;
+            String expected6 = WorkoutConstant.GYM;
             String result6 = Handler.checkTypeOfExercise(input6);
             assertEquals(result6, expected6);
 
@@ -224,33 +224,23 @@ class HandlerTest {
 
         // with invalid exercise type
         String input1 = "new /e";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            Handler.checkTypeOfExercise(input1);
-        });
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input1));
 
         // with invalid exercise type
         String input2 = "new /e:wrong /d:10.3 /t:00:40:10 /date:15/03/2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            Handler.checkTypeOfExercise(input2);
-        });
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input2));
 
         // with invalid exercise type
         String input3 = "new /e:gymm /d:10.3 /t:00:40:10 /date:15/03/2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            Handler.checkTypeOfExercise(input3);
-        });
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input3));
 
         // with invalid format
         String input4 = "new /e-gymm /d-10.3 /t:00:40:10 /date:15/03/2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            Handler.checkTypeOfExercise(input4);
-        });
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input4));
 
         // with wrong slash
         String input5 = "new \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> {
-            Handler.checkTypeOfExercise(input5);
-        });
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input5));
     }
 
     /**
