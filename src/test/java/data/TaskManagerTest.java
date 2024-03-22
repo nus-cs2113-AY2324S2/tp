@@ -10,12 +10,12 @@ import java.util.Map;
 
 import static data.TaskManager.addTask;
 import static data.TaskManager.updateTask;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static data.TaskManager.deleteAllTasksOnDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class TaskManagerTest {
+    public static List<Task> emptyTaskList = List.of();
     private TaskManager taskManager;
 
     @BeforeEach
@@ -25,7 +25,8 @@ class TaskManagerTest {
 
     @AfterEach
     void resetTaskManager() {
-        taskManager = null;
+        LocalDate date = LocalDate.now();
+        deleteAllTasksOnDate(taskManager, date);
     }
 
     @Test
@@ -35,25 +36,27 @@ class TaskManagerTest {
         String taskDescription = "Test task";
 
         // Act
+        Task testTask = new Task(taskDescription);
         addTask(date, taskDescription);
+        Task addedTask = taskManager.getTasksForDate(date).get(0);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertEquals(testTask.getName(), addedTask.getName());
     }
 
     @Test
     void updateTask_validInput_updatesTask() {
         // Arrange
         LocalDate date = LocalDate.now();
-        String initialTask = "Initial task";
-        String updatedTask = "Updated task";
-        addTask(date, initialTask);
+        String initialTaskDescription = "Initial task";
+        String updatedTaskDescription = "Updated task";
+        addTask(date, initialTaskDescription);
 
         // Act
-        updateTask(date, 0, updatedTask);
+        updateTask(date, 0, updatedTaskDescription);
 
         // Assert
-        assertEquals(updatedTask, taskManager.getTasksForDate(date).get(0));
+        assertEquals(updatedTaskDescription, taskManager.getTasksForDate(date).get(0).getName());
     }
 
     @Test
@@ -64,25 +67,26 @@ class TaskManagerTest {
         addTask(date, taskDescription);
 
         // Act
-        List<String> tasksForDate = taskManager.getTasksForDate(date);
+        List<Task> tasksForDate = taskManager.getTasksForDate(date);
+        Task createdTask = tasksForDate.get(0);
 
         // Assert
-        assertFalse(tasksForDate.isEmpty());
-        assertTrue(tasksForDate.contains(taskDescription));
+        assertEquals(createdTask, tasksForDate.get(0));
     }
 
     @Test
     void addTasksFromFile_validInput_addsTasks() {
         // Arrange
         LocalDate date = LocalDate.now();
+        Map<LocalDate, List<Task>> tasksFromFile = new HashMap<>();
         String taskDescription = "Test task";
-        Map<LocalDate, List<String>> tasksFromFile = new HashMap<>();
-        tasksFromFile.put(date, List.of(taskDescription));
+        Task testTask = new Task(taskDescription);
+        tasksFromFile.put(date, List.of(testTask));
 
         // Act
         taskManager.addTasksFromFile(tasksFromFile);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertEquals(testTask.getName() ,taskManager.getTasksForDate(date).get(0).getName());
     }
 }

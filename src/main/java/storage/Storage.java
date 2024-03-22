@@ -1,5 +1,7 @@
 package storage;
 
+import data.Task;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -43,17 +45,18 @@ public class Storage {
      * @param tasks Hashmap of tasks
      * @param path File Path of tests.txt file
      */
-    public static void saveTasksToFile(Map<LocalDate, List<String>> tasks, Path path) {
+    public static void saveTasksToFile(Map<LocalDate, List<Task>> tasks, Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
-            for (Map.Entry<LocalDate, List<String>> entry : tasks.entrySet()) {
+            for (Map.Entry<LocalDate, List<Task>> entry : tasks.entrySet()) {
                 assert entry != null;
                 LocalDate date = entry.getKey();
                 assert date != null;
-                List<String> taskList = entry.getValue();
+                List<Task> taskList = entry.getValue();
                 assert taskList != null;
-                for (String task : taskList) {
-                    writer.write(date + "|" + task + System.lineSeparator());
-                    logger.log(Level.INFO, "task added: " + task);
+                for (Task task : taskList) {
+                    String taskDescription = task.getName();
+                    writer.write(date + "|" + taskDescription + System.lineSeparator());
+                    logger.log(Level.INFO, "task added: " + taskDescription);
                 }
             }
         } catch (IOException e) {
@@ -67,8 +70,8 @@ public class Storage {
      * @param path File Path of tests.txt file
      * @return tasks hashmap of tasks read from test.txt
      */
-    public static Map<LocalDate, List<String>> loadTasksFromFile(Path path) {
-        Map<LocalDate, List<String>> tasks = new HashMap<>();
+    public static Map<LocalDate, List<Task>> loadTasksFromFile(Path path) {
+        Map<LocalDate, List<Task>> tasks = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -77,8 +80,9 @@ public class Storage {
                 }
                 String[] parts = line.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0]);
-                String task = parts[1];
-                tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(task);
+                String taskDescription = parts[1];
+                Task taskToAdd = new Task(taskDescription);
+                tasks.computeIfAbsent(date, k -> new ArrayList<>()).add(taskToAdd);
             }
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");
