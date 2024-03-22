@@ -83,7 +83,7 @@ public class Storage {
             }
             writer.flush();
             System.out.println("Record successfully saved!");
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error when saving record!");
             e.printStackTrace();
         }
