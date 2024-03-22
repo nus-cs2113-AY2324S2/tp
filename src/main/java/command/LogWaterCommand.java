@@ -37,9 +37,9 @@ public class LogWaterCommand {
 //        if (quantity <= 0) {
 //            System.out.println("Water quantity must be above 0. Please try again.");
 //        } else {
-            WaterTask waterTask = new WaterTask(quantity);
-            TaskList.tasksList.add(waterTask);
-            CommandUi.printWaterLogMessage(waterTask);
+        WaterTask waterTask = new WaterTask(quantity);
+        TaskList.tasksList.add(waterTask);
+        CommandUi.printWaterLogMessage(waterTask);
         //}
     }
 }   
