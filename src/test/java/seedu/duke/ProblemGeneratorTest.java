@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProblemGeneratorTest {
     public static String[] commands = {"generate -t + -n 1 -d 1", "generate -t - -n 2 -d 2",
-            "generate -t * -n 3 -d 3", "generate -t / -n 4 -d 4"};
+        "generate -t * -n 3 -d 3", "generate -t / -n 4 -d 4"};
     public static void operatorTest() {
         for (String command: commands) {
             ProblemGenerator pb = new ProblemGenerator();
