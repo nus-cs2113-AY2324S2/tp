@@ -1,6 +1,6 @@
 package seedu.duke.modules;
 
-import seedu.duke.exceptions.GpaException;
+import seedu.duke.exceptions.GpaNullException;
 import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
@@ -90,7 +90,7 @@ public class ModuleList {
         }
     }
 
-    public double tallyGPA() throws GpaException {
+    public double tallyGPA() throws GpaNullException {
         int totalMC = 0;
         double sumOfGPA = 0;
         for (Module module : takenModuleList) {
@@ -103,7 +103,7 @@ public class ModuleList {
         }
         if(sumOfGPA == 0) {
             LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
-            throw new GpaException("No countable grades present to tally.");
+            throw new GpaNullException("No countable grades present to tally.");
         }
         return sumOfGPA/(double)totalMC;
     }
