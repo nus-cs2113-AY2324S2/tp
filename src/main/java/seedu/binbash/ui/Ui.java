@@ -1,15 +1,5 @@
 package seedu.binbash.ui;
 
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
-import org.jline.reader.EndOfFileException;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-
-import java.io.IOException;
-import java.util.logging.Logger;
-import java.util.logging.Level;
-
 public class Ui {
     private static final String NEWLINE = System.lineSeparator();
     private static final String LOGO = "  ____  _       ____            _" + NEWLINE +
@@ -20,24 +10,12 @@ public class Ui {
     private static final String WELCOME_MESSAGE = "Welcome to BinBash!";
     private static final String GOODBYE_MESSAGE = "Bye!";
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
-    private static final Logger UILOGGER = Logger.getLogger("BinBashUi");
 
-    private static LineReader input;
-    private boolean isUserActive;
+    private static TextIn inputReader;
+    private static boolean isUserActive;
 
     public Ui() {
-        System.setProperty("org.jline.terminal.exec.redirectPipeCreationMode", "native");
-        try {
-            Terminal userTerminal = TerminalBuilder.builder()
-                .system(true)
-                .dumb(true)
-                .build();
-            input = LineReaderBuilder.builder()
-                .terminal(userTerminal)
-                .build();
-        } catch (IOException e) {
-            UILOGGER.log(Level.WARNING, "failed to get system terminal!");
-        }
+        inputReader = new TextIn();
         isUserActive = true;
     }
 
@@ -51,15 +29,7 @@ public class Ui {
 
     public String readUserCommand() {
         assert isUserActive();
-        String userInput;
-        try {
-            userInput = input.readLine("");
-        } catch (EndOfFileException e) {
-            userInput = "bye";
-        }
-        UILOGGER.setLevel(Level.WARNING);
-        UILOGGER.log(Level.INFO, "received raw user input: " + userInput);
-        return userInput;
+        return inputReader.nextLine();
     }
 
     public void greet() {
