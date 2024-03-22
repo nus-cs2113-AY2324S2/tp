@@ -3,19 +3,27 @@ import constants.UOM;
 
 public class Item {
     public static int numberOfItems;
-    protected final String itemName;
-    protected int quantity;
-    protected UOM uom;
-    protected int uomQty;
-    protected float costPrice;
-    protected float salePrice;
+    private final String itemName;
+    private int quantity;
+    private String uom;
+    private String category;
+    private boolean isOOS;
+    
 
-
-    public Item(String name, int quantity, UOM uom, int uomQty) {
+    public Item(String name, int quantity, String uom, String category) {
         this.itemName = name;
         this.quantity = quantity;
         this.uom = uom;
-        this.uomQty = uomQty;
+        if (category.isEmpty()) {
+            this.category = "NA";
+        } else {
+            this.category = category;
+        }
+        if (quantity == 0) {
+            this.isOOS = true;
+        } else {
+            this.isOOS = false;
+        }
         numberOfItems++;
     }
 
@@ -30,10 +38,12 @@ public class Item {
     public void setQuantity(int newQuantity) {
         this.quantity = newQuantity;
     }
-    public UOM getUom() {
-        return this.uom;
+
+    public void markOOS() {
+        this.isOOS = true;
     }
-    public void setUomQty(int newQty) {
-        this.uomQty = newQty;
+
+    public void unmarkOOS() {
+        this.isOOS = false;
     }
 }
