@@ -1,8 +1,10 @@
 package git;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
+import exceptions.GitException;
 import grocery.Grocery;
 
 
@@ -13,8 +15,9 @@ public class Ui {
     // ATTRIBUTES
     public static final String DIVIDER = "- - - - -";
     private Scanner in;
-
+    private Parser parser;
     // METHODS
+
     /**
      * Constructs Ui and initialises Scanner to read input.
      */
@@ -28,19 +31,31 @@ public class Ui {
     public void printWelcome() {
         String logo =
                 "   _______ ______\n"
-                + "  / ____(_)_  __/\n"
-                + " / / __/ / / /   \n"
-                + "/ /_/ / / / /    \n"
-                + "\\____/_/ /_/     \n";
+                        + "  / ____(_)_  __/\n"
+                        + " / / __/ / / /   \n"
+                        + "/ /_/ / / / /    \n"
+                        + "\\____/_/ /_/     \n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
         printLine();
-        System.out.println("Hello " + in.nextLine() + "!");
+
+        String userName = in.nextLine();
+        if (!Objects.equals(userName, "exit")) {
+            printHello(userName);
+        } else {
+            System.out.println("Exiting...");
+            System.exit(0);
+        }
+}
+
+    public void printHello(String userName) {
+        System.out.println("Hello " + userName + "!");
+
         displayHelp();
         System.out.println("Enter command:");
+
         printLine();
     }
-
     /**
      * Processes user input into commands and their details.
      */
