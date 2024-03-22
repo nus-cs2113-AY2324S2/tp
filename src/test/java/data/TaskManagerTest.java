@@ -35,10 +35,11 @@ class TaskManagerTest {
         String taskDescription = "Test task";
 
         // Act
+        Task testTask = new Task(taskDescription);
         addTask(date, taskDescription);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertTrue(taskManager.getTasksForDate(date).contains(testTask));
     }
 
     @Test
@@ -61,14 +62,15 @@ class TaskManagerTest {
         // Arrange
         LocalDate date = LocalDate.now();
         String taskDescription = "Test task";
+        Task testTask = new Task(taskDescription);
         addTask(date, taskDescription);
 
         // Act
-        List<String> tasksForDate = taskManager.getTasksForDate(date);
+        List<Task> tasksForDate = taskManager.getTasksForDate(date);
 
         // Assert
         assertFalse(tasksForDate.isEmpty());
-        assertTrue(tasksForDate.contains(taskDescription));
+        assertTrue(tasksForDate.contains(testTask));
     }
 
     @Test
@@ -76,13 +78,14 @@ class TaskManagerTest {
         // Arrange
         LocalDate date = LocalDate.now();
         String taskDescription = "Test task";
-        Map<LocalDate, List<String>> tasksFromFile = new HashMap<>();
-        tasksFromFile.put(date, List.of(taskDescription));
+        Map<LocalDate, List<Task>> tasksFromFile = new HashMap<>();
+        Task testTask = new Task(taskDescription);
+        tasksFromFile.put(date, List.of(testTask));
 
         // Act
         taskManager.addTasksFromFile(tasksFromFile);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertTrue(taskManager.getTasksForDate(date).contains(testTask));
     }
 }

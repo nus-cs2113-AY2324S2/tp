@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import data.Task;
 import storage.Storage;
 import time.DateUtils;
 import time.WeekView;
@@ -36,7 +37,7 @@ public class Main {
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
         createNewFile(Storage.FILE_PATH); //Creates directory and tasks.txt file if it does not exist
-        Map<LocalDate, List<String>> tasksFromFile = 
+        Map<LocalDate, List<Task>> tasksFromFile =
                 Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
