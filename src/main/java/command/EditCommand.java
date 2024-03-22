@@ -3,7 +3,6 @@ package command;
 import item.Item;
 import itemlist.Itemlist;
 import storage.Storage;
-import itemlist.Itemlist;
 
 public class EditCommand extends Command {
 
