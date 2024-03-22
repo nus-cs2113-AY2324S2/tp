@@ -35,6 +35,7 @@ public class Bmi extends Health {
 
     protected LocalDate date;
 
+    //@@author j013n3
     /**
      * Constructor for Bmi object.
      *
@@ -55,6 +56,7 @@ public class Bmi extends Health {
         this.bmiCategory = getBmiCategory(bmiValue);
     }
 
+    //@@author syj02
     /**
      * Split user input into Bmi command, height, weight and date.
      *
@@ -94,6 +96,7 @@ public class Bmi extends Health {
         return results;
     }
 
+    //@@author j013n3
     /**
      * Calculates Bmi based on height and weight.
      *
