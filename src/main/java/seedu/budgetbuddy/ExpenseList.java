@@ -113,18 +113,18 @@ public class ExpenseList {
         if (!categories.contains(category)) {
             throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
-        int amountInt;
+        double amountAsDouble;
         try {
-            amountInt = Integer.parseInt(amount);
+            amountAsDouble = Double.parseDouble(amount);
         } catch (NumberFormatException e) {
             throw new BudgetBuddyException("Invalid amount format. Amount should be a number.");
         }
 
-        if (amountInt < 0) {
+        if (amountAsDouble < 0) {
             throw new BudgetBuddyException("Expenses should not be negative.");
         }
 
-        Expense expense = new Expense(category, amountInt, description);
+        Expense expense = new Expense(category, amountAsDouble, description);
         expenses.add(expense);
     }
 
