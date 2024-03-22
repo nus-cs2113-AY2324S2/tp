@@ -168,6 +168,7 @@ public class Parser {
     private static void addTaskForAll(String command, UserList userList) throws InvalidFormatException, InvalidDayException {
         InputValidator.validateAddTaskForAll(command);
         Task task = parseTask(command);
+        assert !userList.getUsers().isEmpty() : "There is no user added.";
         for (User user : userList.getUsers()) {
             user.getTimetable().addUserTask(task.day, task);
         }
@@ -175,6 +176,7 @@ public class Parser {
     }
 
     private static void printConfirmedEvent(UserList userList) {
+        assert !userList.getUsers().isEmpty() : "There is no user added.";
         int taskCount = 1;
         for (String day : DAYS) {
             for (Task task : userList.getActiveUser().getTimetable().getWeeklyTasks().get(day)) {
