@@ -34,12 +34,7 @@ public class WeekView extends View {
     public void previous() {
         startOfView = startOfView.minusWeeks(1);
     }
-
-    /**
-     //     * Retrieves the start date of the current week view.
-     //     *
-     //     * @return the start date of the week view
-     //     */
+    
     public LocalDate getStartOfWeek() {
         return startOfView;
     }
