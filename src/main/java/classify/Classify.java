@@ -26,9 +26,9 @@ public class Classify {
         // Set up polling for the first word input by the user.
         // If user's first word is "bye", will exit the while loop.
         while (!(userCommand[0].equals("bye"))){
-            InputParsing.parseUserCommand(userCommand, StudentList.masterStudentList, in);
+            InputParsing.parseUserCommand(userCommand, StudentList.masterStudentList, StudentList.recentlyDeletedList,
+                    in);
             userCommand = UserInput.processInput(in.nextLine());
-
         }
 
         Ui.printEndConversation();

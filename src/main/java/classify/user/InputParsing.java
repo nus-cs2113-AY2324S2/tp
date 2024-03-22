@@ -25,6 +25,8 @@ public class InputParsing {
     private static final String ADD = "add";
     private static final String VIEW = "view";
     private static final String DELETE = "delete";
+    private static final String UNDO = "undo";
+    private static final String RESTORE = "restore";
     private static final String EDIT = "edit";
     private static final String HELP = "help";
     private static final String SORT_NAME = "sort_name";
@@ -39,7 +41,8 @@ public class InputParsing {
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
 
-    public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in) {
+    public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList,
+                                        ArrayList<Student> recentlyDeletedList, Scanner in) {
         // @@author blackmirag3
         if (masterStudentList == null) {
             System.out.println("Student list is null.");
@@ -57,7 +60,15 @@ public class InputParsing {
 
         //@@author alalal47
         case DELETE:
-            deleteStudent(masterStudentList, in, userCommand[1]);
+            deleteStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
+            break;
+
+        case RESTORE:
+            restoreStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
+            break;
+
+        case UNDO:
+            undoDelete(masterStudentList, recentlyDeletedList);
             break;
 
         case HELP:
@@ -260,13 +271,16 @@ public class InputParsing {
     //@@author alalal47
     /**
      * Removes a student from the list.
+     * Adds the removed student to a recently deleted list, where the student's information can be recovered
      *
-     * @param masterStudentList The list of all students.
-     * @param in                The scanner object to read user input.
-     * @param studentName       The name of the student if the user had entered it
-     *                          before being prompted
+     * @param masterStudentList   The list of all students
+     * @param recentlyDeletedList The list of recently deleted students
+     * @param in                  The scanner object to read user input
+     * @param studentName         The name of the student if the user had entered it
+     *                            before being prompted
      */
-    private static void deleteStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
+    private static void deleteStudent(ArrayList<Student> masterStudentList, ArrayList<Student> recentlyDeletedList,
+                                      Scanner in, String studentName) {
         String name;
         if (studentName == null) {
             Ui.printStudentNamePrompt();
@@ -284,8 +298,61 @@ public class InputParsing {
         }
         
         Ui.printDivider();
+        recentlyDeletedList.add(foundStudent);
         masterStudentList.remove(foundStudent);
-        assert foundStudent == null : "Student should be deleted";
+        //assert foundStudent == null : "Student should be deleted";
+    }
+
+    /**
+     * Removes a student from the list.
+     * Adds the removed student to a recently deleted list, where the student's information can be recovered
+     *
+     * @param masterStudentList   The list of all students.
+     * @param recentlyDeletedList The list of recently deleted students
+     * @param in                  The scanner object to read user input.
+     * @param studentName         The name of the student if the user had entered it
+     *                            before being prompted
+     */
+    private static void restoreStudent(ArrayList<Student> masterStudentList, ArrayList<Student> recentlyDeletedList,
+                                       Scanner in, String studentName) {
+        String name;
+        if (studentName == null) {
+            Ui.printStudentNamePrompt();
+            name = in.nextLine().trim();
+        } else {
+            name = studentName;
+        }
+
+        Student foundStudent = findStudentByName(recentlyDeletedList, name);
+
+        if (foundStudent != null) {
+            Ui.printRestoreMessage();
+        } else {
+            Ui.printStudentNotFound();
+        }
+
+        Ui.printDivider();
+        masterStudentList.add(foundStudent);
+        recentlyDeletedList.remove(foundStudent);
+    }
+
+    /**
+     * Restores the latest deleted student that has not yet been restored
+     *
+     * @param masterStudentList   The list of all students
+     * @param recentlyDeletedList The list of recently deleted students
+     */
+    private static void undoDelete(ArrayList<Student> masterStudentList, ArrayList<Student> recentlyDeletedList) {
+        if (recentlyDeletedList.isEmpty()) {
+            Ui.printNoDeleteFound();
+            Ui.printDivider();
+            return;
+        }
+        Student student = recentlyDeletedList.get(recentlyDeletedList.size() - 1);
+        masterStudentList.add(student);
+        recentlyDeletedList.remove(student);
+        Ui.printDeleteUndone();
+        Ui.printDivider();
     }
 
     //@@author tayponghee
@@ -352,7 +419,7 @@ public class InputParsing {
             }
 
         } else {
-            Ui.printNullAttributeError();;
+            Ui.printNullAttributeError();
         }
     }
 
@@ -703,7 +770,7 @@ public class InputParsing {
      * 
      * @param in    The scanner class to read inputs from.
      * @return      -1 if an exception was thrown. An 8
-     *              or 10 digit number if not.
+     *              or 10-digit number if not.
      */
     private static int promptForPhoneNumber(Scanner in) {
 

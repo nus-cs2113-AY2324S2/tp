@@ -19,9 +19,10 @@ public class InputParsingTest {
         System.setOut(new PrintStream(outputStream));
 
         ArrayList<Student> masterStudentList = new ArrayList<>();
+        ArrayList<Student> recentlyDeletedList = new ArrayList<>();
         String [] commands = new String[2];
         commands[0] = "bye";
-        InputParsing.parseUserCommand(commands, masterStudentList, new Scanner(System.in));
+        InputParsing.parseUserCommand(commands, masterStudentList, recentlyDeletedList, new Scanner(System.in));
 
         System.setOut(System.out);
 
@@ -38,9 +39,10 @@ public class InputParsingTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         ArrayList<Student> students = new ArrayList<>();
+        ArrayList<Student> recentlyDeletedList = new ArrayList<>();
         String [] commands = new String[2];
         commands[0] = "yeet";
-        InputParsing.parseUserCommand(commands, students, new Scanner(System.in));
+        InputParsing.parseUserCommand(commands, students, recentlyDeletedList, new Scanner(System.in));
         System.setOut(System.out);
         String printedOutput = outputStream.toString().trim();
         String expectedOutput = "No such command, type \"help\" to view all commands" +
@@ -55,9 +57,10 @@ public class InputParsingTest {
         System.setOut(new PrintStream(outputStream));
 
         ArrayList<Student> masterStudentList = new ArrayList<>();
+        ArrayList<Student> recentlyDeletedList = new ArrayList<>();
         String [] commands = new String[2];
         commands[0] = "help";
-        InputParsing.parseUserCommand(commands, masterStudentList, new Scanner(System.in));
+        InputParsing.parseUserCommand(commands, masterStudentList, recentlyDeletedList, new Scanner(System.in));
 
         System.setOut(System.out);
 

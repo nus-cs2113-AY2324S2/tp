@@ -13,13 +13,15 @@ public class StudentList {
     public static final String CURRENTLY_THERE_ARE = "Currently, there are ";
     public static final String STUDENTS_IN_THE_LIST = " students in the list.";
     public static ArrayList<Student> masterStudentList = new ArrayList<>();
+    public static ArrayList<Student> recentlyDeletedList = new ArrayList<>();
 
     //@@author Cryolian
     public ArrayList<Student> studentList;
 
+
     //@@author Cryolian
     public StudentList() {
-        this.studentList = new ArrayList<>();
+        this.studentList = new ArrayList<>();;
     }
 
     //@@author ParthGandhiNUS
