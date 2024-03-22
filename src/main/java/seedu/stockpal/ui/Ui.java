@@ -27,8 +27,8 @@ public final class Ui {
     }
 
     /**
-     * Outputs the list of messages, and replace line-separators
-     * with platform independent line-separator.
+     * Outputs the list of messages as lines ending with line separator
+     * , and replace line-separators with platform independent line-separator.
      *
      * @param messages List of messages to output.
      */
@@ -36,6 +36,19 @@ public final class Ui {
         for (String message : messages) {
             String platformIndependentMessage = message.replace("\n", LINE_SEPARATOR);
             System.out.println(platformIndependentMessage);
+        }
+    }
+
+    /**
+     * Outputs the list of messages as lines ending without line separator
+     * , and replace line-separators with platform independent line-separator.
+     *
+     * @param messages List of messages to output.
+     */
+    public static void printToScreenWithoutNewlineAtEnd(String... messages) {
+        for (String message : messages) {
+            String platformIndependentMessage = message.replace("\n", LINE_SEPARATOR);
+            System.out.print(platformIndependentMessage);
         }
     }
 
