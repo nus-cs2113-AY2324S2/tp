@@ -5,10 +5,12 @@ public class Enemy extends InteractableEntity{
     protected int defence;
     protected int health;
 
-    public Enemy(int dmg, int def, int hp){
+    public Enemy(int dmg, int def, int hp, int xCoordinate, int yCoordinate){
         this.damage = dmg;
         this.defence = def;
         this.health = hp;
+        this.x = xCoordinate;
+        this.y = yCoordinate;
     }
 
     public int getHealth(){
@@ -28,5 +30,13 @@ public class Enemy extends InteractableEntity{
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getXCoordinate(){
+        return this.x;
+    }
+
+    public int getYCoordinate(){
+        return this.y;
     }
 }

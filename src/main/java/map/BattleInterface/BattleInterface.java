@@ -2,15 +2,12 @@ package map.BattleInterface;
 
 import InteractableEntity.Enemy;
 import InteractableEntity.InteractableEntity;
-import command.Command;
 import map.AMap;
-import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
 import Math.*;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,6 +92,11 @@ public class BattleInterface extends AMap {
 
     public InteractableEntity getCurrentEntity() {
         return currentEntity;
+    }
+
+    @Override
+    public boolean getEntityDeath() {
+        return currentEntity.getHealth() <= 0;
     }
 
     public PlayerStatus getCurrentPlayer() {

@@ -1,6 +1,8 @@
 package InteractableEntity;
 
 public abstract class InteractableEntity {
+    protected int x;
+    protected int y;
 
     protected String name;
 
