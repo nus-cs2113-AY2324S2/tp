@@ -542,7 +542,7 @@ public class Parser {
         }
     }
 
-    public Command handleRecCommand(String input, RecurringExpensesList expensesList) {
+    public Command handleRecCommand(String input, RecurringExpensesList expensesList, ExpenseList overallExpenses) {
         String[] commandParts = input.split(" ");
         String commandType = commandParts[1];
         commandType = commandType.trim();
@@ -617,6 +617,37 @@ public class Parser {
             }
         }
 
+        if(commandType.equals("addrec")) {
+            try {
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(expensesList, overallExpenses, listNumber, "addrec");
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec addrec [List Number]");
+                return null;
+            }  catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("List Number Cannot be Empty");
+            System.out.println("Command Format : rec addrec [List Number]");
+            return null;
+        }
+    }
+
+        if(commandType.equals("viewexpenses")) {
+            try {
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(listNumber, "viewexpenses", expensesList);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec viewexpenses [List Number]");
+            } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("List Number Cannot be Empty");
+            System.out.println("Command Format : rec viewexpenses [List Number]");
+            return null;
+        }
+    }
+
         return null;
     }
 
@@ -669,7 +700,7 @@ public class Parser {
         }
 
         if (isRecCommand(input)) {
-            return handleRecCommand(input, expensesList);
+            return handleRecCommand(input, expensesList, expenses);
         }
 
         return null;
