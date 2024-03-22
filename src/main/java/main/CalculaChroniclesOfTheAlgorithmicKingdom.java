@@ -1,7 +1,8 @@
 package main;
 
 import command.Command;
-import command.fight.FightingCommand;
+import command.*;
+import command.mapmove.InteractingCommand;
 import command.mapmove.MapMoveCommand;
 import map.*;
 import parser.Parser;
@@ -48,6 +49,10 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
             String userCommandText = in.nextLine();
 
             userCommand = parser.parseCommand(userCommandText);
+            if (userCommand instanceof ErrorCommand) {
+                userCommand.execute(); // To put in textbox when implemented
+                continue;
+            }
             setUserCommand(userCommand, storedMaps.get(currentOn), playerStatus, textBox);
 
             if (!(storedMaps.get(currentOn) instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
