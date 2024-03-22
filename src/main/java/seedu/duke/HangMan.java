@@ -2,7 +2,7 @@ package seedu.duke;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class HangMan {
+public class HangMan extends Game {
     protected static String[] wordBank = new String[11];
     protected static ArrayList<String> allGuessedLetters = new ArrayList<>();
     protected static int numberOfLettersGuessed = 0;
@@ -12,7 +12,8 @@ public class HangMan {
     protected static int state = 0;
     protected static final String LINE = "_";
 
-    public HangMan() {
+    public HangMan(String line) {
+        super(line);
         String words = "ant baboon badger bat bear beaver camel cat clam cobra cougar";
         wordBank = words.split(" ",11);
         Random rand = new Random();
@@ -22,7 +23,7 @@ public class HangMan {
         correctGuesses = LINE.repeat(chosenWordLength);
     }
 
-    public void runHangMan() {
+    @Override public void runHangMan() {
 
         printHangMan();
         printLettersGuessed();

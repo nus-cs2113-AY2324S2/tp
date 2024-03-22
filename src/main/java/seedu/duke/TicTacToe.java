@@ -59,7 +59,7 @@ public class TicTacToe extends Game {
         return "unending";
     }
 
-    public static void runTicTacToe() throws InvalidTTMoveException {
+    @Override public void runTicTacToe() throws InvalidTTMoveException {
         for (int i = 0; i < 9; i++) {
             board[i] = " ";
         }
