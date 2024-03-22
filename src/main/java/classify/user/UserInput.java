@@ -20,4 +20,5 @@ public class UserInput {
         commandWithName[0] = commandWithName[0].toLowerCase();
         return commandWithName;
     }
+
 }

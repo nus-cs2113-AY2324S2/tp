@@ -2,12 +2,17 @@ package classify.user;
 
 import classify.student.Student;
 import classify.student.StudentAttributes;
+
+import classify.student.StudentComparators;
 import classify.student.StudentList;
 import classify.student.SubjectGrade;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import java.util.List;
 import java.util.Scanner;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +27,11 @@ public class InputParsing {
     private static final String DELETE = "delete";
     private static final String EDIT = "edit";
     private static final String HELP = "help";
+    private static final String SORT_NAME = "sort_name";
+    private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
+            "No students in the list, can't sort by name!";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList, Scanner in) {
         // @@author blackmirag3
@@ -55,12 +64,17 @@ public class InputParsing {
             Ui.printEndConversation();
             break;
 
+        case EDIT:
+            editStudent(masterStudentList, in, userCommand[1]);
+            break;
+
         case LIST:
             listStudents(masterStudentList);
             break;
 
-        case EDIT:
-            editStudent(masterStudentList, in, userCommand[1]);
+        //@@ author tayponghee
+        case SORT_NAME:
+            listStudentsByName(masterStudentList);
             break;
 
         default:
@@ -68,6 +82,22 @@ public class InputParsing {
             break;
         }
     }
+
+    /**
+     * Lists students in the provided list by name in ascending order.
+     * If the list is empty, it prints a message indicating that there are no students in the list.
+     *
+     * @param students The list of students to be listed by name.
+     */
+    public static void listStudentsByName(ArrayList<Student> students) {
+        if (students.isEmpty()) {
+            System.out.println(NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME);
+            return;
+        }
+        Collections.sort(students, StudentComparators.nameComparator);
+        listStudents(students);
+    }
+
 
     // @@author blackmirag3
     private static void listStudents(ArrayList<Student> list) {
@@ -139,9 +169,9 @@ public class InputParsing {
                 break;
 
             default:
-                Ui.printWrongInput();
                 break;
             }
+
         }
     }
 

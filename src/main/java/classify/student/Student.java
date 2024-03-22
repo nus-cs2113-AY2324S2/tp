@@ -20,12 +20,24 @@ public class Student {
         this.attributes = new StudentAttributes(this);
     }
 
+    //@@author tayponghee
     public StudentAttributes getAttributes() {
         return attributes;
     }
 
     public void setAttributes(StudentAttributes attributes) {
         this.attributes = attributes;
+    }
+    public String getGender() {
+        return attributes.getGender();
+    }
+
+    public int getPhoneNumber() {
+        return attributes.getPhoneNumber();
+    }
+
+    public String getLastPaymentDate() {
+        return attributes.getLastPaymentDate();
     }
 
     //@@ Cryolian

@@ -11,7 +11,7 @@ public class Classify {
     public static Scanner in = new Scanner(System.in);
 
     /**
-     * Main entry-point for the the Classify application.
+     * Main entry-point for the Classify application.
      */
     public static void main(String[] args) {
 
