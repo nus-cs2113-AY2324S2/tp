@@ -42,17 +42,5 @@ public class Event extends Task {
     public String getName () {
         return name + "(from: " + startDate + " to: " + endDate + ")";
     }
-
-    /**
-     * Returns the String save format used to save Hachi task data.
-     * Override function of superclass Task.
-     *
-     * @return The required save format including the task type, status icon, name, start and end date.
-     */
-
-    @Override
-    public String getSaveFormat () {
-        return getTaskType() + " | " + getStatusIcon() + " | " + this.name + " | " + startDate + " | " + endDate;
-    }
 }
 

@@ -76,14 +76,4 @@ public class Task {
     public String getTaskType() {
         return "?";
     }
-
-    /**
-     * Returns the String save format used to save Hachi task data.
-     *
-     * @return ? which represents an unclassified task.
-     */
-
-    public String getSaveFormat () {
-        return "?";
-    }
 }
