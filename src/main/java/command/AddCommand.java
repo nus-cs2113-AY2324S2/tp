@@ -39,9 +39,12 @@ public class AddCommand extends Command {
     @Override
     public void execute() {
         Itemlist.addItem(toAdd);
-        System.out.print(MESSAGE_SUCCESS + getItemName() + " (Qty: " + getQuantity() + ")");
+        System.out.print(MESSAGE_SUCCESS + getItemName() + " (Qty: " + getQuantity() + " " + getUom() + ")");
         if (!category.equals("NA")) {
             System.out.println(" to " + getCategory());
+        } else {
+            System.out.println();
+            assert category.equals("NA");
         }
     }
 }
