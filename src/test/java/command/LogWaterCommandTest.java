@@ -23,8 +23,10 @@ public class LogWaterCommandTest {
     }
 
     @Test
-    void testNonPositiveQuantity() throws ActiveEdgeException {
+    void testNonPositiveQuantity() {
         LogWaterCommand logWaterCommand = new LogWaterCommand("-100");
-        logWaterCommand.execute();
+        ActiveEdgeException exception = assertThrows(ActiveEdgeException.class, logWaterCommand::execute);
+        assertEquals("Water quantity must be above 0", exception.getMessage());
     }
+
 }
