@@ -18,7 +18,7 @@ public class Expense {
      * @param payeeList : String array of people who owe the payer money
      *                  (Index 0 is the payer and will not be added to the payee list)
      */
-    Expense(String payerName, float totalAmount, String[] payeeList){
+    Expense(String payerName, float totalAmount, String[] payeeList) {
         payerName = removeWhitespaces(payerName);
         for(int i = 1; i < payeeList.length; i++){
             payees.add(removeWhitespaces(payeeList[i]));
@@ -27,14 +27,14 @@ public class Expense {
         this.totalAmount = totalAmount;
 
         System.out.printf("Added new expense %.2f owed to %s by:",this.totalAmount,this.payerName);
-        for(String payee : payees){
+        for(String payee : payees) {
             System.out.print(payee + ", ");
         }
         System.out.println();
     }
 
 
-    private String removeWhitespaces(String item){
+    private String removeWhitespaces(String item) {
         String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
         return itemWithoutWhitespaces;
     }
