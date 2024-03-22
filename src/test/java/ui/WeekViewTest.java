@@ -5,9 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import time.WeekView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -58,6 +55,5 @@ public class WeekViewTest {
         assertEquals(newStartOfWeek, weekView.getStartOfWeek());
     }
 
-    // Additional test cases can be added to cover more scenarios
 }
 
