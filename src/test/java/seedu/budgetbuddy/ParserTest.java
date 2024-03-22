@@ -39,7 +39,8 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command emptyMenuCommand = parser.parseCommand(expenses, savings, "menu");
+        RecurringExpensesList expensesList = new RecurringExpensesList();
+        Command emptyMenuCommand = parser.parseCommand(expensesList,expenses, savings, "menu");
 
         assertInstanceOf(MenuCommand.class, emptyMenuCommand);
         assertEquals(0,((MenuCommand)emptyMenuCommand).getIndex());
@@ -50,7 +51,8 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command validMenuCommand = parser.parseCommand(expenses, savings, "menu 2");
+        RecurringExpensesList expensesList = new RecurringExpensesList();
+        Command validMenuCommand = parser.parseCommand(expensesList,expenses, savings, "menu 2");
 
         assertInstanceOf(MenuCommand.class, validMenuCommand);
         assertEquals(2, ((MenuCommand)validMenuCommand).getIndex());
@@ -61,7 +63,8 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command invalidMenuCommand = parser.parseCommand(expenses, savings, "menu invalidNumber");
+        RecurringExpensesList expensesList = new RecurringExpensesList();
+        Command invalidMenuCommand = parser.parseCommand(expensesList, expenses, savings, "menu invalidNumber");
 
         assertNull(invalidMenuCommand);
     }
@@ -71,7 +74,8 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command invalidCommand = parser.parseCommand(expenses, savings, "notACommand");
+        RecurringExpensesList expensesList = new RecurringExpensesList();
+        Command invalidCommand = parser.parseCommand(expensesList, expenses, savings, "notACommand");
 
         assertNull(invalidCommand);
     }
