@@ -57,13 +57,12 @@ public class TextUi {
     }
 
     public static <T> void showInventoryList(ArrayList<T> arrayList) {
+        replyToUser("List: ");
         for (T item : arrayList) {
             if (item == null) {
                 break;
             }
-            replyToUser(
-                    "List:",
-                    String.valueOf(item));
+            replyToUser(arrayList.indexOf(item) + 1 +". " + item);
         }
     }
 }
