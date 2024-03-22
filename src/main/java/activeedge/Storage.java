@@ -127,21 +127,17 @@ public class Storage {
                 while (scanner.hasNext()) {
                     String task = scanner.nextLine();
                     if (task.startsWith("Meal")) {
-
                         String[] items = task.trim().split(" ");
                         int len = items.length;
                         assert len >= 4;
                         String mealName = "";
-
                         for (int i = 1; i <= len - 3; i++) {
                             mealName = mealName + items[i];
                         }
-
                         LogMeals newTask = new LogMeals(mealName,
                                 Integer.parseInt(items[len - 2]),
                                 Integer.parseInt(items[len - 1]));
                         TaskList.tasksList.add(newTask);
-                        
                     } else if (task.startsWith("Goal")) {
                         String[] items = task.trim().split(" ");
                         GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
@@ -158,19 +154,15 @@ public class Storage {
                         String[] items = task.trim().split(" ");
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
                         UserDetailsList.detailsList.add(newWeight);
+                    } else if (task.startsWith("Goal")) {
+                        String[] items = task.trim().split(" ");
+                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
+                        TaskList.tasksList.add(newTask);
+                    } else if (task.startsWith("Water")) {
+                        String[] items = task.trim().split(" ");
+                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
+                        TaskList.tasksList.add(newTask);
                     }
-                    LogMeals newTask = new LogMeals(mealName,
-                            Integer.parseInt(items[len - 2]),
-                            Integer.parseInt(items[len - 1]));
-                    TaskList.tasksList.add(newTask);
-                }else if (task.startsWith("Goal")){
-                    String[] items = task.trim().split(" ");
-                    GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
-                    TaskList.tasksList.add(newTask);
-                } else if (task.startsWith("Water")) {
-                    String[] items = task.trim().split(" ");
-                    WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
-                    TaskList.tasksList.add(newTask);
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Error: " + e.getMessage());
