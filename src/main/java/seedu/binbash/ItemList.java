@@ -42,8 +42,8 @@ public class ItemList {
         Item tempItem = itemList.remove(index - 1);
         assert itemList.size() == (beforeSize - 1);
 
-        String output = "Got it! I've removed the following item:"
-                + String.format("\t%s", tempItem);
+        String output = "Got it! I've removed the following item:" + System.lineSeparator()
+                + System.lineSeparator() + tempItem;
         return output;
     }
 
@@ -52,7 +52,7 @@ public class ItemList {
         Item currentItem;
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
-            if (currentItem.getItemName().equals(keyword)) {
+            if (currentItem.getItemName().trim().equals(keyword)) {
                 ITEMLIST_LOGGER.log(Level.INFO, "first matching item at index " + i + " found.");
                 targetIndex = i + 1;
                 break;
