@@ -144,7 +144,7 @@ public class Storage {
                         TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Water")) {
                         String[] items = task.trim().split(" ");
-                        GoalTask newTask = new GoalTask(items[0], Integer.parseInt(items[1]));
+                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
                         TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
@@ -154,15 +154,7 @@ public class Storage {
                         String[] items = task.trim().split(" ");
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
                         UserDetailsList.detailsList.add(newWeight);
-                    } else if (task.startsWith("Goal")) {
-                        String[] items = task.trim().split(" ");
-                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
-                        TaskList.tasksList.add(newTask);
-                    } else if (task.startsWith("Water")) {
-                        String[] items = task.trim().split(" ");
-                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
-                        TaskList.tasksList.add(newTask);
-                    }
+                    } 
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Error: " + e.getMessage());
