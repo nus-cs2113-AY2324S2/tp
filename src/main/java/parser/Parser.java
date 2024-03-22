@@ -57,11 +57,10 @@ public class Parser {
         case ADD:
             try {
                 return prepareAdd(userInput);
-
             } catch (CommandFormatException e) {
                 break;
             }
-        case DELETE:
+        case DEL:
             try {
                 return prepareDelete(userInput);
             } catch (CommandFormatException e) {
@@ -101,7 +100,7 @@ public class Parser {
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            throw new CommandFormatException(CommandType.DELETE);
+            throw new CommandFormatException(CommandType.DEL);
         }
         return new DeleteCommand(matcher.group("itemName"));
     }
