@@ -1,13 +1,13 @@
 package classify.datacommands;
 
+import classify.student.Student;
+import classify.user.InputParsing;
+import classify.user.Ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import classify.student.Student;
-import classify.user.InputParsing;
-import classify.user.Ui;
 
 //@@author ParthGandhiNUS
 public class DataReader {
@@ -18,7 +18,8 @@ public class DataReader {
 
     //@@author ParthGandhiNUS
     /**
-     * Method restores the previous student list by accessing the line-by-line information in the Student_Information.txt
+     * Method restores the previous student list by accessing the
+     * line-by-line information in the Student_Information.txt
      * 
      * @param studentFileInput  Line-by-line information of strings in the Student_Information.txt
      * @param masterStudentList The list of all students

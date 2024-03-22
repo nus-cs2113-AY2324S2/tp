@@ -1,5 +1,9 @@
 package classify.datacommands;
 
+import classify.student.Student;
+import classify.student.StudentList;
+import classify.user.Ui;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,10 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import classify.student.Student;
-import classify.student.StudentList;
-import classify.user.Ui;
 
 //@@author ParthGandhiNUS
 public class DataHandler {
@@ -41,11 +41,10 @@ public class DataHandler {
 
     /**
      * This accesses Student_Information.txt and calls the restoreStudentList function
-     * 
-     * @param currentTask   ArrayList containing the current students
+     *
      * @throws IOException  When unable to get the Student_Information.txt file or has any input errors
      */
-    public static void readStudentInfo(List <Student> newList) throws IOException{
+    public static void readStudentInfo() throws IOException{
         try{
             DataStorage.createParentFileFolder(Paths.get(STUDENT_INFO_FILE_FOLDER));
             Path studentInfoFilePath = Paths.get(STUDENT_INFO_TEXT_FILE);

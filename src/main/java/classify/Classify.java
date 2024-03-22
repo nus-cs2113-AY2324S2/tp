@@ -20,7 +20,7 @@ public class Classify {
         // @@author ParthGandhiNUS  
         Ui.printWelcomeMessage();
         Ui.printUserPrompt();
-        DataHandler.readStudentInfo(StudentList.masterStudentList);
+        DataHandler.readStudentInfo();
         
         // Takes in input from the user, and processes input to determine if it contains a command and a name   
         String[] userCommand = UserInput.processInput(in.nextLine());

@@ -1,5 +1,7 @@
 package classify.datacommands;
 
+import classify.user.Ui;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -8,15 +10,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import classify.user.Ui;
-
 
 //@@author ParthGandhiNUS
 public class DataStorage {
     private static final String NEWLINE = "\n";
     private static final String STUDENT_INFO_FILE_FOLDER = "data/studentInfo";
     private static final String STUDENT_INFO_TEXT_FILE = "data/studentInfo/Student_Information.txt";
-    private static final String FAILURE_TO_CREATE_PARENT_FOLDER_DIRECTORY = "Failure to create the parent folder directory!";
+    private static final String FAILURE_TO_CREATE_PARENT_FOLDER_DIRECTORY =
+            "Failure to create the parent folder directory!";
     private static final String SUCCESSFULLY_UPDATE_STUDENT_RECORDS = "Updated Student Records successfully!";
     private static final String ISSUE_WITH_FOLDER_OR_TEXTFILE = "Issue with directory/text file. Please check!";
     
@@ -26,7 +27,7 @@ public class DataStorage {
      * Accesses the parent directory to try to make the parent directory.
      * Tries to write the lines which are made by the writeStudentInfo Method
      * 
-     * @param lines:    Arraylist containing the processed current tasks in the CurrentTask
+     * @param lines Arraylist containing the processed current tasks in the masterStudentList
      */
     public static void writeStudentInfoFile(List <String> lines){
         try {
@@ -49,7 +50,7 @@ public class DataStorage {
     /**
      * Used to create the parent folder for a certain file
      * 
-     * @param parentPath    Path file containing the path of folder we wanna make the text file in
+     * @param parentPath    Path file containing the path of folder we want to make the text file in
      * @throws IOException  Triggers whenever the input for the path or creation of the directory is improper
      */
     public static void createParentFileFolder (Path parentPath) throws IOException {
