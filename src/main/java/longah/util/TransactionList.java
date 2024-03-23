@@ -160,6 +160,25 @@ public class TransactionList {
     }
 
     /**
+     * Edits a transaction from the list by index with new expression.
+     */
+    public void editTransactionList(String[] parts, MemberList memberList) throws LongAhException {
+        if (parts.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_EDIT_COMMAND);
+        }
+        try {
+            String[] editParts = parts[1].split(" ", 2);
+            int index = Integer.parseInt(editParts[0]) - 1;
+            if (index < 0 || index >= transactions.size()) {
+                throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+            }
+            transactions.get(index).editTransaction(editParts[1], memberList);
+        } catch (NumberFormatException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+        }
+    }
+
+    /**
      * Printout the list of transactions which a person is involved as a borrower
      *
      * @param borrowerName containing the String representation of the name of person to search for
