@@ -36,10 +36,12 @@ public class InputParsing {
             "Enter the subject name (type 'exit' to go back):";
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
+    private static final String LIST_SORTED = "Sort complete!";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
     private static final String SORT_BY_CHOOSE_INDEX = "Sort by: (Choose index)";
     private static final String NAME_A_TO_Z = "1. Name (A to Z)";
     private static final String TOTAL_NUMBER_OF_CLASSES_ATTENDED = "2. Total number of classes attended:";
+    private static final String LAST_PAID_DATE = "3. Date of last fee payment: ";
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList,
                                         ArrayList<Student> recentlyDeletedList, Scanner in) {
@@ -99,7 +101,7 @@ public class InputParsing {
 
         //@@ author tayponghee
         case SORT:
-            sortStudents(masterStudentList, in);
+            sortStudents(masterStudentList, in, userCommand[1]);
             break;
 
         case VIEW_SUBJECT:
@@ -118,12 +120,21 @@ public class InputParsing {
      * @param masterStudentList The list of students to be sorted.
      * @param in                The Scanner object to read user input.
      */
-    private static void sortStudents(ArrayList<Student> masterStudentList, Scanner in) {
+    private static void sortStudents(ArrayList<Student> masterStudentList, Scanner in, String sortType) {
+        String input;
         while (true) {
-            Ui.println(SORT_BY_CHOOSE_INDEX);
-            Ui.println(NAME_A_TO_Z);
-            Ui.println(TOTAL_NUMBER_OF_CLASSES_ATTENDED);
-            String input = in.nextLine().trim();
+            //@@author alalal47
+            if (sortType == null) {
+                Ui.println(SORT_BY_CHOOSE_INDEX);
+                Ui.println(NAME_A_TO_Z);
+                Ui.println(TOTAL_NUMBER_OF_CLASSES_ATTENDED);
+                Ui.println(LAST_PAID_DATE);
+                input = in.nextLine().trim();
+            } else {
+                input = sortType.trim().toLowerCase();
+            }
+            //@@author tayponghee
+            //input = in.nextLine().trim();
 
             if (input.equalsIgnoreCase(EXIT)) {
                 System.out.println(EXITED_THE_COMMAND);
@@ -133,7 +144,7 @@ public class InputParsing {
 
             if (StudentSorter.isValidChoice(input)) {
                 StudentSorter.sortByChoice(masterStudentList, input, in);
-                Ui.println(EXITED_THE_COMMAND);
+                Ui.println(LIST_SORTED);
                 break;
             } else {
                 Ui.println(StudentSorter.INVALID_CHOICE);

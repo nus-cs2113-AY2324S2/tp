@@ -90,7 +90,12 @@ public class InputParsingTest {
                                              + System.lineSeparator() +
                 "bye                         Exits Classify"
                                              + System.lineSeparator() +
-               "sort_name                   sorts the students by name lexicographically"
+                "sort_name                   sorts the students by name lexicographically"
+                                             + System.lineSeparator() +
+                "sort                        Sorts the student list by the input parameter, expects an" +
+                                             " attribute to sort by, can be used directly by sort [type]."
+                                             + System.lineSeparator() +
+                "                            Currently available types: name, classes, payment"
                                              + System.lineSeparator() +
                 "help                        Prints this help message" +
             System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
