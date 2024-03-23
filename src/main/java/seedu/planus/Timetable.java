@@ -98,9 +98,11 @@ public class Timetable {
                 if (currCourseCode.equalsIgnoreCase(courseCode)) {
                     course.setGrade(grade);
                     if (course.getLetterGrade() == null) {
+                        assert course.getNumberGrade() == -1 : "The numerical grade should be -1.";
                         Ui.printInvalidInputGrade();
                         return;
                     }
+                    assert course.getLetterGrade().equals(grade) : "The grade is not correctly set.";
                     Ui.printSuccessToAddGrade(currCourseCode);
                     return;
                 }
@@ -116,6 +118,7 @@ public class Timetable {
                 String currCourseCode = course.getCourseCode();
                 if (currCourseCode.equalsIgnoreCase(courseCode)) {
                     course.setGrade(null);
+                    assert course.getNumberGrade() == -1 : "The numerical grade should be -1.";
                     Ui.printSuccessToRemoveGrade(currCourseCode);
                     return;
                 }
