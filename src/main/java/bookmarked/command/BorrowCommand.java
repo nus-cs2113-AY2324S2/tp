@@ -42,7 +42,7 @@ public class BorrowCommand extends Command {
             // and we mark all copies as borrowed
             foundBooks.forEach(book -> {
                 //assert !book.isBorrowed() : "Book is already borrowed: " + book.getName();
-                book.setBorrowed(true);
+                book.setBorrowed();
                 System.out.println("Borrowed " + book.getName() + "!");
             });
         } else {

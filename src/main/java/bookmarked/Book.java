@@ -16,7 +16,7 @@ public class Book {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
     }
 
-    public void setBorrowed(boolean status) {
+    public void setBorrowed() {
         this.isBorrowed = true;
     }
 
