@@ -57,27 +57,24 @@ public class HabitTracker {
     /**
      * Update the habit count for a habit.
      *
-     * @param habitIDString The string of a habitID to be updated.
+     * @param habitID The habitID to be updated.
      * @param updatedCount The count to be added to the existing habit count.
      * @throws HabitException If an invalid habit ID is provided.
      */
-    public void updateHabitCount(String habitIDString, String updatedCount) throws HabitException {
-        int habitID;
-        try {
-            habitID = Integer.parseInt(habitIDString);
-            if (!isValidHabitID(habitID)) {
-                throw new HabitException("Please provide a valid habit ID.");
-            }
-        } catch (NumberFormatException e) {
+    public void updateHabitCount(int habitID, String updatedCount) throws HabitException {
+        if (!isValidHabitID(habitID)) {
             throw new HabitException("Please provide a valid habit ID.");
         }
 
         Habit habit = habitList.get(habitID - 1);
         int changeInCount = habit.updateCount(updatedCount);
+
         String updateHabitCountMessage = "";
+
         if (changeInCount > 0) {
             updateHabitCountMessage += "Good Job! You have completed your habit!\n";
         }
+
         updateHabitCountMessage += "The count for your habit has been updated:\n";
         updateHabitCountMessage += "  " + habitID + ". " + habit;
         Ui.printMessageWithSepNewLine(updateHabitCountMessage);
@@ -102,4 +99,5 @@ public class HabitTracker {
 
         saveHabitListToFile(habitList);
     }
+
 }

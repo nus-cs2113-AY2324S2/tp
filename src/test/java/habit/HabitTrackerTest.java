@@ -26,7 +26,7 @@ public class HabitTrackerTest {
     public void updateHabitCount_habitCountTwo_success() throws HabitException {
         Habit habitThree = new Habit("Complete my homework");
         habitTracker.addHabit(habitThree);
-        habitTracker.updateHabitCount("3", "2");
+        habitTracker.updateHabitCount(3, "2");
         assertEquals(2, habitThree.getHabitCount());
 
     }
