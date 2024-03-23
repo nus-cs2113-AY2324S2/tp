@@ -27,7 +27,13 @@ public class Duke {
                     Ui.printLine();
                     break;
 
-                case "add":
+                case "accommodation":
+                    Ui.printLine();
+                    Parser.addCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "food":
                     Ui.printLine();
                     Parser.addCommand(line, list);
                     Ui.printLine();
