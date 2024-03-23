@@ -1,6 +1,10 @@
 package activeedge;
 
-import activeedge.task.*;
+import activeedge.task.GoalTask;
+import activeedge.task.MealTask;
+import activeedge.task.TaskList;
+import activeedge.task.ExerciseTask;
+import activeedge.task.WaterTask;
 import activeedge.userdetails.LogHeight;
 import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
