@@ -15,12 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Ui {
-
-    private static final Scanner IN = new Scanner(System.in);
+    public static int roundCount = 1;
+    public static final Scanner IN = new Scanner(System.in);
     private static boolean isRunning = true;
     private static String userInput;
     private static Parser userCommandReader;
-    public static int roundCount = 0;
+
     private static final Logger logger = Logger.getLogger("Foo");
 
     /**
@@ -60,19 +60,23 @@ public class Ui {
      * Runs command based on parsed input
      */
     public static void executeCommand() {
-        CommandList selectedCommand = CommandList.valueOf(userCommandReader.getCommandName());
-    
+        String readUserCommand = userCommandReader.getCommandName();
+        String[] readArgumentTokens = userCommandReader.getArgumentTokens();
+
+        CommandList selectedCommand = CommandList.valueOf(readUserCommand);
+
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
             break;
         case SHOOT:
-            CommandList.executeShoot(userCommandReader);
+            CommandList.executeShoot(readArgumentTokens);
             roundCount++;
             break;
         case PENALTY:
             CommandList.executePenalty();
             break;
+            //insert new executable command here
         default:
             Formatter.printErrorUnknown();
         }
