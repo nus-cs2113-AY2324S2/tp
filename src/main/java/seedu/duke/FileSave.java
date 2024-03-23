@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileSave {
+    /*
     private static String filePath;
 
     public FileSave(String path) {
         this.filePath = path;
     }
-/*
+
     public static void loadFileContents(TravelActivityList list) throws FileNotFoundException {
         java.io.File f = new java.io.File(filePath);
         Scanner s = new Scanner(f);
@@ -18,21 +19,21 @@ public class FileSave {
             String[] line = s.nextLine().split("/");
             switch (line[0].toLowerCase()){
             case "accommodation":
-                TravelActivity accommodation = new Accommodation(line[2]);
+                TravelActivity accommodation = new Accommodation();
                 list.addTravelActivity(accommodation);
                 if(line[1].equals(" 1 ")){
                     accommodation.setActivityStatus(true);
                 }
                 break;
             case "food":
-                TravelActivity food = new Food(line[2]);
+                TravelActivity food = new Food();
                 list.addTravelActivity(food);
                 if(line[1].equals(" 1 ")){
                     food.setActivityStatus(true);
                 }
                 break;
             case "landmark":
-                TravelActivity landmark = new Landmark(line[2]);
+                TravelActivity landmark = new Landmark();
                 list.addTravelActivity(landmark);
                 if(line[1].equals(" 1 ")){
                     landmark.setActivityStatus(true);
