@@ -8,9 +8,8 @@ import java.util.ArrayList;
 /**
  * Represents a bank of reflection questions.
  */
-public class ReflectionQuestionBank {
-    private ArrayList<ReflectionQuestion> reflectionQuestionList;
-    private final String[] questions = {
+public class ReflectionQuestionBank extends ReflectionList{
+    private static final String[] REFLECTION_QUESTIONS = {
         "What have been the most significant lessons you've learned about yourself in the past year?",
         "How have your values evolved over time, and why?",
         "What habits or behaviors do you want to cultivate or change to become a better version of yourself?",
@@ -66,7 +65,7 @@ public class ReflectionQuestionBank {
      * Constructs a ReflectionQuestionBank and initializes the list of reflection questions.
      */
     public ReflectionQuestionBank() {
-        this.reflectionQuestionList = new ArrayList<>();
+        super();
         setUpReflectionBank();
     }
 
@@ -74,20 +73,9 @@ public class ReflectionQuestionBank {
      * Initializes the reflection question bank with predefined questions.
      */
     private void setUpReflectionBank() {
-        for(String question : questions) {
+        for(String question : REFLECTION_QUESTIONS) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(question);
             addReflectionQuestion(reflectionQuestion);
-        }
-    }
-
-    /**
-     * Adds a reflection question to the bank.
-     *
-     * @param question The reflection question to add.
-     */
-    public void addReflectionQuestion(ReflectionQuestion question) {
-        if (!question.toString().isBlank()) {
-            reflectionQuestionList.add(question);
         }
     }
 
@@ -102,7 +90,7 @@ public class ReflectionQuestionBank {
             ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
 
             // Create a copy of the original list
-            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionQuestionList);
+            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionList);
 
             // Shuffle the copy list
             Collections.shuffle(copyList);
@@ -119,24 +107,5 @@ public class ReflectionQuestionBank {
         } catch (IndexOutOfBoundsException e) {
             throw new ReflectException("Question bank is empty");
         }
-
-    }
-
-    /**
-     * Retrieves the size of the reflection question bank.
-     *
-     * @return The size of the reflection question bank.
-     */
-    public int getTaskListSize() {
-        return reflectionQuestionList.size();
-    }
-
-    /**
-     * Retrieves the list of reflection questions.
-     *
-     * @return The list of reflection questions.
-     */
-    public ArrayList<ReflectionQuestion> getQuestionsList() {
-        return reflectionQuestionList;
     }
 }

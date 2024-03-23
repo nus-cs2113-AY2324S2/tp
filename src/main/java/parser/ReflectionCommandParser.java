@@ -1,8 +1,10 @@
 package parser;
 
 import commands.Command;
+import commands.reflectcommands.ReflectionHelpCommand;
+import commands.reflectcommands.ListFavouriteReflectionsCommand;
 import commands.reflectcommands.GetReflectionQuestionsCommand;
-import commands.reflectcommands.ListFavouritesCommand;
+import commands.reflectcommands.UnsaveFromFavouritesCommand;
 import commands.reflectcommands.SaveToFavouritesCommand;
 import exceptions.ReflectException;
 import reflection.ReflectionManager;
@@ -33,8 +35,12 @@ public class ReflectionCommandParser {
             return new GetReflectionQuestionsCommand(reflectionManager);
         case "save":
             return new SaveToFavouritesCommand(reflectionManager, reflectionCommandArgs);
+        case "unsave":
+            return new UnsaveFromFavouritesCommand(reflectionManager, reflectionCommandArgs);
         case "list":
-            return new ListFavouritesCommand(reflectionManager);
+            return new ListFavouriteReflectionsCommand(reflectionManager);
+        case "help":
+            return new ReflectionHelpCommand(reflectionManager);
         default:
             throw new ReflectException("Unknown reflect command");
         }

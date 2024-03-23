@@ -1,39 +1,17 @@
 package reflection;
 
-import java.util.ArrayList;
-
 /**
  * Represents a list of favorite reflection questions.
  */
-public class FavoriteReflectionsList {
-    private ArrayList<ReflectionQuestion> favouritesList;
+public class FavoriteReflectionsList extends ReflectionList {
 
     /**
      * Constructs a FavoriteReflectionsList with an empty list of favorites.
      */
     public FavoriteReflectionsList() {
-        this.favouritesList = new ArrayList<>();
+        super();
     }
 
-    /**
-     * Adds a reflection question to the list of favorites.
-     *
-     * @param reflectionQuestion The reflection question to be added.
-     */
-    public void addReflectionQuestion(ReflectionQuestion reflectionQuestion) {
-        if (!reflectionQuestion.toString().isBlank()) {
-            favouritesList.add(reflectionQuestion);
-        }
-    }
-
-    /**
-     * Retrieves the list of favorite reflection questions.
-     *
-     * @return The list of favorite reflection questions.
-     */
-    public ArrayList<ReflectionQuestion> getFavouritesList() {
-        return favouritesList;
-    }
 
 
     /**
@@ -43,6 +21,6 @@ public class FavoriteReflectionsList {
      * @return The reflection question at the specified index.
      */
     public ReflectionQuestion get(int favouritesId) {
-        return favouritesList.get(favouritesId);
+        return reflectionList.get(favouritesId);
     }
 }
