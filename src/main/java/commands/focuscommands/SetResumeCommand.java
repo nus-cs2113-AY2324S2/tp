@@ -16,7 +16,7 @@ public class SetResumeCommand implements Command {
     }
 
     public void execute() throws FocusException {
-        if (timerStartedAndPaused()) {
+        if (!timerStartedAndPaused()) {
             throw new FocusException("Timer is already resumed or Timer hasn't started..");
         }
         focusTimer.setResumeTiming();
