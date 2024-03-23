@@ -35,6 +35,15 @@ public class FavoriteReflectionsListTest {
     }
 
     @Test
+    public void removeReflectionQuestion_removeQuestion_success() {
+        ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
+        favoriteReflectionList.addReflectionQuestion(question);
+        favoriteReflectionList.removeReflectionQuestion(question);
+        assertEquals(0, favoriteReflectionList.getReflectionList().size());
+        assertFalse(favoriteReflectionList.getReflectionList().contains(question));
+    }
+
+    @Test
     public void get_getQuestionById_success() {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         favoriteReflectionList.addReflectionQuestion(question);

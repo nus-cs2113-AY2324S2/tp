@@ -5,6 +5,9 @@ import commands.Command;
 import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
+/**
+ * A command implementation for unsaving a reflection item from favorites.
+ */
 public class UnsaveFromFavouritesCommand implements Command {
     private ReflectionManager reflectionManager;
     private int reflectionId;

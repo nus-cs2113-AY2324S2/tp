@@ -5,15 +5,23 @@ import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Manages reflection-related operations.
  */
 public class ReflectionManager {
+    private static final String[] HELP_MENU_INSTRUCTIONS = {
+        "reflect get: Get 5 random reflection questions",
+        "reflect save <reflection_id>: Save reflection question by id to favourites list",
+        "reflect unsave <reflection_id>: Unsave reflection question by id from favourites list",
+        "reflect list: Retrieve questions from favourites list",
+        "reflect help: Get help menu for reflect commands"
+    };
+    private static final String FAVOURITE_QUESTIONS_FILE_PATH = "data/favourites.txt";
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
-    private final String FAVOURITE_QUESTIONS_FILE_PATH = "data/favourites.txt";
 
     /**
      * Constructs a ReflectionManager and initializes question bank and favorite reflections list.
@@ -96,6 +104,15 @@ public class ReflectionManager {
         } else {
             Ui.printList(favoriteReflectionsList.getReflectionList(), "Favourites list:");
         }
+    }
+
+    /**
+     * Prints the help menu for reflection commands.
+     */
+    public void printHelpMenu() {
+        ArrayList<String> helpMenuInstructionsList = new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
+
+        Ui.printList(helpMenuInstructionsList, "Commands for reflection feature:");
     }
 
 }

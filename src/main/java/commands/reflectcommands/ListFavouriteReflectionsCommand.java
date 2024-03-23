@@ -7,7 +7,7 @@ import reflection.ReflectionManager;
 /**
  * A command implementation for listing favorite reflection items.
  */
-public class ListFavouritesCommand implements Command {
+public class ListFavouriteReflectionsCommand implements Command {
     private ReflectionManager reflectionManager;
 
     /**
@@ -15,7 +15,7 @@ public class ListFavouritesCommand implements Command {
      *
      * @param reflectionManager The ReflectionManager instance to be used for listing favorite items.
      */
-    public ListFavouritesCommand(ReflectionManager reflectionManager) {
+    public ListFavouriteReflectionsCommand(ReflectionManager reflectionManager) {
         this.reflectionManager = reflectionManager;
     }
 

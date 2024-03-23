@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Represents a bank of reflection questions.
  */
 public class ReflectionQuestionBank extends ReflectionList{
-    private final String[] questions = {
+    private static final String[] REFLECTION_QUESTIONS = {
         "What have been the most significant lessons you've learned about yourself in the past year?",
         "How have your values evolved over time, and why?",
         "What habits or behaviors do you want to cultivate or change to become a better version of yourself?",
@@ -73,7 +73,7 @@ public class ReflectionQuestionBank extends ReflectionList{
      * Initializes the reflection question bank with predefined questions.
      */
     private void setUpReflectionBank() {
-        for(String question : questions) {
+        for(String question : REFLECTION_QUESTIONS) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(question);
             addReflectionQuestion(reflectionQuestion);
         }
