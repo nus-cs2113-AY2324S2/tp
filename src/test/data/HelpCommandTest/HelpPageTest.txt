@@ -84,3 +84,12 @@ Description: List all available commands supported by Stockpal.
 Usage: help
 
 ====================================================================================
+Command: history
+
+Description: Checks the history of inflow outflow commands of a particular PID
+
+Usage: history PID
+
+Options:
+PID                   Product ID of product
+====================================================================================
