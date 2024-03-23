@@ -55,23 +55,10 @@ public class Parser {
             deleteTask(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktiming")){
             changeTaskTiming(command, userList);
-            changeTaskType(command, userList);
         }  else if(command.toLowerCase().startsWith("addrepeattask")){
             addRepeatTask(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktype")){
-            try {
-                InputValidator.validateChangeTaskType(command);
-                String[] parts = command.split("\\s+");
-                List<String> wordList = Arrays.asList(parts);
-                String day = wordList.get(2);
-                int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
-                String newType = wordList.get(wordList.indexOf("/type") + 1);
-                InputValidator.validateDay(day);
-                userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
-                System.out.println("Task type changed successfully.");
-            } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
-                throw new RuntimeException(e);
-            }
+            changeTaskType(command, userList);
         } else if (command.toLowerCase().startsWith("compareall")) {
             UI.printComparingAll();
             UI.printSharedTime(Timetable.compareAllTimetables(userList));

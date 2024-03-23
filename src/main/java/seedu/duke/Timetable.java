@@ -78,6 +78,9 @@ public class Timetable {
     }
 
     public void changeFlexibleTaskTiming(String dayOfWeek, int index, LocalTime newStartTime, LocalTime newEndTime) {
+        assert dayOfWeek != null : "Day of week cannot be null";
+        assert newStartTime != null : "New start time cannot be null";
+        assert newEndTime != null : "New end time cannot be null";
         String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
         ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
         if (index < 0 || index >= tasks.size()) {
