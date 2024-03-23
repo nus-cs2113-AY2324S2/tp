@@ -19,5 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 /*.jar
 /.vscode
 /data/studentInfo/
-data/studentInfo
-data/studentInfo/Student_Information.txt
+
+
