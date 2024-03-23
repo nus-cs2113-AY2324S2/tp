@@ -40,8 +40,8 @@ public class PINHandler {
      * Creates a new PIN for the user.
      */
     public void createPin() {
-        System.out.print("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!\n" +
-                "Create your 6-digit PIN: \n");
+        System.out.println("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!\n" +
+                "Create your 6-digit PIN:\n");
         String pin = scanner.nextLine();
 
         while (pin.length() != 6 || !pin.matches("\\d{6}")) {
@@ -111,7 +111,7 @@ public class PINHandler {
                     System.exit(0);
                 }
                 System.out.println("Invalid PIN. Please try again. Alternatively, enter 'quit' to exit.");
-                System.out.print("Enter your PIN: ");
+                System.out.println("Enter your PIN:");
                 enteredPin = scanner.nextLine();
                 hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
                 hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
