@@ -3,17 +3,21 @@ package classify.student;
 import classify.user.Ui;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class StudentSorter {
 
+    public static final String NAME = "name";
+    public static final String PAYMENT_DATE = "payment";
+    public static final String TOTAL_CLASSES = "classes";
     public static final String ONE = "1";
     public static final String TWO = "2";
+    public static final String THREE = "3";
     public static final String INVALID_CHOICE = "Invalid choice! " +
-            "Type either 1 or 2 to sort the list by the selected attribute";
+            "Type either 1, 2 or 3 to sort the list by the selected attribute";
 
+    //@@author tayponghee
     /**
      * Sorts the list of students based on the specified choice.
      *
@@ -31,9 +35,23 @@ public class StudentSorter {
         case ONE:
             listStudentsByName(masterStudentList);
             break;
+        case NAME:
+            listStudentsByName(masterStudentList);
+            break;
         case TWO:
             listStudentsByTotalClasses(masterStudentList);
             break;
+        case TOTAL_CLASSES:
+            listStudentsByTotalClasses(masterStudentList);
+            break;
+        //@@author alalal47
+        case THREE:
+            listStudentsByLastPaidDate(masterStudentList);
+            break;
+        case PAYMENT_DATE:
+            listStudentsByLastPaidDate(masterStudentList);
+            break;
+        //@@author tayponghee
         default:
             Ui.println(INVALID_CHOICE);
             break;
@@ -41,13 +59,14 @@ public class StudentSorter {
     }
 
     /**
-     * Checks if the choice is valid (either "1" or "2").
+     * Checks if the choice is valid (either "1", "2" or "3").
      *
      * @param choice The input choice.
      * @return True if the choice is valid, false otherwise.
      */
     public static boolean isValidChoice(String choice) {
-        return ONE.equals(choice) || TWO.equals(choice);
+        return (ONE.equals(choice) || TWO.equals(choice) || THREE.equals(choice)) ||
+                (NAME.equals(choice) || PAYMENT_DATE.equals(choice) || TOTAL_CLASSES.equals(choice));
     }
 
     /**
@@ -56,7 +75,7 @@ public class StudentSorter {
      * @param masterStudentList The list of students to be listed by name.
      */
     private static void listStudentsByName(ArrayList<Student> masterStudentList) {
-        masterStudentList.sort(Comparator.comparing(Student::getName));
+        masterStudentList.sort(StudentComparators.nameComparator);
         listStudents(masterStudentList);
         Ui.printDivider();
     }
@@ -79,20 +98,35 @@ public class StudentSorter {
 
             student.setTotalClassesAttended(totalClassesAttended);
         }
-        masterStudentList.sort(Comparator.comparingInt(Student::getTotalClassesAttended));
+        masterStudentList.sort(StudentComparators.classesAttendedComparator);
         listStudentsWithTotalClasses(masterStudentList);
 
         Ui.printDivider();
     }
 
+    //@@author alalal47
+    /**
+     * Lists students in the provided list by last paid date attended in ascending order, with the most recent first.
+     *
+     * @param masterStudentList The list of students to be listed by total classes attended.
+     */
+    private static void listStudentsByLastPaidDate(ArrayList<Student> masterStudentList) {
+        masterStudentList.sort(StudentComparators.lastPaidDateComparator);
+        listStudentsWithLastPaidDate(masterStudentList);
+        Ui.printDivider();
+    }
+
+    //@@author tayponghee
     /**
      * Lists students in the provided list.
      *
      * @param students The list of students to be listed.
      */
     private static void listStudents(ArrayList<Student> students) {
+        int i = 1;
         for (Student student : students) {
-            System.out.println(student.getName());
+            System.out.println(i + "." + student.getName());
+            i ++;
         }
     }
 
@@ -102,8 +136,20 @@ public class StudentSorter {
      * @param students The list of students to be listed.
      */
     private static void listStudentsWithTotalClasses(ArrayList<Student> students) {
+        int i = 1;
         for (Student student : students) {
-            System.out.println(student.getName() + " - Total Classes Attended: " + student.getTotalClassesAttended());
+            System.out.println(i + "." + student.getName() + " - Total Classes Attended: " +
+                    student.getTotalClassesAttended());
+            i ++;
+        }
+    }
+
+    private static void listStudentsWithLastPaidDate(ArrayList<Student> students) {
+        int i = 1;
+        for (Student student : students) {
+            System.out.println(i + "." + student.getName() + " - Date of last payment: " +
+                    student.getLastPaymentDate());
+            i ++;
         }
     }
 }

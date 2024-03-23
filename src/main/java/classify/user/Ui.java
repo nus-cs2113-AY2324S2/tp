@@ -66,9 +66,15 @@ public class Ui {
         printListHelpMessage();
         printByeHelpMessage();
         printSortNameMessage();
+        printSortHelpMessage();
         System.out.println("help                        Prints this help message");
     }
 
+    private static void printSortHelpMessage() {
+        System.out.println("sort                        Sorts the student list by the input parameter, expects an" +
+                " attribute to sort by, can be used directly by sort [type].");
+        System.out.println("                            Currently available types: name, classes, payment");
+    }
     //@@ author tayponghee
     private static void printSortNameMessage() {
         System.out.println("sort_name                   sorts the students by name lexicographically");
