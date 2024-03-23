@@ -1,7 +1,5 @@
 package longah;
 
-import java.util.Scanner;
-
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
