@@ -25,6 +25,7 @@ public class TextIn {
                 .build();
             input = LineReaderBuilder.builder()
                 .terminal(userTerminal)
+                .completer(new CommandCompleter())
                 .build();
         } catch (IOException e) {
             TEXTINLOGGER.log(Level.WARNING, "failed to get system terminal! using standard system input");
