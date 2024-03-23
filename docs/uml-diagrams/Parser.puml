@@ -1,0 +1,47 @@
+
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml
+
+@startuml
+hide footbox
+actor User
+participant ":SuperTracker" as SuperTracker
+participant ": Parser" as Parser
+
+activate SuperTracker
+User -> SuperTracker : userInput
+SuperTracker -> Parser: parseCommand(userInput)
+activate Parser
+Parser -> Parser : getPatternMatcher(regex, userInput)
+activate Parser
+Parser --> SuperTracker : commandToExecute
+deactivate Parser
+deactivate Parser
+SuperTracker -> User : Output
+
+@enduml

@@ -5,9 +5,17 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
+This section describes how certain features are implemented
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Input Parsing
+The program handles user inputs in the Parser class where inputs are parsed into command classes that implement the Command interface. 
+The Parser class only contains static methods as we have determined that it would be more practical instead of instantiating an instance of a Parser class.
 
+> Note on the command inputs:
+> - All valid command inputs by the user will have a command word _(first word separated by whitespace)_ with its respective parameters following the word.
+> - Each parameter must be entered following a flag, i.e. a name parameter will have the input `n/NAME`
+
+The following is a sequence diagram of the execution sequence of a single user input
 
 ## Product scope
 ### Target user profile
