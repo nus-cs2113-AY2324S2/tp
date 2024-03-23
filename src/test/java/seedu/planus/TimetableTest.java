@@ -13,7 +13,8 @@ public class TimetableTest {
         Timetable timetable = new Timetable();
         timetable.addCourse(new Course("MA1511", "Engineering Calculus", 2, 1, 1));
         assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  MA1511 Engineering Calculus (MC: 2)"
-                + System.lineSeparator() + "Term MCs: 2" + System.lineSeparator(), timetable.getPlan(1, 1));
+                + System.lineSeparator() + "Term MCs: 2" + System.lineSeparator(),
+                PlanGetter.getPlan(timetable, 1, 1));
     }
 
     @Test
