@@ -22,6 +22,29 @@ public class UserDetailsCommand extends Command {
         ui.showMessage("I see you're a " + gender + "!");
         System.out.println(HORIZONTAL);
 
+        ui.showMessage("Where do you stay?\n");
+        ui.showMessage("E: East");
+        ui.showMessage("W: West");
+        ui.showMessage("C: Central");
+        ui.showMessage("S: South");
+        ui.showMessage("NE: NorthEast");
+        String location = ui.readCommand();
+        ui.showMessage("Thanks! Don't worry, I won't let the rest know where you stay ;)!");
+        System.out.println(HORIZONTAL);
+
+        ui.showMessage("What is your favourite cuisine?\n");
+        ui.showMessage("W: Western");
+        ui.showMessage("F: Fusion");
+        ui.showMessage("J: Japanese");
+        ui.showMessage("C: Chinese");
+        ui.showMessage("T: Thai");
+        ui.showMessage("K: Korean");
+        ui.showMessage("I: Italian");
+        ui.showMessage("S: Spanish");
+        String cuisine = ui.readCommand();
+        ui.showMessage("Thanks, this will be useful...");
+        System.out.println(HORIZONTAL);
+
         ui.showMessage("Please enter your relationship status:\n");
         ui.showMessage("Enter 'M' if you are Married");
         ui.showMessage("Enter 'R' if you are in a serious relationship");
@@ -33,7 +56,7 @@ public class UserDetailsCommand extends Command {
         ui.showMessage("Thanks for letting me know your relationship status! :)");
         System.out.println(HORIZONTAL);
 
-        UserDetails userDetails = new UserDetails(name, age, gender, status);
+        UserDetails userDetails = new UserDetails(name, age, gender, status, location, cuisine);
         // Save the user details to a file using the Storage class
         storage.saveUserDetails(userDetails);
 

@@ -5,12 +5,16 @@ public class UserDetails {
     private String age;
     private String gender;
     private String status;
+    private String location;
+    private String cuisine;
 
-    public UserDetails(String name, String age, String gender, String status) {
+    public UserDetails(String name, String age, String gender, String status, String location, String cuisine) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.status = status;
+        this.location = location;
+        this.cuisine = cuisine;
     }
 
     // Getter for name
@@ -53,7 +57,27 @@ public class UserDetails {
         this.gender = gender;
     }
 
+    // Getter for cuisine
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    // Setter for cuisine
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    // Getter for location
+    public String getLocation() {
+        return location;
+    }
+
+    // Setter for location
+    public void setLocation(String location) {
+        this.gender = location;
+    }
+
     public String toFileFormat() {
-        return name + "|" + age + "|" + gender + "|" + status;
+        return name + " | " + age + " | " + gender + " | " + status + " | " + location + " | " + cuisine;
     }
 }

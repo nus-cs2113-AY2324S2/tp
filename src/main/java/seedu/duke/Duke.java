@@ -37,7 +37,7 @@ public class Duke {
         while(!isExit) {
             String userInput = ui.readCommand();
             try {
-                Command command = Parser.parseCommand(userInput);
+                Command command = Parser.parseCommand(userInput, userDetails);
                 command.execute(favourites, foods, activities, ui, storage);
                 if(command instanceof ExitCommand) {
                     isExit = true;

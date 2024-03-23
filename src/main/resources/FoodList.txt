@@ -1,90 +1,76 @@
-25 Degrees | C | C
-49 Seats | C | C
-888 Mookata | C | C
-90 Minutes | C | B
-A9 Noodles and Dumplings | C | B
-Aburi Kaisen Don Keisuke | C | B
-Five Guys | C | A
-Hantol | C | A
-Swee Choon | C | A
-Wano Niku | C | P
-Super Thai Mookata | C | P
-Cicheti | C | P
-Ikura Japanese | C | S
-R.K Eating House | C | S
-Tolido's Expresso Nook | C | S
-886 Bistro | E | C
-Al Jasra | E | C
-Breakfast Grill | E | C
-Charlie's Corner | E | B
-E&D Co | E | B
-Ha-Jun | E | B
-Missus | E | A
-Mr Yakiniku | E | A
-Five Oars | E | A
-Knead To Eat | E | P
-Craze Kitchen | E | P
-Neptune | E | P
-Supernova | E | S
-The Sushi Bar | E | S
-The Basil Inn | E | S
-25 Degrees | W | C
-49 Seats | W | C
-888 Mookata | W | C
-90 Minutes | W | B
-A9 Noodles and Dumplings | W | B
-Aburi Kaisen Don Keisuke | W | B
-Five Guys | W | A
-Hantol | W | A
-Swee Choon | W | A
-Wano Niku | W | P
-Super Thai Mookata | W | P
-Cicheti | W | P
-Ikura Japanese | W | S
-R.K Eating House | W | S
-Tolido's Expresso Nook | W | S
-46 Mittsu | S | C
-Abundance | S | C
-Hwang Shi | S | C
-Gyunion | S | B
-Gyu San | S | B
-Hamburg Steak | S | B
-Hantoi | S | A
-Burger Labo | S | A
-Old Habits Cafe | S | A
-Publico | S | P
-Pura Barsa | S | P
-Marcy's | S | P
-Lau Pa Sat | S | S
-Potato Head | S | S
-Dankga | S | S
-Fuel X | NE | C
-Samwitch | NE | C
-Breakfast Club | NE | C
-Whisk and Paddle | NE | B
-Tend Bistro | NE | B
-Dai Lou | NE | B
-Riang | NE | A
-Ishiro | NE | A
-Folk Yard | NE | A
-Tie Fun Wan | NE | P
-Gusta Sourdough Pizza Co | NE | P
-Curry Otoko Donburi | NE | P
-Shabu-GO | NE | S
-idaten Udon | NE | S
-Moments | NE | S
-Aburi-En | ACC | C
-Genki Sushi | ACC | C
-Makisan | ACC | C
-Lenu | ACC | B
-A&W | ACC | B
-Monster Curry | ACC | B
-Pepperlunch | ACC | A
-Shi Li Fang | ACC | A
-Soup Spoon | ACC | A
-Green Dot | ACC | P
-Hai Di Lao | ACC | P
-Poulet | ACC | P
-Gochi-so Shokudo | ACC | S
-Ichiban Sushi | ACC | S
-Watami Japanese Dining | ACC | S
+25 Degrees | C | C | W
+49 Seats | C | C | W
+888 Mookata | C | C | T
+90 Minutes | C | B | K
+A9 Noodles and Dumplings | C | B | C
+Aburi Kaisen Don Keisuke | C | B | J
+Five Guys | C | A | W
+Hantol | C | A | K
+Swee Choon | C | A | C 
+Wano Niku | C | P | J
+Super Thai Mookata | C | P | T
+Cicheti | C | P | I
+Ikura Japanese | C | S | J
+R.K Eating House | C | S | I
+Tolido's Expresso Nook | C | S | W
+886 Bistro | E | C | C
+Al Jasra | E | C | I
+Breakfast Grill | E | C | W
+Charlie's Corner | E | B | W
+E&D Co | E | B | W
+Ha-Jun | E | B | K
+Missus | E | A | W
+Mr Yakiniku | E | A | J
+Five Oars | E | A | W
+Knead To Eat | E | P | W
+Craze Kitchen | E | P | I
+Neptune | E | P | I
+Supernova | E | S | W
+The Sushi Bar | E | S | J
+The Basil Inn | E | S | T
+49 Seats | W | C | W
+888 Mookata | W | C | T
+46 Mittsu | S | C | W
+Abundance | S | C | C
+Hwang Shi | S | C | C
+Gyunion | S | B | J
+Gyu San | S | B | J
+Hamburg Steak | S | B | J
+Hantoi | S | A | K
+Burger Labo | S | A | W
+Old Habits Cafe | S | A | W
+Publico | S | P | I
+Pura Barsa | S | P | S
+Marcy's | S | P | I
+Lau Pa Sat | S | S | F
+Potato Head | S | S | W
+Fuel X | NE | C | W
+Samwitch | NE | C | W
+Breakfast Club | NE | C | W
+Whisk and Paddle | NE | B | W
+Tend Bistro | NE | B | J
+Dai Lou | NE | B | C
+Riang | NE | A | W
+Ishiro | NE | A | J
+Folk Yard | NE | A | W
+Tie Fun Wan | NE | P | C
+Gusta Sourdough Pizza Co | NE | P | I
+Curry Otoko Donburi | NE | P | J
+Shabu-GO | NE | S | J
+Idaten Udon | NE | S | J
+Moments | NE | S | W
+Aburi-En | ACC | C | J
+Genki Sushi | ACC | C | J
+Makisan | ACC | C | J
+Lenu | ACC | B | C
+A&W | ACC | B | W
+Monster Curry | ACC | B | J
+Pepperlunch | ACC | A | J
+Shi Li Fang | ACC | A | C
+Soup Spoon | ACC | A | W
+Green Dot | ACC | P | W
+Hai Di Lao | ACC | P | C
+Poulet | ACC | P | W
+Gochi-so Shokudo | ACC | S | J
+Ichiban Sushi | ACC | S | J
+Watami Japanese Dining | ACC | S | J

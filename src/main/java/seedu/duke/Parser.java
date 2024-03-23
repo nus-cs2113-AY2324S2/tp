@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Parser {
     private static final String HORIZONTAL = "____________________________________________________________";
 
-    public static Command parseCommand(String userInput) throws FlirtForkException {
+    public static Command parseCommand(String userInput, UserDetails userDetails) throws FlirtForkException {
         if (userInput.trim().isEmpty()) {
             throw new FlirtForkException("OOPS! Input cannot be empty! \n" + HORIZONTAL);
         }
@@ -51,6 +51,11 @@ public class Parser {
                 throw new FlirtForkEmptyException();
             }
             return new GenerateItineraryCommand(arguments);
+        case "smart":
+            if (!arguments.trim().isEmpty()) {
+                throw new FlirtForkEmptyException();
+            }
+            return new GenerateSmartItineraryCommand(userDetails);
         case "idea":
             return new GenerateIdeaCommand();
         case "exit":
@@ -75,7 +80,7 @@ public class Parser {
         Favourites favourite = null;
 
         if ("F".equals(parts[0]) && parts.length >= 2) {
-            favourite = new Food(parts[0], parts[1], parts[2]);
+            favourite = new Food(parts[0], parts[1], parts[2], parts[3]);
         } else if ("A".equals(parts[0]) && parts.length >= 2) {
             favourite = new Activity(parts[0], parts[1], parts[2]);
         } else {
@@ -88,7 +93,7 @@ public class Parser {
     public static Food parseFood(String line) {
         String[] parts = line.split(" \\| ");
         Food food;
-        food = new Food(parts[0], parts[1], parts[2]);
+        food = new Food(parts[0], parts[1], parts[2], parts[3]);
         return food;
     }
 
