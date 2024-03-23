@@ -900,14 +900,21 @@ public class InputParsing {
 
     private static LocalDate invalidDatePath() {
         logger.log(Level.WARNING, "Invalid date format entered." + '\n');
-        Ui.printInvalidDateError();
+        Ui.printInvalidDateFormatError();
         return LocalDate.now().plusDays(2);
     }
 
     private static boolean isDateValid(LocalDate paymentDate) {
 
-        return paymentDate.isBefore(LocalDate.now().plusDays(1))
-                && paymentDate.isAfter(LocalDate.parse(EARLIER_POSSIBLE_DATE));
+        if (paymentDate.isAfter(LocalDate.now().plusDays(1)) || 
+                paymentDate.isBefore(LocalDate.parse(EARLIER_POSSIBLE_DATE))) {
+            
+            Ui.printInvalidDateRangeError();
+            return false;
+        }
+
+        return true;
+                
     }
 
 }

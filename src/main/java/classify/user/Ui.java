@@ -28,6 +28,8 @@ public class Ui {
     private static final String REMARKS_PROMPT = "Please input any remarks: ";
     private static final String INVALID_DATE_ERROR = "Please input a valid date in the format YYYY-MM-DD"
             + ", or blank for today.";
+    private static final String INVALID_DATE_RANGE = "Please input a date with a reasonable value. \n" +
+            "(eg. from 2010 until today.)";
     //@@author ParthGandhiNUS
     private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String WELCOME_TO_CLASSIFY = "Welcome to Classify!";
@@ -51,8 +53,6 @@ public class Ui {
     private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
     private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
     private static final String NO_RECENT_DELETES = "No recent deletes found!";
-
-
 
     //@@author alalal47
     /**
@@ -255,8 +255,13 @@ public class Ui {
         System.out.println(NULL_ATTRIBUTE_ERROR);
     }
 
-    public static void printInvalidDateError() {
+    public static void printInvalidDateFormatError() {
         System.out.println(INVALID_DATE_ERROR);
+    }
+
+    public static void printInvalidDateRangeError() {
+        System.out.println(INVALID_DATE_RANGE);
+        printDivider();
     }
 
     //@@author alalal47
