@@ -23,8 +23,8 @@ public class UpdateSleepCommand implements Command {
         }
         try {
             this.sleepTracker = sleepTracker;
-            this.date = userCommand[0].trim();
-            this.hours = Double.parseDouble(userCommand[1].trim());
+            date = userCommand[0].trim();
+            hours = Double.parseDouble(userCommand[1].trim());
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours to update to");
         }
