@@ -46,9 +46,14 @@ public class StorageHandler {
      * 
      * @throws LongAhException If the data files are not created
      */
-    public StorageHandler(MemberList members, TransactionList transactions)
+    public StorageHandler(MemberList members, TransactionList transactions, String groupName)
             throws LongAhException {
-        // Create file directory if it does not exist
+        // Create data directory if it does not exist
+        if(!new File(this.storageFolderPath).exists()) {
+            new File(this.storageFolderPath).mkdir();
+        }
+        this.storageFolderPath += "/" + groupName;
+        // Create group directory if it does not exist
         if(!new File(this.storageFolderPath).exists()) {
             new File(this.storageFolderPath).mkdir();
         }
@@ -58,6 +63,7 @@ public class StorageHandler {
         this.storageTransactionsFilePath = this.storageFolderPath + "/transactions.txt";
         this.membersFile = new File(this.storageMembersFilePath);
         this.transactionsFile = new File(this.storageTransactionsFilePath);
+
         try {
             membersFile.createNewFile();
             transactionsFile.createNewFile();
@@ -149,8 +155,8 @@ public class StorageHandler {
                 throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
             }
         }
-        double total = checkTransactions(members);
-        if (total != 0) {
+        boolean checksum = checkTransactions(members);
+        if (!checksum) {
             throw new LongAhException(ExceptionMessage.STORAGE_FILE_CORRUPTED);
         }
     }
@@ -165,7 +171,7 @@ public class StorageHandler {
      * @return The Subtransaction object parsed from the data file
      * @throws LongAhException If the data file is not read or the content is invalid
      */
-    public Subtransaction parseSubtransaction(String borrowerName, String value,
+    public static Subtransaction parseSubtransaction(String borrowerName, String value,
             Member lender, MemberList members) throws LongAhException{
         try {
             Member borrower = members.getMember(borrowerName);
@@ -177,20 +183,23 @@ public class StorageHandler {
     }
 
     /**
-     * Checks the total balance of all members in the MemberList object.
+     * Returns if the total balance of all members in the MemberList object is 0.
      * 
      * @param members The MemberList object to check the total balance from
-     * @return The total balance of all members
+     * @return If the total balance is 0, return true. Otherwise, return false.
      */
-    public double checkTransactions(MemberList members) {
+    public boolean checkTransactions(MemberList members) {
         if (members.getMemberListSize() == 0) {
-            return 0;
+            return true;
         }
         double total = 0;
         for (Member member : members.getMembers()) {
             total += member.getBalance();
         }
-        return total;
+        if (total == 0) {
+            return true;
+        }
+        return false;
     }
 
     /**

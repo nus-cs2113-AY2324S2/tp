@@ -86,7 +86,7 @@ public class MemberListTest {
      * Tests the successful computation of multiple transactions.
      */
     @Test
-    public void solveTransactions_validTransaction_success() {
+    public void updateMembersBalance_validTransaction_success() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
@@ -106,7 +106,7 @@ public class MemberListTest {
      * Tests the successful computation of no transactions.
      */
     @Test
-    public void solveTransactions_noTransactions_success() {
+    public void updateMembersBalance_noTransactions_success() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
@@ -124,7 +124,7 @@ public class MemberListTest {
      * Tests the successful computation of multiple members in the group.
      */
     @Test
-    public void solveTransactions_multipleMembers_success() {
+    public void updateMembersBalance_multipleMembers_success() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");

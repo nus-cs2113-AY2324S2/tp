@@ -18,7 +18,7 @@ public class TransactionTest {
     @Test
     public void transactionConstructor_transaction_success() {
         try {
-            Group group = new Group();
+            Group group = new Group("");
             MemberList memberList = group.getMemberList();
             TransactionList transactionList = group.getTransactionList();
             memberList.addMember("Alice");
@@ -40,7 +40,7 @@ public class TransactionTest {
      * Tests the unsuccessful creation of a transaction with < 2 persons involved.
      */
     @Test
-    public void transactionConstructor_invalidTransaction_exceptionThrown() {
+    public void transactionConstructor_invalidFormat_exceptionThrown() {
         try {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");

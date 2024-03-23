@@ -18,16 +18,36 @@ public class Group {
     private MemberList members;
     private TransactionList transactions;
     private StorageHandler storage;
+    private String groupName;
     private ArrayList<Subtransaction> transactionSolution = new ArrayList<>();
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.
      */
-    public Group() throws LongAhException {
+    public Group(String groupName) throws LongAhException {
+        this.groupName = groupName;
         this.members = new MemberList();
         this.transactions = new TransactionList();
-        this.storage = new StorageHandler(this.members, this.transactions);
+        this.storage = new StorageHandler(this.members, this.transactions, this.groupName);
         updateTransactionSolution();
+    }
+
+    /**
+     * Sets the name of the group.
+     * 
+     * @param groupName The name of the group
+     */
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    /**
+     * Returns the name of the group.
+     * 
+     * @return The name of the group
+     */
+    public String getGroupName() {
+        return this.groupName;
     }
 
     /**

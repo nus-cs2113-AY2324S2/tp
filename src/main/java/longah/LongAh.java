@@ -48,7 +48,7 @@ public class LongAh {
         LongAh app = new LongAh();
         try {
             LongAhLogger.log(Level.INFO, "Loading previous member and transaction info.");
-            group = new Group();
+            group = new Group("group"); // Give a temporary name for now
         } catch (LongAhException e) {
             LongAhLogger.log(Level.WARNING, "Loading process fails! Unable to create file or " +
                     "file could not be access.");
