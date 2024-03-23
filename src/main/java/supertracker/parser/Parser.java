@@ -31,9 +31,15 @@ public class Parser {
     private static final String NAME_FLAG = "n";
     private static final String QUANTITY_FLAG = "q";
     private static final String PRICE_FLAG = "p";
+    private static final String SORT_QUANTITY_FLAG = "x";
+    private static final String SORT_PRICE_FLAG = "y";
+    private static final String REVERSE_FLAG = "r";
     private static final String NAME_GROUP = "name";
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
+    private static final String SORT_QUANTITY_GROUP = "sortQuantity";
+    private static final String SORT_PRICE_GROUP = "sortPrice";
+    private static final String REVERSE_GROUP = "reverse";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
             + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) ";
@@ -41,7 +47,10 @@ public class Parser {
             + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + ".*)?) "
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
-            + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
+            + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + SORT_QUANTITY_GROUP + ">(?:" + SORT_QUANTITY_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + SORT_PRICE_GROUP + ">(?:" + SORT_PRICE_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + REVERSE_GROUP + ">(?:" + REVERSE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
     private static final String ADD_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
@@ -235,7 +244,7 @@ public class Parser {
     }
 
     private static Command parseListCommand(String input) throws TrackerException {
-        String[] flags = {QUANTITY_FLAG, PRICE_FLAG};
+        String[] flags = {QUANTITY_FLAG, PRICE_FLAG, SORT_QUANTITY_FLAG, SORT_PRICE_FLAG, REVERSE_FLAG};
         Matcher matcher = getPatternMatcher(LIST_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
@@ -244,6 +253,9 @@ public class Parser {
 
         boolean hasQuantity = !matcher.group(QUANTITY_GROUP).isEmpty();
         boolean hasPrice = !matcher.group(PRICE_GROUP).isEmpty();
+        boolean hasSortQuantity = !matcher.group(SORT_QUANTITY_GROUP).isEmpty();
+        boolean hasSortPrice = !matcher.group(SORT_PRICE_GROUP).isEmpty();
+        boolean reverse = !matcher.group(REVERSE_GROUP).isEmpty();
 
         // to check if q comes before p or vice versa
         String firstParam = "";
@@ -253,7 +265,20 @@ public class Parser {
             firstParam = quantityPosition < pricePosition ? QUANTITY_FLAG : PRICE_FLAG;
         }
 
-        return new ListCommand(hasQuantity, hasPrice, firstParam);
+        // sort by whichever sorting method comes first
+        // if sorting method is unspecified then sort by alphabet
+        String sortBy = "";
+        if (hasSortQuantity && hasSortPrice) {
+            int sortQuantityPosition = input.indexOf(SORT_QUANTITY_FLAG + BASE_FLAG);
+            int sortPricePosition = input.indexOf(SORT_PRICE_FLAG + BASE_FLAG);
+            sortBy = sortQuantityPosition < sortPricePosition ? QUANTITY_FLAG : PRICE_FLAG;
+        } else if (hasSortQuantity) {
+            sortBy = QUANTITY_FLAG;
+        } else if (hasSortPrice) {
+            sortBy = PRICE_FLAG;
+        }
+
+        return new ListCommand(hasQuantity, hasPrice, firstParam, sortBy, reverse);
     }
 
     private static Command parseDeleteCommand(String input) throws TrackerException {
@@ -359,10 +384,6 @@ public class Parser {
 
         if (name.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
-        }
-
-        if (!Inventory.contains(name)) {
-            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_FIND);
         }
 
         return new FindCommand(name);
