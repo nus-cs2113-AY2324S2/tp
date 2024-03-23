@@ -13,7 +13,6 @@ public class Parser {
 
     public void handleInput(String input) {
         try {
-            String inputTrimmed;
             if (input.contains("help")) {
                 new HelpCommand();
             } else if (input.equalsIgnoreCase("list foods")) {
