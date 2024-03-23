@@ -19,8 +19,7 @@ public class CountdownTimer {
     private int minutes;
     private int seconds;
     private int inputMinutes;
-    private boolean isStarted;
-    private AtomicBoolean isCompleted;
+    private AtomicBoolean isStarted;
     private AtomicBoolean isRunning;
     private Timer stopwatch;
     private TimerTask timerTask;
@@ -29,9 +28,8 @@ public class CountdownTimer {
         this.minutes = DEFAULT_MINUTES;
         this.seconds = DEFAULT_SECONDS;
         this.inputMinutes = DEFAULT_MINUTES;
-        this.isCompleted = new AtomicBoolean(false);
         this.isRunning = new AtomicBoolean(false);
-        this.isStarted = false;
+        this.isStarted = new AtomicBoolean(false);
     }
 
     private void decreaseMinutes() {
@@ -44,14 +42,14 @@ public class CountdownTimer {
 
     public void start() {
         stopwatch = new Timer();
-        isStarted = true;
+        isStarted.set(true);
         timerTask = new TimerTask() {
             @Override
             public void run() {
                 if (!isRunning.get()) {
                     return;
                 }
-                if(minutes == STOP_TIME && seconds == START_WARNING) {
+                if (minutes == STOP_TIME && seconds == START_WARNING) {
                     System.out.println();
                 }
                 if (minutes == STOP_TIME && seconds <= START_WARNING && seconds != STOP_TIME) {
@@ -71,22 +69,40 @@ public class CountdownTimer {
         };
         stopwatch.scheduleAtFixedRate(timerTask, TIME_DELAY, ONE_SECOND);
     }
+
     public void setStart() {
         assert !isRunning.get() : ASSERTION_TIMER_NOT_RUNNING;
         isRunning.set(true);
         minutes = inputMinutes;
         start();
-        Ui.printMessageWithSepNewLine("Countdown timer started");
+        Ui.printMessageWithSepNewLine("Countdown timer started! \n"
+                + "Duration set: " + minutes + " minute(s) " + seconds + " second(s)");
     }
+
     public void setStop() {
         assert stopwatch != null : ASSERTION_INVALID_STOP;
-        isCompleted.set(true);
         isRunning.set(false);
+        isStarted.set(false);
         stopwatch.cancel();
         stopwatch.purge();
     }
 
+    public void setPause() {
+        isRunning.set(false);
+        Ui.printMessageWithSepNewLine("Timer paused. \n"  +
+               "Remaining time: " + minutes + " minutes " + seconds + " seconds");
+    }
+
+    public void setResume() {
+        isRunning.set(true);
+        Ui.printMessageWithSepNewLine("Countdown timer resumed.");
+    }
+
     public boolean getRunningStatus() {
+        return isStarted.get();
+    }
+
+    public boolean getPausedStatus() {
         return isRunning.get();
     }
 }
