@@ -75,12 +75,14 @@ public class CountupTimer {
      * the total time elapsed using Ui class.
      */
     public void totalTimeSpent() {
-        Duration timeElapsed = Duration.between(startTiming, stopTiming);
-        long hours = timeElapsed.toHours();
-        long minutes = timeElapsed.toMinutes() % MINUTES_DIVISION;
-        long seconds = timeElapsed.toSeconds() % SECONDS_DIVISION;
+        if(!isPaused) {
+            Duration timeElapsed = Duration.between(startTiming, stopTiming);
+            totalHours += timeElapsed.toHours();
+            totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
+            totalSeconds += timeElapsed.toSeconds() % MINUTES_DIVISION;
+        }
         Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + " Time spent: " +
-                hours + " hours, " + minutes + " minutes, " + seconds + " seconds" + "\n" +
+                totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds" + "\n" +
                 "To start a new session, use ‘focus start’ ");
     }
 }
