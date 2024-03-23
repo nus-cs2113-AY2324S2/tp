@@ -27,6 +27,11 @@ public class Ui {
                     "|_______ \\__||__|  \\___  >   |____|   |__|  (____  /\\___  >__|_ \\\n" +
                     "        \\/             \\/                        \\/     \\/     \\/\n";
 
+    /**
+     * Reads in the input from the user
+     * @param calorieList list containing all entries pertinent to calories
+     * @param liquidList list containing all entries pertinent to liquids
+     */
     public static void readUserInput(CalorieList calorieList, LiquidList liquidList) {
         String line;
         do {
@@ -35,6 +40,11 @@ public class Ui {
         } while (!line.equalsIgnoreCase("bye"));
     }
 
+    /**
+     * handles input from the user 
+     * @param line input from the user
+     * @param calorieList list containing all entries pertinent to calories
+     */
     public static void handleCaloriesInput(String line, CalorieList calorieList) {
         assert !line.startsWith("bye") : "exit the app";
         if (line.startsWith("calories in") || line.startsWith("calories out")) {
