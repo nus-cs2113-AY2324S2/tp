@@ -78,6 +78,12 @@ public class Duke {
                     userSaysBye = true;
                     break;
 
+                case "update":
+                    Ui.printLine();
+                    Parser.updateCommand(line, list);
+                    Ui.printLine();
+                    break;
+
                 default:
                     Ui.printLine();
                     System.out.println("This is not a valid command");

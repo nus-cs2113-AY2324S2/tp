@@ -1,4 +1,5 @@
 package seedu.duke;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -191,6 +192,18 @@ public class TravelActivityList {
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
         System.out.println(taggedTask);
+    }
+
+    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration) throws OmniException{
+        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber == 0 && travelActivities.isEmpty())){
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTravelActivity = travelActivityNumber-1;
+        TravelActivity updatedTravelActivity = travelActivities.get(indexOfTravelActivity);
+        String oldTravelActivityDescription = updatedTravelActivity.toString();
+        updatedTravelActivity.setDate(date);
+        updatedTravelActivity.setDuration(duration);
+        System.out.println("I have updated this task\nfrom: " + updatedTravelActivity + "\nto: " + oldTravelActivityDescription);
     }
 
     public ArrayList<TravelActivity> getTravelActivities () {
