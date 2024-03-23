@@ -143,7 +143,7 @@ public class WeeklyProgramManager extends ActivityManager {
             throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to this day",
                     chosenDayWorkout.getActivityName()));
         }
-        
+
         activityList.set(ordinalOfDay, workout);
     }
 

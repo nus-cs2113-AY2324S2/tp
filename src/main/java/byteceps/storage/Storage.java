@@ -28,7 +28,6 @@ public class Storage {
 
     public void save(ExerciseManager allExercises, WorkoutManager allWorkouts, WeeklyProgramManager weeklyProgram)
             throws IOException {
-        String message;
         JSONObject jsonArchive = new JSONObject().put("exerciseManager", allExercises.getActivityList().toArray());
         jsonArchive.put("workoutManager", allWorkouts.getActivityList().toArray());
         jsonArchive.put("weeklyProgram", weeklyProgram.getActivityList().toArray());
