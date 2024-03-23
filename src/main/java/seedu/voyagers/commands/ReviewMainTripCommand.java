@@ -5,9 +5,9 @@ import seedu.voyagers.classes.TripList;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.utils.Storage;
 
-public class ReviewTripCommand extends Command {
+public class ReviewMainTripCommand extends Command {
 
-    public ReviewTripCommand(String[] args){
+    public ReviewMainTripCommand(String[] args){
         super(args);
     }
 
