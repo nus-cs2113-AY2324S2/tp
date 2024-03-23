@@ -49,4 +49,14 @@ public class UI {
     public static void showMessage(String message) {
         System.out.println(message);
     }
+
+    /**
+     * Checks if there is another line of input.
+     * Used for text ui testing.
+     *
+     * @return true if there is another line of input, false otherwise.
+     */
+    public static boolean hasNextLine() {
+        return scanner.hasNextLine();
+    }
 }

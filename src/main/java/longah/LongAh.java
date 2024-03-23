@@ -3,19 +3,24 @@ package longah;
 import java.util.Scanner;
 
 import longah.node.Group;
-import longah.util.Logging;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
 import longah.handler.InputHandler;
+import longah.handler.Logging;
+import longah.handler.UI;
 import longah.commands.Command;
 
 /**
  * LongAh class manages debts between members.
  */
 public class LongAh {
-    private static final Logging log = new Logging();
     private static Group group;
-    private Scanner scanner = new Scanner(System.in);
+
+    public static void init() {
+        Logging.initLogger();
+        Logging.logInfo("Starting Pre-program preparations.");
+        UI.showMessage("Welcome to LongAh!");
+    }
 
     /**
      * The main method to run the LongAh application.
@@ -23,9 +28,7 @@ public class LongAh {
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
-        Logging.logInfo("Starting Pre-program preparations.");
-        System.out.println("Welcome to LongAh!");
-        LongAh app = new LongAh();
+        init();
         try {
             group = new Group("group"); // Give a temporary name for now
         } catch (LongAhException e) {
@@ -37,11 +40,11 @@ public class LongAh {
         Logging.logInfo("Entering main program body. Begin accepting user commands.");
         while (true) {
             try {
-                System.out.print("Enter command: ");
-                if (!app.scanner.hasNextLine()) {
-                    return;
+                if (!UI.hasNextLine()) {
+                    System.exit(0);
                 }
-                String command = app.scanner.nextLine();
+                System.out.print("Enter command: ");
+                String command = UI.getUserInput();
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);
 
@@ -51,7 +54,7 @@ public class LongAh {
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);
-                // Log critical errors
+                // Log only critical errors
                 if (e.getMessage().equals(ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage()) ||
                         e.getMessage().equals(ExceptionMessage.NO_DEBTS_FOUND.getMessage()) || 
                         e.getMessage().equals(ExceptionMessage.NO_TRANSACTION_FOUND.getMessage())) {
