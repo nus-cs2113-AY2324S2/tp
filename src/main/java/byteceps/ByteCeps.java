@@ -51,7 +51,8 @@ public class ByteCeps {
                 case "bye":
                 case "exit":
                     return;
-                default: UserInterface.printMessage("Unknown Command!");
+                default:
+                    UserInterface.printMessage("Unknown Command!");
                 }
 
             } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
@@ -65,11 +66,7 @@ public class ByteCeps {
         ui.printWelcomeMessage();
         try {
             storage.load(exerciseManager, workoutManager, weeklyProgramManager);
-        } catch (IOException e) {
-            UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
-        }
-        commandLine();
-        try {
+            commandLine();
             storage.save(exerciseManager, workoutManager, weeklyProgramManager);
         } catch (IOException e) {
             UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
