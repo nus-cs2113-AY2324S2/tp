@@ -69,6 +69,9 @@ public class Parser {
             } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
                 throw new RuntimeException(e);
             }
+        } else if (command.toLowerCase().startsWith("compareall")) {
+            UI.printComparingAll();
+            UI.printSharedTime(Timetable.compareAllTimetables(userList));
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
                 InputValidator.validateCompareInput(command);
@@ -77,12 +80,13 @@ public class Parser {
                 String user2 = parts[2];
                 InputValidator.validateUserInput(user1, userList);
                 InputValidator.validateUserInput(user2, userList);
-                Timetable.compareTimetable(userList.findUser(user1).getTimetable(),
-                        userList.findUser(user2).getTimetable());
+                UI.printSharedTime(Timetable.compareTimetable(userList.findUser(user1).getTimetable(),
+                        userList.findUser(user2).getTimetable()));
 
             } catch (InvalidFormatException | InvalidUserException | NullPointerException e) {
                 System.out.println(e.getMessage());
             }
+
         } else if (command.toLowerCase().startsWith("addforall")) {
             addTaskForAll(command, userList);
         } else if (command.toLowerCase().startsWith("viewcommonevents")) {
