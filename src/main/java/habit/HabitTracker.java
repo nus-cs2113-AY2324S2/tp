@@ -6,6 +6,8 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+import static storage.habit.HabitTrackerStorage.loadHabitListFromFile;
+import static storage.habit.HabitTrackerStorage.saveHabitListToFile;
 import static ui.Ui.printMessageWithoutSepNewLine;
 
 /**
@@ -15,6 +17,7 @@ public class HabitTracker {
     private static ArrayList<Habit> habitList = new ArrayList<>();
 
     public HabitTracker() {
+        habitList = loadHabitListFromFile();
     }
 
     /**
@@ -28,6 +31,8 @@ public class HabitTracker {
         String addHabitMessage = "Great! You have added a new habit:\n";
         addHabitMessage += "  '" + newHabit.getDescription() + "' was successfully added!";
         Ui.printMessageWithSepNewLine(addHabitMessage);
+
+        saveHabitListToFile(habitList);
     }
 
     /**
@@ -76,6 +81,8 @@ public class HabitTracker {
         updateHabitCountMessage += "The count for your habit has been updated:\n";
         updateHabitCountMessage += "  " + habitID + ". " + habit;
         Ui.printMessageWithSepNewLine(updateHabitCountMessage);
+
+        saveHabitListToFile(habitList);
     }
 
     public static int getNumberOfHabits() {
@@ -92,5 +99,7 @@ public class HabitTracker {
         habitList.remove(habitID - 1);
         deleteHabitMessage += "Now you have " + habitList.size() + " habits left in the list.";
         Ui.printMessageWithSepNewLine(deleteHabitMessage);
+
+        saveHabitListToFile(habitList);
     }
 }
