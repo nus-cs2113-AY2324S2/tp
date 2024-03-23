@@ -43,7 +43,7 @@ public enum ExceptionMessage {
     INVALID_CLEAR_COMMAND ("Invalid command format." +
             " Use 'clear'"),
     INVALID_EDIT_COMMAND("Invalid command format." +
-            " Use 'edit transaction INDEX NEW_TRANSACTION'"),
+            " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'"),
     INVALID_EXIT_COMMAND ("Invalid command format." +
             " Use 'exit'");
 

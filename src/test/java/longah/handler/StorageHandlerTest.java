@@ -3,9 +3,7 @@ package longah.handler;
 import org.junit.jupiter.api.Test;
 
 import longah.exception.ExceptionMessage;
-import longah.node.Member;
 import longah.util.MemberList;
-import longah.util.Subtransaction;
 import longah.util.TransactionList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

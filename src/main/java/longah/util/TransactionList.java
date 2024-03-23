@@ -53,7 +53,7 @@ public class TransactionList {
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        Transaction removedTransaction = this.transactions.remove(index);
+        this.transactions.remove(index);
     }
 
     /**
@@ -165,7 +165,7 @@ public class TransactionList {
      * @throws LongAhException If the index is invalid or if the edit input is in an invalid format.
      */
     public void editTransactionList(String expression, MemberList memberList) throws LongAhException {
-        String indexTransactionSplice[] = expression.split(" ", 2);
+        String[] indexTransactionSplice = expression.split(" ", 2);
         if (indexTransactionSplice.length != 2) {
             throw new LongAhException(ExceptionMessage.INVALID_EDIT_COMMAND);
         }

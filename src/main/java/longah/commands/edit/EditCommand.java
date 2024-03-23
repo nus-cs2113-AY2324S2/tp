@@ -37,7 +37,10 @@ public class EditCommand extends Command {
         String fullCommandString = this.commandString + " " + this.subCommand;
         switch (this.subCommand) {
         case "member":
-            throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
+            EditMemberCommand editMemberCommand =
+                    new EditMemberCommand(fullCommandString, this.taskExpression);
+            editMemberCommand.execute(group);
+            break;
         case "transaction":
             EditTransactionCommand editTransactionCommand =
                     new EditTransactionCommand(fullCommandString, this.taskExpression);

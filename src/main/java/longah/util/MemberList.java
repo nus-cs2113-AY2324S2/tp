@@ -98,6 +98,24 @@ public class MemberList {
     }
 
     /**
+     * Changes the name of the member at the specified index.
+     * 
+     * @param index The index of the member to change the name of.
+     * @param name The new name of the member.
+     * @throws LongAhException If the index is invalid.
+     */
+    public void editMemberName(String expression) throws LongAhException {
+        try {
+            String[] indexNameSplice = expression.split(" ", 2);
+            int index = Integer.parseInt(indexNameSplice[0]) - 1;
+            String name = indexNameSplice[1];
+            members.get(index).setName(name);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+        }
+    }
+
+    /**
      * Prints the list of members in the group.
      * @throws LongAhException If there are no members in the group.
      */

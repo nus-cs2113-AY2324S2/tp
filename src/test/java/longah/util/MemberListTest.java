@@ -141,4 +141,54 @@ public class MemberListTest {
             fail();
         }
     }
+
+    /**
+     * Tests the successful edit of name of a member in the group.
+     */
+    @Test
+    public void editMemberName_validCommand_success() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            String expected = "Alice: $5.0\n";
+            assertEquals(expected, memberList.listMembers());
+            memberList.editMemberName("1 Bob");
+            expected = "Bob: $5.0\n";
+            assertEquals(expected, memberList.listMembers());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the unsuccessful edit of name of a member in the group when the index is invalid.
+     */
+    @Test
+    public void editMemberName_invalidIndexValue_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.editMemberName("2 Bob");
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the unsuccessful edit of name of a member in the group when the index is invalid.
+     */
+    @Test
+    public void editMemberName_invalidIndexSyntax_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.editMemberName("Bob");
+            fail();
+        } catch (LongAhException e) {
+            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
+            assertEquals(expectedString, e.getMessage());
+        }
+    }
 }
