@@ -19,6 +19,9 @@ public class CommandFactory {
         case STATUS:
             return new CheckStatusCommand();
 
+        case HELP:
+            return new HelpCommand();
+
         default:
             return new ExitCommand();
         }
