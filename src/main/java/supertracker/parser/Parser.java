@@ -31,8 +31,8 @@ public class Parser {
     private static final String NAME_FLAG = "n";
     private static final String QUANTITY_FLAG = "q";
     private static final String PRICE_FLAG = "p";
-    private static final String SORT_QUANTITY_FLAG = "x";
-    private static final String SORT_PRICE_FLAG = "y";
+    private static final String SORT_QUANTITY_FLAG = "sq";
+    private static final String SORT_PRICE_FLAG = "sp";
     private static final String REVERSE_FLAG = "r";
     private static final String NAME_GROUP = "name";
     private static final String QUANTITY_GROUP = "quantity";
@@ -126,15 +126,17 @@ public class Parser {
         StringBuilder flagBuilder = new StringBuilder();
         for (String flag : paramFlags) {
             flagBuilder.append(flag);
+            flagBuilder.append("|");
         }
+        flagBuilder.deleteCharAt(flagBuilder.length() - 1);
         String flags = flagBuilder.toString();
 
-        String[] params = inputParams.split("(?=[" + flags + "]" + BASE_FLAG + ")");
+        String[] params = inputParams.split("(?= (" + flags + ")" + BASE_FLAG + ")");
         StringBuilder stringPattern = new StringBuilder();
 
         for (String paramFlag : paramFlags) {
             for (String p : params) {
-                if (p.startsWith(paramFlag + BASE_FLAG)) {
+                if (p.trim().startsWith(paramFlag + BASE_FLAG)) {
                     stringPattern.append(p.trim());
                     break;
                 }
