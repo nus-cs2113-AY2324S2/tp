@@ -30,17 +30,13 @@ public class Transaction {
         }
         assert splitInput.length >= 2 : "Invalid transaction.";
 
+        // Check for existence of all parties involved in the transaction in the group.
         String lenderName = splitInput[0].trim();
-        // Exception is thrown if the person owed does not exist in the group
         this.lender = memberList.getMember(lenderName);
-        double totalSumLent = 0.0;
-
         for (int i = 1; i < splitInput.length; i++) {
             String borrowNameAmount = splitInput[i].trim();
-            totalSumLent += addBorrower(borrowNameAmount, memberList);
+            addBorrower(borrowNameAmount, memberList);
         }
-        this.lender.addToBalance(totalSumLent);
-        updateBorrowerBalances();
     }
 
     /**
@@ -69,14 +65,13 @@ public class Transaction {
     }
 
     /**
-     * Adds a borrower to the subtransaction and returns the amount borrowed.
+     * Adds a borrower to the subtransaction list.
      * 
      * @param expression The expression containing the borrower and amount borrowed.
      * @param memberList The list of members in the group.
-     * @return The amount owed by the borrower.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public Double addBorrower(String expression, MemberList memberList) throws LongAhException {
+    public void addBorrower(String expression, MemberList memberList) throws LongAhException {
         String[] splitBorrower = expression.split("a/");
         if (splitBorrower.length != 2) {
             // Each person owing should have an amount specified
@@ -100,18 +95,6 @@ public class Transaction {
         assert amountBorrowed > 0 : "Amount owed should be positive.";
         Subtransaction subtransaction = new Subtransaction(this.lender, borrower, amountBorrowed);
         this.subtransactions.add(subtransaction);
-        return amountBorrowed;
-    }
-
-    /**
-     * Updates the balances of all borrowers involved in the transaction.
-     */
-    public void updateBorrowerBalances() throws LongAhException {
-        for (Subtransaction subtransaction : this.subtransactions) {
-            Member member = subtransaction.getBorrower();
-            double amount = subtransaction.getAmount();
-            member.subtractFromBalance(amount);
-        }
     }
 
     /**
@@ -195,13 +178,12 @@ public class Transaction {
         return lender + borrower;
     }
 
-    public void recalculateBalances() throws LongAhException{
-        for (Subtransaction subtransaction : subtransactions) {
-            Member lender = this.lender;
-            lender.subtractFromBalance(subtransaction.getAmount());
-            Member borrower = subtransaction.getBorrower();
-            borrower.addToBalance(subtransaction.getAmount());
-        }
+    /**
+     * Returns the list of subtransactions in the transaction.
+     * 
+     * @return The list of subtransactions in the transaction.
+     */
+    public ArrayList<Subtransaction> getSubtransactions() {
+        return this.subtransactions;
     }
-
 }

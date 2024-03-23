@@ -72,6 +72,7 @@ public class Group {
      * @throws LongAhException If the transaction solution cannot be updated
      */
     public void updateTransactionSolution() throws LongAhException {
+        this.members.updateMembersBalance(this.transactions);
         this.transactionSolution = this.members.solveTransactions();
         logger.log(Level.INFO, "Transaction solution updated");
     }
@@ -146,6 +147,12 @@ public class Group {
         return solution;
     }
 
+    /**
+     * Returns the list of members in the group.
+     * 
+     * @return The list of members in the group
+     * @throws LongAhException If there are no members in the group
+     */
     public String listIndivDebt(String name) throws LongAhException {
         double balance = members.getMemberBalance(name);
         if (balance == 0) {

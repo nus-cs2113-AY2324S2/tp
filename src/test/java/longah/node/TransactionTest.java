@@ -1,6 +1,7 @@
 package longah.node;
 
 import longah.util.MemberList;
+import longah.util.TransactionList;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,14 @@ public class TransactionTest {
     @Test
     public void transactionConstructor_transaction_success() {
         try {
-            MemberList memberList = new MemberList();
+            Group group = new Group();
+            MemberList memberList = group.getMemberList();
+            TransactionList transactionList = group.getTransactionList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
+            transactionList.addTransaction(transaction);
+            group.updateTransactionSolution();
             Member lender = transaction.getLender();
             assertEquals("Alice", lender.getName());
             assertEquals(5.0, lender.getBalance());

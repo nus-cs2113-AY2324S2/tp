@@ -54,8 +54,6 @@ public class TransactionList {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
         Transaction removedTransaction = this.transactions.remove(index);
-        // recalculate the balances of the members
-        removedTransaction.recalculateBalances();
     }
 
     /**

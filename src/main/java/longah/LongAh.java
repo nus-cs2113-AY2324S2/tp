@@ -68,7 +68,7 @@ public class LongAh {
 
                 // Check will not be reached if exception is thrown
                 if (c.isExit()) {
-                    return;
+                    System.exit(0);
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);
