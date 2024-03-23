@@ -8,6 +8,7 @@ public class StudentAttributes extends Details {
     private List<SubjectGrade> subjectGrades;
 
     public StudentAttributes(Student student) {
+        super();
         this.student = student;
         this.subjectGrades = new ArrayList<>();
     }

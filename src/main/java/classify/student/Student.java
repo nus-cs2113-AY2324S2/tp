@@ -1,5 +1,7 @@
 package classify.student;
 
+import java.time.LocalDate;
+
 /**
  * Meant to represent a particular student of the tuition centre.
  * The student can first be declared with only a name, and the subsequent details
@@ -20,6 +22,10 @@ public class Student {
         this.attributes = new StudentAttributes(this);
     }
 
+    public void setLastPaymentDate(LocalDate lastPaymenDate) {
+        this.attributes.setLastPaymentDate(lastPaymenDate);
+    }
+
     //@@author tayponghee
     public StudentAttributes getAttributes() {
         return attributes;
@@ -37,7 +43,7 @@ public class Student {
         return attributes.getPhoneNumber();
     }
 
-    public String getLastPaymentDate() {
+    public LocalDate getLastPaymentDate() {
         return attributes.getLastPaymentDate();
     }
     public boolean hasSubject(String subject) {

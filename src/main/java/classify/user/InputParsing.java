@@ -8,6 +8,8 @@ import classify.student.StudentComparators;
 import classify.student.StudentList;
 import classify.student.SubjectGrade;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
+    private static final String EARLIER_POSSIBLE_DATE = "1970-01-01";
     private static final String DEFAULT_STRING_VALUE = "Unknown";
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
@@ -476,7 +479,7 @@ public class InputParsing {
         student.getAttributes().setGender(readInString(in));
 
         Ui.promptForLastPaymentDate();
-        student.getAttributes().setLastPaymentDate(readInString(in));
+        student.getAttributes().setLastPaymentDate(readInDate(in));
 
         Ui.promptForRemarks();
         student.getAttributes().setRemarks(readInString(in));
@@ -828,6 +831,53 @@ public class InputParsing {
         } 
         return string.trim();
         
+    }
+
+    protected static LocalDate readInDate(Scanner in) {
+
+        String userInput;
+        LocalDate paymentDate;
+
+        do {
+
+            userInput = in.nextLine();
+            paymentDate = parseDateFromString(userInput);
+
+        } while(!isDateValid(paymentDate));
+
+        return paymentDate;
+    }
+
+    protected static LocalDate parseDateFromString(String string) {
+
+        if (string.isBlank()) {
+            logger.log(Level.INFO, "Storing today as the last payment date.");
+            return LocalDate.now();
+        }
+
+        LocalDate paymentDate;
+
+        try {
+
+            paymentDate = LocalDate.parse(string);
+
+        } catch (DateTimeParseException e) {
+            return invalidDatePath();
+        }
+
+        return paymentDate;
+    }
+
+    private static LocalDate invalidDatePath() {
+        logger.log(Level.WARNING, "Invalid date format entered.");
+        Ui.printInvalidDateError();
+        return LocalDate.now().plusDays(2);
+    }
+
+    private static boolean isDateValid(LocalDate paymentDate) {
+
+        return paymentDate.isBefore(LocalDate.now().plusDays(1))
+                && paymentDate.isAfter(LocalDate.parse(EARLIER_POSSIBLE_DATE));
     }
 
 }
