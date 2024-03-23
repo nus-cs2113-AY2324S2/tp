@@ -28,8 +28,6 @@ public class Florizz {
         boolean isRunning = true;
         Ui ui = new Ui();
         ui.printIntroMessage();
-        assert !isRunning : "Programme is running";
-        assert false : "Programme is not running correctly.";
         assert tempBouquetList !=null : "tempBouquetList doesn't exist";
 
         // Set up logger
