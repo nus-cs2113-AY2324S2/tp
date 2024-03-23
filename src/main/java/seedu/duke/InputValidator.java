@@ -172,4 +172,12 @@ public class InputValidator {
                     "Expected format: changeTaskType /on [day] /index [index] /type [f/c]");
         }
     }
+    public static void validateAddRepeatTask(String input) throws InvalidFormatException{
+        String regex = "(?i)^addrepeattask\\s+/task\\s+(.+?)\\s+/on\\s+(\\w+(\\s+\\w+)*)\\s+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})\\s+/type\\s+([fc])$";
+
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid addRepeatTask format. " +
+                    "Expected format: addRepeatTask /task [description] /on [day(s)] /from [start time] /to [end time] /type [f/c]");
+        }
+    }
 }

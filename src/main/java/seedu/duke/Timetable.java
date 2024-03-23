@@ -84,8 +84,8 @@ public class Timetable {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         Task task = tasks.get(index);
-        if (!task.getType().equals("f")) {
-            throw new IllegalArgumentException("Task on " + dayOfWeek + " at index " + index + " is not flexible.");
+        if(!task.getType().equals("f")){
+            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + (index + 1) +" is not flexible, timings cannot be changed.");
         }
         task.setStartTime(newStartTime);
         task.setEndTime(newEndTime);
