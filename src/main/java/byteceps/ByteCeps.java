@@ -17,6 +17,7 @@ public class ByteCeps {
     private static Parser parser;
     private static UserInterface ui;
     private static Storage storage;
+    private static final String FILE_PATH = "data.json";
 
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
@@ -24,7 +25,7 @@ public class ByteCeps {
         weeklyProgramManager = new WeeklyProgramManager(workoutManager);
         ui = new UserInterface();
         parser = new Parser();
-        storage = new Storage("data.json");
+        storage = new Storage(FILE_PATH);
     }
 
     public static void main(String[] args) {
