@@ -1,9 +1,9 @@
 package activeedge.task;
 
 
-    /**
-    * Represents a task related to water intake.
-    */
+/**
+ * Represents a task related to water intake.
+ * */
 public class WaterTask extends Task {
     private int quantity;
 
@@ -35,5 +35,5 @@ public class WaterTask extends Task {
     public String toString() {
         return "Water " + this.getQuantity();
     }
-    
+
 }
