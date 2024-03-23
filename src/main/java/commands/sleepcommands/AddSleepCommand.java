@@ -4,7 +4,6 @@ import commands.Command;
 import exceptions.SleepException;
 import sleep.SleepCycle;
 import sleep.SleepTracker;
-import ui.Ui;
 
 /**
  * Represents a command to add sleep cycles.
