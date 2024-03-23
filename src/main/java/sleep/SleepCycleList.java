@@ -48,6 +48,17 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine(sleepListMessage);
     }
 
+    public void getSleepCycle(String date) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            SleepCycle currSleep = sleepCycleList.get(i);
+            if (currSleep.getDateOfSleep().equals(date)){
+                Ui.printMessageWithSepNewLine("Hours slept on " + date + ": " + currSleep.getHoursSlept());
+                return;
+            }
+        }
+        Ui.printMessageWithSepNewLine("No entry found for the date.");
+    }
+
     public int getNumberOfCycles() {
         return numberOfCycles;
     }

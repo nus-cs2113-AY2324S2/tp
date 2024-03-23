@@ -26,9 +26,9 @@ public class AddSleepCommand implements Command {
         }
         String[] userCommand = sleepCommandArgs.trim().split("/date");
         this.sleepTracker = sleepTracker;
-        int hourSlept;
+        double hourSlept;
         try {
-            hourSlept = Integer.parseInt(userCommand[0].trim());
+            hourSlept = Double.parseDouble(userCommand[0].trim());
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours slept");
         }
