@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BookTest {
     @Test
+    public void getBookDescription_returnsBookDescription() {
+        Book testBook = new Book ("Test");
+        assertEquals("Test", testBook.getBookDescription());
+    }
+    @Test
     public void getBorrowedStatus_unBorrowed_returnsSpace() {
         Book testBook = new Book("Test Book");
         assertEquals(" ", testBook.getBorrowedStatus());

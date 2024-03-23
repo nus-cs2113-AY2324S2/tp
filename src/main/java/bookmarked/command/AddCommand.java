@@ -18,6 +18,7 @@ public class AddCommand extends Command {
 
     @Override
     public void handleCommand() {
+        assert newItem != null : "Item should not be null";
         String[] newSplitBook = this.newItem.split("add");
         try {
             processAddCommand(newSplitBook, listOfBooks);
@@ -34,8 +35,8 @@ public class AddCommand extends Command {
         if (newSplitBook.length < 1 || newSplitBook[1].isBlank()) {
             throw new emptyArgumentsException();
         }
-
-        this.listOfBooks.add(new Book(newSplitBook[1].trim()));
-        System.out.println("Added!");
+        Book bookName = new Book(newSplitBook[1].trim());
+        this.listOfBooks.add(bookName);
+        System.out.println("Added " + bookName + "!");
     }
 }
