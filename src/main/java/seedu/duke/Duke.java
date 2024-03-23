@@ -1,5 +1,4 @@
 package seedu.duke;
-
 import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -9,7 +8,9 @@ public class Duke {
     public static void main(String[] args) {
         Ui.printGreeting();
         boolean userSaysBye = false;
+        //FileSave file = new FileSave("omni.txt");
         TravelActivityList list = new TravelActivityList();
+        //FileSave.readFile(list);
         String line;
         Scanner in = new Scanner(System.in);
         while (!userSaysBye) {
