@@ -4,6 +4,7 @@ import commands.Command;
 import commands.reflectcommands.GetReflectionQuestionsCommand;
 import commands.reflectcommands.ListFavouritesCommand;
 import commands.reflectcommands.SaveToFavouritesCommand;
+import commands.reflectcommands.UnsaveFromFavouritesCommand;
 import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
@@ -33,6 +34,8 @@ public class ReflectionCommandParser {
             return new GetReflectionQuestionsCommand(reflectionManager);
         case "save":
             return new SaveToFavouritesCommand(reflectionManager, reflectionCommandArgs);
+        case "unsave":
+            return new UnsaveFromFavouritesCommand(reflectionManager, reflectionCommandArgs);
         case "list":
             return new ListFavouritesCommand(reflectionManager);
         default:

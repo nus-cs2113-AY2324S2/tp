@@ -12,6 +12,8 @@ public class FavoriteReflectionsList extends ReflectionList {
         super();
     }
 
+
+
     /**
      * Retrieves a favorite reflection question by its index in the list.
      *

@@ -27,6 +27,18 @@ public class ReflectionList {
     }
 
     /**
+     * Removes a reflection question from the list.
+     *
+     * @param reflectionQuestion The reflection question to be removed.
+     */
+    public void removeReflectionQuestion(ReflectionQuestion reflectionQuestion) {
+        if (!reflectionQuestion.toString().isBlank()) {
+            reflectionList.remove(reflectionQuestion);
+        }
+    }
+
+
+    /**
      * Retrieves the size of the reflection list.
      *
      * @return The size of the reflection list.

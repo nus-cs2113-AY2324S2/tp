@@ -23,6 +23,7 @@ public class ReflectionManager {
 
         this.favoriteReflectionsList = new FavoriteReflectionsList();
         ArrayList<String> favouritesList = Storage.loadDataFromFile(FAVOURITE_QUESTIONS_FILE_PATH);
+
         for (String fav : favouritesList) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(fav);
             this.favoriteReflectionsList.addReflectionQuestion(reflectionQuestion);
@@ -66,6 +67,27 @@ public class ReflectionManager {
     }
 
     /**
+     * Unaves a reflection question from favorites.
+     *
+     * @param reflectionId The ID of the reflection question to be unsaved.
+     * @throws ReflectException if an error occurs during saving.
+     */
+    public void unsaveReflectionQuestion(int reflectionId) throws ReflectException {
+        try {
+
+            ReflectionQuestion questionToUnsave = favoriteReflectionsList.get(reflectionId - 1);
+            favoriteReflectionsList.removeReflectionQuestion(questionToUnsave);
+            Storage.saveTasksToFile(FAVOURITE_QUESTIONS_FILE_PATH, favoriteReflectionsList.getReflectionList());
+
+            Ui.printMessageWithSepNewLine("Got it. Unsaved reflection question from favourites:\n" + questionToUnsave);
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new ReflectException("Key in valid favourite reflection ID, key in 'reflect list' command to " +
+                    "view range of questions in your favourites list. ");
+        }
+    }
+
+    /**
      * Prints the list of favorite reflection questions.
      */
     public void printFavourites() {
@@ -74,15 +96,6 @@ public class ReflectionManager {
         } else {
             Ui.printList(favoriteReflectionsList.getReflectionList(), "Favourites list:");
         }
-    }
-
-    /**
-     * Retrieves the question bank.
-     *
-     * @return The ReflectionQuestionBank instance.
-     */
-    public ReflectionQuestionBank getQuestionBank() {
-        return questionBank;
     }
 
 }
