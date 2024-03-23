@@ -5,11 +5,15 @@ import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import static seedu.duke.FAP.LOGGER;
 
 public class ModuleList {
+    private static final int NUM_SEMESTERS = 8;
+
     protected ArrayList<Module> takenModuleList;
     protected ArrayList<Module> toBeTakenModuleList;
 
@@ -106,5 +110,18 @@ public class ModuleList {
             throw new GpaNullException("No countable grades present to tally.");
         }
         return sumOfGPA/(double)totalMC;
+    }
+
+    public Map<Integer, ArrayList<Module>> groupModulesBySemester() {
+        Map<Integer, ArrayList<Module>> moduleBySemMap = new HashMap<>();
+        for (int i = 1; i <= NUM_SEMESTERS; i++) {
+            moduleBySemMap.put(i, new ArrayList<>());
+        }
+
+        for (Module module : takenModuleList) {
+            moduleBySemMap.get(module.getModuleDate()).add(module);
+        }
+
+        return moduleBySemMap;
     }
 }

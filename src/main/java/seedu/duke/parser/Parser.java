@@ -29,7 +29,7 @@ public class Parser {
             Pattern.compile("remove\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_MODULE_PATTERN =
             Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)\\s+s/(?<status>plan|taken)" +
-                    "\\s+w/(?<semester>[1-9]|10)\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
+                    "\\s+w/(?<semester>[1-8])\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
                     "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)", Pattern.CASE_INSENSITIVE);
