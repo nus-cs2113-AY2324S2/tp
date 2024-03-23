@@ -4,6 +4,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -121,6 +122,18 @@ class DukeTest {
         // Remove an existing tag
         list.removeTag(1);
         assertEquals("visit museum", list.getDescription("visit museum"));
+    }
+
+    @Test
+    public void testUpdateActivity() throws OmniException{
+        TravelActivityList travelActivityList = new TravelActivityList();
+        TravelActivity travelActivity1 = new TravelActivity("Go Paris", LocalDate.parse("2019-02-10"),"2hours");
+        travelActivityList.addTravelActivity(travelActivity1);
+        assertEquals("10 Feb 2019", travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        assertEquals("2hours", travelActivity1.getDuration());
+        travelActivityList.updateTravelActivity(1, LocalDate.parse("2020-12-10"), "3hours");
+        assertEquals("10 Dec 2020", travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        assertEquals("3hours", travelActivity1.getDuration());
     }
 
 }
