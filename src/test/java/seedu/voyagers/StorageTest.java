@@ -57,8 +57,10 @@ public class StorageTest {
             Date endDate1 = dateFormat.parse("2024-03-20");
             Date startDate2 = dateFormat.parse("2024-03-25");
             Date endDate2 = dateFormat.parse("2024-03-30");
-            Trip trip1 = new Trip("Trip1", startDate1, endDate1, "Location1", "Description1");
-            Trip trip2 = new Trip("Trip2", startDate2, endDate2, "Location2", "Description2");
+            Trip trip1 = new Trip("Trip1", startDate1, endDate1, "Location1",
+                    "Description1", "5");
+            Trip trip2 = new Trip("Trip2", startDate2, endDate2, "Location2",
+                    "Description2", "3");
             trips.add(trip1);
             trips.add(trip2);
         } catch (ParseException e) {

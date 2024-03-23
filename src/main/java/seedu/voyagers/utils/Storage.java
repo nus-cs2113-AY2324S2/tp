@@ -36,12 +36,12 @@ public class Storage {
                 System.out.println("Here are the trips in your list:");
             }
             while (s.hasNext()) {
-                String[] inputs = s.nextLine().split("\\|", 5);
+                String[] inputs = s.nextLine().split("\\|", 6);
                 assert inputs.length == 5 : "Invalid input format";
                 java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
                 Date startDate = format.parse(inputs[1]);
                 Date endDate = format.parse(inputs[2]);
-                Trip trip = new Trip(inputs[0], startDate, endDate, inputs[3], inputs[4]);
+                Trip trip = new Trip(inputs[0], startDate, endDate, inputs[3], inputs[4], inputs[5]);
                 trips.add(trip);
             }
             s.close();
@@ -76,7 +76,8 @@ public class Storage {
                 Trip trip = trips.get(i);
                 writer.write(trip.getName() + "|" + FormatDate.dateFormat.format(trip.getStartDate()) + "|" +
                         FormatDate.dateFormat.format(trip.getEndDate()) + "|"
-                        + trip.getLocation() + "|" + trip.getDescription() + "\n");
+                        + trip.getLocation() + "|" + trip.getDescription()
+                        + "|" + trip.getReviewScore() + "\n");
             }
         } catch (IOException e) {
             System.out.println("An error occurred: " + e.getMessage());
