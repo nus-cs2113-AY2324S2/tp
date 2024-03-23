@@ -5,9 +5,9 @@ import java.util.Optional;
 
 public class Group {
     public static final HashMap<String, Group> groups = new HashMap<>();
+    public static String currentGroupName = null;
     protected String groupName;
     protected ArrayList<User> users;
-    static String currentGroupName = null;
 
     public Group(String groupName) {
         this.groupName = groupName;
@@ -47,7 +47,8 @@ public class Group {
         // If the user is in a different group, prevent them from creating or joining a new group.
         Group group = optionalGroup.orElseGet(() -> {
             if (currentGroupName != null && !currentGroupName.equals(groupName)) {
-                throw new IllegalStateException("Please exit the current group '" + currentGroupName + "' to create or join another group.");
+                throw new IllegalStateException("Please exit the current group '" + currentGroupName
+                            + "' to create or join another group.");
             }
             Group newGroup = new Group(groupName);
             groups.put(groupName, newGroup);
@@ -65,18 +66,19 @@ public class Group {
         return group;
     }
 
-    public void addUsers(User user) {
-        try {
-            for (User u : users) {
-                if (u.getName().equals(user.getName())) {
-                    throw new Exception("User already exists in group");
-                }
-            }
-            users.add(user);
-            System.out.println("Added " + user.getName() + " to " + groupName);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public Group parseAddMember(String argument) {
+        if (currentGroupName == null) {
+            throw new IllegalStateException("Please create or join a group first.");
         }
+        String[] tokens = argument.split(" ");
+        if (tokens.length == 0) {
+            throw new IllegalArgumentException("Please enter a name for the member.");
+        }
+        String memberName = tokens[0];
+        User newMember = new User(memberName);
+        users.add(newMember);
+        System.out.println(memberName + " has been added to " + currentGroupName + ".");
+        return this;
     }
 
     public static void exitGroup() {
