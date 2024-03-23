@@ -47,6 +47,15 @@ public class Member {
     }
 
     /**
+     * Sets the name of the member.
+     * 
+     * @param name The name of the member.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Adds the specified amount to the member's balance.
      *
      * @param amount The amount to add to the balance.
@@ -125,5 +134,9 @@ public class Member {
      */
     public void clearBalance() {
         this.balance = 0;
+    }
+
+    public void resetBalance() {
+        this.balance = 0.0;
     }
 }

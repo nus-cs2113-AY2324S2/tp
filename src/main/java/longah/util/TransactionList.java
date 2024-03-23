@@ -53,9 +53,7 @@ public class TransactionList {
         if (index < 0 || index >= this.transactions.size()) {
             throw new LongAhException(ExceptionMessage.INVALID_INDEX);
         }
-        Transaction removedTransaction = this.transactions.remove(index);
-        // recalculate the balances of the members
-        removedTransaction.recalculateBalances();
+        this.transactions.remove(index);
     }
 
     /**
@@ -157,6 +155,30 @@ public class TransactionList {
             throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
+    }
+
+    /**
+     * Edits a transaction from the list by index with new expression.
+     * 
+     * @param expression The new expression to edit the transaction with.
+     * @param memberList The member list to edit the transaction with.
+     * @throws LongAhException If the index is invalid or if the edit input is in an invalid format.
+     */
+    public void editTransactionList(String expression, MemberList memberList) throws LongAhException {
+        String[] indexTransactionSplice = expression.split(" ", 2);
+        if (indexTransactionSplice.length != 2) {
+            throw new LongAhException(ExceptionMessage.INVALID_EDIT_COMMAND);
+        }
+
+        try {
+            int index = Integer.parseInt(indexTransactionSplice[0]) - 1;
+            if (index < 0 || index >= transactions.size()) {
+                throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+            }
+            transactions.get(index).editTransaction(indexTransactionSplice[1], memberList);
+        } catch (NumberFormatException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+        }
     }
 
     /**
