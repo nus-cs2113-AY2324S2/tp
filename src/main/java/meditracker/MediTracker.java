@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class MediTracker {
 
-    private Ui ui;
     private MedicationManager medicationManager;
     private DailyMedicationManager dailyMedicationManager;
 
@@ -25,7 +24,6 @@ public class MediTracker {
      * Constructs a new MediTracker object and initializes the user interface.
      */
     public MediTracker() {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(medicationManager);
     }
@@ -36,7 +34,6 @@ public class MediTracker {
      * @param dailyMedicationList Daily medication
      */
     public MediTracker(List<String> dailyMedicationList) {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
     }
@@ -53,13 +50,13 @@ public class MediTracker {
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
         FileReaderWriter.loadMediTrackerData(medicationManager);
-        ui.showWelcomeMessage();
+        Ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
+            String fullCommand = Ui.readCommand();
+            Ui.showLine();
             Command command = Parser.parse(fullCommand);
-            command.execute(medicationManager, dailyMedicationManager, ui);
+            command.execute(medicationManager, dailyMedicationManager);
             isExit = command.isExit();
         }
     }

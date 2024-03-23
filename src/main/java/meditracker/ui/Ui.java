@@ -10,12 +10,12 @@ import java.util.Scanner;
  * It includes methods to display welcome messages, exit messages, and read user commands.
  */
 public class Ui {
-    Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
 
     /**
      * Displays the welcome message and introduction name.
      */
-    public void showWelcomeMessage() {
+    public static void showWelcomeMessage() {
         printIntroName();
         showWelcome();
     }
@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Prints the introduction name banner.
      */
-    public void printIntroName() {
+    public static void printIntroName() {
 
         // Solution below adapted by http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
         System.out.println("                    __      ______                      __                      \n" +
@@ -45,14 +45,14 @@ public class Ui {
     /**
      * Displays a line divider.
      */
-    public void showLine() {
+    public static void showLine() {
         System.out.println("____________________________________________________________");
     }
 
     /**
      * Displays the welcome message.
      */
-    public void showWelcome() {
+    public static void showWelcome() {
         System.out.println("Welcome to MediTracker, your best companion to track your medicine intake.");
         System.out.println("Let's begin tracking!\n");
     }
@@ -60,31 +60,31 @@ public class Ui {
     /**
      * Displays the exit message.
      */
-    public void showExitMessage() {
+    public static void showExitMessage() {
         System.out.println("Thank you for using MediTracker. Hope to see you again!");
     }
 
-    public void showAddCommandMessage() {
+    public static void showAddCommandMessage() {
         System.out.println("Medicine has been successfully added!");
     }
 
-    public void showModifyCommandMessage() {
+    public static void showModifyCommandMessage() {
         System.out.println("Medicine has been successfully modified!");
     }
 
-    public void showListCommandMessage() {
+    public static void showListCommandMessage() {
         System.out.println("Your list of medications has been successfully shown!");
     }
 
-    public void showDeleteCommandMessage() {
+    public static void showDeleteCommandMessage() {
         System.out.println("Medicine has been successfully deleted");
     }
 
-    public void showTakeCommandMessage() {
+    public static void showTakeCommandMessage() {
         System.out.println("Medicine has been successfully taken");
     }
 
-    public void showUntakeCommandMessage() {
+    public static void showUntakeCommandMessage() {
         System.out.println("Medicine has been successfully untaken");
     }
 
@@ -92,26 +92,26 @@ public class Ui {
      * Reads user input command.
      * @return The user input command as a String.
      */
-    public String readCommand() {
+    public static String readCommand() {
         return input.nextLine();
     }
 
-    public <T> void printMedsList(List<T> medications) {
+    public static <T> void printMedsList(List<T> medications) {
         for (T medication : medications) {
             int numbering = medications.indexOf(medication) + 1;
             System.out.println("\t" + numbering + ". " + medication);
         }
     }
 
-    public void showLibraryNotFoundMessage() {
+    public static void showLibraryNotFoundMessage() {
         System.out.println("Library not found! Please download the library from the website.");
     }
 
-    public void showNoSearchResultsMessage() {
+    public static void showNoSearchResultsMessage() {
         System.out.println("No search results found!");
     }
 
-    public void showSearchResults(List<SearchResult> searchResults) {
+    public static void showSearchResults(List<SearchResult> searchResults) {
         System.out.println("Here are the search results:");
 
         for (int i = 0; i < searchResults.size(); i++) {

@@ -52,12 +52,10 @@ public class AddCommand extends Command {
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
-     * @param ui                     The Ui object used to interact with the user interface.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) {
+                        DailyMedicationManager dailyMedicationManager) {
         Medication medication = new Medication(medicationName, medicineQuantity, medicineDosage, expiryDate, intakeFreq,
                 remarks);
         DailyMedication dailyMedication = new DailyMedication(medicationName);
@@ -65,6 +63,6 @@ public class AddCommand extends Command {
         dailyMedicationManager.addDailyMedication(dailyMedication);
         assert medicationManager.getTotalMedications() != 0 : "Total medications in medication " +
                 "manager should not be 0!";
-        ui.showAddCommandMessage();
+        Ui.showAddCommandMessage();
     }
 }

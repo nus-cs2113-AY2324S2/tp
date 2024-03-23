@@ -4,7 +4,6 @@ import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
-import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,8 +25,7 @@ public class ModifyCommandTest {
         String newName = "Medication_B";
         String inputString = "modify -l 1 -n " + newName;
         ModifyCommand command = new ModifyCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(medicationManager, dailyMedicationManager, ui);
+        command.execute(medicationManager, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));
@@ -49,8 +47,7 @@ public class ModifyCommandTest {
         String newName = "Medication_B";
         String inputString = String.format("modify -n %s -l 1", newName);
         ModifyCommand command = new ModifyCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(medicationManager, dailyMedicationManager, ui);
+        command.execute(medicationManager, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));
