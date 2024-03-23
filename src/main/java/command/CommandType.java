@@ -4,7 +4,7 @@ import exception.CommandInputException;
 
 public enum CommandType {
     WORK("(?i)work\\s*"),
-    REST("(?i)rest\\*"),
+    REST("(?i)rest\\s*"),
     EXIT("(?i)bye\\s*"),
     EXERCISE("(?i)exercise\\s*"),
     STATUS("(?i)status\\s*"),
