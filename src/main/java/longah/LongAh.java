@@ -1,12 +1,15 @@
 package longah;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 
+import longah.handler.PINHandler;
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
@@ -46,6 +49,13 @@ public class LongAh {
         LongAhLogger.log(Level.INFO, "Starting Pre-program preparations.");
         System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
+        PINHandler pinHandler = new PINHandler();
+
+        if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| pinHandler.loadPin().isEmpty()) {
+            pinHandler.createPin();
+        }
+
+        pinHandler.authenticate();
         try {
             LongAhLogger.log(Level.INFO, "Loading previous member and transaction info.");
             group = new Group();
