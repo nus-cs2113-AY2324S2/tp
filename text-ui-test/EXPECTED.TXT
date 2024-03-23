@@ -1,7 +1,7 @@
 -------------------------------------------------
 WELCOME TO BYTECEPS
 -------------------------------------------------
-[ByteCeps]> Loading your exercises...
+[ByteCeps]> Looks like you're starting fresh!
 -------------------------------------------------
 [User]> [ByteCeps]> All your workouts and exercises have been saved.
 -------------------------------------------------
