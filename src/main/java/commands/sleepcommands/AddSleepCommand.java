@@ -4,6 +4,9 @@ import commands.Command;
 import exceptions.SleepException;
 import sleep.SleepCycle;
 import sleep.SleepTracker;
+import date.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a command to add sleep cycles.
@@ -33,13 +36,21 @@ public class AddSleepCommand implements Command {
         }
         this.sleepTracker = sleepTracker;
         double hourSlept;
+        LocalDate dateSlept;
         try {
             hourSlept = Double.parseDouble(userCommand[0].trim());
         } catch (NumberFormatException e) {
-            throw new SleepException("Key in valid number of hours slept");
+            throw new SleepException("Key in valid number of hours slept" + System.lineSeparator()
+                + "E.g: 7.5");
+        }
+        try {
+            dateSlept = DateFormat.convertStringToDate(userCommand[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new SleepException("Key in valid date slept" + System.lineSeparator()
+                + "E.g: 22/12/2023");
         }
         assert !sleepCommandArgs.isEmpty() : "Sleep cycle should not be added";
-        sleepCycleToAdd = new SleepCycle(hourSlept, userCommand[1].trim());
+        sleepCycleToAdd = new SleepCycle(hourSlept, dateSlept);
     }
 
     @Override

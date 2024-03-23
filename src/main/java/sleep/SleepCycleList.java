@@ -1,7 +1,6 @@
 package sleep;
 
 import ui.Ui;
-
 import java.util.ArrayList;
 
 /**
