@@ -157,4 +157,21 @@ public class Parser {
             throw new OmniException("Please specify which task to remove tag");
         }
     }
+
+    public static void updateCommand(String line, TravelActivityList list) throws OmniException {
+        String[] command = line.split("update | /date | /duration ");
+        if (command.length >= 4 && (command[1].isEmpty() || !isNumeric(command[1]))) {
+            throw new OmniException("The update index cannot be empty or non numerical!");
+        } else if (command.length >= 4 && command[2].isEmpty()) {
+            throw new OmniException("The date cannot be empty!");
+        } else if (command.length >= 4 && command[3].isEmpty()) {
+            throw new OmniException("The duration cannot be empty!");
+        } else if (command.length < 4) {
+            throw new OmniException("Please check that your update command is in this format: update INDEX " +
+                    "/date YYYY-MM-DD /duration DURATION");
+        } else {
+            list.updateTravelActivity(Integer.parseInt(command[1]), LocalDate.parse(command[2]), command[3]);
+        }
+    }
+
 }

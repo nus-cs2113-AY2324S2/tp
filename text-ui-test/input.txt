@@ -18,6 +18,7 @@ check
 uncheck 5
 delete 5
 list
+update 1 /date 2020-12-12 /duration 2hours
 hello
 help
 bye

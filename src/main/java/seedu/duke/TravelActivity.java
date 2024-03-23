@@ -61,4 +61,20 @@ public class TravelActivity {
         this.tag = "";
     }
 
+    public void setDate(LocalDate date){
+        this.date = date;
+    }
+
+    public LocalDate getDate(){
+        return date;
+    }
+
+    public void setDuration(String duration){
+        this.duration = duration;
+    }
+
+    public String getDuration(){
+        return duration;
+    }
+
 }
