@@ -10,7 +10,6 @@ import static activeedge.ExerciseData.exercisesList;
 import activeedge.FoodData;
 
 public class Parser {
-
     public void handleInput(String input) {
         try {
             if (input.contains("help")) {
