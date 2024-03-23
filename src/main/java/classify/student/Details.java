@@ -1,5 +1,7 @@
 package classify.student;
 
+import java.time.LocalDate;
+
 /**
  * Important details of a student the tuition centre
  * has to keep track of.
@@ -9,11 +11,11 @@ public abstract class Details {
     //@@author Cryolian
     protected String gender;
     protected int phoneNumber = 0;
-    protected String lastPaymentDate = "unknown";
+    protected LocalDate lastPaymentDate = LocalDate.now();
     protected String remarks = "NA";
 
     public Details() {
-        
+
     }
      
     public String getGender() {
@@ -24,7 +26,7 @@ public abstract class Details {
         return phoneNumber;
     }
 
-    public String getLastPaymentDate() {
+    public LocalDate getLastPaymentDate() {
         return lastPaymentDate;
     }
 
@@ -40,7 +42,7 @@ public abstract class Details {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setLastPaymentDate(String lastPaymentDate) {
+    public void setLastPaymentDate(LocalDate lastPaymentDate) {
         this.lastPaymentDate = lastPaymentDate;
     }
 

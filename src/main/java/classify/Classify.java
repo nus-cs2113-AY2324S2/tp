@@ -14,6 +14,9 @@ public class Classify {
 
     /**
      * Main entry-point for the Classify application.
+     * 
+     * @param args          Input arguments when running the program.
+     * @throws IOException  Thrown when error reading file.
      */
     public static void main(String[] args) throws IOException {
 

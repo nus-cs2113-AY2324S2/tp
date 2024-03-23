@@ -3,8 +3,12 @@ package classify.user;
 import classify.student.Student;
 
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -92,5 +96,47 @@ public class InputParsingTest {
             System.lineSeparator() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
         assertEquals(expectedOutput.trim(), printedOutput);
+    }
+
+    //@@author Cryolian
+    @Test
+    public void testReadInDateCommand() {
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String userInputDate = "2020-12-12";
+
+        InputStream stdin = System.in;
+
+        try {
+            System.setIn(new ByteArrayInputStream(userInputDate.getBytes()));
+            Scanner scanner = new Scanner(System.in);
+
+            LocalDate parsedDate = InputParsing.readInDate(scanner);
+            assertEquals(LocalDate.parse(userInputDate), parsedDate);
+        } finally {
+            System.setIn(stdin);
+        }
+
+        userInputDate = " ";
+
+        try {
+            System.setIn(new ByteArrayInputStream(userInputDate.getBytes()));
+            Scanner scanner = new Scanner(System.in);
+
+            LocalDate parsedDate = InputParsing.readInDate(scanner);
+            assertEquals(LocalDate.now(), parsedDate);
+        } finally {
+            System.setIn(stdin);
+        }
+    }
+
+    @Test
+    public void testParseDateFromString() {
+        LocalDate date = InputParsing.parseDateFromString("fiodjsfoi");
+
+        assertEquals(date, LocalDate.now().plusDays(2));
+
     }
 }

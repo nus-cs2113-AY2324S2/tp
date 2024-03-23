@@ -21,8 +21,11 @@ public class Ui {
             "Please enter a different name.";
     private static final String EMPTY_NAME_ERROR = "Student name cannot be empty. Please enter a valid name.";
     private static final String GENDER_PROMPT = "Please input the student's gender: ";
-    private static final String PAYMENT_PROMPT = "Please input their last payment date: ";
+    private static final String PAYMENT_PROMPT = "Please input their last payment date in the format of YYYY-MM-DD." +
+            "Enter blank to input today's date.";
     private static final String REMARKS_PROMPT = "Please input any remarks: ";
+    private static final String INVALID_DATE_ERROR = "Please input a valid date in the format YYYY-MM-DD"
+            + ", or blank for today.";
     //@@author ParthGandhiNUS
     private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String WELCOME_TO_CLASSIFY = "Welcome to Classify!";
@@ -46,6 +49,7 @@ public class Ui {
     private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
     private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
     private static final String NO_RECENT_DELETES = "No recent deletes found!";
+
 
 
     //@@author alalal47
@@ -197,6 +201,7 @@ public class Ui {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
+    //@@author Cryolian
     public static void printSameNameError() {
         System.out.println(SAME_NAME_ERROR);
     }
@@ -240,6 +245,10 @@ public class Ui {
 
     public static void printNullAttributeError() {
         System.out.println(NULL_ATTRIBUTE_ERROR);
+    }
+
+    public static void printInvalidDateError() {
+        System.out.println(INVALID_DATE_ERROR);
     }
 
     //@@author alalal47
