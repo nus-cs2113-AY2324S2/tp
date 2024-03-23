@@ -43,7 +43,8 @@ public class Parser {
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
-    public static final Pattern  FIND_COMMAND_PATTERN = Pattern.compile("find ([^\\t\\n\\r\\f]{1,50})");
+    public static final Pattern  FIND_COMMAND_PATTERN =
+            Pattern.compile("find ([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+)");
     public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 4;
     public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 5;
     public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 1;
