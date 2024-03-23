@@ -33,6 +33,24 @@ public class Duke {
                     Ui.printLine();
                     break;
 
+                case "accommodation":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "food":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "landmark":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
+                    Ui.printLine();
+                    break;
+
                 case "delete":
                     Ui.printLine();
                     Parser.deleteCommand(command, list);
@@ -105,9 +123,6 @@ public class Duke {
             }
         }
     }
-
-
-
 }
 
 
