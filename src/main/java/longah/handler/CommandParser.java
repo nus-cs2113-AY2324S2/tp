@@ -6,6 +6,7 @@ import longah.commands.ExitCommand;
 import longah.commands.SettleCommand;
 import longah.commands.add.AddCommand;
 import longah.commands.delete.DeleteCommand;
+import longah.commands.edit.EditCommand;
 import longah.commands.find.FindCommand;
 import longah.commands.list.ListCommand;
 import longah.exception.ExceptionMessage;
@@ -34,11 +35,11 @@ public class CommandParser {
             return new ClearCommand(commandString, taskExpression);
         case "settleup":
             return new SettleCommand(commandString, taskExpression);
+        case "edit":
+            return new EditCommand(commandString, taskExpression);
         case "exit":
             return new ExitCommand(commandString, taskExpression);
 
-        case "edit":
-            // Fallthrough
         case "help":
             throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
         default:

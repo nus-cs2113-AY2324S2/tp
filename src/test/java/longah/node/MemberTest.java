@@ -1,8 +1,8 @@
 package longah.node;
 
 import longah.exception.LongAhException;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -18,6 +18,17 @@ public class MemberTest {
             Member member = new Member("Alice");
             assertEquals("Alice", member.getName());
             assertEquals(0.0, member.getBalance());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void memberConstructor_validNameAndBalance_success() {
+        try {
+            Member member = new Member("Alice", 10);
+            assertEquals("Alice", member.getName());
+            assertEquals(10.0, member.getBalance());
         } catch (Exception e) {
             fail();
         }
@@ -41,27 +52,12 @@ public class MemberTest {
      * Tests the constructor of the Member class with valid name and balance.
      */
     @Test
-    public void memberConstructor_validNameAndBalance_success() {
+    public void addToBalance_validAdd_success() {
         try {
             Member member = new Member("Alice");
             member.addToBalance(10.0);
             assertEquals("Alice", member.getName());
             assertEquals(10.0, member.getBalance());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    /**
-     * Tests the addToBalance method of the Member class with valid added balance.
-     */
-    @Test
-    public void addToBalance_validAdd_success() {
-        try {
-            Member member = new Member("Bob");
-            member.addToBalance(10.0);
-            member.addToBalance(10.0);
-            assertEquals(20.0, member.getBalance());
         } catch (Exception e) {
             fail();
         }
