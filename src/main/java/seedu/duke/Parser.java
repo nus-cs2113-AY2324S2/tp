@@ -55,10 +55,26 @@ public class Parser {
             deleteTask(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktiming")){
             changeTaskTiming(command, userList);
-        } else if(command.toLowerCase().startsWith("changetasktype")){
             changeTaskType(command, userList);
         }  else if(command.toLowerCase().startsWith("addrepeattask")){
             addRepeatTask(command, userList);
+        } else if(command.toLowerCase().startsWith("changetasktype")){
+            try {
+                InputValidator.validateChangeTaskType(command);
+                String[] parts = command.split("\\s+");
+                List<String> wordList = Arrays.asList(parts);
+                String day = wordList.get(2);
+                int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
+                String newType = wordList.get(wordList.indexOf("/type") + 1);
+                InputValidator.validateDay(day);
+                userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
+                System.out.println("Task type changed successfully.");
+            } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (command.toLowerCase().startsWith("compareall")) {
+            UI.printComparingAll();
+            UI.printSharedTime(Timetable.compareAllTimetables(userList));
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
                 InputValidator.validateCompareInput(command);
@@ -67,12 +83,13 @@ public class Parser {
                 String user2 = parts[2];
                 InputValidator.validateUserInput(user1, userList);
                 InputValidator.validateUserInput(user2, userList);
-                Timetable.compareTimetable(userList.findUser(user1).getTimetable(),
-                        userList.findUser(user2).getTimetable());
+                UI.printSharedTime(Timetable.compareTimetable(userList.findUser(user1).getTimetable(),
+                        userList.findUser(user2).getTimetable()));
 
             } catch (InvalidFormatException | InvalidUserException | NullPointerException e) {
                 System.out.println(e.getMessage());
             }
+
         } else if (command.toLowerCase().startsWith("addforall")) {
             addTaskForAll(command, userList);
         } else if (command.toLowerCase().startsWith("viewcommonevents")) {
