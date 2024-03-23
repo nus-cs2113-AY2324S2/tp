@@ -3,11 +3,12 @@ package command;
 import exception.CommandInputException;
 
 public enum CommandType {
-    WORK("work"),
-    REST("rest"),
-    EXIT("bye"),
-    EXERCISE("exercise"),
-    STATUS("status");
+    WORK("(?i)work\\s*"),
+    REST("(?i)rest\\s*"),
+    EXIT("(?i)bye\\s*"),
+    EXERCISE("(?i)exercise\\s*"),
+    STATUS("(?i)status\\s*"),
+    HELP("(?i)help\\s*");
 
 
     private final String command;
@@ -18,7 +19,7 @@ public enum CommandType {
 
     public static CommandType analyseInput(String userInput) throws CommandInputException {
         for (CommandType commandType : CommandType.values()) {
-            if (commandType.command.equals(userInput.toLowerCase().trim())) {
+            if (userInput.matches(commandType.command)) {
                 return commandType;
             }
         }

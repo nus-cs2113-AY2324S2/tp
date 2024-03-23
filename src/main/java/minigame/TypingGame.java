@@ -47,7 +47,8 @@ public class TypingGame implements MiniGame {
             Scanner scanner = new Scanner(System.in);
             ResponseManager.indentPrint(START_MSG);
             ResponseManager.indentPrint(GREEN_COLOR + TEXT_TO_TYPE + RESET + "\n");
-            ResponseManager.indentPrint("Press" + RED_COLOR + "ENTER" + RESET + "to start typing..." + "\n");
+            ResponseManager.indentPrint(
+                    "Press" + RED_COLOR + "ENTER" + RESET + "to" + RED_COLOR + "start" + RESET + "\n");
             // Wait for user to press enter
             scanner.nextLine();
 
@@ -61,7 +62,7 @@ public class TypingGame implements MiniGame {
         } catch (TimeoutException e) {
             this.timeSpent = TIME_LIMIT;
             finalScore.cancel(true);
-            ResponseManager.indentPrint("\nTime's up!!!! Your input is not captured TAT\n");
+            System.out.println("\nTime's up!!!! Your input is not captured TAT\n");
             TG_LOGGER.info("User did not complete the game in time");
         } catch (InterruptedException | ExecutionException e) {
             ResponseManager.indentPrint("An error occurred while calculating your score.\n");
@@ -94,7 +95,10 @@ public class TypingGame implements MiniGame {
     }
 
     public void outputResult() {
+        String response = (this.accuracy >= 75) ? "Great job!" :
+                (this.accuracy >= 50) ? "Good effort!" : "Keep practicing!";
         ResponseManager.indentPrint(
-                String.format("You typed at %d%% accuracy in %.2f seconds!\n", this.accuracy, this.timeSpent));
+                String.format("You typed at %d%% accuracy in %.2f seconds!\n" +
+                        "%s\n", this.accuracy, this.timeSpent, response));
     }
 }
