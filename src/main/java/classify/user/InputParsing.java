@@ -117,7 +117,7 @@ public class InputParsing {
      */
     private static void sortStudents(ArrayList<Student> masterStudentList, Scanner in) {
         while (true) {
-            System.out.println("Sort by: ");
+            System.out.println("Sort by: (Choose index)");
             Ui.println("1. Name (A to Z)");
             Ui.println("2. Total number of classes attended:");
             String input = in.nextLine().trim();

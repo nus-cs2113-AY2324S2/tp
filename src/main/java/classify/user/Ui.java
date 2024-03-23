@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 //@@author Cryolian
 public class Ui {
+    public static final String TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS = "Total classes " +
+            "attended across all subjects: ";
     private static final String EMPTY_SUBJECT_ERROR = "No subjects and grades found for this student.";
     private static final String NULL_ATTRIBUTE_ERROR = "No attributes found for this student.";
     private static final String EDIT_PROMPT = "How would you like to update a student's subject? (enter blank to exit)";
@@ -49,7 +51,7 @@ public class Ui {
     private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
     private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
     private static final String NO_RECENT_DELETES = "No recent deletes found!";
-    public static final String TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS = "Total classes attended across all subjects: ";
+
 
 
     //@@author alalal47

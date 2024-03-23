@@ -11,7 +11,8 @@ public class StudentSorter {
 
     public static final String ONE = "1";
     public static final String TWO = "2";
-    public static final String INVALID_CHOICE = "Invalid choice! Type either 1 or 2 to sort the list by the selected attribute";
+    public static final String INVALID_CHOICE = "Invalid choice! " +
+            "Type either 1 or 2 to sort the list by the selected attribute";
 
     /**
      * Sorts the list of students based on the specified choice.
