@@ -13,7 +13,8 @@ public class ChangeCurrencyCommand extends Command {
     private ExpenseList expenses;
     private CurrencyConverter currencyConverter;
 
-    public ChangeCurrencyCommand(Currency newCurrency, SavingList savings, ExpenseList expenses, CurrencyConverter currencyConverter) {
+    public ChangeCurrencyCommand(Currency newCurrency, SavingList savings, ExpenseList expenses,
+                                 CurrencyConverter currencyConverter) {
         this.newCurrency = newCurrency;
         this.savings = savings;
         this.expenses = expenses;

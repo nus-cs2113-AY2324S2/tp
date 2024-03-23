@@ -69,7 +69,8 @@ public class SavingList {
             double totalExpenses = 0;
             for (Expense expense : expenseList.getExpenses()) {
                 totalExpenses += expense.getAmount();
-                System.out.println("$" + String.format("%.2f", expense.getAmount()) + " spent on " + expense.getDescription() +
+                System.out.println("$" + String.format("%.2f", expense.getAmount()) +
+                        " spent on " + expense.getDescription() +
                         " on " + expense.getDateAdded());
             }
             System.out.println("------------------------------------------------------------------------");
