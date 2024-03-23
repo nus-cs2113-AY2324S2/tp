@@ -59,6 +59,20 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine("No entry found for the date.");
     }
 
+    public void updateSleepCycle(String date, double newHours) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            SleepCycle currSleep = sleepCycleList.get(i);
+            if (currSleep.getDateOfSleep().equals(date)){
+                double oldHours = currSleep.getHoursSlept();
+                currSleep.setHoursOfSleep(newHours);
+                Ui.printMessageWithSepNewLine("Hours of sleep for " + date + " has been updated from " +
+                        oldHours + " to " + newHours);
+                return;
+            }
+        }
+        Ui.printMessageWithSepNewLine("No entry found for the date.");
+    }
+
     public int getNumberOfCycles() {
         return numberOfCycles;
     }

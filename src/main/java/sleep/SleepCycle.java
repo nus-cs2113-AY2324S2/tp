@@ -17,6 +17,9 @@ public class SleepCycle {
         return dateOfSleep;
     }
 
+    public void setHoursOfSleep(double newHours) {
+        hoursSlept = newHours;
+    }
     @Override
     public String toString() {
         return this.dateOfSleep  + ": " + this.hoursSlept;
