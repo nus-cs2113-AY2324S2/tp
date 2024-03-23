@@ -11,11 +11,18 @@ import java.util.logging.Logger;
 
 public class InflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
-    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
-            + ": Increases the quantity of product with PID "
-            + "by the specified INCREMENT_AMOUNT from the existing amount."
-            + Messages.LINE_SEPARATOR
-            + "Format: inflow PID a/INCREMENT_AMOUNT");
+    public static final String COMMAND_DESCRIPTION = "Increases the quantity of a product from the existing amount.";
+    public static final String COMMAND_USAGE = "inflow PID a/INCREMENT_AMOUNT";
+
+    public static final String[] COMMAND_FLAGS = {
+        "PID"
+        , "INCREMENT_AMOUNT"
+    };
+
+    public static final String[] COMMAND_FLAG_DESCRIPTIONS = {
+        "Product ID of product"
+        , "Quantity of product to add"
+    };
 
     private static final Logger LOGGER = Logger.getLogger(InflowCommand.class.getName());
 

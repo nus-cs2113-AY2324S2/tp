@@ -2,6 +2,8 @@ package seedu.stockpal.common;
 
 public class Messages {
     public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String EMPTY_STRING = "";
+    public static final String SINGLE_SPACE = " ";
     public static final String HORIZONTAL_LINE =
             "====================================================================================";
     public static final String MESSAGE_WELCOME = "Welcome to StockPal!"
@@ -39,4 +41,6 @@ public class Messages {
     public static final String MESSAGE_NO_LOW_QUANTITY_PRODUCTS = "No products with low quantity";
 
     public static final String MESSAGE_EMPTY_FIND_LIST = "No matches found.";
+
+    public static final String LOG_PRINT_HELP_PAGE = "Help page has been printed.";
 }

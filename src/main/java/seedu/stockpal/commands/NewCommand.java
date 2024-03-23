@@ -4,7 +4,6 @@ import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.ui.Ui;
 
 import java.util.logging.Level;
 
@@ -14,12 +13,25 @@ import static seedu.stockpal.ui.Ui.printToScreen;
 //@@author EdmundTangg
 public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
-    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
-            + ": Creates a new product to the inventory and assigns a unique Product ID (PID) to it."
-            + Messages.LINE_SEPARATOR
-            + "Format: new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]")
-            + Messages.LINE_SEPARATOR
-            + "PRICE must be in 2 decimal places.";
+    public static final String COMMAND_DESCRIPTION =
+        "Adds a new product to the inventory and assigns a unique Product" +
+                "\nID (PID) to it.";
+    public static final String COMMAND_USAGE =
+        "new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]";
+
+    public static final String[] COMMAND_FLAGS = {
+        "PRODUCT_NAME"
+        , "INITIAL_QUANTITY"
+        , "PRICE"
+        , "DESCRIPTION"
+    };
+
+    public static final String[] COMMAND_FLAG_DESCRIPTIONS = {
+        "Name of the product"
+        , "Quantity of the product"
+        , "Price of the product. Price must be in 2 decimal places."
+        , "Description of the product"
+    };
 
     private final String name;
     private final Integer quantity;

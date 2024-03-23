@@ -81,7 +81,6 @@ public class Parser {
         case EditCommand.COMMAND_KEYWORD:
             parsed = matchAndParseCommand(input, EDIT_COMMAND_PATTERN, NUM_OF_EDIT_COMMAND_ARGUMENTS);
             assert(parsed.get(0) != null);
-            assert(parsed.get(1) != null);
             return validateAndCreateEditCommand(parsed);
 
         case DeleteCommand.COMMAND_KEYWORD:

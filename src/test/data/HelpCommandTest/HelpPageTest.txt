@@ -1,0 +1,86 @@
+====================================================================================
+Command: new
+
+Description: Adds a new product to the inventory and assigns a unique Product
+             ID (PID) to it.
+
+Usage: new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]
+
+Options:
+PRODUCT_NAME          Name of the product
+INITIAL_QUANTITY      Quantity of the product
+PRICE                 Price of the product. Price must be in 2 decimal places.
+DESCRIPTION           Description of the product
+====================================================================================
+Command: edit
+
+Description: Edits an existing product in the inventory at the specific PID.
+
+Usage: edit PID [n/PRODUCT_NAME] [q/QUANTITY] [p/PRICE] [d/DESCRIPTION]
+
+Options:
+PID                   Product ID of product to edit
+PRODUCT_NAME          Updated name of the product
+QUANTITY              Updated quantity of the product
+PRICE                 Updated price of the product. Price must be in 2 decimal places.
+DESCRIPTION           Updated description of the product
+====================================================================================
+Command: delete
+
+Description: Deletes an existing product from the inventory.
+
+Usage: Format: delete PID
+
+Options:
+PID                   Product ID of product
+====================================================================================
+Command: inflow
+
+Description: Increases the quantity of a product from the existing amount.
+
+Usage: inflow PID a/INCREMENT_AMOUNT
+
+Options:
+PID                   Product ID of product
+INCREMENT_AMOUNT      Quantity of product to add
+====================================================================================
+Command: outflow
+
+Description: Decreases the quantity of a product from the existing amount.
+
+Usage: outflow PID a/DECREMENT_AMOUNT
+
+Options:
+PID                   Product ID of product
+DECREMENT_AMOUNT      Quantity of product to remove
+====================================================================================
+Command: find
+
+Description: Lists all products containing KEYWORD.
+
+Usage: find KEYWORD
+
+Options:
+KEYWORD               Keyword to search for in product name. Keyword is case sensitive.
+====================================================================================
+Command: list
+
+Description: Lists each product in inventory.
+
+Usage: list
+
+====================================================================================
+Command: exit
+
+Description: Exits the program.
+
+Usage: exit
+
+====================================================================================
+Command: help
+
+Description: List all available commands supported by Stockpal.
+
+Usage: help
+
+====================================================================================
