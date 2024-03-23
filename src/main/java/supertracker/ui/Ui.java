@@ -4,6 +4,8 @@ import supertracker.item.Item;
 
 public class Ui {
     private static final String LINE = "    --------------------------------------------------------------------------";
+    private static final String QUANTITY_FLAG = "q";
+    private static final String PRICE_FLAG = "p";
     private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
@@ -116,9 +118,9 @@ public class Ui {
         String priceString = "    Price: " + item.getPriceString();
 
         if (hasQuantity && hasPrice) {
-            if (firstParam.equals("q")) {
+            if (firstParam.equals(QUANTITY_FLAG)) {
                 stringToPrint += (quantityString + priceString);
-            } else if (firstParam.equals("p")) {
+            } else if (firstParam.equals(PRICE_FLAG)) {
                 stringToPrint += (priceString + quantityString);
             }
         } else if (hasQuantity) {

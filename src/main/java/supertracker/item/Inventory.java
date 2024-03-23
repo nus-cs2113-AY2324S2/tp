@@ -1,7 +1,9 @@
 package supertracker.item;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class Inventory {
     private static HashMap<String, Item> itemMap = new HashMap<>();
@@ -26,7 +28,8 @@ public class Inventory {
         itemMap.clear();
     }
 
-    public static Collection<Item> items() {
-        return itemMap.values();
+    public static List<Item> items() {
+        Collection<Item> items = itemMap.values();
+        return new ArrayList<>(items);
     }
 }
