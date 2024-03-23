@@ -75,7 +75,7 @@ public class CountupTimer {
      * the total time elapsed using Ui class.
      */
     public void totalTimeSpent() {
-        if(!isPaused) {
+        if (!isPaused) {
             Duration timeElapsed = Duration.between(startTiming, stopTiming);
             totalHours += timeElapsed.toHours();
             totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;

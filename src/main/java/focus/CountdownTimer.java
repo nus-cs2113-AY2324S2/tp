@@ -89,8 +89,8 @@ public class CountdownTimer {
 
     public void setPause() {
         isRunning.set(false);
-        Ui.printMessageWithSepNewLine("Timer paused. \n"  +
-               "Remaining time: " + minutes + " minutes " + seconds + " seconds");
+        Ui.printMessageWithSepNewLine("Timer paused. \n" +
+                "Remaining time: " + minutes + " minutes " + seconds + " seconds");
     }
 
     public void setResume() {
