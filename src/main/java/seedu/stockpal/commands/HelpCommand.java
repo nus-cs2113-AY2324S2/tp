@@ -2,7 +2,6 @@ package seedu.stockpal.commands;
 
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.ui.Ui;
 
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
@@ -11,11 +10,10 @@ import static seedu.stockpal.ui.Ui.printToScreenWithoutNewlineAtEnd;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_KEYWORD = "help";
-    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
-            + ": List all available commands supported by Stockpal."
-            + Messages.LINE_SEPARATOR
-            + "Format: help"
-    );
+    public static final String COMMAND_DESCRIPTION = "List all available commands supported by Stockpal.";
+    public static final String COMMAND_USAGE = "help";
+    public static final String[] COMMAND_FLAGS = {};
+    public static final String[] COMMAND_FLAG_DESCRIPTIONS = {};
 
     private static final String COMMAND_KEYWORD_PREFIX = "Command: ";
     private static final String DESCRIPTION_PREFIX = "Description: ";
@@ -28,7 +26,7 @@ public class HelpCommand extends Command {
         String formattedText = HORIZONTAL_LINE + LINE_SEPARATOR
                 + newCommandUsage() + editCommandUsage() + deleteCommandUsage()
                 + inflowCommandUsage() + outflowCommandUsage() + findCommandUsage()
-                + listCommandUsage() + exitCommandUsage();
+                + listCommandUsage() + exitCommandUsage() + helpCommandUsage();
         printToScreenWithoutNewlineAtEnd(formattedText);
     }
 
@@ -110,5 +108,10 @@ public class HelpCommand extends Command {
     private String exitCommandUsage() {
         return formatCommandDetails(ExitCommand.COMMAND_KEYWORD, ExitCommand.COMMAND_DESCRIPTION
                 , ExitCommand.COMMAND_USAGE, ExitCommand.COMMAND_FLAGS, ExitCommand.COMMAND_FLAG_DESCRIPTIONS);
+    }
+
+    private String helpCommandUsage() {
+        return formatCommandDetails(HelpCommand.COMMAND_KEYWORD, HelpCommand.COMMAND_DESCRIPTION
+                , HelpCommand.COMMAND_USAGE, HelpCommand.COMMAND_FLAGS, HelpCommand.COMMAND_FLAG_DESCRIPTIONS);
     }
 }

@@ -76,3 +76,10 @@ Description: Exits the program.
 Usage: exit
 
 ====================================================================================
+Command: help
+
+Description: List all available commands supported by Stockpal.
+
+Usage: help
+
+====================================================================================
