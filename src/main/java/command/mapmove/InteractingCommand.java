@@ -21,7 +21,7 @@ public class InteractingCommand extends MapMoveCommand {
             int x_pos = currentMap.getInteractX();
             int y_pos = currentMap.getInteractY();
             textBox.setNextDialogue("*the @ symbol stares at you menacingly*");
-            InteractableEntity monster = new Enemy(10, 10, 10, x_pos, y_pos);
+            InteractableEntity monster = new Enemy(10, 10, 10, x_pos, y_pos, 10, 10);
             battleMap = new BattleInterface(playerStatus, textBox, monster);
             battleMap.initMap(30, 10);
             storedMaps.add(battleMap);

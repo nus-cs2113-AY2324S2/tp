@@ -86,4 +86,15 @@ public class Ui {
     public void printQuestion(MathQuestion mathQuestion){
         System.out.println(mathQuestion.getQuestion());
     }
+
+
+    public void printDeathMessage(){
+        System.out.println("|\\     /|(  ___  )|\\     /|  (  __  \\ \\__   __/(  ____ \\(  __  \\ ");
+        System.out.println("( \\   / )| (   ) || )   ( |  | (  \\  )   ) (   | (    \\/| (  \\  )");
+        System.out.println(" \\ (_) / | |   | || |   | |  | |   ) |   | |   | (__    | |   ) |");
+        System.out.println("  \\   /  | |   | || |   | |  | |   | |   | |   |  __)   | |   | |");
+        System.out.println("   ) (   | |   | || |   | |  | |   ) |   | |   | (      | |   ) |");
+        System.out.println("   | |   | (___) || (___) |  | (__/  )___) (___| (____/\\| (__/  )");
+        System.out.println("   \\_/   (_______)(_______)  (______/ \\_______/(_______/(______/ ");
+    }
 }

@@ -115,8 +115,31 @@ public class BattleInterface extends AMap {
         return currentEntity.getHealth() <= 0;
     }
 
+    @Override
+    public boolean getPlayerDeath() {
+        return currentPlayer.getPlayerHealth() <= 0;
+    }
+
+    @Override
+    public void handleDeath(){
+        Ui ui = new Ui();
+        ui.printDeathMessage();
+        System.exit(0);
+    }
+
     public PlayerStatus getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public void handleLootingByPlayer(){
+        int exp = this.currentEntity.getExp_dropped();
+        int money = this.currentEntity.getMoney_dropped();
+        this.currentPlayer.addExp(exp);
+        this.currentPlayer.addMoney(money);
+        this.currentTextBox.setNextNarration("The beast was slain. You looted its cold dead corpse and found $" + money
+                + " and gained " + exp + " exp.");
+    }
+
+
 
 }

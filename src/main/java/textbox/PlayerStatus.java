@@ -39,4 +39,12 @@ public class PlayerStatus {
     public void harmHealth(int dmg){
         playerHealth -= dmg;
     }
+
+    public void addMoney(int money){
+        playerMoney += money;
+    }
+
+    public void addExp(int exp){
+        playerExp += exp;
+    }
 }
