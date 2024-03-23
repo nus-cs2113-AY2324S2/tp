@@ -40,7 +40,11 @@ public class SleepCycleList {
         for (int i = 0; i < numberOfCycles - 1; i++) {
             sleepListMessage += (i + 1) + ". " + sleepCycleList.get(i) + System.lineSeparator();
         }
-        sleepListMessage += numberOfCycles + ". " + sleepCycleList.get(numberOfCycles - 1);
+        if (numberOfCycles > 0) {
+            sleepListMessage += numberOfCycles + ". " + sleepCycleList.get(numberOfCycles - 1);
+        } else {
+            sleepListMessage += "No sleep cycle has been added";
+        }
         Ui.printMessageWithSepNewLine(sleepListMessage);
     }
 
