@@ -159,6 +159,9 @@ public abstract class AMap {
     }
 
     public abstract boolean getEntityDeath();
+    public abstract boolean getPlayerDeath();
+    public abstract void handleDeath();
+    public abstract void handleLootingByPlayer();
 
     public void placeMonsterInTheMap(int x, int y) {
         currentMap.get(y).set(x, '@');

@@ -10,4 +10,15 @@ public class FirstMap extends AMap{
     public boolean getEntityDeath(){
         return false;
     }
+    @Override
+    public boolean getPlayerDeath(){
+        return false;
+    }
+    @Override
+    public void handleDeath() {
+    }
+    @Override
+    public void handleLootingByPlayer(){
+
+    }
 }
