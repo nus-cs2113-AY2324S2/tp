@@ -64,4 +64,8 @@ public class Ui {
     public static void printDateTimeExceptionError(){
         System.out.println("Invalid date, please input the date in the following order: YYYY-MM-DD");
     }
+
+    public static void printSavingError(){
+        System.out.println("Something went wrong when saving the file");
+    }
 }

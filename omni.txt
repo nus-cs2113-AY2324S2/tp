@@ -1,0 +1,4 @@
+accommodation / 0 / Malaysia Airbnb / 2019-12-17 / 3hours
+food / 1 / Popia / 2020-12-01 / 1hour
+landmark / 0 / Eiffel Tower / 2018-06-01 / 4hours
+1 / Go to Paris / 2019-12-20 / 2hours
