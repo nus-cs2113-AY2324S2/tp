@@ -62,7 +62,7 @@ public class LongAh {
         LongAhLogger.log(Level.INFO, "Entering main program body. Begin accepting user commands.");
         while (true) {
             try {
-                System.out.print("Enter command: ");
+                System.out.print("Enter command:");
                 if (!app.scanner.hasNextLine()) {
                     return;
                 }
