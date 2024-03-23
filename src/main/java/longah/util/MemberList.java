@@ -100,8 +100,7 @@ public class MemberList {
     /**
      * Changes the name of the member at the specified index.
      * 
-     * @param index The index of the member to change the name of.
-     * @param name The new name of the member.
+     * @param expression The expression containing the index and new name.
      * @throws LongAhException If the index is invalid.
      */
     public void editMemberName(String expression) throws LongAhException {
