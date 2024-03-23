@@ -27,5 +27,7 @@ public class Duke {
             }
 
         }
+        //assert false: "dummy assertion set to fail";
     }
+
 }

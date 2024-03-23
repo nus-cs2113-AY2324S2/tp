@@ -20,7 +20,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
    | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   |____/ \__,_|_|\_\___
    
    What is your name?
    ```

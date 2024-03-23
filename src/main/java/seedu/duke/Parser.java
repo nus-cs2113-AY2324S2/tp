@@ -2,17 +2,20 @@ package seedu.duke;
 
 import seedu.duke.ui.UI;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
 
+    protected static final String[] DAYS = new String[]
+            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     /**
      * Parses User Input and Identifies the command used.
      *
      * @param command The users text input.
      */
-    public void parseCommand(String command, UserList userList) {
+    public void parseCommand(String command, UserList userList) throws InvalidFormatException, InvalidDayException {
         if (command.equalsIgnoreCase("list")) {
             UI.printListingUsers();
             userList.listAll();
@@ -47,31 +50,24 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else if (command.toLowerCase().startsWith("addtask")) {
+            addTask(command, userList);
+        } else if (command.toLowerCase().startsWith("deletetask")) {
+            deleteTask(command, userList);
+        } else if(command.toLowerCase().startsWith("changetasktiming")){
+            changeTaskTiming(command, userList);
+        } else if(command.toLowerCase().startsWith("changetasktype")){
             try {
-                InputValidator.validateAddTaskInput(command);
+                InputValidator.validateChangeTaskType(command);
                 String[] parts = command.split("\\s+");
                 List<String> wordList = Arrays.asList(parts);
-                String day = parts[2];
-                String description = parseDescription(wordList);
-                String startTime = parts[wordList.indexOf("/from") + 1];
-                String endTime = parts[wordList.indexOf("/to") + 1];
+                String day = wordList.get(2);
+                int index = Integer.parseInt(wordList.get(wordList.indexOf("/index") + 1));
+                String newType = wordList.get(wordList.indexOf("/type") + 1);
                 InputValidator.validateDay(day);
-                Task task = new Task(description, day, startTime, endTime);
-                userList.getActiveUser().getTimetable().addUserTask(day, task);
-                UI.printAddTask(task);
-            } catch (InvalidFormatException | InvalidDayException e) {
-                System.out.println(e.getMessage());
-            }
-        } else if (command.toLowerCase().startsWith("deletetask")) {
-            try {
-                InputValidator.validateDeleteTaskInput(command);
-                String[] parts = command.split("\\s+");
-                String day = parts[2];
-                int index = Integer.parseInt(parts[4]);
-                InputValidator.validateDay(day);
-                userList.getActiveUser().getTimetable().deleteUserTask(day, index);
-            } catch (InvalidFormatException | InvalidDayException e) {
-                System.out.println(e.getMessage());
+                userList.getActiveUser().getTimetable().changeTaskType(day, index - 1, newType);
+                System.out.println("Task type changed successfully.");
+            } catch (InvalidDayException | IndexOutOfBoundsException | NumberFormatException e) {
+                throw new RuntimeException(e);
             }
         } else if (command.toLowerCase().startsWith("compare")) {
             try {
@@ -87,12 +83,76 @@ public class Parser {
             } catch (InvalidFormatException | InvalidUserException | NullPointerException e) {
                 System.out.println(e.getMessage());
             }
-        } else {
+        } else if (command.toLowerCase().startsWith("addforall")) {
+            addTaskForAll(command, userList);
+        } else if (command.toLowerCase().startsWith("viewcommonevents")) {
+            printConfirmedEvent(userList);
+        }
+        else {
             UI.printInvalidCommand();
         }
     }
 
-    private String parseDescription(List<String> words) {
+    private static void deleteTask(String command, UserList userList) {
+        try {
+            InputValidator.validateDeleteTaskInput(command);
+            String[] parts = command.split("\\s+");
+            String day = parts[2];
+            int index = Integer.parseInt(parts[4]);
+            InputValidator.validateDay(day);
+            userList.getActiveUser().getTimetable().deleteUserTask(day, index);
+        } catch (InvalidFormatException | InvalidDayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void addTask(String command, UserList userList) {
+        try {
+            InputValidator.validateAddTaskInput(command);
+            Task task = parseTask(command);
+            userList.getActiveUser().getTimetable().addUserTask(task.day, task);
+            UI.printAddTask(task);
+        } catch (InvalidFormatException | InvalidDayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Task parseTask(String command) throws InvalidDayException {
+        String[] parts = command.split("\\s+");
+        List<String> wordList = Arrays.asList(parts);
+        String day = parts[2];
+        String description = parseDescription(wordList);
+        String startTime = parts[wordList.indexOf("/from") + 1];
+        String endTime = parts[wordList.indexOf("/to") + 1];
+
+        String type;
+        if (wordList.contains("/type")) {
+            type = parts[wordList.indexOf("/type") + 1];
+        } else {
+            type = "common";
+        }
+
+        InputValidator.validateDay(day);
+        return new Task(description, day, startTime, endTime, type);
+    }
+    private static void changeTaskTiming(String command, UserList userList) throws InvalidFormatException {
+        try {
+            InputValidator.validateChangeTaskTiming(command);
+            String[] parts = command.split("\\s+");
+            List<String> wordList = Arrays.asList(parts);
+            String day = parts[2];
+            int index = Integer.parseInt(parts[wordList.indexOf("/index") + 1]);
+            LocalTime newStartTime = LocalTime.parse(parts[wordList.indexOf("/from") + 1]);
+            LocalTime newEndTime = LocalTime.parse(parts[wordList.indexOf("/to") + 1]);
+            InputValidator.validateDay(day);
+            userList.getActiveUser().getTimetable().changeFlexibleTaskTiming(day, index - 1, newStartTime, newEndTime);
+            System.out.println("Flexible task timing changed successfully.");
+        } catch (InvalidDayException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String parseDescription(List<String> words) {
         int startIndex = words.indexOf("/task") + 1;
         int endIndex = words.indexOf("/from") - 1;
         StringBuilder description = new StringBuilder();
@@ -103,5 +163,27 @@ public class Parser {
             }
         }
         return description.toString();
+    }
+
+    private static void addTaskForAll(String command, UserList userList) throws InvalidFormatException, InvalidDayException {
+        InputValidator.validateAddTaskForAll(command);
+        Task task = parseTask(command);
+        assert !userList.getUsers().isEmpty() : "There is no user added.";
+        for (User user : userList.getUsers()) {
+            user.getTimetable().addUserTask(task.day, task);
+        }
+        UI.printAddForAll(task);
+    }
+
+    private static void printConfirmedEvent(UserList userList) {
+        assert !userList.getUsers().isEmpty() : "There is no user added.";
+        int taskCount = 1;
+        for (String day : DAYS) {
+            for (Task task : userList.getActiveUser().getTimetable().getWeeklyTasks().get(day)) {
+                if (task.type.equals("common")) {
+                    System.out.println(taskCount + ". " + task);
+                }
+            }
+        }
     }
 }

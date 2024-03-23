@@ -11,7 +11,6 @@ import java.util.Map;
  * This class represents the Timetable object consisting of Arraylist of Tasks for each day of the week.
  */
 public class Timetable {
-
     protected static final String[] DAYS = new String[]
         {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private Map<String, ArrayList<Task>> weeklyTasks; // Map to store tasks for each day
@@ -28,6 +27,23 @@ public class Timetable {
         return weeklyTasks;
     }
 
+    /**
+     * Prints tasks of the day specified.
+     * @param day day of the week the task is on.
+     */
+    public void printTasksOfTheDay(String day) {
+        String capitalizedDay = day.substring(0, 1).toUpperCase() + day.substring(1);
+        if (weeklyTasks.get(capitalizedDay).isEmpty()) {
+            System.out.println("NO TASK FOR " + day);
+            return;
+        }
+        System.out.println(capitalizedDay + ":");
+        int count = 1;
+        for (Task task : weeklyTasks.get(capitalizedDay)) {
+            System.out.println(count + ". " + task.toString());
+            count++;
+        }
+    }
     /**
      * Adds task on dayOfWeek at an index
      *
@@ -59,6 +75,28 @@ public class Timetable {
         }
     }
 
+    public void changeFlexibleTaskTiming(String dayOfWeek, int index, LocalTime newStartTime, LocalTime newEndTime){
+        String capitalizedDay = dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1);
+        ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
+        if(index < 0 || index >= tasks.size()){
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        Task task = tasks.get(index);
+        if(!task.getType().equals("f")){
+            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + index +" is not flexible.");
+        }
+        task.setStartTime(newStartTime);
+        task.setEndTime(newEndTime);
+    }
+    public void changeTaskType(String dayOfWeek, int index, String newType){
+        String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
+        ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
+        if(index < 0 || index >= tasks.size()){
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        Task task = tasks.get(index);
+        task.setType(newType);
+    }
     /**
      * Compares and prints overlapping free time between two Timetables.
      *
@@ -114,15 +152,6 @@ public class Timetable {
         }
     }
 
-    public void printTasksOfTheDay(String day) {
-        String capitalizedDay = day.substring(0, 1).toUpperCase() + day.substring(1);
-        if (weeklyTasks.get(capitalizedDay).isEmpty()) {
-            System.out.println("NO TASK FOR " + day);
-            return;
-        }
-        System.out.println(capitalizedDay + ":");
-        for (Task task : weeklyTasks.get(capitalizedDay)) {
-            System.out.println(task.toString());
-        }
-    }
+
+
 }

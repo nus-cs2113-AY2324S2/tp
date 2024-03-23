@@ -29,11 +29,12 @@ public class InputValidator {
     public static void validateAddTaskInput(String input) throws InvalidFormatException {
         // Define the regex pattern for the expected format with case-insensitive flag
         String regex = "(?i)^addtask\\s+/on\\s+(\\w+)\\s+/task\\s+(.+?)\\s" +
-                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})$";
+                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})(\\s+/type\\s+[fc])$";
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addTask format. " +
-                    "Expected format: addTask /on [day] /task [description] /from [start time] /to [start time]");
+                    "Expected format: addTask /on [day] /task [description] /from [start time] /to [end time] " +
+                    "/type [f/c]");
         }
     }
 
@@ -131,6 +132,44 @@ public class InputValidator {
     public static void validateTableExistence(Timetable table) throws NullPointerException {
         if (table == null) {
             throw new NullPointerException("Timetable object is null.");
+        }
+    }
+
+    public static void validateChangeTaskTiming(String input) throws InvalidFormatException{
+        String prefix = "(?i)^changeTaskTiming\\s+/on\\s+";
+        String dayPattern = "(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
+        String indexPattern = "\\d+";
+        String startPattern = "\\d{1,2}:\\d{2}";
+        String endPattern = "\\d{1,2}:\\d{2}";
+        String suffix = "$";
+        String regex = prefix + dayPattern + "\\s+/index\\s+" + indexPattern + "\\s+/from\\s+" + startPattern + "\\s+/to\\s+" + endPattern + suffix;
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid changeTaskTiming format. " +
+                    "Expected format: changeTaskTiming /on [day] /index [index] /from [new start time] /to [new end time]");
+        }
+    }
+
+    public static void validateAddTaskForAll(String input) throws InvalidFormatException {
+        String regex = "(?i)^addforall\\s+/on\\s+(\\w+)\\s+/task\\s+(.+?)\\s" +
+                "+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})$";
+
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid addTask format. " +
+                    "Expected format: addforall /on [day] /task [description] /from [start time] /to [end time] " +
+                    "/type [f/c]");
+        }
+    }
+
+    public static void validateChangeTaskType(String input) throws InvalidFormatException {
+        String prefix = "(?i)^changeTaskType\\s+/on\\s+";
+        String dayPattern = "(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
+        String indexPattern = "\\d+";
+        String typePattern = "[fc]"; // Assuming task types can be 'f' for flexible and 'c' for compulsory
+        String suffix = "$";
+        String regex = prefix + dayPattern + "\\s+/index\\s+" + indexPattern + "\\s+/type\\s+" + typePattern + suffix;
+        if (!input.matches(regex)) {
+            throw new InvalidFormatException("[ERROR] Invalid changeTaskType format. " +
+                    "Expected format: changeTaskType /on [day] /index [index] /type [f/c]");
         }
     }
 }
