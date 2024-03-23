@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class Duke {
 
                 case "add":
                     Ui.printLine();
-                    Parser.addCommand(line, command, list);
+                    Parser.addCommand(line, list);
                     Ui.printLine();
                     break;
 
@@ -88,6 +89,8 @@ public class Duke {
                 Ui.printNoSuchElementException(exception);
             } catch (NumberFormatException exception) {
                 Ui.printNumberTooLargeException(exception);
+            } catch (DateTimeException exception){
+                Ui.printDateTimeExceptionError();
             }
         }
     }

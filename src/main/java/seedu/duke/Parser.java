@@ -1,5 +1,5 @@
 package seedu.duke;
-
+import java.time.LocalDate;
 public class Parser {
     /**
      * Checks if the string is a number
@@ -34,18 +34,25 @@ public class Parser {
      * Handles the case where the add command is given as input
      *
      * @param line Line that the user inputs into the chatbot
-     * @param command Command array of input string without spaces
      * @param list List of travel activities
      * @throws OmniException if command.length < 2
      */
-    public static void addCommand(String line, String[] command, TravelActivityList list) throws OmniException{
-        if (command.length >= 2) {
-            TravelActivity newActivity = new TravelActivity(line.substring(4));
+    public static void addCommand(String line, TravelActivityList list) throws OmniException{
+        String[] command = line.split("add | /date | /duration ");
+        if (command.length >= 4 && command[1].isEmpty()) {
+            throw new OmniException("The description of add cannot be empty!");
+        } else if(command.length >= 4 && command[2].isEmpty()){
+            throw new OmniException("The date cannot be empty!");
+        } else if (command.length >= 4 && command[3].isEmpty()){
+            throw new OmniException("The duration cannot be empty!");
+        } else if(command.length < 4) {
+            throw new OmniException("Please check that your add command is in this format: add DESCRIPTION " +
+                                    "/date YYYY-MM-DD /duration DURATION");
+        } else{
+            TravelActivity newActivity = new TravelActivity(command[1], LocalDate.parse(command[2]), command[3]);
             list.addTravelActivity(newActivity);
             System.out.println("I added a new travel activity");
             System.out.println(newActivity);
-        } else {
-            throw new OmniException("The description of add cannot be empty!");
         }
     }
 
