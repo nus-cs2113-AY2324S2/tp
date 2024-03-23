@@ -32,14 +32,7 @@ public class TopicList {
     }
 
     public int getSize() {
-        //System.out.println(topicList.size());
         return topicList.size();
-    }
-
-    public String getChosenTopic(int topicNum){
-        int topicIndex = topicNum - 1;
-        Topic topic = topicList.get(topicIndex);
-        return topic.topicName;
     }
 
 }
