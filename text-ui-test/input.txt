@@ -1,14 +1,26 @@
 add
-18/03/2024
-new task 1
+20/03/2024
+T
+new todo
 add
-17/03/2024
-task2
+20/03/2024
+E
+new event
+20/03/2024
+22/03/2024
+add
+20/03/2024
+D
+new deadline 1
+20/03/2024
+D
+new deadline 2
+20/03/2024
 update
-17/03/2024
+20/03/2024
 1
 qioncioqnc uion uioqen qwpc
 delete
-18/03/2024
-1
+20/03/2024
+4
 quit
