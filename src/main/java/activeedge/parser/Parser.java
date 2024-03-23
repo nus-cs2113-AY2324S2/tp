@@ -1,22 +1,12 @@
 package activeedge.parser;
 
-import command.HelpCommand;
-import command.LogWaterCommand;
-import command.LogMealCommand;
-import command.ListMealsCommand;
-import command.ListFullCommand;
-import command.ShowCaloriesCommand;
-import command.ViewWaterIntakeCommand;
-import command.ShowGoalsCommand;
-import command.AddGoalsCommand;
-import command.FindCommand;
-import command.DeleteTaskCommand;
-import command.ActiveEdgeException;
+import command.*;
 
 import activeedge.Storage;
 
 import static activeedge.task.TaskList.tasksList;
 import static activeedge.FoodData.foodItems;
+import static activeedge.ExerciseData.exercisesList;
 import activeedge.FoodData;
 
 public class Parser {
@@ -108,8 +98,21 @@ public class Parser {
             } else if(input.startsWith("delete")){
                 DeleteTaskCommand deleteCommand = new DeleteTaskCommand(input);
                 deleteCommand.execute();
+            } else if(input.startsWith("exercise")){
+                String[] logParts = input.substring(8).split("d/");
+                String exerciseName = logParts[0].trim();
+                int duration = Integer.parseInt(logParts[1]);
+                int caloriesBurnt = 0;
 
-            }else {
+                for (int i = 0; i < exercisesList.length; i++) {
+                    if (exercisesList[i][0].equals(exerciseName)) {
+                        caloriesBurnt = Integer.parseInt(foodItems[i][1]) * duration;
+                    }
+                }
+                LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt);
+                logExerciseCommand.execute();
+            }
+            else {
                 System.out.println("Unknown command.");
             }
             Storage.saveLogsToFile("data/data.txt");
