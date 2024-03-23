@@ -8,13 +8,14 @@ import longah.commands.add.AddCommand;
 import longah.commands.delete.DeleteCommand;
 import longah.commands.find.FindCommand;
 import longah.commands.list.ListCommand;
+import longah.commands.ResetCommand;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
 
 public class CommandParser {
     /**
      * Parses the command string and returns the corresponding command.
-     * 
+     *
      * @param commandString The command string.
      * @param taskExpression The task expression.
      * @return The corresponding command of type {@link Command}.
@@ -36,6 +37,8 @@ public class CommandParser {
             return new SettleCommand(commandString, taskExpression);
         case "exit":
             return new ExitCommand(commandString, taskExpression);
+        case "reset":
+            return new ResetCommand(commandString, taskExpression);
 
         case "edit":
             // Fallthrough
