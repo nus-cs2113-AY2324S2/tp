@@ -1,4 +1,4 @@
-# Developer Guide
+# Developer Guide - ActiveEdge
 
 ## Acknowledgements
 
@@ -12,18 +12,23 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+NUS Students
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+University students, overwhelmed by academic pressures, often find it challenging to balance exercise and nutrition. 
+A dedicated chatbot can ease their burden, providing daily guidance on workouts and diet. 
+By simplifying these decisions, the chatbot helps students stay fit amidst their demanding 
+schedules, fostering a healthier lifestyle.
+
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|new user|see usage instructions of the app|refer to them when I forget how to use the application|
+|v1.0|returning user|see my previous logs|see my daily logs and progress|
+|v2.0|user|log exercises|keep track of my physical activities|
 
 ## Non-Functional Requirements
 
