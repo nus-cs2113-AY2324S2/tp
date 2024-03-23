@@ -27,13 +27,13 @@ public class Ui {
      * Prints welcome message.
      */
     public void printWelcome() {
-        String logo =
-                "   _______ ______\n"
-                        + "  / ____(_)_  __/\n"
-                        + " / / __/ / / /   \n"
-                        + "/ /_/ / / / /    \n"
-                        + "\\____/_/ /_/     \n";
-        System.out.println("Hello from\n" + logo);
+//        String logo =
+//                "   _______ ______\n"
+//                        + "  / ____(_)_  __/\n"
+//                        + " / / __/ / / /   \n"
+//                        + "/ /_/ / / / /    \n"
+//                        + "\\____/_/ /_/     \n";
+        System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         printLine();
         String userName = in.nextLine();
