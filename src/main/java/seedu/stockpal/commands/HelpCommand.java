@@ -30,6 +30,13 @@ public class HelpCommand extends Command {
         printToScreenWithoutNewlineAtEnd(formattedText);
     }
 
+    /**
+     * Pads text with spaces until a specified length.
+     *
+     * @param text The text
+     * @param width The length of the text after adding padding
+     * @return The text padded with spaces until a specified length
+     */
     private String padUntilWidth(String text, int width) {
         String paddedText = text;
         int amountToPad = width - text.length();
@@ -39,6 +46,13 @@ public class HelpCommand extends Command {
         return paddedText;
     }
 
+    /**
+     * Formats the flag options and flag descriptions for display.
+     *
+     * @param flags List of flags for the command
+     * @param flagDescriptions List of description for the flags of the command
+     * @return
+     */
     private String formatCommandOptions(String[] flags, String[] flagDescriptions) {
         if (flags.length == 0) {
             return Messages.EMPTY_STRING;
@@ -55,6 +69,16 @@ public class HelpCommand extends Command {
         return commandOptions;
     }
 
+    /**
+     * Formats all details of the command.
+     *
+     * @param keyword Command keyword
+     * @param description Description of the command
+     * @param usage Format of the command
+     * @param flags List of flags that the command accepts
+     * @param flagDescriptions List of description for the flags of the command
+     * @return
+     */
     private String formatCommandDetails(String keyword, String description, String usage
             , String[] flags, String[] flagDescriptions) {
         String command = COMMAND_KEYWORD_PREFIX + keyword + LINE_SEPARATOR;
