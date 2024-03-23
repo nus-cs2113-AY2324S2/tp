@@ -83,4 +83,8 @@ public class CountdownTimer {
         stopwatch.cancel();
         stopwatch.purge();
     }
+
+    public boolean getRunningStatus() {
+        return isRunning.get();
+    }
 }
