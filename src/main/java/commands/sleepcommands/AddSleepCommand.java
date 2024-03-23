@@ -5,9 +5,20 @@ import exceptions.SleepException;
 import sleep.SleepCycle;
 import sleep.SleepTracker;
 
+/**
+ * Represents a command to add sleep cycles.
+ */
 public class AddSleepCommand implements Command {
     SleepTracker sleepTracker;
     SleepCycle sleepCycleToAdd;
+
+    /**
+     * Constructs a new AddSleepCommand object with user input.
+     *
+     * @param sleepTracker Class that contains information and functions to be executed required by Sleep Tracker
+     * @param sleepCommandArgs User input for the add sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     public AddSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
         if (sleepCommandArgs.isEmpty()) {
             throw new SleepException("Please use proper format: " + System.lineSeparator()
@@ -21,8 +32,10 @@ public class AddSleepCommand implements Command {
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours slept");
         }
+        assert !sleepCommandArgs.isEmpty() : "Sleep cycle should not be added";
         this.sleepCycleToAdd = new SleepCycle(hourSlept, userCommand[1].trim());
     }
+
     @Override
     public void execute() {
         sleepTracker.addSleepCycle(sleepCycleToAdd);
@@ -32,5 +45,4 @@ public class AddSleepCommand implements Command {
     public boolean isExit() {
         return false;
     }
-
 }

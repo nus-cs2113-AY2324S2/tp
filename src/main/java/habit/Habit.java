@@ -2,10 +2,18 @@ package habit;
 
 import exceptions.HabitException;
 
+/**
+ * Represents a Habit.
+ */
 public class Habit {
     private String description;
     private int habitCount;
 
+    /**
+     * Constructs a habit object with the habit description.
+     *
+     * @param description The habit description to be added.
+     */
     public Habit(String description) {
         this.description = description;
         this.habitCount = 0;
@@ -19,6 +27,13 @@ public class Habit {
         return habitCount;
     }
 
+    /**
+     * Updates the habit count of a habit.
+     *
+     * @param updatedCount The count to be added to the existing habit count.
+     * @return An integer type of the change in count to be added.
+     * @throws HabitException If the user tries to decrease a habit count to below zero, or use a non-numerical number.
+     */
     public int updateCount(String updatedCount) throws HabitException {
         int changeInCount = 0;
         try {

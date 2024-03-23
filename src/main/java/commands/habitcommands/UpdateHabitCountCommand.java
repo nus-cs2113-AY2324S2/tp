@@ -9,6 +9,13 @@ public class UpdateHabitCountCommand implements Command {
     private String habitID;
     private String updatedCount;
 
+    /**
+     * Constructs a UpdateHabitCountCommand object with user input.
+     *
+     * @param habitTracker The HabitTracker instance to be used for storing the habits.
+     * @param habitCommandArgs User input for the update habit count command.
+     * @throws HabitException If there are any formatting issues.
+     */
     public UpdateHabitCountCommand(HabitTracker habitTracker, String habitCommandArgs) throws HabitException {
         this.habitTracker = habitTracker;
 
@@ -23,10 +30,15 @@ public class UpdateHabitCountCommand implements Command {
         this.updatedCount = parts[2].trim();
     }
 
+    /**
+     * Execute the command to update the habit count of a habit.
+     */
+    @Override
     public void execute() throws HabitException {
         habitTracker.updateHabitCount(habitID, updatedCount);
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
