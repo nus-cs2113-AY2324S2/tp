@@ -25,4 +25,15 @@ public class Todo extends Task {
     public String getTaskType () {
         return "T";
     }
+
+    /**
+     * Method that creates the save format for a Todo task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the save format for this task.
+     */
+    @Override
+    public String getSaveFormat () {
+        return getTaskType() + "|" + getName();
+    }
 }

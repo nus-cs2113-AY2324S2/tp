@@ -17,6 +17,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter for by date of Deadline task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the by date.
+     */
+    @Override
+    public String getByDate() {
+        return byDate;
+    }
+
+    /**
      * Returns the task type of the specified task.
      * Override function of superclass Task.
      *
@@ -29,14 +40,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the name of the task that invokes this function.
-     * Override function of superclass Task.
+     * Method that creates the save format for a Deadline task.
+     * Overrides super dummy function.
      *
-     * @return Returns the string of the task's name, including the by date.
+     * @return The String representation of the save format for this task.
      */
     @Override
-    public String getName () {
-        return name + " (by: " + byDate + ")";
+    public String getSaveFormat () {
+        return getTaskType() + "|" + getName() + "|" + getByDate();
     }
-
 }

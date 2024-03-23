@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class TaskManagerTest {
-    public static List<Task> emptyTaskList = List.of();
     private TaskManager taskManager;
 
     @BeforeEach
@@ -30,14 +29,16 @@ class TaskManagerTest {
     }
 
     @Test
-    void addTask_validInput_addsTask() {
+    void addTodo_validInput_addsTask() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
+        String taskDescription = "Test Todo";
 
         // Act
         Task testTask = new Task(taskDescription);
-        addTask(date, taskDescription);
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, taskDescription, testTaskType, dummyTestDates);
         Task addedTask = taskManager.getTasksForDate(date).get(0);
 
         // Assert
@@ -45,12 +46,14 @@ class TaskManagerTest {
     }
 
     @Test
-    void updateTask_validInput_updatesTask() {
+    void updateTodo_validInput_updatesTask() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String initialTaskDescription = "Initial task";
-        String updatedTaskDescription = "Updated task";
-        addTask(date, initialTaskDescription);
+        String initialTaskDescription = "Initial todo";
+        String updatedTaskDescription = "Updated todo";
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, initialTaskDescription, testTaskType, dummyTestDates);
 
         // Act
         updateTask(date, 0, updatedTaskDescription);
@@ -60,11 +63,13 @@ class TaskManagerTest {
     }
 
     @Test
-    void getTasksForDate_validDate_returnsTasks() {
+    void getTasksForDate_validDate_returnsTasks() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
-        addTask(date, taskDescription);
+        String taskDescription = "Test todo task";
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, taskDescription, testTaskType, dummyTestDates);
 
         // Act
         List<Task> tasksForDate = taskManager.getTasksForDate(date);
@@ -75,18 +80,18 @@ class TaskManagerTest {
     }
 
     @Test
-    void addTasksFromFile_validInput_addsTasks() {
+    void addTodoFromFile_validInput_addsTasks() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
         Map<LocalDate, List<Task>> tasksFromFile = new HashMap<>();
-        String taskDescription = "Test task";
-        Task testTask = new Task(taskDescription);
-        tasksFromFile.put(date, List.of(testTask));
+        String taskDescription = "Test todo task";
+        Task testTodoTask = new Todo(taskDescription);
+        tasksFromFile.put(date, List.of(testTodoTask));
 
         // Act
         taskManager.addTasksFromFile(tasksFromFile);
 
         // Assert
-        assertEquals(testTask.getName() ,taskManager.getTasksForDate(date).get(0).getName());
+        assertEquals(testTodoTask.getName() ,taskManager.getTasksForDate(date).get(0).getName());
     }
 }
