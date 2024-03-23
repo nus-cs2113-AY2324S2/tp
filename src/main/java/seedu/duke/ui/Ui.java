@@ -61,9 +61,9 @@ public class Ui {
                 String moduleCode = (module != null) ? module.getModuleCode() : "";
                 String moduleGrade = (module != null && module.getModuleGrade() != null) ? module.getModuleGrade() : "";
 
-                System.out.printf("|%-8s %-2s", moduleCode, moduleGrade);
+                System.out.printf(" %-8s %-2s", moduleCode, moduleGrade);
             }
-            System.out.println("|");
+            System.out.println(" ");
         }
     }
 
