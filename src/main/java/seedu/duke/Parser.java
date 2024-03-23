@@ -23,9 +23,6 @@ public class Parser {
         switch (command) {
         case "bye":
             throw new EndProgramException();
-        case "exit":
-            GroupCommand.exitGroup();
-            break;
         case "help":
             // Help code here
             Help.printHelp();
@@ -35,6 +32,9 @@ public class Parser {
             break;
         case "member":
             GroupCommand.addMember(argument);
+            break;
+        case "exit":
+            GroupCommand.exitGroup();
             break;
         case "expense":
             try {
