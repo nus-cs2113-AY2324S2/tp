@@ -63,6 +63,7 @@ public class GradeChecker {
         if (totalMCs != 0) {
             cumulativeGPA = totalGrade / totalMCs;
         }
+        assert cumulativeGPA >= 0.00 : "The cumulative GPA should be non-negative.";
         plan.append("Total GPA: ").append(cumulativeGPA).append(System.lineSeparator()).append(System.lineSeparator());
 
         return plan.toString();
@@ -113,6 +114,7 @@ public class GradeChecker {
         if (yearMCs != 0) {
             yearGPA = yearGrade / yearMCs;
         }
+        assert yearGPA >= 0.00 : "The GPA for the given academic year should be non-negative.";
 
         plan.append("Year ").append(year).append(" GPA: ").append(yearGPA).append(System.lineSeparator())
                 .append(System.lineSeparator());
@@ -142,6 +144,8 @@ public class GradeChecker {
         if (termMCs != 0) {
             termGPA = termGrade / termMCs;
         }
+        assert termGPA >= 0.00 : "The GPA of the semester should be non-negative.";
+
         plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
                 .append("-----------------------------").append(System.lineSeparator());
 
