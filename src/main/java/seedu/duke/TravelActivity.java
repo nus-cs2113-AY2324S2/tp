@@ -1,19 +1,28 @@
 package seedu.duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class TravelActivity {
     /** Travel activity description */
     private String travelActivity;
+    /** Travel activity date */
+    private LocalDate date;
+    /** Travel activity duration */
+    private String duration;
     /** Travel activity status */
     private boolean activityIsDone = false;
     /** Travel activity tag */
     private String tag;
-    public TravelActivity(String line){
-        travelActivity = line;
+    public TravelActivity(String description, LocalDate date, String duration){
+        travelActivity = description;
+        this.date = date;
+        this.duration = duration;
     }
 
     @Override
     public String toString(){
-        return travelActivity;
+        return travelActivity + " :" + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :" + duration;
     }
 
     /**
