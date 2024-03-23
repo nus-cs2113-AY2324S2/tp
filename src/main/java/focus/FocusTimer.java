@@ -32,7 +32,7 @@ public class FocusTimer {
         }
     }
 
-    public boolean getStatus() {
+    public boolean getStartStatus() {
         if (timerMode) {
             return countdownTimer.getRunningStatus();
         } else {

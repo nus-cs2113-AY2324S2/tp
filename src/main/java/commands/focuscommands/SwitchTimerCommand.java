@@ -14,7 +14,7 @@ public class SwitchTimerCommand implements Command {
 
     @Override
     public void execute() throws FocusException {
-        if (focusTimer.getStatus()) {
+        if (focusTimer.getStartStatus()) {
             throw new FocusException("Unable to change as timer is running");
         }
         focusTimer.switchTimer();

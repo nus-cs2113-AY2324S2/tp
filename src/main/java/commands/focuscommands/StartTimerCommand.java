@@ -26,7 +26,7 @@ public class StartTimerCommand implements Command {
      */
     @Override
     public void execute() throws FocusException {
-        if (focusTimer.getStatus()) {
+        if (focusTimer.getStartStatus()) {
             throw new FocusException("Error! Clock has already started.");
         }
         focusTimer.setStartTiming();

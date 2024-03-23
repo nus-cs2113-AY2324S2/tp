@@ -11,9 +11,13 @@ public class SetPauseCommand implements Command {
         this.focusTimer = timer;
     }
 
+    public boolean timerStartedAndNotPaused() {
+        return (focusTimer.getPausedStatus() || !focusTimer.getStartStatus());
+    }
+
     @Override
     public void execute() throws FocusException {
-        if (focusTimer.getPausedStatus() || !focusTimer.getStatus()) {
+        if (timerStartedAndNotPaused()) {
             throw new FocusException("Timer is already paused or Timer hasn't started.");
         }
         focusTimer.setPauseTiming();
