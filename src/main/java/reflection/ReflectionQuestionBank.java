@@ -8,8 +8,7 @@ import java.util.ArrayList;
 /**
  * Represents a bank of reflection questions.
  */
-public class ReflectionQuestionBank {
-    private ArrayList<ReflectionQuestion> reflectionQuestionList;
+public class ReflectionQuestionBank extends ReflectionList{
     private final String[] questions = {
         "What have been the most significant lessons you've learned about yourself in the past year?",
         "How have your values evolved over time, and why?",
@@ -66,7 +65,7 @@ public class ReflectionQuestionBank {
      * Constructs a ReflectionQuestionBank and initializes the list of reflection questions.
      */
     public ReflectionQuestionBank() {
-        this.reflectionQuestionList = new ArrayList<>();
+        super();
         setUpReflectionBank();
     }
 
@@ -81,17 +80,6 @@ public class ReflectionQuestionBank {
     }
 
     /**
-     * Adds a reflection question to the bank.
-     *
-     * @param question The reflection question to add.
-     */
-    public void addReflectionQuestion(ReflectionQuestion question) {
-        if (!question.toString().isBlank()) {
-            reflectionQuestionList.add(question);
-        }
-    }
-
-    /**
      * Retrieves five random reflection questions from the bank.
      *
      * @return An ArrayList containing five random reflection questions.
@@ -102,7 +90,7 @@ public class ReflectionQuestionBank {
             ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
 
             // Create a copy of the original list
-            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionQuestionList);
+            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionList);
 
             // Shuffle the copy list
             Collections.shuffle(copyList);
@@ -119,24 +107,5 @@ public class ReflectionQuestionBank {
         } catch (IndexOutOfBoundsException e) {
             throw new ReflectException("Question bank is empty");
         }
-
-    }
-
-    /**
-     * Retrieves the size of the reflection question bank.
-     *
-     * @return The size of the reflection question bank.
-     */
-    public int getTaskListSize() {
-        return reflectionQuestionList.size();
-    }
-
-    /**
-     * Retrieves the list of reflection questions.
-     *
-     * @return The list of reflection questions.
-     */
-    public ArrayList<ReflectionQuestion> getQuestionsList() {
-        return reflectionQuestionList;
     }
 }

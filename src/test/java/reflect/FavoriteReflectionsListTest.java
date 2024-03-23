@@ -22,16 +22,16 @@ public class FavoriteReflectionsListTest {
     public void addReflectionQuestion_addQuestion_success() {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         favoriteReflectionList.addReflectionQuestion(question);
-        assertEquals(1, favoriteReflectionList.getFavouritesList().size());
-        assertTrue(favoriteReflectionList.getFavouritesList().contains(question));
+        assertEquals(1, favoriteReflectionList.getReflectionList().size());
+        assertTrue(favoriteReflectionList.getReflectionList().contains(question));
     }
 
     @Test
     public void addReflectionQuestion_addBlankQuestion_skipOverBlankQuestion() {
         ReflectionQuestion question = new ReflectionQuestion("");
         favoriteReflectionList.addReflectionQuestion(question);
-        assertEquals(0, favoriteReflectionList.getFavouritesList().size());
-        assertFalse(favoriteReflectionList.getFavouritesList().contains(question));
+        assertEquals(0, favoriteReflectionList.getReflectionList().size());
+        assertFalse(favoriteReflectionList.getReflectionList().contains(question));
     }
 
     @Test

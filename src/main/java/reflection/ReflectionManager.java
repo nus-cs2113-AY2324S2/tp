@@ -13,8 +13,7 @@ public class ReflectionManager {
     private ArrayList<ReflectionQuestion> fiveRandomQuestions;
     private ReflectionQuestionBank questionBank;
     private FavoriteReflectionsList favoriteReflectionsList;
-
-    private final String favouriteQuestionsFilePath = "data/favourites.txt";
+    private final String FAVOURITE_QUESTIONS_FILE_PATH = "data/favourites.txt";
 
     /**
      * Constructs a ReflectionManager and initializes question bank and favorite reflections list.
@@ -23,7 +22,7 @@ public class ReflectionManager {
         this.questionBank = new ReflectionQuestionBank();
 
         this.favoriteReflectionsList = new FavoriteReflectionsList();
-        ArrayList<String> favouritesList = Storage.loadDataFromFile(favouriteQuestionsFilePath);
+        ArrayList<String> favouritesList = Storage.loadDataFromFile(FAVOURITE_QUESTIONS_FILE_PATH);
         for (String fav : favouritesList) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(fav);
             this.favoriteReflectionsList.addReflectionQuestion(reflectionQuestion);
@@ -53,7 +52,7 @@ public class ReflectionManager {
             ReflectionQuestion questionToSave = fiveRandomQuestions.get(reflectionId - 1);
 
             favoriteReflectionsList.addReflectionQuestion(questionToSave);
-            Storage.saveTasksToFile(favouriteQuestionsFilePath, favoriteReflectionsList.getFavouritesList());
+            Storage.saveTasksToFile(FAVOURITE_QUESTIONS_FILE_PATH, favoriteReflectionsList.getReflectionList());
 
             Ui.printMessageWithSepNewLine("Got it. Added reflection question to favourites:\n" + questionToSave);
 
@@ -70,10 +69,10 @@ public class ReflectionManager {
      * Prints the list of favorite reflection questions.
      */
     public void printFavourites() {
-        if(favoriteReflectionsList.getFavouritesList().isEmpty()) {
+        if(favoriteReflectionsList.getReflectionList().isEmpty()) {
             Ui.printMessageWithSepNewLine("No reflection questions saved to favourites");
         } else {
-            Ui.printList(favoriteReflectionsList.getFavouritesList(), "Favourites list:");
+            Ui.printList(favoriteReflectionsList.getReflectionList(), "Favourites list:");
         }
     }
 

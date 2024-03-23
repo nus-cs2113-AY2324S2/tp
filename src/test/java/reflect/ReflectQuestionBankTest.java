@@ -25,14 +25,14 @@ public class ReflectQuestionBankTest {
     public void addReflectionQuestion_addQuestion_success() {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         reflectionQuestionBank.addReflectionQuestion(question);
-        assertEquals(42, reflectionQuestionBank.getTaskListSize());
+        assertEquals(42, reflectionQuestionBank.getSize());
     }
 
     @Test
     public void addReflectionQuestion_addBlankQuestion_skipOverBlankQuestion() {
         ReflectionQuestion question = new ReflectionQuestion("");
         reflectionQuestionBank.addReflectionQuestion(question);
-        assertEquals(41, reflectionQuestionBank.getTaskListSize());
+        assertEquals(41, reflectionQuestionBank.getSize());
     }
 
     @Test
@@ -73,6 +73,6 @@ public class ReflectQuestionBankTest {
 
     @Test
     public void testGetTaskListSize() {
-        assertEquals(41, reflectionQuestionBank.getTaskListSize());
+        assertEquals(41, reflectionQuestionBank.getSize());
     }
 }
