@@ -2,6 +2,7 @@ package parser;
 
 import commands.Command;
 import commands.habitcommands.AddHabitCommand;
+import commands.habitcommands.DeleteHabitCommand;
 import commands.habitcommands.ListHabitsCommand;
 import commands.habitcommands.UpdateHabitCountCommand;
 import exceptions.HabitException;
@@ -34,6 +35,8 @@ public class HabitCommandParser {
             return new ListHabitsCommand(habitTracker);
         case "update":
             return new UpdateHabitCountCommand(habitTracker, habitCommandArgs);
+        case "delete":
+            return new DeleteHabitCommand(habitTracker, habitCommandArgs);
         default:
             throw new HabitException("Unknown command");
         }
