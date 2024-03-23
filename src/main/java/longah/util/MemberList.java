@@ -3,6 +3,7 @@ package longah.util;
 import java.util.ArrayList;
 
 import longah.node.Member;
+import longah.node.Transaction;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
 
@@ -97,8 +98,25 @@ public class MemberList {
     }
 
     /**
+     * Changes the name of the member at the specified index.
+     * 
+     * @param expression The expression containing the index and new name.
+     * @throws LongAhException If the index is invalid.
+     */
+    public void editMemberName(String expression) throws LongAhException {
+        try {
+            String[] indexNameSplice = expression.split(" ", 2);
+            int index = Integer.parseInt(indexNameSplice[0]) - 1;
+            String name = indexNameSplice[1];
+            members.get(index).setName(name);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+        }
+    }
+
+    /**
      * Prints the list of members in the group.
-     * throws LongAhException If there are no members in the group.
+     * @throws LongAhException If there are no members in the group.
      */
     public String listMembers() throws LongAhException {
         if (members.isEmpty()) {
@@ -110,6 +128,28 @@ public class MemberList {
         }
         return output;
     }
+
+    /**
+     * Updates the balances of the members in the group based on the transactions.
+     * 
+     * @param transactions The list of transactions to update the balances with.
+     * @throws LongAhException If there are no members in the group.
+     */
+    public void updateMembersBalance(TransactionList transactions) throws LongAhException {
+        clearBalances();
+        if (transactions.getTransactions().isEmpty()) {
+            return;
+        }
+        for (Transaction transaction : transactions.getTransactions()) {
+            for (Subtransaction subtransaction : transaction.getSubtransactions()) {
+                Member lender = subtransaction.getLender();
+                Member borrower = subtransaction.getBorrower();
+                double amount = subtransaction.getAmount();
+                lender.addToBalance(amount);
+                borrower.subtractFromBalance(amount);
+            }
+        }
+    } 
 
     /**
      * Groups members into two lists: positive balances and negative balances.

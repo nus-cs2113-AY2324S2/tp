@@ -45,7 +45,7 @@ public enum ExceptionMessage {
     INVALID_RESET_COMMAND ("Invalid command format." +
             " Use 'reset password'"),
     INVALID_EDIT_COMMAND("Invalid command format." +
-            " Use 'edit INDEX NEW_TRANSACTION'"),
+            " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'"),
     INVALID_EXIT_COMMAND ("Invalid command format." +
             " Use 'exit'");
 
