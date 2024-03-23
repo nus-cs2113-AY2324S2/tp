@@ -4,6 +4,7 @@ import commands.Command;
 import exceptions.SleepException;
 import sleep.SleepCycle;
 import sleep.SleepTracker;
+import ui.Ui;
 
 /**
  * Represents a command to add sleep cycles.
@@ -20,11 +21,17 @@ public class AddSleepCommand implements Command {
      * @throws SleepException if there is any formatting issues.
      */
     public AddSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
-        if (sleepCommandArgs.isEmpty()) {
+        String[] userCommand = sleepCommandArgs.trim().split("/date", 2);
+        if (userCommand.length != 2) {
             throw new SleepException("Please use proper format: " + System.lineSeparator()
-                + "sleep add <hoursSlept> /date <date>");
+                    + "sleep add <hoursSlept> /date <date>");
         }
-        String[] userCommand = sleepCommandArgs.trim().split("/date");
+        if (userCommand[1].isBlank()) {
+            throw new SleepException("Key in non-empty date");
+        }
+        if (userCommand[0].isBlank()) {
+            throw new SleepException("Key in non-empty number of hours slept");
+        }
         this.sleepTracker = sleepTracker;
         double hourSlept;
         try {
