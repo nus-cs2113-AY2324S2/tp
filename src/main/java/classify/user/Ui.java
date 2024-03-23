@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 //@@author Cryolian
 public class Ui {
+    public static final String TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS = "Total classes " +
+            "attended across all subjects: ";
     private static final String EMPTY_SUBJECT_ERROR = "No subjects and grades found for this student.";
     private static final String NULL_ATTRIBUTE_ERROR = "No attributes found for this student.";
     private static final String EDIT_PROMPT = "How would you like to update a student's subject? (enter blank to exit)";
@@ -268,5 +270,14 @@ public class Ui {
 
     public static void printNoDeleteFound() {
         System.out.println(NO_RECENT_DELETES);
+    }
+
+    //@@ author tayponghee
+    public static void printTotalClassesAttended(int classes) {
+        System.out.println(TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS + classes);
+    }
+
+    public static void println (String text) {
+        System.out.println(text);
     }
 }

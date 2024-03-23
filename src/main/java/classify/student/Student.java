@@ -14,12 +14,21 @@ public class Student {
 
     //@@author tayponghee
     private StudentAttributes attributes;
+    private int totalClassesAttended;
 
     //@@author Cryolian
-
     public Student(String name) {
         this.name = name;
         this.attributes = new StudentAttributes(this);
+    }
+
+    //@@ author tayponghee
+    public int getTotalClassesAttended() {
+        return totalClassesAttended;
+    }
+
+    public void setTotalClassesAttended(int totalClassesAttended) {
+        this.totalClassesAttended = totalClassesAttended;
     }
 
     public void setLastPaymentDate(LocalDate lastPaymenDate) {
