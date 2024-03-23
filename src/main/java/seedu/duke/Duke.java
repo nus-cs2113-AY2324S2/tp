@@ -1,4 +1,5 @@
 package seedu.duke;
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -8,9 +9,9 @@ public class Duke {
     public static void main(String[] args) {
         Ui.printGreeting();
         boolean userSaysBye = false;
-        //FileSave file = new FileSave("omni.txt");
+        FileSave file = new FileSave("omni.txt");
         TravelActivityList list = new TravelActivityList();
-        //FileSave.readFile(list);
+        file.readFile(list);
         String line;
         Scanner in = new Scanner(System.in);
         while (!userSaysBye) {
@@ -90,6 +91,7 @@ public class Duke {
                     System.out.println("This is not a valid command");
                     Ui.printLine();
                 }
+                file.saveActivityList(list);
             } catch (OmniException exception){
                 Ui.printException(exception);
             } catch (NoSuchElementException exception){
@@ -98,6 +100,8 @@ public class Duke {
                 Ui.printNumberTooLargeException(exception);
             } catch (DateTimeException exception){
                 Ui.printDateTimeExceptionError();
+            } catch (IOException exception){
+                Ui.printSavingError();
             }
         }
     }
