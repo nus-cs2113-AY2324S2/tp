@@ -9,7 +9,9 @@ import seedu.stockpal.commands.DeleteCommand;
 import seedu.stockpal.commands.InflowCommand;
 import seedu.stockpal.commands.OutflowCommand;
 import seedu.stockpal.commands.FindCommand;
+import seedu.stockpal.commands.HistoryCommand;
 import seedu.stockpal.commands.Command;
+
 
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -44,12 +46,15 @@ public class Parser {
 
     public static final Pattern  FIND_COMMAND_PATTERN = Pattern.compile("find ([^\\t\\n\\r\\f]{1,50})");
 
+    public static final Pattern HISTORY_COMMAND_PATTERN = Pattern.compile("history (\\d+)");
+
     public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 4;
     public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 5;
     public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 1;
     public static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 2;
     public static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 2;
     public static final int NUM_OF_FIND_COMMAND_ARGUMENTS = 1;
+    public static final int NUM_OF_HISTORY_COMMAND_ARGUMENTS = 1;
     public static final int START_INDEX = 0;
     private static final Double EMPTY_PRICE = -0.1;
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -102,6 +107,11 @@ public class Parser {
             parsed = matchAndParseCommand(input, FIND_COMMAND_PATTERN, NUM_OF_FIND_COMMAND_ARGUMENTS);
             assert(parsed.get(0) != null);
             return validateAndCreateFindCommand(parsed);
+
+        case HistoryCommand.COMMAND_KEYWORD:
+            parsed = matchAndParseCommand(input, HISTORY_COMMAND_PATTERN, NUM_OF_HISTORY_COMMAND_ARGUMENTS);
+            assert(parsed.get(0) != null);
+            return validateAndCreateHistoryCommand(parsed);
 
         default:
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INVALID_COMMAND);
@@ -192,6 +202,17 @@ public class Parser {
     private FindCommand validateAndCreateFindCommand(ArrayList<String> parsed) {
         String name = parsed.get(0);
         return new FindCommand(name);
+    }
+
+    private HistoryCommand validateAndCreateHistoryCommand(ArrayList<String> parsed)
+            throws UnsignedIntegerExceededException {
+        try {
+            Integer pid = Integer.parseInt(parsed.get(0));
+            return new HistoryCommand(pid);
+        } catch (NumberFormatException nfe) {
+            LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
+            throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
+        }
     }
 
     private static String getCommandFromInput(String input) {

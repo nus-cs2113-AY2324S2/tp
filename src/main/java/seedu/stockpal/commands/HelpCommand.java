@@ -32,7 +32,7 @@ public class HelpCommand extends Command {
         String formattedText = HORIZONTAL_LINE + LINE_SEPARATOR
                 + newCommandUsage() + editCommandUsage() + deleteCommandUsage()
                 + inflowCommandUsage() + outflowCommandUsage() + findCommandUsage()
-                + listCommandUsage() + exitCommandUsage() + helpCommandUsage();
+                + listCommandUsage() + exitCommandUsage() + helpCommandUsage() + historyCommandUsage();
         printToScreenWithoutNewlineAtEnd(formattedText);
         logger.log(Level.INFO, Messages.LOG_PRINT_HELP_PAGE);
     }
@@ -148,5 +148,9 @@ public class HelpCommand extends Command {
     private String helpCommandUsage() {
         return formatCommandDetails(HelpCommand.COMMAND_KEYWORD, HelpCommand.COMMAND_DESCRIPTION
                 , HelpCommand.COMMAND_USAGE, HelpCommand.COMMAND_FLAGS, HelpCommand.COMMAND_FLAG_DESCRIPTIONS);
+    }
+    private String historyCommandUsage() {
+        return formatCommandDetails(HistoryCommand.COMMAND_KEYWORD, HistoryCommand.COMMAND_DESCRIPTION
+                , HistoryCommand.COMMAND_USAGE, HistoryCommand.COMMAND_FLAGS, HistoryCommand.COMMAND_FLAG_DESCRIPTIONS);
     }
 }
