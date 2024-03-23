@@ -2,21 +2,26 @@ package bookmarked.command;
 
 import bookmarked.Book;
 import bookmarked.exceptions.emptyListException;
+import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BorrowCommand extends Command {
-    String bookName;
-    ArrayList<Book> listOfBooks;
-    public BorrowCommand(String[] commandParts, ArrayList<Book> listOfBooks) {
+    private String bookName;
+    private ArrayList<Book> listOfBooks;
+    private File bookDataFile;
+
+    public BorrowCommand(String[] commandParts, ArrayList<Book> listOfBooks, File bookDataFile) {
         assert commandParts != null : "commandParts should not be null";
         assert commandParts.length > 1 : "commandParts should contain at least two elements";
         this.bookName = String.join(" ", List.of(commandParts).subList(1, commandParts.length));
         assert listOfBooks != null : "listOfBooks should not be null";
         this.listOfBooks = listOfBooks;
+        this.bookDataFile = bookDataFile;
     }
 
     @Override
@@ -27,6 +32,7 @@ public class BorrowCommand extends Command {
                 .collect(Collectors.toList());
         try {
             runBorrowCommand(foundBooks);
+            BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
         } catch (emptyListException e) {
             Ui.printEmptyListMessage();
         }

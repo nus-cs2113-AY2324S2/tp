@@ -22,6 +22,6 @@ public class BookMarked {
         Scanner in = new Scanner(System.in);
         String newItem = in.nextLine();
 
-        Parser.runCommand(newItem, in, listOfBooks);
+        Parser.runCommand(newItem, in, listOfBooks, bookDataFile);
     }
 }
