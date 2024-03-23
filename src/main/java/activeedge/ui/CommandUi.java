@@ -8,7 +8,7 @@ import activeedge.task.LogMeals;
 
 public class CommandUi {
 
-    final static String LINE = "____________________________________________________________\n";
+    static final String LINE = "____________________________________________________________\n";
 
 
     public static void printMealList() {

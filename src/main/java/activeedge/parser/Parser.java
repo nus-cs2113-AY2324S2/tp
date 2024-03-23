@@ -1,5 +1,17 @@
 package activeedge.parser;
-import command.*;
+
+import command.HelpCommand;
+import command.LogWaterCommand;
+import command.LogMealCommand;
+import command.ListMealsCommand;
+import command.ListFullCommand;
+import command.ShowCaloriesCommand;
+import command.ViewWaterIntakeCommand;
+import command.ShowGoalsCommand;
+import command.AddGoalsCommand;
+import command.FindCommand;
+import command.DeleteTaskCommand;
+import command.ActiveEdgeException;
 
 import activeedge.Storage;
 
@@ -49,11 +61,6 @@ public class Parser {
                     }
                 } else {
                     System.out.println("There are no items in your list!");
-                    if (input.trim().length() > 4) { //list meals
-                        new ListMealsCommand();
-                    } else { //list both
-
-                    }
                 }
             } else if (input.startsWith("show")) { //show calories, water, and goals
                 String[] parts = input.split(" ");
@@ -96,10 +103,8 @@ public class Parser {
                     System.out.println("Invalid goal amount. " +
                             "Please provide a valid integer.");
                 }
-
             } else if(input.startsWith("find")) {
                 new FindCommand(input);
-
             } else if(input.startsWith("delete")){
                 DeleteTaskCommand deleteCommand = new DeleteTaskCommand(input);
                 deleteCommand.execute();
