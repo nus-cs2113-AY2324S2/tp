@@ -37,6 +37,9 @@ public class InputParsing {
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+    private static final String SORT_BY_CHOOSE_INDEX = "Sort by: (Choose index)";
+    private static final String NAME_A_TO_Z = "1. Name (A to Z)";
+    private static final String TOTAL_NUMBER_OF_CLASSES_ATTENDED = "2. Total number of classes attended:";
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList,
                                         ArrayList<Student> recentlyDeletedList, Scanner in) {
@@ -117,9 +120,9 @@ public class InputParsing {
      */
     private static void sortStudents(ArrayList<Student> masterStudentList, Scanner in) {
         while (true) {
-            System.out.println("Sort by: (Choose index)");
-            Ui.println("1. Name (A to Z)");
-            Ui.println("2. Total number of classes attended:");
+            Ui.println(SORT_BY_CHOOSE_INDEX);
+            Ui.println(NAME_A_TO_Z);
+            Ui.println(TOTAL_NUMBER_OF_CLASSES_ATTENDED);
             String input = in.nextLine().trim();
 
             if (input.equalsIgnoreCase(EXIT)) {
