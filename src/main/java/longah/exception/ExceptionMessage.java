@@ -42,6 +42,8 @@ public enum ExceptionMessage {
             " Use 'delete transaction INDEX'"),
     INVALID_CLEAR_COMMAND ("Invalid command format." +
             " Use 'clear'"),
+    INVALID_EDIT_COMMAND("Invalid command format." +
+            " Use 'edit INDEX NEW_TRANSACTION'"),
     INVALID_EXIT_COMMAND ("Invalid command format." +
             " Use 'exit'");
 
