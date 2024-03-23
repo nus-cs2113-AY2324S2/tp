@@ -1,4 +1,4 @@
-add Go Paris /date 2019-12-05 /duration 2hours
+ Go Paris /date 2019-12-05 /duration 2hours
 list
 add Go home /date 2018-12-06 /duration 3hours
 list
