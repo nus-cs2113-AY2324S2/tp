@@ -27,4 +27,8 @@ public class LongAhException extends Exception {
     public static void printException(LongAhException e) {
         System.out.println(e.getMessage());
     }
+
+    public static boolean isMessage(LongAhException e, ExceptionMessage message) {
+        return e.getMessage().equals(message.getMessage());
+    }
 }

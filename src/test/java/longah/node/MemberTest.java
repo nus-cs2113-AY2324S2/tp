@@ -1,12 +1,13 @@
 package longah.node;
 
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.ExceptionMessage;
 
 public class MemberTest {
     /** 
@@ -43,8 +44,8 @@ public class MemberTest {
             new Member("Alice123-");
             fail();
         } catch (Exception e) {
-            String expectedString = ExceptionMessage.INVALID_MEMBER_NAME.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage((LongAhException) e, ExceptionMessage.INVALID_MEMBER_NAME);
+            assertTrue(isMessage);
         }
     }
 

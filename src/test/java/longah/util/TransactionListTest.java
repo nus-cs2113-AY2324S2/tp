@@ -49,8 +49,8 @@ public class TransactionListTest {
             transactionList.remove(parts[1]);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -64,8 +64,8 @@ public class TransactionListTest {
             transactionList.listTransactions();
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.NO_TRANSACTION_FOUND);
+            assertTrue(isMessage);
         }
     }
     
@@ -115,8 +115,8 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+            assertTrue(isMessage);
         }
     }
 
@@ -170,8 +170,8 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+            assertTrue(isMessage);
         }
     }
 
@@ -246,8 +246,8 @@ public class TransactionListTest {
             transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -268,8 +268,8 @@ public class TransactionListTest {
             transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.MEMBER_NOT_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.MEMBER_NOT_FOUND);
+            assertTrue(isMessage);
         }
     }
 

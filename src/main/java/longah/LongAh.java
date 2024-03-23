@@ -53,9 +53,9 @@ public class LongAh {
             } catch (LongAhException e) {
                 LongAhException.printException(e);
                 // Log only critical errors
-                if (e.getMessage().equals(ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage()) ||
-                        e.getMessage().equals(ExceptionMessage.NO_DEBTS_FOUND.getMessage()) || 
-                        e.getMessage().equals(ExceptionMessage.NO_TRANSACTION_FOUND.getMessage())) {
+                if (LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP) ||
+                        LongAhException.isMessage(e, ExceptionMessage.NO_DEBTS_FOUND) ||
+                        LongAhException.isMessage(e, ExceptionMessage.NO_TRANSACTION_FOUND)) {
                     Logging.logWarning("The previous user command caused an error. " +
                             "Check the returned error message for details");
                 }

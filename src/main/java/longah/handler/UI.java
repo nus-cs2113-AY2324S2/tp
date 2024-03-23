@@ -1,4 +1,5 @@
 package longah.handler;
+
 import java.util.Scanner;
 
 /**
@@ -38,6 +39,9 @@ public class UI {
      * @return The user input as a String.
      */
     public static String getUserInput() {
+        if (!scanner.hasNextLine()) {
+            return null;
+        }
         return scanner.nextLine().trim();
     }
 

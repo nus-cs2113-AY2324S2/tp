@@ -2,14 +2,13 @@ package longah.node;
 
 import longah.util.MemberList;
 import longah.util.TransactionList;
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.LongAhException;
-import longah.exception.ExceptionMessage;
 
 public class TransactionTest {
     /**

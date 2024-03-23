@@ -2,10 +2,11 @@ package longah.util;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 public class MemberListTest {
     /**
@@ -62,8 +63,8 @@ public class MemberListTest {
             memberList.listMembers();
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_MEMBERS_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.NO_MEMBERS_FOUND);
+            assertTrue(isMessage);
         }
     }
 
@@ -171,8 +172,8 @@ public class MemberListTest {
             memberList.editMemberName("2 Bob");
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -187,8 +188,8 @@ public class MemberListTest {
             memberList.editMemberName("Bob");
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 }
