@@ -1,7 +1,7 @@
 package command;
 
 import activeedge.ui.CommandUi;
-import activeedge.task.LogMeals;
+import activeedge.task.MealTask;
 
 import static activeedge.task.TaskList.tasksList;
 
@@ -17,7 +17,7 @@ public class LogMealCommand {
     }
 
     public void execute() throws ActiveEdgeException {
-        LogMeals logMeal = new LogMeals(description, servings, mealCalories);
+        MealTask logMeal = new MealTask(description, servings, mealCalories);
         tasksList.add(logMeal);
         CommandUi.printMealLogMessage(logMeal);
     }

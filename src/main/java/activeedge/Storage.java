@@ -1,7 +1,7 @@
 package activeedge;
 
 import activeedge.task.GoalTask;
-import activeedge.task.LogMeals;
+import activeedge.task.MealTask;
 import activeedge.task.TaskList;
 import activeedge.userdetails.LogHeight;
 import activeedge.userdetails.LogWeight;
@@ -134,7 +134,7 @@ public class Storage {
                         for (int i = 1; i <= len - 3; i++) {
                             mealName = mealName + items[i];
                         }
-                        LogMeals newTask = new LogMeals(mealName,
+                        MealTask newTask = new MealTask(mealName,
                                 Integer.parseInt(items[len - 2]),
                                 Integer.parseInt(items[len - 1]));
                         TaskList.tasksList.add(newTask);
