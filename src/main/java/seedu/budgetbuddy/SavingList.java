@@ -59,26 +59,27 @@ public class SavingList {
                 if (filterCategory == null || saving.getCategory().equalsIgnoreCase(filterCategory)) {
                     System.out.print(i + 1 + " | ");
                     System.out.print("Category: " + saving.getCategory() + " | ");
-                    System.out.println("Amount: $" + saving.getAmount() + " | ");
+                    System.out.println("Amount: $" + String.format("%.2f", saving.getAmount()) + " | ");
                 }
             }
             System.out.println("------------------------------------------------------------------------");
-            System.out.println("Initial Savings Amount: $" + initialAmount);
+            System.out.println("Initial Savings Amount: $" + String.format("%.2f", initialAmount));
             System.out.println("Expenses Deducted: ");
 
             double totalExpenses = 0;
             for (Expense expense : expenseList.getExpenses()) {
                 totalExpenses += expense.getAmount();
-                System.out.println("$" + expense.getAmount() + " spent on " + expense.getDescription() +
+                System.out.println("$" + String.format("%.2f", expense.getAmount()) + " spent on " + expense.getDescription() +
                         " on " + expense.getDateAdded());
             }
             System.out.println("------------------------------------------------------------------------");
 
             double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
             if (remainingAmount < 0) {
-                System.out.println("You are currently short on savings by: $" + remainingAmount);
+                System.out.println("You are currently short on savings by: $" + String.format("%.2f", remainingAmount));
             } else {
-                System.out.println("Remaining Amount: $" + remainingAmount);
+                System.out.println("Remaining Amount: $" + String.format("%.2f", remainingAmount));
+
             }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An error occurred while listing savings", e);
