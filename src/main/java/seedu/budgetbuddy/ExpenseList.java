@@ -76,7 +76,7 @@ public class ExpenseList {
                 }
             }
             System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("Total Expenses: $" + calculateTotalExpenses());
+            System.out.println("Overall Total Expenses: $" + calculateTotalExpenses());
 
             // Assertion: Check if total expenses calculation is correct
             double totalExpenses = calculateTotalExpenses();

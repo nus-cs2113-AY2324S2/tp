@@ -59,7 +59,7 @@ public class SavingList {
                 if (filterCategory == null || saving.getCategory().equalsIgnoreCase(filterCategory)) {
                     System.out.print(i + 1 + " | ");
                     System.out.print("Category: " + saving.getCategory() + " | ");
-                    System.out.print("Amount: $" + saving.getAmount() + " | ");
+                    System.out.println("Amount: $" + saving.getAmount() + " | ");
                 }
             }
             System.out.println("------------------------------------------------------------------------");

@@ -57,7 +57,7 @@ public class Ui {
             break;
         case 3:
             System.out.println("View Expenses");
-            System.out.println("list expense [CATEGORY]");
+            System.out.println("list expenses [CATEGORY]");
             break;
         case 4:
             System.out.println("View Savings");
