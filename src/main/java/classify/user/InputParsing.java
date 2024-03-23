@@ -394,6 +394,7 @@ public class InputParsing {
 
         if (foundStudent != null) {
             logger.log(Level.INFO, "Viewing student details: " + name);
+            Ui.printDivider();
             Ui.printStudentDetails();
             Ui.printStudentName(name);
             Ui.printStudentDetails(foundStudent);
@@ -851,7 +852,7 @@ public class InputParsing {
     protected static LocalDate parseDateFromString(String string) {
 
         if (string.isBlank()) {
-            logger.log(Level.INFO, "Storing today as the last payment date.");
+            logger.log(Level.INFO, "Storing today as the last payment date." + '\n');
             return LocalDate.now();
         }
 
@@ -869,7 +870,7 @@ public class InputParsing {
     }
 
     private static LocalDate invalidDatePath() {
-        logger.log(Level.WARNING, "Invalid date format entered.");
+        logger.log(Level.WARNING, "Invalid date format entered." + '\n');
         Ui.printInvalidDateError();
         return LocalDate.now().plusDays(2);
     }
