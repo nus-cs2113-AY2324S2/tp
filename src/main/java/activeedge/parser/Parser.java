@@ -106,7 +106,7 @@ public class Parser {
 
                 for (int i = 0; i < exercisesList.length; i++) {
                     if (exercisesList[i][0].equals(exerciseName)) {
-                        caloriesBurnt = Integer.parseInt(foodItems[i][1]) * duration;
+                        caloriesBurnt = Integer.parseInt(exercisesList[i][1]) * duration;
                     }
                 }
                 LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt);

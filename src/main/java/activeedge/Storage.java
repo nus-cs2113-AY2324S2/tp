@@ -1,14 +1,11 @@
 package activeedge;
 
-import activeedge.task.GoalTask;
-import activeedge.task.MealTask;
-import activeedge.task.TaskList;
+import activeedge.task.*;
 import activeedge.userdetails.LogHeight;
 import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
-import activeedge.task.WaterTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -90,7 +87,7 @@ public class Storage {
             System.out.print("\n");
             int i = 0;
             int j = 0;
-            System.out.println("Welcome new user! PLease input your height and weight in whole numbers!");
+            System.out.println("Welcome new user! Please input your height and weight in whole numbers!");
             try {
                 while(j<1) {
                     System.out.println("Please input your height (in cm): ");
@@ -154,14 +151,23 @@ public class Storage {
                         String[] items = task.trim().split(" ");
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
                         UserDetailsList.detailsList.add(newWeight);
-                    } 
+                    } else if (task.startsWith("Exercise")){
+                        String[] items = task.trim().split(" ");
+                        int len = items.length;
+                        assert len >= 4;
+                        String exerciseName = "";
+                        for (int i = 1; i <= len - 3; i++) {
+                            exerciseName = exerciseName + items[i];
+                        }
+                        ExerciseTask newTask = new ExerciseTask(exerciseName,
+                                Integer.parseInt(items[len - 2]),
+                                Integer.parseInt(items[len - 1]));
+                        TaskList.tasksList.add(newTask);
+                    }
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Error: " + e.getMessage());
             }
-
         }
-
     }
-
 }
