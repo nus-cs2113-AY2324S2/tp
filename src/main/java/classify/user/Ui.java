@@ -17,11 +17,11 @@ public class Ui {
     private static final String STUDENT_GENDER_MESSAGE = "Gender: ";
     private static final String STUDENT_PAYMENT_MESSAGE = "Last Payment Date: ";
     private static final String STUDENT_REMARKS_MESSAGE = "Remarks: ";
-    private static final String SAME_NAME_ERROR = "Student with the same name already exists." + 
+    private static final String SAME_NAME_ERROR = "Student with the same name already exists. " + 
             "Please enter a different name.";
     private static final String EMPTY_NAME_ERROR = "Student name cannot be empty. Please enter a valid name.";
     private static final String GENDER_PROMPT = "Please input the student's gender: ";
-    private static final String PAYMENT_PROMPT = "Please input their last payment date in the format of YYYY-MM-DD." +
+    private static final String PAYMENT_PROMPT = "Please input their last payment date in the format of YYYY-MM-DD. " +
             "Enter blank to input today's date.";
     private static final String REMARKS_PROMPT = "Please input any remarks: ";
     private static final String INVALID_DATE_ERROR = "Please input a valid date in the format YYYY-MM-DD"
@@ -149,16 +149,22 @@ public class Ui {
     }
 
     public static void printStudentDetails(Student student) {
-        System.out.println(STUDENT_PHONE_MESSAGE + student.getAttributes().getPhoneNumber());
-        System.out.println(STUDENT_GENDER_MESSAGE + student.getAttributes().getGender());
-        System.out.println(STUDENT_PAYMENT_MESSAGE + student.getAttributes().getLastPaymentDate());
-        System.out.println(STUDENT_REMARKS_MESSAGE + student.getAttributes().getRemarks());
+        System.out.println(STUDENT_PHONE_MESSAGE + student.getAttributes().getPhoneNumber() + "\n");
+        System.out.println(STUDENT_GENDER_MESSAGE + student.getAttributes().getGender() + "\n");
+        System.out.println(STUDENT_PAYMENT_MESSAGE + student.getAttributes().getLastPaymentDate() + "\n");
+        System.out.println(STUDENT_REMARKS_MESSAGE + student.getAttributes().getRemarks() + "\n");
     }
 
     public static void printStudentName(String name) {
-        System.out.println(STUDENT_NAME_MESSAGE + name);
+        System.out.println(STUDENT_NAME_MESSAGE + name + "\n");
     }
 
+    //@@author Cryolian
+    public static void printStudentName(Student student) {
+        System.out.println(STUDENT_NAME_MESSAGE + student.getName() + "\n");
+    }
+
+    //@@author blackmirag3
     public static void printClassesAttendedPrompt() {
         System.out.println(CLASSES_ATTENDED_PROMPT);
     }
