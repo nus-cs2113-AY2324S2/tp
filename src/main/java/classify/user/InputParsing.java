@@ -3,15 +3,16 @@ package classify.user;
 import classify.datacommands.DataHandler;
 import classify.student.Student;
 import classify.student.StudentAttributes;
-
-import classify.student.StudentComparators;
 import classify.student.StudentList;
+import classify.student.StudentSorter;
 import classify.student.SubjectGrade;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
 
+import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,18 +32,11 @@ public class InputParsing {
     private static final String HELP = "help";
     private static final String SORT = "sort";
     private static final String VIEW_SUBJECT = "view_subject";
-    private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
-            "No students in the list, can't sort by name!";
     private static final String ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK =
             "Enter the subject name (type 'exit' to go back):";
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
-    private static final String Sort_BY = "Sort by:\n1. Name " +
-            "\n2. Total Classes Attended\n(Type 'exit' to leave the command)";
-    private static final String INVALID_CHOICE = "Invalid choice!";
-    private static final String INVALID_INPUT = "Invalid input. " +
-            "Please enter a valid choice or type 'exit' to leave the command.";
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList,
                                         ArrayList<Student> recentlyDeletedList, Scanner in) {
@@ -55,6 +49,7 @@ public class InputParsing {
         case ADD:
             addStudent(masterStudentList, in, userCommand[1]);
             // @@author ParthGandhiNUS
+            assert masterStudentList != null;
             DataHandler.writeStudentInfo(masterStudentList);
             // @@author tayponghee
             break;
@@ -101,19 +96,7 @@ public class InputParsing {
 
         //@@ author tayponghee
         case SORT:
-            boolean validChoice = false;
-            while (!validChoice) {
-                System.out.println(Sort_BY);
-                String input = in.nextLine().trim();
-
-                if (input.equalsIgnoreCase(EXIT)) {
-                    System.out.println(EXITED_THE_COMMAND);
-                    Ui.printDivider();
-                    return;
-                }
-
-                validChoice = isValidChoice(masterStudentList, input, validChoice);
-            }
+            sortStudents(masterStudentList, in);
             break;
 
         case VIEW_SUBJECT:
@@ -126,44 +109,32 @@ public class InputParsing {
         }
     }
 
-    private static boolean isValidChoice(ArrayList<Student> masterStudentList, String input, boolean validChoice) {
-        try {
-            int choice = Integer.parseInt(input);
-            switch (choice) {
-            case 1:
-                listStudentsByName(masterStudentList);
-                validChoice = true;
-                break;
+    /**
+     * Sorts the list of students based on user input.
+     *
+     * @param masterStudentList The list of students to be sorted.
+     * @param in                The Scanner object to read user input.
+     */
+    private static void sortStudents(ArrayList<Student> masterStudentList, Scanner in) {
+        while (true) {
+            System.out.println("Sort by: ");
+            Ui.println("1. Name (A to Z)");
+            Ui.println("2. Total number of classes attended:");
+            String input = in.nextLine().trim();
 
-            case 2:
-                listStudentsByTotalClasses(masterStudentList);
-                validChoice = true;
-                break;
-
-            default:
-                Ui.println(INVALID_CHOICE);
+            if (input.equalsIgnoreCase(EXIT)) {
+                System.out.println(EXITED_THE_COMMAND);
+                Ui.printDivider();
+                return;
             }
-        } catch (NumberFormatException e) {
-            Ui.println(INVALID_INPUT);
-        }
-        return validChoice;
-    }
 
-    private static void listStudentsByTotalClasses(ArrayList<Student> masterStudentList) {
-        for (Student student : masterStudentList) {
-            int totalClassesAttended = 0;
-            StudentAttributes attributes = student.getAttributes();
-            List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
-            for (SubjectGrade subjectGrade : subjectGrades) {
-                totalClassesAttended += subjectGrade.getClassesAttended();
+            if (StudentSorter.isValidChoice(input)) {
+                StudentSorter.sortByChoice(masterStudentList, input, in);
+                Ui.println(EXITED_THE_COMMAND);
+                break;
+            } else {
+                Ui.println(StudentSorter.INVALID_CHOICE);
             }
-            student.setTotalClassesAttended(totalClassesAttended);
-        }
-
-        masterStudentList.sort(Comparator.comparingInt(Student::getTotalClassesAttended));
-
-        for (Student student : masterStudentList) {
-            System.out.println(student.getName() + " - Total Classes Attended: " + student.getTotalClassesAttended());
         }
     }
 
@@ -234,21 +205,6 @@ public class InputParsing {
         }
 
         Ui.printDivider();
-    }
-
-    /**
-     * Lists students in the provided list by name in ascending order.
-     * If the list is empty, it prints a message indicating that there are no students in the list.
-     *
-     * @param students The list of students to be listed by name.
-     */
-    public static void listStudentsByName(ArrayList<Student> students) {
-        if (students.isEmpty()) {
-            System.out.println(NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME);
-            return;
-        }
-        Collections.sort(students, StudentComparators.nameComparator);
-        listStudents(students);
     }
 
     // @@author blackmirag3
@@ -470,7 +426,7 @@ public class InputParsing {
      */
     private static int getTotalClassesAttended(Student student) {
         int totalClassesAttended = 0;
-        for (SubjectGrade subjectGrade : student.getAttributes().getSubjectGrades()) {
+        for (classify.student.SubjectGrade subjectGrade : student.getAttributes().getSubjectGrades()) {
             totalClassesAttended += subjectGrade.getClassesAttended();
         }
         return totalClassesAttended;
