@@ -3,6 +3,7 @@ package seedu.lifetrack;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.lifetrack.ui.LiquidListUI.WHITESPACE;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -38,7 +39,8 @@ public class LiquidListTest {
         LiquidList liquidList = new LiquidList();
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "\t Your liquid list is empty." + lineSeparator;
+        String expectedOutput = WHITESPACE + "Your liquid list is empty." + lineSeparator
+                + WHITESPACE + "Populate your list with more entries :)" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -51,9 +53,9 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Milo v/200");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Beverage has been successfully added" + lineSeparator +
-                "\t Liquid List:" + lineSeparator +
-                "\t 1. Beverage: Milo, Volume: 200" + lineSeparator;
+        String expectedOutput = WHITESPACE+ "Beverage has been successfully added" + lineSeparator +
+                WHITESPACE+ "Your liquid List:" + lineSeparator +
+                WHITESPACE + "1. Beverage: Milo, Volume: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -68,13 +70,13 @@ public class LiquidListTest {
         liquidList.addEntry("liquids in b/Juice v/150");
         liquidList.printLiquidList();
         System.setOut(System.out);
-        String expectedOutput = "Beverage has been successfully added" + lineSeparator +
-                "Beverage has been successfully added" + lineSeparator +
-                "Beverage has been successfully added" + lineSeparator +
-                "\t Liquid List:" + lineSeparator +
-                "\t 1. Beverage: Milo, Volume: 200" + lineSeparator +
-                "\t 2. Beverage: Water, Volume: 300" + lineSeparator +
-                "\t 3. Beverage: Juice, Volume: 150" + lineSeparator;
+        String expectedOutput = WHITESPACE + "Beverage has been successfully added" + lineSeparator +
+                WHITESPACE + "Beverage has been successfully added" + lineSeparator +
+                WHITESPACE + "Beverage has been successfully added" + lineSeparator +
+                WHITESPACE + "Your liquid List:" + lineSeparator +
+                WHITESPACE + "1. Beverage: Milo, Volume: 200" + lineSeparator +
+                WHITESPACE + "2. Beverage: Water, Volume: 300" + lineSeparator +
+                WHITESPACE + "3. Beverage: Juice, Volume: 150" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, liquidList.getSize());
     }
