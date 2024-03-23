@@ -85,12 +85,32 @@ public class Group {
     }
 
     /**
+     * Checks if a user with the given name is a member of the group.
+     *
+     * @param memberName The name of the member to check.
+     * @return true if the user is a member of the group, false otherwise.
+     */
+    public boolean isMember(String memberName) {
+        for (User member : members) {
+            if (member.getName().equals(memberName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a new member to the group.
      *
      * @param memberName The name of the member to add.
-     * @return The newly added user.
+     * @return The newly added user, or null if the user is already a member of the group.
      */
     public User addMember(String memberName) {
+        if (isMember(memberName)) {
+            System.out.println(memberName + " is already a member of " + groupName + ".");
+            return null;
+        }
+
         User newMember = new User(memberName);
         members.add(newMember);
         System.out.println(memberName + " has been added to " + groupName + ".");
