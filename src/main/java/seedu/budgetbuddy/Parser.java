@@ -260,6 +260,26 @@ public class Parser {
         return false;
     }
 
+    public Command handleChangeCurrencyCommand(String input, SavingList savingList, ExpenseList expenseList, CurrencyConverter currencyConverter) {
+        if (input.startsWith("change currency")) {
+            String[] parts = input.split(" ");
+            if (parts.length == 3) {
+                String currencyCode = parts[2];
+                try {
+                    Currency newCurrency = Currency.getInstance(currencyCode.toUpperCase());
+                    System.out.println("Default currency changed to " + newCurrency);
+                    return new ChangeCurrencyCommand(newCurrency, savingList, expenseList, currencyConverter);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid currency code.");
+                }
+            } else {
+                System.out.println("Invalid command format. Use 'change currency <currency_code>'.");
+            }
+        }
+        return null;
+    }
+
+
     /**
      * Processes all menu commands and returns the corresponding Command object.
      * This method interprets the user's input and displays either the entire menu
