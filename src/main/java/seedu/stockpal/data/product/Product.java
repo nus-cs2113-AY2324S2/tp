@@ -60,6 +60,11 @@ public class Product {
         return this.pid.equals(pid);
     }
 
+    /**
+     * Increase quantity of the product and throw exception if overflow detected
+     *
+     * @param amountToChange Quantity to increase by
+     */
     public void increaseQuantity(Integer amountToChange) {
         try {
             quantity.updateIncreaseQuantity(amountToChange);
@@ -70,6 +75,11 @@ public class Product {
 
     }
 
+    /**
+     * Decrease quantity of the product and throw exception when outflow > current amount
+     *
+     * @param amountToChange Quantity to decrease by
+     */
     public void decreaseQuantity(Integer amountToChange) {
         try {
             quantity.updateDecreaseQuantity(amountToChange);

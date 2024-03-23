@@ -72,11 +72,23 @@ public class ProductList {
         products.set(productIndex, updatedProduct);
     }
 
+    /**
+     * Increases the quantity of the product with a specific PID
+     *
+     * @param productIndex Product PID to update
+     * @param amountToIncrease Quantity of product to decrease
+     */
     public void increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.increaseQuantity(amountToIncrease);
     }
 
+    /**
+     * Decreases the quantity of the product with a specific PID
+     *
+     * @param productIndex Product PID to update
+     * @param amountToDecrease Quantity of product to decrease
+     */
     public void decreaseAmount(int productIndex, Integer amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.decreaseQuantity(amountToDecrease);
@@ -127,6 +139,11 @@ public class ProductList {
         return currProduct.toSave();
     }
 
+    /**
+     * Checks if product is low in quantity
+     * If low, then prints out before the program exits
+     * Else, if no low quantity products at all, print out "No product with low quantity"
+     */
     public void printLowQuantityProducts () {
         boolean hasLowQuantity = false;
 
@@ -137,6 +154,7 @@ public class ProductList {
                 Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
                         productQuantity);
                 Ui.printToScreen(HORIZONTAL_LINE);
+                hasLowQuantity = true;
             }
         }
 
