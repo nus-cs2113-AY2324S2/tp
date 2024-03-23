@@ -11,8 +11,6 @@ import seedu.stockpal.commands.OutflowCommand;
 import seedu.stockpal.commands.FindCommand;
 import seedu.stockpal.commands.Command;
 
-
-
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
 import seedu.stockpal.exceptions.UnsignedIntegerExceededException;
@@ -30,16 +28,16 @@ import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_FORMAT;
 public class Parser {
     public static final String DIVIDER = " ";
     public static final Pattern NEW_COMMAND_PATTERN =
-            Pattern.compile("new n/([^\\t\\n\\r\\f]{1,50})" +
+            Pattern.compile("new n/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]{1,50})" +
                     " q/(\\d+)" +
                     "(?: p/(\\d+\\.\\d{2}))?" +
-                    "(?: d/([^\\t\\n\\r\\f]+))?");
+                    "(?: d/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+))?");
     public static final Pattern EDIT_COMMAND_PATTERN =
             Pattern.compile("edit (\\d+)" +
-                    "(?: n/([^\\t\\n\\r\\f]{1,50}))?" +
+                    "(?: n/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]{1,50}))?" +
                     "(?: q/(\\d+))?" +
                     "(?: p/(\\d+\\.\\d{2}))?" +
-                    "(?: d/([^\\t\\n\\r\\f]+))?");
+                    "(?: d/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+))?");
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
@@ -81,7 +79,6 @@ public class Parser {
         case EditCommand.COMMAND_KEYWORD:
             parsed = matchAndParseCommand(input, EDIT_COMMAND_PATTERN, NUM_OF_EDIT_COMMAND_ARGUMENTS);
             assert(parsed.get(0) != null);
-            assert(parsed.get(1) != null);
             return validateAndCreateEditCommand(parsed);
 
         case DeleteCommand.COMMAND_KEYWORD:
