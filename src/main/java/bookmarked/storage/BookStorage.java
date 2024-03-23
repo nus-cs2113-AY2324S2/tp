@@ -2,6 +2,7 @@ package bookmarked.storage;
 
 import bookmarked.Book;
 
+import java.lang.reflect.Array;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.io.File;
@@ -13,18 +14,9 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 
 public class BookStorage {
-    private String bookDataPath;
-    private String dataDirectory;
-
-    private ArrayList<Book> listOfBooks;
-
-    public BookStorage(String bookDataPath, String dataDirectory) {
-        this.bookDataPath = bookDataPath;
-        this.dataDirectory = dataDirectory;
-    }
-
-    public File createFile() {
-        File bookDataFile = new File(this.bookDataPath);
+    public static ArrayList<Book> listOfBooks = new ArrayList<>();
+    public static File createFile(String bookDataPath) {
+        File bookDataFile = new File(bookDataPath);
         try {
             boolean isFileCreated = bookDataFile.createNewFile();
 
@@ -39,14 +31,14 @@ public class BookStorage {
         return bookDataFile;
     }
 
-    public ArrayList<Book> readFileStorage (File bookDataFile) {
+    public static ArrayList<Book> readFileStorage (File bookDataFile) {
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(bookDataFile));
             String currentTextLine = fileReader.readLine();
             int bookCount = 0;
 
             while (currentTextLine != null) {
-                addToArrayList(currentTextLine, bookCount);
+                addToArrayList(currentTextLine, bookCount, listOfBooks);
                 bookCount += 1;
                 currentTextLine = fileReader.readLine();
             }
@@ -58,17 +50,40 @@ public class BookStorage {
             System.out.println("Access to file is interrupted");
         }
 
-        return this.listOfBooks;
+        return listOfBooks;
     }
 
-    private void addToArrayList(String currentTextLine, int bookCount) {
+    public static void writeBookToTxt(File bookDataFile, ArrayList<Book> listOfBooks) {
+        try {
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(bookDataFile, false));
+            int bookCount = listOfBooks.size();
+            for (int i = 0; i < bookCount; i += 1) {
+                writeFormattedString(i, fileWriter, listOfBooks);
+            }
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND!!!");
+        } catch (IOException e) {
+            System.out.println("Failed to write to file");
+        }
+    }
+
+    private static void writeFormattedString(int bookIndex, BufferedWriter fileWriter, ArrayList<Book> listOfBooks)
+            throws IOException {
+        Book currentBook = listOfBooks.get(bookIndex);
+        String bookTitle = currentBook.getName();
+        String bookBorrowStatus = currentBook.getBorrowedStatus().equals(", borrowed") ? "True" : "False";
+        fileWriter.write(bookTitle + " | " + bookBorrowStatus);
+    }
+
+    private static void addToArrayList(String currentTextLine, int bookCount, ArrayList<Book> listOfBooks) {
         String[] splitTextLine;
         splitTextLine = currentTextLine.split("//|");
-        this.listOfBooks.add(new Book(splitTextLine[0]));
+        listOfBooks.add(new Book(splitTextLine[0]));
 
         // Update borrow status in array list
         if (splitTextLine[1].equalsIgnoreCase("Yes")) {
-            Book currentBook = this.listOfBooks.get(bookCount);
+            Book currentBook = listOfBooks.get(bookCount);
             currentBook.setBorrowed();
         }
     }
