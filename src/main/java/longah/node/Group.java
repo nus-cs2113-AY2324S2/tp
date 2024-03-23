@@ -18,16 +18,36 @@ public class Group {
     private MemberList members;
     private TransactionList transactions;
     private StorageHandler storage;
+    private String groupName;
     private ArrayList<Subtransaction> transactionSolution = new ArrayList<>();
 
     /**
      * Constructs a new Group instance with an empty member list and transaction list.
      */
-    public Group() throws LongAhException {
+    public Group(String groupName) throws LongAhException {
+        this.groupName = groupName;
         this.members = new MemberList();
         this.transactions = new TransactionList();
-        this.storage = new StorageHandler(this.members, this.transactions);
+        this.storage = new StorageHandler(this.members, this.transactions, this.groupName);
         updateTransactionSolution();
+    }
+
+    /**
+     * Sets the name of the group.
+     * 
+     * @param groupName The name of the group
+     */
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    /**
+     * Returns the name of the group.
+     * 
+     * @return The name of the group
+     */
+    public String getGroupName() {
+        return this.groupName;
     }
 
     /**
@@ -72,6 +92,7 @@ public class Group {
      * @throws LongAhException If the transaction solution cannot be updated
      */
     public void updateTransactionSolution() throws LongAhException {
+        this.members.updateMembersBalance(this.transactions);
         this.transactionSolution = this.members.solveTransactions();
         logger.log(Level.INFO, "Transaction solution updated");
     }
@@ -146,6 +167,12 @@ public class Group {
         return solution;
     }
 
+    /**
+     * Returns the list of members in the group.
+     * 
+     * @return The list of members in the group
+     * @throws LongAhException If there are no members in the group
+     */
     public String listIndivDebt(String name) throws LongAhException {
         double balance = members.getMemberBalance(name);
         if (balance == 0) {

@@ -22,25 +22,7 @@ public class Transaction {
      * @throws LongAhException If the user input is in an invalid format or value.
      */
     public Transaction(String userInput, MemberList memberList) throws LongAhException {
-        // User input format: [Lender] p/[Borrower1] a/[amount1] p/[Borrower2] a/[amount2] ...
-        String[] splitInput = userInput.split("p/");
-        if (splitInput.length < 2 || splitInput[0].isEmpty()) {
-            // Minimum of 2 people as part of a transaction
-            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
-        }
-        assert splitInput.length >= 2 : "Invalid transaction.";
-
-        String lenderName = splitInput[0].trim();
-        // Exception is thrown if the person owed does not exist in the group
-        this.lender = memberList.getMember(lenderName);
-        double totalSumLent = 0.0;
-
-        for (int i = 1; i < splitInput.length; i++) {
-            String borrowNameAmount = splitInput[i].trim();
-            totalSumLent += addBorrower(borrowNameAmount, memberList);
-        }
-        this.lender.addToBalance(totalSumLent);
-        updateBorrowerBalances();
+        parseTransaction(userInput, memberList);
     }
 
     /**
@@ -68,15 +50,32 @@ public class Transaction {
         this.subtransactions = subtransactions;
     }
 
+    public void parseTransaction(String expression, MemberList members) throws LongAhException {
+        // User input format: [Lender] p/[Borrower1] a/[amount1] p/[Borrower2] a/[amount2] ...
+        String[] splitInput = expression.split("p/");
+        if (splitInput.length < 2 || splitInput[0].isEmpty()) {
+            // Minimum of 2 people as part of a transaction
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
+        }
+        assert splitInput.length >= 2 : "Invalid transaction.";
+
+        // Check for existence of all parties involved in the transaction in the group.
+        String lenderName = splitInput[0].trim();
+        this.lender = members.getMember(lenderName);
+        for (int i = 1; i < splitInput.length; i++) {
+            String borrowNameAmount = splitInput[i].trim();
+            addBorrower(borrowNameAmount, members);
+        }
+    }
+
     /**
-     * Adds a borrower to the subtransaction and returns the amount borrowed.
+     * Adds a borrower to the subtransaction list.
      * 
      * @param expression The expression containing the borrower and amount borrowed.
      * @param memberList The list of members in the group.
-     * @return The amount owed by the borrower.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public Double addBorrower(String expression, MemberList memberList) throws LongAhException {
+    public void addBorrower(String expression, MemberList memberList) throws LongAhException {
         String[] splitBorrower = expression.split("a/");
         if (splitBorrower.length != 2) {
             // Each person owing should have an amount specified
@@ -100,18 +99,6 @@ public class Transaction {
         assert amountBorrowed > 0 : "Amount owed should be positive.";
         Subtransaction subtransaction = new Subtransaction(this.lender, borrower, amountBorrowed);
         this.subtransactions.add(subtransaction);
-        return amountBorrowed;
-    }
-
-    /**
-     * Updates the balances of all borrowers involved in the transaction.
-     */
-    public void updateBorrowerBalances() throws LongAhException {
-        for (Subtransaction subtransaction : this.subtransactions) {
-            Member member = subtransaction.getBorrower();
-            double amount = subtransaction.getAmount();
-            member.subtractFromBalance(amount);
-        }
     }
 
     /**
@@ -196,17 +183,12 @@ public class Transaction {
     }
 
     /**
-     * Recalculate the balances of the lender and borrowers involved in the transaction.
-     *
-     * @throws LongAhException
+     * Returns the list of subtransactions in the transaction.
+     * 
+     * @return The list of subtransactions in the transaction.
      */
-    public void recalculateBalances() throws LongAhException{
-        for (Subtransaction subtransaction : subtransactions) {
-            Member lender = this.lender;
-            lender.subtractFromBalance(subtransaction.getAmount());
-            Member borrower = subtransaction.getBorrower();
-            borrower.addToBalance(subtransaction.getAmount());
-        }
+    public ArrayList<Subtransaction> getSubtransactions() {
+        return this.subtransactions;
     }
 
     /**
@@ -217,35 +199,7 @@ public class Transaction {
      * @throws LongAhException If the transaction index is invalid or if the edit input is in an invalid format.
      */
     public void editTransaction(String expression, MemberList memberList) throws LongAhException {
-        // Reset the balances of all members involved in the transaction
-        this.lender.resetBalance();
-        for (Subtransaction subtransaction : this.subtransactions) {
-            subtransaction.getBorrower().resetBalance();
-        }
-        // Clear the existing subtransactions
         subtransactions.clear();
-
-        // Parse the new transaction details
-        String[] splitInput = expression.split("p/");
-        if (splitInput.length < 2 || splitInput[0].isEmpty()) {
-            throw new LongAhException(ExceptionMessage.INVALID_EDIT_COMMAND);
-        }
-
-        String lenderName = splitInput[0].trim();
-        this.lender = memberList.getMember(lenderName);
-        double totalSumLent = 0.0;
-
-        for (int i = 1; i < splitInput.length; i++) {
-            String nameValue = splitInput[i].trim();
-            totalSumLent += addBorrower(nameValue, memberList);
-        }
-
-        // Replace the lender's balance with the new total sum lent
-        this.lender.addToBalance(totalSumLent);
-
-        // Update the borrowers' balances
-        updateBorrowerBalances();
-        assert this.lender.getBalance() == totalSumLent : "Lender's balance not updated correctly";
+        parseTransaction(expression, memberList);
     }
-
 }

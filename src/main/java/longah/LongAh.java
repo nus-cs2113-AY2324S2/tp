@@ -51,7 +51,7 @@ public class LongAh {
 
         try {
             LongAhLogger.log(Level.INFO, "Loading previous member and transaction info.");
-            group = new Group();
+            group = new Group("group"); // Give a temporary name for now
             pinHandler = new PINHandler();
         } catch (LongAhException e) {
             LongAhLogger.log(Level.WARNING, "Loading process fails! Unable to create file or " +
@@ -72,7 +72,7 @@ public class LongAh {
 
                 // Check will not be reached if exception is thrown
                 if (c.isExit()) {
-                    return;
+                    System.exit(0);
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);

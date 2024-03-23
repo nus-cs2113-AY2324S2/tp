@@ -219,8 +219,8 @@ public class TransactionListTest {
 
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            String[] parts = "edit 1 Alice p/Bob a/10".split(" ", 2);
-            transactionList.editTransactionList(parts, memberList);
+            String command = "1 Alice p/Bob a/10";
+            transactionList.editTransactionList(command, memberList);
             assertEquals(1, transactionList.getTransactionListSize());
             String expectedString = "1.\nLender: Alice\nBorrower 1: Bob Owed amount: 10.00\n";
             assertEquals(expectedString.trim(), transactionList.listTransactions().trim());
@@ -242,8 +242,8 @@ public class TransactionListTest {
 
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            String[] parts = "edit -1 Alice p/Bob a/10".split(" ", 2);
-            transactionList.editTransactionList(parts, memberList);
+            String command = "-1 Alice p/Bob a/10";
+            transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
@@ -264,8 +264,8 @@ public class TransactionListTest {
 
             transactionList.addTransaction("Alice p/Bob a/5", memberList);
             assertEquals(1, transactionList.getTransactionListSize());
-            String[] parts = "edit 1 Alice p/Charlie a/10".split(" ", 2);
-            transactionList.editTransactionList(parts, memberList);
+            String command = "1 Alice p/Charlie a/10";
+            transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.MEMBER_NOT_FOUND.getMessage();
