@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.TravelActivity.TravelActivity;
+import seedu.duke.TravelActivity.TravelActivityList;
+
 public class Parser {
     /**
      * Checks if the string is a number

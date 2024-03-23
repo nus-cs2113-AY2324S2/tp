@@ -2,6 +2,9 @@ package seedu.duke;
 
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TravelActivity.TravelActivity;
+import seedu.duke.TravelActivity.TravelActivityList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
