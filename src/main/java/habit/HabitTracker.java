@@ -81,4 +81,16 @@ public class HabitTracker {
     public static int getNumberOfHabits() {
         return habitList.size();
     }
+
+    public void deleteHabit(int habitID) throws HabitException {
+        if (!isValidHabitID(habitID)) {
+            throw new HabitException("Please provide a valid habit ID.");
+        }
+
+        String deleteHabitMessage = "Got it! I've removed this habit:\n";
+        deleteHabitMessage += "  " + habitList.get(habitID - 1) + "\n";
+        habitList.remove(habitID - 1);
+        deleteHabitMessage += "Now you have " + habitList.size() + " habits left in the list.";
+        Ui.printMessageWithSepNewLine(deleteHabitMessage);
+    }
 }

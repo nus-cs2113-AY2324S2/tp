@@ -26,7 +26,7 @@ public class DeleteHabitCommand implements Command{
 
     @Override
     public void execute() throws HabitException {
-
+        habitTracker.deleteHabit(habitID);
     }
 
     @Override
