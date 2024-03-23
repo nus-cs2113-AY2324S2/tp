@@ -27,7 +27,8 @@ public class SleepCycleListTest {
 
     @Test
     public void addTwoSleepCycle_getTotalHoursSlept_success() {
-        LocalDate date1, date2;
+        LocalDate date1;
+        LocalDate date2;
         date1 = LocalDate.parse("25/01/2022");
         date2 = LocalDate.parse("26/01/2022");
         SleepCycle cycle = new SleepCycle(2, date1);
