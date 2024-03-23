@@ -4,6 +4,9 @@ import seedu.stockpal.common.Messages;
 import seedu.stockpal.exceptions.StockPalException;
 import seedu.stockpal.ui.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 import static seedu.stockpal.common.Messages.SINGLE_SPACE;
@@ -15,6 +18,8 @@ public class HelpCommand extends Command {
     public static final String COMMAND_USAGE = "help";
     public static final String[] COMMAND_FLAGS = {};
     public static final String[] COMMAND_FLAG_DESCRIPTIONS = {};
+
+    protected static Logger logger = Logger.getLogger(HelpCommand.class.getName());
 
     private static final String COMMAND_KEYWORD_PREFIX = "Command: ";
     private static final String DESCRIPTION_PREFIX = "Description: ";
@@ -29,6 +34,7 @@ public class HelpCommand extends Command {
                 + inflowCommandUsage() + outflowCommandUsage() + findCommandUsage()
                 + listCommandUsage() + exitCommandUsage() + helpCommandUsage();
         printToScreenWithoutNewlineAtEnd(formattedText);
+        logger.log(Level.INFO, Messages.LOG_PRINT_HELP_PAGE);
     }
 
     /**
@@ -44,6 +50,7 @@ public class HelpCommand extends Command {
         if (amountToPad > 0) {
             paddedText += SINGLE_SPACE.repeat(amountToPad);
         }
+        assert paddedText.length() == width;
         return paddedText;
     }
 
@@ -93,6 +100,8 @@ public class HelpCommand extends Command {
                 + commandUsage + LINE_SEPARATOR
                 + commandOptions
                 + HORIZONTAL_LINE + LINE_SEPARATOR;
+
+        assert !commandDetails.isEmpty();
         return commandDetails;
     }
 
