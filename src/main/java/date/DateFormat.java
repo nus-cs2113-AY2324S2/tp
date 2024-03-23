@@ -1,16 +1,16 @@
 package date;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormat {
-    private static final DateTimeFormatter FORMAT =  DateTimeFormatter.ofPattern("dd_MM_yyyy");
+    private static final DateTimeFormatter FORMAT =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public static LocalDateTime convertStringToDate(String s) {
-        return LocalDateTime.parse(s , FORMAT);
+    public static LocalDate convertStringToDate(String s) {
+        return LocalDate.parse(s , FORMAT);
     }
 
-    public static String convertDateToString(LocalDateTime date) {
+    public static String convertDateToString(LocalDate date) {
         return date.format(FORMAT);
     }
 }
