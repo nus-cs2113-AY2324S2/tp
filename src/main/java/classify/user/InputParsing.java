@@ -10,11 +10,7 @@ import classify.student.SubjectGrade;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,17 +29,20 @@ public class InputParsing {
     private static final String RESTORE = "restore";
     private static final String EDIT = "edit";
     private static final String HELP = "help";
-    private static final String SORT_NAME = "sort_name";
+    private static final String SORT = "sort";
     private static final String VIEW_SUBJECT = "view_subject";
     private static final String NO_STUDENTS_IN_THE_LIST_CAN_T_SORT_BY_NAME =
             "No students in the list, can't sort by name!";
-    //private static final String STUDENTS_WITH_THE_SUBJECT = "Students with the subject \"";
-    //private static final String NO_STUDENTS_FOUND_WITH_THE_SUBJECT = "No students found with the subject: ";
     private static final String ENTER_THE_SUBJECT_NAME_TYPE_EXIT_TO_GO_BACK =
             "Enter the subject name (type 'exit' to go back):";
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+    private static final String Sort_BY = "Sort by:\n1. Name " +
+            "\n2. Total Classes Attended\n(Type 'exit' to leave the command)";
+    private static final String INVALID_CHOICE = "Invalid choice!";
+    private static final String INVALID_INPUT = "Invalid input. " +
+            "Please enter a valid choice or type 'exit' to leave the command.";
 
     public static void parseUserCommand(String[] userCommand, ArrayList<Student> masterStudentList,
                                         ArrayList<Student> recentlyDeletedList, Scanner in) {
@@ -101,8 +100,20 @@ public class InputParsing {
             break;
 
         //@@ author tayponghee
-        case SORT_NAME:
-            listStudentsByName(masterStudentList);
+        case SORT:
+            boolean validChoice = false;
+            while (!validChoice) {
+                System.out.println(Sort_BY);
+                String input = in.nextLine().trim();
+
+                if (input.equalsIgnoreCase(EXIT)) {
+                    System.out.println(EXITED_THE_COMMAND);
+                    Ui.printDivider();
+                    return;
+                }
+
+                validChoice = isValidChoice(masterStudentList, input, validChoice);
+            }
             break;
 
         case VIEW_SUBJECT:
@@ -112,6 +123,47 @@ public class InputParsing {
         default:
             Ui.printWrongInput();
             break;
+        }
+    }
+
+    private static boolean isValidChoice(ArrayList<Student> masterStudentList, String input, boolean validChoice) {
+        try {
+            int choice = Integer.parseInt(input);
+            switch (choice) {
+            case 1:
+                listStudentsByName(masterStudentList);
+                validChoice = true;
+                break;
+
+            case 2:
+                listStudentsByTotalClasses(masterStudentList);
+                validChoice = true;
+                break;
+
+            default:
+                Ui.println(INVALID_CHOICE);
+            }
+        } catch (NumberFormatException e) {
+            Ui.println(INVALID_INPUT);
+        }
+        return validChoice;
+    }
+
+    private static void listStudentsByTotalClasses(ArrayList<Student> masterStudentList) {
+        for (Student student : masterStudentList) {
+            int totalClassesAttended = 0;
+            StudentAttributes attributes = student.getAttributes();
+            List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
+            for (SubjectGrade subjectGrade : subjectGrades) {
+                totalClassesAttended += subjectGrade.getClassesAttended();
+            }
+            student.setTotalClassesAttended(totalClassesAttended);
+        }
+
+        masterStudentList.sort(Comparator.comparingInt(Student::getTotalClassesAttended));
+
+        for (Student student : masterStudentList) {
+            System.out.println(student.getName() + " - Total Classes Attended: " + student.getTotalClassesAttended());
         }
     }
 
@@ -400,10 +452,28 @@ public class InputParsing {
             Ui.printStudentDetails(foundStudent);
             StudentAttributes attributes = foundStudent.getAttributes();
             showAttributes(attributes);
+
+            int totalClassesAttended = getTotalClassesAttended(foundStudent);
+            Ui.printTotalClassesAttended(totalClassesAttended);
+
         } else {
             logger.log(Level.WARNING, "Student not found: " + name);
             Ui.printStudentNotFound();
         }
+    }
+
+    /**
+     * Calculates the total number of classes attended by the student across all subjects.
+     *
+     * @param student The student whose total classes attended are to be calculated.
+     * @return The total number of classes attended by the student.
+     */
+    private static int getTotalClassesAttended(Student student) {
+        int totalClassesAttended = 0;
+        for (SubjectGrade subjectGrade : student.getAttributes().getSubjectGrades()) {
+            totalClassesAttended += subjectGrade.getClassesAttended();
+        }
+        return totalClassesAttended;
     }
 
     /**

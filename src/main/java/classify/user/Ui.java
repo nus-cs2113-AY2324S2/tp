@@ -49,7 +49,7 @@ public class Ui {
     private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
     private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
     private static final String NO_RECENT_DELETES = "No recent deletes found!";
-
+    public static final String TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS = "Total classes attended across all subjects: ";
 
 
     //@@author alalal47
@@ -268,5 +268,14 @@ public class Ui {
 
     public static void printNoDeleteFound() {
         System.out.println(NO_RECENT_DELETES);
+    }
+
+    //@@ author tayponghee
+    public static void printTotalClassesAttended(int classes) {
+        System.out.println(TOTAL_CLASSES_ATTENDED_ACROSS_ALL_SUBJECTS + classes);
+    }
+
+    public static void println (String text) {
+        System.out.println(text);
     }
 }
