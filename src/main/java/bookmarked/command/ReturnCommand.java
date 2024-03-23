@@ -2,6 +2,7 @@ package bookmarked.command;
 
 import bookmarked.Book;
 import bookmarked.exceptions.emptyListException;
+import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class ReturnCommand extends Command {
 
         try {
             runReturnCommand(foundBooks);
+            BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
         } catch (emptyListException e) {
             Ui.printEmptyListMessage();
         }
