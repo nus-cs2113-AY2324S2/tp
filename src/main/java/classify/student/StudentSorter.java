@@ -3,7 +3,6 @@ package classify.student;
 import classify.user.Ui;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
