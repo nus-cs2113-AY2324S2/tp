@@ -3,6 +3,7 @@ package longah.handler;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Scanner;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,7 +45,11 @@ public class PINHandler {
         String pin = scanner.nextLine();
 
         while (pin.length() != 6 || !pin.matches("\\d{6}")) {
-            System.out.println("Invalid PIN. Your PIN must be a 6-digit number. Please try again.");
+            if (Objects.equals(pin, "quit")) {
+                System.exit(0);
+            }
+            System.out.println("Invalid PIN. Your PIN must be a 6-digit number. " +
+            "Please try again, or enter 'quit' to exit.");
             System.out.print("Enter a 6-digit PIN: ");
             pin = scanner.nextLine();
         }
@@ -102,7 +107,10 @@ public class PINHandler {
             String hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
 
             while (!hashedEnteredPinHex.equals(savedPin)) {
-                System.out.println("Invalid PIN. Please try again.");
+                if (Objects.equals(enteredPin, "quit")) {
+                    System.exit(0);
+                }
+                System.out.println("Invalid PIN. Please try again. Alternatively, enter 'quit' to exit.");
                 System.out.print("Enter your PIN: ");
                 enteredPin = scanner.nextLine();
                 hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
