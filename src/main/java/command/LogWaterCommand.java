@@ -28,7 +28,7 @@ public class LogWaterCommand {
         int quantity = 0;
         try {
             quantity = Integer.parseInt(quantityString);
-            assert quantity > 0: "quantity must be more than 0!";
+            assert quantity >= 0;
             WaterTask waterTask = new WaterTask(quantity);
             TaskList.tasksList.add(waterTask);
             CommandUi.printWaterLogMessage(waterTask);
