@@ -1,7 +1,5 @@
-package seedu.duke.TravelActivity;
-import seedu.duke.OmniException;
-import seedu.duke.TravelActivity.TravelActivity;
-
+package seedu.duke;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -44,7 +42,11 @@ public class TravelActivityList {
             }
             String checked = activity.getActivityStatus()? "[X]" : "[ ]";
             activityCount++;
-            System.out.println(checked + " " + activityCount +". " + activity);
+            if(activity.getTag()==null || activity.getTag().isEmpty()){
+                System.out.println(checked + " " + activityCount +". " + activity);
+            } else {
+                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getTag() + ")" );
+            }
         }
         int finalactivityCount = noOfActivities;
         assert finalactivityCount == activityCount : "Index out of bounds while listing activities";
@@ -61,7 +63,7 @@ public class TravelActivityList {
      * Removes travel activity from the travel activity list
      * @param activityNumber The travel activity number on the list
      */
-    public void removeTravelActivity(int activityNumber) throws OmniException {
+    public void removeTravelActivity(int activityNumber) throws OmniException{
         assert activityNumber != 0  :"There is not activities in the list";
         if(activityNumber > travelActivities.size()){
             throw new OmniException("Travel activity cannot be found!");
@@ -173,7 +175,7 @@ public class TravelActivityList {
         TravelActivity taggedTask = travelActivities.get(indexOfTask);
         taggedTask.setTag(tag);
         System.out.println("I have tagged this task:");
-        System.out.println(taggedTask + "(" + tag + ")");
+        System.out.println(taggedTask + " (" + tag + ")");
     }
 
     /**
@@ -190,6 +192,19 @@ public class TravelActivityList {
         taggedTask.removeTag();
         System.out.println("Tag removed from the task:");
         System.out.println(taggedTask);
+    }
+
+    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration) throws OmniException{
+        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())){
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTravelActivity = travelActivityNumber-1;
+        TravelActivity updatedTravelActivity = travelActivities.get(indexOfTravelActivity);
+        String oldTravelActivityDescription = updatedTravelActivity.toString();
+        updatedTravelActivity.setDate(date);
+        updatedTravelActivity.setDuration(duration);
+        System.out.println("I have updated this task\nfrom: " + updatedTravelActivity +
+                            "\nto: " + oldTravelActivityDescription);
     }
 
     public ArrayList<TravelActivity> getTravelActivities () {

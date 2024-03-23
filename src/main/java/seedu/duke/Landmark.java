@@ -1,4 +1,4 @@
-package seedu.duke.TravelActivity;
+package seedu.duke;
 
 public class Landmark extends TravelActivity {
     public Landmark(String line){

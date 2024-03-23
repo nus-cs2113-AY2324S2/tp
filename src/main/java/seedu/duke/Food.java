@@ -1,4 +1,4 @@
-package seedu.duke.TravelActivity;
+package seedu.duke;
 
 public class Food extends TravelActivity {
     public Food(String line){

@@ -1,10 +1,4 @@
 package seedu.duke;
-import seedu.duke.TravelActivity.Accommodation;
-import seedu.duke.TravelActivity.Food;
-import seedu.duke.TravelActivity.Landmark;
-import seedu.duke.TravelActivity.TravelActivity;
-import seedu.duke.TravelActivity.TravelActivityList;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +10,7 @@ public class FileSave {
     public FileSave(String path) {
         this.filePath = path;
     }
-
+/*
     public static void loadFileContents(TravelActivityList list) throws FileNotFoundException {
         java.io.File f = new java.io.File(filePath);
         Scanner s = new Scanner(f);
@@ -72,5 +66,5 @@ public class FileSave {
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
-    }
+    }*/
 }

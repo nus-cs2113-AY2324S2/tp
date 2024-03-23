@@ -60,4 +60,8 @@ public class Ui {
         System.out.println("1. list\n2. add <insert travel activity>\n3. delete <insert activity number>\n" +
                            "4. find <insert keyword>\n5. help\n6. bye\n");
     }
+
+    public static void printDateTimeExceptionError(){
+        System.out.println("Invalid date, please input the date in the following order: YYYY-MM-DD");
+    }
 }

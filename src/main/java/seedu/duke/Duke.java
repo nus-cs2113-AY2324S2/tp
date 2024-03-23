@@ -1,7 +1,5 @@
 package seedu.duke;
-
-import seedu.duke.TravelActivity.TravelActivityList;
-
+import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -30,7 +28,7 @@ public class Duke {
 
                 case "add":
                     Ui.printLine();
-                    Parser.addCommand(line, command, list);
+                    Parser.addCommand(line, list);
                     Ui.printLine();
                     break;
 
@@ -60,7 +58,7 @@ public class Duke {
 
                 case "tag":
                     Ui.printLine();
-                    Parser.tagCommand(command, list);
+                    Parser.tagCommand(line, list);
                     Ui.printLine();
                     break;
 
@@ -81,6 +79,12 @@ public class Duke {
                     userSaysBye = true;
                     break;
 
+                case "update":
+                    Ui.printLine();
+                    Parser.updateCommand(line, list);
+                    Ui.printLine();
+                    break;
+
                 default:
                     Ui.printLine();
                     System.out.println("This is not a valid command");
@@ -92,6 +96,8 @@ public class Duke {
                 Ui.printNoSuchElementException(exception);
             } catch (NumberFormatException exception) {
                 Ui.printNumberTooLargeException(exception);
+            } catch (DateTimeException exception){
+                Ui.printDateTimeExceptionError();
             }
         }
     }
