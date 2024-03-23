@@ -3,6 +3,7 @@ package parser;
 import commands.Command;
 import commands.focuscommands.StartTimerCommand;
 import commands.focuscommands.StopTimerCommand;
+import commands.focuscommands.SwitchTimerCommand;
 import exceptions.FocusException;
 import focus.FocusTimer;
 
@@ -28,6 +29,8 @@ public class FocusCommandParser {
             return new StartTimerCommand(focusTimer);
         case "stop":
             return new StopTimerCommand(focusTimer);
+        case "switch":
+            return new SwitchTimerCommand(focusTimer);
         default:
             throw new FocusException("Unknown Focus Timer command");
         }

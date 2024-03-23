@@ -7,9 +7,10 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CountdownTimer {
-    private static final int DEFAULT_SECONDS = 59;
-    private static final int DEFAULT_MINUTES = 0;
+    private static final int DEFAULT_SECONDS = 0;
+    private static final int DEFAULT_MINUTES = 1;
     private static final int ONE_SECOND = 1000;
+    private static final int MAX_SECONDS = 59;
     private static final int TIME_DELAY = 0;
     private static final int STOP_TIME = 0;
     private static final int START_WARNING = 5;
@@ -27,6 +28,7 @@ public class CountdownTimer {
     public CountdownTimer() {
         this.minutes = DEFAULT_MINUTES;
         this.seconds = DEFAULT_SECONDS;
+        this.inputMinutes = DEFAULT_MINUTES;
         this.isCompleted = new AtomicBoolean(false);
         this.isRunning = new AtomicBoolean(false);
         this.isStarted = false;
@@ -41,7 +43,6 @@ public class CountdownTimer {
     }
 
     public void start() {
-        assert !isRunning.get() : ASSERTION_TIMER_NOT_RUNNING;
         stopwatch = new Timer();
         isStarted = true;
         timerTask = new TimerTask() {
@@ -62,7 +63,7 @@ public class CountdownTimer {
                     Ui.promptUserInput();
                 } else if (seconds == STOP_TIME) {
                     decreaseMinutes();
-                    seconds = DEFAULT_SECONDS;
+                    seconds = MAX_SECONDS;
                 } else {
                     decreaseSeconds();
                 }
@@ -71,6 +72,7 @@ public class CountdownTimer {
         stopwatch.scheduleAtFixedRate(timerTask, TIME_DELAY, ONE_SECOND);
     }
     public void setStart() {
+        assert !isRunning.get() : ASSERTION_TIMER_NOT_RUNNING;
         isRunning.set(true);
         minutes = inputMinutes;
         start();

@@ -39,4 +39,12 @@ public class FocusTimer {
             return countupTimer.getStartedStatus();
         }
     }
+    public void switchTimer() {
+        this.timerMode = !timerMode;
+        if(timerMode) {
+            Ui.printMessageWithSepNewLine("Switched to Count down timer");
+        } else {
+            Ui.printMessageWithSepNewLine("Switched to Count up timer");
+        }
+    }
 }
