@@ -1,19 +1,10 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.command.AddExpenseCommand;
-import seedu.budgetbuddy.command.AddSavingCommand;
-import seedu.budgetbuddy.command.EditExpenseCommand;
-import seedu.budgetbuddy.command.EditSavingCommand;
-import seedu.budgetbuddy.command.ReduceSavingCommand;
-import seedu.budgetbuddy.command.DeleteExpenseCommand;
-import seedu.budgetbuddy.command.Command;
-import seedu.budgetbuddy.command.MenuCommand;
-import seedu.budgetbuddy.command.ListExpenseCommand;
-import seedu.budgetbuddy.command.ListSavingsCommand;
-import seedu.budgetbuddy.command.FindExpensesCommand;
+import seedu.budgetbuddy.command.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,6 +93,9 @@ public class Parser {
 
     public Boolean isReduceSavingCommand(String input) {
         return input.startsWith("reduce");
+    }
+    public Boolean isConvertCurrencyCommand(String input) {
+        return input.startsWith("change currency");
     }
 
 
@@ -591,6 +585,10 @@ public class Parser {
 
         if (isFindExpensesCommand(input)) {
             return handleFindExpensesCommand(input, expenses);
+        }
+
+        if (isConvertCurrencyCommand(input)) {
+            return handleChangeCurrencyCommand(input, savings, expenses, new CurrencyConverter());
         }
 
         return null;
