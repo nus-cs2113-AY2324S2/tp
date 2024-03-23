@@ -44,6 +44,8 @@ public class Ui {
             "'find' [space] '(keyword)'\n\n" +
             "To list out all your favourites, simply send me the following: \n" +
             "'favourites'\n\n" +
+            "To generate a smart itinerary, simply send me the following AFTER you have completed 'me': \n" +
+            "'smart'\n\n" +
             "To delete an activity from your favourites, simply send me the following: \n" +
             "'delete' [space] '(index of entry)'\n\n" +            
             "To exit the program, simply send me the following: \n" +

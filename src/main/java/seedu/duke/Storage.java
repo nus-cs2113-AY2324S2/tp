@@ -81,9 +81,9 @@ public class Storage {
                 Scanner scanner = new Scanner(file);
                 if (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-                    String[] details = line.split("|");
+                    String[] details = line.split(" \\| ");
                     scanner.close();
-                    return new UserDetails(details[0], details[1], details[2],details[3]);
+                    return new UserDetails(details[0], details[1], details[2],details[3], details[4], details[5]);
                 }
                 scanner.close();
             }

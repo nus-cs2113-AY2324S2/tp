@@ -40,6 +40,19 @@ public class FoodList {
         int filteredFoodIndex = random.nextInt(filteredFoods.size());
         return filteredFoods.get(filteredFoodIndex);
     }
+
+    public Food getCustomisedFood(String preferredLocation, String preferredCuisine) {
+        ArrayList<Food> filteredFoods = new ArrayList<>();
+        for (Food eachFood : foods) {
+            if (eachFood.location.equals(preferredLocation) && eachFood.cuisine.equals(preferredCuisine)) {
+                filteredFoods.add(eachFood);
+            }
+        }
+        
+        Random random = new Random();
+        int filteredFoodIndex = random.nextInt(filteredFoods.size());
+        return filteredFoods.get(filteredFoodIndex);
+    }
 }
 
 
