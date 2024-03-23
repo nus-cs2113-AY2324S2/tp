@@ -51,6 +51,16 @@ class ParserTest {
     }
 
     @Test
+    void parseCommand_userDetailsCommandInput_expectUserDetailsCommand() {
+        try {
+            Command result = Parser.parseCommand("me", userDetails);
+            assertTrue(result instanceof UserDetailsCommand, "Expected UserDetailsCommand for 'me' input.");
+        } catch (Exception e) {
+            fail("Exception should not be thrown for valid 'me' input.");
+        }
+    }
+
+    @Test
     void parseCommand_listFavouritesCommandInput_expectListFavouritesCommand() {
         try {
             Command result = Parser.parseCommand("favourites", userDetails);
