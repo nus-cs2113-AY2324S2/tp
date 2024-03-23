@@ -1,10 +1,10 @@
 package activeedge.task;
 
-public class LogMeals extends Task {
+public class MealTask extends Task {
     protected Integer servings;
     protected Integer mealCalories;
 
-    public LogMeals (String meal, int servings, int mealCalories){
+    public MealTask(String meal, int servings, int mealCalories){
         super(meal);
         this.servings = servings;
         this.mealCalories = mealCalories;

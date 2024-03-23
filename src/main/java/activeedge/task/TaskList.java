@@ -5,6 +5,14 @@ public class TaskList {
     // Static constant ArrayList to store Task objects
     public static final ArrayList<Task> tasksList = new ArrayList<Task>();
 
+    public static Task delete(int index) {
+        if (index >= 0 && index < tasksList.size()) {
+            return tasksList.remove(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index is out of bounds.");
+        }
+    }
+
     public void add(Task task) {
         tasksList.add(task);
     }
