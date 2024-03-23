@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_COMMAND;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_FORMAT;
+import static seedu.stockpal.common.Messages.MESSAGE_ERROR_EMPTY_NAME;
+import static seedu.stockpal.common.Messages.MESSAGE_ERROR_EMPTY_QUANTITY;
 
 public class Parser {
     public static final String DIVIDER = " ";
@@ -192,10 +194,10 @@ public class Parser {
         String description;
 
         if (parsed.get(0) == null) {
-            throw new InvalidFormatException("Empty name");
+            throw new InvalidFormatException(MESSAGE_ERROR_EMPTY_NAME);
         }
         if (parsed.get(1) == null) {
-            throw new InvalidFormatException("Empty quantity");
+            throw new InvalidFormatException(MESSAGE_ERROR_EMPTY_QUANTITY);
         }
 
         name = parsed.get(0);
