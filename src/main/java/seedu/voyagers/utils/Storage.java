@@ -37,7 +37,7 @@ public class Storage {
             }
             while (s.hasNext()) {
                 String[] inputs = s.nextLine().split("\\|", 6);
-                assert inputs.length == 5 : "Invalid input format";
+                assert inputs.length == 6 : "Invalid input format";
                 java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
                 Date startDate = format.parse(inputs[1]);
                 Date endDate = format.parse(inputs[2]);
@@ -67,9 +67,9 @@ public class Storage {
      * @param tripsCount The number of trips in the list.
      * @param currentDir The current directory of the file.
      */
-    public static void writeTripFile(ArrayList<Trip> trips, int tripsCount, String currentDir) {
+    public static void writeTripFile(ArrayList<Trip> trips, int tripsCount, String currentDir, String fileName) {
         //local path of data file
-        File f = new File(currentDir + "/local-voyagers.txt");
+        File f = new File(currentDir + "/" + fileName);
 
         try (java.io.FileWriter writer = new java.io.FileWriter(f)) {
             for (int i = 0; i < tripsCount; i++) {

@@ -22,7 +22,8 @@ public class TripTest {
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         assertEquals(trip.getDuration(), 2);
     }
     @Test
@@ -32,7 +33,8 @@ public class TripTest {
                     new Date(2020, 2, 1),
                     new Date(2020, 1, 3),
                     "Test Location",
-                    "Test Description");
+                    "Test Description",
+                    "0");
         });
 
         assertDoesNotThrow(() -> {
@@ -40,7 +42,8 @@ public class TripTest {
                     new Date(2020, 1, 1),
                     new Date(2020, 2, 3),
                     "Test Location",
-                    "Test Description");
+                    "Test Description",
+                    "0");
         });
     }
     @Test
@@ -49,12 +52,14 @@ public class TripTest {
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         Trip subTrip = new Trip("Sub Trip",
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         trip.addSubTrip(subTrip);
         assertTrue(trip.getSubTrips().contains(subTrip));
     }
@@ -64,17 +69,20 @@ public class TripTest {
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         Trip subTrip = new Trip("Sub Trip",
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         Trip subTrip2 = new Trip("Sub Trip 2",
                 new Date(2020, 1, 1),
                 new Date(2020, 1, 3),
                 "Test Location",
-                "Test Description");
+                "Test Description",
+                "0");
         trip.addSubTrip(subTrip);
         trip.addSubTrip(subTrip2);
         trip.removeSubTrip(subTrip);

@@ -59,7 +59,7 @@ public class Voyagers {
             }
         }
 
-        writeTripFile(tripList.getTrips(), tripList.size(), currentDir);
+        writeTripFile(tripList.getTrips(), tripList.size(), currentDir, "/local-voyagers.txt");
     }
 
 }
