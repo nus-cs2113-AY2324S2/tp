@@ -27,14 +27,7 @@ public class Ui {
      * Prints welcome message.
      */
     public void printWelcome() {
-        String logo = "\n" +
-        "________._____________\n" +
-        " /  _____/|__\\__    ___/\n" +
-        "/   \\  ___|  | |    |   \n" +
-        "\\    \\_\\  \\  | |    |   \n" +
-        " \\______  /__| |____|   \n" +
-        "        \\/\n";
-        System.out.println("Hello from GiT" + logo);
+        System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         printLine();
         String userName = in.nextLine();
