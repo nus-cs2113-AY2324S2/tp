@@ -1,12 +1,17 @@
 package seedu.budgetbuddy;
 
+import java.util.Currency;
+
 public abstract class Transaction {
     String category;
     double amount;
+    Currency currency;
 
     public Transaction(String category, double amount) {
         this.category = category;
         this.amount = amount;
+        this.currency = Currency.getInstance("SGD");
+
     }
 
     public String getCategory() {
