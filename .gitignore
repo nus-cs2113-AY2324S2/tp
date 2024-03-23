@@ -20,3 +20,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 /.vscode
 /data/studentInfo/
 data/studentInfo
+data/studentInfo/Student_Information.txt
