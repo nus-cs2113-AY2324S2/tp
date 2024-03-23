@@ -11,6 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import seedu.stockpal.commands.Command;
+import seedu.stockpal.commands.HelpCommand;
+import seedu.stockpal.commands.NewCommand;
 import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.exceptions.StockPalException;
@@ -46,7 +49,7 @@ public class Storage {
     private CsvWriter csvWriter;
 
     /**
-     * Constructs a new Storage object with the DEFAULT_STORAGE_FILEPATH.
+     * Constructs a new Storage object with the default storage filepath.
      *
      * @throws InvalidStorageFilePathException If the file path is invalid.
      */
@@ -67,6 +70,7 @@ public class Storage {
         this.path = filePath;
         setupLogger();
     }
+
 
     /**
      * Checks if the given file path is of the valid format.
@@ -167,12 +171,34 @@ public class Storage {
     }
 
     /**
+     * Executes the corresponding save/append function based on the current Command.
+     *
+     * @param command The current Command being executed.
+     * @param productList The updated ProductList.
+     * @throws StockPalException If there is an error saving the data.
+     */
+    public void saveData(Command command, ProductList productList) throws StockPalException {
+        LOGGER.entering(getClass().getName(), "saveData");
+        if (command instanceof HelpCommand) {
+            return;
+        }
+        if (command instanceof NewCommand) {
+            int idxNewProd = productList.getSize() - 1;
+            Product newProduct = productList.get(idxNewProd);
+            append(newProduct);
+        } else {
+            save(productList);
+        }
+        LOGGER.exiting(getClass().getName(), "saveData");
+    }
+
+    /**
      * Saves the current ProductList to the data file.
      *
      * @param productList The ProductList containing the data to be saved.
      * @throws StockPalException If there is an error saving the data.
      */
-    public void save(ProductList productList) throws StockPalException {
+    protected void save(ProductList productList) throws StockPalException {
         LOGGER.entering(getClass().getName(), "save");
         csvWriter = new CsvWriter(this.path, !isAppend);
         csvWriter.saveAllData(productList);
@@ -185,7 +211,7 @@ public class Storage {
      * @param newProduct The new Product to be appended.
      * @throws StockPalException If there is an error saving the data.
      */
-    public void append(Product newProduct) throws StockPalException {
+    protected void append(Product newProduct) throws StockPalException {
         LOGGER.entering(getClass().getName(), "append");
         csvWriter = new CsvWriter(this.path, isAppend);
         csvWriter.appendProduct(newProduct);
@@ -232,7 +258,7 @@ public class Storage {
      *
      * @return String representation of the filepath.
      */
-    public String getPath() {
+    protected String getPath() {
         return path;
     }
 }

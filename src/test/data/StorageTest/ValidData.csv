@@ -1,4 +1,4 @@
 PID;Name;Quantity;Price;Description
-1;milk;100;3.0;oat milk
-2;bread;30;1.5
+1;milk;100;3.00;oat milk
+2;bread;30;1.50
 3;toothbrush;10

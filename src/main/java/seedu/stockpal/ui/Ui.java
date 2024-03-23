@@ -13,7 +13,7 @@ import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
 
 public final class Ui {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int WRAP_LENGTH = 70;
+    private static final int WRAP_LENGTH = 81;
 
     public static String getUserInput() throws NoSuchElementException {
         String input = "";
@@ -27,8 +27,8 @@ public final class Ui {
     }
 
     /**
-     * Outputs the list of messages, and replace line-separators
-     * with platform independent line-separator.
+     * Outputs the list of messages as lines ending with line separator
+     * , and replace line-separators with platform independent line-separator.
      *
      * @param messages List of messages to output.
      */
@@ -39,9 +39,28 @@ public final class Ui {
         }
     }
 
+    /**
+     * Outputs the list of messages as lines ending without line separator
+     * , and replace line-separators with platform independent line-separator.
+     *
+     * @param messages List of messages to output.
+     */
+    public static void printToScreenWithoutNewlineAtEnd(String... messages) {
+        for (String message : messages) {
+            String platformIndependentMessage = message.replace("\n", LINE_SEPARATOR);
+            System.out.print(platformIndependentMessage);
+        }
+    }
+
     public static String indentTextIfRequired (String textToFormat) {
         return WordUtils.wrap(textToFormat, WRAP_LENGTH, LINE_SEPARATOR, true);
     }
+
+    public static String wrapTextWithIndentation (String text, int padding) {
+        String indentation = Messages.SINGLE_SPACE.repeat(padding);
+        return text.replace("\n", LINE_SEPARATOR + indentation);
+    }
+
 
     public static void printExceptionMessage(Exception exception) {
         printToScreen(exception.getMessage());
@@ -56,6 +75,7 @@ public final class Ui {
     }
 
     public static void printListTasks(ProductList products) {
+        printToScreen(HORIZONTAL_LINE);
         for (int i = 0; i < products.getSize(); i++ ) {
             assert products.get(i) != null : "Product should not be a null object.";
             Product product = products.get(i);
@@ -78,5 +98,18 @@ public final class Ui {
 
     public static void printDeleteSuccessMessage() {
         printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
+    }
+
+    public static void printLowQuantityAlert() {
+        printToScreen(Messages.ALERT_LOW_QUANTITY);
+        printToScreen(HORIZONTAL_LINE);
+    }
+
+    public static void printThresholdWarningAlert() {
+        printToScreen(Messages.ALERT_FIRST_LOW_QUANTITY_OCCURRENCE);
+    }
+
+    public static void printNoLowQuantity() {
+        printToScreen(Messages.MESSAGE_NO_LOW_QUANTITY_PRODUCTS);
     }
 }

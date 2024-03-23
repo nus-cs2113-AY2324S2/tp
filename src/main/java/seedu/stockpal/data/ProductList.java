@@ -3,6 +3,7 @@ package seedu.stockpal.data;
 import java.util.List;
 import java.util.ArrayList;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -10,6 +11,10 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
+import seedu.stockpal.ui.Ui;
+import static seedu.stockpal.ui.Ui.printToScreen;
+import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
+
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -56,6 +61,7 @@ public class ProductList {
         }
         if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
+            updatedProduct.getQuantity().notifyLowQuantity(newQuantity);
         }
         if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
@@ -76,6 +82,30 @@ public class ProductList {
         updatedProduct.decreaseQuantity(amountToDecrease);
     }
 
+    /**
+     * @param productList ProductList object.
+     * @param keyword Keyword to search for.
+     */
+    public static void findKeyword(ProductList productList, String keyword) {
+        ProductList findList = new ProductList();
+        for (int i = 0; i < productList.getSize(); i ++) {
+            List<Product> products = productList.getProducts();
+            Product product = products.get(i);
+            String productName = product.getName().getName().toLowerCase();
+
+            if (productName.equals(keyword)) {
+                findList.addProduct(product);
+            }
+        }
+
+        if (findList.isEmpty()) {
+            printToScreen(Messages.MESSAGE_EMPTY_FIND_LIST);
+            return;
+        }
+
+        Ui.printListTasks(findList);
+    }
+
     public boolean isEmpty() {
         return products.isEmpty();
     }
@@ -93,7 +123,26 @@ public class ProductList {
     }
 
     public String toSave(Integer productIndex) {
-        Product currProd = products.get(productIndex);
-        return currProd.toSave();
+        Product currProduct = products.get(productIndex);
+        return currProduct.toSave();
+    }
+
+    public void printLowQuantityProducts () {
+        boolean hasLowQuantity = false;
+
+        Ui.printLowQuantityAlert();
+        for (Product product : products) {
+            Quantity productQuantity = product.getQuantity();
+            if (productQuantity.isLowQuantity(product)) {
+                Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
+                        productQuantity);
+                Ui.printToScreen(HORIZONTAL_LINE);
+            }
+        }
+
+        if (!hasLowQuantity) {
+            Ui.printNoLowQuantity();
+            Ui.printToScreen(HORIZONTAL_LINE);
+        }
     }
 }

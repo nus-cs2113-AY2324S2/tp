@@ -3,29 +3,24 @@ package seedu.stockpal.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.stockpal.data.ProductList;
-import seedu.stockpal.storage.Storage;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.storage.exception.InvalidStorageFilePathException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class NewCommandTest {
-    private static final String TEST_FILE_PATH = "src/test/data/NewCommandTest/Test.csv";
     public ProductList productList;
-    public Storage storage;
 
     @BeforeEach
-    public void setUp() throws InvalidStorageFilePathException {
+    public void setUp() {
         productList = new ProductList();
-        storage = new Storage(TEST_FILE_PATH);
     }
 
     @Test
     void newCommand_allFieldsFilled_expectCorrectAllocation() throws StockPalException {
-        NewCommand userInput = new NewCommand(productList, "chocolate", 100,
-                2.00, "ingredient", storage);
-        userInput.execute();
+        NewCommand userInput = new NewCommand("chocolate", 100,
+                2.00, "ingredient");
+        userInput.execute(productList);
 
         assertEquals("chocolate",productList.getProducts().get(0).getName().getName());
         assertEquals(100,productList.getProducts().get(0).getQuantity().getQuantity());
@@ -36,9 +31,9 @@ public class NewCommandTest {
 
     @Test
     void newCommand_compulsoryFieldsFilled_expectCorrectAllocation() throws StockPalException {
-        NewCommand userInput = new NewCommand(productList, "chocolate",
-                100, null, null, storage);
-        userInput.execute();
+        NewCommand userInput = new NewCommand("chocolate",
+                100, null, null);
+        userInput.execute(productList);
 
         assertEquals("chocolate",productList.getProducts().get(0).getName().getName());
         assertEquals(100,productList.getProducts().get(0).getQuantity().getQuantity());
@@ -49,13 +44,13 @@ public class NewCommandTest {
 
     @Test
     void newCommand_twoProductsWithCompulsoryFieldsFilled_expectCorrectAllocation() throws StockPalException {
-        NewCommand userInput1 = new NewCommand(productList, "chocolate", 100,
-                2.00, "ingredient", storage);
-        userInput1.execute();
+        NewCommand userInput1 = new NewCommand("chocolate", 100,
+                2.00, "ingredient");
+        userInput1.execute(productList);
 
-        NewCommand userInput2 = new NewCommand(productList, "strawberry", 200,
-                null, null, storage);
-        userInput2.execute();
+        NewCommand userInput2 = new NewCommand("strawberry", 200,
+                null, null);
+        userInput2.execute(productList);
 
         assertEquals("chocolate",productList.products.get(0).getName().getName());
         assertEquals(1, productList.products.get(0).getPid().getPid());

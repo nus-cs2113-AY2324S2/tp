@@ -11,24 +11,18 @@ import static seedu.stockpal.ui.Ui.printToScreen;
 
 public class ListCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "list";
+    public static final String COMMAND_DESCRIPTION = "Lists each product in inventory.";
+    public static final String COMMAND_USAGE = "list";
+    public static final String[] COMMAND_FLAGS = {};
+    public static final String[] COMMAND_FLAG_DESCRIPTIONS = {};
     private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
-    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
-            + ": Lists each product in inventory."
-            + Messages.LINE_SEPARATOR
-            + "Format: list");
-
-    protected ProductList productList;
-
-    public ListCommand(ProductList productList) {
-        this.productList = productList;
-    }
 
     /**
      * Prints out all products that are in the list.
      * If the list is empty, it tells the user that the list is empty.
      */
     @Override
-    public void execute() {
+    public void execute(ProductList productList) {
         if (productList.isEmpty()) {
             printToScreen(Messages.MESSAGE_EMPTY_LIST);
             return;

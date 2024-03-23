@@ -34,7 +34,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName.set("stockpal")
+    archiveBaseName.set("StockPal")
     archiveClassifier.set("")
 }
 
@@ -44,4 +44,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

@@ -219,7 +219,7 @@ public class StorageTest {
         return new Storage(TEST_STORAGE_DIR + fileName);
     }
 
-    private Storage getTempStorage() throws Exception{
+    private Storage getTempStorage() throws Exception {
         return new Storage(testDir.resolve(TEMP_FILE_NAME).toString());
     }
 

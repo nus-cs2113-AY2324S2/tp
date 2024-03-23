@@ -4,7 +4,7 @@ import seedu.stockpal.common.CommandParameter;
 
 public class Price implements CommandParameter {
     private static final String EMPTY_STRING = "";
-    protected Double price;
+    private final Double price;
 
     public Price(Double price) {
         this.price = (price == null || price < 0)
@@ -15,12 +15,18 @@ public class Price implements CommandParameter {
     public Double getPrice() {
         return this.price;
     }
+
     public boolean isNull() {
         return this.price == null;
     }
+
+    private boolean isEmptyPrice() {
+        return isNull() || this.price.equals(0.00);
+    }
+
     @Override
     public String toString() {
-        return "Price: " + (this.isNull()
+        return "Price: " + (this.isEmptyPrice()
                 ? "[X]"
                 : String.format("$%.2f", price));
     }
@@ -31,8 +37,8 @@ public class Price implements CommandParameter {
      * @return A formatted string containing the Price for saving.
      */
     public String toSave() {
-        return this.isNull()
+        return this.isEmptyPrice()
                 ? EMPTY_STRING
-                : this.price.toString();
+                : String.format("%.2f", this.price);
     }
 }
