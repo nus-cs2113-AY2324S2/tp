@@ -33,42 +33,18 @@ public class Parser {
                 "Investments", "Gifts", "Others"));
     }
 
-    private String extractDetailsForFind(String input, String splitter) {
+    private String extractDetailsForCommand(String input, String splitter, CommandPrefix type) {
         int startIndex = input.indexOf(splitter) + splitter.length();
         int endIndex = input.length();
 
-        String[] nextPrefixes = { "d/", "morethan/", "lessthan/" };
+        String[] nextPrefixes = type.getNextPrefixes();
+
         for (String nextPrefix : nextPrefixes) {
             if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
                 endIndex = input.indexOf(nextPrefix, startIndex);
             }
         }
         return input.substring(startIndex, endIndex).trim();
-    }
-
-    private String extractDetailsForRec(String details, String prefix) {
-        int startIndex = details.indexOf(prefix) + prefix.length();
-        int endIndex = details.length();
-
-        String[] nextPrefixes = { "to/", "c/", "a/", "d/" };
-        for (String nextPrefix : nextPrefixes) {
-            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = details.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return details.substring(startIndex, endIndex).trim();
-    }
-    private String extractDetailsForAdd(String details, String prefix) {
-        int startIndex = details.indexOf(prefix) + prefix.length();
-        int endIndex = details.length();
-
-        String[] nextPrefixes = { "c/", "a/", "d/" };
-        for (String nextPrefix : nextPrefixes) {
-            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = details.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return details.substring(startIndex, endIndex).trim();
     }
 
     public Boolean isRecCommand(String input) {
@@ -147,11 +123,11 @@ public class Parser {
         }
 
         if (input.contains("d/")) {
-            description = extractDetailsForFind(input, "d/");
+            description = extractDetailsForCommand(input, "d/", CommandPrefix.FIND);
         }
 
         if (input.contains("morethan/")) {
-            String minAmountAsString = extractDetailsForFind(input, "morethan/");
+            String minAmountAsString = extractDetailsForCommand(input, "morethan/", CommandPrefix.FIND);
             try {
                 minAmount = Double.parseDouble(minAmountAsString);
             } catch (NumberFormatException e) {
@@ -163,7 +139,7 @@ public class Parser {
         }
 
         if (input.contains("lessthan/")) {
-            String maxAmountAsString = extractDetailsForFind(input, "lessthan/");
+            String maxAmountAsString = extractDetailsForCommand(input, "lessthan/" , CommandPrefix.FIND);
             try {
                 maxAmount = Double.parseDouble(maxAmountAsString);
             } catch (NumberFormatException e) {
@@ -320,12 +296,12 @@ public class Parser {
         }
         String details = parts[1];
 
-        String category = extractDetailsForAdd(details, "c/");
+        String category = extractDetailsForCommand(details, "c/", CommandPrefix.ADD);
         if (category.isEmpty()) {
             System.out.println("category is missing.");
             return null;
         }
-        String amount = extractDetailsForAdd(details, "a/");
+        String amount = extractDetailsForCommand(details, "a/", CommandPrefix.ADD);
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
             return null;
@@ -344,7 +320,7 @@ public class Parser {
             return null;
         }
 
-        String description = extractDetailsForAdd(details, "d/");
+        String description = extractDetailsForCommand(details, "d/", CommandPrefix.ADD);
         if (description.isEmpty()) {
             System.out.println("description is missing.");
             return null;
@@ -365,13 +341,13 @@ public class Parser {
         }
 
         String details = parts[1];
-        String category = extractDetailsForAdd(details, "c/");
+        String category = extractDetailsForCommand(details, "c/", CommandPrefix.ADD);
         if (category.isEmpty()){
             System.out.println("Category is missing.");
             return null;
         }
         
-        String amount = extractDetailsForAdd(details, "a/");
+        String amount = extractDetailsForCommand(details, "a/", CommandPrefix.ADD);
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
             return null;
@@ -587,15 +563,15 @@ public class Parser {
 
         if(commandType.equals("newexpense")) {
             try {
-                String listNumberAsString = extractDetailsForRec(input, "to/");
+                String listNumberAsString = extractDetailsForCommand(input, "to/", CommandPrefix.REC);
                 int listNumber = Integer.parseInt(listNumberAsString);
 
-                String category = extractDetailsForRec(input, "c/");
+                String category = extractDetailsForCommand(input, "c/", CommandPrefix.REC);
 
-                String amountAsString = extractDetailsForRec(input, "a/");
+                String amountAsString = extractDetailsForCommand(input, "a/", CommandPrefix.REC);
                 double amount = Double.parseDouble(amountAsString);
 
-                String description = extractDetailsForRec(input, "d/");
+                String description = extractDetailsForCommand(input, "d/", CommandPrefix.REC);
 
                 if (listNumberAsString.isEmpty() || category.isEmpty() || amountAsString.isEmpty()
                         || description.isEmpty()) {
