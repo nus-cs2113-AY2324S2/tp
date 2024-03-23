@@ -12,16 +12,17 @@ public class DeleteHabitCommand implements Command{
     public DeleteHabitCommand(HabitTracker habitTracker, String habitCommandArgs)
             throws HabitException {
         this.habitTracker = habitTracker;
+
+        if (habitCommandArgs.isEmpty()) {
+            throw new HabitException("Please provide a valid habit ID.\n" +
+                    "Use Format: habit delete <habit_ID>");
+        }
+
         try {
-            if (habitCommandArgs.isEmpty()) {
-                throw new HabitException("Please provide a valid habit ID.\n" +
-                        "Use Format: habit delete <habit_ID>");
-            }
             this.habitID = Integer.parseInt(habitCommandArgs.trim());
         } catch (NumberFormatException e) {
             throw new HabitException("Please provide a valid habit ID.");
         }
-
     }
 
     @Override
