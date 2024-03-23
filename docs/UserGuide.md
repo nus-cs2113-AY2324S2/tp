@@ -13,7 +13,9 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Reflection Manager
           - [`reflect get` - Get reflection questions](#get-reflection-questions-reflect-get)
           - [`reflect save` - Save favourite reflection question](#save-favourite-reflection-question-reflect-save)
+          - [`reflect unsave` - Unsave favourite reflection question](#unsave-favourite-reflection-question-reflect-unsave)
           - [`reflect list` - View favourite reflection questions](#view-favourite-reflection-questions-reflect-list)
+          - [`reflect help` - View reflection help menu](#view-reflection-help-menu-reflect-help)
         - Habit Tracker
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
@@ -32,7 +34,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
 3. To start `Wellness360` Using the `jar` file, go to the containing folder for Wellness360. 
 Then, on your terminal of choice, run:
 ```
--$ java -jar ip.jar
+-$ java -jar tp.jar
 ```
 
 ## Features
@@ -75,7 +77,7 @@ Example of usage:
 reflect get
 ```
 Expected outcome:  
-* Note that the questions are randomized.
+Note that the questions are randomized.
 ```
 ________________________________________________________________________________________________________________
 1. How do you overcome creative blocks or periods of stagnation?
