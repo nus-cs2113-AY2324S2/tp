@@ -131,14 +131,16 @@ public class Storage {
                         String[] items = task.trim().split(" ");
                         int len = items.length;
                         assert len >= 4;
+
                         String mealName = "";
                         for (int i = 1; i <= len - 3; i++) {
-                            mealName = mealName + items[i];
+                            mealName = mealName + items[i] + " "; // Add space between words
                         }
-                        MealTask newTask = new MealTask(mealName,
+                        MealTask newTask = new MealTask(mealName.trim(), // Trim to remove extra space at the end
                                 Integer.parseInt(items[len - 2]),
                                 Integer.parseInt(items[len - 1]));
                         TaskList.tasksList.add(newTask);
+
                     } else if (task.startsWith("Goal")) {
                         String[] items = task.trim().split(" ");
                         GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
