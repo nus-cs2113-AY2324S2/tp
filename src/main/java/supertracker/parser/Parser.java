@@ -386,10 +386,6 @@ public class Parser {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
-        if (!Inventory.contains(name)) {
-            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_FIND);
-        }
-
         return new FindCommand(name);
     }
 }

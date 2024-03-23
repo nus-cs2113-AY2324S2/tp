@@ -145,4 +145,9 @@ public class Ui {
         stringToPrint += (priceString + quantityString);
         printIndent(stringToPrint);
     }
+
+    public static void noItemFound(String name) {
+        String stringToPrint = "So sorry, Your item: " + name + " could not be found.";
+        printIndent(stringToPrint);
+    }
 }
