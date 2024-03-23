@@ -110,14 +110,14 @@ public class Parser {
             return false;
         case "check":
             if (words.length == 1) {
-                System.out.println(timetable.checkGrade());
+                System.out.println(GradeChecker.checkGrade(timetable));
             } else if (words.length == 2) {
                 try {
                     year = Integer.parseInt(words[1].substring("y/".length()));
                 } catch (NumberFormatException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_CHECK_YEAR_GRADE);
                 }
-                System.out.println(timetable.checkGrade(year));
+                System.out.println(GradeChecker.checkGrade(timetable, year));
             } else {
                 try {
                     year = Integer.parseInt(words[1].substring("y/".length()));
@@ -125,19 +125,19 @@ public class Parser {
                 } catch (NumberFormatException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_CHECK_TERM_GRADE);
                 }
-                System.out.println(timetable.checkGrade(year, term));
+                System.out.println(GradeChecker.checkGrade(timetable, year, term));
             }
             return false;
         case "view":
             if (words.length == 1) {
-                System.out.println(timetable.getPlan());
+                System.out.println(PlanGetter.getPlan(timetable));
             } else if (words.length == 2) {
                 try {
                     year = Integer.parseInt(words[1].substring("y/".length()));
                 } catch (NumberFormatException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_VIEW_YEAR_PLAN);
                 }
-                System.out.println(timetable.getPlan(year));
+                System.out.println(PlanGetter.getPlan(timetable, year));
             } else {
                 try {
                     year = Integer.parseInt(words[1].substring("y/".length()));
@@ -145,7 +145,7 @@ public class Parser {
                 } catch (NumberFormatException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_VIEW_TERM_PLAN);
                 }
-                System.out.println(timetable.getPlan(year, term));
+                System.out.println(PlanGetter.getPlan(timetable, year, term));
             }
             return false;
         case "help":

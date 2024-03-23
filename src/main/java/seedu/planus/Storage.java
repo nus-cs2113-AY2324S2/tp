@@ -49,7 +49,7 @@ public class Storage {
         Path filePath = Paths.get(filePathName);
 
         if (!Files.exists(filePath)) {
-            if (timetableName == "myTimetable") {
+            if (timetableName.equals("myTimetable")) {
                 System.out.println("File at " + filePathName + " is not found. Trying to create one.");
                 createFile(filePathName);
             } else {
@@ -77,7 +77,7 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.next();
             try {
-                Course course = parseCourse(line);
+                Course course = parseCourse(timetableName, line);
                 newTimetable.addCourse(course);
             } catch (Exception e) {
                 System.out.println("Data corrupted at line " + lineNumber + "of file at " + filePathName);
@@ -112,13 +112,14 @@ public class Storage {
         Ui.printFileCreated();
     }
 
-    public static Course parseCourse(String sentence) throws Exception {
+    public static Course parseCourse(String timetableName, String sentence) throws Exception {
         String[] words = sentence.split(",");
         String courseCode;
         String courseName;
         int modularCredits;
         int year;
         int term;
+        String letterGrade = null;
 
         try {
             courseCode = words[0];
@@ -126,11 +127,18 @@ public class Storage {
             modularCredits = Integer.parseInt(words[2]);
             year = Integer.parseInt(words[3]);
             term = Integer.parseInt(words[4]);
+            if (timetableName.equals("myTimetable")) {
+                letterGrade = words[5];
+            }
         } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
             throw new Exception();
         }
 
-        return new Course(courseCode, courseName, modularCredits, year, term);
+        Course course = new Course(courseCode, courseName, modularCredits, year, term);
+        if (timetableName.equals("myTimetable")) {
+            course.setGrade(letterGrade);
+        }
+        return course;
     }
 
 }
