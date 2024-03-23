@@ -1,8 +1,6 @@
 package longah;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
@@ -22,6 +20,7 @@ import longah.commands.Command;
 public class LongAh {
     private static final Logger LongAhLogger = Logger.getLogger("LongAh");
     private static Group group;
+    private static PINHandler pinHandler;
     private Scanner scanner;
 
     /**
@@ -49,16 +48,11 @@ public class LongAh {
         LongAhLogger.log(Level.INFO, "Starting Pre-program preparations.");
         System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
-        PINHandler pinHandler = new PINHandler();
 
-        if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| pinHandler.loadPin().isEmpty()) {
-            pinHandler.createPin();
-        }
-
-        pinHandler.authenticate();
         try {
             LongAhLogger.log(Level.INFO, "Loading previous member and transaction info.");
             group = new Group();
+            pinHandler = new PINHandler();
         } catch (LongAhException e) {
             LongAhLogger.log(Level.WARNING, "Loading process fails! Unable to create file or " +
                     "file could not be access.");

@@ -19,12 +19,20 @@ public class PINHandler {
     private static Logger logger = Logger.getLogger("PIN Logger");
     private static final String PIN_FILE_PATH = "./data/pin.txt";
     private Scanner scanner;
+    private String savedPin;
 
     /**
      * Constructs a new PINHandler instance.
      */
     public PINHandler() {
         this.scanner = new Scanner(System.in);
+        if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| loadPin().isEmpty()) {
+            createPin();
+            loadPin();
+        } else {
+            loadPin();
+        }
+        authenticate();
     }
 
     /**
@@ -44,12 +52,13 @@ public class PINHandler {
                 + "Create your 6-digit PIN:\n");
         String pin = scanner.nextLine();
 
+        // check if the input is a 6-digit number
         while (pin.length() != 6 || !pin.matches("\\d{6}")) {
-            if (Objects.equals(pin, "quit")) {
+            if (Objects.equals(pin, "exit")) {
                 System.exit(0);
             }
             System.out.println("Invalid PIN. Your PIN must be a 6-digit number. " +
-                "Please try again, or enter 'quit' to exit.");
+                "Please try again, or enter 'exit' to exit LongAh.");
             System.out.print("Enter a 6-digit PIN: ");
             pin = scanner.nextLine();
         }
@@ -74,11 +83,8 @@ public class PINHandler {
 
     /**
      * Loads the saved PIN from the file.
-     *
-     * @return The saved PIN.
      */
     public String loadPin() {
-        String savedPin = "";
         try {
             // Load hashed PIN after loading
             savedPin = new String(Files.readAllBytes(Paths.get(PIN_FILE_PATH)));
@@ -90,10 +96,17 @@ public class PINHandler {
     }
 
     /**
+     * Gets the saved PIN.
+     */
+    public String getPin() {
+        return savedPin;
+    }
+
+    /**
      * Authenticates the user by comparing the entered PIN with the saved PIN.
      */
     public void authenticate() {
-        String savedPin = loadPin();
+        String savedPin = getPin();
         assert savedPin != null : "Saved PIN should not be null.";
 
         System.out.print("Enter your PIN: ");
@@ -107,10 +120,10 @@ public class PINHandler {
             String hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
 
             while (!hashedEnteredPinHex.equals(savedPin)) {
-                if (Objects.equals(enteredPin, "quit")) {
+                if (Objects.equals(enteredPin, "exit")) {
                     System.exit(0);
                 }
-                System.out.println("Invalid PIN. Please try again. Alternatively, enter 'quit' to exit.");
+                System.out.println("Invalid PIN. Please try again. Alternatively, enter 'exit' to exit LongAh.");
                 System.out.println("Enter your PIN:");
                 enteredPin = scanner.nextLine();
                 hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
@@ -136,7 +149,7 @@ public class PINHandler {
             byte[] hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
             String hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
 
-            String savedPin = loadPin();
+            String savedPin = getPin();
             if (hashedEnteredPinHex.equals(savedPin)) {
                 // If the entered PIN is correct, allow the user to create a new PIN
                 createPin();
