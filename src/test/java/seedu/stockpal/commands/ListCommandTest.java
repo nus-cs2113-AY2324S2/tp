@@ -36,7 +36,7 @@ public class ListCommandTest {
 
     @Test
     public void emptyListTest() {
-        ListCommand command = new ListCommand();
+        ListCommand command = new ListCommand(null);
         command.execute(emptyProductList);
         assertEquals(MESSAGE_EMPTY_LIST, output.toString().trim());
     }
@@ -64,7 +64,7 @@ public class ListCommandTest {
 
     @Test
     public void listTest() throws IOException {
-        ListCommand command = new ListCommand();
+        ListCommand command = new ListCommand(null);
         command.execute(productList);
         String expected = new String(Files.readAllBytes(Paths.get(LIST_TEST_FILE_TO_COMPARE)));
         assertEquals(expected, output.toString());
