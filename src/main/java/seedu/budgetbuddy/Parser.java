@@ -1,14 +1,24 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.command.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.budgetbuddy.command.FindExpensesCommand;
+import seedu.budgetbuddy.command.ListExpenseCommand;
+import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.ChangeCurrencyCommand;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
+import seedu.budgetbuddy.command.MenuCommand;
+import seedu.budgetbuddy.command.AddExpenseCommand;
+import seedu.budgetbuddy.command.EditSavingCommand;
+import seedu.budgetbuddy.command.EditExpenseCommand;
+import seedu.budgetbuddy.command.AddSavingCommand;
+import seedu.budgetbuddy.command.DeleteExpenseCommand;
+import seedu.budgetbuddy.command.ReduceSavingCommand;
+import seedu.budgetbuddy.command.Command;
 
 public class Parser {
     
@@ -254,20 +264,31 @@ public class Parser {
         return false;
     }
 
-    public Command handleChangeCurrencyCommand(String input, SavingList savingList, ExpenseList expenseList, CurrencyConverter currencyConverter) {
+    public Command handleChangeCurrencyCommand(String input, SavingList savingList, ExpenseList expenseList,
+                                               CurrencyConverter currencyConverter) {
         if (input.startsWith("change currency")) {
             String[] parts = input.split(" ");
+            assert parts.length > 1 : "Input should contain currency code";
+
             if (parts.length == 3) {
                 String currencyCode = parts[2];
+                assert !currencyCode.isEmpty() : "Currency code should not be empty";
+
                 try {
                     Currency newCurrency = Currency.getInstance(currencyCode.toUpperCase());
+                    assert newCurrency != null : "Currency code should be valid";
+                    LOGGER.log(Level.INFO, "Default currency changed to " + newCurrency);
                     System.out.println("Default currency changed to " + newCurrency);
                     return new ChangeCurrencyCommand(newCurrency, savingList, expenseList, currencyConverter);
                 } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid currency code: " + currencyCode);
                     System.out.println("Invalid currency code.");
+                    return null;
                 }
             } else {
+                LOGGER.log(Level.WARNING, "Invalid command format. Use 'change currency <currency_code>'.");
                 System.out.println("Invalid command format. Use 'change currency <currency_code>'.");
+                return null;
             }
         }
         return null;
