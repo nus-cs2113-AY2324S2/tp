@@ -89,5 +89,9 @@ public abstract class ActivityManager {
         UserInterface.printMessage(result.toString());
     }
 
+    public ArrayList<Activity> getActivityList() {
+        return activityList;
+    }
+
     public abstract String getActivityType(boolean plural);
 }

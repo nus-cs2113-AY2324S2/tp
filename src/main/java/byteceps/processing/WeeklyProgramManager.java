@@ -135,6 +135,18 @@ public class WeeklyProgramManager extends ActivityManager {
         }
     }
 
+    public void assignWorkoutToDay(Activity workout, int ordinalOfDay) throws Exceptions.InvalidInput,
+            Exceptions.ActivityExistsException{
+        Workout chosenDayWorkout = (Workout) activityList.get(ordinalOfDay);
+
+        if (chosenDayWorkout != null) {
+            throw new Exceptions.ActivityExistsException(String.format("Workout %s is already assigned to this day",
+                    chosenDayWorkout.getActivityName()));
+        }
+
+        activityList.set(ordinalOfDay, workout);
+    }
+
     public String getActivityType(boolean plural) {
         return plural ? "weekly program" : "weekly programs";
     }

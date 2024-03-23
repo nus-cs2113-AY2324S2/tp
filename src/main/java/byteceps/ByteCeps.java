@@ -5,7 +5,10 @@ import byteceps.errors.Exceptions;
 import byteceps.processing.ExerciseManager;
 import byteceps.processing.WeeklyProgramManager;
 import byteceps.processing.WorkoutManager;
+import byteceps.storage.Storage;
 import byteceps.ui.UserInterface;
+
+import java.io.IOException;
 
 public class ByteCeps {
     private static ExerciseManager exerciseManager = null;
@@ -13,6 +16,8 @@ public class ByteCeps {
     private static WeeklyProgramManager weeklyProgramManager = null;
     private static Parser parser;
     private static UserInterface ui;
+    private static Storage storage;
+    private static final String FILE_PATH = "data.json";
 
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
@@ -20,6 +25,7 @@ public class ByteCeps {
         weeklyProgramManager = new WeeklyProgramManager(workoutManager);
         ui = new UserInterface();
         parser = new Parser();
+        storage = new Storage(FILE_PATH);
     }
 
     public static void main(String[] args) {
@@ -50,7 +56,7 @@ public class ByteCeps {
                 }
 
             } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
-                     Exceptions.InvalidInput | Exceptions.ActivityDoesNotExists  | IllegalStateException e) {
+                     Exceptions.InvalidInput | Exceptions.ActivityDoesNotExists | IllegalStateException e) {
                 UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
             }
         }
@@ -58,7 +64,13 @@ public class ByteCeps {
 
     public void run() {
         ui.printWelcomeMessage();
-        commandLine();
+        try {
+            storage.load(exerciseManager, workoutManager, weeklyProgramManager);
+            commandLine();
+            storage.save(exerciseManager, workoutManager, weeklyProgramManager);
+        } catch (IOException e) {
+            UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
+        }
         ui.printGoodbyeMessage();
     }
 

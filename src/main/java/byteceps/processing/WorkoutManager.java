@@ -84,7 +84,7 @@ public class WorkoutManager extends ActivityManager {
         Workout existingWorkout = processWorkout(parser);
         delete(existingWorkout);
         UserInterface.printMessage(String.format(
-                "Deleted Exercise: %s", existingWorkout.getActivityName()
+                "Deleted Workout: %s", existingWorkout.getActivityName()
         ));
     }
 
