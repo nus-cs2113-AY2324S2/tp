@@ -16,6 +16,7 @@ public class LifeTrack {
         LiquidList liquidList = new LiquidList();
         Scanner in = new Scanner(System.in);
         Ui.sayHello();
+        assert true : "dummy assertion set to fail";
         Ui.readUserInput(calorieList,liquidList);
         Ui.byeMessage();
         in.close();
