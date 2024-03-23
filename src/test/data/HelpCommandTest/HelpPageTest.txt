@@ -1,7 +1,8 @@
 ====================================================================================
 Command: new
 
-Description: Adds a new product to the inventory and assigns a unique Product ID (PID) to it.
+Description: Adds a new product to the inventory and assigns a unique Product
+             ID (PID) to it.
 
 Usage: new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]
 
@@ -60,7 +61,7 @@ Description: Lists all products containing KEYWORD.
 Usage: find KEYWORD
 
 Options:
-KEYWORD               Keyword to search for in product name. The keyword is case sensitive.
+KEYWORD               Keyword to search for in product name. Keyword is case sensitive.
 ====================================================================================
 Command: list
 

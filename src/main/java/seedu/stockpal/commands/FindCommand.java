@@ -15,7 +15,7 @@ public class FindCommand extends ListActionCommand{
     };
 
     public static final String[] COMMAND_FLAG_DESCRIPTIONS = {
-        "Keyword to search for in product name. The keyword is case sensitive."
+        "Keyword to search for in product name. Keyword is case sensitive."
     };
 
     private final String keyword;

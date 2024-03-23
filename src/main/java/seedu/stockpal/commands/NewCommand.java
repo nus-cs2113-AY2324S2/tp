@@ -14,7 +14,8 @@ import static seedu.stockpal.ui.Ui.printToScreen;
 public class NewCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "new";
     public static final String COMMAND_DESCRIPTION =
-        "Adds a new product to the inventory and assigns a unique Product ID (PID) to it.";
+        "Adds a new product to the inventory and assigns a unique Product" +
+                "\nID (PID) to it.";
     public static final String COMMAND_USAGE =
         "new n/PRODUCT_NAME q/INITIAL_QUANTITY [p/PRICE] [d/DESCRIPTION]";
 

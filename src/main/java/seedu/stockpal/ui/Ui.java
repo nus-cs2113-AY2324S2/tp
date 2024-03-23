@@ -56,6 +56,12 @@ public final class Ui {
         return WordUtils.wrap(textToFormat, WRAP_LENGTH, LINE_SEPARATOR, true);
     }
 
+    public static String wrapTextWithIndentation (String text, int padding) {
+        String indentation = Messages.SINGLE_SPACE.repeat(padding);
+        return text.replace("\n", LINE_SEPARATOR + indentation);
+    }
+
+
     public static void printExceptionMessage(Exception exception) {
         printToScreen(exception.getMessage());
     }

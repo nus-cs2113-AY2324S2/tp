@@ -2,6 +2,7 @@ package seedu.stockpal.commands;
 
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.exceptions.StockPalException;
+import seedu.stockpal.ui.Ui;
 
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 import static seedu.stockpal.common.Messages.LINE_SEPARATOR;
@@ -62,7 +63,7 @@ public class HelpCommand extends Command {
 
         for (int i = 0; i < flags.length; i++) {
             commandOptions += padUntilWidth(flags[i], FLAG_COL_WIDTH);
-            commandOptions += flagDescriptions[i];
+            commandOptions += Ui.wrapTextWithIndentation(flagDescriptions[i], FLAG_COL_WIDTH);
             commandOptions += LINE_SEPARATOR;
         }
 
@@ -82,7 +83,8 @@ public class HelpCommand extends Command {
     private String formatCommandDetails(String keyword, String description, String usage
             , String[] flags, String[] flagDescriptions) {
         String command = COMMAND_KEYWORD_PREFIX + keyword + LINE_SEPARATOR;
-        String commandDescription = DESCRIPTION_PREFIX + description + LINE_SEPARATOR;
+        String commandDescription = DESCRIPTION_PREFIX
+                + Ui.wrapTextWithIndentation(description, DESCRIPTION_PREFIX.length()) + LINE_SEPARATOR;
         String commandUsage = USAGE_PREFIX + usage + LINE_SEPARATOR;
         String commandOptions = formatCommandOptions(flags, flagDescriptions);
 
