@@ -14,6 +14,7 @@ public class TravelActivity {
     private boolean activityIsDone = false;
     /** Travel activity tag */
     private String tag;
+
     public TravelActivity(String description, LocalDate date, String duration){
         travelActivity = description;
         this.date = date;
@@ -78,3 +79,4 @@ public class TravelActivity {
     }
 
 }
+
