@@ -18,4 +18,8 @@ public class SleepTracker {
     public void addSleepCycle(SleepCycle sleepCycleToAdd) {
         sleepCycleList.addSleepCycle(sleepCycleToAdd);
     }
+
+    public void getSleepCycle(String date) {
+        sleepCycleList.getSleepCycle(date);
+    }
 }

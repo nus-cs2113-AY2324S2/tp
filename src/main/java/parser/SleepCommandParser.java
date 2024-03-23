@@ -2,6 +2,7 @@ package parser;
 
 import commands.Command;
 import commands.sleepcommands.AddSleepCommand;
+import commands.sleepcommands.GetSleepCommand;
 import commands.sleepcommands.ListSleepCommand;
 import exceptions.SleepException;
 import sleep.SleepTracker;
@@ -32,6 +33,8 @@ public class SleepCommandParser {
             return new AddSleepCommand(sleepTracker, sleepCommandArgs);
         case "list":
             return new ListSleepCommand(sleepTracker, sleepCommandArgs);
+        case "get":
+            return new GetSleepCommand(sleepTracker, sleepCommandArgs);
         default:
             throw new SleepException("Unknown sleep command");
         }
