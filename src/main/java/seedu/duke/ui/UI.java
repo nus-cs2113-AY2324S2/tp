@@ -46,4 +46,8 @@ public class UI {
     public static void printAddForAll(Task task) {
         System.out.println("The following task is added for all users: " + task.toString());
     }
+
+    public static void printLine() {
+        System.out.println("____________________________________________________________");
+    }
 }

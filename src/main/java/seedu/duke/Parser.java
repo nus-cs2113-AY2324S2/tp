@@ -36,6 +36,7 @@ public class Parser {
                 User newUser = new User(userName);
                 UI.printNewUser(newUser.getName());
                 userList.addUser(newUser);
+                Storage.addUserInFolder();
             } catch (InvalidFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -51,6 +52,8 @@ public class Parser {
             }
         } else if (command.toLowerCase().startsWith("addtask")) {
             addTask(command, userList);
+            User currentUser = userList.getActiveUser();
+            currentUser.getStorage().writeTaskInFile(currentUser);
         } else if (command.toLowerCase().startsWith("deletetask")) {
             deleteTask(command, userList);
         } else if(command.toLowerCase().startsWith("changetasktiming")){
