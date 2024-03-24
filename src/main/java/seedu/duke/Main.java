@@ -87,7 +87,8 @@ public class Main {
                 try {
                     String[] parts = input.split(",\\s*");
                     if (parts.length < 4) {
-                        throw new TaskManagerException("Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>");
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "add, <day>, <taskType>, <taskDescription>");
                     }
                     String action = parts[0];
                     int day = Integer.parseInt(parts[1].trim());

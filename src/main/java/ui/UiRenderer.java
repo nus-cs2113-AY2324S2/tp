@@ -12,7 +12,8 @@ import data.TaskManager;
 public class UiRenderer {
     private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private static final String[] WEEK_DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private static final String[] WEEK_DAYS = {"Sunday", "Monday", "Tuesday",
+        "Wednesday", "Thursday", "Friday", "Saturday"};
 
     private static final int SPACE_COUNT = 10;
     private static final String SINGLE_HORIZONTAL_DIVIDER = "+" + "-".repeat(SPACE_COUNT + 2);

@@ -131,51 +131,52 @@ public class TaskManager {
      * @throws TaskManagerException If there is an error in managing tasks.
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-//    public static void addManager(Scanner scanner, WeekView weekView, boolean inMonthView)
-//            throws TaskManagerException, DateTimeParseException {
-//        System.out.println("Enter the date for the task (dd/MM/yyyy):");
-//        LocalDate date = parseInputDate(scanner);
-//
-//        if (inMonthView) {
-//            checkIfDateInCurrentMonth(date);
-//        } else {
-//            checkIfDateInCurrentWeek(date, weekView);
-//        }
-//
-//        // vvv Below methods should be recreated when console inputs are streamlined
-//        System.out.println("Enter the type of task (T for Todo, E for event, D for deadline):");
-//        TaskType taskType = parseTaskType(scanner.nextLine().trim().toUpperCase());
-//        // ^^^ Above methods should be recreated  when console inputs are streamlined
-//
-//        System.out.println("Enter the task description:");
-//        String taskDescription = scanner.nextLine().trim();
-//
-//        // vvv Below methods should be recreated when console inputs are streamlined
-//        if (taskType == DEADLINE) {
-//            System.out.println("Enter the deadline of this task:");
-//            String[] deadline = new String[]{scanner.nextLine().trim()};
-//
-//            addTask(date, taskDescription, taskType, deadline);
-//        } else if (taskType == EVENT) {
-//            System.out.println("Enter the start date of this task:");
-//            String startDate = scanner.nextLine().trim();
-//            System.out.println("Enter the end date of this task:");
-//            String endDate = scanner.nextLine().trim();
-//            String [] startAndEndDates = new String[]{startDate, endDate};
-//
-//            addTask(date, taskDescription, taskType, startAndEndDates);
-//        } else {
-//            String[] dummyDates = {null}; // dummy String array to pass into function call
-//            addTask(date, taskDescription, taskType, dummyDates);
-//        }
-//        // ^^^ Above methods should be recreated  when console inputs are streamlined
-//
-//        saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
-//        System.out.println("Task added.");
-//    }
-
-    public static void addManager(WeekView weekView, boolean inMonthView, String action, int day, String taskTypeString, String taskDescription)
+    /*
+    public static void addManager(Scanner scanner, WeekView weekView, boolean inMonthView)
             throws TaskManagerException, DateTimeParseException {
+        System.out.println("Enter the date for the task (dd/MM/yyyy):");
+        LocalDate date = parseInputDate(scanner);
+
+        if (inMonthView) {
+            checkIfDateInCurrentMonth(date);
+        } else {
+            checkIfDateInCurrentWeek(date, weekView);
+        }
+
+        // vvv Below methods should be recreated when console inputs are streamlined
+        System.out.println("Enter the type of task (T for Todo, E for event, D for deadline):");
+        TaskType taskType = parseTaskType(scanner.nextLine().trim().toUpperCase());
+        // ^^^ Above methods should be recreated  when console inputs are streamlined
+
+        System.out.println("Enter the task description:");
+        String taskDescription = scanner.nextLine().trim();
+
+        // vvv Below methods should be recreated when console inputs are streamlined
+        if (taskType == DEADLINE) {
+            System.out.println("Enter the deadline of this task:");
+            String[] deadline = new String[]{scanner.nextLine().trim()};
+
+            addTask(date, taskDescription, taskType, deadline);
+        } else if (taskType == EVENT) {
+            System.out.println("Enter the start date of this task:");
+            String startDate = scanner.nextLine().trim();
+            System.out.println("Enter the end date of this task:");
+            String endDate = scanner.nextLine().trim();
+            String [] startAndEndDates = new String[]{startDate, endDate};
+
+            addTask(date, taskDescription, taskType, startAndEndDates);
+        } else {
+            String[] dummyDates = {null}; // dummy String array to pass into function call
+            addTask(date, taskDescription, taskType, dummyDates);
+        }
+        // ^^^ Above methods should be recreated  when console inputs are streamlined
+
+        saveTasksToFile(tasks, Storage.FILE_PATH); // Updates tasks from hashmap into tasks.txt file
+        System.out.println("Task added.");
+    }
+*/
+    public static void addManager(WeekView weekView, boolean inMonthView, String action, int day, String taskTypeString,
+                                  String taskDescription) throws TaskManagerException, DateTimeParseException {
 
         // Convert the day to a LocalDate
         LocalDate date = weekView.getStartOfWeek().plusDays(day - 1);
@@ -191,7 +192,8 @@ public class TaskManager {
         TaskType taskType = parseTaskType(taskTypeString.toUpperCase());
 
         if (taskType == null) {
-            throw new TaskManagerException("Invalid task type. Please provide valid task type: T for Todo, E for event, D for deadline.");
+            throw new TaskManagerException("Invalid task type. Please provide valid task type: " +
+                    "T for Todo, E for event, D for deadline.");
         }
 
         // Add the task based on the parsed inputs
