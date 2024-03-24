@@ -56,7 +56,7 @@ To facilitate the management of students within a tuition centre, it is imperati
 
 Seen below is an UML diagram of the relevant classes dealing with storage.
 
-![DataStoringUML](./diagrams/out/DataStoring.png)
+![DataStoringUML](./diagrams/src/DataStoring/DateStoring.png)
 
 #### Design considerations
 
