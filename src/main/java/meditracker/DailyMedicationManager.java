@@ -146,4 +146,13 @@ public class DailyMedicationManager {
         }
         return dailyMedicationStrings;
     }
+
+    /**
+     * Returns the total number of daily medications in the list.
+     *
+     * @return The total number of daily medications.
+     */
+    public int getTotalDailyMedication() {
+        return dailyMedications.size();
+    }
 }
