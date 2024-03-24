@@ -9,6 +9,9 @@ public class Habit {
     private String description;
     private int habitCount;
 
+
+    private Priority priority;
+
     /**
      * Constructs a habit object with the habit description.
      *
@@ -17,11 +20,13 @@ public class Habit {
     public Habit(String description) {
         this.description = description;
         this.habitCount = 0;
+        this.priority = Priority.LOW;
     }
 
-    public Habit(String description, int habitCount) {
+    public Habit(String description, int habitCount, Priority priority) {
         this.description = description;
         this.habitCount = habitCount;
+        this.priority = priority;
     }
 
     public String getDescription() {
@@ -30,6 +35,10 @@ public class Habit {
 
     public int getHabitCount() {
         return habitCount;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     /**
@@ -55,8 +64,23 @@ public class Habit {
         return changeInCount;
     }
 
+    public void setPriority (String priority) {
+        switch (priority) {
+        case "low":
+            this.priority = Priority.LOW;
+            break;
+        case "med":
+            this.priority = Priority.MED;
+            break;
+        case "high":
+            this.priority = Priority.HIGH;
+            break;
+        default:
+        }
+    }
+
     public String toString() {
-        return description + " [count: " + habitCount + "]";
+        return " [" + priority + "] " + description + " [count: " + habitCount + "]";
     }
 
 }

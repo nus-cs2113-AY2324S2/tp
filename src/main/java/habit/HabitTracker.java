@@ -100,4 +100,21 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
+    public void setPriorityLevel(int habitID, String priority) throws HabitException {
+        if (!isValidHabitID(habitID)) {
+            throw new HabitException("Please provide a valid habit ID.");
+        }
+
+        Habit habit = habitList.get(habitID - 1);
+        habit.setPriority(priority);
+
+        String setPriorityLevelMessage = "";
+
+        setPriorityLevelMessage += "The priority for your habit has been updated:\n";
+        setPriorityLevelMessage += "  " + habitID + ". " + habit;
+        Ui.printMessageWithSepNewLine(setPriorityLevelMessage);
+
+        saveHabitListToFile(habitList);
+    }
+
 }
