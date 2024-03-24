@@ -22,7 +22,7 @@ class BookListTest {
         BookList testBookList = new BookList();
         testBookList.addBook("Harry Potter");
         assertEquals(1, testBookList.getSize());
-        assertEquals("[U] Harry Potter", testBookList.getBook(0).toString());
+        assertEquals("[U] Harry Potter", testBookList.getBook(1).toString());
     }
 
     @Test
@@ -57,7 +57,7 @@ class BookListTest {
         bookList.addBook("Harry Potter");
         bookList.addBook("Geronimo");
         bookList.addBook("Cradle");
-        assertEquals("[U] Cradle", bookList.getBook(2).toString());
+        assertEquals("[U] Cradle", bookList.getBook(3).toString());
     }
 
     @Test
@@ -65,7 +65,7 @@ class BookListTest {
         BookList bookList = new BookList();
         bookList.addBook("Harry Potter");
         bookList.markDoneByIndex(1);
-        assertEquals("[R] Harry Potter", bookList.getBook(0).toString());
+        assertEquals("[R] Harry Potter", bookList.getBook(1).toString());
     }
 
     @Test
@@ -73,9 +73,9 @@ class BookListTest {
         BookList bookList = new BookList();
         bookList.addBook("Harry Potter");
         bookList.markDoneByIndex(1);
-        assertEquals("[R] Harry Potter", bookList.getBook(0).toString());
+        assertEquals("[R] Harry Potter", bookList.getBook(1).toString());
         bookList.markUndoneByIndex(1);
-        assertEquals("[U] Harry Potter", bookList.getBook(0).toString());
+        assertEquals("[U] Harry Potter", bookList.getBook(1).toString());
     }
 
 }

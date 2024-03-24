@@ -41,6 +41,7 @@ public class BookBuddy {
     public static void main(String[] args) {
         LOGGER.log(Level.INFO, "BookBuddy application started.");
         Ui.printWelcome();
+        assert books != null : "BookList not created";
         getUserInput(books);
         LOGGER.log(Level.INFO, "BookBuddy application is shutting down.");
     }
@@ -66,9 +67,10 @@ public class BookBuddy {
                 System.out.println(e.getMessage());
             } catch (InvalidCommandArgumentException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) { // Generic catch block for any other exceptions
+                LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+                System.out.println("An unexpected error occurred. Please contact support.");
             }
         }
     }
-
-
 }

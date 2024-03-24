@@ -5,4 +5,3 @@ public class InvalidBookIndexException extends NumberFormatException {
         super(message);
     }
 }
-

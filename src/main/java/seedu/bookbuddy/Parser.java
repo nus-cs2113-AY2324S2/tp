@@ -27,7 +27,7 @@ public class Parser {
      * @param books ArrayList of books
      */
 
-    public static void parseCommand( String input, BookList books) {
+    public static void parseCommand(String input, BookList books) {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
         LOGGER.log(Level.FINE, "Parsing command: {0}", command);
@@ -35,26 +35,54 @@ public class Parser {
         try {
             switch (command) {
             case ADD_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
                 if (inputArray.length < 2) {
                     LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
+                    System.out.println("throwing invalidcommand");
                     throw new InvalidCommandArgumentException("The add command requires a book title.");
                 }
                 books.addBook(inputArray[1]);
                 break;
             case REMOVE_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.deleteBook(index);
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    books.deleteBook(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case LIST_COMMAND:
                 books.printAllBooks();
                 break;
             case MARK_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.markDoneByIndex(index);
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    assert index >= 0 : "Index should be non-negative";
+                    books.markDoneByIndex(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case UNMARK_COMMAND:
-                index = Integer.parseInt(inputArray[1]);
-                books.markUndoneByIndex(index);
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    assert index >= 0 : "Index should be non-negative";
+                    books.markUndoneByIndex(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                }
                 break;
             case HELP_COMMAND:
                 Ui.helpMessage();
@@ -65,13 +93,22 @@ public class Parser {
                 break;
             default:
                 LOGGER.log(Level.WARNING, "Sorry but that is not a valid command. Please try again", command);
-                throw new UnsupportedCommandException("Sorry but that is not a valid command. Please try again");
+                throw new UnsupportedCommandException("Sorry but that is not a valid command. " +
+                        "Please try again or type: help");
             }
         } catch (NumberFormatException e) {
             throw new InvalidBookIndexException("Book index must be an integer.");
         } catch (IndexOutOfBoundsException e) {
             throw new BookNotFoundException("Book not found at the provided index.");
+        } catch (InvalidCommandArgumentException e) {
+            LOGGER.log(Level.WARNING, "Invalid command argument: {0}", e.getMessage());
+            throw e;
+        } catch (UnsupportedCommandException e) {
+            LOGGER.log(Level.WARNING, "Command is invalid", e.getMessage());
+            throw e;
+        } catch (Exception e) { // Generic catch block for any other exceptions
+            LOGGER.log(Level.SEVERE, "An unexpected error occurred: {0}", e.getMessage());
+            System.out.println("An unexpected error occurred. Please contact support.");
         }
     }
-
 }

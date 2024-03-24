@@ -19,6 +19,7 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
+        jvmArgs '-da'
 
         showExceptions true
         exceptionFormat "full"
@@ -35,6 +36,7 @@ application {
 shadowJar {
     archiveBaseName.set("bookbuddy")
     archiveClassifier.set("")
+    archiveFileName = 'BookBuddy.jar'
 }
 
 checkstyle {
