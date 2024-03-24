@@ -42,9 +42,9 @@ public class Parser {
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
     private static final String EX_DATE_GROUP = "expiry";
-    private static final String EX_DATE_FORMAT = "dd/MM/yyyy";
-    private static final String INVALID_EX_DATE_FORMAT = "dd/MM/yyyyy";
-    private static final String INVALID_EX_DATE = "01/01/99999";
+    private static final String EX_DATE_FORMAT = "dd-MM-yyyy";
+    private static final String INVALID_EX_DATE_FORMAT = "dd-MM-yyyyy";
+    private static final String INVALID_EX_DATE = "01-01-99999";
     private static final String SORT_QUANTITY_FLAG = "sq";
     private static final String SORT_PRICE_FLAG = "sp";
     private static final String REVERSE_FLAG = "r";
@@ -318,6 +318,7 @@ public class Parser {
         return new ListCommand(hasQuantity, hasPrice, firstParam, sortBy, reverse);
     }
 
+    //@@vimalapugazhan
     private static Command parseDeleteCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG};
         Matcher matcher = getPatternMatcher(DELETE_COMMAND_REGEX, input, flags);
