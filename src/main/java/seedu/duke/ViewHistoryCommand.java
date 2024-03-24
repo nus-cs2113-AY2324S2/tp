@@ -5,7 +5,7 @@ import seedu.duke.exceptions.FlirtForkException;
 public class ViewHistoryCommand extends Command {
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
-                        Storage storage) throws FlirtForkException {
+                        Storage storage, UserDetails userDetails) throws FlirtForkException {
         int foodCount = 0;
         int activityCount = 0;
         System.out.println("These are the activities you have completed:");
