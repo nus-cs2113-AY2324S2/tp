@@ -10,7 +10,8 @@ public class ExpirationDateArgument extends Argument {
                 "-e",
                 "When does the medication expire?",
                 "Expiration date of medication",
-                isOptional
+                isOptional,
+                false
         );
     }
 }

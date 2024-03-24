@@ -10,7 +10,8 @@ public class QuantityArgument extends Argument {
                 "-q",
                 "How much of the medication do you have?",
                 "Quantity of medication",
-                isOptional
+                isOptional,
+                false
         );
     }
 }

@@ -10,7 +10,8 @@ public class IntakeFrequencyArgument extends Argument {
                 "-f",
                 "How often should this medication be taken?",
                 "Intake frequency of medication",
-                isOptional
+                isOptional,
+                false
         );
     }
 }

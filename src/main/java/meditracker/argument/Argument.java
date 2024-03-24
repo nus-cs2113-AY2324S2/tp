@@ -13,6 +13,7 @@ public abstract class Argument {
     private final String prompt;
     private final String help;
     private final boolean isOptional;
+    private final boolean hasNoValue;
 
     /**
      * Constructs Argument object with the fields required to
@@ -24,13 +25,20 @@ public abstract class Argument {
      * @param prompt Guided prompt message
      * @param help Help message for additional context
      * @param isOptional Whether this argument is optional or required
+     * @param hasNoValue Whether this argument requires a value specified with it
      */
-    public Argument(ArgumentName name, String flag, String prompt, String help, boolean isOptional) {
+    public Argument(ArgumentName name,
+                    String flag,
+                    String prompt,
+                    String help,
+                    boolean isOptional,
+                    boolean hasNoValue) {
         this.name = name;
         this.flag = flag;
         this.prompt = prompt;
         this.help = help;
         this.isOptional = isOptional;
+        this.hasNoValue = hasNoValue;
     }
 
     public ArgumentName getName() {
@@ -51,5 +59,9 @@ public abstract class Argument {
 
     public boolean isOptional() {
         return isOptional;
+    }
+
+    public boolean hasNoValue() {
+        return hasNoValue;
     }
 }
