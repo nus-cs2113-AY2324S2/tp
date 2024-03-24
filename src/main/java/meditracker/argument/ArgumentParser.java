@@ -70,6 +70,7 @@ class ArgumentParser {
     private void getArgumentValues(SortedMap<Integer, Argument> indexes, List<String> rawInputSplit) {
         Argument argument = indexes.get(indexes.firstKey());
         ArgumentName argKey = argument.getName();
+        boolean hasNoValue = argument.hasNoValue();
         int startIndex = indexes.firstKey() + 1; // position after argument flag
         int endIndex;
 
@@ -81,11 +82,17 @@ class ArgumentParser {
             }
 
             endIndex = index.getKey();
-            String argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
+            String argValue;
+            if (hasNoValue) {
+                argValue = ""; // No value to be stored
+            } else {
+                argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
+            }
             parsedArguments.put(argKey, argValue);
 
             argument = index.getValue();
             argKey = argument.getName();
+            hasNoValue = argument.hasNoValue();
             startIndex = endIndex + 1; // position after argument flag
         }
 
