@@ -1,5 +1,8 @@
 package fitness;
 
+/**
+ * Enumeration Class used for exercise type, to prevent incorrect types from being used
+ * */
 public enum ExerciseType {
     ARMS,
     CHEST,

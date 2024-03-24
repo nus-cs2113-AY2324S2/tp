@@ -7,9 +7,14 @@ import java.util.Comparator;
 
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
+/**
+ * Represents the list of exercises and includes methods to manipulate the list
+ * */
 public class ExerciseList {
 
     private ArrayList<Exercise> allExercises = new ArrayList<>();
+
+    // Constant lists used to initialise data into local machine
     private final String[] originalListForArms = {
         "Cable Triceps Push down,Arms,3,8", "Barbell Curls,Arms,3,8", "Preacher Curls,Arms,3,8",
         "Skullcrushers,Arms,3,8", "Lateral Raises,Arms,3,8"
@@ -31,6 +36,10 @@ public class ExerciseList {
         "Leg Extensions,Legs,3,10", "Calf Raises,Legs,3,10"
     };
 
+    /**
+     * Checks if a save file exists, if it does then load it for use, else create a new data file
+     * and initialise it with the data above.
+     * */
     public ExerciseList() {
         if (!Storage.isFileCreated(FitnessMotivator.FILE_PATH)) {
             initialiseData();
@@ -40,6 +49,9 @@ public class ExerciseList {
         }
     }
 
+    /**
+     * Reads all 5 different string arrays from above and adds it into one ArrayList for use
+     * */
     private void initialiseData() {
         for (String s : originalListForArms) {
             String[] exerciseDetails = s.split(",");
@@ -83,6 +95,12 @@ public class ExerciseList {
         }
     }
 
+    /**
+     * Further parses data read from storage into usable exercise objects, before adding it into
+     * the ArrayList.
+     *
+     * @param data An ArrayList of strings, comprising lines read from the data file
+     * */
     private void parseData (ArrayList<String> data) {
         for (String s: data) {
             String[] parts = s.split(": |, | sets & | reps");
@@ -110,6 +128,15 @@ public class ExerciseList {
         Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
     }
 
+    /**
+     * This method searches the ArrayList for Exercises that matches the required type, and returns
+     * the n-th item of the queried type, where n is the index.
+     *
+     * @param type The ExerciseType Enum to be queried
+     * @param index The n-th instance of all object that matches the queried ExerciseType
+     *
+     * @return Returns an Object of type Exercise that matches the type and index queried.
+     * */
     public Exercise get(ExerciseType type, int index) {
         ArrayList<Exercise> typeExercises = new ArrayList<>();
         for (Exercise e : allExercises) {
@@ -121,6 +148,11 @@ public class ExerciseList {
         return typeExercises.get(index);
     }
 
+    /**
+     * Returns the total number of a certain type of exercise
+     *
+     * @param type The ExerciseType Enum to be queried
+     * */
     public int size(ExerciseType type) {
         int x = 0;
         for (Exercise e : allExercises) {
@@ -131,6 +163,18 @@ public class ExerciseList {
         return x;
     }
 
+    /**
+     * Creates a new Exercise Object using an array of strings
+     *
+     * @param parameters An array of Strings that provide details for the creation of an Exercise
+     *                   object.
+     *                   Index 0 - Exercise Type
+     *                   Index 1 - Exercise Name
+     *                   Index 2 - Number of Sets
+     *                   Index 3 - Number of Reps
+     *
+     * @return returns a new Exercise object
+     * */
     public Exercise newExercise(String[] parameters) {
         assert parameters.length == REQUIRED_NUM_OF_PARAMETERS
             : "Incorrect Parameters for a new Exercise Object";
