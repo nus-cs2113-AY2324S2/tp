@@ -8,7 +8,10 @@ import seedu.stockpal.commands.EditCommand;
 import seedu.stockpal.commands.DeleteCommand;
 import seedu.stockpal.commands.InflowCommand;
 import seedu.stockpal.commands.OutflowCommand;
+import seedu.stockpal.commands.FindCommand;
+import seedu.stockpal.commands.HistoryCommand;
 import seedu.stockpal.commands.Command;
+
 
 import seedu.stockpal.exceptions.InvalidCommandException;
 import seedu.stockpal.exceptions.InvalidFormatException;
@@ -23,36 +26,43 @@ import java.util.regex.Pattern;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_COMMAND;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED;
 import static seedu.stockpal.common.Messages.MESSAGE_ERROR_INVALID_FORMAT;
+import static seedu.stockpal.common.Messages.MESSAGE_ERROR_EMPTY_NAME;
+import static seedu.stockpal.common.Messages.MESSAGE_ERROR_EMPTY_QUANTITY;
 
 public class Parser {
     public static final String DIVIDER = " ";
     public static final Pattern NEW_COMMAND_PATTERN =
-            Pattern.compile("new n/([^\\t\\n\\r\\f]{1,50})" +
+            Pattern.compile("new n/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]{1,50})" +
                     " q/(\\d+)" +
                     "(?: p/(\\d+\\.\\d{2}))?" +
-                    "(?: d/([^\\t\\n\\r\\f]+))?");
+                    "(?: d/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+))?");
     public static final Pattern EDIT_COMMAND_PATTERN =
             Pattern.compile("edit (\\d+)" +
-                    "(?: n/([^\\t\\n\\r\\f]{1,50}))?" +
+                    "(?: n/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]{1,50}))?" +
                     "(?: q/(\\d+))?" +
                     "(?: p/(\\d+\\.\\d{2}))?" +
-                    "(?: d/([^\\t\\n\\r\\f]+))?");
+                    "(?: d/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+))?");
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
+    public static final Pattern  FIND_COMMAND_PATTERN =
+            Pattern.compile("find ([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+)");
+    public static final Pattern HISTORY_COMMAND_PATTERN = Pattern.compile("history (\\d+)");
+
     public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 4;
     public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 5;
     public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 1;
     public static final int NUM_OF_INFLOW_COMMAND_ARGUMENTS = 2;
     public static final int NUM_OF_OUTFLOW_COMMAND_ARGUMENTS = 2;
+    public static final int NUM_OF_FIND_COMMAND_ARGUMENTS = 1;
+    public static final int NUM_OF_HISTORY_COMMAND_ARGUMENTS = 1;
     public static final int START_INDEX = 0;
-    private static final Double EMPTY_PRICE = -0.1;
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
     public Command parseCommand(String input)
             throws InvalidFormatException, InvalidCommandException, UnsignedIntegerExceededException {
         ArrayList<String> parsed;
-        input = input.strip();
+        input = input.stripLeading();
         String command = getCommandFromInput(input);
 
         switch (command) {
@@ -67,6 +77,7 @@ public class Parser {
 
         case NewCommand.COMMAND_KEYWORD:
             parsed = matchAndParseCommand(input, NEW_COMMAND_PATTERN, NUM_OF_NEW_COMMAND_ARGUMENTS);
+
             assert(parsed.get(0) != null);
             assert(parsed.get(1) != null);
             return validateAndCreateNewCommand(parsed);
@@ -74,7 +85,6 @@ public class Parser {
         case EditCommand.COMMAND_KEYWORD:
             parsed = matchAndParseCommand(input, EDIT_COMMAND_PATTERN, NUM_OF_EDIT_COMMAND_ARGUMENTS);
             assert(parsed.get(0) != null);
-            assert(parsed.get(1) != null);
             return validateAndCreateEditCommand(parsed);
 
         case DeleteCommand.COMMAND_KEYWORD:
@@ -93,6 +103,16 @@ public class Parser {
             assert(parsed.get(0) != null);
             assert(parsed.get(1) != null);
             return validateAndCreateOutflowCommand(parsed);
+
+        case FindCommand.COMMAND_KEYWORD:
+            parsed = matchAndParseCommand(input, FIND_COMMAND_PATTERN, NUM_OF_FIND_COMMAND_ARGUMENTS);
+            assert(parsed.get(0) != null);
+            return validateAndCreateFindCommand(parsed);
+
+        case HistoryCommand.COMMAND_KEYWORD:
+            parsed = matchAndParseCommand(input, HISTORY_COMMAND_PATTERN, NUM_OF_HISTORY_COMMAND_ARGUMENTS);
+            assert(parsed.get(0) != null);
+            return validateAndCreateHistoryCommand(parsed);
 
         default:
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INVALID_COMMAND);
@@ -147,33 +167,75 @@ public class Parser {
     }
 
     private EditCommand validateAndCreateEditCommand(ArrayList<String> parsed) throws UnsignedIntegerExceededException{
-        Integer pid = Integer.parseInt(parsed.get(0));
-        String name = parsed.get(1);
-        Double price = (parsed.get(3) == null)
-                ? null
-                : Double.parseDouble(parsed.get(3));
-        String description = parsed.get(4);
-        try {
-            Integer quantity = (parsed.get(2) == null)
-                    ? null
-                    : Integer.parseInt(parsed.get(2));
+        Integer pid;
+        String name;
+        Integer quantity;
+        Double price;
+        String description;
 
-            return new EditCommand(pid, name, quantity, price, description);
+        name = parsed.get(1);
+        try {
+            pid = Integer.parseInt(parsed.get(0));
+            if (parsed.get(2) != null) {
+                quantity = Integer.parseInt(parsed.get(2));
+            } else {
+                quantity = null;
+            }
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
         }
+
+        if (parsed.get(3) != null) {
+            price = Double.parseDouble(parsed.get(3));
+        } else {
+            price = null;
+        }
+        description = parsed.get(4);
+
+        return new EditCommand(pid, name, quantity, price, description);
+
     }
 
-    private NewCommand validateAndCreateNewCommand(ArrayList<String> parsed) throws UnsignedIntegerExceededException {
-        String name = parsed.get(0);
-        Double price = (parsed.get(2) == null)
-                ? EMPTY_PRICE
-                : Double.parseDouble(parsed.get(2));
-        String description = parsed.get(3);
+    private NewCommand validateAndCreateNewCommand(ArrayList<String> parsed)
+            throws UnsignedIntegerExceededException, InvalidFormatException {
+        String name;
+        Integer quantity;
+        Double price = null;
+        String description;
+
+        if (parsed.get(0) == null) {
+            throw new InvalidFormatException(MESSAGE_ERROR_EMPTY_NAME);
+        }
+        if (parsed.get(1) == null) {
+            throw new InvalidFormatException(MESSAGE_ERROR_EMPTY_QUANTITY);
+        }
+
+        name = parsed.get(0);
         try {
-            Integer quantity = Integer.parseUnsignedInt(parsed.get(1));
-            return new NewCommand(name, quantity, price, description);
+            quantity = Integer.parseUnsignedInt(parsed.get(1));
+        } catch (NumberFormatException nfe) {
+            LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
+            throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
+        }
+
+        if (parsed.get(2) != null) {
+            price = Double.parseDouble(parsed.get(2));
+        }
+        description = parsed.get(3);
+        return new NewCommand(name, quantity, price, description);
+    }
+
+    private FindCommand validateAndCreateFindCommand(ArrayList<String> parsed) {
+        String name = parsed.get(0);
+        return new FindCommand(name);
+    }
+
+    private HistoryCommand validateAndCreateHistoryCommand(ArrayList<String> parsed)
+            throws UnsignedIntegerExceededException {
+        try {
+            Integer pid = Integer.parseInt(parsed.get(0));
+            return new HistoryCommand(pid);
         } catch (NumberFormatException nfe) {
             LOGGER.log(Level.WARNING, MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
             throw new UnsignedIntegerExceededException(MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED);
@@ -197,7 +259,14 @@ public class Parser {
 
         ArrayList<String> parsed = new ArrayList<>();
         for (int i = 1; i < numOfArgs + 1; i++) {
-            parsed.add(matcher.group(i));
+            String argument = matcher.group(i);
+            if (argument != null) {
+                argument = argument.strip();
+                if (argument.isEmpty()) {
+                    argument = null;
+                }
+            }
+            parsed.add(argument);
         }
 
         return parsed;

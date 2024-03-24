@@ -14,7 +14,7 @@ public class Product {
 
     public Product(String name, Integer quantity, Double price, String description, Integer pid) {
         this.name = new Name(name);
-        this.quantity = new Quantity(quantity);
+        this.quantity = new Quantity(quantity, false);
         this.price = new Price(price);
         this.description = new Description(description);
         this.pid = new Pid(pid);
@@ -60,21 +60,31 @@ public class Product {
         return this.pid.equals(pid);
     }
 
+    /**
+     * Increase quantity of the product and throw exception if overflow detected
+     *
+     * @param amountToChange Quantity to increase by
+     */
     public void increaseQuantity(Integer amountToChange) {
         try {
             quantity.updateIncreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
-        } catch (InventoryQuantityOverflowException IQOE) {
+        } catch (InventoryQuantityOverflowException iqoe) {
             Ui.printToScreen("Overflow detected. No change to quantity. " + quantity.toString());
         }
 
     }
 
+    /**
+     * Decrease quantity of the product and throw exception when outflow > current amount
+     *
+     * @param amountToChange Quantity to decrease by
+     */
     public void decreaseQuantity(Integer amountToChange) {
         try {
             quantity.updateDecreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
-        } catch (InsufficientAmountException IAE) {
+        } catch (InsufficientAmountException iae) {
             Ui.printToScreen("Insufficient amount in inventory. No change to quantity. " + quantity.toString());
         }
     }

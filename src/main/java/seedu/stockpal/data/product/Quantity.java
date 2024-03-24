@@ -3,17 +3,35 @@ package seedu.stockpal.data.product;
 import seedu.stockpal.common.CommandParameter;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
+import seedu.stockpal.ui.Ui;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Quantity implements CommandParameter {
     public static final Integer MAX_QUANTITY = Integer.MAX_VALUE;
-    protected Integer quantity;
+    public static final Integer WARNING_QUANTITY = 20;
 
-    public Quantity(Integer quantity) {
+    protected static Logger logger = Logger.getLogger(Quantity.class.getName());
+
+    protected Integer quantity;
+    private boolean isLowQuantityWarningPrinted;
+
+    public Quantity(Integer quantity, boolean isLowQuantityWarningPrinted) {
         this.quantity = quantity;
+        this.isLowQuantityWarningPrinted = isLowQuantityWarningPrinted;
     }
 
     public Integer getQuantity() {
         return this.quantity;
+    }
+
+    public boolean isLowQuantityWarningPrinted() {
+        return isLowQuantityWarningPrinted;
+    }
+
+    public void setWarningPrinted(boolean isPrinted) {
+        isLowQuantityWarningPrinted = isPrinted;
     }
 
     /**
@@ -26,13 +44,17 @@ public class Quantity implements CommandParameter {
      */
 
     public void updateIncreaseQuantity(Integer increaseQuantity) throws InventoryQuantityOverflowException {
+        logger.log(Level.INFO, "Updating quantity with increase: " + increaseQuantity);
+        assert increaseQuantity != null : "Increase quantity cannot be null";
         long tentativeQuantity = (long) quantity + (long) increaseQuantity;
         assert tentativeQuantity >= 0 : "Tentative Quantity cannot be negative";
         if (tentativeQuantity > MAX_QUANTITY) {
+            logger.log(Level.WARNING, "Inventory overflow detected. No change to quantity.");
             throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
         }
         assert tentativeQuantity <= MAX_QUANTITY : "Tentative quantity exceeds MAX_QUANTITY. Integer overflow detected";
         quantity = (int) tentativeQuantity;
+        logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
     }
 
     /**
@@ -43,11 +65,15 @@ public class Quantity implements CommandParameter {
      *         larger than the current quantity.
      */
     public void updateDecreaseQuantity(Integer decreaseQuantity) throws InsufficientAmountException {
+        logger.log(Level.INFO, "Updating quantity with decrease: " + decreaseQuantity);
         assert decreaseQuantity != null : "Decrease quantity cannot be null";
         if (quantity >= decreaseQuantity) {
             quantity -= decreaseQuantity;
-            assert quantity >= 0 : "Quantity cannot be smaller than 0.";
+            assert quantity > 0 : "Quantity cannot be smaller than 0.";
+            notifyLowQuantity(this);
+            logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
         } else {
+            logger.log(Level.WARNING, "Insufficient amount in inventory. No change to quantity. ");
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
     }
@@ -68,6 +94,32 @@ public class Quantity implements CommandParameter {
      */
     public String toSave() {
         return this.quantity.toString();
+    }
+
+    /**
+     * Check if product is of low quantity
+     *
+     * @param product Product class
+     * @return return true if quantity is <= WARNING_QUANTITY
+     *         else return false
+     */
+    public boolean isLowQuantity (Product product) {
+        Quantity productQuantity = product.getQuantity();
+        return productQuantity.getQuantity() <= WARNING_QUANTITY;
+    }
+
+    /**
+     * Check if it is the first time the product hits low quantity
+     * If it is the first time, then notify
+     * Else, do not notify
+     *
+     * @param quantity Quantity class
+     */
+    public void notifyLowQuantity(Quantity quantity) {
+        if (quantity.getQuantity() <= WARNING_QUANTITY && !quantity.isLowQuantityWarningPrinted()) {
+            Ui.printThresholdWarningAlert();
+            quantity.setWarningPrinted(true);
+        }
     }
 }
 

@@ -2,6 +2,8 @@ package seedu.stockpal.common;
 
 public class Messages {
     public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String EMPTY_STRING = "";
+    public static final String SINGLE_SPACE = " ";
     public static final String HORIZONTAL_LINE =
             "====================================================================================";
     public static final String MESSAGE_WELCOME = "Welcome to StockPal!"
@@ -12,6 +14,9 @@ public class Messages {
     public static final String MESSAGE_REFER_TO_HELP = "For more information on the commands, use `help`.";
     public static final String MESSAGE_ERROR_INVALID_COMMAND = "Invalid command. " + MESSAGE_REFER_TO_HELP;
     public static final String MESSAGE_ERROR_INVALID_FORMAT = "Invalid format. " + MESSAGE_REFER_TO_HELP;
+    public static final String MESSAGE_ERROR_EMPTY_NAME = "Invalid format. Name cannot be empty when adding product.";
+    public static final String MESSAGE_ERROR_EMPTY_QUANTITY = "Invalid format. " +
+            "Quantity cannot be empty when adding product.";
     public static final String MESSAGE_ERROR_MISSING_PARAMETERS = "Please ensure that there is " +
             "at least 1 parameter provided.";
     public static final String MESSAGE_ERROR_INPUT_INTEGER_EXCEEDED = "Integer input exceeds largest integer " +
@@ -33,4 +38,12 @@ public class Messages {
     public static final String MESSAGE_OUTFLOW_SUCCESS = "Product quantity has been decreased successfully.";
     public static final String MESSAGE_LIST_SUCCESS = "Products in the product list have been printed.";
     public static final String MESSAGE_EMPTY_LIST = "ProductList is empty";
+
+    public static final String ALERT_LOW_QUANTITY = "These products have low quantity! Please top up!";
+    public static final String ALERT_FIRST_LOW_QUANTITY_OCCURRENCE = "Warning! This product is low in quantity.";
+    public static final String MESSAGE_NO_LOW_QUANTITY_PRODUCTS = "No products with low quantity";
+
+    public static final String MESSAGE_EMPTY_FIND_LIST = "No matches found.";
+
+    public static final String LOG_PRINT_HELP_PAGE = "Help page has been printed.";
 }

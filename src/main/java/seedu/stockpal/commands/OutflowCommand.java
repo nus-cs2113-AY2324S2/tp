@@ -9,13 +9,22 @@ import seedu.stockpal.ui.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author leongxingyu
 public class OutflowCommand extends ListActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
-    public static final String COMMAND_USAGE = Ui.indentTextIfRequired(COMMAND_KEYWORD
-            + ": Decreases the quantity by the specified amount from the existing amount according to the PID."
-            + Messages.LINE_SEPARATOR
-            + "Format: outflow PID a/DECREMENT_AMOUNT");
+    public static final String COMMAND_DESCRIPTION = "Decreases the quantity of a product from the existing amount.";
 
+    public static final String COMMAND_USAGE = "outflow PID a/DECREMENT_AMOUNT";
+
+    public static final String[] COMMAND_FLAGS = {
+        "PID"
+        , "DECREMENT_AMOUNT"
+    };
+
+    public static final String[] COMMAND_FLAG_DESCRIPTIONS = {
+        "Product ID of product"
+        , "Quantity of product to remove"
+    };
     private static final Logger LOGGER = Logger.getLogger(OutflowCommand.class.getName());
 
     private final Pid pid;
@@ -33,6 +42,7 @@ public class OutflowCommand extends ListActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
+        assert productList.getSize() > 0;
         productList.decreaseAmount(productIndex, amountToDecrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
     }

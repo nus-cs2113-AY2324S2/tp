@@ -3,6 +3,7 @@ package seedu.stockpal.data;
 import java.util.List;
 import java.util.ArrayList;
 
+import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.product.Product;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.data.product.Name;
@@ -10,6 +11,10 @@ import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.PidNotFoundException;
+import seedu.stockpal.ui.Ui;
+import static seedu.stockpal.ui.Ui.printToScreen;
+import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
+
 
 public class ProductList {
     public List<Product> products = new ArrayList<>();
@@ -56,6 +61,7 @@ public class ProductList {
         }
         if (!newQuantity.isNull()) {
             updatedProduct.setQuantity(newQuantity);
+            updatedProduct.getQuantity().notifyLowQuantity(newQuantity);
         }
         if (!newDescription.isNull()) {
             updatedProduct.setDescription(newDescription);
@@ -66,14 +72,50 @@ public class ProductList {
         products.set(productIndex, updatedProduct);
     }
 
+    /**
+     * Increases the quantity of the product with a specific PID
+     *
+     * @param productIndex Product PID to update
+     * @param amountToIncrease Quantity of product to decrease
+     */
     public void increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.increaseQuantity(amountToIncrease);
     }
 
+    /**
+     * Decreases the quantity of the product with a specific PID
+     *
+     * @param productIndex Product PID to update
+     * @param amountToDecrease Quantity of product to decrease
+     */
     public void decreaseAmount(int productIndex, Integer amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
         updatedProduct.decreaseQuantity(amountToDecrease);
+    }
+
+    /**
+     * @param productList ProductList object.
+     * @param keyword Keyword to search for.
+     */
+    public static void findKeyword(ProductList productList, String keyword) {
+        ProductList findList = new ProductList();
+        for (int i = 0; i < productList.getSize(); i ++) {
+            List<Product> products = productList.getProducts();
+            Product product = products.get(i);
+            String productName = product.getName().getName().toLowerCase();
+
+            if (productName.equals(keyword)) {
+                findList.addProduct(product);
+            }
+        }
+
+        if (findList.isEmpty()) {
+            printToScreen(Messages.MESSAGE_EMPTY_FIND_LIST);
+            return;
+        }
+
+        Ui.printListTasks(findList);
     }
 
     public boolean isEmpty() {
@@ -95,5 +137,30 @@ public class ProductList {
     public String toSave(Integer productIndex) {
         Product currProduct = products.get(productIndex);
         return currProduct.toSave();
+    }
+
+    /**
+     * Checks if product is low in quantity
+     * If low, then prints out before the program exits
+     * Else, if no low quantity products at all, print out "No product with low quantity"
+     */
+    public void printLowQuantityProducts () {
+        boolean hasLowQuantity = false;
+
+        Ui.printLowQuantityAlert();
+        for (Product product : products) {
+            Quantity productQuantity = product.getQuantity();
+            if (productQuantity.isLowQuantity(product)) {
+                Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
+                        productQuantity);
+                Ui.printToScreen(HORIZONTAL_LINE);
+                hasLowQuantity = true;
+            }
+        }
+
+        if (!hasLowQuantity) {
+            Ui.printNoLowQuantity();
+            Ui.printToScreen(HORIZONTAL_LINE);
+        }
     }
 }
