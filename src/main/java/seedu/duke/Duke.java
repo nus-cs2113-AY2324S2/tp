@@ -9,8 +9,8 @@ public class Duke {
     private static final String FILE_PATH = "./data/FlirtFork.txt";
 
     private static final String HORIZONTAL = "____________________________________________________________";
+    private static FoodList foods;
     private FavouritesList favourites;
-    private FoodList foods;
     private ActivityList activities;
     private Ui ui;
     private Storage storage;
@@ -57,6 +57,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke flirtFork = new Duke(FILE_PATH);
+        assert foods.get(0).toString().equals("25 Degrees") : "first entry in food database must be 25 degrees";
         flirtFork.run();
     }
 }
