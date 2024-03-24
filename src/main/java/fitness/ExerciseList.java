@@ -40,35 +40,35 @@ public class ExerciseList {
     private void initialiseData() {
         for (String s : originalListForArms) {
             String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == 4;
+            assert exerciseDetails.length == 4 : "Missing Data from Data file!";
             Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
                 exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForChest) {
             String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == 4;
+            assert exerciseDetails.length == 4 : "Missing Data from Data file!";
             Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForAbs) {
             String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == 4;
+            assert exerciseDetails.length == 4 : "Missing Data from Data file!";
             Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForBack) {
             String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == 4;
+            assert exerciseDetails.length == 4 : "Missing Data from Data file!";
             Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForLegs) {
             String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == 4;
+            assert exerciseDetails.length == 4 : "Missing Data from Data file!";
             Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
@@ -95,7 +95,7 @@ public class ExerciseList {
     public Exercise get(String type, int index) {
         ArrayList<Exercise> typeExercises = new ArrayList<>();
         for (Exercise e : allExercises) {
-            assert e != null;
+            assert e != null : "Invalid Exercise Detected";
             if (e.getType().equals(type)) {
                 typeExercises.add(e);
             }
