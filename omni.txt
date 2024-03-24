@@ -1,0 +1,5 @@
+accommodation / 0 / Malaysia Airbnb / 2019-12-17 / 3hours
+food / 0 / Popia / 2020-12-01 / 1hour
+landmark / 0 / Eiffel Tower / 2018-06-01 / 4hours
+accommodation / 0 / four seasons hotel / 2024-12-12 / 2 days
+food / 0 /  kfc / 2024-12-12 /  1 hour
