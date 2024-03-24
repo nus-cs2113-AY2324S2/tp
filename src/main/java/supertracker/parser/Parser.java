@@ -15,6 +15,7 @@ import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,9 @@ public class Parser {
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
     private static final String EX_DATE_GROUP = "expiry";
+    private static final String EX_DATE_FORMAT = "dd/MM/yyyy";
+    private static final String INVALID_EX_DATE_FORMAT = "dd/MM/yyyyy";
+    private static final String INVALID_EX_DATE = "01/01/99999";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
             + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) "
@@ -215,13 +219,17 @@ public class Parser {
         }
 
         String dateString = null;
-        LocalDate expiryDate = LocalDate.parse("01/01/99999", DateTimeFormatter.ofPattern("dd/MM/yyyyy"));
+        LocalDate expiryDate = LocalDate.parse(INVALID_EX_DATE, DateTimeFormatter.ofPattern(INVALID_EX_DATE_FORMAT));
 
         boolean hasExpiry = !matcher.group(EX_DATE_GROUP).isEmpty();
 
-        if (hasExpiry) {
-            dateString = matcher.group(EX_DATE_GROUP).trim().substring(2);
-            expiryDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        try {
+            if (hasExpiry) {
+                dateString = matcher.group(EX_DATE_GROUP).trim().substring(2);
+                expiryDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern(EX_DATE_FORMAT));
+            }
+        } catch (DateTimeParseException e) {
+            throw new TrackerException(ErrorMessage.INVALID_DATE_FORMAT);
         }
 
         if (Inventory.contains(name)) {
