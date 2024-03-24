@@ -15,11 +15,15 @@ public class ModifyCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         Medication medication = new Medication(
                 "Medication_A",
-                "60_TAB",
-                "500mg",
+                60.0,
+                500.0,
+                null,
+                null,
+                null,
                 "01/07/25",
                 "morning",
-                "cause_dizziness");
+                "cause_dizziness",
+                "");
         medicationManager.addMedication(medication);
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
 
@@ -38,11 +42,15 @@ public class ModifyCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         Medication medication = new Medication(
                 "Medication_A",
-                "60_TAB",
-                "500mg",
+                60.0,
+                500.0,
+                null,
+                null,
+                null,
                 "01/07/25",
                 "morning",
-                "cause_dizziness");
+                "cause_dizziness",
+                "");
         medicationManager.addMedication(medication);
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
 
