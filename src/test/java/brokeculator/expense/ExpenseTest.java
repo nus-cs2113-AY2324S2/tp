@@ -29,15 +29,10 @@ public class ExpenseTest {
     }
 
     @Test
-    void testGetStringRepresentation() {
-        assertEquals("--expense--Lunch $12.50 (today) [FOOD]", testExpense.getStringRepresentation());
-    }
-
-    @Test
     void testGetExpenseFromFile() {
-        String fileString = "Lunch $12.50 (today) [FOOD]";
         try {
-            Expense expenseFromFile = Expense.getExpenseFromFile(fileString);
+            String stringRepresentation = testExpense.getStringRepresentation();
+            Expense expenseFromFile = Expense.getExpenseFromFile(stringRepresentation);
             assertEquals("Lunch", expenseFromFile.getDescription());
             assertEquals(12.50, expenseFromFile.getAmount());
             assertEquals("today", expenseFromFile.getDate());

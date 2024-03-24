@@ -25,10 +25,10 @@ public class AddParser {
             String expenseDescription = getOptionField(userInputAsArray, ADD_COMMAND_OPTIONS[NAME_INDEX]);
             String expenseDate = getOptionField(userInputAsArray, ADD_COMMAND_OPTIONS[DESCRIPTION_INDEX]);
             String expenseAmountAsString = getOptionField(userInputAsArray, ADD_COMMAND_OPTIONS[AMOUNT_INDEX]);
-            String expenseCategory = "null";
+            String expenseCategory = null;
             if (userInput.contains(" /c ")) {
                 expenseCategory = getOptionField(userInputAsArray, ADD_COMMAND_OPTIONS[CATEGORY_INDEX]);
-                expenseCategory = expenseCategory.isBlank() ? "null" : expenseCategory;
+                expenseCategory = expenseCategory.isBlank() ? null : expenseCategory;
             }
             boolean isDesiredFieldsEmpty = isFieldsEmpty(expenseDescription, expenseDate, expenseAmountAsString);
             boolean isAmountNumeric = isAmountNumericString(expenseAmountAsString);
