@@ -17,6 +17,8 @@ import supertracker.ui.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.time.LocalDate;
+
 public class Parser {
     private static final String QUIT_COMMAND = "quit";
     private static final String NEW_COMMAND = "new";
@@ -31,12 +33,15 @@ public class Parser {
     private static final String NAME_FLAG = "n";
     private static final String QUANTITY_FLAG = "q";
     private static final String PRICE_FLAG = "p";
+    private static final String EX_DATE_FLAG = "e";
     private static final String NAME_GROUP = "name";
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
+    private static final String EX_DATE_GROUP = "expiry";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
-            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) ";
+            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) "
+            + "(?<" + EX_DATE_GROUP + ">(?:" + EX_DATE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String UPDATE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + ".*)?) "
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
@@ -193,7 +198,7 @@ public class Parser {
     }
 
     private static Command parseNewCommand(String input) throws TrackerException {
-        String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
+        String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG, EX_DATE_FLAG};
         Matcher matcher = getPatternMatcher(NEW_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
@@ -206,6 +211,14 @@ public class Parser {
 
         if (name.isEmpty() || quantityString.isEmpty() || priceString.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        CharSequence dateString = null;
+
+        boolean hasExpiry = !matcher.group(EX_DATE_GROUP).isEmpty();
+
+        if (hasExpiry) {
+            dateString = matcher.group(EX_DATE_GROUP).trim().substring(2);
         }
 
         if (Inventory.contains(name)) {
@@ -231,7 +244,8 @@ public class Parser {
             throw new TrackerException(ErrorMessage.PRICE_TOO_SMALL);
         }
 
-        return new NewCommand(name, quantity, price);
+        LocalDate expiryDate = LocalDate.parse(dateString);
+        return new NewCommand(name, quantity, price, expiryDate);
     }
 
     private static Command parseListCommand(String input) throws TrackerException {
