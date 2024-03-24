@@ -72,4 +72,15 @@ public class FocusTimer {
             countupTimer.setResume();
         }
     }
+
+    public void setDuration(int commandArgs) {
+        countdownTimer.setTimer(commandArgs);
+    }
+
+    public void checkTime() {
+        if (timerMode) {
+            countdownTimer.checkTime();
+        }
+        countupTimer.checkTime();
+    }
 }

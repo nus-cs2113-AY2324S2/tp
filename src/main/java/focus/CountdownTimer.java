@@ -105,4 +105,18 @@ public class CountdownTimer {
     public boolean getPausedStatus() {
         return isRunning.get();
     }
+
+    public void setTimer(int userInput) {
+        if (userInput < 1) {
+            Ui.printMessageWithSepNewLine("Duration cannot be less than 1.");
+        } else {
+            inputMinutes = userInput - 1;
+            Ui.printMessageWithSepNewLine("Countdown duration has been set to " + userInput + " minute(s)");
+        }
+    }
+
+    public void checkTime() {
+        Ui.printMessageWithSepNewLine("Remaining time: \n" +
+                minutes + " minutes " + seconds + " seconds left.");
+    }
 }
