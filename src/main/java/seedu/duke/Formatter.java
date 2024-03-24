@@ -1,5 +1,7 @@
 package seedu.duke;
+
 import java.util.logging.Logger;
+
 public class Formatter {
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
 
@@ -7,7 +9,6 @@ public class Formatter {
      * Method to check if the shot resulted in a goal
      * If shoot direction matches save direction, it's not a goal and the returned value is false.
      */
-
     /**
      * Appends a newline to a given string and returns the resulting string
      *
@@ -32,7 +33,6 @@ public class Formatter {
     public static void printWelcomeMsg() {
         printWrapper("-");
         System.out.println("\t Welcome to NUSFC 24 ");
-//        System.out.println("\t What can I do for you?");
         printWrapper("-");
     }
 
@@ -72,8 +72,7 @@ public class Formatter {
             System.out.println("|*   *    | *   *   |  *   *  |");
             System.out.println("|      *  |    *    |*      * |");
             System.out.println("GOAL!!!!");
-        }
-        else {
+        } else {
             logger.info("No goal :((((");
             System.out.println("_______________________________");
             System.out.println("\\         \\         \\         \\");
@@ -91,52 +90,6 @@ public class Formatter {
         System.out.println("\t List is empty. Add tasks using commands \"todo\", \"deadline\", \"event\".");
     }
 
-//    /**
-//     * Prints a notification indicating task is marked given the index of a task
-//     *
-//     * @param index the index of a given task
-//     */
-//    public static void printMarkDoneNotif(int index) {
-//        System.out.println("\t Nice! I've marked this task as done:");
-//        System.out.printf("\t %s.\n", Ui.tasks.get(index));
-//    }
-
-//    /**
-//     * Prints a notification indicating task is unmarked given the index of a task
-//     *
-//     * @param index the index of a given task
-//     */
-//    public static void printMarkUndoneNotif(int index) {
-//        System.out.println("\t OK, I've marked this task as not done yet:");
-//        System.out.printf("\t %s.\n", Ui.tasks.get(index));
-//    }
-
-//    /**
-//     * Prints a notification indicating task is added given a task
-//     *
-//     * @param newTask the task being added
-//     */
-//    public static void printTaskNotif(Task newTask) {
-//        printWrapper("_");
-//        System.out.println("\t Got it. I've added this task:");
-//        System.out.printf("\t\t%s\n", newTask);
-//        System.out.printf("\t Now you have %d tasks in the list.\n", Ui.tasks.size());
-//        printWrapper("_");
-//    }
-//
-//    /**
-//     * Prints a notification indicating task is removed given the index of a task
-//     *
-//     * @param removedTask the task being removed
-//     */
-//    public static void printDeleteNotif(Task removedTask) {
-//        printWrapper("_");
-//        System.out.println("\t Noted. I've removed this task:");
-//        System.out.printf("\t\t%s\n", removedTask);
-//        System.out.printf("\t Now you have %d tasks in the list.\n", Ui.tasks.size());
-//        printWrapper("_");
-//    }
-
     /**
      * Prints an error message indicating wrong command is entered
      */
@@ -145,7 +98,7 @@ public class Formatter {
     }
 
     /**
-     * Prints a error message indicating command failed to execute
+     * Prints an error message indicating command failed to execute
      */
     public static void printErrorExecutionFail() {
         System.out.println("\t Ui: Command could not be executed ");
@@ -167,13 +120,15 @@ public class Formatter {
     }
 
     /**
-     * Prints an error message stating the number of arguments given versus the number of arguments expected for given command
+     * Prints an error message stating the number of arguments given
+     * versus the number of arguments expected for given command
      *
      * @param correctArgumentCount the expected number of arguments for given command
      * @param userArgumentCount    the given number of arguments read from user input
      * @param userCommandName      the command name read from user input
      */
-    public static void printErrorArgumentsMismatch(String userCommandName, int userArgumentCount, int correctArgumentCount) {
+    public static void printErrorArgumentsMismatch(String userCommandName,
+                                                   int userArgumentCount, int correctArgumentCount) {
         System.out.printf("\t SyntaxAnalyser: Command %s contains too %s arguments. Given: %d - Expected: %d\n",
                 userCommandName,
                 userArgumentCount < correctArgumentCount ? "few" : "many",
@@ -181,13 +136,14 @@ public class Formatter {
     }
 
     /**
-     * Prints an error message indicating that the regex pattern failed to match at a given argument position for a given command name
+     * Prints an error message indicating that the regex pattern failed to match at a given argument position
+     * for a given command name
      *
      * @param argumentPosition the index position of the argument which failed to match the correct type
      * @param regex            the correct type for the argument
-     * @param COMMAND_NAME     the name of the given command
+     * @param commandName     the name of the given command
      */
-    public static void printErrorWrongArgumentType(String COMMAND_NAME, String regex, int argumentPosition) {
+    public static void printErrorWrongArgumentType(final String commandName, String regex, int argumentPosition) {
         int userRanking = argumentPosition + 1;
         String rankingSuffix;
         switch (userRanking) {
@@ -205,7 +161,7 @@ public class Formatter {
             break;
         }
         System.out.printf("\t SyntaxAnalyser: %s expects the %d%s argument to be %s\n",
-                COMMAND_NAME, userRanking, rankingSuffix, regex);
+                commandName, userRanking, rankingSuffix, regex);
     }
 
     /**
