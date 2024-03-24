@@ -48,7 +48,23 @@ You are recommended to use Intellij IDEA:
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+
+### Ui component
+
+### Command parser component
+
+### Storage component
+
+### Reflection component
+
+### Habit tracker component
+
+### Sleep tracker component
+
+### Focus timer component
+
+### Fitness tracker component
 
 
 ## Product scope
