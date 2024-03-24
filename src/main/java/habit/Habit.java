@@ -19,6 +19,11 @@ public class Habit {
         this.habitCount = 0;
     }
 
+    public Habit(String description, int habitCount) {
+        this.description = description;
+        this.habitCount = habitCount;
+    }
+
     public String getDescription() {
         return description;
     }

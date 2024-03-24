@@ -10,26 +10,58 @@ public class CountupTimer {
     private static final int SECONDS_DIVISION = 60;
     public LocalDateTime startTiming;
     public LocalDateTime stopTiming;
+    public LocalDateTime currentTime;
     public boolean isStarted = false;
+    private boolean isPaused = false;
+    private long totalHours = 0;
+    private long totalMinutes = 0;
+    private long totalSeconds = 0;
 
     /**
      * Store the current time when the user calls the function as the start timing for the timer.
      */
     public void setStartTiming() {
-        assert !isStarted: "Timer should not have started";
+        assert !isStarted : "Timer should not have started";
         this.startTiming = LocalDateTime.now();
         isStarted = true;
         Ui.printMessageWithSepNewLine("Your session has started. Time to grind!");
+        this.totalHours = 0;
+        this.totalMinutes = 0;
+        this.totalSeconds = 0;
     }
 
     /**
-     *  Store the current time when the user calls the function as the stop timing for the timer.
+     * Store the current time when the user calls the function as the stop timing for the timer.
      */
     public void setStopTiming() {
-        assert isStarted: "Timer should have started";
-        stopTiming = LocalDateTime.now();
+        assert isStarted : "Timer should have started";
+        if(!isPaused) {
+            stopTiming = LocalDateTime.now();
+        }
         isStarted = false;
+        isPaused = false;
         totalTimeSpent();
+    }
+
+    public void setPause() {
+        currentTime = LocalDateTime.now();
+        Duration timeElapsed = Duration.between(startTiming, currentTime);
+        stopTiming = LocalDateTime.now();
+        isPaused = true;
+        totalHours += timeElapsed.toHours();
+        totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
+        totalSeconds += timeElapsed.toSeconds() % MINUTES_DIVISION;
+        Ui.printMessageWithSepNewLine("Count up timer paused.");
+    }
+
+    public void setResume() {
+        this.startTiming = LocalDateTime.now();
+        isPaused = false;
+        Ui.printMessageWithSepNewLine("Count up timer resumed");
+    }
+
+    public boolean getPauseStatus() {
+        return isPaused;
     }
 
     /**
@@ -42,16 +74,31 @@ public class CountupTimer {
     }
 
     /**
-     *  Calculates the total time elapsed between the start timing and stop timing, and prints out
-     *  the total time elapsed using Ui class.
+     * Calculates the total time elapsed between the start timing and stop timing, and prints out
+     * the total time elapsed using Ui class.
      */
     public void totalTimeSpent() {
-        Duration timeElapsed = Duration.between(startTiming, stopTiming);
-        long hours = timeElapsed.toHours();
-        long minutes = timeElapsed.toMinutes() % MINUTES_DIVISION;
-        long seconds = timeElapsed.toSeconds() % SECONDS_DIVISION;
-        Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + " Time spent: " +
-                hours + " hours, " + minutes + " minutes, " + seconds + " seconds" + "\n" +
+        if (!isPaused) {
+            Duration timeElapsed = Duration.between(startTiming, stopTiming);
+            totalHours += timeElapsed.toHours();
+            totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
+            totalSeconds += timeElapsed.toSeconds() % SECONDS_DIVISION;
+        }
+        Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + "Total time spent: " +
+                totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds" + "\n" +
                 "To start a new session, use ‘focus start’ ");
+    }
+
+    public void checkTime() {
+        if(!isPaused) {
+            currentTime = LocalDateTime.now();
+        }
+        Duration timeElapsed = Duration.between(startTiming, currentTime);
+        startTiming = currentTime;
+        totalHours += timeElapsed.toHours();
+        totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
+        totalSeconds += timeElapsed.toSeconds() % SECONDS_DIVISION;
+        Ui.printMessageWithSepNewLine("Total time elapsed: \n" +
+                totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds");
     }
 }

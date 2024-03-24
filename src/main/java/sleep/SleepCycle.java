@@ -1,10 +1,14 @@
 package sleep;
 
+import date.DateFormat;
+
+import java.time.LocalDate;
+
 public class SleepCycle {
     private double hoursSlept;
-    private String dateOfSleep;
+    private LocalDate dateOfSleep;
 
-    public SleepCycle(double hours, String date) {
+    public SleepCycle(double hours, LocalDate date) {
         this.hoursSlept = hours;
         this.dateOfSleep = date;
     }
@@ -14,9 +18,12 @@ public class SleepCycle {
     }
 
     public String getDateOfSleep() {
-        return dateOfSleep;
+        return DateFormat.convertDateToString(dateOfSleep);
     }
 
+    public void setHoursOfSleep(double newHours) {
+        hoursSlept = newHours;
+    }
     @Override
     public String toString() {
         return this.dateOfSleep  + ": " + this.hoursSlept;

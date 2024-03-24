@@ -16,13 +16,13 @@ public class FocusTimerTest {
     @Test
     public void setStartTimer_startTimer_success() {
         focusTimer.setStartTiming();
-        assertEquals(true,focusTimer.getStatus());
+        assertEquals(true,focusTimer.getStartStatus());
     }
 
     @Test
     public void setStopTimer_stopTimer_success() {
         focusTimer.setStartTiming();
         focusTimer.setStopTiming();
-        assertEquals(false, focusTimer.getStatus());
+        assertEquals(false, focusTimer.getStartStatus());
     }
 }

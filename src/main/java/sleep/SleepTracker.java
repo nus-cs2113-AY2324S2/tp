@@ -19,6 +19,9 @@ public class SleepTracker {
         sleepCycleList.addSleepCycle(sleepCycleToAdd);
     }
 
+    public void updateSleepCycle(String date, double newHours) {
+        sleepCycleList.updateSleepCycle(date, newHours);
+    }
     public void getSleepCycle(String date) {
         sleepCycleList.getSleepCycle(date);
     }
