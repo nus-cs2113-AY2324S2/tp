@@ -31,6 +31,7 @@ import static seedu.stockpal.common.Messages.MESSAGE_ERROR_EMPTY_QUANTITY;
 
 public class Parser {
     public static final String DIVIDER = " ";
+
     public static final Pattern NEW_COMMAND_PATTERN =
             Pattern.compile("new n/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]{1,50})" +
                     " q/(\\d+)" +
@@ -42,13 +43,14 @@ public class Parser {
                     "(?: q/(\\d+))?" +
                     "(?: p/(\\d+\\.\\d{2}))?" +
                     "(?: d/([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+))?");
+    public static final Pattern LIST_COMMAND_PATTERN = Pattern.compile("list( -sn| -sq)?");
     public static final Pattern DELETE_COMMAND_PATTERN = Pattern.compile("delete (\\d+)");
     public static final Pattern INFLOW_COMMAND_PATTERN = Pattern.compile("inflow (\\d+) a/(\\d+)");
     public static final Pattern OUTFLOW_COMMAND_PATTERN = Pattern.compile("outflow (\\d+) a/(\\d+)");
     public static final Pattern  FIND_COMMAND_PATTERN =
             Pattern.compile("find ([a-zA-Z0-9 `~!@#$%^&*()\\[\\]{}<>\\-_+=,.?\"':;]+)");
     public static final Pattern HISTORY_COMMAND_PATTERN = Pattern.compile("history (\\d+)");
-
+    public static final int NUM_OF_LIST_COMMAND_ARGUMENTS = 1;
     public static final int NUM_OF_NEW_COMMAND_ARGUMENTS = 4;
     public static final int NUM_OF_EDIT_COMMAND_ARGUMENTS = 5;
     public static final int NUM_OF_DELETE_COMMAND_ARGUMENTS = 1;
@@ -70,7 +72,9 @@ public class Parser {
             return createHelpCommand();
 
         case ListCommand.COMMAND_KEYWORD:
-            return createListCommand();
+            parsed = matchAndParseCommand(input, LIST_COMMAND_PATTERN, NUM_OF_LIST_COMMAND_ARGUMENTS);
+
+            return validateAndCreateListCommand(parsed);
 
         case ExitCommand.COMMAND_KEYWORD:
             return createExitCommand();
@@ -124,8 +128,8 @@ public class Parser {
         return new ExitCommand();
     }
 
-    private ListCommand createListCommand() {
-        return new ListCommand();
+    private ListCommand validateAndCreateListCommand(ArrayList<String> parsed) {
+        return new ListCommand(parsed.get(0));
     }
 
     private HelpCommand createHelpCommand() {
