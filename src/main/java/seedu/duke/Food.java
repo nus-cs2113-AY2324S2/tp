@@ -11,11 +11,15 @@ public class Food extends Favourites {
         this.location = location;
         this.price = price;
         this.cuisine = cuisine;
-        this.completionStatus = completionStatus;
+        this.completionStatus = "U";
     }
 
     @Override
     public String toString() {
         return (description);
+    }
+
+    public void markComplete() {
+        this.completionStatus = "C";
     }
 }

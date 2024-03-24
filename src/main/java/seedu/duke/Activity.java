@@ -9,11 +9,15 @@ public class Activity extends Favourites {
         super(name);
         this.location = location;
         this.price = price;
-        this.completionStatus = completionStatus;
+        this.completionStatus = "U";
     }
 
     @Override
     public String toString() {
         return description;
+    }
+
+    public void markComplete() {
+        this.completionStatus = "C";
     }
 }

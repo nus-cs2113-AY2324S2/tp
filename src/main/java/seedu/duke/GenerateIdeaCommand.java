@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 import seedu.duke.exceptions.FlirtForkException;
 
 public class GenerateIdeaCommand extends Command {
@@ -17,11 +19,15 @@ public class GenerateIdeaCommand extends Command {
             userSatisfied = ui.readCommand().toLowerCase();
             if (userSatisfied.equals("yes")) {
                 System.out.println("That's great! Enjoy your date!");
-                return;
+                food.markComplete();
+                activity.markComplete();
+                break;
             } else {
                 System.out.println("Regenerating a new date idea..");
             }
         } while (true);
 
+        storage.saveFood(foods);
+        storage.saveActivity(activities);
     }
 }
