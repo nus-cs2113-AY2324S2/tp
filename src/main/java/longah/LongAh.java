@@ -1,6 +1,7 @@
 package longah;
 
 import longah.handler.PINHandler;
+import longah.handler.StorageHandler;
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
@@ -20,6 +21,7 @@ public class LongAh {
     public static void init() {
         Logging.logInfo("Starting Pre-program preparations.");
         UI.showMessage("Welcome to LongAh!");
+        StorageHandler.initDir();
     }
 
     /**

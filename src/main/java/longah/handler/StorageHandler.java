@@ -43,10 +43,6 @@ public class StorageHandler {
      */
     public StorageHandler(MemberList members, TransactionList transactions, String groupName)
             throws LongAhException {
-        // Create data directory if it does not exist
-        if(!new File(this.storageFolderPath).exists()) {
-            new File(this.storageFolderPath).mkdir();
-        }
         this.storageFolderPath += "/" + groupName;
         // Create group directory if it does not exist
         if(!new File(this.storageFolderPath).exists()) {
@@ -69,6 +65,16 @@ public class StorageHandler {
         // Load data from data files into MemberList and TransactionList objects
         loadAllData(members, transactions);
         Logging.logInfo("Data loaded from storage.");
+    }
+
+    /**
+     * Initializes the storage scanner to read data files.
+     */
+    public static void initDir() {
+        File f = new File("./data");
+        if (!f.exists()) {
+            f.mkdir();
+        }
     }
 
     /**
