@@ -18,8 +18,6 @@ public class ListExpenseCommand extends Command {
 
     @Override
     public void execute() {
-        // Load expenses from the file before listing them
-        expenses.loadExpensesFromFile();
         // Now, list the expenses with or without a filter category
         expenses.listExpenses(filterCategory);
     }

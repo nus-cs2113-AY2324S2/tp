@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
-    
+
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     protected ArrayList<String> expenseCategories;
     protected ArrayList<String> savingsCategories;
@@ -44,7 +44,7 @@ public class Parser {
         }
         return input.substring(startIndex, endIndex).trim();
     }
-    
+
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -180,58 +180,56 @@ public class Parser {
         assert !action.isEmpty() : "Action should not be empty";
 
         switch (action) {
-        case "list":
-            if (parts.length == 2) {
-                // List expenses or savings
-                String listType = parts[1];
-                assert !listType.isEmpty() : "List type should not be empty";
+            case "list":
+                if (parts.length == 2) {
+                    // List expenses or savings
+                    String listType = parts[1];
+                    assert !listType.isEmpty() : "List type should not be empty";
 
-                if (listType.equalsIgnoreCase("expenses")) {
-                    expenseList.loadExpensesFromFile(); // Load expenses right
-                    return new ListExpenseCommand(expenseList);
-                } else if (listType.equalsIgnoreCase("savings")) {
-                    savingList.loadSavingsFromFile(); // Load savings
-                    return new ListSavingsCommand(savingList, expenseList);
-                }
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
-                String filterCategory = parts[2];
-                try {
-                    // Checks for valid category input
-                    if (filterCategory != null) {
-                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
-                        if (!isValidCategory) {
-                            LOGGER.warning("Invalid category inputted: " + filterCategory);
-                            System.out.println("Invalid category: " + filterCategory);
-                            return null;
-                        }
+                    if (listType.equalsIgnoreCase("expenses")) {
+                        return new ListExpenseCommand(expenseList);
+                    } else if (listType.equalsIgnoreCase("savings")) {
+                        return new ListSavingsCommand(savingList, expenseList);
                     }
-                } catch (IllegalArgumentException e) {
-                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
-                }
-                return new ListExpenseCommand(expenseList, filterCategory);
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
-                String filterCategory = parts[2];
-                try {
-                    // Checks for valid category input
-                    if (filterCategory != null) {
-                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
-                        if (!isValidCategory) {
-                            LOGGER.warning("Invalid category inputted: " + filterCategory);
-                            System.out.println("Invalid category: " + filterCategory);
-                            return null;
+                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
+                    String filterCategory = parts[2];
+                    try {
+                        // Checks for valid category input
+                        if (filterCategory != null) {
+                            boolean isValidCategory = isValidExpenseCategory(filterCategory);
+                            if (!isValidCategory) {
+                                LOGGER.warning("Invalid category inputted: " + filterCategory);
+                                System.out.println("Invalid category: " + filterCategory);
+                                return null;
+                            }
                         }
+                    } catch (IllegalArgumentException e) {
+                        LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
                     }
-                } catch (IllegalArgumentException e) {
-                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                    return new ListExpenseCommand(expenseList, filterCategory);
+                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
+                    String filterCategory = parts[2];
+                    try {
+                        // Checks for valid category input
+                        if (filterCategory != null) {
+                            boolean isValidCategory = isValidSavingsCategory(filterCategory);
+                            if (!isValidCategory) {
+                                LOGGER.warning("Invalid category inputted: " + filterCategory);
+                                System.out.println("Invalid category: " + filterCategory);
+                                return null;
+                            }
+                        }
+                    } catch (IllegalArgumentException e) {
+                        LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                    }
+                    return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
+                } else {
+                    return null;
                 }
-                return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
-            } else {
+                break;
+
+            default:
                 return null;
-            }
-            break;
-
-        default:
-            return null;
         }
         return null;
     }
@@ -356,7 +354,7 @@ public class Parser {
             System.out.println("Category is missing.");
             return null;
         }
-        
+
         String amount = extractDetailsForAdd(details, "a/");
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
@@ -368,7 +366,7 @@ public class Parser {
             if (amountValue <= 0) {
                 throw new BudgetBuddyException(amount + " is not a valid amount.");
             }
-           
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");
             return null;
@@ -494,7 +492,7 @@ public class Parser {
 
         assert savings != null : "Savings list cannot be null";
         assert input != null : "Input string cannot be null";
-        
+
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
@@ -531,13 +529,13 @@ public class Parser {
     /**
      * Parses a string input into a Command object and returns the associated
      * command to handle the user input
-     * 
+     *
      * @param input The user input string.
      * @return A Command object corresponding to the user input, or null if the
      *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
-        
+
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
             return handleMenuCommand(input);

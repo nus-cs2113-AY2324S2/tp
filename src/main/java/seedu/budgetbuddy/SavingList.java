@@ -1,7 +1,5 @@
 package seedu.budgetbuddy;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -20,8 +18,8 @@ public class SavingList {
 
     public SavingList() {
         this.savings = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Salary", 
-        "Investments", "Gifts", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
         this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
@@ -50,15 +48,6 @@ public class SavingList {
             LOGGER.log(Level.SEVERE, "Error occurred while calculating total savings", e);
         }
     }
-
-    public void loadSavingsFromFile() {
-        try {
-            this.savings = new ArrayList<>(storage.loadSavings());
-        } catch (FileNotFoundException e) {
-            System.out.println("No existing savings file found. Starting fresh.");
-        }
-    }
-
 
     public void listSavings(String filterCategory, ExpenseList expenseList) {
         try {
@@ -127,11 +116,6 @@ public class SavingList {
         if (!categories.contains(category)) {
             categories.add(category);
         }
-        try {
-            storage.saveSavings(savings);
-        } catch (IOException e) {
-            System.out.println("Error saving savings to file.");
-        }
     }
 
     public void editSaving(String category, int index, double amount) {
@@ -173,12 +157,6 @@ public class SavingList {
             savingToEdit.setAmount(amount);
 
             System.out.println("Saving edited successfully.");
-            storage.saveSavings(savings);
-        } catch (IOException e) {
-            System.out.println("Error saving savings to file.");
-            LOGGER.info(String.format("Saving at index %d edited successfully. " +
-                    "New details: %s", index, savingToEdit.toString()));
-            System.out.println("Saving edited successfully.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error occurred while editing saving at index " + index, e);
             System.out.println("An error occurred during saving edition. Please try again.");
@@ -197,11 +175,6 @@ public class SavingList {
             }
         } else {
             System.out.println("Invalid saving index.");
-        }
-        try {
-            storage.saveSavings(savings);
-        } catch (IOException e) {
-            System.out.println("Error saving savings to file.");
         }
     }
 }
