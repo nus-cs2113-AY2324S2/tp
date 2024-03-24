@@ -14,6 +14,19 @@ Additional Packages used: JSON
 
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+### Add Medication Command
+The add medication command extends from the Command parent class and implements the following operations:
+- execute(MedicationManager, DailyMedicationManager, Ui) - Adds the medication object into the respective medication managers.
+- setMedicineAttributes() - Sets the medicine object's attributes to be added to the medicine managers. 
+- assertionTest(MedicationManager, DailyMedicationManager) - Asserts that medicine has been added to both medication managers.
+- parseStringToValues(Arguments) - Parses string input for medicine quantity and dosage into double type.
+
+Given below is an example usage scenario and how the add command behaves at each step.
+- Step 1. To be added.
+- Step 2. To be added.
+
+
 - TODO: Design and Implementation of the Logging Functionaity (SX) (Issue #41)
 - TODO: Design and Implementing of the Load and Save functionality (SX) (Issue #25)
 - TODO: Design and Implementing of the Reading and Writing of JSON file (SX) (Issue #27)
