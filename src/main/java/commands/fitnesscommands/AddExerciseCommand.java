@@ -22,10 +22,10 @@ public class AddExerciseCommand implements Command {
      * Validates the command argument given for the fitness add command.
      *
      * @param commandArgs A string of arguments
-     * @throws FitnessException Exceptions are thrown when improper command arguments are found
-     *
      * @return A split array of strings of size 4 if there are no issues found with the string
      *         input
+     *         
+     * @throws FitnessException Exceptions are thrown when improper command arguments are found
      * */
     private static String[] checkCommandArgs(String commandArgs) throws FitnessException {
         String[] tempCommandArgs = commandArgs.split(", ", 4);
