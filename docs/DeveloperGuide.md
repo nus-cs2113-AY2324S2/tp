@@ -15,8 +15,6 @@
 
 ### InputParsing component
 
----
-
 The first and foremost component in the Student Tracking app is to ensure that the user parses in commands in a format that makes sense, which will modify the master list.
 
 #### Design considerations
@@ -51,10 +49,38 @@ Given below is an example of how a user may add a student to the data base.
 - Assuming the name "wario" did not exist in the masterlist beforehand, the parser would grant the user's request to add the student to the masterlist.
 - This `add wario` command is equivalent to having the user first type `add`, then after waiting fo the program to respond, type `wario`. In the latter scenario, the input parser deems that an argument was not present, and thus will ask the user to give the name of the student that they would like to add.
 
+
+### Student Details
+
+To facilitate the management of students within a tuition centre, it is imperative to have easy access and storage of important information regarding said personnel.
+
+Seen below is an UML diagram of the relevant classes dealing with storage.
+
+![DataStoringUML](./diagrams/src/DataStoring/DateStoring.png)
+
+#### Design considerations
+
+When building our implementation, we wanted our program to be able to easily access a student's details from a student object, and vice versa. 
+
+#### Implementation and rationale
+
+A `Student` is made up of a list of the subjects they are taking, along with relevant information one might need while managing their schedules and clienthood (maybe not gender, but who knows). Every `Student` object is stored in a public `static StudentList` that any class can call.
+
+Storage of these details are handled via the `StudentsAttributes` class when the user package calls upon its methods. To ensure easy access of information from either a `Student` object, and be able to retrieve the `Student` parent when having access to an `StudentAttributes` object, we linked both `Student` and `StudentAttribute`.
+
+Since both classes are referencing each other, it was easy for us to link it with the input parsing system, where we would just need a student's name (we have yet to account for repeat names; only showing a warning) to be able to edit their details.
+
+We created a parent `Details` class as those are information not specifically related to students. It can thus be repurposed in future updates should we wish to expand this application into a personnel management system, which would include employees of the tuition centre.
+
+However, our current implementation is not very secure as one can access every field of a `Student` object just by having access to it or the `StudentAttribute` object, which can be done via accessing the `static masterStudentList` variable.In future updates, we could possibly implement a Facade Pattern to better hide sensitive details.
+
+---
+
 ## Product scope
+
 ### Target user profile
 
-{Describe the target user profile}
+We aim to target private tuition centres with our product, specifically smaller ones without a good system in place to track the progress of their students.
 
 ### Value proposition
 
