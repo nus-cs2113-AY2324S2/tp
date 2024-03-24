@@ -1,13 +1,16 @@
 package seedu.budgetbuddy.command;
 
 import seedu.budgetbuddy.SplitExpenseList;
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class SplitExpenseCommand extends Command{
-    private final String numberOfPeople;
+    private SplitExpenseList splitexpenses;
     private final String amount;
+    private final String numberOfPeople;
     private final String description;
 
-    public SplitExpenseCommand(SplitExpenseList splitexpenses, String numberOfPeople, String amount, String description) {
+    public SplitExpenseCommand(SplitExpenseList splitexpenses, String amount, String numberOfPeople, String description) {
+        this.splitexpenses = splitexpenses;
         this.numberOfPeople = numberOfPeople;
         this.amount = amount;
         this.description = description;
@@ -25,7 +28,13 @@ public class SplitExpenseCommand extends Command{
         return description;
     }
     
+   @Override
     public void execute() {
-        System.out.println("Expense Split: " + numberOfPeople + " people, $" + amount + " each, description: " + description);
+        try {
+            splitexpenses.addSplitExpense(this.amount, this.numberOfPeople, this.description);
+            System.out.println("SplitExpense Added :" + "$" + amount + "spent by" + numberOfPeople + " description : " + description);
+        } catch (BudgetBuddyException e) {
+            System.out.println("An error occurred while adding expense.");
+        }
     }
 }

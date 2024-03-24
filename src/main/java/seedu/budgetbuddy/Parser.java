@@ -97,16 +97,6 @@ public class Parser {
         return input.startsWith("add expense");
     }
 
-    /**
-     * Checks if the provided input starts with the word "add splitexpense" .
-     *
-     * @param input The user input string
-     * @return true if user input starts with "add splitexpense", else returns false
-     */
-    public Boolean isAddSplitExpenseCommand(String input) {
-        return input.startsWith("add splitexpense");
-    }
-
     public Boolean isAddSavingCommand(String input) {
         return input.startsWith("add savings");
     }
@@ -130,7 +120,6 @@ public class Parser {
     public Boolean isSplitExpenseCommand(String input) {
         return input.startsWith("split expenses");
     }
-
 
     /**
      * Parses the "find expenses" command, allowing for optional and combinable parameters.
@@ -561,63 +550,57 @@ public class Parser {
             return null;
         }
     }
-
-    public Command handleSplitExpenseCommand (SplitExpenseList splitexpenses, String input) {
-        if (input == null || !input.contains(" ") || !input.contains("a/") || !input.contains("n/") || !input.contains("d/")) {
+    public Command handleSplitExpenseCommand(SplitExpenseList splitexpenses, String input) {
+        if (input == null || !input.contains("a/") || !input.contains("n/") || !input.contains("d/")) {
             System.out.println("Invalid command format.");
             return null;
         }
-
-        String[] parts = input.split(" ", 2);
-        if (parts.length < 2) {
-            System.out.println("Split expense details are missing.");
+    
+        // Extract details directly using the prefixes
+        String amount = extractDetail(input, "a/");
+        String numberOfPeople = extractDetail(input, "n/");
+        String description = extractDetail(input, "d/");
+    
+        // Validation for each part
+        if (amount.isEmpty() || numberOfPeople.isEmpty() || description.isEmpty()) {
+            System.out.println("Missing details.");
             return null;
         }
-
-        String details = parts[1];
-        String amount = extractDetailsForAdd(details, "a/");
-        if (amount.isEmpty()) {
-            System.out.println("amount is missing.");
-            return null;
-        }
-
+    
         try {
             double amountValue = Double.parseDouble(amount);
             if (amountValue <= 0) {
                 throw new BudgetBuddyException(amount + " is not a valid amount.");
             }
-        } catch (BudgetBuddyException e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException | BudgetBuddyException e) {
+            System.out.println("Invalid amount format.");
             return null;
         }
-
-        String number = extractDetailsForAdd(details, "n/");
-        if (number.isEmpty()) {
-            System.out.println("number is missing.");
-            return null;
-        }
-
+    
         try {
-            int numberValue = Integer.parseInt(number);
+            int numberValue = Integer.parseInt(numberOfPeople);
             if (numberValue <= 0) {
-                throw new BudgetBuddyException(number + " is not a valid number.");
+                throw new BudgetBuddyException(numberOfPeople + " is not a valid number.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid number. Please enter a valid number.");
-            return null;
-        } catch (BudgetBuddyException e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException | BudgetBuddyException e) {
+            System.out.println("Invalid number format.");
             return null;
         }
-
-        String description = extractDetailsForAdd(details, "d/");
-        if (description.isEmpty()) {
-            System.out.println("description is missing.");
-            return null;
-        }
-
-        return new SplitExpenseCommand(splitexpenses, number, amount, description);
+    
+        return new SplitExpenseCommand(splitexpenses, amount, numberOfPeople, description);
     }
+    
+    private String extractDetail(String input, String prefix) {
+        try {
+            int startIndex = input.indexOf(prefix) + prefix.length();
+            int endIndex = input.indexOf(" ", startIndex);
+            endIndex = endIndex == -1 ? input.length() : endIndex; // Handle last detail case
+            return input.substring(startIndex, endIndex);
+        } catch (Exception e) {
+            return ""; // Return empty string if any error occurs
+        }
+    }
+    
 
 
 

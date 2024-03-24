@@ -16,6 +16,7 @@ public class BudgetBuddy {
         parser = new Parser();
         expenses = new ExpenseList();
         savings = new SavingList();
+        splitexpenses = new SplitExpenseList();
     }
 
     public void handleCommands(String input) {
