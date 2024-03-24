@@ -53,6 +53,7 @@ class RecipeIOTest {
         testAllergies.add("eggs");
         Recipe testRecipe = new Recipe("Spaghetti Carbonara", 0, 0, testAllergies,
                 MealCategory.LUNCH, null);
+        assert testRecipe.allergies.toString().equals("[eggs]") : "correct allergy";
         RecipeList testRecipeList = new RecipeList();
         testRecipeList.add(testRecipe);
         testRecipeList.findAllergy("eggs");
