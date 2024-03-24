@@ -26,6 +26,8 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Focus Timer
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
           - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
+        - Fitness Motivator
+          - [`fitness get` - Get a pre-loaded list of different exercises](#)
 
 ## Quick Start
 
@@ -366,6 +368,32 @@ Your focus session has ended.
 To start a new session, use ‘focustimer start’ 
 ________________________________________________________________________________________________________________
 ~~~
+### Get a list of exercises: `fitness get`
+Prints a list of 5 different exercises from 5 different types of exercises targeting different body parts.
+
+Format:
+```
+fitness get
+```
+
+* The `fitness` and `get` are case-sensitive.
+* Use lower casing for this command.
+* The command will generate different exercises with each repeated command, but there should be one exercise from
+each type
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+These are some of the exercises you can do!
+
+1. Arms: Barbell Curls, 3 sets & 8 reps
+2. Chest: Bench Press, 3 sets & 8 reps
+3. Abs: Crunches, 5 sets & 20 reps
+4. Back: Pull Ups, 3 sets & 6 reps
+5. Legs: Leg Press, 3 sets & 8 reps
+
+________________________________________________________________________________________________________________
+```
 
 ## FAQ
 
