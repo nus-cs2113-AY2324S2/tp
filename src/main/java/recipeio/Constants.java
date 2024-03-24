@@ -24,4 +24,6 @@ public class Constants {
     static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
             + RECIPE_TIME_PREFIX;
 
+    public static final String MESSAGE_ASK_INPUT = "asking user for input";
+
 }
