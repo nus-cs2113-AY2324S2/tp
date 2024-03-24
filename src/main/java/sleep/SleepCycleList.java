@@ -38,6 +38,10 @@ public class SleepCycleList {
         Collections.sort(sleepCycleList);
     }
 
+    /**
+     * Deletes a new sleep cycle in sleepCycleList
+     * @param  sleep cycle to be added
+     */
     public void deleteSleepCycle(LocalDate date) {
         for (int i = 0; i < numberOfCycles; i++) {
             SleepCycle currSleepCycle = sleepCycleList.get(i);
