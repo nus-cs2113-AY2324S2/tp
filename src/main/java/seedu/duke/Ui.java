@@ -20,6 +20,14 @@ public class Ui {
         System.out.println(HORIZONTAL);
     }
 
+    public void firstSetUpMessage() {
+        System.out.println(HORIZONTAL);
+        System.out.println("Hungry for love? You've come to the right place.\n" +
+                "Welcome to " + BOT_NAME + " - where Cupid meets the chef!");
+        System.out.println("Before we start, I would like to know you better!");
+        System.out.println(HORIZONTAL);
+    }
+
     public void exitMessage() {
         System.out.println("Love, like a good meal, is all about timing.\n" +
                 "Keep your love simmering and your fork ready, " +

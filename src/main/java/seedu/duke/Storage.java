@@ -91,7 +91,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("OOPS! No saved user details found.");
         }
-        return null;
+        return new UserDetails();
     }
 
     public ArrayList<Food> loadFood() throws FileNotFoundException {

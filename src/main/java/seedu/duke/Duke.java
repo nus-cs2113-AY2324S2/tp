@@ -31,14 +31,20 @@ public class Duke {
     }
 
     public void run() {
-        ui.greetingMessage();
+        if (userDetails.getName().equals("NOT SET")) {
+            ui.firstSetUpMessage();
+            UserDetailsCommand userDetailsCommand = new UserDetailsCommand();
+            userDetailsCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+        } else {
+            ui.greetingMessage();
+        }
 
         boolean isExit = false;
         while(!isExit) {
             String userInput = ui.readCommand();
             try {
                 Command command = Parser.parseCommand(userInput, userDetails);
-                command.execute(favourites, foods, activities, ui, storage);
+                command.execute(favourites, foods, activities, ui, storage, userDetails);
                 if(command instanceof ExitCommand) {
                     isExit = true;
                 }

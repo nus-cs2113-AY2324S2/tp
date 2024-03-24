@@ -9,6 +9,16 @@ public class UserDetails {
     private String cuisine;
     private String anniversary;
 
+    public UserDetails() {
+        this.name = "NOT SET";
+        this.age = "N.A";
+        this.gender = "N.A";
+        this.status = "N.A";
+        this.location = "N.A";
+        this.cuisine = "N.A";
+        this.anniversary = "N.A";
+    }
+
     public UserDetails(String name, String age, String gender, String status, String location,
                        String cuisine, String anniversary) {
         this.name = name;
@@ -77,7 +87,7 @@ public class UserDetails {
 
     // Setter for location
     public void setLocation(String location) {
-        this.gender = location;
+        this.location = location;
     }
 
     public String getAnniversary() {
