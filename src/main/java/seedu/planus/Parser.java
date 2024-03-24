@@ -66,7 +66,9 @@ public class Parser {
                 }
             } else if (targetAdded.equalsIgnoreCase("grade")) {
                 try {
-                    timetable.addGrade(words[2], words[3]);
+                    String courseCode = words[2];
+                    String grade = words[3].toUpperCase(); // Convert grade to uppercase
+                    timetable.addGrade(courseCode, grade);
                     Storage.writeToFile(timetable);
                 } catch (IndexOutOfBoundsException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_ADD_GRADE);
