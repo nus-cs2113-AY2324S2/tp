@@ -1,6 +1,18 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.command.*;
+import seedu.budgetbuddy.command.AddExpenseCommand;
+import seedu.budgetbuddy.command.AddSavingCommand;
+import seedu.budgetbuddy.command.Command;
+import seedu.budgetbuddy.command.DeleteExpenseCommand;
+import seedu.budgetbuddy.command.EditExpenseCommand;
+import seedu.budgetbuddy.command.EditSavingCommand;
+import seedu.budgetbuddy.command.FindExpensesCommand;
+import seedu.budgetbuddy.command.ListBudgetCommand;
+import seedu.budgetbuddy.command.ListExpenseCommand;
+import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.MenuCommand;
+import seedu.budgetbuddy.command.ReduceSavingCommand;
+import seedu.budgetbuddy.command.SetBudgetCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
