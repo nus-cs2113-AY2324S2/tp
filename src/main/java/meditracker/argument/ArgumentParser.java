@@ -24,7 +24,7 @@ class ArgumentParser {
      */
     public ArgumentParser(ArgumentList argumentList, String rawInput) throws ArgumentNotFoundException {
         List<String> rawInputSplit = List.of(rawInput.split(" "));
-        SortedMap<Integer, ArgumentName> indexes = getArgumentIndexes(argumentList, rawInputSplit);
+        SortedMap<Integer, Argument> indexes = getArgumentIndexes(argumentList, rawInputSplit);
         getArgumentValues(indexes, rawInputSplit);
     }
 
@@ -37,19 +37,18 @@ class ArgumentParser {
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private SortedMap<Integer, ArgumentName> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
+    private SortedMap<Integer, Argument> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
             throws ArgumentNotFoundException {
-        SortedMap<Integer, ArgumentName> indexes = new TreeMap<>();
+        SortedMap<Integer, Argument> indexes = new TreeMap<>();
         for (Argument argument: argumentList.getArguments()) {
             String flag = argument.getFlag();
-            ArgumentName argumentName = argument.getName();
             boolean isRequired = !argument.isOptional();
 
             int flagIndex = rawInputSplit.indexOf(flag);
             boolean isNotFound = flagIndex == -1;
 
             if (!isNotFound) {
-                indexes.put(flagIndex, argumentName);
+                indexes.put(flagIndex, argument);
             } else if (isRequired) {
                 // arg keyword not found in additional input
                 String errorContext = String.format("Missing \"%s\" argument", flag);
@@ -61,19 +60,21 @@ class ArgumentParser {
 
     /**
      * Obtains a map of argument flags and their corresponding value, using a sorted ordering
-     * of the argument flags.
+     * of the argument flags indexes.
      *
      * @param indexes A sorted map of arguments and their corresponding indexes
      */
     //@@author wenenhoe-reused
-    //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private void getArgumentValues(SortedMap<Integer, ArgumentName> indexes, List<String> rawInputSplit) {
-        ArgumentName argKey = indexes.get(indexes.firstKey());
-        int startIndex = indexes.firstKey() + 1; // position after keyword arg
+    //Reused from https://github.com/wenenhoe/ip with modifications to support
+    //arguments without corresponding value
+    private void getArgumentValues(SortedMap<Integer, Argument> indexes, List<String> rawInputSplit) {
+        Argument argument = indexes.get(indexes.firstKey());
+        ArgumentName argKey = argument.getName();
+        int startIndex = indexes.firstKey() + 1; // position after argument flag
         int endIndex;
 
         boolean isSkipFirst = false;
-        for (Map.Entry<Integer, ArgumentName> index: indexes.entrySet()) {
+        for (Map.Entry<Integer, Argument> index: indexes.entrySet()) {
             if (!isSkipFirst) {
                 isSkipFirst = true; // Skips first map entry
                 continue;
@@ -83,8 +84,9 @@ class ArgumentParser {
             String argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
             parsedArguments.put(argKey, argValue);
 
-            argKey = index.getValue();
-            startIndex = endIndex + 1;
+            argument = index.getValue();
+            argKey = argument.getName();
+            startIndex = endIndex + 1; // position after argument flag
         }
 
         endIndex = rawInputSplit.size();
