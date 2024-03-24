@@ -39,5 +39,10 @@ public class WeekView extends View {
         return startOfView;
     }
 
+    public LocalDate getDateForDay(int dayOfWeek) {
+        // Assuming dayOfWeek is 1 for Monday, 2 for Tuesday, ..., 7 for Sunday
+        // Adjust the calculation if your week starts on a different day
+        return startOfView.plusDays(dayOfWeek - 1);
+    }
 
 }

@@ -53,15 +53,15 @@ public class Main {
                 }
             }
             printWeek = true; // Reset flag for the next iteration
-            System.out.println("Enter 'next' for next week, 'prev' for previous week, " +
-                    "'add' to add a task, " +
-                    "'update' to edit a task, " +
-                    "'delete' to delete a task, " + 
-                    "'month' to display the month view, " +
+            System.out.println("Enter 'next' for next week, 'prev' for previous week,\n" +
+                    "'add' to add a task,\n" +
+                    "'update' to edit a task,\n" +
+                    "'delete' to delete a task,\n" +
+                    "'month' to display the month view,\n" +
                     "or 'quit' to quit:");
             String input = scanner.nextLine().trim().toLowerCase();
-
-            switch (input) {
+            String command = input.split(",")[0];
+            switch (command) {
             case "next":
                 if (inMonthView) {
                     monthView.next();
@@ -85,8 +85,16 @@ public class Main {
                 break;
             case "add":
                 try {
-                    addManager(scanner, weekView, inMonthView);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length < 4) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>");
+                    }
+                    String action = parts[0];
+                    int day = Integer.parseInt(parts[1].trim());
+                    String taskTypeString = parts[2].trim();
+                    String taskDescription = parts[3].trim();
+                    addManager(weekView, inMonthView, action, day, taskTypeString, taskDescription);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
