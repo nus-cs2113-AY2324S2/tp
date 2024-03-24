@@ -47,12 +47,18 @@ public class OutflowCommand extends TransactionActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
-        productList.decreaseAmount(productIndex, amountToDecrease);
+        boolean updateSuccessful = productList.decreaseAmount(productIndex, amountToDecrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
 
-        createTransaction(transactionList);
+        if (updateSuccessful) {
+            createTransaction(transactionList);
+        }
     }
 
+    /**
+     * Creates a transaction and add to the transaction list.
+     * @param transactionList transactionList object.
+     */
     public void createTransaction(TransactionList transactionList) {
         this.time = LocalDateTime.now();
         Transaction transaction = new Transaction(pid, -amountToDecrease, time);

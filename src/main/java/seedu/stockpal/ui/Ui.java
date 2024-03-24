@@ -116,13 +116,20 @@ public final class Ui {
     }
 
 
+
+
+    /**
+     * Outputs the list of messages as lines ending with line separator
+     * , and replace line-separators with platform independent line-separator.
+     *
+     * @param transactions List of transactions to output.
+     */
     public static void printTransactionTasks(TransactionList transactions) {
         printToScreen(HORIZONTAL_LINE);
         for (int i = 0; i < transactions.getSize(); i++ ) {
             assert transactions.get(i) != null : "Product should not be a null object.";
             Transaction transaction = transactions.get(i);
             System.out.println((i + 1) + ". " + transaction);
-            printToScreen(HORIZONTAL_LINE);
         }
     }
 }

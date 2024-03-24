@@ -2,6 +2,7 @@ package seedu.stockpal.data;
 
 import seedu.stockpal.data.product.Pid;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //@@author EdmundTangg
 public class Transaction {
@@ -24,7 +25,12 @@ public class Transaction {
     @Override
     public String toString() {
         String separator = "  |  ";
-        return (this.pid + separator + this.changeInQuantity + separator + this.time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDateTime = this.time.format(formatter);
+
+        return (this.pid + separator
+                + "Change in quantity: " + this.changeInQuantity + separator
+                + "Date of inflow/outflow: " + formattedDateTime);
     }
 
     public Pid getPid() {

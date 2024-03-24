@@ -45,16 +45,22 @@ public class InflowCommand extends TransactionActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
-        productList.increaseAmount(productIndex, amountToIncrease);
+        boolean updateSuccessful = productList.increaseAmount(productIndex, amountToIncrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
 
-        createTransaction(transactionList);
+        if (updateSuccessful) {
+            createTransaction(transactionList);
+        }
     }
 
+
+    /**
+     * Creates a transaction and add to the transaction list.
+     * @param transactionList transactionList object.
+     */
     public void createTransaction(TransactionList transactionList) {
         this.time = LocalDateTime.now();
         Transaction transaction = new Transaction(pid, amountToIncrease, time);
         transactionList.addTransaction(transaction);
-
     }
 }

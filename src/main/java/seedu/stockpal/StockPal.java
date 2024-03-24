@@ -10,8 +10,6 @@ import seedu.stockpal.parser.Parser;
 import seedu.stockpal.storage.Storage;
 import seedu.stockpal.ui.Ui;
 
-import java.util.ArrayList;
-
 public class StockPal {
     private static Storage storage;
     private static Parser parser;
@@ -49,23 +47,6 @@ public class StockPal {
             String userInput = Ui.getUserInput();
             try {
                 Command command = parser.parseCommand(userInput);
-
-    /*            //abstract out as function
-                if (!isListActionCommand(command)) {
-                    command.execute();
-                }
-                else if (TransactionListCommand(command)) {
-                    ListActionCommand actionCommand = (ListActionCommand) command;
-                    actionCommand.execute(productList, transactionList);
-
-                    storage.saveData(command, productList); // old one
-                    storage.saveData(command, transactionList); // new one
-                }
-                else {
-                    ListActionCommand actionCommand = (ListActionCommand) command;
-                    actionCommand.execute(productList);
-                    storage.saveData(command, productList);
-                }*/
                 checkCommandType(command);
                 
             } catch (StockPalException spe) {
@@ -75,6 +56,11 @@ public class StockPal {
         } while (true); // check if command is exit
     }
 
+    /**
+     * Checks the type of command.
+     * @param command Command that the user entered.
+     * @throws StockPalException throws exception.
+     */
     private static void checkCommandType(Command command) throws StockPalException {
         if (isListActionCommand(command)) {
             ListActionCommand actionCommand = (ListActionCommand) command;

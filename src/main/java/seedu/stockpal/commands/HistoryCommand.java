@@ -42,5 +42,4 @@ public class HistoryCommand extends TransactionActionCommand {
         TransactionList.findTransactions(transactionList, pid.getPid());
     }
 
-
 }

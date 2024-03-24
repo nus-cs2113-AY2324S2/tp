@@ -60,22 +60,26 @@ public class Product {
         return this.pid.equals(pid);
     }
 
-    public void increaseQuantity(Integer amountToChange) {
+    public boolean increaseQuantity(Integer amountToChange) {
         try {
             quantity.updateIncreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
+            return true;
         } catch (InventoryQuantityOverflowException iqoe) {
             Ui.printToScreen("Overflow detected. No change to quantity. " + quantity.toString());
+            return false;
         }
 
     }
 
-    public void decreaseQuantity(Integer amountToChange) {
+    public boolean decreaseQuantity(Integer amountToChange) {
         try {
             quantity.updateDecreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
+            return true;
         } catch (InsufficientAmountException iae) {
             Ui.printToScreen("Insufficient amount in inventory. No change to quantity. " + quantity.toString());
+            return false;
         }
     }
 

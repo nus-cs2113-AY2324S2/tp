@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import static seedu.stockpal.ui.Ui.printToScreen;
 
+//@@author EdmundTangg
 public class TransactionList {
     public List<Transaction> transactions = new ArrayList<>();
 
@@ -50,6 +51,5 @@ public class TransactionList {
     public Transaction get(int i) {
         return transactions.get(i);
     }
-
 
 }
