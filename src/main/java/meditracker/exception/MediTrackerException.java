@@ -5,7 +5,13 @@ package meditracker.exception;
  * It extends the Exception class.
  */
 public class MediTrackerException extends Exception {
-    public MediTrackerException() {
 
+    /**
+     * Constructs a new MediTrackerException with the specified error context.
+     *
+     * @param errorContext The error context describing the exception.
+     */
+    public MediTrackerException(String errorContext) {
+        super(errorContext);
     }
 }
