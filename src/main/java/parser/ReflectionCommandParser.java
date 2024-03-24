@@ -32,15 +32,15 @@ public class ReflectionCommandParser {
 
         switch(userReflectionCommand) {
         case "get":
-            return new GetReflectionQuestionsCommand(reflectionManager);
+            return new GetReflectionQuestionsCommand(reflectionManager, reflectionCommandArgs);
         case "save":
             return new SaveToFavouritesCommand(reflectionManager, reflectionCommandArgs);
         case "unsave":
             return new UnsaveFromFavouritesCommand(reflectionManager, reflectionCommandArgs);
         case "list":
-            return new ListFavouriteReflectionsCommand(reflectionManager);
+            return new ListFavouriteReflectionsCommand(reflectionManager, reflectionCommandArgs);
         case "help":
-            return new ReflectionHelpCommand(reflectionManager);
+            return new ReflectionHelpCommand(reflectionManager, reflectionCommandArgs);
         default:
             throw new ReflectException("Unknown reflect command");
         }
