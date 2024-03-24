@@ -25,7 +25,7 @@ public class SleepCycleList {
     }
 
     /**
-     * Adds a new sleep cycle into sleepCycleList
+     * Adds a new sleep cycle into sleepCycleList.
      * @param sleepCycle sleep cycle to be added
      */
     public void addSleepCycle(SleepCycle sleepCycle) {
@@ -39,8 +39,8 @@ public class SleepCycleList {
     }
 
     /**
-     * Deletes a new sleep cycle in sleepCycleList
-     * @param  sleep cycle to be added
+     * Deletes a new sleep cycle in sleepCycleList.
+     * @param date date of sleep cycle to be deleted
      */
     public void deleteSleepCycle(LocalDate date) {
         for (int i = 0; i < numberOfCycles; i++) {
@@ -57,6 +57,10 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine("No entry for sleep cycle on " + DateFormat.convertDateToString(date));
     }
 
+    /**
+     * Deletes a new sleep cycle in sleepCycleList.
+     * @param date date at which sleep cycles logged before this date are to be deleted
+     */
     public void deleteSleepCyclesBefore(LocalDate date) {
         int numberOfDeletion = 0;
         while (numberOfCycles > 0 && sleepCycleList.get(0).getDateOfSleep().isBefore(date)) {
@@ -68,6 +72,11 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine("A total of " + numberOfDeletion + " sleep cycles have been deleted");
     }
 
+    /**
+     * Deletes a new sleep cycle in sleepCycleList.
+     * @param startDate lower bound of date of sleep cycles to be deleted
+     * @param endDate upper bound of date of sleep cycles to be deleted
+     */
     public void deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate) {
         int startId = 0;
         int numberOfDeletion = 0;
@@ -108,6 +117,11 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine(sleepListMessage);
     }
 
+    /**
+     * Prints out number of hours of a date's sleep cycle in sleepCycleList.
+     * @param date date of sleep cycle to be found
+     * @param isPrint true if user wants to print out message, false otherwise
+     */
     public int getSleepCycle(LocalDate date, boolean isPrint) {
         for (int i = 0; i < numberOfCycles; i++) {
             SleepCycle currSleep = sleepCycleList.get(i);
@@ -125,6 +139,11 @@ public class SleepCycleList {
         return -1;
     }
 
+    /**
+     * Updates a  sleep cycle in sleepCycleList.
+     * @param date date of sleep cycle to be updated
+     * @param newHours updated hours of sleep cycle
+     */
     public void updateSleepCycle(LocalDate date, double newHours) {
         for (int i = 0; i < numberOfCycles; i++) {
             SleepCycle currSleep = sleepCycleList.get(i);

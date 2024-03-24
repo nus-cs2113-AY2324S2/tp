@@ -7,11 +7,21 @@ import sleep.SleepTracker;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to update sleep cycles.
+ */
 public class UpdateSleepCommand implements Command {
     private SleepTracker sleepTracker;
     private LocalDate date;
     private double hours;
 
+    /**
+     * Constructs a new UpdateSleepCommand object with user input.
+     *
+     * @param sleepTracker Class that contains information and functions to be executed required by Sleep Tracker
+     * @param sleepCommandArgs User input for the update sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     public UpdateSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
         String[] userCommand = sleepCommandArgs.trim().split("/new", 2);
         if (userCommand.length != 2) {

@@ -8,6 +8,9 @@ import sleep.SleepTracker;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to delete sleep cycles.
+ */
 public class DeleteSleepCommand implements Command {
     private static final String ERROR_MESSAGE = "Please use proper format: " + System.lineSeparator()
             + "sleep delete /date <date>" + System.lineSeparator()
@@ -20,6 +23,13 @@ public class DeleteSleepCommand implements Command {
     private LocalDate endDate;
     private DeleteMode deleteMode;
 
+    /**
+     * Constructs a new DeleteSleepCommand object with user input.
+     *
+     * @param sleepTracker Class that contains information and functions to be executed required by Sleep Tracker
+     * @param sleepCommandArgs User input for the delete sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     public DeleteSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
         if (sleepCommandArgs.isBlank()) {
             throw new SleepException(ERROR_MESSAGE);
@@ -34,6 +44,12 @@ public class DeleteSleepCommand implements Command {
         }
     }
 
+    /**
+     * Further parse user input when user wants to delete with deleteMode = FIND.
+     *
+     * @param sleepCommandArgs User input for the delete sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     private void deleteSleep(String sleepCommandArgs) throws SleepException {
         deleteMode = DeleteMode.FIND;
         String[] userCommand = sleepCommandArgs.trim().split("/date", 2);
@@ -54,6 +70,12 @@ public class DeleteSleepCommand implements Command {
         endDate = date;
     }
 
+    /**
+     * Further parse user input when user wants to delete with deleteMode = BEFORE.
+     *
+     * @param sleepCommandArgs User input for the delete sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     private void deleteSleepBefore(String sleepCommandArgs) throws SleepException {
         deleteMode = DeleteMode.BEFORE;
         String[] userCommand = sleepCommandArgs.trim().split("/before", 2);
@@ -74,6 +96,12 @@ public class DeleteSleepCommand implements Command {
         endDate = date;
     }
 
+    /**
+     * Further parse user input when user wants to delete with deleteMode = BETWEEN.
+     *
+     * @param sleepCommandArgs User input for the delete sleep cycles command.
+     * @throws SleepException if there is any formatting issues.
+     */
     private void deleteSleepBetween(String sleepCommandArgs) throws SleepException {
         deleteMode = DeleteMode.BETWEEN;
         String[] userCommandStart = sleepCommandArgs.trim().split("/from", 2);
