@@ -26,6 +26,9 @@ public class ListCommand implements Command {
 
     @Override
     public void execute() {
+        assert isValid(firstParam);
+        assert isValid(sortBy);
+
         int index = 1;
         List<Item> items = Inventory.items();
         Ui.listIntro(items.size());
@@ -55,5 +58,16 @@ public class ListCommand implements Command {
     @Override
     public boolean isQuit() {
         return false;
+    }
+
+    /**
+     * Checks if the provided string is valid.
+     *
+     * @param s The string to be validated.
+     * @return {@code true} if the string is equal to "q" or "p",
+     *         or if the string is empty; {@code false} otherwise.
+     */
+    private boolean isValid(String s) {
+        return s.equals(QUANTITY_FLAG) || s.equals(PRICE_FLAG) || s.isEmpty();
     }
 }
