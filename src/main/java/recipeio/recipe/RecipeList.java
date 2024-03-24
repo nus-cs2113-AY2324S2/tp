@@ -95,9 +95,11 @@ public class RecipeList {
             break;
         case Constants.HELP_COMMAND:
             UI.printInstructions();
+            break;
         default:
             UI.printInvalidCommandWarning();
             UI.printInstructions();
+            break;
         }
     }
 }
