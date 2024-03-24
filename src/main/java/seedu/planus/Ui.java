@@ -127,7 +127,7 @@ public class Ui {
     }
 
     public static void printFailedToWrite() {
-        System.out.println("Failed writing timetable to file");
+        System.out.println("Failed writing timetable to file.");
     }
 
     public static String getUserCommand() {

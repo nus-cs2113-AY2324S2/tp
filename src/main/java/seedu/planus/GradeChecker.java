@@ -45,6 +45,8 @@ public class GradeChecker {
 
                 yearMCs += termMCs;
                 yearGrade += termGrade;
+                termMCs = 0;
+                termGrade = 0.00;
             }
 
             double yearGPA = 0.00;
@@ -57,6 +59,8 @@ public class GradeChecker {
 
             totalMCs += yearMCs;
             totalGrade += yearGrade;
+            yearMCs = 0;
+            yearGrade = 0.00;
         }
 
         double cumulativeGPA = 0.00;
@@ -108,6 +112,8 @@ public class GradeChecker {
 
             yearMCs += termMCs;
             yearGrade += termGrade;
+            termMCs = 0;
+            termGrade = 0.00;
         }
 
         double yearGPA = 0.00;
