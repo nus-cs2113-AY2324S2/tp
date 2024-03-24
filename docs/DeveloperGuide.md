@@ -20,10 +20,13 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...          | I want to ...                                            | So that I can ...                                                |
+|---------|-------------------|----------------------------------------------------------|------------------------------------------------------------------|
+| v1.0    | user              | be able to view my expenses                              | track my prior expenditures and plan future expenses accordingly |
+| v1.0    | user              | be able to view my savings                               | plan my budget accordingly                                       |
+| v1.0    | user              | be able to view my expenses by their relevant categories | control my spending                                              |
+| v1.0    | user              | be able to identify my largest savings category          | allocate necessary saved funds                                   |
+| v2.0    | frequent traveler | log my expenses in multiple currencies                   | accurately track my expenses across different countries          | 
 
 ## Non-Functional Requirements
 
