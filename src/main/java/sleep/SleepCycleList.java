@@ -27,14 +27,17 @@ public class SleepCycleList {
     /**
      * Adds a new sleep cycle into sleepCycleList.
      * @param sleepCycle sleep cycle to be added
+     * @param isPrint true if user wants to print out message, false otherwise
      */
-    public void addSleepCycle(SleepCycle sleepCycle) {
+    public void addSleepCycle(SleepCycle sleepCycle, boolean isPrint) {
         sleepCycleList.add(sleepCycle);
         totalHrsSlept += sleepCycle.getHoursSlept();
         numberOfCycles += 1;
-        Ui.printMessageWithSepNewLine("--- SleepCycle for "
-                + DateFormat.convertDateToString(sleepCycle.getDateOfSleep())
-                + " has been added ---");
+        if (isPrint) {
+            Ui.printMessageWithSepNewLine("--- SleepCycle for "
+                    + DateFormat.convertDateToString(sleepCycle.getDateOfSleep())
+                    + " has been added ---");
+        }
         Collections.sort(sleepCycleList);
     }
 
@@ -121,6 +124,7 @@ public class SleepCycleList {
      * Prints out number of hours of a date's sleep cycle in sleepCycleList.
      * @param date date of sleep cycle to be found
      * @param isPrint true if user wants to print out message, false otherwise
+     * @return id of sleepCycle of the specific date
      */
     public int getSleepCycle(LocalDate date, boolean isPrint) {
         for (int i = 0; i < numberOfCycles; i++) {
@@ -166,4 +170,9 @@ public class SleepCycleList {
     public double getTotalHrsSlept() {
         return totalHrsSlept;
     }
+
+    public ArrayList<SleepCycle> getSleepCycleList() {
+        return this.sleepCycleList;
+    }
+
 }
