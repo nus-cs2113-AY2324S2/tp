@@ -167,7 +167,7 @@ public class Parser {
 
         return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
     }
-    
+
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
@@ -179,56 +179,55 @@ public class Parser {
         assert !action.isEmpty() : "Action should not be empty";
 
         switch (action) {
-            case "list":
-                if (parts.length == 2) {
-                    // List expenses or savings
-                    String listType = parts[1];
-                    assert !listType.isEmpty() : "List type should not be empty";
+        case "list":
+            if (parts.length == 2) {
+                // List expenses or savings
+                String listType = parts[1];
+                assert !listType.isEmpty() : "List type should not be empty";
 
-                    if (listType.equalsIgnoreCase("expenses")) {
-                        return new ListExpenseCommand(expenseList);
-                    } else if (listType.equalsIgnoreCase("savings")) {
-                        return new ListSavingsCommand(savingList, expenseList);
-                    }
-                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
-                    String filterCategory = parts[2];
-                    try {
-                        // Checks for valid category input
-                        if (filterCategory != null) {
-                            boolean isValidCategory = isValidExpenseCategory(filterCategory);
-                            if (!isValidCategory) {
-                                LOGGER.warning("Invalid category inputted: " + filterCategory);
-                                System.out.println("Invalid category: " + filterCategory);
-                                return null;
-                            }
-                        }
-                    } catch (IllegalArgumentException e) {
-                        LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
-                    }
-                    return new ListExpenseCommand(expenseList, filterCategory);
-                } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
-                    String filterCategory = parts[2];
-                    try {
-                        // Checks for valid category input
-                        if (filterCategory != null) {
-                            boolean isValidCategory = isValidSavingsCategory(filterCategory);
-                            if (!isValidCategory) {
-                                LOGGER.warning("Invalid category inputted: " + filterCategory);
-                                System.out.println("Invalid category: " + filterCategory);
-                                return null;
-                            }
-                        }
-                    } catch (IllegalArgumentException e) {
-                        LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
-                    }
-                    return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
-                } else {
-                    return null;
+                if (listType.equalsIgnoreCase("expenses")) {
+                    return new ListExpenseCommand(expenseList);
+                } else if (listType.equalsIgnoreCase("savings")) {
+                    return new ListSavingsCommand(savingList, expenseList);
                 }
-                break;
-
-            default:
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
+                String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
+                return new ListExpenseCommand(expenseList, filterCategory);
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
+                String filterCategory = parts[2];
+                try {
+                    // Checks for valid category input
+                    if (filterCategory != null) {
+                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
+                        if (!isValidCategory) {
+                            LOGGER.warning("Invalid category inputted: " + filterCategory);
+                            System.out.println("Invalid category: " + filterCategory);
+                            return null;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
+                }
+                return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
+            } else {
                 return null;
+            }
+            break;
+        default:
+        return null;
         }
         return null;
     }
