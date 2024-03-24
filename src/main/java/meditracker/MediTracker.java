@@ -21,7 +21,8 @@ public class MediTracker {
     private DailyMedicationManager dailyMedicationManager;
 
     /**
-     * Constructs a new MediTracker object and initializes the user interface.
+     * Constructs a new MediTracker object and initializes both medicationManager and
+     * dailyMedicationManager.
      */
     public MediTracker() {
         medicationManager = new MedicationManager();
