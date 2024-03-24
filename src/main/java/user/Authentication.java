@@ -1,6 +1,6 @@
 package user;
 
-import customexceptions.SecurityException;
+import customexceptions.ExceededAttemptsException;
 import userinterface.UI;
 
 public class Authentication {
@@ -21,18 +21,16 @@ public class Authentication {
         return this.username;
     }
 
-    public boolean checkPassword(String username, String password) throws SecurityException {
+    public boolean checkPassword(String username, String password) throws ExceededAttemptsException {
         boolean isMatch = this.password.equals(password) && this.username.equals(username);
         if (!isMatch) {
             wrongAttempts++;
-            if (wrongAttempts == 3) {
-                throw new SecurityException();
-            }
+            throw new ExceededAttemptsException(wrongAttempts <= 3);
         }
         return isMatch;
     }
 
-    public boolean changePassword(String username, String oldPassword, String newPassword) throws SecurityException {
+    public boolean changePassword(String username, String oldPassword, String newPassword) throws SecurityException, ExceededAttemptsException {
         if (!checkPassword(username, oldPassword)) {
             return false;
         }
@@ -40,13 +38,11 @@ public class Authentication {
         return true;
     }
 
-    public boolean authenticate() throws SecurityException {
+    public boolean authenticate() throws ExceededAttemptsException {
         System.out.println("username: ");
         String inputUsername = this.ui.readInput();
         System.out.println("password: ");
         String inputPassword = this.ui.readInput();
         return this.checkPassword(inputUsername, inputPassword);
     }
-
-
 }

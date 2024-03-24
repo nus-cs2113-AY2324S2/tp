@@ -1,19 +1,19 @@
 package financeproject;
 
-import customexceptions.InactivityTimeoutException;
 import command.BaseCommand;
+import customexceptions.ExceededAttemptsException;
+import customexceptions.InactivityTimeoutException;
 import customexceptions.IncompletePromptException;
-import customexceptions.SecurityException;
 import financialtransactions.TransactionManager;
 import parser.Parser;
 import storage.Storage;
-import user.InactivityTimer;
 import user.Authentication;
 import user.BaseUser;
+import user.InactivityTimer;
 import userinterface.UI;
 
 public class Main {
-    public static void main(String[] args) throws SecurityException {
+    public static void main(String[] args) throws SecurityException, ExceededAttemptsException {
         Storage storage = new Storage("./data");
         TransactionManager manager = new TransactionManager();
 

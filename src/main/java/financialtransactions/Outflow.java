@@ -6,8 +6,7 @@ public class Outflow extends Transaction<Outflow.Category> {
     }
 
     public Outflow(String name, double amount, String date) {
-        super(name, -1.00 * amount, date);
-        //super.transactionType = "O";
+        super(name, /*-1.00 * */amount, date);
         super.amount = amount;
     }
 
