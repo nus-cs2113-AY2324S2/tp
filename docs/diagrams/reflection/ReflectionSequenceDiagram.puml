@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Main
+participant Scanner
+participant ReflectionManager
+participant Parser
+participant ReflectionCommandParser
+participant PlaceholderReflectionCommand
+
+activate Main
+
+create Scanner
+Main -> Scanner
+activate Scanner
+
+create ReflectionManager
+Main -> ReflectionManager
+activate ReflectionManager
+
+loop until isExit
+
+    Main -> Scanner: nextLine()
+    Scanner --> Main: userInput
+    Main -> Parser: userInput
+    alt userInput is ReflectionCommand
+        Parser -> ReflectionCommandParser: determineReflectionCommand()
+        alt command is PlaceholderReflectionCommand
+            create PlaceholderReflectionCommand
+            ReflectionCommandParser -> PlaceholderReflectionCommand: command, params
+            activate PlaceholderReflectionCommand
+            PlaceholderReflectionCommand --> ReflectionCommandParser: command object
+            ReflectionCommandParser --> Parser: command object
+            Parser --> Main: command object
+            Main -> PlaceholderReflectionCommand: execute()
+            PlaceholderReflectionCommand -> ReflectionManager: execute()
+            destroy PlaceholderReflectionCommand
+        end
+    end
+end
+
+@enduml
+
+@enduml

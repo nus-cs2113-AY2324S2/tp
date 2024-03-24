@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Represents a list of reflection questions.
  */
-public class ReflectionList {
+public abstract class ReflectionList {
     protected ArrayList<ReflectionQuestion> reflectionList;
 
     /**
