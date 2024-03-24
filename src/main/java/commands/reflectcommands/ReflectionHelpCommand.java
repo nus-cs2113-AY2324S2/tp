@@ -1,6 +1,7 @@
 package commands.reflectcommands;
 
 import commands.Command;
+import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
 /**
@@ -13,8 +14,16 @@ public class ReflectionHelpCommand implements Command {
      * Constructs a ReflectionHelpCommand with the provided ReflectionManager.
      *
      * @param reflectionManager The ReflectionManager to be used.
+     * @param reflectionCommandArgs The string representing the reflection command arguments.
+     * @throws ReflectException if the command arguments is not empty.
      */
-    public ReflectionHelpCommand(ReflectionManager reflectionManager) {
+    public ReflectionHelpCommand(ReflectionManager reflectionManager, String reflectionCommandArgs)
+            throws ReflectException {
+
+        if (!reflectionCommandArgs.isBlank()) {
+            throw new ReflectException("Additional parameters for 'reflect help' command are not allowed.");
+        }
+
         this.reflectionManager = reflectionManager;
     }
 
