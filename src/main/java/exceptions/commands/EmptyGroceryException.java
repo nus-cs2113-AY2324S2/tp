@@ -1,4 +1,6 @@
-package exceptions;
+package exceptions.commands;
+
+import exceptions.GitException;
 
 /**
  * Represents the exception thrown when the grocery is not given after the command.

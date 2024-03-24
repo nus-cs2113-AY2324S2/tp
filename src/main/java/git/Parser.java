@@ -14,6 +14,9 @@ public class Parser {
 
     private boolean isRunning;
 
+    /**
+     * Constructs Parser.
+     */
     public Parser() {
         groceryList = new GroceryList();
         ui = new Ui();
@@ -32,17 +35,17 @@ public class Parser {
         switch (commandParts[0]) {
         case "add":
             // Assuming the format is "add GROCERY"
-            Grocery grocery = new Grocery(commandParts[1], "", "");
+            Grocery grocery = new Grocery(commandParts[1], 0, "");
             groceryList.addGrocery(grocery);
             break;
 
         case "exp":
-            // if (commandParts.length < 2) throw new EmptyGroceryException();
-            groceryList.setExpiration(commandParts[1]);
+            groceryList.editExpiration(commandParts[1]);
             break;
 
         case "amt":
-            groceryList.setAmount(commandParts[1]);
+        case "use":
+            groceryList.editAmount(commandParts[1], commandParts[0].equals("use"));
             break;
 
         case "del":
@@ -67,7 +70,7 @@ public class Parser {
         }
     }
 
-    public boolean isRunning() {
+    public boolean getIsRunning() {
         return isRunning;
     }
 }

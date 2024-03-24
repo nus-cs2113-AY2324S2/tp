@@ -33,6 +33,7 @@ public class Ui {
         String userName = in.nextLine();
         printHello(userName);
     }
+
     /**
      * Prints Hello with user's name
      */
@@ -70,6 +71,7 @@ public class Ui {
                         "add GROCERY: adds the item GROCERY.\n" +
                         "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY.\n" +
                         "amt GROCERY a/AMOUNT: sets the amount of GROCERY.\n" +
+                        "use GROCERY a/AMOUNT: updates the total amount after using a GROCERY\n" +
                         "del GROCERY: deletes GROCERY.\n" +
                         "list: shows list of all groceries you have.\n" +
                         "exit: exits the program.\n" +
@@ -98,8 +100,16 @@ public class Ui {
      * Prints output after setting the selected grocery's amount.
      */
     public static void printAmtSet(Grocery grocery) {
-        assert !(grocery.getAmount().isEmpty()): "grocery amount should not be empty";
+        // TODO: update amount output according to Grocery subclass
+        assert grocery.getAmount() >= 0 : "grocery amount should not be empty";
         System.out.println(grocery.getName() + ": " + grocery.getAmount());
+    }
+
+    /**
+     * Prints output after a grocery's amount is set to 0.
+     */
+    public static void printAmtDepleted(Grocery grocery) {
+        System.out.println(grocery.getName() + " is now out of stock!");
     }
 
     /**

@@ -14,7 +14,7 @@ public class Git {
 
     // METHODS
     /**
-     * Initialise Git.
+     * Constructs Git.
      */
     public Git() {
         ui = new Ui();
@@ -31,7 +31,7 @@ public class Git {
             try {
                 String[] commandParts = ui.processInput();
                 parser.executeCommand(commandParts);
-                isRunning = parser.isRunning();
+                isRunning = parser.getIsRunning();
             } catch (GitException e) {
                 System.out.println(e.getMessage());
             } finally {

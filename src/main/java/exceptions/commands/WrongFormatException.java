@@ -1,4 +1,6 @@
-package exceptions;
+package exceptions.commands;
+
+import exceptions.GitException;
 
 /**
  * Represents the exception thrown when the command does not follow the proper format.
@@ -18,10 +20,18 @@ public class WrongFormatException extends GitException {
         StringBuilder message = new StringBuilder();
         message.append("Command is in the wrong format, type \"help\" for more information.");
         message.append(System.lineSeparator());
-        if (command.equals("date")) {
+        switch(command) {
+        case ("exp"):
             message.append("exp needs 'd/'");
-        } else if (command.equals("amt")) {
+            break;
+        case ("amt"):
             message.append("amt needs 'a/'");
+            break;
+        case ("use"):
+            message.append("use needs 'a/'");
+            break;
+        default:
+            // Do nothing
         }
 
         return message.toString();
