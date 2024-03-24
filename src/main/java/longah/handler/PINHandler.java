@@ -1,5 +1,6 @@
 package longah.handler;
 
+import java.io.File;
 // import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,6 +28,10 @@ public class PINHandler {
      */
     public PINHandler() {
         this.scanner = new Scanner(System.in);
+        File f = new File("./data");
+        if (!f.exists()) {
+            f.mkdir();
+        }
         if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| loadPin().isEmpty()) {
             createPin();
             loadPin();

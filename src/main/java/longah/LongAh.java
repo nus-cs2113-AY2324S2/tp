@@ -21,7 +21,6 @@ public class LongAh {
     public static void init() {
         Logging.logInfo("Starting Pre-program preparations.");
         UI.showMessage("Welcome to LongAh!");
-        StorageHandler.initDir();
     }
 
     /**
