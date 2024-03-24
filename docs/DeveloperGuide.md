@@ -68,7 +68,7 @@ object to `SuperTracker+handleCommands()`
 The following is a class diagram of the NewCommand and its relevant dependencies
 ![NewCommandClass](uml-diagrams/NewCommandClass.png)
 The `NewCommand` class implements the `Command` interface and is responsible for handling the creation of new items in the `Inventory`.
-A NewCommand instance is created by the `ParseNewCommand` method called by Parser, which ensures that the provided parameters (name, quantity, price) are valid.
+A NewCommand instance is created by the `parseNewCommand` method called by Parser, which ensures that the provided parameters (name, quantity, price) are valid.
 
 #### Dependencies
 - `Item`: For creating the new item
