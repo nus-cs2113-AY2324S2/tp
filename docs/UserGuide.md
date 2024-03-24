@@ -47,6 +47,12 @@ Example of usage:
 `itinerary ACC B`
 
 
+### Generate a smart itinerary, based on your user profile: `smart`
+Generates out a smart itinerary, based off the user information given to Duke
+
+Format: `smart`
+
+
 ### Add a restaurant to your favourites: `food`
 Adds a new restaurant to your favourited list.
 
@@ -100,6 +106,12 @@ Example of usage:
 `delete 7`
 
 
+### List out all entries from your past date history: `history`
+Lists out all the previous restaurants and activites completed on previous dates.
+
+Format: `history`
+
+
 ### Exit the program: `exit`
 Exits the program.
 
@@ -132,11 +144,14 @@ Locations:
 
 * Display all possible commands: `help`
 * List out all restaurants or activities: `list`
+* Update your personal information: `me`
 * Generate a randomised date idea: `idea`
 * Generate a date itinerary, based on preferred location and budget: `itinerary (preferred location) (preferred price)`
+* Generate a smart date itinerary, based on your user profile: `smart`
 * Add a restaurant to your favourites: `food (name of eatery) (location) (price)`
 * Add an activity to your favourites: `activity (name of activity) (location) (price)`
 * Find an entry from your favourited list: `find (keyword)`
 * List out all entries in your favourited list: `favourites`
 * Delete an entry from your favourited list: `delete (index of entry)`
+* List out all entries from your past date history: `history`
 * Exit the program: `exit`
