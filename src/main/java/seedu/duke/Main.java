@@ -78,8 +78,17 @@ public class Main {
                 break;
             case "update":
                 try {
-                    updateManager(scanner, weekView, inMonthView, taskManager);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length < 4) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "update, <day>, <taskIndex>, <newDescription>");
+                    }
+                    String action = parts[0];
+                    int day = Integer.parseInt(parts[1].trim());
+                    int taskIndex = Integer.parseInt(parts[2].trim());
+                    String newDescription = parts[3].trim();
+                    updateManager(scanner, weekView, inMonthView, taskManager, day, taskIndex, newDescription);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
@@ -101,8 +110,15 @@ public class Main {
                 break;
             case "delete":
                 try {
-                    deleteManager(scanner, weekView, inMonthView, taskManager);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length != 3) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "delete, <day>, <taskIndex>");
+                    }
+                    int day = Integer.parseInt(parts[1].trim());
+                    int taskIndex = Integer.parseInt(parts[2].trim());
+                    deleteManager(weekView, inMonthView, taskManager, day, taskIndex);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
