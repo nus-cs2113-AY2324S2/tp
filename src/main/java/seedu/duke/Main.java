@@ -36,6 +36,7 @@ public class Main {
         LocalDate startOfMonth = today.withDayOfMonth(1);
         MonthView monthView = new MonthView(startOfMonth, dateFormatter);
 
+        System.out.println(startOfWeek);
         boolean printWeek = true; // Flag to control printing of the week view
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 

@@ -5,13 +5,11 @@ import time.MonthView;
 import time.WeekView;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static data.TaskManagerException.checkIfDateHasTasks;
@@ -212,12 +210,14 @@ public class TaskManager {
                                      int day, int taskIndex, String newDescription)
             throws TaskManagerException, DateTimeParseException {
         // Convert the day to a LocalDate
-        LocalDate date = weekView.getStartOfWeek().plusDays(day - 1);
+        LocalDate date;
 
         // Check if the date is in the current week/month view
         if (inMonthView) {
+            date = MonthView.getStartOfMonth().plusDays(day - 1);
             checkIfDateInCurrentMonth(date);
         } else {
+            date = weekView.getStartOfWeek().plusDays(day - 1);
             checkIfDateInCurrentWeek(date, weekView);
         }
 
@@ -300,8 +300,8 @@ public class TaskManager {
      * @throws TaskManagerException If not in correct week/month view
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-    public static void deleteManager(WeekView weekView, boolean inMonthView, TaskManager taskManager, int day, int taskIndex)
-            throws TaskManagerException, DateTimeParseException {
+    public static void deleteManager(WeekView weekView, boolean inMonthView, TaskManager taskManager,
+                                     int day, int taskIndex) throws TaskManagerException, DateTimeParseException {
 
         // Convert the day to a LocalDate
         LocalDate date = weekView.getStartOfWeek().plusDays(day - 1);
@@ -337,24 +337,4 @@ public class TaskManager {
         }
     }
 
-    // to abstract as Parser/UI function
-
-    /**
-     * Parses user input into date time format.
-     *
-     * @param scanner User Input.
-     * @return Formatted date time from user input.
-     * @throws DateTimeParseException If user input is not in correct format.
-     */
-    private static LocalDate parseInputDate(Scanner scanner) throws DateTimeParseException {
-        String dateString = scanner.nextLine().trim();
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date;
-        try {
-            date = LocalDate.parse(dateString, dateFormatter);
-        } catch (DateTimeParseException e) {
-            throw new DateTimeParseException("Invalid date format. Please use the format dd/MM/yyyy.", dateString, 0);
-        }
-        return date;
-    }
 }
