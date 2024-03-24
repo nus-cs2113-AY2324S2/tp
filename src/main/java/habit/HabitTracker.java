@@ -34,6 +34,7 @@ public class HabitTracker {
     public void addHabit (Habit newHabit) {
         assert habitList != null : "habitList should not be null";
         habitList.add(newHabit);
+
         String addHabitMessage = "Great! You have added a new habit:\n";
         addHabitMessage += "  '" + newHabit.getDescription() + "' was successfully added!";
         Ui.printMessageWithSepNewLine(addHabitMessage);
@@ -46,13 +47,16 @@ public class HabitTracker {
      */
     public void listHabits() {
         String listHabitsMessage = "Here is the list of all your habits!\n";
+
         if (habitList.isEmpty()) {
             listHabitsMessage += "  <you currently have no habits, add one now!>\n";
         }
+
         for (int i = 0; i < habitList.size(); i++) {
             Habit habit = habitList.get(i);
             listHabitsMessage += "  " + (i + 1) + "." + habit + "\n";
         }
+
         printMessageWithoutSepNewLine(listHabitsMessage);
     }
 
@@ -76,7 +80,6 @@ public class HabitTracker {
         int changeInCount = habit.updateCount(updatedCount);
 
         String updateHabitCountMessage = "";
-
         if (changeInCount > 0) {
             updateHabitCountMessage += "Good Job! You have completed your habit!\n";
         }
@@ -99,7 +102,9 @@ public class HabitTracker {
 
         String deleteHabitMessage = "Got it! I've removed this habit:\n";
         deleteHabitMessage += "  " + habitList.get(habitID - 1) + "\n";
+
         habitList.remove(habitID - 1);
+
         deleteHabitMessage += "Now you have " + habitList.size() + " habits left in the list.";
         Ui.printMessageWithSepNewLine(deleteHabitMessage);
 
