@@ -167,8 +167,7 @@ public class Parser {
 
         return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
     }
-
-
+    
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
@@ -233,6 +232,7 @@ public class Parser {
         }
         return null;
     }
+
 
     private boolean isValidExpenseCategory(String category) {
 
