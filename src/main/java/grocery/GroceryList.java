@@ -133,13 +133,12 @@ public class GroceryList {
      * Lists all the user's groceries.
      */
     public void listGroceries() {
-        assert (!groceries.isEmpty()) : "There is nothing to list.";
         int size = groceries.size();
         if (size == 0) {
             Ui.printNoGrocery();
-            return;
+        } else {
+            Ui.printGroceryList(groceries);
         }
-        Ui.printGroceryList(groceries);
     }
 
     /**

@@ -15,6 +15,7 @@ public class Ui {
     private Scanner in;
 
     // METHODS
+
     /**
      * Constructs Ui and initialises Scanner to read input.
      */
@@ -26,27 +27,29 @@ public class Ui {
      * Prints welcome message.
      */
     public void printWelcome() {
-        // LOGO causes runtest.bat to fail, failing our CI
-        final String GITLOGO =
-                "   _______ ______\n"
-                + "  / ____(_)_  __/\n"
-                + " / / __/ / / /   \n"
-                + "/ /_/ / / / /    \n"
-                + "\\____/_/ /_/     \n";
-
         System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         printLine();
-        System.out.println("Hello " + in.nextLine() + "!");
+        String userName = in.nextLine();
+        printHello(userName);
+    }
+    /**
+     * Prints Hello with user's name
+     */
+    public void printHello(String userName) {
+        System.out.println("Hello " + userName + "!");
+
+        displayHelp();
         System.out.println("Enter command:");
+
         printLine();
     }
-
     /**
      * Processes user input into commands and their details.
      */
     public String[] processInput() {
         String commandLine = in.nextLine();
+        assert !(commandLine.isEmpty()): "User input should be read";
         String[] commandParts = commandLine.strip().split(" ", 2);
         assert commandParts.length > 0 : "Failed to read user input";
 
@@ -64,12 +67,13 @@ public class Ui {
     public void displayHelp() {
         System.out.println(
                 "Here are some ways you can use this app!\n" +
-                        "add GROCERY: adds the item GROCERY\n" +
-                        "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY\n" +
-                        "amt GROCERY a/AMOUNT: sets the amount of GROCERY\n" +
-                        "del GROCERY: deletes GROCERY\n" +
-                        "list: shows list of all groceries you have\n" +
-                        "exit: exits the program."
+                        "add GROCERY: adds the item GROCERY.\n" +
+                        "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY.\n" +
+                        "amt GROCERY a/AMOUNT: sets the amount of GROCERY.\n" +
+                        "del GROCERY: deletes GROCERY.\n" +
+                        "list: shows list of all groceries you have.\n" +
+                        "exit: exits the program.\n" +
+                        "help: view all the possible commands."
         );
     }
 
@@ -109,6 +113,7 @@ public class Ui {
      * Prints all groceries.
      */
     public static void printGroceryList(List<Grocery> groceries) {
+        assert !groceries.isEmpty() : "grocery list should not be empty";
         System.out.println("Here are your groceries!");
         for (Grocery grocery: groceries) {
             System.out.println(" - " + grocery.printGrocery());
@@ -119,6 +124,9 @@ public class Ui {
      * Prints output when the selected grocery is removed.
      */
     public static void printGroceryRemoved(Grocery grocery, List<Grocery> groceries) {
+        assert grocery!=null : "Grocery does not exist";
+        System.out.println("This grocery is removed:");
+        System.out.println(grocery.printGrocery());
         System.out.println("You now have " + groceries.size() + " groceries left");
     }
 
