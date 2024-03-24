@@ -1,16 +1,20 @@
 package supertracker.item;
 
+import  java.time.LocalDate;
+
 import java.util.Comparator;
 
 public class Item {
     private String name;
     private int quantity;
     private double price;
+    private LocalDate expiryDate;
 
-    public Item(String name, int quantity, double price) {
+    public Item(String name, int quantity, double price, LocalDate expiryDate) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.expiryDate = expiryDate;
     }
 
     public String getName() {
@@ -23,6 +27,10 @@ public class Item {
 
     public double getPrice() {
         return price;
+    }
+
+    public LocalDate getExpiryDate() {
+        return expiryDate;
     }
 
     public String getPriceString() {

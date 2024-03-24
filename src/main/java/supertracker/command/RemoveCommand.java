@@ -22,7 +22,7 @@ public class RemoveCommand implements Command {
         int newQuantity = oldItem.getQuantity() - quantity;
         newQuantity = Math.max(newQuantity, 0);
         int quantityRemoved = oldItem.getQuantity() - newQuantity;
-        Item newItem = new Item(name, newQuantity, oldItem.getPrice());
+        Item newItem = new Item(name, newQuantity, oldItem.getPrice(), oldItem.getExpiryDate());
         Inventory.put(name, newItem);
         Ui.removeCommandSuccess(newItem, quantityRemoved);
     }

@@ -7,6 +7,9 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,8 +26,8 @@ public class NewCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
-
-        Command command = new NewCommand(name, quantity, price);
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Command command = new NewCommand(name, quantity, price, date);
         command.execute();
 
         assertTrue(Inventory.contains(name));
@@ -52,11 +55,13 @@ public class NewCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
+
         newCommand.execute();
 
-        String userInput = "new n/milk q/100 p/5.00";
+        String userInput = "new n/milk q/100 p/5.00 e/22/08/2013";
         assertThrows(TrackerException.class, () -> Parser.parseCommand(userInput));
     }
 
@@ -67,6 +72,21 @@ public class NewCommandTest {
 
         String invalidPriceInput = "new n/milk q/100 p/-5.00";
         assertThrows(TrackerException.class, () -> Parser.parseCommand(invalidPriceInput));
+    }
+
+    @Test
+    public void newCommand_invalidExpiryDate() {
+        String invalidExpiryDateInput = "new n/milk q/100 p/5.33 e/hello";
+        assertThrows(TrackerException.class, () -> Parser.parseCommand(invalidExpiryDateInput));
+
+        String invalidExpiryDateInputNumber = "new n/milk q/100 p/5.33 e/5.33";
+        assertThrows(TrackerException.class, () -> Parser.parseCommand(invalidExpiryDateInputNumber));
+
+        String invalidExpiryDateYearFormat = "new n/milk q/100 p/5.33 e/22/11/22331";
+        assertThrows(TrackerException.class, () -> Parser.parseCommand(invalidExpiryDateYearFormat));
+
+        String invalidExpiryDateOrder = "new n/milk q/100 p/5.33 e/2113/11/13";
+        assertThrows(TrackerException.class, () -> Parser.parseCommand(invalidExpiryDateOrder));
     }
 
     @Test
