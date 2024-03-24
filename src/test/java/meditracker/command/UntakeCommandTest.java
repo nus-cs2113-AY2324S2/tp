@@ -4,7 +4,6 @@ import meditracker.DailyMedication;
 import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.MedicationManager;
-import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,8 +18,7 @@ public class UntakeCommandTest {
 
         String inputString = "untake -l 1";
         UntakeCommand command = new UntakeCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(null, dailyMedicationManager, ui);
+        command.execute(null, dailyMedicationManager);
 
         assertFalse(dailyMedication.isTaken());
     }

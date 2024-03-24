@@ -3,7 +3,6 @@ package meditracker.command;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
-import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,8 +22,7 @@ public class DeleteCommandTest {
 
         String inputString = "delete -l 1";
         DeleteCommand command = new DeleteCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(medicationManager, null, ui);
+        command.execute(medicationManager, null);
 
         assertThrows(IndexOutOfBoundsException.class, () -> medicationManager.getMedication(1));
     }

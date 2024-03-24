@@ -4,7 +4,6 @@ import meditracker.DailyMedication;
 import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.medication.MedicationManager;
-import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,8 +18,7 @@ public class TakeCommandTest {
 
         String inputString = "take -l 1";
         TakeCommand command = new TakeCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(null, dailyMedicationManager, ui);
+        command.execute(null, dailyMedicationManager);
 
         assertTrue(dailyMedication.isTaken());
     }
