@@ -43,6 +43,9 @@ public class CountupTimer {
         totalTimeSpent();
     }
 
+    /**
+     * Set the timer to pause
+     */
     public void setPause() {
         currentTime = LocalDateTime.now();
         Duration timeElapsed = Duration.between(startTiming, currentTime);
@@ -54,12 +57,20 @@ public class CountupTimer {
         Ui.printMessageWithSepNewLine("Count up timer paused.");
     }
 
+    /**
+     * Set the timer to resume.
+     */
     public void setResume() {
         this.startTiming = LocalDateTime.now();
         isPaused = false;
         Ui.printMessageWithSepNewLine("Count up timer resumed");
     }
 
+    /**
+     * Get the current paused status of the timer
+     *
+     * @return true if the timer has been paused, false otherwise.
+     */
     public boolean getPauseStatus() {
         return isPaused;
     }
@@ -89,6 +100,10 @@ public class CountupTimer {
                 "To start a new session, use ‘focus start’ ");
     }
 
+    /**
+     * Check to total time elapsed from the start to the current time, and prints out the total time elapsed
+     * using the Ui class.
+     */
     public void checkTime() {
         if(!isPaused) {
             currentTime = LocalDateTime.now();
