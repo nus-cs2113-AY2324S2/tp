@@ -36,6 +36,8 @@ public class Ui {
             "'idea'\n\n" +
             "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
             "'itinerary' [space] '(preferred location)' [space] '(preferred price)'\n\n" +
+            "To generate a smart itinerary, simply send me the following AFTER you have completed 'me': \n" +
+            "'smart'\n\n" +
             "To add food to your favourites, simply send me the following: \n" +
             "'food' [space] '(name of eatery)' [space] '(location)' [space] '(price)'\n\n" +
             "To add an activity to your favourites, simply send me the following: \n" +
@@ -44,10 +46,10 @@ public class Ui {
             "'find' [space] '(keyword)'\n\n" +
             "To list out all your favourites, simply send me the following: \n" +
             "'favourites'\n\n" +
-            "To generate a smart itinerary, simply send me the following AFTER you have completed 'me': \n" +
-            "'smart'\n\n" +
             "To delete an activity from your favourites, simply send me the following: \n" +
-            "'delete' [space] '(index of entry)'\n\n" +            
+            "'delete' [space] '(index of entry)'\n\n" +   
+            "To list out all your past date locations and restaurants, simply send me the following: \n" +
+            "'history'\n\n" +         
             "To exit the program, simply send me the following: \n" +
             "'exit'\n\n" +
 

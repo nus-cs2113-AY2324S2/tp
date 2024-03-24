@@ -1,141 +1,141 @@
-Botanic Garden Tours | C | C
-Gardens by the Bay | C | C
-Kampong Glam Cultural Exploration | C | C
-Chinatown Food Adventure | C | B
-Marina Bay Sands Light and Water Show | C | B
-Singapore River Cruise | C | B
-Haw Par Villa | C | B
-Mount Faber Cable Car Ride | C | B
-Haji Lane Shopping | C | A
-Fort Canning Park Archaeological Dig and Historical Tour | C | A
-Museum of Ice Cream | C | A
-Katong Antique House Visit | C | A
-Katong Food Walk | C | A
-Singapore Flyer | C | P
-Universal Studios Singapore | C | P
-Singapore Zoo Night Safari | C | P
-Marina Bay Sands SkyPark | C | P
-Marina Bay Sands Skypark Observation Deck | C | S
-Marina Bay Sands Infinity Pool | C | S
-ArtScience Museum | C | S
-Marina Bay Sands Shopping | C | S
-Gardens by the Bay | C | S
-Jewel Changi Airport Exploration | E | C
-Peranakan Culture Exploration in Joo Chiat | E | C
-Pulau Ubin Adventure | E | C
-Marina Barrage Kite Flying | E | C
-Punggol Waterway Park | E | C
-Haw Par Villa | E | B
-Katong Laksa Tasting | E | B
-East Coast Park Cycling | E | B
-Coney Island Park Exploration | E | B
-Katong Antique House Visit | E | A
-Katong Food Walk | E | A
-Changi Museum Visit | E | A
-Punggol Promenade Nature Walk | E | A
-Cycling at Punggol Waterway | E | A
-Jewel Changi Airport Canopy Park | E | P
-Changi Experience Studio | E | P
-Marina Bay Sands Skypark Observation Deck | E | P
-Marina Bay Sands Casino | E | P
-Jewel Changi Airport Canopy Park | E | P
-Marina Bay Sands Infinity Pool | E | S
-Marina Bay Sands Shopping | E | S
-Marina Bay Sands Helicopter Tour | E | S
-Pulau Ubin Adventure | E | S
-Punggol Waterway Park | E | S
-Singapore Botanic Gardens | W | C
-Jurong Bird Park | W | C
-Singapore Science Centre | W | C
-Henderson Waves Bridge Walk | W | C
-Singapore Botanic Gardens | W | C
-West Coast Park Picnic | W | B
-Hawker Centre Hopping in Jurong | W | B
-JCube Ice Skating | W | B
-Haw Par Villa | W | B
-Mount Faber Cable Car Ride | W | B
-Jurong Lake Gardens Cycling | W | A
-Haw Par Villa | W | A
-Jurong East Swimming Complex | W | A
-Jurong Hill Lookout Tower | W | A
-Jurong Eco-Garden | W | A
-Jurong Hill Lookout Tower | W | P
-Jem Shopping Mall | W | P
-West Coast Park Sunset Viewing | W | P
-Orchard Road Shopping | W | P
-VivoCity Shopping | W | P
-Jurong Eco-Garden | W | S
-Marina Bay Sands Infinity Pool | W | S
-Marina Bay Sands Skypark Observation Deck | W | S
-West Coast Park Sunset Viewing | W | S
-Henderson Waves Bridge Walk | W | S
-Henderson Waves Bridge Walk | S | C
-Southern Ridges Walk | S | C
-Sentosa Merlion | S | C
-Marina Barrage Picnic | S | C
-Gardens by the Bay | S | C
-Haw Par Villa | S | B
-Mount Faber Cable Car Ride | S | B
-Resorts World Sentosa Adventure Cove Waterpark | S | B
-Sentosa Skyline Luge | S | B
-Underwater World | S | B
-Resorts World Sentosa Adventure Cove Waterpark | S | A
-Siloso Beach Party | S | A
-Sentosa Island Beach Clubs | S | A
-Marina Bay Sands Fine Dining | S | A
-Siloso Beach Party | S | A
-Marina Bay Sands Skating Rink | S | P
-S.E.A. Aquarium | S | P
-Underwater World | S | P
-Marina Bay Sands Casino | S | P
-Singapore Flyer Dining | S | P
-iFly Singapore Indoor Skydiving | S | S
-Skyline Luge Sentosa | S | S
-AJ Hackett Sentosa Bungee Jump | S | S
-Marina Bay Sands Infinity Pool | S | S
-Skydiving | S | S
-Punggol Waterway Park | NE | C
-Punggol Settlement Seafood Dining | NE | C
-Coney Island Park Exploration | NE | C
-Lorong Halus Wetland Park Bird Watching | NE | C
-Punggol Waterway Park | NE | C
-Punggol Waterway Park Kayaking | NE | B
-Windsurfing in Punggol | NE | B
-Lorong Halus Wetland Park Bird Watching | NE | B
-Punggol Jetty Sunset Viewing | NE | B
-Lorong Halus Bridge Cycling | NE | B
-Punggol Promenade Nature Walk | NE | A
-Punggol Container Park Shopping | NE | A
-Cycling at Punggol Waterway | NE | A
-Pulau Ubin Adventure | NE | A
-Coney Island Park Glamping | NE | A
-Jewel Changi Airport Canopy Park | NE | P
-Hai Bin Prawning | NE | P
-Changi Experience Studio | NE | P
-Marina Bay Sands SkyPark | NE | P
-Jewel Changi Airport Canopy Park | NE | P
-Marina Bay Sands Skypark Observation Deck | NE | S
-Marina Bay Sands Shopping | NE | S
-Marina Bay Sands Helicopter Tour | NE | S
-Pulau Ubin Adventure | NE | S
-Punggol Waterway Park | NE | S
-Cultural Shows | ACC | C
-Interactive Workshops | ACC | C
-Park Visits | ACC | C
-Street Food Sampling | ACC | C
-Cultural Shows | ACC | B
-Interactive Workshops | ACC | B
-Park Visits | ACC | B
-Street Food Sampling | ACC | B
-Beach Outings | ACC | A
-Historical Landmark Visits | ACC | A
-Guided City Tours | ACC | A
-Museum Trips | ACC | A
-Private Guided Tours | ACC | P
-Local Theatre Performances | ACC | P
-River Cruise | ACC | P
-Spa Treatment | ACC | P
-Helicopter Tour | ACC | S
-Adventure Sports | ACC | S
-Yacht Charter | ACC | S
-VIP Event | ACC | S
+Botanic Garden Tours | C | C | U
+Gardens by the Bay | C | C | U
+Kampong Glam Cultural Exploration | C | C | U
+Chinatown Food Adventure | C | B | U
+Marina Bay Sands Light and Water Show | C | B | U
+Singapore River Cruise | C | B | U
+Haw Par Villa | C | B | U
+Mount Faber Cable Car Ride | C | B | U
+Haji Lane Shopping | C | A | U
+Fort Canning Park Archaeological Dig and Historical Tour | C | A | U
+Museum of Ice Cream | C | A | U
+Katong Antique House Visit | C | A | U
+Katong Food Walk | C | A | U
+Singapore Flyer | C | P | U
+Universal Studios Singapore | C | P | U
+Singapore Zoo Night Safari | C | P | U
+Marina Bay Sands SkyPark | C | P | U
+Marina Bay Sands Skypark Observation Deck | C | S | U
+Marina Bay Sands Infinity Pool | C | S | U
+ArtScience Museum | C | S | U
+Marina Bay Sands Shopping | C | S | U
+Gardens by the Bay | C | S | U
+Jewel Changi Airport Exploration | E | C | U
+Peranakan Culture Exploration in Joo Chiat | E | C | U
+Pulau Ubin Adventure | E | C | U
+Marina Barrage Kite Flying | E | C | U
+Punggol Waterway Park | E | C | U
+Haw Par Villa | E | B | U
+Katong Laksa Tasting | E | B | U
+East Coast Park Cycling | E | B | U
+Coney Island Park Exploration | E | B | U
+Katong Antique House Visit | E | A | U
+Katong Food Walk | E | A | U
+Changi Museum Visit | E | A | U
+Punggol Promenade Nature Walk | E | A | U
+Cycling at Punggol Waterway | E | A | U
+Jewel Changi Airport Canopy Park | E | P | U
+Changi Experience Studio | E | P | U
+Marina Bay Sands Skypark Observation Deck | E | P | U
+Marina Bay Sands Casino | E | P | U
+Jewel Changi Airport Canopy Park | E | P | U
+Marina Bay Sands Infinity Pool | E | S | U
+Marina Bay Sands Shopping | E | S | U
+Marina Bay Sands Helicopter Tour | E | S | U
+Pulau Ubin Adventure | E | S | U
+Punggol Waterway Park | E | S | U
+Singapore Botanic Gardens | W | C | U
+Jurong Bird Park | W | C | U
+Singapore Science Centre | W | C | U
+Henderson Waves Bridge Walk | W | C | U
+Singapore Botanic Gardens | W | C | U
+West Coast Park Picnic | W | B | U
+Hawker Centre Hopping in Jurong | W | B | U
+JCube Ice Skating | W | B | U
+Haw Par Villa | W | B | U
+Mount Faber Cable Car Ride | W | B | U
+Jurong Lake Gardens Cycling | W | A | U
+Haw Par Villa | W | A | U
+Jurong East Swimming Complex | W | A | U
+Jurong Hill Lookout Tower | W | A | U
+Jurong Eco-Garden | W | A | U
+Jurong Hill Lookout Tower | W | P | U
+Jem Shopping Mall | W | P | U
+West Coast Park Sunset Viewing | W | P | U
+Orchard Road Shopping | W | P | U
+VivoCity Shopping | W | P | U
+Jurong Eco-Garden | W | S | U
+Marina Bay Sands Infinity Pool | W | S | U
+Marina Bay Sands Skypark Observation Deck | W | S | U
+West Coast Park Sunset Viewing | W | S | U
+Henderson Waves Bridge Walk | W | S | U
+Henderson Waves Bridge Walk | S | C | U
+Southern Ridges Walk | S | C | U
+Sentosa Merlion | S | C | U
+Marina Barrage Picnic | S | C | U
+Gardens by the Bay | S | C | U
+Haw Par Villa | S | B | U
+Mount Faber Cable Car Ride | S | B | U
+Resorts World Sentosa Adventure Cove Waterpark | S | B | U
+Sentosa Skyline Luge | S | B | U
+Underwater World | S | B | U
+Resorts World Sentosa Adventure Cove Waterpark | S | A | U
+Siloso Beach Party | S | A | U
+Sentosa Island Beach Clubs | S | A | U
+Marina Bay Sands Fine Dining | S | A | U
+Siloso Beach Party | S | A | U
+Marina Bay Sands Skating Rink | S | P | U
+S.E.A. Aquarium | S | P | U
+Underwater World | S | P | U
+Marina Bay Sands Casino | S | P | U
+Singapore Flyer Dining | S | P | U
+iFly Singapore Indoor Skydiving | S | S | U
+Skyline Luge Sentosa | S | S | U
+AJ Hackett Sentosa Bungee Jump | S | S | U
+Marina Bay Sands Infinity Pool | S | S | U
+Skydiving | S | S | U
+Punggol Waterway Park | NE | C | U
+Punggol Settlement Seafood Dining | NE | C | U
+Coney Island Park Exploration | NE | C | U
+Lorong Halus Wetland Park Bird Watching | NE | C | U
+Punggol Waterway Park | NE | C | U
+Punggol Waterway Park Kayaking | NE | B | U
+Windsurfing in Punggol | NE | B | U
+Lorong Halus Wetland Park Bird Watching | NE | B | U
+Punggol Jetty Sunset Viewing | NE | B | U
+Lorong Halus Bridge Cycling | NE | B | U
+Punggol Promenade Nature Walk | NE | A | U
+Punggol Container Park Shopping | NE | A | U
+Cycling at Punggol Waterway | NE | A | U
+Pulau Ubin Adventure | NE | A | U
+Coney Island Park Glamping | NE | A | U
+Jewel Changi Airport Canopy Park | NE | P | U
+Hai Bin Prawning | NE | P | U
+Changi Experience Studio | NE | P | U
+Marina Bay Sands SkyPark | NE | P | U
+Jewel Changi Airport Canopy Park | NE | P | U
+Marina Bay Sands Skypark Observation Deck | NE | S | U
+Marina Bay Sands Shopping | NE | S | U
+Marina Bay Sands Helicopter Tour | NE | S | U
+Pulau Ubin Adventure | NE | S | U
+Punggol Waterway Park | NE | S | U
+Cultural Shows | ACC | C | U
+Interactive Workshops | ACC | C | U
+Park Visits | ACC | C | U
+Street Food Sampling | ACC | C | U
+Cultural Shows | ACC | B | U
+Interactive Workshops | ACC | B | U
+Park Visits | ACC | B | U
+Street Food Sampling | ACC | B | U
+Beach Outings | ACC | A | U
+Historical Landmark Visits | ACC | A | U
+Guided City Tours | ACC | A | U
+Museum Trips | ACC | A | U
+Private Guided Tours | ACC | P | U
+Local Theatre Performances | ACC | P | U
+River Cruise | ACC | P | U
+Spa Treatment | ACC | P | U
+Helicopter Tour | ACC | S | U
+Adventure Sports | ACC | S | U
+Yacht Charter | ACC | S | U
+VIP Event | ACC | S | U
