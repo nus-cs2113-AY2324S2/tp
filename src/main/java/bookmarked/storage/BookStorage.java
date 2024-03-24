@@ -19,7 +19,7 @@ public class BookStorage {
             boolean isFileCreated = bookDataFile.createNewFile();
 
             if (isFileCreated) {
-               System.out.println("Successfully create a storage file for books");
+                System.out.println("Successfully create a storage file for books");
             } else {
                 System.out.println("Sorry, something's wrong, file is not created");
             }

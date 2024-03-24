@@ -55,7 +55,8 @@ public class DeleteCommand extends Command {
         }
 
         int listNumberIndex = (inputtedIndex - 1);
-        System.out.println("Deleted!");
+        Book bookName = listOfBooks.get(listNumberIndex);
+        System.out.println("Deleted " + bookName + "!");
         this.listOfBooks.remove(listNumberIndex);
     }
 

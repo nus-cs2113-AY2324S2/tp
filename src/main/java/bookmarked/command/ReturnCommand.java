@@ -15,6 +15,7 @@ public class ReturnCommand extends Command {
     private ArrayList<Book> listOfBooks;
     private File bookDataFile;
     public ReturnCommand(String[] commandParts, ArrayList<Book> listOfBooks, File bookDataFile) {
+        assert listOfBooks != null : "list of books should not be empty";
         assert commandParts != null : "commandParts should not be null";
         assert commandParts.length > 1 : "commandParts should contain at least the command and the book name";
         this.bookName =  String.join(" ", List.of(commandParts).subList(1, commandParts.length));

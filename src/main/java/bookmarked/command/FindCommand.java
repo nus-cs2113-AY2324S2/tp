@@ -20,6 +20,7 @@ public class FindCommand extends Command {
 
     @Override
     public void handleCommand() {
+        assert listOfBooks != null : "list of books should not be empty";
         String keyword;
         logger.log(Level.INFO, "going to start processing find command");
         try {
