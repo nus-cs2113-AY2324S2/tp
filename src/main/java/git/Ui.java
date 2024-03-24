@@ -15,6 +15,7 @@ public class Ui {
     private Scanner in;
 
     // METHODS
+
     /**
      * Constructs Ui and initialises Scanner to read input.
      */
@@ -26,23 +27,23 @@ public class Ui {
      * Prints welcome message.
      */
     public void printWelcome() {
-        // LOGO causes runtest.bat to fail, failing our CI
-        final String GITLOGO =
-                "   _______ ______\n"
-                + "  / ____(_)_  __/\n"
-                + " / / __/ / / /   \n"
-                + "/ /_/ / / / /    \n"
-                + "\\____/_/ /_/     \n";
-
         System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         printLine();
-        System.out.println("Hello " + in.nextLine() + "!");
+        String userName = in.nextLine();
+        printHello(userName);
+    }
+    /**
+     * Prints Hello with user's name
+     */
+    public void printHello(String userName) {
+        System.out.println("Hello " + userName + "!");
+
         displayHelp();
         System.out.println("Enter command:");
+
         printLine();
     }
-
     /**
      * Processes user input into commands and their details.
      */
