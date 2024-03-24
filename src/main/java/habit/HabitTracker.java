@@ -117,4 +117,8 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
+    public void clearHabits() {
+        habitList.clear();
+        saveHabitListToFile(habitList);
+    }
 }
