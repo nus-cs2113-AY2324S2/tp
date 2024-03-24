@@ -1,10 +1,7 @@
 package brokeculator.command;
 
 import brokeculator.dashboard.Dashboard;
-import brokeculator.expense.Expense;
 import brokeculator.frontend.UI;
-
-import java.util.ArrayList;
 
 public class ListCommand extends Command {
     private int amountToList;
