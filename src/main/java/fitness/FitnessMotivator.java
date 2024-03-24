@@ -9,6 +9,7 @@ public class FitnessMotivator {
     public static ExerciseList allExercises = new ExerciseList();
 
     public static final String FILE_PATH = "./data/exerciselist.txt";
+    public static final int REQUIRED_NUM_OF_PARAMETERS = 4;
 
     public FitnessMotivator() {}
 
@@ -33,9 +34,11 @@ public class FitnessMotivator {
         return message;
     }
 
-    public void addExercises(String commandArgs) {
-        String[] newCommandArgs = commandArgs.split(", ", 4);
-        Exercise newExercise = allExercises.newExercise(newCommandArgs);
+    public void addExercises(String[] commandArgs) {
+        assert commandArgs.length == 4 :
+            "Something went wrong with parsing fitness add command arguments";
+
+        Exercise newExercise = allExercises.newExercise(commandArgs);
         allExercises.add(newExercise);
         String message = "I have added the following exercise into our list!" +
                 System.lineSeparator() + newExercise;
