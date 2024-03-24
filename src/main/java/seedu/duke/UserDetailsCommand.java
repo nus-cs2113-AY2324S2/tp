@@ -60,6 +60,7 @@ public class UserDetailsCommand extends Command {
             String anniversary;
             ui.showMessage("Lucky you! Please enter your anniversary:");
             anniversary = ui.readCommand();
+            userDetails.setAnniversary(anniversary);
         }
 
         userDetails.setName(name);

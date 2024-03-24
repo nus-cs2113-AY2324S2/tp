@@ -36,7 +36,7 @@ public class Duke {
             UserDetailsCommand userDetailsCommand = new UserDetailsCommand();
             userDetailsCommand.execute(favourites, foods, activities, ui, storage, userDetails);
         } else {
-            ui.greetingMessage();
+            ui.greetingMessage(userDetails.getAnniversary());
         }
 
         boolean isExit = false;
