@@ -27,14 +27,29 @@ public class Main {
         BaseUser tempUser = new BaseUser("Bob", ui);
         Authentication auth = tempUser.getAuthentication();
         InactivityTimer inactivityTimer = new InactivityTimer();
+        boolean isAuthenticated = false;
 
-        if (!auth.authenticate()) {
-            ui.printMessage("Authentication error");
+        while (!isAuthenticated && auth.getWrongAttempts() < 3) {
+            try {
+                if (!auth.authenticate()) {
+                    ui.printMessage("Authentication error");
+                } else {
+                    ui.printMessage("Password is correct. You are now logged in");
+                    manager = storage.loadFile();
+                    isAuthenticated = true;
+                }
+            } catch (ExceededAttemptsException e) {
+                if (e.isCanTryAgain()) {
+                    ui.printMessage("Incorrect username or password. Please try again.");
+                } else {
+                    ui.printMessage("Too many incorrect attempts. Authentication failed.");
+                }
+            }
+        }
+
+        if (!isAuthenticated) {
             ui.closeScanner();
             return;
-        } else {
-            ui.printMessage("Password is correct. You are now logged in");
-            manager = storage.loadFile();
         }
 
         do {
