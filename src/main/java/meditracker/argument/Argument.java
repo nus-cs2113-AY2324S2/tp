@@ -7,7 +7,7 @@ package meditracker.argument;
  * if user require additional context and whether the argument
  * is optional or not.
  */
-public class Argument {
+public abstract class Argument {
     private final ArgumentName name;
     private final String flag;
     private final String prompt;
