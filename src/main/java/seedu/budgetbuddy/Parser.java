@@ -1,16 +1,6 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.command.AddExpenseCommand;
-import seedu.budgetbuddy.command.AddSavingCommand;
-import seedu.budgetbuddy.command.EditExpenseCommand;
-import seedu.budgetbuddy.command.EditSavingCommand;
-import seedu.budgetbuddy.command.ReduceSavingCommand;
-import seedu.budgetbuddy.command.DeleteExpenseCommand;
-import seedu.budgetbuddy.command.Command;
-import seedu.budgetbuddy.command.MenuCommand;
-import seedu.budgetbuddy.command.ListExpenseCommand;
-import seedu.budgetbuddy.command.ListSavingsCommand;
-import seedu.budgetbuddy.command.FindExpensesCommand;
+import seedu.budgetbuddy.command.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +92,14 @@ public class Parser {
 
     public Boolean isReduceSavingCommand(String input) {
         return input.startsWith("reduce");
+    }
+
+    public Boolean isSetBudgetCommand(String input){
+        return input.startsWith("set budget");
+    }
+
+    public boolean isListBudgetCommand(String input){
+        return input.startsWith("budget print");
     }
 
 
@@ -509,6 +507,52 @@ public class Parser {
         }
     }
 
+    private Command handleSetBudgetCommand(ExpenseList expenses, String input) {
+        LOGGER.log(Level.INFO, "Entering handleSetBudgetCommand with input: " + input);
+        String[] parts = input.split(" ");
+        String category = null;
+        double budget = -1;
+
+        for (String part : parts) {
+            if (part.startsWith("c/")) {
+                category = part.substring(2);
+                LOGGER.log(Level.INFO, "Category extracted: " + category);
+            } else if (part.startsWith("b/")) {
+                try {
+                    budget = Double.parseDouble(part.substring(2));
+                    LOGGER.log(Level.INFO, "Budget extracted: " + budget);
+                } catch (NumberFormatException e) {
+                    LOGGER.log(Level.SEVERE, "Invalid budget format. Budget should be a number.", e);
+                    System.out.println("Invalid budget format. Budget should be a number");
+                    return null;
+                }
+            }
+        }
+
+        if (category == null || budget == -1) {
+            LOGGER.log(Level.WARNING, "Invalid command format or missing values for category/budget");
+            System.out.println("Invalid command format.");
+            System.out.println("Expected format: set budget c/<category> b/<budget>");
+            return null;
+        }
+
+        boolean isValidCategory = isValidExpenseCategory(category);
+        if (!isValidCategory) {
+            LOGGER.log(Level.WARNING, "Invalid category: " + category);
+            System.out.println("Invalid category: " + category);
+            System.out.println("Valid categories: Housing, Groceries, Utility, Transport, Entertainment, Others");
+            return null;
+        }
+
+        LOGGER.log(Level.INFO, "Exiting handleSetBudgetCommand. Command ready for execution.");
+        return new SetBudgetCommand(expenses, category, budget);
+    }
+
+    public Command handleListBudgetCommand(ExpenseList expenseList) {
+        return new ListBudgetCommand(expenseList);
+    }
+
+
     /**
      * Parses a string input into a Command object and returns the associated
      * command to handle the user input
@@ -556,7 +600,13 @@ public class Parser {
             return handleFindExpensesCommand(input, expenses);
         }
 
+        if (isSetBudgetCommand(input)) {
+            return handleSetBudgetCommand(expenses, input);
+        }
+
+        if (isListBudgetCommand(input)){
+            return handleListBudgetCommand(expenses);
+        }
         return null;
     }
-
 }
