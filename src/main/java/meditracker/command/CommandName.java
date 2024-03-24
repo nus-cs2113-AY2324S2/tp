@@ -29,10 +29,10 @@ public enum CommandName {
      *
      * @param label The string label representing a command name.
      * @return The CommandName enum corresponding to the label, or null if not found.
-     * @author Baeldung
-     * Reused from https://www.baeldung.com/java-enum-values
-     * with minor modifications
      */
+    // @@author Baeldung
+    // Reused from https://www.baeldung.com/java-enum-values
+    // with minor modifications
     public static CommandName valueOfLabel(String label) {
         for (CommandName e : values()) {
             if (e.value.equals(label)) {
