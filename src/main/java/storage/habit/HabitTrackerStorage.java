@@ -9,13 +9,15 @@ import java.util.ArrayList;
 
 public class HabitTrackerStorage {
     private static final String HABIT_FILE_PATH = "data/habits.txt";
+    private static final String COMMA_SEPARATION = ", ";
+    private static final int DATA_SIZE = 3;
 
     public static void saveHabitListToFile(ArrayList<Habit> habitList) {
         ArrayList<String> data = new ArrayList<>();
 
         for (Habit habit : habitList) {
-            data.add(habit.getDescription() + ", " + habit.getHabitCount()
-                    + ", " + habit.getPriority());
+            data.add(habit.getDescription() + COMMA_SEPARATION + habit.getHabitCount()
+                    + COMMA_SEPARATION + habit.getPriority());
         }
 
         Storage.saveTasksToFile(HABIT_FILE_PATH, data);
@@ -28,7 +30,7 @@ public class HabitTrackerStorage {
         for (String line : data) {
             String[] parts = line.split(", ");
 
-            if (parts.length != 3) {
+            if (parts.length != DATA_SIZE) {
                 throw new HabitException("Error in loading habit tracker data from local storage");
             }
 

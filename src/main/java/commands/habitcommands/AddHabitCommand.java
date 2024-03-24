@@ -21,9 +21,11 @@ public class AddHabitCommand implements Command {
      */
     public AddHabitCommand(HabitTracker habitTracker, String habitCommandArgs) throws HabitException {
         this.habitTracker = habitTracker;
+
         if (habitCommandArgs.isEmpty()) {
             throw new HabitException("Habit Description cannot be left empty.");
         }
+
         this.newHabit = new Habit(habitCommandArgs.trim());
     }
 

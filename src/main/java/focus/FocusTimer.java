@@ -3,18 +3,24 @@ package focus;
 import ui.Ui;
 
 /**
- * Represents the focus timer for wellness360
+ * Represents the focus timer for wellness360.
  */
 public class FocusTimer {
     CountupTimer countupTimer;
     CountdownTimer countdownTimer;
     private boolean timerMode = false; // false for count-up, true for countdown
 
+    /**
+     * Constructs a FocusTimer class with instances of CountupTimer and CountdownTimer
+     */
     public FocusTimer() {
         this.countupTimer = new CountupTimer();
         this.countdownTimer = new CountdownTimer();
     }
 
+    /**
+     * Set the start timing for the timer.
+     */
     public void setStartTiming() {
         if (timerMode) {
             countdownTimer.setStart();
@@ -23,6 +29,9 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Set the stop timing for the timer.
+     */
     public void setStopTiming() {
         if (timerMode) {
             countdownTimer.setStop();
@@ -32,6 +41,11 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Check whether the timer has started.
+     *
+     * @return true if the timer has started. False otherwise.
+     */
     public boolean getStartStatus() {
         if (timerMode) {
             return countdownTimer.getRunningStatus();
@@ -40,6 +54,9 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Switch the timer mode for focus timer between count yp timer and countdown timer.
+     */
     public void switchTimer() {
         this.timerMode = !timerMode;
         if (timerMode) {
@@ -49,6 +66,9 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Pause the timer that is currently running.
+     */
     public void setPauseTiming() {
         if (timerMode) {
             countdownTimer.setPause();
@@ -57,6 +77,11 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Get the pause status of the current timer that is running.
+     *
+     * @return True if the timer is in the paused state. False otherwise.
+     */
     public boolean getPausedStatus() {
         if (timerMode) {
             return !countdownTimer.getPausedStatus();
@@ -65,6 +90,9 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Resume the timer that is currently running.
+     */
     public void setResumeTiming() {
         if (timerMode) {
             countdownTimer.setResume();
@@ -73,10 +101,18 @@ public class FocusTimer {
         }
     }
 
+    /**
+     * Set the desired duration for the countdown timer.
+     *
+     * @param commandArgs The desired number of minutes from the user.
+     */
     public void setDuration(int commandArgs) {
         countdownTimer.setTimer(commandArgs);
     }
 
+    /**
+     * Check the total time elapsed for count up timer or time remaining for countdown timer.
+     */
     public void checkTime() {
         if (timerMode) {
             countdownTimer.checkTime();

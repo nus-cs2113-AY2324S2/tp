@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Storage {
+public class Storage {
 
     public static ArrayList<String> loadDataFromFile(String filePath) {
         ArrayList<String> data = new ArrayList<>();

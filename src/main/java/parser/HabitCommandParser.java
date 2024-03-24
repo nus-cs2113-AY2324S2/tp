@@ -3,6 +3,7 @@ package parser;
 import commands.Command;
 import commands.habitcommands.AddHabitCommand;
 import commands.habitcommands.DeleteHabitCommand;
+import commands.habitcommands.HabitHelpCommand;
 import commands.habitcommands.ListHabitsCommand;
 import commands.habitcommands.SetPriorityCommand;
 import commands.habitcommands.SortHabitsCommand;
@@ -43,6 +44,8 @@ public class HabitCommandParser {
             return new SetPriorityCommand(habitTracker, habitCommandArgs);
         case "sort":
             return new SortHabitsCommand(habitTracker);
+        case "help":
+            return new HabitHelpCommand();
         default:
             throw new HabitException("Unknown command");
         }

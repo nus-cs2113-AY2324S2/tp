@@ -31,8 +31,13 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
             - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
           - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
         - Focus Timer
+          - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
           - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
+          - [`focus pause` - Pause the current focus timer](#pause-the-current-focus-timer-focus-pause)
+          - [`focus resume` - Resume the current focus timer](#resume-the-current-focus-timer-focus-resume)
+          - [`focus check` - Check time for focus timer](#check-time-for-focus-timer-focus-check)
+          - [`focus set` - Set focus time duration](#set-focus-timer-duration-focus-set)
 
 ## Quick Start
 
@@ -384,7 +389,6 @@ ________________________________________________________________________________
 
 ### Delete sleep cycles: `sleep delete`
 
-
 #### Delete Sleep Cycle of a specific date:
 
 Format:
@@ -473,6 +477,26 @@ ________________________________________________________________________________
 Saved list to storage file
 ________________________________________________________________________________________________________________
 ```
+=======
+### Switch focus timer mode: `focus switch`
+Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose 
+between count up timer and count down timer.
+
+Format:
+~~~
+focus switch
+~~~
+* The `focus` and `switch` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Switched to Count down timer
+________________________________________________________________________________________________________________
+~~~
+* Outcome depends on the current timer mode.
+* `focus switch` will be disable if a timer is currently running.
 
 ### Start a new focus timer: `focus start`
 Allow the user to start a new focus timer session. The user will be able
@@ -487,13 +511,25 @@ focus start
 * Use lower casing for this command.
 
 Expected outcome:
+* Count up timer.
 ~~~
 ________________________________________________________________________________________________________________
 Your session has started. Time to grind!
 ________________________________________________________________________________________________________________
 ~~~
 
-### Stop the current focus timer: `focus stop`
+* Count down timer.
+~~~
+________________________________________________________________________________________________________________
+Countdown timer started! 
+Duration set: 1 minute(s) 0 second(s)
+________________________________________________________________________________________________________________
+~~~
+
+### Stop the current focus timer: `focus stop` 
+> [!NOTE]
+> Countdown timer will automatically stop when the duration expires.
+> 
 Allow users to stop a timer that is currently running. The users will be able to see the total
 time elapsed upon a successful stop.
 
@@ -505,7 +541,7 @@ focus stop
 * Use lower casing for this command.
 
 Expected outcome:
-* Depending on the total time spent, the output may differ.
+* Count up timer 
 ~~~
 ________________________________________________________________________________________________________________
 Your focus session has ended.
@@ -514,6 +550,133 @@ To start a new session, use ‘focustimer start’
 ________________________________________________________________________________________________________________
 ~~~
 
+* Count down timer 
+* Timer will automatically stop if the duration expires. However, users will still be able to stop it manually
+~~~
+________________________________________________________________________________________________________________
+5 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+4 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+3 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+2 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+1 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+Count down timer completed!
+________________________________________________________________________________________________________________
+~~~
+
+### Pause the current focus timer: `focus pause`
+Allow users to pause the timer momentarily while the timer is running.
+
+Format: 
+~~~
+focus pause
+~~~
+* The `focus` and `pause` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Count up timer paused.
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Timer paused. 
+Remaining time: 0 minutes 56 seconds
+________________________________________________________________________________________________________________
+~~~
+### Resume the current focus timer: `focus resume`
+Allow users to resume the paused timer.
+
+Format:
+~~~
+focus resume
+~~~
+* The `focus` and `resume` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Count up timer resumed
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Countdown timer resumed.
+________________________________________________________________________________________________________________
+~~~
+
+### Check time for focus timer: `focus check`
+Allow users to check the total time elapsed or total time remaining, depending on the mode of the timer.
+
+Format:
+~~~
+focus check
+~~~
+* The `focus` and `check` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Total time elapsed: 
+0 hours, 0 minutes, 8 seconds
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Remaining time: 
+0 minutes 54 seconds left.
+________________________________________________________________________________________________________________
+~~~
+
+### Set focus timer duration: `focus set`
+> Using `focus set` command only affects count down timer.
+> 
+
+Allow users to set the desired countdown timer duration for the session.
+
+Format:
+~~~
+focus set [minutes]
+~~~
+* The `focus` and `set` are case-sensitive.
+* Use lower casing for this command.
+* Input `minutes` must be in numerical form and can be more than 60. 
+* Example: *120 minutes implies 2 hours*
+
+Example of usage:
+~~~
+focus set 10
+~~~
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Countdown duration has been set to 10 minute(s)
+________________________________________________________________________________________________________________
+
+~~~
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

@@ -12,6 +12,7 @@ public class StopTimerCommand implements Command {
 
     /**
      * Constructs a StopTimerCommand with the concerned focus timer.
+     *
      * @param timer FocusTimer object to be stopped.
      */
     public StopTimerCommand(FocusTimer timer) {
@@ -19,7 +20,8 @@ public class StopTimerCommand implements Command {
     }
 
     /**
-     * Executes the command bye setting the stop timing of the timer.
+     * Executes the command by setting the stop timing of the timer.
+     *
      * @throws FocusException If the status of focus timer is not currently running.
      */
     @Override
@@ -32,6 +34,7 @@ public class StopTimerCommand implements Command {
 
     /**
      * Determines whether the command is an exit message.
+     *
      * @return Returns false since this is not an exit command.
      */
     @Override
