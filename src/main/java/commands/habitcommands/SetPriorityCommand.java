@@ -5,6 +5,7 @@ import exceptions.HabitException;
 import habit.HabitTracker;
 
 public class SetPriorityCommand implements Command {
+    private static final int REQUIRED_PARAMETERS = 3;
     private HabitTracker habitTracker;
     private String priority;
     private int habitID;
@@ -14,7 +15,7 @@ public class SetPriorityCommand implements Command {
 
         String[] parts = habitCommandArgs.trim().split("/id | /priority");
 
-        if (!(parts.length == 3)) {
+        if (!(parts.length == REQUIRED_PARAMETERS)) {
             throw new HabitException("Incorrect set priority command formatting\n" +
                     "Use Format: habit set /id <habit_ID> /priority <priority_level>\n" +
                     "Note: for <priority_level>, there are 3 levels --> low, med, high");

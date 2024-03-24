@@ -5,6 +5,7 @@ import exceptions.HabitException;
 import habit.HabitTracker;
 
 public class UpdateHabitCountCommand implements Command {
+    private static final int REQUIRED_PARAMETERS = 3;
     private HabitTracker habitTracker;
     private int habitID;
     private String updatedCount;
@@ -21,7 +22,7 @@ public class UpdateHabitCountCommand implements Command {
 
         String[] parts = habitCommandArgs.trim().split("/id | /by");
 
-        if (!(parts.length == 3)) {
+        if (!(parts.length == REQUIRED_PARAMETERS)) {
             throw new HabitException("Incorrect update command formatting\n" +
                     "Use Format: habit update /id <habit_ID> /by <increment_count>\n" +
                     "Note: for <increment_count>, use '+1' to increase by 1, '-1' to decrease by 1");
