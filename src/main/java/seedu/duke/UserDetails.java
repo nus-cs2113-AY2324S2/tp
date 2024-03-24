@@ -7,14 +7,27 @@ public class UserDetails {
     private String status;
     private String location;
     private String cuisine;
+    private String anniversary;
 
-    public UserDetails(String name, String age, String gender, String status, String location, String cuisine) {
+    public UserDetails() {
+        this.name = "NOT SET";
+        this.age = "N.A";
+        this.gender = "N.A";
+        this.status = "N.A";
+        this.location = "N.A";
+        this.cuisine = "N.A";
+        this.anniversary = "N.A";
+    }
+
+    public UserDetails(String name, String age, String gender, String status, String location,
+                       String cuisine, String anniversary) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.status = status;
         this.location = location;
         this.cuisine = cuisine;
+        this.anniversary = anniversary;
     }
 
     // Getter for name
@@ -74,10 +87,19 @@ public class UserDetails {
 
     // Setter for location
     public void setLocation(String location) {
-        this.gender = location;
+        this.location = location;
+    }
+
+    public String getAnniversary() {
+        return anniversary;
+    }
+
+    public void setAnniversary(String anniversary) {
+        this.anniversary =anniversary;
     }
 
     public String toFileFormat() {
-        return name + " | " + age + " | " + gender + " | " + status + " | " + location + " | " + cuisine;
+        return name + " | " + age + " | " + gender + " | " + status + " | " + location + " | " +
+                cuisine + " | " + anniversary;
     }
 }

@@ -7,7 +7,7 @@ import java.io.IOException;
 public class ExitCommand extends Command {
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
-                        Storage storage) throws FlirtForkException {
+                        Storage storage, UserDetails userDetails) throws FlirtForkException {
 
         try {
             storage.saveFavourites(favourites.getFavourites());

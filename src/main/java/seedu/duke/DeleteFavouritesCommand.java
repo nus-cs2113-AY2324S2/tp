@@ -10,7 +10,7 @@ public class DeleteFavouritesCommand extends Command{
 
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
-                        Storage storage) throws FlirtForkException {
+                        Storage storage, UserDetails userDetails) throws FlirtForkException {
         if (index >= 0 && index < favourites.getFavourites().size()) {
             Favourites removedFavourite = favourites.getFavourites().get(index);
             favourites.deleteFavourite(index);

@@ -6,7 +6,7 @@ public class UserDetailsCommand extends Command {
 
     @Override
     public void execute(FavouritesList favouritesList, FoodList foodList, 
-        ActivityList activityList, Ui ui, Storage storage) {
+        ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails) {
         ui.showMessage("Please enter your name:");
         String name = ui.readCommand();
         ui.showMessage("Great! Hello there " + name + ", it's my pleasure to know you!"); 
@@ -56,7 +56,19 @@ public class UserDetailsCommand extends Command {
         ui.showMessage("Thanks for letting me know your relationship status! :)");
         System.out.println(HORIZONTAL);
 
-        UserDetails userDetails = new UserDetails(name, age, gender, status, location, cuisine);
+        if (status.equals("M") || status.equals("R") || status.equals("D")) {
+            String anniversary;
+            ui.showMessage("Lucky you! Please enter your anniversary:");
+            anniversary = ui.readCommand();
+            userDetails.setAnniversary(anniversary);
+        }
+
+        userDetails.setName(name);
+        userDetails.setAge(age);
+        userDetails.setGender(gender);
+        userDetails.setStatus(status);
+        userDetails.setLocation(location);
+        userDetails.setCuisine(cuisine);
         // Save the user details to a file using the Storage class
         storage.saveUserDetails(userDetails);
 

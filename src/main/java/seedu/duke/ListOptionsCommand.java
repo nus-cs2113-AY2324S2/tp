@@ -11,7 +11,7 @@ public class ListOptionsCommand extends Command {
 
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities,
-                        Ui ui, Storage storag) throws FlirtForkException {
+                        Ui ui, Storage storage, UserDetails userDetails) throws FlirtForkException {
         switch(optionType) {
         case "food":
             printFoodList(ui, foods);

@@ -12,11 +12,22 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void greetingMessage() {
+    public void greetingMessage(String anniversary) {
         System.out.println(HORIZONTAL);
         System.out.println("Hungry for love? You've come to the right place.\n" +
                 "Welcome to " + BOT_NAME + " - where Cupid meets the chef!\n\n" +
                 "Send me 'help' if you're new!");
+        if (!anniversary.equals("N.A")) {
+            System.out.println("\nRemember, your anniversary is on " + anniversary + " :)");
+        }
+        System.out.println(HORIZONTAL);
+    }
+
+    public void firstSetUpMessage() {
+        System.out.println(HORIZONTAL);
+        System.out.println("Hungry for love? You've come to the right place.\n" +
+                "Welcome to " + BOT_NAME + " - where Cupid meets the chef!");
+        System.out.println("Before we start, I would like to know you better!");
         System.out.println(HORIZONTAL);
     }
 

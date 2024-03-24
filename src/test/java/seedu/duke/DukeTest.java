@@ -20,6 +20,7 @@ class DukeTest {
     private FavouritesList favourites;
     private FoodList foods;
     private ActivityList activities;
+    private UserDetails userDetails;
 
     public void sampleTest() {
         assertTrue(true);
@@ -31,6 +32,7 @@ class DukeTest {
             favourites = new FavouritesList(storage.loadFavourites());
             foods = new FoodList(storage.loadFood());
             activities = new ActivityList(storage.loadActivity());
+            userDetails = storage.loadUserDetails();
         } catch (FileNotFoundException e) {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
@@ -51,7 +53,7 @@ class DukeTest {
         System.setOut(printStream);
 
         try {
-            generateIdeaCommand.execute(favourites, foods, activities, ui, storage);
+            generateIdeaCommand.execute(favourites, foods, activities, ui, storage, userDetails);
         } catch (NoSuchElementException e) {
             System.setIn(in);
             String output = outputStream.toString();
@@ -92,7 +94,7 @@ class DukeTest {
         System.setOut(printStream);
 
         try {
-            generateItineraryCommand.execute(favourites, foods, activities, ui, storage);
+            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails);
         } catch (NoSuchElementException e) {
             System.setIn(in);
             String output = outputStream.toString();
@@ -120,7 +122,7 @@ class DukeTest {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
             System.setOut(printStream);
-            generateItineraryCommand.execute(favourites, foods, activities, ui, storage);
+            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails);
             String output = outputStream.toString();
             assertTrue(output.contains("We could not generate a suitable itineray based on your inputs! Sorry!!"));
             System.setOut(System.out);

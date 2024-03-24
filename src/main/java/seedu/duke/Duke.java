@@ -9,8 +9,8 @@ public class Duke {
     private static final String FILE_PATH = "./data/FlirtFork.txt";
 
     private static final String HORIZONTAL = "____________________________________________________________";
+    private static FoodList foods;
     private FavouritesList favourites;
-    private FoodList foods;
     private ActivityList activities;
     private Ui ui;
     private Storage storage;
@@ -31,14 +31,20 @@ public class Duke {
     }
 
     public void run() {
-        ui.greetingMessage();
+        if (userDetails.getName().equals("NOT SET")) {
+            ui.firstSetUpMessage();
+            UserDetailsCommand userDetailsCommand = new UserDetailsCommand();
+            userDetailsCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+        } else {
+            ui.greetingMessage(userDetails.getAnniversary());
+        }
 
         boolean isExit = false;
         while(!isExit) {
             String userInput = ui.readCommand();
             try {
                 Command command = Parser.parseCommand(userInput, userDetails);
-                command.execute(favourites, foods, activities, ui, storage);
+                command.execute(favourites, foods, activities, ui, storage, userDetails);
                 if(command instanceof ExitCommand) {
                     isExit = true;
                 }
@@ -51,6 +57,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke flirtFork = new Duke(FILE_PATH);
+        assert foods.get(0).toString().equals("25 Degrees") : "first entry in food database must be 25 degrees";
         flirtFork.run();
     }
 }

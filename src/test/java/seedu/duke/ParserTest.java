@@ -15,7 +15,8 @@ class ParserTest {
     @BeforeEach
     void setUp() {
         // Create a dummy UserDetails object for testing
-        userDetails = new UserDetails("John Doe", "25", "Male", "Single", "Central", "Italian");
+        userDetails = new UserDetails("John Doe", "25", "Male", "Single", "Central",
+                "Italian", "14/2/2024");
     }
 
     // 3 part format

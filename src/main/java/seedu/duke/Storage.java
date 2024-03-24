@@ -85,14 +85,15 @@ public class Storage {
                     String line = scanner.nextLine();
                     String[] details = line.split(" \\| ");
                     scanner.close();
-                    return new UserDetails(details[0], details[1], details[2],details[3], details[4], details[5]);
+                    return new UserDetails(details[0], details[1], details[2], details[3], details[4],
+                            details[5], details[6]);
                 }
                 scanner.close();
             }
         } catch (FileNotFoundException e) {
             System.out.println("OOPS! No saved user details found.");
         }
-        return null;
+        return new UserDetails();
     }
 
     public ArrayList<Food> loadFood() throws FileNotFoundException {
