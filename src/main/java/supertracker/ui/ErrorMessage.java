@@ -27,4 +27,5 @@ public class ErrorMessage {
     public static final String FILE_HANDLER_ERROR = "Error setting up file handler";
     public static final String INVALID_FIND_FORMAT =
             "Please ensure the name of the item you are looking for is correct";
+    public static final String FILE_SAVE_ERROR = "Oops! Unable to save data due to an I/O error!";
 }
