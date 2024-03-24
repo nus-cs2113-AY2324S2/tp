@@ -45,9 +45,9 @@ public class CountupTimer {
 
     public void setPause() {
         currentTime = LocalDateTime.now();
+        Duration timeElapsed = Duration.between(startTiming, currentTime);
         stopTiming = LocalDateTime.now();
         isPaused = true;
-        Duration timeElapsed = Duration.between(startTiming, currentTime);
         totalHours += timeElapsed.toHours();
         totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
         totalSeconds += timeElapsed.toSeconds() % MINUTES_DIVISION;

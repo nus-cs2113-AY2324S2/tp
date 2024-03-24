@@ -11,6 +11,7 @@ public class SetTimingCommand implements Command {
     public SetTimingCommand(FocusTimer timer, String userInput) throws FocusException {
         this.focusTimer = timer;
         String[] parts = userInput.trim().split("\\s", 2);
+
         try {
             this.desiredDuration = Integer.parseInt(parts[0]);
         } catch (NumberFormatException e) {
