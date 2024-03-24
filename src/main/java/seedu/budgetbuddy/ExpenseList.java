@@ -189,34 +189,4 @@ public class ExpenseList {
         LOGGER.info("Creating new budget for category: " + category);
         budgets.add(new Budget(category, budget));
     }
-
-
-    public void printCategoriesAboveBudget() {
-        System.out.println("Categories above budget:");
-        boolean found = false;
-
-        for (String category : categories) {
-            double totalSpent = expenses.stream()
-                    .filter(expense -> expense.getCategory().equalsIgnoreCase(category))
-                    .mapToDouble(Expense::getAmount)
-                    .sum();
-
-            // Find the matching budget for this category
-            Budget budgetForCategory = budgets.stream()
-                    .filter(budget -> budget.getCategory().equalsIgnoreCase(category))
-                    .findFirst()
-                    .orElse(null);
-
-            if (budgetForCategory != null && totalSpent > budgetForCategory.getBudget()) {
-                System.out.println(category + " - Budget: $" + budgetForCategory.getBudget()
-                                    + ", Spent: $" + totalSpent);
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("No categories are above budget.");
-        }
-    }
-
 }
