@@ -5,6 +5,7 @@ import health.Health;
 import health.HealthList;
 import health.Period;
 
+import storage.DataFile;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
@@ -27,6 +28,7 @@ import storage.LogFile;
 public class Handler {
     public static Scanner in;
     static LogFile logFile = LogFile.getInstance();
+    static DataFile dataFile = DataFile.getInstance();
 
     /**
      * Processes user input and filters for valid command words from enum {@code Command},
