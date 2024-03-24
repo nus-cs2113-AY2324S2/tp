@@ -12,10 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class RecipeIOTest {
-    @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
 
     @Test
     public void testAddRecipe() {
