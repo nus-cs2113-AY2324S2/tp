@@ -41,35 +41,35 @@ public class ExerciseList {
         for (String s : originalListForArms) {
             String[] exerciseDetails = s.split(",");
             assert exerciseDetails.length == 4 : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
+            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.ARMS,
                 exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForChest) {
             String[] exerciseDetails = s.split(",");
             assert exerciseDetails.length == 4 : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
+            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.CHEST,
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForAbs) {
             String[] exerciseDetails = s.split(",");
             assert exerciseDetails.length == 4 : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
+            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.ABS,
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForBack) {
             String[] exerciseDetails = s.split(",");
             assert exerciseDetails.length == 4 : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
+            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.BACK,
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
         for (String s : originalListForLegs) {
             String[] exerciseDetails = s.split(",");
             assert exerciseDetails.length == 4 : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], exerciseDetails[1],
+            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.LEGS,
                     exerciseDetails[2], exerciseDetails[3]);
             allExercises.add(exercise);
         }
@@ -79,11 +79,12 @@ public class ExerciseList {
         for (String s: data) {
             String[] parts = s.split(": |, | sets & | reps");
             if (parts.length == 4) {
-                String exerciseName = parts[0];
-                String exerciseType = parts[1];
+                String type = parts[0].toUpperCase();
+                ExerciseType exerciseType = ExerciseType.valueOf(type);
+                String exerciseName = parts[1];
                 String sets = parts[2];
                 String reps = parts[3];
-                allExercises.add(new Exercise(exerciseType, exerciseName, sets, reps));
+                allExercises.add(new Exercise(exerciseName, exerciseType, sets, reps));
             }
         }
     }
@@ -92,7 +93,7 @@ public class ExerciseList {
         allExercises.add(exercise);
     }
 
-    public Exercise get(String type, int index) {
+    public Exercise get(ExerciseType type, int index) {
         ArrayList<Exercise> typeExercises = new ArrayList<>();
         for (Exercise e : allExercises) {
             assert e != null : "Invalid Exercise Detected";
@@ -103,7 +104,7 @@ public class ExerciseList {
         return typeExercises.get(index);
     }
 
-    public int size(String type) {
+    public int size(ExerciseType type) {
         int x = 0;
         for (Exercise e : allExercises) {
             if (e.getType().equals(type)) {
