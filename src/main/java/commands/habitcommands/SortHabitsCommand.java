@@ -1,6 +1,7 @@
 package commands.habitcommands;
 
 import commands.Command;
+import exceptions.HabitException;
 import habit.HabitTracker;
 
 public class SortHabitsCommand implements Command {
@@ -11,7 +12,7 @@ public class SortHabitsCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws HabitException {
         habitTracker.sortHabits();
     }
 

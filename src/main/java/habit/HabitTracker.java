@@ -118,23 +118,27 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
-    public void sortHabits() {
-        // Define a custom comparator to sort habits based on their priority
-        Comparator<Habit> habitComparator = Comparator.comparing(habit -> {
-            switch (habit.getPriority()) {
-            case HIGH:
-                return 0;
-            case MED:
-                return 1;
-            case LOW:
-                return 2;
-            default:
-                return 3; // Handles any unexpected case
-            }
-        });
+    public void sortHabits() throws HabitException {
+        try {
+            // Define a custom comparator to sort habits based on their priority
+            Comparator<Habit> habitComparator = Comparator.comparing(habit -> {
+                switch (habit.getPriority()) {
+                case HIGH:
+                    return 0;
+                case MED:
+                    return 1;
+                case LOW:
+                    return 2;
+                default:
+                    return 3; // Handles any unexpected case
+                }
+            });
 
-        // Sort the habitList using the custom comparator
-        Collections.sort(habitList, habitComparator);
+            // Sort the habitList using the custom comparator
+            Collections.sort(habitList, habitComparator);
+        } catch (Exception e) {
+            throw new HabitException(e.getMessage());
+        }
 
         Ui.printMessageWithSepNewLine("Habits have been sorted according to priority.");
         saveHabitListToFile(habitList);
