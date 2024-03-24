@@ -43,6 +43,7 @@ public class HabitCommandParser {
             return new SetPriorityCommand(habitTracker, habitCommandArgs);
         case "sort":
             return new SortHabitsCommand(habitTracker);
+        case "help":
         default:
             throw new HabitException("Unknown command");
         }

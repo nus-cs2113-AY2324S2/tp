@@ -9,8 +9,7 @@ public class DeleteHabitCommand implements Command{
     private HabitTracker habitTracker;
     private int habitID;
 
-    public DeleteHabitCommand(HabitTracker habitTracker, String habitCommandArgs)
-            throws HabitException {
+    public DeleteHabitCommand(HabitTracker habitTracker, String habitCommandArgs) throws HabitException {
         this.habitTracker = habitTracker;
 
         if (habitCommandArgs.isEmpty()) {
