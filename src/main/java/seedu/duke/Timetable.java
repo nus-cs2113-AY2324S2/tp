@@ -11,8 +11,8 @@ import java.util.Map;
  * This class represents the Timetable object consisting of Arraylist of Tasks for each day of the week.
  */
 public class Timetable {
-    protected static final String[] DAYS = new String[]
-        {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    public static final String[] DAYS = new String[]
+            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private Map<String, ArrayList<Task>> weeklyTasks; // Map to store tasks for each day
 
     public Timetable() {
@@ -29,6 +29,7 @@ public class Timetable {
 
     /**
      * Prints tasks of the day specified.
+     *
      * @param day day of the week the task is on.
      */
     public void printTasksOfTheDay(String day) {
@@ -44,6 +45,7 @@ public class Timetable {
             count++;
         }
     }
+
     /**
      * Adds task on dayOfWeek at an index
      *
@@ -75,55 +77,64 @@ public class Timetable {
         }
     }
 
-    public void changeFlexibleTaskTiming(String dayOfWeek, int index, LocalTime newStartTime, LocalTime newEndTime){
-        String capitalizedDay = dayOfWeek.substring(0,1).toUpperCase() + dayOfWeek.substring(1);
+    public void changeFlexibleTaskTiming(String dayOfWeek, int index, LocalTime newStartTime, LocalTime newEndTime) {
+        assert dayOfWeek != null : "Day of week cannot be null";
+        assert newStartTime != null : "New start time cannot be null";
+        assert newEndTime != null : "New end time cannot be null";
+        String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
         ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
-        if(index < 0 || index >= tasks.size()){
+        if (index < 0 || index >= tasks.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         Task task = tasks.get(index);
         if(!task.getType().equals("f")){
-            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + index +" is not flexible.");
+            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + (index + 1) +" is not flexible, timings cannot be changed.");
         }
         task.setStartTime(newStartTime);
         task.setEndTime(newEndTime);
     }
-    public void changeTaskType(String dayOfWeek, int index, String newType){
+
+    public void changeTaskType(String dayOfWeek, int index, String newType) {
         String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
         ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
-        if(index < 0 || index >= tasks.size()){
+        if (index < 0 || index >= tasks.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         Task task = tasks.get(index);
         task.setType(newType);
     }
+
     /**
      * Compares and prints overlapping free time between two Timetables.
      *
      * @param table1 first Timetable.
      * @param table2 second Timetable
-     *               <p>
-     *               Prints the overlapping free time for each day in the format:
-     *               ----------------------
-     *               Shared Free Time on [day]
-     *               HH:mm - HH:mm: Overlapping Free Time
+     * @return Returns a merged timetable comprising both input timetables.
      */
-    public static void compareTimetable(Timetable table1, Timetable table2) {
+    public static Timetable compareTimetable(Timetable table1, Timetable table2) {
+        Timetable mergedTimetable = new Timetable();
+        if (table1.equals(table2)) {
+            return table1;
+        }
         try {
             InputValidator.validateTableExistence(table1);
             InputValidator.validateTableExistence(table2);
             for (String day : Timetable.DAYS) {
-                System.out.println("----------------------\n" +
-                        "Shared Free Time on " + day + ":");
-                // Merge tasks from both timetables and sort them by start time
-                ArrayList<Task> mergedTasks = mergeAndSortTasks(table1.getWeeklyTasks().get(day),
-                        table2.getWeeklyTasks().get(day));
-                // Calculate overlapping free time intervals then print them
-                findOverlappingFreeTime(mergedTasks, day);
+                mergedTimetable.weeklyTasks.replace(day, mergeAndSortTasks(table1.getWeeklyTasks().get(day),
+                        table2.getWeeklyTasks().get(day)));
             }
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
+        return mergedTimetable;
+    }
+
+    public static Timetable compareAllTimetables(UserList userList) {
+        Timetable mergedTimetable = new Timetable();
+        for (User user : userList.getUsers()) {
+            mergedTimetable = compareTimetable(mergedTimetable, user.getTimetable());
+        }
+        return mergedTimetable;
     }
 
     private static ArrayList<Task> mergeAndSortTasks(ArrayList<Task> taskList1, ArrayList<Task> taskList2) {
@@ -133,7 +144,7 @@ public class Timetable {
         return mergedTasks;
     }
 
-    private static void findOverlappingFreeTime(ArrayList<Task> tasks, String day) {
+    public static void findOverlappingFreeTime(ArrayList<Task> tasks, String day) {
         if (!tasks.isEmpty()) {
             LocalTime previousEndTime = LocalTime.MIN;
             for (Task task : tasks) {
@@ -151,7 +162,6 @@ public class Timetable {
             System.out.println("** Whole day is free on " + day);
         }
     }
-
 
 
 }
