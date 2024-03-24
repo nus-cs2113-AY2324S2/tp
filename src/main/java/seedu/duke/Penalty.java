@@ -9,6 +9,7 @@ import seedu.duke.ui.Ui;
 public class Penalty {
     private static final String PENALTY_PROMPT = "Enter the direction to shoot the penalty (0, 1, or 2): ";
 
+
     /**
      * Executes the penalty command.
      */
