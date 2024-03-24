@@ -56,7 +56,7 @@ class TaskManagerTest {
         addTask(date, initialTaskDescription, testTaskType, dummyTestDates);
 
         // Act
-        //updateTask(date, 0, updatedTaskDescription);
+        updateTask(date, 0, updatedTaskDescription);
 
         // Assert
         assertEquals(updatedTaskDescription, taskManager.getTasksForDate(date).get(0).getName());

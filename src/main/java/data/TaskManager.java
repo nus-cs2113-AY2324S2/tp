@@ -1,6 +1,7 @@
 package data;
 
 import storage.Storage;
+import time.MonthView;
 import time.WeekView;
 
 import java.time.LocalDate;
@@ -139,12 +140,15 @@ public class TaskManager {
                                   String taskDescription) throws TaskManagerException, DateTimeParseException {
 
         // Convert the day to a LocalDate
-        LocalDate date = weekView.getStartOfWeek().plusDays(day - 1);
+        LocalDate date;
 
         // Check if the date is in the current week/month view
         if (inMonthView) {
+            date = MonthView.getStartOfMonth().plusDays(day - 1);
             checkIfDateInCurrentMonth(date);
+
         } else {
+            date = weekView.getStartOfWeek().plusDays(day - 1);
             checkIfDateInCurrentWeek(date, weekView);
         }
 
@@ -204,41 +208,6 @@ public class TaskManager {
      * @throws TaskManagerException If not in correct week/month view.
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-//    public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView,TaskManager taskManager)
-//            throws TaskManagerException, DateTimeParseException {
-//        System.out.println("Enter the date for the task you wish to update (dd/MM/yyyy):");
-//        LocalDate date = parseInputDate(scanner);
-//
-//
-//        if (inMonthView) {
-//            checkIfDateInCurrentMonth(date);
-//        } else {
-//            checkIfDateInCurrentWeek(date, weekView);
-//        }
-//
-//        listTasksAtDate(taskManager, date, "Enter the task number of the task you wish to update:");
-//
-//        int taskNumber;
-//        String updatedDescription;
-//
-//        try {
-//            taskNumber = Integer.parseInt(scanner.nextLine().trim());
-//            assert taskNumber != 0 : "Task Number is invalid!";
-//
-//            System.out.println("Enter the updated task description:");
-//            updatedDescription = scanner.nextLine().trim();
-//
-//            updateTask(date, taskNumber - 1, updatedDescription);
-//            saveTasksToFile(tasks,Storage.FILE_PATH); //Update tasks.txt file
-//            System.out.println("Task updated.");
-//        } catch (NumberFormatException e) {
-//            System.out.println("Task number should be an integer value. Please try again.");
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("The task number you have entered does not exist. Please try again.");
-//        }
-//
-//    }
-
     public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager,
                                      int day, int taskIndex, String newDescription)
             throws TaskManagerException, DateTimeParseException {

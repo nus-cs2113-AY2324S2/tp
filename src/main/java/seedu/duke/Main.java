@@ -129,7 +129,6 @@ public class Main {
                 break;
             case "week":
                 inMonthView = false;
-                //weekView.printWeekView(taskManager);
                 break;
             case "quit":
                 System.out.println("Exiting Calendar...");

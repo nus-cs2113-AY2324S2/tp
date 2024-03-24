@@ -29,10 +29,12 @@ public class UiRenderer {
     private static final String ANSI_CYAN = "\u001B[36m"; // Cyan
 
 
-    public static void printWeekHeader(LocalDate startOfView, DateTimeFormatter dateFormatter) {
+    public static void printWeekHeader(LocalDate startOfView, DateTimeFormatter dateFormatter, boolean isMonthView) {
         printHorizontalDivider();
         printHeaderRow();
-        printDateRow(dateFormatter ,startOfView);
+        if (!isMonthView) {
+            printDateRow(dateFormatter ,startOfView);
+        }
         printHorizontalDivider();
     }
 

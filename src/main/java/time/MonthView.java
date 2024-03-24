@@ -25,12 +25,13 @@ public class MonthView extends View {
     public void printView(TaskManager taskManager) {
         logger.log(Level.INFO, "Printing calendar in month view");
         assert startOfView != null : "Start of Month missing!";
+        boolean isMonthView = true;
         YearMonth yearMonth = YearMonth.from(startOfView);
         LocalDate firstOfMonth = startOfView.withDayOfMonth(1);
         LocalDate current = firstOfMonth.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.SUNDAY));
 
         System.out.println("\nMonth View: " + yearMonth.getMonth() + " " + yearMonth.getYear());
-        printWeekHeader(startOfView, dateFormatter);
+        printWeekHeader(startOfView, dateFormatter, isMonthView);
 
         while (current.isBefore(firstOfMonth.plusMonths(1))) {
             printWeek(current, taskManager);
@@ -102,7 +103,7 @@ public class MonthView extends View {
         startOfView = startOfView.minusMonths(1);
     }
 
-    public LocalDate getStartOfMonth() {
+    public static LocalDate getStartOfMonth() {
         return startOfView.withDayOfMonth(1);
     }
 }
