@@ -41,6 +41,24 @@ public class ExpenseManager {
         }
     }
 
+    public String getExpensesListString(int amountToList) {
+        assert !this.expenses.isEmpty();
+
+        int lastIdxToPrint;
+        if (amountToList <= 0 || amountToList > this.expenses.size()) {
+            lastIdxToPrint = this.expenses.size();
+        } else {
+            lastIdxToPrint = amountToList;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < lastIdxToPrint; i++) {
+            sb.append(i + 1).append(". ").append(expenses.get(i)).append(System.lineSeparator());
+        }
+
+        return sb.toString();
+    }
+
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (Expense expense : expenses) {
