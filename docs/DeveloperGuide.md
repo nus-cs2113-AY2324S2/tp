@@ -47,7 +47,7 @@ Given below is an example of how a user may add a student to the data base.
 
 - Suppose the user types in the command `add wario`. The parser first splits the input into two, checking for the command and the argument.
 - It then recognises the `add` command, which then further checks if there is an argument given.
-- Since the `add` command only allows the user to add a student to the list if there were no duplicate names present before, it will run the method "findStudentByName(ArrayList<Student> masterStudentList, String name)", to check if the name was already present in the masterlist.
+- Since the `add` command only allows the user to add a student to the list if there were no duplicate names present before, it will run the method `findStudentByName(ArrayList<Student> masterStudentList, String name)`, to check if the name was already present in the masterlist.
 - Assuming the name "wario" did not exist in the masterlist beforehand, the parser would grant the user's request to add the student to the masterlist.
 - This `add wario` command is equivalent to having the user first type `add`, then after waiting fo the program to respond, type `wario`. In the latter scenario, the input parser deems that an argument was not present, and thus will ask the user to give the name of the student that they would like to add.
 
