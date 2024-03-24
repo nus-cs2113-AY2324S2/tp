@@ -10,6 +10,7 @@ public class CountupTimer {
     private static final int SECONDS_DIVISION = 60;
     public LocalDateTime startTiming;
     public LocalDateTime stopTiming;
+    public LocalDateTime currentTime;
     public boolean isStarted = false;
     private boolean isPaused = false;
     private long totalHours = 0;
@@ -34,21 +35,23 @@ public class CountupTimer {
      */
     public void setStopTiming() {
         assert isStarted : "Timer should have started";
-        stopTiming = LocalDateTime.now();
+        if(!isPaused) {
+            stopTiming = LocalDateTime.now();
+        }
         isStarted = false;
         isPaused = false;
         totalTimeSpent();
     }
 
     public void setPause() {
-        LocalDateTime currentTime = LocalDateTime.now();
+        currentTime = LocalDateTime.now();
+        stopTiming = LocalDateTime.now();
+        isPaused = true;
         Duration timeElapsed = Duration.between(startTiming, currentTime);
         totalHours += timeElapsed.toHours();
         totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
         totalSeconds += timeElapsed.toSeconds() % MINUTES_DIVISION;
-        isPaused = true;
-        Ui.printMessageWithSepNewLine("Count up timer paused \n" +
-                "Total Time: " + totalHours + " hours " + totalMinutes + " minutes, " + totalSeconds + " seconds");
+        Ui.printMessageWithSepNewLine("Count up timer paused.");
     }
 
     public void setResume() {
@@ -79,10 +82,23 @@ public class CountupTimer {
             Duration timeElapsed = Duration.between(startTiming, stopTiming);
             totalHours += timeElapsed.toHours();
             totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
-            totalSeconds += timeElapsed.toSeconds() % MINUTES_DIVISION;
+            totalSeconds += timeElapsed.toSeconds() % SECONDS_DIVISION;
         }
-        Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + " Time spent: " +
+        Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + "Total time spent: " +
                 totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds" + "\n" +
                 "To start a new session, use ‘focus start’ ");
+    }
+
+    public void checkTime() {
+        if(!isPaused) {
+            currentTime = LocalDateTime.now();
+        }
+        Duration timeElapsed = Duration.between(startTiming, currentTime);
+        startTiming = currentTime;
+        totalHours += timeElapsed.toHours();
+        totalMinutes += timeElapsed.toMinutes() % MINUTES_DIVISION;
+        totalSeconds += timeElapsed.toSeconds() % SECONDS_DIVISION;
+        Ui.printMessageWithSepNewLine("Total time elapsed: \n" +
+                totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds");
     }
 }

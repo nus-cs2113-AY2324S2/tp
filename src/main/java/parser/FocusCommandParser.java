@@ -1,12 +1,7 @@
 package parser;
 
 import commands.Command;
-import commands.focuscommands.SetResumeCommand;
-import commands.focuscommands.StartTimerCommand;
-import commands.focuscommands.StopTimerCommand;
-import commands.focuscommands.SwitchTimerCommand;
-import commands.focuscommands.SetPauseCommand;
-import commands.focuscommands.SetTimingCommand;
+import commands.focuscommands.*;
 import exceptions.FocusException;
 import focus.FocusTimer;
 
@@ -40,7 +35,7 @@ public class FocusCommandParser {
         case "resume":
             return new SetResumeCommand(focusTimer);
         case "check":
-
+            return new CheckTimeCommand(focusTimer);
         case "set":
             return new SetTimingCommand(focusTimer, focusTimerCommandArgs);
         default:
