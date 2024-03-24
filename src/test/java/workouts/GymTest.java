@@ -66,10 +66,9 @@ class GymTest {
 
         } catch (Exception e) {
             fail("Should not throw an exception");
-        } finally {
-
         }
     }
+
 
     @Test
     void getStations() {
