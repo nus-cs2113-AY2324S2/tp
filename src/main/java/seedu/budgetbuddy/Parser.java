@@ -76,12 +76,34 @@ public class Parser {
         return input.startsWith("menu");
     }
 
+    /**
+     * Checks if the provided input starts with the word "bye" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "bye", else returns false
+     */
     public Boolean isExitCommand(String input) {
         return input.startsWith("bye");
     }
 
+    /**
+     * Checks if the provided input starts with the word "add expense" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "add expense", else returns false
+     */
     public Boolean isAddExpenseCommand(String input) {
         return input.startsWith("add expense");
+    }
+
+    /**
+     * Checks if the provided input starts with the word "add splitexpense" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "add splitexpense", else returns false
+     */
+    public Boolean isAddSplitExpenseCommand(String input) {
+        return input.startsWith("add splitexpense");
     }
 
     public Boolean isAddSavingCommand(String input) {
@@ -169,6 +191,15 @@ public class Parser {
     }
 
 
+    /**
+     * Parses the "list" command, allowing for optional category filtering.
+     *
+     * @param input The full user input string.
+     * @param expenseList The ExpenseList to list from.
+     * @param savingList The SavingList to list from.
+     * @return A Command for executing the list, or null if the input is invalid.
+     */
+    
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
@@ -575,5 +606,4 @@ public class Parser {
 
         return null;
     }
-
 }
