@@ -18,7 +18,12 @@ public class UiConstant {
 
 
     // Storage
-    public static final String LOG_FILE_PATH ="./pulsepilot_log.txt";
+    public static final String LOG_FILE_PATH = "./pulsepilot_log.txt";
+    public static final String DATA_FILE_PATH = "./pulsepilot_data.txt";
+    public static final String RUN_NAME = "run";
+    public static final String GYM_NAME = "gym";
+    public static final String BMI_NAME = "bmi";
+    public static final String PERIOD_NAME = "period";
 
     public static final String MISSING_FILE = "What is your name, voyager?";
     public static final String SUCCESSFUL_LOAD = "Captain's data found. Orbit has been synchronised.";

@@ -27,6 +27,16 @@ public class CustomExceptions extends Exception {
     }
 
     /**
+     * Prints the error for an FileReadError error, and logs it in the log file as an error.
+     */
+    public static class FileReadError extends Exception{
+        public FileReadError(String message) {
+            super("\u001b[31mError: " + message + "\u001b[0m");
+            LogFile.writeLog(message, true);
+        }
+    }
+
+    /**
      * Prints the error for an FileWriteError error, and logs it in the log file as an error.
      */
     public static class FileWriteError extends Exception{
