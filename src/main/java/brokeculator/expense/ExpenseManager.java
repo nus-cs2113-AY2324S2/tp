@@ -70,11 +70,7 @@ public class ExpenseManager {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Expense expense : expenses) {
-            sb.append(expense.getStringRepresentation());
-        }
-        return sb.toString();
+        return getExpensesListString(expenses.size());
     }
     
     public int getNumberOfExpensesTracked() {
