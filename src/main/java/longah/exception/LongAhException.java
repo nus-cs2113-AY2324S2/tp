@@ -1,6 +1,11 @@
 package longah.exception;
 
+import longah.handler.UI;
+import longah.handler.Logging;
+
 public class LongAhException extends Exception {
+    private static ExceptionType type;
+
     /**
      * Constructor for LongAhExceptions.
      * 
@@ -17,6 +22,7 @@ public class LongAhException extends Exception {
      */
     public LongAhException(ExceptionMessage message) {
         super(message.getMessage());
+        type = message.getType();
     }
 
     /**
@@ -25,7 +31,12 @@ public class LongAhException extends Exception {
      * @param e The exception to be printed.
      */
     public static void printException(LongAhException e) {
-        System.out.println(e.getMessage());
+        UI.showMessage(e.getMessage());
+        if (type == ExceptionType.WARNING) {
+            Logging.logWarning(e.getMessage());
+        } else if (type == ExceptionType.INFO) {
+            Logging.logInfo(e.getMessage());
+        }
     }
 
     public static boolean isMessage(LongAhException e, ExceptionMessage message) {

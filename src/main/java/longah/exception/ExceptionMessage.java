@@ -1,7 +1,7 @@
 package longah.exception;
 
 public enum ExceptionMessage {
-    // [Cause of Exception]([Message to be printed])
+    // [Cause of Exception]([Message to be printed], [Type of Exception])
     // General Exceptions
     INVALID_INDEX ("Invalid index.", ExceptionType.WARNING),
 

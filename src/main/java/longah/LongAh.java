@@ -2,7 +2,6 @@ package longah;
 
 import longah.handler.PINHandler;
 import longah.node.Group;
-import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
 import longah.handler.InputHandler;
 import longah.handler.Logging;
@@ -33,8 +32,6 @@ public class LongAh {
             group = new Group("group"); // Give a temporary name for now
             pinHandler = new PINHandler();
         } catch (LongAhException e) {
-            Logging.logWarning("Loading process fails! Unable to create file or " +
-                    "file could not be access.");
             LongAhException.printException(e);
         }
 
@@ -55,13 +52,6 @@ public class LongAh {
                 }
             } catch (LongAhException e) {
                 LongAhException.printException(e);
-                // Log only critical errors
-                if (LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP) ||
-                        LongAhException.isMessage(e, ExceptionMessage.NO_DEBTS_FOUND) ||
-                        LongAhException.isMessage(e, ExceptionMessage.NO_TRANSACTION_FOUND)) {
-                    Logging.logWarning("The previous user command caused an error. " +
-                            "Check the returned error message for details");
-                }
             }
         }
     }
