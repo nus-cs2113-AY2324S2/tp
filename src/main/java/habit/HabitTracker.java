@@ -19,7 +19,11 @@ public class HabitTracker {
     private static ArrayList<Habit> habitList = new ArrayList<>();
 
     public HabitTracker() {
-        habitList = loadHabitListFromFile();
+        try {
+            habitList = loadHabitListFromFile();
+        } catch (HabitException e) {
+            Ui.printMessageWithSepNewLine(e.getMessage());
+        }
     }
 
     /**
