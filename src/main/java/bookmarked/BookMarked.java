@@ -9,9 +9,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class BookMarked {
-    private static final String BOOK_FILE_PATH = "./book.txt";
     public static ArrayList<Book> listOfBooks = new ArrayList<>();
     public static int numberOfBooks = 0;
+    private static final String BOOK_FILE_PATH = "./book.txt";
 
     public static void main(String[] args) {
         Ui.greetings();
