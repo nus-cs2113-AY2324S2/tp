@@ -21,7 +21,7 @@ public class Constants {
             "calories!";
     public static final String MEAL_CATEGORY_ERROR_MESSAGE = "Please enter a valid meal category. Here are your" +
             "options:\n BREAKFAST, LUNCH, DINNER, APPETIZER, DESSERT";
-    static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
+    public static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
             + RECIPE_TIME_PREFIX;
 
     public static final String MESSAGE_ASK_INPUT = "asking user for input";
