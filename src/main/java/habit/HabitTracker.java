@@ -5,6 +5,8 @@ import ui.Ui;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static storage.habit.HabitTrackerStorage.loadHabitListFromFile;
 import static storage.habit.HabitTrackerStorage.saveHabitListToFile;
@@ -45,7 +47,7 @@ public class HabitTracker {
         }
         for (int i = 0; i < habitList.size(); i++) {
             Habit habit = habitList.get(i);
-            listHabitsMessage += "  " + (i + 1) + ". " + habit + "\n";
+            listHabitsMessage += "  " + (i + 1) + "." + habit + "\n";
         }
         printMessageWithoutSepNewLine(listHabitsMessage);
     }
@@ -109,11 +111,32 @@ public class HabitTracker {
         habit.setPriority(priority);
 
         String setPriorityLevelMessage = "";
-
         setPriorityLevelMessage += "The priority for your habit has been updated:\n";
         setPriorityLevelMessage += "  " + habitID + ". " + habit;
         Ui.printMessageWithSepNewLine(setPriorityLevelMessage);
 
+        saveHabitListToFile(habitList);
+    }
+
+    public void sortHabits() {
+        // Define a custom comparator to sort habits based on their priority
+        Comparator<Habit> habitComparator = Comparator.comparing(habit -> {
+            switch (habit.getPriority()) {
+            case HIGH:
+                return 0;
+            case MED:
+                return 1;
+            case LOW:
+                return 2;
+            default:
+                return 3; // Handles any unexpected case
+            }
+        });
+
+        // Sort the habitList using the custom comparator
+        Collections.sort(habitList, habitComparator);
+
+        Ui.printMessageWithSepNewLine("Habits have been sorted according to priority.");
         saveHabitListToFile(habitList);
     }
 
