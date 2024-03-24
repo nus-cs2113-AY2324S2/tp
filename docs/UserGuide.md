@@ -33,6 +33,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`focus set` - Set focus time duration](#set-focus-timer-duration-focus-set)
       - Fitness Motivator
           - [`fitness get` - Get a pre-loaded list of different exercises](#get-a-list-of-exercises-fitness-get)
+          - [`fitness add` - Add new exercises into the list](#add-exercises-to-the-list-fitness-add)
 
 ## Quick Start
 
@@ -561,6 +562,29 @@ These are some of the exercises you can do!
 ________________________________________________________________________________________________________________
 ```
 
+### Add exercises to the list: `fitness add`
+Allows the user to add their own exercises to the list.
+
+Format:
+```
+fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
+```
+
+* The `fitness` and `add` is case-sensitive.
+* Use of commands between each parameter is required.
+
+Example of usage (increasing count):
+```
+fitness add Arms, Tricep Dips, 8, 10
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+I have added the following exercise into our list!
+Arms: Tricep Dips, 8 sets & 10 reps
+________________________________________________________________________________________________________________
+```
 
 ## FAQ
 
