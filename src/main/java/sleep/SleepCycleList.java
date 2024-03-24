@@ -1,7 +1,11 @@
 package sleep;
 
+import date.DateFormat;
 import ui.Ui;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents the lists of sleep cycles
@@ -28,7 +32,60 @@ public class SleepCycleList {
         sleepCycleList.add(sleepCycle);
         totalHrsSlept += sleepCycle.getHoursSlept();
         numberOfCycles += 1;
-        Ui.printMessageWithSepNewLine("--- SleepCycle for " + sleepCycle.getDateOfSleep() + " has been added ---");
+        Ui.printMessageWithSepNewLine("--- SleepCycle for "
+                + DateFormat.convertDateToString(sleepCycle.getDateOfSleep())
+                + " has been added ---");
+        Collections.sort(sleepCycleList);
+    }
+
+    public void deleteSleepCycle(LocalDate date) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            SleepCycle currSleepCycle = sleepCycleList.get(i);
+            if (date.isEqual(currSleepCycle.getDateOfSleep())) {
+                totalHrsSlept -= currSleepCycle.getHoursSlept();
+                sleepCycleList.remove(i);
+                numberOfCycles--;
+                Ui.printMessageWithSepNewLine("Sleep cycle for " + DateFormat.convertDateToString(date)
+                        + " has been removed from list");
+                return;
+            }
+        }
+        Ui.printMessageWithSepNewLine("No entry for sleep cycle on " + DateFormat.convertDateToString(date));
+    }
+
+    public void deleteSleepCyclesBefore(LocalDate date) {
+        int numberOfDeletion = 0;
+        while (numberOfCycles > 0 && sleepCycleList.get(0).getDateOfSleep().isBefore(date)) {
+            totalHrsSlept -= sleepCycleList.get(0).getHoursSlept();
+            sleepCycleList.remove(0);
+            numberOfCycles--;
+            numberOfDeletion++;
+        }
+        Ui.printMessageWithSepNewLine("A total of " + numberOfDeletion + " sleep cycles have been deleted");
+    }
+
+    public void deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate) {
+        int startId = 0;
+        int numberOfDeletion = 0;
+        while (startId < numberOfCycles) {
+            SleepCycle currSleepCycle = sleepCycleList.get(startId);
+            if (startDate.isBefore(currSleepCycle.getDateOfSleep())) {
+                startId++;
+            } else {
+                break;
+            }
+        }
+        while (startId < numberOfCycles) {
+            SleepCycle currSleepCycle = sleepCycleList.get(startId);
+            if (!currSleepCycle.getDateOfSleep().isAfter(endDate)) {
+                sleepCycleList.remove(startId);
+                numberOfDeletion++;
+                numberOfCycles--;
+            } else {
+                break;
+            }
+        }
+        Ui.printMessageWithSepNewLine("A total of " + numberOfDeletion + " sleep cycles have been deleted");
     }
 
     /**
@@ -47,25 +104,32 @@ public class SleepCycleList {
         Ui.printMessageWithSepNewLine(sleepListMessage);
     }
 
-    public void getSleepCycle(String date) {
+    public int getSleepCycle(LocalDate date, boolean isPrint) {
         for (int i = 0; i < numberOfCycles; i++) {
             SleepCycle currSleep = sleepCycleList.get(i);
-            if (currSleep.getDateOfSleep().equals(date)){
-                Ui.printMessageWithSepNewLine("Hours slept on " + date + ": " + currSleep.getHoursSlept());
-                return;
+            if (currSleep.getDateOfSleep().isEqual(date)){
+                if (isPrint) {
+                    Ui.printMessageWithSepNewLine("Hours slept on " + DateFormat.convertDateToString(date)
+                            + ": " + currSleep.getHoursSlept());
+                }
+                return i;
             }
         }
-        Ui.printMessageWithSepNewLine("No entry found for the date.");
+        if (isPrint) {
+            Ui.printMessageWithSepNewLine("No entry found for the date.");
+        }
+        return -1;
     }
 
-    public void updateSleepCycle(String date, double newHours) {
+    public void updateSleepCycle(LocalDate date, double newHours) {
         for (int i = 0; i < numberOfCycles; i++) {
             SleepCycle currSleep = sleepCycleList.get(i);
-            if (currSleep.getDateOfSleep().equals(date)){
+            if (currSleep.getDateOfSleep().isEqual(date)){
                 double oldHours = currSleep.getHoursSlept();
                 currSleep.setHoursOfSleep(newHours);
-                Ui.printMessageWithSepNewLine("Hours of sleep for " + date + " has been updated from " +
-                        oldHours + " to " + newHours);
+                totalHrsSlept = totalHrsSlept - oldHours + newHours;
+                Ui.printMessageWithSepNewLine("Hours of sleep for " + DateFormat.convertDateToString(date) +
+                        " has been updated from " + oldHours + " to " + newHours);
                 return;
             }
         }

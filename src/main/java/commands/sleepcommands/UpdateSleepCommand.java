@@ -1,13 +1,16 @@
 package commands.sleepcommands;
 
 import commands.Command;
+import date.DateFormat;
 import exceptions.SleepException;
 import sleep.SleepTracker;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class UpdateSleepCommand implements Command {
-    SleepTracker sleepTracker;
-    String date;
-    double hours;
+    private SleepTracker sleepTracker;
+    private LocalDate date;
+    private double hours;
 
     public UpdateSleepCommand(SleepTracker sleepTracker, String sleepCommandArgs) throws SleepException {
         String[] userCommand = sleepCommandArgs.trim().split("/new", 2);
@@ -23,8 +26,11 @@ public class UpdateSleepCommand implements Command {
         }
         try {
             this.sleepTracker = sleepTracker;
-            date = userCommand[0].trim();
+            date = DateFormat.convertStringToDate(userCommand[0].trim());
             hours = Double.parseDouble(userCommand[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new SleepException("Key in valid date of sleep cycle to be updated" + System.lineSeparator()
+                    + "E.g: 22/12/2023");
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours to update to");
         }
