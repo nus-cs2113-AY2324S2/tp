@@ -179,7 +179,7 @@ public class Parser {
     public static String parseInfoDrink(String command) throws UnregisteredDrinkException {
         int drinkIndex = 10;
         String infoDrinkDescription = command.substring(drinkIndex).trim();
-        if (!Meal.getNutrientDetails().containsKey(infoDrinkDescription)) {
+        if (!Drink.getNutrientDetails().containsKey(infoDrinkDescription)) {
             throw new UnregisteredDrinkException();
         }
         return infoDrinkDescription;
