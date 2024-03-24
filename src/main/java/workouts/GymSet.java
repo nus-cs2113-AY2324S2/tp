@@ -20,6 +20,22 @@ public class GymSet {
         this.repetitions = repetitions;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getRepetitions() {
+        return repetitions;
+    }
+
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
     /**
      * Retrieves a string representation of a GymSet object.
      *

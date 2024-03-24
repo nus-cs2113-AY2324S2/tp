@@ -41,7 +41,7 @@ class HandlerTest {
         System.setOut(originalOut);
         System.setIn(originalIn);
         System.setErr(originalErr);
-        WorkoutList.clearWorkoutsAndRun();
+        WorkoutList.clearWorkoutsRunGym();
         HealthList.clearBmisAndPeriods();
         Handler.destroyScanner();
         assert isScannerClosed(Handler.in) : "Scanner is not closed";
