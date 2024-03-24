@@ -12,8 +12,8 @@ import java.time.format.DateTimeParseException;
  * Represents a command to add sleep cycles.
  */
 public class AddSleepCommand implements Command {
-    SleepTracker sleepTracker;
-    SleepCycle sleepCycleToAdd;
+    private SleepTracker sleepTracker;
+    private SleepCycle sleepCycleToAdd;
 
     /**
      * Constructs a new AddSleepCommand object with user input.
@@ -46,7 +46,7 @@ public class AddSleepCommand implements Command {
         try {
             dateSlept = DateFormat.convertStringToDate(userCommand[1].trim());
         } catch (DateTimeParseException e) {
-            throw new SleepException("Key in valid date slept" + System.lineSeparator()
+            throw new SleepException("Key in valid date of sleep" + System.lineSeparator()
                 + "E.g: 22/12/2023");
         }
         assert !sleepCommandArgs.isEmpty() : "Sleep cycle should not be added";
@@ -54,7 +54,7 @@ public class AddSleepCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SleepException {
         sleepTracker.addSleepCycle(sleepCycleToAdd);
     }
 

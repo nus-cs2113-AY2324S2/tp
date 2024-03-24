@@ -20,7 +20,7 @@ public class StartTimerCommand implements Command {
     }
 
     /**
-     * Executes the command bye setting the start timing of the timer.
+     * Executes the command by setting the start timing of the timer.
      *
      * @throws FocusException If the status of focus timer is already running.
      */

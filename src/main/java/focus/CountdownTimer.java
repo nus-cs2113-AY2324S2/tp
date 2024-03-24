@@ -6,6 +6,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Represents the countdown timer for the focus timer function.
+ */
 public class CountdownTimer {
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MINUTES = 1;
@@ -24,6 +27,9 @@ public class CountdownTimer {
     private Timer stopwatch;
     private TimerTask timerTask;
 
+    /**
+     * Constructs a CountdownTimer by initialising the class with default timings.
+     */
     public CountdownTimer() {
         this.minutes = DEFAULT_MINUTES;
         this.seconds = DEFAULT_SECONDS;
@@ -40,6 +46,9 @@ public class CountdownTimer {
         this.seconds--;
     }
 
+    /**
+     * Starts the countdown timer by running it in the background thread.
+     */
     public void start() {
         stopwatch = new Timer();
         isStarted.set(true);
@@ -70,6 +79,9 @@ public class CountdownTimer {
         stopwatch.scheduleAtFixedRate(timerTask, TIME_DELAY, ONE_SECOND);
     }
 
+    /**
+     * Set the timer to start by initialising the timing to the desired countdown timings.
+     */
     public void setStart() {
         assert !isRunning.get() : ASSERTION_TIMER_NOT_RUNNING;
         isRunning.set(true);
@@ -80,6 +92,9 @@ public class CountdownTimer {
                 + "Duration set: " + minutes + " minute(s) " + seconds + " second(s)");
     }
 
+    /**
+     * Set the timer to stop
+     */
     public void setStop() {
         assert stopwatch != null : ASSERTION_INVALID_STOP;
         isRunning.set(false);
@@ -88,25 +103,46 @@ public class CountdownTimer {
         stopwatch.purge();
     }
 
+    /**
+     * Set the timer to pause
+     */
     public void setPause() {
         isRunning.set(false);
         Ui.printMessageWithSepNewLine("Timer paused. \n" +
                 "Remaining time: " + minutes + " minutes " + seconds + " seconds");
     }
 
+    /**
+     * set the timer to resume
+     */
     public void setResume() {
         isRunning.set(true);
         Ui.printMessageWithSepNewLine("Countdown timer resumed.");
     }
 
+    /**
+     * Get the current running status of the timer
+     *
+     * @return true if the timer has started. False otherwise.
+     */
     public boolean getRunningStatus() {
         return isStarted.get();
     }
 
+    /**
+     * Get the current paused status of the timer
+     *
+     * @return false if the timer has been paused, true otherwise.
+     */
     public boolean getPausedStatus() {
         return isRunning.get();
     }
 
+    /**
+     * Set the countdown timer duration to the desired duration.
+     *
+     * @param userInput The number of minutes desired from the user.
+     */
     public void setTimer(int userInput) {
         if (userInput < 1) {
             Ui.printMessageWithSepNewLine("Duration cannot be less than 1.");
@@ -116,6 +152,9 @@ public class CountdownTimer {
         }
     }
 
+    /**
+     * Check the remaining time in the countdown timer.
+     */
     public void checkTime() {
         Ui.printMessageWithSepNewLine("Remaining time: \n" +
                 minutes + " minutes " + seconds + " seconds left.");
