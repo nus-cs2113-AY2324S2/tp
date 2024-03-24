@@ -1,27 +1,107 @@
 @startuml
-'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+skinparam classAttributeIconSize 0
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+package parser {
+    class ReflectionCommandParser {
+    }
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+    class Parser {
+    }
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+package command {
+    interface "<<interface>>\nCommand" as Command {
+            + execute(): void
+            + isExit(): boolean
+    }
+
+    class GetReflectionQuestionsCommand implements Command {
+    }
+
+    class ListFavouriteReflectionsCommand implements Command {
+    }
+
+    class ReflectionHelpCommand implements Command {
+    }
+
+    class SaveToFavouritesCommand implements Command {
+    }
+
+    class UnsaveFromFavouritesCommand implements Command {
+    }
 }
+package reflection {
+    abstract class "{abstract}\nReflectionList" as ReflectionList {
+        - reflectionList: ArrayList<ReflectionQuestion>
+
+        + ReflectionList()
+        + addReflectionQuestion(reflectionQuestion: ReflectionQuestion): void
+        + removeReflectionQuestion(reflectionQuestion: ReflectionQuestion): void
+        + getSize(): int
+        + getReflectionList(): ArrayList<ReflectionQuestion>
+    }
+
+    class FavoriteReflectionsList {
+        + FavoriteReflectionsList()
+        + get(favouritesId: int): ReflectionQuestion
+    }
+
+    class ReflectionQuestionBank {
+        - setUpReflectionBank(): void
+        + ReflectionQuestionBank()
+        + getFiveRandomQuestions(): ArrayList<ReflectionQuestion>
+    }
+
+    class ReflectionQuestion {
+        - question: String
+        + ReflectionQuestion(question: String)
+        + toString(): String
+    }
+
+    class ReflectionManager {
+
+        + ReflectionManager()
+        + printFiveRandomQuestions(): void
+        + saveReflectionQuestion(reflectionId: int): void
+        + unsaveReflectionQuestion(reflectionId: int): void
+        + printFavourites(): void
+        + printHelpMenu(): void
+    }
+}
+
+class Storage {
+}
+
+class Ui {
+}
+
+ReflectionList *-- "*" ReflectionQuestion : contains
+FavoriteReflectionsList --|> ReflectionList
+ReflectionQuestionBank --|> ReflectionList
+ReflectionQuestionBank *-- "41" ReflectionQuestion : contains >
+FavoriteReflectionsList *-- "*" ReflectionQuestion : contains >
+
+ReflectionManager --> Storage : uses >
+ReflectionManager --> Ui : uses >
+ReflectionManager *--> "1" FavoriteReflectionsList : contains >
+ReflectionManager *--> "1" ReflectionQuestionBank : contains >
+
+Parser ..> ReflectionCommandParser : creates >
+ReflectionCommandParser .DOWN.> GetReflectionQuestionsCommand : creates >
+ReflectionCommandParser .DOWN.> ListFavouriteReflectionsCommand : creates >
+ReflectionCommandParser .DOWN.> ReflectionHelpCommand : creates >
+ReflectionCommandParser .DOWN.> SaveToFavouritesCommand : creates >
+ReflectionCommandParser .DOWN.> UnsaveFromFavouritesCommand : creates >
+
+GetReflectionQuestionsCommand --> ReflectionManager : uses >
+
+ListFavouriteReflectionsCommand --> ReflectionManager : uses >
+
+ReflectionHelpCommand --> ReflectionManager : uses >
+
+SaveToFavouritesCommand --> ReflectionManager : uses >
+
+UnsaveFromFavouritesCommand --> ReflectionManager : uses >
 
 @enduml
