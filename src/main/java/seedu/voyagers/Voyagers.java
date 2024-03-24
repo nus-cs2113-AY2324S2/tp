@@ -2,6 +2,7 @@ package seedu.voyagers;
 
 import seedu.voyagers.classes.TripList;
 import seedu.voyagers.paser.NewParser;
+import seedu.voyagers.utils.Status;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
@@ -20,16 +21,19 @@ public class Voyagers {
     //TODO: change to private and add to the command.execute(Ui, tripList, storage)
     public TripList tripList;
     public Ui ui;
+    public static Status status = Status.TRIP;
 
     public Voyagers() {
         this.tripList = new TripList(new ArrayList<>());
         this.ui = new Ui();
     }
     public static void main(String[] args) {
-        new Voyagers().run();
+        if (status == Status.TRIP) {
+            new Voyagers().runTrip();
+        }
     }
 
-    void run() {
+    void runTrip() {
 
         Logger logger = Logger.getLogger("Voyagers");
         logger.setLevel(Level.INFO);
