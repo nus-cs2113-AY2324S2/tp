@@ -93,8 +93,11 @@ public class RecipeList {
         case Constants.FIND_BY_NAME:
             findName(userInput);
             break;
+        case Constants.HELP_COMMAND:
+            UI.printInstructions();
         default:
-            System.out.println("try another command");
+            UI.printInvalidCommandWarning();
+            UI.printInstructions();
         }
     }
 }
