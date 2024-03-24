@@ -1,7 +1,6 @@
 package longah;
 
 import longah.handler.PINHandler;
-import longah.handler.StorageHandler;
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
