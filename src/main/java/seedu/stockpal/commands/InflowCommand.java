@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InflowCommand extends ListActionCommand {
+public class InflowCommand extends TransactionActionCommand {
     public static final String COMMAND_KEYWORD = "inflow";
     public static final String COMMAND_DESCRIPTION = "Increases the quantity of a product from the existing amount.";
     public static final String COMMAND_USAGE = "inflow PID a/INCREMENT_AMOUNT";
@@ -39,24 +39,22 @@ public class InflowCommand extends ListActionCommand {
     }
 
     @Override
-    public void execute(ProductList productList) throws StockPalException {
-        TransactionList transactionList = new TransactionList();
+    public void execute(ProductList productList, TransactionList transactionList) throws StockPalException {
         int productIndex = productList.findProductIndex(this.pid);
         if (productIndex == -1) {
             Ui.printInvalidPidMessage();
             return;
         }
         productList.increaseAmount(productIndex, amountToIncrease);
-        this.time = LocalDateTime.now();
-        Transaction transaction = createTransaction(pid, amountToIncrease, time);
-        transactionList.addTransaction(transaction);
         LOGGER.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
+
+        createTransaction(transactionList);
     }
 
+    public void createTransaction(TransactionList transactionList) {
+        this.time = LocalDateTime.now();
+        Transaction transaction = new Transaction(pid, amountToIncrease, time);
+        transactionList.addTransaction(transaction);
 
-    private Transaction createTransaction(Pid pid,
-                                      Integer amountToIncrease,
-                                      LocalDateTime time) {
-        return new Transaction(pid, amountToIncrease, time);
     }
 }

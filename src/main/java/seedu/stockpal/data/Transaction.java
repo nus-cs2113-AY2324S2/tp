@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 //@@author EdmundTangg
 public class Transaction {
 
-    private Integer changeInQuantity;
+    private final Integer changeInQuantity;
 
     private final LocalDateTime time;
     private final Pid pid;
@@ -21,6 +21,14 @@ public class Transaction {
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        String separator = "  |  ";
+        return (this.pid + separator + this.changeInQuantity + separator + this.time);
+    }
 
+    public Pid getPid() {
+        return this.pid;
+    }
 
 }
