@@ -30,7 +30,8 @@ public class Authentication {
         return isMatch;
     }
 
-    public boolean changePassword(String username, String oldPassword, String newPassword) throws SecurityException, ExceededAttemptsException {
+    public boolean changePassword(String username, String oldPassword, String newPassword)
+            throws SecurityException, ExceededAttemptsException {
         if (!checkPassword(username, oldPassword)) {
             return false;
         }

@@ -17,7 +17,7 @@ public class TransactionManager {
         if (transaction instanceof Inflow) {
             Inflow inflow = (Inflow) transaction;
             return inflows.addTransaction(inflow);
-        } 
+        }
         if (transaction instanceof Outflow) {
             Outflow outflow = (Outflow) transaction;
             return outflows.addTransaction(outflow);
@@ -56,7 +56,7 @@ public class TransactionManager {
         int numOfInflows = inflows.getTransactionListSize();
         Transaction<?> transactionEdited = inflows.getNthTransaction(numOfInflows - index);
         transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited),
-                                             updatedTransaction);
+                updatedTransaction);
         return inflows.editTransactionIndex(numOfInflows - index, (Inflow) updatedTransaction);
     }
 
@@ -64,7 +64,7 @@ public class TransactionManager {
         int numOfOutflows = outflows.getTransactionListSize();
         Transaction<?> transactionEdited = outflows.getNthTransaction(numOfOutflows - index);
         transactionList.editTransactionIndex(transactionList.getIndexOfParticularTransaction(transactionEdited),
-                                             updatedTransaction);
+                updatedTransaction);
         return outflows.editTransactionIndex(numOfOutflows - index, (Outflow) updatedTransaction);
     }
 
@@ -79,31 +79,31 @@ public class TransactionManager {
         return "Inflows:\n" + inflows.toString() + "\nOutflows:\n" + outflows.toString();
     }
 
-    public String showLastNTransactions(int n) throws Exception {
+    public String showLastNTransactions(int n) throws Exception{
         int listSize = transactionList.getTransactionListSize();
         if (n > listSize) {
             throw new Exception("Invalid index");
         }
         int index = 1;
-        StringBuilder returnedText = new StringBuilder("Inflows:\nTransactions:\n");
+        String returnedText = "Inflows:\nTransactions:\n";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Inflow) {
-                returnedText.append(String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString()));
+                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
                 index++;
             }
         }
 
         index = 1;
-        returnedText.append("\nOutflows:\nTransactions:\n");
+        returnedText += "\nOutflows:\nTransactions:\n";
         for (int i = listSize - 1; i > listSize - n - 1; i--) {
             Transaction<?> transaction = transactionList.getNthTransaction(i);
             if (transaction instanceof Outflow) {
-                returnedText.append(String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString()));
+                returnedText += String.format("%d)  %s\n", index, transactionList.getNthTransaction(i).toString());
                 index++;
             }
         }
-        return returnedText.toString();
+        return returnedText;
     }
 
     public String toSave() {
