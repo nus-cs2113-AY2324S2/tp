@@ -39,6 +39,9 @@ public class Handler {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(UiConstant.SPLIT_BY_WHITESPACE)[0];
             LogFile.writeLog("User Input: " + userInput, false);
+
+            assert userInput != null : "Object cannot be null";
+
             try {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
@@ -137,6 +140,7 @@ public class Handler {
         Output.printHistory(filter);
     }
 
+
     /**
      * Handles user input related to health data. Parses the user input to determine
      * the type of health data and processes it accordingly.
@@ -198,6 +202,7 @@ public class Handler {
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      */
+    //@@author JustinSoh
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
         String numberOfStationString = extractSubstringFromSpecificIndex(input, WorkoutConstant.STATION_DELIMITER);
@@ -205,6 +210,7 @@ public class Handler {
         return Integer.parseInt(numberOfStationString);
     }
 
+    //@@author JustinSoh
     /**
      * Retrieves the gym station details and adds a GymStation object to Gym.
      *
@@ -225,6 +231,8 @@ public class Handler {
             Output.printException(e, e.getMessage());
         }
     }
+
+    //@@author JustinSoh
     /**
      * Prints the latest run, gym, BMI entry or Period tracked.
      *
@@ -237,12 +245,13 @@ public class Handler {
     }
 
 
-
+    //@@author
     /**
      * Checks the type of exercise based on the user input.
      * Usage: to use this method whenever the user enters a new exercise.
      * Handles all the checks for input validity and sufficiency.
      * Can assume input is valid and sufficient if no exceptions are thrown.
+     *
      * @param userInput The user input string.
      * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
      * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
@@ -286,6 +295,9 @@ public class Handler {
         }
     }
 
+    /**
+     * Get user's name, and print profile induction messages.
+     */
     public static void userInduction() {
         String name = in.nextLine();
         System.out.println("Welcome aboard, Captain " + name);
@@ -295,13 +307,21 @@ public class Handler {
         System.out.println("Tips: Enter 'help' to view the pilot manual!");
         System.out.println("Initiating FTL jump sequence...");
 
-        // save name to DataFile
+        LogFile.writeLog("Name Entered: " + name, false);
         System.out.println("FTL jump completed.");
     }
 
+    /**
+     * Initialise scanner to read user input.
+     */
     public static void initialiseScanner(){
         in = new Scanner(System.in);
+        assert in != null : "Object cannot be null";
     }
+
+    /**
+     * Close scanner to stop reading user input.
+     */
     public static void destroyScanner(){
         in.close();
     }

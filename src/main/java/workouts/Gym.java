@@ -83,6 +83,7 @@ public class Gym extends Workout{
         int numberOfSets = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_SETS]);
         int repetition = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_REPS]);
         gym.addStation(exerciseName, weights, numberOfSets, repetition);
+
     }
 
     /**
@@ -102,18 +103,13 @@ public class Gym extends Workout{
         String reps = inputs[WorkoutConstant.INDEX_OF_STATION_REPS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
         String weights = inputs[WorkoutConstant.INDEX_OF_STATION_WEIGHTS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
 
-
-
-        if (exerciseName.isBlank() || sets.isBlank() || reps.isBlank() || weights.isBlank()) {
-            throw new CustomExceptions.InvalidInput(WorkoutConstant.BLANK_INPUT_FOR_GYM_STATION);
-        }
         try {
-            int setInt = Integer.parseInt(sets);
-            int repInt = Integer.parseInt(reps);
-            int weightInt = Integer.parseInt(weights);
-            assert setInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
-            assert repInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
-            assert weightInt > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            int setInteger = Integer.parseInt(sets);
+            int repInteger = Integer.parseInt(reps);
+            int weightInteger = Integer.parseInt(weights);
+            assert setInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert repInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert weightInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
 
         } catch (NumberFormatException e) {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.NUMERIC_INPUT_REQUIRED_GYM_STATION);

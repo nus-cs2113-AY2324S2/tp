@@ -57,6 +57,7 @@ public class WorkoutList extends ArrayList<Workout> {
             CustomExceptions.InvalidInput {
 
         filter = filter.toLowerCase();
+
         if(!filter.equals(WorkoutConstant.ALL) && !filter.equals(WorkoutConstant.RUN)
                 && !filter.equals(WorkoutConstant.GYM)) {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);

@@ -16,6 +16,7 @@ public class Period extends Health {
     protected LocalDate endDate;
     protected long length;
 
+    //@@author syj02
     /**
      * Constructs a Period object with the given start and end dates in string format.
      *

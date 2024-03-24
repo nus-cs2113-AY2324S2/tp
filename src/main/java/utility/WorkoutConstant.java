@@ -38,6 +38,10 @@ public class WorkoutConstant {
     public static final Integer INDEX_OF_STATION_REPS = 2; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_WEIGHTS = 3; // PLEASE STANDARDISE
 
+    public static final String STATION_SET_DELIMITER = "s:"; // PLEASE STANDARDISE
+    public static final String STATION_REPS_DELIMITER = "r:"; // PLEASE STANDARDISE
+    public static final String STATION_WEIGHTS_DELIMITER = "w:"; // PLEASE STANDARDISE
+
 
     // Numerical Values
     public static final int SUBSTRING_COMMAND = 0;
