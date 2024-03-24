@@ -74,6 +74,7 @@ public class CountdownTimer {
         assert !isRunning.get() : ASSERTION_TIMER_NOT_RUNNING;
         isRunning.set(true);
         minutes = inputMinutes;
+        seconds = DEFAULT_SECONDS;
         start();
         Ui.printMessageWithSepNewLine("Countdown timer started! \n"
                 + "Duration set: " + minutes + " minute(s) " + seconds + " second(s)");
@@ -110,7 +111,7 @@ public class CountdownTimer {
         if (userInput < 1) {
             Ui.printMessageWithSepNewLine("Duration cannot be less than 1.");
         } else {
-            inputMinutes = userInput - 1;
+            inputMinutes = userInput;
             Ui.printMessageWithSepNewLine("Countdown duration has been set to " + userInput + " minute(s)");
         }
     }

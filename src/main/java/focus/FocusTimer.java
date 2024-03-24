@@ -80,7 +80,8 @@ public class FocusTimer {
     public void checkTime() {
         if (timerMode) {
             countdownTimer.checkTime();
+        } else {
+            countupTimer.checkTime();
         }
-        countupTimer.checkTime();
     }
 }
