@@ -1,2 +1,8 @@
-package recipeio.exceptions;public class InvalidDescriptionException {
+package recipeio.exceptions;
+
+public class InvalidDescriptionException extends Exception {
+
+    public InvalidDescriptionException(String message) {
+        super(message);
+    }
 }
