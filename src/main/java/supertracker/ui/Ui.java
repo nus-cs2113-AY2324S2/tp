@@ -34,7 +34,7 @@ public class Ui {
     private static String newItemOpening(Item item) {
         return item.getName() + " has been added to the inventory!";
     }
-    private static String ExpiryDateMessage(Item item) {
+    private static String expiryDateMessage(Item item) {
         return "Expiry Date: " + item.getExpiryDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     private static String updateItemOpening(Item item) {
@@ -88,7 +88,7 @@ public class Ui {
         printIndent(quantityMessage(item));
         printIndent(priceMessage(item));
         if (!item.getExpiryDate().isEqual(LocalDate.parse("01/01/99999", DateTimeFormatter.ofPattern("dd/MM/yyyyy")))) {
-            printIndent(ExpiryDateMessage(item));
+            printIndent(expiryDateMessage(item));
         }
     }
 
