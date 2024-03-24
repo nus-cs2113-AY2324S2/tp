@@ -6,7 +6,7 @@ import habit.HabitTracker;
 
 public class UpdateHabitCountCommand implements Command {
     private HabitTracker habitTracker;
-    private String habitID;
+    private int habitID;
     private String updatedCount;
 
     /**
@@ -20,13 +20,19 @@ public class UpdateHabitCountCommand implements Command {
         this.habitTracker = habitTracker;
 
         String[] parts = habitCommandArgs.trim().split("/id | /by");
+
         if (!(parts.length == 3)) {
             throw new HabitException("Incorrect update command formatting\n" +
                     "Use Format: habit update /id <habit_ID> /by <increment_count>\n" +
                     "Note: for <increment_count>, use '+1' to increase by 1, '-1' to decrease by 1");
         }
 
-        this.habitID = parts[1].trim();
+        try {
+            this.habitID = Integer.parseInt(parts[1].trim());
+        } catch (NumberFormatException e) {
+            throw new HabitException("Please provide a valid habit ID.");
+        }
+
         this.updatedCount = parts[2].trim();
     }
 

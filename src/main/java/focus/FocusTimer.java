@@ -2,59 +2,86 @@ package focus;
 
 import ui.Ui;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-
 /**
  * Represents the focus timer for wellness360
  */
 public class FocusTimer {
-    private static final int MINUTES_DIVISION = 60;
-    private static final int SECONDS_DIVISION = 60;
-    public LocalDateTime startTiming;
-    public LocalDateTime stopTiming;
-    public boolean isStarted = false;
+    CountupTimer countupTimer;
+    CountdownTimer countdownTimer;
+    private boolean timerMode = false; // false for count-up, true for countdown
 
-    /**
-     * Store the current time when the user calls the function as the start timing for the timer.
-     */
+    public FocusTimer() {
+        this.countupTimer = new CountupTimer();
+        this.countdownTimer = new CountdownTimer();
+    }
+
     public void setStartTiming() {
-        assert !isStarted: "Timer should not have started";
-        this.startTiming = LocalDateTime.now();
-        isStarted = true;
-        Ui.printMessageWithSepNewLine("Your session has started. Time to grind!");
+        if (timerMode) {
+            countdownTimer.setStart();
+        } else {
+            countupTimer.setStartTiming();
+        }
     }
 
-    /**
-     *  Store the current time when the user calls the function as the stop timing for the timer.
-     */
     public void setStopTiming() {
-        assert isStarted: "Timer should have started";
-        stopTiming = LocalDateTime.now();
-        isStarted = false;
-        totalTimeSpent();
+        if (timerMode) {
+            countdownTimer.setStop();
+            Ui.printMessageWithSepNewLine("Countdown timer stopped.");
+        } else {
+            countupTimer.setStopTiming();
+        }
     }
 
-    /**
-     * Retrieves the current status of the clock
-     *
-     * @return The status of the focus timer
-     */
-    public boolean getStatus() {
-        return isStarted;
+    public boolean getStartStatus() {
+        if (timerMode) {
+            return countdownTimer.getRunningStatus();
+        } else {
+            return countupTimer.getStartedStatus();
+        }
     }
 
-    /**
-     *  Calculates the total time elapsed between the start timing and stop timing, and prints out
-     *  the total time elapsed using Ui class.
-     */
-    public void totalTimeSpent() {
-        Duration timeElapsed = Duration.between(startTiming, stopTiming);
-        long hours = timeElapsed.toHours();
-        long minutes = timeElapsed.toMinutes() % MINUTES_DIVISION;
-        long seconds = timeElapsed.toSeconds() % SECONDS_DIVISION;
-        Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + " Time spent: " +
-                hours + " hours, " + minutes + " minutes, " + seconds + " seconds" + "\n" +
-                "To start a new session, use ‘focus start’ ");
+    public void switchTimer() {
+        this.timerMode = !timerMode;
+        if (timerMode) {
+            Ui.printMessageWithSepNewLine("Switched to Count down timer");
+        } else {
+            Ui.printMessageWithSepNewLine("Switched to Count up timer");
+        }
+    }
+
+    public void setPauseTiming() {
+        if (timerMode) {
+            countdownTimer.setPause();
+        } else {
+            countupTimer.setPause();
+        }
+    }
+
+    public boolean getPausedStatus() {
+        if (timerMode) {
+            return !countdownTimer.getPausedStatus();
+        } else {
+            return countupTimer.getPauseStatus();
+        }
+    }
+
+    public void setResumeTiming() {
+        if (timerMode) {
+            countdownTimer.setResume();
+        } else {
+            countupTimer.setResume();
+        }
+    }
+
+    public void setDuration(int commandArgs) {
+        countdownTimer.setTimer(commandArgs);
+    }
+
+    public void checkTime() {
+        if (timerMode) {
+            countdownTimer.checkTime();
+        } else {
+            countupTimer.checkTime();
+        }
     }
 }
