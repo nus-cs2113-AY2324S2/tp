@@ -7,6 +7,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 
+import longah.handler.PINHandler;
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
@@ -19,6 +20,7 @@ import longah.commands.Command;
 public class LongAh {
     private static final Logger LongAhLogger = Logger.getLogger("LongAh");
     private static Group group;
+    private static PINHandler pinHandler;
     private Scanner scanner;
 
     /**
@@ -46,9 +48,11 @@ public class LongAh {
         LongAhLogger.log(Level.INFO, "Starting Pre-program preparations.");
         System.out.println("Welcome to LongAh!");
         LongAh app = new LongAh();
+
         try {
             LongAhLogger.log(Level.INFO, "Loading previous member and transaction info.");
             group = new Group("group"); // Give a temporary name for now
+            pinHandler = new PINHandler();
         } catch (LongAhException e) {
             LongAhLogger.log(Level.WARNING, "Loading process fails! Unable to create file or " +
                     "file could not be access.");
@@ -58,7 +62,7 @@ public class LongAh {
         LongAhLogger.log(Level.INFO, "Entering main program body. Begin accepting user commands.");
         while (true) {
             try {
-                System.out.print("Enter command: ");
+                System.out.print("Enter command:");
                 if (!app.scanner.hasNextLine()) {
                     return;
                 }
