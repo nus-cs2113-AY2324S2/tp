@@ -28,7 +28,7 @@ public class ExpenseList {
         this.expenses = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Housing",
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
-        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt"); // Assuming the file name is expenses.txt
+        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt");
         try {
             this.expenses.addAll(storage.loadExpenses());
         } catch (FileNotFoundException e) {
@@ -175,29 +175,24 @@ public class ExpenseList {
             // Retrieve the expense to edit
             Expense expenseToEdit = expenses.get(index - 1);
 
-        // Update the expense details
-        expenseToEdit.setCategory(category);
-        expenseToEdit.setAmount(amount);
-        expenseToEdit.setDescription(description);
-        // Save the updated expenses list to the file
-        try {
-            storage.saveExpenses(expenses);
-        } catch (IOException e) {
-            System.out.println("Error saving expenses to file.");
-        }
             // Update the expense details
             expenseToEdit.setCategory(category);
             expenseToEdit.setAmount(amount);
             expenseToEdit.setDescription(description);
 
-            LOGGER.info("Expense at index " + index + " edited successfully. New details: " + expenseToEdit.toString());
+            LOGGER.info("Expense at index " + index + " edited successfully. New details: " +
+                    expenseToEdit.toString());
             System.out.println("Expense edited successfully.");
+
+            // Save the updated expenses list to the file
+            storage.saveExpenses(expenses);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error saving expenses to file.", e);
+            System.out.println("Error saving expenses to file.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error editing expense at index " + index, e);
         }
     }
-
-
 
     public void deleteExpense(int index){
         if (index >= 0 && index < expenses.size()){
