@@ -50,7 +50,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_alphabetical_ascending() throws TrackerException {
+    public void listCommand_alphabeticalAscending_correctlyConstructed() throws TrackerException {
         String userInput = "list";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -63,7 +63,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_alphabetical_descending() throws TrackerException {
+    public void listCommand_alphabeticalDescending_correctlyConstructed() throws TrackerException {
         String userInput = "list r/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -76,7 +76,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_quantity_ascending() throws TrackerException {
+    public void listCommand_quantityAscending_correctlyConstructed() throws TrackerException {
         String userInput = "list q/ sq/ sp/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -89,7 +89,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_quantity_descending() throws TrackerException {
+    public void listCommand_quantityDescending_correctlyConstructed() throws TrackerException {
         String userInput = "list q/ sq/ sp/ r/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -102,7 +102,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_price_ascending() throws TrackerException {
+    public void listCommand_priceAscending_correctlyConstructed() throws TrackerException {
         String userInput = "list p/ sp/ sq/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -115,7 +115,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_price_descending() throws TrackerException {
+    public void listCommand_priceDescending_correctlyConstructed() throws TrackerException {
         String userInput = "list p/ sp/ sq/ r/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -128,7 +128,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_quantity_before_price() throws TrackerException {
+    public void listCommand_quantityBeforePrice_correctlyConstructed() throws TrackerException {
         String userInput = "list q/ p/ q/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
@@ -141,7 +141,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommand_validData_correctlyConstructed_price_before_quantity() throws TrackerException {
+    public void listCommand_priceBeforeQuantity_correctlyConstructed() throws TrackerException {
         String userInput = "list p/ q/ p/";
         Command c = Parser.parseCommand(userInput);
         c.execute();
