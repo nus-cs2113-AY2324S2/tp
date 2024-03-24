@@ -56,7 +56,15 @@ public class UserDetailsCommand extends Command {
         ui.showMessage("Thanks for letting me know your relationship status! :)");
         System.out.println(HORIZONTAL);
 
-        UserDetails userDetails = new UserDetails(name, age, gender, status, location, cuisine);
+        String anniversary;
+        if (status.equals("M") || status.equals("R") || status.equals("D")) {
+            ui.showMessage("Lucky you! Please enter your anniversary:");
+            anniversary = ui.readCommand();
+        } else {
+            anniversary = "N.A";
+        }
+
+        UserDetails userDetails = new UserDetails(name, age, gender, status, location, cuisine, anniversary);
         // Save the user details to a file using the Storage class
         storage.saveUserDetails(userDetails);
 
