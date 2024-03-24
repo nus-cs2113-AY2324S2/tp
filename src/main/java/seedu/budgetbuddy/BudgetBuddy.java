@@ -9,6 +9,7 @@ public class BudgetBuddy {
     private Parser parser;
     private ExpenseList expenses;
     private SavingList savings;
+    private SplitExpenseList splitexpenses;
 
     public BudgetBuddy() {
         ui = new Ui();
@@ -18,7 +19,7 @@ public class BudgetBuddy {
     }
 
     public void handleCommands(String input) {
-        Command command = parser.parseCommand(expenses, savings, input);
+        Command command = parser.parseCommand(expenses, savings, splitexpenses, input);
 
         if (command != null) {
             command.execute();

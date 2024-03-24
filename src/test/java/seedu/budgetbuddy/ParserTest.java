@@ -39,7 +39,7 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command emptyMenuCommand = parser.parseCommand(expenses, savings, "menu");
+        Command emptyMenuCommand = parser.parseCommand(expenses, savings, null, null);
 
         assertInstanceOf(MenuCommand.class, emptyMenuCommand);
         assertEquals(0,((MenuCommand)emptyMenuCommand).getIndex());
@@ -50,7 +50,7 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command validMenuCommand = parser.parseCommand(expenses, savings, "menu 2");
+        Command validMenuCommand = parser.parseCommand(expenses, savings, null, null);
 
         assertInstanceOf(MenuCommand.class, validMenuCommand);
         assertEquals(2, ((MenuCommand)validMenuCommand).getIndex());
@@ -61,7 +61,7 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command invalidMenuCommand = parser.parseCommand(expenses, savings, "menu invalidNumber");
+        Command invalidMenuCommand = parser.parseCommand(expenses, savings, null, null);
 
         assertNull(invalidMenuCommand);
     }
@@ -71,7 +71,7 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenses = new ExpenseList();
         SavingList savings = new SavingList();
-        Command invalidCommand = parser.parseCommand(expenses, savings, "notACommand");
+        Command invalidCommand = parser.parseCommand(expenses, savings, null, null);
 
         assertNull(invalidCommand);
     }
