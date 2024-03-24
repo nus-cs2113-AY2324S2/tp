@@ -23,22 +23,18 @@ public class Parser {
         switch (command) {
         case "bye":
             throw new EndProgramException();
-        case "exit":
-            Group.exitGroup();
-            break;
         case "help":
             // Help code here
             Help.printHelp();
             break;
         case "create":
-            try {
-                String groupName = argument;
-                Group.getOrCreateGroup(groupName);
-            } catch (IllegalStateException e) {
-                System.out.println(e.getMessage()); // Print the message instructing to exit current group.
-            }
+            GroupCommand.createGroup(argument);
             break;
         case "member":
+            GroupCommand.addMember(argument);
+            break;
+        case "exit":
+            GroupCommand.exitGroup();
             break;
         case "expense":
             try {
