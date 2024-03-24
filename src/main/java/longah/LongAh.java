@@ -13,9 +13,9 @@ import longah.commands.Command;
  */
 public class LongAh {
     private static Group group;
+    private static final Logging logger = new Logging();
 
     public static void init() {
-        Logging.initLogger();
         Logging.logInfo("Starting Pre-program preparations.");
         UI.showMessage("Welcome to LongAh!");
     }

@@ -7,31 +7,20 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 
 public class Logging {
-    private static Logger LongAhLogger = null;
+    private static Logger LongAhLogger = Logger.getLogger("LongAh");
 
     /**
      * Constructs a new Logging instance.
      * Creates a log file to store log data.
      */
-    private Logging() {
+    public Logging() {
         try {
-            LongAhLogger = Logger.getLogger("LongAh");
             FileHandler handler = new FileHandler("./log/LongAh.log");
             handler.setFormatter(new SimpleFormatter());
             LongAhLogger.addHandler(handler);
             LongAhLogger.setUseParentHandlers(false);
         } catch (IOException e) {
             LongAhLogger.log(Level.WARNING, "Log data may not be saved due to permission.");
-        }
-    }
-
-    /**
-     * Initializes the logger.
-     * Enables singleton pattern for the logger.
-     */
-    public static void initLogger() {
-        if (LongAhLogger == null) {
-            new Logging();
         }
     }
 
