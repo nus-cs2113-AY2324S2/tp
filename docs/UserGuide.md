@@ -12,7 +12,7 @@ help students prepare for the future challenges.
 
 1. Ensure you have Java 11 installed on your computer.
 2. Download the latest `econoCraft.jar` from [here](https://github.com/AY2324S2-CS2113-T11-4/tp/releases/download/v1.0/econoCraft.jar).
-3. Copy the file to the folder you want to use as the home folder for Zuke.
+3. Copy the file to the folder you want to use as the home folder for EconoCraft.
 4. Open a terminal and navigate to the folder where `econoCraft.jar` is located.
 5. Run the command `java -jar econoCraft.jar` to start the game. The chatbot should start and display the welcome message.
 6. Follow the game instructions to start playing.
