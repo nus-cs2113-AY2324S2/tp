@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.ui.UI;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,9 +13,11 @@ public class Duke {
         isFinished = b;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         UI.printGreeting();
         UserList userList = new UserList();
+        Storage.createFolder();
+        Storage.addExistingUsers(userList);
 
         while (!isFinished) {
             try {

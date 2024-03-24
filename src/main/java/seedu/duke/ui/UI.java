@@ -57,6 +57,10 @@ public class UI {
         System.out.println("The following task is added for all users: " + task.toString());
     }
 
+
+    public static void printLine() {
+        System.out.println("____________________________________________________________");
+
     /**
      * <p>
      * Prints the overlapping free time for each day in the format:
