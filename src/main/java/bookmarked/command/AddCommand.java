@@ -2,18 +2,22 @@ package bookmarked.command;
 
 import bookmarked.Book;
 import bookmarked.exceptions.emptyArgumentsException;
+import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AddCommand extends Command {
     private String newItem;
     private ArrayList<Book> listOfBooks;
     private String[] splitItem;
-    public AddCommand(String newItem, ArrayList<Book> listOfBooks, String[] splitItem){
+    private File bookDataFile;
+    public AddCommand(String newItem, ArrayList<Book> listOfBooks, String[] splitItem, File bookDataFile){
         this.newItem = newItem;
         this.listOfBooks = listOfBooks;
         this.splitItem = splitItem;
+        this.bookDataFile = bookDataFile;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class AddCommand extends Command {
             processAddCommand(newSplitBook, listOfBooks);
             assert newSplitBook.length >= 1 : "There should be an argument to the command";
             assert !this.listOfBooks.isEmpty() : "The current list of books should not be empty";
+            BookStorage.writeBookToTxt(this.bookDataFile, listOfBooks);
         } catch (emptyArgumentsException e) {
             Ui.printEmptyArgumentsMessage();
         }

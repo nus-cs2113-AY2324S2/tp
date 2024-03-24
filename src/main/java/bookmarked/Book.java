@@ -16,16 +16,12 @@ public class Book {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
     }
 
-    public void setBorrowed(boolean status) {
+    public void setBorrowed() {
         this.isBorrowed = true;
     }
 
     public void setReturned() {
         this.isBorrowed = false;
-    }
-
-    public String getBookDescription() {
-        return this.description;
     }
 
     @Override

@@ -12,11 +12,12 @@ import bookmarked.command.BorrowCommand;
 import bookmarked.command.HelpCommand;
 import bookmarked.command.ListCommand;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
-    public static void runCommand(String newItem, Scanner in, ArrayList<Book> listOfBooks) {
+    public static void runCommand(String newItem, Scanner in, ArrayList<Book> listOfBooks, File bookDataFile) {
         Command userCommand = new ListCommand(listOfBooks);
         while (!newItem.equalsIgnoreCase("bye")) {
             String[] splitItem = newItem.split(" ");
@@ -25,13 +26,13 @@ public class Parser {
             } else if (splitItem[0].matches("list")) {
                 userCommand = new ListCommand(listOfBooks);
             } else if (splitItem[0].matches("add")) {
-                userCommand = new AddCommand(newItem, listOfBooks, splitItem);
+                userCommand = new AddCommand(newItem, listOfBooks, splitItem, bookDataFile);
             } else if (splitItem[0].matches("delete")) {
-                userCommand = new DeleteCommand(splitItem, listOfBooks);
+                userCommand = new DeleteCommand(splitItem, listOfBooks, bookDataFile);
             } else if (splitItem[0].matches("borrow")) {
-                userCommand = new BorrowCommand(splitItem, listOfBooks);
+                userCommand = new BorrowCommand(splitItem, listOfBooks, bookDataFile);
             } else if (splitItem[0].matches("return")) {
-                userCommand = new ReturnCommand(splitItem, listOfBooks);
+                userCommand = new ReturnCommand(splitItem, listOfBooks, bookDataFile);
             } else if (splitItem[0].matches("find")) {
                 userCommand = new FindCommand(newItem, listOfBooks);
             } else {

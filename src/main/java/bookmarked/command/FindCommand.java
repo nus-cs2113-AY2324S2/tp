@@ -53,10 +53,10 @@ public class FindCommand extends Command {
 
         // filter books based on keyword
         for (Book currentBook : this.listOfBooks) {
-            if (!(currentBook.getBookDescription().contains(keyword))) {
+            if (!(currentBook.getName().contains(keyword))) {
                 continue;
             }
-            assert currentBook.getBookDescription().contains(keyword) : "current book should contain the keyword";
+            assert currentBook.getName().contains(keyword) : "current book should contain the keyword";
             numberOfBookFound =+ 1;
             bookFound.add(currentBook);
         }
@@ -70,7 +70,7 @@ public class FindCommand extends Command {
         logger.log(Level.INFO, "processing print of matching book lists");
         System.out.println("Here's the list of matching books in your library:");
         for (int i = 0; i < bookFound.size(); i += 1) {
-            String currentBookTitle = bookFound.get(i).getBookDescription();
+            String currentBookTitle = bookFound.get(i).getName();
             System.out.println(" " + (i + 1) + ". " + currentBookTitle);
         }
         logger.log(Level.INFO, "end processing");
