@@ -1,0 +1,52 @@
+@startuml DateStoring
+
+package student {
+
+    class StudentList {
+        {static} +masterStudentList:Student[]
+        {static} +recentlyDeletedList:Student[]
+        +studentList:Student[]
+        --
+        Methods omitted
+    }
+
+    class Student {
+        +name:String
+        -totalClassesAttended:int
+        --
+        Methods omitted
+    }
+
+    class SubjectGrade {
+        -subject:String
+        -grade:double
+        -classesAttended:int
+        --
+        Methods omitted
+    }
+
+    class Details {
+        #gender:String 
+        #phoneNumber:int
+        #lastPaymentDate:LocalDate
+        #remarks:String
+        --
+        Methods omitted
+    }
+
+    class StudentAttributes {
+        --
+        Methods omitted
+    }
+
+    StudentList o-- Student
+
+    Student "attributes"---> "1" StudentAttributes
+
+    StudentAttributes --down|> Details
+    StudentAttributes -->"0..*" SubjectGrade
+    StudentAttributes "student" --> "1" Student
+
+}
+
+@enduml
