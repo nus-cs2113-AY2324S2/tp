@@ -75,15 +75,15 @@ public class ReflectionManager {
     }
 
     /**
-     * Unaves a reflection question from favorites.
+     * Unsaves a reflection question from favorites.
      *
      * @param reflectionId The ID of the reflection question to be unsaved.
      * @throws ReflectException if an error occurs during saving.
      */
     public void unsaveReflectionQuestion(int reflectionId) throws ReflectException {
         try {
-
             ReflectionQuestion questionToUnsave = favoriteReflectionsList.get(reflectionId - 1);
+
             favoriteReflectionsList.removeReflectionQuestion(questionToUnsave);
             Storage.saveTasksToFile(FAVOURITE_QUESTIONS_FILE_PATH, favoriteReflectionsList.getReflectionList());
 
@@ -111,6 +111,8 @@ public class ReflectionManager {
      */
     public void printHelpMenu() {
         ArrayList<String> helpMenuInstructionsList = new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
+
+        assert helpMenuInstructionsList.size() == 5 : "Help menu should have 5 instructions";
 
         Ui.printList(helpMenuInstructionsList, "Commands for reflection feature:");
     }

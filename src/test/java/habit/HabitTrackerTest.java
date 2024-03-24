@@ -1,6 +1,7 @@
 package habit;
 
 import exceptions.HabitException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,11 @@ public class HabitTrackerTest {
     @BeforeEach
     public void setUp() {
         habitTracker = new HabitTracker();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        habitTracker.clearHabits();
     }
 
     @Test
@@ -24,10 +30,9 @@ public class HabitTrackerTest {
 
     @Test
     public void updateHabitCount_habitCountTwo_success() throws HabitException {
-        Habit habitThree = new Habit("Complete my homework");
-        habitTracker.addHabit(habitThree);
-        habitTracker.updateHabitCount("3", "2");
-        assertEquals(2, habitThree.getHabitCount());
-
+        Habit habitOne = new Habit("Complete my homework");
+        habitTracker.addHabit(habitOne);
+        habitTracker.updateHabitCount(1, "2");
+        assertEquals(2, habitOne.getHabitCount());
     }
 }

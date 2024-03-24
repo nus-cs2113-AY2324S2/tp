@@ -1,6 +1,7 @@
 package commands.reflectcommands;
 
 import commands.Command;
+import exceptions.ReflectException;
 import reflection.ReflectionManager;
 
 /**
@@ -14,8 +15,15 @@ public class GetReflectionQuestionsCommand implements Command {
      * Constructs a GetReflectionQuestionsCommand.
      *
      * @param reflectionManager The ReflectionManager instance to be used for retrieving questions.
+     * @param reflectionCommandArgs The string representing the reflection command arguments.
+     * @throws ReflectException if the command arguments is not empty.
      */
-    public GetReflectionQuestionsCommand(ReflectionManager reflectionManager) {
+    public GetReflectionQuestionsCommand(ReflectionManager reflectionManager, String reflectionCommandArgs)
+            throws ReflectException {
+
+        if (!reflectionCommandArgs.isBlank()) {
+            throw new ReflectException("Additional parameters for 'reflect get' command are not allowed.");
+        }
         this.reflectionManager = reflectionManager;
     }
 
