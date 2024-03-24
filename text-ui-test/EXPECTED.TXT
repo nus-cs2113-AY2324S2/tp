@@ -1,5 +1,6 @@
 Welcome to BookMarked, a one-stop app for all your librarian needs!
 Type /help to see a list of commands!
+Successfully create a storage file for books
 These are the current available features and the format that you need
 to follow to use it in using this software:
 1. To add books
