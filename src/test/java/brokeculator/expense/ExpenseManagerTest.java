@@ -67,9 +67,15 @@ public class ExpenseManagerTest {
         expenseManager.add(expense2);
         expenseManager.add(expense3);
 
-        assertEquals("--expense--pasta $10.00 (2021-10-10) [FOOD]" + System.lineSeparator()
-                + "--expense--bus $20.00 (2021-10-11) [TRANSPORT]" + System.lineSeparator()
-                + "--expense--movie $30.00 (2021-10-12) [ENTERTAINMENT]" + System.lineSeparator(),
-                expenseManager.getExpensesStringRepresentation());
+        String actualExpensesStringRepresentation = expenseManager.getExpensesStringRepresentation();
+
+        String expense1StringRepresentation = expense1.getStringRepresentation();
+        String expense2StringRepresentation = expense2.getStringRepresentation();
+        String expense3StringRepresentation = expense3.getStringRepresentation();
+        String expectedExpensesStringRepresentation = expense1StringRepresentation + System.lineSeparator()
+                + expense2StringRepresentation + System.lineSeparator()
+                + expense3StringRepresentation + System.lineSeparator();
+
+        assertEquals(actualExpensesStringRepresentation, expectedExpensesStringRepresentation);
     }
 }
