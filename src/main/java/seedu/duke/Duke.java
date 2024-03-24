@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
+        assert false : "dummy assertion set to fail.";
         Ui.printGreeting();
         boolean userSaysBye = false;
         TravelActivityList list = new TravelActivityList();
@@ -77,9 +78,6 @@ public class Duke {
             }
         }
     }
-
-
-
 }
 
 
