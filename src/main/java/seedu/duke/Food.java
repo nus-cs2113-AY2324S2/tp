@@ -11,7 +11,7 @@ public class Food extends Favourites {
         this.location = location;
         this.price = price;
         this.cuisine = cuisine;
-        this.completionStatus = "U";
+        this.completionStatus = completionStatus;
     }
 
     @Override

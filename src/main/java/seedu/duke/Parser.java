@@ -64,6 +64,8 @@ public class Parser {
             return new HelpCommand();
         case "me":
             return new UserDetailsCommand(); 
+        case "history":
+            return new ViewHistoryCommand();
         case "list":
             Ui.listCommand();
             Scanner scanner = new Scanner(System.in);

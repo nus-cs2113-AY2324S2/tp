@@ -9,7 +9,7 @@ public class Activity extends Favourites {
         super(name);
         this.location = location;
         this.price = price;
-        this.completionStatus = "U";
+        this.completionStatus = completionStatus;
     }
 
     @Override
