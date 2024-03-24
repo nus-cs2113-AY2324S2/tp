@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ActivityTest {
-
     @Test
     public void getActivityName_validName_setNewName() {
         String activityName = "Running";

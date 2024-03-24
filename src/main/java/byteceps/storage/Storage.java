@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -30,7 +32,7 @@ public class Storage {
             throws IOException {
         JSONObject jsonArchive = new JSONObject().put("exerciseManager", allExercises.getActivityList().toArray());
         jsonArchive.put("workoutManager", allWorkouts.getActivityList().toArray());
-        jsonArchive.put("weeklyProgram", weeklyProgram.getActivityList().toArray());
+        jsonArchive.put("weeklyProgram", weeklyProgram.exportToJSON());
 
         FileWriter fileWriter = new FileWriter(filePath.toFile());
         fileWriter.write(jsonArchive.toString());
@@ -59,9 +61,10 @@ public class Storage {
             loadExercises(allExercises, jsonArchive);
             loadWorkouts(allExercises, allWorkouts, jsonArchive);
             loadWeeklyProgram(allWorkouts, weeklyProgram, jsonArchive);
-
+            UserInterface.printMessage("Data loaded successfully!");
         } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
-             Exceptions.ActivityDoesNotExists | Exceptions.InvalidInput | JSONException e) {
+             Exceptions.ActivityDoesNotExists | Exceptions.InvalidInput | JSONException | NoSuchElementException e) {
+            System.out.println(e.getMessage());
             throw new IOException("Error processing JSON file");
         }
 
@@ -70,17 +73,15 @@ public class Storage {
     private static void loadWeeklyProgram(WorkoutManager allWorkouts, WeeklyProgramManager weeklyProgram,
         JSONObject jsonArchive)
             throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput, Exceptions.ActivityExistsException {
-        JSONArray jsonWeeklyProgram = jsonArchive.getJSONArray("weeklyProgram");
+        JSONObject jsonWeeklyProgram = jsonArchive.getJSONObject("weeklyProgram");
+
         assert jsonWeeklyProgram.length() == 7 : "Weekly program array must be length 7";
-        for (int i = 0; i < 7; i++) {
-            try {
-                JSONObject jsonWorkout = jsonWeeklyProgram.getJSONObject(i);
-                String workoutName = jsonWorkout.getString("activityName");
-                Workout workout = (Workout) allWorkouts.retrieve(workoutName);
-                weeklyProgram.assignWorkoutToDay(workout, i);
-            } catch (JSONException ignored) {
-                //ignored because jsonWeeklyProgram.getJSONObject(i) throws a JSONException
-                //when the object is null, meaning there is no workout assigned to that day of the week.
+        for (Iterator<String> it = jsonWeeklyProgram.keys(); it.hasNext(); ) {
+            String day = it.next();
+            String workout = (String) jsonWeeklyProgram.get(day);
+            if (!workout.isBlank()) {
+                Workout dayWorkout = (Workout) allWorkouts.retrieve(workout);
+                weeklyProgram.assignWorkoutToDay(dayWorkout, day, true);
             }
         }
     }
@@ -89,7 +90,7 @@ public class Storage {
             throws Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity,
             Exceptions.ActivityDoesNotExists {
         JSONArray jsonWorkoutArray = jsonArchive.getJSONArray("workoutManager");
-        for (int i = 0; i < jsonWorkoutArray.length(); i += 1) {
+        for (int i = 0; i < jsonWorkoutArray.length(); i++) {
             JSONObject jsonWorkout = jsonWorkoutArray.getJSONObject(i);
             String workoutName = jsonWorkout.getString("activityName");
             Workout workout = new Workout(workoutName);

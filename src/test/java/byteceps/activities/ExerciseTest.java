@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ExerciseTest {
-
     @Test
     public void toString_activityName_returnsActivityName() {
         String exerciseName = "Bench Press";
