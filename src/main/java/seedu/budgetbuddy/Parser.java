@@ -187,8 +187,10 @@ public class Parser {
                 assert !listType.isEmpty() : "List type should not be empty";
 
                 if (listType.equalsIgnoreCase("expenses")) {
+                    expenseList.loadExpensesFromFile(); // Load expenses right
                     return new ListExpenseCommand(expenseList);
                 } else if (listType.equalsIgnoreCase("savings")) {
+                    savingList.loadSavingsFromFile(); // Load savings
                     return new ListSavingsCommand(savingList, expenseList);
                 }
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {

@@ -1,0 +1,2 @@
+Salary | 5000.00
+Investments | 400.00

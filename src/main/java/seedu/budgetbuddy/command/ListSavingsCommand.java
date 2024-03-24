@@ -21,6 +21,7 @@ public class ListSavingsCommand extends Command {
 
     @Override
     public void execute() {
+        savings.loadSavingsFromFile(); // Load savings right before listing them
         savings.listSavings(this.filterCategory, this.expenses);
     }
 }

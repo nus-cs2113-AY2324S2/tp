@@ -1,5 +1,7 @@
 package seedu.budgetbuddy;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories;
+    protected Storage storage;
     public ExpenseList(ArrayList<Expense> expenses) {
         this.expenses = expenses;
         this.categories = new ArrayList<>(Arrays.asList("Housing",
@@ -25,6 +28,12 @@ public class ExpenseList {
         this.expenses = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Housing",
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt"); // Assuming the file name is expenses.txt
+        try {
+            this.expenses.addAll(storage.loadExpenses());
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing expense file found. Starting fresh.");
+        }
     }
 
     public int size() {
@@ -126,6 +135,12 @@ public class ExpenseList {
 
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
+        // Save the updated expenses list to the file
+        try {
+            storage.saveExpenses(expenses);
+        } catch (IOException e) {
+            System.out.println("Error saving expenses to file.");
+        }
     }
 
     public void editExpense(String category, int index, double amount, String description) {
@@ -162,6 +177,12 @@ public class ExpenseList {
         expenseToEdit.setCategory(category);
         expenseToEdit.setAmount(amount);
         expenseToEdit.setDescription(description);
+        // Save the updated expenses list to the file
+        try {
+            storage.saveExpenses(expenses);
+        } catch (IOException e) {
+            System.out.println("Error saving expenses to file.");
+        }
 
         System.out.println("Expense edited successfully.");
     }
@@ -171,8 +192,23 @@ public class ExpenseList {
         if (index >= 0 && index < expenses.size()){
             expenses.remove(index);
             System.out.println("Expense deleted successfully!");
+            // Save the updated expenses list to the file
+            try {
+                storage.saveExpenses(expenses);
+            } catch (IOException e) {
+                System.out.println("Error saving expenses to file.");
+            }
         } else {
             System.out.println("Invalid expense index.");
         }
     }
+
+    public void loadExpensesFromFile() {
+        try {
+            this.expenses = new ArrayList<>(storage.loadExpenses());
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing expense file found. Starting fresh.");
+        }
+    }
+
 }

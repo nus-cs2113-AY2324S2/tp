@@ -1,5 +1,7 @@
 package seedu.budgetbuddy;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -13,6 +15,7 @@ public class SavingList {
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
     protected double initialAmount;
+    protected Storage storage;
 
 
     public SavingList() {
@@ -20,6 +23,7 @@ public class SavingList {
         this.categories = new ArrayList<>(Arrays.asList("Salary", 
         "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
+        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
 
     public int size() {
@@ -44,6 +48,14 @@ public class SavingList {
             this.initialAmount = totalSavings;
         } catch (AssertionError e) {
             LOGGER.log(Level.SEVERE, "Error occurred while calculating total savings", e);
+        }
+    }
+
+    public void loadSavingsFromFile() {
+        try {
+            this.savings = new ArrayList<>(storage.loadSavings());
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing savings file found. Starting fresh.");
         }
     }
 
@@ -115,6 +127,12 @@ public class SavingList {
         if (!categories.contains(category)) {
             categories.add(category);
         }
+        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
+        try {
+            storage.saveSavings(savings);
+        } catch (IOException e) {
+            System.out.println("Error saving savings to file.");
+        }
     }
 
     public void editSaving(String category, int index, double amount) {
@@ -147,6 +165,12 @@ public class SavingList {
         savingToEdit.setAmount(amount);
 
         System.out.println("Saving edited successfully.");
+        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
+        try {
+            storage.saveSavings(savings);
+        } catch (IOException e) {
+            System.out.println("Error saving savings to file.");
+        }
     }
 
     public void reduceSavings(int index, double amount){
@@ -160,6 +184,12 @@ public class SavingList {
             }
         } else {
             System.out.println("Invalid saving index.");
+        }
+        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
+        try {
+            storage.saveSavings(savings);
+        } catch (IOException e) {
+            System.out.println("Error saving savings to file.");
         }
     }
 }
