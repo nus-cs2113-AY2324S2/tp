@@ -64,6 +64,25 @@ and extract out the necessary information if there is a match.
 This will be used by each command's respective parsing method and returns the relevant parsed `Command`
 object to `SuperTracker+handleCommands()`
 
+### New Command
+The following is a class diagram of the NewCommand and its relevant dependencies
+![NewCommandClass](uml-diagrams/NewCommandClass.png)
+The `NewCommand` class implements the `Command` interface and is responsible for handling the creation of new items in the `Inventory`.
+A NewCommand instance is created by the `ParseNewCommand` method called by Parser, which ensures that the provided parameters (name, quantity, price) are valid.
+
+#### Dependencies
+- `Item`: For creating the new item
+- `Inventory`: For adding the new item into the inventory
+- `Ui`: To notify the user about the successful execution of `NewCommand`
+
+The following sequence diagram shows the execution of a NewCommand
+![NewCommandSequence](uml-diagrams/NewCommandSequence.png)
+1. The `SuperTracker` class calls the `execute` method of `NewCommand`
+2. A new `Item` object with the given parameters (name, quantity, price) is created and returned to `NewCommand`
+3. The `put` method of the `Inventory` class is called to add the newly created item into the inventory
+4. The `newCommandSuccess` method of the `Ui` class is called to notify that `NewCommand` has been successfully executed
+
+
 ## Product scope
 ### Target user profile
 
