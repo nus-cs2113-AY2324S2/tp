@@ -127,7 +127,6 @@ public class SavingList {
         if (!categories.contains(category)) {
             categories.add(category);
         }
-        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
         try {
             storage.saveSavings(savings);
         } catch (IOException e) {
@@ -164,17 +163,16 @@ public class SavingList {
             return;
         }
 
+        Saving savingToEdit = null;
         try {
             // Retrieve the saving to edit
-            Saving savingToEdit = savings.get(index - 1);
+            savingToEdit = savings.get(index - 1);
 
             // Update the saving details
             savingToEdit.setCategory(category);
             savingToEdit.setAmount(amount);
 
-        System.out.println("Saving edited successfully.");
-        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
-        try {
+            System.out.println("Saving edited successfully.");
             storage.saveSavings(savings);
         } catch (IOException e) {
             System.out.println("Error saving savings to file.");
@@ -184,6 +182,7 @@ public class SavingList {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error occurred while editing saving at index " + index, e);
             System.out.println("An error occurred during saving edition. Please try again.");
+
         }
     }
 
@@ -199,7 +198,6 @@ public class SavingList {
         } else {
             System.out.println("Invalid saving index.");
         }
-        Storage storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt"); // Ensure this matches your file path
         try {
             storage.saveSavings(savings);
         } catch (IOException e) {
