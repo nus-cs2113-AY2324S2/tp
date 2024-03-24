@@ -12,6 +12,7 @@ public class StartTimerCommand implements Command {
 
     /**
      * Constructs a StartTimerCommand with the concerned focus timer.
+     *
      * @param timer FocusTimer object to be started.
      */
     public StartTimerCommand(FocusTimer timer) {
@@ -20,11 +21,12 @@ public class StartTimerCommand implements Command {
 
     /**
      * Executes the command bye setting the start timing of the timer.
+     *
      * @throws FocusException If the status of focus timer is already running.
      */
     @Override
     public void execute() throws FocusException {
-        if (focusTimer.getStatus()) {
+        if (focusTimer.getStartStatus()) {
             throw new FocusException("Error! Clock has already started.");
         }
         focusTimer.setStartTiming();
@@ -32,6 +34,7 @@ public class StartTimerCommand implements Command {
 
     /**
      * Determines whether the command is an exit message.
+     *
      * @return Returns false since this is not an exit command.
      */
     @Override

@@ -13,7 +13,9 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Reflection Manager
           - [`reflect get` - Get reflection questions](#get-reflection-questions-reflect-get)
           - [`reflect save` - Save favourite reflection question](#save-favourite-reflection-question-reflect-save)
+          - [`reflect unsave` - Unsave favourite reflection question](#unsave-favourite-reflection-question-reflect-unsave)
           - [`reflect list` - View favourite reflection questions](#view-favourite-reflection-questions-reflect-list)
+          - [`reflect help` - View reflection help menu](#view-reflection-help-menu-reflect-help)
         - Habit Tracker
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
@@ -32,7 +34,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
 3. To start `Wellness360` Using the `jar` file, go to the containing folder for Wellness360. 
 Then, on your terminal of choice, run:
 ```
--$ java -jar ip.jar
+-$ java -jar tp.jar
 ```
 
 ## Features
@@ -75,7 +77,7 @@ Example of usage:
 reflect get
 ```
 Expected outcome:  
-* Note that the questions are randomized.
+Note that the questions are randomized.
 ```
 ________________________________________________________________________________________________________________
 1. How do you overcome creative blocks or periods of stagnation?
@@ -115,6 +117,31 @@ How do you overcome creative blocks or periods of stagnation?
 ________________________________________________________________________________________________________________
 ```
 
+### Unsave favourite reflection question: `reflect unsave`
+Allows user to unsave reflection question from favourites list if the question is no longer relevant to the user. The favourites list is stored in memory as a text file.
+New users will have an empty favourites list file on load, but existing users can load back favourite questions from
+past sessions.
+
+Format:
+```
+reflect unsave [QUESTION_ID]
+```
+
+* The `reflect` and `unsave` keywords are case-sensitive. Use lower casing for these 2 keywords.
+* Questions that can be unsaved correspond to the reflection questions favourites list.
+
+Example of usage:
+```
+reflect unsave 1
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Got it. Unsaved reflection question from favourites:
+How do you overcome creative blocks or periods of stagnation?
+________________________________________________________________________________________________________________
+```
+
 ### View favourite reflection questions: `reflect list`
 Allow the user to view favourite reflection questions that have been saved.
 
@@ -137,6 +164,32 @@ Favourites list:
 1. How do you overcome creative blocks or periods of stagnation?
 2. How do you prioritize self-care and well-being in your daily life?
 3. Reflect on a time when you took a creative risk. What did you learn from the experience?
+________________________________________________________________________________________________________________
+```
+
+### View reflection help menu: `reflect help`
+Allows new users to check what commands are available for reflection feature and their formats.
+
+Format:
+```
+reflect help
+```
+* The `reflect` and `help` keywords are case-sensitive. Use lower casing for these 2 keywords.
+
+Example of usage:
+```
+reflect help
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Commands for reflection feature:
+1. reflect get: Get 5 random reflection questions
+2. reflect save <reflection_id>: Save reflection question by id to favourites list
+3. reflect unsave <reflection_id>: Unsave reflection question by id from favourites list
+4. reflect list: Retrieve questions from favourites list
+5. reflect help: Get help menu for reflect commands
 ________________________________________________________________________________________________________________
 ```
 

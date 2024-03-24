@@ -6,8 +6,9 @@ import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 
 public class FitnessCommandParser {
-    public static Command determineFitnessCommand(FitnessMotivator fitnessMotivator,
-                                                  String commandArgs) throws FitnessException {
+    public static Command determineFitnessCommand(FitnessMotivator fitnessMotivator, String commandArgs)
+            throws FitnessException {
+
         String[] userCommand = commandArgs.trim().split("\\s+", 1);
         String userFitnessCommand = userCommand[0].trim();
 

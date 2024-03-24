@@ -1,7 +1,6 @@
 package sleep;
 
 import ui.Ui;
-
 import java.util.ArrayList;
 
 /**
@@ -40,8 +39,37 @@ public class SleepCycleList {
         for (int i = 0; i < numberOfCycles - 1; i++) {
             sleepListMessage += (i + 1) + ". " + sleepCycleList.get(i) + System.lineSeparator();
         }
-        sleepListMessage += numberOfCycles + ". " + sleepCycleList.get(numberOfCycles - 1);
+        if (numberOfCycles > 0) {
+            sleepListMessage += numberOfCycles + ". " + sleepCycleList.get(numberOfCycles - 1);
+        } else {
+            sleepListMessage += "No sleep cycle has been added";
+        }
         Ui.printMessageWithSepNewLine(sleepListMessage);
+    }
+
+    public void getSleepCycle(String date) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            SleepCycle currSleep = sleepCycleList.get(i);
+            if (currSleep.getDateOfSleep().equals(date)){
+                Ui.printMessageWithSepNewLine("Hours slept on " + date + ": " + currSleep.getHoursSlept());
+                return;
+            }
+        }
+        Ui.printMessageWithSepNewLine("No entry found for the date.");
+    }
+
+    public void updateSleepCycle(String date, double newHours) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            SleepCycle currSleep = sleepCycleList.get(i);
+            if (currSleep.getDateOfSleep().equals(date)){
+                double oldHours = currSleep.getHoursSlept();
+                currSleep.setHoursOfSleep(newHours);
+                Ui.printMessageWithSepNewLine("Hours of sleep for " + date + " has been updated from " +
+                        oldHours + " to " + newHours);
+                return;
+            }
+        }
+        Ui.printMessageWithSepNewLine("No entry found for the date.");
     }
 
     public int getNumberOfCycles() {

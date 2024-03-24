@@ -22,6 +22,7 @@ public class ListSleepCommand implements Command {
             throw new SleepException("Please use proper format: " + System.lineSeparator()
                     + "sleep list");
         }
+        assert sleepCommandArgs.isEmpty() : "Sleep cycle should not be listed";
         this.sleepTracker = sleepTracker;
     }
 
