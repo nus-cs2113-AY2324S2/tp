@@ -4,6 +4,8 @@ import commands.Command;
 import commands.habitcommands.AddHabitCommand;
 import commands.habitcommands.DeleteHabitCommand;
 import commands.habitcommands.ListHabitsCommand;
+import commands.habitcommands.SetPriorityCommand;
+import commands.habitcommands.SortHabitsCommand;
 import commands.habitcommands.UpdateHabitCountCommand;
 import exceptions.HabitException;
 import habit.HabitTracker;
@@ -37,6 +39,10 @@ public class HabitCommandParser {
             return new UpdateHabitCountCommand(habitTracker, habitCommandArgs);
         case "delete":
             return new DeleteHabitCommand(habitTracker, habitCommandArgs);
+        case "set":
+            return new SetPriorityCommand(habitTracker, habitCommandArgs);
+        case "sort":
+            return new SortHabitsCommand(habitTracker);
         default:
             throw new HabitException("Unknown command");
         }
