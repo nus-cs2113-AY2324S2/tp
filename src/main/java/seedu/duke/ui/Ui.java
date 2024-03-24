@@ -62,16 +62,10 @@ public class Ui {
     public static void executeCommand() {
         String readUserCommand = userCommandReader.getCommandName();
         String[] readArgumentTokens = userCommandReader.getArgumentTokens();
-
         CommandList selectedCommand = CommandList.valueOf(readUserCommand);
-
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
-            break;
-        case SHOOT:
-            CommandList.executeShoot(readArgumentTokens);
-            roundCount++;
             break;
         case PENALTY:
             CommandList.executePenalty();

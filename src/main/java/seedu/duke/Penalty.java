@@ -31,11 +31,32 @@ public class Penalty {
         do {
             System.out.print(PENALTY_PROMPT);
             String directionString = Ui.IN.nextLine().trim();
-            userDirection = ShootDirectionConverter.convertToShootDirection(directionString);
+            userDirection = convertToShootDirection(directionString);
             if (userDirection == -1) {
                 System.out.println("Invalid direction! Please enter 0, 1, or 2.");
             }
         } while (userDirection == -1);
         return userDirection;
+    }
+
+    /**
+     * Converts the user's input direction to an integer value.
+     *
+     * @param direction The user's input direction as a string.
+     * @return The user's input direction as an integer (0, 1, or 2), or -1 if the input is invalid.
+     */
+    public static int convertToShootDirection(String direction) {
+        int directionIndex;
+        try {
+            directionIndex = Integer.parseInt(direction);
+        } catch (NumberFormatException e) {
+            return -1; // Invalid input
+        }
+
+        if (directionIndex >= Ai.getMinDirection() && directionIndex <= Ai.getMaxDirection()) {
+            return directionIndex;
+        } else {
+            return -1; // Invalid direction
+        }
     }
 }

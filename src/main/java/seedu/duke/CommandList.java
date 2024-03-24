@@ -4,7 +4,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public enum CommandList {
-    BYE, SHOOT, PENALTY
+    BYE, PENALTY
     //insert new user command name here
     ;
 
@@ -22,14 +22,6 @@ public enum CommandList {
         assert aiInput >= 0 && aiInput <= 2 :
                 "Illegal aiInput generated!";
         return userInput != aiInput;
-    }
-
-    public static void executeShoot(String[] readArgumentTokens) {
-        String selectedDirection = readArgumentTokens[0];
-        int selectedDirectionIndex = Integer.parseInt(selectedDirection);
-        boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);
-
-        Formatter.printGoalAfterShot(isScoreGoal);
     }
 
     public static void executePenalty() {
