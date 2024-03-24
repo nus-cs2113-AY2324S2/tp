@@ -5,13 +5,9 @@ import java.io.IOException;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
 
 import workouts.Workout;
-import workouts.WorkoutList;
 import health.Health;
-import health.HealthList;
 import utility.CustomExceptions;
 import utility.UiConstant;
 
@@ -79,7 +75,9 @@ public class DataFile {
      * @param healthData Health data to be written.
      */
     public static void writeHealthData(Health healthData) {
-
+        // bmi format: bmi|HEIGHT|WEIGHT|BMI_SCORE|DATE (NA if no date)
+        // period format: period|START|END|DURATION|NEXT
+        // appointment format: appointment|DATE|DESCRIPTION
     }
 
     /**
@@ -87,7 +85,12 @@ public class DataFile {
      * @param workoutData Workout data to be written.
      */
     public static void writeWorkoutData(Workout workoutData){
-
+        // run format: run|DISTANCE|TIME|PACE|DATE
+        /*
+        Gym Format:
+        gym|NUM_STATIONS|DATE|gym_1|STATION1_NAME|NUM_SETS|WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
+        |gym_2|STATION2_NAME...
+         */
     }
 
     /**
@@ -97,19 +100,22 @@ public class DataFile {
     public static void readDataFile() throws CustomExceptions.FileReadError {
         int itemCount = 0; // just for getting lineNumber, no other use
         try {
-            final Scanner READ_FILE = new Scanner(UiConstant.DATA_FILE_PATH);
-            while (READ_FILE.hasNext()) {
-                String [] words = READ_FILE.nextLine().split("\\|");
+            Scanner readFile = new Scanner(UiConstant.DATA_FILE_PATH);
+            while (readFile.hasNext()) {
+                String [] words = readFile.nextLine().split("\\|");
                 switch (words[0].trim()){
                 // case "macro":
                 //     processMacro(words);
                 //     break;
+
                 // case "sleep":
                 //     processSleep(words);
                 //     break;
+
                 // case "appointment":
                 //     processAppointment(words);
                 //     break;
+                
                 case "period":
                     // processPeriod(words);
                     break;
