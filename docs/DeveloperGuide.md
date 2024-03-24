@@ -21,9 +21,8 @@ The first and foremost component in the Student Tracking app is to ensure that t
 
 #### Design considerations
 - The parser must be effecive in breaking down the user's input into its constitutent commands, with further breakdown if an associated argument is added.
-- There must be a way to prevent users from adding multiple instances of a student with the same name, to prevent confusion.
-- The method of adding students to the master list must be straightforward and intuitive, allowing users to add a student without comprimising the integrity of the information.
-- Allowing the user to input blank fields in certain information slots so as to simulate real life scenarios, where not all the information is present at the time of registration. For example, while a valid phone number must be present to register a student to the master list, the remarks tab can be left empty.
+- The parser should be quick and effective in understanding the user's input, with simple prompts given to help the user in correctly parsing the command through the input parser.
+- Allowing the user to input optional arguments. For example, the user could type `view <student name>`, which takes in the "student name" as an optional argument. This is to increase the robustness of the program, which accounts for the two types of users, one who just types in `view`, and the other as formerly mentioned above. 
 - Error handling must be intuitive for the user, so that appropriate error messages are produced if the user does not input a valid command. The error handling should also be robust, to account for the event a user is incapable in following instructions.
 
 #### Implementation and rationale
