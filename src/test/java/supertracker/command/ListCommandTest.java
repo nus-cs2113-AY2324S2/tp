@@ -14,7 +14,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListCommandTest {
-    private static final String LINE_SEPARATOR = "\r\n";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String LIST_INTRO = "     There are 3 unique items in your inventory:" + LINE_SEPARATOR;
     private static final String INDEX_1 = "     1.";
     private static final String INDEX_2 = "     2.";
@@ -157,5 +157,4 @@ public class ListCommandTest {
     public void restoreStreams() {
         System.setOut(originalOut);
     }
-
 }
