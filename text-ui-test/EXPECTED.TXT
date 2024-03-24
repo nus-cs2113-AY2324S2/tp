@@ -3,4 +3,3 @@ Enter command: Enter command: Enter command: Amy: $0.0
 Brandon: $0.0
 Enter command: Enter command: Best Way to Solve Debts:
 Brandon owes Amy $5.0
-Enter command: 
