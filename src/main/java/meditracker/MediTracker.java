@@ -17,15 +17,14 @@ import java.util.List;
  */
 public class MediTracker {
 
-    private Ui ui;
     private MedicationManager medicationManager;
     private DailyMedicationManager dailyMedicationManager;
 
     /**
-     * Constructs a new MediTracker object and initializes the user interface.
+     * Constructs a new MediTracker object and initializes both medicationManager and
+     * dailyMedicationManager.
      */
     public MediTracker() {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(medicationManager);
     }
@@ -36,7 +35,6 @@ public class MediTracker {
      * @param dailyMedicationList Daily medication
      */
     public MediTracker(List<String> dailyMedicationList) {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
     }
@@ -55,14 +53,14 @@ public class MediTracker {
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
         FileReaderWriter.loadMediTrackerData(medicationManager);
-        ui.showWelcomeMessage();
+        Ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
+            String fullCommand = Ui.readCommand();
+            Ui.showLine();
             try {
                 Command command = CommandParser.parse(fullCommand);
-                command.execute(medicationManager, dailyMedicationManager, ui);
+                command.execute(medicationManager, dailyMedicationManager);
                 isExit = command.isExit();
             } catch (ArgumentNotFoundException | MediTrackerException ex) {
                 System.out.println(ex.getMessage());

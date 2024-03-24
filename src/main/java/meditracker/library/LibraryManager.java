@@ -38,14 +38,12 @@ public class LibraryManager {
 
     /**
      * Prints the search results to the user interface.
-     *
-     * @param ui The user interface to print the search results to.
      */
-    public void printSearchResults(Ui ui) {
+    public void printSearchResults() {
         if (searchResults.isEmpty()) {
-            ui.showNoSearchResultsMessage();
+            Ui.showNoSearchResultsMessage();
         } else {
-            ui.showSearchResults(searchResults);
+            Ui.showSearchResults(searchResults);
         }
     }
 }

@@ -74,14 +74,13 @@ public class AddCommand extends Command {
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
-     * @param ui                     The Ui object used to interact with the user interface.
      * @throws NullPointerException   if any of the required objects are null.
      * @throws NumberFormatException  if there is an error in parsing numeric values.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) throws NullPointerException, NumberFormatException {
+                        DailyMedicationManager dailyMedicationManager) throws NullPointerException,
+            NumberFormatException {
         setMedicineAttributes();
         Medication medication = new Medication(medicationName, medicationQuantity, medicationDosage,
                 medicationDosageMorning, medicationDosageAfternoon, medicationDosageEvening, expiryDate,
@@ -91,7 +90,7 @@ public class AddCommand extends Command {
         medicationManager.addMedication(medication);
         dailyMedicationManager.addDailyMedication(dailyMedication);
         assertionTest(medicationManager, dailyMedicationManager);
-        ui.showAddCommandMessage();
+        Ui.showAddCommandMessage();
     }
 
     /**
