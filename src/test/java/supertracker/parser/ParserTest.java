@@ -26,6 +26,17 @@ public class ParserTest {
     }
 
     @Test
+    public void parseCommand_validNewCommandInput_newCommand_withExpiry() throws TrackerException {
+        String[] inputs = {"new n/apple q/50 p/99.5 e/22/06/2024", "new e/12/11/2033 p/99.5 q/23 n/ball",
+                "new q/88 e/02/12/2024 n/cookie p/1.50"};
+
+        for (String input : inputs) {
+            Command resultCommand = Parser.parseCommand(input);
+            assertInstanceOf(NewCommand.class, resultCommand);
+        }
+    }
+
+    @Test
     public void parseCommand_validUpdateCommandInput_updateCommand() throws TrackerException {
         Command newItem = Parser.parseCommand("new n/banana milkshake q/11 p/12.2");
         newItem.execute();

@@ -10,6 +10,8 @@ import supertracker.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,16 +30,24 @@ public class ListCommandTest {
     private static final String A_PRICE = "    Price: $2.00";
     private static final String B_PRICE = "    Price: $1.00";
     private static final String C_PRICE = "    Price: $3.00";
+    private static final String A_EX_DATE = "    Expiry Date: 01/01/2113";
+    private static final String B_EX_DATE = "    Expiry Date: 13/03/2023";
+    private static final String C_EX_DATE = "    Expiry Date: 22/08/2013";
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
     @BeforeAll
     public static void setUp() {
         Inventory.clear();
+        LocalDate dateA = LocalDate.parse("01/01/2113", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dateB = LocalDate.parse("13/03/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dateC = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
         Command[] commands = {
-            new NewCommand("Apple", 3, 2.00),
-            new NewCommand("Berry", 2, 1.00),
-            new NewCommand("Cake", 1, 3.00)
+            new NewCommand("Apple", 3, 2.00, dateA),
+            new NewCommand("Berry", 2, 1.00, dateB),
+            new NewCommand("Cake", 1, 3.00, dateC)
         };
         for (Command c : commands) {
             c.execute();

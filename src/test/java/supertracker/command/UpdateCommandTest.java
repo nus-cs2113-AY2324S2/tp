@@ -7,6 +7,9 @@ import supertracker.TrackerException;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,11 +25,12 @@ public class UpdateCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         int newQuantity = 200;
         double newPrice = 3.00;
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
         Command updateCommand = new UpdateCommand(name, newQuantity, newPrice);
         updateCommand.execute();
@@ -44,8 +48,9 @@ public class UpdateCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
 
         String userInput = "update n/Milk p/-1";
@@ -57,8 +62,9 @@ public class UpdateCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
 
         String userInput = "update n/Milk p/";
@@ -70,8 +76,9 @@ public class UpdateCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
 
         String userInput = "update n/apple q/20 p/3";
