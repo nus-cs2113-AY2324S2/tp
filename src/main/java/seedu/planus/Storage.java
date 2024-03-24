@@ -10,12 +10,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Deals with file access.
  */
 public class Storage {
-
+    private static Logger logger = Logger.getLogger("myLogger");
     public static final String FOLDER_PATH = "./data/";
     public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
     public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
@@ -31,6 +33,7 @@ public class Storage {
             fw.write(timetable.toString());
             fw.close();
         } catch (IOException e) {
+            logger.log(Level.WARNING, "Failed writing timetable to file.");
             Ui.printFailedToWrite();
         }
     }
@@ -56,12 +59,14 @@ public class Storage {
                 InputStream in = Thread.currentThread().getContextClassLoader()
                         .getResourceAsStream(timetableName + ".csv");
                 try {
+                    assert in != null : "The input stream is null.";
                     Files.copy(in, filePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
+        assert Files.exists(filePath) : "Target file creation failed: " + timetableName + ".csv";
 
         File f = new File(filePathName);
         Scanner s = null;
