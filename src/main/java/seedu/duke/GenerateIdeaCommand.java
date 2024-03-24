@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.io.IOException;
-
 import seedu.duke.exceptions.FlirtForkException;
 
 public class GenerateIdeaCommand extends Command {
