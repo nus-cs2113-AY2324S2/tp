@@ -40,6 +40,9 @@ public class HangMan extends Game {
                 System.out.println("Thank you!! Hope you had flying good time.");
                 break;
             }
+            if (userInput.equalsIgnoreCase("help")) {
+                getHelp();
+            }
             if (!allGuessedLetters.contains(userInput)) {
                 addGuess(userInput);
                 printHangMan();
@@ -213,5 +216,10 @@ public class HangMan extends Game {
                 state += 1;
             }
         }
+    }
+
+    @Override public void getHelp() {
+        System.out.println("How to play:");
+        //show how to play
     }
 }
