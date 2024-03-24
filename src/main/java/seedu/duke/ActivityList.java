@@ -23,15 +23,20 @@ public class ActivityList {
     }
 
     public Activity getRandomActivity() {
-        Random random = new Random();
-        int activityIndex = random.nextInt(9);
-        return activities.get(activityIndex);
+        Activity randomActivity;
+        do {
+            Random random = new Random();
+            int activityIndex = random.nextInt(activities.size());
+            randomActivity = activities.get(activityIndex);
+        } while (randomActivity.completionStatus.equals("C"));
+        return randomActivity;
     }
 
     public Activity getFilteredActivity(String preferredLocation, String preferredPrice) {
         ArrayList<Activity> filteredActivities = new ArrayList<>();
         for (Activity eachActivity : activities) {
-            if (eachActivity.location.equals(preferredLocation) && eachActivity.price.equals(preferredPrice)) {
+            if (eachActivity.location.equals(preferredLocation) && 
+                    eachActivity.price.equals(preferredPrice) && eachActivity.completionStatus.equals("U")) {
                 filteredActivities.add(eachActivity);
             }
         }

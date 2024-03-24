@@ -11,7 +11,7 @@ public class AddFoodCommand extends Command{
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage) throws FlirtForkException {
-        Food food = new Food(description, "default location", "default price", "default cuisine");
+        Food food = new Food(description, "default location", "default price", "default cuisine", "U");
         favourites.addFavourite(food);
         System.out.println("Cupid's arrow strikes! This is now in your favourites. \n" + food);
         ui.showFavourite("Guess what? You've collected " + favourites.getFavourites().size() +
