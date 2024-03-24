@@ -33,9 +33,13 @@ public class FitnessMotivator {
         return message;
     }
 
-    public String addExercises() {
-        //
-        return null;
+    public void addExercises(String commandArgs) {
+        String[] newCommandArgs = commandArgs.split(", ", 4);
+        Exercise newExercise = allExercises.newExercise(newCommandArgs);
+        allExercises.add(newExercise);
+        String message = "I have added the following exercise into our list!" +
+                System.lineSeparator() + newExercise;
+        Ui.printMessageWithSepNewLine(message);
     }
 
 }

@@ -3,6 +3,8 @@ package fitness;
 import storage.Storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ExerciseList {
 
@@ -79,18 +81,27 @@ public class ExerciseList {
         for (String s: data) {
             String[] parts = s.split(": |, | sets & | reps");
             if (parts.length == 4) {
-                String type = parts[0].toUpperCase();
-                ExerciseType exerciseType = ExerciseType.valueOf(type);
-                String exerciseName = parts[1];
-                String sets = parts[2];
-                String reps = parts[3];
-                allExercises.add(new Exercise(exerciseName, exerciseType, sets, reps));
+                allExercises.add(newExercise(parts));
             }
         }
     }
 
+    /**
+     * This method adds an exercise object into the full list of exercises. It also sorts the list
+     * in order of exercise type before saving it into storage.
+     *
+     * @param exercise An Exercise object for ExerciseList
+     */
     public void add(Exercise exercise) {
         allExercises.add(exercise);
+
+        // The comparing method extracts the exercise type from each exercise object and then
+        // compares them based on their type
+        Comparator<Exercise> comparator = Comparator.comparing(Exercise::getType);
+
+        // The sort method then sorts the list based on the comparator specified before saving
+        allExercises.sort(comparator);
+        Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
     }
 
     public Exercise get(ExerciseType type, int index) {
@@ -114,7 +125,13 @@ public class ExerciseList {
         return x;
     }
 
-    public void saveExercises() {
-        Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
+    public Exercise newExercise(String[] parameters) {
+        assert parameters.length == 4 : "Incorrect Parameters for a new Exercise Object";
+        String type = parameters[0].toUpperCase();
+        ExerciseType exerciseType = ExerciseType.valueOf(type);
+        String exerciseName = parameters[1].trim();
+        String sets = parameters[2].trim();
+        String reps = parameters[3].trim();
+        return new Exercise(exerciseName, exerciseType, sets, reps);
     }
 }
