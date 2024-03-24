@@ -1,38 +1,29 @@
-# Developer Guide
+### NewCommand Class
 
-## Acknowledgements
+<img src="images/ArchitectureDiagram.png" width="280" />
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The ***Add feature*** is facilitated by stockPal.
 
-## Design & implementation
+The NewCommand class is responsible for adding a new product to the inventory in the StockPal application.
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+**Attributes**
+* name: The name of the product. 
+* quantity: The initial quantity of the product. 
+* price: The price of the product. 
+* description: The description of the product.
+
+**Methods**
+* `NewCommand`: Constructor for creating a new instance of the NewCommand class. 
+* `execute`: Method to add the new product to the product list. 
+* `createProduct`: Method to create a new product with a unique product ID.
 
 
-## Product scope
-### Target user profile
+**Usage**
 
-{Describe the target user profile}
+How the `newCommand` class works:
 
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+1. User will input the necessary parameters:
+   `name`, `quantity`, `price`, and `description`.
+2. `newCommand()` constructor will be invoked to assign attributes' values.
+3. `Execute()` will be invoked. A new stock will be created with `createProduct()`
+and added to the list. 

@@ -1,0 +1,59 @@
+@startuml
+
+participant NewCommand
+participant ProductList
+participant Product
+
+activate NewCommand
+NewCommand -> ProductList: getSize()
+activate ProductList
+ProductList --> NewCommand: sizeOfArray
+deactivate ProductList
+
+alt sizeOfArray == 0
+    NewCommand -> Product: new Product(name, quantity, price, description, 1)
+    activate Product
+    Product --> NewCommand: toAdd
+    deactivate Product
+
+else sizeOfArray == productList.get(sizeOfArray - 1).getPid().getPid()
+    NewCommand -> ProductList: get(sizeOfArray - 1)
+    activate ProductList
+    ProductList --> NewCommand: lastProduct
+    deactivate ProductList
+
+    NewCommand -> Product: getPid()
+    activate Product
+    Product --> NewCommand: lastPid
+    deactivate Product
+
+    NewCommand -> Product: new Product(name, quantity, price, description, lastPid)
+    activate Product
+    Product --> NewCommand: toAdd
+    deactivate Product
+
+else
+    NewCommand -> ProductList: get(sizeOfArray - 1)
+    activate ProductList
+    ProductList --> NewCommand: lastProduct
+    deactivate ProductList
+
+    NewCommand -> Product: getPid()
+    activate Product
+    Product --> NewCommand: lastPid
+    deactivate Product
+
+    NewCommand -> Product: new Product(name, quantity, price, description, lastPid + 1)
+    activate Product
+    Product --> NewCommand: toAdd
+    deactivate Product
+end
+
+NewCommand -> ProductList: addProduct(toAdd)
+activate ProductList
+ProductList --> NewCommand: productList
+deactivate ProductList
+
+deactivate NewCommand
+
+@enduml
