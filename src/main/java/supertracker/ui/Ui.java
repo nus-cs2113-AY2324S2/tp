@@ -5,8 +5,12 @@ import supertracker.item.Item;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import java.util.List;
+
 public class Ui {
     private static final String LINE = "    --------------------------------------------------------------------------";
+    private static final String QUANTITY_FLAG = "q";
+    private static final String PRICE_FLAG = "p";
     private static final String EMPTY_LIST_MESSAGE = "Nothing to list! No items in inventory!";
     private static final String SINGLE_ITEM_LIST_MESSAGE= "There is 1 unique item in your inventory:";
     private static final String INVALID_COMMAND_MESSAGE = "Sorry! Invalid command!";
@@ -14,6 +18,7 @@ public class Ui {
     private static final String FAREWELL_MESSAGE = "Goodbye!";
     private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
     private static final String FIND_OPENING_MESSAGE = "Here are your found items:";
+    private static final String REPORT_NO_ITEMS_OPENING = "There are no items that fit the criteria!";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -46,6 +51,14 @@ public class Ui {
 
     private static String removeItemOpening(Item item, int quantityRemoved) {
         return quantityRemoved + " " + item.getName() + " removed from inventory!";
+    }
+
+    private static String reportLowStockOpening(Item reportItem, int count) {
+        return count + ". Name: " + reportItem.getName();
+    }
+
+    private static String reportLowStockQuantityMessage(Item reportItem) {
+        return "   Current Quantity: " + reportItem.getQuantity();
     }
 
     public static void printIndent(String string) {
@@ -101,6 +114,21 @@ public class Ui {
         printIndent(quantityMessage(item));
     }
 
+    public static void reportCommandSuccess(List<Item> reportItems, String reportType) {
+        if (reportItems.isEmpty()) {
+            printIndent(REPORT_NO_ITEMS_OPENING);
+        } else {
+            int count = 1;
+            for (Item item : reportItems) {
+                if (reportType.equals("low stock")) {
+                    printIndent(reportLowStockOpening(item, count));
+                    printIndent(reportLowStockQuantityMessage(item));
+                }
+                count += 1;
+            }
+        }
+    }
+
     public static void listIntro(int size) {
         assert size >= 0;
         if (size == 0) {
@@ -124,9 +152,9 @@ public class Ui {
         String priceString = "    Price: " + item.getPriceString();
 
         if (hasQuantity && hasPrice) {
-            if (firstParam.equals("q")) {
+            if (firstParam.equals(QUANTITY_FLAG)) {
                 stringToPrint += (quantityString + priceString);
-            } else if (firstParam.equals("p")) {
+            } else if (firstParam.equals(PRICE_FLAG)) {
                 stringToPrint += (priceString + quantityString);
             }
         } else if (hasQuantity) {
@@ -149,6 +177,11 @@ public class Ui {
         String priceString = "    Price: " + item.getPriceString();
 
         stringToPrint += (priceString + quantityString);
+        printIndent(stringToPrint);
+    }
+
+    public static void noItemFound(String name) {
+        String stringToPrint = "So sorry, Your item: " + name + " could not be found.";
         printIndent(stringToPrint);
     }
 }

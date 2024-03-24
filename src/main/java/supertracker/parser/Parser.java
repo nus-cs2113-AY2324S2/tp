@@ -2,15 +2,16 @@ package supertracker.parser;
 
 import supertracker.TrackerException;
 import supertracker.command.AddCommand;
+import supertracker.command.Command;
+import supertracker.command.DeleteCommand;
+import supertracker.command.FindCommand;
 import supertracker.command.InvalidCommand;
 import supertracker.command.ListCommand;
 import supertracker.command.NewCommand;
 import supertracker.command.QuitCommand;
 import supertracker.command.RemoveCommand;
+import supertracker.command.ReportCommand;
 import supertracker.command.UpdateCommand;
-import supertracker.command.DeleteCommand;
-import supertracker.command.Command;
-import supertracker.command.FindCommand;
 import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
@@ -30,6 +31,7 @@ public class Parser {
     private static final String ADD_COMMAND = "add";
     private static final String REMOVE_COMMAND = "remove";
     private static final String FIND_COMMAND = "find";
+    private static final String REPORT_COMMAND = "report";
     private static final double ROUNDING_FACTOR = 100.0;
     private static final String BASE_FLAG = "/";
     private static final String NAME_FLAG = "n";
@@ -43,6 +45,16 @@ public class Parser {
     private static final String EX_DATE_FORMAT = "dd/MM/yyyy";
     private static final String INVALID_EX_DATE_FORMAT = "dd/MM/yyyyy";
     private static final String INVALID_EX_DATE = "01/01/99999";
+    private static final String SORT_QUANTITY_FLAG = "sq";
+    private static final String SORT_PRICE_FLAG = "sp";
+    private static final String REVERSE_FLAG = "r";
+    private static final String SORT_QUANTITY_GROUP = "sortQuantity";
+    private static final String SORT_PRICE_GROUP = "sortPrice";
+    private static final String REVERSE_GROUP = "reverse";
+    private static final String REPORT_TYPE_FLAG = "r";
+    private static final String REPORT_TYPE_GROUP = "reportType";
+    private static final String THRESHOLD_FLAG = "t";
+    private static final String THRESHOLD_GROUP = "threshold";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
             + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) "
@@ -51,13 +63,18 @@ public class Parser {
             + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + ".*)?) "
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String LIST_COMMAND_REGEX = "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG
-            + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
+            + ".*)?) (?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + SORT_QUANTITY_GROUP + ">(?:" + SORT_QUANTITY_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + SORT_PRICE_GROUP + ">(?:" + SORT_PRICE_FLAG + BASE_FLAG + ".*)?) "
+            + "(?<" + REVERSE_GROUP + ">(?:" + REVERSE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String DELETE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
     private static final String ADD_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
     private static final String REMOVE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) ";
     private static final String FIND_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) ";
+    private static final String REPORT_COMMAND_REGEX = REPORT_TYPE_FLAG + BASE_FLAG + "(?<" + REPORT_TYPE_GROUP +
+            ">.*) " + THRESHOLD_FLAG + BASE_FLAG + "(?<" + THRESHOLD_GROUP + ">.*) ";
 
 
     /**
@@ -109,6 +126,9 @@ public class Parser {
         case FIND_COMMAND:
             command = parseFindCommand(params);
             break;
+        case REPORT_COMMAND:
+            command = parseReportCommand(params);
+            break;
         default:
             command = new InvalidCommand();
             break;
@@ -127,15 +147,17 @@ public class Parser {
         StringBuilder flagBuilder = new StringBuilder();
         for (String flag : paramFlags) {
             flagBuilder.append(flag);
+            flagBuilder.append("|");
         }
+        flagBuilder.deleteCharAt(flagBuilder.length() - 1);
         String flags = flagBuilder.toString();
 
-        String[] params = inputParams.split("(?=[" + flags + "]" + BASE_FLAG + ")");
+        String[] params = inputParams.split("(?= (" + flags + ")" + BASE_FLAG + ")");
         StringBuilder stringPattern = new StringBuilder();
 
         for (String paramFlag : paramFlags) {
             for (String p : params) {
-                if (p.startsWith(paramFlag + BASE_FLAG)) {
+                if (p.trim().startsWith(paramFlag + BASE_FLAG)) {
                     stringPattern.append(p.trim());
                     break;
                 }
@@ -259,7 +281,7 @@ public class Parser {
     }
 
     private static Command parseListCommand(String input) throws TrackerException {
-        String[] flags = {QUANTITY_FLAG, PRICE_FLAG};
+        String[] flags = {QUANTITY_FLAG, PRICE_FLAG, SORT_QUANTITY_FLAG, SORT_PRICE_FLAG, REVERSE_FLAG};
         Matcher matcher = getPatternMatcher(LIST_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
@@ -268,6 +290,9 @@ public class Parser {
 
         boolean hasQuantity = !matcher.group(QUANTITY_GROUP).isEmpty();
         boolean hasPrice = !matcher.group(PRICE_GROUP).isEmpty();
+        boolean hasSortQuantity = !matcher.group(SORT_QUANTITY_GROUP).isEmpty();
+        boolean hasSortPrice = !matcher.group(SORT_PRICE_GROUP).isEmpty();
+        boolean reverse = !matcher.group(REVERSE_GROUP).isEmpty();
 
         // to check if q comes before p or vice versa
         String firstParam = "";
@@ -277,7 +302,20 @@ public class Parser {
             firstParam = quantityPosition < pricePosition ? QUANTITY_FLAG : PRICE_FLAG;
         }
 
-        return new ListCommand(hasQuantity, hasPrice, firstParam);
+        // sort by whichever sorting method comes first
+        // if sorting method is unspecified then sort by alphabet
+        String sortBy = "";
+        if (hasSortQuantity && hasSortPrice) {
+            int sortQuantityPosition = input.indexOf(SORT_QUANTITY_FLAG + BASE_FLAG);
+            int sortPricePosition = input.indexOf(SORT_PRICE_FLAG + BASE_FLAG);
+            sortBy = sortQuantityPosition < sortPricePosition ? QUANTITY_FLAG : PRICE_FLAG;
+        } else if (hasSortQuantity) {
+            sortBy = QUANTITY_FLAG;
+        } else if (hasSortPrice) {
+            sortBy = PRICE_FLAG;
+        }
+
+        return new ListCommand(hasQuantity, hasPrice, firstParam, sortBy, reverse);
     }
 
     private static Command parseDeleteCommand(String input) throws TrackerException {
@@ -385,11 +423,37 @@ public class Parser {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
-        if (!Inventory.contains(name)) {
-            throw new TrackerException(name + ErrorMessage.ITEM_NOT_IN_LIST_FIND);
+        return new FindCommand(name);
+    }
+
+    private static Command parseReportCommand(String input) throws TrackerException {
+        String[] flags = {REPORT_TYPE_FLAG, THRESHOLD_FLAG};
+        Matcher matcher = getPatternMatcher(REPORT_COMMAND_REGEX, input, flags);
+
+        if (!matcher.matches()) {
+            throw new TrackerException(ErrorMessage.INVALID_REPORT_FORMAT);
         }
 
-        return new FindCommand(name);
+        String reportType = matcher.group(REPORT_TYPE_GROUP).trim();
+        String thresholdString = matcher.group(THRESHOLD_GROUP).trim();
+
+        if (reportType.isEmpty() || thresholdString.isEmpty()) {
+            throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        int threshold;
+
+        try {
+            threshold = Integer.parseInt(thresholdString);
+        } catch (NumberFormatException e) {
+            throw new TrackerException(ErrorMessage.INVALID_NUMBER_FORMAT);
+        }
+
+        if (threshold < 0) {
+            throw new TrackerException(ErrorMessage.QUANTITY_TOO_SMALL);
+        }
+
+        return new ReportCommand(reportType, threshold);
     }
 
 }

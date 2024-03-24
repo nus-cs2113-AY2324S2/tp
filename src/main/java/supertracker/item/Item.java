@@ -2,6 +2,8 @@ package supertracker.item;
 
 import  java.time.LocalDate;
 
+import java.util.Comparator;
+
 public class Item {
     private String name;
     private int quantity;
@@ -33,5 +35,17 @@ public class Item {
 
     public String getPriceString() {
         return "$" + String.format("%.2f", price);
+    }
+
+    public static Comparator<Item> sortByName() {
+        return Comparator.comparing(Item::getName);
+    }
+
+    public static Comparator<Item> sortByQuantity() {
+        return Comparator.comparingInt(Item::getQuantity);
+    }
+
+    public static Comparator<Item> sortByPrice() {
+        return Comparator.comparingDouble(Item::getPrice);
     }
 }

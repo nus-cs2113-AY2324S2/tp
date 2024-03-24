@@ -9,6 +9,7 @@ public class ErrorMessage {
     public static final String INVALID_NEW_ITEM_FORMAT = "Invalid new command format!";
     public static final String INVALID_ADD_FORMAT = "Invalid add command format!";
     public static final String INVALID_REMOVE_FORMAT = "Invalid remove command format!";
+    public static final String INVALID_REPORT_FORMAT = "Invalid report command format!";
     public static final String ITEM_NOT_IN_LIST_UPDATE =
             " does not exist in inventory. Unable to update its values. =(";
     public static final String ITEM_NOT_IN_LIST_DELETE =
@@ -22,7 +23,7 @@ public class ErrorMessage {
     public static final String ITEM_IN_LIST_NEW = " already exists in inventory. Use the update command instead.";
     public static final String INVALID_NUMBER_FORMAT = "Invalid values for price/quantity";
     public static final String INVALID_DATE_FORMAT = "Invalid date. Follow \"dd/mm/yyyy\" format";
-    public static final String QUANTITY_TOO_SMALL = "Quantity should be more than 0";
+    public static final String QUANTITY_TOO_SMALL = "Quantity should be more than equal to 0";
     public static final String PRICE_TOO_SMALL = "Price should be more than 0";
     public static final String FILE_HANDLER_ERROR = "Error setting up file handler";
     public static final String INVALID_FIND_FORMAT =
