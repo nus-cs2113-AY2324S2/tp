@@ -2,6 +2,8 @@ package supertracker.ui;
 
 import supertracker.item.Item;
 
+import java.util.List;
+
 public class Ui {
     private static final String LINE = "    --------------------------------------------------------------------------";
     private static final String QUANTITY_FLAG = "q";
@@ -13,6 +15,7 @@ public class Ui {
     private static final String FAREWELL_MESSAGE = "Goodbye!";
     private static final String BASIC_ERROR_MESSAGE = "Oh no! An error has occurred in your input";
     private static final String FIND_OPENING_MESSAGE = "Here are your found items:";
+    private static final String REPORT_NO_ITEMS_OPENING = "There are no items that fit the criteria!";
 
     private static String listSize(int size){
         return ("There are " + size + " unique items in your inventory:");
@@ -43,6 +46,14 @@ public class Ui {
 
     private static String removeItemOpening(Item item, int quantityRemoved) {
         return quantityRemoved + " " + item.getName() + " removed from inventory!";
+    }
+
+    private static String reportLowStockOpening(Item reportItem, int count) {
+        return count + ". Name: " + reportItem.getName();
+    }
+
+    private static String reportLowStockQuantityMessage(Item reportItem) {
+        return "   Current Quantity: " + reportItem.getQuantity();
     }
 
     public static void printIndent(String string) {
@@ -93,6 +104,21 @@ public class Ui {
         assert quantityRemoved >= 0;
         printIndent(removeItemOpening(item, quantityRemoved));
         printIndent(quantityMessage(item));
+    }
+
+    public static void reportCommandSuccess(List<Item> reportItems, String reportType) {
+        if (reportItems.isEmpty()) {
+            printIndent(REPORT_NO_ITEMS_OPENING);
+        } else {
+            int count = 1;
+            for (Item item : reportItems) {
+                if (reportType.equals("low stock")) {
+                    printIndent(reportLowStockOpening(item, count));
+                    printIndent(reportLowStockQuantityMessage(item));
+                }
+                count += 1;
+            }
+        }
     }
 
     public static void listIntro(int size) {
