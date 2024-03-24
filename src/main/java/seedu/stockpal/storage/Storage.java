@@ -24,7 +24,6 @@ import static seedu.stockpal.common.Messages.ERROR_MESSAGE_GENERAL;
 import static seedu.stockpal.common.Messages.WARNING_DATA_ERROR;
 import static seedu.stockpal.common.Messages.WARNING_INVALID_FILEPATH;
 
-
 /**
  * Represents the file storage of the StockPal application.
  * Responsible for loading/saving of the inventory data from/to the CSV file.
