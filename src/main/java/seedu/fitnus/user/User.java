@@ -4,6 +4,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Meal;
 import seedu.fitnus.Parser;
 import seedu.fitnus.Water;
+import seedu.fitnus.storage.Storage;
 
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
@@ -12,6 +13,8 @@ import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.invalidIndexException;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class User {
@@ -19,10 +22,78 @@ public class User {
     protected static ArrayList<Drink> drinkList;
     private static ArrayList<Water> totalWaterIntake;
 
-    public User() {
+    public User(Storage mealStorage, Storage drinkStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         totalWaterIntake = new ArrayList<>();
+        loadMeal(mealStorage);
+        loadDrink(drinkStorage);
+    }
+
+    public void loadMeal(Storage mealStorage) {
+        try {
+            ArrayList<String> mealStorageList = mealStorage.readFile();
+            if (!mealStorageList.isEmpty()) {
+                for (String s : mealStorageList) {
+                    Parser.parseMealStorage(s);
+                    String mealDescription = Parser.mealStorageDescription;
+                    int mealSize = Parser.mealStorageSize;
+                    mealList.add(new Meal(mealDescription, mealSize));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, attempting to create file.");
+            mealStorage.createFile();
+        }
+    }
+
+    public void loadDrink(Storage drinkStorage) {
+        try {
+            ArrayList<String> drinkStorageList = drinkStorage.readFile();
+            if (!drinkStorageList.isEmpty()) {
+                for (String s : drinkStorageList) {
+                    Parser.parseDrinkStorage(s);
+                    String drinkDescription = Parser.drinkStorageDescription;
+                    int drinkSize = Parser.drinkStorageSize;
+                    if (drinkDescription.equals("water")) {
+                        totalWaterIntake.add(new Water(drinkSize));
+                    } else {
+                        drinkList.add(new Drink(drinkDescription, drinkSize));
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, attempting to create file.");
+            drinkStorage.createFile();
+        }
+    }
+
+    public void saveMeal(Storage mealStorage) {
+        for (Meal meal : mealList) {
+            String mealSavedData = meal.getName() + "," + meal.getServingSize();
+            mealStorage.appendTextContent(mealSavedData);
+        }
+        try {
+            mealStorage.writeFile(mealStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed saving meal: " + e.getMessage());
+        }
+    }
+
+    public void saveDrink(Storage drinkStorage) {
+        for (Water water: totalWaterIntake) {
+            String waterSavedData = "water" + "," + water.getWater();
+            drinkStorage.appendTextContent(waterSavedData);
+        }
+        for (Drink drink : drinkList) {
+            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize();
+            drinkStorage.appendTextContent(drinkSavedData);
+        }
+        try {
+            drinkStorage.writeFile(drinkStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed saving drink: " + e.getMessage());
+        }
     }
 
     public void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException {
@@ -144,7 +215,7 @@ public class User {
     public void printDrinkList(int startIndex) {
         for (int i = 0; i < drinkList.size(); i++) {
             Drink currentDrink = drinkList.get(i);
-            System.out.print((startIndex+i) + ". " + currentDrink.getName() + " (serving size: "
+            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (serving size: "
                     + currentDrink.getDrinkVolumeSize() + ")");
         }
     }

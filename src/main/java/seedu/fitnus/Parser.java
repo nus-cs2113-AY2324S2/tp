@@ -20,11 +20,16 @@ public class Parser {
     public static int editDrinkIndex;
     public static int editDrinkSize;
     public static int editWaterSize;
+    public static String mealStorageDescription;
+    public static int mealStorageSize;
+    public static String drinkStorageDescription;
+    public static int drinkStorageSize;
     private User user;
 
-    public Parser() {
-        this.user = new User();
+    public Parser(User user) {
+        this.user = user;
     }
+
     public void handleCommand(String command) {
         try {
             if (command.equals("help")) {
@@ -127,7 +132,7 @@ public class Parser {
         if (sizeIndex >= command.length()) {
             throw new IncompleteMealException();
         }
-        mealDescription = command.substring(descriptionIndex, sizeIndex - 2).trim();
+        mealDescription = command.substring(descriptionIndex, sizeIndex - 2).trim().toLowerCase();
         if (mealDescription.isEmpty()) {
             throw new IncompleteMealException();
         }
@@ -146,7 +151,7 @@ public class Parser {
         if (sizeIndex >= command.length()) {
             throw new IncompleteDrinkException();
         }
-        drinkDescription = command.substring(descriptionIndex, sizeIndex - 2).trim();
+        drinkDescription = command.substring(descriptionIndex, sizeIndex - 2).trim().toLowerCase();
         if (drinkDescription.isEmpty()) {
             throw new IncompleteDrinkException();
         }
@@ -200,5 +205,19 @@ public class Parser {
     public static void parseEditWater(String command) {
         int waterSizePosition = command.indexOf("s/") + 2;
         editWaterSize = Integer.parseInt(command.substring(waterSizePosition).trim());
+    }
+
+    public static void parseMealStorage(String data) {
+        String delimiter = ",";
+        String[] arrayOfMealData = data.split(delimiter);
+        mealStorageDescription = arrayOfMealData[0];
+        mealStorageSize = Integer.parseInt(arrayOfMealData[1]);
+    }
+
+    public static void parseDrinkStorage(String data) {
+        String delimiter = ",";
+        String[] arrayOfDrinkData = data.split(delimiter);
+        drinkStorageDescription = arrayOfDrinkData[0];
+        drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
     }
 }

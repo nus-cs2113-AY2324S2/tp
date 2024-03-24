@@ -1,0 +1,4 @@
+fried rice,3
+chicken rice,2
+fried rice,1
+chicken rice,2

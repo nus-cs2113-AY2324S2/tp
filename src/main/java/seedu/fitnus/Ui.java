@@ -1,5 +1,8 @@
 package seedu.fitnus;
 
+import seedu.fitnus.storage.Storage;
+import seedu.fitnus.user.User;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +11,10 @@ public class Ui {
     /** Specifies whether user has input the exit command  */
     public boolean isExit = false;
 
-    private Parser parser = new Parser();
+    private Storage mealStorage = new Storage("./data", "data/MealList.txt");
+    private Storage drinkStorage = new Storage("./data", "data/DrinkList.txt");
+    private User user = new User(mealStorage, drinkStorage);
+    private Parser parser = new Parser(user);
 
     /** Prints the welcome message upon the start of the application  */
     public void printWelcomeMessage() {
@@ -24,6 +30,8 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
         input.close();
         isExit = true;
+        user.saveMeal(mealStorage);
+        user.saveDrink(drinkStorage);
     }
 
     public static void showLine() {
