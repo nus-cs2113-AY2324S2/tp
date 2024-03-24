@@ -1,5 +1,6 @@
 package longah;
 
+import longah.handler.PINHandler;
 import longah.node.Group;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
@@ -13,6 +14,7 @@ import longah.commands.Command;
  */
 public class LongAh {
     private static Group group;
+    private static PINHandler pinHandler;
     private static final Logging logger = new Logging();
 
     public static void init() {
@@ -29,6 +31,7 @@ public class LongAh {
         init();
         try {
             group = new Group("group"); // Give a temporary name for now
+            pinHandler = new PINHandler();
         } catch (LongAhException e) {
             Logging.logWarning("Loading process fails! Unable to create file or " +
                     "file could not be access.");
@@ -41,7 +44,7 @@ public class LongAh {
                 if (!UI.hasNextLine()) {
                     System.exit(0);
                 }
-                System.out.print("Enter command: ");
+                System.out.print("Enter command:");
                 String command = UI.getUserInput();
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);

@@ -50,6 +50,9 @@ public enum ExceptionMessage {
     INVALID_CLEAR_COMMAND ("Invalid command format." +
             " Use 'clear'",
             ExceptionType.INFO),
+    INVALID_RESET_COMMAND ("Invalid command format." +
+            " Use 'reset password'",
+            ExceptionType.INFO),
     INVALID_EDIT_COMMAND("Invalid command format." +
             " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'",
             ExceptionType.INFO),
