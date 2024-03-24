@@ -2,7 +2,6 @@ package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
 
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class SellCommand extends Command{
