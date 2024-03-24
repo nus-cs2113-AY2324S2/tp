@@ -17,10 +17,11 @@ import java.util.logging.Logger;
  * Deals with file access.
  */
 public class Storage {
-    private static Logger logger = Logger.getLogger("myLogger");
     public static final String FOLDER_PATH = "./data/";
     public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
     public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
+
+    private static Logger logger = Logger.getLogger("myLogger");
 
     /**
      * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.
