@@ -14,6 +14,7 @@ import supertracker.command.FindCommand;
 import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -213,12 +214,14 @@ public class Parser {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
         }
 
-        CharSequence dateString = null;
+        String dateString = null;
+        LocalDate expiryDate = LocalDate.parse("01/01/99999", DateTimeFormatter.ofPattern("dd/MM/yyyyy"));
 
         boolean hasExpiry = !matcher.group(EX_DATE_GROUP).isEmpty();
 
         if (hasExpiry) {
             dateString = matcher.group(EX_DATE_GROUP).trim().substring(2);
+            expiryDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
 
         if (Inventory.contains(name)) {
@@ -244,7 +247,6 @@ public class Parser {
             throw new TrackerException(ErrorMessage.PRICE_TOO_SMALL);
         }
 
-        LocalDate expiryDate = LocalDate.parse(dateString);
         return new NewCommand(name, quantity, price, expiryDate);
     }
 
@@ -381,4 +383,5 @@ public class Parser {
 
         return new FindCommand(name);
     }
+
 }
