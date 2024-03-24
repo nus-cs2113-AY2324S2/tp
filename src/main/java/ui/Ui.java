@@ -58,7 +58,7 @@ public class Ui {
         printDividingLine();
         for (ArrayList<Character> row : map) {
             for (char cell : row) {
-                System.out.print(cell + " ");
+                System.out.print(cell);
             }
             System.out.println();
         }
@@ -69,6 +69,16 @@ public class Ui {
         for (ArrayList<Character> row : map.getCurrentMap()) {
             for (char cell : row) {
                 System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+        printDividingLine();
+    }
+    public void printEnemy(AMap map) {
+        printDividingLine();
+        for (ArrayList<Character> row : map.getCurrentMap()) {
+            for (char cell : row) {
+                System.out.print(cell);
             }
             System.out.println();
         }

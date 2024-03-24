@@ -21,4 +21,9 @@ public abstract class InteractableEntity {
     public int getMoney_dropped(){
         return money_dropped;
     }
+    public int getHeight() {
+        return 0;
+    }
+
+    public void setHeight() {}
 }

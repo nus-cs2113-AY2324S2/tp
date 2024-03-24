@@ -1,10 +1,12 @@
 package main;
 
+import InteractableEntity.Enemy;
 import command.Command;
 import command.*;
 import command.mapmove.InteractingCommand;
 import command.mapmove.MapMoveCommand;
 import map.*;
+import map.BattleInterface.BattleInterface;
 import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
@@ -62,7 +64,11 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
 
             if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
                 ui.printPlayerStatus(playerStatus);
-                ui.printMap(storedMaps.get(currentOn));
+                if (storedMaps.get(currentOn) instanceof BattleInterface) {
+                    ui.printEnemy(storedMaps.get(currentOn));
+                } else {
+                    ui.printMap(storedMaps.get(currentOn));
+                }
                 ui.printTextBox(textBox);
             }
 
