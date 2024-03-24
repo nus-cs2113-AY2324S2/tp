@@ -11,6 +11,7 @@ import seedu.binbash.command.DeleteCommand;
 import seedu.binbash.command.SearchCommand;
 import seedu.binbash.command.ListCommand;
 import seedu.binbash.command.RestockCommand;
+import seedu.binbash.command.SellCommand;
 import seedu.binbash.command.ByeCommand;
 import seedu.binbash.exceptions.InvalidCommandException;
 import seedu.binbash.exceptions.InvalidArgumentException;
@@ -42,6 +43,8 @@ public class Parser {
                 return parseSearchCommand(userInput);
             case "restock":
                 return parseRestockCommand(userInput);
+            case "sell":
+                return parseSellCommand(userInput);
             default:
                 throw new InvalidCommandException("Invalid command!");
             }
@@ -108,6 +111,18 @@ public class Parser {
         return new RestockCommand(itemList, itemName, restockQuantity);
     }
 
+    private Command parseSellCommand(String userInput) throws InvalidFormatException {
+        Matcher matcher = SellCommand.COMMAND_FORMAT.matcher(userInput);
+        if (!matcher.matches()) {
+            throw new InvalidFormatException("Sell command is not properly formatted!");
+        }
+        String itemName = matcher.group("itemName");
+        int sellQuantity = Integer.parseInt(
+                Objects.requireNonNullElse(matcher.group("sellQuantity"), "0").strip()
+        );
+
+        return new SellCommand(itemList, itemName, sellQuantity);
+    }
 
     private Command parseSearchCommand(String userInput) throws InvalidFormatException {
         Matcher matcher = SearchCommand.COMMAND_FORMAT.matcher(userInput);
