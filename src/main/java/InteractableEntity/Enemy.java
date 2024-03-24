@@ -1,6 +1,6 @@
 package InteractableEntity;
 
-public class Enemy extends InteractableEntity{
+public abstract class Enemy extends InteractableEntity{
     protected int damage;
     protected int defence;
     protected int health;
@@ -43,4 +43,5 @@ public class Enemy extends InteractableEntity{
         return this.y;
     }
 
+    public abstract void setHeight(int height);
 }
