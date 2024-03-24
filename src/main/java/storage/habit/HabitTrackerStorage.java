@@ -1,6 +1,7 @@
 package storage.habit;
 
 import habit.Habit;
+import habit.Priority;
 import storage.Storage;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class HabitTrackerStorage {
         ArrayList<String> data = new ArrayList<>();
 
         for (Habit habit : habitList) {
-            data.add(habit.getDescription() + ", " + habit.getHabitCount());
+            data.add(habit.getDescription() + ", " + habit.getHabitCount()
+                    + ", " + habit.getPriority());
         }
 
         Storage.saveTasksToFile(HABIT_FILE_PATH, data);
@@ -25,10 +27,11 @@ public class HabitTrackerStorage {
         for (String line : data) {
             String[] parts = line.split(", ");
 
-            if (parts.length == 2) {
+            if (parts.length == 3) {
                 String description = parts[0];
                 int habitCount = Integer.parseInt(parts[1]);
-                Habit habit = new Habit(description, habitCount);
+                Priority priority = Priority.valueOf(parts[2]);
+                Habit habit = new Habit(description, habitCount, priority);
                 habitList.add(habit);
             }
         }
