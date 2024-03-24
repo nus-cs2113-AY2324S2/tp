@@ -18,6 +18,7 @@ public class GenerateItineraryCommand extends Command{
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage, UserDetails userDetails) throws FlirtForkException {
+        String userSatisfied;
         Food food1;
         Food food2;
         Activity activity1;
@@ -36,9 +37,25 @@ public class GenerateItineraryCommand extends Command{
             } while (activity2.getDescription().equals(activity1.getDescription()));
             Itinerary itinerary = new Itinerary(food1, food2, activity1, activity2);
             System.out.println(itinerary);
+
+            System.out.println("Are you satisfied with the itinerary? [Yes/No]");
+            userSatisfied = ui.readCommand().toLowerCase();
+            if (userSatisfied.equals("yes")) {
+                System.out.println("That's great! Enjoy your date!");
+                food1.markComplete();
+                food2.markComplete();
+                activity1.markComplete();
+                activity2.markComplete();
+                storage.saveFood(foods);
+                storage.saveActivity(activities);
+                return;
+            } else {
+                System.out.println("We apologise! Perhaps you could try again?");
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("We could not generate a suitable itineray based on your inputs! Sorry!!");
             LOGGER.log(Level.SEVERE, "Invalid arguments given");
         }
     }
 }
+

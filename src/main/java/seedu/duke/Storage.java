@@ -10,6 +10,8 @@ import java.io.InputStream;
 
 public class Storage {
     private static final String USER_DETAILS_FILE = "./data/UserDetails.txt";
+    private static final String FOOD_DETAILS_FILE = "./src/main/resources/FoodList.txt";
+    private static final String ACTIVITIES_DETAILS_FILE = "./src/main/resources/ActivityList.txt";
     private String filePath;
 
     public Storage(String filePath) {
@@ -110,6 +112,20 @@ public class Storage {
         return loadedFood;
     }
 
+    public void saveFood(FoodList foods) {
+        try (FileWriter writer = new FileWriter(FOOD_DETAILS_FILE)) {
+            for (int i=0; i<foods.size(); i++) {
+                Food oneFood = foods.get(i);
+                writer.write(oneFood.description + " | " + oneFood.location + " | " + 
+                        oneFood.price + " | " + oneFood.cuisine + " | "  + oneFood.completionStatus + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("OOPS! An error occurred while saving tasks.");
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Activity> loadActivity() throws FileNotFoundException {
         ArrayList<Activity> loadedActivity = new ArrayList<>();
         InputStream is = getClass().getClassLoader().getResourceAsStream("ActivityList.txt");
@@ -124,5 +140,19 @@ public class Storage {
             }
         }
         return loadedActivity;
+    }
+
+    public void saveActivity(ActivityList activities) {
+        try (FileWriter writer = new FileWriter(ACTIVITIES_DETAILS_FILE)) {
+            for (int i=0; i<activities.size(); i++) {
+                Activity oneActivity = activities.get(i);
+                writer.write(oneActivity.description + " | " + oneActivity.location + " | " + 
+                        oneActivity.price + " | " + oneActivity.completionStatus + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("OOPS! An error occurred while saving tasks.");
+            e.printStackTrace();
+        }
     }
 }

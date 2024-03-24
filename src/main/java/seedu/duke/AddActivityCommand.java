@@ -12,7 +12,7 @@ public class AddActivityCommand extends Command{
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities,Ui ui,
                         Storage storage, UserDetails userDetails) throws FlirtForkException {
-        Activity activity = new Activity(description, "default location", "default price");
+        Activity activity = new Activity(description, "default location", "default price", "U");
         favourites.addFavourite(activity);
         System.out.println("Cupid's arrow strikes! This is now in your favourites. \n" + activity);
         ui.showFavourite("Guess what? You've collected " + favourites.getFavourites().size() +

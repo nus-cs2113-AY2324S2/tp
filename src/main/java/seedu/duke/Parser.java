@@ -64,6 +64,8 @@ public class Parser {
             return new HelpCommand();
         case "me":
             return new UserDetailsCommand(); 
+        case "history":
+            return new ViewHistoryCommand();
         case "list":
             Ui.listCommand();
             Scanner scanner = new Scanner(System.in);
@@ -80,9 +82,9 @@ public class Parser {
         Favourites favourite = null;
 
         if ("F".equals(parts[0]) && parts.length >= 2) {
-            favourite = new Food(parts[0], parts[1], parts[2], parts[3]);
+            favourite = new Food(parts[0], parts[1], parts[2], parts[3], parts[4]);
         } else if ("A".equals(parts[0]) && parts.length >= 2) {
-            favourite = new Activity(parts[0], parts[1], parts[2]);
+            favourite = new Activity(parts[0], parts[1], parts[2], parts[3]);
         } else {
             assert false; // Throws AssertionError if favourite not created yet
         }
@@ -93,14 +95,14 @@ public class Parser {
     public static Food parseFood(String line) {
         String[] parts = line.split(" \\| ");
         Food food;
-        food = new Food(parts[0], parts[1], parts[2], parts[3]);
+        food = new Food(parts[0], parts[1], parts[2], parts[3], parts[4]);
         return food;
     }
 
     public static Activity parseActivity(String line) {
         String[] parts = line.split(" \\| ");
         Activity activity;
-        activity = new Activity(parts[0], parts[1], parts[2]);
+        activity = new Activity(parts[0], parts[1], parts[2], parts[3]);
         return activity;
     }
 }
