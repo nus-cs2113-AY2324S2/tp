@@ -1,5 +1,8 @@
 package brokeculator.expense;
 
+import brokeculator.storage.parsing.FileKeyword;
+import brokeculator.storage.parsing.SaveableType;
+
 import java.util.ArrayList;
 
 public class ExpenseManager {
@@ -62,7 +65,9 @@ public class ExpenseManager {
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (Expense expense : expenses) {
-            sb.append(expense.getStringRepresentation());
+            String currentExpenseString = expense.getStringRepresentation();
+            String finalExpenseString = FileKeyword.formatWithKeyword(SaveableType.EXPENSE, currentExpenseString);
+            sb.append(finalExpenseString);
             sb.append(System.lineSeparator());
         }
         return sb.toString();
