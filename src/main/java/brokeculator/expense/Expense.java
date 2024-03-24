@@ -27,7 +27,7 @@ public class Expense implements Saveable {
         this.description = description.trim();
         this.amount = amount;
         this.date = date.trim();
-        this.category = category.trim();
+        this.category = category == null ? null : category.trim();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Expense implements Saveable {
 
     @Override
     public String toString() {
-        if (category.equalsIgnoreCase("null")) {
+        if (category == null) {
             return String.format("%s $%.2f (%s)", description, amount, date);
         }
         return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
