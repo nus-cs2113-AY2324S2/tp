@@ -247,7 +247,7 @@ public class Parser {
 
         try {
             if (hasExpiry) {
-                dateString = matcher.group(EX_DATE_GROUP).trim().substring(2);
+                dateString = matcher.group(EX_DATE_GROUP).trim().replace(EX_DATE_FLAG + BASE_FLAG, "");
                 expiryDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern(EX_DATE_FORMAT));
             }
         } catch (DateTimeParseException e) {
