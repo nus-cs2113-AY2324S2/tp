@@ -28,8 +28,8 @@ public class Output {
         printLine();
         System.out.println("Commands List:");
         System.out.println();
-        System.out.println("new /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run");
-        System.out.println("new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
+        System.out.println("workout /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run");
+        System.out.println("workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
         System.out.println("history /view:[run/gym/bmi/period] - " +
