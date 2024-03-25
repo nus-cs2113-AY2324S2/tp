@@ -49,6 +49,13 @@ public class Parser {
         return additionalInfo;
     }
 
+    public Parser(String userInput, String command, String argument, HashMap<String, ArrayList<String>> params) {
+        this.userInput = userInput;
+        this.command = command;
+        this.argument = argument;
+        this.params = params;
+    }
+
     public Parser(String userInput) {
         this.userInput = userInput;
         this.parseUserInput();
@@ -62,7 +69,6 @@ public class Parser {
         this.command = tokens[0].toLowerCase().trim();
 
         if (tokens.length == 1){
-            System.out.print(this);
             return;
         }
 
@@ -81,8 +87,6 @@ public class Parser {
                 params.get(subCommand).add(subArgument);
             }
         }
-
-        System.out.print(this);
     }
 
     /**
