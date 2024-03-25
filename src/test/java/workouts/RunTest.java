@@ -13,7 +13,7 @@ class RunTest {
 
     @AfterEach
     void cleanup() {
-        WorkoutList.clearWorkoutsAndRun();
+        WorkoutList.clearWorkoutsRunGym();
     }
     /**
      * Tests the behaviour of parsing a time string with hours into an integer array.

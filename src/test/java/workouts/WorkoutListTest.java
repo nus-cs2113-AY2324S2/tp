@@ -20,7 +20,7 @@ class WorkoutListTest {
 
     @AfterEach
     void cleanup() {
-        WorkoutList.clearWorkoutsAndRun();
+        WorkoutList.clearWorkoutsRunGym();
     }
 
 
@@ -92,11 +92,12 @@ class WorkoutListTest {
     }
 
     /**
-     * Tests the behavior of getting an empty workout list
+     * Tests the behavior of getting an empty run / gym list
      * Expected behaviour is to raise {@code OutOfBounds} exception.
      */
     @Test
     void getWorkouts_emptyList_throwOutOfBoundsForRun() {
+        assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(WorkoutConstant.GYM));
         assertThrows(CustomExceptions.OutOfBounds.class, () -> WorkoutList.getWorkouts(WorkoutConstant.RUN));
     }
 

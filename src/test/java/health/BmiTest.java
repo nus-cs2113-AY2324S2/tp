@@ -15,8 +15,9 @@ import utility.HealthConstant;
 import utility.CustomExceptions;
 
 class BmiTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final PrintStream originalOut = System.out;
+    private static final PrintStream originalErr = System.err;
 
     @BeforeEach
     void setUpStreams() {
@@ -24,14 +25,10 @@ class BmiTest {
     }
 
     @AfterEach
-    void restoreStreams() {
-        System.setOut(originalOut);
-
-    }
-
-    @AfterEach
     void cleanup() {
+        System.setOut(originalOut);
         HealthList.clearBmisAndPeriods();
+        outContent.reset();
     }
 
     /**
