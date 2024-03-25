@@ -9,10 +9,15 @@ import exceptions.commands.NoSuchGroceryException;
 import exceptions.commands.WrongFormatException;
 import exceptions.CannotUseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.Collections;
+
 
 /**
  * Stores all the user's groceries.
@@ -87,18 +92,29 @@ public class GroceryList {
             throw new EmptyGroceryException();
         }
 
+        // Split the input into the grocery name and the detail part.
         String[] detailParts = details.split(parameter, 2);
+        if (detailParts.length < 2 || detailParts[1].trim().isEmpty()) {
+            throw new WrongFormatException(command + " command is in the wrong format. " + parameter + " is required.");
+        }
+
+        // Retrieve the grocery to ensure it exists.
         Grocery grocery = getGrocery(detailParts[0].strip());
-        if (detailParts.length < 2) {
-            throw new WrongFormatException(command);
+        if (grocery == null) {
+            throw new NoSuchGroceryException();
         }
 
         String attribute = detailParts[1].strip();
-        if (attribute.isEmpty()) {
-            throw new IncompleteCommandException(parameter);
+        // For expiration date updates, validate the date format.
+        if (command.equals("exp")) {
+            try {
+                LocalDate.parse(attribute, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (DateTimeParseException e) {
+                throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
+            }
         }
 
-        return detailParts;
+        return new String[] {detailParts[0].trim(), attribute};
     }
 
     /**
@@ -109,13 +125,26 @@ public class GroceryList {
     public void editExpiration(String details) throws GitException {
         // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
         String[] expParts = checkDetails(details, "exp", "d/");
+        if (expParts.length < 2 || expParts[1].trim().isEmpty()) {
+            throw new IncompleteCommandException("Expiration date is missing. Please use the format 'd/YYYY-MM-DD'.");
+        }
         Grocery grocery = getGrocery(expParts[0].strip());
-        String date = expParts[1].strip();
-
-        grocery.setExpiration(date);
-        assert grocery.getExpiration().equals(date) : "Expiration date should be set correctly";
+        
+        // Parse the date string to LocalDate
+        LocalDate date;
+        try {
+            date = LocalDate.parse(expParts[1].strip(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
+        }
+    
+        // Convert LocalDate back to String to match the setExpiration signature
+        String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        grocery.setExpiration(dateString);
+    
+        // Verification and UI feedback
+        assert grocery.getExpiration().isEqual(date) : "Expiration date should be set correctly";
         Ui.printExpSet(grocery);
-
     }
 
     /**
@@ -162,6 +191,13 @@ public class GroceryList {
         } else {
             Ui.printGroceryList(groceries);
         }
+    }
+
+    /**
+     * Sorts the groceries by expiration date.
+     */
+    public void sortByExpiration() {
+        Collections.sort(groceries, (g1, g2) -> g1.getExpiration().compareTo(g2.getExpiration()));
     }
 
     /**

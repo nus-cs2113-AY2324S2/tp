@@ -63,13 +63,57 @@ public class Ui {
     }
 
     /**
+     * Prompts user for expiration date.
+     */
+    public String promptForExpiration() {
+        System.out.println("Please enter the year of expiry (e.g., 2024):");
+        String year = in.nextLine().trim();
+
+        System.out.println("Please enter the month of expiry (can be July or can be 07):");
+        String month = in.nextLine().trim();
+        month = convertMonthToNumber(month);
+
+        System.out.println("Please enter the date of expiry (e.g., 19):");
+        String day = in.nextLine().trim();
+
+        String formattedDate = formatExpirationDate(year, month, day);
+        return formattedDate;
+    }
+
+    /**
+     * Reads expiration date from user input.
+     */
+    private String convertMonthToNumber(String month) {
+        // Convert month from name to number (e.g., "July" to "07")
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", 
+                               "July", "August", "September", "October", "November", "December"};
+        String[] monthNumbers = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        for (int i = 0; i < monthNames.length; i++) {
+            if (month.equalsIgnoreCase(monthNames[i]) || month.equals(monthNumbers[i])) {
+                return monthNumbers[i]; // Found a match, return the month number
+            }
+        }
+        // If no match found or input is already in numeric format, return original input
+        // This part can be enhanced to handle invalid months.
+        return month;
+    }
+
+    /**
+     * Reads expiration date from user input.
+     */
+    private String formatExpirationDate(String year, String month, String day) {
+        // This method can be enhanced to validate the date components
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
      * Displays help message containing all possible commands.
      */
     public void displayHelp() {
         System.out.println(
                 "Here are some ways you can use this app!\n" +
                         "add GROCERY: adds the item GROCERY.\n" +
-                        "exp GROCERY d/EXPIRATION_DATE: sets the expiration date for GROCERY.\n" +
+                        "exp GROCERY d/EXPIRATION_DATE: edits the expiration date for GROCERY.\n" +
                         "amt GROCERY a/AMOUNT: sets the amount of GROCERY.\n" +
                         "use GROCERY a/AMOUNT: updates the total amount after using a GROCERY\n" +
                         "del GROCERY: deletes GROCERY.\n" +
@@ -84,7 +128,6 @@ public class Ui {
      */
     public static void printExpSet(Grocery grocery) {
         assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
-        assert !(grocery.getExpiration().isEmpty()): "expiration date should not be empty";
         System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
     }
 
