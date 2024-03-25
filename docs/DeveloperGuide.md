@@ -34,6 +34,31 @@ obtain a new `ExpenseList` object containing the filtered expenses, along with p
 | filterExpenses() | ArrayList<Expense> | Returns an ArrayList<Expense> containing all filtered expenses  |
 | listExpenses()   | void               | Prints the filtered expenses obtained from `filterExpenses()`   |
 
+The following UML Sequence diagram below shows how the Parser works to obtain the relevant inputs for the Find Feature :
+![Sequence Diagram for Parser for Find Feature](diagrams/sequenceDiagram-Parser%20For%20Find%20Command.jpg)
+
+The following is a step-by-step explanation for the Parser for the Find Feature :
+1. `BudgetBuddy` calls `Parser#parseCommand(input)` with `input` being the entire user input.
+E.g `find expenses d/bruno`
+2. Within the `Parser`, it will have determined that the `input` is a Find Command from the `isFindCommand(input)`
+function. This part has been left out in the diagram as it is trivial.
+3. The `Parser` then self calls the method `handleFindCommand(input)` with the `input` still being the entire
+user input.
+4. Within `handleFindCommand(input)`, the first check would be the check for the existence of any combination of 
+`d/ , morethan/ and lessthan/`. If none of these combinations were found, it immediately returns `null`
+5. If the checks in `4.` is passed, Three variables would be initialized.
+
+    * | Variable Name | Variable Type |                                                              
+      |---------------|---------------|
+      | description   | String        | 
+      | minAmount     | Double        |
+      | maxAmount     | Double        |
+6. Depending on which parameters were present, the corresponding input would be extracted and placed into each variable
+using the `Parser#extractDetailsForFind(input, "parameter")`
+7. Should the values of `minAmount` and `maxAmount` not be empty,  a check is done to ensure `minAmount` is less than
+or equals to `maxAmount`. If this check does not pass, the function immediately returns `null`
+8. Finally, `Parser#handleFindCommand()` returns a `FindExpensesCommand` to `Parser#parseCommand()`, which is
+then returned to `BudgetBuddy`
 
 The following UML Sequence diagram below shows how the Find Feature command works when a user provides a **valid**
 find expenses command:
