@@ -21,6 +21,7 @@ class DukeTest {
     private FoodList foods;
     private ActivityList activities;
     private UserDetails userDetails;
+    private GiftList gifts;
 
     public void sampleTest() {
         assertTrue(true);
@@ -53,7 +54,7 @@ class DukeTest {
         System.setOut(printStream);
 
         try {
-            generateIdeaCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+            generateIdeaCommand.execute(favourites, foods, activities, ui, storage, userDetails, gifts);
         } catch (NoSuchElementException e) {
             System.setIn(in);
             String output = outputStream.toString();
@@ -94,7 +95,7 @@ class DukeTest {
         System.setOut(printStream);
 
         try {
-            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails, gifts);
         } catch (NoSuchElementException e) {
             System.setIn(in);
             String output = outputStream.toString();
@@ -122,7 +123,7 @@ class DukeTest {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
             System.setOut(printStream);
-            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+            generateItineraryCommand.execute(favourites, foods, activities, ui, storage, userDetails, gifts);
             String output = outputStream.toString();
             assertTrue(output.contains("We could not generate a suitable itineray based on your inputs! Sorry!!"));
             System.setOut(System.out);

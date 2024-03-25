@@ -12,6 +12,7 @@ public class Storage {
     private static final String USER_DETAILS_FILE = "./data/UserDetails.txt";
     private static final String FOOD_DETAILS_FILE = "./src/main/resources/FoodList.txt";
     private static final String ACTIVITIES_DETAILS_FILE = "./src/main/resources/ActivityList.txt";
+    private static final String GIFTS_DETAILS_FILE = "./src/main/resources/GiftList.txt";
     private String filePath;
 
     public Storage(String filePath) {
@@ -148,6 +149,35 @@ public class Storage {
                 Activity oneActivity = activities.get(i);
                 writer.write(oneActivity.description + " | " + oneActivity.location + " | " + 
                         oneActivity.price + " | " + oneActivity.completionStatus + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("OOPS! An error occurred while saving tasks.");
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Gift> loadGift() throws FileNotFoundException {
+        ArrayList<Gift> loadedGift = new ArrayList<>();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("GiftList.txt");
+        if (is == null) {
+            throw new FileNotFoundException("Gift list file not found");
+        }
+        try (Scanner scanner = new Scanner(is)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // Parse the line into an Activity object and add it to the list
+                loadedGift.add(Parser.parseGift(line));
+            }
+        }
+        return loadedGift;
+    }
+
+    public void saveGift(GiftList gifts) {
+        try (FileWriter writer = new FileWriter(GIFTS_DETAILS_FILE)) {
+            for (int i=0; i<gifts.size(); i++) {
+                Gift oneGift = gifts.get(i);
+                writer.write(oneGift.description + " | " + oneGift.completionStatus + "\n");
             }
             writer.close();
         } catch (IOException e) {

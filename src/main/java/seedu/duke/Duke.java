@@ -15,6 +15,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private UserDetails userDetails;
+    private GiftList gifts;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -24,6 +25,7 @@ public class Duke {
             foods = new FoodList(storage.loadFood());
             activities = new ActivityList(storage.loadActivity());
             userDetails = storage.loadUserDetails();
+            gifts = new GiftList(storage.loadGift());
         } catch (FileNotFoundException e) {
             ui.errorMessage("File not found. Starting with an empty task list :)");
             favourites = new FavouritesList(new ArrayList<>());
@@ -34,7 +36,7 @@ public class Duke {
         if (userDetails.getName().equals("NOT SET")) {
             ui.firstSetUpMessage();
             UserDetailsCommand userDetailsCommand = new UserDetailsCommand();
-            userDetailsCommand.execute(favourites, foods, activities, ui, storage, userDetails);
+            userDetailsCommand.execute(favourites, foods, activities, ui, storage, userDetails, gifts);
         } else {
             ui.greetingMessage(userDetails.getAnniversary());
         }
@@ -44,7 +46,7 @@ public class Duke {
             String userInput = ui.readCommand();
             try {
                 Command command = Parser.parseCommand(userInput, userDetails);
-                command.execute(favourites, foods, activities, ui, storage, userDetails);
+                command.execute(favourites, foods, activities, ui, storage, userDetails, gifts);
                 if(command instanceof ExitCommand) {
                     isExit = true;
                 }

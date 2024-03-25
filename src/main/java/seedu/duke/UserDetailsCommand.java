@@ -6,7 +6,7 @@ public class UserDetailsCommand extends Command {
 
     @Override
     public void execute(FavouritesList favouritesList, FoodList foodList, 
-        ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails) {
+        ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails, GiftList gifts) {
         ui.showMessage("Please enter your name:");
         String name = ui.readCommand();
         ui.showMessage("Great! Hello there " + name + ", it's my pleasure to know you!"); 

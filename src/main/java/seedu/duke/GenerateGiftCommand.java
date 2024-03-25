@@ -2,30 +2,26 @@ package seedu.duke;
 
 import seedu.duke.exceptions.FlirtForkException;
 
-public class GenerateIdeaCommand extends Command {
+public class GenerateGiftCommand extends Command {
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage, UserDetails userDetails, GiftList gifts) throws FlirtForkException {
         String userSatisfied;
 
         do {
-            Food food = foods.getRandomFood();
-            Activity activity = activities.getRandomActivity();
-            Idea idea = new Idea(food, activity);
-            System.out.println(idea);
+            Gift gift = gifts.getRandomGift();
+            System.out.println(gift);
             System.out.println("Satisfied with the date idea? [Yes/No]");
             userSatisfied = ui.readCommand().toLowerCase();
             if (userSatisfied.equals("yes")) {
-                System.out.println("That's great! Enjoy your date!");
-                food.markComplete();
-                activity.markComplete();
+                System.out.println("");
+                gift.markComplete();
                 break;
             } else {
-                System.out.println("Regenerating a new date idea..");
+                System.out.println("");
             }
         } while (true);
 
-        storage.saveFood(foods);
-        storage.saveActivity(activities);
+        storage.saveGift(gifts);
     }
 }
