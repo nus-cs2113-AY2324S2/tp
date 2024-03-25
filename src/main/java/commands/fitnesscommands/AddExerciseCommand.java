@@ -45,7 +45,8 @@ public class AddExerciseCommand implements Command {
 
         // Handles the case where non-integer values are entered in parameters that should only
         // be integers
-        if (!tempCommandArgs[2].matches("\\d+") || !tempCommandArgs[3].matches("\\d+")) {
+        if (!tempCommandArgs[2].matches("\\d+") ||
+                !tempCommandArgs[3].matches("\\d+")) {
             throw new FitnessException("Did you enter your Sets and Reps correctly? :(");
         }
 

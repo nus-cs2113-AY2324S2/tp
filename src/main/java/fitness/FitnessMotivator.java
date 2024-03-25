@@ -38,8 +38,8 @@ public class FitnessMotivator {
         Exercise exercise4 = allExercises.get(ExerciseType.BACK, randomInt4);
         Exercise exercise5 = allExercises.get(ExerciseType.LEGS, randomInt5);
 
-        String message = "These are some of the exercises you can do!" +
-                System.lineSeparator() + System.lineSeparator() +
+        String message = "These are some of the exercises you can do! " +
+                "LETS GET STRONK MY G" + System.lineSeparator() + System.lineSeparator() +
                 "1. " + exercise1 + System.lineSeparator() +
                 "2. " + exercise2 + System.lineSeparator() +
                 "3. " + exercise3 + System.lineSeparator() +

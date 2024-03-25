@@ -1,5 +1,6 @@
 package fitness;
 
+import exceptions.FitnessException;
 import storage.Storage;
 
 import java.util.ArrayList;
@@ -178,5 +179,42 @@ public class ExerciseList {
         String reps = parameters[3].trim();
 
         return new Exercise(exerciseName, exerciseType, sets, reps);
+    }
+
+    /**
+     * Helper methods for finding exercises in the list. Overloaded with different parameters to
+     * allow for different searching methods. This method uses the exercise name to search.
+     *
+     * @param type The ExerciseType Enum to be queried
+     * @param nameQuery the name of the exercise to be queried
+     *
+     * @return An object of type Exercise
+     * */
+    public Exercise findExercise(ExerciseType type, String nameQuery) {
+        ArrayList<Exercise> typeExercises = getType(type);
+        for (Exercise e : typeExercises) {
+            if (e.getType().equals(type) && e.getExerciseName().contains(nameQuery)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Helper methods for finding exercises in the list. Overloaded with different parameters to
+     * allow for different searching methods.This method uses index to search.
+     *
+     * @param type The ExerciseType Enum to be queried
+     * @param index The n-th exercise of type ExerciseType, where n is the index
+     *
+     * @return An object of type Exercise
+     * */
+    public Exercise findExercise(ExerciseType type, int index) throws FitnessException {
+        ArrayList<Exercise> typeExercises = getType(type);
+        try {
+            return typeExercises.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new FitnessException("Index for exercise query is not valid!");
+        }
     }
 }
