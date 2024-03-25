@@ -312,8 +312,8 @@ public class TaskManager {
      * @throws TaskManagerException If not in correct week/month view
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-    public static void deleteManager(WeekView weekView,MonthView monthView, boolean inMonthView, TaskManager taskManager,
-                                     String day, int taskIndex) throws TaskManagerException, DateTimeParseException {
+    public static void deleteManager(WeekView weekView,MonthView monthView, boolean inMonthView,
+            TaskManager taskManager,String day, int taskIndex) throws TaskManagerException, DateTimeParseException {
 
         // Convert the day to a LocalDate
         LocalDate date;
