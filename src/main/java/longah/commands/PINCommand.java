@@ -1,20 +1,19 @@
 package longah.commands;
 
 import longah.exception.LongAhException;
-import longah.exception.ExceptionMessage;
 import longah.handler.PINHandler;
 import longah.node.Group;
+import longah.exception.ExceptionMessage;
 
-import java.util.Objects;
 
-public class ResetCommand extends Command {
+public class PINCommand extends Command {
     /**
-     * Constructor for ResetCommand.
+     * Constructor for PINCommand.
      *
      * @param commandString The command string.
      * @param taskExpression The task expression.
      */
-    public ResetCommand(String commandString, String taskExpression) {
+    public PINCommand(String commandString, String taskExpression) {
         super(commandString, taskExpression);
     }
 
@@ -29,10 +28,18 @@ public class ResetCommand extends Command {
      * @throws LongAhException If unexpected additional parameters are found.
      */
     public void execute() throws LongAhException {
-        if (!Objects.equals(this.taskExpression, "password")) {
-            throw new LongAhException(ExceptionMessage.INVALID_RESET_COMMAND);
+        switch (this.taskExpression) {
+        case "reset":
+            PINHandler.resetPin();
+            break;
+        case "enable":
+            PINHandler.enablePin();
+            break;
+        case "disable":
+            PINHandler.disablePin();
+            break;
+        default:
+            throw new LongAhException(ExceptionMessage.INVALID_PIN_COMMAND);
         }
-        PINHandler pinHandler = new PINHandler();
-        pinHandler.resetPin();
     }
 }

@@ -56,6 +56,9 @@ public enum ExceptionMessage {
     INVALID_EDIT_COMMAND("Invalid command format." +
             " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'",
             ExceptionType.INFO),
+    INVALID_PIN_COMMAND("Invalid command format." +
+            " Use 'pin edit' or 'pin enable' or 'pin disable'",
+            ExceptionType.INFO),
     INVALID_EXIT_COMMAND ("Invalid command format." +
             " Use 'exit'",
             ExceptionType.INFO);

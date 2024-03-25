@@ -9,7 +9,7 @@ import longah.commands.delete.DeleteCommand;
 import longah.commands.edit.EditCommand;
 import longah.commands.find.FindCommand;
 import longah.commands.list.ListCommand;
-import longah.commands.ResetCommand;
+import longah.commands.PINCommand;
 import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
 
@@ -40,8 +40,8 @@ public class CommandParser {
             return new EditCommand(commandString, taskExpression);
         case "exit":
             return new ExitCommand(commandString, taskExpression);
-        case "reset":
-            return new ResetCommand(commandString, taskExpression);
+        case "pin":
+            return new PINCommand(commandString, taskExpression);
 
         case "help":
             throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
