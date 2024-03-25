@@ -1,1 +1,4 @@
-James Gosling
+s 3
+d
+s
+quit

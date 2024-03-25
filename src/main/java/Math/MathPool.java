@@ -79,9 +79,9 @@ public class MathPool {
 
         // Difficulty 3
         addMathQuestion("5^2 = ", 25, 3);
-        addMathQuestion("√144 = ", 12, 3);
+        addMathQuestion("square root of 144 = ", 12, 3);
         addMathQuestion("3^3 = ", 27, 3);
-        addMathQuestion("√81 = ", 9, 3);
+        addMathQuestion("square root of 81 = ", 9, 3);
         addMathQuestion("7^2 = ", 49, 3);
 
         // Difficulty 4
