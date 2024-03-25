@@ -117,11 +117,16 @@ public class Ui {
         System.out.println("What are some activities you can do as a couple? Let's see.." );
     }
 
+    public static void listGifts() {
+        System.out.println("Peek into Cupid's own gift collection!" );
+    }
+
     public static void listCommand() {
         System.out.println("Looking for ideas to spice up your date night?");
         System.out.println("Choose from the following options:");
         System.out.println("1. List out delicious dining options (type 'food')");
         System.out.println("2. Discover exciting activities to do together (type 'activities')");
+        System.out.println("3. Unwrap joy with our curated list of gifts that'll make hearts flutter! (type 'gifts')");
         System.out.println("What's your pleasure?");
     }
 

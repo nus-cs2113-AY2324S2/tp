@@ -99,7 +99,7 @@ Punggol Settlement Seafood Dining | NE | C | U
 Coney Island Park Exploration | NE | C | U
 Lorong Halus Wetland Park Bird Watching | NE | C | U
 Punggol Waterway Park | NE | C | U
-Punggol Waterway Park Kayaking | NE | B | U
+Punggol Waterway Park Kayaking | NE | B | C
 Windsurfing in Punggol | NE | B | U
 Lorong Halus Wetland Park Bird Watching | NE | B | U
 Punggol Jetty Sunset Viewing | NE | B | U

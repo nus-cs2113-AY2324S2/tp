@@ -5,10 +5,10 @@ import seedu.duke.exceptions.FlirtForkException;
 public class ViewHistoryCommand extends Command {
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
-                        Storage storage, UserDetails userDetails) throws FlirtForkException {
+                        Storage storage, UserDetails userDetails, GiftList gifts) throws FlirtForkException {
         int foodCount = 0;
         int activityCount = 0;
-        System.out.println("These are the activities you have completed:");
+        System.out.println("These are the activities you have marked:");
         for (int i=0; i<activities.size(); i++) {
             Activity oneActivity = activities.get(i);
             if (oneActivity.completionStatus.equals("C")) {
@@ -16,7 +16,7 @@ public class ViewHistoryCommand extends Command {
             }
         }
         System.out.println("");
-        System.out.println("These are the restaurants you have visited:");
+        System.out.println("These are the restaurants you have marked:");
         for (int i=0; i<foods.size(); i++) {
             Food oneFood = foods.get(i);
             if (oneFood.completionStatus.equals("C")) {

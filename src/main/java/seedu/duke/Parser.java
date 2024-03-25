@@ -58,6 +58,8 @@ public class Parser {
             return new GenerateSmartItineraryCommand(userDetails);
         case "idea":
             return new GenerateIdeaCommand();
+        case "gift":
+            return new GenerateGiftCommand();
         case "exit":
             return new ExitCommand();
         case "help":
@@ -104,5 +106,12 @@ public class Parser {
         Activity activity;
         activity = new Activity(parts[0], parts[1], parts[2], parts[3]);
         return activity;
+    }
+
+    public static Gift parseGift(String line) {
+        String[] parts = line.split(" \\| ");
+        Gift gift;
+        gift = new Gift(parts[0], parts[1]);
+        return gift;
     }
 }

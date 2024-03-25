@@ -20,7 +20,7 @@ Charlie's Corner | E | B | W | U
 E&D Co | E | B | W | U
 Ha-Jun | E | B | K | U
 Missus | E | A | W | U
-Mr Yakiniku | E | A | J | U
+Mr Yakiniku | E | A | J | C
 Five Oars | E | A | W | U
 Knead To Eat | E | P | W | U
 Craze Kitchen | E | P | I | U
