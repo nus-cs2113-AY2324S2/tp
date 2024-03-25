@@ -1,134 +1,365 @@
+2024-03-24
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
-Enter the date for the task (dd/MM/yyyy):
-Enter the type of task (T for Todo, E for event, D for deadline):
-Enter the task description:
-Task added.
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
-Enter the date for the task (dd/MM/yyyy):
-Enter the type of task (T for Todo, E for event, D for deadline):
-Enter the task description:
-Enter the start date of this task:
-Enter the end date of this task:
-Task added.
-
-Week View: 17/03/2024 - 23/03/2024
-+------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
-+------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
-+------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-|            |            |            | new event  |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
-Enter the date for the task (dd/MM/yyyy):
-Enter the type of task (T for Todo, E for event, D for deadline):
-Enter the task description:
-Enter the deadline of this task:
-Task added.
-
-Week View: 17/03/2024 - 23/03/2024
-+------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
-+------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
-+------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
 Invalid input. Please try again.
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
 Invalid input. Please try again.
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
 Invalid input. Please try again.
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | new todo   |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
-Enter the date for the task you wish to update (dd/MM/yyyy):
-Enter the task number of the task you wish to update:
-1. new todo
-2. new event
-3. new deadline 1
-Enter the updated task description:
-Task updated.
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | qioncioqnc |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
-Enter the date for the task to delete (dd/MM/yyyy):
-Enter the task number to delete:
-1. qioncioqnc uion uioqen qwpc
-2. new event
-3. new deadline 1
-Task deleted.
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
 
-Week View: 17/03/2024 - 23/03/2024
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-| Sun        | Mon        | Tue        | Wed        | Thu        | Fri        | Sat        |
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
-| 17/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024 | 21/03/2024 | 22/03/2024 | 23/03/2024 |
 +------------+------------+------------+------------+------------+------------+------------+
-|            |            |            | qioncioqnc |            |            |            |
-|            |            |            | new event  |            |            |            |
-|            |            |            | new deadli |            |            |            |
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week, 'add' to add a task, 'update' to edit a task, 'delete' to delete a task, 'month' to display the month view, or 'quit' to quit:
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input format. Please provide input in the format: update, <day>, <taskIndex>, <newDescription>
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input format. Please provide input in the format: delete, <day>, <taskIndex>
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
+Invalid input. Please try again.
+
+Week View: 24/03/2024 - 30/03/2024
++------------+------------+------------+------------+------------+------------+------------+
+| Sunday     | Monday     | Tuesday    | Wednesday  | Thursday   | Friday     | Saturday   |
+| [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
++------------+------------+------------+------------+------------+------------+------------+
++------------+------------+------------+------------+------------+------------+------------+
+Enter 'next' for next week, 'prev' for previous week,
+'add' to add a task,
+'update' to edit a task,
+'delete' to delete a task,
+'month' to display the month view,
+or 'quit' to quit:
 Exiting Calendar...
