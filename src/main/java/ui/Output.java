@@ -302,7 +302,7 @@ public class Output {
      * @param message The custom message to be printed.
      */
     public static void printException(String message) {
-        System.err.println("Exception Caught! " + message);
+        System.err.println("Exception Caught!" + System.lineSeparator() + message);
     }
 
     /**
