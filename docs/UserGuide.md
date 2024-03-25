@@ -9,12 +9,53 @@ Our application generates creative, enjoyable date itineraries that fit within y
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed.
-1. Download the latest version of `Duke` from [here](http://link.to/duke).
-3. Using the command terminal, locate the downloaded jar file, and run the command `java -jar Duke.jar`.
-
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest version of `Duke` from [here](http://link.to/duke).
+3. Copy the file to the folder you want to use as the _home folder_
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Duke.jar` command to run the bot. The GUI should appear in a few seconds.
+5. Type the command in the command box and press Enter to execute it.
+6. Refer to the [Features](#Features) section below for an overview of all valid commands.
 
 ## Features 
+
+This section provides an overview of the available commands in the application, grouped by their functionality. Detailed usage instructions for each command can be found in the [Usage](#Usage) section.
+
+### Discovering Options
+Explore potential dining, activities, and gifts options.
+- `list`: View a comprehensive list of restaurants, activities, and gift ideas.
+
+### Personalisation
+Tailor the application experience to your preferences for more customised suggestions.
+- `me`: Input personal details and preferences to enable personalised suggestions.
+- `itinerary`: Generate a date itinerary based on specified preferences for location and pricing.
+- `smart`: Generate a smart itinerary tailored to your personal details.
+> Complete `me` before the smart itinerary function can be enabled
+
+### Idea Generation
+Stimulate creativity with randomised suggestions for dates and gifts.
+- `idea`: Receive a randomised date idea.
+- `gift`: Receive a randomised gift suggestion.
+
+### Favourites Management
+Manage a personalised list of your favourite foods and activities.
+- `food`: Add a food option to your favourites list.
+- `activity`: Add an activity to your favourites list.
+- `find`: Search your favourites list for specific entries.
+- `favourites`: List all entries in your current favourites list.
+- `delete`: Remove an entry from your favourites list based on its entry number.
+
+### Additional Utilities
+Extra commands to facilitate application use.
+- `help`: Display help message with a summary of all valid commands at any point in time.
+- `history`: List all past marked date restaurants, activities, and gift ideas.
+
+### Exit the program
+There is only one command to terminate the program:
+- `exit`: Saves all current data and exits the program.
+
+Refer to the [Usage](#Usage) section below for details of each command.
+
+## Usage
 
 ### Display all possible commands: `help`
 Lists out all possible commands used to interact with Duke.
@@ -22,8 +63,8 @@ Lists out all possible commands used to interact with Duke.
 Format: `help`
 
 
-### List out all restaurants or activities: `list`
-Lists out all the restaurants or activities within our curated collection.
+### List out all restaurants, activities or gifts: `list`
+Lists out all the restaurants, activities, or gifts within our curated collection.
 
 Format: `list`
 
@@ -32,6 +73,11 @@ Format: `list`
 Generates out a randomised date idea, consisting of 1 restaurant and 1 activity from our curated collection.
 
 Format: `idea`
+
+### Generate a randomised gift idea: `gift`
+Generates a randomised gift idea.
+
+Format: `gift`
 
 
 ### Generate a date itinerary, based on preferred location and budget: `itinerary`

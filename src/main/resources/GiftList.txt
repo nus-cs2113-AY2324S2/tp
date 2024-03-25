@@ -2,7 +2,7 @@
 [Accessory] Personalised charm bracelets | U
 [Accessory] Studs or dazzling chandelier earrings | U
 [Accessory] Classic leather-bound watch or modern smartwatches | U
-[Accessory] Vintage brooches or pins | C
+[Accessory] Vintage brooches or pins | U
 [Accessory] Any piece of jewelry that includes a name, initial, or date | U
 [Accessory] Sentimental keychains of a special place | U
 [Accessory] Desk accessories, mousepad, desk blotter, paperweight | U
@@ -31,7 +31,7 @@
 [Scent] Scented candles with unique fragrances, consider candles that uses natural waxes | U
 [Scent] Scented lotions, cream, or body washes | U
 [Scent] Incense sticks, cones, or scented sachets for drawers and closets | U
-[Plant] Succulents and cacti: low-maintenance plants, suitable for those who may not have a green thumb | C
+[Plant] Succulents and cacti: low-maintenance plants, suitable for those who may not have a green thumb | U
 [Plant] DIY terrarium kit: thoughtful choice for someone who enjoys crafts and plants | U
 [Plant] Garden starter kit with seeds, pots, and planting instructions | U
 [Flower] Red roses: Love and passion (associated with deep affection and desire) | U
@@ -51,6 +51,6 @@
 [Flower] Forget-me-nots: True love and remembrance (given in the hope the recipient will not forget the giver) | U
 [Flower] Red poppies: Remembrance, deep and passionate love between two people | U
 [Flower] Violets: Faithfulness (conveys the message "I'll always be true") | U
-[Flower] Anthuriums: Long-term love and happiness | C
+[Flower] Anthuriums: Long-term love and happiness | U
 [Flower] Amaryllis: Given as a recognition of someone's beauty and loveliness | U
 [Flower] Ranunculus: Use to convey charm and attractiveness (wonderful gift to say "I am dazzled by your charms") | U
