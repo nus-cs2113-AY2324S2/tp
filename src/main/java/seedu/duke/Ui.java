@@ -6,14 +6,18 @@ import java.util.Random;
  */
 public class Ui {
     private static final String LINE = "_________________________________________________________________";
-    private String[] byeSentences = {
+
+    /**
+     * Array of sentences to be chosen at random for quitUser()
+     */
+    private final String[] byeSentences = {
         "AeroCade dismissed. Fly with honor and return victorious.",
         "Departure clearance granted. Execute your aero-maneuvers with expertise.",
         "Aero-Launch sequence initiated. Depart with purpose.",
         "Permission to depart granted. Execute your flight plan with discipline."
     };
 
-    private String logo = "\n\n\n" + LINE + "\n" +
+    private final String logo = "\n\n\n" + LINE + "\n" +
             "               _______  _______  ______    _______              \n" +
             "              |   _   ||       ||    _ |  |       |             \n" +
             "  __|____|__  |  |_|  ||    ___||   | ||  |   _   |             \n" +
@@ -29,7 +33,7 @@ public class Ui {
             "              |     |_ |   _   ||       ||   |___     |  |      \n" +
             "              |_______||__| |__||______| |_______|    | / \\  \n\n" ;
 
-    private String boeing =
+    private final String boeing =
             "                                |                              \n" +
             "                              .-'-.                            \n" +
             "                             ' ___ '                           \n" +
@@ -38,11 +42,10 @@ public class Ui {
             "    ''''''-|---|--/    \\==][^',_m_,'^][==/    \\--|---|-''''''\n" +
             "                  \\    /  ||/   H   \\||  \\    /             \n" +
             "                   '--'   OO   O|O   OO   '--' \n              \n";
-    public void println(String s) {
-        System.out.println(s);
-    }
 
-    
+    /**
+     * Greets the user by displaying the AeroCade logo and the game menu.
+     */
     public void greetUser() {
         println(logo + boeing + LINE +
             "\n              [      Welcome to the AeroCade      ]\n" + LINE);
@@ -62,11 +65,26 @@ public class Ui {
             "\n\nType 'help' for a list of available commands!                  \n");
     }
 
-    public void byeUser() {
+    /**
+     * Prints the given string to the console.
+     *
+     * @param s The string to be printed.
+     */
+    public void println(String s) {
+        System.out.println(s);
+    }
+
+    /**
+     * Displays a random farewell message from an array to the user.
+     */
+    public void quitUser() {
         int randomIndex = new Random().nextInt(byeSentences.length);
         println(LINE + "\n\n" + boeing + byeSentences[randomIndex] + "\n");
     }
 
+    /**
+     * Prints a help message listing the available commands.
+     */
     public void printHelp() {
         println(LINE + "\nHere are the list of commands:\n" +
                 "'TTT' - Starts Tic-tac-toe Game\n" +
