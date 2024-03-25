@@ -167,6 +167,7 @@ public class HealthList extends ArrayList<Health> {
     public static int getBmisSize() {
         return bmis.size();
     }
+
     /**
      * Deletes Bmi object based on index.
      * @param index Index of the Bmi object to be deleted.

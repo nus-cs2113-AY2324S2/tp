@@ -376,8 +376,6 @@ public class Handler {
         }
     }
 
-
-
     //@@author
     /**
      * Checks the type of exercise based on the user input.
