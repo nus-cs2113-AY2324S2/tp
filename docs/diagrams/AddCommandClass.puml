@@ -1,0 +1,16 @@
+@startuml
+
+package "seedu.stockpal.commands" {
+    class NewCommand {
+        - name: String
+        - quantity: Integer
+        - price: Double
+        - description: String
+
+        + NewCommand(name: String, quantity: Integer, price: Double, description: String)
+        + execute(productList: ProductList): void
+        + createProduct(productList: ProductList, name: String, quantity: Integer, price: Double, description: String): Product
+    }
+}
+
+@enduml

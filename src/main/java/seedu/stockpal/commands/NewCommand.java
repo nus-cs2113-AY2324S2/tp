@@ -62,6 +62,7 @@ public class NewCommand extends ListActionCommand {
 
     /**
      * Creates a product.
+     *
      * @param productList List of products object.
      * @param name Name of object.
      * @param quantity Quantity of object.
@@ -85,6 +86,7 @@ public class NewCommand extends ListActionCommand {
         } else {
             pid = productList.get(sizeOfArray - 1).getPid().getPid() + 1;
         }
+
         return new Product(name, quantity, price, description, pid);
     }
 }

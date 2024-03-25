@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: Developer Guide
@@ -9,12 +10,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 * The formatting for the developer guide is inspired by [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 Third-party libraries:
 * [OpenCSV](https://opencsv.sourceforge.net/) - This package is licensed under [Apache2](https://opencsv.sourceforge.net/licenses.html), which is a business-friendly open-source software license.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +26,6 @@ Third-party libraries:
 </div>
 
 ### Architecture
-
 <img src="images/ArchitectureDiagram.png" alt=""/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -71,6 +70,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 **API** : [`Command.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/commands/Command.java)
 
+
 ![Structure of the Commands Component](images/CommandsClassDiagram.png)
 
 ### Data component
@@ -108,10 +108,25 @@ Exceptions classes used by multiple components are in the `seedu.stockpal.except
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add new product feature
+<img src="images/AddCommandClass.png" alt=""/>
 
-#### Implementation
+The NewCommand class is responsible for adding a new product to the inventory in the StockPal application.
 
-#### Design consideration
+**Attributes**
+* name: The name of the product.
+* quantity: The initial quantity of the product.
+* price: The price of the product.
+* description: The description of the product.
+
+**Methods**
+* `NewCommand`: Constructor for creating a new instance of the NewCommand class.
+* `execute`: Method to add the new product to the product list.
+* `createProduct`: Method to create a new product with a unique product ID.
+
+The following sequence diagram shows how an add operation works:
+<img src="images/AddCommandSequence.png" alt=""/>
+
+
 
 ### Edit product feature
 
@@ -127,7 +142,7 @@ This section describes some noteworthy details on how certain features are imple
 
 **Target user profile**:
 
-{Describe the target user profile}
+
 
 **Value proposition**:
 
@@ -153,3 +168,4 @@ This section describes some noteworthy details on how certain features are imple
 ## **Appendix: Instructions for manual testing**
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+

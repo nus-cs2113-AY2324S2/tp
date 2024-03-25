@@ -3,6 +3,8 @@ package seedu.stockpal.ui;
 import org.apache.commons.text.WordUtils;
 import seedu.stockpal.common.Messages;
 import seedu.stockpal.data.ProductList;
+import seedu.stockpal.data.Transaction;
+import seedu.stockpal.data.TransactionList;
 import seedu.stockpal.data.product.Product;
 
 import java.util.NoSuchElementException;
@@ -111,5 +113,23 @@ public final class Ui {
 
     public static void printNoLowQuantity() {
         printToScreen(Messages.MESSAGE_NO_LOW_QUANTITY_PRODUCTS);
+    }
+
+
+
+
+    /**
+     * Outputs the list of messages as lines ending with line separator
+     * , and replace line-separators with platform independent line-separator.
+     *
+     * @param transactions List of transactions to output.
+     */
+    public static void printTransactionTasks(TransactionList transactions) {
+        printToScreen(HORIZONTAL_LINE);
+        for (int i = 0; i < transactions.getSize(); i++ ) {
+            assert transactions.get(i) != null : "Product should not be a null object.";
+            Transaction transaction = transactions.get(i);
+            System.out.println((i + 1) + ". " + transaction);
+        }
     }
 }

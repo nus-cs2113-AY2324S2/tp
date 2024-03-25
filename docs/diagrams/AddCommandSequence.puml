@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":StockPal" as stockpal STOCKPAL_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":Commands" as commands COMMANDS_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+activate stockpal STOCKPAL_COLOR
+
+user -[USER_COLOR]> ui : "new n/Chocolate q/100 p/2.00 d/Tobelerone"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> stockpal : "new n/Chocolate q/100 p/2.00 d/Tobelerone"
+
+stockpal -[STOCKPAL_COLOR]> parser : parseCommand("new n/Chocolate q/100 p/2.00 d/Tobelerone")
+activate parser PARSER_COLOR
+
+parser --[PARSER_COLOR]> stockpal : NewCommand(name, quantity, price, description)
+deactivate parser
+
+stockpal -[STOCKPAL_COLOR]> commands : execute(NewCommand(name, quantity, price, description))
+activate commands COMMANDS_COLOR
+
+commands --[COMMANDS_COLOR]> ui
+deactivate commands
+ui --[UI_COLOR]> user : "added product!"
+
+stockpal -[STOCKPAL_COLOR]> storage : (productList)
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+storage --[STORAGE_COLOR]> stockpal
+deactivate storage
+
+@enduml
