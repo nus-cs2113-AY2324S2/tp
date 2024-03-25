@@ -1,18 +1,19 @@
 package classify.user;
 
 import classify.datacommands.DataHandler;
+
 import classify.student.AddStudent;
 import classify.student.Student;
 import classify.student.StudentAttributes;
 import classify.student.StudentList;
 import classify.student.StudentSorter;
 import classify.student.SubjectGrade;
+import classify.student.ViewStudent;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,6 @@ public class InputParsing {
     private static final String EARLIER_POSSIBLE_DATE = "1970-01-01";
     private static final String DEFAULT_STRING_VALUE = "Unknown";
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
-    private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
     private static final String BYE = "bye";
     private static final String LIST = "list";
     private static final String ADD = "add";
@@ -61,7 +61,7 @@ public class InputParsing {
             break;
 
         case VIEW:
-            viewStudent(masterStudentList, in, userCommand[1]);
+            ViewStudent.viewStudent(masterStudentList, in, userCommand[1]);
             Ui.printDivider();
             break;
 
@@ -269,7 +269,7 @@ public class InputParsing {
 
     private static void editStudentAttributes(Scanner in, Student student) {
         StudentAttributes attributes = student.getAttributes();
-        showAttributes(attributes);
+        ViewStudent.showAttributes(attributes);
 
         while (true) {
             Ui.printEditPrompt();
@@ -389,93 +389,6 @@ public class InputParsing {
         Ui.printDivider();
     }
 
-    //@@author tayponghee
-    /**
-     * Displays the details of a specific student.
-     *
-     * @param masterStudentList The list of all students.
-     * @param in                The scanner object to read user input.
-     * @param studentName       The name of the student if the user had entered it
-     *                          before being prompted
-     */
-    private static void viewStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
-        
-        String name;
-
-        //@@author alalal47
-        if (studentName == null) {
-            Ui.printStudentNamePrompt();
-            name = in.nextLine();
-        } else {
-            name = studentName;
-        }
-
-        //@@author blackmirag3
-        assert name != null : "Student name cannot be null";
-        //@@author tayponghee
-        Student foundStudent = findStudentByName(masterStudentList, name);
-
-        if (foundStudent != null) {
-            logger.log(Level.INFO, "Viewing student details: " + name);
-            Ui.printDivider();
-            Ui.printStudentDetails();
-            Ui.printStudentName(name);
-            Ui.printStudentDetails(foundStudent);
-            StudentAttributes attributes = foundStudent.getAttributes();
-            showAttributes(attributes);
-
-            int totalClassesAttended = getTotalClassesAttended(foundStudent);
-            Ui.printTotalClassesAttended(totalClassesAttended);
-
-        } else {
-            logger.log(Level.WARNING, "Student not found: " + name);
-            Ui.printStudentNotFound();
-        }
-    }
-
-    /**
-     * Calculates the total number of classes attended by the student across all subjects.
-     *
-     * @param student The student whose total classes attended are to be calculated.
-     * @return The total number of classes attended by the student.
-     */
-    private static int getTotalClassesAttended(Student student) {
-        int totalClassesAttended = 0;
-        for (classify.student.SubjectGrade subjectGrade : student.getAttributes().getSubjectGrades()) {
-            totalClassesAttended += subjectGrade.getClassesAttended();
-        }
-        return totalClassesAttended;
-    }
-
-    /**
-     * Displays the attributes of a student.
-     *
-     * @param attributes The attributes of the student to display.
-     */
-    private static void showAttributes(StudentAttributes attributes) {
-        if (attributes != null) {
-
-            List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
-
-            if (!subjectGrades.isEmpty()) {
-
-                for (SubjectGrade subjectGrade : subjectGrades) {
-                    assert subjectGrade != null : "subjectGrade cannot be null";
-                    Ui.printSubjectName(subjectGrade.getSubject());
-                    Ui.printStudentGrades(subjectGrade.getGrade());
-                    Ui.printClassesAttended(subjectGrade.getClassesAttended());
-                    Ui.printDivider();
-                }
-
-            } else {
-                Ui.printEmptySubjectError();
-            }
-
-        } else {
-            Ui.printNullAttributeError();
-        }
-    }
-
     // @@author blackmirag3
     /**
      * Prompts the user to edit subject, grade, and classes attended for student.
@@ -543,7 +456,6 @@ public class InputParsing {
             }
         }
     }
-
 
     /**
      * Prompts for grade from user input and checks format
