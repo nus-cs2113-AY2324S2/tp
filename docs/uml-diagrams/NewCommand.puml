@@ -30,7 +30,7 @@ class NewCommand {
 }
 
 class Item {
-    +Item(name:String, quantity:int, price:double)
+    +Item(name:String, quantity:int, price:double, expiryDate: LocalDate)
 }
 
 class Inventory {
