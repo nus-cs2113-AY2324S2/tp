@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import utility.CustomExceptions;
 import utility.ErrorConstant;
+import utility.HealthConstant;
 import utility.WorkoutConstant;
 import workouts.WorkoutList;
 
@@ -167,6 +168,8 @@ class HandlerTest {
         assertTrue(output.contains("Commands List"));
     }
 
+
+
     /**
      * Tests the processInput function's behaviour to an invalid command, which prints
      * an error.
@@ -178,8 +181,26 @@ class HandlerTest {
         Handler.initialiseScanner();
         Handler.processInput();
 
-        String expected = "Exception Caught! " + ErrorConstant.INVALID_COMMAND_ERROR + System.lineSeparator();
+        String expected = "Exception Caught!" +
+                System.lineSeparator() +
+                ErrorConstant.INVALID_COMMAND_ERROR +
+                System.lineSeparator();
         assertEquals(expected, errContent.toString());
+        Handler.destroyScanner();
+    }
+
+    /**
+     * Tests the processInput function's behaviour when the HEALTH command is given with invalid parameters.
+     */
+    @Test
+    void processInput_healthCommand_insufficientParameters() {
+        String input = "HEALTH /h:bmi /height:1.70";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Handler.initialiseScanner();
+        Handler.processInput();
+
+        assertTrue(errContent.toString().contains(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI));
+        Handler.destroyScanner();
     }
 
     /**
