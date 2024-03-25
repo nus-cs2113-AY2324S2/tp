@@ -20,6 +20,7 @@ public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
             Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
 
+
     public static final Pattern DELETE_COMMAND_FORMAT =
             Pattern.compile("del (?<itemName>[^/]+)");
 
@@ -56,11 +57,10 @@ public class Parser {
         case ADD:
             try {
                 return prepareAdd(userInput);
-
             } catch (CommandFormatException e) {
                 break;
             }
-        case DELETE:
+        case DEL:
             try {
                 return prepareDelete(userInput);
             } catch (CommandFormatException e) {
@@ -82,7 +82,6 @@ public class Parser {
 
     private Command prepareAdd(String args) throws CommandFormatException{
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-
         // Validate arg string format
         if (!matcher.matches()) {
             throw new CommandFormatException(CommandType.ADD);
@@ -101,7 +100,7 @@ public class Parser {
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            throw new CommandFormatException(CommandType.DELETE);
+            throw new CommandFormatException(CommandType.DEL);
         }
         return new DeleteCommand(matcher.group("itemName"));
     }

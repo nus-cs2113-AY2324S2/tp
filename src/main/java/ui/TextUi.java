@@ -18,9 +18,9 @@ public class TextUi {
     }
 
     public String getUserInput() {
-        System.out.println("Enter Command: ");
+        System.out.println("Enter Command:");
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
+        String userInput = in.hasNextLine() ? in.nextLine() : "";
         if (shouldIgnore(userInput)) {
             return "Invalid Command"; //Might want to change this with Exceptions
         }
@@ -57,13 +57,18 @@ public class TextUi {
     }
 
     public static <T> void showInventoryList(ArrayList<T> arrayList) {
+        replyToUser("List: ");
         for (T item : arrayList) {
             if (item == null) {
                 break;
             }
-            replyToUser(
-                    "List:",
-                    String.valueOf(item));
+            replyToUser(arrayList.indexOf(item) + 1 +". " + item);
         }
+    }
+
+    public static void showEditMessage(String item, int oldQuantity, int newQuantity) {
+        replyToUser("\n" +
+                "Changed quantity of " + item + " from " + oldQuantity + " to " + newQuantity
+        );
     }
 }
