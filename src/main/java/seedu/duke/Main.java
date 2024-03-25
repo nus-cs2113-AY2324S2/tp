@@ -18,9 +18,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static storage.Storage.createNewFile;
-import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
-import static data.TaskManager.updateManager;
+import static ui.UiRenderer.printHelp;
 
 
 public class Main {
@@ -53,15 +52,10 @@ public class Main {
                 }
             }
             printWeek = true; // Reset flag for the next iteration
-            System.out.println("Enter 'next' for next week, 'prev' for previous week, " +
-                    "'add' to add a task, " +
-                    "'update' to edit a task, " +
-                    "'delete' to delete a task, " + 
-                    "'month' to display the month view, " +
-                    "or 'quit' to quit:");
+            System.out.println("Enter help to learn commands");
             String input = scanner.nextLine().trim().toLowerCase();
-
-            switch (input) {
+            String command = input.split(",")[0];
+            switch (command) {
             case "next":
                 if (inMonthView) {
                     monthView.next();
@@ -78,22 +72,49 @@ public class Main {
                 break;
             case "update":
                 try {
-                    updateManager(scanner, weekView, inMonthView, taskManager);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length < 4) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "update, <day>, <taskIndex>, <newDescription>");
+                    }
+                    int day = Integer.parseInt(parts[1].trim());
+                    int taskIndex = Integer.parseInt(parts[2].trim());
+                    String newDescription = parts[3].trim();
+                    taskManager.updateManager(scanner, weekView, monthView, inMonthView, taskManager, day,
+                            taskIndex, newDescription);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "add":
                 try {
-                    addManager(scanner, weekView, inMonthView);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length < 4) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "add, <day>, <taskType>, <taskDescription>");
+                    }
+                    String action = parts[0];
+                    //int day = Integer.parseInt(parts[1].trim());
+                    String day = parts[1].trim();
+                    String taskTypeString = parts[2].trim();
+                    String taskDescription = parts[3].trim();
+                    taskManager.addManager(weekView,monthView, inMonthView, action, day,
+                            taskTypeString, taskDescription);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "delete":
                 try {
-                    deleteManager(scanner, weekView, inMonthView, taskManager);
-                } catch (TaskManagerException | DateTimeParseException e) {
+                    String[] parts = input.split(",\\s*");
+                    if (parts.length != 3) {
+                        throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
+                                "delete, <day>, <taskIndex>");
+                    }
+                    String day = parts[1].trim();
+                    int taskIndex = Integer.parseInt(parts[2].trim());
+                    deleteManager(weekView, monthView, inMonthView, taskManager, day, taskIndex);
+                } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
@@ -104,7 +125,9 @@ public class Main {
                 break;
             case "week":
                 inMonthView = false;
-                //weekView.printWeekView(taskManager);
+                break;
+            case "help":
+                printHelp();
                 break;
             case "quit":
                 System.out.println("Exiting Calendar...");
