@@ -1,5 +1,8 @@
 package workouts;
 
+import utility.CustomExceptions;
+import utility.ErrorConstant;
+import utility.UiConstant;
 import utility.WorkoutConstant;
 
 import java.util.ArrayList;
@@ -77,6 +80,38 @@ public class GymStation {
         return numberOfSets;
     }
 
+    /**
+     * Checks parameters from user input for adding a new GymStation.
+     *
+     * @param inputs List of strings representing user input.
+     * @return Array of strings representing the parameters required for a new GymStation.
+     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
+    public static String[] checkIfGymStationInputValid(String[] inputs) throws
+            CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+        String exerciseName = inputs[WorkoutConstant.INDEX_OF_STATION_NAME].trim();
+        String sets = inputs[WorkoutConstant.INDEX_OF_STATION_SETS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String reps = inputs[WorkoutConstant.INDEX_OF_STATION_REPS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String weights = inputs[WorkoutConstant.INDEX_OF_STATION_WEIGHTS].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+
+        try {
+            int setInteger = Integer.parseInt(sets);
+            int repInteger = Integer.parseInt(reps);
+            int weightInteger = Integer.parseInt(weights);
+            assert setInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert repInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+            assert weightInteger > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
+
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.NUMERIC_INPUT_REQUIRED_GYM_STATION);
+        }
+
+
+        return new String[]{exerciseName, sets, reps, weights};
+    }
     /**
      * Retrieves the string representation of a GymStation object.
      *

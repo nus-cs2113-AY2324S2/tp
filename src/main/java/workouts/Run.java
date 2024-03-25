@@ -144,6 +144,43 @@ public class Run extends Workout{
     }
 
     /**
+     * Method checks if Run values is valid
+     * Returns {@code true} if {@code runDistance} and {@code runTime} parameters are valid.
+     * Valid only if {@code runDistance} is a positive double / not blank / and is digit.
+     * {@code runTime} is not blank.
+     * {@code runDate} is not blank.
+     * Otherwise, throw {@code CustomExceptions.InvalidInput}  or {@code CustomExceptions.InsufficientInput}
+     *
+     * @param runDistance String representing the distance of the run
+     * @param runTime String representing the time taken for the run
+     * @param runDate String representing the date of the run
+     * @return {@code true} if all parameters are valid.
+     */
+    public static boolean checkIfRunIsValid(String runDistance, String runTime, String runDate)
+            throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {
+
+        try{
+            double value = Double.parseDouble(runDistance);
+            if (value <= 0){
+                throw new CustomExceptions.InvalidInput(ErrorConstant.DISTANCE_MUST_BE_POSITIVE_ERROR);
+            }
+        } catch (NumberFormatException e){
+            throw new CustomExceptions.InvalidInput(ErrorConstant.DISTANCE_MUST_BE_DOUBLE_ERROR);
+        }
+
+        if(runTime.isBlank()){
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_BLANK_ERROR);
+        }
+
+        if (runDate.isBlank()){
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_DATE_BLANK_ERROR);
+        }
+
+        return true;
+
+    }
+
+    /**
      * Method checks if hour has been specified, then returns total seconds.
      *
      * @return The total number of seconds in the run.
