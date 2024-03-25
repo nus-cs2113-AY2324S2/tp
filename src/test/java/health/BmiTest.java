@@ -26,6 +26,12 @@ class BmiTest {
     @AfterEach
     void restoreStreams() {
         System.setOut(originalOut);
+
+    }
+
+    @AfterEach
+    void cleanup() {
+        HealthList.clearBmisAndPeriods();
     }
 
     /**
@@ -166,13 +172,7 @@ class BmiTest {
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
 
-        String expected = "2024-03-19"
-                + System.lineSeparator()
-                + "Your BMI is 22.86"
-                + System.lineSeparator()
-                + "Great! You're within normal range."
-                + System.lineSeparator()
-                + "2024-03-20"
+        String expected = "2024-03-20"
                 + System.lineSeparator()
                 + "Your BMI is 26.12"
                 + System.lineSeparator()
@@ -187,5 +187,46 @@ class BmiTest {
 
         HealthList.showBmiHistory();
         assertEquals(expected, outContent.toString());
+    }
+
+    /**
+     * Test deleting of bmi with valid list and valid index.
+     * Expected behaviour is to have one bmi entry left in the list.
+     *
+     * @throws CustomExceptions.OutOfBounds If the index is invalid.
+     */
+    @Test
+    void deleteBmi_properList_listOfSizeOne() throws CustomExceptions.OutOfBounds {
+        Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
+        Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
+        HealthList.addBmi(firstBmi);
+        HealthList.addBmi(secondBmi);
+
+        int index = 1;
+        HealthList.deleteBmi(index);
+        assertEquals(1, HealthList.getBmisSize());
+    }
+
+    /**
+     * Test deleting of bmi with empty list.
+     * Expected behaviour is for an AssertionError to be thrown.
+     */
+    @Test
+    void deleteBmi_emptyList_throwsAssertionError() {
+        assertThrows(AssertionError.class, () ->
+                HealthList.deleteBmi(0));
+    }
+
+    /**
+     * Test deleting of bmi with invalid index.
+     * Expected behaviour is for an OutOfBounds error to be thrown.
+     */
+    @Test
+    void deleteBmi_properListInvalidIndex_throwOutOfBoundsForBmi() {
+        Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
+        HealthList.addBmi(firstBmi);
+        int invalidIndex = 5;
+        assertThrows (CustomExceptions.OutOfBounds.class, () ->
+                HealthList.deleteBmi(invalidIndex));
     }
 }

@@ -170,7 +170,7 @@ public class Handler {
 
             default:
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_PARAMETER_ERROR);
-        }
+            }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.OutOfBounds e) {
             System.out.println(e.getMessage());
         }

@@ -1,6 +1,7 @@
 package health;
 
 import storage.LogFile;
+import utility.CustomExceptions;
 import utility.HealthConstant;
 import java.util.ArrayList;
 
@@ -94,15 +95,32 @@ public class HealthList extends ArrayList<Health> {
     }
     //@@author rouvinerh
 
+
+    /**
+     * Retrieves size of periods list.
+     *
+     * @return Size of periods list.
+     */
+    public static int getPeriodsSize() {
+        return periods.size();
+    }
+
+    /**
+     * Retrieves size of bmis list.
+     *
+     * @return Size of bmis list.
+     */
+    public static int getBmisSize() {
+        return bmis.size();
+    }
     /**
      * Deletes Bmi object based on index.
      * @param index Index of the Bmi object to be deleted.
      */
-    public static void deleteBmi(int index) {
+    public static void deleteBmi(int index) throws CustomExceptions.OutOfBounds {
         assert !bmis.isEmpty() : "BMI list is empty.";
         if (index < 0 || index >= bmis.size()) {
-            System.err.println("Invalid index: " + index);
-            return;
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
         }
         Bmi deletedBmi = bmis.get(index);
         System.out.println("Removed BMI entry of " +
@@ -117,11 +135,10 @@ public class HealthList extends ArrayList<Health> {
      * Deletes Bmi object based on index.
      * @param index Index of the Bmi object to be deleted.
      */
-    public static void deletePeriod(int index) {
+    public static void deletePeriod(int index) throws CustomExceptions.OutOfBounds {
         assert !periods.isEmpty() : "Period list is empty.";
         if (index < 0 || index >= periods.size()) {
-            System.err.println("Invalid index: " + index);
-            return;
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
         }
         Period deletedPeriod = periods.get(index);
         System.out.println("Removed period entry with start date: " +
