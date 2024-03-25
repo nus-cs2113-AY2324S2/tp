@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
     public static void listAllCommands() {
         UI.showMessage("Here are the full list of commands available:");
         UI.showMessage("1. `add member <NAME>` - Add a new member to the group.");
-        UI.showMessage("2. `Add transaction <LENDER> p/<BORROWER1> a/<AMOUNT OWED> " +
+        UI.showMessage("2. `add transaction <LENDER> p/<BORROWER1> a/<AMOUNT OWED> " +
                 "p/<BORROWER2> a/<AMOUNTED OWED> ...` - Add a new transaction.");
         UI.showMessage("3. `list members` - List all current members in the group.");
         UI.showMessage("4. `list transactions` - List all transactions in the group.");
