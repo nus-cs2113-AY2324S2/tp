@@ -1,5 +1,8 @@
 package brokeculator.expense;
 
+import brokeculator.storage.parsing.FileKeyword;
+import brokeculator.storage.parsing.SaveableType;
+
 import java.util.ArrayList;
 
 public class ExpenseManager {
@@ -41,10 +44,30 @@ public class ExpenseManager {
         }
     }
 
+    public String getExpensesListString(int amountToList) {
+        assert !this.expenses.isEmpty();
+
+        int lastIdxToPrint;
+        if (amountToList <= 0 || amountToList > this.expenses.size()) {
+            lastIdxToPrint = this.expenses.size();
+        } else {
+            lastIdxToPrint = amountToList;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < lastIdxToPrint; i++) {
+            sb.append(i + 1).append(". ").append(expenses.get(i)).append(System.lineSeparator());
+        }
+
+        return sb.toString();
+    }
+
     public String getExpensesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (Expense expense : expenses) {
-            sb.append(expense.getStringRepresentation());
+            String currentExpenseString = expense.getStringRepresentation();
+            String finalExpenseString = FileKeyword.formatWithKeyword(SaveableType.EXPENSE, currentExpenseString);
+            sb.append(finalExpenseString);
             sb.append(System.lineSeparator());
         }
         return sb.toString();
@@ -52,11 +75,7 @@ public class ExpenseManager {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Expense expense : expenses) {
-            sb.append(expense.getStringRepresentation());
-        }
-        return sb.toString();
+        return getExpensesListString(expenses.size());
     }
     
     public int getNumberOfExpensesTracked() {

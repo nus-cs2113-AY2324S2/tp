@@ -1,8 +1,5 @@
 package brokeculator.expense;
 
-import brokeculator.storage.parsing.FileKeyword;
-import brokeculator.storage.parsing.SaveableType;
-
 import java.util.logging.Logger;
 
 /**
@@ -10,6 +7,7 @@ import java.util.logging.Logger;
  */
 public class Expense implements Saveable {
     private static final Logger logger = Logger.getLogger(Expense.class.getName());
+    private static final String FILE_DELIMITER = "EXPENSE_DELIMITER";
     private final String description;
     private final String date;
     private final double amount;
@@ -27,7 +25,7 @@ public class Expense implements Saveable {
         this.description = description.trim();
         this.amount = amount;
         this.date = date.trim();
-        this.category = category.trim();
+        this.category = category == null ? null : category.trim();
     }
 
     /**
@@ -67,33 +65,40 @@ public class Expense implements Saveable {
      * @return a string representation of the expense.
      */
     public String getStringRepresentation() {
-        return FileKeyword.formatWithKeyword(SaveableType.EXPENSE,
-                String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase())
-        );
+        String stringRepresentation = description
+                + FILE_DELIMITER + date
+                + FILE_DELIMITER + amount;
+        if (this.category != null) {
+            stringRepresentation += (FILE_DELIMITER + this.category.toUpperCase());
+        }
+        return stringRepresentation;
     }
 
     public static Expense getExpenseFromFile(String stringRepresentation) throws Exception {
-        String[] split = stringRepresentation.split(" ");
-        if (split.length != 4) {
+        String[] split = stringRepresentation.split(FILE_DELIMITER);
+        if (split.length != 3 && split.length != 4) {
             logger.warning("Expense file is corrupted.");
             throw new Exception("Expense file is corrupted.");
         }
         
         String description = split[0];
 
-        String amountString = split[1].substring(1);
+        String date = split[1];
+
+        String amountString = split[2];
         double amount = Double.parseDouble(amountString);
 
-        String date = split[2].substring(1, split[2].length() - 1);
-
-        String category = split[3].substring(1, split[3].length() - 1);
+        String category = null;
+        if (split.length == 4) {
+            category = split[3];
+        }
 
         return new Expense(description, amount, date, category);
     }
 
     @Override
     public String toString() {
-        if (category.equalsIgnoreCase("null")) {
+        if (category == null) {
             return String.format("%s $%.2f (%s)", description, amount, date);
         }
         return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
