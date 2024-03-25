@@ -1,6 +1,8 @@
 package data;
 
 public class Event extends Task {
+    private final String startTime;
+    private final String endTime;
     protected String startDate;
     protected String endDate;
 
@@ -13,10 +15,12 @@ public class Event extends Task {
      * @param start The starting time/date of the task.
      * @param end The ending time/date of the task.
      */
-    public Event(String name, String start, String end) {
+    public Event(String name, String start, String end, String startTime, String endTime) {
         super(name);
         this.startDate = start;
         this.endDate = end;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -28,6 +32,28 @@ public class Event extends Task {
     @Override
     public String getStartDate() {
         return startDate;
+    }
+
+    /**
+     * Getter for start time of Event task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the start time.
+     */
+    @Override
+    public String getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Getter for end time of Event task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the end time.
+     */
+    @Override
+    public String getEndTime() {
+        return endTime;
     }
 
     /**
@@ -61,7 +87,7 @@ public class Event extends Task {
      */
     @Override
     public String getSaveFormat () {
-        return getTaskType() + "|" + getName() + "|" + getStartDate() + "|" + getEndDate();
+        return getTaskType() + "|" + getName() + "|" + getStartDate() + "|" + getEndDate() + "|" + getStartTime() + "|" + getEndTime();
     }
 }
 

@@ -98,12 +98,42 @@ public class Task {
     }
 
     /**
+     * Getter for start time of Event task.
+     * It is a dummy function meant for the Event subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getStartTime() {
+        return "";
+    }
+
+    /**
+     * Getter for end time of Event task.
+     * It is a dummy function meant for the Event subclass to override.
+     *
+     * @return Empty string.
+     */
+    public String getEndTime() {
+        return "";
+    }
+
+    /**
      * Getter for by date for a Deadline task.
      * It is a dummy function meant for the Deadline subclass to override.
      *
      * @return Empty string.
      */
     public String getByDate() {
+        return "";
+    }
+
+    /**
+     * Getter for by time for a Deadline task.
+     * It is a dummy function meant for the Deadline subclass to override
+     *
+     * @return Empty string.
+     */
+    public String getByTime() {
         return "";
     }
 
