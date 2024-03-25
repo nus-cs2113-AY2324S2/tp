@@ -40,7 +40,7 @@ public class GroceryListTest {
         try {
             GroceryList gl = new GroceryList();
             gl.addGrocery(new Grocery("Meat", 0, LocalDate.now()));
-            gl.editExpiration("Meat");
+            gl.editExpiration("Meat d/2024-07-19");
         } catch (GitException e) {
             String message = "Command is in the wrong format, type \"help\" for more information." +
                     System.lineSeparator() +
@@ -81,7 +81,8 @@ public class GroceryListTest {
             gl.editAmount("Meat", false);
             fail("Expected a WrongFormatException to be thrown");
         } catch (WrongFormatException e) {
-            String expectedMessage = "Command is in the wrong format, type \"help\" for more information. amt needs 'a/'";
+            String expectedMessage = 
+                "Command is in the wrong format, type \"help\" for more information. amt needs 'a/'";
             assertEquals(expectedMessage, e.getMessage());
         } catch (GitException e) {
             fail("Expected a WrongFormatException, but another GitException was thrown");

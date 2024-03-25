@@ -61,7 +61,9 @@ public class Grocery {
         // TODO: update amount output according to Grocery subclass
         // TODO: consider stating amount == 0 now that we track amount ?
         String amt = (amount == 0) ? "" : ", amount: " + amount;
-        String exp = (expiration == null) ? "expiration date not set" : " expires on: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String exp = (expiration == null) 
+            ? " expiration date not set" 
+            : " expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return this.name + amt + exp;
     }
 }
