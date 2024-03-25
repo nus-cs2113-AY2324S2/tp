@@ -70,28 +70,6 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 **API** : [`Command.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/commands/Command.java)
 
-### NewCommand Class
-<img src="images/AddCommandClass.png" alt=""/>
-
-The ***Add feature*** is facilitated by stockPal.
-
-
-The NewCommand class is responsible for adding a new product to the inventory in the StockPal application.
-
-**Attributes**
-* name: The name of the product.
-* quantity: The initial quantity of the product.
-* price: The price of the product.
-* description: The description of the product.
-
-**Methods**
-* `NewCommand`: Constructor for creating a new instance of the NewCommand class.
-* `execute`: Method to add the new product to the product list.
-* `createProduct`: Method to create a new product with a unique product ID.
-
-The following sequence diagram shows how an add operation works:
-<img src="images/AddCommandSequence.png" alt=""/>
-
 
 ![Structure of the Commands Component](images/CommandsClassDiagram.png)
 
@@ -130,6 +108,23 @@ Exceptions classes used by multiple components are in the `seedu.stockpal.except
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add new product feature
+<img src="images/AddCommandClass.png" alt=""/>
+
+The NewCommand class is responsible for adding a new product to the inventory in the StockPal application.
+
+**Attributes**
+* name: The name of the product.
+* quantity: The initial quantity of the product.
+* price: The price of the product.
+* description: The description of the product.
+
+**Methods**
+* `NewCommand`: Constructor for creating a new instance of the NewCommand class.
+* `execute`: Method to add the new product to the product list.
+* `createProduct`: Method to create a new product with a unique product ID.
+
+The following sequence diagram shows how an add operation works:
+<img src="images/AddCommandSequence.png" alt=""/>
 
 #### Implementation
 
