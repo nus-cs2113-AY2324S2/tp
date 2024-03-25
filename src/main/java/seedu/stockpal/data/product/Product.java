@@ -62,6 +62,7 @@ public class Product {
 
 
     /**
+     * Return true if the increase in quantity is successful.
      * Increase quantity of the product and throw exception if overflow detected
      *
      * @param amountToChange Quantity to increase by
@@ -79,6 +80,7 @@ public class Product {
     }
 
     /**
+     * Return true if the decrease in quantity is successful.
      * Decrease quantity of the product and throw exception when outflow > current amount
      *
      * @param amountToChange Quantity to decrease by

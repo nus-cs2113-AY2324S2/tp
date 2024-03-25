@@ -73,10 +73,11 @@ public class ProductList {
     }
 
     /**
-     * Increases the quantity of the product with a specific PID
+     * Return true if the increase in quantity is successful.
+     * Increases the quantity of the product with a specific PID.
      *
-     * @param productIndex Product PID to update
-     * @param amountToIncrease Quantity of product to decrease
+     * @param productIndex Product PID to update.
+     * @param amountToIncrease Quantity of product to decrease.
      */
     public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
@@ -86,7 +87,8 @@ public class ProductList {
 
 
     /**
-     * Decreases the quantity of the product with a specific PID
+     * Return true if the decrease of quantity is successful.
+     * Decreases the quantity of the product with a specific PID.
      *
      * @param productIndex Product PID to update
      * @param amountToDecrease Quantity of product to decrease
