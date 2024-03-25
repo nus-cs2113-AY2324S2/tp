@@ -20,6 +20,28 @@ public class Event extends Task {
     }
 
     /**
+     * Getter for start date of Event task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the start date.
+     */
+    @Override
+    public String getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Getter for end date of Event task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the end date.
+     */
+    @Override
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /**
      * Returns the task type of the specified task.
      * Override function of superclass Task.
      *
@@ -32,15 +54,14 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the name of the task that invokes this function.
-     * Override function of superclass Task.
+     * Method that creates the save format for an Event task.
+     * Overrides super dummy function.
      *
-     * @return Returns the string of the task's name, including the start and end date.
+     * @return The String representation of the save format for this task.
      */
-
     @Override
-    public String getName () {
-        return name + "(from: " + startDate + " to: " + endDate + ")";
+    public String getSaveFormat () {
+        return getTaskType() + "|" + getName() + "|" + getStartDate() + "|" + getEndDate();
     }
 }
 
