@@ -2,7 +2,13 @@ package utility;
 
 public class WorkoutConstant {
     // Delimiter
-    public static final String STATION_DELIMITER = "/n:";
+    public static final String SPLIT_BY_NUMBER_OF_STATIONS = "/n:";
+    public static final String SPLIT_BY_EXERCISE_TYPE = "/e:";
+    public static final String SPLIT_BY_DISTANCE = "/d:";
+
+    public static final String SPLIT_BY_TIME = "/t:";
+    public static final String SPLIT_BY_DATE = "/date:";
+
 
 
     // Headers
@@ -50,11 +56,15 @@ public class WorkoutConstant {
     public static final int SUBSTRING_DATE = 3;
 
 
+
+
     // Workout Errors
     // STANDARDISE FORMAT ACCORDING TO TELEGRAM MESSAGE : <ERROR_TYPE>_ERROR
     // EXAMPLE : UNSPECIFIED_PARAMETER_ERROR
     // EXAMPLE : LOAD_ERROR
     // ----------------V V V V V ---- PLEASE CHECK AND MOVE TO ERROR ---- V V V V V----------------
+
+
     public static final String INVALID_FILTER = "Invalid filter! Filter is only 'run', 'gym', 'bmi' or 'period'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
     public static final String NO_GYMS_FOUND = "No gyms found! You need to add a gym first!";
