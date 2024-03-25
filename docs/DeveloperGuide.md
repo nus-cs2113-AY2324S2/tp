@@ -126,9 +126,7 @@ The NewCommand class is responsible for adding a new product to the inventory in
 The following sequence diagram shows how an add operation works:
 <img src="images/AddCommandSequence.png" alt=""/>
 
-#### Implementation
 
-#### Design consideration
 
 ### Edit product feature
 
