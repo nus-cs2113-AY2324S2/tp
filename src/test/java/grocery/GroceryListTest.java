@@ -1,6 +1,7 @@
 package grocery;
 
 import exceptions.commands.EmptyGroceryException;
+import exceptions.commands.NoSuchGroceryException;
 import exceptions.commands.WrongFormatException;
 import exceptions.CannotUseException;
 import exceptions.GitException;
@@ -29,9 +30,12 @@ public class GroceryListTest {
     public void editExpiration_noSuchGrocery_exceptionThrown() {
         try {
             GroceryList gl = new GroceryList();
-            gl.editExpiration("nothing");
-        } catch (GitException e) {
+            gl.editExpiration("nonexistentGrocery d/2024-07-19");
+            fail("Expected NoSuchGroceryException not thrown");
+        } catch (NoSuchGroceryException e) {
             assertEquals("The grocery does not exist!", e.getMessage());
+        } catch (GitException e) {
+            fail("Expected NoSuchGroceryException, but another GitException was thrown");
         }
     }
 
@@ -78,16 +82,16 @@ public class GroceryListTest {
         try {
             GroceryList gl = new GroceryList();
             gl.addGrocery(new Grocery("Meat", 0, LocalDate.now()));
-            gl.editAmount("Meat", false);
+            gl.editAmount("Meat", false); // This should probably include an attempt at an amount without the 'a/' indicator
             fail("Expected a WrongFormatException to be thrown");
         } catch (WrongFormatException e) {
-            String expectedMessage = 
-                "Command is in the wrong format, type \"help\" for more information. amt needs 'a/'";
+            String expectedMessage = "Command is in the wrong format, type \"help\" for more information. amt needs 'a/'";
             assertEquals(expectedMessage, e.getMessage());
         } catch (GitException e) {
             fail("Expected a WrongFormatException, but another GitException was thrown");
         }
     }
+    
 
     @Test
     public void editAmountUseTrue_amountReaches0_success() {

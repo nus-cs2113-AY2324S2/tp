@@ -63,7 +63,7 @@ public class Grocery {
         String amt = (amount == 0) ? "" : ", amount: " + amount;
         String exp = (expiration == null) 
             ? " expiration date not set" 
-            : " expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            : ", expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return this.name + amt + exp;
     }
 }

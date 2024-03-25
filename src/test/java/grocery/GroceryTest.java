@@ -8,7 +8,7 @@ class GroceryTest {
     @Test
     public void printGrocery_noAmountNoExpiration_leaveEmpty() {
         Grocery grocery = new Grocery("apple", 0, null);
-        String message = "apple expiration data not set";
+        String message = "apple expiration date not set";
         assertEquals(message, grocery.printGrocery());
     }
 
