@@ -1,12 +1,13 @@
 package longah.node;
 
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.ExceptionMessage;
 
 public class MemberTest {
     /** 
@@ -23,6 +24,9 @@ public class MemberTest {
         }
     }
 
+    /**
+     * Tests the successful creation of a member with a valid name and balance.
+     */
     @Test
     public void memberConstructor_validNameAndBalance_success() {
         try {
@@ -43,8 +47,22 @@ public class MemberTest {
             new Member("Alice123-");
             fail();
         } catch (Exception e) {
-            String expectedString = ExceptionMessage.INVALID_MEMBER_NAME.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage((LongAhException) e, ExceptionMessage.INVALID_MEMBER_NAME);
+            assertTrue(isMessage);
+        }
+    }
+
+    /**
+     * Tests the unsuccessful creation of a member with an empty name.
+     */
+    @Test
+    public void memberConstructor_emptyName_exceptionThrown() {
+        try {
+            new Member("");
+            fail();
+        } catch (Exception e) {
+            boolean isMessage = LongAhException.isMessage((LongAhException) e, ExceptionMessage.INVALID_MEMBER_NAME);
+            assertTrue(isMessage);
         }
     }
 

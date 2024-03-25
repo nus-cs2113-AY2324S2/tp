@@ -24,8 +24,12 @@ public class MemberList {
      * Adds a member to the group.
      *
      * @param member The member to add.
+     * @throws LongAhException If the member already exists in the group.
      */
-    public void addMember(Member member) {
+    public void addMember(Member member) throws LongAhException {
+        if (isMember(member)) {
+            throw new LongAhException(ExceptionMessage.DUPLICATE_MEMBER);
+        }
         this.members.add(member);
     }
 
@@ -33,6 +37,7 @@ public class MemberList {
      * Adds a member to the group with the specified name.
      *
      * @param name The name of the member to add.
+     * @throws LongAhException If the member already exists in the group.
      */
     public void addMember(String name) throws LongAhException {
         if (isMember(name)) {
@@ -292,5 +297,16 @@ public class MemberList {
         for (Member member : members) {
             member.clearBalance();
         }
+    }
+
+    /**
+     * Deletes a member from the group.
+     * 
+     * @param name The name of the member to delete.
+     * @throws LongAhException If the member does not exist in the group.
+     */
+    public void deleteMember(String name) throws LongAhException {
+        Member member = getMember(name);
+        members.remove(member);
     }
 }

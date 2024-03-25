@@ -37,7 +37,10 @@ public class DeleteCommand extends Command {
         String fullCommandString = this.commandString + " " + this.subCommand;
         switch (this.subCommand) {
         case "member":
-            throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
+            DeleteMemberCommand deleteMemberCommand =
+                    new DeleteMemberCommand(fullCommandString, this.taskExpression);
+            deleteMemberCommand.execute(group);
+            break;
         case "transaction":
             DeleteTransactionCommand deleteTransactionCommand =
                     new DeleteTransactionCommand(fullCommandString, this.taskExpression);

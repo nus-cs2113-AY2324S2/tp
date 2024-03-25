@@ -5,7 +5,7 @@ pushd %~dp0
 cd ..
 call gradlew clean shadowJar
 
-:: rmdir /s /q data\
+rmdir /s /q data\
 
 cd build\libs
 for /f "tokens=*" %%a in (

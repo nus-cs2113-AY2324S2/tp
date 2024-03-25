@@ -4,6 +4,7 @@ import longah.commands.Command;
 import longah.node.Group;
 import longah.util.TransactionList;
 import longah.exception.LongAhException;
+import longah.handler.UI;
 
 public class FindLenderCommand extends Command {
     /**
@@ -23,6 +24,6 @@ public class FindLenderCommand extends Command {
      */
     public void execute(Group group) throws LongAhException {
         TransactionList transactions = group.getTransactionList();
-        System.out.println(transactions.findLender(taskExpression));
+        UI.showMessage(transactions.findLender(taskExpression));
     }
 }

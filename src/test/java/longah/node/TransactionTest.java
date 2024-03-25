@@ -2,14 +2,13 @@ package longah.node;
 
 import longah.util.MemberList;
 import longah.util.TransactionList;
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.LongAhException;
-import longah.exception.ExceptionMessage;
 
 public class TransactionTest {
     /**
@@ -62,8 +61,9 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
+            Member lender = memberList.getMember("Alice");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.addBorrower("Bob b/5", memberList);
+            transaction.addBorrower("Bob b/5", memberList, lender);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_FORMAT.getMessage();
@@ -81,8 +81,9 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
+            Member lender = memberList.getMember("Alice");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.addBorrower("Bob a/five", memberList);
+            transaction.addBorrower("Bob a/five", memberList, lender);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_VALUE_FORMAT.getMessage();
@@ -100,8 +101,9 @@ public class TransactionTest {
             MemberList memberList = new MemberList();
             memberList.addMember("Alice");
             memberList.addMember("Bob");
+            Member lender = memberList.getMember("Alice");
             Transaction transaction = new Transaction("Alice p/Bob a/5", memberList);
-            transaction.addBorrower("Bob a/-5", memberList);
+            transaction.addBorrower("Bob a/-5", memberList, lender);
             fail();
         } catch (LongAhException e) {
             String expectedString = ExceptionMessage.INVALID_TRANSACTION_VALUE.getMessage();

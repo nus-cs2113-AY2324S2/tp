@@ -5,4 +5,4 @@ add member Brandon
 list members
 add transaction Amy p/Brandon a/5
 list debts
-quit
+exit
