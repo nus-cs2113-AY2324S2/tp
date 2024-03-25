@@ -29,7 +29,6 @@ public class BinBash {
 
                 if (userCommand instanceof ByeCommand) {
                     userInterface.setUserAsInactive();
-                    continue;
                 }
 
                 userCommand.execute();
@@ -40,8 +39,6 @@ public class BinBash {
                 userInterface.talk(e.getMessage());
             }
         }
-
-        userInterface.farewell();
     }
     
     /**
