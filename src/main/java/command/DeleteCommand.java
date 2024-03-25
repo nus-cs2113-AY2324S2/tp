@@ -30,5 +30,6 @@ public class DeleteCommand extends Command {
         }
         System.out.println(itemName + " has been successfully deleted.");
         Storage.overwriteFile(Itemlist.getItems(), false);
+        assert(!Itemlist.getItem(index).getItemName().equals(itemName));
     }
 }
