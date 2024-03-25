@@ -8,6 +8,7 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -28,19 +29,23 @@ public class TextIn {
                 .completer(new CommandCompleter())
                 .build();
         } catch (IOException e) {
-            TEXTINLOGGER.log(Level.WARNING, "failed to get system terminal! using standard system input");
+            TEXTINLOGGER.log(Level.WARNING, "failed to get system terminal!");
             throw new RuntimeException(e);
         }
     }
 
+    public PrintWriter getPrintWriter() {
+        return input.getTerminal().writer();
+    }
+
     public String nextLine() {
-        String userInput;
         try {
-            userInput = input.readLine("");
+            String userInput = input.readLine("");
+            TEXTINLOGGER.log(Level.INFO, "received raw user input: " + userInput);
+            return userInput;
         } catch (EndOfFileException | UserInterruptException e) {
-            userInput = "bye";
+            TEXTINLOGGER.log(Level.INFO, "received EOF / interrupt exception");
+            return "bye";
         }
-        TEXTINLOGGER.log(Level.INFO, "received raw user input: " + userInput);
-        return userInput;
     }
 }

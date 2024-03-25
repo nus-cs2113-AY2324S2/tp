@@ -1,5 +1,7 @@
 package seedu.binbash.ui;
 
+import java.io.PrintWriter;
+
 public class Ui {
     private static final String NEWLINE = System.lineSeparator();
     private static final String LOGO = "  ____  _       ____            _" + NEWLINE +
@@ -12,10 +14,12 @@ public class Ui {
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
 
     private static TextIn inputReader;
+    private static PrintWriter outputWriter;
     private static boolean isUserActive;
 
     public Ui() {
         inputReader = new TextIn();
+        outputWriter = inputReader.getPrintWriter();
         isUserActive = true;
     }
 
@@ -42,6 +46,6 @@ public class Ui {
     }
 
     public void talk(String line) {
-        System.out.println(LINE_DIVIDER + NEWLINE + line + NEWLINE + LINE_DIVIDER);
+        outputWriter.println(LINE_DIVIDER + NEWLINE + line + NEWLINE + LINE_DIVIDER);
     }
 }
