@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.Scanner;
-import java.util.HashMap;
 
 public class Duke {
     /**
@@ -22,7 +21,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
 
-        while(in.hasNextLine()) {
+        while (in.hasNextLine()) {
             String userInput = in.nextLine();
             Parser parser = new Parser(userInput);
 

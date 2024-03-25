@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,6 +13,7 @@ public class GroupTest {
         Group group = new Group(expectedName);
         assertEquals(expectedName, group.getGroupName(), "Group name is not the same as expected");
     }
+
     @Test
     public void addUserToGroupTest() {
         String groupName = "TestGroup";
@@ -22,6 +24,7 @@ public class GroupTest {
 
         assertTrue(group.getUsers().contains(user), "User was not added to the group");
     }
+
     @Test
     public void getOrCreateGroupTest() {
         String groupName = "NewGroup";
@@ -29,11 +32,12 @@ public class GroupTest {
 
         assertTrue(Group.groups.containsKey(groupName), "New group was not created");
     }
+
     @Test
     public void exitGroupTest() {
         String groupName = "ExitingGroup";
         Group.getOrCreateGroup(groupName);
         Group.exitGroup();
-        Assertions.assertNull(Group.currentGroupName, "Did not successfully exit the group");
+        Assertions.assertTrue(Group.currentGroupName.isEmpty(), "Did not successfully exit the group");
     }
 }
