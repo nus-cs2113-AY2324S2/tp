@@ -4,10 +4,37 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+![Architecture](images\Architecture.png)
 
+The **Architecture diagram** given above shows the high-level design of the application.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**`Main`** is in charge of the app launch, shut down, and taking user input.
+
+* At the app launch, it loads the data from the file system, and initializes other components.
+* At the app shut down, it saves the data to the file system, and shuts down other components.
+
+The app's work is done by the following components:
+
+* [**`MainLogic`**](#sublogic-component): The main logic command executor.
+* [**`SubLogic`**](#sublogic-component): The sub logics(i.e. **`MenuLogic`**, **`OrderLogic`**) command executor.
+* [**`Parser`**](#parser-component): The parser that parses user input to command.
+* [**`Model`**](#model-component): The data model that stores the data.
+* [**`Command`**](#command-component): Represents a command that the user can execute.
+* [**`Storage`**](#storage-component): Reads data from, and writes data.
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues 
+the command `Create order -menu 01`, `add -item 001` and `complete`.
+
+![Sequence Diagram](images\ArchitectureSequanceDiagram.png)
+
+## Implementation
 
 ## Product scope
 ### Target user profile
