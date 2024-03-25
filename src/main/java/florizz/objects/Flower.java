@@ -1,30 +1,65 @@
 package florizz.objects;
 
-public class Flower {
-    private String name;
-    private String occasion;
-    private String colour;
+import java.util.ArrayList;
 
-    public Flower() {
-        this("","","");
+public class Flower {
+    private String name = "";
+    private ArrayList<Occasion> occasions = null;
+    private Colour colour = null;
+
+    public enum Colour {
+        WHITE, BLUE, RED, PINK
     }
 
-    public Flower(String name, String colour, String occasion) {
+    public enum Occasion {
+        FUNERAL, WEDDING, VALENTINES, MOTHERS_DAY
+    }
+
+    public Flower() {
+        this.name = "";
+    }
+
+    public Flower(String name, Colour colour, ArrayList<Occasion> occasion) {
         this.name = name;
-        this.occasion = occasion;
+        this.occasions = occasion;
+        this.colour = colour;
+    }
+    public Flower(String name, Colour colour, Occasion occasion) {
+        this.name = name;
+        this.occasions = new ArrayList<Occasion>();
+        occasions.add(occasion);
         this.colour = colour;
     }
 
+    public static Occasion stringToOccasion(String ocassionString){
+        return Occasion.valueOf(ocassionString.replaceAll(" ", "_").toUpperCase());
+    }
+
+    public static String occasionToString(Occasion occasion){
+        return occasion.toString().charAt(0) +
+                occasion.toString().replaceAll("_", " ").toLowerCase().substring(1);
+    }
+
+    public static Colour stringToColour(String colourString){
+        return Colour.valueOf(colourString.replaceAll(" ", "_").toUpperCase());
+    }
     public String getFlowerName() {
         return name;
     }
 
-    public String getOccasion() {
-        return occasion;
+    public String getNameAndColour() {
+        return colour.toString().charAt(0) + colour.toString().substring(1).toLowerCase() + " " + name;
+    }
+
+    public String getColour (){
+        return colour.toString();
+    }
+    public ArrayList<Occasion> getOccasion() {
+        return occasions;
     }
 
     @Override
     public String toString() {
-        return ("Name: " + name + "\n" + "Colour: " + colour + "\n" + "Occasion: " + occasion);
+        return ("Name: " + name + "\n" + "Colours: " + colour.toString() + "\n" + "Occasions: " + occasions.toString());
     }
 }

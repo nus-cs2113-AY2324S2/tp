@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class AddFlowerCommand extends Command{
     private String flowerName;
+
     private Integer quantity;
     private String bouquetName;
 
@@ -40,6 +41,7 @@ public class AddFlowerCommand extends Command{
         Flower flowerToBeAdded = new Flower();
         for (int i = 0; !doesFlowerExist && i < FlowerDictionary.size(); i++) {
             if (FlowerDictionary.get(i).getFlowerName().toLowerCase().equals(flowerName)) {
+                //TODO should be extracted to its own function getFlower(String name, String colour)
                 flowerToBeAdded = FlowerDictionary.get(i);
                 doesFlowerExist = true;
             }

@@ -46,7 +46,7 @@ public class Bouquet {
     }
 
     /**
-     * check if flower exist in bouquet.
+     * checks if flower exist in bouquet.
      *
      * @param flowerName
      * @return boolean true if flower exist

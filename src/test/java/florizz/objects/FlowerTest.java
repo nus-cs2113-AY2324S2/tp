@@ -8,7 +8,7 @@ public class FlowerTest {
 
     @Test
     void testGetName() {
-        Flower flower = new Flower("Orchid","White","Marriage");
+        Flower flower = new Flower("Orchid", Flower.Colour.WHITE, Flower.Occasion.WEDDING);
         assertEquals("Orchid",flower.getFlowerName());
     }
 
