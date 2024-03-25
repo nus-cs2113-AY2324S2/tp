@@ -31,7 +31,7 @@ public class UI {
      * Displays the command prompt.
      */
     public static void showCommandPrompt() {
-        System.out.println("Enter command: ");
+        System.out.print("Enter command: ");
     }
 
     /**

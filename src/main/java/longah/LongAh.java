@@ -38,10 +38,7 @@ public class LongAh {
         Logging.logInfo("Entering main program body. Begin accepting user commands.");
         while (true) {
             try {
-                if (!UI.hasNextLine()) {
-                    System.exit(0);
-                }
-                UI.showMessage("Enter command:", false);
+                UI.showCommandPrompt();
                 String command = UI.getUserInput();
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);
