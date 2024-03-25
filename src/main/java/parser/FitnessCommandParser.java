@@ -20,7 +20,7 @@ public class FitnessCommandParser {
 
         switch (userFitnessCommand) {
         case "get":
-            return new GetExercisesCommand(fitnessMotivator);
+            return new GetExercisesCommand(fitnessMotivator, fitnessCommandArgs);
         case "add":
             return new AddExerciseCommand(fitnessMotivator, fitnessCommandArgs);
         default:

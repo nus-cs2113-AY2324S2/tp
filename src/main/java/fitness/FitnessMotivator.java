@@ -2,6 +2,7 @@ package fitness;
 
 import ui.Ui;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,17 +10,17 @@ import java.util.Random;
  * */
 public class FitnessMotivator {
 
-    public static ExerciseList allExercises = new ExerciseList();
-
     public static final String FILE_PATH = "./data/exerciselist.txt";
 
     // Required Number of parameters for the fitness add command
     public static final int REQUIRED_NUM_OF_PARAMETERS = 4;
 
+    public ExerciseList allExercises = new ExerciseList();
+
     public FitnessMotivator() {}
 
     /**
-     * Gets one randomised exercise per type, then prints it out.
+     * Gets one randomised exercise per type, then prints it to the UI.
      *
      * @return A string for printing that lists 5 exercises of different type
      * */
@@ -63,6 +64,18 @@ public class FitnessMotivator {
         String message = "I have added the following exercise into our list!" +
                 System.lineSeparator() + newExercise;
         Ui.printMessageWithSepNewLine(message);
+    }
+
+    /**
+     * Gets all the exercises that belong to the queried type, and prints it to the UI.
+     *
+     * @param type An object of type ExerciseType used for query
+     * */
+    public void getTypeExercises(ExerciseType type) {
+        ArrayList<Exercise> exercisesByType = allExercises.getType(type);
+        String message = "Here are the " + type + " exercises as requested!" +
+                System.lineSeparator();
+        Ui.printList(exercisesByType, message);
     }
 
 }

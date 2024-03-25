@@ -129,6 +129,17 @@ public class ExerciseList {
         return typeExercises.get(index);
     }
 
+    public ArrayList<Exercise> getType(ExerciseType type) {
+        ArrayList<Exercise> exercisesByType = new ArrayList<>();
+        for (Exercise e : allExercises) {
+            assert e != null : "Invalid Exercise Detected";
+            if (e.getType().equals(type)) {
+                exercisesByType.add(e);
+            }
+        }
+        return exercisesByType;
+    }
+
     /**
      * Returns the total number of a certain type of exercise
      *
