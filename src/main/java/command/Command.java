@@ -1,6 +1,8 @@
 package command;
 
-public abstract class Command {
+import exceptions.CommandFormatException;
 
-    public abstract void execute();
+public abstract class Command  {
+
+    public abstract void execute() throws CommandFormatException;
 }
