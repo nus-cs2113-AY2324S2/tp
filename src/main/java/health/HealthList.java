@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class HealthList extends ArrayList<Health> {
     static LogFile logFile = LogFile.getInstance();
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
+    private static final ArrayList<Appointment> appointments = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
     //@@author j013n3

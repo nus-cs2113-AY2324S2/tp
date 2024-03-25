@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import health.Appointment;
 import health.Bmi;
 import health.Period;
 import utility.ErrorConstant;
@@ -91,12 +92,12 @@ public class DataFile {
      * // param healthData Health data to be written.
      */
     public static void writeHealthData(ArrayList<Bmi> bmiArrayList,
-                                       // ArrayList<Appointment.class> appointmentArrayList,
+                                       ArrayList<Appointment> appointmentArrayList,
                                        ArrayList<Period> periodArrayList) {
 
         // Write each bmi entry in a specific format
         // bmi format: bmi|HEIGHT|WEIGHT|BMI_SCORE|DATE (NA if no date)
-        for (Health entry : bmiArrayList) {
+        for (Health bmiEntry : bmiArrayList) {
             // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
             // + task.getRange() + UiConstant.LINE.trim() +
             //       task.getStatusIcon() + System.LineSeparator());
@@ -104,15 +105,15 @@ public class DataFile {
 
         // Write each appointment entry in a specific format
         // appointment format: appointment|DATE|DESCRIPTION
-        //for (Health entry : periodArrayList) {
+        for (Health appointmentEntry : appointmentArrayList) {
         // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
         // + task.getRange() + UiConstant.LINE.trim() +
         //       task.getStatusIcon() + System.LineSeparator());
-        //}
+        }
 
         // Write each period entry in a specific format
         // period format: period|START|END|DURATION|NEXT
-        for (Health entry : periodArrayList) {
+        for (Health periodEntry : periodArrayList) {
             // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
             // + task.getRange() + UiConstant.LINE.trim() +
             //       task.getStatusIcon() + System.LineSeparator());
@@ -127,7 +128,7 @@ public class DataFile {
 
         // Write each period entry in a specific format
         // run format: run|DISTANCE|TIME|PACE|DATE
-        for (Workout entry : runArrayList) {
+        for (Workout runEntry : runArrayList) {
             // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
             // + task.getRange() + UiConstant.LINE.trim() +
             //       task.getStatusIcon() + System.LineSeparator());
@@ -139,7 +140,7 @@ public class DataFile {
         gym|NUM_STATIONS|DATE|gym_1|STATION1_NAME|NUM_SETS|WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
         |gym_2|STATION2_NAME...
          */
-        for (Workout entry : runArrayList) {
+        for (Workout gymEntry : gymArrayList) {
             // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
             // + task.getRange() + UiConstant.LINE.trim() +
             //       task.getStatusIcon() + System.LineSeparator());
@@ -156,25 +157,27 @@ public class DataFile {
             Scanner readFile = new Scanner(UiConstant.DATA_FILE_PATH);
             while (readFile.hasNext()) {
                 String [] words = readFile.nextLine().split(UiConstant.LINE.trim());
-                switch (words[0].trim()){
+                String dataType = words[0].trim();
+                DataType filter = DataType.valueOf(dataType);
+                switch (filter){
 
-                // case "appointment":
-                //     processAppointment(words);
-                //     break;
+                case APPOINTMENT:
+                    // processAppointment(words);
+                    break;
                 
-                case "period":
+                case PERIOD:
                     // processPeriod(words);
                     break;
 
-                case "bmi":
+                case BMI:
                     // processBmi(words);
                     break;
 
-                case "gym":
+                case GYM:
                     // processGym(words);
                     break;
 
-                case "run":
+                case RUN:
                     // processRun(words);
                     break;
 
@@ -197,7 +200,7 @@ public class DataFile {
      * @throws CustomExceptions If an error occurs during file operations.
      */
     public static void saveDataFile(ArrayList<Bmi> bmiArrayList,
-                                    //ArrayList<Appointment> appointmentArrayList,
+                                    ArrayList<Appointment> appointmentArrayList,
                                     ArrayList<Period> periodArrayList,
                                     ArrayList<Run> runArrayList,
                                     ArrayList<Gym> gymArrayList
@@ -206,7 +209,7 @@ public class DataFile {
         try (FileWriter dataFile = new FileWriter(UiConstant.DATA_FILE_PATH)) {
 
             writeHealthData(bmiArrayList,
-                    // appointmentArrayList,
+                    appointmentArrayList,
                     periodArrayList);
 
             writeWorkoutData(runArrayList, gymArrayList);
