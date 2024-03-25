@@ -1,6 +1,7 @@
 package classify.user;
 
 import classify.datacommands.DataHandler;
+import classify.student.AddStudent;
 import classify.student.Student;
 import classify.student.StudentAttributes;
 import classify.student.StudentList;
@@ -37,7 +38,7 @@ public class InputParsing {
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final String LIST_SORTED = "Sort complete!";
-    private static final Logger logger = Logger.getLogger(InputParsing.class.getName());
+    public static final Logger logger = Logger.getLogger(InputParsing.class.getName());
     private static final String SORT_BY_CHOOSE_INDEX = "Sort by: (Choose index)";
     private static final String NAME_A_TO_Z = "1. Name (A to Z)";
     private static final String TOTAL_NUMBER_OF_CLASSES_ATTENDED = "2. Total number of classes attended:";
@@ -52,7 +53,7 @@ public class InputParsing {
         // @@author tayponghee
         switch (userCommand[0]) {
         case ADD:
-            addStudent(masterStudentList, in, userCommand[1]);
+            AddStudent.addStudent(masterStudentList, in, userCommand[1]);
             // @@author ParthGandhiNUS
             assert masterStudentList != null;
             DataHandler.writeStudentInfo(masterStudentList);
@@ -282,7 +283,7 @@ public class InputParsing {
             switch (command) {
 
             case ADD:
-                addSubject(in, attributes);
+                AddStudent.addSubject(in, attributes);
                 student.setAttributes(attributes);
                 break;
 
@@ -475,101 +476,6 @@ public class InputParsing {
         }
     }
 
-    /**
-     * Adds a new student to the list of students.
-     * Does not allow for students of the same name to be added.
-     * Checks if attributes added are in the correct format.
-     * Allows for multiple subjects to be added, along with their grades and classes
-     * attended.
-     *
-     * @param masterStudentList The list of all students.
-     * @param in                The scanner object to read user input.
-     * @param studentName       The name of the student if the user had entered it
-     *                          before being prompted
-     */
-    private static void addStudent(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
-        String name;
-
-        name = checkForEmptyName(masterStudentList, in, studentName);
-
-        if (findStudentByName(masterStudentList, name) != null) {
-            assert findStudentByName(masterStudentList, name) != null;
-            logger.log(Level.WARNING, "Student with the same name already exists.");
-            
-            Ui.printSameNameError();
-            Ui.printDivider();
-            return;
-        }
-
-        Student student = new Student(name);
-        addSubject(in, student.getAttributes());
-
-        // @@author Cryolian
-        int number = promptForPhoneNumber(in);
-
-        while (number < 0) {
-            number = promptForPhoneNumber(in);
-        }
-        //@@ author ParthGandhiNUS
-        assert number > 0 && number < 100000000: "Number is outside the acceptable range.";
-
-        //@@author Cryolian
-        student.getAttributes().setPhoneNumber(number);
-
-        Ui.promptForGender();
-        student.getAttributes().setGender(readInString(in));
-
-        Ui.promptForLastPaymentDate();
-        student.getAttributes().setLastPaymentDate(readInDate(in));
-
-        Ui.promptForRemarks();
-        student.getAttributes().setRemarks(readInString(in));
-
-        //@@author tayponghee
-        masterStudentList.add(student);
-        logger.log(Level.INFO, "Student added successfully.");
-        Ui.printStudentAdded();
-        Ui.printDivider();
-    }
-
-    /**
-     * Prompts the user to enter a non-empty name for a student and checks if it
-     * already exists in the list.
-     * If the name is empty or already exists, prompts the user again until valid
-     * input is provided.
-     *
-     * @param masterStudentList The list of all students.
-     * @param in                The scanner object to read user input.
-     * @param studentName       The name of the student if the user had entered it
-     *                          before being prompted
-     * @return The valid non-empty name entered by the user.
-     */
-    private static String checkForEmptyName(ArrayList<Student> masterStudentList, Scanner in, String studentName) {
-        String name;
-        while (true) {
-
-            //@@author alalal47
-            if (studentName == null) {
-                Ui.printStudentNamePrompt();
-                name = in.nextLine().trim();
-            } else {
-                name = studentName.trim();
-                studentName = NOTEMPTY;
-            }
-
-            //@@author tayponghee
-            assert studentName != null;
-
-            if (name.isEmpty()) {
-                Ui.printEmptyNameMessage();
-                Ui.printDivider();
-            } else {
-                break;
-            }
-        }
-        return name;
-    }
-
     // @@author blackmirag3
     /**
      * Prompts the user to edit subject, grade, and classes attended for student.
@@ -607,7 +513,7 @@ public class InputParsing {
                     currentSubject.setGrade(newGrade);
                 }
                 
-                int newClassesAttended = promptForClassesAttended(in);
+                int newClassesAttended = AddStudent.promptForClassesAttended(in);
                 currentSubject.setClassesAttended(newClassesAttended);
                 System.out.println("Subject updated.");
 
@@ -638,97 +544,6 @@ public class InputParsing {
         }
     }
 
-    // @@author tayponghee
-    /**
-     * Prompts the user to enter attributes for a student, including subject, grade,
-     * and classes attended.
-     * Continues to prompt the user until user enters blank to exit.
-     *
-     * @param in         The scanner object to read user input.
-     * @param attributes The StudentAttributes object to store the attributes of the
-     *                   student.
-     */
-    private static void addSubject(Scanner in, StudentAttributes attributes) {
-        while (true) {
-            // @@author blackmirag3
-            System.out.print("Subject (enter nothing to skip): ");
-            String subject = in.nextLine().trim();
-            
-            if (subject.isBlank()) {
-                System.out.println("No subjects added.");
-                break;
-
-            } else if (attributes.findSubject(subject) != null) {
-                // rejects subject if existing subject of same name exists in students'
-                // attributes
-                System.out.println("Subject already exists.");
-                break;
-
-            } else if (checkForValidSubjectResponse(in, attributes, subject)) {
-                //@@author tayponghee
-                return;
-            }
-        }
-    }
-
-    /**
-     * Checks for a valid response from the user when prompted to add another subject and grade.
-     *
-     * @param in The scanner object to read user input.
-     * @param attributes The attributes of the student.
-     * @param subject The subject to be added.
-     * @return True if the user chooses not to add another subject and grade, false otherwise.
-     */
-    private static boolean checkForValidSubjectResponse(Scanner in, StudentAttributes attributes, String subject) {
-        double grade = Math.max(promptForGrade(in), 0);
-        int classesAttended = promptForClassesAttended(in);
-        SubjectGrade subjectGrade = new SubjectGrade(subject, grade, classesAttended);
-        attributes.addSubjectGrade(subjectGrade);
-        while (true) {
-            System.out.println("Do you want to add another subject and grade? (yes/no)");
-            String response = in.nextLine().trim().toLowerCase();
-            if (response.equals("yes")) {
-                break;
-            } else if (response.equals("no")) {
-                return true;
-            } else {
-                System.out.println("Invalid response. Please type 'yes' or 'no'.");
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks the format of the input for the number of classes attended.
-     * Prompts the user to enter a valid integer until one is provided.
-     *
-     * @param in The scanner object to read user input.
-     * @return The valid number of classes attended.
-     */
-    private static int promptForClassesAttended(Scanner in) {
-        while (true) {
-            Ui.printClassesAttendedPrompt();
-            String classesAttendedInput = in.nextLine();
-            
-            if (classesAttendedInput.isBlank()) {
-                return -1;
-            }
-            
-            // @@author ParthGandhiNUS
-            int classesAttended;
-            try {
-                classesAttended = Integer.parseInt(classesAttendedInput);
-            } catch (NumberFormatException e) {
-                System.out.println("Wrong number format! Please try again! e.g. 12 ");
-                Ui.printDivider();
-                classesAttended = promptForClassesAttended(in);
-            }
-            
-            if (isValidClassesAttended(classesAttended)) {
-                return classesAttended;
-            }
-        }
-    }
 
     /**
      * Prompts for grade from user input and checks format
@@ -738,7 +553,7 @@ public class InputParsing {
      * @param in The scanner object to read user input.
      * @return The valid grade.
      */
-    private static double promptForGrade(Scanner in) {
+    public static double promptForGrade(Scanner in) {
         while (true) {
             Ui.printStudentGradesPrompt();
             String gradeInput = in.nextLine();
@@ -780,7 +595,7 @@ public class InputParsing {
     }
 
     // @@author blackmirag3
-    private static boolean isValidClassesAttended(int classesAttended) {
+    public static boolean isValidClassesAttended(int classesAttended) {
         try {
             if (classesAttended < 0) {
                 System.out.println("Classes attended must be 0 or more.");
@@ -824,7 +639,7 @@ public class InputParsing {
      * @return      -1 if an exception was thrown. An 8
      *              or 10-digit number if not.
      */
-    private static int promptForPhoneNumber(Scanner in) {
+    public static int promptForPhoneNumber(Scanner in) {
 
         int number = 0;
         
@@ -864,7 +679,7 @@ public class InputParsing {
      * @return      "Unknown" if blank was inputted, or the
      *              trimmed string inputted by the user.
      */
-    private static String readInString(Scanner in) {
+    public static String readInString(Scanner in) {
         
         String string = in.nextLine();
         if (string.isBlank()) {
@@ -874,7 +689,7 @@ public class InputParsing {
         
     }
 
-    protected static LocalDate readInDate(Scanner in) {
+    public static LocalDate readInDate(Scanner in) {
 
         String userInput;
         LocalDate paymentDate;
