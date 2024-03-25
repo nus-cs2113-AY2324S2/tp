@@ -12,12 +12,13 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
- * Handles the creation, loading, authentication and resetting of the PIN.
+ * Handles the creation, loading, authentication, and resetting of the PIN.
  */
 public class PINHandler {
-    private static Logger logger = Logger.getLogger("PIN Logger");
+    private static final Logger logger = Logger.getLogger("PIN Logger");
     private static final String PIN_FILE_PATH = "./data/pin.txt";
     private String savedPin;
+    private boolean authenticationEnabled;
 
     // @@author jing-xiang
     /**
@@ -25,13 +26,40 @@ public class PINHandler {
      */
     public PINHandler() {
         StorageHandler.initDir();
-        if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| loadPin().isEmpty()) {
+        loadPinAndAuthenticationEnabled();
+        if (!Files.exists(Paths.get(PINHandler.getPinFilePath())) || savedPin.isEmpty()) {
             createPin();
-            loadPin();
-        } else {
-            loadPin();
         }
-        authenticate();
+        if (authenticationEnabled) {
+            authenticate();
+        }
+    }
+
+    /**
+     * Loads the saved PIN and authentication enabled state from the file.
+     */
+    private void loadPinAndAuthenticationEnabled() {
+        try {
+            String[] data = new String(Files.readAllBytes(Paths.get(PIN_FILE_PATH))).split("\n");
+            savedPin = data[0];
+            if (data.length > 1) {
+                authenticationEnabled = Boolean.parseBoolean(data[1].trim());
+            }
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error reading saved PIN and authentication enabled state.");
+        }
+    }
+
+    /**
+     * Saves the PIN and authentication enabled state to the file.
+     */
+    private void savePinAndAuthenticationEnabled() {
+        try {
+            String data = savedPin + "\n" + authenticationEnabled;
+            Files.write(Paths.get(PIN_FILE_PATH), data.getBytes());
+        } catch (IOException e) {
+            System.out.println("Error saving PIN and authentication enabled state.");
+        }
     }
 
     /**
@@ -39,7 +67,7 @@ public class PINHandler {
      *
      * @return The file path of the PIN file where the PIN is encrypted and saved.
      */
-    public static java.lang.String getPinFilePath() {
+    public static String getPinFilePath() {
         return PIN_FILE_PATH;
     }
 
@@ -56,7 +84,7 @@ public class PINHandler {
                 System.exit(0);
             }
             UI.showMessage("Invalid PIN. Your PIN must be a 6-digit number. " +
-                "Please try again, or enter 'exit' to exit LongAh.");
+                    "Please try again, or enter 'exit' to exit LongAh.");
             UI.showMessage("Enter a 6-digit PIN: ", false);
             pin = UI.getUserInput();
         }
@@ -69,42 +97,22 @@ public class PINHandler {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedPin = md.digest(pin.getBytes(StandardCharsets.UTF_8));
             String hashedPinHex = new BigInteger(1, hashedPin).toString(16);
-            Files.write(Paths.get(PIN_FILE_PATH), hashedPinHex.getBytes());
+            savedPin = hashedPinHex;
+            savePinAndAuthenticationEnabled();
             UI.showMessage("PIN saved successfully!");
             logger.log(Level.INFO, "PIN saved successfully!");
-        } catch (IOException e) {
-            UI.showMessage("Error saving PIN. Please try again.");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            UI.showMessage("Error saving PIN. Please try again.");
         }
-    }
-
-    /**
-     * Loads the saved PIN from the file.
-     */
-    public String loadPin() {
-        try {
-            // Load hashed PIN after loading
-            savedPin = new String(Files.readAllBytes(Paths.get(PIN_FILE_PATH)));
-            logger.log(Level.INFO, "User loaded successfully!");
-        } catch (IOException e) {
-            UI.showMessage("Error reading saved PIN. Please try again.");
-        }
-        return savedPin;
-    }
-
-    /**
-     * Gets the saved PIN.
-     */
-    public String getPin() {
-        return savedPin;
     }
 
     /**
      * Authenticates the user by comparing the entered PIN with the saved PIN.
      */
     public void authenticate() {
-        String savedPin = getPin();
+        if (!authenticationEnabled) {
+            return;
+        }
         assert savedPin != null : "Saved PIN should not be null.";
 
         UI.showMessage("Enter your PIN: ", false);
@@ -134,12 +142,23 @@ public class PINHandler {
     }
 
     /**
-     * Resets the PIN for the user.
+     * Resets the PIN for the user or enables/disables authentication upon startup.
      */
     public void resetPin() {
-        UI.showMessage("Enter your current PIN: ", false);
+        UI.showMessage("Enter your current PIN: (or enter enable/disable to control startup authentication!)", false);
         String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
+        if (Objects.equals(enteredPin, "disable")) {
+            authenticationEnabled = false;
+            savePinAndAuthenticationEnabled();
+            System.out.println("Authentication disabled upon startup.");
+            return;
+        } else if (Objects.equals(enteredPin, "enable")) {
+            authenticationEnabled = true;
+            savePinAndAuthenticationEnabled();
+            System.out.println("Authentication enabled upon startup.");
+            return;
+        }
 
         try {
             // Hash the entered PIN before comparing
@@ -147,7 +166,6 @@ public class PINHandler {
             byte[] hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
             String hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
 
-            String savedPin = getPin();
             if (hashedEnteredPinHex.equals(savedPin)) {
                 // If the entered PIN is correct, allow the user to create a new PIN
                 createPin();
