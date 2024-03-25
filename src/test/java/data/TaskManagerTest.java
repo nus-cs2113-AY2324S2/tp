@@ -10,8 +10,7 @@ import java.util.Map;
 
 import static data.TaskManager.addTask;
 import static data.TaskManager.updateTask;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static data.TaskManager.deleteAllTasksOnDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -25,64 +24,74 @@ class TaskManagerTest {
 
     @AfterEach
     void resetTaskManager() {
-        taskManager = null;
+        LocalDate date = LocalDate.now();
+        deleteAllTasksOnDate(taskManager, date);
     }
 
     @Test
-    void addTask_validInput_addsTask() {
+    void addTodo_validInput_addsTask() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
+        String taskDescription = "Test Todo";
 
         // Act
-        addTask(date, taskDescription);
+        Task testTask = new Task(taskDescription);
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, taskDescription, testTaskType, dummyTestDates);
+        Task addedTask = taskManager.getTasksForDate(date).get(0);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertEquals(testTask.getName(), addedTask.getName());
     }
 
     @Test
-    void updateTask_validInput_updatesTask() {
+    void updateTodo_validInput_updatesTask() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String initialTask = "Initial task";
-        String updatedTask = "Updated task";
-        addTask(date, initialTask);
+        String initialTaskDescription = "Initial todo";
+        String updatedTaskDescription = "Updated todo";
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, initialTaskDescription, testTaskType, dummyTestDates);
 
         // Act
-        updateTask(date, 0, updatedTask);
+        updateTask(date, 0, updatedTaskDescription);
 
         // Assert
-        assertEquals(updatedTask, taskManager.getTasksForDate(date).get(0));
+        assertEquals(updatedTaskDescription, taskManager.getTasksForDate(date).get(0).getName());
     }
 
     @Test
-    void getTasksForDate_validDate_returnsTasks() {
+    void getTasksForDate_validDate_returnsTasks() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
-        addTask(date, taskDescription);
+        String taskDescription = "Test todo task";
+        TaskType testTaskType = TaskType.TODO;
+        String[] dummyTestDates = new String[]{null};
+        addTask(date, taskDescription, testTaskType, dummyTestDates);
 
         // Act
-        List<String> tasksForDate = taskManager.getTasksForDate(date);
+        List<Task> tasksForDate = taskManager.getTasksForDate(date);
+        Task createdTask = tasksForDate.get(0);
 
         // Assert
-        assertFalse(tasksForDate.isEmpty());
-        assertTrue(tasksForDate.contains(taskDescription));
+        assertEquals(createdTask, tasksForDate.get(0));
     }
 
     @Test
-    void addTasksFromFile_validInput_addsTasks() {
+    void addTodoFromFile_validInput_addsTasks() throws TaskManagerException {
         // Arrange
         LocalDate date = LocalDate.now();
-        String taskDescription = "Test task";
-        Map<LocalDate, List<String>> tasksFromFile = new HashMap<>();
-        tasksFromFile.put(date, List.of(taskDescription));
+        Map<LocalDate, List<Task>> tasksFromFile = new HashMap<>();
+        String taskDescription = "Test todo task";
+        Task testTodoTask = new Todo(taskDescription);
+        tasksFromFile.put(date, List.of(testTodoTask));
 
         // Act
         taskManager.addTasksFromFile(tasksFromFile);
 
         // Assert
-        assertTrue(taskManager.getTasksForDate(date).contains(taskDescription));
+        assertEquals(testTodoTask.getName() ,taskManager.getTasksForDate(date).get(0).getName());
     }
 }
