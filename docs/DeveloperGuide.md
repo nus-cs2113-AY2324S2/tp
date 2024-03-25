@@ -143,14 +143,6 @@ The following sequence diagram shows how an add operation works:
 **Target user profile**:
 
 
-How the `newCommand` class works:
-
-
-1. User will input the necessary parameters:
-   `name`, `quantity`, `price`, and `description`.
-2. `newCommand()` constructor will be invoked to assign attributes' values.
-3. `Execute()` will be invoked. A new stock will be created with `createProduct()`
-and added to the list. 
 
 **Value proposition**:
 
