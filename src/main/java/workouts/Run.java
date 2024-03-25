@@ -159,7 +159,7 @@ public class Run extends Workout{
     public static boolean checkIfRunIsValid(String runDistance, String runTime, String runDate)
             throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {
 
-        try{
+        try {
             double value = Double.parseDouble(runDistance);
             if (value <= 0){
                 throw new CustomExceptions.InvalidInput(ErrorConstant.DISTANCE_MUST_BE_POSITIVE_ERROR);
@@ -171,13 +171,7 @@ public class Run extends Workout{
         if(runTime.isBlank()){
             throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_BLANK_ERROR);
         }
-
-        if (runDate.isBlank()){
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_DATE_BLANK_ERROR);
-        }
-
         return true;
-
     }
 
     /**
