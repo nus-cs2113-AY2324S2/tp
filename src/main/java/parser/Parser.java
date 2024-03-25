@@ -88,6 +88,7 @@ public class Parser {
         }
         String category = matcher.group("category") != null ? matcher.group("category") : "NA";
         int quantity = Integer.parseInt(matcher.group("quantity"));
+        assert quantity >= 0 : "Quantity should not be negative.";
         return new AddCommand(
                 matcher.group("itemName"),
                 quantity,
@@ -112,6 +113,7 @@ public class Parser {
             throw new CommandFormatException(CommandType.EDIT);
         }
         int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
+        assert newQuantity >= 0 : "New quantity should not be negative.";
         return new EditCommand(
             matcher.group("itemName"),
             newQuantity
