@@ -136,7 +136,8 @@ public class CommandUi {
         System.out.println("Task not found.");
     }
 
-    public static void printShowSummaryMessage(int totalCalories,int totalWaterIntake, int totalCaloriesBurnt, String calorieGoal, String waterGoal) {
+    public static void printShowSummaryMessage(int totalCalories,int totalWaterIntake, int totalCaloriesBurnt,
+                                               String calorieGoal, String waterGoal) {
         System.out.println("Daily Summary:");
         System.out.println("Total calories consumed: " + totalCalories + " kcal");
         System.out.println("Total water consumed: " + totalWaterIntake + " ml");
