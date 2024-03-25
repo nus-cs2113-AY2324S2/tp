@@ -19,10 +19,10 @@ public class InteractingCommand extends MapMoveCommand {
         textBox.setNextInstruction("Will you [fight] or will you [run]?");
         AMap battleMap;
         switch (entityInteractedWith) {
-        case "@":
+        case "@": //centaur
             int x_pos = currentMap.getInteractX();
             int y_pos = currentMap.getInteractY();
-            textBox.setNextDialogue("*the @ symbol stares at you menacingly*");
+            textBox.setNextDialogue("*the Centaur stares at you menacingly*");
             InteractableEntity monster = new Centaur(10, 10, 10, x_pos, y_pos, 10, 10);
             battleMap = new BattleInterface(playerStatus, textBox, monster);
             battleMap.initMap(30, monster.getHeight());
