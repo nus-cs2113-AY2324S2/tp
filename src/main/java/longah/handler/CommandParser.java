@@ -3,7 +3,6 @@ package longah.handler;
 import longah.commands.Command;
 import longah.commands.ExitCommand;
 import longah.commands.HelpCommand;
-import longah.commands.ResetCommand;
 import longah.commands.add.AddCommand;
 import longah.commands.delete.DeleteCommand;
 import longah.commands.edit.EditCommand;
