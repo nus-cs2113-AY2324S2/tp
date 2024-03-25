@@ -25,8 +25,8 @@ public class ErrorConstant {
     public static final String DISTANCE_MUST_BE_DOUBLE_ERROR = "Distance must be a double! e.g. /d:24.00";
     public static final String DISTANCE_MUST_BE_POSITIVE_ERROR = "Distance must be positive! e.g. /d:10.32";
 
-    public static final String RUN_TIME_BLANK_ERROR = "Time cannot be blank! e.g. /t:1:30:00";
-    public static final String RUN_DATE_BLANK_ERROR = "Date cannot be blank! e.g. /date:2021-09-01";
+    public static final String RUN_TIME_BLANK_ERROR = "Time cannot be blank! e.g. /t:HH:MM:SS";
+    public static final String RUN_DATE_BLANK_ERROR = "Date cannot be blank! e.g. /date:DD-MM-YYYY";
 
     // GYM ERRORS
     public static final String NO_OF_STATION_CANNOT_BE_BLANK_ERROR = "Number of stations cannot be blank! e.g. /n:3";
