@@ -8,6 +8,7 @@ import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ModifyCommandTest {
@@ -32,7 +33,7 @@ public class ModifyCommandTest {
         command.execute(medicationManager, dailyMedicationManager, ui);
 
         Medication updatedMedication = medicationManager.getMedication(1);
-        assertTrue(updatedMedication.getName().equals(newName));
+        assertEquals(updatedMedication.getName(), newName);
     }
 
     @Test
