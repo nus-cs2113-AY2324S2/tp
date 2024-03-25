@@ -6,6 +6,9 @@ import ui.Ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents a command to display the habit tracker help menu
+ */
 public class HabitHelpCommand implements Command {
     private static final String[] HELP_MENU_INSTRUCTIONS = {
         "habit add <habit_description>: Add a new habit",
@@ -16,6 +19,9 @@ public class HabitHelpCommand implements Command {
         "habit sort: Sort habit list according to priority level",
     };
 
+    /**
+     * Execute the command to display the habit tracker help menu
+     */
     public void execute() {
         ArrayList<String> helpMenuInstructionsList = new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
 

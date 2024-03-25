@@ -6,7 +6,7 @@ import habit.Habit;
 import habit.HabitTracker;
 
 /**
- * A command implementation for adding new habits.
+ * Represents a command to add new habits.
  */
 public class AddHabitCommand implements Command {
     private HabitTracker habitTracker;
@@ -32,7 +32,7 @@ public class AddHabitCommand implements Command {
     /**
      * Execute the command to add a new habit into the habit tracker.
      *
-     * @throws HabitException If there are any formatting issues
+     * @throws HabitException If there are any formatting issues.
      */
     @Override
     public void execute() throws HabitException {

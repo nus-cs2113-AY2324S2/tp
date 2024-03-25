@@ -8,8 +8,6 @@ import exceptions.HabitException;
 public class Habit {
     private String description;
     private int habitCount;
-
-
     private Priority priority;
 
     /**
@@ -67,6 +65,11 @@ public class Habit {
         return changeInCount;
     }
 
+    /**
+     * Sets the priority of a habit.
+     *
+     * @param priority The priority level of a habit from user input.
+     */
     public void setPriority (String priority) {
         switch (priority) {
         case "low":

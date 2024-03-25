@@ -16,7 +16,7 @@ public class HabitTrackerTest {
 
     @AfterEach
     public void tearDown() {
-        habitTracker.clearHabits();
+        habitTracker.clearHabitList();
     }
 
     @Test

@@ -17,6 +17,8 @@ import habit.HabitTracker;
  * Generates the respective Command objects to be executed, based on the parsed command keyword.
  */
 public class HabitCommandParser {
+    private static final int COMMAND_LENGTH = 2;
+
     /**
      * Parses user input into command and details, and creates the corresponding habit command objects.
      *
@@ -29,7 +31,7 @@ public class HabitCommandParser {
         String[] userCommand = commandArgs.trim().split("\\s+", 2);
         String userHabitCommand = userCommand[0].trim();
 
-        String habitCommandArgs = userCommand.length == 2 ? userCommand[1].trim() : "";
+        String habitCommandArgs = userCommand.length == COMMAND_LENGTH ? userCommand[1].trim() : "";
 
         switch(userHabitCommand) {
         case "add":
