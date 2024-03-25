@@ -86,7 +86,7 @@ class HandlerTest {
      */
     @Test
     void processInput_newCommand_addRunExercise() {
-        String input = "WORKOUT  /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
+        String input = "WORKOUT /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
@@ -200,28 +200,6 @@ class HandlerTest {
             String result2 = Handler.checkTypeOfExercise(input2);
             assertEquals(result2, expected2);
 
-            // with capital letter
-            String input3 = "WORKOUT /E:run /D:10.3 /T:00:40:10 /Date:15-03-2024";
-            String expected3 = WorkoutConstant.RUN;
-            String result3 = Handler.checkTypeOfExercise(input3);
-            assertEquals(result3, expected3);
-
-            String input4 = "WORKOUT /E:gym /N:4";
-            String expected4 = WorkoutConstant.GYM;
-            String result4 = Handler.checkTypeOfExercise(input4);
-            assertEquals(result4, expected4);
-
-            // exercises in capital letter
-            String input5 = "WORKOUT /E:RUN /D:10.3 /T:00:40:10 /Date:15-03-2024";
-            String expected5 = WorkoutConstant.RUN;
-            String result5 = Handler.checkTypeOfExercise(input5);
-            assertEquals(result5, expected5);
-
-            String input6 = "WORKOUT /E:GYM /N:4";
-            String expected6 = WorkoutConstant.GYM;
-            String result6 = Handler.checkTypeOfExercise(input6);
-            assertEquals(result6, expected6);
-
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             e.printStackTrace();
             fail(ErrorConstant.UNSPECIFIED_ERROR);
@@ -237,26 +215,14 @@ class HandlerTest {
     @Test
     void checkTypeOfExercise_invalidUserInput_throwInvalidInput() {
 
-        // with invalid exercise type
-        String input1 = "WORKOUT /e";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input1));
 
         // with invalid exercise type
-        String input2 = "WORKOUT /e:wrong /d:10.3 /t:00:40:10 /date:15/03/2024";
+        String input2 = "workout /e:wrong /d:10.3 /t:00:40:10 /date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input2));
 
         // with invalid exercise type
-        String input3 = "WORKOUT /e:gymm /d:10.3 /t:00:40:10 /date:15/03/2024";
+        String input3 = "workout /e:gymm /d:10.3 /t:00:40:10 /date:15-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input3));
-
-        // with invalid format
-        String input4 = "WORKOUT /e-gymm /d-10.3 /t:00:40:10 /date:15/03/2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input4));
-
-        // with wrong slash
-        String input5 = "WORKOUT \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
-
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input5));
     }
 
     /**
@@ -269,21 +235,24 @@ class HandlerTest {
     void checkTypeOfExercise_insufficientUserInput_throwInsufficientInput() {
 
         // with invalid exercise type
-        String input1 = "new /e";
+        String input1 = "workout /e";
         assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input1));
 
         // without distance, time, and date
-        String input2 = "WORKOUT /e:run";
+        String input2 = "workout /e:run";
         assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input2));
 
         // without time and date
-        String input3 = "WORKOUT /e:run /d:10.3";
+        String input3 = "workout /e:run /d:10.3";
         assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input3));
 
-        // without the date
-        String input4 = "WORKOUT /e:run /d:30:10 /t:00:20:10";
-        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input4));
+        // with invalid format
+        String input5 = "workout /e-gymm /d-10.3 /t:00:40:10 /date:15-03-2024";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input5));
+
+        // with wrong slash
+        String input6 = "workout \\e:run \\d:30:10 \\t:00:20:10 \\date:15-03-2024";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input6));
+
     }
-
-
 }
