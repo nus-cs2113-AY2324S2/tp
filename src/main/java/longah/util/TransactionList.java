@@ -2,6 +2,7 @@ package longah.util;
 
 import java.util.ArrayList;
 
+import longah.node.Member;
 import longah.node.Transaction;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
@@ -201,5 +202,25 @@ public class TransactionList {
             throw new LongAhException(ExceptionMessage.TRANSACTIONS_SUMMED_UP);
         }
         return outString;
+    }
+
+    /**
+     * Deletes a member from all transactions in the list.
+     * 
+     * @param name The name of the member to delete.
+     * @param members The list of members to delete from.
+     * @throws LongAhException If the member is not found in the list.
+     */
+    public void deleteMember(String name, MemberList members) throws LongAhException {
+        Member member = members.getMember(name);
+        int size = transactions.size();
+        for (int i = 0; i < size; i++) {
+            boolean isDiscard = transactions.get(i).deleteMember(member);
+            if (isDiscard) {
+                transactions.remove(i);
+                size--;
+                i--;
+            }
+        }
     }
 }

@@ -293,4 +293,15 @@ public class MemberList {
             member.clearBalance();
         }
     }
+
+    /**
+     * Deletes a member from the group.
+     * 
+     * @param name The name of the member to delete.
+     * @throws LongAhException If the member does not exist in the group.
+     */
+    public void deleteMember(String name) throws LongAhException {
+        Member member = getMember(name);
+        members.remove(member);
+    }
 }

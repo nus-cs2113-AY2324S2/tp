@@ -3,6 +3,7 @@ package longah.commands.list;
 import longah.commands.Command;
 import longah.node.Group;
 import longah.exception.LongAhException;
+import longah.handler.UI;
 
 public class ListDebtCommand extends Command {
     /**
@@ -21,6 +22,6 @@ public class ListDebtCommand extends Command {
      * @param group The group to execute the command on.
      */
     public void execute(Group group) throws LongAhException {
-        System.out.print(group.listDebts());
+        UI.showMessage(group.listDebts());
     }
 }

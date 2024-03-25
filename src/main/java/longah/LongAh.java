@@ -41,7 +41,7 @@ public class LongAh {
                 if (!UI.hasNextLine()) {
                     System.exit(0);
                 }
-                System.out.print("Enter command:");
+                UI.showMessage("Enter command:", false);
                 String command = UI.getUserInput();
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);

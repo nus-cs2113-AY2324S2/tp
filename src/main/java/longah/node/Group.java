@@ -9,6 +9,7 @@ import longah.util.MemberList;
 import longah.util.Subtransaction;
 import longah.util.TransactionList;
 import longah.handler.StorageHandler;
+import longah.handler.UI;
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
 
@@ -115,14 +116,14 @@ public class Group {
                 Member lender = subtransaction.getLender();
                 double amountRepaid = subtransaction.getAmount();
                 transactionExpression += " p/" + lender.getName() + " a/" + amountRepaid;
-                System.out.println(borrowerName + " has repaid " + lender.getName() + " $" + amountRepaid);
+                UI.showMessage(borrowerName + " has repaid " + lender.getName() + " $" + amountRepaid);
             }
         }
 
         this.transactions.addTransaction(transactionExpression, this.members);
         updateTransactionSolution();
         assert this.members.getMember(borrowerName).getBalance() == 0 : "Borrower should have no more debts.";
-        System.out.println(borrowerName + " has no more debts!");
+        UI.showMessage(borrowerName + " has no more debts!");
     }
 
     /**

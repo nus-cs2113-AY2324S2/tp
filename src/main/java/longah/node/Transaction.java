@@ -64,7 +64,7 @@ public class Transaction {
         this.lender = members.getMember(lenderName);
         for (int i = 1; i < splitInput.length; i++) {
             String borrowNameAmount = splitInput[i].trim();
-            addBorrower(borrowNameAmount, members);
+            addBorrower(borrowNameAmount, members, this.lender);
         }
     }
 
@@ -75,7 +75,8 @@ public class Transaction {
      * @param memberList The list of members in the group.
      * @throws LongAhException If the expression is in an invalid format or value.
      */
-    public void addBorrower(String expression, MemberList memberList) throws LongAhException {
+    public void addBorrower(String expression, MemberList memberList, Member lender)
+            throws LongAhException {
         String[] splitBorrower = expression.split("a/");
         if (splitBorrower.length != 2) {
             // Each person owing should have an amount specified
@@ -87,6 +88,12 @@ public class Transaction {
         // Exception is thrown if the borrower does not exist in the group
         Member borrower = memberList.getMember(borrowerName);
         Double amountBorrowed;
+        
+        if (borrower.equals(lender)) {
+            throw new LongAhException(ExceptionMessage.INVALID_TRANSACTION_FORMAT);
+        }
+        assert !borrower.equals(lender) : "Lender cannot borrow from themselves.";
+        
         try {
             amountBorrowed = Double.parseDouble(splitBorrower[1].trim());
         } catch (NumberFormatException e) {
@@ -201,5 +208,30 @@ public class Transaction {
     public void editTransaction(String expression, MemberList memberList) throws LongAhException {
         subtransactions.clear();
         parseTransaction(expression, memberList);
+    }
+
+    /**
+     * Returns true if the transaction needs to be removed, false otherwise.
+     * Deletes a member from the transaction.
+     * 
+     * @param member The member to be deleted from the transaction.
+     * @return True if the transaction needs to be removed, false otherwise.
+     */
+    public boolean deleteMember(Member member) {
+        // Delete transaction if member is lender
+        if (lender.equals(member)) {
+            return true;
+        }
+
+        // Delete subtransaction if member is borrower
+        for (int i = 0; i < subtransactions.size(); i++) {
+            Subtransaction subtransaction = subtransactions.get(i);
+            if (subtransaction.getBorrower().equals(member)) {
+                subtransactions.remove(i);
+            }
+        }
+
+        // Delete transaction if no more subtransactions
+        return subtransactions.isEmpty();
     }
 }

@@ -39,6 +39,13 @@ public class LongAhException extends Exception {
         }
     }
 
+    /**
+     * Checks if the exception message is equal to the given message.
+     * 
+     * @param e The exception to be checked.
+     * @param message The message to be compared, of enum {@link ExceptionMessage}.
+     * @return True if the exception message is equal to the given message, false otherwise.
+     */
     public static boolean isMessage(LongAhException e, ExceptionMessage message) {
         return e.getMessage().equals(message.getMessage());
     }
