@@ -51,12 +51,12 @@ public class HelpCommand extends Command {
         UI.showMessage("7. `delete member <MEMBER NAME>` - Delete a member from the group.\n");
         UI.showMessage("FIND commands: ");
         UI.printSeparator();
-        UI.showMessage("8. `find Borrower <MEMBER NAME>` - Find all transactions where the " +
+        UI.showMessage("8. `find borrower <MEMBER NAME>` - Find all transactions where the " +
                 "member is a borrower.");
-        UI.showMessage("9. `find Lender <MEMBER NAME>` - Find all transactions where the member " +
+        UI.showMessage("9. `find lender <MEMBER NAME>` - Find all transactions where the member " +
                 "is involved as the lender.");
-        UI.showMessage("10. `find debt <MEMBER NAME>` - Find all debts of the member.");
-        UI.showMessage("11. `find transaction <MEMBER NAME>` - Find all transactions where " +
+        UI.showMessage("10. `find debts <MEMBER NAME>` - Find all debts of the member.");
+        UI.showMessage("11. `find transactions <MEMBER NAME>` - Find all transactions where " +
                 "the member is involved as the lender.\n");
         UI.showMessage("EDIT commands: ");
         UI.printSeparator();
@@ -64,12 +64,16 @@ public class HelpCommand extends Command {
                 "- Edit the name of a member.");
         UI.showMessage("13. `edit transaction <TRANSACTION NUMBER> <NEW TRANSACTION>`" +
                 " - Edit the details of a transaction.\n");
+        UI.showMessage("PIN commands: ");
+        UI.printSeparator();
+        UI.showMessage("14. `PIN enable` - Enable the use of PIN for the application.");
+        UI.showMessage("15. `PIN disable` - Disable the use of PIN for the application.");
+        UI.showMessage("16. `PIN reset` - Reset the user PIN.\n");
         UI.showMessage("OTHER commands: ");
         UI.printSeparator();
-        UI.showMessage("14. `settleup <MEMBER NAME>` - Settle all debts of the member.");
-        UI.showMessage("15. `clear` - Clear all transaction data in the group.");
-        UI.showMessage("16. `reset password` - Reset your own user PIN.");
-        UI.showMessage("17. `exit` - Exit the application.");
-        UI.showMessage("18. `help` - Display the list of commands.");
+        UI.showMessage("17. `settleup <MEMBER NAME>` - Settle all debts of the member.");
+        UI.showMessage("18. `clear` - Clear all transaction data in the group.");
+        UI.showMessage("19. `exit` - Exit the application.");
+        UI.showMessage("20. `help` - Display the list of commands.\n");
     }
 }

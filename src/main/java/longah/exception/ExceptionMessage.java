@@ -57,10 +57,9 @@ public enum ExceptionMessage {
             " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'",
             ExceptionType.INFO),
     INVALID_EXIT_COMMAND ("Invalid command format." +
-            " Use 'exit'",
-             ExceptionType.INFO),
+            " Use 'exit'", ExceptionType.INFO),
     INVALID_HELP_COMMAND ("Invalid command format." +
-            " Use 'help'");
+            " Use 'help'", ExceptionType.INFO);
 
     private final String message;
     private final ExceptionType type;

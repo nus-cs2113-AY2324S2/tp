@@ -56,8 +56,6 @@ public class UI {
         System.out.println(message);
     }
 
-    public static void printSeparator() {
-        System.out.println(SEPARATOR);
     /**
      * Displays a message.
      *
@@ -69,7 +67,7 @@ public class UI {
             System.out.println(message);
         } else {
             System.out.print(message);
-        };
+        }
     }
 
     /**
@@ -81,4 +79,12 @@ public class UI {
     public static boolean hasNextLine() {
         return scanner.hasNextLine();
     }
+
+    /**
+     * Prints a separator.
+     */
+    public static void printSeparator() {
+        System.out.println(SEPARATOR);
+    }
+
 }
