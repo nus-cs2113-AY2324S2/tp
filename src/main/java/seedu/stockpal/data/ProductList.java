@@ -73,25 +73,30 @@ public class ProductList {
     }
 
     /**
-     * Increases the quantity of the product with a specific PID
+     * Return true if the increase in quantity is successful.
+     * Increases the quantity of the product with a specific PID.
      *
-     * @param productIndex Product PID to update
-     * @param amountToIncrease Quantity of product to decrease
+     * @param productIndex Product PID to update.
+     * @param amountToIncrease Quantity of product to decrease.
      */
-    public void increaseAmount(int productIndex, Integer amountToIncrease) {
+    public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
-        updatedProduct.increaseQuantity(amountToIncrease);
+
+        return updatedProduct.increaseQuantity(amountToIncrease);
     }
 
+
     /**
-     * Decreases the quantity of the product with a specific PID
+     * Return true if the decrease of quantity is successful.
+     * Decreases the quantity of the product with a specific PID.
      *
      * @param productIndex Product PID to update
      * @param amountToDecrease Quantity of product to decrease
      */
-    public void decreaseAmount(int productIndex, Integer amountToDecrease) {
+    public boolean decreaseAmount(int productIndex, Integer amountToDecrease) {
+
         Product updatedProduct = products.get(productIndex);
-        updatedProduct.decreaseQuantity(amountToDecrease);
+        return updatedProduct.decreaseQuantity(amountToDecrease);
     }
 
     /**

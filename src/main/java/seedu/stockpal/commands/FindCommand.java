@@ -7,9 +7,7 @@ import seedu.stockpal.exceptions.StockPalException;
 public class FindCommand extends ListActionCommand{
     public static final String COMMAND_KEYWORD = "find";
     public static final String COMMAND_DESCRIPTION = "Lists all products containing KEYWORD.";
-
     public static final String COMMAND_USAGE = "find KEYWORD";
-
     public static final String[] COMMAND_FLAGS = {
         "KEYWORD"
     };
