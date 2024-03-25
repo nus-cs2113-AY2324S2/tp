@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface "<<interface>>\nCommand" as Command {
+execute()
+isExit()
+}
+class PlaceholderFocusCommand implements Command {
+}
+note top of PlaceholderFocusCommand: PlaceholderFocusCommand = StartTimerCommand,\n StopTimer command, etc
+class FocusCommandParser {
+}
+
+class Parser {
+}
+
+class Ui {
+}
+
+class FocusTimer {
+    - countupTimer: CountupTimer
+    - countdownTimer : CountdownTimer
+    - timerMode: boolean
+
+    + getStartStatus() : boolean
+    + switchTimer() : boolean
+    + getPausedStatus() : boolean
+    + setStartTiming()
+    + setStopTiming()
+    + setPauseTiming()
+    + setResumeTiming()
+    + checkTime()
+    + setDuration()
+
+}
+
+class CountupTimer {
+    - startTiming: LocalDateTime
+    - stoptiming: LocalDateTime
+    - currentTime: LocalDateTime
+    - isStarted: boolean
+    - isPaused: boolean
+
+}
+
+class CountdownTimer {
+    - minutes: int
+    - seconds: int
+    - inputMinutes: int
+    - isStarted: AtomicBoolean
+    - isRunning: AtomicBoolean
+    - stopwatch: Timer
+    - timerTask: TimerTask
+}
+
+
+FocusCommandParser .> PlaceholderFocusCommand: creates >
+PlaceholderFocusCommand ->"1" FocusTimer : controls >
+CountupTimer "1"<-* FocusTimer : manages <
+FocusTimer *-->"1" CountdownTimer : manages >
+Ui <. CountupTimer : uses < 
+CountdownTimer .> Ui : uses >
+Parser ..> FocusCommandParser : creates >
+
+
+
+@enduml

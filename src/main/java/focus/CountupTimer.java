@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 public class CountupTimer {
     private static final int MINUTES_DIVISION = 60;
     private static final int SECONDS_DIVISION = 60;
-    public LocalDateTime startTiming;
-    public LocalDateTime stopTiming;
-    public LocalDateTime currentTime;
-    public boolean isStarted = false;
+    private LocalDateTime startTiming;
+    private LocalDateTime stopTiming;
+    private LocalDateTime currentTime;
+    private boolean isStarted = false;
     private boolean isPaused = false;
     private long totalHours = 0;
     private long totalMinutes = 0;
