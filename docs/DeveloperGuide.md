@@ -1,20 +1,135 @@
-# Developer Guide
+---
+layout: page
+title: Developer Guide
+---
+* Table of Contents
+  {:toc}
 
-## Acknowledgements
+--------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+* The formatting for the developer guide is inspired by [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+Third-party libraries:
+* [OpenCSV](https://opencsv.sourceforge.net/) - This package is licensed under [Apache2](https://opencsv.sourceforge.net/licenses.html), which is a business-friendly open-source software license.
 
+--------------------------------------------------------------------------------------------------------------------
 
-## Product scope
-### Target user profile
+## **Design**
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+</div>
+
+### Architecture
+
+<img src="images/ArchitectureDiagram.png" alt=""/>
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+[**`StockPal`**](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/StockPal.java) is in charge of the app launch and shut down.
+
+The bulk of the app's work is done by the following five components:
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Parser`**](#parser-component): Parses user input into respective commands.
+* [**`Commands`**](#commands-component): The command executor.
+* [**`Data`**](#data-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple components above.
+[**`Exceptions`**](#exceptions-classes) represents a collection of exceptions used by multiple components above.
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" alt=""/>
+
+The sections below give more details of each component.
+
+### UI component
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/tree/master/src/main/java/seedu/stockpal/ui/Ui.java)
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+### Parser component
+
+**API** : [`Parser.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/parser/Parser.java)
+
+![Structure of the Parser Component](images/ParserClassDiagram.png)
+
+### Commands component
+
+**API** : [`Command.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/commands/Command.java)
+
+![Structure of the Commands Component](images/CommandsClassDiagram.png)
+
+### Data component
+
+**API** : [`Data`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/data)
+
+![Structure of the Data Component](images/DataClassDiagram.png)
+
+### Storage component
+
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/storage/Storage.java)
+
+![Structure of the Storage Component](images/StorageClassDiagram.png)
+
+The `Storage` component,
+* can save product list data in CSV format, and load them back into corresponding Products.
+* depends on the `StockPal` component (because the `Storage` component's job is to save/load objects that belong to `StockPal`)
+* consists of the classes `Storage`, `CsvWriter` and `CsvReader`.
+  * `Storage` defines methods that loads and saves data.
+  * `CsvWriter` is responsible for handling the writing of data to the CSV data file.
+  * `CsvReader` is responsible for handling the reading of data from the CSV data file.
+
+### Common classes
+
+Classes used by multiple components are in the `seedu.stockpal.common` package.
+
+### Exception classes
+
+Exceptions classes used by multiple components are in the `seedu.stockpal.exceptions` package.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Implementation**
+
+This section describes some noteworthy details on how certain features are implemented.
+
+### Add new product feature
+
+#### Implementation
+
+#### Design consideration
+
+### Edit product feature
+
+#### Implementation
+
+#### Design consideration
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Requirements**
+
+### Product scope
+
+**Target user profile**:
 
 {Describe the target user profile}
 
-### Value proposition
+**Value proposition**:
 
 {Describe the value proposition: what problem does it solve?}
 
@@ -33,6 +148,8 @@
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Instructions for manual testing**
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
