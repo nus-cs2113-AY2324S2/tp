@@ -58,7 +58,7 @@ participant ":Item" as Item #fbffb2
 SuperTracker -> NewCommand : execute()
 activate NewCommand #cbf7f4
 
-NewCommand -> Item ** : new Item(name:String, quantity:int, price:double)
+NewCommand -> Item ** : new Item(name:String, quantity:int, price:double, expiryDate:LocalDate)
 activate Item #fbffb2
 Item --> NewCommand : :Item
 deactivate Item
