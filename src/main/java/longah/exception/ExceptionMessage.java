@@ -37,7 +37,7 @@ public enum ExceptionMessage {
     INVALID_FIND_COMMAND ("Invalid command format." +
             " Use 'find transactions NAME' or 'find debts NAME'"),
     INVALID_SETTLEUP_COMMAND ("Invalid command format." +
-            " Use 'settleUp PERSON'"),
+            " Use 'settleup PERSON'"),
     INVALID_DELETE_COMMAND ("Invalid command format." +
             " Use 'delete transaction INDEX'"),
     INVALID_CLEAR_COMMAND ("Invalid command format." +
@@ -47,7 +47,9 @@ public enum ExceptionMessage {
     INVALID_EDIT_COMMAND("Invalid command format." +
             " Use 'edit transaction INDEX NEW_TRANSACTION' or 'edit member INDEX NEW_NAME'"),
     INVALID_EXIT_COMMAND ("Invalid command format." +
-            " Use 'exit'");
+            " Use 'exit'"),
+    INVALID_HELP_COMMAND ("Invalid command format." +
+            " Use 'help'");
 
     private final String message;
 
