@@ -130,14 +130,15 @@ public class Handler {
 
     /**
      * Handle history command.
-     * Expected command: `history /e:[all\run\gym]`
      * Show history of all exercises, run or gym.
+     *
      * @param userInput The user input string.
      */
     public static void handleHistory(String userInput) {
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printHistory(filter);
+        String filter = processHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printHistory(filter);
+        }
     }
 
 
@@ -233,15 +234,43 @@ public class Handler {
     }
 
     //@@author JustinSoh
+
+    /**
+     * Function validates and parses the user input for the history and latest commands.
+     *
+     * @param userInput String representing the user input.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String processHistoryAndLatestInput(String userInput) {
+        try {
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 2) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
+                        "Usage: history/latest /view:filter");
+            }
+
+            String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("view")) {
+                throw new CustomExceptions.InvalidInput("Invalid filter used. Use 'run', 'gym', 'period', or 'bmi'.");
+            }
+            return filterSplit[1];
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+
+    }
+
     /**
      * Prints the latest run, gym, BMI entry or Period tracked.
      *
      * @param userInput String representing user input.
      */
-    public static void handleLatest(String userInput){
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printLatest(filter);
+    public static void handleLatest(String userInput) {
+        String filter = processHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printLatest(filter);
+        }
     }
 
 
