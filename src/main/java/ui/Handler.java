@@ -16,10 +16,13 @@ import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import storage.LogFile;
 import workouts.Workout;
+
+import static health.HealthList.showPeriodHistory;
 
 
 /**
@@ -190,6 +193,14 @@ public class Handler {
                         + UiConstant.LINE
                         + periodDetails[2]);
                 System.out.println(newPeriod);
+            } else if (typeOfHealth.equals(HealthConstant.PREDICT)) {
+                showPeriodHistory();
+                if (HealthList.getPeriodSize() >= HealthConstant.MINIMUM_SIZE_FOR_PREDICTION) {
+                    LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
+                    Period.printNextCyclePrediction(nextPeriodStartDate);
+                } else {
+                    throw new CustomExceptions.InsufficientInput(HealthConstant.UNABLE_TO_MAKE_PREDICTIONS);
+                }
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e, e.getMessage());
