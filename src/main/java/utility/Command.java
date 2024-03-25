@@ -8,6 +8,7 @@ public enum Command {
     HISTORY,
     LATEST,
     HEALTH,
+    DELETE,
     HELP,
     EXIT,
 }

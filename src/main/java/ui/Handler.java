@@ -4,21 +4,19 @@ import health.Bmi;
 import health.Health;
 import health.HealthList;
 import health.Period;
-
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.HealthConstant;
 import utility.WorkoutConstant;
 import utility.Command;
-
+import utility.Filters;
+import workouts.WorkoutList;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
-
 import java.time.LocalDate;
 import java.util.Scanner;
-
 import storage.LogFile;
 import workouts.Workout;
 
@@ -70,6 +68,11 @@ public class Handler {
                     handleLatest(userInput);
                     break;
 
+                case DELETE:
+                    handleDelete(userInput);
+                    break;
+                    // delete /item:gym/health/bmi /index:1
+
                 case HELP:
                     Output.printHelp();
                     break;
@@ -77,7 +80,7 @@ public class Handler {
                 default:
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | CustomExceptions.InvalidInput e) {
                 Output.printException(e, ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
@@ -134,17 +137,100 @@ public class Handler {
     }
 
     /**
-     * Handle history command.
-     * Expected command: `history /e:[all\run\gym]`
+     * Handles history command.
      * Show history of all exercises, run or gym.
+     *
      * @param userInput The user input string.
      */
     public static void handleHistory(String userInput) {
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printHistory(filter);
+        String filter = processHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printHistory(filter);
+        }
     }
 
+    /**
+     * Parses and validates user input for the delete command. Returns a list of parsed user input containing the
+     * filter string and the index.
+     *
+     * @param userInput The user input string.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String[] parseDeleteInput(String userInput) {
+        String[] parsedInputs = new String[2];
+        try {
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 3) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
+                        "Usage: delete /item:filter /index:index");
+            }
+
+            String[] itemSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (itemSplit.length != 2 || !itemSplit[0].equalsIgnoreCase("item")) {
+                throw new CustomExceptions.InvalidInput("Invalid item specification. " +
+                        "Use /item:run/gym/period/bmi");
+            }
+            parsedInputs[0] = itemSplit[1].trim();
+
+            String[] indexSplit = inputs[2].split(UiConstant.SPLIT_BY_COLON);
+            if (indexSplit.length != 2 || !indexSplit[0].equalsIgnoreCase("index")) {
+                throw new CustomExceptions.InvalidInput("Invalid index specification.");
+            }
+
+            try {
+                Integer.parseInt(indexSplit[1].trim());
+            } catch (NumberFormatException e) {
+                throw new CustomExceptions.InvalidInput("Index must be a valid positive integer!");
+            }
+
+            parsedInputs[1] = indexSplit[1].trim();
+            return parsedInputs;
+
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            return null;
+        }
+    }
+
+    /**
+     * Handles the delete command.
+     * Deletes an item stored within PulsePilot.
+     *
+     * @param userInput The user input string.
+     */
+    public static void handleDelete(String userInput) throws CustomExceptions.InvalidInput {
+        String[] parsedInputs = parseDeleteInput(userInput);
+        if (parsedInputs != null) {
+            Filters parsedFilter = Filters.valueOf(parsedInputs[0].toUpperCase());
+            int index = Integer.parseInt(parsedInputs[1]) - 1;
+            try {
+                switch (parsedFilter) {
+                case BMI:
+                    HealthList.deleteBmi(index);
+                    break;
+
+                case PERIOD:
+                    HealthList.deletePeriod(index);
+                    break;
+
+                case GYM:
+                    WorkoutList.deleteGym(index);
+                    break;
+
+                case RUN:
+                    WorkoutList.deleteRun(index);
+                    break;
+
+                default:
+                    break;
+                }
+            } catch (CustomExceptions.OutOfBounds e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            throw new CustomExceptions.InvalidInput("Invalid delete command input!");
+        }
+
+    }
 
     /**
      * Handles user input related to health data. Parses the user input to determine
@@ -247,15 +333,44 @@ public class Handler {
     }
 
     //@@author JustinSoh
+
+    /**
+     * Function validates and parses the user input for the history and latest commands.
+     *
+     * @param userInput String representing the user input.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String processHistoryAndLatestInput(String userInput) {
+        try {
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 2) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
+                        "Usage: history/latest /view:filter");
+            }
+
+            String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("view")) {
+                throw new CustomExceptions.InvalidInput("Invalid filter or flag used!" +
+                        "Use /view:run/gym/period/bmi");
+            }
+            return filterSplit[1];
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+
+    }
+
     /**
      * Prints the latest run, gym, BMI entry or Period tracked.
      *
      * @param userInput String representing user input.
      */
-    public static void handleLatest(String userInput){
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printLatest(filter);
+    public static void handleLatest(String userInput) {
+        String filter = processHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printLatest(filter);
+        }
     }
 
 

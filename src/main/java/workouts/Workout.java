@@ -52,9 +52,9 @@ public abstract class Workout {
 
         exerciseType = exerciseType.toLowerCase();
 
-        if (! exerciseType.equals(WorkoutConstant.RUN) && ! exerciseType.equals(WorkoutConstant.GYM)){
+        if (!exerciseType.equals(WorkoutConstant.RUN) && ! exerciseType.equals(WorkoutConstant.GYM)) {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_INPUT_FOR_EXERCISE);
-        };
+        }
 
         return true;
     }

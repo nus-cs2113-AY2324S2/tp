@@ -119,13 +119,16 @@ class HandlerTest {
     void processInput_historyCommand_printsHistoryRun() {
         String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        Handler.initialiseScanner();
+        Handler.processInput();
+        Handler.destroyScanner();
+
         String inputHistory = "HISTORY /view:run";
         System.setIn(new ByteArrayInputStream(inputHistory.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
-        assertTrue(output.contains("history:"));
+        assertTrue(output.contains("Your run history:"));
     }
 
     /**
@@ -136,6 +139,10 @@ class HandlerTest {
     void processInput_latestCommand_printsLatestRun() {
         String inputRun = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        Handler.initialiseScanner();
+        Handler.processInput();
+        Handler.destroyScanner();
+
         String inputLatest = "LATEST /view:run";
         System.setIn(new ByteArrayInputStream(inputLatest.getBytes()));
         Handler.initialiseScanner();

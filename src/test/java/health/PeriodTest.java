@@ -3,9 +3,13 @@ package health;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import utility.CustomExceptions;
 import utility.HealthConstant;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -53,7 +57,6 @@ class PeriodTest {
      */
     @Test
     void showLatestPeriod_printCorrectPeriod() {
-        // Arrange
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
         Period secondPeriod = new Period("09-03-2023", "16-03-2023");
 
@@ -75,11 +78,10 @@ class PeriodTest {
     }
 
     @Test
+
     void showPeriodHistory_twoInputs_printCorrectPeriodHistory() {
-        // Arrange
         Period firstPeriod = new Period("10-04-2023", "16-04-2023");
         Period secondPeriod = new Period("09-05-2023", "16-05-2023");
-
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
 
@@ -110,6 +112,45 @@ class PeriodTest {
         assertEquals(expected, outContent.toString());
     }
 
+    /**
+     * Test deleting of periods with valid list and valid index.
+     * Expected behaviour is to have one periods entry left in the list.
+     *
+     * @throws CustomExceptions.OutOfBounds If the index is invalid.
+     */
+    @Test
+    void deletePeriod_properList_listOfSizeOne() throws CustomExceptions.OutOfBounds {
+        Period firstPeriod = new Period("10-04-2024", "16-04-2024");
+        Period secondPeriod = new Period("09-05-2024", "16-05-2024");
+        HealthList.addPeriod(firstPeriod);
+        HealthList.addPeriod(secondPeriod);;
+        int index = 1;
+        HealthList.deletePeriod(index);
+        assertEquals(1, HealthList.getPeriodsSize());
+    }
+
+    /**
+     * Test deleting of period with empty list.
+     * Expected behaviour is for an AssertionError to be thrown.
+     */
+    @Test
+    void deleteBmi_emptyList_throwsAssertionError() {
+        assertThrows(AssertionError.class, () ->
+                HealthList.deletePeriod(0));
+    }
+
+    /**
+     * Test deleting of period with invalid index.
+     * Expected behaviour is for an OutOfBounds error to be thrown.
+     */
+    @Test
+    void deleteBmi_properListInvalidIndex_throwOutOfBoundsForBmi() {
+        Period firstPeriod = new Period("10-04-2024", "16-04-2024");
+        HealthList.addPeriod(firstPeriod);
+        int invalidIndex = 5;
+        assertThrows(CustomExceptions.OutOfBounds.class, () ->
+                HealthList.deletePeriod(invalidIndex));
+    }
     /**
      * Tests the behaviour of the predictNextPeriodStartDate function and whether it prints
      * correct predicted start date.

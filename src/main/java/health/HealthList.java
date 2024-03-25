@@ -1,7 +1,8 @@
 package health;
 
+import storage.LogFile;
+import utility.CustomExceptions;
 import utility.HealthConstant;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Represents the list of BMI objects stored.
  */
 public class HealthList extends ArrayList<Health> {
-
+    static LogFile logFile = LogFile.getInstance();
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
@@ -145,5 +146,60 @@ public class HealthList extends ArrayList<Health> {
         bmis.clear();
         assert bmis.isEmpty() : "Bmi list is not cleared.";
         assert periods.isEmpty() : "Period list is not cleared.";
+    }
+    //@@author rouvinerh
+
+
+    /**
+     * Retrieves size of periods list.
+     *
+     * @return Size of periods list.
+     */
+    public static int getPeriodsSize() {
+        return periods.size();
+    }
+
+    /**
+     * Retrieves size of bmis list.
+     *
+     * @return Size of bmis list.
+     */
+    public static int getBmisSize() {
+        return bmis.size();
+    }
+    /**
+     * Deletes Bmi object based on index.
+     * @param index Index of the Bmi object to be deleted.
+     */
+    public static void deleteBmi(int index) throws CustomExceptions.OutOfBounds {
+        assert !bmis.isEmpty() : "BMI list is empty.";
+        if (index < 0 || index >= bmis.size()) {
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+        }
+        Bmi deletedBmi = bmis.get(index);
+        System.out.println("Removed BMI entry of " +
+                deletedBmi.bmiValue +
+                "from " +
+                deletedBmi.date);
+        bmis.remove(index);
+        LogFile.writeLog("Removed BMI with index: " + index, false);
+    }
+
+    /**
+     * Deletes Bmi object based on index.
+     * @param index Index of the Bmi object to be deleted.
+     */
+    public static void deletePeriod(int index) throws CustomExceptions.OutOfBounds {
+        assert !periods.isEmpty() : "Period list is empty.";
+        if (index < 0 || index >= periods.size()) {
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+        }
+        Period deletedPeriod = periods.get(index);
+        System.out.println("Removed period entry with start date: " +
+                deletedPeriod.startDate +
+                "and end date: " +
+                deletedPeriod.endPeriodDate);
+        periods.remove(index);
+        LogFile.writeLog("Removed period with index: " + index, false);
     }
 }
