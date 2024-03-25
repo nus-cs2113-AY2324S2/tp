@@ -421,7 +421,7 @@ public class Handler {
         } else if (exerciseTypeIsValid && isGymValid) {
             return WorkoutConstant.GYM;
         } else {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_ERROR);
+            return "";
         }
 
     }

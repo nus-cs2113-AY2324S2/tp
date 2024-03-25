@@ -172,6 +172,8 @@ public class Run extends Workout{
             throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_BLANK_ERROR);
         }
 
+       // insert rouvin checking for time and date
+
         if (runDate.isBlank()){
             throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_DATE_BLANK_ERROR);
         }
