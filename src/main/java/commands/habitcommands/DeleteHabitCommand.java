@@ -4,11 +4,21 @@ import commands.Command;
 import exceptions.HabitException;
 import habit.HabitTracker;
 
+/**
+ * Represents a command to add new habits.
+ */
 public class DeleteHabitCommand implements Command{
 
     private HabitTracker habitTracker;
     private int habitID;
 
+    /**
+     * Constructs a DeleteHabitCommand object with user input.
+     *
+     * @param habitTracker The HabitTracker instance to be used for storing the habits.
+     * @param habitCommandArgs User input for the delete habit command.
+     * @throws HabitException If there are any formatting issues.
+     */
     public DeleteHabitCommand(HabitTracker habitTracker, String habitCommandArgs) throws HabitException {
         this.habitTracker = habitTracker;
 
@@ -24,6 +34,11 @@ public class DeleteHabitCommand implements Command{
         }
     }
 
+    /**
+     * Execute the command to delete a habit from the habit tracker.
+     *
+     * @throws HabitException If there are any formatting issues.
+     */
     @Override
     public void execute() throws HabitException {
         habitTracker.deleteHabit(habitID);

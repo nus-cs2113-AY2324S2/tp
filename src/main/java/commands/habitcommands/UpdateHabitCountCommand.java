@@ -4,6 +4,9 @@ import commands.Command;
 import exceptions.HabitException;
 import habit.HabitTracker;
 
+/**
+ * Represents a command to update a habit count.
+ */
 public class UpdateHabitCountCommand implements Command {
     private static final int REQUIRED_PARAMETERS = 3;
     private HabitTracker habitTracker;
