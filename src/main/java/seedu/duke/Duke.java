@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exception.ProcessInputException;
+import seedu.duke.shooter.MediumSkill;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -13,9 +14,9 @@ public class Duke {
      */
     public static void main(String[] args) {
         Formatter.printWelcomeMsg();
-
+        PlayerList.L1.add(new MediumSkill("Bruno"));
         while (Ui.getIsRunning()) {
-            Formatter.printGoalBeforeShot(Ui.roundCount);
+//            Formatter.printGoalBeforeShot(Ui.roundCount);
             try {
                 Ui.beginListening();
                 Ui.processInput();
