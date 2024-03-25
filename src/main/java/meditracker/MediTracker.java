@@ -57,17 +57,20 @@ public class MediTracker {
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = Ui.readCommand();
+            Command command = null;
             Ui.showLine();
             try {
-                Command command = CommandParser.parse(fullCommand);
+                command = CommandParser.parse(fullCommand);
                 command.execute(medicationManager, dailyMedicationManager);
-                isExit = command.isExit();
             } catch (ArgumentNotFoundException | MediTrackerException ex) {
                 System.out.println(ex.getMessage());
             } catch (NullPointerException ex) {
                 System.out.println("Invalid MediTracker command! Please refer to the user guide.");
             } catch (NumberFormatException ex) {
                 System.out.println("Dosage/Quantity should be of type double!");
+            }
+            if (command != null) {
+                isExit = command.isExit();
             }
         }
     }
