@@ -26,6 +26,8 @@ Given below is an example usage scenario and how the add command behaves at each
 - Step 1. To be added.
 - Step 2. To be added.
 
+---
+
 ### Utilising the argument parser
 The `ArgumentParser` requires the following to work:
 1. `ArgumentList` object
@@ -50,18 +52,19 @@ exception if this argument is required but not found in user specified argument 
 Additional information regarding the `ArgumentName` enum:
 - To create a new enum, follow the following convention: `ALL_CAPS_NAME(“justFollowAttributeNamingConvention”)`
 - This enum is used in `ArgumentParser` when it returns a `Map<ArgumentName, String>`, where the enum is used as
-the key. In order to query the returned data structure, you can utilised the same enum.
+the key. In order to query the returned data structure, you can utilise the same enum.
 
 In order to utilise the argument parser,
 1. Determine if the `Argument` variant already exist. If not, create a new class and extend the `Argument` class.
 2. Prior to completing the creation of your new class, create a new enum in `ArgumentName`.
 3. In the class/method that you intend to use the `ArgumentParser`, create a `ArgumentList` and specify the required
 `Argument` objects.
-4. Finally, invoking `ArgumentList.parse` with the `String` object to obtained the parsed argument values.
+4. Finally, invoking `ArgumentList.parse` with the `String` object to obtain the parsed argument values.
 
 Overview of the `meditracker.argument` core classes:
 - TODO: Add class diagrams and/or object diagrams required to illustrate the above information
 
+---
 
 - TODO: Design and Implementation of the Logging Functionaity (SX) (Issue #41)
 - TODO: Design and Implementing of the Load and Save functionality (SX) (Issue #25)
