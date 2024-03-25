@@ -26,6 +26,42 @@ Given below is an example usage scenario and how the add command behaves at each
 - Step 1. To be added.
 - Step 2. To be added.
 
+### Utilising the argument parser
+The `ArgumentParser` requires the following to work:
+1. `ArgumentList` object
+2. Raw user input in `String`
+
+The `ArgumentList` object constitutes to a combination of `Argument` objects. The constructor for 
+the `ArgumentList` takes in a variable amount of `Argument`-extended classes. Additional assertion
+tests have been added to ensure that certain attributes of the `Argument` classes do not clash with
+one another.
+
+An `Argument` object consists of the following:
+1. `name`: Name of the argument, uses enum type `ArgumentName` as this value is used by `ArgumentParser` as well
+2. `flag`: Takes the form of `-*` where `*` represents any number of alphabetic characters
+3. `prompt`: Used within the guided prompt system
+4. `help`: Used in printing help message to provide user with the usage for the argument
+5. `isOptional`: A `boolean` value to specify whether this argument is optional or not. This value is utilised
+by the `ArgumentParser` to determine whether the argument is required, and will throw a `ArgumentNotFound` 
+exception if this argument is required but not found in user specified argument string.
+6. `hasNoValue`: A `boolean` value to specify whether this argument has a corresponding value tied to it. 
+`ArgumentParser` requires this to know whether to take the value specified by the user.
+
+Additional information regarding the `ArgumentName` enum:
+- To create a new enum, follow the following convention: `ALL_CAPS_NAME(“justFollowAttributeNamingConvention”)`
+- This enum is used in `ArgumentParser` when it returns a `Map<ArgumentName, String>`, where the enum is used as
+the key. In order to query the returned data structure, you can utilised the same enum.
+
+In order to utilise the argument parser,
+1. Determine if the `Argument` variant already exist. If not, create a new class and extend the `Argument` class.
+2. Prior to completing the creation of your new class, create a new enum in `ArgumentName`.
+3. In the class/method that you intend to use the `ArgumentParser`, create a `ArgumentList` and specify the required
+`Argument` objects.
+4. Finally, invoking `ArgumentList.parse` with the `String` object to obtained the parsed argument values.
+
+Overview of the `meditracker.argument` core classes:
+- TODO: Add class diagrams and/or object diagrams required to illustrate the above information
+
 
 - TODO: Design and Implementation of the Logging Functionaity (SX) (Issue #41)
 - TODO: Design and Implementing of the Load and Save functionality (SX) (Issue #25)
