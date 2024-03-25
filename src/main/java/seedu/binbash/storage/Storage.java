@@ -1,22 +1,28 @@
 package seedu.binbash.storage;
 
-import seedu.binbash.Item;
+import seedu.binbash.item.Item;
 import seedu.binbash.command.AddCommand;
 import seedu.binbash.exceptions.BinBashException;
+import seedu.binbash.item.PerishableRetailItem;
+import seedu.binbash.item.RetailItem;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 
 public class Storage {
+    private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     protected String filePath;
     protected String dataDirectoryPath;
@@ -121,25 +127,34 @@ public class Storage {
 
             Matcher matcher = AddCommand.COMMAND_FORMAT.matcher(line);
             if (matcher.matches()) {
-                String itemName = matcher.group("itemName");
-                String itemDescription = matcher.group("itemDescription");
+                String itemName = matcher.group("itemName").strip();
+                String itemDescription = matcher.group("itemDescription").strip();
                 int itemQuantity = Integer.parseInt(
                         Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
                 );
-                String itemExpirationDate = Objects.requireNonNullElse(
-                        matcher.group("itemExpirationDate"),
-                        "N.A."
-                ).strip();
+                LocalDate itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
+                        .map(String::strip)
+                        .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
+                        .orElse(LocalDate.MIN);
                 double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
                 double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
-                itemList.add(new Item(
-                        itemName,
-                        itemDescription,
-                        itemQuantity,
-                        itemExpirationDate,
-                        itemSalePrice,
-                        itemCostPrice));
+                if (itemExpirationDate.equals(LocalDate.MIN)) {
+                    itemList.add(new RetailItem(
+                            itemName,
+                            itemDescription,
+                            itemQuantity,
+                            itemSalePrice,
+                            itemCostPrice));
+                } else {
+                    itemList.add(new PerishableRetailItem(
+                            itemName,
+                            itemDescription,
+                            itemQuantity,
+                            itemExpirationDate,
+                            itemSalePrice,
+                            itemCostPrice));
+                }
             } else {
                 isCorrupted = true;
             }
@@ -194,10 +209,19 @@ public class Storage {
         output += "add" + " "
                 + "n/" + item.getItemName() + " "
                 + "d/" + item.getItemDescription() + " "
-                + "q/" + item.getItemQuantity() + " "
-                + "e/" + item.getItemExpirationDate() + " "
-                + "s/" + item.getItemSalePrice() + " "
-                + "c/" + item.getItemCostPrice();
+                + "q/" + item.getItemQuantity() + " ";
+
+        if (item instanceof PerishableRetailItem) {
+            PerishableRetailItem perishableItem = (PerishableRetailItem) item;
+            output += "e/" + perishableItem.getItemExpirationDate() + " ";
+        }
+
+        if (item instanceof RetailItem) {
+            RetailItem retailItem = (RetailItem) item;
+            output += "s/" + retailItem.getItemSalePrice() + " ";
+        }
+
+        output += "c/" + item.getItemCostPrice();
 
         return output;
     }

@@ -1,5 +1,11 @@
 package seedu.binbash;
 
+import seedu.binbash.item.Item;
+import seedu.binbash.item.PerishableRetailItem;
+import seedu.binbash.item.RetailItem;
+import seedu.binbash.command.RestockCommand;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -24,9 +30,17 @@ public class ItemList {
         return itemList.size();
     }
 
-    public String addItem(String itemName, String itemDescription, int itemQuantity, String itemExpirationDate,
-                          double itemSalePrice, double itemCostPrice) {
-        Item item = new Item(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
+    public String addItem(String itemName, String itemDescription, int itemQuantity,
+                          LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
+        Item item;
+        if (!itemExpirationDate.equals(LocalDate.MIN)) {
+            // Create perishable item
+            item = new PerishableRetailItem(itemName, itemDescription, itemQuantity,
+                    itemExpirationDate, itemSalePrice, itemCostPrice);
+        } else {
+            // Create non-perishable item
+            item = new RetailItem(itemName, itemDescription, itemQuantity, itemSalePrice, itemCostPrice);
+        }
 
         int beforeSize = itemList.size();
         itemList.add(item);
@@ -37,13 +51,35 @@ public class ItemList {
         return output;
     }
 
+    public String updateItemQuantity(String itemName, int itemQuantity, String command) {
+        String output = "Sorry, I can't find the item you are looking for.";
+
+        for (Item item : itemList) {
+            int newQuantity = item.getItemQuantity();
+            if (!item.getItemName().trim().equals(itemName.trim())) {
+                continue;
+            }
+
+            if (command.trim().equals(RestockCommand.command.trim())) {
+                newQuantity += itemQuantity;
+            } else {
+                newQuantity -= itemQuantity;
+            }
+            item.setItemQuantity(newQuantity);
+            output = "Great! I have updated the quantity of the item for you:" + System.lineSeparator()
+                    + System.lineSeparator() + item;
+
+        }
+        return output;
+    }
+
     public String deleteItem(int index) {
         int beforeSize = itemList.size();
         Item tempItem = itemList.remove(index - 1);
         assert itemList.size() == (beforeSize - 1);
 
-        String output = "Got it! I've removed the following item:"
-                + String.format("\t%s", tempItem);
+        String output = "Got it! I've removed the following item:" + System.lineSeparator()
+                + System.lineSeparator() + tempItem;
         return output;
     }
 
@@ -52,7 +88,7 @@ public class ItemList {
         Item currentItem;
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
-            if (currentItem.getItemName().equals(keyword)) {
+            if (currentItem.getItemName().trim().equals(keyword)) {
                 ITEMLIST_LOGGER.log(Level.INFO, "first matching item at index " + i + " found.");
                 targetIndex = i + 1;
                 break;
