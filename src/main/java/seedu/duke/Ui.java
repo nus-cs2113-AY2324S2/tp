@@ -69,8 +69,8 @@ public class Ui {
 
     public void printHelp() {
         println(LINE + "\nHere are the list of commands:\n" +
-                "'TTT' - Starts Tic-tac-toe Game\n\n" +
-                "type 'help TTT' for Tic-tac-toe commands\n" +
+                "'TTT' - Starts Tic-tac-toe Game\n" +
+                "type 'help TTT' for Tic-tac-toe commands\n\n" +
                 "'hangman' - Starts Hangman Game\n" +
                 "type 'help hangman' for Hangman commands\n" + LINE);
     }
