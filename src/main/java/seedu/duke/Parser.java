@@ -3,15 +3,21 @@ package seedu.duke;
 import seedu.duke.exceptions.FlirtForkEmptyException;
 import seedu.duke.exceptions.FlirtForkException;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 import java.util.Scanner;
 
 public class Parser {
     private static final String HORIZONTAL = "____________________________________________________________";
+    private static Logger logger = Logger.getLogger("ParserLogger");
 
     public static Command parseCommand(String userInput, UserDetails userDetails) throws FlirtForkException {
         if (userInput.trim().isEmpty()) {
             throw new FlirtForkException("OOPS! Input cannot be empty! \n" + HORIZONTAL);
         }
+
+        assert userDetails != null : "Input should not be empty";
 
         String commandType = userInput.split(" ")[0];
         String arguments = userInput.contains(" ") ? userInput.substring(userInput.indexOf(" ") + 1) : "";
@@ -33,11 +39,13 @@ public class Parser {
             try {
                 int index = Integer.parseInt(arguments) - 1;
                 if (index < 0) {
+                    logger.log(Level.WARNING, "Index less than zero");
                     throw new FlirtForkException("OOPS! Index must be greater than 0! \n" +
                             HORIZONTAL);
                 }
                 return new DeleteFavouritesCommand(index);
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Index invalid format");
                 throw new FlirtForkException("OOPS! Invalid format, " +
                         "please specify task index correctly! \n" + HORIZONTAL);
             }
