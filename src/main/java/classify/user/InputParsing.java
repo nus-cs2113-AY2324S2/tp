@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputParsing {
+    public static final Logger LOGGER = Logger.getLogger(InputParsing.class.getName());
     private static final String EARLIER_POSSIBLE_DATE = "1970-01-01";
     private static final String DEFAULT_STRING_VALUE = "Unknown";
     private static final int LOWER_LIMIT_PHONE_NUMBER = 8;
@@ -38,7 +39,6 @@ public class InputParsing {
     private static final String EXIT = "exit";
     private static final String EXITED_THE_COMMAND = "Exited the command.";
     private static final String LIST_SORTED = "Sort complete!";
-    public static final Logger logger = Logger.getLogger(InputParsing.class.getName());
     private static final String SORT_BY_CHOOSE_INDEX = "Sort by: (Choose index)";
     private static final String NAME_A_TO_Z = "1. Name (A to Z)";
     private static final String TOTAL_NUMBER_OF_CLASSES_ATTENDED = "2. Total number of classes attended:";
@@ -516,7 +516,7 @@ public class InputParsing {
             }
             return true;
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "Invalid input for classes attended: " + classesAttended, e);
+            LOGGER.log(Level.WARNING, "Invalid input for classes attended: " + classesAttended, e);
             System.out.println("Invalid input for classes attended. Please enter a valid whole number.");
             Ui.printDivider();
             return false;
@@ -532,7 +532,7 @@ public class InputParsing {
             }
             return true;
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "Invalid input for grade: " + grade, e);
+            LOGGER.log(Level.WARNING, "Invalid input for grade: " + grade, e);
             Ui.printValidNumberError();
             Ui.printDivider();
             return false;
@@ -562,7 +562,7 @@ public class InputParsing {
                 number = readInPhoneNumber(in);
             } while (!checkNumberValidity(number));
             
-            logger.log(Level.INFO, "Storing number: " + number);
+            LOGGER.log(Level.INFO, "Storing number: " + number);
             return number;
 
         } catch (NumberFormatException e) {
@@ -619,7 +619,7 @@ public class InputParsing {
     protected static LocalDate parseDateFromString(String string) {
 
         if (string.isBlank()) {
-            logger.log(Level.INFO, "Storing today as the last payment date." + '\n');
+            LOGGER.log(Level.INFO, "Storing today as the last payment date." + '\n');
             return LocalDate.now();
         }
 
@@ -637,7 +637,7 @@ public class InputParsing {
     }
 
     private static LocalDate invalidDatePath() {
-        logger.log(Level.WARNING, "Invalid date format entered." + '\n');
+        LOGGER.log(Level.WARNING, "Invalid date format entered." + '\n');
         Ui.printInvalidDateFormatError();
         return LocalDate.now().plusDays(2);
     }

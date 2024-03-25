@@ -7,20 +7,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-import static classify.user.InputParsing.logger;
+import static classify.user.InputParsing.LOGGER;
 
 public class AddStudent {
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
-    private static final String DO_YOU_WANT_TO_ADD_ANOTHER_SUBJECT_AND_GRADE_YES_NO = "Do you want to add another subject and grade? (yes/no)";
+    private static final String DO_YOU_WANT_TO_ADD_ANOTHER_SUBJECT_AND_GRADE_YES_NO =
+            "Do you want to add another subject and grade? (yes/no)";
     private static final String YES = "yes";
     private static final String NO = "no";
-    private static final String INVALID_RESPONSE_PLEASE_TYPE_YES_OR_NO = "Invalid response. Please type 'yes' or 'no'.";
+    private static final String INVALID_RESPONSE_PLEASE_TYPE_YES_OR_NO =
+            "Invalid response. Please type 'yes' or 'no'.";
     private static final String SUBJECT_ENTER_NOTHING_TO_SKIP = "Subject (enter nothing to skip): ";
     private static final String NO_SUBJECTS_ADDED = "No subjects added.";
     private static final String SUBJECT_ALREADY_EXISTS = "Subject already exists.";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully.";
     private static final String NUMBER_IS_OUTSIDE_THE_ACCEPTABLE_RANGE = "Number is outside the acceptable range.";
-    private static final String STUDENT_WITH_THE_SAME_NAME_ALREADY_EXISTS = "Student with the same name already exists.";
+    private static final String STUDENT_WITH_THE_SAME_NAME_ALREADY_EXISTS =
+            "Student with the same name already exists.";
 
     /**
      * Adds a new student to the list of students.
@@ -41,7 +44,7 @@ public class AddStudent {
 
         if (InputParsing.findStudentByName(masterStudentList, name) != null) {
             assert InputParsing.findStudentByName(masterStudentList, name) != null;
-            logger.log(Level.WARNING, STUDENT_WITH_THE_SAME_NAME_ALREADY_EXISTS);
+            LOGGER.log(Level.WARNING, STUDENT_WITH_THE_SAME_NAME_ALREADY_EXISTS);
 
             Ui.printSameNameError();
             Ui.printDivider();
@@ -74,7 +77,7 @@ public class AddStudent {
 
         //@@author tayponghee
         masterStudentList.add(student);
-        logger.log(Level.INFO, STUDENT_ADDED_SUCCESSFULLY);
+        LOGGER.log(Level.INFO, STUDENT_ADDED_SUCCESSFULLY);
         Ui.printStudentAdded();
         Ui.printDivider();
     }
