@@ -13,8 +13,6 @@ import longah.commands.Command;
  */
 public class LongAh {
     private static Group group;
-    private static PINHandler pinHandler;
-    private static final Logging logger = new Logging();
 
     public static void init() {
         Logging.logInfo("Starting Pre-program preparations.");
@@ -29,8 +27,9 @@ public class LongAh {
     public static void main(String[] args) {
         init();
         try {
+            new Logging();
             group = new Group("group"); // Give a temporary name for now
-            pinHandler = new PINHandler();
+            new PINHandler();
         } catch (LongAhException e) {
             LongAhException.printException(e);
         }
