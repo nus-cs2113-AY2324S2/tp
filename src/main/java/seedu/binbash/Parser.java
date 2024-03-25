@@ -1,6 +1,9 @@
 package seedu.binbash;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +21,7 @@ import seedu.binbash.exceptions.InvalidArgumentException;
 import seedu.binbash.exceptions.InvalidFormatException;
 
 public class Parser {
+    private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private final ItemList itemList;
 
     public Parser(ItemList itemList) {
@@ -82,16 +86,17 @@ public class Parser {
         if (!matcher.matches()) {
             throw new InvalidFormatException("Add command is not properly formatted!");
         }
-        String itemName = matcher.group("itemName");
-        String itemDescription = matcher.group("itemDescription");
+        String itemName = matcher.group("itemName").strip();
+        String itemDescription = matcher.group("itemDescription").strip();
         int itemQuantity = Integer.parseInt(
                 Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
         );
-        String itemExpirationDate = Objects.requireNonNullElse( // If no expiration date provided, set as N.A.
-                matcher.group("itemExpirationDate"),
-                "N.A."
-        ).strip();
-        double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
+        // itemExpirationDate is optional. If none provided, we will set it as LocalDate.MIN
+        LocalDate itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
+                .map(String::strip)
+                .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
+                .orElse(LocalDate.MIN);
+        double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice")); // Will set as optional later
         double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
         return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,

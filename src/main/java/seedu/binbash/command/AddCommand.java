@@ -1,5 +1,6 @@
 package seedu.binbash.command;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
 
@@ -44,12 +45,12 @@ public class AddCommand extends Command {
     private final String itemName;
     private final String itemDescription;
     private final int itemQuantity;
-    private final String itemExpirationDate;
+    private final LocalDate itemExpirationDate;
     private final double itemSalePrice;
     private final double itemCostPrice;
 
     public AddCommand(ItemList itemList, String itemName, String itemDescription, int itemQuantity,
-                      String itemExpirationDate, double itemSalePrice, double itemCostPrice) {
+                      LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
         super(itemList);
         this.itemName = itemName;
         this.itemDescription = itemDescription;

@@ -1,7 +1,11 @@
 package seedu.binbash;
 
+import seedu.binbash.item.Item;
+import seedu.binbash.item.PerishableRetailItem;
+import seedu.binbash.item.RetailItem;
 import seedu.binbash.command.RestockCommand;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -26,9 +30,17 @@ public class ItemList {
         return itemList.size();
     }
 
-    public String addItem(String itemName, String itemDescription, int itemQuantity, String itemExpirationDate,
-                          double itemSalePrice, double itemCostPrice) {
-        Item item = new Item(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
+    public String addItem(String itemName, String itemDescription, int itemQuantity,
+                          LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
+        Item item;
+        if (!itemExpirationDate.equals(LocalDate.MIN)) {
+            // Create perishable item
+            item = new PerishableRetailItem(itemName, itemDescription, itemQuantity,
+                    itemExpirationDate, itemSalePrice, itemCostPrice);
+        } else {
+            // Create non-perishable item
+            item = new RetailItem(itemName, itemDescription, itemQuantity, itemSalePrice, itemCostPrice);
+        }
 
         int beforeSize = itemList.size();
         itemList.add(item);
@@ -50,8 +62,7 @@ public class ItemList {
 
             if (command.trim().equals(RestockCommand.command.trim())) {
                 newQuantity += itemQuantity;
-            }
-            else {
+            } else {
                 newQuantity -= itemQuantity;
             }
             item.setItemQuantity(newQuantity);
