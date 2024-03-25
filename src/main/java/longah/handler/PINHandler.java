@@ -46,7 +46,7 @@ public class PINHandler {
                 authenticationEnabled = Boolean.parseBoolean(data[1].trim());
             }
         } catch (IOException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error reading saved PIN and authentication enabled state.");
+            UI.showMessage("Error reading saved PIN and authentication enabled state.");
         }
     }
 
@@ -58,7 +58,7 @@ public class PINHandler {
             String data = savedPin + "\n" + authenticationEnabled;
             Files.write(Paths.get(PIN_FILE_PATH), data.getBytes());
         } catch (IOException e) {
-            System.out.println("Error saving PIN and authentication enabled state.");
+            UI.showMessage("Error saving PIN and authentication enabled state.");
         }
     }
 
@@ -151,12 +151,12 @@ public class PINHandler {
         if (Objects.equals(enteredPin, "disable")) {
             authenticationEnabled = false;
             savePinAndAuthenticationEnabled();
-            System.out.println("Authentication disabled upon startup.");
+            UI.showMessage("Authentication disabled upon startup.");
             return;
         } else if (Objects.equals(enteredPin, "enable")) {
             authenticationEnabled = true;
             savePinAndAuthenticationEnabled();
-            System.out.println("Authentication enabled upon startup.");
+            UI.showMessage("Authentication enabled upon startup.");
             return;
         }
 
