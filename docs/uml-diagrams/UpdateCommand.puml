@@ -64,19 +64,18 @@ activate Inventory #d5eac2
 Inventory --> UpdateCommand : oldItem:Item
 deactivate Inventory
 
-alt newQuantity == -1
+opt newQuantity == -1
     UpdateCommand -> Item: getQuantity()
     activate Item #fbffb2
     Item --> UpdateCommand: oldItemQuantity
     deactivate Item
-    UpdateCommand -> UpdateCommand: newQuantity = oldItemQuantity
 end
-alt newPrice == -1
+
+opt newPrice == -1
     UpdateCommand -> Item: getPrice()
     activate Item #fbffb2
     Item --> UpdateCommand: oldItemPrice
     deactivate Item
-    UpdateCommand -> UpdateCommand: newPrice = oldItemPrice
 end
 
 UpdateCommand -> Inventory : put(name:String, item:Item)
