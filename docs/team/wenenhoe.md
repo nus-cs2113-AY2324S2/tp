@@ -14,6 +14,8 @@
 - Issue #77: Add support for no value flag arguments
 
 ### Developer Guide Contributions
+- Information related to how `ArgumentParser` works and what is required to add on
+and further extend it if more `Argument`s are needed
 
 ### User Guide Contributions
 
