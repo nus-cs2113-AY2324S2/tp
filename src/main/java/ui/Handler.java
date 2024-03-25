@@ -49,8 +49,8 @@ public class Handler {
                     System.out.println(UiConstant.EXIT_MESSAGE);
                     return;
 
-                case NEW:
-                    handleExercise(userInput);
+                case WORKOUT:
+                    handleWorkout(userInput);
                     break;
 
                 case HEALTH:
@@ -105,7 +105,7 @@ public class Handler {
      *
      * @param userInput The user input string.
      */
-    public static void handleExercise(String userInput) {
+    public static void handleWorkout(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(WorkoutConstant.RUN)) {
