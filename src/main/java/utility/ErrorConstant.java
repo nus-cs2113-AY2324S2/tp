@@ -7,9 +7,10 @@ public class ErrorConstant {
 
 
     // Storage Errors
-    public static final String SAVE_ERROR = "File save failed.\nWrite error occurred:\n";
-    public static final String LOAD_ERROR = "File read error:\n" + "Error at ";
-    public static final String CORRUPT_ERROR = "\nFile is corrupted. Ceasing any further data imports.";
+    public static final String SAVE_ERROR = "File save failed. Write error occurred:";
+    public static final String LOAD_ERROR = "File read error:" + "Error at ";
+    public static final String CREATE_FILE_ERROR = "Unable to create file.";
+    public static final String CORRUPT_ERROR = "File is corrupted. Ceasing any further data imports.";
 
 
     // Input Errors

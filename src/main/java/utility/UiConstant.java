@@ -20,6 +20,8 @@ public class UiConstant {
     // Storage
     public static final String LOG_FILE_PATH = "./pulsepilot_log.txt";
     public static final String DATA_FILE_PATH = "./pulsepilot_data.txt";
+    public static final int FILE_FOUND = 0;
+    public static final int FILE_NOT_FOUND = 1;
     public static final String RUN_NAME = "run";
     public static final String GYM_NAME = "gym";
     public static final String BMI_NAME = "bmi";

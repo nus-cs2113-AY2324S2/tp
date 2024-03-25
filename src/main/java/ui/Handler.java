@@ -5,6 +5,7 @@ import health.Health;
 import health.HealthList;
 import health.Period;
 
+import storage.DataFile;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
@@ -148,7 +149,6 @@ public class Handler {
      * @param userInput A string containing health data information of user.
      */
     public static void handleHealth(String userInput) {
-        Output.printLine();
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(HealthConstant.BMI)){
@@ -192,7 +192,6 @@ public class Handler {
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e, e.getMessage());
         }
-        Output.printLine();
     }
 
     /**
@@ -335,8 +334,7 @@ public class Handler {
         initialiseScanner();
         LogFile.writeLog("Started bot", false);
         // Yet to implement : Check for existing save, if not, make a new one
-        // Yet to implement : int status = Storage.load();
-        int status = 1;
+        int status = DataFile.loadDataFile();
         Output.printGreeting(1);
 
         if (status == 1) {
