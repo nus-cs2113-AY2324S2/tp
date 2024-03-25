@@ -62,8 +62,7 @@ public class ItemList {
 
             if (command.trim().equals(RestockCommand.command.trim())) {
                 newQuantity += itemQuantity;
-            }
-            else {
+            } else {
                 newQuantity -= itemQuantity;
             }
             item.setItemQuantity(newQuantity);
