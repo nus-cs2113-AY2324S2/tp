@@ -18,6 +18,18 @@ public class Exercise {
         return exerciseType;
     }
 
+    public String getExerciseName() {
+        return exerciseName;
+    }
+
+    public String getSets() {
+        return sets;
+    }
+
+    public String getReps() {
+        return reps;
+    }
+
     @Override
     public String toString() {
         return exerciseType + ": " + exerciseName + ", " + sets + " sets & " + reps + " reps";
