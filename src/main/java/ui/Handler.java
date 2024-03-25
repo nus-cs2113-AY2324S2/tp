@@ -4,19 +4,17 @@ import health.Bmi;
 import health.Health;
 import health.HealthList;
 import health.Period;
-
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.HealthConstant;
 import utility.WorkoutConstant;
 import utility.Command;
-
+import utility.Filters;
+import workouts.WorkoutList;
 import workouts.Gym;
 import workouts.Run;
-
 import java.util.Scanner;
-
 import storage.LogFile;
 
 
@@ -64,6 +62,11 @@ public class Handler {
                 case LATEST:
                     handleLatest(userInput);
                     break;
+
+                case DELETE:
+                    handleDelete(userInput);
+                    break;
+                    // delete /item:gym/health/bmi /index:1
 
                 case HELP:
                     Output.printHelp();
@@ -141,6 +144,37 @@ public class Handler {
         }
     }
 
+    public static void handleDelete(String userInput) {
+        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+        String type = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1].trim();
+        String strIndex = inputs[2].split(UiConstant.SPLIT_BY_COLON)[1];
+        int index = Integer.parseInt(strIndex);
+        Filters parsedFilter = Filters.valueOf(type.toUpperCase());
+        try {
+            switch (parsedFilter) {
+            case BMI:
+                HealthList.deleteBmi(index);
+                break;
+
+            case PERIOD:
+                HealthList.deletePeriod(index);
+                break;
+
+            case GYM:
+                WorkoutList.deleteGym(index);
+                break;
+
+            case RUN:
+                WorkoutList.deleteRun(index);
+                break;
+
+            default:
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_PARAMETER_ERROR);
+        }
+        } catch (CustomExceptions.InvalidInput e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * Handles user input related to health data. Parses the user input to determine

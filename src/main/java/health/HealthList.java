@@ -1,14 +1,14 @@
 package health;
 
+import storage.LogFile;
 import utility.HealthConstant;
-
 import java.util.ArrayList;
 
 /**
  * Represents the list of BMI objects stored.
  */
 public class HealthList extends ArrayList<Health> {
-
+    static LogFile logFile = LogFile.getInstance();
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class HealthList extends ArrayList<Health> {
         }
     }
 
-    //@@l5_z
+    //@@author l5_z
     /**
      * Clears the Bmis and Periods array lists.
      * @throws AssertionError If periods and bmis lists are not empty
@@ -91,5 +91,44 @@ public class HealthList extends ArrayList<Health> {
         bmis.clear();
         assert bmis.isEmpty() : "Bmi list is not cleared.";
         assert periods.isEmpty() : "Period list is not cleared.";
+    }
+    //@@author rouvinerh
+
+    /**
+     * Deletes Bmi object based on index.
+     * @param index Index of the Bmi object to be deleted.
+     */
+    public static void deleteBmi(int index) {
+        assert !bmis.isEmpty() : "BMI list is empty.";
+        if (index < 0 || index >= bmis.size()) {
+            System.err.println("Invalid index: " + index);
+            return;
+        }
+        Bmi deletedBmi = bmis.get(index);
+        System.out.println("Removed BMI entry of " +
+                deletedBmi.bmiValue +
+                "from " +
+                deletedBmi.date);
+        bmis.remove(index);
+        LogFile.writeLog("Removed BMI with index: " + index, false);
+    }
+
+    /**
+     * Deletes Bmi object based on index.
+     * @param index Index of the Bmi object to be deleted.
+     */
+    public static void deletePeriod(int index) {
+        assert !periods.isEmpty() : "Period list is empty.";
+        if (index < 0 || index >= periods.size()) {
+            System.err.println("Invalid index: " + index);
+            return;
+        }
+        Period deletedPeriod = periods.get(index);
+        System.out.println("Removed period entry with start date: " +
+                deletedPeriod.startDate +
+                "and end date: " +
+                deletedPeriod.endDate);
+        periods.remove(index);
+        LogFile.writeLog("Removed period with index: " + index, false);
     }
 }

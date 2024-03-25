@@ -1,5 +1,6 @@
 package workouts;
 
+import storage.LogFile;
 import utility.CustomExceptions;
 import utility.WorkoutConstant;
 
@@ -118,6 +119,46 @@ public class WorkoutList extends ArrayList<Workout> {
      */
     public static int getGymSize() {
         return gyms.size();
+    }
+
+    /**
+     * Deletes Gym object based on index.
+     * @param index Index of the Gym object to be deleted.
+     */
+    public static void deleteGym(int index) {
+        assert !gyms.isEmpty() : "Gym list is empty.";
+        if (index < 0 || index >= gyms.size()) {
+            System.err.println("Invalid index: " + index);
+            return;
+        }
+        Gym deletedGym = gyms.get(index);
+        System.out.println("Removed Gym entry with " +
+                deletedGym.stations.size() +
+                "stations.");
+        workouts.remove(deletedGym);
+        gyms.remove(index);
+        LogFile.writeLog("Removed gym with index: " + index, false);
+    }
+
+    /**
+     * Deletes Run object based on index.
+     * @param index Index of the Run object to be deleted.
+     */
+    public static void deleteRun(int index) {
+        assert !runs.isEmpty() : "Gym list is empty.";
+        if (index < 0 || index >= runs.size()) {
+            System.err.println("Invalid index: " + index);
+            return;
+        }
+        Run deletedRun = runs.get(index);
+        System.out.println("Removed Run entry with " +
+                deletedRun.distance +
+                "km at " +
+                deletedRun.getPace() +
+                ".");
+        workouts.remove(deletedRun);
+        runs.remove(index);
+        LogFile.writeLog("Removed run with index: " + index, false);
     }
 
     /**
