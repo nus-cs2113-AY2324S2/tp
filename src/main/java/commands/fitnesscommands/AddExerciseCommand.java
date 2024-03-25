@@ -31,17 +31,17 @@ public class AddExerciseCommand implements Command {
     private String[] checkCommandArgs(String commandArgs) throws FitnessException {
         String[] tempCommandArgs = commandArgs.split(",", 4);
 
-        // String Cleaning
-        tempCommandArgs[0] = tempCommandArgs[0].trim();
-        tempCommandArgs[1] = tempCommandArgs[1].trim();
-        tempCommandArgs[2] = tempCommandArgs[2].trim();
-        tempCommandArgs[3] = tempCommandArgs[3].trim();
-
         // Handles insufficient parameters entered
         if (tempCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS) {
             throw new FitnessException(
                     "Forgetting something? Key in the correct parameters please!");
         }
+
+        // String Cleaning
+        tempCommandArgs[0] = tempCommandArgs[0].trim();
+        tempCommandArgs[1] = tempCommandArgs[1].trim();
+        tempCommandArgs[2] = tempCommandArgs[2].trim();
+        tempCommandArgs[3] = tempCommandArgs[3].trim();
 
         // Handles the case where non-integer values are entered in parameters that should only
         // be integers
@@ -51,7 +51,7 @@ public class AddExerciseCommand implements Command {
 
         // Checks that the entered type belongs to one of the ExerciseType Enum
         try {
-            String exerciseTypeString = tempCommandArgs[0].toUpperCase();
+            String exerciseTypeString = tempCommandArgs[0].toUpperCase().trim();
             ExerciseType.valueOf(exerciseTypeString);
         } catch (IllegalArgumentException e) {
             String errorMessage = "Hmm...Invalid type of exercise..." + System.lineSeparator() +
