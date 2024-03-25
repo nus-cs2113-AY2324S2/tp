@@ -1,18 +1,6 @@
 package activeedge.parser;
 
-import command.HelpCommand;
-import command.LogWaterCommand;
-import command.LogMealCommand;
-import command.ListMealsCommand;
-import command.ListFullCommand;
-import command.ShowCaloriesCommand;
-import command.ViewWaterIntakeCommand;
-import command.ShowGoalsCommand;
-import command.AddGoalsCommand;
-import command.FindCommand;
-import command.DeleteTaskCommand;
-import command.ActiveEdgeException;
-import command.LogExerciseCommand;
+import command.*;
 
 import activeedge.Storage;
 
@@ -121,6 +109,9 @@ public class Parser {
                 }
                 LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt);
                 logExerciseCommand.execute();
+            }
+            else if (input.startsWith("summary")) {
+                new ShowSummaryCommand().execute();
             }
             else {
                 System.out.println("Unknown command.");
