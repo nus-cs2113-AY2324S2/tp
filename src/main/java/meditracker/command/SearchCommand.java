@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Represents a command to search for medications from the local medication library based on a keyword.
  */
-public class SearchCommand extends Command{
+public class SearchCommand extends Command {
 
     private final String keyword;
 
@@ -28,18 +28,16 @@ public class SearchCommand extends Command{
      * and displays the search results on the user interface.
      *
      * @param medicationManager The MedicationManager object to manage medications.
-     * @param ui The Ui object to handle user interface interactions.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) {
+                        DailyMedicationManager dailyMedicationManager) {
         try {
             LibraryManager libraryManager = new LibraryManager();
             libraryManager.searchMedication(keyword);
-            libraryManager.printSearchResults(ui);
+            libraryManager.printSearchResults();
         } catch (IOException e) {
-            ui.showLibraryNotFoundMessage();
+            Ui.showLibraryNotFoundMessage();
         }
     }
 }

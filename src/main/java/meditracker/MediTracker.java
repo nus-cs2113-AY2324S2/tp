@@ -6,7 +6,7 @@ import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.exception.MediTrackerException;
 import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
-import meditracker.parser.Parser;
+import meditracker.command.CommandParser;
 import meditracker.storage.FileReaderWriter;
 import meditracker.ui.Ui;
 
@@ -18,15 +18,14 @@ import java.util.List;
  */
 public class MediTracker {
 
-    private Ui ui;
     private MedicationManager medicationManager;
     private DailyMedicationManager dailyMedicationManager;
 
     /**
-     * Constructs a new MediTracker object and initializes the user interface.
+     * Constructs a new MediTracker object and initializes both medicationManager and
+     * dailyMedicationManager.
      */
     public MediTracker() {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(medicationManager);
     }
@@ -37,7 +36,6 @@ public class MediTracker {
      * @param dailyMedicationList Daily medication
      */
     public MediTracker(List<String> dailyMedicationList) {
-        ui = new Ui();
         medicationManager = new MedicationManager();
         dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
     }
@@ -46,23 +44,31 @@ public class MediTracker {
      * Runs the MediTracker application.
      * This method displays a welcome message, reads user commands, and processes them until the user exits the
      * application.
-     * @throws MediTrackerException If an error occurs during the execution of the application.
-     * @throws ArgumentNotFoundException Argument required not found
-     * @throws DuplicateArgumentFoundException Duplicate argument found
      */
-    public void run() throws MediTrackerException, ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public void run() {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
         FileReaderWriter.loadMediTrackerData(medicationManager);
-        ui.showWelcomeMessage();
+        Ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
-            Command command = Parser.parse(fullCommand);
-            command.execute(medicationManager, dailyMedicationManager, ui);
-            isExit = command.isExit();
+            String fullCommand = Ui.readCommand();
+            Command command = null;
+            Ui.showLine();
+            try {
+                command = CommandParser.parse(fullCommand);
+                command.execute(medicationManager, dailyMedicationManager);
+            } catch (ArgumentNotFoundException | DuplicateArgumentFoundException | MediTrackerException ex) {
+                System.out.println(ex.getMessage());
+            } catch (NullPointerException ex) {
+                System.out.println("Invalid MediTracker command! Please refer to the user guide.");
+            } catch (NumberFormatException ex) {
+                System.out.println("Dosage/Quantity should be of type double!");
+            }
+            if (command != null) {
+                isExit = command.isExit();
+            }
         }
     }
 
@@ -70,12 +76,8 @@ public class MediTracker {
      * Starts the MediTracker application.
      * It creates a new MediTracker object and calls its run() method.
      * @param args Command-line arguments.
-     * @throws MediTrackerException If an error occurs during the execution of the application.
-     * @throws ArgumentNotFoundException Argument required not found
-     * @throws DuplicateArgumentFoundException Duplicate argument found
      */
-    public static void main(String[] args)
-            throws MediTrackerException, ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public static void main(String[] args) {
         MediLogger.initialiseLogger();
 
         List<String> dailyMedicationList = FileReaderWriter.loadDailyMedicationData();

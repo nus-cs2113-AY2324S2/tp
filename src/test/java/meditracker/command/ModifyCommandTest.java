@@ -5,7 +5,6 @@ import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
-import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,19 +17,22 @@ public class ModifyCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         Medication medication = new Medication(
                 "Medication_A",
-                "60_TAB",
-                "500mg",
+                60.0,
+                500.0,
+                null,
+                null,
+                null,
                 "01/07/25",
                 "morning",
-                "cause_dizziness");
+                "cause_dizziness",
+                "");
         medicationManager.addMedication(medication);
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
 
         String newName = "Medication_B";
         String inputString = "modify -l 1 -n " + newName;
         ModifyCommand command = new ModifyCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(medicationManager, dailyMedicationManager, ui);
+        command.execute(medicationManager, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertEquals(updatedMedication.getName(), newName);
@@ -42,19 +44,22 @@ public class ModifyCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         Medication medication = new Medication(
                 "Medication_A",
-                "60_TAB",
-                "500mg",
+                60.0,
+                500.0,
+                null,
+                null,
+                null,
                 "01/07/25",
                 "morning",
-                "cause_dizziness");
+                "cause_dizziness",
+                "");
         medicationManager.addMedication(medication);
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
 
         String newName = "Medication_B";
         String inputString = String.format("modify -n %s -l 1", newName);
         ModifyCommand command = new ModifyCommand(inputString);
-        Ui ui = new Ui();
-        command.execute(medicationManager, dailyMedicationManager, ui);
+        command.execute(medicationManager, dailyMedicationManager);
 
         Medication updatedMedication = medicationManager.getMedication(1);
         assertTrue(updatedMedication.getName().equals(newName));

@@ -36,18 +36,16 @@ public class DeleteCommand extends Command {
      *
      * @param medicationManager      The MedicationList object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
-     * @param ui                     The Ui object used to interact with the user interface.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) {
+                        DailyMedicationManager dailyMedicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
         medicationManager.removeMedication(listIndex);
 
         // TODO: remove medication from DailyMedicationManager as well.
 
-        ui.showDeleteCommandMessage();
+        Ui.showDeleteCommandMessage();
     }
 }

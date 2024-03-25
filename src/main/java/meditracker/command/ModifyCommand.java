@@ -50,12 +50,10 @@ public class ModifyCommand extends Command {
      *
      * @param medicationManager      The MedicationList object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
-     * @param ui                     The Ui object used to interact with the user interface.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) {
+                        DailyMedicationManager dailyMedicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
         Medication medication = medicationManager.getMedication(listIndex);
@@ -66,7 +64,7 @@ public class ModifyCommand extends Command {
 
             switch (argumentName) {
             case DOSAGE:
-                medication.setDosage(argumentValue);
+                medication.setDosage(Double.parseDouble(argumentValue));
                 break;
             case EXPIRATION_DATE:
                 medication.setExpiryDate(argumentValue);
@@ -84,7 +82,7 @@ public class ModifyCommand extends Command {
                 dailyMedication.setName(argumentValue);
                 break;
             case QUANTITY:
-                medication.setQuantity(argumentValue);
+                medication.setQuantity(Double.parseDouble(argumentValue));
                 break;
             case REMARKS:
                 medication.setRemarks(argumentValue);
@@ -94,6 +92,6 @@ public class ModifyCommand extends Command {
             }
         }
 
-        ui.showModifyCommandMessage();
+        Ui.showModifyCommandMessage();
     }
 }

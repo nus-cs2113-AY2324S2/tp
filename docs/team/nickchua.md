@@ -4,13 +4,15 @@
 
 
 ### Summary of Contributions
-1. Refactor: <br>
-Package names <br>
-Gradle configuration files <br><br>
-2. Ui: <br>
-Develop the user interface for the MediTracker. 
-It includes getting the user input, printing the welcome, exit message and more. <br><br>
-3. Command: <br>
-Create command abstract class, AddCommand and ExitCommand. Add JUnit test for AddCommand. <br><br>
-4. Medication: <br>
-Create Medication class and MedicationList class <br><br>
+#### Refactor:
+- Package names
+- Gradle configuration files
+#### Ui:
+- Develop the user interface for the MediTracker. 
+- It includes getting the user input, printing the welcome, exit message and more.
+#### Command:
+- Create command abstract class, AddCommand and ExitCommand. Add JUnit test for AddCommand.
+#### Medication:
+- Create Medication class and MedicationList class
+#### Defensive code:
+Handled exceptions in MediTracker class as well as invalid command input in Command class.

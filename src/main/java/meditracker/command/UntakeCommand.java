@@ -36,15 +36,13 @@ public class UntakeCommand extends Command {
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
      * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
-     * @param ui                     The Ui object used to interact with the user interface.
      */
     @Override
     public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager,
-                        Ui ui) {
+                        DailyMedicationManager dailyMedicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
         dailyMedicationManager.untakeDailyMedication(listIndex);
-        ui.showUntakeCommandMessage();
+        Ui.showUntakeCommandMessage();
     }
 }
