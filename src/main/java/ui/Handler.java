@@ -82,8 +82,10 @@ public class Handler {
                 default:
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
-            } catch (IllegalArgumentException | CustomExceptions.InvalidInput e) {
-                Output.printException(e, ErrorConstant.INVALID_COMMAND_ERROR);
+            } catch (CustomExceptions.InvalidInput e) {
+                Output.printException(e.getMessage());
+            } catch (IllegalArgumentException e){
+                Output.printException(ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
     }
@@ -120,12 +122,7 @@ public class Handler {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(WorkoutConstant.RUN)) {
                 String[] runDetails = Run.getRun(userInput);
-                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
-                        || runDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
-
-                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                Run newRun = Run.addRun(runDetails);
                 Output.printAddRun(newRun);
 
             } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
@@ -134,7 +131,7 @@ public class Handler {
                 getGymStation(numberOfStations, gym);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+            Output.printException(e.getMessage());
         }
     }
 
@@ -290,7 +287,7 @@ public class Handler {
                 }
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+            Output.printException(e.getMessage());
         }
     }
 
@@ -328,7 +325,7 @@ public class Handler {
             }
             Output.printAddGym(gym);
         } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
-            Output.printException(e, e.getMessage());
+            Output.printException(e.getMessage());
         }
     }
 
@@ -373,8 +370,6 @@ public class Handler {
         }
     }
 
-
-
     //@@author
     /**
      * Checks the type of exercise based on the user input.
@@ -396,32 +391,29 @@ public class Handler {
         boolean isGymValid = false;
 
         String exerciseType = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_EXERCISE_TYPE);
-        try {
-            exerciseTypeIsValid = Workout.checkIfExerciseTypeIsValid(exerciseType);
-            boolean isRun = exerciseType.equals(WorkoutConstant.RUN);
-            boolean isGym = exerciseType.equals(WorkoutConstant.GYM);
 
-            if (isRun) {
-                String runDistance = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
-                String runTime = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
-                String runDate = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
-                isRunValid = Run.checkIfRunIsValid(runDistance, runTime, runDate);
-            } else if (isGym) {
-                String numberOfStations = extractSubstringFromSpecificIndex(userInput,
-                        WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
-                isGymValid = Gym.checkIfGymIsValid(numberOfStations);
-            }
+        exerciseTypeIsValid = Workout.checkIfExerciseTypeIsValid(exerciseType);
+        boolean isRun = exerciseType.equals(WorkoutConstant.RUN);
+        boolean isGym = exerciseType.equals(WorkoutConstant.GYM);
 
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+        if (isRun) {
+            String runDistance = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
+            String runTime = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
+            String runDate = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
+            isRunValid = Run.checkIfRunIsValid(runDistance, runTime, runDate);
+        } else if (isGym) {
+            String numberOfStations = extractSubstringFromSpecificIndex(userInput,
+                    WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
+            isGymValid = Gym.checkIfGymIsValid(numberOfStations);
         }
+
 
         if (exerciseTypeIsValid && isRunValid) {
             return WorkoutConstant.RUN;
         } else if (exerciseTypeIsValid && isGymValid) {
             return WorkoutConstant.GYM;
         } else {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_ERROR);
+            return "";
         }
 
     }

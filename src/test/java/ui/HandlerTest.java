@@ -178,14 +178,7 @@ class HandlerTest {
         Handler.initialiseScanner();
         Handler.processInput();
 
-        String expected = "Exception Caught!" +
-                System.lineSeparator() +
-                "Invalid command. Enter 'help' to view available commands." +
-                System.lineSeparator() +
-                System.lineSeparator() +
-                "No enum constant utility.Command.INVALID" +
-                System.lineSeparator();
-
+        String expected = "Exception Caught! " + ErrorConstant.INVALID_COMMAND_ERROR + System.lineSeparator();
         assertEquals(expected, errContent.toString());
     }
 
@@ -274,6 +267,11 @@ class HandlerTest {
      */
     @Test
     void checkTypeOfExercise_insufficientUserInput_throwInsufficientInput() {
+
+        // with invalid exercise type
+        String input1 = "new /e";
+        assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input1));
+
         // without distance, time, and date
         String input2 = "WORKOUT /e:run";
         assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input2));

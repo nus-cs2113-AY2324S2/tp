@@ -27,7 +27,6 @@ class OutputTest {
     private static final PrintStream originalOut = System.out;
     private static final PrintStream originalErr = System.err;
 
-
     @BeforeAll
     public static void setUpStreams() {
         System.setOut(new PrintStream(outContent));

@@ -37,8 +37,7 @@ public class WorkoutConstant {
 
 
     // Index
-    public static final Integer EXERCISE_TYPE_INDEX = 1;  // PLEASE STANDARDISE
-    public static final Integer LENGTH_OF_GYM_STATION_INPUTS = 4;
+
     public static final Integer INDEX_OF_STATION_NAME = 0; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_SETS = 1; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_REPS = 2; // PLEASE STANDARDISE
