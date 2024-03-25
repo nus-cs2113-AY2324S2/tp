@@ -1,5 +1,0 @@
-water,500
-water,500
-lemon tea,2
-sprite,200
-sprite,500

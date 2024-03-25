@@ -52,19 +52,16 @@ public class Storage {
         try {
             File dataFolder = new File(folderPath);
             if (!dataFolder.exists()) {
-                System.out.println("Folder not found, attempting to create folder.");
-                if (dataFolder.mkdirs()) {
-                    System.out.println("Data folder has been created successfully.");
-                } else {
+                if (!dataFolder.mkdirs()) {
                     System.err.println("Failed to create data folder.");
                 }
             }
             File textFile = new File(filePath);
-            if (textFile.createNewFile()) {
-                System.out.println("File has been created.");
+            if (!textFile.createNewFile()) {
+                System.err.println("Failed to create file.");
             }
         } catch (IOException err) {
-            System.out.println("Failed to create file.");
+            System.out.println("Failed to create file: " + err.getMessage());
         }
     }
 

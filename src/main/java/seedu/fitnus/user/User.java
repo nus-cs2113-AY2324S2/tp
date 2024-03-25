@@ -42,7 +42,6 @@ public class User {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found, attempting to create file.");
             mealStorage.createFile();
         }
     }
@@ -63,7 +62,6 @@ public class User {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found, attempting to create file.");
             drinkStorage.createFile();
         }
     }
