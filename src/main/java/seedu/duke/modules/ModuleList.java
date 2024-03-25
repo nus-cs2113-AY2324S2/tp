@@ -1,6 +1,13 @@
 package seedu.duke.modules;
 
+import seedu.duke.exceptions.GpaNullException;
+import seedu.duke.exceptions.ModuleException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+
 import java.util.ArrayList;
+import java.util.logging.Level;
+
+import static seedu.duke.FAP.LOGGER;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
@@ -11,20 +18,23 @@ public class ModuleList {
         this.toBeTakenModuleList = new ArrayList<Module>(size);
     }
 
-    public Module getModule(String courseCode) {
-        // check if the module is already taken
-        for(Module module : takenModuleList){
-            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+    public Module getModule(String courseCode) throws ModuleNotFoundException {
+        if (courseCode == null || courseCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Course code cannot be null or empty.");
+        }
+        courseCode = courseCode.toUpperCase(); // Convert once and reuse, improving efficiency
+
+        for (Module module : takenModuleList) {
+            if (module.getModuleCode().equals(courseCode)) {
                 return module;
             }
         }
-        // check if the module is planned to be taken
-        for(Module module : toBeTakenModuleList){
-            if(module.getModuleCode().equals(courseCode.toUpperCase())){
+        for (Module module : toBeTakenModuleList) {
+            if (module.getModuleCode().equals(courseCode)) {
                 return module;
             }
         }
-        return null;
+        throw new ModuleNotFoundException("Module " + courseCode + " not found!");
     }
 
     public ArrayList<Module> getTakenModuleList() {
@@ -36,6 +46,9 @@ public class ModuleList {
     }
 
     public void addModule(Module module) {
+        if (module == null) {
+            throw new IllegalArgumentException("Module cannot be null.");
+        }
         if (module.getModuleStatus()) {
             takenModuleList.add(module);
         } else {
@@ -52,23 +65,32 @@ public class ModuleList {
         }
     }
     public void removeModule(Module module) {
-        if (toBeTakenModuleList.contains(module)) {
-            toBeTakenModuleList.remove(module);
-        } else if (takenModuleList.contains(module)) {
-            takenModuleList.remove(module);
+        assert module != null : "Module cannot be null";
+        // The remove operation returns false if the item was not found
+        boolean removed = toBeTakenModuleList.remove(module) || takenModuleList.remove(module);
+        if (!removed) {
+            System.out.println("Module not found in either list.");
         }
     }
 
     public void changeModuleGrade(String moduleCode, String grade) {
-        Module toChange = getModule(moduleCode);
-        if (toChange == null) {
-            System.out.println("This module does not exist in the list");
-            return;
+        if (moduleCode == null || moduleCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Module code cannot be null or empty.");
         }
-        toChange.setModuleGrade(grade);
+        try{
+            Module toChange = getModule(moduleCode);
+            toChange.setModuleGrade(grade);
+            System.out.println("Grade for " + moduleCode + " updated to " + grade);
+            assert toChange.getModuleGrade().equals(grade) : "Grade is not updated successfully";
+
+        } catch (ModuleNotFoundException e){
+            System.out.println("Module not found in list");
+        } catch (ModuleException e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public double tallyGPA() {
+    public double tallyGPA() throws GpaNullException {
         int totalMC = 0;
         double sumOfGPA = 0;
         for (Module module : takenModuleList) {
@@ -79,8 +101,10 @@ public class ModuleList {
             totalMC += module.getModuleMC();
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
+        if(sumOfGPA == 0) {
+            LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
+            throw new GpaNullException("No countable grades present to tally.");
+        }
         return sumOfGPA/(double)totalMC;
     }
-
-
 }

@@ -1,16 +1,18 @@
 package seedu.duke.modules;
 
+import seedu.duke.exceptions.ModuleException;
+
 public class Module {
     private String moduleCode;
     private String moduleGrade;
     private int moduleMC;
-    private boolean moduleStatus;
+    private boolean moduleTaken;
     private int moduleDate;
 
-    public Module(String moduleCode, int moduleMC, boolean moduleStatus, int moduleDate) {
+    public Module(String moduleCode, int moduleMC, boolean moduleTaken, int moduleDate) {
         this.moduleCode = moduleCode;
         this.moduleMC = moduleMC;
-        this.moduleStatus = moduleStatus;
+        this.moduleTaken = moduleTaken;
         this.moduleDate = moduleDate;
         this.moduleGrade = null;
     }
@@ -20,6 +22,9 @@ public class Module {
     }
 
     public void setModuleCode(String moduleCode) {
+        if (moduleCode == null || moduleCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Module code cannot be null or empty.");
+        }
         this.moduleCode = moduleCode;
     }
 
@@ -27,7 +32,14 @@ public class Module {
         return moduleGrade;
     }
 
-    public void setModuleGrade(String moduleGrade) {
+    public void setModuleGrade(String moduleGrade) throws ModuleException {
+
+        if (moduleGrade != null && !moduleGrade.matches("A\\+|A|A-|B\\+|B|B-|C\\+|C|D\\+|D|F|CS|CU")) {
+            throw new IllegalArgumentException("Invalid module grade.");
+        }
+        if (!moduleTaken) {
+            throw new ModuleException("Module needs to be taken before its grade can be updated.");
+        }
         this.moduleGrade = moduleGrade;
     }
 
@@ -36,15 +48,18 @@ public class Module {
     }
 
     public void setModuleMC(int moduleMC) {
+        if (moduleMC <= 0) {
+            throw new IllegalArgumentException("Module MC (Modular Credits) must be positive.");
+        }
         this.moduleMC = moduleMC;
     }
 
     public boolean getModuleStatus() {
-        return moduleStatus;
+        return moduleTaken;
     }
 
-    public void setModuleStatus(boolean moduleStatus) {
-        this.moduleStatus = moduleStatus;
+    public void setModuleStatus(boolean moduleTaken) {
+        this.moduleTaken = moduleTaken;
     }
 
     public int getModuleDate() {
@@ -52,6 +67,9 @@ public class Module {
     }
 
     public void setModuleDate(int moduleDate) {
+        if (moduleDate <= 0) {
+            throw new IllegalArgumentException("Module date must be a positive number.");
+        }
         this.moduleDate = moduleDate;
     }
 
@@ -80,7 +98,7 @@ public class Module {
         case "F":
             return 0;
         default:
-            return 0;
+            throw new IllegalStateException("Invalid or unassigned module grade.");
         }
     }
 
