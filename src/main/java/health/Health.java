@@ -30,7 +30,7 @@ public class Health {
 
         String healthType = userInputs[HealthConstant.HEALTH_TYPE_INDEX].trim();
 
-        if (healthType.isBlank()){
+        if (healthType.isBlank()) {
             throw new CustomExceptions.InvalidInput(HealthConstant.BLANK_INPUT_FOR_HEALTH);
         }
 
@@ -38,25 +38,29 @@ public class Health {
 
         boolean isBmi = healthType.equals(HealthConstant.BMI_INPUT);
         boolean isPeriod = healthType.equals(HealthConstant.PERIOD_INPUT);
+        boolean isPredict = healthType.equals(HealthConstant.PREDICT_INPUT);
 
-        if(!isBmi && !isPeriod){
+
+        if (!isBmi && !isPeriod && !isPredict) {
             throw new CustomExceptions.InvalidInput(HealthConstant.INVALID_INPUT_FOR_HEALTH);
         }
 
-        if(isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS){
+        if (isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 
-        if(isPeriod && userInputs.length < HealthConstant.BMI_PARAMETERS){
+        if (isPeriod && userInputs.length < HealthConstant.BMI_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
         }
 
         assert userInputs.length == 5 : HealthConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
 
-        if (isBmi){
+        if (isBmi) {
             return HealthConstant.BMI;
-        } else {
+        } else if (isPeriod) {
             return HealthConstant.PERIOD;
+        } else {
+            return HealthConstant.PREDICT;
         }
     }
 }
