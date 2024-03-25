@@ -35,7 +35,6 @@ public class Main {
         LocalDate startOfMonth = today.withDayOfMonth(1);
         MonthView monthView = new MonthView(startOfMonth, dateFormatter);
 
-        System.out.println(startOfWeek);
         boolean printWeek = true; // Flag to control printing of the week view
         boolean inMonthView = false; // Flag to indicate if we are in month view mode
 
@@ -112,9 +111,9 @@ public class Main {
                         throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
                                 "delete, <day>, <taskIndex>");
                     }
-                    int day = Integer.parseInt(parts[1].trim());
+                    String day = parts[1].trim();
                     int taskIndex = Integer.parseInt(parts[2].trim());
-                    deleteManager(weekView, inMonthView, taskManager, day, taskIndex);
+                    deleteManager(weekView, monthView, inMonthView, taskManager, day, taskIndex);
                 } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
