@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
 
     @Override
     public boolean execute() {
-        executionUiOutput = "";
+        executionUiOutput = "Bye!";
         return true;
     }
 }

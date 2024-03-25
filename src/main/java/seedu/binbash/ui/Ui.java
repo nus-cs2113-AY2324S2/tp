@@ -1,6 +1,6 @@
 package seedu.binbash.ui;
 
-import java.io.PrintWriter;
+import java.io.PrintStream;
 
 public class Ui {
     private static final String NEWLINE = System.lineSeparator();
@@ -10,16 +10,15 @@ public class Ui {
             " | |_) | | | | | |_) | (_| \\__ \\ | | |" + NEWLINE +
             " |____/|_|_| |_|____/ \\__,_|___/_| |_|" + NEWLINE + NEWLINE;
     private static final String WELCOME_MESSAGE = "Welcome to BinBash!";
-    private static final String GOODBYE_MESSAGE = "Bye!";
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
 
     private static TextIn inputReader;
-    private static PrintWriter outputWriter;
+    private static PrintStream outputWriter;
     private static boolean isUserActive;
 
     public Ui() {
         inputReader = new TextIn();
-        outputWriter = inputReader.getPrintWriter();
+        outputWriter = System.out;
         isUserActive = true;
     }
 
@@ -38,11 +37,6 @@ public class Ui {
 
     public void greet() {
         talk(LOGO + WELCOME_MESSAGE);
-    }
-
-    public void farewell() {
-        assert !isUserActive();
-        talk(GOODBYE_MESSAGE);
     }
 
     public void talk(String line) {
