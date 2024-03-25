@@ -1,4 +1,6 @@
 package grocery;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -7,7 +9,7 @@ package grocery;
 public class Grocery {
     private String name;
     private int amount;
-    private String expiration;
+    private LocalDate expiration;
 
     /**
      * Constructs a Grocery.
@@ -16,7 +18,7 @@ public class Grocery {
      * @param amount Measurement of grocery.
      * @param expiration When grocery expires.
      */
-    public Grocery(String name, int amount, String expiration) {
+    public Grocery(String name, int amount, LocalDate expiration) {
         this.name = name;
         this.amount = amount;
         this.expiration = expiration;
@@ -31,7 +33,7 @@ public class Grocery {
         return amount;
     }
 
-    public String getExpiration() {
+    public LocalDate getExpiration() {
         return expiration;
     }
 
@@ -46,7 +48,8 @@ public class Grocery {
 
     public void setExpiration(String expiration) {
         assert !(expiration.isEmpty()) : "Expiration date entered is invalid!";
-        this.expiration = expiration;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.expiration = LocalDate.parse(expiration, formatter);
     }
 
     /**
@@ -58,7 +61,7 @@ public class Grocery {
         // TODO: update amount output according to Grocery subclass
         // TODO: consider stating amount == 0 now that we track amount ?
         String amt = (amount == 0) ? "" : ", amount: " + amount;
-        String exp = (expiration == null || expiration.isEmpty()) ? "" : ", expiration: " + expiration;
+        String exp = (expiration == null) ? "expiration date not set" : " expires on: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return this.name + amt + exp;
     }
 }

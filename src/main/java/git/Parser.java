@@ -1,5 +1,7 @@
 package git;
 
+import java.time.LocalDate;
+
 import exceptions.GitException;
 import exceptions.InvalidCommandException;
 import grocery.Grocery;
@@ -34,8 +36,9 @@ public class Parser {
 
         switch (commandParts[0]) {
         case "add":
-            // Assuming the format is "add GROCERY"
-            Grocery grocery = new Grocery(commandParts[1], 0, "");
+            Grocery grocery = new Grocery(commandParts[1], 0, LocalDate.now());
+            String expiration = ui.promptForExpiration();
+            grocery.setExpiration(expiration);
             groceryList.addGrocery(grocery);
             break;
 
