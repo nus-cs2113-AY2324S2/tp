@@ -3,7 +3,7 @@ package seedu.binbash;
 public class Item {
     private final String itemName;
     private final String itemDescription;
-    private final int itemQuantity;
+    private int itemQuantity;
     private final String itemExpirationDate;
     private final double itemSalePrice;
     private final double itemCostPrice;
@@ -30,6 +30,10 @@ public class Item {
 
     public int getItemQuantity() {
         return itemQuantity;
+    }
+
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
     public String getItemExpirationDate() {
         return itemExpirationDate;

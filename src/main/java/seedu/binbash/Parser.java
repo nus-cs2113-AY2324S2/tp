@@ -10,6 +10,8 @@ import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.DeleteCommand;
 import seedu.binbash.command.SearchCommand;
 import seedu.binbash.command.ListCommand;
+import seedu.binbash.command.RestockCommand;
+import seedu.binbash.command.SellCommand;
 import seedu.binbash.command.ByeCommand;
 import seedu.binbash.exceptions.InvalidCommandException;
 import seedu.binbash.exceptions.InvalidArgumentException;
@@ -39,6 +41,10 @@ public class Parser {
                 return parseListCommand(userInput);
             case "search":
                 return parseSearchCommand(userInput);
+            case "restock":
+                return parseRestockCommand(userInput);
+            case "sell":
+                return parseSellCommand(userInput);
             default:
                 throw new InvalidCommandException("Invalid command!");
             }
@@ -90,6 +96,32 @@ public class Parser {
 
         return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
                     itemCostPrice);
+    }
+
+    private Command parseRestockCommand(String userInput) throws InvalidFormatException {
+        Matcher matcher = RestockCommand.COMMAND_FORMAT.matcher(userInput);
+        if (!matcher.matches()) {
+            throw new InvalidFormatException("Restock command is not properly formatted!");
+        }
+        String itemName = matcher.group("itemName");
+        int restockQuantity = Integer.parseInt(
+                Objects.requireNonNullElse(matcher.group("restockQuantity"), "0").strip()
+        );
+
+        return new RestockCommand(itemList, itemName, restockQuantity);
+    }
+
+    private Command parseSellCommand(String userInput) throws InvalidFormatException {
+        Matcher matcher = SellCommand.COMMAND_FORMAT.matcher(userInput);
+        if (!matcher.matches()) {
+            throw new InvalidFormatException("Sell command is not properly formatted!");
+        }
+        String itemName = matcher.group("itemName");
+        int sellQuantity = Integer.parseInt(
+                Objects.requireNonNullElse(matcher.group("sellQuantity"), "0").strip()
+        );
+
+        return new SellCommand(itemList, itemName, sellQuantity);
     }
 
     private Command parseSearchCommand(String userInput) throws InvalidFormatException {

@@ -1,5 +1,7 @@
 package seedu.binbash;
 
+import seedu.binbash.command.RestockCommand;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -34,6 +36,29 @@ public class ItemList {
 
         String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
                 + System.lineSeparator() + item;
+        return output;
+    }
+
+    public String updateItemQuantity(String itemName, int itemQuantity, String command) {
+        String output = "Sorry, I can't find the item you are looking for.";
+
+        for (Item item : itemList) {
+            int newQuantity = item.getItemQuantity();
+            if (!item.getItemName().trim().equals(itemName.trim())) {
+                continue;
+            }
+
+            if (command.trim().equals(RestockCommand.command.trim())) {
+                newQuantity += itemQuantity;
+            }
+            else {
+                newQuantity -= itemQuantity;
+            }
+            item.setItemQuantity(newQuantity);
+            output = "Great! I have updated the quantity of the item for you:" + System.lineSeparator()
+                    + System.lineSeparator() + item;
+
+        }
         return output;
     }
 
