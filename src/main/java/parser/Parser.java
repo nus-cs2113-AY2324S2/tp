@@ -16,7 +16,7 @@ import static parser.FocusCommandParser.determineFocusCommand;
 import exceptions.Wellness360Exception;
 
 public class Parser {
-    private static final int LENGTH = 2;
+    private static final int COMMAND_LENGTH = 2;
 
     public static Command determineCommand(SleepTracker sleepTracker,
                                            ReflectionManager reflection,
@@ -29,7 +29,7 @@ public class Parser {
         String[] userWords = userInput.trim().split("\\s+", 2);
         String userCommandSection = userWords[0];
 
-        String commandArgs = userWords.length == LENGTH ? userWords[1] : "";
+        String commandArgs = userWords.length == COMMAND_LENGTH ? userWords[1] : "";
 
         switch (userCommandSection) {
         case "reflect":

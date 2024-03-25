@@ -3,6 +3,9 @@ package commands.habitcommands;
 import commands.Command;
 import habit.HabitTracker;
 
+/**
+ * Represents a command to display a list of all habits
+ */
 public class ListHabitsCommand implements Command {
     private HabitTracker habitTracker;
 

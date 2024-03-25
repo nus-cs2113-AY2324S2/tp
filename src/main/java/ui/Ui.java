@@ -49,7 +49,12 @@ public class Ui {
         System.out.println(SEP + "\n" +message + "\n" + SEP);
     }
 
-    public static void printMessageWithoutSepNewLine(String message) {
+    /**
+     * Prints a message without a new line after, and subsequently followed by a separator.
+     *
+     * @param message the message to be printed
+     */
+    public static void printMessageWithoutNewLine(String message) {
         System.out.println(SEP + "\n" + message + SEP);
     }
 

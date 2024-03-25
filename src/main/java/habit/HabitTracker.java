@@ -10,7 +10,7 @@ import java.util.Comparator;
 
 import static storage.habit.HabitTrackerStorage.loadHabitListFromFile;
 import static storage.habit.HabitTrackerStorage.saveHabitListToFile;
-import static ui.Ui.printMessageWithoutSepNewLine;
+import static ui.Ui.printMessageWithoutNewLine;
 
 /**
  * Represents the habit tracker which stores all habits.
@@ -18,12 +18,19 @@ import static ui.Ui.printMessageWithoutSepNewLine;
 public class HabitTracker {
     private static ArrayList<Habit> habitList = new ArrayList<>();
 
+    /**
+     * Loads data from local storage and constructs a new HabitTracker object.
+     */
     public HabitTracker() {
         try {
             habitList = loadHabitListFromFile();
         } catch (HabitException e) {
             Ui.printMessageWithSepNewLine(e.getMessage());
         }
+    }
+
+    public static int getNumberOfHabits() {
+        return habitList.size();
     }
 
     /**
@@ -57,7 +64,7 @@ public class HabitTracker {
             listHabitsMessage += "  " + (i + 1) + "." + habit + "\n";
         }
 
-        printMessageWithoutSepNewLine(listHabitsMessage);
+        printMessageWithoutNewLine(listHabitsMessage);
     }
 
     public static boolean isValidHabitID(int habitID) {
@@ -67,7 +74,7 @@ public class HabitTracker {
     /**
      * Update the habit count for a habit.
      *
-     * @param habitID The habitID to be updated.
+     * @param habitID The habit ID to be updated.
      * @param updatedCount The count to be added to the existing habit count.
      * @throws HabitException If an invalid habit ID is provided.
      */
@@ -91,10 +98,12 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
-    public static int getNumberOfHabits() {
-        return habitList.size();
-    }
-
+    /**
+     * Delete a habit from the habit tracker list.
+     *
+     * @param habitID The habit ID to be deleted.
+     * @throws HabitException If an invalid habit ID is provided.
+     */
     public void deleteHabit(int habitID) throws HabitException {
         if (!isValidHabitID(habitID)) {
             throw new HabitException("Please provide a valid habit ID.");
@@ -111,6 +120,13 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
+    /**
+     * Set the priority level of a habit.
+     *
+     * @param habitID The habit ID of the habit to be updated with a different priority level.
+     * @param priority The priority level that the user wish to set.
+     * @throws HabitException If an invalid habit ID is provided.
+     */
     public void setPriorityLevel(int habitID, String priority) throws HabitException {
         if (!isValidHabitID(habitID)) {
             throw new HabitException("Please provide a valid habit ID.");
@@ -127,6 +143,11 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
+    /**
+     * Sort the habits in the habit tracker list according to their priority from HIGH to LOW
+     *
+     * @throws HabitException If there are any exception errors when sorting.
+     */
     public void sortHabits() throws HabitException {
         try {
             // Define a custom comparator to sort habits based on their priority
@@ -153,7 +174,7 @@ public class HabitTracker {
         saveHabitListToFile(habitList);
     }
 
-    public void clearHabits() {
+    public void clearHabitList() {
         habitList.clear();
         saveHabitListToFile(habitList);
     }
