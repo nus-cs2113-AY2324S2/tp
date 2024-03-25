@@ -192,4 +192,39 @@ public class MemberListTest {
             assertTrue(isMessage);
         }
     }
+
+    /**
+     * Tests the successful deletion of a member in the group.
+     * Balance should not be updated at this point as updating is performed after commands are invoked.
+     */
+    @Test
+    public void deleteMember_validName_success() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.addMember("Bob", 10);
+            memberList.deleteMember("Alice");
+            String expected = "Bob: $10.0\n";
+            assertEquals(expected, memberList.listMembers());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the unsuccessful deletion of a member in the group when the name is invalid.
+     */
+    @Test
+    public void deleteMember_invalidName_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.addMember("Bob", 10);
+            memberList.deleteMember("Charlie");
+            fail();
+        } catch (LongAhException e) {
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.MEMBER_NOT_FOUND);
+            assertTrue(isMessage);
+        }
+    }
 }
