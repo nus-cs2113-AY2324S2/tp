@@ -24,7 +24,7 @@ public class AddExerciseCommand implements Command {
      * @param commandArgs A string of arguments
      * @return A split array of strings of size 4 if there are no issues found with the string
      *         input
-     *         
+     *
      * @throws FitnessException Exceptions are thrown when improper command arguments are found
      * */
     private static String[] checkCommandArgs(String commandArgs) throws FitnessException {

@@ -50,49 +50,30 @@ public class ExerciseList {
     }
 
     /**
+     * Takes in a pre-saved list of exercises for a single exercise type
+     *
+     * @param list An array of strings that contain information about all exercises under each type
+     * */
+    private void initialiseSingleList(String[] list, ExerciseType type) {
+        for (String s : list) {
+            String[] exerciseDetails = s.split(",");
+            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
+                    : "Missing Data from Data file!";
+            Exercise exercise = new Exercise(exerciseDetails[0], type,
+                    exerciseDetails[2], exerciseDetails[3]);
+            allExercises.add(exercise);
+        }
+    }
+
+    /**
      * Reads all 5 different string arrays from above and adds it into one ArrayList for use
      * */
     private void initialiseData() {
-        for (String s : originalListForArms) {
-            String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
-                : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.ARMS,
-                exerciseDetails[2], exerciseDetails[3]);
-            allExercises.add(exercise);
-        }
-        for (String s : originalListForChest) {
-            String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
-                : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.CHEST,
-                    exerciseDetails[2], exerciseDetails[3]);
-            allExercises.add(exercise);
-        }
-        for (String s : originalListForAbs) {
-            String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
-                : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.ABS,
-                    exerciseDetails[2], exerciseDetails[3]);
-            allExercises.add(exercise);
-        }
-        for (String s : originalListForBack) {
-            String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
-                : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.BACK,
-                    exerciseDetails[2], exerciseDetails[3]);
-            allExercises.add(exercise);
-        }
-        for (String s : originalListForLegs) {
-            String[] exerciseDetails = s.split(",");
-            assert exerciseDetails.length == REQUIRED_NUM_OF_PARAMETERS
-                : "Missing Data from Data file!";
-            Exercise exercise = new Exercise(exerciseDetails[0], ExerciseType.LEGS,
-                    exerciseDetails[2], exerciseDetails[3]);
-            allExercises.add(exercise);
-        }
+        initialiseSingleList(originalListForArms, ExerciseType.ARMS);
+        initialiseSingleList(originalListForChest, ExerciseType.CHEST);
+        initialiseSingleList(originalListForAbs, ExerciseType.ABS);
+        initialiseSingleList(originalListForBack, ExerciseType.BACK);
+        initialiseSingleList(originalListForLegs, ExerciseType.LEGS);
     }
 
     /**
@@ -178,11 +159,13 @@ public class ExerciseList {
     public Exercise newExercise(String[] parameters) {
         assert parameters.length == REQUIRED_NUM_OF_PARAMETERS
             : "Incorrect Parameters for a new Exercise Object";
+
         String type = parameters[0].toUpperCase();
         ExerciseType exerciseType = ExerciseType.valueOf(type);
         String exerciseName = parameters[1].trim();
         String sets = parameters[2].trim();
         String reps = parameters[3].trim();
+
         return new Exercise(exerciseName, exerciseType, sets, reps);
     }
 }
