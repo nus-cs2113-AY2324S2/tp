@@ -2,6 +2,7 @@ package meditracker;
 
 import meditracker.command.Command;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.exception.MediTrackerException;
 import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
@@ -47,8 +48,9 @@ public class MediTracker {
      * application.
      * @throws MediTrackerException If an error occurs during the execution of the application.
      * @throws ArgumentNotFoundException Argument required not found
+     * @throws DuplicateArgumentFoundException Duplicate argument found
      */
-    public void run() throws MediTrackerException, ArgumentNotFoundException {
+    public void run() throws MediTrackerException, ArgumentNotFoundException, DuplicateArgumentFoundException {
         //@@author nickczh-reused
         //Reused from https://github.com/nickczh/ip
         //with minor modifications
@@ -70,8 +72,10 @@ public class MediTracker {
      * @param args Command-line arguments.
      * @throws MediTrackerException If an error occurs during the execution of the application.
      * @throws ArgumentNotFoundException Argument required not found
+     * @throws DuplicateArgumentFoundException Duplicate argument found
      */
-    public static void main(String[] args) throws MediTrackerException, ArgumentNotFoundException {
+    public static void main(String[] args)
+            throws MediTrackerException, ArgumentNotFoundException, DuplicateArgumentFoundException {
         MediLogger.initialiseLogger();
 
         List<String> dailyMedicationList = FileReaderWriter.loadDailyMedicationData();

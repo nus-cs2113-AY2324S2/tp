@@ -1,6 +1,7 @@
 package meditracker.argument;
 
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -41,9 +42,11 @@ public class ArgumentList {
      * @param rawInput Raw input to be parsed
      * @return A map of argument name as key and the corresponding value
      * @throws ArgumentNotFoundException When argument required not found
+     * @throws DuplicateArgumentFoundException When duplicate argument found
      * @see ArgumentParser
      */
-    public Map<ArgumentName, String> parse(String rawInput) throws ArgumentNotFoundException {
+    public Map<ArgumentName, String> parse(String rawInput)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         ArgumentParser argumentParser = new ArgumentParser(this, rawInput);
         return argumentParser.parsedArguments;
     }

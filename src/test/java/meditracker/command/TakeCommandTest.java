@@ -3,6 +3,7 @@ package meditracker.command;
 import meditracker.DailyMedication;
 import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TakeCommandTest {
     @Test
-    void execute_inOrderArgument_expectDailyMedicationTaken() throws ArgumentNotFoundException {
+    void execute_inOrderArgument_expectDailyMedicationTaken()
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         MedicationManager medicationManager = new MedicationManager();
         DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         DailyMedication dailyMedication = new DailyMedication("Medication_A");

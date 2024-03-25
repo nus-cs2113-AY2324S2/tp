@@ -5,6 +5,7 @@ import meditracker.argument.ArgumentList;
 import meditracker.argument.ArgumentName;
 import meditracker.argument.ListIndexArgument;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
 
@@ -24,7 +25,7 @@ public class TakeCommand extends Command {
      * Constructs a TakeCommand object with the specified arguments.
      * @param arguments The arguments containing information to be parsed.
      */
-    public TakeCommand(String arguments) throws ArgumentNotFoundException {
+    public TakeCommand(String arguments) throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 

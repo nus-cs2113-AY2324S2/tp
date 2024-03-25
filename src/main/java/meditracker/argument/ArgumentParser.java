@@ -1,6 +1,7 @@
 package meditracker.argument;
 
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,8 @@ class ArgumentParser {
      * @param rawInput Raw input to be parsed
      * @throws ArgumentNotFoundException Argument flag specified not found
      */
-    public ArgumentParser(ArgumentList argumentList, String rawInput) throws ArgumentNotFoundException {
+    public ArgumentParser(ArgumentList argumentList, String rawInput)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         List<String> rawInputSplit = List.of(rawInput.split(" "));
         SortedMap<Integer, Argument> indexes = ArgumentParser.getArgumentIndexes(argumentList, rawInputSplit);
         getArgumentValues(indexes, rawInputSplit);
@@ -42,22 +44,45 @@ class ArgumentParser {
     }
 
     /**
+     * Obtains the argument index from the raw input list
+     *
+     * @param rawInputSplit List of raw input split by spaces
+     * @param flag Argument flag to index
+     * @return Index of the argument flag
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
+     */
+    private static int getArgumentIndex(List<String> rawInputSplit,
+                                        String flag)
+            throws DuplicateArgumentFoundException {
+        int firstFlagIndex = rawInputSplit.indexOf(flag);
+        int lastFlagIndex = rawInputSplit.lastIndexOf(flag);
+
+        if (firstFlagIndex != lastFlagIndex) {
+            String errorContext = String.format("Duplicate \"%s\" argument found", flag);
+            throw new DuplicateArgumentFoundException(errorContext);
+        }
+        return firstFlagIndex;
+    }
+
+    /**
      * Sorts a list of argument flags and their corresponding indexes
      *
      * @param rawInputSplit List of raw input split by spaces
      * @return A sorted map of arguments and their corresponding indexes
      * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument found
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private static SortedMap<Integer, Argument> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
-            throws ArgumentNotFoundException {
+    private static SortedMap<Integer, Argument> getArgumentIndexes(ArgumentList argumentList,
+                                                                   List<String> rawInputSplit)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         SortedMap<Integer, Argument> indexes = new TreeMap<>();
         for (Argument argument: argumentList.getArguments()) {
             String flag = argument.getFlag();
             boolean isRequired = !argument.isOptional();
 
-            int flagIndex = rawInputSplit.indexOf(flag);
+            int flagIndex = ArgumentParser.getArgumentIndex(rawInputSplit, flag);
             boolean isNotFound = flagIndex == -1;
 
             if (!isNotFound) {

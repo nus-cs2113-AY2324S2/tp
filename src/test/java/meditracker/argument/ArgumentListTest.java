@@ -1,6 +1,7 @@
 package meditracker.argument;
 
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -44,7 +45,7 @@ public class ArgumentListTest {
         Map<ArgumentName, String> parsedArgs;
         try {
             parsedArgs = testArgumentList.parse(testArgumentString);
-        } catch (ArgumentNotFoundException e) {
+        } catch (ArgumentNotFoundException | DuplicateArgumentFoundException e) {
             throw new RuntimeException(e);
         }
 

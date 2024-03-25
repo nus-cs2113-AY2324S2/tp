@@ -10,6 +10,7 @@ import meditracker.command.SearchCommand;
 import meditracker.command.TakeCommand;
 import meditracker.command.UntakeCommand;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.exception.MediTrackerException;
 
 /**
@@ -19,11 +20,15 @@ public class Parser {
 
     /**
      * Parses a full command string into a Command object.
+     *
      * @param fullCommand The full command string entered by the user.
      * @return A Command object corresponding to the parsed command.
      * @throws MediTrackerException If an error occurs during parsing.
+     * @throws ArgumentNotFoundException When argument required not found
+     * @throws DuplicateArgumentFoundException When duplicate argument found
      */
-    public static Command parse(String fullCommand) throws MediTrackerException, ArgumentNotFoundException {
+    public static Command parse(String fullCommand)
+            throws MediTrackerException, ArgumentNotFoundException, DuplicateArgumentFoundException {
         String[] commands = fullCommand.split(" ", 2);
         String command = commands[0];
         String arguments = (commands.length == 2) ? commands[1] : "";
