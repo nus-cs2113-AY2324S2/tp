@@ -49,13 +49,9 @@ public class AddCommand extends Command {
     private String medicationName;
     private double medicationQuantity;
     private double medicationDosage;
-    private double medicationDosageMorning;
-    private double medicationDosageAfternoon;
-    private double medicationDosageEvening;
-    private String expiryDate;
-    private String intakeFreq;
-    private String remarks;
-    private String repeat;
+    private double medicationDosageMorning = 0.0;
+    private double medicationDosageAfternoon = 0.0;
+    private double medicationDosageEvening = 0.0;
 
     /**
      * Constructs an AddCommand object with the specified arguments.
@@ -81,11 +77,8 @@ public class AddCommand extends Command {
     public void execute(MedicationManager medicationManager,
                         DailyMedicationManager dailyMedicationManager) throws NullPointerException,
             NumberFormatException {
-        setMedicineAttributes();
-        Medication medication = new Medication(medicationName, medicationQuantity, medicationDosage,
-                medicationDosageMorning, medicationDosageAfternoon, medicationDosageEvening, expiryDate,
-                intakeFreq, repeat, remarks);
 
+        Medication medication = createMedication();
         DailyMedication dailyMedication = new DailyMedication(medicationName);
         medicationManager.addMedication(medication);
         dailyMedicationManager.addDailyMedication(dailyMedication);
@@ -99,21 +92,25 @@ public class AddCommand extends Command {
      * @throws NumberFormatException if there is an error in parsing numeric values.
      * @throws NullPointerException  if any of the required arguments are null.
      */
-    private void setMedicineAttributes() throws NumberFormatException, NullPointerException {
+    private Medication createMedication() throws NumberFormatException, NullPointerException {
         medicationName = parsedArguments.get(ArgumentName.NAME);
-        expiryDate = parsedArguments.get(ArgumentName.EXPIRATION_DATE);
-        intakeFreq = parsedArguments.get(ArgumentName.INTAKE_FREQUENCY);
-        remarks = parsedArguments.get(ArgumentName.REMARKS);
-        repeat = parsedArguments.get(ArgumentName.REPEAT);
+        String expiryDate = parsedArguments.get(ArgumentName.EXPIRATION_DATE);
+        String intakeFreq = parsedArguments.get(ArgumentName.INTAKE_FREQUENCY);
+        String remarks = parsedArguments.get(ArgumentName.REMARKS);
+        String repeat = parsedArguments.get(ArgumentName.REPEAT);
 
-        String medicationQuantity = parsedArguments.get(ArgumentName.QUANTITY);
-        String medicationDosage = parsedArguments.get(ArgumentName.DOSAGE);
-        String medicationDosageMorning = parsedArguments.get(ArgumentName.DOSAGE_MORNING);
-        String medicationDosageAfternoon = parsedArguments.get(ArgumentName.DOSAGE_AFTERNOON);
-        String medicationDosageEvening = parsedArguments.get(ArgumentName.DOSAGE_EVENING);
+        String medicationQuantityArg = parsedArguments.get(ArgumentName.QUANTITY);
+        String medicationDosageArg = parsedArguments.get(ArgumentName.DOSAGE);
+        String medicationDosageMorningArg = parsedArguments.get(ArgumentName.DOSAGE_MORNING);
+        String medicationDosageAfternoonArg = parsedArguments.get(ArgumentName.DOSAGE_AFTERNOON);
+        String medicationDosageEveningArg = parsedArguments.get(ArgumentName.DOSAGE_EVENING);
 
-        parseStringToValues(medicationQuantity, medicationDosage, medicationDosageMorning, medicationDosageAfternoon,
-                medicationDosageEvening);
+        parseStringToValues(medicationQuantityArg, medicationDosageArg, medicationDosageMorningArg,
+                medicationDosageAfternoonArg, medicationDosageEveningArg);
+
+        return new Medication(medicationName, medicationQuantity, medicationDosage,
+                medicationDosageMorning, medicationDosageAfternoon, medicationDosageEvening,
+                expiryDate, intakeFreq, repeat, remarks);
     }
 
     /**
