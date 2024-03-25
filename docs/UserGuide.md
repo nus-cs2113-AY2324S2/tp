@@ -20,6 +20,10 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
           - [`habit update` - Update habit count after completing a habit](#update-habit-count-after-completing-a-habit-habit-update)
+          - [`habit delete` - Delete a habit](#delete-a-habit-habit-delete)
+          - [`habit set` - Set priority of habit](#set-priority-of-habit-habit-set)
+          - [`habit sort` - Sort habit tracker list](#sort-habit-tracker-list-habit-sort)
+          - [`habit help` - View habit tracker help menu](#view-habit-tracker-help-menu-habit-help)
         - Sleep Tracker
           - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
           - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
@@ -240,8 +244,8 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 Here is the list of all your habits!
-  1. vacuum and mop the floor [count: 2]
-  2. complete leetcode daily question [count: 3]
+  1. [LOW] vacuum and mop the floor [count: 2]
+  2. [LOW] complete leetcode daily question [count: 3]
 ________________________________________________________________________________________________________________
 ```
 
@@ -257,6 +261,7 @@ habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 
 * The `habit`, `list`, `id` and `by` are case-sensitive.
 * Use lower casing for this command.
+* `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
 
 Example of usage (increasing count):
 ```
@@ -269,7 +274,7 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 Good Job! You have completed your habit!
 The count for your habit has been updated:
-  2. complete leetcode daily question [count: 4]
+  2. [LOW] complete leetcode daily question [count: 4]
 ________________________________________________________________________________________________________________
 ```
 
@@ -283,7 +288,108 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 The count for your habit has been updated:
-  2. complete leetcode daily question [count: 2]
+  2. [LOW] complete leetcode daily question [count: 2]
+________________________________________________________________________________________________________________
+```
+
+### Delete a habit: `habit delete`
+Delete a habit from the habit tracker.
+
+Format:
+```
+habit delete /id <HABIT_ID>
+```
+
+* The `habit` and `delete` are case-sensitive.
+* Use lower casing for this command.
+* `HABIT_ID` have to be numerical.
+
+Example of usage:
+```
+habit delete /id 1
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Got it! I've removed this habit:
+   [LOW] vacuum and mop the floor [count: 2]
+Now you have 1 habit left in the list.
+________________________________________________________________________________________________________________
+```
+
+### Set priority of habit: `habit set`
+Set the priority of a habit (`HIGH`, `MED`, `LOW`). Priority of habits are initialised at LOW by default.
+
+Format:
+```
+habit set /id <HABIT_ID> /priority <PRIORITY_LEVEL>
+```
+
+* The `habit` and `set` are case-sensitive.
+* Use lower casing for this command.
+* `HABIT_ID` have to be numerical.
+* For `PRIORITY_LEVEL`, user can set as `HIGH`, `MED` OR `LOW` (not case-sensitive).
+
+Example of usage:
+```
+habit set /id 1 /priority HIGH
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+The priority for your habit has been updated:
+  1. [HIGH] complete leetcode daily question [count: 4]
+________________________________________________________________________________________________________________
+```
+
+### Sort habit tracker list: `habit sort`
+Sort the habits in the habit tracker list according to the habits' priority. 
+Habits with higher priority will be placed higher than those with lower priority.
+
+Format:
+```
+habit sort
+```
+
+* The `habit` and `sort` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit sort
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Habits have been sorted according to priority.
+________________________________________________________________________________________________________________
+```
+
+### View habit tracker help menu: `habit help`
+Allows new users to check what commands are available for habit tracker feature and their formats.
+
+Format:
+```
+habit help
+```
+
+* The `habit` and `help` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit help
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Commands for habit tracker feature:
+1. habit add <habit_description>: Add a new habit
+2. habit list: List out all existing habits
+3. habit update /id <habit_ID> /by <increment_count>: Increase habit count after completing a habit
+4. habit delete /id <habit_ID>: Delete a habit
+5. habit set /id <habit_ID> /priority <priority_level>: Set priority level for habits (HIGH, MED, LOW)
+6. habit sort: Sort habit list according to priority level
 ________________________________________________________________________________________________________________
 ```
 
