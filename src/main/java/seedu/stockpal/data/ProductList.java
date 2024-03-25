@@ -10,11 +10,11 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
+import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
 
-import static seedu.stockpal.ui.Ui.indentTextIfRequired;
 import static seedu.stockpal.ui.Ui.printToScreen;
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
@@ -84,7 +84,6 @@ public class ProductList {
      */
     public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
-
         Quantity intialQuantity = updatedProduct.getQuantity();
         try {
             intialQuantity.updateIncreaseQuantity(intialQuantity, amountToIncrease);
@@ -106,9 +105,17 @@ public class ProductList {
      * @param amountToDecrease Quantity of product to decrease
      */
     public boolean decreaseAmount(int productIndex, Integer amountToDecrease) {
-
         Product updatedProduct = products.get(productIndex);
-        return updatedProduct.decreaseQuantity(amountToDecrease);
+        Quantity intialQuantity = updatedProduct.getQuantity();
+        try {
+            intialQuantity.updateDecreaseQuantity(intialQuantity, amountToDecrease);
+            Ui.printToScreen("Quantity updated. " + intialQuantity);
+            return true;
+        } catch (InsufficientAmountException ise) {
+            Ui.printToScreen("Insufficient amount in inventory. " +
+                    "No change to quantity. " + intialQuantity);
+            return false;
+        }
     }
 
     /**
