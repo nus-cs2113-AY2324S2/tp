@@ -134,6 +134,21 @@ The following sequence diagram shows how an add operation works:
 
 #### Design consideration
 
+### List feature
+<img src="images/ListCommandClass.png" alt=""/>
+
+The ListCommand class is responsible for sorting and printing out the products in the list. 
+
+**Attributes**
+* sortType: Additional optional flags the user can set to sort the products in the list.
+
+**Methods**
+* `ListCommand`: Constructor for creating a new instance of the ListCommand class.
+* `execute`: Method to list out the products in the product list.
+* `sortListAccordingly`: Method to sort the list according to the products' PID, products' name or products' quantity.
+
+The following sequence diagram shows how an add operation works:
+<img src="images/ListCommandSequence.png" alt=""/>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**

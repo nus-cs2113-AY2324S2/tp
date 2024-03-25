@@ -5,7 +5,7 @@ Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":StockPal" as stockpal STOCKPAL_COLOR
 Participant ":Parser" as parser PARSER_COLOR
-Participant ":Commands" as commands COMMANDS_COLOR
+Participant ":ListCommand" as commands COMMANDS_COLOR
 
 activate stockpal STOCKPAL_COLOR
 
