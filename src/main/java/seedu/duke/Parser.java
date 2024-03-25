@@ -34,7 +34,7 @@ public class Parser {
      * whatever makes it flow easier
      */
     public static void readGame(String input) throws InvalidGameException {
-        if (input != null && !input.equals("TTT") && !input.equals("hangman")) {
+        if (!input.equals("TTT") && !input.equals("hangman") && !ifHelp(input) && !ifQuit(input)) {
             throw new InvalidGameException();
         }
     }

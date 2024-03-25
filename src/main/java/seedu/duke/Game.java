@@ -11,15 +11,15 @@ public class Game {
         isExit = false; //not used for nw
         assert !isExit; //not used for now
     }
- public void runTicTacToe() throws InvalidTTMoveException {
+    public void runTicTacToe() throws InvalidTTMoveException {
 
- }
+    }
 
- public void getHelp() {
+    public void getHelp() {
 
- }
+    }
 
- public void runHangMan() {
+    public void runHangMan() {
 
- }
+    }
 }

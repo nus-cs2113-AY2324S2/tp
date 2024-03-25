@@ -3,7 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.InvalidGameException;
 import seedu.duke.exceptions.InvalidTTMoveException;
 
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -21,20 +21,17 @@ public class Duke {
 
         boolean inGame = false;
         String input = Parser.readLine();
+        assert input != null;
 
         while (true) {
             if (Parser.ifQuit(input)) {
-                ui.byeUser();
+                ui.quitUser();
                 break;
-            } else if (Parser.ifHelp(input)) {
-                ui.printHelp();
-            } else {
-                assert input != null;
-                if (input.equals("testquit")) {
-                    ui.println("runtestbat success!");
-                    break;
-                }
+            } else if (input.equals("testquit")) {
+                ui.println("runtestbat success!");
+                break;
             }
+
 
             if (!inGame) {
                 try {
@@ -57,9 +54,9 @@ public class Duke {
                         gameCounter ++;
                         System.out.println("Now what would you like to do?");
                         inGame = false;
-                    }
-                    if (!input.equals("help")  ) {
+                    } else if (Parser.ifHelp(input)) {
                         ui.printHelp();
+                        inGame = false;
                     }
                 } catch (InvalidGameException | NullPointerException e) {
                     ui.println("Invalid Game.");
