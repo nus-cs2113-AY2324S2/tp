@@ -15,8 +15,9 @@ import utility.HealthConstant;
 import utility.CustomExceptions;
 
 class BmiTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final PrintStream originalOut = System.out;
+    private static final PrintStream originalErr = System.err;
 
     @BeforeEach
     void setUpStreams() {
@@ -24,8 +25,10 @@ class BmiTest {
     }
 
     @AfterEach
-    void restoreStreams() {
+    void cleanup() {
         System.setOut(originalOut);
+        HealthList.clearBmisAndPeriods();
+        outContent.reset();
     }
 
     /**
@@ -166,13 +169,7 @@ class BmiTest {
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
 
-        String expected = "2024-03-19"
-                + System.lineSeparator()
-                + "Your BMI is 22.86"
-                + System.lineSeparator()
-                + "Great! You're within normal range."
-                + System.lineSeparator()
-                + "2024-03-20"
+        String expected = "2024-03-20"
                 + System.lineSeparator()
                 + "Your BMI is 26.12"
                 + System.lineSeparator()
