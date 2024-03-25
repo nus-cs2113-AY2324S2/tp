@@ -27,6 +27,15 @@ public class Ui {
      * Prints welcome message.
      */
     public void printWelcome() {
+        final String GITLOGO =
+                "   ______   _  _________\n" +
+                " .' ___  | (_)|  _   _  |\n" +
+                "/ .'   \\_| __ |_/ | | \\_|\n" +
+                "| |   ____[  |    | |\n" +
+                "\\ `.___]  || |   _| |_\n" +
+                " `._____.'[___] |_____|";
+
+        System.out.println(GITLOGO + System.lineSeparator());
         System.out.println("Hello from GiT");
         System.out.println("What is your name?");
         printLine();
