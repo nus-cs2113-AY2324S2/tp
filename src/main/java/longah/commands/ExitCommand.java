@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
      * @throws LongAhException If unexpected additional parameters are found.
      */
     public void execute(Group group) throws LongAhException {
-        if (!this.taskExpression.equals("")) {
+        if (!this.taskExpression.isEmpty()) {
             throw new LongAhException(ExceptionMessage.INVALID_EXIT_COMMAND);
         }
     }
