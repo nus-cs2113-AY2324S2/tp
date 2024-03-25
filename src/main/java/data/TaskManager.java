@@ -134,19 +134,30 @@ public class TaskManager {
      * @throws TaskManagerException If there is an error in managing tasks.
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-    public static void addManager(WeekView weekView, boolean inMonthView, String action, int day, String taskTypeString,
-                                  String taskDescription) throws TaskManagerException, DateTimeParseException {
+    public void addManager(WeekView weekView, MonthView monthView,boolean inMonthView, String action,
+            String day, String taskTypeString, String taskDescription)
+            throws TaskManagerException,DateTimeParseException {
 
         // Convert the day to a LocalDate
         LocalDate date;
+        // Convert the dayString to date range
+        String[] dates = new String[2];
+        if (day.contains("-")) {
+            dates = day.split("-");
+        } else {
+            dates[0] = day;
+        }
+
+        // Convert dayString to int
+        int dayInt = Integer.parseInt(day);
 
         // Check if the date is in the current week/month view
         if (inMonthView) {
-            date = MonthView.getStartOfMonth().plusDays(day - 1);
+            date = monthView.getStartOfMonth().plusDays(dayInt - 1);
             checkIfDateInCurrentMonth(date);
 
         } else {
-            date = weekView.getStartOfWeek().plusDays(day - 1);
+            date = weekView.getStartOfWeek().plusDays(dayInt - 1);
             checkIfDateInCurrentWeek(date, weekView);
         }
 
@@ -159,7 +170,7 @@ public class TaskManager {
         }
 
         // Add the task based on the parsed inputs
-        addTask(date, taskDescription, taskType, null); // Assuming no additional dates are needed for the task
+        addTask(date, taskDescription, taskType, dates); // Assuming no additional dates are needed for the task
 
         // Save tasks to file
         saveTasksToFile(tasks, Storage.FILE_PATH); // Update tasks.txt file
@@ -206,15 +217,16 @@ public class TaskManager {
      * @throws TaskManagerException If not in correct week/month view.
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-    public static void updateManager(Scanner scanner, WeekView weekView, boolean inMonthView, TaskManager taskManager,
-                                     int day, int taskIndex, String newDescription)
+
+    public void updateManager(Scanner scanner, WeekView weekView, MonthView monthView, boolean inMonthView,
+                              TaskManager taskManager,int day, int taskIndex, String newDescription)
             throws TaskManagerException, DateTimeParseException {
         // Convert the day to a LocalDate
         LocalDate date;
 
         // Check if the date is in the current week/month view
         if (inMonthView) {
-            date = MonthView.getStartOfMonth().plusDays(day - 1);
+            date = monthView.getStartOfMonth().plusDays(day - 1);
             checkIfDateInCurrentMonth(date);
         } else {
             date = weekView.getStartOfWeek().plusDays(day - 1);
@@ -222,7 +234,7 @@ public class TaskManager {
         }
 
         // Update the task based on the parsed inputs
-        taskManager.updateTask(date, taskIndex - 1, newDescription); // Subtract 1 to convert to zero-based index
+        updateTask(date, taskIndex - 1, newDescription); // Subtract 1 to convert to zero-based index
         System.out.println("Task updated.");
 
         // Save tasks to file

@@ -103,7 +103,7 @@ public class MonthView extends View {
         startOfView = startOfView.minusMonths(1);
     }
 
-    public static LocalDate getStartOfMonth() {
+    public LocalDate getStartOfMonth() {
         return startOfView.withDayOfMonth(1);
     }
 }

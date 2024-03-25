@@ -18,9 +18,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static storage.Storage.createNewFile;
-import static data.TaskManager.addManager;
 import static data.TaskManager.deleteManager;
-import static data.TaskManager.updateManager;
+
 
 
 public class Main {
@@ -84,11 +83,11 @@ public class Main {
                         throw new TaskManagerException("Invalid input format. Please provide input in the format: " +
                                 "update, <day>, <taskIndex>, <newDescription>");
                     }
-                    String action = parts[0];
                     int day = Integer.parseInt(parts[1].trim());
                     int taskIndex = Integer.parseInt(parts[2].trim());
                     String newDescription = parts[3].trim();
-                    updateManager(scanner, weekView, inMonthView, taskManager, day, taskIndex, newDescription);
+                    taskManager.updateManager(scanner, weekView, monthView, inMonthView, taskManager, day,
+                            taskIndex, newDescription);
                 } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }
@@ -101,10 +100,12 @@ public class Main {
                                 "add, <day>, <taskType>, <taskDescription>");
                     }
                     String action = parts[0];
-                    int day = Integer.parseInt(parts[1].trim());
+                    //int day = Integer.parseInt(parts[1].trim());
+                    String day = parts[1].trim();
                     String taskTypeString = parts[2].trim();
                     String taskDescription = parts[3].trim();
-                    addManager(weekView, inMonthView, action, day, taskTypeString, taskDescription);
+                    taskManager.addManager(weekView,monthView, inMonthView, action, day,
+                            taskTypeString, taskDescription);
                 } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
                 }

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class View {
-    protected static LocalDate startOfView;
+    protected LocalDate startOfView;
     protected final DateTimeFormatter dateFormatter;
 
     public View(LocalDate startOfView, DateTimeFormatter dateFormatter) {
