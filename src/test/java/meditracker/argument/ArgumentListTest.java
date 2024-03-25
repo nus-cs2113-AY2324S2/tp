@@ -17,7 +17,7 @@ public class ArgumentListTest {
     );
 
     @Test
-    void ArgumentList_flagCollision_assertionError() {
+    void argumentList_flagCollision_assertionError() {
         Argument testArgument1 = new Argument(
                 ArgumentName.LIST_TYPE,
                 "-l",
