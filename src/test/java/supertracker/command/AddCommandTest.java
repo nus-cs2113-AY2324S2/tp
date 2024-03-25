@@ -7,6 +7,9 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,11 +26,12 @@ public class AddCommandTest {
         String name = "Milk";
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("01/01/2113", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         int quantityToAdd = 50;
         int newQuantity = quantity + quantityToAdd;
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
         Command addCommand = new AddCommand(name, quantityToAdd);
         addCommand.execute();

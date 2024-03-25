@@ -7,6 +7,9 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,8 +22,9 @@ public class DeleteCommandTest {
 
         int quantity = 100;
         double price = 5.00;
+        LocalDate date = LocalDate.parse("01/01/2113", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(NAME, quantity, price);
+        Command newCommand = new NewCommand(NAME, quantity, price, date);
         newCommand.execute();
     }
 

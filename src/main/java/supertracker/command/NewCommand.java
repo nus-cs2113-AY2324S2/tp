@@ -4,15 +4,20 @@ import supertracker.ui.Ui;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
+import java.time.LocalDate;
+
 public class NewCommand implements Command {
     private String name;
     private int quantity;
     private double price;
 
-    public NewCommand(String name, int quantity, double price) {
+    private LocalDate expiryDate;
+
+    public NewCommand(String name, int quantity, double price, LocalDate expiryDate) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.expiryDate = expiryDate;
     }
 
     @Override
@@ -21,7 +26,7 @@ public class NewCommand implements Command {
         assert quantity >= 0;
         assert price >= 0;
 
-        Item item = new Item(name, quantity, price);
+        Item item = new Item(name, quantity, price, expiryDate);
         Inventory.put(name, item);
         Ui.newCommandSuccess(item);
     }

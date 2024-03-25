@@ -7,6 +7,9 @@ import supertracker.item.Inventory;
 import supertracker.item.Item;
 import supertracker.parser.Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,8 +29,9 @@ public class RemoveCommandTest {
 
         int quantityToRemove = 50;
         int newQuantity = quantity - quantityToRemove;
+        LocalDate date = LocalDate.parse("22/08/2013", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
         Command removeCommand = new RemoveCommand(name, quantityToRemove);
         removeCommand.execute();
@@ -71,8 +75,9 @@ public class RemoveCommandTest {
 
         int quantityToRemove = 100;
         int newQuantity = 0;
+        LocalDate date = LocalDate.parse("22/08/2033", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        Command newCommand = new NewCommand(name, quantity, price);
+        Command newCommand = new NewCommand(name, quantity, price, date);
         newCommand.execute();
         Command removeCommand = new RemoveCommand(name, quantityToRemove);
         removeCommand.execute();

@@ -15,8 +15,12 @@ import supertracker.command.UpdateCommand;
 import supertracker.item.Inventory;
 import supertracker.ui.ErrorMessage;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.time.LocalDate;
 
 public class Parser {
     private static final String QUIT_COMMAND = "quit";
@@ -33,12 +37,17 @@ public class Parser {
     private static final String NAME_FLAG = "n";
     private static final String QUANTITY_FLAG = "q";
     private static final String PRICE_FLAG = "p";
-    private static final String SORT_QUANTITY_FLAG = "sq";
-    private static final String SORT_PRICE_FLAG = "sp";
-    private static final String REVERSE_FLAG = "r";
+    private static final String EX_DATE_FLAG = "e";
     private static final String NAME_GROUP = "name";
     private static final String QUANTITY_GROUP = "quantity";
     private static final String PRICE_GROUP = "price";
+    private static final String EX_DATE_GROUP = "expiry";
+    private static final String EX_DATE_FORMAT = "dd-MM-yyyy";
+    private static final String INVALID_EX_DATE_FORMAT = "dd-MM-yyyyy";
+    private static final String INVALID_EX_DATE = "01-01-99999";
+    private static final String SORT_QUANTITY_FLAG = "sq";
+    private static final String SORT_PRICE_FLAG = "sp";
+    private static final String REVERSE_FLAG = "r";
     private static final String SORT_QUANTITY_GROUP = "sortQuantity";
     private static final String SORT_PRICE_GROUP = "sortPrice";
     private static final String REVERSE_GROUP = "reverse";
@@ -48,7 +57,8 @@ public class Parser {
     private static final String THRESHOLD_GROUP = "threshold";
     private static final String NEW_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + QUANTITY_FLAG + BASE_FLAG + "(?<" + QUANTITY_GROUP + ">.*) "
-            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) ";
+            + PRICE_FLAG + BASE_FLAG + "(?<" + PRICE_GROUP + ">.*) "
+            + "(?<" + EX_DATE_GROUP + ">(?:" + EX_DATE_FLAG + BASE_FLAG + ".*)?) ";
     private static final String UPDATE_COMMAND_REGEX = NAME_FLAG + BASE_FLAG + "(?<" + NAME_GROUP + ">.*) "
             + "(?<" + QUANTITY_GROUP + ">(?:" + QUANTITY_FLAG + BASE_FLAG + ".*)?) "
             + "(?<" + PRICE_GROUP + ">(?:" + PRICE_FLAG + BASE_FLAG + ".*)?) ";
@@ -215,7 +225,7 @@ public class Parser {
     }
 
     private static Command parseNewCommand(String input) throws TrackerException {
-        String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG};
+        String[] flags = {NAME_FLAG, QUANTITY_FLAG, PRICE_FLAG, EX_DATE_FLAG};
         Matcher matcher = getPatternMatcher(NEW_COMMAND_REGEX, input, flags);
 
         if (!matcher.matches()) {
@@ -228,6 +238,20 @@ public class Parser {
 
         if (name.isEmpty() || quantityString.isEmpty() || priceString.isEmpty()) {
             throw new TrackerException(ErrorMessage.EMPTY_PARAM_INPUT);
+        }
+
+        String dateString = null;
+        LocalDate expiryDate = LocalDate.parse(INVALID_EX_DATE, DateTimeFormatter.ofPattern(INVALID_EX_DATE_FORMAT));
+
+        boolean hasExpiry = !matcher.group(EX_DATE_GROUP).isEmpty();
+
+        try {
+            if (hasExpiry) {
+                dateString = matcher.group(EX_DATE_GROUP).trim().replace(EX_DATE_FLAG + BASE_FLAG, "");
+                expiryDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern(EX_DATE_FORMAT));
+            }
+        } catch (DateTimeParseException e) {
+            throw new TrackerException(ErrorMessage.INVALID_DATE_FORMAT);
         }
 
         if (Inventory.contains(name)) {
@@ -253,7 +277,7 @@ public class Parser {
             throw new TrackerException(ErrorMessage.PRICE_TOO_SMALL);
         }
 
-        return new NewCommand(name, quantity, price);
+        return new NewCommand(name, quantity, price, expiryDate);
     }
 
     private static Command parseListCommand(String input) throws TrackerException {
@@ -294,6 +318,7 @@ public class Parser {
         return new ListCommand(hasQuantity, hasPrice, firstParam, sortBy, reverse);
     }
 
+    //@@vimalapugazhan
     private static Command parseDeleteCommand(String input) throws TrackerException {
         String[] flags = {NAME_FLAG};
         Matcher matcher = getPatternMatcher(DELETE_COMMAND_REGEX, input, flags);
@@ -431,4 +456,5 @@ public class Parser {
 
         return new ReportCommand(reportType, threshold);
     }
+
 }
