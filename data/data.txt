@@ -1,0 +1,8 @@
+Height 180 cm
+Weight 77 kg
+Water 100
+Water -10
+Water 10
+Water -10
+Water -10
+Water -10
