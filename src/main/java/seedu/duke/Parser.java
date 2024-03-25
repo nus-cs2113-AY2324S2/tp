@@ -1,15 +1,115 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Parser {
-    protected String userInput;
+    private final String userInput;
+
+    /**
+     * List of parameters to extract from user input.
+     * For example, "/amount (amount)".
+     * Add new Keys to extract additional user parameters for future functionality.
+     */
+    private static final String[] paramKeys = {"amount", "paid", "user"};
+
+    /**
+     * First word of user input.
+     */
+    private String command = null;
+
+    /**
+     * Input between first word and '/' character.
+     * For example, "(command) (argument) /(parameter) (parameter input)...".
+     */
+    private String argument = null;
+
+    /**
+     * Additional parameters provided by user.
+     */
+    private HashMap<String, ArrayList<String>> params = createParams();
 
     public static class EndProgramException extends Exception {
 
     }
 
+    /**
+     * Creates a new HashMap with Keys equal to additional parameters users might input.
+     * Values are arrays that store user input.
+     *
+     * @return HashMap with Keys in 'additionalFields' and empty array Values.
+     */
+    private HashMap<String, ArrayList<String>> createParams() {
+        HashMap<String, ArrayList<String>> additionalInfo = new HashMap<>();
+
+        for(String paramKey : paramKeys){
+            additionalInfo.put(paramKey, new ArrayList<>());
+        }
+
+        return additionalInfo;
+    }
+
     public Parser(String userInput) {
         this.userInput = userInput;
+        this.parseUserInput();
     }
+
+    /**
+     * Process the String userInput and populates corresponding fields of Parser object.
+     */
+    public void parseUserInput() {
+        String[] tokens = userInput.split(" ", 2);
+        this.command = tokens[0].toLowerCase().trim();
+
+        if (tokens.length == 1){
+            System.out.print(this);
+            return;
+        }
+
+        String[] arguments = tokens[1].split("/");
+        this.argument = arguments[0].trim();
+
+        for(int i = 1; i < arguments.length; i++){
+            String[] subTokens = arguments[i].split(" ", 2);
+            if (subTokens.length == 1){
+                continue;
+            }
+
+            String subCommand = subTokens[0].toLowerCase().trim();
+            String subArgument = subTokens[1].trim();
+            if (!subArgument.isEmpty() && params.containsKey(subCommand)){
+                params.get(subCommand).add(subArgument);
+            }
+        }
+
+        System.out.print(this);
+    }
+
+    /**
+     * Returns String summarising contents of Parser object.
+     * For easier debug printing.
+     *
+     * @return Contents of Parser object.
+     */
+    @Override
+    public String toString(){
+        StringBuilder parser = new StringBuilder();
+
+        parser.append("command: ").append(command).append("\n");
+
+        parser.append("argument: ").append(argument).append("\n");
+
+        for(String paramKey : paramKeys){
+            parser.append(paramKey).append(": ");
+            for(String item : params.get(paramKey)){
+                parser.append(item).append(" ");
+            }
+            parser.append("\n");
+        }
+
+        return parser.toString();
+    }
+
 
     public void handleUserInput() throws EndProgramException, ExpensesException {
         String[] tokens = userInput.split(" ", 2);
