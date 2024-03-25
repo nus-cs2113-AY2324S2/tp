@@ -110,5 +110,25 @@ public class UiRenderer {
         System.out.println("+");
     }
 
+    public static void printHelp() {
+        String horizontalLine = "+-------------------------------------------------------------------------------+";
+        String emptyLine = "|                                                                               |";
+        System.out.println(horizontalLine);
+        System.out.println("|                               Available Commands                              |");
+        System.out.println(horizontalLine);
+        System.out.println(emptyLine);
+        System.out.println("| - 'next': Move to the next week or month view.                                |");
+        System.out.println("| - 'prev': Move to the previous week or month view.                            |");
+        System.out.println("| - 'update, <day>, <taskIndex>, <newDescription>': Update a task description.  |");
+        System.out.println("| - 'add, <day>, <taskType>, <taskDescription>': Add a new task.                |");
+        System.out.println("| - 'delete, <day>, <taskIndex>': Delete a task.                                |");
+        System.out.println("| - 'month': Switch to month view.                                              |");
+        System.out.println("| - 'week': Switch to week view.                                                |");
+        System.out.println("| - 'quit': Exit the calendar application.                                      |");
+        System.out.println(emptyLine);
+        System.out.println(horizontalLine);
+    }
+
+
 }
 

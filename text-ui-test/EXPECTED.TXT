@@ -6,12 +6,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
 
 Week View: 24/03/2024 - 30/03/2024
@@ -20,12 +15,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -34,12 +24,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -48,12 +33,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -62,12 +42,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
 
 Week View: 24/03/2024 - 30/03/2024
@@ -76,12 +51,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -90,12 +60,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -104,12 +69,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -118,12 +78,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -132,12 +87,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -146,12 +96,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input format. Please provide input in the format: add, <day>, <taskType>, <taskDescription>
 
 Week View: 24/03/2024 - 30/03/2024
@@ -160,12 +105,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -174,12 +114,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -188,12 +123,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -202,12 +132,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -216,12 +141,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -230,12 +150,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -244,12 +159,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -258,12 +168,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input format. Please provide input in the format: update, <day>, <taskIndex>, <newDescription>
 
 Week View: 24/03/2024 - 30/03/2024
@@ -272,12 +177,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -286,12 +186,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -300,12 +195,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -314,12 +204,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input format. Please provide input in the format: delete, <day>, <taskIndex>
 
 Week View: 24/03/2024 - 30/03/2024
@@ -328,12 +213,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -342,12 +222,7 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Invalid input. Please try again.
 
 Week View: 24/03/2024 - 30/03/2024
@@ -356,10 +231,5 @@ Week View: 24/03/2024 - 30/03/2024
 | [36m[2m[22m24/03/2024[0m | [36m[2m[22m25/03/2024[0m | [36m[2m[22m26/03/2024[0m | [36m[2m[22m27/03/2024[0m | [36m[2m[22m28/03/2024[0m | [36m[2m[22m29/03/2024[0m | [36m[2m[22m30/03/2024[0m |
 +------------+------------+------------+------------+------------+------------+------------+
 +------------+------------+------------+------------+------------+------------+------------+
-Enter 'next' for next week, 'prev' for previous week,
-'add' to add a task,
-'update' to edit a task,
-'delete' to delete a task,
-'month' to display the month view,
-or 'quit' to quit:
+Enter help to learn commands
 Exiting Calendar...

@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 import static storage.Storage.createNewFile;
 import static data.TaskManager.deleteManager;
-
+import static ui.UiRenderer.printHelp;
 
 
 public class Main {
@@ -53,12 +53,7 @@ public class Main {
                 }
             }
             printWeek = true; // Reset flag for the next iteration
-            System.out.println("Enter 'next' for next week, 'prev' for previous week,\n" +
-                    "'add' to add a task,\n" +
-                    "'update' to edit a task,\n" +
-                    "'delete' to delete a task,\n" +
-                    "'month' to display the month view,\n" +
-                    "or 'quit' to quit:");
+            System.out.println("Enter help to learn commands");
             String input = scanner.nextLine().trim().toLowerCase();
             String command = input.split(",")[0];
             switch (command) {
@@ -131,6 +126,9 @@ public class Main {
                 break;
             case "week":
                 inMonthView = false;
+                break;
+            case "help":
+                printHelp();
                 break;
             case "quit":
                 System.out.println("Exiting Calendar...");
