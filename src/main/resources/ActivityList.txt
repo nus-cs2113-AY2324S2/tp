@@ -131,7 +131,7 @@ Beach Outings | ACC | A | U
 Historical Landmark Visits | ACC | A | U
 Guided City Tours | ACC | A | U
 Museum Trips | ACC | A | U
-Private Guided Tours | ACC | P | U
+Private Guided Tours | ACC | P | C
 Local Theatre Performances | ACC | P | U
 River Cruise | ACC | P | U
 Spa Treatment | ACC | P | U
