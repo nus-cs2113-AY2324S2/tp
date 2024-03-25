@@ -3,6 +3,7 @@ package seedu.binbash;
 import seedu.binbash.item.Item;
 import seedu.binbash.item.PerishableRetailItem;
 import seedu.binbash.item.RetailItem;
+import seedu.binbash.command.RestockCommand;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,6 +48,29 @@ public class ItemList {
 
         String output = "Noted! I have added the following item into your inventory:" + System.lineSeparator()
                 + System.lineSeparator() + item;
+        return output;
+    }
+
+    public String updateItemQuantity(String itemName, int itemQuantity, String command) {
+        String output = "Sorry, I can't find the item you are looking for.";
+
+        for (Item item : itemList) {
+            int newQuantity = item.getItemQuantity();
+            if (!item.getItemName().trim().equals(itemName.trim())) {
+                continue;
+            }
+
+            if (command.trim().equals(RestockCommand.command.trim())) {
+                newQuantity += itemQuantity;
+            }
+            else {
+                newQuantity -= itemQuantity;
+            }
+            item.setItemQuantity(newQuantity);
+            output = "Great! I have updated the quantity of the item for you:" + System.lineSeparator()
+                    + System.lineSeparator() + item;
+
+        }
         return output;
     }
 
