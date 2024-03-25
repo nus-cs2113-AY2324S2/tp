@@ -30,6 +30,7 @@ public class MainLogic {
         testOrderAddAndRemove(ordersList);
         testOrderAddAndRemove(ordersList);
 
+        MainHelpCommand.execute();
         boolean isExit = false;
         while (!isExit) {
             String inputText = input.nextLine();
@@ -61,7 +62,7 @@ public class MainLogic {
             case VIEW_ORDER:
                 //TODO: put all this into the method to maintain same level of abstraction
                 Optional<Order> checkedOrder = MainViewOrderCommand.execute(ordersList, inputText);
-                checkedOrder.ifPresentOrElse(x -> System.out.println(x.toString()),
+                checkedOrder.ifPresentOrElse(System.out::println,
                                             () -> System.out.println("Order not found"));
                 break;
             case VIEW_ALL_ORDERS:

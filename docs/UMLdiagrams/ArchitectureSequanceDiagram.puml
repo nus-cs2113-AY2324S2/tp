@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":MainLogic" as mainLogic MAIN_LOGIC_COLOR
+Participant ":SubLogic(OrderLogic)" as subLogic SUB_LOGIC_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":Command" as command COMMAND_COLOR
+Participant ":Model" as model MODEL_COLOR
+participant ":Storage" as storage STORAGE_COLOR
+
+
+user -> mainLogic : "Create order -menu 01"
+activate mainLogic MAIN_LOGIC_COLOR
+mainLogic -> parser : analyzeInput("Create order -menu 01")
+activate parser PARSER_COLOR
+parser --> mainLogic : return command
+deactivate parser
+mainLogic -> command : execute(command)
+activate command COMMAND_COLOR
+command -> model : get(menu01)
+activate model MODEL_COLOR
+model --> command : return menu01
+deactivate model
+command -> model : createOrder(menu01)
+activate model MODEL_COLOR
+model --> command : return newOrder
+deactivate model
+command --> subLogic : return newOrder
+deactivate command
+activate subLogic SUB_LOGIC_COLOR
+user -> subLogic : "add -item 001"
+subLogic -> parser : analyzeInput("add -item 001")
+activate parser PARSER_COLOR
+parser --> subLogic : return command
+deactivate parser
+subLogic -> command : execute(command)
+activate command COMMAND_COLOR
+command -> model : get(item001)
+activate model MODEL_COLOR
+model --> command : return item001
+deactivate model
+command -> model : addItem(newOrder, item001)
+activate model MODEL_COLOR
+model --> command : return newOrder
+deactivate model
+command --> subLogic : return newOrder
+deactivate command
+user -> subLogic : "complete"
+subLogic -> parser : analyzeInput("complete")
+activate parser PARSER_COLOR
+parser --> subLogic : return command
+deactivate parser
+subLogic -> command : execute(command)
+activate command COMMAND_COLOR
+deactivate subLogic
+command --> mainLogic : return newOrder
+deactivate command
+mainLogic -> storage : save(newOrder)
+activate storage STORAGE_COLOR
+storage --> mainLogic
+deactivate storage
+
+
+
+
+@enduml
