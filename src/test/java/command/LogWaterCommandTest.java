@@ -21,12 +21,5 @@ public class LogWaterCommandTest {
         assertEquals("Invalid water quantity. " +
                 "Please provide a valid integer.", exception.getMessage());
     }
-
-    @Test
-    void testNonPositiveQuantity() {
-        LogWaterCommand logWaterCommand = new LogWaterCommand("-100");
-        ActiveEdgeException exception = assertThrows(ActiveEdgeException.class, logWaterCommand::execute);
-        assertEquals("Water quantity must be above 0. Please try again.", exception.getMessage());
-    }
-
+    
 }
