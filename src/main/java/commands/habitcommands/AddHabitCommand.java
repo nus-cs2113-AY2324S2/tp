@@ -6,7 +6,7 @@ import habit.Habit;
 import habit.HabitTracker;
 
 /**
- * A command implementation for adding new habits.
+ * Represents a command to add new habits.
  */
 public class AddHabitCommand implements Command {
     private HabitTracker habitTracker;
@@ -21,16 +21,18 @@ public class AddHabitCommand implements Command {
      */
     public AddHabitCommand(HabitTracker habitTracker, String habitCommandArgs) throws HabitException {
         this.habitTracker = habitTracker;
+
         if (habitCommandArgs.isEmpty()) {
             throw new HabitException("Habit Description cannot be left empty.");
         }
+
         this.newHabit = new Habit(habitCommandArgs.trim());
     }
 
     /**
      * Execute the command to add a new habit into the habit tracker.
      *
-     * @throws HabitException If there are any formatting issues
+     * @throws HabitException If there are any formatting issues.
      */
     @Override
     public void execute() throws HabitException {

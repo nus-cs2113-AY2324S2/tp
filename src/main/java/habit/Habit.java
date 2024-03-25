@@ -8,8 +8,6 @@ import exceptions.HabitException;
 public class Habit {
     private String description;
     private int habitCount;
-
-
     private Priority priority;
 
     /**
@@ -50,20 +48,28 @@ public class Habit {
      */
     public int updateCount(String updatedCount) throws HabitException {
         int changeInCount = 0;
+
         try {
             changeInCount = Integer.parseInt(updatedCount);
             if (habitCount + changeInCount < 0) {
                 throw new HabitException("You cannot decrement a habit count to below zero");
             }
+
             habitCount += changeInCount;
 
         } catch (NumberFormatException e) {
             throw new HabitException("Please enter a valid count\n" +
                     "Use: '+1' to increase count, '-1' to decrease count ");
         }
+
         return changeInCount;
     }
 
+    /**
+     * Sets the priority of a habit.
+     *
+     * @param priority The priority level of a habit from user input.
+     */
     public void setPriority (String priority) {
         switch (priority) {
         case "low":
