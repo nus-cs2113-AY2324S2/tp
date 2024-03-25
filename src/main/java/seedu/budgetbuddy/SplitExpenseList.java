@@ -15,9 +15,10 @@ public class SplitExpenseList {
         this.splitexpenses = splitexpenses;
     }
 
-    public SplitExpenseList(){
-        this.splitexpenses = new ArrayList();
+    public SplitExpenseList() {
+        this.splitexpenses = new ArrayList<>();
     }
+
     public int size() {
         return splitexpenses.size();
     }
@@ -26,7 +27,7 @@ public class SplitExpenseList {
         return splitexpenses;
     }
 
-    public void listSplitExpenses(String filterCategory) {
+    public void listSplitExpenses() {
         LOGGER.info("Listing splitexpenses...");
 
         try {
@@ -38,6 +39,11 @@ public class SplitExpenseList {
                     LOGGER.warning("Expense object at index " + i + " is null");
                     continue;
                 }
+                System.out.print(i+1 + " | ");
+                System.out.print("Amount: " + splitexpense.getAmount());
+                System.out.print(" Number of People: " + splitexpense.getNumberOfPeople());
+                System.out.print(" Description: " + splitexpense.getDescription());
+                System.out.println(" Amount per person: " + splitexpense.calculateAmountPerPerson());
             }
             System.out.println("-----------------------------------------------------------------------------");
             
