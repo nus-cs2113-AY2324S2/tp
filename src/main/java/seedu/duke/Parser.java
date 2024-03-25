@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Parser {
     private final String userInput;
@@ -49,11 +50,17 @@ public class Parser {
         return additionalInfo;
     }
 
-    public Parser(String userInput, String command, String argument, HashMap<String, ArrayList<String>> params) {
+    /**
+     * Constructor for Test purposes.
+     */
+    public Parser(String userInput, String command, String argument,
+                  String[] amount, String[] paid, String[] user) {
         this.userInput = userInput;
         this.command = command;
         this.argument = argument;
-        this.params = params;
+        this.params.put("amount", new ArrayList<>(List.of(amount)));
+        this.params.put("paid", new ArrayList<>(List.of(paid)));
+        this.params.put("user", new ArrayList<>(List.of(user)));
     }
 
     public Parser(String userInput) {
