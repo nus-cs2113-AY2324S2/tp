@@ -25,10 +25,18 @@ in achieving their fitness objectives while navigating the challenges of univers
 
 ### Value proposition
 
-University students, overwhelmed by academic pressures, often find it challenging to balance exercise and nutrition. 
-A dedicated chatbot can ease their burden, providing daily guidance on workouts and diet. 
-By simplifying these decisions, the chatbot helps students stay fit amidst their demanding 
-schedules, fostering a healthier lifestyle.
+**Comprehensive Health Tracking:** Users can log various aspects of their health, including meals, water intake, exercise activities, height, and weight. This comprehensive tracking enables users to maintain a holistic view of their health behaviors.
+
+**Goal Setting and Monitoring:** The application allows users to set personalized goals for calorie intake, water consumption, and other health-related metrics. Users can track their progress towards these goals over time, fostering motivation and accountability.
+
+**Customized Logging:** Users can log specific details about their meals, exercise routines, and water intake, providing granular insights into their health habits. This customization allows for tailored tracking based on individual preferences and requirements.
+
+**Error Handling and User Guidance:** The application includes error handling mechanisms and user guidance to ensure smooth interaction and data input. This feature enhances user experience by reducing frustration and confusion during usage.
+
+**Data Persistence and Accessibility:** The application stores user data securely, allowing for easy access and retrieval across multiple sessions. This ensures that users can review their health history and progress over time, facilitating informed decision-making and goal adjustment.
+
+**Clear User Interface:** The user interface of the application is designed to be intuitive and user-friendly, enabling users to navigate and interact with the app effortlessly. This simplicity enhances user engagement and satisfaction with the overall experience.
+
 
 
 ## User Stories
