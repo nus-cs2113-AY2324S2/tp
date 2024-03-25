@@ -118,12 +118,15 @@ public class Handler {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(WorkoutConstant.RUN)) {
                 String[] runDetails = Run.getRun(userInput);
-                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
-                        || runDetails[3].isEmpty()) {
+                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()) {
                     throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
                 }
-
-                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                Run newRun;
+                if (runDetails[3].isEmpty()) {
+                    newRun = new Run(runDetails[2], runDetails[1]);
+                } else {
+                    newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                }
                 Output.printAddRun(newRun);
 
             } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
