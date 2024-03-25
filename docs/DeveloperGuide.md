@@ -92,7 +92,18 @@ The `MiniGame` mechanism:
 
 ## MiniGame - Typing Game
 
-{Describe the implementation of the Typing Game}
+The implementation of the Typing Game is as follows:
+
+1. The game can be invoked by the `WorkCommand` class when the user inputs the `work` command.
+2. It makes use of the `ResponseManager` to generate the instructions of the game to the user. 
+3. The user would be prompted to type the given text as fast as they can.
+4. This game made use of the `CompletableFuture` class to create separate thread which handles the countdown timer and user input at the same time.
+5. When the user finishes typing or the time limit is reached, the game would calculate the user's typing speed and accuracy and reward the user accordingly. 
+6. Finally, the `WorkCommand` would update the player profile with the reward earned according to the user's performance in the game.
+
+Given below is a sequence diagram of the `TypingGame` class when the user inputs the `work` command:
+
+![](https://via.placeholder.com/100.png?text=Photo)
 
 ## MiniGame - Tic Tac Toe
 
