@@ -1,24 +1,25 @@
 package seedu.duke;
+
+import seedu.duke.exceptions.InvalidTTMoveException;
+
 public class Game {
     protected boolean isExit; // true to exit
     protected String gameName;
 
     public Game(String line) {
         gameName = line;
-        isExit = false;
+        isExit = false; //not used for nw
+        assert !isExit; //not used for now
+    }
+    public void runTicTacToe() throws InvalidTTMoveException {
+
     }
 
-    public void startGame() {
-        switch (gameName) { //to parse string
-        case ("tic tac toe"):
-            //start tic-tac-toe
-            break;
-        case ("hangman"):
-            //starts hangman
-            break;
-        default:
-            //throw exception
-            break;
-        }
+    public void getHelp() {
+
+    }
+
+    public void runHangMan() {
+
     }
 }
