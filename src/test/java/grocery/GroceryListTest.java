@@ -86,7 +86,7 @@ public class GroceryListTest {
             fail("Expected a WrongFormatException to be thrown");
         } catch (WrongFormatException e) {
             String expectedMessage = 
-                "Command is in the wrong format, type \"help\" for more information.";
+                "Command is in the wrong format, type \"help\" for more information.\n";
             assertEquals(expectedMessage, e.getMessage());
         } catch (GitException e) {
             fail("Expected a WrongFormatException, but another GitException was thrown");
