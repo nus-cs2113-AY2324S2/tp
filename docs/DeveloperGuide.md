@@ -12,7 +12,16 @@
 ## Product scope
 ### Target user profile
 
-NUS Students
+Our target user profile primarily consists of NUS university students, including fitness enthusiasts, 
+athletes adhering to strict dietary regimens, and individuals aiming to adopt a healthier lifestyle. 
+These students are often juggling academic commitments, extracurricular activities, and social obligations, 
+leaving little time for comprehensive meal planning and exercise routines. They recognize the importance 
+of maintaining a balanced diet and engaging in regular physical activity to support their overall well-being,
+but struggle to find the time and resources to effectively manage their fitness goals. By providing a 
+convenient solution for tracking calorie intake and exercise routines tailored to their individual height 
+and weight, our application aims to empower these busy students to make informed decisions about their 
+nutrition and fitness. Through personalized guidance and easy-to-use features, we strive to assist them 
+in achieving their fitness objectives while navigating the challenges of university life.
 
 ### Value proposition
 
