@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,11 +8,12 @@ import static seedu.duke.ui.Ui.printGreeting;
 import seedu.duke.command.Command;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
+import seedu.duke.ui.Ui;
 
 public class FAP {
 
     public static ModuleList moduleList = new ModuleList(10);
-    private static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
 
     public static void main(String[] args) {
         try {
@@ -30,12 +30,12 @@ public class FAP {
     }
 
     private static void runApplication() {
-        Scanner in = new Scanner(System.in);
+        Ui ui = new Ui();
         boolean continueRunning = true;
 
         while (continueRunning) {
             try {
-                String userInput = in.nextLine().trim();
+                String userInput = ui.getUserCommand();
                 LOGGER.log(Level.INFO, "User input: " + userInput);
                 Command command = Parser.getCommand(userInput);
                 command.execute(userInput);
