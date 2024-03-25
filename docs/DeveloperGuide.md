@@ -24,11 +24,17 @@ schedules, fostering a healthier lifestyle.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions of the app|refer to them when I forget how to use the application|
-|v1.0|returning user|see my previous logs|see my daily logs and progress|
-|v2.0|user|log exercises|keep track of my physical activities|
+| Version | As a ... | I want to ... | So that I can ...|
+|---------|----------|---------------|------------------|
+| v1.0    |new user|see usage instructions of the app|refer to them when I forget how to use the application|
+| v1.0    |returning user|see my previous logs|see my daily logs and progress|
+| v1.0    |user|log calorie intake|record daily consumption to monitor deitary habits|
+|v1.0| user|Log water intake|Track hydration levels throughout the day|
+|v2.0|user|Search for keywords|Quickly find specific information or entries within logs|
+|v2.0|user|	Delete entries from log|	Remove incorrect or unnecessary data from records|
+| v2.0    |user|log exercises|keep track of my physical activities|
+|v2.0|user|View daily summary|Access a summary of exercise, nutrition, and hydration for the day|
+
 
 ## Non-Functional Requirements
 
