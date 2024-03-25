@@ -17,8 +17,8 @@ import java.util.logging.Level;
 public class PINHandler {
     private static final Logger logger = Logger.getLogger("PIN Logger");
     private static final String PIN_FILE_PATH = "./data/pin.txt";
-    private String savedPin;
-    private boolean authenticationEnabled;
+    private static String savedPin;
+    private static boolean authenticationEnabled;
 
     // @@author jing-xiang
     /**
@@ -38,7 +38,7 @@ public class PINHandler {
     /**
      * Loads the saved PIN and authentication enabled state from the file.
      */
-    private void loadPinAndAuthenticationEnabled() {
+    public static void loadPinAndAuthenticationEnabled() {
         try {
             String[] data = new String(Files.readAllBytes(Paths.get(PIN_FILE_PATH))).split("\n");
             savedPin = data[0];
@@ -53,7 +53,7 @@ public class PINHandler {
     /**
      * Saves the PIN and authentication enabled state to the file.
      */
-    private void savePinAndAuthenticationEnabled() {
+    public static void savePinAndAuthenticationEnabled() {
         try {
             String data = savedPin + "\n" + authenticationEnabled;
             Files.write(Paths.get(PIN_FILE_PATH), data.getBytes());
@@ -74,7 +74,7 @@ public class PINHandler {
     /**
      * Creates a new PIN for the user.
      */
-    public void createPin() {
+    public static void createPin() {
         UI.showMessage("Create your 6-digit PIN:");
         String pin = UI.getUserInput();
 
@@ -99,7 +99,7 @@ public class PINHandler {
             String hashedPinHex = new BigInteger(1, hashedPin).toString(16);
             savedPin = hashedPinHex;
             savePinAndAuthenticationEnabled();
-            UI.showMessage("PIN saved successfully!");
+            UI.showMessage("PIN saved successfully! You can enter 'pin disable' to login automatically upon startup.");
             logger.log(Level.INFO, "PIN saved successfully!");
         } catch (NoSuchAlgorithmException e) {
             UI.showMessage("Error saving PIN. Please try again.");
@@ -109,7 +109,7 @@ public class PINHandler {
     /**
      * Authenticates the user by comparing the entered PIN with the saved PIN.
      */
-    public void authenticate() {
+    public static void authenticate() {
         if (!authenticationEnabled) {
             return;
         }
@@ -142,23 +142,12 @@ public class PINHandler {
     }
 
     /**
-     * Resets the PIN for the user or enables/disables authentication upon startup.
+     * Resets the PIN for the user with a new PIN.
      */
-    public void resetPin() {
-        UI.showMessage("Enter your current PIN: (or enter enable/disable to control startup authentication!)", false);
+    public static void resetPin() {
+        UI.showMessage("Enter your current PIN: ", false);
         String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
-        if (Objects.equals(enteredPin, "disable")) {
-            authenticationEnabled = false;
-            savePinAndAuthenticationEnabled();
-            UI.showMessage("Authentication disabled upon startup.");
-            return;
-        } else if (Objects.equals(enteredPin, "enable")) {
-            authenticationEnabled = true;
-            savePinAndAuthenticationEnabled();
-            UI.showMessage("Authentication enabled upon startup.");
-            return;
-        }
 
         try {
             // Hash the entered PIN before comparing
@@ -170,10 +159,36 @@ public class PINHandler {
                 // If the entered PIN is correct, allow the user to create a new PIN
                 createPin();
             } else {
-                UI.showMessage("Invalid PIN. Please try again.");
+                UI.showMessage("Invalid PIN. Please try again later.");
             }
         } catch (NoSuchAlgorithmException e) {
             UI.showMessage("Error resetting PIN. Please try again.");
+        }
+    }
+
+    /**
+     * Enables authentication upon startup.
+     */
+    public static void enablePin() {
+        if (!authenticationEnabled) {
+            authenticationEnabled = true;
+            savePinAndAuthenticationEnabled();
+            UI.showMessage("Authentication enabled upon startup.");
+        } else {
+            UI.showMessage("Authentication is already enabled.");
+        }
+    }
+
+    /**
+     * Disables authentication upon startup.
+     */
+    public static void disablePin() {
+        if (authenticationEnabled) {
+            authenticationEnabled = false;
+            savePinAndAuthenticationEnabled();
+            UI.showMessage("Authentication disabled upon startup.");
+        } else {
+            UI.showMessage("Authentication is already disabled.");
         }
     }
 }
