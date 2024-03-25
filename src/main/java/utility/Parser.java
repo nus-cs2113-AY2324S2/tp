@@ -29,7 +29,7 @@ public class Parser {
         try {
             formattedDate = LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            Output.printException(e, "Error parsing date!");
+            Output.printException("Error parsing date!");
         }
         return formattedDate;
     }
@@ -57,6 +57,7 @@ public class Parser {
         if (day <= 10 && !parts[0].startsWith("0")) {
             throw new CustomExceptions.InvalidInput("Day must start with '0' if day is less than 10");
         }
+
     }
 
     /**

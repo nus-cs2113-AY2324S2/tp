@@ -299,13 +299,11 @@ public class Output {
 
     /**
      * Prints a specified message and the exception error message.
-     * @param e Represents the Exception caught.
      * @param message The custom message to be printed.
      */
-    public static void printException(Exception e, String message) {
+    public static void printException(String message) {
         System.err.println("Exception Caught! " + message);
     }
-
 
     /**
      * Prints the welcome banner for PulsePilot.
