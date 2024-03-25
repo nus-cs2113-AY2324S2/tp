@@ -24,7 +24,7 @@ class ArgumentParser {
      */
     public ArgumentParser(ArgumentList argumentList, String rawInput) throws ArgumentNotFoundException {
         List<String> rawInputSplit = List.of(rawInput.split(" "));
-        SortedMap<Integer, Argument> indexes = getArgumentIndexes(argumentList, rawInputSplit);
+        SortedMap<Integer, Argument> indexes = ArgumentParser.getArgumentIndexes(argumentList, rawInputSplit);
         getArgumentValues(indexes, rawInputSplit);
     }
 
@@ -50,7 +50,7 @@ class ArgumentParser {
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications
-    private SortedMap<Integer, Argument> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
+    private static SortedMap<Integer, Argument> getArgumentIndexes(ArgumentList argumentList, List<String> rawInputSplit)
             throws ArgumentNotFoundException {
         SortedMap<Integer, Argument> indexes = new TreeMap<>();
         for (Argument argument: argumentList.getArguments()) {
