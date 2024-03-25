@@ -13,6 +13,7 @@ import command.FindCommand;
 import command.DeleteTaskCommand;
 import command.ActiveEdgeException;
 import command.LogExerciseCommand;
+import command.ShowSummaryCommand;
 
 import activeedge.Storage;
 
@@ -121,6 +122,9 @@ public class Parser {
                 }
                 LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt);
                 logExerciseCommand.execute();
+            }
+            else if (input.startsWith("summary")) {
+                new ShowSummaryCommand().execute();
             }
             else {
                 System.out.println("Unknown command.");
