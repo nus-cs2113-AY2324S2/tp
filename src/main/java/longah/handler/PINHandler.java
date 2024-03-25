@@ -170,17 +170,25 @@ public class PINHandler {
      * Enables authentication upon startup.
      */
     public static void enablePin() {
-        authenticationEnabled = true;
-        savePinAndAuthenticationEnabled();
-        UI.showMessage("Authentication enabled upon startup.");
+        if (!authenticationEnabled) {
+            authenticationEnabled = true;
+            savePinAndAuthenticationEnabled();
+            UI.showMessage("Authentication enabled upon startup.");
+        } else {
+            UI.showMessage("Authentication is already enabled.");
+        }
     }
 
     /**
      * Disables authentication upon startup.
      */
     public static void disablePin() {
-        authenticationEnabled = false;
-        savePinAndAuthenticationEnabled();
-        UI.showMessage("Authentication disabled upon startup.");
+        if (authenticationEnabled) {
+            authenticationEnabled = false;
+            savePinAndAuthenticationEnabled();
+            UI.showMessage("Authentication disabled upon startup.");
+        } else {
+            UI.showMessage("Authentication is already disabled.");
+        }
     }
 }
