@@ -31,11 +31,6 @@ class PeriodTest {
         outContent.reset();
     }
 
-    @AfterEach
-    void cleanup() {
-        HealthList.clearBmisAndPeriods();
-    }
-
     /**
      * Tests the behaviour of toString in Period class.
      */
@@ -153,10 +148,10 @@ class PeriodTest {
         Period firstPeriod = new Period("10-04-2024", "16-04-2024");
         HealthList.addPeriod(firstPeriod);
         int invalidIndex = 5;
-        assertThrows (CustomExceptions.OutOfBounds.class, () ->
+        assertThrows(CustomExceptions.OutOfBounds.class, () ->
                 HealthList.deletePeriod(invalidIndex));
-      
-     /**
+    }
+    /**
      * Tests the behaviour of the predictNextPeriodStartDate function and whether it prints
      * correct predicted start date.
      */

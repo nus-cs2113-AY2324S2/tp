@@ -198,7 +198,7 @@ public class HealthList extends ArrayList<Health> {
         System.out.println("Removed period entry with start date: " +
                 deletedPeriod.startDate +
                 "and end date: " +
-                deletedPeriod.endDate);
+                deletedPeriod.endPeriodDate);
         periods.remove(index);
         LogFile.writeLog("Removed period with index: " + index, false);
     }
