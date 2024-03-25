@@ -16,9 +16,8 @@ Noted! I have added the following item into your inventory:
 [R] item with
 	description: no exp or quantity
 	quantity: 0
-	expiry date: N.A.
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
 -------------------------------------------------------------
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
@@ -26,9 +25,8 @@ Noted! I have added the following item into your inventory:
 [R] item with
 	description: no exp
 	quantity: 10
-	expiry date: N.A.
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
 -------------------------------------------------------------
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
@@ -36,9 +34,9 @@ Noted! I have added the following item into your inventory:
 [P][R] item with
 	description: no quantity
 	quantity: 0
-	expiry date: 01-01-1999
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
+	expiry date: 01-01-1999
 -------------------------------------------------------------
 -------------------------------------------------------------
 Noted! I have added the following item into your inventory:
@@ -46,38 +44,36 @@ Noted! I have added the following item into your inventory:
 [P][R] item with
 	description: everything
 	quantity: 100
-	expiry date: 01-01-1999
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
+	expiry date: 01-01-1999
 -------------------------------------------------------------
 -------------------------------------------------------------
 1. [R] item with
 	description: no exp or quantity
 	quantity: 0
-	expiry date: N.A.
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
 
 2. [R] item with
 	description: no exp
 	quantity: 10
-	expiry date: N.A.
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
 
 3. [P][R] item with
 	description: no quantity
 	quantity: 0
-	expiry date: 01-01-1999
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
+	expiry date: 01-01-1999
 
 4. [P][R] item with
 	description: everything
 	quantity: 100
-	expiry date: 01-01-1999
-	sale price: $0.00
 	cost price: $100.00
+	sale price: $0.00
+	expiry date: 01-01-1999
 
 
 -------------------------------------------------------------

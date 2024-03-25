@@ -127,24 +127,23 @@ public class Storage {
 
             Matcher matcher = AddCommand.COMMAND_FORMAT.matcher(line);
             if (matcher.matches()) {
-                String itemName = matcher.group("itemName");
-                String itemDescription = matcher.group("itemDescription");
+                String itemName = matcher.group("itemName").strip();
+                String itemDescription = matcher.group("itemDescription").strip();
                 int itemQuantity = Integer.parseInt(
                         Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
                 );
-                String itemExpirationDate = Objects.requireNonNullElse(
-                        matcher.group("itemExpirationDate"),
-                        "N.A."
-                ).strip();
+                LocalDate itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
+                        .map(String::strip)
+                        .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
+                        .orElse(LocalDate.MIN);
                 double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
                 double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
-                if (itemExpirationDate.equals("N.A.")) {
+                if (itemExpirationDate.equals(LocalDate.MIN)) {
                     itemList.add(new RetailItem(
                             itemName,
                             itemDescription,
                             itemQuantity,
-                            Optional.empty(),
                             itemSalePrice,
                             itemCostPrice));
                 } else {
@@ -152,7 +151,7 @@ public class Storage {
                             itemName,
                             itemDescription,
                             itemQuantity,
-                            Optional.of(LocalDate.parse(itemExpirationDate, EXPECTED_INPUT_DATE_FORMAT)),
+                            itemExpirationDate,
                             itemSalePrice,
                             itemCostPrice));
                 }
@@ -210,10 +209,19 @@ public class Storage {
         output += "add" + " "
                 + "n/" + item.getItemName() + " "
                 + "d/" + item.getItemDescription() + " "
-                + "q/" + item.getItemQuantity() + " "
-                + "e/" + item.getItemExpirationDate() + " "
-                + "s/" + item.getItemSalePrice() + " "
-                + "c/" + item.getItemCostPrice();
+                + "q/" + item.getItemQuantity() + " ";
+
+        if (item instanceof PerishableRetailItem) {
+            PerishableRetailItem perishableItem = (PerishableRetailItem) item;
+            output += "e/" + perishableItem.getItemExpirationDate() + " ";
+        }
+
+        if (item instanceof RetailItem) {
+            RetailItem retailItem = (RetailItem) item;
+            output += "s/" + retailItem.getItemSalePrice() + " ";
+        }
+
+        output += "c/" + item.getItemCostPrice();
 
         return output;
     }

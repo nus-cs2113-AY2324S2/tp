@@ -7,7 +7,6 @@ import seedu.binbash.item.RetailItem;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -31,16 +30,15 @@ public class ItemList {
     }
 
     public String addItem(String itemName, String itemDescription, int itemQuantity,
-                          Optional<LocalDate> itemExpirationDate, double itemSalePrice, double itemCostPrice) {
+                          LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
         Item item;
-        if (itemExpirationDate.isPresent()) {
+        if (!itemExpirationDate.equals(LocalDate.MIN)) {
             // Create perishable item
             item = new PerishableRetailItem(itemName, itemDescription, itemQuantity,
                     itemExpirationDate, itemSalePrice, itemCostPrice);
         } else {
             // Create non-perishable item
-            item = new RetailItem(itemName, itemDescription, itemQuantity,
-                    itemExpirationDate, itemSalePrice, itemCostPrice);
+            item = new RetailItem(itemName, itemDescription, itemQuantity, itemSalePrice, itemCostPrice);
         }
 
         int beforeSize = itemList.size();
@@ -57,8 +55,8 @@ public class ItemList {
         Item tempItem = itemList.remove(index - 1);
         assert itemList.size() == (beforeSize - 1);
 
-        String output = "Got it! I've removed the following item:"
-                + String.format("\t%s", tempItem);
+        String output = "Got it! I've removed the following item:" + System.lineSeparator()
+                + System.lineSeparator() + tempItem;
         return output;
     }
 
@@ -67,7 +65,7 @@ public class ItemList {
         Item currentItem;
         for (int i = 0 ; i < itemList.size(); i ++) {
             currentItem = itemList.get(i);
-            if (currentItem.getItemName().equals(keyword)) {
+            if (currentItem.getItemName().trim().equals(keyword)) {
                 ITEMLIST_LOGGER.log(Level.INFO, "first matching item at index " + i + " found.");
                 targetIndex = i + 1;
                 break;

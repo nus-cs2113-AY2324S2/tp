@@ -66,7 +66,7 @@ public class Parser {
             if (index <= 0 || index > itemList.getItemCount()) {
                 throw new InvalidArgumentException("Index is out of bounds!");
             }
-            assert index <= 0 || index > itemList.getItemCount();
+            assert index > 0 && index <= itemList.getItemCount();
             return new DeleteCommand(itemList, index);
         } else {
             String keyword = argumentMatcher.group("identifier");
@@ -80,15 +80,17 @@ public class Parser {
         if (!matcher.matches()) {
             throw new InvalidFormatException("Add command is not properly formatted!");
         }
-        String itemName = matcher.group("itemName");
-        String itemDescription = matcher.group("itemDescription");
+        String itemName = matcher.group("itemName").strip();
+        String itemDescription = matcher.group("itemDescription").strip();
         int itemQuantity = Integer.parseInt(
                 Objects.requireNonNullElse(matcher.group("itemQuantity"), "0").strip()
         );
-        Optional<LocalDate> itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
-                .map(x -> x.strip())
-                .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT));
-        double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice"));
+        // itemExpirationDate is optional. If none provided, we will set it as LocalDate.MIN
+        LocalDate itemExpirationDate = Optional.ofNullable(matcher.group("itemExpirationDate"))
+                .map(String::strip)
+                .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
+                .orElse(LocalDate.MIN);
+        double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice")); // Will set as optional later
         double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
         return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,

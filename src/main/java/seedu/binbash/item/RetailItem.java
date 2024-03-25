@@ -1,16 +1,20 @@
 package seedu.binbash.item;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
 public class RetailItem extends Item {
-    public RetailItem(String itemName, String itemDescription, int itemQuantity, Optional<LocalDate> itemExpirationDate,
+    private final double itemSalePrice;
+    public RetailItem(String itemName, String itemDescription, int itemQuantity,
                       double itemSalePrice, double itemCostPrice) {
-        super(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice, itemCostPrice);
+        super(itemName, itemDescription, itemQuantity, itemCostPrice);
+        this.itemSalePrice = itemSalePrice;
+    }
+
+    public double getItemSalePrice() {
+        return itemSalePrice;
     }
 
     @Override
     public String toString() {
-        return "[R] " + super.toString();
+        return "[R] " + super.toString() + System.lineSeparator()
+                + String.format("\tsale price: $%.2f", itemSalePrice);
     }
 }
