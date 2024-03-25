@@ -42,6 +42,9 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`focus resume` - Resume the current focus timer](#resume-the-current-focus-timer-focus-resume)
           - [`focus check` - Check time for focus timer](#check-time-for-focus-timer-focus-check)
           - [`focus set` - Set focus time duration](#set-focus-timer-duration-focus-set)
+      - Fitness Motivator
+          - [`fitness get` - Get a pre-loaded list of different exercises](#get-a-list-of-exercises-fitness-get)
+          - [`fitness add` - Add new exercises into the list](#add-exercises-to-the-list-fitness-add)
 
 ## Quick Start
 
@@ -585,7 +588,7 @@ ________________________________________________________________________________
 ```
 =======
 ### Switch focus timer mode: `focus switch`
-Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose 
+Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose
 between count up timer and count down timer.
 
 Format:
@@ -606,7 +609,7 @@ ________________________________________________________________________________
 
 ### Start a new focus timer: `focus start`
 Allow the user to start a new focus timer session. The user will be able
-to start the timer whenever they want and the application will keep track of the time. 
+to start the timer whenever they want and the application will keep track of the time.
 In addition, only 1 timer will run at a time, thus multiple uses of `focus start` is not allowed.
 
 Format:
@@ -632,10 +635,10 @@ Duration set: 1 minute(s) 0 second(s)
 ________________________________________________________________________________________________________________
 ~~~
 
-### Stop the current focus timer: `focus stop` 
+### Stop the current focus timer: `focus stop`
 > [!NOTE]
 > Countdown timer will automatically stop when the duration expires.
-> 
+>
 Allow users to stop a timer that is currently running. The users will be able to see the total
 time elapsed upon a successful stop.
 
@@ -647,7 +650,7 @@ focus stop
 * Use lower casing for this command.
 
 Expected outcome:
-* Count up timer 
+* Count up timer
 ~~~
 ________________________________________________________________________________________________________________
 Your focus session has ended.
@@ -656,7 +659,7 @@ To start a new session, use ‘focustimer start’
 ________________________________________________________________________________________________________________
 ~~~
 
-* Count down timer 
+* Count down timer
 * Timer will automatically stop if the duration expires. However, users will still be able to stop it manually
 ~~~
 ________________________________________________________________________________________________________________
@@ -682,7 +685,7 @@ ________________________________________________________________________________
 ### Pause the current focus timer: `focus pause`
 Allow users to pause the timer momentarily while the timer is running.
 
-Format: 
+Format:
 ~~~
 focus pause
 ~~~
@@ -758,7 +761,7 @@ ________________________________________________________________________________
 
 ### Set focus timer duration: `focus set`
 > Using `focus set` command only affects count down timer.
-> 
+>
 
 Allow users to set the desired countdown timer duration for the session.
 
@@ -768,7 +771,7 @@ focus set [minutes]
 ~~~
 * The `focus` and `set` are case-sensitive.
 * Use lower casing for this command.
-* Input `minutes` must be in numerical form and can be more than 60. 
+* Input `minutes` must be in numerical form and can be more than 60.
 * Example: *120 minutes implies 2 hours*
 
 Example of usage:
@@ -783,6 +786,58 @@ Countdown duration has been set to 10 minute(s)
 ________________________________________________________________________________________________________________
 
 ~~~
+
+### Get a list of exercises: `fitness get`
+Prints a list of 5 different exercises from 5 different types of exercises targeting different body parts.
+
+Format:
+```
+fitness get
+```
+
+* The `fitness` and `get` are case-sensitive.
+* Use lower casing for this command.
+* The command will generate different exercises with each repeated command, but there should be one exercise from
+  each type
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+These are some of the exercises you can do!
+
+1. Arms: Barbell Curls, 3 sets & 8 reps
+2. Chest: Bench Press, 3 sets & 8 reps
+3. Abs: Crunches, 5 sets & 20 reps
+4. Back: Pull Ups, 3 sets & 6 reps
+5. Legs: Leg Press, 3 sets & 8 reps
+
+________________________________________________________________________________________________________________
+```
+
+### Add exercises to the list: `fitness add`
+Allows the user to add their own exercises to the list.
+
+Format:
+```
+fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
+```
+
+* The `fitness` and `add` is case-sensitive.
+* Use of commands between each parameter is required.
+
+Example of usage (increasing count):
+```
+fitness add Arms, Tricep Dips, 8, 10
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+I have added the following exercise into our list!
+Arms: Tricep Dips, 8 sets & 10 reps
+________________________________________________________________________________________________________________
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

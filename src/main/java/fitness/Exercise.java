@@ -3,18 +3,18 @@ package fitness;
 public class Exercise {
 
     private String exerciseName;
-    private String exerciseType;
+    private ExerciseType exerciseType;
     private String sets;
     private String reps;
 
-    public Exercise(String exerciseName, String exerciseType, String sets, String reps) {
+    public Exercise(String exerciseName, ExerciseType exerciseType, String sets, String reps) {
         this.exerciseName = exerciseName;
         this.exerciseType = exerciseType;
         this.sets = sets;
         this.reps = reps;
     }
 
-    public String getType() {
+    public ExerciseType getType() {
         return exerciseType;
     }
 
