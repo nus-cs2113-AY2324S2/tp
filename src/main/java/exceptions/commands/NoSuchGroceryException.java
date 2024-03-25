@@ -1,5 +1,7 @@
-package exceptions;
+package exceptions.commands;
 
+
+import exceptions.GitException;
 
 /**
  * Represents the exception thrown when the grocery to edit does not exist.

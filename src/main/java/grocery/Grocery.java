@@ -6,7 +6,7 @@ package grocery;
  */
 public class Grocery {
     private String name;
-    private String amount;
+    private int amount;
     private String expiration;
 
     /**
@@ -16,7 +16,7 @@ public class Grocery {
      * @param amount Measurement of grocery.
      * @param expiration When grocery expires.
      */
-    public Grocery(String name, String amount, String expiration) {
+    public Grocery(String name, int amount, String expiration) {
         this.name = name;
         this.amount = amount;
         this.expiration = expiration;
@@ -27,7 +27,7 @@ public class Grocery {
         return name;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -39,8 +39,8 @@ public class Grocery {
         this.name = name;
     }
 
-    public void setAmount(String amount) {
-        assert !(amount.isEmpty()) : "Amount entered is invalid!";
+    public void setAmount(int amount) {
+        assert amount >= 0 : "Amount entered is invalid!";
         this.amount = amount;
     }
 
@@ -55,8 +55,10 @@ public class Grocery {
     public String printGrocery() {
         assert !(this.name.isEmpty()) : "Grocery does not exist!!";
 
-        String amt = (this.amount == null || this.amount.isEmpty()) ? "" : ", amount: " + this.amount;
-        String exp = (this.amount == null || this.expiration.isEmpty()) ? "" : ", expiration: " + this.expiration;
+        // TODO: update amount output according to Grocery subclass
+        // TODO: consider stating amount == 0 now that we track amount ?
+        String amt = (amount == 0) ? "" : ", amount: " + amount;
+        String exp = (expiration == null || expiration.isEmpty()) ? "" : ", expiration: " + expiration;
         return this.name + amt + exp;
     }
 }

@@ -1,4 +1,6 @@
-package exceptions;
+package exceptions.commands;
+
+import exceptions.GitException;
 
 /**
  * Represents the exception thrown when the format is correct, but input is empty.
