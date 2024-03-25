@@ -51,15 +51,42 @@ public class Formatter {
      */
 
 
-    public static void printGoalBeforeShot(int roundCount) {
+    public static void printGoalBeforeShotforBeginner(int roundCount) {
         assert roundCount > 0 : "Round count should be greater than zero.";
         logger.info("Round " + roundCount);
         System.out.println("Round " + roundCount);
         System.out.println("_______________________________");
         System.out.println("|         |         |         |");
+        System.out.println("|         |         |         |");
         System.out.println("|    0    |    1    |    2    |");
         System.out.println("|         |         |         |");
         System.out.println("|         |         |         |");
+        System.out.println("\nSelect direction to shoot : [0-2]");
+    }
+
+    public static void printGoalBeforeShotforMedium(int roundCount) {
+        assert roundCount > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + roundCount);
+        System.out.println("Round " + roundCount);
+        System.out.println("_______________________________");
+        System.out.println("|    0    |    1    |    2    |");
+        System.out.println("|         |         |         |");
+        System.out.println("|_________|_________|_________|");
+        System.out.println("|         |         |         |");
+        System.out.println("|    3    |    4    |    5    |");
+        System.out.println("\nSelect direction to shoot : [0-2]");
+    }
+
+    public static void printGoalBeforeShotforExpert(int roundCount) {
+        assert roundCount > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + roundCount);
+        System.out.println("Round " + roundCount);
+        System.out.println("_______________________________");
+        System.out.println("|    0    |    1    |    2    |");
+        System.out.println("|---------|---------|---------|");
+        System.out.println("|    3    |    4    |    5    |");
+        System.out.println("|---------|---------|---------|");
+        System.out.println("|    6    |    7    |    8    |");
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
 
@@ -71,6 +98,7 @@ public class Formatter {
             System.out.println("|    *    |       * |     *   |");
             System.out.println("|*   *    | *   *   |  *   *  |");
             System.out.println("|      *  |    *    |*      * |");
+            System.out.println("|   *     |*   *  * | *   *   |");
             System.out.println("GOAL!!!!");
         } else {
             logger.info("No goal :((((");
@@ -79,6 +107,7 @@ public class Formatter {
             System.out.println(" \\         \\         \\         \\");
             System.out.println("  \\         \\         \\         \\");
             System.out.println("   \\         \\         \\         \\");
+            System.out.println("    \\         \\         \\         \\");
             System.out.println("no goal :((((");
         }
     }

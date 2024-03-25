@@ -1,15 +1,14 @@
 package seedu.duke.ui;
 
-import seedu.duke.CommandList;
-import seedu.duke.Formatter;
-import seedu.duke.Parser;
-import seedu.duke.SyntaxAnalyser;
+import seedu.duke.*;
 
 import seedu.duke.exception.ProcessInputException;
 import seedu.duke.exception.ArgumentMismatchException;
 import seedu.duke.exception.BadTokenException;
 import seedu.duke.exception.IllegalCommandException;
 
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +74,9 @@ public class Ui {
             break;
         case PENALTY:
             CommandList.executePenalty();
+            break;
+        case UPGRADE:
+            CommandList.executeUpgrade(readArgumentTokens);
             break;
             //insert new executable command here
         default:
