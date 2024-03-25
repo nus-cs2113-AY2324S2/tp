@@ -17,8 +17,8 @@ ____________________________________________________________
 ____________________________________________________________
 Commands List:
 
-new /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run
-new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout
+workout /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run
+workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout
 health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data
 health /h:period /start:START_DATE /end:END_DATE - Add new period data
 history /view:[run/gym/bmi/period] - Show history of runs/gyms/bmi records/periods tracked
@@ -91,30 +91,24 @@ Gym Session 2
 shoulder press: 4 sets of 5 reps at 50 KG
 deadlift: 4 sets of 5 reps at 120 KG
 ____________________________________________________________
-____________________________________________________________
 Added: bmi | 1.80 | 85 | 19-03-2024
 2024-03-19
 Your BMI is 26.23
 You're overweight.
 ____________________________________________________________
-____________________________________________________________
 Your BMI history:
 2024-03-19
 Your BMI is 26.23
 You're overweight.
-____________________________________________________________
 ____________________________________________________________
 Added: bmi | 2.0 | 45.42 | 20-03-2024
 2024-03-20
 Your BMI is 11.36
 You're underweight.
-____________________________________________________________
-____________________________________________________________
 Added: bmi | 1.95 | 85.0 | 21-03-2024
 2024-03-21
 Your BMI is 22.35
 Great! You're within normal range.
-____________________________________________________________
 ____________________________________________________________
 Your BMI history:
 2024-03-19
@@ -132,21 +126,17 @@ ____________________________________________________________
 Your BMI is 22.35
 Great! You're within normal range.
 ____________________________________________________________
-____________________________________________________________
 Added: period | 09-03-2022 | 16-03-2022
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
-____________________________________________________________
 ____________________________________________________________
 Your Period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
 ____________________________________________________________
-____________________________________________________________
 Added: period | 20-11-2022 | 22-12-2022
 Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
-____________________________________________________________
 ____________________________________________________________
 Your Period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
