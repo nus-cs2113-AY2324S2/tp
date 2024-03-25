@@ -1,11 +1,9 @@
 package longah.handler;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.Scanner;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
@@ -19,18 +17,14 @@ import java.util.logging.Level;
 public class PINHandler {
     private static Logger logger = Logger.getLogger("PIN Logger");
     private static final String PIN_FILE_PATH = "./data/pin.txt";
-    private Scanner scanner;
     private String savedPin;
 
+    // @@author jing-xiang
     /**
      * Constructs a new PINHandler instance.
      */
     public PINHandler() {
-        this.scanner = new Scanner(System.in);
-        File f = new File("./data");
-        if (!f.exists()) {
-            f.mkdir();
-        }
+        StorageHandler.initDir();
         if (!Files.exists(Paths.get(PINHandler.getPinFilePath()))|| loadPin().isEmpty()) {
             createPin();
             loadPin();
@@ -53,19 +47,18 @@ public class PINHandler {
      * Creates a new PIN for the user.
      */
     public void createPin() {
-        System.out.println("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!\n"
-                + "Create your 6-digit PIN:\n");
-        String pin = scanner.nextLine();
+        UI.showMessage("Create your 6-digit PIN:");
+        String pin = UI.getUserInput();
 
         // check if the input is a 6-digit number
         while (pin.length() != 6 || !pin.matches("\\d{6}")) {
             if (Objects.equals(pin, "exit")) {
                 System.exit(0);
             }
-            System.out.println("Invalid PIN. Your PIN must be a 6-digit number. " +
+            UI.showMessage("Invalid PIN. Your PIN must be a 6-digit number. " +
                 "Please try again, or enter 'exit' to exit LongAh.");
-            System.out.print("Enter a 6-digit PIN: ");
-            pin = scanner.nextLine();
+            UI.showMessage("Enter a 6-digit PIN: ", false);
+            pin = UI.getUserInput();
         }
 
         assert pin != null : "PIN should not be null.";
@@ -77,10 +70,10 @@ public class PINHandler {
             byte[] hashedPin = md.digest(pin.getBytes(StandardCharsets.UTF_8));
             String hashedPinHex = new BigInteger(1, hashedPin).toString(16);
             Files.write(Paths.get(PIN_FILE_PATH), hashedPinHex.getBytes());
-            System.out.println("PIN saved successfully!");
+            UI.showMessage("PIN saved successfully!");
             logger.log(Level.INFO, "PIN saved successfully!");
         } catch (IOException e) {
-            System.out.println("Error saving PIN. Please try again.");
+            UI.showMessage("Error saving PIN. Please try again.");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -95,7 +88,7 @@ public class PINHandler {
             savedPin = new String(Files.readAllBytes(Paths.get(PIN_FILE_PATH)));
             logger.log(Level.INFO, "User loaded successfully!");
         } catch (IOException e) {
-            System.out.println("Error reading saved PIN. Please try again.");
+            UI.showMessage("Error reading saved PIN. Please try again.");
         }
         return savedPin;
     }
@@ -114,8 +107,8 @@ public class PINHandler {
         String savedPin = getPin();
         assert savedPin != null : "Saved PIN should not be null.";
 
-        System.out.print("Enter your PIN: ");
-        String enteredPin = scanner.nextLine();
+        UI.showMessage("Enter your PIN: ", false);
+        String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
 
         try {
@@ -128,15 +121,15 @@ public class PINHandler {
                 if (Objects.equals(enteredPin, "exit")) {
                     System.exit(0);
                 }
-                System.out.println("Invalid PIN. Please try again. Alternatively, enter 'exit' to exit LongAh.");
-                System.out.println("Enter your PIN:");
-                enteredPin = scanner.nextLine();
+                UI.showMessage("Invalid PIN. Please try again. Alternatively, enter 'exit' to exit LongAh.");
+                UI.showMessage("Enter your PIN:");
+                enteredPin = UI.getUserInput();
                 hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
                 hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
             }
             logger.log(Level.INFO, "Login successful!");
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error authenticating PIN. Please try again.");
+            UI.showMessage("Error authenticating PIN. Please try again.");
         }
     }
 
@@ -144,8 +137,8 @@ public class PINHandler {
      * Resets the PIN for the user.
      */
     public void resetPin() {
-        System.out.print("Enter your current PIN: ");
-        String enteredPin = scanner.nextLine();
+        UI.showMessage("Enter your current PIN: ", false);
+        String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
 
         try {
@@ -159,10 +152,10 @@ public class PINHandler {
                 // If the entered PIN is correct, allow the user to create a new PIN
                 createPin();
             } else {
-                System.out.println("Invalid PIN. Please try again.");
+                UI.showMessage("Invalid PIN. Please try again.");
             }
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error resetting PIN. Please try again.");
+            UI.showMessage("Error resetting PIN. Please try again.");
         }
     }
 }

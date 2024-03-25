@@ -24,7 +24,7 @@ public class UI {
         UI.showMessage("                               /$$  \\ $$                            ");
         UI.showMessage("                              |  $$$$$$/                            ");
         UI.showMessage("                               \\______/                             ");
-        UI.showMessage("Welcome to LongAh!");
+        UI.showMessage("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!");
     }
 
     /**
