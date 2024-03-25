@@ -59,16 +59,16 @@ public class Medication {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = Double.parseDouble(quantity);
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Double getDosage() {
         return dosage;
     }
 
-    public void setDosage(String dosage) {
-        this.dosage = Double.parseDouble(dosage);
+    public void setDosage(Double dosage) {
+        this.dosage = dosage;
     }
 
     public Double getDosageMorning() {
