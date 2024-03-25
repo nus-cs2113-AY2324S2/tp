@@ -159,7 +159,7 @@ public class Output {
      */
     private static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Your BMI history: ");
+        System.out.println("Your BMI history:");
         HealthList.showBmiHistory();
         printLine();
     }
@@ -172,7 +172,7 @@ public class Output {
      */
     private static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Your Period history: ");
+        System.out.println("Your Period history:");
         HealthList.showPeriodHistory();
         printLine();
     }

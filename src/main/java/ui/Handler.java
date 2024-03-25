@@ -75,7 +75,7 @@ public class Handler {
                 default:
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | CustomExceptions.InvalidInput e) {
                 Output.printException(e, ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
@@ -132,7 +132,7 @@ public class Handler {
     }
 
     /**
-     * Handle history command.
+     * Handles history command.
      * Show history of all exercises, run or gym.
      *
      * @param userInput The user input string.
@@ -144,36 +144,87 @@ public class Handler {
         }
     }
 
-    public static void handleDelete(String userInput) {
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String type = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1].trim();
-        String strIndex = inputs[2].split(UiConstant.SPLIT_BY_COLON)[1];
-        int index = Integer.parseInt(strIndex) - 1;
-        Filters parsedFilter = Filters.valueOf(type.toUpperCase());
+    /**
+     * Parses and validates user input for the delete command. Returns a list of parsed user input containing the
+     * filter string and the index.
+     *
+     * @param userInput The user input string.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String[] parseDeleteInput(String userInput) {
+        String[] parsedInputs = new String[2];
         try {
-            switch (parsedFilter) {
-            case BMI:
-                HealthList.deleteBmi(index);
-                break;
-
-            case PERIOD:
-                HealthList.deletePeriod(index);
-                break;
-
-            case GYM:
-                WorkoutList.deleteGym(index);
-                break;
-
-            case RUN:
-                WorkoutList.deleteRun(index);
-                break;
-
-            default:
-                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_PARAMETER_ERROR);
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 3) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
+                        "Usage: delete /item:filter /index:index");
             }
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.OutOfBounds e) {
-            System.out.println(e.getMessage());
+
+            String[] itemSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (itemSplit.length != 2 || !itemSplit[0].equalsIgnoreCase("item")) {
+                throw new CustomExceptions.InvalidInput("Invalid item specification. " +
+                        "Use /item:run/gym/period/bmi");
+            }
+            parsedInputs[0] = itemSplit[1].trim();
+
+            String[] indexSplit = inputs[2].split(UiConstant.SPLIT_BY_COLON);
+            if (indexSplit.length != 2 || !indexSplit[0].equalsIgnoreCase("index")) {
+                throw new CustomExceptions.InvalidInput("Invalid index specification.");
+            }
+
+            try {
+                Integer.parseInt(indexSplit[1].trim());
+            } catch (NumberFormatException e) {
+                throw new CustomExceptions.InvalidInput("Index must be a valid positive integer!");
+            }
+
+            parsedInputs[1] = indexSplit[1].trim();
+            return parsedInputs;
+
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            return null;
         }
+    }
+
+    /**
+     * Handles the delete command.
+     * Deletes an item stored within PulsePilot.
+     *
+     * @param userInput The user input string.
+     */
+    public static void handleDelete(String userInput) throws CustomExceptions.InvalidInput {
+        String[] parsedInputs = parseDeleteInput(userInput);
+        if (parsedInputs != null) {
+            Filters parsedFilter = Filters.valueOf(parsedInputs[0].toUpperCase());
+            int index = Integer.parseInt(parsedInputs[1]) - 1;
+            try {
+                switch (parsedFilter) {
+                case BMI:
+                    HealthList.deleteBmi(index);
+                    break;
+
+                case PERIOD:
+                    HealthList.deletePeriod(index);
+                    break;
+
+                case GYM:
+                    WorkoutList.deleteGym(index);
+                    break;
+
+                case RUN:
+                    WorkoutList.deleteRun(index);
+                    break;
+
+                default:
+                    break;
+                }
+            } catch (CustomExceptions.OutOfBounds e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            throw new CustomExceptions.InvalidInput("Invalid delete command input!");
+        }
+
     }
 
     /**
@@ -285,7 +336,8 @@ public class Handler {
 
             String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
             if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("view")) {
-                throw new CustomExceptions.InvalidInput("Invalid filter used. Use 'run', 'gym', 'period', or 'bmi'.");
+                throw new CustomExceptions.InvalidInput("Invalid filter or flag used!" +
+                        "Use /view:run/gym/period/bmi");
             }
             return filterSplit[1];
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
