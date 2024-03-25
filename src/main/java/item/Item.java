@@ -1,5 +1,4 @@
 package item;
-import constants.UOM;
 
 public class Item {
     public static int numberOfItems;
