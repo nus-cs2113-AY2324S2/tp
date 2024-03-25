@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Paths;
+import java.nio.file.Files;
 
 /**
  * The {@code Storage} class handles file operations for the Health Tracker application.

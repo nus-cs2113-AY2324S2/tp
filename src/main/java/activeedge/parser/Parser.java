@@ -14,6 +14,7 @@ import command.DeleteTaskCommand;
 import command.ActiveEdgeException;
 import command.LogExerciseCommand;
 import command.ShowSummaryCommand;
+import command.ClearCommand;
 
 import activeedge.Storage;
 
@@ -125,6 +126,10 @@ public class Parser {
             }
             else if (input.startsWith("summary")) {
                 new ShowSummaryCommand().execute();
+            }
+            else if(input.equalsIgnoreCase("clear")) {
+                ClearCommand clearCommand = new ClearCommand();
+                clearCommand.execute();
             }
             else {
                 System.out.println("Unknown command.");
