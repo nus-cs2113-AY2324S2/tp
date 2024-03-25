@@ -321,9 +321,9 @@ public class Output {
      * @param status Integer representing whether the storage file has been loaded. If set to 0, file is present. Else,
      *                file is not present.
      */
-    public static void printGreeting(int status) {
+    public static void printGreeting(int status, String name) {
         if (status == 0) {
-            System.out.println("Welcome back, Captain");
+            System.out.println("Welcome back, Captain " + name);
             System.out.println(UiConstant.SUCCESSFUL_LOAD);
         } else {
             System.out.println(UiConstant.MISSING_FILE);

@@ -425,13 +425,14 @@ public class Handler {
     public static void userInduction() {
         String name = in.nextLine();
         System.out.println("Welcome aboard, Captain " + name);
-        LogFile.writeLog("Name entered: " + name, false);
         Output.printLine();
 
         System.out.println("Tips: Enter 'help' to view the pilot manual!");
         System.out.println("Initiating FTL jump sequence...");
 
+        // DataFile.saveName(name);
         LogFile.writeLog("Name Entered: " + name, false);
+
         System.out.println("FTL jump completed.");
     }
 
@@ -460,9 +461,10 @@ public class Handler {
         Output.printWelcomeBanner();
         initialiseScanner();
         LogFile.writeLog("Started bot", false);
-        // Yet to implement : Check for existing save, if not, make a new one
+
         int status = DataFile.loadDataFile();
-        Output.printGreeting(1);
+        //String name = DataFile.loadName();
+        Output.printGreeting(status, "name");
 
         if (status == 1) {
             userInduction();
