@@ -55,9 +55,9 @@ public class LiquidList {
             liquidArrayList.remove(index - 1);
             deleteMessage();
         } catch (IndexOutOfBoundsException e) {
-            logr.log(Level.WARNING, deleteLogIndexMessage(), e);
+            System.out.println(deleteLogIndexMessage());
         } catch (NumberFormatException e) {
-            logr.log(Level.WARNING, deleteLogNumberMessage(), e);
+            System.out.println(deleteLogNumberMessage());
         }
     }
 

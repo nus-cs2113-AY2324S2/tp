@@ -13,6 +13,14 @@ public class CalorieListUi {
         System.out.println("\t Your caloric list is empty. Add new entries to populate your list :)");
     }
 
+    public static String deleteLogIndexMessage() {
+        return "Sorry, this index is invalid. Please enter a positive integer " +
+                "within the size of the list.";
+    }
+    public static String deleteLogNumberMessage() {
+        return "Please enter a valid index!";
+    }
+
     public static void calorieListHeader() {
         System.out.println("\t Your Caloric List:");
     }

@@ -4,6 +4,9 @@ import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
 import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
 import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
 import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
+import static seedu.lifetrack.ui.LiquidListUI.deleteLogIndexMessage;
+import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
+
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,10 +39,9 @@ public class CalorieList {
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
             successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
-            logr.log(Level.WARNING, "Sorry, this index is invalid. Please enter a positive integer " +
-                    "within the size of the list.", e);
+            System.out.println(deleteLogIndexMessage());
         } catch (NumberFormatException e) {
-            logr.log(Level.WARNING, "Please enter a valid index!", e);
+            System.out.println(deleteLogNumberMessage());
         }
     }
 
