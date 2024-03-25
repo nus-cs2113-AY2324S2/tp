@@ -1,6 +1,8 @@
 package sleep;
 
 import exceptions.SleepException;
+import storage.sleep.SleepTrackerStorage;
+import ui.Ui;
 
 import java.time.LocalDate;
 
@@ -12,7 +14,12 @@ public class SleepTracker {
     SleepCycleList sleepCycleList;
 
     public SleepTracker() {
-        this.sleepCycleList = new SleepCycleList();
+        try {
+            this.sleepCycleList = SleepTrackerStorage.loadSleepListFromFile();
+        } catch (SleepException e){
+            Ui.printMessageWithSepNewLine(e.getMessage());
+        }
+
     }
 
     public void listSleepCycles() {
@@ -23,7 +30,7 @@ public class SleepTracker {
         if (sleepCycleList.getSleepCycle(sleepCycleToAdd.getDateOfSleep(), false) >= 0) {
             throw new SleepException("There is already an existing sleep cycle for the date");
         }
-        sleepCycleList.addSleepCycle(sleepCycleToAdd);
+        sleepCycleList.addSleepCycle(sleepCycleToAdd, true);
     }
 
     public void updateSleepCycle(LocalDate date, double newHours) {
@@ -44,5 +51,9 @@ public class SleepTracker {
 
     public void deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate) {
         sleepCycleList.deleteSleepCyclesBetween(startDate, endDate);
+    }
+
+    public void saveSleepCycles() {
+        SleepTrackerStorage.saveSleepListToFile(sleepCycleList.getSleepCycleList());
     }
 }
