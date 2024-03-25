@@ -5,7 +5,7 @@ import seedu.binbash.ItemList;
 import java.util.regex.Pattern;
 
 public class SellCommand extends Command{
-    public static final String command = "sell";
+    public static final String COMMAND = "sell";
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
             "sell\\s+"
                     + "n/(?<itemName>.+?)(?=q/)"
@@ -28,7 +28,7 @@ public class SellCommand extends Command{
 
     @Override
     public boolean execute() {
-        executionUiOutput = itemList.updateItemQuantity(itemName, sellQuantity, command);
+        executionUiOutput = itemList.updateItemQuantity(itemName, sellQuantity, COMMAND);
         return true;
     }
 }

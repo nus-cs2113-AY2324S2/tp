@@ -60,7 +60,7 @@ public class ItemList {
                 continue;
             }
 
-            if (command.trim().equals(RestockCommand.command.trim())) {
+            if (command.trim().equals(RestockCommand.COMMAND.trim())) {
                 newQuantity += itemQuantity;
             } else {
                 newQuantity -= itemQuantity;
