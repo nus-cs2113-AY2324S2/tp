@@ -2,13 +2,14 @@ package activeedge.ui;
 
 import static activeedge.task.TaskList.tasksList;
 
+import activeedge.task.ExerciseTask;
 import activeedge.task.Task;
 import activeedge.task.WaterTask;
-import activeedge.task.LogMeals;
+import activeedge.task.MealTask;
 
 public class CommandUi {
 
-    final static String LINE = "____________________________________________________________\n";
+    static final String LINE = "____________________________________________________________\n";
 
 
     public static void printMealList() {
@@ -48,10 +49,16 @@ public class CommandUi {
 
     }
 
-    public static void printMealLogMessage(LogMeals logMeals) {
-        System.out.println("You've logged " + Integer.toString(logMeals.getServings()) +
-                " servings" + " of " + logMeals.getFoodName() + ".") ;
-        System.out.println("Estimated calories: " + Integer.toString(logMeals.getMealCalories()) + " kcal");
+    public static void printMealLogMessage(MealTask mealTask) {
+        System.out.println("You've logged " + Integer.toString(mealTask.getServings()) +
+                " servings" + " of " + mealTask.getFoodName() + ".") ;
+        System.out.println("Estimated calories: " + Integer.toString(mealTask.getMealCalories()) + " kcal");
+    }
+
+    public static void printExerciseLogMessage(ExerciseTask exerciseTask) {
+        System.out.println("You've logged " + Integer.toString(exerciseTask.getDuration()) +
+                " hours" + " of " + exerciseTask.getExerciseName() + ".") ;
+        System.out.println("Estimated calories burnt: " + Integer.toString(exerciseTask.getCaloriesBurnt()) + " kcal");
     }
 
     public static void printShowCalMessage() {

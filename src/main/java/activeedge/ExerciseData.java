@@ -1,7 +1,8 @@
 package activeedge;
 
 public class ExerciseData {
-    public static String[][] exercises = {
-            {"calisthenics", "running", "400"}
+    public static String[][] exercisesList = {
+            {"calisthenics", "400"},
+            {"running", "300"}
     };
 }
