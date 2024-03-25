@@ -45,6 +45,8 @@ public class Ui {
             "'me'\n\n" +
             "To generate a randomised date idea, simply send me the following: \n" +
             "'idea'\n\n" +
+            "To generate a randomised gift idea, simply send me the following: \n" +
+            "'gift'\n\n" +
             "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
             "'itinerary' [space] '(preferred location)' [space] '(preferred price)'\n\n" +
             "To generate a smart itinerary, simply send me the following AFTER you have completed 'me': \n" +

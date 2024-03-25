@@ -46,7 +46,7 @@ Lau Pa Sat | S | S | F | U
 Potato Head | S | S | W | U
 Fuel X | NE | C | W | U
 Samwitch | NE | C | W | U
-Breakfast Club | NE | C | W | U
+Breakfast Club | NE | C | W | C
 Whisk and Paddle | NE | B | W | U
 Tend Bistro | NE | B | J | U
 Dai Lou | NE | B | C | U
