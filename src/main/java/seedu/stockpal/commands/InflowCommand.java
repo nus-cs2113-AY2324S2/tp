@@ -12,7 +12,10 @@ import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+//@@author leongxingyu
 public class InflowCommand extends TransactionActionCommand {
+
     public static final String COMMAND_KEYWORD = "inflow";
     public static final String COMMAND_DESCRIPTION = "Increases the quantity of a product from the existing amount.";
     public static final String COMMAND_USAGE = "inflow PID a/INCREMENT_AMOUNT";

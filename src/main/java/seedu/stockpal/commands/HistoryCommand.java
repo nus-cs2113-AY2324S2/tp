@@ -16,15 +16,12 @@ public class HistoryCommand extends TransactionActionCommand {
         " of a particular PID";
     public static final String COMMAND_USAGE =
         "history PID";
-
     public static final String[] COMMAND_FLAGS = {
         "PID"
     };
-
     public static final String[] COMMAND_FLAG_DESCRIPTIONS = {
         "Product ID of product"
     };
-
     private final Pid pid;
 
     public HistoryCommand(Integer pidValue) {

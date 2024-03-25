@@ -16,6 +16,11 @@ public class TransactionList {
         transactions.add(toAdd);
     }
 
+
+    /**
+     * @param transactionList TransactionList object.
+     * @param inputPid Matching Pid to search for.
+     */
     public static void findTransactions(TransactionList transactionList, Integer inputPid) {
         TransactionList findList = new TransactionList();
         for (int i = 0; i < transactionList.getSize(); i ++) {
@@ -36,18 +41,31 @@ public class TransactionList {
         Ui.printTransactionTasks(findList);
     }
 
+    /**
+     * Obtain the size of the transaction list
+     */
     public int getSize() {
         return transactions.size();
     }
 
+    /**
+     * Obtain the list of transactions from a Transaction object.
+     */
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
+    /**
+     * Check if the transaction list is empty.
+     */
     public boolean isEmpty() {
         return transactions.isEmpty();
     }
 
+
+    /**
+     * Obtain each transaction object from the list.
+     */
     public Transaction get(int i) {
         return transactions.get(i);
     }

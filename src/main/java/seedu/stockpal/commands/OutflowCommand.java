@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author leongxingyu
 public class OutflowCommand extends TransactionActionCommand {
     public static final String COMMAND_KEYWORD = "outflow";
     public static final String COMMAND_DESCRIPTION = "Decreases the quantity of a product from the existing amount.";
@@ -47,7 +47,9 @@ public class OutflowCommand extends TransactionActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
+        assert productList.getSize() > 0;
         boolean updateSuccessful = productList.decreaseAmount(productIndex, amountToDecrease);
+
         LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
 
         if (updateSuccessful) {
