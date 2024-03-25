@@ -37,11 +37,15 @@ public class JsonImporter {
                 JSONObject  medicationInfoJson = medicationList.getJSONObject(i);
                 Medication med = new Medication(
                         medicationInfoJson.getString("name"),
-                        medicationInfoJson.getString("quantity"),
-                        medicationInfoJson.getString("dosage"),
+                        Double.parseDouble(medicationInfoJson.getString("quantity")),
+                        Double.parseDouble(medicationInfoJson.getString("dosage")),
+                        Double.parseDouble(medicationInfoJson.getString("dosageMorning")),
+                        Double.parseDouble(medicationInfoJson.getString("dosageAfternoon")),
+                        Double.parseDouble(medicationInfoJson.getString("dosageEvening")),
                         medicationInfoJson.getString("expiryDate"),
                         medicationInfoJson.getString("intakeFrequency"),
-                        medicationInfoJson.getString("remarks")
+                        medicationInfoJson.getString("remarks"),
+                        medicationInfoJson.getString("repeat")
                 );
                 medManager.addMedication(med);
             } catch (JSONException e) {

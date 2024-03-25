@@ -1,52 +1,48 @@
-package meditracker.parser;
+package meditracker.command;
 
-import meditracker.command.AddCommand;
-import meditracker.command.Command;
-import meditracker.command.DeleteCommand;
-import meditracker.command.ExitCommand;
-import meditracker.command.ListCommand;
-import meditracker.command.ModifyCommand;
-import meditracker.command.SearchCommand;
-import meditracker.command.TakeCommand;
-import meditracker.command.UntakeCommand;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.MediTrackerException;
 
 /**
  * The Parser class parses user input commands into Command objects.
  */
-public class Parser {
+public class CommandParser {
 
     /**
      * Parses a full command string into a Command object.
+     *
      * @param fullCommand The full command string entered by the user.
      * @return A Command object corresponding to the parsed command.
-     * @throws MediTrackerException If an error occurs during parsing.
+     * @throws MediTrackerException      If an error occurs during parsing.
+     * @throws ArgumentNotFoundException If a required argument is not found.
+     * @throws NullPointerException      If the fullCommand is null.
      */
-    public static Command parse(String fullCommand) throws MediTrackerException, ArgumentNotFoundException {
+    public static Command parse(String fullCommand) throws MediTrackerException, ArgumentNotFoundException,
+            NullPointerException {
         String[] commands = fullCommand.split(" ", 2);
-        String command = commands[0];
         String arguments = (commands.length == 2) ? commands[1] : "";
+        CommandName commandName = CommandName.valueOfLabel(commands[0]);
 
-        switch (command) {
-        case "exit":
+        switch (commandName) {
+        case EXIT:
             return new ExitCommand();
-        case "add":
+        case ADD:
             return new AddCommand(arguments);
-        case "modify":
+        case MODIFY:
             return new ModifyCommand(arguments);
-        case "list":
+        case LIST:
             return new ListCommand(arguments);
-        case "delete":
+        case DELETE:
             return new DeleteCommand(arguments);
-        case "search":
+        case SEARCH:
             return new SearchCommand(arguments);
-        case "take":
+        case TAKE:
             return new TakeCommand(arguments);
-        case "untake":
+        case UNTAKE:
             return new UntakeCommand(arguments);
         default:
-            throw new MediTrackerException();
+            String errorContext = "Invalid MediTracker command! Please refer to the user guide. hello";
+            throw new MediTrackerException(errorContext);
         }
     }
 }

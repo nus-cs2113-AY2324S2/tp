@@ -63,7 +63,7 @@ public class ModifyCommand extends Command {
 
             switch (argumentName) {
             case DOSAGE:
-                medication.setDosage(argumentValue);
+                medication.setDosage(Double.parseDouble(argumentValue));
                 break;
             case EXPIRATION_DATE:
                 medication.setExpiryDate(argumentValue);
@@ -81,7 +81,7 @@ public class ModifyCommand extends Command {
                 dailyMedication.setName(argumentValue);
                 break;
             case QUANTITY:
-                medication.setQuantity(argumentValue);
+                medication.setQuantity(Double.parseDouble(argumentValue));
                 break;
             case REMARKS:
                 medication.setRemarks(argumentValue);

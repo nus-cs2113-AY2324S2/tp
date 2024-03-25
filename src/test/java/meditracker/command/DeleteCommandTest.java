@@ -13,11 +13,15 @@ public class DeleteCommandTest {
         MedicationManager medicationManager = new MedicationManager();
         Medication medication = new Medication(
                 "Medication_A",
-                "60_TAB",
-                "500mg",
+                60.0,
+                500.0,
+                null,
+                null,
+                null,
                 "01/07/25",
                 "morning",
-                "cause_dizziness");
+                "cause_dizziness",
+                "Fortnightly");
         medicationManager.addMedication(medication);
 
         String inputString = "delete -l 1";

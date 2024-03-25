@@ -27,44 +27,46 @@ public class JsonExporterTest {
     public static void initiateMedicationManager() {
         Medication med1 = new Medication(
                 "Test Valid Medication 1",
-                "69",
-                "1",
+                69.0,
+                1.0,
+                null,
+                null,
+                null,
                 "23/11/24",
                 "2",
-                "No Remarks"
+                "No Remarks",
+                ""
         );
 
         Medication med2 = new Medication(
                 "Test Valid Medication 2",
-                "10000",
-                "10.0",
+                10000.0,
+                10.0,
+                null,
+                null,
+                null,
                 "01/01/25",
                 "4",
+                "",
                 ""
         );
 
         Medication med3 = new Medication(
-                "Invalid Medication 3",
-                "",
-                "",
-                "",
-                "",
-                ""
-        );
-
-        Medication med4 = new Medication(
                 "Invalid Medication 4",
-                "999",
-                "3.1425926535",
+                999.0,
+                3.1425926535,
+                null,
+                null,
+                null,
                 "",
                 "",
-                "null"
+                "null",
+                ""
         );
 
         medManager.addMedication(med1);
         medManager.addMedication(med2);
         medManager.addMedication(med3);
-        medManager.addMedication(med4);
     }
 
     @BeforeEach
