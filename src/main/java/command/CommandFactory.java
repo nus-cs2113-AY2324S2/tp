@@ -1,6 +1,7 @@
 package command;
 
 import exception.CommandInputException;
+import ui.CommandType;
 import ui.Parser;
 
 public class CommandFactory {
