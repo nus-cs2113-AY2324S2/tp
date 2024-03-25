@@ -152,6 +152,7 @@ ____________________________________________________________
 Your period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
+Cycle Length: 256 days
 Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________

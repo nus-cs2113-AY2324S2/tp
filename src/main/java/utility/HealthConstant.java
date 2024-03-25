@@ -83,4 +83,13 @@ public class HealthConstant {
     public static final String PERIOD_START_MUST_BE_BEFORE_END = "Start date of period must be before end date.";
     public static final String START_DATE_CANNOT_BE_NULL = "Start date of period cannot be empty.";
     public static final String END_DATE_CANNOT_BE_NULL = "End date of period cannot be empty.";
+    public static final Integer LATEST_THREE_CYCLE_LENGTHS = 3;
+    public static final Integer MINIMUM_SIZE_FOR_PREDICTION = 4;
+    public static final String PREDICT_INPUT = "h:predict";
+    public static final String PREDICT = "predict";
+    public static final String PREDICTED_START_DATE_MESSAGE ="Your next cycle's predicted start date is ";
+    public static final String COUNT_DAYS_MESSAGE = ", in ";
+    public static final String PERIOD_IS_LATE = ". Your period is late by ";
+    public static final String DAYS_MESSAGE = " days.";
+    public static final String UNABLE_TO_MAKE_PREDICTIONS = "Insufficient period cycles to make prediction.";
 }
