@@ -22,7 +22,7 @@ public class FitnessMotivator {
     /**
      * Gets one randomised exercise per type, then prints it to the UI.
      *
-     * @return A string for printing that lists 5 exercises of different type
+     * @return A string that lists 5 exercises of different type
      * */
     public String getExercises() {
         Random random = new Random();
@@ -71,11 +71,12 @@ public class FitnessMotivator {
      *
      * @param type An object of type ExerciseType used for query
      * */
-    public void getTypeExercises(ExerciseType type) {
+    public ArrayList<Exercise> getTypeExercises(ExerciseType type) {
         ArrayList<Exercise> exercisesByType = allExercises.getType(type);
         String message = "Here are the " + type + " exercises as requested!" +
                 System.lineSeparator();
         Ui.printList(exercisesByType, message);
+        return exercisesByType;
     }
 
 }
