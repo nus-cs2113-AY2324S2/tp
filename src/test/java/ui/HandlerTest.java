@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import utility.CustomExceptions;
+import utility.ErrorConstant;
 import utility.WorkoutConstant;
 import workouts.WorkoutList;
 
@@ -41,9 +42,12 @@ class HandlerTest {
         System.setOut(originalOut);
         System.setIn(originalIn);
         System.setErr(originalErr);
-        WorkoutList.clearWorkoutsAndRun();
+        WorkoutList.clearWorkoutsRunGym();
         HealthList.clearBmisAndPeriods();
         Handler.destroyScanner();
+        if (Handler.in == null){
+            return; // Scanner is already closed
+        }
         assert isScannerClosed(Handler.in) : "Scanner is not closed";
     }
 
@@ -87,6 +91,7 @@ class HandlerTest {
         Handler.initialiseScanner();
         Handler.processInput();
         String output = outContent.toString();
+        System.out.println(output);
         assertTrue(output.contains("Successfully added a new run session"));
     }
 
@@ -114,13 +119,16 @@ class HandlerTest {
     void processInput_historyCommand_printsHistoryRun() {
         String inputRun = "WORKOUT /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        Handler.initialiseScanner();
+        Handler.processInput();
+        Handler.destroyScanner();
+
         String inputHistory = "HISTORY /view:run";
         System.setIn(new ByteArrayInputStream(inputHistory.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
-        assertTrue(output.contains("history:"));
+        assertTrue(output.contains("Your run history:"));
     }
 
     /**
@@ -131,6 +139,10 @@ class HandlerTest {
     void processInput_latestCommand_printsLatestRun() {
         String inputRun = "WORKOUT /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(inputRun.getBytes()));
+        Handler.initialiseScanner();
+        Handler.processInput();
+        Handler.destroyScanner();
+
         String inputLatest = "LATEST /view:run";
         System.setIn(new ByteArrayInputStream(inputLatest.getBytes()));
         Handler.initialiseScanner();
@@ -218,7 +230,8 @@ class HandlerTest {
             assertEquals(result6, expected6);
 
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            fail(e.getMessage());
+            e.printStackTrace();
+            fail(ErrorConstant.UNSPECIFIED_ERROR);
         }
     }
 
@@ -249,6 +262,7 @@ class HandlerTest {
 
         // with wrong slash
         String input5 = "WORKOUT \\e:run \\d:30:10 \\t:00:20:10 \\date:15/03/2024";
+
         assertThrows(CustomExceptions.InvalidInput.class, () -> Handler.checkTypeOfExercise(input5));
     }
 
@@ -272,4 +286,6 @@ class HandlerTest {
         String input4 = "WORKOUT /e:run /d:30:10 /t:00:20:10";
         assertThrows(CustomExceptions.InsufficientInput.class, () -> Handler.checkTypeOfExercise(input4));
     }
+
+
 }

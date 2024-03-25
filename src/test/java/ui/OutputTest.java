@@ -36,7 +36,7 @@ class OutputTest {
 
     @AfterEach
     public void cleanup() {
-        WorkoutList.clearWorkoutsAndRun();
+        WorkoutList.clearWorkoutsRunGym();
         HealthList.clearBmisAndPeriods();
         outContent.reset();
     }
@@ -89,9 +89,15 @@ class OutputTest {
     @Test
     void printLatestRun_oneRun_expectOneRunPrinted() throws CustomExceptions.InvalidInput {
         new Run("40:10", "10.3");
-        String expected = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate" +
+        String expected = UiConstant.PARTITION_LINE +
+                System.lineSeparator() +
+                "Your latest run:" +
+                System.lineSeparator() +
+                "Index\t\tType\tTime\t\tDistance\tPace\t\tDate" +
                 System.lineSeparator() +
                 "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\tNA" +
+                System.lineSeparator() +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
@@ -102,7 +108,13 @@ class OutputTest {
      */
     @Test
     void printLatestRun_noRun_expectNoRunMessage() {
-        String expected = "\u001B[31mError: " + WorkoutConstant.NO_RUNS_FOUND + "\u001B[0m" +
+        String expected = UiConstant.PARTITION_LINE +
+                System.lineSeparator() +
+                "\u001B[31mError: " +
+                WorkoutConstant.NO_RUNS_FOUND +
+                "\u001B[0m" +
+                System.lineSeparator() +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
         Output.printLatestRun();
         assertEquals(expected, outContent.toString());
@@ -122,13 +134,19 @@ class OutputTest {
             gym2.addStation("Squat Press", 4, 10, 50);
             gym2.addStation("Lat Press", 20, 4, 10);
 
-            String expected = "Gym Session 2" +
+            String expected = UiConstant.PARTITION_LINE +
+                    System.lineSeparator() +
+                    "Your latest gym:" +
+                    System.lineSeparator() +
+                    "Gym Session 2" +
                     System.lineSeparator() +
                     String.format(WorkoutConstant.GYM_STATION_FORMAT, "Squat Press") +
                     String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
                     System.lineSeparator() +
                     String.format(WorkoutConstant.GYM_STATION_FORMAT, "Lat Press") +
                     String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    System.lineSeparator() +
+                    UiConstant.PARTITION_LINE +
                     System.lineSeparator();
 
             Output.printLatestGym();
@@ -146,7 +164,13 @@ class OutputTest {
      */
     @Test
     void printLatestGym_noGym_expectNoGymMessage() {
-        String expected = "\u001B[31mError: " + WorkoutConstant.NO_GYMS_FOUND + "\u001B[0m" +
+        String expected = UiConstant.PARTITION_LINE +
+                System.lineSeparator() +
+                "\u001B[31mError: " +
+                WorkoutConstant.NO_GYMS_FOUND +
+                "\u001B[0m" +
+                System.lineSeparator() +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
         Output.printLatestGym();
         assertEquals(expected, outContent.toString());
@@ -162,11 +186,15 @@ class OutputTest {
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
         Output.printLatestBmi();
-        String expected = "2024-03-20" +
+        String expected = UiConstant.PARTITION_LINE +
+                System.lineSeparator() +
+                "2024-03-20" +
                 System.lineSeparator()+
                 "Your BMI is 22.89" +
                 System.lineSeparator() +
                 "Great! You're within normal range." +
+                System.lineSeparator() +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
         assertEquals(expected, outContent.toString());
     }
@@ -183,15 +211,19 @@ class OutputTest {
      * Tests the behaviour of the printLatestBmi function when two Period objects are added.
      */
     @Test
-    void printLatestPeriod_twoPeriods_expectOneBmiPrinted() {
+    void printLatestPeriod_twoPeriods_expectOnePeriodPrinted() {
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
         Period secondPeriod = new Period("09-03-2023", "16-03-2023");
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
         Output.printLatestPeriod();
-        String expected = "Period Start: 2023-03-09 Period End: 2023-03-16" +
+        String expected = UiConstant.PARTITION_LINE +
+                System.lineSeparator() +
+                "Period Start: 2023-03-09 Period End: 2023-03-16" +
                 System.lineSeparator() +
                 "Period Length: 8 days" +
+                System.lineSeparator() +
+                UiConstant.PARTITION_LINE +
                 System.lineSeparator();
 
         assertEquals(expected, outContent.toString());

@@ -1,5 +1,6 @@
 package workouts;
 
+import storage.LogFile;
 import utility.CustomExceptions;
 import utility.WorkoutConstant;
 
@@ -121,9 +122,47 @@ public class WorkoutList extends ArrayList<Workout> {
     }
 
     /**
+     * Deletes Gym object based on index.
+     * @param index Index of the Gym object to be deleted.
+     */
+    public static void deleteGym(int index) throws CustomExceptions.OutOfBounds {
+        assert !gyms.isEmpty() : "Gym list is empty.";
+        if (index < 0 || index >= gyms.size()) {
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+        }
+        Gym deletedGym = gyms.get(index);
+        System.out.println("Removed Gym entry with " +
+                deletedGym.stations.size() +
+                " stations.");
+        workouts.remove(deletedGym);
+        gyms.remove(index);
+        LogFile.writeLog("Removed gym with index: " + index, false);
+    }
+
+    /**
+     * Deletes Run object based on index.
+     * @param index Index of the Run object to be deleted.
+     */
+    public static void deleteRun(int index) throws CustomExceptions.OutOfBounds {
+        assert !runs.isEmpty() : "Run list is empty.";
+        if (index < 0 || index >= runs.size()) {
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+        }
+        Run deletedRun = runs.get(index);
+        System.out.println("Removed Run entry with " +
+                deletedRun.distance +
+                "km at " +
+                deletedRun.getPace() +
+                ".");
+        workouts.remove(deletedRun);
+        runs.remove(index);
+        LogFile.writeLog("Removed run with index: " + index, false);
+    }
+
+    /**
      * Clears the workouts, runs and gyms ArrayLists.
      */
-    public static void clearWorkoutsAndRun() {
+    public static void clearWorkoutsRunGym() {
         workouts.clear();
         runs.clear();
         gyms.clear();

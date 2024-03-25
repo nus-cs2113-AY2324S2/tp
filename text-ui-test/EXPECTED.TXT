@@ -98,7 +98,7 @@ Your BMI is 26.23
 You're overweight.
 ____________________________________________________________
 ____________________________________________________________
-Your bmi history:
+Your BMI history:
 2024-03-19
 Your BMI is 26.23
 You're overweight.
@@ -116,7 +116,7 @@ Your BMI is 22.35
 Great! You're within normal range.
 ____________________________________________________________
 ____________________________________________________________
-Your bmi history:
+Your BMI history:
 2024-03-19
 Your BMI is 26.23
 You're overweight.
@@ -128,7 +128,6 @@ Your BMI is 22.35
 Great! You're within normal range.
 ____________________________________________________________
 ____________________________________________________________
-Your latest bmi:
 2024-03-21
 Your BMI is 22.35
 Great! You're within normal range.
@@ -139,7 +138,7 @@ Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
 ____________________________________________________________
 ____________________________________________________________
-Your period history:
+Your Period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
 ____________________________________________________________
@@ -149,14 +148,14 @@ Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________
 ____________________________________________________________
-Your period history:
+Your Period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
+Cycle Length: 256 days
 Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________
 ____________________________________________________________
-Your latest period:
 Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________

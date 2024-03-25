@@ -13,8 +13,10 @@ import java.time.temporal.ChronoUnit;
  */
 public class Period extends Health {
     protected LocalDate startDate;
-    protected LocalDate endDate;
-    protected long length;
+    protected LocalDate endPeriodDate;
+    protected LocalDate endCycleDate;
+    protected long periodLength;
+    protected long cycleLength;
 
     //@@author syj02
     /**
@@ -25,8 +27,11 @@ public class Period extends Health {
      */
     public Period(String stringStartDate, String stringEndDate) {
         this.startDate = Parser.parseDate(stringStartDate);
-        this.endDate = Parser.parseDate(stringEndDate);
-        this.length = calculatePeriodLength();
+        this.endPeriodDate = Parser.parseDate(stringEndDate);
+        this.endCycleDate = null;
+        this.periodLength = calculatePeriodLength();
+        this.cycleLength = 0;
+
     }
 
     /**
@@ -47,8 +52,8 @@ public class Period extends Health {
      * @throws AssertionError if the end date is null
      */
     public LocalDate getEndDate() {
-        assert endDate != null : HealthConstant.END_DATE_CANNOT_BE_NULL;
-        return endDate;
+        assert endPeriodDate != null : HealthConstant.END_DATE_CANNOT_BE_NULL;
+        return endPeriodDate;
     }
 
     /**
@@ -92,9 +97,71 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
-        assert startDate.isBefore(endDate) : HealthConstant.PERIOD_START_MUST_BE_BEFORE_END;
+        assert startDate.isBefore(endPeriodDate) : HealthConstant.PERIOD_START_MUST_BE_BEFORE_END;
         // Add 1 to include both start and end dates
-        return ChronoUnit.DAYS.between(startDate,endDate) + 1;
+        return ChronoUnit.DAYS.between(startDate,endPeriodDate) + 1;
+    }
+
+    /**
+     * Sets the cycle length of the current period based on the start date of the next period.
+     *
+     * @param nextStartDate The start date of the next period.
+     */
+    public void setCycleLength(LocalDate nextStartDate) {
+        this.cycleLength = ChronoUnit.DAYS.between(startDate, nextStartDate);
+    }
+
+
+    /**
+     * Calculates the sum of the cycle lengths of the latest three menstrual cycles.
+     *
+     * @return The sum of the cycle lengths of the latest three menstrual cycles.
+     */
+    public long getLastThreeCycleLengths() {
+        int size = HealthList.getPeriodSize();
+
+
+        long sumOfCycleLengths = 0;
+        for (int i = size - 4; i <= size - 2; i++) {
+            sumOfCycleLengths += HealthList.getPeriod(i).cycleLength;
+        }
+        return sumOfCycleLengths;
+    }
+
+
+    /**
+     * Predicts the start date of the next period based on the average cycle length.
+     *
+     * @return The predicted start date of the next period.
+     */
+    public LocalDate nextCyclePrediction() {
+        long averageCycleLength = getLastThreeCycleLengths() / HealthConstant.LATEST_THREE_CYCLE_LENGTHS;
+        return this.startDate.plusDays(averageCycleLength);
+    }
+
+    /**
+     * Prints a message indicating the number of days until the predicted start date of the next period,
+     * or how many days late the period is if the current date is after the predicted start date.
+     *
+     * @param nextPeriodStartDate The predicted start date of the next period.
+     */
+    public static void printNextCyclePrediction(LocalDate nextPeriodStartDate) {
+        LocalDate today = LocalDate.now();
+        long daysUntilNextPeriod = today.until(nextPeriodStartDate, ChronoUnit.DAYS);
+        if (today.isBefore(nextPeriodStartDate)) {
+            System.out.println(HealthConstant.PREDICTED_START_DATE_MESSAGE
+                    + nextPeriodStartDate +
+                    HealthConstant.COUNT_DAYS_MESSAGE
+                    + daysUntilNextPeriod
+                    + HealthConstant.DAYS_MESSAGE);
+        }
+        if (today.isAfter(nextPeriodStartDate)) {
+            System.out.println(HealthConstant.PREDICTED_START_DATE_MESSAGE
+                    + nextPeriodStartDate
+                    + HealthConstant.PERIOD_IS_LATE
+                    + -daysUntilNextPeriod
+                    + HealthConstant.DAYS_MESSAGE);
+        }
     }
 
     /**
@@ -104,8 +171,14 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        String startDateString = startDate.toString();
-        String endDateString = endDate.toString();
-        return String.format(HealthConstant.PRINT_PERIOD_FORMAT, startDateString, endDateString, length);
+        return "Period Start: "
+                + this.getStartDate()
+                + " Period End: "
+                + this.endPeriodDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + this.periodLength
+                + " days"
+                + (this.cycleLength > 0 ? System.lineSeparator() + "Cycle Length: " + this.cycleLength + " days" : "");
     }
 }

@@ -1,6 +1,9 @@
 package workouts;
 import java.time.LocalDate;
+
+import utility.CustomExceptions;
 import utility.Parser;
+import utility.WorkoutConstant;
 
 /**
  * Represents a Workout object for PulsePilot.
@@ -31,6 +34,32 @@ public abstract class Workout {
     public LocalDate getDate() {
         return date;
     }
+
+
+    /**
+     * Method checks if Exercise Type is valid (e.g. run or gym).
+     * Returns {@code true} if all parameters are valid.
+     * Otherwise, throw {@code CustomExceptions.InvalidInput}  or {@code CustomExceptions.InsufficientInput}
+     *
+     * @param exerciseType String representing the type of exercise which is either {@code run} or {@code gym}
+     * @return {@code true} if all parameters are valid.
+     */
+    public static boolean checkIfExerciseTypeIsValid(String exerciseType) throws CustomExceptions.InvalidInput,
+            CustomExceptions.InsufficientInput {
+        if (exerciseType.isBlank()){
+            throw new CustomExceptions.InsufficientInput(WorkoutConstant.BLANK_INPUT_FOR_EXERCISE);
+        }
+
+        exerciseType = exerciseType.toLowerCase();
+
+        if (!exerciseType.equals(WorkoutConstant.RUN) && ! exerciseType.equals(WorkoutConstant.GYM)) {
+            throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_INPUT_FOR_EXERCISE);
+        }
+
+        return true;
+    }
+
+
 
     /**
      * Retrieves the string representation of a Workout object.
