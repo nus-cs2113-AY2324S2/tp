@@ -29,6 +29,19 @@ class ArgumentParser {
     }
 
     /**
+     * Obtains argument value using start and end index of the raw input list
+     *
+     * @param rawInputSplit List of raw input split by spaces
+     * @param startIndex Start index in rawInputSplit of argument value
+     * @param endIndex End index in rawInputSplit of argument value
+     * @return Corresponding argument value, joined with spaces
+     */
+    private static String getArgumentValue(List<String> rawInputSplit, int startIndex, int endIndex) {
+        List<String> argContentList = rawInputSplit.subList(startIndex, endIndex);
+        return String.join(" ", argContentList).strip();
+    }
+
+    /**
      * Sorts a list of argument flags and their corresponding indexes
      *
      * @param rawInputSplit List of raw input split by spaces
@@ -99,18 +112,5 @@ class ArgumentParser {
         endIndex = rawInputSplit.size();
         String argValue = ArgumentParser.getArgumentValue(rawInputSplit, startIndex, endIndex);
         parsedArguments.put(argKey, argValue);
-    }
-
-    /**
-     * Obtains argument value using start and end index of the raw input list
-     *
-     * @param rawInputSplit List of raw input split by spaces
-     * @param startIndex Start index in rawInputSplit of argument value
-     * @param endIndex End index in rawInputSplit of argument value
-     * @return Corresponding argument value, joined with spaces
-     */
-    private static String getArgumentValue(List<String> rawInputSplit, int startIndex, int endIndex) {
-        List<String> argContentList = rawInputSplit.subList(startIndex, endIndex);
-        return String.join(" ", argContentList);
     }
 }
