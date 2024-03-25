@@ -1,7 +1,9 @@
 Welcome to LongAh!
+Error reading saved PIN and authentication enabled state.
 Create your 6-digit PIN:
 PIN saved successfully!
-Enter your PIN: Enter command: Enter command: Enter command: Amy: $0.0
+Enter command: Invalid command. Use 'help' to see the list of commands.
+Enter command: Enter command: Enter command: Amy: $0.0
 Brandon: $0.0
 
 Enter command: Enter command: Best Way to Solve Debts:
