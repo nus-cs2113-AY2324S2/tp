@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static fitness.FitnessMotivator.FILE_PATH;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static storage.Storage.isFileCreated;
 
 public class FitnessMotivatorTest {
