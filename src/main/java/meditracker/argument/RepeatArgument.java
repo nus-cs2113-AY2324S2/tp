@@ -16,7 +16,8 @@ public class RepeatArgument extends Argument {
                 "-rep",
                 "How often do you need to take this medication?",
                 "How often to take medication (eg: once a day, once every week)",
-                isOptional
+                isOptional,
+                false
         );
     }
 }
