@@ -1,9 +1,10 @@
 package florizz.command;
 
 import florizz.core.FlorizzException;
-import florizz.core.OccasionDictionary;
+import florizz.core.FlowerDictionary;
 import florizz.core.Ui;
 import florizz.objects.Bouquet;
+import florizz.objects.Flower;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,15 @@ public class FlowerCommand extends Command{
     public boolean execute(ArrayList<Bouquet> bouquetList, Ui ui) throws FlorizzException {
         if (occasion.isBlank()) {
             ui.printAllDictFlowerName();
-        } else if (!OccasionDictionary.contains(occasion)){
-            throw new FlorizzException("This occasion does not exist type 'occasion' to get a list of occasions");
-        } else {
-            ui.printOccasionFlower(occasion);
+            return true;
         }
-        return true;
+        try {
+            Flower.Occasion occasionEnum = Flower.stringToOccasion(occasion);
+            ui.printFilteredFlowers(FlowerDictionary.filterByOccasion(occasionEnum),occasion);
+            return true;
+
+        }catch(IllegalArgumentException error){
+            throw new FlorizzException("This occasion does not exist. Type 'occasion' to get a list of occasions");
+        }
     }
 }

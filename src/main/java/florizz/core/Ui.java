@@ -73,8 +73,8 @@ public class Ui {
         System.out.println("4. info <flowerName> - Provide information on chosen flower");
         System.out.println("5. add <flowerName> /q <quantity> /to <bouquetName> - add flower to a bouquet.");
         System.out.println("6. remove <flowerName> /q <quantity> /from <bouquetName> - remove flower from a bouquet.");
-        System.out.println("7. flower - Shows a list of flowers that can be added into mybouquets");
-        System.out.println("8. flower <occasion> - Shows a list of flowers associated with said occasion");
+        System.out.println("7. flowers - Shows a list of flowers that can be added into mybouquets");
+        System.out.println("8. flowers <occasion> - Shows a list of flowers associated with said occasion");
         System.out.println("9. occasion - Shows a list of occasions associated with available flowers.");
         System.out.println("10. bye - Exits the programme");
         printBreakLine();
@@ -104,24 +104,16 @@ public class Ui {
     public void printAllDictFlowerName() {
         System.out.println("Here are all the flowers you can add: ");
         for (int i = 0; i < FlowerDictionary.size(); i++) {
-            System.out.println(" - " + FlowerDictionary.get(i).getFlowerName());
+            System.out.println(" - " + FlowerDictionary.get(i).getNameAndColour());
         }
         printBreakLine();
     }
 
-    /**
-     * print specific flowers for specific occasion inputted
-     *
-     * @param targetOccasion
-     */
-    public void printOccasionFlower(String targetOccasion) {
-        System.out.println("Here are all the flowers related to " + targetOccasion.toLowerCase() + ": ");
-        for (int i = 0; i < FlowerDictionary.size(); i++) {
-            if (FlowerDictionary.get(i).getOccasion().equalsIgnoreCase(targetOccasion)) {
-                System.out.println(FlowerDictionary.get(i).getFlowerName());
-            }
+    public void printFilteredFlowers(ArrayList<Flower> flowers, String filter){
+        System.out.println("Here are all the flowers related to " + filter + ": ");
+        for (Flower flower : flowers){
+            System.out.println("- " + flower.getNameAndColour());
         }
-        printBreakLine();
     }
 
     public boolean printFlowerInfo(String targetFlower) {
@@ -138,9 +130,12 @@ public class Ui {
     /**
      * print all occasions available
      */
-    public void printAllOccasion() {
+    public void printAllOccasions() {
         System.out.println("Here are all the occasions associated with the available flowers: ");
-        OccasionDictionary.print();
+        for (Flower.Occasion occasion : Flower.Occasion.values()){
+            System.out.println("- " + Flower.occasionToString(occasion));
+        }
+
         printBreakLine();
     }
 

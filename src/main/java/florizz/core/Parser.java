@@ -51,7 +51,7 @@ public class Parser {
             case ("help"):
                 command = new HelpCommand();
                 break;
-            case ("flower"):
+            case ("flowers"):
                 command = handleFlowerCommand(input);
                 break;
             case ("info"):
@@ -130,7 +130,7 @@ public class Parser {
     }
 
     private static FlowerCommand handleFlowerCommand(String input) {
-        String occasion  = (input.length() == 6) ? " " : input.substring(input.indexOf(" ") + 1);
+        String occasion  = (input.length() == 7) ? " " : input.substring(input.indexOf(" ") + 1);
         return new FlowerCommand(occasion);
     }
 
