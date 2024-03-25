@@ -148,7 +148,7 @@ public class Handler {
         String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
         String type = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1].trim();
         String strIndex = inputs[2].split(UiConstant.SPLIT_BY_COLON)[1];
-        int index = Integer.parseInt(strIndex);
+        int index = Integer.parseInt(strIndex) - 1;
         Filters parsedFilter = Filters.valueOf(type.toUpperCase());
         try {
             switch (parsedFilter) {
@@ -171,7 +171,7 @@ public class Handler {
             default:
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_PARAMETER_ERROR);
         }
-        } catch (CustomExceptions.InvalidInput e) {
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.OutOfBounds e) {
             System.out.println(e.getMessage());
         }
     }

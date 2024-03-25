@@ -125,16 +125,15 @@ public class WorkoutList extends ArrayList<Workout> {
      * Deletes Gym object based on index.
      * @param index Index of the Gym object to be deleted.
      */
-    public static void deleteGym(int index) {
+    public static void deleteGym(int index) throws CustomExceptions.OutOfBounds {
         assert !gyms.isEmpty() : "Gym list is empty.";
         if (index < 0 || index >= gyms.size()) {
-            System.err.println("Invalid index: " + index);
-            return;
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
         }
         Gym deletedGym = gyms.get(index);
         System.out.println("Removed Gym entry with " +
                 deletedGym.stations.size() +
-                "stations.");
+                " stations.");
         workouts.remove(deletedGym);
         gyms.remove(index);
         LogFile.writeLog("Removed gym with index: " + index, false);
@@ -144,11 +143,10 @@ public class WorkoutList extends ArrayList<Workout> {
      * Deletes Run object based on index.
      * @param index Index of the Run object to be deleted.
      */
-    public static void deleteRun(int index) {
-        assert !runs.isEmpty() : "Gym list is empty.";
+    public static void deleteRun(int index) throws CustomExceptions.OutOfBounds {
+        assert !runs.isEmpty() : "Run list is empty.";
         if (index < 0 || index >= runs.size()) {
-            System.err.println("Invalid index: " + index);
-            return;
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
         }
         Run deletedRun = runs.get(index);
         System.out.println("Removed Run entry with " +
