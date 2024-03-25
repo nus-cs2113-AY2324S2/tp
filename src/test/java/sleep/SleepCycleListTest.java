@@ -22,7 +22,7 @@ public class SleepCycleListTest {
         LocalDate date;
         date = LocalDate.parse("25/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy") );
         SleepCycle cycle = new SleepCycle(2, date);
-        sleepCycleList.addSleepCycle(cycle);
+        sleepCycleList.addSleepCycle(cycle, false);
         assertEquals(1, sleepCycleList.getNumberOfCycles());
     }
 
@@ -33,9 +33,9 @@ public class SleepCycleListTest {
         date1 = LocalDate.parse("25/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         date2 = LocalDate.parse("26/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         SleepCycle cycle = new SleepCycle(2, date1);
-        sleepCycleList.addSleepCycle(cycle);
+        sleepCycleList.addSleepCycle(cycle, false);
         cycle = new SleepCycle(3, date2);
-        sleepCycleList.addSleepCycle(cycle);
+        sleepCycleList.addSleepCycle(cycle,false);
         assertEquals(5, sleepCycleList.getTotalHrsSlept());
     }
 }

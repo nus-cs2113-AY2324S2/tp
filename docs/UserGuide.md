@@ -27,6 +27,13 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
         - Sleep Tracker
           - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
           - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
+          - [`sleep get` - Get hours slept on specific date](#get-hours-slept-on-specific-date-sleep-get)
+          - [`sleep update` - Update hours slept on specific date](#update-hours-slept-on-specific-date)
+          - [`sleep delete` - Delete sleep cycles](#delete-sleep-cycles-sleep-delete)
+            - [Delete Sleep Cycle of a specific date](#delete-sleep-cycle-of-a-specific-date)
+            - [Delete Sleep Cycles before a specific date](#delete-sleep-cycles-before-a-specific-date)
+            - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
+          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
         - Focus Timer
           - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
@@ -403,15 +410,16 @@ sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 
 * The `sleep`, `/date` and `add` are case-sensitive.
 * Use lower casing for this command.
+* `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
 ```
-sleep add 7 /date 18/03/24
+sleep add 7 /date 18/03/2024
 ```
 Expected outcome:
 ```
 ________________________________________________________________________________________________________________
---- SleepCycle for 18/03/24 has been added ---
+--- SleepCycle for 18/03/2024 has been added ---
 ________________________________________________________________________________________________________________
 ```
 
@@ -434,10 +442,148 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 Total hrs slept: 15.0
-1. 27/01/12: 7.0
-2. 30/01/12: 8.0
+1. 27/01/2012: 7.0
+2. 30/01/2012: 8.0
 ________________________________________________________________________________________________________________
 ```
+
+### Get hours slept on specific date: `sleep get`
+Prints number of hours slept on specific date.
+
+Format:
+```
+sleep get [DATE_OF_SLEEP]
+```
+
+* The `sleep` and `get` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep get 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Hours slept on 27/01/2012: 7.0
+________________________________________________________________________________________________________________
+```
+
+### Update hours slept on specific date: `sleep update`
+Updates number of hours slept on specfic date.
+
+Format:
+```
+sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]
+```
+
+* The `sleep`, `update` and `/new` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep update 27/01/2012 /new 9
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Hours of sleep for 27/01/2012 has been updated from 7.0 to 9.0
+________________________________________________________________________________________________________________
+```
+
+### Delete sleep cycles: `sleep delete`
+
+#### Delete Sleep Cycle of a specific date:
+
+Format:
+```
+sleep delete /date [DATE_OF_SLEEP]
+```
+
+* The `sleep`, `delete` and `/date` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /date 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Sleep cycle for 27/01/2012 has been removed from list
+________________________________________________________________________________________________________________
+```
+Format:
+
+#### Delete Sleep Cycles before a specific date:
+
+Format:
+```
+sleep delete /before [DATE_OF_SLEEP]
+```
+
+* The `sleep`, `delete` and `/before` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /date 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+A total of 2 sleep cycles have been deleted
+________________________________________________________________________________________________________________
+```
+
+#### Delete Sleep Cycles within a range of dates:
+
+Format:
+```
+sleep delete /from [START_DATE] /to [END_DATE]
+```
+
+* The `sleep`, `delete`, `/from` and `/to` are case-sensitive.
+* Use lower casing for this command.
+* `START_DATE` and `END_DATE` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /from 27/01/2012 /to 27/02/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+A total of 5 sleep cycles have been deleted
+________________________________________________________________________________________________________________
+```
+
+### Save sleep cycles: `sleep save`
+Allow user to save sleep cycles in a text file located in `FILE_PATH: data/sleep.txt`
+
+Format:
+```
+sleep save
+```
+
+* The `sleep` and `save` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+sleep save
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Saved list to storage file
+________________________________________________________________________________________________________________
+```
+=======
 ### Switch focus timer mode: `focus switch`
 Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose 
 between count up timer and count down timer.
