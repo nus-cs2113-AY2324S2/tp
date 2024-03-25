@@ -123,7 +123,7 @@ public class WorkoutList extends ArrayList<Workout> {
     /**
      * Clears the workouts, runs and gyms ArrayLists.
      */
-    public static void clearWorkoutsAndRun() {
+    public static void clearWorkoutsRunGym() {
         workouts.clear();
         runs.clear();
         gyms.clear();
