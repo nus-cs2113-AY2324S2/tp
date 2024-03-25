@@ -1,8 +1,10 @@
 Height 180 cm
+Weight 67 kg
 Weight 77 kg
+Exercise running 2 600
+Exercise running 2 600
+Goal c 400
 Water 100
-Water -10
 Water 10
-Water -10
-Water -10
-Water -10
+Water 100
+Meal sushi 2 700
