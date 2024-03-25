@@ -49,8 +49,8 @@ public class TransactionListTest {
             transactionList.remove(parts[1]);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -64,8 +64,8 @@ public class TransactionListTest {
             transactionList.listTransactions();
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.NO_TRANSACTION_FOUND);
+            assertTrue(isMessage);
         }
     }
     
@@ -115,8 +115,8 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+            assertTrue(isMessage);
         }
     }
 
@@ -170,8 +170,8 @@ public class TransactionListTest {
             fail();
 
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.TRANSACTIONS_SUMMED_UP.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.TRANSACTIONS_SUMMED_UP);
+            assertTrue(isMessage);
         }
     }
 
@@ -246,8 +246,8 @@ public class TransactionListTest {
             transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -268,9 +268,99 @@ public class TransactionListTest {
             transactionList.editTransactionList(command, memberList);
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.MEMBER_NOT_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.MEMBER_NOT_FOUND);
+            assertTrue(isMessage);
         }
     }
 
+    /**
+     * Test the successful deletion of a member from the transaction list.
+     */
+    @Test
+    public void deleteMember_validMember_success() {
+        try {
+            MemberList memberList = new MemberList();
+            TransactionList transactionList = new TransactionList();
+            memberList.addMember("Alice");
+            memberList.addMember("Bob");
+            memberList.addMember("Charlie");
+            
+            transactionList.addTransaction("Alice p/Bob a/5 p/Charlie a/10", memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            transactionList.deleteMember("Bob", memberList);
+            assertEquals(1, transactionList.getTransactionListSize());
+            String expected = "1.\nLender: Alice\nBorrower 1: Charlie Owed amount: 10.00\n";
+            assertEquals(expected.trim(), transactionList.listTransactions().trim());
+        } catch (LongAhException e) {
+            fail();
+        }
+    }
+
+    /**
+     * Test the successful deletion of a member from the transaction list.
+     * The delete command should invoke behvaiour to remove the transaction.
+     */
+    @Test
+    public void deleteMember_transactionDeleted_exceptionThrown() {
+        try {
+            MemberList members = new MemberList();
+            TransactionList transactions = new TransactionList();
+            members.addMember("Alice");
+            members.addMember("Bob");
+
+            transactions.addTransaction("Alice p/Bob a/5", members);
+            assertEquals(1, transactions.getTransactionListSize());
+            transactions.deleteMember("Bob", members);
+            assertEquals(0, transactions.getTransactionListSize());
+            transactions.listTransactions();
+            fail();
+        } catch (LongAhException e) {
+            String expected = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
+            assertEquals(expected, e.getMessage());
+        }
+    }
+
+    /**
+     * Test the successful deletion of a member from the transaction list.
+     * The delete command should invoke behvaiour to remove the transaction.
+     */
+    @Test
+    public void deleteMember_deleteLender_exceptionThrown() {
+        try {
+            MemberList members = new MemberList();
+            TransactionList transactions = new TransactionList();
+            members.addMember("Alice");
+            members.addMember("Bob");
+
+            transactions.addTransaction("Alice p/Bob a/5", members);
+            assertEquals(1, transactions.getTransactionListSize());
+            transactions.deleteMember("Alice", members);
+            transactions.listTransactions();
+            fail();
+        } catch (LongAhException e) {
+            String expected = ExceptionMessage.NO_TRANSACTION_FOUND.getMessage();
+            assertEquals(expected, e.getMessage());
+        }
+    }
+
+    /**
+     * Test the unsuccessful deletion of a member from the transaction list.
+     */
+    @Test
+    public void deleteMember_memberNotFound_exceptionThrown() {
+        try {
+            MemberList members = new MemberList();
+            TransactionList transactions = new TransactionList();
+            members.addMember("Alice");
+            members.addMember("Bob");
+
+            transactions.addTransaction("Alice p/Bob a/5", members);
+            assertEquals(1, transactions.getTransactionListSize());
+            transactions.deleteMember("Charlie", members);
+            fail();
+        } catch (LongAhException e) {
+            String expected = ExceptionMessage.MEMBER_NOT_FOUND.getMessage();
+            assertEquals(expected, e.getMessage());
+        }
+    }
 }

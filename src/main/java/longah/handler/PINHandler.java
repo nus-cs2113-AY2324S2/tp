@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.Scanner;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
@@ -18,15 +17,15 @@ import java.util.logging.Level;
 public class PINHandler {
     private static final Logger logger = Logger.getLogger("PIN Logger");
     private static final String PIN_FILE_PATH = "./data/pin.txt";
-    private Scanner scanner;
     private String savedPin;
     private boolean authenticationEnabled;
 
+    // @@author jing-xiang
     /**
      * Constructs a new PINHandler instance.
      */
     public PINHandler() {
-        this.scanner = new Scanner(System.in);
+        StorageHandler.initDir();
         loadPinAndAuthenticationEnabled();
         if (!Files.exists(Paths.get(PINHandler.getPinFilePath())) || savedPin.isEmpty()) {
             createPin();
@@ -47,7 +46,7 @@ public class PINHandler {
                 authenticationEnabled = Boolean.parseBoolean(data[1].trim());
             }
         } catch (IOException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error reading saved PIN and authentication enabled state.");
+            UI.showMessage("Error reading saved PIN and authentication enabled state.");
         }
     }
 
@@ -59,7 +58,7 @@ public class PINHandler {
             String data = savedPin + "\n" + authenticationEnabled;
             Files.write(Paths.get(PIN_FILE_PATH), data.getBytes());
         } catch (IOException e) {
-            System.out.println("Error saving PIN and authentication enabled state.");
+            UI.showMessage("Error saving PIN and authentication enabled state.");
         }
     }
 
@@ -76,19 +75,18 @@ public class PINHandler {
      * Creates a new PIN for the user.
      */
     public void createPin() {
-        System.out.println("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!\n"
-                + "Create your 6-digit PIN:\n");
-        String pin = scanner.nextLine();
+        UI.showMessage("Create your 6-digit PIN:");
+        String pin = UI.getUserInput();
 
         // check if the input is a 6-digit number
         while (pin.length() != 6 || !pin.matches("\\d{6}")) {
             if (Objects.equals(pin, "exit")) {
                 System.exit(0);
             }
-            System.out.println("Invalid PIN. Your PIN must be a 6-digit number. " +
+            UI.showMessage("Invalid PIN. Your PIN must be a 6-digit number. " +
                     "Please try again, or enter 'exit' to exit LongAh.");
-            System.out.print("Enter a 6-digit PIN: ");
-            pin = scanner.nextLine();
+            UI.showMessage("Enter a 6-digit PIN: ", false);
+            pin = UI.getUserInput();
         }
 
         assert pin != null : "PIN should not be null.";
@@ -101,10 +99,10 @@ public class PINHandler {
             String hashedPinHex = new BigInteger(1, hashedPin).toString(16);
             savedPin = hashedPinHex;
             savePinAndAuthenticationEnabled();
-            System.out.println("PIN saved successfully!");
+            UI.showMessage("PIN saved successfully!");
             logger.log(Level.INFO, "PIN saved successfully!");
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error saving PIN. Please try again.");
+            UI.showMessage("Error saving PIN. Please try again.");
         }
     }
 
@@ -117,8 +115,8 @@ public class PINHandler {
         }
         assert savedPin != null : "Saved PIN should not be null.";
 
-        System.out.print("Enter your PIN: ");
-        String enteredPin = scanner.nextLine();
+        UI.showMessage("Enter your PIN: ", false);
+        String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
 
         try {
@@ -131,15 +129,15 @@ public class PINHandler {
                 if (Objects.equals(enteredPin, "exit")) {
                     System.exit(0);
                 }
-                System.out.println("Invalid PIN. Please try again. Alternatively, enter 'exit' to exit LongAh.");
-                System.out.println("Enter your PIN:");
-                enteredPin = scanner.nextLine();
+                UI.showMessage("Invalid PIN. Please try again. Alternatively, enter 'exit' to exit LongAh.");
+                UI.showMessage("Enter your PIN:");
+                enteredPin = UI.getUserInput();
                 hashedEnteredPin = md.digest(enteredPin.getBytes(StandardCharsets.UTF_8));
                 hashedEnteredPinHex = new BigInteger(1, hashedEnteredPin).toString(16);
             }
             logger.log(Level.INFO, "Login successful!");
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error authenticating PIN. Please try again.");
+            UI.showMessage("Error authenticating PIN. Please try again.");
         }
     }
 
@@ -147,18 +145,18 @@ public class PINHandler {
      * Resets the PIN for the user or enables/disables authentication upon startup.
      */
     public void resetPin() {
-        System.out.print("Enter your current PIN: (or enter enable/disable to control startup authentication!)");
-        String enteredPin = scanner.nextLine();
+        UI.showMessage("Enter your current PIN: (or enter enable/disable to control startup authentication!)", false);
+        String enteredPin = UI.getUserInput();
         assert enteredPin != null : "Entered PIN should not be null.";
         if (Objects.equals(enteredPin, "disable")) {
             authenticationEnabled = false;
             savePinAndAuthenticationEnabled();
-            System.out.println("Authentication disabled upon startup.");
+            UI.showMessage("Authentication disabled upon startup.");
             return;
         } else if (Objects.equals(enteredPin, "enable")) {
             authenticationEnabled = true;
             savePinAndAuthenticationEnabled();
-            System.out.println("Authentication enabled upon startup.");
+            UI.showMessage("Authentication enabled upon startup.");
             return;
         }
 
@@ -172,10 +170,10 @@ public class PINHandler {
                 // If the entered PIN is correct, allow the user to create a new PIN
                 createPin();
             } else {
-                System.out.println("Invalid PIN. Please try again.");
+                UI.showMessage("Invalid PIN. Please try again.");
             }
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error resetting PIN. Please try again.");
+            UI.showMessage("Error resetting PIN. Please try again.");
         }
     }
 }

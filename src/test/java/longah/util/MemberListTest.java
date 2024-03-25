@@ -2,12 +2,43 @@ package longah.util;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import longah.exception.ExceptionMessage;
 import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
 
 public class MemberListTest {
+    /**
+     * Tests the successful addition of a member to the list.
+     */
+    @Test
+    public void addMember_validName_success() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice");
+            assertEquals(1, memberList.getMemberListSize());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the unsuccessful addition of a member to the list when the name is repeated.
+     */
+    @Test
+    public void addMember_duplicateName_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice");
+            memberList.addMember("Alice");
+            fail();
+        } catch (LongAhException e) {
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.DUPLICATE_MEMBER);
+            assertTrue(isMessage);
+        }
+    }
+
     /**
      * Tests checking of a valid name in the member list.
      */
@@ -62,8 +93,8 @@ public class MemberListTest {
             memberList.listMembers();
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.NO_MEMBERS_FOUND.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.NO_MEMBERS_FOUND);
+            assertTrue(isMessage);
         }
     }
 
@@ -171,8 +202,8 @@ public class MemberListTest {
             memberList.editMemberName("2 Bob");
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
         }
     }
 
@@ -187,8 +218,43 @@ public class MemberListTest {
             memberList.editMemberName("Bob");
             fail();
         } catch (LongAhException e) {
-            String expectedString = ExceptionMessage.INVALID_INDEX.getMessage();
-            assertEquals(expectedString, e.getMessage());
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_INDEX);
+            assertTrue(isMessage);
+        }
+    }
+
+    /**
+     * Tests the successful deletion of a member in the group.
+     * Balance should not be updated at this point as updating is performed after commands are invoked.
+     */
+    @Test
+    public void deleteMember_validName_success() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.addMember("Bob", 10);
+            memberList.deleteMember("Alice");
+            String expected = "Bob: $10.0\n";
+            assertEquals(expected, memberList.listMembers());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the unsuccessful deletion of a member in the group when the name is invalid.
+     */
+    @Test
+    public void deleteMember_invalidName_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice", 5);
+            memberList.addMember("Bob", 10);
+            memberList.deleteMember("Charlie");
+            fail();
+        } catch (LongAhException e) {
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.MEMBER_NOT_FOUND);
+            assertTrue(isMessage);
         }
     }
 }

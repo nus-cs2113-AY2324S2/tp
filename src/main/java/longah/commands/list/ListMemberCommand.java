@@ -4,6 +4,7 @@ import longah.commands.Command;
 import longah.node.Group;
 import longah.util.MemberList;
 import longah.exception.LongAhException;
+import longah.handler.UI;
 
 public class ListMemberCommand extends Command {
     /**
@@ -23,6 +24,6 @@ public class ListMemberCommand extends Command {
      */
     public void execute(Group group) throws LongAhException {
         MemberList members = group.getMemberList();
-        System.out.print(members.listMembers());
+        UI.showMessage(members.listMembers());
     }
 }
