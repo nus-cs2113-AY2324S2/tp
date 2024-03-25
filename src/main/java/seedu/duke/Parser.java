@@ -48,9 +48,12 @@ public class Parser {
 
                 try {
                     float totalAmount = Float.parseFloat(amount);
-                    String[] extractPayer = extractAmount[1].split("/user");
-                    String payerName = extractPayer[0];
-                    Expense newTransaction = new Expense(payerName,totalAmount,extractPayer);
+                    String[] payeeList = extractAmount[1].split("/user");
+                    String payerName = removeWhitespaces(payeeList[0]);
+                    for(int i = 0; i < payeeList.length; i++){
+                        payeeList[i] = removeWhitespaces(payeeList[i]);
+                    }
+                    Expense newTransaction = new Expense(payerName,totalAmount, payeeList);
                 } catch (NumberFormatException e) {
                     System.out.println("Re-enter expense with amount as a proper number.");
                 }
@@ -66,11 +69,16 @@ public class Parser {
             break;
         default:
             // Default clause
+            System.out.println("That is not a command. " +
+                    "Please use one of the commands given here");
+            Help.printHelp();
             break;
         }
+
     }
     private String removeWhitespaces(String item) {
         String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
         return itemWithoutWhitespaces;
     }
+
 }

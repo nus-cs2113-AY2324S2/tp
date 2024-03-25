@@ -2,7 +2,7 @@ package seedu.duke;
 
 public class Help {
     private static final String prompt =
-            "Welcome\n" +
+            "Welcome, here is a list of commands:\n" +
                     "help: Access help menu.\n" +
                     "create <name>: Create a group.\n" +
                     "exit <name>: Exit current group.\n" +
