@@ -15,7 +15,7 @@ public class LongAh {
     private static Group group;
 
     public static void init() {
-        Logging.logInfo("Starting Pre-program preparations.");
+        new Logging();
         UI.showMessage("Welcome to LongAh!");
     }
 
@@ -26,8 +26,9 @@ public class LongAh {
      */
     public static void main(String[] args) {
         init();
+
+        Logging.logInfo("Starting Pre-program preparations.");
         try {
-            new Logging();
             group = new Group("group"); // Give a temporary name for now
             new PINHandler();
         } catch (LongAhException e) {
@@ -39,6 +40,9 @@ public class LongAh {
             try {
                 UI.showCommandPrompt();
                 String command = UI.getUserInput();
+                if (command == null) {
+                    continue;
+                }
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);
 
