@@ -21,9 +21,10 @@ public class ClearCommand extends Command {
      * Executes the clear command.
      * 
      * @param group The group to execute the command on.
+     * @throws LongAhException If unexpected additional parameters are found.
      */
     public void execute(Group group) throws LongAhException {
-        if (!this.taskExpression.equals("")) {
+        if (!this.taskExpression.isEmpty()) {
             throw new LongAhException(ExceptionMessage.INVALID_CLEAR_COMMAND);
         }
 

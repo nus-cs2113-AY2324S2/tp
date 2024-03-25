@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class UI {
     private static Scanner scanner = new Scanner(System.in);
 
+    private static final String SEPARATOR = "____________________________________________________________";
     // @@author haowern98
     /**
      * Displays the welcome message along with ASCII art.
@@ -66,7 +67,7 @@ public class UI {
             System.out.println(message);
         } else {
             System.out.print(message);
-        };
+        }
     }
 
     /**
@@ -78,4 +79,12 @@ public class UI {
     public static boolean hasNextLine() {
         return scanner.hasNextLine();
     }
+
+    /**
+     * Prints a separator.
+     */
+    public static void printSeparator() {
+        System.out.println(SEPARATOR);
+    }
+
 }
