@@ -10,6 +10,36 @@ import longah.exception.ExceptionMessage;
 
 public class MemberListTest {
     /**
+     * Tests the successful addition of a member to the list.
+     */
+    @Test
+    public void addMember_validName_success() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice");
+            assertEquals(1, memberList.getMemberListSize());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests the unsuccessful addition of a member to the list when the name is repeated.
+     */
+    @Test
+    public void addMember_duplicateName_exceptionThrown() {
+        try {
+            MemberList memberList = new MemberList();
+            memberList.addMember("Alice");
+            memberList.addMember("Alice");
+            fail();
+        } catch (LongAhException e) {
+            boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.DUPLICATE_MEMBER);
+            assertTrue(isMessage);
+        }
+    }
+
+    /**
      * Tests checking of a valid name in the member list.
      */
     @Test

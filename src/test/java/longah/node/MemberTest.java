@@ -24,6 +24,9 @@ public class MemberTest {
         }
     }
 
+    /**
+     * Tests the successful creation of a member with a valid name and balance.
+     */
     @Test
     public void memberConstructor_validNameAndBalance_success() {
         try {
@@ -42,6 +45,20 @@ public class MemberTest {
     public void memberConstructor_invalidName_exceptionThrown() {
         try {
             new Member("Alice123-");
+            fail();
+        } catch (Exception e) {
+            boolean isMessage = LongAhException.isMessage((LongAhException) e, ExceptionMessage.INVALID_MEMBER_NAME);
+            assertTrue(isMessage);
+        }
+    }
+
+    /**
+     * Tests the unsuccessful creation of a member with an empty name.
+     */
+    @Test
+    public void memberConstructor_emptyName_exceptionThrown() {
+        try {
+            new Member("");
             fail();
         } catch (Exception e) {
             boolean isMessage = LongAhException.isMessage((LongAhException) e, ExceptionMessage.INVALID_MEMBER_NAME);

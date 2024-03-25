@@ -13,11 +13,9 @@ import longah.commands.Command;
  */
 public class LongAh {
     private static Group group;
-    private static PINHandler pinHandler;
-    private static final Logging logger = new Logging();
 
     public static void init() {
-        Logging.logInfo("Starting Pre-program preparations.");
+        new Logging();
         UI.showMessage("Welcome to LongAh!");
     }
 
@@ -28,9 +26,11 @@ public class LongAh {
      */
     public static void main(String[] args) {
         init();
+
+        Logging.logInfo("Starting Pre-program preparations.");
         try {
             group = new Group("group"); // Give a temporary name for now
-            pinHandler = new PINHandler();
+            new PINHandler();
         } catch (LongAhException e) {
             LongAhException.printException(e);
         }
@@ -38,11 +38,11 @@ public class LongAh {
         Logging.logInfo("Entering main program body. Begin accepting user commands.");
         while (true) {
             try {
-                if (!UI.hasNextLine()) {
-                    System.exit(0);
-                }
-                UI.showMessage("Enter command:", false);
+                UI.showCommandPrompt();
                 String command = UI.getUserInput();
+                if (command == null) {
+                    continue;
+                }
                 Command c = InputHandler.parseInput(command);
                 c.execute(group);
 

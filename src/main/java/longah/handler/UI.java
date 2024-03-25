@@ -24,14 +24,14 @@ public class UI {
         UI.showMessage("                               /$$  \\ $$                            ");
         UI.showMessage("                              |  $$$$$$/                            ");
         UI.showMessage("                               \\______/                             ");
-        UI.showMessage("Welcome to LongAh!");
+        UI.showMessage("Thanks for choosing LongAh! Never worry about owing money during the Year of the Dragon!");
     }
 
     /**
      * Displays the command prompt.
      */
     public static void showCommandPrompt() {
-        System.out.println("Enter command: ");
+        System.out.print("Enter command: ");
     }
 
     /**
