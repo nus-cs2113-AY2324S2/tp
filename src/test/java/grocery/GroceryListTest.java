@@ -82,16 +82,16 @@ public class GroceryListTest {
         try {
             GroceryList gl = new GroceryList();
             gl.addGrocery(new Grocery("Meat", 0, LocalDate.now()));
-            gl.editAmount("Meat", false); // This should probably include an attempt at an amount without the 'a/' indicator
+            gl.editAmount("Meat", false);
             fail("Expected a WrongFormatException to be thrown");
         } catch (WrongFormatException e) {
-            String expectedMessage = "Command is in the wrong format, type \"help\" for more information. amt needs 'a/'";
+            String expectedMessage = 
+                "Command is in the wrong format, type \"help\" for more information.";
             assertEquals(expectedMessage, e.getMessage());
         } catch (GitException e) {
             fail("Expected a WrongFormatException, but another GitException was thrown");
         }
     }
-    
 
     @Test
     public void editAmountUseTrue_amountReaches0_success() {
