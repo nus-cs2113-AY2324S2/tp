@@ -18,8 +18,6 @@ public class ExerciseManager extends ActivityManager {
         if (parser.getAction().isEmpty()) {
             throw new Exceptions.InvalidInput("No action specified");
         }
-        Exercise newExercise;
-        Exercise retrievedExercise;
 
         switch (parser.getAction()) {
         case "add":
@@ -93,12 +91,6 @@ public class ExerciseManager extends ActivityManager {
         }
 
         Exercise retrievedExercise = retrieveExercise(parser);
-        String oldExerciseName = retrievedExercise.getActivityName();
-        int exerciseIndex = activityHashMap.get(oldExerciseName);
-
-        activityHashMap.remove(oldExerciseName);
-        activityHashMap.put(newExerciseName, exerciseIndex);
-
         retrievedExercise.editExerciseName(newExerciseName);
         return newExerciseName;
     }

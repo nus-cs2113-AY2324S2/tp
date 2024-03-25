@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WorkoutTest {
-
     @Test
     public void addExercise_addSingleExerciseToWorkout_success() {
         Workout workout = new Workout("Push Day");
