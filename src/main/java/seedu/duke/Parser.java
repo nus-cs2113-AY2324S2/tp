@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Parser {
-    private final String userInput;
 
     /**
      * List of parameters to extract from user input.
@@ -13,6 +12,8 @@ public class Parser {
      * Add new Keys to extract additional user parameters for future functionality.
      */
     private static final String[] paramKeys = {"amount", "paid", "user"};
+
+    private final String userInput;
 
     /**
      * First word of user input.
@@ -35,22 +36,6 @@ public class Parser {
     }
 
     /**
-     * Creates a new HashMap with Keys equal to additional parameters users might input.
-     * Values are arrays that store user input.
-     *
-     * @return HashMap with Keys in 'additionalFields' and empty array Values.
-     */
-    private HashMap<String, ArrayList<String>> createParams() {
-        HashMap<String, ArrayList<String>> additionalInfo = new HashMap<>();
-
-        for(String paramKey : paramKeys){
-            additionalInfo.put(paramKey, new ArrayList<>());
-        }
-
-        return additionalInfo;
-    }
-
-    /**
      * Constructor for Test purposes.
      */
     public Parser(String userInput, String command, String argument,
@@ -66,6 +51,22 @@ public class Parser {
     public Parser(String userInput) {
         this.userInput = userInput;
         this.parseUserInput();
+    }
+
+    /**
+     * Creates a new HashMap with Keys equal to additional parameters users might input.
+     * Values are arrays that store user input.
+     *
+     * @return HashMap with Keys in 'additionalFields' and empty array Values.
+     */
+    private HashMap<String, ArrayList<String>> createParams() {
+        HashMap<String, ArrayList<String>> additionalInfo = new HashMap<>();
+
+        for(String paramKey : paramKeys){
+            additionalInfo.put(paramKey, new ArrayList<>());
+        }
+
+        return additionalInfo;
     }
 
     /**
