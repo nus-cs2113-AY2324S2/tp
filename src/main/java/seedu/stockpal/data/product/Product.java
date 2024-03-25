@@ -67,7 +67,7 @@ public class Product {
      *
      * @param amountToChange Quantity to increase by
      */
-    public boolean increaseQuantity(Integer amountToChange) {
+    /*public boolean increaseQuantity(Integer amountToChange) {
         try {
             quantity.updateIncreaseQuantity(amountToChange);
             Ui.printToScreen("Quantity updated. " + quantity.toString());
@@ -78,6 +78,8 @@ public class Product {
         }
 
     }
+
+     */
 
     /**
      * Return true if the decrease in quantity is successful.

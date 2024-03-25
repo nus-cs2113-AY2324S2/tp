@@ -26,6 +26,10 @@ public class Quantity implements CommandParameter {
         return this.quantity;
     }
 
+    public void updateQuantity(Integer newQuantity) {
+        quantity = newQuantity;
+    }
+
     public boolean isLowQuantityWarningPrinted() {
         return isLowQuantityWarningPrinted;
     }
@@ -43,17 +47,18 @@ public class Quantity implements CommandParameter {
      *         quantity is larger than the maximum integer INT can hold.
      */
 
-    public void updateIncreaseQuantity(Integer increaseQuantity) throws InventoryQuantityOverflowException {
+    public void updateIncreaseQuantity(Quantity quantity, Integer increaseQuantity)
+            throws InventoryQuantityOverflowException {
         logger.log(Level.INFO, "Updating quantity with increase: " + increaseQuantity);
         assert increaseQuantity != null : "Increase quantity cannot be null";
-        long tentativeQuantity = (long) quantity + (long) increaseQuantity;
+        long tentativeQuantity = (long) quantity.getQuantity() + (long) increaseQuantity;
         assert tentativeQuantity >= 0 : "Tentative Quantity cannot be negative";
         if (tentativeQuantity > MAX_QUANTITY) {
             logger.log(Level.WARNING, "Inventory overflow detected. No change to quantity.");
             throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
         }
         assert tentativeQuantity <= MAX_QUANTITY : "Tentative quantity exceeds MAX_QUANTITY. Integer overflow detected";
-        quantity = (int) tentativeQuantity;
+        updateQuantity((int) tentativeQuantity);
         logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
     }
 

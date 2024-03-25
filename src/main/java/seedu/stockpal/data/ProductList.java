@@ -10,8 +10,11 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
+import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
+
+import static seedu.stockpal.ui.Ui.indentTextIfRequired;
 import static seedu.stockpal.ui.Ui.printToScreen;
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
@@ -82,7 +85,16 @@ public class ProductList {
     public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
 
-        return updatedProduct.increaseQuantity(amountToIncrease);
+        Quantity intialQuantity = updatedProduct.getQuantity();
+        try {
+            intialQuantity.updateIncreaseQuantity(intialQuantity, amountToIncrease);
+            Ui.printToScreen("Quantity updated. " + intialQuantity);
+            return true;
+        } catch (InventoryQuantityOverflowException iqoe) {
+            Ui.printToScreen("Overflow detected. No change to quantity. " + intialQuantity);
+            return false;
+        }
+        //return updatedProduct.increaseQuantity(amountToIncrease);
     }
 
 
