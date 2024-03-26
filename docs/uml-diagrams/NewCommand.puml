@@ -8,12 +8,15 @@ class Item
 class NewCommand
 class Parser
 class Ui
+class FileManager
 
 Command <|. NewCommand
-Item <.. NewCommand
+Item <... NewCommand
 Ui <.. NewCommand
 Inventory <.. NewCommand
-NewCommand <.. Parser
+NewCommand <... Parser
+FileManager <.. NewCommand
+Inventory <.. FileManager
 
 interface Command {
     +execute():void
@@ -42,7 +45,11 @@ class Ui {
 }
 
 class Parser {
-    {static}-ParseNewCommand(input:String):NewCommand
+    {static}-parseNewCommand(input:String):NewCommand
+}
+
+class FileManager {
+    {static}+saveData():void
 }
 
 @enduml
@@ -51,10 +58,10 @@ class Parser {
 hide footbox
 participant "SuperTracker" as SuperTracker <<class>> #f5e3a9
 participant ":NewCommand" as NewCommand #cbf7f4
+participant "FileManager" as FileManager <<class>> #bcf7cf
 participant "Inventory" as Inventory <<class>> #d5eac2
 participant "Ui" as Ui <<class>> #e5c2ea
 participant ":Item" as Item #fbffb2
-
 SuperTracker -> NewCommand : execute()
 activate NewCommand #cbf7f4
 
@@ -72,6 +79,12 @@ NewCommand -> Ui : newCommandSuccess(item:Item)
 activate Ui #e5c2ea
 Ui --> NewCommand
 deactivate Ui
+
+NewCommand -> FileManager : saveData()
+activate FileManager #bcf7cf
+FileManager -> Inventory : getItems()
+FileManager --> NewCommand
+deactivate FileManager
 
 NewCommand --> SuperTracker
 deactivate NewCommand
