@@ -34,7 +34,7 @@ public class SummariseParser {
         if (userInput.contains(SUMMARISE_COMMAND_OPTIONS[FROM_INDEX])) {
             try {
                 String beginIndexAsString = getOptionField(userInputAsArray, SUMMARISE_COMMAND_OPTIONS[FROM_INDEX]);
-                beginIndexAsString = beginIndexAsString.isBlank() ? "0" : beginIndexAsString;
+                beginIndexAsString = beginIndexAsString.isBlank() ? "1" : beginIndexAsString;
                 beginIndex = Integer.parseInt(beginIndexAsString.trim()) - 1;
             } catch (NumberFormatException e) {
                 return new InvalidCommand("Start index cannot be non-integer");
