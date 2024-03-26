@@ -91,6 +91,7 @@ public class Timetable {
         return isRemoved;
     }
 
+    //@@author ZhangWenyue3325
     public void addGrade(String courseCode, String grade) {
         for (ArrayList<Course> courseList : courses) {
             for (Course course : courseList) {
@@ -138,6 +139,7 @@ public class Timetable {
         return index;
     }
 
+    //@@author ZhouJunmin
     @Override
     public String toString() {
         StringBuilder plan = new StringBuilder();
