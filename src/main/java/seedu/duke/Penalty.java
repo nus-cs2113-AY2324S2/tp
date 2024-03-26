@@ -28,7 +28,7 @@ public class Penalty {
      */
     private static int getUserPenaltyDirection() {
         System.out.print(PENALTY_PROMPT);
-        String directionString = Ui.IN.nextLine();
+        String directionString = Ui.userInput;
         int userDirection = convertToShootDirection(directionString);
         return userDirection;
     }
