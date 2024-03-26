@@ -5,7 +5,7 @@ public class LiquidListUI {
     public static final String WHITESPACE = "     ";
 
     public static void deleteMessage() {
-        System.out.println(WHITESPACE + "Successfully delete the liquid record.");
+        System.out.println(WHITESPACE + "Successfully delete the hydration record.");
     }
 
     public static String deleteLogIndexMessage() {
@@ -22,11 +22,11 @@ public class LiquidListUI {
     }
 
     public static void emptyListMessage() {
-        System.out.println(WHITESPACE + "Your liquid list is empty.");
+        System.out.println(WHITESPACE + "Your hydration list is empty.");
         System.out.println(WHITESPACE + "Populate your list with more entries :)");
     }
 
     public static void listHeader() {
-        System.out.println(WHITESPACE + "Your liquid List:");
+        System.out.println(WHITESPACE + "Your hydration List:");
     }
 }

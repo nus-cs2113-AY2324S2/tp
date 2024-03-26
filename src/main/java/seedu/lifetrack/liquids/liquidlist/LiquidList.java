@@ -24,8 +24,7 @@ import static seedu.lifetrack.ui.LiquidListUI.listHeader;
 public class LiquidList {
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
     private ArrayList<LiquidEntry> liquidArrayList;
-    private final int DELETE_PADDING = 15;
-
+    private final int DELETE_PADDING = 16;
     /**
      * Constructs an empty LiquidList.
      */
@@ -67,6 +66,7 @@ public class LiquidList {
      * @param input the input string containing liquid entry information
      */
     public void addEntry(String input) {
+        assert (input.startsWith("hydration add") || input.startsWith("calories out")) : "ensures that input is correct";
         try {
             LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
@@ -87,9 +87,8 @@ public class LiquidList {
             listHeader();
             for (int i = 0; i < liquidArrayList.size(); i++) {
                 LiquidEntry entry = liquidArrayList.get(i);
-                Beverage beverage = entry.getBeverage();
-                System.out.println(WHITESPACE + (i + 1) + ". Beverage: " + beverage.getBeverage()
-                        + ", Volume: " + beverage.getVolume());
+                System.out.println(WHITESPACE + (i + 1) + ". Beverage: " + entry.getDescription()
+                        + ", Volume: " + entry.getVolume() + ", Date: " + entry.getDate());
             }
         }
     }

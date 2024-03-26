@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.*;
+import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 import static seedu.lifetrack.system.parser.ParserLiquid.parseLiquidInput;
 
 public class ParserLiquidTest {
@@ -71,16 +73,10 @@ public class ParserLiquidTest {
 
     @Test
     public void parseLiquidInput_inputWrongOrderVolumeBeforeBeverage_invalidInputExceptionThrown() {
-        // setup test
-        String invalidInput = "liquids in v/1000 b/milo";
-
-        // Call methods to test
         try {
-            parseLiquidInput(invalidInput);
+            parseCaloriesInput("hydration add milo date/202232 v/123");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ before v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals(getIncorrectOrderMessage(), e.getMessage());
         }
     }
 
@@ -116,11 +112,9 @@ public class ParserLiquidTest {
     @Test
     public void parseLiquidInput_missingKeywords_exceptionThrown() {
         try {
-            parseLiquidInput("liquids in");
+            parseCaloriesInput("hydration add milo");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals(getHydrationMissingKeywordsMessage(), e.getMessage());
         }
     }
 
