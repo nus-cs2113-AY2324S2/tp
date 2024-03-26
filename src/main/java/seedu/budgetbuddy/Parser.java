@@ -2,7 +2,6 @@ package seedu.budgetbuddy;
 
 import seedu.budgetbuddy.command.AddExpenseCommand;
 import seedu.budgetbuddy.command.AddSavingCommand;
-import seedu.budgetbuddy.command.EditExpenseCommand;
 import seedu.budgetbuddy.command.EditSavingCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.DeleteExpenseCommand;
