@@ -48,6 +48,8 @@ public class Ui {
             System.out.println("add expense c/CATEGORY a/AMOUNT d/DESCRIPTION");
             System.out.println("edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION");
             System.out.println("delete expense i/INDEX");
+            System.out.println("set budget c/CATEGORY b/BUDGET");
+            System.out.println("budget print");
             break;
         case 2:
             System.out.println("Manage Savings");
