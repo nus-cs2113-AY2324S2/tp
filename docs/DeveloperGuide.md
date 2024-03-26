@@ -58,10 +58,10 @@ This guide will walk developers through the architecture, functionality, and cor
 ## Overview
 The module is divided into two primary classes:
 
-### class: Expenditure
+## class: Expenditure
 This class is responsible for processing expenditure related commands and storing all expenses input by the user
 
-### Key Method
+### ExpenditureList Key Method
 #### addExpenditure(String expenditure, Boolean userAdded)
 Takes in the string input by the user and splits it into the respective parts. "userAdded" checks if the method is called by
 the user or called when reading from a storage file.
@@ -78,7 +78,7 @@ This class is responsible for interacting with the user, collecting inputs,
 and managing the flow of the GPA calculation process. It operates within a loop, 
 allowing the user to perform multiple calculations or exit at any point.
 
-### Key Methods
+### GPACommand Key Methods
 #### processGPACommand(): 
 Orchestrates the overall process, including collecting user inputs and displaying the updated GPA.
 
