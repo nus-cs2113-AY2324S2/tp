@@ -63,11 +63,29 @@ public class Grocery {
 
         // TODO: update amount output according to Grocery subclass
         // TODO: consider stating amount == 0 now that we track amount ?
-        String amt = (amount == 0) ? "" : ", amount: " + amount;
+        String amountString = (amount == 0) ? "" : ", amount: " + amount;
         String exp = (expiration == null) 
             ? " expiration date not set" 
             : ", expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return this.name + amt + exp;
+        String unit = "";
+        switch (category.toLowerCase()){
+            case "fruit":
+                unit = "pieces";
+                break;
+            case "vegetable":
+                unit = "grams";
+                break;
+            case "meat":
+                unit = "grams";
+                break;
+            case "beverage":
+                unit = "ml";
+                break;
+            default:
+                unit = "units";
+                break;
+        }
+        return this.name + " (" + this.category + ") " + amountString + unit + exp;
     }
 }
 

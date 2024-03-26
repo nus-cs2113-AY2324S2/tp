@@ -37,7 +37,8 @@ public class Parser {
         switch (commandParts[0]) {
         case "add":
             String category = ui.promptForCategory();
-            Grocery grocery = new Grocery(commandParts[1], 0, LocalDate.now(), category);
+            int amount = ui.promptForAmount();
+            Grocery grocery = new Grocery(commandParts[1], amount, LocalDate.now(), category);
             String expiration = ui.promptForExpiration();
             grocery.setExpiration(expiration);
             groceryList.addGrocery(grocery);

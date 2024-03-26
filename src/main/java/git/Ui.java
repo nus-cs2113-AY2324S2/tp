@@ -96,6 +96,16 @@ public class Ui {
         return in.nextLine().trim();
     }
 
+    public int promptForAmount(){
+        System.out.println("Please enter the amount (e.g. 3):");
+        try {
+            return Integer.parseInt(in.nextLine().trim());
+        } catch (NumberFormatException e){
+            System.out.println("Please enter a valid integer for the amount (e.g. 3)!");
+            return promptForAmount();
+        }
+    }
+
     /**
      * Reads expiration date from user input.
      */
