@@ -17,6 +17,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 
 /**
  * The {@code Storage} class handles file operations for the Health Tracker application.
@@ -24,6 +28,9 @@ import java.nio.file.Paths;
  * and fetching data from files.
  */
 public class Storage {
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+
 
     /**
      * Ensures that the directory for a given file path exists.
@@ -63,8 +70,8 @@ public class Storage {
      */
     public static void saveLogsToFile(String filePath) {
         try (FileWriter fw = new FileWriter(filePath)) {
-            for (int i = 0; i < UserDetailsList.detailsList.size(); i++) {
-                String out = UserDetailsList.detailsList.get(i).toString();
+            for (int i = 0; i < UserDetailsList.DETAILS_LIST.size(); i++) {
+                String out = UserDetailsList.DETAILS_LIST.get(i).toString();
                 fw.write(out + "\n");
             }
             for (int i = 0; i < TaskList.tasksList.size(); i++) {
@@ -93,12 +100,12 @@ public class Storage {
             int j = 0;
             System.out.println("Welcome new user! Please input your height and weight in whole numbers!");
             try {
-                while(j<1) {
+                while (j < 1) {
                     System.out.println("Please input your height (in cm): ");
                     Scanner scanner = new Scanner(System.in);
                     try {
                         Integer input = Integer.valueOf(scanner.nextLine());
-                        AddHeightCommand addHeightCommand = new AddHeightCommand(input);
+                        AddHeightCommand addHeightCommand = new AddHeightCommand(input, LocalDateTime.now());
                         addHeightCommand.execute();
                         saveLogsToFile("data/data.txt");
                         j++;
@@ -106,12 +113,12 @@ public class Storage {
                         System.out.println("Please input a whole number only");
                     }
                 }
-                while(i<1) {
+                while (i < 1) {
                     System.out.println("Please input your weight (in kg): ");
                     Scanner scanner = new Scanner(System.in);
                     try {
                         Integer input = Integer.valueOf(scanner.nextLine());
-                        AddWeightCommand addWeightCommand = new AddWeightCommand(input);
+                        AddWeightCommand addWeightCommand = new AddWeightCommand(input, LocalDateTime.now());
                         addWeightCommand.execute();
                         saveLogsToFile("data/data.txt");
                         i++;
@@ -123,7 +130,7 @@ public class Storage {
                 throw new RuntimeException(e);
             }
             System.out.println("You can now start logging data!");
-        } else {
+        }else {
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {
                     String task = scanner.nextLine();
@@ -138,25 +145,25 @@ public class Storage {
                         }
                         MealTask newTask = new MealTask(mealName.trim(), // Trim to remove extra space at the end
                                 Integer.parseInt(items[len - 2]),
-                                Integer.parseInt(items[len - 1]));
+                                Integer.parseInt(items[len - 1]), LocalDateTime.now());
                         TaskList.tasksList.add(newTask);
 
                     } else if (task.startsWith("Goal")) {
                         String[] items = task.trim().split(" ");
-                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]));
+                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]), LocalDateTime.now());
                         TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Water")) {
                         String[] items = task.trim().split(" ");
-                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]));
+                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]), LocalDateTime.now());
                         TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
-                        LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]));
-                        UserDetailsList.detailsList.add(newHeight);
+                        LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), LocalDateTime.now());
+                        UserDetailsList.DETAILS_LIST.add(newHeight);
                     } else if (task.startsWith("Weight")) {
                         String[] items = task.trim().split(" ");
-                        LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]));
-                        UserDetailsList.detailsList.add(newWeight);
+                        LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]), LocalDateTime.now());
+                        UserDetailsList.DETAILS_LIST.add(newWeight);
                     } else if (task.startsWith("Exercise")){
                         String[] items = task.trim().split(" ");
                         int len = items.length;
@@ -167,7 +174,7 @@ public class Storage {
                         }
                         ExerciseTask newTask = new ExerciseTask(exerciseName,
                                 Integer.parseInt(items[len - 2]),
-                                Integer.parseInt(items[len - 1]));
+                                Integer.parseInt(items[len - 1]), LocalDateTime.now());
                         TaskList.tasksList.add(newTask);
                     }
                 }
@@ -176,4 +183,12 @@ public class Storage {
             }
         }
     }
+    public static String formatDateTime(LocalDateTime dateTime) {
+        return dateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    public static LocalDateTime parseDateTime(String dateTimeStr) {
+        return LocalDateTime.parse(dateTimeStr, DATE_TIME_FORMATTER);
+    }
 }
+

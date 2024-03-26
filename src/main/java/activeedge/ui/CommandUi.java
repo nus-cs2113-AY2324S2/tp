@@ -7,10 +7,14 @@ import activeedge.task.Task;
 import activeedge.task.WaterTask;
 import activeedge.task.MealTask;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 public class CommandUi {
 
     static final String LINE = "____________________________________________________________\n";
-
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
 
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
@@ -33,7 +37,7 @@ public class CommandUi {
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).toString().startsWith("Meal")) {
                 System.out.print(j + ". " + tasksList.get(i).toString().substring(5));
-                System.out.println(" kcal");
+                System.out.println("");
                 j++;
             }
         }
@@ -42,7 +46,7 @@ public class CommandUi {
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).toString().startsWith("Water")) {
                 System.out.print(k + ". " + tasksList.get(i).toString().substring(6));
-                System.out.println(" ml");
+                System.out.println("");
                 k++;
             }
         }
@@ -147,13 +151,15 @@ public class CommandUi {
         System.out.println("Water goal: " + waterGoal + " ml");
     }
 
+    public static String formatDateTime(LocalDateTime dateTime) {
+        return dateTime.format(DATE_TIME_FORMATTER);
+    }
     public static void printAllTasksClearedMessage() {
         System.out.println("All logged data has been cleared.");
     }
     public static void printDataAlreadyClearedMessage() {
         System.out.println("Logged data has already been cleared.");
     }
-
 
 }
 

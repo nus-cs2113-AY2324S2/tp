@@ -1,9 +1,18 @@
 package activeedge.userdetails;
+import java.time.LocalDateTime;
 
 public class LogHeight extends UserDetails {
-    public LogHeight(Integer value) {
+
+    private LocalDateTime dateTime;
+
+    public LogHeight(Integer value, LocalDateTime dateTime) {
         super(value);
+        this.dateTime = dateTime;
+    }
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public String toString() { return "Height " + this.getValue() + " cm";}
+    public String toString() { return "Height " + this.getValue() + " cm" + " (Recorded on: " + dateTime + ")";}
+
 }

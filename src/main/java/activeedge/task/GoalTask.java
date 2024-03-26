@@ -1,11 +1,14 @@
 package activeedge.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task with a specific goal amount.
  * Extends the Task class.
  */
 public class GoalTask extends Task {
     private int goalAmount; // The amount associated with the goal task.
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a GoalTask object with the provided description and goal amount.
@@ -13,9 +16,10 @@ public class GoalTask extends Task {
      * @param description The description of the goal task.
      * @param goalAmount  The amount associated with the goal task.
      */
-    public GoalTask(String description, int goalAmount) {
+    public GoalTask(String description, int goalAmount, LocalDateTime dateTime) {
         super(description); // Calls the constructor of the superclass (Task) with the provided description.
         this.goalAmount = goalAmount; // Initializes the goal amount.
+        this.dateTime = dateTime;
     }
 
     /**
@@ -34,6 +38,7 @@ public class GoalTask extends Task {
      */
     @Override
     public String toString() {
-        return "Goal " + this.getDescription() + " " + this.getGoalAmount();
+        return "Goal " + this.getDescription() + " "
+                + this.getGoalAmount() + " (Recorded on: " + dateTime + ")";
     }
 }
