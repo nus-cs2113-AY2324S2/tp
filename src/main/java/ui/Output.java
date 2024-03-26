@@ -290,10 +290,10 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);
+                break;
             }
         } catch (CustomExceptions.OutOfBounds | CustomExceptions.InvalidInput e) {
-            System.err.println(e.getMessage());
+            Output.printException(e.getMessage());
         }
     }
 

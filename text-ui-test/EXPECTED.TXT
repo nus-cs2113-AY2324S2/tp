@@ -60,7 +60,7 @@ squats: 4 sets of 5 reps at 100 KG
 ____________________________________________________________
 ____________________________________________________________
 Your gym history:
-Gym Session 1
+Gym Session 1 (Date: NA)
 benchpress: 4 sets of 5 reps at 100 KG
 squats: 4 sets of 5 reps at 100 KG
 ____________________________________________________________
@@ -77,17 +77,17 @@ deadlift: 4 sets of 5 reps at 120 KG
 ____________________________________________________________
 ____________________________________________________________
 Your gym history:
-Gym Session 1
+Gym Session 1 (Date: NA)
 benchpress: 4 sets of 5 reps at 100 KG
 squats: 4 sets of 5 reps at 100 KG
 ____________________________________________________________
-Gym Session 2
+Gym Session 2 (Date: NA)
 shoulder press: 4 sets of 5 reps at 50 KG
 deadlift: 4 sets of 5 reps at 120 KG
 ____________________________________________________________
 ____________________________________________________________
 Your latest gym:
-Gym Session 2
+Gym Session 2 (Date: NA)
 shoulder press: 4 sets of 5 reps at 50 KG
 deadlift: 4 sets of 5 reps at 120 KG
 ____________________________________________________________
