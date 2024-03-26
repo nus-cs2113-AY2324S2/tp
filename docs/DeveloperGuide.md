@@ -8,7 +8,7 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-# Tracking Exercise Feature
+### Tracking Exercise Feature
 - Create a CSV which stores data regarding how many calories are burnt per hour for each exercise type (eg. swimming, running, cycling).
 - Implement a 'track exercise' function which will be parsed with the format:
   track exercise t/{type of exercise} d/{duration of exercise}
