@@ -18,7 +18,7 @@ public class ReportCommand implements Command{
 
     @Override
     public void execute() {
-        List<Item> items = Inventory.items();
+        List<Item> items = Inventory.getItems();
         List<Item> reportItems = new ArrayList<>();
         LocalDate currDate = LocalDate.now();
         if (reportType.equals("low stock")) {

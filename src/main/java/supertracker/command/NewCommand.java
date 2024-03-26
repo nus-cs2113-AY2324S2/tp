@@ -1,9 +1,12 @@
 package supertracker.command;
 
+import supertracker.storage.FileManager;
+import supertracker.ui.ErrorMessage;
 import supertracker.ui.Ui;
 import supertracker.item.Inventory;
 import supertracker.item.Item;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class NewCommand implements Command {
@@ -29,6 +32,12 @@ public class NewCommand implements Command {
         Item item = new Item(name, quantity, price, expiryDate);
         Inventory.put(name, item);
         Ui.newCommandSuccess(item);
+
+        try {
+            FileManager.saveData();
+        } catch (IOException e) {
+            Ui.printError(ErrorMessage.FILE_SAVE_ERROR);
+        }
     }
 
     @Override

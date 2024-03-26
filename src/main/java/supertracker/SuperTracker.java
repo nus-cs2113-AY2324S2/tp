@@ -4,9 +4,11 @@ import supertracker.command.Command;
 import supertracker.command.InvalidCommand;
 import supertracker.command.QuitCommand;
 import supertracker.parser.Parser;
+import supertracker.storage.FileManager;
 import supertracker.ui.ErrorMessage;
 import supertracker.ui.Ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import java.util.logging.FileHandler;
@@ -34,6 +36,12 @@ public class SuperTracker {
     private static void run() {
         setupLogger();
         logger.info(START_MESSAGE);
+
+        try {
+            FileManager.loadData();
+        } catch (IOException e) {
+            Ui.printError(ErrorMessage.FILE_CORRUPTED_ERROR);
+        }
 
         Ui.greetUser();
         handleCommands();

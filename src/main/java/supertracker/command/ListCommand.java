@@ -30,7 +30,7 @@ public class ListCommand implements Command {
         assert isValid(sortBy);
 
         int index = 1;
-        List<Item> items = Inventory.items();
+        List<Item> items = Inventory.getItems();
         Ui.listIntro(items.size());
 
         switch (sortBy) {

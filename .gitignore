@@ -19,3 +19,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Log files
 supertracker.log
 supertracker.log.lck
+
+# Data files
+/data/
