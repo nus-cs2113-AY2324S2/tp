@@ -147,7 +147,7 @@ The ListCommand class is responsible for sorting and printing out the products i
 * `execute`: Method to list out the products in the product list.
 * `sortListAccordingly`: Method to sort the list according to the products' PID, products' name or products' quantity.
 
-The following sequence diagram shows how an add operation works:
+The following sequence diagram shows how a list operation works, by calling `list`.
 <img src="images/ListCommandSequence.png" alt=""/>
 --------------------------------------------------------------------------------------------------------------------
 
