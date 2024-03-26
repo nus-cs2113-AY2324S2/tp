@@ -12,6 +12,7 @@ import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
 import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
+import seedu.stockpal.exceptions.NoLowQuantityException;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
 
@@ -111,12 +112,17 @@ public class ProductList {
      * @return true is quantity updated successfully, else false if exception thrown
      */
     private boolean updateQuantity(Quantity initialQuantity, int amount, String operation) {
+        assert amount > 0 : "Amount should be greater than zero.";
+        assert ("increase".equals(operation) || "decrease".equals(operation)) :
+                "Operation should be 'increase' or 'decrease'.";
         try {
             if ("increase".equals(operation)) {
                 initialQuantity.updateIncreaseQuantity(initialQuantity, amount);
-            } else if ("decrease".equals(operation)) {
+            } else {
                 initialQuantity.updateDecreaseQuantity(initialQuantity, amount);
             }
+
+            initialQuantity.notifyLowQuantity(initialQuantity);
             Ui.printToScreen("Quantity updated. " + initialQuantity);
             return true;
         } catch (InventoryQuantityOverflowException iqoe) {
@@ -176,13 +182,12 @@ public class ProductList {
     }
 
     /**
-     * Checks if product is low in quantity
-     * If low, then prints out before the program exits
-     * Else, if no low quantity products at all, print out "No product with low quantity"
+     * Method to check if product has low quantity.
+     *
+     * @return return True is product is of low quantity
+     *          return false if otherwise
      */
-    public void printLowQuantityProducts () {
-        boolean hasLowQuantity = false;
-
+    private boolean checkLowQuantityProducts () {
         Ui.printLowQuantityAlert();
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
@@ -190,13 +195,34 @@ public class ProductList {
                 Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
                         productQuantity);
                 Ui.printToScreen(HORIZONTAL_LINE);
-                hasLowQuantity = true;
+                return true;
             }
         }
+        return false;
+    }
 
+    /**
+     * Checks if there is any low quantity product.
+     * If there is no low quantity product, then throw exception
+     *
+     * @param hasLowQuantity boolean to check if product has low quantity
+     * @throws NoLowQuantityException Exception to catch that there is no low quantity products
+     */
+    private void printNoLowQuantity (boolean hasLowQuantity) throws NoLowQuantityException {
         if (!hasLowQuantity) {
+            throw new NoLowQuantityException("No products with low quantity");
+        }
+    }
+
+    /**
+     * Driver function to print low quantity products from the product list.
+     */
+    public void printLowQuantityProducts () {
+        try {
+            boolean hasLowQuantity = checkLowQuantityProducts();
+            printNoLowQuantity(hasLowQuantity);
+        } catch (NoLowQuantityException nlqe) {
             Ui.printNoLowQuantity();
-            Ui.printToScreen(HORIZONTAL_LINE);
         }
     }
 }
