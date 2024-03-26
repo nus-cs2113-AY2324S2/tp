@@ -34,7 +34,25 @@ the command `Create order -menu 01`, `add -item 001` and `complete`.
 
 ![Sequence Diagram](images\ArchitectureSequanceDiagram.png)
 
+### Model Component
+The model consists of classes describing the objects used in this application.
+
+* [**`ItemManager`**](#model-component): An interface containing methods representing operations common to **`Menu`** 
+  and **`Order`**. <br><br />
+* [**`Item`**](#model-component): An abstract class representing a food item. It should be implemented by **`MenuItem`**.
+  <br><br />
+* [**`Menu`**](#model-component): A class representing the menu(s) of the restaurant, where each contains menuItem(s)
+ that can be ordered. Multiple menus can exist and each has a unique ID. <br><br />
+* [**`MenuItem`**](#model-component): A class inheriting item, and represents a food item on the menu. <br><br />
+* [**`Order`**](#model-component): A class representing an order to be entered into the system to be kept track of. Each 
+  order has a unique ID generated from the time of order.<br><br />
+* [**`SetMenu`**](#model-component): An enumeration representing the different types of set menus available, examples of
+  which includes *breakfast*, *lunch*, *dinner*.
+
 ## Implementation
+
+### 
+
 
 ## Product scope
 ### Target user profile
