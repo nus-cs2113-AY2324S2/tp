@@ -84,4 +84,91 @@ public class Parser {
         }
         return parts;
     }
+
+    /**
+     * Parses and validates user input for the delete command. Returns a list of parsed user input containing the
+     * filter string and the index.
+     *
+     * @param userInput The user input string.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String[] parseDeleteInput(String userInput) throws CustomExceptions.InvalidInput {
+        String[] parsedInputs = new String[2];
+        try {
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 3) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format." +
+                        System.lineSeparator() +
+                        "Usage: delete /item:filter /index:index");
+            }
+
+            String[] itemSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (itemSplit.length != 2 || !itemSplit[0].equalsIgnoreCase("item")) {
+                throw new CustomExceptions.InvalidInput("No item specified." +
+                        System.lineSeparator() +
+                        "Use /item:run/gym/period/bmi");
+            }
+
+            validateFilter(itemSplit[1].trim());
+            String[] indexSplit = inputs[2].split(UiConstant.SPLIT_BY_COLON);
+            if (indexSplit.length != 2 || !indexSplit[0].equalsIgnoreCase("index")) {
+                throw new CustomExceptions.InvalidInput("No index specified");
+            }
+
+            Integer.parseInt(indexSplit[1].trim());
+            parsedInputs[1] = indexSplit[1].trim();
+            return parsedInputs;
+
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            Output.printException(e.getMessage());
+            return null;
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput("Index must be a valid positive integer.");
+        }
+    }
+
+    /**
+     * Validates whether the filter string is either 'run', 'gym', 'bmi' or 'period'.
+     *
+     * @param filter The filter string to be checked.
+     * @throws CustomExceptions.InvalidInput If the filter string is none of them.
+     */
+    public static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
+        if (filter.equals(WorkoutConstant.RUN) || filter.equals(WorkoutConstant.GYM) ||
+                filter.equals(HealthConstant.BMI) || filter.equals(HealthConstant.PERIOD)) {
+            return;
+        }
+        throw new CustomExceptions.InvalidInput("Invalid item specified." +
+                System.lineSeparator() +
+                "/item:run/gym/bmi/period");
+    }
+
+    //@@author JustinSoh
+    /**
+     * Function validates and parses the user input for the history and latest commands.
+     *
+     * @param userInput String representing the user input.
+     * @return The filter string, set to either 'gym', 'run', 'bmi' or 'period'.
+     */
+    public static String parseHistoryAndLatestInput(String userInput) {
+        try {
+            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
+            if (inputs.length != 2) {
+                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
+                        System.lineSeparator() +
+                        "Usage: history/latest /view:filter");
+            }
+            String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
+            if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("item")) {
+                throw new CustomExceptions.InvalidInput("No filter used!" +
+                        System.lineSeparator() +
+                        "Use /view:run/gym/period/bmi");
+            }
+            validateFilter(filterSplit[1].toLowerCase());
+            return filterSplit[1].toLowerCase();
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            Output.printException(e.getMessage());
+            return null;
+        }
+    }
 }

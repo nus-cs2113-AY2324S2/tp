@@ -209,10 +209,10 @@ public class Run extends Workout {
         String[] stringTimeParts = inputTime.split(UiConstant.SPLIT_BY_COLON);
         int inputLength = stringTimeParts.length;
         int hours = 0;
-        int minute = 0;
-        int seconds = 0;
+        int minute;
+        int seconds;
 
-        // if it is neither in MM:SS or HH:MM:SS format
+        // if it is neither in MM:SS nor HH:MM:SS format
         if (inputLength != UiConstant.MAX_RUNTIME_ARRAY_LENGTH && inputLength != UiConstant.MIN_RUNTIME_ARRAY_LENGTH) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_INVALID_FORMAT_ERROR);
         }
