@@ -19,7 +19,6 @@ public enum CEGModules {
     MA1512(2),
     MA1508E(4),
     EG2401A(2),
-    CP3880(12),
     EG3611A(10),
     CG1111A(4),
     CG2111A(4),
@@ -35,14 +34,14 @@ public enum CEGModules {
 
     private final int moduleMC;
 
-    CEGModules(int moduleMC){
+    CEGModules(int moduleMC) {
         this.moduleMC = moduleMC;
     }
 
-    public int getModuleMC(){
+    public int getModuleMC() {
         return moduleMC;
     }
-
+    
     public static CEGModules mapStringToEnum(String moduleCode) {
         for (CEGModules cegModule : CEGModules.values()) {
             if (cegModule.name().equalsIgnoreCase(moduleCode)) {
@@ -51,4 +50,6 @@ public enum CEGModules {
         }
         throw new IllegalArgumentException("No module code " + moduleCode + " found in CEGModules");
     }
+
+
 }

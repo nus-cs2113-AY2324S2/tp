@@ -85,7 +85,8 @@ public class Ui {
         printHyphens();
     }
 
-    public static void printModulesToComplete(ArrayList<String> modulesToComplete) {
+    public static void printModulesToComplete(ArrayList<String> modulesToComplete,
+                                              Integer unrestrictedElectiveMCToComplete) {
         int courseCodeTableWidth = 25, mcTableWidth = 10;
         System.out.println("+---------------------------+------------+");
         System.out.println("| Course Code               | MCs        |");
@@ -97,6 +98,7 @@ public class Ui {
             System.out.println(paddedModuleCode + paddedModuleMC);
         }
         System.out.println("+---------------------------+------------+");
+        System.out.println("Unrestricted elective MCs left to take: " + unrestrictedElectiveMCToComplete);
     }
 
     public static void printHyphens() {

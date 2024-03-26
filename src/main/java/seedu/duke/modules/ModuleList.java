@@ -47,10 +47,11 @@ public class ModuleList {
     }
 
     public void printModules() {
-        for (Module module:takenModuleList) {
+        for (Module module : takenModuleList) {
             System.out.println(module.getModuleCode());
         }
     }
+
     public void removeModule(Module module) {
         assert module != null : "Module cannot be null";
         // The remove operation returns false if the item was not found
@@ -64,15 +65,15 @@ public class ModuleList {
         if (moduleCode == null || moduleCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Module code cannot be null or empty.");
         }
-        try{
+        try {
             Module toChange = getModule(moduleCode);
             toChange.setModuleGrade(grade);
             System.out.println("Grade for " + moduleCode + " updated to " + grade);
             assert toChange.getModuleGrade().equals(grade) : "Grade is not updated successfully";
 
-        } catch (ModuleNotFoundException e){
+        } catch (ModuleNotFoundException e) {
             System.out.println("Module not found in list");
-        } catch (ModuleException e){
+        } catch (ModuleException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -81,18 +82,18 @@ public class ModuleList {
         int totalMC = 0;
         double sumOfGPA = 0;
         for (Module module : takenModuleList) {
-            if(module.getModuleGrade() == null || module.getModuleGrade().equals("CS") ||
-                    module.getModuleGrade().equals("CU") ) {
+            if (module.getModuleGrade() == null || module.getModuleGrade().equals("CS") ||
+                    module.getModuleGrade().equals("CU")) {
                 continue;
             }
             totalMC += module.getModuleMC();
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
-        if(sumOfGPA == 0) {
+        if (sumOfGPA == 0) {
             LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
             throw new GpaNullException("No countable grades present to tally.");
         }
-        return sumOfGPA/(double)totalMC;
+        return sumOfGPA / (double) totalMC;
     }
 
     public Map<Integer, ArrayList<Module>> groupModulesBySemester() {
@@ -108,19 +109,31 @@ public class ModuleList {
         return moduleBySemMap;
     }
 
-    public boolean containsModule(String moduleCode){
-        for(Module takenModule : takenModuleList){
-            if(moduleCode.equals(takenModule.getModuleCode())){
+    public boolean containsModule(String moduleCode) {
+        for (Module takenModule : takenModuleList) {
+            if (moduleCode.equals(takenModule.getModuleCode())) {
                 return true;
             }
         }
         return false;
     }
 
-    public ArrayList<String> getModulesToComplete(){
+    public Integer getUEModuleMCToComplete() {
+        int totalUnrestrictedElectivesMCs = 40, takenUnrestrictedElectiveMCs = 0;
+        for (Module takenModule : takenModuleList) {
+            try {
+                CEGModules.mapStringToEnum(takenModule.getModuleCode());
+            } catch (IllegalArgumentException e) {
+                takenUnrestrictedElectiveMCs += takenModule.getModuleMC();
+            }
+        }
+        return Math.max(totalUnrestrictedElectivesMCs - takenUnrestrictedElectiveMCs, 0);
+    }
+
+    public ArrayList<String> getModulesToComplete() {
         ArrayList<String> modulesToComplete = new ArrayList<>();
-        for(CEGModules cegModule : CEGModules.values()){
-            if(!containsModule(cegModule.name())){
+        for (CEGModules cegModule : CEGModules.values()) {
+            if (!containsModule(cegModule.name())) {
                 modulesToComplete.add(cegModule.name());
             }
         }
