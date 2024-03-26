@@ -1,4 +1,6 @@
-package seedu.duke;
+package expenditure;
+
+import seedu.duke.InvalidInputFormatException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +16,7 @@ public class ExpenditureList {
         expenditureCount = 0;
     }
 
-    protected static void listExpensesByMonth(String monthYear) {
+    public static void listExpensesByMonth(String monthYear) {
         assert monthYear.length() == 7;
         if (!monthYear.matches("\\d{2}\\.\\d{4}")) {
             System.out.println("Month and year format incorrect! Please use MM.yyyy format.");
@@ -47,7 +49,7 @@ public class ExpenditureList {
         }
     }
 
-    protected static void listExpensesByYear(String year) {
+    public static void listExpensesByYear(String year) {
         List<Expenditure> filteredExpenses = new ArrayList<>();
 
         if (!year.matches("\\d{4}")) {
