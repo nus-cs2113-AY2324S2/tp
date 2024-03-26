@@ -11,8 +11,8 @@ public enum Category {
     SALARY(8, "Salary"),
     OTHER(9, "Other");
 
-    private int categoryNum;
-    private String categoryName;
+    private final int categoryNum;
+    private final String categoryName;
 
     Category(int categoryNum, String categoryName) {
         this.categoryNum = categoryNum;
@@ -30,5 +30,9 @@ public enum Category {
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public int getCategoryNum() {
+        return categoryNum;
     }
 }
