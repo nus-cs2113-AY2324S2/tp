@@ -5,14 +5,9 @@ import seedu.stockpal.exceptions.InsufficientAmountException;
 import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class QuantityTest {
-    @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
 
     @Test
     public void updateIncreaseQuantity_anyInteger_success() {
