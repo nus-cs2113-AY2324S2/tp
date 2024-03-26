@@ -38,13 +38,13 @@ public class JsonManager {
     public int getModuleInfo(String moduleCode) {
         // Now, you can iterate through the array of objects just like before
         for (JsonObject obj : jsonArray) {
-             // Process the object as needed; assuming there's a 'name' field
-             String name = obj.get("moduleCode").getAsString();  // Replace 'name' with actual field names
-             // If you want to match a specific module code, add an if check here
-             if (name.equals(moduleCode)) {
-                 // Print out or process the module info
-                 return obj.get("moduleCredit").getAsInt();
-             }
+            // Process the object as needed; assuming there's a 'name' field
+            String name = obj.get("moduleCode").getAsString();  // Replace 'name' with actual field names
+            // If you want to match a specific module code, add an if check here
+            if (name.equals(moduleCode)) {
+                // Print out or process the module info
+                return obj.get("moduleCredit").getAsInt();
+            }
         }
         return 0;
     }
