@@ -69,7 +69,7 @@ The following is a class diagram of the NewCommand and its relevant dependencies
 ![NewCommandClass](uml-diagrams/NewCommandClass.png)
 
 The `NewCommand` class implements the `Command` interface and is responsible for handling the creation of new items in the `Inventory`.
-A NewCommand instance is created by the `parseNewCommand` method called by Parser, which ensures that the provided parameters (name, quantity, price) are valid.
+A NewCommand instance is created by the `parseNewCommand` method called by Parser, which ensures that the provided parameters (name, quantity, price, expiry date) are valid.
 
 #### Dependencies
 - `Item`: For creating the new item
@@ -80,10 +80,36 @@ The following sequence diagram shows the execution of a NewCommand
 ![NewCommandSequence](uml-diagrams/NewCommandSequence.png)
 
 1. The `SuperTracker` class calls the `execute` method of `NewCommand`
-2. A new `Item` object with the given parameters (name, quantity, price) is created and returned to `NewCommand`
-3. The `put` method of the `Inventory` class is called to add the newly created item into the inventory
+2. A new `Item` object with the given parameters (name, quantity, price, expiry date) is created and returned to `NewCommand`
+3. The `put` method of the `Inventory` class is called to add the newly created item into the `inventory`
 4. The `newCommandSuccess` method of the `Ui` class is called to notify that `NewCommand` has been successfully executed
 
+### Update Command
+The following is a class diagram of the UpdateCommand and its relevant dependencies
+![UpdateCommandClass](uml-diagrams/UpdateCommandClass.png)
+
+The `UpdateCommand` class implements the `Command` interface and is responsible for updating existing items in the 
+`Inventory`. A UpdateCommand instance is created by the `parseUpdateCommand` method called by Parser, which ensures 
+that the provided parameters (name, quantity, price) are valid. While it is optional to include quantity and price, one
+of the aforementioned parameters must be provided.
+
+#### Dependencies
+- `Item`: For getting the quantity and price of the to be updated item
+- `Inventory`: For updating the item in the inventory
+- `Ui`: To notify the user about the successful execution of `UpdateCommand`
+
+The following sequence diagram shows the execution of a UpdateCommand
+![UpdateCommandSequence](uml-diagrams/UpdateCommandSequence.png)
+
+1. The `SuperTracker` class calls the `execute` method of `UpdateCommand`
+2. The item object of the item to be updated is obtained from `inventory`
+3. There is an optional check for newQuantity being -1 (an invalid value that indicates that quantity should not be 
+updated). If the condition holds true it retrieves the item's previous quantity.
+4. There is another optional check for newPrice being -1 (an invalid value that indicates that price should not be
+   updated). If the condition holds true it retrieves the item's previous price.
+5. A new `Item` object with the given parameters (name, new quantity, new price, old expiry date) is created and returned to `UpdateCommand`
+6. The `put` method of the `Inventory` class is called to update the item in the `inventory`
+7. The `UpdateCommandSuccess` method of the `Ui` class is called to notify that `UpdateCommand` has been successfully executed
 
 ## Product scope
 ### Target user profile
