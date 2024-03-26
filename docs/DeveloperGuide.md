@@ -232,11 +232,11 @@ intuitive command-line commands, saving time and improving efficiency.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Any mainstream OS with Java `11` installed
 
 ## Glossary
 
-* *glossary item* - Definition
+* Mainstream OS: Windows, Linux, Unix, MacOS
 
 --------------------------------------------------------------------------------------------------------------------
 
