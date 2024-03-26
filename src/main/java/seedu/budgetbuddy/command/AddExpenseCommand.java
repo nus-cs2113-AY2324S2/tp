@@ -10,6 +10,7 @@ public class AddExpenseCommand extends Command{
     private final String amount;
     private final String description;
 
+
     public AddExpenseCommand (ExpenseList expenses,String category, String amount, String description) {
         this.expenses = expenses;
         this.category = category;

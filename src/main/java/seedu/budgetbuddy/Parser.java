@@ -10,6 +10,7 @@ import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.RecurringExpenseCommand;
 import seedu.budgetbuddy.command.SplitExpenseCommand;
 import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
@@ -37,11 +38,12 @@ public class Parser {
                 "Investments", "Gifts", "Others"));
     }
 
-    private String extractDetailsForFind(String input, String splitter) {
+    private String extractDetailsForCommand(String input, String splitter, CommandPrefix type) {
         int startIndex = input.indexOf(splitter) + splitter.length();
         int endIndex = input.length();
 
-        String[] nextPrefixes = { "d/", "morethan/", "lessthan/" };
+        String[] nextPrefixes = type.getNextPrefixes();
+
         for (String nextPrefix : nextPrefixes) {
             if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
                 endIndex = input.indexOf(nextPrefix, startIndex);
@@ -63,6 +65,10 @@ public class Parser {
         return details.substring(startIndex, endIndex).trim();
     }
 
+
+    public Boolean isRecCommand(String input) {
+        return input.startsWith("rec ");
+    }
     public Boolean isFindExpensesCommand(String input) {
         return input.startsWith("find expenses");
     }
@@ -163,11 +169,11 @@ public class Parser {
         }
 
         if (input.contains("d/")) {
-            description = extractDetailsForFind(input, "d/");
+            description = extractDetailsForCommand(input, "d/", CommandPrefix.FIND);
         }
 
         if (input.contains("morethan/")) {
-            String minAmountAsString = extractDetailsForFind(input, "morethan/");
+            String minAmountAsString = extractDetailsForCommand(input, "morethan/", CommandPrefix.FIND);
             try {
                 minAmount = Double.parseDouble(minAmountAsString);
             } catch (NumberFormatException e) {
@@ -179,7 +185,7 @@ public class Parser {
         }
 
         if (input.contains("lessthan/")) {
-            String maxAmountAsString = extractDetailsForFind(input, "lessthan/");
+            String maxAmountAsString = extractDetailsForCommand(input, "lessthan/" , CommandPrefix.FIND);
             try {
                 maxAmount = Double.parseDouble(maxAmountAsString);
             } catch (NumberFormatException e) {
@@ -379,12 +385,12 @@ public class Parser {
         }
         String details = parts[1];
 
-        String category = extractDetailsForAdd(details, "c/");
+        String category = extractDetailsForCommand(details, "c/", CommandPrefix.ADD);
         if (category.isEmpty()) {
             System.out.println("category is missing.");
             return null;
         }
-        String amount = extractDetailsForAdd(details, "a/");
+        String amount = extractDetailsForCommand(details, "a/", CommandPrefix.ADD);
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
             return null;
@@ -403,7 +409,7 @@ public class Parser {
             return null;
         }
 
-        String description = extractDetailsForAdd(details, "d/");
+        String description = extractDetailsForCommand(details, "d/", CommandPrefix.ADD);
         if (description.isEmpty()) {
             System.out.println("description is missing.");
             return null;
@@ -416,7 +422,6 @@ public class Parser {
             System.out.println("Invalid command format.");
             return null;
         }
-
         String[] parts = input.split(" ", 2);
         if (parts.length < 2) {
             System.out.println("Saving details are missing.");
@@ -424,13 +429,14 @@ public class Parser {
         }
 
         String details = parts[1];
-        String category = extractDetailsForAdd(details, "c/");
+        String category = extractDetailsForCommand(details, "c/", CommandPrefix.ADD);
         if (category.isEmpty()){
             System.out.println("Category is missing.");
             return null;
         }
+        
+        String amount = extractDetailsForCommand(details, "a/", CommandPrefix.ADD);
 
-        String amount = extractDetailsForAdd(details, "a/");
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
             return null;
@@ -601,6 +607,106 @@ public class Parser {
         }
     }
 
+    public Command handleRecCommand(String input, RecurringExpensesList expensesList, ExpenseList overallExpenses){
+        String[] commandParts = input.split(" ");
+        String commandType = commandParts[1];
+        commandType = commandType.trim();
+
+        if (!RecurringExpenseCommand.commandTypes.contains(commandType)) {
+            System.out.println("This Command Type does not exist for \"rec\"");
+            return null;
+        }
+
+        if (commandType.equals("newlist")) {
+            try {
+                String listName = commandParts[2];
+                return new RecurringExpenseCommand(listName, expensesList, "newlist");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please Input a Valid listName");
+                System.out.println("Command Format : rec newlist [listName]");
+                return null;
+            }
+        }
+
+        if (commandType.equals("viewlists")) {
+            return new RecurringExpenseCommand(expensesList, "viewlists");
+        }
+
+        if (commandType.equals("removelist")) {
+            try {
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(listNumber, expensesList, "removelist");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec removelist [List Number]");
+                return null;
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec removelist [List Number]");
+                return null;
+            }
+        }
+
+        if (commandType.equals("newexpense")) {
+            try {
+                String listNumberAsString = extractDetailsForCommand(input, "to/", CommandPrefix.REC);
+                int listNumber = Integer.parseInt(listNumberAsString);
+
+                String category = extractDetailsForCommand(input, "c/", CommandPrefix.REC);
+                String amountAsString = extractDetailsForCommand(input, "a/", CommandPrefix.REC);
+                double amount = Double.parseDouble(amountAsString);
+                String description = extractDetailsForCommand(input, "d/", CommandPrefix.REC);
+                if (listNumberAsString.isEmpty() || category.isEmpty() || amountAsString.isEmpty()
+                        || description.isEmpty()) {
+                    throw new BudgetBuddyException("Please Ensure all parameters are filled");
+                }
+                return new RecurringExpenseCommand(listNumber, expensesList, category,
+                        amount, description, "newexpense");
+
+            } catch (BudgetBuddyException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Command Format : rec newexpense to/ LISTNUMBER c/ CATEGORY" +
+                            " a/ AMOUNT d/ DESCRIPTION");
+            } catch (NumberFormatException e) {
+                System.out.println("Ensure that listNumber and Amount are valid Numbers");
+                return null;
+            }
+        }
+
+        if (commandType.equals("addrec")) {
+            try {
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(listNumber, expensesList, overallExpenses, "addrec");
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec addrec [List Number]");
+                return null;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec addrec [List Number]");
+                return null;
+            }
+        }
+
+        if (commandType.equals("viewexpenses")) {
+            try {
+                String listNumberAsString = commandParts[2];
+                int listNumber = Integer.parseInt(listNumberAsString);
+                return new RecurringExpenseCommand(listNumber, expensesList, "viewexpenses");
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid Integer");
+                System.out.println("Command Format : rec viewexpenses [List Number]");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("List Number Cannot be Empty");
+                System.out.println("Command Format : rec viewexpenses [List Number]");
+                return null;
+            }
+        }
+        return null;
+    }
+
     public Command handleSplitExpenseCommand(SplitExpenseList splitexpenses, String input) {
         if (input == null || !input.contains("a/") || !input.contains("n/") || !input.contains("d/")) {
             System.out.println("Invalid command format.");
@@ -613,6 +719,7 @@ public class Parser {
         String description = extractDetail(input, "d/");
     
         // Validation for each part
+
         if (amount.isEmpty() || numberOfPeople.isEmpty() || description.isEmpty()) {
             System.out.println("Missing details.");
             return null;
@@ -706,7 +813,7 @@ public class Parser {
      *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, SplitExpenseList 
-            splitexpenses, String input) {
+            splitexpenses, RecurringExpensesList expensesList, String input) {
         
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
@@ -743,6 +850,10 @@ public class Parser {
 
         if (isFindExpensesCommand(input)) {
             return handleFindExpensesCommand(input, expenses);
+        }
+
+        if (isRecCommand(input)) {
+            return handleRecCommand(input, expensesList, expenses);
         }
 
         if (isConvertCurrencyCommand(input)) {
