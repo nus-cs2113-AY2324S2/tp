@@ -26,7 +26,7 @@ class FindCommand {
 }
 
 class Inventory {
-    {static}+getItems():items: ArrayList
+    {static}+getItems():ArrayList<Item>
 }
 
 class Ui {
@@ -49,9 +49,6 @@ participant "Ui" as Ui <<class>> #e5c2ea
 SuperTracker -> FindCommand : execute()
 activate FindCommand #cbf7f4
 
-FindCommand --> FindCommand : isFound = false
-
-
 FindCommand -> Inventory : getItems()
 activate Inventory #d5eac2
 Inventory --> FindCommand : items
@@ -60,11 +57,10 @@ deactivate Inventory
 loop until every item in items are checked
     alt check if item contains the word
     else word found
-    FindCommand -> Ui : foundItem(item:String, index: int)
+    FindCommand -> Ui : foundItem(item:String, index:int)
     activate Ui #e5c2ea
     Ui --> FindCommand
     deactivate Ui
-    FindCommand --> FindCommand : isFound = true
     end
 end
 

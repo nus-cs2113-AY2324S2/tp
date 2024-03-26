@@ -129,7 +129,7 @@ The following sequence diagram shows the execution of a NewCommand
 
 1. The `SuperTracker` class calls the `execute` method of `FindCommand`
 2. A boolean variable `isFound` is assigned a false value 
-3. The `getItem` method of the `Inventory` class is called to get the list of items in the inventory
+3. The `getItems` method of the `Inventory` class is called to get the list of items in the inventory
 4. The `FindCommand` class will loop through each item of the list of items
 5. On every iteration, the item will be checked if it contains the word that is to be found
 6. If the item contains the word, the `foundItem` method of the Ui class is called and the `isFound` variable is assigned a true value
