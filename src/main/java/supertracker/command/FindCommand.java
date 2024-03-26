@@ -22,7 +22,7 @@ public class FindCommand implements Command {
         Ui.findIntro();
         for (Item item : items) {
             if(item.getName().contains(name)) {
-                Ui.findItem(item, index);
+                Ui.foundItem(item, index);
                 index++;
                 isFound = true;
             }
