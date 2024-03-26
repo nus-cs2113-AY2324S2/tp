@@ -24,7 +24,6 @@ public class Parser {
     private static final int NO_RESULTS = 0;
     private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
     private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
-    boolean hasChosenTopic = false;
 
 
     public void parseCommand(
@@ -37,11 +36,8 @@ public class Parser {
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
-            if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
+            if (lowerCaseCommand.startsWith("topic")) {
                 processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults, userAnswers);
-                //hasChosenTopic = true;
-            } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
-                throw new CustomException("Please choose a topic in the format: topic [INDEX]");
             } else if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
@@ -182,6 +178,8 @@ public class Parser {
             if (isSolutionCommand) {
                 String solution = qnList.getOneSolution(questionNum);
                 if (topicList.get(topicNum - 1).hasAttempted) {
+                    assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
+                    assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
                     ui.printOneSolution(questionNum, solution);
                 } else {
                     ui.printNoSolutionAccess();
@@ -191,6 +189,8 @@ public class Parser {
             assert typeOfCommand.contentEquals("explain") : "typeOfCommand should be explain";
             String explanation = qnList.getOneExplanation(questionNum);
             if (topicList.get(topicNum - 1).hasAttempted) {
+                assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
+                assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
                 ui.printOneSolution(questionNum, explanation);
             } else {
                 ui.printNoSolutionAccess();
