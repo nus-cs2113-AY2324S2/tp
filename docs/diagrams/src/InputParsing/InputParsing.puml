@@ -1,0 +1,38 @@
+@startuml InputParsing
+
+class Classify {
+    
+}
+
+package user {
+    class InputParsing {
+        findStudentByName(masterStudentList:Student[], name:String)
+    }
+
+    class Ui {
+
+    }
+
+    class UserInput {
+
+    }
+}
+
+package student {
+    class AddStudent {
+        addStudent();
+    }
+
+    class ViewStudent {
+        viewStudent();
+    }
+}
+
+Classify ..> InputParsing
+Classify ..> UserInput
+Classify ..> Ui
+UserInput ...l> Ui
+InputParsing ...r> Ui
+InputParsing ..> student
+
+note "Inconsequential methods and attributes omitted" as N1

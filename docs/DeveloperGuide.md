@@ -17,6 +17,8 @@
 
 The first and foremost component in the Student Tracking app is to ensure that the user parses in commands in a format that makes sense, which will modify the master list.
 
+![InputParsingUML](./diagrams/src/InputParsing/InputParsing.png)
+
 #### Design considerations
 - The parser must be effecive in breaking down the user's input into its constitutent commands, with further breakdown if an associated argument is added.
 - The parser should be quick and effective in understanding the user's input, with simple prompts given to help the user in correctly parsing the command through the input parser.
