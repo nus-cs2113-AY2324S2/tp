@@ -1,14 +1,11 @@
 package grocery;
 
-import exceptions.InvalidAmountException;
-import exceptions.InvalidCostException;
+import exceptions.*;
 import git.Ui;
-import exceptions.GitException;
 import exceptions.commands.EmptyGroceryException;
-import exceptions.commands.IncompleteCommandException;
+import exceptions.commands.IncompleteParameterException;
 import exceptions.commands.NoSuchGroceryException;
-import exceptions.commands.WrongFormatException;
-import exceptions.CannotUseException;
+import exceptions.commands.CommandWrongFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +40,7 @@ public class GroceryList {
      * @throws EmptyGroceryException If grocery name == null.
      */
     public void addGrocery(Grocery grocery) throws EmptyGroceryException {
-        if (grocery.getName() == null || grocery.getName().trim().isEmpty()) {
+        if (grocery.getName() == null) {
             throw new EmptyGroceryException();
         }
 
@@ -100,27 +97,17 @@ public class GroceryList {
 
         // Split the input into the grocery name and the detail part.
         String[] detailParts = details.split(parameter, 2);
-        if (detailParts.length < 2 || detailParts[1].trim().isEmpty()) {
-            throw new WrongFormatException(command + " command is in the wrong format. " + parameter + " is required.");
-        }
-
-        // Retrieve the grocery to ensure it exists.
-        Grocery grocery = getGrocery(detailParts[0].strip());
-        if (grocery == null) {
-            throw new NoSuchGroceryException();
+        Grocery grocery = getGrocery(detailParts[0].strip());           // Needed to throw NoSuchGrocery exception first
+        if (detailParts.length < 2) {
+            throw new CommandWrongFormatException(command);
         }
 
         String attribute = detailParts[1].strip();
-        // For expiration date updates, validate the date format.
-        if (command.equals("exp")) {
-            try {
-                LocalDate.parse(attribute, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            } catch (DateTimeParseException e) {
-                throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
-            }
+        if (attribute.isEmpty()) {
+            throw new IncompleteParameterException(parameter);
         }
 
-        return new String[] {detailParts[0].trim(), attribute};
+        return new String[] {detailParts[0].strip(), attribute};
     }
 
     /**
@@ -132,9 +119,6 @@ public class GroceryList {
     public void editExpiration(String details) throws GitException {
         // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
         String[] expParts = checkDetails(details, "exp", "d/");
-        if (expParts.length < 2 || expParts[1].trim().isEmpty()) {
-            throw new IncompleteCommandException("Expiration date is missing. Please use the format 'd/YYYY-MM-DD'.");
-        }
         Grocery grocery = getGrocery(expParts[0].strip());
         
         // Parse the date string to LocalDate
@@ -142,7 +126,7 @@ public class GroceryList {
         try {
             date = LocalDate.parse(expParts[1].strip(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
-            throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
+            throw new LocalDateWrongFormatException();
         }
     
         // Convert LocalDate back to String to match the setExpiration signature
@@ -163,7 +147,7 @@ public class GroceryList {
      */
     public void editAmount(String details, boolean use) throws GitException {
         // Assuming the format is "amt GROCERY a/AMOUNT"
-        String[] amtParts = checkDetails(details, "amt", "a/");
+        String[] amtParts = checkDetails(details, use ? "use": "amt", "a/");
         Grocery grocery = getGrocery(amtParts[0].strip());
         String amountString = amtParts[1].strip();
 

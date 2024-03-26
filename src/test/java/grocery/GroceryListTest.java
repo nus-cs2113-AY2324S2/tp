@@ -2,7 +2,7 @@ package grocery;
 
 import exceptions.commands.EmptyGroceryException;
 import exceptions.commands.NoSuchGroceryException;
-import exceptions.commands.WrongFormatException;
+import exceptions.commands.CommandWrongFormatException;
 import exceptions.CannotUseException;
 import exceptions.GitException;
 
@@ -84,7 +84,7 @@ public class GroceryListTest {
             gl.addGrocery(new Grocery("Meat", 0, LocalDate.now(), "Meat", 0));
             gl.editAmount("Meat", false);
             fail("Expected a WrongFormatException to be thrown");
-        } catch (WrongFormatException e) {
+        } catch (CommandWrongFormatException e) {
             String expectedMessage = 
                 "Command is in the wrong format, type \"help\" for more information.\n";
             assertEquals(expectedMessage.trim(), e.getMessage().trim());
