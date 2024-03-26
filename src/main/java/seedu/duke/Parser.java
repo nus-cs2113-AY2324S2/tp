@@ -1,5 +1,4 @@
 package seedu.duke;
-
 import java.util.*;
 
 public class Parser {
@@ -10,10 +9,9 @@ public class Parser {
      * Add new Keys to extract additional user parameters for future functionality.
      */
     private static final String[] paramKeys = {"amount", "paid", "user"};
-
-    private final String userInput;
     private static Map<String, Group> groups = new HashMap<>();
     private static Optional<Group> currentGroup = Optional.empty();
+    private final String userInput;
 
     /**
      * First word of user input.
@@ -139,22 +137,22 @@ public class Parser {
                 System.out.printf(
                         "Please exit %s before creating a new one%n",
                         group);
-                    return group;
-                }).orElseGet(() -> {
-                String groupName = argument;
-                boolean isGroupCreated = groups.containsKey(groupName);
-                if (isGroupCreated) {
-                    Group queriedGroup = groups.get(groupName);
-                    System.out.println("Group already exists! " +
+                return group;
+            }).orElseGet(() -> {
+                    String groupName = argument;
+                    boolean isGroupCreated = groups.containsKey(groupName);
+                    if (isGroupCreated) {
+                        Group queriedGroup = groups.get(groupName);
+                        System.out.println("Group already exists! " +
                             "You are now in " + queriedGroup);
-                    return queriedGroup;
-                }
-                Group createdGroup = Group.createGroup(groupName);
-                groups.put(groupName, createdGroup);
-                System.out.println("Creating new group! " +
+                        return queriedGroup;
+                    }
+                    Group createdGroup = Group.createGroup(groupName);
+                    groups.put(groupName, createdGroup);
+                    System.out.println("Creating new group! " +
                         "You are now in " + createdGroup);
-                return createdGroup;
-            }));
+                    return createdGroup;
+                }));
             break;
         case "member":
             String memberName = argument;
