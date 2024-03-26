@@ -10,6 +10,7 @@ public class Grocery {
     private String name;
     private int amount;
     private LocalDate expiration;
+    private String category;
 
     /**
      * Constructs a Grocery.
@@ -17,11 +18,13 @@ public class Grocery {
      * @param name Name.
      * @param amount Measurement of grocery.
      * @param expiration When grocery expires.
+     * @param category Category of grocery.
      */
-    public Grocery(String name, int amount, LocalDate expiration) {
+    public Grocery(String name, int amount, LocalDate expiration, String category) {
         this.name = name;
         this.amount = amount;
         this.expiration = expiration;
+        this.category = category;
     }
 
     // Getters and setters
