@@ -203,4 +203,57 @@ class ExerciseManagerTest {
         parser.parseInput(invalidInput);
         assertThrows(IllegalStateException.class, () -> exerciseManager.execute(parser));
     }
+
+
+    @Test
+    public void execute_searchExistingExercise_success() {
+        setUpStreams();
+
+        String addInput = "exercise /add Pushups";
+        parser.parseInput(addInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String searchInput = "exercise /search Pushups";
+        parser.parseInput(searchInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String expectedOutput = "[ByteCeps]> AddedExercise: \n" +
+                "\t\t\t Pushups\n" +
+                "\n" +
+                "-------------------------------------------------\n" +
+                "[ByteCeps]> SearchResults:\n" +
+                "\t\t\t1. Pushups\n" +
+                "\n" +
+                "-------------------------------------------------\n";
+
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
+
+        restoreStreams();
+    }
+
+    @Test
+    public void execute_searchNonexistentExercise_emptyResult() {
+        setUpStreams();
+
+        String searchInput = "exercise /search Nonexistent";
+        parser.parseInput(searchInput);
+        assertDoesNotThrow(() -> exerciseManager.execute(parser));
+
+        String expectedOutput = "[ByteCeps]>Noresultsfound\n" +
+                "-------------------------------------------------\n";
+
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
+
+        restoreStreams();
+    }
+
+    @Test
+    public void execute_searchEmptyQuery_throwsInvalidInput() {
+        String emptyInput = "exercise /search ";
+        parser.parseInput(emptyInput);
+        assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
+    }
 }
+
