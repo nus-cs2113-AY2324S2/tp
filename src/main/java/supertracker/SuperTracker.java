@@ -46,12 +46,6 @@ public class SuperTracker {
         Ui.greetUser();
         handleCommands();
 
-        try {
-            FileManager.saveData();
-        } catch (IOException e) {
-            Ui.printError(ErrorMessage.FILE_SAVE_ERROR);
-        }
-
         logger.info(EXIT_MESSAGE);
     }
 
