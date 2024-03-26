@@ -1,7 +1,10 @@
 //@@author ZhangWenyue3325
 package seedu.planus;
 
+import java.util.logging.Logger;
+
 public class GradeChecker {
+    private static Logger logger = Logger.getLogger("myLogger");
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
 
