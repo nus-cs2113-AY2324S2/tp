@@ -82,8 +82,10 @@ public class Handler {
                 default:
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
-            } catch (CustomExceptions.InvalidInput | IllegalArgumentException e) {
+            } catch (CustomExceptions.InvalidInput e) {
                 Output.printException(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                Output.printException(ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
     }
@@ -125,9 +127,9 @@ public class Handler {
 
             } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
                 int numberOfStations = getNumberOfGymStations(userInput);
+
                 String gymDate = getDateFromGym(userInput);
                 Gym gym;
-
                 if (gymDate == null) {
                     gym = new Gym();
                 } else {
