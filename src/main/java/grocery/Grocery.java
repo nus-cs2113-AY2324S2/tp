@@ -96,21 +96,21 @@ public class Grocery {
         String price = (cost != 0) ? ", cost: $" + String.format("%.2f", cost): " cost not set";
         String unit = "";
         switch (category.toLowerCase()){
-            case "fruit":
-                unit = "pieces";
-                break;
-            case "vegetable":
-                unit = "grams";
-                break;
-            case "meat":
-                unit = "grams";
-                break;
-            case "beverage":
-                unit = "ml";
-                break;
-            default:
-                unit = "units";
-                break;
+        case "fruit":
+            unit = "pieces";
+            break;
+        case "vegetable":
+            unit = "grams";
+            break;
+        case "meat":
+            unit = "grams";
+            break;
+        case "beverage":
+            unit = "ml";
+            break;
+        default:
+            unit = "units";
+            break;
         }
         return this.name + " (" + this.category + ") " + amountString + unit + exp + price;
 
