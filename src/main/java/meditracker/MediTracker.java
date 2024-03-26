@@ -26,7 +26,6 @@ public class MediTracker {
      */
     public MediTracker() {
         medicationManager = new MedicationManager();
-        dailyMedicationManager = new DailyMedicationManager(medicationManager);
     }
 
     /**
@@ -36,7 +35,6 @@ public class MediTracker {
      */
     public MediTracker(List<String> dailyMedicationList) {
         medicationManager = new MedicationManager();
-        dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
     }
 
     /**
@@ -61,7 +59,7 @@ public class MediTracker {
             Ui.showLine();
             try {
                 command = CommandParser.parse(fullCommand);
-                command.execute(medicationManager, dailyMedicationManager);
+                command.execute(medicationManager);
             } catch (ArgumentNotFoundException | MediTrackerException ex) {
                 System.out.println(ex.getMessage());
             } catch (NullPointerException ex) {

@@ -12,13 +12,13 @@ public class TakeCommandTest {
     @Test
     void execute_inOrderArgument_expectDailyMedicationTaken() throws ArgumentNotFoundException {
         MedicationManager medicationManager = new MedicationManager();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         DailyMedication dailyMedication = new DailyMedication("Medication_A");
-        dailyMedicationManager.addDailyMedication(dailyMedication);
+        int size = DailyMedicationManager.getTotalDailyMedication();
+        DailyMedicationManager.addDailyMedication(dailyMedication);
 
-        String inputString = "take -l 1";
+        String inputString = String.format("take -l %d", size + 1);
         TakeCommand command = new TakeCommand(inputString);
-        command.execute(null, dailyMedicationManager);
+        command.execute(null);
 
         assertTrue(dailyMedication.isTaken());
     }
