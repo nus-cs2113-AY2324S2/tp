@@ -3,6 +3,9 @@ package brokeculator.expense;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
+import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class ExpenseManager {
@@ -24,13 +27,23 @@ public class ExpenseManager {
         expenses.remove(index);
     }
 
-    public double summariseExpenses(int beginIndex, int endIndex) {
+    public double summariseExpenses(String description, LocalDateTime date, String category,
+                                    int beginIndex, int endIndex) {
         double total = 0;
         if (endIndex == -1 || endIndex >= expenses.size()) {
             endIndex = expenses.size() - 1;
         }
-        ArrayList<Expense> expensesToList  = new ArrayList<>(expenses.subList(beginIndex, endIndex + 1));
-        for (Expense expense : expensesToList) {
+        boolean isDescriptionNull = (description == null);
+        ArrayList<Expense> expensesToSummarise = new ArrayList<Expense>();
+        for (Expense expense : expenses.subList(beginIndex, endIndex + 1)) {
+            if (!isDescriptionNull && !expense.getDescription().equals(description)) {
+                continue;
+            }
+            // TODO implement date processing
+            // TODO implement category processing
+            expensesToSummarise.add(expense);
+        }
+        for (Expense expense : expensesToSummarise) {
             total += expense.getAmount();
         }
         return total;

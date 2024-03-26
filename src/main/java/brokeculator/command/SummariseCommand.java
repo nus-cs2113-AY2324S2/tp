@@ -26,7 +26,7 @@ public class SummariseCommand extends Command {
             UI.print("Start index exceeds number of expenses currently tracked");
             return;
         }
-        double summary = dashboard.getExpenseManager().summariseExpenses(beginIndex, endIndex);
+        double summary = dashboard.getExpenseManager().summariseExpenses(name, date, category, beginIndex, endIndex);
         UI.prettyPrint("The total is $" + summary);
     }
 }
