@@ -78,7 +78,7 @@ public class AppointmentTest {
                 + secondAppointment.getDate()
                 + " at "
                 + secondAppointment.getTime()
-                + " : "
+                + ": "
                 + secondAppointment.description
                 + System.lineSeparator()
                 + "1. On "
