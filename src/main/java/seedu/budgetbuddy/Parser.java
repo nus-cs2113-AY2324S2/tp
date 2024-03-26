@@ -16,6 +16,7 @@ import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
 import seedu.budgetbuddy.command.ChangeCurrencyCommand;
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
