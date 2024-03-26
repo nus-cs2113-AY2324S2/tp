@@ -13,7 +13,7 @@ public class Ui {
         System.out.println(DIVIDER);
         System.out.println("1. Manage Expenses     3. View Expenses");
         System.out.println("2. Manage Savings      4. View Savings");
-        System.out.println("5. Find Expenses");
+        System.out.println("5. Find Expenses       6. Split Expenses");
         System.out.println(DIVIDER);
     }
 
@@ -29,7 +29,7 @@ public class Ui {
         System.out.println("Menu Options:");
         System.out.println("1. Manage Expenses     3. View Expenses");
         System.out.println("2. Manage Savings      4. View Savings");
-        System.out.println("5. Find Expenses");
+        System.out.println("5. Find Expenses       6. Split Expenses");
         System.out.println("Use 'menu INDEX' to select an option");
         System.out.println(DIVIDER);
     }
@@ -48,6 +48,8 @@ public class Ui {
             System.out.println("add expense c/CATEGORY a/AMOUNT d/DESCRIPTION");
             System.out.println("edit expense c/CATEGORY i/INDEX a/AMOUNT d/DESCRIPTION");
             System.out.println("delete expense i/INDEX");
+            System.out.println("set budget c/CATEGORY b/BUDGET");
+            System.out.println("budget print");
             break;
         case 2:
             System.out.println("Manage Savings");
@@ -67,6 +69,11 @@ public class Ui {
             System.out.println("Find Expenses");
             System.out.println("find expenses d/DESCRIPTION morethan/MINAMOUNT lessthan/MAXAMOUNT " +
                     "(Choose the parameters according to what you wish to search for)");
+            break;
+        case 6:
+            System.out.println("Split Expenses");
+            System.out.println("split expenses a/AMOUNT n/NUMBER d/DESCRIPTION");
+            System.out.println("list splitted expenses");
             break;
         default:
             System.out.println("Invalid menu index.");

@@ -67,6 +67,16 @@ Format:  `add savings c/CATEGORY a/AMOUNT`
 * The `AMOUNT` must be a positive integer.
 * The `DESCRIPTION` can be any string.
 
+### Add Split Expenses
+Add expenses that are meant for splitting among friends or colleague
+
+Format: `split expenses a/AMOUNT n/NUMBER_OF_PEOPLE d/DESCRIPTION`
+
+* Increments split expenses 
+* The `AMOUNT` must be a positive number
+* The `NUMER_OF_PEOPLE` must be a positive integer.
+* The `DESCRIPTION` can be any string
+
 Example of usage:
 
 `add savings c/Salary a/10000`

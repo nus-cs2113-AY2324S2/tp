@@ -13,13 +13,15 @@ public class SavingList {
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
     protected double initialAmount;
+    protected Storage storage;
 
 
     public SavingList() {
         this.savings = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Salary", 
-        "Investments", "Gifts", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
+        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
 
     public int size() {
@@ -46,7 +48,6 @@ public class SavingList {
             LOGGER.log(Level.SEVERE, "Error occurred while calculating total savings", e);
         }
     }
-
 
     public void listSavings(String filterCategory, ExpenseList expenseList) {
         try {
@@ -148,20 +149,20 @@ public class SavingList {
             return;
         }
 
+        Saving savingToEdit = null;
         try {
             // Retrieve the saving to edit
-            Saving savingToEdit = savings.get(index - 1);
+            savingToEdit = savings.get(index - 1);
 
             // Update the saving details
             savingToEdit.setCategory(category);
             savingToEdit.setAmount(amount);
 
-            LOGGER.info(String.format("Saving at index %d edited successfully. " +
-                    "New details: %s", index, savingToEdit.toString()));
             System.out.println("Saving edited successfully.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error occurred while editing saving at index " + index, e);
             System.out.println("An error occurred during saving edition. Please try again.");
+
         }
     }
 
