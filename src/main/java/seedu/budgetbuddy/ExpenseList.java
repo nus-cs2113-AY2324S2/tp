@@ -122,7 +122,7 @@ public class ExpenseList {
         assert category != null : "Category should not be null";
         assert amount != null : "Amount should not be null";
         assert description != null : "Description should not be null";
-        
+
         if (!categories.contains(category)) {
             throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
@@ -139,33 +139,53 @@ public class ExpenseList {
 
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
+
     }
 
     public void editExpense(String category, int index, double amount, String description) {
+        LOGGER.info(String.format("Attempting to edit expense at index %d with category '%s', " +
+                "amount %.2f, and description '%s'", index, category, amount, description));
+
+        // Assert that the provided category is not null or empty
+        assert category != null && !category.isEmpty() : "Category cannot be null or empty";
+        // Assert that the index is within the valid bounds of the expenses list
+        assert index > 0 && index <= expenses.size() : "Index is out of bounds";
+        // Assert that the amount is non-negative
+        assert amount >= 0 : "Amount cannot be negative";
+        // Assert that the description is not null.
+        assert description != null : "Description cannot be null";
+
         // Check if the category exists in the list of categories
         int categoryIndex = categories.indexOf(category);
         if (categoryIndex == -1) {
+            LOGGER.warning("Invalid category: " + category);
             System.out.println("Invalid category.");
             return;
         }
 
         // Check if the index is within valid bounds
         if (index <= 0 || index > expenses.size()) {
+            LOGGER.warning("Invalid index: " + index);
             System.out.println("Invalid index.");
             return;
         }
 
-        // Retrieve the expense to edit
-        Expense expenseToEdit = expenses.get(index - 1);
+        try {
+            // Retrieve the expense to edit
+            Expense expenseToEdit = expenses.get(index - 1);
 
-        // Update the expense details
-        expenseToEdit.setCategory(category);
-        expenseToEdit.setAmount(amount);
-        expenseToEdit.setDescription(description);
+            // Update the expense details
+            expenseToEdit.setCategory(category);
+            expenseToEdit.setAmount(amount);
+            expenseToEdit.setDescription(description);
 
-        System.out.println("Expense edited successfully.");
+            LOGGER.info("Expense at index " + index + " edited successfully. New details: " +
+                    expenseToEdit.toString());
+            System.out.println("Expense edited successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error editing expense at index " + index, e);
+        }
     }
-
 
     public void deleteExpense(int index){
         if (index >= 0 && index < expenses.size()){
@@ -189,4 +209,5 @@ public class ExpenseList {
         LOGGER.info("Creating new budget for category: " + category);
         budgets.add(new Budget(category, budget));
     }
+
 }

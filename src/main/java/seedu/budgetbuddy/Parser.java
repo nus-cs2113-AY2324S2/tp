@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
-    
+
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     protected ArrayList<String> expenseCategories;
     protected ArrayList<String> savingsCategories;
@@ -46,7 +46,7 @@ public class Parser {
         }
         return input.substring(startIndex, endIndex).trim();
     }
-    
+
     private String extractDetailsForAdd(String details, String prefix) {
         int startIndex = details.indexOf(prefix) + prefix.length();
         int endIndex = details.length();
@@ -178,7 +178,6 @@ public class Parser {
         return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
     }
 
-
     public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
@@ -237,12 +236,12 @@ public class Parser {
                 return null;
             }
             break;
-
         default:
             return null;
         }
         return null;
     }
+
 
     private boolean isValidExpenseCategory(String category) {
 
@@ -364,7 +363,7 @@ public class Parser {
             System.out.println("Category is missing.");
             return null;
         }
-        
+
         String amount = extractDetailsForAdd(details, "a/");
         if (amount.isEmpty()) {
             System.out.println("amount is missing.");
@@ -376,7 +375,7 @@ public class Parser {
             if (amountValue <= 0) {
                 throw new BudgetBuddyException(amount + " is not a valid amount.");
             }
-           
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");
             return null;
@@ -465,9 +464,15 @@ public class Parser {
     }
 
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
+        LOGGER.log(Level.INFO, "Processing handleDeleteExpenseCommand");
+
+        assert expenses != null : "Expense list cannot be null";
+        assert input != null : "Input string cannot be null";
+
         String[] parts = input.split("i/", 2);
         // Check if the input format is correct (i.e., contains "i/")
         if (parts.length < 2) {
+            LOGGER.log(Level.WARNING, "Invalid command format. Expected format: <command> i/<index>");
             System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
             return null;
         }
@@ -476,12 +481,15 @@ public class Parser {
             int index = Integer.parseInt(parts[1].trim()) - 1;
             // Check if the index is within the bounds of the expense list.
             if (index < 0 || index >= expenses.size()) {
+                LOGGER.log(Level.WARNING, "Index is out of bounds.");
                 System.out.println("Error: Index is out of bounds.");
                 return null;
             }
+            LOGGER.log(Level.INFO, "Successfully processed DeleteExpenseCommand");
             // If the index is valid, return a new DeleteExpenseCommand.
             return new DeleteExpenseCommand(expenses, index);
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.SEVERE, "Index is not a valid number.");
             // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
             System.out.println("Error: Index is not a valid number.");
             return null;
@@ -489,6 +497,11 @@ public class Parser {
     }
 
     public Command handleReduceSavingCommand(SavingList savings, String input) {
+        LOGGER.log(Level.INFO, "Processing handleReduceSavingCommand");
+
+        assert savings != null : "Savings list cannot be null";
+        assert input != null : "Input string cannot be null";
+
         String description = input.replace("reduce", "").trim();
 
         if(description.contains("i/") && description.contains("a/")) {
@@ -502,17 +515,20 @@ public class Parser {
 
                 // Validate the index range.
                 if (indexToReduce < 0 || indexToReduce >= savings.size()) {
+                    LOGGER.log(Level.WARNING, "Index is out of bounds.");
                     System.out.println("Error: Index is out of bounds.");
                     return null;
                 }
-
+                LOGGER.log(Level.INFO, "Successfully processed ReduceSavingCommand!");
                 return new ReduceSavingCommand(savings, indexToReduce, amountToReduce);
             } catch (NumberFormatException e){
+                LOGGER.log(Level.SEVERE, "Index and amount must be valid numbers.");
                 // Catch and handle incorrect number formats for index or amount.
                 System.out.println("Error: Index and amount must be valid numbers.");
                 return null;
             }
         } else {
+            LOGGER.log(Level.WARNING, "Invalid command format. Expected format: reduce i/<index> a/<amount>");
             // Handle the case where the input does not contain the required markers.
             System.out.println("Error: Invalid command format. Expected format: reduce i/<index> a/<amount>");
             return null;
@@ -568,13 +584,13 @@ public class Parser {
     /**
      * Parses a string input into a Command object and returns the associated
      * command to handle the user input
-     * 
+     *
      * @param input The user input string.
      * @return A Command object corresponding to the user input, or null if the
      *         input is invalid.
      */
     public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
-        
+
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
             return handleMenuCommand(input);

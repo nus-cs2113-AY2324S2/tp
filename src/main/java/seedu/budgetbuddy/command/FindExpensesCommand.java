@@ -26,8 +26,7 @@ public class FindExpensesCommand extends Command {
 
         if(description == null) {
             this.description = "";
-        }
-        else {
+        } else {
             this.description = description;
         }
         this.minAmount = minAmount;
