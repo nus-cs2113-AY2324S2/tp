@@ -28,6 +28,7 @@ public class ExerciseTask extends Task{
     }
     public String getExerciseName() { return description; }
 
+
     public int getDuration(){
         return duration;
     }

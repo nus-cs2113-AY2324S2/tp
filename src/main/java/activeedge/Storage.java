@@ -70,8 +70,8 @@ public class Storage {
      */
     public static void saveLogsToFile(String filePath) {
         try (FileWriter fw = new FileWriter(filePath)) {
-            for (int i = 0; i < UserDetailsList.detailsList.size(); i++) {
-                String out = UserDetailsList.detailsList.get(i).toString();
+            for (int i = 0; i < UserDetailsList.DETAILS_LIST.size(); i++) {
+                String out = UserDetailsList.DETAILS_LIST.get(i).toString();
                 fw.write(out + "\n");
             }
             for (int i = 0; i < TaskList.tasksList.size(); i++) {
@@ -159,11 +159,11 @@ public class Storage {
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
                         LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), LocalDateTime.now());
-                        UserDetailsList.detailsList.add(newHeight);
+                        UserDetailsList.DETAILS_LIST.add(newHeight);
                     } else if (task.startsWith("Weight")) {
                         String[] items = task.trim().split(" ");
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]), LocalDateTime.now());
-                        UserDetailsList.detailsList.add(newWeight);
+                        UserDetailsList.DETAILS_LIST.add(newWeight);
                     } else if (task.startsWith("Exercise")){
                         String[] items = task.trim().split(" ");
                         int len = items.length;

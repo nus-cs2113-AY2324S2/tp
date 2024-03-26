@@ -11,6 +11,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.LocalDateTime;
+
 
 public class ViewWaterIntakeCommandTest {
 
@@ -24,10 +26,11 @@ public class ViewWaterIntakeCommandTest {
 
     @Test
     public void testGetTotalWaterIntake() {
+        LocalDateTime dateTime = LocalDateTime.now();
         // Create a mock task list
         ArrayList<Task> tasksList = new ArrayList<>();
-        tasksList.add(new WaterTask(200)); // Adding water intake
-        tasksList.add(new WaterTask(300)); // Adding water intake
+        tasksList.add(new WaterTask(200, dateTime)); // Adding water intake
+        tasksList.add(new WaterTask(300, dateTime)); // Adding water intake
 
         ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
 
@@ -40,10 +43,11 @@ public class ViewWaterIntakeCommandTest {
 
     @Test
     public void testGetWaterGoal() {
+        LocalDateTime dateTime = LocalDateTime.now();
         // Create a mock task list
         ArrayList<Task> tasksList = new ArrayList<>();
-        tasksList.add(new GoalTask("c", 2000)); // Adding calorie goal
-        tasksList.add(new GoalTask("w", 1500)); // Adding water goal
+        tasksList.add(new GoalTask("c", 2000, dateTime)); // Adding calorie goal
+        tasksList.add(new GoalTask("w", 1500, dateTime)); // Adding water goal
 
         ViewWaterIntakeCommand viewWaterIntakeCommand = new ViewWaterIntakeCommand();
 

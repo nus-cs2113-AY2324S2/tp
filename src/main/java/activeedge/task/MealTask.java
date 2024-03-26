@@ -16,11 +16,13 @@ public class MealTask extends Task {
     }
     public String getFoodName() { return description; }
 
+
     public int getServings(){
         return servings;
     }
 
     public int getMealCalories() { return mealCalories; }
+
 
     @Override
     public String toString() {

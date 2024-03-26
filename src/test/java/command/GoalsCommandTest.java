@@ -2,11 +2,14 @@ package command;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.time.LocalDateTime;
+
 
 public class GoalsCommandTest {
     @Test
     void testAddCalorieGoal() {
-        AddGoalsCommand addGoalsCommand = new AddGoalsCommand("c", 2000);
+        LocalDateTime dateTime = LocalDateTime.now();
+        AddGoalsCommand addGoalsCommand = new AddGoalsCommand("c", 2000, dateTime);
         addGoalsCommand.execute();
         // Assuming you have a method to check if the calorie goal was set correctly
         assertTrue(checkCalorieGoal(2000));
@@ -14,7 +17,8 @@ public class GoalsCommandTest {
 
     @Test
     void testAddWaterGoal() {
-        AddGoalsCommand addGoalsCommand = new AddGoalsCommand("w", 2500);
+        LocalDateTime dateTime = LocalDateTime.now();
+        AddGoalsCommand addGoalsCommand = new AddGoalsCommand("w", 2500, dateTime);
         addGoalsCommand.execute();
         // Assuming you have a method to check if the water goal was set correctly
         assertTrue(checkWaterGoal(2500));

@@ -25,7 +25,7 @@ import activeedge.FoodData;
 import java.time.LocalDateTime;
 
 
-public class Parser {
+public class    Parser {
     public void handleInput(String input) {
         try {
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -53,7 +53,8 @@ public class Parser {
                             calories = Integer.parseInt(foodItems[i][1]) * servings;
                         }
                     }
-                    LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories, currentDateTime);
+                    LogMealCommand logMealCommand = new LogMealCommand(description, servings,
+                            calories, currentDateTime);
                     logMealCommand.execute();
                 }
             } else if (input.startsWith("list")) {
@@ -123,7 +124,8 @@ public class Parser {
                         caloriesBurnt = Integer.parseInt(exercisesList[i][1]) * duration;
                     }
                 }
-                LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt, currentDateTime);
+                LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration,
+                        caloriesBurnt, currentDateTime);
                 logExerciseCommand.execute();
             }
             else if (input.startsWith("summary")) {
