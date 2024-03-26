@@ -28,8 +28,8 @@ public class Output {
         printLine();
         System.out.println("Commands List:");
         System.out.println();
-        System.out.println("new /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run");
-        System.out.println("new /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
+        System.out.println("workout /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run");
+        System.out.println("workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
         System.out.println("history /view:[run/gym/bmi/period] - " +
@@ -299,20 +299,11 @@ public class Output {
 
     /**
      * Prints a specified message and the exception error message.
-     * @param e Represents the Exception caught.
      * @param message The custom message to be printed.
      */
-    public static void printException(Exception e, String message) {
-        printLine();
-        System.err.println("Exception Caught!" +
-                System.lineSeparator() +
-                message +
-                System.lineSeparator() +
-                System.lineSeparator() +
-                e.getMessage());
-        printLine();
+    public static void printException(String message) {
+        System.err.println("Exception Caught!" + System.lineSeparator() + message);
     }
-
 
     /**
      * Prints the welcome banner for PulsePilot.
@@ -330,9 +321,9 @@ public class Output {
      * @param status Integer representing whether the storage file has been loaded. If set to 0, file is present. Else,
      *                file is not present.
      */
-    public static void printGreeting(int status) {
+    public static void printGreeting(int status, String name) {
         if (status == 0) {
-            System.out.println("Welcome back, Captain");
+            System.out.println("Welcome back, Captain " + name);
             System.out.println(UiConstant.SUCCESSFUL_LOAD);
         } else {
             System.out.println(UiConstant.MISSING_FILE);

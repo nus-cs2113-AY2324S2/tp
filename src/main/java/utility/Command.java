@@ -4,7 +4,7 @@ package utility;
  * Enum representing the commands for PulsePilot
  */
 public enum Command {
-    NEW,
+    WORKOUT,
     HISTORY,
     LATEST,
     HEALTH,
