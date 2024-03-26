@@ -9,7 +9,6 @@ import static activeedge.FoodData.foodItems;
 import static activeedge.ExerciseData.exercisesList;
 import activeedge.FoodData;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 
 public class Parser {

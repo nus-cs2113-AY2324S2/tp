@@ -38,6 +38,7 @@ public class GoalTask extends Task {
      */
     @Override
     public String toString() {
-        return "Goal " + this.getDescription() + " " + this.getGoalAmount() + " (Recorded on: " + dateTime + ")";
+        return "Goal " + this.getDescription() + " "
+                + this.getGoalAmount() + " (Recorded on: " + dateTime + ")";
     }
 }
