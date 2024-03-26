@@ -17,7 +17,9 @@ public class Meal {
 
     // Constructor with only serving size and meal name
     public Meal(String name, int servingSize) {
+        assert name != null : "Name must not be null";
         this.name = name;
+        assert servingSize > 0 : "Serving size must be greater than 0";
         this.servingSize = servingSize;
         setNutrientValues(name); // Assign nutrient values based on the name
     }
