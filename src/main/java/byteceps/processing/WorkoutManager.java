@@ -47,6 +47,9 @@ public class WorkoutManager extends ActivityManager {
         case "list":
             executeListAction();
             break;
+        case "search":
+            executeSearchAction(parser);
+            break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
@@ -55,7 +58,7 @@ public class WorkoutManager extends ActivityManager {
     private void executeInfoAction(Parser parser) throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
         assert parser.getAction().equals("info") : "Action must be info";
         String workoutName = parser.getActionParameter();
-        if(workoutName == null || workoutName.isEmpty()) {
+        if (workoutName == null || workoutName.isEmpty()) {
             throw new Exceptions.InvalidInput("info command not complete");
         }
 
@@ -101,7 +104,7 @@ public class WorkoutManager extends ActivityManager {
     //@@author V4vern
     public Workout processWorkout(Parser parser) throws Exceptions.InvalidInput {
         String workoutName = parser.getActionParameter();
-        assert !workoutName.isEmpty(): "Workout name cannot be empty";
+        assert !workoutName.isEmpty() : "Workout name cannot be empty";
         if (workoutName.isEmpty()) {
             throw new Exceptions.InvalidInput("Workout name cannot be empty");
         }
@@ -185,4 +188,14 @@ public class WorkoutManager extends ActivityManager {
     public String getActivityType(boolean plural) {
         return plural ? "Workouts" : "Workout";
     }
+
+    //@@author V4vern
+    private void executeSearchAction(Parser parser) throws Exceptions.InvalidInput {
+        String searchTerm = parser.getActionParameter();
+        if (searchTerm == null || searchTerm.isEmpty()) {
+            throw new Exceptions.InvalidInput("Search term cannot be empty.");
+        }
+        search(searchTerm);
+    }
+
 }
