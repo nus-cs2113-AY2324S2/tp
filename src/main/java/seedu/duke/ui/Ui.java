@@ -13,11 +13,13 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
     public String getUserCommand() {
+        printHyphens();
         String currentLine =  in.nextLine();
 
         while(shouldIgnore(currentLine)) {
             currentLine = in.nextLine();
         }
+        printHyphens();
         return currentLine;
     }
     private boolean shouldIgnore(String currentLine) {
