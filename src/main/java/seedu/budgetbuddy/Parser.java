@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 import seedu.budgetbuddy.commandcreator.CommandCreator;
 import seedu.budgetbuddy.commandcreator.EditExpenseCommandCreator;
+import seedu.budgetbuddy.commandcreator.EditSavingsCommandCreator;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
@@ -379,43 +380,6 @@ public class Parser {
         return new AddSavingCommand(savings, category, amount);
     }
 
-    public Command handleEditSavingCommand(SavingList savings, String input) {
-        String[] parts = input.split(" ");
-        String category = null;
-        int index = -1;
-        double amount = -1;
-
-        for (String part : parts) {
-            if (part.startsWith("c/")) {
-                category = part.substring(2);
-            } else if (part.startsWith("i/")) {
-                try {
-                    index = Integer.parseInt(part.substring(2));
-                } catch (NumberFormatException e) {
-                    // Handle invalid index format
-                    System.out.println("Invalid index");
-                    return null;
-                }
-            } else if (part.startsWith("a/")) {
-                try {
-                    amount = Double.parseDouble(part.substring(2));
-                } catch (NumberFormatException e) {
-                    // Handle invalid amount format
-                    System.out.println("Invalid amount. Amount should be a numerical value");
-                    return null;
-                }
-            }
-        }
-
-        // Validate required fields
-        if (category != null && index != -1 && amount != -1) {
-            return new EditSavingCommand(savings, category, index, amount);
-        } else {
-            // Handle incomplete command
-            return null;
-        }
-    }
-
     public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
         assert expenses != null : "Expense list cannot be null";
         assert input != null : "Input string cannot be null";
@@ -506,7 +470,8 @@ public class Parser {
         }
 
         if (isEditSavingCommand(input)) {
-            return handleEditSavingCommand(savings, input);
+            CommandCreator commandCreator = new EditSavingsCommandCreator(input, savings);
+            return commandCreator.createCommand();
         }
 
         if (isDeleteExpenseCommand(input)) {
