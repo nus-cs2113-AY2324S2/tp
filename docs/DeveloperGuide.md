@@ -8,7 +8,7 @@
 
 ### Architecture
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![Architecture.png](UML%20diagram%2FArchitecture.png)
 
 The **Architecture diagram** above showcases the high-level design of the EconoCraft Pro application. 
 
@@ -25,6 +25,7 @@ is in charge of the game initialization and starting the main game loop.
 
 The functionality of the game is divided into different components, each responsible for a different aspect of the game.
 
+* `PlayerProfile`: Represents the player's profile and is responsible for storing and updating the player's information.
 * `Parser`: Responsible for parsing the user input.
 * `ResponseManager`: Responsible for generating the response to the user input.
 * `EconoCraftLogic`: Responsible for executing user command and updating the game state.
@@ -36,14 +37,12 @@ The functionality of the game is divided into different components, each respons
 The *Sequence Diagram* below showcases the interaction between the different components of the EconoCraft Pro 
 application when a user inputs a command `work`.
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![Sequence_for_work.png](UML%20diagram%2FSequence_for_work.png)
 
 For `CommandFactory` and `Minigame`,
 * Each defines its API for creating commands and mini-games respectively, where
   `Command` is the API for `CommandFactory` and `MiniGame` is the API for `MiniGame`.
 * Implements its functionality with concrete classes such as `WorkCommand` and `TypingGame`.
-
-![](https://via.placeholder.com/100.png?text=Photo)
 
 The sections below would give more details of each component.
 
