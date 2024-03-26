@@ -1,7 +1,11 @@
 package supertracker.command;
 
 import supertracker.item.Inventory;
+import supertracker.storage.FileManager;
+import supertracker.ui.ErrorMessage;
 import supertracker.ui.Ui;
+
+import java.io.IOException;
 
 public class DeleteCommand implements Command {
 
@@ -17,6 +21,12 @@ public class DeleteCommand implements Command {
 
         Inventory.delete(name);
         Ui.deleteCommandSuccess(name);
+
+        try {
+            FileManager.saveData();
+        } catch (IOException e) {
+            Ui.printError(ErrorMessage.FILE_SAVE_ERROR);
+        }
     }
 
     @Override

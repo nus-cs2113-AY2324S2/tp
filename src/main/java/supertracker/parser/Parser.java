@@ -90,6 +90,13 @@ public class Parser {
         return input.substring(0, input.indexOf(" "));
     }
 
+    private static String getParameters(String input) {
+        if (!input.contains(" ")) {
+            return "";
+        }
+        return input.substring(input.indexOf(" ")).trim();
+    }
+
     /**
      * Parses a Command accordingly from the user input string
      *
@@ -98,7 +105,7 @@ public class Parser {
      */
     public static Command parseCommand(String input) throws TrackerException {
         String commandWord = getCommandWord(input);
-        String params = input.replace(commandWord, "").trim();
+        String params = getParameters(input);
 
         Command command;
         switch (commandWord) {
