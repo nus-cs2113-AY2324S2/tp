@@ -36,15 +36,15 @@ public class Gym extends Workout {
      * Adds station to an ArrayList of GymStation object.
      *
      * @param name        Name of the gym station.
-     * @param weight      Weight used for the station.
+     * @param weightsList Weights used for the station.
      * @param numberOfSet Number of sets done.
      * @param repetitions Number of repetitions done.
      * @throws CustomExceptions.InvalidInput If there is invalid input in any parameter.
      */
-    public void addStation(String name, int weight, int numberOfSet,
+    public void addStation(String name, ArrayList<Integer> weightsList, int numberOfSet,
                            int repetitions) throws CustomExceptions.InvalidInput {
         try {
-            GymStation newStation = new GymStation(name, weight, repetitions, numberOfSet);
+            GymStation newStation = new GymStation(name, weightsList, repetitions, numberOfSet);
             stations.add(newStation);
         } catch (Exception e) {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_GYM_INPUT);
@@ -67,25 +67,6 @@ public class Gym extends Workout {
         return stations.get(index);
     }
 
-    /**
-     * Adds new gym station using validated parameters.
-     *
-     * @param validatedInputs Array representing validated GymStation parameters.
-     * @param gym             Gym object to add the GymStation to.
-     * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
-     * @throws CustomExceptions.InvalidInput      If there is invalid input.
-     */
-    public static void addGymStationInput(String[] validatedInputs, Gym gym) throws
-            CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-
-        String exerciseName = validatedInputs[WorkoutConstant.INDEX_OF_STATION_NAME];
-        int weights = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_WEIGHTS]);
-        int numberOfSets = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_SETS]);
-        int repetition = Integer.parseInt(validatedInputs[WorkoutConstant.INDEX_OF_STATION_REPS]);
-        gym.addStation(exerciseName, weights, numberOfSets, repetition);
-
-    }
 
     /**
      * Method checks if Gym values is valid
@@ -99,16 +80,16 @@ public class Gym extends Workout {
 
     public static boolean checkIfGymIsValid(String numberOfStation) throws CustomExceptions.InvalidInput {
         if (numberOfStation.isBlank()) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_CANNOT_BE_BLANK_ERROR);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_BLANK_ERROR);
         }
 
         try {
             int value = Integer.parseInt(numberOfStation);
             if (value <= 0) {
-                throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_MUST_BE_POSITIVE_ERROR);
+                throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_POSITIVE_ERROR);
             }
         } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_MUST_BE_DIGIT_ERROR);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.NO_OF_STATION_DIGIT_ERROR);
         }
 
         return true;

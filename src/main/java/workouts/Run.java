@@ -188,10 +188,10 @@ public class Run extends Workout {
         try {
             double value = Double.parseDouble(runDistance);
             if (value <= 0) {
-                throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_MUST_BE_POSITIVE_ERROR);
+                throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_POSITIVE_ERROR);
             }
         } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_MUST_BE_DOUBLE_ERROR);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_DOUBLE_ERROR);
         }
 
         // Check to see if time is valid
@@ -228,7 +228,7 @@ public class Run extends Workout {
                 seconds = Integer.parseInt(stringTimeParts[1]);
             }
         } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_MUST_BE_INTEGER_ERROR);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_INTEGER_ERROR);
         }
 
         // Check if hour is within the range
