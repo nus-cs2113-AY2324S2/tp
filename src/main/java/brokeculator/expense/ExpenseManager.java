@@ -36,7 +36,7 @@ public class ExpenseManager {
         boolean isDescriptionNull = (description == null);
         ArrayList<Expense> expensesToSummarise = new ArrayList<Expense>();
         for (Expense expense : expenses.subList(beginIndex, endIndex + 1)) {
-            if (!isDescriptionNull && !expense.getDescription().equals(description)) {
+            if (!isDescriptionNull && !expense.getDescription().contains(description)) {
                 continue;
             }
             // TODO implement date processing
