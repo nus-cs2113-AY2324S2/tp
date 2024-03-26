@@ -31,7 +31,7 @@ activate commands COMMANDS_COLOR
 commands --[COMMANDS_COLOR]> commands
 deactivate commands
 
-commands --[COMMANDS_COLOR]> ui : printListTasks(newList:ProductList)
+commands -[COMMANDS_COLOR]> ui : printListTasks(newList:ProductList)
 deactivate commands
 
 @enduml
