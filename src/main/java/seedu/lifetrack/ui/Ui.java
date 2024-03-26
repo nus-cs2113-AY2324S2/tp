@@ -2,6 +2,7 @@ package seedu.lifetrack.ui;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.sleep.sleeplist.SleepList;
 
 import java.util.Scanner;
 
@@ -32,11 +33,11 @@ public class Ui {
      * @param calorieList list containing all entries pertinent to calories
      * @param liquidList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, LiquidList liquidList) {
+    public static void readUserInput(CalorieList calorieList, LiquidList liquidList, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList, liquidList);
+            handleUserInput(line, calorieList, liquidList, sleepList);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
@@ -70,8 +71,21 @@ public class Ui {
             handleUnknownInput();
         }
     }
+    public static void handleSleepInput(String line, SleepList sleepList) {
+        assert !line.startsWith("bye") : "exit the app";
+        if (line.startsWith("sleep add"))  {
+            sleepList.addSleep(line);
+        } else if (line.startsWith("sleep list")) {
+            sleepList.printSleepList();
+        } else if (line.startsWith("sleep delete")) {
+            sleepList.deleteSleep(line);
+        } else {
+            handleUnknownInput();
+        }
+    }
 
-    public static void handleUserInput(String line, CalorieList calorieList, LiquidList liquidList) {
+    public static void handleUserInput(String line, CalorieList calorieList,
+                                       LiquidList liquidList, SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
@@ -83,6 +97,8 @@ public class Ui {
                 showHelp();
             } else if (line.startsWith("liquids")) {
                 handleLiquidsInput(line, liquidList);
+            } else if (line.startsWith("sleep")) {
+                handleSleepInput(line, sleepList);
             } else {
                 handleUnknownInput();
             }
@@ -127,5 +143,9 @@ public class Ui {
         System.out.println("\t - liquids in b/<type of beverage> v/<volume> : " +
                 "Marks the task at the specified index as done.");
         System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
+        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>.\"");
+        System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.\"");
+        System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index" +
+                " from the sleep list.");
     }
 }
