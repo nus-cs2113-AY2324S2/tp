@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -198,6 +199,18 @@ public class GroceryList {
      */
     public void sortByExpiration() {
         Collections.sort(groceries, (g1, g2) -> g1.getExpiration().compareTo(g2.getExpiration()));
+    }
+
+    public void sortByCost() {
+        int size = groceries.size();
+        if (size == 0) {
+            Ui.printNoGrocery();
+        } else {
+            List<Grocery> groceriesByDate = groceries;
+            groceriesByDate.sort((g1, g2) -> Double.compare(g1.getCost(), g2.getCost()));
+            Collections.reverse(groceriesByDate);
+            Ui.printGroceryList(groceriesByDate);
+        }
     }
 
     /**

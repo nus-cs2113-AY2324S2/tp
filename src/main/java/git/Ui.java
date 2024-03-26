@@ -54,8 +54,11 @@ public class Ui {
 
         printLine();
     }
+
     /**
      * Processes user input into commands and their details.
+     *
+     * @return an array of the fragments of the commands
      */
     public String[] processInput() {
         String commandLine = in.nextLine();
@@ -73,6 +76,8 @@ public class Ui {
 
     /**
      * Prompts user for expiration date.
+     *
+     * @return the formatted expiration date
      */
     public String promptForExpiration() {
         System.out.println("Please enter the year of expiry (e.g., 2024):");
@@ -82,7 +87,7 @@ public class Ui {
         String month = in.nextLine().trim();
         month = convertMonthToNumber(month);
 
-        System.out.println("Please enter the date of expiry (e.g., 19):");
+        System.out.println("Please enter the date of expiry (e.g., 09):");
         String day = in.nextLine().trim();
 
         String formattedDate = formatExpirationDate(year, month, day);
@@ -90,7 +95,25 @@ public class Ui {
     }
 
     /**
+     * Prompts the user to enter the cost of the grocery and format the string.
+     * Returns the cost to be set for the grocery.
+     *
+     * @return the cost of the grocery formatted in 2dp
+     */
+    public String promptForCost() {
+        System.out.println("Please enter the cost (e.g., $1.20):");
+        String price = in.nextLine().trim();
+        String formattedPrice = price.replace("$", "");
+        //format the money value with 2dp
+        double cost = Double.parseDouble(formattedPrice);
+        return String.format("%.2f", cost);
+    }
+
+    /**
      * Reads expiration date from user input.
+     *
+     * @param month the month of expiration
+     * @return month in numerical format
      */
     private String convertMonthToNumber(String month) {
         // Convert month from name to number (e.g., "July" to "07")
@@ -109,6 +132,11 @@ public class Ui {
 
     /**
      * Reads expiration date from user input.
+     *
+     * @param year the year of expiration
+     * @param month the month of expiration
+     * @param day the day of expiration
+     * @return the formatted expiration date
      */
     private String formatExpirationDate(String year, String month, String day) {
         // This method can be enhanced to validate the date components
@@ -127,6 +155,7 @@ public class Ui {
                         "use GROCERY a/AMOUNT: updates the total amount after using a GROCERY\n" +
                         "del GROCERY: deletes GROCERY.\n" +
                         "list: shows list of all groceries you have.\n" +
+                        "listC: shows the list sorted by price.\n" +
                         "exit: exits the program.\n" +
                         "help: view all the possible commands."
         );
