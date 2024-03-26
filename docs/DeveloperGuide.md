@@ -12,19 +12,20 @@
 ## Product scope
 ### Target user profile
 
-Students and Working adults
+NUS Students
 
 ### Value proposition
 
 Users can use this app to keep track of their expenditures and therefore they can better manage their finances.
-Students can use this app to keep track of their GPA grade
+Students can use this app to calculate their GPA grade
 
 ## User Stories
 
-| Version | As a ... | I want to ...                     | So that I can ...|
-|---------|------|-----------------------------------|------------------|
-| v1.0    |student| focus on financial responsibility |view a breakdown of his expenditures by category|
-| v1.0    |user| find a to-do item by name         |locate a to-do without having to go through the entire list|
+| Version | As a ...                 | I want to ...                                 | So that I can ...                                    |
+|---------|--------------------------|-----------------------------------------------|------------------------------------------------------|
+| v1.0    | student                  | focus on financial responsibility             | view a breakdown of his expenditures by category     |
+| v1.0    | Proactive business major | calculate my course grades on CantVas         | see which mod I have to SU.                          |
+| v1.0    | careless user            | delete wrong items in the expenditure tracker | add back the correct item in the expenditure tracker |
 
 ## Non-Functional Requirements
 
@@ -42,7 +43,7 @@ Students can use this app to keep track of their GPA grade
 The Motivational module prints a randomly generated motivational quote for the user whenever the program starts 
 
 # Expenditure
-The expenditure module is acomprehensive allows users to key in their expenses to enable them to store all their 
+The expenditure module is comprehensive allows users to key in their expenses to enable them to store all their 
 expenses.
 This guide will walk developers through how to use the expenditure function to track their expenses
 
@@ -58,11 +59,6 @@ The module is divided into two primary classes:
 Handles user interactions, input collection, and directs the flow of the GPA calculation process.
 ### GPAMain: 
 Contains the logic for calculating the updated GPA.
-
-
-## Environment Setup
-Java JDK 8 or above
-An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 
 ## Class Descriptions
 
@@ -115,7 +111,6 @@ Throws an error message when the user enters an input that has the wrong format 
 ### Usages 
 This exception is thrown in addExpenditure()
 
-
 ## Development Notes
 Input Validation: Ensure that GPA scores and credit numbers are within valid ranges. This module expects a GPA between 0 and 5, and non-negative numbers for credits.
 Error Handling: Properly handle invalid inputs, such as non-numeric values for credits or unsupported grade values.
@@ -128,7 +123,9 @@ Persistent Data: Implement functionality to save and retrieve historical GPA cal
 
 Expanded Grade Scale: Allow for customization of the grade to GPA points mapping to accommodate different institutions' grading scales.
 
-
+## Environment Setup
+Java JDK 8 or above
+An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 
 
 
