@@ -5,6 +5,7 @@ import utility.CustomExceptions;
 import utility.HealthConstant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Represents the list of BMI objects stored.
@@ -13,6 +14,7 @@ public class HealthList extends ArrayList<Health> {
     static LogFile logFile = LogFile.getInstance();
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
     private static final ArrayList<Period> periods = new ArrayList<>();
+    private static final ArrayList<Appointment> appointments = new ArrayList<>();
 
     //@@author j013n3
     /**
@@ -201,5 +203,44 @@ public class HealthList extends ArrayList<Health> {
                 deletedPeriod.endPeriodDate);
         periods.remove(index);
         LogFile.writeLog("Removed period with index: " + index, false);
+    }
+
+    //@@author syj_02
+    public static void addAppointment(Appointment appointment) {
+        assert appointment != null : HealthConstant.APPOINTMENT_CANNOT_BE_NULL;
+        appointments.add(appointment);
+        appointments.sort(Comparator.comparing(Appointment::getDate).thenComparing(Appointment::getTime));
+    }
+
+    public static void deleteAppointment(int index) throws CustomExceptions.OutOfBounds {
+        assert !appointments.isEmpty() : "Apointment list is empty.";
+        if (index < 1 || index > appointments.size()) {
+            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+        }
+        index -= 1;
+        Appointment deletedAppointment = appointments.get(index);
+        System.out.println("Removed appointment on " +
+                deletedAppointment.date +
+                " at " +
+                deletedAppointment.time +
+                " : " +
+                deletedAppointment.description);
+        appointments.remove(index);
+        LogFile.writeLog("Removed period with index: " + index, false);
+        showAppointmentList();
+    }
+
+    public static void showAppointmentList() {
+        assert !appointments.isEmpty() : HealthConstant.APPOINTMENT_LIST_EMPTY;
+        int index = 1;
+        for (Appointment appointment: appointments) {
+            System.out.print(index + ". ");
+            System.out.println(appointment);
+            index += 1;
+        }
+    }
+    public static void clearAppointments() {
+        appointments.clear();
+        assert appointments.isEmpty() : "Appointment list is not cleared.";
     }
 }

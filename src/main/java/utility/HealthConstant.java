@@ -5,6 +5,8 @@ public class HealthConstant {
     // Headers
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
+    public static final String PREDICT = "predict";
+    public static final String APPOINTMENT = "appointment";
 
 
     // Flags
@@ -14,21 +16,24 @@ public class HealthConstant {
     public static final String DATE_FLAG = "/date";
     public static final String START_FLAG = "/start";
     public static final String END_FLAG = "/end";
-
+    public static final String TIME_FLAG = "/time";
+    public static final String DESCRIPTION_FLAG = "/description";
 
     // Parameters
     public static final Integer BMI_PARAMETERS = 4;
-    public static final Integer PERIOD_CYCLE_PARAMETERS = 3;
+    public static final Integer PERIOD_PARAMETERS = 3;
+    public static final Integer APPOINTMENT_PARAMETERS = 4;
 
 
     // Offset
-    public static final Integer BMI_H_OFFSET = 3;
-    public static final Integer BMI_HEIGHT_OFFSET = 8;
-    public static final Integer BMI_WEIGHT_OFFSET = 8;
+    public static final Integer H_OFFSET = 3;
+    public static final Integer HEIGHT_OFFSET = 8;
+    public static final Integer WEIGHT_OFFSET = 8;
     public static final Integer DATE_OFFSET = 6;
-    public static final Integer PERIOD_CYCLE_H_OFFSET = 3;
-    public static final Integer PERIOD_CYCLE_START_OFFSET = 7;
-    public static final Integer PERIOD_CYCLE_END_OFFSET = 5;
+    public static final Integer START_DATE_OFFSET = 7;
+    public static final Integer END_DATE_OFFSET = 5;
+    public static final Integer TIME_OFFSET = 6;
+    public static final Integer DESCRIPTION_OFFSET = 13;
 
 
     // Index
@@ -45,6 +50,8 @@ public class HealthConstant {
     // Input
     public static final String BMI_INPUT = "h:bmi";
     public static final String PERIOD_INPUT = "h:period";
+    public static final String PREDICT_INPUT = "h:predict";
+    public static final String APPOINTMENT_INPUT = "h:appointment";
 
 
     // Formatted Strings/Messages
@@ -67,12 +74,16 @@ public class HealthConstant {
     public static final String INVALID_INPUT_FOR_HEALTH = "Invalid input for health type! " +
             "Please input either /h:bmi or /h:period";
     public static final String INSUFFICIENT_PARAMETERS_FOR_BMI = "Insufficient parameters for bmi! " +
-            "Example input: /h:bmi /height:height /weight:weight";
+            "Example input: /h:bmi /height:height /weight:weight /date:date";
     public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
             "Example input: /h:period /start:startDate /end:endDate";
+    public static final String INSUFFICIENT_PARAMETERS_FOR_APPOINTMENT = "Insufficient parameters for period! " +
+            "Example input: /h:appointment /date:date /time:time /description:description /place:place";
     public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
+    public static final String APPOINTMENT_MESSAGE_PREFIX = "";
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
     public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
+    public static final String APPOINTMENT_ADDED_MESSAGE_PREFIX = "Added: appointment | ";
     public static final String NUMBER_OF_INPUTS_REQUIRED_PERIOD =  "Array of userInputs should have 5 elements.";
     public static final String HEIGHT_WEIGHT_REQUIRE_POSITIVE = "Both Height and weight must be positive.";
     public static final String BMI_MUST_BE_POSITIVE = "Bmi must be a positive value";
@@ -85,11 +96,11 @@ public class HealthConstant {
     public static final String END_DATE_CANNOT_BE_NULL = "End date of period cannot be empty.";
     public static final Integer LATEST_THREE_CYCLE_LENGTHS = 3;
     public static final Integer MINIMUM_SIZE_FOR_PREDICTION = 4;
-    public static final String PREDICT_INPUT = "h:predict";
-    public static final String PREDICT = "predict";
     public static final String PREDICTED_START_DATE_MESSAGE ="Your next cycle's predicted start date is ";
     public static final String COUNT_DAYS_MESSAGE = ", in ";
     public static final String PERIOD_IS_LATE = ". Your period is late by ";
     public static final String DAYS_MESSAGE = " days.";
     public static final String UNABLE_TO_MAKE_PREDICTIONS = "Insufficient period cycles to make prediction.";
+    public static final String APPOINTMENT_CANNOT_BE_NULL = "Appointment object cannot be null.";
+    public static final String APPOINTMENT_LIST_EMPTY = "Appointment list is empty.";
 }

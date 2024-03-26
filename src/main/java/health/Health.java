@@ -39,9 +39,10 @@ public class Health {
         boolean isBmi = healthType.equals(HealthConstant.BMI_INPUT);
         boolean isPeriod = healthType.equals(HealthConstant.PERIOD_INPUT);
         boolean isPredict = healthType.equals(HealthConstant.PREDICT_INPUT);
+        boolean isAppointment = healthType.equals(HealthConstant.APPOINTMENT_INPUT);
 
 
-        if (!isBmi && !isPeriod && !isPredict) {
+        if (!isBmi && !isPeriod && !isPredict && !isAppointment) {
             throw new CustomExceptions.InvalidInput(HealthConstant.INVALID_INPUT_FOR_HEALTH);
         }
 
@@ -49,8 +50,12 @@ public class Health {
             throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 
-        if (isPeriod && userInputs.length < HealthConstant.BMI_PARAMETERS) {
+        if (isPeriod && userInputs.length < HealthConstant.PERIOD_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
+        }
+
+        if (isAppointment && userInputs.length < HealthConstant.APPOINTMENT_PARAMETERS) {
+            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_APPOINTMENT);
         }
 
         assert userInputs.length == 5 : HealthConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
@@ -59,8 +64,10 @@ public class Health {
             return HealthConstant.BMI;
         } else if (isPeriod) {
             return HealthConstant.PERIOD;
-        } else {
+        } else if (isPredict){
             return HealthConstant.PREDICT;
+        } else {
+            return HealthConstant.APPOINTMENT;
         }
     }
 }

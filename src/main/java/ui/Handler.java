@@ -1,5 +1,6 @@
 package ui;
 
+import health.Appointment;
 import health.Bmi;
 import health.Health;
 import health.HealthList;
@@ -287,6 +288,23 @@ public class Handler {
                 } else {
                     throw new CustomExceptions.InsufficientInput(HealthConstant.UNABLE_TO_MAKE_PREDICTIONS);
                 }
+            } else if (typeOfHealth.equals(HealthConstant.APPOINTMENT)) {
+                String[] appointmentDetails = Appointment.getAppointment(userInput);
+
+                if (appointmentDetails[0].isEmpty() || appointmentDetails[1].isEmpty() || appointmentDetails[2].isEmpty() ||  appointmentDetails[3].isEmpty()) {
+                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
+                }
+
+                Appointment newAppointment = new Appointment(appointmentDetails[1], appointmentDetails[2], appointmentDetails[3]);
+
+                HealthList.addAppointment(newAppointment);
+                System.out.println(HealthConstant.APPOINTMENT_ADDED_MESSAGE_PREFIX
+                        + appointmentDetails[1]
+                        + UiConstant.LINE
+                        + appointmentDetails[2]
+                        + UiConstant.LINE
+                        + appointmentDetails[3]);
+                System.out.println(newAppointment);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e, e.getMessage());
