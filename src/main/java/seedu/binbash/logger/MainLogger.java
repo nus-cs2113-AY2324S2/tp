@@ -10,11 +10,12 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class MainLogger {
-    private final Logger fileLogger;
     private static FileHandler fileHandler;
     private static final String logDirectoryPath = "./logs/";
     private static final String logFileName = "logs.txt";
     private static boolean isLogFileCreated = false;
+    private final Logger fileLogger;
+
 
     public MainLogger (String loggerName) throws BinBashException {
         fileLogger = Logger.getLogger(loggerName);
