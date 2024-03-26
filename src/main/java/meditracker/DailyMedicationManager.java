@@ -21,7 +21,7 @@ public class DailyMedicationManager {
      *
      * @see DailyMedication
      */
-    public DailyMedicationManager(MedicationManager medicationManager) {
+    public static void createDailyMedicationManager(MedicationManager medicationManager) {
         assert medicationManager != null;
         for (Medication medication : medicationManager.getMedications()) {
             String medicationName = medication.getName();
@@ -35,7 +35,7 @@ public class DailyMedicationManager {
      *
      * @param lines lines of String read from each row in the textfile
      */
-    public DailyMedicationManager(List<String> lines) {
+    public static void importDailyMedicationManager(List<String> lines) {
         try {
             for (String line : lines) {
                 DailyMedication dailyMedication = parseImportedLine(line);

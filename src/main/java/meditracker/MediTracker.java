@@ -26,6 +26,7 @@ public class MediTracker {
      */
     public MediTracker() {
         medicationManager = new MedicationManager();
+        DailyMedicationManager.createDailyMedicationManager(medicationManager);
     }
 
     /**
@@ -35,6 +36,7 @@ public class MediTracker {
      */
     public MediTracker(List<String> dailyMedicationList) {
         medicationManager = new MedicationManager();
+        DailyMedicationManager.importDailyMedicationManager(dailyMedicationList);
     }
 
     /**
