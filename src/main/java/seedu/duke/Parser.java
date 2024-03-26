@@ -124,14 +124,6 @@ public class Parser {
 
 
     public void handleUserInput() throws EndProgramException, ExpensesException {
-        String[] tokens = userInput.split(" ", 2);
-
-        String command = tokens[0].toLowerCase().trim();
-        String argument = "";
-        if (tokens.length > 1) {
-            argument = tokens[1].trim();
-        }
-
         switch (command) {
         case "bye":
             throw new EndProgramException();
@@ -149,29 +141,31 @@ public class Parser {
             GroupCommand.exitGroup();
             break;
         case "expense":
-            try {
-                String[] removeExpenseTag = argument.split("/amount");
-                if (removeExpenseTag.length == 1) {
-                    throw new ExpensesException("No description for expenses! Add /amount /paid /user");
-                }
-                String[] extractAmount = removeExpenseTag[1].split("/paid");
-                String amount = extractAmount[0];
-                amount = removeWhitespaces(amount);
 
-                try {
-                    float totalAmount = Float.parseFloat(amount);
-                    String[] payeeList = extractAmount[1].split("/user");
-                    String payerName = removeWhitespaces(payeeList[0]);
-                    for(int i = 0; i < payeeList.length; i++){
-                        payeeList[i] = removeWhitespaces(payeeList[i]);
-                    }
-                    Expense newTransaction = new Expense(payerName,totalAmount, payeeList);
-                } catch (NumberFormatException e) {
-                    System.out.println("Re-enter expense with amount as a proper number.");
+            // Checks for missing Expense Parameters
+            String[] expenseParams = {"amount", "paid", "user"};
+            for(String expenseParam : expenseParams){
+                if(params.get(expenseParam).isEmpty()){
+                    String exceptionMessage = "No description for expenses! Add /" + expenseParam;
+                    throw new ExpensesException(exceptionMessage);
                 }
-            } catch(ArrayIndexOutOfBoundsException e) {
-                System.out.println("Empty /amount, /paid or /user. Add expenses using the correct format.");
             }
+
+            // Checks if amount is a valid Float
+            float totalAmount;
+            try {
+                totalAmount = Float.parseFloat(params.get("amount").get(0));
+            } catch (NumberFormatException e) {
+                String exceptionMessage = "Re-enter expense with amount as a proper number.";
+                throw new ExpensesException(exceptionMessage);
+            }
+
+            // Obtain necessary information from 'params' and create new Expense
+            ArrayList<String> payeeList = params.get("user");
+            String payerName = params.get("paid").get(0);
+            payeeList.add(0, payerName);
+
+            Expense newTransaction = new Expense(payerName, totalAmount, payeeList.toArray(new String[0]));
             break;
         case "list":
             // List code here
@@ -188,9 +182,4 @@ public class Parser {
         }
 
     }
-    private String removeWhitespaces(String item) {
-        String itemWithoutWhitespaces = item.replaceAll("\\s+", " ").trim();
-        return itemWithoutWhitespaces;
-    }
-
 }
