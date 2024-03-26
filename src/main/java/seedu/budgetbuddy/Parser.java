@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.EditExpenseCommandCreator;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
@@ -378,45 +380,6 @@ public class Parser {
         return new AddSavingCommand(savings, category, amount);
     }
 
-    public Command handleEditExpenseCommand(ExpenseList expenses, String input) {
-        String[] parts = input.split(" ");
-        String category = null;
-        int index = -1;
-        double amount = -1;
-        String description = null;
-
-        for (String part : parts) {
-            if (part.startsWith("c/")) {
-                category = part.substring(2);
-            } else if (part.startsWith("i/")) {
-                try {
-                    index = Integer.parseInt(part.substring(2));
-                } catch (NumberFormatException e) {
-                    // Handle invalid index format
-                    return null;
-                }
-            } else if (part.startsWith("a/")) {
-                try {
-                    amount = Double.parseDouble(part.substring(2));
-                } catch (NumberFormatException e) {
-                    // Handle invalid amount format
-                    System.out.println("Invalid Amount. Amount should be a numerical value.");
-                    return null;
-                }
-            } else if (part.startsWith("d/")) {
-                description = part.substring(2);
-            }
-        }
-
-        // Validate required fields
-        if (category != null && index != -1 && amount != -1 && description != null) {
-            return new EditExpenseCommand(expenses, category, index, amount, description);
-        } else {
-            // Handle incomplete command
-            return null;
-        }
-    }
-
     public Command handleEditSavingCommand(SavingList savings, String input) {
         String[] parts = input.split(" ");
         String category = null;
@@ -539,7 +502,8 @@ public class Parser {
         }
 
         if (isEditExpenseCommand(input)) {
-            return handleEditExpenseCommand(expenses, input);
+            CommandCreator commandCreator = new EditExpenseCommandCreator(input, expenses);
+            return commandCreator.createCommand();
         }
 
         if (isEditSavingCommand(input)) {
