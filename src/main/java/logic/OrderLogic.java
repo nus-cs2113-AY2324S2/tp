@@ -21,7 +21,7 @@ public class OrderLogic {
         Order newOrder = new Order();
         boolean isComplete = false;
         System.out.println("Order " + newOrder.getID() + " creating...");
-        System.out.println("Type 'help' for a list of commands");
+        OrderHelpCommand.execute();
         while (!isComplete) {
             String inputText = input.nextLine();
             CommandType commandType;
