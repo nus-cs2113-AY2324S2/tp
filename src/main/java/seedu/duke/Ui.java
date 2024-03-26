@@ -91,15 +91,13 @@ public class Ui {
         userAnswers.addUserCorrectness(answersCorrectness);
     }
 
+    public void printNoSolutionAccess(){
+        System.out.println("Attempt the topic first!");
+    }
 
     public void printOneSolution(int questionNum, String solution) {
         System.out.println("The solution for question " + questionNum + ":"
                 + System.lineSeparator() + solution);
-    }
-
-    public void printOneExplanation (int questionNum, String explanation) {
-        System.out.println("The explanation for question " + questionNum + ":"
-                + System.lineSeparator() + explanation);
     }
 
     public void printAllSolutions(String allSolutions) {
