@@ -1,5 +1,6 @@
 package seedu.duke;
-
+import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -8,7 +9,9 @@ public class Duke {
     public static void main(String[] args) {
         Ui.printGreeting();
         boolean userSaysBye = false;
+        FileSave file = new FileSave("omni.txt");
         TravelActivityList list = new TravelActivityList();
+        file.readFile(list);
         String line;
         Scanner in = new Scanner(System.in);
         while (!userSaysBye) {
@@ -26,7 +29,25 @@ public class Duke {
 
                 case "add":
                     Ui.printLine();
-                    Parser.addCommand(line, command, list);
+                    Parser.addCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "accommodation":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "food":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "landmark":
+                    Ui.printLine();
+                    Parser.activityCommand(line, list);
                     Ui.printLine();
                     break;
 
@@ -56,7 +77,7 @@ public class Duke {
 
                 case "tag":
                     Ui.printLine();
-                    Parser.tagCommand(command, list);
+                    Parser.tagCommand(line, list);
                     Ui.printLine();
                     break;
 
@@ -77,23 +98,31 @@ public class Duke {
                     userSaysBye = true;
                     break;
 
+                case "update":
+                    Ui.printLine();
+                    Parser.updateCommand(line, list);
+                    Ui.printLine();
+                    break;
+
                 default:
                     Ui.printLine();
                     System.out.println("This is not a valid command");
                     Ui.printLine();
                 }
+                file.saveActivityList(list);
             } catch (OmniException exception){
                 Ui.printException(exception);
             } catch (NoSuchElementException exception){
                 Ui.printNoSuchElementException(exception);
             } catch (NumberFormatException exception) {
                 Ui.printNumberTooLargeException(exception);
+            } catch (DateTimeException exception){
+                Ui.printDateTimeExceptionError();
+            } catch (IOException exception){
+                Ui.printSavingError();
             }
         }
     }
-
-
-
 }
 
 
