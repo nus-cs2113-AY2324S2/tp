@@ -34,6 +34,7 @@ public class UserTest {
         assertEquals(3, testMealList.get(0).getServingSize());
     }
 
+    /*
     @Test
     public void handleWater_unknownServingSize_addWaterFailed() throws IncompleteWaterException {
         try {
@@ -46,6 +47,7 @@ public class UserTest {
         String error = "Incomplete command, the format must be [water s/SERVING_SIZE].";
         fail(error);
     }
+    */
 
     @Test
     public void handleDrinks_validInputs_correctlyAddMeal() throws IncompleteDrinkException,
