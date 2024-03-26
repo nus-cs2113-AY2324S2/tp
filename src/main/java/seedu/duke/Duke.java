@@ -2,6 +2,7 @@ package seedu.duke;
 
 import command.Command;
 import command.ExitCommand;
+import exceptions.CommandFormatException;
 import parser.Parser;
 import ui.TextUi;
 
@@ -17,17 +18,17 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CommandFormatException {
         new Duke().run();
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, CommandFormatException {
         ui.showWelcomeMessage("1.0", "./StockMasterData.txt");
         this.normalOperation();
         ui.showGoodByeMessage("./StockMasterData.txt");
     }
 
-    private void normalOperation() throws IOException {
+    private void normalOperation() throws IOException, CommandFormatException {
         String userInput;
         do {
             userInput = ui.getUserInput();
