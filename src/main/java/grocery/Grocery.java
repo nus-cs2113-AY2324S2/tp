@@ -87,7 +87,7 @@ public class Grocery {
             ? " expiration date not set" 
             : ", expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String amt = (amount == 0) ? "" : ", amount: " + amount;
-        String price = (cost != 0) ? ", cost: $" + String.format("%.2f", cost): " the cost is not set";
+        String price = (cost != 0) ? ", cost: $" + String.format("%.2f", cost): " cost not set";
         return this.name + amt + exp + price;
     }
 }

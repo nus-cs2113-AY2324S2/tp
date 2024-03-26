@@ -3,6 +3,7 @@ package git;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.InvalidCostException;
 import grocery.Grocery;
 
 
@@ -100,13 +101,20 @@ public class Ui {
      *
      * @return the cost of the grocery formatted in 2dp
      */
-    public String promptForCost() {
+    public String promptForCost() throws InvalidCostException {
         System.out.println("Please enter the cost (e.g., $1.20):");
         String price = in.nextLine().trim();
-        String formattedPrice = price.replace("$", "");
-        //format the money value with 2dp
-        double cost = Double.parseDouble(formattedPrice);
-        return String.format("%.2f", cost);
+        if(price.contains("$")) {
+            String formattedPrice = price.replace("$", "");
+            try {
+                double cost = Double.parseDouble(formattedPrice);
+                return String.format("%.2f", cost);//format the money value to 2dp
+            } catch (NumberFormatException nfe) {
+                throw new InvalidCostException();
+            }
+        } else {
+            throw new InvalidCostException();
+        }
     }
 
     /**
