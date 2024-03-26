@@ -5,9 +5,18 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
+### Timetable plan component
+In order to keep track of the timetable plan of the user, 3 classes are used mainly.
+- `Course`: Represents a course taken or planned by the user
+- `Timetable`: Stores the list of courses
+- `PlanGetter`: Provides access to the timetable plan
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+Below is the class diagram to illustrate this:
+![TimetablePlan_ClassDiagram](uml/TimetablePlan_ClassDiagram.png)
 
+There are 3 overloaded variations of the `getPlan()` method in the `PlanGetter` class.
+The first is as shown in the class diagram above. 
+The second takes in an additional integer `year`, while the third takes in two additional integers `year` and `term`.
 
 ## Product scope
 ### Target user profile

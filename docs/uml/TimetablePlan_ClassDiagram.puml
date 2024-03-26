@@ -1,0 +1,21 @@
+@startuml
+class Timetable {
+    +addCourse(course: Course)
+    +removeCourse(courseCode: String): boolean
+}
+
+class Course {
+    -courseCode: String
+    -year: int
+    -term: int
+    +getDetails(): String
+    +getYearAndTerm(): String
+}
+
+class PlanGetter {
+    +{static} getPlan(timetable: Timetable): String
+}
+
+Timetable "*" -> "courses *" Course : contains >
+PlanGetter ..> Timetable
+@enduml
