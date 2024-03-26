@@ -27,4 +27,8 @@ public enum Category {
         }
         return null;
     }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 }
