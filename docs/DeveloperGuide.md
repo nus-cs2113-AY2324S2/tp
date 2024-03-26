@@ -37,6 +37,9 @@
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
+# Motivational messages
+The Motivational module prints a randomly generated motivational quote for the user whenever the program starts 
+
 # Expenditure
 The expenditure module is acomprehensive allows users to key in their expenses to enable them to store all their 
 expenses.
