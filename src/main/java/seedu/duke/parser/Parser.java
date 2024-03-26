@@ -1,12 +1,22 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.GradeCommand;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.InitCommand;
+import seedu.duke.command.RemoveCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.ViewGpaCommand;
+import seedu.duke.command.ViewGraduateCommand;
+
 import java.util.function.Function;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.command.*;
 
 public class Parser {
 
@@ -98,7 +108,7 @@ public class Parser {
         return new ViewCommand();
     }
 
-    private static ViewGraduateCommand graduateCommand(Map<String, String> args){
+    private static ViewGraduateCommand graduateCommand(Map<String, String> args) {
         return new ViewGraduateCommand();
     }
 

@@ -119,7 +119,8 @@ public class ModuleList {
     }
 
     public Integer getUEModuleMCToComplete() {
-        int totalUnrestrictedElectivesMCs = 40, takenUnrestrictedElectiveMCs = 0;
+        int totalUnrestrictedElectivesMCs = 40;
+        int takenUnrestrictedElectiveMCs = 0;
         for (Module takenModule : takenModuleList) {
             try {
                 CEGModules.mapStringToEnum(takenModule.getModuleCode());

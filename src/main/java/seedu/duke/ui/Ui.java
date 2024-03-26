@@ -4,7 +4,6 @@ import seedu.duke.enums.CEGModules;
 import seedu.duke.modules.Module;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -87,7 +86,9 @@ public class Ui {
 
     public static void printModulesToComplete(ArrayList<String> modulesToComplete,
                                               Integer unrestrictedElectiveMCToComplete) {
-        int courseCodeTableWidth = 25, mcTableWidth = 10;
+        int courseCodeTableWidth = 25;
+        int mcTableWidth = 10;
+        
         System.out.println("+---------------------------+------------+");
         System.out.println("| Course Code               | MCs        |");
         System.out.println("+---------------------------+------------+");
