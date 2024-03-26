@@ -8,7 +8,6 @@ public class Itemlist {
 
     public Itemlist() {
     }
-
     public static void addItem(Item item) {
         items.add(item);
     }
@@ -28,6 +27,10 @@ public class Itemlist {
 
     public static ArrayList<Item> getItems() {
         return items;
+    }
+
+    public static Item getItem(int index) {
+        return items.get(index);
     }
 
     public static int getIndex(Item item) {

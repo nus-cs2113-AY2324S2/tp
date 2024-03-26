@@ -57,11 +57,10 @@ public class Parser {
         case ADD:
             try {
                 return prepareAdd(userInput);
-
             } catch (CommandFormatException e) {
                 break;
             }
-        case DELETE:
+        case DEL:
             try {
                 return prepareDelete(userInput);
             } catch (CommandFormatException e) {
@@ -89,6 +88,7 @@ public class Parser {
         }
         String category = matcher.group("category") != null ? matcher.group("category") : "NA";
         int quantity = Integer.parseInt(matcher.group("quantity"));
+        assert quantity >= 0 : "Quantity should not be negative.";
         return new AddCommand(
                 matcher.group("itemName"),
                 quantity,
@@ -101,7 +101,7 @@ public class Parser {
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            throw new CommandFormatException(CommandType.DELETE);
+            throw new CommandFormatException(CommandType.DEL);
         }
         return new DeleteCommand(matcher.group("itemName"));
     }
@@ -113,6 +113,7 @@ public class Parser {
             throw new CommandFormatException(CommandType.EDIT);
         }
         int newQuantity = Integer.parseInt(matcher.group("newQuantity"));
+        assert newQuantity >= 0 : "New quantity should not be negative.";
         return new EditCommand(
             matcher.group("itemName"),
             newQuantity

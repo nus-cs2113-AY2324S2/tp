@@ -21,6 +21,7 @@ public class EditCommand extends Command {
         for (Item item : Itemlist.getItems()) {
             if (item.getItemName().equals(itemName) || item.getItemName().toLowerCase().equals(itemName)) {
                 index = Itemlist.getItems().indexOf(item);
+                item = Itemlist.getItems().get(index);
                 break;
             }
         }
@@ -28,6 +29,7 @@ public class EditCommand extends Command {
             //throw exception;
             System.out.println("item not found!");
         } else {
+            ui.TextUi.showEditMessage(itemName, Itemlist.getItem(index).getQuantity(), newQuantity );
             Itemlist.editQuantity(index, newQuantity);
         }
         Storage.overwriteFile(Itemlist.getItems(), false);
