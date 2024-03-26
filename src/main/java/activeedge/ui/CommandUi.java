@@ -150,7 +150,7 @@ public class CommandUi {
         System.out.println("Calorie goal: " + calorieGoal + " kcal");
         System.out.println("Water goal: " + waterGoal + " ml");
     }
-    
+
     public static String formatDateTime(LocalDateTime dateTime) {
         return dateTime.format(DATE_TIME_FORMATTER);
     }
