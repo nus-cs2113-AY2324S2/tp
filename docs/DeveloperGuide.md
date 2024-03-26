@@ -189,19 +189,39 @@ The execute method will call `decreaseAmount` which is a method of the ProductLi
 In the ProductList class, the `decreaseAmount` method will call a `updatedDecreaseQuantity`
 method in the quantity class.
 
---------------------------------------------------------------------------------------------------------------------
+It is implemented this way to adhere to Single Responsibility Principle (SRP), such that the
+ProductList class will only handle the product involved in quantity increase, whereas the
+Quantity class will be responsible for updating the quantities.
+
+**Attributes**
+* pid: The unique Product ID for each product
+* quantity: The amount of quantity to decrease product by
+
+**Methods**
+* `OutflowCommand`: Constructor for creating a new instance of the InflowCommand class.
+* `execute`: Method to increase quantity of the specified product.
+  * `execute` calls `decreaseAmount` in the ProductList class.
+  * `decreaseAmount` in ProductList class will call `updateDecreaseQuantity` in the Quantity class.
+
+The following sequence diagram shows how the OutflowCommand works.
+![OutflowCommand Class](images/OutflowCommandSequence.png)
+
+ --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
+* Small business owners who are looking to keep track of their inventory using CLI
+* Possibly established companies looking to expand our application
+  **Target user profile**:
 
-
-
-**Value proposition**:
-
-{Describe the value proposition: what problem does it solve?}
+**Value proposition**: <br>
+Traditional inventory management methods often involve manual data entry, spreadsheets, and paper-based
+tracking systems. These processes are time-consuming, error-prone, and lack real-time visibility into
+inventory status. StockPal allows users to quickly update, track, and monitor inventory data through
+intuitive command-line commands, saving time and improving efficiency.
 
 ## User Stories
 
