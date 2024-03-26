@@ -37,8 +37,8 @@ end note
 
 command -[COMMANDS_COLOR]> ui : printEditSuccessMessage()
 user <-[UI_COLOR] ui : "Product details have been updated."
-ui --> command
-stockpal <-- command
+ui [UI_COLOR]--> command
+stockpal <--[COMMANDS_COLOR] command
 deactivate command
 
 stockpal -[STOCKPAL_COLOR]> storage : saveData(productList)
