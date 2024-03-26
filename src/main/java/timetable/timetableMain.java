@@ -1,8 +1,5 @@
 package timetable;
 
-
-import seedu.duke.Expenditure;
-
 import java.util.ArrayList;
 
 public class timetableMain {
