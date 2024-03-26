@@ -5,6 +5,13 @@ import brokeculator.command.InvalidCommand;
 import brokeculator.command.SummariseCommand;
 
 public class SummariseParser {
+    private static final String[] SUMMARISE_COMMAND_OPTIONS = {" /n ", " /d ", " /c ", " /from ", " /to "};
+    private static final int NAME_INDEX = 0;
+    private static final int DATE_INDEX = 1;
+    private static final int CATEGORY_INDEX = 2;
+    private static final int FROM_INDEX = 3;
+    private static final int TO_INDEX = 4;
+
     private static final String INVALID_FORMAT_MESSAGE = "Invalid input format for summarise command. "
             + "Please use the format: summarise /from <start> /to <end>";
 
