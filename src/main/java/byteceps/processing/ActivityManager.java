@@ -90,4 +90,32 @@ public abstract class ActivityManager {
     }
 
     public abstract String getActivityType(boolean plural);
+
+    public void search(String searchTerm){
+        ArrayList <Activity> searchResults = new ArrayList<>();
+        for(Activity activity : activitySet){
+            if(activity.getActivityName().toLowerCase().contains(searchTerm.toLowerCase())){
+                searchResults.add(activity);
+            }
+        }
+        displaySearchResults(searchResults);
+    }
+
+    private void displaySearchResults(ArrayList<Activity> searchResults){
+        if(searchResults.isEmpty()){
+            UserInterface.printMessage("No results found");
+            return;
+        }
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("Search Results:%s", System.lineSeparator()));
+
+        int index = 1;
+        for (Activity currentActivity : searchResults) {
+            result.append(String.format("\t\t\t%d. %s\n", index, currentActivity.getActivityName()));
+            index++;
+        }
+
+        UserInterface.printMessage(result.toString());
+    }
+
 }

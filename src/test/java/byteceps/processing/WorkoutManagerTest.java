@@ -208,5 +208,57 @@ class WorkoutManagerTest {
         assertThrows(IllegalStateException.class, () -> workoutManager.execute(parser));
     }
 
+    @Test
+    public void execute_searchExistingWorkout_success() {
+        setUpStreams();
+
+        String addInput = "workout /create LegDay";
+        parser.parseInput(addInput);
+        assertDoesNotThrow(() -> workoutManager.execute(parser));
+
+        String searchInput = "workout /search LegDay";
+        parser.parseInput(searchInput);
+        assertDoesNotThrow(() -> workoutManager.execute(parser));
+
+        String expectedOutput = "[ByteCeps]> Added Workout Plan: LegDay\n" +
+                "-------------------------------------------------\n" +
+                "[ByteCeps]> SearchResults:\n" +
+                "\t\t\t1. LegDay\n" +
+                "\n" +
+                "-------------------------------------------------\n";
+
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
+
+        restoreStreams();
+    }
+
+    @Test
+    public void execute_searchNonExistingWorkout_returnsEmptyResults() {
+        setUpStreams();
+
+        String searchInput = "workout /search NonExistentWorkout";
+        parser.parseInput(searchInput);
+        assertDoesNotThrow(() -> workoutManager.execute(parser));
+
+        String expectedOutput = "[ByteCeps]>Noresultsfound\n" +
+                "\n" +
+                "-------------------------------------------------\n";
+
+        assertEquals(expectedOutput.replaceAll("\\s+", ""),
+                outContent.toString().replaceAll("\\s+", ""));
+
+        restoreStreams();
+    }
+
+    @Test
+    public void execute_searchEmptyQuery_throwsInvalidInput() {
+        String searchInput = "workout /search";
+        parser.parseInput(searchInput);
+        assertThrows(Exceptions.InvalidInput.class, () -> workoutManager.execute(parser));
+    }
+
+
+
 
 }
