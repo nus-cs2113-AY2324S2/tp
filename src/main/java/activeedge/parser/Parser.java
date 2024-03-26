@@ -16,7 +16,6 @@ import command.LogExerciseCommand;
 import command.ShowSummaryCommand;
 import command.ClearCommand;
 
-
 import activeedge.Storage;
 
 import static activeedge.task.TaskList.tasksList;
