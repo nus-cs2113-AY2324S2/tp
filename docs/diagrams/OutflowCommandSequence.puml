@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":StockPal" as stockpal STOCKPAL_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":Commands" as commands COMMANDS_COLOR
+Participant ":data" as data DATA_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+activate stockpal STOCKPAL_COLOR
+
+user -[USER_COLOR]> ui : "outflow 2 a/10"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]>stockpal : "outflow 2 a/10"
+
+stockpal -[STOCKPAL_COLOR]> parser : parseCommand("outflow 2 a/10")
+activate parser PARSER_COLOR
+
+parser --[PARSER_COLOR]> stockpal : OutflowCommand(pid, decreaseBy)
+deactivate parser
+
+stockpal -[STOCKPAL_COLOR]> commands : execute(OutflowCommand(pid, decreaseBy))
+activate commands COMMANDS_COLOR
+
+commands -[COMMANDS_COLOR]> data : decreaseAmount(pid, decreaseBy)
+activate data DATA_COLOR
+
+data -[DATA_COLOR]> data : updateDecreaseQuantity(decreaseBy)
+activate data DATA_COLOR
+data --[DATA_COLOR]> data
+deactivate data
+
+data --[DATA_COLOR]> commands
+
+commands --[COMMANDS_COLOR]> ui
+
+deactivate commands
+deactivate data
+
+stockpal -[STOCKPAL_COLOR]> storage : (productList)
+activate storage STORAGE_COLOR
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+storage --[STORAGE_COLOR]> stockpal
+deactivate storage
+
+ui --[UI_COLOR]> user : "Quantity updated. Quantity: 10"
+
+@enduml
