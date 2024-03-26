@@ -1,12 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.stats.MatchStat;
 import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
-import java.util.ArrayList;
-
 public enum CommandList {
-    BYE, SHOOT, PENALTY, UPGRADE
+    BYE, SHOOT, PENALTY, UPGRADE, YES, NO
+
     //insert new user command name here
     ;
 
@@ -25,26 +25,22 @@ public enum CommandList {
                 "Illegal aiInput generated!";
         return userInput != aiInput;
     }
-
+  
     public static void executeShoot(String[] readArgumentTokens) {
-        PlayerList.L1.get(Ui.curplayer).printSelfInfo();
-        PlayerList.L1.get(Ui.curplayer).printGoalBeforeShoot();
         String selectedDirection = readArgumentTokens[0];
         int selectedDirectionIndex = Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);
 
+        MatchStat.updateStat(true, isScoreGoal); //Need to update after save command.
         Formatter.printGoalAfterShot(isScoreGoal);
     }
 
-    public static void executePenalty() {
-        Penalty.executePenalty();
-    }
     public static void executeUpgrade(String[] level){
         String upgradeLevel = level[0];
         int upgradeLevelIndex = Integer.parseInt(upgradeLevel);
 
-        PlayerList.L1.get(Ui.curplayer).upgradePower(upgradeLevelIndex);
-        PlayerList.L1.get(Ui.curplayer).printSelfInfo();
+        PlayerList.l1.get(Ui.curplayer).upgradePower(upgradeLevelIndex);
+        PlayerList.l1.get(Ui.curplayer).printSelfInfo();
     }
     //insert new command here
 }

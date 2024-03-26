@@ -12,7 +12,9 @@ public class SyntaxAnalyser {
             {},
             {VALID_INDEX_REGEX},
             {},
-            {VALID_INDEX_REGEX}
+            {VALID_INDEX_REGEX}, // Added regex pattern for penalty command
+            {},
+            {}
             //insert new command syntax here
     };
 

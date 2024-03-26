@@ -1,27 +1,27 @@
 package seedu.duke.ui;
 
-import seedu.duke.*;
-
+import seedu.duke.Parser;
+import seedu.duke.Formatter;
+import seedu.duke.CommandList;
+import seedu.duke.SyntaxAnalyser;
+import seedu.duke.stats.MatchStat;
 import seedu.duke.exception.ProcessInputException;
 import seedu.duke.exception.ArgumentMismatchException;
 import seedu.duke.exception.BadTokenException;
 import seedu.duke.exception.IllegalCommandException;
 
-
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Ui {
-    public static int roundCount = 1;
     public static final Scanner IN = new Scanner(System.in);
+    public static int curplayer=0; // The player in current game return by account login.
     private static boolean isRunning = true;
     private static String userInput;
     private static Parser userCommandReader;
 
     private static final Logger logger = Logger.getLogger("Foo");
-    public static int curplayer=0; // The player in current game return by account login.
 
     /**
      * Reads user input and stores it
@@ -62,19 +62,27 @@ public class Ui {
     public static void executeCommand() {
         String readUserCommand = userCommandReader.getCommandName();
         String[] readArgumentTokens = userCommandReader.getArgumentTokens();
-
         CommandList selectedCommand = CommandList.valueOf(readUserCommand);
-
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
             break;
         case SHOOT:
             CommandList.executeShoot(readArgumentTokens);
-            roundCount++;
             break;
-        case PENALTY:
-            CommandList.executePenalty();
+        case YES:
+            if (MatchStat.getIsMatchEnd()) {
+                MatchStat.updateForNewMatch();
+            } else {
+                Formatter.printErrorUnknown();
+            }
+            break;
+        case NO:
+            if (MatchStat.getIsMatchEnd()) {
+                CommandList.executeBye();
+            } else {
+                Formatter.printErrorUnknown();
+            }
             break;
         case UPGRADE:
             CommandList.executeUpgrade(readArgumentTokens);

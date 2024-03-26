@@ -1,14 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.stats.MatchStat;
+
 import java.util.logging.Logger;
 
 public class Formatter {
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
 
-    /**
-     * Method to check if the shot resulted in a goal
-     * If shoot direction matches save direction, it's not a goal and the returned value is false.
-     */
     /**
      * Appends a newline to a given string and returns the resulting string
      *
@@ -50,11 +48,11 @@ public class Formatter {
      * If shoot direction matches save direction, it's not a goal and the returned value is false.
      */
 
-
-    public static void printGoalBeforeShotforBeginner(int roundCount) {
-        assert roundCount > 0 : "Round count should be greater than zero.";
-        logger.info("Round " + roundCount);
-        System.out.println("Round " + roundCount);
+    public static void printGoalBeforeShotforBeginner() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
         System.out.println("_______________________________");
         System.out.println("|         |         |         |");
         System.out.println("|         |         |         |");
@@ -64,30 +62,32 @@ public class Formatter {
         System.out.println("\nSelect direction to shoot : [0-2]");
     }
 
-    public static void printGoalBeforeShotforMedium(int roundCount) {
-        assert roundCount > 0 : "Round count should be greater than zero.";
-        logger.info("Round " + roundCount);
-        System.out.println("Round " + roundCount);
+    public static void printGoalBeforeShotforMedium() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
         System.out.println("_______________________________");
         System.out.println("|    0    |    1    |    2    |");
         System.out.println("|         |         |         |");
         System.out.println("|_________|_________|_________|");
         System.out.println("|         |         |         |");
         System.out.println("|    3    |    4    |    5    |");
-        System.out.println("\nSelect direction to shoot : [0-2]");
+        System.out.println("\nSelect direction to shoot : [0-2] WILL COMPLETE IN V2.0b");
     }
 
-    public static void printGoalBeforeShotforExpert(int roundCount) {
-        assert roundCount > 0 : "Round count should be greater than zero.";
-        logger.info("Round " + roundCount);
-        System.out.println("Round " + roundCount);
+    public static void printGoalBeforeShotforExpert() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
         System.out.println("_______________________________");
         System.out.println("|    0    |    1    |    2    |");
         System.out.println("|---------|---------|---------|");
         System.out.println("|    3    |    4    |    5    |");
         System.out.println("|---------|---------|---------|");
         System.out.println("|    6    |    7    |    8    |");
-        System.out.println("\nSelect direction to shoot : [0-2]");
+        System.out.println("\nSelect direction to shoot : [0-2] WILL COMPLETE IN V2.0b");
     }
 
     public static void printGoalAfterShot(boolean goalScored) {
@@ -109,6 +109,17 @@ public class Formatter {
             System.out.println("   \\         \\         \\         \\");
             System.out.println("    \\         \\         \\         \\");
             System.out.println("no goal :((((");
+        }
+
+        System.out.println("Your score: " + MatchStat.getPlayerScore());
+        System.out.println("Opponent's score: " + MatchStat.getAiScore());
+    }
+
+    public static void printMatchResult() {
+        if (MatchStat.getIsPlayerWin()) {
+            System.out.println("Nice! You won this match! Wanna a new match?");
+        } else {
+            System.out.println("You lost this match. Wanna a new match?");
         }
     }
 
