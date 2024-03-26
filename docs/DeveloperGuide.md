@@ -8,6 +8,30 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Source Function
+
+
+The `sourceNews` function in the `NewsOnTheGo` class 
+is used to retrieve the source of a news article. 
+The function takes in a string and a list of 
+`NewsArticle` objects. The string is split into an 
+array and the second element (index 1) is parsed as 
+an integer. This integer is used as an index to 
+retrieve a `NewsArticle` from the list, and the 
+source of the news article is then printed.
+
+Here is the code snippet for the `sourceNews` 
+function:
+
+```java
+/**
+ * Enter the news article number as stored in the array, and it will return the source of the news article.
+ */
+static void sourceNews(String line, List<NewsArticle> list) {
+    String[] split = line.split(" ");
+    int index = Integer.parseInt(split[1]) + 1;
+    System.out.println(list.get(index).getSource());
+}
 
 ## Product scope
 ### Target user profile
