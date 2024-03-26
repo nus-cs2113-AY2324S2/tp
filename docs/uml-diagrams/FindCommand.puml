@@ -4,14 +4,12 @@ skinparam classAttributeIconSize 0
 
 abstract class Command
 class Inventory
-class Item
 class FindCommand
 class Parser
 class Ui
 
 Command <|. FindCommand
 Inventory <.. FindCommand
-Item <.. FindCommand
 Ui <.. FindCommand
 FindCommand <.. Parser
 
@@ -27,12 +25,8 @@ class FindCommand {
     +isExit():boolean
 }
 
-class Item {
-    +Item(name:String, quantity:int, price:double)
-}
-
 class Inventory {
-    {static}+put(name:String, item:Item):void
+    {static}+getItems():items: ArrayList
 }
 
 class Ui {
@@ -55,26 +49,22 @@ participant "Ui" as Ui <<class>> #e5c2ea
 SuperTracker -> FindCommand : execute()
 activate FindCommand #cbf7f4
 
-FindCommand --> FindCommand : isFound = 0
+FindCommand --> FindCommand : isFound = false
 
-FindCommand -> Ui : findIntro()
-activate Ui #e5c2ea
-Ui --> FindCommand
-deactivate Ui
 
-FindCommand -> Inventory : items()
+FindCommand -> Inventory : getItems()
 activate Inventory #d5eac2
 Inventory --> FindCommand : items
 deactivate Inventory
 
-loop item:items
+loop until every item in items are checked
     alt check if item contains the word
     else word found
     FindCommand -> Ui : foundItem(item:String, index: int)
     activate Ui #e5c2ea
     Ui --> FindCommand
     deactivate Ui
-    FindCommand --> FindCommand : isFound = 1
+    FindCommand --> FindCommand : isFound = true
     end
 end
 

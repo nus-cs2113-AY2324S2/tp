@@ -87,6 +87,28 @@ The following sequence diagram shows the execution of a NewCommand
 5. The `saveData` method of the `FileManager` class is called to save the new item added onto the hard disk
 
 
+### Find Command
+The following is a class diagram of the FindCommand and its relevant dependencies
+![FindCommandClass](uml-diagrams/FindCommandClass.png)
+
+The `FindCommand` class implements the `Command` interface and is responsible for searching for name in items provided by `Inventory`.
+A FindCommand instance is created by the `parseFindCommand` method called by Parser, which ensures that the provided parameter (name) is valid.
+
+#### Dependencies
+- `Inventory`: For getting the inventory list of items
+- `Ui`: To notify the user about the successful execution of `FindCommand`
+
+The following sequence diagram shows the execution of a NewCommand
+![FindCommandSequence](uml-diagrams/FindCommandSequence.png)
+
+1. The `SuperTracker` class calls the `execute` method of `FindCommand`
+2. A boolean variable `isFound` is assigned a false value 
+3. The `getItem` method of the `Inventory` class is called to get the list of items in the inventory
+4. The `FindCommand` class will loop through each item of the list of items
+5. On every iteration, the item will be checked if it contains the word that is to be found
+6. If the item contains the word, the `foundItem` method of the Ui class is called and the `isFound` variable is assigned a true value
+7. After the loop ends, if the `isFound` variable is still false, the `noItemFound` method of the Ui class is called to notify that no item has been found containing the word
+
 ## Product scope
 ### Target user profile
 
