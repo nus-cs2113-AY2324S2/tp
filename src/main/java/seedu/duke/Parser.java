@@ -19,7 +19,8 @@ public class Parser {
      *
      * @param command The users text input.
      */
-    public void parseCommand(String command, UserList userList) throws InvalidFormatException, InvalidDayException {
+    public static void parseCommand(String command, UserList userList) throws
+            InvalidFormatException, InvalidDayException, InvalidUserException {
         if (command.equalsIgnoreCase("list")) {
             UI.printListingUsers();
             userList.listAll();
@@ -33,27 +34,19 @@ public class Parser {
         } else if (command.equalsIgnoreCase("view")) {
             userList.getActiveUser().viewTimetable();
         } else if (command.toLowerCase().startsWith("adduser")) {
-            try {
-                InputValidator.validateAddUserInput(command);
-                String[] parts = command.split("\\s+");
-                String userName = parts[1];
-                User newUser = new User(userName);
-                UI.printNewUser(newUser.getName());
-                userList.addUser(newUser);
-                Storage.addUserInFolder();
-            } catch (InvalidFormatException e) {
-                System.out.println(e.getMessage());
-            }
+            InputValidator.validateAddUserInput(command);
+            String[] parts = command.split("\\s+");
+            String userName = parts[1];
+            User newUser = new User(userName);
+            UI.printNewUser(newUser.getName());
+            userList.addUser(newUser);
+            Storage.addUserInFolder();
         } else if (command.toLowerCase().startsWith("switch")) {
-            try {
-                InputValidator.validateSwitchInput(command);
-                String[] parts = command.split("\\s+");
-                String userName = parts[1];
-                userList.setActiveUser(userList.findUser(userName));
-                UI.printActiveUser(userList.getActiveUser().getName());
-            } catch (InvalidFormatException e) {
-                System.out.println(e.getMessage());
-            }
+            InputValidator.validateSwitchInput(command);
+            String[] parts = command.split("\\s+");
+            String userName = parts[1];
+            userList.setActiveUser(userList.findUser(userName));
+            UI.printActiveUser(userList.getActiveUser().getName());
         } else if (command.toLowerCase().startsWith("addtask")) {
             addTask(command, userList);
             User currentUser = userList.getActiveUser();
@@ -122,7 +115,7 @@ public class Parser {
         }
     }
 
-    private void addTask(String command, UserList userList) {
+    private static void addTask(String command, UserList userList) {
         try {
             InputValidator.validateAddTaskInput(command);
             Task task = parseTask(command);

@@ -72,7 +72,7 @@ public class InputValidator {
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addUser format. " +
-                    "Expected format: addUser <desired user's name>");
+                    "Expected format: adduser <desired user's name>");
         }
     }
 
