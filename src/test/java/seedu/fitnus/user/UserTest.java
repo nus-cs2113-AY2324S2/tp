@@ -5,9 +5,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Meal;
 import seedu.fitnus.Parser;
 import seedu.fitnus.Water;
-import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
-import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.*;
 
 import java.util.ArrayList;
 
@@ -44,5 +42,14 @@ public class UserTest {
 
         String error = "Incomplete command, the format must be [water s/SERVING_SIZE].";
         fail(error);
+    }
+
+    @Test
+    public void handleDrinks_validInputs_correctlyAddMeal() throws IncompleteDrinkException, UnregisteredDrinkException {
+        Drink newDrink = new Drink("sprite", 100);
+        testDrinkList.add(newDrink);
+
+        assertEquals("sprite", testDrinkList.get(0).getName());
+        assertEquals(100, testDrinkList.get(0).getDrinkVolumeSize());
     }
 }
