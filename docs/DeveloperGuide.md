@@ -55,10 +55,14 @@ The GPA Calculator Module is a comprehensive component designed to facilitate th
 of a user's updated GPA based on their current academic standing and projected module grades. 
 This guide will walk developers through the architecture, functionality, and core components of the module.
 
+------------------------------------------------------------------------------------------
+
 ## Overview
 The module is divided into two primary classes:
 
-## class: Expenditure
+------------------------------------------------------------------------------------------
+
+## Class: Expenditure
 This class is responsible for processing expenditure related commands and storing all expenses input by the user
 
 ### ExpenditureList Key Method
@@ -66,12 +70,12 @@ This class is responsible for processing expenditure related commands and storin
 Takes in the string input by the user and splits it into the respective parts. "userAdded" checks if the method is called by
 the user or called when reading from a storage file.
 
+------------------------------------------------------------------------------------------
+
 ### GPACommand: 
 Handles user interactions, input collection, and directs the flow of the GPA calculation process.
 ### GPAMain: 
 Contains the logic for calculating the updated GPA.
-
-## Class Descriptions
 
 ## Class: GPACommand
 This class is responsible for interacting with the user, collecting inputs, 
