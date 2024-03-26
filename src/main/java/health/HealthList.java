@@ -2,6 +2,7 @@ package health;
 
 import storage.LogFile;
 import utility.CustomExceptions;
+import utility.ErrorConstant;
 import utility.HealthConstant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If Bmi object is null.
      */
     public static void addBmi(Bmi bmi) {
-        assert bmi != null : HealthConstant.BMI_CANNOT_BE_NULL;
+        assert bmi != null : ErrorConstant.NULL_BMI_ERROR;
         bmis.add(bmi);
     }
 
@@ -35,7 +36,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If bmis list is empty.
      */
     public static void showCurrentBmi() {
-        assert !bmis.isEmpty() : HealthConstant.BMI_LIST_EMPTY;
+        assert !bmis.isEmpty() : ErrorConstant.EMPTY_BMI_LIST_ERROR;
         int currentIndex = bmis.size();
         System.out.println(bmis.get(currentIndex - 1));
     }
@@ -46,7 +47,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If bmis list is empty
      */
     public static void showBmiHistory() {
-        assert !bmis.isEmpty() : HealthConstant.BMI_LIST_EMPTY;
+        assert !bmis.isEmpty() : ErrorConstant.EMPTY_BMI_LIST_ERROR;
         for (Bmi bmi : bmis) {
             System.out.println(bmi);
         }
@@ -59,7 +60,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If period object is null
      */
     public static void addPeriod(Period period) {
-        assert period != null : HealthConstant.PERIOD_CANNOT_BE_NULL;
+        assert period != null : ErrorConstant.NULL_PERIOD_ERROR;
         if (!periods.isEmpty()) {
             Period previousPeriod = periods.get(periods.size() - 1);
             previousPeriod.setCycleLength(period.getStartDate());
@@ -72,7 +73,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If periods list is empty
      */
     public static void showLatestPeriod() {
-        assert !periods.isEmpty() : HealthConstant.PERIOD_LIST_EMPTY;
+        assert !periods.isEmpty() : ErrorConstant.EMPTY_PERIOD_LIST_ERROR;
         int currentIndex = periods.size();
         System.out.println(periods.get(currentIndex - 1));
     }
@@ -83,7 +84,7 @@ public class HealthList extends ArrayList<Health> {
      * @throws AssertionError If periods list is empty
      */
     public static void showPeriodHistory() {
-        assert !periods.isEmpty() : HealthConstant.PERIOD_LIST_EMPTY;
+        assert !periods.isEmpty() : ErrorConstant.EMPTY_PERIOD_LIST_ERROR;
         for (Period period : periods) {
             System.out.println(period);
         }

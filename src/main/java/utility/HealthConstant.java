@@ -55,52 +55,37 @@ public class HealthConstant {
 
 
     // Formatted Strings/Messages
-    public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
-            + System.lineSeparator()
-            + "Period Length: %d days";
+    // BMI
+    public static final String LOG_DELETE_BMI_FORMAT = "Removed BMI entry of %.2f from %s";
+    public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
+    public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
+    public static final String BMI_REMOVED_MESSAGE_PREFIX = "Removed BMI with index: ";
     public static final String UNDERWEIGHT_MESSAGE = "You're underweight.";
     public static final String NORMAL_WEIGHT_MESSAGE = "Great! You're within normal range.";
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
     public static final String OBESE_MESSAGE = "You're obese.";
     public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
 
-
-    // STANDARDISE FORMAT ACCORDING TO TELEGRAM MESSAGE : <ERROR_TYPE>_ERROR
-    // EXAMPLE : UNSPECIFIED_PARAMETER_ERROR
-    // EXAMPLE : LOAD_ERROR
-    // ----------------V V V V V ---- PLEASE CHECK AND MOVE TO ERROR ---- V V V V V----------------
-    public static final String BLANK_INPUT_FOR_HEALTH = "Type of health cannot be empty. " +
-            "Please input either /h:bmi or /h:period";
-    public static final String INVALID_INPUT_FOR_HEALTH = "Invalid input for health type! " +
-            "Please input either /h:bmi or /h:period";
-    public static final String INSUFFICIENT_PARAMETERS_FOR_BMI = "Insufficient parameters for bmi! " +
-            "Example input: /h:bmi /height:height /weight:weight /date:date";
-    public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
-            "Example input: /h:period /start:startDate /end:endDate";
-    public static final String INSUFFICIENT_PARAMETERS_FOR_APPOINTMENT = "Insufficient parameters for period! " +
-            "Example input: /h:appointment /date:date /time:time /description:description /place:place";
-    public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
-    public static final String APPOINTMENT_MESSAGE_PREFIX = "";
-    public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
+    // PERIOD
+    public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
+            + System.lineSeparator()
+            + "Period Length: %d days";
+    public static final String LOG_DELETE_PERIOD_FORMAT = "Removed period entry with start date: %s and end date: %s";
     public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
-    public static final String APPOINTMENT_ADDED_MESSAGE_PREFIX = "Added: appointment | ";
-    public static final String NUMBER_OF_INPUTS_REQUIRED_PERIOD =  "Array of userInputs should have 5 elements.";
-    public static final String HEIGHT_WEIGHT_REQUIRE_POSITIVE = "Both Height and weight must be positive.";
-    public static final String BMI_MUST_BE_POSITIVE = "Bmi must be a positive value";
-    public static final String BMI_CANNOT_BE_NULL = "Bmi object cannot be null.";
-    public static final String BMI_LIST_EMPTY = "BMI List is empty.";
-    public static final String PERIOD_LIST_EMPTY = "Period List is empty.";
-    public static final String PERIOD_CANNOT_BE_NULL = "Period object cannot be null.";
-    public static final String PERIOD_START_MUST_BE_BEFORE_END = "Start date of period must be before end date.";
-    public static final String START_DATE_CANNOT_BE_NULL = "Start date of period cannot be empty.";
-    public static final String END_DATE_CANNOT_BE_NULL = "End date of period cannot be empty.";
+    public static final String PERIOD_REMOVED_MESSAGE_PREFIX = "Removed period with index: ";
+
+    // PREDICTION
+    public static final String PRINT_CYCLE_FORMAT = "Cycle Length: %d days";
     public static final Integer LATEST_THREE_CYCLE_LENGTHS = 3;
     public static final Integer MINIMUM_SIZE_FOR_PREDICTION = 4;
     public static final String PREDICTED_START_DATE_MESSAGE ="Your next cycle's predicted start date is ";
     public static final String COUNT_DAYS_MESSAGE = ", in ";
     public static final String PERIOD_IS_LATE = ". Your period is late by ";
     public static final String DAYS_MESSAGE = " days.";
-    public static final String UNABLE_TO_MAKE_PREDICTIONS = "Insufficient period cycles to make prediction.";
-    public static final String APPOINTMENT_CANNOT_BE_NULL = "Appointment object cannot be null.";
-    public static final String APPOINTMENT_LIST_EMPTY = "Appointment list is empty.";
+
+    // APPOINTMENT
+    public static final String PRINT_APPOINTMENT_FORMAT = "On %s at %s: %s";
+    public static final String LOG_DELETE_APPOINTMENT_FORMAT = "Removed appointment on %s at %s: %s";
+    public static final String APPOINTMENT_ADDED_MESSAGE_PREFIX = "Added: appointment | ";
+    public static final String APPOINTMENT_REMOVED_MESSAGE_PREFIX = "Removed appointment with index: ";
 }

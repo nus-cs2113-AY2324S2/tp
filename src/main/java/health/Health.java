@@ -31,7 +31,7 @@ public class Health {
         String healthType = userInputs[HealthConstant.HEALTH_TYPE_INDEX].trim();
 
         if (healthType.isBlank()) {
-            throw new CustomExceptions.InvalidInput(HealthConstant.BLANK_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.HEALTH_INPUT_BLANK_ERROR);
         }
 
         healthType = healthType.toLowerCase();
@@ -43,22 +43,20 @@ public class Health {
 
 
         if (!isBmi && !isPeriod && !isPredict && !isAppointment) {
-            throw new CustomExceptions.InvalidInput(HealthConstant.INVALID_INPUT_FOR_HEALTH);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HEALTH_INPUT_ERROR);
         }
 
         if (isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS) {
-            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
 
         if (isPeriod && userInputs.length < HealthConstant.PERIOD_PARAMETERS) {
-            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_PERIOD);
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
 
         if (isAppointment && userInputs.length < HealthConstant.APPOINTMENT_PARAMETERS) {
-            throw new CustomExceptions.InsufficientInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_APPOINTMENT);
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-
-        assert userInputs.length == 5 : HealthConstant.NUMBER_OF_INPUTS_REQUIRED_PERIOD;
 
         if (isBmi) {
             return HealthConstant.BMI;

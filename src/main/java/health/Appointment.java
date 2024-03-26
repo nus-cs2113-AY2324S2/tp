@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Appointment {
+    //@@author syj02
     protected LocalDate date;
     protected LocalTime time;
     protected String description;
@@ -47,7 +48,7 @@ public class Appointment {
         String descriptionSubstring = input.substring(indexDescription + HealthConstant.DESCRIPTION_OFFSET).trim();
 
         if (command.isEmpty() || dateSubstring.isEmpty() || timeSubstring.isEmpty() || descriptionSubstring.isEmpty()) {
-            throw new CustomExceptions.InvalidInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
 
         results[0] = command;

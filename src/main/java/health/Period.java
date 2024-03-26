@@ -1,9 +1,10 @@
 package health;
 
-import utility.Parser;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.HealthConstant;
+import utility.Parser;
+import utility.UiConstant;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -41,7 +42,7 @@ public class Period extends Health {
      * @throws AssertionError if the start date is null
      */
     public LocalDate getStartDate() {
-        assert startDate != null : HealthConstant.START_DATE_CANNOT_BE_NULL;
+        assert startDate != null : ErrorConstant.NULL_START_DATE_ERROR;
         return startDate;
     }
 
@@ -52,7 +53,7 @@ public class Period extends Health {
      * @throws AssertionError if the end date is null
      */
     public LocalDate getEndDate() {
-        assert endPeriodDate != null : HealthConstant.END_DATE_CANNOT_BE_NULL;
+        assert endPeriodDate != null : ErrorConstant.NULL_END_DATE_ERROR;
         return endPeriodDate;
     }
 
@@ -97,7 +98,7 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
-        assert startDate.isBefore(endPeriodDate) : HealthConstant.PERIOD_START_MUST_BE_BEFORE_END;
+        assert startDate.isBefore(endPeriodDate) : ErrorConstant.PERIOD_END_BEFORE_START_ERROR;
         // Add 1 to include both start and end dates
         return ChronoUnit.DAYS.between(startDate,endPeriodDate) + 1;
     }

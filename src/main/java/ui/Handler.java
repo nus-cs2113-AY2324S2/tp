@@ -271,7 +271,7 @@ public class Handler {
 
                 Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
                 if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
-                    throw new CustomExceptions.InvalidInput(HealthConstant.PERIOD_START_MUST_BE_BEFORE_END);
+                    throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
                 }
 
                 HealthList.addPeriod(newPeriod);
@@ -286,7 +286,7 @@ public class Handler {
                     LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
                     Period.printNextCyclePrediction(nextPeriodStartDate);
                 } else {
-                    throw new CustomExceptions.InsufficientInput(HealthConstant.UNABLE_TO_MAKE_PREDICTIONS);
+                    throw new CustomExceptions.InsufficientInput(ErrorConstant.UNABLE_TO_MAKE_PREDICTIONS_ERROR);
                 }
             } else if (typeOfHealth.equals(HealthConstant.APPOINTMENT)) {
                 String[] appointmentDetails = Appointment.getAppointment(userInput);
