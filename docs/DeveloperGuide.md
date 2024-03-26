@@ -19,8 +19,17 @@
    * When setting the cost, convert the cost from String into Double.
    * Third, add method in "GroceryList" class to create a copy of the current grocery list, then sort the 
    new grocery list by price using lambda function. Reverse and print the new list.
-3. xx
-
+3. Input category for each grocery added
+   * In Grocery class, modified the Grocery constructor to accept the 'category' parameter.
+   * In Parser class executeCommand method, modified the add command to prompt the user for the category of the grocery. Passed the category as a parameter when creating a new Grocery object.
+   * In Ui class, added a new method promptForCategory to prompt the user for the category of the grocery.
+   * In Grocery class, modified the printGrocery method to include the category information in the output string.
+4. Input amount for each grocery added
+   * In Grocery class, modified the Grocery constructor to accept the 'amount' parameter.
+   * In Parser class executeCommand method, modified the add command to prompt the user for the amount of grocery. Passed the amount as a parameter when creating a new Grocery object.
+   * In Ui class, added a new method promptForAmount to prompt the user for the amount of grocery.
+   * In Grocery class, modified the printGrocery method to print different units of measurement for different categories.
+5. xx
 ## Product scope
 ### Target user profile
 
