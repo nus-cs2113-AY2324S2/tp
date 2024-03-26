@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class CSVReader {
+    public static final String DELIMITER = ",";
     private static HashMap<String, String[]> foodItems = new HashMap<>();
 
-    public static final String DELIMITER = ",";
     public static void main(String[] args){
         String mealCsvFile = "./db/Meal_db.csv";
         String drinkCSVFile = "./db/Drink_db.csv";
@@ -51,13 +51,12 @@ public class CSVReader {
         } else {
             System.out.println("Error! Food not found. Please input a valid item.");
         }
-        if(found && nutrientInfo != null)
-            for(String nutrients: nutrientInfo) {
+        if (found && nutrientInfo != null) {
+            for (String nutrients : nutrientInfo) {
                 System.out.println(nutrients);
             }
+        }
     }
-
-
 
     public static void printInfo() {
         for (HashMap.Entry<String, String[]> entry : foodItems.entrySet()) {
