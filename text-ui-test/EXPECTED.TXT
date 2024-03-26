@@ -48,48 +48,96 @@ Index		Type	Time		Distance	Pace		Date
 2.			run 	33:33		10.24		3:17/km		2024-04-20
 ____________________________________________________________
 ____________________________________________________________
-Please enter the details of station 1. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+Please enter the details of station 1. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
 ____________________________________________________________
 ____________________________________________________________
-Please enter the details of station 2. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+Please enter the details of station 2. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
 ____________________________________________________________
 ____________________________________________________________
 Successfully added a new gym session
-benchpress: 4 sets of 5 reps at 100 KG
-squats: 4 sets of 5 reps at 100 KG
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
 ____________________________________________________________
 ____________________________________________________________
 Your gym history:
 Gym Session 1 (Date: NA)
-benchpress: 4 sets of 5 reps at 100 KG
-squats: 4 sets of 5 reps at 100 KG
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
 ____________________________________________________________
 ____________________________________________________________
-Please enter the details of station 1. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+Please enter the details of station 1. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
 ____________________________________________________________
 ____________________________________________________________
-Please enter the details of station 2. (Format: [name of exercise:string] /s:[sets:number] /r:[reps:number] /w:[weights:number])
+Please enter the details of station 2. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
 ____________________________________________________________
 ____________________________________________________________
 Successfully added a new gym session
-shoulder press: 4 sets of 5 reps at 50 KG
-deadlift: 4 sets of 5 reps at 120 KG
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
 ____________________________________________________________
 ____________________________________________________________
 Your gym history:
 Gym Session 1 (Date: NA)
-benchpress: 4 sets of 5 reps at 100 KG
-squats: 4 sets of 5 reps at 100 KG
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
 ____________________________________________________________
 Gym Session 2 (Date: NA)
-shoulder press: 4 sets of 5 reps at 50 KG
-deadlift: 4 sets of 5 reps at 120 KG
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
 ____________________________________________________________
 ____________________________________________________________
 Your latest gym:
 Gym Session 2 (Date: NA)
-shoulder press: 4 sets of 5 reps at 50 KG
-deadlift: 4 sets of 5 reps at 120 KG
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
 ____________________________________________________________
 Added: bmi | 1.80 | 85 | 19-03-2024
 2024-03-19

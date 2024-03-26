@@ -124,7 +124,7 @@ public class GymStation {
 
         for (int i = 0; i < this.getNumberOfSets(); i++) {
             returnString.append(System.lineSeparator());
-            returnString.append(String.format("\t- Set %d. %s", i+1 , this.getSets().get(i).toString()));
+            returnString.append(String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, i+1 , this.getSets().get(i).toString()));
         }
         return returnString.toString();
     }

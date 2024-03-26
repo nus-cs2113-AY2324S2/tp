@@ -42,13 +42,32 @@ public class ErrorConstant {
     public static final String NO_OF_STATION_POSITIVE_ERROR = "Number of stations must be positive! e.g. /n:4";
     public static final String NO_OF_STATION_DIGIT_ERROR = "Number of stations must be a number! e.g. /n:5";
 
+    public static final String GYM_EXERCISE_NAME_BLANK_ERROR = "Exercise name cannot be blank! e.g. " +
+            WorkoutConstant.STATION_GYM_FORMAT;
+
+    public static final String GYM_SET_DIGIT_ERROR = "Number of sets must be a number! e.g. /s:4";
+    public static final String GYM_SET_POSITIVE_ERROR = "Number of sets must be positive! e.g. /s:4";
+    public static final String GYM_SET_BLANK_ERROR = "Number of sets cannot be blank! e.g. /s:4";
+
+    public static final String GYM_REP_DIGIT_ERROR = "Number of reps must be a number! e.g. /r:4";
+
+    public static final String GYM_REP_POSITIVE_ERROR = "Number of reps must be positive! e.g. /r:4";
+    public static final String GYM_REP_BLANK_ERROR = "Number of reps cannot be blank! e.g. /r:4";
+
+    public static final String GYM_WEIGHT_POSITIVE_ERROR = "Weights must be positive! e.g. /w:10,20,30";
+    public static final String GYM_WEIGHT_BLANK_ERROR = "Weights cannot be blank! e.g. /w:10,20,30";
+
+    public static final String GYM_WEIGHT_DIGIT_ERROR = " Weights must be a number! e.g. /w:5,10,20";
+    public static final String GYM_WEIGHTS_INCORRECT_NUMBER_ERROR = " Number of weight values must be the same as" +
+            " the number of sets! e.g. benchpress /s:2 /r:10 /w:10,20";
+
+    public static final String GYM_STATION_INPUT_DIGIT_ERROR = "Numeric input required for sets, reps and weights!"
+            + " e.g. " + WorkoutConstant.STATION_GYM_FORMAT;
     // HEALTH ERRORS
     public static final String HEALTH_INPUT_BLANK_ERROR = "Type of health cannot be empty. " +
             "Please input either /h:bmi or /h:period";
     public static final String INVALID_HEALTH_INPUT_ERROR = "Invalid input for health type! " +
             "Please input either /h:bmi or /h:period";
-    public static final String GYM_EXERCISE_NAME_BLANK_ERROR = "Exercise name cannot be blank! e.g. " +
-            WorkoutConstant.STATION_GYM_FORMAT;
 
     // BMI ERRORS
     public static final String INSUFFICIENT_BMI_PARAMETERS_ERROR = "Insufficient parameters for bmi! " +
@@ -79,22 +98,5 @@ public class ErrorConstant {
 
 
 
-    public static final String GYM_SET_DIGIT_ERROR = "Number of sets must be a number! e.g. /s:4";
-    public static final String GYM_SET_POSITIVE_ERROR = "Number of sets must be positive! e.g. /s:4";
-    public static final String GYM_SET_BLANK_ERROR = "Number of sets cannot be blank! e.g. /s:4";
 
-    public static final String GYM_REP_DIGIT_ERROR = "Number of reps must be a number! e.g. /r:4";
-
-    public static final String GYM_REP_POSITIVE_ERROR = "Number of reps must be positive! e.g. /r:4";
-    public static final String GYM_REP_BLANK_ERROR = "Number of reps cannot be blank! e.g. /r:4";
-
-    public static final String GYM_WEIGHT_POSITIVE_ERROR = "Weights must be positive! e.g. /w:10,20,30";
-    public static final String GYM_WEIGHT_BLANK_ERROR = "Weights cannot be blank! e.g. /w:10,20,30";
-
-    public static final String GYM_WEIGHT_DIGIT_ERROR = " Weights must be a number! e.g. /w:5,10,20";
-    public static final String GYM_WEIGHTS_INCORRECT_NUMBER_ERROR = " Number of weight values must be the same as" +
-            " the number of sets! e.g. benchpress /s:2 /r:10 /w:10,20";
-
-    public static final String GYM_STATION_INPUT_DIGIT_ERROR = "Numeric input required for sets, reps and weights!"
-           + " e.g. " + WorkoutConstant.STATION_GYM_FORMAT;
 }

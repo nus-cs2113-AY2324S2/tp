@@ -32,6 +32,7 @@ public class WorkoutConstant {
             "\t\tWeights";
     public static final String GYM_STATION_FORMAT = "%s: ";
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
+    public static final String GYM_SET_INDEX_FORMAT = "\t- Set %d. %s";
     public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets";
     public static final int NUMBER_OF_RUN_PARAMETERS = 4;
     public static final String RUN_HEADER = "Type\tTime\t\tDistance\tPace\t\tDate";
