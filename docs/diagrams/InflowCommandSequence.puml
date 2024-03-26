@@ -26,10 +26,15 @@ deactivate parser
 stockpal -[STOCKPAL_COLOR]> commands : execute(InflowCommand(pid, increaseBy))
 activate commands COMMANDS_COLOR
 
-commands -[COMMANDS_COLOR]> data : increaseAmount(pid, increaseBy)
+commands -[COMMANDS_COLOR]> data : increaseAmountCaller(pid, increaseBy)
 activate data DATA_COLOR
 
-data -[DATA_COLOR]> data : updateIncreaseQuantity(increaseBy)
+data -[DATA_COLOR]> data : updateQuantity(pid, increaseBy, "increase")
+activate data DATA_COLOR
+data --[DATA_COLOR]> data
+deactivate data
+
+data -[DATA_COLOR]> data : updateIncreaseQuantity(quantityClass, increaseBy)
 activate data DATA_COLOR
 data --[DATA_COLOR]> data
 deactivate data
