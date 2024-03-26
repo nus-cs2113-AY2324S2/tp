@@ -1,9 +1,9 @@
-package seedu.duke.shooter;
+package seedu.duke.player;
 
 import seedu.duke.Formatter;
 import seedu.duke.ui.Ui;
 
-public class BeginnerSkill extends Shooter {
+public class BeginnerSkill extends Player {
     public String name;
     private int power=1;
     private final int skill=1;
@@ -23,7 +23,21 @@ public class BeginnerSkill extends Shooter {
 
     @Override
     protected void printPower(){
-        super.printPower();
+        System.out.print("Power:");
+        for (int i=0; i<3;i++){
+            if (i<power){
+                System.out.print(" ###");
+            }else{
+                System.out.print("    ");
+            }
+        }
+        if (power==1){
+            System.out.println(" Level-Beginner");
+        }else if (power == 2){
+            System.out.println(" Level-Medium");
+        }else{
+            System.out.println(" Level-Expert");
+        }
     }
 
     @Override
@@ -31,9 +45,9 @@ public class BeginnerSkill extends Shooter {
         System.out.print("Skill:");
         for (int i=0; i<3;i++){
             if (i<skill){
-                System.out.print(" 000");
+                System.out.print(" ###");
             }else{
-                System.out.print(" OOO");
+                System.out.print("    ");
             }
         }
         System.out.println(" Level-Beginner");

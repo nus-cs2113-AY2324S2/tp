@@ -21,6 +21,7 @@ public class Ui {
     private static Parser userCommandReader;
 
     private static final Logger logger = Logger.getLogger("Foo");
+    public static int curplayer=0; // The player in current game return by account login.
 
     /**
      * Reads user input and stores it

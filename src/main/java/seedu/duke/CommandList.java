@@ -1,9 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.shooter.MediumSkill;
 import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
-import seedu.duke.shooter.*;
 
 import java.util.ArrayList;
 
@@ -29,8 +27,8 @@ public enum CommandList {
     }
 
     public static void executeShoot(String[] readArgumentTokens) {
-        PlayerList.L1.get(0).printSelfInfo();
-        PlayerList.L1.get(0).printGoalBeforeShoot();
+        PlayerList.L1.get(Ui.curplayer).printSelfInfo();
+        PlayerList.L1.get(Ui.curplayer).printGoalBeforeShoot();
         String selectedDirection = readArgumentTokens[0];
         int selectedDirectionIndex = Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);
@@ -45,8 +43,8 @@ public enum CommandList {
         String upgradeLevel = level[0];
         int upgradeLevelIndex = Integer.parseInt(upgradeLevel);
 
-        PlayerList.L1.get(0).upgradePower(upgradeLevelIndex);
-        PlayerList.L1.get(0).printSelfInfo();
+        PlayerList.L1.get(Ui.curplayer).upgradePower(upgradeLevelIndex);
+        PlayerList.L1.get(Ui.curplayer).printSelfInfo();
     }
     //insert new command here
 }
