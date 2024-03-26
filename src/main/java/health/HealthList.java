@@ -146,8 +146,8 @@ public class HealthList extends ArrayList<Health> {
     public static void clearBmisAndPeriods() {
         periods.clear();
         bmis.clear();
-        assert bmis.isEmpty() : "Bmi list is not cleared.";
-        assert periods.isEmpty() : "Period list is not cleared.";
+        assert bmis.isEmpty() : ErrorConstant.BMI_LIST_UNCLEARED_ERROR;
+        assert periods.isEmpty() : ErrorConstant.PERIOD_LIST_UNCLEARED_ERROR;
     }
     //@@author rouvinerh
 
@@ -174,17 +174,16 @@ public class HealthList extends ArrayList<Health> {
      * @param index Index of the Bmi object to be deleted.
      */
     public static void deleteBmi(int index) throws CustomExceptions.OutOfBounds {
-        assert !bmis.isEmpty() : "BMI list is empty.";
+        assert !bmis.isEmpty() : ErrorConstant.EMPTY_BMI_LIST_ERROR;
         if (index < 0 || index >= bmis.size()) {
-            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.INVALID_INDEX_DELETE_ERROR);
         }
         Bmi deletedBmi = bmis.get(index);
-        System.out.println("Removed BMI entry of " +
-                deletedBmi.bmiValue +
-                "from " +
-                deletedBmi.date);
+        System.out.println(String.format(HealthConstant.LOG_DELETE_BMI_FORMAT,
+                        deletedBmi.bmiValue,
+                        deletedBmi.date));
         bmis.remove(index);
-        LogFile.writeLog("Removed BMI with index: " + index, false);
+        LogFile.writeLog(HealthConstant.BMI_REMOVED_MESSAGE_PREFIX + index, false);
     }
 
     /**
@@ -192,46 +191,43 @@ public class HealthList extends ArrayList<Health> {
      * @param index Index of the Bmi object to be deleted.
      */
     public static void deletePeriod(int index) throws CustomExceptions.OutOfBounds {
-        assert !periods.isEmpty() : "Period list is empty.";
+        assert !periods.isEmpty() : ErrorConstant.EMPTY_PERIOD_LIST_ERROR;
         if (index < 0 || index >= periods.size()) {
-            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.INVALID_INDEX_DELETE_ERROR);
         }
         Period deletedPeriod = periods.get(index);
-        System.out.println("Removed period entry with start date: " +
-                deletedPeriod.startDate +
-                "and end date: " +
-                deletedPeriod.endPeriodDate);
+        System.out.println(String.format(HealthConstant.LOG_DELETE_PERIOD_FORMAT,
+                deletedPeriod.getStartDate(),
+                deletedPeriod.getEndDate()));
         periods.remove(index);
-        LogFile.writeLog("Removed period with index: " + index, false);
+        LogFile.writeLog(HealthConstant.PERIOD_REMOVED_MESSAGE_PREFIX + index, false);
     }
 
     //@@author syj_02
     public static void addAppointment(Appointment appointment) {
-        assert appointment != null : HealthConstant.APPOINTMENT_CANNOT_BE_NULL;
+        assert appointment != null : ErrorConstant.NULL_APPOINTMENT_ERROR;
         appointments.add(appointment);
         appointments.sort(Comparator.comparing(Appointment::getDate).thenComparing(Appointment::getTime));
     }
 
     public static void deleteAppointment(int index) throws CustomExceptions.OutOfBounds {
-        assert !appointments.isEmpty() : "Apointment list is empty.";
+        assert !appointments.isEmpty() : ErrorConstant.EMPTY_APPOINTMENT_LIST_ERROR;
         if (index < 1 || index > appointments.size()) {
-            throw new CustomExceptions.OutOfBounds("Invalid index to delete!");
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.INVALID_INDEX_DELETE_ERROR);
         }
         index -= 1;
         Appointment deletedAppointment = appointments.get(index);
-        System.out.println("Removed appointment on " +
-                deletedAppointment.date +
-                " at " +
-                deletedAppointment.time +
-                " : " +
-                deletedAppointment.description);
+        System.out.println(String.format(HealthConstant.LOG_DELETE_APPOINTMENT_FORMAT,
+                deletedAppointment.date,
+                deletedAppointment.time,
+                deletedAppointment.description));
         appointments.remove(index);
-        LogFile.writeLog("Removed period with index: " + index, false);
+        LogFile.writeLog(HealthConstant.APPOINTMENT_REMOVED_MESSAGE_PREFIX + index, false);
         showAppointmentList();
     }
 
     public static void showAppointmentList() {
-        assert !appointments.isEmpty() : HealthConstant.APPOINTMENT_LIST_EMPTY;
+        assert !appointments.isEmpty() : ErrorConstant.EMPTY_APPOINTMENT_LIST_ERROR;
         int index = 1;
         for (Appointment appointment: appointments) {
             System.out.print(index + ". ");
@@ -241,6 +237,6 @@ public class HealthList extends ArrayList<Health> {
     }
     public static void clearAppointments() {
         appointments.clear();
-        assert appointments.isEmpty() : "Appointment list is not cleared.";
+        assert appointments.isEmpty() : ErrorConstant.APPOINTMENT_LIST_UNCLEARED_ERROR;
     }
 }

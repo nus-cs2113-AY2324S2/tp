@@ -60,6 +60,9 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "On " + getDate() + " at " + getTime() + ": " + this.description;
+        return String.format(HealthConstant.PRINT_APPOINTMENT_FORMAT,
+                getDate(),
+                getTime(),
+                this.description);
     }
 }

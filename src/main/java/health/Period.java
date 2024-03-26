@@ -171,14 +171,11 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        return "Period Start: "
-                + this.getStartDate()
-                + " Period End: "
-                + this.endPeriodDate
-                + System.lineSeparator()
-                + "Period Length: "
-                + this.periodLength
-                + " days"
-                + (this.cycleLength > 0 ? System.lineSeparator() + "Cycle Length: " + this.cycleLength + " days" : "");
+        return String.format(HealthConstant.PRINT_PERIOD_FORMAT,
+                getStartDate(),
+                getEndDate(),
+                this.periodLength)
+                + (this.cycleLength > 0 ? System.lineSeparator()
+                + String.format(HealthConstant.PRINT_CYCLE_FORMAT, this.cycleLength) : UiConstant.EMPTY_STRING);
     }
 }
