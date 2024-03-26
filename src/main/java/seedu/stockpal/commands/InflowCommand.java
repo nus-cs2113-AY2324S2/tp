@@ -48,7 +48,7 @@ public class InflowCommand extends TransactionActionCommand {
             Ui.printInvalidPidMessage();
             return;
         }
-        boolean updateSuccessful = productList.increaseAmount(productIndex, amountToIncrease);
+        boolean updateSuccessful = productList.increaseAmountCaller(productIndex, amountToIncrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
 
         if (updateSuccessful) {

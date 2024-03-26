@@ -76,47 +76,59 @@ public class ProductList {
     }
 
     /**
-     * Return true if the increase in quantity is successful.
-     * Increases the quantity of the product with a specific PID.
+     * Method to call the driver code(updateQuantity) to increase quantity.
      *
-     * @param productIndex Product PID to update.
-     * @param amountToIncrease Quantity of product to decrease.
+     * @param productIndex The PID of the specific product
+     * @param amountToIncrease Amount to increase
+     * @return true if quantity is updated successfully and false if exception is thrown
      */
-    public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
+    public boolean increaseAmountCaller(int productIndex, int amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
-        Quantity intialQuantity = updatedProduct.getQuantity();
-        try {
-            intialQuantity.updateIncreaseQuantity(intialQuantity, amountToIncrease);
-            Ui.printToScreen("Quantity updated. " + intialQuantity);
-            return true;
-        } catch (InventoryQuantityOverflowException iqoe) {
-            Ui.printToScreen("Overflow detected. No change to quantity. " + intialQuantity);
-            return false;
-        }
-        //return updatedProduct.increaseQuantity(amountToIncrease);
+        Quantity initialQuantity = updatedProduct.getQuantity();
+        return updateQuantity(initialQuantity, amountToIncrease, "increase");
     }
-
 
     /**
-     * Return true if the decrease of quantity is successful.
-     * Decreases the quantity of the product with a specific PID.
+     * Method to call the driver code(updateQuantity) to decrease quantity.
      *
-     * @param productIndex Product PID to update
-     * @param amountToDecrease Quantity of product to decrease
+     * @param productIndex The PID of the specific product
+     * @param amountToDecrease Amount to decrease
+     * @return true if quantity is updated successfully and false if exception is thrown
      */
-    public boolean decreaseAmount(int productIndex, Integer amountToDecrease) {
+    public boolean decreaseAmountCaller(int productIndex, int amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
-        Quantity intialQuantity = updatedProduct.getQuantity();
+        Quantity initialQuantity = updatedProduct.getQuantity();
+        return updateQuantity(initialQuantity, amountToDecrease, "decrease");
+    }
+
+    /**
+     * Driver function to update the quantity of the products based on the
+     * operation (increase / decrease).
+     *
+     * @param initialQuantity Intial quantity object
+     * @param amount Amount to increase/decrease
+     * @param operation Increase / decrease quantity
+     * @return true is quantity updated successfully, else false if exception thrown
+     */
+    private boolean updateQuantity(Quantity initialQuantity, int amount, String operation) {
         try {
-            intialQuantity.updateDecreaseQuantity(intialQuantity, amountToDecrease);
-            Ui.printToScreen("Quantity updated. " + intialQuantity);
+            if ("increase".equals(operation)) {
+                initialQuantity.updateIncreaseQuantity(initialQuantity, amount);
+            } else if ("decrease".equals(operation)) {
+                initialQuantity.updateDecreaseQuantity(initialQuantity, amount);
+            }
+            Ui.printToScreen("Quantity updated. " + initialQuantity);
             return true;
+        } catch (InventoryQuantityOverflowException iqoe) {
+            Ui.printToScreen("Overflow detected. No change to quantity. " + initialQuantity);
+            return false;
         } catch (InsufficientAmountException ise) {
             Ui.printToScreen("Insufficient amount in inventory. " +
-                    "No change to quantity. " + intialQuantity);
+                    "No change to quantity. " + initialQuantity);
             return false;
         }
     }
+
 
     /**
      * @param productList ProductList object.
