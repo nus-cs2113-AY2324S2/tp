@@ -14,9 +14,6 @@ public class SummariseParser {
     private static final int FROM_INDEX = 3;
     private static final int TO_INDEX = 4;
 
-    private static final String INVALID_FORMAT_MESSAGE = "Invalid input format for summarise command. "
-            + "Please use the format: summarise /from <start> /to <end>";
-
     public static Command parseInput(String userInput) {
         String[] userInputAsArray = userInput.trim().split("\\s+");
         String nameToSummariseBy = null;
