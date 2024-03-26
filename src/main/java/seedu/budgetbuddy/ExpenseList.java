@@ -109,7 +109,7 @@ public class ExpenseList {
         assert category != null : "Category should not be null";
         assert amount != null : "Amount should not be null";
         assert description != null : "Description should not be null";
-        
+
         if (!categories.contains(category)) {
             throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
@@ -126,6 +126,7 @@ public class ExpenseList {
 
         Expense expense = new Expense(category, amountInt, description);
         expenses.add(expense);
+
     }
 
     public void editExpense(String category, int index, double amount, String description) {
@@ -165,14 +166,13 @@ public class ExpenseList {
             expenseToEdit.setAmount(amount);
             expenseToEdit.setDescription(description);
 
-            LOGGER.info("Expense at index " + index + " edited successfully. New details: " + expenseToEdit.toString());
+            LOGGER.info("Expense at index " + index + " edited successfully. New details: " +
+                    expenseToEdit.toString());
             System.out.println("Expense edited successfully.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error editing expense at index " + index, e);
         }
     }
-
-
 
     public void deleteExpense(int index){
         if (index >= 0 && index < expenses.size()){
@@ -182,4 +182,5 @@ public class ExpenseList {
             System.out.println("Invalid expense index.");
         }
     }
+
 }

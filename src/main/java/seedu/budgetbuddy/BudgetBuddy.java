@@ -2,6 +2,8 @@ package seedu.budgetbuddy;
 
 import seedu.budgetbuddy.command.Command;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class BudgetBuddy {
@@ -10,11 +12,16 @@ public class BudgetBuddy {
     private ExpenseList expenses;
     private SavingList savings;
 
+    private Storage expensesStorage;
+    private Storage savingsStorage;
+
     public BudgetBuddy() {
         ui = new Ui();
         parser = new Parser();
         expenses = new ExpenseList();
         savings = new SavingList();
+        expensesStorage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt");
+        savingsStorage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
 
     public void handleCommands(String input) {
@@ -25,10 +32,25 @@ public class BudgetBuddy {
         } else {
             System.out.println("Invalid command");
         }
+
+        try {
+            expensesStorage.saveExpenses(expenses.getExpenses());
+            savingsStorage.saveSavings(savings.getSavings());
+        } catch (IOException e) {
+            System.out.println("Error saving expenses to file.");
+        }
+
     }
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
+
+        try {
+            this.expenses.getExpenses().addAll(expensesStorage.loadExpenses());
+            this.savings.getSavings().addAll(savingsStorage.loadSavings());
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing expense file found. Starting fresh.");
+        }
 
         ui.showWelcome();
 
