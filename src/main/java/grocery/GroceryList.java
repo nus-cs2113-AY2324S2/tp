@@ -38,6 +38,9 @@ public class GroceryList {
 
     /**
      * Adds a grocery.
+     *
+     * @param grocery Grocery to be added.
+     * @throws EmptyGroceryException If grocery name == null.
      */
     public void addGrocery(Grocery grocery) throws EmptyGroceryException {
         if (grocery.getName() == null || grocery.getName().trim().isEmpty()) {
@@ -60,7 +63,9 @@ public class GroceryList {
     /**
      * Returns the desired grocery.
      *
-     * @throws NoSuchGroceryException Selected grocery does not exist.
+     * @param name Name of the grocery.
+     * @return The needed grocery.
+     * @throws NoSuchGroceryException If the selected grocery does not exist.
      */
     private Grocery getGrocery(String name) throws NoSuchGroceryException {
         int index = -1;
@@ -121,6 +126,7 @@ public class GroceryList {
     /**
      * Adds the expiration date of an existing grocery.
      *
+     * @param details A string containing grocery name and details.
      * @throws GitException Exception thrown depending on error.
      */
     public void editExpiration(String details) throws GitException {
@@ -182,6 +188,12 @@ public class GroceryList {
         }
     }
 
+    /**
+     * Updates the cost of an existing grocery.
+     *
+     * @param details A string containing grocery name and details.
+     * @throws GitException If the input new cost is not numeric.
+     */
     public void editCost(String details) throws GitException {
         // Assuming the format is "cost GROCERY $PRICE"
         System.out.println(details);
@@ -232,7 +244,8 @@ public class GroceryList {
     /**
      * Removes a grocery.
      *
-     * @throws GitException Exception thrown depending on error.
+     * @param details User input.
+     * @throws GitException If grocery is empty.
      */
     public void removeGrocery(String details) throws GitException {
         assert (!groceries.isEmpty()) : "There is nothing to remove.";

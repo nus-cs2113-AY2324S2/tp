@@ -55,7 +55,7 @@ public class Grocery {
     /**
      * Formats the expiration date from type string to local date.
      *
-     * @param expiration the expiration date of the grocery
+     * @param expiration The expiration date of the grocery.
      */
     public void setExpiration(String expiration) {
         assert !(expiration.isEmpty()) : "Expiration date entered is invalid!";
@@ -66,7 +66,7 @@ public class Grocery {
     /**
      * Converts the cost from type String to double and store it.
      *
-     * @param cost the cost of grocery in String type
+     * @param cost The cost of grocery in String type.
      */
     public void setCost(String cost) {
         assert !(cost.isEmpty()) : "Cost entered is invalid!";
@@ -76,7 +76,7 @@ public class Grocery {
     /**
      * Returns the name, amount, expiration date and cost of the grocery.
      *
-     * @return a String representation of the Grocery.
+     * @return String representation of the Grocery.
      */
     public String printGrocery() {
         assert !(this.name.isEmpty()) : "Grocery does not exist!!";

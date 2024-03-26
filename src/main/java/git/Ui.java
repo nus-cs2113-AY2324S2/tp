@@ -46,7 +46,9 @@ public class Ui {
     }
 
     /**
-     * Prints Hello with user's name
+     * Prints Hello with user's name.
+     *
+     * @param userName User's name.
      */
     public void printHello(String userName) {
         System.out.println("Hello " + userName + "!");
@@ -60,7 +62,7 @@ public class Ui {
     /**
      * Processes user input into commands and their details.
      *
-     * @return an array of the fragments of the commands
+     * @return Array of the fragments of the commands.
      */
     public String[] processInput() {
         String commandLine = in.nextLine();
@@ -79,7 +81,7 @@ public class Ui {
     /**
      * Prompts user for expiration date.
      *
-     * @return the formatted expiration date
+     * @return Formatted expiration date.
      */
     public String promptForExpiration() {
         System.out.println("Please enter the year of expiry (e.g., 2024):");
@@ -100,7 +102,7 @@ public class Ui {
      * Prompts the user to enter the cost of the grocery and format the string.
      * Returns the cost to be set for the grocery.
      *
-     * @return the cost of the grocery formatted in 2dp
+     * @return Cost of the grocery formatted in 2 decimal points.
      */
     public String promptForCost() throws GitException {
         System.out.println("Please enter the cost (e.g., $1.20):");
@@ -121,8 +123,8 @@ public class Ui {
     /**
      * Reads expiration date from user input.
      *
-     * @param month the month of expiration
-     * @return month in numerical format
+     * @param month Month of expiration.
+     * @return Month in numerical format.
      */
     private String convertMonthToNumber(String month) {
         // Convert month from name to number (e.g., "July" to "07")
@@ -142,10 +144,10 @@ public class Ui {
     /**
      * Reads expiration date from user input.
      *
-     * @param year the year of expiration
-     * @param month the month of expiration
-     * @param day the day of expiration
-     * @return the formatted expiration date
+     * @param year Year of expiration.
+     * @param month Month of expiration.
+     * @param day Day of expiration.
+     * @return Formatted expiration date.
      */
     private String formatExpirationDate(String year, String month, String day) {
         // This method can be enhanced to validate the date components
@@ -173,12 +175,19 @@ public class Ui {
 
     /**
      * Prints output after setting the selected grocery's expiration date.
+     *
+     * @param grocery The grocery that should be updated.
      */
     public static void printExpSet(Grocery grocery) {
         assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
         System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
     }
 
+    /**
+     * Prints output after editing the selected grocery's cost.
+     *
+     * @param grocery The grocery that should be updated.
+     */
     public static void printCostSet(Grocery grocery) {
         assert (grocery.getCost()!= 0): "grocery cost should not be empty";
         double cost = grocery.getCost();
@@ -188,6 +197,8 @@ public class Ui {
 
     /**
      * Prints output after adding a grocery.
+     *
+     * @param grocery Grocery added.
      */
     public static void printGroceryAdded(Grocery grocery) {
         assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
@@ -196,6 +207,8 @@ public class Ui {
 
     /**
      * Prints output after setting the selected grocery's amount.
+     *
+     * @param grocery The grocery that should be updated.
      */
     public static void printAmtSet(Grocery grocery) {
         // TODO: update amount output according to Grocery subclass
@@ -205,6 +218,8 @@ public class Ui {
 
     /**
      * Prints output after a grocery's amount is set to 0.
+     *
+     * @param grocery The grocery that is depleted.
      */
     public static void printAmtDepleted(Grocery grocery) {
         System.out.println(grocery.getName() + " is now out of stock!");
@@ -219,6 +234,8 @@ public class Ui {
 
     /**
      * Prints all groceries.
+     *
+     * @param groceries An array list of groceries.
      */
     public static void printGroceryList(List<Grocery> groceries) {
         assert !groceries.isEmpty() : "grocery list should not be empty";
@@ -230,6 +247,9 @@ public class Ui {
 
     /**
      * Prints output when the selected grocery is removed.
+     *
+     * @param grocery The grocery that is removed.
+     * @param groceries The array list of groceries.
      */
     public static void printGroceryRemoved(Grocery grocery, List<Grocery> groceries) {
         assert grocery!=null : "Grocery does not exist";
