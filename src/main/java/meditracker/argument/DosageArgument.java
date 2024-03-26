@@ -11,7 +11,7 @@ public class DosageArgument extends Argument {
                 "How much medication should you take?",
                 "Dosage of medication",
                 isOptional,
-                false
+                true
         );
     }
 }

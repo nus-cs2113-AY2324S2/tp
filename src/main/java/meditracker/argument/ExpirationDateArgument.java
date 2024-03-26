@@ -11,7 +11,7 @@ public class ExpirationDateArgument extends Argument {
                 "When does the medication expire?",
                 "Expiration date of medication",
                 isOptional,
-                false
+                true
         );
     }
 }

@@ -11,7 +11,7 @@ public class NameArgument extends Argument {
                 "What is the name of the medication?",
                 "Name of medication",
                 isOptional,
-                false
+                true
         );
     }
 }

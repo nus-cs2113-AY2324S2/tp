@@ -11,7 +11,7 @@ public class ListIndexArgument extends Argument {
                 "What is the index of item in list?",
                 "Index of item in list",
                 isOptional,
-                false
+                true
         );
     }
 }

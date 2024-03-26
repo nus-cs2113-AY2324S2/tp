@@ -17,7 +17,7 @@ public class IntakeFrequencyArgument extends Argument {
                 "How often should this medication be taken during the day?",
                 "Intake frequency of medication during the day",
                 isOptional,
-                false
+                true
         );
     }
 }

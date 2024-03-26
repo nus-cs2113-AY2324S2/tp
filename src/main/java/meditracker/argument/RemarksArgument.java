@@ -11,7 +11,7 @@ public class RemarksArgument extends Argument {
                 "Any additional remarks?",
                 "Additional remarks on medication",
                 isOptional,
-                false
+                true
         );
     }
 }
