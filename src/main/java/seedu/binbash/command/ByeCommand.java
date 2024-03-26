@@ -1,7 +1,6 @@
 package seedu.binbash.command;
 
 import seedu.binbash.ui.Ui;
-import seedu.binbash.storage.Storage;
 import seedu.binbash.ItemList;
 
 public class ByeCommand extends Command {
@@ -10,7 +9,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
+    public boolean execute(Ui ui, ItemList itemList) {
         ui.setUserAsInactive();
         executionUiOutput = "Bye!";
         return true;

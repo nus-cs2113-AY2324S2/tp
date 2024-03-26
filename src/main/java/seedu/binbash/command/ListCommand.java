@@ -2,7 +2,6 @@ package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.storage.Storage;
 
 public class ListCommand extends Command {
 
@@ -10,7 +9,7 @@ public class ListCommand extends Command {
         commandLogger.fine("Creating List Command...");
     }
 
-    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
+    public boolean execute(Ui ui, ItemList itemList) {
         executionUiOutput = itemList.printList(itemList.getItemList());
         return true;
     }

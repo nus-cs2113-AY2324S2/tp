@@ -3,12 +3,12 @@ package seedu.binbash.command;
 import java.util.logging.Logger;
 import seedu.binbash.ItemList;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.storage.Storage;
 
 public abstract class Command {
     protected ItemList itemList;
     protected Logger commandLogger;
     protected String executionUiOutput;
+    protected boolean hasToSave = false;
 
     protected Command() {
         commandLogger = Logger.getLogger("CommandLogger");
@@ -18,5 +18,9 @@ public abstract class Command {
         return executionUiOutput;
     }
 
-    public abstract boolean execute(Ui ui, ItemList itemList, Storage storage);
+    public boolean hasToSave() {
+        return hasToSave;
+    }
+
+    public abstract boolean execute(Ui ui, ItemList itemList);
 }

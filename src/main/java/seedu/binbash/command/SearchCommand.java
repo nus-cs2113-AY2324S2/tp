@@ -2,7 +2,6 @@ package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.storage.Storage;
 
 import java.util.regex.Pattern;
 
@@ -19,7 +18,7 @@ public class SearchCommand extends Command {
         ));
     }
 
-    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
+    public boolean execute(Ui ui, ItemList itemList) {
         executionUiOutput = itemList.searchItem(keyword);
         return true;
     }

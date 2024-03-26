@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 import java.util.logging.Level;
 import seedu.binbash.ItemList;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.storage.Storage;
 
 public class DeleteCommand extends Command {
     public static final Pattern COMMAND_FORMAT = Pattern.compile("delete\\s(?<identifier>.+)");
@@ -30,7 +29,7 @@ public class DeleteCommand extends Command {
         ));
     }
 
-    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
+    public boolean execute(Ui ui, ItemList itemList) {
         if (isIndex) {
             if (index <= 0 || index > itemList.getItemCount()) {
                 executionUiOutput = "Index is out of bounds!";
@@ -43,7 +42,7 @@ public class DeleteCommand extends Command {
             commandLogger.log(Level.INFO, "Delete identifier is detected as an item name");
             executionUiOutput = itemList.deleteItem(keyword);
         }
-        storage.saveToStorage(itemList.getItemList());
+        hasToSave = true;
         return true;
     }
 }
