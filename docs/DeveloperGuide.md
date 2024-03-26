@@ -12,7 +12,7 @@
 ## Product scope
 ### Target user profile
 
-Students and Working adults
+University students and Working adults
 
 ### Value proposition
 
@@ -29,6 +29,10 @@ Students can use this app to keep track of their GPA grade
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
+
+## Environment Setup
+Java JDK 8 or above
+An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 
 ## Glossary
 
@@ -54,15 +58,18 @@ This guide will walk developers through the architecture, functionality, and cor
 ## Overview
 The module is divided into two primary classes:
 
+### class: Expenditure
+This class is responsible for processing expenditure related commands and storing all expenses input by the user
+
+### Key Method
+#### addExpenditure(String expenditure, Boolean userAdded)
+Takes in the string input by the user and splits it into the respective parts. "userAdded" checks if the method is called by
+the user or called when reading from a storage file.
+
 ### GPACommand: 
 Handles user interactions, input collection, and directs the flow of the GPA calculation process.
 ### GPAMain: 
 Contains the logic for calculating the updated GPA.
-
-
-## Environment Setup
-Java JDK 8 or above
-An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 
 ## Class Descriptions
 
