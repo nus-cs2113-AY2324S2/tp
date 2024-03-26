@@ -77,7 +77,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 **API** : [`Data`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/data)
 
+The following is a class diagram of the `data` component.
 ![Structure of the Data Component](images/DataClassDiagram.png)
+
 
 ### Storage component
 
@@ -193,7 +195,7 @@ The following sequence diagram summarizes what happens when a user inputs a vali
 
 ## Glossary
 
-* *glossary item* - Definition
+* *PID (Product ID)* - A unique number assigned to each product for identification purposes.
 
 --------------------------------------------------------------------------------------------------------------------
 
