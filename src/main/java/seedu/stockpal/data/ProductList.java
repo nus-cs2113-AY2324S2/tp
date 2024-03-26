@@ -106,7 +106,7 @@ public class ProductList {
      * Driver function to update the quantity of the products based on the
      * operation (increase / decrease).
      *
-     * @param initialQuantity Intial quantity object
+     * @param initialQuantity initial quantity object
      * @param amount Amount to increase/decrease
      * @param operation Increase / decrease quantity
      * @return true is quantity updated successfully, else false if exception thrown
@@ -121,7 +121,6 @@ public class ProductList {
             } else {
                 initialQuantity.updateDecreaseQuantity(initialQuantity, amount);
             }
-
             initialQuantity.notifyLowQuantity(initialQuantity);
             Ui.printToScreen("Quantity updated. " + initialQuantity);
             return true;
@@ -182,12 +181,15 @@ public class ProductList {
     }
 
     /**
-     * Method to check if product has low quantity.
+     * Check if a product has low quantity.
+     * If it has low quantity, throw exception
      *
-     * @return return True is product is of low quantity
-     *          return false if otherwise
+     * @throws NoLowQuantityException exception thrown when there are no
+     *          products with low quantity
      */
-    private boolean checkLowQuantityProducts () {
+    public void checkLowQuantityProducts () throws NoLowQuantityException {
+        boolean hasLowQuantity = false;
+
         Ui.printLowQuantityAlert();
         for (Product product : products) {
             Quantity productQuantity = product.getQuantity();
@@ -195,20 +197,9 @@ public class ProductList {
                 Ui.printToScreen (product.getPid() + " | " + product.getName() + " | " +
                         productQuantity);
                 Ui.printToScreen(HORIZONTAL_LINE);
-                return true;
+                hasLowQuantity = true;
             }
         }
-        return false;
-    }
-
-    /**
-     * Checks if there is any low quantity product.
-     * If there is no low quantity product, then throw exception
-     *
-     * @param hasLowQuantity boolean to check if product has low quantity
-     * @throws NoLowQuantityException Exception to catch that there is no low quantity products
-     */
-    private void printNoLowQuantity (boolean hasLowQuantity) throws NoLowQuantityException {
         if (!hasLowQuantity) {
             throw new NoLowQuantityException("No products with low quantity");
         }
@@ -219,8 +210,7 @@ public class ProductList {
      */
     public void printLowQuantityProducts () {
         try {
-            boolean hasLowQuantity = checkLowQuantityProducts();
-            printNoLowQuantity(hasLowQuantity);
+            checkLowQuantityProducts();
         } catch (NoLowQuantityException nlqe) {
             Ui.printNoLowQuantity();
         }

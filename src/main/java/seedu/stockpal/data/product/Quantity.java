@@ -53,10 +53,12 @@ public class Quantity implements CommandParameter {
         assert increaseQuantity != null : "Increase quantity cannot be null";
         long tentativeQuantity = (long) quantity.getQuantity() + (long) increaseQuantity;
         assert tentativeQuantity >= 0 : "Tentative Quantity cannot be negative";
+
         if (tentativeQuantity > MAX_QUANTITY) {
             logger.log(Level.WARNING, "Inventory overflow detected. No change to quantity.");
             throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
         }
+
         assert tentativeQuantity <= MAX_QUANTITY : "Tentative quantity exceeds MAX_QUANTITY. Integer overflow detected";
         updateQuantity((int) tentativeQuantity);
         logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
@@ -74,16 +76,18 @@ public class Quantity implements CommandParameter {
         assert decreaseQuantity != null : "Decrease quantity cannot be null";
         int initialQuantity = quantity.getQuantity();
         int newQuantity;
+
         if (initialQuantity >= decreaseQuantity) {
             newQuantity = initialQuantity - decreaseQuantity;
-            assert newQuantity > 0 : "Quantity cannot be smaller than 0.";
+            assert newQuantity >= 0 : "Quantity cannot be smaller than 0.";
             notifyLowQuantity(this);
             logger.log(Level.INFO, "Quantity updated successfully to: " + newQuantity);
         } else {
             logger.log(Level.WARNING, "Insufficient amount in inventory. No change to quantity. ");
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
-        updateQuantity((int) newQuantity);
+
+        updateQuantity(newQuantity);
         logger.log(Level.INFO, "Quantity updated successfully to: " + newQuantity);
 
     }
