@@ -61,6 +61,7 @@ list of `expenses` matching against the corresponding `category`.
 | Method       | Return Type | Relevance                                       |
 |--------------|-------------|-------------------------------------------------|
 | addExpense() | void        | Add expense to the existing list of `expenses`  |
+
 The following UML Sequence diagram below shows how the Parser works to obtain the relevant inputs for the Find Feature :
 ![Sequence Diagram for Parser for Add Feature]()
 
@@ -77,16 +78,14 @@ user input.
 
     * | Variable Name | Variable Type |                                                              
       |---------------|---------------|
-      | description   | String        | 
-      | minAmount     | Double        |
-      | maxAmount     | Double        |
+      | category      | String        | 
+      | a   mount     | String        |
+      | description   | String        |
 6. Depending on which parameters were present, the corresponding input would be extracted and placed into each variable
-using the `Parser#extractDetailsForFind(input, "parameter")`
-7. Should the values of `minAmount` and `maxAmount` not be empty,  a check is done to ensure `minAmount` is less than
-or equals to `maxAmount`. If this check does not pass, the function immediately returns `null`
-8. Finally, `Parser#handleFindCommand()` returns a `FindExpensesCommand` to `Parser#parseCommand()`, which is
+using the `Parser#extractDetailsForAdd(input, "parameter")`
+7. Finally, `Parser#handleAddExpenseCommand()` returns a `AddExpensesCommand` to `Parser#parseCommand()`, which is
 then returned to `BudgetBuddy`
 
-The following UML Sequence diagram below shows how the Find Feature command works when a user provides a **valid**
-find expenses command:
+The following UML Sequence diagram below shows how the AddExpense Feature command works when a user provides a **valid**
+add expenses command:
 
