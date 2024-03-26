@@ -37,6 +37,12 @@ public class SuperTracker {
         setupLogger();
         logger.info(START_MESSAGE);
 
+        try {
+            FileManager.loadData();
+        } catch (IOException e) {
+            Ui.printError(ErrorMessage.FILE_CORRUPTED_ERROR);
+        }
+
         Ui.greetUser();
         handleCommands();
 
