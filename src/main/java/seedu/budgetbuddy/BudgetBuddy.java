@@ -11,6 +11,7 @@ public class BudgetBuddy {
     private Parser parser;
     private ExpenseList expenses;
     private SavingList savings;
+    private SplitExpenseList splitexpenses;
 
     private Storage expensesStorage;
     private Storage savingsStorage;
@@ -20,12 +21,13 @@ public class BudgetBuddy {
         parser = new Parser();
         expenses = new ExpenseList();
         savings = new SavingList();
+        splitexpenses = new SplitExpenseList();
         expensesStorage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt");
         savingsStorage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
 
     public void handleCommands(String input) {
-        Command command = parser.parseCommand(expenses, savings, input);
+        Command command = parser.parseCommand(expenses, savings, splitexpenses, input);
 
         if (command != null) {
             command.execute();

@@ -10,6 +10,8 @@ import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.SplitExpenseCommand;
+import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
@@ -63,6 +65,7 @@ public class Parser {
     public Boolean isFindExpensesCommand(String input) {
         return input.startsWith("find expenses");
     }
+
     public Boolean isListCommand(String input) {
         return input.startsWith("list");
     }
@@ -78,10 +81,22 @@ public class Parser {
         return input.startsWith("menu");
     }
 
+    /**
+     * Checks if the provided input starts with the word "bye" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "bye", else returns false
+     */
     public Boolean isExitCommand(String input) {
         return input.startsWith("bye");
     }
 
+    /**
+     * Checks if the provided input starts with the word "add expense" .
+     *
+     * @param input The user input string
+     * @return true if user input starts with "add expense", else returns false
+     */
     public Boolean isAddExpenseCommand(String input) {
         return input.startsWith("add expense");
     }
@@ -106,6 +121,9 @@ public class Parser {
         return input.startsWith("reduce");
     }
 
+    public Boolean isSplitExpenseCommand(String input) {
+        return input.startsWith("split expenses");
+    }
     public Boolean isSetBudgetCommand(String input){
         return input.startsWith("set budget");
     }
@@ -114,11 +132,11 @@ public class Parser {
         return input.startsWith("budget print");
     }
 
-
     /**
-     * Parses the "find expenses" command, allowing for optional and combinable parameters.
+     * Parses the "find expenses" command, allowing for optional and combinable
+     * parameters.
      *
-     * @param input The full user input string.
+     * @param input    The full user input string.
      * @param expenses The ExpenseList to search within.
      * @return A Command for executing the search, or null if the input is invalid.
      */
@@ -133,7 +151,7 @@ public class Parser {
 
         LOGGER.log(Level.INFO, "Begin parsing parameters in find expenses command");
 
-        if(!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
+        if (!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
             LOGGER.log(Level.WARNING, "Input does not contain any parameters");
 
             System.out.println("Please Ensure that you include d/, morethan/ or lessthan/");
@@ -178,7 +196,17 @@ public class Parser {
         return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
     }
 
-    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
+    /**
+     * Parses the "list" command, allowing for optional category filtering.
+     *
+     * @param input The full user input string.
+     * @param expenseList The ExpenseList to list from.
+     * @param savingList The SavingList to list from.
+     * @return A Command for executing the list, or null if the input is invalid.
+     */
+    
+    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList, 
+            SplitExpenseList splitexpenseList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
 
@@ -216,6 +244,9 @@ public class Parser {
                     LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
                 }
                 return new ListExpenseCommand(expenseList, filterCategory);
+            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("splitted") 
+                    && parts[2].equalsIgnoreCase("expenses")) {
+                return new ListSplitExpenseCommand(splitexpenseList);
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
                 String filterCategory = parts[2];
                 try {
@@ -238,8 +269,8 @@ public class Parser {
             break;
         default:
             return null;
-        }
-        return null;
+        }return null;
+
     }
 
 
@@ -535,6 +566,57 @@ public class Parser {
         }
     }
 
+    public Command handleSplitExpenseCommand(SplitExpenseList splitexpenses, String input) {
+        if (input == null || !input.contains("a/") || !input.contains("n/") || !input.contains("d/")) {
+            System.out.println("Invalid command format.");
+            return null;
+        }
+    
+        // Extract details directly using the prefixes
+        String amount = extractDetail(input, "a/");
+        String numberOfPeople = extractDetail(input, "n/");
+        String description = extractDetail(input, "d/");
+    
+        // Validation for each part
+        if (amount.isEmpty() || numberOfPeople.isEmpty() || description.isEmpty()) {
+            System.out.println("Missing details.");
+            return null;
+        }
+    
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                throw new BudgetBuddyException(amount + " is not a valid amount.");
+            }
+        } catch (NumberFormatException | BudgetBuddyException e) {
+            System.out.println("Invalid amount format.");
+            return null;
+        }
+    
+        try {
+            int numberValue = Integer.parseInt(numberOfPeople);
+            if (numberValue <= 0) {
+                throw new BudgetBuddyException(numberOfPeople + " is not a valid number.");
+            }
+        } catch (NumberFormatException | BudgetBuddyException e) {
+            System.out.println("Invalid number format.");
+            return null;
+        }
+    
+        return new SplitExpenseCommand(splitexpenses, amount, numberOfPeople, description);
+    }
+
+    private String extractDetail(String input, String prefix) {
+        try {
+            int startIndex = input.indexOf(prefix) + prefix.length();
+            int endIndex = input.indexOf(" ", startIndex);
+            endIndex = endIndex == -1 ? input.length() : endIndex; // Handle last detail case
+            return input.substring(startIndex, endIndex);
+        } catch (Exception e) {
+            return ""; // Return empty string if any error occurs
+        }
+    }
+
     private Command handleSetBudgetCommand(ExpenseList expenses, String input) {
         LOGGER.log(Level.INFO, "Entering handleSetBudgetCommand with input: " + input);
         String[] parts = input.split(" ");
@@ -580,7 +662,6 @@ public class Parser {
         return new ListBudgetCommand(expenseList);
     }
 
-
     /**
      * Parses a string input into a Command object and returns the associated
      * command to handle the user input
@@ -589,8 +670,9 @@ public class Parser {
      * @return A Command object corresponding to the user input, or null if the
      *         input is invalid.
      */
-    public Command parseCommand(ExpenseList expenses, SavingList savings, String input) {
-
+    public Command parseCommand(ExpenseList expenses, SavingList savings, SplitExpenseList 
+            splitexpenses, String input) {
+        
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
             return handleMenuCommand(input);
@@ -621,13 +703,17 @@ public class Parser {
         }
 
         if (isListCommand(input)) {
-            return handleListCommand(input, expenses, savings);
+            return handleListCommand(input, expenses, savings, splitexpenses);
         }
 
         if (isFindExpensesCommand(input)) {
             return handleFindExpensesCommand(input, expenses);
         }
 
+        if (isSplitExpenseCommand(input)) {
+            return handleSplitExpenseCommand(splitexpenses, input);
+        }
+        
         if (isSetBudgetCommand(input)) {
             return handleSetBudgetCommand(expenses, input);
         }
