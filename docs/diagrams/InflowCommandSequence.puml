@@ -6,26 +6,28 @@ Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":StockPal" as stockpal STOCKPAL_COLOR
 Participant ":Parser" as parser PARSER_COLOR
-Participant ":Commands" as commands COMMANDS_COLOR
+Participant ":command:InflowCommand" as commands COMMANDS_COLOR
 Participant ":data" as data DATA_COLOR
-Participant ":Storage" as storage STORAGE_COLOR
 
 activate stockpal STOCKPAL_COLOR
 
 user -[USER_COLOR]> ui : "inflow 2 a/10"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]>stockpal : "inflow 2 a/10"
+ui -[UI_COLOR]> stockpal : "inflow 2 a/10"
 
-stockpal -[STOCKPAL_COLOR]> parser : parseCommand("inflow 2 a/10")
+stockpal -[PARSER_COLOR]> parser : parseCommand("inflow 2 a/10")
 activate parser PARSER_COLOR
 
-parser --[PARSER_COLOR]> stockpal : InflowCommand(pid, increaseBy)
+create commands
+parser -[PARSER_COLOR]> commands : new InflowCommand(pid, increaseBy)
+activate commands COMMANDS_COLOR
+commands --[COMMANDS_COLOR]> parser : commands
+
+parser --[PARSER_COLOR]> stockpal : commands
 deactivate parser
 
 stockpal -[STOCKPAL_COLOR]> commands : execute(InflowCommand(pid, increaseBy))
-activate commands COMMANDS_COLOR
-
 commands -[COMMANDS_COLOR]> data : increaseAmountCaller(pid, increaseBy)
 activate data DATA_COLOR
 
@@ -41,20 +43,10 @@ deactivate data
 
 data --[DATA_COLOR]> commands
 
-commands --[COMMANDS_COLOR]> ui
+commands -[COMMANDS_COLOR]> ui
 
 deactivate commands
 deactivate data
-
-stockpal -[STOCKPAL_COLOR]> storage : (productList)
-activate storage STORAGE_COLOR
-storage -[STORAGE_COLOR]> storage : Save to file
-activate storage STORAGE_COLOR
-storage --[STORAGE_COLOR]> storage
-deactivate storage
-storage --[STORAGE_COLOR]> stockpal
-deactivate storage
-
 
 ui --[UI_COLOR]> user : "Quantity updated. Quantity: 20"
 
