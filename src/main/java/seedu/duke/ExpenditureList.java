@@ -121,6 +121,7 @@ public class ExpenditureList {
     }
 
     public static void deleteExpenditure(int index) {
+        assert index > 0 && index <= expenditureList.size() : "Index out of bounds.";
         Expenditure expenditure = expenditureList.get(index - 1);
         System.out.println("deleted: " + expenditure.getDescription() +
                 " | Cost: $" + expenditure.getAmount() +
