@@ -150,9 +150,16 @@ public class CommandUi {
         System.out.println("Calorie goal: " + calorieGoal + " kcal");
         System.out.println("Water goal: " + waterGoal + " ml");
     }
-
+    
     public static String formatDateTime(LocalDateTime dateTime) {
         return dateTime.format(DATE_TIME_FORMATTER);
     }
+    public static void printAllTasksClearedMessage() {
+        System.out.println("All logged data has been cleared.");
+    }
+    public static void printDataAlreadyClearedMessage() {
+        System.out.println("Logged data has already been cleared.");
+    }
+
 }
 

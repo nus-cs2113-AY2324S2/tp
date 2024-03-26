@@ -27,4 +27,8 @@ public class TaskList {
         }
     }
 
+    public static void clearTasks() {
+        tasksList.clear();
+    }
+
 }
