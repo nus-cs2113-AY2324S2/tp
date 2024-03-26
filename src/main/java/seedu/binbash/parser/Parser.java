@@ -1,4 +1,4 @@
-package seedu.binbash;
+package seedu.binbash.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
