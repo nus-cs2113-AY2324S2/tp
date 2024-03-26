@@ -4,6 +4,8 @@ import health.Bmi;
 import health.Health;
 import health.HealthList;
 import health.Period;
+
+import storage.DataFile;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
@@ -52,8 +54,8 @@ public class Handler {
                     System.out.println(UiConstant.EXIT_MESSAGE);
                     return;
 
-                case NEW:
-                    handleExercise(userInput);
+                case WORKOUT:
+                    handleWorkout(userInput);
                     break;
 
                 case HEALTH:
@@ -115,7 +117,7 @@ public class Handler {
      *
      * @param userInput The user input string.
      */
-    public static void handleExercise(String userInput) {
+    public static void handleWorkout(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(WorkoutConstant.RUN)) {
@@ -236,7 +238,6 @@ public class Handler {
      * @param userInput A string containing health data information of user.
      */
     public static void handleHealth(String userInput) {
-        Output.printLine();
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
             if (typeOfHealth.equals(HealthConstant.BMI)){
@@ -288,7 +289,6 @@ public class Handler {
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e.getMessage());
         }
-        Output.printLine();
     }
 
     /**
@@ -425,13 +425,14 @@ public class Handler {
     public static void userInduction() {
         String name = in.nextLine();
         System.out.println("Welcome aboard, Captain " + name);
-        LogFile.writeLog("Name entered: " + name, false);
         Output.printLine();
 
         System.out.println("Tips: Enter 'help' to view the pilot manual!");
         System.out.println("Initiating FTL jump sequence...");
 
+        // DataFile.saveName(name);
         LogFile.writeLog("Name Entered: " + name, false);
+
         System.out.println("FTL jump completed.");
     }
 
@@ -460,10 +461,10 @@ public class Handler {
         Output.printWelcomeBanner();
         initialiseScanner();
         LogFile.writeLog("Started bot", false);
-        // Yet to implement : Check for existing save, if not, make a new one
-        // Yet to implement : int status = Storage.load();
-        int status = 1;
-        Output.printGreeting(1);
+
+        int status = DataFile.loadDataFile();
+        //String name = DataFile.loadName();
+        Output.printGreeting(status, "name");
 
         if (status == 1) {
             userInduction();

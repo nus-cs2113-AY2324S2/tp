@@ -63,12 +63,16 @@ public class HealthConstant {
     // EXAMPLE : LOAD_ERROR
     // ----------------V V V V V ---- PLEASE CHECK AND MOVE TO ERROR ---- V V V V V----------------
     public static final String BLANK_INPUT_FOR_HEALTH = "Type of health cannot be empty. " +
+            System.lineSeparator() +
             "Please input either /h:bmi or /h:period";
     public static final String INVALID_INPUT_FOR_HEALTH = "Invalid input for health type! " +
+            System.lineSeparator() +
             "Please input either /h:bmi or /h:period";
     public static final String INSUFFICIENT_PARAMETERS_FOR_BMI = "Insufficient parameters for bmi! " +
+            System.lineSeparator() +
             "Example input: /h:bmi /height:height /weight:weight";
     public static final String INSUFFICIENT_PARAMETERS_FOR_PERIOD = "Insufficient parameters for period! " +
+            System.lineSeparator() +
             "Example input: /h:period /start:startDate /end:endDate";
     public static final String BMI_MESSAGE_PREFIX = "Your BMI is ";
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
