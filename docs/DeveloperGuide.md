@@ -37,6 +37,11 @@
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
+# Expenditure
+The expenditure module is acomprehensive allows users to key in their expenses to enable them to store all their 
+expenses.
+This guide will walk developers through how to use the expenditure function to track their expenses
+
 # GPA Function
 The GPA Calculator Module is a comprehensive component designed to facilitate the calculation 
 of a user's updated GPA based on their current academic standing and projected module grades. 
