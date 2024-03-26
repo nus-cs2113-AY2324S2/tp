@@ -184,7 +184,7 @@ public class Parser {
                 if (topicList.get(topicNum - 1).hasAttempted) {
                     ui.printOneSolution(questionNum, solution);
                 } else {
-                    System.out.print ("Attempt the topic first!");
+                    ui.printNoSolutionAccess();
                 }
                 return;
             } // only runs if explanation
@@ -193,7 +193,7 @@ public class Parser {
             if (topicList.get(topicNum - 1).hasAttempted) {
                 ui.printOneSolution(questionNum, explanation);
             } else {
-                System.out.print ("Attempt the topic first!");
+                ui.printNoSolutionAccess();
             }
 
 
