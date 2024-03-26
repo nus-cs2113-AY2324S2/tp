@@ -32,7 +32,6 @@ public class Period extends Health {
         this.endCycleDate = null;
         this.periodLength = calculatePeriodLength();
         this.cycleLength = 0;
-
     }
 
     /**

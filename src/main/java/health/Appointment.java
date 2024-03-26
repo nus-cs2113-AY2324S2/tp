@@ -8,7 +8,7 @@ import utility.Parser;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Appointment {
+public class Appointment extends Health {
     //@@author syj02
     protected LocalDate date;
     protected LocalTime time;

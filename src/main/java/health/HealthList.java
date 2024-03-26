@@ -14,8 +14,8 @@ import java.util.Comparator;
 public class HealthList extends ArrayList<Health> {
     static LogFile logFile = LogFile.getInstance();
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
-    private static final ArrayList<Period> periods = new ArrayList<>();
     private static final ArrayList<Appointment> appointments = new ArrayList<>();
+    private static final ArrayList<Period> periods = new ArrayList<>();
 
     //@@author j013n3
     /**
@@ -170,6 +170,7 @@ public class HealthList extends ArrayList<Health> {
     public static int getBmisSize() {
         return bmis.size();
     }
+
     /**
      * Deletes Bmi object based on index.
      * @param index Index of the Bmi object to be deleted.
