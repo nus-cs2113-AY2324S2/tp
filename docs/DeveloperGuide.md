@@ -37,11 +37,11 @@
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-### Add Feature
+### Add Expense Feature
 
 #### Implementation
 
-The Add Feature allows users to add expenses to different categories. `AddExpenseCommand` class enables this feature, 
+The Add Expense Feature allows users to add expenses to different categories. `AddExpenseCommand` class enables this feature, 
 after initialized by the `Parser` class. Within the `AddExpense` object, the `Parser` would have initialized it with
 4 variables, an `ExpenseList` object,  along with a `category`, `amount` , `description`. 
 The relevance of these Class Attributes in `AddExpenseCommand` is as follows : 
@@ -62,8 +62,8 @@ list of `expenses` matching against the corresponding `category`.
 |--------------|-------------|-------------------------------------------------|
 | addExpense() | void        | Add expense to the existing list of `expenses`  |
 
-The following UML Sequence diagram below shows how the Parser works to obtain the relevant inputs for the Find Feature :
-![Sequence Diagram for Parser for Add Feature](docs\diagram\sequenceDiagram_AddExpense.png)
+The following UML Sequence diagram shows how the Parser works to obtain the relevant inputs for the Add Expense Feature :
+![Sequence Diagram for Parser for Add Expense Feature](docs\diagram\sequenceDiagram_AddExpense.png)
 
 The following is a step-by-step explanation for the Parser for the Find Feature :
 1. `BudgetBuddy` calls `Parser#parseCommand(input)` with `input` being the entire user input.
