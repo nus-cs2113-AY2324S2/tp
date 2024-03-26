@@ -19,7 +19,8 @@ public class FAP {
 
     public static void main(String[] args) {
         JsonManager jsonManager = new JsonManager();
-        jsonManager.getModuleInfo("ABM5001");
+        int moduleMC = jsonManager.getModuleInfo("CS1010");
+        System.out.println(jsonManager.moduleExist("CS1010"));
         try {
             printGreeting();
             assert moduleList != null : "moduleList should not be null";
