@@ -38,7 +38,7 @@ class ExerciseManagerTest {
 
     @Test
     public void execute_addValidExercise_success() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Pushups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
     }
@@ -52,7 +52,7 @@ class ExerciseManagerTest {
 
     @Test
     public void execute_addDuplicateExercise_throwsActivityExists() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Pushups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
         assertThrows(Exceptions.ActivityExistsException.class, () -> exerciseManager.execute(parser));
@@ -60,11 +60,11 @@ class ExerciseManagerTest {
 
     @Test
     public void execute_deleteValidExercise_success() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Pushups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String deleteInput = "exercise /delete Push-ups";
+        String deleteInput = "exercise /delete Pushups";
         parser.parseInput(deleteInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
     }
@@ -80,7 +80,7 @@ class ExerciseManagerTest {
     public void execute_listExercises_success() {
         setUpStreams();
 
-        String validInput1 = "exercise /add Push-ups";
+        String validInput1 = "exercise /add Pushups";
         String validInput2 = "exercise /add Deadlifts";
 
         parser.parseInput(validInput1);
@@ -89,12 +89,12 @@ class ExerciseManagerTest {
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
         exerciseManager.executeListAction();
-        String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
+        String expectedOutput = "[ByteCeps]> Added Exercise: Pushups\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Added Exercise: Deadlifts\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
-                "\t\t\t1. Push-ups\n" +
+                "\t\t\t1. Pushups\n" +
                 "\t\t\t2. Deadlifts\n" +
                 "\n" +
                 "-------------------------------------------------\n";
@@ -118,23 +118,23 @@ class ExerciseManagerTest {
     public void execute_validExerciseEdit_success() {
         setUpStreams();
 
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Push ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
         exerciseManager.executeListAction();
 
-        String editedInput = "exercise /edit Push-ups /to Push Ups";
+        String editedInput = "exercise /edit Push ups /to Push Ups";
         parser.parseInput(editedInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
         exerciseManager.executeListAction();
 
-        String expectedOutput = "[ByteCeps]> Added Exercise: Push-ups\n" +
+        String expectedOutput = "[ByteCeps]> Added Exercise: Push ups\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
-                "\t\t\t1. Push-ups\n" +
+                "\t\t\t1. Push ups\n" +
                 "\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Edited Exercise from Push-ups to Push Ups\n" +
+                "[ByteCeps]> Edited Exercise from Push ups to Push Ups\n" +
                 "-------------------------------------------------\n" +
                 "[ByteCeps]> Listing Exercises:\n" +
                 "\t\t\t1. Push Ups\n" +
@@ -154,7 +154,7 @@ class ExerciseManagerTest {
         parser.parseInput(invalidInput);
         assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
 
-        String invalidInput2 = "exercise /edit non-existent";
+        String invalidInput2 = "exercise /edit non existent";
         parser.parseInput(invalidInput2);
         assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
 
@@ -163,11 +163,11 @@ class ExerciseManagerTest {
     //@@author LWachtel1
     @Test
     public void invalidExerciseEdit_emptyNewExercise_throwsInvalidInput() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Push ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String editedInput = "exercise /edit Push-ups /to";
+        String editedInput = "exercise /edit Push ups /to";
         parser.parseInput(editedInput);
         assertThrows(Exceptions.InvalidInput.class, () -> exerciseManager.execute(parser));
     }
@@ -175,11 +175,11 @@ class ExerciseManagerTest {
     //@@author LWachtel1
     @Test
     public void invalidExerciseEdit_invalidPreviousName_throwsActivityDoesNotExists() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Push ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String editedInput = "exercise /edit Pull-ups /to Decline Push-ups";
+        String editedInput = "exercise /edit Pull ups /to Decline Push ups";
         parser.parseInput(editedInput);
         assertThrows(Exceptions.ActivityDoesNotExists.class, () -> exerciseManager.execute(parser));
     }
@@ -187,11 +187,11 @@ class ExerciseManagerTest {
     //@@author LWachtel1
     @Test
     public void invalidExerciseEdit_emptyPreviousName_throwsActivityDoesNotExists() {
-        String validInput = "exercise /add Push-ups";
+        String validInput = "exercise /add Push ups";
         parser.parseInput(validInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String editedInput = "exercise /edit /to Decline Push-ups";
+        String editedInput = "exercise /edit /to Decline Push ups";
         parser.parseInput(editedInput);
         assertThrows(Exceptions.ActivityDoesNotExists.class, () -> exerciseManager.execute(parser));
     }
@@ -199,7 +199,7 @@ class ExerciseManagerTest {
     //@@author LWachtel1
     @Test
     public void execute_invalidFlag_throwsIllegalStateException() {
-        String invalidInput = "exercise /change Push-ups";
+        String invalidInput = "exercise /change Push ups";
         parser.parseInput(invalidInput);
         assertThrows(IllegalStateException.class, () -> exerciseManager.execute(parser));
     }
