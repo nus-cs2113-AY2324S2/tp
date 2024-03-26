@@ -72,6 +72,8 @@ public class ExerciseManager extends ActivityManager {
         String exerciseName = parser.getActionParameter();
         if (exerciseName.isEmpty()) {
             throw new Exceptions.InvalidInput("Exercise name cannot be empty");
+        } else if (exerciseName.matches(".*[{}\\[\\]/\\\\:,#\\-].*")) {
+            throw new Exceptions.InvalidInput("Exercise name cannot contain special characters: { } [ ] / \\\\ : , # -");
         }
         return new Exercise(exerciseName);
     }
