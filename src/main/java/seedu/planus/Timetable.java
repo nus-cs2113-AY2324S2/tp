@@ -91,6 +91,12 @@ public class Timetable {
         return isRemoved;
     }
 
+    /**
+     * Adds a grade to the existing course
+     *
+     * @param courseCode Course that the grade is counted for
+     * @param grade Grade to be added to the course
+     */
     //@@author ZhangWenyue3325
     public void addGrade(String courseCode, String grade) {
         for (ArrayList<Course> courseList : courses) {
@@ -113,6 +119,11 @@ public class Timetable {
         Ui.printFailedToAddGrade();
     }
 
+    /**
+     * Deletes a grade from the existing course
+     *
+     * @param courseCode Course that the grade is counted for
+     */
     public void removeGrade(String courseCode) {
         for (ArrayList<Course> courseList : courses) {
             for (Course course : courseList) {
@@ -128,6 +139,12 @@ public class Timetable {
         Ui.printFailedToRemoveGrade();
     }
 
+    /**
+     * Searches for the index of the specific year and term in the timetable
+     *
+     * @param year Academic year
+     * @param term Semester
+     */
     int searchTimetableIndex(int year, int term) {
         int index = -1;
         for (int i = 0; i < courses.size(); i ++) {

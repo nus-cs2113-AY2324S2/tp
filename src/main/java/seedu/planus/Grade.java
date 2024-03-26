@@ -7,10 +7,19 @@ public class Grade {
     private String letterGrade;
     private double numberGrade;
 
+    /**
+     * Constructor when no params are provided, initialising letterGrade to be null
+     *
+     */
     public Grade() {
         this(null);
     }
 
+    /**
+     * Constructor to initialise letterGrade
+     *
+     * @param letterGrade Grade of the course in alphabetical letter
+     */
     public Grade(String letterGrade) {
         setLetterGrade(letterGrade);
     }

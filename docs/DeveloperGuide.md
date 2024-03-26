@@ -39,6 +39,23 @@ Below is a sequence diagram that shows how Storage takes part in the programme.
 
 ![Storage_SequenceDiagram](uml/Storage_SequenceDiagram-0.png)
 
+### Grade component
+In order to store and check the grades of courses of the user, 4 classes are used mainly.
+- `Grade`: Represents a grade of a course
+- `Course`: Represents a course taken or planned by the user with grades being specified
+- `Timetable`: Stores the list of courses
+- `GradeChecker`: Provides access to the grades of the given period
+
+Below is the class diagram to illustrate this:
+![Grades_ClassDiagram](uml/Grades_ClassDiagram-0.png)
+
+The grades keyed in by the user are **String** type, e.g.`"A"`.
+In the `Grade` class, the `setNumberGrade()` method converts the grade into **double** type, which is more appropriate for the calculation of GPA and total grades.
+
+There are 3 overloaded variations of the `checkGrade()` method in the `GradeChecker` class.
+The first only takes in Timetable `timetable`, which records the current plan of the user.
+The second takes in an additional integer `year`, while the third takes in two additional integers `year` and `term`.
+
 ## Product scope
 ### Target user profile
 
