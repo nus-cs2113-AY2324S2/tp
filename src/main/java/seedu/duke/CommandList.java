@@ -36,9 +36,9 @@ public enum CommandList {
         Formatter.printGoalAfterShot(isScoreGoal);
     }
 
-    public static void executePenalty() {
-        Penalty.executePenalty();
-    }
+//    public static void executePenalty() {
+//        Penalty.executePenalty();
+//    }
     
     //insert new command here
 }

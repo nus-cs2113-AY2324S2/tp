@@ -70,9 +70,9 @@ public class Ui {
         case SHOOT:
             CommandList.executeShoot(readArgumentTokens);
             break;
-        case PENALTY:
-            CommandList.executePenalty();
-            break;
+//        case PENALTY:
+//            CommandList.executePenalty();
+//            break;
         case YES:
             if (MatchStat.getIsMatchEnd()) {
                 MatchStat.updateForNewMatch();
