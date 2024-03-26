@@ -76,9 +76,6 @@ public class Ui {
         case PENALTY:
             CommandList.executePenalty();
             break;
-        case SAVE:
-            CommandList.executeSave();
-            break;
             //insert new executable command here
         default:
             Formatter.printErrorUnknown();
