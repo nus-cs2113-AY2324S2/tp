@@ -15,16 +15,20 @@ public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories;
+    protected List<Budget> budgets;
+
     public ExpenseList(ArrayList<Expense> expenses) {
         this.expenses = expenses;
         this.categories = new ArrayList<>(Arrays.asList("Housing",
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.budgets = new ArrayList<>();
     }
 
     public ExpenseList() {
         this.expenses = new ArrayList<>();
         this.categories = new ArrayList<>(Arrays.asList("Housing",
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.budgets = new ArrayList<>();
     }
 
     public int size() {
@@ -34,6 +38,15 @@ public class ExpenseList {
     public List<Expense> getExpenses() {
         return expenses;
     }
+
+    public List<String> getCategories() {
+        return this.categories;
+    }
+
+    public List<Budget> getBudgets() {
+        return this.budgets;
+    }
+
 
     public ArrayList<Expense> filterExpenses(String description, Double minAmount, Double maxAmount) {
         assert minAmount <= maxAmount : "Minimum Amount must be smaller than or equals to Max Amount";
@@ -181,6 +194,20 @@ public class ExpenseList {
         } else {
             System.out.println("Invalid expense index.");
         }
+    }
+
+    public void setBudget(String category, double budget){
+        LOGGER.info("Setting budget - Category: " + category + ", Budget: $" + budget);
+        for (Budget b : budgets){
+            if (b.getCategory().equalsIgnoreCase(category)){
+                LOGGER.info("Updating budget for category: " + category);
+                b.setBudget(budget);
+                System.out.println("Updated budget for " + category + " to $" + budget);
+                return;
+            }
+        }
+        LOGGER.info("Creating new budget for category: " + category);
+        budgets.add(new Budget(category, budget));
     }
 
 }
