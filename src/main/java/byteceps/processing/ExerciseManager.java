@@ -34,6 +34,9 @@ public class ExerciseManager extends ActivityManager {
         case "list":
             executeListAction();
             break;
+        case "search":
+            executeSearchAction(parser);
+            break;
         default:
             throw new IllegalStateException("Unexpected value: " + parser.getAction());
         }
@@ -99,6 +102,15 @@ public class ExerciseManager extends ActivityManager {
     @Override
     public String getActivityType(boolean plural) {
         return plural ? "Exercises" : "Exercise";
+    }
+
+    //@@author V4vern
+    private void executeSearchAction(Parser parser) throws Exceptions.InvalidInput {
+        String searchTerm = parser.getActionParameter();
+        if (searchTerm == null || searchTerm.isEmpty()) {
+            throw new Exceptions.InvalidInput("Search term cannot be empty.");
+        }
+        search(searchTerm);
     }
 
 }
