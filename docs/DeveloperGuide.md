@@ -75,6 +75,7 @@ A NewCommand instance is created by the `parseNewCommand` method called by Parse
 - `Item`: For creating the new item
 - `Inventory`: For adding the new item into the inventory
 - `Ui`: To notify the user about the successful execution of `NewCommand`
+- `FileManager`: To save the new item added onto the hard disk
 
 The following sequence diagram shows the execution of a NewCommand
 ![NewCommandSequence](uml-diagrams/NewCommandSequence.png)
@@ -83,6 +84,7 @@ The following sequence diagram shows the execution of a NewCommand
 2. A new `Item` object with the given parameters (name, quantity, price) is created and returned to `NewCommand`
 3. The `put` method of the `Inventory` class is called to add the newly created item into the inventory
 4. The `newCommandSuccess` method of the `Ui` class is called to notify that `NewCommand` has been successfully executed
+5. The `saveData` method of the `FileManager` class is called to save the new item added onto the hard disk
 
 
 ## Product scope

@@ -28,7 +28,7 @@ public class Inventory {
         itemMap.clear();
     }
 
-    public static List<Item> items() {
+    public static List<Item> getItems() {
         Collection<Item> items = itemMap.values();
         return new ArrayList<>(items);
     }

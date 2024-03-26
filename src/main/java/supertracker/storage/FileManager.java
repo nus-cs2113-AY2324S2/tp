@@ -48,7 +48,7 @@ public class FileManager {
             saveFile.createNewFile();
         }
 
-        List<Item> items = Inventory.items();
+        List<Item> items = Inventory.getItems();
         FileWriter fw = new FileWriter(saveFile);
         BufferedWriter writer = new BufferedWriter(fw);
 

@@ -33,16 +33,15 @@ class Parser {
 @startuml
 hide footbox
 actor User as User
-participant ":SuperTracker" as SuperTracker #f5e3a9
-participant ":Parser" as Parser #cbf7f4
+participant "SuperTracker" as SuperTracker <<class>> #f5e3a9
+participant "Parser" as Parser <<class>> #cbf7f4
 
-activate SuperTracker #f5e3a9
 User -> SuperTracker : userInput
 SuperTracker -> Parser : parseCommand(userInput)
 activate Parser #cbf7f4
 
 alt valid command word in userInput
-    Parser -> Parser : getPatternMatcher(regex, userInput)
+    Parser -> Parser : getPatternMatcher(regex, userInput, paramFlags)
     activate Parser #a9dff5
     Parser --> Parser : commandToExecute
     deactivate Parser
