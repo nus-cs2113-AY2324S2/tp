@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exception.ProcessInputException;
+import seedu.duke.stats.MatchStat;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -15,7 +16,11 @@ public class Duke {
         Formatter.printWelcomeMsg();
 
         while (Ui.getIsRunning()) {
-            Formatter.printGoalBeforeShot(Ui.roundCount);
+            if (MatchStat.getIsMatchEnd()) {
+                Formatter.printMatchResult();
+            } else {
+                Formatter.printGoalBeforeShot();
+            }
             try {
                 Ui.beginListening();
                 Ui.processInput();
