@@ -3,10 +3,9 @@ package seedu.fitnus.user;
 import org.junit.jupiter.api.Test;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Meal;
-import seedu.fitnus.Parser;
-import seedu.fitnus.Water;
+//import seedu.fitnus.Parser;
+//import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
@@ -14,7 +13,7 @@ import seedu.fitnus.exception.UnregisteredDrinkException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+//import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
@@ -35,6 +34,7 @@ public class UserTest {
         assertEquals(3, testMealList.get(0).getServingSize());
     }
 
+    /*
     @Test
     public void handleWater_unknownServingSize_addWaterFailed() throws IncompleteWaterException {
         try {
@@ -47,6 +47,7 @@ public class UserTest {
         String error = "Incomplete command, the format must be [water s/SERVING_SIZE].";
         fail(error);
     }
+    */
 
     @Test
     public void handleDrinks_validInputs_correctlyAddMeal() throws IncompleteDrinkException,

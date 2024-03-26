@@ -8,7 +8,6 @@ import seedu.fitnus.storage.Storage;
 
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.invalidIndexException;
@@ -20,12 +19,11 @@ import java.util.ArrayList;
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
-    private static ArrayList<Water> totalWaterIntake;
+
 
     public User(Storage mealStorage, Storage drinkStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
-        totalWaterIntake = new ArrayList<>();
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
     }
@@ -55,7 +53,7 @@ public class User {
                     String drinkDescription = Parser.drinkStorageDescription;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        totalWaterIntake.add(new Water(drinkSize));
+                        Water.getInstance(drinkSize);
                     } else {
                         drinkList.add(new Drink(drinkDescription, drinkSize));
                     }
@@ -79,10 +77,8 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
-        for (Water water: totalWaterIntake) {
-            String waterSavedData = "water" + "," + water.getWater();
-            drinkStorage.appendTextContent(waterSavedData);
-        }
+        String waterSavedData = "water" + "," + Water.getWater();
+        drinkStorage.appendTextContent(waterSavedData);
         for (Drink drink : drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize();
             drinkStorage.appendTextContent(drinkSavedData);
@@ -110,17 +106,12 @@ public class User {
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
 
-        drinkList.add(new Drink(drinkName, servingSize));
+        if (drinkName.equals("water")) {
+            Water.getInstance(servingSize);
+        } else {
+            drinkList.add(new Drink(drinkName, servingSize));
+        }
         System.out.println("Added " + servingSize + " ml of " + drinkName);
-    }
-
-    public void handleWater(String command) throws IncompleteWaterException {
-        Parser.parseWater(command);
-        int volume = Parser.waterSize;
-        assert volume > 0: "invalid volume";
-
-        totalWaterIntake.add(new Water(volume));
-        System.out.println("Added " + volume + " ml of water");
     }
 
     public void handleViewCalories() {
@@ -158,9 +149,7 @@ public class User {
 
     public void handleViewWaterIntake() {
         int waterIntake = 0;
-        for (Water water: totalWaterIntake) {
-            waterIntake += water.getWater();
-        }
+        waterIntake += Water.getWater();
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
@@ -213,8 +202,8 @@ public class User {
     public void printDrinkList(int startIndex) {
         for (int i = 0; i < drinkList.size(); i++) {
             Drink currentDrink = drinkList.get(i);
-            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (serving size: "
-                    + currentDrink.getDrinkVolumeSize() + ")");
+            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (volume: "
+                    + currentDrink.getDrinkVolumeSize() + "ml)");
         }
     }
 
@@ -233,6 +222,8 @@ public class User {
         System.out.println("here's what you have consumed today");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
+            System.out.println();
+            handleViewWaterIntake();
         } else {
             printMealList(1);
             printDrinkList(mealList.size()+1);
@@ -267,6 +258,12 @@ public class User {
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
 
+    public static void handleEditWaterIntake(String command) throws invalidIndexException {
+        Parser.parseEditWater(command);
+        Water.editWaterIntake(Parser.editWaterSize);
+        System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
+    }
+
     public void handleDeleteMeal(String command) {
         int mealIndex = Integer.parseInt(command.substring(11)) - 1;
         assert mealIndex >= 0: "meal index out of bounds";
@@ -286,6 +283,7 @@ public class User {
     public void handleClear() {
         mealList.clear();
         drinkList.clear();
+        Water.editWaterIntake(0);
         assert mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
 
