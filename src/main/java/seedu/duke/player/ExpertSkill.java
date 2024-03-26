@@ -1,15 +1,13 @@
 package seedu.duke.player;
 
 import seedu.duke.Formatter;
-import seedu.duke.ui.Ui;
 
 public class ExpertSkill extends Player {
-    private String name;
     private int power = 1;
     private final int skill = 3;
 
-    public ExpertSkill(String name) {
-        super(name);
+    public ExpertSkill(String name, int matchCount) {
+        super(name, matchCount);
     }
 
     @Override
@@ -50,8 +48,15 @@ public class ExpertSkill extends Player {
     }
 
     @Override
+    public int getSkill() {
+        return skill;
+    }
+
+    //For now, only finished visualization part, user can only choose 0,1,2
+    //Will be completed in V2.0b
+    @Override
     public void printGoalBeforeShoot() {
-        Formatter.printGoalBeforeShotforExpert(Ui.roundCount);
+        Formatter.printGoalBeforeShotforExpert();
     }
 
     @Override

@@ -1,15 +1,13 @@
 package seedu.duke.player;
 
 import seedu.duke.Formatter;
-import seedu.duke.ui.Ui;
 
 public class MediumSkill extends Player {
-    private String name;
     private int power = 1;
     private final int skill = 2;
 
-    public MediumSkill(String name) {
-        super(name);
+    public MediumSkill(String name, int matchCount) {
+        super(name, matchCount);
     }
 
     @Override
@@ -37,6 +35,11 @@ public class MediumSkill extends Player {
     }
 
     @Override
+    public int getSkill() {
+        return skill;
+    }
+
+    @Override
     protected void printSkill(){
         System.out.print("Skill:");
         for (int i=0; i<3;i++){
@@ -49,9 +52,11 @@ public class MediumSkill extends Player {
         System.out.println(" Level-Medium");
     }
 
+    //For now, only finished visualization part, user can only choose 0,1,2
+    //Will be completed in V2.0b
     @Override
     public void printGoalBeforeShoot() {
-        Formatter.printGoalBeforeShotforMedium(Ui.roundCount);
+        Formatter.printGoalBeforeShotforMedium();
     }
 
     @Override

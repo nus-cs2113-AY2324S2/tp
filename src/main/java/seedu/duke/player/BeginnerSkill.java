@@ -1,24 +1,18 @@
 package seedu.duke.player;
 
 import seedu.duke.Formatter;
-import seedu.duke.ui.Ui;
 
 public class BeginnerSkill extends Player {
-    public String name;
     private int power=1;
     private final int skill=1;
 
-    public BeginnerSkill(String name) {
-        super(name);
+    public BeginnerSkill(String name, int matchCount) {
+        super(name, matchCount);
     }
 
     @Override
-    public void printSelfInfo(){
-        System.out.println("--------Player Info--------");
-        System.out.println("Name: "+this.name);
-        printPower();
-        printSkill();
-        System.out.println("---------------------------");
+    public void printSelfInfo() {
+        super.printSelfInfo();
     }
 
     @Override
@@ -54,8 +48,13 @@ public class BeginnerSkill extends Player {
     }
 
     @Override
+    public int getSkill() {
+        return skill;
+    }
+
+    @Override
     public void printGoalBeforeShoot() {
-        Formatter.printGoalBeforeShotforBeginner(Ui.roundCount);
+        Formatter.printGoalBeforeShotforBeginner();
     }
 
     @Override
