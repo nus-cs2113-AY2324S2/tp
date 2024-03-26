@@ -1,6 +1,6 @@
 package storage;
 
-import seedu.duke.ExpenditureList;
+import expenditure.ExpenditureList;
 
 
 import java.io.File;

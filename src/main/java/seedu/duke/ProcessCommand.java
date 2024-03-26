@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import expenditure.ExpenditureList;
 import storage.Storage;
 import gpa.GPACommand;
 

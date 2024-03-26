@@ -1,4 +1,4 @@
-package seedu.duke;
+package expenditure;
 
 public class Expenditure {
     protected String description;

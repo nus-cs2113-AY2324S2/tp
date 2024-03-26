@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import expenditure.ExpenditureList;
+
 import static storage.Storage.readExpenditureFile;
 
 public class CantVasMain {
