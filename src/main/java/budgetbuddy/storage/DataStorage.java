@@ -59,10 +59,10 @@ public class DataStorage {
         switch (transactionInfo[2]) {
         case "Income":
             return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
-                    transactionInfo[1], transactionInfo[3], account);
+                    transactionInfo[1], account);
         case "Expense":
             return new Expense(transactionInfo[0], -Double.parseDouble(transactionInfo[4]),
-                    transactionInfo[1], transactionInfo[3], account);
+                    transactionInfo[1], account);
         default:
             return null;
         }
