@@ -35,4 +35,8 @@ public class TopicList {
         return topicList.size();
     }
 
+    public Topic get(int index){
+        return topicList.get(index);
+    }
+
 }

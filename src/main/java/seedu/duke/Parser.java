@@ -26,11 +26,14 @@ public class Parser {
     private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
     boolean hasChosenTopic = false;
 
+
     public void parseCommand(
+
             String command, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper,
             AnswerTracker userAnswers
     ) throws CustomException {
+
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
@@ -134,6 +137,7 @@ public class Parser {
             }
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
             System.out.println("You have finished the topic! What will be your next topic?");
+            topicList.get(topicNum - 1).markAsAttempted();
             ui.printTopicList(topicList, ui);
 
         } catch (NumberFormatException e) {
@@ -175,15 +179,23 @@ public class Parser {
             if (questionNum < 1 || questionNum > qnList.getSize()) {
                 throw new CustomException(("No such question"));
             }
-
             if (isSolutionCommand) {
                 String solution = qnList.getOneSolution(questionNum);
-                ui.printOneSolution(questionNum, solution);
+                if (topicList.get(topicNum - 1).hasAttempted) {
+                    ui.printOneSolution(questionNum, solution);
+                } else {
+                    System.out.print ("Attempt the topic first!");
+                }
                 return;
             } // only runs if explanation
             assert typeOfCommand.contentEquals("explain") : "typeOfCommand should be explain";
             String explanation = qnList.getOneExplanation(questionNum);
-            ui.printOneSolution(questionNum, explanation);
+            if (topicList.get(topicNum - 1).hasAttempted) {
+                ui.printOneSolution(questionNum, explanation);
+            } else {
+                System.out.print ("Attempt the topic first!");
+            }
+
 
         } catch (NumberFormatException e) {
             // if parameter is a String
@@ -198,7 +210,6 @@ public class Parser {
             String allSolutions = qnList.getAllSolutions();
             ui.printAllSolutions(allSolutions);
         }
-
     }
 
     public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,

@@ -27,6 +27,7 @@ public class Ui {
     ) {
         Parser parser = new Parser();
         printLine();
+        //int[] solutionEnabled = new int[topicList.getSize()];
 
         while(isPlaying) {
             ui.askForInput();
