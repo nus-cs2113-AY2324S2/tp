@@ -85,8 +85,9 @@ public class GroceryListTest {
             gl.editAmount("Meat", false);
             fail("Expected a WrongFormatException to be thrown");
         } catch (CommandWrongFormatException e) {
-            String expectedMessage = 
-                "Command is in the wrong format, type \"help\" for more information.\n";
+            String expectedMessage = "Command is in the wrong format, type \"help\" for more information." +
+                    System.lineSeparator() +
+                    "amt needs 'a/'";
             assertEquals(expectedMessage.trim(), e.getMessage().trim());
         } catch (GitException e) {
             fail("Expected a WrongFormatException, but another GitException was thrown");
