@@ -18,4 +18,13 @@ public enum Category {
         this.categoryNum = categoryNum;
         this.categoryName = categoryName;
     }
+
+    public static Category fromNumber(int number) {
+        for (Category category : Category.values()) {
+            if (category.categoryNum == number) {
+                return category;
+            }
+        }
+        return null;
+    }
 }
