@@ -3,6 +3,7 @@ package seedu.duke.ui;
 import seedu.duke.modules.Module;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -79,6 +80,18 @@ public class Ui {
         printHyphens();
     }
 
+    public static void printModulesToComplete(ArrayList<String> modulesToComplete){
+        int courseCodeTableWidth = 25, mcTableWidth = 10;
+        System.out.println("+---------------------------+------------+");
+        System.out.println("| Course Code               | MCs        |");
+        System.out.println("+---------------------------+------------+");
+        for (String moduleCode : modulesToComplete) {
+            String paddedModuleCode = String.format("| %-"+ courseCodeTableWidth +"s |", moduleCode);
+            String paddedModuleMC = String.format(" %-"+ mcTableWidth +"s |", 3);
+            System.out.println(paddedModuleCode + paddedModuleMC);
+        }
+        System.out.println("+---------------------------+------------+");
+    }
     public static void printHyphens() {
         System.out.println("__________________________________________________");
     }

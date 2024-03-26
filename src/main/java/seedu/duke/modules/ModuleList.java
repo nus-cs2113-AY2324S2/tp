@@ -1,5 +1,6 @@
 package seedu.duke.modules;
 
+import seedu.duke.enums.CEGModules;
 import seedu.duke.exceptions.GpaNullException;
 import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -105,5 +106,24 @@ public class ModuleList {
         }
 
         return moduleBySemMap;
+    }
+
+    public boolean containsModule(String moduleCode){
+        for(Module takenModule : takenModuleList){
+            if(moduleCode.equals(takenModule.getModuleCode())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<String> getModulesToComplete(){
+        ArrayList<String> modulesToComplete = new ArrayList<>();
+        for(CEGModules cegModule : CEGModules.values()){
+            if(!containsModule(cegModule.name())){
+                modulesToComplete.add(cegModule.name());
+            }
+        }
+        return modulesToComplete;
     }
 }
