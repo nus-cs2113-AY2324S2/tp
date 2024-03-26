@@ -22,11 +22,6 @@ import seedu.binbash.exceptions.InvalidFormatException;
 
 public class Parser {
     private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private final ItemList itemList;
-
-    public Parser(ItemList itemList) {
-        this.itemList = itemList;
-    }
 
     public Command parseCommand(String userInput) throws InvalidCommandException {
         String[] tokens = userInput.trim().split("\\s+", 2);
@@ -36,7 +31,7 @@ public class Parser {
         try {
             switch (commandString) {
             case "bye":
-                return new ByeCommand(itemList);
+                return new ByeCommand();
             case "add":
                 return parseAddCommand(userInput);
             case "delete":
@@ -69,15 +64,14 @@ public class Parser {
 
         if (indexMatcher.matches()) {
             int index = Integer.parseInt(argumentMatcher.group("identifier"));
-            if (index <= 0 || index > itemList.getItemCount()) {
-                throw new InvalidArgumentException("Index is out of bounds!");
+            if (index < 0) {
+                throw new InvalidArgumentException("Task index cannot be negative!");
             }
-            assert index > 0 && index <= itemList.getItemCount();
-            return new DeleteCommand(itemList, index);
+            return new DeleteCommand(index);
         } else {
             String keyword = argumentMatcher.group("identifier");
             assert !keyword.isEmpty();
-            return new DeleteCommand(itemList, keyword);
+            return new DeleteCommand(keyword);
         }
     }
 
@@ -99,7 +93,7 @@ public class Parser {
         double itemSalePrice = Double.parseDouble(matcher.group("itemSalePrice")); // Will set as optional later
         double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
-        return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
+        return new AddCommand(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
                     itemCostPrice);
     }
 
@@ -113,7 +107,7 @@ public class Parser {
                 Objects.requireNonNullElse(matcher.group("restockQuantity"), "0").strip()
         );
 
-        return new RestockCommand(itemList, itemName, restockQuantity);
+        return new RestockCommand(itemName, restockQuantity);
     }
 
     private Command parseSellCommand(String userInput) throws InvalidFormatException {
@@ -126,7 +120,7 @@ public class Parser {
                 Objects.requireNonNullElse(matcher.group("sellQuantity"), "0").strip()
         );
 
-        return new SellCommand(itemList, itemName, sellQuantity);
+        return new SellCommand(itemName, sellQuantity);
     }
 
     private Command parseSearchCommand(String userInput) throws InvalidFormatException {
@@ -135,11 +129,11 @@ public class Parser {
             throw new InvalidFormatException("Search command is not properly formatted!");
         }
         String keyword = matcher.group("keyword");
-        return new SearchCommand(itemList, keyword);
+        return new SearchCommand(keyword);
     }
 
     private Command parseListCommand(String arguments) {
-        return new ListCommand(itemList);
+        return new ListCommand();
     }
 }
 
