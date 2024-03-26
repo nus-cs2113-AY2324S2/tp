@@ -1,3 +1,4 @@
+//@@author ZhangWenyue3325
 package seedu.planus;
 
 public class GradeChecker {
@@ -13,6 +14,7 @@ public class GradeChecker {
         double termGrade = 0.00;
 
         StringBuilder plan = new StringBuilder();
+
 
         for (int y = 1; y <= MAX_CANDIDATURE_YEAR; y ++) {
             plan.append("Year ").append(y).append(":").append(System.lineSeparator());
@@ -157,4 +159,5 @@ public class GradeChecker {
 
         return plan.toString();
     }
+
 }
