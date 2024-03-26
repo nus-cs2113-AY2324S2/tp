@@ -1,6 +1,7 @@
 package utility;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -25,5 +26,16 @@ public class Parser {
             System.err.println("Error parsing date: " + e.getMessage());
         }
         return formattedDate;
+    }
+
+    public static LocalTime parseTime(String stringTime) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime formattedTime = null;
+        try {
+            formattedTime = LocalTime.parse(stringTime, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Error parsing time: " + e.getMessage());
+        }
+        return formattedTime;
     }
 }
