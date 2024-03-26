@@ -56,7 +56,7 @@ public class InflowCommand extends TransactionActionCommand {
         }
     }
 
-
+    //@@author EdmundTangg
     /**
      * Creates a transaction and add to the transaction list.
      * @param transactionList transactionList object.
