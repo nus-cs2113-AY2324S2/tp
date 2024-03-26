@@ -81,7 +81,6 @@ public class Run extends Workout {
                 "Distance should be a valid numeric " + "value (assuming KM)";
         assert !results[WorkoutConstant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
 
-
         return results;
     }
 

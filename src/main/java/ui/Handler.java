@@ -73,7 +73,6 @@ public class Handler {
                 case DELETE:
                     handleDelete(userInput);
                     break;
-                    // delete /item:gym/health/bmi /index:1
 
                 case HELP:
                     Output.printHelp();
@@ -127,13 +126,20 @@ public class Handler {
 
             } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
                 int numberOfStations = getNumberOfGymStations(userInput);
-                Gym gym = new Gym();
+                String gymDate = getDateFromGym(userInput);
+                Gym gym;
+                if (gymDate == null) {
+                    gym = new Gym();
+                } else {
+                    gym = new Gym(gymDate);
+                }
                 getGymStation(numberOfStations, gym);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e.getMessage());
         }
     }
+
 
     /**
      * Handles history command.
@@ -288,6 +294,19 @@ public class Handler {
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             Output.printException(e.getMessage());
+        }
+    }
+
+    /**
+     * Retrieves the date from the input for a Gym output
+     * @param input The user input string.
+     * @return A string representing the date.
+     */
+    public static String getDateFromGym(String input) {
+        try {
+            return extractSubstringFromSpecificIndex(input, WorkoutConstant.SPLIT_BY_DATE);
+        } catch (Exception e) {
+            return null;
         }
     }
 

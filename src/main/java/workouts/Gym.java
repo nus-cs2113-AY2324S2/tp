@@ -114,7 +114,6 @@ public class Gym extends Workout {
         return true;
     }
 
-
     /**
      * Retrieves the string representation of a Gym object.
      *
@@ -125,7 +124,7 @@ public class Gym extends Workout {
         String printedDate;
         if (date != null) {
             printedDate = date.toString();
-            return String.format("(%s)", printedDate);
+            return String.format(" on %s", printedDate);
         } else {
             return "";
         }
