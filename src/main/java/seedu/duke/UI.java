@@ -54,7 +54,7 @@ public class UI {
     }
 
     public static void printMotivationQuote() {
-        String quote = MotivationalQuotes.getQoute();
+        String quote = MotivationalQuotes.getQuote();
         System.out.println(quote);
         printLineBreak();
     }

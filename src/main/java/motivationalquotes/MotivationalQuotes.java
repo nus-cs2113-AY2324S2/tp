@@ -42,7 +42,7 @@ public class MotivationalQuotes {
             "Know that there is something inside you that is greater than any obstacle.",
         "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart."};
 
-    public static String getQoute() {
+    public static String getQuote() {
         Random rand = new Random();
         int index = rand.nextInt(MOTIVATIONALQUOTELIST.length);
         return MOTIVATIONALQUOTELIST[index];
