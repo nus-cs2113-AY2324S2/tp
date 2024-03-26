@@ -283,6 +283,7 @@ public class User {
     public void handleClear() {
         mealList.clear();
         drinkList.clear();
+        Water.editWaterIntake(0);
         assert mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
 
