@@ -9,6 +9,8 @@
 
 !define STOCKPAL_COLOR #grey
 
+!define PRODUCTLIST_COLOR #purple
+
 !define UI_COLOR #1D8900
 !define UI_COLOR_T1 #83E769
 !define UI_COLOR_T2 #3FC71B
