@@ -1,5 +1,25 @@
 # Developer Guide
 
+## Table of Contents
+
+* [Design](#Design)
+  * [Architecture](#Architecture)
+    * [Main components](#Main-components)
+    * [Component interaction](#Component-interaction)
+  * [UI components](#UI-components)
+  * [EconoCraftLogic components](#EconoCraftLogic-components)
+  * [MiniGame components](#MiniGame-components)
+* [Implementation](#Implementation)
+  * [MiniGame - Typing Game](#MiniGame---Typing-Game)
+  * [MiniGame - Tic Tac Toe](#MiniGame---Tic-Tac-Toe)
+  * [MiniGame - True or False](#MiniGame---True-or-False)
+* [Product scope](#Product-scope)
+  * [Target user playerProfile](#Target-user-playerProfile)
+  * [Value proposition](#Value-proposition)
+* [User Stories](#User-Stories)
+* [Non-Functional Requirements](#Non-Functional-Requirements)
+* [Glossary](#Glossary)
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -37,8 +57,6 @@ The functionality of the game is divided into different components, each respons
 The *Sequence Diagram* below showcases the interaction between the different components of the EconoCraft Pro 
 application when a user inputs a command `work`.
 
-![Sequence_for_work.png](UML%20diagram%2FSequence_for_work.png)
-
 For `CommandFactory` and `Minigame`,
 * Each defines its API for creating commands and mini-games respectively, where
   `Command` is the API for `CommandFactory` and `MiniGame` is the API for `MiniGame`.
@@ -51,8 +69,9 @@ The sections below would give more details of each component.
 UI consists of the following components:
 * `Parser`
 * `ResponseManager`
+* `CommandType`
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![UI.png](UML%20diagram%2FUI.png)
 
 The **UI components**,
 * `Parser` parses the user input for `CommandFactory` to produce `Command`
@@ -62,11 +81,16 @@ The **UI components**,
 
 Here is the partial class diagram of the `EconoCraftLogic` component:
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![Logic.png](UML%20diagram%2FLogic.png)
+
+> [!NOTE]
+> - The `XYZ` in `XYZCommand` represents the exact command e.g., `WorkCommand`, `RestCommand`, `ExerciseCommand`.
+> - The `XYZ` in `XYZMiniGame` represents the exact mini-game e.g., `TypingGame`, `TicTacToe`, etc.
+
 
 Here is the sequence diagram of the `EconoCraftLogic` executing the command:
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![Work.png](UML%20diagram%2FWork.png)
 
 The `EconoCraftLogic` mechanism:
 
@@ -80,12 +104,12 @@ The `EconoCraftLogic` mechanism:
 
 Here is the partial class diagram of the `MiniGame` component:
 
-![](https://via.placeholder.com/100.png?text=Photo)
+![MiniGame.png](UML%20diagram%2FMiniGame.png)
 
 The `MiniGame` mechanism:
 1. For command `work`, `rest`, and `exercise`, they would have their respective mini-games.
 2. When these commands are generated and executed in `EconoCraftLogic`, the respective mini-game would be played.
-3. The mini-game would then update the player profile accordingly.
+3. The command would then update the player profile according to the mini-game result.
 
 # Implementation
 
@@ -99,10 +123,6 @@ The implementation of the Typing Game is as follows:
 4. This game made use of the `CompletableFuture` class to create separate thread which handles the countdown timer and user input at the same time.
 5. When the user finishes typing or the time limit is reached, the game would calculate the user's typing speed and accuracy and reward the user accordingly. 
 6. Finally, the `WorkCommand` would update the player profile with the reward earned according to the user's performance in the game.
-
-Given below is a sequence diagram of the `TypingGame` class when the user inputs the `work` command:
-
-![](https://via.placeholder.com/100.png?text=Photo)
 
 ## MiniGame - Tic Tac Toe
 
