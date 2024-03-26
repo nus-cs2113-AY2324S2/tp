@@ -63,7 +63,7 @@ list of `expenses` matching against the corresponding `category`.
 | addExpense() | void        | Add expense to the existing list of `expenses`  |
 
 The following UML Sequence diagram below shows how the Parser works to obtain the relevant inputs for the Find Feature :
-![Sequence Diagram for Parser for Add Feature]()
+![Sequence Diagram for Parser for Add Feature](docs\diagram\sequenceDiagram_AddExpense.png)
 
 The following is a step-by-step explanation for the Parser for the Find Feature :
 1. `BudgetBuddy` calls `Parser#parseCommand(input)` with `input` being the entire user input.
