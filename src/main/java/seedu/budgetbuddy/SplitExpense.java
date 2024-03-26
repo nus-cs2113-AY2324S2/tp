@@ -29,6 +29,10 @@ public class SplitExpense {
         return amountValue / numberOfPeopleValue;
     }
 
+    public Boolean isExpenseSettled() {
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Number of People: " + numberOfPeople + " Amount: " + amount + " Description: " +
