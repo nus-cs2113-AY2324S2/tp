@@ -3,6 +3,7 @@ package git;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.GitException;
 import exceptions.InvalidCostException;
 import grocery.Grocery;
 
@@ -101,7 +102,7 @@ public class Ui {
      *
      * @return the cost of the grocery formatted in 2dp
      */
-    public String promptForCost() throws InvalidCostException {
+    public String promptForCost() throws GitException {
         System.out.println("Please enter the cost (e.g., $1.20):");
         String price = in.nextLine().trim();
         if(price.contains("$")) {
@@ -161,6 +162,7 @@ public class Ui {
                         "exp GROCERY d/EXPIRATION_DATE: edits the expiration date for GROCERY.\n" +
                         "amt GROCERY a/AMOUNT: sets the amount of GROCERY.\n" +
                         "use GROCERY a/AMOUNT: updates the total amount after using a GROCERY\n" +
+                        "cost GROCERY $PRICE: updates the price of GROCERY.\n" +
                         "del GROCERY: deletes GROCERY.\n" +
                         "list: shows list of all groceries you have.\n" +
                         "listC: shows the list sorted by price.\n" +
@@ -175,6 +177,13 @@ public class Ui {
     public static void printExpSet(Grocery grocery) {
         assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
         System.out.println(grocery.getName() + " will expire on: " + grocery.getExpiration());
+    }
+
+    public static void printCostSet(Grocery grocery) {
+        assert (grocery.getCost()!= 0): "grocery cost should not be empty";
+        double cost = grocery.getCost();
+        String price = "$" + String.format("%.2f", cost);
+        System.out.println(grocery.getName() + " is now " + price);
     }
 
     /**

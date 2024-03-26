@@ -53,6 +53,10 @@ public class Parser {
             groceryList.editAmount(commandParts[1], commandParts[0].equals("use"));
             break;
 
+        case "cost":
+            groceryList.editCost(commandParts[1]);
+            break;
+
         case "del":
             groceryList.removeGrocery(commandParts[1]);
             break;
@@ -61,7 +65,7 @@ public class Parser {
             groceryList.listGroceries();
             break;
 
-        case "listC" :
+        case "listC":
             groceryList.sortByCost();
             break;
 

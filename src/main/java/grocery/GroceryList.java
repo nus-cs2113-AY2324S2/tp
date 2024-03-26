@@ -1,6 +1,7 @@
 package grocery;
 
 import exceptions.InvalidAmountException;
+import exceptions.InvalidCostException;
 import git.Ui;
 import exceptions.GitException;
 import exceptions.commands.EmptyGroceryException;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -179,6 +179,22 @@ public class GroceryList {
             Ui.printAmtDepleted(grocery);
         } else {
             Ui.printAmtSet(grocery);
+        }
+    }
+
+    public void editCost(String details) throws GitException {
+        // Assuming the format is "cost GROCERY $PRICE"
+        System.out.println(details);
+        String[] costParts = checkDetails(details, "cost", "\\$");
+        Grocery grocery = getGrocery(costParts[0].strip());
+        String price = costParts[1].strip();
+
+        try {
+            double cost = Double.parseDouble(price);
+            grocery.setCost(String.format("%.2f", cost));
+            Ui.printCostSet(grocery);
+        } catch (NumberFormatException e) {
+            throw new InvalidCostException();
         }
     }
 
