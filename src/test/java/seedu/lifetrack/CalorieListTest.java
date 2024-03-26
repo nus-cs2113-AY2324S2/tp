@@ -7,7 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.calories.calorielist.Entry;
+import seedu.lifetrack.calories.calorielist.InputEntry;
+import seedu.lifetrack.calories.calorielist.OutputEntry;
 
 public class CalorieListTest {
 
@@ -26,8 +27,8 @@ public class CalorieListTest {
 
         // Verify that the entry has been added to the list
         assertEquals(2, calorieList.getSize());
-        Entry firstEntry = calorieList.getEntry(0);
-        Entry secondEntry = calorieList.getEntry(1);
+        InputEntry firstEntry = (InputEntry)calorieList.getEntry(0);
+        OutputEntry secondEntry = (OutputEntry)calorieList.getEntry(1);
 
         // Check calories intake entry
         assertEquals("2024-03-14", firstEntry.getDate());

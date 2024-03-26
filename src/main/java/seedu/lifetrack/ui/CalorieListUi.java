@@ -1,6 +1,6 @@
 package seedu.lifetrack.ui;
 
-import seedu.lifetrack.calories.calorielist.Entry;
+import seedu.lifetrack.Entry;
 
 public class CalorieListUi {
 

@@ -55,7 +55,7 @@ public class LiquidListTest {
         System.setOut(System.out);
         String expectedOutput = WHITESPACE+ "Beverage has been successfully added" + lineSeparator +
                 WHITESPACE+ "Your liquid List:" + lineSeparator +
-                WHITESPACE + "1. Beverage: Milo, Volume: 200" + lineSeparator;
+                WHITESPACE + "1. \t Date: 111111, Description: Milo, Volume: 200" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -74,9 +74,9 @@ public class LiquidListTest {
                 WHITESPACE + "Beverage has been successfully added" + lineSeparator +
                 WHITESPACE + "Beverage has been successfully added" + lineSeparator +
                 WHITESPACE + "Your liquid List:" + lineSeparator +
-                WHITESPACE + "1. Beverage: Milo, Volume: 200" + lineSeparator +
-                WHITESPACE + "2. Beverage: Water, Volume: 300" + lineSeparator +
-                WHITESPACE + "3. Beverage: Juice, Volume: 150" + lineSeparator;
+                WHITESPACE + "1. \t Date: 111111, Description: Milo, Volume: 200" + lineSeparator +
+                WHITESPACE + "2. \t Date: 111111, Description: Water, Volume: 300" + lineSeparator +
+                WHITESPACE + "3. \t Date: 111111, Description: Juice, Volume: 150" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, liquidList.getSize());
     }

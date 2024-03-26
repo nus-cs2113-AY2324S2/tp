@@ -1,6 +1,6 @@
 package seedu.lifetrack.system.parser;
 
-import seedu.lifetrack.liquids.Beverage;
+import seedu.lifetrack.Entry;
 import seedu.lifetrack.liquids.liquidlist.LiquidEntry;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
@@ -19,7 +19,7 @@ public class ParserLiquid {
      * @throws InvalidInputException if the input string is missing components or
      *                              contains empty fields
      */
-    public static LiquidEntry parseLiquidInput(String input) throws InvalidInputException {
+    public static Entry parseLiquidInput(String input) throws InvalidInputException {
         //get index for b/ and  v/ inputs
         int beverageIndex = input.indexOf("b/");
         int volumeIndex = input.indexOf("v/");
@@ -74,11 +74,10 @@ public class ParserLiquid {
         return getNewLiquidEntry(volume, beverageName);
     }
 
-    private static LiquidEntry getNewLiquidEntry(int volume, String name) throws InvalidInputException {
+    private static Entry getNewLiquidEntry(int volume, String name) throws InvalidInputException {
         //create objects for Beverage
-        Beverage liquidToAdd = new Beverage(name, volume);
 
         //create Object Entry to be returned
-        return new LiquidEntry(liquidToAdd);
+        return new LiquidEntry(name, volume, "111111");
     }
 }

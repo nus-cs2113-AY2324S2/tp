@@ -18,4 +18,12 @@ public class ErrorMessages {
     public static String getIncorrectMacrosInputMessage() {
         return "\t Please input only positive integers into the macronutrients field!";
     }
+
+    public static String getIOExceptionMessage() {
+        return "\t Unable to write to file!";
+    }
+
+    public static String getFileNotFoundMessage() {
+        return "\t No file found! The initialised list will be empty.";
+    }
 }

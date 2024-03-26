@@ -4,22 +4,26 @@ import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
 import seedu.lifetrack.ui.Ui;
 
-import java.util.Scanner;
+import java.io.File;
 
 public class LifeTrack {
+
+    public static CalorieList calorieList;
+    public static LiquidList liquidList;
+
+    public static void setup() {
+        new File("data/").mkdir();
+        calorieList = new CalorieList("data/caloriesData.txt");
+        liquidList = new LiquidList("data/liquidsData.txt");
+    }
 
     /**
      * Main entry-point for the java.lifetrack.LifeTrack application.
      */
     public static void main(String[] args) {
-        CalorieList calorieList = new CalorieList();
-        LiquidList liquidList = new LiquidList();
-        Scanner in = new Scanner(System.in);
+        setup();
         Ui.sayHello();
-        assert true : "dummy assertion set to fail";
         Ui.readUserInput(calorieList,liquidList);
         Ui.byeMessage();
-        in.close();
     }
-
 }

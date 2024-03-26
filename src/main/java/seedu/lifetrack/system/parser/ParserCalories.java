@@ -1,6 +1,5 @@
 package seedu.lifetrack.system.parser;
 
-import seedu.lifetrack.calories.calorielist.Entry;
 import seedu.lifetrack.calories.calorielist.InputEntry;
 import seedu.lifetrack.calories.calorielist.OutputEntry;
 import seedu.lifetrack.calories.Activity;
@@ -14,6 +13,8 @@ import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.get
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncorrectOrderMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMissingKeywordsMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInMacrosInputMessage;
+
+import seedu.lifetrack.Entry;
 
 
 public class ParserCalories {

@@ -1,10 +1,13 @@
 package seedu.lifetrack.liquids.liquidlist;
 
+import seedu.lifetrack.Entry;
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.Beverage;
+import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
+import seedu.lifetrack.system.storage.FileHandler;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,16 +25,29 @@ import static seedu.lifetrack.ui.LiquidListUI.listHeader;
  * Provides methods to add, delete, and print liquid entries.
  */
 public class LiquidList {
-    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
-    private ArrayList<LiquidEntry> liquidArrayList;
+
     private final int DELETE_PADDING = 15;
+
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+    private ArrayList<Entry> liquidArrayList;
+    private FileHandler fileHandler;
+
+    public LiquidList() {
+        liquidArrayList = new ArrayList<>();
+        fileHandler = new FileHandler("data/liquidsTestData.txt");
+    }
 
     /**
      * Constructs an empty LiquidList.
      */
-    public LiquidList() {
-        liquidArrayList = new ArrayList<>();
-    }
+    public LiquidList(String filePath) {
+        try {
+            fileHandler = new FileHandler(filePath);
+            liquidArrayList = fileHandler.getCalorieEntriesFromFile();
+        } catch (FileNotFoundException e) {
+            liquidArrayList = new ArrayList<>();
+            System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }    }
 
     /**
      * Retrieves the liquid entry at the specified index.
@@ -39,7 +55,7 @@ public class LiquidList {
      * @param index the index of the liquid entry to retrieve
      * @return the liquid entry at the specified index
      */
-    public LiquidEntry getEntry(int index) {
+    public Entry getEntry(int index) {
         assert index >= 0 && index < liquidArrayList.size() : "Index out of bounds";
         return liquidArrayList.get(index);
     }
@@ -68,8 +84,9 @@ public class LiquidList {
      */
     public void addEntry(String input) {
         try {
-            LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
+            Entry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
+            fileHandler.writeEntries(liquidArrayList);
             addEntryMessage();
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
@@ -86,10 +103,8 @@ public class LiquidList {
         } else {
             listHeader();
             for (int i = 0; i < liquidArrayList.size(); i++) {
-                LiquidEntry entry = liquidArrayList.get(i);
-                Beverage beverage = entry.getBeverage();
-                System.out.println(WHITESPACE + (i + 1) + ". Beverage: " + beverage.getBeverage()
-                        + ", Volume: " + beverage.getVolume());
+                Entry entry = liquidArrayList.get(i);
+                System.out.println(WHITESPACE + (i + 1) + ". " + entry);
             }
         }
     }

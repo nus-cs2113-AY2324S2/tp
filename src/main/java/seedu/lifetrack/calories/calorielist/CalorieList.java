@@ -7,19 +7,37 @@ import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
 import static seedu.lifetrack.ui.LiquidListUI.deleteLogIndexMessage;
 import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
 
+import seedu.lifetrack.Entry;
+import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import seedu.lifetrack.system.storage.FileHandler;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CalorieList {
 
-    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
-    private ArrayList<Entry> calorieArrayList;
     private final int SIZE_OF_DELETE = 16;
 
+    private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+    private ArrayList<Entry> calorieArrayList;
+    private FileHandler fileHandler;
+
     public CalorieList() {
-        calorieArrayList= new ArrayList<>();
+        calorieArrayList = new ArrayList<>();
+        fileHandler = new FileHandler("data/caloriesTestData.txt");
+    }
+
+    public CalorieList(String filePath) {
+        try {
+            fileHandler = new FileHandler(filePath);
+            calorieArrayList = fileHandler.getCalorieEntriesFromFile();
+        } catch (FileNotFoundException e) {
+            calorieArrayList = new ArrayList<>();
+            System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }
     }
 
     public Entry getEntry(int index) {
@@ -62,6 +80,7 @@ public class CalorieList {
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
+            fileHandler.writeEntries(calorieArrayList);
             printNewCalorieEntry(newEntry);
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
