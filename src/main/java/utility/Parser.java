@@ -173,15 +173,11 @@ public class Parser {
         try {
             String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
             if (inputs.length != 2) {
-                throw new CustomExceptions.InsufficientInput("Invalid command format. " +
-                        System.lineSeparator() +
-                        "Usage: history/latest /view:filter");
+                throw new CustomExceptions.InsufficientInput(ErrorConstant.INVALID_HISTORY_FORMAT_ERROR);
             }
             String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
             if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("item")) {
-                throw new CustomExceptions.InvalidInput("No filter used!" +
-                        System.lineSeparator() +
-                        "Use /view:run/gym/period/bmi");
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
             }
             validateFilter(filterSplit[1].toLowerCase());
             return filterSplit[1].toLowerCase();
