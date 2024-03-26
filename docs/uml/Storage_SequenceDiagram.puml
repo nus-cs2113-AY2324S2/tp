@@ -1,0 +1,34 @@
+@startuml
+
+participant ":PlaNUS" #orange
+participant Storage << class >> #lightYellow
+participant Ui << class >> #lightGreen
+participant Parser << class >> #lightBlue
+
+":PlaNUS" -> Storage: loadTimetable()
+alt "timetable file not found"
+Storage -> Storage: createFile("myTimetable")
+end
+Storage --> ":PlaNUS": timetable: Timetable
+loop "isExit is false"
+":PlaNUS" -> Ui: getUserCommand()
+Ui --> ":PlaNUS": line: String
+":PlaNUS" -> Parser: parseCommand(line: String, timetable: Timetable)
+alt "if initialise from recommended timetable"
+Parser -> Storage: loadTimetable(major: String)
+alt "timetable file not found"
+Storage -> Storage: createFile(major: String)
+end
+Storage --> Parser: newTimetable: Timetable
+end
+alt "changes made to timetable"
+Parser -> Storage: writeToFile(timetable: Timetable)
+alt "timetable file not found"
+Storage -> Storage: createFile("myTimetable")
+end
+Storage --> Parser
+end
+Parser --> ":PlaNUS": isExit: Boolean
+end
+
+@enduml

@@ -18,6 +18,27 @@ There are 3 overloaded variations of the `getPlan()` method in the `PlanGetter` 
 The first is as shown in the class diagram above. 
 The second takes in an additional integer `year`, while the third takes in two additional integers `year` and `term`.
 
+### Storage component
+In order to store user data and load different data files for course planning, 
+PlaNUS uses Storage class for this purpose.
+
+Storage has two main file access APIs:
+- `writeToFile(Timetable)`:
+  - Take in a timetable containing courses, then write courses to the user data file at __./data/myTimetable.csv__.
+    - Params: timetable – A table containing all courses of the user.
+- `Timetable loadTimetable(String)`:
+  - Take in a file name, then load the file containing all courses of the major/user to a Timetable object.
+    - Params: timetableName – The name of the file containing all courses of the major/user. e.g. timetableName of "CEG" indicating the recommended timetable of Computer Engineering, while timetableName of "myTimetable" indicating the timetable of the user.
+    - Returns: A timetable object that is loaded from the given file.
+
+If target file is not found, the above two methods will be able to create the missing file.
+
+Storage also contains a useful parser method `parseCourse(String)` that can parse a line of csv file into a Course object.
+
+Below is a sequence diagram that shows how Storage takes part in the programme.
+
+![Storage_SequenceDiagram](uml/Storage_SequenceDiagram-0.png)
+
 ## Product scope
 ### Target user profile
 
