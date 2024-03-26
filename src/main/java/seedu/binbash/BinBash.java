@@ -1,13 +1,11 @@
 package seedu.binbash;
 
+import seedu.binbash.command.ByeCommand;
+import seedu.binbash.command.Command;
+import seedu.binbash.exceptions.BinBashException;
 import seedu.binbash.logger.MainLogger;
 import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.command.Command;
-import seedu.binbash.command.ByeCommand;
-import seedu.binbash.exceptions.BinBashException;
-
-import javax.imageio.stream.FileImageOutputStream;
 
 public class BinBash {
     private Ui userInterface;
