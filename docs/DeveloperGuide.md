@@ -20,10 +20,15 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|Version| As a ... | I want to ...                          | So that I can ...|
+|--------|---------|----------------------------------------|------------------|
+|v1.0|new user|see instructions on how to use the app|refer to them when I forget how to use the application|
+|v1.0|user| add groceries to the app               |manage all my groceries|
+|v1.0|user| view all my groceries                  |know what I have bought|
+|v1.0|user| delete the groceries from the list     |know which items are depleted|
+|v1.0|user| add the amount of a grocery|keep track of the amount of that item I have|
+|v1.0|user| add the expiration date of the grocery |keep track of when my items expire easily|
+|v2.0|financially-aware user|add the cost of the groceries|know how much I am spending|
 
 ## Non-Functional Requirements
 
