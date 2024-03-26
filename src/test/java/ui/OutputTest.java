@@ -126,7 +126,7 @@ class OutputTest {
     void printLatestGym_twoGyms_expectOneGymPrinted() {
         try{
             Gym gym1 = new Gym();
-            gym1.addStation("Bench Press", 4, 10, 50);
+            gym1.addStation("Bench Press",  10, 50);
             gym1.addStation("Shoulder Press", 20, 4, 10);
 
             Gym gym2 = new Gym();

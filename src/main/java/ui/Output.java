@@ -63,6 +63,8 @@ public class Output {
     }
 
 
+
+
     /**
      * Returns the formatted string for printing runs.
      *
@@ -124,8 +126,8 @@ public class Output {
      */
     private static void printGymStats(Gym gym) {
         ArrayList<GymStation> allStations = gym.getStations();
-        for (GymStation station: allStations){
-            System.out.println(station);
+        for (int i = 0; i < allStations.size(); i++){
+            System.out.println(String.format("Station %d %s", i+1, allStations.get(i).toString()));
         }
     }
 

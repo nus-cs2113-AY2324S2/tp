@@ -5,9 +5,12 @@ public class WorkoutConstant {
     public static final String SPLIT_BY_NUMBER_OF_STATIONS = "/n:";
     public static final String SPLIT_BY_EXERCISE_TYPE = "/e:";
     public static final String SPLIT_BY_DISTANCE = "/d:";
-
     public static final String SPLIT_BY_TIME = "/t:";
     public static final String SPLIT_BY_DATE = "/date:";
+
+    public static final String SPLIT_BY_SETS = "/s:";
+    public static final String SPLIT_BY_REPS = "/r:";
+    public static final String SPLIT_BY_WEIGHTS = "/w:";
 
 
 
@@ -29,7 +32,7 @@ public class WorkoutConstant {
             "\t\tWeights";
     public static final String GYM_STATION_FORMAT = "%s: ";
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
-    public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets of %s";
+    public static final String INDIVIDUAL_GYM_STATION_FORMAT = "%d sets";
     public static final int NUMBER_OF_RUN_PARAMETERS = 4;
     public static final String RUN_HEADER = "Type\tTime\t\tDistance\tPace\t\tDate";
     public static final String ADD_RUN = "Successfully added a new run session";
@@ -43,9 +46,7 @@ public class WorkoutConstant {
     public static final Integer INDEX_OF_STATION_REPS = 2; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_WEIGHTS = 3; // PLEASE STANDARDISE
 
-    public static final String STATION_SET_DELIMITER = "s:"; // PLEASE STANDARDISE
-    public static final String STATION_REPS_DELIMITER = "r:"; // PLEASE STANDARDISE
-    public static final String STATION_WEIGHTS_DELIMITER = "w:"; // PLEASE STANDARDISE
+
 
 
     // Numerical Values
@@ -70,12 +71,11 @@ public class WorkoutConstant {
     public static final String NO_HISTORY_FOUND = "No history found!";
     public static final String BLANK_INPUT_FOR_EXERCISE = "Type of exercise cannot be empty. " +
             "Please input either /e:run or /e:gym";
-    public static final String STATION_GYM_FORMAT = "[name of exercise:string] /s:[sets:number] /r:[reps:number] " +
-            "/w:[weights:number]";
+    public static final String STATION_GYM_FORMAT = "e.g. Bench Press /s:2 /r:4 " +
+            "/w:10,20";
     public static final String BLANK_INPUT_FOR_GYM_STATION = "Fields cannot be empty" +
             "Please input " + STATION_GYM_FORMAT;
-    public static final String NUMERIC_INPUT_REQUIRED_GYM_STATION = "Numeric input required for sets, reps and weights!"
-            + "Please input " + STATION_GYM_FORMAT;
+
     public static final String INVALID_INPUT_FOR_EXERCISE = "Invalid input for exercise type! " +
             "Please input either /e:run or /e:gym";
     public static final String INVALID_RUN_TIME = "Invalid run time!";
