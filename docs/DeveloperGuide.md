@@ -118,6 +118,12 @@ For each new module, add to the total points based on the grade and credits.
 #### Calculate Updated GPA: 
 Divide the total points by the new total credits (accumulated + new modules) to get the updated GPA.
 
+------------------------------------------------------------------------------------------
+## Sub-Classes
+
+## Class: ProcessCommand
+This class identifies the userinput type and passes the command into the relevant classes to exceute the command
+
 ## Class: InvalidInputFormatException
 
 ### InvalidInputFormatException()
