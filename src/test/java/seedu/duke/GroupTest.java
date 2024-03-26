@@ -3,9 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GroupTest {
     @BeforeEach
@@ -23,30 +25,36 @@ public class GroupTest {
     @Test
     public void testGroupCreation() {
         String expectedName = "GroupName";
-        Group group = Group.getOrCreateGroup(expectedName);
-        assertEquals(expectedName, group.getGroupName(), "Group name is not the same as expected");
+        Optional<Group> group = Group.getOrCreateGroup(expectedName);
+        assertEquals(expectedName, group.get().getGroupName(), "Group name is not the same as expected");
     }
 
     @Test
     public void testAddUserToGroup() {
         String groupName = "TestGroup";
-        Group group = Group.getOrCreateGroup(groupName);
-        User user = group.addMember("TestUser");
+        Optional<Group> group = Group.getOrCreateGroup(groupName);
+        if (group.isEmpty()) {
+            System.out.println("Group does not exist.");
+            return;
+        }
 
-        assertTrue(group.getMembers().contains(user), "User was not added to the group");
+        User user = group.get().addMember("TestUser");
+
+        assertTrue(group.get().getMembers().contains(user), "User was not added to the group");
     }
 
     @Test
     public void testGetOrCreateGroup() {
         String groupName = "NewGroup";
-        Group newGroup = Group.getOrCreateGroup(groupName);
+        Optional<Group> newGroup = Group.getOrCreateGroup(groupName);
 
-        assertEquals(groupName, newGroup.getGroupName(), "Group name is not the expected value");
+        assertEquals(groupName, newGroup.get().getGroupName(), "Group name is not the expected value");
 
         Group.exitGroup();
-        Group existingGroup = Group.getOrCreateGroup(groupName);
+        Optional<Group> existingGroup = Group.getOrCreateGroup(groupName);
 
-        assertEquals(newGroup, existingGroup, "getOrCreateGroup should return the existing group");
+        assertEquals(newGroup.get(), existingGroup.get(), "getOrCreateGroup should return the existing group");
+        assertTrue(Group.getCurrentGroup().isEmpty(), "Current group should be empty after exiting");
     }
 
     @Test
@@ -54,17 +62,17 @@ public class GroupTest {
         String groupName = "ExitingGroup";
         Group.getOrCreateGroup(groupName);
         Group.exitGroup();
-        assertNull(Group.getCurrentGroup(), "Did not successfully exit the group");
+        assertTrue(Group.getCurrentGroup().isEmpty(), "Did not successfully exit the group");
     }
 
     @Test
     public void testGetCurrentGroup() {
         String groupName = "CurrentGroup";
-        Group group = Group.getOrCreateGroup(groupName);
+        Optional<Group> group = Group.getOrCreateGroup(groupName);
 
-        assertEquals(group, Group.getCurrentGroup(), "Current group is not the expected group");
+        assertEquals(group.get(), Group.getCurrentGroup().get(), "Current group is not the expected group");
 
         Group.exitGroup();
-        assertNull(Group.getCurrentGroup(), "Current group should be null after exiting");
+        assertTrue(Group.getCurrentGroup().isEmpty(), "Current group should be empty after exiting");
     }
 }

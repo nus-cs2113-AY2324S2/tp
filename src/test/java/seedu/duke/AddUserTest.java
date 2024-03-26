@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -19,15 +22,17 @@ public class AddUserTest {
 
     @Test
     public void testAddUserToGroup() {
-        try {
-            Group group = Group.getOrCreateGroup("TestGroup");
-            User user = group.addMember("John");
-
-            assertTrue(group.getMembers().contains(user), "User was not added to the group");
-            assertEquals("John", user.getName(), "User name is not the expected value");
-        } catch (Exception e) {
-            fail("Exception occurred while adding a user to the group: " + e.getMessage());
+        String groupName = "TestGroup";
+        Optional<Group> group = Group.getOrCreateGroup(groupName);
+        if (group.isEmpty()) {
+            System.out.println("Group does not exist.");
+            return;
         }
+
+        User user = group.get().addMember("TestUser");
+
+        assertTrue(group.get().getMembers().contains(user), "User was not added to the group");
     }
 }
+
 

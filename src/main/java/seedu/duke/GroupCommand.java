@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.Optional;
+
 /**
  * Represents a command handler for group-related operations.
  * Provides static methods to create groups, add members to groups, and exit groups.
@@ -25,13 +27,13 @@ public class GroupCommand {
      * @param memberName the name of the member to add
      */
     public static void addMember(String memberName) {
-        Group currentGroup = Group.getCurrentGroup();
-        if (currentGroup == null) {
+        Optional<Group> currentGroup = Group.getCurrentGroup();
+        if (currentGroup.isEmpty()) {
             System.out.println("Please create or join a group first.");
             return;
         }
 
-        currentGroup.addMember(memberName);
+        currentGroup.get().addMember(memberName);
     }
 
     /**
