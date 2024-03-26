@@ -15,13 +15,14 @@ import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
+import seedu.budgetbuddy.command.ChangeCurrencyCommand;
+import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
 
@@ -119,6 +120,9 @@ public class Parser {
 
     public Boolean isReduceSavingCommand(String input) {
         return input.startsWith("reduce");
+    }
+    public Boolean isConvertCurrencyCommand(String input) {
+        return input.startsWith("change currency");
     }
 
     public Boolean isSplitExpenseCommand(String input) {
@@ -299,6 +303,37 @@ public class Parser {
         }
         return false;
     }
+
+    public Command handleChangeCurrencyCommand(String input, SavingList savingList, ExpenseList expenseList,
+                                               CurrencyConverter currencyConverter) {
+        if (input.startsWith("change currency")) {
+            String[] parts = input.split(" ");
+            assert parts.length > 1 : "Input should contain currency code";
+
+            if (parts.length == 3) {
+                String currencyCode = parts[2];
+                assert !currencyCode.isEmpty() : "Currency code should not be empty";
+
+                try {
+                    Currency newCurrency = Currency.getInstance(currencyCode.toUpperCase());
+                    assert newCurrency != null : "Currency code should be valid";
+                    LOGGER.log(Level.INFO, "Default currency changed to " + newCurrency);
+                    System.out.println("Default currency changed to " + newCurrency);
+                    return new ChangeCurrencyCommand(newCurrency, savingList, expenseList, currencyConverter);
+                } catch (IllegalArgumentException e) {
+                    LOGGER.log(Level.WARNING, "Invalid currency code: " + currencyCode);
+                    System.out.println("Invalid currency code.");
+                    return null;
+                }
+            } else {
+                LOGGER.log(Level.WARNING, "Invalid command format. Use 'change currency <currency_code>'.");
+                System.out.println("Invalid command format. Use 'change currency <currency_code>'.");
+                return null;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Processes all menu commands and returns the corresponding Command object.
@@ -708,6 +743,10 @@ public class Parser {
 
         if (isFindExpensesCommand(input)) {
             return handleFindExpensesCommand(input, expenses);
+        }
+
+        if (isConvertCurrencyCommand(input)) {
+            return handleChangeCurrencyCommand(input, savings, expenses, new CurrencyConverter());
         }
 
         if (isSplitExpenseCommand(input)) {

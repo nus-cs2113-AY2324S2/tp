@@ -84,12 +84,12 @@ public class ExpenseList {
                     System.out.print(i+1 + " | ");
                     System.out.print("Date: " + expense.getDateAdded() + " | ");
                     System.out.print("Category: " + expense.getCategory() + " | ");
-                    System.out.print("Amount: $" + expense.getAmount() + " | ");
+                    System.out.print("Amount: $" + String.format("%.2f", expense.getAmount()) + " | ");
                     System.out.println("Description: " + expense.getDescription() + " | ");
                 }
             }
             System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("Total Expenses: $" + calculateTotalExpenses());
+            System.out.println("Overall Total Expenses: $" + String.format("%.2f", calculateTotalExpenses()));
 
             // Assertion: Check if total expenses calculation is correct
             double totalExpenses = calculateTotalExpenses();

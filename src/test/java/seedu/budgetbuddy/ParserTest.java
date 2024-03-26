@@ -1,15 +1,17 @@
 package seedu.budgetbuddy;
 
 import org.junit.jupiter.api.Test;
+import seedu.budgetbuddy.command.ListSavingsCommand;
+import seedu.budgetbuddy.command.ChangeCurrencyCommand;
 import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.ListExpenseCommand;
-import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 import org.junit.jupiter.api.Disabled;
 
@@ -175,6 +177,51 @@ public class ParserTest {
         String input = "list savings qweqwe";
 
         Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        assertNull(command);
+    }
+
+    @Test
+    public void handleChangeCurrencyCommand_changeCurrencyToUSD_success() throws BudgetBuddyException {
+        Parser parser = new Parser();
+        SavingList savingList = new SavingList();
+        ExpenseList expenseList = new ExpenseList();
+        CurrencyConverter currencyConverter = new CurrencyConverter();
+
+        savingList.addSaving("Salary", "1000");
+
+        String input = "change currency USD";
+        Command command = parser.handleChangeCurrencyCommand(input, savingList, expenseList, currencyConverter);
+
+        assertEquals(ChangeCurrencyCommand.class, command.getClass());
+    }
+
+    @Test
+    public void handleChangeCurrencyCommand_changeCurrency_invalidCurrencyCode() throws BudgetBuddyException {
+        Parser parser = new Parser();
+        SavingList savingList = new SavingList();
+        ExpenseList expenseList = new ExpenseList();
+        CurrencyConverter currencyConverter = new CurrencyConverter();
+
+        savingList.addSaving("Salary", "1000");
+
+        String input = "change currency abc";
+        Command command = parser.handleChangeCurrencyCommand(input, savingList, expenseList, currencyConverter);
+
+        assertNull(command);
+    }
+
+    @Test
+    public void handleChangeCurrencyCommand_changeCurrency_invalidCommandFormat() throws BudgetBuddyException {
+        Parser parser = new Parser();
+        SavingList savingList = new SavingList();
+        ExpenseList expenseList = new ExpenseList();
+        CurrencyConverter currencyConverter = new CurrencyConverter();
+
+        savingList.addSaving("Salary", "1000");
+
+        String input = "change currency abc asd";
+        Command command = parser.handleChangeCurrencyCommand(input, savingList, expenseList, currencyConverter);
+
         assertNull(command);
     }
 }
