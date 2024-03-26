@@ -24,12 +24,12 @@ public class Parser {
     private static final Pattern GPA_PATTERN =
             Pattern.compile("gpa", Pattern.CASE_INSENSITIVE);
     private static final Pattern VIEW_PATTERN =
-            Pattern.compile("view\\s+(?<mode>all|taken|plan)", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("view", Pattern.CASE_INSENSITIVE);
     private static final Pattern REMOVE_MODULE_PATTERN =
             Pattern.compile("remove\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_MODULE_PATTERN =
             Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)\\s+s/(?<status>plan|taken)" +
-                    "\\s+w/(?<semester>[1-9]|10)\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
+                    "\\s+w/(?<semester>[1-8])\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
                     "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)", Pattern.CASE_INSENSITIVE);
@@ -39,7 +39,7 @@ public class Parser {
     // Argument Group captures
     private static final String[] INIT_ARGUMENTS = {"name"};
     private static final String[] GPA_ARGUMENTS = {};
-    private static final String[] VIEW_ARGUMENTS = {"mode"};
+    private static final String[] VIEW_ARGUMENTS = {};
     private static final String[] REMOVE_MODULE_ARGUMENTS = {"courseCode"};
     private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "status", "semester", "mc"};
     private static final String[] GRADE_ARGUMENTS = {"courseCode", "grade"};
@@ -98,8 +98,7 @@ public class Parser {
     }
 
     private static Command viewCommand(Map<String, String> args) {
-        String moduleCode = args.getOrDefault("mode", "MODE_ERROR");
-        return new ViewCommand(moduleCode);
+        return new ViewCommand();
     }
 
     private static Command removeCommand(Map<String, String> args) {
