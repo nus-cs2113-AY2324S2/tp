@@ -1,6 +1,22 @@
 package activeedge.parser;
 
+
 import command.*;
+import command.HelpCommand;
+import command.LogWaterCommand;
+import command.LogMealCommand;
+import command.ListMealsCommand;
+import command.ListFullCommand;
+import command.ShowCaloriesCommand;
+import command.ViewWaterIntakeCommand;
+import command.ShowGoalsCommand;
+import command.AddGoalsCommand;
+import command.FindCommand;
+import command.DeleteTaskCommand;
+import command.ActiveEdgeException;
+import command.LogExerciseCommand;
+import command.ShowSummaryCommand;
+import command.ClearCommand;
 
 import activeedge.Storage;
 
@@ -115,6 +131,10 @@ public class Parser {
             }
             else if (input.startsWith("summary")) {
                 new ShowSummaryCommand().execute();
+            }
+            else if(input.equalsIgnoreCase("clear")) {
+                ClearCommand clearCommand = new ClearCommand();
+                clearCommand.execute();
             }
             else {
                 System.out.println("Unknown command.");
