@@ -1,0 +1,33 @@
+@startuml
+exception Exception #fac79b {
+}
+
+exception InvalidTTMoveException #DarkSalmon {
+}
+
+exception InvalidGameException #DarkSalmon {
+}
+
+InvalidTTMoveException --> Exception
+InvalidGameException --> Exception
+
+class Parser #LightBlue {
+  --
+  +ifQuit(input): boolean
+  +ifHelp(input): boolean
+  +readGame(input)
+  +readTTMove(input)
+  +readLine(): String
+}
+
+class java.io.BufferedReader #d9effa {
+}
+
+Parser --> BufferedReader: 1
+Parser --> InvalidTTMoveException: <<throws>>
+Parser --> InvalidGameException: <<throws>>
+
+BufferedReader -right[hidden]- Parser
+InvalidGameException -right[hidden]- InvalidTTMoveException
+
+@enduml
