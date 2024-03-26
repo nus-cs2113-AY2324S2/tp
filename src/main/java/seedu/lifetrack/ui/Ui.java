@@ -143,7 +143,7 @@ public class Ui {
         System.out.println("\t - liquids in b/<type of beverage> v/<volume> : " +
                 "Marks the task at the specified index as done.");
         System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
-        System.out.println("\t - sleep add t/<duration> d/<date, format:DDMMYY>.\"");
+        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>.\"");
         System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.\"");
         System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index" +
                 " from the sleep list.");
