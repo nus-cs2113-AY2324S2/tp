@@ -65,7 +65,7 @@ public class Parser {
             } else if (command.startsWith("editDrink")) {
                 User.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWater")) {
-                //User.handleEditWaterIntake(command);
+                User.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
@@ -86,8 +86,8 @@ public class Parser {
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
         } catch (invalidIndexException e) {
-            System.out.println("Sorry the index you provided is invalid, check listMeals/listDrinks to view valid " +
-                    "indexes.");
+            System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
+                    "to view valid " + "indexes.");
         }
     }
 
@@ -109,7 +109,7 @@ public class Parser {
         System.out.println("- List entire food intake for the day: listEverything");
         System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
-        //System.out.println("- Edit water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
+        System.out.println("- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
         System.out.println("- Delete certain meal entry: deleteMeal INDEX");
         System.out.println("- Delete certain drink entry: deleteDrink INDEX");
         System.out.println("- Clear all entries: clear");

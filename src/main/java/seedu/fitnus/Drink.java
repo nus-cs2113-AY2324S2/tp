@@ -3,7 +3,7 @@ package seedu.fitnus;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import java.util.HashMap;
 
-public class Drink extends Water {
+public class Drink  {
     private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int drinkVolume;
@@ -14,7 +14,6 @@ public class Drink extends Water {
     private int fat;
 
     public Drink(String name, int volume) {
-        super(volume);
         this.name = name;
         this.drinkVolume = volume;
         setNutrientValues(name);
@@ -22,10 +21,10 @@ public class Drink extends Water {
 
     // Add nutrient details per 100 milliliter to the static HashMap
     static {
+        nutrientDetails.put("water", new int[]{0, 0, 0, 0, 0});
         nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2});
         nutrientDetails.put("lemon tea", new int[]{150, 30, 25, 1, 20});
         nutrientDetails.put("milk coffee", new int[]{20, 27, 25, 4, 3});
-        nutrientDetails.put("water", new int[]{0, 0, 0, 0, 0});
     }
 
     private void setNutrientValues(String name) {

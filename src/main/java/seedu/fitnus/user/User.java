@@ -19,12 +19,11 @@ import java.util.ArrayList;
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
-    private static ArrayList<Water> totalWaterIntake;
+
 
     public User(Storage mealStorage, Storage drinkStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
-        totalWaterIntake = new ArrayList<>();
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
     }
@@ -54,7 +53,7 @@ public class User {
                     String drinkDescription = Parser.drinkStorageDescription;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        totalWaterIntake.add(new Water(drinkSize));
+                        Water.getInstance(drinkSize);
                     } else {
                         drinkList.add(new Drink(drinkDescription, drinkSize));
                     }
@@ -78,10 +77,8 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
-        for (Water water: totalWaterIntake) {
-            String waterSavedData = "water" + "," + water.getWater();
-            drinkStorage.appendTextContent(waterSavedData);
-        }
+        String waterSavedData = "water" + "," + Water.getWater();
+        drinkStorage.appendTextContent(waterSavedData);
         for (Drink drink : drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize();
             drinkStorage.appendTextContent(drinkSavedData);
@@ -108,8 +105,9 @@ public class User {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
+
         if (drinkName.equals("water")) {
-            totalWaterIntake.add(new Water(servingSize));
+            Water.getInstance(servingSize);
         } else {
             drinkList.add(new Drink(drinkName, servingSize));
         }
@@ -151,9 +149,7 @@ public class User {
 
     public void handleViewWaterIntake() {
         int waterIntake = 0;
-        for (Water water: totalWaterIntake) {
-            waterIntake += water.getWater();
-        }
+        waterIntake += Water.getWater();
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
@@ -226,6 +222,8 @@ public class User {
         System.out.println("here's what you have consumed today");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
+            System.out.println();
+            handleViewWaterIntake();
         } else {
             printMealList(1);
             printDrinkList(mealList.size()+1);
@@ -258,6 +256,12 @@ public class User {
         Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
+    }
+
+    public static void handleEditWaterIntake(String command) throws invalidIndexException {
+        Parser.parseEditWater(command);
+        Water.editWaterIntake(Parser.editWaterSize);
+        System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
     public void handleDeleteMeal(String command) {
