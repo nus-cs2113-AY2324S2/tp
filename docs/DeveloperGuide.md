@@ -47,8 +47,35 @@ The Motivational module prints a randomly generated motivational quote for the u
 
 # Expenditure
 The expenditure module is comprehensive allows users to key in their expenses to enable them to store all their 
+
+## Overview
+The expenditure module allows users to key in their expenses to enable them to store all their 
 expenses.
 This guide will walk developers through how to use the expenditure function to track their expenses
+
+### List of Operations:
+#### Deleting an expenditure:
+Deleting an expenditure in numerical form, by referencing its index in the array.
+Format: e/ del/ INDEX
+Example: e/ del/ 3
+#### Adding an expenditure:
+Adding an expenditure in numerical form.
+Format: add n/DOLLARS_AND_CENTS d/DD.MM.YYYY
+Example: add n/3.22 d/31.01.2024
+#### Viewing expenditures by month:
+Viewing an expenditure in numerical form, filtered by month.
+Format: view -m MM.YYYY
+Example: view -m 01.2023
+#### View expenditure by year:
+Viewing an expenditure in numerical form, filtered by year.
+Format: view -y YEAR
+Example: view -y 2023
+#### Viewing expenditures:
+Viewing an expenditure in numerical form, in sequence of when they are added.
+Format: list
+Example: list
+
+
 
 # GPA Function
 The GPA Calculator Module is a comprehensive component designed to facilitate the calculation 
