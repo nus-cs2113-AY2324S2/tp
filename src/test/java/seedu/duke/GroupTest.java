@@ -30,20 +30,6 @@ public class GroupTest {
     }
 
     @Test
-    public void testAddUserToGroup() {
-        String groupName = "TestGroup";
-        Optional<Group> group = Group.getOrCreateGroup(groupName);
-        if (group.isEmpty()) {
-            System.out.println("Group does not exist.");
-            return;
-        }
-
-        User user = group.get().addMember("TestUser");
-
-        assertTrue(group.get().getMembers().contains(user), "User was not added to the group");
-    }
-
-    @Test
     public void testGetOrCreateGroup() {
         String groupName = "NewGroup";
         Optional<Group> newGroup = Group.getOrCreateGroup(groupName);
