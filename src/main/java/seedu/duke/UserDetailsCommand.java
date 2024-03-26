@@ -1,9 +1,31 @@
 package seedu.duke;
 
+/**
+ * Represents a command to collect and store user details. This command prompts the user
+ * for personal information such as name, age, gender, location, favourite cuisine, and
+ * relationship status. Some details, like an anniversary date, are conditionally requested
+ * based on the user's relationship status. The collected information is used to personalize
+ * the application's services and recommendations.
+ */
 public class UserDetailsCommand extends Command {
 
     private static final String HORIZONTAL = "____________________________________________________________";
 
+    /**
+     * Executes the user detail collection process. This method interacts with the user
+     * through the provided UI to gather personal information. It then saves these details
+     * to the application's storage. Information collected includes name, age, gender,
+     * location, favourite cuisine, relationship status, and potentially the anniversary date.
+     * This information is essential for customizing the application experience and recommendations.
+     *
+     * @param favouritesList The user's list of favourite items (not directly used in this method).
+     * @param foodList The list of food items (not directly used in this method).
+     * @param activityList The list of activities (not directly used in this method).
+     * @param ui The user interface to interact with the user for input and output.
+     * @param storage The storage handler to save user details.
+     * @param userDetails The UserDetails object to be populated with the user's information.
+     * @param gifts The list of gifts (not directly used in this method).
+     */
     @Override
     public void execute(FavouritesList favouritesList, FoodList foodList, 
         ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails, GiftList gifts) {
