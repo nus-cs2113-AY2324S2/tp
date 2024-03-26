@@ -1,6 +1,5 @@
 package ui;
 
-import command.CommandType;
 import exception.CommandInputException;
 import exception.JobSelectException;
 import exception.NameInputException;
