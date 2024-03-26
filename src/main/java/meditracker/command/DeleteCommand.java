@@ -23,9 +23,13 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a DeleteCommand object with the specified arguments.
+     *
      * @param arguments The arguments containing medication information to be parsed.
+     * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
-    public DeleteCommand(String arguments) throws ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public DeleteCommand(String arguments)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 

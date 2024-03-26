@@ -37,9 +37,13 @@ public class ModifyCommand extends Command {
 
     /**
      * Constructs a ModifyCommand object with the specified arguments.
+     *
      * @param arguments The arguments containing medication information to be parsed.
+     * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
-    public ModifyCommand(String arguments) throws ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public ModifyCommand(String arguments)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 

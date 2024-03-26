@@ -22,6 +22,7 @@ class ArgumentParser {
      * @param argumentList List of argument
      * @param rawInput Raw input to be parsed
      * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
     public ArgumentParser(ArgumentList argumentList, String rawInput)
             throws ArgumentNotFoundException, DuplicateArgumentFoundException {
@@ -70,7 +71,7 @@ class ArgumentParser {
      * @param rawInputSplit List of raw input split by spaces
      * @return A sorted map of arguments and their corresponding indexes
      * @throws ArgumentNotFoundException Argument flag specified not found
-     * @throws DuplicateArgumentFoundException Duplicate argument found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
     //@@author wenenhoe-reused
     //Reused from https://github.com/wenenhoe/ip with minor modifications

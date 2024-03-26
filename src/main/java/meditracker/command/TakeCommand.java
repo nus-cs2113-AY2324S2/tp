@@ -23,9 +23,13 @@ public class TakeCommand extends Command {
 
     /**
      * Constructs a TakeCommand object with the specified arguments.
+     *
      * @param arguments The arguments containing information to be parsed.
+     * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
-    public TakeCommand(String arguments) throws ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public TakeCommand(String arguments)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 

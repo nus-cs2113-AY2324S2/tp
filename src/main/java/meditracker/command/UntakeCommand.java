@@ -23,9 +23,13 @@ public class UntakeCommand extends Command {
 
     /**
      * Constructs a UntakeCommand object with the specified arguments.
+     *
      * @param arguments The arguments containing information to be parsed.
+     * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
-    public UntakeCommand(String arguments) throws ArgumentNotFoundException, DuplicateArgumentFoundException {
+    public UntakeCommand(String arguments)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 
