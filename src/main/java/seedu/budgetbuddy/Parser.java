@@ -10,7 +10,6 @@ import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
-import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.SplitExpenseCommand;
 import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
