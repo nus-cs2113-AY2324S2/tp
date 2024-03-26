@@ -1,19 +1,12 @@
 package seedu.duke;
-
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.Map;
 
 public class Group {
-    static Optional<String> currentGroupName = Optional.empty();
-    static final HashMap<String, Group> groups = new HashMap<>();
-    protected String groupName;
-    protected ArrayList<User> users;
-
-    public Group(String groupName) {
-        this.groupName = groupName;
-        this.users = new ArrayList<>();
-    }
-
+    private static final Map<String, Group> groups = new HashMap<>();
+    private static String currentGroupName;
 
     private final String groupName;
     private final List<User> members;
@@ -31,13 +24,11 @@ public class Group {
      * @return The existing or newly created group.
      * @throws IllegalStateException If trying to create or join a new group while already in another group.
      */
-
-    public static Optional<Group> getOrCreateGroup(String groupName) {
-
+    public static Group getOrCreateGroup(String groupName) {
         // Check if user is accessing a group they are already in
-        if (currentGroupName.isPresent() && currentGroupName.get().equals(groupName)) {
+        if (isInGroup() && getCurrentGroup().getGroupName().equals(groupName)) {
             System.out.println("You are in " + groupName);
-            return Optional.ofNullable(groups.get(groupName));
+            return getCurrentGroup();
         }
 
         // If the user is in a different group, prevent them from creating or joining a new group.
@@ -48,26 +39,15 @@ public class Group {
 
         Group group = groups.get(groupName);
 
-
-        // If the user is in a different group, prevent them from creating or joining a new group.
-        Group group = optionalGroup.orElseGet(() -> {
-            if (currentGroupName.isPresent() && !currentGroupName.get().equals(groupName)) {
-                throw new IllegalStateException("Please exit the current group '" + currentGroupName + " first.");
-            }
-            Group newGroup = new Group(groupName);
-            groups.put(groupName, newGroup);
+        if (group == null) {
+            group = new Group(groupName);
+            groups.put(groupName, group);
             System.out.println(groupName + " created.");
-            isNewGroupCreated[0] = true;
-            return newGroup;
-        });
-
-        // If a new group was created, update currentGroupName to reflect this.
-        if (isNewGroupCreated[0]) {
-            currentGroupName = Optional.of(groupName);
+            currentGroupName = groupName;
         }
 
         System.out.println("You are now in " + groupName);
-        return Optional.ofNullable(groups.get(groupName));
+        return group;
     }
 
     /**
@@ -75,13 +55,12 @@ public class Group {
      * If the user is not in any group, it displays a message asking the user to try again.
      */
     public static void exitGroup() {
-        if (currentGroupName.isPresent()) {
-            System.out.println("You have exited " + currentGroupName.get() + ".");
-            currentGroupName = Optional.empty();
+        if (currentGroupName != null) {
+            System.out.println("You have exited " + currentGroupName + ".");
+            currentGroupName = null;
         } else {
             System.out.println("You are not currently in any group. Please try again.");
         }
-        System.out.println("Current group: " + currentGroupName.orElse(null));
     }
 
     /**
@@ -156,4 +135,3 @@ public class Group {
         return new ArrayList<>(members);
     }
 }
-
