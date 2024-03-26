@@ -55,6 +55,7 @@ public class UI {
 
     public static void printMotivationQuote() {
         String quote = MotivationalQuotes.getQuote();
+        System.out.println("Here is your motivational quote of the day:");
         System.out.println(quote);
         printLineBreak();
     }
