@@ -1,9 +1,10 @@
 package health;
 
-import utility.Parser;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.HealthConstant;
+import utility.Parser;
+import utility.UiConstant;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -40,7 +41,7 @@ public class Period extends Health {
      * @throws AssertionError if the start date is null
      */
     public LocalDate getStartDate() {
-        assert startDate != null : HealthConstant.START_DATE_CANNOT_BE_NULL;
+        assert startDate != null : ErrorConstant.NULL_START_DATE_ERROR;
         return startDate;
     }
 
@@ -51,7 +52,7 @@ public class Period extends Health {
      * @throws AssertionError if the end date is null
      */
     public LocalDate getEndDate() {
-        assert endPeriodDate != null : HealthConstant.END_DATE_CANNOT_BE_NULL;
+        assert endPeriodDate != null : ErrorConstant.NULL_END_DATE_ERROR;
         return endPeriodDate;
     }
 
@@ -63,7 +64,7 @@ public class Period extends Health {
      * @throws CustomExceptions.InvalidInput if the input string does not contain the required parameters
      */
     public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.PERIOD_CYCLE_PARAMETERS];
+        String[] results = new String[HealthConstant.PERIOD_PARAMETERS];
 
         if (!input.contains(HealthConstant.HEALTH_FLAG)
                 | !input.contains(HealthConstant.START_FLAG)
@@ -75,9 +76,9 @@ public class Period extends Health {
         int indexStart = input.indexOf(HealthConstant.START_FLAG);
         int indexEnd = input.indexOf(HealthConstant.END_FLAG);
 
-        String command = input.substring(indexH + HealthConstant.PERIOD_CYCLE_H_OFFSET, indexStart).trim();
-        String startSubstring = input.substring(indexStart + HealthConstant.PERIOD_CYCLE_START_OFFSET, indexEnd).trim();
-        String endSubstring = input.substring(indexEnd + HealthConstant.PERIOD_CYCLE_END_OFFSET).trim();
+        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexStart).trim();
+        String startSubstring = input.substring(indexStart + HealthConstant.START_DATE_OFFSET, indexEnd).trim();
+        String endSubstring = input.substring(indexEnd + HealthConstant.END_DATE_OFFSET).trim();
 
         if (command.isEmpty() || startSubstring.isEmpty() || endSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
@@ -96,7 +97,7 @@ public class Period extends Health {
      * @return The length of the period.
      */
     public long calculatePeriodLength() {
-        assert startDate.isBefore(endPeriodDate) : HealthConstant.PERIOD_START_MUST_BE_BEFORE_END;
+        assert startDate.isBefore(endPeriodDate) : ErrorConstant.PERIOD_END_BEFORE_START_ERROR;
         // Add 1 to include both start and end dates
         return ChronoUnit.DAYS.between(startDate,endPeriodDate) + 1;
     }
@@ -170,14 +171,11 @@ public class Period extends Health {
      */
     @Override
     public String toString() {
-        return "Period Start: "
-                + this.getStartDate()
-                + " Period End: "
-                + this.endPeriodDate
-                + System.lineSeparator()
-                + "Period Length: "
-                + this.periodLength
-                + " days"
-                + (this.cycleLength > 0 ? System.lineSeparator() + "Cycle Length: " + this.cycleLength + " days" : "");
+        return String.format(HealthConstant.PRINT_PERIOD_FORMAT,
+                getStartDate(),
+                getEndDate(),
+                this.periodLength)
+                + (this.cycleLength > 0 ? System.lineSeparator()
+                + String.format(HealthConstant.PRINT_CYCLE_FORMAT, this.cycleLength) : UiConstant.EMPTY_STRING);
     }
 }

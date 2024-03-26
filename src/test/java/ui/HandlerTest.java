@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import utility.CustomExceptions;
 import utility.ErrorConstant;
-import utility.HealthConstant;
 import utility.WorkoutConstant;
 import workouts.WorkoutList;
 
@@ -199,7 +198,7 @@ class HandlerTest {
         Handler.initialiseScanner();
         Handler.processInput();
 
-        assertTrue(errContent.toString().contains(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI));
+        assertTrue(errContent.toString().contains(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR));
         Handler.destroyScanner();
     }
 

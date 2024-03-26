@@ -48,7 +48,7 @@ public class Bmi extends Health {
         this.height = Double.parseDouble(height);
         this.weight = Double.parseDouble(weight);
 
-        assert this.height > 0 && this.weight > 0 : HealthConstant.HEIGHT_WEIGHT_REQUIRE_POSITIVE;
+        assert this.height > 0 && this.weight > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
 
         this.date = Parser.parseDate(date);
 
@@ -79,13 +79,13 @@ public class Bmi extends Health {
         int indexWeight = input.indexOf(HealthConstant.WEIGHT_FLAG);
         int indexDate = input.indexOf(HealthConstant.DATE_FLAG);
 
-        String command = input.substring(indexH + HealthConstant.BMI_H_OFFSET, indexHeight).trim();
-        String heightSubstring = input.substring(indexHeight + HealthConstant.BMI_HEIGHT_OFFSET, indexWeight).trim();
-        String weightSubstring = input.substring(indexWeight + HealthConstant.BMI_WEIGHT_OFFSET, indexDate).trim();
+        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexHeight).trim();
+        String heightSubstring = input.substring(indexHeight + HealthConstant.HEIGHT_OFFSET, indexWeight).trim();
+        String weightSubstring = input.substring(indexWeight + HealthConstant.WEIGHT_OFFSET, indexDate).trim();
         String dateSubstring = input.substring(indexDate + HealthConstant.DATE_OFFSET).trim();
 
-        if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty()) {
-            throw new CustomExceptions.InvalidInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
+        if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty() || dateSubstring.isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
 
         results[0] = command;
@@ -106,7 +106,7 @@ public class Bmi extends Health {
     public double calculateBmiValue() {
         double bmi = Math.round((weight / (Math.pow(height, UiConstant.POWER_OF_TWO))) * UiConstant.ROUNDING_FACTOR)
                 / UiConstant.ROUNDING_FACTOR;
-        assert bmi > 0: HealthConstant.BMI_MUST_BE_POSITIVE;
+        assert bmi > 0: ErrorConstant.NEGATIVE_BMI_ERROR;
         return bmi;
     }
 
@@ -118,7 +118,7 @@ public class Bmi extends Health {
      * @throws AssertionError If calculated value is not positive.
      */
     public static String getBmiCategory(double bmiValue) {
-        assert bmiValue > 0: HealthConstant.BMI_MUST_BE_POSITIVE;
+        assert bmiValue > 0: ErrorConstant.NEGATIVE_BMI_ERROR;
 
         if (bmiValue < HealthConstant.UNDERWEIGHT_BMI_THRESHOLD) {
             return HealthConstant.UNDERWEIGHT_MESSAGE;

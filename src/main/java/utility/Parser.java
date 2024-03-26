@@ -3,6 +3,7 @@ package utility;
 import ui.Output;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -32,6 +33,24 @@ public class Parser {
             Output.printException("Error parsing date!");
         }
         return formattedDate;
+    }
+
+    /**
+     * Parses and converts String time to a LocalDate variable.
+     * @param stringTime String representing the time.
+     * @return LocalTime variable representing the time.
+     *
+     * @throws DateTimeParseException If there is an error parsing the time.
+     */
+    public static LocalTime parseTime(String stringTime) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime formattedTime = null;
+        try {
+            formattedTime = LocalTime.parse(stringTime, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Error parsing time: " + e.getMessage());
+        }
+        return formattedTime;
     }
 
     /**
