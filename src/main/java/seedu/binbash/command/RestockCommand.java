@@ -1,6 +1,8 @@
 package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
+import seedu.binbash.ui.Ui;
+import seedu.binbash.storage.Storage;
 
 import java.util.regex.Pattern;
 
@@ -14,8 +16,7 @@ public class RestockCommand extends Command{
     private final String itemName;
     private final int restockQuantity;
 
-    public RestockCommand(ItemList itemList, String itemName, int restockQuantity) {
-        super(itemList);
+    public RestockCommand(String itemName, int restockQuantity) {
         this.itemName = itemName;
         this.restockQuantity = restockQuantity;
 
@@ -27,8 +28,9 @@ public class RestockCommand extends Command{
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
         executionUiOutput = itemList.updateItemQuantity(itemName, restockQuantity, COMMAND);
+        storage.saveToStorage(itemList.getItemList());
         return true;
     }
 }

@@ -3,6 +3,8 @@ package seedu.binbash.command;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
+import seedu.binbash.ui.Ui;
+import seedu.binbash.storage.Storage;
 
 public class AddCommand extends Command {
 
@@ -49,9 +51,8 @@ public class AddCommand extends Command {
     private final double itemSalePrice;
     private final double itemCostPrice;
 
-    public AddCommand(ItemList itemList, String itemName, String itemDescription, int itemQuantity,
+    public AddCommand(String itemName, String itemDescription, int itemQuantity,
                       LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
-        super(itemList);
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemQuantity = itemQuantity;
@@ -75,9 +76,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
         executionUiOutput = itemList.addItem(itemName, itemDescription, itemQuantity, itemExpirationDate,
                 itemSalePrice, itemCostPrice);
+        storage.saveToStorage(itemList.getItemList());
         return true;
     }
 }

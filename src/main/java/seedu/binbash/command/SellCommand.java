@@ -1,6 +1,8 @@
 package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
+import seedu.binbash.ui.Ui;
+import seedu.binbash.storage.Storage;
 
 import java.util.regex.Pattern;
 
@@ -14,8 +16,7 @@ public class SellCommand extends Command{
     private final String itemName;
     private final int sellQuantity;
 
-    public SellCommand(ItemList itemList, String itemName, int sellQuantity) {
-        super(itemList);
+    public SellCommand(String itemName, int sellQuantity) {
         this.itemName = itemName;
         this.sellQuantity = sellQuantity;
 
@@ -27,8 +28,9 @@ public class SellCommand extends Command{
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(Ui ui, ItemList itemList, Storage storage) {
         executionUiOutput = itemList.updateItemQuantity(itemName, sellQuantity, COMMAND);
+        storage.saveToStorage(itemList.getItemList());
         return true;
     }
 }
