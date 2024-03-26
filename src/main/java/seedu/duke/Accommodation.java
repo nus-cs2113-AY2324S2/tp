@@ -6,8 +6,8 @@ public class Accommodation extends TravelActivity {
     private LocalDate date;
     private String duration;
 
-    public Accommodation(String line, LocalDate date, String duration, String Tag){
-        super(line, date, duration, Tag);
+    public Accommodation(String line, LocalDate date, String duration, String tag){
+        super(line, date, duration, tag);
     }
 
     @Override

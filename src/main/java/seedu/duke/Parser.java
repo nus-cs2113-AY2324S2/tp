@@ -1,6 +1,5 @@
 package seedu.duke;
 import java.time.LocalDate;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -224,7 +223,8 @@ public class Parser {
             throw new OmniException("Please check that your update command is in this format: update INDEX " +
                     "/date YYYY-MM-DD /duration DURATION");
         } else {
-            list.updateTravelActivity(Integer.parseInt(command[1]), LocalDate.parse(command[2]), command[3], command[4]);
+            list.updateTravelActivity(Integer.parseInt(command[1]), LocalDate.parse(command[2]), command[3],
+                    command[4]);
         }
     }
 
@@ -232,8 +232,7 @@ public class Parser {
         String[] command = line.split("findtag");
         if (command.length < 1) {
             throw new OmniException("Please check that your update command is in this format: findtag <task tag>");
-        }
-        else {
+        } else {
             list.findTag(command[1].trim());
         }
     }

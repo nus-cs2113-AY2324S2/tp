@@ -2,7 +2,6 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 
 public class TravelActivityList {
@@ -188,7 +187,8 @@ public class TravelActivityList {
         System.out.println(taggedTask);
     }
 
-    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration, String tag) throws OmniException{
+    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration, String tag)
+            throws OmniException{
         if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())){
             throw new OmniException("Travel activity cannot be found");
         }

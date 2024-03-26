@@ -114,7 +114,7 @@ public class Duke {
                     Ui.printLine();
                     Parser.findTagCommand(line, list);
                     Ui.printLine();
-                break;
+                    break;
 
                 default:
                     Ui.printLine();

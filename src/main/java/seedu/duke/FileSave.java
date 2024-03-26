@@ -8,25 +8,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FileSave {
-
+    private static Logger logger = Logger.getLogger("LoadFileLogger");
     private static String filePath;
 
     public FileSave(String path) {
         this.filePath = path;
     }
 
-    private static Logger logger = Logger.getLogger("LoadFileLogger");
-
     public void loadFileContents(TravelActivityList list) throws FileNotFoundException {
+        logger.log(Level.INFO, "loadFileContents");
         java.io.File f = new java.io.File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()){
             String[] line = s.nextLine().split(" / ");
-            //logger.log(Level.INFO, line[0] + "/ /" + line[1] + "/ /" + line[2] + "/ /" + line[3] + "/ /" + line[4] + "/ /" + line[5]);
-
             switch (line[0].toLowerCase()){
             case "accommodation":
-                TravelActivity accommodation = new Accommodation(line[2], LocalDate.parse(line[3]), line[4], line[5].trim());
+                TravelActivity accommodation = new Accommodation(line[2],
+                        LocalDate.parse(line[3]), line[4], line[5].trim());
                 list.addTravelActivity(accommodation);
                 if(line[1].equals(" 1 ")){
                     accommodation.setActivityStatus(true);
@@ -53,6 +51,7 @@ public class FileSave {
     }
 
     public void saveActivityList(TravelActivityList list) throws IOException {
+        logger.log(Level.INFO, "saveActivityList");
         FileWriter fw = new FileWriter(filePath);
         for (TravelActivity travelActivity: list.getTravelActivities()) {
             if (travelActivity instanceof Accommodation) {
@@ -72,6 +71,7 @@ public class FileSave {
     }
 
     public void readFile(TravelActivityList list) {
+        logger.log(Level.INFO, "readFile");
         try {
             loadFileContents(list);
         } catch (FileNotFoundException e) {

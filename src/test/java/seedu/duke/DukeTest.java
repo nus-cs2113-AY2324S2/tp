@@ -15,8 +15,10 @@ class DukeTest {
     @Test
     public void addTest() {
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity1 = new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
-        TravelActivity travelActivity2 = new TravelActivity("visit home", LocalDate.parse("2019-12-14"), "5hours", "Sightseeing");
+        TravelActivity travelActivity1 = new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
+        TravelActivity travelActivity2 = new TravelActivity("visit home",
+                LocalDate.parse("2019-12-14"), "5hours", "Sightseeing");
         travelActivityList.addTravelActivity(travelActivity1);
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
         travelActivityList.addTravelActivity(travelActivity2);
@@ -27,7 +29,8 @@ class DukeTest {
     public void deleteTest() throws OmniException {
         //add the plan
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity = new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
+        TravelActivity travelActivity = new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
         travelActivityList.addTravelActivity(travelActivity);
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
         //delete the plan
@@ -39,9 +42,12 @@ class DukeTest {
     public void getNoActivitiesTest() throws OmniException {
         //add the first plan
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity1 = new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
-        TravelActivity travelActivity2 = new TravelActivity("go to beach", LocalDate.parse("2018-10-12"),"3hours", "Sightseeing");
-        TravelActivity travelActivity3 = new TravelActivity("shopping", LocalDate.parse("2020-12-05"),"5hours", "Shopping");
+        TravelActivity travelActivity1 = new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
+        TravelActivity travelActivity2 = new TravelActivity("go to beach",
+                LocalDate.parse("2018-10-12"),"3hours", "Sightseeing");
+        TravelActivity travelActivity3 = new TravelActivity("shopping",
+                LocalDate.parse("2020-12-05"),"5hours", "Shopping");
         travelActivityList.addTravelActivity(travelActivity1);
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
         //add the second and third plan
@@ -62,7 +68,8 @@ class DukeTest {
     public void checkTest() throws OmniException {
         //add the first plan
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity1 = new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
+        TravelActivity travelActivity1 = new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
         travelActivityList.addTravelActivity(travelActivity1);
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
         //check the plan
@@ -75,7 +82,8 @@ class DukeTest {
     public void uncheckTest() throws OmniException {
         //add the first plan
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity1 = new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
+        TravelActivity travelActivity1 = new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing");
         travelActivityList.addTravelActivity(travelActivity1);
         assertEquals("visit museum", travelActivityList.getDescription("visit museum"));
         //check the plan
@@ -102,7 +110,8 @@ class DukeTest {
     @Test
     public void testTagActivity() throws OmniException {
         TravelActivityList list = new TravelActivityList();
-        list.addTravelActivity(new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
+        list.addTravelActivity(new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
         assertEquals("visit museum", list.getDescription("visit museum"));
         // Tagging an existing task
         list.tagActivity(1, "activity 1");
@@ -113,7 +122,8 @@ class DukeTest {
     @Test
     public void testRemoveTagFromActivity() throws OmniException {
         TravelActivityList list = new TravelActivityList();
-        list.addTravelActivity(new TravelActivity("visit museum", LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
+        list.addTravelActivity(new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
         assertEquals("visit museum", list.getDescription("visit museum"));
         // Tagging an existing task
         list.tagActivity(1, "activity 1");
@@ -127,12 +137,16 @@ class DukeTest {
     @Test
     public void testUpdateActivity() throws OmniException{
         TravelActivityList travelActivityList = new TravelActivityList();
-        TravelActivity travelActivity1 = new TravelActivity("Go Paris", LocalDate.parse("2019-02-10"),"2hours", "Sightseeing");
+        TravelActivity travelActivity1 = new TravelActivity("Go Paris",
+                LocalDate.parse("2019-02-10"),"2hours", "Sightseeing");
         travelActivityList.addTravelActivity(travelActivity1);
-        assertEquals("10 Feb 2019", travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        assertEquals("10 Feb 2019",
+                travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         assertEquals("2hours", travelActivity1.getDuration());
-        travelActivityList.updateTravelActivity(1, LocalDate.parse("2020-12-10"), "3hours", "misc");
-        assertEquals("10 Dec 2020", travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        travelActivityList.updateTravelActivity(1,
+                LocalDate.parse("2020-12-10"), "3hours", "misc");
+        assertEquals("10 Dec 2020",
+                travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         assertEquals("3hours", travelActivity1.getDuration());
     }
 
