@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class DailyMedicationManager {
     private final List<DailyMedication> dailyMedications;
-    private Ui ui;
 
     /**
      * Constructs DailyMedicationManager with a list of DailyMedication
@@ -25,7 +24,6 @@ public class DailyMedicationManager {
     public DailyMedicationManager(MedicationManager medicationManager) {
         assert medicationManager != null;
         dailyMedications = new ArrayList<>();
-        ui = new Ui();
         for (Medication medication : medicationManager.getMedications()) {
             String medicationName = medication.getName();
             DailyMedication dailyMedication = new DailyMedication(medicationName);
@@ -40,7 +38,6 @@ public class DailyMedicationManager {
      */
     public DailyMedicationManager(List<String> lines) {
         dailyMedications = new ArrayList<>();
-        ui = new Ui();
         try {
             for (String line : lines) {
                 DailyMedication dailyMedication = parseImportedLine(line);
@@ -112,7 +109,7 @@ public class DailyMedicationManager {
 
     public void printMedications() {
         System.out.println("Here are the Daily Medications you have to take today: ");
-        ui.printMedsList(dailyMedications);
+        Ui.printMedsList(dailyMedications);
     }
 
     /**

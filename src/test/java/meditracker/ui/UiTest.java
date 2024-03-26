@@ -29,10 +29,9 @@ class UiTest {
 
     @Test
     void printMedsList_sizeOfMedicationList_expectPrintedList() {
-        Ui ui = new Ui();
         List<DailyMedication> medications = new ArrayList<>(1);
 
-        ui.printMedsList(medications);
+        Ui.printMedsList(medications);
         StringBuilder expectedOutput = new StringBuilder();
 
         for (DailyMedication dailyMedication : medications) {
