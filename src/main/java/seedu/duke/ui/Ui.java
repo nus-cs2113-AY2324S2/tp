@@ -65,20 +65,6 @@ public class Ui {
 
         CommandList selectedCommand = CommandList.valueOf(readUserCommand);
 
-        if (MatchStat.getIsMatchEnd()) {
-            switch (selectedCommand) {
-            case YES:
-                MatchStat.updateForNewMatch();
-                break;
-            case NO:
-                CommandList.executeBye();
-                break;
-            default:
-                Formatter.printErrorUnknown();
-            }
-            return;
-        }
-
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
@@ -88,6 +74,20 @@ public class Ui {
             break;
         case PENALTY:
             CommandList.executePenalty();
+            break;
+        case YES:
+            if (MatchStat.getIsMatchEnd()) {
+                MatchStat.updateForNewMatch();
+            } else {
+                Formatter.printErrorUnknown();
+            }
+            break;
+        case NO:
+            if (MatchStat.getIsMatchEnd()) {
+                CommandList.executeBye();
+            } else {
+                Formatter.printErrorUnknown();
+            }
             break;
             //insert new executable command here
         default:

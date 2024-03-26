@@ -17,7 +17,7 @@ public class Duke {
 
         while (Ui.getIsRunning()) {
             if (MatchStat.getIsMatchEnd()) {
-                Formatter.printAfterMatch();
+                Formatter.printMatchResult();
             } else {
                 Formatter.printGoalBeforeShot();
             }

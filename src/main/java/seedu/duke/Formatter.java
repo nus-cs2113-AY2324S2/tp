@@ -86,7 +86,7 @@ public class Formatter {
         System.out.println("Opponent's score: " + MatchStat.getAiScore());
     }
 
-    public static void printAfterMatch() {
+    public static void printMatchResult() {
         if (MatchStat.getIsPlayerWin()) {
             System.out.println("Nice! You won this match! Wanna a new match?");
         } else {
