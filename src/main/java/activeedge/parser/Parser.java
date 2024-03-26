@@ -1,19 +1,6 @@
 package activeedge.parser;
 
-import command.HelpCommand;
-import command.LogWaterCommand;
-import command.LogMealCommand;
-import command.ListMealsCommand;
-import command.ListFullCommand;
-import command.ShowCaloriesCommand;
-import command.ViewWaterIntakeCommand;
-import command.ShowGoalsCommand;
-import command.AddGoalsCommand;
-import command.FindCommand;
-import command.DeleteTaskCommand;
-import command.ActiveEdgeException;
-import command.LogExerciseCommand;
-import command.ShowSummaryCommand;
+import command.*;
 
 import activeedge.Storage;
 
@@ -21,21 +8,24 @@ import static activeedge.task.TaskList.tasksList;
 import static activeedge.FoodData.foodItems;
 import static activeedge.ExerciseData.exercisesList;
 import activeedge.FoodData;
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
 
 public class Parser {
     public void handleInput(String input) {
         try {
+            LocalDateTime currentDateTime = LocalDateTime.now();
             if (input.contains("help")) {
                 new HelpCommand();
             } else if (input.equalsIgnoreCase("list foods")) {
                 FoodData.printFood();
-            }
-            else if (input.startsWith("log")) {
+            }else if (input.startsWith("log")) {
                 String parts = input.substring(4);
                 String[] items = parts.split("/");
                 if (items[0].equals("w")) {
                     String quantityString = items[1];
-                    LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString);
+                    LogWaterCommand logWaterCommand = new LogWaterCommand(quantityString, currentDateTime);
                     logWaterCommand.execute();
                 } else if (items[0].equals("m")) {
                     String[] logParts = input.split("m/|s/");
@@ -50,7 +40,7 @@ public class Parser {
                             calories = Integer.parseInt(foodItems[i][1]) * servings;
                         }
                     }
-                    LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories);
+                    LogMealCommand logMealCommand = new LogMealCommand(description, servings, calories, currentDateTime);
                     logMealCommand.execute();
                 }
             } else if (input.startsWith("list")) {
@@ -93,9 +83,9 @@ public class Parser {
                     }
                     assert goalAmount > 0 : "Goal amount must be positive integer";
                     if (goalType.equals("c")) {
-                        new AddGoalsCommand(goalType, goalAmount).execute();
+                        new AddGoalsCommand(goalType, goalAmount, currentDateTime).execute();
                     } else if (goalType.equals("w")) {
-                        new AddGoalsCommand(goalType, goalAmount).execute();
+                        new AddGoalsCommand(goalType, goalAmount, currentDateTime).execute();
                     } else {
                         System.out.println("Invalid goal type. " +
                                 "Please use 'c' for calories or 'w' for water.");
@@ -120,7 +110,7 @@ public class Parser {
                         caloriesBurnt = Integer.parseInt(exercisesList[i][1]) * duration;
                     }
                 }
-                LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt);
+                LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration, caloriesBurnt, currentDateTime);
                 logExerciseCommand.execute();
             }
             else if (input.startsWith("summary")) {

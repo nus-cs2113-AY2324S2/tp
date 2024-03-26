@@ -4,6 +4,8 @@ import activeedge.task.ExerciseTask;
 import activeedge.ui.CommandUi;
 
 import static activeedge.task.TaskList.tasksList;
+import java.time.LocalDateTime;
+
 
 /**
  * Represents a command to log exercise activities into the system.
@@ -14,11 +16,14 @@ public class LogExerciseCommand {
     protected String exerciseName;
     protected int duration;
     protected int caloriesBurnt;
+    protected LocalDateTime dateTime;
 
-    public LogExerciseCommand(String exerciseName, int duration, int caloriesBurnt) {
+
+    public LogExerciseCommand(String exerciseName, int duration, int caloriesBurnt, LocalDateTime dateTime) {
         this.exerciseName = exerciseName;
         this.duration = duration;
         this.caloriesBurnt = caloriesBurnt;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -29,7 +34,7 @@ public class LogExerciseCommand {
      * @throws ActiveEdgeException if any error occurs during the execution process
      */
     public void execute() throws ActiveEdgeException {
-        ExerciseTask logExercise = new ExerciseTask(exerciseName, duration, caloriesBurnt);
+        ExerciseTask logExercise = new ExerciseTask(exerciseName, duration, caloriesBurnt, dateTime);
         tasksList.add(logExercise);
         CommandUi.printExerciseLogMessage(logExercise);
     }
