@@ -47,6 +47,8 @@ public class SummariseParser {
             }
         }
 
+        assert beginIndex >= 0 : "beginIndex should be 0 or greater";
+
         if (userInput.contains(SUMMARISE_COMMAND_OPTIONS[TO_INDEX])) {
             try {
                 String endIndexAsString = getOptionField(userInputAsArray, SUMMARISE_COMMAND_OPTIONS[TO_INDEX]);
@@ -59,6 +61,8 @@ public class SummariseParser {
                 return new InvalidCommand("End index must be one or greater");
             }
         }
+
+        assert endIndex >= -1 : "endIndex should be -1 or greater";
 
         if (endIndex != -1 && beginIndex > endIndex) {
             return new InvalidCommand("Start index cannot be greater than end index");
