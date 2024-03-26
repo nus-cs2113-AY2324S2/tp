@@ -91,15 +91,13 @@ public class DataFile {
      */
     public static void readDataFile() throws CustomExceptions.FileReadError {
         int lineNumberCount = 0; // just for getting lineNumber, no other use
-        try (final Scanner readFile = new Scanner(UiConstant.DATA_FILE_PATH)) {
+        try (final Scanner readFile = new Scanner(UiConstant.SAVE_FILE)) {
             LogFile.writeLog("Read begins", false);
 
             while (readFile.hasNextLine()) {
-                String [] input = readFile.nextLine().split(UiConstant.SPLIT_BY_LINE);
-                LogFile.writeLog("Input: " + Arrays.toString(input), false);
+                String [] input = readFile.nextLine().split(UiConstant.SPLIT_BY_COLON);
 
                 String dataType = input[UiConstant.DATA_TYPE_INDEX].trim();
-                LogFile.writeLog("Datatype: " + dataType, false);
                 String name = input[UiConstant.NAME_INDEX].trim();
 
                 DataType filter = DataType.valueOf(dataType);
@@ -187,7 +185,7 @@ public class DataFile {
      * // param healthData Health data to be written.
      */
     public static void writeName(FileWriter dataFile, String name) throws IOException {
-        dataFile.write(DataType.NAME + UiConstant.LINE.trim() + name.trim());
+        dataFile.write(DataType.NAME + UiConstant.SPLIT_BY_COLON + name.trim());
         LogFile.writeLog("Wrote name to file", false);
     }
 
