@@ -40,11 +40,14 @@ public class Balance {
 
     private void addExpense(Expense expense) {
         ArrayList<String> payees = expense.getPayees();
-        int numberOfUsers = payees.size() + 1;
+        int numberOfUsers = payees.size();
         Float amountPerUser = expense.getTotalAmount() / numberOfUsers;
 
         if(expense.getPayerName().equals(userName)) {
             for(String payee : payees) {
+                if(payee.equals(userName)){
+                    continue;
+                }
                 Float currentOwed = balanceList.get(payee);
                 Float newOwed = currentOwed + amountPerUser;
 
