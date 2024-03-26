@@ -1,4 +1,6 @@
 package seedu.duke;
+
+
 import java.util.*;
 
 public class Parser {
@@ -139,20 +141,20 @@ public class Parser {
                         group);
                 return group;
             }).orElseGet(() -> {
-                    String groupName = argument;
-                    boolean isGroupCreated = groups.containsKey(groupName);
-                    if (isGroupCreated) {
-                        Group queriedGroup = groups.get(groupName);
-                        System.out.println("Group already exists! " +
+                String groupName = argument;
+                boolean isGroupCreated = groups.containsKey(groupName);
+                if (isGroupCreated) {
+                    Group queriedGroup = groups.get(groupName);
+                    System.out.println("Group already exists! " +
                             "You are now in " + queriedGroup);
-                        return queriedGroup;
-                    }
-                    Group createdGroup = Group.createGroup(groupName);
-                    groups.put(groupName, createdGroup);
-                    System.out.println("Creating new group! " +
+                    return queriedGroup;
+                }
+                Group createdGroup = Group.createGroup(groupName);
+                groups.put(groupName, createdGroup);
+                System.out.println("Creating new group! " +
                         "You are now in " + createdGroup);
-                    return createdGroup;
-                }));
+                return createdGroup;
+            }));
             break;
         case "member":
             String memberName = argument;

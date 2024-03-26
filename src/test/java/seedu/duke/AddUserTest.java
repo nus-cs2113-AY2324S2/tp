@@ -22,10 +22,10 @@ public class AddUserTest {
 
     @Test
     public void testAddUserToGroup() {
-        String groupName = "TestGroup";
+        String groupName = "testGroup";
         Group TestGroup = Group.createGroup(groupName);
-        TestGroup.addMember("TestUser");
-        assertTrue(TestGroup.isMember("TestUser"),
+        TestGroup.addMember("testUser");
+        assertTrue(TestGroup.isMember("testUser"),
                 "User was not added to the group");
     }
 }
