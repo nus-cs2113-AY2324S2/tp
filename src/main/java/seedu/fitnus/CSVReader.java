@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class CSVReader {
     private static HashMap<String, String[]> foodItems = new HashMap<>();
 
-    public static final String DELIMITER = ",";
+    private static final String DELIMITER = ",";
     public static void main(String[] args){
         String mealCsvFile = "./db/Meal_db.csv";
         String drinkCSVFile = "./db/Drink_db.csv";

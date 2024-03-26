@@ -2,7 +2,6 @@ package seedu.fitnus;
 
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
 import seedu.fitnus.exception.InvalidCommandException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
@@ -14,7 +13,6 @@ public class Parser {
     public static int mealSize;
     public static String drinkDescription;
     public static int drinkSize;
-    public static int waterSize;
     public static int editMealIndex;
     public static int editMealSize;
     public static int editDrinkIndex;
@@ -38,8 +36,6 @@ public class Parser {
                 user.handleMeal(command);
             } else if (command.startsWith("drink")) {
                 user.handleDrink(command);
-            } else if (command.startsWith("water")) {
-                user.handleWater(command);
             } else if (command.startsWith("infoMeal")) {
                 Meal.handleInfoMeal(command);
             } else if (command.startsWith("infoDrink")) {
@@ -81,8 +77,6 @@ public class Parser {
             }
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command, type [help] to view all commands.");
-        } catch (IncompleteWaterException e) {
-            System.out.println("Incomplete command, the format must be [water s/SERVING_SIZE].");
         } catch (IncompleteDrinkException e) {
             System.out.println("Incomplete command, the format must be [drink d/DRINK s/SERVING_SIZE].");
         } catch (IncompleteMealException e) {
@@ -100,8 +94,7 @@ public class Parser {
     public static void handleHelp() {
         System.out.println("here's all the valid commands i recognise: ");
         System.out.println("- Add a meal eaten: ate m/MEAL s/SERVING_SIZE");
-        System.out.println("- Add a drink: drink d/DRINK s/SERVING_SIZE");
-        System.out.println("- Add water: water s/SERVING_SIZE");
+        System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
         System.out.println("- Find the information about a certain meal: infoMeal MEAL");
         System.out.println("- Find the information about a certain drink: infoDrink DRINK");
         System.out.println("- View daily calories consumed: calories");
@@ -155,21 +148,10 @@ public class Parser {
         if (drinkDescription.isEmpty()) {
             throw new IncompleteDrinkException();
         }
-        if (!Drink.getNutrientDetails().containsKey(drinkDescription)) {
+        if (!Drink.getNutrientDetails().containsKey(drinkDescription) && !drinkDescription.equals("water")) {
             throw new UnregisteredDrinkException();
         }
         drinkSize = Integer.parseInt(command.substring(sizeIndex).trim());
-    }
-
-    public static void parseWater(String command) throws IncompleteWaterException {
-        if (!command.contains("s/")) {
-            throw new IncompleteWaterException();
-        }
-        int sizeIndex = command.indexOf("s/") + 2;
-        if (sizeIndex >= command.length()) {
-            throw new IncompleteWaterException();
-        }
-        waterSize = Integer.parseInt(command.substring(sizeIndex).trim());
     }
 
     public static String parseInfoMeal(String command) throws UnregisteredMealException {

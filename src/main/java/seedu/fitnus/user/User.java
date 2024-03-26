@@ -8,7 +8,6 @@ import seedu.fitnus.storage.Storage;
 
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.invalidIndexException;
@@ -109,18 +108,12 @@ public class User {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
-
-        drinkList.add(new Drink(drinkName, servingSize));
+        if (drinkName.equals("water")) {
+            totalWaterIntake.add(new Water(servingSize));
+        } else {
+            drinkList.add(new Drink(drinkName, servingSize));
+        }
         System.out.println("Added " + servingSize + " ml of " + drinkName);
-    }
-
-    public void handleWater(String command) throws IncompleteWaterException {
-        Parser.parseWater(command);
-        int volume = Parser.waterSize;
-        assert volume > 0: "invalid volume";
-
-        totalWaterIntake.add(new Water(volume));
-        System.out.println("Added " + volume + " ml of water");
     }
 
     public void handleViewCalories() {
@@ -213,8 +206,8 @@ public class User {
     public void printDrinkList(int startIndex) {
         for (int i = 0; i < drinkList.size(); i++) {
             Drink currentDrink = drinkList.get(i);
-            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (serving size: "
-                    + currentDrink.getDrinkVolumeSize() + ")");
+            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (volume: "
+                    + currentDrink.getDrinkVolumeSize() + "ml)");
         }
     }
 

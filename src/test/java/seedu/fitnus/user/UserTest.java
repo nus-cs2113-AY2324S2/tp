@@ -6,7 +6,6 @@ import seedu.fitnus.Meal;
 import seedu.fitnus.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
 import seedu.fitnus.exception.UnregisteredMealException;
 
 import java.util.ArrayList;
@@ -33,16 +32,4 @@ public class UserTest {
         assertEquals(3, testMealList.get(0).getServingSize());
     }
 
-    @Test
-    public void handleWater_unknownServingSize_addWaterFailed() throws IncompleteWaterException {
-        try {
-            Parser.parseWater("water 1");
-            new Water(Parser.waterSize);
-        } catch (IncompleteWaterException e) {
-            return;
-        }
-
-        String error = "Incomplete command, the format must be [water s/SERVING_SIZE].";
-        fail(error);
-    }
 }
