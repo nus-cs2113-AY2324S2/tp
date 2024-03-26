@@ -6,8 +6,21 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Parser Implementation:
+Parser Class (v1.0) reads user input from the standard input stream, checks the input, 
+tests the validity, and conveys the validity back to the class it is called from.
+![img.png](img.png)
 
+Briefly, the Parser class interacts with the main program by reading the inputs and throwing exceptions
+if the inputs are unexpected. These exceptions are then handled by the Duke class or the 
+TicTacToe class. 
+![img_4.png](img_4.png)
+
+Currently, the Parser class only covers the reading of the chosen game by the user and 
+the moves performed in TicTacToe. A future implementation for v2.0 would integrate methods
+to read and verify user input for the HangMan class as well, such as readLetters(String: input) 
+or readHMMove(String: input).
+![img_1.png](img_1.png)
 
 ## Product scope
 ### Target user profile
