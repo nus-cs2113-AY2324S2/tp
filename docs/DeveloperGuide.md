@@ -36,3 +36,82 @@
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+# GPA Function
+The GPA Calculator Module is a comprehensive component designed to facilitate the calculation 
+of a user's updated GPA based on their current academic standing and projected module grades. 
+This guide will walk developers through the architecture, functionality, and core components of the module.
+
+## Overview
+The module is divided into two primary classes:
+
+### GPACommand: 
+Handles user interactions, input collection, and directs the flow of the GPA calculation process.
+### GPAMain: 
+Contains the logic for calculating the updated GPA.
+
+
+## Environment Setup
+Java JDK 8 or above
+An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
+
+## Class Descriptions
+
+## Class: GPACommand
+This class is responsible for interacting with the user, collecting inputs, 
+and managing the flow of the GPA calculation process. It operates within a loop, 
+allowing the user to perform multiple calculations or exit at any point.
+
+### Key Methods
+#### processGPACommand(): 
+Orchestrates the overall process, including collecting user inputs and displaying the updated GPA.
+
+### Workflow
+#### Start/Exit Prompt: 
+Prompt the user to start the calculation or exit.
+#### GPA and MCs Input: 
+Collect the user's current GPA and the number of Modular Credits (MCs) taken.
+#### Module Details Input: 
+For each module the user wants to add, collect the modular credit and the expected grade.
+#### GPA Calculation: 
+Calls GPAMain.calculateNewGPA to compute the updated GPA based on inputs.
+#### Display Updated GPA: 
+Displays the calculated updated GPA to the user.
+
+
+## Class: GPAMain
+Contains the core logic for calculating the new GPA given the user's current GPA, 
+total accumulated credits, and details of modules being added.
+
+### Key Methods
+#### calculateNewGPA()
+input: double currentGPA, int totalAccumulatedCredits, int numOfModules, int[] moduleCredits, String[] moduleGrades
+Calculates and returns the updated GPA.
+#### calculatePointsForGrade(String grade): 
+Translates a letter grade into its corresponding GPA points.
+
+### GPA Calculation Logic
+#### Total Points Calculation: 
+Calculates the total points achieved so far by multiplying the current GPA by the total accumulated credits.
+#### Add Points for New Modules: 
+For each new module, add to the total points based on the grade and credits.
+#### Calculate Updated GPA: 
+Divide the total points by the new total credits (accumulated + new modules) to get the updated GPA.
+
+## Development Notes
+Input Validation: Ensure that GPA scores and credit numbers are within valid ranges. This module expects a GPA between 0 and 5, and non-negative numbers for credits.
+Error Handling: Properly handle invalid inputs, such as non-numeric values for credits or unsupported grade values.
+Assertions: Use assertions to catch unexpected values during development. Ensure they are adequately handled or logged.
+
+## Future Enhancements
+GUI Integration: Consider developing a graphical user interface for easier input and interaction.
+
+Persistent Data: Implement functionality to save and retrieve historical GPA calculations.
+
+Expanded Grade Scale: Allow for customization of the grade to GPA points mapping to accommodate different institutions' grading scales.
+
+
+
+
+
+
