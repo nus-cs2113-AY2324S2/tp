@@ -25,9 +25,12 @@ public class BinBash {
             String userInput = userInterface.readUserCommand();
             try {
                 Command userCommand = inputParser.parseCommand(userInput);
-                userCommand.execute(userInterface, itemList, storage);
+                userCommand.execute(userInterface, itemList);
                 userInterface.talk(userCommand.getExecutionUiOutput());
 
+                if (userCommand.hasToSave()) {
+                    storage.saveToStorage(itemList.getItemList());
+                }
             } catch (BinBashException e) {
                 userInterface.talk(e.getMessage());
             }
