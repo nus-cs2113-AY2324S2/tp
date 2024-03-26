@@ -1,7 +1,6 @@
 package seedu.binbash.command;
 
 import seedu.binbash.ItemList;
-import seedu.binbash.ui.Ui;
 
 import java.util.regex.Pattern;
 
@@ -27,7 +26,7 @@ public class RestockCommand extends Command{
     }
 
     @Override
-    public boolean execute(Ui ui, ItemList itemList) {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.updateItemQuantity(itemName, restockQuantity, COMMAND);
         hasToSave = true;
         return true;

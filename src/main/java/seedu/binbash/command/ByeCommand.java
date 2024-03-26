@@ -1,6 +1,5 @@
 package seedu.binbash.command;
 
-import seedu.binbash.ui.Ui;
 import seedu.binbash.ItemList;
 
 public class ByeCommand extends Command {
@@ -9,8 +8,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean execute(Ui ui, ItemList itemList) {
-        ui.setUserAsInactive();
+    public boolean execute(ItemList itemList) {
         executionUiOutput = "Bye!";
         return true;
     }

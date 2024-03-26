@@ -3,7 +3,6 @@ package seedu.binbash.command;
 import org.junit.jupiter.api.Test;
 import seedu.binbash.item.Item;
 import seedu.binbash.ItemList;
-import seedu.binbash.ui.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListCommandTest {
-    private static final Ui TEST_UI = new Ui();
 
     @Test
     void execute_listCommandWithTwoItemsInItemList_correctPrintFormatForBothItems() {
@@ -24,7 +22,7 @@ class ListCommandTest {
 
         ListCommand listCommand = new ListCommand();
 
-        listCommand.execute(TEST_UI, itemList);
+        listCommand.execute(itemList);
         String actualOutput = listCommand.getExecutionUiOutput();
 
         String expectedOutput = "1. [P][R] testItem1" + System.lineSeparator() +

@@ -3,6 +3,7 @@ package seedu.binbash;
 import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
 import seedu.binbash.command.Command;
+import seedu.binbash.command.ByeCommand;
 import seedu.binbash.exceptions.BinBashException;
 
 public class BinBash {
@@ -25,7 +26,12 @@ public class BinBash {
             String userInput = userInterface.readUserCommand();
             try {
                 Command userCommand = inputParser.parseCommand(userInput);
-                userCommand.execute(userInterface, itemList);
+
+                if (userCommand instanceof ByeCommand) {
+                    userInterface.setUserAsInactive();
+                }
+
+                userCommand.execute(itemList);
                 userInterface.talk(userCommand.getExecutionUiOutput());
 
                 if (userCommand.hasToSave()) {

@@ -3,7 +3,6 @@ package seedu.binbash.command;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import seedu.binbash.ItemList;
-import seedu.binbash.ui.Ui;
 
 public class AddCommand extends Command {
 
@@ -75,7 +74,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute(Ui ui, ItemList itemList) {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.addItem(itemName, itemDescription, itemQuantity, itemExpirationDate,
                 itemSalePrice, itemCostPrice);
         hasToSave = true;

@@ -2,7 +2,6 @@ package seedu.binbash.command;
 
 import java.util.logging.Logger;
 import seedu.binbash.ItemList;
-import seedu.binbash.ui.Ui;
 
 public abstract class Command {
     protected ItemList itemList;
@@ -22,5 +21,5 @@ public abstract class Command {
         return hasToSave;
     }
 
-    public abstract boolean execute(Ui ui, ItemList itemList);
+    public abstract boolean execute(ItemList itemList);
 }

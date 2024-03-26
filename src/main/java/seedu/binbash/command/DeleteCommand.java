@@ -3,7 +3,6 @@ package seedu.binbash.command;
 import java.util.regex.Pattern;
 import java.util.logging.Level;
 import seedu.binbash.ItemList;
-import seedu.binbash.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final Pattern COMMAND_FORMAT = Pattern.compile("delete\\s(?<identifier>.+)");
@@ -29,7 +28,7 @@ public class DeleteCommand extends Command {
         ));
     }
 
-    public boolean execute(Ui ui, ItemList itemList) {
+    public boolean execute(ItemList itemList) {
         if (isIndex) {
             if (index <= 0 || index > itemList.getItemCount()) {
                 executionUiOutput = "Index is out of bounds!";
