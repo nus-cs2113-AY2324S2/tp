@@ -2,6 +2,7 @@ package seedu.duke;
 
 import storage.Storage;
 import gpa.GPACommand;
+import gc.gc;
 
 public class ProcessCommand {
 
@@ -54,6 +55,9 @@ public class ProcessCommand {
         case "gpa":
             GPACommand.processGPACommand();
             UI.printHelpMessage();
+            break;
+        case "gc":
+            gc.main();
             break;
         case "exit":
             System.out.println("Shutting down... Goodbye!!");
