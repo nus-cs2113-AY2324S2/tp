@@ -8,19 +8,19 @@ import seedu.budgetbuddy.command.EditExpenseCommand;
 import seedu.budgetbuddy.command.EditSavingCommand;
 import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
-import seedu.budgetbuddy.command.ListExpenseCommand;
-import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.command.SplitExpenseCommand;
-import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
-import seedu.budgetbuddy.command.ChangeCurrencyCommand;
+
+import seedu.budgetbuddy.commandcreator.ChangeCurrencyCommandCreator;
+import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.ListCommandCreator;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Currency;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -200,82 +200,7 @@ public class Parser {
         return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
     }
 
-    /**
-     * Parses the "list" command, allowing for optional category filtering.
-     *
-     * @param input The full user input string.
-     * @param expenseList The ExpenseList to list from.
-     * @param savingList The SavingList to list from.
-     * @return A Command for executing the list, or null if the input is invalid.
-     */
-    
-    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList, 
-            SplitExpenseList splitexpenseList) {
-        assert input != null : "Input should not be null";
-        assert !input.isEmpty() : "Input should not be empty";
 
-        String[] parts = input.split(" ");
-        assert parts.length >= 1 : "At least one part should be present in the input";
-
-        String action = parts[0];
-        assert !action.isEmpty() : "Action should not be empty";
-
-        switch (action) {
-        case "list":
-            if (parts.length == 2) {
-                // List expenses or savings
-                String listType = parts[1];
-                assert !listType.isEmpty() : "List type should not be empty";
-
-                if (listType.equalsIgnoreCase("expenses")) {
-                    return new ListExpenseCommand(expenseList);
-                } else if (listType.equalsIgnoreCase("savings")) {
-                    return new ListSavingsCommand(savingList, expenseList);
-                }
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("expenses")) {
-                String filterCategory = parts[2];
-                try {
-                    // Checks for valid category input
-                    if (filterCategory != null) {
-                        boolean isValidCategory = isValidExpenseCategory(filterCategory);
-                        if (!isValidCategory) {
-                            LOGGER.warning("Invalid category inputted: " + filterCategory);
-                            System.out.println("Invalid category: " + filterCategory);
-                            return null;
-                        }
-                    }
-                } catch (IllegalArgumentException e) {
-                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
-                }
-                return new ListExpenseCommand(expenseList, filterCategory);
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("splitted") 
-                    && parts[2].equalsIgnoreCase("expenses")) {
-                return new ListSplitExpenseCommand(splitexpenseList);
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
-                String filterCategory = parts[2];
-                try {
-                    // Checks for valid category input
-                    if (filterCategory != null) {
-                        boolean isValidCategory = isValidSavingsCategory(filterCategory);
-                        if (!isValidCategory) {
-                            LOGGER.warning("Invalid category inputted: " + filterCategory);
-                            System.out.println("Invalid category: " + filterCategory);
-                            return null;
-                        }
-                    }
-                } catch (IllegalArgumentException e) {
-                    LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
-                }
-                return new ListSavingsCommand(savingList, expenseList, filterCategory); // Pass expenseList instance
-            } else {
-                return null;
-            }
-            break;
-        default:
-            return null;
-        }return null;
-
-    }
 
 
     private boolean isValidExpenseCategory(String category) {
@@ -289,49 +214,6 @@ public class Parser {
             }
         }
         return false;
-    }
-
-    private boolean isValidSavingsCategory(String category) {
-
-        assert category != null : "Category should not be null";
-        assert !category.isEmpty() : "Category should not be empty";
-
-        for (String validCategory : savingsCategories) {
-            if (validCategory.equalsIgnoreCase(category)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Command handleChangeCurrencyCommand(String input, SavingList savingList, ExpenseList expenseList,
-                                               CurrencyConverter currencyConverter) {
-        if (input.startsWith("change currency")) {
-            String[] parts = input.split(" ");
-            assert parts.length > 1 : "Input should contain currency code";
-
-            if (parts.length == 3) {
-                String currencyCode = parts[2];
-                assert !currencyCode.isEmpty() : "Currency code should not be empty";
-
-                try {
-                    Currency newCurrency = Currency.getInstance(currencyCode.toUpperCase());
-                    assert newCurrency != null : "Currency code should be valid";
-                    LOGGER.log(Level.INFO, "Default currency changed to " + newCurrency);
-                    System.out.println("Default currency changed to " + newCurrency);
-                    return new ChangeCurrencyCommand(newCurrency, savingList, expenseList, currencyConverter);
-                } catch (IllegalArgumentException e) {
-                    LOGGER.log(Level.WARNING, "Invalid currency code: " + currencyCode);
-                    System.out.println("Invalid currency code.");
-                    return null;
-                }
-            } else {
-                LOGGER.log(Level.WARNING, "Invalid command format. Use 'change currency <currency_code>'.");
-                System.out.println("Invalid command format. Use 'change currency <currency_code>'.");
-                return null;
-            }
-        }
-        return null;
     }
 
 
@@ -738,7 +620,8 @@ public class Parser {
         }
 
         if (isListCommand(input)) {
-            return handleListCommand(input, expenses, savings, splitexpenses);
+            CommandCreator commandCreator = new ListCommandCreator(splitexpenses, expenses, savings, input);
+            return commandCreator.createCommand();
         }
 
         if (isFindExpensesCommand(input)) {
@@ -746,7 +629,9 @@ public class Parser {
         }
 
         if (isConvertCurrencyCommand(input)) {
-            return handleChangeCurrencyCommand(input, savings, expenses, new CurrencyConverter());
+            CommandCreator commandCreator = new ChangeCurrencyCommandCreator(input, savings, expenses,
+                    new CurrencyConverter());
+            return commandCreator.createCommand();
         }
 
         if (isSplitExpenseCommand(input)) {
