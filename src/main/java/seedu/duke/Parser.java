@@ -1,8 +1,6 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Parser {
 
@@ -14,6 +12,8 @@ public class Parser {
     private static final String[] paramKeys = {"amount", "paid", "user"};
 
     private final String userInput;
+    private static Map<String, Group> groups = new HashMap<>();
+    private static Optional<Group> currentGroup = Optional.empty();
 
     /**
      * First word of user input.
@@ -70,7 +70,8 @@ public class Parser {
     }
 
     /**
-     * Process the String userInput and populates corresponding fields of Parser object.
+     * Process the String userInput
+     * populates corresponding fields of Parser object.
      */
     public void parseUserInput() {
         String[] tokens = userInput.split(" ", 2);
@@ -91,7 +92,8 @@ public class Parser {
 
             String subCommand = subTokens[0].toLowerCase().trim();
             String subArgument = subTokens[1].trim();
-            if (!subArgument.isEmpty() && params.containsKey(subCommand)){
+            if (!subArgument.isEmpty() &&
+                    params.containsKey(subCommand)){
                 params.get(subCommand).add(subArgument);
             }
         }
@@ -123,7 +125,8 @@ public class Parser {
     }
 
 
-    public void handleUserInput() throws EndProgramException, ExpensesException {
+    public void handleUserInput() throws EndProgramException,
+            ExpensesException {
         switch (command) {
         case "bye":
             throw new EndProgramException();
@@ -132,13 +135,39 @@ public class Parser {
             Help.printHelp();
             break;
         case "create":
-            GroupCommand.createGroup(argument);
+            currentGroup = Optional.of(currentGroup.map(group -> {
+                System.out.printf(
+                        "Please exit %s before creating a new one%n",
+                        group);
+                    return group;
+                }).orElseGet(() -> {
+                String groupName = argument;
+                boolean isGroupCreated = groups.containsKey(groupName);
+                if (isGroupCreated) {
+                    Group queriedGroup = groups.get(groupName);
+                    System.out.println("Group already exists! " +
+                            "You are now in " + queriedGroup);
+                    return queriedGroup;
+                }
+                Group createdGroup = Group.createGroup(groupName);
+                groups.put(groupName, createdGroup);
+                System.out.println("Creating new group! " +
+                        "You are now in " + createdGroup);
+                return createdGroup;
+            }));
             break;
         case "member":
-            GroupCommand.addMember(argument);
+            String memberName = argument;
+            currentGroup.ifPresentOrElse(group -> group.addMember(memberName),
+                    () -> System.out.println("You are not in a group!!"));
             break;
         case "exit":
-            GroupCommand.exitGroup();
+            currentGroup.ifPresentOrElse(
+                    group -> {
+                        System.out.printf("Exiting %s%n", group);
+                        currentGroup = Optional.empty();
+                    },
+                    () -> currentGroup = Optional.empty());
             break;
         case "expense":
 
@@ -146,7 +175,9 @@ public class Parser {
             String[] expenseParams = {"amount", "paid", "user"};
             for(String expenseParam : expenseParams){
                 if(params.get(expenseParam).isEmpty()){
-                    String exceptionMessage = "No description for expenses! Add /" + expenseParam;
+                    String exceptionMessage =
+                            "No description for expenses! Add /" +
+                                    expenseParam;
                     throw new ExpensesException(exceptionMessage);
                 }
             }
@@ -156,16 +187,18 @@ public class Parser {
             try {
                 totalAmount = Float.parseFloat(params.get("amount").get(0));
             } catch (NumberFormatException e) {
-                String exceptionMessage = "Re-enter expense with amount as a proper number.";
+                String exceptionMessage =
+                        "Re-enter expense with amount as a proper number.";
                 throw new ExpensesException(exceptionMessage);
             }
 
-            // Obtain necessary information from 'params' and create new Expense
+            // Obtain necessary information from 'params', create new Expense
             ArrayList<String> payeeList = params.get("user");
             String payerName = params.get("paid").get(0);
             payeeList.add(0, payerName);
 
-            Expense newTransaction = new Expense(payerName, totalAmount, payeeList.toArray(new String[0]));
+            Expense newTransaction = new Expense(payerName,
+                    totalAmount, payeeList.toArray(new String[0]));
             break;
         case "list":
             // List code here
