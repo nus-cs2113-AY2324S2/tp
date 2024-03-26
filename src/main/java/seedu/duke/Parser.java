@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +80,6 @@ public class Parser {
         if (tokens.length == 1){
             return;
         }
-
         String[] arguments = tokens[1].split("/");
         this.argument = arguments[0].trim();
 
@@ -127,18 +127,45 @@ public class Parser {
         switch (command) {
         case "bye":
             throw new EndProgramException();
+        case "exit":
+            Group.exitGroup();
+            break;
         case "help":
             // Help code here
             Help.printHelp();
             break;
         case "create":
-            GroupCommand.createGroup(argument);
+            try {
+                Optional<Group> optionalGroup = Group.getOrCreateGroup(argument);
+                if (optionalGroup.isEmpty()) {
+                    System.out.println("The group does not exist.");
+                }
+            } catch (IllegalStateException e) {
+                System.out.println(e.getMessage()); // Print the message instructing to exit current group.
+            }
             break;
         case "member":
-            GroupCommand.addMember(argument);
-            break;
-        case "exit":
-            GroupCommand.exitGroup();
+            try {
+                String[] memberDetails = argument.split("/group");
+                if (memberDetails.length == 1) {
+                    throw new ExpensesException("No group name for user! Add /group <group name>");
+                }
+                String memberName = memberDetails[0].trim();
+                if (memberName.isEmpty()) {
+                    throw new ExpensesException("No name for user! Add a name for the user");
+                }
+                String groupNameForUser = memberDetails[1].trim();
+                User newUser = new User(memberName);
+                Optional<Group> optionalGroup = Group.getOrCreateGroup(groupNameForUser);
+                if (optionalGroup.isPresent()) {
+                    Group group = optionalGroup.get();
+                    group.addUsers(newUser);
+                } else {
+                    System.out.println("The group does not exist.");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             break;
         case "expense":
 
@@ -180,6 +207,5 @@ public class Parser {
             Help.printHelp();
             break;
         }
-
     }
 }

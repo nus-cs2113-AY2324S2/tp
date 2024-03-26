@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -54,17 +55,6 @@ public class GroupTest {
         String groupName = "ExitingGroup";
         Group.getOrCreateGroup(groupName);
         Group.exitGroup();
-        assertNull(Group.getCurrentGroup(), "Did not successfully exit the group");
-    }
-
-    @Test
-    public void testGetCurrentGroup() {
-        String groupName = "CurrentGroup";
-        Group group = Group.getOrCreateGroup(groupName);
-
-        assertEquals(group, Group.getCurrentGroup(), "Current group is not the expected group");
-
-        Group.exitGroup();
-        assertNull(Group.getCurrentGroup(), "Current group should be null after exiting");
+        Assertions.assertTrue(Group.currentGroupName.isEmpty(), "Did not successfully exit the group");
     }
 }

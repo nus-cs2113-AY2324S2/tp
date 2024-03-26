@@ -22,7 +22,7 @@ public class Duke {
         System.out.println("Hello " + in.nextLine());
         Help.printHelp();
 
-        while(in.hasNextLine()) {
+        while (in.hasNextLine()) {
             String userInput = in.nextLine();
             Parser parser = new Parser(userInput);
 
