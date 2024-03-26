@@ -11,7 +11,7 @@ public class GenerateGiftCommand extends Command {
         do {
             Gift gift = gifts.getRandomGift();
             System.out.println(gift);
-            System.out.println("Satisfied with the date idea? [Yes/No]");
+            System.out.println("Satisfied with the gift suggestion? [Yes/No]");
             userSatisfied = ui.readCommand().toLowerCase();
             if (userSatisfied.equals("yes")) {
                 System.out.println("This gift is about to make a love story even sweeter.");
