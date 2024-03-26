@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import utility.UiConstant;
 import utility.CustomExceptions;
@@ -126,12 +128,16 @@ class OutputTest {
     void printLatestGym_twoGyms_expectOneGymPrinted() {
         try{
             Gym gym1 = new Gym();
-            gym1.addStation("Bench Press", 4, 10, 50);
-            gym1.addStation("Shoulder Press", 20, 4, 10);
+            ArrayList<Integer> array1 = new ArrayList<>(Arrays.asList(1));
+            ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(1,2));
+
+            gym1.addStation("Bench Press",  array1, 1, 10);
+            gym1.addStation("Shoulder Press", array2, 2, 10);
 
             Gym gym2 = new Gym();
-            gym2.addStation("Squat Press", 4, 10, 50);
-            gym2.addStation("Lat Press", 20, 4, 10);
+            gym2.addStation("Squat Press", array1, 1, 50);
+            gym2.addStation("Lat Press", array2, 2, 10);
+
 
             String expected = UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
@@ -139,11 +145,17 @@ class OutputTest {
                     System.lineSeparator() +
                     "Gym Session 2 (Date: NA)" +
                     System.lineSeparator() +
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Squat Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 1 Squat Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 1) +
                     System.lineSeparator() +
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Lat Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "50 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 2 Lat Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 2) +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "10 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 2, "10 reps at 2 KG") +
                     System.lineSeparator() +
                     UiConstant.PARTITION_LINE +
                     System.lineSeparator();
@@ -243,13 +255,17 @@ class OutputTest {
     @Test
     void printGymHistory_correctInput_expectPrintGymHistory(){
         try{
+
+            ArrayList<Integer> array1 = new ArrayList<>(Arrays.asList(1));
+            ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(1,2));
+
             Gym gym1 = new Gym();
-            gym1.addStation("Bench Press", 4, 10, 50);
-            gym1.addStation("Shoulder Press", 20, 4, 10);
+            gym1.addStation("Bench Press", array1, 1, 50);
+            gym1.addStation("Shoulder Press", array2, 2, 10);
 
             Gym gym2 = new Gym();
-            gym2.addStation("Squat Press", 4, 10, 50);
-            gym2.addStation("Lat Press", 20, 4, 10);
+            gym2.addStation("Squat Press", array1, 1, 50);
+            gym2.addStation("Lat Press", array2, 2, 10);
 
             String expected = UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
@@ -257,21 +273,33 @@ class OutputTest {
                     System.lineSeparator() +
                     "Gym Session 1 (Date: NA)"+
                     System.lineSeparator() +
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Bench Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 1 Bench Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 1) +
                     System.lineSeparator() +
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Shoulder Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "50 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 2 Shoulder Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 2) +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "10 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 2, "10 reps at 2 KG") +
                     System.lineSeparator() +
                     UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
                     "Gym Session 2 (Date: NA)" +
                     System.lineSeparator() +
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Squat Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
-                    System.lineSeparator()+
-                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Lat Press") +
-                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 4, "10 reps at 20 KG") +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 1 Squat Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 1) +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "50 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_STATION_FORMAT, "Station 2 Lat Press") +
+                    String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 2) +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 1, "10 reps at 1 KG") +
+                    System.lineSeparator() +
+                    String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, 2, "10 reps at 2 KG") +
                     System.lineSeparator() +
                     UiConstant.PARTITION_LINE +
                     System.lineSeparator();

@@ -19,8 +19,10 @@ import workouts.WorkoutList;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
+
 import java.time.LocalDate;
 import java.util.Scanner;
+
 import storage.LogFile;
 import workouts.Workout;
 
@@ -205,7 +207,7 @@ public class Handler {
     public static void handleHealth(String userInput) {
         try {
             String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(HealthConstant.BMI)){
+            if (typeOfHealth.equals(HealthConstant.BMI)) {
                 String[] bmiDetails = Bmi.getBmi(userInput);
 
                 if (bmiDetails[0].isEmpty()
@@ -224,7 +226,7 @@ public class Handler {
                         + UiConstant.LINE
                         + bmiDetails[3]);
                 System.out.println(newBmi);
-            } else if (typeOfHealth.equals(HealthConstant.PERIOD)){
+            } else if (typeOfHealth.equals(HealthConstant.PERIOD)) {
                 String[] periodDetails = Period.getPeriod(userInput);
 
                 if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
@@ -310,25 +312,27 @@ public class Handler {
     }
 
     //@@author JustinSoh
+
     /**
      * Retrieves the gym station details and adds a GymStation object to Gym.
      *
      * @param numberOfStations The number of stations in one gym session.
-     * @param gym The Gym object.
+     * @param gym              The Gym object.
      */
     private static void getGymStation(int numberOfStations, Gym gym) {
-        try{
-            for (int i = 0; i < numberOfStations; i++) {
+        int i = 0;
+        while (i < numberOfStations) {
+            try {
+
                 Output.printGymStationPrompt(i + 1);
                 String userInput = in.nextLine();
-                String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-                String[] validatedInputs = GymStation.checkIfGymStationInputValid(inputs);
-                Gym.addGymStationInput(validatedInputs, gym);
+                GymStation.addGymStationInputValid(gym, userInput);
+                i++;
+            } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
+                Output.printException(e.getMessage());
             }
-            Output.printAddGym(gym);
-        } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
-            Output.printException(e.getMessage());
         }
+        Output.printAddGym(gym);
     }
 
     /**
@@ -344,6 +348,7 @@ public class Handler {
     }
 
     //@@author
+
     /**
      * Checks the type of exercise based on the user input.
      * Usage: to use this method whenever the user enters a new exercise.
@@ -352,7 +357,7 @@ public class Handler {
      *
      * @param userInput The user input string.
      * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
-     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      */
     public static String checkTypeOfExercise(String userInput) throws
@@ -411,7 +416,7 @@ public class Handler {
     /**
      * Initialise scanner to read user input.
      */
-    public static void initialiseScanner(){
+    public static void initialiseScanner() {
         in = new Scanner(System.in);
         assert in != null : "Object cannot be null";
     }
@@ -419,8 +424,8 @@ public class Handler {
     /**
      * Close scanner to stop reading user input.
      */
-    public static void destroyScanner(){
-        if (in != null){
+    public static void destroyScanner() {
+        if (in != null) {
             in.close();
         }
     }
