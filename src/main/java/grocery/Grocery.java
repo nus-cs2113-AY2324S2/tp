@@ -10,7 +10,9 @@ public class Grocery {
     private String name;
     private int amount;
     private LocalDate expiration;
+    private String category;
     private double cost;
+
 
     /**
      * Constructs a Grocery.
@@ -18,11 +20,14 @@ public class Grocery {
      * @param name Name.
      * @param amount Measurement of grocery.
      * @param expiration When grocery expires.
+     * @param category Category of grocery.
      */
-    public Grocery(String name, int amount, LocalDate expiration, double cost) {
+
+    public Grocery(String name, int amount, LocalDate expiration, String category, double cost) {
         this.name = name;
         this.amount = amount;
         this.expiration = expiration;
+        this.category = category;
         this.cost = cost;
     }
 
@@ -83,12 +88,32 @@ public class Grocery {
 
         // TODO: update amount output according to Grocery subclass
         // TODO: consider stating amount == 0 now that we track amount ?
+
+        String amountString = (amount == 0) ? "" : ", amount: " + amount;
         String exp = (expiration == null) 
             ? " expiration date not set" 
             : ", expiration: " + expiration.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String amt = (amount == 0) ? "" : ", amount: " + amount;
         String price = (cost != 0) ? ", cost: $" + String.format("%.2f", cost): " cost not set";
-        return this.name + amt + exp + price;
+        String unit = "";
+        switch (category.toLowerCase()){
+        case "fruit":
+            unit = "pieces";
+            break;
+        case "vegetable":
+            unit = "grams";
+            break;
+        case "meat":
+            unit = "grams";
+            break;
+        case "beverage":
+            unit = "ml";
+            break;
+        default:
+            unit = "units";
+            break;
+        }
+        return this.name + " (" + this.category + ") " + amountString + unit + exp + price;
+
     }
 }
 

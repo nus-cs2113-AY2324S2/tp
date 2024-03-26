@@ -84,18 +84,34 @@ public class Ui {
      * @return Formatted expiration date.
      */
     public String promptForExpiration() {
-        System.out.println("Please enter the year of expiry (e.g., 2024):");
+        System.out.println("Please enter the year of expiry (e.g. 2024):");
         String year = in.nextLine().trim();
 
-        System.out.println("Please enter the month of expiry (can be July or can be 07):");
+        System.out.println("Please enter the month of expiry (e.g. July or 07):");
         String month = in.nextLine().trim();
         month = convertMonthToNumber(month);
-
-        System.out.println("Please enter the date of expiry (e.g., 09):");
+        System.out.println("Please enter the date of expiry (e.g. 19):");
         String day = in.nextLine().trim();
 
         String formattedDate = formatExpirationDate(year, month, day);
         return formattedDate;
+    }
+    /**
+     * Prompts user for category
+     */
+    public String promptForCategory(){
+        System.out.println("Please enter the category (e.g. fruit):");
+        return in.nextLine().trim();
+    }
+
+    public int promptForAmount(){
+        System.out.println("Please enter the amount (e.g. 3):");
+        try {
+            return Integer.parseInt(in.nextLine().trim());
+        } catch (NumberFormatException e){
+            System.out.println("Please enter a valid integer for the amount (e.g. 3)!");
+            return promptForAmount();
+        }
     }
 
     /**
