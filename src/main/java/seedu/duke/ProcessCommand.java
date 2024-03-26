@@ -48,6 +48,7 @@ public class ProcessCommand {
     }
 
     public boolean userCommand(String input, ExpenditureList expenses) {
+        assert input != null;
         input = input.trim().toLowerCase();
         switch (input) {
         case "gpa":
