@@ -18,7 +18,7 @@ public class Penalty {
 
         boolean isGoal = CommandList.goalCheck(userDirection, aiDirection);
         Formatter.printGoalAfterShot(isGoal);
-        Ui.roundCount++;
+
     }
 
     /**
