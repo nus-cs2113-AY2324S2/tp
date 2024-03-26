@@ -5,17 +5,19 @@ import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import static seedu.duke.FAP.LOGGER;
 
 public class ModuleList {
+    private static final int NUM_SEMESTERS = 8;
+
     protected ArrayList<Module> takenModuleList;
-    protected ArrayList<Module> toBeTakenModuleList;
 
     public ModuleList(int size) {
         this.takenModuleList = new ArrayList<Module>(size);
-        this.toBeTakenModuleList = new ArrayList<Module>(size);
     }
 
     public Module getModule(String courseCode) throws ModuleNotFoundException {
@@ -29,11 +31,6 @@ public class ModuleList {
                 return module;
             }
         }
-        for (Module module : toBeTakenModuleList) {
-            if (module.getModuleCode().equals(courseCode)) {
-                return module;
-            }
-        }
         throw new ModuleNotFoundException("Module " + courseCode + " not found!");
     }
 
@@ -41,33 +38,22 @@ public class ModuleList {
         return takenModuleList;
     }
 
-    public ArrayList<Module> getToBeTakenModuleList() {
-        return toBeTakenModuleList;
-    }
-
     public void addModule(Module module) {
         if (module == null) {
             throw new IllegalArgumentException("Module cannot be null.");
         }
-        if (module.getModuleStatus()) {
-            takenModuleList.add(module);
-        } else {
-            toBeTakenModuleList.add(module);
-        }
+        takenModuleList.add(module);
     }
 
     public void printModules() {
         for (Module module:takenModuleList) {
             System.out.println(module.getModuleCode());
         }
-        for (Module module:toBeTakenModuleList) {
-            System.out.println(module.getModuleCode());
-        }
     }
     public void removeModule(Module module) {
         assert module != null : "Module cannot be null";
         // The remove operation returns false if the item was not found
-        boolean removed = toBeTakenModuleList.remove(module) || takenModuleList.remove(module);
+        boolean removed = takenModuleList.remove(module);
         if (!removed) {
             System.out.println("Module not found in either list.");
         }
@@ -106,5 +92,18 @@ public class ModuleList {
             throw new GpaNullException("No countable grades present to tally.");
         }
         return sumOfGPA/(double)totalMC;
+    }
+
+    public Map<Integer, ArrayList<Module>> groupModulesBySemester() {
+        Map<Integer, ArrayList<Module>> moduleBySemMap = new HashMap<>();
+        for (int i = 1; i <= NUM_SEMESTERS; i++) {
+            moduleBySemMap.put(i, new ArrayList<>());
+        }
+
+        for (Module module : takenModuleList) {
+            moduleBySemMap.get(module.getModuleDate()).add(module);
+        }
+
+        return moduleBySemMap;
     }
 }
