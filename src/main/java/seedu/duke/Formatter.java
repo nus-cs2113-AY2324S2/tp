@@ -80,16 +80,6 @@ public class Formatter {
         }
     }
 
-    public static void printSaveResult(boolean isGoalSaved) {
-        if (isGoalSaved) {
-            logger.info("Penalty saved!");
-            System.out.println("You saved the penalty!");
-        } else {
-            logger.info("Goal conceded :(");
-            System.out.println("You failed to save the penalty!");
-        }
-    }
-
     /**
      * Prints "list is empty" if tasks list is empty
      */
