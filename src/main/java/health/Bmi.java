@@ -79,12 +79,12 @@ public class Bmi extends Health {
         int indexWeight = input.indexOf(HealthConstant.WEIGHT_FLAG);
         int indexDate = input.indexOf(HealthConstant.DATE_FLAG);
 
-        String command = input.substring(indexH + HealthConstant.BMI_H_OFFSET, indexHeight).trim();
-        String heightSubstring = input.substring(indexHeight + HealthConstant.BMI_HEIGHT_OFFSET, indexWeight).trim();
-        String weightSubstring = input.substring(indexWeight + HealthConstant.BMI_WEIGHT_OFFSET, indexDate).trim();
+        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexHeight).trim();
+        String heightSubstring = input.substring(indexHeight + HealthConstant.HEIGHT_OFFSET, indexWeight).trim();
+        String weightSubstring = input.substring(indexWeight + HealthConstant.WEIGHT_OFFSET, indexDate).trim();
         String dateSubstring = input.substring(indexDate + HealthConstant.DATE_OFFSET).trim();
 
-        if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty()) {
+        if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty() || dateSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(HealthConstant.INSUFFICIENT_PARAMETERS_FOR_BMI);
         }
 

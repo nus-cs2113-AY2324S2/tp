@@ -64,7 +64,7 @@ public class Period extends Health {
      * @throws CustomExceptions.InvalidInput if the input string does not contain the required parameters
      */
     public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.PERIOD_CYCLE_PARAMETERS];
+        String[] results = new String[HealthConstant.PERIOD_PARAMETERS];
 
         if (!input.contains(HealthConstant.HEALTH_FLAG)
                 | !input.contains(HealthConstant.START_FLAG)
@@ -76,9 +76,9 @@ public class Period extends Health {
         int indexStart = input.indexOf(HealthConstant.START_FLAG);
         int indexEnd = input.indexOf(HealthConstant.END_FLAG);
 
-        String command = input.substring(indexH + HealthConstant.PERIOD_CYCLE_H_OFFSET, indexStart).trim();
-        String startSubstring = input.substring(indexStart + HealthConstant.PERIOD_CYCLE_START_OFFSET, indexEnd).trim();
-        String endSubstring = input.substring(indexEnd + HealthConstant.PERIOD_CYCLE_END_OFFSET).trim();
+        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexStart).trim();
+        String startSubstring = input.substring(indexStart + HealthConstant.START_DATE_OFFSET, indexEnd).trim();
+        String endSubstring = input.substring(indexEnd + HealthConstant.END_DATE_OFFSET).trim();
 
         if (command.isEmpty() || startSubstring.isEmpty() || endSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
