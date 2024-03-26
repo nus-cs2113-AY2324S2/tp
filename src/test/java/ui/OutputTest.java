@@ -137,7 +137,7 @@ class OutputTest {
                     System.lineSeparator() +
                     "Your latest gym:" +
                     System.lineSeparator() +
-                    "Gym Session 2" +
+                    "Gym Session 2 (Date: NA)" +
                     System.lineSeparator() +
                     String.format(WorkoutConstant.GYM_STATION_FORMAT, "Squat Press") +
                     String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
@@ -255,7 +255,7 @@ class OutputTest {
                     System.lineSeparator() +
                     "Your gym history:" +
                     System.lineSeparator() +
-                    "Gym Session 1"+
+                    "Gym Session 1 (Date: NA)"+
                     System.lineSeparator() +
                     String.format(WorkoutConstant.GYM_STATION_FORMAT, "Bench Press") +
                     String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +
@@ -265,7 +265,7 @@ class OutputTest {
                     System.lineSeparator() +
                     UiConstant.PARTITION_LINE +
                     System.lineSeparator() +
-                    "Gym Session 2" +
+                    "Gym Session 2 (Date: NA)" +
                     System.lineSeparator() +
                     String.format(WorkoutConstant.GYM_STATION_FORMAT, "Squat Press") +
                     String.format(WorkoutConstant.INDIVIDUAL_GYM_STATION_FORMAT, 10, "50 reps at 4 KG") +

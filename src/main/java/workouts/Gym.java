@@ -124,9 +124,9 @@ public class Gym extends Workout {
         String printedDate;
         if (date != null) {
             printedDate = date.toString();
-            return String.format(" on %s", printedDate);
+            return String.format(" (Date: %s)", printedDate);
         } else {
-            return "";
+            return " (Date: NA)";
         }
     }
 }

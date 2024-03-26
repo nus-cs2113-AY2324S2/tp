@@ -130,7 +130,7 @@ public class Handler {
 
                 String gymDate = getDateFromGym(userInput);
                 Gym gym;
-                if (gymDate == null) {
+                if (gymDate.isEmpty()) {
                     gym = new Gym();
                 } else {
                     gym = new Gym(gymDate);
@@ -256,7 +256,9 @@ public class Handler {
     }
 
     /**
-     * Retrieves the date from the input for a Gym output
+     * Retrieves the date from the input for a Gym output.
+     * Returns empty string if not specified.
+     *
      * @param input The user input string.
      * @return A string representing the date.
      */
@@ -264,7 +266,7 @@ public class Handler {
         try {
             return extractSubstringFromSpecificIndex(input, WorkoutConstant.SPLIT_BY_DATE);
         } catch (Exception e) {
-            return null;
+            return "";
         }
     }
 
