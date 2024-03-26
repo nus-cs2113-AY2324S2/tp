@@ -8,13 +8,12 @@ public class Water {
         waterIntake = amount;
     }
 
-    public static Water getInstance(int amount) {
+    public static void getInstance(int amount) {
         if (instance == null) {
             instance = new Water(amount);
         } else {
             addWaterIntake(amount);
         }
-        return instance;
     }
 
     public static int getWater() {
