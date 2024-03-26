@@ -13,8 +13,8 @@ public class ParserSleep {
             double duration = 0;
             String[] parts = input.split(" ");
             for (String part : parts) {
-                if (part.startsWith("t/")) {
-                    duration = Double.parseDouble(part.substring(2));
+                if (part.matches("^-?\\d+(\\.\\d+)?$")) {
+                    duration = Double.parseDouble(part);
                     if (duration < 0) {
                         throw new InvalidInputException(getIncorrectSleepInputMessage());
                     }
@@ -27,12 +27,12 @@ public class ParserSleep {
             }
             if (duration == 0) {
                 throw new InvalidInputException("Please ensure that you have keyed in the correct format: " +
-                        "sleep add t/<duration> d/<date>");
+                        "sleep add <duration> d/<date>");
             }
             return new Sleep(date, duration);
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Please ensure that you have keyed in the correct format: " +
-                    "sleep add t/<duration> d/<date>");
+                    "sleep add <duration> d/<date>");
         }
     }
 

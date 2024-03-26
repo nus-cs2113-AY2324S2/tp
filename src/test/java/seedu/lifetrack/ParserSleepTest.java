@@ -10,13 +10,13 @@ public class ParserSleepTest {
     @Test
     public void parseSleepInput_inputContains2Duration_invalidInputExceptionThrown() {
         // setup test
-        String invalidInput = "sleep add t/8.0 t/9.2";
+        String invalidInput = "sleep add 8.0 9.2";
         // Call methods to test
         try {
             parseSleepInput(invalidInput);
         } catch (InvalidInputException e) {
             assertEquals("Please ensure that you have keyed in the correct format: " +
-                    "sleep add t/<duration> d/<date>", e.getMessage());
+                    "sleep add <duration> d/<date>", e.getMessage());
         }
     }
     @Test
@@ -28,7 +28,7 @@ public class ParserSleepTest {
             parseSleepInput(invalidInput);
         } catch (InvalidInputException e) {
             assertEquals("Please ensure that you have keyed in the correct format: " +
-                    "sleep add t/<duration> d/<date>", e.getMessage());
+                    "sleep add <duration> d/<date>", e.getMessage());
         }
     }
     @Test
@@ -40,14 +40,14 @@ public class ParserSleepTest {
             parseSleepInput(invalidInput);
         } catch (InvalidInputException e) {
             assertEquals("Please ensure that you have keyed in the correct format: " +
-                    "sleep add t/<duration> d/<date>", e.getMessage());
+                    "sleep add <duration> d/<date>", e.getMessage());
         }
     }
 
     @Test
     public void parseSleepInput_inputNonPositiveValueForDuration_invalidInputExceptionThrown() {
         // setup test
-        String invalidInput = "sleep add t/-2 d/110324";
+        String invalidInput = "sleep add -2 d/110324";
 
         // Call methods to test
         try {
@@ -64,7 +64,7 @@ public class ParserSleepTest {
             parseSleepInput("sleep add");
         } catch (InvalidInputException e) {
             assertEquals("Please ensure that you have keyed in the correct format: " +
-                    "sleep add t/<duration> d/<date>", e.getMessage());
+                    "sleep add <duration> d/<date>", e.getMessage());
         }
     }
 }

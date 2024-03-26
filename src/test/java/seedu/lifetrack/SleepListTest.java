@@ -13,8 +13,8 @@ public class SleepListTest {
     @Test
     public void testDeleteSleepValidIndex(){
         SleepList sleepList = new SleepList();
-        sleepList.addSleep("sleep add t/7.5 d/110324");
-        sleepList.addSleep("sleep add t/8");
+        sleepList.addSleep("sleep add 7.5 d/110324");
+        sleepList.addSleep("sleep add 8");
         int initialSize = sleepList.getSize();
         sleepList.deleteSleep("sleep delete 1");
         assertEquals(initialSize - 1, sleepList.getSize());
@@ -22,8 +22,8 @@ public class SleepListTest {
     @Test
     public void testDeleteSleepInvalidIndex() {
         SleepList sleepList = new SleepList();
-        sleepList.addSleep("sleep add t/7.5 d/110324");
-        sleepList.addSleep("sleep add t/8");
+        sleepList.addSleep("sleep add 7.5 d/110324");
+        sleepList.addSleep("sleep add 8");
         int initialSize = sleepList.getSize();
         sleepList.deleteSleep("sleep delete 5"); // Index out of bounds
         sleepList.deleteSleep("sleep delete -1");
@@ -47,7 +47,7 @@ public class SleepListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         SleepList sleepList = new SleepList();
-        sleepList.addSleep("sleep add t/7.5 d/110324");
+        sleepList.addSleep("sleep add 7.5 d/110324");
         sleepList.printSleepList();
         System.setOut(System.out);
         String expectedOutput = WHITESPACE+ "New sleep record has been successfully added." + lineSeparator +
@@ -62,9 +62,9 @@ public class SleepListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         SleepList sleepList = new SleepList();
-        sleepList.addSleep("sleep add t/7.5 d/110324");
-        sleepList.addSleep("sleep add t/8.0 d/280524");
-        sleepList.addSleep("sleep add t/4.2");
+        sleepList.addSleep("sleep add 7.5 d/110324");
+        sleepList.addSleep("sleep add 8.0 d/280524");
+        sleepList.addSleep("sleep add 4.2");
         sleepList.printSleepList();
         System.setOut(System.out);
         String expectedOutput = WHITESPACE + "New sleep record has been successfully added." + lineSeparator +
