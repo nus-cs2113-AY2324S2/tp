@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Timetable {
     public static final String[] DAYS = new String[]
-            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private Map<String, ArrayList<Task>> weeklyTasks; // Map to store tasks for each day
 
     public Timetable() {
@@ -81,27 +81,27 @@ public class Timetable {
         assert dayOfWeek != null : "Day of week cannot be null";
         assert newStartTime != null : "New start time cannot be null";
         assert newEndTime != null : "New end time cannot be null";
-        String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
-        ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
-        if (index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException("Invalid index");
-        }
-        Task task = tasks.get(index);
-        if(!task.getType().equals("f")){
-            throw new IllegalArgumentException("Task on " +dayOfWeek +" at index " + (index + 1) +" is not flexible, timings cannot be changed.");
+        Task task = readDay(dayOfWeek, index);
+        if (!task.getType().equals("f")) {
+            throw new IllegalArgumentException("Task on " + dayOfWeek + " at index " +
+                    (index + 1) + " is not flexible, timings cannot be changed.");
         }
         task.setStartTime(newStartTime);
         task.setEndTime(newEndTime);
     }
 
     public void changeTaskType(String dayOfWeek, int index, String newType) {
+        Task task = readDay(dayOfWeek, index);
+        task.setType(newType);
+    }
+
+    private Task readDay(String dayOfWeek, int index) {
         String capitalizedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
         ArrayList<Task> tasks = weeklyTasks.get(capitalizedDay);
         if (index < 0 || index >= tasks.size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-        Task task = tasks.get(index);
-        task.setType(newType);
+        return tasks.get(index);
     }
 
     /**

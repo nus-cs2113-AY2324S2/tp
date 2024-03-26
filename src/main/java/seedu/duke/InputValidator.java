@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.InvalidDayException;
+import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.exceptions.InvalidUserException;
+
 public class InputValidator {
     /**
      * Validates correctly formatted compare command. The expected format is
@@ -68,7 +72,7 @@ public class InputValidator {
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addUser format. " +
-                    "Expected format: addUser <desired user's name>");
+                    "Expected format: adduser <desired user's name>");
         }
     }
 
@@ -142,10 +146,12 @@ public class InputValidator {
         String startPattern = "\\d{1,2}:\\d{2}";
         String endPattern = "\\d{1,2}:\\d{2}";
         String suffix = "$";
-        String regex = prefix + dayPattern + "\\s+/index\\s+" + indexPattern + "\\s+/from\\s+" + startPattern + "\\s+/to\\s+" + endPattern + suffix;
+        String regex = prefix + dayPattern + "\\s+/index\\s+" + indexPattern + "\\s+/from\\s+" +
+                startPattern + "\\s+/to\\s+" + endPattern + suffix;
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid changeTaskTiming format. " +
-                    "Expected format: changeTaskTiming /on [day] /index [index] /from [new start time] /to [new end time]");
+                    "Expected format: changeTaskTiming /on [day] /index [index] /from [new start time] " +
+                    "/to [new end time]");
         }
     }
 
@@ -173,11 +179,13 @@ public class InputValidator {
         }
     }
     public static void validateAddRepeatTask(String input) throws InvalidFormatException{
-        String regex = "(?i)^addrepeattask\\s+/task\\s+(.+?)\\s+/on\\s+(\\w+(\\s+\\w+)*)\\s+/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})\\s+/type\\s+([fc])$";
+        String regex = "(?i)^addrepeattask\\s+/task\\s+(.+?)\\s+/on\\s+(\\w+(\\s+\\w+)*)\\s+" +
+                "/from\\s+(\\d{1,2}:\\d{2})\\s+/to\\s+(\\d{1,2}:\\d{2})\\s+/type\\s+([fc])$";
 
         if (!input.matches(regex)) {
             throw new InvalidFormatException("[ERROR] Invalid addRepeatTask format. " +
-                    "Expected format: addRepeatTask /task [description] /on [day(s)] /from [start time] /to [end time] /type [f/c]");
+                    "Expected format: addRepeatTask /task [description] /on [day(s)] /from [start time] " +
+                    "/to [end time] /type [f/c]");
         }
     }
 }
