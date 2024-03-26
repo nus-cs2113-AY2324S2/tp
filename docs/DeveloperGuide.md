@@ -12,18 +12,19 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Students and Working adults
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Users can use this app to keep track of their expenditures and therefore they can better manage their finances.
+Students can use this app to keep track of their GPA grade
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                     | So that I can ...|
+|---------|------|-----------------------------------|------------------|
+| v1.0    |student| focus on financial responsibility |view a breakdown of his expenditures by category|
+| v1.0    |user| find a to-do item by name         |locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
 
@@ -97,6 +98,15 @@ Calculates the total points achieved so far by multiplying the current GPA by th
 For each new module, add to the total points based on the grade and credits.
 #### Calculate Updated GPA: 
 Divide the total points by the new total credits (accumulated + new modules) to get the updated GPA.
+
+## Class: InvalidInputFormatException
+
+### InvalidInputFormatException()
+Throws an error message when the user enters an input that has the wrong format and the user will be informed about their wrong format
+
+### Usages 
+This exception is thrown in addExpenditure()
+
 
 ## Development Notes
 Input Validation: Ensure that GPA scores and credit numbers are within valid ranges. This module expects a GPA between 0 and 5, and non-negative numbers for credits.
