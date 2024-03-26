@@ -14,8 +14,7 @@ public class SellCommand extends Command{
     private final String itemName;
     private final int sellQuantity;
 
-    public SellCommand(ItemList itemList, String itemName, int sellQuantity) {
-        super(itemList);
+    public SellCommand(String itemName, int sellQuantity) {
         this.itemName = itemName;
         this.sellQuantity = sellQuantity;
 
@@ -27,8 +26,9 @@ public class SellCommand extends Command{
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.updateItemQuantity(itemName, sellQuantity, COMMAND);
+        hasToSave = true;
         return true;
     }
 }

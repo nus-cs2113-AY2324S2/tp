@@ -14,10 +14,10 @@ public class AddCommandTest {
     @Test
     void execute_item_oneItemInItemList() {
         ItemList itemList = new ItemList(new ArrayList<Item>());
-        AddCommand addCommand = new AddCommand(itemList, "testItem", "A test item", 2,
+        AddCommand addCommand = new AddCommand("testItem", "A test item", 2,
                 LocalDate.now(), 4.00, 5.00);
 
-        addCommand.execute();
+        addCommand.execute(itemList);
         assertEquals(1, itemList.getItemCount());
     }
 }

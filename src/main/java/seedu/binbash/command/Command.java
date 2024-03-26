@@ -7,9 +7,9 @@ public abstract class Command {
     protected ItemList itemList;
     protected Logger commandLogger;
     protected String executionUiOutput;
+    protected boolean hasToSave = false;
 
-    protected Command(ItemList itemList) {
-        this.itemList = itemList;
+    protected Command() {
         commandLogger = Logger.getLogger("CommandLogger");
     }
 
@@ -17,5 +17,9 @@ public abstract class Command {
         return executionUiOutput;
     }
 
-    public abstract boolean execute();
+    public boolean hasToSave() {
+        return hasToSave;
+    }
+
+    public abstract boolean execute(ItemList itemList);
 }

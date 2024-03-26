@@ -1,4 +1,4 @@
-package seedu.binbash;
+package seedu.binbash.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import seedu.binbash.ItemList;
 import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.DeleteCommand;
@@ -26,7 +27,7 @@ public class ParserTest {
     @BeforeEach
     public void setUp() {
         itemList = new ItemList(new ArrayList<>());
-        parser = new Parser(itemList);
+        parser = new Parser();
     }
 
     @Test
