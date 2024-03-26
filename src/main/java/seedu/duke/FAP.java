@@ -17,8 +17,9 @@ public class FAP {
     public static ModuleList moduleList = new ModuleList(10);
     public static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
 
+    public static JsonManager jsonManager = new JsonManager();
+
     public static void main(String[] args) {
-        JsonManager jsonManager = new JsonManager();
         try {
             printGreeting();
             assert moduleList != null : "moduleList should not be null";

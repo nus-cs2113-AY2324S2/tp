@@ -16,12 +16,17 @@ public class JsonManager {
     InputStreamReader reader;
     List<JsonObject> jsonArray;
 
+    String moduleDescription;
+
+    int moduleMC;
+
+    String moduleTitle;
+
     public JsonManager() {
 
         this.inputStream = this.getClass().getResourceAsStream("/moduleInfo.json");
         if (inputStream == null) {
             throw new RuntimeException("Cannot find resource file");
-            //System.out.println("Inputstream is null");
         }
 
         this.gson = new Gson();
@@ -33,20 +38,6 @@ public class JsonManager {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    public int getModuleInfo(String moduleCode) {
-        // Now, you can iterate through the array of objects just like before
-        for (JsonObject obj : jsonArray) {
-            // Process the object as needed; assuming there's a 'name' field
-            String name = obj.get("moduleCode").getAsString();  // Replace 'name' with actual field names
-            // If you want to match a specific module code, add an if check here
-            if (name.equals(moduleCode)) {
-                // Print out or process the module info
-                return obj.get("moduleCredit").getAsInt();
-            }
-        }
-        return 0;
     }
 
     public boolean moduleExist(String moduleCode) {
@@ -61,5 +52,32 @@ public class JsonManager {
             }
         }
         return false;
+    }
+
+    public void getModuleInfo(String moduleCode) {
+        // Now, you can iterate through the array of objects just like before
+        for (JsonObject obj : jsonArray) {
+            // Process the object as needed; assuming there's a 'name' field
+            String name = obj.get("moduleCode").getAsString();  // Replace 'name' with actual field names
+            // If you want to match a specific module code, add an if check here
+            if (name.equals(moduleCode)) {
+                // Print out or process the module info
+                this.moduleMC = obj.get("moduleCredit").getAsInt();
+                this.moduleDescription = obj.get("description").getAsString();
+                this.moduleTitle = obj.get("title").getAsString();
+            }
+        }
+    }
+
+    public String getModuleDescription() {
+        return moduleDescription;
+    }
+
+    public int getModuleMC() {
+        return moduleMC;
+    }
+
+    public String getModuleTitle() {
+        return moduleTitle;
     }
 }
