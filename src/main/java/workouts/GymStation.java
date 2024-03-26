@@ -86,11 +86,10 @@ public class GymStation {
      * Checks parameters from user input for adding a new GymStation.
      *
      * @param inputs List of strings representing user input.
-     * @return Array of strings representing the parameters required for a new GymStation.
      * @throws CustomExceptions.InsufficientInput If there is not enough parameters specified.
      * @throws CustomExceptions.InvalidInput      If there is invalid input.
      */
-    public static void AddGymStationInputValid(Gym gym, String inputs) throws
+    public static void addGymStationInputValid(Gym gym, String inputs) throws
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
@@ -124,7 +123,8 @@ public class GymStation {
 
         for (int i = 0; i < this.getNumberOfSets(); i++) {
             returnString.append(System.lineSeparator());
-            returnString.append(String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, i+1 , this.getSets().get(i).toString()));
+            returnString.append(String.format(WorkoutConstant.GYM_SET_INDEX_FORMAT, i+1 ,
+                    this.getSets().get(i).toString()));
         }
         return returnString.toString();
     }
@@ -172,7 +172,8 @@ public class GymStation {
         return repInteger;
     }
 
-    private static ArrayList<Integer> checkIfWeightsAreValid(String weights, int sets) throws CustomExceptions.InsufficientInput,
+    private static ArrayList<Integer> checkIfWeightsAreValid(String weights, int sets)
+            throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
         if(weights.isBlank()){
             throw new CustomExceptions.InsufficientInput(ErrorConstant.GYM_WEIGHT_BLANK_ERROR);
@@ -187,7 +188,8 @@ public class GymStation {
         return getValidatedWeightsArray(weightsArray);
     }
 
-    private static ArrayList<Integer> getValidatedWeightsArray(String[] weightsArray) throws CustomExceptions.InvalidInput {
+    private static ArrayList<Integer> getValidatedWeightsArray(String[] weightsArray)
+            throws CustomExceptions.InvalidInput {
         ArrayList<Integer> validatedWeightsArray = new ArrayList<>();
 
         try{

@@ -326,7 +326,7 @@ public class Handler {
 
                 Output.printGymStationPrompt(i + 1);
                 String userInput = in.nextLine();
-                GymStation.AddGymStationInputValid(gym, userInput);
+                GymStation.addGymStationInputValid(gym, userInput);
                 i++;
             } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
                 Output.printException(e.getMessage());

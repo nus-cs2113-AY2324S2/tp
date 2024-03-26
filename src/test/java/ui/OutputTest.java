@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,7 +14,6 @@ import utility.CustomExceptions;
 import utility.WorkoutConstant;
 import workouts.Gym;
 import workouts.Run;
-import workouts.Workout;
 import workouts.WorkoutList;
 import health.Bmi;
 import health.Period;
