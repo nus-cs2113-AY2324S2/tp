@@ -1,6 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.categories.Category;
 import budgetbuddy.exceptions.EmptyArgumentException;
 import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
 import budgetbuddy.exceptions.InvalidIndexException;
@@ -96,6 +97,9 @@ public class TransactionList {
 
         Transaction t = parser.parseTransaction(input, account);
         assert t != null : "Parsed transaction is null";
+        UserInterface.listCategories();
+        int category = UserInterface.getCategoryNum();
+        t.setCategory(Category.fromNumber(category));
         addTransaction(t);
         assert transactions.get(transactions.size() - 1) != null : "Added transaction is null after adding to the list";
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));
