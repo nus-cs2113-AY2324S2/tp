@@ -11,20 +11,20 @@
 
 ## Product scope
 ### Target user profile
-
-University students and Working adults
+NUS Students
 
 ### Value proposition
 
 Users can use this app to keep track of their expenditures and therefore they can better manage their finances.
-Students can use this app to keep track of their GPA grade
+Students can use this app to calculate their GPA grade
 
 ## User Stories
 
-| Version | As a ...                     | I want to ...                             | So that I can ...               |
-|---------|------------------------------|-------------------------------------------|---------------------------------|
-| v1.0    | financial student            | view a breakdown of expenditures by month | identify areas for cost-saving. |
-| v1.0    | student who wants to save up | know how much money I spent per year      | identify how to save up.        |
+| Version | As a ...                 | I want to ...                                 | So that I can ...                                    |
+|---------|--------------------------|-----------------------------------------------|------------------------------------------------------|
+| v1.0    | student                  | focus on financial responsibility             | view a breakdown of his expenditures by category     |
+| v1.0    | Proactive business major | calculate my course grades on CantVas         | see which mod I have to SU.                          |
+| v1.0    | careless user            | delete wrong items in the expenditure tracker | add back the correct item in the expenditure tracker |
 
 ## Non-Functional Requirements
 
@@ -46,6 +46,7 @@ An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 The Motivational module prints a randomly generated motivational quote for the user whenever the program starts 
 
 # Expenditure
+The expenditure module is comprehensive allows users to key in their expenses to enable them to store all their 
 
 ## Overview
 The expenditure module allows users to key in their expenses to enable them to store all their 
@@ -96,7 +97,8 @@ This class is responsible for processing expenditure related commands and storin
 Takes in the string input by the user and splits it into the respective parts. "userAdded" checks if the method is called by
 the user or called when reading from a storage file.
 
-------------------------------------------------------------------------------------------
+### deleteExpenditure(int index)
+Takes in an index and deletes the respective expenditure from the expenditure list.
 
 ### GPACommand: 
 Handles user interactions, input collection, and directs the flow of the GPA calculation process.
@@ -152,6 +154,18 @@ Throws an error message when the user enters an input that has the wrong format 
 ### Usages 
 This exception is thrown in addExpenditure()
 
+## Class: Storage
+Handles reading from and writing to the expenditure file.
+
+### Key Methods
+#### createNewFile(): 
+Creates a new expenditure file if it doesn't exist.
+#### readExpenditureFile(): 
+Reads expenditure data from the file and returns an ExpenditureList object containing the data.
+#### processLine(String line): 
+Processes a line read from the file and extracts expenditure information.
+#### writeToFile(ExpenditureList expenses): 
+Writes expenditure data from an ExpenditureList object to the file.
 
 ## Development Notes
 Input Validation: Ensure that GPA scores and credit numbers are within valid ranges. This module expects a GPA between 0 and 5, and non-negative numbers for credits.
@@ -164,9 +178,3 @@ GUI Integration: Consider developing a graphical user interface for easier input
 Persistent Data: Implement functionality to save and retrieve historical GPA calculations.
 
 Expanded Grade Scale: Allow for customization of the grade to GPA points mapping to accommodate different institutions' grading scales.
-
-
-
-
-
-
