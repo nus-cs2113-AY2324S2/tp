@@ -80,7 +80,8 @@ public class TypingGame implements MiniGame {
 
     private int calculateAccuracy() {
         int correctCharacters = 0;
-        for (int i = 0; i < Math.min(TEXT_TO_TYPE.length(), userInput[0].length()); i++) {
+        int typedLength = Math.min(TEXT_TO_TYPE.length(), userInput[0].length());
+        for (int i = 0; i < typedLength; i++) {
             if (TEXT_TO_TYPE.charAt(i) == userInput[0].charAt(i)) {
                 correctCharacters++;
             }
