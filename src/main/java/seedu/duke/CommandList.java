@@ -1,10 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.stats.MatchStat;
 import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public enum CommandList {
-    BYE, SHOOT, PENALTY
+
+    BYE, SHOOT, PENALTY, YES, NO
+
     //insert new user command name here
     ;
 
@@ -23,12 +26,13 @@ public enum CommandList {
                 "Illegal aiInput generated!";
         return userInput != aiInput;
     }
-
+  
     public static void executeShoot(String[] readArgumentTokens) {
         String selectedDirection = readArgumentTokens[0];
         int selectedDirectionIndex = Integer.parseInt(selectedDirection);
         boolean isScoreGoal = goalCheck(Ai.getAiDirection(), selectedDirectionIndex);
 
+        MatchStat.updateStat(true, isScoreGoal); //Need to update after save command.
         Formatter.printGoalAfterShot(isScoreGoal);
     }
 

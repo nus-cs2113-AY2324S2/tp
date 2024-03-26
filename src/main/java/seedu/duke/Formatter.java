@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.stats.MatchStat;
+
 import java.util.logging.Logger;
 
 public class Formatter {
@@ -51,10 +53,11 @@ public class Formatter {
      */
 
 
-    public static void printGoalBeforeShot(int roundCount) {
-        assert roundCount > 0 : "Round count should be greater than zero.";
-        logger.info("Round " + roundCount);
-        System.out.println("Round " + roundCount);
+    public static void printGoalBeforeShot() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
         System.out.println("_______________________________");
         System.out.println("|         |         |         |");
         System.out.println("|    0    |    1    |    2    |");
@@ -80,6 +83,17 @@ public class Formatter {
             System.out.println("  \\         \\         \\         \\");
             System.out.println("   \\         \\         \\         \\");
             System.out.println("no goal :((((");
+        }
+
+        System.out.println("Your score: " + MatchStat.getPlayerScore());
+        System.out.println("Opponent's score: " + MatchStat.getAiScore());
+    }
+
+    public static void printMatchResult() {
+        if (MatchStat.getIsPlayerWin()) {
+            System.out.println("Nice! You won this match! Wanna a new match?");
+        } else {
+            System.out.println("You lost this match. Wanna a new match?");
         }
     }
 

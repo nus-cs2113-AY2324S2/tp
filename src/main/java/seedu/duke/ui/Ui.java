@@ -1,9 +1,10 @@
 package seedu.duke.ui;
 
-import seedu.duke.CommandList;
-import seedu.duke.Formatter;
 import seedu.duke.Parser;
+import seedu.duke.Formatter;
+import seedu.duke.CommandList;
 import seedu.duke.SyntaxAnalyser;
+import seedu.duke.stats.MatchStat;
 
 import seedu.duke.exception.ProcessInputException;
 import seedu.duke.exception.ArgumentMismatchException;
@@ -15,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Ui {
-    public static int roundCount = 1;
     public static final Scanner IN = new Scanner(System.in);
     private static boolean isRunning = true;
     private static String userInput;
@@ -62,19 +62,30 @@ public class Ui {
     public static void executeCommand() {
         String readUserCommand = userCommandReader.getCommandName();
         String[] readArgumentTokens = userCommandReader.getArgumentTokens();
-
         CommandList selectedCommand = CommandList.valueOf(readUserCommand);
-
         switch (selectedCommand) {
         case BYE:
             CommandList.executeBye();
             break;
         case SHOOT:
             CommandList.executeShoot(readArgumentTokens);
-            roundCount++;
             break;
         case PENALTY:
             CommandList.executePenalty();
+            break;
+        case YES:
+            if (MatchStat.getIsMatchEnd()) {
+                MatchStat.updateForNewMatch();
+            } else {
+                Formatter.printErrorUnknown();
+            }
+            break;
+        case NO:
+            if (MatchStat.getIsMatchEnd()) {
+                CommandList.executeBye();
+            } else {
+                Formatter.printErrorUnknown();
+            }
             break;
             //insert new executable command here
         default:
