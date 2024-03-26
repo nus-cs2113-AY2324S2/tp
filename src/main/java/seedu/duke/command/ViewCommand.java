@@ -31,7 +31,7 @@ public class ViewCommand extends Command{
                 System.out.println("Taken modules: ");
                 printModuleList(moduleList.getTakenModuleList());
                 System.out.println("Planned modules: ");
-                printModuleList(moduleList.getToBeTakenModuleList());
+                //printModuleList(moduleList.getToBeTakenModuleList());
                 break;
             case "taken":
                 System.out.println("Taken modules: ");
@@ -39,7 +39,7 @@ public class ViewCommand extends Command{
                 break;
             case "plan":
                 System.out.println("Planned modules: ");
-                printModuleList(moduleList.getToBeTakenModuleList());
+                //printModuleList(moduleList.getToBeTakenModuleList());
                 break;
             default:
                 System.out.println("Invalid mode.");
