@@ -11,11 +11,9 @@ import static seedu.duke.FAP.LOGGER;
 
 public class ModuleList {
     protected ArrayList<Module> takenModuleList;
-    protected ArrayList<Module> toBeTakenModuleList;
 
     public ModuleList(int size) {
         this.takenModuleList = new ArrayList<Module>(size);
-        this.toBeTakenModuleList = new ArrayList<Module>(size);
     }
 
     public Module getModule(String courseCode) throws ModuleNotFoundException {
@@ -29,11 +27,6 @@ public class ModuleList {
                 return module;
             }
         }
-        for (Module module : toBeTakenModuleList) {
-            if (module.getModuleCode().equals(courseCode)) {
-                return module;
-            }
-        }
         throw new ModuleNotFoundException("Module " + courseCode + " not found!");
     }
 
@@ -41,33 +34,22 @@ public class ModuleList {
         return takenModuleList;
     }
 
-    public ArrayList<Module> getToBeTakenModuleList() {
-        return toBeTakenModuleList;
-    }
-
     public void addModule(Module module) {
         if (module == null) {
             throw new IllegalArgumentException("Module cannot be null.");
         }
-        if (module.getModuleStatus()) {
-            takenModuleList.add(module);
-        } else {
-            toBeTakenModuleList.add(module);
-        }
+        takenModuleList.add(module);
     }
 
     public void printModules() {
         for (Module module:takenModuleList) {
             System.out.println(module.getModuleCode());
         }
-        for (Module module:toBeTakenModuleList) {
-            System.out.println(module.getModuleCode());
-        }
     }
     public void removeModule(Module module) {
         assert module != null : "Module cannot be null";
         // The remove operation returns false if the item was not found
-        boolean removed = toBeTakenModuleList.remove(module) || takenModuleList.remove(module);
+        boolean removed = takenModuleList.remove(module);
         if (!removed) {
             System.out.println("Module not found in either list.");
         }
