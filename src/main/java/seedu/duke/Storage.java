@@ -18,7 +18,8 @@ public class Storage {
 
     private static final String boxOutlineForWednesday = "+-------------+\n";
     private static final String boxOutlineForFriday = "+------+\n";
-    private static final String lineSeparator = ".................................................................................................\n";
+    private static final String lineSeparator =
+            ".................................................................................................\n";
 
     public Storage(String filePath) {
         Storage.filePath = filePath;
@@ -79,6 +80,7 @@ public class Storage {
             user.getTimetable().getWeeklyTasks().get(day).add(extractTaskInfo(line, day));
         }
     }
+
     public static void addUserInFolder() {
         File f = new File(filePath);
         String day = "";
@@ -99,7 +101,7 @@ public class Storage {
      * Extracts task information from the local text file.
      *
      * @param line the current line in the file.
-     * @param day the day of the week.
+     * @param day  the day of the week.
      * @return a Task object represented by this line.
      */
     public static Task extractTaskInfo(String line, String day) {
@@ -115,12 +117,12 @@ public class Storage {
     /**
      * Writes the text to data file
      *
-     * @param filePath a relative path giving the location of the data file, relative to the current working directory.
+     * @param filePath  a relative path giving the location of the data file, relative to the current working directory.
      * @param textToAdd text to write to the file.
-     * @param isAppend whether to append the text or overwrite the whole file.
+     * @param isAppend  whether to append the text or overwrite the whole file.
      * @throws IOException If there is something wrong.
      */
-    public static void writeToFile(String filePath, String textToAdd, boolean isAppend) throws IOException{
+    public static void writeToFile(String filePath, String textToAdd, boolean isAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, isAppend);
         fw.write(textToAdd);
         fw.close();
@@ -128,6 +130,7 @@ public class Storage {
 
     /**
      * Adds task in file.
+     *
      * @param user the user that the timetable belongs to.
      */
 
@@ -158,7 +161,8 @@ public class Storage {
                 } else {
                     int taskCount = 1;
                     for (Task task : timetable.getWeeklyTasks().get(day)) {
-                        writer.write(taskCount + ". " + task.getStartTime() + " - " + task.getEndTime() + ": " + task.getDescription() + " (type: " + task.getType() + ")" + "\n");
+                        writer.write(taskCount + ". " + task.getStartTime() + " - " + task.getEndTime() +
+                                ": " + task.getDescription() + " (type: " + task.getType() + ")" + "\n");
                         taskCount += 1;
                     }
                 }
