@@ -104,6 +104,8 @@ public class WorkoutManager extends ActivityManager {
         assert !workoutName.isEmpty(): "Workout name cannot be empty";
         if (workoutName.isEmpty()) {
             throw new Exceptions.InvalidInput("Workout name cannot be empty");
+        } else if (workoutName.matches(".*[{}\\[\\]/\\\\:,#\\-].*")) {
+            throw new Exceptions.InvalidInput("Workout name cannot contain special characters: { } [ ] / \\ : , # -");
         }
         return new Workout(parser.getActionParameter());
     }

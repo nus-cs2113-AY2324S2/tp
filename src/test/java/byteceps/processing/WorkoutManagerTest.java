@@ -112,7 +112,7 @@ class WorkoutManagerTest {
 
     @Test
     public void execute_unassignExerciseFromWorkout_success() {
-        String exerciseInput = "exercise /add Push-ups";
+        String exerciseInput = "exercise /add Pushups";
         parser.parseInput(exerciseInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
@@ -120,11 +120,11 @@ class WorkoutManagerTest {
         parser.parseInput(workoutInput);
         assertDoesNotThrow(() -> workoutManager.execute(parser));
 
-        String assignInput = "workout /assign Push-ups /to ChestDay";
+        String assignInput = "workout /assign Pushups /to ChestDay";
         parser.parseInput(assignInput);
         assertDoesNotThrow(() -> workoutManager.execute(parser));
 
-        String unassignInput = "workout /unassign Push-ups /from ChestDay";
+        String unassignInput = "workout /unassign Pushups /from ChestDay";
         parser.parseInput(unassignInput);
         assertDoesNotThrow(() -> workoutManager.execute(parser));
     }
