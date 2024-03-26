@@ -39,7 +39,7 @@ public class Ui {
 
     public void helpMessage() {
         System.out.println(
-            "To take a look at potential restaurants or activities, simply send me the following: \n" +
+            "To take a look at potential restaurants, activities, or gifts simply send me the following: \n" +
             "'list'\n\n" +
             "To let me know more about yourself, simply send me the following: \n" +
             "'me'\n\n" +
