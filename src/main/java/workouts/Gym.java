@@ -175,7 +175,7 @@ public class Gym extends Workout {
 
         // If it is first iteration, includes dashes for irrelevant field
         if (index == 0){
-            return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+            return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
                     WorkoutConstant.GYM, gymDate,
                     UiConstant.DASH,
                     UiConstant.DASH,
@@ -186,7 +186,7 @@ public class Gym extends Workout {
                     gymWeightString);
         } else {
             // if it is not, then leave it blank
-            return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+            return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
                     UiConstant.EMPTY_STRING,
                     UiConstant.EMPTY_STRING,
                     UiConstant.EMPTY_STRING,

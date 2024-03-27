@@ -1,14 +1,7 @@
 package ui;
 
-<<<<<<< HEAD
-import utility.CustomExceptions;
-import utility.Filters;
-import utility.UiConstant;
-import utility.WorkoutConstant;
-import utility.HealthConstant;
-=======
 import utility.*;
->>>>>>> 2564af23371b457b1268ff42c591da7ff80b7a70
+
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
@@ -153,16 +146,15 @@ public class Output {
      */
     protected static void printWorkoutHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Showing all workouts (runs and gyms):");
-        System.out.println(String.format(WorkoutConstant.HISTORY_ALL_HEADER_FORMAT, "Index",
-                "Type", "Date" , "Distance" , "Duration" , "Pace", "Station", "Sets" , "Reps" , "Weights"));
+        System.out.println(WorkoutConstant.HISTORY_WORKOUTS_HEADER);
+        System.out.println(WorkoutConstant.HISTORY_WORKOUTS_HEADER_FORMAT);
 
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.ALL);
         for(int i = 0; i < workoutList.size(); i++){
             Workout workout = workoutList.get(i);
             if (workout instanceof Run) {
                 Run run = (Run) workout;
-                System.out.println(String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                System.out.println(String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
                         (i + 1),run.getFormatForAllHistory()));
             } else {
                 Gym gym = (Gym) workout;
@@ -170,11 +162,11 @@ public class Output {
                 for(int j = 0; j < numberOfStation; j++){
                     String gymString;
                     if(j == 0){
-                        gymString = String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                        gymString = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
                                 (i+1), gym.getHistoryFormatForSpecificGymStation(j));
                     }
                     else{
-                        gymString = String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                        gymString = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
                                 "", gym.getHistoryFormatForSpecificGymStation(j));
                     }
                     System.out.println(gymString);

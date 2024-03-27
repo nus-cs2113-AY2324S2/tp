@@ -26,9 +26,12 @@ public class WorkoutConstant {
 
 
     // HISTORY (ALL WORKOUTS) CONSTANTS
-    public static final String HISTORY_ALL_DATA_FORMAT = "%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s";
-    public static final String HISTORY_ALL_HEADER_FORMAT = "%6s\t%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s";
-    public static final String HISTORY_ALL_DATA_HEADER_FORMAT = "%-6s\t%s";
+    public static final String HISTORY_WORKOUTS_HEADER = "Showing all workouts (runs and gyms):";
+    public static final String HISTORY_WORKOUTS_DATA_FORMAT = "%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s";
+    public static final String HISTORY_WORKOUTS_HEADER_FORMAT = String.format(
+            "%6s\t%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s", "Index",
+                    "Type", "Date" , "Distance" , "Duration" , "Pace", "Station", "Sets" , "Reps" , "Weights");
+    public static final String HISTORY_WORKOUTS_DATA_HEADER_FORMAT = "%-6s\t%s";
 
     // Formatted Strings/Messages
     public static final String RUN_DATA_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";

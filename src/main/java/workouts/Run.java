@@ -316,7 +316,7 @@ public class Run extends Workout {
         } else {
             printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
         }
-        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+        return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
                 WorkoutConstant.RUN,
                 printedDate,
                 getDistance(),
