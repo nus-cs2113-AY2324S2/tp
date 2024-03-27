@@ -25,21 +25,33 @@ The following diagram provides a rough overview of how BudgetBuddy is built
 ![Diagram of overview of BudgetBuddy](diagrams/Introduction.jpg)
 
 `BudgetBuddy` is the main class of the application and directly interacts with the user, passing along the input
-into the Parser. The `Parser` creates a `Command` object depending on the user's input, which will be executed in
-`BudgetBuddy`. The `Command` object utilizes methods and the class present in the `Application Classes`, which will 
-be explained in more detail in the following sections.
+into the Parser. The `Parser` creates a `CommandCreator` object depending on the user's input. The `CommandCreator`
+object then creates the `Command` object. This `Command` will be executed in `BudgetBuddy`. The `Command` object 
+utilizes methods and the class present in the `Application Classes`, which will be explained in more 
+detail in the following sections.
 
 #### 3.2 Parser Class
-Make Class Diagram + Explanation
+The main functionality of the Parser Class is to determine the type of `CommandCreator` object to initialize, and
+return the created `Command` object created by the `CommandCreator` back to `BudgetBuddy`
 
 #### 3.3 Ui Class
-Make Class Diagram + Explanation
+The Ui Class is used to print certain elements to the CLI. In particular, it consists of the Welcome Message,
+Goodbye Message, Divider Lines and all the corresponding commands' command format.
+
+#### 3.5 CommandCreator Class
+The CommandCreator class contains multiple subclasses, which corresponding to a specific function of the application.
+Within the CommandCreator classes, it handles making sense of the user input, obtaining the relevant parameters to be
+used in the created `Command` class.
 
 #### 3.4 Command Class
-Make Class Diagram + Explanation
+The Command class, similar to the CommandCreator class, contains multiple subclasses, all corresponding to a specific
+function of the application. In this case, each CommandCreator class would be associated to their relevant Commands.
+Here is a table of all CommandCreator class and the Commands that they can create.
+
+"Insert Table Here"
 
 #### 3.5 Storage Class
-Make Class Diagram + Explanation
+The Storage Class handles the loading and saving of the Expenses and Savings in BudgetBuddy.
 
 ### 3.6 Application Classes
 The classes present in this group of `Application Classes` refers to certain elements which serves a purpose more
@@ -47,20 +59,41 @@ towards the `user` instead of application itself. They represent data of the use
 including expenses and savings, along with mechanisms for organizing and managing this data in meaningful ways.
 
 ##### 3.6.1 Transaction
-Explain what it does
+This is an abstract class, which is the superclass for both the Expense and Saving Classes. It contains common variables
+such as Currency, Category and Amount.
 
 ##### 3.6.2 Expense
-Explain what it does
+This class holds details regarding an expense a user has. Within this class, it has 4 class-level variables :
+`String category`, `LocalDate dateAdded` , `String description` and `Double amount`. The variables and their relevance
+are as follows : 
+
 
 ##### 3.6.3 ExpenseList
-Explain what it does
+This class represents a list of expenses. Within this class, it has 2 class-level variables :
+`ArrayList<Expense> expenses` and `ArrayList<String> categories`, The variables and there relevance are as follows :
+
+This class also contains the methods to handle any user interactions with the list of expenses. The methods and a 
+brief explanation on their functionality is as follows :
 
 ##### 3.6.4 Saving
-Explain what it does
+This class holds details regarding a saving a user has. Within this class, it has 3 class-level variables :
+`String category`, `LocalDate dateAdded`, `Double amount`. The variables and their relevance
+are as follows :
 
 ##### 3.6.5 SavingList
+This class represents a list of savings. Within this class, it has 2 class-level variables :
+`ArrayList<Saving> expenses` and `ArrayList<String> categories`, The variables and there relevance are as follows :
 
-### 4. Implementation
+This class also contains the methods to handle any user interactions with the list of savings. The methods and a
+brief explanation on their functionality is as follows :
+
+##### 3.6.6 RecurringExpenseList
+Explain what it does
+
+##### 3.6.7 RecurringExpensesList
+Explain what it does
+
+## 4. Implementation
 
 ## 5. Product scope
 
