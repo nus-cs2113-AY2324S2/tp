@@ -1,0 +1,34 @@
+@startuml
+class FAP {
+    - static moduleList: ModuleList
+    - static LOGGER: Logger
+    + static main(args: String[]): void
+    - static runApplication(): void
+}
+
+class ModuleList {
+    - maxSize: int
+}
+
+class Ui {
+    + printGreeting(): void
+    + getUserCommand(): String
+}
+
+class Parser {
+    + static getCommand(userInput: String): Command
+}
+
+class Command {
+    + execute(userInput: String): void
+}
+
+FAP .down.> ModuleList : uses
+FAP .right.> Logger : uses
+FAP .down.> Ui : uses
+Ui --> FAP : calls\nstatic methods
+FAP .down.> Parser : uses
+Parser --> Command : returns
+FAP ..> Command : uses
+
+@enduml
