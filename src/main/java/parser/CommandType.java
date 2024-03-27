@@ -6,5 +6,6 @@ public enum CommandType {
     HELP,
     ADD,
     DEL,
-    EDIT
+    EDIT,
+    FIND
 }

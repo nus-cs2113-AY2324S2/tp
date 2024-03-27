@@ -4,12 +4,14 @@ public class Item {
     public static int numberOfItems;
     private final String itemName;
     private int quantity;
-    private String uom;
-    private String category;
+    private final String uom;
+    private final String category;
+    private int buyPrice;
+    private int sellPrice;
     private boolean isOOS;
 
 
-    public Item(String name, int quantity, String uom, String category) {
+    public Item(String name, int quantity, String uom, String category, int buyPrice, int sellPrice) {
         this.itemName = name;
         this.quantity = quantity;
         this.uom = uom;
@@ -18,6 +20,8 @@ public class Item {
         } else {
             this.category = category;
         }
+        this.buyPrice = buyPrice;
+        this.sellPrice = sellPrice;
         if (quantity == 0) {
             this.isOOS = true;
         } else {
@@ -48,6 +52,13 @@ public class Item {
         this.quantity = newQuantity;
     }
 
+    public int getBuyPrice() {
+        return buyPrice;
+    }
+    public int getSellPrice() {
+        return sellPrice;
+    }
+
     public void markOOS() {
         this.isOOS = true;
     }
@@ -58,6 +69,7 @@ public class Item {
 
     public String toString() {
         String categoryString = (getCategory() != null) ? " to " + getCategory() : ""; // Check if category is null
-        return (getItemName() + " (Qty " + getQuantity() + " " + getUom() + ")" + categoryString);
+        return (getItemName() + " (Qty " + getQuantity() + getUom() +
+                ", Buy: $" + getBuyPrice() + ", Sell: $" + getSellPrice() + ")" + categoryString);
     }
 }

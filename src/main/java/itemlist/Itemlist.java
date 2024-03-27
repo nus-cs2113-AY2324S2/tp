@@ -25,6 +25,14 @@ public class Itemlist {
         }
     }
 
+    public static boolean itemIsExist(String itemName) {
+        for (Item item : Itemlist.getItems()) {
+            if (item.getItemName().toLowerCase().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static ArrayList<Item> getItems() {
         return items;
     }
