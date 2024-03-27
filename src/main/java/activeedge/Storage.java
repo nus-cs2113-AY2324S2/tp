@@ -83,20 +83,7 @@ public class Storage {
             System.out.println("An error occurred while saving tasks to file: " + e.getMessage());
         }
     }
-
-    public static boolean hasHeightAndWeightInFile(String filePath) {
-        try (Scanner scanner = new Scanner(new File(filePath))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (line.startsWith("Height") || line.startsWith("Weight")) {
-                    return true; // Height or weight information found in the file
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); // Handle file not found exception
-        }
-        return false; // Height and weight information not found in the file
-    }
+    
 
     /**
      * Fetches and loads data from a specified data file into the application's memory.
