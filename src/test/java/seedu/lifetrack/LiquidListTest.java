@@ -4,7 +4,6 @@ package seedu.lifetrack;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.lifetrack.ui.LiquidListUI.WHITESPACE;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 

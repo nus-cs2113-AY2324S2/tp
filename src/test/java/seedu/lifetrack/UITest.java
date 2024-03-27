@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.ui.Ui;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.user.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -31,8 +32,9 @@ public class UITest {
     public void handleUserInput_inputBye_printByeMessage() {
         CalorieList calorieList = new CalorieList();
         LiquidList liquidList = new LiquidList();
+        User user = new User();
         String input = "bye";
-        Ui.handleUserInput(input, calorieList, liquidList);
+        Ui.handleUserInput(input, calorieList, liquidList,user);
         assertEquals("", outContent.toString());
     }
 }

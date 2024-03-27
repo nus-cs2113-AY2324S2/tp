@@ -2,6 +2,7 @@ package seedu.lifetrack.ui;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.user.User;
 
 import java.util.Scanner;
 
@@ -29,20 +30,22 @@ public class Ui {
 
     /**
      * Reads in the input from the user
+     *
      * @param calorieList list containing all entries pertinent to calories
-     * @param liquidList list containing all entries pertinent to liquids
+     * @param liquidList  list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, LiquidList liquidList) {
+    public static void readUserInput(CalorieList calorieList, LiquidList liquidList, User user) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList, liquidList);
+            handleUserInput(line, calorieList, liquidList, user);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
     /**
-     * handles input from the user 
-     * @param line input from the user
+     * handles input from the user
+     *
+     * @param line        input from the user
      * @param calorieList list containing all entries pertinent to calories
      */
     public static void handleCaloriesInput(String line, CalorieList calorieList) {
@@ -71,7 +74,7 @@ public class Ui {
         }
     }
 
-    public static void handleUserInput(String line, CalorieList calorieList, LiquidList liquidList) {
+    public static void handleUserInput(String line, CalorieList calorieList, LiquidList liquidList, User user) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
@@ -83,10 +86,20 @@ public class Ui {
                 showHelp();
             } else if (line.startsWith("liquids")) {
                 handleLiquidsInput(line, liquidList);
+            } else if (line.startsWith("user")) {
+                handleUserCommands(line, user);
             } else {
                 handleUnknownInput();
             }
             printLine();
+        }
+    }
+
+    public static void handleUserCommands(String line, User user) {
+        if (line.contains("setup")) {
+            user.setUp(line);
+        } else if (line.contains("progress")) {
+            user.getHealthInfo();
         }
     }
 
