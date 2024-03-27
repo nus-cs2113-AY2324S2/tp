@@ -37,12 +37,12 @@ public class ParserLiquid {
             throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationIncorrectOrderMessage());
         }
 
-
         // splits string according to b/ and v/ keywords
         String[] parts = input.split("b/|v/");
-        // parts length less than 3 means that not all split keywords were keyed in
+
+        //ensures that v/DESCRIPTION is not empty
         if (parts.length < 3) {
-            throw new InvalidInputException("Please ensure that you have keyed in the correct format!");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationEmptyDescriptionMessage());
         }
 
         // extracts beverage name and quantity portion from input
@@ -51,7 +51,7 @@ public class ParserLiquid {
 
         // ensures that both inputs are not empty
         if (beverageName.isEmpty() || strVolume.isEmpty()) {
-            throw new InvalidInputException("Please ensure that you have keyed in the correct format!");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationEmptyDescriptionMessage());
         }
 
         int volume;

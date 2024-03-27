@@ -138,4 +138,27 @@ public class ParserLiquidTest {
 
         }
     }
+
+    @Test
+    public void parseLiquidInput_emptyBeverageName_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/   v/1000");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
+    @Test
+    public void parseLiquidInput_emptyVolumeDescription_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/Milo v/   ");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
 }

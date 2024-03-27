@@ -49,4 +49,9 @@ public class InvalidInputExceptionMessage {
         String message = "\t Please ensure that you have keyed the input in the correct order!\n";
         return HEADER + message + HYDRATION_IN_INPUT;
     }
+
+    public static String getHydrationEmptyDescriptionMessage() {
+        String message = "\t Please ensure that beverage and volume is not empty!\n";
+        return HEADER + message + HYDRATION_IN_INPUT;
+    }
 }
