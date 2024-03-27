@@ -1,1 +1,19 @@
-
+Welcome to BookMarked, a one-stop app for all your librarian needs!
+Type /help to see a list of commands!
+Successfully create a storage file for books
+These are the current available features and the format that you need
+to follow to use it in using this software:
+1. To add books
+   add NAME_OF_BOOK
+2. To delete current existing book
+   delete NUMBER_ACCORDING_TO_LIST
+3. To mark book as borrowed
+   borrow NAME_OF_BOOK
+4. To unmark book as returned
+   return NAME_OF_BOOK
+5. To list all the books added
+   list
+6. To list all the books added in alphabetical order
+   list alphabetical
+__________
+Bye!
