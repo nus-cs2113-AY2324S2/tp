@@ -24,3 +24,5 @@ text-ui-test/data/*
 # Data files
 /data/
 /data/*
+/logs/
+/logs/*
