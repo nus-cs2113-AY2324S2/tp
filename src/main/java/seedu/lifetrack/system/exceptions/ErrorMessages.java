@@ -22,4 +22,11 @@ public class ErrorMessages {
     public static String getIncorrectMacrosInputMessage() {
         return "\t Please input only positive integers into the macronutrients field!";
     }
+
+    public static String getIncorrectSleepInputMessage() {
+        return "\t Please input only positive real number into the sleep duration field!";
+    }
+    public static String getIncorrectSleepDateInputMessage() {
+        return "\t Error: Date must be in DDMMYY format.!";
+    }
 }

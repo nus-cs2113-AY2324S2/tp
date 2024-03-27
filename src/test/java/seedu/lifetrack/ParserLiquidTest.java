@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.*;
-import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
 import static seedu.lifetrack.system.parser.ParserLiquid.parseLiquidInput;
 
 public class ParserLiquidTest {
@@ -20,9 +18,10 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
@@ -35,9 +34,10 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
@@ -50,9 +50,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -65,18 +65,25 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
     @Test
     public void parseLiquidInput_inputWrongOrderVolumeBeforeBeverage_invalidInputExceptionThrown() {
+        // setup test
+        String invalidInput = "liquids in v/1000 b/milo";
+
+        // Call methods to test
         try {
-            parseCaloriesInput("hydration add milo date/202232 v/123");
+            parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals(getIncorrectOrderMessage(), e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have keyed the input in the correct order!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -89,8 +96,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -103,8 +111,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -112,9 +121,11 @@ public class ParserLiquidTest {
     @Test
     public void parseLiquidInput_missingKeywords_exceptionThrown() {
         try {
-            parseCaloriesInput("hydration add milo");
+            parseLiquidInput("liquids in");
         } catch (InvalidInputException e) {
-            assertEquals(getHydrationMissingKeywordsMessage(), e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -123,9 +134,33 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput("liquids in b/Milo");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_emptyBeverageName_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/   v/1000");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
+    @Test
+    public void parseLiquidInput_emptyVolumeDescription_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/Milo v/   ");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 }
