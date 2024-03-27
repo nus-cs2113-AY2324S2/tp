@@ -1,7 +1,6 @@
 package seedu.voyagers.commands;
 
 import seedu.voyagers.classes.Bill;
-import seedu.voyagers.classes.Trip;
 import seedu.voyagers.classes.TripList;
 import seedu.voyagers.utils.Storage;
 import seedu.voyagers.utils.Ui;
