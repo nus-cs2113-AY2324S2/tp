@@ -5,6 +5,8 @@ import command.CommandFactory;
 import exception.CommandInputException;
 import exception.JobSelectException;
 import exception.NameInputException;
+import file.Loader;
+import file.Saver;
 import player.PlayerProfile;
 import ui.Parser;
 import ui.ResponseManager;
@@ -21,25 +23,32 @@ public class EconoCraftLogic {
     }
 
     public static EconoCraftLogic initializeGame() {
-        ResponseManager.printGameInit();
-        String playerName = "";
-        String jobType = "";
-        try {
-            playerName = getName();
-        } catch (NoSuchElementException e) {
-            ResponseManager.printGoodbye();
-            System.exit(0);
+        PlayerProfile playerProfile;
+        playerProfile = Loader.loadProfile();
+
+        if (playerProfile == null) {
+            ResponseManager.printGameInit();
+            String playerName = "";
+            String jobType = "";
+            try {
+                playerName = getName();
+            } catch (NoSuchElementException e) {
+                ResponseManager.printGoodbye();
+                System.exit(0);
+            }
+
+            ResponseManager.printJobSelect();
+            try {
+                jobType = getJob();
+            } catch (NoSuchElementException e) {
+                ResponseManager.printGoodbye();
+                System.exit(0);
+            }
+
+            playerProfile = new PlayerProfile(playerName, jobType);
         }
 
-        ResponseManager.printJobSelect();
-        try {
-            jobType = getJob();
-        } catch (NoSuchElementException e) {
-            ResponseManager.printGoodbye();
-            System.exit(0);
-        }
-
-        PlayerProfile playerProfile = new PlayerProfile(playerName, jobType);
+        Saver.saveProfile(playerProfile);
         ResponseManager.printWelcome(playerProfile);
         return new EconoCraftLogic(playerProfile);
 
@@ -77,6 +86,7 @@ public class EconoCraftLogic {
             try {
                 Command command = CommandFactory.create(userInput.nextLine());
                 command.execute(playerProfile);
+                Saver.saveProfile(playerProfile);
                 exitFlag = command.isExit();
             } catch (CommandInputException error) {
                 ResponseManager.indentPrint(error.getMessage());
