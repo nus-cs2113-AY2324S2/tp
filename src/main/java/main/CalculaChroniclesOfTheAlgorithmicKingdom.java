@@ -21,12 +21,13 @@ import java.util.Scanner;
 public class CalculaChroniclesOfTheAlgorithmicKingdom {
     public static int currentOn;
     public static ArrayList<AMap> storedMaps = new ArrayList<>();
+
     public static void main(String[] args) {
         new CalculaChroniclesOfTheAlgorithmicKingdom().startGame();
     }
 
     public void startGame() {
-        Scanner in  = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
         PlayerStatus playerStatus = new PlayerStatus(100, 0, 0);
         TextBox textBox = new TextBox();
@@ -47,22 +48,20 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
         ui.printTextBox(textBox);
 
         Command userCommand;
-        while (true) {
+        do {
             String userCommandText = in.nextLine();
 
             userCommand = parser.parseCommand(userCommandText);
             setUserCommand(userCommand, storedMaps.get(currentOn), playerStatus, textBox);
 
-            if (!(storedMaps.get(currentOn) instanceof FirstMap) && userCommand instanceof MapMoveCommand) {
-                System.out.println("Invalid Command");
-
-            } else if (userCommand.getCommandDescription().equals("FIGHT!")){
+            if (userCommand.getCommandDescription().equals("FIGHT!")) {
                 userCommand.execute(in);
             } else {
                 userCommand.execute();
             }
 
-            if (!userCommand.getCommandDescription().equals("HelpMe!!")) {
+            if (!userCommand.getCommandDescription().equals("HelpMe!!") &&
+                    !userCommand.getCommandDescription().equals("TIRED")) {
                 ui.printPlayerStatus(playerStatus);
                 if (storedMaps.get(currentOn) instanceof BattleInterface) {
                     ui.printEnemy(storedMaps.get(currentOn));
@@ -72,7 +71,7 @@ public class CalculaChroniclesOfTheAlgorithmicKingdom {
                 ui.printTextBox(textBox);
             }
 
-        }
+        } while (!userCommand.getCommandDescription().equals("TIRED"));
     }
 
     private static void setUserCommand(Command userCommand, AMap map, PlayerStatus playerStatus, TextBox textBox) {

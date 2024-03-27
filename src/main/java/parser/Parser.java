@@ -1,22 +1,18 @@
 package parser;
 
 import command.*;
-import command.exception.IllegalCommandException;
 import command.fight.FightingCommand;
 import command.fight.RunningCommand;
 import command.mapmove.*;
 
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static main.CalculaChroniclesOfTheAlgorithmicKingdom.*;
+
 public class Parser {
 
-    boolean isInInteractionScreen;
-
-    public Parser() {
-        this.isInInteractionScreen = false;
-    }
+    private static final int FIRST_MAP = 0;
 
     public CommandType analyseCommand(String userCommand) {
         Pattern pattern;
@@ -24,84 +20,52 @@ public class Parser {
         for (CommandType commandType : CommandType.values()) {
             pattern = Pattern.compile(commandType.getRegExpression());
             matcher = pattern.matcher(userCommand);
-            if(matcher.matches()){
+            if (matcher.matches()) {
                 return commandType;
             }
         }
         return CommandType.ERROR;
     }
 
-    public Command fightCommandParser(CommandType commandType, String userCommand) {
-        Command command;
-
-        switch (commandType) {
-        case FIGHT:
-            isInInteractionScreen = false;
-            command = new FightingCommand();
-            break;
-        case RUN:
-            isInInteractionScreen = false;
-            command = new RunningCommand();
-            break;
-        case QUIT:
-            command = new QuitCommand();
-            break;
-        case ERROR:
-            command = new ErrorCommand(new IllegalCommandException("That's not a valid command.\n\n\nWill you [fight] or will you [run]?"));
-            break;
-        default:
-            command = null;
-        }
-        return command;
-    }
-
     public Command parseCommand(String userCommand) {
         Command command;
         CommandType commandType = analyseCommand(userCommand);
 
-        if (isInInteractionScreen) {
-            return fightCommandParser(commandType, userCommand);
-        }
-
-        switch (commandType){
+        switch (commandType) {
         case FIGHT:
+            command = (currentOn != FIRST_MAP) ? new FightingCommand() : new ErrorCommand();
+            break;
         case RUN:
-            command = new ErrorCommand(new IllegalCommandException("You can't do this here\n\n\n"));
+            command = (currentOn != FIRST_MAP) ? new RunningCommand() : new ErrorCommand();
             break;
         case MOVE_FORWARD:
-            command = new MovingForwardCommand(userCommand);
+            command = (currentOn == FIRST_MAP) ? new MovingForwardCommand(userCommand) : new ErrorCommand();
             break;
         case MOVE_DOWNWARD:
-            command = new MovingDownwardCommand(userCommand);
+            command = (currentOn == FIRST_MAP) ? new MovingDownwardCommand(userCommand) : new ErrorCommand();
             break;
         case MOVE_LEFT:
-            command = new MovingLeftCommand(userCommand);
+            command = (currentOn == FIRST_MAP) ? new MovingLeftCommand(userCommand) : new ErrorCommand();
             break;
         case MOVE_RIGHT:
-            command = new MovingRightCommand(userCommand);
+            command = (currentOn == FIRST_MAP) ? new MovingRightCommand(userCommand) : new ErrorCommand();
             break;
         case QUIT:
             command = new QuitCommand();
             break;
         case INTERACT:
-            isInInteractionScreen = true;
-            command = new InteractingCommand();
+            command = (currentOn == FIRST_MAP) ? new InteractingCommand() : new ErrorCommand();
             break;
         case HELP:
             command = new HelpCommand();
             break;
+        case ERROR:
+            command = new ErrorCommand();
+            break;
         default:
-            command = new ErrorCommand(new IllegalCommandException("That's not a valid command.\n\n\nEnter 'h' or 'help' to find the list of commands."));
+            command = new ErrorCommand();
         }
         return command;
-    }
-
-    public boolean isInInteractionScreen() {
-        return isInInteractionScreen;
-    }
-
-    public void setInInteractionScreen(boolean inInteractionScreen) {
-        this.isInInteractionScreen = inInteractionScreen;
     }
 
 }
