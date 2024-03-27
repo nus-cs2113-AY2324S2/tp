@@ -1,8 +1,8 @@
 package seedu.voyagers;
 
 import seedu.voyagers.classes.TripList;
+import seedu.voyagers.commands.AutoTripStatusUpdateCommand;
 import seedu.voyagers.paser.NewParser;
-import seedu.voyagers.utils.Status;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.commands.Command;
 import seedu.voyagers.commands.ListCommand;
@@ -21,37 +21,22 @@ public class Voyagers {
     //TODO: change to private and add to the command.execute(Ui, tripList, storage)
     public TripList tripList;
     public Ui ui;
-    public static Status status = Status.TRIP;
 
     public Voyagers() {
         this.tripList = new TripList(new ArrayList<>());
         this.ui = new Ui();
     }
     public static void main(String[] args) {
-        if (status == Status.TRIP) {
-            new Voyagers().runTrip();
-        }
-        else if (status == Status.REVIEW) {
-            //todo
-        }
-        else if (status == Status.PROFILE) {
-            //todo
-        }
-        else if (status == Status.BILL) {
-            //todo
-        }
-        else {
-            System.out.println("Some status error occurred. Exiting...");
-        }
+            new Voyagers().run();
     }
 
-    void runTrip() {
+    void run() {
 
         Logger logger = Logger.getLogger("Voyagers");
         logger.setLevel(Level.INFO);
 
         ui.showWelcome();
-        assert false : "This is a debug assertion set to fail.";
+        //assert false : "This is a debug assertion set to fail.";
         ui.echo("Here are the trips in your list from the previous time:", false, false);
 
         //TODO: make Storage a singleton
@@ -61,6 +46,7 @@ public class Voyagers {
 
 
         new ListCommand().execute(tripList, ui, null);
+        new AutoTripStatusUpdateCommand().execute(tripList, ui, null);
         boolean isExit = false;
 
         while (!isExit) {

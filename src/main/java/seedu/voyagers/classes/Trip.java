@@ -158,6 +158,10 @@ public class Trip {
         return this.status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     /**
      * Returns the sub-trip at the specified index.
      *
@@ -177,7 +181,8 @@ public class Trip {
         String s = "Name: " + name + "\t\tStart Date: " +
                 FormatDate.dateFormat.format(startDate) + "\t\tEnd Date: " +
                 FormatDate.dateFormat.format(endDate) + "\t\tLocation: " +
-                location + "\t\tDescription: " + description + "\t\tReview: " + getReviewScore();
+                location + "\t\tDescription: " + description + "\t\tReview: " +
+                getReviewScore() + "\t\tStatus: " + getStatus();
         s += "\n\tSub-trips:";
         for (Trip t : subTrips) {
             s += "\n\t\t" + t.toString();
