@@ -33,8 +33,12 @@ public class AddCommandParser extends DefaultParser {
         double itemCostPrice = Double.parseDouble(commandLine.getOptionValue("cost"));
 
         // Optional options
-        int itemQuantity = Integer.parseInt(commandLine.getOptionValue("quantity", "0"));
-        // catch NumberFormatExcpetion here
+        int itemQuantity;
+        try {
+            itemQuantity = Integer.parseInt(commandLine.getOptionValue("quantity", "0"));
+        } catch (NumberFormatException e) {
+            throw new ParseException("Item quantity must be a number!");
+        }
         double itemSalePrice = Double.parseDouble(commandLine.getOptionValue("salePrice", "0.00"));
         LocalDate itemExpirationDate = Optional.ofNullable(commandLine.getOptionValue("expiration"))
                 .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
