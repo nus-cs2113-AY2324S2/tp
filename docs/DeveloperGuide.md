@@ -25,6 +25,18 @@ Step 2. The user enters the `"smart"` command to generate a personalized itinera
 
 Step 3. The execute method of ```GenerateSmartItineraryCommand``` is invoked. It retrieves the user's preferred location and cuisine from the ```UserDetails``` object. The method then filters the ```FoodList``` to find food options matching the user's preferences, ensures the selected food options are distinct, and randomly selects two activities from the ```ActivityList```. The generated itinerary, consisting of the selected food and activity options, is then output to the user.
 
+
+### [Proposed] History Tracking feature
+
+#### Proposed Implementation
+The proposed History Tracking feature keeps a database of previously visited restaurants, activities and gifts. It extends the Command class with a new ```ViewHistoryCommand```. Additionally, it implements the following operation:
+- ```execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui, Storage storage, UserDetails userDetails, GiftList gifts)``` — Displays a list of all past restaurants, activities and gifts based on the user's past history.
+
+These operations are detailed in the ```Parser``` class, where the ```parseCommand(String userInput, UserDetails userDetails)``` method is updated to return a ```ViewHistoryCommand``` when the `"history"` command is entered by the user.
+
+The ```GenerateGiftCommand```, ```GenerateIdeaCommand```, ```GenerateItineraryCommand``` and ```GenerateSmartItineraryCommand``` update the relevant txt files (GiftList.txt, ActivityList.txt, and FoodList.txt), toggling the "U" indicator, which represents uncomplete, to be "C", which represents complete. This is done by calling the markComplete() method under the ```Activity```/```Food```/```Gift``` class. Updating their status to be marked as completed ensures that they are not called in future
+
+
 ## Product scope
 ### Target user profile
 
