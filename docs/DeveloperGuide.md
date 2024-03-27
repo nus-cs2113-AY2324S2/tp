@@ -12,6 +12,38 @@ The Voyagers application is designed as a command-line interface
 (CLI) tool for managing travel trips. 
 It is implemented in Java and follows a modular architecture to promote scalability and maintainability.
 
+
+### Normal flow of the application
+
+The application starts by displaying a welcome message. Then the flow is as follows:
+
+1. The user is prompted to enter a command.
+2. The application processes the command and displays the appropriate output.
+3. Steps 1 and 2 are repeated until the user enters the `exit` command.
+
+The implementation of this flow is made using four main classes: `Parser`, `Commands`, `Storage` and `Ui`.
+With these classes we can encapsulate the whole logic of the application in a relative simple loop.
+
+````java
+                                    ...
+  while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = NewParser.parse(fullCommand);
+                c.execute(tripList, ui, null);
+                isExit = c.isExit();
+
+            } catch (Exception e) { //TODO: change to specific exceptions
+                ui.echo(e.getMessage());
+            }
+                                ...
+````
+
+The following UML sequence diagram shows the flow of the application when the user enters a command.
+
+//![Sequence Diagram](sequence_diagram_flow.png)
+
+
 ## Setting Up, Getting Started
 
 Run the JAR File, then follow the prompts through the command-line interface. Refer to this guide for syntax.

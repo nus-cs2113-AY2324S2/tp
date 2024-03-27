@@ -30,9 +30,9 @@ public class Bill implements Payable {
         if (people.size() != percentages.size()) {
             throw new IllegalArgumentException("Number of elements in 'people' and 'percentages' arrays must be equal");
         }
-        if (sumPercentages(percentages) != 100) { //TODO: change to check. not negative
-            throw new IllegalArgumentException("Percentages do not sum to 100");
-        }
+
+        checkPercentages(percentages);
+
         this.billName = billName;
         this.people = people;
         this.percentages = percentages;
@@ -122,11 +122,10 @@ public class Bill implements Payable {
         if (percentages.length != this.people.size()) {
             throw new IllegalArgumentException("Number of percentage arguments must equal the number of people");
         }
-        if (sumPercentages(percentages) != 100) {
-            throw new IllegalArgumentException("Percentages do not sum to 100");
-        }
-        ArrayList<Double> arrayList = new ArrayList<>(Arrays.asList(percentages));
-        this.percentages = arrayList;
+
+        checkPercentages(percentages);
+
+        this.percentages = new ArrayList<>(Arrays.asList(percentages));
 
     }
     public ArrayList<Double> getPercentages() {
