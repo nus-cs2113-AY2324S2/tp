@@ -12,6 +12,7 @@ public class Grocery {
     private LocalDate expiration;
     private String category;
     private double cost;
+    private String location;
 
 
     /**
@@ -21,14 +22,16 @@ public class Grocery {
      * @param amount Measurement of grocery.
      * @param expiration When grocery expires.
      * @param category Category of grocery.
+     * @param location Location of where the grocery is stored.
      */
 
-    public Grocery(String name, int amount, LocalDate expiration, String category, double cost) {
+    public Grocery(String name, int amount, LocalDate expiration, String category, double cost, String location) {
         this.name = name;
         this.amount = amount;
         this.expiration = expiration;
         this.category = category;
         this.cost = cost;
+        this.location = location;
     }
 
     // Getters and setters
@@ -46,6 +49,10 @@ public class Grocery {
 
     public double getCost() {
         return this.cost;
+    }
+
+    public String getLocation() {
+        return this.location;
     }
 
     public void setName(String name) {
@@ -78,6 +85,10 @@ public class Grocery {
         this.cost = Double.parseDouble(cost);
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     /**
      * Returns the name, amount, expiration date and cost of the grocery.
      *
@@ -88,6 +99,8 @@ public class Grocery {
 
         // TODO: update amount output according to Grocery subclass
         // TODO: consider stating amount == 0 now that we track amount ?
+
+        String locationString = ", location: " + location;
 
         String amountString = (amount == 0) ? "" : ", amount: " + amount;
         String exp = (expiration == null) 
@@ -112,7 +125,7 @@ public class Grocery {
             unit = "units";
             break;
         }
-        return this.name + " (" + this.category + ") " + amountString + unit + exp + price;
+        return this.name + " (" + this.category + ") " + amountString + unit + exp + price + locationString;
 
     }
 }

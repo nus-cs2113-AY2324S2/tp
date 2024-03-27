@@ -152,6 +152,15 @@ public class Ui {
     }
 
     /**
+     * Prompts the user to enter the location of the grocery.
+     * @return Location of grocery in String
+     */
+    public String promptForLocation() {
+        System.out.println("Please enter the location (e.g. freezer first compartment)");
+        return in.nextLine().trim();
+    }
+
+    /**
      * Reads expiration date from user input.
      *
      * @param month Month of expiration.
