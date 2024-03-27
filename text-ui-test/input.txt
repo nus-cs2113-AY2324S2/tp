@@ -1,1 +1,6 @@
-James Gosling
+add -n Medication_A -q 60.0 -d 500.0 -e 01/07/25 -f morning -r cause_dizziness
+modify -l 1 -n Medication_A
+delete -l 1
+take -l 1
+untake -l 1
+exit

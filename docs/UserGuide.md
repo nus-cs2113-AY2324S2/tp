@@ -1,3 +1,8 @@
+<!-- 
+CREDIT: We try to follow the ideas and structure of the following sample user guide:
+https://se-education.org/addressbook-level3/UserGuide.html
+-->
+
 # User Guide
 
 ## Introduction
@@ -34,6 +39,8 @@ Example of usage:
 **Q**: How do I transfer my data to another computer? 
 
 **A**: {your answer here}
+
+- TODO: Add warning about modifying the text files
 
 ## Command Summary
 
