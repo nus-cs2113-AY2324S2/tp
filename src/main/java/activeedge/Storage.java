@@ -11,6 +11,7 @@ import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -82,6 +83,7 @@ public class Storage {
             System.out.println("An error occurred while saving tasks to file: " + e.getMessage());
         }
     }
+    
 
     /**
      * Fetches and loads data from a specified data file into the application's memory.
@@ -91,10 +93,12 @@ public class Storage {
     public static void fetchData() {
         String filePath = Paths.get(System.getProperty("user.dir"), "data", "data.txt").toString();
         File file = new File(filePath);
+
+
         if (!file.exists()) {
             createFile(filePath);
         }
-        if (file.length() == 0) {
+        if (file.length() == 0 ) {
             System.out.print("\n");
             int i = 0;
             int j = 0;
