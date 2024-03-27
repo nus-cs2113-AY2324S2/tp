@@ -23,6 +23,7 @@ public class Ui {
         System.out.println("What would you like to track today?");
         Meal.printAvailableMeals();
         Drink.printAvailableDrinks();
+        Exercise.printAvailableExercises();
         System.out.println(LINE);
     }
 

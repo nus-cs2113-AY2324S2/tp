@@ -1,16 +1,19 @@
 package seedu.fitnus.user;
 
 import seedu.fitnus.Drink;
+import seedu.fitnus.Exercise;
+import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.Parser;
 import seedu.fitnus.Water;
-import seedu.fitnus.storage.Storage;
-
 import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.invalidIndexException;
+import seedu.fitnus.storage.Storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,11 +22,13 @@ import java.util.ArrayList;
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
+    protected static ArrayList<Exercise> exerciseList;
 
 
     public User(Storage mealStorage, Storage drinkStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
+        exerciseList = new ArrayList<>();
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
     }
@@ -153,7 +158,7 @@ public class User {
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
-    public static void handleViewFiber() {
+    public void handleViewFiber() {
         int fibreCount = 0;
         for (Meal meal: mealList) {
             fibreCount += meal.getFiber();
@@ -188,6 +193,14 @@ public class User {
             Meal currentMeal = mealList.get(i);
             System.out.println((startIndex+i) + ". " + currentMeal.getName() + " (serving size: "
                     + currentMeal.getServingSize() + ")");
+        }
+    }
+
+    public void printExerciseList() {
+        for (int i = 0; i < exerciseList.size(); i++) {
+            Exercise currentExercise = exerciseList.get(i);
+            System.out.println((i+1) + ". " + currentExercise.getName() + "duration:" + currentExercise.getDuration() +
+                    " (intensity: " + currentExercise.getIntensity() + ")");
         }
     }
     public void handleListMeals() {
@@ -280,6 +293,17 @@ public class User {
         System.out.println("Removed " + drinkName + " from drinks");
     }
 
+    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException {
+        Parser.parseExercise(command);
+        String exerciseType = Parser.exerciseDescription;
+        int duration = Parser.exerciseDuration;
+        ExerciseIntensity intensity = Parser.exerciseIntensity;
+        exerciseList.add(new Exercise(exerciseType, duration, intensity));
+        assert !exerciseList.isEmpty(): "failed to track exercise";
+
+        System.out.println("Tracked " + duration + " minutes of " + exerciseType);
+    }
+
     public void handleClear() {
         mealList.clear();
         drinkList.clear();
@@ -290,4 +314,20 @@ public class User {
         System.out.println("All entries have been deleted");
     }
 
+    public void handleCaloriesBurnt() {
+        int caloriesBurnt = 0;
+        for (Exercise exercise: exerciseList) {
+            caloriesBurnt += exercise.getCaloriesBurnt();
+        }
+        System.out.println("Total calories burnt: " + caloriesBurnt);
+    }
+
+    public void handleListExercises() {
+        System.out.println("here's the exercises you've done today");
+        if (exerciseList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printExerciseList();
+        }
+    }
 }

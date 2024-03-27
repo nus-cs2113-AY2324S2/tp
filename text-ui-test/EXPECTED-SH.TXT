@@ -3,6 +3,7 @@ Hello! Welcome to FitNUS
 What would you like to track today?
 Available meals: pizza, chicken rice, fried rice, etc.
 Available drinks: lemon tea, sprite, water, milk coffee, etc.
+Available exercises: running, swimming, cycling, etc.
 _________________________________________________________________
 _________________________________________________________________
 Invalid command, type [help] to view all commands.
