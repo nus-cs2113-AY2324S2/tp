@@ -80,7 +80,6 @@ public class MedicationManager {
     public void printAllMedications() {
         assert medications != null;
         System.out.println("You have " + getTotalMedications() + " medications listed below.");
-        Ui ui = new Ui();
-        ui.printMedsList(medications);
+        Ui.printMedsList(medications);
     }
 }

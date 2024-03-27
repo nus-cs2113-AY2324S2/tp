@@ -13,6 +13,12 @@ public class Ui {
     static Scanner input = new Scanner(System.in);
 
     /**
+     * Prevents defaulting to the public constructor
+     * that allows instantiation of the Ui class
+     */
+    private Ui() {}
+
+    /**
      * Displays the welcome message and introduction name.
      */
     public static void showWelcomeMessage() {

@@ -14,18 +14,16 @@ import java.util.List;
  * @see DailyMedication
  */
 public class DailyMedicationManager {
-    private final List<DailyMedication> dailyMedications;
-    private Ui ui;
+    private static List<DailyMedication> dailyMedications = new ArrayList<>();
 
     /**
-     * Constructs DailyMedicationManager with a list of DailyMedication
+     * Creates DailyMedicationManager to save medications from MedicationManager
+     * so that program can output to textfile
      *
      * @see DailyMedication
      */
-    public DailyMedicationManager(MedicationManager medicationManager) {
+    public static void createDailyMedicationManager(MedicationManager medicationManager) {
         assert medicationManager != null;
-        dailyMedications = new ArrayList<>();
-        ui = new Ui();
         for (Medication medication : medicationManager.getMedications()) {
             String medicationName = medication.getName();
             DailyMedication dailyMedication = new DailyMedication(medicationName);
@@ -34,13 +32,11 @@ public class DailyMedicationManager {
     }
 
     /**
-     * Constructs DailyMedicationManager with lines imported from the textfile
+     * Reads each lines from textfile to process and save into DailyMedicationManager
      *
      * @param lines lines of String read from each row in the textfile
      */
-    public DailyMedicationManager(List<String> lines) {
-        dailyMedications = new ArrayList<>();
-        ui = new Ui();
+    public static void importDailyMedicationManager(List<String> lines) {
         try {
             for (String line : lines) {
                 DailyMedication dailyMedication = parseImportedLine(line);
@@ -52,11 +48,18 @@ public class DailyMedicationManager {
     }
 
     /**
+     * Clears and resets DailyMedicationManager for testing purpose
+     */
+    protected static void clearDailyMedication() {
+        dailyMedications.clear();
+    }
+
+    /**
      * Adds a DailyMedication to the list of DailyMedication
      *
      * @param dailyMedication DailyMedication to be added to the list
      */
-    public void addDailyMedication(DailyMedication dailyMedication) {
+    public static void addDailyMedication(DailyMedication dailyMedication) {
         dailyMedications.add(dailyMedication);
         try {
             FileReaderWriter.saveDailyMedicationData(getDailyMedicationStringData());
@@ -73,7 +76,7 @@ public class DailyMedicationManager {
      * @return DailyMedication object at the corresponding index (0-based indexing)
      * @throws IndexOutOfBoundsException Out of range index specified
      */
-    public DailyMedication getDailyMedication(int listIndex) throws IndexOutOfBoundsException {
+    public static DailyMedication getDailyMedication(int listIndex) throws IndexOutOfBoundsException {
         listIndex--; // Decremented to 0-base indexing
         return dailyMedications.get(listIndex);
     }
@@ -84,7 +87,7 @@ public class DailyMedicationManager {
      * @param listIndex Index of the dailyMedications list to update (1-based indexing)
      * @see DailyMedication#take()
      */
-    public void takeDailyMedication(int listIndex) {
+    public static void takeDailyMedication(int listIndex) {
         DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.take();
         try {
@@ -100,7 +103,7 @@ public class DailyMedicationManager {
      * @param listIndex Index of the dailyMedications list to update (1-based indexing)
      * @see DailyMedication#untake()
      */
-    public void untakeDailyMedication(int listIndex) {
+    public static void untakeDailyMedication(int listIndex) {
         DailyMedication dailyMedication = getDailyMedication(listIndex);
         dailyMedication.untake();
         try {
@@ -110,9 +113,9 @@ public class DailyMedicationManager {
         }
     }
 
-    public void printMedications() {
+    public static void printMedications() {
         System.out.println("Here are the Daily Medications you have to take today: ");
-        ui.printMedsList(dailyMedications);
+        Ui.printMedsList(dailyMedications);
     }
 
     /**
@@ -121,7 +124,7 @@ public class DailyMedicationManager {
      * @param line each line read from the textfile
      * @return dailyMedication object to add into the DailyMedicationManager
      */
-    private DailyMedication parseImportedLine(String line) {
+    private static DailyMedication parseImportedLine(String line) {
         String[] fields = line.split("\\|");
         boolean isTaken = Boolean.parseBoolean(fields[0].trim());
         DailyMedication dailyMedication = new DailyMedication(fields[1].trim());
@@ -139,7 +142,7 @@ public class DailyMedicationManager {
      *
      * @return A list of DailyMedication object to string
      */
-    private List<String> getDailyMedicationStringData() {
+    private static List<String> getDailyMedicationStringData() {
         List<String> dailyMedicationStrings = new ArrayList<>();
         for (DailyMedication dailyMedication : dailyMedications) {
             dailyMedicationStrings.add(dailyMedication.isTaken() + "|" + dailyMedication.getName());
@@ -152,7 +155,7 @@ public class DailyMedicationManager {
      *
      * @return The total number of daily medications.
      */
-    public int getTotalDailyMedication() {
+    public static int getTotalDailyMedication() {
         return dailyMedications.size();
     }
 }

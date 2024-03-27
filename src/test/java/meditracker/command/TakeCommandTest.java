@@ -5,22 +5,35 @@ import meditracker.DailyMedicationManager;
 import meditracker.exception.ArgumentNotFoundException;
 import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.medication.MedicationManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TakeCommandTest {
+
+    @BeforeEach
+    public void resetDailyMedicationManager() throws InvocationTargetException,
+            IllegalAccessException, NoSuchMethodException {
+        Method resetDailyMedicationManagerMethod
+                = DailyMedicationManager.class.getDeclaredMethod("clearDailyMedication");
+        resetDailyMedicationManagerMethod.setAccessible(true);
+        resetDailyMedicationManagerMethod.invoke(DailyMedicationManager.class);
+    }
+
     @Test
     void execute_inOrderArgument_expectDailyMedicationTaken()
             throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         MedicationManager medicationManager = new MedicationManager();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         DailyMedication dailyMedication = new DailyMedication("Medication_A");
-        dailyMedicationManager.addDailyMedication(dailyMedication);
+        DailyMedicationManager.addDailyMedication(dailyMedication);
 
         String inputString = "take -l 1";
         TakeCommand command = new TakeCommand(inputString);
-        command.execute(null, dailyMedicationManager);
+        command.execute(null);
 
         assertTrue(dailyMedication.isTaken());
     }

@@ -39,14 +39,12 @@ public class TakeCommand extends Command {
      * It also displays a message confirming the modification of the daily medication status.
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
-     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      */
     @Override
-    public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager) {
+    public void execute(MedicationManager medicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
-        dailyMedicationManager.takeDailyMedication(listIndex);
+        DailyMedicationManager.takeDailyMedication(listIndex);
         Ui.showTakeCommandMessage();
     }
 }

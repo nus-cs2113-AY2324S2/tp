@@ -14,13 +14,12 @@ public class UntakeCommandTest {
     void execute_inOrderArgument_expectDailyMedicationUntaken()
             throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         MedicationManager medicationManager = new MedicationManager();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         DailyMedication dailyMedication = new DailyMedication("Medication_A");
-        dailyMedicationManager.addDailyMedication(dailyMedication);
+        DailyMedicationManager.addDailyMedication(dailyMedication);
 
         String inputString = "untake -l 1";
         UntakeCommand command = new UntakeCommand(inputString);
-        command.execute(null, dailyMedicationManager);
+        command.execute(null);
 
         assertFalse(dailyMedication.isTaken());
     }

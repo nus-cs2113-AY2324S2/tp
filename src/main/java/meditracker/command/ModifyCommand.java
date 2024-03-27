@@ -53,11 +53,9 @@ public class ModifyCommand extends Command {
      * It also displays a message confirming the modification of the medication.
      *
      * @param medicationManager      The MedicationList object representing the list of medications.
-     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      */
     @Override
-    public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager) {
+    public void execute(MedicationManager medicationManager) {
         String listIndexString = parsedArguments.get(ArgumentName.LIST_INDEX);
         int listIndex = Integer.parseInt(listIndexString);
         Medication medication = medicationManager.getMedication(listIndex);
@@ -82,7 +80,7 @@ public class ModifyCommand extends Command {
                 medication.setName(argumentValue);
 
                 // Update medication name in DailyMedication
-                DailyMedication dailyMedication = dailyMedicationManager.getDailyMedication(listIndex);
+                DailyMedication dailyMedication = DailyMedicationManager.getDailyMedication(listIndex);
                 dailyMedication.setName(argumentValue);
                 break;
             case QUANTITY:
