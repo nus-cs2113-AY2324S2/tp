@@ -31,6 +31,18 @@ public class Voyagers {
         if (status == Status.TRIP) {
             new Voyagers().runTrip();
         }
+        else if (status == Status.REVIEW) {
+            //todo
+        }
+        else if (status == Status.PROFILE) {
+            //todo
+        }
+        else if (status == Status.BILL) {
+            //todo
+        }
+        else {
+            System.out.println("Some status error occurred. Exiting...");
+        }
     }
 
     void runTrip() {
