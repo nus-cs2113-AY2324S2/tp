@@ -44,6 +44,8 @@ public class StorageHandlerTest {
             assertTrue(f.exists());
             f = new File("./data/test_grp1/transactions.txt");
             assertTrue(f.exists());
+            // Delete test folders after completion
+            deleteDir(f);
         } catch (Exception e) {
             fail();
         }
@@ -68,6 +70,8 @@ public class StorageHandlerTest {
             new StorageHandler(members2, transactions2, "test_grp2");
             String expected = "Alice: $10.0\nBob: -$10.0\n";
             assertEquals(expected, members2.listMembers());
+            // Delete test folders after completion
+            deleteDir(f);
         } catch (Exception e) {
             fail();
         }
@@ -78,8 +82,8 @@ public class StorageHandlerTest {
      */
     @Test
     public void loadMembersData_invalidMembersData_exceptionThrown() {
+        File f = new File("./data/test_grp3");
         try {
-            File f = new File("./data/test_grp3");
             deleteDir(f);
             MemberList members1 = new MemberList();
             TransactionList transactions1 = new TransactionList();
@@ -93,6 +97,8 @@ public class StorageHandlerTest {
         } catch (LongAhException e) {
             boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.STORAGE_FILE_CORRUPTED);
             assertTrue(isMessage);
+            // Delete test folders after completion
+            deleteDir(f);
         }
     }
 
@@ -101,8 +107,8 @@ public class StorageHandlerTest {
      */
     @Test
     public void loadMembersData_invalidTransactionData_exceptionThrown() {
+        File f = new File("./data/test_grp4");
         try {
-            File f = new File("./data/test_grp4");
             deleteDir(f);
             MemberList members1 = new MemberList();
             TransactionList transactions1 = new TransactionList();
@@ -118,6 +124,8 @@ public class StorageHandlerTest {
         } catch (LongAhException e) {
             boolean isMessage = LongAhException.isMessage(e, ExceptionMessage.INVALID_STORAGE_CONTENT);
             assertTrue(isMessage);
+            // Delete test folders after completion
+            deleteDir(f);
         } catch (Exception e) {
             // Filewriter error
             fail();
