@@ -44,7 +44,7 @@ public class BinBash {
                 userInterface.talk(e.getMessage());
             }
         }
-        logger.info("BinBash existing...");
+        logger.info("BinBash exiting...");
     }
     
     /**
