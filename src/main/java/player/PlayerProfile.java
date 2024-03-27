@@ -5,8 +5,6 @@ public class PlayerProfile {
     private final String name;
     private final Health health;
     private final Asset asset;
-
-
     public PlayerProfile(String name, String occupation) {
         this.name = name;
         this.health = new Health();
@@ -32,6 +30,18 @@ public class PlayerProfile {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getOccupation() {
+        return this.occupation;
+    }
+
+    public Health getHealth() {
+        return health;
+    }
+
+    public Asset getAsset() {
+        return asset;
     }
 
     @Override
