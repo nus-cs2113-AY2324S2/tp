@@ -166,7 +166,7 @@ public class ExpenditureList {
         return expenditureList.get(index);
     }
 
-    protected static boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         dateFormat.setLenient(false);
         try {
@@ -180,7 +180,7 @@ public class ExpenditureList {
         }
     }
 
-    protected static boolean isValidAmount(float amt) {
+    public static boolean isValidAmount(float amt) {
         if (amt >= 0) {
             String amtStr = String.valueOf(amt);
 
