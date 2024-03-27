@@ -1,7 +1,5 @@
 package seedu.binbash.logger;
 
-import seedu.binbash.exceptions.BinBashException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -9,39 +7,47 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class MainLogger {
+public class BinBashLogger {
     private static FileHandler fileHandler;
     private static final String logDirectoryPath = "./logs/";
     private static final String logFileName = "logs.txt";
     private static boolean isLogFileCreated = false;
     private final Logger fileLogger;
+    private final Logger consoleLogger;
 
 
-    public MainLogger (String loggerName) {
+    public BinBashLogger(String loggerName) {
         fileLogger = Logger.getLogger(loggerName);
+        consoleLogger = Logger.getLogger("consoleLogger");
+
+        if(isLogFileCreated) {
+            setFileHandler();
+        } else {
+            createLogFile();
+        }
     }
 
-    public void createLogFile() throws BinBashException {
+    private void createLogFile() {
         File logDirectory = new File(logDirectoryPath);
         File logFile = new File(logDirectory, logFileName);
 
         if (!logDirectory.exists()) {
             boolean wasDirectoryMade = logDirectory.mkdirs();
             if (!wasDirectoryMade) {
-                throw new BinBashException(("Could not create log directory."));
+                consoleLogger.warning(("Could not create log directory."));
             }
         }
 
         if (!logFile.exists()) {
-            boolean wasLogFileCreated;
+            boolean wasLogFileCreated = false;
             try {
                 wasLogFileCreated = logFile.createNewFile();
             } catch (IOException e) {
-                throw new BinBashException("Could not create log file.");
+                consoleLogger.warning("Could not create log file.");
             }
 
             if(!wasLogFileCreated) {
-                throw new BinBashException("Could not create log file.");
+                consoleLogger.warning("Could not create log file.");
             }
         }
 
@@ -70,11 +76,11 @@ public class MainLogger {
         }
     }
 
-    private void setFileHandler() throws BinBashException {
+    private void setFileHandler() {
         try {
             fileHandler = new FileHandler(logDirectoryPath + logFileName);
         } catch (IOException e) {
-            throw new BinBashException("Could not create file handler! Unable to generate logs!");
+            consoleLogger.warning("Could not create file handler! Unable to generate logs!");
         }
 
         fileHandler.setFormatter(new SimpleFormatter());
