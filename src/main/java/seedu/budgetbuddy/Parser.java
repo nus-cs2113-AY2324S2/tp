@@ -13,7 +13,6 @@ import seedu.budgetbuddy.commandcreator.AddSavingCommandCreator;
 import seedu.budgetbuddy.commandcreator.CommandCreator;
 import seedu.budgetbuddy.commandcreator.SplitExpenseCommandCreator;
 import seedu.budgetbuddy.command.RecurringExpenseCommand;
-import seedu.budgetbuddy.command.SplitExpenseCommand;
 import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
@@ -53,20 +52,6 @@ public class Parser {
         }
         return input.substring(startIndex, endIndex).trim();
     }
-
-    private String extractDetailsForAdd(String details, String prefix) {
-        int startIndex = details.indexOf(prefix) + prefix.length();
-        int endIndex = details.length();
-
-        String[] nextPrefixes = { "c/", "a/", "d/" };
-        for (String nextPrefix : nextPrefixes) {
-            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = details.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return details.substring(startIndex, endIndex).trim();
-    }
-
 
     public Boolean isRecCommand(String input) {
         return input.startsWith("rec ");
