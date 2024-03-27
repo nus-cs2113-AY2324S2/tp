@@ -6,6 +6,7 @@ import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
 
+
 public class ExerciseManager extends ActivityManager {
     //@@author V4vern
     @Override
@@ -32,7 +33,7 @@ public class ExerciseManager extends ActivityManager {
             break;
         //@@author V4vern
         case "list":
-            executeListAction();
+            validateListAction(parser);
             break;
         case "search":
             executeSearchAction(parser);
@@ -47,6 +48,15 @@ public class ExerciseManager extends ActivityManager {
         UserInterface.printMessage(String.format(
                 "Edited Exercise from %s to %s", parser.getActionParameter(), newExerciseName
         ));
+    }
+
+
+    public void validateListAction(Parser parser) throws Exceptions.InvalidInput {
+        String userInput = parser.getActionParameter();
+        if (!userInput.isEmpty()) {
+            throw new Exceptions.InvalidInput("Invalid command. Use 'exercise /list' to list all exercises.");
+        }
+        executeListAction();
     }
 
     private void executeDeleteAction(Parser parser) throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
