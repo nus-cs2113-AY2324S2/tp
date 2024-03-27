@@ -25,7 +25,7 @@ public class ExpenseTest {
 
     @Test
     void testGetCategory() {
-        assertEquals("food", testExpense.getCategory());
+        assertEquals("FOOD", testExpense.getCategory());
     }
 
     @Test
