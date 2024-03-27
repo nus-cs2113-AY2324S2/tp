@@ -6,7 +6,27 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}   
+the overall UML diagram looks like this
+
+![RUNOOB](../assets/images/mathGenius.png)
+### problemGenerator Component
+the main idea in the design of problemGenerator is that it take 3 parameters and generate a test which include some number of problems
+
+
+when the gengerator is triggered, users enter a command like this:
+
+    generate -t [operators] -n [number] -d [maximum digit]
+for example , user can enter:
+
+    generate -t +-*/ -n 10 -d 2
+
+in which case the parseCommand() will take the command and pass the parameters to generete().
+
+generate() function will choose two random number with max digits of 2, take a random operation from the operation set of  $+,-,*,/$ to form a single problem ,and loop the execution for 10 times to form a test
+
+if user missed some parameters ,defaultOptions() function will use pre-set default options and invoke UI to print a message for every missing parameter
+
+
 ### Checker Component  
 **API：`Checker.java`**   
 **How the `Checker` work:**  

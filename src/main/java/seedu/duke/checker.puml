@@ -1,0 +1,43 @@
+@startuml
+
+class Checker {
+    -userAnswer: Double[]
+    -test: Test
+    -isCorrect: Boolean[]
+    -correctNumber: int
+    -accuracy: double
+    -time: long
+    +checkCorrectness(problem: Problem, answer: double): Boolean
+    +Checker(test: Test)
+    +getUserAnswer(): void
+    +checkAnswer(): Boolean[]
+    +getCorrectNumber(): int
+    +getAccuracy(): double
+    +getTime(): long
+}
+
+class Test {
+    -operators: String
+    -maxDigits: int
+    -number: int
+    -problemList: ArrayList<Problem>
+    +Test(operators: String, maxDigits: int, number: int)
+    +addToTest(p: Problem): void
+    +getNumber(): int
+    +getProblem(): ArrayList<Problem>
+}
+
+class Problem {
+    -description: String
+    -answer: double
+    +unsolved(): String
+    +Problem(description: String, answer: double)
+    +getDescription(): String
+    +getAnswer(): double
+}
+
+Checker --> Test
+Checker --> Problem
+Checker --> Scanner
+
+@enduml

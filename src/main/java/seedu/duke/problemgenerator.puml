@@ -1,0 +1,46 @@
+@startuml
+
+package seedu.duke {
+    class ProblemGenerator {
+        -DEFAULT_NUMBER: String = "10"
+        -DEFAULT_MAX_DIGITS: String = "2"
+        -DEFAULT_OPERATORS: String = "+-*/"
+        -PROBLEM_FORM: String
+        -in: Scanner
+        +typeChoose(): Test
+        -generate(parameter: HashMap<String, String>): Test
+        +parseCommand(command: String): HashMap<String, String>
+        -defaultOptions(command: String, options: HashMap<String, String>): void
+    }
+
+    class Test {
+            -operators: String
+            -maxDigits: int
+            -number: int
+            -problemList: ArrayList<Problem>
+            +Test(operators: String, maxDigits: int, number: int)
+            +addToTest(p: Problem): void
+            +getNumber(): int
+            +getProblem(): ArrayList<Problem>
+        }
+
+    class Problem {
+        -description: String
+        -answer: double
+        +Problem(description: String, answer: double)
+        +unsolved(): String
+    }
+
+    class Ui {
+        +missingMessage(option: String): void
+    }
+}
+
+
+
+Test --> Problem: contains
+ProblemGenerator --> Test: create
+ProblemGenerator --> Test: generate
+ProblemGenerator --> Ui: displayMessage
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+class Duke {
+    -name: String
+    -ui: Ui
+    +run(): void
+    +main(args: String[]): void
+}
+
+class Ui {
+    -name: String
+    -scanner: Scanner
+    +Ui(name: String)
+    +greet(): void
+    +readCommand(): String
+    +showLine(): void
+    +help(helpType: String): void
+    +invalidCommand(): void
+    +exit(): void
+}
+
+class Parser {
+    +parse(command: String, ui: Ui): void
+}
+
+class Storage {
+    +readFile(): void
+}
+
+Duke --> Ui
+Duke --> Parser
+Duke --> Storage
+
+@enduml

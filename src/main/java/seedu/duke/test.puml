@@ -1,0 +1,26 @@
+@startuml
+
+
+    class Test {
+        -operators: String
+        -maxDigits: int
+        -number: int
+        -problemList: ArrayList<Problem>
+        +Test(operators: String, maxDigits: int, number: int)
+        +addToTest(p: Problem): void
+        +getNumber(): int
+        +getProblem(): ArrayList<Problem>
+    }
+
+    class Problem {
+        -description: String
+        -answer: double
+        +Problem(description: String, answer: double)
+        +unsolved(): String
+    }
+
+
+Test --> Problem: contains
+
+
+@enduml

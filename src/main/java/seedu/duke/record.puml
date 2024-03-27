@@ -1,0 +1,30 @@
+@startuml
+
+class Record {
+    -formatter: DateTimeFormatter
+    -dateTime: LocalDateTime
+    -speed: double
+    -accuracy: double
+    +writeLine(): String
+    +Record(dateTime: LocalDateTime, speed: double, accuracy: double)
+    +getSpeed(): double
+    +setSpeed(speed: double): void
+    +getAccuracy(): double
+    +setAccuracy(accuracy: double): void
+    +getDateTime(): LocalDateTime
+    +setDateTime(dateTime: LocalDateTime): void
+}
+
+class Storage {
+    -filePath: String
+    -records: List<Record>
+    +addRecord(record: Record): void
+    +clearRecords(): void
+    +processLine(line: String): void
+    +readFile(): void
+    +writeFile(): void
+}
+
+Record --> "*" Storage
+
+@enduml

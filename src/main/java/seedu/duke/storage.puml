@@ -1,0 +1,14 @@
+@startuml
+
+class Storage {
+    -filePath: String
+    -formatter: DateTimeFormatter
+    -records: List<Record>
+    +addRecord(record: Record): void
+    +clearRecords(): void
+    +processLine(line: String): void
+    +readFile(): void
+    +writeFile(): void
+}
+
+@enduml
