@@ -1,6 +1,5 @@
 package storage;
 
-import itemlist.Itemlist;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

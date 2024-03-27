@@ -2,7 +2,6 @@ package storage;
 
 import item.Item;
 import itemlist.Itemlist;
-import parser.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 /**
  * Represents an add command where a new task is added to the existing list of task.
