@@ -1,25 +1,45 @@
 package seedu.lifetrack.calories.calorielist;
-import static seedu.lifetrack.system.parser.ParserCalories.parseCaloriesInput;
-import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
-import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
-import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
-import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogIndexMessage;
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
 
+import seedu.lifetrack.Entry;
+import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import seedu.lifetrack.system.parser.ParserCalories;
+import seedu.lifetrack.system.storage.FileHandler;
+import seedu.lifetrack.ui.CalorieListUi;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CalorieList {
 
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
-    private ArrayList<Entry> calorieArrayList;
+    
     private final int SIZE_OF_DELETE = 16;
+    private ArrayList<Entry> calorieArrayList;
+    private FileHandler fileHandler;
 
+    //constructor for JUnit tests
     public CalorieList() {
-        calorieArrayList= new ArrayList<>();
+        calorieArrayList = new ArrayList<>();
+    }
+
+    //constructor for usage in terminal
+    public CalorieList(String filePath) {
+        try {
+            fileHandler = new FileHandler(filePath);
+            calorieArrayList = fileHandler.getCalorieEntriesFromFile();
+        } catch (FileNotFoundException e) {
+            calorieArrayList = new ArrayList<>();
+            System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }
+    }
+
+    private void updateFile() {
+        if (fileHandler != null) {
+            fileHandler.writeEntries(calorieArrayList);
+        }
     }
 
     public Entry getEntry(int index) {
@@ -37,11 +57,12 @@ public class CalorieList {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             Entry toDelete = calorieArrayList.get(index-1);
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
-            successfulDeletedMessage(toDelete);
+            updateFile();
+            CalorieListUi.successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(deleteLogIndexMessage());
+            System.out.println(CalorieListUi.deleteLogIndexMessage());
         } catch (NumberFormatException e) {
-            System.out.println(deleteLogNumberMessage());
+            System.out.println(CalorieListUi.deleteLogNumberMessage());
         }
     }
 
@@ -60,9 +81,10 @@ public class CalorieList {
         assert (input.startsWith("calories in") || input.startsWith("calories out")) : "ensures that input is correct";
         logr.setLevel(Level.WARNING);
         try {
-            Entry newEntry = parseCaloriesInput(input);
+            Entry newEntry = ParserCalories.parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
-            printNewCalorieEntry(newEntry);
+            updateFile();
+            CalorieListUi.printNewCalorieEntry(newEntry);
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
         }
@@ -75,9 +97,9 @@ public class CalorieList {
      */
     public void printCalorieList() {
         if (calorieArrayList.isEmpty()) {
-            emptyListMessage();
+            CalorieListUi.emptyListMessage();
         } else {
-            calorieListHeader();
+            CalorieListUi.calorieListHeader();
             for (int i = 0; i < calorieArrayList.size(); i++) {
                 Entry entry = calorieArrayList.get(i);
                 System.out.println("\t " + (i + 1) + ". " + entry);
