@@ -5,12 +5,14 @@ public abstract class Item {
     protected final String itemDescription;
     protected int itemQuantity;
     protected final double itemCostPrice;
+    protected int totalUnitsPurchased;
 
     public Item(String itemName, String itemDescription, int itemQuantity, double itemCostPrice) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemQuantity = itemQuantity;
         this.itemCostPrice = itemCostPrice;
+        this.totalUnitsPurchased = itemQuantity;
     }
 
     public String getItemName() {
@@ -31,6 +33,14 @@ public abstract class Item {
 
     public double getItemCostPrice() {
         return itemCostPrice;
+    }
+
+    public int getTotalUnitsPurchased() {
+        return totalUnitsPurchased;
+    }
+
+    public void setTotalUnitsPurchased(int totalUnitsPurchased) {
+        this.totalUnitsPurchased = totalUnitsPurchased;
     }
 
     @Override

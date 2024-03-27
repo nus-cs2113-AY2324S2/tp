@@ -22,6 +22,7 @@ public class BinBash {
 
     private void run() {
         userInterface.greet();
+        userInterface.talk(itemList.getProfitMargin());
 
         while (userInterface.isUserActive()) {
             String userInput = userInterface.readUserCommand();
@@ -38,6 +39,7 @@ public class BinBash {
                 if (userCommand.hasToSave()) {
                     storage.saveToStorage(itemList.getItemList());
                 }
+
             } catch (BinBashException e) {
                 userInterface.talk(e.getMessage());
             }
