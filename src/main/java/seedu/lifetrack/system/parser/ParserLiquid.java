@@ -34,9 +34,7 @@ public class ParserLiquid {
 
         //Handle exception when order of b/ and v/ is incorrect
         if (volumeIndex < beverageIndex) {
-            throw new InvalidInputException("Invalid input exception: " +
-                    "Please ensure that you have entered b/ before v/\n" +
-                    "For example: liquids in b/Milo v/1000");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationIncorrectOrderMessage());
         }
 
 

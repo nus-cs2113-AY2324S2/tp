@@ -46,7 +46,7 @@ public class InvalidInputExceptionMessage {
     }
 
     public static String getHydrationIncorrectOrderMessage() {
-        String message = "\t Please ensure that you have keyed in the correct format in the correct order!\n";
+        String message = "\t Please ensure that you have keyed the input in the correct order!\n";
         return HEADER + message + HYDRATION_IN_INPUT;
     }
 }
