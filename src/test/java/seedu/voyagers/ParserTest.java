@@ -6,8 +6,6 @@ import seedu.voyagers.classes.Trip;
 import seedu.voyagers.classes.TripList;
 import seedu.voyagers.utils.Ui;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
