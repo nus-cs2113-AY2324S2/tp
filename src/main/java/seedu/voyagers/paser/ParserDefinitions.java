@@ -7,6 +7,9 @@ public class ParserDefinitions {
 
     public static final String[] ADDSUBTRIP = {"/n", "/start", "/end", "/location", "/d"};
 
+    public static final String[] ADDBILL = {"/n", "/people", "/percentages"};
+
+
     public static final String[] SETNAME = {"/n"};
 
     public static final String[] SETDATES = {"/start", "/end"};
