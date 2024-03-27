@@ -14,7 +14,6 @@ import utility.CustomExceptions;
 class BmiTest {
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private static final PrintStream originalOut = System.out;
-    private static final PrintStream originalErr = System.err;
 
     @BeforeEach
     void setUpStreams() {
@@ -113,33 +112,12 @@ class BmiTest {
         assertEquals(expected, outContent.toString());
     }
 
-    // /**
-    //  * Tests the behaviour of a valid health command being passed into checkTypeOfHealth.
-    //  */
-    // @Test
-    // void checkTypeOfHealth_returnCorrectHealthType() throws
-    //         CustomExceptions.InvalidInput,
-    //         CustomExceptions.InsufficientInput{
-    //     String userInput = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-    //     String expected = HealthConstant.BMI;
-    //     String result = Health.checkTypeOfHealth(userInput);
-    //     assertEquals(expected, result);
-    // }
-    //
-    // /**
-    //  * Tests the behaviour of an invalid health command being passed into checkTypeOfHealth.
-    //  */
-    // @Test
-    // void checkTypeOfHealth_throwsInvalidInputExceptions() {
-    //     String userInput = "/h:run /height:1.71 /weight:60.50 /date:19-03-2024";
-    //     assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.checkTypeOfHealth(userInput));
-    // }
 
     /**
      * Test the behaviour of printing Bmi history.
      */
     @Test
-    void showBmiHistory_bmiObject_printsCorrectBmiHistory() {
+    void showBmiHistory_twoBmiObjects_printsCorrectBmiHistory() {
         Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
         Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
 
