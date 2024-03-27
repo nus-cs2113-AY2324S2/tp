@@ -1,6 +1,7 @@
 package budgetbuddy.storage;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.categories.Category;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
@@ -46,23 +47,28 @@ public class DataStorage {
     private static String getStringToWrite(Transaction t) {
         LocalDate date = t.getDate();
         String stringDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        return t.getDescription() + " ," + t.getCategory() + " ," + t.getTransactionType() + " ," + stringDate
+        return t.getDescription() + " ," + t.getCategory().getCategoryNum() + " ," + t.getTransactionType() + " ," + stringDate
                 + " ," + t.getAmount() + "\n";
     }
 
     private Transaction processData(String s, Account account) {
         String[] transactionInfo = s.split(" ,");
+        int categoryNum = Integer.parseInt(transactionInfo[1]);
 
         assert transactionInfo.length == 5 : "Invalid transaction information format";
         assert transactionInfo[2].equals("Income") || transactionInfo[2].equals("Expense") : "Invalid transaction type";
 
         switch (transactionInfo[2]) {
         case "Income":
-            return new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
-                    transactionInfo[1], account);
+            Income incomeObj = new Income(transactionInfo[0], Double.parseDouble(transactionInfo[4]),
+                    transactionInfo[3], account);
+            incomeObj.setCategory(Category.fromNumber(categoryNum));
+            return incomeObj;
         case "Expense":
-            return new Expense(transactionInfo[0], -Double.parseDouble(transactionInfo[4]),
-                    transactionInfo[1], account);
+            Expense expenseObj = new Expense(transactionInfo[0], -Double.parseDouble(transactionInfo[4]),
+                    transactionInfo[3], account);
+            expenseObj.setCategory(Category.fromNumber(categoryNum));
+            return expenseObj;
         default:
             return null;
         }
