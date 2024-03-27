@@ -22,7 +22,12 @@
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
   - [Sleep tracker component]()
-  - [Focus timer component]()
+  - [Focus timer component](#focus-timer-component)
+    - [Design Considerations](#design-considerations-1)
+    - [Implementation](#implementation-1)
+      - [Focus Class Diagram](#focus-class-diagram)
+      - [Focus State Transition Diagram](#focus-state-transition-diagram)
+      - [Focus Sequence Diagram](#focus-sequence-diagram)
   - [Fitness tracker component]()
 
 ## Acknowledgements
@@ -298,6 +303,69 @@ and the corresponding method in `HabitTracker` is invoked.
 ### Sleep tracker component
 
 ### Focus timer component
+The focus timer component provides users with a countdown timer and a count up timer, which enables the user to set a 
+goal to focus entirely on their work. This component aims to allow users to keep track of their time, improving their
+productivity and well-being.
+
+### Design Considerations
+* #### User Design Considerations
+  * Users will be able to choose between a count up timer and a countdown timer.
+  * Users can start, pause, resume, stop the timer at any point in time.
+  * Users will also be able to navigate to other functions while running the timer concurrently.
+  * Error messages will inform users the current status of the timer and reason the error appeared.
+
+* #### Developer Design Considerations
+  * The `Focus Timer` component is a wrapper class for both `CountupTimer` and `CountdownTimer`, which contains 
+utility logic to identify state and manage the different timers.
+
+#### Implementation
+
+#### Focus Class Diagram
+![FocusClassDiagram.png](diagrams\focus\FocusClassDiagram.png)
+* `FocusTimer` object
+  * Overview:
+    * The `FocusTimer` class is a facade class that sits between the component internals and users of the component 
+    such that all access to the component like countdown timer and count up timer happens through the Facade class.
+  * Attributes:
+    * `countupTimer`: Count up timer object.
+    * `countdownTimer`: Count down timer object.
+    * `timerMode`: Indicates the timer mode to be operating.
+  * Methods:
+    * `getStartTiming()`: Gets the current running state of the timer.
+    * `switchTimer()`: Changes the timer mode between count up and count down timer.
+    * `getPausedStatus()`: Gets the current pause status of the timer.
+    * `setStartTiming()`: Start the timer.
+    * `setStopTiming()`: Stop the timer.
+    * `setPauseTiming()`: Pause the timer.
+    * `setResumeTiming()`: Resume the timer.
+    * `checkTime`: Get the total time elapsed or time remaining in the timer.
+    * `setDuration`: Change countdown timer duration.
+    
+* `CountupTimer` and `CountdownTimer` object
+  * Dependencies:
+    * `Ui` object: Utilized for user interface interactions.
+
+#### Focus State transition Diagram
+There are many commands for the focus timer feature. However, some commands logically cannot be executed in cetain 
+states. For example, the command `focus pause` cannot be used if the timer hasn't started. Another example would be 
+the `focus switch` command to switch between the timer could not be used if the current timer mode is running. To aid 
+the understanding of the logic, we will use state transition diagram.
+
+![FocusStateDiagram.png](diagrams\focus\FocusStateDiagram.png)
+* The black circle in the diagram represents the starting point of focus timer. 
+* The labels of the arrows represents the commands.
+
+#### Focus Sequence Diagram
+![FocusSequenceDiagram.png](diagrams\focus\FocusSequenceDiagram.png)
+* Note that `PlaceholderFoucsCommand` can refer to any of the focus commands as mentioned above, since all of them 
+follows the same call pattern.
+
+When main starts, `scanner` and `FocusTimer` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the focus timer feature. 
+If it is, it will be further parsed by `FocusCommandParser` to determine the command. 
+The corresponding focus command object is then created and is returned to `Main`, where `execute` will then be called 
+and the corresponding method in `FocusTimer` is invoked.
+
 
 ### Fitness tracker component
 
