@@ -200,6 +200,7 @@ Format: `bye`
 ## Command Summary
 - Viewing help: `help`
 - Initializing course plan: `init MAJOR_NAME`
+- Displaying recommended schedules: `display MAJOR_NAME`
 - Adding a course to course plan: `add course COURSE_CODE y/YEAR t/TERM`
 - Removing course from course plan: `rm course COURSE_CODE`
 - Viewing course plan: `view {y/YEAR} {t/TERM}`
