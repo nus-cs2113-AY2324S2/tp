@@ -16,13 +16,12 @@ public class StorageTest {
     public void readFromFile_fileNotFound() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-
-        String directory = "./testFile.txt";
+        String directory = "./testFile1.txt";
         File testFile = new File(directory);
         try {
-            Storage.writeToFile(directory, "Created", true);
+            Storage.writeToFile(directory, "", true);
             testFile.delete();
-            Storage.readFromFile(testFile);
+            Storage.readFromFile(directory);
             assertEquals("File does not exist." + System.lineSeparator(), outputStream.toString());
         } catch (IOException e) {
             fail("failed to create a file.");
@@ -31,7 +30,7 @@ public class StorageTest {
 
     @Test
     public void writeToFile_aLine_writeSuccessful() {
-        String directory = "./testFile.txt";
+        String directory = "./testFile2.txt";
         File testFile = new File(directory);
         String aLine = "A line";
         try {
