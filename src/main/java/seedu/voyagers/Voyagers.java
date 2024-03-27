@@ -7,8 +7,10 @@ import static seedu.voyagers.Storage.writeTripFile;
 public class Voyagers {
     
     public static void main(String[] args) {
+        assert false : "dummy assertion set to fail";
         welcomeMessage();
         new Voyagers().runTrip();
+
     }
 
     void runTrip () {
