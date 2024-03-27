@@ -51,7 +51,8 @@ public class Parser {
                 String courseCode;
                 try {
                     courseCode = courseCodeAndYearAndTerms[0].trim();
-                    String[] splitMC = courseCodeAndYearAndTerms[1].split("m/", 2); // check if mcs are specified first, if not then default 4 mcs
+                    // check if mcs are specified first, if not then default 4 mcs
+                    String[] splitMC = courseCodeAndYearAndTerms[1].split("m/", 2);
                     if(splitMC.length == 2) {
                         mc = Integer.parseInt(splitMC[1].trim()); // Parse MCs
                         yearAndTerm = splitMC[0].split("t/", 2);
