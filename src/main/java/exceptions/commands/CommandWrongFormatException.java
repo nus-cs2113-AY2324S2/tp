@@ -5,11 +5,11 @@ import exceptions.GitException;
 /**
  * Represents the exception thrown when the command does not follow the proper format.
  */
-public class WrongFormatException extends GitException {
+public class CommandWrongFormatException extends GitException {
     /**
-     * Constructs WrongFormatException.
+     * Constructs CommandWrongFormatException.
      */
-    public WrongFormatException(String command) {
+    public CommandWrongFormatException(String command) {
         message = printWrongFormatFix(command);
     }
 
