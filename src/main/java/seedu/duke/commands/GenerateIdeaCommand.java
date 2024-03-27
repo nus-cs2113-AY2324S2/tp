@@ -1,6 +1,16 @@
 package seedu.duke.commands;
 
-import seedu.duke.*;
+import seedu.duke.Activity;
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.Food;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Idea;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 
 public class GenerateIdeaCommand extends Command {

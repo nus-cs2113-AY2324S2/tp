@@ -1,7 +1,13 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.*;
+import seedu.duke.commands.AddActivityCommand;
+import seedu.duke.commands.AddFoodCommand;
+import seedu.duke.commands.DeleteFavouritesCommand;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.FindFavouritesCommand;
+import seedu.duke.commands.ListFavouritesCommand;
+import seedu.duke.commands.UserDetailsCommand;
 import seedu.duke.exceptions.FlirtForkException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

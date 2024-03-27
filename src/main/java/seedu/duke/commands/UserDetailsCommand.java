@@ -1,6 +1,13 @@
 package seedu.duke.commands;
 
-import seedu.duke.*;
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 
 /**
  * Represents a command to collect and store user details. This command prompts the user
