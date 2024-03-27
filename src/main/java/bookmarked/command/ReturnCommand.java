@@ -1,7 +1,7 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyListException;
+import bookmarked.exceptions.EmptyListException;
 import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
@@ -34,14 +34,14 @@ public class ReturnCommand extends Command {
         try {
             runReturnCommand(foundBooks);
             BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
-        } catch (emptyListException e) {
+        } catch (EmptyListException e) {
             Ui.printEmptyListMessage();
         }
     }
 
-    public void runReturnCommand(List<Book> foundBooks) throws emptyListException {
+    public void runReturnCommand(List<Book> foundBooks) throws EmptyListException {
         if (this.listOfBooks.isEmpty()) {
-            throw new emptyListException();
+            throw new EmptyListException();
         }
 
         if (!foundBooks.isEmpty()) {

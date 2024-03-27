@@ -1,7 +1,7 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyListException;
+import bookmarked.exceptions.EmptyListException;
 import bookmarked.ui.Ui;
 
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ public class ListCommand extends Command {
     public void handleCommand() {
         try {
             runListCommand();
-        } catch (emptyListException e) {
+        } catch (EmptyListException e) {
             Ui.printEmptyListMessage();
         }
     }
 
-    public void runListCommand() throws emptyListException {
+    public void runListCommand() throws EmptyListException {
         if (this.listOfBooks.isEmpty()) {
-            throw new emptyListException();
+            throw new EmptyListException();
         }
 
         int numberOfBooks = this.listOfBooks.size();

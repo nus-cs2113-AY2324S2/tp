@@ -1,4 +1,4 @@
 package bookmarked.exceptions;
 
-public class indexOutOfListBounds extends Exception {
+public class IndexOutOfListBounds extends Exception {
 }

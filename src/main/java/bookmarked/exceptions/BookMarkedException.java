@@ -1,4 +1,4 @@
 package bookmarked.exceptions;
 
-public class bookMarkedException extends Exception {
+public class BookMarkedException extends Exception {
 }
