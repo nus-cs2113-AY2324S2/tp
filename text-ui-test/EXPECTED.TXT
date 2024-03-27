@@ -5,9 +5,13 @@ ____________________________________________________________
 Engaging orbital thrusters...
 PulsePilot on standby
 ____________________________________________________________
-Welcome back, Captain null
-Prior data found. Orbit has been synchronised.
+What is your name, voyager?
 ____________________________________________________________
+Welcome aboard, Captain James Gosling
+____________________________________________________________
+Tips: Enter 'help' to view the pilot manual!
+Initiating FTL jump sequence...
+FTL jump completed.
 Terminal primed. Command inputs are now accepted...
 ____________________________________________________________
 ____________________________________________________________
@@ -195,3 +199,7 @@ Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________
 Initiating PulsePilot landing sequence...
+____________________________________________________________
+PulsePilot successful touchdown
+See you soon, Captain!
+____________________________________________________________
