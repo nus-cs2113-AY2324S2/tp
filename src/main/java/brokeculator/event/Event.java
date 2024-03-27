@@ -34,17 +34,15 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event Name: " + eventName + System.lineSeparator()
-                + "Event Description: " + eventDescription + System.lineSeparator() 
-                + listExpenses();
+        return "Event Name: " + eventName
+                + " Event Description: " + eventDescription 
+                + System.lineSeparator();
     }
 
     public String listExpenses() {
-        int index = 1;
         StringBuilder sb = new StringBuilder();
         for (Expense expense : expenses) {
-            sb.append(index).append(". ").append(expense.toString()).append(System.lineSeparator());
-            index++;
+            sb.append(expense).append(System.lineSeparator());
         }
         return sb.toString();
     }

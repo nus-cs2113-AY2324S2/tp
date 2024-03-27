@@ -39,9 +39,14 @@ public class EventManager {
     }
 
     public void printEvents() {
+        if (events.isEmpty()) {
+            UI.prettyPrint("No events found");
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         for (int idx = 0; idx < events.size(); idx++) {
-            sb.append(idx + 1).append(". ").append(events.get(idx)).append(System.lineSeparator());
+            sb.append(idx + 1).append(". ").append(events.get(idx));
+            sb.append(System.lineSeparator());
         }
         UI.prettyPrint(sb.toString());
     }

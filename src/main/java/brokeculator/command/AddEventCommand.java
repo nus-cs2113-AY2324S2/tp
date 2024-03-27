@@ -2,6 +2,7 @@ package brokeculator.command;
 
 import brokeculator.dashboard.Dashboard;
 import brokeculator.event.Event;
+import brokeculator.frontend.UI;
 
 public class AddEventCommand extends Command {
     
@@ -19,5 +20,6 @@ public class AddEventCommand extends Command {
     public void execute(Dashboard dashboard) {
         Event event = new Event(eventName, eventDescription);
         dashboard.getEventManager().addEvent(event);
+        UI.prettyPrint("Event added successfully");
     }
 }
