@@ -25,6 +25,7 @@ public class GeneralInputParser {
             break;
         case "event":
             commandToExecute = EventParser.parseInput(userInput);
+            break;
         case "category":
             commandToExecute = CategoryParser.parseInput(userInput);
             break;
