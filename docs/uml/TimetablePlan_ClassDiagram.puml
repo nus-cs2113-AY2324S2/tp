@@ -16,6 +16,6 @@ class PlanGetter {
     +{static} getPlan(timetable: Timetable): String
 }
 
-Timetable "*" -> "courses *" Course : contains >
-PlanGetter ..> Timetable
+Timetable "*" ---> "courses *" Course : contains >
+PlanGetter .left.> Timetable
 @enduml
