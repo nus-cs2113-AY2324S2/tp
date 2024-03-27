@@ -1,7 +1,7 @@
 package command;
 
 import activeedge.userdetails.LogWeight;
-import static activeedge.userdetails.UserDetailsList.DETAILS_LIST;
+import static activeedge.userdetails.UserDetailsList.detailsList;
 import java.time.LocalDateTime;
 
 
@@ -17,7 +17,7 @@ public class AddWeightCommand {
 
     public void execute() throws ActiveEdgeException {
         LogWeight logWeight = new LogWeight(weight, dateTime);
-        DETAILS_LIST.add(logWeight);
+        detailsList.add(logWeight);
     }
 }
 

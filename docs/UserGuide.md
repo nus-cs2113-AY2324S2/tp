@@ -25,10 +25,10 @@ follow these simple steps:
 - Adds a new meal to the log along with the number of servings.
 - Alerts if the calories consumed exceed the goal.
 
-Format: `log m/FOOD s/NUMBER OF SERVINGS`
+Format: `log m/<MEAL_NAME> s/<SERVINGS>`
 
-* The `FOOD` can be from any food from the food list.
-* The `NUMBER OF SERVINGS` can be any interger value.  
+* The `<MEAL_NAME>` can be from any food from the food list.
+* The `<SERVINGS>` can be any interger value.  
 
 Example of usage: 
 

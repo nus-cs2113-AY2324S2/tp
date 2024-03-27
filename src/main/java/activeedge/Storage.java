@@ -8,6 +8,7 @@ import activeedge.task.WaterTask;
 import activeedge.userdetails.LogHeight;
 import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
+import command.AddBMICommand;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
 
@@ -70,8 +71,8 @@ public class Storage {
      */
     public static void saveLogsToFile(String filePath) {
         try (FileWriter fw = new FileWriter(filePath, false)) {
-            for (int i = 0; i < UserDetailsList.DETAILS_LIST.size(); i++) {
-                String out = UserDetailsList.DETAILS_LIST.get(i).toString();
+            for (int i = 0; i < UserDetailsList.detailsList.size(); i++) {
+                String out = UserDetailsList.detailsList.get(i).toString();
                 fw.write(out + "\n");
             }
             for (int i = 0; i < TaskList.tasksList.size(); i++) {
@@ -104,12 +105,14 @@ public class Storage {
             System.out.println("Since you are new here, let's start with your height and weight " +
                     "to set things up!");
             try {
+                int heightInput = 0;
+                int weightInput = 0;
                 while (j < 1) {
                     System.out.println("Please input your height (in cm): ");
                     Scanner scanner = new Scanner(System.in);
                     try {
-                        Integer input = Integer.valueOf(scanner.nextLine());
-                        AddHeightCommand addHeightCommand = new AddHeightCommand(input, LocalDateTime.now());
+                        heightInput = Integer.valueOf(scanner.nextLine());
+                        AddHeightCommand addHeightCommand = new AddHeightCommand(heightInput, LocalDateTime.now());
                         addHeightCommand.execute();
                         saveLogsToFile("data/data.txt");
                         j++;
@@ -121,8 +124,8 @@ public class Storage {
                     System.out.println("Please input your weight (in kg): ");
                     Scanner scanner = new Scanner(System.in);
                     try {
-                        Integer input = Integer.valueOf(scanner.nextLine());
-                        AddWeightCommand addWeightCommand = new AddWeightCommand(input, LocalDateTime.now());
+                        weightInput = Integer.valueOf(scanner.nextLine());
+                        AddWeightCommand addWeightCommand = new AddWeightCommand(weightInput, LocalDateTime.now());
                         addWeightCommand.execute();
                         saveLogsToFile("data/data.txt");
                         i++;
@@ -130,12 +133,28 @@ public class Storage {
                         System.out.println("Please input a whole number only");
                     }
                 }
+                double heightMeters = (double) heightInput/100;
+                int bmi = (int) (weightInput/(heightMeters*heightMeters));
+                AddBMICommand addBMICommand = new AddBMICommand(bmi, LocalDateTime.now());
+                addBMICommand.execute();
+                saveLogsToFile("data/data.txt");
+                System.out.println("Your BMI is " + bmi);
+                if (bmi < 19) {
+                    System.out.println("You are in the underweight range.");
+                } else if (bmi < 25) {
+                    System.out.println("You are in the healthy weight range.");
+                } else if (bmi < 30) {
+                    System.out.println("You are in the overweight range.");
+                } else {
+                    System.out.println("You are in the obese weight range.");
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             System.out.println("You can now start logging data! Type 'help' " +
                     "if you are not sure how to use ActiveEdge.");
         }else {
+
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {
                     String task = scanner.nextLine();
@@ -143,17 +162,22 @@ public class Storage {
                     LocalDateTime dateTime = parseDateTime(dateTimeStr);
 
                     if (task.startsWith("Meal")) {
-                        String[] items = task.split(" ");
-                        if (!task.matches("^Meal .* \\d+ \\d+ kcal \\(Recorded on: .*\\)$")) {
-                            System.out.println("Invalid task format: " + task);
-                            continue; // Skip this task and move to the next line
-                        }
-
+                        String[] items = task.trim().split(" ");
                         int len = items.length;
-                        assert len >= 4;
-                        String mealName = items[1];
-                        int servings = Integer.parseInt(items[2]);
-                        int mealCalories = Integer.parseInt(items[3]);
+                        assert len >= 8;
+
+                        String mealName = "";
+                        //len-7 is the last item[] of the mealname. if mealname is fried chicken
+                        // then item[len-7] = chicken
+                        for(int i = 1; i <= len-7; i++) {
+                            if( i < len-7 ) {
+                                mealName = mealName + items[i] + " ";
+                            } else {
+                                mealName = mealName + items[i];
+                            }
+                        }
+                        int servings = Integer.parseInt(items[len-6]);
+                        int mealCalories = Integer.parseInt(items[len-5]);
                         MealTask newTask = new MealTask(mealName, servings, mealCalories, dateTime);
 
                         TaskList.tasksList.add(newTask);
@@ -169,11 +193,11 @@ public class Storage {
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
                         LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), dateTime);
-                        UserDetailsList.DETAILS_LIST.add(newHeight);
+                        UserDetailsList.detailsList.add(newHeight);
                     } else if (task.startsWith("Weight")) {
                         String[] items = task.trim().split(" ");
                         LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]), dateTime);
-                        UserDetailsList.DETAILS_LIST.add(newWeight);
+                        UserDetailsList.detailsList.add(newWeight);
                     } else if (task.startsWith("Exercise")){
                         String[] items = task.trim().split(" ");
                         int len = items.length;
