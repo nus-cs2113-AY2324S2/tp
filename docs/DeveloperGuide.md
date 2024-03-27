@@ -21,16 +21,27 @@
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
-  - [Sleep tracker component](#sleep-tracker-component)
     - [Description](#description-1)
     - [Design Considerations](#design-considerations-1)
-      - [User Design Considerations](#user-design-considerations-1)
-      - [Developer Design Considerations](#developer-design-considerations-1)
+        - [User Design Considerations](#design-considerations-1)
+        - [Developer Design Considerations](#design-considerations-1)
     - [Implementation](#implementation-1)
-      - [Class Diagram](#class-diagram-1)
-      - [Sequence Diagram](#sequence-diagram-1)
-  
-  - [Focus timer component]()
+        - [Class Diagram](#class-diagram-1)
+        - [Sequence Diagram](#sequence-diagram-1)
+  - [Sleep tracker component](#sleep-tracker-component)
+    - [Description](#description-2)
+    - [Design Considerations](#design-considerations-2)
+      - [User Design Considerations](#user-design-considerations-2)
+      - [Developer Design Considerations](#developer-design-considerations-1)
+    - [Implementation](#implementation-2)
+      - [Class Diagram](#class-diagram-2)
+      - [Sequence Diagram](#sequence-diagram-2)
+  - [Focus timer component](#focus-timer-component)
+    - [Design Considerations](#design-considerations-3)
+    - [Implementation](#implementation-3)
+      - [Focus Class Diagram](#focus-class-diagram)
+      - [Focus State Transition Diagram](#focus-state-transition-diagram)
+      - [Focus Sequence Diagram](#focus-sequence-diagram)
   - [Fitness tracker component]()
 
 ## Acknowledgements
@@ -207,6 +218,102 @@ and the corresponding method in `ReflectionManager` is invoked.
 
 ### Habit tracker component
 
+#### Description
+The habit tracker component aims to provide user with a tool to track and cultivate good habits.
+
+#### Design Considerations
+* ##### User Design Considerations
+    * User can add new habits in the habit tracker that they wish to cultivate.
+    * User can increase the count of a habit after they completed the habit for the day, allowing them to keep track of the total number of times they completed the habit.
+    * User can also delete the habit if they no longer want to cultivate that habit.
+    * User are able to set the priority of the habits (HIGH, MED, LOW), to prioritise their time on more important habits.
+    * User can also sort the habits according to their priority for better visualization.
+    * A help menu is also provided for users to guide them on how to use the habit tracker.
+    * Error messages with guidance messages will be printed to console if command input by user is invalid.
+
+* #### Developer Design Considerations
+    * Modularity: Encapsulate related functionalities within classes to promote re-usability and maintainability.
+    * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages
+    * Data Encapsulation: Control the access to a class's internal attributes, accessible only through getters and setters
+    * Interface Segregation: Segregation of command interface to represent different command types for specific use cases.
+    * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+#### Implementation
+
+##### Class Diagram
+![HabitClassDiagram.png](diagrams/habit/HabitClassDiagram.png)
+
+* `HabitTracker` class
+    * Overview
+        * The `HabitTracker` class manages the habit tracker list which contains the habits.
+    * Attributes:
+        * `habitList`: Private attribute representing the list of habits. It is an ArrayList of Habit objects.
+    * Methods:
+        * `HabitTracker()`: Constructs a HabitTracker object. 
+        * `getNumberOfHabits()`: Returns the number of habits in the habitList.
+        * `addHabit(Habit newHabit)`: Adds a new Habit object into the habitList.
+        * `listHabits()`: Prints a list of all habits in habitList .
+        * `isValidHabitID(int habitID)`: Check if a habit ID is valid by comparing with the size of habitList.
+        * `updateHabitCount(int habitID, String updatedCount)`: Update the habit count of a habit.
+        * `deleteHabit(int habitID)`: Delete a habit from habitList.
+        * `setPriorityLevel(int habitID, String priority)`: Set the priority of a habit.
+        * `sortHabits()`: Sort the habits in habitList according to the habits' priorities.
+        * `clearHabitList()`: Delete all habits from habitList.
+    * Dependencies:
+        * HabitTrackerStorage: Utilized for data storage operations.
+        * Ui: Utilized for user interface interactions.
+    * UML notes:
+        * `HabitTracker` can contain any number of `Habit` class objects.
+        * It relies on `HabitTrackerStorage` class for file operations and `Ui` class for user interactions.
+
+* `Habit` class
+    * Overview:
+        * This class represents a Habit.
+    * Attributes:
+        * `description`: Private attribute holding the habit description.
+        * `habitCount`: Private attribute holding the total count the user have completed the habit.
+        * `priority`: Private attribute representing the priority level of a habit.
+    * Methods:
+        * `Habit(String description)`: Constructs a habit object.
+        * `Habit(String description, int habitCount, Priority priority)`: Constructs a habit object.
+        * `getDescription()`: Get the description of the habit.
+        * `getHabitCount()`: Get the habit count of the habit.
+        * `getPriority()`: Get the priority of the habit.
+        * `toString()`: Method that formats the attributes of the habit for printing.
+    * UML notes:
+        * `HabitTracker` can contain any number of `ReflectionQuestion` instances.
+        * When a `HabitTracker` object is destroyed, its associated `Habit` instances are also destroyed, showcasing a composition relationship.
+
+* `HabitCommandParser`
+    * Overview: Parses habit-tracker commands and create different habit command objects based on user input.
+    * Method: `determineHabitCommand(HabitTracker habitTracker, String commandArgs)`
+
+* Habit command classes
+    * `AddHabitCommand`: Add a new habit to the habit-tracker.
+        * Command format: `habit add <habit_description>`
+    * `DeleteHabitCommand`: Delete a habit from the habit-tracker.
+        * Command format: `habit delete /id <habit_ID>`
+    * `ListHabitsCommand`: Prints a list of all existing habits.
+        * Command format: `habit list`
+    * `UpdateHabitCountCommand`: Increase habit count after completing a habit.
+        * Command format: `habit update /id <habit_ID> /by <increment_count>`
+    * `SetPriorityCommand`: Set priority level of habit
+        * Command format: `habit set /id <habit_ID> /priority <priority_level>`
+    * `SortHabitsCommand`: Sort habit list according to priority level.
+        * Command format: `habit sort`
+    * `HabitHelpCommand`: Display a help menu of the habit-tracker commands
+        * Command format: `habit help`
+
+
+#### Sequence Diagram
+![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
+* Note that `PlaceholderReflectionCommand` can refer to any of the habit commands. 
+
+When main starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the habit tracker feature. If it is, it will be further parsed by `HabitCommandParser` to determine
+the command. The corresponding habit command object is then created and is returned to `Main`, where `execute` will then be called
+and the corresponding method in `HabitTracker` is invoked.
+
 ### Sleep tracker component
 
 #### Description
@@ -343,6 +450,69 @@ SleepTrackerParser to determine the command. The corresponding sleep command obj
 returned to Main, where execute will then be called and the corresponding method in SleepTracker is invoked.
 
 ### Focus timer component
+The focus timer component provides users with a countdown timer and a count up timer, which enables the user to set a 
+goal to focus entirely on their work. This component aims to allow users to keep track of their time, improving their
+productivity and well-being.
+
+### Design Considerations
+* #### User Design Considerations
+  * Users will be able to choose between a count up timer and a countdown timer.
+  * Users can start, pause, resume, stop the timer at any point in time.
+  * Users will also be able to navigate to other functions while running the timer concurrently.
+  * Error messages will inform users the current status of the timer and reason the error appeared.
+
+* #### Developer Design Considerations
+  * The `Focus Timer` component is a wrapper class for both `CountupTimer` and `CountdownTimer`, which contains 
+utility logic to identify state and manage the different timers.
+
+#### Implementation
+
+#### Focus Class Diagram
+![FocusClassDiagram.png](diagrams\focus\FocusClassDiagram.png)
+* `FocusTimer` object
+  * Overview:
+    * The `FocusTimer` class is a facade class that sits between the component internals and users of the component 
+    such that all access to the component like countdown timer and count up timer happens through the Facade class.
+  * Attributes:
+    * `countupTimer`: Count up timer object.
+    * `countdownTimer`: Count down timer object.
+    * `timerMode`: Indicates the timer mode to be operating.
+  * Methods:
+    * `getStartTiming()`: Gets the current running state of the timer.
+    * `switchTimer()`: Changes the timer mode between count up and count down timer.
+    * `getPausedStatus()`: Gets the current pause status of the timer.
+    * `setStartTiming()`: Start the timer.
+    * `setStopTiming()`: Stop the timer.
+    * `setPauseTiming()`: Pause the timer.
+    * `setResumeTiming()`: Resume the timer.
+    * `checkTime`: Get the total time elapsed or time remaining in the timer.
+    * `setDuration`: Change countdown timer duration.
+    
+* `CountupTimer` and `CountdownTimer` object
+  * Dependencies:
+    * `Ui` object: Utilized for user interface interactions.
+
+#### Focus State transition Diagram
+There are many commands for the focus timer feature. However, some commands logically cannot be executed in cetain 
+states. For example, the command `focus pause` cannot be used if the timer hasn't started. Another example would be 
+the `focus switch` command to switch between the timer could not be used if the current timer mode is running. To aid 
+the understanding of the logic, we will use state transition diagram.
+
+![FocusStateDiagram.png](diagrams\focus\FocusStateDiagram.png)
+* The black circle in the diagram represents the starting point of focus timer. 
+* The labels of the arrows represents the commands.
+
+#### Focus Sequence Diagram
+![FocusSequenceDiagram.png](diagrams\focus\FocusSequenceDiagram.png)
+* Note that `PlaceholderFoucsCommand` can refer to any of the focus commands as mentioned above, since all of them 
+follows the same call pattern.
+
+When main starts, `scanner` and `FocusTimer` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the focus timer feature. 
+If it is, it will be further parsed by `FocusCommandParser` to determine the command. 
+The corresponding focus command object is then created and is returned to `Main`, where `execute` will then be called 
+and the corresponding method in `FocusTimer` is invoked.
+
 
 ### Fitness tracker component
 

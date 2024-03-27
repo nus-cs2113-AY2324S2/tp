@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant ":Main" as Main
+participant ":Scanner" as Scanner
+participant ":FocusTimer" as FocusTimer
+participant ":Parser" as Parser
+participant ":FocusCommandParser" as FocusCommandParser
+participant ":PlaceholderFocusCommand" as PlaceholderFocusCommand
+
+activate Main
+
+create Scanner
+Main -> Scanner
+activate Scanner
+
+create FocusTimer
+Main -> FocusTimer
+activate FocusTimer
+
+loop until isExit
+    Main -> Scanner : nextLine()
+    Main <-- Scanner : userInput
+    Main -> Parser : userInput
+    alt userInput is FocusCommand
+        Parser -> FocusCommandParser : DetermineFocusCommand
+        alt command is PlaceholderFocusCommand
+            create PlaceholderFocusCommand
+            FocusCommandParser -> PlaceholderFocusCommand : focusCommand()
+            activate PlaceholderFocusCommand
+            PlaceholderFocusCommand --> FocusCommandParser : command object
+            FocusCommandParser --> Parser  : command object
+            Parser --> Main : command object
+            Main -> PlaceholderFocusCommand : execute()
+            PlaceholderFocusCommand --> FocusTimer : execute()
+            destroy PlaceholderFocusCommand
+        end
+    end
+end
+
+@enduml

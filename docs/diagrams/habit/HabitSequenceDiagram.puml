@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Main
+participant Scanner
+participant HabitTracker
+participant Parser
+participant HabitCommandParser
+participant PlaceholderHabitCommand
+
+activate Main
+
+create Scanner
+Main -> Scanner
+activate Scanner
+
+create HabitTracker
+Main -> HabitTracker
+activate HabitTracker
+
+loop until isExit
+    Main -> Scanner: nextLine()
+    Scanner --> Main: userInput
+    Main -> Parser: userInput
+
+    alt userInput is HabitCommand
+        Parser -> HabitCommandParser: determineHabitCommand()
+        alt command is PlaceholderHabitCommand
+            create PlaceholderHabitCommand
+            HabitCommandParser -> PlaceholderHabitCommand: command, params
+            activate PlaceholderHabitCommand
+            PlaceholderHabitCommand --> HabitCommandParser: command object
+            HabitCommandParser --> Parser: command object
+            Parser --> Main: command object
+            Main -> PlaceholderHabitCommand: execute()
+            PlaceholderHabitCommand -> HabitTracker: execute()
+            destroy PlaceholderHabitCommand
+        end
+    end
+end
+
+
+@enduml

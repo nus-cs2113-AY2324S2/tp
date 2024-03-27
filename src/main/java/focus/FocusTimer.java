@@ -6,8 +6,8 @@ import ui.Ui;
  * Represents the focus timer for wellness360.
  */
 public class FocusTimer {
-    CountupTimer countupTimer;
-    CountdownTimer countdownTimer;
+    private CountupTimer countupTimer;
+    private CountdownTimer countdownTimer;
     private boolean timerMode = false; // false for count-up, true for countdown
 
     /**

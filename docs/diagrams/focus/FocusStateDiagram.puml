@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty description
+
+[*] --> StateReady
+StateReady --> StateReady: switch timer
+StateReady --> StateTimerRunning: start
+StateTimerRunning -up-> StateReady: stop
+StateTimerRunning -up-> StatePaused: pause
+StatePaused --> StateTimerRunning: resume
+StatePaused --> StateReady: stop
+StatePaused --> StatePaused: check
+StateTimerRunning --> StateTimerRunning: check
+
+
+@enduml
