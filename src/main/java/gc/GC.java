@@ -5,7 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 //import java.awt.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class GC extends JPanel {
 
