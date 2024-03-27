@@ -15,9 +15,9 @@ public class CategoryCommand extends Command {
     public CategoryCommand(String subcommand) {
         this.subcommand = subcommand;
     };
-    public CategoryCommand(String subcommand, String value) {
+    public CategoryCommand(String subcommand, String categoryString) {
         this.subcommand = subcommand;
-        this.value = value;
+        this.value = categoryString;
     };
     @Override
     public void execute(Dashboard dashboard) {

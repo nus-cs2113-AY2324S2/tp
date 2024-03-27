@@ -1,0 +1,52 @@
+@startuml
+
+box Category Load Logic
+
+participant ":Category" as category
+participant ":FileManager" as fileManager
+participant ":GeneralFileParser" as generalFileParser
+participant ":Logic" as logic
+
+activate logic
+logic -> logic: loadCategoriesFromFile()
+activate logic
+logic -> fileManager: openCategoryFile()
+activate fileManager
+fileManager -[dashed]-> logic: hasFileErrors: boolean
+deactivate fileManager
+    alt hasFileErrors
+        return
+    else
+        logic -> fileManager : getNextLine()
+        activate fileManager
+        fileManager -[dashed]-> logic : hasNextLine:boolean
+        deactivate fileManager
+        loop hasNextLine
+            logic -> fileManager : readNextLine();
+            activate fileManager
+            fileManager -[dashed]-> logic : line:String
+            deactivate fileManager
+            logic -> generalFileParser : getCommandFromFileInput(line: String)
+            activate generalFileParser
+            create AddCategoryFromFileCommand
+            generalFileParser -> AddCategoryFromFileCommand: new AddCategoryFromFileCommand ("add", line)
+            activate AddCategoryFromFileCommand
+            AddCategoryFromFileCommand --> generalFileParser: command:AddCategoryFromFileCommand
+            deactivate AddCategoryFromFileCommand
+            generalFileParser --> logic : command:AddCategoryFromFileCommand
+            deactivate generalFileParser
+            logic -> AddCategoryFromFileCommand : execute(..)
+            activate AddCategoryFromFileCommand
+            AddCategoryFromFileCommand -> category : addCategory(line)
+            activate category
+            deactivate category
+            deactivate AddCategoryFromFileCommand
+            logic -> fileManager : getNextLine();
+            activate fileManager
+            fileManager -[dashed]-> logic : hasNextLine:boolean
+            deactivate fileManager
+
+        end
+    end
+end box
+@enduml
