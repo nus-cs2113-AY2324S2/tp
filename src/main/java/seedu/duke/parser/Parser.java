@@ -1,23 +1,32 @@
 package seedu.duke.parser;
 
-import java.util.function.Function;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.GradeCommand;
 import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.InitCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.ViewGpaCommand;
-import seedu.duke.command.InitCommand;
+import seedu.duke.command.ViewGraduateCommand;
+
+import java.util.function.Function;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.duke.FAP;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.json.JsonManager;
+
+import static seedu.duke.FAP.LOGGER;
 
 public class Parser {
 
+    static JsonManager jsonManager = FAP.jsonManager;
     // String Pattern inputs
     private static final Pattern INIT_PATTERN =
             Pattern.compile("init\\s+n/(?<name>[A-Za-z0-9 ]+)", Pattern.CASE_INSENSITIVE);
@@ -25,11 +34,13 @@ public class Parser {
             Pattern.compile("gpa", Pattern.CASE_INSENSITIVE);
     private static final Pattern VIEW_PATTERN =
             Pattern.compile("view", Pattern.CASE_INSENSITIVE);
+    private static final Pattern GRADUATE_PATTERN =
+            Pattern.compile("graduate", Pattern.CASE_INSENSITIVE);
     private static final Pattern REMOVE_MODULE_PATTERN =
             Pattern.compile("remove\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_MODULE_PATTERN =
-            Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)\\s+s/(?<status>plan|taken)" +
-                    "\\s+w/(?<semester>[1-8])\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
+                    "\\s+w/(?<semester>[1-8])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
                     "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)", Pattern.CASE_INSENSITIVE);
@@ -40,8 +51,9 @@ public class Parser {
     private static final String[] INIT_ARGUMENTS = {"name"};
     private static final String[] GPA_ARGUMENTS = {};
     private static final String[] VIEW_ARGUMENTS = {};
+    private static final String[] GRADUATE_ARGUMENTS = {};
     private static final String[] REMOVE_MODULE_ARGUMENTS = {"courseCode"};
-    private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "status", "semester", "mc"};
+    private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "semester"};
     private static final String[] GRADE_ARGUMENTS = {"courseCode", "grade"};
     private static final String[] BYE_ARGUMENTS = {};
 
@@ -49,6 +61,7 @@ public class Parser {
     private static final Function<Map<String, String>, Command> INIT_CONSTRUCTOR = Parser::initCommand;
     private static final Function<Map<String, String>, Command> GPA_CONSTRUCTOR = Parser::gpaCommand;
     private static final Function<Map<String, String>, Command> VIEW_CONSTRUCTOR = Parser::viewCommand;
+    private static final Function<Map<String, String>, Command> GRADUATE_CONSTRUCTOR = Parser::graduateCommand;
     private static final Function<Map<String, String>, Command> REMOVE_MODULE_CONSTRUCTOR = Parser::removeCommand;
     private static final Function<Map<String, String>, Command> ADD_MODULE_CONSTRUCTOR = Parser::addCommand;
     private static final Function<Map<String, String>, Command> GRADE_CONSTRUCTOR = Parser::gradeCommand;
@@ -63,6 +76,7 @@ public class Parser {
         list.add(new CommandMetadata(INIT_PATTERN, INIT_ARGUMENTS, INIT_CONSTRUCTOR));
         list.add(new CommandMetadata(GPA_PATTERN, GPA_ARGUMENTS, GPA_CONSTRUCTOR));
         list.add(new CommandMetadata(VIEW_PATTERN, VIEW_ARGUMENTS, VIEW_CONSTRUCTOR));
+        list.add(new CommandMetadata(GRADUATE_PATTERN, GRADUATE_ARGUMENTS, GRADUATE_CONSTRUCTOR));
         list.add(new CommandMetadata(REMOVE_MODULE_PATTERN, REMOVE_MODULE_ARGUMENTS, REMOVE_MODULE_CONSTRUCTOR));
         list.add(new CommandMetadata(ADD_MODULE_PATTERN, ADD_MODULE_ARGUMENTS, ADD_MODULE_CONSTRUCTOR));
         list.add(new CommandMetadata(GRADE_PATTERN, GRADE_ARGUMENTS, GRADE_CONSTRUCTOR));
@@ -101,21 +115,26 @@ public class Parser {
         return new ViewCommand();
     }
 
+    private static ViewGraduateCommand graduateCommand(Map<String, String> args) {
+        return new ViewGraduateCommand();
+    }
+
     private static Command removeCommand(Map<String, String> args) {
         return new RemoveCommand(args);
     }
 
     private static Command addCommand(Map<String, String> args) {
-        String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
-        String status = args.getOrDefault("status", "STATUS_ERROR");
-        String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
-        String mc = args.getOrDefault("mc", "MC_ERROR");
+        try {
+            String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+            String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
+            int semesterInt = Integer.parseInt(semester);
 
-        int semesterInt = Integer.parseInt(semester);
-        int mcInt = Integer.parseInt(mc);
-        boolean statusBool = status.toLowerCase().equals("taken");
-
-        return new AddCommand(moduleCode, mcInt, statusBool, semesterInt);
+            return new AddCommand(moduleCode, semesterInt);
+        } catch (ModuleNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage());
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+        return new InvalidCommand();
     }
 
     private static Command gradeCommand(Map<String, String> args) {
