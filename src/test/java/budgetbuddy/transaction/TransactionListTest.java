@@ -34,14 +34,14 @@ public class TransactionListTest {
     @Test
     public void processTransaction_addsTransaction()
             throws InvalidTransactionTypeException, InvalidAddTransactionSyntax, EmptyArgumentException {
-        Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
+        Transaction testTransaction = new Income("Test", 200, "Personal", "14-03-2024",
                 account);
         transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
 
         assertEquals(1, transactionList.getTransactions().size());
         assertEquals(testTransaction.getDescription(), transactionList.getTransactions().get(0).getDescription());
         assertEquals(testTransaction.getAmount(), transactionList.getTransactions().get(0).getAmount());
-        assertEquals(testTransaction.getCategory(), transactionList.getTransactions().get(0).getCategory());
+        assertEquals(testTransaction.getCategory().getCategoryName(), transactionList.getTransactions().get(0).getCategory().getCategoryName());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
     }
 

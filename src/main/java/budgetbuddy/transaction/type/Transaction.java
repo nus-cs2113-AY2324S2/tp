@@ -33,8 +33,8 @@ public abstract class Transaction {
         return LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
   
-    public String getCategory() {
-        return category.getCategoryName();
+    public Category getCategory() {
+        return category;
     }
 
     public abstract String getTransactionType();
@@ -45,7 +45,7 @@ public abstract class Transaction {
                 " Description: " + getDescription() + " | " +
                 " Date: " + getDate() + " | " +
                 " Amount: " + getAmount() + " | " +
-                " Category: " + getCategory()) ;
+                " Category: " + getCategory().getCategoryName()) ;
     }
 
     public void setCategory(Category category) {

@@ -24,7 +24,7 @@ public class TransactionTest {
                 new Account());
         assertEquals("Groceries", transaction.getDescription());
         assertEquals(50.0f, transaction.getAmount(), 0.001);
-        assertEquals("Food", transaction.getCategory());
+        assertEquals("Food", transaction.getCategory().getCategoryName());
         LocalDate date = LocalDate.parse("14-03-2024", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         assertEquals(date, transaction.getDate());
     }
@@ -47,7 +47,7 @@ public class TransactionTest {
     public void testGetCategory() {
         Transaction transaction = new Income("Groceries", 50.0f, "Food", "14-03-2024",
                 account);
-        assertEquals("Food", transaction.getCategory());
+        assertEquals("Food", transaction.getCategory().getCategoryName());
     }
 
     @Test

@@ -21,6 +21,6 @@ public class ParserTest {
         assertEquals("Shopping", transaction.getDescription());
         assertEquals(50.0f, transaction.getAmount(), 0.001);
         assertEquals(LocalDate.parse("14-03-2024", DateTimeFormatter.ofPattern("dd-MM-yyyy")), transaction.getDate());
-        assertEquals("Personal", transaction.getCategory());
+        assertEquals("Personal", transaction.getCategory().getCategoryName());
     }
 }

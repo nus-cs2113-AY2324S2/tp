@@ -116,7 +116,7 @@ public class UserInterface {
             String description = transaction.getDescription();
             LocalDate date = transaction.getDate();
             double amount = transaction.getAmount();
-            String category = transaction.getCategory();
+            String category = transaction.getCategory().getCategoryName();
 
             System.out.printf(TAB_SPACE+TAB_SPACE + "%-5d %-10s %-50.45s %-20s %-15.2f  %-15s%n", i + 1, type,
                     description, date, amount, category);
