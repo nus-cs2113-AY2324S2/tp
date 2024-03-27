@@ -41,7 +41,7 @@ public enum CEGModules {
     public int getModuleMC() {
         return moduleMC;
     }
-    
+
     public static CEGModules mapStringToEnum(String moduleCode) {
         for (CEGModules cegModule : CEGModules.values()) {
             if (cegModule.name().equalsIgnoreCase(moduleCode)) {
@@ -50,6 +50,4 @@ public enum CEGModules {
         }
         throw new IllegalArgumentException("No module code " + moduleCode + " found in CEGModules");
     }
-
-
 }

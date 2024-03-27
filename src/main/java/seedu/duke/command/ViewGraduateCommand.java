@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class ViewGraduateCommand extends Command {
 
     private final ArrayList<String> modulesToComplete = moduleList.getModulesToComplete();
-
-
+    
     @Override
     public void execute(String userInput) {
         Ui.printModulesToComplete(modulesToComplete);

@@ -26,6 +26,10 @@ public class Ui {
         return currentLine;
     }
 
+    public static void printMessage(String str) {
+        System.out.println(str);
+    }
+
     private boolean shouldIgnore(String currentLine) {
         return currentLine.isBlank() || currentLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }

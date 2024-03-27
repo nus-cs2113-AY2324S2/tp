@@ -41,7 +41,6 @@ public class AddCommand extends Command{
 
             Module newModule = new Module(moduleCode, moduleMC, moduleDate, jsonManager.getModuleTitle());
             moduleList.addModule(newModule);
-            moduleList.printModules();
         } catch (ModuleException e) {
             System.err.println("Failed to add module: " + e.getMessage());
         } catch (Exception e) {
