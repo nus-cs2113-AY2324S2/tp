@@ -93,7 +93,7 @@ public class GymStation {
             CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
 
-        String exerciseName = inputs.split(UiConstant.SPLIT_BY_SLASH)[WorkoutConstant.INDEX_OF_STATION_NAME].trim();
+        String exerciseName = inputs.split(UiConstant.SPLIT_BY_SLASH)[WorkoutConstant.STATION_NAME_INDEX].trim();
         String sets = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_SETS);
         String reps = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_REPS);
         String weights = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_WEIGHTS);

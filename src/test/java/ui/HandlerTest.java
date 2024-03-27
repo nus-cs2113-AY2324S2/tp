@@ -122,7 +122,7 @@ class HandlerTest {
         Handler.processInput();
         Handler.destroyScanner();
 
-        String inputHistory = "HISTORY /item:run";
+        String inputHistory = "HISTORY /view:run";
         System.setIn(new ByteArrayInputStream(inputHistory.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
@@ -142,7 +142,7 @@ class HandlerTest {
         Handler.processInput();
         Handler.destroyScanner();
 
-        String inputLatest = "LATEST /item:run";
+        String inputLatest = "LATEST /view:run";
         System.setIn(new ByteArrayInputStream(inputLatest.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();

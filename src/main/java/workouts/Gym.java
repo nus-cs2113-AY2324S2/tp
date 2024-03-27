@@ -117,55 +117,64 @@ public class Gym extends Workout {
         }
     }
 
-    private void buildGymStationString(GymStation station, StringBuilder stringBuilder) {
-        stringBuilder.append(station.getStationName());
-    }
 
-    private void buildGymSetString(GymStation station, StringBuilder stringBuilder) {
-        stringBuilder.append(station.getNumberOfSets());
-    }
+    /**
+     * Use when printing the workout history. This method is used to format the reps and weights into a string.
+     *
+     * @param station The GymStation object which contains the sets to be formatted.
+     * @return A StringBuilder array where [0] is reps, [1] is weights.
+     */
+    private StringBuilder[] buildGymRepAndWeightString(GymStation station){
+        StringBuilder[] repAndWeightArray = new StringBuilder[2];
+        repAndWeightArray[0] = new StringBuilder();
+        repAndWeightArray[1] = new StringBuilder();
 
-    private void buildGymRepString(GymStation station, StringBuilder stringBuilder) {
-        for (int j = 0; j < station.getNumberOfSets(); j++) {
-            stringBuilder.append(station.getSets().get(j).getRepetitions());
-            if (j != station.getNumberOfSets() - 1) {
-                stringBuilder.append(",");
+
+        int repIndex = 0;
+        int weightIndex = 1;
+
+        ArrayList<GymSet> gymSets = station.getSets();
+        for (int i = 0; i < gymSets.size(); i++) {
+            String gymRepString = String.valueOf(gymSets.get(i).getRepetitions());
+            String gymWeightString = String.valueOf(gymSets.get(i).getWeight());
+
+            repAndWeightArray[repIndex].append(gymRepString);
+            repAndWeightArray[weightIndex].append(gymWeightString);
+            if (i != gymSets.size() - 1) {
+                repAndWeightArray[repIndex].append(UiConstant.COMMAS);
+                repAndWeightArray[weightIndex].append(UiConstant.COMMAS);
             }
         }
-    }
-
-    private void buildGymWeightString(GymStation station, StringBuilder stringBuilder) {
-        for (int j = 0; j < station.getNumberOfSets(); j++) {
-            stringBuilder.append(station.getSets().get(j).getWeight());
-            if (j != station.getNumberOfSets() - 1) {
-                stringBuilder.append(",");
-            }
-        }
+        return repAndWeightArray;
     }
 
 
-    public String getFormatForAllHistory(boolean isFirstIteration , int i) {
-
+    /**
+     * Used when printing all the workouts. This method takes in two parameters {@code isFirstIteration} and {@code i}
+     * @param index indicates which particular gymStation is being queried.
+     * @return
+     */
+    public String getHistoryFormatForSpecificGymStation(int index) {
 
         StringBuilder gymDate = new StringBuilder();
-        StringBuilder gymStationString = new StringBuilder();
-        StringBuilder gymSetString = new StringBuilder();
-        StringBuilder gymRepString = new StringBuilder();
-        StringBuilder gymWeightString = new StringBuilder();
         if (date != null) {
-            gymDate.append(date.toString());
+            gymDate.append(date);
         } else {
             gymDate.append(ErrorConstant.NO_DATE_SPECIFIED_ERROR);
         }
 
-        GymStation station = getStations().get(i);
-        buildGymStationString(station, gymStationString);
-        buildGymSetString(station, gymSetString);
-        buildGymRepString(station, gymRepString);
-        buildGymWeightString(station, gymWeightString);
+        // Get the string format for a specific gym station
+        GymStation station = getStations().get(index);
+        String gymStationString = station.getStationName();
+        String gymSetString = String.valueOf(station.getNumberOfSets());
 
+        // Process the reps and weights into string format
+        StringBuilder [] repAndWeightArray = buildGymRepAndWeightString(station);
+        String gymRepString = repAndWeightArray[0].toString();
+        String gymWeightString = repAndWeightArray[1].toString();
 
-        if (isFirstIteration){
+        // If it is first iteration, includes dashes for irrelevant field
+        if (index == 0){
             return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
                     WorkoutConstant.GYM, gymDate,
                     UiConstant.DASH,
@@ -176,6 +185,7 @@ public class Gym extends Workout {
                     gymRepString,
                     gymWeightString);
         } else {
+            // if it is not, then leave it blank
             return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
                     UiConstant.EMPTY_STRING,
                     UiConstant.EMPTY_STRING,
@@ -189,95 +199,6 @@ public class Gym extends Workout {
             );
 
         }
-
-
     }
 
-//    public String getFormatForAllHistoryFirst(){
-//        String printedDate;
-//
-//        if (date != null) {
-//            printedDate = date.toString();
-//        } else {
-//            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
-//        }
-////
-//        StringBuilder gymStationString = new StringBuilder();
-//        StringBuilder gymSetString = new StringBuilder();
-//        StringBuilder gymRepString = new StringBuilder();
-//        StringBuilder gymWeightString = new StringBuilder();
-//
-//        for(int i = 0; i < 1; i++){
-//            GymStation station = stations.get(i);
-//            gymStationString.append(station.getStationName());
-//            gymSetString.append(station.getNumberOfSets());
-//
-//            for(int j = 0; j < station.getNumberOfSets(); j++){
-//                gymRepString.append(station.getSets().get(j).getRepetitions());
-//                gymWeightString.append(station.getSets().get(j).getWeight());
-//                if(j != station.getNumberOfSets() - 1){
-//                    gymWeightString.append(", ");
-//                }
-//            }
-//
-//
-//        }
-//
-//
-//        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
-//                WorkoutConstant.GYM,
-//                printedDate,
-//                "-",
-//                "-",
-//                "-",
-//                gymStationString,
-//                gymSetString,
-//                gymRepString,
-//                gymWeightString);
-//     }
-
-//    public String getFormatForAllHistorySubsequent(){
-//        String printedDate;
-//
-//        if (date != null) {
-//            printedDate = date.toString();
-//        } else {
-//            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
-//        }
-////
-//        StringBuilder gymStationString = new StringBuilder();
-//        StringBuilder gymSetString = new StringBuilder();
-//        StringBuilder gymRepString = new StringBuilder();
-//        StringBuilder gymWeightString = new StringBuilder();
-//        if(stations.size() < 2){
-//            return "";
-//        }else{
-//            for(int i = 1; i < stations.size(); i++){
-//                GymStation station = stations.get(i);
-//                gymStationString.append(station.getStationName());
-//                gymSetString.append(station.getNumberOfSets());
-//
-//                for(int j = 0; j < station.getNumberOfSets(); j++){
-//                    gymRepString.append(station.getSets().get(j).getRepetitions());
-//                    gymWeightString.append(station.getSets().get(j).getWeight());
-//                    if(j != station.getNumberOfSets() - 1){
-//                        gymWeightString.append(", ");
-//                    }
-//                }
-//            }
-//        }
-//
-//
-//
-//        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
-//                "",
-//                "",
-//                "",
-//                "",
-//                "",
-//                gymStationString,
-//                gymSetString,
-//                gymRepString,
-//                gymWeightString);
-//    }
 }

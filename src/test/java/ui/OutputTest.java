@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.WorkoutConstant;
@@ -112,7 +113,7 @@ class OutputTest {
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "\u001B[31mError: " +
-                WorkoutConstant.NO_RUNS_FOUND +
+                ErrorConstant.HISTORY_RUN_EMPTY_ERROR +
                 "\u001B[0m" +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
@@ -178,7 +179,7 @@ class OutputTest {
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "\u001B[31mError: " +
-                WorkoutConstant.NO_GYMS_FOUND +
+                ErrorConstant.HISTORY_GYM_EMPTY_ERROR +
                 "\u001B[0m" +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
