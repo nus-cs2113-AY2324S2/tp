@@ -2,6 +2,8 @@ package seedu.lifetrack.system.exceptions;
 
 public class ErrorMessages {
 
+    private static final String WHITESPACE = "         ";
+
     public static void printIndexOutOfBoundsError(){
         System.out.println("\t Sorry, this index is invalid. Please enter a positive integer " +
                 "within the size of the list.");
@@ -24,7 +26,7 @@ public class ErrorMessages {
     }
 
     public static String getFileNotFoundMessage() {
-        return "\t No file found! The initialised list will be empty.";
+        return WHITESPACE + "No file found! The initialised list will be empty.";
     }
 
     public static String getIncorrectSleepInputMessage() {

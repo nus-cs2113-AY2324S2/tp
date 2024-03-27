@@ -85,7 +85,7 @@ public class Ui {
     }
 
     public static void handleUserInput(String line, CalorieList calorieList,
-                                       LiquidList liquidList, SleepList sleepList) {
+            LiquidList liquidList, SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
