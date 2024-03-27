@@ -24,7 +24,7 @@
 
 ### Data Component
 
-![DataComponent](/Users/yihaowong/Downloads/cs2113/tp/docs/images/DataComponent.png)
+![DataComponent](images/DataComponent.png)
 
 API: [`ItemList.java`](https://github.com/AY2324S2-CS2113T-T09-2/tp/blob/master/src/main/java/seedu/binbash/ItemList.java)
 
