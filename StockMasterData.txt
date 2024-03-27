@@ -1,2 +1,0 @@
-0 | apple | 5
-0 | apple | 5
