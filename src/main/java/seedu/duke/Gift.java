@@ -17,4 +17,8 @@ public class Gift extends Favourites {
         this.completionStatus = "C";
     }
 
+    public String getCompletionStatus() {
+        return completionStatus;
+    }
+
 }

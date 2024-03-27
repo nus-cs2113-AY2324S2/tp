@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.FlirtForkException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

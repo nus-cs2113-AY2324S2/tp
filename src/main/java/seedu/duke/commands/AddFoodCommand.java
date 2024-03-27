@@ -1,8 +1,9 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.*;
 import seedu.duke.exceptions.FlirtForkException;
 
-public class AddFoodCommand extends Command{
+public class AddFoodCommand extends Command {
     private String description;
     public AddFoodCommand(String description) {
         this.description = description;

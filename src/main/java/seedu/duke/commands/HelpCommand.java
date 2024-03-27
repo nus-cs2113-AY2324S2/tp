@@ -1,15 +1,14 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.*;
 import seedu.duke.exceptions.FlirtForkException;
 
-public class ListFavouritesCommand extends Command{
+public class HelpCommand extends Command {
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage, UserDetails userDetails, GiftList gifts) throws FlirtForkException {
-        if (favourites.isEmpty()) {
-            ui.showFavourite("No treasures found this time. Let's fill it with some love!");
-        } else {
-            ui.listFavourites(favourites);
-        }
+        System.out.println("I know you are excited to Flirt & Fork :) Here's how: \n");
+        ui.helpMessage();
+        ui.showMessage("Send me 'help' if you're new!");
     }
 }

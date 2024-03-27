@@ -1,5 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.*;
 import seedu.duke.exceptions.FlirtForkException;
 
 import java.io.IOException;

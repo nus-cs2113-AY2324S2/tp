@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.FlirtForkEmptyException;
 import seedu.duke.exceptions.FlirtForkException;
 

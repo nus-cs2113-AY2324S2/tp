@@ -1,8 +1,9 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.*;
 import seedu.duke.exceptions.FlirtForkException;
 
-public class DeleteFavouritesCommand extends Command{
+public class DeleteFavouritesCommand extends Command {
     private final int index;
     public DeleteFavouritesCommand(int index) {
         this.index = index;
