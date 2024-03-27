@@ -4,6 +4,7 @@ import command.Command;
 import command.ExitCommand;
 import exceptions.CommandFormatException;
 import parser.Parser;
+import storage.Storage;
 import ui.TextUi;
 
 import itemlist.Itemlist;
@@ -23,6 +24,7 @@ public class Duke {
     }
 
     public void run() throws IOException, CommandFormatException {
+        Storage.readFromFile("./StockMasterData.txt");
         ui.showWelcomeMessage("1.0", "./StockMasterData.txt");
         this.normalOperation();
         ui.showGoodByeMessage("./StockMasterData.txt");

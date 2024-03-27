@@ -1,6 +1,10 @@
 package storage;
 
+import command.Command;
+import exceptions.CommandFormatException;
 import item.Item;
+import itemlist.Itemlist;
+import parser.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,9 +20,6 @@ import java.io.IOException;
  */
 public class Storage {
     private static final String FILENAME = "./StockMasterData.txt";
-
-    private static File stockMaster;
-
 
     /**
      * Write contents to the file.
@@ -62,11 +63,36 @@ public class Storage {
      * Add the identified tasks into a list of existing tasks.
      *
      */
-    public static void readFromFile(File fileName) {
+    public static void readFromFile(String fileName) {
+        Parser parser = new Parser();
         try {
-            Scanner scanner = new Scanner(fileName);
+            Scanner scanner = new Scanner(new File(fileName));
             while (scanner.hasNext()) {
-                String lineSkipped = scanner.nextLine();
+                String fileLine = "add" + scanner.nextLine();
+                String[] keyCommands = fileLine.split(" \\| ");
+                String commandQty = "";
+                String commandCat = "";
+                String commandUom = "";
+                String commandName = "";
+                for (String keyCommand : keyCommands) {
+                    if (keyCommand.contains(".")) {
+                        //do nothing.
+                    }
+                    else if (keyCommand.contains("Qty: ")) {
+                        String[] commandQtyUnit = keyCommand.replace("Qty: ", "").split(" ");
+                        assert commandQtyUnit.length == 2 : "length not 2!";
+                        commandQty = commandQtyUnit[0];
+                        commandUom = commandQtyUnit[1];
+                    }
+                    else if (keyCommand.contains("Cat: ")) {
+                        commandCat = keyCommand.replace("Cat: ", "");
+                    }
+                    else {
+                        commandName = keyCommand;
+                    }
+                }
+                Item toAdd = new Item(commandName, Integer.parseInt(commandQty), commandUom, commandCat);
+                Itemlist.addItem(toAdd);
             }
         } catch(FileNotFoundException e){
             System.out.println("File does not exist.");
@@ -76,8 +102,9 @@ public class Storage {
     public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
         assert items != null : "Items cannot be null.";
         Item lastItem = items.get(items.size() - 1);
-        String descriptionAdded = (items.size() - 1) + " | " + lastItem.getItemName() +
-                " | " + lastItem.getQuantity() + "\n";
+        String descriptionAdded = (items.size()) + "." + " | " + lastItem.getItemName() +
+                " | " + "Qty: " + lastItem.getQuantity() + " " + lastItem.getUom() + " | " + "Cat: " +
+                lastItem.getCategory() + "\n";
         updateFile(descriptionAdded, ifAppend);
     }
 
@@ -85,22 +112,14 @@ public class Storage {
         assert items != null : "Items cannot be null.";
         int length = items.size();
         for (int index = 0; index < length; index++) {
-            String descriptionAdded = index + " | " + items.get(index).getItemName() +
-                    " | " + items.get(index).getQuantity() + "\n";
+            String descriptionAdded = (index + 1) + "." + " | " + items.get(index).getItemName() +
+                    " | " + "Qty: " + items.get(index).getQuantity() + " " + items.get(index).getUom() +
+                    " | " + "Cat: " + items.get(index).getCategory() + "\n";
             if (index == 0) {
                 updateFile(descriptionAdded, ifAppend);
             } else {
                 updateFile(descriptionAdded, !ifAppend);
             }
-        }
-    }
-
-    public static void main (String[]args){
-        stockMaster = setFile();
-        try {
-            writeToFile(stockMaster.getPath(), "", true);
-        } catch (IOException e) {
-            System.out.println("File does not exist.");
         }
     }
 }

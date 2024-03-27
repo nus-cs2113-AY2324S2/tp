@@ -1,5 +1,6 @@
 package storage;
 
+import itemlist.Itemlist;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,11 +19,9 @@ public class StorageTest {
         System.setOut(new PrintStream(outputStream));
 
         String directory = "./testFile.txt";
-        File testFile = new File(directory);
         try {
             Storage.writeToFile(directory, "Created", true);
-            testFile.delete();
-            Storage.readFromFile(testFile);
+            Storage.readFromFile(directory);
             assertEquals("File does not exist." + System.lineSeparator(), outputStream.toString());
         } catch (IOException e) {
             fail("failed to create a file.");
