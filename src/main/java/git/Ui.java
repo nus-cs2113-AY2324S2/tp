@@ -115,14 +115,29 @@ public class Ui {
     }
 
     /**
-     * Prompts the user to enter the cost of the grocery and format the string.
-     * Returns the cost to be set for the grocery.
+     * Prompts the user to enter the cost of the grocery until a valid cost is given.
      *
-     * @return Cost of the grocery formatted in 2 decimal points.
+     * @return the cost to be set for the grocery.
      */
-    public String promptForCost() throws GitException {
+    public String promptForCost() {
         System.out.println("Please enter the cost (e.g., $1.20):");
         String price = in.nextLine().trim();
+        try {
+            return convertCost(price);
+        } catch (GitException e) {
+            System.out.println("Cost entered is invalid!");
+            return promptForCost();
+        }
+    }
+
+    /**
+     * Removes dollar sign from input cost and store in 2 decimal places.
+     *
+     * @param price Input cost entered by user.
+     * @return Cost in desired format.
+     * @throws GitException If there is no Dollar sign or cost entered is not numeric.
+     */
+    private String convertCost(String price) throws GitException{
         if(price.contains("$")) {
             String formattedPrice = price.replace("$", "");
             try {
