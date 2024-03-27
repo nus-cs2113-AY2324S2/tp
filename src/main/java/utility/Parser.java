@@ -382,7 +382,7 @@ public class Parser {
         if (seconds < 1 || seconds > 60) {
             throw new CustomExceptions.InvalidInput("Minutes must be a positive integer between 01 and 59.");
         }
-        
+
         if (hours == 0) {
             throw new CustomExceptions.InvalidInput("Hours cannot be 0. Use MM:SS instead");
         }
