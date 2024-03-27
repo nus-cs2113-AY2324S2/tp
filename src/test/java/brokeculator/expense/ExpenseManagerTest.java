@@ -42,9 +42,9 @@ public class ExpenseManagerTest {
         expenseManager.add(expense2);
         expenseManager.add(expense3);
 
-        assertEquals(60.0, expenseManager.summariseExpenses(0, -1));
-        assertEquals(30.0, expenseManager.summariseExpenses(2, 2));
-        assertEquals(50.0, expenseManager.summariseExpenses(1, 5));
+        assertEquals(60.0, expenseManager.summariseExpenses(null, null, null, 0, -1));
+        assertEquals(30.0, expenseManager.summariseExpenses(null, null, null, 2, 2));
+        assertEquals(50.0, expenseManager.summariseExpenses(null, null, null, 1, 5));
     }
 
     @Test

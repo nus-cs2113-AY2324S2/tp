@@ -1,5 +1,6 @@
 package brokeculator;
 import brokeculator.dashboard.Dashboard;
+import brokeculator.enumerators.Category;
 import brokeculator.exceptions.BrokeculatorException;
 import brokeculator.frontend.UI;
 import brokeculator.command.Command;
@@ -13,6 +14,7 @@ public class Logic {
     }
     public void run() {
         loadExpensesFromFile();
+        loadCategoriesFromFile();
         UI.greetUser();
         while (true) {
             try {
@@ -22,6 +24,7 @@ public class Logic {
                 assert command != null : "command should not be null";
                 command.execute(dashboard);
                 saveExpensesToFile();
+                saveCategoriesToFile();
             } catch (BrokeculatorException b) {
                 UI.prettyPrint("Brokeculator error occurred. " + b.getMessage());
             } catch (Exception e) {
@@ -30,8 +33,8 @@ public class Logic {
         }
     }
     private void loadExpensesFromFile() {
-        boolean hasNoFileErrors = dashboard.getFileManager().openFile();
-        if (!hasNoFileErrors) {
+        boolean expenseFileHasNoFileErrors = dashboard.getFileManager().openExpenseFile();
+        if (!expenseFileHasNoFileErrors) {
             UI.println("continuing without file");
             return;
         }
@@ -46,9 +49,31 @@ public class Logic {
     private void saveExpensesToFile() {
         try {
             String expenseListToSave = dashboard.getExpenseManager().getExpensesStringRepresentation();
-            dashboard.getFileManager().save(expenseListToSave);
+            dashboard.getFileManager().saveExpenses(expenseListToSave);
         } catch (Exception e) {
             UI.prettyPrint("file save error occurred" + e.getMessage());
         }
     }
+    private void loadCategoriesFromFile() {
+        boolean categoryFileHasNoFileErrors = dashboard.getFileManager().openCategoryFile();
+        if (!categoryFileHasNoFileErrors) {
+            UI.println("continuing without file");
+            return;
+        }
+        while (dashboard.getFileManager().hasNextLine()) {
+            String line = dashboard.getFileManager().readNextLine();
+            Command loadCommand = GeneralFileParser.getCommandFromFileInput(line);
+            loadCommand.execute(dashboard);
+        }
+        saveCategoriesToFile();
+    }
+    private void saveCategoriesToFile() {
+        try {
+            String categoryListToSave = Category.getCategoriesStringRepresentation();
+            dashboard.getFileManager().saveCategories(categoryListToSave);
+        } catch (Exception e) {
+            UI.prettyPrint("file save error occurred" + e.getMessage());
+        }
+    }
+
 }

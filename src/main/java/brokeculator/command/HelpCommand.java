@@ -13,9 +13,11 @@ public class HelpCommand extends Command {
             + System.lineSeparator()
             + "\t4. summarise [/from <start>] [/to <end>] - summarises the expenses in the dashboard"
             + System.lineSeparator()
-            + "\t5. exit - exits the application" + System.lineSeparator()
+            + "\t5. category <list|add|delete> [<category if add|delete specified>] - manages categories"
             + System.lineSeparator()
             + "\t6. event /n <event name> /d <event description> - adds an event"
+            + System.lineSeparator()
+            + "\t7. exit - exits the application"
             + System.lineSeparator()
             + "Notes about the command format:" + System.lineSeparator()
             + "\t1. <word> are to be provided by the user without the <>" + System.lineSeparator()

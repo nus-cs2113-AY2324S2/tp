@@ -7,29 +7,32 @@ import java.util.Scanner;
 import brokeculator.frontend.UI;
 
 import java.io.FileWriter;
-
+//@@author STeng618
 public class FileManager {
     private static final String DEFAULT_DATA_FILE_PATH = "./data/data.txt";
+    private static final String DEFAULT_CATEGORY_FILE_PATH = "./data/category.txt";
     private File dataFile;
+    private File categoryFile;
     private Scanner scanner = null;
     private boolean hasNoFileErrors;
 
-    public FileManager(String dataFilePath) {
+    public FileManager(String dataFilePath, String categoryFilePath) {
         this.dataFile = new File(dataFilePath);
+        this.categoryFile = new File(categoryFilePath);
     }
     public FileManager() {
-        this(FileManager.DEFAULT_DATA_FILE_PATH);
+        this(FileManager.DEFAULT_DATA_FILE_PATH, FileManager.DEFAULT_CATEGORY_FILE_PATH);
     }
 
-    public boolean openFile() {
+    private boolean openFile(File file) {
         try {
-            if (!this.dataFile.exists()) {
-                createDataFile();
+            if (!file.exists()) {
+                createDataFile(file);
             }
-            assert this.dataFile.exists();
-            this.scanner = new Scanner(this.dataFile);
+            assert file.exists();
+            this.scanner = new Scanner(file);
             this.hasNoFileErrors = true;
-            printDataSavedMessage();
+            printDataSavedMessage(file);
         } catch (Exception e) {
             this.scanner = null;
             this.hasNoFileErrors = false;
@@ -37,26 +40,39 @@ public class FileManager {
         }
         return this.hasNoFileErrors;
     }
+    public boolean openExpenseFile() {
+        return openFile(this.dataFile);
+    }
+    public boolean openCategoryFile() {
+        return openFile(this.categoryFile);
+    }
+    public void saveExpenses(String data) {
+        save(data, this.dataFile);
+    }
+    public void saveCategories(String data) {
+        save(data, this.categoryFile);
+    }
 
     private void printDataLossWarning() {
         UI.println("Errors! Your data will not be saved");
     }
-    private void printDataSavedMessage() {
-        UI.println("Data file successfully created!");
+    private void printDataSavedMessage(File file) {
+        UI.println("Data file: " + file + " successfully created!");
     }
 
-    private void createDataFile() throws Exception {
-        boolean hasDataDirectory = this.dataFile.getParentFile().exists();
-        boolean isDataDirectoryReady = hasDataDirectory || this.dataFile.getParentFile().mkdirs();
+
+    private void createDataFile(File file) throws Exception {
+        boolean hasDataDirectory = file.getParentFile().exists();
+        boolean isDataDirectoryReady = hasDataDirectory || file.getParentFile().mkdirs();
         if (!isDataDirectoryReady) {
             throw new Exception();
         }
-        assert this.dataFile.getParentFile().exists();
-        boolean isDataFileCreated = this.dataFile.createNewFile();
+        assert file.getParentFile().exists();
+        boolean isDataFileCreated = file.createNewFile();
         if (!isDataFileCreated) {
             throw new Exception();
         }
-        assert this.dataFile.exists();
+        assert file.exists();
     }
 
     public boolean hasNextLine() {
@@ -67,13 +83,13 @@ public class FileManager {
         return this.scanner.nextLine();
     }
 
-    public void save(String data) {
+    private void save(String data, File file) {
         try {
             if (!this.hasNoFileErrors) {
                 printDataLossWarning();
                 return;
             }
-            FileWriter fileWriter = new FileWriter(this.dataFile);
+            FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(data);
             fileWriter.close();
         } catch (IOException e) {
