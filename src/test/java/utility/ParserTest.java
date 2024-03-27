@@ -125,7 +125,7 @@ class ParserTest {
     @Test
     void splitBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
         String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-        String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
+        String[] expected = {"1.71", "60.50", "19-03-2024"};
         String[] result = Parser.splitBmiInput(input);
         assertArrayEquals(expected, result);
     }

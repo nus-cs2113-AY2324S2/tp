@@ -105,7 +105,6 @@ class HandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
         assertTrue(output.contains("Added: bmi | 1.70 | 65.00 | 2024-03-15"));
     }

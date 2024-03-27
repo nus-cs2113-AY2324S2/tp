@@ -50,7 +50,7 @@ public class Parser {
         try {
             formattedTime = LocalTime.parse(stringTime, formatter);
         } catch (DateTimeParseException e) {
-            System.err.println("Error parsing time: " + e.getMessage());
+            Output.printException("Error parsing time!");
         }
         return formattedTime;
     }
@@ -122,19 +122,23 @@ public class Parser {
     }
 
     /**
-     * Validates whether the filter string is either 'run', 'gym', 'bmi' or 'period'.
-     *
+     * Validates whether the filter string is either 'run', 'gym', 'bmi', 'period' 
+     * or 'appointment'. 
+     * 
      * @param filter The filter string to be checked.
      * @throws CustomExceptions.InvalidInput If the filter string is none of them.
      */
     public static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
-        if (filter.equals(WorkoutConstant.RUN) || filter.equals(WorkoutConstant.GYM) ||
-                filter.equals(HealthConstant.BMI) || filter.equals(HealthConstant.PERIOD)) {
+        if (filter.equals(WorkoutConstant.RUN) 
+                || filter.equals(WorkoutConstant.GYM) 
+                || filter.equals(HealthConstant.BMI) 
+                || filter.equals(HealthConstant.PERIOD) 
+                || filter.equals(HealthConstant.APPOINTMENT)) {
             return;
         }
         throw new CustomExceptions.InvalidInput("Invalid item specified." +
                 System.lineSeparator() +
-                "/item:run/gym/bmi/period");
+                "/item:run/gym/bmi/period/appointment");
     }
 
     //@@author JustinSoh
@@ -170,7 +174,7 @@ public class Parser {
     public static void parseBmiInput(String userInput) throws CustomExceptions.InvalidInput {
         String[] bmiDetails = splitBmiInput(userInput);
         validateBmiInput(bmiDetails);
-        Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
+        Bmi newBmi = new Bmi(bmiDetails[0], bmiDetails[1], bmiDetails[2]);
         HealthList.addBmi(newBmi);
         Output.printAddBmi(newBmi);
     }
@@ -182,18 +186,18 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
      */
     public static void validateBmiInput(String[] bmiDetails) throws CustomExceptions.InvalidInput {
-        if (bmiDetails[1].isEmpty()
-                || bmiDetails[2].isEmpty()
-                || bmiDetails[3].isEmpty()) {
+        if (bmiDetails[0].isEmpty()
+                || bmiDetails[1].isEmpty()
+                || bmiDetails[2].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
         // checks whether input number is 2dp
         String twoDecimalPlaceRegex = "\\d+\\.\\d{2}";
-        if (!bmiDetails[1].matches(twoDecimalPlaceRegex) ||
-                !bmiDetails[2].matches(twoDecimalPlaceRegex)) {
+        if (!bmiDetails[0].matches(twoDecimalPlaceRegex) ||
+                !bmiDetails[1].matches(twoDecimalPlaceRegex)) {
             throw new CustomExceptions.InvalidInput("Height and weight should be 2 decimal place positive numbers!");
         }
-        validateDateInput(bmiDetails[3]);
+        validateDateInput(bmiDetails[2]);
     }
 
     //@@author syj02
@@ -212,10 +216,9 @@ public class Parser {
                 || !input.contains(HealthConstant.DATE_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
-        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
         return results;
     }
     //@@author
@@ -228,7 +231,7 @@ public class Parser {
     public static void parsePeriodInput(String userInput) throws CustomExceptions.InvalidInput {
         String[] periodDetails = splitPeriodInput(userInput);
         validatePeriodInput(periodDetails);
-        Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
+        Period newPeriod = new Period(periodDetails[0], periodDetails[1]);
         HealthList.addPeriod(newPeriod);
         Output.printAddPeriod(newPeriod);
     }
@@ -241,16 +244,15 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
      */
     public static String[] splitPeriodInput(String input) throws CustomExceptions.InvalidInput {
-        String [] results = new String[HealthConstant.PERIOD_PARAMETERS];
+        String [] results = new String[HealthConstant.NUM_PERIOD_PARAMETERS];
 
         if (!input.contains(HealthConstant.HEALTH_FLAG)
                 | !input.contains(HealthConstant.START_FLAG)
                 || !input.contains(HealthConstant.END_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
         return results;
     }
 
@@ -261,27 +263,27 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
      */
     public static void validatePeriodInput(String[] periodDetails) throws CustomExceptions.InvalidInput {
-        if (periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
+        if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
 
         try {
-            validateDateInput(periodDetails[1]);
+            validateDateInput(periodDetails[0]);
         } catch (CustomExceptions.InvalidInput e) {
             throw new CustomExceptions.InvalidInput("Invalid start date!" +
                     System.lineSeparator() +
                     e.getMessage());
         }
         try {
-            validateDateInput(periodDetails[2]);
+            validateDateInput(periodDetails[1]);
         } catch (CustomExceptions.InvalidInput e) {
             throw new CustomExceptions.InvalidInput("Invalid end date!" +
                     System.lineSeparator() +
                     e.getMessage());
         }
 
-        LocalDate startDate = parseDate(periodDetails[1]);
-        LocalDate endDate = parseDate(periodDetails[2]);
+        LocalDate startDate = parseDate(periodDetails[0]);
+        LocalDate endDate = parseDate(periodDetails[1]);
         if (startDate.isAfter(endDate)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
         }
@@ -295,7 +297,7 @@ public class Parser {
      */
     public static void parsePredictionInput() throws CustomExceptions.InsufficientInput {
         showPeriodHistory();
-        if (HealthList.getPeriodSize() >= HealthConstant.MINIMUM_SIZE_FOR_PREDICTION) {
+        if (HealthList.getPeriodSize() >= HealthConstant.MIN_SIZE_FOR_PREDICTION) {
             LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
             Period.printNextCyclePrediction(nextPeriodStartDate);
         } else {
@@ -415,17 +417,16 @@ public class Parser {
      */
     public static String[] splitAppointmentDetails(String input)
             throws CustomExceptions.InvalidInput {
-        String [] results = new String[HealthConstant.APPOINTMENT_PARAMETERS];
+        String [] results = new String[HealthConstant.NUM_APPOINTMENT_PARAMETERS];
         if (!input.contains(HealthConstant.HEALTH_FLAG)
                 || !input.contains(HealthConstant.DATE_FLAG)
                 || !input.contains(HealthConstant.TIME_FLAG)
                 || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
-        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
         return results;
     }
 
@@ -437,16 +438,9 @@ public class Parser {
     public static void parseAppointmentInput(String userInput) throws CustomExceptions.InvalidInput {
         String[] appointmentDetails = splitAppointmentDetails(userInput);
         validateAppointmentDetails(appointmentDetails);
-        if (appointmentDetails[0].isEmpty()
-                || appointmentDetails[1].isEmpty()
-                || appointmentDetails[2].isEmpty()
-                ||  appointmentDetails[3].isEmpty()) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-        }
-
-        Appointment newAppointment = new Appointment(appointmentDetails[1],
-                appointmentDetails[2],
-                appointmentDetails[3]);
+        Appointment newAppointment = new Appointment(appointmentDetails[0],
+                appointmentDetails[1],
+                appointmentDetails[2]);
         HealthList.addAppointment(newAppointment);
         Output.printAddAppointment(newAppointment);
     }
