@@ -1,12 +1,9 @@
 package filereader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import command.ErrorCommand;
+
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FileReader {
     private final String filePath;
@@ -17,25 +14,22 @@ public class FileReader {
     }
 
     public ArrayList<ArrayList<Character>> readEnemyDesign() throws IOException {
-        File f = new File(filePath);
-        System.out.println(filePath);
-        if (f.exists()) {
-            System.out.println("exist");
-        } else {
-            boolean fe = f.createNewFile();
-            System.out.println("no exist");
-        }
-        Scanner in = new Scanner(f);
         ArrayList<ArrayList<Character>> map = new ArrayList<>();
-        while (in.hasNextLine()) {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found at: " + filePath);
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        while ((line = reader.readLine()) != null) {
             ArrayList<Character> row = new ArrayList<>();
-            String line = in.nextLine();
             for (int i = 0; i < line.length(); i += 1) {
                 row.add(line.charAt(i));
             }
             map.add(row);
         }
+        reader.close();
+        inputStream.close();
         return map;
     }
-
 }

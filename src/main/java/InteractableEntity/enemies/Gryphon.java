@@ -1,14 +1,14 @@
 package InteractableEntity.enemies;
 
 import InteractableEntity.Enemy;
-import static filereader.filepath.EnemiesDesignFilePath.GOBLIN_PATH;
+import static filereader.filepath.EnemiesDesignFilePath.GRYPHON_PATH;
 
-public class Goblin extends Enemy {
+public class Gryphon extends Enemy {
 
-    public Goblin(int dmg, int def, int hp, int xCoordinate, int yCoordinate, int exp, int money) {
+    public Gryphon(int dmg, int def, int hp, int xCoordinate, int yCoordinate, int exp, int money) {
         super(dmg, def, hp, xCoordinate, yCoordinate, exp, money);
-        this.name = "Goblin";
-        this.filePath = GOBLIN_PATH;
+        this.name = "Gryphon";
+        this.filePath = GRYPHON_PATH;
     }
 
     @Override

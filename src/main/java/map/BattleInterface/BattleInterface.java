@@ -70,12 +70,11 @@ public class BattleInterface extends AMap {
         this.height = givenHeight;
         this.currentMap = new ArrayList<>(height);
 
-        FileReader fileReader = new FileReader(EnemiesDesignFilePath.CENTAUR_PATH);
+        FileReader fileReader = new FileReader(currentEntity.getFilePath());
         try {
             currentMap = fileReader.readEnemyDesign();
         } catch (Exception e) {
-            System.out.println(e);
-
+            // display exception, see how sihan wants to do.
         }
     }
 

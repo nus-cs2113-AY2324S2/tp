@@ -1,14 +1,14 @@
 package InteractableEntity.enemies;
 
 import InteractableEntity.Enemy;
-import static filereader.filepath.EnemiesDesignFilePath.GOBLIN_PATH;
+import static filereader.filepath.EnemiesDesignFilePath.DRAGON_PATH;
 
-public class Goblin extends Enemy {
+public class Dragon extends Enemy {
 
-    public Goblin(int dmg, int def, int hp, int xCoordinate, int yCoordinate, int exp, int money) {
+    public Dragon(int dmg, int def, int hp, int xCoordinate, int yCoordinate, int exp, int money) {
         super(dmg, def, hp, xCoordinate, yCoordinate, exp, money);
-        this.name = "Goblin";
-        this.filePath = GOBLIN_PATH;
+        this.name = "Dragon";
+        this.filePath = DRAGON_PATH;
     }
 
     @Override
