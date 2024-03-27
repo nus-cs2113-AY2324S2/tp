@@ -4,7 +4,6 @@ import seedu.voyagers.utils.Payable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 //NOTE: this class uses object Double class, since it implements ArrayLists.
 
@@ -19,7 +18,8 @@ public class Bill implements Payable {
     public Bill(String[] args) {
         assert(args.length == 3);
         //TODO: check that the parser is splitting the args by keyword, not space.
-        //TODO: change args[1] into ArrayList<Profile> people on the backend, and args[2] into ArrayList<Double> percentages.
+        //TODO: change args[1] into ArrayList<Profile> people on the backend, and args[2] into ArrayList<Double>
+        // percentages.
         //TODO: then call Bill(billName, newPeople, newPercentages) with this format.
 
     }
