@@ -1,5 +1,4 @@
 package command.fight;
-import InteractableEntity.Enemy;
 import command.Command;
 import static main.CalculaChroniclesOfTheAlgorithmicKingdom.*;
 import java.util.Scanner;
@@ -19,9 +18,9 @@ public class FightingCommand extends Command {
         currentMap.fightLoop(in);
         currentOn = 0;
         if (currentMap.getEntityDeath()){
-            int x_pos = storedMaps.get(currentOn).getInteractX();
-            int y_pos = storedMaps.get(currentOn).getInteractY();
-            storedMaps.get(currentOn).clearSpot(x_pos, y_pos);
+            int xPos = storedMaps.get(currentOn).getInteractX();
+            int yPos = storedMaps.get(currentOn).getInteractY();
+            storedMaps.get(currentOn).clearSpot(xPos, yPos);
             currentMap.handleLootingByPlayer();
         }
         else if (currentMap.getPlayerDeath()){

@@ -1,6 +1,6 @@
-package InteractableEntity.enemies;
+package interactable.enemies;
 
-import InteractableEntity.Enemy;
+import interactable.Enemy;
 import static filereader.filepath.EnemiesDesignFilePath.CENTAUR_PATH;
 
 public class Centaur extends Enemy {

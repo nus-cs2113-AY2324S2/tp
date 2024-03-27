@@ -30,7 +30,7 @@ Each map instance consists of a `currentMap` which stores a 2-dimensional array 
 printed map for the player. All maps will come with a given `height` and `width`, all of these attributes are inherited
 from the AMap abstract class. Currently, the `FirstMap` and `BattleInterface` classes
 extend AMap. `FirstMap` is the first map displayed upon entering the game and it displays the position of the player. 
-The `BattleInterface` is the map displayed when the player interacts with an `InteractableEntity`. 
+The `BattleInterface` is the map displayed when the player interacts with an `interactable`. 
 
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}

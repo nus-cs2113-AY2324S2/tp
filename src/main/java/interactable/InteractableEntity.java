@@ -1,4 +1,4 @@
-package InteractableEntity;
+package interactable;
 
 public abstract class InteractableEntity {
     protected int x;

@@ -13,14 +13,16 @@ public abstract class Command {
     protected AMap currentMap;
 
     public abstract void execute();
-    public void execute(Scanner in){
-
-    }
 
     public Command() {
         commandDescription = "Impossible";
         currentMap = null;
     }
+
+    public void execute(Scanner in) {
+
+    }
+
 
     public String getCommandDescription() {
         return commandDescription;
@@ -38,7 +40,7 @@ public abstract class Command {
         this.playerStatus = playerStatus;
     }
 
-    public void setTextBox(TextBox textBox){
+    public void setTextBox(TextBox textBox) {
         this.textBox = textBox;
     }
 }
