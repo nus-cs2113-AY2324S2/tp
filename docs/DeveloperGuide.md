@@ -126,7 +126,15 @@ The implementation of the Typing Game is as follows:
 
 ## MiniGame - Tic Tac Toe
 
-{Describe the implementation of the Tic Tac Toe}
+The implementation of the Tic Tac Toe Game is as follows:
+
+1. The game can be invoked by the `ExerciseCommand` class when the user inputs the `exercise` command.
+2. It makes use of the `ResponseManager` for instructions and display the board status.
+3. The user would be prompted to choose player mark and place it when entering the game.
+4. AI player will randomly choose available to place mark once user places the mark.
+5. After each placement, the game would check the status to determine whether continue the game or not.
+6. If the board is full or there are three consecutive marks, the game will announce the winner or say "it's a draw".
+7. Finally, the `ExerciseCommand` would update the player profile with the reward or punishment for health.
 
 ## MiniGame - True or False
 
