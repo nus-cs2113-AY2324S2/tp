@@ -36,11 +36,12 @@ public class Output {
         System.out.println("workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
-        System.out.println("health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION");
+        System.out.println("health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION" +
+                " - Add new appointment data");
         System.out.println("history /item:[run/gym/bmi/period] - " +
-                "Show history of runs/gyms/bmi records/periods tracked");
+                "Shows history of runs/gyms/bmi records/periods tracked/appointment records");
         System.out.println("latest /item:[run/gym/bmi/period] - " +
-                "Show history of runs/gyms/bmi records/periods tracked");
+                "Shows latest entry of runs/gyms/bmi records/periods tracked/appointment records");
         System.out.println("help - Show this help message");
         System.out.println("exit - Exit the program");
         printLine();

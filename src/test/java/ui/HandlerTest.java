@@ -85,7 +85,7 @@ class HandlerTest {
      * object.
      */
     @Test
-    void processInput_newCommand_addRunExercise() {
+    void processInput_workoutCommand_addRunExercise() {
         String input = "WORKOUT /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();

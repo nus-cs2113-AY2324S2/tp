@@ -63,6 +63,7 @@ public class ErrorConstant {
 
     public static final String GYM_STATION_INPUT_DIGIT_ERROR = "Numeric input required for sets, reps and weights!"
             + " e.g. " + WorkoutConstant.STATION_GYM_FORMAT;
+
     // HEALTH ERRORS
     public static final String HEALTH_INPUT_BLANK_ERROR = "Type of health cannot be empty. " +
             "Please input either /h:bmi, /h:period or /h:appointment";
@@ -95,8 +96,13 @@ public class ErrorConstant {
     public static final String EMPTY_APPOINTMENT_LIST_ERROR = "Appointment list is empty.";
     public static final String APPOINTMENT_LIST_UNCLEARED_ERROR = "Appointment list is not cleared.";
 
-
-
+    // HISTORY AND LATEST ERRORS
+    public static final String INVALID_HISTORY_FORMAT_ERROR = "Invalid command format. " +
+            System.lineSeparator() +
+            "Usage: history/latest /view:filter";
+    public static final String INVALID_HISTORY_FILTER_ERROR = "Missing/invalid filter used!" +
+            System.lineSeparator() +
+            "Use /view:run/gym/period/bmi";
 
 
 }
