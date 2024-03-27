@@ -28,11 +28,9 @@ public class ListCommand extends Command {
      * Executes the list command.
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
-     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      */
     @Override
-    public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager) {
+    public void execute(MedicationManager medicationManager) {
         String listTypeString = parsedArguments.get(ArgumentName.LIST_TYPE);
         
         switch (listTypeString) {
@@ -40,7 +38,7 @@ public class ListCommand extends Command {
             medicationManager.printAllMedications();
             break;
         case "today":
-            dailyMedicationManager.printMedications();
+            DailyMedicationManager.printMedications();
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + listTypeString);

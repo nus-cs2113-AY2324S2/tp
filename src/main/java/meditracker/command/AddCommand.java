@@ -69,20 +69,18 @@ public class AddCommand extends Command {
      * It also displays a message confirming the addition of the medication.
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
-     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      * @throws NullPointerException   if any of the required objects are null.
      * @throws NumberFormatException  if there is an error in parsing numeric values.
      */
     @Override
-    public void execute(MedicationManager medicationManager,
-                        DailyMedicationManager dailyMedicationManager) throws NullPointerException,
+    public void execute(MedicationManager medicationManager) throws NullPointerException,
             NumberFormatException {
 
         Medication medication = createMedication();
         DailyMedication dailyMedication = new DailyMedication(medicationName);
         medicationManager.addMedication(medication);
-        dailyMedicationManager.addDailyMedication(dailyMedication);
-        assertionTest(medicationManager, dailyMedicationManager);
+        DailyMedicationManager.addDailyMedication(dailyMedication);
+        assertionTest(medicationManager);
         Ui.showAddCommandMessage();
     }
 
@@ -117,12 +115,11 @@ public class AddCommand extends Command {
      * Performs assertion tests for medication and daily medication managers.
      *
      * @param medicationManager      The MedicationManager object representing the list of medications.
-     * @param dailyMedicationManager The DailyMedicationManager object representing the list of daily medications.
      */
-    private void assertionTest(MedicationManager medicationManager, DailyMedicationManager dailyMedicationManager) {
+    private void assertionTest(MedicationManager medicationManager) {
         assert medicationManager.getTotalMedications() != 0 : "Total medications in medication " +
                 "manager should not be 0!";
-        assert dailyMedicationManager.getTotalDailyMedication() != 0 : "Total medications in daily medication " +
+        assert DailyMedicationManager.getTotalDailyMedication() != 0 : "Total medications in daily medication " +
                 "manager should not be 0!";
     }
 

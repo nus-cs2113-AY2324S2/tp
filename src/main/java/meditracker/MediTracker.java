@@ -18,7 +18,6 @@ import java.util.List;
 public class MediTracker {
 
     private MedicationManager medicationManager;
-    private DailyMedicationManager dailyMedicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes both medicationManager and
@@ -26,7 +25,7 @@ public class MediTracker {
      */
     public MediTracker() {
         medicationManager = new MedicationManager();
-        dailyMedicationManager = new DailyMedicationManager(medicationManager);
+        DailyMedicationManager.createDailyMedicationManager(medicationManager);
     }
 
     /**
@@ -36,7 +35,7 @@ public class MediTracker {
      */
     public MediTracker(List<String> dailyMedicationList) {
         medicationManager = new MedicationManager();
-        dailyMedicationManager = new DailyMedicationManager(dailyMedicationList);
+        DailyMedicationManager.importDailyMedicationManager(dailyMedicationList);
     }
 
     /**
@@ -61,7 +60,7 @@ public class MediTracker {
             Ui.showLine();
             try {
                 command = CommandParser.parse(fullCommand);
-                command.execute(medicationManager, dailyMedicationManager);
+                command.execute(medicationManager);
             } catch (ArgumentNotFoundException | MediTrackerException ex) {
                 System.out.println(ex.getMessage());
             } catch (NullPointerException ex) {

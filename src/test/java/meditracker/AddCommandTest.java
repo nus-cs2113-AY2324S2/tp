@@ -17,9 +17,8 @@ class AddCommandTest {
         // setup lines
         String inputString = "add -n Medication_A -q 60 -d 500 -e 01/07/25 -f morning -r cause_dizziness";
         MedicationManager medicationManager = new MedicationManager();
-        DailyMedicationManager dailyMedicationManager = new DailyMedicationManager(medicationManager);
         AddCommand command = new AddCommand(inputString);
-        command.execute(medicationManager, dailyMedicationManager);
+        command.execute(medicationManager);
 
         // actual test
         assertEquals(1, medicationManager.getTotalMedications());
