@@ -15,6 +15,7 @@ dependencies {
     implementation group: 'org.jline', name: 'jline-terminal', version: '3.25.1'
     implementation group: 'org.jline', name: 'jline-reader', version: '3.25.1'
     implementation group: 'org.jline', name: 'jline-builtins', version: '3.25.1'
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.6.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
 }

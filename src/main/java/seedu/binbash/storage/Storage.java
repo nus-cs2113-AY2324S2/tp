@@ -20,9 +20,16 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Storage {
     private static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final Pattern QUANTITIES_PURCHASED_AND_SOLD_FORMAT = Pattern.compile(
+            "p/(?<totalUnitsPurchased>.+?)\\s+" +
+                    "s/(?<totalUnitsSold>.+?)"
+    );
+    private static final int READ_IN_PROFIT_QUANTITIES = 0;
+    private static final int READ_IN_ITEM = 1;
 
     protected String filePath;
     protected String dataDirectoryPath;
@@ -117,7 +124,11 @@ public class Storage {
      * @return A list of Item objects created from the parsed data.
      */
     private ArrayList<Item> parseAndAddToList(ArrayList<String> stringRepresentationOfTxtFile) {
+        int turn = 0;
         ArrayList<Item> itemList = new ArrayList<Item>();
+
+        int totalUnitsPurchased = 0;
+        int totalUnitsSold = 0;
 
         for (String line: stringRepresentationOfTxtFile) {
 
@@ -125,8 +136,19 @@ public class Storage {
                 break;
             }
 
-            Matcher matcher = AddCommand.COMMAND_FORMAT.matcher(line);
-            if (matcher.matches()) {
+            Matcher matcher;
+
+            matcher = QUANTITIES_PURCHASED_AND_SOLD_FORMAT.matcher(line);
+            if (turn == READ_IN_PROFIT_QUANTITIES && matcher.matches()) {
+                totalUnitsPurchased = Integer.parseInt(matcher.group("totalUnitsPurchased").trim());
+                totalUnitsSold = Integer.parseInt(matcher.group("totalUnitsSold").trim());
+                turn = READ_IN_ITEM;
+                continue;
+            }
+
+            matcher = AddCommand.COMMAND_FORMAT.matcher(line);
+            if (turn == READ_IN_ITEM && matcher.matches()) {
+                turn = READ_IN_PROFIT_QUANTITIES;
                 String itemName = matcher.group("itemName").strip();
                 String itemDescription = matcher.group("itemDescription").strip();
                 int itemQuantity = Integer.parseInt(
@@ -140,20 +162,26 @@ public class Storage {
                 double itemCostPrice = Double.parseDouble(matcher.group("itemCostPrice"));
 
                 if (itemExpirationDate.equals(LocalDate.MIN)) {
-                    itemList.add(new RetailItem(
+                    RetailItem retailItem = new RetailItem(
                             itemName,
                             itemDescription,
                             itemQuantity,
                             itemSalePrice,
-                            itemCostPrice));
+                            itemCostPrice);
+                    retailItem.setTotalUnitsSold(totalUnitsSold);
+                    retailItem.setTotalUnitsPurchased(totalUnitsPurchased);
+                    itemList.add(retailItem);
                 } else {
-                    itemList.add(new PerishableRetailItem(
+                    PerishableRetailItem perishableRetailItem = new PerishableRetailItem(
                             itemName,
                             itemDescription,
                             itemQuantity,
                             itemExpirationDate,
                             itemSalePrice,
-                            itemCostPrice));
+                            itemCostPrice);
+                    perishableRetailItem.setTotalUnitsSold(totalUnitsSold);
+                    perishableRetailItem.setTotalUnitsPurchased(totalUnitsPurchased);
+                    itemList.add(perishableRetailItem);
                 }
             } else {
                 isCorrupted = true;
@@ -205,6 +233,15 @@ public class Storage {
      */
     private static String generateCommandRepresentationOfAnItem(Item item) {
         String output = "";
+
+        output += "p/" + item.getTotalUnitsPurchased() + " " + "s/";
+
+        if (item instanceof RetailItem) {
+            RetailItem retailItem = (RetailItem)item;
+            output += retailItem.getTotalUnitsSold() + System.lineSeparator();
+        } else {
+            output += "0" + System.lineSeparator();
+        }
 
         output += "add" + " "
                 + "n/" + item.getItemName() + " "

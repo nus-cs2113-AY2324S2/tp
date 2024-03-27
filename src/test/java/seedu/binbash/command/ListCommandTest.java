@@ -20,9 +20,9 @@ class ListCommandTest {
         itemList.addItem("testItem2", "Test item 2", 6,
                 LocalDate.of(1999, 1, 1), 8.00, 9.00);
 
-        ListCommand listCommand = new ListCommand(itemList);
+        ListCommand listCommand = new ListCommand();
 
-        listCommand.execute();
+        listCommand.execute(itemList);
         String actualOutput = listCommand.getExecutionUiOutput();
 
         String expectedOutput = "1. [P][R] testItem1" + System.lineSeparator() +
