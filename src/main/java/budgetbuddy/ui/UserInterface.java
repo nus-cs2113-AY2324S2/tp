@@ -128,8 +128,8 @@ public class UserInterface {
         System.out.println(LINE);
     }
 
-    public static void printUpdateInfo(String string, int index, ArrayList<Transaction> transactions,
-                                       Account account){
+    public static void getEditInformation(String string, int index, ArrayList<Transaction> transactions,
+                                          Account account){
         System.out.println(LINE);
         System.out.println( TAB_SPACE + "Please edit the following transaction" );
         System.out.println(string);

@@ -124,7 +124,7 @@ public class TransactionList {
         int index = Integer.parseInt(data) - INDEX_OFFSET;
         if ((index >= LOWER_BOUND) && (index < transactions.size())) {
             Transaction transaction = transactions.get(index);
-            UserInterface.printUpdateInfo(transaction.toString(), index, transactions, account);
+            UserInterface.getEditInformation(transaction.toString(), index, transactions, account);
         } else {
             throw new InvalidIndexException(String.valueOf(transactions.size()));
         }
