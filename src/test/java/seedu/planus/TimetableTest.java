@@ -60,6 +60,7 @@ public class TimetableTest {
         }
         timetable.addGrade("CS1010", "B");
         assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  CS1010: B" + System.lineSeparator()
-                + "Term GPA: 3.50" + System.lineSeparator(), GradeChecker.checkGrade(timetable, 1, 1));
+                + "Term GPA: 3.5" + System.lineSeparator() + "-----------------------------" + System.lineSeparator()
+                , GradeChecker.checkGrade(timetable, 1, 1));
     }
 }
