@@ -60,8 +60,8 @@ public class Storage {
                 InputStream in = Thread.currentThread().getContextClassLoader()
                         .getResourceAsStream(timetableName + ".csv");
                 try {
-                    assert in != null : "The input stream is null.";
                     Files.copy(in, filePath, StandardCopyOption.REPLACE_EXISTING);
+                    assert in != null : "The input stream is null.";
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

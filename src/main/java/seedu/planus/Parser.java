@@ -189,6 +189,14 @@ public class Parser {
                 System.out.println(PlanGetter.getPlan(timetable, year, term));
             }
             return false;
+        case "display":
+            try {
+                Timetable recommendedTimetable = Storage.loadTimetable(words[1]);
+                System.out.println(PlanGetter.getPlan(recommendedTimetable));
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                throw new Exception(Ui.MISSING_MAJOR_DISPLAY);
+            }
+            return false;
         case "help":
             Ui.printHelp();
             return false;

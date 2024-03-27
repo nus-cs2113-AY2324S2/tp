@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Ui {
 
     public static final String MISSING_MAJOR = "Please retry with a major code.\ne.g. init CEG";
+    public static final String MISSING_MAJOR_DISPLAY = "Please retry with a major code.\ne.g. display CEG";
     public static final String INVALID_COMMAND = "Command entered is invalid.\nPlease enter: \"help\" " +
             "for available commands.";
     public static final String INVALID_ADD_COURSE = "To add course, please enter: add course " +
