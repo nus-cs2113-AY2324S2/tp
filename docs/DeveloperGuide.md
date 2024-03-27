@@ -59,10 +59,14 @@ This guide will include UML diagrams to better each component of our product.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...       | I want to ...       | So that I can ...                  |
+|--------|----------------|---------------------|------------------------------------|
+| 1.0    | gym enthusiast | enter my gym stats  | track my gym sessions              |
+| 1.0    | runner         | see my running pace | see my relative speed for each run |
+| 1.0    | runner | log my runs         | track my running progress over time |
+| 2.0    | runner | see my latest run | quickly view my most recent run details |
+| 2.0    | gym enthusiast | see my latest gym session | quickly view my most recent gym session | 
+| 2.0    | gym enthusiast | enter varying weights for sets | accurately track my progress and strength gains | 
 
 ## Non-Functional Requirements
 
@@ -90,6 +94,35 @@ used to assess overall health and fitness.
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
+### Adding a new run
+#### Expected Input: 
+```java
+WORKOUT /e:run /d:<distance> /t:<time> /date:<date>
+```
+- Replace `<distance>` with the distance covered to 2 decimal place  (e.g. if the distance is 5.123 km, enter 5.12).
+- Replace `<time>` with the duration of the run in the format `HH:MM:SS` (e.g. if you ran for an hour and 5 minutes,
+  enter 01:05:00).
+- Replace `<date>` with the date of the run in the format `DD-MM-YYYY` (e.g. if the date is 24/07/2024, enter
+  24-07-2024).
+
+#### Sequence Diagram for Adding a New Run Exercise
+wip
+<!--![Sequence Diagram for Adding a New Run Exercise]()-->
+
+#### General Workflow of Adding a New Run Exercise
+1. User input is passed to `handleExercise()` of the `handler` class.
+2. `handleExercise()` will call `checkTypeOfExercise()` to validate the input and determine the type of exercise.
+3. If the exercise type is `run`, `checkTypeofExercise()` will return `WorkoutConstant.RUN`
+4. Upon receiving `WorkoutConstant.RUN`, `handlerExercise()` will call `Run.getRun()` to extract out
+all the run details. These details are stored in `runDetails: String[]`.
+5. `handlerExercise()` will then call `Run.addRun` to create a `newRun` object
+   - If there is a date provided, it will add the date to the `newRun` object.
+   - Else it will add `NA` to the date parameter. 
+   - It will also add the `distance`, `time`, and `pace` to the `newRun` object.
+   - Lastly, it will add the `newRun` object to the `runList` and `workoutList` in the `WorkoutList` class.
+6. The newly created `newRun` object is parsed into `Output.printAddRun()` and printed out to the user
+
+[Back to table of contents](#Developer-Guide)
 
 ### How to load sample data
 The application does not currently support loading sample data. However, you can manually test different scenarios 

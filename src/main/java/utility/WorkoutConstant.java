@@ -17,7 +17,7 @@ public class WorkoutConstant {
     // Headers
     public static final String RUN = "run";
     public static final String GYM = "gym";
-    public static final String ALL = "all";
+    public static final String ALL = "workouts";
 
     // Input
     public static final String RUN_INPUT = "e:run";
@@ -25,6 +25,9 @@ public class WorkoutConstant {
 
 
     // Formatted Strings/Messages
+    public static final String HISTORY_ALL_DATA_FORMAT = "%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s";
+    public static final String HISTORY_ALL_HEADER_FORMAT = "%6s\t%-5s\t%-12s\t%-8s\t%-15s\t%-8s\t%-10s\t%-4s\t%-4s\t%-10s";
+
     public static final String RUN_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
     public static final String PRINT_RUN_FORMAT_WITH_INDEX = "%d.\t\t\t%s";
     public static final String RUN_HEADER_WITH_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
@@ -41,7 +44,6 @@ public class WorkoutConstant {
 
 
     // Index
-
     public static final Integer INDEX_OF_STATION_NAME = 0; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_SETS = 1; // PLEASE STANDARDISE
     public static final Integer INDEX_OF_STATION_REPS = 2; // PLEASE STANDARDISE
@@ -66,7 +68,6 @@ public class WorkoutConstant {
     // ----------------V V V V V ---- PLEASE CHECK AND MOVE TO ERROR ---- V V V V V----------------
 
 
-    public static final String INVALID_FILTER = "Invalid filter! Filter is only 'run', 'gym', 'bmi' or 'period'";
     public static final String NO_RUNS_FOUND = "No runs found! You need to add a run first!";
     public static final String NO_GYMS_FOUND = "No gyms found! You need to add a gym first!";
     public static final String NO_HISTORY_FOUND = "No history found!";

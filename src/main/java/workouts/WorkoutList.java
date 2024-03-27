@@ -2,6 +2,7 @@ package workouts;
 
 import storage.LogFile;
 import utility.CustomExceptions;
+import utility.ErrorConstant;
 import utility.WorkoutConstant;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class WorkoutList extends ArrayList<Workout> {
 
         if(!filter.equals(WorkoutConstant.ALL) && !filter.equals(WorkoutConstant.RUN)
                 && !filter.equals(WorkoutConstant.GYM)) {
-            throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
         }
         if(filter.equals(WorkoutConstant.RUN) && runs.isEmpty()){
             throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_RUNS_FOUND);

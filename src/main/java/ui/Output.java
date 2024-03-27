@@ -144,12 +144,45 @@ public class Output {
     }
 
     /**
+     * Prints all Workout objects (Run and Gym) based on the time it was added.
+     * The list is sorted in descending order. (Latest one first)
+     */
+    protected static void printWorkoutHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+        printLine();
+        System.out.println("Showing all workouts (runs and gyms):");
+        System.out.println(String.format(WorkoutConstant.HISTORY_ALL_HEADER_FORMAT, "Index",
+                "Type", "Date" , "Distance" , "Duration" , "Pace", "Station", "Sets" , "Reps" , "Weights"));
+
+        ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.ALL);
+        for(int i = 0; i < workoutList.size(); i++){
+            Workout workout = workoutList.get(i);
+            if (workout instanceof Run) {
+                Run run = (Run) workout;
+                System.out.println(String.format("%-6s\t%s", (i + 1),run.getFormatForAllHistory()));
+            } else {
+                Gym gym = (Gym) workout;
+                for(int j = 0; j < gym.getStations().size(); j++){
+
+                    if(j == 0){
+                        System.out.println(String.format("%-6d\t%s" , (i+1), gym.getFormatForAllHistoryFirst()));
+                    }
+                    else{
+                        System.out.println(String.format("%-6s\t%s", "", gym.getFormatForAllHistorySubsequent()));
+                    }
+                }
+
+            }
+        }
+        printLine();
+    }
+
+    /**
      * Prints all the Run objects added to the list.
      *
      * @throws CustomExceptions.OutOfBounds If index is out of bounds.
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
-    private static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+    protected static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
         System.out.println("Your run history:");
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.RUN);
@@ -168,7 +201,7 @@ public class Output {
      * Prints all the stations within a specified Gym object.
      * @param gym The Gym object containing the GymStation objects to be printed.
      */
-    private static void printGymStats(Gym gym) {
+    protected static void printGymStats(Gym gym) {
         ArrayList<GymStation> allStations = gym.getStations();
         for (int i = 0; i < allStations.size(); i++){
             System.out.printf("Station %d %s%n", i+1, allStations.get(i).toString());
@@ -181,7 +214,7 @@ public class Output {
      * @throws CustomExceptions.OutOfBounds If index is out of bounds.
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
-    private static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+    protected static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
         System.out.println("Your gym history:");
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.GYM);
@@ -203,7 +236,7 @@ public class Output {
      * @throws CustomExceptions.OutOfBounds If there is access to a Bmi object that does not exist.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
-    private static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+    protected static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
         System.out.println("Your BMI history:");
         HealthList.showBmiHistory();
@@ -216,7 +249,7 @@ public class Output {
      * @throws CustomExceptions.OutOfBounds If there is access to a Period object that does not exist.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
-    private static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+    protected static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
         System.out.println("Your Period history:");
         HealthList.showPeriodHistory();
@@ -226,7 +259,7 @@ public class Output {
     /**
      * Prints the latest Run recorded.
      */
-    public static void printLatestRun() {
+    protected static void printLatestRun() {
         printLine();
         try {
 
@@ -245,7 +278,7 @@ public class Output {
     /**
      * Prints the latest Gym recorded.
      */
-    public static void printLatestGym() {
+    protected static void printLatestGym() {
         printLine();
         try {
             Gym latestGym = WorkoutList.getLatestGym();
@@ -262,7 +295,7 @@ public class Output {
     /**
      * Prints the latest BMI entry recorded.
      */
-    public static void printLatestBmi() {
+    protected static void printLatestBmi() {
         printLine();
         HealthList.showCurrentBmi();
         printLine();
@@ -271,7 +304,7 @@ public class Output {
     /**
      * Prints the latest Period entry recorded.
      */
-    public static void printLatestPeriod() {
+    protected static void printLatestPeriod() {
         printLine();
         HealthList.showLatestPeriod();
         printLine();
@@ -303,7 +336,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_FILTER);
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
             }
         } catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
@@ -319,6 +352,9 @@ public class Output {
         try {
             Filters parsedFilter = Filters.valueOf(filter.toUpperCase());
             switch (parsedFilter) {
+            case WORKOUTS:
+                printWorkoutHistory();
+                break;
             case RUN:
                 printRunHistory();
                 break;

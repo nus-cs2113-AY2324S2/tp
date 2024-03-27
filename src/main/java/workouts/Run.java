@@ -130,6 +130,15 @@ public class Run extends Workout {
         return pace;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     /**
      * Method parses the time format in either hh:mm:ss or mm:ss.
      * Sets {@code isHourPresent} variable to true if hours have been specified.
@@ -298,4 +307,27 @@ public class Run extends Workout {
         return String.format(WorkoutConstant.RUN_FORMAT, WorkoutConstant.RUN,
                 getTimes(), getDistance(), getPace(), printedDate);
     }
-}
+
+    public String getFormatForAllHistory(){
+        String printedDate;
+
+        if (date != null) {
+            printedDate = date.toString();
+        } else {
+            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
+        }
+        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+                WorkoutConstant.RUN,
+                printedDate,
+                getDistance(),
+                getTimes(),
+                getPace(),
+                "-", // Placeholder for gym sets (NA)
+                "-", // Placeholder for gym reps (NA)
+                "-", // Placeholder for gym weight (NA)
+                "-"  // Placeholder for gym station (NA)
+        );
+
+    }
+
+    }
