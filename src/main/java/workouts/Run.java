@@ -66,35 +66,35 @@ public class Run extends Workout {
             throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
         }
         // Command
-        results[WorkoutConstant.SUBSTRING_COMMAND] = Handler.extractSubstringFromSpecificIndex(input, "/e:");
+        results[WorkoutConstant.COMMAND_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/e:");
         // Distance
-        results[WorkoutConstant.SUBSTRING_DISTANCE] = Handler.extractSubstringFromSpecificIndex(input, "/d:");
+        results[WorkoutConstant.DISTANCE_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/d:");
         // Time
-        results[WorkoutConstant.SUBSTRING_TIME] = Handler.extractSubstringFromSpecificIndex(input, "/t:");
+        results[WorkoutConstant.TIME_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/t:");
         // Date
-        results[WorkoutConstant.SUBSTRING_DATE] = Handler.extractSubstringFromSpecificIndex(input, "/date:");
+        results[WorkoutConstant.DATE_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/date:");
 
 
-        assert !results[WorkoutConstant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
-        assert !results[WorkoutConstant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
-        assert results[WorkoutConstant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") :
+        assert !results[WorkoutConstant.COMMAND_INDEX].isEmpty() : "Command should not be empty";
+        assert !results[WorkoutConstant.DISTANCE_INDEX].isEmpty() : "Distance should not be empty";
+        assert results[WorkoutConstant.DISTANCE_INDEX].matches("\\d+(\\.\\d+)?") :
                 "Distance should be a valid numeric " + "value (assuming KM)";
-        assert !results[WorkoutConstant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
+        assert !results[WorkoutConstant.TIME_INDEX].isEmpty() : "Time should not be empty";
 
         return results;
     }
 
     public static Run addRun (String[] runDetails) throws CustomExceptions.InvalidInput {
         Run newRun;
-        if (runDetails[WorkoutConstant.SUBSTRING_DATE].isEmpty()) {
+        if (runDetails[WorkoutConstant.DATE_INDEX].isEmpty()) {
             newRun = new Run(
-                    runDetails[WorkoutConstant.SUBSTRING_TIME],
-                    runDetails[WorkoutConstant.SUBSTRING_DISTANCE]);
+                    runDetails[WorkoutConstant.TIME_INDEX],
+                    runDetails[WorkoutConstant.DISTANCE_INDEX]);
         } else {
             newRun = new Run(
-                    runDetails[WorkoutConstant.SUBSTRING_TIME],
-                    runDetails[WorkoutConstant.SUBSTRING_DISTANCE],
-                    runDetails[WorkoutConstant.SUBSTRING_DATE]);
+                    runDetails[WorkoutConstant.TIME_INDEX],
+                    runDetails[WorkoutConstant.DISTANCE_INDEX],
+                    runDetails[WorkoutConstant.DATE_INDEX]);
         }
         return newRun;
     }
@@ -304,7 +304,7 @@ public class Run extends Workout {
         } else {
             printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
         }
-        return String.format(WorkoutConstant.RUN_FORMAT, WorkoutConstant.RUN,
+        return String.format(WorkoutConstant.RUN_DATA_FORMAT, WorkoutConstant.RUN,
                 getTimes(), getDistance(), getPace(), printedDate);
     }
 

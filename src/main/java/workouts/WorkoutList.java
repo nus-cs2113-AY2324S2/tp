@@ -65,13 +65,13 @@ public class WorkoutList extends ArrayList<Workout> {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
         }
         if(filter.equals(WorkoutConstant.RUN) && runs.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_RUNS_FOUND);
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.HISTORY_RUN_EMPTY_ERROR);
         }
         if(filter.equals(WorkoutConstant.ALL) && workouts.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_HISTORY_FOUND);
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.HISTORY_WORKOUTS_EMPTY_ERROR);
         }
         if(filter.equals(WorkoutConstant.GYM) && gyms.isEmpty()){
-            throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_GYMS_FOUND);
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.HISTORY_GYM_EMPTY_ERROR);
         }
 
         if(filter.equals(WorkoutConstant.RUN)){
@@ -92,14 +92,14 @@ public class WorkoutList extends ArrayList<Workout> {
      */
     public static Run getLatestRun() throws CustomExceptions.OutOfBounds {
         if (runs.isEmpty()) {
-            throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_RUNS_FOUND);
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.HISTORY_RUN_EMPTY_ERROR);
         }
         return runs.get(runs.size() - 1);
     }
 
     public static Gym getLatestGym() throws CustomExceptions.OutOfBounds {
         if (gyms.isEmpty()) {
-            throw new CustomExceptions.OutOfBounds(WorkoutConstant.NO_GYMS_FOUND);
+            throw new CustomExceptions.OutOfBounds(ErrorConstant.HISTORY_GYM_EMPTY_ERROR);
         }
         return gyms.get(gyms.size() - 1);
     }

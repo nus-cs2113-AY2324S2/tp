@@ -72,7 +72,7 @@ public class Output {
      * @return A string
      */
     private static String getFormattedRunWithIndex(int index, Workout currentWorkout) {
-        return String.format(WorkoutConstant.PRINT_RUN_FORMAT_WITH_INDEX, index, currentWorkout);
+        return String.format(WorkoutConstant.RUN_DATA_INDEX_FORMAT, index, currentWorkout);
     }
 
     /**
@@ -113,22 +113,23 @@ public class Output {
             Workout workout = workoutList.get(i);
             if (workout instanceof Run) {
                 Run run = (Run) workout;
-                System.out.println(String.format("%-6s\t%s", (i + 1),run.getFormatForAllHistory()));
+                System.out.println(String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                        (i + 1),run.getFormatForAllHistory()));
             } else {
                 Gym gym = (Gym) workout;
-                for(int j = 0; j < gym.getStations().size(); j++){
-                    StringBuilder gymString = new StringBuilder();
+                int numberOfStation = gym.getStations().size();
+                for(int j = 0; j < numberOfStation; j++){
+                    String gymString;
                     if(j == 0){
-                        gymString.append(String.format("%-6d\t%s", (i+1), gym.getFormatForAllHistory(true, j)));
+                        gymString = String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                                (i+1), gym.getHistoryFormatForSpecificGymStation(j));
                     }
                     else{
-                        gymString.append(String.format("%-6s\t%s", "", gym.getFormatForAllHistory(false, j)));
+                        gymString = String.format(WorkoutConstant.HISTORY_ALL_DATA_HEADER_FORMAT,
+                                "", gym.getHistoryFormatForSpecificGymStation(j));
                     }
-
                     System.out.println(gymString);
-
                 }
-
             }
         }
         printLine();
@@ -144,7 +145,7 @@ public class Output {
         printLine();
         System.out.println("Your run history:");
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.RUN);
-        System.out.println(WorkoutConstant.RUN_HEADER_WITH_INDEX_FORMAT);
+        System.out.println(WorkoutConstant.RUN_HEADER_INDEX_FORMAT);
 
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
@@ -224,7 +225,7 @@ public class Output {
             Workout latestRun = WorkoutList.getLatestRun();
             String latestRunString = getFormattedRunWithIndex(WorkoutList.getRunSize(), latestRun);
             System.out.println("Your latest run:");
-            System.out.println(WorkoutConstant.RUN_HEADER_WITH_INDEX_FORMAT);
+            System.out.println(WorkoutConstant.RUN_HEADER_INDEX_FORMAT);
             System.out.println(latestRunString);
 
         } catch (CustomExceptions.OutOfBounds e) {
@@ -294,7 +295,7 @@ public class Output {
                 break;
 
             default:
-                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_LATEST_FILTER_ERROR);
             }
         } catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
