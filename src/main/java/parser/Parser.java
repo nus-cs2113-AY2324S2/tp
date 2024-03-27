@@ -5,6 +5,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.EditCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.HelpCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
@@ -31,6 +32,9 @@ public class Parser {
 
     public static final Pattern SELL_COMMAND_FORMAT =
             Pattern.compile("sell (?<itemName>[^/]+) qty/(?<sellQuantity>\\d+)(?: price/(?<sellPrice>[^/]+))?");
+
+    public static final Pattern FIND_COMMAND_FORMAT =
+            Pattern.compile("find (?<itemName>[^/]+)");
 
     public static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
@@ -74,6 +78,12 @@ public class Parser {
         case EDIT:
             try {
                 return prepareEdit(userInput);
+            } catch (CommandFormatException e) {
+                break;
+            }
+        case FIND:
+            try {
+                return prepareFind(userInput);
             } catch (CommandFormatException e) {
                 break;
             }
@@ -153,6 +163,15 @@ public class Parser {
                 sellQuantity,
                 sellPrice
         );
+    }
+
+    private Command prepareFind(String args) throws CommandFormatException{
+        final Matcher matcher = FIND_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.FIND);
+        }
+        return new FindCommand(matcher.group("itemName"));
     }
 }
 

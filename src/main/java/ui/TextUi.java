@@ -52,17 +52,21 @@ public class TextUi {
 
     public static void replyToUser(String... message) {
         for (String m : message) {
-            System.out.println(m + "\n");
+            System.out.println(m);
         }
     }
 
     public static <T> void showInventoryList(ArrayList<T> arrayList) {
-        replyToUser("List: ");
-        for (T item : arrayList) {
-            if (item == null) {
-                break;
+        if (arrayList.isEmpty()) {
+            replyToUser("There is nothing here! Time to spend some money and stock em up!");
+        } else {
+            replyToUser("List: ");
+            for (T item : arrayList) {
+                if (item == null) {
+                    break;
+                }
+                replyToUser(arrayList.indexOf(item) + 1 + ". " + item);
             }
-            replyToUser(arrayList.indexOf(item) + 1 +". " + item);
         }
     }
 

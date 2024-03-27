@@ -7,5 +7,6 @@ public enum CommandType {
     ADD,
     DEL,
     EDIT,
-    SELL
+    SELL,
+    FIND
 }

@@ -20,6 +20,9 @@ public class CommandFormatException extends Exception{
         case SELL:
             System.out.println(Messages.INVALID_SELL_FORMAT);
             break;
+        case FIND:
+            System.out.println(Messages.INVALID_FIND_FORMAT);
+            break;
         case HELP:
             System.out.println(Messages.HELP);
             break;

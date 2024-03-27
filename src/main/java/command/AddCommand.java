@@ -46,15 +46,19 @@ public class AddCommand extends Command {
 
     @Override
     public void execute() {
-        Itemlist.addItem(toAdd);
-        System.out.print(MESSAGE_SUCCESS + getItemName() + " (Qty: " + getQuantity() + getUom() +
-                ", Buy: $" + getBuyPrice() + ", Sell: $" + getSellPrice() + ")");
-        Storage.addToFile(Itemlist.getItems(), true);
-        if (!category.equals("NA")) {
-            System.out.println(" to " + getCategory());
+        if (Itemlist.itemIsExist(itemName)) {
+            System.out.println("Item already exists. To increase the quantity, please use the edit command");
         } else {
-            System.out.println();
-            assert category.equals("NA");
+            Itemlist.addItem(toAdd);
+            System.out.print(MESSAGE_SUCCESS + getItemName() + " (Qty: " + getQuantity() + getUom() +
+                    ", Buy: $" + getBuyPrice() + ", Sell: $" + getSellPrice() + ")");
+            Storage.addToFile(Itemlist.getItems(), true);
+            if (!category.equals("NA")) {
+                System.out.println(" to " + getCategory());
+            } else {
+                System.out.println();
+                assert category.equals("NA");
+            }
         }
     }
 }

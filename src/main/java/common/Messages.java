@@ -13,6 +13,8 @@ public class Messages {
     public static final String INVALID_SELL_FORMAT ="Invalid command format. Please use format: " +
             "'sell [ITEM_NAME] qty/[SELL_QUANTITY] price/[SELL_PRICE]'";
     public static final String INVALID_SELL_PRICE ="Price cannot be negative!";
+
+    public static final String INVALID_FIND_FORMAT ="Invalid command format. Please use format: 'find [ITEM_NAME]'";
     public static final String WELCOME = "Welcome to StockMaster, where you can master the knowledge on your " +
             "Stock!";
 

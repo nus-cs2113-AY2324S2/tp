@@ -2,6 +2,7 @@ package command;
 
 import item.Item;
 import itemlist.Itemlist;
+import ui.TextUi;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,9 @@ public class FindCommand extends Command{
         ArrayList<String> searchList = new ArrayList<>();
         for (Item item : Itemlist.getItems()) {
             if (item.getItemName().toLowerCase().contains(itemName)) {
-                int index = Itemlist.getItems().indexOf(item);
-                String itemNameWithIndex = index + ". " + item.getItemName();
-                searchList.add(itemNameWithIndex);
+                searchList.add(String.valueOf(item));
             }
         }
-        //displayList(searchList);
+        TextUi.showInventoryList(searchList);
     }
 }
