@@ -6,25 +6,22 @@
 # Vim swap files
 *.swp
 
-# Gradle build files
+# Gradle and build files
 /.gradle/
 /build/
 src/main/resources/docs/
+/META-INF/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
 
+# Ephemeral test files
 /text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
-text-ui-test/data
-text-ui-test/data/*
+/text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/data/
 
-# Data files
+# Data and log files created by application
 /data/
-/data/*
 /logs/
-/logs/*
-/META-INF/
-/META-INF/*
