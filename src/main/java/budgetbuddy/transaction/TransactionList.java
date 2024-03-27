@@ -18,6 +18,7 @@ public class TransactionList {
     public static final int DELETE_BEGIN_INDEX = 7;
     public static final int INDEX_OFFSET = 1;
     public static final int LOWER_BOUND = 0;
+    public static final int EDIT_BEGIN_INDEX = 5;
 
     private ArrayList<Transaction> transactions;
     private Parser parser;
@@ -108,5 +109,24 @@ public class TransactionList {
 
     public void updateBalance(Account account) {
         account.setBalance(dataStorage.getBalance());
+    }
+
+    public void processEditTransaction(String input, Account account) throws EmptyArgumentException,
+            NumberFormatException, InvalidIndexException {
+        if (input.trim().length() < EDIT_BEGIN_INDEX) {
+            throw new EmptyArgumentException("edit index ");
+        }
+        String data = input.substring(EDIT_BEGIN_INDEX).trim();
+
+        if (isNotInteger(data)) {
+            throw new NumberFormatException(data);
+        }
+        int index = Integer.parseInt(data) - INDEX_OFFSET;
+        if ((index >= LOWER_BOUND) && (index < transactions.size())) {
+            Transaction transaction = transactions.get(index);
+            UserInterface.printUpdateInfo(transaction.toString(), index, transactions, account);
+        } else {
+            throw new InvalidIndexException(String.valueOf(transactions.size()));
+        }
     }
 }

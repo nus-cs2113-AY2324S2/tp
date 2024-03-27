@@ -1,9 +1,13 @@
 package budgetbuddy.ui;
 
+import budgetbuddy.transaction.type.Expense;
+import budgetbuddy.transaction.type.Income;
 import budgetbuddy.transaction.type.Transaction;
 
+import budgetbuddy.account.Account;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -18,7 +22,7 @@ public class UserInterface {
     private static final String TAB_SPACE = "    ";
 
     public static Scanner in = new Scanner(System.in);
-    
+
     public static void printDeleteMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
         System.out.println(LINE);
@@ -77,7 +81,7 @@ public class UserInterface {
     public static void printNumberFormatError(String message) {
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Error occurred with the input: " + message);
-        System.out.println(TAB_SPACE + "Please enter an integer.");
+        System.out.println(TAB_SPACE + "Please enter a valid value.");
         System.out.println(LINE);
     }
 
@@ -121,6 +125,47 @@ public class UserInterface {
     public static void printNoCommandExists(){
         System.out.println(LINE);
         System.out.println( TAB_SPACE + "No such command exists." );
+        System.out.println(LINE);
+    }
+
+    public static void printUpdateInfo(String string, int index, ArrayList<Transaction> transactions,
+                                       Account account){
+        System.out.println(LINE);
+        System.out.println( TAB_SPACE + "Please edit the following transaction" );
+        System.out.println(string);
+        System.out.println(LINE);
+        System.out.print( TAB_SPACE + "Enter transaction type: " );
+        String type = in.next();
+        System.out.print( TAB_SPACE + "Enter description: " );
+        String description = in.next();
+        System.out.print( TAB_SPACE + "Enter transaction date: " );
+        String date = in.next();
+        System.out.print( TAB_SPACE + "Enter transaction amount: " );
+        String amount = in.next();
+        System.out.print( TAB_SPACE + "Enter Category: " );
+        String category = in.next();
+        in.nextLine();
+        try {
+            if (type.equalsIgnoreCase("income")) {
+                Transaction t = new Income(description, Double.parseDouble(amount), category, date, account);
+                transactions.set(index, t);
+            } else if (type.equalsIgnoreCase("expense")) {
+                Transaction t = new Expense(description, Double.parseDouble(amount), category, date, account);
+                transactions.set(index, t);
+            } else {
+                throw new InputMismatchException(" One or more data is wrong. ");
+            }
+            System.out.println("\n" + TAB_SPACE + "Updated Successfully");
+            System.out.println(LINE);
+        } catch (InputMismatchException e){
+            printInputMismatch(e.getMessage());
+
+        }
+    }
+
+    public static void printInputMismatch(String message){
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Input Mismatch error: " + message);
         System.out.println(LINE);
     }
 }

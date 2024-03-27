@@ -50,6 +50,9 @@ public class BudgetBuddy {
                 case "add":
                     transactions.processTransaction(input, account);
                     break;
+                case "edit":
+                    transactions.processEditTransaction(input, account);
+                    break;
                 default:
                     UserInterface.printNoCommandExists();
                 }
