@@ -5,9 +5,20 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
+### Parsing user input for caloric entries
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+This functionality is facilitated by `ParserCalories`. It implements one operation, namely:
+- `ParserCalories#parseCaloriesInput(String)`
 
+This operation is exposed in the `CalorieList` class as `CalorieList#addEntry(String)`.
+
+Given below is an example usage scenario and how this mechanism behaves at every step:
+- Step 1: When the user inputs the command `calories in burger c/200 date/270324` in the terminal,
+the string is sent to `CalorieList#addEntry(String)`, which calls `ParserCalories#parseCaloriesInput(String)`.
+
+- Step 2: Using `String.split()`, the method extracts information such as the description, number of calories, and date of entry. The obtained information is sent to the private method `ParserCalories#makeNewInputEntry(String, int, String)` to create a new entry of class `InputEntry` that extends `Entry`.
+
+- Step 3: The created `InputEntry` instance is added into the `ArrayList<Entry>` attribute of the `CalorieList`.
 
 ## Product scope
 ### Target user profile
