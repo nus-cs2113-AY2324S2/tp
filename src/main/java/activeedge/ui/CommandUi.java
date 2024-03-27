@@ -1,6 +1,6 @@
 package activeedge.ui;
 
-import static activeedge.task.TaskList.tasksList;
+import static activeedge.task.TaskList.TASKS_LIST;
 
 import activeedge.task.ExerciseTask;
 import activeedge.task.Task;
@@ -19,9 +19,9 @@ public class CommandUi {
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
         int j = 1;
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).toString().startsWith("Meal")) {
-                System.out.print(j + ". " + tasksList.get(i).toString().substring(5));
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            if (TASKS_LIST.get(i).toString().startsWith("Meal")) {
+                System.out.print(j + ". " + TASKS_LIST.get(i).toString().substring(5));
                 System.out.println(" kcal");
                 j++;
             }
@@ -34,18 +34,18 @@ public class CommandUi {
         System.out.println("(food name, servings, calories):");
         int j = 1;
 
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).toString().startsWith("Meal")) {
-                System.out.print(j + ". " + tasksList.get(i).toString().substring(5));
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            if (TASKS_LIST.get(i).toString().startsWith("Meal")) {
+                System.out.print(j + ". " + TASKS_LIST.get(i).toString().substring(5));
                 System.out.println("");
                 j++;
             }
         }
         System.out.println("Water:");
         int k = 1;
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).toString().startsWith("Water")) {
-                System.out.print(k + ". " + tasksList.get(i).toString().substring(6));
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            if (TASKS_LIST.get(i).toString().startsWith("Water")) {
+                System.out.print(k + ". " + TASKS_LIST.get(i).toString().substring(6));
                 System.out.println("");
                 k++;
             }
@@ -68,13 +68,13 @@ public class CommandUi {
     public static void printShowCalMessage() {
         int totalCalories = 0;
         String goal = "0";
-        for (int i = 0; i < tasksList.size(); i++) {
-            String[] parts = tasksList.get(i).toString().split(" ");
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            String[] parts = TASKS_LIST.get(i).toString().split(" ");
             int len = parts.length;
-            if(tasksList.get(i).toString().startsWith("Meal")) {
+            if(TASKS_LIST.get(i).toString().startsWith("Meal")) {
                 totalCalories = totalCalories + Integer.parseInt(parts[len-1]);
             }
-            if(tasksList.get(i).toString().startsWith("Goal")) {
+            if(TASKS_LIST.get(i).toString().startsWith("Goal")) {
                 if (parts[1].equals("c")) {
                     goal = parts[2].toString();
                 }
@@ -101,20 +101,20 @@ public class CommandUi {
         boolean found = false;
 
         // Search in the food section
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).toString().startsWith("Meal") && tasksList.get(i).toString().contains(word)) {
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            if (TASKS_LIST.get(i).toString().startsWith("Meal") && TASKS_LIST.get(i).toString().contains(word)) {
                 System.out.print(matchingTasksIndex + ". ");
-                System.out.println(tasksList.get(i).toString().substring(5) + " kcal");
+                System.out.println(TASKS_LIST.get(i).toString().substring(5) + " kcal");
                 matchingTasksIndex++;
                 found = true; // Indicate that a match was found
             }
         }
 
         // Search in the water section
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).toString().startsWith("Water") && tasksList.get(i).toString().contains(word)) {
+        for (int i = 0; i < TASKS_LIST.size(); i++) {
+            if (TASKS_LIST.get(i).toString().startsWith("Water") && TASKS_LIST.get(i).toString().contains(word)) {
                 System.out.print(matchingTasksIndex + ". ");
-                System.out.println(tasksList.get(i).toString().substring(6) + " ml");
+                System.out.println(TASKS_LIST.get(i).toString().substring(6) + " ml");
                 matchingTasksIndex++;
                 found = true; // Indicate that a match was found
             }

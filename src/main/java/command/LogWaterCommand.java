@@ -42,7 +42,7 @@ public class LogWaterCommand {
             System.out.println("Water quantity must be above 0. Please try again.");
         } else {
             WaterTask waterTask = new WaterTask(quantity, dateTime);
-            TaskList.tasksList.add(waterTask);
+            TaskList.TASKS_LIST.add(waterTask);
             CommandUi.printWaterLogMessage(waterTask);
         }
     }

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -28,8 +29,6 @@ import java.time.format.DateTimeFormatter;
  * and fetching data from files.
  */
 public class Storage {
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
 
 
     /**
@@ -74,8 +73,8 @@ public class Storage {
                 String out = UserDetailsList.DETAILS_LIST.get(i).toString();
                 fw.write(out + "\n");
             }
-            for (int i = 0; i < TaskList.tasksList.size(); i++) {
-                String out = TaskList.tasksList.get(i).toString();
+            for (int i = 0; i < TaskList.TASKS_LIST.size(); i++) {
+                String out = TaskList.TASKS_LIST.get(i).toString();
                 fw.write(out + "\n");
             }
         } catch (IOException e) {
@@ -134,35 +133,40 @@ public class Storage {
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {
                     String task = scanner.nextLine();
+                    String dateTimeStr = extractDateTimeString(task);
+                    LocalDateTime dateTime = parseDateTime(dateTimeStr);
+
                     if (task.startsWith("Meal")) {
-                        String[] items = task.trim().split(" ");
+                        String[] items = task.split(" ");
+                        if (!task.matches("^Meal .* \\d+ \\d+ kcal \\(Recorded on: .*\\)$")) {
+                            System.out.println("Invalid task format: " + task);
+                            continue; // Skip this task and move to the next line
+                        }
+
                         int len = items.length;
                         assert len >= 4;
+                        String mealName = items[1];
+                        int servings = Integer.parseInt(items[2]);
+                        int mealCalories = Integer.parseInt(items[3]);
+                        MealTask newTask = new MealTask(mealName, servings, mealCalories, dateTime);
 
-                        String mealName = "";
-                        for (int i = 1; i <= len - 3; i++) {
-                            mealName = mealName + items[i] + " "; // Add space between words
-                        }
-                        MealTask newTask = new MealTask(mealName.trim(), // Trim to remove extra space at the end
-                                Integer.parseInt(items[len - 2]),
-                                Integer.parseInt(items[len - 1]), LocalDateTime.now());
-                        TaskList.tasksList.add(newTask);
+                        TaskList.TASKS_LIST.add(newTask);
 
                     } else if (task.startsWith("Goal")) {
                         String[] items = task.trim().split(" ");
-                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]), LocalDateTime.now());
-                        TaskList.tasksList.add(newTask);
+                        GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]), dateTime);
+                        TaskList.TASKS_LIST.add(newTask);
                     } else if (task.startsWith("Water")) {
                         String[] items = task.trim().split(" ");
-                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]), LocalDateTime.now());
-                        TaskList.tasksList.add(newTask);
+                        WaterTask newTask = new WaterTask(Integer.parseInt(items[1]), dateTime);
+                        TaskList.TASKS_LIST.add(newTask);
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
-                        LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), LocalDateTime.now());
+                        LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), dateTime);
                         UserDetailsList.DETAILS_LIST.add(newHeight);
                     } else if (task.startsWith("Weight")) {
                         String[] items = task.trim().split(" ");
-                        LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]), LocalDateTime.now());
+                        LogWeight newWeight = new LogWeight(Integer.parseInt(items[1]), dateTime);
                         UserDetailsList.DETAILS_LIST.add(newWeight);
                     } else if (task.startsWith("Exercise")){
                         String[] items = task.trim().split(" ");
@@ -173,9 +177,9 @@ public class Storage {
                             exerciseName = exerciseName + items[i];
                         }
                         ExerciseTask newTask = new ExerciseTask(exerciseName,
-                                Integer.parseInt(items[len - 2]),
-                                Integer.parseInt(items[len - 1]), LocalDateTime.now());
-                        TaskList.tasksList.add(newTask);
+                                Integer.parseInt(items[len - 3]),
+                                Integer.parseInt(items[len - 2]), dateTime);
+                        TaskList.TASKS_LIST.add(newTask);
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -183,12 +187,25 @@ public class Storage {
             }
         }
     }
-    public static String formatDateTime(LocalDateTime dateTime) {
-        return dateTime.format(DATE_TIME_FORMATTER);
+    private static String extractDateTimeString(String task) {
+        // Extracting date-time string between "Recorded on: " and ")"
+        int startIndex = task.indexOf("Recorded on: ") + "Recorded on: ".length();
+        int endIndex = task.lastIndexOf(")");
+        return task.substring(startIndex, endIndex);
     }
 
-    public static LocalDateTime parseDateTime(String dateTimeStr) {
-        return LocalDateTime.parse(dateTimeStr, DATE_TIME_FORMATTER);
+
+    private static LocalDateTime parseDateTime(String dateTimeStr) {
+        try {
+            // Use the correct DateTimeFormatter for your date-time strings
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+            return LocalDateTime.parse(dateTimeStr, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Error parsing date-time: " + e.getMessage());
+            // Handle the error, e.g., by returning a default date-time or logging the error
+            return LocalDateTime.now(); // Default to the current date-time
+        }
     }
+
 }
 

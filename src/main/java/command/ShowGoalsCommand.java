@@ -20,16 +20,14 @@ public class ShowGoalsCommand {
         int waterGoal = 0; // The water goal set by the user
 
         // Iterate through the list of tasks
-        for (Task task : TaskList.tasksList) {
+        for (Task task : TaskList.TASKS_LIST) {
             // Check if the task is an instance of GoalTask
             if (task instanceof GoalTask) {
                 GoalTask goalTask = (GoalTask) task; // Cast Task to GoalTask
                 // Check if the goal is related to calories
                 if (goalTask.getDescription().startsWith("c")) {
                     calorieGoal = goalTask.getGoalAmount(); // Retrieve calorie goal
-                }
-                // Check if the goal is related to water intake
-                else if (goalTask.getDescription().startsWith("w")) {
+                } else if (goalTask.getDescription().startsWith("w")) {
                     waterGoal = goalTask.getGoalAmount(); // Retrieve water goal
                 }
             }

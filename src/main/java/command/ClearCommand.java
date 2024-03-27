@@ -9,7 +9,7 @@ public class ClearCommand {
     }
 
     public void execute() {
-        if (TaskList.tasksList.isEmpty()) {
+        if (TaskList.TASKS_LIST.isEmpty()) {
             CommandUi.printDataAlreadyClearedMessage();
         } else {
             TaskList.clearTasks();

@@ -3,7 +3,7 @@ package command;
 import activeedge.task.ExerciseTask;
 import activeedge.ui.CommandUi;
 
-import static activeedge.task.TaskList.tasksList;
+import static activeedge.task.TaskList.TASKS_LIST;
 import java.time.LocalDateTime;
 
 
@@ -35,7 +35,7 @@ public class LogExerciseCommand {
      */
     public void execute() throws ActiveEdgeException {
         ExerciseTask logExercise = new ExerciseTask(exerciseName, duration, caloriesBurnt, dateTime);
-        tasksList.add(logExercise);
+        TASKS_LIST.add(logExercise);
         CommandUi.printExerciseLogMessage(logExercise);
     }
 

@@ -26,7 +26,9 @@ public class ExerciseTask extends Task{
         this.caloriesBurnt = caloriesBurnt;
         this.dateTime = dateTime;
     }
-    public String getExerciseName() { return description; }
+    public String getExerciseName() {
+        return description;
+    }
 
 
     public int getDuration(){

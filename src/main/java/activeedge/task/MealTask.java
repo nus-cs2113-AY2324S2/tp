@@ -14,14 +14,18 @@ public class MealTask extends Task {
         this.mealCalories = Optional.ofNullable(mealCalories).orElse(0);
         this.dateTime = dateTime;
     }
-    public String getFoodName() { return description; }
+    public String getFoodName() {
+        return description;
+    }
 
 
     public int getServings(){
         return servings;
     }
 
-    public int getMealCalories() { return mealCalories; }
+    public int getMealCalories() {
+        return mealCalories;
+    }
 
 
     @Override

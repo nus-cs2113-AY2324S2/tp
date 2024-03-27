@@ -20,8 +20,8 @@ public class DeleteTaskCommand {
     public void execute() {
         // Search for the task with the specified description
         boolean taskFound = false;
-        for (int i = 0; i < TaskList.tasksList.size(); i++) {
-            Task task = TaskList.tasksList.get(i);
+        for (int i = 0; i < TaskList.TASKS_LIST.size(); i++) {
+            Task task = TaskList.TASKS_LIST.get(i);
             if (task.getDescription().toLowerCase().startsWith("water")) {
                 if (task instanceof WaterTask) { // Check if it's a WaterTask before casting
                     WaterTask waterTask = (WaterTask) task;

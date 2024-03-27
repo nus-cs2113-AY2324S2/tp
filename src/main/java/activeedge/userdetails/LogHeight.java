@@ -13,6 +13,8 @@ public class LogHeight extends UserDetails {
         return dateTime;
     }
 
-    public String toString() { return "Height " + this.getValue() + " cm" + " (Recorded on: " + dateTime + ")";}
+    public String toString() {
+        return "Height " + this.getValue() + " cm" + " (Recorded on: " + dateTime + ")";
+    }
 
 }
