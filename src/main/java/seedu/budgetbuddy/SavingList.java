@@ -13,13 +13,15 @@ public class SavingList {
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
     protected double initialAmount;
+    protected Storage storage;
 
 
     public SavingList() {
         this.savings = new ArrayList<>();
-        this.categories = new ArrayList<>(Arrays.asList("Salary", 
-        "Investments", "Gifts", "Others"));
+        this.categories = new ArrayList<>(Arrays.asList("Salary",
+                "Investments", "Gifts", "Others"));
         this.initialAmount = 0;
+        this.storage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
     }
 
     public int size() {
@@ -47,7 +49,6 @@ public class SavingList {
         }
     }
 
-
     public void listSavings(String filterCategory, ExpenseList expenseList) {
         try {
             LOGGER.info("Listing savings...");
@@ -59,26 +60,28 @@ public class SavingList {
                 if (filterCategory == null || saving.getCategory().equalsIgnoreCase(filterCategory)) {
                     System.out.print(i + 1 + " | ");
                     System.out.print("Category: " + saving.getCategory() + " | ");
-                    System.out.print("Amount: $" + saving.getAmount() + " | ");
+                    System.out.println("Amount: $" + String.format("%.2f", saving.getAmount()) + " | ");
                 }
             }
             System.out.println("------------------------------------------------------------------------");
-            System.out.println("Initial Savings Amount: $" + initialAmount);
+            System.out.println("Initial Savings Amount: $" + String.format("%.2f", initialAmount));
             System.out.println("Expenses Deducted: ");
 
             double totalExpenses = 0;
             for (Expense expense : expenseList.getExpenses()) {
                 totalExpenses += expense.getAmount();
-                System.out.println("$" + expense.getAmount() + " spent on " + expense.getDescription() +
+                System.out.println("$" + String.format("%.2f", expense.getAmount()) +
+                        " spent on " + expense.getDescription() +
                         " on " + expense.getDateAdded());
             }
             System.out.println("------------------------------------------------------------------------");
 
             double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
             if (remainingAmount < 0) {
-                System.out.println("You are currently short on savings by: $" + remainingAmount);
+                System.out.println("You are currently short on savings by: $" + String.format("%.2f", remainingAmount));
             } else {
-                System.out.println("Remaining Amount: $" + remainingAmount);
+                System.out.println("Remaining Amount: $" + String.format("%.2f", remainingAmount));
+
             }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An error occurred while listing savings", e);
@@ -146,20 +149,20 @@ public class SavingList {
             return;
         }
 
+        Saving savingToEdit = null;
         try {
             // Retrieve the saving to edit
-            Saving savingToEdit = savings.get(index - 1);
+            savingToEdit = savings.get(index - 1);
 
             // Update the saving details
             savingToEdit.setCategory(category);
             savingToEdit.setAmount(amount);
 
-            LOGGER.info(String.format("Saving at index %d edited successfully. " +
-                    "New details: %s", index, savingToEdit.toString()));
             System.out.println("Saving edited successfully.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error occurred while editing saving at index " + index, e);
             System.out.println("An error occurred during saving edition. Please try again.");
+
         }
     }
 
