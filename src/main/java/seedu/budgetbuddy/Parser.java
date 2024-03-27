@@ -1,7 +1,5 @@
 package seedu.budgetbuddy;
 
-import seedu.budgetbuddy.command.AddExpenseCommand;
-import seedu.budgetbuddy.command.AddSavingCommand;
 import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.DeleteExpenseCommand;
 import seedu.budgetbuddy.command.EditExpenseCommand;
@@ -10,7 +8,10 @@ import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
-import seedu.budgetbuddy.command.SplitExpenseCommand;
+import seedu.budgetbuddy.commandcreator.AddExpenseCommandCreator;
+import seedu.budgetbuddy.commandcreator.AddSavingCommandCreator;
+import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.SplitExpenseCommandCreator;
 import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
@@ -20,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class Parser {
 
@@ -47,19 +46,6 @@ public class Parser {
             }
         }
         return input.substring(startIndex, endIndex).trim();
-    }
-
-    private String extractDetailsForAdd(String details, String prefix) {
-        int startIndex = details.indexOf(prefix) + prefix.length();
-        int endIndex = details.length();
-
-        String[] nextPrefixes = { "c/", "a/", "d/" };
-        for (String nextPrefix : nextPrefixes) {
-            if (details.indexOf(nextPrefix, startIndex) != -1 && details.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = details.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return details.substring(startIndex, endIndex).trim();
     }
 
     public Boolean isFindExpensesCommand(String input) {
@@ -332,92 +318,6 @@ public class Parser {
         }
     }
 
-    public Command handleAddExpenseCommand(ExpenseList expenses, String input) {
-        if (input == null || !input.contains("c/") || !input.contains("a/") || !input.contains("d/")) {
-            System.out.println("Invalid command format.");
-            return null;
-        }
-        String[] parts = input.split(" ", 2);
-        if (parts.length < 2) {
-            System.out.println("Expense details are missing.");
-            return null;
-        }
-        String details = parts[1];
-
-        String category = extractDetailsForAdd(details, "c/");
-        if (category.isEmpty()) {
-            System.out.println("category is missing.");
-            return null;
-        }
-        String amount = extractDetailsForAdd(details, "a/");
-        if (amount.isEmpty()) {
-            System.out.println("amount is missing.");
-            return null;
-        }
-
-        try {
-            double amountValue = Double.parseDouble(amount);
-            if (amountValue <= 0) {
-                throw new BudgetBuddyException(amount + " is not a valid amount.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
-            return null;
-        } catch (BudgetBuddyException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        String description = extractDetailsForAdd(details, "d/");
-        if (description.isEmpty()) {
-            System.out.println("description is missing.");
-            return null;
-        }
-        return new AddExpenseCommand(expenses, category, amount, description);
-    }
-
-    public Command handleAddSavingCommand(SavingList savings, String input) {
-        if (input == null || !input.contains(" ") || !input.contains("c/") || !input.contains("a/")){
-            System.out.println("Invalid command format.");
-            return null;
-        }
-
-        String[] parts = input.split(" ", 2);
-        if (parts.length < 2) {
-            System.out.println("Saving details are missing.");
-            return null;
-        }
-
-        String details = parts[1];
-        String category = extractDetailsForAdd(details, "c/");
-        if (category.isEmpty()){
-            System.out.println("Category is missing.");
-            return null;
-        }
-
-        String amount = extractDetailsForAdd(details, "a/");
-        if (amount.isEmpty()) {
-            System.out.println("amount is missing.");
-            return null;
-        }
-
-        try {
-            double amountValue = Double.parseDouble(amount);
-            if (amountValue <= 0) {
-                throw new BudgetBuddyException(amount + " is not a valid amount.");
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
-            return null;
-        } catch (BudgetBuddyException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        return new AddSavingCommand(savings, category, amount);
-    }
-
     public Command handleEditExpenseCommand(ExpenseList expenses, String input) {
         String[] parts = input.split(" ");
         String category = null;
@@ -566,57 +466,6 @@ public class Parser {
         }
     }
 
-    public Command handleSplitExpenseCommand(SplitExpenseList splitexpenses, String input) {
-        if (input == null || !input.contains("a/") || !input.contains("n/") || !input.contains("d/")) {
-            System.out.println("Invalid command format.");
-            return null;
-        }
-    
-        // Extract details directly using the prefixes
-        String amount = extractDetail(input, "a/");
-        String numberOfPeople = extractDetail(input, "n/");
-        String description = extractDetail(input, "d/");
-    
-        // Validation for each part
-        if (amount.isEmpty() || numberOfPeople.isEmpty() || description.isEmpty()) {
-            System.out.println("Missing details.");
-            return null;
-        }
-    
-        try {
-            double amountValue = Double.parseDouble(amount);
-            if (amountValue <= 0) {
-                throw new BudgetBuddyException(amount + " is not a valid amount.");
-            }
-        } catch (NumberFormatException | BudgetBuddyException e) {
-            System.out.println("Invalid amount format.");
-            return null;
-        }
-    
-        try {
-            int numberValue = Integer.parseInt(numberOfPeople);
-            if (numberValue <= 0) {
-                throw new BudgetBuddyException(numberOfPeople + " is not a valid number.");
-            }
-        } catch (NumberFormatException | BudgetBuddyException e) {
-            System.out.println("Invalid number format.");
-            return null;
-        }
-    
-        return new SplitExpenseCommand(splitexpenses, amount, numberOfPeople, description);
-    }
-
-    private String extractDetail(String input, String prefix) {
-        try {
-            int startIndex = input.indexOf(prefix) + prefix.length();
-            int endIndex = input.indexOf(" ", startIndex);
-            endIndex = endIndex == -1 ? input.length() : endIndex; // Handle last detail case
-            return input.substring(startIndex, endIndex);
-        } catch (Exception e) {
-            return ""; // Return empty string if any error occurs
-        }
-    }
-
     private Command handleSetBudgetCommand(ExpenseList expenses, String input) {
         LOGGER.log(Level.INFO, "Entering handleSetBudgetCommand with input: " + input);
         String[] parts = input.split(" ");
@@ -679,11 +528,13 @@ public class Parser {
         }
 
         if (isAddExpenseCommand(input)) {
-            return handleAddExpenseCommand(expenses, input);
+            CommandCreator commandCreator = new AddExpenseCommandCreator(expenses, input);
+            return commandCreator.createCommand();
         }
 
         if (isAddSavingCommand(input)) {
-            return handleAddSavingCommand(savings, input);
+            CommandCreator commandCreator = new AddSavingCommandCreator(savings, input);
+            return commandCreator.createCommand();
         }
 
         if (isEditExpenseCommand(input)) {
@@ -711,7 +562,8 @@ public class Parser {
         }
 
         if (isSplitExpenseCommand(input)) {
-            return handleSplitExpenseCommand(splitexpenses, input);
+            CommandCreator commandCreator = new SplitExpenseCommandCreator(splitexpenses, input);
+            return commandCreator.createCommand();
         }
         
         if (isSetBudgetCommand(input)) {
