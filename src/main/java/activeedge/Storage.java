@@ -101,7 +101,8 @@ public class Storage {
             System.out.print("\n");
             int i = 0;
             int j = 0;
-            System.out.println("Welcome new user! Please input your height and weight in whole numbers!");
+            System.out.println("Since you are new here, let's start with your height and weight " +
+                    "to set things up!");
             try {
                 while (j < 1) {
                     System.out.println("Please input your height (in cm): ");
@@ -132,7 +133,8 @@ public class Storage {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("You can now start logging data!");
+            System.out.println("You can now start logging data! Type 'help' " +
+                    "if you are not sure how to use ActiveEdge.");
         }else {
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {

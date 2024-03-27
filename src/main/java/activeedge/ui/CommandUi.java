@@ -18,7 +18,7 @@ public class CommandUi {
 
     public static void printWelcomeMessage() {
         String logo = "🌟 ACTIVE EDGE 🌟";
-        System.out.println(logo);
+        System.out.println("Welcome to " + logo);
         System.out.println("🚀✨ Take the next step in your Healthy Lifestyle! ✨🚀");
     }
 
