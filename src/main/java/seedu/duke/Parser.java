@@ -142,9 +142,7 @@ public class Parser {
 
     }
 
-    // user enters "solution 1" to get solution for question1 OR
-    // user enters "solution -all" to get ALL solutions
-    // also works for "explain 1"
+    // solution and explain commands
     private void processSolutionCommand(
             String lowerCaseCommand, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic

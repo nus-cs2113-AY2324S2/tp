@@ -56,6 +56,7 @@ public class Ui {
         for (int index = 0; index < topicListSize; index++) {
             System.out.println((index + 1) + ". " + topicList.getTopic(index));
         }
+        System.out.println((topicListSize + 1) + ". " + "Randomly select a topic for me ;)");
         System.out.println("Please choose a topic to play:");//input command in the form "start [INDEX]
     }
 
@@ -63,6 +64,10 @@ public class Ui {
             int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList alLResults,
             AnswerTracker userAnswers
     ){
+        if (topicNum == topicList.getSize()) {
+            System.out.println("You reached here");
+            return;
+        }
         Results topicResults = new Results();
         QuestionsList qnList;
         System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
