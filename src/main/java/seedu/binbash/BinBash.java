@@ -17,7 +17,7 @@ public class BinBash {
         userInterface = new Ui();
         storage = new Storage();
         itemList = new ItemList(storage.loadData());
-        inputParser = new Parser(itemList);
+        inputParser = new Parser();
     }
 
     private void run() {
@@ -30,19 +30,18 @@ public class BinBash {
 
                 if (userCommand instanceof ByeCommand) {
                     userInterface.setUserAsInactive();
-                    continue;
                 }
 
-                userCommand.execute();
+                userCommand.execute(itemList);
                 userInterface.talk(userCommand.getExecutionUiOutput());
-                storage.saveToStorage(itemList.getItemList());
 
+                if (userCommand.hasToSave()) {
+                    storage.saveToStorage(itemList.getItemList());
+                }
             } catch (BinBashException e) {
                 userInterface.talk(e.getMessage());
             }
         }
-
-        userInterface.farewell();
     }
     
     /**

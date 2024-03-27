@@ -2,7 +2,6 @@ package seedu.binbash.parser;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
-import seedu.binbash.ItemList;
 import seedu.binbash.command.AddCommand;
 import seedu.binbash.command.Command;
 
@@ -11,8 +10,8 @@ import java.util.Optional;
 
 public class AddParser extends Parser {
 
-    public AddParser(ItemList itemList) {
-        super(itemList);
+    public AddParser() {
+        super();
         addNameOption();
         addDescriptionOption();
         addQuantityOption(false);
@@ -36,7 +35,7 @@ public class AddParser extends Parser {
                 .map(x -> LocalDate.parse(x, EXPECTED_INPUT_DATE_FORMAT))
                 .orElse(LocalDate.MIN);
 
-        return new AddCommand(itemList, itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
+        return new AddCommand(itemName, itemDescription, itemQuantity, itemExpirationDate, itemSalePrice,
                 itemCostPrice);
     }
 }

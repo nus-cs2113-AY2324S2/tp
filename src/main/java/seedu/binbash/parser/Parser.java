@@ -1,33 +1,30 @@
 package seedu.binbash.parser;
 
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import seedu.binbash.command.ByeCommand;
+import seedu.binbash.command.Command;
+import seedu.binbash.command.DeleteCommand;
+import seedu.binbash.command.ListCommand;
+import seedu.binbash.command.SearchCommand;
+import seedu.binbash.exceptions.BinBashException;
+import seedu.binbash.exceptions.InvalidArgumentException;
+import seedu.binbash.exceptions.InvalidCommandException;
+import seedu.binbash.exceptions.InvalidFormatException;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import seedu.binbash.ItemList;
-import seedu.binbash.command.Command;
-import seedu.binbash.command.DeleteCommand;
-import seedu.binbash.command.SearchCommand;
-import seedu.binbash.command.ListCommand;
-import seedu.binbash.command.ByeCommand;
-import seedu.binbash.exceptions.BinBashException;
-import seedu.binbash.exceptions.InvalidCommandException;
-import seedu.binbash.exceptions.InvalidArgumentException;
-import seedu.binbash.exceptions.InvalidFormatException;
-
 public class Parser {
     protected static final DateTimeFormatter EXPECTED_INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    protected final ItemList itemList;
     protected Options options;
     protected DefaultParser defaultParser;
 
-    public Parser(ItemList itemList) {
-        this.itemList = itemList;
+    public Parser() {
         options = new Options();
         defaultParser = new DefaultParser();
     }
@@ -39,7 +36,7 @@ public class Parser {
 
         switch (commandString) {
         case "bye":
-            return new ByeCommand(itemList);
+            return new ByeCommand();
         case "add":
             return parseAddCommand(commandArgs);
         case "delete":
@@ -69,21 +66,20 @@ public class Parser {
 
         if (indexMatcher.matches()) {
             int index = Integer.parseInt(argumentMatcher.group("identifier"));
-            if (index <= 0 || index > itemList.getItemCount()) {
-                throw new InvalidArgumentException("Index is out of bounds!");
+            if (index < 0) {
+                throw new InvalidArgumentException("Task index cannot be negative!");
             }
-            assert index > 0 && index <= itemList.getItemCount();
-            return new DeleteCommand(itemList, index);
+            return new DeleteCommand(index);
         } else {
             String keyword = argumentMatcher.group("identifier");
             assert !keyword.isEmpty();
-            return new DeleteCommand(itemList, keyword);
+            return new DeleteCommand(keyword);
         }
     }
 
     private Command parseAddCommand(String[] commandArgs) throws InvalidFormatException {
         try {
-            AddParser addParser = new AddParser(itemList);
+            AddParser addParser = new AddParser();
             return addParser.parse(commandArgs);
         } catch (ParseException e) {
             throw new InvalidFormatException(e.getMessage());
@@ -92,7 +88,7 @@ public class Parser {
 
     private Command parseRestockCommand(String[] commandArgs) throws InvalidFormatException {
         try {
-            RestockParser restockParser = new RestockParser(itemList);
+            RestockParser restockParser = new RestockParser();
             return restockParser.parse(commandArgs);
         } catch (ParseException e) {
             throw new InvalidFormatException(e.getMessage());
@@ -101,7 +97,7 @@ public class Parser {
 
     private Command parseSellCommand(String[] commandArgs) throws InvalidFormatException {
         try {
-            SellParser sellParser = new SellParser(itemList);
+            SellParser sellParser = new SellParser();
             return sellParser.parse(commandArgs);
         } catch (ParseException e) {
             throw new InvalidFormatException(e.getMessage());
@@ -114,11 +110,11 @@ public class Parser {
             throw new InvalidFormatException("Search command is not properly formatted!");
         }
         String keyword = matcher.group("keyword");
-        return new SearchCommand(itemList, keyword);
+        return new SearchCommand(keyword);
     }
 
     private Command parseListCommand() {
-        return new ListCommand(itemList);
+        return new ListCommand();
     }
 
     protected void addNameOption() {

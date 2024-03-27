@@ -2,13 +2,12 @@ package seedu.binbash.parser;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
-import seedu.binbash.ItemList;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.SellCommand;
 
 public class SellParser extends Parser {
-    public SellParser(ItemList itemList) {
-        super(itemList);
+    public SellParser() {
+        super();
         addNameOption();
         addQuantityOption(true);
     }
@@ -19,6 +18,6 @@ public class SellParser extends Parser {
         String itemName = String.join(" ", commandLine.getOptionValues("name"));// Allow multiple arguments
         int sellQuantity = Integer.parseInt(commandLine.getOptionValue("quantity", "0"));
 
-        return new SellCommand(itemList, itemName, sellQuantity);
+        return new SellCommand(itemName, sellQuantity);
     }
 }

@@ -2,13 +2,12 @@ package seedu.binbash.parser;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
-import seedu.binbash.ItemList;
 import seedu.binbash.command.Command;
 import seedu.binbash.command.RestockCommand;
 
 public class RestockParser extends Parser {
-    public RestockParser(ItemList itemList) {
-        super(itemList);
+    public RestockParser() {
+        super();
         addNameOption();
         addQuantityOption(true);
     }
@@ -19,6 +18,6 @@ public class RestockParser extends Parser {
         String itemName = String.join(" ", commandLine.getOptionValues("name"));// Allow multiple arguments
         int restockQuantity = Integer.parseInt(commandLine.getOptionValue("quantity", "0"));
 
-        return new RestockCommand(itemList, itemName, restockQuantity);
+        return new RestockCommand(itemName, restockQuantity);
     }
 }

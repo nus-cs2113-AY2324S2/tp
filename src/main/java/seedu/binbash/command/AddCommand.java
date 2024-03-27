@@ -49,9 +49,8 @@ public class AddCommand extends Command {
     private final double itemSalePrice;
     private final double itemCostPrice;
 
-    public AddCommand(ItemList itemList, String itemName, String itemDescription, int itemQuantity,
+    public AddCommand(String itemName, String itemDescription, int itemQuantity,
                       LocalDate itemExpirationDate, double itemSalePrice, double itemCostPrice) {
-        super(itemList);
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemQuantity = itemQuantity;
@@ -75,9 +74,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.addItem(itemName, itemDescription, itemQuantity, itemExpirationDate,
                 itemSalePrice, itemCostPrice);
+        hasToSave = true;
         return true;
     }
 }
