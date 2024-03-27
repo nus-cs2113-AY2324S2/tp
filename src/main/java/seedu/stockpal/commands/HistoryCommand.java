@@ -4,9 +4,6 @@ import seedu.stockpal.data.ProductList;
 import seedu.stockpal.data.TransactionList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.ui.Ui;
-
-
 
 //@@author EdmundTangg
 public class HistoryCommand extends TransactionActionCommand {
@@ -31,11 +28,6 @@ public class HistoryCommand extends TransactionActionCommand {
     @Override
     public void execute(ProductList productList, TransactionList transactionList) throws StockPalException {
         int productIndex = productList.findProductIndex(this.pid);
-
-        if (productIndex == -1) {
-            Ui.printInvalidPidMessage();
-            return;
-        }
         TransactionList.findTransactions(transactionList, pid.getPid());
     }
 

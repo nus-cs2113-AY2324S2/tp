@@ -76,10 +76,6 @@ public class EditCommand extends ListActionCommand {
             return;
         }
         int productIndex = productList.findProductIndex(this.pid);
-        if (productIndex == -1) {
-            Ui.printInvalidPidMessage();
-            return;
-        }
         assert productList.getSize() > 0;
         productList.updateProduct(productIndex, name, quantity, description, price);
         logger.log(Level.INFO, Messages.MESSAGE_EDIT_SUCCESS);

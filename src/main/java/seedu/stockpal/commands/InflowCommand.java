@@ -6,12 +6,10 @@ import seedu.stockpal.data.Transaction;
 import seedu.stockpal.data.TransactionList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 //@@author leongxingyu
 public class InflowCommand extends TransactionActionCommand {
@@ -44,10 +42,6 @@ public class InflowCommand extends TransactionActionCommand {
     @Override
     public void execute(ProductList productList, TransactionList transactionList) throws StockPalException {
         int productIndex = productList.findProductIndex(this.pid);
-        if (productIndex == -1) {
-            Ui.printInvalidPidMessage();
-            return;
-        }
         boolean updateSuccessful = productList.increaseAmountCaller(productIndex, amountToIncrease);
         LOGGER.log(Level.INFO, Messages.MESSAGE_INFLOW_SUCCESS);
 

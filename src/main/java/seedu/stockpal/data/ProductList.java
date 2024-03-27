@@ -16,6 +16,7 @@ import seedu.stockpal.exceptions.NoLowQuantityException;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
 
+import static seedu.stockpal.common.Messages.MESSAGE_ERROR_PID_NOT_FOUND;
 import static seedu.stockpal.ui.Ui.printToScreen;
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
@@ -38,21 +39,18 @@ public class ProductList {
      * @return Index of the product in the product list.
      *     If product is not in the product list, return -1.
      */
-    public int findProductIndex(Pid pid) {
+    public int findProductIndex(Pid pid) throws PidNotFoundException {
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
             if (product.isPidMatch(pid)) {
                 return i;
             }
         }
-        return -1;
+        throw new PidNotFoundException(MESSAGE_ERROR_PID_NOT_FOUND + pid.getPid());
     }
 
     public void deleteProduct(Pid productPid) throws PidNotFoundException {
         int productIndex = findProductIndex(productPid);
-        if (productIndex == -1) {
-            throw new PidNotFoundException("Product with PID: " + productPid.toString() + " not found");
-        }
         products.remove(productIndex);
     }
 
