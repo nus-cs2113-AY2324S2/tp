@@ -138,7 +138,12 @@ The implementation of the Tic Tac Toe Game is as follows:
 
 ## MiniGame - True or False
 
-{Describe the implementation of the True or False}
+1. The game can be invoked by the `RestCommand` class when the user inputs the `rest` command.
+2. It makes use of the `ResponseManager` for instructions and display the questions to answer.
+3. The user would be prompted to answer True or False by typing `T` or `F`.
+4. When the user returns his/her answer, the `ResponseManager` will display the correctness of the response.
+5. When the user finishes answering all the questions, `ResponseManager` will output how many questions the user answers correctly.
+6. Finally, the `RestCommand` would update the player profile with the reward or punishment earned according to the game.
 
 ## Product scope
 ### Target user playerProfile
