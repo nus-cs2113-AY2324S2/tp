@@ -10,7 +10,7 @@ import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
-import command.ClearCommand;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
