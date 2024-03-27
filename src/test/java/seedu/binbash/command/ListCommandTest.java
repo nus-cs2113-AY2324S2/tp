@@ -42,4 +42,17 @@ class ListCommandTest {
 
         assertEquals(expectedOutput, actualOutput);
     }
+
+    @Test
+    void execute_listCommandWithEmptyItemList_returnsEmptyOutput() {
+        ItemList itemList = new ItemList(new ArrayList<Item>());
+        ListCommand listCommand = new ListCommand();
+
+        listCommand.execute(itemList);
+        String actualOutput = listCommand.getExecutionUiOutput();
+
+        String expectedOutput = "";
+
+        assertEquals(expectedOutput, actualOutput);
+    }
 }
