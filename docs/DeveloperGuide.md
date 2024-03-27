@@ -6,7 +6,37 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}   
+### Checker Component  
+**API：`Checker.java`**   
+**How the `Checker` work:**  
+1. Every `Checker` was created with a `Test` class.   
+2. The `Checker` will ask user's input and compare the answer up to 2 decimal tolerance.   
+3. If the user input is not a number, the answer will automatically viewed as a incorrect answer.   
+4. The accuracy and the user's answers will be stored for UI or other class to access with the specific function.   
+5. The checker will also store the times that user use to caculate for the problemset.  
+    
+**`Psedue code` for reference:**  
+```
+# the brief psedue code for how to check the answer
+
+correct = 0
+isCorrect = []
+for problem in problem set: 
+    UI.PrintProblem
+    answer <- user_input
+    if answer - problem.answer < 0.01
+        correct <- correct+1
+        isCorrect.append("1")
+    else
+        isCorrect.append("0")
+        continue
+
+```
+**next to be added for `Checker.java`:**  
+1. Support check on more types of problems (i.e Quadratic equation of one variable)   
+2. Give some explanation of the math problems.   
+   
 * To be added
 
 
