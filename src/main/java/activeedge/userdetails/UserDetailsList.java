@@ -11,7 +11,7 @@ public class UserDetailsList {
     /**
      * The list containing user details.
      */
-    public static final ArrayList<UserDetails> DETAILS_LIST = new ArrayList<>();
+    public static final ArrayList<UserDetails> detailsList = new ArrayList<>();
 
     /**
      * Adds user details to the list.
@@ -19,7 +19,7 @@ public class UserDetailsList {
      * @param details The user details to add.
      */
     public void add(UserDetails details) {
-        DETAILS_LIST.add(details);
+        detailsList.add(details);
     }
 
     /**
@@ -30,8 +30,8 @@ public class UserDetailsList {
      */
     public static UserDetails get() {
         int index = 0;
-        if (index >= 0 && index < DETAILS_LIST.size()) {
-            return DETAILS_LIST.get(index);
+        if (index >= 0 && index < detailsList.size()) {
+            return detailsList.get(index);
         } else {
             throw new IndexOutOfBoundsException("Index is out of bounds.");
         }
@@ -41,7 +41,7 @@ public class UserDetailsList {
      * Clears the list of user details.
      */
     public static void clearDetailsList() {
-        DETAILS_LIST.clear();
+        detailsList.clear();
     }
 }
 
