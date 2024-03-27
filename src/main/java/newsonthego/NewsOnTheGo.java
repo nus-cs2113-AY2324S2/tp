@@ -3,6 +3,8 @@ package newsonthego;
 
 import newsonthego.newstopic.NewsTopic;
 import newsonthego.ui.UI;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +16,7 @@ public class NewsOnTheGo {
     public static final String FILENAME = "data/sampleNews.txt";
     private static final Logger logger = Logger.getLogger("NewsOnTheGo");
     private static final ArrayList<NewsTopic> newsTopics = new ArrayList<>();
+    private static NewsFile savedNews;
 
     /**
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
@@ -22,6 +25,7 @@ public class NewsOnTheGo {
 
         Scanner in = new Scanner(System.in);
         UI.initializeUI(in);
+        savedNews = new NewsFile();
 
         List<NewsArticle> newsArticles = NewsImporter.importNewsFromText(FILENAME, newsTopics);
 
@@ -45,7 +49,7 @@ public class NewsOnTheGo {
         DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
     }
 
-    private static boolean processCommand(String command, String line, List<NewsArticle> list) {
+    private static boolean processCommand(String command, String line, List<NewsArticle> list) throws IOException {
         assert !command.isEmpty();
         Parser.handleCommand(command, line, list);
         return command.equalsIgnoreCase(Command.BYE.toString());
@@ -106,7 +110,14 @@ public class NewsOnTheGo {
         }
     }
 
-    static void saveNews(String line, List<NewsArticle> list) {
+    static void saveNews(String line, List<NewsArticle> list) throws IOException {
+        String[] split = line.split(" ");
+        int index = Integer.parseInt(split[1]) - 1;
+        if (index >= 0 && index < list.size()) {
+            savedNews.saveNews(list.get(index));
+        } else {
+            System.out.println("Please provide a valid news index!");
+        }
     }
 
     /**
@@ -117,6 +128,4 @@ public class NewsOnTheGo {
         int index = Integer.parseInt(split[1]) + 1;
         System.out.println(list.get(index).getSource());
     }
-
-
 }

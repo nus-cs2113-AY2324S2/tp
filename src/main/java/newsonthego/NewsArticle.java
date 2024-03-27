@@ -6,11 +6,8 @@ public class NewsArticle {
     protected String date;
     protected String source;
     protected int importance;
-
     protected int reliability;
-
     protected int bias;
-
     protected String content;
 
     public NewsArticle(String headline, String author, String date, String source, int importance, int reliability,
