@@ -15,7 +15,7 @@ import java.util.logging.Level;
 
 public class ItemList {
     private static final Logger ITEMLIST_LOGGER = Logger.getLogger("ItemList");
-    private static final BinBashLogger logger = new BinBashLogger(BinBash.class.getName());
+    private static final BinBashLogger logger = new BinBashLogger(ItemList.class.getName());
     private double totalRevenue;
     private double totalCost;
     private final List<Item> itemList;
