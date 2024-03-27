@@ -54,4 +54,9 @@ public class InvalidInputExceptionMessage {
         String message = "\t Please ensure that beverage and volume is not empty!\n";
         return HEADER + message + HYDRATION_IN_INPUT;
     }
+
+    public static String getHydrationNonIntegerVolumeMessage() {
+        String message = "\t Please ensure that positive integer value is keyed in for volume!\n";
+        return HEADER + message + HYDRATION_IN_INPUT;
+    }
 }

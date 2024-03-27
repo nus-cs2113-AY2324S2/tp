@@ -59,14 +59,12 @@ public class ParserLiquid {
         try {
             volume = Integer.parseInt(strVolume);
         } catch(NumberFormatException e) {
-            throw new InvalidInputException("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationNonIntegerVolumeMessage());
         }
 
         // Handle exception when negative values are keyed in for volume
         if (volume <= 0) {
-            throw new InvalidInputException("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationNonIntegerVolumeMessage());
         }
         return getNewLiquidEntry(volume, beverageName);
     }

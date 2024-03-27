@@ -96,8 +96,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -110,8 +111,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
