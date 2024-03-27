@@ -1,0 +1,87 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+package parser {
+    class FitnessCommandParser {
+        {Static} Command determineFitnessCommand()
+    }
+
+    class Parser {
+    }
+}
+
+package commands {
+    interface "<<interface>>\nCommand" as Command {
+        + execute(): void
+        + isExit(): boolean
+    }
+
+    class AddExerciseCommand implements Command {
+    }
+
+    class GetExerciseCommand implements Command {
+    }
+}
+
+package fitness {
+    class FitnessMotivator {
+        + allExercises: ExerciseList
+        + getExercises(): void
+        + addExercises(): void
+        + getTypeExercises(exerciseType: ExerciseType): void
+    }
+
+    class ExerciseList {
+        - allExercises: ArrayList<Exercise>
+        + ExerciseList()
+        + add(exercise: Exercise): void
+        + get(type: ExerciseType, index: int): Exercise
+        + getType(type: ExerciseType): ArrayList<Exercise>
+        + size(type: ExerciseType): int
+        + newExercise(parameters: String[]): Exercise
+        + findExercise(type: ExerciseType, nameQuery: String): Exercise
+    }
+
+    class Exercise {
+        - ExerciseName: String
+        - exerciseType: ExerciseType
+        - sets: String
+        - reps: String
+        + toString(): String
+    }
+
+    enum ExerciseType {
+        ARMS
+        CHEST
+        ABS
+        BACK
+        LEGS
+    }
+}
+
+class Storage {
+}
+
+class Ui {
+}
+
+Parser ..> FitnessCommandParser : uses >
+
+AddExerciseCommand --> FitnessMotivator : uses >
+AddExerciseCommand ..> ExerciseType : uses >
+GetExerciseCommand --> FitnessMotivator : uses >
+
+FitnessMotivator *--> "1" ExerciseList : contains >
+
+Exercise ..> ExerciseType : uses >
+ExerciseList ..> ExerciseType : uses >
+FitnessMotivator ..> ExerciseType : uses >
+
+ExerciseList *--> "25..*" Exercise : contains >
+
+ExerciseList ..> Storage : uses >
+
+FitnessMotivator ..> Ui : uses >
+
+@enduml
