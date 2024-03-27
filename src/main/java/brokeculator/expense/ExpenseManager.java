@@ -1,5 +1,6 @@
 package brokeculator.expense;
 
+import brokeculator.event.Event;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
@@ -22,9 +23,22 @@ public class ExpenseManager {
         expenses.add(expense);
     }
 
+
+    public boolean isExpenseIndexValid(int index) {
+        return index >= 1 && index <= expenses.size();
+    }
+
+    public Expense getExpense(int index) {
+        if (!isExpenseIndexValid(index)) {
+            return null;
+        }
+        return expenses.get(index - 1);
+    }
+
     public void delete(int index) {
-        Expense expense = expenses.get(index - 1);
-        expense.removeOwningEvent();
+        if (!isExpenseIndexValid(index)) {
+            return;
+        }
         expenses.remove(index - 1);
     }
 
@@ -94,14 +108,5 @@ public class ExpenseManager {
     
     public int getNumberOfExpensesTracked() {
         return expenses.size();
-    }
-
-    public boolean isExpenseIndexValid(int index) {
-        return index >= 1 && index <= expenses.size();
-    }
-
-    public Expense getExpense(int index) {
-        assert isExpenseIndexValid(index);
-        return expenses.get(index - 1);
     }
 }

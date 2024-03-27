@@ -22,13 +22,19 @@ public class EventManager {
     public void addEvent(Event event) {
         events.add(event);
     }
-
     public boolean isEventIdxValid(int idx) {
         return idx >= 1 && idx <= events.size();
     }
-
+    public Event getEvent(int idx) {
+        if (!isEventIdxValid(idx)) {
+            return null;
+        }
+        return events.get(idx - 1);
+    }
     public void removeEvent(int idx) {
-        assert isEventIdxValid(idx);
+        if (!isEventIdxValid(idx)) {
+            return;
+        }
         events.remove(idx - 1);
     }
 
@@ -39,9 +45,6 @@ public class EventManager {
         }
         UI.prettyPrint(sb.toString());
     }
-
-    public Event getEvent(int idx) {
-        assert isEventIdxValid(idx);
-        return events.get(idx - 1);
-    }
 }
+
+

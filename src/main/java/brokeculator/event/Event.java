@@ -16,14 +16,18 @@ public class Event {
         this.expenses = new ArrayList<>();
     }
 
+    public boolean containsExpense(Expense expense) {
+        return expenses.contains(expense);
+    }
     public void addExpense(Expense expense) {
+        if (containsExpense(expense)) {
+            return;
+        }
         expenses.add(expense);
     }
-
     public boolean hasExpenses() {
         return expenses.size() > 0;
     }
-
     public void removeExpense(Expense expense) {
         expenses.remove(expense);
     }
@@ -43,10 +47,6 @@ public class Event {
             index++;
         }
         return sb.toString();
-    }
-
-    public boolean containsExpense(Expense expense) {
-        return expenses.contains(expense);
     }
 
 }

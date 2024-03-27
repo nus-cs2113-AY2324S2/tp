@@ -1,6 +1,7 @@
 package brokeculator.command;
 
 import brokeculator.dashboard.Dashboard;
+import brokeculator.event.Event;
 import brokeculator.frontend.UI;
 
 public class DeleteEventCommand extends Command {
@@ -17,9 +18,9 @@ public class DeleteEventCommand extends Command {
             UI.prettyPrint("Invalid event index");
             return;
         }
-        boolean hasExpenses = dashboard.getEventManager().getEvent(idx).hasExpenses();
-        if (hasExpenses) {
-            UI.prettyPrint("Event has expenses and cannot be deleted");
+        Event event = dashboard.getEventManager().getEvent(idx);
+        if (event.hasExpenses()) {
+            UI.prettyPrint("Event has expenses. Please remove expenses before deleting event");
             return;
         }
         dashboard.getEventManager().removeEvent(idx);

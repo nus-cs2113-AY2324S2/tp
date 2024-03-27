@@ -63,17 +63,16 @@ public class Expense implements Saveable {
         return category;
     }
 
+    public boolean hasOwningEvent() {
+        return owningEvent != null;
+    }
+    public Event getOwningEvent() {
+        return owningEvent;
+    }
     public void removeOwningEvent() {
-        if (this.owningEvent == null) {
-            return;
-        }
-        this.owningEvent.removeExpense(this);
         this.owningEvent = null;
     }
-
     public void setOwningEvent(Event event) {
-        this.removeOwningEvent();
-        event.addExpense(this);
         this.owningEvent = event;
     }
 
@@ -121,7 +120,5 @@ public class Expense implements Saveable {
         return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
     }
 
-    public boolean hasOwningEvent() {
-        return owningEvent != null;
-    }
+
 }
