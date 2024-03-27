@@ -12,12 +12,10 @@ import static seedu.duke.FAP.LOGGER;
 
 public class AddCommandMetadata extends CommandMetadata {
     private static final String ADD_KEYWORD = "add";
-    private static final String ADD_PATTERN_REGEX =
-            "add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)\\s+w/(?<semester>[1-8])";
     private static final String[] ADD_ARGUMENTS = {"courseCode", "semester"};
 
     public AddCommandMetadata() {
-        super(ADD_KEYWORD, ADD_PATTERN_REGEX, ADD_ARGUMENTS);
+        super(ADD_KEYWORD, ADD_ARGUMENTS);
     }
 
     // Add Command Creator

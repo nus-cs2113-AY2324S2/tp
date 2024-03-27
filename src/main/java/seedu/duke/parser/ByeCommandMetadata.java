@@ -7,11 +7,10 @@ import java.util.Map;
 
 public class ByeCommandMetadata extends CommandMetadata {
     private static final String BYE_KEYWORD = "bye";
-    private static final String BYE_PATTERN_REGEX = "bye";
     private static final String[] BYE_ARGUMENTS = {};
 
     public ByeCommandMetadata() {
-        super(BYE_KEYWORD, BYE_PATTERN_REGEX, BYE_ARGUMENTS);
+        super(BYE_KEYWORD, BYE_ARGUMENTS);
     }
 
     // Bye Command Creator

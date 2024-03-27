@@ -26,19 +26,19 @@ public abstract class CommandMetadata {
     }
 
     private String keyword;
-    private String regex;
     private String[] groupArguments;
+    private String regex;
     private int regexLength;
     private Pattern pattern;
 
-    protected CommandMetadata(String keyword, String regex, String[] groupArguments) {
-        if (keyword == null || regex == null || groupArguments == null) {
+    protected CommandMetadata(String keyword, String[] groupArguments) throws IllegalArgumentException {
+        if (keyword == null || groupArguments == null) {
             throw new IllegalArgumentException("Keyword, regex, and group arguments cannot be null");
         }
         this.keyword = keyword;
-        this.regex = regex;
         this.groupArguments = groupArguments;
 
+        this.regex = generateRegex(keyword, groupArguments);
         this.regexLength = groupArguments.length + 1; // Keyword + number of Arguments
         this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
     }
@@ -61,6 +61,27 @@ public abstract class CommandMetadata {
 
     protected Map<String, String> getArgRegexMap() {
         return argRegexMap;
+    }
+
+    private static String generateRegex(String keyword, String[] groupArguments) {
+        if (keyword == null || groupArguments == null) {
+            throw new IllegalArgumentException("Keyword and groupArguments must not be null");
+        }
+
+        StringBuilder regexPattern = new StringBuilder(keyword);
+        for (String groupArgName : groupArguments) {
+            appendRegex(regexPattern, groupArgName);
+        }
+        return regexPattern.toString();
+    }
+
+    // Helper function for generateRegex
+    private static void appendRegex(StringBuilder regexPattern, String groupArgName) {
+        String argRegex = argRegexMap.get(groupArgName);
+        if (argRegex == null) {
+            throw new IllegalArgumentException("No regex pattern found for argument: " + groupArgName);
+        }
+        regexPattern.append("\\s+").append(argRegex);
     }
 
     protected boolean matchesKeyword(String userInput) {

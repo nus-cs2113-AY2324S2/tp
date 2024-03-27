@@ -7,11 +7,10 @@ import java.util.Map;
 
 public class GpaCommandMetadata extends CommandMetadata {
     private static final String GPA_KEYWORD = "gpa";
-    private static final String GPA_PATTERN_REGEX = "gpa";
     private static final String[] GPA_ARGUMENTS = {};
 
     public GpaCommandMetadata() {
-        super(GPA_KEYWORD, GPA_PATTERN_REGEX, GPA_ARGUMENTS);
+        super(GPA_KEYWORD, GPA_ARGUMENTS);
     }
 
     // Gpa Command Creator

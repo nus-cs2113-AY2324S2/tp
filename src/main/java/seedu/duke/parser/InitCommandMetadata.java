@@ -7,11 +7,10 @@ import java.util.Map;
 
 public class InitCommandMetadata extends CommandMetadata {
     private static final String INIT_KEYWORD = "init";
-    private static final String INIT_PATTERN_REGEX = "init\\s+n/(?<name>[A-Za-z0-9 ]+)";
     private static final String[] INIT_ARGUMENTS = {"name"};
 
     public InitCommandMetadata() {
-        super(INIT_KEYWORD, INIT_PATTERN_REGEX, INIT_ARGUMENTS);
+        super(INIT_KEYWORD, INIT_ARGUMENTS);
     }
 
     // Init Command Creator
