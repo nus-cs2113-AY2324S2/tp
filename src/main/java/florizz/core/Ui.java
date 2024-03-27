@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 public class Ui {
     Scanner inputScanner = new Scanner (System.in);
+
+    /**
+     * Prints the introductory message.
+     */
     public void printIntroMessage(){
         String logo = "\n" +
                 "   __ _            _\n" +
@@ -21,6 +25,9 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Prints a break line.
+     */
     public void printBreakLine(){
         System.out.println(("____________________________________________________________"));
     }
@@ -34,30 +41,47 @@ public class Ui {
         return inputScanner.nextLine();
     }
 
+    /**
+     * Prints the message indicating a new bouquet has been added.
+     * @param bouquetAdded The bouquet that has been added.
+     */
     public void printBouquetAdded(Bouquet bouquetAdded){
         System.out.println("Added new bouquet to list: \n" + bouquetAdded);
         printBreakLine();
 
     }
+
+    /**
+     * Prints the message indicating a bouquet has been deleted.
+     * @param bouquetDeleted The bouquet that has been deleted.
+     */
     public void printBouquetDeleted(Bouquet bouquetDeleted){
         System.out.println("Deleted bouquet: \n" + bouquetDeleted);
         printBreakLine();
 
     }
 
+    /**
+     * Prints all saved bouquets with their flowers and total estimated price.
+     * @param bouquetList The list of saved bouquets.
+     */
     public void printAllBouquets(ArrayList<Bouquet> bouquetList){
         System.out.println("Here are the list of your saved bouquets:");
         int i = 1;
+        int totalPrice = 0;
         for (Bouquet bouquet : bouquetList){
             System.out.println(i++ + ". " + bouquet + " :");
             HashMap<Flower, Integer> flowerHashMap = bouquet.getFlowerHashMap();
             if (!flowerHashMap.isEmpty()) {
                 for (Flower j : flowerHashMap.keySet()) {
                     System.out.println("    - " + flowerHashMap.get(j) + " x " + j.getFlowerName());
+                    totalPrice += flowerHashMap.get(j);
                 }
+                System.out.println("  Total estimated price = $" + totalPrice);
             } else {
                 System.out.println("      No flowers added so far");
             }
+
         }
         printBreakLine();
     }
@@ -109,6 +133,11 @@ public class Ui {
         printBreakLine();
     }
 
+    /**
+     * Prints filtered flowers based on a given filter.
+     * @param flowers The list of flowers to filter.
+     * @param filter The filter to apply to the flowers.
+     */
     public void printFilteredFlowers(ArrayList<Flower> flowers, String filter){
         System.out.println("Here are all the flowers related to " + filter + ": ");
         for (Flower flower : flowers){
@@ -116,6 +145,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints name, colour, occasion and price information about a specific flower.
+     * @param targetFlower The name of the flower to retrieve information for.
+     * @return true if the flower information is found and printed successfully, otherwise false.
+     */
     public boolean printFlowerInfo(String targetFlower) {
         for (int i = 0; i < FlowerDictionary.size(); i++) {
             if (FlowerDictionary.get(i).getFlowerName().equalsIgnoreCase(targetFlower)) {
