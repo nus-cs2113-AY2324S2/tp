@@ -1,0 +1,27 @@
+@startuml
+
+hide circles
+skinparam classAttributeIconSize 0
+
+package "seedu.stockpal.parser" {
+    class Parser {
+        + parseInput(input: String)
+        - getCommandFromInput(input: String)
+        - validateStringInput(parsedString: String)
+        - validateIntegerInput(parsedInteger: String)
+        - validateDoubleInput(parsedDouble: String)
+        - createExitCommand()
+        - createNewCommand()
+        - createListCommand()
+        - validateAndCreateInflowCommand(parsed: ArrayList<String>)
+        - validateAndCreateOutflowCommand(parsed: ArrayList<String>)
+        - validateAndCreateDeleteCommand(parsed: ArrayList<String>)
+        - validateAndCreateEditCommand(parsed: ArrayList<String>)
+        - validateAndCreateNewCommand(parsed: ArrayList<String>)
+        - validateAndCreateFindCommand(parsed: ArrayList<String>)
+        - validateAndCreateHistoryCommand(parsed: ArrayList<String>)
+        - matchAndParseInput(input: String, pattern: Pattern, numOfArgs: int)
+    }
+}
+
+@enduml
