@@ -4,6 +4,7 @@ public abstract class Enemy extends InteractableEntity{
     protected int damage;
     protected int defence;
     protected int health;
+    protected String filePath;
 
 
     public Enemy(int dmg, int def, int hp, int xCoordinate, int yCoordinate, int exp, int money){
@@ -43,5 +44,7 @@ public abstract class Enemy extends InteractableEntity{
         return this.y;
     }
 
-    public abstract void setHeight(int height);
+    public String getFilePath() {
+        return filePath;
+    }
 }
