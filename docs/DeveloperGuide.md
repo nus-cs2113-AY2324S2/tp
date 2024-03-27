@@ -15,7 +15,7 @@ The Parser class only contains static methods as we have determined that it woul
 > - All valid command inputs by the user will have a command word _(first word separated by whitespace)_ with its respective parameters following the word.
 > - Each parameter must be entered following a flag, i.e. a name parameter will have the input `n/NAME`
 
-The following is a class diagram of the Parser and its relevant dependencies\
+The following is a class diagram of the `Parser` and its relevant dependencies\
 ![ParserClass](uml-diagrams/ParserClass.png)
 
 The following is a sequence diagram of the execution sequence of a single user input\
@@ -49,7 +49,7 @@ Thus, it would be necessary to convert the user's input into a consistent format
 > 
 > For example, suppose the program wants to match the user input parameter
 > `c/coconut a/apple b/bear a/anaconda d/donkey` to the regex `a/(?<grp1>.*) b/(?<grp2>.*) c/(?<grp3>.*) (?<grp4>(?:e/.*)?)`
-> 1. The input parameter string and a string array of flags `{a, b, c, e}` is passed into `Parser-makeStringPattern`
+> 1. The input parameter string and a string array of flags `{a, b, c, e}` is passed into `Parser-makeStringPattern(...)`
 > 2. `Parser-makeStringPattern` will return a pattern string `a/apple b/bear c/coconut `
 > 3. The program will then try to match the pattern string `a/apple b/bear c/coconut ` to the regex `
 > a/(?<grp1>.*) b/(?<grp2>.*) c/(?<grp3>.*) (?<grp4>(?:e/.*)?)`
@@ -63,6 +63,27 @@ The `Matcher` will detect whether this input string pattern match the given rege
 and extract out the necessary information if there is a match. 
 This will be used by each command's respective parsing method and returns the relevant parsed `Command`
 object to `SuperTracker+handleCommands()`
+
+### File Saving and Loading
+Saving and loading data of items is performed by the `FileManager` class. The following is a class diagram of `FileManager`
+and its relevant dependencies\
+![FileManagerClass]()
+
+Saving is performed automatically each time the item list is updated. Currently, there are only 5 commands that can make changes to
+the item list and will call `FileManager+saveData()` at the end of `Command+execute()`.
+> Commands that call `FileManager+saveData()` in `execute()`:
+> - `NewCommand`
+> - `UpdateCommand`
+> - `DeleteCommand`
+> - `AddCommand`
+> - `RemoveCommand`
+
+Item data is saved into a text file in `./data/items.txt` by generating a string for each `Item` in the list, containing the attributes of the `item`.
+The string generated will have the attributes in the format and order of `NAME, QUANTITY, PRICE, EXPIRY_DATE`. Since an item's expiry date is
+optional, `EXPIRY_DATE` can be the string `"no date"` if the expiry date is determined to not exist. This string will be written to the text file as mentioned.
+> For example, suppose the program wants to save the `Item` with attributes `name = "Apple"`, `quantity = 5`, `price = 2.50`, `expiryDate = 19-04-2024`
+> and the program uses `"|"` to indicate separators.\
+> The program generates the string `"Apple|5|2.50|19-04-2024|` 
 
 ### New Command
 The following is a class diagram of the NewCommand and its relevant dependencies
