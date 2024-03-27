@@ -336,6 +336,20 @@ resources. It embodies key software design principles and showcases thoughtful a
    It utilizes the `Ui` class to print out the list of modules in a
    formatted manner. Additionally, it interacts with the `CEGModules` enum to retrieve module information such as
    module codes and Module Credits (MCs).
+7. **Viewing GPA**
+
+    The `ViewGpaCommand` class is responsible for displaying the current GPA attained by the student. It 
+    accesses `ModuleList`, which looks through all `Module` object contained in the list. If the `Module` is marked as
+    taken and has been assigned a valid grade with `GradeCommand` by the user, its grades will be included into the 
+    calculation.
+
+    This is the formula used for tabulation of GPA.
+    `GPA = SUM(Course Grade Point * Course Units) / SUM(Course Units Counted Towards GPA)`
+    
+    Below is the sequence diagram for `ViewGpaCommand`.
+    ![View Gpa Command Sequence Diagram](diagrams/ViewGpaCommand.png)
+
+    
 
 #### UML Diagram
 
