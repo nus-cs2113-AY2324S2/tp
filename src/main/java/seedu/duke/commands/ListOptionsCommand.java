@@ -1,5 +1,13 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 
 public class ListOptionsCommand extends Command {

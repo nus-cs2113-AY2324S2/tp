@@ -20,4 +20,8 @@ public class Activity extends Favourites {
     public void markComplete() {
         this.completionStatus = "C";
     }
+
+    public String getCompletionStatus() {
+        return completionStatus;
+    }
 }

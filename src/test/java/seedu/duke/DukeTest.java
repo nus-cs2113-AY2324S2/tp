@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.GenerateIdeaCommand;
+import seedu.duke.commands.GenerateItineraryCommand;
 import seedu.duke.exceptions.FlirtForkException;
 import java.util.NoSuchElementException;
 
