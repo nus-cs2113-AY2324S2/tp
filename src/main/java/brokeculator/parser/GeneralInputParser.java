@@ -28,6 +28,9 @@ public class GeneralInputParser {
         case "category":
             commandToExecute = CategoryParser.parseInput(userInput);
             break;
+        case "viewEvents":
+            commandToExecute = ViewEventsParser.parseInput(userInput);
+            break;
         default:
             commandToExecute = new HelpCommand();
         }
