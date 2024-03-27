@@ -45,7 +45,7 @@ public class WorkoutManager extends ActivityManager {
             executeInfoAction(parser);
             break;
         case "list":
-            executeListAction();
+            validateListAction(parser);
             break;
         case "search":
             executeSearchAction(parser);
@@ -64,6 +64,14 @@ public class WorkoutManager extends ActivityManager {
 
         list(workoutName);
 
+    }
+
+    public void validateListAction(Parser parser) throws Exceptions.InvalidInput {
+        String userInput = parser.getActionParameter();
+        if (!userInput.isEmpty()) {
+            throw new Exceptions.InvalidInput("Invalid command. Use 'workout /list' to list all exercises.");
+        }
+        executeListAction();
     }
 
     private void executeUnassignAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
