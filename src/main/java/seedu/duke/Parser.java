@@ -118,6 +118,7 @@ public class Parser {
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
             ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
+        assert (topicList.getSize() != 0) : "Size of topicList should never be 0";
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
@@ -137,6 +138,9 @@ public class Parser {
                 Helper helper = new Helper();
                 topicNum = helper.generateRandomNumber(randomTopicNum);
             }
+            assert (topicNum != 0) : "topicNum should not be 0";
+            assert (topicNum != randomTopicNum) : "topicNum should not be randomTopicNum";
+
             // prints questions
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
             System.out.println("You have finished the topic! What will be your next topic?");

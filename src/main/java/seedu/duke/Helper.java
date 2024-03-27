@@ -63,10 +63,20 @@ public class Helper {
         return commandList.size();
     }
 
-    // returns random number from 0 to upperLimit - 1
+    // returns random topic number from 1 to upperLimit - 1
     public int generateRandomNumber(int upperLimit) {
+        assert (upperLimit != 1) : "upperLimit == 1 means topicList.getSize() = 0";
         Random random = new Random();
-        return random.nextInt(upperLimit);
+        int randomNumber = 0;
+        boolean isCheckingValidTopicNum = true;
+
+        while (isCheckingValidTopicNum) { //random.nextInt() may return 0, which is NOT a valid topicNum
+            randomNumber = random.nextInt(upperLimit);
+            if (randomNumber != 0) {
+                isCheckingValidTopicNum = false;
+            }
+        }
+        return randomNumber;
     }
 }
 

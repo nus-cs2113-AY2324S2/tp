@@ -14,13 +14,8 @@ public class HelperTest {
     }
 
     @Test
-    void generateRandomNumber_noTopicToChooseFrom_expect0() {
-        int upperLimit = 1;
-        assertEquals(0, helperTest.generateRandomNumber(upperLimit));
-    }
-    @Test
     void generateRandomNumber_onlyOneTopicToChooseFrom_expect1() {
-        int upperLimit = 2;
-        assertEquals(1, helperTest.generateRandomNumber(upperLimit));
+        int upperLimitOneTopic = 2;
+        assertEquals(1, helperTest.generateRandomNumber(upperLimitOneTopic));
     }
 }
