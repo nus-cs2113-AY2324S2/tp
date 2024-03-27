@@ -23,7 +23,9 @@ public class ExpenseManager {
     }
 
     public void delete(int index) {
-        expenses.remove(index);
+        Expense expense = expenses.get(index - 1);
+        expense.removeOwningEvent();
+        expenses.remove(index - 1);
     }
 
     public double summariseExpenses(String description, LocalDateTime date, String category,

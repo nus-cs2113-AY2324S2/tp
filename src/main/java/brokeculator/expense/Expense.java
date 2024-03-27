@@ -63,7 +63,7 @@ public class Expense implements Saveable {
         return category;
     }
 
-    private void removeOwningEvent() {
+    public void removeOwningEvent() {
         if (this.owningEvent == null) {
             return;
         }
