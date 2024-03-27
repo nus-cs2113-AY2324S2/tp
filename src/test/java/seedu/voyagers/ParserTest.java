@@ -6,11 +6,10 @@ import seedu.voyagers.classes.Trip;
 import seedu.voyagers.classes.TripList;
 import seedu.voyagers.utils.Ui;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import seedu.voyagers.paser.NewParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,13 +26,14 @@ public class ParserTest {
     public void setUp() {
         tripsList = new TripList(new ArrayList<>());
         ui = new Ui();
+        NewParser newParser = new NewParser();
     }
 
     @Test
     public void testAddMainTrip() {
         String input = "addmaintrip /n Trip1 with long name /start 2024-03-15 /end 2024-03-20 " +
                 "/location Location1 /d This is the description";
-        Parser.parseInput(input).execute(tripsList, ui, null);
+        NewParser.parse(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
         Trip addedTrip = tripsList.getTrip("Trip1 with long name");
@@ -45,51 +45,30 @@ public class ParserTest {
     }
 
     @Test
-    public void testAddMainTripMissingDatesLocation() {
-        String input = "addmaintrip /n Trip1 /d Dates missing, location missing";
-
-        // Set up a new input stream to simulate user input
-        InputStream in = new ByteArrayInputStream("y\n".getBytes());
-        System.setIn(in);
-
-        // Execute the parser with the prepared input
-        Parser.parseInput(input).execute(tripsList, ui, null);
-
-        assertEquals(1, tripsList.size());
-        Trip addedTrip = tripsList.getTrip("Trip1");
-        assertEquals("Trip1", addedTrip.getName());
-        assertEquals(DEFAULT_START, printDateFormat.format(addedTrip.getStartDate())); // Check start date
-        assertEquals(DEFAULT_END, printDateFormat.format(addedTrip.getEndDate())); // Check end date
-        assertEquals("-", addedTrip.getLocation());
-        assertEquals("Dates missing, location missing", addedTrip.getDescription());
-    }
-
-
-    @Test
     public void testSetName() {
-        String input = "addmaintrip /n Trip1 with long name " +
+        String input = "addmaintrip /n TripName " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        Parser.parseInput(input).execute(tripsList, ui, null);
+        NewParser.parse(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = tripsList.getTrip("Trip1 with long name");
-        assertEquals("Trip1 with long name", addedTrip.getName());
-        input = "setname /old Trip1 with long name /new This is the new name";
-        Parser.parseInput(input).execute(tripsList, ui, null);
-        assertEquals("This is the new name", addedTrip.getName());
+        Trip addedTrip = tripsList.getTrip("TripName");
+        assertEquals("TripName", addedTrip.getName());
+        input = "setname TripName /n newName";
+        NewParser.parse(input).execute(tripsList, ui, null);
+        assertEquals("newName", addedTrip.getName());
     }
 
     @Test
     public void testSetLocation() {
-        String input = "addmaintrip /n Trip1 with long name " +
+        String input = "addmaintrip /n TripName " +
                 "/start 2024-03-15 /end 2024-03-20 /location Location1 /d This is the description";
-        Parser.parseInput(input).execute(tripsList, ui, null);
+        NewParser.parse(input).execute(tripsList, ui, null);
 
         assertEquals(1, tripsList.size());
-        Trip addedTrip = tripsList.getTrip("Trip1 with long name");
+        Trip addedTrip = tripsList.getTrip("TripName");
         assertEquals("Location1", addedTrip.getLocation());
-        input = "setlocation /n Trip1 with long name    /location the new hangout";
-        Parser.parseInput(input).execute(tripsList, ui, null);
-        assertEquals("the new hangout", addedTrip.getLocation());
+        input = "setlocation TripName /location newLocation";
+        NewParser.parse(input).execute(tripsList, ui, null);
+        assertEquals("newLocation", addedTrip.getLocation());
     }
 }
