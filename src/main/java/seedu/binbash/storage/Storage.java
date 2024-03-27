@@ -236,7 +236,7 @@ public class Storage {
 
         output += "p/" + item.getTotalUnitsPurchased() + " " + "s/";
 
-        if (item.getClass() == RetailItem.class || item.getClass() == PerishableRetailItem.class) {
+        if (item instanceof RetailItem) {
             RetailItem retailItem = (RetailItem)item;
             output += retailItem.getTotalUnitsSold() + System.lineSeparator();
         } else {

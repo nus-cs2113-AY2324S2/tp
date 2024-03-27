@@ -29,7 +29,7 @@ public class ItemList {
         double totalRevenue = 0;
 
         for (Item item: itemList) {
-            if (item.getClass() == RetailItem.class || item.getClass() == PerishableRetailItem.class) {
+            if (item instanceof RetailItem) {
                 // Downcast made only after checking if item is a RetailItem (and below) object.
                 // TODO: Add an assert statement to verify code logic.
                 RetailItem retailItem = (RetailItem) item;
