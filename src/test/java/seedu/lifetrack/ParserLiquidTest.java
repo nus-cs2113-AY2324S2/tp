@@ -18,9 +18,10 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
@@ -33,9 +34,10 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
@@ -48,9 +50,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -63,9 +65,10 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 
@@ -78,9 +81,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ before v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have keyed the input in the correct order!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -93,8 +96,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -107,8 +111,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput(invalidInput);
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input Exception: " +
-                    "Please enter a positive integer value for volume", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that positive integer value is keyed in for volume!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -118,9 +123,9 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput("liquids in");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
         }
     }
 
@@ -129,9 +134,33 @@ public class ParserLiquidTest {
         try {
             parseLiquidInput("liquids in b/Milo");
         } catch (InvalidInputException e) {
-            assertEquals("Invalid input exception: " +
-                    "Please ensure that you have entered b/ and v/\n" +
-                    "For example: liquids in b/Milo v/1000", e.getMessage());
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that you have entered all keywords!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
+
+    @Test
+    public void parseLiquidInput_emptyBeverageName_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/   v/1000");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
+        }
+    }
+    @Test
+    public void parseLiquidInput_emptyVolumeDescription_exceptionThrown() {
+        try {
+            parseLiquidInput("liquids in b/Milo v/   ");
+        } catch (InvalidInputException e) {
+            assertEquals("\t Invalid input!\n" +
+                    "\t Please ensure that beverage and volume is not empty!\n" +
+                    "\t Example input: liquids in b/Milo v/1000", e.getMessage());
+
         }
     }
 }
