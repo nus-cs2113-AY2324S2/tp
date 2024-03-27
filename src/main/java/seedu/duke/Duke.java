@@ -24,6 +24,7 @@ public class Duke {
     }
 
     public void run() throws IOException, CommandFormatException {
+        ui.showWelcomeMessage("StockMaster v2.0", "./StockMasterData.txt");
         Storage.readFromFile("./StockMasterData.txt");
         ui.showWelcomeMessage("1.0", "./StockMasterData.txt");
         this.normalOperation();
