@@ -117,20 +117,7 @@ public class ModuleList {
         }
         return false;
     }
-
-    public Integer getUEModuleMCToComplete() {
-        int totalUnrestrictedElectivesMCs = 40;
-        int takenUnrestrictedElectiveMCs = 0;
-        for (Module takenModule : takenModuleList) {
-            try {
-                CEGModules.mapStringToEnum(takenModule.getModuleCode());
-            } catch (IllegalArgumentException e) {
-                takenUnrestrictedElectiveMCs += takenModule.getModuleMC();
-            }
-        }
-        return Math.max(totalUnrestrictedElectivesMCs - takenUnrestrictedElectiveMCs, 0);
-    }
-
+    
     public ArrayList<String> getModulesToComplete() {
         ArrayList<String> modulesToComplete = new ArrayList<>();
         for (CEGModules cegModule : CEGModules.values()) {
