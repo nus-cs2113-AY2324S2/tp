@@ -39,6 +39,7 @@ public class Output {
         System.out.println("workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout");
         System.out.println("health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data");
         System.out.println("health /h:period /start:START_DATE /end:END_DATE - Add new period data");
+        System.out.println("health /h:prediction - Predicts next period's start date");
         System.out.println("health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION" +
                 " - Add new appointment data");
         System.out.println("history /item:[run/gym/bmi/period] - " +

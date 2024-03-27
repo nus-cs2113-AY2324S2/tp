@@ -21,6 +21,7 @@ workout /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run
 workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout
 health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data
 health /h:period /start:START_DATE /end:END_DATE - Add new period data
+health /h:prediction - Predicts next period's start date
 health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION - Add new appointment data
 history /item:[run/gym/bmi/period] - Shows history of runs/gyms/bmi records/periods tracked/appointment records
 latest /item:[run/gym/bmi/period] - Shows latest entry of runs/gyms/bmi records/periods tracked/appointment records

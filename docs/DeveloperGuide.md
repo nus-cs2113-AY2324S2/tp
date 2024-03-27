@@ -45,8 +45,8 @@ to other classes based on the command provided.
 The Output class is responsible for printing messages, prompts, and information to the console.
 
 The Run and Gym classes represent different types of exercises that the user can log. 
-The Health, Bmi, and Period classes are used to manage health-related data, such as Body Mass Index (BMI) 
-and menstrual period information.
+The Health, Bmi, Period and Appointment classes are used to manage health-related data, such as Body Mass Index (BMI), 
+menstrual period information and medical appointment details. 
 
 The LogFile class is used for logging application events and user actions to a log file.
 
@@ -79,11 +79,12 @@ The Health component consists of Health, HealthList, Bmi, Period, and Appointmen
 
 {Insert class diagram -- half drawn in draw.io}
 
-1. `Health`
+1. `Health` class stores date. 
 2. `HealthList`class stores separate lists for different `Health` objects using ArrayList.
 `HealthList`includes methods to add, delete, view history of the various `Health`lists.
-3. `Bmi`class
-4. `Period`class 
+3. `Bmi`class stores bmi attributes (i.e. height, weight, date, bmi value and bmi category). 
+4. `Period`class stores period attributes (i.e. start date of period, end date of period, period length 
+and cycle length). 
 5. `Appointment`class stores appointment attributes (i.e. date, time, appointment description). Primarily, `Appointment`
 has all necessary getter methods to access the attributes.
 
@@ -96,22 +97,30 @@ has all necessary getter methods to access the attributes.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Outpatients who need to monitor their health activity and health parameters.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+PulsePilot is a health monitoring application designed to bridge the gap between medical professionals 
+and patients during outpatient recovery. PulsePilot offers outpatients the capability to input and track a range of 
+health activities, encompassing both aerobic and anaerobic exercises, alongside crucial health parameters such as 
+BMI and menstrual cycles. Simultaneously, PulsePilot facilitates access to this vital data for various 
+healthcare professionals, ensuring comprehensive and seamless support in guiding outpatient recovery processes.
 
 ## User Stories
 
-| Version | As a ...       | I want to ...       | So that I can ...                  |
-|--------|----------------|---------------------|------------------------------------|
-| 1.0    | gym enthusiast | enter my gym stats  | track my gym sessions              |
-| 1.0    | runner         | see my running pace | see my relative speed for each run |
-| 1.0    | runner | log my runs         | track my running progress over time |
-| 2.0    | runner | see my latest run | quickly view my most recent run details |
-| 2.0    | gym enthusiast | see my latest gym session | quickly view my most recent gym session | 
-| 2.0    | gym enthusiast | enter varying weights for sets | accurately track my progress and strength gains | 
+| Version | As a ...              | I want to ...       | So that I can ...                          |
+|---------|-----------------------|---------------------|--------------------------------------------|
+| 1.0     | gym enthusiast        | enter my gym stats  | track my gym sessions                      |
+| 1.0     | runner                | see my running pace | see my relative speed for each run         |
+| 1.0     | runner                | log my runs         | track my running progress over time        |
+| 1.0     | health conscious user | calculate my BMI | track change in my weight over time        |
+| 1.0     | female user           | track my menstrual cycle | monitor any deviations from my normal menstrual cycle |
+| 2.0     | runner                | see my latest run | quickly view my most recent run details    |
+| 2.0     | gym enthusiast        | see my latest gym session | quickly view my most recent gym session    | 
+| 2.0     | gym enthusiast        | enter varying weights for sets | accurately track my progress and strength gains | 
+| 2.0     | female user           | predict my next period start date | plan ahead and better manage my health | 
+| 2.0     | injured user          | track my medical appointments | remember the appointments I have  |
 
 ## Non-Functional Requirements
 

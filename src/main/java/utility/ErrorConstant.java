@@ -19,6 +19,28 @@ public class ErrorConstant {
     public static final String UNSPECIFIED_PARAMETER_ERROR = "Parameter(s) unspecified.";
     public static final String INVALID_PARAMETER_ERROR = "Parameter(s) invalid or out of bounds";
     public static final String NO_DATE_SPECIFIED_ERROR = "NA";
+    public static final String INVALID_ITEM_ERROR = "Invalid item specified.";
+    public static final String CORRECT_FILTER_ITEM_FORMAT = "/item:run/gym/workouts/bmi/period";
+
+    // Date errors
+    public static final String INVALID_DATE_ERROR = "Invalid date format. Format is DD-MM-YYYY in integers.";
+    public static final String INVALID_DAY_ERROR = "Day must be an integer between 01 and 31.";
+    public static final String INVALID_MONTH_ERROR = "Month must be an integer between 01 and 12.";
+    public static final String PARSING_DATE_ERROR ="Error parsing date!";
+
+    // Time errors
+    public static final String INVALID_TIME_ERROR = "Invalid time format. Format is HH:MM:SS or MM:SS with integers";
+    public static final String INVALID_MINUTES_ERROR = "Minutes must be a positive integer between 01 and 59.";
+    public static final String INVALID_HOURS_ERROR = "Hours must be a positive integer between 1 and 23";
+    public static final String PARSING_TIME_ERROR = "Error parsing time!";
+
+    //Delete Errors
+    public static final String INVALID_COMMAND_FORMAT_ERROR = "Invalid command format.";
+    public static final String CORRECT_DELETE_COMMAND_FORMAT = "Usage: delete /item:filter /index:index";
+    public static final String NULL_ITEM_ERROR = "No item specified.";
+    public static final String CORRECT_ITEM_FORMAT = "Use /item:run/gym/period/bmi";
+    public static final String NULL_INDEX_ERROR = "No index specified";
+    public static final String NEGATIVE_INDEX_ERROR = "Index must be a valid positive integer.";
 
     // EXERCISE ERRORS
     public static final String UNSPECIFIED_ERROR = "Unspecified error";
@@ -71,9 +93,9 @@ public class ErrorConstant {
 
     // HEALTH ERRORS
     public static final String HEALTH_INPUT_BLANK_ERROR = "Type of health cannot be empty. " +
-            "Please input either /h:bmi, /h:period or /h:appointment";
+            "Please input either /h:bmi, /h:period, /h:prediction or /h:appointment";
     public static final String INVALID_HEALTH_INPUT_ERROR = "Invalid input for health type! " +
-            "Please input either /h:bmi, /h:period or /h:appointment";
+            "Please input either /h:bmi, /h:period, /h:prediction or /h:appointment";
 
     // BMI ERRORS
     public static final String INSUFFICIENT_BMI_PARAMETERS_ERROR = "Insufficient parameters for bmi! " +
@@ -82,6 +104,8 @@ public class ErrorConstant {
     public static final String NULL_BMI_ERROR = "Bmi object cannot be null.";
     public static final String EMPTY_BMI_LIST_ERROR = "BMI List is empty.";
     public static final String BMI_LIST_UNCLEARED_ERROR = "Bmi list is not cleared.";
+    public static final String HEIGHT_WEIGHT_INPUT_ERROR =
+            "Height and weight should be 2 decimal place positive numbers!";
 
     // PERIOD ERRORS
     public static final String INSUFFICIENT_PERIOD_PARAMETERS_ERROR = "Insufficient parameters for period! " +
@@ -89,8 +113,11 @@ public class ErrorConstant {
     public static final String NULL_PERIOD_ERROR = "Period object cannot be null.";
     public static final String NULL_START_DATE_ERROR = "Start date of period cannot be empty.";
     public static final String NULL_END_DATE_ERROR = "End date of period cannot be empty.";
+    public static final String INVALID_START_DATE_ERROR = "Invalid start date!";
+    public static final String INVALID_END_DATE_ERROR = "Invalid end date!";
     public static final String EMPTY_PERIOD_LIST_ERROR = "Period List is empty.";
     public static final String PERIOD_LIST_UNCLEARED_ERROR = "Period list is not cleared.";
+    public static final String START_DATE_IN_FUTURE_ERROR = "Start date cannot be later than today's date.";
     public static final String PERIOD_END_BEFORE_START_ERROR = "Start date of period must be before end date.";
     public static final String UNABLE_TO_MAKE_PREDICTIONS_ERROR = "Insufficient period cycles to make prediction.";
 
@@ -100,6 +127,12 @@ public class ErrorConstant {
     public static final String NULL_APPOINTMENT_ERROR = "Appointment object cannot be null.";
     public static final String EMPTY_APPOINTMENT_LIST_ERROR = "Appointment list is empty.";
     public static final String APPOINTMENT_LIST_UNCLEARED_ERROR = "Appointment list is not cleared.";
+    public static final String START_INDEX_NEGATIVE_ERROR = "Start index for prediction must be positive";
+    public static final String END_INDEX_GREATER_THAN_START_ERROR =
+            "End index must be greater than start index is negative";
+    public static final String NULL_DATE_ERROR = "Date of appointment cannot be empty.";
+    public static final String NULL_TIME_ERROR = "Time of appointment cannot be empty.";
+    public static final String DESCRIPTION_LENGTH_ERROR ="Description cannot be more than 100 characters";
 
     // HISTORY AND LATEST ERRORS
     public static final String INVALID_HISTORY_FORMAT_ERROR = "Invalid command format. " +

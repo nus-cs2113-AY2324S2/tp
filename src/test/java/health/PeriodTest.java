@@ -52,11 +52,11 @@ class PeriodTest {
     }
 
     /**
-     * Tests the behaviour of the showLatestPeriod function and whether it prints
+     * Tests the behaviour of the showLatestPeriod method and whether it prints
      * the last Period object added.
      */
     @Test
-    void showLatestPeriod_printCorrectPeriod() {
+    void showLatestPeriod_twoPeriodInputs_printCorrectPeriod() {
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
         Period secondPeriod = new Period("09-03-2023", "16-03-2023");
 
@@ -77,8 +77,11 @@ class PeriodTest {
         assertEquals(expected, outContent.toString());
     }
 
+    /**
+     * Tests the behaviour of the showPeriodHistory method and whether it prints
+     * the period history correctly.
+     */
     @Test
-
     void showPeriodHistory_twoInputs_printCorrectPeriodHistory() {
         Period firstPeriod = new Period("10-04-2023", "16-04-2023");
         Period secondPeriod = new Period("09-05-2023", "16-05-2023");
@@ -134,7 +137,7 @@ class PeriodTest {
      * Expected behaviour is for an AssertionError to be thrown.
      */
     @Test
-    void deleteBmi_emptyList_throwsAssertionError() {
+    void deletePeriod_emptyList_throwsAssertionError() {
         assertThrows(AssertionError.class, () ->
                 HealthList.deletePeriod(0));
     }
@@ -144,7 +147,7 @@ class PeriodTest {
      * Expected behaviour is for an OutOfBounds error to be thrown.
      */
     @Test
-    void deleteBmi_properListInvalidIndex_throwOutOfBoundsForBmi() {
+    void deletePeriod_properListInvalidIndex_throwOutOfBoundsForBmi() {
         Period firstPeriod = new Period("10-04-2024", "16-04-2024");
         HealthList.addPeriod(firstPeriod);
         int invalidIndex = 5;
@@ -209,6 +212,62 @@ class PeriodTest {
                 + System.lineSeparator();
 
         Period.printNextCyclePrediction(predictedDate);
+        assertEquals(expected, outContent.toString());
+    }
+
+    /**
+     * Tests the behaviour of the printLatestThreeCycles method and whether it prints
+     * the latest three period objects only.
+     */
+    @Test
+    void printLatestThreeCycles_fourInputs_printsThreePeriodObjectsOnly() {
+        Period firstPeriod = new Period("09-01-2024", "16-01-2024");
+        Period secondPeriod = new Period("10-02-2024", "16-02-2024");
+        Period thirdPeriod = new Period("09-03-2024", "14-03-2024");
+        Period fourthPeriod = new Period("09-04-2024", "16-04-2024");
+
+        HealthList.addPeriod(firstPeriod);
+        HealthList.addPeriod(secondPeriod);
+        HealthList.addPeriod(thirdPeriod);
+        HealthList.addPeriod(fourthPeriod);
+
+        String expected = "Period Start: "
+                + secondPeriod.getStartDate()
+                + " Period End: "
+                + secondPeriod.endPeriodDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + secondPeriod.periodLength
+                + " days"
+                + System.lineSeparator()
+                + "Cycle Length: "
+                + secondPeriod.cycleLength
+                + " days"
+                + System.lineSeparator()
+                + "Period Start: "
+                + thirdPeriod.getStartDate()
+                + " Period End: "
+                + thirdPeriod.endPeriodDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + thirdPeriod.periodLength
+                + " days"
+                + System.lineSeparator()
+                + "Cycle Length: "
+                + thirdPeriod.cycleLength
+                + " days"
+                + System.lineSeparator()
+                + "Period Start: "
+                + fourthPeriod.getStartDate()
+                + " Period End: "
+                + fourthPeriod.endPeriodDate
+                + System.lineSeparator()
+                + "Period Length: "
+                + fourthPeriod.periodLength
+                + " days"
+                + System.lineSeparator();
+
+        HealthList.printLatestThreeCycles();
         assertEquals(expected, outContent.toString());
     }
 }

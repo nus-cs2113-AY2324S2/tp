@@ -1,8 +1,6 @@
 package health;
 
-import ui.Handler;
 import utility.Parser;
-import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.HealthConstant;
@@ -34,6 +32,9 @@ public class Bmi extends Health {
      */
     protected String bmiCategory;
 
+    /**
+     * The date of user input.
+     */
     protected LocalDate date;
 
     //@@author j013n3
@@ -63,7 +64,7 @@ public class Bmi extends Health {
      * @return The height recorded in the Bmi object.
      */
     public String getHeight() {
-        return String.format("%.2f", height);
+        return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, height);
     }
 
     /**
@@ -72,7 +73,7 @@ public class Bmi extends Health {
      * @return The weight recorded in the Bmi object.
      */
     public String getWeight() {
-        return String.format("%.2f", weight);
+        return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, weight);
     }
 
     /**
@@ -82,30 +83,6 @@ public class Bmi extends Health {
      */
     public LocalDate getDate() {
         return date;
-    }
-
-
-    /**
-     * Split user input into Bmi command, height, weight and date.
-     *
-     * @param input A user-provided string.
-     * @return An array of strings containing the extracted Bmi parameters.
-     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
-     */
-    public static String[] splitBmiInput(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
-
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                || !input.contains(HealthConstant.HEIGHT_FLAG)
-                || !input.contains(HealthConstant.WEIGHT_FLAG)
-                || !input.contains(HealthConstant.DATE_FLAG)) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
-        }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
-        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
-        return results;
     }
 
     //@@author j013n3
@@ -152,11 +129,9 @@ public class Bmi extends Health {
      */
     @Override
     public String toString() {
-        return this.date
-                + System.lineSeparator()
-                + HealthConstant.BMI_MESSAGE_PREFIX
-                + this.calculateBmiValue()
-                + System.lineSeparator()
-                + getBmiCategory(bmiValue);
+        return String.format(HealthConstant.PRINT_BMI_FORMAT,
+                this.date,
+                this.calculateBmiValue(),
+                getBmiCategory(bmiValue));
     }
 }
