@@ -55,6 +55,7 @@ public class Handler {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
                 case EXIT:
+                    LogFile.writeLog("User ran command: exit", false);
                     System.out.println(UiConstant.EXIT_MESSAGE);
                     return;
 
@@ -401,6 +402,7 @@ public class Handler {
      */
     public static void userInduction() {
         String name = in.nextLine();
+        DataFile.userName = name;
         System.out.println("Welcome aboard, Captain " + name);
         Output.printLine();
 
@@ -440,12 +442,19 @@ public class Handler {
         LogFile.writeLog("Started bot", false);
 
         int status = DataFile.loadDataFile();
-        //String name = DataFile.loadName();
-        Output.printGreeting(status, "name");
 
-        if (status == 1) {
+        if (status == 0) {
+            try {
+                DataFile.readDataFile(); // File read
+                Output.printGreeting(status, DataFile.userName);
+            } catch (CustomExceptions.FileReadError e) {
+                Output.printException(e.getMessage());
+            }
+        } else {
+            Output.printGreeting(status, DataFile.userName);
             userInduction();
         }
+
         System.out.println("Terminal primed. Command inputs are now accepted...");
         Output.printLine();
     }
@@ -455,7 +464,16 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        // Yet to implement : Storage.saveTasks(tasks);
+        LogFile.writeLog("User terminating PulsePilot", false);
+        try {
+            LogFile.writeLog("Attempting to save data file", false);
+            DataFile.saveDataFile(DataFile.userName, null, null, null,
+                    null, null);
+            LogFile.writeLog("File saved", false);
+        } catch (CustomExceptions.FileWriteError e) {
+            LogFile.writeLog("File write error", true);
+            Output.printException(e.getMessage());
+        }
         Output.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
         LogFile.writeLog("Bot exited gracefully", false);
