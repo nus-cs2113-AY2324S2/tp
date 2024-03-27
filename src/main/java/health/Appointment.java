@@ -1,5 +1,6 @@
 package health;
 
+import utility.ErrorConstant;
 import utility.HealthConstant;
 import utility.Parser;
 
@@ -43,6 +44,7 @@ public class Appointment extends Health {
      * @return The date of appointment in LocalDate
      */
     public LocalDate getDate() {
+        assert date != null : ErrorConstant.NULL_DATE_ERROR;
         return this.date;
     }
 
@@ -52,6 +54,7 @@ public class Appointment extends Health {
      * @return The time of appointment in LocalTime
      */
     public LocalTime getTime() {
+        assert time != null : ErrorConstant.NULL_TIME_ERROR;
         return this.time;
     }
 

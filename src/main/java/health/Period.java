@@ -21,10 +21,6 @@ public class Period extends Health {
      */
     protected LocalDate endPeriodDate;
     /**
-     * The end date of period cycle i.e. the last day before the first day of the next period flow.
-     */
-    protected LocalDate endCycleDate;
-    /**
      * The number of days between the first day and last day of period flow.
      */
     protected long periodLength;
@@ -43,7 +39,6 @@ public class Period extends Health {
     public Period(String stringStartDate, String stringEndDate) {
         this.startDate = Parser.parseDate(stringStartDate);
         this.endPeriodDate = Parser.parseDate(stringEndDate);
-        this.endCycleDate = null;
         this.periodLength = calculatePeriodLength();
         this.cycleLength = 0;
     }
@@ -99,11 +94,18 @@ public class Period extends Health {
     public long getLastThreeCycleLengths() {
         int size = HealthList.getPeriodSize();
 
-
         long sumOfCycleLengths = 0;
-        for (int i = size - 4; i <= size - 2; i++) {
+
+        int startIndexForPrediction = size - HealthConstant.MIN_SIZE_FOR_PREDICTION;
+        assert startIndexForPrediction >= 0 : ErrorConstant.START_INDEX_NEGATIVE_ERROR;
+
+        int endIndexForPrediction = size - HealthConstant.LAST_CYCLE_INDEX_OFFSET;
+        assert endIndexForPrediction >= startIndexForPrediction : ErrorConstant.END_INDEX_GREATER_THAN_START_ERROR;
+
+        for (int i = startIndexForPrediction; i <= endIndexForPrediction; i++) {
             sumOfCycleLengths += HealthList.getPeriod(i).cycleLength;
         }
+
         return sumOfCycleLengths;
     }
 

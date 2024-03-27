@@ -12,9 +12,16 @@ import java.util.Comparator;
  * Represents the list of BMI objects stored.
  */
 public class HealthList extends ArrayList<Health> {
+    /** LogFile for logging health-related activities. */
     static LogFile logFile = LogFile.getInstance();
+
+    /** The list of Bmi records. */
     private static final ArrayList<Bmi> bmis = new ArrayList<>();
+
+    /** The list of Appointment records. */
     private static final ArrayList<Appointment> appointments = new ArrayList<>();
+
+    /** The list of Period records. */
     private static final ArrayList<Period> periods = new ArrayList<>();
 
     //@@author j013n3
@@ -27,7 +34,6 @@ public class HealthList extends ArrayList<Health> {
     public static void addBmi(Bmi bmi) {
         assert bmi != null : ErrorConstant.NULL_BMI_ERROR;
         bmis.add(bmi);
-
     }
 
     //@@author syj02
@@ -71,6 +77,7 @@ public class HealthList extends ArrayList<Health> {
 
     /**
      * Prints the latest period object added.
+     *
      * @throws AssertionError If periods list is empty
      */
     public static void showLatestPeriod() {
@@ -82,6 +89,7 @@ public class HealthList extends ArrayList<Health> {
     //@@author j013n3
     /**
      * Prints all Period entries tracked.
+     *
      * @throws AssertionError If periods list is empty
      */
     public static void showPeriodHistory() {
@@ -92,17 +100,20 @@ public class HealthList extends ArrayList<Health> {
     }
 
     /**
-     * Retrieves the latest Period object from the periods list.
+     * Prints the latest three Period objects from the periods list.
      *
-     * @return The latest Period object, or null if the list is empty.
      */
-    public static Period getLatestCycle() {
-        if (periods.isEmpty()) {
-            return null;
-        }
-        return periods.get(periods.size() - 1);
-    }
+    public static void printLatestThreeCycles() {
+        int size = periods.size();
+        int startIndex = size - HealthConstant.LATEST_THREE_CYCLE_LENGTHS;
+        assert startIndex >= 0 : ErrorConstant.START_INDEX_NEGATIVE_ERROR;
 
+        int endIndex = size - HealthConstant.LAST_CYCLE_OFFSET;
+
+        for (int i = startIndex; i <= endIndex; i++) {
+            System.out.println(periods.get(i));
+        }
+    }
 
     /**
      * Retrieves the number of periods recorded.
@@ -129,12 +140,11 @@ public class HealthList extends ArrayList<Health> {
     /**
      * Predicts the start date of the next period based on the average cycle length of the last three cycles.
      *
-     * @return The predicted start date of the next period, or null if there are no periods recorded.
+     * @return The predicted start date of the next period
+     * @throws AssertionError If periods lists is empty
      */
     public static LocalDate predictNextPeriodStartDate() {
-        if (periods.isEmpty()) {
-            return null;
-        }
+        assert !periods.isEmpty() : ErrorConstant.EMPTY_PERIOD_LIST_ERROR;
 
         Period latestPeriod = periods.get(periods.size() - 1);
         return latestPeriod.nextCyclePrediction();
