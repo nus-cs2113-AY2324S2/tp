@@ -15,6 +15,10 @@ import florizz.objects.Bouquet;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+=======
+
+>>>>>>> e34062b33e25e1494edf72f881641eac3d27b849
 
 public class Parser {
     private static Logger logger = Logger.getLogger(Florizz.class.getName());
@@ -50,7 +54,7 @@ public class Parser {
             case ("help"):
                 command = new HelpCommand();
                 break;
-            case ("flower"):
+            case ("flowers"):
                 command = handleFlowerCommand(input);
                 break;
             case ("info"):
@@ -129,7 +133,7 @@ public class Parser {
     }
 
     private static FlowerCommand handleFlowerCommand(String input) {
-        String occasion  = (input.length() == 6) ? " " : input.substring(input.indexOf(" ") + 1);
+        String occasion  = (input.length() == 7) ? " " : input.substring(input.indexOf(" ") + 1);
         return new FlowerCommand(occasion);
     }
 

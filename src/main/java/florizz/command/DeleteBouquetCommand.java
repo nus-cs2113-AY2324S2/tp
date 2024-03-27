@@ -16,8 +16,10 @@ public class DeleteBouquetCommand extends Command{
         if (!bouquetList.contains(bouquetToDelete)){
             throw new FlorizzException("Could not find bouquet to delete");
         }
+        int initialListSize = bouquetList.size();
         bouquetList.remove(bouquetToDelete);
         ui.printBouquetDeleted(bouquetToDelete);
+        assert bouquetList.size() < initialListSize : "Size of bouquet list did not go down";
         return true;
     }
 }

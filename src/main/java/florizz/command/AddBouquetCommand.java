@@ -18,6 +18,7 @@ public class AddBouquetCommand extends Command{
         }
         bouquetList.add(bouquetToAdd);
         ui.printBouquetAdded(bouquetToAdd);
+        assert !bouquetList.isEmpty() : "Bouquet list should not be empty";
         return true;
     }
 }

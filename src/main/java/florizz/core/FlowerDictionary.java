@@ -1,5 +1,6 @@
 package florizz.core;
 
+
 import java.util.ArrayList;
 import florizz.objects.Flower;
 
@@ -14,24 +15,30 @@ public class FlowerDictionary {
      *
      * @param name Name of flower to be added
      * @param colour Colour of flower to be added
-     * @param occasion Occasion that the flower is bought for
+     * @param occasions Occasions that the flower can be bought for
      */
-    private static void add(String name, String colour, String occasion) {
-        flowerDict.add(new Flower(name, colour, occasion));
+    private static void add(String name, String colour, String[] occasions) {
+
+        Flower.Colour colourEnum = Flower.Colour.valueOf(colour.replaceAll(" ", "_").toUpperCase());
+        ArrayList<Flower.Occasion> occasionsArrayList = new ArrayList<>();
+        for (String occasion : occasions){
+            occasionsArrayList.add(Flower.Occasion.valueOf(occasion.replaceAll(" ", "_").toUpperCase()));
+        }
+        flowerDict.add(new Flower(name, colourEnum, occasionsArrayList));
     }
 
     /**
      * Adds flowers to the dictionary when florizz starts up (temporary)
      */
     public static void startup() {
-        add("Orchid", "White", "Wedding");
-        add("Rose", "Red", "Valentines");
-        add("Lily", "White", "Funeral");
-        add("Daisy", "White", "Valentines");
-        add("Babys Breath", "White", "Wedding");
-        add("Chrysanthemum", "White", "Funeral");
-        add("Hydrangea", "Blue", "Wedding");
-        add("Carnation", "Pink", "Mothers Day");
+        add("Orchid", "White", new String[]{"Wedding"});
+        add("Rose", "Red", new String[]{"Valentines", "Wedding"});
+        add("Lily", "White", new String[]{"Funeral"});
+        add("Daisy", "White", new String[]{"Valentines"});
+        add("Babys Breath", "White", new String[] {"Wedding"});
+        add("Chrysanthemum", "White", new String[]{"Funeral"});
+        add("Hydrangea", "Blue", new String[] {"Wedding"});
+        add("Carnation", "Pink", new String[] {"Mothers Day"});
     }
 
     /**
@@ -51,5 +58,15 @@ public class FlowerDictionary {
      */
     public static Flower get(int i) {
         return flowerDict.get(i);
+    }
+
+    public static ArrayList<Flower> filterByOccasion(Flower.Occasion occasion){
+        ArrayList<Flower> filteredFlowers = new ArrayList<>();
+        for (int i = 0; i < flowerDict.size(); i++) {
+            if (flowerDict.get(i).getOccasion().contains(occasion)){
+                filteredFlowers.add(flowerDict.get(i));
+            }
+        }
+        return filteredFlowers;
     }
 }
