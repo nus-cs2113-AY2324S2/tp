@@ -20,8 +20,15 @@ public class Storage {
     public static final String FOLDER_PATH = "./data/";
     public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
     public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
-
+    public static Integer userTimetableIndex = 0;
     private static Logger logger = Logger.getLogger("myLogger");
+
+    public static String getUserTimetableFilePath() {
+        return "./data/myTimetable" + userTimetableIndex.toString() + ".csv";
+    }
+    public static String getUserTimetableFileName() {
+        return "myTimetable" + userTimetableIndex.toString();
+    }
 
     /**
      * Take in a timetable containing courses, then write courses to the user data file at ./data/myTimetable.csv.
@@ -30,7 +37,7 @@ public class Storage {
      */
     public static void writeToFile(Timetable timetable) {
         try {
-            FileWriter fw = new FileWriter(USER_TIMETABLE_FILE_PATH);
+            FileWriter fw = new FileWriter(getUserTimetableFilePath());
             fw.write(timetable.toString());
             fw.close();
         } catch (IOException e) {
@@ -49,11 +56,17 @@ public class Storage {
      */
     public static Timetable loadTimetable(String timetableName) {
         Timetable newTimetable = new Timetable();
-        String filePathName = FOLDER_PATH + timetableName + ".csv";
+        String filePathName;
+        if (timetableName.contains("myTimetable")) {
+            filePathName = getUserTimetableFilePath();
+        }
+        else {
+            filePathName = "./data/" + timetableName + ".csv";
+        }
         Path filePath = Paths.get(filePathName);
 
         if (!Files.exists(filePath)) {
-            if (timetableName.equals("myTimetable")) {
+            if (timetableName.contains("myTimetable")) {
                 System.out.println("File at " + filePathName + " is not found. Trying to create one.");
                 createFile(filePathName);
             } else {

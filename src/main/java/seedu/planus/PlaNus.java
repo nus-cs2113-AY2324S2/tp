@@ -53,7 +53,8 @@ public class PlaNus {
      */
     public void run() {
         Ui.printLogo();
-        timetable = Storage.loadTimetable(Storage.USER_TIMETABLE_FILE_NAME);
+        String name = Storage.getUserTimetableFileName();
+        timetable = Storage.loadTimetable(Storage.getUserTimetableFileName());
         setUpLogger();
 
         while (!isExit) {
@@ -63,7 +64,7 @@ public class PlaNus {
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
             }
-            timetable = Storage.loadTimetable(Storage.USER_TIMETABLE_FILE_NAME);
+            timetable = Storage.loadTimetable(Storage.getUserTimetableFileName());
         }
         Ui.printExit();
     }
