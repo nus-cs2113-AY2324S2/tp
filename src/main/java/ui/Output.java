@@ -1,6 +1,11 @@
 package ui;
 
-import utility.*;
+import utility.Filters;
+import utility.ErrorConstant;
+import utility.UiConstant;
+import utility.WorkoutConstant;
+import utility.HealthConstant;
+import utility.CustomExceptions;
 
 import workouts.Gym;
 import workouts.GymStation;
@@ -11,6 +16,7 @@ import health.HealthList;
 import health.Bmi;
 import health.Period;
 import health.Appointment;
+
 import java.util.ArrayList;
 
 public class Output {
@@ -55,6 +61,7 @@ public class Output {
 
     /**
      * Prints the gym station prompt.
+     *
      * @param stationNumber Integer representing the current gym station index.
      */
     public static void printGymStationPrompt(int stationNumber) {
@@ -66,12 +73,10 @@ public class Output {
     }
 
 
-
-
     /**
      * Returns the formatted string for printing runs.
      *
-     * @param index The index of the run.
+     * @param index          The index of the run.
      * @param currentWorkout The current Workout object within the list.
      * @return A string
      */
@@ -81,6 +86,7 @@ public class Output {
 
     /**
      * Prints the text header when adding a new Run.
+     *
      * @param newRun The new Run object added.
      */
     public static void printAddRun(Run newRun) {
@@ -131,6 +137,7 @@ public class Output {
 
     /**
      * Prints the text header when adding a new Gym.
+     *
      * @param gym The new Gym object added.
      */
     public static void printAddGym(Gym gym) {
@@ -150,22 +157,21 @@ public class Output {
         System.out.println(WorkoutConstant.HISTORY_WORKOUTS_HEADER_FORMAT);
 
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.ALL);
-        for(int i = 0; i < workoutList.size(); i++){
+        for (int i = 0; i < workoutList.size(); i++) {
             Workout workout = workoutList.get(i);
             if (workout instanceof Run) {
                 Run run = (Run) workout;
                 System.out.println(String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
-                        (i + 1),run.getFormatForAllHistory()));
+                        (i + 1), run.getFormatForAllHistory()));
             } else {
                 Gym gym = (Gym) workout;
                 int numberOfStation = gym.getStations().size();
-                for(int j = 0; j < numberOfStation; j++){
+                for (int j = 0; j < numberOfStation; j++) {
                     String gymString;
-                    if(j == 0){
+                    if (j == 0) {
                         gymString = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
-                                (i+1), gym.getHistoryFormatForSpecificGymStation(j));
-                    }
-                    else{
+                                (i + 1), gym.getHistoryFormatForSpecificGymStation(j));
+                    } else {
                         gymString = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT,
                                 "", gym.getHistoryFormatForSpecificGymStation(j));
                     }
@@ -179,7 +185,7 @@ public class Output {
     /**
      * Prints all the Run objects added to the list.
      *
-     * @throws CustomExceptions.OutOfBounds If index is out of bounds.
+     * @throws CustomExceptions.OutOfBounds  If index is out of bounds.
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
     protected static void printRunHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
@@ -199,19 +205,20 @@ public class Output {
 
     /**
      * Prints all the stations within a specified Gym object.
+     *
      * @param gym The Gym object containing the GymStation objects to be printed.
      */
     protected static void printGymStats(Gym gym) {
         ArrayList<GymStation> allStations = gym.getStations();
-        for (int i = 0; i < allStations.size(); i++){
-            System.out.printf("Station %d %s%n", i+1, allStations.get(i).toString());
+        for (int i = 0; i < allStations.size(); i++) {
+            System.out.printf("Station %d %s%n", i + 1, allStations.get(i).toString());
         }
     }
 
     /**
      * Prints all the information for all Gym objects within the list.
      *
-     * @throws CustomExceptions.OutOfBounds If index is out of bounds.
+     * @throws CustomExceptions.OutOfBounds  If index is out of bounds.
      * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
     protected static void printGymHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
@@ -223,7 +230,7 @@ public class Output {
             Gym currentWorkout = (Gym) workoutList.get(i);
             System.out.println("Gym Session " + index + currentWorkout);
             printGymStats(currentWorkout);
-            if(i != workoutList.size() - 1){
+            if (i != workoutList.size() - 1) {
                 printLine();
             }
         }
@@ -233,7 +240,7 @@ public class Output {
     /**
      * Prints all Bmi objects recorded.
      *
-     * @throws CustomExceptions.OutOfBounds If there is access to a Bmi object that does not exist.
+     * @throws CustomExceptions.OutOfBounds  If there is access to a Bmi object that does not exist.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     protected static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
@@ -246,7 +253,7 @@ public class Output {
     /**
      * Prints all Period objects recorded.
      *
-     * @throws CustomExceptions.OutOfBounds If there is access to a Period object that does not exist.
+     * @throws CustomExceptions.OutOfBounds  If there is access to a Period object that does not exist.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     protected static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
@@ -381,6 +388,7 @@ public class Output {
 
     /**
      * Prints a specified message and the exception error message.
+     *
      * @param message The custom message to be printed.
      */
     public static void printException(String message) {
@@ -400,8 +408,9 @@ public class Output {
 
     /**
      * Checks whether storage file is present, and prints corresponding message.
+     *
      * @param status Integer representing whether the storage file has been loaded. If set to 0, file is present. Else,
-     *                file is not present.
+     *               file is not present.
      */
     public static void printGreeting(int status, String name) {
         if (status == 0) {

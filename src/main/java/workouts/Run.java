@@ -84,7 +84,7 @@ public class Run extends Workout {
         return results;
     }
 
-    public static Run addRun (String[] runDetails) throws CustomExceptions.InvalidInput {
+    public static Run addRun(String[] runDetails) throws CustomExceptions.InvalidInput {
         Run newRun;
         if (runDetails[WorkoutConstant.DATE_INDEX].isEmpty()) {
             newRun = new Run(
@@ -308,7 +308,7 @@ public class Run extends Workout {
                 getTimes(), getDistance(), getPace(), printedDate);
     }
 
-    public String getFormatForAllHistory(){
+    public String getFormatForAllHistory() {
         String printedDate;
 
         if (date != null) {
@@ -330,4 +330,4 @@ public class Run extends Workout {
 
     }
 
-    }
+}
