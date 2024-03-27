@@ -1,7 +1,9 @@
-package seedu.voyagers;
+package seedu.voyagers.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
+import seedu.voyagers.utils.FormatDate;
+
 
 public class Trip {
     private String name;
@@ -9,20 +11,34 @@ public class Trip {
     private Date endDate;
     private String location;
     private String description;
+    private Integer reviewScore = 0;
 
     private ArrayList<Trip> subTrips = new ArrayList<>();
 
-    public Trip(String name, Date startDate, Date endDate, String location, String description) {
+    public Trip(String name, Date startDate, Date endDate, String location, String description, String reviewScore) {
 
         if (startDate.after(endDate)) {
             throw new IllegalArgumentException("Start date cannot be after end date");
         }
+
+        assert startDate.before(endDate) : "Start date cannot be after end date";
 
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
         this.description = description;
+        this.reviewScore = Integer.parseInt(reviewScore);
+    }
+
+    public Trip(String[] args) throws Exception{
+        this.name = args[0];
+
+        this.startDate =  FormatDate.dateFormat.parse(args[1]);
+        this.endDate =   FormatDate.dateFormat.parse(args[2]);
+        this.location = args[3];
+        this.description = args[4];
+
     }
 
     public String getName() {
@@ -35,6 +51,10 @@ public class Trip {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public int getSubTripsSize(){
+        return subTrips.size();
     }
 
     /**
@@ -51,6 +71,10 @@ public class Trip {
 
     public String getDescription() {
         return description;
+    }
+
+    public Integer getReviewScore() {
+        return reviewScore;
     }
 
     public void setName(String name) {
@@ -74,13 +98,14 @@ public class Trip {
         this.description = description;
     }
 
-
-
-
+    public void setReviewScore(int reviewScore) {
+        this.reviewScore = reviewScore;
+    }
 
     /**
      * Returns the sub-trips of the current trip.
-     * @return the array with sub-trips of the current trip
+     *
+     * @return the list with sub-trips of the current trip
      */
     public ArrayList<Trip> getSubTrips() {
         return subTrips;
@@ -88,6 +113,7 @@ public class Trip {
 
     /**
      * Adds a sub-trip to the current trip.
+     *
      * @param subTrip the sub-trip to be added
      */
     public void addSubTrip(Trip subTrip) {
@@ -96,6 +122,7 @@ public class Trip {
 
     /**
      * Removes the specified sub-trip from the current trip.
+     *
      * @param subTrip the sub-trip to be removed
      */
     public void removeSubTrip(Trip subTrip) {
@@ -104,10 +131,11 @@ public class Trip {
 
     /**
      * Removes the sub-trip at the specified index.
+     *
      * @param i the index of the sub-trip to be removed. Index starts from 0.
      */
-    public void removeSubTrip(int i){
-        try{
+    public void removeSubTrip(int i) {
+        try {
             subTrips.remove(i);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -116,14 +144,30 @@ public class Trip {
 
     /**
      * Returns the sub-trip at the specified index.
+     *
      * @param i the index of the sub-trip to be returned. Index starts from 0.
      * @return the sub-trip at the specified index
      */
-    public Trip getSubTrip(int i){
-        try{
+    public Trip getSubTrip(int i) {
+        try {
             return subTrips.get(i);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = "Name: " + name + "\t\tStart Date: " +
+                FormatDate.dateFormat.format(startDate) + "\t\tEnd Date: " +
+                FormatDate.dateFormat.format(endDate) + "\t\tLocation: " +
+                location + "\t\tDescription: " + description + "\t\tReview: " + getReviewScore();
+        s += "\n\tSub-trips:";
+        for (Trip t : subTrips) {
+            s += "\n\t\t" + t.toString();
+        }
+
+        return s;
+
     }
 }

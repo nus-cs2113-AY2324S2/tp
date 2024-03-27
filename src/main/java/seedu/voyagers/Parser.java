@@ -1,11 +1,25 @@
 package seedu.voyagers;
 
+import seedu.voyagers.commands.AddSubTripCommand;
+import seedu.voyagers.commands.AddTripCommand;
+import seedu.voyagers.commands.Command;
+import seedu.voyagers.commands.DeleteCommand;
+import seedu.voyagers.commands.EmptyCommand;
+import seedu.voyagers.commands.ExitCommand;
+import seedu.voyagers.commands.HelpCommand;
+import seedu.voyagers.commands.ListCommand;
+import seedu.voyagers.commands.ModifyTripCommand;
+import seedu.voyagers.utils.FormatDate;
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+
 
 public class Parser {
 
@@ -20,179 +34,254 @@ public class Parser {
     private static final Date DEFAULT_START = defaultStartCalendar.getTime();
     private static final Date DEFAULT_END = defaultEndCalendar.getTime();
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private final SimpleDateFormat printDateFormat = new SimpleDateFormat("dd MMMM yyyy");
-    private ArrayList<Trip> tripsList;
+    private static final SimpleDateFormat dateFormat = FormatDate.dateFormat;
 
-    public Parser(ArrayList<Trip> tripsList) {
-        this.tripsList = tripsList;
-    }
 
-    public void parseInput(String input) {
+
+
+    public static Command parseInput(String input) throws IllegalArgumentException{
         String[] tokens = input.split(" ");
-        if (tokens.length < 2 && !tokens[0].equals("listall")) {
+        if (tokens.length < 2 && !tokens[0].equals("listall") && !tokens[0].equals("exit")
+                && !tokens[0].equals("help")) {
             System.out.println("Insufficient input.");
-            return;
+            throw new IllegalArgumentException("Insufficient input.");
         }
 
         String command = tokens[0].toLowerCase();
 
         switch (command) {
         case "addmaintrip":
-            addMainTrip(tokens);
-            break;
+            return commandAddMainTrip(tokens);
+        case "addsubtrip":
+            return commandAddSubTrip(tokens);
         case "deletemaintrip":
-            deleteMainTrip(tokens);
-            break;
+            return deleteMainTrip(tokens);
         case "setname":
-            setName(tokens);
-            break;
+            return commandSetName(tokens);
         case "setdates":
-            setDates(tokens);
-            break;
+            return commandSetDates(tokens);
         case "setlocation":
-            setLocation(tokens);
-            break;
+            return commandSetLocation(tokens);
         case "setdescription":
-            setDescription(tokens);
-            break;
+            return commandSetDescription(tokens);
         case "listall":
-            listAll();
-            break;
+            return listAll();
+        case "exit":
+            return new ExitCommand();
+        case "help":
+            return new HelpCommand();
         // Other cases for commands like "addsubtrip", "removesubtrip" can be added similarly
         default:
             System.out.println("Unknown command.");
         }
+
+        return new EmptyCommand();
     }
 
-    private void setName(String[] tokens) {
+    private static Command commandAddSubTrip(String[] tokens) {
+        String[] newTokens = new String[tokens.length - 1];
+
+        System.arraycopy(tokens, 2, newTokens, 1, tokens.length - 2);
+
+        System.out.println(Arrays.toString(newTokens));
+
+        Command c = commandAddMainTrip(newTokens);
+
+
+        String[] subTripArgs = c.getArgs();
+        String[] args = new String[6];
+        System.arraycopy(subTripArgs, 0, args, 1, 5);
+        args[0] = tokens[1];
+
+
+        return new AddSubTripCommand(args);
+
+    }
+
+    /**
+     * Method to parse user input to change existing trip's name
+     *
+     * @param tokens String[] of user input split by " "
+     */
+    private static ModifyTripCommand commandSetName(String[] tokens) {
         String oldName = null;
         String newName = null;
+        boolean oldNameEntered = false;
+        boolean newNameEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/old":
-                oldName = addWordAfterSeparator(tokens, oldName, i);
+                oldName = addWordsAfterSeparator(tokens, i);
+                oldNameEntered = true;
                 break;
             case "/new":
-                newName = addWordAfterSeparator(tokens, newName, i);
+                newName = addWordsAfterSeparator(tokens, i);
+                newNameEntered = true;
                 break;
             default:
                 //No flags found
                 break;
             }
         }
-        Trip mainTrip = findTripByName(oldName);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
+
+        //TODO: change for exception
+        if (!oldNameEntered) {
+            System.out.println("You are missing /old <name>");
+            throw new IllegalArgumentException("You are missing /old <name>");
         }
-        mainTrip.setName(newName);
-        System.out.println("Name set to: " + newName);
+        if (!newNameEntered) {
+            System.out.println("You are missing /new <name>");
+            throw new IllegalArgumentException("You are missing /new <name>");
+        }
+
+        String[] args = {oldName, "name", newName};
+        return new ModifyTripCommand(args);
     }
 
-    private void setDates(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+    /**
+     * Method to parse user input to change existing trip's dates
+     *
+     * @param tokens String[] of user input split by " "
+     */
+    private static Command commandSetDates(String[] tokens) {
+        String tripName = null;
         String start = "-";
         String end = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/start") && i + 1 < tokens.length) {
+        boolean nameEntered = false;
+        boolean startEntered = false;
+        boolean endEntered = false;
+        for (int i = 0; i < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, i);
+                nameEntered = true;
+                break;
+            case "/start":
                 start = tokens[i + 1];
-            } else if (tokens[i].toLowerCase().equals("/end") && i + 1 < tokens.length) {
+                startEntered = true;
+                break;
+            case "/end":
                 end = tokens[i + 1];
+                endEntered = true;
+                break;
+            default:
+                break;
             }
         }
-
-        try {
-            Date startDate = dateFormat.parse(start);
-            Date endDate = dateFormat.parse(end);
-            mainTrip.setDates(startDate, endDate);
-            System.out.println("Dates set successfully.");
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            throw new IllegalArgumentException("You are missing /n <name>");
         }
+
+        if (!startEntered || !endEntered) {
+            System.out.println("You are missing /start <date> or /end <date");
+            throw new IllegalArgumentException("You are missing /start <date> or /end <date");
+        }
+
+        String[] args = {tripName, "dates", start, end};
+        return new ModifyTripCommand(args);
+
     }
 
-    private void setLocation(String[] tokens) {
+    /**
+     * Method to parse user input to change existing trip's location
+     *
+     * @param tokens String[] of user input split by " "
+     */
+    private static Command commandSetLocation(String[] tokens) {
         String tripName = null;
         String location = "-";
+        boolean nameEntered = false;
+        boolean locationEntered = false;
         for (int i = 0; i + 1 < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                tripName = addWordAfterSeparator(tokens, tripName, i);
+                tripName = addWordsAfterSeparator(tokens, i);
+                nameEntered = true;
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, i);
+                locationEntered = true;
                 break;
             default:
-                //No flags found
                 break;
             }
         }
-        Trip mainTrip = findTripByName(tripName);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            throw new IllegalArgumentException("You are missing /n <name>");
         }
-        mainTrip.setLocation(location);
-        System.out.println("Location set to: " + location);
+        if (!locationEntered) {
+            System.out.println("You are missing /location <location");
+            throw new IllegalArgumentException("You are missing /location <location");
+        }
+
+        String[] args = {tripName, "location", location};
+        return new ModifyTripCommand(args);
     }
 
-    private void setDescription(String[] tokens) {
-        Trip mainTrip = findTripByName(tokens[1]);
-        if (mainTrip == null) {
-            System.out.println("Trip not found: " + tokens[1]);
-            return;
-        }
-
+    /**
+     * Method to parse user input to change existing trip's description
+     *
+     * @param tokens String[] of user input split by " "
+     */
+    private static Command commandSetDescription(String[] tokens) {
+        String tripName = null;
         String description = "-";
-        for (int i = 2; i < tokens.length; i++) {
-            if (tokens[i].toLowerCase().equals("/d") && i + 1 < tokens.length) {
-                description = addWordAfterSeparator(tokens, description, i);
+        boolean nameEntered = false;
+        boolean descriptionEntered = false;
+        for (int i = 0; i + 1 < tokens.length; i++) {
+            switch (tokens[i].toLowerCase()) {
+            case "/n":
+                tripName = addWordsAfterSeparator(tokens, i);
+                break;
+            case "/d":
+                description = addWordsAfterSeparator(tokens, i);
+                descriptionEntered = true;
+                break;
+            default:
                 break;
             }
         }
-        mainTrip.setDescription(description);
-        System.out.println("Description set to: " + description);
-    }
-
-    protected Trip findTripByName(String tripName) {
-        for (Trip trip : tripsList) {
-            if (trip.getName().equals(tripName)) {
-                return trip;
-            }
+        if (!nameEntered) {
+            System.out.println("You are missing /n <name>");
+            throw new IllegalArgumentException("You are missing /n <name>");
         }
-        return null;
-    }
 
-    public void listAll() {
-        System.out.println("Index\tName\tStart Date\tEnd Date\tLocation\tDescription");
-        for (int i = 0; i < tripsList.size(); i++) {
-            Trip trip = tripsList.get(i);
-            String startDateStr = trip.getStartDate().equals(DEFAULT_START) ?
-                    "-" : printDateFormat.format(trip.getStartDate());
-            String endDateStr = trip.getEndDate().equals(DEFAULT_END) ? "-" : printDateFormat.format(trip.getEndDate());
-            System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\n", i, trip.getName(), startDateStr,
-                    endDateStr, trip.getLocation(), trip.getDescription());
+        if (!descriptionEntered) {
+            System.out.println("You are missing /n <name> or /d <description");
+            throw new IllegalArgumentException("You are missing /n <name> or /d <description");
         }
+
+        String[] args = {tripName, "description", description};
+        return new ModifyTripCommand(args);
     }
 
-    private void addMainTrip(String[] tokens) {
+    /**
+     * Method to print a list of all trips
+     */
+
+    private static Command listAll() {
+        return new ListCommand();
+    }
+
+    /**
+     * Method to parse user input to add a new main trip
+     *
+     * @param tokens String[] of user input split by " "
+     */
+    private static Command commandAddMainTrip(String[] tokens) {
         StringBuilder sentenceBuilder = new StringBuilder();
         String name = "-";
         String start = "-";
         String end = "-";
         String location = "-";
         String description = "-";
-
+        //Loop through user input words to find flag-content pairs
         for (int i = 1; i < tokens.length; i++) {
             switch (tokens[i].toLowerCase()) {
             case "/n":
-                name = addWordAfterSeparator(tokens, name, i);
+                name = addWordsAfterSeparator(tokens, i);
                 break;
             case "/start":
                 if (i + 1 < tokens.length) {
@@ -205,10 +294,10 @@ public class Parser {
                 }
                 break;
             case "/d":
-                description = addWordAfterSeparator(tokens, description, i);
+                description = addWordsAfterSeparator(tokens, i);
                 break;
             case "/location":
-                location = addWordAfterSeparator(tokens, location, i);
+                location = addWordsAfterSeparator(tokens, i);
                 break;
             default:
                 //No flags found
@@ -216,20 +305,15 @@ public class Parser {
             }
         }
 
-        if (tripNameExists(name)) {
-            System.out.println("A trip with the name '" + name + "' already exists. Cannot create another main trip " +
-                    "with the same name.");
-            return;
-        }
-
         try {
+            //check if name has was inputted
             if (name == "-") {
                 System.out.println("You cannot leave name empty when creating a new main trip.");
-                return;
+                throw new IllegalArgumentException("Name cannot be empty.");
             }
             Date startDate = start.equals("-") ? DEFAULT_START : dateFormat.parse(start);
             Date endDate = end.equals("-") ? DEFAULT_END : dateFormat.parse(end);
-
+            //check if only partial info is provided (name must be entered)
             if (isPartialTripInfo(name, startDate, endDate, location, description)) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("You are about to add a trip with the following information:");
@@ -239,65 +323,61 @@ public class Parser {
                 System.out.println("Location: " + location);
                 System.out.println("Description: " + description);
                 System.out.println("Confirm? (Y/N)");
+                //print to user asking for confirmation of partial trip info
                 String confirmation = null;
                 while (confirmation == null) {
                     confirmation = scanner.nextLine().toLowerCase();
                 }
                 if (!confirmation.toLowerCase().equals("y")) {
                     System.out.println("Add main trip aborted");
-                    return;
+                    return new EmptyCommand();
                 }
             }
 
-            Trip newTrip = new Trip(name, startDate, endDate, location, description);
-            tripsList.add(newTrip);
-            System.out.println("Main trip added successfully.");
+            // print start date in the format yyyy-MM-dd
+            String startDateString = dateFormat.format(startDate);
+            String endDateString = dateFormat.format(endDate);
+            String[] args = {name, startDateString, endDateString, location, description};
+            return new AddTripCommand(args);
+
         } catch (ParseException e) {
             System.out.println("Invalid date format for main trip. Please use yyyy-MM-dd.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+
+        return new EmptyCommand();
     }
 
-    private String addWordAfterSeparator(String[] tokens, String name, int i) {
+    /**
+     * Method to concatenate words until the end of the String[] tokens or until the next "/"
+     *
+     * @param tokens user input split by " "
+     * @param i      index of the current word in the String[] tokens
+     * @return sentence String name with concatenated words
+     */
+
+    private static String addWordsAfterSeparator(String[] tokens, int i) {
+        String sentence = null;
         if (i + 1 < tokens.length) {
             StringBuilder nameBuilder = new StringBuilder();
             for (int j = i + 1; j < tokens.length && !(tokens[j].startsWith("/")); j++) {
                 nameBuilder.append(tokens[j]).append(" ");
             }
-            name = nameBuilder.toString().trim();
+            sentence = nameBuilder.toString().trim();
         }
-        return name;
+        return sentence;
     }
 
 
-    private boolean tripNameExists(String name) {
-        for (Trip trip : tripsList) {
-            if (trip.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+
+    private static boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location,
+                                             String description) {
+        return startDate == DEFAULT_START || endDate == DEFAULT_END || location.isEmpty() || description.isEmpty();
     }
 
-    private boolean isPartialTripInfo(String name, Date startDate, Date endDate, String location, String description) {
-        if (startDate == DEFAULT_START || endDate == DEFAULT_END
-                || location.isEmpty() || description.isEmpty()) {
-            return true;
-        }
-        return false;
+    private static Command deleteMainTrip(String[] tokens) {
+        String[] args = {tokens[1]};
+        return new DeleteCommand(args);
     }
-
-    private void deleteMainTrip(String[] tokens) {
-        String tripName = tokens[1];
-        Trip tripToDelete = findTripByName(tripName);
-        if (tripToDelete == null) {
-            System.out.println("Trip not found: " + tripName);
-            return;
-        }
-
-        tripsList.remove(tripToDelete);
-        System.out.println("Main trip '" + tripName + "' deleted successfully.");
-    }
-
 }
