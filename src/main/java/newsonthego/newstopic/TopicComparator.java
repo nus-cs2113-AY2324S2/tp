@@ -1,4 +1,4 @@
-package newsonthego;
+package newsonthego.newstopic;
 
 import java.util.Comparator;
 

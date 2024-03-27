@@ -1,6 +1,7 @@
 package newsonthego;
 
 
+import newsonthego.newstopic.NewsTopic;
 import newsonthego.ui.UI;
 import java.util.ArrayList;
 import java.util.List;
