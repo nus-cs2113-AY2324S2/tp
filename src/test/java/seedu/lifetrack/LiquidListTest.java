@@ -14,19 +14,19 @@ public class LiquidListTest {
     @Test
     public void testDeleteLiquidValidIndex() {
         LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
+        liquidList.addEntry("hydration add Milo v/200 date/220224");
         int initialSize = liquidList.getSize();
-        liquidList.deleteEntry("delete liquids 1");
+        liquidList.deleteEntry("hydration delete 1");
         assertEquals(initialSize - 1, liquidList.getSize());
     }
 
     @Test
     public void testDeleteLiquidInvalidIndex() {
         LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
+        liquidList.addEntry("hydration add Milo v/200 date/220224");
         int initialSize = liquidList.getSize();
-        liquidList.deleteEntry("delete liquids 2"); // Index out of bounds
-        liquidList.deleteEntry("delete liquids -1");
+        liquidList.deleteEntry("hydration delete 2"); // Index out of bounds
+        liquidList.deleteEntry("hydration delete -1");
         assertEquals(initialSize, liquidList.getSize());
     }
 
@@ -49,7 +49,7 @@ public class LiquidListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
+        liquidList.addEntry("hydration add Milo v/200 date/220224");
         liquidList.printLiquidList();
         System.setOut(System.out);
         String expectedOutput = "\t Beverage has been successfully added" + lineSeparator +
@@ -64,9 +64,9 @@ public class LiquidListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         LiquidList liquidList = new LiquidList();
-        liquidList.addEntry("liquids in b/Milo v/200");
-        liquidList.addEntry("liquids in b/Water v/300");
-        liquidList.addEntry("liquids in b/Juice v/150");
+        liquidList.addEntry("hydration add Milo v/200 date/220224");
+        liquidList.addEntry("hydration add Water v/300 date/220224");
+        liquidList.addEntry("hydration add Juice v/150 date/220224");
         liquidList.printLiquidList();
         System.setOut(System.out);
         String expectedOutput = "\t Beverage has been successfully added" + lineSeparator +

@@ -88,6 +88,8 @@ public class LiquidList {
      * @param input the input string containing liquid entry information
      */
     public void addEntry(String input) {
+        assert (input.startsWith("hydration in"))
+                : "ensures that input is correct";
         try {
             Entry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);

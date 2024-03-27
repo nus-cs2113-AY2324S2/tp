@@ -17,6 +17,10 @@ public class ErrorMessages {
         return "\t Please input only positive integers into the calories field!";
     }
 
+    public static String getIncorrectVolumeInputMessage() {
+        return "\t Please input only positive integers into the volume field!";
+    }
+
     public static String getIncorrectMacrosInputMessage() {
         return "\t Please input only positive integers into the macronutrients field!";
     }

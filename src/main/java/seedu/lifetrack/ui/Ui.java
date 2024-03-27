@@ -61,11 +61,11 @@ public class Ui {
 
     public static void handleLiquidsInput(String line, LiquidList liquidsList) {
         assert !line.startsWith("bye") : "exit the app";
-        if (line.startsWith("liquids in") || line.startsWith("liquids out")) {
+        if (line.startsWith("hydration in")) {
             liquidsList.addEntry(line);
-        } else if (line.startsWith("liquids list")) {
+        } else if (line.startsWith("hydration list")) {
             liquidsList.printLiquidList();
-        } else if (line.startsWith("liquids delete")) {
+        } else if (line.startsWith("hydration delete")) {
             liquidsList.deleteEntry(line);
         } else {
             handleUnknownInput();
@@ -95,7 +95,7 @@ public class Ui {
                 handleCaloriesInput(line, calorieList);
             } else if (line.startsWith("help")) {
                 showHelp();
-            } else if (line.startsWith("liquids")) {
+            } else if (line.startsWith("hydration")) {
                 handleLiquidsInput(line, liquidList);
             } else if (line.startsWith("sleep")) {
                 handleSleepInput(line, sleepList);
@@ -135,13 +135,14 @@ public class Ui {
     public static void showHelp() {
         System.out.println("\t LifeTrack Command List:");
         System.out.println("\t - help: Displays a list of available commands and their descriptions.");
-        System.out.println("\t - calories in/out <activity> c/<number of calories> d/<date>: " +
+        System.out.println("\t - calories in/out <activity> c/<number of calories> date/<date>: " +
                 "Adds a calorie gaining/burning entry into the calories tracker.");
         System.out.println("\t - calories list: Displays all entries currently stored in the calorie list.");
         System.out.println("\t - calories delete <index>: Deletes the entry at the specified index" +
                 " from the calorie list.");
-        System.out.println("\t - liquids in b/<type of beverage> v/<volume> : " +
+        System.out.println("\t - hydration add <type of beverage> v/<volume> date/<date>: " +
                 "Marks the task at the specified index as done.");
+        System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.\"");
         System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
         System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>.\"");
         System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.\"");

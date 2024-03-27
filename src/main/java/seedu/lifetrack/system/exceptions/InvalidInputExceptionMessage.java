@@ -8,8 +8,7 @@ public class InvalidInputExceptionMessage {
     private static final String CALORIES_OUT_INPUT = "\t Example input: calories out DESCRIPTION " +
             "c/INTEGER_CALORIES date/DATE";
     private static final String MACROS_INPUT = "\t Example input: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT";
-
-    private static final String HYDRATION_IN_INPUT = "\t Example input: liquids in b/Milo v/1000" ;
+    private static final String HYDRATION_IN_INPUT = "\t Example input: liquids in Milo v/1000 date/221024" ;
 
     public static String getIncorrectOrderMessage() {
         String message = "\t Please ensure that you have keyed in the correct format in the correct order!\n";
@@ -55,7 +54,7 @@ public class InvalidInputExceptionMessage {
         return HEADER + message + HYDRATION_IN_INPUT;
     }
 
-    public static String getHydrationNonIntegerVolumeMessage() {
+    public static String getHydrationNegativeIntegerVolumeMessage() {
         String message = "\t Please ensure that positive integer value is keyed in for volume!\n";
         return HEADER + message + HYDRATION_IN_INPUT;
     }
