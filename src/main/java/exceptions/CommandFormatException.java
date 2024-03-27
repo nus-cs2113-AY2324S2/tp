@@ -17,6 +17,9 @@ public class CommandFormatException extends Exception{
         case EDIT:
             System.out.println(Messages.INVALID_EDIT_FORMAT);
             break;
+        case SELL:
+            System.out.println(Messages.INVALID_SELL_FORMAT);
+            break;
         case FIND:
             System.out.println(Messages.INVALID_FIND_FORMAT);
             break;
@@ -27,6 +30,20 @@ public class CommandFormatException extends Exception{
             System.out.println(Messages.INVALID_COMMAND);
             break;
         }
+
+    }
+
+    public CommandFormatException(String error) {
+        switch (error) {
+
+        case "SELL_PRICE":
+            System.out.println(Messages.INVALID_SELL_PRICE);
+            break;
+        default:
+            System.out.println("Error Detected");
+        }
+
+
 
     }
 }
