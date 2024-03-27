@@ -7,14 +7,14 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class SellCommand extends Command{
-    private static final Logger logger = Logger.getLogger(SellCommand.class.getName());
-    private static final BinBashLogger binBashLogger = new BinBashLogger(SellCommand.class.getName());
     public static final String COMMAND = "sell";
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
             "sell\\s+"
                     + "n/(?<itemName>.+?)(?=q/)"
                     + "q/(?<sellQuantity>.+)"
     );
+    private static final Logger logger = Logger.getLogger(SellCommand.class.getName());
+    private static final BinBashLogger binBashLogger = new BinBashLogger(SellCommand.class.getName());
     private final String itemName;
     private final int sellQuantity;
 
