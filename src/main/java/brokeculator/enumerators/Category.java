@@ -1,8 +1,9 @@
 package brokeculator.enumerators;
 
 import brokeculator.dashboard.Dashboard;
-import brokeculator.exceptions.BrokeculatorException;
 import brokeculator.expense.Expense;
+import brokeculator.storage.parsing.FileKeyword;
+import brokeculator.storage.parsing.SaveableType;
 
 
 import java.util.ArrayList;
@@ -62,10 +63,12 @@ public class Category {
         }
         return sb.toString();
     }
-    public static String getStringRepresentation() {
+    public static String getCategoriesStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         for (String category : categories) {
-            sb.append(category).append(System.lineSeparator());
+            String finalExpenseString = FileKeyword.formatWithKeyword(SaveableType.CATEGORY, category);
+            sb.append(finalExpenseString);
+            sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
