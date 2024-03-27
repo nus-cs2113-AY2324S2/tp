@@ -143,11 +143,15 @@ The implementation of the Typing Game is as follows:
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|------|---------------------------|-------------------------------------------------------------|
+| v1.0    |new user| see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    |user| find a to-do item by name | locate a to-do without having to go through the entire list |
+| v2.0    |user| see different game ending from different decision made in game | gain a sense of satisfaction when good ending happens |
+| v2.0    |user| have 3-4 saved progresses        | choose the progress based on my preference                              |
+| v2.0    |user| name each progress        | differentiate saved progresses                              |
+| v2.0    |user| delete saved progresses   | delete the saved data when the data has no use              |
+| v2.0    |advanced player| modify the saved file     | adjust my game infomation when possible                     |
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
