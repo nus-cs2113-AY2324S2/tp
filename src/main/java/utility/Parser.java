@@ -210,11 +210,12 @@ public class Parser {
         HealthList.addBmi(newBmi);
         Output.printAddBmi(newBmi);
     }
+
     /**
      * Validates Bmi details entered.
      *
      * @param bmiDetails List of strings representing BMI details.
-     * @throws CustomExceptions.InvalidInput If any strings are formatted wrongly.
+     * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
      */
     public static void validateBmiInput(String[] bmiDetails) throws CustomExceptions.InvalidInput {
         if (bmiDetails[1].isEmpty()
@@ -230,6 +231,7 @@ public class Parser {
         }
         validateDateInput(bmiDetails[3]);
     }
+
     //@@author syj02
     /**
      * Split user input into Bmi command, height, weight and date.
@@ -260,17 +262,65 @@ public class Parser {
      * @param userInput The user input string.
      */
     public static void parsePeriodInput(String userInput) throws CustomExceptions.InvalidInput {
-        String[] periodDetails = Period.getPeriod(userInput);
-
-        if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-        }
+        String[] periodDetails = splitPeriodInput(userInput);
+        validatePeriodInput(periodDetails);
         Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
-        if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
-        }
         HealthList.addPeriod(newPeriod);
         Output.printAddPeriod(newPeriod);
+    }
+
+    /**
+     * Split user input into Period command, start date and end date.
+     *
+     * @param input A user-provided string.
+     * @return An array of strings containing the extracted Period parameters.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     */
+    public static String[] splitPeriodInput(String input) throws CustomExceptions.InvalidInput {
+        String [] results = new String[HealthConstant.PERIOD_PARAMETERS];
+
+        if (!input.contains(HealthConstant.HEALTH_FLAG)
+                | !input.contains(HealthConstant.START_FLAG)
+                || !input.contains(HealthConstant.END_FLAG)) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
+        }
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
+        return results;
+    }
+
+    /**
+     * Validates Period details entered.
+     *
+     * @param periodDetails List of strings representing Period details.
+     * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
+     */
+    public static void validatePeriodInput(String[] periodDetails) throws CustomExceptions.InvalidInput {
+        if (periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
+        }
+
+        try {
+            validateDateInput(periodDetails[1]);
+        } catch (CustomExceptions.InvalidInput e) {
+            throw new CustomExceptions.InvalidInput("Invalid start date!" +
+                    System.lineSeparator() +
+                    e.getMessage());
+        }
+        try {
+            validateDateInput(periodDetails[2]);
+        } catch (CustomExceptions.InvalidInput e) {
+            throw new CustomExceptions.InvalidInput("Invalid end date!" +
+                    System.lineSeparator() +
+                    e.getMessage());
+        }
+
+        LocalDate startDate = parseDate(periodDetails[1]);
+        LocalDate endDate = parseDate(periodDetails[2]);
+        if (startDate.isAfter(endDate)) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
+        }
     }
 
     /**
