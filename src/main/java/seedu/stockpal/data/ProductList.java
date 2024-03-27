@@ -10,8 +10,12 @@ import seedu.stockpal.data.product.Name;
 import seedu.stockpal.data.product.Quantity;
 import seedu.stockpal.data.product.Description;
 import seedu.stockpal.data.product.Price;
+import seedu.stockpal.exceptions.InsufficientAmountException;
+import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
+import seedu.stockpal.exceptions.NoLowQuantityException;
 import seedu.stockpal.exceptions.PidNotFoundException;
 import seedu.stockpal.ui.Ui;
+
 import static seedu.stockpal.ui.Ui.printToScreen;
 import static seedu.stockpal.common.Messages.HORIZONTAL_LINE;
 
@@ -73,31 +77,63 @@ public class ProductList {
     }
 
     /**
-     * Return true if the increase in quantity is successful.
-     * Increases the quantity of the product with a specific PID.
+     * Method to call the driver code(updateQuantity) to increase quantity.
      *
-     * @param productIndex Product PID to update.
-     * @param amountToIncrease Quantity of product to decrease.
+     * @param productIndex The PID of the specific product
+     * @param amountToIncrease Amount to increase
+     * @return true if quantity is updated successfully and false if exception is thrown
      */
-    public boolean increaseAmount(int productIndex, Integer amountToIncrease) {
+    public boolean increaseAmountCaller(int productIndex, int amountToIncrease) {
         Product updatedProduct = products.get(productIndex);
-
-        return updatedProduct.increaseQuantity(amountToIncrease);
+        Quantity initialQuantity = updatedProduct.getQuantity();
+        return updateQuantity(initialQuantity, amountToIncrease, "increase");
     }
-
 
     /**
-     * Return true if the decrease of quantity is successful.
-     * Decreases the quantity of the product with a specific PID.
+     * Method to call the driver code(updateQuantity) to decrease quantity.
      *
-     * @param productIndex Product PID to update
-     * @param amountToDecrease Quantity of product to decrease
+     * @param productIndex The PID of the specific product
+     * @param amountToDecrease Amount to decrease
+     * @return true if quantity is updated successfully and false if exception is thrown
      */
-    public boolean decreaseAmount(int productIndex, Integer amountToDecrease) {
-
+    public boolean decreaseAmountCaller(int productIndex, int amountToDecrease) {
         Product updatedProduct = products.get(productIndex);
-        return updatedProduct.decreaseQuantity(amountToDecrease);
+        Quantity initialQuantity = updatedProduct.getQuantity();
+        return updateQuantity(initialQuantity, amountToDecrease, "decrease");
     }
+
+    /**
+     * Driver function to update the quantity of the products based on the
+     * operation (increase / decrease).
+     *
+     * @param initialQuantity initial quantity object
+     * @param amount Amount to increase/decrease
+     * @param operation Increase / decrease quantity
+     * @return true is quantity updated successfully, else false if exception thrown
+     */
+    private boolean updateQuantity(Quantity initialQuantity, int amount, String operation) {
+        assert amount > 0 : "Amount should be greater than zero.";
+        assert ("increase".equals(operation) || "decrease".equals(operation)) :
+                "Operation should be 'increase' or 'decrease'.";
+        try {
+            if ("increase".equals(operation)) {
+                initialQuantity.updateIncreaseQuantity(initialQuantity, amount);
+            } else {
+                initialQuantity.updateDecreaseQuantity(initialQuantity, amount);
+            }
+            initialQuantity.notifyLowQuantity(initialQuantity);
+            Ui.printToScreen("Quantity updated. " + initialQuantity);
+            return true;
+        } catch (InventoryQuantityOverflowException iqoe) {
+            Ui.printToScreen("Overflow detected. No change to quantity. " + initialQuantity);
+            return false;
+        } catch (InsufficientAmountException ise) {
+            Ui.printToScreen("Insufficient amount in inventory. " +
+                    "No change to quantity. " + initialQuantity);
+            return false;
+        }
+    }
+
 
     /**
      * @param productList ProductList object.
@@ -145,11 +181,13 @@ public class ProductList {
     }
 
     /**
-     * Checks if product is low in quantity
-     * If low, then prints out before the program exits
-     * Else, if no low quantity products at all, print out "No product with low quantity"
+     * Check if a product has low quantity.
+     * If it has low quantity, throw exception
+     *
+     * @throws NoLowQuantityException exception thrown when there are no
+     *          products with low quantity
      */
-    public void printLowQuantityProducts () {
+    public void checkLowQuantityProducts () throws NoLowQuantityException {
         boolean hasLowQuantity = false;
 
         Ui.printLowQuantityAlert();
@@ -162,10 +200,19 @@ public class ProductList {
                 hasLowQuantity = true;
             }
         }
-
         if (!hasLowQuantity) {
+            throw new NoLowQuantityException("No products with low quantity");
+        }
+    }
+
+    /**
+     * Driver function to print low quantity products from the product list.
+     */
+    public void printLowQuantityProducts () {
+        try {
+            checkLowQuantityProducts();
+        } catch (NoLowQuantityException nlqe) {
             Ui.printNoLowQuantity();
-            Ui.printToScreen(HORIZONTAL_LINE);
         }
     }
 }

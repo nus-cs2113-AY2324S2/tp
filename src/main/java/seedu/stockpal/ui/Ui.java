@@ -116,8 +116,6 @@ public final class Ui {
     }
 
 
-
-
     /**
      * Outputs the list of messages as lines ending with line separator
      * , and replace line-separators with platform independent line-separator.

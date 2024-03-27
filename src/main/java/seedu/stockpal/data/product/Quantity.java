@@ -26,6 +26,10 @@ public class Quantity implements CommandParameter {
         return this.quantity;
     }
 
+    public void updateQuantity(Integer newQuantity) {
+        quantity = newQuantity;
+    }
+
     public boolean isLowQuantityWarningPrinted() {
         return isLowQuantityWarningPrinted;
     }
@@ -43,17 +47,20 @@ public class Quantity implements CommandParameter {
      *         quantity is larger than the maximum integer INT can hold.
      */
 
-    public void updateIncreaseQuantity(Integer increaseQuantity) throws InventoryQuantityOverflowException {
+    public void updateIncreaseQuantity(Quantity quantity, Integer increaseQuantity)
+            throws InventoryQuantityOverflowException {
         logger.log(Level.INFO, "Updating quantity with increase: " + increaseQuantity);
         assert increaseQuantity != null : "Increase quantity cannot be null";
-        long tentativeQuantity = (long) quantity + (long) increaseQuantity;
+        long tentativeQuantity = (long) quantity.getQuantity() + (long) increaseQuantity;
         assert tentativeQuantity >= 0 : "Tentative Quantity cannot be negative";
+
         if (tentativeQuantity > MAX_QUANTITY) {
             logger.log(Level.WARNING, "Inventory overflow detected. No change to quantity.");
             throw new InventoryQuantityOverflowException("Overflow detected. No Change to quantity.");
         }
+
         assert tentativeQuantity <= MAX_QUANTITY : "Tentative quantity exceeds MAX_QUANTITY. Integer overflow detected";
-        quantity = (int) tentativeQuantity;
+        updateQuantity((int) tentativeQuantity);
         logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
     }
 
@@ -64,18 +71,25 @@ public class Quantity implements CommandParameter {
      * @throws InsufficientAmountException Exception thrown when the amount to decrease is
      *         larger than the current quantity.
      */
-    public void updateDecreaseQuantity(Integer decreaseQuantity) throws InsufficientAmountException {
+    public void updateDecreaseQuantity(Quantity quantity, Integer decreaseQuantity) throws InsufficientAmountException {
         logger.log(Level.INFO, "Updating quantity with decrease: " + decreaseQuantity);
         assert decreaseQuantity != null : "Decrease quantity cannot be null";
-        if (quantity >= decreaseQuantity) {
-            quantity -= decreaseQuantity;
-            assert quantity > 0 : "Quantity cannot be smaller than 0.";
+        int initialQuantity = quantity.getQuantity();
+        int newQuantity;
+
+        if (initialQuantity >= decreaseQuantity) {
+            newQuantity = initialQuantity - decreaseQuantity;
+            assert newQuantity >= 0 : "Quantity cannot be smaller than 0.";
             notifyLowQuantity(this);
-            logger.log(Level.INFO, "Quantity updated successfully to: " + quantity);
+            logger.log(Level.INFO, "Quantity updated successfully to: " + newQuantity);
         } else {
             logger.log(Level.WARNING, "Insufficient amount in inventory. No change to quantity. ");
             throw new InsufficientAmountException("Insufficient amount in inventory");
         }
+
+        updateQuantity(newQuantity);
+        logger.log(Level.INFO, "Quantity updated successfully to: " + newQuantity);
+
     }
 
     public boolean isNull() {

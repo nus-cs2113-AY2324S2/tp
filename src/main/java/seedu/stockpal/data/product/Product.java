@@ -1,9 +1,6 @@
 package seedu.stockpal.data.product;
 
 import seedu.stockpal.common.Messages;
-import seedu.stockpal.exceptions.InsufficientAmountException;
-import seedu.stockpal.exceptions.InventoryQuantityOverflowException;
-import seedu.stockpal.ui.Ui;
 
 public class Product {
     private Name name;
@@ -58,43 +55,6 @@ public class Product {
 
     public boolean isPidMatch(Pid pid) {
         return this.pid.equals(pid);
-    }
-
-
-    /**
-     * Return true if the increase in quantity is successful.
-     * Increase quantity of the product and throw exception if overflow detected
-     *
-     * @param amountToChange Quantity to increase by
-     */
-    public boolean increaseQuantity(Integer amountToChange) {
-        try {
-            quantity.updateIncreaseQuantity(amountToChange);
-            Ui.printToScreen("Quantity updated. " + quantity.toString());
-            return true;
-        } catch (InventoryQuantityOverflowException iqoe) {
-            Ui.printToScreen("Overflow detected. No change to quantity. " + quantity.toString());
-            return false;
-        }
-
-    }
-
-    /**
-     * Return true if the decrease in quantity is successful.
-     * Decrease quantity of the product and throw exception when outflow > current amount
-     *
-     * @param amountToChange Quantity to decrease by
-     */
-    public boolean decreaseQuantity(Integer amountToChange) {
-
-        try {
-            quantity.updateDecreaseQuantity(amountToChange);
-            Ui.printToScreen("Quantity updated. " + quantity.toString());
-            return true;
-        } catch (InsufficientAmountException iae) {
-            Ui.printToScreen("Insufficient amount in inventory. No change to quantity. " + quantity.toString());
-            return false;
-        }
     }
 
     @Override

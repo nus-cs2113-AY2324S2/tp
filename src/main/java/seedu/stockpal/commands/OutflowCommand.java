@@ -48,7 +48,7 @@ public class OutflowCommand extends TransactionActionCommand {
             return;
         }
         assert productList.getSize() > 0;
-        boolean updateSuccessful = productList.decreaseAmount(productIndex, amountToDecrease);
+        boolean updateSuccessful = productList.decreaseAmountCaller(productIndex, amountToDecrease);
 
         LOGGER.log(Level.INFO, Messages.MESSAGE_OUTFLOW_SUCCESS);
 
@@ -57,6 +57,7 @@ public class OutflowCommand extends TransactionActionCommand {
         }
     }
 
+    //@@author EdmundTangg
     /**
      * Creates a transaction and add to the transaction list.
      * @param transactionList transactionList object.
