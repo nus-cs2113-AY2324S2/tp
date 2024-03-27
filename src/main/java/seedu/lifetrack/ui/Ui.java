@@ -61,7 +61,7 @@ public class Ui {
 
     public static void handleLiquidsInput(String line, LiquidList liquidsList) {
         assert !line.startsWith("bye") : "exit the app";
-        if (line.startsWith("hydration add")) {
+        if (line.startsWith("hydration in")) {
             liquidsList.addEntry(line);
         } else if (line.startsWith("hydration list")) {
             liquidsList.printLiquidList();

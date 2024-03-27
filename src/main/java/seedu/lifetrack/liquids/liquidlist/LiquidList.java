@@ -1,7 +1,6 @@
 package seedu.lifetrack.liquids.liquidlist;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserLiquid;
 
@@ -66,7 +65,8 @@ public class LiquidList {
      * @param input the input string containing liquid entry information
      */
     public void addEntry(String input) {
-        assert (input.startsWith("hydration add") || input.startsWith("calories out")) : "ensures that input is correct";
+        assert (input.startsWith("hydration in"))
+                : "ensures that input is correct";
         try {
             LiquidEntry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);

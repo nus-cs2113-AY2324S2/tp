@@ -1,7 +1,5 @@
 package seedu.lifetrack.liquids.liquidlist;
 
-import seedu.lifetrack.liquids.Beverage;
-
 public class LiquidEntry {
     private String description;
     private int volume;
