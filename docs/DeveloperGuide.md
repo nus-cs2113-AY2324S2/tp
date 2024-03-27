@@ -151,15 +151,44 @@ The implementation of the Tic Tac Toe Game is as follows:
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|------|---------------------------|-------------------------------------------------------------|
-| v1.0    |new user| see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    |user| find a to-do item by name | locate a to-do without having to go through the entire list |
-| v2.0    |user| see different game ending from different decision made in game | gain a sense of satisfaction when good ending happens |
-| v2.0    |user| have 3-4 saved progresses        | choose the progress based on my preference                              |
-| v2.0    |user| name each progress        | differentiate saved progresses                              |
-| v2.0    |user| delete saved progresses   | delete the saved data when the data has no use              |
-| v2.0    |advanced player| modify the saved file     | adjust my game infomation when possible                     |
+| Version | As a ...         | I want to ...                                                  | So that I can ...                                           |
+|---------|------------------|----------------------------------------------------------------|-------------------------------------------------------------|
+| v1.0    | new user         | see usage instructions                                         | refer to them when I forget how to use the application      |
+| v1.0    | user             | view basic command list and game flow                          | navigate and start the game smoothly      |
+| v1.0    | user             | add my name to the programme                                   | have a personalised game interaction    |
+| v1.0    | user             | exit from the programme                                        | decide when to exit based on my own preferrence     |
+| v1.0    | user             | view my player or company status                               | know how much assets that I have      |
+| v2.0    | user             | find a to-do item by name                                      | locate a to-do without having to go through the entire list |
+| v2.0    | user             | restart the game                                               | reset the progess when a bad decision is made      |
+| v2.0    | user             | check current game progress via a progress percentage bar      | be clear about how many more task needs to be done to complete the game      |
+| v2.0    | user             | set finantial task to be completed                                                               | complete task to increase game progress      |
+| v2.0    | user             | track my in-game money flow                               | play the game more strategically      |
+| v2.0    | first-time user  | view tips for playing the game                              | familiarise with the game faster      |
+| v2.0    | first-time user  | view the background story of the game                              | have a better understanding on what the game is about      |
+| v2.0    | experienced user | perform employee hiring action                               | develop the virtual startup      |
+| v2.0    | user             | invest in virtual stock market                               | increase the earning for company development      |
+| v2.0    | user             | delete a task that has been created                               | start over with a new idea or approach      |
+| v2.0    | user             | have a reward system for completing each task                               | feel a sense of achievement when complete the task      |
+| v2.0    | player           | task with different challenge when entered command                               | feel more engaged to the game      |
+| v2.0    | user             | want to have random event at the end of each round                               | enjoy the uncertainty within the gameplay process      |
+| v2.0    | user             | save my personal profile                               | not to lose any progress when I play again      |
+| v2.0    | user             | see different game ending from different decision made in game | gain a sense of satisfaction when good ending happens |
+| v2.0    | user             | have 3-4 saved progresses                                      | choose the progress based on my preference                              |
+| v2.0    | user             | name each progress                                             | differentiate saved progresses                              |
+| v2.0    | user             | delete saved progresses                                        | delete the saved data when the data has no use              |
+| v2.0    | advanced player  | modify the saved file                                          | adjust my game infomation when possible                     |
+| v2.0    | user             | choose level of difficulties of the game                       | adjust the difficulties based on my skills      |
+| v2.0    | user             | learn different player skills                                  | complete mission and task easier      |
+| v2.0    | user             | have lucky draw to gain interesting rewards                    | feel the excitement and joy of the game     |
+| v2.0    | user             | get loan from the virtual bank                                 | use for the investment and expand the businesses     |
+| v2.0    | user             | negotiate with game NPCs                                       | feel more engaged to the game      |
+| v2.0    | busy-user        | save the game data into local                                  | continue the saved progress next time      |
+| v2.0    | first-time user  | see what actions I can do in different player level            | type correct command to complete the tasks     |
+| v2.0    | user             | trigger random event                                           | feel more insterested to the game     |
+
+
+
+
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
