@@ -49,14 +49,16 @@
 ### 6. Edit grocery amount after using a grocery
    * A `Grocery` stores its `amount` as an attribute. All `Grocery` objects are then stored in an ArrayList in `GroceryList`, which entirely handles the editing of the `amount`.
 
-![useAmt sequence diagram](./diagrams/GroceryAmtGroceryList.puml)
+<puml src="./diagrams/GroceryAmtGroceryList.puml" width="200" />
+
    * `GroceryList#editAmount()` is used to either decrease or directly set the `amount` of a `Grocery`. It takes in 2 parameters:
       1. details: String — User input read from `Scanner`.
       2. use: boolean — `true` decreases the `amount`, while `false` directly sets it.
    * To edit the `amount` after using a `Grocery`, the user inputs `use GROCERY a/AMOUNT`. 
 Our app then executes `GroceryList#editAmount()` with parameter `use = true`, as illustrated by the following sequence diagram.
 
-![useAmt sequence diagram](./diagrams/useAmt.puml)
+<puml src="./diagrams/useAmt.puml" width="300" />
+
    * Additional checks specific to `use` ensure that the user only inputs a valid `int`, or that the `amount` must not be 0 beforehand.
    * Any exceptions thrown come with a message to help the user remedy their specific issue, as displayed by the `Ui`.
 
