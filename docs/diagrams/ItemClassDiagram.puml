@@ -1,0 +1,50 @@
+@startuml
+
+abstract class Item {
+    # itemName: String
+    # itemDescription: String
+    # itemQuantity: Integer
+    # itemCostPrice: Double
+
+    + getItemName(): String
+    + getItemDescription(): String
+    + getItemQuantity(): Integer
+    + setItemQuantity(itemQuantity: Integer)
+    + getItemCostPrice(): Double
+    + toString(): String
+}
+
+class OperationalItem {
+    + toString(): String
+}
+
+class RetailItem {
+    - itemSalePrice: Double
+
+    + getItemSalePrice(): Double
+    + toString(): String
+}
+
+class PerishableOperationalItem{
+    - DATE_TIME_FORMATTER: DateTimeFormatter
+    - itemExpirationDate: LocalDate
+
+    + getItemExpirationDate(): String
+    + toString(): String
+}
+
+class PerishableRetailItem {
+    - DATE_TIME_FORMATTER: DateTimeFormatter
+    - itemExpirationDate: LocalDate
+
+    + getItemExpirationDate(): String
+    + toString(): String
+}
+
+Item <|-- OperationalItem
+Item <|-- RetailItem
+
+OperationalItem <|-- PerishableOperationalItem
+RetailItem <|-- PerishableRetailItem
+
+@enduml
