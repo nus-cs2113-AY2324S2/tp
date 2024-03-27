@@ -55,8 +55,7 @@ Inventory --> FindCommand : items
 deactivate Inventory
 
 loop until every item in items are checked
-    alt check if item contains the word
-    else word found
+    opt item contains the word
     FindCommand -> Ui : foundItem(item:String, index:int)
     activate Ui #e5c2ea
     Ui --> FindCommand
