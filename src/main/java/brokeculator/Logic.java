@@ -13,8 +13,8 @@ public class Logic {
         this.dashboard = dashboard;
     }
     public void run() {
-        loadExpensesFromFile();
         loadCategoriesFromFile();
+        loadExpensesFromFile();
         UI.greetUser();
         while (true) {
             try {

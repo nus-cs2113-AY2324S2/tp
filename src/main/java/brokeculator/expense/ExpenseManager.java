@@ -1,5 +1,6 @@
 package brokeculator.expense;
 
+import brokeculator.enumerators.Category;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
@@ -18,8 +19,12 @@ public class ExpenseManager {
         this.expenses = expenses;
     }
 
-    public void add(Expense expense) {
+    public String add(Expense expense) {
+        if (expense.getCategory() != null && !Category.isValidCategory(expense.getCategory())) {
+            return "Category does not exist";
+        }
         expenses.add(expense);
+        return "Added expense: " + expense;
     }
 
     public void delete(int index) {

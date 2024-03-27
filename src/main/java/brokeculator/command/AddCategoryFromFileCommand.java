@@ -10,7 +10,7 @@ public class AddCategoryFromFileCommand extends Command {
     }
     @Override
     public void execute(Dashboard dashboard) {
-        String category = fileString;
+        String category = fileString.toUpperCase();
         Category.addCategory(category);
     }
 }

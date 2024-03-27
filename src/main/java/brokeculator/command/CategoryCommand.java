@@ -15,18 +15,18 @@ public class CategoryCommand extends Command {
     public CategoryCommand(String subcommand) {
         this.subcommand = subcommand;
     };
-    public CategoryCommand(String subcommand, String value) {
+    public CategoryCommand(String subcommand, String categoryString) {
         this.subcommand = subcommand;
-        this.value = value;
+        this.value = categoryString;
     };
     @Override
     public void execute(Dashboard dashboard) {
         switch (subcommand) {
         case ADD_SUBCOMMAND:
-            addCategory(value);
+            addCategory(value.toUpperCase());
             break;
         case DELETE_SUBCOMMAND:
-            deleteCategory(value);
+            deleteCategory(value.toUpperCase());
             break;
         case LIST_SUBCOMMAND:
             listCategories();

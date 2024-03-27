@@ -1,5 +1,6 @@
 package brokeculator.expense;
 
+import brokeculator.enumerators.Category;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,9 @@ public class ExpenseManagerTest {
 
     @Test
     void testAdd() {
+        Category.addCategory("food");
+        Category.addCategory("transport");
+        Category.addCategory("entertainment");
         expenseManager.add(expense1);
         expenseManager.add(expense2);
         expenseManager.add(expense3);
@@ -26,6 +30,9 @@ public class ExpenseManagerTest {
 
     @Test
     void testDelete() {
+        Category.addCategory("food");
+        Category.addCategory("transport");
+        Category.addCategory("entertainment");
         expenseManager.add(expense1);
         expenseManager.add(expense2);
         expenseManager.add(expense3);
@@ -38,6 +45,9 @@ public class ExpenseManagerTest {
 
     @Test
     void testSummariseExpenses() {
+        Category.addCategory("food");
+        Category.addCategory("transport");
+        Category.addCategory("entertainment");
         expenseManager.add(expense1);
         expenseManager.add(expense2);
         expenseManager.add(expense3);
@@ -49,6 +59,9 @@ public class ExpenseManagerTest {
 
     @Test
     void testListExpenses() {
+        Category.addCategory("food");
+        Category.addCategory("transport");
+        Category.addCategory("entertainment");
         expenseManager.add(expense1);
         expenseManager.add(expense2);
         expenseManager.add(expense3);
@@ -65,6 +78,9 @@ public class ExpenseManagerTest {
 
     @Test
     void testGetExpensesStringRepresentation() {
+        Category.addCategory("food");
+        Category.addCategory("transport");
+        Category.addCategory("entertainment");
         expenseManager.add(expense1);
         expenseManager.add(expense2);
         expenseManager.add(expense3);

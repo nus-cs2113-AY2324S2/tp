@@ -21,10 +21,10 @@ public class Category {
         Category.dashboard = dashboard;
     }
     public static String addCategory(String category) {
-        if (categories.contains(category)) {
+        if (categories.contains(category.toUpperCase())) {
             return "Category already exists";
         }
-        categories.add(category);
+        categories.add(category.toUpperCase());
         return "Category added: " + category;
     }
     public static ArrayList<String> getCategoryList() {
