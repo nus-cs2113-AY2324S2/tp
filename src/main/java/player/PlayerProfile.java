@@ -1,8 +1,8 @@
 package player;
 
 public class PlayerProfile {
-    private final String name;
     public final String occupation;
+    private final String name;
     private final Health health;
     private final Asset asset;
 

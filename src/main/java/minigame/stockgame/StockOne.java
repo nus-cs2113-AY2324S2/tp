@@ -1,6 +1,5 @@
 package minigame.stockgame;
 
-import player.PlayerProfile;
 import ui.ResponseManager;
 
 public class StockOne implements Stock{

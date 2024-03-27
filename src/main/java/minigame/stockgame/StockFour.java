@@ -3,6 +3,16 @@ package minigame.stockgame;
 import ui.ResponseManager;
 
 public class StockFour implements Stock{
+
+    public static final String STOCK_INFORMATION =
+            "Demand for AI chip risen in multiple sectors. -CNN \n"
+                    + "GROQ AI chips, at what cost? -Economists \n"
+                    + "We are going to have a huge progress -Jack786 from X \n";;
+    public static final String STOCK_NAME = "Groq (Start up company)";
+    public static final String HIDDEN_INFO = "The progress of chip " +
+            "development currently is not too well";
+
+    public static final int STOCK_PRICE = 23;
     private static final String STOCK_GRAPH =
             "▲                                                           \n" +
             "│                                                           \n" +
@@ -27,15 +37,6 @@ public class StockFour implements Stock{
             "│                                                           \n" +
             "└──────────────────────────────────────────────────────────►\n";
 
-    public static final String STOCK_INFORMATION =
-            "Demand for AI chip risen in multiple sectors. -CNN \n"
-                    + "GROQ AI chips, at what cost? -Economists \n"
-                    + "We are going to have a huge progress -Jack786 from X \n";;
-    public static final String STOCK_NAME = "Groq (Start up company)";
-    public static final String HIDDEN_INFO = "The progress of chip " +
-            "development currently is not too well";
-
-    public static final int STOCK_PRICE = 23;
 
     public void printInfo() {
         ResponseManager.indentPrint(STOCK_GRAPH);
