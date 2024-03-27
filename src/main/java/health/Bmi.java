@@ -62,8 +62,8 @@ public class Bmi extends Health {
      *
      * @return The height recorded in the Bmi object.
      */
-    public double getHeight() {
-        return height;
+    public String getHeight() {
+        return String.format("%.2f", height);
     }
 
     /**
