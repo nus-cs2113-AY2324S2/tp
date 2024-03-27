@@ -48,4 +48,12 @@ public class TimetableTest {
         timetable.addCourse(new Course("MA1511", "Engineering Calculus", 2, 1, 1));
         assertTrue(timetable.removeCourse("MA1511"));
     }
+
+    @Test
+    public void addGrade_success() {
+        Timetable timetable = new Timetable();
+        Course course = new Course("CS1010", "Programming Methodology", 1, 1);
+        timetable.addGrade("CS1010", "B");
+        assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  CS1010: B" + System.lineSeparator() + "Term GPA: 5.00" + System.lineSeparator(), GradeChecker.checkGrade(timetable, 1, 1));
+    }
 }
