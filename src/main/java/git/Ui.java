@@ -227,7 +227,7 @@ public class Ui {
      */
     public static void printGroceryAdded(Grocery grocery) {
         assert !(grocery.getName().isEmpty()): "grocery name should not be empty";
-        System.out.println(grocery.getName() + "added!");
+        System.out.println(grocery.getName() + " added!");
     }
 
     /**
