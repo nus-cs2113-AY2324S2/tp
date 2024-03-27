@@ -152,7 +152,7 @@ public class Parser {
      */
     public static String parseHistoryAndLatestInput(String userInput) {
         try {
-            String type = Handler.extractSubstringFromSpecificIndex(userInput, UiConstant.VIEW_FLAG);
+            String type = Handler.extractSubstringFromSpecificIndex(userInput, UiConstant.ITEM_FLAG);
 
             if (type.isBlank()) {
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);

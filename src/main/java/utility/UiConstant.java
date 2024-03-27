@@ -35,7 +35,7 @@ public class UiConstant {
     public static final String SUCCESSFUL_LOAD = "Prior data found. Orbit has been synchronised.";
 
     // History
-    public static final String VIEW_FLAG = "/view:";
+    public static final String ITEM_FLAG = "/item:";
 
 
     // Numerical values
