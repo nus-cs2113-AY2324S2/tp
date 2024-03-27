@@ -9,6 +9,7 @@ import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.hydration.hydrationlist.HydrationList;
 import seedu.lifetrack.sleep.sleeplist.SleepList;
 import seedu.lifetrack.ui.Ui;
+import seedu.lifetrack.user.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,8 +34,9 @@ public class UITest {
         CalorieList calorieList = new CalorieList();
         HydrationList hydrationList = new HydrationList();
         SleepList sleepList = new SleepList();
+        User user = new User();
         String input = "bye";
-        Ui.handleUserInput(input, calorieList, hydrationList,sleepList);
+        Ui.handleUserInput(input, calorieList, hydrationList,user,sleepList);
         assertEquals("", outContent.toString());
     }
 }

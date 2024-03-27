@@ -3,6 +3,7 @@ package seedu.lifetrack.ui;
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.hydration.hydrationlist.HydrationList;
 import seedu.lifetrack.sleep.sleeplist.SleepList;
+import seedu.lifetrack.user.User;
 
 import java.util.Scanner;
 
@@ -30,14 +31,16 @@ public class Ui {
 
     /**
      * Reads in the input from the user
+     *
      * @param calorieList list containing all entries pertinent to calories
      * @param hydrationList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList, SleepList sleepList) {
+    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList,
+                                     User user, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList, hydrationList, sleepList);
+            handleUserInput(line, calorieList, hydrationList, user, sleepList);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
@@ -84,8 +87,8 @@ public class Ui {
         }
     }
 
-    public static void handleUserInput(String line, CalorieList calorieList,
-            HydrationList hydrationList, SleepList sleepList) {
+    public static void handleUserInput(String line, CalorieList calorieList, HydrationList hydrationList,
+                                       User user ,SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
@@ -99,10 +102,20 @@ public class Ui {
                 handleHydrationInput(line, hydrationList);
             } else if (line.startsWith("sleep")) {
                 handleSleepInput(line, sleepList);
+            } else if (line.startsWith("user")) {
+                handleUserCommands(line, user);
             } else {
                 handleUnknownInput();
             }
             printLine();
+        }
+    }
+
+    public static void handleUserCommands(String line, User user) {
+        if (line.contains("setup")) {
+            user.setUp(line);
+        } else if (line.contains("progress")) {
+            user.getHealthInfo();
         }
     }
 
@@ -150,7 +163,7 @@ public class Ui {
         System.out.println("\t - hydration delete <index>: Deletes the hydration entry at the specified index " +
                 "from the hydration list.");
         printLine();
-        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>: " + 
+        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>: " +
                 "Adds a sleep entry into the sleep tracker.");
         System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.");
         System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index " +
