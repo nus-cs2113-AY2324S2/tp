@@ -1,5 +1,6 @@
 package seedu.duke.modules;
 
+import seedu.duke.enums.CEGModules;
 import seedu.duke.exceptions.GpaNullException;
 import seedu.duke.exceptions.ModuleException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -14,10 +15,10 @@ import static seedu.duke.FAP.LOGGER;
 public class ModuleList {
     private static final int NUM_SEMESTERS = 8;
 
-    protected ArrayList<Module> takenModuleList;
+    protected ArrayList<Module> moduleList;
 
-    public ModuleList(int size) {
-        this.takenModuleList = new ArrayList<Module>(size);
+    public ModuleList() {
+        this.moduleList = new ArrayList<Module>();
     }
 
     public Module getModule(String courseCode) throws ModuleNotFoundException {
@@ -26,7 +27,7 @@ public class ModuleList {
         }
         courseCode = courseCode.toUpperCase(); // Convert once and reuse, improving efficiency
 
-        for (Module module : takenModuleList) {
+        for (Module module : moduleList) {
             if (module.getModuleCode().equals(courseCode)) {
                 return module;
             }
@@ -35,25 +36,27 @@ public class ModuleList {
     }
 
     public ArrayList<Module> getTakenModuleList() {
-        return takenModuleList;
+        return moduleList;
     }
 
     public void addModule(Module module) {
         if (module == null) {
             throw new IllegalArgumentException("Module cannot be null.");
         }
-        takenModuleList.add(module);
+        moduleList.add(module);
+        System.out.println("Added the new module: " + "\n" + module.getModuleDescription());
     }
 
     public void printModules() {
-        for (Module module:takenModuleList) {
+        for (Module module:moduleList) {
             System.out.println(module.getModuleCode());
         }
     }
+
     public void removeModule(Module module) {
         assert module != null : "Module cannot be null";
         // The remove operation returns false if the item was not found
-        boolean removed = takenModuleList.remove(module);
+        boolean removed = moduleList.remove(module);
         if (!removed) {
             System.out.println("Module not found in either list.");
         }
@@ -63,15 +66,15 @@ public class ModuleList {
         if (moduleCode == null || moduleCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Module code cannot be null or empty.");
         }
-        try{
+        try {
             Module toChange = getModule(moduleCode);
             toChange.setModuleGrade(grade);
             System.out.println("Grade for " + moduleCode + " updated to " + grade);
             assert toChange.getModuleGrade().equals(grade) : "Grade is not updated successfully";
 
-        } catch (ModuleNotFoundException e){
+        } catch (ModuleNotFoundException e) {
             System.out.println("Module not found in list");
-        } catch (ModuleException e){
+        } catch (ModuleException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -79,7 +82,8 @@ public class ModuleList {
     public double tallyGPA() throws GpaNullException {
         int totalMC = 0;
         double sumOfGPA = 0;
-        for (Module module : takenModuleList) {
+
+        for (Module module : moduleList) {
             if(module.getModuleGrade() == null || module.getModuleGrade().equals("CS") ||
                     module.getModuleGrade().equals("CU") ) {
                 continue;
@@ -87,11 +91,11 @@ public class ModuleList {
             totalMC += module.getModuleMC();
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
-        if(sumOfGPA == 0) {
+        if (sumOfGPA == 0) {
             LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
             throw new GpaNullException("No countable grades present to tally.");
         }
-        return sumOfGPA/(double)totalMC;
+        return sumOfGPA / (double) totalMC;
     }
 
     public Map<Integer, ArrayList<Module>> groupModulesBySemester() {
@@ -100,10 +104,29 @@ public class ModuleList {
             moduleBySemMap.put(i, new ArrayList<>());
         }
 
-        for (Module module : takenModuleList) {
+        for (Module module : moduleList) {
             moduleBySemMap.get(module.getModuleDate()).add(module);
         }
 
         return moduleBySemMap;
+    }
+
+    public boolean containsModule(String moduleCode) {
+        for (Module takenModule : moduleList) {
+            if (moduleCode.equals(takenModule.getModuleCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public ArrayList<String> getModulesToComplete() {
+        ArrayList<String> modulesToComplete = new ArrayList<>();
+        for (CEGModules cegModule : CEGModules.values()) {
+            if (!containsModule(cegModule.name())) {
+                modulesToComplete.add(cegModule.name());
+            }
+        }
+        return modulesToComplete;
     }
 }
