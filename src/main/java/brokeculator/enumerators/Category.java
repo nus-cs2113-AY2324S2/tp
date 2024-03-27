@@ -4,6 +4,7 @@ import brokeculator.dashboard.Dashboard;
 import brokeculator.exceptions.BrokeculatorException;
 import brokeculator.expense.Expense;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +14,8 @@ public class Category {
     private static Dashboard dashboard;
     private static boolean isDashboardSet = false;
     private static Set<String> categories = new HashSet<>();
-    public static void setDashboard(Dashboard dashboard) throws BrokeculatorException {
-        if(!Category.isDashboardSet) {
-            throw new BrokeculatorException("Dashboard has already been set");
-        }
+    public static void setDashboard(Dashboard dashboard) {
+        assert !isDashboardSet : "Dashboard should not be set twice";
         Category.isDashboardSet = true;
         Category.dashboard = dashboard;
     }
@@ -37,6 +36,9 @@ public class Category {
         if (isCategoryUsed(category)) {
             return "Cannot remove category that is in use";
         }
+        if (!categories.contains(category)) {
+            return "Category does not exist";
+        }
         categories.remove(category);
         return "Category removed: " + category;
     }
@@ -44,10 +46,27 @@ public class Category {
         assert dashboard != null : "Dashboard should not be null";
         ArrayList<Expense> expenseList = dashboard.getExpenseManager().listExpenses(LIST_ALL_EXPENSES);
         for (Expense expense : expenseList) {
+            if (expense.getCategory() == null) {
+                continue;
+            }
             if (expense.getCategory().equals(category)) {
                 return true;
             }
         }
         return false;
+    }
+    public static String getCategoryListString() {
+        StringBuilder sb = new StringBuilder();
+        for (String category : categories) {
+            sb.append("- ").append(category).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+    public static String getStringRepresentation() {
+        StringBuilder sb = new StringBuilder();
+        for (String category : categories) {
+            sb.append(category).append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 }
