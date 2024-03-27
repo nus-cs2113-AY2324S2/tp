@@ -131,7 +131,7 @@ public class Ui {
 
     //@@author ZhouJunmin
     public static void printInvalidInputGrade() {
-        System.out.println("The letter grade entered is invalid!\nPlease enter: A+/A/A-/B+/B/B-/C+/C/D+/D/F");
+        System.out.println("The letter grade entered is invalid!\nPlease enter: A+/A/A-/B+/B/B-/C+/C/D+/D/F/S/U/CS/CU");
     }
 
     public static void printFailedToWrite() {

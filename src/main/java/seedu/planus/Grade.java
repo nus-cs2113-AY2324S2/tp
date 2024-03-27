@@ -82,6 +82,10 @@ public class Grade {
             this.numberGrade = 1.00;
             break;
         case "F":
+        case "S":
+        case "U":
+        case "CS":
+        case "CU":
             this.numberGrade = 0.00;
             break;
         default:
