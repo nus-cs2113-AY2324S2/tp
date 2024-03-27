@@ -1,16 +1,23 @@
 package seedu.lifetrack.liquids.liquidlist;
 
-import seedu.lifetrack.liquids.Beverage;
-
 public class LiquidEntry {
-
-    private Beverage beverage;
-
-    public LiquidEntry(Beverage beverage){
-        this.beverage= beverage;
+    private String description;
+    private int volume;
+    private String date;
+    public LiquidEntry(String description, int volume, String date){
+        this.description = description;
+        this.volume = volume;
+        this.date = date;
+    }
+    public String getDescription() {
+        return description;
     }
 
-    public Beverage getBeverage() {
-        return beverage;
+    public int getVolume() {
+        return volume;
+    }
+
+    public String getDate() {
+        return date;
     }
 }
