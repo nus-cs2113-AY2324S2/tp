@@ -1,8 +1,6 @@
 package seedu.binbash.ui;
 
-import java.util.Scanner;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+import java.io.PrintStream;
 
 public class Ui {
     private static final String NEWLINE = System.lineSeparator();
@@ -12,15 +10,15 @@ public class Ui {
             " | |_) | | | | | |_) | (_| \\__ \\ | | |" + NEWLINE +
             " |____/|_|_| |_|____/ \\__,_|___/_| |_|" + NEWLINE + NEWLINE;
     private static final String WELCOME_MESSAGE = "Welcome to BinBash!";
-    private static final String GOODBYE_MESSAGE = "Bye!";
     private static final String LINE_DIVIDER = "-------------------------------------------------------------";
-    private static final Logger UILOGGER = Logger.getLogger("BinBashUi");
 
-    private final Scanner in;
-    private boolean isUserActive;
+    private static TextIn inputReader;
+    private static PrintStream outputWriter;
+    private static boolean isUserActive;
 
     public Ui() {
-        in = new Scanner(System.in);
+        inputReader = new TextIn();
+        outputWriter = System.out;
         isUserActive = true;
     }
 
@@ -34,22 +32,14 @@ public class Ui {
 
     public String readUserCommand() {
         assert isUserActive();
-        String userInput = in.nextLine();
-        UILOGGER.setLevel(Level.WARNING);
-        UILOGGER.log(Level.INFO, "received raw user input: " + userInput);
-        return userInput;
+        return inputReader.nextLine();
     }
 
     public void greet() {
         talk(LOGO + WELCOME_MESSAGE);
     }
 
-    public void farewell() {
-        assert !isUserActive();
-        talk(GOODBYE_MESSAGE);
-    }
-
     public void talk(String line) {
-        System.out.println(LINE_DIVIDER + NEWLINE + line + NEWLINE + LINE_DIVIDER);
+        outputWriter.println(LINE_DIVIDER + NEWLINE + line + NEWLINE + LINE_DIVIDER);
     }
 }

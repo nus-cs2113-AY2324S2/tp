@@ -4,12 +4,11 @@ import seedu.binbash.ItemList;
 
 public class ListCommand extends Command {
 
-    public ListCommand(ItemList itemList) {
-        super(itemList);
+    public ListCommand() {
         commandLogger.fine("Creating List Command...");
     }
 
-    public boolean execute() {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.printList(itemList.getItemList());
         return true;
     }

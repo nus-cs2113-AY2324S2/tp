@@ -9,8 +9,7 @@ public class SearchCommand extends Command {
     public static final Pattern COMMAND_FORMAT = Pattern.compile("search\\s+(?<keyword>.+?)\\s*$");
     private final String keyword;
 
-    public SearchCommand(ItemList itemList, String keyword) {
-        super(itemList);
+    public SearchCommand(String keyword) {
         this.keyword = keyword;
         commandLogger.fine(String.format(
                 "Creating Search Command... Keyword: %s",
@@ -18,7 +17,7 @@ public class SearchCommand extends Command {
         ));
     }
 
-    public boolean execute() {
+    public boolean execute(ItemList itemList) {
         executionUiOutput = itemList.searchItem(keyword);
         return true;
     }
