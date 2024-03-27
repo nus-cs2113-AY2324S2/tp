@@ -63,18 +63,18 @@ public class Expense implements Saveable {
         return category;
     }
 
-    public void placeInEvent(Event event) throws Exception{
-        if (this.owningEvent != null) {
-            throw new Exception("Expense is already in an event.");
-        }
-        this.owningEvent = event;
-    }
-
-    public void removeFromEvent() {
+    private void removeOwningEvent() {
         if (this.owningEvent == null) {
             return;
         }
         this.owningEvent.removeExpense(this);
+        this.owningEvent = null;
+    }
+
+    public void setOwningEvent(Event event) {
+        this.removeOwningEvent();
+        event.addExpense(this);
+        this.owningEvent = event;
     }
 
     /**
@@ -119,5 +119,9 @@ public class Expense implements Saveable {
             return String.format("%s $%.2f (%s)", description, amount, date);
         }
         return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
+    }
+
+    public boolean hasOwningEvent() {
+        return owningEvent != null;
     }
 }
