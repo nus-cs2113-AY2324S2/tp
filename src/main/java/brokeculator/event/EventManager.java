@@ -23,8 +23,13 @@ public class EventManager {
         events.add(event);
     }
 
-    public void removeEvent(Event event) {
-        events.remove(event);
+    public boolean isEventIdxValid(int idx) {
+        return idx >= 1 && idx <= events.size();
+    }
+
+    public void removeEvent(int idx) {
+        assert isEventIdxValid(idx);
+        events.remove(idx - 1);
     }
 
     public void printEvents() {
