@@ -15,10 +15,6 @@ import florizz.objects.Bouquet;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
-=======
-
->>>>>>> e34062b33e25e1494edf72f881641eac3d27b849
 
 public class Parser {
     private static Logger logger = Logger.getLogger(Florizz.class.getName());

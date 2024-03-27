@@ -6,6 +6,7 @@ public class Flower {
     private String name = "";
     private ArrayList<Occasion> occasions = null;
     private Colour colour = null;
+    private String price = "";
 
     public enum Colour {
         WHITE, BLUE, RED, PINK
@@ -19,16 +20,18 @@ public class Flower {
         this.name = "";
     }
 
-    public Flower(String name, Colour colour, ArrayList<Occasion> occasion) {
+    public Flower(String name, Colour colour, ArrayList<Occasion> occasion, String price) {
         this.name = name;
         this.occasions = occasion;
         this.colour = colour;
+        this.price = price;
     }
-    public Flower(String name, Colour colour, Occasion occasion) {
+    public Flower(String name, Colour colour, Occasion occasion, String price) {
         this.name = name;
         this.occasions = new ArrayList<Occasion>();
         occasions.add(occasion);
         this.colour = colour;
+        this.price = price;
     }
 
     public static Occasion stringToOccasion(String ocassionString){
@@ -60,6 +63,7 @@ public class Flower {
 
     @Override
     public String toString() {
-        return ("Name: " + name + "\n" + "Colours: " + colour.toString() + "\n" + "Occasions: " + occasions.toString());
+        return ("Name: " + name + "\n" + "Colours: " + colour.toString() + "\n" + "Occasions: " + occasions.toString()
+            + "\n" + "Price: " + price);
     }
 }
