@@ -1,0 +1,36 @@
+@startuml
+
+actor User as user
+participant "groceryList:GroceryList" as gl
+participant ":Grocery" as g
+participant "ui:Ui" as ui
+
+user -> gl : editAmount()
+activate gl
+
+gl -> gl : checkDetails()
+note right
+Ensures user input is valid
+end note
+activate gl
+return amtParts
+
+gl -> gl : getGrocery()
+activate gl
+return Grocery
+
+gl -> g : setAmount()
+activate g
+deactivate g
+
+alt finalAmount == 0
+    gl -> ui : printAmtDepleted()
+    activate ui
+else else
+    gl -> ui : printAmtSet()
+    activate ui
+end
+
+ui --> user : message
+
+@enduml

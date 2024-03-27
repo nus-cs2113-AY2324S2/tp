@@ -1,0 +1,13 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class GroceryList
+GroceryList : +editAmount(details : String, use : boolean)
+
+class Grocery
+Grocery : -amount : int
+
+GroceryList "1" ---> "*" Grocery : stores >
+
+
+@enduml
