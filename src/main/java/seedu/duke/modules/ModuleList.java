@@ -44,7 +44,7 @@ public class ModuleList {
             throw new IllegalArgumentException("Module cannot be null.");
         }
         moduleList.add(module);
-        System.out.println("Added the new module: " + "\n" + module.getModuleDescription());
+        System.out.println("Added the new module: " + module.getModuleCode() + "\n" + module.getModuleDescription());
     }
 
     public void printModules() {
