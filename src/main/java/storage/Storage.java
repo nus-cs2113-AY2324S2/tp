@@ -103,9 +103,9 @@ public class Storage {
                 Itemlist.addItem(toAdd);
             }
         } catch(FileNotFoundException e) {
-            System.out.println("File does not exist.");
+            //System.out.println("File does not exist.");
         } catch(NumberFormatException e) {
-            System.out.println("Invalid numbers found.");
+            //System.out.println("Invalid numbers found.");
         }
     }
 
