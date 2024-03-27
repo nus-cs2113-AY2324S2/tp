@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     private String inputCommand;
     private ArrayList<Book> sortedListOfBooks;
     private String[] splitCommand;
-    int numberOfBooks;
+    private int numberOfBooks;
 
 
     public ListCommand(ArrayList<Book> listOfBooks, String newItem) {
