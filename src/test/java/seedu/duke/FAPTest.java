@@ -35,44 +35,50 @@ public class FAPTest {
         System.setIn(testIn);
     }
 
+    private String buildExpectedOutput(String... lines) {
+        return String.join(System.lineSeparator(), lines) + System.lineSeparator();
+    }
+
     @Test
     public void testInit() {
-        String simulatedUserInput = "init n/bob\n";
+        String simulatedUserInput = "init n/bob" + System.lineSeparator();
         provideInput(simulatedUserInput);
 
         FAP.main(new String[]{});
 
-        String output = testOut.toString();
+        String output = testOut.toString().replace(System.lineSeparator(), "\n");
 
-        String expectedOutput =
-                "Hello! This is your CEG Future Academic Planner!\n" +
-                        "What can I do for you?\n" +
-                        "__________________________________________________\n" +
-                        "__________________________________________________\n" +
-                        "Hello bob!\n" +
-                        "What would you like to do today?\n" +
-                        "__________________________________________________\n" +
-                        "An error occurred: No line found\n";
+        String expectedOutput = buildExpectedOutput(
+                "Hello! This is your CEG Future Academic Planner!",
+                "What can I do for you?",
+                "__________________________________________________",
+                "__________________________________________________",
+                "Hello bob!",
+                "What would you like to do today?",
+                "__________________________________________________",
+                "An error occurred: No line found"
+        ).replace(System.lineSeparator(), "\n");
+
         assertTrue(output.contains(expectedOutput));
     }
 
     @Test
     public void invalidInitTest() {
-
-        String simulatedUserInput = "init n/";
+        String simulatedUserInput = "init n/" + System.lineSeparator();
         provideInput(simulatedUserInput);
         FAP.main(new String[]{});
-        String output = testOut.toString();
+        String output = testOut.toString().replace(System.lineSeparator(), "\n");
 
-        String expectedOutput =
-                "__________________________________________________\n" +
-                        "Hello! This is your CEG Future Academic Planner!\n" +
-                        "What can I do for you?\n" +
-                        "__________________________________________________\n" +
-                        "__________________________________________________\n" +
-                        "INVALID COMMAND\n" +
-                        "__________________________________________________\n" +
-                        "An error occurred: No line found\n";
+        String expectedOutput = buildExpectedOutput(
+                "__________________________________________________",
+                "Hello! This is your CEG Future Academic Planner!",
+                "What can I do for you?",
+                "__________________________________________________",
+                "__________________________________________________",
+                "INVALID COMMAND",
+                "__________________________________________________",
+                "An error occurred: No line found"
+        ).replace(System.lineSeparator(), "\n");
 
         assertTrue(output.contains(expectedOutput));
     }
