@@ -18,7 +18,7 @@ public class DeleteCommand extends Command{
             return;
         }
 
-        Trip trip = trips.remove(index - 1);
+        Trip trip = trips.remove(index);
         ui.echo("Noted. I've removed this trip:\n" + trip
                 + "\nNow you have " + trips.size() +
                 " trips in the list.");
