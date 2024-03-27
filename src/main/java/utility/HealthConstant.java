@@ -10,19 +10,19 @@ public class HealthConstant {
 
 
     // Flags
-    public static final String HEALTH_FLAG = "/h";
-    public static final String HEIGHT_FLAG = "/height";
-    public static final String WEIGHT_FLAG = "/weight";
-    public static final String DATE_FLAG = "/date";
-    public static final String START_FLAG = "/start";
-    public static final String END_FLAG = "/end";
-    public static final String TIME_FLAG = "/time";
-    public static final String DESCRIPTION_FLAG = "/description";
+    public static final String HEALTH_FLAG = "/h:";
+    public static final String HEIGHT_FLAG = "/height:";
+    public static final String WEIGHT_FLAG = "/weight:";
+    public static final String DATE_FLAG = "/date:";
+    public static final String START_FLAG = "/start:";
+    public static final String END_FLAG = "/end:";
+    public static final String TIME_FLAG = "/time:";
+    public static final String DESCRIPTION_FLAG = "/description:";
 
     // Parameters
-    public static final Integer BMI_PARAMETERS = 4;
-    public static final Integer PERIOD_PARAMETERS = 3;
-    public static final Integer APPOINTMENT_PARAMETERS = 4;
+    public static final Integer NUM_BMI_PARAMETERS = 3;
+    public static final Integer NUM_PERIOD_PARAMETERS = 2;
+    public static final Integer NUM_APPOINTMENT_PARAMETERS = 3;
 
 
     // Offset
@@ -77,7 +77,7 @@ public class HealthConstant {
     // PREDICTION
     public static final String PRINT_CYCLE_FORMAT = "Cycle Length: %d days";
     public static final Integer LATEST_THREE_CYCLE_LENGTHS = 3;
-    public static final Integer MINIMUM_SIZE_FOR_PREDICTION = 4;
+    public static final Integer MIN_SIZE_FOR_PREDICTION = 4;
     public static final String PREDICTED_START_DATE_MESSAGE ="Your next cycle's predicted start date is ";
     public static final String COUNT_DAYS_MESSAGE = ", in ";
     public static final String PERIOD_IS_LATE = ". Your period is late by ";

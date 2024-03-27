@@ -1,11 +1,6 @@
 package ui;
 
-import health.Appointment;
-import health.Bmi;
-import health.Health;
 import health.HealthList;
-import health.Period;
-
 import storage.DataFile;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
@@ -19,15 +14,9 @@ import workouts.WorkoutList;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
-
-import java.time.LocalDate;
 import java.util.Scanner;
-
 import storage.LogFile;
 import workouts.Workout;
-
-import static health.HealthList.showPeriodHistory;
-
 
 /**
  * Represents user input parsing and handling
@@ -207,77 +196,32 @@ public class Handler {
      */
     public static void handleHealth(String userInput) {
         try {
-            String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(HealthConstant.BMI)) {
-                String[] bmiDetails = Bmi.getBmi(userInput);
+            String typeOfHealth = extractSubstringFromSpecificIndex(userInput, HealthConstant.HEALTH_FLAG);
+            Filters parsedFilter = Filters.valueOf(typeOfHealth.toUpperCase());
+            switch(parsedFilter) {
+            case BMI:
+                Parser.parseBmiInput(userInput);
+                break;
 
-                if (bmiDetails[0].isEmpty()
-                        || bmiDetails[1].isEmpty()
-                        || bmiDetails[2].isEmpty()
-                        || bmiDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
+            case PERIOD:
+                Parser.parsePeriodInput(userInput);
+                break;
 
-                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
-                HealthList.addBmi(newBmi);
-                System.out.println(HealthConstant.BMI_ADDED_MESSAGE_PREFIX
-                        + bmiDetails[1]
-                        + UiConstant.LINE
-                        + bmiDetails[2]
-                        + UiConstant.LINE
-                        + bmiDetails[3]);
-                System.out.println(newBmi);
-            } else if (typeOfHealth.equals(HealthConstant.PERIOD)) {
-                String[] periodDetails = Period.getPeriod(userInput);
+            case PREDICTION:
+                Parser.parsePredictionInput();
+                break;
 
-                if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
+            case APPOINTMENT:
+                Parser.parseAppointmentInput(userInput);
+                break;
 
-                Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
-                if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
-                }
-
-                HealthList.addPeriod(newPeriod);
-                System.out.println(HealthConstant.PERIOD_ADDED_MESSAGE_PREFIX
-                        + periodDetails[1]
-                        + UiConstant.LINE
-                        + periodDetails[2]);
-                System.out.println(newPeriod);
-            } else if (typeOfHealth.equals(HealthConstant.PREDICT)) {
-                showPeriodHistory();
-                if (HealthList.getPeriodSize() >= HealthConstant.MINIMUM_SIZE_FOR_PREDICTION) {
-                    LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
-                    Period.printNextCyclePrediction(nextPeriodStartDate);
-                } else {
-                    throw new CustomExceptions.InsufficientInput(ErrorConstant.UNABLE_TO_MAKE_PREDICTIONS_ERROR);
-                }
-            } else if (typeOfHealth.equals(HealthConstant.APPOINTMENT)) {
-                String[] appointmentDetails = Appointment.getAppointment(userInput);
-
-                if (appointmentDetails[0].isEmpty()
-                        || appointmentDetails[1].isEmpty()
-                        || appointmentDetails[2].isEmpty()
-                        ||  appointmentDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
-
-                Appointment newAppointment = new Appointment(appointmentDetails[1],
-                        appointmentDetails[2],
-                        appointmentDetails[3]);
-
-                HealthList.addAppointment(newAppointment);
-                System.out.println(HealthConstant.APPOINTMENT_ADDED_MESSAGE_PREFIX
-                        + appointmentDetails[1]
-                        + UiConstant.LINE
-                        + appointmentDetails[2]
-                        + UiConstant.LINE
-                        + appointmentDetails[3]);
-                System.out.println(newAppointment);
+            default:
+                break;
             }
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+        } catch (CustomExceptions.InvalidInput |  CustomExceptions.InsufficientInput e) {
             Output.printException(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            Output.printException(ErrorConstant.HEALTH_INPUT_BLANK_ERROR);
         }
     }
 

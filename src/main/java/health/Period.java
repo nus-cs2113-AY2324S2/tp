@@ -1,6 +1,5 @@
 package health;
 
-import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.HealthConstant;
 import utility.Parser;
@@ -54,41 +53,6 @@ public class Period extends Health {
     public LocalDate getEndDate() {
         assert endPeriodDate != null : ErrorConstant.NULL_END_DATE_ERROR;
         return endPeriodDate;
-    }
-
-    /**
-     * Extracts the period information from the user input string.
-     *
-     * @param input A string consisting of period information
-     * @return An array of strings containing the appropriate health command, start date, and end date
-     * @throws CustomExceptions.InvalidInput if the input string does not contain the required parameters
-     */
-    public static String[] getPeriod(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.PERIOD_PARAMETERS];
-
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                | !input.contains(HealthConstant.START_FLAG)
-                || !input.contains(HealthConstant.END_FLAG)) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-        }
-
-        int indexH = input.indexOf(HealthConstant.HEALTH_FLAG);
-        int indexStart = input.indexOf(HealthConstant.START_FLAG);
-        int indexEnd = input.indexOf(HealthConstant.END_FLAG);
-
-        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexStart).trim();
-        String startSubstring = input.substring(indexStart + HealthConstant.START_DATE_OFFSET, indexEnd).trim();
-        String endSubstring = input.substring(indexEnd + HealthConstant.END_DATE_OFFSET).trim();
-
-        if (command.isEmpty() || startSubstring.isEmpty() || endSubstring.isEmpty()) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-        }
-
-        results[0] = command;
-        results[1] = startSubstring;
-        results[2] = endSubstring;
-
-        return results;
     }
 
     /**

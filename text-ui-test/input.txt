@@ -13,10 +13,10 @@ shoulder press /s:4 /r:5 /w:50,40,50,40
 deadlift /s:4 /r:5 /w:120,100,100,110
 history /item:gym
 latest /item:gym
-health /h:bmi /height:1.80 /weight:85 /date:19-03-2024
+health /h:bmi /height:1.80 /weight:85.00 /date:19-03-2024
 history /item:bmi
-health /h:bmi /height:2.0 /weight:45.42 /date:20-03-2024
-health /h:bmi /height:1.95 /weight:85.0 /date:21-03-2024
+health /h:bmi /height:2.00 /weight:45.42 /date:20-03-2024
+health /h:bmi /height:1.95 /weight:85.00 /date:21-03-2024
 history /item:bmi
 latest /item:bmi
 health /h:period /start:09-03-2022 /end:16-03-2022

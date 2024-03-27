@@ -24,7 +24,7 @@ public class AppointmentTest {
     @AfterEach
     void cleanup() {
         System.setOut(originalOut);
-        HealthList.clearAppointments();
+        HealthList.clearHealthLists();
         outContent.reset();
     }
 

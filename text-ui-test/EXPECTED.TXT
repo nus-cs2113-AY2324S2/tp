@@ -140,7 +140,7 @@ Station 2 deadlift: 4 sets
 	- Set 3. 5 reps at 100 KG
 	- Set 4. 5 reps at 110 KG
 ____________________________________________________________
-Added: bmi | 1.80 | 85 | 19-03-2024
+Added: bmi | 1.80 | 85.00 | 2024-03-19
 2024-03-19
 Your BMI is 26.23
 You're overweight.
@@ -150,11 +150,11 @@ Your BMI history:
 Your BMI is 26.23
 You're overweight.
 ____________________________________________________________
-Added: bmi | 2.0 | 45.42 | 20-03-2024
+Added: bmi | 2.00 | 45.42 | 2024-03-20
 2024-03-20
 Your BMI is 11.36
 You're underweight.
-Added: bmi | 1.95 | 85.0 | 21-03-2024
+Added: bmi | 1.95 | 85.00 | 2024-03-21
 2024-03-21
 Your BMI is 22.35
 Great! You're within normal range.
@@ -175,7 +175,7 @@ ____________________________________________________________
 Your BMI is 22.35
 Great! You're within normal range.
 ____________________________________________________________
-Added: period | 09-03-2022 | 16-03-2022
+Added: period | 2022-03-09 | 2022-03-16
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
 ____________________________________________________________
@@ -183,7 +183,7 @@ Your Period history:
 Period Start: 2022-03-09 Period End: 2022-03-16
 Period Length: 8 days
 ____________________________________________________________
-Added: period | 20-11-2022 | 22-12-2022
+Added: period | 2022-11-20 | 2022-12-22
 Period Start: 2022-11-20 Period End: 2022-12-22
 Period Length: 33 days
 ____________________________________________________________

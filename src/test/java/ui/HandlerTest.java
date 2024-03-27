@@ -43,10 +43,10 @@ class HandlerTest {
         System.setIn(originalIn);
         System.setErr(originalErr);
         WorkoutList.clearWorkoutsRunGym();
-        HealthList.clearBmisAndPeriods();
+        HealthList.clearHealthLists();
         Handler.destroyScanner();
         if (Handler.in == null){
-            return; // Scanner is already closed
+            return;
         }
         assert isScannerClosed(Handler.in) : "Scanner is not closed";
     }
@@ -101,13 +101,12 @@ class HandlerTest {
      */
     @Test
     void processInput_healthCommand_addBMIHealthData() {
-        String input = "HEALTH /h:bmi /height:1.70 /weight:65 /date:15-03-2024";
+        String input = "HEALTH /h:bmi /height:1.70 /weight:65.00 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         String output = outContent.toString();
-        assertTrue(output.contains("Added: bmi | 1.70 | 65 | 15-03-2024"));
+        assertTrue(output.contains("Added: bmi | 1.70 | 65.00 | 2024-03-15"));
     }
 
 
@@ -185,7 +184,6 @@ class HandlerTest {
                 ErrorConstant.INVALID_COMMAND_ERROR +
                 System.lineSeparator();
         assertEquals(expected, errContent.toString());
-        Handler.destroyScanner();
     }
 
     /**
@@ -197,9 +195,7 @@ class HandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Handler.initialiseScanner();
         Handler.processInput();
-
         assertTrue(errContent.toString().contains(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR));
-        Handler.destroyScanner();
     }
 
     /**

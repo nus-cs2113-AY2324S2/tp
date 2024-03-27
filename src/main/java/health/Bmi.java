@@ -1,5 +1,6 @@
 package health;
 
+import ui.Handler;
 import utility.Parser;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
@@ -56,7 +57,34 @@ public class Bmi extends Health {
         this.bmiCategory = getBmiCategory(bmiValue);
     }
 
-    //@@author syj02
+    /**
+     * Returns height recorded in Bmi object.
+     *
+     * @return The height recorded in the Bmi object.
+     */
+    public String getHeight() {
+        return String.format("%.2f", height);
+    }
+
+    /**
+     * Returns weight recorded in Bmi object.
+     *
+     * @return The weight recorded in the Bmi object.
+     */
+    public String getWeight() {
+        return String.format("%.2f", weight);
+    }
+
+    /**
+     * Returns date recorded in Bmi object.
+     *
+     * @return The date recorded in the Bmi object.
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+
     /**
      * Split user input into Bmi command, height, weight and date.
      *
@@ -64,35 +92,19 @@ public class Bmi extends Health {
      * @return An array of strings containing the extracted Bmi parameters.
      * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
      */
-    public static String[] getBmi(String input) throws CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.BMI_PARAMETERS];
+    public static String[] splitBmiInput(String input) throws CustomExceptions.InvalidInput {
+        String[] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
 
         if (!input.contains(HealthConstant.HEALTH_FLAG)
                 || !input.contains(HealthConstant.HEIGHT_FLAG)
                 || !input.contains(HealthConstant.WEIGHT_FLAG)
                 || !input.contains(HealthConstant.DATE_FLAG)) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-        }
-
-        int indexH = input.indexOf(HealthConstant.HEALTH_FLAG);
-        int indexHeight = input.indexOf(HealthConstant.HEIGHT_FLAG);
-        int indexWeight = input.indexOf(HealthConstant.WEIGHT_FLAG);
-        int indexDate = input.indexOf(HealthConstant.DATE_FLAG);
-
-        String command = input.substring(indexH + HealthConstant.H_OFFSET, indexHeight).trim();
-        String heightSubstring = input.substring(indexHeight + HealthConstant.HEIGHT_OFFSET, indexWeight).trim();
-        String weightSubstring = input.substring(indexWeight + HealthConstant.WEIGHT_OFFSET, indexDate).trim();
-        String dateSubstring = input.substring(indexDate + HealthConstant.DATE_OFFSET).trim();
-
-        if (command.isEmpty() || heightSubstring.isEmpty() || weightSubstring.isEmpty() || dateSubstring.isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-
-        results[0] = command;
-        results[1] = heightSubstring;
-        results[2] = weightSubstring;
-        results[3] = dateSubstring;
-
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
+        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
         return results;
     }
 

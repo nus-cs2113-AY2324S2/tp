@@ -199,7 +199,7 @@ public class Run extends Workout {
 
         // Check to see if date is valid
         if (!runDate.isBlank()) {
-            Parser.checkDateInput(runDate);
+            Parser.validateDateInput(runDate);
         }
         return true;
     }

@@ -46,15 +46,15 @@ public class Health {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HEALTH_INPUT_ERROR);
         }
 
-        if (isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS) {
+        if (isBmi && userInputs.length < HealthConstant.NUM_BMI_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
 
-        if (isPeriod && userInputs.length < HealthConstant.PERIOD_PARAMETERS) {
+        if (isPeriod && userInputs.length < HealthConstant.NUM_PERIOD_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
 
-        if (isAppointment && userInputs.length < HealthConstant.APPOINTMENT_PARAMETERS) {
+        if (isAppointment && userInputs.length < HealthConstant.NUM_APPOINTMENT_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
 

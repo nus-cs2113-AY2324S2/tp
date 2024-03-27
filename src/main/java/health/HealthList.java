@@ -27,6 +27,7 @@ public class HealthList extends ArrayList<Health> {
     public static void addBmi(Bmi bmi) {
         assert bmi != null : ErrorConstant.NULL_BMI_ERROR;
         bmis.add(bmi);
+
     }
 
     //@@author syj02
@@ -144,14 +145,14 @@ public class HealthList extends ArrayList<Health> {
      * Clears the Bmis and Periods array lists.
      * @throws AssertionError If periods and bmis lists are not empty
      */
-    public static void clearBmisAndPeriods() {
+    public static void clearHealthLists() {
         periods.clear();
         bmis.clear();
+        appointments.clear();
         assert bmis.isEmpty() : ErrorConstant.BMI_LIST_UNCLEARED_ERROR;
         assert periods.isEmpty() : ErrorConstant.PERIOD_LIST_UNCLEARED_ERROR;
+        assert appointments.isEmpty() : ErrorConstant.APPOINTMENT_LIST_UNCLEARED_ERROR;
     }
-    //@@author rouvinerh
-
 
     /**
      * Retrieves size of periods list.
@@ -181,9 +182,9 @@ public class HealthList extends ArrayList<Health> {
             throw new CustomExceptions.OutOfBounds(ErrorConstant.INVALID_INDEX_DELETE_ERROR);
         }
         Bmi deletedBmi = bmis.get(index);
-        System.out.println(String.format(HealthConstant.LOG_DELETE_BMI_FORMAT,
+        System.out.printf((HealthConstant.LOG_DELETE_BMI_FORMAT) + "%n",
                         deletedBmi.bmiValue,
-                        deletedBmi.date));
+                        deletedBmi.date);
         bmis.remove(index);
         LogFile.writeLog(HealthConstant.BMI_REMOVED_MESSAGE_PREFIX + index, false);
     }
@@ -198,9 +199,9 @@ public class HealthList extends ArrayList<Health> {
             throw new CustomExceptions.OutOfBounds(ErrorConstant.INVALID_INDEX_DELETE_ERROR);
         }
         Period deletedPeriod = periods.get(index);
-        System.out.println(String.format(HealthConstant.LOG_DELETE_PERIOD_FORMAT,
+        System.out.printf((HealthConstant.LOG_DELETE_PERIOD_FORMAT) + "%n",
                 deletedPeriod.getStartDate(),
-                deletedPeriod.getEndDate()));
+                deletedPeriod.getEndDate());
         periods.remove(index);
         LogFile.writeLog(HealthConstant.PERIOD_REMOVED_MESSAGE_PREFIX + index, false);
     }
@@ -219,10 +220,10 @@ public class HealthList extends ArrayList<Health> {
         }
         index -= 1;
         Appointment deletedAppointment = appointments.get(index);
-        System.out.println(String.format(HealthConstant.LOG_DELETE_APPOINTMENT_FORMAT,
+        System.out.printf((HealthConstant.LOG_DELETE_APPOINTMENT_FORMAT) + "%n",
                 deletedAppointment.date,
                 deletedAppointment.time,
-                deletedAppointment.description));
+                deletedAppointment.description);
         appointments.remove(index);
         LogFile.writeLog(HealthConstant.APPOINTMENT_REMOVED_MESSAGE_PREFIX + index, false);
         showAppointmentList();
@@ -236,9 +237,5 @@ public class HealthList extends ArrayList<Health> {
             System.out.println(appointment);
             index += 1;
         }
-    }
-    public static void clearAppointments() {
-        appointments.clear();
-        assert appointments.isEmpty() : ErrorConstant.APPOINTMENT_LIST_UNCLEARED_ERROR;
     }
 }

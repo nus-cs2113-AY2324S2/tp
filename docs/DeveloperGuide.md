@@ -2,12 +2,20 @@
 
 ## Acknowledgements
 
+Our team has referenced [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) 
+referenced for their [User Guide (UG)](https://se-education.org/addressbook-level3/UserGuide.html)
+and [Developer Guide (DG)](https://se-education.org/addressbook-level3/DeveloperGuide.html) to better structure our own Developer Guide.
+
 - The `java.util.Scanner` class from the Java Standard Library is used for reading user input.
 - The `JUnit 5` testing framework is used for writing and running unit tests.
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries
 -- include links to the original source as well}
 
-## Design & implementation
+
+## Introductiton
+
+
+The aim of this guide is to provide an explanation for all the functions and processing of information in PulsePilot. This is to enable any technical readers to get a detailed understanding of the application's internals.
 
 The application follows an Object-Oriented Design approach, with separate classes for handling different components
 of the application, such as user input, output, exercise logging, and health data management.
@@ -25,6 +33,20 @@ The LogFile class is used for logging application events and user actions to a l
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+This guide will include UML diagrams to better each component of our product. 
+
+## Design
+
+### Overview of Components
+
+`Main`
+
+- When PulsePilot is launched, it creates an instance of `PulsePilot`.
+
+`PulsePilot`
+
+- Upon creation, it initialises a `LogFile` and `DataFile` object to create log and data files for the bot.
+- The `initialiseBot()` function is called to retrieve the user's name. 
 
 ## Product scope
 ### Target user profile

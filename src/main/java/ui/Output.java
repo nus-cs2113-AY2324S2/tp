@@ -4,12 +4,16 @@ import utility.CustomExceptions;
 import utility.Filters;
 import utility.UiConstant;
 import utility.WorkoutConstant;
+import utility.HealthConstant;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
 import workouts.Workout;
 import workouts.WorkoutList;
 import health.HealthList;
+import health.Bmi;
+import health.Period;
+import health.Appointment;
 import java.util.ArrayList;
 
 public class Output {
@@ -91,6 +95,44 @@ public class Output {
     }
 
     /**
+     * Prints the message when a new Bmi is added.
+     *
+     * @param newBmi The new Bmi object added.
+     */
+    public static void printAddBmi(Bmi newBmi) {
+        System.out.println(HealthConstant.BMI_ADDED_MESSAGE_PREFIX
+                + newBmi.getHeight()
+                + UiConstant.LINE
+                + newBmi.getWeight()
+                + UiConstant.LINE
+                + newBmi.getDate());
+        System.out.println(newBmi);
+    }
+
+    /**
+     * Prints the message when a new Period is added.
+     *
+     * @param newPeriod The new Period object added.
+     */
+    public static void printAddPeriod(Period newPeriod) {
+        System.out.println(HealthConstant.PERIOD_ADDED_MESSAGE_PREFIX
+                + newPeriod.getStartDate()
+                + UiConstant.LINE
+                + newPeriod.getEndDate());
+        System.out.println(newPeriod);
+    }
+
+    public static void printAddAppointment(Appointment newAppointment) {
+        System.out.println(HealthConstant.APPOINTMENT_ADDED_MESSAGE_PREFIX
+                + newAppointment.getDate()
+                + UiConstant.LINE
+                + newAppointment.getTime()
+                + UiConstant.LINE
+                + newAppointment.getDescription());
+        System.out.println(newAppointment);
+    }
+
+    /**
      * Prints the text header when adding a new Gym.
      * @param gym The new Gym object added.
      */
@@ -129,7 +171,7 @@ public class Output {
     private static void printGymStats(Gym gym) {
         ArrayList<GymStation> allStations = gym.getStations();
         for (int i = 0; i < allStations.size(); i++){
-            System.out.println(String.format("Station %d %s", i+1, allStations.get(i).toString()));
+            System.out.printf("Station %d %s%n", i+1, allStations.get(i).toString());
         }
     }
 

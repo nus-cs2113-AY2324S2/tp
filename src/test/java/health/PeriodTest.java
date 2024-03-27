@@ -27,7 +27,7 @@ class PeriodTest {
     @AfterEach
     void cleanup() {
         System.setOut(originalOut);
-        HealthList.clearBmisAndPeriods();
+        HealthList.clearHealthLists();
         outContent.reset();
     }
 
