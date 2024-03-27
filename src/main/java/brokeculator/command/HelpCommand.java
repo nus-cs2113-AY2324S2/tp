@@ -11,6 +11,8 @@ public class HelpCommand extends Command {
             + "\t3. list - lists all expenses in the dashboard" + System.lineSeparator()
             + "\t4. summarise [/from <start>] [/to <end>] - summarises the expenses in the dashboard"
             + System.lineSeparator()
+            + "\t6. category <list|add|delete> [<category if add|delete specified>] - manages categories"
+            + System.lineSeparator()
             + "\t5. exit - exits the application" + System.lineSeparator()
             + System.lineSeparator()
             + "Notes about the command format:" + System.lineSeparator()
