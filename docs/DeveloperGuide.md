@@ -21,6 +21,13 @@
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
+      - [Description](#description-1)
+      - [Design Considerations](#design-considerations-1)
+          - [User Design Considerations](#design-considerations-1)
+          - [Developer Design Considerations](#design-considerations-1)
+      - [Implementation](#implementation-1)
+          - [Class Diagram](#class-diagram-1)
+          - [Sequence Diagram](#sequence-diagram-1)
   - [Sleep tracker component]()
   - [Focus timer component](#focus-timer-component)
     - [Design Considerations](#design-considerations-1)
@@ -209,10 +216,10 @@ The habit tracker component aims to provide user with a tool to track and cultiv
 
 #### Design Considerations
 * ##### User Design Considerations
-    * User can add new habits in the habit tracker that they wish to cultivate
-    * User can increase the count of a habit after they completed the habit for the day, allowing them to keep track of the total number of times they completed the habit
-    * User can also delete the habit if they no longer want to cultivate that habit
-    * User are able to set the priority of the habits (HIGH, MED, LOW), to prioritise their time on more important habits
+    * User can add new habits in the habit tracker that they wish to cultivate.
+    * User can increase the count of a habit after they completed the habit for the day, allowing them to keep track of the total number of times they completed the habit.
+    * User can also delete the habit if they no longer want to cultivate that habit.
+    * User are able to set the priority of the habits (HIGH, MED, LOW), to prioritise their time on more important habits.
     * User can also sort the habits according to their priority for better visualization.
     * A help menu is also provided for users to guide them on how to use the habit tracker.
     * Error messages with guidance messages will be printed to console if command input by user is invalid.
@@ -231,7 +238,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
 
 * `HabitTracker` class
     * Overview
-        * The `HabitTracker` class manages the habit tracker list which contains the habits
+        * The `HabitTracker` class manages the habit tracker list which contains the habits.
     * Attributes:
         * `habitList`: Private attribute representing the list of habits. It is an ArrayList of Habit objects.
     * Methods:
