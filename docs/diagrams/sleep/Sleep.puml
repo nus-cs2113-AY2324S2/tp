@@ -1,0 +1,123 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam classAttributeIconSize 0
+
+package parser {
+    class SleepCommandParser {
+    }
+
+    class Parser {
+    }
+}
+
+package command {
+    interface "<<interface>>\nCommand" as Command {
+                + execute(): void
+                + isExit(): boolean
+    }
+
+    class AddSleepCommand implements Command {
+    }
+
+    class DeleteSleepCommand implements Command {
+        - startDate: LocalDate
+        - endDate: LocalDate
+
+        - deleteSleepBefore(sleepCommandArgs: String)
+        - deleteSleepBefore(sleepCommandArgs: String)
+        - deleteSleepBetween(sleepCommandArgs: String)
+    }
+
+    class GetSleepCommand implements Command {
+        -  date: LocalDate
+    }
+
+    class ListSleepCommand implements Command {
+    }
+
+    class SaveSleepCommand implements Command {
+    }
+
+    class UpdateSleepCommand implements Command {
+        - date: LocalDate
+        - hours: double
+    }
+}
+
+package sleep {
+    interface "<<interface>>\nComparable" as Comparable {
+    }
+
+    class SleepCycle implements Comparable{
+        - hoursSlept: double
+        - dateOfSleep: LocalDate
+
+        + getHoursSlept(): double
+        + getDateOfSleep(): LocalDate
+        + setHoursOfSleep(newHours: double)
+        + compareTo(sleepCycle: SleepCycle)
+        +toString(): String
+    }
+
+    class SleepCycleList {
+        - totalHrsSlept: double
+        - numberOfCycles: int
+
+        +addSleepCycle(sleepCycle: SleepCycle, isPrint: boolean)
+        +deleteSleepCycle(date: LocalDate)
+        +deleteSleepCyclesBefore(date: LocalDate)
+        +deleteSleepCyclesBetween(startDate: LocalDate, endDate: LocalDate)
+        +listSleepCycles()
+        +getSleepCycle(date: LocalDate, isPrint: boolean): int
+        +updateSleepCycle(date: LocalDate, newHours: double)
+        +getNumberOfCycles(): int
+        +getTotalHrsSlept(): double
+        +getSleepCycleList(): ArrayList<SleepCycle>
+
+    }
+
+    class SleepTracker {
+        +listSleepCycles()
+        +addSleepCycle(sleepCycleToAdd: SleepCycle)
+        +updateSleepCycle(date: LocalDate, newHours: double)
+        +getSleepCycle(date: LocalDate)
+        +deleteSleepCycle(date: LocalDate)
+        +deleteSleepCyclesBefore(date: LocalDate)
+        +deleteSleepCyclesBetween(startDate:LocalDate, endDate:LocalDate)
+        +saveSleepCycles()
+    }
+}
+
+
+class SleepTrackerStorage {
+}
+
+class Ui {
+}
+
+Parser ..> SleepCommandParser: creates >
+
+SleepCommandParser .DOWN.> AddSleepCommand : creates >
+SleepCommandParser .DOWN.> DeleteSleepCommand : creates >
+SleepCommandParser .DOWN.> ListSleepCommand : creates >
+SleepCommandParser .DOWN.> SaveSleepCommand : creates >
+SleepCommandParser .DOWN.> UpdateSleepCommand : creates >
+SleepCommandParser .DOWN.> GetSleepCommand : creates >
+
+AddSleepCommand --> SleepTracker : uses >
+DeleteSleepCommand --> SleepTracker : uses >
+DeleteSleepCommand ..> "deleteMode  1" DeleteMode
+GetSleepCommand --> SleepTracker : uses >
+ListSleepCommand --> SleepTracker : uses >
+SaveSleepCommand --> SleepTracker : uses >
+UpdateSleepCommand --> SleepTracker : uses >
+
+
+SleepCycleList --> Ui : uses >
+SleepTracker *--> "1" SleepCycleList: contains >
+SleepTracker --> SleepTrackerStorage : uses >
+
+SleepCycleList *-- "*" SleepCycle : contains
+
+@enduml

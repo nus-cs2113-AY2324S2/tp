@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Main
+participant Scanner
+participant SleepTracker
+participant Parser
+participant SleepCommandParser
+participant PlaceholderSleepCommand
+
+activate Main
+
+create Scanner
+Main -> Scanner
+activate Scanner
+
+create SleepTracker
+Main -> SleepTracker
+activate SleepTracker
+
+loop until isExit
+
+    Main -> Scanner: nextLine()
+    Scanner --> Main: userInput
+    Main -> Parser: userInput
+    alt userInput is SleepCommand
+        Parser -> SleepCommandParser: determineSleepCommand()
+        alt command is PlaceholderSleepCommand
+            create PlaceholderSleepCommand
+            SleepCommandParser -> PlaceholderSleepCommand: command, params
+            activate PlaceholderSleepCommand
+            PlaceholderSleepCommand --> SleepCommandParser: command object
+            SleepCommandParser --> Parser: command object
+            Parser --> Main: command object
+            Main -> PlaceholderSleepCommand: execute()
+            PlaceholderSleepCommand -> SleepTracker: execute()
+            destroy PlaceholderSleepCommand
+        end
+    end
+end
+
+@enduml
+
+@enduml

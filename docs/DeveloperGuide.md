@@ -21,7 +21,15 @@
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
-  - [Sleep tracker component]()
+  - [Sleep tracker component](#sleep-tracker-component)
+    - [Description](#description-1)
+    - [Design Considerations](#design-considerations-1)
+      - [User Design Considerations](#user-design-considerations-1)
+      - [Developer Design Considerations](#developer-design-considerations-1)
+    - [Implementation](#implementation-1)
+      - [Class Diagram](#class-diagram-1)
+      - [Sequence Diagram](#sequence-diagram-1)
+  
   - [Focus timer component]()
   - [Fitness tracker component]()
 
@@ -200,6 +208,139 @@ and the corresponding method in `ReflectionManager` is invoked.
 ### Habit tracker component
 
 ### Sleep tracker component
+
+#### Description
+
+The Sleep tracker component allow users to keep track of the number of hours they have slept, so that users will know
+when their lacking sleep or getting more sleep hours as the day progresses. With information on the user's sleep cycle,
+one will be able to understand what is their optimal sleep cycle. With this users can have better sleep, improving
+user's wellness.
+
+#### Design Considerations
+
+* ##### User Design Considerations
+    * Users can add hours slept on a specific date
+    * Users can update hours slept on a specific date in case of mistakes in adding of sleep hours
+    * Users can list out all sleep hours tracked or get number of hours slept on a specific date
+    * Users can delete sleep cycles with deletion methods of:
+        * Deleting a sleep cycle that is of a certain date
+        * Deleting sleep cycles before a certain date
+        * Deleting sleep cycles between certain dates
+    * Error messages with guidance messages will be printed to console if command input by user is invalid.
+
+
+* ##### Developer Design Considerations
+    * SRP: Ease of scalability is achieved as classes adhere to the Single Responsibility Principle. For example, 
+    the SleepTracker class is responsible for managing sleep tracker related commands, SleepCommandParser class handles
+    parsing and determining which sleep command is being called and SleepCycleList is responsible for storing sleep 
+    cycles and methods that can be called to edit it's content.
+    * Readability and Maintainability: Descriptive naming, use of Enumerations and JavaDoc for clarity. 
+    For example, use of enumerations for deleteMode.
+    * Encapsulation: Private access modifiers and encapsulated methods ensure data integrity. Methods like addSleepCycle
+    and deleteSleepCycle in SleepCycleList encapsulate the manipulation of the reflection list, ensuring data integrity
+    and promoting a clear interface for interacting with the list.
+    * Exception Handling: Extensive coverage of exceptions in sleepCommand classes to ensure all errors are handled 
+    properly
+
+#### Implementation
+
+##### Class Diagram
+![SleepDiagram.png](diagrams/sleep/SleepDiagram.png)
+
+* `SleepTracker` class
+  * Overview
+    * The `SleepTracker` class oversees sleep-related operations, managing sleep cycles.
+  * Attributes:
+    * `sleepCycleList`: Instance of `SleepCycleList` managing sleep cycles.
+  * Methods:
+    * `listSleepCycles()`: List out all sleep cycles.
+    * `addSleepCycle(SleepCycle sleepCycleToAdd)`: Add sleep cycle.
+    * `updateSleepCycle(LocalDate date, double newHours)`: Change hours slept for specific date.
+    * `getSleepCycle(LocalDate date)`: Get number of hours slept for specific date.
+    * `deleteSleepCycle(LocalDate date)`: Delete sleep cycle for specific date.
+    * `deleteSleepCyclesBefore(LocalDate date)`: Delete sleep cycle before specific date.
+    * `deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate)`: Delete sleep cycles between 2 dates.
+    * `saveSleepCycles()`: Save sleep cycle list into a text file.
+  * Dependencies:
+    * `SleepTrackerStorage`: Utilized for sleep cycle data storage operations
+  * UML Notes:
+    * `SleepTracker` contains only 1 `SleepCycleList`
+    * It relies on `SleepTrackerStorage` class for file operations
+
+* `SleepCycle` class
+  * Overview:
+    * This class represents a sleep cycle
+  * Attributes:
+    * `hoursSlept`: Number of hours slept
+    * `dateOfSleep`: Date that user slept on
+  * Methods:
+    * getHoursSlept(): Get Hours slept for this sleep cycle.
+    * getDateOfSleep(): Get date slept for this sleep cycle.
+    * setHoursOfSleep(double newHours): Set Hours slept for this sleep cycle to a new duration.
+    * compareTo(SleepCycle: SleepCycle): Comparison between sleep cycles.
+    * toString(): String format for what needs to be printed out for a sleep cycle.
+  * `SleepCycleList` may contain 0 or more instances of `SleepCycle`.
+  * UML Notes:
+    * When a `SleepCycleList` object is destroyed, its associated `SleepCycle` instances are also destroyed,
+    reflecting a "whole part" relationship.
+
+* `SleepCycleList` class
+  * Overview
+    * The `SleepCycleList` class contains all sleep cycles added by the user.
+  * Attributes:
+    * `totalHrsSlept`: Accumulated number of hours slept from all sleep cycles. 
+    * `numberOfCycles`: Number of sleep cycles in sleepCycleList.
+  * Methods:
+    * `listSleepCycles()`: List out all sleep cycles.
+    * `addSleepCycle(SleepCycle sleepCycleToAdd)`: Add sleep cycle.
+    * `updateSleepCycle(LocalDate date, double newHours)`: Change hours slept for specific date.
+    * `getSleepCycle(LocalDate date)`: Get number of hours slept for specific date.
+    * `deleteSleepCycle(LocalDate date)`: Delete sleep cycle for specific date.
+    * `deleteSleepCyclesBefore(LocalDate date)`: Delete sleep cycle before specific date.
+    * `deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate)`: Delete sleep cycles between 2 dates.
+    * `getNumberOfCycles()`: Get number of sleep cycles in sleepCycleList.
+    * `getTotalHrsSlept()`: Get total number of hours slept.
+    * `getSleepCycleList`: Get list of sleep cycles.
+  * Dependencies:
+    * Ui: Utilized for user interface interactions
+  * UML Notes:
+    * `SleepTracker` contains a single instance of `SleepCycleList`.
+    * `SleepCycleList` may contain 0 or more instances of `SleepCycle`. 
+    * It relies on `Ui` class for user interaction.
+
+* `SleepCommandParser` class
+  * Overview: 
+    * Parses sleep-related commands and create different sleep command objects based on user input.
+  * Method:
+    * determineSleepCommand(SleepTracker sleepTracker, String commandArgs)
+
+* Sleep command classes
+    * `AddSleep Command`: Add a sleep cycle.
+        * Command format: `sleep add`
+    * `DeleteSleepCommand`: Delete sleep cycles.
+        * Delete sleep cycle matching date command format: `sleep delete /date <date>`
+        * Delete sleep cycle before date command format: `sleep delete /before <date>`
+        * Delete sleep cycles between 2 dates command format: `sleep delete /from <start_date /to <end_date>`
+    * `GetSleepCommand`: Get number of hours slept on a specific date.
+        * Command format: `sleep get <date>`
+    * `ListSleepcommand`: Get information on all the sleep.
+        * Command format: `sleep list`
+    * `SaveSleepCommand`: Save current sleep cycles added/deleted/updated into a text file.
+        * Command format:`sleep save`
+    * `UpdateSleepCommand`: Change number of hours slept on a specific date.
+        * Command format: `sleep update <date> /new <new_hours>`
+    
+##### Sequence Diagram
+
+![SleepSequenceDiagram.png](diagrams/sleep/SleepSequenceDiagram.png)
+
+* Note that PlaceholderReflectionCommand can refer to any of the reflection commands as mentioned above, 
+as all of them follow the same call pattern.
+
+When main starts, scanner and SleepTracker objects are created. Upon receiving user input, the input will first 
+be determined if it is a command related to the sleep tracker feature. If it is, it will be further parsed by 
+SleepTrackerParser to determine the command. The corresponding sleep command object is then created and is 
+returned to Main, where execute will then be called and the corresponding method in SleepTracker is invoked.
 
 ### Focus timer component
 
