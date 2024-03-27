@@ -75,13 +75,14 @@ public class ItemList {
     }
 
     public String deleteItem(int index) {
-        logger.info("Entering deleteItem");
+        logger.info("Attempting to delete an item");
         int beforeSize = itemList.size();
         Item tempItem = itemList.remove(index - 1);
         assert itemList.size() == (beforeSize - 1);
 
         String output = "Got it! I've removed the following item:" + System.lineSeparator()
                 + System.lineSeparator() + tempItem;
+        logger.info("An item has been deleted");
         return output;
     }
 
