@@ -27,4 +27,11 @@ public class CourseTest {
     public void getModularCredit_notProvided_default4ModularCredit() {
         assertEquals(4, new Course("CS1010", "", 1, 1).getModularCredit());
     }
+
+    @Test
+    public void getGrade() {
+        Course course = new Course("MA1511", "Engineering Calculus", 2, 1, 1);
+        course.setGrade("A");
+        assertEquals("MA1511: A", course.getGrade());
+    }
 }
