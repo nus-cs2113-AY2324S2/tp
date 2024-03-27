@@ -788,31 +788,57 @@ ________________________________________________________________________________
 ~~~
 
 ### Get a list of exercises: `fitness get`
-Prints a list of 5 different exercises from 5 different types of exercises targeting different body parts.
+Prints a list of exercises. If no parameters are specified, 5 different exercises from 5 different types of exercises 
+targeting different body parts. If the exercise type is specified, only exercises matching that type will be shown.
 
 Format:
 ```
-fitness get
+fitness get [EXERCISE_TYPE]
 ```
 
-* The `fitness` and `get` are case-sensitive.
-* Use lower casing for this command.
-* The command will generate different exercises with each repeated command, but there should be one exercise from
+* The `fitness` and `get` are case-sensitive. Use lower casing.
+* Running the command with no parameters will generate different exercises with each repeated command, but there should be one exercise from
   each type
+* The `[EXERCISE_TYPE]` parameter is optional, and only supports the following types:
+  * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
+
+Example of usage:
+~~~
+fitness get
+~~~
 
 Expected outcome:
 ```
 ________________________________________________________________________________________________________________
-These are some of the exercises you can do!
+These are some of the exercises you can do! LETS GET STRONK MY G
 
-1. Arms: Barbell Curls, 3 sets & 8 reps
-2. Chest: Bench Press, 3 sets & 8 reps
+1. Arms: Skullcrushers, 3 sets & 8 reps
+2. Chest: Cable Flies, 3 sets & 8 reps
 3. Abs: Crunches, 5 sets & 20 reps
-4. Back: Pull Ups, 3 sets & 6 reps
+4. Back: Lateral Rows, 3 sets & 8 reps
 5. Legs: Leg Press, 3 sets & 8 reps
 
 ________________________________________________________________________________________________________________
 ```
+Example of usage:
+~~~
+fitness get arms
+~~~
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Here are the Arms exercises as requested!
+
+1. Arms: Cable Triceps Push down, 3 sets & 8 reps
+2. Arms: Barbell Curls, 3 sets & 8 reps
+3. Arms: Preacher Curls, 3 sets & 8 reps
+4. Arms: Skullcrushers, 3 sets & 8 reps
+5. Arms: Lateral Raises, 3 sets & 8 reps
+________________________________________________________________________________________________________________
+
+```
+
 
 ### Add exercises to the list: `fitness add`
 Allows the user to add their own exercises to the list.
@@ -824,6 +850,8 @@ fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
 
 * The `fitness` and `add` is case-sensitive.
 * Use of commands between each parameter is required.
+* The `[EXERCISE_TYPE]` parameter only supports the following types:
+  * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
 
 Example of usage (increasing count):
 ```
