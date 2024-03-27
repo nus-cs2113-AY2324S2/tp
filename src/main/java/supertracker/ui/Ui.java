@@ -171,7 +171,7 @@ public class Ui {
         printIndent(errorMessage);
     }
 
-    public static void findItem(Item item, int index) {
+    public static void foundItem(Item item, int index) {
         String stringToPrint = index + ". Name: " + item.getName();
         String quantityString = "    Quantity: " + item.getQuantity();
         String priceString = "    Price: " + item.getPriceString();
