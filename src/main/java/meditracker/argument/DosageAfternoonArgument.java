@@ -16,7 +16,8 @@ public class DosageAfternoonArgument extends Argument {
                 "-dA",
                 "What is the afternoon dosage of this medication?",
                 "Afternoon dosage of medication",
-                isOptional
+                isOptional,
+                true
         );
     }
 }

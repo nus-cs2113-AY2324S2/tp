@@ -10,7 +10,8 @@ public class ListTypeArgument extends Argument {
                 "-t",
                 "Show today/morning/afternoon/evening/all medications?",
                 "Lists medications accordingly",
-                isOptional
+                isOptional,
+                true
         );
     }
 }

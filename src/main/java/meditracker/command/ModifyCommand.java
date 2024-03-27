@@ -12,6 +12,7 @@ import meditracker.argument.NameArgument;
 import meditracker.argument.QuantityArgument;
 import meditracker.argument.RemarksArgument;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.medication.Medication;
 import meditracker.medication.MedicationManager;
 import meditracker.ui.Ui;
@@ -36,9 +37,13 @@ public class ModifyCommand extends Command {
 
     /**
      * Constructs a ModifyCommand object with the specified arguments.
+     *
      * @param arguments The arguments containing medication information to be parsed.
+     * @throws ArgumentNotFoundException Argument flag specified not found
+     * @throws DuplicateArgumentFoundException Duplicate argument flag found
      */
-    public ModifyCommand(String arguments) throws ArgumentNotFoundException {
+    public ModifyCommand(String arguments)
+            throws ArgumentNotFoundException, DuplicateArgumentFoundException {
         parsedArguments = argumentList.parse(arguments);
     }
 

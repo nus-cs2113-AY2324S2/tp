@@ -2,6 +2,7 @@ package meditracker;
 
 import meditracker.command.Command;
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.exception.MediTrackerException;
 import meditracker.logging.MediLogger;
 import meditracker.medication.MedicationManager;
@@ -42,10 +43,6 @@ public class MediTracker {
      * Runs the MediTracker application.
      * This method displays a welcome message, reads user commands, and processes them until the user exits the
      * application.
-     * @throws MediTrackerException If an error occurs during the execution of the application.
-     * @throws ArgumentNotFoundException Argument required not found.
-     * @throws NullPointerException When the command does not exist.
-     * @throws NumberFormatException If the argument of type double is not supplied as type double.
      */
     public void run() {
         //@@author nickczh-reused
@@ -61,7 +58,7 @@ public class MediTracker {
             try {
                 command = CommandParser.parse(fullCommand);
                 command.execute(medicationManager);
-            } catch (ArgumentNotFoundException | MediTrackerException ex) {
+            } catch (ArgumentNotFoundException | DuplicateArgumentFoundException | MediTrackerException ex) {
                 System.out.println(ex.getMessage());
             } catch (NullPointerException ex) {
                 System.out.println("Invalid MediTracker command! Please refer to the user guide.");

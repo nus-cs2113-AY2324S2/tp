@@ -1,6 +1,7 @@
 package meditracker.command;
 
 import meditracker.exception.ArgumentNotFoundException;
+import meditracker.exception.DuplicateArgumentFoundException;
 import meditracker.exception.MediTrackerException;
 
 /**
@@ -13,12 +14,14 @@ public class CommandParser {
      *
      * @param fullCommand The full command string entered by the user.
      * @return A Command object corresponding to the parsed command.
-     * @throws MediTrackerException      If an error occurs during parsing.
-     * @throws ArgumentNotFoundException If a required argument is not found.
+     * @throws MediTrackerException If an error occurs during parsing.
      * @throws NullPointerException      If the fullCommand is null.
+     * @throws ArgumentNotFoundException When argument required not found
+     * @throws DuplicateArgumentFoundException When duplicate argument found
      */
-    public static Command parse(String fullCommand) throws MediTrackerException, ArgumentNotFoundException,
-            NullPointerException {
+    public static Command parse(String fullCommand)
+            throws MediTrackerException, NullPointerException,
+            ArgumentNotFoundException, DuplicateArgumentFoundException {
         String[] commands = fullCommand.split(" ", 2);
         String arguments = (commands.length == 2) ? commands[1] : "";
         CommandName commandName = CommandName.valueOfLabel(commands[0]);
