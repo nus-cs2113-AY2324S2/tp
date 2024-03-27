@@ -85,6 +85,6 @@ public class BinBashLogger {
 
         fileHandler.setFormatter(new SimpleFormatter());
         fileLogger.setUseParentHandlers(false);
-        fileLogger.addHandler((fileHandler));
+        fileLogger.addHandler(fileHandler);
     }
 }
