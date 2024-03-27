@@ -29,7 +29,7 @@ public class SleepEntry extends Entry {
 
     public String toString() {
         // Show "N/A" if no date was provided
-        return "Date: " + (date == null || date.isEmpty() ? "N/A" : date) +
+        return "\t Date: " + (date == null || date.isEmpty() ? "N/A" : date) +
                 ", Duration: " + String.format("%.1f", duration) + " hours";
     }
 

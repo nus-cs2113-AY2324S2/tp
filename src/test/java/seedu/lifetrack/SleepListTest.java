@@ -51,7 +51,7 @@ public class SleepListTest {
         System.setOut(System.out);
         String expectedOutput = "\t New sleep record has been successfully added." + lineSeparator +
                 "\t Your Sleep List:" + lineSeparator +
-                "\t 1. Date: 110324, Duration: 7.5 hours" + lineSeparator;
+                "\t 1. \t Date: 110324, Duration: 7.5 hours" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -70,9 +70,9 @@ public class SleepListTest {
                 "\t New sleep record has been successfully added." + lineSeparator +
                 "\t New sleep record has been successfully added." + lineSeparator +
                 "\t Your Sleep List:" + lineSeparator +
-                "\t 1. Date: 110324, Duration: 7.5 hours" + lineSeparator +
-                "\t 2. Date: 280524, Duration: 8.0 hours" + lineSeparator +
-                "\t 3. Date: N/A, Duration: 4.2 hours" + lineSeparator;
+                "\t 1. \t Date: 110324, Duration: 7.5 hours" + lineSeparator +
+                "\t 2. \t Date: 280524, Duration: 8.0 hours" + lineSeparator +
+                "\t 3. \t Date: N/A, Duration: 4.2 hours" + lineSeparator;
         assertEquals(expectedOutput, outputStream.toString());
         assertEquals(3, sleepList.getSize());
     }

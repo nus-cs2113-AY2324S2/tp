@@ -67,8 +67,9 @@ public class SleepList {
             SleepListUi.emptyListMessage();
         } else {
             SleepListUi.sleepListHeader();
-            for (int i = 0; i < this.sleepList.size(); i++) {
-                System.out.println("\t " + (i + 1)+ ". " + getSleep(i).toString());
+            for (int i = 0; i < sleepList.size(); i++) {
+                Entry entry = sleepList.get(i);
+                System.out.println("\t " + (i + 1) + ". " + entry);
             }
         }
     }
