@@ -1,10 +1,11 @@
 package data;
 
 public class Event extends Task {
-    private final String startTime;
-    private final String endTime;
     protected String startDate;
     protected String endDate;
+    private final String startTime;
+    private final String endTime;
+
 
     /**
      * Constructor for new tasks given its name.
@@ -87,7 +88,8 @@ public class Event extends Task {
      */
     @Override
     public String getSaveFormat () {
-        return getTaskType() + "|" + getName() + "|" + getStartDate() + "|" + getEndDate() + "|" + getStartTime() + "|" + getEndTime();
+        return getTaskType() + "|" + getName() + "|" + getStartDate() + "|" + getEndDate() + "|" + getStartTime() + "|"
+                + getEndTime();
     }
 }
 
