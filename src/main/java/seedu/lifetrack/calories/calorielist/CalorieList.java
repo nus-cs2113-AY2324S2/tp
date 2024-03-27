@@ -4,8 +4,8 @@ import static seedu.lifetrack.ui.CalorieListUi.emptyListMessage;
 import static seedu.lifetrack.ui.CalorieListUi.successfulDeletedMessage;
 import static seedu.lifetrack.ui.CalorieListUi.printNewCalorieEntry;
 import static seedu.lifetrack.ui.CalorieListUi.calorieListHeader;
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogIndexMessage;
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
+import static seedu.lifetrack.ui.CalorieListUi.deleteLogIndexMessage;
+import static seedu.lifetrack.ui.CalorieListUi.deleteLogNumberMessage;
 
 import seedu.lifetrack.Entry;
 import seedu.lifetrack.system.exceptions.ErrorMessages;

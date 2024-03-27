@@ -1,12 +1,12 @@
-package seedu.lifetrack.liquids.liquidlist;
+package seedu.lifetrack.hydration.hydrationlist;
 
 import seedu.lifetrack.Entry;
 
-public class LiquidEntry extends Entry {
+public class HydrationEntry extends Entry {
 
     private int volume;
 
-    public LiquidEntry(String description, int volume, String date){
+    public HydrationEntry(String description, int volume, String date){
         super(description, date);
         this.volume= volume;
     }

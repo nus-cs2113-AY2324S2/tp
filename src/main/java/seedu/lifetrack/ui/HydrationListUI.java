@@ -1,14 +1,13 @@
 package seedu.lifetrack.ui;
 
-public class LiquidListUI {
+public class HydrationListUI {
 
     public static void deleteMessage() {
         System.out.println("\t Successfully delete the liquid record.");
     }
 
     public static String deleteLogIndexMessage() {
-        return "Sorry, this index is invalid. Please enter a positive integer " +
-                "within the size of the list.";
+        return "Sorry, this index is invalid. Please enter a positive integer within the size of the list.";
     }
 
     public static String deleteLogNumberMessage() {

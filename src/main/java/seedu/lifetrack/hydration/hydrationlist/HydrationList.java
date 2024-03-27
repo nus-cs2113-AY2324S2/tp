@@ -1,10 +1,10 @@
-package seedu.lifetrack.liquids.liquidlist;
+package seedu.lifetrack.hydration.hydrationlist;
 
 import seedu.lifetrack.Entry;
 import seedu.lifetrack.calories.calorielist.CalorieList;
 import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
-import seedu.lifetrack.system.parser.ParserLiquid;
+import seedu.lifetrack.system.parser.ParserHydration;
 import seedu.lifetrack.system.storage.FileHandler;
 
 import java.io.FileNotFoundException;
@@ -12,44 +12,44 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogIndexMessage;
-import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
-import static seedu.lifetrack.ui.LiquidListUI.deleteMessage;
-import static seedu.lifetrack.ui.LiquidListUI.addEntryMessage;
-import static seedu.lifetrack.ui.LiquidListUI.emptyListMessage;
-import static seedu.lifetrack.ui.LiquidListUI.listHeader;
+import static seedu.lifetrack.ui.HydrationListUI.deleteLogIndexMessage;
+import static seedu.lifetrack.ui.HydrationListUI.deleteLogNumberMessage;
+import static seedu.lifetrack.ui.HydrationListUI.deleteMessage;
+import static seedu.lifetrack.ui.HydrationListUI.addEntryMessage;
+import static seedu.lifetrack.ui.HydrationListUI.emptyListMessage;
+import static seedu.lifetrack.ui.HydrationListUI.listHeader;
 
 /**
  * Represents a list of liquid entries.
  * Provides methods to add, delete, and print liquid entries.
  */
-public class LiquidList {
+public class HydrationList {
 
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
     private final int DELETE_PADDING = 15;
-    private ArrayList<Entry> liquidArrayList;
+    private ArrayList<Entry> hydrationArrayList;
     private FileHandler fileHandler;
 
     //constructor for JUnit tests
-    public LiquidList() {
-        liquidArrayList = new ArrayList<>();
+    public HydrationList() {
+        hydrationArrayList = new ArrayList<>();
     }
 
     //constructor for usage in terminal
-    public LiquidList(String filePath) {
+    public HydrationList(String filePath) {
         try {
             fileHandler = new FileHandler(filePath);
-            liquidArrayList = fileHandler.getLiquidEntriesFromFile();
+            hydrationArrayList = fileHandler.getHydrationEntriesFromFile();
         } catch (FileNotFoundException e) {
-            liquidArrayList = new ArrayList<>();
+            hydrationArrayList = new ArrayList<>();
             System.out.println(ErrorMessages.getFileNotFoundMessage());
         }
     }
 
     private void updateFile() {
         if (fileHandler != null) {
-            fileHandler.writeEntries(liquidArrayList);
+            fileHandler.writeEntries(hydrationArrayList);
         }
     }
 
@@ -60,8 +60,8 @@ public class LiquidList {
      * @return the liquid entry at the specified index
      */
     public Entry getEntry(int index) {
-        assert index >= 0 && index < liquidArrayList.size() : "Index out of bounds";
-        return liquidArrayList.get(index);
+        assert index >= 0 && index < hydrationArrayList.size() : "Index out of bounds";
+        return hydrationArrayList.get(index);
     }
 
     /**
@@ -72,7 +72,7 @@ public class LiquidList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
-            liquidArrayList.remove(index - 1);
+            hydrationArrayList.remove(index - 1);
             updateFile();
             deleteMessage();
         } catch (IndexOutOfBoundsException e) {
@@ -88,11 +88,10 @@ public class LiquidList {
      * @param input the input string containing liquid entry information
      */
     public void addEntry(String input) {
-        assert (input.startsWith("hydration in"))
-                : "ensures that input is correct";
+        assert (input.startsWith("hydration in")) : "ensures that input is correct";
         try {
-            Entry newEntry = ParserLiquid.parseLiquidInput(input);
-            liquidArrayList.add(newEntry);
+            Entry newEntry = ParserHydration.parseHydrationInput(input);
+            hydrationArrayList.add(newEntry);
             updateFile();
             addEntryMessage();
         } catch (InvalidInputException e) {
@@ -104,13 +103,13 @@ public class LiquidList {
      * Prints the list of liquid entries.
      * If the list is empty, prints a message indicating that the list is empty.
      */
-    public void printLiquidList() {
-        if (liquidArrayList.isEmpty()) {
+    public void printHydrationList() {
+        if (hydrationArrayList.isEmpty()) {
             emptyListMessage();
         } else {
             listHeader();
-            for (int i = 0; i < liquidArrayList.size(); i++) {
-                Entry entry = liquidArrayList.get(i);
+            for (int i = 0; i < hydrationArrayList.size(); i++) {
+                Entry entry = hydrationArrayList.get(i);
                 System.out.println("\t " + (i + 1) + ". " + entry);
             }
         }
@@ -122,6 +121,6 @@ public class LiquidList {
      * @return the number of liquid entries in the list
      */
     public int getSize() {
-        return liquidArrayList.size();
+        return hydrationArrayList.size();
     }
 }

@@ -11,7 +11,7 @@ import seedu.lifetrack.Entry;
 import seedu.lifetrack.calories.Food;
 import seedu.lifetrack.calories.calorielist.InputEntry;
 import seedu.lifetrack.calories.calorielist.OutputEntry;
-import seedu.lifetrack.liquids.liquidlist.LiquidEntry;
+import seedu.lifetrack.hydration.hydrationlist.HydrationEntry;
 import seedu.lifetrack.sleep.sleeplist.SleepEntry;
 import seedu.lifetrack.system.exceptions.ErrorMessages;
 
@@ -85,7 +85,7 @@ public class FileHandler {
         return entries;
     }
 
-    public ArrayList<Entry> getLiquidEntriesFromFile() throws FileNotFoundException {
+    public ArrayList<Entry> getHydrationEntriesFromFile() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         ArrayList<Entry> entries = new ArrayList<>();
@@ -96,7 +96,7 @@ public class FileHandler {
             String date = words[DATE_INDEX];
             String description = words[DESCRIPTION_INDEX];
             int volume = Integer.parseInt(words[VOLUME_INDEX]);
-            entries.add(new LiquidEntry(description, volume, date));
+            entries.add(new HydrationEntry(description, volume, date));
         }
         return entries;
     }

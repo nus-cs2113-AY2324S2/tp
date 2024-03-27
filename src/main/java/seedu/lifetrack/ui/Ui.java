@@ -1,7 +1,7 @@
 package seedu.lifetrack.ui;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.hydration.hydrationlist.HydrationList;
 import seedu.lifetrack.sleep.sleeplist.SleepList;
 
 import java.util.Scanner;
@@ -33,7 +33,7 @@ public class Ui {
      * @param calorieList list containing all entries pertinent to calories
      * @param liquidList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, LiquidList liquidList, SleepList sleepList) {
+    public static void readUserInput(CalorieList calorieList, HydrationList liquidList, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
@@ -59,14 +59,14 @@ public class Ui {
         }
     }
 
-    public static void handleLiquidsInput(String line, LiquidList liquidsList) {
+    public static void handleLiquidsInput(String line, HydrationList hydrationList) {
         assert !line.startsWith("bye") : "exit the app";
         if (line.startsWith("hydration in")) {
-            liquidsList.addEntry(line);
+            hydrationList.addEntry(line);
         } else if (line.startsWith("hydration list")) {
-            liquidsList.printLiquidList();
+            hydrationList.printHydrationList();
         } else if (line.startsWith("hydration delete")) {
-            liquidsList.deleteEntry(line);
+            hydrationList.deleteEntry(line);
         } else {
             handleUnknownInput();
         }
@@ -85,7 +85,7 @@ public class Ui {
     }
 
     public static void handleUserInput(String line, CalorieList calorieList,
-            LiquidList liquidList, SleepList sleepList) {
+            HydrationList liquidList, SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();

@@ -1,7 +1,7 @@
 package seedu.lifetrack.system.parser;
 
 import seedu.lifetrack.Entry;
-import seedu.lifetrack.liquids.liquidlist.LiquidEntry;
+import seedu.lifetrack.hydration.hydrationlist.HydrationEntry;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectVolumeInputMessage;
@@ -10,7 +10,7 @@ import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.get
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getHydrationMissingKeywordMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getHydrationNegativeIntegerVolumeMessage;
 
-public class ParserLiquid {
+public class ParserHydration {
     
     private static final int HYDRATION_IN_PADDING = 12;
 
@@ -27,8 +27,8 @@ public class ParserLiquid {
      * @throws InvalidInputException if the input string is missing components or
      *                              contains empty fields
      */
-    public static Entry parseLiquidInput(String input) throws InvalidInputException {
-        //get index for b/ and  v/ inputs
+    public static Entry parseHydrationInput(String input) throws InvalidInputException {
+        
         int volumeIndex = input.indexOf("v/");
         int dateIndex = input.indexOf("date/");
 
@@ -55,10 +55,12 @@ public class ParserLiquid {
 
         return makeNewInputEntry(description, volume, date);
     }
-    private static LiquidEntry makeNewInputEntry(String description, int volume, String date) {
 
-        return new LiquidEntry(description, volume, date);
+    private static HydrationEntry makeNewInputEntry(String description, int volume, String date) {
+
+        return new HydrationEntry(description, volume, date);
     }
+
     private static int getIntegerVolumeFromInput(String strVolume) {
         int volume = 0;
         try {
@@ -74,6 +76,7 @@ public class ParserLiquid {
             throw new InvalidInputException(getHydrationNegativeIntegerVolumeMessage());
         }
     }
+
     private static void checkInputsAreNonEmpty(String description, String strVolume, String date)
             throws InvalidInputException {
         //check if the description, calories or date fields are empty
@@ -81,16 +84,19 @@ public class ParserLiquid {
             throw new InvalidInputException(getHydrationEmptyDescriptionMessage());
         }
     }
+
     private static String getDescriptionFromInput(String inputString, int volumeIndex) {
         String description;
         description = inputString.substring(HYDRATION_IN_PADDING, volumeIndex).trim();
         return description;
     }
+
     private static void checkKeywordsCorrectlyOrdered( int dateIndex, int volumeIndex) throws InvalidInputException {
         if (!(volumeIndex < dateIndex)) {
             throw new InvalidInputException(getHydrationIncorrectOrderMessage());
         }
     }
+
     private static void checkKeywordsExist(int dateIndex, int volumeIndex) throws InvalidInputException {
         //check that v/ and date/ keywords exist in the input, else throw exception
         if (dateIndex == -1 || volumeIndex == -1) {
