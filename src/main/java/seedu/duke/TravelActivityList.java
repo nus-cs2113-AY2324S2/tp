@@ -2,7 +2,6 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 
 public class TravelActivityList {
@@ -22,10 +21,10 @@ public class TravelActivityList {
      * @param travelActivity The travel activity
      */
     public void addTravelActivity(TravelActivity travelActivity){
-        logger.log(Level.INFO, "addKeyword function started");
+        //logger.log(Level.INFO, "addKeyword function started");
         int initialListSize = noOfActivities;
         travelActivities.add(travelActivity);
-        logger.log(Level.INFO, "travelActivity is added");
+        //logger.log(Level.INFO, "travelActivity is added");
         noOfActivities += 1;
         int newSize = noOfActivities;
         assert newSize == initialListSize + 1 :"There is an error with list size!";
@@ -98,32 +97,26 @@ public class TravelActivityList {
      */
 
     public void searchKeyword (String activityName) {
-        logger.log(Level.INFO, "searchKeyword function started");
-        ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();;
-        int temporaryArrayCounter = 0;
-        logger.log(Level.INFO, "temporaryArray is initialised");
         boolean isFound = false;
-        logger.log(Level.INFO, "isFound is initialised to false");
-        logger.log(Level.INFO, "Search for activities related to activityName given by user started");
+        int foundCounter = 0;
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
-            if(travelActivities.get(iterator).getPlan().contains(activityName)){
-                temporaryArray.add(temporaryArrayCounter ,travelActivities.get(iterator));
-                temporaryArrayCounter += 1;
-                logger.log(Level.INFO, "An activity is added to the temporaryArray");
+            if(travelActivities.get(iterator).getPlan().contains(activityName) &&
+                    !travelActivities.get(iterator).getTag().isEmpty()){
                 isFound = true;
+                foundCounter += 1;
+                if (isFound && foundCounter == 1) {
+                    System.out.println("Here are what you are looking for:");
+                }
+                if (travelActivities.get(iterator).getTag() == "") {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
+                } else {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
+                            " (" + travelActivities.get(iterator).getTag() + ")");
+                }
             }
         }
-        if (temporaryArrayCounter == 0 || isFound == false) {
+        if (foundCounter == 0 || isFound == false) {
             System.out.println("Sorry I could not find what you are looking for.");
-            logger.log(Level.INFO, "No activity is stored in the temporaryArray");
-        } else {
-            assert !temporaryArray.isEmpty();
-            System.out.println("Here are what you are looking for:");
-            logger.log(Level.INFO, "Starting the printing of activities in temporaryArray");
-            for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
-                System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).getPlan());
-                logger.log(Level.INFO, "An activity in temporaryArray is printed");
-            }
         }
     }
 
@@ -194,7 +187,8 @@ public class TravelActivityList {
         System.out.println(taggedTask);
     }
 
-    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration) throws OmniException{
+    public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration, String tag)
+            throws OmniException{
         if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())){
             throw new OmniException("Travel activity cannot be found");
         }
@@ -203,12 +197,100 @@ public class TravelActivityList {
         String oldTravelActivityDescription = updatedTravelActivity.toString();
         updatedTravelActivity.setDate(date);
         updatedTravelActivity.setDuration(duration);
+        updatedTravelActivity.setTag(tag);
         System.out.println("I have updated this task\nfrom: " + updatedTravelActivity +
                             "\nto: " + oldTravelActivityDescription);
     }
 
     public ArrayList<TravelActivity> getTravelActivities () {
         return travelActivities;
+    }
+
+    /**
+     * Find all the tasks with a particular tag and prints them out
+     *
+     * @param tag The tag of tasks that the user wants to find
+     */
+
+    public void findTag(String tag){
+        boolean isFound = false;
+        int foundCounter = 0;
+        for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
+            if(travelActivities.get(iterator).getTag().contains(tag) &&
+                    !travelActivities.get(iterator).getTag().isEmpty()){
+                isFound = true;
+                foundCounter += 1;
+                if (isFound && foundCounter == 1) {
+                    System.out.println("Here are what you are looking for:");
+                }
+                if (travelActivities.get(iterator).getTag() == "") {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
+                } else {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
+                            " (" + travelActivities.get(iterator).getTag() + ")");
+                }
+            }
+        }
+        if (foundCounter == 0 || isFound == false) {
+            System.out.println("Sorry I could not find what you are looking for.");
+        }
+    }
+
+    /**
+     * Find all the tasks of a particular type and prints them out
+     *
+     * @param type The type of tasks that the user wants to find
+     */
+
+    public void findType(String type){
+        boolean isFound = false;
+        int foundCounter = 0;
+
+        for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
+            if(type.equals("Food") && travelActivities.get(iterator) instanceof Food &&
+                    !travelActivities.get(iterator).toString().isEmpty()){
+                isFound = true;
+                foundCounter += 1;
+                if (isFound && foundCounter == 1) {
+                    System.out.println("Here are what you are looking for:");
+                }
+                if (travelActivities.get(iterator).getTag() == "") {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
+                } else {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
+                            " (" + travelActivities.get(iterator).getTag() + ")");
+                }
+            } else if (type.equals("Landmark") && travelActivities.get(iterator) instanceof Landmark &&
+                    !travelActivities.get(iterator).toString().isEmpty()) {
+                isFound = true;
+                foundCounter += 1;
+                if (isFound && foundCounter == 1) {
+                    System.out.println("Here are what you are looking for:");
+                }
+                if (travelActivities.get(iterator).getTag() == "") {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
+                } else {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
+                            " (" + travelActivities.get(iterator).getTag() + ")");
+                }
+            } else if (type.equals("Accommodation") && travelActivities.get(iterator) instanceof Accommodation &&
+                    !travelActivities.get(iterator).toString().isEmpty()) {
+                isFound = true;
+                foundCounter += 1;
+                if (isFound && foundCounter == 1) {
+                    System.out.println("Here are what you are looking for:");
+                }
+                if (travelActivities.get(iterator).getTag() == "") {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
+                } else {
+                    System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
+                            " (" + travelActivities.get(iterator).getTag() + ")");
+                }
+            }
+        }
+        if (foundCounter == 0 || isFound == false) {
+            System.out.println("Sorry I could not find what you are looking for.");
+        }
     }
 
 }

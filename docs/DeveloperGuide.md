@@ -16,7 +16,9 @@
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Tourists may have many plans during their holiday. Omnitravel aims to be a one-stop-shop for all travel plans.
+Omnitravels stores the user's travel plans and enable them to quickly retrieve their travel plans using the search 
+functions.
 
 ## User Stories
 
@@ -34,5 +36,27 @@
 * *glossary item* - Definition
 
 ## Instructions for manual testing
+
+- To find all travel plans with the same keyword
+
+Example: find rvrc
+
+Result:
+____________________________________________________________
+Here are what you are looking for:
+1. Accommodation: rvrc :24 Dec 2024 :2 weeks
+____________________________________________________________
+
+- To find all travel plans with the same tag
+
+Example: findtag delicacies
+
+Result: 
+____________________________________________________________
+Here are what you are looking for:
+1. Food: Popia :1 Dec 2020 :1hour
+2. Food: kfc :12 Dec 2024 :1 hour
+____________________________________________________________
+
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

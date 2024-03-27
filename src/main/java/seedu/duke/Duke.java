@@ -3,10 +3,15 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Duke {
 
     public static void main(String[] args) {
+
+        Logger logger = Logger.getLogger("Main");
+
         Ui.printGreeting();
         boolean userSaysBye = false;
         FileSave file = new FileSave("omni.txt");
@@ -19,6 +24,8 @@ public class Duke {
                 line = in.nextLine();
                 assert line != null :"Input does not exist!";
                 String[] command = line.split(" ");
+                logger.log(Level.INFO, command[0]);
+
                 switch (command[0].toLowerCase()) {
 
                 case "list":
@@ -101,6 +108,18 @@ public class Duke {
                 case "update":
                     Ui.printLine();
                     Parser.updateCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "findtag":
+                    Ui.printLine();
+                    Parser.findTagCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "findtype":
+                    Ui.printLine();
+                    Parser.findTypeCommand(line, list);
                     Ui.printLine();
                     break;
 
