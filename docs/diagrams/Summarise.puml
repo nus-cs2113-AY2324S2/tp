@@ -9,7 +9,7 @@ participant GeneralInputParser
 participant SummariseParser << static >>
 participant Dashboard order 30
 participant ExpenseManager order 31
-participant GeneralFileManager order 32
+participant FileManager order 32
 Logic -> UI ++ : getUserInput()
 
 User -> UI : "summarise"
@@ -35,9 +35,8 @@ Logic -> Dashboard ++ : getExpenseManager
 Dashboard --> Logic -- : ExpenseManager
 Logic -> ExpenseManager ++ : getExpensesStringRepresentation
 ExpenseManager --> Logic -- : expenseListToSave
-Logic -> Dashboard ++ : getGeneralFileManager
-Dashboard --> Logic -- : GeneralFileManager
-Logic -> GeneralFileManager ++ : save(expenseListToSave)
-
+Logic -> Dashboard ++ : getFileManager
+Dashboard --> Logic -- : FileManager
+Logic -> FileManager ++ : save(expenseListToSave)
 
 @enduml
