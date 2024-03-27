@@ -1,6 +1,5 @@
 package seedu.lifetrack.system.parser;
 
-import seedu.lifetrack.calories.calorielist.Entry;
 import seedu.lifetrack.calories.calorielist.InputEntry;
 import seedu.lifetrack.calories.calorielist.OutputEntry;
 import seedu.lifetrack.calories.Activity;
@@ -11,10 +10,11 @@ import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectMacros
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInInputMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncompleteMacrosMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMacrosInCaloriesOutMessage;
-import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncorrectOrderMessage;
-import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMissingKeywordsMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getCaloriesIncorrectOrderMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getCaloriesMissingKeywordsMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInMacrosInputMessage;
 
+import seedu.lifetrack.Entry;
 
 public class ParserCalories {
 
@@ -39,18 +39,18 @@ public class ParserCalories {
      */
     public static Entry parseCaloriesInput(String input) throws InvalidInputException {
         int caloriesIndex = input.indexOf("c/");
-        int dateIndex = input.indexOf("date/");
+        int dateIndex = input.indexOf("d/");
         int macrosIndex = input.indexOf("m/");
         
         checkKeywordsExist(caloriesIndex, dateIndex);
         assert caloriesIndex != -1 : "The c/ keyword should exist!";
-        assert dateIndex != -1 : "The date/ keyword should exist!";
+        assert dateIndex != -1 : "The d/ keyword should exist!";
 
         checkKeywordsCorrectlyOrdered(caloriesIndex, dateIndex, macrosIndex);
         assert caloriesIndex < dateIndex : "The c/ keyword must appear before date/ in the input!";
 
         //extract command, description, calories, date from input
-        String[] parts = input.split("c/|date/|m/");
+        String[] parts = input.split("c/|d/|m/");
         String command = parts[0].substring(0, CALORIES_OUT_PADDING).trim();
         String description = getDescriptionFromInput(input, command, caloriesIndex);
         String strCalories = parts[1].trim();
@@ -150,7 +150,7 @@ public class ParserCalories {
     private static void checkKeywordsExist(int caloriesIndex, int dateIndex) throws InvalidInputException {
         //check that c/ and date/ keywords exist in the input, else throw exception
         if (caloriesIndex == -1 || dateIndex == -1) {
-            throw new InvalidInputException(getMissingKeywordsMessage());
+            throw new InvalidInputException(getCaloriesMissingKeywordsMessage());
         }
     }
 
@@ -158,7 +158,7 @@ public class ParserCalories {
             throws InvalidInputException {        
         if ((macrosIndex != -1 && !(caloriesIndex < dateIndex && dateIndex < macrosIndex)) ||
                 (macrosIndex == -1 && !(caloriesIndex < dateIndex))) {
-            throw new InvalidInputException(getIncorrectOrderMessage());
+            throw new InvalidInputException(getCaloriesIncorrectOrderMessage());
         }
     }
 

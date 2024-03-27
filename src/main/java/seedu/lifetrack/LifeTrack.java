@@ -1,27 +1,26 @@
 package seedu.lifetrack;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.hydration.hydrationlist.HydrationList;
+import seedu.lifetrack.sleep.sleeplist.SleepList;
 import seedu.lifetrack.ui.Ui;
 import seedu.lifetrack.user.User;
 
-import java.util.Scanner;
+import java.io.File;
 
 public class LifeTrack {
 
+    public static CalorieList calorieList = new CalorieList("data/caloriesData.txt");
+    public static HydrationList hydrationList = new HydrationList("data/hydrationData.txt");
+    public static SleepList sleepList = new SleepList("data/sleepData.txt");
+    public static User user = new User();
     /**
      * Main entry-point for the java.lifetrack.LifeTrack application.
      */
     public static void main(String[] args) {
-        CalorieList calorieList = new CalorieList();
-        LiquidList liquidList = new LiquidList();
-        Scanner in = new Scanner(System.in);
-        User user = new User();
+        new File("data/").mkdir();
         Ui.sayHello();
-        assert true : "dummy assertion set to fail";
-        Ui.readUserInput(calorieList,liquidList,user);
+        Ui.readUserInput(calorieList,hydrationList,user,sleepList);
         Ui.byeMessage();
-        in.close();
     }
-
 }

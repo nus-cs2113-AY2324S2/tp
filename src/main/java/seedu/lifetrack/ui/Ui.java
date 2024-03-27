@@ -1,7 +1,8 @@
 package seedu.lifetrack.ui;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
+import seedu.lifetrack.hydration.hydrationlist.HydrationList;
+import seedu.lifetrack.sleep.sleeplist.SleepList;
 import seedu.lifetrack.user.User;
 
 import java.util.Scanner;
@@ -32,20 +33,19 @@ public class Ui {
      * Reads in the input from the user
      *
      * @param calorieList list containing all entries pertinent to calories
-     * @param liquidList  list containing all entries pertinent to liquids
+     * @param hydrationList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, LiquidList liquidList, User user) {
+    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList, User user, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList, liquidList, user);
+            handleUserInput(line, calorieList, hydrationList, user, sleepList);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
     /**
-     * handles input from the user
-     *
-     * @param line        input from the user
+     * handles input from the user 
+     * @param line input from the user
      * @param calorieList list containing all entries pertinent to calories
      */
     public static void handleCaloriesInput(String line, CalorieList calorieList) {
@@ -61,20 +61,33 @@ public class Ui {
         }
     }
 
-    public static void handleLiquidsInput(String line, LiquidList liquidsList) {
+    public static void handleHydrationInput(String line, HydrationList hydrationList) {
         assert !line.startsWith("bye") : "exit the app";
-        if (line.startsWith("liquids in") || line.startsWith("liquids out")) {
-            liquidsList.addEntry(line);
-        } else if (line.startsWith("liquids list")) {
-            liquidsList.printLiquidList();
-        } else if (line.startsWith("liquids delete")) {
-            liquidsList.deleteEntry(line);
+        if (line.startsWith("hydration add")) {
+            hydrationList.addEntry(line);
+        } else if (line.startsWith("hydration list")) {
+            hydrationList.printHydrationList();
+        } else if (line.startsWith("hydration delete")) {
+            hydrationList.deleteEntry(line);
+        } else {
+            handleUnknownInput();
+        }
+    }
+    public static void handleSleepInput(String line, SleepList sleepList) {
+        assert !line.startsWith("bye") : "exit the app";
+        if (line.startsWith("sleep add"))  {
+            sleepList.addSleep(line);
+        } else if (line.startsWith("sleep list")) {
+            sleepList.printSleepList();
+        } else if (line.startsWith("sleep delete")) {
+            sleepList.deleteSleep(line);
         } else {
             handleUnknownInput();
         }
     }
 
-    public static void handleUserInput(String line, CalorieList calorieList, LiquidList liquidList, User user) {
+    public static void handleUserInput(String line, CalorieList calorieList, HydrationList hydrationList,
+                                       User user ,SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
@@ -84,8 +97,10 @@ public class Ui {
                 handleCaloriesInput(line, calorieList);
             } else if (line.startsWith("help")) {
                 showHelp();
-            } else if (line.startsWith("liquids")) {
-                handleLiquidsInput(line, liquidList);
+            } else if (line.startsWith("hydration")) {
+                handleHydrationInput(line, hydrationList);
+            } else if (line.startsWith("sleep")) {
+                handleSleepInput(line, sleepList);
             } else if (line.startsWith("user")) {
                 handleUserCommands(line, user);
             } else {
@@ -132,13 +147,25 @@ public class Ui {
     public static void showHelp() {
         System.out.println("\t LifeTrack Command List:");
         System.out.println("\t - help: Displays a list of available commands and their descriptions.");
-        System.out.println("\t - calories in/out <activity> c/<number of calories> d/<date>: " +
-                "Adds a calorie gaining/burning entry into the calories tracker.");
+        printLine();
+        System.out.println("\t - calories in <food> c/<calories> d/<date> " +
+                "m/[carbohydrates, proteins, fats]: Adds a calorie gaining entry into the calories tracker.");
+        System.out.println("\t - calories out <activity> c/<calories> d/<date>: " +
+                "Adds a calorie burning entry into the calories tracker.");
         System.out.println("\t - calories list: Displays all entries currently stored in the calorie list.");
         System.out.println("\t - calories delete <index>: Deletes the entry at the specified index" +
                 " from the calorie list.");
-        System.out.println("\t - liquids in b/<type of beverage> v/<volume> : " +
-                "Marks the task at the specified index as done.");
-        System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
+        printLine();
+        System.out.println("\t - hydration add <type of beverage> v/<volume> d/<date>: " +
+                "Adds a hydration entry into the hydration tracker.");
+        System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.");
+        System.out.println("\t - hydration delete <index>: Deletes the hydration entry at the specified index " +
+                "from the hydration list.");
+        printLine();
+        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>: " +
+                "Adds a sleep entry into the sleep tracker.");
+        System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.");
+        System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index " +
+                "from the sleep list.");
     }
 }

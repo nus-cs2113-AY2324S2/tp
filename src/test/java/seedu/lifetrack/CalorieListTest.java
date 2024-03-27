@@ -7,7 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
-import seedu.lifetrack.calories.calorielist.Entry;
+import seedu.lifetrack.calories.calorielist.InputEntry;
+import seedu.lifetrack.calories.calorielist.OutputEntry;
 
 public class CalorieListTest {
 
@@ -17,8 +18,8 @@ public class CalorieListTest {
     public void addEntry_validInput_entryAdded() {
         // Test setup
         CalorieList calorieList = new CalorieList();
-        String validInputCalorieIn = "calories in Eat burger c/369 date/2024-03-14";
-        String validInputCalorieOut = "calories out run c/679 date/2024-03-15";
+        String validInputCalorieIn = "calories in Eat burger c/369 d/2024-03-14";
+        String validInputCalorieOut = "calories out run c/679 d/2024-03-15";
 
         // Call method to test
         calorieList.addEntry(validInputCalorieIn);
@@ -26,8 +27,8 @@ public class CalorieListTest {
 
         // Verify that the entry has been added to the list
         assertEquals(2, calorieList.getSize());
-        Entry firstEntry = calorieList.getEntry(0);
-        Entry secondEntry = calorieList.getEntry(1);
+        InputEntry firstEntry = (InputEntry)calorieList.getEntry(0);
+        OutputEntry secondEntry = (OutputEntry)calorieList.getEntry(1);
 
         // Check calories intake entry
         assertEquals("2024-03-14", firstEntry.getDate());
@@ -44,12 +45,12 @@ public class CalorieListTest {
     @Test
     public void testDeleteCalorieValidIndex() {
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/200 d/2024-03-14");
         int initialSize = calorieList.getSize();
         calorieList.deleteEntry("calories delete 1");
         assertEquals(initialSize - 1, calorieList.getSize());
-        calorieList.addEntry("calories out Run c/200 date/2024-03-14");
-        calorieList.addEntry("calories in Eat c/200 date/2024-03-14");
+        calorieList.addEntry("calories out Run c/200 d/2024-03-14");
+        calorieList.addEntry("calories in Eat c/200 d/2024-03-14");
         initialSize = calorieList.getSize();
         calorieList.deleteEntry("calories delete 2");
         assertEquals(initialSize - 1, calorieList.getSize());
@@ -85,7 +86,7 @@ public class CalorieListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
+        calorieList.addEntry("calories in Run c/200 d/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         String expectedOutput = addedEntryHeader + lineSeparator +
@@ -101,11 +102,11 @@ public class CalorieListTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         CalorieList calorieList = new CalorieList();
-        calorieList.addEntry("calories in Run c/200 date/2024-03-14");
-        calorieList.addEntry("calories out Walk c/150 date/2024-03-14");
-        calorieList.addEntry("calories in Eat c/500 date/2024-03-14");
-        calorieList.addEntry("calories out Run c/250 date/2024-03-14");
-        calorieList.addEntry("calories in Eat c/300 date/2024-03-14");
+        calorieList.addEntry("calories in Run c/200 d/2024-03-14");
+        calorieList.addEntry("calories out Walk c/150 d/2024-03-14");
+        calorieList.addEntry("calories in Eat c/500 d/2024-03-14");
+        calorieList.addEntry("calories out Run c/250 d/2024-03-14");
+        calorieList.addEntry("calories in Eat c/300 d/2024-03-14");
         calorieList.printCalorieList();
         System.setOut(System.out);
         StringBuilder expectedOutput = new StringBuilder();

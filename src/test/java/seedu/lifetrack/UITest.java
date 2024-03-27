@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.lifetrack.calories.calorielist.CalorieList;
+import seedu.lifetrack.hydration.hydrationlist.HydrationList;
+import seedu.lifetrack.sleep.sleeplist.SleepList;
 import seedu.lifetrack.ui.Ui;
-import seedu.lifetrack.liquids.liquidlist.LiquidList;
 import seedu.lifetrack.user.User;
 
 import java.io.ByteArrayOutputStream;
@@ -31,10 +32,11 @@ public class UITest {
     // Expect Empty String as function is exited
     public void handleUserInput_inputBye_printByeMessage() {
         CalorieList calorieList = new CalorieList();
-        LiquidList liquidList = new LiquidList();
+        HydrationList hydrationList = new HydrationList();
+        SleepList sleepList = new SleepList();
         User user = new User();
         String input = "bye";
-        Ui.handleUserInput(input, calorieList, liquidList,user);
+        Ui.handleUserInput(input, calorieList, hydrationList,user,sleepList);
         assertEquals("", outContent.toString());
     }
 }
