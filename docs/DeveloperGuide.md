@@ -5,8 +5,70 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
- # testcase component
-   # proposed implementation
+
+{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}   
+### Checker Component  
+**API：`Checker.java`**   
+**How the `Checker` work:**  
+1. Every `Checker` was created with a `Test` class.   
+2. The `Checker` will ask user's input and compare the answer up to 2 decimal tolerance.   
+3. If the user input is not a number, the answer will automatically viewed as a incorrect answer.   
+4. The accuracy and the user's answers will be stored for UI or other class to access with the specific function.   
+5. The checker will also store the times that user use to caculate for the problemset.  
+    
+**`Psedue code` for reference:**  
+```
+# the brief psedue code for how to check the answer
+
+correct = 0
+isCorrect = []
+for problem in problem set: 
+    UI.PrintProblem
+    answer <- user_input
+    if answer - problem.answer < 0.01
+        correct <- correct+1
+        isCorrect.append("1")
+    else
+        isCorrect.append("0")
+        continue
+
+```
+**next to be added for `Checker.java`:**  
+1. Support check on more types of problems (i.e Quadratic equation of one variable)   
+2. Give some explanation of the math problems.   
+   
+* To be added
+
+### Record Component - Design
+
+API: ![Record.java](../src/main/java/seedu/duke/Record.java)
+
+The Record component:
+
+- a snapshot of a completed problem sets, including the individual problems, the date it was solved, the time taken to solve the problem set, and the accuracy of the attempt.
+- \[Proposed\] records the specifics of each problem, including whether the answer is correct or not, for organized or filtered viewing of past records.
+
+### Record Component - Implementation
+
+- \[Proposed\] Store in each Record object a referential Test object for storing specifics of the attempted Problem Set.
+
+### Storage Component - Design
+
+API: ![Storage.java](../src/main/java/seedu/duke/Storage.java)
+
+The Storage Component:
+
+- Read / Write to external file at appropriate runtime to enable data persistence throughout multiple usages of the software.
+- a unique and strict format for external file formatting for proper loading data as well as input file corruption detection.
+- \[Proposed\] incorporate the UI, Parser component for proper user feedback regarding the save/load process
+
+### Storage Component - Implementation
+
+- Uses a list of Record objects to store all past attempts
+- \[Proposed\] Use a hashing method to write / read properly all information of test object
+
+### Testcase Component
+   # Proposed Implementation
      The proposed test mechanism is facilitated by ProblemGeneratorTest, CheckerTest. It check the correctness of the generated problemsets' types,
     number of questions and max digits, by comparing the generated output to the user input.
 
@@ -35,32 +97,37 @@ Given below is an example usage scenario and how the test behaves.
     information. Then generate a new ProblemGenerator and use ProblemGenerator#typeChoose to collect the generated problem,then for every problem, call 
     ProblemGeneratorTest#parseNumbers to extract the digits in the problem, then use assertTrue to verify if the input max digit is greater or equal to the digits
     of every operands in the generated problems.
-    
 
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* The student who wish to practise their mathematical problem solving ability.  
+* The teachers who wish to provide students with some math problems and check their performance.  
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+The product automates the generation of mathematical problems and their corresponding answers, thereby reducing the effort required by students to find practice problems.
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|student who just started learning quadratic equations|use MathGenius to specifically generate problem sets|gain specialized practice on this topic|
+|v1.0|a student who’s unfamiliar with mathematics terms|watch explanations and introductions to unfamiliar terms|strengthen understanding|
+|v1.0|primary school teacher|wcreate course or topic-specific arithmetic questions for students|teaching student more effortlessly|
+|v2.0|student who want to pracise solving foumula|generate various kinds of formula|practise the ability of solving math formula|
 
 ## Non-Functional Requirements
-
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.   
+    
+**{More to be add}**
 
 ## Glossary
 
-* *glossary item* - Definition
+* Mainstream OS: Windows, Linux, Unix, MacOS  
+* Private contact detail: A contact detail that is not meant to be shared with others  
 
 ## Instructions for manual testing
 
@@ -88,3 +155,4 @@ Given below is an example usage scenario and how the test behaves.
          Spend Time: 121s' .
    2. after shut down the program, user can view his performance report in a .txt file called 'recordList.txt' 
       with the complete date and accuracy inside.
+
