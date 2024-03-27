@@ -18,8 +18,6 @@ import java.util.logging.Logger;
  */
 public class Storage {
     public static final String FOLDER_PATH = "./data/";
-    public static final String USER_TIMETABLE_FILE_PATH = "./data/myTimetable.csv";
-    public static final String USER_TIMETABLE_FILE_NAME = "myTimetable";
     public static Integer userTimetableIndex = 0;
     private static Logger logger = Logger.getLogger("myLogger");
 
@@ -160,4 +158,7 @@ public class Storage {
         return course;
     }
 
+    public static void changeTimetable(int i) {
+        userTimetableIndex = i;
+    }
 }
