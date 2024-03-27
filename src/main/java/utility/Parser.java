@@ -27,11 +27,6 @@ public class Parser {
      * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static LocalDate parseDate(String date) {
-        // try {
-        //     checkDateInput(date);
-        // } catch (CustomExceptions.InvalidInput e) {
-        //     throw new CustomExceptions.InvalidInput("Invalid date format");
-        // }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate formattedDate = null;
         try {
@@ -67,8 +62,11 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
     public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
-        String[] parts = getDateParts(date);
-
+        String validDateRegex = "\\d{2}-\\d{2}-\\d{4}";
+        if (!date.matches(validDateRegex)) {
+            throw new CustomExceptions.InvalidInput("Invalid date format. Format is DD-MM-YYYY in integers.");
+        }
+        String[] parts = date.split("-");
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
 
@@ -79,36 +77,6 @@ public class Parser {
         if (month < 1 || month > 12) {
             throw new CustomExceptions.InvalidInput("Month must be an integer between 01 and 12.");
         }
-
-        if (day <= 10 && !parts[0].startsWith("0")) {
-            throw new CustomExceptions.InvalidInput("Day must start with '0' if day is less than 10");
-        }
-
-    }
-
-    /**
-     * Splits the date string input into day, month and year.
-     *
-     * @param date The string date from user input.
-     * @return A list of strings representing day, month and year
-     * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
-     */
-    private static String[] getDateParts(String date) throws CustomExceptions.InvalidInput {
-        String [] parts;
-        try {
-            parts = date.split("-");
-        } catch (Exception e) {
-            throw new CustomExceptions.InvalidInput("Invalid delimiter. Format is DD-MM-YYYY");
-        }
-
-        if (parts.length != 3){
-            throw new CustomExceptions.InvalidInput("Insufficient date parameters. Format is DD-MM-YYYY");
-        }
-
-        if (parts[0].length() != 2 || parts[1].length() != 2 || parts[2].length() != 4) {
-            throw new CustomExceptions.InvalidInput("Invalid date format. Format is DD-MM-YYYY");
-        }
-        return parts;
     }
 
     /**
@@ -324,11 +292,13 @@ public class Parser {
     }
 
     /**
-     * Parses input for Prediction command. Prints prediction if valid.
+     * Parses input for Prediction command.
+     * Prints period prediction if possible.
+     *
+     * @throws CustomExceptions.InsufficientInput If prediction cannot be made.
      */
     public static void parsePredictionInput() throws CustomExceptions.InsufficientInput {
         showPeriodHistory();
-
         if (HealthList.getPeriodSize() >= HealthConstant.MINIMUM_SIZE_FOR_PREDICTION) {
             LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
             Period.printNextCyclePrediction(nextPeriodStartDate);
@@ -337,14 +307,140 @@ public class Parser {
         }
     }
 
+    public static String[] getTimeParts(String time) throws CustomExceptions.InvalidInput {
+        String [] parts;
+        try {
+            parts = time.split(":");
+        } catch (Exception e) {
+            throw new CustomExceptions.InvalidInput("Invalid delimiter. Use ':'");
+        }
+        if (parts.length != 2 && parts.length != 3) {
+            throw new CustomExceptions.InvalidInput("Invalid time format! "
+                    + System.lineSeparator()
+                    + "Format is  either HH:MM, HH:MM:SS or MM:SS!");
+        }
+
+        return parts;
+    }
+
+    /**
+     * Validates the time used in HH:MM format.
+     *
+     * @param time String representing the time to check.
+     * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
+     */
+    public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
+        String validTimeRegex = "\\d{2}:\\d{2}";
+        if (!time.matches(validTimeRegex)) {
+            throw new CustomExceptions.InvalidInput("Invalid time format. Format is HH:MM with integers");
+        }
+        String [] parts = time.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+
+        if (hours < 0 || hours > 23) {
+            throw new CustomExceptions.InvalidInput("Hours must be a positive integer between 1 and 23");
+        }
+        if (minutes < 0 || minutes > 59) {
+            throw new CustomExceptions.InvalidInput("Minutes must be a positive integer between 1 and 59");
+        }
+    }
+
+    /**
+     * Validates the time used in HH:MM format.
+     *
+     * @param time String representing the time to check.
+     * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
+     */
+    public static void validateRunTimeInput(String time) throws CustomExceptions.InvalidInput {
+        String validTimeRegexWithHours = "\\d{2}:\\d{2}:\\d{2}";
+        String validTimeRegex = "\\d{2}:\\d{2}";
+        if (!time.matches(validTimeRegex) &&
+                !time.matches(validTimeRegexWithHours)) {
+            throw new CustomExceptions.InvalidInput("Invalid time format. " +
+                    "Format is HH:MM:SS or MM:SS with integers");
+        }
+        String [] parts = time.split(":");
+        int hours = -1; // if not needed, leave as -1.
+        int minutes;
+        int seconds;
+
+        if (parts.length == 2) {
+            minutes = Integer.parseInt(parts[0]);
+            seconds = Integer.parseInt(parts[1]);
+        } else if (parts.length == 3) {
+            hours = Integer.parseInt(parts[0]);
+            minutes = Integer.parseInt(parts[1]);
+            seconds = Integer.parseInt(parts[2]);
+        } else {
+            throw new CustomExceptions.InvalidInput("Invalid time format. Format is HH:MM:SS or MM:SS with integers");
+        }
+        if (minutes < 1 || minutes > 60) {
+            throw new CustomExceptions.InvalidInput("Minutes must be a positive integer between 01 and 59.");
+        }
+
+        if (seconds < 1 || seconds > 60) {
+            throw new CustomExceptions.InvalidInput("Minutes must be a positive integer between 01 and 59.");
+        }
+        
+        if (hours == 0) {
+            throw new CustomExceptions.InvalidInput("Hours cannot be 0. Use MM:SS instead");
+        }
+    }
+
+    /**
+     * Validates Appointment details entered.
+     *
+     * @param appointmentDetails List of strings representing Appointment details.
+     * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
+     */
+    public static void validateAppointmentDetails(String[] appointmentDetails)
+            throws CustomExceptions.InvalidInput {
+        if (appointmentDetails[1].isEmpty()
+                || appointmentDetails[2].isEmpty()
+                || appointmentDetails[3].isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant
+                    .INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
+        }
+        validateDateInput(appointmentDetails[1]);
+        validateTimeInput(appointmentDetails[2]);
+
+        if (appointmentDetails[3].length() > 100) {
+            throw new CustomExceptions.InvalidInput("Description cannot be more than 100 characters");
+        }
+    }
+
+    /**
+     * Split user input into Appointment command, date, time and description.
+     *
+     * @param input A user-provided string.
+     * @return An array of strings containing the extracted Appointment parameters.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     */
+    public static String[] splitAppointmentDetails(String input)
+            throws CustomExceptions.InvalidInput {
+        String [] results = new String[HealthConstant.APPOINTMENT_PARAMETERS];
+        if (!input.contains(HealthConstant.HEALTH_FLAG)
+                || !input.contains(HealthConstant.DATE_FLAG)
+                || !input.contains(HealthConstant.TIME_FLAG)
+                || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
+        }
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
+        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
+        return results;
+    }
+
     /**
      * Parses input for Appointment command. Adds Appointment object to HealthList if valid.
      *
      * @param userInput The user input string.
      */
     public static void parseAppointmentInput(String userInput) throws CustomExceptions.InvalidInput {
-        String[] appointmentDetails = Appointment.getAppointment(userInput);
-
+        String[] appointmentDetails = splitAppointmentDetails(userInput);
+        validateAppointmentDetails(appointmentDetails);
         if (appointmentDetails[0].isEmpty()
                 || appointmentDetails[1].isEmpty()
                 || appointmentDetails[2].isEmpty()
