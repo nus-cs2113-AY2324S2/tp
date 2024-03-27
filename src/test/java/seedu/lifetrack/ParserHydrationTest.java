@@ -60,7 +60,7 @@ public class ParserHydrationTest {
     @Test
     public void parseHydrationInput_inputWrongOrderDateBeforeVolume_invalidInputExceptionThrown() {
         // setup test
-        String invalidInput = "liquids in Milo date/221024 v/1000";
+        String invalidInput = "hydration add Milo d/221024 v/1000";
 
         // Call methods to test
         try {
@@ -75,7 +75,7 @@ public class ParserHydrationTest {
     @Test
     public void parseHydrationInput_inputNonIntegerValueForVolume_invalidInputExceptionThrown() {
         // setup test
-        String invalidInput = "liquids in Milo v/##s100 date/221024";
+        String invalidInput = "hydration add Milo v/##s100 d/221024";
 
         // Call methods to test
         try {
@@ -90,7 +90,7 @@ public class ParserHydrationTest {
     @Test
     public void parseHydrationInput_inputNegativeValueForVolume_invalidInputExceptionThrown() {
         // setup test
-        String invalidInput = "liquids in Milo v/-1000 date/221024";
+        String invalidInput = "hydration add Milo v/-1000 d/221024";
 
         // Call methods to test
         try {

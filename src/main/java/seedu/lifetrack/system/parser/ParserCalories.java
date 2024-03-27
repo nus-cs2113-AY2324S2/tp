@@ -10,8 +10,8 @@ import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectMacros
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInInputMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncompleteMacrosMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMacrosInCaloriesOutMessage;
-import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getIncorrectOrderMessage;
-import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getMissingKeywordsMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getCaloriesIncorrectOrderMessage;
+import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getCaloriesMissingKeywordsMessage;
 import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.getWhitespaceInMacrosInputMessage;
 
 import seedu.lifetrack.Entry;
@@ -150,7 +150,7 @@ public class ParserCalories {
     private static void checkKeywordsExist(int caloriesIndex, int dateIndex) throws InvalidInputException {
         //check that c/ and date/ keywords exist in the input, else throw exception
         if (caloriesIndex == -1 || dateIndex == -1) {
-            throw new InvalidInputException(getMissingKeywordsMessage());
+            throw new InvalidInputException(getCaloriesMissingKeywordsMessage());
         }
     }
 
@@ -158,7 +158,7 @@ public class ParserCalories {
             throws InvalidInputException {        
         if ((macrosIndex != -1 && !(caloriesIndex < dateIndex && dateIndex < macrosIndex)) ||
                 (macrosIndex == -1 && !(caloriesIndex < dateIndex))) {
-            throw new InvalidInputException(getIncorrectOrderMessage());
+            throw new InvalidInputException(getCaloriesIncorrectOrderMessage());
         }
     }
 
