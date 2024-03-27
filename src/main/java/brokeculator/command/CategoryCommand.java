@@ -23,10 +23,10 @@ public class CategoryCommand extends Command {
     public void execute(Dashboard dashboard) {
         switch (subcommand) {
         case ADD_SUBCOMMAND:
-            addCategory(value);
+            addCategory(value.toUpperCase());
             break;
         case DELETE_SUBCOMMAND:
-            deleteCategory(value);
+            deleteCategory(value.toUpperCase());
             break;
         case LIST_SUBCOMMAND:
             listCategories();
