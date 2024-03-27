@@ -56,6 +56,7 @@ public class Ui {
         for (int index = 0; index < topicListSize; index++) {
             System.out.println((index + 1) + ". " + topicList.getTopic(index));
         }
+        System.out.println((topicListSize + 1) + ". " + "Randomly select a topic for me ;)");
         System.out.println("Please choose a topic to play:");//input command in the form "start [INDEX]
     }
 
@@ -139,7 +140,7 @@ public class Ui {
     }
 
     private void handleException(CustomException e) {
-        System.out.println(e.getMessage() + "TODO: show possible commands"); //TODO
+        System.out.println(e.getMessage()); //TODO
     }
     public void printLine() {
         for (int i = 0; i < NEW_LINE; i += 1) {

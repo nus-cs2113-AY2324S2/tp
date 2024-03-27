@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Helper {
     private static final ArrayList<Command> commandList = new ArrayList<Command>();
@@ -62,5 +63,20 @@ public class Helper {
         return commandList.size();
     }
 
+    // returns random topic number from 1 to upperLimit - 1
+    public int generateRandomNumber(int upperLimit) {
+        assert (upperLimit != 1) : "upperLimit == 1 means topicList.getSize() = 0";
+        Random random = new Random();
+        int randomNumber = 0;
+        boolean isCheckingValidTopicNum = true;
+
+        while (isCheckingValidTopicNum) { //random.nextInt() may return 0, which is NOT a valid topicNum
+            randomNumber = random.nextInt(upperLimit);
+            if (randomNumber != 0) {
+                isCheckingValidTopicNum = false;
+            }
+        }
+        return randomNumber;
+    }
 }
 

@@ -118,6 +118,7 @@ public class Parser {
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
             ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
+        assert (topicList.getSize() != 0) : "Size of topicList should never be 0";
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
@@ -131,6 +132,16 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("No such topic");
             }
+            // checks if user wants a random topic num
+            final int randomTopicNum = topicList.getSize() + 1;
+            if (topicNum == randomTopicNum) {
+                Helper helper = new Helper();
+                topicNum = helper.generateRandomNumber(randomTopicNum);
+            }
+            assert (topicNum != 0) : "topicNum should not be 0";
+            assert (topicNum != randomTopicNum) : "topicNum should not be randomTopicNum";
+
+            // prints questions
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
             System.out.println("You have finished the topic! What will be your next topic?");
             topicList.get(topicNum - 1).markAsAttempted();
@@ -142,9 +153,7 @@ public class Parser {
 
     }
 
-    // user enters "solution 1" to get solution for question1 OR
-    // user enters "solution -all" to get ALL solutions
-    // also works for "explain 1"
+    // solution and explain commands
     private void processSolutionCommand(
             String lowerCaseCommand, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic

@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HelperTest {
 
-    private final Helper helperTest = new Helper();
+    private static final Helper helperTest = new Helper();
 
     @Test
     // check number of prompts in the helper's command list
-    public void helperCompletenessTest(){
-        assertEquals(helperTest.getCommandsCount(), 7);
+    public void getCommandsCount_correctNumOfCommandsInList_expect7(){
+        assertEquals(7, helperTest.getCommandsCount());
+    }
+
+    @Test
+    void generateRandomNumber_onlyOneTopicToChooseFrom_expect1() {
+        int upperLimitOneTopic = 2;
+        assertEquals(1, helperTest.generateRandomNumber(upperLimitOneTopic));
     }
 }
