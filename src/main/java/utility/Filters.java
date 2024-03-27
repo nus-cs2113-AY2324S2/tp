@@ -9,5 +9,6 @@ public enum Filters {
     GYM,
     PERIOD,
     BMI,
-    APPOINTMENT
+    APPOINTMENT,
+    PREDICTION
 }

@@ -27,6 +27,10 @@ public class Appointment extends Health {
     public LocalTime getTime() {
         return this.time;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
     public static String[] getAppointment(String input) throws CustomExceptions.InvalidInput {
         String[] results = new String[HealthConstant.APPOINTMENT_PARAMETERS];
 
