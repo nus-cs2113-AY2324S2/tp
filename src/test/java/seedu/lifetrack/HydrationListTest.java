@@ -4,7 +4,6 @@ package seedu.lifetrack;
 import org.junit.jupiter.api.Test;
 
 import seedu.lifetrack.hydration.hydrationlist.HydrationList;
-import seedu.lifetrack.ui.HydrationListUI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
