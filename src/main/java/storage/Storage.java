@@ -77,7 +77,7 @@ public class Storage {
         assert items != null : "Items cannot be null.";
         Item lastItem = items.get(items.size() - 1);
         String descriptionAdded = (items.size() - 1) + " | " + lastItem.getItemName() +
-                " | " + lastItem.getQuantity() + "\n";
+                " | " + lastItem.getQuantity() + " | " + lastItem.getBuyPrice() + " | " + lastItem.getSellPrice() +"\n";
         updateFile(descriptionAdded, ifAppend);
     }
 
@@ -85,8 +85,8 @@ public class Storage {
         assert items != null : "Items cannot be null.";
         int length = items.size();
         for (int index = 0; index < length; index++) {
-            String descriptionAdded = index + " | " + items.get(index).getItemName() +
-                    " | " + items.get(index).getQuantity() + "\n";
+            String descriptionAdded = index + " | " + items.get(index).getItemName() + " | " + items.get(index).getQuantity()
+                    + " | " + items.get(index).getBuyPrice() + " | " + items.get(index).getSellPrice() + "\n";
             if (index == 0) {
                 updateFile(descriptionAdded, ifAppend);
             } else {
