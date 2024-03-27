@@ -6,6 +6,14 @@
 
 ## Design & implementation
 
+Here is a quick overview of the main components and how they interact with each other:
+
+- [Parser](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###parser-implementation): Reads input
+- [Ui](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###ui-implementation): The UI of the App
+- Game: The Interface concerning the games
+- TicTacToe: Game 1
+- Hangman: Game 2
+
 ### Parser Implementation:
 Parser Class (v1.0) reads user input from the standard input stream, checks the input, 
 tests the validity, and conveys the validity back to the class it is called from.
@@ -21,6 +29,23 @@ the moves performed in TicTacToe. A future implementation for v2.0 would integra
 to read and verify user input for the HangMan class as well, such as readLetters(String: input) 
 or readHMMove(String: input).
 ![img_1.png](img_1.png)
+
+### UI Implementation:
+The `UI` consists of the AeroCade `logo`, the `help` menu, the `tutorial`, and sends farewell to the user upon `quit`
+
+The `UI` component,
+
+* reads user commands using `Parser` component.
+* displays a `help` menu with instructions.
+* creates a `tutorial` to assist user.
+
+(image)
+
+### Game Implementation:
+
+### TicTacToe Implementation:
+
+### Hangman Implementation:
 
 ## Product scope
 ### Target user profile
