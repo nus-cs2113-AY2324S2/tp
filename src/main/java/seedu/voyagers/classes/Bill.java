@@ -1,5 +1,6 @@
 package seedu.voyagers.classes;
 
+import seedu.voyagers.utils.Currency;
 import seedu.voyagers.utils.Payable;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.Arrays;
 public class Bill implements Payable {
 
     private String billName;
+    private double amount;
+    private Currency currency;
     private Trip trip;
     private ArrayList<Profile> people = new ArrayList<>();
     private ArrayList<Double> percentages = new ArrayList<>();
@@ -27,7 +30,7 @@ public class Bill implements Payable {
         if (people.size() != percentages.size()) {
             throw new IllegalArgumentException("Number of elements in 'people' and 'percentages' arrays must be equal");
         }
-        if (sumPercentages(percentages) != 100) {
+        if (sumPercentages(percentages) != 100) { //TODO: change to check. not negative
             throw new IllegalArgumentException("Percentages do not sum to 100");
         }
         this.billName = billName;
@@ -83,6 +86,24 @@ public class Bill implements Payable {
         return people;
     }
 
+    public static void checkPercentages(ArrayList<Double> list) {
+        double sum = 0;
+        for (double num : list) {
+            sum += num;
+            if (num < 0) {
+                throw new IllegalArgumentException("Percentages cannot be negative");
+            }
+        }
+
+        if (sum != 100) {
+            throw new IllegalArgumentException("Percentages do not sum to 100");
+        }
+    }
+
+    public static void checkPercentages(Double[] p){
+        checkPercentages(new ArrayList<>(Arrays.asList(p)));
+    }
+
     public static double sumPercentages(ArrayList<Double> list) {
         double sum = 0;
         for (double num : list) {
@@ -110,6 +131,25 @@ public class Bill implements Payable {
     }
     public ArrayList<Double> getPercentages() {
         return this.percentages;
+    }
+
+    public void setAmount(double amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
+        this.amount = amount;
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public Currency getCurrency() {
+        return this.currency;
     }
     public void setTrip(Trip trip) {
         this.trip = trip;
