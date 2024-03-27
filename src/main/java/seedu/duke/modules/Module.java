@@ -64,7 +64,7 @@ public class Module {
         return moduleTaken;
     }
 
-    public void setModuleStatus(boolean moduleTaken) {
+    public void setModuleTaken(boolean moduleTaken) {
         this.moduleTaken = moduleTaken;
     }
 
