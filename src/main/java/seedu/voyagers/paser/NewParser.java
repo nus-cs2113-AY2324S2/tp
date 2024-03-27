@@ -8,6 +8,8 @@ import seedu.voyagers.commands.ExitCommand;
 import seedu.voyagers.commands.HelpCommand;
 import seedu.voyagers.commands.ListCommand;
 import seedu.voyagers.commands.ModifyTripCommand;
+import seedu.voyagers.commands.ReviewMainTripCommand;
+import seedu.voyagers.commands.AddBillCommand;
 
 
 import java.util.Arrays;
@@ -47,6 +49,8 @@ public class NewParser {
             return new AddTripCommand(parseArgs(line, ParserDefinitions.ADDMAINTRIP));
         case "addsubtrip":
             return new AddSubTripCommand(parseArgs(line, ParserDefinitions.ADDSUBTRIP, true));
+        case "addBill":
+            return new AddBillCommand(parseArgs(line, ParserDefinitions.ADDBILL));
         case "setname":
             values = concatenate(new String[]{"name"},
                     parseArgs(line, ParserDefinitions.SETNAME, true));
@@ -65,6 +69,10 @@ public class NewParser {
             return new ModifyTripCommand(values);
         case "help":
             return new HelpCommand();
+        case "reviewmaintrip":
+            values = parseArgs(line, ParserDefinitions.REVIEW);
+            return new ReviewMainTripCommand(values);
+
         default:
             throw new IllegalArgumentException("Invalid command");
 
@@ -74,6 +82,7 @@ public class NewParser {
     private static String[] concatenate(String[] s1, String[] s2){
         String[] result = new String[s1.length + s2.length];
         System.arraycopy(s1, 0, result, 0, s1.length);
+        System.arraycopy(s2, 0, result, 1, s2.length);
         return result;
     }
 
@@ -150,8 +159,8 @@ public class NewParser {
         String line2 = "setname trip1 /n trip2";
         String[] values = null;
         try{
-            values = parseArgs(line2, ParserDefinitions.SETNAME, true);}
-        catch (IllegalArgumentException e){
+            values = parseArgs(line2, ParserDefinitions.SETNAME, true);
+        } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
         for (String value : values) {

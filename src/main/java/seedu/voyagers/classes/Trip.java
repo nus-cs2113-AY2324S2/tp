@@ -11,10 +11,11 @@ public class Trip {
     private Date endDate;
     private String location;
     private String description;
+    private Integer reviewScore = 0;
 
     private ArrayList<Trip> subTrips = new ArrayList<>();
 
-    public Trip(String name, Date startDate, Date endDate, String location, String description) {
+    public Trip(String name, Date startDate, Date endDate, String location, String description, String reviewScore) {
 
         if (startDate.after(endDate)) {
             throw new IllegalArgumentException("Start date cannot be after end date");
@@ -27,6 +28,7 @@ public class Trip {
         this.endDate = endDate;
         this.location = location;
         this.description = description;
+        this.reviewScore = Integer.parseInt(reviewScore);
     }
 
     public Trip(String[] args) throws Exception{
@@ -57,7 +59,6 @@ public class Trip {
 
     /**
      * Returns the duration of the trip in days.
-     *
      * @return duration of the trip in days
      */
     public int getDuration() {
@@ -70,6 +71,10 @@ public class Trip {
 
     public String getDescription() {
         return description;
+    }
+
+    public Integer getReviewScore() {
+        return reviewScore;
     }
 
     public void setName(String name) {
@@ -93,11 +98,14 @@ public class Trip {
         this.description = description;
     }
 
+    public void setReviewScore(int reviewScore) {
+        this.reviewScore = reviewScore;
+    }
 
     /**
      * Returns the sub-trips of the current trip.
      *
-     * @return the array with sub-trips of the current trip
+     * @return the list with sub-trips of the current trip
      */
     public ArrayList<Trip> getSubTrips() {
         return subTrips;
@@ -153,7 +161,7 @@ public class Trip {
         String s = "Name: " + name + "\t\tStart Date: " +
                 FormatDate.dateFormat.format(startDate) + "\t\tEnd Date: " +
                 FormatDate.dateFormat.format(endDate) + "\t\tLocation: " +
-                location + "\t\tDescription: " + description;
+                location + "\t\tDescription: " + description + "\t\tReview: " + getReviewScore();
         s += "\n\tSub-trips:";
         for (Trip t : subTrips) {
             s += "\n\t\t" + t.toString();
