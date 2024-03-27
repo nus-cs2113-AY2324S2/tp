@@ -1,4 +1,4 @@
-# User Guide
+# Active Edge User Guide 💪
 
 ## Introduction
 
@@ -61,11 +61,20 @@ Example of usage:
 `set goal w/WATER_GOAL`
 `show g`
 
-## FAQ
+## FAQ ❓
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**:
+Create a "data" folder within the ActiveEdge application directory, 
+and then copy the "data.txt" file into this newly created folder.
+
+**Q**: I accidentally deleted an entry. Is there a way to recover it?
+
+**A**: Unfortunately, deleted entries are not recoverable, so it's 
+important to be careful when using the delete command.
+
+
 
 ## Command Summary
 

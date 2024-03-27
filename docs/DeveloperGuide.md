@@ -1,16 +1,33 @@
-# Developer Guide - ActiveEdge
+# ActiveEdge Developer Guide 🥦🏃‍♂️
 
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design & implementation 🏹
+
+### System Architecture
+
+[IMAGE will be added later]
+
+The Architecture Diagram above shows a high-level overview of the architectural design of ActiveEdge.
+
+Active Edge is comprised of 8 major components:
+
+```Main```: The entry point of the application.\
+```UI```: A package responsible for handling user interactions, both capturing input and displaying output.\
+```Parser```: A package that analyzes and interprets the user's input commands.\
+```Command```: A package tasked with executing specific actions based on the user's commands.\
+```Storage```: A package focused on persisting and retrieving all relevant data from the application's local storage system, ensuring data continuity and integrity.\
+```LogList```: Maintains logged data throughout the application's runtime.\
+```FoodData```: Active Edge's food database\
+```ExerciseData```: Active Edge's exercise database\
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
 ## Product scope
-### Target user profile
+### Target user profile 
 
 Our target user profile primarily consists of NUS university students, including fitness enthusiasts, 
 athletes adhering to strict dietary regimens, and individuals aiming to adopt a healthier lifestyle. 

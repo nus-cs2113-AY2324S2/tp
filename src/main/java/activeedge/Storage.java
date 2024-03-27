@@ -191,13 +191,13 @@ public class Storage {
             }
         }
     }
+
     private static String extractDateTimeString(String task) {
         // Extracting date-time string between "Recorded on: " and ")"
         int startIndex = task.indexOf("Recorded on: ") + "Recorded on: ".length();
         int endIndex = task.lastIndexOf(")");
         return task.substring(startIndex, endIndex);
     }
-
 
     private static LocalDateTime parseDateTime(String dateTimeStr) {
         try {
