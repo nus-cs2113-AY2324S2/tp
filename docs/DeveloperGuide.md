@@ -21,6 +21,13 @@
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
+      - [Description](#description-1)
+      - [Design Considerations](#design-considerations-1)
+          - [User Design Considerations](#design-considerations-1)
+          - [Developer Design Considerations](#design-considerations-1)
+      - [Implementation](#implementation-1)
+          - [Class Diagram](#class-diagram-1)
+          - [Sequence Diagram](#sequence-diagram-1)
   - [Sleep tracker component]()
   - [Focus timer component](#focus-timer-component)
     - [Design Considerations](#design-considerations-1)
@@ -203,6 +210,102 @@ the command. The corresponding reflection command object is then created and is 
 and the corresponding method in `ReflectionManager` is invoked.
 
 ### Habit tracker component
+
+#### Description
+The habit tracker component aims to provide user with a tool to track and cultivate good habits.
+
+#### Design Considerations
+* ##### User Design Considerations
+    * User can add new habits in the habit tracker that they wish to cultivate.
+    * User can increase the count of a habit after they completed the habit for the day, allowing them to keep track of the total number of times they completed the habit.
+    * User can also delete the habit if they no longer want to cultivate that habit.
+    * User are able to set the priority of the habits (HIGH, MED, LOW), to prioritise their time on more important habits.
+    * User can also sort the habits according to their priority for better visualization.
+    * A help menu is also provided for users to guide them on how to use the habit tracker.
+    * Error messages with guidance messages will be printed to console if command input by user is invalid.
+
+* #### Developer Design Considerations
+    * Modularity: Encapsulate related functionalities within classes to promote re-usability and maintainability.
+    * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages
+    * Data Encapsulation: Control the access to a class's internal attributes, accessible only through getters and setters
+    * Interface Segregation: Segregation of command interface to represent different command types for specific use cases.
+    * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+#### Implementation
+
+##### Class Diagram
+![HabitClassDiagram.png](diagrams/habit/HabitClassDiagram.png)
+
+* `HabitTracker` class
+    * Overview
+        * The `HabitTracker` class manages the habit tracker list which contains the habits.
+    * Attributes:
+        * `habitList`: Private attribute representing the list of habits. It is an ArrayList of Habit objects.
+    * Methods:
+        * `HabitTracker()`: Constructs a HabitTracker object. 
+        * `getNumberOfHabits()`: Returns the number of habits in the habitList.
+        * `addHabit(Habit newHabit)`: Adds a new Habit object into the habitList.
+        * `listHabits()`: Prints a list of all habits in habitList .
+        * `isValidHabitID(int habitID)`: Check if a habit ID is valid by comparing with the size of habitList.
+        * `updateHabitCount(int habitID, String updatedCount)`: Update the habit count of a habit.
+        * `deleteHabit(int habitID)`: Delete a habit from habitList.
+        * `setPriorityLevel(int habitID, String priority)`: Set the priority of a habit.
+        * `sortHabits()`: Sort the habits in habitList according to the habits' priorities.
+        * `clearHabitList()`: Delete all habits from habitList.
+    * Dependencies:
+        * HabitTrackerStorage: Utilized for data storage operations.
+        * Ui: Utilized for user interface interactions.
+    * UML notes:
+        * `HabitTracker` can contain any number of `Habit` class objects.
+        * It relies on `HabitTrackerStorage` class for file operations and `Ui` class for user interactions.
+
+* `Habit` class
+    * Overview:
+        * This class represents a Habit.
+    * Attributes:
+        * `description`: Private attribute holding the habit description.
+        * `habitCount`: Private attribute holding the total count the user have completed the habit.
+        * `priority`: Private attribute representing the priority level of a habit.
+    * Methods:
+        * `Habit(String description)`: Constructs a habit object.
+        * `Habit(String description, int habitCount, Priority priority)`: Constructs a habit object.
+        * `getDescription()`: Get the description of the habit.
+        * `getHabitCount()`: Get the habit count of the habit.
+        * `getPriority()`: Get the priority of the habit.
+        * `toString()`: Method that formats the attributes of the habit for printing.
+    * UML notes:
+        * `HabitTracker` can contain any number of `ReflectionQuestion` instances.
+        * When a `HabitTracker` object is destroyed, its associated `Habit` instances are also destroyed, showcasing a composition relationship.
+
+* `HabitCommandParser`
+    * Overview: Parses habit-tracker commands and create different habit command objects based on user input.
+    * Method: `determineHabitCommand(HabitTracker habitTracker, String commandArgs)`
+
+* Habit command classes
+    * `AddHabitCommand`: Add a new habit to the habit-tracker.
+        * Command format: `habit add <habit_description>`
+    * `DeleteHabitCommand`: Delete a habit from the habit-tracker.
+        * Command format: `habit delete /id <habit_ID>`
+    * `ListHabitsCommand`: Prints a list of all existing habits.
+        * Command format: `habit list`
+    * `UpdateHabitCountCommand`: Increase habit count after completing a habit.
+        * Command format: `habit update /id <habit_ID> /by <increment_count>`
+    * `SetPriorityCommand`: Set priority level of habit
+        * Command format: `habit set /id <habit_ID> /priority <priority_level>`
+    * `SortHabitsCommand`: Sort habit list according to priority level.
+        * Command format: `habit sort`
+    * `HabitHelpCommand`: Display a help menu of the habit-tracker commands
+        * Command format: `habit help`
+
+
+#### Sequence Diagram
+![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
+* Note that `PlaceholderReflectionCommand` can refer to any of the habit commands. 
+
+When main starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the habit tracker feature. If it is, it will be further parsed by `HabitCommandParser` to determine
+the command. The corresponding habit command object is then created and is returned to `Main`, where `execute` will then be called
+and the corresponding method in `HabitTracker` is invoked.
 
 ### Sleep tracker component
 
