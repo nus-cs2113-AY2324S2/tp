@@ -1,0 +1,15 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package "seedu.stockpal.commands" {
+    class ListCommand {
+        - sortType: String
+
+        + ListCommand(sortType: String)
+        + execute(productList: ProductList): void
+        - sortListAccordingly(newList: ProductList): void
+    }
+}
+
+@enduml

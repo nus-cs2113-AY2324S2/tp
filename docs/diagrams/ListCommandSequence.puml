@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":StockPal" as stockpal STOCKPAL_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant "command:ListCommand" as commands COMMANDS_COLOR
+
+activate stockpal STOCKPAL_COLOR
+
+user -[USER_COLOR]> ui : "list"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> stockpal : "list"
+
+stockpal -[STOCKPAL_COLOR]> parser : parseCommand("list")
+activate parser PARSER_COLOR
+
+create commands
+parser -[PARSER_COLOR]> commands : new ListCommand(null)
+activate commands COMMANDS_COLOR
+commands --[COMMANDS_COLOR]> parser : command
+
+parser --[PARSER_COLOR]> stockpal : command
+deactivate parser
+
+stockpal -[STOCKPAL_COLOR]> commands : command.execute(productList:ProductList)
+commands -[COMMANDS_COLOR]> commands : sortListAccordingly(newList:ProductList))
+activate commands COMMANDS_COLOR
+commands --[COMMANDS_COLOR]> commands
+deactivate commands
+
+commands -[COMMANDS_COLOR]> ui : printListTasks(newList:ProductList)
+deactivate commands
+
+@enduml
