@@ -19,12 +19,7 @@ public class BinBash {
         storage = new Storage();
         itemList = new ItemList(storage.loadData());
         inputParser = new Parser(itemList);
-
-        try {
-            logger = new MainLogger(BinBash.class.getName());
-        } catch (BinBashException e) {
-            userInterface.talk(e.getMessage());
-        }
+        logger = new MainLogger(BinBash.class.getName());
     }
 
     private void run() {
@@ -33,7 +28,7 @@ public class BinBash {
         } catch (BinBashException e) {
             userInterface.talk(e.getMessage());
         }
-        logger.info("Program started");
+        logger.info("BinBash started");
 
         userInterface.greet();
 

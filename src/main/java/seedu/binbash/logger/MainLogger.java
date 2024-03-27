@@ -17,7 +17,7 @@ public class MainLogger {
     private final Logger fileLogger;
 
 
-    public MainLogger (String loggerName) throws BinBashException {
+    public MainLogger (String loggerName) {
         fileLogger = Logger.getLogger(loggerName);
     }
 
