@@ -162,7 +162,7 @@ public class Storage {
                         String[] items = task.trim().split(" ");
                         int len = items.length;
                         assert len >= 8;
-                        
+
                         String mealName = "";
                         for(int i = 1; i <= len-7; i++) {
                             if( i < len-7 ) {

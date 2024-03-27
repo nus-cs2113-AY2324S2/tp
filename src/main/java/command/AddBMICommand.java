@@ -1,10 +1,8 @@
 package command;
 
 import activeedge.userdetails.LogBMI;
-import activeedge.userdetails.LogHeight;
 import static activeedge.userdetails.UserDetailsList.DETAILS_LIST;
 import java.time.LocalDateTime;
-
 
 public class AddBMICommand {
     protected Integer bmi;
