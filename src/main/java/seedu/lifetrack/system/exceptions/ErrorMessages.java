@@ -27,7 +27,7 @@ public class ErrorMessages {
 
     public static String getInvalidNumberOfSetUpInputs() {
         return "\t Sorry, this command is invalid. Please enter the setup command in the following format " +
-                "user setup {NAME} h/{HEIGHT} w/{WEIGHT} a/{AGE} s/{SEX} e/{ENERGY LEVELS} g/{GOAL}";
+                "user setup {NAME} h/{HEIGHT} w/{WEIGHT} a/{AGE} s/{SEX} e/{EXERCISE LEVELS} g/{GOAL}";
     }
 
     public static String getInvalidGoalNumberMessage() {

@@ -35,7 +35,8 @@ public class Ui {
      * @param calorieList list containing all entries pertinent to calories
      * @param hydrationList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList, User user, SleepList sleepList) {
+    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList,
+                                     User user, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();

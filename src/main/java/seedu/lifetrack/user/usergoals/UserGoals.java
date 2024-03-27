@@ -16,7 +16,6 @@ public class UserGoals {
 
     public static void getHealthInfo(User user) {
         try {
-            System.out.println(System.getenv("KEY"));
             String requestBody = "height=" + user.getHeight() + "&" +
                     "weight=" + user.getWeight() + "&" +
                     "age=" + user.getAge() + "&" +
@@ -35,7 +34,7 @@ public class UserGoals {
             int indexOfCalories = response.body().indexOf("neededEnergy") + JSON_HEADING_SIZE;
             int calories = Integer.parseInt(response.body()
                     .substring(indexOfCalories, indexOfCalories + CALORIES_LENGTH));
-            System.out.println("You should consume " + calories + " calories a day to hit your goals!");
+            System.out.println("\t You should consume " + calories + " calories a day to hit your goals!");
             user.setCaloriesRequired(calories);
         } catch (IOException | InterruptedException e) {
             System.out.println("OOPS");
