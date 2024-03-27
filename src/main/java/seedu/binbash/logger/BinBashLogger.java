@@ -15,16 +15,15 @@ public class BinBashLogger {
     private final Logger fileLogger;
     private final Logger consoleLogger;
 
-
     public BinBashLogger(String loggerName) {
         fileLogger = Logger.getLogger(loggerName);
         consoleLogger = Logger.getLogger("consoleLogger");
 
-        if(isLogFileCreated) {
-            setFileHandler();
-        } else {
+        if(!isLogFileCreated) {
             createLogFile();
         }
+
+        setFileHandler();
     }
 
     private void createLogFile() {
@@ -55,7 +54,6 @@ public class BinBashLogger {
         assert logFile.exists() : "Log file (logs.txt) should already exists / have been created";
 
         isLogFileCreated = true;
-        setFileHandler();
     }
 
     public void info(String message) {
