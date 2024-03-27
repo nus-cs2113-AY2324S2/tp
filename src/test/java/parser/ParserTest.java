@@ -17,7 +17,7 @@ public class ParserTest {
         Parser parser = new Parser();
         parser.handleInput("help");
 
-        String expectedOutputPart = "Welcome to the Health Tracker Bot";
+        String expectedOutputPart = "Welcome to Active Edge!";
         assertTrue(outContent.toString().contains(expectedOutputPart));
 
         System.setOut(System.out);

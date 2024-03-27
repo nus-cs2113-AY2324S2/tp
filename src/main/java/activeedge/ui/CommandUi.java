@@ -16,6 +16,12 @@ public class CommandUi {
     static final String LINE = "____________________________________________________________\n";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
 
+    public static void printWelcomeMessage() {
+        String logo = "🌟 ACTIVE EDGE 🌟";
+        System.out.println("Welcome to " + logo);
+        System.out.println("🚀✨ Take the next step in your Healthy Lifestyle! ✨🚀");
+    }
+
     public static void printMealList() {
         System.out.println("Here are your logged meals for today");
         int j = 1;
@@ -162,4 +168,3 @@ public class CommandUi {
     }
 
 }
-

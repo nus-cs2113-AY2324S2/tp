@@ -70,7 +70,7 @@ public class Storage {
      * @param filePath The path of the file where logs should be saved.
      */
     public static void saveLogsToFile(String filePath) {
-        try (FileWriter fw = new FileWriter(filePath)) {
+        try (FileWriter fw = new FileWriter(filePath, false)) {
             for (int i = 0; i < UserDetailsList.detailsList.size(); i++) {
                 String out = UserDetailsList.detailsList.get(i).toString();
                 fw.write(out + "\n");
@@ -102,7 +102,8 @@ public class Storage {
             System.out.print("\n");
             int i = 0;
             int j = 0;
-            System.out.println("Welcome new user! Please input your height and weight in whole numbers!");
+            System.out.println("Since you are new here, let's start with your height and weight " +
+                    "to set things up!");
             try {
                 int heightInput = 0;
                 int weightInput = 0;
@@ -150,8 +151,10 @@ public class Storage {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("You can now start logging data!");
-        } else {
+            System.out.println("You can now start logging data! Type 'help' " +
+                    "if you are not sure how to use ActiveEdge.");
+        }else {
+
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {
                     String task = scanner.nextLine();
@@ -214,13 +217,13 @@ public class Storage {
             }
         }
     }
+
     private static String extractDateTimeString(String task) {
         // Extracting date-time string between "Recorded on: " and ")"
         int startIndex = task.indexOf("Recorded on: ") + "Recorded on: ".length();
         int endIndex = task.lastIndexOf(")");
         return task.substring(startIndex, endIndex);
     }
-
 
     private static LocalDateTime parseDateTime(String dateTimeStr) {
         try {

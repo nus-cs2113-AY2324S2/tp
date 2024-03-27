@@ -1,5 +1,6 @@
 package activeedge;
 
+import activeedge.ui.CommandUi;
 import command.ActiveEdgeException;
 import activeedge.parser.Parser;
 import activeedge.ui.ByeUi;
@@ -13,10 +14,7 @@ public class ActiveEdge {
     public static void run() {
         Scanner in = new Scanner(System.in);
 
-        String logo = "ACTIVE EDGE";
-        System.out.println("Hello from\n" + logo + " AI assistant!");
-        System.out.println("How can I help you today?");
-
+        CommandUi.printWelcomeMessage();
         Parser parser = new Parser();
 
         Storage.fetchData();
