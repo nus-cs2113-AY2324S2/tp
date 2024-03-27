@@ -42,7 +42,14 @@
       - [Focus Class Diagram](#focus-class-diagram)
       - [Focus State Transition Diagram](#focus-state-transition-diagram)
       - [Focus Sequence Diagram](#focus-sequence-diagram)
-  - [Fitness tracker component]()
+  - [Fitness tracker component](#fitness-motivator-component)
+    - [Description](#description-3)
+    - [Design Considerations](#design-considerations-4)
+        - [User Design Considerations](#user-design-considerations-4)
+        - [Developer Design Considerations](#developer-design-considerations-4)
+    - [Implementation](#implementation-4)
+        - [Class Diagram]()
+        - [Sequence Diagram]()
 
 ## Acknowledgements
 
@@ -514,7 +521,33 @@ The corresponding focus command object is then created and is returned to `Main`
 and the corresponding method in `FocusTimer` is invoked.
 
 
-### Fitness tracker component
+### Fitness Motivator component
+#### Description
+The Fitness Motivator provides users with a list of exercises, and give these users the ability to add and track their
+fitness goals. This component aims to contribute to the goal of improving the user's wellness, mainly their physical
+well-being.
+
+#### Design Considerations
+- #### User Design Considerations
+    - Users are able to generate a list of 5 different exercises that target 5 different parts of the body: The arms, chest, abs, back and legs. The list is randomly generated each time, to allow for the mixing of exercises.
+    - Users can also choose to generate exercises that generate a single part of the body, should they choose to target that part of the body for exercise.
+    - Users are given the freedom of adding, editing and deleting exercises to the list, to increase the number of different exercises that can be done.
+    - What good are exercises if there is no way of keeping track of progress? The goal tracker does this by generating 5 exercises for the user to do that day. It then allows the user to mark the exercise as done or not done, along with a progress bar for the user to track their progress.
+    - Error messages helps guide the user with usage of the fitness tracker, to ensure ease of usage.
+- #### Developer Design Considerations
+    - _Modularity_: All related classes are grouped together into packages. Command parsers are placed in the parser package, with individual command execution further placed into the fitnesscommands package. The execution of fitness logic are all grouped into the fitness package.
+    - _Abstraction_: The command interface is used to specify methods to be implemented in every single exercise command, creating a pre-written template and behaviour for all command classes.
+    - _Encapsulation_: The usage of private attributes and the use of helper methods help ensure data integrity. Get methods in the Exercise class and ExerciseList class ensure that the data is manipulated in the way that was intended by the developer and thus protecting the data.
+    - _Exception Handling_: Exception Handling prevents the code from reaching an unknown or unpredictable state, which could break the program.
+    - _Design Pattern_: To Be Continued
+    - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
+<!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
+#### Implementation
+**Class Diagram**
+<!-- Insert image and description of each class, with its overview, attributes,
+methods, dependencies and UML Notes -->
+**Sequence Diagram**
+<!-- Insert image and description of the image -->
 
 
 ## Product scope
