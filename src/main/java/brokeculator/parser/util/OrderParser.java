@@ -27,7 +27,7 @@ public class OrderParser {
                 continue;
             }
             if (keywordPositions[i] < providedKeywordPositions[providedKeywordCount - 1]) {
-                throw new Exception("Input format is incorrect. Use the help command to check the expected input order.");    
+                throw new Exception("Input format is incorrect. Check the help menu");
             }
             providedKeywordPositions[providedKeywordCount] = keywordPositions[i];
             providedKeywordCount++;
@@ -42,7 +42,8 @@ public class OrderParser {
                 continue;
             }
             int startIndex = keywordPositions[i] + keywords[i].keywordMarker.length();
-            int endIndex = parsedKeywordCount + 1 == providedKeywordCount ? userInput.length() : providedKeywordPositions[parsedKeywordCount + 1];
+            int endIndex = parsedKeywordCount + 1 == providedKeywordCount ?
+                    userInput.length() : providedKeywordPositions[parsedKeywordCount + 1];
             if (startIndex >= endIndex) {
                 throw new Exception(keywords[i].keywordMeaning + " is missing");
             }

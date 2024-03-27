@@ -1,6 +1,5 @@
 package brokeculator.expense;
 
-import brokeculator.event.Event;
 import brokeculator.storage.parsing.FileKeyword;
 import brokeculator.storage.parsing.SaveableType;
 
