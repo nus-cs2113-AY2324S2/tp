@@ -2,10 +2,8 @@ package seedu.lifetrack.ui;
 
 public class LiquidListUI {
 
-    public static final String WHITESPACE = "     ";
-
     public static void deleteMessage() {
-        System.out.println(WHITESPACE + "Successfully delete the liquid record.");
+        System.out.println("\t Successfully delete the liquid record.");
     }
 
     public static String deleteLogIndexMessage() {
@@ -18,15 +16,15 @@ public class LiquidListUI {
     }
 
     public static void addEntryMessage() {
-        System.out.println(WHITESPACE + "Beverage has been successfully added");
+        System.out.println("\t Beverage has been successfully added");
     }
 
     public static void emptyListMessage() {
-        System.out.println(WHITESPACE + "Your liquid list is empty.");
-        System.out.println(WHITESPACE + "Populate your list with more entries :)");
+        System.out.println("\t Your liquid list is empty.");
+        System.out.println("\t Populate your list with more entries :)");
     }
 
     public static void listHeader() {
-        System.out.println(WHITESPACE + "Your liquid List:");
+        System.out.println("\t Your liquid List:");
     }
 }

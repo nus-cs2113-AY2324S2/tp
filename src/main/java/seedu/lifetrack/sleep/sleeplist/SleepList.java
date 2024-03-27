@@ -5,7 +5,6 @@ import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserSleep;
 import seedu.lifetrack.ui.SleepListUi;
 import java.util.ArrayList;
-import static seedu.lifetrack.ui.SleepListUi.WHITESPACE;
 import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectSleepInputMessage;
 import static seedu.lifetrack.ui.SleepListUi.deleteMessage;
 import static seedu.lifetrack.ui.SleepListUi.sleepListHeader;
@@ -46,7 +45,7 @@ public class SleepList {
         } else {
             sleepListHeader();
             for (int i = 0; i < this.sleepList.size(); i++) {
-                System.out.println(WHITESPACE + (i + 1)+ ". " + getSleep(i).toString());
+                System.out.println("\t " + (i + 1)+ ". " + getSleep(i).toString());
             }
         }
     }

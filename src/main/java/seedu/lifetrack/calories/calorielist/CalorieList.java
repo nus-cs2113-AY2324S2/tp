@@ -25,11 +25,13 @@ public class CalorieList {
     private ArrayList<Entry> calorieArrayList;
     private FileHandler fileHandler;
 
+    //constructor for JUnit tests
     public CalorieList() {
         calorieArrayList = new ArrayList<>();
         fileHandler = new FileHandler("data/caloriesTestData.txt");
     }
 
+    //constructor for usage in terminal
     public CalorieList(String filePath) {
         try {
             fileHandler = new FileHandler(filePath);

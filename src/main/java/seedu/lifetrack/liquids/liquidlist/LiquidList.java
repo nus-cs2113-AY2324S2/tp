@@ -17,7 +17,6 @@ import static seedu.lifetrack.ui.LiquidListUI.deleteLogNumberMessage;
 import static seedu.lifetrack.ui.LiquidListUI.deleteMessage;
 import static seedu.lifetrack.ui.LiquidListUI.addEntryMessage;
 import static seedu.lifetrack.ui.LiquidListUI.emptyListMessage;
-import static seedu.lifetrack.ui.LiquidListUI.WHITESPACE;
 import static seedu.lifetrack.ui.LiquidListUI.listHeader;
 
 /**
@@ -32,14 +31,13 @@ public class LiquidList {
     private ArrayList<Entry> liquidArrayList;
     private FileHandler fileHandler;
 
+    //constructor for JUnit tests
     public LiquidList() {
         liquidArrayList = new ArrayList<>();
         fileHandler = new FileHandler("data/liquidsTestData.txt");
     }
 
-    /**
-     * Constructs an empty LiquidList.
-     */
+    //constructor for usage in terminal
     public LiquidList(String filePath) {
         try {
             fileHandler = new FileHandler(filePath);
@@ -104,7 +102,7 @@ public class LiquidList {
             listHeader();
             for (int i = 0; i < liquidArrayList.size(); i++) {
                 Entry entry = liquidArrayList.get(i);
-                System.out.println(WHITESPACE + (i + 1) + ". " + entry);
+                System.out.println("\t " + (i + 1) + ". " + entry);
             }
         }
     }
