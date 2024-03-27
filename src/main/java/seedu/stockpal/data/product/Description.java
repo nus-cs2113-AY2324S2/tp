@@ -20,8 +20,8 @@ public class Description implements CommandParameter {
     }
 
     /**
-     * Checks if the description of the product is empty or
-     * if the description is more than 70 characters.
+     * Formats the description of the product accordingly.
+     * Wraps the description around if it's length exceeds 70 characters.
      *
      * @return a formatted string that shows it's an optional field or is indented accordingly.
      */

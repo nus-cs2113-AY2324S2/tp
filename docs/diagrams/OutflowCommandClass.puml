@@ -1,0 +1,18 @@
+@startuml
+
+hide circles
+skinparam classAttributeIconSize 0
+
+package "seedu.stockpal.commands" {
+    class OutflowCommand {
+        - pid: Pid
+        - amountToIncrease: Integer
+        - time: LocalDateTime
+
+        + OutflowCommand(pid: Integer, transactionList: TransactionList)
+        + execute(productList: ProductList): void
+        - createTransaction(pid: Pid, amountToIncrease: Integer, time: LocalDateTime): Transaction
+    }
+}
+
+@enduml

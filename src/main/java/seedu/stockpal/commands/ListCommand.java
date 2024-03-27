@@ -70,7 +70,7 @@ public class ListCommand extends ListActionCommand {
     /**
      * Creates a comparator that sorts a product by quantity.
      */
-    static class SortByQuantity implements Comparator<Product> {
+    private static class SortByQuantity implements Comparator<Product> {
         @Override
         public int compare(Product a, Product b) {
             return a.getQuantity().getQuantity() - b.getQuantity().getQuantity();
@@ -80,7 +80,7 @@ public class ListCommand extends ListActionCommand {
     /**
      * Creates a comparator that sorts a product by name.
      */
-    static class SortByName implements Comparator<Product> {
+    private static class SortByName implements Comparator<Product> {
         @Override
         public int compare(Product a, Product b) {
             return a.getName().getName().toLowerCase().
