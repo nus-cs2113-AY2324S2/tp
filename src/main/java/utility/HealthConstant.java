@@ -10,17 +10,17 @@ public class HealthConstant {
 
 
     // Flags
-    public static final String HEALTH_FLAG = "/h";
-    public static final String HEIGHT_FLAG = "/height";
-    public static final String WEIGHT_FLAG = "/weight";
-    public static final String DATE_FLAG = "/date";
-    public static final String START_FLAG = "/start";
-    public static final String END_FLAG = "/end";
-    public static final String TIME_FLAG = "/time";
-    public static final String DESCRIPTION_FLAG = "/description";
+    public static final String HEALTH_FLAG = "/h:";
+    public static final String HEIGHT_FLAG = "/height:";
+    public static final String WEIGHT_FLAG = "/weight:";
+    public static final String DATE_FLAG = "/date:";
+    public static final String START_FLAG = "/start:";
+    public static final String END_FLAG = "/end:";
+    public static final String TIME_FLAG = "/time:";
+    public static final String DESCRIPTION_FLAG = "/description:";
 
     // Parameters
-    public static final Integer BMI_PARAMETERS = 4;
+    public static final Integer NUM_BMI_PARAMETERS = 4;
     public static final Integer PERIOD_PARAMETERS = 3;
     public static final Integer APPOINTMENT_PARAMETERS = 4;
 

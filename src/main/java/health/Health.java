@@ -46,7 +46,7 @@ public class Health {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HEALTH_INPUT_ERROR);
         }
 
-        if (isBmi && userInputs.length < HealthConstant.BMI_PARAMETERS) {
+        if (isBmi && userInputs.length < HealthConstant.NUM_BMI_PARAMETERS) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
 

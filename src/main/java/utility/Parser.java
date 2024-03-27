@@ -1,11 +1,18 @@
 package utility;
 
+import health.Appointment;
+import health.Bmi;
+import health.HealthList;
+import health.Period;
+import ui.Handler;
 import ui.Output;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import static health.HealthList.showPeriodHistory;
 
 /**
  * Represents the parser used for PulsePilot
@@ -59,8 +66,8 @@ public class Parser {
      * @param date The string date from user input.
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
-    public static void checkDateInput(String date) throws CustomExceptions.InvalidInput {
-        String[] parts = getDateStrings(date);
+    public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
+        String[] parts = getDateParts(date);
 
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
@@ -86,7 +93,7 @@ public class Parser {
      * @return A list of strings representing day, month and year
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
-    private static String[] getDateStrings(String date) throws CustomExceptions.InvalidInput {
+    private static String[] getDateParts(String date) throws CustomExceptions.InvalidInput {
         String [] parts;
         try {
             parts = date.split("-");
@@ -189,5 +196,116 @@ public class Parser {
             Output.printException(e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * Parses input for Bmi command. Adds Bmi object to HealthList if valid.
+     *
+     * @param userInput The user input string.
+     */
+    public static void parseBmiInput(String userInput) throws CustomExceptions.InvalidInput {
+        String[] bmiDetails = splitBmiInput(userInput);
+        validateBmiInput(bmiDetails);
+        Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
+        HealthList.addBmi(newBmi);
+        Output.printAddBmi(newBmi);
+    }
+    /**
+     * Validates Bmi details entered.
+     *
+     * @param bmiDetails List of strings representing BMI details.
+     * @throws CustomExceptions.InvalidInput If any strings are formatted wrongly.
+     */
+    public static void validateBmiInput(String[] bmiDetails) throws CustomExceptions.InvalidInput {
+        if (bmiDetails[1].isEmpty()
+                || bmiDetails[2].isEmpty()
+                || bmiDetails[3].isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
+        }
+        // checks whether input number is 2dp
+        String twoDecimalPlaceRegex = "\\d+\\.\\d{2}";
+        if (!bmiDetails[1].matches(twoDecimalPlaceRegex) ||
+                !bmiDetails[2].matches(twoDecimalPlaceRegex)) {
+            throw new CustomExceptions.InvalidInput("Height and weight should be 2 decimal place positive numbers!");
+        }
+        validateDateInput(bmiDetails[3]);
+    }
+    //@@author syj02
+    /**
+     * Split user input into Bmi command, height, weight and date.
+     *
+     * @param input A user-provided string.
+     * @return An array of strings containing the extracted Bmi parameters.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     */
+    public static String[] splitBmiInput(String input) throws CustomExceptions.InvalidInput {
+        String [] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
+        if (!input.contains(HealthConstant.HEALTH_FLAG)
+                || !input.contains(HealthConstant.HEIGHT_FLAG)
+                || !input.contains(HealthConstant.WEIGHT_FLAG)
+                || !input.contains(HealthConstant.DATE_FLAG)) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
+        }
+        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEALTH_FLAG);
+        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
+        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
+        results[3] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        return results;
+    }
+    //@@author
+
+    /**
+     * Parses input for Period command. Adds Period object to HealthList if valid.
+     *
+     * @param userInput The user input string.
+     */
+    public static void parsePeriodInput(String userInput) throws CustomExceptions.InvalidInput {
+        String[] periodDetails = Period.getPeriod(userInput);
+
+        if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
+        }
+        Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
+        if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
+        }
+        HealthList.addPeriod(newPeriod);
+        Output.printAddPeriod(newPeriod);
+    }
+
+    /**
+     * Parses input for Prediction command. Prints prediction if valid.
+     */
+    public static void parsePredictionInput() throws CustomExceptions.InsufficientInput {
+        showPeriodHistory();
+
+        if (HealthList.getPeriodSize() >= HealthConstant.MINIMUM_SIZE_FOR_PREDICTION) {
+            LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
+            Period.printNextCyclePrediction(nextPeriodStartDate);
+        } else {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.UNABLE_TO_MAKE_PREDICTIONS_ERROR);
+        }
+    }
+
+    /**
+     * Parses input for Appointment command. Adds Appointment object to HealthList if valid.
+     *
+     * @param userInput The user input string.
+     */
+    public static void parseAppointmentInput(String userInput) throws CustomExceptions.InvalidInput {
+        String[] appointmentDetails = Appointment.getAppointment(userInput);
+
+        if (appointmentDetails[0].isEmpty()
+                || appointmentDetails[1].isEmpty()
+                || appointmentDetails[2].isEmpty()
+                ||  appointmentDetails[3].isEmpty()) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
+        }
+
+        Appointment newAppointment = new Appointment(appointmentDetails[1],
+                appointmentDetails[2],
+                appointmentDetails[3]);
+        HealthList.addAppointment(newAppointment);
+        Output.printAddAppointment(newAppointment);
     }
 }
