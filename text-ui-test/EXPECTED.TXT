@@ -2,7 +2,7 @@ _______________________________________
 _______________________________________
 
 Welcome to BookMarked, a one-stop app for all your librarian needs!
-Type /help to see a list of commands!
+To get started, you can type /help to see a list of commands!
 
 _______________________________________
 _______________________________________
