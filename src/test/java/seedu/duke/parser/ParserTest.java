@@ -65,8 +65,50 @@ public class ParserTest {
     }
 
     @Test
-    public void testInvalidCommand() {
-        String userInput = "invalid command";
+    public void testNullUserInput() {
+        String userInput = null;
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testEmptyUserInput() {
+        String userInput = "";
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testWhitespaceUserInput() {
+        String userInput = "    ";
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testUnknownCommand() {
+        String userInput = "unknown";
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testRemoveCommandWithoutCourseCode() {
+        String userInput = "remove";
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testAddCommandWithoutCourseCodeAndSemester() {
+        String userInput = "add";
+        Command command = Parser.getCommand(userInput);
+        assertTrue(command instanceof InvalidCommand);
+    }
+
+    @Test
+    public void testGradeCommandWithoutCourseCodeAndGrade() {
+        String userInput = "grade";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof InvalidCommand);
     }

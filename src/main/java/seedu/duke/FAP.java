@@ -20,6 +20,7 @@ public class FAP {
     public static JsonManager jsonManager = new JsonManager();
 
     public static void main(String[] args) {
+        LOGGER.setLevel(Level.OFF);
         try {
             printGreeting();
             assert moduleList != null : "moduleList should not be null";

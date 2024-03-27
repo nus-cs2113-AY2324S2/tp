@@ -75,7 +75,7 @@ public class FAPTest {
                 "What can I do for you?",
                 "__________________________________________________",
                 "__________________________________________________",
-                "INVALID COMMAND",
+                "init command: Error in name",
                 "__________________________________________________",
                 "An error occurred: No line found"
         ).replace(System.lineSeparator(), "\n");
