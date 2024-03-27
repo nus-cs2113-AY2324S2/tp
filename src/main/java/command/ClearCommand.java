@@ -30,7 +30,7 @@ public class ClearCommand {
      */
     public void execute() {
 
-        if (TaskList.tasksList.isEmpty() && UserDetailsList.DETAILS_LIST.isEmpty()) {
+        if (TaskList.tasksList.isEmpty() && UserDetailsList.detailsList.isEmpty()) {
             CommandUi.printDataAlreadyClearedMessage();
         } else {
             TaskList.clearTasks();

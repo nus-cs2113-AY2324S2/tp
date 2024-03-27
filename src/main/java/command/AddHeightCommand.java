@@ -1,7 +1,7 @@
 package command;
 
 import activeedge.userdetails.LogHeight;
-import static activeedge.userdetails.UserDetailsList.DETAILS_LIST;
+import static activeedge.userdetails.UserDetailsList.detailsList;
 import java.time.LocalDateTime;
 
 
@@ -18,6 +18,6 @@ public class AddHeightCommand {
 
     public void execute() throws ActiveEdgeException {
         LogHeight logHeight = new LogHeight(height,dateTime);
-        DETAILS_LIST.add(logHeight);
+        detailsList.add(logHeight);
     }
 }

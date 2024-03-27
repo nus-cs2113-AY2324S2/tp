@@ -1,7 +1,7 @@
 package command;
 
 import activeedge.userdetails.LogBMI;
-import static activeedge.userdetails.UserDetailsList.DETAILS_LIST;
+import static activeedge.userdetails.UserDetailsList.detailsList;
 import java.time.LocalDateTime;
 
 public class AddBMICommand {
@@ -15,6 +15,6 @@ public class AddBMICommand {
 
     public void execute() throws ActiveEdgeException {
         LogBMI logBMI = new LogBMI(bmi, dateTime);
-        DETAILS_LIST.add(logBMI);
+        detailsList.add(logBMI);
     }
 }
