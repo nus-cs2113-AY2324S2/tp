@@ -7,7 +7,7 @@ public class BookTest {
     @Test
     public void getBookDescription_returnsBookDescription() {
         Book testBook = new Book ("Test");
-        assertEquals("Test", testBook.getBookDescription());
+        assertEquals("Test", testBook.getName());
     }
     @Test
     public void getBorrowedStatus_unBorrowed_returnsSpace() {

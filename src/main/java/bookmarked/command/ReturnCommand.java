@@ -2,8 +2,10 @@ package bookmarked.command;
 
 import bookmarked.Book;
 import bookmarked.exceptions.emptyListException;
+import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,12 +13,14 @@ import java.util.stream.Collectors;
 public class ReturnCommand extends Command {
     private String bookName;
     private ArrayList<Book> listOfBooks;
-    public ReturnCommand(String[] commandParts, ArrayList<Book> listOfBooks) {
+    private File bookDataFile;
+    public ReturnCommand(String[] commandParts, ArrayList<Book> listOfBooks, File bookDataFile) {
         assert listOfBooks != null : "list of books should not be empty";
         assert commandParts != null : "commandParts should not be null";
         assert commandParts.length > 1 : "commandParts should contain at least the command and the book name";
         this.bookName =  String.join(" ", List.of(commandParts).subList(1, commandParts.length));
         this.listOfBooks = listOfBooks;
+        this.bookDataFile = bookDataFile;
     }
 
     @Override
@@ -29,6 +33,7 @@ public class ReturnCommand extends Command {
 
         try {
             runReturnCommand(foundBooks);
+            BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
         } catch (emptyListException e) {
             Ui.printEmptyListMessage();
         }

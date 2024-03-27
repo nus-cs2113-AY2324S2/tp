@@ -4,16 +4,20 @@ import bookmarked.Book;
 import bookmarked.exceptions.emptyArgumentsException;
 import bookmarked.exceptions.emptyListException;
 import bookmarked.exceptions.indexOutOfListBounds;
+import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
-    String[] bookToDelete;
-    ArrayList<Book> listOfBooks;
-    public DeleteCommand(String[] bookToDelete, ArrayList<Book> listOfBooks) {
+    private String[] bookToDelete;
+    private ArrayList<Book> listOfBooks;
+    private File bookDataFile;
+    public DeleteCommand(String[] bookToDelete, ArrayList<Book> listOfBooks, File bookDataFile) {
         this.bookToDelete = bookToDelete;
         this.listOfBooks = listOfBooks;
+        this.bookDataFile = bookDataFile;
     }
 
     @Override
@@ -22,6 +26,7 @@ public class DeleteCommand extends Command {
             processDeleteCommand(listOfBooks);
             assert this.bookToDelete.length >= 1 : "There should be an argument to the command";
             assert !this.listOfBooks.isEmpty() : "The current list of books should not be empty";
+            BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
         } catch (emptyListException e) {
             Ui.printEmptyListMessage();
         } catch (emptyArgumentsException e) {
