@@ -77,7 +77,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 **API** : [`Data`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/data)
 
+The following is a class diagram of the `data` component.
 ![Structure of the Data Component](images/DataClassDiagram.png)
+
 
 ### Storage component
 
@@ -125,6 +127,40 @@ The NewCommand class is responsible for adding a new product to the inventory in
 
 The following sequence diagram shows how an add operation works:
 <img src="images/AddCommandSequence.png" alt=""/>
+
+
+### Edit product feature
+#### Implementation
+The edit product feature is facilitated by `EditCommand` which extends `Command`.
+
+Given below is an example usage scenario and how the edit product mechanism behaves.
+
+Step 1. The user launches the application for the first time. There are no products in the product list.
+
+Step 2. The user executes `add n/Highlihgter q/100 p/2.00 d/Neon highlighter` to add a product to product list.
+
+Step 3. The user realises that he made mistakes in the product name and price. The user executes
+`find Highlihgter` to obtain the `PID` of the product. The `PID` is `1`.
+
+Step 4. The user executes `edit 1 n/Highlighter p/1.00` to edit the product name and price. The product name is 
+successfully updated from `Highlihgter` to `Highlighter`. The price is successfully updated from `2.00` to `1.00`.
+
+The following sequence diagram summarizes what happens when a user inputs a valid `edit` command.
+<img src="images/EditCommandSequenceDiagram.png" alt=""/>
+
+> INFO:
+> The lifeline for EditCommand should end at the destroy marker (X) but due to a limitation of PlantUML, 
+> the lifeline reaches the end of diagram.
+
+**Aspect: Validating parameters and handling errors**
+
+- Alternative 1 (current choice): Check parameters and handle errors within EditCommand.
+  - Pros: Easy to implement
+  - Cons: -
+  
+- Alternative 2: Handle validation of errors within to productList#updateProduct().
+    - Pros: Implementing EditCommand#execute() will be very simple. Usage of throw/catch to handle errors.
+    - Cons: productList#updateProduct() will be more lengthy. May require further abstraction.
 
 ### List feature
 <img src="images/ListCommandClass.png" alt=""/>
@@ -233,10 +269,12 @@ intuitive command-line commands, saving time and improving efficiency.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                            | So that I can ...                                                                                          |
+|---------|----------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                   | refer to them when I forget how to use the application                                                     |
+| v1.0    | user     | I want to be able to edit details of the products easily | so that I can easily change the name / price / quantity /description of the products, if there is an error |
+| v1.0    | user     | I want to have a small manual page                       | so that I am aware of the commands that I can enter                                                        |
+| v2.0    | user     | find a to-do item by name                                | locate a to-do without having to go through the entire list                                                |
 
 ## Non-Functional Requirements
 
@@ -244,11 +282,21 @@ intuitive command-line commands, saving time and improving efficiency.
 
 ## Glossary
 
+* *PID (Product ID)* - A unique number assigned to each product for identification purposes.
 * Mainstream OS: Windows, Linux, Unix, MacOS
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
+### Editing Product Details
+1. Prerequisites: List all products using `list` command. There should be at least multiple products in the list.
+
+3. Test case: `edit 1 n/Updated name d/Updated description`<br> 
+   Expected: The name and description of the product with Product ID (PID) 1 
+   will be changed to `Updated name` and `Updated description` respectively.
+
+3. Test case: `edit 1 q/100 p/0.99`<br>
+   Expected: The quantity and price of the product with Product ID (PID) 1
+   will be changed to `100` and `0.99` respectively.

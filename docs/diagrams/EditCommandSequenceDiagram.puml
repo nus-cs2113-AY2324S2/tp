@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":StockPal" as stockpal STOCKPAL_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":EditCommands" as command COMMANDS_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+activate stockpal STOCKPAL_COLOR
+
+user -[USER_COLOR]> ui : "edit 1 n/Highlighter p/1.00"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> stockpal : "edit 1 n/Highlighter p/1.00"
+
+stockpal -[STOCKPAL_COLOR]> parser : parseCommand("edit 1 n/Highlighter p/1.00")
+activate parser PARSER_COLOR
+
+create command
+parser -[PARSER_COLOR]> command : new EditCommand(pid, name, quantity, price, description)
+activate command COMMANDS_COLOR
+parser <--[COMMANDS_COLOR] command
+deactivate command
+
+parser --[PARSER_COLOR]> stockpal : command : EditCommand
+deactivate parser
+
+stockpal -[STOCKPAL_COLOR]> command : execute()
+activate command COMMANDS_COLOR
+
+note over command
+    Update product details
+end note
+
+command -[COMMANDS_COLOR]> ui : printEditSuccessMessage()
+user <-[UI_COLOR] ui : "Product details have been updated."
+ui [UI_COLOR]--> command
+stockpal <--[COMMANDS_COLOR] command
+deactivate command
+
+stockpal -[STOCKPAL_COLOR]> storage : saveData(productList)
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+storage --[STORAGE_COLOR]> stockpal
+deactivate storage
+
+destroy command
+@enduml
