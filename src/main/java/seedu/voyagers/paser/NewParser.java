@@ -1,6 +1,15 @@
 package seedu.voyagers.paser;
 
-import seedu.voyagers.commands.*;
+import seedu.voyagers.commands.AddSubTripCommand;
+import seedu.voyagers.commands.AddTripCommand;
+import seedu.voyagers.commands.Command;
+import seedu.voyagers.commands.DeleteCommand;
+import seedu.voyagers.commands.ExitCommand;
+import seedu.voyagers.commands.HelpCommand;
+import seedu.voyagers.commands.ListCommand;
+import seedu.voyagers.commands.ModifyTripCommand;
+import seedu.voyagers.commands.ReviewMainTripCommand;
+import seedu.voyagers.commands.AddBillCommand;
 
 
 import java.util.Arrays;
