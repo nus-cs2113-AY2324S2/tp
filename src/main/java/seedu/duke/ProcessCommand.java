@@ -3,7 +3,7 @@ package seedu.duke;
 import expenditure.ExpenditureList;
 import storage.Storage;
 import gpa.GPACommand;
-import gc.gc;
+import gc.GC;
 
 public class ProcessCommand {
 
@@ -58,7 +58,7 @@ public class ProcessCommand {
             UI.printHelpMessage();
             break;
         case "gc":
-            gc.main();
+            GC.main();
             break;
         case "exit":
             System.out.println("Shutting down... Goodbye!!");

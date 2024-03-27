@@ -9,7 +9,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Dimension;
 
-public class gc extends JPanel {
+public class GC extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -51,7 +51,7 @@ public class gc extends JPanel {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Graph Drawing Example with Axes");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(new gc());
+            frame.getContentPane().add(new GC());
             frame.setPreferredSize(new Dimension(400, 400));
             frame.pack();
             frame.setLocationRelativeTo(null);
