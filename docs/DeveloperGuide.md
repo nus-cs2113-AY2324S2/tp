@@ -50,11 +50,16 @@ The `UI` component,
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+- Loves to play games and challenge themselves
+- Prefers using desktop for entertainment
+- Has particular interest in CLI commands
+- Enjoys retro-style
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+CLI-based games work on different operating systems and environments that support 
+command-line interfaces. This means players can enjoy the game no matter what kind 
+of computer or setup they use.
 
 ## User Stories
 
@@ -65,7 +70,7 @@ The `UI` component,
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has `Java 11` installed.
 
 ## Glossary
 
