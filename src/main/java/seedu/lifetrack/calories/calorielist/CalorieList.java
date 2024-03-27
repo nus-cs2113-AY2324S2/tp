@@ -28,7 +28,6 @@ public class CalorieList {
     //constructor for JUnit tests
     public CalorieList() {
         calorieArrayList = new ArrayList<>();
-        fileHandler = new FileHandler("data/caloriesTestData.txt");
     }
 
     //constructor for usage in terminal
@@ -39,6 +38,12 @@ public class CalorieList {
         } catch (FileNotFoundException e) {
             calorieArrayList = new ArrayList<>();
             System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }
+    }
+
+    private void updateFile() {
+        if (fileHandler != null) {
+            fileHandler.writeEntries(calorieArrayList);
         }
     }
 
@@ -57,6 +62,7 @@ public class CalorieList {
             int index = Integer.parseInt(line.substring(SIZE_OF_DELETE).trim());
             Entry toDelete = calorieArrayList.get(index-1);
             calorieArrayList.remove((index-1));  // transfer to scope 0 to size-1
+            updateFile();
             successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(deleteLogIndexMessage());
@@ -82,7 +88,7 @@ public class CalorieList {
         try {
             Entry newEntry = parseCaloriesInput(input);
             calorieArrayList.add(newEntry);
-            fileHandler.writeEntries(calorieArrayList);
+            updateFile();
             printNewCalorieEntry(newEntry);
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);

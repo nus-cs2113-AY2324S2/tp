@@ -34,7 +34,6 @@ public class LiquidList {
     //constructor for JUnit tests
     public LiquidList() {
         liquidArrayList = new ArrayList<>();
-        fileHandler = new FileHandler("data/liquidsTestData.txt");
     }
 
     //constructor for usage in terminal
@@ -45,6 +44,12 @@ public class LiquidList {
         } catch (FileNotFoundException e) {
             liquidArrayList = new ArrayList<>();
             System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }
+    }
+
+    private void updateFile() {
+        if (fileHandler != null) {
+            fileHandler.writeEntries(liquidArrayList);
         }
     }
 
@@ -68,6 +73,7 @@ public class LiquidList {
         try {
             int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
             liquidArrayList.remove(index - 1);
+            updateFile();
             deleteMessage();
         } catch (IndexOutOfBoundsException e) {
             System.out.println(deleteLogIndexMessage());
@@ -85,7 +91,7 @@ public class LiquidList {
         try {
             Entry newEntry = ParserLiquid.parseLiquidInput(input);
             liquidArrayList.add(newEntry);
-            fileHandler.writeEntries(liquidArrayList);
+            updateFile();
             addEntryMessage();
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);

@@ -19,7 +19,6 @@ public class SleepList {
     //constructor for JUnit tests
     public SleepList() {
         sleepList = new ArrayList<>();
-        fileHandler = new FileHandler("data/sleepTestData.txt");
     }
 
     //constructor for usage in terminal
@@ -33,6 +32,12 @@ public class SleepList {
         }
     }
 
+    private void updateFile() {
+        if (fileHandler != null) {
+            fileHandler.writeEntries(sleepList);
+        }
+    }
+
     public Entry getSleep(int index) {
         assert index >= 0 && index < sleepList.size() : "Index out of bounds";
         return sleepList.get(index);
@@ -42,7 +47,7 @@ public class SleepList {
         try {
             SleepEntry newSleep = ParserSleep.parseSleepInput(input);
             sleepList.add(newSleep);
-            fileHandler.writeEntries(sleepList);
+            updateFile();
             SleepListUi.addEntryMessage();
         } catch (InvalidInputException e) {
             System.out.println(getIncorrectSleepInputMessage());
@@ -53,7 +58,7 @@ public class SleepList {
         try {
             int index = Integer.parseInt(line.split(" ")[2]) ;
             sleepList.remove(index - 1);
-            fileHandler.writeEntries(sleepList);
+            updateFile();
             SleepListUi.deleteMessage();
         } catch (IndexOutOfBoundsException e) {
             System.out.println(SleepListUi.deleteLogIndexMessage());
