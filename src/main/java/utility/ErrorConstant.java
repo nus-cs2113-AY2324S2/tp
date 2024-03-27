@@ -23,6 +23,12 @@ public class ErrorConstant {
     // EXERCISE ERRORS
     public static final String UNSPECIFIED_ERROR = "Unspecified error";
 
+    // HISTORY ERRORS
+    public static final String HISTORY_RUN_EMPTY_ERROR = "No runs found! You need to add a run first!";
+    public static final String HISTORY_GYM_EMPTY_ERROR = "No gyms found! You need to add a gym first!";
+    public static final String HISTORY_WORKOUTS_EMPTY_ERROR = "No workouts found! You need to add " +
+            "either a run or a gym first";
+
     // RUN ERRORS
     public static final String RUN_DISTANCE_DOUBLE_ERROR = "Distance must be a double! e.g. /d:24.00";
     public static final String RUN_DISTANCE_POSITIVE_ERROR = "Distance must be positive! e.g. /d:10.32";
@@ -35,7 +41,6 @@ public class ErrorConstant {
     public static final String RUN_TIME_MINUTES_RANGE_ERROR = "Minutes must be between 00 and 59! e.g. /t:23:33:10";
     public static final String RUN_TIME_SECONDS_RANGE_ERROR = "Seconds must be between 00 and 59! e.g. /t:00:40:10";
     public static final String RUN_DISTANCE_EMPTY_ERROR = "Distance cannot be blank! e.g. /d:10.32";
-
 
     // GYM ERRORS
     public static final String NO_OF_STATION_BLANK_ERROR = "Number of stations cannot be blank! e.g. /n:3";
@@ -102,7 +107,10 @@ public class ErrorConstant {
             "Usage: history/latest /view:filter";
     public static final String INVALID_HISTORY_FILTER_ERROR = "Missing/invalid filter used!" +
             System.lineSeparator() +
-            "Use /view:run/gym/period/bmi";
+            "Use /item:run/gym/workouts/period/bmi";
 
+    public static final String INVALID_LATEST_FILTER_ERROR = "Missing/invalid filter used!" +
+            System.lineSeparator() +
+            "Use /item:run/gym/period/bmi";
 
 }

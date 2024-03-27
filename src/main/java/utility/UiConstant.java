@@ -12,6 +12,8 @@ public class UiConstant {
     public static final String SPLIT_BY_COLON = ":";
     public static final String SPLIT_BY_WHITESPACE = " ";
     public static final String SPLIT_BY_COMMAS = ",";
+    public static final String DASH = "-";
+    public static final String COMMAS = ",";
     public static final String LINE = " | ";
     public static final String PARTITION_LINE = "____________________________________________________________";
     public static final String EMPTY_STRING = "";
@@ -31,6 +33,9 @@ public class UiConstant {
     public static final int FILE_NOT_FOUND = 1;
     public static final String MISSING_FILE = "What is your name, voyager?";
     public static final String SUCCESSFUL_LOAD = "Prior data found. Orbit has been synchronised.";
+
+    // History
+    public static final String ITEM_FLAG = "/item:";
 
 
     // Numerical values

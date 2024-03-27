@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.CustomExceptions;
 import utility.WorkoutConstant;
@@ -21,6 +22,7 @@ import health.HealthList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class OutputTest {
 
@@ -112,7 +114,7 @@ class OutputTest {
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "\u001B[31mError: " +
-                WorkoutConstant.NO_RUNS_FOUND +
+                ErrorConstant.HISTORY_RUN_EMPTY_ERROR +
                 "\u001B[0m" +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
@@ -178,7 +180,7 @@ class OutputTest {
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "\u001B[31mError: " +
-                WorkoutConstant.NO_GYMS_FOUND +
+                ErrorConstant.HISTORY_GYM_EMPTY_ERROR +
                 "\u001B[0m" +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
@@ -308,5 +310,76 @@ class OutputTest {
         }  catch (CustomExceptions.InvalidInput e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Test the behaviour of the printRunHistory function, which should print both Runs and Gyms
+     */
+    @Test
+    void printWorkoutHistory() {
+        try {
+            Run run1 = new Run("11:11:12", "10.24", "19-12-1923");
+            Gym gym1 = new Gym("11-11-1992");
+            gym1.addStation("Bench Press", new ArrayList<>(Arrays.asList(10,20)), 2, 4);
+            gym1.addStation("Squat Press", new ArrayList<>(Arrays.asList(100,200)), 2, 4);
+
+            String expectedRun1 = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                    WorkoutConstant.RUN,
+                    "1923-12-19",
+                    "10.24",
+                    "11:11:12",
+                    "65:33/km",
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    UiConstant.DASH
+                    );
+
+
+            String expectedGym1Set1 = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                    WorkoutConstant.GYM,
+                    "1992-11-11",
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    "Bench Press",
+                    "2",
+                    "4,4",
+                    "10,20"
+            );
+
+            String expectedGym1Set2 = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    "Squat Press",
+                    "2",
+                    "4,4",
+                    "100,200"
+            );
+
+            String expected2 = String.format(
+                    WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT, "2", expectedGym1Set1)
+                    + System.lineSeparator() +
+                    String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT, "", expectedGym1Set2);
+
+
+            String expected1 = String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_HEADER_FORMAT, "1", expectedRun1);
+
+            String expected = UiConstant.PARTITION_LINE + System.lineSeparator()
+                    + WorkoutConstant.HISTORY_WORKOUTS_HEADER + System.lineSeparator()
+                    + WorkoutConstant.HISTORY_WORKOUTS_HEADER_FORMAT + System.lineSeparator()
+                    + expected1 + System.lineSeparator()
+                    + expected2 + System.lineSeparator()
+                    + UiConstant.PARTITION_LINE + System.lineSeparator();
+
+            Output.printHistory(WorkoutConstant.ALL);
+            assertEquals(expected, outContent.toString());
+        } catch (CustomExceptions.InvalidInput e) {
+            fail("Shouldn't have failed");
+        }
+
     }
 }

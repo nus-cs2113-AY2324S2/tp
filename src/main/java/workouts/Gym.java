@@ -1,8 +1,9 @@
 package workouts;
 
 import utility.CustomExceptions;
-import utility.Parser;
 import utility.ErrorConstant;
+import utility.Parser;
+import utility.UiConstant;
 import utility.WorkoutConstant;
 
 import java.time.LocalDate;
@@ -95,6 +96,15 @@ public class Gym extends Workout {
         return true;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     /**
      * Retrieves the string representation of a Gym object.
      *
@@ -110,4 +120,89 @@ public class Gym extends Workout {
             return " (Date: NA)";
         }
     }
+
+
+    /**
+     * Use when printing the workout history. This method is used to format the reps and weights into a string.
+     *
+     * @param station The GymStation object which contains the sets to be formatted.
+     * @return A StringBuilder array where [0] is reps, [1] is weights.
+     */
+    private StringBuilder[] buildGymRepAndWeightString(GymStation station){
+        StringBuilder[] repAndWeightArray = new StringBuilder[2];
+        repAndWeightArray[0] = new StringBuilder();
+        repAndWeightArray[1] = new StringBuilder();
+
+
+        int repIndex = 0;
+        int weightIndex = 1;
+
+        ArrayList<GymSet> gymSets = station.getSets();
+        for (int i = 0; i < gymSets.size(); i++) {
+            String gymRepString = String.valueOf(gymSets.get(i).getRepetitions());
+            String gymWeightString = String.valueOf(gymSets.get(i).getWeight());
+
+            repAndWeightArray[repIndex].append(gymRepString);
+            repAndWeightArray[weightIndex].append(gymWeightString);
+            if (i != gymSets.size() - 1) {
+                repAndWeightArray[repIndex].append(UiConstant.COMMAS);
+                repAndWeightArray[weightIndex].append(UiConstant.COMMAS);
+            }
+        }
+        return repAndWeightArray;
+    }
+
+
+    /**
+     * Used when printing all the workouts. This method takes in two parameters {@code isFirstIteration} and {@code i}
+     * @param index indicates which particular gymStation is being queried.
+     * @return
+     */
+    public String getHistoryFormatForSpecificGymStation(int index) {
+
+        StringBuilder gymDate = new StringBuilder();
+        if (date != null) {
+            gymDate.append(date);
+        } else {
+            gymDate.append(ErrorConstant.NO_DATE_SPECIFIED_ERROR);
+        }
+
+        // Get the string format for a specific gym station
+        GymStation station = getStations().get(index);
+        String gymStationString = station.getStationName();
+        String gymSetString = String.valueOf(station.getNumberOfSets());
+
+        // Process the reps and weights into string format
+        StringBuilder [] repAndWeightArray = buildGymRepAndWeightString(station);
+        String gymRepString = repAndWeightArray[0].toString();
+        String gymWeightString = repAndWeightArray[1].toString();
+
+        // If it is first iteration, includes dashes for irrelevant field
+        if (index == 0){
+            return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                    WorkoutConstant.GYM, gymDate,
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    UiConstant.DASH,
+                    gymStationString,
+                    gymSetString,
+                    gymRepString,
+                    gymWeightString);
+        } else {
+            // if it is not, then leave it blank
+            return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    UiConstant.EMPTY_STRING,
+                    gymStationString,
+                    gymSetString,
+                    gymRepString,
+                    gymWeightString
+            );
+
+        }
+    }
+
 }
