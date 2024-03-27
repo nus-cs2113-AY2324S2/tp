@@ -1,0 +1,18 @@
+@startuml
+class Dashboard
+class CategoryCommand {
+    CategoryCommand(subcommand: string, categoryString: string)
+    CategoryCommand(subcommand: string)
+   }
+class AddCategoryFromFileCommand
+class CategoryParser
+class GeneralFileParser
+class Category <<Singleton>> {
+     catgories: HashSet<String>
+}
+Category --> Dashboard
+CategoryParser -[dashed]-> CategoryCommand
+CategoryCommand -[dashed]-> Category
+AddCategoryFromFileCommand -[dashed]-> Category
+GeneralFileParser -[dashed]-> AddCategoryFromFileCommand
+@enduml
