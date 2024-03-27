@@ -55,11 +55,10 @@ public class Parser {
             throw new OmniException("The date cannot be empty!");
         } else if (input.length >= 5 && input[3].isEmpty()){
             throw new OmniException("The duration cannot be empty!");
-        }
-//        else if (input.length >= 5 && input[4].isEmpty()){
-//            throw new OmniException("The tag cannot be empty!");
-//        }
-        else if (!line.contains("/tag") ) {
+        } else if(input.length < 4) {
+            throw new OmniException("Please check that your accommodation command is in this format: add DESCRIPTION " +
+                    "/date YYYY-MM-DD /duration DURATION /tag TAG");
+        } else if (!line.contains("/tag") ) {
             if (command[0].equals("accommodation")) {
                 Accommodation newActivity = new Accommodation(input[1].trim(), LocalDate.parse(input[2]),
                         input[3].trim(), "");
@@ -79,9 +78,6 @@ public class Parser {
                 System.out.println("I added a new landmark");
                 System.out.println(newActivity);
             }
-        } else if(input.length < 4) {
-            throw new OmniException("Please check that your accommodation command is in this format: add DESCRIPTION " +
-                                    "/date YYYY-MM-DD /duration DURATION /tag TAG");
         } else{
             if (command[0].equals("accommodation")) {
                 Accommodation newActivity = new Accommodation(input[1].trim(), LocalDate.parse(input[2]),
