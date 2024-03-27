@@ -12,6 +12,8 @@ public class UiConstant {
     public static final String SPLIT_BY_COLON = ":";
     public static final String SPLIT_BY_WHITESPACE = " ";
     public static final String SPLIT_BY_COMMAS = ",";
+    public static final String DASH = "-";
+
     public static final String LINE = " | ";
     public static final String PARTITION_LINE = "____________________________________________________________";
     public static final String EMPTY_STRING = "";

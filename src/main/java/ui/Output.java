@@ -117,13 +117,16 @@ public class Output {
             } else {
                 Gym gym = (Gym) workout;
                 for(int j = 0; j < gym.getStations().size(); j++){
-
+                    StringBuilder gymString = new StringBuilder();
                     if(j == 0){
-                        System.out.println(String.format("%-6d\t%s" , (i+1), gym.getFormatForAllHistoryFirst()));
+                        gymString.append(String.format("%-6d\t%s", (i+1), gym.getFormatForAllHistory(true, j)));
                     }
                     else{
-                        System.out.println(String.format("%-6s\t%s", "", gym.getFormatForAllHistorySubsequent()));
+                        gymString.append(String.format("%-6s\t%s", "", gym.getFormatForAllHistory(false, j)));
                     }
+
+                    System.out.println(gymString);
+
                 }
 
             }
