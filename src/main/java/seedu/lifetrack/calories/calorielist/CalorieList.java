@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class CalorieList {
 
-    private final int SIZE_OF_DELETE = 16;
-
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+    
+    private final int SIZE_OF_DELETE = 16;
     private ArrayList<Entry> calorieArrayList;
     private FileHandler fileHandler;
 

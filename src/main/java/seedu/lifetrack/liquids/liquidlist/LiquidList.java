@@ -25,9 +25,9 @@ import static seedu.lifetrack.ui.LiquidListUI.listHeader;
  */
 public class LiquidList {
 
-    private final int DELETE_PADDING = 15;
-
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
+
+    private final int DELETE_PADDING = 15;
     private ArrayList<Entry> liquidArrayList;
     private FileHandler fileHandler;
 
