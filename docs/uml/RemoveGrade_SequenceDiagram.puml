@@ -1,0 +1,25 @@
+@startuml
+autoactivate on
+participant ": Timetable" as timetable
+participant "courses: ArrayList<ArrayList<Course>>" as courses
+participant ": Grade" as grade
+
+[-> timetable : addGrade()
+loop until current course matches target course code or end of list reached
+    timetable -> courses : check course code
+    timetable <-- courses
+    deactivate courses
+end
+
+opt target course code found
+    timetable -> courses : delete grade of the course
+    courses -> grade : set the letter grade to null
+    courses <-- grade
+    timetable <-- courses
+    deactivate courses
+    deactivate grade
+end
+
+[<-- timetable : whether target course code was found
+deactivate timetable
+@enduml

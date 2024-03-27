@@ -53,7 +53,14 @@ public class TimetableTest {
     public void addGrade_success() {
         Timetable timetable = new Timetable();
         Course course = new Course("CS1010", "Programming Methodology", 1, 1);
+        try {
+            timetable.addCourse(course);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         timetable.addGrade("CS1010", "B");
-        assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  CS1010: B" + System.lineSeparator() + "Term GPA: 5.00" + System.lineSeparator(), GradeChecker.checkGrade(timetable, 1, 1));
+        assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  CS1010: B" + System.lineSeparator()
+                + "Term GPA: 3.5" + System.lineSeparator() + "-----------------------------" + System.lineSeparator()
+                , GradeChecker.checkGrade(timetable, 1, 1));
     }
 }

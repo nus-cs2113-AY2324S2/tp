@@ -76,6 +76,23 @@ In order to store and check the grades of courses of the user, 4 classes are use
 Below is the class diagram to illustrate this:
 ![Grades_ClassDiagram](uml/Grades_ClassDiagram-0.png)
 
+<br>
+
+When `addGrade()` is called, it finds the course according to the course code. Then, the grade will be set to that course.
+
+Below is the sequence diagram to illustrate the implementation:
+
+![AddGrade_SequenceDiagram](uml/AddGrade_SequenceDiagram-0.png)
+
+<br>
+
+When `removeGrade()` is called, it finds the course according to the course code. Then, the `lettergrade` of that course is set to `null`.
+
+Below is the sequence diagram to illustrate the implementation:
+
+![RemoveGrade_SequenceDiagram](uml/RemoveGrade_SequenceDiagram-0.png)
+
+
 The grades keyed in by the user are **String** type, e.g.`"A"`.
 In the `Grade` class, the `setNumberGrade()` method converts the grade into **double** type, which is more appropriate for the calculation of GPA and total grades.
 
