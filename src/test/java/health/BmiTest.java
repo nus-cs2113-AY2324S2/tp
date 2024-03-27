@@ -13,6 +13,7 @@ import java.io.PrintStream;
 
 import utility.HealthConstant;
 import utility.CustomExceptions;
+import utility.Parser;
 
 class BmiTest {
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -27,7 +28,7 @@ class BmiTest {
     @AfterEach
     void cleanup() {
         System.setOut(originalOut);
-        HealthList.clearBmisAndPeriods();
+        HealthList.clearHealthLists();
         outContent.reset();
     }
 
@@ -145,7 +146,7 @@ class BmiTest {
     void getBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
         String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
         String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
-        String[] result = Bmi.getBmi(input);
+        String[] result = Parser.splitBmiInput(input);
         assertArrayEquals(expected, result);
     }
 
@@ -155,7 +156,7 @@ class BmiTest {
     @Test
     void getBmi_wrongInput_throwsInvalidInputExceptions() {
         String input = "/h:bmi /height:1.71 /date:19-03-2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Parser.splitBmiInput(input));
     }
 
     /**

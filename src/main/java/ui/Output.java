@@ -102,7 +102,7 @@ public class Output {
         System.out.println(HealthConstant.BMI_ADDED_MESSAGE_PREFIX
                 + newBmi.getHeight()
                 + UiConstant.LINE
-                + String.format("%.2f", newBmi.getWeight())
+                + newBmi.getWeight()
                 + UiConstant.LINE
                 + newBmi.getDate());
         System.out.println(newBmi);

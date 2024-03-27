@@ -38,7 +38,7 @@ class OutputTest {
     @AfterEach
     public void cleanup() {
         WorkoutList.clearWorkoutsRunGym();
-        HealthList.clearBmisAndPeriods();
+        HealthList.clearHealthLists();
         outContent.reset();
     }
 

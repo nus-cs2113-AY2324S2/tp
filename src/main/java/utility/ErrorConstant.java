@@ -65,9 +65,9 @@ public class ErrorConstant {
             + " e.g. " + WorkoutConstant.STATION_GYM_FORMAT;
     // HEALTH ERRORS
     public static final String HEALTH_INPUT_BLANK_ERROR = "Type of health cannot be empty. " +
-            "Please input either /h:bmi or /h:period";
+            "Please input either /h:bmi, /h:period or /h:appointment";
     public static final String INVALID_HEALTH_INPUT_ERROR = "Invalid input for health type! " +
-            "Please input either /h:bmi or /h:period";
+            "Please input either /h:bmi, /h:period or /h:appointment";
 
     // BMI ERRORS
     public static final String INSUFFICIENT_BMI_PARAMETERS_ERROR = "Insufficient parameters for bmi! " +
