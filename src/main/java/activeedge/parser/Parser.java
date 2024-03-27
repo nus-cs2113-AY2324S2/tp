@@ -134,6 +134,7 @@ public class    Parser {
             else if(input.equalsIgnoreCase("clear")) {
                 ClearCommand clearCommand = new ClearCommand();
                 clearCommand.execute();
+                //Storage.fetchData();
             }
             else {
                 System.out.println("Unknown command.");

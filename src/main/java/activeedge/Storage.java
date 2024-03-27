@@ -10,6 +10,7 @@ import activeedge.userdetails.LogWeight;
 import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
+import command.ClearCommand;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -83,6 +84,20 @@ public class Storage {
         }
     }
 
+    public static boolean hasHeightAndWeightInFile(String filePath) {
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                if (line.startsWith("Height") || line.startsWith("Weight")) {
+                    return true; // Height or weight information found in the file
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(); // Handle file not found exception
+        }
+        return false; // Height and weight information not found in the file
+    }
+
     /**
      * Fetches and loads data from a specified data file into the application's memory.
      * This method attempts to read tasks from the file, parsing each line to recreate
@@ -91,10 +106,12 @@ public class Storage {
     public static void fetchData() {
         String filePath = Paths.get(System.getProperty("user.dir"), "data", "data.txt").toString();
         File file = new File(filePath);
+
+
         if (!file.exists()) {
             createFile(filePath);
         }
-        if (file.length() == 0) {
+        if (file.length() == 0 ) {
             System.out.print("\n");
             int i = 0;
             int j = 0;
