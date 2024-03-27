@@ -23,6 +23,9 @@ public class GeneralInputParser {
         case "exit":
             commandToExecute = ExitParser.parseInput(userInput);
             break;
+        case "event":
+            commandToExecute = EventParser.parseInput(userInput);
+            break;
         default:
             commandToExecute = new HelpCommand();
         }
