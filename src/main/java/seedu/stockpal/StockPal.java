@@ -46,7 +46,7 @@ public class StockPal {
         do {
             String userInput = Ui.getUserInput();
             try {
-                Command command = parser.parseCommand(userInput);
+                Command command = parser.parseInput(userInput);
                 checkCommandType(command);
                 
             } catch (StockPalException spe) {
