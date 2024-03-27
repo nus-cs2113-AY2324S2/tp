@@ -1,5 +1,6 @@
 package seedu.binbash;
 
+import seedu.binbash.parser.Parser;
 import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
 import seedu.binbash.command.Command;
