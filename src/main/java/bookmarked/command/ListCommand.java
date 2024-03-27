@@ -67,8 +67,8 @@ public class ListCommand extends Command {
         this.sortedListOfBooks = new ArrayList<>(this.listOfBooks);
         this.sortedListOfBooks.sort(new Comparator<Book>() {
             @Override
-            public int compare(Book book_One, Book book_Two) {
-                return book_One.getName().compareTo(book_Two.getName());
+            public int compare(Book bookOne, Book bookTwo) {
+                return bookOne.getName().compareTo(bookTwo.getName());
             }
         });
 
