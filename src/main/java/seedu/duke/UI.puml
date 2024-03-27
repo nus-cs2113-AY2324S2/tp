@@ -1,0 +1,20 @@
+@startuml
+
+class Ui {
+    -name: String
+    -scanner: Scanner
+    -PROBLEM_FORM: String
+    -INPUT_INSTRUCTION: String
+    -GEN_COMMAND: String
+    -HELP_COMMAND: String
+    +Ui(name: String)
+    +greet(): void
+    +readCommand(): String
+    +showLine(): void
+    +help(helpType: String): void
+    +invalidCommand(): void
+    +exit(): void
+    +missingMessage(parameters: String): void
+}
+
+@enduml

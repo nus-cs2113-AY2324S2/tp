@@ -1,0 +1,67 @@
+@startuml
+
+class Parser {
+    +parse(command: String, ui: Ui): void
+}
+
+class Ui {
+    +help(helpType: String): void
+    +exit(): void
+    +invalidCommand(): void
+}
+
+class ProblemGenerator {
+    +typeChoose(): Test
+}
+
+class Test {
+    -operators: String
+    -maxDigits: int
+    -number: int
+    -problemList: ArrayList<Problem>
+    +Test(operators: String, maxDigits: int, number: int)
+    +addToTest(p: Problem): void
+    +getNumber(): int
+    +getProblem(): ArrayList<Problem>
+}
+
+class Checker {
+    -test: Test
+    +getUserAnswer(): void
+    +getAccuracy(): double
+    +getTime(): double
+}
+
+class Record {
+    -dateTime: LocalDateTime
+    -speed: double
+    -accuracy: double
+    +Record(dateTime: LocalDateTime, speed: double, accuracy: double)
+    +writeLine(): String
+}
+
+class Storage {
+    -filePath: String
+    -formatter: DateTimeFormatter
+    -records: List<Record>
+    +addRecord(record: Record): void
+    +clearRecords(): void
+    +processLine(line: String): void
+    +readFile(): void
+    +writeFile(): void
+}
+
+Parser --> Ui
+Parser --> ProblemGenerator
+ProblemGenerator --> Test
+Test --> Problem
+ProblemGenerator --> Checker
+Checker --> Test
+Record --> LocalDateTime
+Record --> Storage
+Storage --> BufferedReader
+Storage --> FileReader
+Storage --> BufferedWriter
+Storage --> FileWriter
+
+@enduml
