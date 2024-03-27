@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 class ParserTest {
 
     /**
@@ -115,4 +117,28 @@ class ParserTest {
             Parser.validateDateInput(invalidDate);
         });
     }
+
+    //@@author j013n3
+    /**
+     * Tests the behaviour of a correctly formatted user input being passed into getBmi.
+     */
+    @Test
+    void splitBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
+        String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
+        String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
+        String[] result = Parser.splitBmiInput(input);
+        assertArrayEquals(expected, result);
+    }
+
+    /**
+     * Test the behaviour of a string with missing parameter being passed in for getBmi.
+     */
+    @Test
+    void splitBmi_wrongInput_throwsInvalidInputExceptions() {
+        String input = "/h:bmi /height:1.71 /date:19-03-2024";
+        assertThrows(CustomExceptions.InvalidInput.class, () -> Parser.splitBmiInput(input));
+    }
+    //@@author
+
+    
 }

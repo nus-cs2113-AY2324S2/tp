@@ -6,14 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import utility.HealthConstant;
 import utility.CustomExceptions;
-import utility.Parser;
 
 class BmiTest {
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -137,26 +135,6 @@ class BmiTest {
     void checkTypeOfHealth_throwsInvalidInputExceptions() {
         String userInput = "/h:run /height:1.71 /weight:60.50 /date:19-03-2024";
         assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.checkTypeOfHealth(userInput));
-    }
-
-    /**
-     * Tests the behaviour of a correctly formatted user input being passed into getBmi.
-     */
-    @Test
-    void getBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
-        String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-        String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
-        String[] result = Parser.splitBmiInput(input);
-        assertArrayEquals(expected, result);
-    }
-
-    /**
-     * Test the behaviour of a string with missing parameter being passed in for getBmi.
-     */
-    @Test
-    void getBmi_wrongInput_throwsInvalidInputExceptions() {
-        String input = "/h:bmi /height:1.71 /date:19-03-2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Parser.splitBmiInput(input));
     }
 
     /**
