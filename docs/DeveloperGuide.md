@@ -152,9 +152,6 @@ The following sequence diagram summarizes what happens when a user inputs a vali
 > The lifeline for EditCommand should end at the destroy marker (X) but due to a limitation of PlantUML, 
 > the lifeline reaches the end of diagram.
 
-The following sequence diagram shows how a list operation works, by calling `list`.
-<img src="images/ListCommandSequence.png" alt=""/>
-
 **Aspect: Validating parameters and handling errors**
 
 - Alternative 1 (current choice): Check parameters and handle errors within EditCommand.
@@ -178,6 +175,8 @@ The ListCommand class is responsible for sorting and printing out the products i
 * `execute`: Method to list out the products in the product list.
 * `sortListAccordingly`: Method to sort the list according to the products' PID, products' name or products' quantity.
 
+The following sequence diagram shows how a list operation works, by calling `list`.
+<img src="images/ListCommandSequence.png" alt=""/>
 
 ### InflowCommand Feature
 
