@@ -1,5 +1,6 @@
 package seedu.duke;
 import java.time.LocalDate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parser {
@@ -42,18 +43,43 @@ public class Parser {
      * @throws OmniException if command.length < 2
      */
     public static void activityCommand(String line, TravelActivityList list) throws OmniException{
+        logger.log(Level.INFO, "activityCommand");
         String[] command = line.split(" ");
-        String delimiter = command[0] + "| /date | /duration | /tag";
+        String delimiter = command[0] + "| /date | /duration | /tag ";
         String[] input = line.split(delimiter);
+        logger.log(Level.INFO, input[0] + " // " +  input[1] + " // " +  input[2] + " // " +  input[3]);
+
         if (input.length >= 5 && input[1].isEmpty()) {
             throw new OmniException("The description of accommodation cannot be empty!");
         } else if(input.length >= 5 && input[2].isEmpty()){
             throw new OmniException("The date cannot be empty!");
         } else if (input.length >= 5 && input[3].isEmpty()){
             throw new OmniException("The duration cannot be empty!");
-        } else if (input.length >= 5 && input[4].isEmpty()){
-            throw new OmniException("The tag cannot be empty!");
-        } else if(input.length < 5) {
+        }
+//        else if (input.length >= 5 && input[4].isEmpty()){
+//            throw new OmniException("The tag cannot be empty!");
+//        }
+        else if (!line.contains("/tag") ) {
+            if (command[0].equals("accommodation")) {
+                Accommodation newActivity = new Accommodation(input[1].trim(), LocalDate.parse(input[2]),
+                        input[3].trim(), "");
+                list.addTravelActivity(newActivity);
+                System.out.println("I added a new accommodation");
+                System.out.println(newActivity);
+            } else if (command[0].equals("food")) {
+                Food newActivity = new Food(input[1].trim(), LocalDate.parse(input[2]),
+                        input[3].trim(), "");
+                list.addTravelActivity(newActivity);
+                System.out.println("I added a new restaurant");
+                System.out.println(newActivity);
+            } else if (command[0].equals("landmark")) {
+                Landmark newActivity = new Landmark(input[1].trim(), LocalDate.parse(input[2]),
+                        input[3].trim(), "");
+                list.addTravelActivity(newActivity);
+                System.out.println("I added a new landmark");
+                System.out.println(newActivity);
+            }
+        } else if(input.length < 4) {
             throw new OmniException("Please check that your accommodation command is in this format: add DESCRIPTION " +
                                     "/date YYYY-MM-DD /duration DURATION /tag TAG");
         } else{
@@ -88,14 +114,20 @@ public class Parser {
      */
     public static void addCommand(String line, TravelActivityList list) throws OmniException{
         String[] command = line.split("add | /date | /duration | /tag ");
-        //logger.log(Level.INFO, command[0] + " // " +  command[1]);
+        logger.log(Level.INFO, command[0] + " // " +  command[1]);
         if (command.length >= 5 && command[1].isEmpty()) {
             throw new OmniException("The description of add cannot be empty!");
         } else if(command.length >= 5 && command[2].isEmpty()){
             throw new OmniException("The date cannot be empty!");
         } else if (command.length >= 5 && command[3].isEmpty()){
             throw new OmniException("The duration cannot be empty!");
-        } else if(command.length < 5) {
+        } else if (!line.contains("/tag") ) {
+            TravelActivity newActivity = new TravelActivity(command[1].trim(), LocalDate.parse(command[2]),
+                    command[3].trim(), "");
+            list.addTravelActivity(newActivity);
+            System.out.println("I added a new travel activity");
+            System.out.println(newActivity);
+        } else if(command.length < 4) {
             throw new OmniException("Please check that your add command is in this format: add DESCRIPTION " +
                     "/date YYYY-MM-DD /duration DURATION /tag TAG");
         } else{
@@ -228,12 +260,37 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the findtag command is given as input
+     *
+     * @param line User's input into Omnitravel
+     * @param list List of travel activities
+     * @throws OmniException if command.length < 1
+     */
+
     public static void findTagCommand(String line, TravelActivityList list) throws OmniException {
         String[] command = line.split("findtag");
         if (command.length < 1) {
             throw new OmniException("Please check that your update command is in this format: findtag <task tag>");
         } else {
             list.findTag(command[1].trim());
+        }
+    }
+
+    /**
+     * Handles the case where the findtype command is given as input
+     *
+     * @param line User's input into Omnitravel
+     * @param list list List of travel activities
+     * @throws OmniException if command.length < 1
+     */
+
+    public static void findTypeCommand(String line, TravelActivityList list) throws OmniException {
+        String[] command = line.split("findtype");
+        if (command.length < 1) {
+            throw new OmniException("Please check that your find type command is in this format: findtype <task type>");
+        } else {
+            list.findType(command[1].trim());
         }
     }
 

@@ -5,3 +5,10 @@ accommodation / 0 / four seasons hotel / 2024-12-12 / 2 days / staycation
 food / 0 / kfc / 2024-12-12 / 1 hour / delicacies
 accommodation / 0 / rvrc / 2024-12-24 / 2 weeks / single room
 food / 0 / dining hall / 2024-03-26 / 1 hour / nourishment
+accommodation / 0 / utr / 2025-12-24 / 5 weeks / suite
+food / 0 / hwangs / 2023-12-20 / 1 hour / 
+0 / hwangs / 2023-12-20 / 1 hour / 
+0 / hwangs / 2023-12-20 / 1 hour / 
+0 / royal bistro / 2023-12-20 / 1 hour / 
+0 / royal bistro / 2023-12-20 / 1 day / 
+0 / saizeriya / 2023-12-20 / 1 hour / 

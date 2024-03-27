@@ -101,7 +101,6 @@ class DukeTest {
     }
 
     @Test
-
     //basic test for searchKeyword function
     public void searchTest () {
         assertTrue(true);
@@ -149,5 +148,7 @@ class DukeTest {
                 travelActivity1.getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         assertEquals("3hours", travelActivity1.getDuration());
     }
+
+
 
 }
