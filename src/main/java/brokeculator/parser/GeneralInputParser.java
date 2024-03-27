@@ -35,6 +35,9 @@ public class GeneralInputParser {
         case "deleteEvent":
             commandToExecute = DeleteEventParser.parseInput(userInput);
             break;
+       case "addExpenseToEvent":
+           commandToExecute = AddExpenseToEventParser.parseInput(userInput);
+           break;
         default:
             commandToExecute = new HelpCommand();
         }
