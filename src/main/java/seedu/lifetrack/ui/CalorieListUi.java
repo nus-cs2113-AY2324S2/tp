@@ -14,10 +14,11 @@ public class CalorieListUi {
     }
 
     public static String deleteLogIndexMessage() {
-        return "Sorry, this index is invalid. Please enter a positive integer within the size of the list.";
+        return "\t Sorry, this index is invalid. Please enter a positive integer within the size of the list.";
     }
+    
     public static String deleteLogNumberMessage() {
-        return "Please enter a valid index!";
+        return "\t Please enter a valid index!";
     }
 
     public static void calorieListHeader() {
@@ -27,6 +28,5 @@ public class CalorieListUi {
     public static void printNewCalorieEntry(Entry newEntry) {
         System.out.println("\t The following entry has been added to your caloric list!");
         System.out.println("\t " + newEntry.toString());
-
     }
 }

@@ -10,7 +10,7 @@ import java.io.File;
 public class LifeTrack {
 
     public static CalorieList calorieList = new CalorieList("data/caloriesData.txt");
-    public static HydrationList hydrationList = new HydrationList("data/liquidsData.txt");
+    public static HydrationList hydrationList = new HydrationList("data/hydrationData.txt");
     public static SleepList sleepList = new SleepList("data/sleepData.txt");
     
     /**

@@ -45,10 +45,10 @@ public class SleepList {
 
     public void addSleep(String input) {
         try {
-            SleepEntry newSleep = ParserSleep.parseSleepInput(input);
+            Entry newSleep = ParserSleep.parseSleepInput(input);
             sleepList.add(newSleep);
             updateFile();
-            SleepListUi.addEntryMessage();
+            SleepListUi.printNewSleepEntry(newSleep);
         } catch (InvalidInputException e) {
             System.out.println(getIncorrectSleepInputMessage());
         }
@@ -57,9 +57,10 @@ public class SleepList {
     public void deleteSleep(String line) {
         try {
             int index = Integer.parseInt(line.split(" ")[2]) ;
+            Entry toDelete = sleepList.get(index-1);
             sleepList.remove(index - 1);
             updateFile();
-            SleepListUi.deleteMessage();
+            SleepListUi.successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(SleepListUi.deleteLogIndexMessage());
         } catch (NumberFormatException e) {

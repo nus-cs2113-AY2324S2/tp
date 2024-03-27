@@ -1,29 +1,32 @@
 package seedu.lifetrack.ui;
 
+import seedu.lifetrack.Entry;
+
 public class HydrationListUI {
 
-    public static void deleteMessage() {
-        System.out.println("\t Successfully delete the liquid record.");
-    }
-
-    public static String deleteLogIndexMessage() {
-        return "Sorry, this index is invalid. Please enter a positive integer within the size of the list.";
-    }
-
-    public static String deleteLogNumberMessage() {
-        return "Please enter a valid index!";
-    }
-
-    public static void addEntryMessage() {
-        System.out.println("\t Beverage has been successfully added");
+    public static void successfulDeletedMessage(Entry toDelete) {
+        System.out.println("\t The following hydration record has been successfully deleted!");
+        System.out.println("\t " + toDelete.toString());
     }
 
     public static void emptyListMessage() {
-        System.out.println("\t Your liquid list is empty.");
-        System.out.println("\t Populate your list with more entries :)");
+        System.out.println("\t Your hydration list is empty. Add new entries to populate your list :)");
     }
 
-    public static void listHeader() {
-        System.out.println("\t Your liquid List:");
+    public static String deleteLogIndexMessage() {
+        return "\t Sorry, this index is invalid. Please enter a positive integer within the size of the list.";
+    }
+
+    public static String deleteLogNumberMessage() {
+        return "\t Please enter a valid index!";
+    }
+
+    public static void hydrationListHeader() {
+        System.out.println("\t Your Hydration List:");
+    }
+
+    public static void printNewHydrationEntry(Entry newEntry) {
+        System.out.println("\t The following entry has been added to your hydration list!");
+        System.out.println("\t " + newEntry.toString());
     }
 }

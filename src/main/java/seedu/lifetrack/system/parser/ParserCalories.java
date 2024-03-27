@@ -16,7 +16,6 @@ import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.get
 
 import seedu.lifetrack.Entry;
 
-
 public class ParserCalories {
 
     private static final int CARBS_IDX = 0;
@@ -40,18 +39,18 @@ public class ParserCalories {
      */
     public static Entry parseCaloriesInput(String input) throws InvalidInputException {
         int caloriesIndex = input.indexOf("c/");
-        int dateIndex = input.indexOf("date/");
+        int dateIndex = input.indexOf("d/");
         int macrosIndex = input.indexOf("m/");
         
         checkKeywordsExist(caloriesIndex, dateIndex);
         assert caloriesIndex != -1 : "The c/ keyword should exist!";
-        assert dateIndex != -1 : "The date/ keyword should exist!";
+        assert dateIndex != -1 : "The d/ keyword should exist!";
 
         checkKeywordsCorrectlyOrdered(caloriesIndex, dateIndex, macrosIndex);
         assert caloriesIndex < dateIndex : "The c/ keyword must appear before date/ in the input!";
 
         //extract command, description, calories, date from input
-        String[] parts = input.split("c/|date/|m/");
+        String[] parts = input.split("c/|d/|m/");
         String command = parts[0].substring(0, CALORIES_OUT_PADDING).trim();
         String description = getDescriptionFromInput(input, command, caloriesIndex);
         String strCalories = parts[1].trim();

@@ -6,18 +6,12 @@ import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 import seedu.lifetrack.system.parser.ParserHydration;
 import seedu.lifetrack.system.storage.FileHandler;
+import seedu.lifetrack.ui.HydrationListUI;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static seedu.lifetrack.ui.HydrationListUI.deleteLogIndexMessage;
-import static seedu.lifetrack.ui.HydrationListUI.deleteLogNumberMessage;
-import static seedu.lifetrack.ui.HydrationListUI.deleteMessage;
-import static seedu.lifetrack.ui.HydrationListUI.addEntryMessage;
-import static seedu.lifetrack.ui.HydrationListUI.emptyListMessage;
-import static seedu.lifetrack.ui.HydrationListUI.listHeader;
 
 /**
  * Represents a list of liquid entries.
@@ -27,7 +21,7 @@ public class HydrationList {
 
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());
 
-    private final int DELETE_PADDING = 15;
+    private final int DELETE_PADDING = 16;
     private ArrayList<Entry> hydrationArrayList;
     private FileHandler fileHandler;
 
@@ -72,13 +66,14 @@ public class HydrationList {
     public void deleteEntry(String line) {
         try {
             int index = Integer.parseInt(line.substring(DELETE_PADDING).trim());
+            Entry toDelete = hydrationArrayList.get(index - 1);
             hydrationArrayList.remove(index - 1);
             updateFile();
-            deleteMessage();
+            HydrationListUI.successfulDeletedMessage(toDelete);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(deleteLogIndexMessage());
+            System.out.println(HydrationListUI.deleteLogIndexMessage());
         } catch (NumberFormatException e) {
-            System.out.println(deleteLogNumberMessage());
+            System.out.println(HydrationListUI.deleteLogNumberMessage());
         }
     }
 
@@ -88,12 +83,12 @@ public class HydrationList {
      * @param input the input string containing liquid entry information
      */
     public void addEntry(String input) {
-        assert (input.startsWith("hydration in")) : "ensures that input is correct";
+        assert (input.startsWith("hydration add")) : "ensures that input is correct";
         try {
             Entry newEntry = ParserHydration.parseHydrationInput(input);
             hydrationArrayList.add(newEntry);
             updateFile();
-            addEntryMessage();
+            HydrationListUI.printNewHydrationEntry(newEntry);
         } catch (InvalidInputException e) {
             logr.log(Level.WARNING, e.getMessage(), e);
         }
@@ -105,9 +100,9 @@ public class HydrationList {
      */
     public void printHydrationList() {
         if (hydrationArrayList.isEmpty()) {
-            emptyListMessage();
+            HydrationListUI.emptyListMessage();
         } else {
-            listHeader();
+            HydrationListUI.hydrationListHeader();
             for (int i = 0; i < hydrationArrayList.size(); i++) {
                 Entry entry = hydrationArrayList.get(i);
                 System.out.println("\t " + (i + 1) + ". " + entry);

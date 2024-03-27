@@ -31,13 +31,13 @@ public class Ui {
     /**
      * Reads in the input from the user
      * @param calorieList list containing all entries pertinent to calories
-     * @param liquidList list containing all entries pertinent to liquids
+     * @param hydrationList list containing all entries pertinent to liquids
      */
-    public static void readUserInput(CalorieList calorieList, HydrationList liquidList, SleepList sleepList) {
+    public static void readUserInput(CalorieList calorieList, HydrationList hydrationList, SleepList sleepList) {
         String line;
         do {
             line = new Scanner(System.in).nextLine();
-            handleUserInput(line, calorieList, liquidList, sleepList);
+            handleUserInput(line, calorieList, hydrationList, sleepList);
         } while (!line.equalsIgnoreCase("bye"));
     }
 
@@ -59,9 +59,9 @@ public class Ui {
         }
     }
 
-    public static void handleLiquidsInput(String line, HydrationList hydrationList) {
+    public static void handleHydrationInput(String line, HydrationList hydrationList) {
         assert !line.startsWith("bye") : "exit the app";
-        if (line.startsWith("hydration in")) {
+        if (line.startsWith("hydration add")) {
             hydrationList.addEntry(line);
         } else if (line.startsWith("hydration list")) {
             hydrationList.printHydrationList();
@@ -85,7 +85,7 @@ public class Ui {
     }
 
     public static void handleUserInput(String line, CalorieList calorieList,
-            HydrationList liquidList, SleepList sleepList) {
+            HydrationList hydrationList, SleepList sleepList) {
         if (!line.startsWith("bye")) {
             printLine();
             line = line.trim().toLowerCase();
@@ -96,7 +96,7 @@ public class Ui {
             } else if (line.startsWith("help")) {
                 showHelp();
             } else if (line.startsWith("hydration")) {
-                handleLiquidsInput(line, liquidList);
+                handleHydrationInput(line, hydrationList);
             } else if (line.startsWith("sleep")) {
                 handleSleepInput(line, sleepList);
             } else {

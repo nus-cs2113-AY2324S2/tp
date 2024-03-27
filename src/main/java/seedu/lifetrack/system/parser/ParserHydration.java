@@ -12,7 +12,7 @@ import static seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage.get
 
 public class ParserHydration {
     
-    private static final int HYDRATION_IN_PADDING = 12;
+    private static final int HYDRATION_ADD_PADDING = 13;
 
     /**
      * Parses a string input to create a Liquid object representing liquid intake.
@@ -30,16 +30,16 @@ public class ParserHydration {
     public static Entry parseHydrationInput(String input) throws InvalidInputException {
         
         int volumeIndex = input.indexOf("v/");
-        int dateIndex = input.indexOf("date/");
+        int dateIndex = input.indexOf("d/");
 
         checkKeywordsExist(dateIndex, volumeIndex);
         assert volumeIndex != -1 : "The v/ keyword should exist!";
-        assert dateIndex != -1 : "The date/ keyword should exist!";
+        assert dateIndex != -1 : "The d/ keyword should exist!";
 
         checkKeywordsCorrectlyOrdered(dateIndex, volumeIndex);
         assert volumeIndex < dateIndex : "The v/ keyword must appear before date/ in the input!";
 
-        String[] parts = input.split("v/|date/");
+        String[] parts = input.split("v/|d/");
         String description = getDescriptionFromInput(input, volumeIndex);
         String strVolume = parts[1].trim();
         String date = parts[2].trim();
@@ -87,7 +87,7 @@ public class ParserHydration {
 
     private static String getDescriptionFromInput(String inputString, int volumeIndex) {
         String description;
-        description = inputString.substring(HYDRATION_IN_PADDING, volumeIndex).trim();
+        description = inputString.substring(HYDRATION_ADD_PADDING, volumeIndex).trim();
         return description;
     }
 

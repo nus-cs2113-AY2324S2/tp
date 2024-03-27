@@ -3,6 +3,7 @@ import seedu.lifetrack.calories.calorielist.CalorieList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class InvalidInputException extends Exception {
 
     private static Logger logr = Logger.getLogger(CalorieList.class.getName());

@@ -8,6 +8,7 @@ import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectSleepI
 import seedu.lifetrack.sleep.sleeplist.SleepEntry;
 
 public class ParserSleep {
+
     public static SleepEntry parseSleepInput(String input) throws InvalidInputException {
         try {
             String date = "N/A"; // Default if no date is provided
@@ -36,5 +37,4 @@ public class ParserSleep {
                     "sleep add <duration> d/<date>");
         }
     }
-
 }
