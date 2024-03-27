@@ -82,9 +82,9 @@ public class Course {
     }
 
     /**
-     * Returns a string containing the grade in letter form of the course
+     * Returns a string containing the grade in letter form of the course and the course code
      *
-     * @return A string that contains the course code and the grade
+     * @return A string that contains the course code and the grade and the course code
      */
     public String getGrade() {
         return courseCode + ": " + getLetterGrade();

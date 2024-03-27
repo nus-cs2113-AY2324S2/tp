@@ -1,9 +1,19 @@
+//@@author ZhangWenyue3325
 package seedu.planus;
 
+import java.util.logging.Logger;
+
 public class GradeChecker {
+    private static Logger logger = Logger.getLogger("myLogger");
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
 
+    /**
+     * Returns a formatted string containing the grades for all semesters of the user
+     *
+     * @param timetable Timetable of the user
+     * @return A string with the grades
+     */
     public static String checkGrade(Timetable timetable) {
         int totalMCs = 0;
         int yearMCs = 0;
@@ -13,6 +23,7 @@ public class GradeChecker {
         double termGrade = 0.00;
 
         StringBuilder plan = new StringBuilder();
+
 
         for (int y = 1; y <= MAX_CANDIDATURE_YEAR; y ++) {
             plan.append("Year ").append(y).append(":").append(System.lineSeparator());
@@ -73,6 +84,13 @@ public class GradeChecker {
         return plan.toString();
     }
 
+    /**
+     * Returns a formatted string containing the grades for the year specified
+     *
+     * @param timetable Timetable of the user
+     * @param year Year of study for which the user wants to check the grade
+     * @return A string with the year's grades
+     */
     public static String checkGrade(Timetable timetable, int year) {
         int yearMCs = 0;
         int termMCs = 0;
@@ -128,6 +146,14 @@ public class GradeChecker {
         return plan.toString();
     }
 
+    /**
+     * Returns a formatted string containing the grades for the year and term specified
+     *
+     * @param timetable Timetable of the user
+     * @param year Year of study for which the user wants to check the grade
+     * @param term Term of study for which the user wants to check the grade
+     * @return A string with the term's grades
+     */
     public static String checkGrade(Timetable timetable, int year, int term) {
         int termMCs = 0;
         double termGrade = 0.00;
@@ -157,4 +183,5 @@ public class GradeChecker {
 
         return plan.toString();
     }
+
 }

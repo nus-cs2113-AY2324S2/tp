@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Timetable {
+    +addGrade(courseCode: String, grade: String)
+    +removeGrade(courseCode: String)
+}
+
+class Grade {
+    -letterGrade: String
+    -numberGrade: double
+    +getLetterGrade(): String
+    +getNumberGrade(): double
+    +setLetterGrade(letterGrade: String)
+    +setNumberGrade(letterGrade: String)
+}
+
+class Course {
+    -grade: Grade
+    +setGrade(letterGrade: String)
+    +getLetterGrade(): String
+    +getNumberGrade(): double
+    +getGrade(): String
+}
+
+class GradeChecker {
+    +{static} checkGrade(timetable: Timetable): String
+    +{static} checkGrade(timetable: Timetable, year: int): String
+    +{static} checkGrade(timetable: Timetable, year: int, term: int): String
+}
+
+Timetable "*" -> "courses *" Course : contains >
+Course -> "grade 1" Grade : consists of >
+GradeChecker ..> Timetable
+GradeChecker ..> Course
+GradeChecker ..> Grade
+
+@enduml
