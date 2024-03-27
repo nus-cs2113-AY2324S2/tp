@@ -16,56 +16,56 @@ import seedu.duke.command.ViewGpaCommand;
 public class ParserTest {
 
     @Test
-    public void testGetCommand_InitCommand() {
+    public void testInitCommand() {
         String userInput = "init n/John Doe";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof InitCommand);
     }
 
     @Test
-    public void testGetCommand_GpaCommand() {
+    public void testGpaCommand() {
         String userInput = "gpa";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof ViewGpaCommand);
     }
 
     @Test
-    public void testGetCommand_ViewCommand() {
+    public void testViewCommand() {
         String userInput = "view";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof ViewCommand);
     }
 
     @Test
-    public void testGetCommand_RemoveCommand() {
+    public void testRemoveCommand() {
         String userInput = "remove c/CS1010";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof RemoveCommand);
     }
 
     @Test
-    public void testGetCommand_AddCommand() {
+    public void testAddCommand() {
         String userInput = "add c/CS1010 w/1";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof AddCommand);
     }
 
     @Test
-    public void testGetCommand_GradeCommand() {
+    public void testGradeCommand() {
         String userInput = "grade c/CS1010 g/A";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof GradeCommand);
     }
 
     @Test
-    public void testGetCommand_ByeCommand() {
+    public void testByeCommand() {
         String userInput = "bye";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof ByeCommand);
     }
 
     @Test
-    public void testGetCommand_InvalidCommand() {
+    public void testInvalidCommand() {
         String userInput = "invalid command";
         Command command = Parser.getCommand(userInput);
         assertTrue(command instanceof InvalidCommand);
