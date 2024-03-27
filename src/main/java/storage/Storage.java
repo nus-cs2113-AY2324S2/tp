@@ -135,13 +135,4 @@ public class Storage {
             }
         }
     }
-
-    public static void main (String[]args){
-        stockMaster = setFile();
-        try {
-            writeToFile(stockMaster.getPath(), "", true);
-        } catch (IOException e) {
-            System.out.println("File does not exist.");
-        }
-    }
 }
