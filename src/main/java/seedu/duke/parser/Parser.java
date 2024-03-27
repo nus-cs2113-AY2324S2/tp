@@ -17,9 +17,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.duke.FAP;
+import seedu.duke.json.JsonManager;
 
 public class Parser {
 
+    static JsonManager jsonManager = FAP.jsonManager;
     // String Pattern inputs
     private static final Pattern INIT_PATTERN =
             Pattern.compile("init\\s+n/(?<name>[A-Za-z0-9 ]+)", Pattern.CASE_INSENSITIVE);
@@ -118,15 +121,14 @@ public class Parser {
 
     private static Command addCommand(Map<String, String> args) {
         String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+        jsonManager.getModuleInfo(moduleCode);
         String status = args.getOrDefault("status", "STATUS_ERROR");
         String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
-        String mc = args.getOrDefault("mc", "MC_ERROR");
-
+        int mc = jsonManager.getModuleMC();
         int semesterInt = Integer.parseInt(semester);
-        int mcInt = Integer.parseInt(mc);
         boolean statusBool = status.toLowerCase().equals("taken");
 
-        return new AddCommand(moduleCode, mcInt, statusBool, semesterInt);
+        return new AddCommand(moduleCode, mc, statusBool, semesterInt);
     }
 
     private static Command gradeCommand(Map<String, String> args) {
