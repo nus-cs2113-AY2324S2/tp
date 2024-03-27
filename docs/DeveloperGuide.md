@@ -10,6 +10,18 @@
 
 ### UI Component
 
+# UserCommand feature
+
+User can type command to do things on the Map. 
+
+If the user type the command, `parseCommand` function will be called. After that, the original input will be
+analyzed by `analyseCommand` function to see if it matches a kind of `CommandType`. Then, we will return new
+Command back to the main based on the command type. The Final step is to call the `execute` function. If the command
+is the type of `fightCommand`, we will call the execute function with one parameter `Scanner`. For all other
+conditions, we will call the execute function with no parameter.
+
+![dummy test](/picture/Command.svg)
+
 ### Map Component
 
 The API of this component is defined in AMap.java.
