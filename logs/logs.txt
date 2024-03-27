@@ -1,0 +1,2 @@
+Mar 26, 2024 9:27:24 PM seedu.binbash.logger.MainLogger info
+INFO: Program started

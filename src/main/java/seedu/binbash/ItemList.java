@@ -4,6 +4,7 @@ import seedu.binbash.item.Item;
 import seedu.binbash.item.PerishableRetailItem;
 import seedu.binbash.item.RetailItem;
 import seedu.binbash.command.RestockCommand;
+import seedu.binbash.logger.BinBashLogger;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 
 public class ItemList {
     private static final Logger ITEMLIST_LOGGER = Logger.getLogger("ItemList");
+    private static final BinBashLogger logger = new BinBashLogger(ItemList.class.getName());
     private double totalRevenue;
     private double totalCost;
     private final List<Item> itemList;
@@ -133,12 +135,14 @@ public class ItemList {
     }
 
     public String deleteItem(int index) {
+        logger.info("Attempting to delete an item");
         int beforeSize = itemList.size();
         Item tempItem = itemList.remove(index - 1);
         assert itemList.size() == (beforeSize - 1);
 
         String output = "Got it! I've removed the following item:" + System.lineSeparator()
                 + System.lineSeparator() + tempItem;
+        logger.info("An item has been deleted");
         return output;
     }
 

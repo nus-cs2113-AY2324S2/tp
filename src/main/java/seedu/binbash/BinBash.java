@@ -1,19 +1,23 @@
 package seedu.binbash;
 
+
+import seedu.binbash.command.ByeCommand;
+import seedu.binbash.command.Command;
+import seedu.binbash.exceptions.BinBashException;
+import seedu.binbash.logger.BinBashLogger;
 import seedu.binbash.parser.Parser;
 import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
-import seedu.binbash.command.Command;
-import seedu.binbash.command.ByeCommand;
-import seedu.binbash.exceptions.BinBashException;
 
 public class BinBash {
     private Ui userInterface;
     private ItemList itemList;
     private Parser inputParser;
     private Storage storage;
+    private BinBashLogger logger;
 
     public BinBash() {
+        logger = new BinBashLogger(BinBash.class.getName());
         userInterface = new Ui();
         storage = new Storage();
         itemList = new ItemList(storage.loadData());
@@ -21,6 +25,8 @@ public class BinBash {
     }
 
     private void run() {
+        logger.info("BinBash starting...");
+
         userInterface.greet();
         userInterface.talk(itemList.getProfitMargin());
 
@@ -44,6 +50,7 @@ public class BinBash {
                 userInterface.talk(e.getMessage());
             }
         }
+        logger.info("BinBash exiting...");
     }
     
     /**
