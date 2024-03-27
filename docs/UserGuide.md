@@ -45,18 +45,27 @@ Format: `init MAJOR_NAME`
   under Faculty of Engineering.
 
 Valid MAJOR_NAME:
-- BME
-- CEG
-- ChBE
-- CVE
-- EE
-- ESP
-- EVE
-- ISE
-- ME
-- MSE
+- BME: Biomedical Engineering
+- CEG: Computer Engineering
+- ChBE: Chemical and Biomolecular Engineering
+- CVE: Civil Engineering
+- EE: Electrical Engineering
+- ESP: Engineering Science Programme
+- EVE: Environmental Engineering
+- ISE: Industrial Systems Engineering
+- ME: Mechanical Engineering
+- MSE: Materials Science and Engineering
 
 Example of usage: `init CEG`
+
+<br>
+
+### Displaying the recommended schedules: `display`
+Displays the recommended schedule of the desired major without overwriting the user's timetable.
+Allows user to check recommended schedules without extra data being saved.
+
+Format: `display MAJOR_NAME`
+- MAJOR_NAME must be a valid major (in short form) under Faculty of Engineering.
 
 <br>
 
