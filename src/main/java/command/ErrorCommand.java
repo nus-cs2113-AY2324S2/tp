@@ -1,7 +1,5 @@
 package command;
 
-import java.lang.reflect.Executable;
-
 public class ErrorCommand extends Command {
 
     @Override

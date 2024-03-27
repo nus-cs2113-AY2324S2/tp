@@ -1,7 +1,7 @@
 package command.mapmove;
 
-import InteractableEntity.*;
-import InteractableEntity.enemies.*;
+import interactable.*;
+import interactable.enemies.*;
 import map.*;
 import map.BattleInterface.BattleInterface;
 import static main.CalculaChroniclesOfTheAlgorithmicKingdom.*;
@@ -25,9 +25,9 @@ public class InteractingCommand extends MapMoveCommand {
         AMap battleMap;
         switch (entityInteractedWith) {
         case "@": //centaur
-            int x_pos = currentMap.getInteractX();
-            int y_pos = currentMap.getInteractY();
-            InteractableEntity monster = new Centaur(10, 10, 10, x_pos, y_pos, 10, 10);
+            int xPos = currentMap.getInteractX();
+            int yPos = currentMap.getInteractY();
+            InteractableEntity monster = new Centaur(10, 10, 10, xPos, yPos, 10, 10);
             textBox.setNextDialogue("*the " + monster.getName() + " stares at you menacingly*");
             battleMap = new BattleInterface(playerStatus, textBox, monster);
             battleMap.initMap(30, monster.getHeight());

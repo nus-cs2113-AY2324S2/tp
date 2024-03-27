@@ -1,14 +1,13 @@
 package map.BattleInterface;
 
-import InteractableEntity.Enemy;
-import InteractableEntity.InteractableEntity;
+import interactable.Enemy;
+import interactable.InteractableEntity;
 import filereader.FileReader;
 import map.AMap;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
 import Math.*;
-import filereader.filepath.EnemiesDesignFilePath;
 
 import java.util.ArrayList;
 import java.util.Scanner;

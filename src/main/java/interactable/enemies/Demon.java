@@ -1,6 +1,6 @@
-package InteractableEntity.enemies;
+package interactable.enemies;
 
-import InteractableEntity.Enemy;
+import interactable.Enemy;
 import static filereader.filepath.EnemiesDesignFilePath.DEMON_PATH;
 
 public class Demon extends Enemy {

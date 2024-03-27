@@ -1,20 +1,14 @@
 package main;
 
-import InteractableEntity.Enemy;
 import command.Command;
-import command.*;
-import command.mapmove.InteractingCommand;
-import command.mapmove.MapMoveCommand;
 import map.*;
 import map.BattleInterface.BattleInterface;
 import parser.Parser;
 import textbox.PlayerStatus;
 import textbox.TextBox;
 import ui.Ui;
-import Math.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 
