@@ -94,10 +94,6 @@ public final class Ui {
         Ui.printToScreen(Messages.MESSAGE_ERROR_MISSING_PARAMETERS);
     }
 
-    public static void printInvalidPidMessage() {
-        Ui.printToScreen(Messages.MESSAGE_ERROR_INVALID_PID);
-    }
-
     public static void printDeleteSuccessMessage() {
         printToScreen(Messages.MESSAGE_DELETE_SUCCESS);
     }

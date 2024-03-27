@@ -6,7 +6,6 @@ import seedu.stockpal.data.Transaction;
 import seedu.stockpal.data.TransactionList;
 import seedu.stockpal.data.product.Pid;
 import seedu.stockpal.exceptions.StockPalException;
-import seedu.stockpal.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.util.logging.Level;
@@ -43,10 +42,6 @@ public class OutflowCommand extends TransactionActionCommand {
     @Override
     public void execute(ProductList productList, TransactionList transactionList) throws StockPalException {
         int productIndex = productList.findProductIndex(this.pid);
-        if (productIndex == -1) {
-            Ui.printInvalidPidMessage();
-            return;
-        }
         assert productList.getSize() > 0;
         boolean updateSuccessful = productList.decreaseAmountCaller(productIndex, amountToDecrease);
 
