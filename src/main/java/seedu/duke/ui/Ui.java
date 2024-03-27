@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.enums.CEGModules;
 import seedu.duke.modules.Module;
 
 import java.util.ArrayList;
@@ -9,22 +10,26 @@ import java.util.Scanner;
 public class Ui {
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
     private final Scanner in;
+
     public Ui() {
         this.in = new Scanner(System.in);
     }
+
     public String getUserCommand() {
         printHyphens();
-        String currentLine =  in.nextLine();
+        String currentLine = in.nextLine();
 
-        while(shouldIgnore(currentLine)) {
+        while (shouldIgnore(currentLine)) {
             currentLine = in.nextLine();
         }
         printHyphens();
         return currentLine;
     }
+
     private boolean shouldIgnore(String currentLine) {
         return currentLine.isBlank() || currentLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }
+
     public static void printGreeting() {
         printHyphens();
         System.out.println("Hello! This is your CEG Future Academic Planner!");
@@ -79,9 +84,26 @@ public class Ui {
         printHyphens();
     }
 
+    public static void printModulesToComplete(ArrayList<String> modulesToComplete) {
+        int courseCodeTableWidth = 25;
+        int mcTableWidth = 10;
+
+        System.out.println("+---------------------------+------------+");
+        System.out.println("| Course Code               | MCs        |");
+        System.out.println("+---------------------------+------------+");
+        for (String moduleCode : modulesToComplete) {
+            String paddedModuleCode = String.format("| %-" + courseCodeTableWidth + "s |", moduleCode);
+            String paddedModuleMC = String.format(" %-" + mcTableWidth + "s |",
+                    CEGModules.mapStringToEnum(moduleCode).getModuleMC());
+            System.out.println(paddedModuleCode + paddedModuleMC);
+        }
+        System.out.println("+---------------------------+------------+");
+    }
+
     public static void printHyphens() {
         System.out.println("__________________________________________________");
     }
+
     public static void printExit() {
         System.out.println("Bye. Enjoy your studies!");
     }
