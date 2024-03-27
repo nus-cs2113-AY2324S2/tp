@@ -1,6 +1,7 @@
 package seedu.planus;
 import java.util.Scanner;
 
+//@@author iscyng
 public class Ui {
 
     public static final String MISSING_MAJOR = "Please retry with a major code.\ne.g. init CEG";
@@ -43,6 +44,7 @@ public class Ui {
                 "                                                      \\|_________|\n\n");
     }
 
+    //@@author ZhouJunmin
     public static void printHelp() {
         System.out.println("Listed below are all available commands:\n" +
                 "    add course [course code]y/[year]t/[term]\n        e.g. add course CS1010y/1t/1\n" +
@@ -58,6 +60,7 @@ public class Ui {
                 "    bye\n\n");
     }
 
+    //@@author iscyng
     public static void printExit() {
         System.out.println("Goodbye!");
     }
@@ -74,6 +77,7 @@ public class Ui {
         System.out.println("Course added to your schedule");
     }
 
+    //@@author ZhouJunmin
     public static void printFileNotFound(String filePathName) {
         System.out.println("File at " + filePathName + " is not found. Trying to create one.");
     }
@@ -82,6 +86,7 @@ public class Ui {
         System.out.println("Data corrupted at line " + lineNumber + " of file at " + filePathName);
     }
 
+    //@@author iscyng
     public static void printFileCreated() {
         System.out.println("File creation successful.");
     }
@@ -107,6 +112,7 @@ public class Ui {
         System.out.println("Year is not from 1 to 6");
     }
 
+    //@@author ZhangWenyue3325
     public static void printFailedToAddGrade() {
         System.out.println("The course does not exist in the current timetable! You may want to add the course first.");
     }
@@ -123,6 +129,7 @@ public class Ui {
         System.out.println("The grade has been removed for " + courseCode);
     }
 
+    //@@author ZhouJunmin
     public static void printInvalidInputGrade() {
         System.out.println("The letter grade entered is invalid!\nPlease enter: A+/A/A-/B+/B/B-/C+/C/D+/D/F");
     }
@@ -131,6 +138,7 @@ public class Ui {
         System.out.println("Failed writing timetable to file.");
     }
 
+    //@@author cirelesna
     public static String getUserCommand() {
         System.out.print("Command: ");
         Scanner in = new Scanner(System.in);
