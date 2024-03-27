@@ -1,6 +1,15 @@
 package seedu.voyagers.paser;
 
-import seedu.voyagers.commands.*;
+import seedu.voyagers.commands.AddSubTripCommand;
+import seedu.voyagers.commands.AddTripCommand;
+import seedu.voyagers.commands.Command;
+import seedu.voyagers.commands.DeleteCommand;
+import seedu.voyagers.commands.ExitCommand;
+import seedu.voyagers.commands.HelpCommand;
+import seedu.voyagers.commands.ListCommand;
+import seedu.voyagers.commands.ModifyTripCommand;
+import seedu.voyagers.commands.ReviewMainTripCommand;
+import seedu.voyagers.commands.AddBillCommand;
 
 
 import java.util.Arrays;
@@ -73,6 +82,7 @@ public class NewParser {
     private static String[] concatenate(String[] s1, String[] s2){
         String[] result = new String[s1.length + s2.length];
         System.arraycopy(s1, 0, result, 0, s1.length);
+        System.arraycopy(s2, 0, result, 1, s2.length);
         return result;
     }
 

@@ -3,6 +3,7 @@ package seedu.voyagers.classes;
 import java.util.ArrayList;
 import java.util.Date;
 import seedu.voyagers.utils.FormatDate;
+import seedu.voyagers.utils.Status;
 
 
 public class Trip {
@@ -12,6 +13,8 @@ public class Trip {
     private String location;
     private String description;
     private Integer reviewScore = 0;
+
+    private Status status;
 
     private ArrayList<Trip> subTrips = new ArrayList<>();
 
@@ -29,6 +32,15 @@ public class Trip {
         this.location = location;
         this.description = description;
         this.reviewScore = Integer.parseInt(reviewScore);
+        // if the date is in the future, the trip is ongoing
+        // if the date is in the past, the trip is completed
+        if (endDate.before(new Date())) {
+            this.status = Status.COMPLETED;
+        }   else if (startDate.after(new Date())) {
+            this.status = Status.UPCOMING;
+        }   else {
+            this.status = Status.ONGOING;
+        }
     }
 
     public Trip(String[] args) throws Exception{
@@ -140,6 +152,10 @@ public class Trip {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
+    }
+
+    public Status getStatus() {
+        return this.status;
     }
 
     /**
