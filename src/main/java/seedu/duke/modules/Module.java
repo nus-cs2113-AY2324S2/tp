@@ -9,12 +9,18 @@ public class Module {
     private boolean moduleTaken;
     private int moduleDate;
 
-    public Module(String moduleCode, int moduleMC, boolean moduleTaken, int moduleDate) {
+    private String moduleDescription;
+
+    public Module(String moduleCode, int moduleMC, int moduleDate, String moduleDescription) {
         this.moduleCode = moduleCode;
         this.moduleMC = moduleMC;
-        this.moduleTaken = moduleTaken;
         this.moduleDate = moduleDate;
         this.moduleGrade = null;
+        this.moduleDescription = moduleDescription;
+    }
+
+    public String getModuleDescription() {
+        return moduleDescription;
     }
 
     public String getModuleCode() {

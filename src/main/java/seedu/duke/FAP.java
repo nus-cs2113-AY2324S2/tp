@@ -14,7 +14,7 @@ import seedu.duke.ui.Ui;
 public class FAP {
 
 
-    public static ModuleList moduleList = new ModuleList(10);
+    public static ModuleList moduleList = new ModuleList();
     public static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
 
     public static JsonManager jsonManager = new JsonManager();
@@ -44,7 +44,7 @@ public class FAP {
                 Command command = Parser.getCommand(userInput);
                 command.execute(userInput);
             } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage(), e);
+                LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage());
                 System.out.println("An error occurred: " + e.getMessage());
                 continueRunning = false; // Exit loop on error
             }

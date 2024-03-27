@@ -14,8 +14,8 @@ class RemoveCommandTest {
     @Test
     public void removeCommandTest() {
 
-        moduleList.addModule(new Module("CS2113", 4, true, 2));
-        moduleList.addModule(new Module("CS1010", 4, true, 2));
+        moduleList.addModule(new Module("CS2113", 4,  2, ""));
+        moduleList.addModule(new Module("CS1010", 4,  2, ""));
         Map<String, String> args = new HashMap<>();
 
         args.put("courseCode", "CS2113");

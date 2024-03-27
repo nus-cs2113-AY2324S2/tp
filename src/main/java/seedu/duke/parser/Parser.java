@@ -14,11 +14,15 @@ import seedu.duke.command.ViewGraduateCommand;
 import java.util.function.Function;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.FAP;
+import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.json.JsonManager;
+
+import static seedu.duke.FAP.LOGGER;
 
 public class Parser {
 
@@ -35,8 +39,8 @@ public class Parser {
     private static final Pattern REMOVE_MODULE_PATTERN =
             Pattern.compile("remove\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_MODULE_PATTERN =
-            Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)\\s+s/(?<status>plan|taken)" +
-                    "\\s+w/(?<semester>[1-8])\\s+m/(?<mc>[1-9]|1[0-2])", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("add\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
+                    "\\s+w/(?<semester>[1-8])", Pattern.CASE_INSENSITIVE);
     private static final Pattern GRADE_PATTERN =
             Pattern.compile("grade\\s+c/(?<courseCode>[A-Za-z]{2,3}\\d{4}[A-Za-z]?)" +
                     "\\s+g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)", Pattern.CASE_INSENSITIVE);
@@ -49,7 +53,7 @@ public class Parser {
     private static final String[] VIEW_ARGUMENTS = {};
     private static final String[] GRADUATE_ARGUMENTS = {};
     private static final String[] REMOVE_MODULE_ARGUMENTS = {"courseCode"};
-    private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "status", "semester", "mc"};
+    private static final String[] ADD_MODULE_ARGUMENTS = {"courseCode", "semester"};
     private static final String[] GRADE_ARGUMENTS = {"courseCode", "grade"};
     private static final String[] BYE_ARGUMENTS = {};
 
@@ -120,15 +124,17 @@ public class Parser {
     }
 
     private static Command addCommand(Map<String, String> args) {
-        String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
-        jsonManager.getModuleInfo(moduleCode);
-        String status = args.getOrDefault("status", "STATUS_ERROR");
-        String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
-        int mc = jsonManager.getModuleMC();
-        int semesterInt = Integer.parseInt(semester);
-        boolean statusBool = status.toLowerCase().equals("taken");
+        try {
+            String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+            String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
+            int semesterInt = Integer.parseInt(semester);
 
-        return new AddCommand(moduleCode, mc, statusBool, semesterInt);
+            return new AddCommand(moduleCode, semesterInt);
+        } catch (ModuleNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage());
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+        return new InvalidCommand();
     }
 
     private static Command gradeCommand(Map<String, String> args) {
