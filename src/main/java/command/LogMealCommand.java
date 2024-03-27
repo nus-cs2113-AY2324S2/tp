@@ -3,7 +3,7 @@ package command;
 import activeedge.ui.CommandUi;
 import activeedge.task.MealTask;
 
-import static activeedge.task.TaskList.TASKS_LIST;
+import static activeedge.task.TaskList.tasksList;
 import java.time.LocalDateTime;
 
 
@@ -22,7 +22,7 @@ public class LogMealCommand {
 
     public void execute() throws ActiveEdgeException {
         MealTask logMeal = new MealTask(description, servings, mealCalories, dateTime);
-        TASKS_LIST.add(logMeal);
+        tasksList.add(logMeal);
         CommandUi.printMealLogMessage(logMeal);
     }
 

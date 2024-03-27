@@ -4,7 +4,7 @@ package command;
 import activeedge.task.Task;
 import activeedge.ui.CommandUi;
 
-import static activeedge.task.TaskList.TASKS_LIST;
+import static activeedge.task.TaskList.tasksList;
 
 public class ShowSummaryCommand {
     public void execute() {
@@ -15,7 +15,7 @@ public class ShowSummaryCommand {
         String calorieGoal = "0";
         String waterGoal = "0";
 
-        for (Task task : TASKS_LIST) {
+        for (Task task : tasksList) {
             if (task.toString().startsWith("Meal")) {
                 String[] parts = task.toString().split(" ");
                 totalCalories += Integer.parseInt(parts[parts.length - 1]);

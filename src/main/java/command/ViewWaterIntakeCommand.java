@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class ViewWaterIntakeCommand {
     public void execute() {
-        int totalWaterIntake = getTotalWaterIntake(TaskList.TASKS_LIST);
-        int waterGoal = getWaterGoal(TaskList.TASKS_LIST);
+        int totalWaterIntake = getTotalWaterIntake(TaskList.tasksList);
+        int waterGoal = getWaterGoal(TaskList.tasksList);
         CommandUi.printWaterIntakeMessage(totalWaterIntake, waterGoal);
 
     }

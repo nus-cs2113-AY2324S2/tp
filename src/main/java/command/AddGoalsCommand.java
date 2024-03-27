@@ -1,7 +1,7 @@
 package command;
 
 import activeedge.task.GoalTask;
-import static activeedge.task.TaskList.TASKS_LIST;
+import static activeedge.task.TaskList.tasksList;
 import activeedge.ui.GoalsUi;
 import java.time.LocalDateTime;
 
@@ -38,7 +38,7 @@ public class AddGoalsCommand {
         // Create a new GoalTask
         GoalTask addGoalTask = new GoalTask(description, goalAmount, dateTime);
         // Add the task to the tasks list
-        TASKS_LIST.add(addGoalTask);
+        tasksList.add(addGoalTask);
         // Print a message to indicate that the goal task has been added
         GoalsUi.printAddGoalMessage(description, goalAmount);
     }

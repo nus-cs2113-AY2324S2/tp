@@ -20,7 +20,7 @@ public class ShowGoalsCommand {
         int waterGoal = 0; // The water goal set by the user
 
         // Iterate through the list of tasks
-        for (Task task : TaskList.TASKS_LIST) {
+        for (Task task : TaskList.tasksList) {
             // Check if the task is an instance of GoalTask
             if (task instanceof GoalTask) {
                 GoalTask goalTask = (GoalTask) task; // Cast Task to GoalTask

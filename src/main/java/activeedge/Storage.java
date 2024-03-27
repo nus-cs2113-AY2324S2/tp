@@ -11,6 +11,7 @@ import activeedge.userdetails.UserDetailsList;
 import command.AddHeightCommand;
 import command.AddWeightCommand;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -73,14 +74,15 @@ public class Storage {
                 String out = UserDetailsList.DETAILS_LIST.get(i).toString();
                 fw.write(out + "\n");
             }
-            for (int i = 0; i < TaskList.TASKS_LIST.size(); i++) {
-                String out = TaskList.TASKS_LIST.get(i).toString();
+            for (int i = 0; i < TaskList.tasksList.size(); i++) {
+                String out = TaskList.tasksList.get(i).toString();
                 fw.write(out + "\n");
             }
         } catch (IOException e) {
             System.out.println("An error occurred while saving tasks to file: " + e.getMessage());
         }
     }
+    
 
     /**
      * Fetches and loads data from a specified data file into the application's memory.
@@ -90,10 +92,12 @@ public class Storage {
     public static void fetchData() {
         String filePath = Paths.get(System.getProperty("user.dir"), "data", "data.txt").toString();
         File file = new File(filePath);
+
+
         if (!file.exists()) {
             createFile(filePath);
         }
-        if (file.length() == 0) {
+        if (file.length() == 0 ) {
             System.out.print("\n");
             int i = 0;
             int j = 0;
@@ -150,16 +154,16 @@ public class Storage {
                         int mealCalories = Integer.parseInt(items[3]);
                         MealTask newTask = new MealTask(mealName, servings, mealCalories, dateTime);
 
-                        TaskList.TASKS_LIST.add(newTask);
+                        TaskList.tasksList.add(newTask);
 
                     } else if (task.startsWith("Goal")) {
                         String[] items = task.trim().split(" ");
                         GoalTask newTask = new GoalTask(items[1], Integer.parseInt(items[2]), dateTime);
-                        TaskList.TASKS_LIST.add(newTask);
+                        TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Water")) {
                         String[] items = task.trim().split(" ");
                         WaterTask newTask = new WaterTask(Integer.parseInt(items[1]), dateTime);
-                        TaskList.TASKS_LIST.add(newTask);
+                        TaskList.tasksList.add(newTask);
                     } else if (task.startsWith("Height")) {
                         String[] items = task.trim().split(" ");
                         LogHeight newHeight = new LogHeight(Integer.parseInt(items[1]), dateTime);
@@ -179,7 +183,7 @@ public class Storage {
                         ExerciseTask newTask = new ExerciseTask(exerciseName,
                                 Integer.parseInt(items[len - 3]),
                                 Integer.parseInt(items[len - 2]), dateTime);
-                        TaskList.TASKS_LIST.add(newTask);
+                        TaskList.tasksList.add(newTask);
                     }
                 }
             } catch (FileNotFoundException e) {

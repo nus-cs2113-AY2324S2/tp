@@ -18,7 +18,7 @@ import command.ClearCommand;
 
 import activeedge.Storage;
 
-import static activeedge.task.TaskList.TASKS_LIST;
+import static activeedge.task.TaskList.tasksList;
 import static activeedge.FoodData.foodItems;
 import static activeedge.ExerciseData.exercisesList;
 import activeedge.FoodData;
@@ -58,7 +58,7 @@ public class    Parser {
                     logMealCommand.execute();
                 }
             } else if (input.startsWith("list")) {
-                if (TASKS_LIST.size() > 0) {
+                if (tasksList.size() > 0) {
                     if (input.substring(4).trim().contains("meals")) { //list meals
                         new ListMealsCommand();
                     } else { //list both
@@ -132,6 +132,7 @@ public class    Parser {
             } else if(input.equalsIgnoreCase("clear")) {
                 ClearCommand clearCommand = new ClearCommand();
                 clearCommand.execute();
+
             } else {
                 System.out.println("Unknown command.");
             }
