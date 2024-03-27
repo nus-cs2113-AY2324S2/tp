@@ -1,0 +1,47 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class SuperTracker
+class FileManager
+class Inventory
+class Item
+class Command
+
+FileManager <.. SuperTracker
+Inventory <.. FileManager
+Item <. FileManager
+Item "*" <-* Inventory
+FileManager <.. Command
+Inventory <.. Command
+
+class FileManager {
+    {static}+saveData():void
+    {static}+loadData():void
+    {static}-getItemData(item:Item):String
+    {static}-parseItemData(data:String):Item
+}
+
+class SuperTracker {
+    {static}-run():void
+}
+
+class Command {
+    +execute():void
+}
+
+class Inventory {
+    {static}+getItems():List<Item>
+    {static}+put(name:String, item:Item):void
+}
+
+class Item {
+    -name:String
+    -quantity:int
+    -price:double
+    -expiryDate:LocalDate
+    +Item(name:String, quantity:int,
+    price:double, expiryDate:LocalDate)
+    +getName():String
+}
+
+@enduml
