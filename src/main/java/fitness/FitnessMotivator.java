@@ -56,7 +56,7 @@ public class FitnessMotivator {
      * @param commandArgs A list of Strings that contain parameters for the Exercise object
      * */
     public void addExercises(String[] commandArgs) {
-        assert commandArgs.length == 4 :
+        assert commandArgs.length == REQUIRED_NUM_OF_PARAMETERS :
             "Something went wrong with parsing fitness add command arguments";
 
         Exercise newExercise = allExercises.newExercise(commandArgs);

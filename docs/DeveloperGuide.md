@@ -48,8 +48,8 @@
         - [User Design Considerations](#user-design-considerations-4)
         - [Developer Design Considerations](#developer-design-considerations-4)
     - [Implementation](#implementation-4)
-        - [Class Diagram]()
-        - [Sequence Diagram]()
+        - [Class Diagram](#class-diagram-3)
+        - [Sequence Diagram](#sequence-diagram-3)
 
 ## Acknowledgements
 
@@ -218,7 +218,7 @@ This component aims to contribute to the goal of improving user's wellness.
 ![ReflectionSequenceDiagram.png](diagrams/reflection/ReflectionSequenceDiagram.png)
 * Note that `PlaceholderReflectionCommand` can refer to any of the reflection commands as mentioned above, as all of them follow the same call pattern.
 
-When main starts, `scanner` and `ReflectionManager` objects are created. Upon receiving user input, the input will first be
+When `Main` starts, `scanner` and `ReflectionManager` objects are created. Upon receiving user input, the input will first be
 determined if it is a command related to the reflection feature. If it is, it will be further parsed by `ReflectionCommandParser` to determine
 the command. The corresponding reflection command object is then created and is returned to `Main`, where `execute` will then be called
 and the corresponding method in `ReflectionManager` is invoked.
@@ -316,7 +316,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
 ![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
 * Note that `PlaceholderReflectionCommand` can refer to any of the habit commands. 
 
-When main starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
+When `Main` starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
 determined if it is a command related to the habit tracker feature. If it is, it will be further parsed by `HabitCommandParser` to determine
 the command. The corresponding habit command object is then created and is returned to `Main`, where `execute` will then be called
 and the corresponding method in `HabitTracker` is invoked.
@@ -475,7 +475,7 @@ utility logic to identify state and manage the different timers.
 #### Implementation
 
 #### Focus Class Diagram
-![FocusClassDiagram.png](diagrams\focus\FocusClassDiagram.png)
+![FocusClassDiagram.png](diagrams/focus/FocusClassDiagram.png)
 * `FocusTimer` object
   * Overview:
     * The `FocusTimer` class is a facade class that sits between the component internals and users of the component 
@@ -505,16 +505,16 @@ states. For example, the command `focus pause` cannot be used if the timer hasn'
 the `focus switch` command to switch between the timer could not be used if the current timer mode is running. To aid 
 the understanding of the logic, we will use state transition diagram.
 
-![FocusStateDiagram.png](diagrams\focus\FocusStateDiagram.png)
+![FocusStateDiagram.png](diagrams/focus/FocusStateDiagram.png)
 * The black circle in the diagram represents the starting point of focus timer. 
 * The labels of the arrows represents the commands.
 
 #### Focus Sequence Diagram
-![FocusSequenceDiagram.png](diagrams\focus\FocusSequenceDiagram.png)
-* Note that `PlaceholderFoucsCommand` can refer to any of the focus commands as mentioned above, since all of them 
+![FocusSequenceDiagram.png](diagrams/focus/FocusSequenceDiagram.png)
+* Note that `PlaceholderFocusCommand` can refer to any of the focus commands as mentioned above, since all of them 
 follows the same call pattern.
 
-When main starts, `scanner` and `FocusTimer` objects are created. Upon receiving user input, the input will first be
+When `Main` starts, `scanner` and `FocusTimer` objects are created. Upon receiving user input, the input will first be
 determined if it is a command related to the focus timer feature. 
 If it is, it will be further parsed by `FocusCommandParser` to determine the command. 
 The corresponding focus command object is then created and is returned to `Main`, where `execute` will then be called 
@@ -543,12 +543,86 @@ well-being.
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
 <!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
 #### Implementation
-**Class Diagram**
+#### Class Diagram
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
-**Sequence Diagram**
-<!-- Insert image and description of the image -->
+![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
+- `FitnessMotivator` Class
+  - Overview
+    - The `FitnessMotivator` class manages fitness related operations.
+  - Attributes:
+    - `FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
+    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. (Omitted from Class Diagram)
+    - `allExercise`: An instance of `ExerciseList`.
+  - Methods:
+    - `getExercises()`: Prints 5 random exercises, where each exercise belongs to a different `ExerciseType`.
+    - `getTypeExercises(ExerciseType type)`: Prints all the exercises belonging to the queried `ExerciseType`.
+    - `addExercises(String[] commandArgs)`: Add the user-specified exercise into `allExercises`.
+  - Dependencies:
+    - Ui: Utilised for user interface interactions.
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `FitnessMotivator` class only contains one `ExerciseList`.
+- `ExerciseList` Class
+  - Overview:
+    - The `ExerciseList` class directly manipulates the list of `Exercises`, and provides methods to do so.
+  - Attributes:
+    - `allExercises`: A private instance of an `ArrayList` of `Exercises`.
+    - `originalListForArms`: A private constant array of Strings used to initialise the program with arm `Exercise`. (Omitted from Class Diagram)
+    - `originalListForChest`: A private constant array of Strings used to initialise the program with chest `Exercise`. (Omitted from Class Diagram)
+    - `originalListForAbs`: A private constant array of Strings used to initialise the program with abs `Exercise`. (Omitted from Class Diagram)
+    - `originalListForBack`: A private constant array of Strings used to initialise the program with back `Exercise`. (Omitted from Class Diagram)
+    - `originalListForLegs`: A private constant array of Strings used to initialise the program with legs `Exercise`. (Omitted from Class Diagram)
+  - Methods:
+    - `ExerciseList()`: A public constructor method, it checks if a local save file exists. If it does not, it creates a new file and initialises it with data, otherwise it will simply load the file.
+    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. (Omitted from Class Diagram)
+    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. (Omitted from Class Diagram)
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. (Omitted from Class Diagram)
+    - `add(Exercise exercise)`: A public helper method used to add an `Exercise` object into `allExercises`.
+    - `getType(ExerciseType type)`: A public helper method used to query for all of the `Exercise` objects that match the `ExerciseType`.
+    - `size(ExerciseType type)`: A public helper method that returns the total number of `Exercise` objects that match the `ExerciseType`.
+    - `newExercise(String[] parameters)`: A public helper method that creates an `Exercise` Object from an array of strings.
+    - `findExercise(ExerciseType type, String nameQuery)`: A public helper method that searches for an `Exercise` object within `allExercises` using `ExerciseType` and a string which represents the name being searched.
+  - Dependencies:
+      - Storage: Utilised for persistent memory storage.
+      - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `ExerciseList` contains at least 25 instances of `Exercise`.
+    - When `FitnessMotivator` is destroyed, the `ExerciseList` instance is destroyed, reflecting a "whole-part" relationship.
+- `Exercise` Class
+  - Overview:
+    - The `Exercise` class stores the basic data of each exercise, such as its name, its type and the number of sets and reps to do.
+  - Attributes:
+    - `exerciseName`: A private string storing the name of the exercise.
+    - `exerciseType`: A private `ExerciseType` object storing one of five types of exercises.
+    - `sets`: A private string storing the number of sets to be done.
+    - `reps`: A private string storing the number of reps to be done.
+  - Methods:
+    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. (Omitted from Class Diagram)
+    - `getExerciseName()`: A public helper method to obtain the name of the exercise. (Omitted from Class Diagram)
+    - `getSets()`: A public helper method to get the number of sets to be done per exercise. (Omitted from Class Diagram)
+    - `getReps()`: A public helper method to get the number of reps to be done per exercise. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `Exercise` object.
+  - Dependencies:
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `ExerciseList` contains at least 25 instances of `Exercise`.
+    - When `ExerciseList` or `FitnessMotivator` is destroyed, the `Exercise` instances are destroyed as well, reflecting a "whole-part" relationship.
+- Fitness command classes
+  - `GetExercisesCommand`:
+    - Without parameters, the command retrieves 5 random exercises from each `ExerciseType` and prints it.
+      - Command format: `fitness get`
+    - With parameters, the command retrieves all the exercises from the specified `ExerciseType` and prints it.
+      - Command format: `fitness get arms`
+  - `AddExerciseCommand`: Add a user specified exercise into the list.
+    - CommandFormat: `fitness add <ExerciseType>, <ExerciseName>, <Number_Of_Sets>, <Number_Of_Reps>`
 
+#### Sequence Diagram
+<!-- Insert image and description of the image -->
+![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
+- Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
+
+When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
 
 ## Product scope
 ### Target user profile

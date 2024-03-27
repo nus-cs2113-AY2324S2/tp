@@ -28,7 +28,7 @@ package fitness {
     class FitnessMotivator {
         + allExercises: ExerciseList
         + getExercises(): void
-        + addExercises(): void
+        + addExercises(commandArgs: String[]): void
         + getTypeExercises(exerciseType: ExerciseType): void
     }
 
