@@ -1,24 +1,29 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.ModuleException;
+import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.modules.Module;
+
+import static seedu.duke.FAP.jsonManager;
 
 public class AddCommand extends Command{
     private String moduleCode;
-    private String moduleGrade;
-    private int moduleMC;
-    private boolean moduleStatus;
     private int moduleDate;
 
-    public AddCommand(String moduleCode, int moduleMC, boolean moduleStatus, int moduleDate) {
+    private int moduleMC;
+
+    public AddCommand(String moduleCode, int moduleDate) throws ModuleNotFoundException {
         assert moduleCode != null && !moduleCode.trim().isEmpty() : "Module code cannot be null or empty";
-        assert moduleMC > 0 : "Module MC (Modular Credits) must be positive";
         assert moduleDate > 0 : "Module date must be a positive number";
 
-        this.moduleCode = moduleCode;
-        this.moduleMC = moduleMC;
-        this.moduleStatus = moduleStatus;
-        this.moduleDate = moduleDate;
+        if (jsonManager.moduleExist(moduleCode)) {
+            jsonManager.getModuleInfo(moduleCode);
+            this.moduleMC = jsonManager.getModuleMC();
+            this.moduleCode = moduleCode;
+            this.moduleDate = moduleDate;
+        } else {
+            throw new ModuleNotFoundException("Module do not exist in NUS!");
+        }
     }
 
     //to not throw error
@@ -34,9 +39,8 @@ public class AddCommand extends Command{
                 throw new ModuleException("Module list is not initialized.");
             }
 
-            Module newModule = new Module(moduleCode, moduleMC, moduleStatus, moduleDate);
+            Module newModule = new Module(moduleCode, moduleMC, moduleDate, jsonManager.getModuleTitle());
             moduleList.addModule(newModule);
-            moduleList.printModules();
         } catch (ModuleException e) {
             System.err.println("Failed to add module: " + e.getMessage());
         } catch (Exception e) {
