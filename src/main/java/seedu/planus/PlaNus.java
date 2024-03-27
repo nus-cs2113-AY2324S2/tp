@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -29,6 +31,12 @@ public class PlaNus {
      * Sets up the logger
      */
     public void setUpLogger() {
+        Logger rootLogger = Logger.getLogger("");
+        Handler[] handlers = rootLogger.getHandlers();
+        if (handlers[0] instanceof ConsoleHandler) {
+            rootLogger.removeHandler(handlers[0]);
+        }
+
         logger.setLevel(Level.INFO);
         try {
             fileTxt = new FileHandler("Logging.txt", true);
@@ -49,7 +57,7 @@ public class PlaNus {
         setUpLogger();
 
         while (!isExit) {
-            String line = Ui.getUserCommand();
+            String line = Ui.getUserCommand().trim();
             try {
                 isExit = Parser.parseCommand(line, timetable);
             } catch (Exception e) {
