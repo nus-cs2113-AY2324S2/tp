@@ -12,13 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeleteCommandTest {
 
     @Test
-    void execute() {
+    void execute_deleteCommandOnListWithTestItem_success() {
         ItemList itemList = new ItemList(new ArrayList<Item>());
         itemList.addItem("testItem", "A test item", 1,
                 LocalDate.now(), 10.00, 5.00);
 
-        DeleteCommand deleteCommand = new DeleteCommand(itemList, "testItem");
+        DeleteCommand deleteCommand = new DeleteCommand("testItem");
+        deleteCommand.execute(itemList);
 
-        assertEquals(1, itemList.getItemCount());
+        assertEquals(0, itemList.getItemCount());
     }
 }

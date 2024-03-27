@@ -10,8 +10,7 @@ public class DeleteCommand extends Command {
     private int index;
     private boolean isIndex;
 
-    public DeleteCommand(ItemList itemList, int index) {
-        super(itemList);
+    public DeleteCommand(int index) {
         this.index = index;
         isIndex = true;
         commandLogger.fine(String.format(
@@ -20,8 +19,7 @@ public class DeleteCommand extends Command {
         ));
     }
 
-    public DeleteCommand(ItemList itemList, String keyword) {
-        super(itemList);
+    public DeleteCommand(String keyword) {
         this.keyword = keyword;
         isIndex = false;
         commandLogger.fine(String.format(
@@ -30,9 +28,12 @@ public class DeleteCommand extends Command {
         ));
     }
 
-    public boolean execute() {
+    public boolean execute(ItemList itemList) {
         if (isIndex) {
-            // Ensure index out of bounds error is caught by Parser.
+            if (index <= 0 || index > itemList.getItemCount()) {
+                executionUiOutput = "Index is out of bounds!";
+                return true;
+            }
             assert index > 0 && index <= itemList.getItemCount();
             commandLogger.log(Level.INFO, "Delete identifier is detected as an index");
             executionUiOutput = itemList.deleteItem(index);
@@ -40,6 +41,7 @@ public class DeleteCommand extends Command {
             commandLogger.log(Level.INFO, "Delete identifier is detected as an item name");
             executionUiOutput = itemList.deleteItem(keyword);
         }
+        hasToSave = true;
         return true;
     }
 }
