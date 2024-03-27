@@ -163,9 +163,9 @@ class DukeTest {
             travelActivityListNew.addTravelActivity(travelActivityNew3);
             String[] command1 = new String[]{"find", "mala"};
 
-            String findExpectedOutput = "Here are what you are looking for:\r\n" +
-                    "1. Food: utown mala :19 Jun 2019 :2 hours (spicy)\r\n" +
-                    "2. Food: pgpr mala :7 Jul 2012 :1 hours (spicy)\r\n";
+            String findExpectedOutput = "Here are what you are looking for:\n" +
+                    "1. Food: utown mala :19 Jun 2019 :2 hours (spicy)\n" +
+                    "2. Food: pgpr mala :7 Jul 2012 :1 hours (spicy)\n";
             Parser.findCommand(command1, travelActivityListNew);
             assertEquals(capturedOutputStream.toString(), findExpectedOutput);
         } catch (OmniException exception) {
@@ -193,9 +193,9 @@ class DukeTest {
             travelActivityListNew.addTravelActivity(travelActivityNew2);
             travelActivityListNew.addTravelActivity(travelActivityNew3);
 
-            String findExpectedOutput2 = "Here are what you are looking for:\r\n" +
-                    "1. merlion :7 Apr 2018 :2 hours (sightseeing)\r\n" +
-                    "2. chinatown :21 Feb 2015 :5 hours (sightseeing)\r\n";
+            String findExpectedOutput2 = "Here are what you are looking for:\n" +
+                    "1. merlion :7 Apr 2018 :2 hours (sightseeing)\n" +
+                    "2. chinatown :21 Feb 2015 :5 hours (sightseeing)\n";
             Parser.findTagCommand("findtag sightseeing", travelActivityListNew);
             assertEquals(capturedOutputStream.toString(), findExpectedOutput2);
 
@@ -222,10 +222,10 @@ class DukeTest {
             travelActivityListNew.addTravelActivity(travelActivityNew2);
             travelActivityListNew.addTravelActivity(travelActivityNew3);
 
-            String findExpectedOutput3 = "Here are what you are looking for:\r\n" +
-                    "1. Accommodation: nus rvrc :12 Dec 2007 :5 years (campus stay)\r\n" +
-                    "2. Accommodation: nus pgpr :12 Oct 2017 :5 years (campus stay)\r\n" +
-                    "3. Accommodation: nus utr :12 Sep 2007 :5 years (campus stay)\r\n";
+            String findExpectedOutput3 = "Here are what you are looking for:\n" +
+                    "1. Accommodation: nus rvrc :12 Dec 2007 :5 years (campus stay)\n" +
+                    "2. Accommodation: nus pgpr :12 Oct 2017 :5 years (campus stay)\n" +
+                    "3. Accommodation: nus utr :12 Sep 2007 :5 years (campus stay)\n";
             Parser.findTypeCommand("findtype Accommodation", travelActivityListNew);
             assertEquals(capturedOutputStream.toString(), findExpectedOutput3);
             Parser.findTypeCommand("findtype Accommodation", travelActivityListNew);
