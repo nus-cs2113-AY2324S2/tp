@@ -56,4 +56,8 @@ public class Helper {
         }
         return tableData;
     }
+
+    public int getCommandsCount() {
+        return commandList.size();
+    }
 }
