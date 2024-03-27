@@ -54,6 +54,6 @@ public class Parser {
                 INDENT + source + "\n" +
                 INDENT + "| IMPORTANCE: " + importance + " | BIAS: " + bias +
                 " | RELIABILITY: " + reliability + " | \n" +
-                content);
+                content + "\n");
     }
 }

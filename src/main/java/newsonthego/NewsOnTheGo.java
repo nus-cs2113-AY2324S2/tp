@@ -114,7 +114,13 @@ public class NewsOnTheGo {
         String[] split = line.split(" ");
         int index = Integer.parseInt(split[1]) - 1;
         if (index >= 0 && index < list.size()) {
-            savedNews.saveNews(list.get(index));
+            if (list.get(index).isSaved()) {
+                System.out.println(list.get(index).getHeadline() + " has already been saved! \n" +
+                        "find your saved articles at " +savedNews.getPathName());
+            } else {
+                savedNews.saveNews(list.get(index));
+                list.get(index).setSaved(true);
+            }
         } else {
             System.out.println("Please provide a valid news index!");
         }

@@ -16,13 +16,18 @@ public class NewsFile {
     public NewsFile() {
         pathName = SAVED_NEWS_PATH;
     }
+
+    public String getPathName() {
+        return pathName;
+    }
+
     public void saveNews(NewsArticle article) throws IOException {
         Files.createDirectories(Paths.get("data"));
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathName, true))) {
             writer.write(parseToText(article));
             writer.newLine();
             System.out.println("Successfully saved " +article.getHeadline()+ "\n" +
-                    "find your saved news at " +pathName);
+                    "find your saved articles at " +pathName);
         } catch (IOException e) {
             System.out.println("An error occurred while appending text to the file: " + e.getMessage());
         }
