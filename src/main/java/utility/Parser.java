@@ -1,11 +1,14 @@
 package utility;
 
 import ui.Handler;
+<<<<<<< HEAD
 import health.Appointment;
 import health.Bmi;
 import health.HealthList;
 import health.Period;
 import ui.Handler;
+=======
+>>>>>>> 2564af23371b457b1268ff42c591da7ff80b7a70
 import ui.Output;
 
 import java.time.LocalDate;
@@ -129,12 +132,18 @@ public class Parser {
      * @param filter The filter string to be checked.
      * @throws CustomExceptions.InvalidInput If the filter string is none of them.
      */
+<<<<<<< HEAD
     public static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
         if (filter.equals(WorkoutConstant.RUN) 
                 || filter.equals(WorkoutConstant.GYM) 
                 || filter.equals(HealthConstant.BMI) 
                 || filter.equals(HealthConstant.PERIOD) 
                 || filter.equals(HealthConstant.APPOINTMENT) 
+=======
+    protected static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
+        if (filter.equals(WorkoutConstant.RUN) || filter.equals(WorkoutConstant.GYM) ||
+                filter.equals(HealthConstant.BMI) || filter.equals(HealthConstant.PERIOD)
+>>>>>>> 2564af23371b457b1268ff42c591da7ff80b7a70
                 || filter.equals(WorkoutConstant.ALL)) {
             return;
         }

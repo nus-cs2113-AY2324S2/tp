@@ -10,6 +10,9 @@ public enum Filters {
     PERIOD,
     BMI,
     APPOINTMENT,
+<<<<<<< HEAD
     PREDICTION
+=======
+>>>>>>> 2564af23371b457b1268ff42c591da7ff80b7a70
     WORKOUTS,
 }
