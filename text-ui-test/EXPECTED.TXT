@@ -1,5 +1,5 @@
 ----------------
-1.0
+StockMaster v2.0
 ----------------
 Data is being extracted from: ./StockMasterData.txt
 Welcome to StockMaster, where you can master the knowledge on your Stock!

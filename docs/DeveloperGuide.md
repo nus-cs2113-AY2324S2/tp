@@ -12,11 +12,19 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Small Business Owners who:
+* has a need to manage a significant number of inventory products
+* able to track revenue/loss of the business
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Help small business owners organise and better manage their inventory faster than 
+a typical mouse/GUI driven app
+
 
 ## User Stories
 
