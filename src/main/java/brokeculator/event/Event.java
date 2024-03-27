@@ -31,12 +31,14 @@ public class Event {
     public void removeExpense(Expense expense) {
         expenses.remove(expense);
     }
+    public int getExpenseCount() {
+        return expenses.size();
+    }
 
     @Override
     public String toString() {
         return "Event Name: " + eventName
-                + " Event Description: " + eventDescription 
-                + System.lineSeparator();
+                + " Event Description: " + eventDescription;
     }
 
     public String listExpenses() {
