@@ -17,6 +17,8 @@ public class CommandFormatException extends Exception{
         case EDIT:
             System.out.println(Messages.INVALID_EDIT_FORMAT);
             break;
+        case FIND:
+            System.out.println(Messages.INVALID_FIND_FORMAT);
         case HELP:
             System.out.println(Messages.HELP);
             break;

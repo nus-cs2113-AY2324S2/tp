@@ -1,13 +1,6 @@
 package parser;
 
-import command.Command;
-import command.DeleteCommand;
-import command.AddCommand;
-import command.ListCommand;
-import command.IncorrectCommand;
-import command.ExitCommand;
-import command.HelpCommand;
-import command.EditCommand;
+import command.*;
 import common.Messages;
 import exceptions.CommandFormatException;
 import itemlist.Itemlist;
@@ -18,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
+            Pattern.compile("add (?<itemName>[^/]+( [^/]+)*) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: cat/(?<category>[^/]+))?");
 
 
     public static final Pattern DELETE_COMMAND_FORMAT =
@@ -26,6 +19,9 @@ public class Parser {
 
     public static final Pattern EDIT_COMMAND_FORMAT =
             Pattern.compile("edit (?<itemName>[^/]+) qty/(?<newQuantity>\\d+)");
+
+    public static final Pattern FIND_COMMAND_FORMAT =
+            Pattern.compile("find (?<itemName>[^/]+)");
 
     public static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
@@ -69,6 +65,12 @@ public class Parser {
         case EDIT:
             try {
                 return prepareEdit(userInput);
+            } catch (CommandFormatException e) {
+                break;
+            }
+        case FIND:
+            try {
+                return prepareFind(userInput);
             } catch (CommandFormatException e) {
                 break;
             }
@@ -118,6 +120,15 @@ public class Parser {
             matcher.group("itemName"),
             newQuantity
         );
+    }
+
+    private Command prepareFind(String args) throws CommandFormatException{
+        final Matcher matcher = FIND_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.FIND);
+        }
+        return new FindCommand(matcher.group("itemName"));
     }
 }
 
