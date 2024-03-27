@@ -6,14 +6,18 @@ import java.util.logging.Logger;
 import static seedu.duke.ui.Ui.printGreeting;
 
 import seedu.duke.command.Command;
+import seedu.duke.json.JsonManager;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.ui.Ui;
 
 public class FAP {
 
+
     public static ModuleList moduleList = new ModuleList(10);
     public static final Logger LOGGER = Logger.getLogger(FAP.class.getName());
+
+    public static JsonManager jsonManager = new JsonManager();
 
     public static void main(String[] args) {
         try {
