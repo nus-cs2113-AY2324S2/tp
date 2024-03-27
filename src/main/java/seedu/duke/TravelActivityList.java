@@ -114,8 +114,8 @@ public class TravelActivityList {
             System.out.println("Here are what you are looking for:");
             //logger.log(Level.INFO, "Starting the printing of activities in temporaryArray");
             for (int newIterator = 0; newIterator < temporaryArray.size(); newIterator += 1) {
-                System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).toString());
-
+                System.out.println((newIterator + 1) + ". " + temporaryArray.get(newIterator).toString() + " (" +
+                        temporaryArray.get(newIterator).getTag() + ")");
             }
         }
     }
