@@ -1,6 +1,6 @@
 package brokeculator.event;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 import brokeculator.expense.Expense;
 
@@ -8,12 +8,12 @@ public class Event {
 
     private String eventName;
     private String eventDescription;
-    private Set<Expense> expenses;
+    private ArrayList<Expense> expenses;
 
     public Event(String eventName, String eventDescription) {
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-        this.expenses = Set.of();
+        this.expenses = new ArrayList<>();
     }
 
     public void addExpense(Expense expense) {
@@ -40,4 +40,9 @@ public class Event {
         }
         return sb.toString();
     }
+
+    public boolean containsExpense(Expense expense) {
+        return expenses.contains(expense);
+    }
+
 }
