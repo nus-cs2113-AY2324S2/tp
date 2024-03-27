@@ -16,11 +16,11 @@ public class ExpenditureList {
         expenditureCount = 0;
     }
 
-    public static void listExpensesByMonth(String monthYear) {
+    public static List<Expenditure> listExpensesByMonth(String monthYear) {
         assert monthYear.length() == 7;
         if (!monthYear.matches("\\d{2}\\.\\d{4}")) {
             System.out.println("Month and year format incorrect! Please use MM.yyyy format.");
-            return;
+            return null;
         }
 
         String[] monthYearParts = monthYear.split("\\.");
@@ -47,14 +47,15 @@ public class ExpenditureList {
                 System.out.println(count + ". " + exp);
             }
         }
+        return filteredExpenses;
     }
 
-    public static void listExpensesByYear(String year) {
+    public static List<Expenditure> listExpensesByYear(String year) {
         List<Expenditure> filteredExpenses = new ArrayList<>();
 
         if (!year.matches("\\d{4}")) {
             System.out.println("Year format incorrect. Please use yyyy format.");
-            return;
+            return filteredExpenses;
         }
 
         for (Expenditure exp : expenditureList) {
@@ -75,6 +76,8 @@ public class ExpenditureList {
                 System.out.println(count + ". " + exp);
             }
         }
+
+        return filteredExpenses;
     }
 
 
@@ -197,7 +200,5 @@ public class ExpenditureList {
         System.out.println("Please enter a positive amount");
         return false;
     }
-
-
 }
 
