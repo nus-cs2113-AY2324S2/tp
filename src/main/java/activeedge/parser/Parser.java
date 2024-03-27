@@ -127,16 +127,13 @@ public class    Parser {
                 LogExerciseCommand logExerciseCommand = new LogExerciseCommand(exerciseName, duration,
                         caloriesBurnt, currentDateTime);
                 logExerciseCommand.execute();
-            }
-            else if (input.startsWith("summary")) {
+            } else if (input.startsWith("summary")) {
                 new ShowSummaryCommand().execute();
-            }
-            else if(input.equalsIgnoreCase("clear")) {
+            } else if(input.equalsIgnoreCase("clear")) {
                 ClearCommand clearCommand = new ClearCommand();
                 clearCommand.execute();
-                //Storage.fetchData();
-            }
-            else {
+
+            } else {
                 System.out.println("Unknown command.");
             }
             Storage.saveLogsToFile("data/data.txt");

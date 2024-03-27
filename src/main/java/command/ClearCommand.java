@@ -29,6 +29,7 @@ public class ClearCommand {
      * Otherwise, it clears both lists and prints a message indicating that all tasks are cleared.
      */
     public void execute() {
+
         if (TaskList.tasksList.isEmpty() && UserDetailsList.DETAILS_LIST.isEmpty()) {
             CommandUi.printDataAlreadyClearedMessage();
         } else {

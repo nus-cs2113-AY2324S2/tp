@@ -27,9 +27,7 @@ public class ShowGoalsCommand {
                 // Check if the goal is related to calories
                 if (goalTask.getDescription().startsWith("c")) {
                     calorieGoal = goalTask.getGoalAmount(); // Retrieve calorie goal
-                }
-                // Check if the goal is related to water intake
-                else if (goalTask.getDescription().startsWith("w")) {
+                } else if (goalTask.getDescription().startsWith("w")) {
                     waterGoal = goalTask.getGoalAmount(); // Retrieve water goal
                 }
             }
