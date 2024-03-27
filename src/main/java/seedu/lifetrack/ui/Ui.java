@@ -135,18 +135,25 @@ public class Ui {
     public static void showHelp() {
         System.out.println("\t LifeTrack Command List:");
         System.out.println("\t - help: Displays a list of available commands and their descriptions.");
-        System.out.println("\t - calories in/out <activity> c/<number of calories> date/<date>: " +
-                "Adds a calorie gaining/burning entry into the calories tracker.");
+        printLine();
+        System.out.println("\t - calories in <food> c/<calories> d/<date> " +
+                "m/[carbohydrates, proteins, fats]: Adds a calorie gaining entry into the calories tracker.");
+        System.out.println("\t - calories out <activity> c/<calories> d/<date>: " +
+                "Adds a calorie burning entry into the calories tracker.");
         System.out.println("\t - calories list: Displays all entries currently stored in the calorie list.");
         System.out.println("\t - calories delete <index>: Deletes the entry at the specified index" +
                 " from the calorie list.");
-        System.out.println("\t - hydration add <type of beverage> v/<volume> date/<date>: " +
-                "Marks the task at the specified index as done.");
-        System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.\"");
-        System.out.println("\t - liquids list: Displays all entries currently stored in the hydration list.\"");
-        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>.\"");
-        System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.\"");
-        System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index" +
-                " from the sleep list.");
+        printLine();
+        System.out.println("\t - hydration add <type of beverage> v/<volume> d/<date>: " +
+                "Adds a hydration entry into the hydration tracker.");
+        System.out.println("\t - hydration list: Displays all entries currently stored in the hydration list.");
+        System.out.println("\t - hydration delete <index>: Deletes the hydration entry at the specified index " +
+                "from the hydration list.");
+        printLine();
+        System.out.println("\t - sleep add <duration> d/<date, format:DDMMYY>: " + 
+                "Adds a sleep entry into the sleep tracker.");
+        System.out.println("\t - sleep list: Displays all entries currently stored in the sleep list.");
+        System.out.println("\t - sleep delete <index>: Deletes the entry at the specified index " +
+                "from the sleep list.");
     }
 }
