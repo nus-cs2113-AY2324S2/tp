@@ -11,9 +11,9 @@ import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.commandcreator.AddExpenseCommandCreator;
 import seedu.budgetbuddy.commandcreator.AddSavingCommandCreator;
 import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.ListSplittedExpenseCommandCreator;
 import seedu.budgetbuddy.commandcreator.SplitExpenseCommandCreator;
 import seedu.budgetbuddy.command.RecurringExpenseCommand;
-import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
@@ -122,6 +122,11 @@ public class Parser {
     public Boolean isSplitExpenseCommand(String input) {
         return input.startsWith("split expenses");
     }
+
+    public Boolean isListSplitExpenseCommand(String input) {
+        return input.startsWith("list splitted expenses");
+    }
+
     public Boolean isSetBudgetCommand(String input){
         return input.startsWith("set budget");
     }
@@ -203,8 +208,7 @@ public class Parser {
      * @return A Command for executing the list, or null if the input is invalid.
      */
     
-    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList, 
-            SplitExpenseList splitexpenseList) {
+    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
 
@@ -242,9 +246,6 @@ public class Parser {
                     LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
                 }
                 return new ListExpenseCommand(expenseList, filterCategory);
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("splitted") 
-                    && parts[2].equalsIgnoreCase("expenses")) {
-                return new ListSplitExpenseCommand(splitexpenseList);
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
                 String filterCategory = parts[2];
                 try {
@@ -264,13 +265,13 @@ public class Parser {
             } else {
                 return null;
             }
-            break;
+        break;
         default:
             return null;
-        }return null;
+        }
+        return null;
 
     }
-
 
     private boolean isValidExpenseCategory(String category) {
 
@@ -697,7 +698,12 @@ public class Parser {
         }
 
         if (isListCommand(input)) {
-            return handleListCommand(input, expenses, savings, splitexpenses);
+            return handleListCommand(input, expenses, savings);
+        }
+
+        if (isListSplitExpenseCommand(input)) {
+            CommandCreator commandCreator = new ListSplittedExpenseCommandCreator(input, splitexpenses);
+            return commandCreator.createCommand();
         }
 
         if (isFindExpensesCommand(input)) {
