@@ -4,6 +4,7 @@ import byteceps.activities.Exercise;
 import byteceps.activities.Workout;
 import byteceps.errors.Exceptions;
 import byteceps.processing.ExerciseManager;
+import byteceps.processing.TrackedWorkoutsManager;
 import byteceps.processing.WeeklyProgramManager;
 import byteceps.processing.WorkoutManager;
 import byteceps.ui.UserInterface;
@@ -28,11 +29,13 @@ public class Storage {
         this.filePath = Path.of(filePath);
     }
 
-    public void save(ExerciseManager allExercises, WorkoutManager allWorkouts, WeeklyProgramManager weeklyProgram)
+    public void save(ExerciseManager allExercises, WorkoutManager allWorkouts,
+                     WeeklyProgramManager weeklyProgram, TrackedWorkoutsManager trackedWorkoutsManager)
             throws IOException {
         JSONObject jsonArchive = new JSONObject().put("exerciseManager", allExercises.getActivityList().toArray());
         jsonArchive.put("workoutManager", allWorkouts.getActivityList().toArray());
         jsonArchive.put("weeklyProgram", weeklyProgram.exportToJSON());
+        jsonArchive.put("trackedWorkoutsManager", trackedWorkoutsManager.exportToJSON());
 
         FileWriter fileWriter = new FileWriter(filePath.toFile());
         fileWriter.write(jsonArchive.toString());
@@ -40,7 +43,9 @@ public class Storage {
 
         UserInterface.printMessage("All your workouts and exercises have been saved.");
     }
-    public void load(ExerciseManager allExercises, WorkoutManager allWorkouts, WeeklyProgramManager weeklyProgram)
+
+    public void load(ExerciseManager allExercises, WorkoutManager allWorkouts,
+                     WeeklyProgramManager weeklyProgram, TrackedWorkoutsManager trackedWorkoutsManager)
             throws IOException {
         assert allExercises.getActivityList().isEmpty() && allWorkouts.getActivityList().isEmpty()
             && weeklyProgram.getActivityList().stream().allMatch(Objects::isNull)
@@ -55,12 +60,12 @@ public class Storage {
 
         UserInterface.printMessage("Loading your exercises...");
 
-        try {
-            Scanner jsonScanner = new Scanner(jsonFile);
+        try (Scanner jsonScanner = new Scanner(jsonFile)) {
             JSONObject jsonArchive = new JSONObject(jsonScanner.nextLine());
             loadExercises(allExercises, jsonArchive);
             loadWorkouts(allExercises, allWorkouts, jsonArchive);
             loadWeeklyProgram(allWorkouts, weeklyProgram, jsonArchive);
+            loadTrackedWorkouts(allExercises, allWorkouts, jsonArchive, trackedWorkoutsManager);
             UserInterface.printMessage("Data loaded successfully!");
         } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
              Exceptions.ActivityDoesNotExists | Exceptions.InvalidInput | JSONException | NoSuchElementException e) {
@@ -96,7 +101,7 @@ public class Storage {
             Workout workout = new Workout(workoutName);
             allWorkouts.add(workout);
             JSONArray jsonExercisesInWorkout = jsonWorkout.getJSONArray("exerciseList");
-            for (int j = 0; j < jsonExercisesInWorkout.length(); j += 1) {
+            for (int j = 0; j < jsonExercisesInWorkout.length(); j++) {
                 String exerciseInWorkout = jsonExercisesInWorkout.getJSONObject(j).getString("activityName");
                 workout.addExercise((Exercise) allExercises.retrieve(exerciseInWorkout));
             }
@@ -106,9 +111,53 @@ public class Storage {
     private static void loadExercises(ExerciseManager allExercises, JSONObject jsonArchive)
             throws Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
         JSONArray jsonExerciseArray = jsonArchive.getJSONArray("exerciseManager");
-        for (int i = 0; i < jsonExerciseArray.length(); i += 1) {
+        for (int i = 0; i < jsonExerciseArray.length(); i++) {
             String exerciseName = jsonExerciseArray.getJSONObject(i).getString("activityName");
             allExercises.add(new Exercise(exerciseName));
         }
     }
+
+    private void loadTrackedWorkouts(ExerciseManager allExercises, WorkoutManager allWorkouts,
+                                     JSONObject jsonArchive, TrackedWorkoutsManager trackedWorkoutsManager)
+            throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
+        JSONArray jsonTrackedWorkouts = jsonArchive.getJSONArray("trackedWorkoutsManager");
+        for (int i = 0; i < jsonTrackedWorkouts.length(); i++) {
+            JSONObject currentWorkout = jsonTrackedWorkouts.getJSONObject(i);
+            JSONArray exercisesArray = currentWorkout.getJSONArray("exercises");
+            String workoutDate = currentWorkout.getString("workoutDate");
+            String workoutName = currentWorkout.getString("workoutName");
+
+            // verify workout exists
+            if (allWorkouts.doesNotHaveActivity(workoutName)) {
+                throw new Exceptions.ActivityDoesNotExists(
+                        String.format("The workout %s does not seem to exist", workoutName)
+                );
+            }
+
+            // create trackedWorkout entry
+            trackedWorkoutsManager.addTrackedWorkout(workoutDate, workoutName);
+
+            // loop through exercises
+            for (int j = 0; j < exercisesArray.length(); j++) {
+                JSONObject currentExercise = exercisesArray.getJSONObject(j);
+                String exerciseName = currentExercise.getString("exerciseName");
+                String weight = String.valueOf(currentExercise.getInt("weight"));
+                String sets = String.valueOf(currentExercise.getInt(("sets")));
+                String reps = String.valueOf(currentExercise.getInt(("reps")));
+
+                // verify exercise exists
+                if (allExercises.doesNotHaveActivity(exerciseName)) {
+                    throw new Exceptions.ActivityDoesNotExists(
+                            String.format("The exercise %s does not seem to exist", exerciseName)
+                    );
+                }
+
+                trackedWorkoutsManager.addTrackedExercise(workoutDate, exerciseName,
+                        weight, sets, reps);
+            }
+        }
+
+    }
+
+
 }

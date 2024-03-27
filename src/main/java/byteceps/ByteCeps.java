@@ -2,9 +2,10 @@ package byteceps;
 
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
+import byteceps.processing.TrackedWorkoutsManager;
 import byteceps.processing.ExerciseManager;
-import byteceps.processing.WeeklyProgramManager;
 import byteceps.processing.WorkoutManager;
+import byteceps.processing.WeeklyProgramManager;
 import byteceps.storage.Storage;
 import byteceps.ui.UserInterface;
 
@@ -14,6 +15,7 @@ public class ByteCeps {
     private static ExerciseManager exerciseManager = null;
     private static WorkoutManager workoutManager = null;
     private static WeeklyProgramManager weeklyProgramManager = null;
+    private static TrackedWorkoutsManager trackedWorkoutsManager = null;
     private static Parser parser;
     private static UserInterface ui;
     private static Storage storage;
@@ -22,7 +24,8 @@ public class ByteCeps {
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
         workoutManager = new WorkoutManager(exerciseManager);
-        weeklyProgramManager = new WeeklyProgramManager(workoutManager);
+        trackedWorkoutsManager = new TrackedWorkoutsManager();
+        weeklyProgramManager = new WeeklyProgramManager(exerciseManager, workoutManager, trackedWorkoutsManager);
         ui = new UserInterface();
         parser = new Parser();
         storage = new Storage(FILE_PATH);
@@ -45,7 +48,7 @@ public class ByteCeps {
                 case "workout":
                     workoutManager.execute(parser);
                     continue;
-                case "week":
+                case "program":
                     weeklyProgramManager.execute(parser);
                     continue;
                 case "bye":
@@ -65,9 +68,9 @@ public class ByteCeps {
     public void run() {
         ui.printWelcomeMessage();
         try {
-            storage.load(exerciseManager, workoutManager, weeklyProgramManager);
+            storage.load(exerciseManager, workoutManager, weeklyProgramManager, trackedWorkoutsManager);
             commandLine();
-            storage.save(exerciseManager, workoutManager, weeklyProgramManager);
+            storage.save(exerciseManager, workoutManager, weeklyProgramManager, trackedWorkoutsManager);
         } catch (IOException e) {
             UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
         }

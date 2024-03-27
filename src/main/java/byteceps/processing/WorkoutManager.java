@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class WorkoutManager extends ActivityManager {
     private final ExerciseManager exerciseManager;
-
     public WorkoutManager(ExerciseManager exerciseManager) {
         this.exerciseManager = exerciseManager;
     }
@@ -89,7 +88,7 @@ public class WorkoutManager extends ActivityManager {
     }
 
     private void executeCreateAction(Parser parser) throws Exceptions.InvalidInput,
-            Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
+            Exceptions.ActivityExistsException {
         assert parser.getAction().equals("create") : "Action must be create";
         Workout newWorkout = processWorkout(parser);
         add(newWorkout);

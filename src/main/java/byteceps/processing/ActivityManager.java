@@ -23,7 +23,7 @@ public abstract class ActivityManager {
             Exceptions.ErrorAddingActivity, Exceptions.ActivityExistsException,
             Exceptions.ActivityDoesNotExists;
 
-    public void add(Activity activity) throws Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
+    public void add(Activity activity) throws Exceptions.ActivityExistsException {
         boolean setReturn = activitySet.add(activity);
 
         if (!setReturn) {
@@ -72,7 +72,6 @@ public abstract class ActivityManager {
             UserInterface.printMessage(String.format("Your List of %s is Empty", getActivityType(true)));
             return;
         }
-
         StringBuilder result = new StringBuilder();
         result.append(String.format("Listing %s:%s", getActivityType(true), System.lineSeparator()));
 
@@ -83,6 +82,20 @@ public abstract class ActivityManager {
         }
 
         UserInterface.printMessage(result.toString());
+    }
+
+    public boolean doesNotHaveActivity(String activityName) {
+        if (activitySet.isEmpty()) {
+            return true;
+        }
+
+        for (Activity currentActivity : activitySet) {
+            if (currentActivity.getActivityName().equals(activityName)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public ArrayList<Activity> getActivityList() {
