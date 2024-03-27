@@ -7,7 +7,7 @@ public class Days {
     protected String classDuration;
     protected String classLocation;
 
-    public Days(String classDescription, String classTime, String classDuration, String classLocation){
+    public Days(String classDescription, String classTime, String classDuration, String classLocation) {
         this.classDescription = classDescription;
         this.classTime = classTime;
         this.classDuration = classDuration;
@@ -18,13 +18,16 @@ public class Days {
         return classDescription;
     }
 
-    public String getClassTime() {return classTime;}
+    public String getClassTime() {
+        return classTime;
+    }
 
-    public String getClassDuration() {return classDuration;}
+    public String getClassDuration() {
+        return classDuration;
+    }
 
     public String getClassLocation() {
         return classLocation;
     }
-
 
 }
