@@ -93,4 +93,13 @@ public class ExpenseManager {
     public int getNumberOfExpensesTracked() {
         return expenses.size();
     }
+
+    public boolean isExpenseIndexValid(int index) {
+        return index >= 1 && index <= expenses.size();
+    }
+
+    public Expense getExpense(int index) {
+        assert isExpenseIndexValid(index);
+        return expenses.get(index - 1);
+    }
 }

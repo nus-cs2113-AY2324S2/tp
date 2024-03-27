@@ -33,8 +33,15 @@ public class EventManager {
     }
 
     public void printEvents() {
+        StringBuilder sb = new StringBuilder();
         for (int idx = 0; idx < events.size(); idx++) {
-            UI.println((idx + 1) + ". " + events.get(idx));
+            sb.append(idx + 1).append(". ").append(events.get(idx)).append(System.lineSeparator());
         }
+        UI.prettyPrint(sb.toString());
+    }
+
+    public Event getEvent(int idx) {
+        assert isEventIdxValid(idx);
+        return events.get(idx - 1);
     }
 }
