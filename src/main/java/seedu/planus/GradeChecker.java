@@ -16,19 +16,21 @@ public class GradeChecker {
      */
     public static String checkGrade(Timetable timetable) {
         int totalMCs = 0;
+        int totalMCsWithoutSU = 0;
         int yearMCs = 0;
+        int yearMCsWithoutSU = 0;
         int termMCs = 0;
+        int termMCsWithoutSU = 0;
         double totalGrade = 0.00;
         double yearGrade = 0.00;
         double termGrade = 0.00;
 
         StringBuilder plan = new StringBuilder();
 
-
-        for (int y = 1; y <= MAX_CANDIDATURE_YEAR; y ++) {
+        for (int y = 1; y <= MAX_CANDIDATURE_YEAR; y++) {
             plan.append("Year ").append(y).append(":").append(System.lineSeparator());
 
-            for (int t = 1; t <= TERM_PER_YEAR; t ++) {
+            for (int t = 1; t <= TERM_PER_YEAR; t++) {
                 int index = timetable.searchTimetableIndex(y, t);
                 if (index == -1) {
                     continue;
@@ -43,40 +45,47 @@ public class GradeChecker {
                         continue;
                     }
                     termMCs += course.getModularCredit();
-                    termGrade += course.getNumberGrade() * course.getModularCredit();
+                    if (!course.getLetterGrade().equals("S") && !course.getLetterGrade().equals("CS")) {
+                        termMCsWithoutSU += course.getModularCredit();
+                        termGrade += course.getNumberGrade() * course.getModularCredit();
+                    }
                 }
 
                 double termGPA = 0.00;
-                if (termMCs != 0) {
-                    termGPA = termGrade / termMCs;
+                if (termMCsWithoutSU != 0) {
+                    termGPA = termGrade / termMCsWithoutSU;
                 }
 
                 plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
                         .append("-----------------------------").append(System.lineSeparator());
 
                 yearMCs += termMCs;
+                yearMCsWithoutSU += termMCsWithoutSU;
                 yearGrade += termGrade;
                 termMCs = 0;
+                termMCsWithoutSU = 0;
                 termGrade = 0.00;
             }
 
             double yearGPA = 0.00;
-            if (yearMCs != 0) {
-                yearGPA = yearGrade / yearMCs;
+            if (yearMCsWithoutSU != 0) {
+                yearGPA = yearGrade / yearMCsWithoutSU;
             }
 
             plan.append("Year ").append(y).append(" GPA: ").append(yearGPA).append(System.lineSeparator())
                     .append(System.lineSeparator());
 
             totalMCs += yearMCs;
+            totalMCsWithoutSU += yearMCsWithoutSU;
             totalGrade += yearGrade;
             yearMCs = 0;
+            yearMCsWithoutSU = 0;
             yearGrade = 0.00;
         }
 
         double cumulativeGPA = 0.00;
-        if (totalMCs != 0) {
-            cumulativeGPA = totalGrade / totalMCs;
+        if (totalMCsWithoutSU != 0) {
+            cumulativeGPA = totalGrade / totalMCsWithoutSU;
         }
         assert cumulativeGPA >= 0.00 : "The cumulative GPA should be non-negative.";
         plan.append("Total GPA: ").append(cumulativeGPA).append(System.lineSeparator()).append(System.lineSeparator());
@@ -88,12 +97,14 @@ public class GradeChecker {
      * Returns a formatted string containing the grades for the year specified
      *
      * @param timetable Timetable of the user
-     * @param year Year of study for which the user wants to check the grade
+     * @param year      Year of study for which the user wants to check the grade
      * @return A string with the year's grades
      */
     public static String checkGrade(Timetable timetable, int year) {
         int yearMCs = 0;
+        int yearMCsWithoutSU = 0;
         int termMCs = 0;
+        int termMCsWithoutSU = 0;
         double yearGrade = 0.00;
         double termGrade = 0.00;
 
@@ -101,7 +112,7 @@ public class GradeChecker {
 
         plan.append("Year ").append(year).append(":").append(System.lineSeparator());
 
-        for (int t = 1; t <= TERM_PER_YEAR; t ++) {
+        for (int t = 1; t <= TERM_PER_YEAR; t++) {
             int index = timetable.searchTimetableIndex(year, t);
             if (index == -1) {
                 continue;
@@ -117,26 +128,31 @@ public class GradeChecker {
                 }
 
                 termMCs += course.getModularCredit();
-                termGrade += course.getNumberGrade() * course.getModularCredit();
+                if (!course.getLetterGrade().equals("S") && !course.getLetterGrade().equals("CS")) {
+                    termMCsWithoutSU += course.getModularCredit();
+                    termGrade += course.getNumberGrade() * course.getModularCredit();
+                }
             }
 
             double termGPA = 0.00;
-            if (termMCs != 0) {
-                termGPA = termGrade / termMCs;
+            if (termMCsWithoutSU != 0) {
+                termGPA = termGrade / termMCsWithoutSU;
             }
 
             plan.append("Term GPA: ").append(termGPA).append(System.lineSeparator())
                     .append("-----------------------------").append(System.lineSeparator());
 
             yearMCs += termMCs;
+            yearMCsWithoutSU += termMCsWithoutSU;
             yearGrade += termGrade;
             termMCs = 0;
+            termMCsWithoutSU = 0;
             termGrade = 0.00;
         }
 
         double yearGPA = 0.00;
-        if (yearMCs != 0) {
-            yearGPA = yearGrade / yearMCs;
+        if (yearMCsWithoutSU != 0) {
+            yearGPA = yearGrade / yearMCsWithoutSU;
         }
         assert yearGPA >= 0.00 : "The GPA for the given academic year should be non-negative.";
 
@@ -150,12 +166,13 @@ public class GradeChecker {
      * Returns a formatted string containing the grades for the year and term specified
      *
      * @param timetable Timetable of the user
-     * @param year Year of study for which the user wants to check the grade
-     * @param term Term of study for which the user wants to check the grade
+     * @param year      Year of study for which the user wants to check the grade
+     * @param term      Term of study for which the user wants to check the grade
      * @return A string with the term's grades
      */
     public static String checkGrade(Timetable timetable, int year, int term) {
         int termMCs = 0;
+        int termMCsWithoutSU = 0;
         double termGrade = 0.00;
         int index = timetable.searchTimetableIndex(year, term);
 
@@ -169,12 +186,15 @@ public class GradeChecker {
                 continue;
             }
             termMCs += course.getModularCredit();
-            termGrade += course.getNumberGrade() * course.getModularCredit();
+            if (!course.getLetterGrade().equals("S") && !course.getLetterGrade().equals("CS")) {
+                termMCsWithoutSU += course.getModularCredit();
+                termGrade += course.getNumberGrade() * course.getModularCredit();
+            }
         }
 
         double termGPA = 0.00;
-        if (termMCs != 0) {
-            termGPA = termGrade / termMCs;
+        if (termMCsWithoutSU != 0) {
+            termGPA = termGrade / termMCsWithoutSU;
         }
         assert termGPA >= 0.00 : "The GPA of the semester should be non-negative.";
 
@@ -183,5 +203,4 @@ public class GradeChecker {
 
         return plan.toString();
     }
-
 }
