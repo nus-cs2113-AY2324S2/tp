@@ -16,6 +16,7 @@ public class Parser {
         String[] yearAndTerm;
         int year;
         int term;
+        int mc = 4;
 
         String commandWord;
         try {
@@ -50,14 +51,20 @@ public class Parser {
                 String courseCode;
                 try {
                     courseCode = courseCodeAndYearAndTerms[0].trim();
-                    yearAndTerm = courseCodeAndYearAndTerms[1].split("t/", 2);
+                    String[] splitMC = courseCodeAndYearAndTerms[1].split("m/", 2); // check if mcs are specified first, if not then default 4 mcs
+                    if(splitMC.length == 2) {
+                        mc = Integer.parseInt(splitMC[1].trim()); // Parse MCs
+                        yearAndTerm = splitMC[0].split("t/", 2);
+                    } else {
+                        yearAndTerm = splitMC[0].split("t/", 2);
+                    }
                     year = Integer.parseInt(yearAndTerm[0].trim());
                     term = Integer.parseInt(yearAndTerm[1].trim());
                 } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
                     throw new Exception(Ui.INVALID_ADD_COURSE);
                 }
                 String courseName = "userAdded";
-                newCourse = new Course(courseCode, courseName, year, term);
+                newCourse = new Course(courseCode, courseName, mc, year, term);
                 try {
                     timetable.addCourse(newCourse);
                     Storage.writeToFile(timetable);
