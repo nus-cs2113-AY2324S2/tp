@@ -1,6 +1,7 @@
 package seedu.voyagers;
 
 import seedu.voyagers.classes.TripList;
+import seedu.voyagers.commands.AutoTripStatusUpdateCommand;
 import seedu.voyagers.paser.NewParser;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.commands.Command;
@@ -26,7 +27,7 @@ public class Voyagers {
         this.ui = new Ui();
     }
     public static void main(String[] args) {
-        new Voyagers().run();
+            new Voyagers().run();
     }
 
     void run() {
@@ -35,7 +36,7 @@ public class Voyagers {
         logger.setLevel(Level.INFO);
 
         ui.showWelcome();
-        assert false : "This is a debug assertion set to fail.";
+        //assert false : "This is a debug assertion set to fail.";
         ui.echo("Here are the trips in your list from the previous time:", false, false);
 
         //TODO: make Storage a singleton
@@ -45,6 +46,7 @@ public class Voyagers {
 
 
         new ListCommand().execute(tripList, ui, null);
+        new AutoTripStatusUpdateCommand().execute(tripList, ui, null);
         boolean isExit = false;
 
         while (!isExit) {
