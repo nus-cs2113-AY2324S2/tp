@@ -4,11 +4,11 @@ public class InvalidInputExceptionMessage {
 
     private static final String HEADER = "\t Invalid input!\n";
     private static final String CALORIES_IN_INPUT = "\t Example input: calories in DESCRIPTION " +
-            "c/INTEGER_CALORIES date/DATE [m/MACROS]";
+            "c/INTEGER_CALORIES d/DATE [m/MACROS]";
     private static final String CALORIES_OUT_INPUT = "\t Example input: calories out DESCRIPTION " +
-            "c/INTEGER_CALORIES date/DATE";
+            "c/INTEGER_CALORIES d/DATE";
     private static final String MACROS_INPUT = "\t Example input: ....... m/CARBS_INT, PROTEIN_INT, FATS_INT";
-    private static final String HYDRATION_IN_INPUT = "\t Example input: liquids in Milo v/1000 date/221024" ;
+    private static final String HYDRATION_IN_INPUT = "\t Example input: hydration add Milo v/1000 d/221024" ;
 
     //calories list related methods
     public static String getCaloriesIncorrectOrderMessage() {
