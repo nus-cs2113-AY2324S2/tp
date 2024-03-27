@@ -1,10 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
-import budgetbuddy.exceptions.EmptyArgumentException;
-import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
-import budgetbuddy.exceptions.InvalidIndexException;
-import budgetbuddy.exceptions.InvalidTransactionTypeException;
+import budgetbuddy.exceptions.*;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.storage.DataStorage;
 import budgetbuddy.transaction.type.Transaction;
@@ -112,7 +109,7 @@ public class TransactionList {
     }
 
     public void processEditTransaction(String input, Account account) throws EmptyArgumentException,
-            NumberFormatException, InvalidIndexException {
+            NumberFormatException, InvalidIndexException, InvalidEditTransactionData {
         if (input.trim().length() < EDIT_BEGIN_INDEX) {
             throw new EmptyArgumentException("edit index ");
         }
@@ -124,9 +121,15 @@ public class TransactionList {
         int index = Integer.parseInt(data) - INDEX_OFFSET;
         if ((index >= LOWER_BOUND) && (index < transactions.size())) {
             Transaction transaction = transactions.get(index);
-            UserInterface.getEditInformation(transaction.toString(), index, transactions, account);
+            String newTransaction = UserInterface.getEditInformation(transaction.toString());
+           Transaction t = parser.parseTransactionType(newTransaction,account);
+           transactions.set(index,t);
+           UserInterface.printUpdatedTransaction();
         } else {
             throw new InvalidIndexException(String.valueOf(transactions.size()));
         }
     }
+
+
+
 }

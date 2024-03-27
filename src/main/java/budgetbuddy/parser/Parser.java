@@ -2,7 +2,9 @@ package budgetbuddy.parser;
 
 import budgetbuddy.account.Account;
 import budgetbuddy.exceptions.EmptyArgumentException;
+import budgetbuddy.exceptions.InvalidEditTransactionData;
 import budgetbuddy.exceptions.InvalidTransactionTypeException;
+
 import budgetbuddy.transaction.TransactionList;
 import budgetbuddy.transaction.type.Expense;
 import budgetbuddy.transaction.type.Income;
@@ -58,4 +60,22 @@ public class Parser {
             throw new InvalidTransactionTypeException(type);
         }
     }
+
+    public Transaction parseTransactionType(String newTransaction, Account account) throws InvalidEditTransactionData {
+        String[] parts = newTransaction.split(" \\| ");
+
+        String type = parts[0].trim();
+        String description = parts[1].trim();
+        String date = parts[2].trim();
+        String amount = parts[3].trim();
+        String category = parts[4].trim();
+        if (type.equalsIgnoreCase("income")) {
+            return new Income(description, Double.parseDouble(amount), category, date, account);
+        } else if (type.equalsIgnoreCase("expense")) {
+            return new Expense(description, Double.parseDouble(amount), category, date, account);
+        } else {
+            throw new InvalidEditTransactionData(" One or more data is wrong. ");
+        }
+    }
+
 }
