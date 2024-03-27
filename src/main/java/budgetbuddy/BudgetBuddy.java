@@ -20,7 +20,7 @@ public class BudgetBuddy {
         String logo = "BUDGET BUDDY";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
-        Scanner in = new Scanner(System.in);
+        Scanner in = UserInterface.in;
 
         TransactionList transactions = null;
         try {

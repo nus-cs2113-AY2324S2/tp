@@ -4,6 +4,7 @@ import budgetbuddy.transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserInterface {
   
@@ -16,7 +17,8 @@ public class UserInterface {
 
     private static final String TAB_SPACE = "    ";
 
-
+    public static Scanner in = new Scanner(System.in);
+    
     public static void printDeleteMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
         System.out.println(LINE);
