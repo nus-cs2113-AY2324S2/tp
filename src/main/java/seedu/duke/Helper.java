@@ -45,6 +45,7 @@ public class Helper {
     }
 
     public String[][] listAllCommands() {
+        assert getCommandsCount() > 0 : "Available commands list is empty";
         int commandNum = commandList.size();
         String[][] tableData = new String[commandNum][];
         for (int i = 0; i < commandNum; i++) {
@@ -60,4 +61,6 @@ public class Helper {
     public int getCommandsCount() {
         return commandList.size();
     }
+
 }
+

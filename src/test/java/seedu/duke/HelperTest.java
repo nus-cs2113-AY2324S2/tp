@@ -9,7 +9,7 @@ public class HelperTest {
 
     @Test
     // check number of prompts in the helper's command list
-    public void dummyTest(){
+    public void helperCompletenessTest(){
         assertEquals(helperTest.getCommandsCount(), 7);
     }
 }
