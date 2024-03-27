@@ -12,10 +12,25 @@ import java.time.temporal.ChronoUnit;
  * Represents a Period object to track user's menstrual cycle.
  */
 public class Period extends Health {
+    /**
+     * The start date of period i.e. the first day of period flow which is also the first day of cycle.
+     */
     protected LocalDate startDate;
+    /**
+     * The end date of period i.e. the last day of period flow.
+     */
     protected LocalDate endPeriodDate;
+    /**
+     * The end date of period cycle i.e. the last day before the first day of the next period flow.
+     */
     protected LocalDate endCycleDate;
+    /**
+     * The number of days between the first day and last day of period flow.
+     */
     protected long periodLength;
+    /**
+     * The number of days between the first day and last day of the period cycle.
+     */
     protected long cycleLength;
 
     //@@author syj02

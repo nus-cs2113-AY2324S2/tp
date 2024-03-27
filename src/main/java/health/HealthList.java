@@ -207,12 +207,26 @@ public class HealthList extends ArrayList<Health> {
     }
 
     //@@author syj_02
+    /**
+     * Adds an Appointment to the list of Appointments whenever addAppointment is called.
+     * Sorts all Appointment objects in the list by date and time of the appointments with
+     * the earliest appointment at the top..
+     *
+     * @param appointment Appointment object
+     * @throws AssertionError If Appointment object is null.
+     */
     public static void addAppointment(Appointment appointment) {
         assert appointment != null : ErrorConstant.NULL_APPOINTMENT_ERROR;
         appointments.add(appointment);
         appointments.sort(Comparator.comparing(Appointment::getDate).thenComparing(Appointment::getTime));
     }
 
+    /**
+     * Deletes Appointment object based on index.
+     *
+     * @param index Index of the Appointment object to be deleted.
+     * @throws CustomExceptions If the index is out of bounds
+     */
     public static void deleteAppointment(int index) throws CustomExceptions.OutOfBounds {
         assert !appointments.isEmpty() : ErrorConstant.EMPTY_APPOINTMENT_LIST_ERROR;
         if (index < 1 || index > appointments.size()) {
@@ -229,6 +243,11 @@ public class HealthList extends ArrayList<Health> {
         showAppointmentList();
     }
 
+    /**
+     * Prints all Appointment entries tracked.
+     *
+     * @throws AssertionError If appointments list is empty
+     */
     public static void showAppointmentList() {
         assert !appointments.isEmpty() : ErrorConstant.EMPTY_APPOINTMENT_LIST_ERROR;
         int index = 1;
