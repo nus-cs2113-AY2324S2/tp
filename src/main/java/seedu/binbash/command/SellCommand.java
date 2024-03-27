@@ -1,10 +1,14 @@
 package seedu.binbash.command;
 
+import seedu.binbash.logger.BinBashLogger;
 import seedu.binbash.ItemList;
+import java.util.logging.Logger;
 
 import java.util.regex.Pattern;
 
 public class SellCommand extends Command{
+    private static final Logger logger = Logger.getLogger(SellCommand.class.getName());
+    private static final BinBashLogger binBashLogger = new BinBashLogger(SellCommand.class.getName());
     public static final String COMMAND = "sell";
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
             "sell\\s+"

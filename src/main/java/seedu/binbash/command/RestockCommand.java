@@ -1,10 +1,14 @@
 package seedu.binbash.command;
 
+import seedu.binbash.logger.BinBashLogger;
 import seedu.binbash.ItemList;
+import java.util.logging.Logger;
 
 import java.util.regex.Pattern;
 
 public class RestockCommand extends Command{
+    private static final Logger logger = Logger.getLogger(RestockCommand.class.getName());
+    private static final BinBashLogger binBashLogger = new BinBashLogger(RestockCommand.class.getName());
     public static final String COMMAND = "restock";
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
             "restock\\s+"
