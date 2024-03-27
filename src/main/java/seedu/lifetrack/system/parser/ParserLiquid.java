@@ -3,6 +3,7 @@ package seedu.lifetrack.system.parser;
 import seedu.lifetrack.liquids.Beverage;
 import seedu.lifetrack.liquids.liquidlist.LiquidEntry;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import seedu.lifetrack.system.exceptions.InvalidInputExceptionMessage;
 
 public class ParserLiquid {
 
@@ -26,9 +27,7 @@ public class ParserLiquid {
 
         // Handle exception when b/ or v/ not entered
         if (beverageIndex == -1 || volumeIndex == -1) {
-            throw new InvalidInputException("Invalid input exception: " +
-                "Please ensure that you have entered b/ and v/\n" +
-                "For example: liquids in b/Milo v/1000");
+            throw new InvalidInputException(InvalidInputExceptionMessage.getHydrationMissingKeywordMessage());
         }
 
         assert (beverageIndex != -1 || volumeIndex != -1) : "ensures that beverage and volume has been keyed in";
