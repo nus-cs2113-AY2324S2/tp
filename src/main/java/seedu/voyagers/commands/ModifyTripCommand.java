@@ -1,10 +1,12 @@
 package seedu.voyagers.commands;
 
 import seedu.voyagers.classes.TripList;
+import seedu.voyagers.utils.FormatDate;
 import seedu.voyagers.utils.Ui;
 import seedu.voyagers.utils.Storage;
 import seedu.voyagers.classes.Trip;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class ModifyTripCommand extends Command{
@@ -15,8 +17,9 @@ public class ModifyTripCommand extends Command{
 
     public void execute(TripList trips, Ui ui, Storage storage){
 
-        String oldName = args[0];
-        String modificationType = args[1];
+        String oldName = args[1];
+        String modificationType = args[0];
+        System.out.println(Arrays.toString(args));
 
         int index = trips.findTrip(oldName);
         if (index == -1){
@@ -36,7 +39,9 @@ public class ModifyTripCommand extends Command{
             break;
         case "dates":
             try{
-                trip.setDates(new Date(args[2]), new Date(args[3]));
+                Date newStartDate = FormatDate.dateFormat.parse(args[2]);
+                Date newEndDate = FormatDate.dateFormat.parse(args[3]);
+                trip.setDates(newStartDate, newEndDate);
             } catch (Exception e){
                 //TODO: be more descriptive about the error (e.g. invalid date format,
                 // start date after end date, etc.)

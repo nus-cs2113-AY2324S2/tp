@@ -73,6 +73,7 @@ public class NewParser {
     private static String[] concatenate(String[] s1, String[] s2){
         String[] result = new String[s1.length + s2.length];
         System.arraycopy(s1, 0, result, 0, s1.length);
+        System.arraycopy(s2, 0, result, 1, s2.length);
         return result;
     }
 
