@@ -13,5 +13,7 @@ to follow to use it in using this software:
    return NAME_OF_BOOK
 5. To list all the books added
    list
+6. To list all the books added in alphabetical order");
+   list alphabetical
 __________
 Bye!
