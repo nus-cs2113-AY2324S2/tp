@@ -8,9 +8,9 @@ Woo hoo chef! I have added this recipe to your recipe book:
 	pizza / DINNER
 You now have 1 recipes in your recipe book. Keep adding some!
 -----------------------------
------------------------------
 Enter command:
 [Command entered: list]
+-----------------------------
 pizza / DINNER
 -----------------------------
 Enter command:
@@ -20,9 +20,9 @@ Okay chef! I have deleted this recipe from your recipe book:
 	pizza / DINNER
 You now have 0 recipes in your recipe book. Keep adding some!
 -----------------------------
------------------------------
 Enter command:
 [Command entered: list]
+-----------------------------
 Sorry, there are no recipes in your recipe book to print.
 -----------------------------
 Enter command:
