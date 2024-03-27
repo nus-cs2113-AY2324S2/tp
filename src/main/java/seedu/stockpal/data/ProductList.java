@@ -51,7 +51,7 @@ public class ProductList {
     public void deleteProduct(Pid productPid) throws PidNotFoundException {
         int productIndex = findProductIndex(productPid);
         if (productIndex == -1) {
-            throw new PidNotFoundException("Product with PID: " + productPid.toString() + " not found");
+            throw new PidNotFoundException("Product with " + productPid.toString() + " not found");
         }
         products.remove(productIndex);
     }
