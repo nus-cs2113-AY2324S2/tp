@@ -34,7 +34,42 @@ the command `Create order -menu 01`, `add -item 001` and `complete`.
 
 ![Sequence Diagram](images\ArchitectureSequanceDiagram.png)
 
+### Model Component
+The model consists of classes describing the objects used in this application.
+The general structure is that menu and order are separate, but they both work with `menuItem(s)`, which 
+represent food items on the menu.
+
+* [**`ItemManager`**](#model-component): An interface containing methods representing operations common to **`Menu`** 
+  and **`Order`**. <br><br />
+* [**`Item`**](#model-component): An abstract class representing a food item. It should be implemented by **`MenuItem`**.
+  <br><br />
+* [**`Menu`**](#model-component): A class representing the menu(s) of the restaurant, where each contains menuItem(s)
+ that can be ordered. Multiple menus can exist and each has a unique ID. <br><br />
+* [**`MenuItem`**](#model-component): A class inheriting item, and represents a food item on the menu. <br><br />
+* [**`Order`**](#model-component): A class representing an order to be entered into the system to be kept track of. Each 
+  order has a unique ID generated from the time of order.<br><br />
+* [**`SetMenu`**](#model-component): An enumeration representing the different types of set menus available, examples of
+  which includes *breakfast*, *lunch*, *dinner*.
+
+The *Class Diagram* below shows how the model components interact with each other, including interactions such as 
+dependencies, associations and inheritance.
+
+![Class Diagram](images/modelcomponent.png)
+
 ## Implementation
+
+### `OrderLogic`
+Generally, the order logic works as follows: 
+1. User enters an input which is received in the *ui* and parsed by the `Parser`. 
+2. The `Parser` classifies the command based on `CommandType`
+3. Within `OrderLogic`, `execute` is called on the corresponding class
+4. Control is passed to other sections of the code
+
+**View Menu** <br>
+Within the construct of the order logic, the menu can be accessed for viewing in order to select items from 
+available menus. This is carried out with the `view menu` command.
+
+
 
 ## Product scope
 ### Target user profile

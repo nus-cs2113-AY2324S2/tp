@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam dpi 600
+
+abstract class Item {
+    -id
+    - name
+    - unitPrice
+
+    + Item (id: String, name: String, unitPrice: double)
+    +getID() : String
+    +getName() : String
+    +getPrice() : double
+
+}
+interface ItemManager {
+    add(var1: MenuItem) : boolean
+    remove(var1: String) : boolean
+    getID() : String
+}
+class Menu {
+- logr
+- menuID
+- setupLogger() : void
++ Menu(menuID: String)
++ getItem(itemID: String) : Optional<MenuItem>
++ getID() : String
++ add(item: MenuItem) : boolean
++ remove(itemID: String) : boolean
++ toString() : String
+}
+class MenuItem {
++ MenuItem(id: String, name: String, unitPrice: double)
++ toString(): String
++ compareTo(o: MenuItem) : int
+}
+class Order {
+- SERVICE_CHARGE
+- GST
+- orderID
++ add(item: MenuItem) : boolean
++ remove(itemID: String) : boolean
++ remove(item: MenuItem) : boolean
++ getItemCount(itemID String): int
++ getID() : String
++ getSize() : int
++ getTotalPrice() : double
++ getReceipt() : String
++ getOrderSummary() : String
++ toString() : String
+}
+enum SetMenu {
+    Breakfast
+    Lunch
+    Dinner
+}
+
+Item <|-- MenuItem
+
+ItemManager <|.. Menu
+ItemManager <|.. Order
+
+MenuItem "1" <..  Order : order
+MenuItem "1" <.. Menu : menu
+
+SetMenu <.. Menu
+
+
+
+@enduml
