@@ -126,13 +126,33 @@ public class Parser {
             }
             return false;
         case "change":
+            String targetChanged;
             try {
-                logger.log(Level.INFO, "Changing grade from timetable");
-                timetable.addGrade(words[2], words[3]);
-                Storage.writeToFile(timetable);
+                targetChanged = words[1];
             } catch (IndexOutOfBoundsException | NullPointerException e) {
                 logger.log(Level.WARNING, "Invalid command format: {0}", line);
-                throw new Exception(Ui.INVALID_CHANGE_GRADE);
+                throw new Exception(Ui.INVALID_COMMAND);
+            }
+            if (targetChanged.equalsIgnoreCase("grade")) {
+                try {
+                    logger.log(Level.INFO, "Changing grade from timetable");
+                    timetable.addGrade(words[2], words[3]);
+                    Storage.writeToFile(timetable);
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    logger.log(Level.WARNING, "Invalid command format: {0}", line);
+                    throw new Exception(Ui.INVALID_CHANGE_GRADE);
+                }
+            }
+            else if (targetChanged.equalsIgnoreCase("timetable")) {
+                try {
+                    logger.log(Level.INFO, "Changing timetable");
+                    Storage.changeTimetable(Integer.parseInt(words[2].trim()));
+                } catch (IndexOutOfBoundsException | NullPointerException e) {
+                    throw new Exception(Ui.INVALID_CHANGE_TIMETABLE);
+                }
+            }
+            else {
+                throw new Exception(Ui.INVALID_CHANGE);
             }
             return false;
         case "check":

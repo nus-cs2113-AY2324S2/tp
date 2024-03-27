@@ -163,6 +163,16 @@ Example of usage: `change grade CS1010 A+`
 
 <br>
 
+### Changing timetables: `change timetable`
+Changes the timetable to the corresponding index.
+
+Format: `change timetable TIMETABLE_INDEX`
+- TIMETABLE_INDEX is the index of the saved timetable
+
+Example of usage: `change timetable 2`
+
+<br>
+
 ### Checking grades: `check`
 Shows grades for taken courses, along with the GPA calculated. 
 If term is not specified, grades for the whole year will be shown.
