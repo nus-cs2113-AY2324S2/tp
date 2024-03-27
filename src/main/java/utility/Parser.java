@@ -1,5 +1,6 @@
 package utility;
 
+import ui.Handler;
 import ui.Output;
 
 import java.time.LocalDate;
@@ -152,14 +153,15 @@ public class Parser {
      * @param filter The filter string to be checked.
      * @throws CustomExceptions.InvalidInput If the filter string is none of them.
      */
-    public static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
+    protected static void validateFilter (String filter) throws CustomExceptions.InvalidInput {
         if (filter.equals(WorkoutConstant.RUN) || filter.equals(WorkoutConstant.GYM) ||
-                filter.equals(HealthConstant.BMI) || filter.equals(HealthConstant.PERIOD)) {
+                filter.equals(HealthConstant.BMI) || filter.equals(HealthConstant.PERIOD)
+                || filter.equals(WorkoutConstant.ALL)) {
             return;
         }
         throw new CustomExceptions.InvalidInput("Invalid item specified." +
                 System.lineSeparator() +
-                "/item:run/gym/bmi/period");
+                "/item:run/gym/workouts/bmi/period");
     }
 
     //@@author JustinSoh
@@ -171,17 +173,14 @@ public class Parser {
      */
     public static String parseHistoryAndLatestInput(String userInput) {
         try {
-            String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-            if (inputs.length != 2) {
-                throw new CustomExceptions.InsufficientInput(ErrorConstant.INVALID_HISTORY_FORMAT_ERROR);
-            }
-            String[] filterSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
-            if (filterSplit.length != 2 || !filterSplit[0].equalsIgnoreCase("item")) {
+            String type = Handler.extractSubstringFromSpecificIndex(userInput, UiConstant.VIEW_FLAG);
+
+            if (type.isBlank()) {
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
             }
-            validateFilter(filterSplit[1].toLowerCase());
-            return filterSplit[1].toLowerCase();
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
+            validateFilter(type.toLowerCase());
+            return type.toLowerCase();
+        } catch (CustomExceptions.InvalidInput e) {
             Output.printException(e.getMessage());
             return null;
         }

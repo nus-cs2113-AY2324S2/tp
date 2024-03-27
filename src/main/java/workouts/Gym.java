@@ -95,6 +95,15 @@ public class Gym extends Workout {
         return true;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     /**
      * Retrieves the string representation of a Gym object.
      *
@@ -109,5 +118,93 @@ public class Gym extends Workout {
         } else {
             return " (Date: NA)";
         }
+    }
+
+    public String getFormatForAllHistoryFirst(){
+        String printedDate;
+
+        if (date != null) {
+            printedDate = date.toString();
+        } else {
+            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
+        }
+//
+        StringBuilder gymStationString = new StringBuilder();
+        StringBuilder gymSetString = new StringBuilder();
+        StringBuilder gymRepString = new StringBuilder();
+        StringBuilder gymWeightString = new StringBuilder();
+
+        for(int i = 0; i < 1; i++){
+            GymStation station = stations.get(i);
+            gymStationString.append(station.getStationName());
+            gymSetString.append(station.getNumberOfSets());
+
+            for(int j = 0; j < station.getNumberOfSets(); j++){
+                gymRepString.append(station.getSets().get(j).getRepetitions());
+                gymWeightString.append(station.getSets().get(j).getWeight());
+                if(j != station.getNumberOfSets() - 1){
+                    gymWeightString.append(", ");
+                }
+            }
+
+
+        }
+
+
+        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+                WorkoutConstant.GYM,
+                printedDate,
+                "-",
+                "-",
+                "-",
+                gymStationString,
+                gymSetString,
+                gymRepString,
+                gymWeightString);
+     }
+
+    public String getFormatForAllHistorySubsequent(){
+        String printedDate;
+
+        if (date != null) {
+            printedDate = date.toString();
+        } else {
+            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
+        }
+//
+        StringBuilder gymStationString = new StringBuilder();
+        StringBuilder gymSetString = new StringBuilder();
+        StringBuilder gymRepString = new StringBuilder();
+        StringBuilder gymWeightString = new StringBuilder();
+        if(stations.size() < 2){
+            return "";
+        }else{
+            for(int i = 1; i < stations.size(); i++){
+                GymStation station = stations.get(i);
+                gymStationString.append(station.getStationName());
+                gymSetString.append(station.getNumberOfSets());
+
+                for(int j = 0; j < station.getNumberOfSets(); j++){
+                    gymRepString.append(station.getSets().get(j).getRepetitions());
+                    gymWeightString.append(station.getSets().get(j).getWeight());
+                    if(j != station.getNumberOfSets() - 1){
+                        gymWeightString.append(", ");
+                    }
+                }
+            }
+        }
+
+
+
+        return String.format(WorkoutConstant.HISTORY_ALL_DATA_FORMAT,
+                "",
+                "",
+                "",
+                "",
+                "",
+                gymStationString,
+                gymSetString,
+                gymRepString,
+                gymWeightString);
     }
 }

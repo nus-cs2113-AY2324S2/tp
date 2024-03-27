@@ -102,7 +102,7 @@ public class ErrorConstant {
             "Usage: history/latest /view:filter";
     public static final String INVALID_HISTORY_FILTER_ERROR = "Missing/invalid filter used!" +
             System.lineSeparator() +
-            "Use /view:run/gym/period/bmi";
+            "Use /view:run/gym/workouts/period/bmi";
 
 
 }

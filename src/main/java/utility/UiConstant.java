@@ -32,6 +32,9 @@ public class UiConstant {
     public static final String MISSING_FILE = "What is your name, voyager?";
     public static final String SUCCESSFUL_LOAD = "Prior data found. Orbit has been synchronised.";
 
+    // History
+    public static final String VIEW_FLAG = "/view:";
+
 
     // Numerical values
     public static final Integer MAX_RUNTIME_ARRAY_LENGTH = 3;
