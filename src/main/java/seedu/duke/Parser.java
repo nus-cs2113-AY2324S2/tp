@@ -132,12 +132,12 @@ public class Parser {
                 throw new CustomException("No such topic");
             }
             // checks if user wants a random topic num
-            final int RANDOM_TOPIC_NUM = topicList.getSize() + 1;
-            if (topicNum == RANDOM_TOPIC_NUM) {
+            final int randomTopicNum = topicList.getSize() + 1;
+            if (topicNum == randomTopicNum) {
                 Helper helper = new Helper();
-                System.out.println("You reached here");
-                topicNum = helper.generateRandomNumber(RANDOM_TOPIC_NUM);
+                topicNum = helper.generateRandomNumber(randomTopicNum);
             }
+            // prints questions
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
             System.out.println("You have finished the topic! What will be your next topic?");
             topicList.get(topicNum - 1).markAsAttempted();
