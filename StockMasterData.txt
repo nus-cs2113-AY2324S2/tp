@@ -1,13 +1,1 @@
-0 | apples | 5
-0 | apples | 50
-0 | apples | 50
-0 | apples | 50
-0 | apples | 50
-1 | phones | 100
-0 | apples | 50
-0 | apples | 50
-1 | apples | 50
-2 | pear | 50
-3 | pear | 50
-0 | apples | 50
-1 | apple Iphone | 10
+0 | apple iphone | 10 | 100 | 500

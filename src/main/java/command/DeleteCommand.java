@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
             throw new CommandFormatException(CommandType.DEL);
         } else {
             Itemlist.deleteItem(index);
+            System.out.println(itemName + " has been successfully deleted.");
+            Storage.overwriteFile(Itemlist.getItems(), false);
         }
-        System.out.println(itemName + " has been successfully deleted.");
-        Storage.overwriteFile(Itemlist.getItems(), false);
     }
 }
