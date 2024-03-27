@@ -72,13 +72,19 @@ Format: `display MAJOR_NAME`
 ### Adding a course to course plan: `add course`
 Adds a new course to the course plan at the term specified.
 
-Format: `add course COURSE_CODE y/YEAR t/TERM`
+Format: `add course COURSE_CODE y/YEAR t/TERM m/MCS`
 - YEAR represents the year of study of the user. 
   It must be a positive integer from 1 to 6, which is the maximum candidature period.
 - TERM must span from 1 to 4, with 1 and 2 representing the normal semesters, 
   while 3 and 4 represent the special terms.
+- MCS represents the Modular Credits of the course added. This is to cater to certain courses with different credits.
+  If the user input does not include m/MCS, it will default to 4 MCS being added. 
 
 Example of usage: `add course CS1010y/1t/1`
+
+OR
+
+Example of usage: `add course CFG1002y/1t/1m/2`
 
 <br>
 
@@ -151,7 +157,7 @@ Example of usage: `rm grade CS1010`
 Changes the grade of the corresponding course.
 
 Format: `change grade COURSE_CODE GRADE`
-- GRADE is the letter grade, which can be A+/A/A-/B+/B/B-/C+/C/D+/D/F.
+- GRADE is the letter grade, which can be A+/A/A-/B+/B/B-/C+/C/D+/D/F/S/U/CS/CU.
 
 Example of usage: `change grade CS1010 A+`
 
@@ -177,8 +183,8 @@ Year 1 Semester 2:
   DTK1234: B+
   MA1508E: A
   PF1101: A-
-  GEA1000: A
-Term GPA: 4.7
+  GEA1000: S
+Term GPA: 4.625
 -----------------------------
 ```
 
