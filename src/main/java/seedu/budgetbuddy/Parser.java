@@ -13,10 +13,11 @@ import seedu.budgetbuddy.command.ListSavingsCommand;
 import seedu.budgetbuddy.command.RecurringExpenseCommand;
 import seedu.budgetbuddy.command.SplitExpenseCommand;
 import seedu.budgetbuddy.command.ListSplitExpenseCommand;
-import seedu.budgetbuddy.command.MenuCommand;
 import seedu.budgetbuddy.command.ReduceSavingCommand;
 import seedu.budgetbuddy.command.SetBudgetCommand;
 import seedu.budgetbuddy.command.ChangeCurrencyCommand;
+import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.MenuCommandCreator;
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.ArrayList;
@@ -338,39 +339,6 @@ public class Parser {
             }
         }
         return null;
-    }
-
-
-    /**
-     * Processes all menu commands and returns the corresponding Command object.
-     * This method interprets the user's input and displays either the entire menu
-     * or the associated menu item
-     *
-     * @param input The full user input string
-     * @return A new MenuCommand object with the specified index, returns null if
-     *         index is not an integer
-     */
-    public Command handleMenuCommand(String input) {
-        assert input != null : "Input should not be empty";
-        assert input.startsWith("menu") : "Input should be a menu command";
-
-        LOGGER.log(Level.INFO, "Start processing for Menu Command");
-
-        if (input.trim().equals("menu")) {
-            LOGGER.log(Level.INFO, "Menu Command has no parameters");
-            return new MenuCommand(0);
-        }
-        try {
-            String indexAsString = input.substring(5);
-            int index = Integer.parseInt(indexAsString);
-
-            LOGGER.log(Level.INFO, "Menu Command has found parameter" + index);
-
-            return new MenuCommand(index);
-        } catch (NumberFormatException e) {
-            LOGGER.log(Level.WARNING, "Index found to not be an Integer");
-            return null;
-        }
     }
 
     public Command handleAddExpenseCommand(ExpenseList expenses, String input) {
@@ -817,7 +785,8 @@ public class Parser {
         
         if(isMenuCommand(input)) {
             LOGGER.log(Level.INFO, "Confirmed that input is a menu command");
-            return handleMenuCommand(input);
+            CommandCreator commandCreator = new MenuCommandCreator(input);
+            return commandCreator.createCommand();
         }
 
         if (isAddExpenseCommand(input)) {
