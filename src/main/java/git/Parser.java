@@ -38,7 +38,8 @@ public class Parser {
         case "add":
             String category = ui.promptForCategory();
             int amount = ui.promptForAmount();
-            Grocery grocery = new Grocery(commandParts[1], amount, LocalDate.now(), category, 0);
+            String location = ui.promptForLocation();
+            Grocery grocery = new Grocery(commandParts[1], amount, LocalDate.now(), category, 0, location);
             String expiration = ui.promptForExpiration();
             String cost = ui.promptForCost();
             grocery.setExpiration(expiration);

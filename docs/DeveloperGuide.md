@@ -29,7 +29,14 @@
    * In Parser class executeCommand method, modified the add command to prompt the user for the amount of grocery. Passed the amount as a parameter when creating a new Grocery object.
    * In Ui class, added a new method promptForAmount to prompt the user for the amount of grocery.
    * In Grocery class, modified the printGrocery method to print different units of measurement for different categories.
-5. xx
+5. Input the location of where each grocery is stored
+   * In Grocery class, modified the Grocery class to include location (String) as an attribute.
+   * In Grocery class, modified the Grocery constructor to accept the 'location' parameter.
+   * In Grocery class, under printGrocery, added locationString to format location.
+   * In Parser class executeCommand method, modified the add command to prompt the user for where the grocery is stored. Passed the location as a parameter when creating a new Grocery object.
+   * In Ui class, added promptForLocation method to take in user input for location of the grocery.
+   * In Ui class, modified the printGrocery method to print the 'location' of the grocery alongside the grocery name.
+
 ## Product scope
 ### Target user profile
 
