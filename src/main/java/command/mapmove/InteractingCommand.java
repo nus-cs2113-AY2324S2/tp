@@ -14,8 +14,14 @@ public class InteractingCommand extends MapMoveCommand {
     @Override
     public void execute() {
         String entityInteractedWith = currentMap.handleInteract();
-        textBox.setNextNarration(entityInteractedWith + " appears in your path. What will you do?");
-        textBox.setNextInstruction("Will you [fight] or will you [run]?");
+        if (entityInteractedWith == "no interaction"){
+            textBox.setNextNarration("Nothing to interact with here");
+        }
+        else{
+            textBox.setNextNarration(entityInteractedWith + " appears in your path. What will you do?");
+            textBox.setNextInstruction("Will you [fight] or will you [run]?");
+        }
+
         AMap battleMap;
         switch (entityInteractedWith) {
         case "@": //centaur
