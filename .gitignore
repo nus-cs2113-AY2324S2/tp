@@ -26,3 +26,5 @@ text-ui-test/data/*
 /data/*
 /logs/
 /logs/*
+/META-INF/
+/META-INF/*
