@@ -3,6 +3,7 @@ package seedu.duke.modules;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.GpaNullException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 
 import java.io.ByteArrayOutputStream;
@@ -66,6 +67,26 @@ class ModuleListTest {
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
                 () -> moduleList.changeModuleGrade("",""));
         assertEquals("Module code cannot be null or empty.", thrown.getMessage());
+    }
+
+    @Test
+    void tallyGPA() {
+        try {
+            ModuleList moduleList = new ModuleList();
+            assertThrows(GpaNullException.class, () -> moduleList.tallyGPA());
+            moduleList.addModule(new Module("CS1010", 4,4, ""));
+            moduleList.addModule(new Module("CS1231",4, 4, ""));
+            moduleList.getModule("CS1010").setModuleTaken(true);
+            moduleList.getModule("CS1231").setModuleTaken(true);
+            moduleList.changeModuleGrade("CS1010", "A-");
+            moduleList.changeModuleGrade("CS1231", "A");
+            assertEquals(4.75,moduleList.tallyGPA());
+        } catch (ModuleNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (GpaNullException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
