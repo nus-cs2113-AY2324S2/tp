@@ -17,7 +17,8 @@ public class GPATest {
         String[] moduleGrades = {"A", "A", "A","A"};
 
         double expectedGPA = 4.10;
-        double resultGPA = gpaMain.calculateNewGPA(currentGPA, totalAccumulatedCredits, numOfModules, moduleCredits, moduleGrades);
+        double resultGPA = gpaMain.calculateNewGPA(currentGPA, totalAccumulatedCredits, numOfModules,
+                moduleCredits, moduleGrades);
 
         assertEquals(expectedGPA, resultGPA, 0.01, "The GPA calculated for all A's did not match the expected value");
     }
