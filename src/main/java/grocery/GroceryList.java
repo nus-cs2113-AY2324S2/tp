@@ -1,16 +1,24 @@
 package grocery;
 
+import exceptions.InvalidAmountException;
+import exceptions.InvalidCostException;
 import git.Ui;
 import exceptions.GitException;
-import exceptions.EmptyGroceryException;
-import exceptions.IncompleteCommandException;
-import exceptions.NoSuchGroceryException;
-import exceptions.WrongFormatException;
+import exceptions.commands.EmptyGroceryException;
+import exceptions.commands.IncompleteCommandException;
+import exceptions.commands.NoSuchGroceryException;
+import exceptions.commands.WrongFormatException;
+import exceptions.CannotUseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.Collections;
+
 
 /**
  * Stores all the user's groceries.
@@ -30,6 +38,9 @@ public class GroceryList {
 
     /**
      * Adds a grocery.
+     *
+     * @param grocery Grocery to be added.
+     * @throws EmptyGroceryException If grocery name == null.
      */
     public void addGrocery(Grocery grocery) throws EmptyGroceryException {
         if (grocery.getName() == null || grocery.getName().trim().isEmpty()) {
@@ -39,6 +50,7 @@ public class GroceryList {
         try {
             groceries.add(grocery);
             Ui.printGroceryAdded(grocery);
+            assert groceries.contains(grocery) : "Grocery should be added to the list";
         } catch (NullPointerException e) {
             System.out.println("Failed to add grocery: he groceries collection is null.");
         } catch (Exception e) {
@@ -47,12 +59,13 @@ public class GroceryList {
 
         logger.log(Level.INFO, "Added " + grocery.printGrocery());
     }
-    
 
     /**
      * Returns the desired grocery.
      *
-     * @throws NoSuchGroceryException Selected grocery does not exist.
+     * @param name Name of the grocery.
+     * @return The needed grocery.
+     * @throws NoSuchGroceryException If the selected grocery does not exist.
      */
     private Grocery getGrocery(String name) throws NoSuchGroceryException {
         int index = -1;
@@ -64,6 +77,7 @@ public class GroceryList {
         }
 
         if (index != -1) {
+            assert groceries != null : "Found grocery should not be null";
             return groceries.get(index);
         } else {
             throw new NoSuchGroceryException();
@@ -71,58 +85,128 @@ public class GroceryList {
     }
 
     /**
-     * Adds the expiration date of an existing grocery.
+     * Checks whether details are valid, else throw GitException accordingly.
      *
+     * @param details User input.
+     * @param command Command word.
+     * @param parameter Parameter for the command.
+     * @return String array of valid details.
      * @throws GitException Exception thrown depending on error.
      */
-    public void setExpiration(String details) throws GitException {
+    private String[] checkDetails(String details, String command, String parameter) throws GitException {
         if (details.isEmpty()) {
             throw new EmptyGroceryException();
         }
 
-        // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
-        String parameter = "d/";
-        String[] expParts = details.split(parameter, 2);
-        Grocery grocery = getGrocery(expParts[0].strip());
-
-        if (expParts.length < 2) {
-            throw new WrongFormatException("date");
+        // Split the input into the grocery name and the detail part.
+        String[] detailParts = details.split(parameter, 2);
+        if (detailParts.length < 2 || detailParts[1].trim().isEmpty()) {
+            throw new WrongFormatException(command + " command is in the wrong format. " + parameter + " is required.");
         }
 
-        String date = expParts[1].strip();
-        if (date.isEmpty()) {
-            throw new IncompleteCommandException(parameter);
+        // Retrieve the grocery to ensure it exists.
+        Grocery grocery = getGrocery(detailParts[0].strip());
+        if (grocery == null) {
+            throw new NoSuchGroceryException();
+        }
+
+        String attribute = detailParts[1].strip();
+        // For expiration date updates, validate the date format.
+        if (command.equals("exp")) {
+            try {
+                LocalDate.parse(attribute, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (DateTimeParseException e) {
+                throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
+            }
+        }
+
+        return new String[] {detailParts[0].trim(), attribute};
+    }
+
+    /**
+     * Adds the expiration date of an existing grocery.
+     *
+     * @param details A string containing grocery name and details.
+     * @throws GitException Exception thrown depending on error.
+     */
+    public void editExpiration(String details) throws GitException {
+        // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
+        String[] expParts = checkDetails(details, "exp", "d/");
+        if (expParts.length < 2 || expParts[1].trim().isEmpty()) {
+            throw new IncompleteCommandException("Expiration date is missing. Please use the format 'd/YYYY-MM-DD'.");
+        }
+        Grocery grocery = getGrocery(expParts[0].strip());
+        
+        // Parse the date string to LocalDate
+        LocalDate date;
+        try {
+            date = LocalDate.parse(expParts[1].strip(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            throw new WrongFormatException("Expiration date is in the wrong format. Please use yyyy-MM-dd.");
+        }
+    
+        // Convert LocalDate back to String to match the setExpiration signature
+        String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        grocery.setExpiration(dateString);
+    
+        // Verification and UI feedback
+        assert grocery.getExpiration().isEqual(date) : "Expiration date should be set correctly";
+        Ui.printExpSet(grocery);
+    }
+
+    /**
+     * Sets the amount of an existing grocery.
+     *
+     * @param details User input.
+     * @param use True to reduce the amount of a grocery, false to set a new amount.
+     * @throws GitException Exception thrown depending on error.
+     */
+    public void editAmount(String details, boolean use) throws GitException {
+        // Assuming the format is "amt GROCERY a/AMOUNT"
+        String[] amtParts = checkDetails(details, "amt", "a/");
+        Grocery grocery = getGrocery(amtParts[0].strip());
+        String amountString = amtParts[1].strip();
+
+        int amount = 0;
+        try {
+            amount = Integer.parseInt(amountString);
+        } catch (NumberFormatException e) {
+            throw new InvalidAmountException();
+        }
+
+        // "use" is not valid if an amount was not previously set
+        if (use && grocery.getAmount() == 0) {
+            throw new CannotUseException();
+        }
+
+        int finalAmount = use ? Math.max(0, grocery.getAmount() - amount) : amount;
+        grocery.setAmount(finalAmount);
+        if (finalAmount == 0) {
+            Ui.printAmtDepleted(grocery);
         } else {
-            grocery.setExpiration(date);
-            Ui.printExpSet(grocery);
+            Ui.printAmtSet(grocery);
         }
     }
 
     /**
-     * Adds the amount of an existing grocery.
+     * Updates the cost of an existing grocery.
      *
-     * @throws GitException Exception thrown depending on error.
+     * @param details A string containing grocery name and details.
+     * @throws GitException If the input new cost is not numeric.
      */
-    public void setAmount(String details) throws GitException {
-        if (details.isEmpty()) {
-            throw new EmptyGroceryException();
-        }
+    public void editCost(String details) throws GitException {
+        // Assuming the format is "cost GROCERY $PRICE"
+        System.out.println(details);
+        String[] costParts = checkDetails(details, "cost", "\\$");
+        Grocery grocery = getGrocery(costParts[0].strip());
+        String price = costParts[1].strip();
 
-        // Assuming the format is "amt GROCERY a/AMOUNT"
-        String parameter = "a/";
-        String[] amtParts = details.split(parameter, 2);
-        Grocery grocery = getGrocery(amtParts[0].strip());
-
-        if (amtParts.length < 2) {
-            throw new WrongFormatException("amt");
-        }
-
-        String amount = amtParts[1].strip();
-        if (amount.isEmpty()) {
-            throw new IncompleteCommandException(parameter);
-        } else {
-            grocery.setAmount(amount);
-            Ui.printAmtSet(grocery);
+        try {
+            double cost = Double.parseDouble(price);
+            grocery.setCost(String.format("%.2f", cost));
+            Ui.printCostSet(grocery);
+        } catch (NumberFormatException e) {
+            throw new InvalidCostException();
         }
     }
 
@@ -133,17 +217,38 @@ public class GroceryList {
         int size = groceries.size();
         if (size == 0) {
             Ui.printNoGrocery();
-            return;
+        } else {
+            Ui.printGroceryList(groceries);
         }
-        Ui.printGroceryList(groceries);
+    }
+
+    /**
+     * Sorts the groceries by expiration date.
+     */
+    public void sortByExpiration() {
+        Collections.sort(groceries, (g1, g2) -> g1.getExpiration().compareTo(g2.getExpiration()));
+    }
+
+    public void sortByCost() {
+        int size = groceries.size();
+        if (size == 0) {
+            Ui.printNoGrocery();
+        } else {
+            List<Grocery> groceriesByDate = groceries;
+            groceriesByDate.sort((g1, g2) -> Double.compare(g1.getCost(), g2.getCost()));
+            Collections.reverse(groceriesByDate);
+            Ui.printGroceryList(groceriesByDate);
+        }
     }
 
     /**
      * Removes a grocery.
      *
-     * @throws GitException Exception thrown depending on error.
+     * @param details User input.
+     * @throws GitException If grocery is empty.
      */
     public void removeGrocery(String details) throws GitException {
+        assert (!groceries.isEmpty()) : "There is nothing to remove.";
         if (details.isEmpty()) {
             throw new EmptyGroceryException();
         }
