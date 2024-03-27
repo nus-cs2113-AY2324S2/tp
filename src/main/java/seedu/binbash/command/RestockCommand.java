@@ -5,7 +5,7 @@ import seedu.binbash.ItemList;
 import java.util.regex.Pattern;
 
 public class RestockCommand extends Command{
-    public static final String command = "restock";
+    public static final String COMMAND = "restock";
     public static final Pattern COMMAND_FORMAT = Pattern.compile(
             "restock\\s+"
                     + "n/(?<itemName>.+?)(?=q/)"
@@ -28,7 +28,7 @@ public class RestockCommand extends Command{
 
     @Override
     public boolean execute() {
-        executionUiOutput = itemList.updateItemQuantity(itemName, restockQuantity, command);
+        executionUiOutput = itemList.updateItemQuantity(itemName, restockQuantity, COMMAND);
         return true;
     }
 }
