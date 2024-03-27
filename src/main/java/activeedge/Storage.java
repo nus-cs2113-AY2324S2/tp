@@ -69,7 +69,7 @@ public class Storage {
      * @param filePath The path of the file where logs should be saved.
      */
     public static void saveLogsToFile(String filePath) {
-        try (FileWriter fw = new FileWriter(filePath)) {
+        try (FileWriter fw = new FileWriter(filePath, false)) {
             for (int i = 0; i < UserDetailsList.DETAILS_LIST.size(); i++) {
                 String out = UserDetailsList.DETAILS_LIST.get(i).toString();
                 fw.write(out + "\n");
