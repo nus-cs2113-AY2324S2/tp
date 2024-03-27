@@ -1,4 +1,4 @@
 package bookmarked.exceptions;
 
-public class emptyArgumentsException extends Exception {
+public class EmptyArgumentsException extends Exception {
 }
