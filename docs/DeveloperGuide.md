@@ -2,32 +2,39 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+original source as well}
 
 ## Design & implementation
 
 ### Main Class: `FAP`
 
-The `FAP` class serves as the central hub of the application, orchestrating the flow of execution and managing critical resources. It embodies key software design principles and showcases thoughtful architectural decisions.
+The `FAP` class serves as the central hub of the application, orchestrating the flow of execution and managing critical
+resources. It embodies key software design principles and showcases thoughtful architectural decisions.
 
 #### Design Overview
 
-- **Singleton Components:** `FAP` manages singleton components such as `moduleList` and `LOGGER`, ensuring they are initialized once and accessible throughout the application's lifecycle.
+- **Singleton Components:** `FAP` manages singleton components such as `moduleList` and `LOGGER`, ensuring they are
+  initialized once and accessible throughout the application's lifecycle.
     - `ModuleList`: A collection that holds modules, initialized with a capacity of 10.
     - `LOGGER`: Utilized for logging various levels of application events and errors.
 
-- **Separation of Concerns:** The class delegates specific responsibilities to specialized classes, adhering to the principle of separation of concerns.
+- **Separation of Concerns:** The class delegates specific responsibilities to specialized classes, adhering to the
+  principle of separation of concerns.
     - Interaction with users is managed by the `Ui` class.
     - Command parsing is delegated to the `Parser` class.
     - Command execution is handled by implementations of the `Command` interface.
 
-- **Error Handling:** Demonstrates robust error handling strategies by catching and logging different exceptions, which ensures graceful handling of unexpected situations.
+- **Error Handling:** Demonstrates robust error handling strategies by catching and logging different exceptions, which
+  ensures graceful handling of unexpected situations.
 
 #### Implementation Details
 
 1. **Application Initialization and Entry Point:**
 
-   The `main` method, as the application's entry point, performs initial setups such as greeting the user and ensuring critical components are initialized properly. It encapsulates high-level flow control and implements error handling to manage assertion errors and unexpected exceptions.
+   The `main` method, as the application's entry point, performs initial setups such as greeting the user and ensuring
+   critical components are initialized properly. It encapsulates high-level flow control and implements error handling
+   to manage assertion errors and unexpected exceptions.
 
    ```java
    public static void main(String[] args) {
@@ -47,7 +54,9 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
 
 2. **Running the Application Loop:**
 
-   The `runApplication` method maintains a loop that processes user input until an error occurs or an exit condition is met. This method highlights interactions with other components of the application and demonstrates the use of polymorphism and encapsulation.
+   The `runApplication` method maintains a loop that processes user input until an error occurs or an exit condition is
+   met. This method highlights interactions with other components of the application and demonstrates the use of
+   polymorphism and encapsulation.
 
    ```java
    private static void runApplication() {
@@ -70,7 +79,8 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
    ```
 3. **Module Class:**
 
-   Represents individual modules with attributes for code, grade, credits, status, and semester. The main methods being run are the getter and setters as seen below
+   Represents individual modules with attributes for code, grade, credits, status, and semester. The main methods being
+   run are the getter and setters as seen below
 
     ```java
     public void setModuleGrade(String moduleGrade) throws ModuleException {
@@ -145,7 +155,9 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
     ```
 
 4. **ModuleList Class:**
-   Represents a list of objects of module class. It is used for storing modules and facilitating accessing of modules. The methods it contains are mainly for either accessing or editing certain attributes of the modules the modulelist contains.
+   Represents a list of objects of module class. It is used for storing modules and facilitating accessing of modules.
+   The methods it contains are mainly for either accessing or editing certain attributes of the modules the modulelist
+   contains.
     ```java
      public Module getModule(String courseCode) throws ModuleNotFoundException {
         if (courseCode == null || courseCode.trim().isEmpty()) {
@@ -236,7 +248,8 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
     ```
 
 5. **Getting module details from Json File (JsonManager Class):**
-   The JsonManager class is responsible for initiating of processes required to load the json file. It also helps to retrieve the relevant data such as module credit and description based on the parsed module code.
+   The JsonManager class is responsible for initiating of processes required to load the json file. It also helps to
+   retrieve the relevant data such as module credit and description based on the parsed module code.
 
    This is the constructor that should always get called first to allow the json file to be loaded
     ```java
@@ -259,7 +272,8 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
     }
     ```
 
-   The main purpose of this method is to ensure that the module exist in the NUS curriculum before the user is allowed to add the mod
+   The main purpose of this method is to ensure that the module exist in the NUS curriculum before the user is allowed
+   to add the mod
     ```java
     public boolean moduleExist(String moduleCode) {
         // Now, you can iterate through the array of objects just like before
@@ -276,8 +290,10 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
     }
     ```
 
-   The getModuleInfo get called in other classes when the relevant details of a particular module are needed. This method then loads the relevant details such as module description and credits into the JsonManager's class attribute.
-   The getters below can then be called from other classes to return a particular detail out of the two or more details retrieved.
+   The getModuleInfo get called in other classes when the relevant details of a particular module are needed. This
+   method then loads the relevant details such as module description and credits into the JsonManager's class attribute.
+   The getters below can then be called from other classes to return a particular detail out of the two or more details
+   retrieved.
     ```java
     public void getModuleInfo(String moduleCode) {
         // Now, you can iterate through the array of objects just like before
@@ -307,6 +323,19 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
     }
 
     ```
+6. **Viewing modules left to graduate**
+
+   The `ViewGraduateCommand` class is responsible for displaying the list of modules that a student needs to
+   complete
+   for graduation with respect to the modules the user has previously completed. The diagram below provides an overview
+   of how this class interacts with other components in the
+   system.
+
+   ![View Graduate Module Class](diagrams/ViewGraduateModuleClass.png)
+
+   It utilizes the `Ui` class to print out the list of modules in a
+   formatted manner. Additionally, it interacts with the `CEGModules` enum to retrieve module information such as
+   module codes and Module Credits (MCs).
 
 #### UML Diagram
 
@@ -315,14 +344,18 @@ The `FAP` class serves as the central hub of the application, orchestrating the 
 Below is a brief description of the UML diagram that outlines the structure and relationships of the `FAP` class:
 
 - **Classes:** `FAP`, `ModuleList`, `Ui`, `Parser`, and `Command`.
-- **Associations:** `FAP` has associations with `ModuleList` for managing modules and `LOGGER` for logging. It uses `Ui` for user interactions, `Parser` for parsing commands, and `Command` for executing actions.
-- **Flow:** The diagram would show `FAP` at the center, indicating its role in orchestrating the application flow and its interactions with other components.
+- **Associations:** `FAP` has associations with `ModuleList` for managing modules and `LOGGER` for logging. It uses `Ui`
+  for user interactions, `Parser` for parsing commands, and `Command` for executing actions.
+- **Flow:** The diagram would show `FAP` at the center, indicating its role in orchestrating the application flow and
+  its interactions with other components.
 
-This section highlights the central role of the `FAP` class in coordinating the application's functionality, emphasizing its design as a modular, maintainable, and extensible entry point.
+This section highlights the central role of the `FAP` class in coordinating the application's functionality, emphasizing
+its design as a modular, maintainable, and extensible entry point.
 
 ---
 
 ## Product scope
+
 ### Target user profile
 
 {Describe the target user profile}
@@ -333,10 +366,10 @@ This section highlights the central role of the `FAP` class in coordinating the 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
