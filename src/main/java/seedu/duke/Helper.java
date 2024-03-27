@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Helper {
     private static final ArrayList<Command> commandList = new ArrayList<Command>();
@@ -62,5 +63,10 @@ public class Helper {
         return commandList.size();
     }
 
+    // returns random number from 0 to upperLimit - 1
+    public int generateRandomNumber(int upperLimit) {
+        Random random = new Random();
+        return random.nextInt(upperLimit);
+    }
 }
 

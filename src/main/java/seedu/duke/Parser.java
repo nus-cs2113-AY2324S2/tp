@@ -131,6 +131,13 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("No such topic");
             }
+            // checks if user wants a random topic num
+            final int RANDOM_TOPIC_NUM = topicList.getSize() + 1;
+            if (topicNum == RANDOM_TOPIC_NUM) {
+                Helper helper = new Helper();
+                System.out.println("You reached here");
+                topicNum = helper.generateRandomNumber(RANDOM_TOPIC_NUM);
+            }
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
             System.out.println("You have finished the topic! What will be your next topic?");
             topicList.get(topicNum - 1).markAsAttempted();

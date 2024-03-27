@@ -64,10 +64,6 @@ public class Ui {
             int topicNum, TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList alLResults,
             AnswerTracker userAnswers
     ){
-        if (topicNum == topicList.getSize()) {
-            System.out.println("You reached here");
-            return;
-        }
         Results topicResults = new Results();
         QuestionsList qnList;
         System.out.println("Selected topic: " + topicList.getTopic(topicNum - 1));
@@ -144,7 +140,7 @@ public class Ui {
     }
 
     private void handleException(CustomException e) {
-        System.out.println(e.getMessage() + "TODO: show possible commands"); //TODO
+        System.out.println(e.getMessage()); //TODO
     }
     public void printLine() {
         for (int i = 0; i < NEW_LINE; i += 1) {
