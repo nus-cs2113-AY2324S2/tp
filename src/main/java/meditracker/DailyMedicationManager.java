@@ -17,7 +17,8 @@ public class DailyMedicationManager {
     private static List<DailyMedication> dailyMedications = new ArrayList<>();
 
     /**
-     * Constructs DailyMedicationManager with a list of DailyMedication
+     * Creates DailyMedicationManager to save medications from MedicationManager
+     * so that program can output to textfile
      *
      * @see DailyMedication
      */
@@ -31,7 +32,7 @@ public class DailyMedicationManager {
     }
 
     /**
-     * Constructs DailyMedicationManager with lines imported from the textfile
+     * Reads each lines from textfile to process and save into DailyMedicationManager
      *
      * @param lines lines of String read from each row in the textfile
      */
@@ -46,8 +47,11 @@ public class DailyMedicationManager {
         }
     }
 
+    /**
+     * Clears and resets DailyMedicationManager for testing purpose
+     */
     protected static void clearDailyMedication() {
-        dailyMedications = new ArrayList<>();
+        dailyMedications.clear();
     }
 
     /**

@@ -18,7 +18,6 @@ import java.util.List;
 public class MediTracker {
 
     private MedicationManager medicationManager;
-    private DailyMedicationManager dailyMedicationManager;
 
     /**
      * Constructs a new MediTracker object and initializes both medicationManager and
