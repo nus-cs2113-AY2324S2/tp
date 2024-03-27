@@ -29,7 +29,7 @@ public class MatchStat {
     }
 
     private static void decideMatchEnd() {
-        if (roundCount >= 10 && isCompleteRound() && playerScore != aiScore) {
+        if (roundCount >= 2 && isCompleteRound() && playerScore != aiScore) {
             isMatchEnd = true;
             isPlayerWin = playerScore > aiScore;
         }
@@ -61,5 +61,8 @@ public class MatchStat {
 
     public static int getAiScore() {
         return aiScore;
+    }
+    public static void setMatchCount(int matchCount) {
+        MatchStat.matchCount = matchCount+1;
     }
 }

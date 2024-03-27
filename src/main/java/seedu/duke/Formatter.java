@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 public class Formatter {
     private static final Logger logger = Logger.getLogger(Formatter.class.getName());
-    private static final String EMOJI_SAD = "☹";
 
     /**
      * Appends a newline to a given string and returns the resulting string
@@ -49,18 +48,46 @@ public class Formatter {
      * If shoot direction matches save direction, it's not a goal and the returned value is false.
      */
 
-
-    public static void printGoalBeforeShot() {
+    public static void printGoalBeforeShotforBeginner() {
         assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
         logger.info("Round " + MatchStat.getRoundCount());
         System.out.println("Match " + MatchStat.getMatchCount());
         System.out.println("Round " + MatchStat.getRoundCount());
         System.out.println("_______________________________");
         System.out.println("|         |         |         |");
+        System.out.println("|         |         |         |");
         System.out.println("|    0    |    1    |    2    |");
         System.out.println("|         |         |         |");
         System.out.println("|         |         |         |");
         System.out.println("\nSelect direction to shoot : [0-2]");
+    }
+
+    public static void printGoalBeforeShotforMedium() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
+        System.out.println("_______________________________");
+        System.out.println("|    0    |    1    |    2    |");
+        System.out.println("|         |         |         |");
+        System.out.println("|_________|_________|_________|");
+        System.out.println("|         |         |         |");
+        System.out.println("|    3    |    4    |    5    |");
+        System.out.println("\nSelect direction to shoot : [0-2] WILL COMPLETE IN V2.0b");
+    }
+
+    public static void printGoalBeforeShotforExpert() {
+        assert MatchStat.getRoundCount() > 0 : "Round count should be greater than zero.";
+        logger.info("Round " + MatchStat.getRoundCount());
+        System.out.println("Match " + MatchStat.getMatchCount());
+        System.out.println("Round " + MatchStat.getRoundCount());
+        System.out.println("_______________________________");
+        System.out.println("|    0    |    1    |    2    |");
+        System.out.println("|---------|---------|---------|");
+        System.out.println("|    3    |    4    |    5    |");
+        System.out.println("|---------|---------|---------|");
+        System.out.println("|    6    |    7    |    8    |");
+        System.out.println("\nSelect direction to shoot : [0-2] WILL COMPLETE IN V2.0b");
     }
 
     public static void printGoalAfterShot(boolean goalScored) {
@@ -71,6 +98,7 @@ public class Formatter {
             System.out.println("|    *    |       * |     *   |");
             System.out.println("|*   *    | *   *   |  *   *  |");
             System.out.println("|      *  |    *    |*      * |");
+            System.out.println("|   *     |*   *  * | *   *   |");
             System.out.println("GOAL!!!!");
         } else {
             logger.info("No goal :((((");
@@ -79,6 +107,7 @@ public class Formatter {
             System.out.println(" \\         \\         \\         \\");
             System.out.println("  \\         \\         \\         \\");
             System.out.println("   \\         \\         \\         \\");
+            System.out.println("    \\         \\         \\         \\");
             System.out.println("no goal :((((");
         }
 
@@ -105,7 +134,7 @@ public class Formatter {
      * Prints an error message indicating wrong command is entered
      */
     public static void printErrorWrongCommand() {
-        System.out.println("\t CommandParser: Command not found " + EMOJI_SAD);
+        System.out.println("\t CommandParser: Command not found ");
     }
 
     /**
@@ -127,7 +156,7 @@ public class Formatter {
      * Prints an error message indicating there is at least one bad argument provided
      */
     public static void printErrorBadTokens() {
-        System.out.println("\t Ui: Bad Token Error, please check your arguments" + EMOJI_SAD);
+        System.out.println("\t Ui: Bad Token Error, please check your arguments");
     }
 
     /**

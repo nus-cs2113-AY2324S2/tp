@@ -5,7 +5,6 @@ import seedu.duke.Formatter;
 import seedu.duke.CommandList;
 import seedu.duke.SyntaxAnalyser;
 import seedu.duke.stats.MatchStat;
-
 import seedu.duke.exception.ProcessInputException;
 import seedu.duke.exception.ArgumentMismatchException;
 import seedu.duke.exception.BadTokenException;
@@ -17,6 +16,7 @@ import java.util.logging.Logger;
 
 public class Ui {
     public static final Scanner IN = new Scanner(System.in);
+    public static int curplayer=0; // The player in current game return by account login.
     private static boolean isRunning = true;
     private static String userInput;
     private static Parser userCommandReader;
@@ -70,9 +70,6 @@ public class Ui {
         case SHOOT:
             CommandList.executeShoot(readArgumentTokens);
             break;
-        case PENALTY:
-            CommandList.executePenalty();
-            break;
         case YES:
             if (MatchStat.getIsMatchEnd()) {
                 MatchStat.updateForNewMatch();
@@ -86,6 +83,9 @@ public class Ui {
             } else {
                 Formatter.printErrorUnknown();
             }
+            break;
+        case UPGRADE:
+            CommandList.executeUpgrade(readArgumentTokens);
             break;
             //insert new executable command here
         default:

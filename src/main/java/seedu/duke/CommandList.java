@@ -5,8 +5,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.ai.Ai;
 
 public enum CommandList {
-
-    BYE, SHOOT, PENALTY, YES, NO
+    BYE, SHOOT, PENALTY, UPGRADE, YES, NO
 
     //insert new user command name here
     ;
@@ -36,10 +35,13 @@ public enum CommandList {
         Formatter.printGoalAfterShot(isScoreGoal);
     }
 
-    public static void executePenalty() {
-        Penalty.executePenalty();
+    public static void executeUpgrade(String[] level){
+        String upgradeLevel = level[0];
+        int upgradeLevelIndex = Integer.parseInt(upgradeLevel);
+
+        PlayerList.l1.get(Ui.curplayer).upgradePower(upgradeLevelIndex);
+        PlayerList.l1.get(Ui.curplayer).printSelfInfo();
     }
-    
     //insert new command here
 }
 
