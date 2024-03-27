@@ -82,7 +82,7 @@ public class Storage {
             System.out.println("An error occurred while saving tasks to file: " + e.getMessage());
         }
     }
-    
+
 
     /**
      * Fetches and loads data from a specified data file into the application's memory.
