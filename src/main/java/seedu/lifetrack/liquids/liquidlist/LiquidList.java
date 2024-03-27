@@ -41,11 +41,12 @@ public class LiquidList {
     public LiquidList(String filePath) {
         try {
             fileHandler = new FileHandler(filePath);
-            liquidArrayList = fileHandler.getCalorieEntriesFromFile();
+            liquidArrayList = fileHandler.getLiquidEntriesFromFile();
         } catch (FileNotFoundException e) {
             liquidArrayList = new ArrayList<>();
             System.out.println(ErrorMessages.getFileNotFoundMessage());
-        }    }
+        }
+    }
 
     /**
      * Retrieves the liquid entry at the specified index.

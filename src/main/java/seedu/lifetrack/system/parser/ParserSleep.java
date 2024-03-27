@@ -1,13 +1,14 @@
 package seedu.lifetrack.system.parser;
 
-import seedu.lifetrack.sleep.Sleep;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
 
 import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectSleepDateInputMessage;
 import static seedu.lifetrack.system.exceptions.ErrorMessages.getIncorrectSleepInputMessage;
 
+import seedu.lifetrack.sleep.sleeplist.SleepEntry;
+
 public class ParserSleep {
-    public static Sleep parseSleepInput(String input) throws InvalidInputException {
+    public static SleepEntry parseSleepInput(String input) throws InvalidInputException {
         try {
             String date = "N/A"; // Default if no date is provided
             double duration = 0;
@@ -29,7 +30,7 @@ public class ParserSleep {
                 throw new InvalidInputException("Please ensure that you have keyed in the correct format: " +
                         "sleep add <duration> d/<date>");
             }
-            return new Sleep(date, duration);
+            return new SleepEntry(duration, date);
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Please ensure that you have keyed in the correct format: " +
                     "sleep add <duration> d/<date>");

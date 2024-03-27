@@ -18,4 +18,8 @@ public class LiquidEntry extends Entry {
     public String toString() {
         return String.format(super.toString() + ", Volume: " + volume);
     }
+
+    public String toFileFriendlyString() {
+        return String.format(super.toFileFriendlyString() + ";" + volume);
+    }
 }

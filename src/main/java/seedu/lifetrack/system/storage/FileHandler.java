@@ -11,6 +11,8 @@ import seedu.lifetrack.Entry;
 import seedu.lifetrack.calories.Food;
 import seedu.lifetrack.calories.calorielist.InputEntry;
 import seedu.lifetrack.calories.calorielist.OutputEntry;
+import seedu.lifetrack.liquids.liquidlist.LiquidEntry;
+import seedu.lifetrack.sleep.sleeplist.SleepEntry;
 import seedu.lifetrack.system.exceptions.ErrorMessages;
 
 public class FileHandler {
@@ -34,6 +36,18 @@ public class FileHandler {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
+    }
+
+    public void writeEntries(ArrayList<Entry> entries) {
+        try {
+            String newData = "";
+            for (Entry entry : entries) {
+                newData += entry.toFileFriendlyString() + System.lineSeparator();
+            }
+            writeToFile(newData);
+        } catch (IOException e) {
+            System.out.println(ErrorMessages.getIOExceptionMessage());
+        }
     }
 
     public ArrayList<Entry> getCalorieEntriesFromFile() throws FileNotFoundException {
@@ -63,15 +77,57 @@ public class FileHandler {
         return entries;
     }
 
-    public void writeEntries(ArrayList<Entry> entries) {
-        try {
-            String newData = "";
-            for (Entry entry : entries) {
-                newData += entry.toFileFriendlyString() + System.lineSeparator();
+    public ArrayList<Entry> getLiquidEntriesFromFile() throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<Entry> entries = new ArrayList<>();
+        String line = "";
+        while (s.hasNext()) {
+            line = s.nextLine();
+            String[] words = line.split(";");
+            String date = words[DATE_INDEX];
+            String description = words[DESCRIPTION_INDEX];
+            int calories = Integer.parseInt(words[CALORIES_INDEX]);
+            String entryType = words[ENTRY_TYPE_INDEX];
+            if (entryType.equals("C_IN") && words.length == 5) {
+                int carbohydrates = Integer.parseInt(words[CARBOHYDRATES_INDEX]);
+                int proteins = Integer.parseInt(words[PROTEINS_INDEX]);
+                int fats = Integer.parseInt(words[FATS_INDEX]);
+                Food food = new Food(carbohydrates, proteins, fats);
+                entries.add(new InputEntry(description, calories, date, food));
+            } else if (entryType.equals("C_IN")) {
+                entries.add(new InputEntry(description, calories, date));
+            } else {
+                entries.add(new OutputEntry(description, calories, date));
             }
-            writeToFile(newData);
-        } catch (IOException e) {
-            System.out.println(ErrorMessages.getIOExceptionMessage());
         }
+        return entries;
+    }
+
+    public ArrayList<Entry> getSleepEntriesFromFile() throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<Entry> entries = new ArrayList<>();
+        String line = "";
+        while (s.hasNext()) {
+            line = s.nextLine();
+            String[] words = line.split(";");
+            String date = words[DATE_INDEX];
+            String description = words[DESCRIPTION_INDEX];
+            int calories = Integer.parseInt(words[CALORIES_INDEX]);
+            String entryType = words[ENTRY_TYPE_INDEX];
+            if (entryType.equals("C_IN") && words.length == 5) {
+                int carbohydrates = Integer.parseInt(words[CARBOHYDRATES_INDEX]);
+                int proteins = Integer.parseInt(words[PROTEINS_INDEX]);
+                int fats = Integer.parseInt(words[FATS_INDEX]);
+                Food food = new Food(carbohydrates, proteins, fats);
+                entries.add(new InputEntry(description, calories, date, food));
+            } else if (entryType.equals("C_IN")) {
+                entries.add(new InputEntry(description, calories, date));
+            } else {
+                entries.add(new OutputEntry(description, calories, date));
+            }
+        }
+        return entries;
     }
 }

@@ -17,7 +17,7 @@ public class LifeTrack {
         new File("data/").mkdir();
         calorieList = new CalorieList("data/caloriesData.txt");
         liquidList = new LiquidList("data/liquidsData.txt");
-        sleepList = new SleepList();
+        sleepList = new SleepList("data/sleepData.txt");
     }
 
     /**

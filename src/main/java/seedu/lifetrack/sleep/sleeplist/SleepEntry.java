@@ -1,6 +1,9 @@
-package seedu.lifetrack.sleep;
+package seedu.lifetrack.sleep.sleeplist;
 
-public class Sleep {
+import seedu.lifetrack.Entry;
+
+public class SleepEntry extends Entry {
+
     private String date;
     private double duration;
 
@@ -10,7 +13,8 @@ public class Sleep {
      * @param date
      * @param duration
      */
-    public Sleep (String date, double duration){
+    public SleepEntry (double duration, String date){
+        super("SLEEP", date);
         this.date = date.isEmpty() ? "N/A" : date;
         this.duration = duration;
     }
@@ -22,9 +26,14 @@ public class Sleep {
     public double getDuration() {
         return duration;
     }
+
     public String toString() {
         // Show "N/A" if no date was provided
         return "Date: " + (date == null || date.isEmpty() ? "N/A" : date) +
                 ", Duration: " + String.format("%.1f", duration) + " hours";
+    }
+
+    public String toFileFriendlyString() {
+        return String.format(super.toFileFriendlyString() + ";" + duration);
     }
 }
