@@ -1,13 +1,14 @@
 package parser;
 
+import command.AddCommand;
 import command.Command;
 import command.DeleteCommand;
-import command.AddCommand;
-import command.ListCommand;
-import command.IncorrectCommand;
+import command.EditCommand;
 import command.ExitCommand;
 import command.HelpCommand;
-import command.EditCommand;
+import command.IncorrectCommand;
+import command.ListCommand;
+import command.SellCommand;
 import common.Messages;
 import exceptions.CommandFormatException;
 import itemlist.Itemlist;
@@ -18,8 +19,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static final Pattern ADD_COMMAND_FORMAT =
-            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)(?: " +
-                     "cat/(?<category>[^/]+))? buy/(?<buyPrice>\\d+) sell/(?<sellPrice>\\d+)");
+            Pattern.compile("add (?<itemName>[^/]+) qty/(?<quantity>\\d+) /(?<uom>[^/]+)" +
+                    "(?: cat/(?<category>[^/]+))? buy/(?<buyPrice>\\d+) sell/(?<sellPrice>\\d+)");
 
 
     public static final Pattern DELETE_COMMAND_FORMAT =
@@ -27,6 +28,9 @@ public class Parser {
 
     public static final Pattern EDIT_COMMAND_FORMAT =
             Pattern.compile("edit (?<itemName>[^/]+) qty/(?<newQuantity>\\d+)");
+
+    public static final Pattern SELL_COMMAND_FORMAT =
+            Pattern.compile("sell (?<itemName>[^/]+) qty/(?<sellQuantity>\\d+)(?: price/(?<sellPrice>[^/]+))?");
 
     public static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
@@ -70,6 +74,12 @@ public class Parser {
         case EDIT:
             try {
                 return prepareEdit(userInput);
+            } catch (CommandFormatException e) {
+                break;
+            }
+        case SELL:
+            try {
+                return prepareSell(userInput);
             } catch (CommandFormatException e) {
                 break;
             }
@@ -122,6 +132,26 @@ public class Parser {
         return new EditCommand(
             matcher.group("itemName"),
             newQuantity
+        );
+    }
+
+    private Command prepareSell(String args) throws CommandFormatException{
+        final Matcher matcher = SELL_COMMAND_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            throw new CommandFormatException(CommandType.SELL);
+        }
+        int sellQuantity = Integer.parseInt(matcher.group("sellQuantity").trim());
+        boolean sellPriceIsPresent = matcher.group("sellPrice") != null;
+        int inputPrice = (sellPriceIsPresent) ? Integer.parseInt(matcher.group("sellPrice")): 0;
+        if (sellPriceIsPresent && inputPrice < 0) {
+            throw new CommandFormatException("SELL_PRICE");
+        }
+        int sellPrice = sellPriceIsPresent ? inputPrice : -1;
+        return new SellCommand(
+                matcher.group("itemName"),
+                sellQuantity,
+                sellPrice
         );
     }
 }
