@@ -17,6 +17,11 @@ public class DeleteEventCommand extends Command {
             UI.prettyPrint("Invalid event index");
             return;
         }
+        boolean hasExpenses = dashboard.getEventManager().getEvent(idx).hasExpenses();
+        if (hasExpenses) {
+            UI.prettyPrint("Event has expenses and cannot be deleted");
+            return;
+        }
         dashboard.getEventManager().removeEvent(idx);
         UI.prettyPrint("Event deleted");
     }

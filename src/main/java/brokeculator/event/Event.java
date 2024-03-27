@@ -20,6 +20,10 @@ public class Event {
         expenses.add(expense);
     }
 
+    public boolean hasExpenses() {
+        return expenses.size() > 0;
+    }
+
     public void removeExpense(Expense expense) {
         expenses.remove(expense);
     }
