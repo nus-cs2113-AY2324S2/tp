@@ -36,6 +36,7 @@
    * In Parser class executeCommand method, modified the add command to prompt the user for where the grocery is stored. Passed the location as a parameter when creating a new Grocery object.
    * In Ui class, added promptForLocation method to take in user input for location of the grocery.
    * In Ui class, modified the printGrocery method to print the 'location' of the grocery alongside the grocery name.
+   * Alternative considered: Can possibly add location as enumeration however different people might store groceries in different places thus better to set as String so that user is free to input location details however specific they want.
 
 ## Product scope
 ### Target user profile
