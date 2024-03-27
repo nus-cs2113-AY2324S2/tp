@@ -23,12 +23,14 @@ public class Parser {
 
         while (!newItem.equalsIgnoreCase("bye")) {
             String[] splitItem = newItem.split(" ");
+            Ui.setSmallerLineBreak();
+
             try {
                 parseCommand(newItem, userCommand, listOfBooks, bookDataFile, splitItem);
             } catch (BookMarkedException e) {
                 Ui.printUnknownCommand();
             }
-            Ui.separateNextInput();
+            Ui.setLineBreak();
             newItem = in.nextLine();
         }
         userCommand = new ExitCommand();
