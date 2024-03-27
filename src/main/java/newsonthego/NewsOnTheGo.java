@@ -46,7 +46,7 @@ public class NewsOnTheGo {
     }
 
     public enum Command {
-        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
+        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, CLEAR, BYE
     }
 
     private static boolean processCommand(String command, String line, List<NewsArticle> list) throws IOException {
@@ -124,6 +124,10 @@ public class NewsOnTheGo {
         } else {
             System.out.println("Please provide a valid news index!");
         }
+    }
+
+    static void clearSavedNews() {
+        savedNews.clearFile();
     }
 
     /**

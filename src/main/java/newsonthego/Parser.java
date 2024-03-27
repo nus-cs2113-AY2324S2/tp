@@ -25,6 +25,8 @@ public class Parser {
         case SAVE:
             NewsOnTheGo.saveNews(line, list);
             break;
+        case CLEAR:
+            NewsOnTheGo.clearSavedNews();
         case SOURCE:
             NewsOnTheGo.sourceNews(line, list);
             break;
