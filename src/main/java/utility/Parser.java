@@ -13,8 +13,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static health.HealthList.showPeriodHistory;
-
 /**
  * Represents the parser used for PulsePilot
  */
@@ -33,7 +31,7 @@ public class Parser {
         try {
             formattedDate = LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            Output.printException("Error parsing date!");
+            Output.printException(ErrorConstant.PARSING_DATE_ERROR);
         }
         return formattedDate;
     }
@@ -51,7 +49,7 @@ public class Parser {
         try {
             formattedTime = LocalTime.parse(stringTime, formatter);
         } catch (DateTimeParseException e) {
-            Output.printException("Error parsing time!");
+            Output.printException(ErrorConstant.PARSING_TIME_ERROR);
         }
         return formattedTime;
     }
@@ -65,18 +63,18 @@ public class Parser {
     public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
         String validDateRegex = "\\d{2}-\\d{2}-\\d{4}";
         if (!date.matches(validDateRegex)) {
-            throw new CustomExceptions.InvalidInput("Invalid date format. Format is DD-MM-YYYY in integers.");
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_DATE_ERROR);
         }
-        String[] parts = date.split("-");
+        String[] parts = date.split(UiConstant.DASH);
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
 
-        if (day < 1 || day > 31) {
-            throw new CustomExceptions.InvalidInput("Day must be an integer between 01 and 31.");
+        if (day < UiConstant.MIN_DAY || day > UiConstant.MAX_DAY) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_DAY_ERROR);
         }
 
-        if (month < 1 || month > 12) {
-            throw new CustomExceptions.InvalidInput("Month must be an integer between 01 and 12.");
+        if (month < UiConstant.MIN_MONTH || month > UiConstant.MAX_MONTH) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MONTH_ERROR);
         }
     }
 
@@ -92,22 +90,22 @@ public class Parser {
         try {
             String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
             if (inputs.length != 3) {
-                throw new CustomExceptions.InsufficientInput("Invalid command format." +
-                        System.lineSeparator() +
-                        "Usage: delete /item:filter /index:index");
+                throw new CustomExceptions.InsufficientInput(ErrorConstant.INVALID_COMMAND_FORMAT_ERROR
+                        + System.lineSeparator()
+                        + ErrorConstant.CORRECT_DELETE_COMMAND_FORMAT);
             }
 
             String[] itemSplit = inputs[1].split(UiConstant.SPLIT_BY_COLON);
             if (itemSplit.length != 2 || !itemSplit[0].equalsIgnoreCase("item")) {
-                throw new CustomExceptions.InvalidInput("No item specified." +
-                        System.lineSeparator() +
-                        "Use /item:run/gym/period/bmi");
+                throw new CustomExceptions.InvalidInput(ErrorConstant.NULL_ITEM_ERROR
+                        + System.lineSeparator()
+                        + ErrorConstant.CORRECT_ITEM_FORMAT);
             }
 
             validateFilter(itemSplit[1].trim());
             String[] indexSplit = inputs[2].split(UiConstant.SPLIT_BY_COLON);
             if (indexSplit.length != 2 || !indexSplit[0].equalsIgnoreCase("index")) {
-                throw new CustomExceptions.InvalidInput("No index specified");
+                throw new CustomExceptions.InvalidInput(ErrorConstant.NULL_INDEX_ERROR);
             }
 
             Integer.parseInt(indexSplit[1].trim());
@@ -118,7 +116,7 @@ public class Parser {
             Output.printException(e.getMessage());
             return null;
         } catch (NumberFormatException e) {
-            throw new CustomExceptions.InvalidInput("Index must be a valid positive integer.");
+            throw new CustomExceptions.InvalidInput(ErrorConstant.NEGATIVE_INDEX_ERROR);
         }
     }
 
@@ -133,14 +131,14 @@ public class Parser {
         if (filter.equals(WorkoutConstant.RUN) 
                 || filter.equals(WorkoutConstant.GYM) 
                 || filter.equals(HealthConstant.BMI) 
-                || filter.equals(HealthConstant.PERIOD) 
+                || filter.equals(HealthConstant.PERIOD)
                 || filter.equals(HealthConstant.APPOINTMENT)
-                || filter.equals(WorkoutConstant.ALL)){
+                || filter.equals(WorkoutConstant.ALL)) {
             return;
         }
-        throw new CustomExceptions.InvalidInput("Invalid item specified." +
-                System.lineSeparator() +
-                "/item:run/gym/workouts/bmi/period");
+        throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ITEM_ERROR
+                + System.lineSeparator()
+                + ErrorConstant.CORRECT_FILTER_ITEM_FORMAT);
     }
 
     //@@author JustinSoh
@@ -194,7 +192,7 @@ public class Parser {
         String twoDecimalPlaceRegex = "\\d+\\.\\d{2}";
         if (!bmiDetails[0].matches(twoDecimalPlaceRegex) ||
                 !bmiDetails[1].matches(twoDecimalPlaceRegex)) {
-            throw new CustomExceptions.InvalidInput("Height and weight should be 2 decimal place positive numbers!");
+            throw new CustomExceptions.InvalidInput(ErrorConstant.HEIGHT_WEIGHT_INPUT_ERROR);
         }
         validateDateInput(bmiDetails[2]);
     }
@@ -269,20 +267,23 @@ public class Parser {
         try {
             validateDateInput(periodDetails[0]);
         } catch (CustomExceptions.InvalidInput e) {
-            throw new CustomExceptions.InvalidInput("Invalid start date!" +
-                    System.lineSeparator() +
-                    e.getMessage());
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_START_DATE_ERROR
+                    + System.lineSeparator()
+                    + e.getMessage());
         }
         try {
             validateDateInput(periodDetails[1]);
         } catch (CustomExceptions.InvalidInput e) {
-            throw new CustomExceptions.InvalidInput("Invalid end date!" +
-                    System.lineSeparator() +
-                    e.getMessage());
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_END_DATE_ERROR
+                    + System.lineSeparator()
+                    + e.getMessage());
         }
 
         LocalDate startDate = parseDate(periodDetails[0]);
         LocalDate endDate = parseDate(periodDetails[1]);
+        if (startDate.isAfter(LocalDate.now())) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.START_DATE_IN_FUTURE_ERROR);
+        }
         if (startDate.isAfter(endDate)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.PERIOD_END_BEFORE_START_ERROR);
         }
@@ -295,8 +296,8 @@ public class Parser {
      * @throws CustomExceptions.InsufficientInput If prediction cannot be made.
      */
     public static void parsePredictionInput() throws CustomExceptions.InsufficientInput {
-        showPeriodHistory();
         if (HealthList.getPeriodSize() >= HealthConstant.MIN_SIZE_FOR_PREDICTION) {
+            HealthList.printLatestThreeCycles();
             LocalDate nextPeriodStartDate = HealthList.predictNextPeriodStartDate();
             Period.printNextCyclePrediction(nextPeriodStartDate);
         } else {
@@ -329,17 +330,17 @@ public class Parser {
     public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
         String validTimeRegex = "\\d{2}:\\d{2}";
         if (!time.matches(validTimeRegex)) {
-            throw new CustomExceptions.InvalidInput("Invalid time format. Format is HH:MM with integers");
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_TIME_ERROR);
         }
-        String [] parts = time.split(":");
+        String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
         int hours = Integer.parseInt(parts[0]);
         int minutes = Integer.parseInt(parts[1]);
 
-        if (hours < 0 || hours > 23) {
-            throw new CustomExceptions.InvalidInput("Hours must be a positive integer between 1 and 23");
+        if (hours < UiConstant.MIN_HOURS || hours > UiConstant.MAX_HOURS) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HOURS_ERROR);
         }
-        if (minutes < 0 || minutes > 59) {
-            throw new CustomExceptions.InvalidInput("Minutes must be a positive integer between 1 and 59");
+        if (minutes < UiConstant.MIN_MINUTES || minutes > UiConstant.MAX_MINUTES) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTES_ERROR);
         }
     }
 
@@ -402,8 +403,8 @@ public class Parser {
         validateDateInput(appointmentDetails[1]);
         validateTimeInput(appointmentDetails[2]);
 
-        if (appointmentDetails[3].length() > 100) {
-            throw new CustomExceptions.InvalidInput("Description cannot be more than 100 characters");
+        if (appointmentDetails[3].length() > HealthConstant.MAX_DESCRIPTION_LENGTH) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.DESCRIPTION_LENGTH_ERROR);
         }
     }
 

@@ -43,6 +43,15 @@ public class UiConstant {
     public static final Integer MIN_RUNTIME_ARRAY_LENGTH = 2;
     public static final int NUM_SECONDS_IN_MINUTE = 60;
     public static final int NUM_SECONDS_IN_HOUR = 3600;
+    public static final Integer MIN_DAY = 1;
+    public static final Integer MAX_DAY = 31;
+    public static final Integer MIN_MONTH = 1;
+    public static final Integer MAX_MONTH = 12;
+    public static final Integer MIN_MINUTES = 0;
+    public static final Integer MAX_MINUTES = 59;
+    public static final Integer MIN_HOURS = 0;
+    public static final Integer MAX_HOURS = 23;
     public static final double POWER_OF_TWO = 2.0;
     public static final double ROUNDING_FACTOR = 100.0;
+
 }
