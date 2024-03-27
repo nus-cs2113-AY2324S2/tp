@@ -3,7 +3,7 @@ package seedu.binbash;
 import seedu.binbash.command.ByeCommand;
 import seedu.binbash.command.Command;
 import seedu.binbash.exceptions.BinBashException;
-import seedu.binbash.logger.MainLogger;
+import seedu.binbash.logger.BinBashLogger;
 import seedu.binbash.storage.Storage;
 import seedu.binbash.ui.Ui;
 
@@ -12,23 +12,18 @@ public class BinBash {
     private ItemList itemList;
     private Parser inputParser;
     private Storage storage;
-    private MainLogger logger;
+    private BinBashLogger logger;
 
     public BinBash() {
+        logger = new BinBashLogger(BinBash.class.getName());
         userInterface = new Ui();
         storage = new Storage();
         itemList = new ItemList(storage.loadData());
         inputParser = new Parser(itemList);
-        logger = new MainLogger(BinBash.class.getName());
     }
 
     private void run() {
-        try {
-            logger.createLogFile();
-        } catch (BinBashException e) {
-            userInterface.talk(e.getMessage());
-        }
-        logger.info("BinBash started");
+        logger.info("BinBash starting...");
 
         userInterface.greet();
 
@@ -49,6 +44,7 @@ public class BinBash {
                 userInterface.talk(e.getMessage());
             }
         }
+        logger.info("BinBash existing...");
     }
     
     /**
