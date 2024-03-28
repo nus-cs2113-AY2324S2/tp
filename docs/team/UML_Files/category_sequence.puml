@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Category Command Logic
+
+participant ":otherClasses" as externalClasses
+participant ":CategoryParser" as CategoryParser
+participant ":Category" as Category
+
+
+
+externalClasses -> CategoryParser : parseInput("Category [text]")
+activate CategoryParser
+
+alt validAddCommand || validDeleteCommand || validListCommand
+    create CategoryCommand
+    CategoryParser -> CategoryCommand : new CategoryCommand(...)
+    activate CategoryCommand
+    CategoryCommand -[dashed]-> CategoryParser: commandToExecute:CategoryCommand
+    deactivate CategoryCommand
+else default
+    create InvalidCommand
+    CategoryParser -> InvalidCommand : new InvalidCommand()
+    activate InvalidCommand
+    InvalidCommand -[dashed]-> CategoryParser: commandToExecute:InvalidCommand
+    deactivate InvalidCommand
+end
+CategoryParser -[dashed]-> externalClasses : commandToExecute
+deactivate CategoryParser
+
+alt CategoryCommand
+    externalClasses -> CategoryCommand : execute()
+    activate CategoryCommand
+    alt "add"
+        CategoryCommand -> Category : addCategory()
+        activate Category
+    else "delete"
+        CategoryCommand -> Category : deleteCategory()
+    else "list"
+        CategoryCommand -> Category : listCategories()
+    end
+    deactivate Category
+    deactivate CategoryCommand
+    destroy CategoryCommand
+else InvalidCommand
+    externalClasses -> InvalidCommand : execute()
+    activate InvalidCommand
+    InvalidCommand -> InvalidCommand : printErrorMessage()
+    activate InvalidCommand
+    deactivate InvalidCommand
+    destroy InvalidCommand
+end
+
+
+end box
+@enduml

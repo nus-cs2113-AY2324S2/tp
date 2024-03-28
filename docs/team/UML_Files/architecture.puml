@@ -1,0 +1,65 @@
+@startuml
+
+package Brokeculator {
+
+    class Brokeculator {
+        - ExpenseManager expenseManager
+        - FileManager fileManager
+        - Dashboard dashboard
+        - Logic driverLogic
+        + static void main(String[])
+    }
+
+    class ExpenseManager {
+    }
+
+    class FileManager {
+    }
+
+    class Dashboard {
+        + Dashboard(ExpenseManager, FileManager)
+    }
+
+    class Logic {
+        - Dashboard dashboard
+        + Logic(Dashboard)
+        + void run()
+    }
+
+    class Category {
+        + setDashboard(Dashboard)
+    }
+
+    class UI {
+        + static greetUser()
+        + static getUserInput() : String
+        + static prettyPrint(String)
+    }
+
+    class GeneralInputParser {
+        + static getCommandFromUserInput(String) : Command
+    }
+
+    class Command {
+        + execute(Dashboard)
+    }
+
+}
+
+Brokeculator --> "Initializes" ExpenseManager
+Brokeculator --> "Initializes" FileManager
+Brokeculator --> "Initializes" Dashboard
+Brokeculator --> "Initializes" Logic
+Logic --> UI : "uses"
+Logic --> GeneralInputParser : "uses"
+Logic --> Command : "gets"
+Command --> UI : "uses"
+Command --> Category : "uses"
+Command --> Dashboard : "uses"
+Command --> Expense : "uses"
+Command --> ExpenseManager : "uses"
+Dashboard --> ExpenseManager : "uses"
+Dashboard --> FileManager : "uses"
+Category --> Dashboard : "reports to"
+
+@enduml

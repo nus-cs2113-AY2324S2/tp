@@ -1,9 +1,20 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Data file successfully created!
+------------------------------------
+Hello! I'm Brokeculator!
+If this is your first time using me, type 'help' to see what I can do for you.
+------------------------------------
+	-> ------------------------------------
+Here are the commands you can use:
+	1. add /n <description> /d <date> /a <amount> [/c <category>] - adds an expense to the dashboard
+	2. delete <index> - deletes an expense from the dashboard
+	3. list - lists all expenses in the dashboard
+	4. summarise [/from <start>] [/to <end>] - summarises the expenses in the dashboard
+	5. exit - exits the application
 
-What is your name?
-Hello James Gosling
+Notes about the command format:
+	1. <word> are to be provided by the user without the <>
+	2. [/w word] are optional arguments
+------------------------------------
+	-> ------------------------------------
+Goodbye!
+------------------------------------
