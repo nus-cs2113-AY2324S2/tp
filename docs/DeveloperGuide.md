@@ -32,6 +32,7 @@
   - [Instructions for manual testing](#instructions-for-manual-testing)
   - [Instructions for JUnit Testing](#instructions-for-junit-testing)
   - [Instructions for text-ui-testing](#instructions-for-text-ui-testing)
+  - [Future Enhancements](#future-enhancements)
 
 ## Design
 
@@ -171,3 +172,9 @@ When running tests on a UNIX-based system, run the following command from the sp
 ```
 
 Warning: Text UI Testing has been configured to clear all past data records to simulate a fresh application starting when the above commands are invoked. This WILL result in loss of data from previous runs.
+
+## Future Enhancements
+
+1. Inclusion of anomaly detection algorithms to flag out potentially erroneous transactions.
+2. Adding of further details tagged to each transaction and allow for searching of transactions based on these details.
+3. Create a reminder system to inform users of upcoming events or to warn them to settle payments.
