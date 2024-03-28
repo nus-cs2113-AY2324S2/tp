@@ -1,14 +1,19 @@
 package seedu.planus;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlanGetter {
+    private static final Logger logger = Logger.getLogger("myLogger");
+
     /**
      * Returns a formatted string containing the entire timetable plan of the user
      *
      * @return A string with the timetable plan
      */
     public static String getPlan(Timetable timetable) {
+        logger.log(Level.INFO, "Getting the whole timetable plan");
         StringBuilder plan = new StringBuilder();
         int totalCredit = 0;
 
@@ -39,6 +44,7 @@ public class PlanGetter {
      * @return A string with the year's timetable plan
      */
     public static String getPlan(Timetable timetable, int year) {
+        logger.log(Level.INFO, "Getting the timetable plan for year " + year);
         StringBuilder plan = new StringBuilder();
         int yearCredit = 0;
 
@@ -78,6 +84,7 @@ public class PlanGetter {
      * @return A string with the term's timetable plan
      */
     public static String getPlan(Timetable timetable, int year, int term) {
+        logger.log(Level.INFO, "Getting the timetable plan for year " + year + " term " + term);
         StringBuilder plan = new StringBuilder();
         int termCredit = 0;
 
