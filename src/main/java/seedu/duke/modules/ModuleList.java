@@ -91,7 +91,7 @@ public class ModuleList {
             totalMC += module.getModuleMC();
             sumOfGPA += module.getGradeNumber() * module.getModuleMC();
         }
-        if (sumOfGPA == 0) {
+        if (totalMC == 0) {
             LOGGER.log(Level.INFO, "No modules with grades available to tabulate GPA.");
             throw new GpaNullException("No countable grades present to tally.");
         }
