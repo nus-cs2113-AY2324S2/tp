@@ -38,6 +38,6 @@ public class SellCommand extends Command {
             ui.TextUi.showSellMessage(itemName, sellQuantity, remainingQuantity, sellPrice);
             Itemlist.editQuantity(index, remainingQuantity);
         }
-        Storage.overwriteFile(Itemlist.getItems(), false);
+        Storage.overwriteFile(Itemlist.getItems());
     }
 }

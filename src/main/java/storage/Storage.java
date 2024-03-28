@@ -101,17 +101,17 @@ public class Storage {
         }
     }
 
-    public static void addToFile(ArrayList<Item> items, boolean ifAppend) {
+    public static void addToFile(ArrayList<Item> items) {
         assert items != null : "Items cannot be null.";
         Item lastItem = items.get(items.size() - 1);
         String descriptionAdded = (items.size()) + "." + " | " + lastItem.getItemName() +
                 " | " + "Qty: " + lastItem.getQuantity() + " " + lastItem.getUom() +
                 " | " + "Cat: " + lastItem.getCategory() + " | " + "BuyPrice: $" +
                 lastItem.getBuyPrice() + " | " + "SellPrice: $" + lastItem.getSellPrice() + "\n";
-        updateFile(descriptionAdded, ifAppend);
+        updateFile(descriptionAdded, true);
     }
 
-    public static void overwriteFile(ArrayList<Item> items, boolean ifAppend) {
+    public static void overwriteFile(ArrayList<Item> items) {
         assert items != null : "Items cannot be null.";
         int length = items.size();
         for (int index = 0; index < length; index++) {
@@ -121,9 +121,9 @@ public class Storage {
                     items.get(index).getBuyPrice() + " | " + "SellPrice: $" +
                     items.get(index).getSellPrice() + "\n";
             if (index == 0) {
-                updateFile(descriptionAdded, ifAppend);
+                updateFile(descriptionAdded, false);
             } else {
-                updateFile(descriptionAdded, !ifAppend);
+                updateFile(descriptionAdded, true);
             }
         }
     }

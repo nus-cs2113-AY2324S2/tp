@@ -1,55 +1,51 @@
 package storage;
 
-import item.Item;
+import item.Transaction;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static storage.Storage.writeToFile;
-
 public class TransactionLogs extends Storage {
-//    LocalDateTime currentTime = LocalDateTime.now();
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//    String formattedDateTime = currentTime.format(formatter);
-//    System.out.println(formattedDateTime);
     private static final String LOGNAME = "./TransactionLogs.txt";
-    private static String dateTime;
-    public static void setDateTime(String startDateTime) {
-        dateTime = startDateTime;
-    }
 
-    /**
-     * Returns the private file directory of TransactionLogs.
-     */
-    public static String getLogDirectory() {
+    public static String getFileDirectory() {
         return LOGNAME;
     }
 
-    public static void addToLog(ArrayList<Item> items, boolean ifAppend) {
-        assert items != null : "Items cannot be null.";
-        Item lastItem = items.get(items.size() - 1);
-        String descriptionAdded = (items.size()) + "." + " | " + lastItem.getItemName() +
-                " | " + "Qty: " + lastItem.getQuantity() + " " + lastItem.getUom() +
-                " | " + "Cat: " + lastItem.getCategory() + " | " + "BuyPrice: $" +
-                lastItem.getBuyPrice() + " | " + "SellPrice: $" + lastItem.getSellPrice() + "\n";
-        updateFile(descriptionAdded, ifAppend);
+    public static void addToLog(ArrayList<Transaction> transactions) {
+        assert transactions != null : "Transactions cannot be null.";
+        Transaction lastTransaction = transactions.get(transactions.size() - 1);
+        String descriptionAdded = "";
+        descriptionAdded += "Date: " + lastTransaction.getDateTime() + "\n";
+        descriptionAdded += "Transaction ID: " + transactions.size() + "\n";
+        descriptionAdded += "Item Name: " + lastTransaction.getItemName() + "\n";
+        descriptionAdded += "Quantity: " + lastTransaction.getQuantity() + "\n";
+        descriptionAdded += "Unit Price: " + lastTransaction.getSellPrice() + "\n";
+        descriptionAdded += "Total Price: " + lastTransaction.getTotalPrice() + "\n";
+        descriptionAdded += "Profit: " + lastTransaction.getProfit() + "\n";
+        descriptionAdded += "\n";
+        updateFile(descriptionAdded, true);
     }
 
-    public static void overwriteLog(ArrayList<Item> items, boolean ifAppend) {
-        assert items != null : "Items cannot be null.";
-        int length = items.size();
+    public static void overwriteLog(ArrayList<Transaction> transactions) {
+        assert transactions != null : "Items cannot be null.";
+        int length = transactions.size();
         for (int index = 0; index < length; index++) {
-            String descriptionAdded = (index + 1) + "." + " | " + items.get(index).getItemName() +
-                    " | " + "Qty: " + items.get(index).getQuantity() + " " + items.get(index).getUom() +
-                    " | " + "Cat: " + items.get(index).getCategory() + " | " + "BuyPrice: $" +
-                    items.get(index).getBuyPrice() + " | " + "SellPrice: $" +
-                    items.get(index).getSellPrice() + "\n";
+            String descriptionAdded = "";
+            descriptionAdded += "Date: " + transactions.get(index).getDateTime() + "\n";
+            descriptionAdded += "Transaction ID: " + transactions.get(index + 1) + "\n";
+            descriptionAdded += "Item Name: " + transactions.get(index).getItemName() + "\n";
+            descriptionAdded += "Quantity: " + transactions.get(index).getQuantity() + "\n";
+            descriptionAdded += "Unit Price: " + transactions.get(index).getSellPrice() + "\n";
+            descriptionAdded += "Total Price: " + transactions.get(index).getTotalPrice() + "\n";
+            descriptionAdded += "Profit: " + transactions.get(index).getProfit() + "\n";
+            descriptionAdded += "\n";
             if (index == 0) {
-                updateFile(descriptionAdded, ifAppend);
+                updateFile(descriptionAdded, false);
             } else {
-                updateFile(descriptionAdded, !ifAppend);
+                updateFile(descriptionAdded, true);
             }
         }
     }
-
 }
