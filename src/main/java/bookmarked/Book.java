@@ -12,6 +12,7 @@ public class Book {
     public String getName() {
         return this.description;
     }
+
     public String getBorrowedStatus() {
         return (isBorrowed ? ", borrowed" : " "); // mark done task with X
     }

@@ -1,9 +1,9 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyArgumentsException;
-import bookmarked.exceptions.emptyListException;
-import bookmarked.exceptions.indexOutOfListBounds;
+import bookmarked.exceptions.EmptyArgumentsException;
+import bookmarked.exceptions.EmptyListException;
+import bookmarked.exceptions.IndexOutOfListBounds;
 import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
@@ -27,11 +27,11 @@ public class DeleteCommand extends Command {
             assert this.bookToDelete.length >= 1 : "There should be an argument to the command";
             assert !this.listOfBooks.isEmpty() : "The current list of books should not be empty";
             BookStorage.writeBookToTxt(bookDataFile, listOfBooks);
-        } catch (emptyListException e) {
+        } catch (EmptyListException e) {
             Ui.printEmptyListMessage();
-        } catch (emptyArgumentsException e) {
+        } catch (EmptyArgumentsException e) {
             Ui.printEmptyArgumentsMessage();
-        } catch (indexOutOfListBounds e) {
+        } catch (IndexOutOfListBounds e) {
             Ui.printOutOfBoundsMessage();
         } catch (NumberFormatException e) {
             Ui.printNotNumberMessage();
@@ -39,19 +39,19 @@ public class DeleteCommand extends Command {
     }
 
     public void processDeleteCommand(ArrayList<Book> listOfBooks)
-            throws emptyListException, emptyArgumentsException, indexOutOfListBounds {
+            throws EmptyListException, EmptyArgumentsException, IndexOutOfListBounds {
         if (listOfBooks.isEmpty()) {
-            throw new emptyListException();
+            throw new EmptyListException();
         }
 
         // checks if bookToDelete contains only the word "delete" or if there are only white spaces after it
         if (this.bookToDelete.length < 1 || this.bookToDelete[1].isBlank()) {
-            throw new emptyArgumentsException();
+            throw new EmptyArgumentsException();
         }
 
         int inputtedIndex = Integer.parseInt(this.bookToDelete[1]);
         if (inputtedIndex <= 0 || inputtedIndex > listOfBooks.size()) {
-            throw new indexOutOfListBounds();
+            throw new IndexOutOfListBounds();
         }
 
         int listNumberIndex = (inputtedIndex - 1);

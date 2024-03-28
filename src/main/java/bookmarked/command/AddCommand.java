@@ -1,7 +1,7 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyArgumentsException;
+import bookmarked.exceptions.EmptyArgumentsException;
 import bookmarked.storage.BookStorage;
 import bookmarked.ui.Ui;
 
@@ -29,16 +29,16 @@ public class AddCommand extends Command {
             assert newSplitBook.length >= 1 : "There should be an argument to the command";
             assert !this.listOfBooks.isEmpty() : "The current list of books should not be empty";
             BookStorage.writeBookToTxt(this.bookDataFile, listOfBooks);
-        } catch (emptyArgumentsException e) {
+        } catch (EmptyArgumentsException e) {
             Ui.printEmptyArgumentsMessage();
         }
     }
 
     public void processAddCommand(String[] newSplitBook, ArrayList<Book> listOfBooks)
-            throws emptyArgumentsException {
+            throws EmptyArgumentsException {
         // checks if newSplitBook contains only the word "add" or if there are only white spaces after it
         if (newSplitBook.length < 1 || newSplitBook[1].isBlank()) {
-            throw new emptyArgumentsException();
+            throw new EmptyArgumentsException();
         }
         Book bookName = new Book(newSplitBook[1].trim());
         this.listOfBooks.add(bookName);

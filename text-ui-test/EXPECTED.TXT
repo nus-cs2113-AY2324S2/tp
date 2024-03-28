@@ -1,6 +1,16 @@
+_______________________________________
+_______________________________________
+
 Welcome to BookMarked, a one-stop app for all your librarian needs!
-Type /help to see a list of commands!
+To get started, you can type /help to see a list of commands!
+
+_______________________________________
+_______________________________________
+
 Successfully create a storage file for books
+
+_______________________________________
+
 These are the current available features and the format that you need
 to follow to use it in using this software:
 1. To add books
@@ -13,5 +23,10 @@ to follow to use it in using this software:
    return NAME_OF_BOOK
 5. To list all the books added
    list
-__________
+6. To list all the books added in alphabetical order
+   list alphabetical
+
+_______________________________________
+_______________________________________
+
 Bye!
