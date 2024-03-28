@@ -64,7 +64,7 @@ public class StorageHandlerTest {
             StorageHandler storage1 = new StorageHandler(members1, transactions1, "test_grp2");
             members1.addMember("Alice", 10);
             members1.addMember("Bob", -10);
-            storage1.saveMembersData(members1);
+            storage1.saveMembersData();
             MemberList members2 = new MemberList();
             TransactionList transactions2 = new TransactionList();
             new StorageHandler(members2, transactions2, "test_grp2");
@@ -89,7 +89,7 @@ public class StorageHandlerTest {
             TransactionList transactions1 = new TransactionList();
             StorageHandler storage1 = new StorageHandler(members1, transactions1, "test_grp3");
             members1.addMember("Alice", 10);
-            storage1.saveMembersData(members1);
+            storage1.saveMembersData();
             MemberList members2 = new MemberList();
             TransactionList transactions2 = new TransactionList();
             new StorageHandler(members2, transactions2, "test_grp3");

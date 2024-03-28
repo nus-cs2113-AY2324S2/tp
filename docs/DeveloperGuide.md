@@ -15,7 +15,6 @@
     - [UI and I/O](#ui-and-io)
     - [Commands](#commands)
     - [Storage](#storage)
-      - [Storage File Structure](#storage-file-structure)
     - [Member and MemberList](#member-and-memberlist)
     - [Transaction and TransactionList](#transaction-and-transactionlist)
     - [PIN](#pin)
@@ -59,13 +58,17 @@ Design and Implementation has been broken down into the subsequent sections, eac
 
 Storage operations are performed by the [`StorageHandler Class`](../src/main/java/longah/handler/StorageHandler.java).
 
-Each group calls its own `StorageHandler` object such that they maintain distinct storage directories. To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
+Each group calls its own `StorageHandler` object such that they maintain distinct storage directories.
+
+Key arguments for the constructor are a `MemberList` object, a `TransactionList` object and a string `groupName`. The first two are used to represent the list of `Member` objects and the list of `Transaction` objects associated with the group for reference when loading or saving data. The last represents the directory to be written to to ensure that data across groups are kept discrete.
+
+To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
 
 `loadMembersData()` and `loadTransactionsData()` have been compiled into the method `loadAllData()` while `saveMembersData()` and `saveTransactionsData()` have been compiled into the method `saveAllData()`
 
-Key attributes part of the class include `membersFile` and `trnsactionsFile` which respectively contain the `File` representation of the directories to each of the storage files.
+Key attributes part of the class include `membersFile` and `trnsactionsFile` which respectively contain the `File` representation of the directories to each of the storage files, as well as `members` and `transactions` which store the respective utility lists obtained from calling the constructor.
 
-#### Storage File Structure
+<ins>Storage File Structure</ins>
 
 Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in their respective folders.
 
@@ -74,19 +77,19 @@ Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in t
 
 <ins>`loadMembersData()`</ins>
 
-Takes in `MemberList` as a key argument. Reads data from the groups' associated `members.txt` and unpacks it before inserting `Member` objects into `MemberList`.
+Reads data from the groups' associated `members.txt` and unpacks it before inserting `Member` objects into `MemberList`.
 
 <ins>`loadTransactionsData()`</ins>
 
-Takes in `TransactionList` and `MemberList` as key arguments. Reads data from the groups' associated `transactions.txt` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
+Reads data from the groups' associated `transactions.txt` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
 
 <ins>`saveMembersData()`</ins>
 
-Takes in `MemberList` as a key argument. Writes packaged data from each `Member` and saves it as a record in `members.txt`.
+Writes packaged data from each `Member` and saves it as a record in `members.txt`.
 
 <ins>`saveTransactionsData()`</ins>
 
-Takes in `TransactionList` as a key argument. Writes packaged data from each `Transaction` and saves it as a record in `transactions.txt`
+Writes packaged data from each `Transaction` and saves it as a record in `transactions.txt`
 
 ### Member and MemberList
 
