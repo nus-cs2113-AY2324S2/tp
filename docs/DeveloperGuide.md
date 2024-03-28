@@ -7,6 +7,34 @@
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Daily feature
+
+This daily mechanism is facilitated by a constructor from the `DailyNewsCommand` class. It takes in an input from 
+the user and the current list of articles to display the news on published on a particular day to the user.  
+This feature also implements the following operations:  
+- [Proposed] `DailyNewsCommand#save()` — Saves a news article from the list given to their reading list
+- [Proposed] `DailyNewsCommand#back()` — Exits the daily feature loop.
+
+Given below is an example usage of the daily mechanism behaves at each step.
+
+Step 1: The user launches the application. This initialises a list of news articles named `newsArticles` by reading
+from a text file.
+
+Step 2: When the user executes the `daily 10 March, 2024` to find news articles on that day. The `DailyNewsCommand`
+constructor is called, which searches the `newsArticles` list to find the corresponding news articles. The list of 
+articles found are collected into a list `articlesOfTheDay`, which will be output to the user.
+
+Step 3: After being shown the list of newsArticles, the user is able to select news article that he wants to read later
+by using the `save(1)` command, which saves the first news article on the list.
+
+Step 4: When the user is done saving the desired news articles, he is able to go back to the main function by using the
+`back()` command.
+
+The flow can be seen from the sequence diagram below.
+<img src="UML Diagrams/dailyFunctionSequence.png">
+
+### Topics Feature
+The topic
 
 
 ## Product scope

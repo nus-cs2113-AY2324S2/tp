@@ -1,0 +1,18 @@
+@startuml
+Create NewsOnTheGo
+activate NewsOnTheGo
+Create UI
+activate UI
+NewsOnTheGo -> UI: initializeUI(in)
+UI -> NewsOnTheGo:
+deactivate UI
+Create DailyNewsCommand
+NewsOnTheGo -> DailyNewsCommand: DailyNewsCommand(input, newsArticles)
+activate DailyNewsCommand
+loop back == true
+    DailyNewsCommand -> DailyNewsCommand: save(index)
+    end
+DailyNewsCommand -> NewsOnTheGo:
+deactivate DailyNewsCommand
+deactivate NewsOnTheGo
+@enduml
