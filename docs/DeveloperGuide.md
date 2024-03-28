@@ -13,9 +13,23 @@
 
 ---
 
+### Ui component
+
+The `Ui` class handles message output for the user within the terminal.
+
+The `UI`component,
+- stores message output strings for user feedback
+- holds methods for printing messages to be called by other classes, such as `InputParsing`.
+
+#### Design considerations
+
+Being a CLI application, UI/UX is minimal and user IO is confined within the terminal.
+
+Hence, public methods within the`Ui` class are static for easy access by other classes, without the need to instantiate an instance of the `Ui` class to call.
+
 ### InputParsing component
 
-The first and foremost component in the Student Tracking app is to ensure that the user parses in commands in a format that makes sense, which will modify the master list.
+This component ensures that the user parses in commands in a format that makes sense, which will modify the master list.
 
 ![InputParsingUML](./diagrams/src/InputParsing/InputParsing.png)
 
@@ -86,7 +100,7 @@ We aim to target private tuition centres with our product, specifically smaller 
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Classify serves as an attempt to modernise administrative tasks in education institutes, such as tuition centres or school environments.
 
 ## User Stories
 
