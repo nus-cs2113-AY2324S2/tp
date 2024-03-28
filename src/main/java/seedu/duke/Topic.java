@@ -3,31 +3,28 @@ package seedu.duke;
 public class Topic {
     protected QuestionsList chosenQuestionsList;
     protected String topicName;
-    protected boolean hasAttempted;
+    protected boolean hasAttemptedStatus;
 
     protected String summary;
 
-    public Topic(QuestionsList chosenQuestionsList, String topicName, boolean hasAttempted, String summary){
+    public Topic(QuestionsList chosenQuestionsList, String topicName, boolean hasAttemptedStatus, String summary){
         this.chosenQuestionsList = chosenQuestionsList;
         this.topicName = topicName;
-        this.hasAttempted = hasAttempted;
+        this.hasAttemptedStatus = hasAttemptedStatus;
         this.summary = summary;
     }
 
-    public String getStatus() {
-        if (hasAttempted) {
-            return "Attempted";
-        } else {
-            return "Not attempted";
-        }
+    public boolean hasAttempted() {
+        return this.hasAttemptedStatus;
     }
 
     public void markAsAttempted() {
-        this.hasAttempted = true;
+        this.hasAttemptedStatus = true;
     }
 
     public String toString(){
-        return "[" + getStatus() + "]" + topicName;
+        String status = this.hasAttempted() ? "Attempted" : "Not attempted";
+        return "[" + status + "]" + topicName;
     }
 
 }

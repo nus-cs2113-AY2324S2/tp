@@ -25,7 +25,7 @@ public class TopicList {
                     String.valueOf(i + 1),
                     topicList.get(i).topicName,
                     topicList.get(i).summary,
-                    String.valueOf(topicList.get(i).hasAttempted)
+                    String.valueOf(topicList.get(i).hasAttempted())
             };
         }
         return tableData;

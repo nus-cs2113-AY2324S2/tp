@@ -29,8 +29,11 @@ class QuestionsListTest {
 
     @Test
     void getSize_addTwoQuestions_twoQuestions() {
-        LOGGER.log(Level.INFO, "startLog1");
+        LOGGER.log(Level.INFO, "tests may not be in order!");
         LOGGER.setLevel(Level.OFF); // disableLogs
+        LOGGER.log(Level.INFO, "This log will be ignored!");
+        LOGGER.setLevel(Level.ALL); // enableLogs
+        LOGGER.log(Level.INFO, "logs are enabled for rest of this code");
 
         createQuestionList();
         createTwoQuestions();
@@ -41,9 +44,8 @@ class QuestionsListTest {
     }
 
     @Test
-    void getAllSolutions_twoQuestions_twoExplanations() throws CustomException {
-        LOGGER.log(Level.INFO, "This log will be ignored");
-        LOGGER.setLevel(Level.ALL); // enableLogs
+    void getAllSolutions_twoQuestions_twoSolutions() throws CustomException {
+        LOGGER.log(Level.INFO, "Start Test for getAllSolutions/ getAllExplanations!");
 
         createQuestionList();
         createTwoQuestions();
@@ -57,14 +59,25 @@ class QuestionsListTest {
                         + "Solution for question 2:" + System.lineSeparator()
                         + "solution2" + System.lineSeparator()
                         + System.lineSeparator();
-        if (questionsList.getSize() != 0) {
-            LOGGER.log(Level.WARNING, "warningLog1");
-        }
-        LOGGER.setLevel(Level.WARNING);
-        LOGGER.log(Level.INFO, "this log will be ignored");
-        LOGGER.log(Level.WARNING, "but this log will not coz priority=WARNING");
+
         assertEquals(expectedOutput, questionsList.getAllSolutions());
-        LOGGER.log(Level.WARNING, "this log will be printed");
+    }
+    @Test
+    void getAllExplanations_twoQuestions_twoExplanations() throws CustomException {
+        createQuestionList();
+        createTwoQuestions();
+        questionsList.addQuestion(question1);
+        questionsList.addQuestion(question2);
+
+        String expectedOutput =
+                "Explanation for question 1:" + System.lineSeparator()
+                        + "explanation1" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "Explanation for question 2:" + System.lineSeparator()
+                        + "explanation2" + System.lineSeparator()
+                        + System.lineSeparator();
+
+        assertEquals(expectedOutput, questionsList.getAllExplanations());
     }
 
     @Test
@@ -73,5 +86,14 @@ class QuestionsListTest {
 
         assertThrows(CustomException.class, // expect Exception
                 () -> questionsList.getAllSolutions());
+    }
+    @Test
+    void getAllExplanations_noQuestions_customException() {
+        createQuestionList(); // empty question List
+        LOGGER.log(Level.INFO, "End Test for QuestionsListTest!");
+
+        assertThrows(CustomException.class, // expect Exception
+                () -> questionsList.getAllExplanations());
+
     }
 }
