@@ -4,6 +4,26 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Table of Contents
+- [Developer Guide](#developer-guide)
+  - [Acknowledgements](#acknowledgements)
+  - [Table of Contents](#table-of-contents)
+  - [Design \& implementation](#design--implementation)
+    - [UI and I/O](#ui-and-io)
+    - [Storage](#storage)
+    - [Member and MemberList](#member-and-memberlist)
+    - [Transaction and TransactionList](#transaction-and-transactionlist)
+    - [PIN](#pin)
+    - [Class Diagram](#class-diagram)
+    - [Sequence Diagram](#sequence-diagram)
+  - [Product scope](#product-scope)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+  - [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
