@@ -21,41 +21,42 @@ UI --> Logic : userInput
 Logic -> GeneralInputParser ++ : getCommandFromUserInput(userInput)
 alt Command keyword == summarise
     GeneralInputParser -> SummariseParser ++ : parseInput(userInput)
+    alt Valid userInput
+        SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
+        activate SummariseCommand
+        SummariseCommand --> SummariseParser --: commandToExecute:SummariseCommand
+    else else
+        SummariseParser -> InvalidCommand ** : new InvalidCommand(...)
+        activate InvalidCommand
+        InvalidCommand --> SummariseParser -- : commandToExecute:InvalidCommand
+    end
+
+    SummariseParser --> GeneralInputParser -- : commandToExecute
+    GeneralInputParser --> Logic -- : command
+
+    alt command.instanceOf(SummariseCommand)
+        Logic -> SummariseCommand -- : execute(...)
+        activate SummariseCommand
+        SummariseCommand -> Dashboard ++ : getExpenseManager()
+        Dashboard --> SummariseCommand -- : ExpenseManager
+        SummariseCommand -> ExpenseManager ++ : summariseExpenses(...)
+        ExpenseManager --> SummariseCommand -- : summary
+        SummariseCommand -> UI -- : prettyPrint(summary)
+        destroy SummariseCommand
+        UI --> User : summary
+    else command.instanceOf(InvalidCommand)
+        Logic -> InvalidCommand -- : execute(...)
+        activate InvalidCommand
+        InvalidCommand -> UI -- : prettyPrint(errorMessage)
+        destroy InvalidCommand
+        UI --> User : errorMessage
+    end
+    deactivate UI
 else else
     GeneralInputParser -> otherParsers : parseInput(userInput)
 end
 
-alt Valid userInput
-    SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
-    activate SummariseCommand
-    SummariseCommand --> SummariseParser --: commandToExecute:SummariseCommand
-else else
-    SummariseParser -> InvalidCommand ** : new InvalidCommand(...)
-    activate InvalidCommand
-    InvalidCommand --> SummariseParser -- : commandToExecute:InvalidCommand
-end
 
-SummariseParser --> GeneralInputParser -- : commandToExecute
-GeneralInputParser --> Logic -- : command
-
-alt command.instanceOf(SummariseCommand)
-    Logic -> SummariseCommand -- : execute(...)
-    activate SummariseCommand
-    SummariseCommand -> Dashboard ++ : getExpenseManager()
-    Dashboard --> SummariseCommand -- : ExpenseManager
-    SummariseCommand -> ExpenseManager ++ : summariseExpenses(...)
-    ExpenseManager --> SummariseCommand -- : summary
-    SummariseCommand -> UI -- : prettyPrint(summary)
-    destroy SummariseCommand
-    UI --> User : summary
-else command.instanceOf(InvalidCommand)
-    Logic -> InvalidCommand -- : execute(...)
-    activate InvalidCommand
-    InvalidCommand -> UI -- : prettyPrint(errorMessage)
-    destroy InvalidCommand
-    UI --> User : errorMessage
-end
-deactivate UI
 
 
 
