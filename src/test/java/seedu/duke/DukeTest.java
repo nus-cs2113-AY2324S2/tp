@@ -276,6 +276,33 @@ class DukeTest {
         assertEquals("3hours", travelActivity1.getDuration());
     }
 
+    @Test
+    public void testExpenseActivity() throws OmniException {
+        TravelActivityList list = new TravelActivityList();
+        list.addTravelActivity(new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
+        assertEquals("visit museum", list.getDescription("visit museum"));
+        // adding expense to existing task
+        list.expenseActivity(1, "$50");
+        TravelActivity travelActivity = list.getTravelActivities().get(0);
+        assertEquals("$50", travelActivity.getExpense());
+    }
+
+    @Test
+    public void testRemoveExpense() throws OmniException {
+        TravelActivityList list = new TravelActivityList();
+        list.addTravelActivity(new TravelActivity("visit museum",
+                LocalDate.parse("2019-05-12"),"2hours", "Sightseeing"));
+        assertEquals("visit museum", list.getDescription("visit museum"));
+        // adding expense to existing task
+        list.expenseActivity(1, "$50");
+        TravelActivity travelActivity = list.getTravelActivities().get(0);
+        assertEquals("$50", travelActivity.getExpense());
+        // Remove an existing expense
+        list.removeExpense(1);
+        assertEquals("visit museum", list.getDescription("visit museum"));
+    }
+
 
 
 }

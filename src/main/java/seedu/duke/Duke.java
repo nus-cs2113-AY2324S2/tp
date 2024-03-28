@@ -121,6 +121,18 @@ public class Duke {
                     Ui.printLine();
                     break;
 
+                case "expense":
+                    Ui.printLine();
+                    Parser.expenseCommand(line, list);
+                    Ui.printLine();
+                    break;
+
+                case "removeexpense":
+                    Ui.printLine();
+                    Parser.removeExpenseCommand(command, list);
+                    Ui.printLine();
+                    break;
+
                 default:
                     Ui.printLine();
                     System.out.println("This is not a valid command");
