@@ -46,6 +46,14 @@ Example of usage:
 
 `log w/100`
 
+### Viewing Water Intake: `show`
+-Displays the total water intake and the percentage of water 
+that has been consumed in comparison to the water intake goal.
+
+Format: `show w`
+
+Example of usage: `show w`
+
 ### Goal Setting : `set goal` / `show g`
 - Sets the daily water intake and calorie intake goal.
 - Displays current calorie and water intake goals.
@@ -60,6 +68,22 @@ Example of usage:
 `set goal c/1000`
 `set goal w/WATER_GOAL`
 `show g`
+
+### Delete meals/water: `delete`
+-Deletes a meal/quantity of water(water intake) from the task list.
+-Supports deletion of tasks based on their descriptions.
+
+Format: `delete QUANTITY_OF_WATER ml` / `delete MEAL_NAME`
+
+* The `QUANTITY_OF_WATER` can be the quantity of water the 
+user logged previously and wishes to delete.
+* The `MEAL_NAME` can be the name of the meal the user 
+previously logged in and wishes to delete.
+
+Example of usage:
+
+`delete 100 ml`
+`delete sushi`
 
 ## FAQ ❓
 
