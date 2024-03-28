@@ -53,7 +53,7 @@ public class Ui {
     //@@author ZhouJunmin
     public static void printHelp() {
         System.out.println("Listed below are all available commands:\n" +
-                "    add course [course code]y/[year]t/[term]\n        e.g. add course CS1010y/1t/1\n" +
+                "    add course [course code]y/[year]t/[term]\n        e.g. add course CS1010y/1t/1m/4\n" +
                 "    add grade [course code] [letter grade]\n        e.g. add grade CS1010 A\n" +
                 "    rm course [course code]\n        e.g. rm course CS1010\n" +
                 "    rm grade [course code]\n        e.g. rm grade CS1010\n" +
