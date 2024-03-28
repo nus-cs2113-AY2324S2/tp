@@ -8,11 +8,11 @@
 
 Here is a quick overview of the main components and how they interact with each other:
 
-- [Parser](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###parser-implementation): Reads input
-- [Ui](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###ui-implementation): The UI of the App
-- Game: The Interface concerning the games
-- TicTacToe: Game 1
-- Hangman: Game 2
+- [Parser](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#parser-implementation): Reads input
+- [Ui](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#ui-implementation): The UI of the App
+- [Game](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#game-implementation): The Interface concerning the games
+- [TicTacToe](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#tictactoe-implementation): Game 1
+- [Hangman](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#hangman-implementation): Game 2
 
 ### Parser Implementation:
 Parser Class (v1.0) reads user input from the standard input stream, checks the input, 
