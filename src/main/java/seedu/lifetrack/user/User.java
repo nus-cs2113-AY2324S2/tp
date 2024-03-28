@@ -1,19 +1,36 @@
 package seedu.lifetrack.user;
 
+import seedu.lifetrack.system.exceptions.ErrorMessages;
 import seedu.lifetrack.system.exceptions.InvalidInputException;
+import seedu.lifetrack.system.storage.FileHandler;
 import seedu.lifetrack.user.usergoals.UserGoals;
 
 import static seedu.lifetrack.system.parser.ParserUser.parseSetUp;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 public class User {
-    protected String name;
-    protected int height;
-    protected int weight;
-    protected int age;
-    protected String sex;
-    protected String exerciseLevels;
-    protected String goal;
-    protected int caloriesRequired;
+
+    private FileHandler fileHandler;
+    private String name;
+    private int height;
+    private int weight;
+    private int age;
+    private String sex;
+    private String exerciseLevels;
+    private String goal;
+    private int caloriesRequired;
+
+    //user data constants
+    private final int NAME_INDEX = 0;
+    private final int HEIGHT_INDEX = 1;
+    private final int WEIGHT_INDEX = 2;
+    private final int AGE_INDEX = 3;
+    private final int SEX_INDEX = 4;
+    private final int EXERCISE_INDEX = 5;
+    private final int GOAL_INDEX = 6;
+    private final int REQ_CAL_INDEX = 7;
 
     public User(String name, int height, int weight, int age, String sex, String exerciseLevels, String goal) {
         this.name = name;
@@ -33,13 +50,33 @@ public class User {
         this.sex = sex;
     }
 
+    //constructor for JUnit tests
     public User() {
 
+    }
+
+    //constructor for usage in terminal
+    public User(String filePath) {
+        try {
+            fileHandler = new FileHandler(filePath);
+            ArrayList<String> data = fileHandler.getUserDataFromFile();
+            name = data.get(NAME_INDEX);
+            height = Integer.parseInt(data.get(HEIGHT_INDEX));
+            weight = Integer.parseInt(data.get(WEIGHT_INDEX));
+            age = Integer.parseInt(data.get(AGE_INDEX));
+            sex = data.get(SEX_INDEX);
+            exerciseLevels = data.get(EXERCISE_INDEX);
+            goal = data.get(GOAL_INDEX);
+            caloriesRequired = Integer.parseInt(data.get(REQ_CAL_INDEX));
+        } catch (FileNotFoundException e) {
+            System.out.println(ErrorMessages.getFileNotFoundMessage());
+        }
     }
 
     public void setUp(String line) {
         try {
             parseSetUp(line, this);
+            fileHandler.writeUserData(this);
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }
@@ -107,5 +144,10 @@ public class User {
 
     public int getCaloriesRequired() {
         return caloriesRequired;
+    }
+
+    public String toFileFriendlyString() {
+        return String.format(name + ";" + height + ";" + weight + ";" + age + ";" + sex + ";" +
+                exerciseLevels + ";" + goal + ";" + caloriesRequired);
     }
 }
