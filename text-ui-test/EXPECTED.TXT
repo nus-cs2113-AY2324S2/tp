@@ -1,9 +1,42 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome. Enter your username and password to login.
+username: 
+password: 
+Password is correct. You are now logged in
+Ok. Added inflow
+Ok. Added outflow
+Ok. Added inflow
+Inflows:
+Transactions:
+1)  Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
 
-What is your name?
-Hello James Gosling
+Outflows:
+Transactions:
+1)  Name: Rent, Amount: -1500.00, Date: Jun 23 2023 06:00PM
+
+Ok. Added outflow
+Ok. Added inflow
+Inflows:
+Transactions:
+1)  Name: Refund, Amount: 50.00, Date: Jun 23 2023 06:00PM
+2)  Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
+3)  Name: Salary, Amount: 400.00, Date: May 23 2022 07:00PM
+
+Outflows:
+Transactions:
+1)  Name: Groceries, Amount: -100.00, Date: Jun 23 2023 06:00PM
+2)  Name: Rent, Amount: -1500.00, Date: Jun 23 2023 06:00PM
+
+Ok. Inflow deleted
+Ok. Outflow deleted
+Ok. Edited inflow
+Ok. Edited outflow
+Inflows:
+Transactions:
+1)  Name: Refund, Amount: 100.00, Date: Jun 23 2023 05:00PM
+2)  Name: Stocks, Amount: 400.00, Date: Oct 24 2024 12:00PM
+
+Outflows:
+Transactions:
+1)  Name: Groceries, Amount: -150.00, Date: Jun 23 2023 06:30PM
+
+Exiting application
