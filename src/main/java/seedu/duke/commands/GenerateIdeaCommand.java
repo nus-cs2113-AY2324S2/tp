@@ -13,7 +13,14 @@ import seedu.duke.Ui;
 import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class GenerateIdeaCommand extends Command {
+
+    private static Logger logger = Logger.getLogger("IdeaLogger");
+    private Ui ui = new Ui();
+
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
                         Storage storage, UserDetails userDetails, GiftList gifts) throws FlirtForkException {
@@ -26,13 +33,16 @@ public class GenerateIdeaCommand extends Command {
             System.out.println(idea);
             System.out.println("Satisfied with the date idea? [Yes/No]");
             userSatisfied = ui.readCommand().toLowerCase();
-            if (userSatisfied.equals("yes")) {
+            if (userSatisfied.equalsIgnoreCase("yes")) {
                 System.out.println("That's great! Enjoy your date!");
                 food.markComplete();
                 activity.markComplete();
                 break;
-            } else {
+            } else if (userSatisfied.equalsIgnoreCase("no")) {
                 System.out.println("Regenerating a new date idea..");
+            } else {
+                ui.ideaSatisfiedErrorMessage();
+                logger.log(Level.WARNING, "input error");
             }
         } while (true);
 

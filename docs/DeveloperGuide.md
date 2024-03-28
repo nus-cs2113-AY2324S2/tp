@@ -21,6 +21,24 @@ We would like to acknowledge the following third-party libraries, frameworks and
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### [Implemented] Generate Idea feature
+
+#### Implementation
+
+The existing Generate Idea feature is facilitated by `GenerateIdea` by leveraging the methods `getRandomActivity()` and `getRandomFood()` in `ActivityList` and `FoodList`. It extends `Command` and implements the following operation:
+
+- `execute()` - Generates a randomised date idea consisting of 1 food and 1 dining option. Users can prompt to regenerate an idea until they are satisfied.
+
+Given below is an example usage scenario and how the Generate Idea mechanism behaves at each step.
+
+Step 1. The user launches the application and executes the `idea` command. The `idea` command is parsed by the `parseCommand` method in the `Parser` class, which creates a `GenerateIdeaCommand` instance.
+
+Step 2. The `execute` method of `GenerateIdea` is invoked. It retrieves a random activity and a random dining option from `ActivityList` and `FoodList` and presents it to the user.
+
+Step 3. The user is not satisfied with the proposed idea and inputs the `no` command. The loop in `execute` does not meet the exit condition and thus, generates another idea using the same process as Step 2.
+
+Step 4. The user is satisfied with the proposed idea and inputs the `yes` command. The loop in `execute` has met the exit condition and thus, the `run` method continues running allowing the user to input other commands.
+
 ### [Proposed] Smart Itinerary Generation feature
 
 #### Proposed Implementation

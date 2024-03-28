@@ -132,6 +132,11 @@ public class Ui {
         System.out.println("What's your pleasure?");
     }
 
+    public void ideaSatisfiedErrorMessage() {
+        System.out.println("Sorry, I didn't quite understand that :(");
+        System.out.println("Please enter either yes or no");
+    }
+
     public void showMessage(String message) {
         System.out.println(message);
     }
