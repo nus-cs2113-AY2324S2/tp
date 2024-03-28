@@ -113,6 +113,16 @@ updated). If the condition holds true it retrieves the item's previous quantity.
 6. The `put` method of the `Inventory` class is called to update the item in the `inventory`
 7. The `UpdateCommandSuccess` method of the `Ui` class is called to notify that `UpdateCommand` has been successfully executed
 
+### DeleteCommand
+The following is a class diagram of the DeleteCommand and its relevant dependencies
+*:(*
+
+The `DeleteCommand` class implements the `Command` interface and is responsible for deleting existing items in the
+`Inventory`. A DeleteCommand instance is created when calling the `parseDeleteCommand` method called in Parser class.
+This method parses the input and ensures that the command parameter (item name) exists in the inventory. The `execute()`
+method in the class will call the `delete` method from `inventory` class to  remove the item. It will then execute
+the `saveData` method from `FileManager` class to save changes to the inventory.
+
 ### Find Command
 The following is a class diagram of the FindCommand and its relevant dependencies
 ![FindCommandClass](uml-diagrams/FindCommandClass.png)
