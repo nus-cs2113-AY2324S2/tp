@@ -79,7 +79,9 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+* Manage inventory list more efficiently compared to manual stock taking and typical mouse/GUI driven apps
+* Portability allows usage on multiple operating systems (E.g. Windows, Linux, Mac).
+* Lightweight, only requires entry-level hardware to run.
 
 ## User Stories
 
