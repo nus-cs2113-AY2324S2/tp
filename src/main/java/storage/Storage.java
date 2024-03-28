@@ -18,9 +18,6 @@ import java.io.IOException;
 public class Storage {
     private static final String FILENAME = "./StockMasterData.txt";
 
-    private static File stockMaster;
-
-
     /**
      * Write contents to the file.
      *
