@@ -20,6 +20,14 @@ Investment accounts—each encapsulated within the application's framework for s
 expansion will provide a comprehensive view of diverse financial sources and enhance personal financial management 
 within BudgetBuddy.
 
+### [Implemented] List feature
+#### Implementation
+The list feature in the BudgetBuddy application allows users to view all their past transactions. This feature is
+facilitated through the `UserInterface#printAllTransactions`, which loops through the entire ArrayList of transactions
+and extract all the details of each transaction.
+
+This feature will be further enhanced to include options to view transactions of specified date ranges.
+
 ## Product scope
 ### Target user profile
 
