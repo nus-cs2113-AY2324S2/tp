@@ -1,0 +1,31 @@
+@startuml
+object workout1 {
+  workoutName = "Morning Workout"
+}
+
+object workout2 {
+  workoutName = "Evening Workout"
+}
+
+object exercise1 {
+  exerciseName = "Push-ups"
+}
+
+object exercise2 {
+  exerciseName = "Pull-ups"
+}
+
+object exercise3 {
+  exerciseName = "Squats"
+}
+
+object workoutManager {
+}
+
+workout1 --> exercise1
+workout1 --> exercise2
+workout2 --> exercise3
+workoutManager --> workout1
+workoutManager --> workout2
+
+@enduml
