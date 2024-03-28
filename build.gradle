@@ -19,6 +19,7 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
+        jvmArgs '-da'
 
         showExceptions true
         exceptionFormat "full"
@@ -29,12 +30,13 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("seedu.bookbuddy.BookBuddy")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("bookbuddy")
     archiveClassifier.set("")
+    archiveFileName = 'BookBuddy.jar'
 }
 
 checkstyle {
@@ -43,4 +45,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

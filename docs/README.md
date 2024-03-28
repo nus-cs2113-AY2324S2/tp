@@ -1,4 +1,4 @@
-# Duke
+# BookBuddy
 
 {Give product intro here}
 
