@@ -50,6 +50,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke flirtFork = new Duke(FILE_PATH, FOOD_FILE_PATH, ACTIVITY_FILE_PATH);
+
         flirtFork.run();
+
     }
 }
