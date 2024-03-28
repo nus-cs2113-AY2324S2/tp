@@ -41,8 +41,11 @@ With these classes we can encapsulate the whole logic of the application in a re
 
 The following UML sequence diagram shows the flow of the application when the user enters a command.
 
-//![Sequence Diagram](sequence_diagram_flow.png)
+![Sequence Diagram](diagrams/seq_diagram_flow.png)
 
+### Settling a bill: minimizing number of transactions.
+
+To be implemented.
 
 ## Setting Up, Getting Started
 
