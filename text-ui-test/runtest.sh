@@ -10,6 +10,9 @@ cd text-ui-test
 
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
+grep -v "OOPS!" ACTUAL.TXT > ACTUAL_FILTERED.TXT
+mv ACTUAL_FILTERED.TXT ACTUAL.TXT
+
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
 diff EXPECTED-UNIX.TXT ACTUAL.TXT

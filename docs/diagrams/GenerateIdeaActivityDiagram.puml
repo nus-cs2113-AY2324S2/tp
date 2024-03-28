@@ -1,0 +1,22 @@
+@startuml
+!include Style.puml
+
+skinparam activity {
+    BackgroundColor LOGIC_COLOR_T1
+    BorderColor White
+    FontColor White
+}
+
+start
+:User executes command;
+:Idea with random Activity
+and Food is generated;
+Repeat
+Repeat
+:Take user input again;
+repeat while (Invalid Command?) is (yes) not (no)
+repeat while (userSatisfied?) is (no) not (yes)
+
+stop
+
+@enduml
