@@ -61,7 +61,7 @@ public class User {
                     String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        Water.getInstance(drinkSize);
+                        Water.getInstance(drinkSize, drinkDate);
                     } else {
                         drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
@@ -85,7 +85,7 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
-        String waterSavedData = "water" + "," + Water.getWater();
+        String waterSavedData = "water" + "," + Water.getWater() + "," + Water.getDate();
         drinkStorage.appendTextContent(waterSavedData);
         for (Drink drink : drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
@@ -119,7 +119,7 @@ public class User {
         Date currentDate = new Date();
 
         if (drinkName.equals("water")) {
-            Water.getInstance(servingSize);
+            Water.getInstance(servingSize, currentDate.getDate());
         } else {
             drinkList.add(new Drink(drinkName, servingSize, currentDate.getDate()));
         }
