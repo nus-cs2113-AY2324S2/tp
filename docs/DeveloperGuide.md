@@ -8,14 +8,20 @@
 - [Developer Guide](#developer-guide)
   - [Acknowledgements](#acknowledgements)
   - [Table of Contents](#table-of-contents)
-  - [Design \& implementation](#design--implementation)
+  - [Design](#design)
+    - [Class Diagram](#class-diagram)
+    - [Sequence Diagram](#sequence-diagram)
+  - [Implementation](#implementation)
     - [UI and I/O](#ui-and-io)
+    - [Commands](#commands)
     - [Storage](#storage)
+      - [`loadMembersData()`](#loadmembersdata)
+      - [`loadTransactionsData()`](#loadtransactionsdata)
+      - [`saveMembersData()`](#savemembersdata)
+      - [`saveTransactionsData()`](#savetransactionsdata)
     - [Member and MemberList](#member-and-memberlist)
     - [Transaction and TransactionList](#transaction-and-transactionlist)
     - [PIN](#pin)
-    - [Class Diagram](#class-diagram)
-    - [Sequence Diagram](#sequence-diagram)
   - [Product scope](#product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
@@ -24,25 +30,48 @@
   - [Glossary](#glossary)
   - [Instructions for manual testing](#instructions-for-manual-testing)
 
-## Design & implementation
+## Design
+
+### Class Diagram
+
+### Sequence Diagram
+
+## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+Design and Implementation has been broken down into the subsequent sections, each tagged for ease of reference:
+
+* [UI and I/O](#ui-and-io)
+* [Commands](#commands)
+* [Storage](#storage)
+* [Member and MemberList](#member-and-memberlist)
+* [Transaction and TransactionList](#transaction-and-transactionlist)
+* [PIN](#pin)
+
 ### UI and I/O
+
+### Commands
 
 ### Storage
 
-Storage is performed by the [`Storage`](../src/main/java/longah/handler/StorageHandler.java)
+Storage operations are performed by the [`StorageHandler Class`](../src/main/java/longah/handler/StorageHandler.java)
+
+Each group calls its own `StorageHandler` object such that they maintain distinct storage directories. To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
+
+#### `loadMembersData()`
+
+#### `loadTransactionsData()`
+
+#### `saveMembersData()`
+
+#### `saveTransactionsData()`
 
 ### Member and MemberList
 
 ### Transaction and TransactionList
 
 ### PIN
-
-### Class Diagram
-
-### Sequence Diagram
 
 ## Product scope
 
@@ -91,8 +120,9 @@ Busy people with large transaction quantities among friends
 
 * Lender - Member making payments on behalf of other members
 * Borrower - Members being paid for by the lender
-* Transaction - Payment made by ONE Lender on behalf of MULTIPLE Borrower
-* Subtransaction - Subset of Transaction, 
+* Transaction - Payment made by ONE Lender on behalf of MULTIPLE Borrower, represented as a list of Subtransaction
+* Subtransaction - Subset of Transaction, consists of ONE Lender and ONE Borrower
+* Group - Discrete units each containing their respective lists of Member and Transaction
 
 ## Instructions for manual testing
 
