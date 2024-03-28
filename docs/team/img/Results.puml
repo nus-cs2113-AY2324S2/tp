@@ -1,0 +1,82 @@
+@startuml
+
+skinparam ParticipantFontColor #FFFFFF
+
+box Logic #ABCAFA
+participant "ui:Ui" as Ui #1162E3
+participant "parser:Parser" as Parser #1162E3
+end box
+
+box Results #EB9999
+participant "topicResults:Results" as Results #FE2727
+participant "allResults:ResultsList" as ResultsList #FE2727
+end box
+
+[-> Ui : printChosenTopic(topicNum: int)
+activate Ui
+
+create Results
+Ui -> Results : new Results()
+activate Results
+Results --> Ui
+deactivate Results
+
+ref over Ui : get question set
+
+Ui -> ResultsList : addQuestions(topicNum-1: int)
+activate ResultsList
+ResultsList --> Ui
+deactivate ResultsList
+
+loop until all questions
+
+Ui -> Results : increaseNumberOfQuestions()
+activate Results
+Results --> Ui
+deactivate Results
+
+ref over Ui
+ask question and
+receive user input
+end ref
+
+create Parser
+Ui -> Parser : new Parser()
+activate Parser
+Parser --> Ui
+deactivate Parser
+
+Ui -> Parser : handleAnswerInputs(answer: String)
+activate Parser
+
+ref over Parser : get correct answer
+
+alt answer.equals(correctAnswer)
+Parser -> Results : increaseCorrectAnswers()
+activate Results
+Results --> Parser
+deactivate Results
+
+else else
+end
+
+Parser --> Ui
+deactivate Parser
+end
+
+Ui -> Results : calculateScore()
+activate Results
+Results --> Ui
+deactivate Results
+
+Ui -> ResultsList : addResults(topicResults: Results)
+activate ResultsList
+ResultsList --> Ui
+deactivate ResultsList
+
+Ui -->[
+
+destroy Results
+destroy Parser
+
+@enduml
