@@ -288,7 +288,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
         * `getPriority()`: Get the priority of the habit.
         * `toString()`: Method that formats the attributes of the habit for printing.
     * UML notes:
-        * `HabitTracker` can contain any number of `ReflectionQuestion` instances.
+        * `HabitTracker` can contain any number of `Habit` instances.
         * When a `HabitTracker` object is destroyed, its associated `Habit` instances are also destroyed, showcasing a composition relationship.
 
 * `HabitCommandParser`
@@ -314,7 +314,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
 
 #### Sequence Diagram
 ![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
-* Note that `PlaceholderReflectionCommand` can refer to any of the habit commands. 
+* Note that `PlaceholderHabitCommand` can refer to any of the habit commands. 
 
 When `Main` starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
 determined if it is a command related to the habit tracker feature. If it is, it will be further parsed by `HabitCommandParser` to determine
