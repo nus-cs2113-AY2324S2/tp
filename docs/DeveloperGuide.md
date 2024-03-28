@@ -8,6 +8,19 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### UI and I/O
+
+### Storage
+
+### Member and MemberList
+
+### Transaction and TransactionList
+
+### PIN
+
+### Class Diagram
+
+### Sequence Diagram
 
 ## Product scope
 ### Target user profile
@@ -53,7 +66,10 @@ Busy people with large transaction quantities among friends
 
 ## Glossary
 
-* *glossary item* - Definition
+* Lender - Member making payments on behalf of other members
+* Borrower - Members being paid for by the lender
+* Transaction - Payment made by ONE Lender on behalf of MULTIPLE Borrower
+* Subtransaction - Subset of Transaction, 
 
 ## Instructions for manual testing
 
