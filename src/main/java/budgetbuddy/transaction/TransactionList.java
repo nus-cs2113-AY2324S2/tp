@@ -1,6 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.categories.Category;
 import budgetbuddy.exceptions.EmptyArgumentException;
 import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
 import budgetbuddy.exceptions.InvalidIndexException;
@@ -87,7 +88,7 @@ public class TransactionList {
     public void processTransaction(String input, Account account)
             throws InvalidTransactionTypeException, InvalidAddTransactionSyntax, EmptyArgumentException {
         // Check for syntax for add transaction
-        String[] arguments = {"/t/", "/n/", "/$/", "/d/", "/c/"};
+        String[] arguments = {"/t/", "/n/", "/$/", "/d/"};
         for (String argument : arguments) {
             if (!input.contains(argument)) {
                 throw new InvalidAddTransactionSyntax("Invalid add syntax.");
@@ -96,6 +97,11 @@ public class TransactionList {
 
         Transaction t = parser.parseTransaction(input, account);
         assert t != null : "Parsed transaction is null";
+        if (t.getCategory() == null) {
+            UserInterface.listCategories();
+            int category = UserInterface.getCategoryNum();
+            t.setCategory(Category.fromNumber(category));
+        }
         addTransaction(t);
         assert transactions.get(transactions.size() - 1) != null : "Added transaction is null after adding to the list";
         String fetchData = String.valueOf(transactions.get(transactions.size() - 1));

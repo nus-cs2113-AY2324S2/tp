@@ -1,9 +1,11 @@
 package budgetbuddy.ui;
 
+import budgetbuddy.categories.Category;
 import budgetbuddy.transaction.type.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserInterface {
   
@@ -16,6 +18,22 @@ public class UserInterface {
 
     private static final String TAB_SPACE = "    ";
 
+    public static Scanner in = new Scanner(System.in);
+
+    public static void listCategories(){
+        System.out.println(LINE);
+        System.out.println(TAB_SPACE + "Here are the available categories:");
+        for(Category category : Category.values()) {
+            System.out.println(TAB_SPACE + TAB_SPACE + category.getCategoryName() + ": " + category.getCategoryNum());
+        }
+        System.out.println(LINE);
+    }
+
+    public static int getCategoryNum(){
+        System.out.println("In which category do you want to list this transaction? [Enter number between 1 and 9]");
+        String input = in.nextLine();
+        return Integer.parseInt(input);
+    }
 
     public static void printDeleteMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
@@ -98,7 +116,7 @@ public class UserInterface {
             String description = transaction.getDescription();
             LocalDate date = transaction.getDate();
             double amount = transaction.getAmount();
-            String category = transaction.getCategory();
+            String category = transaction.getCategory().getCategoryName();
 
             System.out.printf(TAB_SPACE+TAB_SPACE + "%-5d %-10s %-50.45s %-20s %-15.2f  %-15s%n", i + 1, type,
                     description, date, amount, category);

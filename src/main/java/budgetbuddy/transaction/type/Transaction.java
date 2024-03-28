@@ -1,18 +1,19 @@
 package budgetbuddy.transaction.type;
 
+import budgetbuddy.categories.Category;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Transaction {
     private String description;
     private double amount;
-    private String category;
+    private Category category;
     private LocalDate date;
 
-    public Transaction(String description, double amount, String category,String date) {
+    public Transaction(String description, double amount,String date) {
         this.description = description;
         this.amount = amount;
-        this.category = category;
         this.date = parseDate(date);
     }
 
@@ -32,7 +33,7 @@ public abstract class Transaction {
         return LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
   
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -44,6 +45,10 @@ public abstract class Transaction {
                 " Description: " + getDescription() + " | " +
                 " Date: " + getDate() + " | " +
                 " Amount: " + getAmount() + " | " +
-                " Category: " + getCategory()) ;
+                " Category: " + getCategory().getCategoryName()) ;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
