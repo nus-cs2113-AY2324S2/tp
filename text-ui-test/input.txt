@@ -1,26 +1,8 @@
-add
-20/03/2024
-T
-new todo
-add
-20/03/2024
-E
-new event
-20/03/2024
-22/03/2024
-add
-20/03/2024
-D
-new deadline 1
-20/03/2024
-D
-new deadline 2
-20/03/2024
-update
-20/03/2024
-1
-qioncioqnc uion uioqen qwpc
-delete
-20/03/2024
-4
+month
+add, 20, T, new todo
+add, 20, T, new event, 20/03/2024, 22/03/2024
+add, 20, D, new deadline 1
+add, 20, D, new deadline 2
+update, 20, 1, qioncioqnc uion uioqen qwpc
+delete, 20, 4
 quit

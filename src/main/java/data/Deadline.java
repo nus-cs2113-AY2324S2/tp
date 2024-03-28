@@ -2,6 +2,7 @@ package data;
 
 public class Deadline extends Task {
     protected String byDate;
+    protected String byTime;
 
     /**
      * Constructor for new tasks given its name.
@@ -9,11 +10,12 @@ public class Deadline extends Task {
      * Deadlines are also considered as tasks.
      *
      * @param name The name of the task to be created.
-     * @param by The date of the task's deadline as a string.
+     * @param byDate The date of the task's deadline as a string.
      */
-    public Deadline(String name, String by) {
+    public Deadline(String name, String byDate, String byTime) {
         super(name);
-        this.byDate = by;
+        this.byDate = byDate;
+        this.byTime = byTime;
     }
 
     /**
@@ -28,11 +30,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter for by time of Deadline task.
+     * Overrides super dummy function.
+     *
+     * @return The String representation of the by time.
+     */
+    @Override
+    public String getByTime() {
+        return byTime;
+    }
+
+    /**
      * Returns the task type of the specified task.
      * Override function of superclass Task.
      *
      * @return D which represents a Deadline task.
      */
+
+
 
     @Override
     public String getTaskType () {
@@ -47,6 +62,6 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveFormat () {
-        return getTaskType() + "|" + getName() + "|" + getByDate();
+        return getTaskType() + "|" + getName() + "|" + getByDate() + "|" + getByTime();
     }
 }

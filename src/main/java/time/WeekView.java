@@ -21,8 +21,7 @@ public class WeekView extends View {
         System.out.println("\nWeek View: " + dateFormatter.format(startOfView) +
                 " - " + dateFormatter.format(endOfWeek));
 
-        // Print week header and body using UiRenderer methods
-        printWeekHeader();
+        printWeekHeader(startOfView, dateFormatter, false);
         printWeekBody(startOfView, dateFormatter, taskManager);
     }
 
@@ -39,4 +38,11 @@ public class WeekView extends View {
     public LocalDate getStartOfWeek() {
         return startOfView;
     }
+
+    public LocalDate getDateForDay(int dayOfWeek) {
+        // Assuming dayOfWeek is 1 for Monday, 2 for Tuesday, ..., 7 for Sunday
+        // Adjust the calculation if your week starts on a different day
+        return startOfView.plusDays(dayOfWeek - 1);
+    }
+
 }

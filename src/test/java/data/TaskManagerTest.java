@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
 
 import static data.TaskManager.addTask;
 import static data.TaskManager.updateTask;
@@ -38,7 +40,9 @@ class TaskManagerTest {
         Task testTask = new Task(taskDescription);
         TaskType testTaskType = TaskType.TODO;
         String[] dummyTestDates = new String[]{null};
-        addTask(date, taskDescription, testTaskType, dummyTestDates);
+        String[] dummyTestTimes = new String[]{null};
+
+        addTask(date, taskDescription, testTaskType, dummyTestDates,dummyTestTimes);
         Task addedTask = taskManager.getTasksForDate(date).get(0);
 
         // Assert
@@ -53,10 +57,14 @@ class TaskManagerTest {
         String updatedTaskDescription = "Updated todo";
         TaskType testTaskType = TaskType.TODO;
         String[] dummyTestDates = new String[]{null};
-        addTask(date, initialTaskDescription, testTaskType, dummyTestDates);
+        String[] dummyTestTimes = new String[]{null};
+
+        Scanner scanner = new Scanner(System.in);
+
+        addTask(date, initialTaskDescription, testTaskType, dummyTestDates, dummyTestTimes);
 
         // Act
-        updateTask(date, 0, updatedTaskDescription);
+        updateTask(date, 0, updatedTaskDescription, scanner);
 
         // Assert
         assertEquals(updatedTaskDescription, taskManager.getTasksForDate(date).get(0).getName());
@@ -69,7 +77,9 @@ class TaskManagerTest {
         String taskDescription = "Test todo task";
         TaskType testTaskType = TaskType.TODO;
         String[] dummyTestDates = new String[]{null};
-        addTask(date, taskDescription, testTaskType, dummyTestDates);
+        String[] dummyTestTimes = new String[]{null};
+
+        addTask(date, taskDescription, testTaskType, dummyTestDates,dummyTestTimes);
 
         // Act
         List<Task> tasksForDate = taskManager.getTasksForDate(date);
