@@ -6,7 +6,6 @@ participant ":EventManager" as EventManager
 participant "newOwningEvent:Event" as noe
 participant "originalOwningEvent:Event" as ooe
 participant "expense:Expense" as Expense
-participant "UI" as UI
 
 
 Logic -> Command: execute(dashboard : Dashboard)
@@ -23,12 +22,10 @@ EventManager --> Command: isValidEventIndex : bool
 deactivate EventManager
 
 opt !isValidExpenseIndex || !isValidEventIndex
-    Command -> UI: prettyPrint("Indexes provided are invalid")
-    activate UI
-    UI --> Command:
-    deactivate UI
+    note right of Command
+        Invalid expense or event index
+    end note
     Command --> Logic: 
-    deactivate Command
 end
 
 Command -> ExpenseManager: getExpense(expenseIdx : int)
@@ -47,32 +44,26 @@ noe --> Command: isExpenseOwnedByEvent : bool
 deactivate noe
 
 opt isExpenseOwnedByEvent
-    Command -> UI: prettyPrint("Expense already belongs to the event")
-    activate UI
-    UI --> Command:
-    deactivate UI
+    note right of Command
+        Expense is already owned by the event
+    end note
     Command --> Logic:
-    deactivate Command
 end
 
-Command -> expense: getOwningEvent()
-activate expense
-expense --> Command: originalOwningEvent
-deactivate expense
+Command -> Expense: getOwningEvent()
+activate Expense
+Expense --> Command: originalOwningEvent
+deactivate Expense
 
 opt originalOwningEvent != null
-    Command -> UI: prettyPrint("Expense belonged to another event. Moving it to the new event.")
-    activate UI
-    UI --> Command:
-    deactivate UI
     Command -> ooe: removeExpense(expense)
     activate ooe
     ooe --> Command:
     deactivate ooe
-    Command -> expense: removeOwningEvent()
-    activate expense
-    expense --> Command:
-    deactivate expense
+    Command -> Expense: removeOwningEvent()
+    activate Expense
+    Expense --> Command:
+    deactivate Expense
 end
 
 Command -> noe: addExpense(expense)
@@ -80,15 +71,10 @@ activate noe
 noe --> Command:
 deactivate noe
 
-Command -> expense: setOwningEvent(newOwningEvent)
-activate expense
-expense --> Command:
-deactivate expense
-
-Command -> UI: prettyPrint("Expense added to event successfully")
-activate UI
-UI --> Command:
-deactivate UI
+Command -> Expense: setOwningEvent(newOwningEvent)
+activate Expense
+Expense --> Command:
+deactivate Expense
 
 Command --> Logic:
 deactivate Command
