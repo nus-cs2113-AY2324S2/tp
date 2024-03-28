@@ -49,6 +49,16 @@
 ### 6. Edit grocery amount after using a grocery
    * A `Grocery` stores its `amount` as an attribute. All `Grocery` objects are then stored in an ArrayList in `GroceryList`, which entirely handles the editing of the `amount`.
 
+### 7. Input expiration date of each grocery when added
+   * In Grocery class, the expiration field in the Grocery class was changed from a String to a LocalDate to standardize date handling.
+   * In Grocery class, the setExpiration method was updated to accept a String input, convert it to a LocalDate using a specified format ("yyyy-MM-dd"), and then store this date.
+   * In UI class, the UI now includes a multi-step process to prompt the user for the year, month, and day of the grocery item's expiration date. This process ensures that the date is captured in a user-friendly manner and stored accurately.
+   * In GroceryList class, a new method, sortByExpiration, was added to allow sorting the list of groceries by their expiration dates in ascending order. This method utilizes the Collections.sort method with a lambda expression comparing the expiration dates of Grocery items.
+
+### 8. Editing expiration date after it is added
+   * In GroceryList class, modified the editExpiration method to parse String into localdate.
+
+
 ![Grocery (showing amount) and GroceryList class diagram](./diagrams/GroceryAmtGroceryList.png)
 
    * `GroceryList#editAmount()` is used to either decrease or directly set the `amount` of a `Grocery`. It takes in 2 parameters:
