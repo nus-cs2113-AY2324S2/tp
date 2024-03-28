@@ -1,5 +1,4 @@
-# Duke
-
+# LifeTrack
 {Give product intro here}
 
 Useful links:
