@@ -17,19 +17,30 @@ Reference to AB-3 diagrams code
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-# Categorising the different books by their genres
-This functionality will allow the books to be segregated into different groups by their genres for improved tracking.  
-This operation is a cross class method that:  
->1. Accesses the BookDetails class to access methods to categorise the books  
->2. The categories are saved directory to the individual books in the Book class  
->3. The Parser class will parse the command to obtain the specific index and genre given  
+### Categorising the different books by their genres
+This functionality enables the categorization of books into distinct groups based on their genres, facilitating better 
+organization and tracking. The implementation of this feature involves interactions across multiple classes within the 
+system. 
+#### Overview
+The process of categorizing books by genre is a multi-step operation that involves the following classes:
+1. 'BookDetails': This class contains methods that handle the categorization of books.
+2. 'Book': Individual book objects are updated with their respective genres directly in this class.
+3. 'Parser': This class is responsible for parsing the input command to extract the specific index and genre.
 
+#### Detailed Workflow
 Below is an example usage:  
->Step 1: When the user inputs the command set-genre 1 Fantasy, the Parser class will split the command into an array   
-of 2 to access the command set-genre  
->Step 2: The second part of the array is further split into 2 to access the index "1" and the genre message "Fantasy"  
->Step 3: The index and genre message is passed into the setBookGenreByIndex method in BookDetails to set the genre of 
-the book indexed at 1.  
+Here’s a step-by-step guide on how the feature works:
+Step 1: The user initiates the process by inputting a command like set-genre 1 Fantasy. Here, the Parser class plays a 
+crucial role as it interprets the command and segregates it into a manageable array. The first part of this array holds 
+the command set-genre, which indicates the action to be executed.
+
+Step 2: The second segment of the input string is then further dissected into two components, which are the index (1) 
+and the genre (Fantasy). This step is essential for identifying the specific book and the genre it needs to be 
+associated with.
+
+Step 3: With the index and genre clearly identified, these parameters are passed to the setBookGenreByIndex method 
+within the BookDetails class. This method is then responsible for assigning the specified genre to the book located at 
+the given index.
 
 
 
