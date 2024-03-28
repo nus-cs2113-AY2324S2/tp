@@ -12,11 +12,22 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void greetingMessage() {
+    public void greetingMessage(String anniversary) {
         System.out.println(HORIZONTAL);
         System.out.println("Hungry for love? You've come to the right place.\n" +
                 "Welcome to " + BOT_NAME + " - where Cupid meets the chef!\n\n" +
                 "Send me 'help' if you're new!");
+        if (!anniversary.equals("N.A")) {
+            System.out.println("\nRemember, your anniversary is on " + anniversary + " :)");
+        }
+        System.out.println(HORIZONTAL);
+    }
+
+    public void firstSetUpMessage() {
+        System.out.println(HORIZONTAL);
+        System.out.println("Hungry for love? You've come to the right place.\n" +
+                "Welcome to " + BOT_NAME + " - where Cupid meets the chef!");
+        System.out.println("Before we start, I would like to know you better!");
         System.out.println(HORIZONTAL);
     }
 
@@ -28,12 +39,18 @@ public class Ui {
 
     public void helpMessage() {
         System.out.println(
-            "To take a look at potential restaurants or activities, simply send me the following: \n" +
+            "To take a look at potential restaurants, activities, or gifts simply send me the following: \n" +
             "'list'\n\n" +
+            "To let me know more about yourself, simply send me the following: \n" +
+            "'me'\n\n" +
             "To generate a randomised date idea, simply send me the following: \n" +
             "'idea'\n\n" +
+            "To generate a randomised gift idea, simply send me the following: \n" +
+            "'gift'\n\n" +
             "To generate a suitable date itinerary based on your preferences, simply send me the following: \n" +
             "'itinerary' [space] '(preferred location)' [space] '(preferred price)'\n\n" +
+            "To generate a smart itinerary, simply send me the following AFTER you have completed 'me': \n" +
+            "'smart'\n\n" +
             "To add food to your favourites, simply send me the following: \n" +
             "'food' [space] '(name of eatery)' [space] '(location)' [space] '(price)'\n\n" +
             "To add an activity to your favourites, simply send me the following: \n" +
@@ -43,7 +60,9 @@ public class Ui {
             "To list out all your favourites, simply send me the following: \n" +
             "'favourites'\n\n" +
             "To delete an activity from your favourites, simply send me the following: \n" +
-            "'delete' [space] '(index of entry)'\n\n" +            
+            "'delete' [space] '(index of entry)'\n\n" +   
+            "To list out all your past date locations and restaurants, simply send me the following: \n" +
+            "'history'\n\n" +         
             "To exit the program, simply send me the following: \n" +
             "'exit'\n\n" +
 
@@ -100,11 +119,20 @@ public class Ui {
         System.out.println("What are some activities you can do as a couple? Let's see.." );
     }
 
+    public static void listGifts() {
+        System.out.println("Peek into Cupid's own gift collection!" );
+    }
+
     public static void listCommand() {
         System.out.println("Looking for ideas to spice up your date night?");
         System.out.println("Choose from the following options:");
         System.out.println("1. List out delicious dining options (type 'food')");
         System.out.println("2. Discover exciting activities to do together (type 'activities')");
+        System.out.println("3. Unwrap joy with our curated list of gifts that'll make hearts flutter! (type 'gifts')");
         System.out.println("What's your pleasure?");
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 }

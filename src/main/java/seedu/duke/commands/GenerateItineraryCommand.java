@@ -1,10 +1,21 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.Activity;
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.Food;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Itinerary;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class GenerateItineraryCommand extends Command{
+public class GenerateItineraryCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(GenerateItineraryCommand.class.getName());
     private String preferredLocation;
     private String preferredPrice;
@@ -17,7 +28,8 @@ public class GenerateItineraryCommand extends Command{
 
     @Override
     public void execute(FavouritesList favourites, FoodList foods, ActivityList activities, Ui ui,
-                        Storage storage) throws FlirtForkException {
+                        Storage storage, UserDetails userDetails, GiftList gifts) throws FlirtForkException {
+        String userSatisfied;
         Food food1;
         Food food2;
         Activity activity1;
@@ -36,9 +48,25 @@ public class GenerateItineraryCommand extends Command{
             } while (activity2.getDescription().equals(activity1.getDescription()));
             Itinerary itinerary = new Itinerary(food1, food2, activity1, activity2);
             System.out.println(itinerary);
+
+            System.out.println("Are you satisfied with the itinerary? [Yes/No]");
+            userSatisfied = ui.readCommand().toLowerCase();
+            if (userSatisfied.equals("yes")) {
+                System.out.println("That's great! Enjoy your date!");
+                food1.markComplete();
+                food2.markComplete();
+                activity1.markComplete();
+                activity2.markComplete();
+                storage.saveFood(foods);
+                storage.saveActivity(activities);
+                return;
+            } else {
+                System.out.println("We apologise! Perhaps you could try again?");
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("We could not generate a suitable itineray based on your inputs! Sorry!!");
             LOGGER.log(Level.SEVERE, "Invalid arguments given");
         }
     }
 }
+

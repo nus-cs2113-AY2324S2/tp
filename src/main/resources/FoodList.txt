@@ -1,0 +1,76 @@
+25 Degrees | C | C | W | U
+49 Seats | C | C | W | U
+888 Mookata | C | C | T | U
+90 Minutes | C | B | K | U
+A9 Noodles and Dumplings | C | B | C | U
+Aburi Kaisen Don Keisuke | C | B | J | U
+Five Guys | C | A | W | U
+Hantol | C | A | K | U
+Swee Choon | C | A | C  | U
+Wano Niku | C | P | J | U
+Super Thai Mookata | C | P | T | U
+Cicheti | C | P | I | U
+Ikura Japanese | C | S | J | U
+R.K Eating House | C | S | I | U
+Tolido's Expresso Nook | C | S | W | U
+886 Bistro | E | C | C | U
+Al Jasra | E | C | I | U
+Breakfast Grill | E | C | W | U
+Charlie's Corner | E | B | W | U
+E&D Co | E | B | W | U
+Ha-Jun | E | B | K | U
+Missus | E | A | W | U
+Mr Yakiniku | E | A | J | C
+Five Oars | E | A | W | U
+Knead To Eat | E | P | W | U
+Craze Kitchen | E | P | I | U
+Neptune | E | P | I | U
+Supernova | E | S | W | U
+The Sushi Bar | E | S | J | U
+The Basil Inn | E | S | T | U
+49 Seats | W | C | W | U
+888 Mookata | W | C | T | U
+46 Mittsu | S | C | W | U
+Abundance | S | C | C | U
+Hwang Shi | S | C | C | U
+Gyunion | S | B | J | U
+Gyu San | S | B | J | U
+Hamburg Steak | S | B | J | U
+Hantoi | S | A | K | U
+Burger Labo | S | A | W | U
+Old Habits Cafe | S | A | W | U
+Publico | S | P | I | U
+Pura Barsa | S | P | S | U
+Marcy's | S | P | I | U
+Lau Pa Sat | S | S | F | U
+Potato Head | S | S | W | U
+Fuel X | NE | C | W | U
+Samwitch | NE | C | W | U
+Breakfast Club | NE | C | W | C
+Whisk and Paddle | NE | B | W | U
+Tend Bistro | NE | B | J | U
+Dai Lou | NE | B | C | U
+Riang | NE | A | W | U
+Ishiro | NE | A | J | U
+Folk Yard | NE | A | W | U
+Tie Fun Wan | NE | P | C | U
+Gusta Sourdough Pizza Co | NE | P | I | U
+Curry Otoko Donburi | NE | P | J | U
+Shabu-GO | NE | S | J | U
+Idaten Udon | NE | S | J | U
+Moments | NE | S | W | U
+Aburi-En | ACC | C | J | U
+Genki Sushi | ACC | C | J | U
+Makisan | ACC | C | J | U
+Lenu | ACC | B | C | U
+A&W | ACC | B | W | U
+Monster Curry | ACC | B | J | U
+Pepperlunch | ACC | A | J | U
+Shi Li Fang | ACC | A | C | U
+Soup Spoon | ACC | A | W | U
+Green Dot | ACC | P | W | U
+Hai Di Lao | ACC | P | C | U
+Poulet | ACC | P | W | U
+Gochi-so Shokudo | ACC | S | J | U
+Ichiban Sushi | ACC | S | J | U
+Watami Japanese Dining | ACC | S | J | U
