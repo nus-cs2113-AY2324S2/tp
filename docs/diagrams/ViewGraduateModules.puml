@@ -1,0 +1,36 @@
+@startuml
+
+class Command {
+    {abstract} +execute(userInput : String) : void
+}
+
+class ViewGraduateCommand {
+    +execute(userInput : String) : void
+}
+
+class ModuleList {
+    +containsModule(moduleCode : String) : boolean
+    +getModulesToComplete() : ArrayList<String>
+}
+
+enum CEGModules {
+    +getModuleMC() : int
+    +mapStringToEnum(moduleCode : String) : CEGModules
+}
+
+class Module {
+    -moduleCode : String
+    -moduleGrade : String
+}
+
+class Ui {
+    {static} +printModulesToComplete(modules : ArrayList<String>) : void
+}
+
+ViewGraduateCommand --|> Command
+ViewGraduateCommand ..> Ui : uses
+ViewGraduateCommand ..> ModuleList : uses
+ModuleList -- Module
+ModuleList ..> CEGModules : uses
+
+@enduml
