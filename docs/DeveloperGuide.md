@@ -18,6 +18,117 @@
 
 ### PIN
 
+#### Overview
+The PINHandler class is responsible for managing the creation, loading, authentication, and resetting of a
+Personal Identification Number (PIN) used for authentication in the LongAh application. It uses SHA-256 hashing to
+securely store and compare PINs. The PINHandler class interacts with the StorageHandler class to save and load the PIN 
+and authentication status.
+
+#### Implementation Details
+*Data Storage*
+
+The PIN and authentication enabled status are saved in a file located at ./data/pin.txt.
+The file format is as follows:
+
+`hashed PIN`<br />
+`authenticationEnabled`<br />
+
+#### Class Structure
+The PINHandler class has the following static fields:
+
+*logger*: A logger object for logging messages. 
+
+*PIN_FILE_PATH*: The path to the file where the PIN and authentication status are saved.
+
+*savedPin*: The hashed PIN saved in the file.
+
+*authenticationEnabled*: A boolean flag indicating whether authentication is enabled.
+
+#### Constructor
+The PINHandler constructor initializes the savedPin and authenticationEnabled fields by loading them from the file using
+the loadPinAndAuthenticationEnabled method.
+
+If the file does not exist or the savedPin is empty, it calls the createPin method to create a new PIN.
+
+#### Methods
+*loadPinAndAuthenticationEnabled*: Loads the saved PIN and authentication enabled status from the file.
+
+*savePinAndAuthenticationEnabled*: Saves the PIN and authentication enabled status to the file.
+
+*getPinFilePath*: Returns the file path of the PIN file.
+
+*createPin*: Prompts the user to create a new 6-digit PIN and hashes it before saving.
+
+*authenticate*: Authenticates the user by comparing the entered PIN with the saved PIN.
+
+*resetPin*: Resets the PIN for the user by prompting for the current PIN and creating a new PIN if the current
+PIN is correct.
+
+*enablePin*: Enables authentication upon startup.
+
+*disablePin*: Disables authentication upon startup.
+
+*getSavedPin*: Returns the saved PIN.
+
+*getAuthenticationStatus*: Returns the authentication status.
+
+#### Usage Example
+
+![pinhandler longah.png](diagrams%2Fpinhandler%20longah.png)
+
+
+Given below is an example usage scenario and how the PIN creation and authentication mechanism behaves at each step:
+```
+Step 1. The user launches the application for the first time. The PINHandler initializes, loading the saved PIN and 
+authentication enabled status from the file. If no PIN exists, it prompts the user to create a new PIN.
+
+Step 2. The user creates a new 6-digit PIN using the createPin method. The entered PIN is hashed using SHA-256 before 
+saving it to the file.
+
+Step 3. The user closes the application and relaunches it. The PINHandler loads the saved PIN and authentication 
+enabled status from the file again.
+
+Step 4. The user attempts to log in by entering their PIN. The authenticate method hashes the entered PIN and 
+compares it with the saved hashed PIN. If they match, the user is successfully authenticated.
+
+Step 5. The user decides to reset their PIN by entering their current PIN and creating a new one using the resetPin 
+method.
+
+Step 6. The user disables authentication upon startup using the 'pin disable' command. The authenticationEnabled flag 
+is set to false and saved to the file.
+
+Step 7. The user relaunches the application, and authentication is no longer required since it has been disabled. 
+The user can proceed with the application and do any actions without entering a PIN.
+```
+* Code Snippet
+```
+// Initialize PINHandler
+PINHandler pinHandler = new PINHandler();
+
+// Check if authentication is enabled
+if (PINHandler.getAuthenticationStatus()) {
+// Authenticate user
+PINHandler.authenticate();
+} else {
+// Authentication is disabled, proceed with application logic
+}
+```
+
+#### Design Considerations
+Resetting PIN: The resetPin() method allows users to change their PIN by first verifying their current PIN. This adds 
+an extra layer of security to prevent unauthorized PIN changes.
+
+Authentication Management: Users have the option to enable or disable authentication upon startup using the 'pin enable'
+and 'pin disable' commands. This flexibility allows users to customize their authentication preferences based on their 
+security needs and convenience.
+
+
+#### Conclusion
+
+The PINHandler class provides a secure and convenient way to manage user authentication using a PIN.
+Its design allows for easy integration into the LongAh application and can be extended to support additional
+authentication features if needed.
+
 ### Class Diagram
 
 ### Sequence Diagram
