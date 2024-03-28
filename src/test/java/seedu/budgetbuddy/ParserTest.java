@@ -103,13 +103,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
         expenseList.addExpense("Housing", "3000", "BTO");
 
         String input = "list expenses";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
 
         assertEquals(ListExpenseCommand.class, command.getClass());
     }
@@ -119,13 +118,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
         expenseList.addExpense("Housing", "3000", "BTO");
 
         String input = "list expenses housing";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
 
         assertEquals(ListExpenseCommand.class, command.getClass());
     }
@@ -135,13 +133,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         expenseList.addExpense("Transport", "50", "Bus Fare");
         expenseList.addExpense("Housing", "3000", "BTO");
 
         String input = "list expenses qweqwe";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
         assertNull(command);
     }
 
@@ -150,13 +147,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         savingList.addSaving("Salary", "1150");
         savingList.addSaving("Investments", "300");
 
         String input = "list savings";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
 
         assertEquals(ListSavingsCommand.class, command.getClass());
     }
@@ -166,13 +162,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         savingList.addSaving("Salary", "1150");
         savingList.addSaving("Investments", "300");
 
         String input = "list savings salary";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
 
         assertEquals(ListSavingsCommand.class, command.getClass());
     }
@@ -182,13 +177,12 @@ public class ParserTest {
         Parser parser = new Parser();
         ExpenseList expenseList = new ExpenseList();
         SavingList savingList = new SavingList();
-        SplitExpenseList splitExpenseList = new SplitExpenseList();
         savingList.addSaving("Salary", "1150");
         savingList.addSaving("Investments", "300");
 
         String input = "list savings qweqwe";
 
-        Command command = parser.handleListCommand(input, expenseList, savingList, splitExpenseList);
+        Command command = parser.handleListCommand(input, expenseList, savingList);
         assertNull(command);
     }
 
