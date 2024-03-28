@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+participant UI << static >>
+participant ":Logic" as Logic
+activate Logic
+participant ":GeneralInputParser" as GeneralInputParser
+participant SummariseParser << static >>
+
+participant InvalidCommand order 29
+participant ":Dashboard" as Dashboard order 30
+participant ":ExpenseManager" as ExpenseManager order 31
+participant otherParsers <<static>> order 32
+Logic -> UI ++ : getUserInput()
+
+User -> UI : userInput
+UI --> Logic : userInput
+
+Logic -> GeneralInputParser ++ : getCommandFromUserInput(userInput)
+alt keyword == summarise
+    GeneralInputParser -> SummariseParser ++ : parseInput(userInput)
+    alt valid userInput
+        SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
+        activate SummariseCommand
+        SummariseCommand --> SummariseParser --: commandToExecute:SummariseCommand
+    else else
+        SummariseParser -> InvalidCommand ** : new InvalidCommand(...)
+        activate InvalidCommand
+        InvalidCommand --> SummariseParser -- : commandToExecute:InvalidCommand
+    end
+
+    SummariseParser --> GeneralInputParser -- : commandToExecute
+    GeneralInputParser --> Logic -- : command
+
+    alt command.instanceOf(SummariseCommand)
+        Logic -> SummariseCommand -- : execute(...)
+        activate SummariseCommand
+        SummariseCommand -> Dashboard ++ : getExpenseManager()
+        Dashboard --> SummariseCommand -- : ExpenseManager
+        SummariseCommand -> ExpenseManager ++ : summariseExpenses(...)
+        ExpenseManager --> SummariseCommand -- : summary
+        SummariseCommand -> UI -- : prettyPrint(summary)
+        destroy SummariseCommand
+        UI --> User : summary
+    else command.instanceOf(InvalidCommand)
+        Logic -> InvalidCommand -- : execute(...)
+        activate InvalidCommand
+        InvalidCommand -> UI -- : prettyPrint(errorMessage)
+        destroy InvalidCommand
+        UI --> User : errorMessage
+    end
+    deactivate UI
+else else
+    GeneralInputParser -> otherParsers : parseInput(userInput)
+end
+
+
+
+
+
+@enduml
