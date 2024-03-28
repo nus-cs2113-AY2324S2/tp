@@ -1,10 +1,7 @@
 package itemlist;
 
-import item.Item;
 import item.Transaction;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Cashier extends Itemlist {
