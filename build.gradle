@@ -16,6 +16,9 @@ dependencies {
 }
 
 test {
+
+    jvmArgs '-ea'
+
     useJUnitPlatform()
 
     testLogging {
