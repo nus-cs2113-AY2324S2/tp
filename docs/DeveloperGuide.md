@@ -101,3 +101,23 @@ Tag removed from the task:
 Visit museum
 ____________________________________________________________
 
+- To add an expense to a travel plan
+
+Example: expense 1 $50
+
+Result:
+____________________________________________________________
+I have added expense for this task:
+Visit museum ($50)
+____________________________________________________________
+
+- To remove expense from a travel plan
+
+Example: removeexpense 1
+
+Result:
+____________________________________________________________
+Expense removed from the task:
+Visit museum
+____________________________________________________________
+
