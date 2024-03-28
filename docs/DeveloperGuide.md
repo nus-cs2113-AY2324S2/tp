@@ -60,7 +60,52 @@ static void sourceNews(String line, List<NewsArticle> list) {
     int index = Integer.parseInt(split[1]) + 1;
     System.out.println(list.get(index).getSource());
 }
+```
+### User Preferences Feature
 
+This feature allows users to personalize their news feed by specifying topics of interest. The `UserPreferences` class stores and manages these preferences, allowing the application to deliver relevant news articles to the user.
+
+#### Implementation
+
+The User Preferences feature is implemented through the `UserPreferences` class, which manages a set of topics. It includes functionality to add and remove topics from the preferences and handles loading and saving these preferences to a text file.
+
+The main operations of this feature include:
+
+- `UserPreferences.addTopic(String topic)` — Adds a new topic to the user's list of interests.
+- `UserPreferences.removeTopic(String topic)` — Removes a topic from the user's list of interests.
+
+The persistence of user preferences is achieved through file I/O operations, specifically using the `java.nio.file.Files` class for reading from and writing to the `userPreferences.txt` file.
+
+#### Example Usage
+
+When a user first starts the application, the `UserPreferences` class is instantiated, automatically loading any previously saved preferences. As the user interacts with the application, they can add or remove topics from their preferences, which are immediately persisted to the file system.
+
+```java
+UserPreferences userPrefs = new UserPreferences();
+userPrefs.addTopic("technology"); // Adds technology to the list of interested topics.
+userPrefs.removeTopic("sports"); // Removes sports from the list of interested topics.
+```
+
+#### Persistence Mechanism
+
+The user preferences are saved in a text file named userPreferences.txt, with each line representing a topic of interest. The loadPreferences and savePreferences methods handle the reading and writing of this file, respectively.
+
+```java
+private void loadPreferences() {
+    try {
+        Files.lines(Paths.get(PREFERENCES_FILE))
+            .forEach(line -> interestedTopics.add(line.trim().toLowerCase()));
+    } catch (IOException e) {
+        System.out.println("Could not load user preferences. Starting with an empty list of topics.");
+    }
+}
+```
+
+#### Design Considerations
+The design of the User Preferences feature aimed to achieve simplicity and efficiency, opting for a lightweight file-based storage solution to avoid the overhead of more complex persistence mechanisms. 
+
+#### Alternatives Considered
+- **Cloud-Based Storage:** Providing cross-device synchronization was deemed unnecessary at this stage, given the application's primary focus on delivering a personalized news experience on individual devices.
 
 ## Product scope
 ### Target user profile
