@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
             + System.lineSeparator()
             + "\t7. viewEvent /i <index> - views an event"
             + System.lineSeparator()
-            + "\t8. viewEvents - lists all events"
+            + "\t8. listEvents - lists all events"
             + System.lineSeparator()
             + "\t9. deleteEvent /i <index> - deletes an event" 
             + System.lineSeparator()

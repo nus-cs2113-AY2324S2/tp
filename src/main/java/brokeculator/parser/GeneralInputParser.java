@@ -32,8 +32,8 @@ public class GeneralInputParser {
         case "viewEvent":
             commandToExecute = ViewSingleEventParser.parseInput(userInput);
             break;
-        case "viewEvents":
-            commandToExecute = ViewEventsParser.parseInput(userInput);
+        case "listEvents":
+            commandToExecute = ListEventsParser.parseInput(userInput);
             break;
         case "deleteEvent":
             commandToExecute = DeleteEventParser.parseInput(userInput);

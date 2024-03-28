@@ -1,10 +1,10 @@
 package brokeculator.parser;
 
 import brokeculator.command.Command;
-import brokeculator.command.ViewEventsCommand;
+import brokeculator.command.ListEventsCommand;
 
-public class ViewEventsParser {
+public class ListEventsParser {
     public static Command parseInput(String userInput) {
-        return new ViewEventsCommand();
+        return new ListEventsCommand();
     }
 }
