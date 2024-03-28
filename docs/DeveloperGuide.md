@@ -33,7 +33,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Main components of the architecture
 
-The bulk of the app's work is done by the following five components:
+The bulk of the app's work is done by the following six components:
 
 - `Ui`: The UI of the App.
 - `Storage`: Reads data from and writes data to a .txt file
@@ -93,6 +93,42 @@ of adding an item and displaying messages. This way, only classes relevant to th
 access to `ItemList`.
 
 ### Haziq
+
+### Delete Item
+
+`DeleteCommand` interacts with the `ItemList` to perform deletion operations. The distinction between index-based and keyword-based deletions is established during object construction, which is handled by the `Parser`.
+This is done through the use of 2 seperate constructors, which are:
+
+- DeleteCommand(int index) - Initializes the command to delete an item by its index in the list. 
+- DeleteCommand(String keyword) - Initializes the command to delete items matching the given keyword.
+
+The choice of constructor is determined by the `Parser` based on the user input format.
+
+As a result of this, the user may enter a command in one of the following formats:
+- `delete 3` - to delete the third item in the inventory. 
+- `delete apple` - to delete all items in the inventory with the name apple.
+
+When the `execute()` method of `DeleteCommand` is invoked, the class first determines whether the deletion is to be carried out by index or keyword, as indicated by the `isIndex` flag.
+
+If **deletion by index** is specified, the `DeleteCommand` calls the `deleteItem(int index)` method of `ItemList` to remove the item at the specified index and sets the `executionUiOutput` with the output of the deletion operation.
+
+Conversely, if **deletion by keyword** is specified, the method calls the `deleteItem(int String)` method of `ItemList`. This method locates and removes items matching the keyword, returns a String output, which is again, stored in `executionUiOutput`
+of the `DeleteCommand` class.
+
+Upon completion of either operation, the method sets the `hasToSave` flag to true, signaling the need to persist changes to storage. This entire process is logged at various levels, providing a trail for audit and debugging purposes.
+
+#### Implementation Notes ####
+The design of `DeleteCommand` is such that it encapsulates the delete operation, separating concerns by handling the logic of deletion internally and interacting with the ItemList without exposing the details of the list's data structure. This modular approach simplifies the responsibilities of the Parser and Main components, which do not need to understand the internals of the delete operation, thereby adhering to the principles of high cohesion and low coupling.
+
+Additionally, the decision to use two constructors promotes the Single Responsibility Principle, as each constructor's logic is tailored to the type of deletion it handles.
+
+### List all items in inventory
+
+The `ListCommand` class is designed to handle the operation of listing all items in the inventory. When the `execute()` method is called, it retrieves the complete list of items from the `ItemList`
+and assigns it to `executionUiOutput`.
+
+#### Implementation Notes ####
+The ListCommand is concerned only with the execution of the listing operation. It follows a straightforward process that relies on the `ItemList` to format the list of items, ensuring separation of concerns between command execution and UI presentation.
 
 ### Jun Han
 
