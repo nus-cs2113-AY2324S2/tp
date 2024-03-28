@@ -1,0 +1,27 @@
+@startuml
+
+class Parser {
+    - metadataList : ArrayList<CommandMetadata>
+    + getCommand(userInput : String) : Command
+}
+
+abstract class CommandMetadata {
+    - {static} argRegexMap: Map<String, String>
+
+    - regex : String
+    - keyword : String
+    - groupArguments : String[]
+
+    + getCommandArguments(matcher : Matcher) : Map<String, String>
+    + {abstract} createCommandInstance(args : Map<String, String>) : Command
+}
+
+class ABCCommandMetadata extends CommandMetadata {}
+class XYZCommandMetadata extends CommandMetadata {}
+
+Parser -up-> "1" XYZCommandMetadata : uses
+Parser -up-> "1" ABCCommandMetadata : uses
+
+
+
+@enduml
