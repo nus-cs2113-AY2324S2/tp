@@ -8,6 +8,7 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+
 This section shows important details on implementation of certain features
 
 ### Expenses feature
@@ -21,6 +22,20 @@ Additionally, it implements the following operations:
 These operations are exposed in the Expense class through the `getPayerName()`, `getTotalAmount()`, and `getPayees()` functions respectively.
 
 
+### Add Member to Group feature
+#### Implementation
+
+The "Add Member to Group" feature is facilitated by the `Group` class. It provides methods to manage group membership and allows users to add new members to an existing group. The implementation of this feature is as follows:
+
+The Group class maintains a list of members as a `private List<User>` field called `members`.
+
+The `addMember(String memberName)` method is responsible for adding a new member to the group. It performs the following steps:
+
+1. Checks if a user with the given `memberName` is already a member of the group using the `isMember(String memberName)` method. 
+2. If the user is not a member, creates a new `User` object with the provided `memberName`.
+3. Adds the new `User` object to the `members` list.
+4. Prints a success message indicating that the member has been added to the group.
+
 
 ## Product scope
 ### Target user profile
@@ -33,6 +48,7 @@ These operations are exposed in the Expense class through the `getPayerName()`, 
 
 ## User Stories
 
+
 | Version | As a ... | I want to ...                                                  | So that I can ...                                           |
 |---------|----------|----------------------------------------------------------------|-------------------------------------------------------------|
 | v1.0    | new user | see usage instructions                                         | refer to them when I forget how to use the application      |
@@ -41,6 +57,7 @@ These operations are exposed in the Expense class through the `getPayerName()`, 
 | v1.0    | user     | list all expenses within a group                               | see recent transactions                                     |
 | v1.0    | user     | check how much I owe each member in the group                  | keep track of my debts                                      |
 | v2.0    | user     | find a to-do item by name                                      | locate a to-do without having to go through the entire list |
+
 
 ## Non-Functional Requirements
 
