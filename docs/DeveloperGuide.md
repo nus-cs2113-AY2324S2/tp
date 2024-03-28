@@ -71,7 +71,11 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 ### Target user profile
 
-{Describe the target user profile}
+* Retail shop owners who has a need to efficiently manage their inventory list
+* prefer desktop apps over other types of apps
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
