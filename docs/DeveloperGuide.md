@@ -411,56 +411,47 @@ resources. It embodies key software design principles and showcases thoughtful a
     us **safety in the arguments** that passes through to the commands via the userInput.
     <br />
     <br />
-    **Developer usage FAP: Parser & CommandMetadata class as of v2.0**: **How to create a new command**
-    1. First, we would need a `Command` type class to return as an object. In the future, this may be expanded to any 
-    `T` type. 
-    2. Second, we would need a string that would be used to create this `Command` instance. This string should follow
-    the format `keyword argument_1 argument_2` where arguments are **optional**
-    3. Third, for every argument available, make a **regex pattern with name capturing** that encloses the value 
-    within the brackets. (eg.`n/(?<name>[A-Za-z0-9 ]+)`, `g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)`)
-    <br />
-    <br />
-    **Begin:** Using example `add c/COURSECODE w/SEMESTERTAKEN`
+  **Developer usage FAP: Parser & CommandMetadata class as of v2.0**: **How to create a new command**
+  - First, we need a `Command` type class to return as an object. In the future, this may be expanded to any `T` type.
+  - Second, we need a string that would be used to create this `Command` instance. This string should follow the format `keyword argument_1 argument_2` where arguments are **optional**.
+  - Third, for every argument available, make a **regex pattern with name capturing** that encloses the value within the brackets. (e.g., `n/(?<name>[A-Za-z0-9 ]+)`, `g/(?<grade>[ab][+-]?|[cd][+]?|f|cs|cu)`)
+  
+  - **Using example `add c/COURSECODE w/SEMESTERTAKEN`**
     - Create a subclass that extends `CommandMetadata`.
-    - Put in the `keyword` (eg. `add`) and `groupArgumentNames` (eg.`{"courseCode", "semester"}`) in super constructor
-    - Put in the argument regex pattern in static variable `argsRegexMap` (eg. 
-    `argRegexMap.put("semester", "w/(?<semester>[1-8])")`) (Note: Currently `argsRegexMap` is in superclass 
-    `CommandMetadata`)
-    - Override method `createCommandInstance(Map<String, String> args)` to implement the method on how to create the 
-    `Command` object you want. Return the `Command` instance
-      - `Map<String, String> args` contains the `groupArgumentName : argumentValue` pairing
-   
-    - On `Parser` class, add in the created `CommandMetadata subclass` to `metadataList`
-    - `Parser` method `getCommand(String userInput)` will help to validate the userInput. If the userInput matches the 
-    string you wanted, then `getCommand(String userInput)` will return the Command instance you require.
-      <br />
-      <br />
-    Sample example code:
-   ```
-   public class AddCommandMetadata extends CommandMetadata {
-    private static final String ADD_KEYWORD = "add";
-    private static final String[] ADD_ARGUMENTS = {"courseCode", "semester"};
-
-    public AddCommandMetadata() {
-        super(ADD_KEYWORD, ADD_ARGUMENTS);
-    }
-
-    // Add Command Creator
-    @Override
-    protected Command createCommandInstance(Map<String, String> args) {
-        try {
-            String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
-            String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
-            int semesterInt = Integer.parseInt(semester);
-
-            return new AddCommand(moduleCode, semesterInt);
-        } catch (ModuleNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage());
-            System.out.println("An error occurred: " + e.getMessage());
-        }
-        return new InvalidCommand();
-    }
-   ```
+    - Put in the `keyword` (e.g., `add`) and `groupArgumentNames` (e.g., `{"courseCode", "semester"}`) in the superclass constructor.
+    - Define the argument regex pattern in the static variable `argsRegexMap` Note: Currently, `argsRegexMap` is in the superclass `CommandMetadata`. (e.g., `argRegexMap.put("semester", "w/(?<semester>[1-8])")`). 
+    - Override the method `createCommandInstance(Map<String, String> args)` to implement the method on how to create the `Command` object you want. Return the `Command` instance.
+      - `Map<String, String> args` contains the `groupArgumentName : argumentValue` pairing.
+    - In the `Parser` class, add the created `CommandMetadata` subclass to `metadataList`.
+    - The `Parser` method `getCommand(String userInput)` will help validate the `userInput`. If the `userInput` matches the string you wanted, then `getCommand(String userInput)` will return the Command instance you require.
+  
+  Sample example code:
+  ```java
+  public class AddCommandMetadata extends CommandMetadata {
+      private static final String ADD_KEYWORD = "add";
+      private static final String[] ADD_ARGUMENTS = {"courseCode", "semester"};
+  
+      public AddCommandMetadata() {
+          super(ADD_KEYWORD, ADD_ARGUMENTS);
+      }
+  
+      // Add Command Creator
+      @Override
+      protected Command createCommandInstance(Map<String, String> args) {
+          try {
+              String moduleCode = args.getOrDefault("courseCode", "COURSECODE_ERROR");
+              String semester = args.getOrDefault("semester", "SEMESTER_ERROR");
+              int semesterInt = Integer.parseInt(semester);
+  
+              return new AddCommand(moduleCode, semesterInt);
+          } catch (ModuleNotFoundException e) {
+              LOGGER.log(Level.SEVERE, "An error occurred: " + e.getMessage());
+              System.out.println("An error occurred: " + e.getMessage());
+          }
+          return new InvalidCommand();
+      }
+  }
+  ```
 #### UML Diagram
 
 ![FAP class diagram](diagrams/FAP.png)
