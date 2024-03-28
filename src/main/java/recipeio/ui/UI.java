@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class UI {
-    public static final String SEPARATOR = "-----------------------------";
+    public static final String SEPARATOR = "-----------------------------------------------";
     private static String name;
 
     private final Scanner in;
