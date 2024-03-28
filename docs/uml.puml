@@ -1,0 +1,63 @@
+@startuml
+participant Duke as duke
+participant Storage as storage
+participant File as file
+participant UserList as userList
+participant UI as UI
+participant Timetable as timetable
+participant User as user
+
+
+activate duke
+duke -> storage: createFolder()
+activate storage
+storage -->> duke:
+deactivate storage
+
+duke -> storage: addExistingUsers()
+activate storage
+storage -> file: listFiles()
+activate file
+file -->> storage: File
+deactivate file
+
+alt directory is not empty
+  loop file
+    opt file is not null
+      storage -> userList: addUser(user: User)
+          activate userList
+          userList -> userList: add(user: User)
+          alt allUsers.size() == 1
+            userList -> UI: printActiveUser()
+            activate UI
+            UI -->> userList
+            deactivate UI
+          end
+          userList -->> storage
+          deactivate userList
+
+          storage -> storage: loadData(user: User)
+          storage -> storage: extractTaskInfo(String line, String day)
+          storage --> storage: Task
+          storage -> user: getTimetable()
+          activate user
+          user -> timetable: addUserTask(day: String, task: Task)
+          activate timetable
+          timetable --> user
+          deactivate timetable
+          user -->> storage
+          deactivate user
+    end
+  end
+
+else
+  storage -> UI: printEmptyDirectory();
+  activate UI
+  UI -->> storage
+  deactivate UI
+end
+
+
+
+storage --> duke
+@enduml
