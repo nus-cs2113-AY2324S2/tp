@@ -112,7 +112,6 @@ public class Ui {
                 }
             } catch (DateTimeException | NumberFormatException e) {
                 System.out.println("Invalid date. Please ensure the year, month, and day are correct and try again.");
-                // No need to reset expirationDate to null here as it's already null or will be reset if the date was in the past.
             }
         }
         return expirationDate.toString(); // Formats to YYYY-MM-DD by default.
