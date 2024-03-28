@@ -187,19 +187,29 @@ public class TravelActivityList {
         System.out.println(taggedTask);
     }
 
+    /**
+     * Updates the date, duration and tag of the travel activity
+     * @param travelActivityNumber The index of the travel activity
+     * @param date The new date of the travel activity
+     * @param duration The new duration of the travel activity
+     * @param tag The new tag of the travel activity
+     * @throws OmniException Thrown if the index of the travel activity cannot be found
+     */
     public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration, String tag)
             throws OmniException{
-        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())){
+        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())
+            || travelActivityNumber < 0){
             throw new OmniException("Travel activity cannot be found");
         }
         int indexOfTravelActivity = travelActivityNumber-1;
         TravelActivity updatedTravelActivity = travelActivities.get(indexOfTravelActivity);
-        String oldTravelActivityDescription = updatedTravelActivity.toString();
+        String oldTravelActivity = (updatedTravelActivity.toString()
+                                            + " (" + updatedTravelActivity.getTag() + ")");
         updatedTravelActivity.setDate(date);
         updatedTravelActivity.setDuration(duration);
         updatedTravelActivity.setTag(tag);
-        System.out.println("I have updated this task\nfrom: " + updatedTravelActivity +
-                            "\nto: " + oldTravelActivityDescription);
+        System.out.println("I have updated this task\nfrom: " + oldTravelActivity +
+                            "\nto: " + updatedTravelActivity + " (" + updatedTravelActivity.getTag() + ")");
     }
 
     public ArrayList<TravelActivity> getTravelActivities () {
