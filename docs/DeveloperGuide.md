@@ -38,7 +38,13 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 ### Jun Han
 
-### Kota
+### UI
+
+API: [`Ui.java`](../src/main/java/seedu/binbash/ui/Ui.java)
+
+![Ui class diagram](images/UiClassDiagram.png)
+
+The above class diagram shows the separate components and functionalities of the Ui.
 
 ### Yi Hao
 
