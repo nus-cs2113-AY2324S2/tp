@@ -1,10 +1,10 @@
 package seedu.budgetbuddy;
 
 import seedu.budgetbuddy.command.Command;
-import seedu.budgetbuddy.command.FindExpensesCommand;
 import seedu.budgetbuddy.command.ListBudgetCommand;
 
 import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.FindExpensesCommandCreator;
 import seedu.budgetbuddy.commandcreator.MenuCommandCreator;
 import seedu.budgetbuddy.commandcreator.RecurringExpenseCommandCreator;
 import seedu.budgetbuddy.commandcreator.ChangeCurrencyCommandCreator;
@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
 public class Parser {
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -38,20 +37,6 @@ public class Parser {
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
         this.savingsCategories = new ArrayList<>(Arrays.asList("Salary",
                 "Investments", "Gifts", "Others"));
-    }
-
-    private String extractDetailsForCommand(String input, String splitter, CommandPrefix type) {
-        int startIndex = input.indexOf(splitter) + splitter.length();
-        int endIndex = input.length();
-
-        String[] nextPrefixes = type.getNextPrefixes();
-
-        for (String nextPrefix : nextPrefixes) {
-            if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = input.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return input.substring(startIndex, endIndex).trim();
     }
 
     public Boolean isRecCommand(String input) {
@@ -140,70 +125,6 @@ public class Parser {
         return input.startsWith("settle");
     }
 
-    /**
-     * Parses the "find expenses" command, allowing for optional and combinable
-     * parameters.
-     *
-     * @param input    The full user input string.
-     * @param expenses The ExpenseList to search within.
-     * @return A Command for executing the search, or null if the input is invalid.
-     */
-    public Command handleFindExpensesCommand(String input, ExpenseList expenses) {
-        assert input != null : "Input cannot be null";
-        assert !input.isEmpty() : "Input cannot be empty";
-        assert input.startsWith("find expenses") : "Input must be a find expenses command";
-
-        String description = null;
-        Double minAmount = null;
-        Double maxAmount = null;
-
-        LOGGER.log(Level.INFO, "Begin parsing parameters in find expenses command");
-
-        if (!input.contains("d/") && !input.contains("morethan/") && !input.contains("lessthan/")) {
-            LOGGER.log(Level.WARNING, "Input does not contain any parameters");
-
-            System.out.println("Please Ensure that you include d/, morethan/ or lessthan/");
-            return null;
-        }
-
-        if (input.contains("d/")) {
-            description = extractDetailsForCommand(input, "d/", CommandPrefix.FIND);
-        }
-
-        if (input.contains("morethan/")) {
-            String minAmountAsString = extractDetailsForCommand(input, "morethan/", CommandPrefix.FIND);
-            try {
-                minAmount = Double.parseDouble(minAmountAsString);
-            } catch (NumberFormatException e) {
-                LOGGER.log(Level.WARNING, "Detected a String when expecting a Number in minAmount");
-
-                System.out.println("Invalid format for amount.");
-                return null;
-            }
-        }
-
-        if (input.contains("lessthan/")) {
-            String maxAmountAsString = extractDetailsForCommand(input, "lessthan/" , CommandPrefix.FIND);
-            try {
-                maxAmount = Double.parseDouble(maxAmountAsString);
-            } catch (NumberFormatException e) {
-                LOGGER.log(Level.WARNING, "Detected a String when expecting a Number in maxAmount");
-
-                System.out.println("Invalid format for amount.");
-                return null;
-            }
-        }
-
-        if (minAmount != null && maxAmount != null && minAmount > maxAmount) {
-            LOGGER.log(Level.WARNING, "Detected Minimum Amount Larger than Maximum Amount");
-
-            System.out.println("Maximum Amount cannot be Smaller than Minimum Amount");
-            return null;
-        }
-
-        return new FindExpensesCommand(expenses, description, minAmount, maxAmount);
-    }
-
     public Command handleListBudgetCommand(ExpenseList expenseList) {
         return new ListBudgetCommand(expenseList);
     }
@@ -266,7 +187,8 @@ public class Parser {
         }
 
         if (isFindExpensesCommand(input)) {
-            return handleFindExpensesCommand(input, expenses);
+            CommandCreator commandCreator = new FindExpensesCommandCreator(input, expenses);
+            return commandCreator.createCommand();
         }
 
         if (isRecCommand(input)) {

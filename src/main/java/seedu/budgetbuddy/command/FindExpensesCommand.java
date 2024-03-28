@@ -33,6 +33,32 @@ public class FindExpensesCommand extends Command {
         this.maxAmount = maxAmount;
     }
 
+    public void printInitializationMessage() {
+        ui.printDivider();
+        System.out.println("Looking for Expenses with the following parameters : ");
+
+        System.out.println("Description : ");
+        if (description == null) {
+            System.out.println("N.A");
+        } else {
+            System.out.println(description);
+        }
+
+        System.out.println("Minimum Amount : ");
+        if (minAmount == null) {
+            System.out.println("N.A");
+        } else {
+            System.out.println(minAmount);
+        }
+
+        System.out.println("Maximum Amount : ");
+        if (maxAmount == null) {
+            System.out.println("N.A");
+        } else {
+            System.out.println(maxAmount);
+        }
+    }
+
     @Override
     public void execute() {
 
@@ -43,6 +69,8 @@ public class FindExpensesCommand extends Command {
         }
 
         LOGGER.log(Level.INFO, "Creating filteredExpenses");
+
+        printInitializationMessage();
         ArrayList<Expense> filteredExpenses = expenses.filterExpenses(description, minAmount, maxAmount);
         ExpenseList filteredExpenseList = new ExpenseList(filteredExpenses);
 

@@ -9,27 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ParserTest {
 
-    @Test
-    public void handleFindExpensesCommand_invalidMaxAndMinValues_fail() {
-        Parser parser = new Parser();
-        ExpenseList expenses = new ExpenseList();
-
-        String input = "find expenses d/Bruno Mars morethan/400 lessthan/300";
-        Command command = parser.handleFindExpensesCommand(input, expenses);
-        assertNull(command);
-
-    }
-
-    @Test
-    public void handleFindExpensesCommand_maxAndMinValuesAsLetters_fail() {
-        Parser parser = new Parser();
-        ExpenseList expenses = new ExpenseList();
-
-        String input = "find expenses d/Bruno Mars morethan/hello lessthan/hello";
-        Command command = parser.handleFindExpensesCommand(input, expenses);
-        assertNull(command);
-
-    }
 
     @Test 
     public void testInvalidCommand() {
