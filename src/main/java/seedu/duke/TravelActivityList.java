@@ -1,6 +1,7 @@
 package seedu.duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -97,6 +98,10 @@ public class TravelActivityList {
      */
 
     public void searchKeyword (String activityName) {
+        logger.log(Level.INFO, "searchKeyword function started");
+        ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();
+        int temporaryArrayCounter = 0;
+        logger.log(Level.INFO, "temporaryArray is initialised");
         boolean isFound = false;
         int foundCounter = 0;
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
@@ -115,7 +120,7 @@ public class TravelActivityList {
                 }
             }
         }
-        if (foundCounter == 0 || isFound == false) {
+        if (temporaryArrayCounter == 0 || !isFound) {
             System.out.println("Sorry I could not find what you are looking for.");
         }
     }

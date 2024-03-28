@@ -9,9 +9,7 @@ import java.util.logging.Logger;
 public class Duke {
 
     public static void main(String[] args) {
-
         Logger logger = Logger.getLogger("Main");
-
         Ui.printGreeting();
         boolean userSaysBye = false;
         FileSave file = new FileSave("omni.txt");
