@@ -7,16 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FindCommand {
-    public static void execute(String userInput, ArrayList<Recipe> recipes) throws IndexOutOfBoundsException{
+    public static void execute(String userInput, ArrayList<Recipe> recipes) {
         String[] inputSplitUp = userInput.split(" ", 3);
-        String findType;
-        try {
-            findType = inputSplitUp[1];
-        } catch (IndexOutOfBoundsException ioobe) {
-            System.out.println("Sorry. Something is missing in your command");
-            return;
-        }
-        assert (inputSplitUp.length >= 3);
+        String findType = inputSplitUp[1];
         switch (findType) {
         case (Constants.FIND_BY_KEYWORD):
             String keyword = inputSplitUp[2];
@@ -40,6 +33,7 @@ public class FindCommand {
             System.out.println("Sorry, you have no recipes to find matches with. Try adding some!");
             return;
         }
+        assert (!recipes.isEmpty());
         for (Recipe recipe : recipes) {
             if (recipe.name.contains(keyword)) {
                 matches.add(recipe);
