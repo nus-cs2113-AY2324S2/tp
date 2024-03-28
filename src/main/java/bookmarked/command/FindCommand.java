@@ -1,7 +1,7 @@
 package bookmarked.command;
 
 import bookmarked.Book;
-import bookmarked.exceptions.emptyListException;
+import bookmarked.exceptions.EmptyListException;
 import bookmarked.ui.Ui;
 
 import java.util.ArrayList;
@@ -36,14 +36,14 @@ public class FindCommand extends Command {
 
         try {
             processFind(keyword);
-        } catch (emptyListException e) {
+        } catch (EmptyListException e) {
             Ui.printEmptyListMessage();
         }
     }
 
-    private void processFind(String keyword) throws emptyListException {
+    private void processFind(String keyword) throws EmptyListException {
         if (this.listOfBooks.isEmpty()) {
-            throw new emptyListException();
+            throw new EmptyListException();
         }
 
         logger.log(Level.INFO, "processing find books based on keyword");
