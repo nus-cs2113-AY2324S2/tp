@@ -1,0 +1,46 @@
+@startuml
+skinparam participantPadding 20
+
+participant User
+participant ViewGpaCommand
+participant ModuleList
+participant Module
+participant GpaNullException
+participant LOGGER
+
+User -> ViewGpaCommand: execute(userInput)
+activate ViewGpaCommand
+
+ViewGpaCommand -> ModuleList: tallyGPA()
+activate ModuleList
+
+Loop For each Module
+    ModuleList -> Module:
+    activate Module
+    Module -> Module: Check if grade is countable
+    alt Countable grade
+        Module --> ModuleList: Grade and Module Credits
+    else Non-countable grade
+        Module --> ModuleList: Continue iteration
+    end
+end
+    deactivate Module
+    alt Total MC is zero
+        ModuleList -> LOGGER: Log message
+        activate LOGGER
+        LOGGER --> ModuleList: Log message
+        deactivate LOGGER
+        ModuleList -> GpaNullException: Throw GpaNullException
+        activate GpaNullException
+        GpaNullException --> ModuleList: GpaNullException
+        deactivate GpaNullException
+        ModuleList --> ViewGpaCommand: GpaNullException
+    else Calculate GPA
+        ModuleList --> ViewGpaCommand: GPA
+    end
+
+ViewGpaCommand --> User
+
+deactivate ViewGpaCommand
+deactivate ModuleList
+@enduml
