@@ -71,4 +71,12 @@ public class SplitExpenseList {
         SplitExpense splitexpense = new SplitExpense(amount, numberOfPeople, description);
         splitexpenses.add(splitexpense);
     }
+
+    public void settleSplitExpenses(int index) {
+        LOGGER.info("Settling split expenses...");
+        assert index >= 0 : "Index should be a positive integer";
+        assert index < splitexpenses.size() : "Index should be within the range of the list";
+
+        splitexpenses.remove(index);
+    }
 }

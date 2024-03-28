@@ -13,7 +13,6 @@ public class RecurringExpenseListTest {
         ArrayList<Expense> expenses = new ArrayList<>();
         RecurringExpenseList recurringExpenseList = new RecurringExpenseList("Bruno", expenses);
 
-        String name = "Bruno";
         assertEquals("Bruno", recurringExpenseList.getName());
     }
 }

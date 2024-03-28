@@ -12,6 +12,7 @@ import seedu.budgetbuddy.commandcreator.AddExpenseCommandCreator;
 import seedu.budgetbuddy.commandcreator.AddSavingCommandCreator;
 import seedu.budgetbuddy.commandcreator.CommandCreator;
 import seedu.budgetbuddy.commandcreator.ListSplittedExpenseCommandCreator;
+import seedu.budgetbuddy.commandcreator.SettleSplitExpenseCommandCreator;
 import seedu.budgetbuddy.commandcreator.SplitExpenseCommandCreator;
 import seedu.budgetbuddy.command.RecurringExpenseCommand;
 import seedu.budgetbuddy.command.MenuCommand;
@@ -124,7 +125,7 @@ public class Parser {
     }
 
     public Boolean isListSplitExpenseCommand(String input) {
-        return input.startsWith("list splitted expenses");
+        return input.contentEquals("check splitted expenses");
     }
 
     public Boolean isSetBudgetCommand(String input){
@@ -133,6 +134,10 @@ public class Parser {
 
     public boolean isListBudgetCommand(String input){
         return input.startsWith("budget print");
+    }
+
+    public Boolean isSettleSplitExpenseCommand(String input) {
+        return input.startsWith("settle");
     }
 
     /**
@@ -720,6 +725,11 @@ public class Parser {
 
         if (isSplitExpenseCommand(input)) {
             CommandCreator commandCreator = new SplitExpenseCommandCreator(splitexpenses, input);
+            return commandCreator.createCommand();
+        }
+
+        if (isSettleSplitExpenseCommand(input)) {
+            CommandCreator commandCreator = new SettleSplitExpenseCommandCreator(input, splitexpenses);
             return commandCreator.createCommand();
         }
         
