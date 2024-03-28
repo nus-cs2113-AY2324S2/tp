@@ -196,7 +196,7 @@ public class Parser {
      * @throws OmniException if command.length == 1
      */
     public static void tagCommand(String line, TravelActivityList list) throws OmniException {
-        String[] command = line.split("tag |-");
+        String[] command = line.split(" ");
         if (command.length == 3 && isNumeric(command[1])){
             int listNumber = Integer.parseInt(command[1]);
             String tag = command[2];
