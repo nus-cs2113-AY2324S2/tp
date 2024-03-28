@@ -1,9 +1,8 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+Display |         Name          |               Github Profile                | Portfolio 
+--------|:---------------------:|:-------------------------------------------:|:---------:
+![](https://via.placeholder.com/100.png?text=Photo) |    Edward Humianto    |   [Github](https://github.com/edwardhumi)   | [Portfolio](docs/team/edwardhumi.md)
+![](https://via.placeholder.com/100.png?text=Photo) |    Jason Lienardi     | [Github](https://github.com/jasonlienardi)  | [Portfolio](docs/team/johndoe.md)
+-- |      Claribel Ho      |  [Github] (https://github.com/claribelho)   | [Portfolio] (docs/team/claribelho.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Bryan Castorius Halim | [Github](https://github.com/BryanCastorius) | [Portfolio](docs/team/bryancastorius.md)
