@@ -9,7 +9,7 @@ public enum Category {
     ENTERTAINMENT(6, "Entertainment"),
     RENT(7, "Rent"),
     SALARY(8, "Salary"),
-    OTHER(9, "Other");
+    OTHERS(9, "Others");
 
     private final int categoryNum;
     private final String categoryName;
