@@ -33,7 +33,7 @@ With these classes we can encapsulate the whole logic of the application in a re
                 c.execute(tripList, ui, null);
                 isExit = c.isExit();
 
-            } catch (Exception e) { //TODO: change to specific exceptions
+            } catch (Exception e) { 
                 ui.echo(e.getMessage());
             }
                                 ...
