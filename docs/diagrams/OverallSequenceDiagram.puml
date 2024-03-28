@@ -31,7 +31,7 @@ loop [isUserActive]
     deactivate ":Command"
 end
 
-alt hasToSave
+opt hasToSave
     ":BinBash" -> ":Storage" : 12. saveToStorage()
     ":Storage" --> ":BinBash"
 end
