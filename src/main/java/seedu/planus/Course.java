@@ -57,10 +57,12 @@ public class Course {
     }
 
     public int getYear() {
+        assert (year >= 1 || year <= MAX_CANDIDATURE_YEAR): "Year is not from 1 to 6";
         return year;
     }
 
     public int getTerm() {
+        assert (term >= 1 || term <= TERM_PER_YEAR): "Term is not from 1 to 4";
         return term;
     }
 

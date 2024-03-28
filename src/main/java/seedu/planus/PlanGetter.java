@@ -28,6 +28,7 @@ public class PlanGetter {
         }
 
         plan.append("Total MCs: ").append(totalCredit).append(System.lineSeparator());
+        assert !plan.toString().isEmpty(): "Plan should not be empty";
         return plan.toString();
     }
 
@@ -65,6 +66,7 @@ public class PlanGetter {
         }
 
         plan.append("Year MCs: ").append(yearCredit).append(System.lineSeparator());
+        assert !plan.toString().isEmpty(): "Plan should not be empty";
         return plan.toString();
     }
 
@@ -106,6 +108,7 @@ public class PlanGetter {
         }
 
         plan.append("Term MCs: ").append(termCredit).append(System.lineSeparator());
+        assert !plan.toString().isEmpty(): "Plan should not be empty";
         return plan.toString();
     }
 
