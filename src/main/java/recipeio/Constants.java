@@ -26,6 +26,7 @@ public class Constants {
     public static final String MESSAGE_ASK_INPUT = "asking user for input";
     public static final String FIND_BY_KEYWORD = "kw";
     public static final String FIND_BY_DATE = "date";
+    public static final String FIND_BY_ALLERGY = "allergy";
     static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
             + RECIPE_TIME_PREFIX;
 
