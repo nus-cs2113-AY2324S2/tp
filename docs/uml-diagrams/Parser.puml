@@ -1,0 +1,56 @@
+
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class SuperTracker
+class Parser
+class TrackerException
+interface Command
+
+Parser <... SuperTracker
+Command <.. SuperTracker
+TrackerException <.. SuperTracker
+TrackerException <.. Parser
+
+interface Command {
+    execute():void
+    isExit():boolean
+}
+
+class TrackerException {
+    #errorMessage:String
+    +getErrorMessage():String
+    +TrackerException(errorMessage:String)
+}
+
+class Parser {
+    {static}+parseCommand(input:String) : Command
+}
+
+@enduml
+
+@startuml
+hide footbox
+actor User as User
+participant "SuperTracker" as SuperTracker <<class>> #f5e3a9
+participant "Parser" as Parser <<class>> #cbf7f4
+
+User -> SuperTracker : userInput
+SuperTracker -> Parser : parseCommand(userInput)
+activate Parser #cbf7f4
+
+alt valid command word in userInput
+    Parser -> Parser : getPatternMatcher(regex, userInput, paramFlags)
+    activate Parser #a9dff5
+    Parser --> Parser : commandToExecute
+    deactivate Parser
+    Parser --> SuperTracker : commandToExecute
+else invalid userInput
+    Parser --> SuperTracker : InvalidCommand
+    deactivate Parser
+end
+
+SuperTracker -> User : Output
+
+@enduml

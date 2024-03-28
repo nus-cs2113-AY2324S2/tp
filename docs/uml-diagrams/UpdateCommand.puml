@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+interface Command
+class Ui
+class Inventory
+class Item
+class UpdateCommand
+class Parser
+
+UpdateCommand <.. Parser
+Command <|.. UpdateCommand
+Ui <.. UpdateCommand
+Inventory <.. UpdateCommand
+Item <.. UpdateCommand
+
+interface Command {
+    +execute():void
+    +isExit():boolean
+}
+
+class UpdateCommand {
+    -name:String
+    -newQuantity: int
+    -newPrice: double
+    +UpdateCommand(name: String, newQuantity: int, newPrice: double)
+    +execute(): void
+    +isQuit(): boolean
+}
+
+class Item {
+    +Item(name: String, quantity: int, price: double, expiryDate: LocalDate)
+}
+
+class Ui {
+    {static}+updateCommandSuccess(item:Item): void
+}
+
+class Parser {
+    {static}-ParseUpdateCommand(input:String):NewCommand
+}
+
+class Inventory {
+    {static}+get(name:String):Item
+    {static}+put(name:String, item:Item):void
+}
+
+@enduml
+
+@startuml
+hide footbox
+participant "SuperTracker" as SuperTracker <<class>> #f5e3a9
+participant ":UpdateCommand" as UpdateCommand #cbf7f4
+participant "Inventory" as Inventory <<class>> #d5eac2
+participant "Ui" as Ui <<class>> #e5c2ea
+participant "oldItem:Item" as Item #fbffb2
+
+SuperTracker -> UpdateCommand : execute()
+activate UpdateCommand #cbf7f4
+
+UpdateCommand -> Inventory : get(name:String)
+activate Inventory #d5eac2
+Inventory --> UpdateCommand : oldItem:Item
+deactivate Inventory
+
+opt newQuantity == -1
+    UpdateCommand -> Item: getQuantity()
+    activate Item #fbffb2
+    Item --> UpdateCommand: oldItemQuantity
+    deactivate Item
+end
+
+opt newPrice == -1
+    UpdateCommand -> Item: getPrice()
+    activate Item #fbffb2
+    Item --> UpdateCommand: oldItemPrice
+    deactivate Item
+end
+
+UpdateCommand -> Inventory : put(name:String, item:Item)
+activate Inventory #d5eac2
+Inventory --> UpdateCommand
+deactivate Inventory
+
+UpdateCommand -> Ui : updateCommandSuccess(item:Item)
+activate Ui #e5c2ea
+Ui --> UpdateCommand
+deactivate Ui
+
+@enduml

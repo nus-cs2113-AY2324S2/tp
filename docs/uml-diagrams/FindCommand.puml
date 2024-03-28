@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam classAttributeIconSize 0
+
+abstract class Command
+class Inventory
+class FindCommand
+class Parser
+class Ui
+
+Command <|. FindCommand
+Inventory <.. FindCommand
+Ui <.. FindCommand
+FindCommand <.. Parser
+
+interface Command {
+    +execute():void
+    +isExit():boolean
+}
+
+class FindCommand {
+    -name:String
+    +FindCommand(name:String)
+    +execute():void
+    +isExit():boolean
+}
+
+class Inventory {
+    {static}+getItems():ArrayList<Item>
+}
+
+class Ui {
+    {static}+findItem(item:Item, index:int):void
+    {static}+noItemFound(name:String):void
+}
+
+class Parser {
+    {static}-parseFindCommand(input:String):FindCommand
+}
+@enduml
+
+@startuml
+hide footbox
+participant "SuperTracker" as SuperTracker <<class>> #f5e3a9
+participant ":FindCommand" as FindCommand #cbf7f4
+participant "Inventory" as Inventory <<class>> #d5eac2
+participant "Ui" as Ui <<class>> #e5c2ea
+
+SuperTracker -> FindCommand : execute()
+activate FindCommand #cbf7f4
+
+FindCommand -> Inventory : getItems()
+activate Inventory #d5eac2
+Inventory --> FindCommand : items
+deactivate Inventory
+
+loop until every item in items are checked
+    opt item contains the word
+    FindCommand -> Ui : foundItem(item:String, index:int)
+    activate Ui #e5c2ea
+    Ui --> FindCommand
+    deactivate Ui
+    end
+end
+
+opt word not found in items
+FindCommand -> Ui : noItemFound(name:String)
+activate Ui #e5c2ea
+Ui --> FindCommand
+deactivate Ui
+end
+
+FindCommand --> SuperTracker
+deactivate FindCommand
+@enduml
