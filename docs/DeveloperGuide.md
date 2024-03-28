@@ -1,14 +1,36 @@
 # Developer Guide
 
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started] (#setting-up-getting-started)
+* [Design & implementation](#design--implementation)
+  * [Architecture](#architecture)
+  * [Category feature](#category-feature)
+* [Product scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+## Setting up, getting started
+
+Refer to the guide [Setting up and getting started]().
 
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-# Category feature
+### Architecture
+
+The UML diagram below shows the main relationships between the classes in the Brokeculator application.
+![img.png](images/architecture.png)
+
+### Category feature
 **Implementation** </br>
 The category feature is mainly facilitated by the `Category` class. The `Category` class is responsible for storing the names of the categories present in expenses. 
 In order for the user to be able to add expenses with a category, the category must be added using the `addCategory` method. 
