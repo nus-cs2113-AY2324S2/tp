@@ -14,7 +14,6 @@ import net.fortuna.ical4j.model.property.CalScale;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.temporal.Temporal;
 import java.util.GregorianCalendar;
 
 public class IcsHandler {
