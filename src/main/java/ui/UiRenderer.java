@@ -12,7 +12,8 @@ import data.TaskManager;
 public class UiRenderer {
     private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private static final String[] WEEK_DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private static final String[] WEEK_DAYS = {"Sunday", "Monday", "Tuesday",
+        "Wednesday", "Thursday", "Friday", "Saturday"};
 
     private static final int SPACE_COUNT = 10;
     private static final String SINGLE_HORIZONTAL_DIVIDER = "+" + "-".repeat(SPACE_COUNT + 2);
@@ -24,9 +25,16 @@ public class UiRenderer {
 
     private static final int numberOfDaysInWeek = 7;
 
-    public static void printWeekHeader() {
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_CYAN = "\u001B[36m"; // Cyan
+
+
+    public static void printWeekHeader(LocalDate startOfView, DateTimeFormatter dateFormatter, boolean isMonthView) {
         printHorizontalDivider();
         printHeaderRow();
+        if (!isMonthView) {
+            printDateRow(dateFormatter ,startOfView);
+        }
         printHorizontalDivider();
     }
 
@@ -45,9 +53,6 @@ public class UiRenderer {
     }
 
     public static void printWeekBody(LocalDate startOfWeek, DateTimeFormatter dateFormatter, TaskManager taskManager) {
-        printDateRow(dateFormatter, startOfWeek);
-
-        printHorizontalDivider();
         int maxTasks = getMaxTasks(startOfWeek, taskManager);
         assert maxTasks >= 0 : "maxTasks should be non-negative";
         printWeeksTasks(startOfWeek, maxTasks, taskManager);
@@ -57,11 +62,14 @@ public class UiRenderer {
     private static void printDateRow(DateTimeFormatter dateFormatter, LocalDate date) {
         logger.log(Level.INFO, "Printing dates for week starting from " + date);
         for (int i = 0; i < numberOfDaysInWeek; i++) {
-            System.out.printf(ENTRY_FORMAT, dateFormatter.format(date));
+            String formattedDate = dateFormatter.format(date);
+            System.out.printf(ENTRY_FORMAT, ANSI_CYAN + "\033[2m\033[22m" + dateFormatter.format(date) + ANSI_RESET);
+
             date = date.plusDays(1);
         }
         System.out.println(VERTICAL_DIVIDER);
     }
+
 
     public static void printWeeksTasks(LocalDate startOfWeek, int maxTasks, TaskManager taskManager) {
         for (int taskIndex = 0; taskIndex < maxTasks; taskIndex++) {
@@ -101,5 +109,26 @@ public class UiRenderer {
         }
         System.out.println("+");
     }
+
+    public static void printHelp() {
+        String horizontalLine = "+-------------------------------------------------------------------------------+";
+        String emptyLine = "|                                                                               |";
+        System.out.println(horizontalLine);
+        System.out.println("|                               Available Commands                              |");
+        System.out.println(horizontalLine);
+        System.out.println(emptyLine);
+        System.out.println("| - 'next': Move to the next week or month view.                                |");
+        System.out.println("| - 'prev': Move to the previous week or month view.                            |");
+        System.out.println("| - 'update, <day>, <taskIndex>, <newDescription>': Update a task description.  |");
+        System.out.println("| - 'add, <day>, <taskType>, <taskDescription>': Add a new task.                |");
+        System.out.println("| - 'delete, <day>, <taskIndex>': Delete a task.                                |");
+        System.out.println("| - 'month': Switch to month view.                                              |");
+        System.out.println("| - 'week': Switch to week view.                                                |");
+        System.out.println("| - 'quit': Exit the calendar application.                                      |");
+        System.out.println(emptyLine);
+        System.out.println(horizontalLine);
+    }
+
+
 }
 
