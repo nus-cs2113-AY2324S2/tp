@@ -1,9 +1,9 @@
 -------------------------------------------------
 WELCOME TO BYTECEPS
 -------------------------------------------------
-[ByteCeps]> Looks like you're starting fresh!
+[BYTE-CEPS]> Looks like you're starting fresh!
 -------------------------------------------------
-[User]> [ByteCeps]> All your workouts and exercises have been saved.
+[User]> [BYTE-CEPS]> All your workouts and exercises have been saved.
 -------------------------------------------------
 -------------------------------------------------
 GOODBYE FOR NOW. STAY HARD!
