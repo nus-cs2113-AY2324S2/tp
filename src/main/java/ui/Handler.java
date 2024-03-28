@@ -330,7 +330,6 @@ public class Handler {
             isGymValid = Gym.checkIfGymIsValid(numberOfStations);
         }
 
-
         if (exerciseTypeIsValid && isRunValid) {
             return WorkoutConstant.RUN;
         } else if (exerciseTypeIsValid && isGymValid) {

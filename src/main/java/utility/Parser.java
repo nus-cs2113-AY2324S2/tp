@@ -61,7 +61,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
     public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
-        String validDateRegex = "\\d{2}-\\d{2}-\\d{4}";
+        String validDateRegex = "^\\d{2}-\\d{2}-\\d{4}$";
         if (!date.matches(validDateRegex)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_DATE_ERROR);
         }
@@ -189,7 +189,7 @@ public class Parser {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
         // checks whether input number is 2dp
-        String twoDecimalPlaceRegex = "\\d+\\.\\d{2}";
+        String twoDecimalPlaceRegex = "^\\d+\\.\\d{2}$";
         if (!bmiDetails[0].matches(twoDecimalPlaceRegex) ||
                 !bmiDetails[1].matches(twoDecimalPlaceRegex)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.HEIGHT_WEIGHT_INPUT_ERROR);
@@ -328,7 +328,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegex = "\\d{2}:\\d{2}";
+        String validTimeRegex = "^\\d{2}:\\d{2}$";
         if (!time.matches(validTimeRegex)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_TIME_ERROR);
         }
@@ -351,8 +351,8 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateRunTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegexWithHours = "\\d{2}:\\d{2}:\\d{2}";
-        String validTimeRegex = "\\d{2}:\\d{2}";
+        String validTimeRegexWithHours = "^\\d{2}:\\d{2}:\\d{2}$";
+        String validTimeRegex = "^\\d{2}:\\d{2}$";
         if (!time.matches(validTimeRegex) &&
                 !time.matches(validTimeRegexWithHours)) {
             throw new CustomExceptions.InvalidInput("Invalid time format. " +
