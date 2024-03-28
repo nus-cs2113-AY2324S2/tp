@@ -15,15 +15,17 @@ public class TravelActivity {
     /** Travel activity tag */
     private String tag;
 
-    public TravelActivity(String description, LocalDate date, String duration){
+    public TravelActivity(String description, LocalDate date, String duration, String tag){
         travelActivity = description;
         this.date = date;
         this.duration = duration;
+        this.tag = tag;
     }
 
     @Override
     public String toString(){
         return travelActivity + " :" + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :" + duration;
+
     }
 
     /**

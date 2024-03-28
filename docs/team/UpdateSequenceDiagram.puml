@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+!define LOGIC_COlOR #228B22
+!define LOGIC_COlOR_T1 #B22222
+!define LOGIC_COlOR_T2 #DCDCDC
+!define LOGIC_COlOR_T3 #808080
+!define LOGIC_COlOR_T4 #008000
+!define LOGIC_COlOR_T5 #800000
+
+
+box Ui LOGIC_COlOR_T4
+participant ":Ui" as Ui LOGIC_COlOR
+
+box Logic LOGIC_COlOR_T5
+participant ":Parser" as Parser LOGIC_COlOR_T1
+end box
+
+box Model LOGIC_COlOR_T3
+participant ":TravelActivityList" as TravelActivityList LOGIC_COlOR_T2
+participant ":TravelActivity" as TravelActivity LOGIC_COlOR_T2
+end box
+
+[-> Ui : printLine()
+activate Ui
+Ui -->[
+deactivate Ui
+[-> Parser : updateCommand(line,list)
+activate Parser
+Parser -> TravelActivityList: updateTravelActivity(traveActivityNumber, date, duration)
+activate TravelActivityList
+TravelActivityList -> TravelActivity: setDate
+activate TravelActivity
+TravelActivity --> TravelActivityList
+deactivate TravelActivity
+TravelActivityList -> TravelActivity: setDuration
+activate TravelActivity
+TravelActivity --> TravelActivityList
+deactivate TravelActivity
+TravelActivityList --> Parser
+deactivate TravelActivityList
+Parser -->[
+deactivate Parser
+[-> Ui : printLine()
+activate Ui
+Ui -->[
+deactivate Ui
+
+
+@enduml

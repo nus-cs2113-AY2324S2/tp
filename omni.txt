@@ -1,6 +1,22 @@
+<<<<<<< HEAD
 accommodation / 0 / Malaysia Airbnb / 2019-12-17 / 3hours
 food / 0 / Popia / 2020-12-01 / 1hour
 landmark / 0 / Eiffel Tower / 2018-06-01 / 4hours
 accommodation / 0 / four seasons hotel / 2024-12-12 / 2 days
 food / 0 /  kfc / 2024-12-12 /  1 hour
 general / 0 / visit paris / 2024-12-12 / 2 weeks
+=======
+accommodation / 1 / nus rvrc / 2007-12-12 / 5 years / campus stay
+accommodation / 0 / nus pgpr / 2017-10-12 / 5 years / campus stay
+accommodation / 0 / nus utr / 2007-09-12 / 5 years / campus stay
+landmark / 0 / berlin wall / 2009-12-15 / 5 hours / historic site
+landmark / 0 / utown / 2016-08-14 / 10 hours / recreational centre
+landmark / 0 / supper stretch / 2021-08-18 / 2 hours / tourist hotspot
+food / 0 / utown mala / 2019-06-19 / 2 hours / spicy
+food / 0 / pgpr mala / 2012-07-07 / 1 hours / spicy
+food / 0 / pgpr waffle / 2006-03-09 / 0.5 hours / non-spicy
+0 / esplanade / 2016-03-19 / 3 hours / concert
+0 / merlion / 2018-04-07 / 2 hours / sightseeing
+0 / chinatown / 2015-02-21 / 5 hours / sightseeing
+1 / landmark Utown / 2019-10-10 / 3hours / exam
+>>>>>>> ff6257b928cad78f4e2a77daf8eb8443f30326cb
