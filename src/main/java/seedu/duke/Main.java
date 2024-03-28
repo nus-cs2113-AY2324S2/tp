@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import data.Task;
-import icshandler.IcsHandler;
 import net.fortuna.ical4j.data.ParserException;
 import storage.Storage;
 import time.DateUtils;
@@ -46,7 +45,7 @@ public class Main {
                 Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
 
-//        IcsHandler.generateICS(); //uncomment when developed
+        //IcsHandler.generateICS(); //uncomment when developed
 
         while (true) {
             if (printWeek) {
