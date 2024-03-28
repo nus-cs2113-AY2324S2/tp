@@ -29,11 +29,13 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("ActiveEdge.ActiveEdge")
+    applicationDefaultJvmArgs = ["-ea"] // Enable assertions for running the application
+
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("ActiveEdge")
     archiveClassifier.set("")
 }
 
@@ -44,3 +46,10 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+run {
+    enableAssertions = true
+
+}
+
+

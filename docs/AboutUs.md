@@ -2,8 +2,10 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Seenivasaragavan Praneet |   [Github](https://github.com/Praneet-25)   | [Portfolio](docs/team/praneet25.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Manimaran Pradeep | [Github](https://github.com/pradeep-cod) | [Portfolio](docs/team/pradeep-cod.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Alvin Wong | [Github](https://github.com/alvinnnnnnnnnn) | [Portfolio](docs/team/alvinnnnnnnnnn.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Suveen Ellawela | [Github](https://github.com/SuveenE) | [Portfolio](docs/team/suveene.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Nikhil Babu | [Github](https://github.com/nikhil-2101) | [Portfolio](docs/team/nikhil-2101.md)
+
+
