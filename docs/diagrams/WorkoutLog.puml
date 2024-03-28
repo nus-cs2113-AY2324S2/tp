@@ -1,0 +1,23 @@
+@startuml
+participant WeeklyProgramManager
+participant WorkoutLogsManager
+participant WorkoutLog
+participant ExerciseLog
+
+activate WeeklyProgramManager
+activate WorkoutLogsManager
+
+WeeklyProgramManager -> WorkoutLogsManager:addWorkoutLog(workoutDate, workoutName)
+WorkoutLogsManager -> WorkoutLog: Create new workout log
+activate WorkoutLog
+return
+WorkoutLogsManager --> WeeklyProgramManager
+
+WeeklyProgramManager -> WorkoutLogsManager:addExerciseLog(workoutDate, exerciseName, weight, sets, repetition)
+WorkoutLogsManager -> ExerciseLog: Create new exercise log
+activate ExerciseLog
+return
+
+WorkoutLogsManager --> WeeklyProgramManager
+deactivate WeeklyProgramManager
+@enduml

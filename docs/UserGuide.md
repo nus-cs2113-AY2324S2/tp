@@ -339,7 +339,7 @@ program /history
 
 Expected outcome:
 ```
-[BYTE-CEPS]> Listing Tracked Workouts:
+[BYTE-CEPS]> Listing Workout Logs:
 			1. 2024-03-27
 			2. 2024-03-06
 			3. 2024-03-28

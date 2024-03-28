@@ -1,0 +1,76 @@
+@startuml
+package byteceps {
+
+  class Storage {
+      + FILE_PATH: String
+      + load(exerciseManager: ExerciseManager, workoutManager: WorkoutManager, weeklyProgramManager: WeeklyProgramManager, workoutLogsManager: WorkoutLogsManager): void
+      + save(exerciseManager: ExerciseManager, workoutManager: WorkoutManager, weeklyProgramManager: WeeklyProgramManager, workoutLogsManager: WorkoutLogsManager): void
+  }
+
+  class UserInterface {
+      + printWelcomeMessage(): void
+      + printGoodbyeMessage(): void
+      + getUserInput(): String
+      + printMessage(message: String): void
+  }
+
+  class Parser {
+      + parseInput(userInput: String): void
+      + getCommand(): String
+  }
+
+  class Exceptions {
+      + ActivityExistsException
+      + ErrorAddingActivity
+      + InvalidInput
+      + ActivityDoesNotExists
+      + IllegalStateException
+  }
+
+  class ExerciseManager {
+      + execute(parser: Parser): void
+  }
+
+  class WorkoutManager {
+      + WorkoutManager(exerciseManager: ExerciseManager)
+      + execute(parser: Parser): void
+  }
+
+  class WeeklyProgramManager {
+      + WeeklyProgramManager(exerciseManager: ExerciseManager, workoutManager: WorkoutManager, workoutLogsManager: WorkoutLogsManager)
+      + execute(parser: Parser): void
+  }
+
+  class WorkoutLogsManager {
+  }
+
+  class ByteCeps {
+      + exerciseManager: ExerciseManager (static)
+      + workoutManager: WorkoutManager (static)
+      + weeklyProgramManager: WeeklyProgramManager (static)
+      + workoutLogsManager: WorkoutLogsManager (static)
+      + parser: Parser (static)
+      + ui: UserInterface (static)
+      + storage: Storage (static)
+      + ByteCeps()
+      + run(): void
+      + commandLine(): void
+  }
+
+  ByteCeps <-> Storage : uses
+  ByteCeps <-> UserInterface : uses
+  ByteCeps <-> Parser : uses
+  ByteCeps o-- ExerciseManager
+  ByteCeps o-- WorkoutManager
+  WorkoutManager o-- ExerciseManager
+  ByteCeps o-- WeeklyProgramManager
+  WeeklyProgramManager o-- ExerciseManager
+  WeeklyProgramManager o-- WorkoutManager
+  WeeklyProgramManager o-- WorkoutLogsManager
+  ByteCeps o-- WorkoutLogsManager
+
+}
+
+ @enduml
+
+
