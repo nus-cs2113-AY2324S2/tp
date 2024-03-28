@@ -54,6 +54,12 @@ classes, the system remains flexible, with each class focusing on a specific asp
 * The `Parser` class abstracts the complexity of command interpretation, ensuring that user inputs are correctly understood 
 * and acted upon by the system.
 
+#### Alternatives Considered
+An alternative design could have centralized the categorization logic within a single class, such as `BookDetails` or 
+`Parser`. However, this approach was discarded in favor of the current design to avoid overloading a single class with 
+multiple responsibilities and to adhere to the Single Responsibility Principle. By distributing the tasks, the system 
+gains in maintainability and scalability, facilitating future enhancements and modifications. 
+
 
 ## Product scope
 ### Target user profile
