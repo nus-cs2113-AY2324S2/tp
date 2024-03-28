@@ -1,5 +1,6 @@
 package brokeculator;
 import brokeculator.dashboard.Dashboard;
+import brokeculator.enumerators.Category;
 import brokeculator.storage.FileManager;
 import brokeculator.expense.ExpenseManager;
 
@@ -9,6 +10,7 @@ public class Brokeculator {
         FileManager fileManager = new FileManager();
         Dashboard dashboard = new Dashboard(expenseManager, fileManager);
         Logic driverLogic = new Logic(dashboard);
+        Category.setDashboard(dashboard);
         driverLogic.run();
     }
 }

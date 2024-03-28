@@ -5,7 +5,7 @@ import java.util.Map;
 public class FileKeyword {
 
     private static final Map<SaveableType, String> FILE_KEYWORDS = Map.of(
-        SaveableType.EXPENSE, "--expense--"
+        SaveableType.EXPENSE, "--expense--", SaveableType.CATEGORY, "--category--"
     );
 
     public static String formatWithKeyword(SaveableType saveableType, String originalStringRepresentation) {

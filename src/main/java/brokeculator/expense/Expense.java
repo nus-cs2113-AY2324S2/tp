@@ -25,7 +25,7 @@ public class Expense implements Saveable {
         this.description = description.trim();
         this.amount = amount;
         this.date = date.trim();
-        this.category = category == null ? null : category.trim();
+        this.category = category == null ? null : category.trim().toUpperCase();
     }
 
     /**
