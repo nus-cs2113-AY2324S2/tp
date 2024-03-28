@@ -1,0 +1,104 @@
+@startuml
+participant Duke #237bf7
+participant Ui #BAFFFE
+participant Parser #c6b3ff
+participant Game #2442ed
+participant TicTacToe #2abd06
+participant InvalidGameException #fab546
+participant InvalidTTMoveException #fab546
+
+
+[-> Duke: main()
+activate Duke #237bf7
+
+Duke -> Ui: greetUser()
+activate Ui #BAFFFE
+Ui --> Duke:
+deactivate Ui
+
+loop#f0af0a #faf1e1 true
+    Duke -> Parser: ifQuit(input)
+            activate Parser #c6b3ff
+            Parser --> Duke
+            deactivate Parser
+
+    alt#Gold #LightBlue ifQuit(input) = true
+        Duke -> Ui: quitUser()
+        activate Ui #BAFFFE
+        Ui --> Duke:
+        deactivate Ui
+        note right
+        Ends the program
+        end note
+        [<- Duke: break
+    end
+
+
+    alt#Gold #LightBlue inGame = false
+           Duke -> Parser: readGame(input)
+           note right
+           inGame is updated in the loop based on if a game is in session or not.
+           end note
+           activate Parser #c6b3ff
+
+            alt#Gold #LightBlue try
+                Duke -> Game: add(input)
+                activate Game #2442ed
+
+                Game -> TicTacToe: runTicTacToe()
+                activate TicTacToe #2abd06
+
+                 alt#Gold #LightBlue try
+                 note right
+                 Control shifts to TicTacToe
+                 to run the game.
+                 end note
+
+                else #Pink catch InvalidTTMoveException e
+                     TicTacToe -> InvalidTTMoveException
+                     activate InvalidTTMoveException #fab546
+                     InvalidTTMoveException --> TicTacToe
+                     deactivate InvalidTTMoveException
+
+                     note right
+                     TicTacToe will catch and handle
+                     the Parser exception if thrown.
+                     end note
+                end
+
+
+                TicTacToe --> Game
+
+                deactivate TicTacToe
+
+                Game --> Duke
+                deactivate Game
+
+           else #Pink catch InvalidGameException e
+                Parser -> InvalidGameException
+                activate InvalidGameException #fab546
+                InvalidGameException --> Duke
+                                     note right
+                                     Duke will catch and handle
+                                     the Parser exception if thrown.
+                                     end note
+                deactivate InvalidGameException
+
+           deactivate Parser
+
+           end
+
+      end
+
+      Duke -> Parser: input = readLine()
+      activate Parser #c6b3ff
+      Parser --> Duke
+      deactivate Parser
+
+   end
+
+
+[<- Duke:
+deactivate Duke
+@enduml
+
