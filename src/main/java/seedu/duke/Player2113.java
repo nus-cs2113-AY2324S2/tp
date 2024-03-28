@@ -36,8 +36,8 @@ public class Player2113 {
             questionsList2.addQuestion(question4);
             questionListByTopic.addQuestionSet(questionsList2);
 
-            Topic topic1 = new Topic(questionsList1,"topic1", false);
-            Topic topic2 = new Topic(questionsList2,"topic2", false);
+            Topic topic1 = new Topic(questionsList1,"topic1", false, "Covers topic 1 notions mentioned in lecture 1-2");
+            Topic topic2 = new Topic(questionsList2,"topic2", false, "Covers topic 2 notions mentioned in lecture 3-4");
             topicList.addTopic(topic1);
             topicList.addTopic(topic2);
         }

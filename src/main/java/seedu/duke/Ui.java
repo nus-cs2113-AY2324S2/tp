@@ -43,7 +43,7 @@ public class Ui {
     }
 
     private void askForInput() {
-        System.out.println("Input a command player! // TODO: show possible commands"); // TODO
+        System.out.println("Input a command player!"); // TODO: show possible commands
     }
 
     private void askForAnswerInput(){
@@ -56,6 +56,7 @@ public class Ui {
         for (int index = 0; index < topicListSize; index++) {
             System.out.println((index + 1) + ". " + topicList.getTopic(index));
         }
+        System.out.println((topicListSize + 1) + ". " + "Randomly select a topic for me ;)");
         System.out.println("Please choose a topic to play:");//input command in the form "start [INDEX]
     }
 
@@ -91,15 +92,13 @@ public class Ui {
         userAnswers.addUserCorrectness(answersCorrectness);
     }
 
+    public void printNoSolutionAccess(){
+        System.out.println("Attempt the topic first!");
+    }
 
     public void printOneSolution(int questionNum, String solution) {
         System.out.println("The solution for question " + questionNum + ":"
                 + System.lineSeparator() + solution);
-    }
-
-    public void printOneExplanation (int questionNum, String explanation) {
-        System.out.println("The explanation for question " + questionNum + ":"
-                + System.lineSeparator() + explanation);
     }
 
     public void printAllSolutions(String allSolutions) {
@@ -141,7 +140,7 @@ public class Ui {
     }
 
     private void handleException(CustomException e) {
-        System.out.println(e.getMessage() + "TODO: show possible commands"); //TODO
+        System.out.println(e.getMessage()); //TODO
     }
     public void printLine() {
         for (int i = 0; i < NEW_LINE; i += 1) {

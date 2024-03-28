@@ -17,15 +17,26 @@ public class TopicList {
         return topicList.get(index).topicName;
     }
 
+    public String[][] listAllTopics() {
+        int commandNum = topicList.size();
+        String[][] tableData = new String[commandNum][];
+        for (int i = 0; i < commandNum; i++) {
+            tableData[i] = new String[]{
+                    String.valueOf(i + 1),
+                    topicList.get(i).topicName,
+                    topicList.get(i).summary,
+                    String.valueOf(topicList.get(i).hasAttempted)
+            };
+        }
+        return tableData;
+    }
+
     public int getSize() {
-        //System.out.println(topicList.size());
         return topicList.size();
     }
 
-    public String getChosenTopic(int topicNum){
-        int topicIndex = topicNum - 1;
-        Topic topic = topicList.get(topicIndex);
-        return topic.topicName;
+    public Topic get(int index){
+        return topicList.get(index);
     }
 
 }

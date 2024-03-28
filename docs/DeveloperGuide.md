@@ -1,37 +1,44 @@
 # Developer Guide
 
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-
 ## Product scope
+
 ### Target user profile
 
-{Describe the target user profile}
+CS2113/2103 students who wish to have an efficient tool to help them revise relevant concepts.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Integration of key notions and learning learning objectives for CS2113 course, self-adaptive testing for understanding and feedback.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...     | I want to ...                                        | So that I can ...                                            |
+| ------- | ------------ | ---------------------------------------------------- | ------------------------------------------------------------ |
+| v1.0    | new user     | see user guide in the app                            | refer to them if I am unfamiliar with the usage of a command |
+| v2.0    | regular user | see a progress bar when answering MCQs               | track my progress when attempting a question set             |
+| v2.0    | regular user | see a progress bar about all topics in the main menu | track my revision progress for the entire course             |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Usability: the user is able to use the app without reading lenthy documentations.
 
 ## Glossary
 
-* *glossary item* - Definition
+- _glossary item_ - Definition
+
+## Acknowledgements
+
+### Libraries
+
+1. Display formatted tables in the CLI - [ASCII TABLES](https://bethecoder.com/applications/products/asciiTable.action)
+
+2. Topic selection menu and testing mode progress bar - [ProgressBar](https://github.com/ctongfei/progressbar)
+
+### References
 
 ## Instructions for manual testing
 

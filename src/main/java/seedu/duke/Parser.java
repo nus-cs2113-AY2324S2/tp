@@ -24,21 +24,20 @@ public class Parser {
     private static final int NO_RESULTS = 0;
     private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
     private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
-    boolean hasChosenTopic = false;
+
 
     public void parseCommand(
+
             String command, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper,
             AnswerTracker userAnswers
     ) throws CustomException {
+
         String lowerCaseCommand = command.toLowerCase();
         if (ui.isPlaying) {
 
-            if (lowerCaseCommand.startsWith("topic") && !hasChosenTopic) {
+            if (lowerCaseCommand.startsWith("topic")) {
                 processStartCommand(lowerCaseCommand, ui, topicList, questionListByTopic, allResults, userAnswers);
-                //hasChosenTopic = true;
-            } else if (lowerCaseCommand.startsWith("topic") && hasChosenTopic) {
-                throw new CustomException("Please choose a topic in the format: topic [INDEX]");
             } else if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
@@ -48,11 +47,19 @@ public class Parser {
                 processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic, userAnswers);
             } else if (lowerCaseCommand.startsWith("help")) {
                 processHelpCommand(lowerCaseCommand, ui, helper);
+            } else if (lowerCaseCommand.startsWith("list")){
+                processListCommand(topicList, ui);
             } else {
                 throw new CustomException("-1 HP coz invalid command");
             }
         }
 
+    }
+
+    private void processListCommand(TopicList topicList, Ui ui) {
+        String[][] printData = topicList.listAllTopics();
+        String[] tableHeader = {"index", "topic", "summary", "attempted"};
+        ui.printTable(tableHeader, printData);
     }
 
     private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
@@ -111,6 +118,7 @@ public class Parser {
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
             ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
+        assert (topicList.getSize() != 0) : "Size of topicList should never be 0";
 
         String[] commandParts = lowerCaseCommand.split(" ");
         if (commandParts.length != 2) {
@@ -124,7 +132,20 @@ public class Parser {
             if (topicNum < 1 || topicNum > topicList.getSize() + 1) {
                 throw new CustomException("No such topic");
             }
+            // checks if user wants a random topic num
+            final int randomTopicNum = topicList.getSize() + 1;
+            if (topicNum == randomTopicNum) {
+                Helper helper = new Helper();
+                topicNum = helper.generateRandomNumber(randomTopicNum);
+            }
+            assert (topicNum != 0) : "topicNum should not be 0";
+            assert (topicNum != randomTopicNum) : "topicNum should not be randomTopicNum";
+
+            // prints questions
             ui.printChosenTopic(topicNum, topicList, questionListByTopic, allResults, userAnswers);
+            System.out.println("You have finished the topic! What will be your next topic?");
+            topicList.get(topicNum - 1).markAsAttempted();
+            ui.printTopicList(topicList, ui);
 
         } catch (NumberFormatException e) {
             throw new CustomException("invalid " + lowerCaseCommand + " parameter");
@@ -132,9 +153,7 @@ public class Parser {
 
     }
 
-    // user enters "solution 1" to get solution for question1 OR
-    // user enters "solution -all" to get ALL solutions
-    // also works for "explain 1"
+    // solution and explain commands
     private void processSolutionCommand(
             String lowerCaseCommand, Ui ui, QuestionsList questionsList,
             TopicList topicList, QuestionListByTopic questionListByTopic
@@ -165,15 +184,27 @@ public class Parser {
             if (questionNum < 1 || questionNum > qnList.getSize()) {
                 throw new CustomException(("No such question"));
             }
-
             if (isSolutionCommand) {
                 String solution = qnList.getOneSolution(questionNum);
-                ui.printOneSolution(questionNum, solution);
+                if (topicList.get(topicNum - 1).hasAttempted) {
+                    assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
+                    assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
+                    ui.printOneSolution(questionNum, solution);
+                } else {
+                    ui.printNoSolutionAccess();
+                }
                 return;
             } // only runs if explanation
             assert typeOfCommand.contentEquals("explain") : "typeOfCommand should be explain";
             String explanation = qnList.getOneExplanation(questionNum);
-            ui.printOneSolution(questionNum, explanation);
+            if (topicList.get(topicNum - 1).hasAttempted) {
+                assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
+                assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
+                ui.printOneSolution(questionNum, explanation);
+            } else {
+                ui.printNoSolutionAccess();
+            }
+
 
         } catch (NumberFormatException e) {
             // if parameter is a String
@@ -188,7 +219,6 @@ public class Parser {
             String allSolutions = qnList.getAllSolutions();
             ui.printAllSolutions(allSolutions);
         }
-
     }
 
     public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,
