@@ -61,8 +61,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
     public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
-        String validDateRegex = "^\\d{2}-\\d{2}-\\d{4}$";
-        if (!date.matches(validDateRegex)) {
+        if (!date.matches(UiConstant.VALID_DATE_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_DATE_ERROR);
         }
         String[] parts = date.split(UiConstant.DASH);
@@ -189,9 +188,8 @@ public class Parser {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
         // checks whether input number is 2dp
-        String twoDecimalPlaceRegex = "^\\d+\\.\\d{2}$";
-        if (!bmiDetails[0].matches(twoDecimalPlaceRegex) ||
-                !bmiDetails[1].matches(twoDecimalPlaceRegex)) {
+        if (!bmiDetails[0].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX) ||
+                !bmiDetails[1].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.HEIGHT_WEIGHT_INPUT_ERROR);
         }
         validateDateInput(bmiDetails[2]);
@@ -328,8 +326,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegex = "^\\d{2}:\\d{2}$";
-        if (!time.matches(validTimeRegex)) {
+        if (!time.matches(UiConstant.VALID_TIME_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_TIME_ERROR);
         }
         String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
@@ -351,10 +348,8 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateRunTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegexWithHours = "^\\d{2}:\\d{2}:\\d{2}$";
-        String validTimeRegex = "^\\d{2}:\\d{2}$";
-        if (!time.matches(validTimeRegex) &&
-                !time.matches(validTimeRegexWithHours)) {
+        if (!time.matches(UiConstant.VALID_TIME_REGEX) &&
+                !time.matches(UiConstant.VALID_TIME_WITH_HOURS_REGEX)) {
             throw new CustomExceptions.InvalidInput("Invalid time format. " +
                     "Format is HH:MM:SS or MM:SS with integers");
         }

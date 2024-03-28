@@ -18,6 +18,12 @@ public class UiConstant {
     public static final String PARTITION_LINE = "____________________________________________________________";
     public static final String EMPTY_STRING = "";
 
+    // Regex
+    public static final String VALID_DATE_REGEX = "^\\d{2}-\\d{2}-\\d{4}$";
+    public static final String VALID_TWO_DP_NUMBER_REGEX = "^\\d+\\.\\d{2}$";
+    public static final String VALID_TIME_REGEX = "^\\d{2}:\\d{2}$";
+    public static final String VALID_TIME_WITH_HOURS_REGEX = "^\\d{2}:\\d{2}:\\d{2}$";
+
 
     // PulsePilot UI replies
     public static final String EXIT_MESSAGE = "Initiating PulsePilot landing sequence...";
