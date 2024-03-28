@@ -72,7 +72,7 @@ Format: `display MAJOR_NAME`
 ### Adding a course to course plan: `add course`
 Adds a new course to the course plan at the term specified.
 
-Format: `add course COURSE_CODE y/YEAR t/TERM m/MCS`
+Format: `add course COURSE_CODEy/YEARt/TERM{m/MCS}`
 - YEAR represents the year of study of the user. 
   It must be a positive integer from 1 to 6, which is the maximum candidature period.
 - TERM must span from 1 to 4, with 1 and 2 representing the normal semesters, 
@@ -217,11 +217,12 @@ Format: `bye`
 - Viewing help: `help`
 - Initializing course plan: `init MAJOR_NAME`
 - Displaying recommended schedules: `display MAJOR_NAME`
-- Adding a course to course plan: `add course COURSE_CODE y/YEAR t/TERM`
+- Adding a course to course plan: `add course COURSE_CODEy/YEARt/TERM{m/MCS}`
 - Removing course from course plan: `rm course COURSE_CODE`
 - Viewing course plan: `view {y/YEAR} {t/TERM}`
 - Adding grades: `add grade COURSE_CODE GRADE`
 - Removing grades: `rm grade COURSE_CODE`
 - Changing grades: `change grade COURSE_CODE GRADE`
 - Checking grades: `check {y/YEAR} {t/TERM}`
+- Changing timetables: `change timetable TIMETABLE_INDEX`
 - Exiting the program: `bye`
