@@ -8,6 +8,12 @@ original source as well}
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Help menu feature
+#### Implementation
+The "help" feature is facilitated by the  `Help` class. 
+It provides a static method `printHelp` to print out a guide on how to use the commands in the application.
+`printHelp` can be used in the event the user issues an invalid command
+
 
 ### Group Creation feature
 
@@ -62,6 +68,8 @@ These operations are exposed in the Expense class through the `getPayerName()`, 
 ### Target user profile
 
 {Describe the target user profile}
+Our target users are people who share expenses with friends, family, roommates, or colleagues.
+The application gives an accurate and simple way to represent unsettled debts between users and their friends
 
 ### Value proposition
 
