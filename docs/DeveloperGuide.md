@@ -39,13 +39,12 @@ The file format is as follows:
 
 The PINHandler class has the following static fields:
 
-*logger*: A logger object for logging messages. 
 
-*PIN_FILE_PATH*: The path to the file where the PIN and authentication status are saved.
+- *PIN_FILE_PATH*: The path to the file where the PIN and authentication status are saved.
 
-*savedPin*: The hashed PIN saved in the file.
+- *savedPin*: The hashed PIN saved in the file.
 
-*authenticationEnabled*: A boolean flag indicating whether authentication is enabled.
+- *authenticationEnabled*: A boolean flag indicating whether authentication is enabled.
 
 <ins> Constructor </ins>
 
@@ -56,26 +55,26 @@ If the file does not exist or the savedPin is empty, it calls the createPin meth
 
 <ins> Methods </ins>
 
-*loadPinAndAuthenticationEnabled*: Loads the saved PIN and authentication enabled status from the file.
+- *loadPinAndAuthenticationEnabled*: Loads the saved PIN and authentication enabled status from the file.
 
-*savePinAndAuthenticationEnabled*: Saves the PIN and authentication enabled status to the file.
+- *savePinAndAuthenticationEnabled*: Saves the PIN and authentication enabled status to the file.
 
-*getPinFilePath*: Returns the file path of the PIN file.
+- *getPinFilePath*: Returns the file path of the PIN file.
 
-*createPin*: Prompts the user to create a new 6-digit PIN and hashes it before saving.
+- *createPin*: Prompts the user to create a new 6-digit PIN and hashes it before saving.
 
-*authenticate*: Authenticates the user by comparing the entered PIN with the saved PIN.
+- *authenticate*: Authenticates the user by comparing the entered PIN with the saved PIN.
 
-*resetPin*: Resets the PIN for the user by prompting for the current PIN and creating a new PIN if the current
+- *resetPin*: Resets the PIN for the user by prompting for the current PIN and creating a new PIN if the current
 PIN is correct.
 
-*enablePin*: Enables authentication upon startup.
+- *enablePin*: Enables authentication upon startup.
 
-*disablePin*: Disables authentication upon startup.
+- *disablePin*: Disables authentication upon startup.
 
-*getSavedPin*: Returns the saved PIN.
+- *getSavedPin*: Returns the saved PIN.
 
-*getAuthenticationStatus*: Returns the authentication status.
+- *getAuthenticationStatus*: Returns the authentication status.
 
 <ins> Usage Example </ins>
 
@@ -83,28 +82,28 @@ PIN is correct.
 
 
 Given below is an example usage scenario and how the PIN creation and authentication mechanism behaves at each step:
-```
-Step 1. The user launches the application for the first time. The PINHandler initializes, loading the saved PIN and 
+
+1. The user launches the application for the first time. The PINHandler initializes, loading the saved PIN and 
 authentication enabled status from the file. If no PIN exists, it prompts the user to create a new PIN.
 
-Step 2. The user creates a new 6-digit PIN using the createPin method. The entered PIN is hashed using SHA-256 before 
+2. The user creates a new 6-digit PIN using the createPin method. The entered PIN is hashed using SHA-256 before 
 saving it to the file.
 
-Step 3. The user closes the application and relaunches it. The PINHandler loads the saved PIN and authentication 
+3. The user closes the application and relaunches it. The PINHandler loads the saved PIN and authentication 
 enabled status from the file again.
 
-Step 4. The user attempts to log in by entering their PIN. The authenticate method hashes the entered PIN and 
+4. The user attempts to log in by entering their PIN. The authenticate method hashes the entered PIN and 
 compares it with the saved hashed PIN. If they match, the user is successfully authenticated.
 
-Step 5. The user decides to reset their PIN by entering their current PIN and creating a new one using the resetPin 
+5. The user decides to reset their PIN by entering their current PIN and creating a new one using the resetPin 
 method.
 
-Step 6. The user disables authentication upon startup using the 'pin disable' command. The authenticationEnabled flag 
+6. The user disables authentication upon startup using the 'pin disable' command. The authenticationEnabled flag 
 is set to false and saved to the file.
 
-Step 7. The user relaunches the application, and authentication is no longer required since it has been disabled. 
+7. The user relaunches the application, and authentication is no longer required since it has been disabled. 
 The user can proceed with the application and do any actions without entering a PIN.
-```
+
 * Code Snippet
 ```
 // Initialize PINHandler
