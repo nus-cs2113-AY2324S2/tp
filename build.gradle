@@ -33,7 +33,6 @@ application {
     mainClass.set("newsonthego.NewsOnTheGo")
 }
 
-
 shadowJar {
     archiveBaseName.set("newsonthego")
     archiveClassifier.set("")

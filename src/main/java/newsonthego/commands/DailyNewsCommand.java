@@ -3,11 +3,23 @@ package newsonthego.commands;
 import newsonthego.NewsArticle;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import static newsonthego.FormatDate.formatFromUser;
+import static newsonthego.ui.UI.printEmptyLine;
+import static newsonthego.ui.UI.printHeadline;
+import static newsonthego.ui.UI.printHeadlinesFound;
+import static newsonthego.ui.UI.printHeadlinesNotFound;
+
+import java.util.logging.Logger;
 
 public class DailyNewsCommand {
 
+    private static final Logger LOGGER = Logger.getLogger("NewsOnTheGo");
     public List<NewsArticle> articlesOfTheDay;
+
+    private final int dateindex = 1;
 
     /**
      * Finds articles that match the date input by the user and prints out the list
@@ -16,22 +28,31 @@ public class DailyNewsCommand {
      * @param list is the list of articles
      */
     public DailyNewsCommand(String input, List<NewsArticle> list) {
-        String[] split = input.split(" ", 2);
-        String date = split[1];
+        assert(!list.isEmpty());
+
+        String[] splitInput = input.split(" ", 2);
+        String date = splitInput[dateindex];
+
+        String formattedDate = formatFromUser(date);
+
+        if (formattedDate == null) {
+            LOGGER.log(Level.WARNING, "Invalid date format");
+            return;
+        }
 
         articlesOfTheDay = list.stream()
-                .filter(a->a.getDate().equals(date))
+                .filter(article -> article.getDate().equals(formattedDate))
                 .collect(Collectors.toList());
 
         if (articlesOfTheDay.isEmpty()) {
-            System.out.println("Nothing is found on this day: " + date);
+            printHeadlinesNotFound(date);
         } else {
-            System.out.println("Sure! Here are the headlines for today:");
-            System.out.println();
-            for (NewsArticle a : articlesOfTheDay) {
-                System.out.println(a.getHeadline());
+            printHeadlinesFound();
+            printEmptyLine();
+            for (NewsArticle article : articlesOfTheDay) {
+                printHeadline(article.getHeadline());
             }
-            System.out.println();
+            printEmptyLine();
         }
     }
 
