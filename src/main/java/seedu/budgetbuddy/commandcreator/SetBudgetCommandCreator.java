@@ -20,7 +20,8 @@ public class SetBudgetCommandCreator extends CommandCreator {
     public SetBudgetCommandCreator(ExpenseList expenses, String input){
         this.expenses = expenses;
         this.input = input;
-        this.expenseCategories = new ArrayList<>(Arrays.asList("Housing", "Groceries", "Utility", "Transport", "Entertainment", "Others"));
+        this.expenseCategories = new ArrayList<>(Arrays.asList("Housing", "Groceries", "Utility", "Transport",
+                                                                "Entertainment", "Others"));
     }
 
     private boolean isValidExpenseCategory(String category) {
