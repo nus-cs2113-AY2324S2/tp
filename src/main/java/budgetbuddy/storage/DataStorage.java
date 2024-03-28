@@ -47,8 +47,8 @@ public class DataStorage {
     private static String getStringToWrite(Transaction t) {
         LocalDate date = t.getDate();
         String stringDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        return t.getDescription() + " ," + t.getCategory().getCategoryNum() + " ," + t.getTransactionType() + " ," + stringDate
-                + " ," + t.getAmount() + "\n";
+        return t.getDescription() + " ," + t.getCategory().getCategoryNum() + " ,"
+                + t.getTransactionType() + " ," + stringDate + " ," + t.getAmount() + "\n";
     }
 
     private Transaction processData(String s, Account account) {
