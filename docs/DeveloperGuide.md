@@ -23,8 +23,8 @@
 ## Setting up, getting started
 
 ## Design
-# Design
 
+# Design
 
 ### Architecture
 
@@ -46,6 +46,7 @@ The bulk of the app's work is done by the following five components:
 The **Sequence Diagram** below shows how the components interact with each other for the scenario where the user issues the command `list`.
 
 ![Sequence Diagram](images/OverallSequenceDiagram.png)
+
 #### Figure 2: Architecture Encode Sequence Diagram
 
 1. User enters the command `list` to the `Ui`.
@@ -60,7 +61,6 @@ The **Sequence Diagram** below shows how the components interact with each other
 10. `BinBash` calls the `talk()` method in `Ui`, and passes the outputString.
 11. `Ui` prints this outputString to the user.
 12. If the `Command` executed modifies the database, `BinBash` will call the `saveToStorage()` method of `Storage`
-
 
 ### Data Component
 
@@ -115,6 +115,8 @@ Note the use of an externally provided `LineReader` object in the `TextIn` class
 
 3. Contextual help menus
 
+
+
 This allows us to overload options on a small number of commands to provide full functionality of the application. Developers can then extend its features without also the worry of finding a way for users to access those features easily.
 
 ### Yi Hao
@@ -129,7 +131,21 @@ This allows us to overload options on a small number of commands to provide full
 
 ### Jun Han
 
-### Kota
+### [Proposed] Search by universal fields
+
+#### Proposed Implementation
+
+This feature redefines our current Search command to allow searching by attributes of class `Item` and not just its name. An example usage scenario is as such:
+
+The user executes the following
+
+```console
+$ search -d battery -e 2w --match 3
+```
+
+The arguments are then parsed in turn, stored in the filter for the method *SearchItem()* in `ItemList` and filtered to return an ArrayList of at most *match* items.
+
+This return value can be printed to the user as per pre-existing *print()* methods.
 
 ### Yi Hao
 
