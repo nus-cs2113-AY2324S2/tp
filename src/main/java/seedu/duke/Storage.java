@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.ui.UI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +13,8 @@ import static seedu.duke.Parser.DAYS;
 /**
  * Represents a storage manager that deals with loading tasks from the file and saving tasks in the file.
  */
+
+
 public class Storage {
     public static String filePath;
 
@@ -23,6 +27,7 @@ public class Storage {
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
+
 
     public static void createFolder() {
         String folderPath = "data";
@@ -57,7 +62,7 @@ public class Storage {
                 }
             }
         } else {
-            System.out.println("Directory is empty.");
+            UI.printEmptyDirectory();
         }
 
     }
@@ -76,12 +81,11 @@ public class Storage {
                 day = line.substring(1, line.length() - 1).trim();
                 continue;
             }
-            user.getTimetable().getWeeklyTasks().get(day).add(extractTaskInfo(line, day));
+            user.getTimetable().addUserTask(day, extractTaskInfo(line, day));
         }
     }
     public static void addUserInFolder() {
         File f = new File(filePath);
-        String day = "";
         try {
             if (f.createNewFile()) {
                 System.out.println("File created: " + f.getName());

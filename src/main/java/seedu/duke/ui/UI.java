@@ -47,7 +47,7 @@ public class UI {
         System.out.println("The following task is added for all users: " + task.toString());
     }
 
-    public static void printLine() {
-        System.out.println("____________________________________________________________");
+    public static void printEmptyDirectory() {
+        System.out.println("Directory is empty.");
     }
 }
