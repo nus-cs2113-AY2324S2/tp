@@ -155,6 +155,7 @@ public class UserInterface {
         String date = in.next();
         System.out.print( TAB_SPACE + "Enter transaction amount: " );
         String amount = in.next();
+        System.out.println(" ");
         for(Category category : Category.values()) {
             System.out.println(TAB_SPACE + TAB_SPACE + category.getCategoryName() + ": " + category.getCategoryNum());
         }
