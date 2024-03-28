@@ -40,6 +40,14 @@ public class FileSave {
                     landmark.setActivityStatus(true);
                 }
                 break;
+            case "general":
+                TravelActivity newActivity = new TravelActivity(line[2], LocalDate.parse(line[3]), line[4]);
+                list.addTravelActivity(newActivity);
+                if(line[1].equals(" 1 ")){
+                    newActivity.setActivityStatus(true);
+                }
+                break;
+
             default:
                 throw new FileNotFoundException("File is corrupted or has invalid format");
             }
@@ -55,6 +63,8 @@ public class FileSave {
                 fw.write("food / ");
             } else if (travelActivity instanceof Landmark) {
                 fw.write("landmark / ");
+            } else {
+                fw.write("general / ");
             }
             fw.write((travelActivity.getActivityStatus() ? "1 / " : "0 / ") + travelActivity.getPlan()
                     + " / " + travelActivity.getDate()
