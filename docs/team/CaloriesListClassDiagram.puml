@@ -1,0 +1,37 @@
+@startuml
+
+class LifeTrack {
+    + main(args: String[]): void
+}
+
+package ui {
+    class Ui {
+        + readUserInput(calorieList: calories.CalorieList, hydrationList: hydration.HydrationList, user: user.User, sleepList: sleep.SleepList): void
+        + handleCaloriesInput(line: String, calorieList: calories.CalorieList): void
+    }
+}
+
+package calories {
+    package calorielist {
+        class CalorieList {
+            - ArrayList<Entry> calorieArrayList
+            + printCalorieList(): void
+        }
+
+        class CalorieListUi {
+            + calorieListHeader(): void
+            + emptyListMessage(): void
+        }
+    }
+}
+
+
+
+LifeTrack --> calories.calorielist.CalorieList
+LifeTrack -[dotted]-> ui.Ui
+ui.Ui -[dotted]-> calories.calorielist.CalorieList
+CalorieList -[dotted]-> CalorieListUi
+
+@enduml
+
+
