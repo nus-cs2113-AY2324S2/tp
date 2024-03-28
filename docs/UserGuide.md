@@ -38,9 +38,9 @@ Example of usage:
 - Logs the quantity of water consumed.
 - Tracks progress towards a customizable water intake goal.
 
-Format: `log w/VOLUME_OF_WATER`
+Format: `log w/<AMOUNT_OF_WATER>`
 
-* The `VOLUME_OF_WATER` can be volume of water intake in ml.
+* The `<AMOUNT_OF_WATER>` can be volume of water intake in ml.
 
 Example of usage:
 
@@ -50,15 +50,15 @@ Example of usage:
 - Sets the daily water intake and calorie intake goal.
 - Displays current calorie and water intake goals.
 
-Format: `set goal c/CALORIE_GOAL`/ `set goal w/WATER_GOAL`/ `show goals`
+Format: `set goal c/<CALORIE_GOAL>`/ `set goal w/<WATER_GOAL>`/ `show goals`
 
-* The `CALORIE_GOAL` can be calorie goal for the day.
-* The `WATER_GOAL` can be water goal for the day
+* The `<CALORIE_GOAL>` can be calorie goal for the day.
+* The `<WATER_GOAL>` can be water goal for the day
 
 Example of usage:
 
 `set goal c/1000`
-`set goal w/WATER_GOAL`
+`set goal w/2000`
 `show g`
 
 ## FAQ ❓
@@ -82,17 +82,19 @@ important to be careful when using the delete command.
 
 Here's a quick summary of commands available in ActiveEdge:
 
-* Log meals: `log m/FOOD s/NUMBER_OF_SERVINGS`
-* View daily calories: `show c`
-* Log water: `log w/VOLUME_OF_WATER`
-* View water intake: `show w`
-* Set daily calorie goal: `set goal c/CALORIE_GOAL`
-* Set daily water goal: `set goal w/WATER_GOAL`
+* Set daily calorie goal: `set goal c/<CALORIE_GOAL>`
+* Set daily water goal: `set goal w/<WATER_GOAL>`
 * View goals: `show g`
-* Log exercise: `log e/EXERCISE_NAME d/DURATION`
-* View exercises: `list exercises`
+* Log meals: `log m/<MEAL_NAME> s/<SERVINGS>`
+* View daily calories: `show c`
+* View entries for logged meals: `list meals`
+* Log water: `log w/<AMOUNT_OF_WATER>`
+* View water intake: `show w`
+* View entries for logged water: `list water`
+* Log exercise: `log e/<EXERCISE_NAME> d/<DURATION>`
+* View entries for logged exercises: `list exercises`
+* View all entries logged: `list`
 * Help: `help`
-* Find: `find "keyword"`
-* Delete items from list: `delete "Quanity of water/Food name`
-* List calorie and water intake: `list`
+* Find: `find <KEYWORD>`
+* Delete items from list: `delete <AMOUNT_OF_WATER>/<MEAL_NAME>`
 * Clear: `clear`

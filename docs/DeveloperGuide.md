@@ -63,11 +63,14 @@ in achieving their fitness objectives while navigating the challenges of univers
 | v1.0    |new user|see usage instructions of the app|refer to them when I forget how to use the application|
 | v1.0    |returning user|see my previous logs|see my daily logs and progress|
 | v1.0    |user|log calorie intake|record daily consumption to monitor deitary habits|
-|v1.0| user|Log water intake|Track hydration levels throughout the day|
-|v2.0|user|Search for keywords|Quickly find specific information or entries within logs|
-|v2.0|user|	Delete entries from log|	Remove incorrect or unnecessary data from records|
+| v1.0    | user|Log water intake|Track hydration levels throughout the day|
+| v2.0    |user|Search for keywords|Quickly find specific information or entries within logs|
+| v2.0    |user|	Delete entries from log|	Remove incorrect or unnecessary data from records|
 | v2.0    |user|log exercises|keep track of my physical activities|
-|v2.0|user|View daily summary|Access a summary of exercise, nutrition, and hydration for the day|
+| v2.0    |user|View daily summary|Access a summary of exercise, nutrition, and hydration for the day|
+| v2.0    |new user|log in my height and weight|see what range my weight is in|
+
+
 
 
 ## Non-Functional Requirements
@@ -84,9 +87,24 @@ in achieving their fitness objectives while navigating the challenges of univers
 
 ## Command Summary
 
-| Action                       | Format                                  |
-|------------------------------|-----------------------------------------|
-| Getting help                 | `help`                                  |
-| Adding entries for meals     | `log m/<MEAL_NAME> s/<SERVINGS>`        |
-| Adding entries for water     | `log w/<AMOUNT_OF_WATER>`               |
-| Adding entries for exercises | `exercise <EXERCISE_NAME> d/<DURATION>` |
+| Action                                | Format                                  |
+|---------------------------------------|-----------------------------------------|
+| Setting daily calories goal           | `set goal c/<CALORIE AMOUNT>`           |
+| Setting daily water goal              | `set goal w/<WATER AMOUNT>`             |
+| View daily calorie goal               | `show c`                                |
+| View daily water goal                 | `show w`                                |
+| View daily goals                      | `show g`                                |
+| Adding entries for meals              | `log m/<MEAL_NAME> s/<SERVINGS>`        |
+| Adding entries for water              | `log w/<AMOUNT_OF_WATER>`               |
+| Adding entries for exercises          | `exercise <EXERCISE_NAME> d/<DURATION>` |
+| View all entries for meals logged     | `list meals`                            |
+| View all entries for water logged     | `list water`                            |
+| View all entries for exercises logged | `list exercises`                        |
+| View all entries logged               | `list`                                  |
+| Getting help                          | `help`                                  |
+| Find entries that contain the keyword | `find <KEYWORD>`                        |
+| Prints all food data                  | `show food`                             |
+| Prints all exercise data              | `show exercises`                        |
+| Deletes the water/meal entry          | `delete <AMOUNT_OF_WATER>/<MEAL_NAME>`  |
+| Clears all entry                      | `clear`                                 |
+
