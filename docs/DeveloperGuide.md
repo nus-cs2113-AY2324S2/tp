@@ -29,6 +29,50 @@ and extract all the details of each transaction.
 This feature will be further enhanced to include options to view transactions that the user is interested in only. For
 example, transactions of the past week, past month, specified date range.
 
+### [Implemented] Category feature
+
+#### Description
+
+The Category feature empowers users to effectively categorize transactions based on their preferences. When initiating a
+new transaction through the `Add` command, users are prompted to select a category from a predefined list. This ensures
+organized and streamlined transaction management.
+
+#### Design and Implementation
+
+The implementation of the Category feature revolves around the integration of a `category` attribute within each
+transaction object. This attribute is defined as a member of the `Category` enum class.
+
+Upon invoking the `Add` command, users are presented with a selection prompt featuring the available categories. User
+input, typically in the form of a numerical identifier corresponding to a category within the enum class, facilitates
+the assignment of the appropriate enum object to the transaction's category attribute.
+
+
+### [Implemented] Remove transaction
+#### Description
+This method is used to remove a transaction from the list of transactions based on the transaction ID provided
+by the user. After the transaction is removed, the account balance is updated accordingly and a message is 
+displayed to the user indicating the success of the operation. This helps user to remove the transaction 
+from the list they added by mistake or those transactions they no longer need to keep track off.
+
+#### Parameters
+1. String input: A string containing the user input, which should include the transaction ID to be removed.
+2. Account account: The account object associated with the transaction list.
+
+#### Design and Implementation
+The method first validates the user input to ensure it's not empty or null. If the input is invalid, it throws
+an EmptyArgumentException. Next, it extracts the transaction ID from the input and verifies its integrity as a
+valid integer. If the ID is invalid, a NumberFormatException is thrown.
+
+Once a valid transaction ID is obtained, the method calculates its corresponding index in the transactions 
+ArrayList by subtracting 1 from the provided ID, as ArrayList indices start from 0 . It then verifies
+if the calculated index falls within the bounds of the ArrayList. If the index is out of bounds, an 
+InvalidIndexException is thrown.
+
+Upon successful validation, the method removes the transaction at the calculated index from the transactions
+ArrayList. Subsequently, it updates the account balance to reflect the removed transaction. Finally, it 
+notifies the user of the successful removal along with displaying the details of the removed transaction.
+
+
 ## Product scope
 ### Target user profile
 
