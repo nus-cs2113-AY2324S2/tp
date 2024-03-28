@@ -19,29 +19,29 @@ public class ParserTest {
     private final Parser testParser = new Parser();
     private String testInput;
     @Test
-    public void parseCommand_helpCommand_success()
+    public void parseInput_helpCommand_success()
             throws InvalidCommandException, InvalidFormatException, UnsignedIntegerExceededException {
         testInput = "help";
-        assertEquals(HelpCommand.class, testParser.parseCommand(testInput).getClass());
+        assertEquals(HelpCommand.class, testParser.parseInput(testInput).getClass());
     }
     @Test
-    public void parseCommand_listCommand_success()
+    public void parseInput_listCommand_success()
             throws InvalidCommandException, InvalidFormatException, UnsignedIntegerExceededException {
         testInput = "list";
-        assertEquals(ListCommand.class, testParser.parseCommand(testInput).getClass());
+        assertEquals(ListCommand.class, testParser.parseInput(testInput).getClass());
     }
     @Test
-    public void parseCommand_exitCommand_success()
+    public void parseInput_exitCommand_success()
             throws InvalidCommandException, InvalidFormatException, UnsignedIntegerExceededException {
         testInput = "exit";
-        assertEquals(ExitCommand.class, testParser.parseCommand(testInput).getClass());
+        assertEquals(ExitCommand.class, testParser.parseInput(testInput).getClass());
     }
 
     @Test
-    public void parseCommand_newCommandWithoutPriceWithoutDescription_success() {
+    public void parseInput_newCommandWithoutPriceWithoutDescription_success() {
         try {
             testInput = "new n/Test name q/123";
-            Command command = testParser.parseCommand(testInput);
+            Command command = testParser.parseInput(testInput);
             assertEquals(NewCommand.class, command.getClass());
         } catch (InvalidCommandException | InvalidFormatException | UnsignedIntegerExceededException e) {
             fail();
@@ -49,20 +49,20 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_newCommandWithPriceWithoutDescription_success() {
+    public void parseInput_newCommandWithPriceWithoutDescription_success() {
         try {
             testInput = "new n/Test name q/123 p/4.56";
-            Command command = testParser.parseCommand(testInput);
+            Command command = testParser.parseInput(testInput);
             assertEquals(NewCommand.class, command.getClass());
         } catch (InvalidCommandException | InvalidFormatException | UnsignedIntegerExceededException e) {
             fail();
         }
     }
     @Test
-    public void parseCommand_newCommandWithoutPriceWithDescription_success() {
+    public void parseInput_newCommandWithoutPriceWithDescription_success() {
         try {
             testInput = "new n/Test Name q/123 d/Test description";
-            Command command = testParser.parseCommand(testInput);
+            Command command = testParser.parseInput(testInput);
             assertEquals(NewCommand.class, command.getClass());
         } catch (InvalidCommandException | InvalidFormatException | UnsignedIntegerExceededException e) {
             fail();
@@ -70,10 +70,10 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_newCommandWithPriceWithDescription_success() {
+    public void parseInput_newCommandWithPriceWithDescription_success() {
         try {
             testInput = "new n/Test Name q/123 p/4.56 d/test description";
-            Command command = testParser.parseCommand(testInput);
+            Command command = testParser.parseInput(testInput);
             assertEquals(NewCommand.class, command.getClass());
         } catch (InvalidCommandException | InvalidFormatException | UnsignedIntegerExceededException e) {
             fail();
@@ -81,14 +81,14 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_newCommandWithoutName_invalidFormatExceptionThrown() {
+    public void parseInput_newCommandWithoutName_invalidFormatExceptionThrown() {
         testInput = "new q/123 p/4.56 d/Test description";
-        assertThrows(InvalidFormatException.class, () -> testParser.parseCommand(testInput));
+        assertThrows(InvalidFormatException.class, () -> testParser.parseInput(testInput));
     }
 
     @Test
-    public void parseCommand_newCommandWithoutQuantity_invalidFormatExceptionThrown() {
+    public void parseInput_newCommandWithoutQuantity_invalidFormatExceptionThrown() {
         testInput = "new n/Test Name p/4.56 d/Test description";
-        assertThrows(InvalidFormatException.class, () -> testParser.parseCommand(testInput));
+        assertThrows(InvalidFormatException.class, () -> testParser.parseInput(testInput));
     }
 }

@@ -66,6 +66,17 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the Parser Component](images/ParserClassDiagram.png)
 
+How the parsing works:
+1. When user inputs, the input is passed to the `Parser`.
+2. `Parser` first extracts the command.
+3. Using the extracted command, `Parser` will perform different validation checks on the arguments supplied in the
+input.
+4. Arguments (mainly the `pid`, `name`, `quantity`, `price`, `description`, `amount` fields) are validated. 
+Exceptions are thrown when the fields do not pass their respective type checks.
+5. Once validation passes, `Parser` uses the validated arguments to creates an instance of that particular command. 
+For example, a `delete` command will cause `Parser` to create a new instance of `DeleteCommand(pid)`.
+6. The created command object is returned back to `main` function for further processing.
+
 ### Commands component
 
 **API** : [`Command.java`](https://github.com/AY2324S2-CS2113T-T09-3/tp/blob/master/src/main/java/seedu/stockpal/commands/Command.java)
