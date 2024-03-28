@@ -1,9 +1,26 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+   ______   _  _________
+ .' ___  | (_)|  _   _  |
+/ .'   \_| __ |_/ | | \_|
+| |   ____[  |    | |
+\ `.___]  || |   _| |_
+ `._____.'[___] |_____|
 
+Hello from GiT
 What is your name?
-Hello James Gosling
+- - - - -
+Hello James Gosling!
+Here are some ways you can use this app!
+add GROCERY: adds the item GROCERY.
+exp GROCERY d/EXPIRATION_DATE: edits the expiration date for GROCERY.
+amt GROCERY a/AMOUNT: sets the amount of GROCERY.
+use GROCERY a/AMOUNT: updates the total amount after using a GROCERY
+cost GROCERY $PRICE: updates the price of GROCERY.
+del GROCERY: deletes GROCERY.
+list: shows list of all groceries you have.
+listC: shows the list sorted by price.
+exit: exits the program.
+help: view all the possible commands.
+Enter command:
+- - - - -
+bye bye!
+- - - - -
