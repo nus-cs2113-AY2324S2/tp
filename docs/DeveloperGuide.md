@@ -37,6 +37,8 @@ functions.
 
 ## Instructions for manual testing
 
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
 - To find all travel plans with the same keyword
 
 Example: find rvrc
@@ -58,5 +60,23 @@ Here are what you are looking for:
 2. Food: kfc :12 Dec 2024 :1 hour
 ____________________________________________________________
 
+- To tag a travel plan
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Example: tag 2 activity 1
+
+Result:
+____________________________________________________________
+I have tagged this task: 
+Visit museum (activity 1)
+____________________________________________________________
+
+- To untag a travel plan
+
+Example: untag 2
+
+Result:
+____________________________________________________________
+Tag removed from the task:
+Visit museum
+____________________________________________________________
+
