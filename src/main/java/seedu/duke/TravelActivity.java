@@ -14,6 +14,9 @@ public class TravelActivity {
     private boolean activityIsDone = false;
     /** Travel activity tag */
     private String tag;
+    /** Travel activity expense */
+    private String expense;
+
 
     public TravelActivity(String description, LocalDate date, String duration, String tag){
         travelActivity = description;
@@ -77,6 +80,22 @@ public class TravelActivity {
 
     public String getDuration(){
         return duration;
+    }
+
+    /**
+     * Gets the expense of the travel activity
+     * @return The tag of the travel activity
+     */
+    public String getExpense() {
+        return expense;
+    }
+
+    public void setExpense(String expense) {
+        this.expense = expense;
+    }
+
+    public void removeExpense() {
+        this.expense = "";
     }
 
 }
