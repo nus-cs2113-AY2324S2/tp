@@ -1,4 +1,4 @@
-# Duke
+# Wellness360
 
 {Give product intro here}
 

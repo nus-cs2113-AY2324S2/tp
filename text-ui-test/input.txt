@@ -1,1 +1,7 @@
-James Gosling
+sleep add 7 /date 22/12/2022
+sleep add 8 /date 23/12/2022
+sleep list
+sleep get 23/12/2022
+sleep update 23/12/2022 /new 5.5
+sleep list
+exit
