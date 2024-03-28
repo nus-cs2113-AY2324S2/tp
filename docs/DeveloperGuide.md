@@ -132,6 +132,35 @@ The ListCommand is concerned only with the execution of the listing operation. I
 
 ### Jun Han
 
+### Delete Item
+
+TODO: Sequence diagram of DeleteCommand
+
+The `delete` command deletes an object of the `Item` class or any of its subclasses from the inventory list and 
+prints a formatted message stating the details of the items that was deleted. 
+
+The constructor of the `DeleteCommand` class is overloaded and its behavior differs based on what search parameter is 
+entered. 
+* If the search parameter is an `Integer` it indicates that an item should be removed by matching its `index` and 
+the `isIndex` variable is set to true.
+* If the search parameter is a `String` it indicates that an item should be removed by matching its `name` and 
+the `isIndex` variable is set to false.
+
+When the `execute()` method from `DeleteCommand` class is called, it first checks whether the search parameter entered
+is an `Integer` or a `String` using the `isIndex` variable. Once the search parameter is checked, it calls the
+`deleteItem` method of the `ItemList` object passed as a parameter to the `execute()` method.
+
+Similar to the `DeleteCommand` constructor, the `deleteItem` method of the `ItemList` class has different behaviors 
+based on the data type of the parameter passed. The implementation is done by overloading the `deleteItem` method and
+having one `deleteItem` method take in an `Integer` and another taking in a `String`.
+* If the parameter is an `Integer`, the `deleteItem` method will call the `remove` method of the `ArrayList` class to
+remove the item from the inventory list.
+* If the parameter is a `String`, the `deleteItem` method will run a `for` loop to iterate through the `ArrayList`
+until it finds a `Item` object whose name `equals` to that of the search parameter. If an `Item` object has matching
+names with the search parameter, it will store the index in the `targetIndex` variable. The `deleteItem` method will
+then call another `deleteItem` method, but this time, the parameter passed is an integer. The execution after this
+will be exactly the same as passing an `Integer` to the `deleteItem` method mentions above.
+
 ### UI
 
 API: [`Ui.java`](../src/main/java/seedu/binbash/ui/Ui.java)
