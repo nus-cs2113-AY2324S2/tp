@@ -1,0 +1,43 @@
+@startuml
+
+autonumber
+
+participant Main
+participant Scanner
+participant FitnessMotivator
+participant Parser
+participant FitnessCommandParser
+participant PlaceholderFitnessCommand
+
+activate Main
+
+create Scanner
+Main -> Scanner
+activate Scanner
+
+create FitnessMotivator
+Main -> FitnessMotivator
+activate FitnessMotivator
+
+loop until isExit
+
+    Main -> Scanner: nextLine()
+    Scanner --> Main: userInput
+    Main -> Parser: userInput
+    alt userInput is FitnessCommand
+        Parser -> FitnessCommandParser: determineFitnessCommand()
+        alt command is PlaceholderFitnessCommand
+            create PlaceholderFitnessCommand
+            FitnessCommandParser -> PlaceholderFitnessCommand: command, params
+            activate PlaceholderFitnessCommand
+            PlaceholderFitnessCommand --> FitnessCommandParser: command object
+            FitnessCommandParser --> Parser: command object
+            Parser --> Main: command object
+            Main -> PlaceholderFitnessCommand: execute()
+            PlaceholderFitnessCommand -> FitnessMotivator: execute()
+            destroy PlaceholderFitnessCommand
+        end
+    end
+end
+
+@enduml
