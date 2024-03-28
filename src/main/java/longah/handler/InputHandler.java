@@ -59,6 +59,10 @@ public class InputHandler {
         case "help":
             return new HelpCommand(commandString, taskExpression);
             
+        case "group":
+            // Fallthrough
+        case "chart":
+            throw new LongAhException(ExceptionMessage.COMMAND_NOT_IMPLEMENTED);
         default:
             throw new LongAhException(ExceptionMessage.INVALID_COMMAND);
         }

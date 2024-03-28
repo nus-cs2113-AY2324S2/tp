@@ -115,6 +115,8 @@ Personal Identification Number (PIN) used for authentication in the LongAh appli
 securely store and compare PINs. The PINHandler class interacts with the StorageHandler class to save and load the PIN 
 and authentication status.
 
+Note: PIN is enabled by default and needs to be set upon first startup.
+
 <ins>Implementation Details </ins>
 
 *Data Storage:*
