@@ -1,9 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+_______________________________________
+_______________________________________
 
-What is your name?
-Hello James Gosling
+Welcome to BookMarked, a one-stop app for all your librarian needs!
+To get started, you can type /help to see a list of commands!
+
+_______________________________________
+_______________________________________
+
+
+_______________________________________
+
+These are the current available features and the format that you need
+to follow to use it in using this software:
+1. To add books
+   add NAME_OF_BOOK
+2. To delete current existing book
+   delete NUMBER_ACCORDING_TO_LIST
+3. To mark book as borrowed
+   borrow NAME_OF_BOOK
+4. To unmark book as returned
+   return NAME_OF_BOOK
+5. To list all the books added
+   list
+6. To list all the books added in alphabetical order
+   list alphabetical
+
+_______________________________________
+_______________________________________
+
+Bye!
