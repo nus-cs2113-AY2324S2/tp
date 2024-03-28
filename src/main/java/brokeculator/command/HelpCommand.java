@@ -25,7 +25,9 @@ public class HelpCommand extends Command {
             + System.lineSeparator()
             + "\t10. addExpenseToEvent /exi <expense index> /evi <event index> - adds an expense to an event"
             + System.lineSeparator()
-            + "\t11. exit - exits the application"
+            + "\t11. deleteExpenseFromEvent /i <expense index> - deletes an expense from an event"
+            + System.lineSeparator()
+            + "\t12. exit - exits the application"
             + System.lineSeparator()
             + "Notes about the command format:" + System.lineSeparator()
             + "\t1. <word> are to be provided by the user without the <>" + System.lineSeparator()
