@@ -2,7 +2,7 @@ package byteceps;
 
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
-import byteceps.processing.TrackedWorkoutsManager;
+import byteceps.processing.WorkoutLogsManager;
 import byteceps.processing.ExerciseManager;
 import byteceps.processing.WorkoutManager;
 import byteceps.processing.WeeklyProgramManager;
@@ -15,7 +15,7 @@ public class ByteCeps {
     private static ExerciseManager exerciseManager = null;
     private static WorkoutManager workoutManager = null;
     private static WeeklyProgramManager weeklyProgramManager = null;
-    private static TrackedWorkoutsManager trackedWorkoutsManager = null;
+    private static WorkoutLogsManager workoutLogsManager = null;
     private static Parser parser;
     private static UserInterface ui;
     private static Storage storage;
@@ -24,8 +24,8 @@ public class ByteCeps {
     public ByteCeps() {
         exerciseManager = new ExerciseManager();
         workoutManager = new WorkoutManager(exerciseManager);
-        trackedWorkoutsManager = new TrackedWorkoutsManager();
-        weeklyProgramManager = new WeeklyProgramManager(exerciseManager, workoutManager, trackedWorkoutsManager);
+        workoutLogsManager = new WorkoutLogsManager();
+        weeklyProgramManager = new WeeklyProgramManager(exerciseManager, workoutManager, workoutLogsManager);
         ui = new UserInterface();
         parser = new Parser();
         storage = new Storage(FILE_PATH);
@@ -68,9 +68,9 @@ public class ByteCeps {
     public void run() {
         ui.printWelcomeMessage();
         try {
-            storage.load(exerciseManager, workoutManager, weeklyProgramManager, trackedWorkoutsManager);
+            storage.load(exerciseManager, workoutManager, weeklyProgramManager, workoutLogsManager);
             commandLine();
-            storage.save(exerciseManager, workoutManager, weeklyProgramManager, trackedWorkoutsManager);
+            storage.save(exerciseManager, workoutManager, weeklyProgramManager, workoutLogsManager);
         } catch (IOException e) {
             UserInterface.printMessage(String.format("Error: %s", e.getMessage()));
         }

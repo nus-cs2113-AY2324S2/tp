@@ -149,11 +149,11 @@ class WorkoutManagerTest {
         assertDoesNotThrow(() -> workoutManager.execute(parser));
 
         workoutManager.executeListAction();
-        String expectedOutput = "[ByteCeps]> Added Workout Plan: LegDay\n" +
+        String expectedOutput = "[BYTE-CEPS]> Added Workout Plan: LegDay\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Added Workout Plan: ArmDay\n" +
+                "[BYTE-CEPS]> Added Workout Plan: ArmDay\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Listing Workouts:\n" +
+                "[BYTE-CEPS]> Listing Workouts:\n" +
                 "\t\t\t1. LegDay\n" +
                 "\t\t\t2. ArmDay\n" +
                 "\n" +
@@ -190,7 +190,7 @@ class WorkoutManagerTest {
 
         setUpStreams();
         assertDoesNotThrow(() -> workoutManager.execute(parser));
-        String expectedOutput = "[ByteCeps]> Listing exercises in workout plan 'LegDay':\n" +
+        String expectedOutput = "[BYTE-CEPS]> Listing exercises in workout plan 'LegDay':\n" +
                 "\t\t\t1. Squat\n" +
                 "\t\t\t2. lunges\n" +
                 "-------------------------------------------------\n";
@@ -220,9 +220,9 @@ class WorkoutManagerTest {
         parser.parseInput(searchInput);
         assertDoesNotThrow(() -> workoutManager.execute(parser));
 
-        String expectedOutput = "[ByteCeps]> Added Workout Plan: LegDay\n" +
+        String expectedOutput = "[BYTE-CEPS]> Added Workout Plan: LegDay\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> SearchResults:\n" +
+                "[BYTE-CEPS]> SearchResults:\n" +
                 "\t\t\t1. LegDay\n" +
                 "\n" +
                 "-------------------------------------------------\n";
@@ -241,7 +241,7 @@ class WorkoutManagerTest {
         parser.parseInput(searchInput);
         assertDoesNotThrow(() -> workoutManager.execute(parser));
 
-        String expectedOutput = "[ByteCeps]>Noresultsfound\n" +
+        String expectedOutput = "[BYTE-CEPS]>Noresultsfound\n" +
                 "\n" +
                 "-------------------------------------------------\n";
 

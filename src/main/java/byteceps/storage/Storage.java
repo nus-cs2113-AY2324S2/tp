@@ -4,7 +4,7 @@ import byteceps.activities.Exercise;
 import byteceps.activities.Workout;
 import byteceps.errors.Exceptions;
 import byteceps.processing.ExerciseManager;
-import byteceps.processing.TrackedWorkoutsManager;
+import byteceps.processing.WorkoutLogsManager;
 import byteceps.processing.WeeklyProgramManager;
 import byteceps.processing.WorkoutManager;
 import byteceps.ui.UserInterface;
@@ -30,12 +30,12 @@ public class Storage {
     }
 
     public void save(ExerciseManager allExercises, WorkoutManager allWorkouts,
-                     WeeklyProgramManager weeklyProgram, TrackedWorkoutsManager trackedWorkoutsManager)
+                     WeeklyProgramManager weeklyProgram, WorkoutLogsManager workoutLogsManager)
             throws IOException {
         JSONObject jsonArchive = new JSONObject().put("exerciseManager", allExercises.getActivityList().toArray());
         jsonArchive.put("workoutManager", allWorkouts.getActivityList().toArray());
         jsonArchive.put("weeklyProgram", weeklyProgram.exportToJSON());
-        jsonArchive.put("trackedWorkoutsManager", trackedWorkoutsManager.exportToJSON());
+        jsonArchive.put("WorkoutLogManager", workoutLogsManager.exportToJSON());
 
         FileWriter fileWriter = new FileWriter(filePath.toFile());
         fileWriter.write(jsonArchive.toString());
@@ -45,7 +45,7 @@ public class Storage {
     }
 
     public void load(ExerciseManager allExercises, WorkoutManager allWorkouts,
-                     WeeklyProgramManager weeklyProgram, TrackedWorkoutsManager trackedWorkoutsManager)
+                     WeeklyProgramManager weeklyProgram, WorkoutLogsManager workoutLogsManager)
             throws IOException {
         assert allExercises.getActivityList().isEmpty() && allWorkouts.getActivityList().isEmpty()
             && weeklyProgram.getActivityList().stream().allMatch(Objects::isNull)
@@ -65,7 +65,7 @@ public class Storage {
             loadExercises(allExercises, jsonArchive);
             loadWorkouts(allExercises, allWorkouts, jsonArchive);
             loadWeeklyProgram(allWorkouts, weeklyProgram, jsonArchive);
-            loadTrackedWorkouts(allExercises, allWorkouts, jsonArchive, trackedWorkoutsManager);
+            loadWorkoutLogs(allExercises, allWorkouts, jsonArchive, workoutLogsManager);
             UserInterface.printMessage("Data loaded successfully!");
         } catch (Exceptions.ActivityExistsException | Exceptions.ErrorAddingActivity |
              Exceptions.ActivityDoesNotExists | Exceptions.InvalidInput | JSONException | NoSuchElementException e) {
@@ -117,27 +117,24 @@ public class Storage {
         }
     }
 
-    private void loadTrackedWorkouts(ExerciseManager allExercises, WorkoutManager allWorkouts,
-                                     JSONObject jsonArchive, TrackedWorkoutsManager trackedWorkoutsManager)
+    private void loadWorkoutLogs(ExerciseManager allExercises, WorkoutManager allWorkouts,
+                                 JSONObject jsonArchive, WorkoutLogsManager workoutLogsManager)
             throws Exceptions.ActivityDoesNotExists, Exceptions.InvalidInput {
-        JSONArray jsonTrackedWorkouts = jsonArchive.getJSONArray("trackedWorkoutsManager");
-        for (int i = 0; i < jsonTrackedWorkouts.length(); i++) {
-            JSONObject currentWorkout = jsonTrackedWorkouts.getJSONObject(i);
+        JSONArray jsonWorkoutLogs = jsonArchive.getJSONArray("WorkoutLogManager");
+        for (int i = 0; i < jsonWorkoutLogs.length(); i++) {
+            JSONObject currentWorkout = jsonWorkoutLogs.getJSONObject(i);
             JSONArray exercisesArray = currentWorkout.getJSONArray("exercises");
             String workoutDate = currentWorkout.getString("workoutDate");
             String workoutName = currentWorkout.getString("workoutName");
 
-            // verify workout exists
             if (allWorkouts.doesNotHaveActivity(workoutName)) {
                 throw new Exceptions.ActivityDoesNotExists(
                         String.format("The workout %s does not seem to exist", workoutName)
                 );
             }
 
-            // create trackedWorkout entry
-            trackedWorkoutsManager.addTrackedWorkout(workoutDate, workoutName);
+            workoutLogsManager.addWorkoutLog(workoutDate, workoutName);
 
-            // loop through exercises
             for (int j = 0; j < exercisesArray.length(); j++) {
                 JSONObject currentExercise = exercisesArray.getJSONObject(j);
                 String exerciseName = currentExercise.getString("exerciseName");
@@ -145,14 +142,13 @@ public class Storage {
                 String sets = String.valueOf(currentExercise.getInt(("sets")));
                 String reps = String.valueOf(currentExercise.getInt(("reps")));
 
-                // verify exercise exists
                 if (allExercises.doesNotHaveActivity(exerciseName)) {
                     throw new Exceptions.ActivityDoesNotExists(
                             String.format("The exercise %s does not seem to exist", exerciseName)
                     );
                 }
 
-                trackedWorkoutsManager.addTrackedExercise(workoutDate, exerciseName,
+                workoutLogsManager.addExerciseLog(workoutDate, exerciseName,
                         weight, sets, reps);
             }
         }

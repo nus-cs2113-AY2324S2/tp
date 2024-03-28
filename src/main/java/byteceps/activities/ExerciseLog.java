@@ -1,11 +1,11 @@
 package byteceps.activities;
 
-public class TrackedExercise extends Exercise {
+public class ExerciseLog extends Activity {
     private final int weight;
     private final int sets;
     private final int repetitions;
 
-    public TrackedExercise(String activityName, int weight, int sets, int repetitions) {
+    public ExerciseLog(String activityName, int weight, int sets, int repetitions) {
         super(activityName);
         this.weight = weight;
         this.sets = sets;

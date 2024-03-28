@@ -22,7 +22,7 @@ public class UserInterface {
     }
 
     public static void printMessage(String message) {
-        System.out.printf("[ByteCeps]> %s%s", message, System.lineSeparator());
+        System.out.printf("[BYTE-CEPS]> %s%s", message, System.lineSeparator());
         System.out.println(SEPARATOR);
     }
 
