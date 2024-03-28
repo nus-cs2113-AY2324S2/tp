@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("seedu.planus.PlaNus")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("PlaNUS")
     archiveClassifier.set("")
 }
 
@@ -41,6 +41,15 @@ checkstyle {
     toolVersion = '10.2'
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "data"
+        }
+    }
 }
