@@ -375,16 +375,16 @@ public class Parser {
      */
     public static void validateAppointmentDetails(String[] appointmentDetails)
             throws CustomExceptions.InvalidInput {
-        if (appointmentDetails[1].isEmpty()
-                || appointmentDetails[2].isEmpty()
-                || appointmentDetails[3].isEmpty()) {
+        if (appointmentDetails[0].isEmpty()
+                || appointmentDetails[1].isEmpty()
+                || appointmentDetails[2].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant
                     .INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-        validateDateInput(appointmentDetails[1]);
-        validateTimeInput(appointmentDetails[2]);
+        validateDateInput(appointmentDetails[0]);
+        validateTimeInput(appointmentDetails[1]);
 
-        if (appointmentDetails[3].length() > HealthConstant.MAX_DESCRIPTION_LENGTH) {
+        if (appointmentDetails[2].length() > HealthConstant.MAX_DESCRIPTION_LENGTH) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.DESCRIPTION_LENGTH_ERROR);
         }
     }
