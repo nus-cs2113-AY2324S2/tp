@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static newsonthego.ArticleScrapper.scrapeArticle;
+
 public class NewsOnTheGo {
 
     public static final String FILENAME = "data/sampleNews.txt";
@@ -22,6 +24,12 @@ public class NewsOnTheGo {
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
      */
     public static void main(String[] args) {
+
+        String url = "https://www.firstpost.com/tech/" +
+                "nasas-budget-cuts-may-force-them-to-shut-down-one-of-a-kind-" +
+                "chandra-x-ray-observatory-satellite-13753316.html";
+        String outputFolderPath = "data";
+        scrapeArticle(url, outputFolderPath);
 
         Scanner in = new Scanner(System.in);
         UI.initializeUI(in);
