@@ -3,8 +3,6 @@ package seedu.fitnus.user;
 import org.junit.jupiter.api.Test;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Meal;
-//import seedu.fitnus.Parser;
-//import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -27,7 +25,7 @@ public class UserTest {
 
     @Test
     public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException {
-        Meal newMeal = new Meal("pizza", 3);
+        Meal newMeal = new Meal("pizza", 3, "28-03-2024");
         testMealList.add(newMeal);
 
         assertEquals("pizza", testMealList.get(0).getName());
@@ -52,7 +50,7 @@ public class UserTest {
     @Test
     public void handleDrinks_validInputs_correctlyAddMeal() throws IncompleteDrinkException,
             UnregisteredDrinkException {
-        Drink newDrink = new Drink("sprite", 100);
+        Drink newDrink = new Drink("sprite", 100, "28-03-2024");
         testDrinkList.add(newDrink);
 
         assertEquals("sprite", testDrinkList.get(0).getName());
