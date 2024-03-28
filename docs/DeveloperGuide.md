@@ -20,6 +20,32 @@ Investment accounts—each encapsulated within the application's framework for s
 expansion will provide a comprehensive view of diverse financial sources and enhance personal financial management 
 within BudgetBuddy.
 
+
+### [Implemented] Remove transaction
+#### Description
+This method is used to remove a transaction from the list of transactions based on the transaction ID provided
+by the user. After the transaction is removed, the account balance is updated accordingly and a message is 
+displayed to the user indicating the success of the operation. This helps user to remove the transaction 
+from the list they added by mistake or those transactions they no longer need to keep track off.
+
+#### Parameters
+1. String input: A string containing the user input, which should include the transaction ID to be removed.
+2. Account account: The account object associated with the transaction list.
+
+#### Design and Implementation
+The method first validates the user input to ensure it's not empty or null. If the input is invalid, it throws
+an EmptyArgumentException. Next, it extracts the transaction ID from the input and verifies its integrity as a
+valid integer. If the ID is invalid, a NumberFormatException is thrown.
+
+Once a valid transaction ID is obtained, the method calculates its corresponding index in the transactions 
+ArrayList by subtracting 1 from the provided ID, as ArrayList indices start from 0 . It then verifies
+if the calculated index falls within the bounds of the ArrayList. If the index is out of bounds, an 
+InvalidIndexException is thrown.
+
+Upon successful validation, the method removes the transaction at the calculated index from the transactions
+ArrayList. Subsequently, it updates the account balance to reflect the removed transaction. Finally, it 
+notifies the user of the successful removal along with displaying the details of the removed transaction.
+
 ## Product scope
 ### Target user profile
 
