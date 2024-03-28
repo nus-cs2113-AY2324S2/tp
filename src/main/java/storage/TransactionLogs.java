@@ -25,11 +25,8 @@ public class TransactionLogs extends Storage {
     }
 
     public static void readFromFile(String fileName) {
-        System.out.println("start...");
         try {
-            System.out.println("try blk");
             Scanner scanner = new Scanner(new File(fileName));
-            System.out.println("File created");
             String commandQty = "";
             String commandProfit = "";
             String commandTotalSell = "";
