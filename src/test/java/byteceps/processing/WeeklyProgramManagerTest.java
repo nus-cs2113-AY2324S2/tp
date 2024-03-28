@@ -29,8 +29,8 @@ class WeeklyProgramManagerTest {
         parser = new Parser();
         exerciseManager = new ExerciseManager();
         workoutManager = new WorkoutManager(exerciseManager);
-        TrackedWorkoutsManager trackedWorkoutsManager = new TrackedWorkoutsManager();
-        weeklyProgramManager = new WeeklyProgramManager(exerciseManager, workoutManager, trackedWorkoutsManager);
+        WorkoutLogsManager workoutLogsManager = new WorkoutLogsManager();
+        weeklyProgramManager = new WeeklyProgramManager(exerciseManager, workoutManager, workoutLogsManager);
 
         // create dummy exercises and workouts
         String[] exerciseInput = {"exercise /add benchpress", "exercise /add deadlift", "exercise /add barbell squat"};
@@ -240,7 +240,7 @@ class WeeklyProgramManagerTest {
     }
 
     @Test
-    void track_validTrack_success() {
+    void log_validLog_success() {
         setUpStreams();
         String dateString = LocalDate.now().toString();
         String todayString = LocalDate.now().getDayOfWeek().toString();
@@ -249,13 +249,13 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
-        parser.parseInput(trackInput);
+        String logInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
+        parser.parseInput(logInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
         String expectedOutput = String.format("[BYTE-CEPS]> Workout full day assigned to %s\n" +
                 "-------------------------------------------------" +
-                "[BYTE-CEPS]> Successfully tracked 500kg benchpress with 5 sets and 5 reps on %s\n" +
+                "[BYTE-CEPS]> Successfully logged 500kg benchpress with 5 sets and 5 reps on %s\n" +
                 "-------------------------------------------------\n", todayString, dateString);
 
         assertEquals(expectedOutput.replaceAll("\\s+", ""),
@@ -277,7 +277,7 @@ class WeeklyProgramManagerTest {
     }
 
     @Test
-    void track_incompleteTrack_throwsInvalidInput() {
+    void log_incompleteLog_throwsInvalidInput() {
         String todayString = LocalDate.now().getDayOfWeek().toString();
         String assignWorkoutInput = String.format("program /assign full day /to %s", todayString);
 
@@ -304,18 +304,18 @@ class WeeklyProgramManagerTest {
     }
 
     @Test
-    void track_invalidExerciseToTrack_throwsActivityDoesNotExist() {
+    void log_invalidExerciseLog_throwsActivityDoesNotExist() {
         String todayString = LocalDate.now().getDayOfWeek().toString();
         String assignWorkoutInput = String.format("program /assign full day /to %s", todayString);
 
         parser.parseInput(assignWorkoutInput);
-        String trackInput = "program /log snooze /weight 500 /sets 5 /reps 5";
-        parser.parseInput(trackInput);
+        String logInput = "program /log snooze /weight 500 /sets 5 /reps 5";
+        parser.parseInput(logInput);
         assertThrows(Exceptions.ActivityDoesNotExists.class, () -> weeklyProgramManager.execute(parser));
     }
 
     @Test
-    void track_history_success() {
+    void log_history_success() {
         setUpStreams();
         String dateString = LocalDate.now().toString();
         String todayString = LocalDate.now().getDayOfWeek().toString();
@@ -323,8 +323,8 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
-        parser.parseInput(trackInput);
+        String logInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
+        parser.parseInput(logInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
         outContent.reset();
@@ -333,7 +333,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(historyInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String expectedHistory = String.format("[BYTE-CEPS]> Listing Tracked Workouts: 1. %s\n" +
+        String expectedHistory = String.format("[BYTE-CEPS]> Listing Workout Logs: 1. %s\n" +
                 "-------------------------------------------------", dateString);
 
         assertEquals(expectedHistory.replaceAll("\\s+", ""),
@@ -344,15 +344,15 @@ class WeeklyProgramManagerTest {
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
 
-        String trackHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-03-25";
-        parser.parseInput(trackHistoryInput);
+        String logHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-03-25";
+        parser.parseInput(logHistoryInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
         outContent.reset();
         parser.parseInput(historyInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        expectedHistory = String.format("[BYTE-CEPS]> Listing Tracked Workouts: 1. %s 2. 2024-03-25\n" +
+        expectedHistory = String.format("[BYTE-CEPS]> Listing Workout Logs: 1. %s 2. 2024-03-25\n" +
                 "-------------------------------------------------", dateString);
 
         assertEquals(expectedHistory.replaceAll("\\s+", ""),
@@ -363,13 +363,13 @@ class WeeklyProgramManagerTest {
     }
 
     @Test
-    void track_historyInvalidDate_throwsInvalidInput() {
+    void log_historyInvalidDate_throwsInvalidInput() {
         String assignWorkoutInput = "program /assign full day /to monday";
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-2323-23";
-        parser.parseInput(trackHistoryInput);
+        String logHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-2323-23";
+        parser.parseInput(logHistoryInput);
         assertThrows(Exceptions.InvalidInput.class, () -> weeklyProgramManager.execute(parser));
     }
 }

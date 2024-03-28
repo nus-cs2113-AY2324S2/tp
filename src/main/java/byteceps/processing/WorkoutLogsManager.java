@@ -2,8 +2,8 @@ package byteceps.processing;
 
 import byteceps.activities.Activity;
 import byteceps.activities.Exercise;
-import byteceps.activities.TrackedExercise;
-import byteceps.activities.TrackedWorkout;
+import byteceps.activities.ExerciseLog;
+import byteceps.activities.WorkoutLog;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
 import byteceps.ui.UserInterface;
@@ -13,33 +13,33 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class TrackedWorkoutsManager extends ActivityManager {
+public class WorkoutLogsManager extends ActivityManager {
     @Override
     public void execute(Parser parser) throws Exceptions.InvalidInput {
         throw new Exceptions.InvalidInput("RepsSetsManager is not meant to be executed");
     }
 
-    public void addTrackedWorkout(String trackedWorkoutDate, String workoutName) {
-        TrackedWorkout newTrackedWorkout = new TrackedWorkout(trackedWorkoutDate, workoutName);
+    public void addWorkoutLog(String WorkoutLogDate, String workoutName) {
+        WorkoutLog newWorkoutLog = new WorkoutLog(WorkoutLogDate, workoutName);
         try {
-            add(newTrackedWorkout);
+            add(newWorkoutLog);
         } catch (Exceptions.ActivityExistsException e) {
             // silently fail as duplicates are okay
         }
     }
 
-    public void addTrackedExercise(String trackedWorkoutDate, String exerciseName,
-                                   String weight, String sets, String repetitions)
+    public void addExerciseLog(String WorkoutLogDate, String exerciseName,
+                               String weight, String sets, String repetitions)
             throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
         try {
             int weightInt = Integer.parseInt(weight);
             int setsInt = Integer.parseInt(sets);
             int repsInt = Integer.parseInt(repetitions);
 
-            TrackedExercise newTrackedExercise = new TrackedExercise(exerciseName, weightInt, setsInt, repsInt);
-            TrackedWorkout trackedWorkout= (TrackedWorkout) retrieve(trackedWorkoutDate);
+            ExerciseLog newExerciseLog = new ExerciseLog(exerciseName, weightInt, setsInt, repsInt);
+            WorkoutLog workoutLog = (WorkoutLog) retrieve(WorkoutLogDate);
 
-            trackedWorkout.addTrackedExercise(newTrackedExercise);
+            workoutLog.addExerciseLog(newExerciseLog);
         } catch (NumberFormatException e) {
             throw new Exceptions.InvalidInput("Invalid reps/sets entered!");
         } catch (Exceptions.ActivityDoesNotExists e) {
@@ -48,8 +48,8 @@ public class TrackedWorkoutsManager extends ActivityManager {
     }
 
     public void list(String date, HashSet<Exercise> workoutHashSet) throws Exceptions.ActivityDoesNotExists {
-        TrackedWorkout retrievedWorkout = (TrackedWorkout) retrieve(date);
-        HashSet<TrackedExercise> trackedExercises = retrievedWorkout.getTrackedExercises();
+        WorkoutLog retrievedWorkout = (WorkoutLog) retrieve(date);
+        HashSet<ExerciseLog> exerciseLogs = retrievedWorkout.getExerciseLogs();
         HashSet<Exercise> tempSet = new HashSet<>(workoutHashSet);
         StringBuilder result = new StringBuilder();
         result.append(String.format(
@@ -57,17 +57,17 @@ public class TrackedWorkoutsManager extends ActivityManager {
                 date, System.lineSeparator()));
 
         int index = 1;
-        for (TrackedExercise currentTrackedExercise : trackedExercises) {
-            String trackedName = currentTrackedExercise.getActivityName();
-            int setCount = currentTrackedExercise.getSets();
-            int repCount = currentTrackedExercise.getRepetitions();
-            int weight = currentTrackedExercise.getWeight();
+        for (ExerciseLog currentExerciseLog : exerciseLogs) {
+            String exerciseName = currentExerciseLog.getActivityName();
+            int setCount = currentExerciseLog.getSets();
+            int repCount = currentExerciseLog.getRepetitions();
+            int weight = currentExerciseLog.getWeight();
             result.append(String.format("\t\t\t%d. %s (weight: %d, sets: %d, reps: %d)\n",
-                    index, trackedName, weight,
+                    index, exerciseName, weight,
                     setCount, repCount)
             );
 
-            tempSet.removeIf(p -> p.getActivityName().equals(trackedName));
+            tempSet.removeIf(p -> p.getActivityName().equals(exerciseName));
             index++;
         }
 
@@ -82,18 +82,18 @@ public class TrackedWorkoutsManager extends ActivityManager {
 
     @Override
     public String getActivityType(boolean plural) {
-        return "Tracked Workouts";
+        return plural ? "Workout Logs" : "Workout Log";
     }
 
     public JSONArray exportToJSON() {
-        ArrayList<Activity> trackedWorkouts = getActivityList();
+        ArrayList<Activity> workoutLogs = getActivityList();
         JSONArray workouts = new JSONArray();
-        for (Activity currentActivity : trackedWorkouts) {
-            TrackedWorkout currentWorkout = (TrackedWorkout) currentActivity;
+        for (Activity currentActivity : workoutLogs) {
+            WorkoutLog currentWorkout = (WorkoutLog) currentActivity;
             String workoutDate = currentWorkout.getWorkoutDate();
             String workoutName = currentWorkout.getWorkoutName();
 
-            HashSet<TrackedExercise> exercises = currentWorkout.getTrackedExercises();
+            HashSet<ExerciseLog> exercises = currentWorkout.getExerciseLogs();
             JSONObject workoutJson = getWorkoutJson(exercises, workoutName, workoutDate);
 
             workouts.put(workoutJson);
@@ -101,10 +101,10 @@ public class TrackedWorkoutsManager extends ActivityManager {
         return workouts;
     }
 
-    private static JSONObject getWorkoutJson(HashSet<TrackedExercise> exercises,
+    private static JSONObject getWorkoutJson(HashSet<ExerciseLog> exercises,
                                              String workoutName, String workoutDate) {
         JSONArray workoutExercises = new JSONArray();
-        for (TrackedExercise currentExercise : exercises) {
+        for (ExerciseLog currentExercise : exercises) {
             JSONObject exercise = new JSONObject();
             String exerciseName = currentExercise.getActivityName();
 

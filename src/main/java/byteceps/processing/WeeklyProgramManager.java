@@ -3,7 +3,6 @@ package byteceps.processing;
 import byteceps.activities.Day;
 import byteceps.activities.Workout;
 import byteceps.activities.Exercise;
-import byteceps.activities.TrackedWorkout;
 import byteceps.activities.Activity;
 import byteceps.commands.Parser;
 import byteceps.errors.Exceptions;
@@ -20,13 +19,13 @@ public class WeeklyProgramManager extends ActivityManager {
     public static final String[] DAYS = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
     private final ExerciseManager exerciseManager;
     private final WorkoutManager workoutManager;
-    private final TrackedWorkoutsManager trackedWorkoutsManager;
+    private final WorkoutLogsManager workoutLogsManager;
 
     public WeeklyProgramManager(ExerciseManager exerciseManager, WorkoutManager workoutManager,
-                                TrackedWorkoutsManager trackedWorkoutsManager) {
+                                WorkoutLogsManager workoutLogsManager) {
         this.exerciseManager = exerciseManager;
         this.workoutManager = workoutManager;
-        this.trackedWorkoutsManager = trackedWorkoutsManager;
+        this.workoutLogsManager = workoutLogsManager;
         initializeDays();
     }
 
@@ -184,10 +183,10 @@ public class WeeklyProgramManager extends ActivityManager {
         }
 
         String workoutName = getWorkoutName(selectedDay, workoutDate);
-        trackedWorkoutsManager.addTrackedWorkout(workoutDate, workoutName);
-        trackedWorkoutsManager.addTrackedExercise(workoutDate, exerciseName, weight, sets, repetition);
+        workoutLogsManager.addWorkoutLog(workoutDate, workoutName);
+        workoutLogsManager.addExerciseLog(workoutDate, exerciseName, weight, sets, repetition);
         UserInterface.printMessage(
-                String.format("Successfully tracked %skg %s with %s sets and %s reps on %s",
+                String.format("Successfully logged %skg %s with %s sets and %s reps on %s",
                         weight, exerciseName, sets, repetition, workoutDate)
         );
     }
@@ -224,8 +223,8 @@ public class WeeklyProgramManager extends ActivityManager {
             }
             String workoutName = workoutDay.getAssignedWorkout().getActivityName();
             HashSet<Exercise> workoutHashSet = givenWorkout.getExerciseSet();
-            trackedWorkoutsManager.addTrackedWorkout(workoutDate, workoutName);
-            trackedWorkoutsManager.list(workoutDate, workoutHashSet);
+            workoutLogsManager.addWorkoutLog(workoutDate, workoutName);
+            workoutLogsManager.list(workoutDate, workoutHashSet);
 
         } catch (Exceptions.ActivityDoesNotExists e) {
             // catch so that it does not show error
@@ -241,15 +240,13 @@ public class WeeklyProgramManager extends ActivityManager {
         }
 
         String workoutDate = parser.getActionParameter();
-        // retrieve tracked workout from given date
-
-        TrackedWorkout retrievedWorkout = (TrackedWorkout) trackedWorkoutsManager.retrieve(workoutDate);
+        Workout retrievedWorkout = (Workout) workoutLogsManager.retrieve(workoutDate);
         Day day = getDayFromDate(workoutDate);
         listGivenWorkout(retrievedWorkout, workoutDate, day);
     }
 
     private void listHistory() {
-        trackedWorkoutsManager.executeListAction();
+        workoutLogsManager.executeListAction();
     }
 
     private void executeClearAction(Parser parser) throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
