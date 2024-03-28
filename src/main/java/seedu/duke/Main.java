@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import data.Task;
+import icshandler.IcsHandler;
+import net.fortuna.ical4j.data.ParserException;
 import storage.Storage;
 import time.DateUtils;
 import time.MonthView;
@@ -26,7 +28,7 @@ import static data.TaskManager.updateManager;
 public class Main {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public static void main(String[] args) throws IOException, TaskManagerException {
+    public static void main(String[] args) throws IOException, TaskManagerException, ParserException {
         FileLogger.setupLogger();
         Scanner scanner = new Scanner(System.in);
         LocalDate today = LocalDate.now();
@@ -43,6 +45,8 @@ public class Main {
         Map<LocalDate, List<Task>> tasksFromFile =
                 Storage.loadTasksFromFile(Storage.FILE_PATH); //Reads tasks from txt file
         taskManager.addTasksFromFile(tasksFromFile); //Loads tasks from txt file
+
+        IcsHandler.generateICS(); //trying out
 
         while (true) {
             if (printWeek) {
