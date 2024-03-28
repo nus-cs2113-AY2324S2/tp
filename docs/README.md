@@ -1,4 +1,4 @@
-# Duke
+# CLI-nton
 
 {Give product intro here}
 
