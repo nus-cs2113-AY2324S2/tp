@@ -156,7 +156,7 @@ View the [User Guide](UserGuide.md) for the full list of UI commands and their r
 
 ## Instructions for JUnit Testing
 
-JUnit tests are written in the [`test directory`](../src/test) and serve to test key methods part of the application.
+JUnit tests are written in the [`test directory`](../src/test/java/longah/) and serve to test key methods part of the application.
 
 ## Instructions for text-ui-testing
 
