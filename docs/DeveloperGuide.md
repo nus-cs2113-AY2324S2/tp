@@ -22,6 +22,44 @@
 ## Setting up, getting started
 
 ## Design
+# Design
+
+
+### Architecture
+
+Given below is a quick overview of main components and how they interact with each other.
+
+### Main components of the architecture
+
+The bulk of the app's work is done by the following five components:
+
+- `Ui`: The UI of the App.
+- `Storage`: Reads data from and writes data to a .txt file
+- `Parser`: Makes sense of the user input to return the appropriate command
+- `Command`: Executes the command requested by the user
+- `ItemList`: Consists of all the classes that are involved during command execution
+- `BinBash`: Responsible for initializing the above classes in the correct sequence during startup, and connecting them up with each other.
+
+### Sequence Diagram
+
+The **Sequence Diagram** below shows how the components interact with each other for the scenario where the user issues the command `list`.
+
+![Sequence Diagram](images/OverallSequenceDiagram.png)
+#### Figure 2: Architecture Encode Sequence Diagram
+
+1. User enters the command `list` to the `Ui`.
+2. `Ui` passes the command as a string through the method `readUserInput('list')`, called via `BinBash`.
+3. `BinBash` passes the string to `Parser` through the method `parseCommand('list')`.
+4. `Parser` returns a new `Command` object. (In this specific case, it would be a ListCommand object)
+5. `BinBash` calls the `execute()` method of `Command`.
+6. `Command` then interacts with `ItemList`, and calls the relevant method.
+7. `ItemList` returns the executionUiOutput, in the form of a String object. 
+8. `BinBash` calls the `getExecutionUiOutput` command in `Command`
+9. `Command` returns the outputString, in the form of a String object.
+10. `BinBash` calls the `talk()` method in `Ui`, and passes the outputString.
+11. `Ui` prints this outputString to the user.
+12. If the `Command` executed modifies the database, `BinBash` will call the `saveToStorage()` method of `Storage`
+
 
 ### Data Component
 
