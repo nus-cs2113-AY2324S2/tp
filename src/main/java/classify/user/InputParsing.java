@@ -67,18 +67,18 @@ public class InputParsing {
 
         //@@author alalal47
         case DELETE:
-            deleteCommands.deleteStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
+            DeleteCommands.deleteStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
             // @@author ParthGandhiNUS
             DataHandler.writeStudentInfo(masterStudentList);
             //@@author alalal47
             break;
 
         case RESTORE:
-            deleteCommands.restoreStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
+            DeleteCommands.restoreStudent(masterStudentList, recentlyDeletedList, in, userCommand[1]);
             break;
 
         case UNDO:
-            deleteCommands.undoDelete(masterStudentList, recentlyDeletedList);
+            DeleteCommands.undoDelete(masterStudentList, recentlyDeletedList);
             break;
 
         case HELP:

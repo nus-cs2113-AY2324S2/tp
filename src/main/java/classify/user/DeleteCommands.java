@@ -5,7 +5,7 @@ import classify.student.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class deleteCommands {
+public class DeleteCommands {
     //@@author alalal47
     /**
      * Removes a student from the list.
