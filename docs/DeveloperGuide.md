@@ -20,13 +20,11 @@ after using the bye command.
 
 ![img.png](img.png)
 
-
-
 The above sequence diagram shows how existing save text files will be reloaded back into Omnibots array list to act as
 a form of save feature when the user exits the bot. 
 
 
-[Proposed] Update feature
+#[Proposed] Update feature
 
 Proposed Implementation
 
@@ -48,7 +46,8 @@ of that travel activity.
 
 The sequence diagram below shows how an update operation goes through the parser component:
 
-![img.png](img.png)
+![img_1.png](img_1.png)
+
 ## Product scope
 ### Target user profile
 
