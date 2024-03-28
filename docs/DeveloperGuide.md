@@ -157,7 +157,7 @@ The following is a class diagram of the DeleteCommand and its relevant dependenc
 The `DeleteCommand` class implements the `Command` interface and is responsible for deleting existing items in the
 `Inventory`. A DeleteCommand instance is created when calling the `parseDeleteCommand` method called in Parser class.
 This method parses the input and ensures that the command parameter (item name) exists in the inventory. The `execute()`
-method in the class will call the `delete` method from `inventory` class to  remove the item. It will then execute
+method in the class will call the `delete` method from `inventory` class to remove the item. It will then execute
 the `saveData` method from `FileManager` class to save changes to the inventory.
 
 ### Find Command
