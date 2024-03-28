@@ -14,8 +14,8 @@ public class AddCommand extends Command{
     @Override
     public void execute(Dashboard dashboard) {
         try {
-            dashboard.getExpenseManager().add(expenseToAdd);
-            UI.prettyPrint("Added expense: " + expenseToAdd);
+            String feedback = dashboard.getExpenseManager().add(expenseToAdd);
+            UI.prettyPrint(feedback);
         } catch (Exception e) {
             UI.println("There was an error adding the expense. Please try again.");
         }

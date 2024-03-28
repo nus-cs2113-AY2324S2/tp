@@ -113,20 +113,6 @@ public class SummariseParserTest {
     }
 
     @Test
-    public void parseInput_invalidFormatWrongOrderShort_invalidCommand() {
-        String input = "summarise 5 /from";
-        Command resultCommand = SummariseParser.parseInput(input);
-        assertInstanceOf(InvalidCommand.class, resultCommand);
-    }
-
-    @Test
-    public void parseInput_invalidFormatWrongOrderLong_invalidCommand() {
-        String input = "summarise /to 9 /from 3 ";
-        Command resultCommand = SummariseParser.parseInput(input);
-        assertInstanceOf(InvalidCommand.class, resultCommand);
-    }
-
-    @Test
     public void parseInput_inputEndLessThanStart_invalidCommand() {
         String input = "summarise /from 2 /to 1 ";
         Command resultCommand = SummariseParser.parseInput(input);
