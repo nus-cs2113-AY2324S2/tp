@@ -161,7 +161,7 @@ class DukeTest {
             travelActivityListNew.addTravelActivity(travelActivityNew1);
             travelActivityListNew.addTravelActivity(travelActivityNew2);
             travelActivityListNew.addTravelActivity(travelActivityNew3);
-            String[] command1 = new String[]{"find", "mala"};
+            String[] command1 = new String[]{"findli", "mala"};
             String findExpectedOutput = "Here are what you are looking for:" + System.lineSeparator() +
                     "1. Food: utown mala :19 Jun 2019 :2 hours (spicy)" + System.lineSeparator() +
                     "2. Food: pgpr mala :7 Jul 2012 :1 hours (spicy)"  + System.lineSeparator();

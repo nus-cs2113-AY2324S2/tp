@@ -98,10 +98,6 @@ public class TravelActivityList {
      */
 
     public void searchKeyword (String activityName) {
-        logger.log(Level.INFO, "searchKeyword function started");
-        ArrayList<TravelActivity> temporaryArray = new ArrayList<TravelActivity>();
-        int temporaryArrayCounter = 0;
-        logger.log(Level.INFO, "temporaryArray is initialised");
         boolean isFound = false;
         int foundCounter = 0;
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
@@ -120,7 +116,7 @@ public class TravelActivityList {
                 }
             }
         }
-        if (temporaryArrayCounter == 0 || !isFound) {
+        if (foundCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
         }
     }
@@ -296,6 +292,7 @@ public class TravelActivityList {
                     System.out.println("Here are what you are looking for:");
                 }
                 if (travelActivities.get(iterator).getTag() == "") {
+
                     System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
                 } else {
                     System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +
