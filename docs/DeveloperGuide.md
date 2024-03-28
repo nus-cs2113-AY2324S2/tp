@@ -71,8 +71,8 @@ Key attributes part of the class include `membersFile` and `trnsactionsFile` whi
 
 Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in their respective folders.
 
-* `members.txt` - <NAME><SEP><BALANCE>
-* `transactions.txt` - <NAME><SEP><BORROWER1><SEP><VALUE1>....
+* `members.txt` - NAME | BALANCE
+* `transactions.txt` - LENDER NAME | BORROWER1 NAME | AMOUNT1 | BORROWER2 NAME...
 
 #### `loadMembersData()`
 
@@ -143,11 +143,12 @@ Busy people with large transaction quantities among friends
 
 ## Glossary
 
-* Lender - Member making payments on behalf of other members
-* Borrower - Members being paid for by the lender
-* Transaction - Payment made by ONE Lender on behalf of MULTIPLE Borrower, represented as a list of Subtransaction
-* Subtransaction - Subset of Transaction, consists of ONE Lender and ONE Borrower
-* Group - Discrete units each containing their respective lists of Member and Transaction
+* Lender - Member making payments on behalf of other members.
+* Borrower - Members being paid for by the lender.
+* Transaction - Payment made by ONE Lender on behalf of MULTIPLE Borrower, represented as a list of Subtransaction.
+* Subtransaction - Subset of Transaction, consists of ONE Lender and ONE Borrower.
+* Group - Discrete units each containing their respective lists of Member and Transaction.
+* Separator - "|" has been used to denote separator within this document but within the Storage related classes, the ASCII Unit Separator as denoted by ASCII 31 is used instead. This is defined within `StorageHandler`.
 
 ## Instructions for manual testing
 
