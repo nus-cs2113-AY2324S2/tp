@@ -52,10 +52,10 @@ public class PlaNus {
      * Runs the PlaNus application.
      */
     public void run() {
-        Ui.printLogo();
-        String name = Storage.getUserTimetableFileName();
-        timetable = Storage.loadTimetable(Storage.getUserTimetableFileName());
         setUpLogger();
+        Ui.printLogo();
+        logger.log(Level.INFO, "Loading user timetable" + Storage.getUserTimetableFileName());
+        timetable = Storage.loadTimetable(Storage.getUserTimetableFileName());
 
         while (!isExit) {
             String line = Ui.getUserCommand().trim();
@@ -64,6 +64,7 @@ public class PlaNus {
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
             }
+            logger.log(Level.INFO, "Loading user timetable" + Storage.getUserTimetableFileName());
             timetable = Storage.loadTimetable(Storage.getUserTimetableFileName());
         }
         Ui.printExit();

@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Timetable {
-    private static Logger logger = Logger.getLogger("myLogger");
+    private static final Logger logger = Logger.getLogger("myLogger");
     private static final int TERM_PER_YEAR = 4;
     private static final int MAX_CANDIDATURE_YEAR = 6;
 
@@ -46,6 +46,7 @@ public class Timetable {
 
             if (currYearAndTerm == newCourseYearAndTerm) {
                 hasYearAndTerm = true;
+                logger.log(Level.INFO, "Found row for " + course.getYearAndTerm());
                 break;
             }
             if (currYearAndTerm > newCourseYearAndTerm) {
@@ -56,8 +57,10 @@ public class Timetable {
         // If the specified year and term does not exist in the plan yet, we add it in
         if (!hasYearAndTerm) {
             courses.add(i, new ArrayList<Course>());
+            logger.log(Level.INFO, "Adding new row for " + course.getYearAndTerm());
         }
         courses.get(i).add(course);
+        logger.log(Level.INFO, "Added new course");
     }
 
     /**
@@ -75,11 +78,13 @@ public class Timetable {
                 if (currCourseCode.equalsIgnoreCase(courseCode)) {
                     courses.get(i).remove(j);
                     isRemoved = true;
+                    logger.log(Level.INFO, "Course removed");
                     break;
                 }
             }
 
             if (courses.get(i).isEmpty()) {
+                logger.log(Level.INFO, "Row is now empty, removing it");
                 courses.remove(i);
                 break;
             }
