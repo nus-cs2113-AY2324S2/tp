@@ -1,18 +1,27 @@
-# Developer Guide
+# AeroCade Developer Guide
 
-## Acknowledgements
+## <span style="color:grey;">Table of Contents</span>
+
+- [Design & Implementation](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#design--implementation)
+- [Product Scope](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#product-scope)
+- [User Stories](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#user-stories)
+- [Non-Functional Requirements](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#non-functional-requirements)
+- [Glossary](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#glossary)
+- [Instructions for Manual Testing](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
+
+## <span style="color:grey;">Acknowledgements</span>
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## <span style="color:grey;">Design & Implementation</span>
 
 Here is a quick overview of the main components and how they interact with each other:
 
-- [Parser](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###parser-implementation): Reads input
-- [Ui](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html/###ui-implementation): The UI of the App
-- Game: The Interface concerning the games
-- TicTacToe: Game 1
-- Hangman: Game 2
+- [Parser](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#parser-implementation): Reads input
+- [Ui](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#ui-implementation): The UI of the App
+- [Game](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#game-implementation): The Interface concerning the games
+- [TicTacToe](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#tictactoe-implementation): Game 1
+- [Hangman](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#hangman-implementation): Game 2
 
 ### Parser Implementation:
 Parser Class (v1.0) reads user input from the standard input stream, checks the input, 
@@ -47,7 +56,7 @@ The `UI` component,
 
 ### Hangman Implementation:
 
-## Product scope
+## <span style="color:grey;">Product scope</span>
 ### Target user profile
 
 - Loves to play games and challenge themselves
@@ -61,21 +70,21 @@ CLI-based games work on different operating systems and environments that suppor
 command-line interfaces. This means players can enjoy the game no matter what kind 
 of computer or setup they use.
 
-## User Stories
+## <span style="color:grey;">User Stories</span>
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+## <span style="color:grey;">Non-Functional Requirements</span>
 
 1. Should work on any mainstream OS as long as it has `Java 11` installed.
 
-## Glossary
+## <span style="color:grey;">Glossary</span>
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+## <span style="color:grey;">Instructions for Manual Testing</span>
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
