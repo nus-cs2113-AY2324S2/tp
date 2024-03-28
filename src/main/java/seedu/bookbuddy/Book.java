@@ -4,6 +4,8 @@ public class Book {
 
     public String title;
     protected boolean isRead;
+    protected String label;
+    protected String genre;
 
 
     /**
@@ -14,6 +16,44 @@ public class Book {
     public Book(String title) {
         this.title = title; // Description of the book
         this.isRead = false; //Completion status of the book (True: Read, False: Unread)
+        this.label = "";
+        this.genre = "";
+    }
+
+    /**
+     * Sets the genre for this book.
+     *
+     * @param genre The label to set for the book.
+     */
+    public void setGenre(String genre) {
+        this.label = genre;  // Set the label for the book
+    }
+
+    /**
+     * Returns the genre of the book.
+     *
+     * @return The genre of the book.
+     */
+    public String getGenre() {
+        return this.genre;
+    }
+
+    /**
+     * Sets the label for this book.
+     *
+     * @param label The label to set for the book.
+     */
+    public void setLabel(String label) {
+        this.label = label;  // Set the label for the book
+    }
+
+    /**
+     * Returns the label of the book.
+     *
+     * @return The label of the book.
+     */
+    public String getLabel() {
+        return this.label;
     }
 
     /**
