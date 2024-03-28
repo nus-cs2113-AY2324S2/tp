@@ -1,6 +1,6 @@
 # AeroCade Developer Guide
 
-## <span style="color:darkgrey;">Table of Contents</span>
+## Table of Contents
 
 - [Design & Implementation](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#design--implementation)
 - [Product Scope](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#product-scope)
@@ -9,11 +9,11 @@
 - [Glossary](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#glossary)
 - [Instructions for Manual Testing](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
 
-## <span style="color:darkgrey;">Acknowledgements</span>
+## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## <span style="color:darkgrey;">Design & Implementation</span>
+## Design & Implementation
 
 Here is a quick overview of the main components and how they interact with each other:
 
@@ -56,7 +56,7 @@ The `UI` component,
 
 ### <span style="color:grey;">Hangman Implementation:</span>
 
-## <span style="color:darkgrey;">Product scope</span>
+## Product scope
 
 ### <span style="color:grey;">Target user profile</span>
 
@@ -71,21 +71,21 @@ CLI-based games work on different operating systems and environments that suppor
 command-line interfaces. This means players can enjoy the game no matter what kind 
 of computer or setup they use.
 
-## <span style="color:darkgrey;">User Stories</span>
+## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## <span style="color:darkgrey;">Non-Functional Requirements</span>
+## Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has `Java 11` installed.
 
-## <span style="color:darkgrey;">Glossary</span>
+## Glossary
 
 * *glossary item* - Definition
 
-## <span style="color:darkgrey;">Instructions for Manual Testing</span>
+## Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
