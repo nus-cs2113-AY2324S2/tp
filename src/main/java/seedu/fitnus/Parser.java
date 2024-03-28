@@ -28,6 +28,7 @@ public class Parser {
     public static int exerciseDuration;
 
     public static ExerciseIntensity exerciseIntensity;
+    public static String mealStorageDate;
     private User user;
 
     public Parser(User user) {

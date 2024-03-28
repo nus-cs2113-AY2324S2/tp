@@ -1,5 +1,6 @@
 package seedu.fitnus.user;
 
+import seedu.fitnus.Date;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
@@ -41,7 +42,8 @@ public class User {
                     Parser.parseMealStorage(s);
                     String mealDescription = Parser.mealStorageDescription;
                     int mealSize = Parser.mealStorageSize;
-                    mealList.add(new Meal(mealDescription, mealSize));
+                    String currentDate = Parser.mealStorageDate;
+                    mealList.add(new Meal(mealDescription, mealSize, currentDate));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -71,7 +73,7 @@ public class User {
 
     public void saveMeal(Storage mealStorage) {
         for (Meal meal : mealList) {
-            String mealSavedData = meal.getName() + "," + meal.getServingSize();
+            String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
             mealStorage.appendTextContent(mealSavedData);
         }
         try {
@@ -100,7 +102,9 @@ public class User {
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
 
-        mealList.add(new Meal(mealName, servingSize));
+        Date currentDate = new Date();
+
+        mealList.add(new Meal(mealName, servingSize, currentDate.getDate()));
         assert !mealList.isEmpty(): "failed to add meal";
 
         System.out.println("Added " + servingSize + " serving of " + mealName);
@@ -253,7 +257,8 @@ public class User {
         }
 
         String mealName = mealList.get(Parser.editMealIndex).getName();
-        Meal updatedMeal = new Meal(mealName, Parser.editMealSize);
+        String mealDate = mealList.get(Parser.editMealIndex).getDate();
+        Meal updatedMeal = new Meal(mealName, Parser.editMealSize, mealDate);
         mealList.set(Parser.editMealIndex, updatedMeal);
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
