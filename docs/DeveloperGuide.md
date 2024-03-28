@@ -6,6 +6,7 @@
 * [Design](#design)
   * [Data Component](#data-component)
 * [Implementation](#implementation)
+* [Logging](#logging)
 * [Product scope](#product-scope)
   * [Target user profile](#target-user-profile)
   * [Value proposition](#value-proposition)
@@ -58,6 +59,13 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 ### Xavier
 
+## Logging
+
+* We are using `java.util.logging` package for logging.
+* The `BinBashLogger` class is used to manage all logging related funtions.
+* The `Logger` for a class can be obtained by contructing a `BinBashLogger` object and assigning it as a class-level variable
+* Log messages are output to a `logs.txt` file in the `*/logs/` directory by default.
+* If there are issues with the `logs.txt` file that results in no `logs` being written, warnings logs will be output through the console instead.
 
 ## Product scope
 
