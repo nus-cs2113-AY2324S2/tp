@@ -21,7 +21,7 @@ UI --> Logic : userInput
 Logic -> GeneralInputParser ++ : getCommandFromUserInput(userInput)
 alt keyword == summarise
     GeneralInputParser -> SummariseParser ++ : parseInput(userInput)
-    alt Valid userInput
+    alt valid userInput
         SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
         activate SummariseCommand
         SummariseCommand --> SummariseParser --: commandToExecute:SummariseCommand
