@@ -32,7 +32,31 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 `Item` has different types, such as `RetailItem`, `OperationalItem`, `PerishableRetailItem`, and `PerishableOperationalItem`.
 
+### Iman
+
+### Haziq
+
+### Jun Han
+
+### Kota
+
+### Yi Hao
+
+### Xavier
+
 ## Implementation
+
+### Iman
+
+### Haziq
+
+### Jun Han
+
+### Kota
+
+### Yi Hao
+
+### Xavier
 
 
 ## Product scope
