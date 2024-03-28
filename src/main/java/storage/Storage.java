@@ -94,6 +94,7 @@ public class Storage {
                         Integer.parseInt(commandBuy), Integer.parseInt(commandSell));
                 Itemlist.addItem(toAdd);
             }
+            scanner.close();
         } catch(FileNotFoundException e) {
             System.out.println("File does not exist.");
         } catch(NumberFormatException e) {
