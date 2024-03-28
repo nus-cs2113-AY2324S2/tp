@@ -61,6 +61,7 @@ static void sourceNews(String line, List<NewsArticle> list) {
     System.out.println(list.get(index).getSource());
 }
 
+
 ## Product scope
 ### Target user profile
 
