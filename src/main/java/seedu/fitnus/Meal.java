@@ -8,6 +8,7 @@ public class Meal {
     private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int servingSize;
+    private String dateAdded;
     private int calories;
     private int carbs;
     private int protein;
@@ -16,12 +17,13 @@ public class Meal {
     private int sugar;
 
     // Constructor with only serving size and meal name
-    public Meal(String name, int servingSize) {
+    public Meal(String name, int servingSize, String currentDate) {
         assert name != null : "Name must not be null";
         this.name = name;
         assert servingSize > 0 : "Serving size must be greater than 0";
         this.servingSize = servingSize;
         setNutrientValues(name); // Assign nutrient values based on the name
+        this.dateAdded = currentDate;
     }
 
     // Add nutrient details to the static HashMap
@@ -103,4 +105,7 @@ public class Meal {
         return nutrientDetails;
     }
 
+    public String getDate() {
+        return dateAdded;
+    }
 }

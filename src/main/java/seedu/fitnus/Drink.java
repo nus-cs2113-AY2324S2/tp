@@ -7,16 +7,18 @@ public class Drink  {
     private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int drinkVolume;
+    private String dateAdded;
     private int calories;
     private int carbs;
     private int sugar;
     private int protein;
     private int fat;
 
-    public Drink(String name, int volume) {
+    public Drink(String name, int volume, String currentDate) {
         this.name = name;
         this.drinkVolume = volume;
         setNutrientValues(name);
+        this.dateAdded = currentDate;
     }
 
     // Add nutrient details per 100 milliliter to the static HashMap
@@ -89,4 +91,7 @@ public class Drink  {
         return nutrientDetails;
     }
 
+    public String getDate() {
+        return dateAdded;
+    }
 }

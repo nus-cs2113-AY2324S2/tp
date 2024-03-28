@@ -1,5 +1,6 @@
 package seedu.fitnus.user;
 
+import seedu.fitnus.Date;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
@@ -41,7 +42,8 @@ public class User {
                     Parser.parseMealStorage(s);
                     String mealDescription = Parser.mealStorageDescription;
                     int mealSize = Parser.mealStorageSize;
-                    mealList.add(new Meal(mealDescription, mealSize));
+                    String currentDate = Parser.mealStorageDate;
+                    mealList.add(new Meal(mealDescription, mealSize, currentDate));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -56,11 +58,12 @@ public class User {
                 for (String s : drinkStorageList) {
                     Parser.parseDrinkStorage(s);
                     String drinkDescription = Parser.drinkStorageDescription;
+                    String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        Water.getInstance(drinkSize);
+                        Water.getInstance(drinkSize, drinkDate);
                     } else {
-                        drinkList.add(new Drink(drinkDescription, drinkSize));
+                        drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
                 }
             }
@@ -71,7 +74,7 @@ public class User {
 
     public void saveMeal(Storage mealStorage) {
         for (Meal meal : mealList) {
-            String mealSavedData = meal.getName() + "," + meal.getServingSize();
+            String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
             mealStorage.appendTextContent(mealSavedData);
         }
         try {
@@ -82,10 +85,10 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
-        String waterSavedData = "water" + "," + Water.getWater();
+        String waterSavedData = "water" + "," + Water.getWater() + "," + Water.getDate();
         drinkStorage.appendTextContent(waterSavedData);
         for (Drink drink : drinkList) {
-            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize();
+            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
             drinkStorage.appendTextContent(drinkSavedData);
         }
         try {
@@ -100,7 +103,9 @@ public class User {
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
 
-        mealList.add(new Meal(mealName, servingSize));
+        Date currentDate = new Date();
+
+        mealList.add(new Meal(mealName, servingSize, currentDate.getDate()));
         assert !mealList.isEmpty(): "failed to add meal";
 
         System.out.println("Added " + servingSize + " serving of " + mealName);
@@ -111,10 +116,12 @@ public class User {
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
 
+        Date currentDate = new Date();
+
         if (drinkName.equals("water")) {
-            Water.getInstance(servingSize);
+            Water.getInstance(servingSize, currentDate.getDate());
         } else {
-            drinkList.add(new Drink(drinkName, servingSize));
+            drinkList.add(new Drink(drinkName, servingSize, currentDate.getDate()));
         }
         System.out.println("Added " + servingSize + " ml of " + drinkName);
     }
@@ -253,7 +260,8 @@ public class User {
         }
 
         String mealName = mealList.get(Parser.editMealIndex).getName();
-        Meal updatedMeal = new Meal(mealName, Parser.editMealSize);
+        String mealDate = mealList.get(Parser.editMealIndex).getDate();
+        Meal updatedMeal = new Meal(mealName, Parser.editMealSize, mealDate);
         mealList.set(Parser.editMealIndex, updatedMeal);
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
@@ -266,7 +274,9 @@ public class User {
             throw new invalidIndexException();
         }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
-        Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
+        String drinkDate = drinkList.get(Parser.editDrinkIndex).getDate();
+
+        Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize, drinkDate);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
