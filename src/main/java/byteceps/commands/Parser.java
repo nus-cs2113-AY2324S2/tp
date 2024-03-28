@@ -74,8 +74,21 @@ public class Parser {
         return commandAction.getParameter();
     }
 
+    public int getAdditionalArgumentsLength() {
+        return additionalArguments.size();
+    }
+
+    public boolean hasAdditionalArguments() {
+        return !additionalArguments.isEmpty();
+    }
+
     public String getAdditionalArguments(String key) {
-        return additionalArguments.get(key);
+        String value = additionalArguments.get(key);
+        if (value == null) {
+            return "";
+        }
+
+        return value;
     }
 
     //@@author pqienso

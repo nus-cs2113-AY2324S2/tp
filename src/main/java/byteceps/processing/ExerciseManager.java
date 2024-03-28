@@ -70,10 +70,9 @@ public class ExerciseManager extends ActivityManager {
     }
 
     private void executeAddAction(Parser parser) throws Exceptions.InvalidInput,
-            Exceptions.ActivityExistsException, Exceptions.ErrorAddingActivity {
+            Exceptions.ActivityExistsException {
         assert parser.getAction().equals("add") : "Action must be add";
-        Exercise newExercise;
-        newExercise = processAddExercise(parser);
+        Exercise newExercise = processAddExercise(parser);
         add(newExercise);
         UserInterface.printMessage(String.format(
                 "Added Exercise: %s", newExercise.getActivityName()

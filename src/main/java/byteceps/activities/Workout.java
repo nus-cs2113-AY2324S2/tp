@@ -2,6 +2,7 @@
 package byteceps.activities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ListIterator;
 
 public class Workout extends Activity {
@@ -14,6 +15,10 @@ public class Workout extends Activity {
 
     public ArrayList<Exercise> getExerciseList() {
         return exerciseList;
+    }
+
+    public HashSet<Exercise> getExerciseSet() {
+        return new HashSet<>(exerciseList);
     }
 
     public void addExercise(Exercise exercise) {
