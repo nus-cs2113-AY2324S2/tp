@@ -4,39 +4,59 @@
 autonumber
 actor User
 participant UI << static >>
+participant ":Logic" as Logic
 activate Logic
-participant GeneralInputParser
+participant ":GeneralInputParser" as GeneralInputParser
 participant SummariseParser << static >>
-participant Dashboard order 30
-participant ExpenseManager order 31
-participant FileManager order 32
+
+participant InvalidCommand order 29
+participant ":Dashboard" as Dashboard order 30
+participant ":ExpenseManager" as ExpenseManager order 31
+participant otherParsers <<static>> order 32
 Logic -> UI ++ : getUserInput()
 
-User -> UI : "summarise"
-UI --> Logic : "summarise"
+User -> UI : userInput
+UI --> Logic : userInput
 
-Logic -> GeneralInputParser ++ : getCommandFromUserInput("summarise")
-GeneralInputParser -> SummariseParser ++ : parseInput("summarise")
-SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
-activate SummariseCommand
+Logic -> GeneralInputParser ++ : getCommandFromUserInput(userInput)
+alt Command keyword == summarise
+    GeneralInputParser -> SummariseParser ++ : parseInput(userInput)
+else else
+    GeneralInputParser -> otherParsers : parseInput(userInput)
+end
+
+alt Valid userInput
+    SummariseParser -> SummariseCommand ** : new SummariseCommand(...)
+    activate SummariseCommand
+    SummariseCommand --> SummariseParser --: commandToExecute:SummariseCommand
+else else
+    SummariseParser -> InvalidCommand ** : new InvalidCommand(...)
+    activate InvalidCommand
+    InvalidCommand --> SummariseParser -- : commandToExecute:InvalidCommand
+end
 
 SummariseParser --> GeneralInputParser -- : commandToExecute
 GeneralInputParser --> Logic -- : command
-Logic -> SummariseCommand -- : execute(...)
-SummariseCommand -> Dashboard ++ : getExpenseManager()
-Dashboard --> SummariseCommand -- : ExpenseManager
-SummariseCommand -> ExpenseManager ++ : summariseExpenses(...)
-ExpenseManager --> SummariseCommand -- : summary
-SummariseCommand -> UI -- : prettyPrint(summary)
-UI --> User -- : summary
 
-activate Logic
-Logic -> Dashboard ++ : getExpenseManager
-Dashboard --> Logic -- : ExpenseManager
-Logic -> ExpenseManager ++ : getExpensesStringRepresentation
-ExpenseManager --> Logic -- : expenseListToSave
-Logic -> Dashboard ++ : getFileManager
-Dashboard --> Logic -- : FileManager
-Logic -> FileManager ++ : save(expenseListToSave)
+alt command.instanceOf(SummariseCommand)
+    Logic -> SummariseCommand -- : execute(...)
+    activate SummariseCommand
+    SummariseCommand -> Dashboard ++ : getExpenseManager()
+    Dashboard --> SummariseCommand -- : ExpenseManager
+    SummariseCommand -> ExpenseManager ++ : summariseExpenses(...)
+    ExpenseManager --> SummariseCommand -- : summary
+    SummariseCommand -> UI -- : prettyPrint(summary)
+    destroy SummariseCommand
+    UI --> User : summary
+else command.instanceOf(InvalidCommand)
+    Logic -> InvalidCommand -- : execute(...)
+    activate InvalidCommand
+    InvalidCommand -> UI -- : prettyPrint(errorMessage)
+    destroy InvalidCommand
+    UI --> User : errorMessage
+end
+deactivate UI
+
+
 
 @enduml
