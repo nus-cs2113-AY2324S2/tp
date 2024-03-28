@@ -2,6 +2,8 @@ package brokeculator.expense;
 
 import java.util.logging.Logger;
 
+import brokeculator.event.Event;
+
 /**
  * Represents an expense in the expense tracker.
  */
@@ -12,6 +14,7 @@ public class Expense implements Saveable {
     private final String date;
     private final double amount;
     private final String category;
+    private Event owningEvent;
 
     /**
      * Constructs an Expense object with the given description, amount, date and category.
@@ -60,6 +63,19 @@ public class Expense implements Saveable {
         return category;
     }
 
+    public boolean hasOwningEvent() {
+        return owningEvent != null;
+    }
+    public Event getOwningEvent() {
+        return owningEvent;
+    }
+    public void removeOwningEvent() {
+        this.owningEvent = null;
+    }
+    public void setOwningEvent(Event event) {
+        this.owningEvent = event;
+    }
+
     /**
      * Returns a string representation of the expense.
      * @return a string representation of the expense.
@@ -103,4 +119,6 @@ public class Expense implements Saveable {
         }
         return String.format("%s $%.2f (%s) [%s]", description, amount, date, category.toUpperCase());
     }
+
+
 }

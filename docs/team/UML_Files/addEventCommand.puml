@@ -1,0 +1,23 @@
+@startuml 
+participant "GeneralInputParser" as GIP
+participant "EventParser" as EP
+participant "OrderParser" as OP
+
+GIP -> EP: parseInput(userInput : String)
+activate EP
+EP -> OP: parseOrder(userInput, keywords)
+activate OP
+OP --> EP : userInputs : String[]
+deactivate OP
+note right of EP : userInputs[0] is the eventName\nuserInputs[1] is the eventDescription
+
+create "x:AddEventCommand" AS AddEventCommand
+EP -> AddEventCommand: new AddEventCommand(userInputs[0], userInputs[1]) 
+activate AddEventCommand
+AddEventCommand --> EP : x
+deactivate AddEventCommand
+
+EP --> GIP : x
+deactivate EP
+
+@enduml

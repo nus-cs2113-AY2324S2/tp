@@ -39,7 +39,7 @@ public class ExpenseManagerTest {
         expenseManager.delete(1);
 
         assertEquals(2, expenseManager.listExpenses(-1).size());
-        assertEquals(expense1, expenseManager.listExpenses(-1).get(0));
+        assertEquals(expense2, expenseManager.listExpenses(-1).get(0));
         assertEquals(expense3, expenseManager.listExpenses(-1).get(1));
     }
 

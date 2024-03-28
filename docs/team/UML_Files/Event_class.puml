@@ -1,0 +1,27 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Event {
+    - eventName: String
+    - eventDescription: String
+    + containsExpense(expense : Expense) : boolean
+    + addExpense(expense : Expense) : void
+    + removeExpense(expense : Expense) : void
+    + listExpenses() : String
+}
+
+class EventManager <<Singleton>> {
+    + getEvent(idx : int) : Event
+    + removeEvent(idx : int) : void
+    + printEvents() : void
+}
+
+class Expense {
+    + getOwningEvent() : Event
+    + setOwningEvent(event : Event) : void
+    + removeOwningEvent() : void
+}
+
+Expense "*" <--> "owningEvent 1" Event
+EventManager "1" -> "*"Event
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+participant Logic  
+participant ":AddEventCommand" AS AddEventCommand 
+participant ":EventManager" AS EventManager
+participant UI 
+
+Logic -> AddEventCommand : execute()
+activate AddEventCommand
+create "x:Event" as Event 
+AddEventCommand -> Event: new Event(eventName, eventDesction)
+activate Event
+Event --> AddEventCommand : x
+deactivate Event
+
+AddEventCommand -> EventManager : addEvent(x)
+activate EventManager
+EventManager --> AddEventCommand
+deactivate EventManager
+
+AddEventCommand -> UI : prettyPrint("Event added successfully")
+activate UI
+UI --> AddEventCommand
+deactivate UI
+
+AddEventCommand --> Logic 
+deactivate AddEventCommand
+
+@enduml

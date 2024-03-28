@@ -23,8 +23,26 @@ public class GeneralInputParser {
         case "exit":
             commandToExecute = ExitParser.parseInput(userInput);
             break;
+        case "event":
+            commandToExecute = EventParser.parseInput(userInput);
+            break;
         case "category":
             commandToExecute = CategoryParser.parseInput(userInput);
+            break;
+        case "viewEvent":
+            commandToExecute = ViewSingleEventParser.parseInput(userInput);
+            break;
+        case "listEvents":
+            commandToExecute = ListEventsParser.parseInput(userInput);
+            break;
+        case "deleteEvent":
+            commandToExecute = DeleteEventParser.parseInput(userInput);
+            break;
+        case "addExpenseToEvent":
+            commandToExecute = AddExpenseToEventParser.parseInput(userInput);
+            break;
+        case "deleteExpenseFromEvent":
+            commandToExecute = DeleteExpenseFromEventParser.parseInput(userInput);
             break;
         default:
             commandToExecute = new HelpCommand();

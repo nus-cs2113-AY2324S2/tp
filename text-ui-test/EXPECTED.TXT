@@ -1,5 +1,4 @@
-Data file: ./data/data.txt successfully created!
-Data file: ./data/category.txt successfully created!
+Data file successfully created!
 ------------------------------------
 Hello! I'm Brokeculator!
 If this is your first time using me, type 'help' to see what I can do for you.
@@ -10,7 +9,6 @@ Here are the commands you can use:
 	2. delete <index> - deletes an expense from the dashboard
 	3. list - lists all expenses in the dashboard
 	4. summarise [/from <start>] [/to <end>] - summarises the expenses in the dashboard
-	6. category <list|add|delete> [<category if add|delete specified>] - manages categories
 	5. exit - exits the application
 
 Notes about the command format:

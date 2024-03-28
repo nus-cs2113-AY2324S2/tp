@@ -1,5 +1,6 @@
 package brokeculator;
 import brokeculator.dashboard.Dashboard;
+import brokeculator.event.EventManager;
 import brokeculator.enumerators.Category;
 import brokeculator.storage.FileManager;
 import brokeculator.expense.ExpenseManager;
@@ -8,7 +9,8 @@ public class Brokeculator {
     public static void main(String[] args) {
         ExpenseManager expenseManager = new ExpenseManager();
         FileManager fileManager = new FileManager();
-        Dashboard dashboard = new Dashboard(expenseManager, fileManager);
+        EventManager eventManager = EventManager.getInstance();
+        Dashboard dashboard = new Dashboard(expenseManager, fileManager, eventManager);
         Logic driverLogic = new Logic(dashboard);
         Category.setDashboard(dashboard);
         driverLogic.run();

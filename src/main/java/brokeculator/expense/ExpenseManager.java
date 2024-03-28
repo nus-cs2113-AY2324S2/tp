@@ -27,8 +27,23 @@ public class ExpenseManager {
         return "Added expense: " + expense;
     }
 
+
+    public boolean isExpenseIndexValid(int index) {
+        return index >= 1 && index <= expenses.size();
+    }
+
+    public Expense getExpense(int index) {
+        if (!isExpenseIndexValid(index)) {
+            return null;
+        }
+        return expenses.get(index - 1);
+    }
+
     public void delete(int index) {
-        expenses.remove(index);
+        if (!isExpenseIndexValid(index)) {
+            return;
+        }
+        expenses.remove(index - 1);
     }
 
     public double summariseExpenses(String description, LocalDateTime date, String category,
