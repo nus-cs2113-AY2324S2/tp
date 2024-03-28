@@ -18,14 +18,16 @@
 
 ### PIN
 
-#### Overview
+<ins> Overview </ins>
+
 The PINHandler class is responsible for managing the creation, loading, authentication, and resetting of a
 Personal Identification Number (PIN) used for authentication in the LongAh application. It uses SHA-256 hashing to
 securely store and compare PINs. The PINHandler class interacts with the StorageHandler class to save and load the PIN 
 and authentication status.
 
-#### Implementation Details
-*Data Storage*
+<ins>Implementation Details </ins>
+
+*Data Storage:*
 
 The PIN and authentication enabled status are saved in a file located at ./data/pin.txt.
 The file format is as follows:
@@ -33,7 +35,8 @@ The file format is as follows:
 `hashed PIN`<br />
 `authenticationEnabled`<br />
 
-#### Class Structure
+<ins> Class Structure </ins>
+
 The PINHandler class has the following static fields:
 
 *logger*: A logger object for logging messages. 
@@ -44,13 +47,15 @@ The PINHandler class has the following static fields:
 
 *authenticationEnabled*: A boolean flag indicating whether authentication is enabled.
 
-#### Constructor
+<ins> Constructor </ins>
+
 The PINHandler constructor initializes the savedPin and authenticationEnabled fields by loading them from the file using
 the loadPinAndAuthenticationEnabled method.
 
 If the file does not exist or the savedPin is empty, it calls the createPin method to create a new PIN.
 
-#### Methods
+<ins> Methods </ins>
+
 *loadPinAndAuthenticationEnabled*: Loads the saved PIN and authentication enabled status from the file.
 
 *savePinAndAuthenticationEnabled*: Saves the PIN and authentication enabled status to the file.
@@ -72,7 +77,7 @@ PIN is correct.
 
 *getAuthenticationStatus*: Returns the authentication status.
 
-#### Usage Example
+<ins> Usage Example </ins>
 
 ![pinhandler longah.png](diagrams%2Fpinhandler%20longah.png)
 
@@ -114,7 +119,8 @@ PINHandler.authenticate();
 }
 ```
 
-#### Design Considerations
+<ins> Design Considerations </ins>
+
 Resetting PIN: The resetPin() method allows users to change their PIN by first verifying their current PIN. This adds 
 an extra layer of security to prevent unauthorized PIN changes.
 
@@ -123,11 +129,11 @@ and 'pin disable' commands. This flexibility allows users to customize their aut
 security needs and convenience.
 
 
-#### Conclusion
+<ins> Conclusion </ins>
 
 The PINHandler class provides a secure and convenient way to manage user authentication using a PIN.
 Its design allows for easy integration into the LongAh application and can be extended to support additional
-authentication features if needed.
+authentication features if required.
 
 ### Class Diagram
 
