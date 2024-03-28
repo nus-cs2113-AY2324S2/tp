@@ -62,6 +62,15 @@ Our app then executes `GroceryList#editAmount()` with parameter `use = true`, as
   * Additional checks specific to `use` ensure that the user only inputs a valid `int`, or that the `amount` must not be 0 beforehand.
   * Any exceptions thrown come with a message to help the user remedy their specific issue, as displayed by the `Ui`.
 
+### 7. Input expiration date of each grocery when added
+   * In Grocery class, the expiration field in the Grocery class was changed from a String to a LocalDate to standardize date handling.
+   * In Grocery class, the setExpiration method was updated to accept a String input, convert it to a LocalDate using a specified format ("yyyy-MM-dd"), and then store this date.
+   * In UI class, the UI now includes a multi-step process to prompt the user for the year, month, and day of the grocery item's expiration date. This process ensures that the date is captured in a user-friendly manner and stored accurately.
+   * In GroceryList class, a new method, sortByExpiration, was added to allow sorting the list of groceries by their expiration dates in ascending order. This method utilizes the Collections.sort method with a lambda expression comparing the expiration dates of Grocery items.
+
+### 8. Editing expiration date after it is added
+   * In GroceryList class, modified the editExpiration method to parse String into localdate.
+
 
 ## Product scope
 ### Target user profile

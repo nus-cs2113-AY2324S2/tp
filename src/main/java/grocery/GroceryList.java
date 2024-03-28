@@ -3,6 +3,7 @@ package grocery;
 import git.Ui;
 import exceptions.GitException;
 import exceptions.LocalDateWrongFormatException;
+import exceptions.PastExpirationDateException;
 import exceptions.InvalidAmountException;
 import exceptions.InvalidCostException;
 import exceptions.CannotUseException;
@@ -62,6 +63,21 @@ public class GroceryList {
     }
 
     /**
+     * Checks if a grocery exists.
+     *
+     * @param name Name of the grocery.
+     * @return True if the grocery exists, false otherwise.
+     */
+    private boolean isGroceryExists(String name) {
+        for (Grocery grocery : groceries) {
+            if (grocery.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the desired grocery.
      *
      * @param name Name of the grocery.
@@ -101,7 +117,12 @@ public class GroceryList {
 
         // Split the input into the grocery name and the detail part.
         String[] detailParts = details.split(parameter, 2);
-        Grocery grocery = getGrocery(detailParts[0].strip());           // Needed to throw NoSuchGrocery exception first
+
+        // Check if the grocery exists
+        if (!isGroceryExists(detailParts[0].strip())) {
+            throw new NoSuchGroceryException();
+        }   
+
         if (detailParts.length < 2) {
             throw new CommandWrongFormatException(command);
         }
@@ -121,7 +142,6 @@ public class GroceryList {
      * @throws GitException Exception thrown depending on error.
      */
     public void editExpiration(String details) throws GitException {
-        // Assuming the format is "exp GROCERY d/EXPIRATION_DATE"
         String[] expParts = checkDetails(details, "exp", "d/");
         Grocery grocery = getGrocery(expParts[0].strip());
         
@@ -135,7 +155,12 @@ public class GroceryList {
     
         // Convert LocalDate back to String to match the setExpiration signature
         String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        grocery.setExpiration(dateString);
+        try {
+            grocery.setExpiration(dateString);
+        } catch (PastExpirationDateException e) {
+            System.out.println(e.getMessage());
+        }
+
     
         // Verification and UI feedback
         assert grocery.getExpiration().isEqual(date) : "Expiration date should be set correctly";

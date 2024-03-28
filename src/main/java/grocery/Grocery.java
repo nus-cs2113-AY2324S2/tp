@@ -2,6 +2,8 @@ package grocery;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import exceptions.PastExpirationDateException;
+
 
 /**
  * Represents a grocery.
@@ -68,10 +70,17 @@ public class Grocery {
      * Formats the expiration date from type string to local date.
      *
      * @param expiration The expiration date of the grocery.
+     * @throws PastExpirationDateException 
      */
-    public void setExpiration(String expiration) {
+    public void setExpiration(String expiration) throws PastExpirationDateException {
         assert !(expiration.isEmpty()) : "Expiration date entered is invalid!";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate expirationDate = LocalDate.parse(expiration, formatter);
+
+        if (expirationDate.isBefore(LocalDate.now())) {
+            throw new PastExpirationDateException();
+        }
+
         this.expiration = LocalDate.parse(expiration, formatter);
     }
 
