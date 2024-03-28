@@ -6,6 +6,7 @@
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
   * [Data Component](#data-component)
+  * [Ui](#ui)
 * [Implementation](#implementation)
 * [Logging](#logging)
 * [Product scope](#product-scope)
@@ -115,7 +116,7 @@ Note the use of an externally provided `LineReader` object in the `TextIn` class
 
 3. Contextual help menus
 
-
+![linereader](images/ui-linereader-enhancement.png)
 
 This allows us to overload options on a small number of commands to provide full functionality of the application. Developers can then extend its features without also the worry of finding a way for users to access those features easily.
 
