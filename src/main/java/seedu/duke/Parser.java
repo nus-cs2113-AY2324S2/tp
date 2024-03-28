@@ -303,7 +303,8 @@ public class Parser {
         }
     }
 
-    /** Handles the case where the expense command is given as input
+    /**
+     * Handles the case where the expense command is given as input
      *
      * @param line array of input string
      * @param list List of travel activities
