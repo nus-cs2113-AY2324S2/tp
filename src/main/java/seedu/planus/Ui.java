@@ -53,7 +53,9 @@ public class Ui {
     //@@author ZhouJunmin
     public static void printHelp() {
         System.out.println("Listed below are all available commands:\n" +
-                "    add course [course code]y/[year]t/[term]\n        e.g. add course CS1010y/1t/1m/4\n" +
+                "    init [major]\n        e.g. init CEG\n" +
+                "    add course [course code]y/[year]t/[term]m/[modular credit]\n" +
+                "        e.g. add course CS1010y/1t/1m/4\n" +
                 "    add grade [course code] [letter grade]\n        e.g. add grade CS1010 A\n" +
                 "    rm course [course code]\n        e.g. rm course CS1010\n" +
                 "    rm grade [course code]\n        e.g. rm grade CS1010\n" +
@@ -62,6 +64,7 @@ public class Ui {
                 "    check y/[year] t/[term]\n        e.g. check y/1 t/1\n" +
                 "    view y/[year]\n        e.g. view y/1\n" +
                 "    view y/[year] t/[term]\n        e.g. view y/1 t/1\n" +
+                "    display [major]\n        e.g. display CEG\n" +
                 "    help\n" +
                 "    bye\n\n");
     }
