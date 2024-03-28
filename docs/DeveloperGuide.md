@@ -39,7 +39,6 @@ The file format is as follows:
 
 The PINHandler class has the following static fields:
 
-- *logger*: A logger object for logging messages. 
 
 - *PIN_FILE_PATH*: The path to the file where the PIN and authentication status are saved.
 
