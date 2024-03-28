@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -31,11 +32,15 @@ class GymTest {
     void addStation_validInput_expectAddedStation() {
         Gym newGym = new Gym();
         try{
-            newGym.addStation("Exercise 1", 10, 1, 10);
-            newGym.addStation("Exercise 2", 20, 2, 20);
+            ArrayList<Integer> array1 = new ArrayList<>(Arrays.asList(1));
+            ArrayList<Integer> array2 = new ArrayList<>(Arrays.asList(1,2));
+            ArrayList<Integer> array3 = new ArrayList<>(Arrays.asList(1,2,3));
+
+            newGym.addStation("Exercise 1", array1, 1, 10);
+            newGym.addStation("Exercise 2", array2, 2, 20);
             assertEquals(2, newGym.getStations().size());
 
-            newGym.addStation("Exercise 3", 30, 3, 30);
+            newGym.addStation("Exercise 3", array3, 3, 30);
             ArrayList<GymStation> stations = newGym.getStations();
             assertEquals(3, stations.size());
 
@@ -47,20 +52,27 @@ class GymTest {
                 if (i == 0){
                     assertEquals("Exercise 1", stationName);
                     assertEquals(1, numberOfSets );
-                    assertEquals(10, sets.get(0).getWeight());
-                    assertEquals(10, sets.get(0).getRepetitions());
+                    for(int j = 0; j < sets.size(); j++){
+                        assertEquals(array1.get(j), sets.get(j).getWeight());
+                        assertEquals(10, sets.get(j).getRepetitions());
+                    }
+
 
                 } else if (i == 1){
                     assertEquals("Exercise 2", stationName);
                     assertEquals(2, numberOfSets );
-                    assertEquals(20, sets.get(0).getWeight());
-                    assertEquals(20, sets.get(0).getRepetitions());
+                    for(int j = 0; j < sets.size(); j++){
+                        assertEquals(array2.get(j), sets.get(j).getWeight());
+                        assertEquals(20, sets.get(j).getRepetitions());
+                    }
 
                 } else if (i == 2){
                     assertEquals("Exercise 3", stationName);
                     assertEquals(3, numberOfSets );
-                    assertEquals(30, sets.get(0).getWeight());
-                    assertEquals(30, sets.get(0).getRepetitions());
+                    for(int j = 0; j < sets.size(); j++){
+                        assertEquals(array3.get(j), sets.get(j).getWeight());
+                        assertEquals(30, sets.get(j).getRepetitions());
+                    }
                 }
             }
 

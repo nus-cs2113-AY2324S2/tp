@@ -6,17 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import utility.HealthConstant;
 import utility.CustomExceptions;
 
 class BmiTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final PrintStream originalOut = System.out;
 
     @BeforeEach
     void setUpStreams() {
@@ -24,8 +21,10 @@ class BmiTest {
     }
 
     @AfterEach
-    void restoreStreams() {
+    void cleanup() {
         System.setOut(originalOut);
+        HealthList.clearHealthLists();
+        outContent.reset();
     }
 
     /**
@@ -113,66 +112,19 @@ class BmiTest {
         assertEquals(expected, outContent.toString());
     }
 
-    /**
-     * Tests the behaviour of a valid health command being passed into checkTypeOfHealth.
-     */
-    @Test
-    void checkTypeOfHealth_returnCorrectHealthType() throws
-            CustomExceptions.InvalidInput,
-            CustomExceptions.InsufficientInput{
-        String userInput = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-        String expected = HealthConstant.BMI;
-        String result = Health.checkTypeOfHealth(userInput);
-        assertEquals(expected, result);
-    }
-
-    /**
-     * Tests the behaviour of an invalid health command being passed into checkTypeOfHealth.
-     */
-    @Test
-    void checkTypeOfHealth_throwsInvalidInputExceptions() {
-        String userInput = "/h:run /height:1.71 /weight:60.50 /date:19-03-2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.checkTypeOfHealth(userInput));
-    }
-
-    /**
-     * Tests the behaviour of a correctly formatted user input being passed into getBmi.
-     */
-    @Test
-    void getBmi_correctInput_returnsCorrectBmiValues() throws CustomExceptions.InvalidInput {
-        String input = "/h:bmi /height:1.71 /weight:60.50 /date:19-03-2024";
-        String[] expected = {"bmi", "1.71", "60.50", "19-03-2024"};
-        String[] result = Bmi.getBmi(input);
-        assertArrayEquals(expected, result);
-    }
-
-    /**
-     * Test the behaviour of a string with missing parameter being passed in for getBmi.
-     */
-    @Test
-    void getBmi_wrongInput_throwsInvalidInputExceptions() {
-        String input = "/h:bmi /height:1.71 /date:19-03-2024";
-        assertThrows(CustomExceptions.InvalidInput.class, () -> Bmi.getBmi(input));
-    }
 
     /**
      * Test the behaviour of printing Bmi history.
      */
     @Test
-    void showBmiHistory_bmiObject_printsCorrectBmiHistory() {
+    void showBmiHistory_twoBmiObjects_printsCorrectBmiHistory() {
         Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
         Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
 
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
 
-        String expected = "2024-03-19"
-                + System.lineSeparator()
-                + "Your BMI is 22.86"
-                + System.lineSeparator()
-                + "Great! You're within normal range."
-                + System.lineSeparator()
-                + "2024-03-20"
+        String expected = "2024-03-20"
                 + System.lineSeparator()
                 + "Your BMI is 26.12"
                 + System.lineSeparator()
@@ -187,5 +139,46 @@ class BmiTest {
 
         HealthList.showBmiHistory();
         assertEquals(expected, outContent.toString());
+    }
+
+    /**
+     * Test deleting of bmi with valid list and valid index.
+     * Expected behaviour is to have one bmi entry left in the list.
+     *
+     * @throws CustomExceptions.OutOfBounds If the index is invalid.
+     */
+    @Test
+    void deleteBmi_properList_listOfSizeOne() throws CustomExceptions.OutOfBounds {
+        Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
+        Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
+        HealthList.addBmi(firstBmi);
+        HealthList.addBmi(secondBmi);
+
+        int index = 1;
+        HealthList.deleteBmi(index);
+        assertEquals(1, HealthList.getBmisSize());
+    }
+
+    /**
+     * Test deleting of bmi with empty list.
+     * Expected behaviour is for an AssertionError to be thrown.
+     */
+    @Test
+    void deleteBmi_emptyList_throwsAssertionError() {
+        assertThrows(AssertionError.class, () ->
+                HealthList.deleteBmi(0));
+    }
+
+    /**
+     * Test deleting of bmi with invalid index.
+     * Expected behaviour is for an OutOfBounds error to be thrown.
+     */
+    @Test
+    void deleteBmi_properListInvalidIndex_throwOutOfBoundsForBmi() {
+        Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
+        HealthList.addBmi(firstBmi);
+        int invalidIndex = 5;
+        assertThrows (CustomExceptions.OutOfBounds.class, () ->
+                HealthList.deleteBmi(invalidIndex));
     }
 }

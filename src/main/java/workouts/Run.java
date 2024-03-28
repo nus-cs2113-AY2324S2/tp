@@ -1,7 +1,7 @@
 package workouts;
+
 import java.time.LocalDate;
 
-import ui.Handler;
 import utility.CustomExceptions;
 import utility.Parser;
 import utility.ErrorConstant;
@@ -12,7 +12,7 @@ import utility.WorkoutConstant;
 /**
  * Represents a Run object.
  */
-public class Run extends Workout{
+public class Run extends Workout {
     protected Integer[] times;
     protected double distance;
     protected LocalDate date = null;
@@ -22,7 +22,7 @@ public class Run extends Workout{
     /**
      * Constructs a new Run object with the time and distance from user input.
      *
-     * @param stringTime The time taken for the run.
+     * @param stringTime     The time taken for the run.
      * @param stringDistance The distance of the run.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
@@ -36,9 +36,9 @@ public class Run extends Workout{
     /**
      * Overloaded constructor that takes in time, distance and the optional date parameter from user input.
      *
-     * @param stringTime The time taken for the run.
+     * @param stringTime     The time taken for the run.
      * @param stringDistance The distance of the run.
-     * @param stringDate The date of the run.
+     * @param stringDate     The date of the run.
      * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     public Run(String stringTime, String stringDistance, String stringDate) throws CustomExceptions.InvalidInput {
@@ -65,23 +65,37 @@ public class Run extends Workout{
             throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
         }
         // Command
-        results[WorkoutConstant.SUBSTRING_COMMAND] = Handler.extractSubstringFromSpecificIndex(input, "/e:");
+        results[WorkoutConstant.COMMAND_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/e:");
         // Distance
-        results[WorkoutConstant.SUBSTRING_DISTANCE] = Handler.extractSubstringFromSpecificIndex(input, "/d:");
+        results[WorkoutConstant.DISTANCE_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/d:");
         // Time
-        results[WorkoutConstant.SUBSTRING_TIME] = Handler.extractSubstringFromSpecificIndex(input, "/t:");
+        results[WorkoutConstant.TIME_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/t:");
         // Date
-        results[WorkoutConstant.SUBSTRING_DATE] = Handler.extractSubstringFromSpecificIndex(input, "/date:");
+        results[WorkoutConstant.DATE_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/date:");
 
-        assert !results[WorkoutConstant.SUBSTRING_COMMAND].isEmpty() : "Command should not be empty";
-        assert !results[WorkoutConstant.SUBSTRING_DISTANCE].isEmpty() : "Distance should not be empty";
-        assert results[WorkoutConstant.SUBSTRING_DISTANCE].matches("\\d+(\\.\\d+)?") :
+
+        assert !results[WorkoutConstant.COMMAND_INDEX].isEmpty() : "Command should not be empty";
+        assert !results[WorkoutConstant.DISTANCE_INDEX].isEmpty() : "Distance should not be empty";
+        assert results[WorkoutConstant.DISTANCE_INDEX].matches("\\d+(\\.\\d+)?") :
                 "Distance should be a valid numeric " + "value (assuming KM)";
-        assert !results[WorkoutConstant.SUBSTRING_TIME].isEmpty() : "Time should not be empty";
-        assert results[WorkoutConstant.SUBSTRING_TIME].matches("\\d{2}:\\d{2}:\\d{2}") : "Time should be " +
-                "in the format " + "HH:MM:SS";
+        assert !results[WorkoutConstant.TIME_INDEX].isEmpty() : "Time should not be empty";
 
         return results;
+    }
+
+    public static Run addRun(String[] runDetails) throws CustomExceptions.InvalidInput {
+        Run newRun;
+        if (runDetails[WorkoutConstant.DATE_INDEX].isEmpty()) {
+            newRun = new Run(
+                    runDetails[WorkoutConstant.TIME_INDEX],
+                    runDetails[WorkoutConstant.DISTANCE_INDEX]);
+        } else {
+            newRun = new Run(
+                    runDetails[WorkoutConstant.TIME_INDEX],
+                    runDetails[WorkoutConstant.DISTANCE_INDEX],
+                    runDetails[WorkoutConstant.DATE_INDEX]);
+        }
+        return newRun;
     }
 
     /**
@@ -89,7 +103,7 @@ public class Run extends Workout{
      *
      * @return Formatted string of the time for the run.
      */
-    public String getTimes()  {
+    public String getTimes() {
         if (isHourPresent) {
             return times[0] + ":" + times[1] + ":" + times[2];
         } else {
@@ -115,6 +129,15 @@ public class Run extends Workout{
         return pace;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     /**
      * Method parses the time format in either hh:mm:ss or mm:ss.
      * Sets {@code isHourPresent} variable to true if hours have been specified.
@@ -124,6 +147,7 @@ public class Run extends Workout{
      * @return A list of integers representing the hours (if present), minutes and seconds.
      */
     public Integer[] parseTime(String inputTime) throws CustomExceptions.InvalidInput {
+
         String[] stringTimeParts = inputTime.split(":");
         int inputLength = stringTimeParts.length;
         Integer[] integerTimes = new Integer[inputLength];
@@ -152,33 +176,86 @@ public class Run extends Workout{
      * Otherwise, throw {@code CustomExceptions.InvalidInput}  or {@code CustomExceptions.InsufficientInput}
      *
      * @param runDistance String representing the distance of the run
-     * @param runTime String representing the time taken for the run
-     * @param runDate String representing the date of the run
+     * @param runTime     String representing the time taken for the run
+     * @param runDate     String representing the date of the run
      * @return {@code true} if all parameters are valid.
      */
     public static boolean checkIfRunIsValid(String runDistance, String runTime, String runDate)
             throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {
 
-        try{
+        // Check to make sure there is sufficient input
+        if (runDistance.isBlank()) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_DISTANCE_EMPTY_ERROR);
+        }
+
+        if (runTime.isBlank()) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_EMPTY_ERROR);
+        }
+
+        // Check to see if distance is a double
+        try {
             double value = Double.parseDouble(runDistance);
-            if (value <= 0){
-                throw new CustomExceptions.InvalidInput(ErrorConstant.DISTANCE_MUST_BE_POSITIVE_ERROR);
+            if (value <= 0) {
+                throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_POSITIVE_ERROR);
             }
-        } catch (NumberFormatException e){
-            throw new CustomExceptions.InvalidInput(ErrorConstant.DISTANCE_MUST_BE_DOUBLE_ERROR);
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_DISTANCE_DOUBLE_ERROR);
         }
 
-        if(runTime.isBlank()){
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_BLANK_ERROR);
-        }
+        // Check to see if time is valid
+        checkIfTimeIsValid(runTime);
 
-        if (runDate.isBlank()){
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_DATE_BLANK_ERROR);
+        // Check to see if date is valid
+        if (!runDate.isBlank()) {
+            Parser.validateDateInput(runDate);
         }
-
         return true;
+    }
+
+    public static void checkIfTimeIsValid(String inputTime) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        String[] stringTimeParts = inputTime.split(UiConstant.SPLIT_BY_COLON);
+        int inputLength = stringTimeParts.length;
+        int hours = 0;
+        int minute;
+        int seconds;
+
+        // if it is neither in MM:SS nor HH:MM:SS format
+        if (inputLength != UiConstant.MAX_RUNTIME_ARRAY_LENGTH && inputLength != UiConstant.MIN_RUNTIME_ARRAY_LENGTH) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.RUN_TIME_INVALID_FORMAT_ERROR);
+        }
+
+        // Check if the value provided is an integer
+        try {
+            if (inputLength == UiConstant.MAX_RUNTIME_ARRAY_LENGTH) {
+                hours = Integer.parseInt(stringTimeParts[0]);
+                minute = Integer.parseInt(stringTimeParts[1]);
+                seconds = Integer.parseInt(stringTimeParts[2]);
+            } else {
+                minute = Integer.parseInt(stringTimeParts[0]);
+                seconds = Integer.parseInt(stringTimeParts[1]);
+            }
+        } catch (NumberFormatException e) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_INTEGER_ERROR);
+        }
+
+        // Check if hour is within the range
+        if (hours < 0 || hours > 23) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_HOURS_RANGE_ERROR);
+        }
+
+        // Check if minute is within the range
+        if (minute < 0 || minute > 59) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_MINUTES_RANGE_ERROR);
+        }
+
+        // Check if seconds is within the range
+        if (seconds < 0 || seconds > 59) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.RUN_TIME_SECONDS_RANGE_ERROR);
+        }
 
     }
+
 
     /**
      * Method checks if hour has been specified, then returns total seconds.
@@ -221,12 +298,35 @@ public class Run extends Workout{
     @Override
     public String toString() {
         String printedDate;
-        if (date != null){
+        if (date != null) {
             printedDate = date.toString();
-        } else{
+        } else {
             printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
         }
-        return String.format(WorkoutConstant.RUN_FORMAT, WorkoutConstant.RUN,
+        return String.format(WorkoutConstant.RUN_DATA_FORMAT, WorkoutConstant.RUN,
                 getTimes(), getDistance(), getPace(), printedDate);
     }
+
+    public String getFormatForAllHistory() {
+        String printedDate;
+
+        if (date != null) {
+            printedDate = date.toString();
+        } else {
+            printedDate = ErrorConstant.NO_DATE_SPECIFIED_ERROR;
+        }
+        return String.format(WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT,
+                WorkoutConstant.RUN,
+                printedDate,
+                getDistance(),
+                getTimes(),
+                getPace(),
+                "-", // Placeholder for gym sets (NA)
+                "-", // Placeholder for gym reps (NA)
+                "-", // Placeholder for gym weight (NA)
+                "-"  // Placeholder for gym station (NA)
+        );
+
+    }
+
 }

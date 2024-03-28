@@ -1,13 +1,20 @@
+//@@author L5-Z
 package storage;
 
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.io.IOException;
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import workouts.Workout;
-import health.Health;
+import health.Appointment;
+import health.Bmi;
+import health.Period;
+import utility.ErrorConstant;
+import workouts.Gym;
+import workouts.Run;
 import utility.CustomExceptions;
 import utility.UiConstant;
 
@@ -16,20 +23,21 @@ import utility.UiConstant;
  */
 public class DataFile {
 
+    public static String userName = null;
     private static DataFile instance = null;
 
     /**
      * Private constructor to prevent instantiation from outside the class.
      */
     private DataFile() {
-        initializeDataFile();
+        loadDataFile();
     }
 
     /**
      * Returns a singular instance of the DataFile class.
      * If the instance is null, it creates a new instance.
      *
-     * @return An instance of the LogFile class.
+     * @return An instance of the DataFile class.
      */
     public static DataFile getInstance() {
         if (instance == null) {
@@ -39,58 +47,41 @@ public class DataFile {
     }
 
     /**
+     * Checks if data file already exists. If it does, log it. Else, create the file and log the event.
+     *
+     * @param dataFile Represents the data file.
+     * @return Integer representing a found data file, 0, or not found, 1
+     * @throws CustomExceptions.FileCreateError If there is an error creating the data file.
+     */
+    public static int verifyIntegrity(File dataFile) throws CustomExceptions.FileCreateError {
+        try {
+            if (dataFile.createNewFile()) {
+                LogFile.writeLog("Created new data file", false);
+                return UiConstant.FILE_NOT_FOUND;
+            } else {
+                LogFile.writeLog("Reading from existing data file", false);
+                return UiConstant.FILE_FOUND;
+            }
+        } catch (IOException e) {
+            throw new CustomExceptions.FileCreateError(ErrorConstant.CREATE_FILE_ERROR);
+        }
+    }
+
+    /**
      * Initialises the data file to be used. Function exits if file cannot be created.
      */
-    public static void initializeDataFile() {
-        File dataFile = new File(UiConstant.DATA_FILE_PATH);
+    public static int loadDataFile() {
+        int status = UiConstant.FILE_NOT_FOUND;
         try {
-            checkDataFile(dataFile);
+            status = verifyIntegrity(UiConstant.SAVE_FILE);
         } catch (CustomExceptions.FileCreateError e) {
-            System.err.println("Cannot create data file.");
+            System.err.println(ErrorConstant.CREATE_FILE_ERROR);
+            LogFile.writeLog(ErrorConstant.CREATE_FILE_ERROR, true);
             System.exit(1);
         }
         Path dataFilePath = Path.of(UiConstant.DATA_FILE_PATH);
         assert Files.exists(dataFilePath) : "Data file does not exist.";
-    }
-
-    /**
-     * Checks if data file already exists. If it does, log it. Else, create the file and log the event.
-     * @param dataFile Represents the data file.
-     * @throws CustomExceptions.FileCreateError If there is an error creating the data file.
-     */
-    public static void checkDataFile(File dataFile) throws CustomExceptions.FileCreateError {
-        try {
-            if (dataFile.createNewFile()) {
-                LogFile.writeLog("Created new data file", false);
-            } else {
-                LogFile.writeLog("Reading from existing data file", false);
-            }
-        } catch (IOException e) {
-            throw new CustomExceptions.FileCreateError("Could not create data file.");
-        }
-    }
-
-    /**
-     * Writes health data to the data file.
-     * @param healthData Health data to be written.
-     */
-    public static void writeHealthData(Health healthData) {
-        // bmi format: bmi|HEIGHT|WEIGHT|BMI_SCORE|DATE (NA if no date)
-        // period format: period|START|END|DURATION|NEXT
-        // appointment format: appointment|DATE|DESCRIPTION
-    }
-
-    /**
-     * Writes Workout data to the data file.
-     * @param workoutData Workout data to be written.
-     */
-    public static void writeWorkoutData(Workout workoutData){
-        // run format: run|DISTANCE|TIME|PACE|DATE
-        /*
-        Gym Format:
-        gym|NUM_STATIONS|DATE|gym_1|STATION1_NAME|NUM_SETS|WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
-        |gym_2|STATION2_NAME...
-         */
+        return status;
     }
 
     /**
@@ -98,101 +89,168 @@ public class DataFile {
      * @throws CustomExceptions.FileReadError If there is an error reading the data file.
      */
     public static void readDataFile() throws CustomExceptions.FileReadError {
-        int itemCount = 0; // just for getting lineNumber, no other use
-        try {
-            Scanner readFile = new Scanner(UiConstant.DATA_FILE_PATH);
-            while (readFile.hasNext()) {
-                String [] words = readFile.nextLine().split("\\|");
-                switch (words[0].trim()){
-                // case "macro":
-                //     processMacro(words);
-                //     break;
+        int lineNumberCount = 0; // just for getting lineNumber, no other use
+        try (final Scanner readFile = new Scanner(UiConstant.SAVE_FILE)) {
+            LogFile.writeLog("Read begins", false);
 
-                // case "sleep":
-                //     processSleep(words);
-                //     break;
+            while (readFile.hasNextLine()) {
+                String [] input = readFile.nextLine().split(UiConstant.SPLIT_BY_COLON);
 
-                // case "appointment":
-                //     processAppointment(words);
-                //     break;
+                String dataType = input[UiConstant.DATA_TYPE_INDEX].trim();
+                String name = input[UiConstant.NAME_INDEX].trim();
+
+                DataType filter = DataType.valueOf(dataType);
+                switch (filter){
+
+                case NAME:
+                    processName(name);
+                    break;
+
+                case APPOINTMENT:
+                    // processAppointment(words);
+                    break;
                 
-                case "period":
+                case PERIOD:
                     // processPeriod(words);
                     break;
 
-                case "bmi":
+                case BMI:
                     // processBmi(words);
                     break;
 
-                case "gym":
+                case GYM:
                     // processGym(words);
                     break;
 
-                case "run":
+                case RUN:
                     // processRun(words);
                     break;
 
-                default: {
-                    System.out.println("Invalid item at line: " + (itemCount + 1) + "!");
-                    LogFile.writeLog("Invalid item read", true);
+                default:
+                    break; // valueOf results in immediate exception for non-match with enum DataType
                 }
-                }
-                itemCount += 1;
+                lineNumberCount += 1;
             }
         } catch (Exception e) {
-            throw new CustomExceptions.FileReadError("Could not read data file contents");
+            LogFile.writeLog("Invalid item read at line: " + (lineNumberCount + 1) + "! " + e, true);
+            throw new CustomExceptions.FileReadError(ErrorConstant.CORRUPT_ERROR);
         }
     }
-    /*
-    private Health health;
+    public static void processName(String name){
+        userName = name.trim();
+    }
 
-    public void save(int id, Health health) {
-        assert health != null : "Health object cannot be null when saving";
-        assert id >= 0 : "ID must be non-negative for saving";
-        String fileName = "health_data_" + id + ".txt";
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
-            //bw.write("Height: " + Health.height);
-            bw.newLine();
-            //bw.write("Weight: " + Health.weight);
+    public static void processAppointment(){}
+    public static void processPeriod(){}
+    public static void processBmi(){}
+    public static void processGym(){}
+    public static void processRun(){}
+
+    /**
+     * Saves the user data to a file.
+     *
+     * // param health data of all specified user input to be saved.
+     * @throws CustomExceptions If an error occurs during file operations.
+     */
+    public static void saveDataFile(String name,
+                                    ArrayList<Bmi> bmiArrayList,
+                                    ArrayList<Appointment> appointmentArrayList,
+                                    ArrayList<Period> periodArrayList,
+                                    ArrayList<Run> runArrayList,
+                                    ArrayList<Gym> gymArrayList
+                                    ) throws CustomExceptions.FileWriteError {
+
+        try (FileWriter dataFile = new FileWriter(UiConstant.DATA_FILE_PATH)) {
+            LogFile.writeLog("Attempting to write data, name: " + name, false);
+            writeName(dataFile, name);
+            LogFile.writeLog("Written name", false);
+            writeHealthData(bmiArrayList,
+                    appointmentArrayList,
+                    periodArrayList);
+
+            writeWorkoutData(runArrayList, gymArrayList);
+
+            LogFile.writeLog("Write end", false);
+            dataFile.close();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CustomExceptions.FileWriteError(ErrorConstant.SAVE_ERROR);
         }
     }
 
-    public static DataFile load(int id) {
-        assert id >= 0 : "ID must be non-negative for loading";
-        String fileName = "health_data_" + id + ".txt";
-        DataFile dataFile = new DataFile();
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * Writes health data to the data file.
+     *
+     * // param healthData Health data to be written.
+     */
+    public static void writeName(FileWriter dataFile, String name) throws IOException {
+        dataFile.write(DataType.NAME + UiConstant.SPLIT_BY_COLON + name.trim());
+        LogFile.writeLog("Wrote name to file", false);
+    }
+
+    /**
+     * Writes health data to the data file.
+     *
+     * // param healthData Health data to be written.
+     */
+    public static void writeHealthData(ArrayList<Bmi> bmiArrayList,
+                                       ArrayList<Appointment> appointmentArrayList,
+                                       ArrayList<Period> periodArrayList) {
+        /*
+        // Write each bmi entry in a specific format
+        // bmi format: bmi|HEIGHT|WEIGHT|BMI_SCORE|DATE (NA if no date)
+        for (Health bmiEntry : bmiArrayList) {
+            // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
+            // + task.getRange() + UiConstant.LINE.trim() +
+            //       task.getStatusIcon() + System.LineSeparator());
         }
-        return dataFile;
-    }
 
-    public static void readFile(String fileName) {
-        assert fileName != null && !fileName.isEmpty() : "File name cannot be null or empty";
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Write each appointment entry in a specific format
+        // appointment format: appointment|DATE|DESCRIPTION
+        for (Health appointmentEntry : appointmentArrayList) {
+            // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
+            // + task.getRange() + UiConstant.LINE.trim() +
+            //       task.getStatusIcon() + System.LineSeparator());
         }
+
+        // Write each period entry in a specific format
+        // period format: period|START|END|DURATION|NEXT
+        for (Health periodEntry : periodArrayList) {
+            // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
+            // + task.getRange() + UiConstant.LINE.trim() +
+            //       task.getStatusIcon() + System.LineSeparator());
+        }
+
+         */
     }
 
-    public void setHealth(Health health) {
-        assert health != null : "Cannot set a null Health object";
-        this.health = health;
+    /**
+     * Writes Workout data to the data file.
+     * // param workoutData Workout data to be written.
+     */
+    public static void writeWorkoutData(ArrayList<Run> runArrayList, ArrayList<Gym> gymArrayList){
+        /*
+        // Write each period entry in a specific format
+        // run format: run|DISTANCE|TIME|PACE|DATE
+        for (Workout runEntry : runArrayList) {
+            // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
+            // + task.getRange() + UiConstant.LINE.trim() +
+            //       task.getStatusIcon() + System.LineSeparator());
+        }
 
+        // Write each period entry in a specific format
+
+        Gym Format:
+        gym|NUM_STATIONS|DATE|gym_1|STATION1_NAME|NUM_SETS|WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
+        |gym_2|STATION2_NAME...
+
+        for (Workout gymEntry : gymArrayList) {
+            // dataFile.write(task.getType() + UiConstant.LINE.trim() + task.getLabel() + UiConstant.LINE.trim()
+            // + task.getRange() + UiConstant.LINE.trim() +
+            //       task.getStatusIcon() + System.LineSeparator());
+        }
+        */
     }
-    */
-
 
 }
 

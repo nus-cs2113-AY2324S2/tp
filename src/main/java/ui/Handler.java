@@ -1,26 +1,22 @@
 package ui;
 
-import health.Bmi;
-import health.Health;
 import health.HealthList;
-import health.Period;
-
+import storage.DataFile;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.HealthConstant;
 import utility.WorkoutConstant;
 import utility.Command;
-
+import utility.Filters;
+import utility.Parser;
+import workouts.WorkoutList;
 import workouts.Gym;
 import workouts.GymStation;
 import workouts.Run;
-
 import java.util.Scanner;
-
 import storage.LogFile;
 import workouts.Workout;
-
 
 /**
  * Represents user input parsing and handling
@@ -48,11 +44,12 @@ public class Handler {
                 Command command = Command.valueOf(instruction);
                 switch (command) {
                 case EXIT:
+                    LogFile.writeLog("User ran command: exit", false);
                     System.out.println(UiConstant.EXIT_MESSAGE);
                     return;
 
-                case NEW:
-                    handleExercise(userInput);
+                case WORKOUT:
+                    handleWorkout(userInput);
                     break;
 
                 case HEALTH:
@@ -67,6 +64,10 @@ public class Handler {
                     handleLatest(userInput);
                     break;
 
+                case DELETE:
+                    handleDelete(userInput);
+                    break;
+
                 case HELP:
                     Output.printHelp();
                     break;
@@ -74,32 +75,12 @@ public class Handler {
                 default:
                     break; // valueOf results in immediate exception for non-match with enum Command
                 }
+            } catch (CustomExceptions.InvalidInput e) {
+                Output.printException(e.getMessage());
             } catch (IllegalArgumentException e) {
-                Output.printException(e, ErrorConstant.INVALID_COMMAND_ERROR);
+                Output.printException(ErrorConstant.INVALID_COMMAND_ERROR);
             }
         }
-    }
-
-    /**
-     * Extracts a substring from the given input string based on the provided delimiter.
-     *
-     * @param input     The input string from which to extract the substring.
-     * @param delimiter The delimiter to search for in the input string.
-     * @return The extracted substring, or an empty string if the delimiter is not found.
-     */
-    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
-        int index = input.indexOf(delimiter);
-        if (index == -1 || index == input.length() - delimiter.length()) {
-            return "";
-        }
-
-        int startIndex = index + delimiter.length();
-        int endIndex = input.indexOf("/", startIndex);
-        if (endIndex == -1) {
-            endIndex = input.length();
-        }
-
-        return input.substring(startIndex, endIndex).trim();
     }
 
     /**
@@ -107,41 +88,83 @@ public class Handler {
      *
      * @param userInput The user input string.
      */
-    public static void handleExercise(String userInput) {
+    public static void handleWorkout(String userInput) {
         try {
             String typeOfExercise = checkTypeOfExercise(userInput);
             if (typeOfExercise.equals(WorkoutConstant.RUN)) {
                 String[] runDetails = Run.getRun(userInput);
-                if (runDetails[0].isEmpty() || runDetails[1].isEmpty() || runDetails[2].isEmpty()
-                        || runDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
-
-                Run newRun = new Run(runDetails[2], runDetails[1], runDetails[3]);
+                Run newRun = Run.addRun(runDetails);
                 Output.printAddRun(newRun);
 
             } else if (typeOfExercise.equals(WorkoutConstant.GYM)) {
                 int numberOfStations = getNumberOfGymStations(userInput);
-                Gym gym = new Gym();
+
+                String gymDate = getDateFromGym(userInput);
+                Gym gym;
+                if (gymDate.isEmpty()) {
+                    gym = new Gym();
+                } else {
+                    gym = new Gym(gymDate);
+                }
                 getGymStation(numberOfStations, gym);
             }
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+            Output.printException(e.getMessage());
+        }
+    }
+
+
+    /**
+     * Handles history command.
+     * Show history of all exercises, run or gym.
+     *
+     * @param userInput The user input string.
+     */
+    public static void handleHistory(String userInput) {
+        String filter = Parser.parseHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printHistory(filter);
         }
     }
 
     /**
-     * Handle history command.
-     * Expected command: `history /e:[all\run\gym]`
-     * Show history of all exercises, run or gym.
+     * Handles the delete command.
+     * Deletes an item stored within PulsePilot.
+     *
      * @param userInput The user input string.
      */
-    public static void handleHistory(String userInput) {
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printHistory(filter);
-    }
+    public static void handleDelete(String userInput) throws CustomExceptions.InvalidInput {
+        String[] parsedInputs = Parser.parseDeleteInput(userInput);
+        if (parsedInputs == null) {
+            return;
+        }
+        try {
+            Filters parsedFilter = Filters.valueOf(parsedInputs[0].toUpperCase());
+            int index = Integer.parseInt(parsedInputs[1]) - 1;
+            switch (parsedFilter) {
+            case BMI:
+                HealthList.deleteBmi(index);
+                break;
 
+            case PERIOD:
+                HealthList.deletePeriod(index);
+                break;
+
+            case GYM:
+                WorkoutList.deleteGym(index);
+                break;
+
+            case RUN:
+                WorkoutList.deleteRun(index);
+                break;
+
+            default:
+                break;
+            }
+        } catch (CustomExceptions.OutOfBounds e) {
+            Output.printException(e.getMessage());
+        }
+    }
 
     /**
      * Handles user input related to health data. Parses the user input to determine
@@ -150,51 +173,49 @@ public class Handler {
      * @param userInput A string containing health data information of user.
      */
     public static void handleHealth(String userInput) {
-        Output.printLine();
         try {
-            String typeOfHealth = Health.checkTypeOfHealth(userInput);
-            if (typeOfHealth.equals(HealthConstant.BMI)){
-                String[] bmiDetails = Bmi.getBmi(userInput);
+            String typeOfHealth = Parser.extractSubstringFromSpecificIndex(userInput, HealthConstant.HEALTH_FLAG);
+            Filters parsedFilter = Filters.valueOf(typeOfHealth.toUpperCase());
+            switch(parsedFilter) {
+            case BMI:
+                Parser.parseBmiInput(userInput);
+                break;
 
-                if (bmiDetails[0].isEmpty()
-                        || bmiDetails[1].isEmpty()
-                        || bmiDetails[2].isEmpty()
-                        || bmiDetails[3].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
+            case PERIOD:
+                Parser.parsePeriodInput(userInput);
+                break;
 
-                Bmi newBmi = new Bmi(bmiDetails[1], bmiDetails[2], bmiDetails[3]);
-                HealthList.addBmi(newBmi);
-                System.out.println(HealthConstant.BMI_ADDED_MESSAGE_PREFIX
-                        + bmiDetails[1]
-                        + UiConstant.LINE
-                        + bmiDetails[2]
-                        + UiConstant.LINE
-                        + bmiDetails[3]);
-                System.out.println(newBmi);
-            } else if (typeOfHealth.equals(HealthConstant.PERIOD)){
-                String[] periodDetails = Period.getPeriod(userInput);
+            case PREDICTION:
+                Parser.parsePredictionInput();
+                break;
 
-                if (periodDetails[0].isEmpty() || periodDetails[1].isEmpty() || periodDetails[2].isEmpty()) {
-                    throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
-                }
+            case APPOINTMENT:
+                Parser.parseAppointmentInput(userInput);
+                break;
 
-                Period newPeriod = new Period(periodDetails[1], periodDetails[2]);
-                if (newPeriod.getStartDate().isAfter(newPeriod.getEndDate())) {
-                    throw new CustomExceptions.InvalidInput(HealthConstant.PERIOD_START_MUST_BE_BEFORE_END);
-                }
-
-                HealthList.addPeriod(newPeriod);
-                System.out.println(HealthConstant.PERIOD_ADDED_MESSAGE_PREFIX
-                        + periodDetails[1]
-                        + UiConstant.LINE
-                        + periodDetails[2]);
-                System.out.println(newPeriod);
+            default:
+                break;
             }
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+        } catch (CustomExceptions.InvalidInput |  CustomExceptions.InsufficientInput e) {
+            Output.printException(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            Output.printException(ErrorConstant.HEALTH_INPUT_BLANK_ERROR);
         }
-        Output.printLine();
+    }
+
+    /**
+     * Retrieves the date from the input for a Gym output.
+     * Returns empty string if not specified.
+     *
+     * @param input The user input string.
+     * @return A string representing the date.
+     */
+    public static String getDateFromGym(String input) {
+        try {
+            return Parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.SPLIT_BY_DATE);
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     /**
@@ -207,49 +228,50 @@ public class Handler {
     //@@author JustinSoh
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
-        String numberOfStationString = extractSubstringFromSpecificIndex(input,
+        String numberOfStationString = Parser.extractSubstringFromSpecificIndex(input,
                 WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
         assert Integer.parseInt(numberOfStationString) > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
         return Integer.parseInt(numberOfStationString);
     }
 
     //@@author JustinSoh
+
     /**
      * Retrieves the gym station details and adds a GymStation object to Gym.
      *
      * @param numberOfStations The number of stations in one gym session.
-     * @param gym The Gym object.
+     * @param gym              The Gym object.
      */
     private static void getGymStation(int numberOfStations, Gym gym) {
-        try{
-            for (int i = 0; i < numberOfStations; i++) {
+        int i = 0;
+        while (i < numberOfStations) {
+            try {
+
                 Output.printGymStationPrompt(i + 1);
                 String userInput = in.nextLine();
-                String[] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-                String[] validatedInputs = GymStation.checkIfGymStationInputValid(inputs);
-                Gym.addGymStationInput(validatedInputs, gym);
+                GymStation.addGymStationInputValid(gym, userInput);
+                i++;
+            } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
+                Output.printException(e.getMessage());
             }
-            Output.printAddGym(gym);
-        } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
-            Output.printException(e, e.getMessage());
         }
+        Output.printAddGym(gym);
     }
 
-    //@@author JustinSoh
     /**
      * Prints the latest run, gym, BMI entry or Period tracked.
      *
      * @param userInput String representing user input.
      */
-    public static void handleLatest(String userInput){
-        String [] inputs = userInput.split(UiConstant.SPLIT_BY_SLASH);
-        String filter = inputs[1].split(UiConstant.SPLIT_BY_COLON)[1];
-        Output.printLatest(filter);
+    public static void handleLatest(String userInput) {
+        String filter = Parser.parseHistoryAndLatestInput(userInput);
+        if (filter != null) {
+            Output.printLatest(filter);
+        }
     }
 
-
-
     //@@author
+
     /**
      * Checks the type of exercise based on the user input.
      * Usage: to use this method whenever the user enters a new exercise.
@@ -258,7 +280,7 @@ public class Handler {
      *
      * @param userInput The user input string.
      * @return The type of exercise {@code Constant.RUN} or {@code Constant.GYM}.
-     * @throws CustomExceptions.InvalidInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InvalidInput      If the user input is invalid or blank.
      * @throws CustomExceptions.InsufficientInput If the user input is insufficient.
      */
     public static String checkTypeOfExercise(String userInput) throws
@@ -269,25 +291,22 @@ public class Handler {
         boolean isRunValid = false;
         boolean isGymValid = false;
 
-        String exerciseType = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_EXERCISE_TYPE);
-        try {
-            exerciseTypeIsValid = Workout.checkIfExerciseTypeIsValid(exerciseType);
-            boolean isRun = exerciseType.equals(WorkoutConstant.RUN);
-            boolean isGym = exerciseType.equals(WorkoutConstant.GYM);
+        String exerciseType = Parser.extractSubstringFromSpecificIndex(userInput,
+                WorkoutConstant.SPLIT_BY_EXERCISE_TYPE);
 
-            if (isRun) {
-                String runDistance = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
-                String runTime = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
-                String runDate = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
-                isRunValid = Run.checkIfRunIsValid(runDistance, runTime, runDate);
-            } else if (isGym) {
-                String numberOfStations = extractSubstringFromSpecificIndex(userInput,
-                        WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
-                isGymValid = Gym.checkIfGymIsValid(numberOfStations);
-            }
+        exerciseTypeIsValid = Workout.checkIfExerciseTypeIsValid(exerciseType);
+        boolean isRun = exerciseType.equals(WorkoutConstant.RUN);
+        boolean isGym = exerciseType.equals(WorkoutConstant.GYM);
 
-        } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
-            Output.printException(e, e.getMessage());
+        if (isRun) {
+            String runDistance = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
+            String runTime = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
+            String runDate = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
+            isRunValid = Run.checkIfRunIsValid(runDistance, runTime, runDate);
+        } else if (isGym) {
+            String numberOfStations = Parser.extractSubstringFromSpecificIndex(userInput,
+                    WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
+            isGymValid = Gym.checkIfGymIsValid(numberOfStations);
         }
 
         if (exerciseTypeIsValid && isRunValid) {
@@ -295,32 +314,33 @@ public class Handler {
         } else if (exerciseTypeIsValid && isGymValid) {
             return WorkoutConstant.GYM;
         } else {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_ERROR);
+            return "";
         }
 
     }
-
 
     /**
      * Get user's name, and print profile induction messages.
      */
     public static void userInduction() {
         String name = in.nextLine();
+        DataFile.userName = name;
         System.out.println("Welcome aboard, Captain " + name);
-        LogFile.writeLog("Name entered: " + name, false);
         Output.printLine();
 
         System.out.println("Tips: Enter 'help' to view the pilot manual!");
         System.out.println("Initiating FTL jump sequence...");
 
+        // DataFile.saveName(name);
         LogFile.writeLog("Name Entered: " + name, false);
+
         System.out.println("FTL jump completed.");
     }
 
     /**
      * Initialise scanner to read user input.
      */
-    public static void initialiseScanner(){
+    public static void initialiseScanner() {
         in = new Scanner(System.in);
         assert in != null : "Object cannot be null";
     }
@@ -328,8 +348,8 @@ public class Handler {
     /**
      * Close scanner to stop reading user input.
      */
-    public static void destroyScanner(){
-        if (in != null){
+    public static void destroyScanner() {
+        if (in != null) {
             in.close();
         }
     }
@@ -342,14 +362,21 @@ public class Handler {
         Output.printWelcomeBanner();
         initialiseScanner();
         LogFile.writeLog("Started bot", false);
-        // Yet to implement : Check for existing save, if not, make a new one
-        // Yet to implement : int status = Storage.load();
-        int status = 1;
-        Output.printGreeting(1);
 
-        if (status == 1) {
+        int status = DataFile.loadDataFile();
+
+        if (status == 0) {
+            try {
+                DataFile.readDataFile(); // File read
+                Output.printGreeting(status, DataFile.userName);
+            } catch (CustomExceptions.FileReadError e) {
+                Output.printException(e.getMessage());
+            }
+        } else {
+            Output.printGreeting(status, DataFile.userName);
             userInduction();
         }
+
         System.out.println("Terminal primed. Command inputs are now accepted...");
         Output.printLine();
     }
@@ -359,7 +386,16 @@ public class Handler {
      * and indicating the filename where tasks are saved.
      */
     public static void terminateBot() {
-        // Yet to implement : Storage.saveTasks(tasks);
+        LogFile.writeLog("User terminating PulsePilot", false);
+        try {
+            LogFile.writeLog("Attempting to save data file", false);
+            DataFile.saveDataFile(DataFile.userName, null, null, null,
+                    null, null);
+            LogFile.writeLog("File saved", false);
+        } catch (CustomExceptions.FileWriteError e) {
+            LogFile.writeLog("File write error", true);
+            Output.printException(e.getMessage());
+        }
         Output.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
         LogFile.writeLog("Bot exited gracefully", false);
