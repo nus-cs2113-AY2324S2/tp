@@ -20,6 +20,23 @@ Investment accounts—each encapsulated within the application's framework for s
 expansion will provide a comprehensive view of diverse financial sources and enhance personal financial management 
 within BudgetBuddy.
 
+### [Implemented] Category feature
+
+#### Description
+
+The Category feature empowers users to effectively categorize transactions based on their preferences. When initiating a
+new transaction through the `Add` command, users are prompted to select a category from a predefined list. This ensures
+organized and streamlined transaction management.
+
+#### Design and Implementation
+
+The implementation of the Category feature revolves around the integration of a `category` attribute within each
+transaction object. This attribute is defined as a member of the `Category` enum class.
+
+Upon invoking the `Add` command, users are presented with a selection prompt featuring the available categories. User
+input, typically in the form of a numerical identifier corresponding to a category within the enum class, facilitates
+the assignment of the appropriate enum object to the transaction's category attribute.
+
 ## Product scope
 ### Target user profile
 
