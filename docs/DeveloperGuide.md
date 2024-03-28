@@ -12,22 +12,29 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Professional culinary practitioners, students who love to cook.
+Basically anyone who cooks and want to keep track of his/her recipes!
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+The user will be able to add, access, and list recipes.
+He can also filter recipes based on ingredients, time required, dietary restrictions, etc.
+The saved recipes will be loaded in a recipe text file for easy sharing with friends.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...          | So that I can ...                                            |
+|---------|----------|------------------------|--------------------------------------------------------------|
+| v1.0    | new user | see usage instructions | refer to them when I forget how to use the application       |
+| v1.0    | user     | add a recipe           | curate my own unique recipes for future use                  |
+| v1.0    | user     | delete a recipe        | remove any outdated or unimportant recipes                   |
+| v2.0    | user     | find a recipe by name  | locate a recipe without having to go through the entire list |
+| v2.0    | foodie   | save and load recipes  | share recipes with friends conveniently                      |
 
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
+Users can use the help function to understand all the available commands they can use
 
 ## Glossary
 

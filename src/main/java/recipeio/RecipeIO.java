@@ -28,13 +28,14 @@ public class RecipeIO {
     }
 
     public void runCommandLoopUntilExitCommand() {
-        logger.log(Level.INFO, "asking for first input from user.");
+        logger.log(Level.INFO, Constants.MESSAGE_ASK_INPUT);
         String userInput = ui.getUserInput();
         String parsedCommand = InputParser.parseCommand(userInput);
+        assert !userInput.isEmpty() : "user input empty";
 
         while (!parsedCommand.equals(Constants.EXIT_COMMAND)) {
-            logger.log(Level.INFO, "not an exit command.");
             recipeList.executeCommand(parsedCommand, userInput);
+            logger.log(Level.INFO, Constants.MESSAGE_ASK_INPUT);
             userInput = ui.getUserInput();
             parsedCommand = InputParser.parseCommand(userInput);
         }

@@ -38,8 +38,14 @@ public class InputParser {
      * @param userInput input from the user in the command line.
      * @return the part of the user input after the command. e.g. 1
      */
-    public static int parseID(String userInput) {
-        String id = userInput.trim().split(" ")[INDEX_ID];
+    public static Integer parseID(String userInput) {
+        String id = "";
+        try {
+            id = userInput.trim().split(" ")[INDEX_ID];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Index not given, please enter an index");
+            return null;
+        }
         return Integer.parseInt(id);
     }
 

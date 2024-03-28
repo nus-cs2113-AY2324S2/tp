@@ -62,8 +62,8 @@ public class UITest {
         PrintStream printStream = new PrintStream(testOut);
         System.setOut(printStream);
 
-        String expected = UI.SEPARATOR + System.lineSeparator() +
-                "See you again chef!" + System.lineSeparator() +
+        String expected =
+                "See you again chef! (｡˃ ᵕ ˂ ) ♨" + System.lineSeparator() +
                 UI.SEPARATOR + System.lineSeparator();
 
         UI.bye();

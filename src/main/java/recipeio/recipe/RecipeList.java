@@ -7,6 +7,7 @@ import recipeio.commands.DeleteRecipeCommand;
 import recipeio.commands.FindByAllergyCommand;
 import recipeio.commands.FindCommand;
 import recipeio.commands.ListRecipeCommand;
+import recipeio.exceptions.InvalidIndexException;
 import recipeio.ui.UI;
 
 import java.util.ArrayList;
@@ -55,13 +56,12 @@ public class RecipeList {
         AddRecipeCommand.execute(recipe, recipes);
     }
 
-    public void delete (String userInput) {
-        int index = InputParser.parseID(userInput);
-        DeleteRecipeCommand.execute(index, recipes);
-    }
-
     public void delete (int index) {
-        DeleteRecipeCommand.execute(index, recipes);
+        try {
+            DeleteRecipeCommand.execute(index, recipes);
+        } catch (InvalidIndexException e) {
+            System.out.println(e.getMessage() + "\nPlease enter a valid index");
+        }
     }
 
     public void listRecipes() {
@@ -85,13 +85,21 @@ public class RecipeList {
             add(userInput);
             break;
         case Constants.DELETE_COMMAND:
-            delete(userInput);
+            Integer index = InputParser.parseID(userInput);
+            if (index != null) {
+                delete(index);
+            }
             break;
         case Constants.FIND_COMMAND:
             find(userInput);
             break;
+        case Constants.HELP_COMMAND:
+            UI.printInstructions();
+            break;
         default:
-            System.out.println("try another command");
+            UI.printInvalidCommandWarning();
+            UI.printInstructions();
+            break;
         }
     }
 }
