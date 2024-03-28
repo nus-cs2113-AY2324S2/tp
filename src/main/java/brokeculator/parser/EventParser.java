@@ -18,6 +18,8 @@ public class EventParser {
         } catch (Exception e) {
             return new InvalidCommand(e.getMessage());
         }
-        return new AddEventCommand(userInputs[0], userInputs[1]);
+        String eventName = userInputs[0];
+        String eventDescription = userInputs[1];
+        return new AddEventCommand(eventName, eventDescription);
     }
 }

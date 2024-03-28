@@ -40,6 +40,31 @@ This is facilitated by the `FileManager` and `GeneralFileParser` classes, with t
 The `GeneralFileParser` class reads the file and returns a list of strings.
 The process is shown in the sequence diagram below:
 ![img.png](images/category_load_sequence.png)
+
+# Event feature
+**Implementation** </br>
+The event feature aims to group expenses happening on specific occasions together. 
+The `Event` class stores the details of the event and the list of expenses that are associated with the event.
+The `EventManager` class is responsible for aggregate operations on the events.
+
+The UMl diagram below shows the main relationships between the classes in the event feature (some methods are omitted) </br>
+![img.png](images/Event_class.png)
+
+The following sequence diagrams show how a user input is processed to add the events: </br>
+
+![img.png](images/addEventCommand.png) </br>
+![img.png](images/executeAddEventCommand.png)
+
+**User input event main parsing sequence**
+1. The user enters a command to add an event
+2. The `EventParser` class parses the user input to identify the event name and the event description
+3. The `AddEventCommand` object is created with the event name and description
+4. When executed, the `AddEventCommand` object creates an `Event` object with the event name and description
+5. The `AddEventCommand` object calls the `addEvent` method in the `EventManager` class to add the event created in step 4
+6. Feedback is given to the user via the UI
+
+Details such as accessing the EventManager via the central dashboard and handling of exceptions using invalid commands are omitted for brevity.
+
 ## Product scope
 ### Target user profile
 
