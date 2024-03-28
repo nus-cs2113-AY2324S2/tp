@@ -1,0 +1,25 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Ui {
+        - isUserActive : boolean {static}
+
+        + setUserAsInactive()
+        + readUserCommand() : String
+        + talk(line: String)
+}
+
+class TextIn {
+        - input : LineReader {static}
+
+        + nextLine() : String
+}
+
+class PrintStream {
+        + println(x: String)
+}
+
+Ui -up-> "1" TextIn : reads from >
+Ui -right-> "1" PrintStream : writes to >
+
+@enduml

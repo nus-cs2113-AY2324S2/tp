@@ -1,10 +1,12 @@
 # Developer Guide
 
 ## Table of Contents
+
 * [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
   * [Data Component](#data-component)
+  * [Ui](#ui)
 * [Implementation](#implementation)
 * [Logging](#logging)
 * [Product scope](#product-scope)
@@ -22,8 +24,8 @@
 ## Setting up, getting started
 
 ## Design
-# Design
 
+# Design
 
 ### Architecture
 
@@ -45,6 +47,7 @@ The bulk of the app's work is done by the following five components:
 The **Sequence Diagram** below shows how the components interact with each other for the scenario where the user issues the command `list`.
 
 ![Sequence Diagram](images/OverallSequenceDiagram.png)
+
 #### Figure 2: Architecture Encode Sequence Diagram
 
 1. User enters the command `list` to the `Ui`.
@@ -59,7 +62,6 @@ The **Sequence Diagram** below shows how the components interact with each other
 10. `BinBash` calls the `talk()` method in `Ui`, and passes the outputString.
 11. `Ui` prints this outputString to the user.
 12. If the `Command` executed modifies the database, `BinBash` will call the `saveToStorage()` method of `Storage`
-
 
 ### Data Component
 
@@ -94,7 +96,29 @@ access to `ItemList`.
 
 ### Jun Han
 
-### Kota
+### UI
+
+API: [`Ui.java`](../src/main/java/seedu/binbash/ui/Ui.java)
+
+![Ui class diagram](images/UiClassDiagram.png)
+
+The above class diagram shows the components delegating separate functionalities of the Ui.
+
+The `TextIn` class is responsible for reading user input and returning it to `Ui`, upon which it is passed to the *main()* program.
+
+The `PrintStream` class writes text at the behest of `Ui` to standard output, upon which it is received by the user.
+
+Note the use of an externally provided `LineReader` object in the `TextIn` class that handles input. This allows us to greatly extend our text-based user interface with features such as:
+
+1. Command completion on tab
+
+2. Displaying option descriptions on hover
+
+3. Contextual help menus
+
+![linereader](images/ui-linereader-enhancement.png)
+
+This allows us to overload options on a small number of commands to provide full functionality of the application. Developers can then extend its features without also the worry of finding a way for users to access those features easily.
 
 ### Yi Hao
 
@@ -108,7 +132,21 @@ access to `ItemList`.
 
 ### Jun Han
 
-### Kota
+### [Proposed] Search by universal fields
+
+#### Proposed Implementation
+
+This feature redefines our current Search command to allow searching by attributes of class `Item` and not just its name. An example usage scenario is as such:
+
+The user executes the following
+
+```console
+$ search -d battery -e 2w --match 3
+```
+
+The arguments are then parsed in turn, stored in the filter for the method *SearchItem()* in `ItemList` and filtered to return an ArrayList of at most *match* items.
+
+This return value can be printed to the user as per pre-existing *print()* methods.
 
 ### Yi Hao
 
@@ -140,10 +178,10 @@ access to `ItemList`.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
