@@ -30,7 +30,7 @@ public class FileSave {
                     accommodation = new Accommodation(line[2], LocalDate.parse(line[3]), line[4], "");
                 }
                 list.addTravelActivity(accommodation);
-                if(line[1].equals(" 1 ")){
+                if(line[1].equals("1")){
                     accommodation.setActivityStatus(true);
                 }
                 break;
@@ -43,7 +43,7 @@ public class FileSave {
                 }
 
                 list.addTravelActivity(food);
-                if(line[1].equals(" 1 ")){
+                if(line[1].equals("1")){
                     food.setActivityStatus(true);
                 }
                 break;
@@ -55,7 +55,7 @@ public class FileSave {
                     landmark = new Landmark(line[2], LocalDate.parse(line[3]), line[4], "");
                 }
                 list.addTravelActivity(landmark);
-                if(line[1].equals(" 1 ")){
+                if(line[1].equals("1")){
                     landmark.setActivityStatus(true);
                 }
                 break;
