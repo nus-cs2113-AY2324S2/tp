@@ -7,7 +7,7 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 
 public class Logging {
-    private static Logger LongAhLogger = Logger.getLogger("LongAh");
+    private static Logger longAhLogger = Logger.getLogger("LongAh");
 
     /**
      * Constructs a new Logging instance.
@@ -17,10 +17,10 @@ public class Logging {
         try {
             FileHandler handler = new FileHandler("./log/LongAh.log");
             handler.setFormatter(new SimpleFormatter());
-            LongAhLogger.addHandler(handler);
-            LongAhLogger.setUseParentHandlers(false);
+            longAhLogger.addHandler(handler);
+            longAhLogger.setUseParentHandlers(false);
         } catch (IOException e) {
-            LongAhLogger.log(Level.WARNING, "Log data may not be saved due to permission.");
+            longAhLogger.log(Level.WARNING, "Log data may not be saved due to permission.");
         }
     }
 
@@ -31,7 +31,7 @@ public class Logging {
      * @param message The message to be logged
      */
     public static void log(Level level, String message) {
-        LongAhLogger.log(level, message);
+        longAhLogger.log(level, message);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Logging {
      * @param message The message to be logged
      */
     public static void logInfo(String message) {
-        LongAhLogger.log(Level.INFO, message);
+        longAhLogger.log(Level.INFO, message);
     }
 
     /**
@@ -49,6 +49,6 @@ public class Logging {
      * @param message The message to be logged
      */
     public static void logWarning(String message) {
-        LongAhLogger.log(Level.WARNING, message);
+        longAhLogger.log(Level.WARNING, message);
     }
 }

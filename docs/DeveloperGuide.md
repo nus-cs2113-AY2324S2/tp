@@ -15,6 +15,7 @@
     - [UI and I/O](#ui-and-io)
     - [Commands](#commands)
     - [Storage](#storage)
+      - [Storage File Structure](#storage-file-structure)
       - [`loadMembersData()`](#loadmembersdata)
       - [`loadTransactionsData()`](#loadtransactionsdata)
       - [`saveMembersData()`](#savemembersdata)
@@ -59,13 +60,32 @@ Storage operations are performed by the [`StorageHandler Class`](../src/main/jav
 
 Each group calls its own `StorageHandler` object such that they maintain distinct storage directories. To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
 
+`loadMembersData()` and `loadTransactionsData()` have been compiled into the method `loadAllData()` while `saveMembersData()` and `saveTransactionsData()` have been compiled into the method `saveAllData()`
+
+Key attributes part of the class include `membersFile` and `trnsactionsFile` which respectively contain the `File` representation of the directories to each of the storage files.
+
+#### Storage File Structure
+
+Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in their respective folders.
+
+* `members.txt` - <NAME><SEP><BALANCE>
+* `transactions.txt` - <NAME><SEP><BORROWER1><SEP><VALUE1>....
+
 #### `loadMembersData()`
+
+Takes in `MemberList` as a key argument. Reads data from the groups' associated `members.txt` and unpacks it before inserting `Member` objects into `MemberList`.
 
 #### `loadTransactionsData()`
 
+Takes in `TransactionList` and `MemberList` as key arguments. Reads data from the groups' associated `transactions.txt` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
+
 #### `saveMembersData()`
 
+Takes in `MemberList` as a key argument. Writes packaged data from each `Member` and saves it as a record in `members.txt`.
+
 #### `saveTransactionsData()`
+
+Takes in `TransactionList` as a key argument. Writes packaged data from each `Transaction` and saves it as a record in `transactions.txt`
 
 ### Member and MemberList
 

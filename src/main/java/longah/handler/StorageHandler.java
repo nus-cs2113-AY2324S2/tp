@@ -22,7 +22,7 @@ import longah.exception.ExceptionMessage;
  * [Name]SEP[Balance]
  * 
  * Transactions:
- * [Lender]SEP[Description]SEP[Borrower1]SEP[Value]SEP...
+ * [Lender]SEP[Borrower1]SEP[Value]SEP...
  */
 public class StorageHandler {
     // ASCII Defined Separator
@@ -138,7 +138,6 @@ public class StorageHandler {
 
                 String[] transactionData = data.split(SEPARATOR);
                 String lenderName = transactionData[0];
-                // String description = transactionData[1];
                 Member lender = members.getMember(lenderName);
                 ArrayList<Subtransaction> subtransactions = new ArrayList<>();
 
