@@ -3,15 +3,26 @@
 /out/
 /*.iml
 
-# Gradle build files
+# Vim swap files
+*.swp
+
+# Gradle and build files
 /.gradle/
 /build/
 src/main/resources/docs/
+/META-INF/
+*.jar
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
 
+# Ephemeral test files
 /text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/data/
+
+# Data and log files created by application
+/data/
+/logs/

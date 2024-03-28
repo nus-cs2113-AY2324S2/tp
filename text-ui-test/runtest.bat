@@ -2,6 +2,9 @@
 setlocal enableextensions
 pushd %~dp0
 
+if exist data del data\items.txt
+if exist data rmdir data
+
 cd ..
 call gradlew clean shadowJar
 

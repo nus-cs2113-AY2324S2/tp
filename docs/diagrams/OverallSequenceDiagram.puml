@@ -1,0 +1,42 @@
+
+@startuml
+actor user
+participant ":Ui"
+participant ":BinBash"
+participant ":Parser"
+participant ":Command"
+participant ":ItemList"
+participant ":Storage"
+
+activate ":Ui"
+activate ":BinBash"
+activate ":Parser"
+activate ":ItemList"
+activate ":Storage"
+user -> ":Ui" : 1. 'list'
+":Ui" -> ":BinBash" : 2. readUserCommand(list)
+
+loop [isUserActive]
+    ":BinBash" -> ":Parser" : 3. parseCommand('list')
+    ":Parser" --> ":BinBash" : 4. userCommand: ":Command"
+    ":BinBash" -> ":Command" : 5. userCommand.execute()
+    activate ":Command"
+    ":Command" -> ":ItemList" : 6. printList()
+    ":ItemList" --> ":Command" : 7. executionUiOutput: ":String"
+    ":Command" --> ":BinBash"
+    ":BinBash" -> ":Command" : 8. getExecutionUiOutput()
+    ":Command" --> ":BinBash" : 9. outputString: ":String"
+    ":BinBash" -> ":Ui" : 10. talk(outputString)
+    ":Ui" -> user : 11. outputString
+    deactivate ":Command"
+end
+
+opt hasToSave
+    ":BinBash" -> ":Storage" : 12. saveToStorage()
+    ":Storage" --> ":BinBash"
+end
+
+deactivate ":Storage"
+deactivate ":BinBash"
+
+@enduml

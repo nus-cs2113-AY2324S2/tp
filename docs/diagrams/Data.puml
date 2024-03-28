@@ -1,0 +1,13 @@
+@startuml
+
+skinparam componentStyle rectangle
+
+component Data {
+    [ItemList] --> "*" [{abstract}\n    Item]
+    [OperationalItem] -up-|> [{abstract}\n    Item]
+    [RetailItem] -up-|> [{abstract}\n    Item]
+    [PerishableRetailItem] -up-|> [RetailItem]
+    [PerishableOperationalItem] -up-|> [OperationalItem]
+}
+
+@enduml
