@@ -22,13 +22,16 @@ public class Parser {
     public static int editWaterSize;
     public static String mealStorageDescription;
     public static int mealStorageSize;
+    public static String mealStorageDate;
+
     public static String drinkStorageDescription;
     public static int drinkStorageSize;
+    public static String drinkStorageDate;
+
     public static String exerciseDescription;
     public static int exerciseDuration;
 
     public static ExerciseIntensity exerciseIntensity;
-    public static String mealStorageDate;
     private User user;
 
     public Parser(User user) {

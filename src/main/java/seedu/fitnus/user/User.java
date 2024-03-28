@@ -58,11 +58,12 @@ public class User {
                 for (String s : drinkStorageList) {
                     Parser.parseDrinkStorage(s);
                     String drinkDescription = Parser.drinkStorageDescription;
+                    String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
                         Water.getInstance(drinkSize);
                     } else {
-                        drinkList.add(new Drink(drinkDescription, drinkSize));
+                        drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
                 }
             }
@@ -87,7 +88,7 @@ public class User {
         String waterSavedData = "water" + "," + Water.getWater();
         drinkStorage.appendTextContent(waterSavedData);
         for (Drink drink : drinkList) {
-            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize();
+            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
             drinkStorage.appendTextContent(drinkSavedData);
         }
         try {
@@ -115,10 +116,12 @@ public class User {
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
 
+        Date currentDate = new Date();
+
         if (drinkName.equals("water")) {
             Water.getInstance(servingSize);
         } else {
-            drinkList.add(new Drink(drinkName, servingSize));
+            drinkList.add(new Drink(drinkName, servingSize, currentDate.getDate()));
         }
         System.out.println("Added " + servingSize + " ml of " + drinkName);
     }
@@ -271,7 +274,9 @@ public class User {
             throw new invalidIndexException();
         }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
-        Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize);
+        String drinkDate = drinkList.get(Parser.editDrinkIndex).getDate();
+
+        Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize, drinkDate);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
