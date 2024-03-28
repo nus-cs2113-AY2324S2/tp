@@ -59,27 +59,20 @@ public class FileSave {
                     landmark.setActivityStatus(true);
                 }
                 break;
-            case "1":
-                TravelActivity generic1;
-                if (line.length == 5) {
-                    generic1 = new TravelActivity(line[1], LocalDate.parse(line[2]), line[3], line[4].trim());
+            case "general":
+                TravelActivity newActivity;
+                if (line.length == 6) {
+                    newActivity = new TravelActivity(line[2], LocalDate.parse(line[3]),
+                            line[4], line[5].trim());
                 } else {
-                    generic1 = new TravelActivity(line[1], LocalDate.parse(line[2]), line[3], "");
+                    newActivity = new TravelActivity(line[2], LocalDate.parse(line[3]),
+                            line[4], "");
                 }
-                list.addTravelActivity(generic1);
-                generic1.setActivityStatus(true);
-                break;
-            case "0":
-                TravelActivity generic0;
-                if (line.length == 5) {
-                    generic0 = new TravelActivity(line[1], LocalDate.parse(line[2]), line[3], line[4].trim());
-                } else {
-                    generic0 = new TravelActivity(line[1], LocalDate.parse(line[2]), line[3], "");
+                list.addTravelActivity(newActivity);
+                if(line[1].equals("1")){
+                    newActivity.setActivityStatus(true);
                 }
-                list.addTravelActivity(generic0);
-                generic0.setActivityStatus(false);
                 break;
-
             default:
                 throw new FileNotFoundException("File is corrupted or has invalid format");
             }
@@ -96,6 +89,8 @@ public class FileSave {
                 fw.write("food / ");
             } else if (travelActivity instanceof Landmark) {
                 fw.write("landmark / ");
+            } else {
+                fw.write("general / ");
             }
             fw.write((travelActivity.getActivityStatus() ? "1 / " : "0 / ") + travelActivity.getPlan()
                     + " / " + travelActivity.getDate()

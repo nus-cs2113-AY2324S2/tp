@@ -108,7 +108,7 @@ public class TravelActivityList {
         int foundCounter = 0;
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
             if(travelActivities.get(iterator).getPlan().contains(activityName) &&
-                    !travelActivities.get(iterator).getTag().isEmpty()){
+                    !travelActivities.get(iterator).getPlan().isEmpty()){
                 isFound = true;
                 foundCounter += 1;
                 if (isFound && foundCounter == 1) {
@@ -122,7 +122,7 @@ public class TravelActivityList {
                 }
             }
         }
-        if (foundCounter == 0 || isFound == false) {
+        if (foundCounter == 0) {
             System.out.println("Sorry I could not find what you are looking for.");
         }
     }
@@ -298,6 +298,7 @@ public class TravelActivityList {
                     System.out.println("Here are what you are looking for:");
                 }
                 if (travelActivities.get(iterator).getTag() == "") {
+
                     System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString());
                 } else {
                     System.out.println(foundCounter + ". " + travelActivities.get(iterator).toString() +

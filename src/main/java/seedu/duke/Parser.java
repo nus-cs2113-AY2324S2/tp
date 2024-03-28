@@ -48,7 +48,6 @@ public class Parser {
         String delimiter = command[0] + "| /date | /duration | /tag ";
         String[] input = line.split(delimiter);
         //logger.log(Level.INFO, input[0] + " // " +  input[1] + " // " +  input[2] + " // " +  input[3]);
-
         if (input.length >= 4 && input[1].isBlank()) {
             throw new OmniException("The description of accommodation cannot be empty!");
         } else if(input.length >= 4 && input[2].isBlank()){
@@ -157,22 +156,6 @@ public class Parser {
     }
 
     /**
-     *  Handles the case where the find command is given as input
-     *
-     * @param command Command array of input string without spaces
-     * @param list List of travel activities
-     * @throws OmniException if command.length != 2
-     */
-    public static void findCommand(String[] command, TravelActivityList list) throws OmniException{
-        if (command.length == 2) {
-            String keyword = command[1];
-            list.searchKeyword(keyword);
-        } else {
-            throw new OmniException("Please specify an appropriate keyword you want to find!");
-        }
-    }
-
-    /**
      * Handles the case where the check command is given as input
      *
      * @param command Command array of input string without spaces
@@ -213,7 +196,7 @@ public class Parser {
      * @throws OmniException if command.length == 1
      */
     public static void tagCommand(String line, TravelActivityList list) throws OmniException {
-        String[] command = line.split("tag |-");
+        String[] command = line.split(" ");
         if (command.length == 3 && isNumeric(command[1])){
             int listNumber = Integer.parseInt(command[1]);
             String tag = command[2];
@@ -301,6 +284,22 @@ public class Parser {
             throw new OmniException("Please check that your find type command is in this format: findtype <task type>");
         } else {
             list.findType(command[1].trim());
+        }
+    }
+
+    /**
+     *  Handles the case where the find command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length != 2
+     */
+    public static void findCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 2) {
+            String keyword = command[1];
+            list.searchKeyword(keyword);
+        } else {
+            throw new OmniException("Please specify an appropriate keyword you want to find!");
         }
     }
 

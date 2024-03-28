@@ -1,0 +1,61 @@
+@startuml
+actor User
+participant "readFile()" as readFile
+participant "loadFileContents(TravelActivityList list)" as loadFileContents
+participant "accommodation:Accommodation" as Accommodation
+participant "food:Food" as Food
+participant "landmark:Landmark" as Landmark
+participant "list:TravelActivityList" as TravelActivityList
+participant "SetActivityStatus" as SetActivityStatus
+participant "s:Scanner" as Scanner
+
+User -> readFile: readFile()
+activate readFile
+readFile -> loadFileContents: loadFileContents(list)
+activate loadFileContents
+
+loop scanner
+loadFileContents -> Scanner: hasNext()
+activate Scanner
+Scanner --> loadFileContents: next
+deactivate Scanner
+    alt Accomodation
+        loadFileContents -> Accommodation: list.addTravelActivity(accommodation)
+        activate Accommodation
+        Accommodation -> TravelActivityList: list.addTravelActivity(accommodation)
+        activate TravelActivityList
+        TravelActivityList --> Accommodation: added activity
+        deactivate TravelActivityList
+        Accommodation -> SetActivityStatus: setActivityStatus()
+        activate SetActivityStatus
+        SetActivityStatus --> Accommodation: Status handled
+        deactivate SetActivityStatus
+    else Food
+        loadFileContents -> Food: list.addTravelActivity(food)
+        activate Food
+        Food -> TravelActivityList: list.addTravelActivity(food)
+        activate TravelActivityList
+        TravelActivityList --> Food: added activity
+        deactivate TravelActivityList
+        Food -> SetActivityStatus: setActivityStatus()
+        activate SetActivityStatus
+        SetActivityStatus --> Food: Status handled
+        deactivate SetActivityStatus
+    else Landmark
+        loadFileContents -> Landmark: list.addTravelActivity(landmark)
+        activate Landmark
+        Landmark -> TravelActivityList: list.addTravelActivity(landmark)
+        activate TravelActivityList
+        TravelActivityList --> Landmark: added activity
+        deactivate TravelActivityList
+        Landmark -> SetActivityStatus: setActivityStatus()
+        activate SetActivityStatus
+        SetActivityStatus --> Landmark: Status handled
+        deactivate SetActivityStatus
+    end
+end
+deactivate TravelActivityList
+deactivate loadFileContents
+deactivate readFile
+
+@enduml
