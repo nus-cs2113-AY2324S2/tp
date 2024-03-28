@@ -41,10 +41,14 @@ public class TravelActivityList {
             }
             String checked = activity.getActivityStatus()? "[X]" : "[ ]";
             activityCount++;
-            if(activity.getTag()==null || activity.getTag().isEmpty()){
-                System.out.println(checked + " " + activityCount +". " + activity);
+            if((activity.getTag() == null || activity.getTag().isEmpty()) && (activity.getExpense() == null || activity.getExpense().isEmpty())){
+                System.out.println(checked + " " + activityCount + ". " + activity);
+            } else if (!(activity.getTag() == null || activity.getTag().isEmpty())) {
+                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getTag() + ")");
+            } else if (!(activity.getExpense() == null || activity.getExpense().isEmpty())) {
+                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getExpense() + ")");
             } else {
-                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getTag() + ")" );
+                System.out.println(checked + " " + activityCount + ". " + activity  + " (" + activity.getTag() + ")" + " (" + activity.getExpense() + ")");
             }
         }
         int finalactivityCount = noOfActivities;
