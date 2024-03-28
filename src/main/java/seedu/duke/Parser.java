@@ -62,7 +62,7 @@ public class Parser {
     private HashMap<String, ArrayList<String>> createParams() {
         HashMap<String, ArrayList<String>> additionalInfo = new HashMap<>();
 
-        for(String paramKey : paramKeys){
+        for (String paramKey : paramKeys) {
             additionalInfo.put(paramKey, new ArrayList<>());
         }
 
@@ -76,22 +76,22 @@ public class Parser {
         String[] tokens = userInput.split(" ", 2);
         this.command = tokens[0].toLowerCase().trim();
 
-        if (tokens.length == 1){
+        if (tokens.length == 1) {
             return;
         }
 
         String[] arguments = tokens[1].split("/");
         this.argument = arguments[0].trim();
 
-        for(int i = 1; i < arguments.length; i++){
+        for (int i = 1; i < arguments.length; i++) {
             String[] subTokens = arguments[i].split(" ", 2);
-            if (subTokens.length == 1){
+            if (subTokens.length == 1) {
                 continue;
             }
 
             String subCommand = subTokens[0].toLowerCase().trim();
             String subArgument = subTokens[1].trim();
-            if (!subArgument.isEmpty() && params.containsKey(subCommand)){
+            if (!subArgument.isEmpty() && params.containsKey(subCommand)) {
                 params.get(subCommand).add(subArgument);
             }
         }
@@ -104,16 +104,16 @@ public class Parser {
      * @return Contents of Parser object.
      */
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder parser = new StringBuilder();
 
         parser.append("command: ").append(command).append("\n");
 
         parser.append("argument: ").append(argument).append("\n");
 
-        for(String paramKey : paramKeys){
+        for (String paramKey : paramKeys) {
             parser.append(paramKey).append(": ");
-            for(String item : params.get(paramKey)){
+            for (String item : params.get(paramKey)) {
                 parser.append(item).append(" ");
             }
             parser.append("\n");
@@ -137,6 +137,9 @@ public class Parser {
         case "member":
             GroupCommand.addMember(argument);
             break;
+        case "enter":
+            GroupCommand.enterGroup(argument);
+            break;
         case "exit":
             GroupCommand.exitGroup();
             break;
@@ -144,8 +147,8 @@ public class Parser {
 
             // Checks for missing Expense Parameters
             String[] expenseParams = {"amount", "paid", "user"};
-            for(String expenseParam : expenseParams){
-                if(params.get(expenseParam).isEmpty()){
+            for (String expenseParam : expenseParams) {
+                if (params.get(expenseParam).isEmpty()) {
                     String exceptionMessage = "No description for expenses! Add /" + expenseParam;
                     throw new ExpensesException(exceptionMessage);
                 }
