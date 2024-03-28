@@ -117,12 +117,12 @@ is an `Integer` or a `String` using the `isIndex` variable. Once the search para
 Similar to the `DeleteCommand` constructor, the `deleteItem` method of the `ItemList` class has different behaviors 
 based on the data type of the parameter passed. The implementation is done by overloading the `deleteItem` method and
 having one `deleteItem` method take in an `Integer` and another taking in a `String`.
-* If the paramemter is an `Integer`, the `deleteItem` method will call the `remove` method of the `ArrayList` class to
+* If the parameter is an `Integer`, the `deleteItem` method will call the `remove` method of the `ArrayList` class to
 remove the item from the inventory list.
-* If the paremeter is a `String`, the `deleteItem` method will run a `for` loop to iterate through the `ArrayList`
+* If the parameter is a `String`, the `deleteItem` method will run a `for` loop to iterate through the `ArrayList`
 until it finds a `Item` object whose name `equals` to that of the search parameter. If an `Item` object has matching
 names with the search parameter, it will store the index in the `targetIndex` variable. The `deleteItem` method will
-then call another `delelteItem` method, but this time, the parameter passed is an integer. The execution after this
+then call another `deleteItem` method, but this time, the parameter passed is an integer. The execution after this
 will be exactly the same as passing an `Integer` to the `deleteItem` method mentions above.
 
 ### UI
