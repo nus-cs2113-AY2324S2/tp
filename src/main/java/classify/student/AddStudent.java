@@ -11,15 +11,9 @@ import static classify.user.InputParsing.LOGGER;
 
 public class AddStudent {
     private static final String NOTEMPTY = "THIS STRING IS NOT EMPTY";
-    private static final String DO_YOU_WANT_TO_ADD_ANOTHER_SUBJECT_AND_GRADE_YES_NO =
-            "Do you want to add another subject and grade? (yes/no)";
     private static final String YES = "yes";
     private static final String NO = "no";
-    private static final String INVALID_RESPONSE_PLEASE_TYPE_YES_OR_NO =
-            "Invalid response. Please type 'yes' or 'no'.";
     private static final String SUBJECT_ENTER_NOTHING_TO_SKIP = "Subject (enter nothing to skip): ";
-    private static final String NO_SUBJECTS_ADDED = "No subjects added.";
-    private static final String SUBJECT_ALREADY_EXISTS = "Subject already exists.";
     private static final String STUDENT_ADDED_SUCCESSFULLY = "Student added successfully.";
     private static final String NUMBER_IS_OUTSIDE_THE_ACCEPTABLE_RANGE = "Number is outside the acceptable range.";
     private static final String STUDENT_WITH_THE_SAME_NAME_ALREADY_EXISTS =
@@ -136,13 +130,13 @@ public class AddStudent {
             String subject = in.nextLine().trim();
 
             if (subject.isBlank()) {
-                System.out.println(NO_SUBJECTS_ADDED);
+                Ui.printNoSubjectsAdded();
                 break;
 
             } else if (attributes.findSubject(subject) != null) {
                 // rejects subject if existing subject of same name exists in students'
                 // attributes
-                System.out.println(SUBJECT_ALREADY_EXISTS);
+                Ui.printSubjectAlreadyExists();
                 break;
 
             } else if (checkForValidSubjectResponse(in, attributes, subject)) {
@@ -168,7 +162,7 @@ public class AddStudent {
         attributes.addSubjectGrade(subjectGrade);
 
         while (true) {
-            System.out.println(DO_YOU_WANT_TO_ADD_ANOTHER_SUBJECT_AND_GRADE_YES_NO);
+            Ui.printAddSubject();
             String response = in.nextLine().trim().toLowerCase();
 
             if (response.equals(YES)) {
@@ -178,7 +172,7 @@ public class AddStudent {
                 return true;
 
             } else {
-                System.out.println(INVALID_RESPONSE_PLEASE_TYPE_YES_OR_NO);
+                Ui.printInvalidResponse();
             }
 
         }
@@ -206,7 +200,9 @@ public class AddStudent {
             try {
                 classesAttended = Integer.parseInt(classesAttendedInput);
             } catch (NumberFormatException e) {
-                System.out.println("Wrong number format! Please try again! e.g. 12 ");
+                //@@author tayponghee
+                Ui.printWrongNumberFormat();
+                //@@author ParthGandhiNus
                 Ui.printDivider();
                 classesAttended = promptForClassesAttended(in);
             }
