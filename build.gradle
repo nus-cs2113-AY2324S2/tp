@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.9'
 }
 
 test {
@@ -29,11 +30,11 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("seedu.stockpal.StockPal")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("StockPal")
     archiveClassifier.set("")
 }
 
@@ -43,4 +44,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

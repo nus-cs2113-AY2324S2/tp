@@ -15,3 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+StorageLogger.log
+/src/test/data/StorageTest/NonExistentFile.csv
+/opencsv-5.9.jar
+/data/

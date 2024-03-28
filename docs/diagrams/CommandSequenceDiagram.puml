@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":StockPal" as stockpal STOCKPAL_COLOR
+Participant ":UI" as ui UI_COLOR
+Actor User as user USER_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":Command" as command COMMANDS_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+activate stockpal STOCKPAL_COLOR
+
+stockpal -[STOCKPAL_COLOR]> ui : getUserInput()
+activate ui UI_COLOR
+
+ui -[STOCKPAL_COLOR]> user : Get user input
+user --[USER_COLOR]> ui : userInput : String
+
+ui --[UI_COLOR]> stockpal : userInput : String
+deactivate ui
+
+stockpal -[STOCKPAL_COLOR]> parser : parseCommand(userInput)
+activate parser PARSER_COLOR
+
+create command
+parser -[PARSER_COLOR]> command : new Command()
+activate command COMMANDS_COLOR
+
+command --[COMMANDS_COLOR]> parser : command : Command
+deactivate command
+
+parser --[PARSER_COLOR]> stockpal : command : Command
+deactivate parser
+
+stockpal -[STOCKPAL_COLOR]> command : execute()
+activate command COMMANDS_COLOR
+stockpal <--[COMMANDS_COLOR] command
+deactivate command
+
+stockpal -> stockpal : checkCommandType(command)
+
+activate stockpal STOCKPAL_COLOR
+
+opt list or transaction command
+    stockpal -[STOCKPAL_COLOR]> storage : productList : ProductList
+    activate storage STORAGE_COLOR
+
+    storage -[STORAGE_COLOR]> storage : Save to file
+    activate storage STORAGE_COLOR
+
+    storage --[STORAGE_COLOR]> storage
+    deactivate storage
+
+    storage --[STORAGE_COLOR]> stockpal
+    deactivate storage
+end
+
+stockpal --> stockpal
+deactivate stockpal
+
+destroy command
+
+@enduml

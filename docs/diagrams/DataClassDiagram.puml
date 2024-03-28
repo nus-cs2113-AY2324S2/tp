@@ -1,0 +1,73 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Description {
+    - description : String
+    + Description(String)
+    + isNull() : boolean
+}
+
+class Name {
+    - name : String
+    + Name(String)
+    + isNull() : boolean
+}
+
+class Pid {
+    - pid : Integer
+    + Pid(Integer)
+    + isNull() : boolean
+}
+
+class Price {
+    - price : Double
+    + Price(Double)
+    + isNull() : boolean
+}
+
+class Quantity {
+    - quantity : Integer
+    + Quantity(Integer)
+    + isNull() : boolean
+}
+
+class Product {
+    + Product(String, Integer, Double, String, Integer)
+}
+
+class ProductList {
+    + ProductList(String, Integer, Double, String, Integer)
+    + addProduct(Product)
+    + findProductIndex(Pid) : int
+    + deleteProduct(Pid)
+    + updateProduct(int, Name, Quantity, Description, Price)
+    + increaseAmount(int, Integer) : boolean
+    + decreaseAmount(int, Integer) : boolean
+    + findKeyword(ProductList, String)
+    + isEmpty() : boolean
+    + getSize() : int
+    + get(int) : Product
+    + getProducts() : List<Product>
+    + toSave(Integer) : String
+    + printLowQuantityProducts()
+}
+
+interface CommandParameter <<Interface>> {
+    + isNull() : boolean
+}
+
+ProductList *--> "*" Product : > contains
+Product --> Pid
+Product --> Name
+Product --> Quantity
+Product --> Price
+Product --> Description
+
+Pid ..|> CommandParameter
+Name ..|> CommandParameter
+Quantity ..|> CommandParameter
+Price ..|> CommandParameter
+Description ..|> CommandParameter
+
+@enduml
