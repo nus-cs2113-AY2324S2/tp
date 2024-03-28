@@ -128,26 +128,29 @@ public class Group {
 
     /**
      * Saves the member data into the storage file.
+     * 
+     * @throws LongAhException If the data file is not written
      */
     public void saveMembersData() throws LongAhException {
-        this.storage.saveMembersData(this.members);
+        this.storage.saveMembersData();
     }
 
     /**
      * Saves the transaction data into the storage file.
+     * 
+     * @throws LongAhException If the data file is not written
      */
     public void saveTransactionsData() throws LongAhException {
-        this.storage.saveTransactionsData(this.transactions);
+        this.storage.saveTransactionsData();
     }
 
     /**
      * Saves the data from the member list and transaction list into storage file.
      * 
-     * @throws LongAhException If the data file is not read or the content is invalid
+     * @throws LongAhException If the data file is not written
      */
     public void saveAllData() throws LongAhException {
-        saveMembersData();
-        saveTransactionsData();
+        this.storage.saveAllData();
     }
 
     /**

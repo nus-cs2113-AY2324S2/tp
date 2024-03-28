@@ -25,7 +25,8 @@ public enum ExceptionMessage {
     STORAGE_FILE_NOT_READ ("File not read.", ExceptionType.WARNING),
     STORAGE_FILE_NOT_WRITTEN ("File not written.", ExceptionType.WARNING),
     INVALID_STORAGE_CONTENT ("Invalid content in storage file, line ignored.", ExceptionType.WARNING),
-    STORAGE_FILE_CORRUPTED ("Storage file is corrupted.", ExceptionType.WARNING),
+    STORAGE_FILE_CORRUPTED ("Storage file is corrupted." + 
+                "We recommend running 'clear' or manually resolving the error data.", ExceptionType.WARNING),
 
     // Ui exceptions
     INVALID_COMMAND ("Invalid command. Use 'help' to see the list of commands.",

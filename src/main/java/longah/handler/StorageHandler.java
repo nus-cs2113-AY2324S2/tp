@@ -22,18 +22,23 @@ import longah.exception.ExceptionMessage;
  * [Name]SEP[Balance]
  * 
  * Transactions:
- * [Lender]SEP[Description]SEP[Borrower1]SEP[Value]SEP...
+ * [Lender]SEP[Borrower1]SEP[Value]SEP...
  */
 public class StorageHandler {
     // ASCII Defined Separator
     private static final String SEPARATOR = String.valueOf(Character.toChars(31));
 
     // Storage Directory Constants
-    private File membersFile;
-    private File transactionsFile;
     private String storageFolderPath = "./data";
     private String storageMembersFilePath;
     private String storageTransactionsFilePath;
+    private File membersFile;
+    private File transactionsFile;
+
+    // Objects for Storate
+    private MemberList members;
+    private TransactionList transactions;
+    private Scanner[] scanners = new Scanner[2];
 
     /**
      * Initializes a new StorageHandler instance.
@@ -64,23 +69,24 @@ public class StorageHandler {
             throw new LongAhException(ExceptionMessage.STORAGE_FILE_NOT_CREATED);
         }
 
+        this.members = members;
+        this.transactions = transactions;
+        initStorageScanners();
+
         // Load data from data files into MemberList and TransactionList objects
-        loadAllData(members, transactions);
+        loadAllData();
         Logging.logInfo("Data loaded from storage.");
     }
 
     /**
      * Initializes the storage scanner to read data files.
      * 
-     * @return An array of Scanners to read the data files
      * @throws LongAhException If the data files are not found
      */
-    public Scanner[] initStorageScanners() throws LongAhException {
-        Scanner[] scanners = new Scanner[2];
+    public void initStorageScanners() throws LongAhException {
         try {
-            scanners[0] = new Scanner(this.membersFile);
-            scanners[1] = new Scanner(this.transactionsFile);
-            return scanners;
+            this.scanners[0] = new Scanner(this.membersFile);
+            this.scanners[1] = new Scanner(this.transactionsFile);
         } catch (FileNotFoundException e) {
             throw new LongAhException(ExceptionMessage.STORAGE_FILE_NOT_FOUND);
         }
@@ -96,11 +102,10 @@ public class StorageHandler {
     /**
      * Loads the members data from the data file into the MemberList object.
      * 
-     * @param members The MemberList object to load the data into
      * @throws LongAhException If the data file is not read or the content is invalid
      */
-    public void loadMembersData(Scanner sc, MemberList members)
-            throws LongAhException {
+    public void loadMembersData() throws LongAhException {
+        Scanner sc = this.scanners[0];
         while (sc.hasNextLine()) {
             try {
                 String data = sc.nextLine();
@@ -113,7 +118,7 @@ public class StorageHandler {
 
                 String name = memberData[0];
                 double balance = Double.parseDouble(memberData[1]);
-                members.addMember(name, balance);
+                this.members.addMember(name, balance);
             } catch (LongAhException | NumberFormatException e) {
                 throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
             } 
@@ -123,12 +128,10 @@ public class StorageHandler {
     /**
      * Loads the transactions data from the data file into the TransactionList object.
      * 
-     * @param transactions The TransactionList object to load the data into
-     * @param members The MemberList object to reference the members in the transactions
      * @throws LongAhException If the data file is not read or the content is invalid
      */
-    public void loadTransactionsData(Scanner sc, TransactionList transactions, MemberList members)
-            throws LongAhException {
+    public void loadTransactionsData() throws LongAhException {
+        Scanner sc = this.scanners[1];
         while (sc.hasNextLine()) {
             try {
                 String data = sc.nextLine();
@@ -138,7 +141,6 @@ public class StorageHandler {
 
                 String[] transactionData = data.split(SEPARATOR);
                 String lenderName = transactionData[0];
-                // String description = transactionData[1];
                 Member lender = members.getMember(lenderName);
                 ArrayList<Subtransaction> subtransactions = new ArrayList<>();
 
@@ -149,7 +151,7 @@ public class StorageHandler {
                 }
 
                 Transaction transaction = new Transaction(lender, subtransactions, members);
-                transactions.addTransaction(transaction);
+                this.transactions.addTransaction(transaction);
 
             } catch (LongAhException | NumberFormatException e) {
                 throw new LongAhException(ExceptionMessage.INVALID_STORAGE_CONTENT);
@@ -205,31 +207,26 @@ public class StorageHandler {
     /**
      * Loads all data from the data files into the MemberList and TransactionList objects.
      * 
-     * @param members The MemberList object to load the members data into
-     * @param transactions The TransactionList object to load the transactions data into
      * @throws LongAhException If the data files are not read or the content is invalid
      */
-    public void loadAllData(MemberList members, TransactionList transactions)
-            throws LongAhException {
-        Scanner[] scanners = initStorageScanners();
-        Scanner membersScanner = scanners[0];
-        Scanner transactionsScanner = scanners[1];
-        loadMembersData(membersScanner, members);
-        loadTransactionsData(transactionsScanner, transactions, members);
-        membersScanner.close();
-        transactionsScanner.close();
+    public void loadAllData() throws LongAhException {
+        loadMembersData();
+        loadTransactionsData();
+
+        // Close the scanners after reading the data
+        this.scanners[0].close();
+        this.scanners[1].close();
     }
 
     /**
      * Saves the members data from the MemberList object into the data file.
      * 
-     * @param members The MemberList object to save the data from
      * @throws LongAhException If the data file is not written
      */
-    public void saveMembersData(MemberList members) throws LongAhException {
+    public void saveMembersData() throws LongAhException {
         try {
             FileWriter fw = new FileWriter(this.membersFile);
-            for (Member member : members.getMembers()) {
+            for (Member member : this.members.getMembers()) {
                 String data = member.toStorageString(SEPARATOR);
                 fw.write(data + "\n");
             }
@@ -242,13 +239,12 @@ public class StorageHandler {
     /**
      * Saves the transactions data from the TransactionList object into the data file.
      * 
-     * @param transactions The TransactionList object to save the data from
      * @throws LongAhException If the data file is not written
      */
-    public void saveTransactionsData(TransactionList transactions) throws LongAhException {
+    public void saveTransactionsData() throws LongAhException {
         try {
             FileWriter fw = new FileWriter(this.transactionsFile);
-            for (Transaction transaction : transactions.getTransactions()) {
+            for (Transaction transaction : this.transactions.getTransactions()) {
                 String data = transaction.toStorageString(SEPARATOR);
                 fw.write(data + "\n");
             }
@@ -256,5 +252,15 @@ public class StorageHandler {
         } catch (IOException e) {
             throw new LongAhException(ExceptionMessage.STORAGE_FILE_NOT_WRITTEN);
         }
+    }
+
+    /**
+     * Saves all data from the MemberList and TransactionList objects into the data files.
+     * 
+     * @throws LongAhException If the data files are not written
+     */
+    public void saveAllData() throws LongAhException {
+        saveMembersData();
+        saveTransactionsData();
     }
 }

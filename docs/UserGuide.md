@@ -1,5 +1,16 @@
 # User Guide
 
+## Table of Contents
+- [User Guide](#user-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Adding a todo: `todo`](#adding-a-todo-todo)
+  - [FAQ](#faq)
+  - [Command Summary](#command-summary)
+
+
 ## Introduction
 
 {Give a product intro}
