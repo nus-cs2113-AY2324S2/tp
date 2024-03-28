@@ -18,6 +18,12 @@ The 'storage' component:
 * Identifies unique tasks stored in task hashmap, parses and writes to tasks.txt file
 * Handles exception if tasks.txt is in corrupted format
 
+### Exporting .ics File Component
+
+The 'ics' component:
+* Exports the tasks in the task hashmap to a .ics file that can be imported into calendar applications
+* Import tasks from external .ics file into the task hashmap
+
 ## Product scope
 ### Target user profile
 
