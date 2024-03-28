@@ -240,11 +240,13 @@ The Logging class has the following static field:
 * *longAhLogger*: A Logger type object to perform the logging.
 
 <ins>Constructor</ins>
+
 The LongAhException class calls the Exception constructor using the message associated with the received ExceptionMessage and stores the type of exception.
 
 The Logging class initializes a file directory to store logging data.
 
 <ins>Methods</ins>
+
 The LongAhException class has the following key methods:
 
 * *printException*: Prints the desired output message when an exception is thrown.
@@ -255,6 +257,7 @@ The Logging class has the following key methods:
 * *logWarning*: Create a log at the WARNING level.
 
 <ins>Usage Example</ins>
+
 Use of the LongAhException class is demonstrated below, including throwing of an exception and printing the desired output message. This example covers the throwing exception due to invalid index.
 ```
 import longah.exception.LongAhException;
