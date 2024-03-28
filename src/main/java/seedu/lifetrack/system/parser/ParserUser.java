@@ -8,7 +8,6 @@ import static seedu.lifetrack.system.exceptions.ErrorMessages.getInvalidNumberOf
 import static seedu.lifetrack.system.exceptions.ErrorMessages.getInvalidGoalNumberMessage;
 
 public class ParserUser {
-    private static final int LABEL_SIZE = 2;
 
     public static void parseSetUp(String input, User user) throws InvalidInputException, NumberFormatException {
         int heightIndex = input.indexOf("h/");
@@ -84,8 +83,7 @@ public class ParserUser {
     }
 
     private static void checkSetUpInputsCorrectOrder(int heightIndex, int weightIndex, int ageIndex, int sexIndex,
-                                                     int exerciseLevelsIndex, int goalIndex)
-            throws InvalidInputException {
+            int exerciseLevelsIndex, int goalIndex) throws InvalidInputException {
         if (!(heightIndex < weightIndex && weightIndex < ageIndex && sexIndex < exerciseLevelsIndex
                 && exerciseLevelsIndex < goalIndex)) {
             throw new InvalidInputException(getInvalidExerciseLevelsNumberMessage());

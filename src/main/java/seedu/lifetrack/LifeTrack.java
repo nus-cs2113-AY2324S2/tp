@@ -13,7 +13,7 @@ public class LifeTrack {
     public static CalorieList calorieList = new CalorieList("data/caloriesData.txt");
     public static HydrationList hydrationList = new HydrationList("data/hydrationData.txt");
     public static SleepList sleepList = new SleepList("data/sleepData.txt");
-    public static User user = new User();
+    public static User user = new User("data/userData.txt");
     /**
      * Main entry-point for the java.lifetrack.LifeTrack application.
      */

@@ -14,6 +14,7 @@ import seedu.lifetrack.calories.calorielist.OutputEntry;
 import seedu.lifetrack.hydration.hydrationlist.HydrationEntry;
 import seedu.lifetrack.sleep.sleeplist.SleepEntry;
 import seedu.lifetrack.system.exceptions.ErrorMessages;
+import seedu.lifetrack.user.User;
 
 public class FileHandler {
 
@@ -34,6 +35,16 @@ public class FileHandler {
     //sleep list constants
     private static final int DURATION_INDEX = 2;
 
+    //user data constants
+    private static final int NAME_INDEX = 0;
+    private static final int HEIGHT_INDEX = 1;
+    private static final int WEIGHT_INDEX = 2;
+    private static final int AGE_INDEX = 3;
+    private static final int SEX_INDEX = 4;
+    private static final int EXERCISE_INDEX = 5;
+    private static final int GOAL_INDEX = 6;
+    private static final int REQ_CAL_INDEX = 7;
+
     private String filePath;
 
     public FileHandler(String filePath) {
@@ -44,6 +55,14 @@ public class FileHandler {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
+    }
+
+    public void writeUserData(User user) {
+        try {
+            writeToFile(user.toFileFriendlyString());
+        } catch (IOException e) {
+            System.out.println(ErrorMessages.getIOExceptionMessage());
+        }
     }
 
     public void writeEntries(ArrayList<Entry> entries) {
@@ -114,5 +133,22 @@ public class FileHandler {
             entries.add(new SleepEntry(duration, date));
         }
         return entries;
+    }
+    
+    public ArrayList<String> getUserDataFromFile() throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<String> data = new ArrayList<>();
+        String line = s.nextLine();
+        String[] words = line.split(";");
+        data.add(words[NAME_INDEX]);
+        data.add(words[HEIGHT_INDEX]);
+        data.add(words[WEIGHT_INDEX]);
+        data.add(words[AGE_INDEX]);
+        data.add(words[SEX_INDEX]);
+        data.add(words[EXERCISE_INDEX]);
+        data.add(words[GOAL_INDEX]);
+        data.add(words[REQ_CAL_INDEX]);
+        return data;
     }
 }
