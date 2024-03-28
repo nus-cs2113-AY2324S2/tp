@@ -123,11 +123,7 @@ public class StudentSorter {
      * @param students The list of students to be listed.
      */
     private static void listStudents(ArrayList<Student> students) {
-        int i = 1;
-        for (Student student : students) {
-            System.out.println(i + "." + student.getName());
-            i ++;
-        }
+        Ui.printStudentList(students);
     }
 
     /**

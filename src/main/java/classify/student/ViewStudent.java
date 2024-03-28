@@ -80,19 +80,27 @@ public class ViewStudent {
     public static void showAttributes(StudentAttributes attributes) {
         if (attributes != null) {
             List<SubjectGrade> subjectGrades = attributes.getSubjectGrades();
-            if (!subjectGrades.isEmpty()) {
-                for (SubjectGrade subjectGrade : subjectGrades) {
-                    assert subjectGrade != null : "subjectGrade cannot be null";
-                    Ui.printSubjectName(subjectGrade.getSubject());
-                    Ui.printStudentGrades(subjectGrade.getGrade());
-                    Ui.printClassesAttended(subjectGrade.getClassesAttended());
-                    Ui.printDivider();
-                }
-            } else {
-                Ui.printEmptySubjectError();
-            }
+            checkIfSubjectGradesIsEmpty(subjectGrades);
         } else {
             Ui.printNullAttributeError();
+        }
+    }
+
+    private static void checkIfSubjectGradesIsEmpty(List<SubjectGrade> subjectGrades) {
+        if (!subjectGrades.isEmpty()) {
+            printSubjectAttributes(subjectGrades);
+        } else {
+            Ui.printEmptySubjectError();
+        }
+    }
+
+    private static void printSubjectAttributes(List<SubjectGrade> subjectGrades) {
+        for (SubjectGrade subjectGrade : subjectGrades) {
+            assert subjectGrade != null : "subjectGrade cannot be null";
+            Ui.printSubjectName(subjectGrade.getSubject());
+            Ui.printStudentGrades(subjectGrade.getGrade());
+            Ui.printClassesAttended(subjectGrade.getClassesAttended());
+            Ui.printDivider();
         }
     }
 

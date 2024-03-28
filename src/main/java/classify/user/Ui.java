@@ -319,4 +319,5 @@ public class Ui {
     public static void printWrongNumberFormat () {
         System.out.println(WRONG_NUMBER_FORMAT);
     }
+
 }
