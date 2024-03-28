@@ -145,9 +145,8 @@ public class CommandUi {
     public static void printTaskNotFoundMessage() {
         System.out.println("Task not found.");
     }
-
     public static void printShowSummaryMessage(int totalCalories,int totalWaterIntake, int totalCaloriesBurnt,
-                                               String calorieGoal, String waterGoal) {
+                                              String calorieGoal, String waterGoal, int netCalories, String calorieStatus) {
         System.out.println("Daily Summary:");
         System.out.println("Total calories consumed: " + totalCalories + " kcal");
         System.out.println("Total water consumed: " + totalWaterIntake + " ml");
@@ -155,9 +154,12 @@ public class CommandUi {
 
         System.out.println("Calorie goal: " + calorieGoal + " kcal");
         System.out.println("Water goal: " + waterGoal + " ml");
+
+        System.out.println("Net calories: " + netCalories + " kcal");
+        System.out.println("Calorie status: " + calorieStatus);
     }
 
-    public static String formatDateTime(LocalDateTime dateTime) {
+public static String formatDateTime(LocalDateTime dateTime) {
         return dateTime.format(DATE_TIME_FORMATTER);
     }
     public static void printAllTasksClearedMessage() {
