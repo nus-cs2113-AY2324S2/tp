@@ -3,7 +3,6 @@ package seedu.budgetbuddy;
 import seedu.budgetbuddy.command.AddExpenseCommand;
 import seedu.budgetbuddy.command.AddSavingCommand;
 import seedu.budgetbuddy.command.Command;
-import seedu.budgetbuddy.command.DeleteExpenseCommand;
 import seedu.budgetbuddy.command.EditExpenseCommand;
 import seedu.budgetbuddy.command.EditSavingCommand;
 import seedu.budgetbuddy.command.FindExpensesCommand;
@@ -24,6 +23,12 @@ import java.util.Arrays;
 import java.util.Currency;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.budgetbuddy.commandcreator.CommandCreator;
+import seedu.budgetbuddy.commandcreator.DeleteExpenseCommandCreator;
+import seedu.budgetbuddy.commandcreator.ReduceSavingCommandCreator;
+import seedu.budgetbuddy.commandcreator.SetBudgetCommandCreator;
+
 
 public class Parser {
 
@@ -535,39 +540,6 @@ public class Parser {
         }
     }
 
-    public Command handleDeleteExpenseCommand(ExpenseList expenses, String input) {
-        LOGGER.log(Level.INFO, "Processing handleDeleteExpenseCommand");
-
-        assert expenses != null : "Expense list cannot be null";
-        assert input != null : "Input string cannot be null";
-
-        String[] parts = input.split("i/", 2);
-        // Check if the input format is correct (i.e., contains "i/")
-        if (parts.length < 2) {
-            LOGGER.log(Level.WARNING, "Invalid command format. Expected format: <command> i/<index>");
-            System.out.println("Error: Invalid command format. Expected format: <command> i/<index>");
-            return null;
-        }
-
-        try {
-            int index = Integer.parseInt(parts[1].trim()) - 1;
-            // Check if the index is within the bounds of the expense list.
-            if (index < 0 || index >= expenses.size()) {
-                LOGGER.log(Level.WARNING, "Index is out of bounds.");
-                System.out.println("Error: Index is out of bounds.");
-                return null;
-            }
-            LOGGER.log(Level.INFO, "Successfully processed DeleteExpenseCommand");
-            // If the index is valid, return a new DeleteExpenseCommand.
-            return new DeleteExpenseCommand(expenses, index);
-        } catch (NumberFormatException e) {
-            LOGGER.log(Level.SEVERE, "Index is not a valid number.");
-            // Catch the NumberFormatException if the part after "i/" isn't a valid integer.
-            System.out.println("Error: Index is not a valid number.");
-            return null;
-        }
-    }
-
     public Command handleReduceSavingCommand(SavingList savings, String input) {
         LOGGER.log(Level.INFO, "Processing handleReduceSavingCommand");
 
@@ -837,11 +809,13 @@ public class Parser {
         }
 
         if (isDeleteExpenseCommand(input)) {
-            return handleDeleteExpenseCommand(expenses, input);
+            CommandCreator commandCreator = new DeleteExpenseCommandCreator(expenses, input);
+            return commandCreator.createCommand();
         }
 
         if (isReduceSavingCommand(input)) {
-            return handleReduceSavingCommand(savings, input);
+            CommandCreator commandCreator = new ReduceSavingCommandCreator(savings, input);
+            return commandCreator.createCommand();
         }
 
         if (isListCommand(input)) {
@@ -865,7 +839,8 @@ public class Parser {
         }
         
         if (isSetBudgetCommand(input)) {
-            return handleSetBudgetCommand(expenses, input);
+            CommandCreator commandCreator = new SetBudgetCommandCreator(expenses, input);
+            return commandCreator.createCommand();
         }
 
         if (isListBudgetCommand(input)){
