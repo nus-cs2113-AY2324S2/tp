@@ -60,6 +60,26 @@ An alternative design could have centralized the categorization logic within a s
 multiple responsibilities and to adhere to the Single Responsibility Principle. By distributing the tasks, the system 
 gains in maintainability and scalability, facilitating future enhancements and modifications. 
 
+### Parser Class Component
+The `Parser` class is responsible for parsing any input from the user and making sense of them to execute the correct commands.
+
+#### Overview
+The `Parser` class contains several predefined string constants representing the valid commands and a public method to parse the 
+input from the user.
+
+#### Detailed Workflow
+Whenever input from the user is detected by the program, the `Parser` class will split the command into 2 parts, with the first part
+containing the command and the second containing details of the command (if present). The command entered is then evaluated using a
+switch statement, with the value of it being compared to the values of each case. In the case of a match, the `Parser` class will then 
+execute the respective action associated with that command by calling other classes from the program such as `BookList` or `BookDetails`.
+
+#### Implementation and Rationale
+The `Parser` class incorporates exception handling to detect invalid or unrecognized commands. This allows the program to continue running
+while prompting the user for valid input
+
+By abstracting out the parsing functionality of BookBuddy into a separate `Parser` class, the complexity of parsing user input is removed
+from the main code. It is instead replaced by a simple interface for the user to work with, adhering to the abstraction concept of
+object-oriented programming.
 
 ## Product scope
 ### Target user profile
