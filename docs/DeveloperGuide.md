@@ -7,7 +7,10 @@
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+
 ### Daily feature
+
 
 This daily mechanism is facilitated by a constructor from the `DailyNewsCommand` class. It takes in an input from 
 the user and the current list of articles to display the news on published on a particular day to the user.  
@@ -33,9 +36,76 @@ Step 4: When the user is done saving the desired news articles, he is able to go
 The flow can be seen from the sequence diagram below.
 <img src="UML Diagrams/dailyFunctionSequence.png">
 
-### Topics Feature
-The topic
+### Source Function
 
+
+The `sourceNews` function in the `NewsOnTheGo` class 
+is used to retrieve the source of a news article. 
+The function takes in a string and a list of 
+`NewsArticle` objects. The string is split into an 
+array and the second element (index 1) is parsed as 
+an integer. This integer is used as an index to 
+retrieve a `NewsArticle` from the list, and the 
+source of the news article is then printed.
+
+Here is the code snippet for the `sourceNews` 
+function:
+
+```java
+/**
+ * Enter the news article number as stored in the array, and it will return the source of the news article.
+ */
+static void sourceNews(String line, List<NewsArticle> list) {
+    String[] split = line.split(" ");
+    int index = Integer.parseInt(split[1]) + 1;
+    System.out.println(list.get(index).getSource());
+}
+```
+### User Preferences Feature
+
+This feature allows users to personalize their news feed by specifying topics of interest. The `UserPreferences` class stores and manages these preferences, allowing the application to deliver relevant news articles to the user.
+
+#### Implementation
+
+The User Preferences feature is implemented through the `UserPreferences` class, which manages a set of topics. It includes functionality to add and remove topics from the preferences and handles loading and saving these preferences to a text file.
+
+The main operations of this feature include:
+
+- `UserPreferences.addTopic(String topic)` — Adds a new topic to the user's list of interests.
+- `UserPreferences.removeTopic(String topic)` — Removes a topic from the user's list of interests.
+
+The persistence of user preferences is achieved through file I/O operations, specifically using the `java.nio.file.Files` class for reading from and writing to the `userPreferences.txt` file.
+
+#### Example Usage
+
+When a user first starts the application, the `UserPreferences` class is instantiated, automatically loading any previously saved preferences. As the user interacts with the application, they can add or remove topics from their preferences, which are immediately persisted to the file system.
+
+```java
+UserPreferences userPrefs = new UserPreferences();
+userPrefs.addTopic("technology"); // Adds technology to the list of interested topics.
+userPrefs.removeTopic("sports"); // Removes sports from the list of interested topics.
+```
+
+#### Persistence Mechanism
+
+The user preferences are saved in a text file named userPreferences.txt, with each line representing a topic of interest. The loadPreferences and savePreferences methods handle the reading and writing of this file, respectively.
+
+```java
+private void loadPreferences() {
+    try {
+        Files.lines(Paths.get(PREFERENCES_FILE))
+            .forEach(line -> interestedTopics.add(line.trim().toLowerCase()));
+    } catch (IOException e) {
+        System.out.println("Could not load user preferences. Starting with an empty list of topics.");
+    }
+}
+```
+
+#### Design Considerations
+The design of the User Preferences feature aimed to achieve simplicity and efficiency, opting for a lightweight file-based storage solution to avoid the overhead of more complex persistence mechanisms. 
+
+#### Alternatives Considered
+- **Cloud-Based Storage:** Providing cross-device synchronization was deemed unnecessary at this stage, given the application's primary focus on delivering a personalized news experience on individual devices.
 
 ## Product scope
 ### Target user profile
