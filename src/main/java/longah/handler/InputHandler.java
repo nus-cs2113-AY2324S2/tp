@@ -56,9 +56,9 @@ public class InputHandler {
             return new ExitCommand(commandString, taskExpression);
         case "pin":
             return new PINCommand(commandString, taskExpression);
-
         case "help":
             return new HelpCommand(commandString, taskExpression);
+            
         default:
             throw new LongAhException(ExceptionMessage.INVALID_COMMAND);
         }

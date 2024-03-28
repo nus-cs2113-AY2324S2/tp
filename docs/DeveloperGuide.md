@@ -43,6 +43,7 @@
 ### Sequence Diagram
 
 ## Product scope
+
 ### Target user profile
 
 Busy people with large transaction quantities among friends
