@@ -85,7 +85,7 @@ public class UI {
     }
 
     public static void bye() {
-        System.out.println("See you again chef! (｡˃ ᵕ ˂ ) ♨");
+        System.out.println("See you again chef!");
         printLine();
     }
 
