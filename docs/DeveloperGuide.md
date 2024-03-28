@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## Table of Contents
+
 * [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
@@ -45,7 +46,21 @@ API: [`Ui.java`](../src/main/java/seedu/binbash/ui/Ui.java)
 
 ![Ui class diagram](images/UiClassDiagram.png)
 
-The above class diagram shows the separate components and functionalities of the Ui.
+The above class diagram shows the components delegating separate functionalities of the Ui.
+
+The `TextIn` class is responsible for reading user input and returning it to `Ui`, upon which it is passed to the *main()* program.
+
+The `PrintStream` class writes text at the behest of `Ui` to standard output, upon which it is received by the user.
+
+Note the use of an externally provided `LineReader` object in the `TextIn` class that handles input. This allows us to greatly extend our text-based user interface with features such as:
+
+1. Command completion on tab
+
+2. Displaying option descriptions on hover
+
+3. Contextual help menus
+
+This allows us to overload options on a small number of commands to provide full functionality of the application. Developers can then extend its features without also the worry of finding a way for users to access those features easily.
 
 ### Yi Hao
 
@@ -91,10 +106,10 @@ The above class diagram shows the separate components and functionalities of the
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
