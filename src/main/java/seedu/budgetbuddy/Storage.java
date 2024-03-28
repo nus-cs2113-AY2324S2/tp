@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,7 +36,6 @@ public class Storage {
             String line = scanner.nextLine();
             String[] parts = line.split("\\|");
             // Assuming the order is Date|Category|Amount|Description
-            LocalDate date = LocalDate.parse(parts[0].trim());
             String category = parts[1].trim();
             double amount = Double.parseDouble(parts[2].trim());
             String description = parts[3].trim();

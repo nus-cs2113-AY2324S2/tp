@@ -2,11 +2,9 @@ package seedu.budgetbuddy.commandcreator;
 
 import seedu.budgetbuddy.ExpenseList;
 import seedu.budgetbuddy.SavingList;
-import seedu.budgetbuddy.SplitExpenseList;
 import seedu.budgetbuddy.command.Command;
 import seedu.budgetbuddy.command.ListExpenseCommand;
 import seedu.budgetbuddy.command.ListSavingsCommand;
-import seedu.budgetbuddy.command.ListSplitExpenseCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,14 +18,12 @@ public class ListCommandCreator extends CommandCreator {
     protected ArrayList<String> savingsCategories;
     private ExpenseList expenses;
     private SavingList savings;
-
-    private SplitExpenseList splitExpenseList;
     private String input;
 
-    public ListCommandCreator(SplitExpenseList splitExpenseList, ExpenseList expenses, SavingList savings,
+    public ListCommandCreator(ExpenseList expenses, SavingList savings,
                               String input) {
 
-        this.splitExpenseList = splitExpenseList;
+
         this.expenses = expenses;
         this.savings = savings;
         this.input = input;
@@ -73,8 +69,7 @@ public class ListCommandCreator extends CommandCreator {
      * @param savingList The SavingList to list from.
      * @return A Command for executing the list, or null if the input is invalid.
      */
-    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList,
-                                     SplitExpenseList splitexpenseList) {
+    public Command handleListCommand(String input, ExpenseList expenseList, SavingList savingList) {
         assert input != null : "Input should not be null";
         assert !input.isEmpty() : "Input should not be empty";
 
@@ -112,9 +107,6 @@ public class ListCommandCreator extends CommandCreator {
                     LOGGER.log(Level.WARNING, "Invalid category inputted: " + filterCategory, e);
                 }
                 return new ListExpenseCommand(expenseList, filterCategory);
-            } else if (parts.length == 3 && parts[1].equalsIgnoreCase("splitted")
-                    && parts[2].equalsIgnoreCase("expenses")) {
-                return new ListSplitExpenseCommand(splitexpenseList);
             } else if (parts.length == 3 && parts[1].equalsIgnoreCase("savings")) {
                 String filterCategory = parts[2];
                 try {
@@ -143,6 +135,6 @@ public class ListCommandCreator extends CommandCreator {
 
     @Override
     public Command createCommand() {
-        return handleListCommand(input, expenses, savings, splitExpenseList);
+        return handleListCommand(input, expenses, savings);
     }
 }

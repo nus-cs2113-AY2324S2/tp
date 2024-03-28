@@ -1,4 +1,2 @@
-2024-03-24 | Entertainment | 40.00 | movie
-2024-03-24 | Transport | 80.00 | GRAB
-2024-03-24 | Entertainment | 40.00 | movie
-2024-03-24 | Groceries | 250.00 | ntuc
+2024-03-28 | Transport | 100.00 | MRT
+2024-03-28 | Housing | 200.00 | BTO
