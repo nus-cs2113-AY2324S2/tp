@@ -43,6 +43,16 @@ classes for analysis and execution.
 * [**`OrderLogic`**](#model-component) and [**`MenuLogic`**](#model-component): A class to handle the second level commands,
 and pass the user input to corresponding classes for analysis and execution.
 
+### Command Component
+The command component consists of two different command interfaces: `MainCommand` and `OrderCommand`. The `MainCommand`
+interface is for the various command classes that are used in the `MainLogic`, while the `OrderCommand` interface is for
+command classes used in `OrderLogic`.  
+
+A `Command` object will be created in either the `MainLogic` or `OrderLogic`
+based on what command the user has inputted(e.g., `MainHelpCommand` object is created when the user inputs the `help`
+command). The `execute()` method of the `Command` object is then called to execute the command, which may require
+certain arguments based on the type of command.
+
 ### Model Component
 The model consists of classes describing the objects used in this application.
 The general structure is that menu and order are separate, but they both work with `menuItem(s)`, which 
@@ -88,8 +98,26 @@ Generally, the order logic works as follows:
 Within the construct of the order logic, the menu can be accessed for viewing in order to select items from 
 available menus. This is carried out with the `view menu` command.
 
+**View Item**  
+Within `OrderLogic`, a list containing all the items that have been added to the current active order can be viewed by executing
+the `view item` command.
 
+**Add**  
+Inside `OrderLogic`, items from the menu can be added into the current active order.
+This is carried out using the `add -item <item_id> -quantity <quantity_of_item>` command,
+where `<item_id>` is an integer corresponding to the item's id in the menu,
+and `<quantity_of_item>` is an integer of the amount of that item to be added.
 
+**Delete**  
+In `OrderLogic`, items from the current order can be removed via the
+`delete -item <item_id> -quantity <quantity_of_item>` command. `<item_id>`
+and `<quantity_of_item>` are the same type of parameters as the ones specified
+in the `Add` command class.
+
+**Complete**  
+Inside `OrderLogic`, once the order is finished, it can be completed and closed
+by executing the `complete` command. This marks the current order as completed
+and the program returns back to `MainLogic` for subsequent command executions.
 
 ## Product scope
 ### Target user profile
