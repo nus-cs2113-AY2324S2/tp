@@ -1,1 +1,9 @@
-James Gosling
+adduser simon
+addtask /on Monday /task lecture /from 9:00 /to 11:00 /type f
+adduser tim
+switch tim
+addtask /on Monday /task lecture /from 9:00 /to 11:00 /type f
+view
+compare simon tim
+addtask /on Eightday /task lecture /from 9:00 /to 11:00 /type f
+bye
