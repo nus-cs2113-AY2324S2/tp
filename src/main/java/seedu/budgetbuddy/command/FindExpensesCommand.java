@@ -72,7 +72,7 @@ public class FindExpensesCommand extends Command {
 
         printInitializationMessage();
         ArrayList<Expense> filteredExpenses = expenses.filterExpenses(description, minAmount, maxAmount);
-        ExpenseList filteredExpensesList = new ExpenseList(filteredExpenses);
+        ExpenseList filteredExpenseList = new ExpenseList(filteredExpenses);
 
         if (filteredExpenses.isEmpty()) {
             LOGGER.log(Level.INFO, "filtered expenses is empty, returning no expenses found");
@@ -85,7 +85,7 @@ public class FindExpensesCommand extends Command {
 
             ui.printDivider();
             System.out.println("Here are the matching expenses : ");
-            filteredExpensesList.listExpenses(null);
+            filteredExpenseList.listExpenses(null);
             ui.printDivider();
         }
     }
