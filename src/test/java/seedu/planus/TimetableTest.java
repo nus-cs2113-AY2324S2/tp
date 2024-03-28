@@ -11,10 +11,17 @@ public class TimetableTest {
     @Test
     public void addCourse_validYearAndTerm_success() throws Exception {
         Timetable timetable = new Timetable();
+        timetable.addCourse(new Course("CG2111A", "", 1, 2));
         timetable.addCourse(new Course("MA1511", "Engineering Calculus", 2, 1, 1));
+        timetable.addCourse(new Course("CG1111A", "", 1, 1));
+
         assertEquals("Year 1 Semester 1:" + System.lineSeparator() + "  MA1511 Engineering Calculus (MC: 2)"
-                + System.lineSeparator() + "Term MCs: 2" + System.lineSeparator(),
-                PlanGetter.getPlan(timetable, 1, 1));
+                + System.lineSeparator() + "  CG1111A  (MC: 4)" + System.lineSeparator() + "Term MCs: 6"
+                + System.lineSeparator() + "-----------------------------" + System.lineSeparator()
+                + "Year 1 Semester 2:" + System.lineSeparator() + "  CG2111A  (MC: 4)" + System.lineSeparator()
+                + "Term MCs: 4" + System.lineSeparator() + "-----------------------------" + System.lineSeparator()
+                + "Total MCs: 10" + System.lineSeparator(),
+                PlanGetter.getPlan(timetable));
     }
 
     @Test
