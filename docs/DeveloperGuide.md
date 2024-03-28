@@ -23,42 +23,8 @@ the string is sent to `CalorieList#addEntry(String)`, which calls `ParserCalorie
 ### List Calories record feature
 
 The `calories list` feature lists out the record of all the Calories data that the user has keyed in. The Calories data are all stored into a `ArrayList<Entry> calorieArrayList` attribute of the `CalorieList` Class. Calories data are printed when the `printCalorieList()` function is called. 
+![CaloriesListClassDiagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/rexyyong/tp/DevGuideRex/docs/CaloriesListClassDiagram.puml)
 
-[//]: # (![CaloriesListClassDiagram]&#40;http://www.plantuml.com/plantuml/proxy?cache=no&src=https://&#41;)
-```plantuml
-@startuml
-
-class LifeTrack {
-    + main(args: String[]): void
-}
-
-package ui {
-    class Ui {
-        + readUserInput(calorieList: calories.CalorieList, hydrationList: hydration.HydrationList, user: user.User, sleepList: sleep.SleepList): void
-        + handleCaloriesInput(line: String, calorieList: calories.CalorieList): void
-    }
-}
-
-package calories {
-    package calorielist {
-        class CalorieList {
-            - ArrayList<Entry> calorieArrayList
-            + printCalorieList(): void
-        }
-
-        class CalorieListUi {
-            + calorieListHeader(): void
-            + emptyListMessage(): void
-        }
-    }
-}
-
-LifeTrack --> calories.calorielist.CalorieList
-LifeTrack -[dotted]-> ui.Ui
-ui.Ui -[dotted]-> calories.calorielist.CalorieList
-CalorieList -[dotted]-> CalorieListUi
-@enduml
-```
 ## Product scope
 ### Target user profile
 
