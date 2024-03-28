@@ -61,6 +61,22 @@ static void sourceNews(String line, List<NewsArticle> list) {
     System.out.println(list.get(index).getSource());
 }
 ```
+
+### Topics Function
+The `showTopics` function in  `NewsOnTheGo` class is used to show the list of topics linked to the current list of news 
+articles. 
+
+In `importNewsFromText` in the `NewsImporter` class, the function not only parses the articles from the text file into a
+list of `NewsArticle` objects, it also creates a list of `NewsTopic` objects. Each `NewsTopic` object stores a list of 
+`NewsArticle` objects for articles related to that specific topic. 
+
+### Filter Function
+The `filterNews` function in `NewsOnTheGo` class is used to show the list of articles linked to a specific topic.
+
+This feature also implements the following operations:
+- [Proposed] `FilterNewsCommand#save()` — Saves the list of news articles in the topic to their reading list
+- [Proposed] `FilterNewsCommand#back()` — Exits the filter topic feature loop.
+
 ### User Preferences Feature
 
 This feature allows users to personalize their news feed by specifying topics of interest. The `UserPreferences` class stores and manages these preferences, allowing the application to deliver relevant news articles to the user.

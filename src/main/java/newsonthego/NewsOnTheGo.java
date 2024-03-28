@@ -88,9 +88,11 @@ public class NewsOnTheGo {
     static int findTopicIndex(String topic) {
         int left = 0;
         int right = newsTopics.size() - 1;
+        String topicToFind = topic.trim();
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            int comparisonResult = topic.trim().compareToIgnoreCase(newsTopics.get(mid).getTopicName().trim());
+            String midTopic = newsTopics.get(mid).getTopicName().trim();
+            int comparisonResult = (topicToFind).compareToIgnoreCase(midTopic);
             if (comparisonResult == 0) {
                 return mid;
             } else if (comparisonResult < 0) {
