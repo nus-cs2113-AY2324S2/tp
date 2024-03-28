@@ -1,11 +1,14 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
-import budgetbuddy.categories.Category;
+
 import budgetbuddy.exceptions.EmptyArgumentException;
 import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
 import budgetbuddy.exceptions.InvalidIndexException;
 import budgetbuddy.exceptions.InvalidTransactionTypeException;
+import budgetbuddy.exceptions.InvalidEditTransactionData;
+
+import budgetbuddy.categories.Category;
 import budgetbuddy.parser.Parser;
 import budgetbuddy.storage.DataStorage;
 import budgetbuddy.transaction.type.Transaction;
@@ -19,6 +22,7 @@ public class TransactionList {
     public static final int DELETE_BEGIN_INDEX = 7;
     public static final int INDEX_OFFSET = 1;
     public static final int LOWER_BOUND = 0;
+    public static final int EDIT_BEGIN_INDEX = 5;
 
     private ArrayList<Transaction> transactions;
     private Parser parser;
@@ -115,4 +119,29 @@ public class TransactionList {
     public void updateBalance(Account account) {
         account.setBalance(dataStorage.getBalance());
     }
+
+    public void processEditTransaction(String input, Account account) throws EmptyArgumentException,
+            NumberFormatException, InvalidIndexException, InvalidEditTransactionData {
+        if (input.trim().length() < EDIT_BEGIN_INDEX) {
+            throw new EmptyArgumentException("edit index ");
+        }
+        String data = input.substring(EDIT_BEGIN_INDEX).trim();
+
+        if (isNotInteger(data)) {
+            throw new NumberFormatException(data);
+        }
+        int index = Integer.parseInt(data) - INDEX_OFFSET;
+        if ((index >= LOWER_BOUND) && (index < transactions.size())) {
+            Transaction transaction = transactions.get(index);
+            String newTransaction = UserInterface.getEditInformation(transaction.toString());
+            Transaction t = parser.parseTransactionType(newTransaction,account);
+            transactions.set(index,t);
+            UserInterface.printUpdatedTransaction();
+        } else {
+            throw new InvalidIndexException(String.valueOf(transactions.size()));
+        }
+    }
+
+
+
 }

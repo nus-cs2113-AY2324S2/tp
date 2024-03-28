@@ -3,6 +3,7 @@ package budgetbuddy.ui;
 import budgetbuddy.categories.Category;
 import budgetbuddy.transaction.type.Transaction;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -34,6 +35,7 @@ public class UserInterface {
         String input = in.nextLine();
         return Integer.parseInt(input);
     }
+
 
     public static void printDeleteMessage(String transaction, double balance){
         String[] parts = transaction.split("\\|");
@@ -93,7 +95,7 @@ public class UserInterface {
     public static void printNumberFormatError(String message) {
         System.out.println(LINE);
         System.out.println(TAB_SPACE + "Error occurred with the input: " + message);
-        System.out.println(TAB_SPACE + "Please enter an integer.");
+        System.out.println(TAB_SPACE + "Please enter a valid value.");
         System.out.println(LINE);
     }
 
@@ -139,4 +141,35 @@ public class UserInterface {
         System.out.println( TAB_SPACE + "No such command exists." );
         System.out.println(LINE);
     }
+
+    public static String getEditInformation(String string){
+        System.out.println(LINE);
+        System.out.println( TAB_SPACE + "Please edit the following transaction" );
+        System.out.println(string);
+        System.out.println(LINE);
+        System.out.print( TAB_SPACE + "Enter transaction type: " );
+        String type = in.next();
+        System.out.print( TAB_SPACE + "Enter description: " );
+        String description = in.next();
+        System.out.print( TAB_SPACE + "Enter transaction date: " );
+        String date = in.next();
+        System.out.print( TAB_SPACE + "Enter transaction amount: " );
+        String amount = in.next();
+        System.out.println(" ");
+        for(Category category : Category.values()) {
+            System.out.println(TAB_SPACE + TAB_SPACE + category.getCategoryName() + ": " + category.getCategoryNum());
+        }
+        System.out.println("In which category do you want to list this transaction? [Enter number between 1 and 9]");
+        System.out.print( TAB_SPACE + "Enter Category: " );
+        String category = in.next();
+        in.nextLine();
+        return type + " | " + description + " | " + date + " | " + amount + " | " + category;
+
+    }
+
+    public static void printUpdatedTransaction(){
+        System.out.println("\n" + TAB_SPACE + "Updated Successfully");
+        System.out.println(LINE);
+    }
+
 }
