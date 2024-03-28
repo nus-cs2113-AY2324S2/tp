@@ -144,7 +144,7 @@ public class Storage {
             modularCredits = Integer.parseInt(words[2]);
             year = Integer.parseInt(words[3]);
             term = Integer.parseInt(words[4]);
-            if (timetableName.equals("myTimetable")) {
+            if (timetableName.contains("myTimetable")) {
                 letterGrade = words[5];
             }
         } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
@@ -152,7 +152,7 @@ public class Storage {
         }
 
         Course course = new Course(courseCode, courseName, modularCredits, year, term);
-        if (timetableName.equals("myTimetable")) {
+        if (timetableName.contains("myTimetable")) {
             course.setGrade(letterGrade);
         }
         return course;
