@@ -1,12 +1,10 @@
 package seedu.bookbuddy;
 
 public class Book {
-
     public String title;
     protected boolean isRead;
     protected String label;
     protected String genre;
-
 
     /**
      * Creates a new Book with the specified title.
@@ -26,7 +24,7 @@ public class Book {
      * @param genre The label to set for the book.
      */
     public void setGenre(String genre) {
-        this.label = genre;  // Set the label for the book
+        this.genre = genre;  // Set the genre for the book
     }
 
     /**

@@ -3,6 +3,7 @@ package seedu.bookbuddy;
 import static seedu.bookbuddy.BookList.books;
 
 public class BookDetails {
+
     /**
      * Sets the label of the book at the specified index.
      *
@@ -39,6 +40,23 @@ public class BookDetails {
         books.get(index).setGenre(genre);
         String title = books.get(index).getTitle();
         Ui.setGenreBookMessage(title, genre);
+    }
+
+    /**
+     * Prints the details of the book at the specified index.
+     * @param index The index of hte book in the list.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public static void displayDetails(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= books.size()) {
+            throw new IndexOutOfBoundsException("Invalid book index. Please enter a valid index.");
+        }
+
+        System.out.println("Here are the details of your book:");
+        System.out.println("Title: " + books.get(index).getTitle());
+        System.out.println("Status: " + (books.get(index).isRead ? "Read" : "Unread"));
+        System.out.println("Label: " + books.get(index).getLabel());
+        System.out.println("Genre: " + books.get(index).getGenre());
     }
 
 }

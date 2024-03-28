@@ -11,7 +11,6 @@ import static seedu.bookbuddy.BookBuddy.LOGGER;
 /**
  * Parses inputs from the user in order to execute the correct commands.
  */
-
 public class Parser {
     public static final String ADD_COMMAND = "add";
     public static final String REMOVE_COMMAND = "remove";
@@ -22,39 +21,40 @@ public class Parser {
     public static final String HELP_COMMAND = "help";
     public static final String LABEL_COMMAND = "label";
     public static final String GENRE_COMMAND = "set-genre";
+    public static final String DISPLAY_COMMAND = "display";
 
     /**
      * Scans the user input for valid commands and handles them accordingly.
      * @param input input from the user
      * @param books ArrayList of books
      */
-
     public static void parseCommand(String input, BookList books) {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
         LOGGER.log(Level.FINE, "Parsing command: {0}", command);
         int index;
+
         try {
             switch (command) {
             case ADD_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 if (inputArray.length < 2) {
                     LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
-                    System.out.println("throwing invalidcommand");
+                    System.out.println("Throwing invalid command");
                     throw new InvalidCommandArgumentException("The add command requires a book title.");
                 }
                 books.addBook(inputArray[1]);
                 break;
             case REMOVE_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     books.deleteBook(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case LIST_COMMAND:
@@ -62,6 +62,7 @@ public class Parser {
                 break;
             case MARK_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     assert index >= 0 : "Index should be non-negative";
@@ -69,12 +70,11 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case UNMARK_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     assert index >= 0 : "Index should be non-negative";
@@ -82,8 +82,6 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case HELP_COMMAND:
@@ -99,7 +97,7 @@ public class Parser {
                     index = Integer.parseInt(labelMessageParts[0]);
                     assert index >= 0 : "Index should be non-negative";
                     String label = labelMessageParts[1];
-                    BookDetails.setBookLabelByIndex(index-1, label);
+                    BookDetails.setBookLabelByIndex(index - 1, label);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + labelMessageParts[0]
                             + " is not a valid number. Please enter a valid numeric index.");
@@ -119,7 +117,7 @@ public class Parser {
                     index = Integer.parseInt(genreMessageParts[0]);
                     assert index >= 0 : "Index should be non-negative";
                     String label = genreMessageParts[1];
-                    BookDetails.setBookGenreByIndex(index-1, label);
+                    BookDetails.setBookGenreByIndex(index - 1, label);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + genreMessageParts[0]
                             + " is not a valid number. Please enter a valid numeric index.");
@@ -127,6 +125,19 @@ public class Parser {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 } catch (Exception e) {
                     System.out.println("An error occurred while setting the genre: " + e.getMessage());
+                }
+                break;
+            case DISPLAY_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    BookDetails.displayDetails(index - 1);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case EXIT_COMMAND:
