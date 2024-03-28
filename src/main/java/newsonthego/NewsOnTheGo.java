@@ -51,6 +51,7 @@ public class NewsOnTheGo {
 
     private static boolean processCommand(String command, String line, List<NewsArticle> list) throws IOException {
         assert !command.isEmpty();
+
         Parser.handleCommand(command, line, list);
         return command.equalsIgnoreCase(Command.BYE.toString());
     }
@@ -101,6 +102,7 @@ public class NewsOnTheGo {
      */
     static void filterNews(String line) {
         int topicIndex = findTopicIndex(line.substring(6).trim());
+        assert topicIndex >= 0 : "Topic index should be valid";
         System.out.println(topicIndex);
         if (topicIndex < 0) {
             System.out.println("Sorry, this topic is not available right now :(");
