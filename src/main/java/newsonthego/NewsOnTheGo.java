@@ -1,7 +1,10 @@
 package newsonthego;
 
 
+import newsonthego.newstopic.NewsTopic;
 import newsonthego.ui.UI;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +16,7 @@ public class NewsOnTheGo {
     public static final String FILENAME = "data/sampleNews.txt";
     private static final Logger logger = Logger.getLogger("NewsOnTheGo");
     private static final ArrayList<NewsTopic> newsTopics = new ArrayList<>();
+    private static NewsFile savedNews;
 
     /**
      * Main entry-point for the java.newsonthego.NewsOnTheGo application.
@@ -21,6 +25,7 @@ public class NewsOnTheGo {
 
         Scanner in = new Scanner(System.in);
         UI.initializeUI(in);
+        savedNews = new NewsFile();
 
         List<NewsArticle> newsArticles = NewsImporter.importNewsFromText(FILENAME, newsTopics);
 
@@ -41,10 +46,10 @@ public class NewsOnTheGo {
     }
 
     public enum Command {
-        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, BYE
+        DAILY, GET, TOPICS, FILTER, SAVE, SOURCE, INFO, CLEAR, BYE
     }
 
-    private static boolean processCommand(String command, String line, List<NewsArticle> list) {
+    private static boolean processCommand(String command, String line, List<NewsArticle> list) throws IOException {
         assert !command.isEmpty();
         Parser.handleCommand(command, line, list);
         return command.equalsIgnoreCase(Command.BYE.toString());
@@ -105,7 +110,24 @@ public class NewsOnTheGo {
         }
     }
 
-    static void saveNews(String line, List<NewsArticle> list) {
+    static void saveNews(String line, List<NewsArticle> list) throws IOException {
+        String[] split = line.split(" ");
+        int index = Integer.parseInt(split[1]) - 1;
+        if (index >= 0 && index < list.size()) {
+            if (list.get(index).isSaved()) {
+                System.out.println(list.get(index).getHeadline() + " has already been saved! \n" +
+                        "find your saved articles at " +savedNews.getPathName());
+            } else {
+                savedNews.saveNews(list.get(index));
+                list.get(index).setSaved(true);
+            }
+        } else {
+            System.out.println("Please provide a valid news index!");
+        }
+    }
+
+    static void clearSavedNews() {
+        savedNews.clearFile();
     }
 
     /**
@@ -116,6 +138,4 @@ public class NewsOnTheGo {
         int index = Integer.parseInt(split[1]) + 1;
         System.out.println(list.get(index).getSource());
     }
-
-
 }

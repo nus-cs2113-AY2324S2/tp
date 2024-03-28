@@ -33,6 +33,10 @@ Step 4: When the user is done saving the desired news articles, he is able to go
 The flow can be seen from the sequence diagram below.
 <img src="UML Diagrams/dailyFunctionSequence.png">
 
+### Topics Feature
+The topic
+
+
 ## Product scope
 ### Target user profile
 

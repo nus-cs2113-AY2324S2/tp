@@ -6,12 +6,10 @@ public class NewsArticle {
     protected String date;
     protected String source;
     protected int importance;
-
     protected int reliability;
-
     protected int bias;
-
     protected String content;
+    protected boolean isSaved;
 
     public NewsArticle(String headline, String author, String date, String source, int importance, int reliability,
                        int bias) {
@@ -23,6 +21,7 @@ public class NewsArticle {
         this.reliability = reliability;
         this.bias = bias;
         this.content = null;
+        this.isSaved = false;
     }
 
     public String getHeadline() {
@@ -87,6 +86,14 @@ public class NewsArticle {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 }
 

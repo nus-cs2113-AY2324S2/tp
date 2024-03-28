@@ -1,4 +1,6 @@
-package newsonthego;
+package newsonthego.newstopic;
+
+import newsonthego.NewsArticle;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,8 @@
 package newsonthego;
 
+import newsonthego.newstopic.NewsTopic;
+import newsonthego.newstopic.TopicComparator;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
