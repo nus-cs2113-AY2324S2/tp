@@ -39,6 +39,10 @@ Step 3. The user is not satisfied with the proposed idea and inputs the `no` com
 
 Step 4. The user is satisfied with the proposed idea and inputs the `yes` command. The loop in `execute` has met the exit condition and thus, the `run` method continues running allowing the user to input other commands.
 
+The following activity diagram summarises what happens when a user inputs `idea`:
+
+<img src="images/GenerateIdeaActivityDiagram.png" height = "375">
+
 ### [Proposed] Smart Itinerary Generation feature
 
 #### Proposed Implementation
