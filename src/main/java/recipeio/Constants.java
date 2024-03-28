@@ -23,6 +23,7 @@ public class Constants {
             "options:\n BREAKFAST, LUNCH, DINNER, APPETIZER, DESSERT";
     public static final String NO_RECIPES_ERROR_MESSAGE = "Sorry, you have no recipes to find matches with. " +
             "Try adding some!";
+    public static final String MESSAGE_ASK_INPUT = "asking user for input";
     static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
             + RECIPE_TIME_PREFIX;
 

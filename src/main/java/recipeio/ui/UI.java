@@ -3,6 +3,7 @@ package recipeio.ui;
 import recipeio.recipe.Recipe;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -51,12 +52,29 @@ public class UI {
         System.out.println("help: shows available commands\n");
         System.out.println("list: shows you list of recipes");
         System.out.println("\tInput Example: list\n");
-        System.out.println("delete: deletes a recipe at a given index");
+        System.out.println("delete LIST_NUMBER: deletes a recipe at a given index");
         System.out.println("\tInput Example: delete 1\n");
-        System.out.println("find: finds tasks with a given keyword");
-        System.out.println("\tInput Example: find pizza\n");
-        System.out.println("add: adds a recipe");
+        System.out.println("find kw KEYWORD: finds recipes with a given keyword");
+        System.out.println("\tInput Example: find kw pizza\n");
+        System.out.println("find date YYYY-MM-DD: finds recipes added on a given date");
+        System.out.println("\tInput Example: find date 2024-03-28\n");
+        System.out.println("add NAME/MINUTES/KCALS/ALLERGIES/CATEGORY/URL: adds a recipe");
         System.out.println("\tInput Example: add pizza/34/340/eggs/dinner/www.food.com\n");
+        System.out.println("exit: to leave the program");
+    }
+
+    public static void printMatches(ArrayList<Recipe> matches) {
+        int counter = 0;
+        StringBuilder output = new StringBuilder();
+        while (counter < matches.size()) {
+            Recipe selected = matches.get(counter);
+            output.append(selected.toString());
+            if (counter != matches.size() - 1) {
+                output.append("\n");
+            }
+            counter += 1;
+        }
+        System.out.println("Here are your matches:\n" + output);
     }
 
     /**
