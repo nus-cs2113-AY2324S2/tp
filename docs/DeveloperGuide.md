@@ -103,7 +103,7 @@ is set to false and saved to the file.
 
 7. The user relaunches the application, and authentication is no longer required since it has been disabled. 
 The user can proceed with the application and do any actions without entering a PIN.
-```
+
 * Code Snippet
 ```
 // Initialize PINHandler
