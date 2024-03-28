@@ -19,8 +19,8 @@ public class WorkoutLogsManager extends ActivityManager {
         throw new Exceptions.InvalidInput("RepsSetsManager is not meant to be executed");
     }
 
-    public void addWorkoutLog(String WorkoutLogDate, String workoutName) {
-        WorkoutLog newWorkoutLog = new WorkoutLog(WorkoutLogDate, workoutName);
+    public void addWorkoutLog(String workoutLogDate, String workoutName) {
+        WorkoutLog newWorkoutLog = new WorkoutLog(workoutLogDate, workoutName);
         try {
             add(newWorkoutLog);
         } catch (Exceptions.ActivityExistsException e) {
@@ -28,7 +28,7 @@ public class WorkoutLogsManager extends ActivityManager {
         }
     }
 
-    public void addExerciseLog(String WorkoutLogDate, String exerciseName,
+    public void addExerciseLog(String workoutLogDate, String exerciseName,
                                String weight, String sets, String repetitions)
             throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
         try {
@@ -37,7 +37,7 @@ public class WorkoutLogsManager extends ActivityManager {
             int repsInt = Integer.parseInt(repetitions);
 
             ExerciseLog newExerciseLog = new ExerciseLog(exerciseName, weightInt, setsInt, repsInt);
-            WorkoutLog workoutLog = (WorkoutLog) retrieve(WorkoutLogDate);
+            WorkoutLog workoutLog = (WorkoutLog) retrieve(workoutLogDate);
 
             workoutLog.addExerciseLog(newExerciseLog);
         } catch (NumberFormatException e) {
