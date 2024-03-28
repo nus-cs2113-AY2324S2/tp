@@ -23,25 +23,36 @@ organization and tracking. The implementation of this feature involves interacti
 system. 
 #### Overview
 The process of categorizing books by genre is a multi-step operation that involves the following classes:
-1. 'BookDetails': This class contains methods that handle the categorization of books.
-2. 'Book': Individual book objects are updated with their respective genres directly in this class.
-3. 'Parser': This class is responsible for parsing the input command to extract the specific index and genre.
+1. `BookDetails`: This class contains methods that handle the categorization of books.
+2. `Book`: Individual book objects are updated with their respective genres directly in this class.
+3. `Parser`: This class is responsible for parsing the input command to extract the specific index and genre.
 
 #### Detailed Workflow
 Below is an example usage:  
 Here’s a step-by-step guide on how the feature works:
-Step 1: The user initiates the process by inputting a command like set-genre 1 Fantasy. Here, the Parser class plays a 
-crucial role as it interprets the command and segregates it into a manageable array. The first part of this array holds 
-the command set-genre, which indicates the action to be executed.
+Step 1: The user initiates the process by inputting a command like `set-genre 1 Fantasy`. Here, the `Parser` class plays
+a crucial role as it interprets the command and segregates it into a manageable array. The first part of this array holds 
+the command `set-genre`, which indicates the action to be executed.
 
-Step 2: The second segment of the input string is then further dissected into two components, which are the index (1) 
-and the genre (Fantasy). This step is essential for identifying the specific book and the genre it needs to be 
+Step 2: The second segment of the input string is then further dissected into two components, which are the index (`1`) 
+and the genre (`Fantasy`). This step is essential for identifying the specific book and the genre it needs to be 
 associated with.
 
-Step 3: With the index and genre clearly identified, these parameters are passed to the setBookGenreByIndex method 
-within the BookDetails class. This method is then responsible for assigning the specified genre to the book located at 
+Step 3: With the index and genre clearly identified, these parameters are passed to the `setBookGenreByIndex` method 
+within the `BookDetails` class. This method is then responsible for assigning the specified genre to the book located at 
 the given index.
 
+#### Implementation and Rationale
+The decision to involve multiple classes in this operation is driven by the principles of object-oriented programming, 
+which emphasize modularity, encapsulation, and separation of concerns. By distributing responsibilities across different
+classes, the system remains flexible, with each class focusing on a specific aspect of the functionality.
+
+* The `BookDetails` class is central to managing book attributes and behaviors, making it the logical location for methods 
+* that categorize books.
+* The `Book` class represents individual books, and it is here that genre information is ultimately stored, aligning with 
+* the principle that objects should manage their own state.
+* The `Parser` class abstracts the complexity of command interpretation, ensuring that user inputs are correctly understood 
+* and acted upon by the system.
 
 
 ## Product scope
