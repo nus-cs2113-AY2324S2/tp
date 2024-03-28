@@ -18,18 +18,18 @@ Reference to AB-3 diagrams code
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 # Categorising the different books by their genres
-This functionality will allow the books to be segregated into different groups by their genres for improved tracking.
-This operation is a cross class method that:
-    1. Accesses the BookDetails class to access methods to categorise the books
-    2. The categories are saved directory to the individual books in the Book class
-    3. The Parser class will parse the command to obtain the specific index and genre given
+This functionality will allow the books to be segregated into different groups by their genres for improved tracking.  
+This operation is a cross class method that:  
+    1. Accesses the BookDetails class to access methods to categorise the books  
+    2. The categories are saved directory to the individual books in the Book class  
+    3. The Parser class will parse the command to obtain the specific index and genre given  
 
-Below is an example usage:
-Step 1: When the user inputs the command set-genre 1 Fantasy, the Parser class will split the command into an array 
-of 2 to access the command set-genre
-Step 2: The second part of the array is further split into 2 to access the index "1" and the genre message "Fantasy"
+Below is an example usage:  
+Step 1: When the user inputs the command set-genre 1 Fantasy, the Parser class will split the command into an array   
+of 2 to access the command set-genre  
+Step 2: The second part of the array is further split into 2 to access the index "1" and the genre message "Fantasy"  
 Step 3: The index and genre message is passed into the setBookGenreByIndex method in BookDetails to set the genre of 
-the book indexed at 1.
+the book indexed at 1.  
 
 
 
