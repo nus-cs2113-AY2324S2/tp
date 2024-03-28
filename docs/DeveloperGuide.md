@@ -21,6 +21,24 @@ expansion will provide a comprehensive view of diverse financial sources and enh
 within BudgetBuddy.
 
 
+### [Implemented] Category feature
+
+#### Description
+
+The Category feature empowers users to effectively categorize transactions based on their preferences. When initiating a
+new transaction through the `Add` command, users are prompted to select a category from a predefined list. This ensures
+organized and streamlined transaction management.
+
+#### Design and Implementation
+
+The implementation of the Category feature revolves around the integration of a `category` attribute within each
+transaction object. This attribute is defined as a member of the `Category` enum class.
+
+Upon invoking the `Add` command, users are presented with a selection prompt featuring the available categories. User
+input, typically in the form of a numerical identifier corresponding to a category within the enum class, facilitates
+the assignment of the appropriate enum object to the transaction's category attribute.
+
+
 ### [Implemented] Remove transaction
 #### Description
 This method is used to remove a transaction from the list of transactions based on the transaction ID provided
@@ -45,6 +63,7 @@ InvalidIndexException is thrown.
 Upon successful validation, the method removes the transaction at the calculated index from the transactions
 ArrayList. Subsequently, it updates the account balance to reflect the removed transaction. Finally, it 
 notifies the user of the successful removal along with displaying the details of the removed transaction.
+
 
 ## Product scope
 ### Target user profile
