@@ -75,23 +75,18 @@ public class Storage {
                 for (String keyCommand : keyCommands) {
                     if (keyCommand.contains(".")) {
                         //do nothing.
-                    }
-                    else if (keyCommand.contains("Qty: ")) {
+                    } else if (keyCommand.contains("Qty: ")) {
                         String[] commandQtyUnit = keyCommand.replace("Qty: ", "").split(" ");
                         assert commandQtyUnit.length == 2 : "length not 2!";
                         commandQty = commandQtyUnit[0];
                         commandUom = commandQtyUnit[1];
-                    }
-                    else if (keyCommand.contains("Cat: ")) {
+                    } else if (keyCommand.contains("Cat: ")) {
                         commandCat = keyCommand.replace("Cat: ", "");
-                    }
-                    else if (keyCommand.contains("BuyPrice: $")) {
+                    } else if (keyCommand.contains("BuyPrice: $")) {
                         commandBuy = keyCommand.replace("BuyPrice: $", "");
-                    }
-                    else if (keyCommand.contains("SellPrice: $")) {
+                    } else if (keyCommand.contains("SellPrice: $")) {
                         commandSell = keyCommand.replace("SellPrice: $", "");
-                    }
-                    else {
+                    } else {
                         commandName = keyCommand;
                     }
                 }

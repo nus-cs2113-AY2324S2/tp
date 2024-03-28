@@ -75,4 +75,10 @@ public class TextUi {
                 "Changed quantity of " + item + " from " + oldQuantity + " to " + newQuantity
         );
     }
+
+    public static void showSellMessage(String item, int sellQuantity, int remainingQuantity, int sellPrice) {
+        replyToUser("Quantity of " + item + " sold: " + sellQuantity + ", for: $" + sellPrice + "\n" +
+                "Quantity remaining: " + remainingQuantity
+        );
+    }
 }
