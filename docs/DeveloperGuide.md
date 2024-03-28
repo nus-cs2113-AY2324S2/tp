@@ -6,7 +6,7 @@
 
 ## Design & implementation
 ### Parsing user input for caloric entries
-
+ 
 This functionality is facilitated by `ParserCalories`. It implements one operation, namely:
 - `ParserCalories#parseCaloriesInput(String)`
 
@@ -19,6 +19,21 @@ the string is sent to `CalorieList#addEntry(String)`, which calls `ParserCalorie
 - Step 2: Using `String.split()`, the method extracts information such as the description, number of calories, and date of entry. The obtained information is sent to the private method `ParserCalories#makeNewInputEntry(String, int, String)` to create a new entry of class `InputEntry` that extends `Entry`.
 
 - Step 3: The created `InputEntry` instance is added into the `ArrayList<Entry>` attribute of the `CalorieList`.
+
+### Parsing user input for hydration entries
+
+This functionality is facilitated by `ParserHydration`. It implements one operation, namely:
+- `ParserHydration#parseHydrationInput(String input)`
+
+This operation is exposed in the `HydrationList` class as `HydrationList#addEntry(String)`.
+
+Given below is an example usage scenario and how this mechanism behaves at every step:
+- Step 1: When the user inputs the command `calories in Milo v/100 date/270324` in the terminal,
+  the string is sent to `HydrationList#addEntry(String)`, which calls `ParserHydration#parseHydrationInput(String)`.
+
+- Step 2: Using `String.split()`, the method extracts information such as the description, volume of beverage, and date of entry. The obtained information is sent to the private method `ParserHydration#makeNewInputEntry(String, int, String)` to create a new entry of class `HydrationEntry` that extends `Entry`.
+
+- Step 3: The created `HydrationEntry` instance is added into the `ArrayList<Entry>` attribute of the `HydrationList`.
 
 ## Product scope
 ### Target user profile
