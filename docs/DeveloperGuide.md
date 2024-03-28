@@ -33,7 +33,24 @@ The `Data` component is primarily composed of an `ItemList` object that stores d
 
 `Item` has different types, such as `RetailItem`, `OperationalItem`, `PerishableRetailItem`, and `PerishableOperationalItem`.
 
+## Features
+
 ### Iman
+
+### Add Item
+
+The `add` command adds an item to the `Item` object and prints out a formatted message to state the name, description,
+quantity, expiration date, sale price, and cost price entered for the item.
+
+When the `execute()` method from `AddCommand` class is called, the `addItem()` method is first called to create a new
+`RetailItem` object or `PerishableRetailItem` object depending on the user inputs. It will then add the object to the
+`ItemList`. It will then call the `Ui` class to print out a message indicating that the item has
+been successfully added.
+
+Separation of Concerns is applied to ensure the `Ui` is only responsible for printing the messages to output, while the 
+`ItemList` class deals with the logic of adding an item to the list. This implementation also encapsulates the details 
+of adding an item and displaying messages. This way, only classes relevant to the logic of adding an item will have 
+access to `ItemList`.
 
 ### Haziq
 
