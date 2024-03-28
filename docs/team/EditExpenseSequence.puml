@@ -1,0 +1,34 @@
+@startuml
+actor User
+participant "BudgetBuddy" as BB
+participant "Parser" as P
+participant "EditExpenseCommand" as EEC
+participant "ExpenseList" as EL
+participant "Expense" as E
+
+User -> BB: inputCommand("edit expense c/Category i/Index a/Amount d/Description")
+activate BB
+BB -> P: parseCommand(input)
+activate P
+P -> EEC: new EditExpenseCommand(expenses, category, index, amount, description)
+activate EEC
+P --> BB: command
+deactivate P
+BB -> EEC: execute()
+activate EEC
+EEC -> EL: editExpense(category, index, amount, description)
+activate EL
+EL -> E: getExpense(index)
+activate E
+E -> E: setCategory(category)
+E -> E: setAmount(amount)
+E -> E: setDescription(description)
+E --> EL: expenseUpdated
+deactivate E
+EL --> EEC: editConfirmed
+deactivate EL
+EEC --> BB: commandExecuted
+deactivate EEC
+BB --> User: "Expense edited successfully."
+deactivate BB
+@enduml
