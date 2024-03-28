@@ -32,7 +32,7 @@
 
 ### Storage
 
-Storage is performed by the `[Storage]`(../src/main/java/longah/handler/StorageHandler.java)
+Storage is performed by the [`Storage`](../src/main/java/longah/handler/StorageHandler.java)
 
 ### Member and MemberList
 
