@@ -1,3 +1,5 @@
+//@@ author hafizuddin-a
+
 package seedu.duke;
 
 import java.util.Optional;
@@ -34,6 +36,16 @@ public class GroupCommand {
         }
 
         currentGroup.get().addMember(memberName);
+    }
+
+    /**
+     * Enters an existing group with the specified name.
+     *
+     * @param groupName the name of the group to enter
+     */
+
+    public static void enterGroup(String groupName) {
+        Group.enterGroup(groupName);
     }
 
     /**

@@ -1,3 +1,5 @@
+//@@ author avrilgk
+
 package seedu.duke;
 
 import java.util.ArrayList;
@@ -54,6 +56,24 @@ public class Group {
             group = Optional.of(newGroup);
         }
 
+        System.out.println("You are now in " + groupName);
+        return group;
+    }
+
+    /**
+     * Enter existing group.
+     *
+     * @param groupName The name of the group to enter.
+     * @return The existing group.
+     */
+
+    public static Optional<Group> enterGroup(String groupName) {
+        Optional<Group> group = Optional.ofNullable(groups.get(groupName));
+        if (group.isEmpty()) {
+            System.out.println("Group does not exist.");
+            return group;
+        }
+        currentGroupName = Optional.of(groupName);
         System.out.println("You are now in " + groupName);
         return group;
     }
