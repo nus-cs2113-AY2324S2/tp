@@ -23,14 +23,14 @@ public class User {
     private int caloriesRequired;
 
     //user data constants
-    private static final int NAME_INDEX = 0;
-    private static final int HEIGHT_INDEX = 1;
-    private static final int WEIGHT_INDEX = 2;
-    private static final int AGE_INDEX = 3;
-    private static final int SEX_INDEX = 4;
-    private static final int EXERCISE_INDEX = 5;
-    private static final int GOAL_INDEX = 6;
-    private static final int REQ_CAL_INDEX = 7;
+    private final int NAME_INDEX = 0;
+    private final int HEIGHT_INDEX = 1;
+    private final int WEIGHT_INDEX = 2;
+    private final int AGE_INDEX = 3;
+    private final int SEX_INDEX = 4;
+    private final int EXERCISE_INDEX = 5;
+    private final int GOAL_INDEX = 6;
+    private final int REQ_CAL_INDEX = 7;
 
     public User(String name, int height, int weight, int age, String sex, String exerciseLevels, String goal) {
         this.name = name;
