@@ -29,11 +29,11 @@ public class StorageHandler {
     private static final String SEPARATOR = String.valueOf(Character.toChars(31));
 
     // Storage Directory Constants
-    private File membersFile;
-    private File transactionsFile;
     private String storageFolderPath = "./data";
     private String storageMembersFilePath;
     private String storageTransactionsFilePath;
+    private File membersFile;
+    private File transactionsFile;
 
     // Objects for Storate
     private MemberList members;

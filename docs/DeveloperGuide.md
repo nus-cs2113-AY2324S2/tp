@@ -8,10 +8,7 @@
 - [Developer Guide](#developer-guide)
   - [Acknowledgements](#acknowledgements)
   - [Table of Contents](#table-of-contents)
-  - [Design](#design)
-    - [Class Diagram](#class-diagram)
-    - [Sequence Diagram](#sequence-diagram)
-  - [Implementation](#implementation)
+  - [Design \& Implementation](#design--implementation)
     - [UI and I/O](#ui-and-io)
     - [Commands](#commands)
     - [Storage](#storage)
@@ -30,13 +27,7 @@
   - [Instructions for text-ui-testing](#instructions-for-text-ui-testing)
   - [Future Enhancements](#future-enhancements)
 
-## Design
-
-### Class Diagram
-
-### Sequence Diagram
-
-## Implementation
+## Design & Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
@@ -48,7 +39,7 @@ Design and Implementation has been broken down into the subsequent sections, eac
 * [Member and MemberList](#member-and-memberlist)
 * [Transaction and TransactionList](#transaction-and-transactionlist)
 * [PIN](#pin)
-* [Exceptions](#exceptions)
+* [Exceptions and Logging](#exceptions-and-logging)
 
 ### UI and I/O
 
@@ -56,40 +47,60 @@ Design and Implementation has been broken down into the subsequent sections, eac
 
 ### Storage
 
-Storage operations are performed by the [`StorageHandler Class`](../src/main/java/longah/handler/StorageHandler.java).
+<ins>Overview</ins>
 
-Each group calls its own `StorageHandler` object such that they maintain distinct storage directories.
+The StorageHandler class is responsible for managing the loading and saving of data regarding members and transactions from and onto the local machine. Each group calls its own StorageHandler object such that they maintain distinct storage directories.
 
-Key arguments for the constructor are a `MemberList` object, a `TransactionList` object and a string `groupName`. The first two are used to represent the list of `Member` objects and the list of `Transaction` objects associated with the group for reference when loading or saving data. The last represents the directory to be written to to ensure that data across groups are kept discrete.
+<ins>Implementation Details</ins>
 
-To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
+*Data Storage:*
 
-`loadMembersData()` and `loadTransactionsData()` have been compiled into the method `loadAllData()` while `saveMembersData()` and `saveTransactionsData()` have been compiled into the method `saveAllData()`
-
-Key attributes part of the class include `membersFile` and `trnsactionsFile` which respectively contain the `File` representation of the directories to each of the storage files, as well as `members` and `transactions` which store the respective utility lists obtained from calling the constructor.
-
-<ins>Storage File Structure</ins>
-
-Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in their respective folders.
+Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in their respective folders. The file format is as follows.
 
 * `members.txt` - NAME | BALANCE
 * `transactions.txt` - LENDER NAME | BORROWER1 NAME | AMOUNT1 | BORROWER2 NAME...
 
-<ins>`loadMembersData()`</ins>
+<ins>Class Structure</ins>
 
-Reads data from the groups' associated `members.txt` and unpacks it before inserting `Member` objects into `MemberList`.
+The StorageHandler has the following attributes:
 
-<ins>`loadTransactionsData()`</ins>
+* *storageFolderPath*: A string containing the path to the storage directory specific to the group.
+* *storageMembersFilePath*: A string containing the path to the `members.txt` directory associated with the group.
+* *storageTransactionsFilePath*: A string containing the path to the `transactions.txt` directory associated with the group.
+* *membersFile*: A File object representing the `members.txt` file associated with the group.
+* *transactionsFile*: A File object representing the `transactions.txt` file associated with the group.
+* *members*: A MemberList object representing the list of Members in the group.
+* *transactions*: A TransactionList object representing the list of Transactions in the group.
+* *scanners*: A size 2 array of Scanners to be used for loading data from the data storage files. The first Scanner in the array is used for reading from `members.txt` while the second is used for reading from `transactions.txt`.
 
-Reads data from the groups' associated `transactions.txt` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
+<ins>Constructor</ins>
 
-<ins>`saveMembersData()`</ins>
+The StorageHandler constructor creates the relevant data storage directories if they do not current exist while initializing the attributes of the object.
 
-Writes packaged data from each `Member` and saves it as a record in `members.txt`.
+Key arguments for the constructor are a `MemberList` object, a `TransactionList` object and a string `groupName`. The first two are used to represent the list of `Member` objects and the list of `Transaction` objects associated with the group for reference when loading or saving data. The last represents the directory to be written to to ensure that data across groups are kept discrete.
 
-<ins>`saveTransactionsData()`</ins>
+<ins>Methods</ins>
 
-Writes packaged data from each `Transaction` and saves it as a record in `transactions.txt`
+* *loadMembersData*: Reads data from `membersFile` and unpacks it before inserting `Member` objects into `MemberList`.
+* *loadTransactionsData*: Reads data from `transactionsFile` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
+* *saveMembersData*: Writes packaged data from each `Member` and saves it as a record in `membersFile`.
+* *saveTransactionsData*: Writes packaged data from each `Transaction` and saves it as a record in `transactionsFile`.
+  
+Data loading methods are merged in the *loadAllData* method while data saving methods are merged in the *saveAllData* method.
+
+<ins>Usage Example</ins>
+![StorageHandler Sequence Diagram](diagrams/StorageHandler%20Sequence%20Diagram.png)
+
+Given below is an example usage scenario and how StorageHandler behaves at each step:
+
+1. The user launches the application for the first time. Group is initialized, creating an instance of StorageHandler. StorageHandler creates relevant storage directories if they do not yet exist.
+2. StorageHandler reads data from the 2 data storage files and creates Member and Transaction objects in the associated utility list objects.
+3. When a command which would alter the data within MemberList or TransactionList is invoked, the method to save data to the storage files is called by Group. This updates the information within the storage files.
+
+<ins>Design Considerations</ins>
+
+* Update upon change, not upon exit - This allows for data to be saved even if the application exits ungracefully.
+* *checkTransactions* - Methods are provided to have a quick check to ensure that data from data storage is not corrupted.
 
 ### Member and MemberList
 
@@ -177,6 +188,7 @@ Busy people with large transaction quantities among friends
 
 * Technical Requirements: Any mainstream OS, i.e. Windows, MacOS or Linux, with Java 11 installed. Instructions for downloading Java 11 can be found [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 * Project Scope Constraints: The application should only be used for tracking. It is not meant to be involved in any form of monetary transaction.
+* Project Scope Constraints: Data storage is only to be performed locally.
 * Quality Requirements: The application should be able to be used effectively by a novice with little experience with CLIs.
 
 ## Glossary
