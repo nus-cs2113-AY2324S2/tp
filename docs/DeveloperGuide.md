@@ -20,9 +20,9 @@ Reference to AB-3 diagrams code
 # Categorising the different books by their genres
 This functionality will allow the books to be segregated into different groups by their genres for improved tracking.  
 This operation is a cross class method that:  
-    >1. Accesses the BookDetails class to access methods to categorise the books  
-    >2. The categories are saved directory to the individual books in the Book class  
-    >3. The Parser class will parse the command to obtain the specific index and genre given  
+>1. Accesses the BookDetails class to access methods to categorise the books  
+>2. The categories are saved directory to the individual books in the Book class  
+>3. The Parser class will parse the command to obtain the specific index and genre given  
 
 Below is an example usage:  
 >Step 1: When the user inputs the command set-genre 1 Fantasy, the Parser class will split the command into an array   
