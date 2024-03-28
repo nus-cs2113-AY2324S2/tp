@@ -30,6 +30,8 @@
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
   - [Instructions for manual testing](#instructions-for-manual-testing)
+  - [Instructions for JUnit Testing](#instructions-for-junit-testing)
+  - [Instructions for text-ui-testing](#instructions-for-text-ui-testing)
 
 ## Design
 
@@ -134,7 +136,9 @@ Busy people with large transaction quantities among friends
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Technical Requirements: Any mainstream OS, i.e. Windows, MacOS or Linux, with Java 11 installed. Instructions for downloading Java 11 can be found [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+* Project Scope Constraints: The application should only be used for tracking. It is not meant to be involved in any form of monetary transaction.
+* Quality Requirements: The application should be able to be used effectively by a novice with little experience with CLIs.
 
 ## Glossary
 
@@ -146,4 +150,24 @@ Busy people with large transaction quantities among friends
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+View the [User Guide](UserGuide.md) for the full list of UI commands and their related use case and expected outcomes.
+
+## Instructions for JUnit Testing
+
+JUnit tests are written in the [`test directory`](../src/test) and serve to test key methods part of the application.
+
+## Instructions for text-ui-testing
+
+Files relating to Text UI Testing can be found [here](../text-ui-test/).
+
+When running tests on a Windows system, run the following command from the specificied directory:
+```
+./runtest.bat
+```
+
+When running tests on a UNIX-based system, run the following command from the specified directory:
+```
+./runtest.sh
+```
+
+Warning: Text UI Testing has been configured to clear all past data records to simulate a fresh application starting when the above commands are invoked. This WILL result in loss of data from previous runs.
