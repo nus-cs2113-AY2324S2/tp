@@ -26,7 +26,8 @@ The list feature in the BudgetBuddy application allows users to view all their p
 facilitated through the `UserInterface#printAllTransactions`, which loops through the entire ArrayList of transactions
 and extract all the details of each transaction.
 
-This feature will be further enhanced to include options to view transactions of specified date ranges.
+This feature will be further enhanced to include options to view transactions that the user is interested in only. For
+example, transactions of the past week, past month, specified date range.
 
 ## Product scope
 ### Target user profile
