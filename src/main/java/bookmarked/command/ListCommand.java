@@ -26,22 +26,16 @@ public class ListCommand extends Command {
         this.splitCommand = inputCommand.split("list ");
 
         //This will be updated to switch/case when the date feature is added
-        if (inputCommand.matches("list")) {
-            try {
+        try {
+            if (inputCommand.matches("list")) {
                 runListBlankCommand();
-            } catch (EmptyListException e) {
-                Ui.printEmptyListMessage();
             }
-        } else if (splitCommand[1].equals("alphabetical")) {
-            try {
+            else if (splitCommand[1].equals("alphabetical")) {
                 runListAlphabeticalCommand();
-            } catch (EmptyListException e) {
-                Ui.printEmptyListMessage();
             }
-        } else {
-            System.out.println("error, the list function went wrong somewhere.");
+        } catch (EmptyListException e) {
+            Ui.printEmptyListMessage();
         }
-
     }
 
 
