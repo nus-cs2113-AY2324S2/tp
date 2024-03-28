@@ -303,4 +303,38 @@ public class TravelActivityList {
         }
     }
 
+    /**
+     * Adds expense to travel activity
+     * @param taskNumber The travel activity number on the list
+     * @param expense  The expense of travel activity
+     */
+    public void expenseActivity(int taskNumber, String expense) throws OmniException {
+        assert taskNumber != 0 : "There is no tasks in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity task = travelActivities.get(indexOfTask);
+        task.setExpense(expense);
+        System.out.println("I have added expense for this task:");
+        System.out.println(task + " (" + expense + ")");
+    }
+
+    /**
+     * Removes the expense on a travel activity
+     * @param taskNumber The travel activity number on the list
+     */
+    public void removeExpense(int taskNumber) throws OmniException {
+        assert taskNumber != 0 : "There is no task in the list";
+        if (taskNumber > travelActivities.size()) {
+            throw new OmniException("Travel activity cannot be found");
+        }
+        int indexOfTask = taskNumber - 1;
+        TravelActivity task = travelActivities.get(indexOfTask);
+        task.removeExpense();
+        System.out.println("Expense removed from the task:");
+        System.out.println(task);
+    }
+
+
 }
