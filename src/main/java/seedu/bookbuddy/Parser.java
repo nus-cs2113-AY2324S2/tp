@@ -91,7 +91,8 @@ public class Parser {
                 break;
             case LABEL_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
-                String[] labelMessageParts = inputArray[1].split(" ", 2); // Split the message into index and label message
+                String[] labelMessageParts = inputArray[1].split(" ", 2);
+                // Split the message into index and label message
                 assert labelMessageParts.length == 2 : "Command requires an index and a label message";
 
                 try {
@@ -100,7 +101,8 @@ public class Parser {
                     String label = labelMessageParts[1];
                     BookDetails.setBookLabelByIndex(index-1, label);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + labelMessageParts[0] + " is not a valid number. Please enter a valid numeric index.");
+                    System.out.println("Invalid input: " + labelMessageParts[0]
+                            + " is not a valid number. Please enter a valid numeric index.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 } catch (Exception e) {
@@ -109,7 +111,8 @@ public class Parser {
                 break;
             case GENRE_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
-                String[] genreMessageParts = inputArray[1].split(" ", 2); // Split the message into index and label message
+                String[] genreMessageParts = inputArray[1].split(" ", 2);
+                // Split the message into index and label message
                 assert genreMessageParts.length == 2 : "Command requires an index and a label message";
 
                 try {
@@ -118,7 +121,8 @@ public class Parser {
                     String label = genreMessageParts[1];
                     BookDetails.setBookGenreByIndex(index-1, label);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + genreMessageParts[0] + " is not a valid number. Please enter a valid numeric index.");
+                    System.out.println("Invalid input: " + genreMessageParts[0]
+                            + " is not a valid number. Please enter a valid numeric index.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 } catch (Exception e) {
