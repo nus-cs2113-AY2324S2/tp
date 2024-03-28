@@ -5,11 +5,13 @@ import time.MonthView;
 import time.WeekView;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static data.TaskManagerException.checkIfDateHasTasks;
@@ -40,7 +42,8 @@ public class TaskManager {
      * @param taskType The TaskType of the task to be added.
      * @param dates A String array that contains the relevant dates for the task to be added.
      */
-    public static void addTask(LocalDate date, String taskDescription, TaskType taskType, String[] dates)
+    public static void addTask(LocalDate date, String taskDescription, TaskType taskType, String[] dates,
+                               String[] times)
             throws TaskManagerException {
         Task taskToAdd;
 
@@ -52,12 +55,17 @@ public class TaskManager {
         case EVENT:
             String startDate = dates[0];
             String endDate = dates[1];
-            taskToAdd = new Event(taskDescription, startDate, endDate);
+
+            String startTime = times[0];
+            String endTime = times[1];
+
+            taskToAdd = new Event(taskDescription, startDate, endDate, startTime, endTime);
             break;
 
         case DEADLINE:
-            String deadline = dates[0];
-            taskToAdd = new Deadline(taskDescription, deadline);
+            String deadlineDate = dates[0];
+            String deadlineTime = times[0];
+            taskToAdd = new Deadline(taskDescription, deadlineDate, deadlineTime);
             break;
 
         default:
@@ -95,25 +103,109 @@ public class TaskManager {
      * @param newTaskDescription The updated description of the task.
      * @throws IndexOutOfBoundsException If the task index is out of bounds.
      */
-    public static void updateTask(LocalDate date, int taskIndex, String newTaskDescription)
-            throws IndexOutOfBoundsException, TaskManagerException {
+    public static void updateTask(LocalDate date, int taskIndex, String newTaskDescription, Scanner scanner)
+            throws IndexOutOfBoundsException {
         try {
             List<Task> dayTasks = tasks.get(date);
-            if (dayTasks == null || taskIndex < 0 || taskIndex >= dayTasks.size()) {
-                throw new TaskManagerException("The task you are trying to update does not exist.");
-            }
+            boolean dayHasTasks = dayTasks != null;
+            boolean taskIndexExists = taskIndex >= 0 && taskIndex < Objects.requireNonNull(dayTasks).size();
+            assert dayHasTasks;
+            assert taskIndexExists;
 
             String oldDescription = dayTasks.get(taskIndex).getName();
+            String currentTaskType = dayTasks.get(taskIndex).getTaskType();
+            boolean startDateChanged = false;
 
-            Task task = new Task(newTaskDescription);
-            dayTasks.set(taskIndex, task);
+            Task task;
+            switch (currentTaskType) {
+            case "T":
+                task = new Todo(newTaskDescription);
+                logger.log(Level.INFO, "Updating task description from " +
+                        oldDescription + " to: " + newTaskDescription);
+                break;
+            case "E":
+                Event oldEvent = (Event) dayTasks.get(taskIndex);
+                System.out.println("Do you want to update the start and end dates and times? (yes/no)");
+                String eventResponse = scanner.nextLine().trim().toLowerCase();
+                if (eventResponse.equals("yes")) {
+                    System.out.println("Enter the new start date, end date, start time and end time, " +
+                            "separated by spaces:");
+                    String[] newDatesAndTimes = scanner.nextLine().trim().split(" ");
+                    String oldStartDate = oldEvent.getStartDate();
 
-            logger.log(Level.INFO, "Updating task description from " +
-                    oldDescription + " to: " + newTaskDescription);
+                    task = new Event(newTaskDescription, newDatesAndTimes[0], newDatesAndTimes[1], newDatesAndTimes[2],
+                            newDatesAndTimes[3]);
+
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate newEventStartDate;
+                    try {
+                        newEventStartDate = LocalDate.parse(newDatesAndTimes[0], dateFormatter);
+                    } catch (DateTimeParseException e) {
+                        throw new DateTimeParseException("Invalid date format. Please use the format dd/MM/yyyy.",
+                                newDatesAndTimes[0], 0);
+                    }
+
+                    if (!newDatesAndTimes[0].equals(oldStartDate)) {
+                        startDateChanged = true;
+                        tasks.computeIfAbsent(newEventStartDate, k -> new ArrayList<>()).add(task);
+                        tasks.get(LocalDate.parse(oldStartDate, dateFormatter)).remove(taskIndex);
+                    }
+
+                    logger.log(Level.INFO, "Updating task description from " +
+                            oldDescription + " to: " + newTaskDescription);
+                    logger.log(Level.INFO, "Updating task start date from " +
+                            oldEvent.getStartDate() + " to: " + newDatesAndTimes[0]);
+                    logger.log(Level.INFO, "Updating task end date from " + oldEvent.getEndDate() + " to: "
+                            + newDatesAndTimes[1]);
+                    logger.log(Level.INFO, "Updating task start time from " + oldEvent.getStartTime() + " to: "
+                            + newDatesAndTimes[2]);
+                    logger.log(Level.INFO, "Updating task end time from " + oldEvent.getEndTime() + " to: "
+                            + newDatesAndTimes[3]);
+                } else {
+                    task = new Event(newTaskDescription, oldEvent.getStartDate(), oldEvent.getEndDate(),
+                            oldEvent.getStartTime(), oldEvent.getEndTime());
+
+                    logger.log(Level.INFO, "Updating task description from " +
+                            oldDescription + " to: " + newTaskDescription);
+                }
+
+                break;
+            case "D":
+                Deadline oldDeadline = (Deadline) dayTasks.get(taskIndex);
+                System.out.println("Do you want to update the deadline date and time? (yes/no)");
+                String deadlineResponse = scanner.nextLine().trim().toLowerCase();
+                if (deadlineResponse.equals("yes")) {
+                    System.out.println("Enter the new deadline date and time, separated by a space:");
+                    String[] newDateAndTime = scanner.nextLine().trim().split(" ");
+                    task = new Deadline(newTaskDescription, newDateAndTime[0], newDateAndTime[1]);
+
+                    logger.log(Level.INFO, "Updating task description from " +
+                            oldDescription + " to: " + newTaskDescription);
+                    logger.log(Level.INFO, "Updating task deadline date from " + oldDeadline.getByDate() + " to: "
+                            + newDateAndTime[0]);
+                    logger.log(Level.INFO, "Updating task deadline time from " + oldDeadline.getByTime() + " to: "
+                            + newDateAndTime[1]);
+                } else {
+                    task = new Deadline(newTaskDescription, oldDeadline.getByDate(), oldDeadline.getByTime());
+
+                    logger.log(Level.INFO, "Updating task description from " +
+                            oldDescription + " to: " + newTaskDescription);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid task type");
+            }
+
+            if (!startDateChanged) {
+                dayTasks.set(taskIndex, task);
+            }
+
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Task index is out of bounds.");
         }
     }
+
+
 
 
     /**
@@ -134,8 +226,8 @@ public class TaskManager {
      * @throws TaskManagerException If there is an error in managing tasks.
      * @throws DateTimeParseException If there is an error parsing the date.
      */
-    public void addManager(WeekView weekView, MonthView monthView,boolean inMonthView, String action,
-            String day, String taskTypeString, String taskDescription)
+    public void addManager(Scanner scanner, WeekView weekView, MonthView monthView,boolean inMonthView, String action,
+                           String day, String taskTypeString, String taskDescription)
             throws TaskManagerException,DateTimeParseException {
 
         // Convert the day to a LocalDate
@@ -163,18 +255,44 @@ public class TaskManager {
 
         // Parse the task type
         TaskType taskType = parseTaskType(taskTypeString.toUpperCase());
+        String typeName = taskType.equals(TODO) ? "Todo" : taskType.equals(DEADLINE) ? "Deadline" : "Event";
 
+        // vvv Below methods should be recreated when console inputs are streamlined
         if (taskType == null) {
             throw new TaskManagerException("Invalid task type. Please provide valid task type: " +
                     "T for Todo, E for event, D for deadline.");
-        }
+        } else if (taskType == DEADLINE) {
+            System.out.println("Enter the deadline date and time of this task, separated by a space:");
+            String[] deadlineDateAndTime = scanner.nextLine().trim().split(" ");
+            String[] deadlineDate = new String[]{deadlineDateAndTime[0]};
+            String[] deadlineTime = new String[]{deadlineDateAndTime[1]};
 
-        // Add the task based on the parsed inputs
-        addTask(date, taskDescription, taskType, dates); // Assuming no additional dates are needed for the task
+            addTask(date, taskDescription, taskType, deadlineDate, deadlineTime);
+        } else if (taskType == EVENT) {
+            System.out.println("Enter the start date of this task, along with the start time separated by a space:");
+            String[] startDateAndTime = scanner.nextLine().trim().split(" ");
+            String startDate = startDateAndTime[0];
+            String startTime = startDateAndTime[1];
+
+            System.out.println("Enter the end date of this task, along with the end time separated by a space:");
+            String[] endDateAndTime = scanner.nextLine().trim().split(" ");
+            String endDate = endDateAndTime[0];
+            String endTime = endDateAndTime[1];
+
+            String [] startAndEndDates = new String[]{startDate, endDate};
+            String [] startAndEndTimes = new String[]{startTime, endTime};
+
+            addTask(date, taskDescription, taskType, startAndEndDates, startAndEndTimes);
+        } else {
+            String[] dummyDates = {null}; // dummy String array to pass into function call
+            String[] dummyTimes = {null}; // dummy String array to pass into function call
+
+            addTask(date, taskDescription, taskType, dummyDates, dummyTimes);
+        }
 
         // Save tasks to file
         saveTasksToFile(tasks, Storage.FILE_PATH); // Update tasks.txt file
-        System.out.println("Task added.");
+        System.out.println(typeName + " added.");
     }
 
 
@@ -233,12 +351,13 @@ public class TaskManager {
             checkIfDateInCurrentWeek(date, weekView);
         }
 
-        // Update the task based on the parsed inputs
-        updateTask(date, taskIndex - 1, newDescription); // Subtract 1 to convert to zero-based index
-        System.out.println("Task updated.");
+        String currentTaskType = taskManager.getTasksForDate(date).get(taskIndex - 1).getTaskType();
+        String typeName = currentTaskType.equals("T") ? "Todo" : currentTaskType.equals("D") ? "Deadline" : "Event";
 
-        // Save tasks to file
-        saveTasksToFile(tasks, Storage.FILE_PATH); // Update tasks.txt file
+        updateTask(date, taskIndex - 1, newDescription, scanner);
+        saveTasksToFile(tasks,Storage.FILE_PATH); //Update tasks.txt file
+        System.out.println(typeName + " updated.");
+
     }
 
 
@@ -257,6 +376,7 @@ public class TaskManager {
                 String taskDescription = task.getName();
                 TaskType taskType = parseTaskType(task.getTaskType());
                 String[] dates = new String[]{null, null};
+                String[] times = new String[]{null, null};
 
                 switch (taskType) {
                 case TODO:
@@ -266,20 +386,30 @@ public class TaskManager {
                 case EVENT:
                     String startDate = task.getStartDate();
                     String endDate = task.getEndDate();
+
+                    String startTime = task.getStartTime();
+                    String endTime = task.getEndTime();
+
                     dates[0] = startDate;
                     dates[1] = endDate;
+
+                    times[0] = startTime;
+                    times[1] = endTime;
                     break;
 
                 case DEADLINE:
-                    String deadline = task.getByDate();
-                    dates[0] = deadline;
+                    String deadlineDate = task.getByDate();
+                    String deadlineTime = task.getByTime();
+
+                    dates[0] = deadlineDate;
+                    times[0] = deadlineTime;
                     break;
 
                 default:
                     logger.log(Level.INFO, "Task to add was invalid. Task in question: " + taskDescription);
                 }
 
-                addTask(date, taskDescription, taskType, dates);
+                addTask(date, taskDescription, taskType, dates, times);
             }
         }
     }
@@ -313,7 +443,8 @@ public class TaskManager {
      * @throws DateTimeParseException If there is an error parsing the date.
      */
     public static void deleteManager(WeekView weekView,MonthView monthView, boolean inMonthView,
-            TaskManager taskManager,String day, int taskIndex) throws TaskManagerException, DateTimeParseException {
+                                     TaskManager taskManager,String day, int taskIndex) throws TaskManagerException,
+            DateTimeParseException {
 
         // Convert the day to a LocalDate
         LocalDate date;
@@ -354,3 +485,4 @@ public class TaskManager {
     }
 
 }
+

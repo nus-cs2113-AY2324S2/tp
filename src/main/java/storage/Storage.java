@@ -90,13 +90,17 @@ public class Storage {
                 TaskType taskType = parseTaskType(parts[1]);
                 String taskDescription = parts[2];
                 String[] dates = {null, null};
+                String[] times = {null, null};
                 if (taskType == DEADLINE) {
                     dates[0] = parts[3];
+                    times[0] = parts[4];
                 } else if (taskType == EVENT) {
                     dates[0] = parts[3];
                     dates[1] = parts[4];
+                    times[0] = parts[5];
+                    times[1] = parts[6];
                 }
-                addTask(date, taskDescription, taskType, dates);
+                addTask(date, taskDescription, taskType, dates, times);
             }
         } catch (IOException e) {
             System.out.println("I/O exception occurred during file handling");

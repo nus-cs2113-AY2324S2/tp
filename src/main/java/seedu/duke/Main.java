@@ -98,7 +98,7 @@ public class Main {
                     String day = parts[1].trim();
                     String taskTypeString = parts[2].trim();
                     String taskDescription = parts[3].trim();
-                    taskManager.addManager(weekView,monthView, inMonthView, action, day,
+                    taskManager.addManager(scanner, weekView,monthView, inMonthView, action, day,
                             taskTypeString, taskDescription);
                 } catch (TaskManagerException | DateTimeParseException | NumberFormatException e) {
                     System.out.println(e.getMessage());
