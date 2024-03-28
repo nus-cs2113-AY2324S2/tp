@@ -148,6 +148,7 @@ public class InputParsing {
                 Ui.println(LIST_SORTED);
                 break;
             } else {
+                sortType = null;
                 Ui.println(StudentSorter.INVALID_CHOICE);
             }
         }
