@@ -23,6 +23,7 @@
     - [Member and MemberList](#member-and-memberlist)
     - [Transaction and TransactionList](#transaction-and-transactionlist)
     - [PIN](#pin)
+    - [Exceptions and Logging](#exceptions-and-logging)
   - [Product scope](#product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
@@ -52,6 +53,7 @@ Design and Implementation has been broken down into the subsequent sections, eac
 * [Member and MemberList](#member-and-memberlist)
 * [Transaction and TransactionList](#transaction-and-transactionlist)
 * [PIN](#pin)
+* [Exceptions](#exceptions)
 
 ### UI and I/O
 
@@ -59,7 +61,7 @@ Design and Implementation has been broken down into the subsequent sections, eac
 
 ### Storage
 
-Storage operations are performed by the [`StorageHandler Class`](../src/main/java/longah/handler/StorageHandler.java)
+Storage operations are performed by the [`StorageHandler Class`](../src/main/java/longah/handler/StorageHandler.java).
 
 Each group calls its own `StorageHandler` object such that they maintain distinct storage directories. To perform its tasks, the class primarily uses the methods `loadMembersData()`, `loadTransactionsData()`, `saveMembersData()` and `saveTransactionsData()`, with several other helper functions.
 
@@ -95,6 +97,43 @@ Takes in `TransactionList` as a key argument. Writes packaged data from each `Tr
 ### Transaction and TransactionList
 
 ### PIN
+
+### Exceptions and Logging
+
+Exception cases are handled by the [`LongAhException Class`](../src/main/java/longah/exception/LongAhException.java).
+
+The class makes use of enumerations [`ExceptionMessage`](../src/main/java/longah/exception/ExceptionMessage.java) and [`ExceptionType`](../src/main/java/longah/exception/ExceptionType.java) for its use.
+
+Notably, `ExceptionMessage` stores the desired output message for each kind of potential error along with its associated `ExceptionType`. `ExceptionType` is used to define the manner in which the exception is logged.
+
+Use of the class are demonstrated below, including throwing of an exception and printing the desired output message. This example covers the throwing exception due to invalid index.
+```
+import longah.exception.LongAhException;
+import longah.exception.ExceptionMessage;
+
+// Throw an exception
+throw new LongAhException(ExceptionMessage.INVALID_INDEX);
+
+// Catch exception and output desired message
+catch (LongAhException e) {
+    LongAhException.printException(e);
+}
+```
+
+Note: All exception calls are logged by default, either as WARNING or INFO depending on the `ExceptionType` classification tagged to the `ExceptionMessage`.
+
+Logging is handled by the [`Logging Class`](../src/main/java/longah/handler/Logging.java).
+
+Logging can be performed using the following lines of code:
+```
+import longah.handler.Logging;
+
+// Create log of INFO Level
+Logging.logInfo(message);
+
+// Create log of WARNING Level
+Logging.logWarning(message);
+```
 
 ## Product scope
 
