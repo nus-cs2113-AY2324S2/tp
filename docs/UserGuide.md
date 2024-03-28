@@ -1,42 +1,62 @@
-# User Guide
+# Voyagers
+
+Voyagers is a Java application designed to manage trips efficiently through a command-line interface.
 
 ## Introduction
 
-{Give a product intro}
+Voyagers is a Java application designed to simplify trip management. It provides users with a command-line interface to manage their trips efficiently, including adding main trips, setting trip details, listing all trips, and more.
 
-## Quick Start
+## Features
 
-{Give steps to get started quickly}
+- **Add Main Trip**: Add a new main trip with specified details such as name, dates, location, and description.
+- **Delete Main Trip**: Remove an existing main trip from the list.
+- **Set Trip Details**: Modify trip details such as name, dates, location, and description for existing trips.
+- **List All Trips**: View a comprehensive list of all trips along with their details.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+## Usage
 
-## Features 
+### Adding a Main Trip
 
-{Give detailed description of each feature}
+To add a new main trip, use the `addmaintrip` command followed by the trip details.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+```bash
+addmaintrip /n <Name> /start <Start Date> /end <End Date> /location <Location> /d <Description>
+```
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### Setting Trip Details
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+You can modify the details of an existing trip using the following commands:
 
-Example of usage: 
+- `setname`: Set the name of a trip.
+- `setdates`: Set the dates of a trip.
+- `setlocation`: Set the location of a trip.
+- `setdescription`: Set the description of a trip.
 
-`todo n/Write the rest of the User Guide d/next week`
+Example:
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+```bash
+setname /old Europe Trip /new European Adventure
+```
 
-## FAQ
+```bash
+setdates /n Europe Trip /start 2024/05/01 /end 2024/07/31
+```
 
-**Q**: How do I transfer my data to another computer? 
+### Deleting a Main Trip
+To delete an existing main trip, use the `deletemaintrip` command followed by the trip name.
 
-**A**: {your answer here}
+```bash
+deletemaintrip /n Europe Trip
+```
+### Listing All Trips
+To view a list of all trips along with their details, use the listall command.
 
-## Command Summary
+```bash 
+listall
+```
 
-{Give a 'cheat sheet' of commands here}
+### Enter "exit" to exit the application.
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+```bash 
+exit
+```
