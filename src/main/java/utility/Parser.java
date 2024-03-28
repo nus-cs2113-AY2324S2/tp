@@ -209,8 +209,7 @@ public class Parser {
      */
     public static String[] splitBmiInput(String input) throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                || !input.contains(HealthConstant.HEIGHT_FLAG)
+        if (!input.contains(HealthConstant.HEIGHT_FLAG)
                 || !input.contains(HealthConstant.WEIGHT_FLAG)
                 || !input.contains(HealthConstant.DATE_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
@@ -245,8 +244,7 @@ public class Parser {
     public static String[] splitPeriodInput(String input) throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_PERIOD_PARAMETERS];
 
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                | !input.contains(HealthConstant.START_FLAG)
+        if (!input.contains(HealthConstant.START_FLAG)
                 || !input.contains(HealthConstant.END_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
@@ -305,22 +303,6 @@ public class Parser {
         } else {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.UNABLE_TO_MAKE_PREDICTIONS_ERROR);
         }
-    }
-
-    public static String[] getTimeParts(String time) throws CustomExceptions.InvalidInput {
-        String [] parts;
-        try {
-            parts = time.split(":");
-        } catch (Exception e) {
-            throw new CustomExceptions.InvalidInput("Invalid delimiter. Use ':'");
-        }
-        if (parts.length != 2 && parts.length != 3) {
-            throw new CustomExceptions.InvalidInput("Invalid time format! "
-                    + System.lineSeparator()
-                    + "Format is  either HH:MM, HH:MM:SS or MM:SS!");
-        }
-
-        return parts;
     }
 
     /**
@@ -417,8 +399,7 @@ public class Parser {
     public static String[] splitAppointmentDetails(String input)
             throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_APPOINTMENT_PARAMETERS];
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                || !input.contains(HealthConstant.DATE_FLAG)
+        if (!input.contains(HealthConstant.DATE_FLAG)
                 || !input.contains(HealthConstant.TIME_FLAG)
                 || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
