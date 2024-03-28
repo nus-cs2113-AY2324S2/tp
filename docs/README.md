@@ -1,4 +1,4 @@
-# Duke
+# PulsePilot
 
 {Give product intro here}
 

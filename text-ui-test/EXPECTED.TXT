@@ -1,9 +1,206 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+ _              _
+|_)    |  _  _ |_) o  |  _ _|_
+|  |_| | _> (/_|   |  | (_) |_
+Engaging orbital thrusters...
+PulsePilot on standby
+____________________________________________________________
+What is your name, voyager?
+____________________________________________________________
+Welcome aboard, Captain James Gosling
+____________________________________________________________
+Tips: Enter 'help' to view the pilot manual!
+Initiating FTL jump sequence...
+FTL jump completed.
+Terminal primed. Command inputs are now accepted...
+____________________________________________________________
+____________________________________________________________
+Commands List:
 
-What is your name?
-Hello James Gosling
+workout /e:run /d:DISTANCE /t:TIME [/date:DATE] - Add a new run
+workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE] - Add a new gym workout
+health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE - Add new BMI data
+health /h:period /start:START_DATE /end:END_DATE - Add new period data
+health /h:prediction - Predicts next period's start date
+health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION - Add new appointment data
+history /item:[run/gym/bmi/period] - Shows history of runs/gyms/bmi records/periods tracked/appointment records
+latest /item:[run/gym/bmi/period] - Shows latest entry of runs/gyms/bmi records/periods tracked/appointment records
+help - Show this help message
+exit - Exit the program
+____________________________________________________________
+____________________________________________________________
+Successfully added a new run session
+Type	Time		Distance	Pace		Date
+run 	25:23		5.24		4:51/km		2024-03-19
+____________________________________________________________
+____________________________________________________________
+Successfully added a new run session
+Type	Time		Distance	Pace		Date
+run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Your run history:
+Index		Type	Time		Distance	Pace		Date
+1.			run 	25:23		5.24		4:51/km		2024-03-19
+2.			run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Your latest run:
+Index		Type	Time		Distance	Pace		Date
+2.			run 	33:33		10.24		3:17/km		2024-04-20
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 1. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 2. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
+____________________________________________________________
+____________________________________________________________
+Successfully added a new gym session
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
+____________________________________________________________
+____________________________________________________________
+Your gym history:
+Gym Session 1 (Date: NA)
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 1. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
+____________________________________________________________
+____________________________________________________________
+Please enter the details of station 2. (Format: e.g. Bench Press /s:2 /r:4 /w:10,20)
+____________________________________________________________
+____________________________________________________________
+Successfully added a new gym session
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
+____________________________________________________________
+____________________________________________________________
+Your gym history:
+Gym Session 1 (Date: NA)
+Station 1 benchpress: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 100 KG
+Station 2 squats: 4 sets
+	- Set 1. 5 reps at 100 KG
+	- Set 2. 5 reps at 90 KG
+	- Set 3. 5 reps at 80 KG
+	- Set 4. 5 reps at 70 KG
+____________________________________________________________
+Gym Session 2 (Date: NA)
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
+____________________________________________________________
+____________________________________________________________
+Your latest gym:
+Gym Session 2 (Date: NA)
+Station 1 shoulder press: 4 sets
+	- Set 1. 5 reps at 50 KG
+	- Set 2. 5 reps at 40 KG
+	- Set 3. 5 reps at 50 KG
+	- Set 4. 5 reps at 40 KG
+Station 2 deadlift: 4 sets
+	- Set 1. 5 reps at 120 KG
+	- Set 2. 5 reps at 100 KG
+	- Set 3. 5 reps at 100 KG
+	- Set 4. 5 reps at 110 KG
+____________________________________________________________
+Added: bmi | 1.80 | 85.00 | 2024-03-19
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+____________________________________________________________
+Your BMI history:
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+____________________________________________________________
+Added: bmi | 2.00 | 45.42 | 2024-03-20
+2024-03-20
+Your BMI is 11.36
+You're underweight.
+Added: bmi | 1.95 | 85.00 | 2024-03-21
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+Your BMI history:
+2024-03-19
+Your BMI is 26.23
+You're overweight.
+2024-03-20
+Your BMI is 11.36
+You're underweight.
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+____________________________________________________________
+2024-03-21
+Your BMI is 22.35
+Great! You're within normal range.
+____________________________________________________________
+Added: period | 2022-03-09 | 2022-03-16
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+____________________________________________________________
+Your Period history:
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+____________________________________________________________
+Added: period | 2022-11-20 | 2022-12-22
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+Your Period history:
+Period Start: 2022-03-09 Period End: 2022-03-16
+Period Length: 8 days
+Cycle Length: 256 days
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+____________________________________________________________
+Period Start: 2022-11-20 Period End: 2022-12-22
+Period Length: 33 days
+____________________________________________________________
+Initiating PulsePilot landing sequence...
+____________________________________________________________
+PulsePilot successful touchdown
+See you soon, Captain!
+____________________________________________________________
