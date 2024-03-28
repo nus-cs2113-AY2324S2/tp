@@ -3,6 +3,7 @@ package grocery;
 import git.Ui;
 import exceptions.GitException;
 import exceptions.LocalDateWrongFormatException;
+import exceptions.PastExpirationDateException;
 import exceptions.InvalidAmountException;
 import exceptions.InvalidCostException;
 import exceptions.CannotUseException;
@@ -154,7 +155,12 @@ public class GroceryList {
     
         // Convert LocalDate back to String to match the setExpiration signature
         String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        grocery.setExpiration(dateString);
+        try {
+            grocery.setExpiration(dateString);
+        } catch (PastExpirationDateException e) {
+            System.out.println(e.getMessage());
+        }
+
     
         // Verification and UI feedback
         assert grocery.getExpiration().isEqual(date) : "Expiration date should be set correctly";
