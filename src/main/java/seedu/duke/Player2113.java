@@ -3,7 +3,6 @@ package seedu.duke;
 public class Player2113 {
     public static final String SOME_FILE_PATH = "something";
     private Ui ui;
-    private QuestionsList questionsList;
     private QuestionsList questionsList1;
     private QuestionsList questionsList2;
     private TopicList topicList;
@@ -50,7 +49,7 @@ public class Player2113 {
         ui.printTopicList(topicList, ui);
 
         while (ui.isPlaying) {
-            ui.readCommands(ui, questionsList, topicList, questionListByTopic, allResults, helper, userAnswers);
+            ui.readCommands(ui, topicList, questionListByTopic, allResults, helper, userAnswers);
         }
 
     }

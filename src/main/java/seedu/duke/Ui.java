@@ -22,7 +22,7 @@ public class Ui {
     public String[] inputAnswers;
 
     public void readCommands(
-            Ui ui, QuestionsList questionsList, TopicList topicList,
+            Ui ui, TopicList topicList,
             QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper, AnswerTracker userAnswers
     ) {
         Parser parser = new Parser();
@@ -32,7 +32,7 @@ public class Ui {
             ui.askForInput();
             String command = in.nextLine();
             try {
-                parser.parseCommand(command, ui, questionsList, topicList, questionListByTopic, allResults, helper,
+                parser.parseCommand(command, ui, topicList, questionListByTopic, allResults, helper,
                         userAnswers);
             } catch (CustomException e) {
                 ui.handleException(e);

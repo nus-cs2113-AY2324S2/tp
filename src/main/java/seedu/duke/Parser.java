@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Parser {
     private static final int NO_RESULTS = 0;
-    private static final int NO_PARAMETERS = 1;
-    private static final int ONE_PARAMETER = 2;
-    private static final int TWO_PARAMETERS = 3;
+    private static final int NO_PARAMETER_LENGTH = 1;
+    private static final int ONE_PARAMETER_LENGTH = 2;
+    private static final int TWO_PARAMETER_LENGTH = 3;
     private static final int FIRST_PARAMETER = 1;
     private static final int SECOND_PARAMETER = 2;
 
@@ -23,9 +23,8 @@ public class Parser {
 
     public void parseCommand(
 
-            String command, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic, ResultsList allResults, Helper helper,
-            AnswerTracker userAnswers
+            String command, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
+            ResultsList allResults, Helper helper, AnswerTracker userAnswers
     ) throws CustomException {
 
         String lowerCaseCommand = command.toLowerCase();
@@ -36,8 +35,7 @@ public class Parser {
             } else if (lowerCaseCommand.startsWith("bye")) {
                 ui.isPlaying = false;
             } else if (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain")) {
-                //System.out.println("ERROR");
-                processSolutionCommand(lowerCaseCommand, ui, questionsList, topicList, questionListByTopic);
+                processSolutionCommand(lowerCaseCommand, ui, topicList, questionListByTopic);
             } else if (lowerCaseCommand.startsWith("results")) {
                 processResultsCommand(lowerCaseCommand, allResults, ui, questionListByTopic, userAnswers);
             } else if (lowerCaseCommand.startsWith("help")) {
@@ -66,14 +64,14 @@ public class Parser {
         if (allResults.getSizeOfAllResults() == NO_RESULTS) {
             throw new CustomException(MESSAGE_NO_RESULTS);
         }
-        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER, TWO_PARAMETERS);
-        assert commandParts.length <= TWO_PARAMETERS;
+        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER, TWO_PARAMETER_LENGTH);
+        assert commandParts.length <= TWO_PARAMETER_LENGTH;
         switch (commandParts.length) {
-        case (NO_PARAMETERS): {
+        case (NO_PARAMETER_LENGTH): {
             ui.printAllResults(!INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             break;
         }
-        case (ONE_PARAMETER): {
+        case (ONE_PARAMETER_LENGTH): {
             if (commandParts[FIRST_PARAMETER].equals(DETAILS_PARAMETER)) {
                 ui.printAllResults(INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             } else {
@@ -90,7 +88,7 @@ public class Parser {
             }
             break;
         }
-        case (TWO_PARAMETERS): {
+        case (TWO_PARAMETER_LENGTH): {
             if (!commandParts[FIRST_PARAMETER].equals(DETAILS_PARAMETER)) {
                 throw new CustomException(MESSAGE_INVALID_PARAMETERS);
             }
@@ -116,7 +114,7 @@ public class Parser {
             String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic,
             ResultsList allResults, AnswerTracker userAnswers
     ) throws CustomException {
-        assert (topicList.getSize() != 0) : "Size of topicList should never be 0";
+        assert (topicList.getSize() != NO_RESULTS) : "Size of topicList should never be 0";
 
         String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER);
         if (commandParts.length != 2) {
@@ -153,9 +151,11 @@ public class Parser {
 
     // solution and explain commands
     private void processSolutionCommand(
-            String lowerCaseCommand, Ui ui, QuestionsList questionsList,
-            TopicList topicList, QuestionListByTopic questionListByTopic
-    ) throws CustomException {
+            String lowerCaseCommand, Ui ui, TopicList topicList, QuestionListByTopic questionListByTopic)
+            throws CustomException {
+        assert (lowerCaseCommand.startsWith("solution") || lowerCaseCommand.startsWith("explain"))
+                : "either solution or explain command";
+
         boolean isSolutionCommand = lowerCaseCommand.startsWith("solution");
         String typeOfCommand = isSolutionCommand ? "solution" : "explain";
 
@@ -166,40 +166,38 @@ public class Parser {
 
         // check validity of parameter
         String commandParameterTopic = commandParts[FIRST_PARAMETER];
-        String commandParameterQn = commandParts[FIRST_PARAMETER + 1];
+        String commandParameterQn = commandParts[SECOND_PARAMETER];
 
         try {
             // if parameter is an Integer
             int topicNum = Integer.parseInt(commandParameterTopic);
             int questionNum = Integer.parseInt(commandParameterQn);
 
-            // checks validity of parameter
+            // checks validity of topicNum
             if (topicNum < 1 || topicNum > topicList.getSize()) {
                 throw new CustomException("No such topic");
             }
-
+            // checks validity of questionNum
             QuestionsList qnList = questionListByTopic.getQuestionSet(topicNum - 1);
             if (questionNum < 1 || questionNum > qnList.getSize()) {
                 throw new CustomException(("No such question"));
             }
             if (isSolutionCommand) {
                 String solution = qnList.getOneSolution(questionNum);
-                if (topicList.get(topicNum - 1).hasAttempted) {
-                    assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
-                    assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
+                if (topicList.get(topicNum - 1).hasAttempted()) {
                     ui.printOneSolution(questionNum, solution);
-                } else {
+                } else { // has not attempted
                     ui.printNoSolutionAccess();
                 }
                 return;
-            } // only runs if explanation
+            }
+            // only runs code below if explain command
             assert typeOfCommand.contentEquals("explain") : "typeOfCommand should be explain";
+
             String explanation = qnList.getOneExplanation(questionNum);
-            if (topicList.get(topicNum - 1).hasAttempted) {
-                assert (questionNum > 0 && questionNum <= qnList.getSize()): "question number out of range";
-                assert (topicNum > 0 && topicNum <= topicList.getSize()): "topic number out of range";
+            if (topicList.get(topicNum - 1).hasAttempted()) {
                 ui.printOneSolution(questionNum, explanation);
-            } else {
+            } else { // has not attempted
                 ui.printNoSolutionAccess();
             }
 
