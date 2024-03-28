@@ -14,6 +14,7 @@ public class Logging {
      * Creates a log file to store log data.
      */
     public Logging() {
+        // @@author FeathersRe
         try {
             FileHandler handler = new FileHandler("./log/LongAh.log");
             handler.setFormatter(new SimpleFormatter());
@@ -22,6 +23,7 @@ public class Logging {
         } catch (IOException e) {
             longAhLogger.log(Level.WARNING, "Log data may not be saved due to permission.");
         }
+        // @@author
     }
 
     /**

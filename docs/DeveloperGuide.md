@@ -194,7 +194,7 @@ is set to false and saved to the file.
 7. The user relaunches the application, and authentication is no longer required since it has been disabled. 
 The user can proceed with the application and do any actions without entering a PIN.
 
-* Code Snippet
+Code Snippet
 ```
 // Initialize PINHandler
 PINHandler pinHandler = new PINHandler();
@@ -219,13 +219,41 @@ security needs and convenience.
 
 ### Exceptions and Logging
 
-Exception cases are handled by the [`LongAhException Class`](../src/main/java/longah/exception/LongAhException.java).
+<ins>Overview</ins>
 
-The class makes use of enumerations [`ExceptionMessage`](../src/main/java/longah/exception/ExceptionMessage.java) and [`ExceptionType`](../src/main/java/longah/exception/ExceptionType.java) for its use.
+This project makes used of centralised exception handling and logging means, allowing for greater standardisation throughout the codebase. This is done through the LongAhException class and Logging class respectively.
 
-Notably, `ExceptionMessage` stores the desired output message for each kind of potential error along with its associated `ExceptionType`. `ExceptionType` is used to define the manner in which the exception is logged.
+<ins>Implementation Details</ins>
 
-Use of the class are demonstrated below, including throwing of an exception and printing the desired output message. This example covers the throwing exception due to invalid index.
+The LongAhException class makes use of enumerations `ExceptionMessage` and `ExceptionType` to dictate its behaviour. `ExceptionMessage` stores the desired output message for each kind of potential error along with its associated `ExceptionType`. `ExceptionType` is used to define the manner in which the exception is logged.
+
+Note: All exception calls are logged by default, either as WARNING or INFO depending on the `ExceptionType` classification tagged to the `ExceptionMessage`.
+
+<ins>Class Structure</ins>
+
+The LongAhException class has the following static field:
+* *type*: A ExceptionType enumeration denoting how the exception should be logged.
+
+The Logging class has the following static field:
+* *longAhLogger*: A Logger type object to perform the logging.
+
+<ins>Constructor</ins>
+The LongAhException class calls the Exception constructor using the message associated with the received ExceptionMessage and stores the type of exception.
+
+The Logging class initializes a file directory to store logging data.
+
+<ins>Methods</ins>
+The LongAhException class has the following key methods:
+
+* *printException*: Prints the desired output message when an exception is thrown.
+
+The Logging class has the following key methods:
+
+* *logInfo*: Create a log at the INFO level.
+* *logWarning*: Create a log at the WARNING level.
+
+<ins>Usage Example</ins>
+Use of the LongAhException class is demonstrated below, including throwing of an exception and printing the desired output message. This example covers the throwing exception due to invalid index.
 ```
 import longah.exception.LongAhException;
 import longah.exception.ExceptionMessage;
@@ -238,10 +266,6 @@ catch (LongAhException e) {
     LongAhException.printException(e);
 }
 ```
-
-Note: All exception calls are logged by default, either as WARNING or INFO depending on the `ExceptionType` classification tagged to the `ExceptionMessage`.
-
-Logging is handled by the [`Logging Class`](../src/main/java/longah/handler/Logging.java).
 
 Logging can be performed using the following lines of code:
 ```
