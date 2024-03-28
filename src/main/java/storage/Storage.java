@@ -25,7 +25,7 @@ import static data.TaskType.EVENT;
 public class Storage {
 
     public static final Path FILE_PATH = Path.of("./save/tasks.txt");
-    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static Logger logger = Logger.getLogger("Storage");
 
     /**
      * Creates directory and tasks.txt if it does not exist
