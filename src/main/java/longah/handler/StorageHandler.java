@@ -81,7 +81,6 @@ public class StorageHandler {
     /**
      * Initializes the storage scanner to read data files.
      * 
-     * @return An array of Scanners to read the data files
      * @throws LongAhException If the data files are not found
      */
     public void initStorageScanners() throws LongAhException {
