@@ -2,10 +2,7 @@ package storage;
 
 import item.Item;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static storage.Storage.writeToFile;
 
 public class TransactionLogs extends Storage {
     private static final String LOGNAME = "./TransactionLogs.txt";
