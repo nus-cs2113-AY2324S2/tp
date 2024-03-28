@@ -23,9 +23,9 @@ public class AddUserTest {
     @Test
     public void testAddUserToGroup() {
         String groupName = "testGroup";
-        Group TestGroup = Group.createGroup(groupName);
-        TestGroup.addMember("testUser");
-        assertTrue(TestGroup.isMember("testUser"),
+        Group testGroup = Group.createGroup(groupName);
+        testGroup.addMember("testUser");
+        assertTrue(testGroup.isMember("testUser"),
                 "User was not added to the group");
     }
 }
