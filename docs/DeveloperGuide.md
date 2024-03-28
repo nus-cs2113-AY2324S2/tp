@@ -23,6 +23,8 @@ the string is sent to `CalorieList#addEntry(String)`, which calls `ParserCalorie
 ### List Calories record feature
 
 The `calories list` feature lists out the record of all the Calories data that the user has keyed in. The Calories data are all stored into a `ArrayList<Entry> calorieArrayList` attribute of the `CalorieList` Class. Calories data are printed when the `printCalorieList()` function is called. 
+
+[//]: # (![CaloriesListClassDiagram]&#40;http://www.plantuml.com/plantuml/proxy?cache=no&src=https://&#41;)
 ```plantuml
 @startuml
 
