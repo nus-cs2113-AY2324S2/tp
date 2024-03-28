@@ -5,23 +5,18 @@ import seedu.duke.exceptions.CustomException;
 import java.util.ArrayList;
 
 public class Parser {
-    private static final int PARAMETER_INDEX = 1;
-  
+    private static final int NO_RESULTS = 0;
     private static final int NO_PARAMETERS = 1;
     private static final int ONE_PARAMETER = 2;
     private static final int TWO_PARAMETERS = 3;
     private static final int FIRST_PARAMETER = 1;
     private static final int SECOND_PARAMETER = 2;
 
-    private static final String DETAILS_PARAMETER = "details";
     private static final String COMMAND_SPLITTER = " ";
 
-    private static final boolean INCLUDES_DETAILS = true;
-    private static final boolean IS_CORRECT_ANSWER = true;
     private static final String MESSAGE_NO_RESULTS = "There are no results.";
     private static final String MESSAGE_ERROR = "An error has occurred.";
     private static final String MESSAGE_INVALID_PARAMETERS = "Invalid parameters.";
-    private static final int NO_RESULTS = 0;
     private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
     private static final String MESSAGE_INVALID_INDEX = "Index must be an integer.";
 
@@ -65,6 +60,9 @@ public class Parser {
     private void processResultsCommand(String lowerCaseCommand, ResultsList allResults, Ui ui,
                                        QuestionListByTopic questionListByTopic, AnswerTracker userAnswers)
             throws CustomException {
+        final String DETAILS_PARAMETER = "details";
+        final boolean INCLUDES_DETAILS = true;
+
         if (allResults.getSizeOfAllResults() == NO_RESULTS) {
             throw new CustomException(MESSAGE_NO_RESULTS);
         }
@@ -76,7 +74,7 @@ public class Parser {
             break;
         }
         case (ONE_PARAMETER): {
-            if (commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+            if (commandParts[FIRST_PARAMETER].equals(DETAILS_PARAMETER)) {
                 ui.printAllResults(INCLUDES_DETAILS, allResults, questionListByTopic, userAnswers);
             } else {
                 try {
@@ -93,7 +91,7 @@ public class Parser {
             break;
         }
         case (TWO_PARAMETERS): {
-            if (!commandParts[PARAMETER_INDEX].equals(DETAILS_PARAMETER)) {
+            if (!commandParts[FIRST_PARAMETER].equals(DETAILS_PARAMETER)) {
                 throw new CustomException(MESSAGE_INVALID_PARAMETERS);
             }
             try {
@@ -120,11 +118,11 @@ public class Parser {
     ) throws CustomException {
         assert (topicList.getSize() != 0) : "Size of topicList should never be 0";
 
-        String[] commandParts = lowerCaseCommand.split(" ");
+        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER);
         if (commandParts.length != 2) {
             throw new CustomException("invalid " + lowerCaseCommand + " command");
         }
-        String commandParameter = commandParts[PARAMETER_INDEX];
+        String commandParameter = commandParts[FIRST_PARAMETER];
         try {
             // if parameter is an Integer
             int topicNum = Integer.parseInt(commandParameter);
@@ -161,14 +159,14 @@ public class Parser {
         boolean isSolutionCommand = lowerCaseCommand.startsWith("solution");
         String typeOfCommand = isSolutionCommand ? "solution" : "explain";
 
-        String[] commandParts = lowerCaseCommand.split(" ");
+        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER);
         if (commandParts.length != 3) {
             throw new CustomException("invalid " + typeOfCommand + " command. Format: solution TOPIC QUESTION_INDEX");
         }
 
         // check validity of parameter
-        String commandParameterTopic = commandParts[PARAMETER_INDEX];
-        String commandParameterQn = commandParts[PARAMETER_INDEX + 1];
+        String commandParameterTopic = commandParts[FIRST_PARAMETER];
+        String commandParameterQn = commandParts[FIRST_PARAMETER + 1];
 
         try {
             // if parameter is an Integer
@@ -223,6 +221,8 @@ public class Parser {
 
     public void handleAnswerInputs(String[] inputAnswers, int index, String answer, Question questionUnit,
                                    Results topicResults, ArrayList<Boolean> correctness){
+        final boolean IS_CORRECT_ANSWER = true;
+
         inputAnswers[index] = answer;
         String correctAnswer = questionUnit.getSolution();
         if (answer.equals(correctAnswer)){
@@ -234,7 +234,7 @@ public class Parser {
     }
 
     private void processHelpCommand(String lowerCaseCommand, Ui ui, Helper helper) throws CustomException {
-        String[] commandParts = lowerCaseCommand.split(" ");
+        String[] commandParts = lowerCaseCommand.split(COMMAND_SPLITTER);
         if (commandParts.length != 1 && commandParts.length != 2) {
             throw new CustomException("invalid help command parameter");
         }
