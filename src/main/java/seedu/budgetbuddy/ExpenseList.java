@@ -18,6 +18,8 @@ public class ExpenseList {
     protected ArrayList<String> categories;
     protected List<Budget> budgets;
 
+    Ui ui = new Ui();
+
     public ExpenseList(ArrayList<Expense> expenses) {
         this.expenses = expenses;
         this.categories = new ArrayList<>(Arrays.asList("Housing",
@@ -90,7 +92,7 @@ public class ExpenseList {
                     System.out.println("Description: " + expense.getDescription() + " | ");
                 }
             }
-            System.out.println("-----------------------------------------------------------------------------");
+            ui.printDivider();
             System.out.println("Overall Total Expenses: $" + String.format("%.2f", calculateTotalExpenses()));
 
             // Assertion: Check if total expenses calculation is correct
