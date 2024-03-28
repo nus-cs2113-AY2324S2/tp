@@ -253,8 +253,8 @@ The LongAhException class has the following key methods:
 
 The Logging class has the following key methods:
 
-* *logInfo*: Create a log at the INFO level.
-* *logWarning*: Create a log at the WARNING level.
+* *logInfo*: Takes a string `message` as an argument. Create a log at the INFO level.
+* *logWarning*: Takes a string `message` as an argument. Create a log at the WARNING level.
 
 <ins>Usage Example</ins>
 
