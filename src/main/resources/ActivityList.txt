@@ -125,10 +125,10 @@ Park Visits | ACC | C | U
 Street Food Sampling | ACC | C | U
 Cultural Shows | ACC | B | U
 Interactive Workshops | ACC | B | U
-Park Visits | ACC | B | U
+Park Visits | ACC | B | C
 Street Food Sampling | ACC | B | U
 Beach Outings | ACC | A | U
-Historical Landmark Visits | ACC | A | U
+Historical Landmark Visits | ACC | A | C
 Guided City Tours | ACC | A | U
 Museum Trips | ACC | A | U
 Private Guided Tours | ACC | P | C

@@ -190,8 +190,90 @@ In today's fast-paced world, maintaining a healthy and exciting relationship can
 
 ## Glossary
 
-* *glossary item* - Definition
+
+Generate Idea Feature: A feature within the application that generates random date ideas consisting of food and activity suggestions.
+
+Smart Itinerary Generation Feature: A proposed feature that creates personalized itineraries based on user preferences, ensuring variety and suitability.
+
+History Tracking Feature: A proposed feature that keeps a record of past date activities, allowing users to track their date history and preferences.
+
+Gift-related Features: Features related to suggesting and managing gift ideas for special occasions or romantic gestures.
+
+Gift Class: A class representing a gift item, including its description and completion status.
+
+GiftList Class: A class managing a collection of gift items and providing methods to access and manipulate the list.
+
+GenerateGiftCommand Class: A command class responsible for generating random gift suggestions and handling user feedback.
+
+ListOptionsCommands Class: A command class that provides functionality to list different types of options, including gifts, food, and activities.
+
+ViewHistoryCommand Class: A command class that displays a history of saved gift ideas or past date activities.
+
+Storage Class: A class responsible for managing data persistence for gift items and other application data.
+
 
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
+**Generate Idea Feature:**
+
+Launch the application.
+
+Execute the "idea" command.
+
+Verify that the application generates random date ideas consisting of food and activity suggestions.
+Test the regeneration option to ensure that users can request new ideas until satisfied.
+
+**Smart Itinerary Generation Feature (Proposed):**
+
+Launch the application.
+
+Ensure that user preferences are stored in the UserDetails object.
+
+Execute the "smart" command.
+
+Verify that the application generates a personalized itinerary based on user preferences, including food and activity options.
+
+**History Tracking Feature (Proposed):**
+
+Launch the application.
+
+Verify that past date activities and gift ideas are stored and accessible.
+
+Execute the "history" command.
+
+Verify that the application displays a list of past date activities or gift ideas.
+
+**Gift-related Features:**
+
+Ensure that the application allows users to view a curated list of gift ideas.
+
+Execute the "gift" command.
+
+Verify that the application generates random gift suggestions.
+
+Test the option to mark selected gifts as complete and view past gift ideas.
+Ensure that changes to gift selections are persisted across sessions.
+
+**Non-Functional Requirements:**
+
+Test application performance under various loads to ensure responsiveness.
+
+Verify that the application adheres to established coding standards and conventions.
+
+Test data persistence to ensure that user data is stored securely and accurately.
+
+Evaluate the user interface for consistency, usability, and accessibility.
+Check for proper error handling and logging mechanisms.
+
+**User Stories:**
+
+Test each user story scenario to ensure that the application meets the specified requirements and user expectations.
+
+**Edge Cases:**
+
+Test boundary conditions and edge cases for all features to ensure robustness and reliability.
+Test error handling for invalid inputs and unexpected scenarios.
+Ensure graceful degradation and recovery from failure conditions.

@@ -47,13 +47,13 @@ Potato Head | S | S | W | U
 Fuel X | NE | C | W | U
 Samwitch | NE | C | W | U
 Breakfast Club | NE | C | W | C
-Whisk and Paddle | NE | B | W | U
+Whisk and Paddle | NE | B | W | C
 Tend Bistro | NE | B | J | U
 Dai Lou | NE | B | C | U
 Riang | NE | A | W | U
 Ishiro | NE | A | J | U
 Folk Yard | NE | A | W | U
-Tie Fun Wan | NE | P | C | U
+Tie Fun Wan | NE | P | C | C
 Gusta Sourdough Pizza Co | NE | P | I | U
 Curry Otoko Donburi | NE | P | J | U
 Shabu-GO | NE | S | J | U

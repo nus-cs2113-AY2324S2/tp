@@ -31,7 +31,7 @@ public class ListOptionsCommand extends Command {
             printGiftList(ui, gifts);
             break;
         default:
-            System.out.println("Invalid option! Please choose 'food' or 'activities'.");
+            throw new FlirtForkException("Invalid option! Please choose 'food', 'activities' or 'gifts'.");
         }
     }
 
