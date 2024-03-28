@@ -186,12 +186,17 @@ public class Parser {
                 || bmiDetails[2].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-        // checks whether input number is 2dp
+
         if (!bmiDetails[0].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX) ||
                 !bmiDetails[1].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.HEIGHT_WEIGHT_INPUT_ERROR);
         }
         validateDateInput(bmiDetails[2]);
+        LocalDate date = parseDate(bmiDetails[2]);
+        if (date.isAfter(LocalDate.now())) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.DATE_IN_FUTURE_ERROR);
+        }
+
     }
 
     //@@author syj02
