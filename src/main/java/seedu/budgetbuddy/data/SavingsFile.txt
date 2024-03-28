@@ -1,2 +1,2 @@
-Salary | 5100.00
-Investments | 400.00
+Salary | 1000.00
+Investments | 100.00

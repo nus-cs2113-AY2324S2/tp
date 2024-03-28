@@ -10,10 +10,13 @@ import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 public class SavingList {
     private static final Logger LOGGER = Logger.getLogger(SavingList.class.getName());
+
     protected ArrayList <Saving> savings;
     protected ArrayList<String> categories;
     protected double initialAmount;
     protected Storage storage;
+    Ui ui = new Ui();
+
 
 
     public SavingList() {
@@ -63,7 +66,7 @@ public class SavingList {
                     System.out.println("Amount: $" + String.format("%.2f", saving.getAmount()) + " | ");
                 }
             }
-            System.out.println("------------------------------------------------------------------------");
+            ui.printDivider();
             System.out.println("Initial Savings Amount: $" + String.format("%.2f", initialAmount));
             System.out.println("Expenses Deducted: ");
 
@@ -74,7 +77,7 @@ public class SavingList {
                         " spent on " + expense.getDescription() +
                         " on " + expense.getDateAdded());
             }
-            System.out.println("------------------------------------------------------------------------");
+            ui.printDivider();
 
             double remainingAmount = calculateRemainingSavings(initialAmount, totalExpenses);
             if (remainingAmount < 0) {

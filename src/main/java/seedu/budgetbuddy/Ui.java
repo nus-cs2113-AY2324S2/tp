@@ -76,7 +76,8 @@ public class Ui {
         case 6:
             System.out.println("Split Expenses");
             System.out.println("split expenses a/AMOUNT n/NUMBER d/DESCRIPTION");
-            System.out.println("list splitted expenses");
+            System.out.println("check splitted expenses");
+            System.out.println("settle i/INDEX");
             break;
         case 7:
             System.out.println("Recurring Bills");
