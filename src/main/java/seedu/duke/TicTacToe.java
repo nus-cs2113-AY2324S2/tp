@@ -127,7 +127,7 @@ public class TicTacToe extends Game {
             System.out.println("----------------------------------------------------");
             System.out.println("It seems you have met your match. Try again, and this time, do try to win.");
             break;
-        case "unending":
+        default:
             System.out.println("----------------------------------------------------");
             System.out.println("Cowards belong on the ground.");
             break;
