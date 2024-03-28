@@ -1,6 +1,5 @@
 package itemlist;
 
-import item.Item;
 import item.Transaction;
 
 import java.util.ArrayList;

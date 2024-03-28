@@ -1,9 +1,7 @@
 package storage;
 
-import item.Item;
 import item.Transaction;
 import itemlist.Cashier;
-import itemlist.Itemlist;
 
 import java.io.File;
 import java.io.FileNotFoundException;
