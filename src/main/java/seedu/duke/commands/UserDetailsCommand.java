@@ -1,4 +1,13 @@
-package seedu.duke;
+package seedu.duke.commands;
+
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 
 /**
  * Represents a command to collect and store user details. This command prompts the user
@@ -27,8 +36,8 @@ public class UserDetailsCommand extends Command {
      * @param gifts The list of gifts (not directly used in this method).
      */
     @Override
-    public void execute(FavouritesList favouritesList, FoodList foodList, 
-        ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails, GiftList gifts) {
+    public void execute(FavouritesList favouritesList, FoodList foodList,
+                        ActivityList activityList, Ui ui, Storage storage, UserDetails userDetails, GiftList gifts) {
         ui.showMessage("Please enter your name:");
         String name = ui.readCommand();
         ui.showMessage("Great! Hello there " + name + ", it's my pleasure to know you!"); 

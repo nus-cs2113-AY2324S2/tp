@@ -1,5 +1,19 @@
 package seedu.duke;
 
+import seedu.duke.commands.AddActivityCommand;
+import seedu.duke.commands.AddFoodCommand;
+import seedu.duke.commands.DeleteFavouritesCommand;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.FindFavouritesCommand;
+import seedu.duke.commands.GenerateGiftCommand;
+import seedu.duke.commands.GenerateIdeaCommand;
+import seedu.duke.commands.GenerateItineraryCommand;
+import seedu.duke.commands.GenerateSmartItineraryCommand;
+import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.ListFavouritesCommand;
+import seedu.duke.commands.ListOptionsCommand;
+import seedu.duke.commands.UserDetailsCommand;
+import seedu.duke.commands.ViewHistoryCommand;
 import seedu.duke.exceptions.FlirtForkEmptyException;
 import seedu.duke.exceptions.FlirtForkException;
 

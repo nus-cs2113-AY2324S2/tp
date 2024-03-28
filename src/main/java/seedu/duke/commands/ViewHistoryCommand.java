@@ -1,5 +1,16 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.Activity;
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.Food;
+import seedu.duke.FoodList;
+import seedu.duke.Gift;
+import seedu.duke.GiftList;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 
 public class ViewHistoryCommand extends Command {
@@ -13,8 +24,9 @@ public class ViewHistoryCommand extends Command {
         System.out.println("These are the activities you have marked:");
         for (int i=0; i<activities.size(); i++) {
             Activity oneActivity = activities.get(i);
-            if (oneActivity.completionStatus.equals("C")) {
-                System.out.println(++activityCount + ". " + oneActivity.description);
+            String completionStatus = oneActivity.getCompletionStatus();
+            if (completionStatus.equals("C")) {
+                System.out.println(++activityCount + ". " + oneActivity);
             }
         }
 
@@ -22,8 +34,9 @@ public class ViewHistoryCommand extends Command {
         System.out.println("These are the restaurants you have marked:");
         for (int i=0; i<foods.size(); i++) {
             Food oneFood = foods.get(i);
-            if (oneFood.completionStatus.equals("C")) {
-                System.out.println(++foodCount + ". " + oneFood.description);
+            String completionStatus = oneFood.getCompletionStatus();
+            if (completionStatus.equals("C")) {
+                System.out.println(++foodCount + ". " + oneFood);
             }
         }
 
@@ -31,8 +44,9 @@ public class ViewHistoryCommand extends Command {
         System.out.println("These are the gifts you've marked:");
         for (int i=0; i<gifts.size(); i++) {
             Gift oneGift = gifts.get(i);
-            if (oneGift.completionStatus.equals("C")) {
-                System.out.println(++giftCount + ". " + oneGift.description);
+            String completionStatus = oneGift.getCompletionStatus();
+            if (completionStatus.equals("C")) {
+                System.out.println(++giftCount + ". " + oneGift);
             }
         }
     }

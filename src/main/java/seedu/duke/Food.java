@@ -22,4 +22,8 @@ public class Food extends Favourites {
     public void markComplete() {
         this.completionStatus = "C";
     }
+
+    public String getCompletionStatus() {
+        return completionStatus;
+    }
 }

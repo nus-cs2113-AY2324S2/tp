@@ -1,5 +1,16 @@
-package seedu.duke;
+package seedu.duke.commands;
 
+import seedu.duke.Activity;
+import seedu.duke.ActivityList;
+import seedu.duke.Command;
+import seedu.duke.FavouritesList;
+import seedu.duke.Food;
+import seedu.duke.FoodList;
+import seedu.duke.GiftList;
+import seedu.duke.Itinerary;
+import seedu.duke.Storage;
+import seedu.duke.Ui;
+import seedu.duke.UserDetails;
 import seedu.duke.exceptions.FlirtForkException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -9,7 +20,7 @@ import java.util.logging.Level;
  * This command considers the user's preferred location and cuisine to create
  * a personalized itinerary that includes food and activities.
  */
-public class GenerateSmartItineraryCommand extends Command{
+public class GenerateSmartItineraryCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(GenerateItineraryCommand.class.getName());
     private String preferredLocation;
     private String preferredCuisine;

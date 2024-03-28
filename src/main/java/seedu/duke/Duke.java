@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.UserDetailsCommand;
 import seedu.duke.exceptions.FlirtForkException;
 
 import java.io.FileNotFoundException;
