@@ -33,10 +33,12 @@ public class Parser {
         String command = inputArray[0].toLowerCase();
         LOGGER.log(Level.FINE, "Parsing command: {0}", command);
         int index;
+
         try {
             switch (command) {
             case ADD_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 if (inputArray.length < 2) {
                     LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
                     System.out.println("Throwing invalid command");
@@ -46,14 +48,13 @@ public class Parser {
                 break;
             case REMOVE_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     books.deleteBook(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case LIST_COMMAND:
@@ -61,6 +62,7 @@ public class Parser {
                 break;
             case MARK_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     assert index >= 0 : "Index should be non-negative";
@@ -68,12 +70,11 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case UNMARK_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     assert index >= 0 : "Index should be non-negative";
@@ -81,8 +82,6 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
                             "Please enter a valid numeric index.");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case HELP_COMMAND:
@@ -98,7 +97,7 @@ public class Parser {
                     index = Integer.parseInt(labelMessageParts[0]);
                     assert index >= 0 : "Index should be non-negative";
                     String label = labelMessageParts[1];
-                    BookDetails.setBookLabelByIndex(index-1, label);
+                    BookDetails.setBookLabelByIndex(index - 1, label);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + labelMessageParts[0]
                             + " is not a valid number. Please enter a valid numeric index.");
@@ -118,7 +117,7 @@ public class Parser {
                     index = Integer.parseInt(genreMessageParts[0]);
                     assert index >= 0 : "Index should be non-negative";
                     String label = genreMessageParts[1];
-                    BookDetails.setBookGenreByIndex(index-1, label);
+                    BookDetails.setBookGenreByIndex(index - 1, label);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input: " + genreMessageParts[0]
                             + " is not a valid number. Please enter a valid numeric index.");
@@ -130,6 +129,7 @@ public class Parser {
                 break;
             case DISPLAY_COMMAND:
                 assert inputArray.length >= 2 : "Command requires additional arguments";
+                
                 try {
                     index = Integer.parseInt(inputArray[1]);
                     BookDetails.displayDetails(index - 1);

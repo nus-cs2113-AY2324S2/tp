@@ -24,7 +24,7 @@ public class Book {
      * @param genre The label to set for the book.
      */
     public void setGenre(String genre) {
-        this.label = genre;  // Set the label for the book
+        this.genre = genre;  // Set the genre for the book
     }
 
     /**
