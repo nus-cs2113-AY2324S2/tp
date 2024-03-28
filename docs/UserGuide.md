@@ -23,6 +23,7 @@ to deal with finances on a singular platform with ease as long as you can type f
 7. List Savings
 8. List Expense
 9. Find Expense
+10. Change Currency
 
 ### Display Commands : `menu`
 Displays the corresponding features of BudgetBuddy
@@ -65,6 +66,16 @@ Format:  `add savings c/CATEGORY a/AMOUNT`
   "Investments", "Gifts" or "Others".
 * The `AMOUNT` must be a positive integer.
 * The `DESCRIPTION` can be any string.
+
+### Add Split Expenses
+Add expenses that are meant for splitting among friends or colleague
+
+Format: `split expenses a/AMOUNT n/NUMBER_OF_PEOPLE d/DESCRIPTION`
+
+* Increments split expenses 
+* The `AMOUNT` must be a positive number
+* The `NUMER_OF_PEOPLE` must be a positive integer.
+* The `DESCRIPTION` can be any string
 
 Example of usage:
 
@@ -187,6 +198,21 @@ Examples of usage :
 `find expenses d/coffee` : Finds all expenses with the word "coffee" in the description
 `find expenses d/coffee morethan/200` : Finds all expenses with the word "coffee" and amount higher than $200
 
+### Changing Currencies : `change currency [CURRENCY_CODE]`
+
+Converts current currency to targeted currency
+
+Format : `change currency [CURRENCY_CODE]`
+
+* Default currency is 'SGD'.
+* `CURRENCY_CODE` consists of the following currencies: 'SGD', 'USD', 'EUR', 'MYR', 'JPY', 'KRW', 'CNY', 'HKD'
+* `CURRENCY_CODE` cannot be null. 
+* Conversion of Currency is interchangeable (e.g. SGD -> USD -> JPY)
+
+Examples of usage:
+
+`change currency USD` : Converts current currency into USD
+
 ## Command Summary
 * Add Savings: `add savings c/CATEGORY a/AMOUNT`
 * Add Expense: `add expense c/CATEGORY a/AMOUNT d/DESCRIPTION`
@@ -194,5 +220,6 @@ Examples of usage :
 * Edit Savings `edit savings c/CATEGORY i/INDEX a/AMOUNT`
 * List Expenses: `list expenses CATEGORY`
 * List Savings: `list savings CATEGORY`
-*  Find Expenses `find expenses [d/DESCRIPTION] [morethan/MINAMOUNT] [lessthan/MAXAMOUNT] `
+* Find Expenses `find expenses [d/DESCRIPTION] [morethan/MINAMOUNT] [lessthan/MAXAMOUNT]`
+* Change Currency `change currency [CURRENCY_CODE]`
 

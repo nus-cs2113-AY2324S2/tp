@@ -11,26 +11,33 @@ public class BudgetBuddy {
     private Parser parser;
     private ExpenseList expenses;
     private SavingList savings;
+    private SplitExpenseList splitexpenses;
+    private RecurringExpensesList expensesList;
 
     private Storage expensesStorage;
     private Storage savingsStorage;
+
 
     public BudgetBuddy() {
         ui = new Ui();
         parser = new Parser();
         expenses = new ExpenseList();
         savings = new SavingList();
+        expensesList = new RecurringExpensesList();
+        splitexpenses = new SplitExpenseList();
         expensesStorage = new Storage("src/main/java/seedu/budgetbuddy/data/ExpenseFile.txt");
         savingsStorage = new Storage("src/main/java/seedu/budgetbuddy/data/SavingsFile.txt");
+
     }
 
     public void handleCommands(String input) {
-        Command command = parser.parseCommand(expenses, savings, input);
+        Command command = parser.parseCommand(expenses, savings, splitexpenses, expensesList, input);
+
 
         if (command != null) {
             command.execute();
         } else {
-            System.out.println("Invalid command");
+            System.out.println("(Invalid command)");
         }
 
         try {

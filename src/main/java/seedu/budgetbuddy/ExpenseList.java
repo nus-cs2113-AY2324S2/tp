@@ -1,11 +1,11 @@
 package seedu.budgetbuddy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import seedu.budgetbuddy.exception.BudgetBuddyException;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class ExpenseList {
     private static final Logger LOGGER = Logger.getLogger(ExpenseList.class.getName());
+
     protected ArrayList <Expense> expenses;
     protected ArrayList<String> categories;
     protected List<Budget> budgets;
@@ -22,6 +23,7 @@ public class ExpenseList {
         this.categories = new ArrayList<>(Arrays.asList("Housing",
                 "Groceries", "Utility", "Transport", "Entertainment", "Others"));
         this.budgets = new ArrayList<>();
+
     }
 
     public ExpenseList() {
@@ -35,7 +37,7 @@ public class ExpenseList {
         return expenses.size();
     }
 
-    public List<Expense> getExpenses() {
+    public ArrayList<Expense> getExpenses() {
         return expenses;
     }
 
@@ -84,12 +86,12 @@ public class ExpenseList {
                     System.out.print(i+1 + " | ");
                     System.out.print("Date: " + expense.getDateAdded() + " | ");
                     System.out.print("Category: " + expense.getCategory() + " | ");
-                    System.out.print("Amount: $" + expense.getAmount() + " | ");
+                    System.out.print("Amount: $" + String.format("%.2f", expense.getAmount()) + " | ");
                     System.out.println("Description: " + expense.getDescription() + " | ");
                 }
             }
             System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("Total Expenses: $" + calculateTotalExpenses());
+            System.out.println("Overall Total Expenses: $" + String.format("%.2f", calculateTotalExpenses()));
 
             // Assertion: Check if total expenses calculation is correct
             double totalExpenses = calculateTotalExpenses();
@@ -118,6 +120,7 @@ public class ExpenseList {
         return totalExpenses;
     }
 
+    //@@author Zhang Yangda
     public void addExpense(String category, String amount, String description) throws BudgetBuddyException {
         assert category != null : "Category should not be null";
         assert amount != null : "Amount should not be null";
@@ -126,18 +129,18 @@ public class ExpenseList {
         if (!categories.contains(category)) {
             throw new BudgetBuddyException("The category '" + category + "' is not listed.");
         }
-        int amountInt;
+        double amountAsDouble;
         try {
-            amountInt = Integer.parseInt(amount);
+            amountAsDouble = Double.parseDouble(amount);
         } catch (NumberFormatException e) {
             throw new BudgetBuddyException("Invalid amount format. Amount should be a number.");
         }
 
-        if (amountInt < 0) {
+        if (amountAsDouble < 0) {
             throw new BudgetBuddyException("Expenses should not be negative.");
         }
 
-        Expense expense = new Expense(category, amountInt, description);
+        Expense expense = new Expense(category, amountAsDouble, description);
         expenses.add(expense);
 
     }
@@ -194,6 +197,10 @@ public class ExpenseList {
         } else {
             System.out.println("Invalid expense index.");
         }
+    }
+
+    public String getName() {
+        return "placeholder";
     }
 
     public void setBudget(String category, double budget){

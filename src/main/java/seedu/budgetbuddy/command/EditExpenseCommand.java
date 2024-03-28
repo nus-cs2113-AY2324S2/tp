@@ -17,7 +17,7 @@ public class EditExpenseCommand extends Command{
         this.amount = amount;
         this.description = description;
     }
-
+    
     @Override
     public void execute() {
         expenses.editExpense(category, index, amount, description);
