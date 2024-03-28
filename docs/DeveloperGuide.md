@@ -36,9 +36,15 @@ The saved recipes will be loaded in a recipe text file for easy sharing with fri
 {Give non-functional requirements}
 Users can use the help function to understand all the available commands they can use
 
-## Glossary
+## Commands Glossary
 
-* *glossary item* - Definition
+* *add [NAME, MINUTES, KCALS, ALLERGIES, CATEGORY, URL]* - This is the command a user can call to add a recipe. 
+* *help* - This shows the user all the available commands. 
+* *list* - This lists out a users recipebook for them. 
+* *delete* - This deletes a recipe at a given valid index. If not valid, it will return an error message.
+* *find kw [KEYWORD]* - This finds recipes with a user-given keyword.
+* *find date [YYYY-MM-DD]* - This finds recipes added on a user-given date. The date is auto-added when adding. 
+* *exit* - This is the command to leave the program. 
 
 ## Instructions for manual testing
 

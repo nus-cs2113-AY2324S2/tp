@@ -1,39 +1,61 @@
 package recipeio.commands;
+
+import recipeio.Constants;
 import recipeio.recipe.Recipe;
 import recipeio.ui.UI;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 public class FindCommand {
-    private static final Logger logr = Logger.getLogger("FindCommand");
-    public static void execute(String command, ArrayList<Recipe> recipes) {
-        logr.log(Level.INFO, "split the command into words separated by space");
-        String[] commandWords = command.split(" ");
-        assert commandWords.length >= 3;
+    public static void execute(String userInput, ArrayList<Recipe> recipes) {
+        String[] inputSplitUp = userInput.split(" ", 3);
+        String findType = inputSplitUp[1];
+        switch (findType) {
+        case (Constants.FIND_BY_KEYWORD):
+            String keyword = inputSplitUp[2];
+            findKeyword(keyword, recipes);
+            break;
+        case (Constants.FIND_BY_DATE):
+            LocalDate date = LocalDate.parse(inputSplitUp[2]);
+            findDate(date, recipes);
+            break;
+        default:
+            System.out.println("Sorry. Please follow one of the find command formats");
+        }
+    }
+    public static void findKeyword(String keyword, ArrayList<Recipe> recipes) {
+        ArrayList<Recipe> matches = new ArrayList<>();
+        if (recipes.isEmpty()) {
+            System.out.println("Sorry, you have no recipes to find matches with. Try adding some!");
+            return;
+        }
+        for (Recipe recipe : recipes) {
+            if (recipe.name.contains(keyword)) {
+                matches.add(recipe);
+            }
+        }
+        if (matches.isEmpty()) {
+            System.out.println("There were no matches. Try searching for something else.");
+            return;
+        }
+        UI.printMatches(matches);
+    }
 
-        logr.log(Level.INFO, "trim the spaces at both ends in each word");
-        for (int i = 0; i < commandWords.length; i++) {
-            commandWords[i] = commandWords[i].trim();
+    public static void findDate(LocalDate date, ArrayList<Recipe> recipes) {
+        ArrayList<Recipe> matches = new ArrayList<>();
+        if (recipes.isEmpty()) {
+            System.out.println("Sorry, you have no recipes to find matches with. Try adding some!");
+            return;
         }
-
-        logr.log(Level.INFO, "concatenate words to form user's search data");
-        String searchData = "";
-        for (int i = 2; i < commandWords.length; i++){
-            searchData = searchData + " " + commandWords[i];
+        for (Recipe recipe : recipes) {
+            if (recipe.dateAdded.isEqual(date)) {
+                matches.add(recipe);
+            }
         }
-        if (commandWords[1].equals("name")) {
-            logr.log(Level.INFO, "find by recipe name");
-            FindByNameCommand.execute(command, recipes);
-        } else if (commandWords[1].equals("allergy")) {
-            logr.log(Level.INFO, "find by allergy");
-            FindByAllergyCommand.execute(command, recipes);
-        } else if (commandWords[1].equals("date")) {
-            //add find by date command here
-        } else { //if the find command is invalid
-            logr.log(Level.WARNING, "Invalid find command option");
-            UI.printMessage("Sorry chef, I can't understand what you are trying to find!");
+        if (matches.isEmpty()) {
+            System.out.println("There were no matches. Try searching for something else.");
+            return;
         }
+        UI.printMatches(matches);
     }
 }
