@@ -1,6 +1,8 @@
 package brokeculator.command;
 
 import brokeculator.dashboard.Dashboard;
+import brokeculator.event.Event;
+import brokeculator.expense.Expense;
 import brokeculator.frontend.UI;
 
 public class DeleteCommand extends Command {
@@ -12,9 +14,15 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(Dashboard dashboard) {
-        if (indexToDelete >= dashboard.getExpenseManager().getNumberOfExpensesTracked()) {
-            UI.print("Delete index exceeds number of expenses currently tracked");
+        boolean isValidExpenseIndex = dashboard.getExpenseManager().isExpenseIndexValid(indexToDelete);
+        if (!isValidExpenseIndex) {
+            UI.prettyPrint("Invalid expense index provided");
             return;
+        }
+        Expense expense = dashboard.getExpenseManager().getExpense(indexToDelete);
+        Event owningEvent = expense.getOwningEvent();
+        if (owningEvent != null) {
+            owningEvent.removeExpense(expense);
         }
         dashboard.getExpenseManager().delete(indexToDelete);
         UI.prettyPrint("Deleted expense at index " + indexToDelete);

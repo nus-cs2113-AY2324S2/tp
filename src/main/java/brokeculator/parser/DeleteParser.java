@@ -13,12 +13,9 @@ public class DeleteParser {
                     + "Format: delete <index>");
         }
         try {
-            indexToDelete = Integer.parseInt(userInputAsArray[1]) - 1;
+            indexToDelete = Integer.parseInt(userInputAsArray[1]);
         } catch (NumberFormatException e) {
             return new InvalidCommand("The delete index must be an integer.");
-        }
-        if (indexToDelete < 0) {
-            return new InvalidCommand("Delete index must be one or greater");
         }
         return new DeleteCommand(indexToDelete);
     }
