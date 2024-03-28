@@ -20,6 +20,8 @@ public class Parser {
     public static final String UNMARK_COMMAND = "unmark";
     public static final String EXIT_COMMAND = "bye";
     public static final String HELP_COMMAND = "help";
+    public static final String LABEL_COMMAND = "label";
+    public static final String GENRE_COMMAND = "set-genre";
 
     /**
      * Scans the user input for valid commands and handles them accordingly.
@@ -86,6 +88,42 @@ public class Parser {
                 break;
             case HELP_COMMAND:
                 Ui.helpMessage();
+                break;
+            case LABEL_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                String[] labelMessageParts = inputArray[1].split(" ", 2); // Split the message into index and label message
+                assert labelMessageParts.length == 2 : "Command requires an index and a label message";
+
+                try {
+                    index = Integer.parseInt(labelMessageParts[0]);
+                    assert index >= 0 : "Index should be non-negative";
+                    String label = labelMessageParts[1];
+                    BookDetails.setBookLabelByIndex(index-1, label);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + labelMessageParts[0] + " is not a valid number. Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                } catch (Exception e) {
+                    System.out.println("An error occurred while setting the label: " + e.getMessage());
+                }
+                break;
+            case GENRE_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                String[] genreMessageParts = inputArray[1].split(" ", 2); // Split the message into index and label message
+                assert genreMessageParts.length == 2 : "Command requires an index and a label message";
+
+                try {
+                    index = Integer.parseInt(genreMessageParts[0]);
+                    assert index >= 0 : "Index should be non-negative";
+                    String label = genreMessageParts[1];
+                    BookDetails.setBookGenreByIndex(index-1, label);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + genreMessageParts[0] + " is not a valid number. Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
+                } catch (Exception e) {
+                    System.out.println("An error occurred while setting the genre: " + e.getMessage());
+                }
                 break;
             case EXIT_COMMAND:
                 Ui.printExitMessage();
