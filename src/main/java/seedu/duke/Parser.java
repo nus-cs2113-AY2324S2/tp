@@ -288,7 +288,6 @@ public class Parser {
     }
 
     /**
-<<<<<<< HEAD
      *  Handles the case where the find command is given as input
      *
      * @param command Command array of input string without spaces
@@ -304,7 +303,7 @@ public class Parser {
         }
     }
 
-     /** Handles the case where the expense command is given as input
+    /** Handles the case where the expense command is given as input
      *
      * @param line array of input string
      * @param list List of travel activities
