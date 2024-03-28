@@ -43,7 +43,8 @@ public class TransactionListTest {
         assertEquals(1, transactionList.getTransactions().size());
         assertEquals(testTransaction.getDescription(), transactionList.getTransactions().get(0).getDescription());
         assertEquals(testTransaction.getAmount(), transactionList.getTransactions().get(0).getAmount());
-        assertEquals(testTransaction.getCategory().getCategoryName(), transactionList.getTransactions().get(0).getCategory().getCategoryName());
+        assertEquals(testTransaction.getCategory().getCategoryName(),
+                transactionList.getTransactions().get(0).getCategory().getCategoryName());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
     }
     @Test
