@@ -11,7 +11,6 @@ import static seedu.bookbuddy.BookBuddy.LOGGER;
 /**
  * Parses inputs from the user in order to execute the correct commands.
  */
-
 public class Parser {
     public static final String ADD_COMMAND = "add";
     public static final String REMOVE_COMMAND = "remove";
@@ -22,13 +21,13 @@ public class Parser {
     public static final String HELP_COMMAND = "help";
     public static final String LABEL_COMMAND = "label";
     public static final String GENRE_COMMAND = "set-genre";
+    public static final String DISPLAY_COMMAND = "display";
 
     /**
      * Scans the user input for valid commands and handles them accordingly.
      * @param input input from the user
      * @param books ArrayList of books
      */
-
     public static void parseCommand(String input, BookList books) {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0].toLowerCase();
@@ -40,7 +39,7 @@ public class Parser {
                 assert inputArray.length >= 2 : "Command requires additional arguments";
                 if (inputArray.length < 2) {
                     LOGGER.log(Level.WARNING, "The add Command requires a book title", inputArray);
-                    System.out.println("throwing invalidcommand");
+                    System.out.println("Throwing invalid command");
                     throw new InvalidCommandArgumentException("The add command requires a book title.");
                 }
                 books.addBook(inputArray[1]);
@@ -127,6 +126,18 @@ public class Parser {
                     System.out.println("Invalid book index. Please enter a valid index.");
                 } catch (Exception e) {
                     System.out.println("An error occurred while setting the genre: " + e.getMessage());
+                }
+                break;
+            case DISPLAY_COMMAND:
+                assert inputArray.length >= 2 : "Command requires additional arguments";
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                    BookDetails.displayDetails(index - 1);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + inputArray[1] + " is not a valid number. " +
+                            "Please enter a valid numeric index.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Invalid book index. Please enter a valid index.");
                 }
                 break;
             case EXIT_COMMAND:

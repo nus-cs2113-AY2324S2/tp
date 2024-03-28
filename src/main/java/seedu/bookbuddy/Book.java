@@ -1,12 +1,10 @@
 package seedu.bookbuddy;
 
 public class Book {
-
     public String title;
     protected boolean isRead;
     protected String label;
     protected String genre;
-
 
     /**
      * Creates a new Book with the specified title.
