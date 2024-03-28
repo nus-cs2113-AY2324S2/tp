@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public abstract class Transaction {
     private String description;
     private double amount;
-    private Category category = Category.OTHER;
+    private Category category;
     private LocalDate date;
 
     public Transaction(String description, double amount,String date) {
