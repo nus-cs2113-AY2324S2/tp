@@ -7,6 +7,13 @@
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Exception
+### Itemlist
+### Parser
+### Storage
+Storage class contains methods to write description of items to the file `./StockMasterData.txt`, 
+and retrieve information from the file when program restarts.
+### UI
 
 
 ## Product scope

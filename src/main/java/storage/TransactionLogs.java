@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import static storage.Storage.writeToFile;
 
 public class TransactionLogs extends Storage {
-//    LocalDateTime currentTime = LocalDateTime.now();
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//    String formattedDateTime = currentTime.format(formatter);
-//    System.out.println(formattedDateTime);
     private static final String LOGNAME = "./TransactionLogs.txt";
     private static String dateTime;
     public static void setDateTime(String startDateTime) {
