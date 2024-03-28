@@ -94,34 +94,6 @@ access to `ItemList`.
 
 ### Haziq
 
-### Delete Item
-
-`DeleteCommand` interacts with the `ItemList` to perform deletion operations. The distinction between index-based and keyword-based deletions is established during object construction, which is handled by the `Parser`.
-This is done through the use of 2 seperate constructors, which are:
-
-- DeleteCommand(int index) - Initializes the command to delete an item by its index in the list. 
-- DeleteCommand(String keyword) - Initializes the command to delete items matching the given keyword.
-
-The choice of constructor is determined by the `Parser` based on the user input format.
-
-As a result of this, the user may enter a command in one of the following formats:
-- `delete 3` - to delete the third item in the inventory. 
-- `delete apple` - to delete all items in the inventory with the name apple.
-
-When the `execute()` method of `DeleteCommand` is invoked, the class first determines whether the deletion is to be carried out by index or keyword, as indicated by the `isIndex` flag.
-
-If **deletion by index** is specified, the `DeleteCommand` calls the `deleteItem(int index)` method of `ItemList` to remove the item at the specified index and sets the `executionUiOutput` with the output of the deletion operation.
-
-Conversely, if **deletion by keyword** is specified, the method calls the `deleteItem(int String)` method of `ItemList`. This method locates and removes items matching the keyword, returns a String output, which is again, stored in `executionUiOutput`
-of the `DeleteCommand` class.
-
-Upon completion of either operation, the method sets the `hasToSave` flag to true, signaling the need to persist changes to storage. This entire process is logged at various levels, providing a trail for audit and debugging purposes.
-
-#### Implementation Notes ####
-The design of `DeleteCommand` is such that it encapsulates the delete operation, separating concerns by handling the logic of deletion internally and interacting with the ItemList without exposing the details of the list's data structure. This modular approach simplifies the responsibilities of the Parser and Main components, which do not need to understand the internals of the delete operation, thereby adhering to the principles of high cohesion and low coupling.
-
-Additionally, the decision to use two constructors promotes the Single Responsibility Principle, as each constructor's logic is tailored to the type of deletion it handles.
-
 ### List all items in inventory
 
 The `ListCommand` class is designed to handle the operation of listing all items in the inventory. When the `execute()` method is called, it retrieves the complete list of items from the `ItemList`
@@ -140,11 +112,10 @@ The `delete` command deletes an object of the `Item` class or any of its subclas
 prints a formatted message stating the details of the items that was deleted. 
 
 The constructor of the `DeleteCommand` class is overloaded and its behavior differs based on what search parameter is 
-entered. 
-* If the search parameter is an `Integer` it indicates that an item should be removed by matching its `index` and 
-the `isIndex` variable is set to true.
-* If the search parameter is a `String` it indicates that an item should be removed by matching its `name` and 
-the `isIndex` variable is set to false.
+entered. The possible constructors are:
+
+* `DeleteCommand(int index)`: This constructor is used if the search parameter is an `Integer`. The `isIndex` variable will be set to true, which indicates that an item should be removed by matching its `index`.
+* `DeleteCommand(String keyword)`: This constructor is used if the search parameter is a `String`. Conversely, the `isIndex` variable will be set to false, which indicates that an item should be removed by matching its `name`.
 
 When the `execute()` method from `DeleteCommand` class is called, it first checks whether the search parameter entered
 is an `Integer` or a `String` using the `isIndex` variable. Once the search parameter is checked, it calls the
@@ -153,13 +124,20 @@ is an `Integer` or a `String` using the `isIndex` variable. Once the search para
 Similar to the `DeleteCommand` constructor, the `deleteItem` method of the `ItemList` class has different behaviors 
 based on the data type of the parameter passed. The implementation is done by overloading the `deleteItem` method and
 having one `deleteItem` method take in an `Integer` and another taking in a `String`.
-* If the parameter is an `Integer`, the `deleteItem` method will call the `remove` method of the `ArrayList` class to
+* If the parameter is an `Integer`, the `deleteItem(int index)` method will call the `remove` method of the `ArrayList` class to
 remove the item from the inventory list.
-* If the parameter is a `String`, the `deleteItem` method will run a `for` loop to iterate through the `ArrayList`
+* If the parameter is a `String`, the `deleteItem(String keyword)` method will run a `for` loop to iterate through the `ArrayList`
 until it finds a `Item` object whose name `equals` to that of the search parameter. If an `Item` object has matching
-names with the search parameter, it will store the index in the `targetIndex` variable. The `deleteItem` method will
-then call another `deleteItem` method, but this time, the parameter passed is an integer. The execution after this
-will be exactly the same as passing an `Integer` to the `deleteItem` method mentions above.
+names with the search parameter, it will store the index in the `targetIndex` variable. This `deleteItem(String keyword)` method will
+then call another `deleteItem(int index)` method, but this time, the parameter passed is an integer. The execution after this
+will be exactly the same as passing an `Integer` to the `deleteItem(int index)` method mentions above.
+
+Upon completion of either operation, the `execute()` method sets the `hasToSave` flag to true, signaling the need to persist changes to storage. This entire process is logged at various levels, providing a trail for audit and debugging purposes.
+
+#### Implementation Notes ####
+The design of `DeleteCommand` is such that it encapsulates the delete operation, separating concerns by handling the logic of deletion internally and interacting with `ItemList` without exposing the details of the list's data structure. This modular approach simplifies the responsibilities of the `Parser` and `BinBash` (main) components, which do not need to understand the internals of the delete operation, thereby adhering to the principles of high cohesion and low coupling.
+
+Additionally, the decision to use two constructors promotes the Single Responsibility Principle, as each constructor's logic is tailored to the type of deletion it handles.
 
 ### UI
 
