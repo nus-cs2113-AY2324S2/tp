@@ -1,6 +1,7 @@
 package budgetbuddy.transaction;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.categories.Category;
 import budgetbuddy.exceptions.EmptyArgumentException;
 import budgetbuddy.exceptions.InvalidAddTransactionSyntax;
 import budgetbuddy.exceptions.InvalidIndexException;
@@ -34,45 +35,47 @@ public class TransactionListTest {
     @Test
     public void processTransaction_addsTransaction()
             throws InvalidTransactionTypeException, InvalidAddTransactionSyntax, EmptyArgumentException {
-        Transaction testTransaction = new Income("Test", 200,"Personal", "14-03-2024",
+        Transaction testTransaction = new Income("Test", 200, "14-03-2024",
                 account);
-        transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/Personal", account);
+        testTransaction.setCategory(Category.fromNumber(1));
+        transactionList.processTransaction("add /t/Income /n/Test /$/200 /d/14-03-2024 /c/1", account);
 
         assertEquals(1, transactionList.getTransactions().size());
         assertEquals(testTransaction.getDescription(), transactionList.getTransactions().get(0).getDescription());
         assertEquals(testTransaction.getAmount(), transactionList.getTransactions().get(0).getAmount());
-        assertEquals(testTransaction.getCategory(), transactionList.getTransactions().get(0).getCategory());
+        assertEquals(testTransaction.getCategory().getCategoryName(),
+                transactionList.getTransactions().get(0).getCategory().getCategoryName());
         assertEquals(testTransaction.getDate(), transactionList.getTransactions().get(0).getDate());
     }
-
     @Test
+
     public void processTransaction_withInvalidAddSyntax_throwsInvalidAddTransactionSyntax() {
 
         assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
-                "add Expense /n/Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+                "add Expense /n/Shopping /$/50 /d/14-03-2024 /c/2", account));
         assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
-                "add /t/Expense Shopping /$/50 /d/14-03-2024 /c/Personal", account));
+                "add /t/Expense Shopping /$/50 /d/14-03-2024 /c/2", account));
         assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
-                "add /t/Expense /n/Shopping 50 /d/14-03-2024 /c/Personal", account));
+                "add /t/Expense /n/Shopping 50 /d/14-03-2024 /c/2", account));
         assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
-                "add /t/Expense /n/Shopping /$/50 14-03-2024 /c/Personal", account));
-        assertThrows(InvalidAddTransactionSyntax.class, () -> transactionList.processTransaction(
-                "add /t/Expense /n/Shopping /$/50 /d/14-03-2024 Personal", account));
+                "add /t/Expense /n/Shopping /$/50 14-03-2024 /c/2", account));
     }
 
     @Test
     public void processTransaction_withInvalidTransactionType_throwsTransactionTypeException() {
 
         assertThrows(InvalidTransactionTypeException.class, () -> transactionList.processTransaction(
-                "add /t/Donation /n/Test /$/200 /d/14-03-2024 /c/Personal", account));
+                "add /t/Donation /n/Test /$/200 /d/14-03-2024 /c/2", account));
     }
 
     @Test
     public void removeTransaction_removesCorrectTransaction() throws EmptyArgumentException, InvalidIndexException {
-        Transaction testTransaction1 = new Income("Test1", 100, "Category1",
+        Transaction testTransaction1 = new Income("Test1", 100,
                 "14-03-2024", account);
-        Transaction testTransaction2 = new Income("Test2", 200, "Category2",
+        testTransaction1.setCategory(Category.fromNumber(1));
+        Transaction testTransaction2 = new Income("Test2", 200,
                 "16-03-2024", account);
+        testTransaction1.setCategory(Category.fromNumber(2));
         transactionList.addTransaction(testTransaction1);
         transactionList.addTransaction(testTransaction2);
 
@@ -84,7 +87,7 @@ public class TransactionListTest {
 
     @Test
     public void removeTransaction_withInvalidIndex_throwsIndexOutOfBoundsException() {
-        Transaction testTransaction = new Income("Test", 200, "Personal",
+        Transaction testTransaction = new Income("Test", 200,
                 "14-03-2024", account);
         transactionList.addTransaction(testTransaction);
 
@@ -94,7 +97,7 @@ public class TransactionListTest {
 
     @Test
     public void removeTransaction_withMissingIndex_throwsEmptyArgumentException() {
-        Transaction testTransaction = new Income("Test", 100, "Personal",
+        Transaction testTransaction = new Income("Test", 100,
                 "14-03-2024", account);
         transactionList.addTransaction(testTransaction);
 
@@ -104,7 +107,7 @@ public class TransactionListTest {
 
     @Test
     public void removeTransaction_withInvalidIndex_throwsNumberFormatException() {
-        Transaction testTransaction = new Income("Test", 100, "Personal",
+        Transaction testTransaction = new Income("Test", 100,
                 "14-03-2024", account);
         transactionList.addTransaction(testTransaction);
 

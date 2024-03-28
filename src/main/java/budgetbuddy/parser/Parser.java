@@ -1,6 +1,7 @@
 package budgetbuddy.parser;
 
 import budgetbuddy.account.Account;
+import budgetbuddy.categories.Category;
 import budgetbuddy.exceptions.EmptyArgumentException;
 import budgetbuddy.exceptions.InvalidEditTransactionData;
 import budgetbuddy.exceptions.InvalidTransactionTypeException;
@@ -50,12 +51,20 @@ public class Parser {
         }
         assert amount != null;
         assert type != null;
-        if(description.trim().isEmpty() || category.trim().isEmpty() || type.trim().isEmpty()){
+        if(description.trim().isEmpty() || type.trim().isEmpty()){
             throw new EmptyArgumentException("data for the arguments ");
         } else if (type.equalsIgnoreCase("income")) {
-            return new Income(description, Double.parseDouble(amount), category, date, account);
+            Income income = new Income(description, Double.parseDouble(amount), date, account);
+            if (category != null){
+                income.setCategory(Category.fromNumber(Integer.parseInt(category)));
+            }
+            return income;
         } else if (type.equalsIgnoreCase("expense")) {
-            return new Expense(description, Double.parseDouble(amount), category, date, account);
+            Expense expense = new Expense(description, Double.parseDouble(amount), date, account);
+            if (category != null){
+                expense.setCategory(Category.fromNumber(Integer.parseInt(category)));
+            }
+            return expense;
         } else {
             throw new InvalidTransactionTypeException(type);
         }
@@ -69,10 +78,18 @@ public class Parser {
         String date = parts[2].trim();
         String amount = parts[3].trim();
         String category = parts[4].trim();
+        int categoryValue = Integer.parseInt(category);
+        if(categoryValue <=0 || categoryValue>9){
+            throw new InvalidEditTransactionData("Choose category number from the list 1-9");
+        }
         if (type.equalsIgnoreCase("income")) {
-            return new Income(description, Double.parseDouble(amount), category, date, account);
+            Income income = new Income(description, Double.parseDouble(amount), date, account);
+            income.setCategory(Category.fromNumber(categoryValue));
+            return income;
         } else if (type.equalsIgnoreCase("expense")) {
-            return new Expense(description, Double.parseDouble(amount), category, date, account);
+            Expense expense = new Expense(description, Double.parseDouble(amount), date, account);
+            expense.setCategory(Category.fromNumber(categoryValue));
+            return expense;
         } else {
             throw new InvalidEditTransactionData(" One or more data is wrong. ");
         }
