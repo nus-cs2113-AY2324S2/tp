@@ -68,6 +68,15 @@ public class SplitExpenseList {
             throw new BudgetBuddyException("Expenses should not be negative.");
         }
 
+        try {
+            Integer.parseInt(numberOfPeople);
+            if (Integer.parseInt(numberOfPeople) < 0) {
+                throw new BudgetBuddyException("Number of people should be a positive number");
+            }
+        } catch (NumberFormatException e) {
+            throw new BudgetBuddyException("Number of people should be a number");
+        }
+
         SplitExpense splitexpense = new SplitExpense(amount, numberOfPeople, description);
         splitexpenses.add(splitexpense);
     }

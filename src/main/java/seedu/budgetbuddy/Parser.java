@@ -270,7 +270,7 @@ public class Parser {
             } else {
                 return null;
             }
-        break;
+            break;
         default:
             return null;
         }
