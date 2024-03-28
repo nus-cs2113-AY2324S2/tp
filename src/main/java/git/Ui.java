@@ -80,43 +80,43 @@ public class Ui {
         }
     }
 
-/**
- * Prompts user for expiration date.
- *
- * Validates the input date for correct format and future dates.
- *
- * @return Formatted expiration date in the format YYYY-MM-DD.
- */
-public String promptForExpiration() {
-    LocalDate expirationDate = null;
-    while (expirationDate == null) {
-        try {
-            System.out.println("Please enter the year of expiry (e.g. 2024):");
-            int year = Integer.parseInt(in.nextLine().trim());
+    /**
+     * Prompts user for expiration date.
+     *
+     * Validates the input date for correct format and future dates.
+     *
+     * @return Formatted expiration date in the format YYYY-MM-DD.
+     */
+    public String promptForExpiration() {
+        LocalDate expirationDate = null;
+        while (expirationDate == null) {
+            try {
+                System.out.println("Please enter the year of expiry (e.g. 2024):");
+                int year = Integer.parseInt(in.nextLine().trim());
 
-            System.out.println("Please enter the month of expiry (e.g. July or 07):");
-            String monthInput = in.nextLine().trim();
-            String monthString = convertMonthToNumber(monthInput); 
-            int month = Integer.parseInt(monthString);
+                System.out.println("Please enter the month of expiry (e.g. July or 07):");
+                String monthInput = in.nextLine().trim();
+                String monthString = convertMonthToNumber(monthInput); 
+                int month = Integer.parseInt(monthString);
 
-            System.out.println("Please enter the date of expiry (e.g. 19):");
-            int day = Integer.parseInt(in.nextLine().trim());
+                System.out.println("Please enter the date of expiry (e.g. 19):");
+                int day = Integer.parseInt(in.nextLine().trim());
 
-            // Attempt to create a date from the input.
-            expirationDate = LocalDate.of(year, month, day);
+                // Attempt to create a date from the input.
+                expirationDate = LocalDate.of(year, month, day);
 
-            // Check if the date is in the past.
-            if (expirationDate.isBefore(LocalDate.now())) {
-                System.out.println("The expiration date cannot be in the past. Please try again.");
-                expirationDate = null; // Reset to null to re-prompt the user.
+                // Check if the date is in the past.
+                if (expirationDate.isBefore(LocalDate.now())) {
+                    System.out.println("The expiration date cannot be in the past. Please try again.");
+                    expirationDate = null; // Reset to null to re-prompt the user.
+                }
+            } catch (DateTimeException | NumberFormatException e) {
+                System.out.println("Invalid date. Please ensure the year, month, and day are correct and try again.");
+                // No need to reset expirationDate to null here as it's already null or will be reset if the date was in the past.
             }
-        } catch (DateTimeException | NumberFormatException e) {
-            System.out.println("Invalid date. Please ensure the year, month, and day are correct and try again.");
-            // No need to reset expirationDate to null here as it's already null or will be reset if the date was in the past.
         }
+        return expirationDate.toString(); // Formats to YYYY-MM-DD by default.
     }
-    return expirationDate.toString(); // Formats to YYYY-MM-DD by default.
-}
 
     /**
      * Prompts user for category
