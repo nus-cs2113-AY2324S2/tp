@@ -1,0 +1,24 @@
+@startuml SequenceDiagram
+
+participant User
+participant Parser
+participant ExerciseManager
+participant ActivityManager
+
+User -> Parser: Inputs command 'exercise /search pushups'
+Parser -> ExerciseManager: Parse command
+activate ExerciseManager
+ExerciseManager -> ExerciseManager: Validate input to ensure correct command format
+alt Input validation successful
+    ExerciseManager -> ActivityManager: Invoke search method to search for exercises
+    activate ActivityManager
+    ActivityManager -> ActivityManager: Perform search operation on activitySet
+    ActivityManager --> ExerciseManager: Return search results
+    deactivate ActivityManager
+    ExerciseManager -> User: Print search results
+    deactivate ExerciseManager
+else Input validation fails
+    ExerciseManager -> User: Print error message
+end
+
+@enduml

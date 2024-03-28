@@ -1,0 +1,20 @@
+@startuml
+object exerciseManager
+
+object exercise1 {
+  exerciseName = "Push-ups"
+}
+
+object exercise2 {
+  exerciseName = "Pull-ups"
+}
+
+object exercise3 {
+  exerciseName = "Squats"
+}
+
+exerciseManager --> exercise1 : manages
+exerciseManager --> exercise2 : manages
+exerciseManager --> exercise3 : manages
+
+@enduml

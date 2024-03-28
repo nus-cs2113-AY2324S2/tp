@@ -1,0 +1,27 @@
+@startuml SequenceDiagram
+
+participant User
+participant Parser
+participant ExerciseManager
+participant Exercise
+participant ActivityManager
+
+User -> Parser: Inputs command 'exercise /add pushups'
+Parser -> ExerciseManager: Parse command
+activate ExerciseManager
+ExerciseManager -> ExerciseManager: Validate input to ensure correct command format
+alt Input validation successful
+    ExerciseManager -> Exercise: Create new Exercise object with name 'pushups'
+    activate Exercise
+    ExerciseManager -> ActivityManager: Invoke add method to add exercise to activitySet
+    activate ActivityManager
+    ActivityManager -> Exercise: Adds exercise to activitySet
+    deactivate ActivityManager
+    deactivate Exercise
+    ExerciseManager -> User: Print success message
+    deactivate ExerciseManager
+else Input validation fails
+    ExerciseManager -> User: Print error message indicating invalid command format
+end
+
+@enduml
