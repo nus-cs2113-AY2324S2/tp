@@ -32,6 +32,6 @@ public class EditCommand extends Command {
             ui.TextUi.showEditMessage(itemName, Itemlist.getItem(index).getQuantity(), newQuantity );
             Itemlist.editQuantity(index, newQuantity);
         }
-        Storage.overwriteFile(Itemlist.getItems(), false);
+        Storage.overwriteFile(Itemlist.getItems());
     }
 }
