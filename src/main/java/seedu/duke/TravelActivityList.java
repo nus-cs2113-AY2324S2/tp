@@ -108,7 +108,7 @@ public class TravelActivityList {
         int foundCounter = 0;
         for (int iterator = 0; iterator < travelActivities.size(); iterator += 1){
             if(travelActivities.get(iterator).getPlan().contains(activityName) &&
-                    !travelActivities.get(iterator).getTag().isEmpty()){
+                    !travelActivities.get(iterator).getPlan().isEmpty()){
                 isFound = true;
                 foundCounter += 1;
                 if (isFound && foundCounter == 1) {
