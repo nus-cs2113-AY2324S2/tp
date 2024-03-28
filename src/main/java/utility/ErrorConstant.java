@@ -118,6 +118,7 @@ public class ErrorConstant {
     public static final String EMPTY_PERIOD_LIST_ERROR = "Period List is empty.";
     public static final String PERIOD_LIST_UNCLEARED_ERROR = "Period list is not cleared.";
     public static final String START_DATE_IN_FUTURE_ERROR = "Start date cannot be later than today's date.";
+    public static final String DATE_IN_FUTURE_ERROR = "Date specified cannot be later than today's date.";
     public static final String PERIOD_END_BEFORE_START_ERROR = "Start date of period must be before end date.";
     public static final String UNABLE_TO_MAKE_PREDICTIONS_ERROR = "Insufficient period cycles to make prediction.";
 

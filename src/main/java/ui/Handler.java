@@ -84,28 +84,6 @@ public class Handler {
     }
 
     /**
-     * Extracts a substring from the given input string based on the provided delimiter.
-     *
-     * @param input     The input string from which to extract the substring.
-     * @param delimiter The delimiter to search for in the input string.
-     * @return The extracted substring, or an empty string if the delimiter is not found.
-     */
-    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
-        int index = input.indexOf(delimiter);
-        if (index == -1 || index == input.length() - delimiter.length()) {
-            return "";
-        }
-
-        int startIndex = index + delimiter.length();
-        int endIndex = input.indexOf("/", startIndex);
-        if (endIndex == -1) {
-            endIndex = input.length();
-        }
-
-        return input.substring(startIndex, endIndex).trim();
-    }
-
-    /**
      * Constructs either a new Run or Gym object based on the user input.
      *
      * @param userInput The user input string.
@@ -196,7 +174,7 @@ public class Handler {
      */
     public static void handleHealth(String userInput) {
         try {
-            String typeOfHealth = extractSubstringFromSpecificIndex(userInput, HealthConstant.HEALTH_FLAG);
+            String typeOfHealth = Parser.extractSubstringFromSpecificIndex(userInput, HealthConstant.HEALTH_FLAG);
             Filters parsedFilter = Filters.valueOf(typeOfHealth.toUpperCase());
             switch(parsedFilter) {
             case BMI:
@@ -234,7 +212,7 @@ public class Handler {
      */
     public static String getDateFromGym(String input) {
         try {
-            return extractSubstringFromSpecificIndex(input, WorkoutConstant.SPLIT_BY_DATE);
+            return Parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.SPLIT_BY_DATE);
         } catch (Exception e) {
             return "";
         }
@@ -250,7 +228,7 @@ public class Handler {
     //@@author JustinSoh
     public static int getNumberOfGymStations(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
-        String numberOfStationString = extractSubstringFromSpecificIndex(input,
+        String numberOfStationString = Parser.extractSubstringFromSpecificIndex(input,
                 WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
         assert Integer.parseInt(numberOfStationString) > 0 : ErrorConstant.NEGATIVE_VALUE_ERROR;
         return Integer.parseInt(numberOfStationString);
@@ -313,23 +291,23 @@ public class Handler {
         boolean isRunValid = false;
         boolean isGymValid = false;
 
-        String exerciseType = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_EXERCISE_TYPE);
+        String exerciseType = Parser.extractSubstringFromSpecificIndex(userInput,
+                WorkoutConstant.SPLIT_BY_EXERCISE_TYPE);
 
         exerciseTypeIsValid = Workout.checkIfExerciseTypeIsValid(exerciseType);
         boolean isRun = exerciseType.equals(WorkoutConstant.RUN);
         boolean isGym = exerciseType.equals(WorkoutConstant.GYM);
 
         if (isRun) {
-            String runDistance = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
-            String runTime = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
-            String runDate = extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
+            String runDistance = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DISTANCE);
+            String runTime = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_TIME);
+            String runDate = Parser.extractSubstringFromSpecificIndex(userInput, WorkoutConstant.SPLIT_BY_DATE);
             isRunValid = Run.checkIfRunIsValid(runDistance, runTime, runDate);
         } else if (isGym) {
-            String numberOfStations = extractSubstringFromSpecificIndex(userInput,
+            String numberOfStations = Parser.extractSubstringFromSpecificIndex(userInput,
                     WorkoutConstant.SPLIT_BY_NUMBER_OF_STATIONS);
             isGymValid = Gym.checkIfGymIsValid(numberOfStations);
         }
-
 
         if (exerciseTypeIsValid && isRunValid) {
             return WorkoutConstant.RUN;

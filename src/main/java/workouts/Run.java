@@ -2,7 +2,6 @@ package workouts;
 
 import java.time.LocalDate;
 
-import ui.Handler;
 import utility.CustomExceptions;
 import utility.Parser;
 import utility.ErrorConstant;
@@ -66,13 +65,13 @@ public class Run extends Workout {
             throw new CustomExceptions.InvalidInput(ErrorConstant.UNSPECIFIED_PARAMETER_ERROR);
         }
         // Command
-        results[WorkoutConstant.COMMAND_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/e:");
+        results[WorkoutConstant.COMMAND_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/e:");
         // Distance
-        results[WorkoutConstant.DISTANCE_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/d:");
+        results[WorkoutConstant.DISTANCE_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/d:");
         // Time
-        results[WorkoutConstant.TIME_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/t:");
+        results[WorkoutConstant.TIME_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/t:");
         // Date
-        results[WorkoutConstant.DATE_INDEX] = Handler.extractSubstringFromSpecificIndex(input, "/date:");
+        results[WorkoutConstant.DATE_INDEX] = Parser.extractSubstringFromSpecificIndex(input, "/date:");
 
 
         assert !results[WorkoutConstant.COMMAND_INDEX].isEmpty() : "Command should not be empty";

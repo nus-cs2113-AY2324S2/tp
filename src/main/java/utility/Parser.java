@@ -1,6 +1,5 @@
 package utility;
 
-import ui.Handler;
 import ui.Output;
 
 import health.Appointment;
@@ -61,8 +60,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If there are invalid date inputs.
      */
     public static void validateDateInput(String date) throws CustomExceptions.InvalidInput {
-        String validDateRegex = "\\d{2}-\\d{2}-\\d{4}";
-        if (!date.matches(validDateRegex)) {
+        if (!date.matches(UiConstant.VALID_DATE_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_DATE_ERROR);
         }
         String[] parts = date.split(UiConstant.DASH);
@@ -150,7 +148,7 @@ public class Parser {
      */
     public static String parseHistoryAndLatestInput(String userInput) {
         try {
-            String type = Handler.extractSubstringFromSpecificIndex(userInput, UiConstant.ITEM_FLAG);
+            String type = extractSubstringFromSpecificIndex(userInput, UiConstant.ITEM_FLAG);
 
             if (type.isBlank()) {
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
@@ -188,13 +186,17 @@ public class Parser {
                 || bmiDetails[2].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-        // checks whether input number is 2dp
-        String twoDecimalPlaceRegex = "\\d+\\.\\d{2}";
-        if (!bmiDetails[0].matches(twoDecimalPlaceRegex) ||
-                !bmiDetails[1].matches(twoDecimalPlaceRegex)) {
+
+        if (!bmiDetails[0].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX) ||
+                !bmiDetails[1].matches(UiConstant.VALID_TWO_DP_NUMBER_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.HEIGHT_WEIGHT_INPUT_ERROR);
         }
         validateDateInput(bmiDetails[2]);
+        LocalDate date = parseDate(bmiDetails[2]);
+        if (date.isAfter(LocalDate.now())) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.DATE_IN_FUTURE_ERROR);
+        }
+
     }
 
     //@@author syj02
@@ -207,15 +209,14 @@ public class Parser {
      */
     public static String[] splitBmiInput(String input) throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                || !input.contains(HealthConstant.HEIGHT_FLAG)
+        if (!input.contains(HealthConstant.HEIGHT_FLAG)
                 || !input.contains(HealthConstant.WEIGHT_FLAG)
                 || !input.contains(HealthConstant.DATE_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
+        results[2] = extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
         return results;
     }
     //@@author
@@ -243,13 +244,12 @@ public class Parser {
     public static String[] splitPeriodInput(String input) throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_PERIOD_PARAMETERS];
 
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                | !input.contains(HealthConstant.START_FLAG)
+        if (!input.contains(HealthConstant.START_FLAG)
                 || !input.contains(HealthConstant.END_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
         return results;
     }
 
@@ -305,22 +305,6 @@ public class Parser {
         }
     }
 
-    public static String[] getTimeParts(String time) throws CustomExceptions.InvalidInput {
-        String [] parts;
-        try {
-            parts = time.split(":");
-        } catch (Exception e) {
-            throw new CustomExceptions.InvalidInput("Invalid delimiter. Use ':'");
-        }
-        if (parts.length != 2 && parts.length != 3) {
-            throw new CustomExceptions.InvalidInput("Invalid time format! "
-                    + System.lineSeparator()
-                    + "Format is  either HH:MM, HH:MM:SS or MM:SS!");
-        }
-
-        return parts;
-    }
-
     /**
      * Validates the time used in HH:MM format.
      *
@@ -328,8 +312,7 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegex = "\\d{2}:\\d{2}";
-        if (!time.matches(validTimeRegex)) {
+        if (!time.matches(UiConstant.VALID_TIME_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_TIME_ERROR);
         }
         String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
@@ -351,10 +334,8 @@ public class Parser {
      * @throws CustomExceptions.InvalidInput If time is formatted wrongly.
      */
     public static void validateRunTimeInput(String time) throws CustomExceptions.InvalidInput {
-        String validTimeRegexWithHours = "\\d{2}:\\d{2}:\\d{2}";
-        String validTimeRegex = "\\d{2}:\\d{2}";
-        if (!time.matches(validTimeRegex) &&
-                !time.matches(validTimeRegexWithHours)) {
+        if (!time.matches(UiConstant.VALID_TIME_REGEX) &&
+                !time.matches(UiConstant.VALID_TIME_WITH_HOURS_REGEX)) {
             throw new CustomExceptions.InvalidInput("Invalid time format. " +
                     "Format is HH:MM:SS or MM:SS with integers");
         }
@@ -394,16 +375,16 @@ public class Parser {
      */
     public static void validateAppointmentDetails(String[] appointmentDetails)
             throws CustomExceptions.InvalidInput {
-        if (appointmentDetails[1].isEmpty()
-                || appointmentDetails[2].isEmpty()
-                || appointmentDetails[3].isEmpty()) {
+        if (appointmentDetails[0].isEmpty()
+                || appointmentDetails[1].isEmpty()
+                || appointmentDetails[2].isEmpty()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant
                     .INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-        validateDateInput(appointmentDetails[1]);
-        validateTimeInput(appointmentDetails[2]);
+        validateDateInput(appointmentDetails[0]);
+        validateTimeInput(appointmentDetails[1]);
 
-        if (appointmentDetails[3].length() > HealthConstant.MAX_DESCRIPTION_LENGTH) {
+        if (appointmentDetails[2].length() > HealthConstant.MAX_DESCRIPTION_LENGTH) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.DESCRIPTION_LENGTH_ERROR);
         }
     }
@@ -418,15 +399,14 @@ public class Parser {
     public static String[] splitAppointmentDetails(String input)
             throws CustomExceptions.InvalidInput {
         String [] results = new String[HealthConstant.NUM_APPOINTMENT_PARAMETERS];
-        if (!input.contains(HealthConstant.HEALTH_FLAG)
-                || !input.contains(HealthConstant.DATE_FLAG)
+        if (!input.contains(HealthConstant.DATE_FLAG)
                 || !input.contains(HealthConstant.TIME_FLAG)
                 || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
+        results[2] = extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
         return results;
     }
 
@@ -443,5 +423,26 @@ public class Parser {
                 appointmentDetails[2]);
         HealthList.addAppointment(newAppointment);
         Output.printAddAppointment(newAppointment);
+    }
+
+    /**
+     * Extracts a substring from the given input string based on the provided delimiter.
+     *
+     * @param input     The input string from which to extract the substring.
+     * @param delimiter The delimiter to search for in the input string.
+     * @return The extracted substring, or an empty string if the delimiter is not found.
+     */
+    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
+        int index = input.indexOf(delimiter);
+        if (index == -1 || index == input.length() - delimiter.length()) {
+            return "";
+        }
+
+        int startIndex = index + delimiter.length();
+        int endIndex = input.indexOf("/", startIndex);
+        if (endIndex == -1) {
+            endIndex = input.length();
+        }
+        return input.substring(startIndex, endIndex).trim();
     }
 }
