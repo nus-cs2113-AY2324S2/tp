@@ -6,7 +6,7 @@
 
 ## Design & implementation
 ### Parsing user input for caloric entries
-
+ 
 This functionality is facilitated by `ParserCalories`. It implements one operation, namely:
 - `ParserCalories#parseCaloriesInput(String)`
 
