@@ -117,7 +117,7 @@ class WeeklyProgramManagerTest {
         outContent.reset();
         weeklyProgramManager.executeListAction();
 
-        String expectedAssignedOutput = "[ByteCeps]> Your workouts for the week:\n" +
+        String expectedAssignedOutput = "[BYTE-CEPS]> Your workouts for the week:\n" +
                 "\tMONDAY: Rest day\n" +
                 "\n" +
                 "\tTUESDAY: Rest day\n" +
@@ -146,7 +146,7 @@ class WeeklyProgramManagerTest {
 
 
         weeklyProgramManager.executeListAction();
-        String expectedClearOutput = "[ByteCeps]> Your workouts for the week:\n" +
+        String expectedClearOutput = "[BYTE-CEPS]> Your workouts for the week:\n" +
                 "\tMONDAY: Rest day\n" +
                 "\n" +
                 "\tTUESDAY: Rest day\n" +
@@ -189,7 +189,7 @@ class WeeklyProgramManagerTest {
         outContent.reset();
         weeklyProgramManager.executeListAction();
 
-        String expectedAssignedOutput = "[ByteCeps]> Your workouts for the week:\n" +
+        String expectedAssignedOutput = "[BYTE-CEPS]> Your workouts for the week:\n" +
                 "\tMONDAY: full day\n" +
                 "\n" +
                 "\tTUESDAY: Rest day\n" +
@@ -217,7 +217,7 @@ class WeeklyProgramManagerTest {
         outContent.reset();
 
         weeklyProgramManager.executeListAction();
-        String expectedClearOutput = "[ByteCeps]> Your workouts for the week:\n" +
+        String expectedClearOutput = "[BYTE-CEPS]> Your workouts for the week:\n" +
                 "\tMONDAY: Rest day\n" +
                 "\n" +
                 "\tTUESDAY: Rest day\n" +
@@ -249,14 +249,14 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackInput = "program /track benchpress /weight 500 /sets 5 /reps 5";
+        String trackInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
         parser.parseInput(trackInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String expectedOutput = "[ByteCeps]> Workout full day assigned to WEDNESDAY\n" +
+        String expectedOutput = String.format("[BYTE-CEPS]> Workout full day assigned to %s\n" +
                 "-------------------------------------------------" +
-                "[ByteCeps]> Successfully tracked benchpress with 5 sets and 5 reps\n" +
-                "-------------------------------------------------\n";
+                "[BYTE-CEPS]> Successfully tracked 500kg benchpress with 5 sets and 5 reps on %s\n" +
+                "-------------------------------------------------\n", todayString, dateString);
 
         assertEquals(expectedOutput.replaceAll("\\s+", ""),
                 outContent.toString().replaceAll("\\s+", ""));
@@ -267,7 +267,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(todayInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        expectedOutput = String.format("[ByteCeps]> Listing Exercises on %s:\n" +
+        expectedOutput = String.format("[BYTE-CEPS]> Listing Exercises on %s:\n" +
                 "1. benchpress (weight: 500, sets: 5, reps:5)\n" +
                 "-------------------------------------------------", dateString);
 
@@ -284,18 +284,18 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String[] invalidInputs = {"program /track benchpress /weight 500 /sets 5",
-            "program /track benchpress /weight 500 /reps 5",
-            "program /track benchpress /sets 5 /reps 5",
-            "program /track /weight 500 /sets 5 /reps 5",
-            "program /track benchpress /weight /sets 5 /reps 5",
-            "program /track benchpress /weight /sets 5 /reps 5",
-            "program /track benchpress /weight 2 /sets /reps 5",
-            "program /track benchpress /weight 2 /sets 5 /reps ",
-            "program /track benchpress /weight /sets /reps ",
-            "program /track benchpress /weight /sets /reps abc",
-            "program /track benchpress /weight /sets test /reps 4",
-            "program /track benchpress /weight abc /sets 3 /reps 4",
+        String[] invalidInputs = {"program /log benchpress /weight 500 /sets 5",
+            "program /log benchpress /weight 500 /reps 5",
+            "program /log benchpress /sets 5 /reps 5",
+            "program /log/weight 500 /sets 5 /reps 5",
+            "program /log benchpress /weight /sets 5 /reps 5",
+            "program /log benchpress /weight /sets 5 /reps 5",
+            "program /log benchpress /weight 2 /sets /reps 5",
+            "program /log benchpress /weight 2 /sets 5 /reps ",
+            "program /log benchpress /weight /sets /reps ",
+            "program /log benchpress /weight /sets /reps abc",
+            "program /log benchpress /weight /sets test /reps 4",
+            "program /log benchpress /weight abc /sets 3 /reps 4",
         };
         for (String input : invalidInputs) {
             parser.parseInput(input);
@@ -309,7 +309,7 @@ class WeeklyProgramManagerTest {
         String assignWorkoutInput = String.format("program /assign full day /to %s", todayString);
 
         parser.parseInput(assignWorkoutInput);
-        String trackInput = "program /track snooze /weight 500 /sets 5 /reps 5";
+        String trackInput = "program /log snooze /weight 500 /sets 5 /reps 5";
         parser.parseInput(trackInput);
         assertThrows(Exceptions.ActivityDoesNotExists.class, () -> weeklyProgramManager.execute(parser));
     }
@@ -323,7 +323,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackInput = "program /track benchpress /weight 500 /sets 5 /reps 5";
+        String trackInput = "program /log benchpress /weight 500 /sets 5 /reps 5";
         parser.parseInput(trackInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
@@ -333,7 +333,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(historyInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String expectedHistory = String.format("[ByteCeps]> Listing Tracked Workouts: 1. %s\n" +
+        String expectedHistory = String.format("[BYTE-CEPS]> Listing Tracked Workouts: 1. %s\n" +
                 "-------------------------------------------------", dateString);
 
         assertEquals(expectedHistory.replaceAll("\\s+", ""),
@@ -344,7 +344,7 @@ class WeeklyProgramManagerTest {
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
 
-        String trackHistoryInput = "program /track benchpress /weight 500 /sets 5 /reps 5 /date 2024-03-25";
+        String trackHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-03-25";
         parser.parseInput(trackHistoryInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
@@ -352,7 +352,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(historyInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        expectedHistory = String.format("[ByteCeps]> Listing Tracked Workouts: 1. %s 2. 2024-03-25\n" +
+        expectedHistory = String.format("[BYTE-CEPS]> Listing Tracked Workouts: 1. %s 2. 2024-03-25\n" +
                 "-------------------------------------------------", dateString);
 
         assertEquals(expectedHistory.replaceAll("\\s+", ""),
@@ -368,7 +368,7 @@ class WeeklyProgramManagerTest {
         parser.parseInput(assignWorkoutInput);
         assertDoesNotThrow(() -> weeklyProgramManager.execute(parser));
 
-        String trackHistoryInput = "program /track benchpress /weight 500 /sets 5 /reps 5 /date 2024-2323-23";
+        String trackHistoryInput = "program /log benchpress /weight 500 /sets 5 /reps 5 /date 2024-2323-23";
         parser.parseInput(trackHistoryInput);
         assertThrows(Exceptions.InvalidInput.class, () -> weeklyProgramManager.execute(parser));
     }

@@ -13,7 +13,7 @@ BYTE-CEPS can track & manage several types of tasks, such as:
 Running Byte
 - You are required to install Java 11 onto your computer.
 - Download the [latest release](https://github.com/AY2324S2-CS2113-F14-3/tp/releases) from the releases page.
-- Run the program in your preferred terminal using the command: java -jar BYTE-CEPS.jar.
+- Run the program in your preferred terminal using the command: java -jar byteceps.jar.
 
 ## Exercise Management
 Using the `exercise` command, you may manage your exercises that have been stored in BYTE-CEPS.

@@ -89,11 +89,11 @@ class ExerciseManagerTest {
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
         exerciseManager.executeListAction();
-        String expectedOutput = "[ByteCeps]> Added Exercise: Pushups\n" +
+        String expectedOutput = "[BYTE-CEPS]> Added Exercise: Pushups\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Added Exercise: Deadlifts\n" +
+                "[BYTE-CEPS]> Added Exercise: Deadlifts\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Listing Exercises:\n" +
+                "[BYTE-CEPS]> Listing Exercises:\n" +
                 "\t\t\t1. Pushups\n" +
                 "\t\t\t2. Deadlifts\n" +
                 "\n" +
@@ -128,15 +128,15 @@ class ExerciseManagerTest {
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
         exerciseManager.executeListAction();
 
-        String expectedOutput = "[ByteCeps]> Added Exercise: Push ups\n" +
+        String expectedOutput = "[BYTE-CEPS]> Added Exercise: Push ups\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Listing Exercises:\n" +
+                "[BYTE-CEPS]> Listing Exercises:\n" +
                 "\t\t\t1. Push ups\n" +
                 "\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Edited Exercise from Push ups to Push Ups\n" +
+                "[BYTE-CEPS]> Edited Exercise from Push ups to Push Ups\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> Listing Exercises:\n" +
+                "[BYTE-CEPS]> Listing Exercises:\n" +
                 "\t\t\t1. Push Ups\n" +
                 "\n" +
                 "-------------------------------------------------\n";
@@ -217,11 +217,11 @@ class ExerciseManagerTest {
         parser.parseInput(searchInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String expectedOutput = "[ByteCeps]> AddedExercise: \n" +
+        String expectedOutput = "[BYTE-CEPS]> AddedExercise: \n" +
                 "\t\t\t Pushups\n" +
                 "\n" +
                 "-------------------------------------------------\n" +
-                "[ByteCeps]> SearchResults:\n" +
+                "[BYTE-CEPS]> SearchResults:\n" +
                 "\t\t\t1. Pushups\n" +
                 "\n" +
                 "-------------------------------------------------\n";
@@ -240,7 +240,7 @@ class ExerciseManagerTest {
         parser.parseInput(searchInput);
         assertDoesNotThrow(() -> exerciseManager.execute(parser));
 
-        String expectedOutput = "[ByteCeps]>Noresultsfound\n" +
+        String expectedOutput = "[BYTE-CEPS]>Noresultsfound\n" +
                 "-------------------------------------------------\n";
 
         assertEquals(expectedOutput.replaceAll("\\s+", ""),

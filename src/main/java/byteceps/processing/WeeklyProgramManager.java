@@ -87,8 +87,8 @@ public class WeeklyProgramManager extends ActivityManager {
         case "today":
             executeTodayAction();
             break;
-        case "track":
-            executeTrackAction(parser);
+        case "log":
+            executeLogAction(parser);
             break;
         case "list":
             executeListAction();
@@ -149,10 +149,10 @@ public class WeeklyProgramManager extends ActivityManager {
         return getDay(dayFromDate.toString());
     }
 
-    private void executeTrackAction(Parser parser)
+    private void executeLogAction(Parser parser)
             throws Exceptions.InvalidInput, Exceptions.ActivityDoesNotExists {
         if (!parser.hasAdditionalArguments() || parser.getAdditionalArgumentsLength() < 3) {
-            throw new Exceptions.InvalidInput("track command not complete");
+            throw new Exceptions.InvalidInput("log command not complete");
         }
 
         String exerciseName = parser.getActionParameter();
@@ -162,7 +162,7 @@ public class WeeklyProgramManager extends ActivityManager {
         String workoutDate = parser.getAdditionalArguments("date");
 
         if (exerciseName.isBlank() || sets.isBlank() || repetition.isBlank() || weight.isBlank()) {
-            throw new Exceptions.InvalidInput("track command not complete");
+            throw new Exceptions.InvalidInput("log command not complete");
         }
 
         if (exerciseManager.doesNotHaveActivity(exerciseName)) {
@@ -187,8 +187,8 @@ public class WeeklyProgramManager extends ActivityManager {
         trackedWorkoutsManager.addTrackedWorkout(workoutDate, workoutName);
         trackedWorkoutsManager.addTrackedExercise(workoutDate, exerciseName, weight, sets, repetition);
         UserInterface.printMessage(
-                String.format("Successfully tracked %s with %s sets and %s reps",
-                        exerciseName, sets, repetition)
+                String.format("Successfully tracked %skg %s with %s sets and %s reps on %s",
+                        weight, exerciseName, sets, repetition, workoutDate)
         );
     }
 
