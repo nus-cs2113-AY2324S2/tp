@@ -24,6 +24,8 @@ public class Constants {
     public static final String NO_RECIPES_ERROR_MESSAGE = "Sorry, you have no recipes to find matches with. " +
             "Try adding some!";
     public static final String MESSAGE_ASK_INPUT = "asking user for input";
+    public static final String FIND_BY_KEYWORD = "kw";
+    public static final String FIND_BY_DATE = "date";
     static final String REGEX_MATCHER = RECIPE_NAME_PREFIX + "|"
             + RECIPE_TIME_PREFIX;
 

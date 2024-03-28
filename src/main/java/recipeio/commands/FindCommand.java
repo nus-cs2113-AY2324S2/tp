@@ -1,8 +1,8 @@
 package recipeio.commands;
 
+import recipeio.Constants;
 import recipeio.recipe.Recipe;
 import recipeio.ui.UI;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,11 +11,11 @@ public class FindCommand {
         String[] inputSplitUp = userInput.split(" ", 3);
         String findType = inputSplitUp[1];
         switch (findType) {
-        case ("kw"):
+        case (Constants.FIND_BY_KEYWORD):
             String keyword = inputSplitUp[2];
             findKeyword(keyword, recipes);
             break;
-        case ("date"):
+        case (Constants.FIND_BY_DATE):
             LocalDate date = LocalDate.parse(inputSplitUp[2]);
             findDate(date, recipes);
             break;
