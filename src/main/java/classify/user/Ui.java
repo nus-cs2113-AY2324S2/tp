@@ -53,6 +53,14 @@ public class Ui {
     private static final String DELETE_UNDONE_MESSAGE = "Last delete undone!";
     private static final String STUDENT_RESTORED_MESSAGE = "Student has been restored!";
     private static final String NO_RECENT_DELETES = "No recent deletes found!";
+    //@@ author tayponghee
+    private static final String ADD_SUBJECT =
+            "Do you want to add another subject and grade? (yes/no)";
+    private static final String INVALID_RESPONSE =
+            "Invalid response. Please type 'yes' or 'no'.";
+    private static final String NO_SUBJECTS_ADDED = "No subjects added.";
+    private static final String SUBJECT_ALREADY_EXISTS = "Subject already exists.";
+    private static final String WRONG_NUMBER_FORMAT = "Wrong number format! Please try again! e.g. 12 ";
 
     //@@author alalal47
     /**
@@ -291,4 +299,25 @@ public class Ui {
     public static void println (String text) {
         System.out.println(text);
     }
+
+    public static void printAddSubject() {
+        System.out.println(ADD_SUBJECT);
+    }
+
+    public static void printInvalidResponse() {
+        System.out.println(INVALID_RESPONSE);
+    }
+
+    public static void printNoSubjectsAdded() {
+        System.out.println(NO_SUBJECTS_ADDED);
+    }
+
+    public static void printSubjectAlreadyExists() {
+        System.out.println(SUBJECT_ALREADY_EXISTS);
+    }
+
+    public static void printWrongNumberFormat () {
+        System.out.println(WRONG_NUMBER_FORMAT);
+    }
+
 }
