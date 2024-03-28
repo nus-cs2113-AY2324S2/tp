@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# delete output from previous run
+if [ -e "./ACTUAL.TXT" ]
+then
+    rm ACTUAL.TXT
+fi
+
 # change to script directory
 cd "${0%/*}"
 

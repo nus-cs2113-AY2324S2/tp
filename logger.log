@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-03-28T06:54:32.099424Z</date>
+  <millis>1711608872099</millis>
+  <nanos>424000</nanos>
+  <sequence>0</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+<record>
+  <date>2024-03-28T06:54:36.721757Z</date>
+  <millis>1711608876721</millis>
+  <nanos>757000</nanos>
+  <sequence>1</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+<record>
+  <date>2024-03-28T06:54:41.791260Z</date>
+  <millis>1711608881791</millis>
+  <nanos>260000</nanos>
+  <sequence>2</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+<record>
+  <date>2024-03-28T06:54:45.730345Z</date>
+  <millis>1711608885730</millis>
+  <nanos>345000</nanos>
+  <sequence>3</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+<record>
+  <date>2024-03-28T06:54:49.745658Z</date>
+  <millis>1711608889745</millis>
+  <nanos>658000</nanos>
+  <sequence>4</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+<record>
+  <date>2024-03-28T06:54:53.763759Z</date>
+  <millis>1711608893763</millis>
+  <nanos>759000</nanos>
+  <sequence>5</sequence>
+  <logger>RecipeIO Logger</logger>
+  <level>INFO</level>
+  <class>recipeio.RecipeIO</class>
+  <method>runCommandLoopUntilExitCommand</method>
+  <thread>1</thread>
+  <message>asking user for input</message>
+</record>
+</log>
