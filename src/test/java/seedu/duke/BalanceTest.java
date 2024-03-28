@@ -4,16 +4,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BalanceTest {
     @Test
     public void testConstructor() {
-        ArrayList<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         users.add(new User("member1"));
         users.add(new User("member2"));
         users.add(new User("member3"));
 
-        ArrayList<Expense> expenses = new ArrayList<>();
+        List<Expense> expenses = new ArrayList<>();
         expenses.add(new Expense("member1", 15f, new String[]{"member1", "member2", "member3"}));
         expenses.add(new Expense("member2", 30f, new String[]{"member2", "member1", "member3"}));
         expenses.add(new Expense("member3", 100f, new String[]{"member3", "member1"}));

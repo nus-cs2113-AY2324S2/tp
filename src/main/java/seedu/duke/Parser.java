@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class Parser {
 
@@ -144,6 +145,12 @@ public class Parser {
             GroupCommand.exitGroup();
             break;
         case "expense":
+            // Checks if user is currently in a Group
+            Optional<Group> currentGroup = Group.getCurrentGroup();
+            if(currentGroup.isEmpty()){
+                String exceptionMessage = "Not signed in to a Group! Use 'create <name>' to create Group";
+                throw new ExpensesException(exceptionMessage);
+            }
 
             // Checks for missing Expense Parameters
             String[] expenseParams = {"amount", "paid", "user"};
@@ -169,12 +176,29 @@ public class Parser {
             payeeList.add(0, payerName);
 
             Expense newTransaction = new Expense(payerName, totalAmount, payeeList.toArray(new String[0]));
+            currentGroup.get().addExpense(newTransaction);
+
             break;
         case "list":
             // List code here
             break;
         case "balance":
-            // Balance code here
+            // Checks if user is currently in a Group
+            // named 'currentGroup1' to prevent conflict with previous declaration
+            Optional<Group> currentGroup1 = Group.getCurrentGroup();
+            if(currentGroup1.isEmpty()){
+                String exceptionMessage = "Not signed in to a Group! Use 'create <name>' to create Group";
+                throw new ExpensesException(exceptionMessage);
+            }
+
+            // Checks if user specified is in Current Group
+            if(!currentGroup1.get().isMember(argument)){
+                String exceptionMessage = argument + " is not in current Group!";
+                throw new ExpensesException(exceptionMessage);
+            }
+
+            Balance balance = new Balance(argument, currentGroup1.get());
+            balance.printBalance();
             break;
         default:
             // Default clause

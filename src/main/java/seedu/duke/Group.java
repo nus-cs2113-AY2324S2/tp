@@ -14,10 +14,12 @@ public class Group {
 
     private final String groupName;
     private final List<User> members;
+    private final List<Expense> expenseList;
 
     private Group(String groupName) {
         this.groupName = groupName;
         this.members = new ArrayList<>();
+        this.expenseList = new ArrayList<>();
     }
 
     /**
@@ -143,6 +145,15 @@ public class Group {
     }
 
     /**
+     * Adds a new expense to the group.
+     *
+     * @param expense The Expense object to add.
+     */
+    public void addExpense(Expense expense) {
+        expenseList.add(expense);
+    }
+
+    /**
      * Retrieves the name of the group.
      *
      * @return The name of the group.
@@ -158,5 +169,14 @@ public class Group {
      */
     public List<User> getMembers() {
         return new ArrayList<>(members);
+    }
+
+    /**
+     * Retrieves the list of expenses in the group.
+     *
+     * @return The list of expenses in the group.
+     */
+    public List<Expense> getExpenseList() {
+        return new ArrayList<>(expenseList);
     }
 }

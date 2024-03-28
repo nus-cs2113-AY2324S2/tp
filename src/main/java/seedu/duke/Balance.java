@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Balance {
@@ -13,7 +13,11 @@ public class Balance {
         this.balanceList = userList;
     }
 
-    public Balance(String userName, ArrayList<Expense> expenses, ArrayList<User> users) {
+    public Balance(String userName, Group group){
+        this(userName, group.getExpenseList(), group.getMembers());
+    }
+
+    public Balance(String userName, List<Expense> expenses, List<User> users) {
         this.userName = userName;
         this.balanceList = new HashMap<>();
 
@@ -39,7 +43,7 @@ public class Balance {
     }
 
     private void addExpense(Expense expense) {
-        ArrayList<String> payees = expense.getPayees();
+        List<String> payees = expense.getPayees();
         int numberOfUsers = payees.size();
         Float amountPerUser = expense.getTotalAmount() / numberOfUsers;
 
