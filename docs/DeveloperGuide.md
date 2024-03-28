@@ -65,6 +65,19 @@ The following sequence diagrams show how a user input is processed to add the ev
 
 Details such as accessing the EventManager via the central dashboard and handling of exceptions using invalid commands are omitted for brevity.
 
+The following sequence diagram shows the execution of an `AddExpenseToEventCommand` command object </br>
+
+![img.png](images/executeAddExpenseToEventCommand.png)
+
+**Execution sequence of AddExpenseToEventCommand**
+1. The command checks the validity of the event and expense indexes 
+2. If the indexes are invalid, a feedback message is returned to the user
+3. The event and expense objects are retrieved based on the indexes
+4. If the expense already exists in the event, a feedback message is returned to the user
+5. The original owning event of the expense is retrieved 
+6. If the expense has an owning event, the expense is removed from the owning event
+7. The expense is added to the new event, and its owning event is updated
+
 ## Product scope
 ### Target user profile
 

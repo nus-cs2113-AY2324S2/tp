@@ -23,12 +23,13 @@ public class AddExpenseToEventCommand extends Command {
             UI.prettyPrint("Indexes provided are invalid");
             return;
         }
-        Event newEvent = dashboard.getEventManager().getEvent(eventIdx);
-        Expense expense = dashboard.getExpenseManager().getExpense(expenseIdx);
 
-        assert newEvent != null && expense != null : "Event or Expense is null";
+        Expense expense = dashboard.getExpenseManager().getExpense(expenseIdx) ;       
+        Event newOwningEvent = dashboard.getEventManager().getEvent(eventIdx);        
 
-        boolean isExpensedOwnedByEvent = newEvent.containsExpense(expense);
+        assert newOwningEvent != null && expense != null : "Event or Expense is null";
+
+        boolean isExpensedOwnedByEvent = newOwningEvent.containsExpense(expense);
         if (isExpensedOwnedByEvent) {
             UI.prettyPrint("Expense already belongs to the event");
             return;
@@ -41,8 +42,8 @@ public class AddExpenseToEventCommand extends Command {
             expense.removeOwningEvent();
         }
 
-        newEvent.addExpense(expense);
-        expense.setOwningEvent(newEvent);
+        newOwningEvent.addExpense(expense);
+        expense.setOwningEvent(newOwningEvent);
         UI.prettyPrint("Expense added to event successfully");
     }
 }
