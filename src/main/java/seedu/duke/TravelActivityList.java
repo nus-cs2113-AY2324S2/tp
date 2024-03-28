@@ -187,19 +187,29 @@ public class TravelActivityList {
         System.out.println(taggedTask);
     }
 
+    /**
+     * Updates the date, duration and tag of the travel activity
+     * @param travelActivityNumber The index of the travel activity
+     * @param date The new date of the travel activity
+     * @param duration The new duration of the travel activity
+     * @param tag The new tag of the travel activity
+     * @throws OmniException Thrown if the index of the travel activity cannot be found
+     */
     public void updateTravelActivity(int travelActivityNumber, LocalDate date, String duration, String tag)
             throws OmniException{
-        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())){
+        if (travelActivityNumber > travelActivities.size() || (travelActivityNumber==0 && travelActivities.isEmpty())
+            || travelActivityNumber < 0){
             throw new OmniException("Travel activity cannot be found");
         }
         int indexOfTravelActivity = travelActivityNumber-1;
         TravelActivity updatedTravelActivity = travelActivities.get(indexOfTravelActivity);
-        String oldTravelActivityDescription = updatedTravelActivity.toString();
+        String oldTravelActivity = (updatedTravelActivity.toString()
+                                            + " (" + updatedTravelActivity.getTag() + ")");
         updatedTravelActivity.setDate(date);
         updatedTravelActivity.setDuration(duration);
         updatedTravelActivity.setTag(tag);
-        System.out.println("I have updated this task\nfrom: " + updatedTravelActivity +
-                "\nto: " + oldTravelActivityDescription);
+        System.out.println("I have updated this task\nfrom: " + oldTravelActivity +
+                            "\nto: " + updatedTravelActivity + " (" + updatedTravelActivity.getTag() + ")");
     }
 
     public ArrayList<TravelActivity> getTravelActivities () {
@@ -291,39 +301,6 @@ public class TravelActivityList {
         if (foundCounter == 0 || isFound == false) {
             System.out.println("Sorry I could not find what you are looking for.");
         }
-    }
-
-    /**
-     * Adds expense to travel activity
-     * @param taskNumber The travel activity number on the list
-     * @param expense  The expense of travel activity
-     */
-    public void expenseActivity(int taskNumber, String expense) throws OmniException {
-        assert taskNumber != 0 : "There is no tasks in the list";
-        if (taskNumber > travelActivities.size()) {
-            throw new OmniException("Travel activity cannot be found");
-        }
-        int indexOfTask = taskNumber - 1;
-        TravelActivity task = travelActivities.get(indexOfTask);
-        task.setExpense(expense);
-        System.out.println("I have added expense for this task:");
-        System.out.println(task + " (" + expense + ")");
-    }
-
-    /**
-     * Removes the expense on a travel activity
-     * @param taskNumber The travel activity number on the list
-     */
-    public void removeExpense(int taskNumber) throws OmniException {
-        assert taskNumber != 0 : "There is no task in the list";
-        if (taskNumber > travelActivities.size()) {
-            throw new OmniException("Travel activity cannot be found");
-        }
-        int indexOfTask = taskNumber - 1;
-        TravelActivity task = travelActivities.get(indexOfTask);
-        task.removeExpense();
-        System.out.println("Expense removed from the task:");
-        System.out.println(task);
     }
 
 }
