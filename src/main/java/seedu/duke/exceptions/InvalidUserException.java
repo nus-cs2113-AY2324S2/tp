@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exceptions;
 
 /**
  * This class represents user Expections expected from the InputValidator class.

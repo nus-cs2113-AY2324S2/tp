@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.InvalidUserException;
 import seedu.duke.ui.UI;
 
 import java.util.ArrayList;
@@ -16,11 +17,12 @@ public class UserList {
         return activeUser;
     }
 
-    public void setActiveUser(User user) {
+    public void setActiveUser(User user) throws InvalidUserException {
         if (user != null) {
             activeUser = user;
         } else {
-            System.out.println("User does not exist!");
+            throw new InvalidUserException("User does not exist!");
+            //System.out.println("User does not exist!");
         }
     }
 
