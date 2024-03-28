@@ -1,5 +1,6 @@
 package itemlist;
 
+import item.Item;
 import item.Transaction;
 
 import java.util.ArrayList;
@@ -13,5 +14,9 @@ public class Cashier extends Itemlist {
 
     public static void deleteItem(int index) {
         transactions.remove(index);
+    }
+
+    public static ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 }

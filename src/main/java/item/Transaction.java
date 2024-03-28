@@ -3,15 +3,45 @@ package item;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Transaction extends Item {
+public class Transaction {
     private String dateTime;
     private int totalPrice;
     private int profit;
-    public Transaction(String name, int quantity, String uom, String category, int buyPrice, int sellPrice) {
-        super(name, quantity, uom, category, buyPrice, sellPrice);
+    private String itemName;
+    private int quantity;
+    private int buyPrice;
+    private int sellPrice;
+
+    public Transaction(String name, int inputQty, int inputBuy, int inputSell) {
         setDateTime();
+        itemName = name;
+        quantity = inputQty;
+        buyPrice = inputBuy;
+        sellPrice = inputSell;
         totalPrice = sellPrice * quantity;
         profit = totalPrice - buyPrice * quantity;
+    }
+
+    public Transaction(String name, int inputQty, int inputBuy, int inputSell, String storedTime) {
+        dateTime = storedTime;
+        itemName = name;
+        quantity = inputQty;
+        buyPrice = inputBuy;
+        sellPrice = inputSell;
+        totalPrice = sellPrice * quantity;
+        profit = totalPrice - buyPrice * quantity;
+    }
+
+    public String getItemName() {
+        return this.itemName;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public int getSellPrice() {
+        return this.sellPrice;
     }
 
     public String getDateTime() {
