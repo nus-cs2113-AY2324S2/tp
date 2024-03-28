@@ -1,10 +1,11 @@
 package workouts;
 
-import ui.Handler;
+import utility.Parser;
 import utility.CustomExceptions;
 import utility.ErrorConstant;
 import utility.UiConstant;
 import utility.WorkoutConstant;
+
 
 import java.util.ArrayList;
 
@@ -94,9 +95,9 @@ public class GymStation {
             CustomExceptions.InvalidInput {
 
         String exerciseName = inputs.split(UiConstant.SPLIT_BY_SLASH)[WorkoutConstant.STATION_NAME_INDEX].trim();
-        String sets = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_SETS);
-        String reps = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_REPS);
-        String weights = Handler.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_WEIGHTS);
+        String sets = Parser.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_SETS);
+        String reps = Parser.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_REPS);
+        String weights = Parser.extractSubstringFromSpecificIndex(inputs, WorkoutConstant.SPLIT_BY_WEIGHTS);
 
         String validExerciseName = checkIfExerciseNameIsValid(exerciseName);
         int setsInteger = checkIfSetsAreValid(sets);

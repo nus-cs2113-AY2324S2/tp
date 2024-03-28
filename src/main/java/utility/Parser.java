@@ -1,6 +1,5 @@
 package utility;
 
-import ui.Handler;
 import ui.Output;
 
 import health.Appointment;
@@ -149,7 +148,7 @@ public class Parser {
      */
     public static String parseHistoryAndLatestInput(String userInput) {
         try {
-            String type = Handler.extractSubstringFromSpecificIndex(userInput, UiConstant.ITEM_FLAG);
+            String type = extractSubstringFromSpecificIndex(userInput, UiConstant.ITEM_FLAG);
 
             if (type.isBlank()) {
                 throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
@@ -211,9 +210,9 @@ public class Parser {
                 || !input.contains(HealthConstant.DATE_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.HEIGHT_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.WEIGHT_FLAG);
+        results[2] = extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
         return results;
     }
     //@@author
@@ -246,8 +245,8 @@ public class Parser {
                 || !input.contains(HealthConstant.END_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.START_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.END_FLAG);
         return results;
     }
 
@@ -419,9 +418,9 @@ public class Parser {
                 || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
         }
-        results[0] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
-        results[1] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
-        results[2] = Handler.extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
+        results[0] = extractSubstringFromSpecificIndex(input, HealthConstant.DATE_FLAG);
+        results[1] = extractSubstringFromSpecificIndex(input, HealthConstant.TIME_FLAG);
+        results[2] = extractSubstringFromSpecificIndex(input, HealthConstant.DESCRIPTION_FLAG);
         return results;
     }
 
@@ -438,5 +437,26 @@ public class Parser {
                 appointmentDetails[2]);
         HealthList.addAppointment(newAppointment);
         Output.printAddAppointment(newAppointment);
+    }
+
+    /**
+     * Extracts a substring from the given input string based on the provided delimiter.
+     *
+     * @param input     The input string from which to extract the substring.
+     * @param delimiter The delimiter to search for in the input string.
+     * @return The extracted substring, or an empty string if the delimiter is not found.
+     */
+    public static String extractSubstringFromSpecificIndex(String input, String delimiter) {
+        int index = input.indexOf(delimiter);
+        if (index == -1 || index == input.length() - delimiter.length()) {
+            return "";
+        }
+
+        int startIndex = index + delimiter.length();
+        int endIndex = input.indexOf("/", startIndex);
+        if (endIndex == -1) {
+            endIndex = input.length();
+        }
+        return input.substring(startIndex, endIndex).trim();
     }
 }
