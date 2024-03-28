@@ -304,4 +304,41 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the expense command is given as input
+     *
+     * @param line array of input string
+     * @param list List of travel activities
+     * @throws OmniException if command.length == 2
+     * @throws OmniException if command.length == 1
+     */
+    public static void expenseCommand(String line, TravelActivityList list) throws OmniException {
+        String[] command = line.split("expense |-");
+        if (command.length == 3 && isNumeric(command[1])){
+            int listNumber = Integer.parseInt(command[1]);
+            String expense = command[2];
+            list.expenseActivity(listNumber, expense);
+        } else if (command.length == 2) {
+            throw new OmniException("Please specify expense amount");
+        } else {
+            throw new OmniException("Please specify which task to add expense");
+        }
+    }
+
+    /**
+     * Handles the case where the removeexpense command is given as input
+     *
+     * @param command Command array of input string without spaces
+     * @param list List of travel activities
+     * @throws OmniException if command.length != 2 && command[1] is not numeric
+     */
+    public static void removeExpenseCommand(String[] command, TravelActivityList list) throws OmniException {
+        if (command.length == 2 && isNumeric(command[1])) {
+            int listNumber = Integer.parseInt(command[1]);
+            list.removeExpense(listNumber);
+        } else {
+            throw new OmniException("Please specify which task to remove expense");
+        }
+    }
+
 }
