@@ -6,6 +6,7 @@
 * [Design](#design)
   * [Data Component](#data-component)
 * [Implementation](#implementation)
+* [Logging](#logging)
 * [Product scope](#product-scope)
   * [Target user profile](#target-user-profile)
   * [Value proposition](#value-proposition)
@@ -64,16 +65,29 @@ The above class diagram shows the separate components and functionalities of the
 
 ### Xavier
 
+## Logging
+
+* We are using `java.util.logging` package for logging.
+* The `BinBashLogger` class is used to manage all logging related funtions.
+* The `Logger` for a class can be obtained by contructing a `BinBashLogger` object and assigning it as a class-level variable
+* Log messages are output to a `logs.txt` file in the `*/logs/` directory by default.
+* If there are issues with the `logs.txt` file that results in no `logs` being written, warnings logs will be output through the console instead.
 
 ## Product scope
 
 ### Target user profile
 
-{Describe the target user profile}
+* Retail shop owners who has a need to efficiently manage their inventory list
+* prefer desktop apps over other types of apps
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+* Manage inventory list more efficiently compared to manual stock taking and typical mouse/GUI driven apps
+* Portability allows usage on multiple operating systems (E.g. Windows, Linux, Mac).
+* Lightweight, only requires entry-level hardware to run.
 
 ## User Stories
 
