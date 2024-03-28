@@ -32,6 +32,8 @@
 
 ### Storage
 
+Storage is performed by the [Storage](tp/src/main/java/longah/handler/StorageHandler.java)
+
 ### Member and MemberList
 
 ### Transaction and TransactionList
