@@ -1,6 +1,6 @@
 # AeroCade Developer Guide
 
-## <span style="color:grey;">Table of Contents</span>
+## <span style="color:darkgrey;">Table of Contents</span>
 
 - [Design & Implementation](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#design--implementation)
 - [Product Scope](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#product-scope)
@@ -9,11 +9,11 @@
 - [Glossary](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#glossary)
 - [Instructions for Manual Testing](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
 
-## <span style="color:grey;">Acknowledgements</span>
+## <span style="color:darkgrey;">Acknowledgements</span>
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## <span style="color:grey;">Design & Implementation</span>
+## <span style="color:darkgrey;">Design & Implementation</span>
 
 Here is a quick overview of the main components and how they interact with each other:
 
@@ -23,7 +23,7 @@ Here is a quick overview of the main components and how they interact with each 
 - [TicTacToe](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#tictactoe-implementation): Game 1
 - [Hangman](https://ay2324s2-cs2113-w13-1.github.io/tp/DeveloperGuide.html#hangman-implementation): Game 2
 
-### Parser Implementation:
+### <span style="color:grey;">Parser Implementation:</span>
 Parser Class (v1.0) reads user input from the standard input stream, checks the input, 
 tests the validity, and conveys the validity back to the class it is called from.
 ![img.png](img.png)
@@ -39,7 +39,7 @@ to read and verify user input for the HangMan class as well, such as readLetters
 or readHMMove(String: input).
 ![img_1.png](img_1.png)
 
-### UI Implementation:
+### <span style="color:grey;">UI Implementation:</span>
 The `UI` consists of the AeroCade `logo`, the `help` menu, the `tutorial`, and sends farewell to the user upon `quit`
 
 The `UI` component,
@@ -50,41 +50,42 @@ The `UI` component,
 
 (image)
 
-### Game Implementation:
+### <span style="color:grey;">Game Implementation:</span>
 
-### TicTacToe Implementation:
+### <span style="color:grey;">TicTacToe Implementation:</span>
 
-### Hangman Implementation:
+### <span style="color:grey;">Hangman Implementation:</span>
 
-## <span style="color:grey;">Product scope</span>
-### Target user profile
+## <span style="color:darkgrey;">Product scope</span>
+
+### <span style="color:grey;">Target user profile</span>
 
 - Loves to play games and challenge themselves
 - Prefers using desktop for entertainment
 - Has particular interest in CLI commands
 - Enjoys retro-style
 
-### Value proposition
+### <span style="color:grey;">Value proposition</span>
 
 CLI-based games work on different operating systems and environments that support 
 command-line interfaces. This means players can enjoy the game no matter what kind 
 of computer or setup they use.
 
-## <span style="color:grey;">User Stories</span>
+## <span style="color:darkgrey;">User Stories</span>
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## <span style="color:grey;">Non-Functional Requirements</span>
+## <span style="color:darkgrey;">Non-Functional Requirements</span>
 
 1. Should work on any mainstream OS as long as it has `Java 11` installed.
 
-## <span style="color:grey;">Glossary</span>
+## <span style="color:darkgrey;">Glossary</span>
 
 * *glossary item* - Definition
 
-## <span style="color:grey;">Instructions for Manual Testing</span>
+## <span style="color:darkgrey;">Instructions for Manual Testing</span>
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
