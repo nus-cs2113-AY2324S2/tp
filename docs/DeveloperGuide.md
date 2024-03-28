@@ -16,10 +16,6 @@
     - [Commands](#commands)
     - [Storage](#storage)
       - [Storage File Structure](#storage-file-structure)
-      - [`loadMembersData()`](#loadmembersdata)
-      - [`loadTransactionsData()`](#loadtransactionsdata)
-      - [`saveMembersData()`](#savemembersdata)
-      - [`saveTransactionsData()`](#savetransactionsdata)
     - [Member and MemberList](#member-and-memberlist)
     - [Transaction and TransactionList](#transaction-and-transactionlist)
     - [PIN](#pin)
@@ -76,19 +72,19 @@ Each `StorageHandler` instance creates `members.txt` and `transactions.txt` in t
 * `members.txt` - NAME | BALANCE
 * `transactions.txt` - LENDER NAME | BORROWER1 NAME | AMOUNT1 | BORROWER2 NAME...
 
-#### `loadMembersData()`
+<ins>`loadMembersData()`</ins>
 
 Takes in `MemberList` as a key argument. Reads data from the groups' associated `members.txt` and unpacks it before inserting `Member` objects into `MemberList`.
 
-#### `loadTransactionsData()`
+<ins>`loadTransactionsData()`</ins>
 
 Takes in `TransactionList` and `MemberList` as key arguments. Reads data from the groups' associated `transactions.txt` and unpacks it, checking if each member exists in `MemberList` before inserting `Transaction` objects into `TransactionList`.
 
-#### `saveMembersData()`
+<ins>`saveMembersData()`</ins>
 
 Takes in `MemberList` as a key argument. Writes packaged data from each `Member` and saves it as a record in `members.txt`.
 
-#### `saveTransactionsData()`
+<ins>`saveTransactionsData()`</ins>
 
 Takes in `TransactionList` as a key argument. Writes packaged data from each `Transaction` and saves it as a record in `transactions.txt`
 
