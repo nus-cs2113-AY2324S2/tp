@@ -1,10 +1,9 @@
 package expenditure;
-import expenditure.Expenditure;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ExpenditureTest {
+public class ExpenditureTest {
 
     @Test
     public void testExpenditureConstructor() {
@@ -21,7 +20,7 @@ class ExpenditureTest {
     }
 
     @Test
-    void getDescription() {
+    public void getDescription() {
         String description = "food";
         Float amount = 50.0f;
         String date = "01.01.2024";
@@ -33,7 +32,7 @@ class ExpenditureTest {
     }
 
     @Test
-    void getAmount() {
+    public void getAmount() {
         String description = "food";
         Float amount = 50.0f;
         String date = "01.01.2024";
@@ -45,7 +44,7 @@ class ExpenditureTest {
     }
 
     @Test
-    void getDate() {
+    public void getDate() {
         String description = "food";
         Float amount = 50.0f;
         String date = "01.01.2024";
@@ -57,7 +56,7 @@ class ExpenditureTest {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         String description = "food";
         Float amount = 50.0f;
         String date = "01.01.2024";
@@ -69,7 +68,7 @@ class ExpenditureTest {
     }
 
     @Test
-    void toStringStorage() {
+     public void toStringStorage() {
         String description = "food";
         Float amount = 50.0f;
         String date = "01.01.2024";
