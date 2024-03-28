@@ -39,20 +39,6 @@ public class Parser {
                 "Investments", "Gifts", "Others"));
     }
 
-    private String extractDetailsForCommand(String input, String splitter, CommandPrefix type) {
-        int startIndex = input.indexOf(splitter) + splitter.length();
-        int endIndex = input.length();
-
-        String[] nextPrefixes = type.getNextPrefixes();
-
-        for (String nextPrefix : nextPrefixes) {
-            if (input.indexOf(nextPrefix, startIndex) != -1 && input.indexOf(nextPrefix, startIndex) < endIndex) {
-                endIndex = input.indexOf(nextPrefix, startIndex);
-            }
-        }
-        return input.substring(startIndex, endIndex).trim();
-    }
-
     public Boolean isRecCommand(String input) {
         return input.startsWith("rec ");
     }
